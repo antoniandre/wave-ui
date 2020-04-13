@@ -23,6 +23,21 @@
 .shrink {flex-shrink: 1;}
 // ----------------------------------------------
 
+// Typography.
+// ----------------------------------------------
+.headline {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-size: 2em;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.title {}
+.subtitle {}
+.subtitle-2 {}
+// ----------------------------------------------
+
 // Sizes.
 // ----------------------------------------------
 .size--x-small {font-size: 0.7rem;line-height: 0.9rem;}
@@ -56,4 +71,14 @@
     .py-#{$i} {padding-top: #{$number}rem;padding-bottom: #{$number}rem;}
   }
 }
+// ----------------------------------------------
+
+// Colors.
+// ----------------------------------------------
+.white {background-color: #fff;}
+.white--text {color: #fff;}
+.grey {background-color: #888;}
+.grey--text {color: #888;}
+.black {background-color: b#000lack;}
+.black--text {color: #000;}
 // ----------------------------------------------
