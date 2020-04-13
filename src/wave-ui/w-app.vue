@@ -17,7 +17,10 @@ export default {
       css.innerHTML = ''
 
       for (const color in this.colors) {
-        css.innerHTML += `.${color} {background-color: ${this.colors[color]};}`
+        css.innerHTML += `
+          .${color} {background-color: ${this.colors[color]};}
+          .${color}--text {color: ${this.colors[color]};}
+        `
       }
       document.head.append(css)
     }
