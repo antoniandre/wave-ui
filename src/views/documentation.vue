@@ -1,11 +1,11 @@
 <template lang="pug">
 div
-  w-btn(color="primary" dark) Welcome
-  w-btn(color="primary" dark x-small) x-small
-  w-btn(color="primary" dark small) small
-  w-btn(color="primary" dark medium) medium
-  w-btn(color="primary" dark large) large
-  w-btn(color="primary" dark x-large) x-large
+  w-btn.ma-1(color="primary" dark) Welcome
+  w-btn.ma-1(color="primary" dark x-small) x-small
+  w-btn.ma-1(color="primary" dark small) small
+  w-btn.ma-1(color="primary" dark medium) medium
+  w-btn.ma-1(color="primary" dark large) large
+  w-btn.ma-1(color="primary" dark x-large) x-large
 </template>
 
 <script>
