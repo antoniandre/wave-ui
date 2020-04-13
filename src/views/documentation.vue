@@ -1,10 +1,9 @@
 <template lang="pug">
-.home
+div
   w-btn Welcome
 </template>
 
 <script>
-// @ is an alias to /src
 import WBtn from '@/components/w-btn'
 
 export default {
