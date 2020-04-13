@@ -11,7 +11,7 @@ w-app(:colors="colors")
 </template>
 
 <script>
-import WApp from '@/components/w-app'
+import WApp from '@/wave-ui/w-app'
 
 export default {
   components: { WApp },
@@ -25,7 +25,6 @@ export default {
 
 <style lang="scss">
 $primary: #234781;
-$layout-padding: 1rem;
 
 * {margin: 0;padding: 0;}
 
@@ -38,15 +37,8 @@ body {
 
 a {text-decoration: none;color: $primary;}
 
-// Wave UI framework classes.
-// --------------------------
-.primary {background-color: $primary;}
-
-.spacer {flex-grow: 1;}
-
-.content-wrap {padding-left: $layout-padding;padding-right: $layout-padding;}
-
 .toolbar {
+  height: 3rem;
   line-height: 3rem;
   position: fixed;
   top: 0;

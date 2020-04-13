@@ -9,7 +9,7 @@ div
 </template>
 
 <script>
-import WBtn from '@/components/w-btn'
+import WBtn from '@/wave-ui/w-btn'
 
 export default {
   components: { WBtn }
@@ -18,22 +18,15 @@ export default {
 
 <style lang="scss">
 header {
+  margin-top: 3rem;
   position: relative;
-  height: 40vh;
-  background: url('~@/assets/the-great-wave-off.png') left bottom;
+  height: 0;
+  background: url('~@/assets/japanese-wave.png') left top;
   background-size: contain;
   margin-bottom: 1rem;
+  padding-bottom: 20%;
 
   &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 25vh;
-    right: 0;
-    // background: linear-gradient(to right, transparent 0%, #fff 15%);
-  }
-  &:after {
     content: '';
     position: absolute;
     top: 0;

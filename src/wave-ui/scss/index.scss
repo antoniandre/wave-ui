@@ -1,0 +1,37 @@
+@import './variables';
+
+// ==============================================
+// Wave UI framework classes.
+// ==============================================
+
+// Structure classes.
+// ----------------------------------------------
+.content-wrap {
+  padding-left: $layout-padding;
+  padding-right: $layout-padding;
+}
+
+// Layout classes.
+// ----------------------------------------------
+.layout {
+  display: flex;
+  flex: 1 1 auto;
+  &.wrap {flex-wrap: wrap;}
+}
+.flex, .grow, .spacer {flex-grow: 1;}
+.shrink {flex-shrink: 1;}
+
+// Spaces.
+$columns: 12;
+
+%float-styles {
+  float: left;
+}
+
+@mixin col-x-list {
+  @for $i from 1 through $columns {
+      .col-#{$i}-m { @extend %float-styles; }
+  }
+}
+
+@include col-x-list;
