@@ -8,6 +8,7 @@ export default {
   props: {
     color: { type: String, default: '' },
     dark: { type: Boolean, default: false },
+    outlined: { type: Boolean, default: false },
     xSmall: { type: Boolean, default: false },
     small: { type: Boolean, default: false },
     medium: { type: Boolean, default: false },
@@ -18,8 +19,10 @@ export default {
   computed: {
     classes () {
       return {
-        [this.color]: !!this.color,
-        'theme--dark': this.dark,
+        [this.color]: !!this.color && !this.outlined,
+        [`${this.color}--text`]: !!this.color && this.outlined,
+        'w-btn--dark': this.dark && !this.outlined,
+        'w-btn--outlined': this.outlined,
         'size--x-small': this.xSmall,
         'size--small': this.small,
         'size--medium': this.medium,
@@ -38,12 +41,16 @@ $border-radius: 4px;
   position: relative;
   outline: none;
   border-radius: $border-radius;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.85);
   padding: 0.2rem 0.4rem;
   transition: 0.15s;
   box-shadow: 0 0 0 transparent;
 
+  &.w-btn--dark {color: rgba(255, 255, 255, 0.95);}
+  &.w-btn--outlined {background-color: transparent;border-color: currentColor;}
+
+  // Overlay to show the focus and active state.
   &:before {
     content: '';
     position: absolute;
@@ -51,20 +58,26 @@ $border-radius: 4px;
     left: 0;
     right: 0;
     bottom: 0;
-    transition: 0.2s;
+    opacity: 0;
+    background-color: transparent;
+    border-radius: inherit;
+    transition: 0.25s;
   }
+  &:focus:before {background-color: rgba(0, 0, 0, 0.15);opacity: 1;}
+  &.w-btn--dark:focus:before {background-color: rgba(255, 255, 255, 0.15);}
+  &.w-btn--outlined:focus:before {background-color: currentColor;opacity: 0.12;}
+  &:active:before {background-color: rgba(0, 0, 0, 0.3);opacity: 1;}
+  &.w-btn--dark:active:before {background-color: rgba(255, 255, 255, 0.3);}
+  &.w-btn--outlined:active:before {background-color: currentColor;opacity: 0.25;}
 
-  &:active:before {
-    background-color: rgba(0, 0, 0, 0.15);
-  }
-
+  // Rounding border to represent the focus state.
   &:after {
     content: '';
     position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
     transition: 0.2s;
     background-color: transparent;
     border-radius: inherit;
@@ -73,13 +86,5 @@ $border-radius: 4px;
     transition: 0.4s;
   }
   &:focus:after {background-color: inherit;}
-
-  &.theme--dark {
-    color: white;
-
-    &:active:before {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
-  }
 }
 </style>
