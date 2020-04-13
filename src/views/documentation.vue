@@ -1,5 +1,15 @@
 <template lang="pug">
 div
+  h1.headline
+    | Wave UI
+  P An emerging new UI framework for Vue.js with only the bright side.
+  p Like other UI frameworks, it is very flexible and easy to use. But Wave UI is also:
+  ul
+    li Lightweight
+    li Very easy to override via CSS
+    li No #[span.code !important] everywhere
+    li No useless DOM wrappers inside UI elements
+    li Not written in pixels but in #[span.code rem]
 
   h2 Buttons
   w-btn.ma-1(color="secondary") Welcome
@@ -35,7 +45,14 @@ export default {
 </script>
 
 <style lang="scss">
-h1 {font-size: 2.2em;}
+html {font-size: 13px;}
+
+h1 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-size: 2em;
+  font-weight: 400;
+}
 h2 {
   margin-top: 2.5em;
   font-size: 1.7em;
@@ -49,6 +66,12 @@ h3 {
 h4 {
   font-size: 1em;
 }
+
+ul {margin-left: 1.2rem;}
+
+p {margin-bottom: 0.5rem;}
+
+.code {font-family: monospace;font-size: 1.1em;}
 
 header {
   margin-top: 3rem;
