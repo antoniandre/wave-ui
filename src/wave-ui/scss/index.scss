@@ -10,6 +10,7 @@
   padding-left: $layout-padding;
   padding-right: $layout-padding;
 }
+// ----------------------------------------------
 
 // Layout classes.
 // ----------------------------------------------
@@ -20,18 +21,39 @@
 }
 .flex, .grow, .spacer {flex-grow: 1;}
 .shrink {flex-shrink: 1;}
+// ----------------------------------------------
+
+// Sizes.
+// ----------------------------------------------
+.size--x-small {font-size: 0.7rem;line-height: 0.9rem;}
+.size--small {font-size: 0.9rem;line-height: 1.1rem;}
+.size--medium {font-size: 1.2rem;line-height: 1.3rem;}
+.size--large {font-size: 1.5rem;line-height: 1.6rem;}
+.size--x-large {font-size: 1.7rem;line-height: 1.8rem;}
+// ----------------------------------------------
 
 // Spaces.
-$columns: 12;
-
-%float-styles {
-  float: left;
-}
-
-@mixin col-x-list {
-  @for $i from 1 through $columns {
-      .col-#{$i}-m { @extend %float-styles; }
+// ----------------------------------------------
+.w-app {
+  @for $i from 1 through 12 {
+    $number: round($i * 100 / 3) / 100;
+    .ma-#{$i} {margin: #{$number}rem;}
+    .mt-#{$i} {margin-top: #{$number}rem;}
+    .mr-#{$i} {margin-right: #{$number}rem;}
+    .mb-#{$i} {margin-bottom: #{$number}rem;}
+    .ml-#{$i} {margin-left: #{$number}rem;}
+    .mx-#{$i} {margin-left: #{$number}rem;margin-right: #{$number}rem;}
+    .my-#{$i} {margin-top: #{$number}rem;margin-bottom: #{$number}rem;}
+  }
+  @for $i from 1 through 12 {
+    $number: round($i * 100 / 3) / 100;
+    .pa-#{$i} {padding: #{$number}rem;}
+    .pt-#{$i} {padding-top: #{$number}rem;}
+    .pr-#{$i} {padding-right: #{$number}rem;}
+    .pb-#{$i} {padding-bottom: #{$number}rem;}
+    .pl-#{$i} {padding-left: #{$number}rem;}
+    .px-#{$i} {padding-left: #{$number}rem;padding-right: #{$number}rem;}
+    .py-#{$i} {padding-top: #{$number}rem;padding-bottom: #{$number}rem;}
   }
 }
-
-@include col-x-list;
+// ----------------------------------------------
