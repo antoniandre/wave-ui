@@ -1,24 +1,15 @@
-# wave-ui
+# Wave UI - NOT YET READY.
 
-## Project setup
-```
-npm install
-```
+An emerging UI framework for Vue.js with only the bright side.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Like other UI frameworks, it is very flexible and easy to use. But Wave UI is also:
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- Lightweight
+- Very easy to override via CSS
+- No #[span.code !important] everywhere
+- No useless DOM wrappers inside UI elements
+- Not written in pixels but in #[span.code rem]
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## install - Not yet ready.
+    npm i --S wave-ui
