@@ -17,7 +17,8 @@ export default {
   components: { WApp },
   data: () => ({
     colors: {
-      primary: '#234781'
+      primary: '#234781',
+      secondary: '#d4e9ed'
     }
   })
 }
@@ -25,6 +26,7 @@ export default {
 
 <style lang="scss">
 $primary: #234781;
+$secondary: #d4e9ed;
 
 * {margin: 0;padding: 0;}
 
@@ -49,5 +51,6 @@ a {text-decoration: none;color: $primary;}
   padding-right: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   background-color: #fff;
+  z-index: 10;
 }
 </style>
