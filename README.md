@@ -6,9 +6,9 @@ Like other UI frameworks, it is very flexible and easy to use. But Wave UI is al
 
 - Lightweight
 - Very easy to override via CSS
-- No #[span.code !important] everywhere
+- No `!important` everywhere
 - No useless DOM wrappers inside UI elements
-- Not written in pixels but in #[span.code rem]
+- Not written in pixels but in `rem`
 
 
 ## install - Not yet ready.
