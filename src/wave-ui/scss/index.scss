@@ -14,6 +14,8 @@
 
 // Layout classes.
 // ----------------------------------------------
+.w-app * {box-sizing: border-box;}
+
 .layout {
   display: flex;
   flex: 1 1 auto;
@@ -75,19 +77,20 @@
 
 // Colors.
 // ----------------------------------------------
-.w-app .white {background-color: #fff;}
-.w-app .white--text {color: #fff;}
-.w-app .grey {background-color: #888;}
-.w-app .grey--text {color: #888;}
-.w-app .black {background-color: #000;}
-.w-app .black--text {color: #000;}
-
-.w-app .success {background-color: #4b4;color: #fff;}
-.w-app .success--text {color: #4b4;}
-.w-app .error {background-color: #f55;color: #fff;}
-.w-app .error--text {color: #f55;}
-.w-app .warning {background-color: #f80;color: #fff;}
-.w-app .warning--text {color: #f80;}
-.w-app .info {background-color: #29f;color: #fff;}
-.w-app .info--text {color: #29f;}
+.w-app {
+  .white {background-color: #fff;}
+  .white--text {color: #fff;}
+  .grey {background-color: #888;}
+  .grey--text {color: #888;}
+  .black {background-color: #000;}
+  .black--text {color: #000;}
+  .success {background-color: #4b4;color: rgba(255, 255, 255, 0.9);}
+  .success--text {color: #4b4;}
+  .error {background-color: #f55;color: rgba(255, 255, 255, 0.9);}
+  .error--text {color: #f55;}
+  .warning {background-color: #f80;color: rgba(255, 255, 255, 0.9);}
+  .warning--text {color: #f80;}
+  .info {background-color: #29f;color: rgba(255, 255, 255, 0.9);}
+  .info--text {color: #29f;}
+}
 // ----------------------------------------------

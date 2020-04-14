@@ -3,8 +3,8 @@ w-app(:colors="colors")
   .toolbar
     | Wave UI
     .spacer
-    router-link(to="/") Home
-    router-link(to="/about") About
+    router-link.ml-2(to="/") Home
+    router-link.ml-2(to="/about") About
   header
   .content-wrap
     router-view
