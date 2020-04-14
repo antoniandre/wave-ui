@@ -11,6 +11,13 @@ div
     li No useless DOM wrappers inside UI elements
     li Not written in pixels but in #[span.code rem]
 
+  h2 Presets
+  h3 Buttons
+  span.code w-btn { small: true, outlined: true, round: true }
+
+  h2 Icons
+
+
   h2 Buttons
   p The buttons elements are written in `rem`, which means it will adapt to the font size set on the #[span.code &lt;html&gt;] tag.
   p
@@ -54,6 +61,10 @@ div
       code .flex
 
   h2 Content spacing
+  p.
+    Margins and paddings are incrementable from 1 to 12 using this syntax: #[span.code ma-12], #[span.code pa-7].#[br]
+    You can also set a space on a single side with #[span.code l], #[span.code r], #[span.code t], #[span.code b] for left, right, top, bottom.#[br]
+    #[span.code x] and #[span.code y] will set both left and right or top and bottom.
   p ma mx my ml mr mt mb
   p pa px py pl pr pt pb
 
@@ -90,7 +101,7 @@ html {
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #333;
+  color: #444;
 }
 
 a {text-decoration: none;color: $primary;}
@@ -140,7 +151,11 @@ ul {margin-left: 1.2rem;}
 
 p {margin-bottom: 0.5rem;}
 
-.code {font-family: monospace;font-size: 1.1em;}
+.code {
+  font-family: monospace;
+  font-size: 1.1em;
+  color: #000;
+}
 
 header {
   margin-top: 3rem;
