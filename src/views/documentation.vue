@@ -12,40 +12,94 @@ div
     li Not written in pixels but in #[span.code rem]
 
   h2 Buttons
-  w-btn.ma-1(color="secondary") Welcome
+  p The buttons elements are written in `rem`, which means it will adapt to the font size set on the #[span.code &lt;html&gt;] tag.
+  p
+    | Try it here:
+    w-btn.ma-1(color="secondary" @click="decreaseFont") A-
+    w-btn.ma-1(color="secondary" @click="increaseFont") A+
+  br
   w-btn.ma-1(color="secondary" x-small) x-small
   w-btn.ma-1(color="secondary" small) small
   w-btn.ma-1(color="secondary" medium) medium
   w-btn.ma-1(color="secondary" large) large
   w-btn.ma-1(color="secondary" x-large) x-large
   h3 Dark
-  w-btn.ma-1(color="primary" dark) Welcome
   w-btn.ma-1(color="primary" dark x-small) x-small
   w-btn.ma-1(color="primary" dark small) small
   w-btn.ma-1(color="primary" dark medium) medium
   w-btn.ma-1(color="primary" dark large) large
   w-btn.ma-1(color="primary" dark x-large) x-large
   h3 Outlined
-  w-btn.ma-1(color="primary" outlined dark) Welcome
   w-btn.ma-1(color="primary" outlined dark x-small) x-small
   w-btn.ma-1(color="primary" outlined dark small) small
   w-btn.ma-1(color="primary" outlined dark medium) medium
   w-btn.ma-1(color="primary" outlined dark large) large
   w-btn.ma-1(color="primary" outlined dark x-large) x-large
+  h3 Shadow &amp; Colors
+  w-btn.ma-1(color="success" shadow) success
+  w-btn.ma-1(color="error" shadow) error
+  w-btn.ma-1(color="warning" shadow) warning
+  w-btn.ma-1(color="info" shadow) info
 
-  h2 Other
+  h2 Layout classes
+  ul
+    li
+      code .layout
+    li
+      code .flex
+
+  h2 Color palette
 </template>
 
 <script>
 import WBtn from '@/wave-ui/w-btn'
 
 export default {
-  components: { WBtn }
+  components: { WBtn },
+
+  methods: {
+    increaseFont () {
+      let htmlStyles = document.getElementsByTagName('html')[0].style
+      htmlStyles.fontSize = `${parseInt(htmlStyles.fontSize || 13) + 1}px`
+    },
+    decreaseFont () {
+      let htmlStyles = document.getElementsByTagName('html')[0].style
+      htmlStyles.fontSize = `${parseInt(htmlStyles.fontSize || 13) - 1}px`
+    }
+  }
 }
 </script>
 
 <style lang="scss">
-html {font-size: 13px;}
+$primary: #234781;
+$secondary: #d4e9ed;
+
+* {margin: 0;padding: 0;}
+
+html {
+  font-size: 13px; // Root font size used as reference for all the `rem` units.
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333;
+}
+
+a {text-decoration: none;color: $primary;}
+
+.toolbar {
+  height: 3rem;
+  line-height: 3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  z-index: 10;
+}
 
 h1 {
   margin-top: 1.5em;
@@ -53,16 +107,19 @@ h1 {
   font-size: 2em;
   font-weight: 400;
 }
+
 h2 {
   margin-top: 2.5em;
   font-size: 1.7em;
   font-weight: 400;
 }
+
 h3 {
   margin-top: 1.6em;
   font-size: 1.25em;
   font-weight: 400;
 }
+
 h4 {
   font-size: 1em;
 }
