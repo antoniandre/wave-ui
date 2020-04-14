@@ -15,8 +15,8 @@ div
   p The buttons elements are written in `rem`, which means it will adapt to the font size set on the #[span.code &lt;html&gt;] tag.
   p
     | Try it here:
-    w-btn.ma-1(color="secondary" @click="decreaseFont") A-
-    w-btn.ma-1(color="secondary" @click="increaseFont") A+
+    w-btn.ml-1(color="secondary" small @click="decreaseFont") A-
+    w-btn.ml-1(color="secondary" small @click="increaseFont") A+
   br
   w-btn.ma-1(color="secondary" x-small) x-small
   w-btn.ma-1(color="secondary" small) small
@@ -29,17 +29,22 @@ div
   w-btn.ma-1(color="primary" dark medium) medium
   w-btn.ma-1(color="primary" dark large) large
   w-btn.ma-1(color="primary" dark x-large) x-large
-  h3 Outlined
-  w-btn.ma-1(color="primary" outlined dark x-small) x-small
-  w-btn.ma-1(color="primary" outlined dark small) small
-  w-btn.ma-1(color="primary" outlined dark medium) medium
-  w-btn.ma-1(color="primary" outlined dark large) large
-  w-btn.ma-1(color="primary" outlined dark x-large) x-large
+  h3 Outline
+  w-btn.ma-1(color="primary" outline dark x-small) x-small
+  w-btn.ma-1(color="primary" outline dark small) small
+  w-btn.ma-1(color="primary" outline dark medium) medium
+  w-btn.ma-1(color="primary" outline dark large) large
+  w-btn.ma-1(color="primary" outline dark x-large) x-large
   h3 Shadow &amp; Colors
   w-btn.ma-1(color="success" shadow) success
   w-btn.ma-1(color="error" shadow) error
   w-btn.ma-1(color="warning" shadow) warning
   w-btn.ma-1(color="info" shadow) info
+  h3 Round, Tile &amp; Icons
+  w-btn.ma-1(color="primary" dark round) round
+  w-btn.ma-1.mr-6(color="secondary" round) round
+  w-btn.ma-1(color="primary" dark tile) tile
+  w-btn.ma-1(color="secondary" tile) tile
 
   h2 Layout classes
   ul
@@ -47,6 +52,10 @@ div
       code .layout
     li
       code .flex
+
+  h2 Content spacing
+  p ma mx my ml mr mt mb
+  p pa px py pl pr pt pb
 
   h2 Color palette
 </template>
@@ -77,7 +86,7 @@ $secondary: #d4e9ed;
 * {margin: 0;padding: 0;}
 
 html {
-  font-size: 13px; // Root font size used as reference for all the `rem` units.
+  font-size: 14px; // Root font size used as reference for all the `rem` units.
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -102,6 +111,7 @@ a {text-decoration: none;color: $primary;}
 }
 
 h1 {
+  color: $primary;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
   font-size: 2em;
@@ -109,7 +119,9 @@ h1 {
 }
 
 h2 {
+  color: $primary;
   margin-top: 2.5em;
+  margin-bottom: 0.3em;
   font-size: 1.7em;
   font-weight: 400;
 }
@@ -133,7 +145,6 @@ p {margin-bottom: 0.5rem;}
 header {
   margin-top: 3rem;
   position: relative;
-  height: 0;
   background: url('~@/assets/japanese-wave.png') left top;
   background-size: contain;
   margin-bottom: 1rem;
