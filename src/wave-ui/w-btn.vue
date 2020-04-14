@@ -1,5 +1,5 @@
 <template lang="pug">
-  button.w-btn(:class="classes")
+  button.w-btn(:class="classes" @click="$emit('click', $event)")
     slot
 </template>
 
@@ -13,21 +13,26 @@ export default {
     small: { type: Boolean, default: false },
     medium: { type: Boolean, default: false },
     large: { type: Boolean, default: false },
-    xLarge: { type: Boolean, default: false },
+    xLarge: { type: Boolean, default: false }
   },
 
   computed: {
+    size () {
+      return (
+        (this.xSmall && 'x-small') ||
+        (this.small && 'small') ||
+        (this.large && 'large') ||
+        (this.xLarge && 'x-large') ||
+        'medium'
+      )
+    },
     classes () {
       return {
         [this.color]: !!this.color && !this.outlined,
         [`${this.color}--text`]: !!this.color && this.outlined,
         'w-btn--dark': this.dark && !this.outlined,
         'w-btn--outlined': this.outlined,
-        'size--x-small': this.xSmall,
-        'size--small': this.small,
-        'size--medium': this.medium,
-        'size--large': this.large,
-        'size--x-large': this.xLarge,
+        [`size--${this.size}`]: true
       }
     }
   }
@@ -35,8 +40,6 @@ export default {
 </script>
 
 <style lang="scss">
-$border-radius: 4px;
-
 .w-btn {
   position: relative;
   outline: none;
@@ -61,7 +64,7 @@ $border-radius: 4px;
     opacity: 0;
     background-color: transparent;
     border-radius: inherit;
-    transition: 0.25s;
+    transition: 0.15s;
   }
   &:focus:before {background-color: rgba(0, 0, 0, 0.15);opacity: 1;}
   &.w-btn--dark:focus:before {background-color: rgba(255, 255, 255, 0.15);}
