@@ -1,6 +1,7 @@
 <template lang="pug">
   button.w-btn(:class="classes" @click="$emit('click', $event)")
-    slot
+    span
+      slot
 </template>
 
 <script>
@@ -8,12 +9,15 @@ export default {
   props: {
     color: { type: String, default: '' },
     dark: { type: Boolean, default: false },
-    outlined: { type: Boolean, default: false },
+    outline: { type: Boolean, default: false },
     xSmall: { type: Boolean, default: false },
     small: { type: Boolean, default: false },
     medium: { type: Boolean, default: false },
     large: { type: Boolean, default: false },
-    xLarge: { type: Boolean, default: false }
+    xLarge: { type: Boolean, default: false },
+    round: { type: Boolean, default: false },
+    shadow: { type: Boolean, default: false },
+    tile: { type: Boolean, default: false },
   },
 
   computed: {
@@ -28,10 +32,13 @@ export default {
     },
     classes () {
       return {
-        [this.color]: !!this.color && !this.outlined,
-        [`${this.color}--text`]: !!this.color && this.outlined,
-        'w-btn--dark': this.dark && !this.outlined,
-        'w-btn--outlined': this.outlined,
+        [this.color]: !!this.color && !this.outline,
+        [`${this.color}--text`]: !!this.color && this.outline,
+        'w-btn--dark': this.dark && !this.outline,
+        'w-btn--outline': this.outline,
+        'w-btn--round': this.round,
+        'w-btn--tile': this.tile,
+        'w-btn--shadow': this.shadow,
         [`size--${this.size}`]: true
       }
     }
@@ -49,9 +56,18 @@ export default {
   padding: 0.2rem 0.4rem;
   transition: 0.15s;
   box-shadow: 0 0 0 transparent;
+  vertical-align: middle;
+  user-select: none;
 
-  &.w-btn--dark {color: rgba(255, 255, 255, 0.95);}
-  &.w-btn--outlined {background-color: transparent;border-color: currentColor;}
+  &--dark {color: rgba(255, 255, 255, 0.95);}
+  &--outline {background-color: transparent;border-color: currentColor;}
+  &--round {border-radius: 2rem;}
+  &--tile {border-radius: initial;}
+  &--shadow {
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+                0 2px 2px 0 rgba(0, 0, 0, 0.15),
+                0 1px 5px 0 rgba(0, 0, 0, 0.15);
+  }
 
   // Overlay to show the focus and active state.
   &:before {
@@ -67,11 +83,11 @@ export default {
     transition: 0.15s;
   }
   &:focus:before {background-color: rgba(0, 0, 0, 0.15);opacity: 1;}
-  &.w-btn--dark:focus:before {background-color: rgba(255, 255, 255, 0.15);}
-  &.w-btn--outlined:focus:before {background-color: currentColor;opacity: 0.12;}
+  &--dark:focus:before {background-color: rgba(255, 255, 255, 0.15);}
+  &--outline:focus:before {background-color: currentColor;opacity: 0.12;}
   &:active:before {background-color: rgba(0, 0, 0, 0.3);opacity: 1;}
-  &.w-btn--dark:active:before {background-color: rgba(255, 255, 255, 0.3);}
-  &.w-btn--outlined:active:before {background-color: currentColor;opacity: 0.25;}
+  &--dark:active:before {background-color: rgba(255, 255, 255, 0.3);}
+  &--outline:active:before {background-color: currentColor;opacity: 0.25;}
 
   // Rounding border to represent the focus state.
   &:after {
@@ -89,5 +105,8 @@ export default {
     transition: 0.4s;
   }
   &:focus:after {background-color: inherit;}
+
+  // Button content must stay on top of the overlay.
+  & > span {position: relative;}
 }
 </style>
