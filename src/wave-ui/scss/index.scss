@@ -44,7 +44,7 @@
 .size--small {font-size: 0.9rem;line-height: 1.1rem;}
 .size--medium {font-size: 1.2rem;line-height: 1.3rem;}
 .size--large {font-size: 1.5rem;line-height: 1.6rem;}
-.size--x-large {font-size: 1.7rem;line-height: 1.8rem;}
+.size--x-large {font-size: 1.8rem;line-height: 2rem;}
 // ----------------------------------------------
 
 // Spaces.
@@ -75,10 +75,19 @@
 
 // Colors.
 // ----------------------------------------------
-.white {background-color: #fff;}
-.white--text {color: #fff;}
-.grey {background-color: #888;}
-.grey--text {color: #888;}
-.black {background-color: b#000lack;}
-.black--text {color: #000;}
+.w-app .white {background-color: #fff;}
+.w-app .white--text {color: #fff;}
+.w-app .grey {background-color: #888;}
+.w-app .grey--text {color: #888;}
+.w-app .black {background-color: #000;}
+.w-app .black--text {color: #000;}
+
+.w-app .success {background-color: #4b4;color: #fff;}
+.w-app .success--text {color: #4b4;}
+.w-app .error {background-color: #f55;color: #fff;}
+.w-app .error--text {color: #f55;}
+.w-app .warning {background-color: #f80;color: #fff;}
+.w-app .warning--text {color: #f80;}
+.w-app .info {background-color: #29f;color: #fff;}
+.w-app .info--text {color: #29f;}
 // ----------------------------------------------
