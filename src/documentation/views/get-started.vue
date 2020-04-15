@@ -18,10 +18,16 @@ div
   h2 Icons
   p.
     The Font Awesome 4 icons font is loaded on demand if you use the 'fa' icon font.#[br]
-    But you can also use your own by adding 'i' to the icons array.#[br]
+    But you can also use your own font by adding 'i' to the icons array.#[br]
     You can use multiple icons sources at the same time even if it is not recommended.
-  w-icon fa fa-chrome
-  w-icon(:size="50") fa fa-chrome
+  w-icon.primary--text fa fa-chrome
+  w-icon(x-small color="primary") fa fa-chrome
+  w-icon(small color="primary") fa fa-chrome
+  w-icon(medium color="primary") fa fa-chrome
+  w-icon(large color="primary") fa fa-chrome
+  w-icon(x-large color="primary") fa fa-chrome
+  w-icon(:size="50" color="primary") fa fa-chrome
+  w-icon(size="5em" color="primary") fa fa-chrome
 
   h2 Buttons
   p The buttons elements are written in `rem`, which means it will adapt to the font size set on the #[span.code &lt;html&gt;] tag.
@@ -56,7 +62,13 @@ div
   w-btn.ma-1(color="primary" dark round) round
   w-btn.ma-1.mr-6(color="secondary" round) round
   w-btn.ma-1(color="primary" dark tile) tile
-  w-btn.ma-1(color="secondary" tile) tile
+  w-btn.ma-1.mr-6(color="secondary" tile) tile
+  w-btn.ma-1(color="error")
+    w-icon.mr-1 ion-md-close
+    | Cancel
+  w-btn.ma-1(color="success")
+    w-icon.mr-1 ion-md-checkmark
+    | Save
 
   h2 Layout classes
   ul
