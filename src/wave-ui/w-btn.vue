@@ -1,5 +1,5 @@
 <template lang="pug">
-  button.w-btn(:class="classes" @click="$emit('click', $event)")
+  button.w-btn(:class="classes" :disabled="!!disabled" @click="$emit('click', $event)")
     span
       slot
 </template>
@@ -18,6 +18,7 @@ export default {
     round: { type: Boolean, default: false },
     shadow: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false }
   },
 
   computed: {
@@ -68,6 +69,15 @@ export default {
                 0 2px 2px 0 rgba(0, 0, 0, 0.15),
                 0 1px 5px 0 rgba(0, 0, 0, 0.15);
   }
+  &[disabled] {
+    box-shadow: none;
+    border-color: rgba(0, 0, 0, 0.03);
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+  &--dark[disabled] {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.3);
+  }
 
   // Overlay to show the focus and active state.
   &:before {
@@ -88,6 +98,8 @@ export default {
   &:active:before {background-color: rgba(0, 0, 0, 0.3);opacity: 1;}
   &--dark:active:before {background-color: rgba(255, 255, 255, 0.3);}
   &--outline:active:before {background-color: currentColor;opacity: 0.25;}
+  &[disabled]:before {background-color: transparent;}
+
 
   // Rounding border to represent the focus state.
   &:after {

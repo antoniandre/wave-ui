@@ -18,16 +18,17 @@ div
   h2 Icons
   p.
     The Font Awesome 4 icons font is loaded on demand if you use the 'fa' icon font.#[br]
-    But you can also use your own font by adding 'i' to the icons array.#[br]
-    You can use multiple icons sources at the same time even if it is not recommended.
-  w-icon.primary--text fa fa-chrome
-  w-icon(x-small color="primary") fa fa-chrome
-  w-icon(small color="primary") fa fa-chrome
-  w-icon(medium color="primary") fa fa-chrome
-  w-icon(large color="primary") fa fa-chrome
-  w-icon(x-large color="primary") fa fa-chrome
-  w-icon(:size="50" color="primary") fa fa-chrome
-  w-icon(size="5em" color="primary") fa fa-chrome
+    The Ionicons 4 icons font is loaded on demand if you use the 'ion' icon font.#[br]
+    You can also use your own font by adding 'i' to the icons array.#[br]
+    You can use multiple icons sources at the same time but it is not recommended.
+  w-icon.mr-1.primary--text fa fa-chrome
+  w-icon.mr-1(x-small color="primary") fa fa-chrome
+  w-icon.mr-1(small color="primary") fa fa-chrome
+  w-icon.mr-1(medium color="primary") fa fa-chrome
+  w-icon.mr-1(large color="primary") fa fa-chrome
+  w-icon.mr-1(x-large color="primary") fa fa-chrome
+  w-icon.mr-1(:size="50" color="primary") fa fa-chrome
+  w-icon.mr-1(size="5em" color="primary") fa fa-chrome
 
   h2 Buttons
   p The buttons elements are written in `rem`, which means it will adapt to the font size set on the #[span.code &lt;html&gt;] tag.
@@ -36,17 +37,20 @@ div
     w-btn.ml-1(color="secondary" small @click="decreaseFont") A-
     w-btn.ml-1(color="secondary" small @click="increaseFont") A+
   br
+  h3 Default
   w-btn.ma-1(color="secondary" x-small) x-small
   w-btn.ma-1(color="secondary" small) small
   w-btn.ma-1(color="secondary" medium) medium
   w-btn.ma-1(color="secondary" large) large
   w-btn.ma-1(color="secondary" x-large) x-large
+  w-btn.ma-1(color="secondary" disabled) disabled
   h3 Dark
   w-btn.ma-1(color="primary" dark x-small) x-small
   w-btn.ma-1(color="primary" dark small) small
   w-btn.ma-1(color="primary" dark medium) medium
   w-btn.ma-1(color="primary" dark large) large
   w-btn.ma-1(color="primary" dark x-large) x-large
+  w-btn.ma-1(color="primary" dark disabled) disabled
   h3 Outline
   w-btn.ma-1(color="primary" outline dark x-small) x-small
   w-btn.ma-1(color="primary" outline dark small) small
