@@ -16,7 +16,12 @@ div
   span.code w-btn { small: true, outlined: true, round: true }
 
   h2 Icons
-
+  p.
+    The Font Awesome 4 icons font is loaded on demand if you use the 'fa' icon font.#[br]
+    But you can also use your own by adding 'i' to the icons array.#[br]
+    You can use multiple icons sources at the same time even if it is not recommended.
+  w-icon fa fa-chrome
+  w-icon(:size="50") fa fa-chrome
 
   h2 Buttons
   p The buttons elements are written in `rem`, which means it will adapt to the font size set on the #[span.code &lt;html&gt;] tag.
@@ -73,9 +78,10 @@ div
 
 <script>
 import WBtn from '@/wave-ui/w-btn'
+import WIcon from '@/wave-ui/w-icon'
 
 export default {
-  components: { WBtn },
+  components: { WBtn, WIcon },
 
   methods: {
     increaseFont () {
@@ -89,92 +95,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-$primary: #234781;
-$secondary: #d4e9ed;
-
-* {margin: 0;padding: 0;}
-
-html {
-  font-size: 14px; // Root font size used as reference for all the `rem` units.
-  font-family: Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #444;
-}
-
-a {text-decoration: none;color: $primary;}
-
-.toolbar {
-  height: 3rem;
-  line-height: 3rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #fff;
-  z-index: 10;
-}
-
-h1 {
-  color: $primary;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-  font-size: 2em;
-  font-weight: 400;
-}
-
-h2 {
-  color: $primary;
-  margin-top: 2.5em;
-  margin-bottom: 0.3em;
-  font-size: 1.7em;
-  font-weight: 400;
-}
-
-h3 {
-  margin-top: 1.6em;
-  font-size: 1.25em;
-  font-weight: 400;
-}
-
-h4 {
-  font-size: 1em;
-}
-
-ul {margin-left: 1.2rem;}
-
-p {margin-bottom: 0.5rem;}
-
-.code {
-  font-family: monospace;
-  font-size: 1.1em;
-  color: #000;
-}
-
-header {
-  margin-top: 3rem;
-  position: relative;
-  background: url('~@/assets/japanese-wave.png') left top;
-  background-size: contain;
-  margin-bottom: 1rem;
-  padding-bottom: 20%;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: url('~@/assets/wave-pattern.svg') bottom;
-    background-size: 45%;
-    z-index: -1;
-  }
-}
-</style>

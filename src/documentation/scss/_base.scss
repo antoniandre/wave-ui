@@ -1,0 +1,47 @@
+* {margin: 0;padding: 0;}
+
+html {
+  font-size: 14px; // Root font size used as reference for all the `rem` units.
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #444;
+}
+
+a {text-decoration: none;color: $primary;}
+
+h1 {
+  color: $primary;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-size: 2em;
+  font-weight: 400;
+}
+
+h2 {
+  color: $primary;
+  margin-top: 2.5em;
+  margin-bottom: 0.3em;
+  font-size: 1.7em;
+  font-weight: 400;
+}
+
+h3 {
+  margin-top: 1.6em;
+  font-size: 1.25em;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+ul {margin-left: 1.2rem;}
+
+p {margin-bottom: 0.5rem;}
+
+.code {
+  font-family: monospace;
+  font-size: 1.1em;
+  color: #000;
+}

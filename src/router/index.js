@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Documentation from '@/views/documentation'
+import GetStarted from '@/documentation/views/get-started'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
-    name: 'documentation',
-    component: Documentation
+    name: 'get-started',
+    component: GetStarted
   },
   {
     path: '/about',
@@ -16,7 +16,7 @@ Vue.use(VueRouter)
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '@/documentation/views/About.vue')
   }
 ]
 
