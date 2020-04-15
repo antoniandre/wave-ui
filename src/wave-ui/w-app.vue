@@ -13,6 +13,7 @@ export default {
 
   created () {
     if (this.icons.includes('fa')) require('font-awesome/css/font-awesome.min.css')
+    if (this.icons.includes('ion')) require('ionicons/dist/css/ionicons.min.css')
   },
   mounted () {
     if (!document.getElementById('wave-ui')) {

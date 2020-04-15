@@ -1,5 +1,5 @@
 <template lang="pug">
-w-app(:colors="colors" :icons="['fa']")
+w-app(:colors="colors" :icons="['fa', 'ion']")
   toolbar
   header
   .content-wrap
