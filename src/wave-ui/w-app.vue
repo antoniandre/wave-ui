@@ -7,9 +7,13 @@
 export default {
   props: {
     dark: { type: Boolean, default: false },
-    colors: { type: Object, default: () => ({}) }
+    colors: { type: Object, default: () => ({}) },
+    icons: { type: Array, default: () => [] }
   },
 
+  created () {
+    if (this.icons.includes('fa')) require('font-awesome/css/font-awesome.min.css')
+  },
   mounted () {
     if (!document.getElementById('wave-ui')) {
       const css = document.createElement('style')
