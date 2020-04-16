@@ -1,6 +1,7 @@
 <template lang="pug">
 w-app(:colors="colors" :icons="['fa', 'ion']")
-  toolbar
+  toolbar(:drawerOpen.sync="drawerOpen")
+  w-drawer(v-model="drawerOpen" left)
   header
   .content-wrap
     router-view
@@ -8,12 +9,14 @@ w-app(:colors="colors" :icons="['fa', 'ion']")
 
 <script>
 import WApp from '@/wave-ui/w-app'
+import WDrawer from '@/wave-ui/w-drawer'
 import Toolbar from '@/documentation/components/toolbar'
 import '@/documentation/scss/index.scss'
 
 export default {
-  components: { WApp, Toolbar },
+  components: { WApp, WDrawer, Toolbar },
   data: () => ({
+    drawerOpen: false,
     colors: {
       primary: '#234781',
       secondary: '#d4e9ed'
