@@ -1,6 +1,7 @@
 <template lang="pug">
   i.w-icon(
     :class="classes"
+    @click="$emit('click', $event)"
     role="icon"
     aria-hidden="true"
     :style="this.forcedSize && `font-size: ${this.forcedSize}`")
@@ -53,6 +54,8 @@ export default {
   vertical-align: middle;
   user-select: none;
   padding: 0.2rem;
+  line-height: inherit;
+
   .w-btn & {padding: 0;}
   &.size--x-small {font-size: 1rem;}
   &.size--small {font-size: 1.2rem;}
