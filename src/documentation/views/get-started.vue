@@ -73,6 +73,10 @@ div
   w-btn.ma-1(color="success")
     w-icon.mr-1 ion-md-checkmark
     | Save
+  h3 Loading
+  w-btn.ma-1(color="primary" dark loading) round
+
+  h2 Loaders and spinners
 
   h2 Layout classes
   ul
