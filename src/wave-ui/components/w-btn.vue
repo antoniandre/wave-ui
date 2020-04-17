@@ -1,6 +1,7 @@
 <template lang="pug">
   button.w-btn(:class="classes" :disabled="!!disabled" @click="$emit('click', $event)")
-    span
+    w-icon(v-if="icon") {{ icon }}
+    span(v-else)
       slot
     slot(name="loading")
       svg(v-if="loading" viewBox="0 0 40 40")
@@ -13,7 +14,11 @@
 </template>
 
 <script>
+import WIcon from './w-icon'
+
 export default {
+  name: 'w-btn',
+  components: { WIcon },
   props: {
     color: { type: String, default: '' },
     dark: { type: Boolean, default: false },
@@ -27,7 +32,9 @@ export default {
     shadow: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
-    loading: { type: Boolean, default: false }
+    loading: { type: Boolean, default: false },
+    // If an icon is passed, no text will display.
+    icon: { type: String, default: null }
   },
 
   computed: {
@@ -50,6 +57,7 @@ export default {
         'w-btn--tile': this.tile,
         'w-btn--shadow': this.shadow,
         'w-btn--loading': this.loading,
+        'w-btn--icon': this.icon,
         [`size--${this.size}`]: true
       }
     }
@@ -74,7 +82,8 @@ $spinner-size: 40;
 
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
-  &--round {border-radius: 2rem;}
+  &--round {border-radius: 3rem;}
+  &--icon {padding: 0.2rem;}
   &--tile {border-radius: initial;}
   &--shadow {
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
