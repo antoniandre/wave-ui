@@ -2,19 +2,21 @@
 w-app(:colors="colors" :icons="['fa', 'ion']")
   toolbar(:drawerOpen.sync="drawerOpen")
   w-drawer(v-model="drawerOpen" left)
+    left-drawer
   header
   .content-wrap
     router-view
 </template>
 
 <script>
-import WApp from '@/wave-ui/w-app'
-import WDrawer from '@/wave-ui/w-drawer'
+import WApp from '@/wave-ui/components/w-app'
+import WDrawer from '@/wave-ui/components/w-drawer'
 import Toolbar from '@/documentation/components/toolbar'
+import LeftDrawer from '@/documentation/components/left-drawer'
 import '@/documentation/scss/index.scss'
 
 export default {
-  components: { WApp, WDrawer, Toolbar },
+  components: { WApp, WDrawer, Toolbar, LeftDrawer },
   data: () => ({
     drawerOpen: false,
     colors: {

@@ -5,6 +5,7 @@
 
 <script>
 export default {
+  name: 'w-app',
   props: {
     dark: { type: Boolean, default: false },
     colors: { type: Object, default: () => ({}) },
@@ -34,5 +35,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import './scss/index';
+@import '../scss/index';
 </style>

@@ -5,13 +5,13 @@
   .spacer
   router-link.ml-2(to="/") Home
   router-link.ml-2(to="/about") About
-  w-icon(@click="$emit('update:drawerOpen', !drawerOpen)") {{ !!drawerOpen ? 'ion-md-close' : 'ion-md-menu' }}
+  w-icon(@click="$emit('update:drawerOpen', !drawerOpen)") {{ drawerOpen ? 'ion-md-close' : 'ion-md-menu' }}
 </template>
 
 <script>
 import Wave from '@/assets/wave.svg?inline'
-import WBtn from '@/wave-ui/w-btn'
-import WIcon from '@/wave-ui/w-icon'
+import WBtn from '@/wave-ui/components/w-btn'
+import WIcon from '@/wave-ui/components/w-icon'
 
 export default {
   props: {
@@ -25,11 +25,12 @@ export default {
 .toolbar {
   height: 3rem;
   line-height: 3rem;
+  display: flex;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  display: flex;
   padding-left: 1rem;
   padding-right: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);

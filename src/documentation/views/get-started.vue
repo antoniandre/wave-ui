@@ -97,8 +97,8 @@ div
 </template>
 
 <script>
-import WBtn from '@/wave-ui/w-btn'
-import WIcon from '@/wave-ui/w-icon'
+import WBtn from '@/wave-ui/components/w-btn'
+import WIcon from '@/wave-ui/components/w-icon'
 
 export default {
   components: { WBtn, WIcon },

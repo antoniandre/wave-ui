@@ -7,6 +7,7 @@
 const defaultSize = 350 // Px.
 
 export default {
+  name: 'w-drawer',
   props: {
     value: { default: true },
     right: { type: String, default: '' },
@@ -65,6 +66,7 @@ export default {
   z-index: 500;
   transition: 0.25s ease-in-out;
   background: #fff;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.3);
 
   &--left, &--right {
     top: 0;
