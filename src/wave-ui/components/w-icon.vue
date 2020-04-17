@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: 'w-icon',
   props: {
     color: { type: String, default: '' },
     xSmall: { type: Boolean, default: false },
@@ -18,6 +19,10 @@ export default {
     xLarge: { type: Boolean, default: false },
     size: { type: [String, Number], default: null },
   },
+
+  data: () => ({
+    icon: ''
+  }),
 
   computed: {
     forcedSize () {
@@ -38,10 +43,14 @@ export default {
         [`${this.color}--text`]: this.color,
         [`size--${this.presetSize}`]: !this.forcedSize
       }
-    },
-    icon () {
-      return this.$slots.default[0].text || ''
     }
+  },
+
+  created () {
+    this.icon = this.$slots.default[0].text || ''
+  },
+  beforeUpdate () {
+    this.icon = this.$slots.default[0].text
   }
 }
 </script>
@@ -51,16 +60,41 @@ export default {
   display: inline-block;
   position: relative;
   border-radius: 100%;
+  text-align: center;
   vertical-align: middle;
   user-select: none;
-  padding: 0.2rem;
   line-height: inherit;
 
   .w-btn & {padding: 0;}
-  &.size--x-small {font-size: 1rem;}
-  &.size--small {font-size: 1.2rem;}
-  &.size--medium {font-size: 1.5rem;}
-  &.size--large {font-size: 1.8rem;}
-  &.size--x-large {font-size: 2.1rem;}
+  &.size--x-small {
+    font-size: 1rem;
+    line-height: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+  &.size--small {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  &.size--medium {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  &.size--large {
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  &.size--x-large {
+    font-size: 2.1rem;
+    line-height: 2.1rem;
+    width: 2.1rem;
+    height: 2.1rem;
+  }
 }
 </style>
