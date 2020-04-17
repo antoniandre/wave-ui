@@ -94,15 +94,32 @@ div
   p pa px py pl pr pt pb
 
   h2 Color palette
+  p.
+    red
+    pink
+    purple
+    deepPurple
+    indigo
+    blue
+    lightBlue
+    cyan
+    teal
+    green
+    lightGreen
+    lime
+    yellow
+    amber
+    orange
+    deepOrange
+    brown
+    blueGrey
+    grey
+    white
+    black
 </template>
 
 <script>
-import WBtn from '@/wave-ui/components/w-btn'
-import WIcon from '@/wave-ui/components/w-icon'
-
 export default {
-  components: { WBtn, WIcon },
-
   methods: {
     increaseFont () {
       let htmlStyles = document.getElementsByTagName('html')[0].style

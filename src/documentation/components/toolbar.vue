@@ -10,13 +10,12 @@
 
 <script>
 import Wave from '@/assets/wave.svg?inline'
-import WBtn from '@/wave-ui/components/w-btn'
 
 export default {
   props: {
     drawerOpen: { type: Boolean, default: false }
   },
-  components: { Wave, WBtn }
+  components: { Wave }
 }
 </script>
 

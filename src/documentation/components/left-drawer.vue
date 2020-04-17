@@ -10,14 +10,10 @@
 </template>
 
 <script>
-import WBtn from '@/wave-ui/components/w-btn'
-import WIcon from '@/wave-ui/components/w-icon'
-
 export default {
   props: {
     drawerOpen: { type: Boolean, default: false }
-  },
-  components: { WBtn, WIcon }
+  }
 }
 </script>
 

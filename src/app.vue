@@ -1,5 +1,5 @@
 <template lang="pug">
-documentation
+  documentation
 </template>
 
 <script>

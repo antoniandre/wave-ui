@@ -9,14 +9,12 @@ w-app(:colors="colors" :icons="['fa', 'ion']")
 </template>
 
 <script>
-import WApp from '@/wave-ui/components/w-app'
-import WDrawer from '@/wave-ui/components/w-drawer'
 import Toolbar from '@/documentation/components/toolbar'
 import LeftDrawer from '@/documentation/components/left-drawer'
 import '@/documentation/scss/index.scss'
 
 export default {
-  components: { WApp, WDrawer, Toolbar, LeftDrawer },
+  components: { Toolbar, LeftDrawer },
   data: () => ({
     drawerOpen: false,
     colors: {
