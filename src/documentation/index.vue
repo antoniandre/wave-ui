@@ -1,8 +1,8 @@
 <template lang="pug">
 w-app(:colors="colors" :icons="['fa', 'ion']")
-  toolbar(:drawerOpen.sync="drawerOpen")
+  toolbar(:drawer-open.sync="drawerOpen")
   w-drawer(v-model="drawerOpen" left)
-    left-drawer
+    left-drawer(:drawer-open.sync="drawerOpen")
   header
   .content-wrap
     router-view

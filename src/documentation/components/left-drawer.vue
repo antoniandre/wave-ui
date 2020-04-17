@@ -1,6 +1,6 @@
 <template lang="pug">
-.nav-menu
-  w-btn.close(@click="$emit('update:value')" outline round color="primary" icon="ion-md-close")
+.nav-menu.pa-3
+  w-btn.close(small @click="$emit('update:drawerOpen', false)" outline round color="primary" icon="ion-md-close")
   .title Component
   ul
     li Buttons
@@ -14,6 +14,9 @@ import WBtn from '@/wave-ui/components/w-btn'
 import WIcon from '@/wave-ui/components/w-icon'
 
 export default {
+  props: {
+    drawerOpen: { type: Boolean, default: false }
+  },
   components: { WBtn, WIcon }
 }
 </script>

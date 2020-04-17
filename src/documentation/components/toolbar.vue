@@ -5,19 +5,18 @@
   .spacer
   router-link.ml-2(to="/") Home
   router-link.ml-2(to="/about") About
-  w-icon(@click="$emit('update:drawerOpen', !drawerOpen)") {{ drawerOpen ? 'ion-md-close' : 'ion-md-menu' }}
+  w-btn.ml-2(@click="$emit('update:drawerOpen', !drawerOpen)" large text round :icon="drawerOpen ? 'ion-md-close' : 'ion-md-menu'")
 </template>
 
 <script>
 import Wave from '@/assets/wave.svg?inline'
 import WBtn from '@/wave-ui/components/w-btn'
-import WIcon from '@/wave-ui/components/w-icon'
 
 export default {
   props: {
     drawerOpen: { type: Boolean, default: false }
   },
-  components: { Wave, WBtn, WIcon }
+  components: { Wave, WBtn }
 }
 </script>
 
