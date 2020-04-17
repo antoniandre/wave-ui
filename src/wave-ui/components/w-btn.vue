@@ -1,6 +1,6 @@
 <template lang="pug">
   button.w-btn(:class="classes" :disabled="!!disabled" @click="$emit('click', $event)")
-    w-icon(v-if="icon") {{ icon }}
+    w-icon(v-if="icon" v-bind="{ [size]: true }") {{ icon }}
     span(v-else)
       slot
     slot(name="loading")
@@ -20,14 +20,15 @@ export default {
   name: 'w-btn',
   components: { WIcon },
   props: {
-    color: { type: String, default: '' },
-    dark: { type: Boolean, default: false },
-    outline: { type: Boolean, default: false },
     xSmall: { type: Boolean, default: false },
     small: { type: Boolean, default: false },
     medium: { type: Boolean, default: false },
     large: { type: Boolean, default: false },
     xLarge: { type: Boolean, default: false },
+    color: { type: String, default: '' },
+    dark: { type: Boolean, default: false },
+    outline: { type: Boolean, default: false },
+    text: { type: Boolean, default: false },
     round: { type: Boolean, default: false },
     shadow: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
@@ -53,6 +54,7 @@ export default {
         [`${this.color}--text`]: !!this.color && this.outline,
         'w-btn--dark': this.dark && !this.outline,
         'w-btn--outline': this.outline,
+        'w-btn--text': this.text,
         'w-btn--round': this.round,
         'w-btn--tile': this.tile,
         'w-btn--shadow': this.shadow,
@@ -82,8 +84,10 @@ $spinner-size: 40;
 
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
+  &--text {background-color: transparent;border-color: transparent;}
   &--round {border-radius: 3rem;}
-  &--icon {padding: 0.2rem;}
+  &--icon {padding: 0.1rem;}
+  &--icon.size--large, &--icon.size--x-large {padding: 0.5rem;}
   &--tile {border-radius: initial;}
   &--shadow {
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
@@ -115,10 +119,12 @@ $spinner-size: 40;
   }
   &:focus:before {background-color: rgba(0, 0, 0, 0.15);opacity: 1;}
   &--dark:focus:before {background-color: rgba(255, 255, 255, 0.15);}
-  &--outline:focus:before {background-color: currentColor;opacity: 0.12;}
+  &--outline:focus:before,
+  &--text:focus:before {background-color: currentColor;opacity: 0.12;}
   &:active:before {background-color: rgba(0, 0, 0, 0.3);opacity: 1;}
   &--dark:active:before {background-color: rgba(255, 255, 255, 0.3);}
-  &--outline:active:before {background-color: currentColor;opacity: 0.25;}
+  &--outline:active:before,
+  &--text:active:before {background-color: currentColor;opacity: 0.25;}
   &[disabled]:before {background-color: transparent;}
 
 
