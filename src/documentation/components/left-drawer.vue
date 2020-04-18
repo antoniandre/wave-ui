@@ -3,10 +3,16 @@
   w-btn.close(small @click="$emit('update:drawerOpen', false)" outline round color="primary" icon="ion-md-close")
   .title Component
   ul
-    li Buttons
-    li Drawers
-    li Icons
-    li Loaders / spinners
+    li
+      router-link(to="buttons") Buttons
+    li
+      router-link(to="drawers") Drawers
+    li
+      router-link(to="icons") Icons
+    li
+      router-link(to="overlays") Overlays
+    li
+      router-link(to="loaders") Loaders / spinners
 </template>
 
 <script>

@@ -11,12 +11,34 @@ const routes = [
     component: GetStarted
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/documentation/views/About.vue')
+    path: '/app',
+    name: 'app',
+    component: () => import(/* webpackChunkName: "doc-app" */ '@/documentation/views/app.vue')
+  },
+  {
+    path: '/buttons',
+    name: 'buttons',
+    component: () => import(/* webpackChunkName: "buttons" */ '@/documentation/views/buttons.vue')
+  },
+  {
+    path: '/drawers',
+    name: 'drawers',
+    component: () => import(/* webpackChunkName: "drawers" */ '@/documentation/views/drawers.vue')
+  },
+  {
+    path: '/icons',
+    name: 'icons',
+    component: () => import(/* webpackChunkName: "icons" */ '@/documentation/views/icons.vue')
+  },
+  {
+    path: '/loaders',
+    name: 'loaders',
+    component: () => import(/* webpackChunkName: "loaders" */ '@/documentation/views/loaders.vue')
+  },
+  {
+    path: '/overlays',
+    name: 'overlays',
+    component: () => import(/* webpackChunkName: "overlays" */ '@/documentation/views/overlays.vue')
   }
 ]
 
