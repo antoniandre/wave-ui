@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import GetStarted from '@/documentation/views/get-started'
+import GettingStarted from '@/documentation/views/getting-started'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'get-started',
-    component: GetStarted
+    name: 'getting-started',
+    component: GettingStarted
   },
   {
     path: '/app',

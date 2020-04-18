@@ -1,4 +1,6 @@
 <template lang="pug">
+div
+  h1 Loaders and spinners
 
 </template>
 
