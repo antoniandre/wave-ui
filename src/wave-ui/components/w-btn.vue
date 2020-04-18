@@ -50,8 +50,8 @@ export default {
     },
     classes () {
       return {
-        [this.color]: !!this.color && !this.outline,
-        [`${this.color}--text`]: !!this.color && this.outline,
+        [this.color]: !!this.color && !this.outline && !this.text,
+        [`${this.color}--text`]: !!this.color && (this.outline || this.text),
         'w-btn--dark': this.dark && !this.outline,
         'w-btn--outline': this.outline,
         'w-btn--text': this.text,
@@ -74,13 +74,14 @@ $spinner-size: 40;
   position: relative;
   outline: none;
   border-radius: $border-radius;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   background-color: rgba(255, 255, 255, 0.85);
   padding: 0.2rem 0.4rem;
   transition: 0.15s;
   box-shadow: 0 0 0 transparent;
   vertical-align: middle;
   user-select: none;
+  cursor: pointer;
 
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
@@ -94,10 +95,13 @@ $spinner-size: 40;
                 0 2px 2px 0 rgba(0, 0, 0, 0.15),
                 0 1px 5px 0 rgba(0, 0, 0, 0.15);
   }
+  &--loading {cursor: wait;opacity: 0.8;}
   &[disabled] {
+    cursor: auto;
     box-shadow: none;
-    border-color: rgba(0, 0, 0, 0.03);
-    background-color: rgba(0, 0, 0, 0.12);
+    opacity: 0.3;
+    // border-color: rgba(0, 0, 0, 0.03);
+    // background-color: rgba(0, 0, 0, 0.12);
   }
   &--dark[disabled] {
     background-color: rgba(255, 255, 255, 0.12);
@@ -117,14 +121,29 @@ $spinner-size: 40;
     border-radius: inherit;
     transition: 0.15s;
   }
+
+  // Hover state.
+  &:hover:before {background-color: currentColor;opacity: 0.08;}
+  &--dark:hover:before {background-color: rgba(255, 255, 255, 0.15);opacity: 1;}
+  &--outline:hover:before,
+  &--text:hover:before {background-color: currentColor;opacity: 0.12;}
+
+  // Focus state.
   &:focus:before {background-color: rgba(0, 0, 0, 0.15);opacity: 1;}
   &--dark:focus:before {background-color: rgba(255, 255, 255, 0.15);}
   &--outline:focus:before,
   &--text:focus:before {background-color: currentColor;opacity: 0.12;}
+
+  // Active state.
   &:active:before {background-color: rgba(0, 0, 0, 0.3);opacity: 1;}
   &--dark:active:before {background-color: rgba(255, 255, 255, 0.3);}
   &--outline:active:before,
   &--text:active:before {background-color: currentColor;opacity: 0.25;}
+
+  // Disable visual feedback on loading and disabled buttons.
+  &--loading:hover:before,
+  &--loading:focus:before,
+  &--loading:active:before,
   &[disabled]:before {background-color: transparent;}
 
 
