@@ -1,9 +1,17 @@
 <template lang="pug">
 .nav-menu.pa-3
   w-btn.close(small @click="$emit('update:drawerOpen', false)" outline round color="primary" icon="ion-md-close")
-  router-link(:to="{ name: 'getting-started' }") Getting started
+  ul
+    li
+      router-link(:to="{ name: 'getting-started' }") Getting started
+    li
+      router-link(to="layout") Layout
+    li
+      router-link(to="typography") Typography
+    li
+      router-link(to="colors") Colors
 
-  .title Component
+  .title.mt-4 Component
   ul
     li
       router-link(to="buttons") Buttons

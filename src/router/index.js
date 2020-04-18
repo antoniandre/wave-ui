@@ -21,6 +21,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "buttons" */ '@/documentation/views/buttons.vue')
   },
   {
+    path: '/colors',
+    name: 'colors',
+    component: () => import(/* webpackChunkName: "colors" */ '@/documentation/views/colors.vue')
+  },
+  {
     path: '/drawers',
     name: 'drawers',
     component: () => import(/* webpackChunkName: "drawers" */ '@/documentation/views/drawers.vue')
@@ -31,6 +36,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "icons" */ '@/documentation/views/icons.vue')
   },
   {
+    path: '/layout',
+    name: 'layout',
+    component: () => import(/* webpackChunkName: "layout" */ '@/documentation/views/layout.vue')
+  },
+  {
     path: '/loaders',
     name: 'loaders',
     component: () => import(/* webpackChunkName: "loaders" */ '@/documentation/views/loaders.vue')
@@ -39,7 +49,12 @@ const routes = [
     path: '/overlays',
     name: 'overlays',
     component: () => import(/* webpackChunkName: "overlays" */ '@/documentation/views/overlays.vue')
-  }
+  },
+  {
+    path: '/typography',
+    name: 'typography',
+    component: () => import(/* webpackChunkName: "typography" */ '@/documentation/views/typography.vue')
+  },
 ]
 
 const router = new VueRouter({
