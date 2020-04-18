@@ -1,6 +1,7 @@
 <template lang="pug">
-  .w-drawer(:class="classes" :style="styles")
-    slot
+  w-overlay(:value="value" @input="$emit('input', false)")
+    .w-drawer(:class="classes" :style="styles")
+      slot
 </template>
 
 <script>
