@@ -19,9 +19,17 @@ div
   p.
     The Font Awesome 4 icons font is loaded on demand if you use the 'fa' icon font.#[br]
     The Ionicons 4 icons font is loaded on demand if you use the 'ion' icon font.#[br]
-    You can also use your own font by adding 'i' to the icons array.#[br]
+    You can also use your own font as long as you import it.#[br]
     You can use multiple icons sources at the same time but it is not recommended.
-  w-icon.mr-1.primary--text fa fa-chrome
+  h3 Ionicons 4
+  w-icon.mr-1(x-small color="primary") ion-md-star
+  w-icon.mr-1(small color="primary") ion-md-star
+  w-icon.mr-1(medium color="primary") ion-md-star
+  w-icon.mr-1(large color="primary") ion-md-star
+  w-icon.mr-1(x-large color="primary") ion-md-star
+  w-icon.mr-1(:size="50" color="primary") ion-md-star
+  w-icon.mr-1(size="5em" color="primary") ion-md-star
+  h3 Font Awesome 4
   w-icon.mr-1(x-small color="primary") fa fa-chrome
   w-icon.mr-1(small color="primary") fa fa-chrome
   w-icon.mr-1(medium color="primary") fa fa-chrome
@@ -52,21 +60,32 @@ div
   w-btn.ma-1(color="primary" dark x-large) x-large
   w-btn.ma-1(color="primary" dark disabled) disabled
   h3 Outline
-  w-btn.ma-1(color="primary" outline dark x-small) x-small
-  w-btn.ma-1(color="primary" outline dark small) small
-  w-btn.ma-1(color="primary" outline dark medium) medium
-  w-btn.ma-1(color="primary" outline dark large) large
-  w-btn.ma-1(color="primary" outline dark x-large) x-large
-  h3 Shadow &amp; Colors
+  w-btn.ma-1(color="primary" outline x-small) x-small
+  w-btn.ma-1(color="primary" outline small) small
+  w-btn.ma-1(color="primary" outline medium) medium
+  w-btn.ma-1(color="primary" outline large) large
+  w-btn.ma-1(color="primary" outline x-large) x-large
+  w-btn.ma-1(color="primary" outline disabled) disabled
+  h3 Text
+  w-btn.ma-1(color="primary" text x-small) x-small
+  w-btn.ma-1(color="primary" text small) small
+  w-btn.ma-1(color="primary" text medium) medium
+  w-btn.ma-1(color="primary" text large) large
+  w-btn.ma-1(color="primary" text x-large) x-large
+  w-btn.ma-1(color="primary" text disabled) disabled
+  h3 Shadow &amp; colors
   w-btn.ma-1(color="success" shadow) success
   w-btn.ma-1(color="error" shadow) error
   w-btn.ma-1(color="warning" shadow) warning
   w-btn.ma-1(color="info" shadow) info
-  h3 Round, Tile &amp; Icons
+  h3 Round &amp; tile
   w-btn.ma-1(color="primary" dark round) round
   w-btn.ma-1.mr-6(color="secondary" round) round
   w-btn.ma-1(color="primary" dark tile) tile
   w-btn.ma-1.mr-6(color="secondary" tile) tile
+  h3 Icons &amp; mixed content
+  w-btn.ma-1(color="error" round icon="ion-md-close")
+  w-btn.ma-1.mr-6(color="success" round icon="ion-md-checkmark")
   w-btn.ma-1(color="error")
     w-icon.mr-1 ion-md-close
     | Cancel
@@ -74,7 +93,9 @@ div
     w-icon.mr-1 ion-md-checkmark
     | Save
   h3 Loading
-  w-btn.ma-1(color="primary" dark loading) round
+  w-btn.ma-1(color="primary" dark :loading="buttonLoading" @click="buttonDoLoading")
+    w-icon.mr-1 ion-md-checkmark
+    | Save
 
   h2 Loaders and spinners
 
@@ -120,7 +141,14 @@ div
 
 <script>
 export default {
+  data: () => ({
+    buttonLoading: false
+  }),
   methods: {
+    buttonDoLoading () {
+      this.buttonLoading = true
+      setTimeout(() => (this.buttonLoading = false), 3000)
+    },
     increaseFont () {
       let htmlStyles = document.getElementsByTagName('html')[0].style
       htmlStyles.fontSize = `${parseInt(htmlStyles.fontSize || 13) + 1}px`
