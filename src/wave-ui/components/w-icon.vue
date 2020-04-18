@@ -96,5 +96,7 @@ export default {
     width: 2.1rem;
     height: 2.1rem;
   }
+
+  .w-btn--icon &:before {margin-top: 0.05rem;}
 }
 </style>

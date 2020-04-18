@@ -72,6 +72,7 @@ $spinner-size: 40;
 
 .w-btn {
   position: relative;
+  display: inline-flex;
   outline: none;
   border-radius: $border-radius;
   border: 1px solid rgba(0, 0, 0, 0.08);
