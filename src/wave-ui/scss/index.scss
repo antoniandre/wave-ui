@@ -84,13 +84,6 @@
   .grey--text {color: #888;}
   .black {background-color: #000;}
   .black--text {color: #000;}
-  .success {background-color: #4b4;color: rgba(255, 255, 255, 0.9);}
-  .success--text {color: #4b4;}
-  .error {background-color: #f55;color: rgba(255, 255, 255, 0.9);}
-  .error--text {color: #f55;}
-  .warning {background-color: #f80;color: rgba(255, 255, 255, 0.9);}
-  .warning--text {color: #f80;}
-  .info {background-color: #29f;color: rgba(255, 255, 255, 0.9);}
-  .info--text {color: #29f;}
+  .success, .error, .warning, .info {color: rgba(255, 255, 255, 0.9);}
 }
 // ----------------------------------------------
