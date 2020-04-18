@@ -1,4 +1,7 @@
 @import './variables';
+@import './typography';
+@import './layout';
+@import './colors';
 
 // ==============================================
 // Wave UI framework classes.
@@ -12,34 +15,6 @@
 }
 // ----------------------------------------------
 
-// Layout classes.
-// ----------------------------------------------
-.w-app * {box-sizing: border-box;}
-
-.layout {
-  display: flex;
-  flex: 1 1 auto;
-  &.wrap {flex-wrap: wrap;}
-}
-.flex, .grow, .spacer {flex-grow: 1;}
-.shrink {flex-shrink: 1;}
-// ----------------------------------------------
-
-// Typography.
-// ----------------------------------------------
-.headline {
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-  font-size: 2em;
-  font-weight: 400;
-  letter-spacing: 1px;
-}
-
-.title {}
-.subtitle {}
-.subtitle-2 {}
-// ----------------------------------------------
-
 // Sizes.
 // ----------------------------------------------
 .size--x-small {font-size: 0.8rem;line-height: 0.9rem;}
@@ -49,41 +24,3 @@
 .size--x-large {font-size: 1.8rem;line-height: 2rem;}
 // ----------------------------------------------
 
-// Spaces.
-// ----------------------------------------------
-.w-app {
-  @for $i from 1 through 12 {
-    $number: round($i * 100 / 3) / 100;
-    .ma-#{$i} {margin: #{$number}rem;}
-    .mt-#{$i} {margin-top: #{$number}rem;}
-    .mr-#{$i} {margin-right: #{$number}rem;}
-    .mb-#{$i} {margin-bottom: #{$number}rem;}
-    .ml-#{$i} {margin-left: #{$number}rem;}
-    .mx-#{$i} {margin-left: #{$number}rem;margin-right: #{$number}rem;}
-    .my-#{$i} {margin-top: #{$number}rem;margin-bottom: #{$number}rem;}
-  }
-  @for $i from 1 through 12 {
-    $number: round($i * 100 / 3) / 100;
-    .pa-#{$i} {padding: #{$number}rem;}
-    .pt-#{$i} {padding-top: #{$number}rem;}
-    .pr-#{$i} {padding-right: #{$number}rem;}
-    .pb-#{$i} {padding-bottom: #{$number}rem;}
-    .pl-#{$i} {padding-left: #{$number}rem;}
-    .px-#{$i} {padding-left: #{$number}rem;padding-right: #{$number}rem;}
-    .py-#{$i} {padding-top: #{$number}rem;padding-bottom: #{$number}rem;}
-  }
-}
-// ----------------------------------------------
-
-// Colors.
-// ----------------------------------------------
-.w-app {
-  .white {background-color: #fff;}
-  .white--text {color: #fff;}
-  .grey {background-color: #888;}
-  .grey--text {color: #888;}
-  .black {background-color: #000;}
-  .black--text {color: #000;}
-  .success, .error, .warning, .info {color: rgba(255, 255, 255, 0.9);}
-}
-// ----------------------------------------------
