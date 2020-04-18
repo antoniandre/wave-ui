@@ -4,28 +4,24 @@
 </template>
 
 <script>
+import config from '../utils/config'
+
 export default {
   name: 'w-app',
   props: {
-    dark: { type: Boolean, default: false },
-    colors: { type: Object, default: () => ({}) },
-    icons: { type: Array, default: () => [] }
+    dark: { type: Boolean, default: false }
   },
 
-  created () {
-    if (this.icons.includes('fa')) require('font-awesome/css/font-awesome.min.css')
-    if (this.icons.includes('ion')) require('ionicons/dist/css/ionicons.min.css')
-  },
   mounted () {
-    if (!document.getElementById('wave-ui')) {
+    if (!document.getElementById('wave-ui-styles')) {
       const css = document.createElement('style')
-      css.id = 'wave-ui'
+      css.id = 'wave-ui-styles'
       css.innerHTML = ''
 
-      for (const color in this.colors) {
+      for (const color in config.colors) {
         css.innerHTML += `
-          .${color} {background-color: ${this.colors[color]};}
-          .${color}--text {color: ${this.colors[color]};}
+          .w-app .${color} {background-color: ${config.colors[color]};}
+          .w-app .${color}--text {color: ${config.colors[color]};}
         `
       }
       document.head.append(css)

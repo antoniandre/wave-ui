@@ -5,10 +5,18 @@ import WaveUI from '@/wave-ui/index'
 
 Vue.config.productionTip = false
 
-// Pass options here.
-Vue.use(WaveUI, {})
+Vue.use(WaveUI)
+
+const waveui = new WaveUI({
+  colors: {
+    primary: '#234781',
+    secondary: '#e0f1ff'
+  },
+  icons: ['fa', 'ion'],
+})
 
 new Vue({
   router,
+  waveui,
   render: h => h(App)
 }).$mount('#app')

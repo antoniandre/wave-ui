@@ -1,5 +1,5 @@
 <template lang="pug">
-w-app(:colors="colors" :icons="['fa', 'ion']")
+w-app
   toolbar(:drawer-open.sync="drawerOpen")
   w-drawer(v-model="drawerOpen" left)
     left-drawer(:drawer-open.sync="drawerOpen")
@@ -16,11 +16,7 @@ import '@/documentation/scss/index.scss'
 export default {
   components: { Toolbar, LeftDrawer },
   data: () => ({
-    drawerOpen: false,
-    colors: {
-      primary: '#234781',
-      secondary: '#d4e9ed'
-    }
+    drawerOpen: false
   })
 }
 </script>

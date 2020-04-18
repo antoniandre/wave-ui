@@ -1,12 +1,17 @@
+import config, { mergeConfig } from './utils/config'
 import * as components from './components'
 // import * as directives from './directives'
 
-const WaveUI = {
-  install (Vue) {
+class WaveUI {
+  static install (Vue) {
     // Register directives.
     // for (const id in directives) {
     //   if (directives[id]) Vue.directive(id, directives[id])
     // }
+    Vue.directive('focus', {
+      // When the bound element is inserted into the DOM...
+      inserted: el => el.focus()
+    })
 
     // Register components.
     for (let id in components) {
@@ -14,10 +19,20 @@ const WaveUI = {
       Vue.component(component.name, component)
     }
 
+    // Register mixins.
     // Vue.mixin({
     //   mounted () {
     //   }
     // })
+  }
+
+  constructor (options = {}) {
+    // Merge user options into default config.
+    mergeConfig(options)
+
+    // Load the icons fonts on demand.
+    if (config.icons.includes('fa')) require('font-awesome/css/font-awesome.min.css')
+    if (config.icons.includes('ion')) require('ionicons/dist/css/ionicons.min.css')
   }
 }
 export default WaveUI
