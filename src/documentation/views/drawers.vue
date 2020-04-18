@@ -1,7 +1,26 @@
 <template lang="pug">
 div
+  h1 Drawers
+  w-btn.mr-2(
+    @click="showLeftDrawer = !showLeftDrawer"
+    outline
+    color="primary") Show left drawer
+  w-btn.mr-2(
+    @click="showRightDrawer = !showRightDrawer"
+    outline
+    color="primary") Show right drawer
+  w-btn.mr-2(
+    @click="showTopDrawer = !showTopDrawer"
+    outline
+    color="primary") Show top drawer
+  w-btn.mr-2(
+    @click="showBottomDrawer = !showBottomDrawer"
+    outline
+    color="primary") Show bottom drawer
+
+
   w-drawer(v-model="showLeftDrawer" left)
-    w-btn.close(
+    w-btn.button--close(
       small
       @click="showLeftDrawer = !showLeftDrawer"
       outline
@@ -10,7 +29,7 @@ div
       icon="ion-md-close")
 
   w-drawer(v-model="showRightDrawer")
-    w-btn.close(
+    w-btn.button--close(
       small
       @click="showRightDrawer = !showRightDrawer"
       outline
@@ -19,7 +38,7 @@ div
       icon="ion-md-close")
 
   w-drawer(v-model="showTopDrawer" top)
-    w-btn.close(
+    w-btn.button--close(
       small
       @click="showTopDrawer = !showTopDrawer"
       outline
@@ -28,7 +47,7 @@ div
       icon="ion-md-close")
 
   w-drawer(v-model="showBottomDrawer" bottom)
-    w-btn.close(
+    w-btn.button--close(
       small
       @click="showBottomDrawer = !showBottomDrawer"
       outline
@@ -49,5 +68,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+.button--close {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+}
 </style>
