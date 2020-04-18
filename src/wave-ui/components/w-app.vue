@@ -4,8 +4,6 @@
 </template>
 
 <script>
-import config from '../utils/config'
-
 export default {
   name: 'w-app',
   props: {
@@ -13,19 +11,7 @@ export default {
   },
 
   mounted () {
-    if (!document.getElementById('wave-ui-styles')) {
-      const css = document.createElement('style')
-      css.id = 'wave-ui-styles'
-      css.innerHTML = ''
-
-      for (const color in config.colors) {
-        css.innerHTML += `
-          .w-app .${color} {background-color: ${config.colors[color]};}
-          .w-app .${color}--text {color: ${config.colors[color]};}
-        `
-      }
-      document.head.append(css)
-    }
+    this.$waveUI.mounted()
   }
 }
 </script>
