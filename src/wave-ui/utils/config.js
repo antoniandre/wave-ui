@@ -9,10 +9,10 @@ const config = {
     primary: '#234781',
     secondary: '#d4e9ed',
     accent: '#2196f3',
-    success: '#4b4',
-    error: '#f55',
+    success: '#54b946',
+    error: '#f65555',
     warning: '#f80',
-    info: '#29f'
+    info: '#3d9ff5'
   },
   icons: []
 }
