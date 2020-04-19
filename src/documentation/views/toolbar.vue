@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1 Toolbars
+  h1 #[span.code w-toolbar]
 
 </template>
 

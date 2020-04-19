@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1 Loaders and spinners
+  h1 #[span.code w-overlay]
 
 </template>
 

@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1 Icons
+  h1 #[span.code w-icon]
   p.
     The Font Awesome 4 icons font is loaded on demand if you use the 'fa' icon font.#[br]
     The Ionicons 4 icons font is loaded on demand if you use the 'ion' icon font.#[br]

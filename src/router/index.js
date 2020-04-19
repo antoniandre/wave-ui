@@ -11,29 +11,9 @@ const routes = [
     component: GettingStarted
   },
   {
-    path: '/app',
-    name: 'app',
-    component: () => import(/* webpackChunkName: "doc-app" */ '@/documentation/views/app.vue')
-  },
-  {
-    path: '/buttons',
-    name: 'buttons',
-    component: () => import(/* webpackChunkName: "buttons" */ '@/documentation/views/buttons.vue')
-  },
-  {
     path: '/colors',
     name: 'colors',
     component: () => import(/* webpackChunkName: "colors" */ '@/documentation/views/colors.vue')
-  },
-  {
-    path: '/drawers',
-    name: 'drawers',
-    component: () => import(/* webpackChunkName: "drawers" */ '@/documentation/views/drawers.vue')
-  },
-  {
-    path: '/icons',
-    name: 'icons',
-    component: () => import(/* webpackChunkName: "icons" */ '@/documentation/views/icons.vue')
   },
   {
     path: '/layout',
@@ -41,26 +21,41 @@ const routes = [
     component: () => import(/* webpackChunkName: "layout" */ '@/documentation/views/layout.vue')
   },
   {
-    path: '/loaders',
-    name: 'loaders',
-    component: () => import(/* webpackChunkName: "loaders" */ '@/documentation/views/loaders.vue')
-  },
-  {
-    path: '/overlays',
-    name: 'overlays',
-    component: () => import(/* webpackChunkName: "overlays" */ '@/documentation/views/overlays.vue')
-  },
-  {
-    path: '/toolbars',
-    name: 'toolbars',
-    component: () => import(/* webpackChunkName: "toolbars" */ '@/documentation/views/toolbars.vue')
-  },
-  {
     path: '/typography',
     name: 'typography',
     component: () => import(/* webpackChunkName: "typography" */ '@/documentation/views/typography.vue')
-  },
+  }
 ]
+
+const components = [
+  { label: 'Accordion', id: 'accordion' },
+  { label: 'Alert', id: 'alert' },
+  { label: 'App', id: 'app' },
+  { label: 'Button', id: 'button' },
+  { label: 'Calendar', id: 'calendar' },
+  { label: 'Card', id: 'card' },
+  { label: 'Dialog', id: 'dialog' },
+  { label: 'Drawer', id: 'drawer' },
+  { label: 'Icon', id: 'icon' },
+  { label: 'Menu', id: 'menu' },
+  { label: 'Notification', id: 'notification' },
+  { label: 'Overlay', id: 'overlay' },
+  { label: 'Progress', id: 'progress' },
+  { label: 'Rating', id: 'rating' },
+  { label: 'Slideshow', id: 'slideshow' },
+  { label: 'Toolbar', id: 'toolbar' },
+  { label: 'Tabs', id: 'tabs' },
+  { label: 'Tag', id: 'tag' },
+  { label: 'Tooltip', id: 'tooltip' }
+]
+
+components.forEach(item => {
+  routes.push({
+    path: `/w-${item.id}`,
+    name: item.id,
+    component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/${item.id}.vue`)
+  })
+})
 
 const router = new VueRouter({
   mode: 'history',
