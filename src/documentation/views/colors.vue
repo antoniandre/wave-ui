@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1 Colors
+  h1.headline.mt-4 Colors
   p.
     red
     pink

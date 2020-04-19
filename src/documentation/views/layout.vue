@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1 Layout
+  h1.headline.mt-4 Layout
 
   h2 Layout classes
   ul

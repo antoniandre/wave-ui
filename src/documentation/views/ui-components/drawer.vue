@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1 #[span.code w-drawer]
+  h1.headline.mt-4 #[span.code w-drawer]
   w-button.mr-2(
     @click="showLeftDrawer = !showLeftDrawer"
     outline

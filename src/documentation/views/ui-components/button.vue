@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1 #[span.code w-button]
+  h1.headline.mt-4 #[span.code w-button]
 
   h2 Default
   w-button.ma-1(color="secondary" x-small) x-small

@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1 #[span.code w-notification]
+  h1.headline.mt-4 #[span.code w-notification]
 
 </template>
 

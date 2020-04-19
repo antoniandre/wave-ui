@@ -11,7 +11,7 @@
     li
       router-link(to="colors") Colors
 
-  .title.mt-4 Components
+  .title.mt-4 UI Components
   ul
     li(v-for="item in components" :key="item.route")
       router-link(:to="item.route") {{ item.label }}

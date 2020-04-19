@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1 #[span.code w-slideshow]
+  h1.headline.mt-4 #[span.code w-slideshow]
 
 </template>
 
