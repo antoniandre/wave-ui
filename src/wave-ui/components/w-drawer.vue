@@ -22,7 +22,7 @@ export default {
     size () {
       let size = this.width || this.height
       // If a number is passed without units, append `px`.
-      if (size && parseInt(size) === size) size = parseInt(size) + 'px'
+      if (size && parseInt(size) == size) size = size + 'px'
       return size && (this.left || this.right || this.top || this.bottom)
     },
     // Return `width` or `height`, `width` by default (position right by default).
@@ -44,7 +44,7 @@ export default {
     },
     classes () {
       return {
-        [`w-drawer--open`]: !!this.value,
+        'w-drawer--open': !!this.value,
         [`w-drawer--${this.position}`]: true
       }
     },

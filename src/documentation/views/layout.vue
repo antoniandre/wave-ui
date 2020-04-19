@@ -8,6 +8,8 @@ div
       code .layout
     li
       code .flex
+    li
+      code .spacer
 
   h2 Content spacing
   p.
