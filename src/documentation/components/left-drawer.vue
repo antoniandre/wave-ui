@@ -22,6 +22,8 @@
     li
       router-link(to="overlays") Overlays
     li
+      router-link(to="toolbars") Toolbars
+    li
       router-link(to="loaders") Loaders / spinners
 </template>
 

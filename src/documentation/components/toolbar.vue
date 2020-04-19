@@ -1,5 +1,5 @@
 <template lang="pug">
-.toolbar
+w-toolbar(fixed)
   wave.wave-logo
   | Wave UI
   .spacer
@@ -20,20 +20,9 @@ export default {
 </script>
 
 <style lang="scss">
-.toolbar {
-  height: 3 * $base-font-size;
-  line-height: 3 * $base-font-size;
-  display: flex;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding-left: 4 * $base-increment;
-  padding-right: 4 * $base-increment;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #fff;
-  z-index: 10;
+.w-toolbar {
+  // height: 3 * $base-font-size;
+  // line-height: 3 * $base-font-size;
 
   .wave-logo {
     height: 70%;

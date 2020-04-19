@@ -51,6 +51,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "overlays" */ '@/documentation/views/overlays.vue')
   },
   {
+    path: '/toolbars',
+    name: 'toolbars',
+    component: () => import(/* webpackChunkName: "toolbars" */ '@/documentation/views/toolbars.vue')
+  },
+  {
     path: '/typography',
     name: 'typography',
     component: () => import(/* webpackChunkName: "typography" */ '@/documentation/views/typography.vue')
