@@ -1,5 +1,5 @@
 <template lang="pug">
-  button.w-btn(
+  button.w-button(
     :class="classes"
     :disabled="!!disabled"
     @click="$emit('click', $event)")
@@ -20,7 +20,7 @@
 import WIcon from './w-icon'
 
 export default {
-  name: 'w-btn',
+  name: 'w-button',
   components: { WIcon },
   props: {
     xSmall: { type: Boolean, default: false },
@@ -55,14 +55,14 @@ export default {
       return {
         [this.color]: !!this.color && !this.outline && !this.text,
         [`${this.color}--text`]: !!this.color && (this.outline || this.text),
-        'w-btn--dark': this.dark && !this.outline,
-        'w-btn--outline': this.outline,
-        'w-btn--text': this.text,
-        'w-btn--round': this.round,
-        'w-btn--tile': this.tile,
-        'w-btn--shadow': this.shadow,
-        'w-btn--loading': this.loading,
-        'w-btn--icon': this.icon,
+        'w-button--dark': this.dark && !this.outline,
+        'w-button--outline': this.outline,
+        'w-button--text': this.text,
+        'w-button--round': this.round,
+        'w-button--tile': this.tile,
+        'w-button--shadow': this.shadow,
+        'w-button--loading': this.loading,
+        'w-button--icon': this.icon,
         [`size--${this.size}`]: true
       }
     }
@@ -73,7 +73,7 @@ export default {
 <style lang="scss">
 $spinner-size: 40;
 
-.w-btn {
+.w-button {
   position: relative;
   display: inline-flex;
   outline: none;

@@ -65,7 +65,7 @@ export default {
   user-select: none;
   line-height: inherit;
 
-  .w-btn & {padding: 0;}
+  .w-button & {padding: 0;}
   &.size--x-small {
     font-size: $base-font-size;
     line-height: $base-font-size;

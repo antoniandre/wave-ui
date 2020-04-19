@@ -1,11 +1,11 @@
 <template lang="pug">
 w-toolbar(fixed)
-  wave.wave-logo
-  | Wave UI
+  router-link.layout.shrink.fill-height.align-center(to="/")
+    wave.wave-logo
+    | Wave UI
   .spacer
   router-link.ml-2(to="/") Home
-  router-link.ml-2(to="/about") About
-  w-btn.ml-2(@click="$emit('update:drawerOpen', !drawerOpen)" large text round :icon="drawerOpen ? 'ion-md-close' : 'ion-md-menu'")
+  w-button.ml-2(@click="$emit('update:drawerOpen', !drawerOpen)" large text round :icon="drawerOpen ? 'ion-md-close' : 'ion-md-menu'")
 </template>
 
 <script>
