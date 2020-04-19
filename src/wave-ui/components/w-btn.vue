@@ -85,12 +85,14 @@ $spinner-size: 40;
   user-select: none;
   cursor: pointer;
 
-  &.size--x-small {padding-left: $base-increment;padding-right: $base-increment;}
-  &.size--x-large {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
   &--text {background-color: transparent;border-color: transparent;}
-  &--round {border-radius: 12 * $base-increment;}
+  &--round {
+    border-radius: 12 * $base-increment;
+    padding-left: round(3 * $base-increment);
+    padding-right: round(3 * $base-increment);
+  }
   &--icon {padding: round(0.4 * $base-increment);}
   &--icon.size--large, &--icon.size--x-large {padding: 2 * $base-increment;}
   &--tile {border-radius: initial;}
@@ -111,6 +113,11 @@ $spinner-size: 40;
     background-color: rgba(255, 255, 255, 0.12);
     color: rgba(255, 255, 255, 0.3);
   }
+
+  &.size--x-small {padding-left: $base-increment;padding-right: $base-increment;}
+  &.size--x-large {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
+  &--round.size--x-small {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
+  &--round.size--x-large {padding-left: round(4.5 * $base-increment);padding-right: round(4.5 * $base-increment);}
 
   // Overlay to mark the focus and active state.
   &:before {
@@ -169,7 +176,11 @@ $spinner-size: 40;
   &:focus:after {background-color: inherit;}
 
   // Button content must stay on top of the overlay.
-  & > span {position: relative;}
+  & > span {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
   &--loading > span {opacity: 0;}
 
   &--loading svg {

@@ -96,7 +96,5 @@ export default {
     width: round(2.1 * $base-font-size);
     height: round(2.1 * $base-font-size);
   }
-
-  .w-btn--icon &:before {margin-top: 0.05;}
 }
 </style>
