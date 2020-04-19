@@ -4,7 +4,7 @@ w-app
   w-drawer(v-model="drawerOpen" left)
     left-drawer(:drawer-open.sync="drawerOpen")
   header
-  .content-wrap
+  .content-wrap(:class="`page--${$route.name}`")
     router-view
 </template>
 
