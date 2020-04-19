@@ -1,11 +1,42 @@
 .headline {
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-  font-size: 2em;
-  font-weight: 400;
+  margin-top: 10 * $base-increment;
+  margin-bottom: 5 * $base-increment;
+  font-size: round(2.2 * $base-font-size);
+  font-weight: 100;
   letter-spacing: 1px;
 }
 
-.title {}
-.subtitle {}
-.subtitle-2 {}
+.title {
+  font-size: round(1.7 * $base-font-size);
+  font-weight: 400;
+  margin-top: 4 * $base-increment;
+  margin-bottom: 2 * $base-increment;
+}
+
+.subtitle {
+  font-size: round(1.4 * $base-font-size);
+  font-weight: 400;
+}
+
+.body {
+  font-size: $base-font-size;
+  font-weight: normal;
+}
+
+.caption {
+  font-size: round(0.85 * $base-font-size);
+  font-style: italic;
+  color: rgba(80, 80, 80, 0.7);
+}
+
+.uppercase {text-transform: uppercase;}
+.lowercase {text-transform: lowercase;}
+.bold {font-weight: bold;}
+.italic {font-style: italic;}
+
+code {
+  background-color: rgba(80, 80, 80, 0.15);
+  padding: round(0.5 * $base-increment) round(1.5 * $base-increment);
+  color: #c33;
+  border-radius: $border-radius;
+}
