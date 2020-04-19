@@ -36,7 +36,7 @@ export default {
   z-index: 10;
 
   .wave-logo {
-    height: 60%;
+    height: 70%;
     margin-right: 1em;
     fill: #497ca2;
   }
