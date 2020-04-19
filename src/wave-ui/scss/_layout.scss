@@ -9,7 +9,14 @@
   &.wrap {flex-wrap: wrap;}
 }
 .flex, .grow, .spacer {flex-grow: 1;}
-.shrink {flex-shrink: 1;}
+.shrink {flex-shrink: 1;flex-grow: 0;}
+.fill-height {height: 100%;}
+.align-center {align-items: center;}
+.justify-center {justify-content: center;}
+
+.text-left {text-align: left;}
+.text-center {text-align: center;}
+.text-right {text-align: right;}
 // ----------------------------------------------
 
 // Spaces.
