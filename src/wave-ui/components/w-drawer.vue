@@ -5,13 +5,11 @@
 </template>
 
 <script>
-const defaultSize = 350 // Px.
-
 export default {
   name: 'w-drawer',
   props: {
     value: { default: true },
-    right: { type: String, default: '' },
+    right: { type: Boolean, default: false },
     left: { type: Boolean, default: false },
     top: { type: Boolean, default: false },
     bottom: { type: Boolean, default: false },
@@ -19,17 +17,13 @@ export default {
     height: { type: [Number, String], default: null }
   },
 
-  data: () => ({
-  }),
-
   computed: {
-    // Return the width or height value if defined, or the default size otherwise.
+    // Return the width or height value if defined, or false otherwise.
     size () {
-      return (
-        ((this.left || this.right) && this.width) ||
-        ((this.top || this.bottom) && this.height) ||
-        defaultSize
-      )
+      let size = this.width || this.height
+      // If a number is passed without units, append `px`.
+      if (size && parseInt(size) === size) size = parseInt(size) + 'px'
+      return size && (this.left || this.right || this.top || this.bottom)
     },
     // Return `width` or `height`, `width` by default (position right by default).
     sizeProperty () {
@@ -55,7 +49,7 @@ export default {
       }
     },
     styles () {
-      return this.size !== defaultSize ? `${this.sizeProperty}: ${this.size}` : false
+      return this.size ? `max-${this.sizeProperty}: ${this.size}` : false
     }
   }
 }
