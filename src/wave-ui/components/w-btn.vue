@@ -84,6 +84,7 @@ $spinner-size: 40;
   user-select: none;
   cursor: pointer;
 
+  &.size--x-large {padding: 0.2rem 0.5rem 0.3rem;}
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
   &--text {background-color: transparent;border-color: transparent;}
