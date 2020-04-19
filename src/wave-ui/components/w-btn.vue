@@ -77,20 +77,21 @@ $spinner-size: 40;
   border-radius: $border-radius;
   border: 1px solid rgba(0, 0, 0, 0.08);
   background-color: rgba(255, 255, 255, 0.85);
-  padding: 0.2rem 0.4rem;
+  padding: round(0.8 * $base-increment) (2 * $base-increment);
   transition: 0.15s;
   box-shadow: 0 0 0 transparent;
   vertical-align: middle;
   user-select: none;
   cursor: pointer;
 
-  &.size--x-large {padding: 0.2rem 0.5rem 0.3rem;}
+  &.size--x-small {padding-left: 1 * $base-increment;padding-right: 1 * $base-increment;}
+  &.size--x-large {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
   &--text {background-color: transparent;border-color: transparent;}
-  &--round {border-radius: 3rem;}
-  &--icon {padding: 0.1rem;}
-  &--icon.size--large, &--icon.size--x-large {padding: 0.5rem;}
+  &--round {border-radius: 12 * $base-increment;}
+  &--icon {padding: round(0.4 * $base-increment);}
+  &--icon.size--large, &--icon.size--x-large {padding: 2 * $base-increment;}
   &--tile {border-radius: initial;}
   &--shadow {
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
@@ -110,7 +111,7 @@ $spinner-size: 40;
     color: rgba(255, 255, 255, 0.3);
   }
 
-  // Overlay to show the focus and active state.
+  // Overlay to mark the focus and active state.
   &:before {
     content: '';
     position: absolute;
@@ -149,7 +150,7 @@ $spinner-size: 40;
   &[disabled]:before {background-color: transparent;}
 
 
-  // Rounding border to represent the focus state.
+  // Surrounding border to mark the focus state.
   &:after {
     content: '';
     position: absolute;

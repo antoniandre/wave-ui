@@ -1,2 +1,7 @@
-$layout-padding: 1rem;
+$base-font-size: 16px;
+$base-increment: round($base-font-size / 4);
+$layout-padding: $base-font-size;
 $border-radius: 4px;
+$drawer-max-size: 380px;
+
+// Mixins.

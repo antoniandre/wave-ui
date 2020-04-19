@@ -1,12 +1,6 @@
 <template lang="pug">
 div
   h1 Buttons
-  p The buttons elements are written in `rem`, which means it will adapt to the font size set on the #[span.code &lt;html&gt;] tag.
-  p
-    | Try it here:
-    w-btn.ml-1(color="secondary" small @click="decreaseFont") A-
-    w-btn.ml-1(color="secondary" small @click="increaseFont") A+
-  br
   h2 Default
   w-btn.ma-1(color="secondary" x-small) x-small
   w-btn.ma-1(color="secondary" small) small
@@ -69,14 +63,6 @@ export default {
     buttonDoLoading () {
       this.buttonLoading = true
       setTimeout(() => (this.buttonLoading = false), 3000)
-    },
-    increaseFont () {
-      let htmlStyles = document.getElementsByTagName('html')[0].style
-      htmlStyles.fontSize = `${parseInt(htmlStyles.fontSize || 13) + 1}px`
-    },
-    decreaseFont () {
-      let htmlStyles = document.getElementsByTagName('html')[0].style
-      htmlStyles.fontSize = `${parseInt(htmlStyles.fontSize || 13) - 1}px`
     }
   }
 }

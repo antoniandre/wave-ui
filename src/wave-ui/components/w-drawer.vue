@@ -67,20 +67,20 @@ export default {
   z-index: 500;
   transition: 0.25s ease-in-out;
   background: #fff;
-  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
 
   &--left, &--right {
     top: 0;
     bottom: 0;
     width: 100%;
-    max-width: 380px;
+    max-width: $drawer-max-size;
     // transform: translateX(0);
   }
   &--top, &--bottom {
     left: 0;
     right: 0;
     height: 100%;
-    max-height: 380px;
+    max-height: $drawer-max-size;
     // transform: translateY(0);
   }
 

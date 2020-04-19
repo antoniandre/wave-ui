@@ -67,36 +67,36 @@ export default {
 
   .w-btn & {padding: 0;}
   &.size--x-small {
-    font-size: 1rem;
-    line-height: 1rem;
-    width: 1rem;
-    height: 1rem;
+    font-size: $base-font-size;
+    line-height: $base-font-size;
+    width: $base-font-size;
+    height: $base-font-size;
   }
   &.size--small {
-    font-size: 1.2rem;
-    line-height: 1.2rem;
-    width: 1.2rem;
-    height: 1.2rem;
+    font-size: round(1.2 * $base-font-size);
+    line-height: round(1.2 * $base-font-size);
+    width: round(1.2 * $base-font-size);
+    height: round(1.2 * $base-font-size);
   }
   &.size--medium {
-    font-size: 1.5rem;
-    line-height: 1.5rem;
-    width: 1.5rem;
-    height: 1.5rem;
+    font-size: round(1.5 * $base-font-size);
+    line-height: round(1.5 * $base-font-size);
+    width: round(1.5 * $base-font-size);
+    height: round(1.5 * $base-font-size);
   }
   &.size--large {
-    font-size: 1.8rem;
-    line-height: 1.8rem;
-    width: 1.8rem;
-    height: 1.8rem;
+    font-size: round(1.8 * $base-font-size);
+    line-height: round(1.8 * $base-font-size);
+    width: round(1.8 * $base-font-size);
+    height: round(1.8 * $base-font-size);
   }
   &.size--x-large {
-    font-size: 2.1rem;
-    line-height: 2.1rem;
-    width: 2.1rem;
-    height: 2.1rem;
+    font-size: round(2.1 * $base-font-size);
+    line-height: round(2.1 * $base-font-size);
+    width: round(2.1 * $base-font-size);
+    height: round(2.1 * $base-font-size);
   }
 
-  .w-btn--icon &:before {margin-top: 0.05rem;}
+  .w-btn--icon &:before {margin-top: 0.05;}
 }
 </style>

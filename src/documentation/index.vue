@@ -23,11 +23,10 @@ export default {
 
 <style lang="scss">
 header {
-  margin-top: 3rem;
+  margin-top: 12 * $base-increment;
   position: relative;
   background: url('~@/assets/japanese-wave.png') left top;
   background-size: contain;
-  margin-bottom: 1rem;
   padding-bottom: 20%;
 
   &:before {

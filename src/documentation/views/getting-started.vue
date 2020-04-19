@@ -9,7 +9,7 @@ div
     li Very easy to override via CSS
     li No #[span.code !important] everywhere
     li No useless DOM wrappers inside UI elements
-    li Not written in pixels but in #[span.code rem]
+    li A single #[span.code $base-font-size] variable rules all the sizes and spacings
 
   h2 Presets
   h3 Buttons

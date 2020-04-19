@@ -1,7 +1,7 @@
 * {margin: 0;padding: 0;}
 
 html {
-  font-size: 14px; // Root font size used as reference for all the `rem` units.
+  font-size: $base-font-size;
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -12,22 +12,22 @@ a {text-decoration: none;color: $primary;}
 
 h1 {
   color: $primary;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
+  margin-top: 6 * $base-increment;
+  margin-bottom: 2 * $base-increment;
   font-size: 2em;
   font-weight: 400;
 }
 
 h2 {
   color: $primary;
-  margin-top: 2.5em;
-  margin-bottom: 0.3em;
+  margin-top: 10 * $base-increment;
+  margin-bottom: $base-increment;
   font-size: 1.7em;
   font-weight: 400;
 }
 
 h3 {
-  margin-top: 1.6em;
+  margin-top: 6 * $base-increment;
   font-size: 1.25em;
   font-weight: 400;
 }
@@ -36,9 +36,9 @@ h4 {
   font-size: 1em;
 }
 
-ul {margin-left: 1.2rem;}
+ul {margin-left: 4 * $base-increment + 2px;}
 
-p {margin-bottom: 0.5rem;}
+p {margin-bottom: 2 * $base-increment;}
 
 .code {
   font-family: monospace;

@@ -37,8 +37,8 @@ export default {
 .nav-menu {
   .close {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 2 * $base-increment;
+    right: 2 * $base-increment;
   }
 }
 </style>

@@ -21,22 +21,22 @@ export default {
 
 <style lang="scss">
 .toolbar {
-  height: 3rem;
-  line-height: 3rem;
+  height: 3 * $base-font-size;
+  line-height: 3 * $base-font-size;
   display: flex;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 4 * $base-increment;
+  padding-right: 4 * $base-increment;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   background-color: #fff;
   z-index: 10;
 
   .wave-logo {
-    width: 3em;
+    height: 60%;
     margin-right: 1em;
     fill: #497ca2;
   }

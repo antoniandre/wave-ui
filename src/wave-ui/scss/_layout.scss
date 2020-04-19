@@ -5,6 +5,7 @@
 .layout {
   display: flex;
   flex: 1 1 auto;
+  &.column {flex-direction: column;}
   &.wrap {flex-wrap: wrap;}
 }
 .flex, .grow, .spacer {flex-grow: 1;}
@@ -14,25 +15,48 @@
 // Spaces.
 // ----------------------------------------------
 .w-app {
-  @for $i from 1 through 12 {
-    $number: round($i * 100 / 3) / 100;
-    .ma-#{$i} {margin: #{$number}rem;}
-    .mt-#{$i} {margin-top: #{$number}rem;}
-    .mr-#{$i} {margin-right: #{$number}rem;}
-    .mb-#{$i} {margin-bottom: #{$number}rem;}
-    .ml-#{$i} {margin-left: #{$number}rem;}
-    .mx-#{$i} {margin-left: #{$number}rem;margin-right: #{$number}rem;}
-    .my-#{$i} {margin-top: #{$number}rem;margin-bottom: #{$number}rem;}
+  .ma-0 {margin: 0;}
+  .mt-0 {margin-top: 0;}
+  .mr-0 {margin-right: 0;}
+  .mb-0 {margin-bottom: 0;}
+  .ml-0 {margin-left: 0;}
+  .mx-0 {margin-left: 0;margin-right: 0;}
+  .my-0 {margin-top: 0;margin-bottom: 0;}
+  @for $i from 0 through 12 {
+    $number: round($i * $base-increment);
+    .ma-#{$i} {margin: $number;}
+    .mt-#{$i} {margin-top: $number;}
+    .mr-#{$i} {margin-right: $number;}
+    .mb-#{$i} {margin-bottom: $number;}
+    .ml-#{$i} {margin-left: $number;}
+    .mx-#{$i} {margin-left: $number;margin-right: $number;}
+    .my-#{$i} {margin-top: $number;margin-bottom: $number;}
   }
+  .pa-0 {padding: 0;}
+  .pt-0 {padding-top: 0;}
+  .pr-0 {padding-right: 0;}
+  .pb-0 {padding-bottom: 0;}
+  .pl-0 {padding-left: 0;}
+  .px-0 {padding-left: 0;padding-right: 0;}
+  .py-0 {padding-top: 0;padding-bottom: 0;}
   @for $i from 1 through 12 {
-    $number: round($i * 100 / 3) / 100;
-    .pa-#{$i} {padding: #{$number}rem;}
-    .pt-#{$i} {padding-top: #{$number}rem;}
-    .pr-#{$i} {padding-right: #{$number}rem;}
-    .pb-#{$i} {padding-bottom: #{$number}rem;}
-    .pl-#{$i} {padding-left: #{$number}rem;}
-    .px-#{$i} {padding-left: #{$number}rem;padding-right: #{$number}rem;}
-    .py-#{$i} {padding-top: #{$number}rem;padding-bottom: #{$number}rem;}
+    $number: round($i * $base-increment) ;
+    .pa-#{$i} {padding: $number;}
+    .pt-#{$i} {padding-top: $number;}
+    .pr-#{$i} {padding-right: $number;}
+    .pb-#{$i} {padding-bottom: $number;}
+    .pl-#{$i} {padding-left: $number;}
+    .px-#{$i} {padding-left: $number;padding-right: $number;}
+    .py-#{$i} {padding-top: $number;padding-bottom: $number;}
   }
 }
+// ----------------------------------------------
+
+// Sizes.
+// ----------------------------------------------
+.size--x-small {font-size: round(0.8 * $base-font-size);line-height: round(0.8 * 1.4 * $base-font-size);}
+.size--small {font-size: round(1 * $base-font-size);line-height: round(1 * 1.4 * $base-font-size);}
+.size--medium {font-size: round(1.25 * $base-font-size);line-height: round(1.25 * 1.4 * $base-font-size);}
+.size--large {font-size: round(1.5 * $base-font-size);line-height: round(1.5 * 1.4 * $base-font-size);}
+.size--x-large {font-size: round(1.8 * $base-font-size);line-height: round(1.8 * 1.4 * $base-font-size);}
 // ----------------------------------------------
