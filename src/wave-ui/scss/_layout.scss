@@ -54,9 +54,27 @@
 
 // Sizes.
 // ----------------------------------------------
-.size--x-small {font-size: round(0.8 * $base-font-size);line-height: round(0.8 * 1.4 * $base-font-size);}
-.size--small {font-size: round(1 * $base-font-size);line-height: round(1 * 1.4 * $base-font-size);}
-.size--medium {font-size: round(1.25 * $base-font-size);line-height: round(1.25 * 1.4 * $base-font-size);}
-.size--large {font-size: round(1.5 * $base-font-size);line-height: round(1.5 * 1.4 * $base-font-size);}
-.size--x-large {font-size: round(1.8 * $base-font-size);line-height: round(1.8 * 1.4 * $base-font-size);}
+// In all the sizes bellow, round(x / 2) * 2 to always have even numbers.
+// Different heights with a mix of odd and even numbers will misalign
+// when verticallly centering (vertical-align or align-items center).
+.size--x-small {
+  font-size: round(0.9 * $base-font-size);
+  line-height: round(1.25 * $base-font-size / 2) * 2;
+}
+.size--small {
+  font-size: round(1.1 * $base-font-size);
+  line-height: round(1.65 * $base-font-size / 2) * 2;
+}
+.size--medium {
+  font-size: round(1.25 * $base-font-size);
+  line-height: round(2.15 * $base-font-size / 2) * 2;
+}
+.size--large {
+  font-size: round(1.5 * $base-font-size);
+  line-height: round(2.5 * $base-font-size / 2) * 2;
+}
+.size--x-large {
+  font-size: round(1.8 * $base-font-size);
+  line-height: round(2.9 * $base-font-size / 2) * 2;
+}
 // ----------------------------------------------
