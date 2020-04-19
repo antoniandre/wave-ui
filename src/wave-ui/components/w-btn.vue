@@ -1,5 +1,8 @@
 <template lang="pug">
-  button.w-btn(:class="classes" :disabled="!!disabled" @click="$emit('click', $event)")
+  button.w-btn(
+    :class="classes"
+    :disabled="!!disabled"
+    @click="$emit('click', $event)")
     w-icon(v-if="icon" v-bind="{ [size]: true }") {{ icon }}
     span(v-else)
       slot
