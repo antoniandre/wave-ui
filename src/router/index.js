@@ -53,7 +53,7 @@ components.forEach(item => {
   routes.push({
     path: `/w-${item.id}`,
     name: item.id,
-    component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/${item.id}.vue`)
+    component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/ui-components/${item.id}.vue`)
   })
 })
 
