@@ -17,29 +17,13 @@ import '@/documentation/scss/index.scss'
 export default {
   components: { Toolbar, LeftDrawer },
   data: () => ({
-    drawerOpen: false,
-    screenWidth: 0
+    drawerOpen: false
   }),
-
-  methods: {
-    onResize (e) {
-      this.screenWidth = e.target.innerWidth
-    }
-  },
 
   computed: {
     isMobile () {
-      return this.screenWidth < 900
+      return this.$waveUI.breakpoint === 'xs'
     }
-  },
-
-  mounted () {
-    window.addEventListener('resize', this.onResize)
-    this.screenWidth = window.innerWidth
-  },
-
-  beforeDestroy () {
-    window.removeEventListener('resize', this.onResize)
   }
 }
 </script>
@@ -55,7 +39,7 @@ header {
   &:before {
     content: '';
     display: block;
-    padding-bottom: 23.3%;
+    padding-bottom: 23.34%;
     background: url('~@/assets/japanese-wave.png');
     background-size: contain;
   }
