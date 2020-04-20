@@ -4,6 +4,8 @@ import * as components from './components'
 // import * as directives from './directives'
 
 class WaveUI {
+  breakpoint = null
+
   static install (Vue) {
     // Register directives.
     // for (const id in directives) {
@@ -28,7 +30,8 @@ class WaveUI {
   }
 
   constructor (options = {}) {
-    Vue.prototype.$waveUI = this
+    // Make waveUI reactive!
+    Vue.prototype.$waveUI = Vue.observable(this)
 
     // Merge user options into default config.
     mergeConfig(options)
@@ -36,23 +39,6 @@ class WaveUI {
     // Load the icons fonts on demand.
     if (config.icons.includes('fa')) require('font-awesome/css/font-awesome.min.css')
     if (config.icons.includes('ion')) require('ionicons/dist/css/ionicons.min.css')
-  }
-
-  mounted () {
-    //  Inject global dynamic CSS classes in document head.
-    if (!document.getElementById('wave-ui-styles')) {
-      const css = document.createElement('style')
-      css.id = 'wave-ui-styles'
-      css.innerHTML = ''
-
-      for (const color in config.colors) {
-        css.innerHTML += `
-          .w-app .${color} {background-color: ${config.colors[color]};}
-          .w-app .${color}--text {color: ${config.colors[color]};}
-        `
-      }
-      document.head.append(css)
-    }
   }
 }
 export default WaveUI
