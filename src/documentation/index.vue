@@ -1,10 +1,11 @@
 <template lang="pug">
 w-app
   toolbar(:drawer-open.sync="drawerOpen")
-  w-drawer(v-model="drawerOpen" left)
+  w-drawer(v-if="isMobile" v-model="drawerOpen" left)
     left-drawer(:drawer-open.sync="drawerOpen")
   header
-  .content-wrap(:class="`page--${$route.name}`")
+  .content-wrap.layout(:class="`page--${$route.name}`")
+    left-drawer.navigation(v-if="!isMobile" :drawer-open.sync="drawerOpen")
     router-view
 </template>
 
@@ -16,8 +17,30 @@ import '@/documentation/scss/index.scss'
 export default {
   components: { Toolbar, LeftDrawer },
   data: () => ({
-    drawerOpen: false
-  })
+    drawerOpen: false,
+    screenWidth: 0
+  }),
+
+  methods: {
+    onResize (e) {
+      this.screenWidth = e.target.innerWidth
+    }
+  },
+
+  computed: {
+    isMobile () {
+      return this.screenWidth < 900
+    }
+  },
+
+  mounted () {
+    window.addEventListener('resize', this.onResize)
+    this.screenWidth = window.innerWidth
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('resize', this.onResize)
+  }
 }
 </script>
 
