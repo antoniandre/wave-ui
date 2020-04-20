@@ -11,6 +11,11 @@ const routes = [
     component: GettingStarted
   },
   {
+    path: '/breakpoints',
+    name: 'breakpoints',
+    component: () => import(/* webpackChunkName: "breakpoints" */ '@/documentation/views/breakpoints.vue')
+  },
+  {
     path: '/colors',
     name: 'colors',
     component: () => import(/* webpackChunkName: "colors" */ '@/documentation/views/colors.vue')

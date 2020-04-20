@@ -5,6 +5,8 @@
     li
       router-link(:to="{ name: 'getting-started' }") Getting started
     li
+      router-link(to="breakpoints") Breakpoints
+    li
       router-link(to="layout") Layout
     li
       router-link(to="typography") Typography
