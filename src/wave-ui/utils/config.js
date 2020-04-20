@@ -1,9 +1,10 @@
 const config = {
   breakpoints: {
-    xs: 600,
-    sm: 960,
-    md: 1280,
-    lg: 1920
+    xs: 550,
+    sm: 900,
+    md: 1200,
+    lg: 1700,
+    xl: 4000
   },
   colors: {
     primary: '#234781',
