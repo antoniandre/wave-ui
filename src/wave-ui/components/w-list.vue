@@ -2,9 +2,9 @@
   ul.w-list(:class="classes")
     li.w-list__item(
       v-for="(item, index) in items"
-      @mousedown="value !== undefined && selectItem(item)"
-      :class="{ 'w-list__item--active': value !== undefined && selectedItems.includes(item[itemValue]) }")
-      w-checkbox(v-if="checklist")
+      @mousedown="isSelectable && selectItem(item)"
+      :class="{ 'w-list__item--active': isSelectable && selectedItems.includes(item[itemValue]) }")
+      w-checkbox.mr-2(v-if="checklist")
       slot(name="item" :item="item" :index="index" :selected="selectedItems.includes(item[itemValue])")
         template(v-if="nav && item.route")
           component(
@@ -37,12 +37,16 @@ export default {
   }),
 
   computed: {
+    isSelectable () {
+      return this.value !== undefined || this.checklist || this.nav
+    },
     classes () {
       return {
         [`${this.color}--text`]: !!this.color,
         'w-list--checklist': this.checklist,
+        'w-list--navigation': this.nav,
         'w-list--hoverable': this.hover,
-        'w-list--selectable': this.value !== undefined
+        'w-list--selectable': this.isSelectable
       }
     }
   },
@@ -83,8 +87,12 @@ export default {
     position: relative;
   }
 
+  &--navigation &__item,
+  &--checklist &__item,
   &--hoverable &__item,
   &--selectable &__item {
+    padding: 2 * $base-increment;
+
     &:before {
       content: '';
       position: absolute;
@@ -97,9 +105,16 @@ export default {
       opacity: 0;
       transition: 0.2s;
     }
-
-    padding: 2 * $base-increment;
     &:hover:before {opacity: 0.08;}
+  }
+
+  &--navigation &__item {
+    padding: 0;
+
+    a {
+      display: block;
+      padding: 2 * $base-increment;
+    }
   }
 
   &--selectable &__item {
