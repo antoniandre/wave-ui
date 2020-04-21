@@ -36,6 +36,7 @@ export default {
       { label: 'Dialog', route: 'w-dialog' },
       { label: 'Drawer', route: 'w-drawer' },
       { label: 'Icon', route: 'w-icon' },
+      { label: 'List', route: 'w-list' },
       { label: 'Menu', route: 'w-menu' },
       { label: 'Notification', route: 'w-notification' },
       { label: 'Overlay', route: 'w-overlay' },

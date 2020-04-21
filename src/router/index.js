@@ -33,25 +33,26 @@ const routes = [
 ]
 
 const components = [
-  { label: 'Accordion', id: 'accordion' },
-  { label: 'Alert', id: 'alert' },
-  { label: 'App', id: 'app' },
-  { label: 'Button', id: 'button' },
-  { label: 'Calendar', id: 'calendar' },
-  { label: 'Card', id: 'card' },
-  { label: 'Dialog', id: 'dialog' },
-  { label: 'Drawer', id: 'drawer' },
-  { label: 'Icon', id: 'icon' },
-  { label: 'Menu', id: 'menu' },
-  { label: 'Notification', id: 'notification' },
-  { label: 'Overlay', id: 'overlay' },
-  { label: 'Progress', id: 'progress' },
-  { label: 'Rating', id: 'rating' },
-  { label: 'Slideshow', id: 'slideshow' },
-  { label: 'Toolbar', id: 'toolbar' },
-  { label: 'Tabs', id: 'tabs' },
-  { label: 'Tag', id: 'tag' },
-  { label: 'Tooltip', id: 'tooltip' }
+  { id: 'accordion', label: 'Accordion' },
+  { id: 'alert', label: 'Alert' },
+  { id: 'app', label: 'App' },
+  { id: 'button', label: 'Button' },
+  { id: 'calendar', label: 'Calendar' },
+  { id: 'card', label: 'Card' },
+  { id: 'dialog', label: 'Dialog' },
+  { id: 'drawer', label: 'Drawer' },
+  { id: 'icon', label: 'Icon' },
+  { id: 'list', label: 'List' },
+  { id: 'menu', label: 'Menu' },
+  { id: 'notification', label: 'Notification' },
+  { id: 'overlay', label: 'Overlay' },
+  { id: 'progress', label: 'Progress' },
+  { id: 'rating', label: 'Rating' },
+  { id: 'slideshow', label: 'Slideshow' },
+  { id: 'toolbar', label: 'Toolbar' },
+  { id: 'tabs', label: 'Tabs' },
+  { id: 'tag', label: 'Tag' },
+  { id: 'tooltip', label: 'Tooltip' }
 ]
 
 components.forEach(item => {
