@@ -1,11 +1,17 @@
 <template lang="pug">
-  ul.w-list(:class="classes" :style="styles")
+  ul.w-list(:class="classes")
     li.w-list__item(
       v-for="(item, index) in items"
-      @click="value !== false && (selectedItem = item[itemValue])"
-      :class="{ 'w-list__item--active': value !== false && selectedItem === item[itemValue] }")
-      slot(name="item" :item="item" :index="index")
-        router-link(v-if="nav && item.route" :to="item.route" v-html="item[itemLabel]")
+      @mousedown="value !== undefined && selectItem(item)"
+      :class="{ 'w-list__item--active': value !== undefined && selectedItems.includes(item[itemValue]) }")
+      w-checkbox(v-if="checklist")
+      slot(name="item" :item="item" :index="index" :selected="selectedItems.includes(item[itemValue])")
+        template(v-if="nav && item.route")
+          component(
+            :is="$router ? 'router-link' : 'a'"
+            :to="$router && item.route"
+            :href="!$router && item.route"
+            v-html="item[itemLabel]")
         span(v-else v-html="item[itemLabel]")
 </template>
 
@@ -13,8 +19,11 @@
 export default {
   name: 'w-list',
   props: {
-    items: { type: Array, required: true },
-    value: { default: false },
+    items: { type: Array, required: true }, // All the possible options.
+    value: {}, // v-model on selected item if any.
+    checklist: { type: Boolean, default: false },
+    // If selectable (if value !== false), this allows multiple selections.
+    multiple: { type: Boolean, default: false },
     hover: { type: Boolean, default: false },
     color: { type: String, default: null },
     // Navigation type adds a router-link on items with `route`.
@@ -24,27 +33,42 @@ export default {
   },
 
   data: () => ({
+    selectedItems: []
   }),
 
   computed: {
-    selectedItem: {
-      get () {
-        return this.value
-      },
-      set (value) {
-        this.$emit('input', value)
-      }
-    },
     classes () {
       return {
         [`${this.color}--text`]: !!this.color,
-        'w-list--hoverable': this.hover !== false,
-        'w-list--selectable': this.value !== false
+        'w-list--checklist': this.checklist,
+        'w-list--hoverable': this.hover,
+        'w-list--selectable': this.value !== undefined
       }
+    }
+  },
+
+  methods: {
+    selectItem (item) {
+      item = item[this.itemValue]
+      if (this.multiple) {
+        const foundAt = this.selectedItems.indexOf(item)
+
+        if (foundAt > -1) this.selectedItems.splice(foundAt, 1)
+        else this.selectedItems.push(item)
+      }
+      else if (this.selectedItems[0] === item) this.selectedItems[0] = null
+      else this.selectedItems[0] = item
+      this.emit()
     },
-    styles () {
-      return {
-      }
+    emit () {
+      this.$emit('input', (this.multiple ? this.selectedItems : this.selectedItems[0]) || null)
+    }
+  },
+
+  watch: {
+    multiple () {
+      this.selectedItems = []
+      this.emit()
     }
   }
 }
@@ -88,11 +112,12 @@ export default {
       right: 0;
       z-index: -2;
       background-color: currentColor;
+      border-top: 1px solid white;
       opacity: 0;
       transition: 0.1s;
     }
     cursor: pointer;
-    &:active:after, &:focus:after, &--active:after {opacity: 0.2;}
+    &:active:after, &:focus:after, &--active:after {opacity: 0.15;}
   }
 }
 </style>
