@@ -35,7 +35,8 @@
 .italic {font-style: italic;}
 
 code {
-  background-color: rgba(80, 80, 80, 0.15);
+  display: inline-block;
+  background-color: rgba(80, 80, 80, 0.1);
   padding: round(0.5 * $base-increment) round(1.5 * $base-increment);
   color: #c33;
   border-radius: $border-radius;
