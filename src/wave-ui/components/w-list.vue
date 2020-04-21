@@ -85,6 +85,7 @@ export default {
 
   &__item {
     position: relative;
+    font-size: round(1.1 * $base-font-size);
   }
 
   &--navigation &__item,
@@ -108,16 +109,28 @@ export default {
     &:hover:before {opacity: 0.08;}
   }
 
-  &--navigation &__item {
-    padding: 0;
-
-    a {
-      display: block;
-      padding: 2 * $base-increment;
+  // Use less nesting for easier overrides.
+  &--navigation &__item {padding: 0;}
+  &--navigation a {display: block;padding: 2 * $base-increment;}
+  &--navigation .router-link-exact-active {
+    font-weight: bold;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: -1;
+      background-color: currentColor;
+      opacity: 0.15;
+      transition: 0.2s;
     }
   }
 
   &--selectable &__item {
+    cursor: pointer;
+
     &:after {
       content: '';
       position: absolute;
@@ -131,7 +144,6 @@ export default {
       opacity: 0;
       transition: 0.1s;
     }
-    cursor: pointer;
     &:active:after, &:focus:after, &--active:after {opacity: 0.15;}
   }
 }
