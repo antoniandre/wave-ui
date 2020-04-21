@@ -5,7 +5,11 @@ w-toolbar(fixed)
     | Wave UI
   .spacer
   router-link.ml-2(to="/") Home
-  w-button.ml-2(@click="$emit('update:drawerOpen', !drawerOpen)" large text round :icon="drawerOpen ? 'ion-md-close' : 'ion-md-menu'")
+  w-button.ml-2(
+    v-if="$waveUI.breakpoint === 'xs'"
+    @click="$emit('update:drawerOpen', !drawerOpen)"
+    large text round
+    :icon="drawerOpen ? 'ion-md-close' : 'ion-md-menu'")
 </template>
 
 <script>
