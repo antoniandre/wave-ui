@@ -1,22 +1,10 @@
 <template lang="pug">
-.nav-menu.pa-3
+.nav-menu
   w-button.close(small @click="$emit('update:drawerOpen', false)" outline round color="primary" icon="ion-md-close")
-  ul
-    li
-      router-link(:to="{ name: 'getting-started' }") Getting started
-    li
-      router-link(to="breakpoints") Breakpoints
-    li
-      router-link(to="layout") Layout
-    li
-      router-link(to="typography") Typography
-    li
-      router-link(to="colors") Colors
+  w-list(:items="sections" nav)
 
   .title.mt-4 UI Components
-  ul
-    li(v-for="item in components" :key="item.route")
-      router-link(:to="item.route") {{ item.label }}
+  w-list(:items="components" nav)
 </template>
 
 <script>
@@ -26,6 +14,13 @@ export default {
   },
 
   data: () => ({
+    sections: [
+      { label: 'Getting started', route: { name: 'getting-started' } },
+      { label: 'Breakpoints', route: 'breakpoints' },
+      { label: 'Layout', route: 'layout' },
+      { label: 'Typography', route: 'typography' },
+      { label: 'Colors', route: 'colors' },
+    ],
     components: [
       { label: 'Accordion', route: 'w-accordion' },
       { label: 'Alert', route: 'w-alert' },
@@ -58,6 +53,12 @@ export default {
     position: absolute;
     top: 2 * $base-increment;
     right: 2 * $base-increment;
+  }
+
+  .w-list__item a {
+    padding-left: 4 * $base-increment;
+    transition: 0.2s;
+    font-size: 1.1em;
   }
 }
 </style>

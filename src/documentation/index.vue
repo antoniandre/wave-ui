@@ -5,7 +5,7 @@ w-app
     left-drawer(:drawer-open.sync="drawerOpen")
   header
   .content-wrap.layout(:class="`page--${$route.name}`")
-    left-drawer.navigation.pt-6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
+    left-drawer.navigation.mt-6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
     router-view
 </template>
 
