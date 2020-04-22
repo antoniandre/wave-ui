@@ -59,6 +59,9 @@ export default {
     padding-left: 4 * $base-increment;
     transition: 0.2s;
     font-size: 1.1em;
+    border-left: 2px solid transparent;
+
+    &.router-link-exact-active {border-left-color: $primary;}
   }
 }
 </style>

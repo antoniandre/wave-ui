@@ -1,6 +1,6 @@
 <template lang="pug">
 w-toolbar(fixed)
-  router-link.layout.shrink.fill-height.align-center(to="/")
+  router-link.layout.shrink.fill-height.align-center.home-link(to="/")
     wave.wave-logo
     | Wave UI
   .spacer
@@ -28,6 +28,11 @@ export default {
   // height: 3 * $base-font-size;
   // line-height: 3 * $base-font-size;
 
+  .home-link {
+    transition: 0.3s;
+
+    &:focus {transform: scale(1.1);}
+  }
   .wave-logo {
     height: 70%;
     margin-right: 1em;
