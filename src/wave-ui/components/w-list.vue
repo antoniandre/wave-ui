@@ -111,9 +111,14 @@ export default {
 
   // Use less nesting for easier overrides.
   &--navigation &__item {padding: 0;}
-  &--navigation a {display: block;padding: 2 * $base-increment;}
+  &--navigation a {
+    display: block;
+    padding: 2 * $base-increment;
+    color: inherit;
+  }
   &--navigation .router-link-exact-active {
     font-weight: bold;
+
     &:before {
       content: '';
       position: absolute;
