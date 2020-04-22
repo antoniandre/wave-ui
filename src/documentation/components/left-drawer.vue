@@ -1,10 +1,10 @@
 <template lang="pug">
 .nav-menu
   w-button.close(small @click="$emit('update:drawerOpen', false)" outline round color="primary" icon="ion-md-close")
-  w-list(:items="sections" nav)
+  w-list(:items="sections" nav color="primary")
 
   .title.mt-4 UI Components
-  w-list(:items="components" nav)
+  w-list(:items="components" nav color="primary")
 </template>
 
 <script>
@@ -59,6 +59,9 @@ export default {
     padding-left: 4 * $base-increment;
     transition: 0.2s;
     font-size: 1.1em;
+    border-left: 2px solid transparent;
+
+    &.router-link-exact-active {border-left-color: $primary;}
   }
 }
 </style>

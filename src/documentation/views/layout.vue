@@ -3,12 +3,12 @@ div
   h1.headline.mt-4 Layout
 
   h2 Layout classes
-  ul
+  ul.mt-3
     li
       code .layout
-    li
+    li.mt-1
       code .flex
-    li
+    li.mt-1
       code .spacer
 
   h2 Content spacing

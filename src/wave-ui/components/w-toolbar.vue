@@ -43,20 +43,23 @@ export default {
 <style lang="scss">
 .w-toolbar {
   position: relative;
-  left: 0;
-  right: 0;
   height: 12 * $base-increment;
   display: flex;
+  flex: 1 1 auto;
   align-items: center;
   padding-left: 4 * $base-increment;
   padding-right: 4 * $base-increment;
   background-color: #fff;
   z-index: 10;
 
-  &--absolute {position: absolute;top: 0;}
-  &--fixed {position: fixed;top: 0;}
+  &--absolute, &--fixed {top: 0;left: 0;right: 0;}
+  &--absolute {position: absolute;}
+  &--fixed {position: fixed;}
   &--bottom {bottom: 0;top: auto;}
-  &:not(&--no-border) {border-bottom: 1px solid rgba(0, 0, 0, 0.2);}
+  &--bottom:not(&--no-border) {border-top: 1px solid rgba(0, 0, 0, 0.2);}
+  &:not(&--no-border):not(&--bottom) {border-bottom: 1px solid rgba(0, 0, 0, 0.2);}
   &--shadow {box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);}
+
+  .w-app > & {z-index: 200;}
 }
 </style>

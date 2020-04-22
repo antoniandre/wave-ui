@@ -1,16 +1,16 @@
 <template lang="pug">
   ul.w-list(:class="classes")
     li.w-list__item(
-      v-for="(item, index) in items"
+      v-for="(item, i) in items"
       @mousedown="isSelectable && selectItem(item)"
       :class="{ 'w-list__item--active': isSelectable && selectedItems.includes(item[itemValue]) }")
       w-checkbox.mr-2(v-if="checklist")
-      slot(name="item" :item="item" :index="index" :selected="selectedItems.includes(item[itemValue])")
+      slot(name="item" :item="item" :index="i" :selected="selectedItems.includes(item[itemValue])")
         template(v-if="nav && item.route")
           component(
             :is="$router ? 'router-link' : 'a'"
             :to="$router && item.route"
-            :href="!$router && item.route"
+            :href="item.route"
             v-html="item[itemLabel]")
         span(v-else v-html="item[itemLabel]")
 </template>
@@ -111,9 +111,11 @@ export default {
 
   // Use less nesting for easier overrides.
   &--navigation &__item {padding: 0;}
-  &--navigation a {display: block;padding: 2 * $base-increment;}
-  &--navigation .router-link-exact-active {
-    font-weight: bold;
+  &--navigation a {
+    display: block;
+    padding: 2 * $base-increment;
+    color: inherit;
+
     &:before {
       content: '';
       position: absolute;
@@ -123,9 +125,16 @@ export default {
       right: 0;
       z-index: -1;
       background-color: currentColor;
-      opacity: 0.15;
+      opacity: 0;
       transition: 0.2s;
     }
+    &:focus:before {opacity: 0.1;}
+  }
+
+  &--navigation .router-link-exact-active {
+    font-weight: bold;
+
+    &:before, &:focus:before {opacity: 0.15;}
   }
 
   &--selectable &__item {

@@ -5,19 +5,19 @@ div
   p
     | By default, 5 breakpoints are set:
   ul
-    li
+    li.mb-1
       code.mr-2 xs
       span from 0 to 550px
-    li
+    li.mb-1
       code.mr-2 sm
       span from 551px to 900px
-    li
+    li.mb-1
       code.mr-2 md
       span from 901px to 1200px
-    li
+    li.mb-1
       code.mr-2 lg
       span from 1201px to 1700px
-    li
+    li.mb-1
       code.mr-2 xl
       span from 1701px and more
   p You can access the current breakpoint from anywhere using #[code this.$waveUI.breakpoint].
@@ -34,8 +34,8 @@ div
       }
     })
 
-  p.mt-6 Resize your browser will update the current breakpoint:
-  .title.mt-0 Current breakpoint = #[code {{ this.$waveUI.breakpoint }}]
+  p.mt-6 Resizing your browser will update the current breakpoint.
+  .title.mt-0 Current breakpoint: #[code {{ this.$waveUI.breakpoint }}]
 </template>
 
 <script>

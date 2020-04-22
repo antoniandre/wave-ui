@@ -40,7 +40,7 @@ header {
     content: '';
     display: block;
     padding-bottom: 23.34%;
-    background: url('~@/assets/japanese-wave.png');
+    background: url('~@/assets/japanese-wave.png') fixed no-repeat 0 57px;
     background-size: contain;
   }
 
@@ -66,6 +66,11 @@ header {
 }
 
 @media screen and (min-width: 1500px) {
-  header:before {padding-bottom: 14%;}
+  header:before {
+    padding-bottom: 14%;
+    background-attachment: initial;
+    background-repeat: repeat;
+    background-position: initial;
+  }
 }
 </style>
