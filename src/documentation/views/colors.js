@@ -1,23 +1,4 @@
 export const colors = [
-  {
-    label: 'red',
-    color: '#f44336',
-    tones: [
-      { label: 'red lighten-5', color: '#ffebee' },
-      { label: 'red lighten-4', color: '#ffcdd2' },
-      { label: 'red lighten-3', color: '#ef9a9a' },
-      { label: 'red lighten-2', color: '#e57373' },
-      { label: 'red lighten-1', color: '#ef5350' },
-      { label: 'red darken-1', color: '#e53935' },
-      { label: 'red darken-2', color: '#d32f2f' },
-      { label: 'red darken-3', color: '#c62828' },
-      { label: 'red darken-4', color: '#b71c1c' },
-      { label: 'red accent-1', color: '#ff8a80' },
-      { label: 'red accent-2', color: '#ff5252' },
-      { label: 'red accent-3', color: '#ff1744' },
-      { label: 'red accent-4', color: '#d50000' }
-    ]
-  },
 
   {
     label: 'pink',
@@ -32,10 +13,7 @@ export const colors = [
       { label: 'pink darken-2', color: '#c2185b' },
       { label: 'pink darken-3', color: '#ad1457' },
       { label: 'pink darken-4', color: '#880e4f' },
-      { label: 'pink accent-1', color: '#ff80ab' },
-      { label: 'pink accent-2', color: '#ff4081' },
-      { label: 'pink accent-3', color: '#f50057' },
-      { label: 'pink accent-4', color: '#c51162' }
+      { label: 'pink darken-5', color: '#880e4f' }
     ]
   },
 
@@ -52,10 +30,7 @@ export const colors = [
       { label: 'purple darken-2', color: '#7b1fa2' },
       { label: 'purple darken-3', color: '#6a1b9a' },
       { label: 'purple darken-4', color: '#4a148c' },
-      { label: 'purple accent-1', color: '#ea80fc' },
-      { label: 'purple accent-2', color: '#e040fb' },
-      { label: 'purple accent-3', color: '#d500f9' },
-      { label: 'purple accent-4', color: '#aa00ff' }
+      { label: 'purple darken-5', color: '#4a148c' }
     ]
   },
 
@@ -72,10 +47,7 @@ export const colors = [
       { label: 'deep-purple darken-2', color: '#512da8' },
       { label: 'deep-purple darken-3', color: '#4527a0' },
       { label: 'deep-purple darken-4', color: '#311b92' },
-      { label: 'deep-purple accent-1', color: '#b388ff' },
-      { label: 'deep-purple accent-2', color: '#7c4dff' },
-      { label: 'deep-purple accent-3', color: '#651fff' },
-      { label: 'deep-purple accent-4', color: '#6200ea' }
+      { label: 'deep-purple darken-5', color: '#311b92' }
     ]
   },
 
@@ -92,10 +64,7 @@ export const colors = [
       { label: 'indigo darken-2', color: '#303f9f' },
       { label: 'indigo darken-3', color: '#283593' },
       { label: 'indigo darken-4', color: '#1a237e' },
-      { label: 'indigo accent-1', color: '#8c9eff' },
-      { label: 'indigo accent-2', color: '#536dfe' },
-      { label: 'indigo accent-3', color: '#3d5afe' },
-      { label: 'indigo accent-4', color: '#304ffe' }
+      { label: 'indigo darken-5', color: '#1a237e' }
     ]
   },
 
@@ -112,10 +81,7 @@ export const colors = [
       { label: 'blue darken-2', color: '#1976d2' },
       { label: 'blue darken-3', color: '#1565c0' },
       { label: 'blue darken-4', color: '#0d47a1' },
-      { label: 'blue accent-1', color: '#82b1ff' },
-      { label: 'blue accent-2', color: '#448aff' },
-      { label: 'blue accent-3', color: '#2979ff' },
-      { label: 'blue accent-4', color: '#2962ff' }
+      { label: 'blue darken-5', color: '#0d47a1' }
     ]
   },
 
@@ -132,10 +98,7 @@ export const colors = [
       { label: 'light-blue darken-2', color: '#0288d1' },
       { label: 'light-blue darken-3', color: '#0277bd' },
       { label: 'light-blue darken-4', color: '#01579b' },
-      { label: 'light-blue accent-1', color: '#80d8ff' },
-      { label: 'light-blue accent-2', color: '#40c4ff' },
-      { label: 'light-blue accent-3', color: '#00b0ff' },
-      { label: 'light-blue accent-4', color: '#0091ea' }
+      { label: 'light-blue darken-5', color: '#01579b' }
     ]
   },
 
@@ -152,10 +115,7 @@ export const colors = [
       { label: 'cyan darken-2', color: '#0097a7' },
       { label: 'cyan darken-3', color: '#00838f' },
       { label: 'cyan darken-4', color: '#006064' },
-      { label: 'cyan accent-1', color: '#84ffff' },
-      { label: 'cyan accent-2', color: '#18ffff' },
-      { label: 'cyan accent-3', color: '#00e5ff' },
-      { label: 'cyan accent-4', color: '#00b8d4' }
+      { label: 'cyan darken-5', color: '#006064' }
     ]
   },
 
@@ -172,10 +132,7 @@ export const colors = [
       { label: 'teal darken-2', color: '#00796b' },
       { label: 'teal darken-3', color: '#00695c' },
       { label: 'teal darken-4', color: '#004d40' },
-      { label: 'teal accent-1', color: '#a7ffeb' },
-      { label: 'teal accent-2', color: '#64ffda' },
-      { label: 'teal accent-3', color: '#1de9b6' },
-      { label: 'teal accent-4', color: '#00bfa5' }
+      { label: 'teal darken-5', color: '#004d40' }
     ]
   },
 
@@ -192,10 +149,7 @@ export const colors = [
       { label: 'green darken-2', color: '#388e3c' },
       { label: 'green darken-3', color: '#2e7d32' },
       { label: 'green darken-4', color: '#1b5e20' },
-      { label: 'green accent-1', color: '#b9f6ca' },
-      { label: 'green accent-2', color: '#69f0ae' },
-      { label: 'green accent-3', color: '#00e676' },
-      { label: 'green accent-4', color: '#00c853' }
+      { label: 'green darken-5', color: '#1b5e20' }
     ]
   },
 
@@ -212,10 +166,7 @@ export const colors = [
       { label: 'light-green darken-2', color: '#689f38' },
       { label: 'light-green darken-3', color: '#558b2f' },
       { label: 'light-green darken-4', color: '#33691e' },
-      { label: 'light-green accent-1', color: '#ccff90' },
-      { label: 'light-green accent-2', color: '#b2ff59' },
-      { label: 'light-green accent-3', color: '#76ff03' },
-      { label: 'light-green accent-4', color: '#64dd17' }
+      { label: 'light-green darken-5', color: '#33691e' }
     ]
   },
 
@@ -232,10 +183,7 @@ export const colors = [
       { label: 'lime darken-2', color: '#afb42b' },
       { label: 'lime darken-3', color: '#9e9d24' },
       { label: 'lime darken-4', color: '#827717' },
-      { label: 'lime accent-1', color: '#f4ff81' },
-      { label: 'lime accent-2', color: '#eeff41' },
-      { label: 'lime accent-3', color: '#c6ff00' },
-      { label: 'lime accent-4', color: '#aeea00' }
+      { label: 'lime darken-5', color: '#827717' }
     ]
   },
 
@@ -252,10 +200,7 @@ export const colors = [
       { label: 'yellow darken-2', color: '#fbc02d' },
       { label: 'yellow darken-3', color: '#f9a825' },
       { label: 'yellow darken-4', color: '#f57f17' },
-      { label: 'yellow accent-1', color: '#ffff8d' },
-      { label: 'yellow accent-2', color: '#ffff00' },
-      { label: 'yellow accent-3', color: '#ffea00' },
-      { label: 'yellow accent-4', color: '#ffd600' }
+      { label: 'yellow darken-5', color: '#f57f17' }
     ]
   },
 
@@ -272,10 +217,7 @@ export const colors = [
       { label: 'amber darken-2', color: '#ffa000' },
       { label: 'amber darken-3', color: '#ff8f00' },
       { label: 'amber darken-4', color: '#ff6f00' },
-      { label: 'amber accent-1', color: '#ffe57f' },
-      { label: 'amber accent-2', color: '#ffd740' },
-      { label: 'amber accent-3', color: '#ffc400' },
-      { label: 'amber accent-4', color: '#ffab00' }
+      { label: 'amber darken-5', color: '#ff6f00' }
     ]
   },
 
@@ -292,10 +234,7 @@ export const colors = [
       { label: 'orange darken-2', color: '#f57c00' },
       { label: 'orange darken-3', color: '#ef6c00' },
       { label: 'orange darken-4', color: '#e65100' },
-      { label: 'orange accent-1', color: '#ffd180' },
-      { label: 'orange accent-2', color: '#ffab40' },
-      { label: 'orange accent-3', color: '#ff9100' },
-      { label: 'orange accent-4', color: '#ff6d00' }
+      { label: 'orange darken-5', color: '#e65100' }
     ]
   },
 
@@ -312,10 +251,24 @@ export const colors = [
       { label: 'deep-orange darken-2', color: '#e64a19' },
       { label: 'deep-orange darken-3', color: '#d84315' },
       { label: 'deep-orange darken-4', color: '#bf360c' },
-      { label: 'deep-orange accent-1', color: '#ff9e80' },
-      { label: 'deep-orange accent-2', color: '#ff6e40' },
-      { label: 'deep-orange accent-3', color: '#ff3d00' },
-      { label: 'deep-orange accent-4', color: '#dd2c00' }
+      { label: 'deep-orange darken-5', color: '#bf360c' }
+    ]
+  },
+
+  {
+    label: 'red',
+    color: '#f44336',
+    tones: [
+      { label: 'red lighten-5', color: '#ffebee' },
+      { label: 'red lighten-4', color: '#ffcdd2' },
+      { label: 'red lighten-3', color: '#ef9a9a' },
+      { label: 'red lighten-2', color: '#e57373' },
+      { label: 'red lighten-1', color: '#ef5350' },
+      { label: 'red darken-1', color: '#e53935' },
+      { label: 'red darken-2', color: '#d32f2f' },
+      { label: 'red darken-3', color: '#c62828' },
+      { label: 'red darken-4', color: '#b71c1c' },
+      { label: 'red darken-5', color: '#b71c1c' }
     ]
   },
 
@@ -331,7 +284,8 @@ export const colors = [
       { label: 'brown darken-1', color: '#6d4c41' },
       { label: 'brown darken-2', color: '#5d4037' },
       { label: 'brown darken-3', color: '#4e342e' },
-      { label: 'brown darken-4', color: '#3e2723' }
+      { label: 'brown darken-4', color: '#3e2723' },
+      { label: 'brown darken-5', color: '#3e2723' }
     ]
   },
 
@@ -347,7 +301,8 @@ export const colors = [
       { label: 'blue-grey darken-1', color: '#546e7a' },
       { label: 'blue-grey darken-2', color: '#455a64' },
       { label: 'blue-grey darken-3', color: '#37474f' },
-      { label: 'blue-grey darken-4', color: '#263238' }
+      { label: 'blue-grey darken-4', color: '#263238' },
+      { label: 'blue-grey darken-5', color: '#263238' }
     ]
   },
 
@@ -363,7 +318,8 @@ export const colors = [
       { label: 'grey darken-1', color: '#757575' },
       { label: 'grey darken-2', color: '#616161' },
       { label: 'grey darken-3', color: '#424242' },
-      { label: 'grey darken-4', color: '#212121' }
+      { label: 'grey darken-4', color: '#212121' },
+      { label: 'grey darken-5', color: '#212121' }
     ]
   }
 ]
