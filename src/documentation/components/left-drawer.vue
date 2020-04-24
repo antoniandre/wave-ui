@@ -49,6 +49,12 @@ export default {
 
 <style lang="scss">
 .nav-menu {
+  width: 100%;
+  min-width: 180px;
+  max-width: 260px;
+  border-right: 1px solid #ddd;
+  margin-right: 4rem;
+
   .close {
     position: absolute;
     top: 2 * $base-increment;
