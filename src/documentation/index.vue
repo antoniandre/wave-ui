@@ -6,7 +6,7 @@ w-app
   header
   .content-wrap.layout(:class="`page--${$route.name}`")
     left-drawer.navigation.mt-6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
-    router-view
+    router-view.flex
 </template>
 
 <script>
@@ -56,13 +56,6 @@ header {
     z-index: -1;
     opacity: 0.5;
   }
-}
-
-.navigation {
-  width: 100%;
-  max-width: 260px;
-  border-right: 1px solid #ddd;
-  margin-right: 4rem;
 }
 
 @media screen and (min-width: 1500px) {

@@ -1,14 +1,12 @@
 // Layout classes.
 // ----------------------------------------------
-.w-app * {box-sizing: border-box;}
-
 .layout {
   display: flex;
   flex: 1 1 auto;
   &.column {flex-direction: column;}
   &.wrap {flex-wrap: wrap;}
 }
-.flex, .grow, .spacer {flex-grow: 1;}
+.flex, .grow, .spacer {flex: 1 1 0;}
 .shrink {flex-shrink: 1;flex-grow: 0;}
 .fill-height {height: 100%;}
 .align-center {align-items: center;}
@@ -38,6 +36,13 @@
     .ml-#{$i} {margin-left: $number;}
     .mx-#{$i} {margin-left: $number;margin-right: $number;}
     .my-#{$i} {margin-top: $number;margin-bottom: $number;}
+    .ma-n#{$i} {margin: -$number;}
+    .mt-n#{$i} {margin-top: -$number;}
+    .mr-n#{$i} {margin-right: -$number;}
+    .mb-n#{$i} {margin-bottom: -$number;}
+    .ml-n#{$i} {margin-left: -$number;}
+    .mx-n#{$i} {margin-left: -$number;margin-right: -$number;}
+    .my-n#{$i} {margin-top: -$number;margin-bottom: -$number;}
   }
   .pa-0 {padding: 0;}
   .pt-0 {padding-top: 0;}
