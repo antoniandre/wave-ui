@@ -1,6 +1,6 @@
 $base-font-size: 14px;
 $base-increment: round($base-font-size / 4);
-$layout-padding: $base-font-size;
+$layout-padding: $base-increment * 4;
 $border-radius: 4px;
 $drawer-max-size: 380px;
 

@@ -1,39 +1,49 @@
 <template lang="pug">
-div
+div(style="overflow: hidden")
   h1.headline.mt-4 Colors
-  .layout.wrap.text-center.mb-12
-    .color.success.text-center.py-4.ma-2 success
-    .color.error.text-center.py-4.ma-2 error
-    .color.warning.text-center.py-4.ma-2 warning
-    .color.info.text-center.py-4.ma-2 info
+  .layout.wrap.mb-12.ma-n2
+    .color.success.subtitle.text-center.flex.py-4.ma-2 success
+    .color.error.subtitle.text-center.flex.py-4.ma-2 error
+    .color.warning.subtitle.text-center.flex.py-4.ma-2 warning
+    .color.info.subtitle.text-center.flex.py-4.ma-2 info
 
-  h2.mt-4 Color Palette
-  .layout.wrap.text-center
-    .color.ma-2(
-      v-for="({ color, label, tones }, i) in colors"
-      :key="i")
-      template(v-for="(tone, i) in tones")
-        //- top color.
-        .color.color--top(v-if="i === 5" :class="label")
-          span {{ label }}
-          small {{ color }}
-        //- tones colors.
-        .color.color--tone(
-          :key="i"
-          :class="[tone.label, i >= 5 ? 'color--darken' : '']")
-          span {{ tone.label }}
-          | {{ tone.color }}
+  h2.my-4.layout.align-center
+    | Color Palette
+    w-button.ml-6(
+      color="primary"
+      small
+      dark
+      @click="horizontal = !horizontal")
+      | {{ horizontal ? 'Vertical' : 'Horizontal' }} display
 
-    .color.ma-1
-      .color.color--top.ma-1.black
-        span black
-        small #000
-      .color.color--top.ma-1.white.black--text
-        span white
-        small #fff
-      .color.color--top.ma-1.transparent.black--text
-        span transparent
-        small transparent
+  .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
+    .layout.flex.wrap.ma-n2
+      .color-palette.ma-2(
+        v-for="({ color, label, tones }, i) in colors"
+        :key="i")
+        template(v-for="(tone, i) in tones")
+          //- top color.
+          .color.color--top(v-if="i === 5" :class="label")
+            span {{ label }}
+            small {{ color }}
+          //- tones colors.
+          .color.color--tone(
+            :key="i"
+            :class="[tone.label, i >= 5 ? 'color--darken' : '']")
+            span {{ tone.label }}
+            | {{ tone.color }}
+
+      .color-palette.ma-2
+        .layout.ma-n2(:class="{ column: !horizontal }")
+          .color.color--top.ma-2.black
+            span black
+            small #000
+          .color.color--top.ma-2.white.black--text
+            span white
+            small #fff
+          .color.color--top.ma-2.transparent.black--text
+            span transparent
+            small transparent
 </template>
 
 <script>
@@ -41,20 +51,45 @@ import { colors } from './colors'
 
 export default {
   data: () => ({
-    colors
+    colors,
+    horizontal: false
   })
 }
 </script>
 
 <style lang="scss">
 .page--colors {
-  .color {
-    min-width: 250px;
-    font-size: 0.9em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .horizontal {overflow: auto hidden;}
+}
 
+.color-palette {
+  .vertical & {min-width: 250px;}
+  .horizontal & {
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+  }
+
+  .color {
+    display: flex;
+    .horizontal & {
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  .color--top {
+    font-size: 2.4em;
+    color: #fff;
+
+    .vertical & {
+      height: 90px;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .horizontal & {min-width: 220px;}
+
+    span {padding-bottom: 4px;letter-spacing: 1px;}
     small {font-size: 0.5em;}
 
     &.black--text {text-shadow: none;color: #000;}
@@ -62,22 +97,20 @@ export default {
     &.white, &.transparent {border: 1px solid #999;}
   }
 
-  .color--top {
-    letter-spacing: 1px;
-    font-size: 2.5em;
-    height: 90px;
-    color: #fff;
-    span {padding-bottom: 4px;}
-  }
-
   .color--tone {
-    height: 40px;
+    font-size: 0.8em;
     color: rgba(0, 0, 0, 0.9);
     text-shadow: none;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 8px;
+
+    .vertical & {
+      justify-content: space-between;
+      align-items: center;
+      height: 45px;
+      padding-left: 2 * $base-increment;
+      padding-right: 2 * $base-increment;
+    }
+    .horizontal & {min-width: 140px;}
 
     &.color--darken {color: #fff;}
     span {padding-bottom: 2px;font-size: 1.2em;}
