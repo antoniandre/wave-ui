@@ -22,26 +22,26 @@ export default {
       { label: 'Colors', route: 'colors' },
     ],
     components: [
-      { label: 'Accordion', route: 'w-accordion' },
-      { label: 'Alert', route: 'w-alert' },
+      { label: 'Accordion', route: 'w-accordion', disabled: true },
+      { label: 'Alert', route: 'w-alert', disabled: true },
       { label: 'App', route: 'w-app' },
       { label: 'Button', route: 'w-button' },
-      { label: 'Calendar', route: 'w-calendar' },
+      { label: 'Calendar', route: 'w-calendar', disabled: true },
       { label: 'Card', route: 'w-card' },
-      { label: 'Dialog', route: 'w-dialog' },
+      { label: 'Dialog', route: 'w-dialog', disabled: true },
       { label: 'Drawer', route: 'w-drawer' },
       { label: 'Icon', route: 'w-icon' },
       { label: 'List', route: 'w-list' },
-      { label: 'Menu', route: 'w-menu' },
-      { label: 'Notification', route: 'w-notification' },
+      { label: 'Menu', route: 'w-menu', disabled: true },
+      { label: 'Notification', route: 'w-notification', disabled: true },
       { label: 'Overlay', route: 'w-overlay' },
-      { label: 'Progress', route: 'w-progress' },
-      { label: 'Rating', route: 'w-rating' },
-      { label: 'Slideshow', route: 'w-slideshow' },
-      { label: 'Tabs', route: 'w-tabs' },
-      { label: 'Tag', route: 'w-tag' },
+      { label: 'Progress', route: 'w-progress', disabled: true },
+      { label: 'Rating', route: 'w-rating', disabled: true },
+      { label: 'Slideshow', route: 'w-slideshow', disabled: true },
+      { label: 'Tabs', route: 'w-tabs', disabled: true },
+      { label: 'Tag', route: 'w-tag', disabled: true },
       { label: 'Toolbar', route: 'w-toolbar' },
-      { label: 'Tooltip', route: 'w-tooltip' }
+      { label: 'Tooltip', route: 'w-tooltip', disabled: true }
     ]
   })
 }
@@ -61,10 +61,10 @@ export default {
     right: 2 * $base-increment;
   }
 
-  .w-list__item a {
+  .w-list__item a, .w-list__item span {
     padding-left: 4 * $base-increment;
     transition: 0.2s;
-    font-size: 1.1em;
+    font-size: 1.05em;
     border-left: 2px solid transparent;
 
     &.router-link-exact-active {border-left-color: $primary;}
