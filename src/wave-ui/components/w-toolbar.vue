@@ -12,7 +12,7 @@ export default {
     fixed: { type: Boolean, default: false },
     bottom: { type: Boolean, default: false },
     height: { type: [Number, String], default: null },
-    border: { type: Boolean, default: true },
+    noBorder: { type: Boolean, default: false },
     shadow: { type: Boolean, default: false }
   },
 
@@ -29,7 +29,7 @@ export default {
         'w-toolbar--absolute': !!this.absolute,
         'w-toolbar--fixed': !!this.fixed,
         'w-toolbar--bottom': !!this.bottom,
-        'w-toolbar--no-border': !this.border,
+        'w-toolbar--no-border': this.noBorder,
         'w-toolbar--shadow': !!this.shadow,
       }
     },
@@ -56,8 +56,8 @@ export default {
   &--absolute {position: absolute;}
   &--fixed {position: fixed;}
   &--bottom {bottom: 0;top: auto;}
-  &--bottom:not(&--no-border) {border-top: 1px solid rgba(0, 0, 0, 0.2);}
-  &:not(&--no-border):not(&--bottom) {border-bottom: 1px solid rgba(0, 0, 0, 0.2);}
+  &--bottom:not(&--no-border) {border-top: 1px solid rgba(0, 0, 0, 0.15);}
+  &:not(&--no-border):not(&--bottom) {border-bottom: 1px solid rgba(0, 0, 0, 0.15);}
   &--shadow {box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);}
 
   .w-app > & {z-index: 200;}
