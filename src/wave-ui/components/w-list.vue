@@ -2,11 +2,11 @@
   ul.w-list(:class="classes")
     li.w-list__item(
       v-for="(item, i) in items"
-      @mousedown="isSelectable && selectItem(item)"
-      :class="{ 'w-list__item--active': isSelectable && selectedItems.includes(item[itemValue]) }")
+      @mousedown="isSelectable && !item.disabled && selectItem(item)"
+      :class="liClasses(item)")
       w-checkbox.mr-2(v-if="checklist")
       slot(name="item" :item="item" :index="i" :selected="selectedItems.includes(item[itemValue])")
-        template(v-if="nav && item.route")
+        template(v-if="nav && !item.disabled && item.route")
           component(
             :is="$router ? 'router-link' : 'a'"
             :to="$router && item.route"
@@ -28,8 +28,8 @@ export default {
     color: { type: String, default: null },
     // Navigation type adds a router-link on items with `route`.
     nav: { type: Boolean, default: false },
-    itemLabel: { type: String, default: 'label' },
-    itemValue: { type: String, default: 'value' }
+    itemLabel: { type: String, default: 'label' }, // Name of the label field.
+    itemValue: { type: String, default: 'value' } // Name of the value field.
   },
 
   data: () => ({
@@ -63,6 +63,12 @@ export default {
       else if (this.selectedItems[0] === item) this.selectedItems[0] = null
       else this.selectedItems[0] = item
       this.emit()
+    },
+    liClasses (item) {
+      return {
+        'w-list__item--disabled': item.disabled,
+        'w-list__item--active': this.isSelectable && this.selectedItems.includes(item[this.itemValue])
+      }
     },
     emit () {
       this.$emit('input', (this.multiple ? this.selectedItems : this.selectedItems[0]) || null)
@@ -111,9 +117,11 @@ export default {
 
   // Use less nesting for easier overrides.
   &--navigation &__item {padding: 0;}
-  &--navigation a {
+  &--navigation a, &--navigation span {
     display: block;
     padding: 2 * $base-increment;
+  }
+  &--navigation a {
     color: inherit;
 
     &:before {
@@ -155,5 +163,9 @@ export default {
     }
     &:active:after, &:focus:after, &--active:after {opacity: 0.15;}
   }
+
+  .w-list__item--disabled {cursor: auto;opacity: 0.3;}
+  .w-list__item--disabled:before,
+  .w-list__item--disabled:after {display: none;}
 }
 </style>

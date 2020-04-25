@@ -33,6 +33,7 @@ div
   p.
     The navigation list expects a #[code route] attribute in the items that are links.#[br]
     It will create a router link or a normal link (if not using vue-router) on those items.
+  p It is possible to disable a link with a #[code disabled: true] attribute in the item.
   w-list.mt-6(:items="listItems" nav color="primary")
 </template>
 
@@ -49,7 +50,8 @@ export default {
       { label: 'Check', id: 'check', icon: 'fa fa-check', route: '#route-to-check' },
       { label: 'Cross', id: 'cross', icon: 'fa fa-close', route: '#route-to-cross' },
       { label: 'Info', id: 'info', icon: 'fa fa-info', route: '#route-to-info' },
-      { label: 'Warning', id: 'warning', icon: 'fa fa-warning', route: '#route-to-warning' }
+      { label: 'Warning', id: 'warning', icon: 'fa fa-warning', route: '#route-to-warning' },
+      { label: 'Disabled', id: 'disabled', icon: 'fa fa-minus-circle', route: '#disabled', disabled: true }
     ],
     selectedItem: 'check'
   }),
