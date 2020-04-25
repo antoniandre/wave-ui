@@ -31,7 +31,7 @@ div(style="overflow: hidden")
             :key="i"
             :class="[tone.label, i >= 5 ? 'color--darken' : '']")
             span {{ tone.label }}
-            | {{ tone.color }}
+            small {{ tone.color }}
 
       .color-palette.ma-2
         .layout.ma-n2(:class="{ column: !horizontal }")
@@ -63,7 +63,7 @@ export default {
 }
 
 .color-palette {
-  .vertical & {min-width: 250px;}
+  .vertical & {min-width: 250px;flex-grow: 1;}
   .horizontal & {
     display: flex;
     flex-direction: row;
@@ -90,7 +90,11 @@ export default {
     .horizontal & {min-width: 220px;}
 
     span {padding-bottom: 4px;letter-spacing: 1px;}
-    small {font-size: 0.5em;}
+    small {
+      font-size: 0.5em;
+      font-family: monospace;
+      letter-spacing: -1px;
+    }
 
     &.black--text {text-shadow: none;color: #000;}
     &.black {text-shadow: none;color: #fff;}
@@ -114,6 +118,11 @@ export default {
 
     &.color--darken {color: #fff;}
     span {padding-bottom: 2px;font-size: 1.2em;}
+    small {
+      font-size: 1.1em;
+      font-family: monospace;
+      letter-spacing: -0.5px;
+    }
   }
 }
 </style>

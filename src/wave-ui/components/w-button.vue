@@ -160,7 +160,6 @@ $spinner-size: 40;
   &--loading:active:before,
   &[disabled]:before {background-color: transparent;}
 
-
   // Surrounding border to mark the focus state.
   &:after {
     content: '';
@@ -169,12 +168,11 @@ $spinner-size: 40;
     left: -4px;
     right: -4px;
     bottom: -4px;
-    transition: 0.2s;
     background-color: transparent;
     border-radius: inherit;
     opacity: 0.25;
     z-index: -1;
-    transition: 0.4s;
+    @include default-transition(0.3s);
   }
   &:focus:after {background-color: inherit;}
 
