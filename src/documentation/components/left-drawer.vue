@@ -23,7 +23,7 @@ export default {
     ],
     components: [
       { label: 'Accordion', route: 'w-accordion', disabled: true },
-      { label: 'Alert', route: 'w-alert', disabled: true },
+      { label: 'Alert', route: 'w-alert' },
       { label: 'App', route: 'w-app' },
       { label: 'Button', route: 'w-button' },
       { label: 'Calendar', route: 'w-calendar', disabled: true },
@@ -63,7 +63,7 @@ export default {
 
   .w-list__item a, .w-list__item span {
     padding-left: 4 * $base-increment;
-    transition: 0.2s;
+    @include default-transition;
     font-size: 1.05em;
     border-left: 2px solid transparent;
 

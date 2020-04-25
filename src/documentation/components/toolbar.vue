@@ -25,14 +25,11 @@ export default {
 
 <style lang="scss">
 .w-toolbar {
-  // height: 3 * $base-font-size;
-  // line-height: 3 * $base-font-size;
-
   .home-link {
-    transition: 0.3s;
-
+    @include default-transition;
     &:focus {transform: scale(1.1);}
   }
+
   .wave-logo {
     height: 70%;
     margin-right: 1em;

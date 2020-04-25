@@ -1,7 +1,17 @@
+// Defaults.
 $base-font-size: 14px;
 $base-increment: round($base-font-size / 4);
 $layout-padding: $base-increment * 4;
 $border-radius: 4px;
+$border: 1px solid rgba(0, 0, 0, 0.15);
 $drawer-max-size: 380px;
+$transition-duration: 0.25s;
 
 // Mixins.
+@mixin default-transition($duration: $transition-duration, $delay: 0s) {
+  transition: $duration $delay ease-in-out;
+}
+
+@mixin out-back-transition($duration: $transition-duration, $delay: 0s) {
+  transition: $duration $delay cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}

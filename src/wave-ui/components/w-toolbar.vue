@@ -56,8 +56,8 @@ export default {
   &--absolute {position: absolute;}
   &--fixed {position: fixed;}
   &--bottom {bottom: 0;top: auto;}
-  &--bottom:not(&--no-border) {border-top: 1px solid rgba(0, 0, 0, 0.15);}
-  &:not(&--no-border):not(&--bottom) {border-bottom: 1px solid rgba(0, 0, 0, 0.15);}
+  &--bottom:not(&--no-border) {border-top: $border;}
+  &:not(&--no-border):not(&--bottom) {border-bottom: $border;}
   &--shadow {box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);}
 
   .w-app > & {z-index: 200;}

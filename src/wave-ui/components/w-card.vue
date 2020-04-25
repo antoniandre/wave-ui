@@ -16,7 +16,7 @@ export default {
     color: { type: String, default: '' },
     cardTitle: { type: String, default: '' },
     shadow: { type: Boolean, default: false },
-    border: { type: Boolean, default: true },
+    noBorder: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
     titleClass: { type: String, default: '' },
     contentClass: { type: String, default: '' },
@@ -26,7 +26,7 @@ export default {
     classes () {
       return {
         [this.color]: !!this.color,
-        'w-card--no-border': !this.border,
+        'w-card--no-border': this.noBorder,
         'w-card--tile': this.tile,
         'w-card--shadow': this.shadow
       }
@@ -46,12 +46,12 @@ export default {
 
   &:not(&--tile) {border-radius: $border-radius;}
   &--shadow {box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);}
-  &:not(&--no-border):not(&--shadow) {border: 1px solid rgba(0, 0, 0, 0.15);}
+  &:not(&--no-border):not(&--shadow) {border: $border;}
 
   &__title {
     padding: (2 * $base-increment) (4 * $base-increment);
     font-size: 1.3em;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    border-bottom: $border;
   }
   &__content {
     display: flex;

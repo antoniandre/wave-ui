@@ -13,7 +13,7 @@ div
       aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
 
   h2 Colored card with no title and no border
-  w-card.mt-4(color="secondary" :border="false")
+  w-card.mt-4(color="secondary" no-border)
     p.
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
       quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
