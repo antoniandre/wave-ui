@@ -1,8 +1,57 @@
 // Fade.
+// --------------------------------------------------
 .fade-enter-active, .fade-leave-active {transition: opacity 0.5s;}
 .fade-enter, .fade-leave-to {opacity: 0;}
+// --------------------------------------------------
+
+// Translate x from left to right.
+// --------------------------------------------------
+.slide-to-right-enter-active, .slide-to-right-leave-active {
+  transition: transform 0.25s;
+  transform: translateX(0%);
+}
+.slide-to-right-enter, .slide-to-right-leave-to {transform: translateX(-100%);}
+// --------------------------------------------------
+
+// Translate x from right to left.
+// --------------------------------------------------
+.slide-to-left-enter-active, .slide-to-left-leave-active {
+  transition: transform 0.25s;
+  transform: translateX(0%);
+}
+.slide-to-left-enter, .slide-to-left-leave-to {transform: translateX(100%);}
+// --------------------------------------------------
+
+// Translate y from top to bottom.
+// --------------------------------------------------
+.slide-to-bottom-enter-active, .slide-to-bottom-leave-active {
+  transition: transform 0.25s;
+  transform: translateY(0%);
+}
+.slide-to-bottom-enter, .slide-to-bottom-leave-to {transform: translateY(-100%);}
+// --------------------------------------------------
+
+// Translate y from bottom to top.
+// --------------------------------------------------
+.slide-to-top-enter-active, .slide-to-top-leave-active {
+  transition: transform 0.25s;
+  transform: translateY(0%);
+}
+.slide-to-top-enter, .slide-to-top-leave-to {transform: translateY(100%);}
+// --------------------------------------------------
+
+// Slide-fade.
+// --------------------------------------------------
+.slide-fade-enter-active {transition: all .3s ease;}
+.slide-fade-leave-active {transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+// --------------------------------------------------
 
 // Bounce.
+// --------------------------------------------------
 .bounce-enter-active {animation: bounce-in .5s;}
 .bounce-leave-active {animation: bounce-in .5s reverse;}
 @keyframes bounce-in {
@@ -10,3 +59,4 @@
   60% {transform: scale(1.15);}
   100% {transform: scale(1);}
 }
+// --------------------------------------------------
