@@ -25,7 +25,12 @@ div
   h2 Tiled card with a top toolbar
   w-card.mt-4(tile title-class="pa-0")
     template(v-slot:title)
-      w-toolbar.px-n2 Card title
+      w-toolbar.px-n2(no-border)
+        .subtitle.my-0 Card title
+        .spacer
+        span.ml-2 Item 1
+        span.ml-2 Item 2
+        span.ml-2 Item 3
     p.
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
       quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas

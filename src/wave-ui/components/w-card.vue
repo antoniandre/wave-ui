@@ -50,6 +50,8 @@ export default {
 
   &__title {
     padding: (2 * $base-increment) (4 * $base-increment);
+    font-size: 1.3em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   }
   &__content {
     display: flex;
