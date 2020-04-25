@@ -3,13 +3,19 @@ div
   h1.headline.mt-4 Layout
 
   h2 Layout classes
-  ul.mt-3
+  ul
     li
       code .layout
+      p column, wrap
     li.mt-1
       code .flex
+      p grow
+    li.mt-1
+      code .shrink
     li.mt-1
       code .spacer
+    li.mt-1
+      code .fill-height
 
   h2 Content spacing
   p.
@@ -18,6 +24,9 @@ div
     #[span.code x] and #[span.code y] will set both left and right or top and bottom.
   p ma mx my ml mr mt mb
   p pa px py pl pr pt pb
+
+  h2 Grid system
+  p 12-cell based.
 </template>
 
 <script>
