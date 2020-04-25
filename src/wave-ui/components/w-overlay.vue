@@ -12,9 +12,9 @@ export default {
   name: 'w-overlay',
   props: {
     value: { type: Boolean, default: false },
-    opacity: { type: [Number, String], default: null },
-    color: { type: String, default: null },
-    zIndex: { type: [Number, String], default: null },
+    opacity: { type: [Number, String, Boolean], default: false },
+    color: { type: [String, Boolean], default: false },
+    zIndex: { type: [Number, String, Boolean], default: false },
     closeOnClick: { type: Boolean, default: true }
   },
 

@@ -1,20 +1,45 @@
 <template lang="pug">
-  w-overlay(:value="value" @input="$emit('input', false)")
-    .w-drawer(:class="classes" :style="styles")
-      slot
+  .w-drawer(v-if="showWrapper" :class="classes")
+    w-overlay(
+      v-if="!noOverlay"
+      v-model="showDrawer"
+      :color="overlayColor"
+      :opacity="overlayOpacity")
+    transition(
+      :name="transitionName"
+      appear
+      @after-leave="showWrapper = false;$emit('input', false)")
+      .w-drawer__content(v-if="showDrawer" :style="styles")
+        slot
 </template>
 
 <script>
+// The complexity in this component is on close:
+// we must keep the wrapper in the DOM until the drawer transition is finished.
+// Then emit the value update that will trigger the removal of the wrapper from the DOM.
+const oppositeSides = { left: 'right', right: 'left', top: 'bottom', bottom: 'top' }
+
 export default {
   name: 'w-drawer',
   props: {
     value: { default: true },
-    right: { type: Boolean, default: false },
     left: { type: Boolean, default: false },
+    right: { type: Boolean, default: false },
     top: { type: Boolean, default: false },
     bottom: { type: Boolean, default: false },
-    width: { type: [Number, String], default: null },
-    height: { type: [Number, String], default: null }
+    width: { type: [Number, String, Boolean], default: false },
+    height: { type: [Number, String, Boolean], default: false },
+    zIndex: { type: [Number, String, Boolean], default: false },
+    noOverlay: { type: Boolean, default: false },
+    overlayColor: { type: [String, Boolean], default: false },
+    overlayOpacity: { type: [Number, String, Boolean], default: false }
+  },
+
+  data () {
+    return {
+      showWrapper: this.value,
+      showDrawer: this.value
+    }
   },
 
   computed: {
@@ -22,8 +47,8 @@ export default {
     size () {
       let size = this.width || this.height
       // If a number is passed without units, append `px`.
-      if (size && parseInt(size) == size) size = size + 'px'
-      return size && (this.left || this.right || this.top || this.bottom)
+      if (size && parseInt(size) == size) size += 'px'
+      return (this.left || this.right || this.top || this.bottom) && size || false
     },
     // Return `width` or `height`, `width` by default (position right by default).
     sizeProperty () {
@@ -44,12 +69,36 @@ export default {
     },
     classes () {
       return {
-        'w-drawer--open': !!this.value,
+        'w-drawer--open': !!this.showDrawer,
         [`w-drawer--${this.position}`]: true
       }
     },
     styles () {
-      return this.size ? `max-${this.sizeProperty}: ${this.size}` : false
+      return {
+        [`max-${this.sizeProperty}`]: this.size || false,
+        zIndex: this.zIndex || this.zIndex === 0 || false
+      }
+    },
+    transitionName () {
+      return `slide-to-${oppositeSides[this.position]}`
+    }
+  },
+
+  methods: {
+    hide () {
+      this.showDrawer = false
+      setTimeout(() => this.$emit('input', false), 500)
+    }
+  },
+
+  watch: {
+    value (value) {
+      // If value is true, mount the wrapper in DOM and open the drawer.
+      // If value is false, keep the wrapper in DOM and close the drawer;
+      // At the end of the drawer transition the value is updated and wrapper
+      // removed from the DOM.
+      if (value) this.showWrapper = value
+      this.showDrawer = value
     }
   }
 }
@@ -59,35 +108,32 @@ export default {
 .w-drawer {
   position: fixed;
   z-index: 500;
-  transition: 0.25s ease-in-out;
-  background: #fff;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
 
-  &--left, &--right {
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    max-width: $drawer-max-size;
-    // transform: translateX(0);
-  }
-  &--top, &--bottom {
-    left: 0;
-    right: 0;
-    height: 100%;
-    max-height: $drawer-max-size;
-    // transform: translateY(0);
-  }
+  .w-overlay {z-index: 0;}
 
-  &--left {right: 100%;}
-  &--right {left: 100%;}
-  &--top {bottom: 100%;}
-  &--bottom {top: 100%;}
+  &__content {
+    position: fixed;
+    z-index: 1;
+    background: #fff;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
 
-  &--open {
-    &.w-drawer--left {transform: translateX(100%);}
-    &.w-drawer--right {transform: translateX(-100%);}
-    &.w-drawer--top {transform: translateY(100%);}
-    &.w-drawer--bottom {transform: translateY(-100%);}
+    .w-drawer--left &, .w-drawer--right & {
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: $drawer-max-size;
+    }
+    .w-drawer--top &, .w-drawer--bottom & {
+      left: 0;
+      right: 0;
+      height: 100%;
+      max-height: $drawer-max-size;
+    }
+
+    .w-drawer--left & {left: 0;}
+    .w-drawer--right & {right: 0;}
+    .w-drawer--top & {top: 0;}
+    .w-drawer--bottom & {bottom: 0;}
   }
 }
 </style>
