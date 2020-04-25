@@ -11,8 +11,23 @@ div
     li A single #[span.code $base-font-size] variable rules all the sizes and spacings
     li Powerful elements, e.g. write a navigation menu in a single line
 
+  h2 Wave UI is developed with a particular care about CSS.
+  blockquote.mt-2.
+    We should all know it by now, there is a price to appending styles via Javascript:
+    it becomes very hard to override.#[br]
+    Same happens when the CSS selectors are too specific or when you start using the
+    #[code !important] keyword.#[br]#[br]
+
+    That's why Wave UI has chosen to use not-too-specific selectors to allow easy overriding.
+
+  p.mt-3.
+    We also encourage you to use Wave UI CSS classes when you can, and sometimes choose to
+    override styles via CSS rather than appending dynamic styles via Javascript.
+
+  p And to keep your CSS easy to override, always avoid the #[code !important] keyword.
+
   h2 Installation
-  npm i --D wave-ui
+  code npm i --D wave-ui
 
   h2 Presets
   h3 Buttons
@@ -23,3 +38,12 @@ div
 export default {
 }
 </script>
+
+<style lang="scss">
+blockquote {
+  background-color: #fffedc;
+  border: 1px solid #eee;
+  padding: 0.6em 1em;
+  display: inline-block;
+}
+</style>
