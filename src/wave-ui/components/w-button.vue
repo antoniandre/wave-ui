@@ -99,11 +99,7 @@ $spinner-size: 40;
   &--icon {padding: round(0.4 * $base-increment);}
   &--icon.size--large, &--icon.size--x-large {padding: 2 * $base-increment;}
   &--tile {border-radius: initial;}
-  &--shadow {
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-                0 2px 2px 0 rgba(0, 0, 0, 0.15),
-                0 1px 5px 0 rgba(0, 0, 0, 0.15);
-  }
+  &--shadow {box-shadow: $box-shadow;}
   &--loading {cursor: wait;opacity: 0.8;}
   &[disabled] {
     cursor: auto;

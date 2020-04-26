@@ -43,9 +43,10 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
+  border-radius: $border-radius;
 
-  &:not(&--tile) {border-radius: $border-radius;}
-  &--shadow {box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);}
+  &--tile {border-radius: 0;}
+  &--shadow {box-shadow: $box-shadow;}
   &:not(&--no-border):not(&--shadow) {border: $border;}
 
   &__title {
