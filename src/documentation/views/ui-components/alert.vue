@@ -1,7 +1,63 @@
 <template lang="pug">
-div
+div(style="max-width: 900px")
   h1.headline.mt-4 #[span.code w-alert]
 
+  h2 Colors
+  p.
+    You can apply a color to the text with the #[code color] attribute,
+    and color to the background with the #[code bg-color] attribute.
+  w-alert(color="primary") This is an alert with a primary color.
+  w-alert(bg-color="primary" color="white") This is an alert with a primary background color.
+  w-alert(color="pink") This is an alert with a pink color.
+  w-alert(bg-color="pink" color="white") This is an alert with a pink background color.
+  p You can even mix different colors and background colors.
+  w-alert(bg-color="purple" color="cyan-lighten-4") This is an alert with a purple background and cyan color.
+  w-alert(bg-color="cyan-lighten-4" color="purple") This is an alert with a cyan background and purple color.
+
+  h2 Types (adds an icon)
+  h3 Normal
+  w-alert(type="success") This is a success alert.
+  w-alert(type="warning") This is a warning alert.
+  w-alert(type="error") This is an error alert.
+  w-alert(type="info") This is an info alert.
+
+  h3 Plain
+  w-alert(type="success" plain) This is a success alert.
+  w-alert(type="warning" plain) This is an alert.
+  w-alert(type="error" plain) This is an error alert.
+  w-alert(type="info" plain) This is an info alert.
+
+  h2 Outline
+  w-alert(color="primary" outline) This is a normal alert with a primary color.
+  w-alert(type="success" outline) This is a success alert.
+  w-alert(type="warning" outline) This is an alert.
+  w-alert(type="error" outline) This is an error alert.
+  w-alert(type="info" outline) This is an info alert.
+
+  h2 Borders
+    w-alert(type="success" light no-border) This is a success alert with no border.
+    w-alert(color="primary" no-border) This is a normal alert with no border.
+    w-alert(bg-color="cyan-lighten-4" color="purple" no-border) This is an alert with a cyan background, purple color and no border.
+  .layout.wrap.ma-n2
+    w-alert.flex.ma-2(color="primary" border-left) This is a normal alert with a left border.
+    w-alert.flex.ma-2(color="primary" border-right) This is a normal alert with a right border.
+  .layout.wrap.mx-n2.mt-2
+    w-alert.flex.ma-2(color="primary" border-top) This is a normal alert with a top border.
+    w-alert.flex.ma-2(color="primary" border-bottom) This is a normal alert with a left border.
+
+  h2 Tile &amp; shadow
+  w-alert(color="primary" tile) This is a tile alert.
+  w-alert(color="primary" shadow) This is a normal alert with a shadow.
+
+  h2 Sizes
+  .layout
+    .flex
+      w-alert.size--x-small(color="info") This is an extra small alert.
+      w-alert.size--small(color="info") This is a small alert.
+      w-alert.size--medium(color="info") This is a medium alert.
+      w-alert.size--large(color="info") This is a large alert.
+      w-alert.size--x-large(color="info") This is an extra large alert.
+    .spacer(v-if="$waveUI.breakpoint !== 'xs'")
 </template>
 
 <script>

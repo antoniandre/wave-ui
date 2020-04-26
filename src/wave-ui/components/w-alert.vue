@@ -1,5 +1,5 @@
 <template lang="pug">
-  .w-alert(:class="classes" :style="styles")
+  .w-alert(:class="classes")
     w-icon.mr-2(v-if="type") ion-{{ icon }}
     slot
 </template>
@@ -10,6 +10,7 @@ export default {
   props: {
     type: { type: [String, Boolean], default: false },
     color: { type: [String, Boolean], default: false },
+    bgColor: { type: [String, Boolean], default: false },
     shadow: { type: Boolean, default: false },
     noBorder: { type: Boolean, default: false },
     borderLeft: { type: Boolean, default: false },
@@ -18,7 +19,8 @@ export default {
     borderBottom: { type: Boolean, default: false },
     outline: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
-    light: { type: Boolean, default: false }
+    plain: { type: Boolean, default: false },
+    // light: { type: Boolean, default: false }
   },
 
   computed: {
@@ -30,29 +32,26 @@ export default {
         (this.type === 'info' && 'md-information-circle')
       )
     },
-    hasBorder () {
+    hasSingleBorder () {
       return this.borderLeft || this.borderRight ||
         this.borderTop || this.borderBottom
     },
     classes () {
       return {
-        [this.type]: this.type && !this.light,
-        [`${(this.light && this.type) || this.color}--text`]: (this.type && this.light) || this.color,
-        [`w-alert--type w-alert--${this.type}`]: this.type && !this.light,
-        'w-alert--no-border': this.noBorder || this.hasBorder,
-        'w-alert--one-border': this.hasBorder,
+        [`${this.bgColor || (this.plain && this.type)}--bg`]: this.bgColor || (this.plain && this.type),
+        [this.color || (!this.plain && this.type)]: this.color || (!this.plain && this.type),
+        [`w-alert--type w-alert--${this.type}`]: this.type,
+        'w-alert--plain': this.type && this.plain,
+        'w-alert--outline': this.outline,
+        'w-alert--tile': this.tile,
+        'w-alert--no-border': this.noBorder || this.hasSingleBorder || (this.plain && this.type),
+        'w-alert--one-border': this.hasSingleBorder,
         'w-alert--border-left': !this.noBorder && this.borderLeft,
         'w-alert--border-right': !this.noBorder && this.borderRight,
         'w-alert--border-top': !this.noBorder && this.borderTop,
         'w-alert--border-bottom': !this.noBorder && this.borderBottom,
-        'w-alert--outline': this.outline,
-        'w-alert--tile': this.tile,
-        'w-alert--light': this.light,
         'w-alert--shadow': this.shadow
       }
-    },
-    styles () {
-      return false
     }
   }
 }
@@ -73,7 +72,7 @@ export default {
 
   &--tile {border-radius: 0;}
   &--shadow {box-shadow: $box-shadow;}
-  &--no-border, &--shadow, &--type {border: none;}
+  &--no-border, &--shadow, &--plain {border: none;}
 
   // Before for the border, after for the background color.
   &:before, &:after {
@@ -85,7 +84,7 @@ export default {
     background-color: currentColor;
   }
 
-  // Border.
+  // Single side border.
   &--border-left {padding-left: 3 * $base-increment;}
   &--border-right {padding-right: 3 * $base-increment;}
   &--border-top {padding-top: 3 * $base-increment;}
@@ -118,7 +117,7 @@ export default {
 
   &:after {opacity: 0.15;content: '';border-radius: inherit;}
   &--outline:after {display: none;}
-  &--type:after {opacity: 0.1;}
+  // &--type:after {opacity: 0.1;}
 
   .w-icon {opacity: 0.9;}
 }
