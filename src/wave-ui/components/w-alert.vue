@@ -1,6 +1,6 @@
 <template lang="pug">
   .w-alert(:class="classes" :style="styles")
-    w-icon.mr-1(v-if="type") ion-{{ icon }}
+    w-icon.mr-2(v-if="type") ion-{{ icon }}
     slot
 </template>
 
@@ -12,10 +12,11 @@ export default {
     color: { type: [String, Boolean], default: false },
     shadow: { type: Boolean, default: false },
     noBorder: { type: Boolean, default: false },
-    borderLeft: { type: [String, Boolean], default: false },
-    borderRight: { type: [String, Boolean], default: false },
-    borderTop: { type: [String, Boolean], default: false },
-    borderBottom: { type: [String, Boolean], default: false },
+    borderLeft: { type: Boolean, default: false },
+    borderRight: { type: Boolean, default: false },
+    borderTop: { type: Boolean, default: false },
+    borderBottom: { type: Boolean, default: false },
+    outline: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
     light: { type: Boolean, default: false }
   },
@@ -39,10 +40,12 @@ export default {
         [`${(this.light && this.type) || this.color}--text`]: (this.type && this.light) || this.color,
         [`w-alert--type w-alert--${this.type}`]: this.type && !this.light,
         'w-alert--no-border': this.noBorder || this.hasBorder,
+        'w-alert--one-border': this.hasBorder,
         'w-alert--border-left': !this.noBorder && this.borderLeft,
         'w-alert--border-right': !this.noBorder && this.borderRight,
         'w-alert--border-top': !this.noBorder && this.borderTop,
         'w-alert--border-bottom': !this.noBorder && this.borderBottom,
+        'w-alert--outline': this.outline,
         'w-alert--tile': this.tile,
         'w-alert--light': this.light,
         'w-alert--shadow': this.shadow
@@ -59,6 +62,7 @@ export default {
 .w-alert {
   position: relative;
   display: flex;
+  align-items: center;
   margin-top: 4 * $base-increment;
   margin-bottom: 4 * $base-increment;
   padding: 2 * $base-increment;
@@ -71,24 +75,51 @@ export default {
   &--shadow {box-shadow: $box-shadow;}
   &--no-border, &--shadow, &--type {border: none;}
 
-  &--border-left {border-left: 2px solid currentColor;}
-  &--border-right {border-right: 2px solid currentColor;}
-  &--border-top {border-top: 2px solid currentColor;}
-  &--border-bottom {border-bottom: 2px solid currentColor;}
-
-  &:before {
-    content: '';
+  // Before for the border, after for the background color.
+  &:before, &:after {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     background-color: currentColor;
-    border-radius: inherit;
-    opacity: 0.15;
   }
-  &--type:before {opacity: 0.1;}
 
-  &--type .w-icon {color: rgba(255, 255, 255, 0.9);}
+  // Border.
+  &--border-left {padding-left: 3 * $base-increment;}
+  &--border-right {padding-right: 3 * $base-increment;}
+  &--border-top {padding-top: 3 * $base-increment;}
+  &--border-bottom {padding-bottom: 3 * $base-increment;}
+  &--one-border:before {content: '';opacity: 0.25;}
+  &--border-left:before {
+    right: auto;
+    width: $base-increment;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+  &--border-right:before {
+    left: auto;
+    width: $base-increment;
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+  &--border-top:before {
+    bottom: auto;
+    height: $base-increment;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+  &--border-bottom:before {
+    top: auto;
+    height: $base-increment;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+
+  &:after {opacity: 0.15;content: '';border-radius: inherit;}
+  &--outline:after {display: none;}
+  &--type:after {opacity: 0.1;}
+
+  .w-icon {opacity: 0.9;}
 }
 </style>
