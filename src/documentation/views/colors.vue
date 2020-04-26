@@ -1,6 +1,21 @@
 <template lang="pug">
 div(style="overflow: hidden")
   h1.headline.mt-4 Colors
+  p.
+    Wave UI colors work in a very simple way: for instance the class
+    #[code pink] (or any color listed bellow) can be applied to any
+    element's text, and the class #[code pink--bg] can be applied to
+    any element's background.
+
+  p.
+    All the components that accept colors, will accept the #[code color]
+    prop for the text color, and #[code bg-color] for the background.
+
+  p.
+    This way, it is possible to mix a background color with a different
+    text color of your choice.
+
+  h2 Status colors
   .layout.wrap.mb-12.ma-n2
     .color.success--bg.subtitle.text-center.flex.py-4.ma-2 success
     .color.error--bg.subtitle.text-center.flex.py-4.ma-2 error
