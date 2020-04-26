@@ -29,6 +29,7 @@ export default {
     large: { type: Boolean, default: false },
     xLarge: { type: Boolean, default: false },
     color: { type: String, default: '' },
+    bgColor: { type: String, default: '' },
     dark: { type: Boolean, default: false },
     outline: { type: Boolean, default: false },
     text: { type: Boolean, default: false },
@@ -53,8 +54,8 @@ export default {
     },
     classes () {
       return {
-        [this.color]: !!this.color && !this.outline && !this.text,
-        [`${this.color}--text`]: !!this.color && (this.outline || this.text),
+        [this.color]: this.color,
+        [`${this.bgColor}--bg`]: this.bgColor,
         'w-button--dark': this.dark && !this.outline,
         'w-button--outline': this.outline,
         'w-button--text': this.text,

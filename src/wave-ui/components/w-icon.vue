@@ -40,7 +40,7 @@ export default {
     classes () {
       return {
         [this.icon]: true,
-        [`${this.color}--text`]: this.color,
+        [this.color]: this.color,
         [`size--${this.presetSize}`]: !this.forcedSize
       }
     }

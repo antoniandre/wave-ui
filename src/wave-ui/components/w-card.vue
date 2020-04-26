@@ -14,6 +14,7 @@ export default {
   name: 'w-card',
   props: {
     color: { type: String, default: '' },
+    bgColor: { type: String, default: '' },
     cardTitle: { type: String, default: '' },
     shadow: { type: Boolean, default: false },
     noBorder: { type: Boolean, default: false },
@@ -25,7 +26,8 @@ export default {
   computed: {
     classes () {
       return {
-        [this.color]: !!this.color,
+        [this.color]: this.color,
+        [`${this.bgColor}--bg`]: this.bgColor,
         'w-card--no-border': this.noBorder,
         'w-card--tile': this.tile,
         'w-card--shadow': this.shadow

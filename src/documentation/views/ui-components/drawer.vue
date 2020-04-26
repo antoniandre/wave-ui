@@ -3,19 +3,19 @@ div
   h1.headline.mt-4 #[span.code w-drawer]
 
   .text-center
-    w-button.mr-2(
+    w-button.ma-1(
       @click="showLeftDrawer = !showLeftDrawer"
       outline
       color="primary") Show left drawer
-    w-button.mr-2(
+    w-button.ma-1(
       @click="showRightDrawer = !showRightDrawer"
       outline
       color="primary") Show right drawer
-    w-button.mr-2(
+    w-button.ma-1(
       @click="noOverlay = false;showTopDrawer = !showTopDrawer"
       outline
       color="primary") Show top drawer
-    w-button.mr-2(
+    w-button.ma-1(
       @click="bottomDrawerHeight = null;showBottomDrawer = !showBottomDrawer"
       outline
       color="primary") Show bottom drawer
@@ -57,7 +57,7 @@ div
       w-button(
         @click="showLeftDrawer = false;showRightDrawer = true"
         dark
-        color="primary") Show right drawer
+        bg-color="primary") Show right drawer
 
   w-drawer(v-model="showRightDrawer")
     w-button.button--close(

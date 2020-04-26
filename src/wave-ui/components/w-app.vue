@@ -36,8 +36,8 @@ export default {
 
       for (const color in config.colors) {
         css.innerHTML += `
-          .w-app .${color} {background-color: ${config.colors[color]};}
-          .w-app .${color}--text {color: ${config.colors[color]};}
+          .w-app .${color}--bg {background-color: ${config.colors[color]};}
+          .w-app .${color} {color: ${config.colors[color]};}
         `
       }
       document.head.append(css)

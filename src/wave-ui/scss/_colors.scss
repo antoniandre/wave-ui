@@ -1,11 +1,11 @@
 .w-app {
-  .white {background-color: #fff;}
-  .white--text {color: #fff;}
-  .grey {background-color: #888;}
-  .grey--text {color: #888;}
-  .black {background-color: #000;color: rgba(255, 255, 255, 0.9);}
-  .black--text {color: #000;}
-  .success, .error, .warning, .info {color: #fff;}
+  .white--bg {background-color: #fff;}
+  .white {color: #fff;}
+  .grey--bg {background-color: #888;}
+  .grey {color: #888;}
+  .black--bg {background-color: #000;color: rgba(255, 255, 255, 0.9);}
+  .black {color: #000;}
+  .success--bg, .error--bg, .warning--bg, .info--bg {color: #fff;}
 
   $colors:(
     'pink': #e91e63,
@@ -30,14 +30,14 @@
   );
 
   @each $label, $color in $colors {
-    .#{$label} {background-color: $color;}
-    .#{$label}--text {color: $color;}
+    .#{$label}--bg {background-color: $color;}
+    .#{$label} {color: $color;}
 
     @for $i from 1 through 5 {
-      .#{$label}.lighten-#{$i} {background-color: lighten($color, 8 * $i);}
-      .#{$label}--text.lighten-#{$i} {color: lighten($color, 8 * $i);}
-      .#{$label}.darken-#{$i} {background-color: darken($color, 6 * $i);}
-      .#{$label}.--textdarken-#{$i} {color: darken($color, 6 * $i);}
+      .#{$label}-lighten-#{$i}--bg {background-color: lighten($color, 8 * $i);}
+      .#{$label}-lighten-#{$i} {color: lighten($color, 8 * $i);}
+      .#{$label}-darken-#{$i}--bg {background-color: darken($color, 6 * $i);}
+      .#{$label}-darken-#{$i} {color: darken($color, 6 * $i);}
     }
   }
 }

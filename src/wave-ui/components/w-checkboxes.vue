@@ -27,7 +27,7 @@ export default {
   computed: {
     classes () {
       return {
-        [`${this.color}--text`]: !!this.color,
+        [this.color]: this.color,
         'w-checkboxes--inline': this.inline
       }
     }

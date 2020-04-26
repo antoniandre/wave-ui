@@ -2,15 +2,15 @@
 div(style="overflow: hidden")
   h1.headline.mt-4 Colors
   .layout.wrap.mb-12.ma-n2
-    .color.success.subtitle.text-center.flex.py-4.ma-2 success
-    .color.error.subtitle.text-center.flex.py-4.ma-2 error
-    .color.warning.subtitle.text-center.flex.py-4.ma-2 warning
-    .color.info.subtitle.text-center.flex.py-4.ma-2 info
+    .color.success--bg.subtitle.text-center.flex.py-4.ma-2 success
+    .color.error--bg.subtitle.text-center.flex.py-4.ma-2 error
+    .color.warning--bg.subtitle.text-center.flex.py-4.ma-2 warning
+    .color.info--bg.subtitle.text-center.flex.py-4.ma-2 info
 
   h2.my-4.layout.align-center
     | Color Palette
     w-button.ml-6(
-      color="primary"
+      bg-color="primary"
       small
       dark
       @click="horizontal = !horizontal")
@@ -23,25 +23,25 @@ div(style="overflow: hidden")
         :key="i")
         template(v-for="(tone, i) in tones")
           //- top color.
-          .color.color--top(v-if="i === 5" :class="label")
+          .color.color--top(v-if="i === 5" :class="`${label}--bg`")
             span {{ label }}
             small {{ color }}
           //- tones colors.
           .color.color--tone(
             :key="i"
-            :class="[tone.label, i >= 5 ? 'color--darken' : '']")
+            :class="[`${tone.label}--bg`, i >= 5 ? 'color--darken' : '']")
             span {{ tone.label }}
             small {{ tone.color }}
 
       .color-palette.ma-2
         .layout.ma-n2(:class="{ column: !horizontal }")
-          .color.color--top.ma-2.black
+          .color.color--top.ma-2.black--bg
             span black
             small #000
-          .color.color--top.ma-2.white.black--text
+          .color.color--top.ma-2.white--bg.black
             span white
             small #fff
-          .color.color--top.ma-2.transparent.black--text
+          .color.color--top.ma-2.transparent--bg.black
             span transparent
             small transparent
 </template>
@@ -96,9 +96,9 @@ export default {
       letter-spacing: -1px;
     }
 
-    &.black--text {text-shadow: none;color: #000;}
-    &.black {text-shadow: none;color: #fff;}
-    &.white, &.transparent {border: 1px solid #999;}
+    &.black {text-shadow: none;color: #000;}
+    &.black--bg {text-shadow: none;color: #fff;}
+    &.white--bg, &.transparent--bg {border: 1px solid #999;}
   }
 
   .color--tone {

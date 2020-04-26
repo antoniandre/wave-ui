@@ -42,7 +42,7 @@ export default {
     },
     classes () {
       return {
-        [`${this.color}--text`]: !!this.color,
+        [this.color]: this.color,
         'w-list--checklist': this.checklist,
         'w-list--navigation': this.nav,
         'w-list--hoverable': this.hover,
