@@ -5,7 +5,7 @@
   .grey--text {color: #888;}
   .black {background-color: #000;color: rgba(255, 255, 255, 0.9);}
   .black--text {color: #000;}
-  .success, .error, .warning, .info {color: rgba(255, 255, 255, 0.9);}
+  .success, .error, .warning, .info {color: #fff;}
 
   $colors:(
     'pink': #e91e63,
@@ -31,10 +31,13 @@
 
   @each $label, $color in $colors {
     .#{$label} {background-color: $color;}
+    .#{$label}--text {color: $color;}
 
     @for $i from 1 through 5 {
       .#{$label}.lighten-#{$i} {background-color: lighten($color, 8 * $i);}
+      .#{$label}--text.lighten-#{$i} {color: lighten($color, 8 * $i);}
       .#{$label}.darken-#{$i} {background-color: darken($color, 6 * $i);}
+      .#{$label}.--textdarken-#{$i} {color: darken($color, 6 * $i);}
     }
   }
 }
