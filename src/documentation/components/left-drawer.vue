@@ -35,11 +35,11 @@ export default {
       { label: 'Menu', route: 'w-menu', disabled: true },
       { label: 'Notification', route: 'w-notification', disabled: true },
       { label: 'Overlay', route: 'w-overlay' },
-      { label: 'Progress', route: 'w-progress', disabled: true },
+      { label: 'Progress', route: 'w-progress' },
       { label: 'Rating', route: 'w-rating', disabled: true },
       { label: 'Slideshow', route: 'w-slideshow', disabled: true },
       { label: 'Tabs', route: 'w-tabs', disabled: true },
-      { label: 'Tag', route: 'w-tag', disabled: true },
+      { label: 'Tag', route: 'w-tag' },
       { label: 'Toolbar', route: 'w-toolbar' },
       { label: 'Tooltip', route: 'w-tooltip', disabled: true }
     ]
