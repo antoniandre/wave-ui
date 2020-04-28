@@ -21,6 +21,7 @@ export default {
     tile: { type: Boolean, default: false },
     round: { type: Boolean, default: false },
     outline: { type: Boolean, default: false },
+    absolute: { type: Boolean, default: false }
   },
 
   computed: {
@@ -37,7 +38,8 @@ export default {
         'w-progress--tile': this.tile,
         'w-progress--stripes': this.stripes,
         'w-progress--round': this.round,
-        'w-progress--shadow': this.shadow
+        'w-progress--shadow': this.shadow,
+        'w-progress--absolute': this.absolute
       }
     },
     styles () {
@@ -58,6 +60,7 @@ export default {
   border-radius: $border-radius;
   height: $base-increment;
 
+  &--absolute {position: absolute;left: 0;right: 0;}
   &--tile {border-radius: 0;}
   &--round {border-radius: 4 * $base-increment;}
   &--outline {
@@ -90,10 +93,12 @@ export default {
   }
 
   &__progress {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    justify-self: left;
+    margin-right: auto;
     border-radius: inherit;
     background-color: currentColor;
     @include default-transition;
