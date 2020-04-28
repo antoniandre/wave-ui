@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline Wave UI
+  h1.headline.mt-4 Wave UI
   P An emerging new UI framework for Vue.js with only the bright side. #[code :bulb:]
   p.
     Like other UI frameworks, Wave UI is fully responsive, very flexible and easy to use.

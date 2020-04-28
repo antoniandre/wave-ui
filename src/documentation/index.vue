@@ -4,10 +4,12 @@ w-app
   w-drawer(v-if="isMobile" v-model="drawerOpen" left)
     left-drawer(:drawer-open.sync="drawerOpen")
   header
-  w-progress(v-if="loading" color="primary" tile absolute)
+  transition(name="fade")
+    w-progress(v-if="loading" color="primary" tile absolute)
   .content-wrap.layout(:class="`page--${$route.name}`")
     left-drawer.navigation.mt-6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
-    router-view.flex
+    transition(name="fade-page" mode="out-in")
+      router-view.flex
 </template>
 
 <script>
@@ -32,43 +34,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-header {
-  margin-top: 12 * $base-increment;
-  position: relative;
-  max-height: 320px;
-  overflow: hidden;
-  padding-top: 8px;
-
-  &:before {
-    content: '';
-    display: block;
-    padding-bottom: 23.34%;
-    background: url('~@/assets/japanese-wave.png') fixed no-repeat 0 57px;
-    background-size: contain;
-  }
-
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: url('~@/assets/wave-pattern.svg') fixed left;
-    background-size: 300px;
-    z-index: -1;
-    opacity: 0.5;
-  }
-}
-
-@media screen and (min-width: 1500px) {
-  header:before {
-    padding-bottom: 14%;
-    background-attachment: initial;
-    background-repeat: repeat;
-    background-position: initial;
-  }
-}
-</style>

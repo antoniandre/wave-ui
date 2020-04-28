@@ -1,0 +1,37 @@
+header {
+  margin-top: 12 * $base-increment;
+  position: relative;
+  max-height: 320px;
+  overflow: hidden;
+  padding-top: 8px;
+
+  &:before {
+    content: '';
+    display: block;
+    padding-bottom: 23.34%;
+    background: url('~@/assets/japanese-wave.png') fixed no-repeat 0 57px;
+    background-size: contain;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url('~@/assets/wave-pattern.svg') fixed left;
+    background-size: 300px;
+    z-index: -1;
+    opacity: 0.5;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  header:before {
+    padding-bottom: 14%;
+    background-attachment: initial;
+    background-repeat: repeat;
+    background-position: initial;
+  }
+}
