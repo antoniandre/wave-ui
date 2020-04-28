@@ -20,9 +20,23 @@ div
     li.mb-1
       code.mr-2 xl
       span from 1701px and more
-  p You can access the current breakpoint from anywhere using #[code this.$waveUI.breakpoint].
-  p You can override the breakpoints with.
+  p.mt-4.
+    You can access the current breakpoint from anywhere using
+    #[code this.$waveUI.breakpoint.name], or one of these quick booleans from
+    the same #[code this.$waveUI.breakpoint] object:
+  ul
+    li
+      code xs
+    li
+      code sm
+    li
+      code md
+    li
+      code lg
+    li
+      code xl
 
+  p.mt-4 You can override the breakpoints with.
   pre.
     const waveui = new WaveUI({
       breakpoints: {
@@ -35,7 +49,7 @@ div
     })
 
   p.mt-6 Resizing your browser will update the current breakpoint.
-  .title.mt-0 Current breakpoint: #[code {{ this.$waveUI.breakpoint }}]
+  .title.mt-0 Current breakpoint: #[code {{ this.$waveUI.breakpoint.name }}]
 </template>
 
 <script>

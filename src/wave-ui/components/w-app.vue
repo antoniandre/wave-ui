@@ -15,15 +15,31 @@ export default {
     dark: { type: Boolean, default: false }
   },
 
+  data: () => ({
+    currentBreakPoint: null
+  }),
+
   methods: {
-    // Most performant lookup.
     getBreakpoint () {
       const width = window.innerWidth
       const breakpoints = breakpointsValues.slice(0)
+      // Most performant lookup.
       breakpoints.push(width)
       breakpoints.sort((a, b) => a - b)
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.$waveUI.breakpoint = breakpointsNames[breakpoints.indexOf(width)] || 'xl'
+      const breakpoint = breakpointsNames[breakpoints.indexOf(width)] || 'xl'
+
+      if (breakpoint !== this.currentBreakPoint) {
+        this.currentBreakPoint = breakpoint
+        this.$waveUI.breakpoint = {
+          name: breakpoint,
+          xs: breakpoint === 'xs',
+          sm: breakpoint === 'sm',
+          md: breakpoint === 'md',
+          lg: breakpoint === 'lg',
+          xl: breakpoint === 'xl'
+        }
+      }
+
     }
   },
 
@@ -35,10 +51,9 @@ export default {
       css.innerHTML = ''
 
       for (const color in config.colors) {
-        css.innerHTML += `
-          .w-app .${color}--bg {background-color: ${config.colors[color]};}
-          .w-app .${color} {color: ${config.colors[color]};}
-        `
+        css.innerHTML +=
+          `.w-app .${color}--bg{background-color: ${config.colors[color]}}` +
+          `.w-app .${color}{color: ${config.colors[color]}}`
       }
       document.head.append(css)
     }
