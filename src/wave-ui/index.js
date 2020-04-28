@@ -4,7 +4,14 @@ import * as components from './components'
 // import * as directives from './directives'
 
 class WaveUI {
-  breakpoint = null
+  breakpoint = {
+    name: '',
+    xs: false,
+    sm: false,
+    md: false,
+    lg: false,
+    xl: false
+  }
 
   static install (Vue) {
     // Register directives.
