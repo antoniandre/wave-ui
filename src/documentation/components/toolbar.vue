@@ -4,7 +4,9 @@ w-toolbar(fixed)
     wave.wave-logo
     | Wave UI
   .spacer
-  router-link.ml-2(to="/") Home
+  a.mr-2(href="https://github.com/antoniandre/wave-ui" target="_blank")
+    w-icon ion-logo-github
+  .caption Version 1.0
   w-button.ml-2(
     v-if="$waveUI.breakpoint === 'xs'"
     @click="$emit('update:drawerOpen', !drawerOpen)"

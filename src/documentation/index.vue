@@ -1,15 +1,19 @@
 <template lang="pug">
 w-app
-  toolbar(:drawer-open.sync="drawerOpen")
   w-drawer(v-if="isMobile" v-model="drawerOpen" left)
     left-drawer(:drawer-open.sync="drawerOpen")
   header
+    toolbar(:drawer-open.sync="drawerOpen")
   transition(name="fade")
     w-progress(v-if="loading" color="primary" tile absolute)
   .content-wrap.layout(:class="`page--${$route.name}`")
     left-drawer.navigation.mt-6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
     transition(name="fade-page" mode="out-in")
       router-view.flex
+  footer.mt-6.pa-3.layout.justify-end.align-center.caption
+    | Made with
+    w-icon.ml-1 ion-md-heart
+
 </template>
 
 <script>
