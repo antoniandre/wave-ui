@@ -1,10 +1,22 @@
 <template lang="pug">
 .nav-menu
-  w-button.close(small @click="$emit('update:drawerOpen', false)" outline round color="primary" icon="ion-md-close")
+  w-button.close(
+    @click="$emit('update:drawerOpen', false)"
+    small
+    outline
+    round
+    color="primary"
+    icon="ion-md-close")
   w-list(:items="sections" nav color="primary")
+    //- template(v-slot:item="{ item }")
+      router-link(v-if="!item.disabled" :to="item.route" v-html="item.label")
+      span(v-else v-html="item.label")
 
   .title.mt-4 UI Components
   w-list(:items="components" nav color="primary")
+    //- template(v-slot:item="{ item }")
+      router-link(v-if="!item.disabled" :to="item.route" v-html="item.label")
+      span(v-else v-html="item.label")
 </template>
 
 <script>
@@ -41,7 +53,8 @@ export default {
       { label: 'Tabs', route: 'w-tabs', disabled: true },
       { label: 'Tag', route: 'w-tag' },
       { label: 'Toolbar', route: 'w-toolbar' },
-      { label: 'Tooltip', route: 'w-tooltip', disabled: true }
+      { label: 'Tooltip', route: 'w-tooltip', disabled: true },
+      { label: 'Form elements', route: '#form', disabled: true }
     ]
   })
 }

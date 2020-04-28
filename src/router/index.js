@@ -3,6 +3,10 @@ import VueRouter from 'vue-router'
 import GettingStarted from '@/documentation/views/getting-started'
 
 Vue.use(VueRouter)
+// The loading state of Vue Router is appended to $router, so a
+// spinner can be shown while loading. This status needs to be reactive, it is
+// set to true on beforeRoute and false on afterRoute.
+const status = Vue.observable({ loading: true })
 
 const routes = [
   {
@@ -67,6 +71,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  console.log('beforeEach', { to, from }, router)
+  status.loading = true
+  router.status = status
+  next()
+});
+
+router.afterEach((to, from) => {
+  status.loading = false
+  console.log('afterEach', { to, from }, router)
 })
 
 export default router

@@ -4,6 +4,7 @@ w-app
   w-drawer(v-if="isMobile" v-model="drawerOpen" left)
     left-drawer(:drawer-open.sync="drawerOpen")
   header
+  w-progress(v-if="loading" color="primary" tile absolute)
   .content-wrap.layout(:class="`page--${$route.name}`")
     left-drawer.navigation.mt-6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
     router-view.flex
@@ -21,8 +22,12 @@ export default {
   }),
 
   computed: {
+    loading () {
+      // Loading status is appended manually in router file.
+      return this.$router.status.loading
+    },
     isMobile () {
-      return this.$waveUI.breakpoint === 'xs'
+      return this.$waveUI.breakpoint.xs
     }
   }
 }
