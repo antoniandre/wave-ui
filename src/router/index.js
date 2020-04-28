@@ -74,15 +74,12 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('beforeEach', { to, from }, router)
+  // Update through the property observer getter for reactivity.
   status.loading = true
   router.status = status
   next()
-});
-
-router.afterEach((to, from) => {
-  status.loading = false
-  console.log('afterEach', { to, from }, router)
 })
+
+router.afterEach(() => (status.loading = false))
 
 export default router
