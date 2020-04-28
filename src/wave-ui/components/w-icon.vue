@@ -12,11 +12,11 @@ export default {
   name: 'w-icon',
   props: {
     color: { type: String, default: '' },
-    xSmall: { type: Boolean, default: false },
-    small: { type: Boolean, default: false },
-    medium: { type: Boolean, default: false },
-    large: { type: Boolean, default: false },
-    xLarge: { type: Boolean, default: false },
+    xs: { type: Boolean, default: false },
+    sm: { type: Boolean, default: false },
+    md: { type: Boolean, default: false },
+    lg: { type: Boolean, default: false },
+    xl: { type: Boolean, default: false },
     size: { type: [String, Number], default: null },
   },
 
@@ -30,11 +30,11 @@ export default {
     },
     presetSize () {
       return (
-        (this.xSmall && 'x-small') ||
-        (this.small && 'small') ||
-        (this.large && 'large') ||
-        (this.xLarge && 'x-large') ||
-        'medium'
+        (this.xs && 'xs') ||
+        (this.sm && 'sm') ||
+        (this.lg && 'lg') ||
+        (this.xl && 'xl') ||
+        'md'
       )
     },
     classes () {
@@ -66,35 +66,35 @@ export default {
   line-height: inherit;
 
   .w-button & {padding: 0;}
-  &.size--x-small {
-    font-size: $base-font-size;
-    line-height: $base-font-size;
-    width: $base-font-size;
-    height: $base-font-size;
+  &.size--xs {
+    font-size: round(0.85 * $base-font-size);
+    line-height: round(0.85 * $base-font-size);
+    width: round(0.85 * $base-font-size);
+    height: round(0.85 * $base-font-size);
   }
-  &.size--small {
-    font-size: round(1.2 * $base-font-size);
-    line-height: round(1.2 * $base-font-size);
-    width: round(1.2 * $base-font-size);
-    height: round(1.2 * $base-font-size);
+  &.size--sm {
+    font-size: round(1.15 * $base-font-size);
+    line-height: round(1.15 * $base-font-size);
+    width: round(1.15 * $base-font-size);
+    height: round(1.15 * $base-font-size);
   }
-  &.size--medium {
-    font-size: round(1.5 * $base-font-size);
-    line-height: round(1.5 * $base-font-size);
-    width: round(1.5 * $base-font-size);
-    height: round(1.5 * $base-font-size);
+  &.size--md {
+    font-size: round(1.4 * $base-font-size);
+    line-height: round(1.4 * $base-font-size);
+    width: round(1.4 * $base-font-size);
+    height: round(1.4 * $base-font-size);
   }
-  &.size--large {
-    font-size: round(1.8 * $base-font-size);
-    line-height: round(1.8 * $base-font-size);
-    width: round(1.8 * $base-font-size);
-    height: round(1.8 * $base-font-size);
+  &.size--lg {
+    font-size: round(1.7 * $base-font-size);
+    line-height: round(1.7 * $base-font-size);
+    width: round(1.7 * $base-font-size);
+    height: round(1.7 * $base-font-size);
   }
-  &.size--x-large {
-    font-size: round(2.1 * $base-font-size);
-    line-height: round(2.1 * $base-font-size);
-    width: round(2.1 * $base-font-size);
-    height: round(2.1 * $base-font-size);
+  &.size--xl {
+    font-size: round(2 * $base-font-size);
+    line-height: round(2 * $base-font-size);
+    width: round(2 * $base-font-size);
+    height: round(2 * $base-font-size);
   }
 }
 </style>

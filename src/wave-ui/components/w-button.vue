@@ -23,11 +23,11 @@ export default {
   name: 'w-button',
   components: { WIcon },
   props: {
-    xSmall: { type: Boolean, default: false },
-    small: { type: Boolean, default: false },
-    medium: { type: Boolean, default: false },
-    large: { type: Boolean, default: false },
-    xLarge: { type: Boolean, default: false },
+    xs: { type: Boolean, default: false },
+    sm: { type: Boolean, default: false },
+    md: { type: Boolean, default: false },
+    lg: { type: Boolean, default: false },
+    xl: { type: Boolean, default: false },
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     dark: { type: Boolean, default: false },
@@ -45,11 +45,11 @@ export default {
   computed: {
     size () {
       return (
-        (this.xSmall && 'x-small') ||
-        (this.small && 'small') ||
-        (this.large && 'large') ||
-        (this.xLarge && 'x-large') ||
-        'medium'
+        (this.xs && 'xs') ||
+        (this.sm && 'sm') ||
+        (this.lg && 'lg') ||
+        (this.xl && 'xl') ||
+        'md'
       )
     },
     classes () {
@@ -98,7 +98,7 @@ $spinner-size: 40;
     padding-right: round(3 * $base-increment);
   }
   &--icon {padding: round(0.4 * $base-increment);}
-  &--icon.size--large, &--icon.size--x-large {padding: 2 * $base-increment;}
+  &--icon.size--lg, &--icon.size--xl {padding: 2 * $base-increment;}
   &--tile {border-radius: initial;}
   &--shadow {box-shadow: $box-shadow;}
   &--loading {cursor: wait;opacity: 0.8;}
@@ -114,10 +114,10 @@ $spinner-size: 40;
     color: rgba(255, 255, 255, 0.3);
   }
 
-  &.size--x-small {padding-left: $base-increment;padding-right: $base-increment;}
-  &.size--x-large {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
-  &--round.size--x-small {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
-  &--round.size--x-large {padding-left: round(4.5 * $base-increment);padding-right: round(4.5 * $base-increment);}
+  &.size--xs {padding-left: $base-increment;padding-right: $base-increment;}
+  &.size--xl {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
+  &--round.size--xs {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
+  &--round.size--xl {padding-left: round(4.5 * $base-increment);padding-right: round(4.5 * $base-increment);}
 
   // Overlay to mark the focus and active state.
   &:before {

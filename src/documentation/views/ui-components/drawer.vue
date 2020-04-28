@@ -48,7 +48,7 @@ div
   w-drawer(v-model="showLeftDrawer" left)
     w-button.button--close(
       @click="showLeftDrawer = !showLeftDrawer"
-      small
+      sm
       outline
       round
       color="primary"
@@ -62,7 +62,7 @@ div
   w-drawer(v-model="showRightDrawer")
     w-button.button--close(
       @click="showRightDrawer = !showRightDrawer"
-      small
+      sm
       outline
       round
       color="primary"
@@ -71,7 +71,7 @@ div
   w-drawer(v-model="showTopDrawer" top :no-overlay="noOverlay" :overlay-color="overlayColor")
     w-button.button--close(
       @click="showTopDrawer = !showTopDrawer"
-      small
+      sm
       outline
       round
       color="primary"
@@ -79,7 +79,7 @@ div
 
   w-drawer(v-model="showBottomDrawer" bottom :height="bottomDrawerHeight")
     w-button.button--close(
-      small
+      sm
       @click="showBottomDrawer = !showBottomDrawer"
       outline
       round

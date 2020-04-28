@@ -10,39 +10,39 @@ div
     text color of your choice.
 
   h2 Default
-  w-button.ma-1(bg-color="secondary" x-small) x-small
-  w-button.ma-1(bg-color="secondary" small) small
-  w-button.ma-1(bg-color="secondary" medium) medium
-  w-button.ma-1(bg-color="secondary" large) large
-  w-button.ma-1(bg-color="secondary" x-large) x-large
+  w-button.ma-1(bg-color="secondary" xs) extra small
+  w-button.ma-1(bg-color="secondary" sm) small
+  w-button.ma-1(bg-color="secondary" md) medium
+  w-button.ma-1(bg-color="secondary" lg) large
+  w-button.ma-1(bg-color="secondary" xl) extra large
   w-button.ma-1(bg-color="secondary" disabled) disabled
   h2 Dark
-  w-button.ma-1(bg-color="primary" color="white" x-small) x-small
-  w-button.ma-1(bg-color="primary" color="white" small) small
-  w-button.ma-1(bg-color="primary" color="white" medium) medium
-  w-button.ma-1(bg-color="primary" color="white" large) large
-  w-button.ma-1(bg-color="primary" color="white" x-large) x-large
+  w-button.ma-1(bg-color="primary" color="white" xs) extra small
+  w-button.ma-1(bg-color="primary" color="white" sm) small
+  w-button.ma-1(bg-color="primary" color="white" md) medium
+  w-button.ma-1(bg-color="primary" color="white" lg) large
+  w-button.ma-1(bg-color="primary" color="white" xl) extra large
   w-button.ma-1(bg-color="primary" color="white" disabled) disabled
   h3 Mix background and text colors
-  w-button.ma-1(bg-color="primary" color="yellow" x-small) x-small
-  w-button.ma-1(bg-color="primary" color="yellow" small) small
-  w-button.ma-1(bg-color="primary" color="yellow" medium) medium
-  w-button.ma-1(bg-color="primary" color="yellow" large) large
-  w-button.ma-1(bg-color="primary" color="yellow" x-large) x-large
+  w-button.ma-1(bg-color="primary" color="yellow" xs) extra small
+  w-button.ma-1(bg-color="primary" color="yellow" sm) small
+  w-button.ma-1(bg-color="primary" color="yellow" md) medium
+  w-button.ma-1(bg-color="primary" color="yellow" lg) large
+  w-button.ma-1(bg-color="primary" color="yellow" xl) extra large
   w-button.ma-1(bg-color="primary" color="yellow" disabled) disabled
   h2 Outline
-  w-button.ma-1(color="primary" outline x-small) x-small
-  w-button.ma-1(color="primary" outline small) small
-  w-button.ma-1(color="primary" outline medium) medium
-  w-button.ma-1(color="primary" outline large) large
-  w-button.ma-1(color="primary" outline x-large) x-large
+  w-button.ma-1(color="primary" outline xs) extra small
+  w-button.ma-1(color="primary" outline sm) small
+  w-button.ma-1(color="primary" outline md) medium
+  w-button.ma-1(color="primary" outline lg) large
+  w-button.ma-1(color="primary" outline xl) extra large
   w-button.ma-1(color="primary" outline disabled) disabled
   h2 Text
-  w-button.ma-1(color="primary" text x-small) x-small
-  w-button.ma-1(color="primary" text small) small
-  w-button.ma-1(color="primary" text medium) medium
-  w-button.ma-1(color="primary" text large) large
-  w-button.ma-1(color="primary" text x-large) x-large
+  w-button.ma-1(color="primary" text xs) extra small
+  w-button.ma-1(color="primary" text sm) small
+  w-button.ma-1(color="primary" text md) medium
+  w-button.ma-1(color="primary" text lg) large
+  w-button.ma-1(color="primary" text xl) extra large
   w-button.ma-1(color="primary" text disabled) disabled
   h2 Shadow &amp; colors
   w-button.ma-1(bg-color="success" shadow) success

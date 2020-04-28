@@ -9,8 +9,13 @@
 .flex, .grow, .spacer {flex: 1 1 0;}
 .shrink {flex-shrink: 1;flex-grow: 0;}
 .fill-height {height: 100%;}
+.align-start {align-items: flex-start;}
 .align-center {align-items: center;}
+.align-end {align-items: flex-end;}
+.justify-start {justify-content: flex-start;}
 .justify-center {justify-content: center;}
+.justify-end {justify-content: flex-end;}
+.justify-space-between {justify-content: space-between;}
 
 .text-left {text-align: left;}
 .text-center {text-align: center;}
@@ -69,23 +74,23 @@
 // In all the sizes bellow, round(x / 2) * 2 to always have even numbers.
 // Different heights with a mix of odd and even numbers will misalign
 // when verticallly centering (vertical-align or align-items center).
-.size--x-small {
+.size--xs {
   font-size: round(0.9 * $base-font-size);
   line-height: round(1.25 * $base-font-size / 2) * 2;
 }
-.size--small {
+.size--sm {
   font-size: round(1.1 * $base-font-size);
   line-height: round(1.65 * $base-font-size / 2) * 2;
 }
-.size--medium {
+.size--md {
   font-size: round(1.25 * $base-font-size);
   line-height: round(2.15 * $base-font-size / 2) * 2;
 }
-.size--large {
+.size--lg {
   font-size: round(1.5 * $base-font-size);
   line-height: round(2.5 * $base-font-size / 2) * 2;
 }
-.size--x-large {
+.size--xl {
   font-size: round(1.8 * $base-font-size);
   line-height: round(2.9 * $base-font-size / 2) * 2;
 }

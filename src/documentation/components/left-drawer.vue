@@ -2,7 +2,7 @@
 .nav-menu
   w-button.close(
     @click="$emit('update:drawerOpen', false)"
-    small
+    sm
     outline
     round
     color="primary"

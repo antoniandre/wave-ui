@@ -34,7 +34,7 @@ div
 
   h2 Presets
   h3 Buttons
-  span.code w-button { small: true, outlined: true, round: true }
+  span.code w-button { sm: true, outlined: true, round: true }
 </template>
 
 <script>

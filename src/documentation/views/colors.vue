@@ -17,16 +17,16 @@ div(style="overflow: hidden")
 
   h2 Status colors
   .layout.wrap.mb-12.ma-n2
-    .color.success--bg.subtitle.text-center.flex.py-4.ma-2 success
-    .color.error--bg.subtitle.text-center.flex.py-4.ma-2 error
-    .color.warning--bg.subtitle.text-center.flex.py-4.ma-2 warning
-    .color.info--bg.subtitle.text-center.flex.py-4.ma-2 info
+    .color.success--bg.subtitle.text-center.flex.py-3.ma-2 success
+    .color.error--bg.subtitle.text-center.flex.py-3.ma-2 error
+    .color.warning--bg.subtitle.text-center.flex.py-3.ma-2 warning
+    .color.info--bg.subtitle.text-center.flex.py-3.ma-2 info
 
   h2.my-4.layout.align-center
     | Color Palette
     w-button.ml-6(
       bg-color="primary"
-      small
+      sm
       dark
       @click="horizontal = !horizontal")
       | {{ horizontal ? 'Vertical' : 'Horizontal' }} display
