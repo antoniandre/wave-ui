@@ -1,28 +1,53 @@
 <template lang="pug">
   .w-progress(:class="classes" :style="styles")
-    .w-progress__progress(:style="`width: ${progressValue}%`")
+    svg(v-if="circle" viewBox="0 0 40 40")
+      //- Background first, in SVG there is no z-index.
+      circle.bg(
+        v-if="bgColor || this.progressValue > -1"
+        :class="bgColor"
+        cx="20" cy="20" r="18"
+        fill="transparent"
+        stroke-width="4")
+      circle.w-progress__progress(
+        cx="20" cy="20" r="18"
+        fill="transparent"
+        stroke-width="4"
+        :stroke-linecap="roundCap && 'round'"
+        :style="`stroke-dashoffset: ${(1 - (progressValue / 100)) * circleCircumference}`")
+
+    .w-progress__progress(v-else :class="{ full: progressValue === 100 }" :style="`width: ${progressValue}%`")
+
     .w-progress__label(v-if="label || $slots.default" :class="labelColor || false")
-      slot {{ Math.round(progressValue) }}%
+      slot {{ Math.round(progressValue) }}{{ !circle ? '%' : '' }}
 </template>
 
 <script>
+// For circular progress.
+const circleSize = 40
+const circleCircumference = circleSize * 3.14
+
 export default {
   name: 'w-progress',
   props: {
     value: { type: [Number, String, Boolean], default: -1 },
-    circular: { type: Boolean, default: false },
     label: { type: Boolean, default: false },
-    stripes: { type: Boolean, default: false },
+    circle: { type: Boolean, default: false },
+    roundCap: { type: Boolean, default: false },
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     labelColor: { type: String, default: '' },
     size: { type: String, default: '' },
-    shadow: { type: Boolean, default: false },
-    tile: { type: Boolean, default: false },
-    round: { type: Boolean, default: false },
-    outline: { type: Boolean, default: false },
+    shadow: { type: Boolean, default: false }, // For linear progress.
+    tile: { type: Boolean, default: false }, // For linear progress.
+    round: { type: Boolean, default: false }, // For linear progress.
+    outline: { type: Boolean, default: false }, // For linear progress.
+    stripes: { type: Boolean, default: false }, // For linear progress.
     absolute: { type: Boolean, default: false }
   },
+
+  data: () => ({
+    circleCircumference
+  }),
 
   computed: {
     progressValue () {
@@ -30,21 +55,23 @@ export default {
     },
     classes () {
       return {
+        [`w-progress--${this.circle ? 'circular' : 'linear'}`]: true,
         [this.color]: this.color,
-        [`${this.bgColor}--bg`]: this.bgColor,
+        [`${this.bgColor}--bg`]: this.bgColor && !this.circle,
         'w-progress--default-bg': !this.bgColor,
         'w-progress--indeterminate': this.value === -1,
-        'w-progress--outline': this.outline,
-        'w-progress--tile': this.tile,
-        'w-progress--stripes': this.stripes,
-        'w-progress--round': this.round,
+        'w-progress--outline': !this.circle && this.outline,
+        'w-progress--tile': !this.circle && this.tile,
+        'w-progress--stripes': !this.circle && this.stripes,
+        'w-progress--round': !this.circle && this.round,
         'w-progress--shadow': this.shadow,
-        'w-progress--absolute': this.absolute
+        'w-progress--absolute': this.absolute,
+        [`w-progress--${this.roundCap ? 'round' : 'flat'}-cap`]: true
       }
     },
     styles () {
       return {
-        height: this.size || false
+        [this.circle ? 'width' : 'height']: this.size || false
       }
     }
   }
@@ -52,83 +79,62 @@ export default {
 </script>
 
 <style lang="scss">
+$circle-size: 40;
+
 .w-progress {
-  display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  border-radius: $border-radius;
-  height: $base-increment;
 
   &--absolute {position: absolute;left: 0;right: 0;}
+  &--shadow {box-shadow: $box-shadow;}
+
+  // Linear progress.
+  // ------------------------------------------------------
+  &--linear {border-radius: $border-radius;}
+  // Tile, round and outline are only available on linear progress.
   &--tile {border-radius: 0;}
   &--round {border-radius: 4 * $base-increment;}
-  &--outline {
-    border: 1px solid currentColor;
-    padding: 1px;
-  }
-  &--shadow {box-shadow: $box-shadow;}
-  &--outline {padding: 2px;}
+  &--outline {border: 1px solid currentColor;padding: 2px;}
 
-  // Background.
-  &--default-bg:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-radius: inherit;
-    background-color: currentColor;
-    opacity: 0.15;
-  }
-  &--outline:after {display: none;}
-
-  &__label {
-    position: absolute;
-    font-weight: bold;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  &__progress {
+  &--linear {
+    display: flex;
+    height: $base-increment;
     overflow: hidden;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    justify-self: left;
-    margin-right: auto;
-    border-radius: inherit;
-    background-color: currentColor;
-    @include default-transition;
 
-    .w-progress--stripes & {
-      will-change: background-position;
-      background-image: linear-gradient(
-                          -45deg,
-                          rgba(255, 255, 255, .2) 25%,
-                          transparent 25%,
-                          transparent 50%,
-                          rgba(255, 255, 255, .2) 50%,
-                          rgba(255, 255, 255, .2) 75%,
-                          transparent 75%,
-                          transparent
-                        );
-      background-size: 50px 50px;
-      animation: indeterminate-stripes 2s infinite linear;
+    // Background.
+    &.w-progress--default-bg:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: inherit;
+      background-color: currentColor;
+      opacity: 0.15;
     }
+    &.w-progress--outline:after {display: none;}
 
-    .w-progress--outline & {
+    .w-progress__progress {
       overflow: hidden;
       position: relative;
       width: 100%;
       height: 100%;
       justify-self: left;
       margin-right: auto;
+      border-radius: inherit;
+      background-color: currentColor;
+      @include default-transition;
     }
+    &.w-progress--flat-cap .w-progress__progress {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &.w-progress--round-cap .w-progress__progress,
+    .w-progress__progress.full {border-radius: inherit;}
 
-    .w-progress--indeterminate & {
+    &.w-progress--indeterminate .w-progress__progress {
       background-color: transparent;
 
       &:before, &:after {
@@ -149,6 +155,33 @@ export default {
     }
   }
 
+  // Stripes are only available on linear progress.
+  &--stripes .w-progress__progress {
+    will-change: background-position;
+    background-image: linear-gradient(
+                        -45deg,
+                        rgba(255, 255, 255, 0.2) 25%,
+                        transparent 25%,
+                        transparent 50%,
+                        rgba(255, 255, 255, 0.2) 50%,
+                        rgba(255, 255, 255, 0.2) 75%,
+                        transparent 75%,
+                        transparent
+                      );
+    background-size: 50px 50px;
+    animation: indeterminate-stripes 2s infinite linear;
+  }
+
+  // Outline is only available on linear progress.
+  &--outline .w-progress__progress {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    justify-self: left;
+    margin-right: auto;
+  }
+
   @keyframes indeterminate-bars {
     0% {transform: translate3d(-100%, 0, 0) scaleX(1);}
     100% {transform: translate3d(0, 0, 0) scaleX(0);}
@@ -157,6 +190,47 @@ export default {
   @keyframes indeterminate-stripes {
     0% {background-position: 0 0;}
     100% {background-position: 50px 50px;}
+  }
+  // ------------------------------------------------------
+
+  // Circular progress.
+  // ------------------------------------------------------
+  &--circular {
+    display: inline-flex;
+    width: 2 * $base-font-size;
+    height: auto;
+    font-size: round(0.85 * $base-font-size);
+
+    svg {display: block;width: 100%;}
+    circle {stroke-dasharray: (3.14 * $circle-size);}
+    circle.bg {stroke: currentColor;}
+    &.w-progress--default-bg circle.bg {stroke: rgba(0, 0, 0, 0.1);}
+
+    .w-progress__progress {
+      transform-origin: 50%;
+      transform: rotate(-90deg);
+      stroke: currentColor;
+    }
+    &.w-progress--round-cap .w-progress__progress {stroke-linecap: round;}
+    &.w-progress--indeterminate .w-progress__progress {
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {transform: rotate(0deg);stroke-dashoffset: (0.66 * $circle-size);}
+      50% {transform: rotate(720deg);stroke-dashoffset: (3.14 * $circle-size);}
+      100% {transform: rotate(1080deg);stroke-dashoffset: (0.66 * $circle-size);}
+    }
+  }
+  // ------------------------------------------------------
+
+  &__label {
+    position: absolute;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
   }
 }
 </style>
