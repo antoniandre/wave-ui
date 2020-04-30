@@ -55,6 +55,10 @@ export default {
 
 <style lang="scss">
 .page--toolbar {
-  .w-card {width: 350px;height: 200px;}
+  .w-card {
+    flex-grow: 1;
+    max-width: 350px;
+    height: 200px;
+  }
 }
 </style>
