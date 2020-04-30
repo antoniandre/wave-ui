@@ -1,17 +1,19 @@
 <template lang="pug">
   .w-progress(:class="classes" :style="styles")
-    svg(v-if="circle" viewBox="0 0 40 40")
+    svg(v-if="circle" :viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`")
       //- Background first, in SVG there is no z-index.
       circle.bg(
         v-if="bgColor || this.progressValue > -1"
         :class="bgColor"
-        cx="20" cy="20"
-        :r="circleRadius"
+        :cx="circleCenter"
+        :cy="circleCenter"
+        r="20"
         fill="transparent"
         :stroke-width="width")
       circle.w-progress__progress(
-        cx="20" cy="20"
-        :r="circleRadius"
+        :cx="circleCenter"
+        :cy="circleCenter"
+        r="20"
         fill="transparent"
         :stroke-width="width"
         :stroke-linecap="roundCap && 'round'"
@@ -58,6 +60,9 @@ export default {
     },
     circleRadius () {
       return circleSize / 2 - (this.width / 2)
+    },
+    circleCenter () {
+      return circleSize + this.width
     },
     classes () {
       return {
@@ -216,6 +221,7 @@ $circle-size: 40;
       transform-origin: 50%;
       transform: rotate(-90deg);
       stroke: currentColor;
+      will-change: stroke-dashoffset;
     }
     &.w-progress--round-cap .w-progress__progress {stroke-linecap: round;}
     &.w-progress--indeterminate .w-progress__progress {
