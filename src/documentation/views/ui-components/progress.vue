@@ -11,11 +11,18 @@ div(style="max-width: 900px")
   h3 Mixing colors
   w-progress.mt-4(:circle="circular" color="yellow" bg-color="cyan")
 
-  h2 Size
-  w-progress.mt-4(:circle="circular" value="38" :size="circular ? '4em' : '1em'" color="blue")
-  w-progress.mt-4(:circle="circular" value="38" :size="circular ? '8em' : '2.5em'" color="blue")
+  template(v-if="circular")
+    h2 Size &amp; width
+    w-progress.mt-4(circle value="38" size="5em" color="blue")
+    w-progress.mt-4(circle value="38" size="8em" color="blue")
+    w-progress.mt-4(circle value="38" size="5em" :width="4" color="blue")
+    w-progress.mt-4(circle value="38" size="8em" :width="10" color="blue")
 
-  template(v-if="!circular")
+  template(v-else)
+    h2 Size
+    w-progress.mt-4(value="38" :size="circular ? '5em' : '1em'" color="blue")
+    w-progress.mt-4(value="38" :size="circular ? '8em' : '2.5em'" color="blue")
+
     h2 Tile &amp; round
     w-progress.mt-4(
       :circle="circular"
@@ -68,12 +75,12 @@ div(style="max-width: 900px")
   w-progress.mt-4(
     :circle="circular"
     v-model="progress1"
-    :size="circular ? '4em' : '1.3em'"
+    :size="circular ? '5em' : '1.3em'"
     round color="primary" label)
   w-progress.mt-4(
     :circle="circular"
     v-model="progress1"
-    :size="circular ? '4em' : '1.3em'"
+    :size="circular ? '5em' : '1.3em'"
     outline
     round
     color="primary"
@@ -96,7 +103,7 @@ div(style="max-width: 900px")
   w-progress.mt-4(
     :circle="circular"
     value="50.3"
-    :size="circular ? '4em' : '2em'"
+    :size="circular ? '5em' : '2em'"
     outline
     round
     color="primary"
@@ -107,14 +114,14 @@ div(style="max-width: 900px")
   w-progress.mt-4(
     :circle="circular"
     value="50.3"
-    :size="circular ? '4em' : '2em'"
+    :size="circular ? '5em' : '2em'"
     round
     round-cap
     color="primary")
   w-progress.mt-4(
     :circle="circular"
     value="50.3"
-    :size="circular ? '4em' : '2em'"
+    :size="circular ? '5em' : '2em'"
     round
     color="primary")
 </template>

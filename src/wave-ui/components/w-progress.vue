@@ -5,13 +5,15 @@
       circle.bg(
         v-if="bgColor || this.progressValue > -1"
         :class="bgColor"
-        cx="20" cy="20" r="18"
+        cx="20" cy="20"
+        :r="circleRadius"
         fill="transparent"
-        stroke-width="4")
+        :stroke-width="width")
       circle.w-progress__progress(
-        cx="20" cy="20" r="18"
+        cx="20" cy="20"
+        :r="circleRadius"
         fill="transparent"
-        stroke-width="4"
+        :stroke-width="width"
         :stroke-linecap="roundCap && 'round'"
         :style="`stroke-dashoffset: ${(1 - (progressValue / 100)) * circleCircumference}`")
 
@@ -37,6 +39,7 @@ export default {
     bgColor: { type: String, default: '' },
     labelColor: { type: String, default: '' },
     size: { type: String, default: '' },
+    width: { type: [Number, String], default: 4 }, // This is the thickness only for circular progress.
     shadow: { type: Boolean, default: false }, // For linear progress.
     tile: { type: Boolean, default: false }, // For linear progress.
     round: { type: Boolean, default: false }, // For linear progress.
@@ -52,6 +55,9 @@ export default {
   computed: {
     progressValue () {
       return parseFloat(this.value)
+    },
+    circleRadius () {
+      return circleSize / 2 - (this.width / 2)
     },
     classes () {
       return {
@@ -199,7 +205,7 @@ $circle-size: 40;
     display: inline-flex;
     width: 2 * $base-font-size;
     height: auto;
-    font-size: round(0.85 * $base-font-size);
+    font-size: round(0.9 * $base-font-size);
 
     svg {display: block;width: 100%;}
     circle {stroke-dasharray: (3.14 * $circle-size);}
