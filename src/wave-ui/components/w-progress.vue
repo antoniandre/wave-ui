@@ -41,7 +41,7 @@ export default {
     bgColor: { type: String, default: '' },
     labelColor: { type: String, default: '' },
     size: { type: String, default: '' },
-    width: { type: [Number, String], default: 4 }, // This is the thickness only for circular progress.
+    width: { type: [Number, String], default: 4 }, // Circular progress thickness.
     shadow: { type: Boolean, default: false }, // For linear progress.
     tile: { type: Boolean, default: false }, // For linear progress.
     round: { type: Boolean, default: false }, // For linear progress.
@@ -218,7 +218,7 @@ $circle-size: 40;
     &.w-progress--default-bg circle.bg {stroke: rgba(0, 0, 0, 0.1);}
 
     .w-progress__progress {
-      transform-origin: 50%;
+      transform-origin: 100% 100%;
       transform: rotate(-90deg);
       stroke: currentColor;
       will-change: stroke-dashoffset;

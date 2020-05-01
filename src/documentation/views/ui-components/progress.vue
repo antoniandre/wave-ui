@@ -16,7 +16,7 @@ div(style="max-width: 900px")
     w-progress.mt-4(circle value="38" size="5em" color="blue")
     w-progress.mt-4(circle value="38" size="8em" color="blue")
     w-progress.mt-4(circle value="38" size="5em" :width="4" color="blue")
-    w-progress.mt-4(circle value="38" size="8em" :width="10" color="blue")
+    w-progress.mt-4(circle value="38" size="8em" :width="40" color="blue")
 
   template(v-else)
     h2 Size
