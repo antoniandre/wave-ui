@@ -17,11 +17,8 @@
 </template>
 
 <script>
-import WIcon from './w-icon'
-
 export default {
   name: 'w-button',
-  components: { WIcon },
   props: {
     xs: { type: Boolean, default: false },
     sm: { type: Boolean, default: false },
@@ -140,14 +137,14 @@ $spinner-size: 40;
   &--text:hover:before {background-color: currentColor;opacity: 0.12;}
 
   // Focus state.
-  &:focus:before {background-color: rgba(0, 0, 0, 0.15);opacity: 1;}
+  &:focus:before {background-color: rgba(0, 0, 0, 0.12);opacity: 1;}
   &--dark:focus:before {background-color: rgba(255, 255, 255, 0.15);}
   &--outline:focus:before,
   &--text:focus:before {background-color: currentColor;opacity: 0.12;}
 
   // Active state.
-  &:active:before {background-color: rgba(0, 0, 0, 0.3);opacity: 1;}
-  &--dark:active:before {background-color: rgba(255, 255, 255, 0.3);}
+  &:active:before {background-color: rgba(0, 0, 0, 0.2);opacity: 1;}
+  &--dark:active:before {background-color: rgba(255, 255, 255, 0.25);}
   &--outline:active:before,
   &--text:active:before {background-color: currentColor;opacity: 0.25;}
 

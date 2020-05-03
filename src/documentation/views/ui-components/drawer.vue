@@ -28,15 +28,15 @@ div
 
   h2 No overlay &amp; custom color overlay
   span Open top drawer with:
-  w-button.mx-2(
+  w-button.mx-2.my-1(
     @click="noOverlay = true;overlayColor = false;showTopDrawer = !showTopDrawer"
     outline
     color="primary") No overlay
-  w-button.mr-2(
+  w-button.mr-2.my-1(
     @click="noOverlay = false;overlayColor = 'rgba(35, 71, 129, 0.5)';showTopDrawer = !showTopDrawer"
     outline
     color="primary") Custom color overlay
-  w-button.mr-2(
+  w-button.mr-2.my-1(
     @click="noOverlay = false;overlayColor = 'transparent';showTopDrawer = !showTopDrawer"
     outline
     color="primary") Transparent overlay
