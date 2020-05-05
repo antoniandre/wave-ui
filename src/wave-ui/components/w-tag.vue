@@ -1,30 +1,55 @@
 <template lang="pug">
-  span.w-tag(:class="classes" :style="styles")
+  span.w-tag(
+    @click="$emit('input', !value)"
+    :class="classes"
+    :role="value !== -1 && 'button'"
+    :aria-pressed="value !== -1 && (value ? 'true' : 'false')"
+    :tabindex="value !== -1 && 0"
+    :style="styles")
     slot
-    w-icon.w-tag__close(v-if="close") ion-md-close
+    i(
+      v-if="close && value"
+      @click.stop="$emit('input', false)"
+      role="icon"
+      aria-hidden="true"
+      class="w-icon w-tag__close ion-md-close")
 </template>
 
 <script>
 export default {
   name: 'w-tag',
   props: {
-    value: { type: [Number, String, Boolean], default: -1 },
+    value: { type: [Boolean, Number], default: -1 },
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     dark: { type: Boolean, default: false },
-    size: { type: String, default: '' },
     shadow: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
     round: { type: Boolean, default: false },
     close: { type: Boolean, default: false },
-    outline: { type: Boolean, default: false }
+    outline: { type: Boolean, default: false },
+    xs: { type: Boolean, default: false },
+    sm: { type: Boolean, default: false },
+    md: { type: Boolean, default: false },
+    lg: { type: Boolean, default: false },
+    xl: { type: Boolean, default: false },
   },
 
   computed: {
+    presetSize () {
+      return (
+        (this.xs && 'xs') ||
+        (this.sm && 'sm') ||
+        (this.lg && 'lg') ||
+        (this.xl && 'xl') ||
+        'md'
+      )
+    },
     classes () {
       return {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
+        [`size--${this.presetSize}`]: true,
         'w-tag--dark': this.dark && !this.outline,
         'w-tag--clickable': this.value !== -1,
         'w-tag--outline': this.outline,
@@ -42,32 +67,58 @@ export default {
 
 <style lang="scss">
 .w-tag {
-  display: inline-flex;
   position: relative;
+  display: inline-flex;
+  align-items: center;
   border-radius: $border-radius;
   border: 1px solid rgba(0, 0, 0, 0.08);
   background-color: rgba(255, 255, 255, 0.85);
   padding-left: 2 * $base-increment;
   padding-right: 2 * $base-increment;
   font-size: round(0.85 * $base-font-size);
+  cursor: default;
 
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
-  &--round {
-    border-radius: 12 * $base-increment;
-    padding-left: round(3 * $base-increment);
-    padding-right: round(3 * $base-increment);
-  }
+  &--round {border-radius: 12 * $base-increment;}
   &--tile {border-radius: initial;}
   &--shadow {box-shadow: $box-shadow;}
 
-  .w-tag__close {line-height: inherit;}
+  &.size--xs {
+    font-size: round(0.7 * $base-font-size);
+    padding-left: $base-increment;
+    padding-right: $base-increment;
+    line-height: 1.3;
+  }
+  &.size--sm {
+    font-size: round(0.82 * $base-font-size);
+    padding-left: $base-increment;
+    padding-right: $base-increment;
+    line-height: 1.3;
+  }
+  &.size--md {font-size: round(0.95 * $base-font-size);line-height: 1.3;}
+  &.size--lg {font-size: round(1.1 * $base-font-size);line-height: 1.5;}
+  &.size--xl {font-size: round(1.3 * $base-font-size);line-height: 1.5;}
 
   &--clickable {
     cursor: pointer;
     user-select: none;
 
-    &:hover {}
+    .w-tag__close {
+      margin-left: 3px;
+      margin-right: -3px;
+      padding: 1px;
+      transition: $transition-duration;
+    }
+    &.size--lg .w-tag__close,
+    &.size--xl .w-tag__close {
+      margin-right: -2px;
+      padding: 2px;
+    }
+
+    &:hover {
+      .w-tag__close {background-color: rgba(0, 0, 0, 0.1);}
+    }
 
     // Overlay to mark the focus and active state.
     &:before {
@@ -80,26 +131,26 @@ export default {
       opacity: 0;
       background-color: transparent;
       border-radius: inherit;
-      transition: 0.15s;
+      transition: 0.2s;
     }
 
     // Hover state.
-    &:hover:before {background-color: currentColor;opacity: 0.08;}
-    &--dark:hover:before {background-color: rgba(255, 255, 255, 0.15);opacity: 1;}
+    &:hover:before {background-color: currentColor;opacity: 0.06;}
+    &--dark:hover:before {background-color: rgba(255, 255, 255, 0.12);opacity: 1;}
     &--outline:hover:before,
     &--text:hover:before {background-color: currentColor;opacity: 0.12;}
 
     // Focus state.
-    &:focus:before {background-color: rgba(0, 0, 0, 0.15);opacity: 1;}
-    &--dark:focus:before {background-color: rgba(255, 255, 255, 0.15);}
+    &:focus:before {background-color: currentColor;opacity: 0.2;}
+    &--dark:focus:before {background-color: rgba(255, 255, 255, 0.12);}
     &--outline:focus:before,
     &--text:focus:before {background-color: currentColor;opacity: 0.12;}
 
     // Active state.
-    &:active:before {background-color: rgba(0, 0, 0, 0.3);opacity: 1;}
-    &--dark:active:before {background-color: rgba(255, 255, 255, 0.3);}
+    &:active:before {background-color: currentColor;opacity: 0.2;}
+    &--dark:active:before {background-color: rgba(255, 255, 255, 0.2);}
     &--outline:active:before,
-    &--text:active:before {background-color: currentColor;opacity: 0.25;}
+    &--text:active:before {background-color: currentColor;opacity: 0.2;}
   }
 }
 </style>
