@@ -11,7 +11,7 @@ w-toolbar(fixed)
     v-if="$waveUI.breakpoint === 'xs'"
     @click="$emit('update:drawerOpen', !drawerOpen)"
     large text round
-    :icon="drawerOpen ? 'ion-md-close' : 'ion-md-menu'")
+    :icon="drawerOpen ? 'wi-cross' : 'ion-md-menu'")
 </template>
 
 <script>

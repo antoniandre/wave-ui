@@ -1,7 +1,7 @@
 <template lang="pug">
   span.w-tag(:class="classes" :style="styles")
     slot
-    w-icon.w-tag__close(v-if="close") ion-md-close
+    w-icon.w-tag__close(v-if="close") wi-cross
 </template>
 
 <script>

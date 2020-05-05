@@ -6,7 +6,7 @@
     outline
     round
     color="primary"
-    icon="ion-md-close")
+    icon="wi-cross")
   w-list(:items="sections" nav color="primary")
     //- template(v-slot:item="{ item }")
       router-link(v-if="!item.disabled" :to="item.route" v-html="item.label")

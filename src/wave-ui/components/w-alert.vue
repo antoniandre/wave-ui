@@ -1,6 +1,6 @@
 <template lang="pug">
   .w-alert(:class="classes")
-    w-icon.mr-2(v-if="type") ion-{{ icon }}
+    w-icon.mr-2(v-if="type") wi-{{ icon }}
     slot
 </template>
 
@@ -26,10 +26,10 @@ export default {
   computed: {
     icon () {
       return (
-        (this.type === 'success' && 'md-checkmark-circle') ||
-        (this.type === 'warning' && 'md-alert') ||
-        (this.type === 'error' && 'md-close-circle') ||
-        (this.type === 'info' && 'md-information-circle')
+        (this.type === 'success' && 'check-circle') ||
+        (this.type === 'warning' && 'warning-circle') ||
+        (this.type === 'error' && 'cross-circle') ||
+        (this.type === 'info' && 'info-circle')
       )
     },
     hasSingleBorder () {

@@ -52,7 +52,7 @@ div
       outline
       round
       color="primary"
-      icon="ion-md-close")
+      icon="wi-cross")
     .layout.align-center.justify-center.fill-height
       w-button(
         @click="showLeftDrawer = false;showRightDrawer = true"
@@ -66,7 +66,7 @@ div
       outline
       round
       color="primary"
-      icon="ion-md-close")
+      icon="wi-cross")
 
   w-drawer(v-model="showTopDrawer" top :no-overlay="noOverlay" :overlay-color="overlayColor")
     w-button.button--close(
@@ -75,7 +75,7 @@ div
       outline
       round
       color="primary"
-      icon="ion-md-close")
+      icon="wi-cross")
 
   w-drawer(v-model="showBottomDrawer" bottom :height="bottomDrawerHeight")
     w-button.button--close(
@@ -84,7 +84,7 @@ div
       outline
       round
       color="primary"
-      icon="ion-md-close")
+      icon="wi-cross")
 </template>
 
 <script>
@@ -104,7 +104,7 @@ export default {
 <style lang="scss">
 .button--close {
   position: absolute;
-  top: 0.5em;
-  right: 0.5em;
+  top: 6px;
+  right: 6px;
 }
 </style>
