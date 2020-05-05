@@ -2,10 +2,22 @@
 div
   h1.headline.mt-4 #[span.code w-icon]
   p.
-    The Font Awesome 4 icons font is loaded on demand if you use the 'fa' icon font.#[br]
-    The Ionicons 4 icons font is loaded on demand if you use the 'ion' icon font.#[br]
-    You can also use your own font as long as you import it.#[br]
-    You can use multiple icons sources at the same time but it is not recommended.
+    Wave UI works with your favorite icon font or even your custom one.#[br]
+    Bellow are some examples using a few popular icons fonts.
+
+  h2 Material Design Icons - Free
+  p
+    a(href="https://material.io/resources/icons" target="_blank") Material Design Icons Cheatsheet
+
+  .layout.mt-4.wrap
+    code TODO: support ligature fonts.
+    //- div.mr-8
+      w-icon.mr-1(xs color="primary") star
+      w-icon.mr-1(sm color="primary") star
+      w-icon.mr-1(md color="primary") star
+      w-icon.mr-1(lg color="primary") star
+      w-icon.mr-1(xl color="primary") star
+      br
 
   h2 Ionicons 4 (iOS &amp; Material Design) - Free
   p
@@ -98,11 +110,10 @@ div
 </template>
 
 <script>
-export default {
+import '@mdi/font/css/materialdesignicons.min.css'
+import 'font-awesome/css/font-awesome.min.css'
+import 'ionicons/dist/css/ionicons.min.css'
 
+export default {
 }
 </script>
-
-<style lang="scss">
-
-</style>

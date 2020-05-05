@@ -11,8 +11,7 @@ const waveui = new WaveUI({
   colors: {
     primary: '#234781',
     secondary: '#e0f1ff'
-  },
-  icons: ['fa', 'ion'],
+  }
 })
 
 new Vue({

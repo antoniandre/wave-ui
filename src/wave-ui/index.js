@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import config, { mergeConfig } from './utils/config'
+import { mergeConfig } from './utils/config'
 import * as components from './components'
 // import * as directives from './directives'
 
@@ -42,10 +42,6 @@ class WaveUI {
 
     // Merge user options into default config.
     mergeConfig(options)
-
-    // Load the icons fonts on demand.
-    if (config.icons.includes('fa')) require('font-awesome/css/font-awesome.min.css')
-    if (config.icons.includes('ion')) require('ionicons/dist/css/ionicons.min.css')
   }
 }
 export default WaveUI
