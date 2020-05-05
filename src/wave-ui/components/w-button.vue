@@ -1,5 +1,8 @@
 <template lang="pug">
-  button.w-button(
+  .w-button(
+    :is="to ? ($router && !externalLink ? 'router-link' : 'a') : 'button'"
+    :to="$router && to"
+    :href="to"
     :class="classes"
     :disabled="!!disabled"
     @click="$emit('click', $event)")
@@ -28,6 +31,7 @@ export default {
     md: { type: Boolean, default: false },
     lg: { type: Boolean, default: false },
     xl: { type: Boolean, default: false },
+    to: { type: [String, Boolean], default: false }, // Creates a link.
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     dark: { type: Boolean, default: false },
@@ -51,6 +55,9 @@ export default {
         (this.xl && 'xl') ||
         'md'
       )
+    },
+    externalLink () {
+      return /^(http|\/\/)/.test(this.to)
     },
     classes () {
       return {
