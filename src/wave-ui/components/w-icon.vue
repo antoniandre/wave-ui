@@ -57,44 +57,31 @@ export default {
 
 <style lang="scss">
 .w-icon {
-  display: inline-block;
   position: relative;
+  display: inline-flex;
   border-radius: 100%;
   text-align: center;
   vertical-align: middle;
   user-select: none;
-  line-height: inherit;
+  line-height: 1;
 
   .w-button & {padding: 0;}
-  &.size--xs {
-    font-size: round(0.85 * $base-font-size);
-    line-height: round(0.85 * $base-font-size);
-    width: round(0.85 * $base-font-size);
-    height: round(0.85 * $base-font-size);
-  }
-  &.size--sm {
-    font-size: round(1.15 * $base-font-size);
-    line-height: round(1.15 * $base-font-size);
-    width: round(1.15 * $base-font-size);
-    height: round(1.15 * $base-font-size);
-  }
-  &.size--md {
-    font-size: round(1.4 * $base-font-size);
-    line-height: round(1.4 * $base-font-size);
-    width: round(1.4 * $base-font-size);
-    height: round(1.4 * $base-font-size);
-  }
-  &.size--lg {
-    font-size: round(1.7 * $base-font-size);
-    line-height: round(1.7 * $base-font-size);
-    width: round(1.7 * $base-font-size);
-    height: round(1.7 * $base-font-size);
-  }
-  &.size--xl {
-    font-size: round(2 * $base-font-size);
-    line-height: round(2 * $base-font-size);
-    width: round(2 * $base-font-size);
-    height: round(2 * $base-font-size);
+  &.size--xs {font-size: round(0.85 * $base-font-size);}
+  &.size--sm {font-size: round(1.15 * $base-font-size);}
+  &.size--md {font-size: round(1.4 * $base-font-size);}
+  &.size--lg {font-size: round(1.7 * $base-font-size);}
+  &.size--xl {font-size: round(2 * $base-font-size);}
+
+  // Adjust Ionic icons to be always square.
+  &[class^="ion-"]:before,
+  &[class*=" ion-"]:before {line-height: 0.85;width: 0.85em;}
+
+  // Adjust Font Awesome icons to be always square.
+  &[class^="fa-"]:before,
+  &[class*=" fa-"]:before {
+    width: 1.015em;
+    display: inline-block;
+    padding-top: 1px;
   }
 }
 </style>

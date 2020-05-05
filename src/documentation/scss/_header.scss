@@ -1,16 +1,16 @@
 header {
   margin-top: 12 * $base-increment;
   position: relative;
-  max-height: 320px;
   overflow: hidden;
-  padding-top: 8px;
 
   &:before {
     content: '';
-    display: block;
-    padding-bottom: 23.34%;
-    background: url('~@/assets/japanese-wave.png') fixed no-repeat 0 57px;
-    background-size: contain;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url('~@/assets/japanese-wave.png') fixed repeat-x 0 50px;
   }
 
   &:after {
@@ -28,10 +28,36 @@ header {
 }
 
 @media screen and (min-width: 1500px) {
+  header {height: 300px;}
+  header:before {background-size: 1600px;}
+}
+
+@media screen and (min-width: 1281px) and (max-width: 1500px) {
+  header {height: 260px;}
   header:before {
-    padding-bottom: 14%;
-    background-attachment: initial;
-    background-repeat: repeat;
-    background-position: initial;
+    display: block;
+    position: relative;
+    padding-bottom: 23.34%;
+    background-size: contain;
   }
+}
+
+@media screen and (min-width: 1021px) and (max-width: 1280px) {
+  header {height: 238px;}
+  header:before {
+    display: block;
+    position: relative;
+    padding-bottom: 23.34%;
+    background-size: contain;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1020px) {
+  header {height: 170px;}
+  header:before {background-size: 800px;}
+}
+
+@media screen and (max-width: 600px) {
+  header {height: 130px;}
+  header:before {background-size: 600px;}
 }
