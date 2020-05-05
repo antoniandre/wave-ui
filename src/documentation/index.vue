@@ -1,6 +1,6 @@
 <template lang="pug">
 w-app
-  w-drawer(v-if="isMobile" v-model="drawerOpen" left)
+  w-drawer.nav-drawer(v-if="isMobile" v-model="drawerOpen" left)
     nav-menu(:drawer-open.sync="drawerOpen")
   header
     toolbar(:drawer-open.sync="drawerOpen")

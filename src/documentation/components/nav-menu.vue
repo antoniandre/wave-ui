@@ -83,4 +83,12 @@ export default {
     &.router-link-exact-active {border-left-color: $primary;}
   }
 }
+
+.nav-drawer .nav-menu {
+  max-width: unset;
+  margin-top: 3em;
+  margin-left: 12px;
+  margin-right: 0;
+  border-right: none;
+}
 </style>
