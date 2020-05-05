@@ -9,14 +9,15 @@
     w-icon(v-if="icon" v-bind="{ [size]: true }") {{ icon }}
     span(v-else)
       slot
-    slot(name="loading")
-      svg(v-if="loading" viewBox="0 0 40 40")
-        circle(
-          cx="20" cy="20" r="18"
-          fill="transparent"
-          stroke="currentColor"
-          stroke-width="4"
-          stroke-linecap="round")
+    .w-button__loader(v-if="loading")
+      slot(name="loading")
+        svg(viewBox="0 0 40 40")
+          circle(
+            cx="20" cy="20" r="18"
+            fill="transparent"
+            stroke="currentColor"
+            stroke-width="4"
+            stroke-linecap="round")
 </template>
 
 <script>
@@ -188,13 +189,17 @@ $spinner-size: 40;
   }
   &--loading > span {opacity: 0;}
 
-  &--loading svg {
+  &__loader {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 65%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    svg {height: 75%;}
     circle {
       stroke-dasharray: (3.14 * $spinner-size);
       transform-origin: 50%;
