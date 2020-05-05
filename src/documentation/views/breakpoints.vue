@@ -25,15 +25,15 @@ div
     #[code this.$waveUI.breakpoint.name], or one of these quick booleans from
     the same #[code this.$waveUI.breakpoint] object:
   ul
-    li
+    li.mb-1
       code xs
-    li
+    li.mb-1
       code sm
-    li
+    li.mb-1
       code md
-    li
+    li.mb-1
       code lg
-    li
+    li.mb-1
       code xl
 
   p.mt-4 You can override the breakpoints with.
