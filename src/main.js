@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './app'
 import router from './router'
 import WaveUI from '@/wave-ui/index'
+import 'ionicons/dist/css/ionicons.min.css'
 
 Vue.config.productionTip = false
 

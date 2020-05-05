@@ -7,8 +7,8 @@ w-toolbar(fixed)
   a.mr-2(href="https://github.com/antoniandre/wave-ui" target="_blank")
     w-icon ion-logo-github
   .caption Version 1.0
-  w-button.ml-2(
-    v-if="$waveUI.breakpoint === 'xs'"
+  w-button.ml-2.mr-n1.hamburger-menu(
+    v-if="$waveUI.breakpoint.xs"
     @click="$emit('update:drawerOpen', !drawerOpen)"
     large text round
     :icon="drawerOpen ? 'wi-cross' : 'ion-md-menu'")
@@ -37,5 +37,8 @@ export default {
     margin-right: 1em;
     fill: #497ca2;
   }
+
+  .hamburger-menu .w-icon {width: 26px;height: 26px;}
+  .hamburger-menu .w-icon.ion-md-menu {font-size: 22px;}
 }
 </style>

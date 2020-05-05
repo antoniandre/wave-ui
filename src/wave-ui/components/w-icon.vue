@@ -60,7 +60,8 @@ export default {
   position: relative;
   display: inline-flex;
   border-radius: 100%;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
   vertical-align: middle;
   user-select: none;
   line-height: 1;
