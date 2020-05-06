@@ -15,7 +15,8 @@ const config = {
     warning: '#f80',
     info: '#3d9ff5'
   },
-  icons: []
+  icons: [],
+  iconsLigature: false
 }
 
 export { config as default }

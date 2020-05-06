@@ -5,9 +5,12 @@
     role="icon"
     aria-hidden="true"
     :style="this.forcedSize && `font-size: ${this.forcedSize}`")
+    template(v-if="ligature") {{ ligature.icon }}
 </template>
 
 <script>
+import config from '../utils/config'
+
 export default {
   name: 'w-icon',
   props: {
@@ -25,6 +28,12 @@ export default {
   }),
 
   computed: {
+    ligature () {
+      if (!config.iconsLigature) return false
+
+      const [fontName, icon] = this.icon.split(' ')
+      return fontName === config.iconsLigature && { fontName, icon }
+    },
     forcedSize () {
       return this.size && (!isNaN(this.size) ? `${this.size}px` : this.size)
     },
@@ -41,7 +50,8 @@ export default {
       return {
         [this.icon]: true,
         [this.color]: this.color,
-        [`size--${this.presetSize}`]: !this.forcedSize
+        [`size--${this.presetSize}`]: !this.forcedSize,
+        [this.ligature && this.ligature.fontName]: this.ligature
       }
     }
   },
