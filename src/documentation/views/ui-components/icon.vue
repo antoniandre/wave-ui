@@ -3,11 +3,11 @@ div
   h1.headline.mt-4 #[span.code w-icon]
   p.
     Wave UI works with your favorite icon font or even your custom one.#[br]
-    Bellow are some examples using a few popular icons fonts.
+    Bellow are some examples using a few popular and free icons fonts.
 
   ul
     li
-      h2 Material Design Icons with ligatures (Free)
+      h2 Material Design Icons with ligatures
       p
         a(href="https://material.io/resources/icons" target="_blank") Material Design Icons Cheatsheet
 
@@ -23,7 +23,7 @@ div
       w-icon.mr-1(xl color="primary") material-icons favorite
 
     li
-      h2 Material Design Icons - community full set (Free)
+      h2 Material Design Icons - community full set
       p
         a(href="https://materialdesignicons.com" target="_blank") Material Design Icons Cheatsheet
 
@@ -39,7 +39,7 @@ div
       w-icon.mr-1(xl color="primary") mdi mdi-heart
 
     li
-      h2 Ionicons 4: iOS &amp; Material Design (Free)
+      h2 Ionicons 4: iOS &amp; Material Design
       p
         a(href="https://ionicons.com/v4/cheatsheet.html" target="_blank") Ionicons V4 Cheatsheet
 
@@ -69,7 +69,7 @@ div
           w-icon.mr-1(xl color="primary") ion-md-heart
 
     li
-      h2 Font Awesome 4 (Free)
+      h2 Font Awesome 4
       p
         a(href="https://fontawesome.com/v4.7.0/icons/" target="_blank") Font Awesome V4 Cheatsheet
 

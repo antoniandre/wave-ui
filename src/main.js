@@ -12,8 +12,7 @@ const waveui = new WaveUI({
   colors: {
     primary: '#234781',
     secondary: '#e0f1ff'
-  },
-  iconsLigature: false
+  }
 })
 
 new Vue({
