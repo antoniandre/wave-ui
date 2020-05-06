@@ -75,9 +75,10 @@ export default {
   }
 
   .w-list__item a, .w-list__item span {
+    padding: 6px;
     padding-left: 4 * $base-increment;
     @include default-transition;
-    font-size: 1.05em;
+    font-size: 1em;
     border-left: 2px solid transparent;
 
     &.router-link-exact-active {border-left-color: $primary;}
