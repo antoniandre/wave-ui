@@ -85,10 +85,12 @@ export default {
   &.size--lg {font-size: round(1.7 * $base-font-size);}
   &.size--xl {font-size: round(2 * $base-font-size);}
 
-  &--spin:before {animation: spin 2s infinite linear;}
+  &--spin:before {
+    animation: w-icon--spin 2s infinite linear;
+  }
 }
 
-@keyframes spin {
+@keyframes w-icon--spin {
   0% {transform: rotate(0deg);}
-  100% {transform: rotate(359deg);}
+  to {transform: rotate(359deg);}
 }</style>

@@ -83,6 +83,10 @@ div
       w-icon.mr-1(xs color="primary") fa fa-heart
       w-icon.mr-1(md color="primary") fa fa-heart
       w-icon.mr-1(xl color="primary") fa fa-heart
+
+  h2 Spin
+  p You can also spin the icons.
+  w-icon.mr-1(xl color="primary" spin) mdi mdi-star
 </template>
 
 <script>
