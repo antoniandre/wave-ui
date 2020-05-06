@@ -35,7 +35,7 @@ div
 
   h2 Custom content
   w-tag(v-model="tagOn3" color="pink-lighten-1" bg-color="pink-lighten-5")
-    w-icon.mr-1(sm) ion-md-heart
+    w-icon.mr-1(sm) mdi mdi-heart
     | Like it
 </template>
 

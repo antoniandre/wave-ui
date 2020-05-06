@@ -91,15 +91,15 @@ div
 
 <script>
 import 'material-design-icons/iconfont/material-icons.css'
-import '@mdi/font/css/materialdesignicons.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import 'ionicons/dist/css/ionicons.min.css'
 import config from '@/wave-ui/utils/config'
 
-// Add ligature on the icons page for the demo.
-config.iconsLigature = 'material-icons'
-
 export default {
+  beforeCreate () {
+    // Add ligature on the icons page for the demo.
+    config.iconsLigature = 'material-icons'
+  },
   beforeDestroy () {
     config.iconsLigature = false
   }

@@ -5,13 +5,13 @@ w-toolbar(fixed)
     | Wave UI
   .spacer
   a.mr-2(href="https://github.com/antoniandre/wave-ui" target="_blank")
-    w-icon ion-logo-github
+    w-icon mdi mdi-github
   .caption Version 1.0
   w-button.ml-2.mr-n1.hamburger-menu(
     v-if="$waveUI.breakpoint.xs"
     @click="$emit('update:drawerOpen', !drawerOpen)"
     large text round
-    :icon="drawerOpen ? 'wi-cross' : 'ion-md-menu'")
+    :icon="drawerOpen ? 'wi-cross' : 'mdi mdi-menu'")
 </template>
 
 <script>
@@ -39,6 +39,5 @@ export default {
   }
 
   .hamburger-menu .w-icon {width: 26px;height: 26px;}
-  .hamburger-menu .w-icon.ion-md-menu {font-size: 22px;}
 }
 </style>

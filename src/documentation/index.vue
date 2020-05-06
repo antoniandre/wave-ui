@@ -12,9 +12,11 @@ w-app
       router-view.flex
   footer.mt-6.pa-3.layout.justify-end.align-center.caption
     | Made with
-    w-icon.ml-1(sm) fa fa-html5
-    w-icon.ml-1(sm) fa fa-css3
-    w-icon.ml-1(sm) ion-md-heart
+    w-icon.ml-1(sm) mdi mdi-vuejs
+    w-icon.ml-1(sm) mdi mdi-language-css3
+    w-icon.ml-1(sm) mdi mdi-language-html5
+    w-icon.ml-1(sm) mdi mdi-sass
+    w-icon.ml-1.heart(sm) mdi mdi-heart
 
 </template>
 
@@ -42,7 +44,7 @@ export default {
 </script>
 
 <style lang="scss">
-footer .ion-md-heart:hover {
+footer .heart:hover {
   animation: heartbeat 1s infinite;
 }
 
