@@ -20,6 +20,7 @@ export default {
     md: { type: Boolean, default: false },
     lg: { type: Boolean, default: false },
     xl: { type: Boolean, default: false },
+    spin: { type: Boolean, default: false },
     size: { type: [String, Number], default: null },
   },
 
@@ -51,6 +52,7 @@ export default {
         [this.icon]: true,
         [this.color]: this.color,
         [`size--${this.presetSize}`]: !this.forcedSize,
+        'w-icon--spin': this.spin,
         [this.ligature && this.ligature.fontName]: this.ligature
       }
     }
@@ -83,16 +85,10 @@ export default {
   &.size--lg {font-size: round(1.7 * $base-font-size);}
   &.size--xl {font-size: round(2 * $base-font-size);}
 
-  // Adjust Ionic icons to be always square.
-  &[class^="ion-"]:before,
-  &[class*=" ion-"]:before {line-height: 0.85;width: 0.85em;}
-
-  // Adjust Font Awesome icons to be always square.
-  &[class^="fa-"]:before,
-  &[class*=" fa-"]:before {
-    width: 1.015em;
-    display: inline-block;
-    padding-top: 1px;
-  }
+  &--spin:before {animation: spin 2s infinite linear;}
 }
-</style>
+
+@keyframes spin {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(359deg);}
+}</style>
