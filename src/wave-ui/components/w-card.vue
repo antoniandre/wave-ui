@@ -5,7 +5,7 @@
       slot(name="title")
     .w-card__content(:class="contentClass || false")
       slot
-    .w-card__actions
+    .w-card__actions(v-if="$slots.actions")
       slot(name="actions")
 </template>
 
@@ -52,14 +52,25 @@ export default {
   &:not(&--no-border):not(&--shadow) {border: $border;}
 
   &__title {
+    overflow: hidden; // For toolbars to fit with negative margins.
     padding: (2 * $base-increment) (4 * $base-increment);
     font-size: 1.3em;
     border-bottom: $border;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
   }
+
   &__content {
     display: flex;
     flex: 1 1 auto;
     padding: 4 * $base-increment;
+  }
+
+  &__actions {
+    overflow: hidden; // For toolbars to fit with negative margins.
+    padding: (2 * $base-increment) (4 * $base-increment);
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
   }
 }
 </style>
