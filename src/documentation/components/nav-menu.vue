@@ -1,6 +1,7 @@
 <template lang="pug">
 .nav-menu
   w-button.close(
+    v-if="$waveUI.breakpoint.xs"
     @click="$emit('update:drawerOpen', false)"
     sm
     outline
@@ -68,12 +69,6 @@ export default {
   border-right: 1px solid #ddd;
   margin-right: 4rem;
 
-  .close {
-    position: absolute;
-    top: 2 * $base-increment;
-    right: 2 * $base-increment;
-  }
-
   .w-list__item a, .w-list__item span {
     padding: 6px;
     padding-left: 4 * $base-increment;
@@ -91,5 +86,11 @@ export default {
   margin-left: 12px;
   margin-right: 0;
   border-right: none;
+
+  .close {
+    position: absolute;
+    top: 2 * $base-increment;
+    right: 2 * $base-increment;
+  }
 }
 </style>
