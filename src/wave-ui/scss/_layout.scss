@@ -6,8 +6,12 @@
   &.column {flex-direction: column;}
   &.wrap {flex-wrap: wrap;}
 }
-.flex, .grow, .spacer {flex: 1 1 0;}
+.flex {flex: 1 1 auto;} // Flex grow + flex shrink.
+.spacer {flex-grow: 1;}
+.grow {flex-shrink: 0;flex-grow: 1;}
+.no-grow {flex-grow: 0;}
 .shrink {flex-shrink: 1;flex-grow: 0;}
+.no-shrink {flex-shrink: 0;}
 .fill-height {height: 100%;}
 .align-start {align-items: flex-start;}
 .align-center {align-items: center;}
