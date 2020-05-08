@@ -1,5 +1,5 @@
 <template lang="pug">
-w-toolbar(fixed)
+w-toolbar.main-toolbar(fixed)
   router-link.layout.shrink.fill-height.align-center.home-link(to="/")
     wave.wave-logo
     | Wave UI
@@ -26,7 +26,9 @@ export default {
 </script>
 
 <style lang="scss">
-.w-toolbar {
+div.main-toolbar {
+  background-color: rgba(255, 255, 255, 0.9);
+
   .home-link {
     @include default-transition;
     &:focus {transform: scale(1.1);}
