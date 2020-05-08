@@ -41,7 +41,7 @@ export default {
       { label: 'Button', route: 'w-button' },
       { label: 'Calendar', route: 'w-calendar', disabled: true },
       { label: 'Card', route: 'w-card' },
-      { label: 'Dialog', route: 'w-dialog', disabled: true },
+      { label: 'Dialog', route: 'w-dialog' },
       { label: 'Drawer', route: 'w-drawer' },
       { label: 'Icon', route: 'w-icon' },
       { label: 'List', route: 'w-list' },

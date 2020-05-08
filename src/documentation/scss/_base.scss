@@ -4,7 +4,10 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #444;
+  height: 100%;
 }
+
+body {height: 100%;}
 
 a {color: $primary;}
 
