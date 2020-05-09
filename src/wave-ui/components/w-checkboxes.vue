@@ -6,7 +6,7 @@
       type="checkbox"
       :name="name || `checkboxes-${_uid}`"
       :label="item[itemLabel]"
-      :checked="value === item[itemValue]"
+      :value="value === item[itemValue]"
       @change.native="$emit('input', item[itemValue])"
       :class="{ 'ml-3': inline && i }")
 </template>
