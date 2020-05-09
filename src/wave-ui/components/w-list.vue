@@ -1,11 +1,20 @@
 <template lang="pug">
   ul.w-list(:class="classes")
     li.w-list__item(
-      v-for="(item, i) in items"
+      v-for="(item, i) in listItems"
       @mousedown="isSelectable && !item.disabled && selectItem(item)"
       :class="liClasses(item)")
-      w-checkbox.mr-2(v-if="checklist")
-      slot(name="item" :item="item" :index="i" :selected="selectedItems.includes(item[itemValue])")
+      w-checkbox.mr-2(
+        v-if="checklist"
+        @click.native.prevent
+        v-model="item.selected"
+        :label="item[itemLabel]")
+      slot(
+        v-else
+        name="item"
+        :item="item"
+        :index="i"
+        :selected="item.selected")
         template(v-if="nav && !item.disabled && item.route")
           component(
             :is="$router ? 'router-link' : 'a'"
@@ -37,6 +46,24 @@ export default {
   }),
 
   computed: {
+    listItems () {
+      return this.items.map(item => ({
+        ...item,
+        selected: this.selection.includes(item[this.itemValue])
+      }))
+    },
+    selection: {
+      get () {
+        if (!this.isSelectable) return []
+        return this.value || []
+      },
+      set (value) {
+        this.$emit('input', value)
+      }
+    },
+    isMultipleSelect () {
+      return this.multiple || this.checklist
+    },
     isSelectable () {
       return this.value !== undefined || this.checklist || this.nav
     },
@@ -53,32 +80,28 @@ export default {
 
   methods: {
     selectItem (item) {
-      item = item[this.itemValue]
-      if (this.multiple) {
-        const foundAt = this.selectedItems.indexOf(item)
-
-        if (foundAt > -1) this.selectedItems.splice(foundAt, 1)
-        else this.selectedItems.push(item)
+      item.selected = !item.selected
+      if (!this.isMultipleSelect) {
+        this.selection = item.selected ? item[this.itemValue] : null
       }
-      else if (this.selectedItems[0] === item) this.selectedItems[0] = null
-      else this.selectedItems[0] = item
-      this.emit()
+      else this.selection = this.listItems.filter(item => item.selected).map(item => item[this.itemValue])
     },
     liClasses (item) {
       return {
         'w-list__item--disabled': item.disabled,
-        'w-list__item--active': this.isSelectable && this.selectedItems.includes(item[this.itemValue])
+        'w-list__item--active': this.isSelectable && item.selected
       }
-    },
-    emit () {
-      this.$emit('input', (this.multiple ? this.selectedItems : this.selectedItems[0]) || null)
     }
   },
 
   watch: {
-    multiple () {
-      this.selectedItems = []
-      this.emit()
+    multiple (value) {
+      // If more than 1 selection and going back to single select,
+      // just keep the first selected item.
+      if (!value) {
+        const firstSelected = this.listItems.find(item => item.selected)
+        this.selection = firstSelected ? firstSelected[this.itemValue] : null
+      }
     }
   }
 }
