@@ -4,7 +4,8 @@
       type="checkbox"
       :name="name"
       :class="{'mr-2': label }"
-      :checked="isChecked")
+      :checked="isChecked"
+      @change="isChecked = !isChecked")
     template(v-if="label") {{ label }}
 </template>
 
@@ -15,17 +16,16 @@ export default {
     value: { type: Boolean, default: false }, // v-model to check or uncheck.
     name: { type: String, default: '' },
     label: { type: String, default: '' },
-    checked: { type: Boolean, default: false },
     color: { type: String, default: null }
   },
 
   computed: {
     isChecked: {
       get () {
-        return this.checked
+        return this.value
       },
       set (value) {
-        this.$emit('change', value)
+        this.$emit('input', value)
       }
     },
     classes () {

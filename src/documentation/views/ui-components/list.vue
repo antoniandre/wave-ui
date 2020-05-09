@@ -15,7 +15,8 @@ div
     :multiple="multiple")
   .subtitle.mt-2
     | Selected item:
-    code.ml-2 {{ selectedItem || (multiple ? '[]' : 'null') }}
+    code.ml-2(v-if="!multiple || Array.isArray(selectedItem)") {{ selectedItem || 'null' }}
+    code.ml-2(v-else-if="multiple") {{ (selectedItem ? [selectedItem] : '[]') }}
 
   h2 Custom rendering &amp; hoverable
   w-list.mt-6(:items="listItems" color="primary" hover)
@@ -27,7 +28,7 @@ div
 
   h2 Checklists
   //- p The checklist expects a #[code checked] attribute in the items that are checked.
-  w-list.mt-6(:items="listItems" checklist color="primary")
+  w-list.mt-6(v-model="checklist" :items="listItems" checklist color="primary")
 
   h2 Navigation lists
   p.
@@ -46,14 +47,15 @@ export default {
     ],
     multiple: false,
     listItems: [
-      { label: 'Star', id: 'star', icon: 'fa fa-star', route: '#route-to-star' },
-      { label: 'Check', id: 'check', icon: 'fa fa-check', route: '#route-to-check' },
-      { label: 'Cross', id: 'cross', icon: 'fa fa-close', route: '#route-to-cross' },
-      { label: 'Info', id: 'info', icon: 'fa fa-info', route: '#route-to-info' },
-      { label: 'Warning', id: 'warning', icon: 'fa fa-warning', route: '#route-to-warning' },
-      { label: 'Disabled', id: 'disabled', icon: 'fa fa-minus-circle', route: '#disabled', disabled: true }
+      { label: 'Star', id: 'star', icon: 'mdi mdi-star', route: '#route-to-star' },
+      { label: 'Check', id: 'check', icon: 'mdi mdi-check', route: '#route-to-check' },
+      { label: 'Cross', id: 'cross', icon: 'mdi mdi-close', route: '#route-to-cross' },
+      { label: 'Info', id: 'info', icon: 'mdi mdi-information', route: '#route-to-info' },
+      { label: 'Warning', id: 'warning', icon: 'mdi mdi-alert', route: '#route-to-warning' },
+      { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', route: '#disabled', disabled: true }
     ],
-    selectedItem: 'check'
+    selectedItem: 'check',
+    checklist: []
   }),
 
   methods: {
