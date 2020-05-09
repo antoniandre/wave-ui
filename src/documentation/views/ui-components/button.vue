@@ -86,7 +86,7 @@ div
     w-icon.ml-1 wi-chevron-right
   w-button.ma-1(bg-color="primary" dark to="https://github.com/antoniandre/wave-ui")
     | Github
-    w-icon.ml-1 wi-chevron-right
+    w-icon.ml-2(sm) mdi mdi-open-in-new
 </template>
 
 <script>
