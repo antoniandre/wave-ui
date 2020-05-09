@@ -42,6 +42,9 @@ export default {
   },
 
   data: () => ({
+    // The selected items are given in the value prop.
+    // But if no value prop is set for checklist for instance, it has to still
+    // keep track of the selected items.
     selectedItems: []
   }),
 
@@ -55,10 +58,11 @@ export default {
     selection: {
       get () {
         if (!this.isSelectable) return []
-        return this.value || []
+        return this.selectedItems || []
       },
-      set (value) {
-        this.$emit('input', value)
+      set (items) {
+        this.selectedItems = items
+        this.$emit('input', items)
       }
     },
     isMultipleSelect () {
@@ -94,7 +98,14 @@ export default {
     }
   },
 
+  created () {
+    this.selectedItems = this.value
+  },
+
   watch: {
+    value (items) {
+      this.selectedItems = items
+    },
     multiple (value) {
       // If more than 1 selection and going back to single select,
       // just keep the first selected item.

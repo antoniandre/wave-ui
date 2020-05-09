@@ -28,7 +28,11 @@ div
 
   h2 Checklists
   //- p The checklist expects a #[code checked] attribute in the items that are checked.
-  w-list.mt-6(v-model="checklist" :items="listItems" checklist color="primary")
+  w-list.mt-6(
+    :items="listItems"
+    item-value="id"
+    checklist
+    color="primary")
 
   h2 Navigation lists
   p.
