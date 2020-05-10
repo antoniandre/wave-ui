@@ -3,9 +3,8 @@
     v-if="value"
     :value="value"
     @input="onOutsideClick"
-    :class="classes"
-    :style="styles")
-    w-card.w-dialog__content(no-border :class="{ 'grow fill-height': fullscreen }")
+    :class="classes")
+    w-card.w-dialog__content(no-border :style="contentStyles")
       template(v-slot:title)
         slot(name="title")
       slot
@@ -18,6 +17,7 @@ export default {
   name: 'w-dialog',
   props: {
     value: { type: Boolean, default: false },
+    maxWidth: { type: Number, default: 0 },
     fullscreen: { type: Boolean, default: false },
     persistent: { type: Boolean, default: false },
     persistentNoAnimation: { type: Boolean, default: false },
@@ -37,8 +37,10 @@ export default {
         'w-dialog--persistent-animate': this.persistentAnimate
       }
     },
-    styles () {
-      return false
+    contentStyles () {
+      return {
+        maxWidth: this.maxWidth ? `${this.maxWidth}px` : false
+      }
     }
   },
 
@@ -56,20 +58,21 @@ export default {
 
 <style lang="scss">
 .w-dialog {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 500;
-
-  &--persistent &__content {
-    transition: 0.1s transform cubic-bezier(0.6, -0.28, 0.74, 0.05);
-  }
-  &--persistent-animate &__content {transform: scale(1.075);}
-
   &__content {
     background-color: #fff;
+    width: 95%;
+    max-width: 95%;
+
+    .w-dialog--fullscreen & {
+      flex: 1 1 auto;
+      height: 100%;
+      max-width: none;
+    }
+
+    .w-dialog--persistent & {
+      transition: 0.1s transform cubic-bezier(0.6, -0.28, 0.74, 0.05);
+    }
+    .w-dialog--persistent-animate & {transform: scale(1.06);}
   }
 }
 </style>
