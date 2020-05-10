@@ -13,12 +13,13 @@ div
   h2 Toolbars inside w-card
   .layout.mt-4
     w-card.mr-2
-      w-toolbar
-        .title.my-0 Top Bar
-        .spacer
-        span.ml-2 Item 1
-        span.ml-2 Item 2
-        span.ml-2 Item 3
+      template(v-slot:title)
+        w-toolbar
+          .title.my-0 Top Bar
+          .spacer
+          span.ml-2 Item 1
+          span.ml-2 Item 2
+          span.ml-2 Item 3
     w-card.ml-2
       template(v-slot:actions)
         w-toolbar(bottom)
@@ -30,12 +31,13 @@ div
 
   .layout.mt-4
     w-card.mr-2
-      w-toolbar(shadow)
-        .title.my-0 Top Bar
-        .spacer
-        span.ml-2 Item 1
-        span.ml-2 Item 2
-        span.ml-2 Item 3
+      template(v-slot:title)
+        w-toolbar(shadow)
+          .title.my-0 Top Bar
+          .spacer
+          span.ml-2 Item 1
+          span.ml-2 Item 2
+          span.ml-2 Item 3
     w-card.ml-2
       template(v-slot:actions)
         w-toolbar(bottom shadow)
