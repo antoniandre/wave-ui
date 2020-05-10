@@ -9,6 +9,7 @@ div
     parameters to the #[span.code w-overlay].
 
   h2 Overlay with custom opacity and control on #[span.code closeOnClick]
+  p When closing on overlay click is allowed, the escape key will also close the overlay.
   .layout.wrap.align-center.mb-2
     w-button.mr-2(bg-color="primary" dark @click="showOverlay = true") Show overlay
     w-button.mr-2(

@@ -3,7 +3,10 @@
     .w-overlay(
       v-if="value"
       :style="(value && styles) || false"
-      @click="closeOnClick && $event.target.classList.contains('w-overlay') && $emit('input', false)")
+      @keydown.escape.stop="onClose"
+      @click="onClose"
+      v-focus
+      tabindex="0")
       slot
 </template>
 
@@ -27,6 +30,12 @@ export default {
         backgroundColor: this.backgroundColor,
         zIndex: this.zIndex || this.zIndex === 0 || false
       }
+    }
+  },
+
+  methods: {
+    onClose (e) {
+      this.closeOnClick && e.target.classList.contains('w-overlay') && this.$emit('input', false)
     }
   }
 }
