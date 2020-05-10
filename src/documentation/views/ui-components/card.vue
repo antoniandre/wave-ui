@@ -28,7 +28,7 @@ div
     slot and will remove the default padding and border on this slot if there is.
   w-card.mt-4(tile)
     template(v-slot:title)
-      w-toolbar.px-n2(no-border)
+      w-toolbar
         .subtitle.my-0 Card title
         .spacer
         span.ml-2 Item 1
@@ -51,8 +51,19 @@ div
       Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
       dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
       aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
-    //- template(v-slot:actions)
-    //- template(v-slot:title)
+
+  h2 Card with actions
+  p The actions slot is optional but facilitates the addition of action buttons in a flex layout.
+  w-card.mt-4
+    template(v-slot:title) Terms and conditions
+    p.
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+      quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+      odit dolor labore eveniet at vel sequi nostrum.
+    template(v-slot:actions)
+      .spacer
+      w-button.mr-2(bg-color="error") I disagree
+      w-button(bg-color="success") I agree
 </template>
 
 <script>

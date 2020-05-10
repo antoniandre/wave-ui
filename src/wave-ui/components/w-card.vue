@@ -81,7 +81,7 @@ export default {
 
   &__actions {
     display: flex;
-    padding: (2 * $base-increment) (4 * $base-increment);
+    padding: (2 * $base-increment) (4 * $base-increment) (4 * $base-increment);
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
 
