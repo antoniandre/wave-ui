@@ -23,7 +23,10 @@ div
       aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
 
   h2 Tiled card with a top toolbar
-  w-card.mt-4(tile title-class="pa-0")
+  p.
+    The w-card component will detect if there is a toolbar in the title slot or in the actions
+    slot and will remove the default padding and border on this slot if there is.
+  w-card.mt-4(tile)
     template(v-slot:title)
       w-toolbar.px-n2(no-border)
         .subtitle.my-0 Card title

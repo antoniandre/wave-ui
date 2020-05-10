@@ -62,12 +62,14 @@ export default {
 
   .w-app > & {z-index: 200;}
 
-  // Fit in w-card.
-  .w-card__title > &, .w-card__actions > & {
-    margin-left: - 4 * $base-increment;
-    margin-right: - 4 * $base-increment;
-    padding-left: 8 * $base-increment;
-    padding-right: 8 * $base-increment;
+  // In w-card.
+  .w-card__title & {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+  .w-card__actions & {
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
   }
 }
 </style>

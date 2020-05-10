@@ -1,11 +1,15 @@
 <template lang="pug">
   .w-card(:class="classes" :style="styles")
-    .w-card__title(v-if="cardTitle" v-html="cardTitle" :class="titleClass || false")
-    .w-card__title(v-else-if="$slots.title" :class="titleClass || false")
+    .w-card__title(v-if="cardTitle" v-html="cardTitle")
+    .w-card__title(
+      v-else-if="$slots.title"
+      :class="{ 'w-card__title--has-toolbar': titleHasToolbar }")
       slot(name="title")
     .w-card__content(:class="contentClass || false")
       slot
-    .w-card__actions(v-if="$slots.actions")
+    .w-card__actions(
+      v-if="$slots.actions"
+      :class="{ 'w-card__actions--has-toolbar': actionsHasToolbar }")
       slot(name="actions")
 </template>
 
@@ -19,11 +23,18 @@ export default {
     shadow: { type: Boolean, default: false },
     noBorder: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
-    titleClass: { type: String, default: '' },
     contentClass: { type: String, default: '' },
   },
 
   computed: {
+    titleHasToolbar () {
+      const { title } = this.$slots
+      return title && title.map(vnode => vnode.tag).join('').includes('w-toolbar')
+    },
+    actionsHasToolbar () {
+      const { actions } = this.$slots
+      return actions && actions.map(vnode => vnode.tag).join('').includes('w-toolbar')
+    },
     classes () {
       return {
         [this.color]: this.color,
@@ -52,12 +63,14 @@ export default {
   &:not(&--no-border):not(&--shadow) {border: $border;}
 
   &__title {
-    overflow: hidden; // For toolbars to fit with negative margins.
+    display: flex;
     padding: (2 * $base-increment) (4 * $base-increment);
     font-size: 1.3em;
     border-bottom: $border;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
+
+    &--has-toolbar {padding: 0;border-bottom: none;}
   }
 
   &__content {
@@ -67,10 +80,12 @@ export default {
   }
 
   &__actions {
-    overflow: hidden; // For toolbars to fit with negative margins.
+    display: flex;
     padding: (2 * $base-increment) (4 * $base-increment);
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+
+    &--has-toolbar {padding: 0;}
   }
 }
 </style>

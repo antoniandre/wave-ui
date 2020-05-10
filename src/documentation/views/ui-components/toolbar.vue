@@ -11,6 +11,10 @@ div
     span.ml-2 Item 3
 
   h2 Toolbars inside w-card
+  p.
+    The w-card component will detect if there is a toolbar in the title slot or in the actions
+    slot and will remove the default padding and border on this slot if there is.
+
   .layout.mt-4
     w-card.mr-2
       template(v-slot:title)
@@ -29,6 +33,7 @@ div
           span.ml-2 Item 2
           span.ml-2 Item 3
 
+  h3 With shadow
   .layout.mt-4
     w-card.mr-2
       template(v-slot:title)
