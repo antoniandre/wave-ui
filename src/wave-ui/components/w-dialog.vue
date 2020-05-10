@@ -1,5 +1,10 @@
 <template lang="pug">
-  w-overlay.w-dialog(v-if="value" v-model="value" :class="classes" :style="styles")
+  w-overlay.w-dialog(
+    v-if="value"
+    :value="value"
+    @input="$emit('input', $event)"
+    :class="classes"
+    :style="styles")
     w-card.w-dialog__content(no-border :class="{ 'grow fill-height': fullscreen }")
       template(v-slot:title)
         slot(name="title")
