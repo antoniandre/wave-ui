@@ -87,15 +87,15 @@
   line-height: round(1.6 * $base-font-size / 2) * 2;
 }
 .size--md {
-  font-size: round(1.25 * $base-font-size);
-  line-height: round(2.0 * $base-font-size / 2) * 2;
+  font-size: round(1.15 * $base-font-size);
+  line-height: round(1.9 * $base-font-size / 2) * 2;
 }
 .size--lg {
-  font-size: round(1.5 * $base-font-size);
+  font-size: round(1.4 * $base-font-size);
   line-height: round(2.35 * $base-font-size / 2) * 2;
 }
 .size--xl {
-  font-size: round(1.8 * $base-font-size);
+  font-size: round(1.7 * $base-font-size);
   line-height: round(2.75 * $base-font-size / 2) * 2;
 }
 // ----------------------------------------------
