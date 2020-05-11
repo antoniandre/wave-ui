@@ -91,6 +91,7 @@ $spinner-size: 40;
   transition: 0.15s;
   box-shadow: 0 0 0 transparent;
   vertical-align: middle;
+  align-self: center;
   user-select: none;
   cursor: pointer;
 
