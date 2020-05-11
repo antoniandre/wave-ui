@@ -1,12 +1,13 @@
 <template lang="pug">
-  component.w-radio(:is="label ? 'label' : 'span'" :class="classes")
+  component.w-radio(:is="hasLabel ? 'label' : 'span'" :class="classes")
     input(
       type="radio"
       :name="name"
-      :class="{'mr-2': label }"
+      :class="{ 'mr-2': hasLabel }"
       :checked="isChecked"
       @change="isChecked = !isChecked")
-    template(v-if="label") {{ label }}
+    template(v-if="hasLabel")
+      slot {{ label }}
 </template>
 
 <script>
@@ -20,6 +21,9 @@ export default {
   },
 
   computed: {
+    hasLabel () {
+      return (this.$slots.default && this.$slots.default.length) || this.label
+    },
     isChecked: {
       get () {
         return this.value
