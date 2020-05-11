@@ -7,10 +7,8 @@
       w-checkbox.mr-2(
         v-if="checklist"
         @click.native.prevent
-        v-model="item.selected"
-        :label="item[itemLabel]")
+        v-model="item.selected")
       slot(
-        v-else
         name="item"
         :item="item"
         :index="i"
@@ -50,11 +48,15 @@ export default {
 
   computed: {
     listItems () {
-      return this.items.map(item => ({
-        ...item,
-        selected: this.selection.includes(item[this.itemValue])
-      }))
+      return this.items.map((item, i) => {
+        // If no value is set then add one to prevent error.
+        if (item[this.itemValue] === undefined) item[this.itemValue] = i
+
+        item.selected = this.selection.includes(item[this.itemValue])
+        return item
+      })
     },
+    // Selection is always an array, but emits a single value if not multiple.
     selection: {
       get () {
         if (!this.isSelectable) return []
@@ -62,7 +64,7 @@ export default {
       },
       set (items) {
         this.selectedItems = items
-        this.$emit('input', items)
+        this.$emit('input', this.isMultipleSelect ? items : (items[0] || null))
       }
     },
     isMultipleSelect () {
@@ -85,9 +87,7 @@ export default {
   methods: {
     selectItem (item) {
       item.selected = !item.selected
-      if (!this.isMultipleSelect) {
-        this.selection = item.selected ? item[this.itemValue] : null
-      }
+      if (!this.isMultipleSelect) this.selection = item.selected ? [item[this.itemValue]] : []
       else this.selection = this.listItems.filter(item => item.selected).map(item => item[this.itemValue])
     },
     liClasses (item) {
@@ -95,23 +95,27 @@ export default {
         'w-list__item--disabled': item.disabled,
         'w-list__item--active': this.isSelectable && item.selected
       }
+    },
+    // Make sure the items selection is always an array.
+    checkSelection (items) {
+      return Array.isArray(items) ? items : (items ? [items] : [])
     }
   },
 
   created () {
-    this.selectedItems = this.value
+    this.selectedItems = this.checkSelection(this.value)
   },
 
   watch: {
     value (items) {
-      this.selectedItems = items
+      this.selectedItems = this.checkSelection(items)
     },
-    multiple (value) {
+    multiple (boolean) {
       // If more than 1 selection and going back to single select,
       // just keep the first selected item.
-      if (!value) {
+      if (!boolean) {
         const firstSelected = this.listItems.find(item => item.selected)
-        this.selection = firstSelected ? firstSelected[this.itemValue] : null
+        this.selection = firstSelected ? [firstSelected[this.itemValue]] : []
       }
     }
   }
@@ -125,6 +129,7 @@ export default {
 
   &__item {
     position: relative;
+    display: flex;
     font-size: round(1.1 * $base-font-size);
   }
 
@@ -152,7 +157,8 @@ export default {
   // Use less nesting for easier overrides.
   &--navigation &__item {padding: 0;}
   &--navigation a, &--navigation span {
-    display: block;
+    display: flex;
+    flex-grow: 1;
     padding: 2 * $base-increment;
   }
   &--navigation a {

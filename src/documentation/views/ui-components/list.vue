@@ -3,43 +3,51 @@ div
   h1.headline.mt-4 #[span.code w-list]
 
   h2 Default items list rendering
-  w-list.mt-6(:items="listItems" color="primary")
-
-  h2 Default items list rendering with selection
-  w-radios.mt-4(v-model="multiple" name="multiple" :items="radios" inline)
-  w-list.mt-6(
-    v-model="selectedItem"
-    :items="listItems"
-    item-value="id"
-    color="primary"
-    :multiple="multiple")
-  .subtitle.mt-2
-    | Selected item:
-    code.ml-2(v-if="!multiple || Array.isArray(selectedItem)") {{ selectedItem || 'null' }}
-    code.ml-2(v-else-if="multiple") {{ (selectedItem ? [selectedItem] : '[]') }}
+  w-list.mt-6(:items="listItems1" color="primary")
 
   h2 Custom rendering &amp; hoverable
-  w-list.mt-6(:items="listItems" color="primary" hover)
+  w-list.mt-6(:items="listItems2" color="pink" hover)
     template(v-slot:item="{ item }")
       .layout
         | {{ item.label }}
         .spacer
         w-icon {{ item.icon }}
 
-  h2 Checklists
-  //- p The checklist expects a #[code checked] attribute in the items that are checked.
+  h2 Default items list rendering with selection
+  w-radios.mt-4(v-model="multiple" name="multiple" :items="radios" inline)
   w-list.mt-6(
-    :items="listItems"
+    v-model="selectedItem1"
+    :items="listItems1"
+    color="deep-purple"
+    :multiple="multiple")
+  .subtitle.mt-2
+    | Selected item:
+    code.ml-2(v-if="!multiple || Array.isArray(selectedItem1)") {{ selectedItem1 || 'null' }}
+    code.ml-2(v-else-if="multiple") {{ (selectedItem1 ? [selectedItem1] : '[]') }}
+
+  h2 Checklists
+  w-list.mt-6(
+    :items="listItems1"
+    checklist
+    color="primary")
+
+  h3 Checklist and custom rendering
+  w-list.mt-6(
+    :items="listItems2"
     item-value="id"
     checklist
     color="primary")
+    template(v-slot:item="{ item }")
+      span {{ item.label }}
+      .spacer
+      w-icon {{ item.icon }}
 
   h2 Navigation lists
   p.
     The navigation list expects a #[code route] attribute in the items that are links.#[br]
     It will create a router link or a normal link (if not using vue-router) on those items.
   p It is possible to disable a link with a #[code disabled: true] attribute in the item.
-  w-list.mt-6(:items="listItems" nav color="primary")
+  w-list.mt-6(:items="listItems2" nav color="primary")
 </template>
 
 <script>
@@ -50,7 +58,23 @@ export default {
       { label: 'Multiple selections', value: true }
     ],
     multiple: false,
-    listItems: [
+    listItems1: [
+      { label: 'Item 1', value: 1 },
+      { label: 'Item 2', value: 2 },
+      { label: 'Item 3', value: 3 },
+      { label: 'Item 4', value: 4 },
+      { label: 'Item 5', value: 5 },
+      { label: 'Item 6', value: 6, disabled: true }
+    ],
+    listItems3: [
+      { label: 'Item 1' },
+      { label: 'Item 2' },
+      { label: 'Item 3' },
+      { label: 'Item 4' },
+      { label: 'Item 5' },
+      { label: 'Item 6', disabled: true }
+    ],
+    listItems2: [
       { label: 'Star', id: 'star', icon: 'mdi mdi-star', route: '#route-to-star' },
       { label: 'Check', id: 'check', icon: 'mdi mdi-check', route: '#route-to-check' },
       { label: 'Cross', id: 'cross', icon: 'mdi mdi-close', route: '#route-to-cross' },
@@ -58,15 +82,9 @@ export default {
       { label: 'Warning', id: 'warning', icon: 'mdi mdi-alert', route: '#route-to-warning' },
       { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', route: '#disabled', disabled: true }
     ],
-    selectedItem: 'check',
-    checklist: []
-  }),
-
-  methods: {
-    cl(a) {
-      console.log(a)
-    }
-  }
+    selectedItem1: 2,
+    selectedItem2: 'check'
+  })
 }
 </script>
 
