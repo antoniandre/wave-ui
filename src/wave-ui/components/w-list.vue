@@ -130,6 +130,7 @@ export default {
   &__item {
     position: relative;
     display: flex;
+    align-items: center;
     font-size: round(1.1 * $base-font-size);
   }
 
