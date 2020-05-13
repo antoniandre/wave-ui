@@ -84,11 +84,11 @@ $spinner-size: 40;
   display: inline-flex;
   outline: none;
   border-radius: $border-radius;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
   background-color: rgba(255, 255, 255, 0.85);
   padding-left: 2 * $base-increment;
   padding-right: 2 * $base-increment;
-  transition: 0.15s;
+  // transition: 0.15s;
   box-shadow: 0 0 0 transparent;
   vertical-align: middle;
   align-self: center;
@@ -125,7 +125,7 @@ $spinner-size: 40;
   &--round.size--xs {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
   &--round.size--xl {padding-left: round(4.5 * $base-increment);padding-right: round(4.5 * $base-increment);}
 
-  // Overlay to mark the focus and active state.
+  // Overlay to mark the focus, hover and active state.
   &:before {
     content: '';
     position: absolute;
@@ -134,36 +134,22 @@ $spinner-size: 40;
     right: 0;
     bottom: 0;
     opacity: 0;
-    background-color: transparent;
+    background-color: currentColor;
     border-radius: inherit;
-    transition: 0.15s;
+    transition: opacity 0.3s ease-out, background-color 0s 0.3s ease-out;
   }
 
-  // Hover state.
-  &:hover:before {background-color: currentColor;opacity: 0.06;}
-  &--dark:hover:before {background-color: rgba(255, 255, 255, 0.12);opacity: 1;}
-  &--outline:hover:before,
-  &--text:hover:before {background-color: currentColor;opacity: 0.12;}
+  &--dark:before {background-color: #fff;}
 
-  // Focus state.
-  &:focus:before {background-color: rgba(0, 0, 0, 0.12);opacity: 1;}
-  &--dark:focus:before {background-color: rgba(255, 255, 255, 0.12);}
-  &--outline:focus:before,
-  &--text:focus:before {background-color: currentColor;opacity: 0.12;}
+  // Button states.
+  // ------------------------------------------------------
+  // Hover & focus states - inside button.
+  &:hover:before, &:focus:before {opacity: 0.08;}
+  &--dark:hover:before, &--dark:focus:before,
+  &--outline:hover:before, &--outline:focus:before,
+  &--text:hover:before, &--text:focus:before {opacity: 0.12;}
 
-  // Active state.
-  &:active:before {background-color: rgba(0, 0, 0, 0.2);opacity: 1;}
-  &--dark:active:before {background-color: rgba(255, 255, 255, 0.2);}
-  &--outline:active:before,
-  &--text:active:before {background-color: currentColor;opacity: 0.2;}
-
-  // Disable visual feedback on loading and disabled buttons.
-  &--loading:hover:before,
-  &--loading:focus:before,
-  &--loading:active:before,
-  &[disabled]:before {background-color: transparent;}
-
-  // Surrounding border to mark the focus state.
+  // Focus state - outside button.
   &:after {
     content: '';
     position: absolute;
@@ -171,13 +157,30 @@ $spinner-size: 40;
     left: -4px;
     right: -4px;
     bottom: -4px;
-    background-color: transparent;
+    background-color: inherit;
+    opacity: 0;
     border-radius: inherit;
-    opacity: 0.25;
     z-index: -1;
-    @include default-transition(0.3s);
+    transition: opacity .2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-in;
+    transform: scale(0.85, 0.7);
   }
-  &:focus:after {background-color: inherit;}
+  &:focus:after {
+    opacity: 0.4;
+    transform: scale(1);
+    transition: opacity .2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-out;
+  }
+  &--dark:focus:after {opacity: 0.2;}
+
+  // Active state.
+  &:active:before {opacity: 0.2;}
+  &--dark:active:before {opacity: 0.3;}
+
+  // Disable visual feedback on loading and disabled buttons.
+  &--loading:hover:before,
+  &--loading:focus:before,
+  &--loading:active:before,
+  &[disabled]:before {opacity: 0;}
+  // ------------------------------------------------------
 
   // Button content must stay on top of the overlay.
   & > span {
