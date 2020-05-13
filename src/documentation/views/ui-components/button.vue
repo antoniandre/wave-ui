@@ -10,6 +10,9 @@ div
     text color of your choice.
 
   h2 Default
+  w-button.ma-1 normal
+
+  h2 Secondary color
   w-button.ma-1(bg-color="secondary" xs) extra small
   w-button.ma-1(bg-color="secondary" sm) small
   w-button.ma-1(bg-color="secondary" md) medium

@@ -84,18 +84,17 @@ $spinner-size: 40;
   display: inline-flex;
   outline: none;
   border-radius: $border-radius;
+  background-color: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.04);
-  background-color: rgba(255, 255, 255, 0.85);
   padding-left: 2 * $base-increment;
   padding-right: 2 * $base-increment;
-  // transition: 0.15s;
   box-shadow: 0 0 0 transparent;
   vertical-align: middle;
   align-self: center;
   user-select: none;
   cursor: pointer;
 
-  &--dark {color: rgba(255, 255, 255, 0.95);}
+  &--dark {color: rgba(255, 255, 255, 0.95);background-color: rgba(255, 255, 255, 0.15);}
   &--outline {background-color: transparent;border-color: currentColor;}
   &--text {background-color: transparent;border-color: transparent;}
   &--round {
