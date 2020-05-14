@@ -59,6 +59,9 @@ export default {
 <style lang="scss">
 .w-dialog {
   &__content {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
     background-color: #fff;
     width: 95%;
     max-width: 95%;
