@@ -16,19 +16,19 @@ export default {
   props: {
     value: { type: Boolean, default: false },
     opacity: { type: [Number, String, Boolean], default: false },
-    color: { type: [String, Boolean], default: false },
+    bgColor: { type: [String, Boolean], default: false },
     zIndex: { type: [Number, String, Boolean], default: false },
     closeOnClick: { type: Boolean, default: true }
   },
 
   computed: {
     backgroundColor () {
-      return this.color || (this.opacity && `rgba(0, 0, 0, ${this.opacity})`) || false
+      return this.bgColor || (this.opacity && `rgba(0, 0, 0, ${this.opacity})`) || false
     },
     styles () {
       return {
         backgroundColor: this.backgroundColor,
-        zIndex: this.zIndex || this.zIndex === 0 || false
+        zIndex: this.zIndex || this.zIndex === 0 ? this.zIndex : false
       }
     }
   },

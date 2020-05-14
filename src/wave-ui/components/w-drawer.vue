@@ -3,7 +3,7 @@
     w-overlay(
       v-if="!noOverlay"
       v-model="showDrawer"
-      :color="overlayColor"
+      :bg-color="overlayColor"
       :opacity="overlayOpacity")
     transition(
       :name="transitionName"
@@ -80,7 +80,7 @@ export default {
       }
     },
     transitionName () {
-      return `slide-to-${oppositeSides[this.position]}`
+      return `slide-${oppositeSides[this.position]}`
     }
   },
 

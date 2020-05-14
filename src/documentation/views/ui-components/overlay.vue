@@ -14,6 +14,7 @@ div
     w-button.mr-2(bg-color="primary" dark @click="showOverlay = true") Show overlay
     w-button.mr-2(
       :bg-color="closeOnClick ? 'green' : 'red'"
+      :class="closeOnClick ? 'px-4' : 'px-1'"
       dark
       @click="closeOnClick = !closeOnClick") {{ closeOnClick ? 'Closing' : 'Not closing' }} on overlay click
     | Overlay opacity
@@ -26,9 +27,13 @@ div
     v-model="showOverlay"
     :close-on-click="closeOnClick"
     :opacity="opacity")
-    w-button(bg-color="primary" dark @click="showOverlay = false") Hide overlay
-  w-overlay.layout.align-center.justify-center(v-model="showBlueOverlay" color="rgba(35, 71, 129, 0.4)")
-    w-button(bg-color="primary" dark @click="showBlueOverlay = false") Hide overlay
+    w-button(bg-color="primary" lg dark @click="showOverlay = false")
+      w-icon.mr-2 wi-cross
+      | Hide overlay
+  w-overlay.layout.align-center.justify-center(v-model="showBlueOverlay" bg-color="rgba(35, 71, 129, 0.4)")
+    w-button(bg-color="primary" lg dark @click="showBlueOverlay = false")
+      w-icon.mr-2 wi-cross
+      | Hide overlay
 </template>
 
 <script>
