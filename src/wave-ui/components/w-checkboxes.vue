@@ -9,6 +9,7 @@
       :value="value === item[itemValue]"
       @change.native="$emit('input', item[itemValue])"
       :class="{ 'ml-3': inline && i }")
+      slot(v-if="item[itemLabel]" name="label" :item="item") {{ item[itemLabel] }}
 </template>
 
 <script>

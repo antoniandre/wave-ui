@@ -3,7 +3,7 @@
     input(
       type="checkbox"
       :name="name"
-      :class="{'mr-2': hasLabel }"
+      :class="{ 'mr-2': hasLabel }"
       :checked="isChecked"
       @change="isChecked = !isChecked")
     template(v-if="hasLabel")

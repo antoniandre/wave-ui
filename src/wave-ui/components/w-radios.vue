@@ -4,11 +4,12 @@
       v-for="(item, i) in items"
       :key="i"
       type="radio"
-      :name="name || `checkboxes-${_uid}`"
+      :name="name || `radios-${_uid}`"
       :label="item[itemLabel]"
       :value="value === item[itemValue]"
       @change.native="$emit('input', item[itemValue])"
       :class="{ 'ml-3': inline && i }")
+      slot(v-if="item[itemLabel]" name="label" :item="item") {{ item[itemLabel] }}
 </template>
 
 <script>
