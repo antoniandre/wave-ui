@@ -7,7 +7,7 @@
       :name="name || `checkboxes-${_uid}`"
       :label="item[itemLabel]"
       :value="value === item[itemValue]"
-      @change.native="$emit('input', item[itemValue])"
+      @input="$emit('input', item[itemValue]);$emit('change', item[itemValue])"
       :class="{ 'ml-3': inline && i }")
       slot(v-if="item[itemLabel]" name="label" :item="item") {{ item[itemLabel] }}
 </template>
