@@ -1,62 +1,115 @@
 // Fade.
 // --------------------------------------------------
-.fade-enter-active, .fade-leave-active {transition: opacity 0.3s;}
+.fade-enter-active, .fade-leave-active {transition: opacity $transition-duration;}
 .fade-enter, .fade-leave-to {opacity: 0;}
 // --------------------------------------------------
 
-// Translate x from left to right.
+// Slide-right: translate x from left to right.
 // --------------------------------------------------
-.slide-to-right-enter-active, .slide-to-right-leave-active {
-  transition: transform 0.25s;
+.slide-right-enter-active, .slide-right-leave-active {
+  transition: transform $transition-duration;
   transform: translateX(0%);
 }
-.slide-to-right-enter, .slide-to-right-leave-to {transform: translateX(-100%);}
+.slide-right-enter, .slide-right-leave-to {transform: translateX(-100%);}
 // --------------------------------------------------
 
-// Translate x from right to left.
+// Slide-left: translate x from right to left.
 // --------------------------------------------------
-.slide-to-left-enter-active, .slide-to-left-leave-active {
-  transition: transform 0.25s;
+.slide-left-enter-active, .slide-left-leave-active {
+  transition: transform $transition-duration;
   transform: translateX(0%);
 }
-.slide-to-left-enter, .slide-to-left-leave-to {transform: translateX(100%);}
+.slide-left-enter, .slide-left-leave-to {transform: translateX(100%);}
 // --------------------------------------------------
 
-// Translate y from top to bottom.
+// Slide-bottom: translate y from top to bottom.
 // --------------------------------------------------
-.slide-to-bottom-enter-active, .slide-to-bottom-leave-active {
-  transition: transform 0.25s;
+.slide-bottom-enter-active, .slide-bottom-leave-active {
+  transition: transform $transition-duration;
   transform: translateY(0%);
 }
-.slide-to-bottom-enter, .slide-to-bottom-leave-to {transform: translateY(-100%);}
+.slide-bottom-enter, .slide-bottom-leave-to {transform: translateY(-100%);}
 // --------------------------------------------------
 
-// Translate y from bottom to top.
+// Slide-top: translate y from bottom to top.
 // --------------------------------------------------
-.slide-to-top-enter-active, .slide-to-top-leave-active {
-  transition: transform 0.25s;
+.slide-top-enter-active, .slide-top-leave-active {
+  transition: transform $transition-duration;
   transform: translateY(0%);
 }
-.slide-to-top-enter, .slide-to-top-leave-to {transform: translateY(100%);}
+.slide-top-enter, .slide-top-leave-to {transform: translateY(100%);}
 // --------------------------------------------------
 
-// Slide-fade.
+// Slide-fade-left.
 // --------------------------------------------------
-.slide-fade-enter-active {transition: all .3s ease;}
-.slide-fade-leave-active {transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);}
-.slide-fade-enter, .slide-fade-leave-to {
-  transform: translateX(10px);
+.slide-fade-left-enter-active, .slide-fade-left-leave-active {
+  transition: all $transition-duration ease-in-out;
+}
+.slide-fade-left-enter, .slide-fade-left-leave-to {
+  transform: translateX(12px);
   opacity: 0;
+}
+
+// Slide-fade-right.
+// --------------------------------------------------
+.slide-fade-right-enter-active, .slide-fade-right-leave-active {
+  transition: all $transition-duration ease-in-out;
+}
+.slide-fade-right-enter, .slide-fade-right-leave-to {
+  transform: translateX(-12px);
+  opacity: 0;
+}
+// --------------------------------------------------
+
+// Slide-fade-top.
+// --------------------------------------------------
+.slide-fade-top-enter-active, .slide-fade-top-leave-active {
+  transition: all $transition-duration ease-in-out;
+}
+.slide-fade-top-enter, .slide-fade-top-leave-to {
+  transform: translateY(12px);
+  opacity: 0;
+}
+// --------------------------------------------------
+
+// Slide-fade-bottom.
+// --------------------------------------------------
+.slide-fade-bottom-enter-active, .slide-fade-bottom-leave-active {
+  transition: all $transition-duration ease-in-out;
+}
+.slide-fade-bottom-enter, .slide-fade-bottom-leave-to {
+  transform: translateY(-12px);
+  opacity: 0;
+}
+// --------------------------------------------------
+
+// Scale.
+// --------------------------------------------------
+.scale-enter-active {animation: w-scale $transition-duration;}
+.scale-leave-active {animation: w-scale $transition-duration reverse;}
+@keyframes w-scale {
+  0% {transform: scale(0);}
+  100% {transform: scale(1);}
+}
+// --------------------------------------------------
+
+// Scale-fade.
+// --------------------------------------------------
+.scale-fade-enter-active {animation: w-scale-fade $transition-duration;}
+.scale-fade-leave-active {animation: w-scale-fade $transition-duration reverse;}
+@keyframes w-scale-fade {
+  0% {transform: scale(0.7);opacity: 0;}
+  100% {transform: scale(1);opacity: 1;}
 }
 // --------------------------------------------------
 
 // Bounce.
 // --------------------------------------------------
-.bounce-enter-active {animation: bounce-in .5s;}
-.bounce-leave-active {animation: bounce-in .5s reverse;}
-@keyframes bounce-in {
-  0% {transform: scale(0);}
-  60% {transform: scale(1.15);}
+.bounce-enter-active {animation: w-bounce ($transition-duration + 0.1s);}
+.bounce-leave-active {animation: w-bounce ($transition-duration + 0.1s) reverse;}
+@keyframes w-bounce {
+  0% {transform: scale(0.5);opacity: 0;}
+  60% {transform: scale(1.15);opacity: 1;}
   100% {transform: scale(1);}
 }
 // --------------------------------------------------
