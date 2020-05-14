@@ -26,8 +26,8 @@ div
       w-button(@click="showDialog = false") Close
 
   h2 Persistent prompt dialog
-  w-button.mr-3(@click="showDialog2 = !showDialog2") Open dialog
 
+  w-button.px-4(@click="showDialog2 = !showDialog2" bg-color="primary" dark) Open dialog
   w-dialog(v-model="showDialog2" persistent :max-width="550")
     template(v-slot:title) Terms and conditions
     p.
@@ -41,6 +41,29 @@ div
       .spacer
       w-button.mr-2(@click="showDialog2 = false" bg-color="error") I disagree
       w-button(@click="showDialog2 = false" bg-color="success") I agree
+
+  h2 Nesting
+
+  w-button.px-4(@click="showDialog3 = !showDialog3" bg-color="primary" dark) Open dialog
+  w-dialog(v-model="showDialog3" :max-width="600")
+    template(v-slot:title) Dialog 1
+    p Lorem ipsum, dolor sit amet consectetur adipisicing elit...
+    w-button.mt-6(@click="showDialog4 = !showDialog4" bg-color="indigo-lighten-1" dark) Open dialog 2
+
+    template(v-slot:actions)
+      .spacer
+      w-button(@click="showDialog3 = false" bg-color="error" dark) Close
+
+  w-dialog(v-model="showDialog4" :max-width="250")
+    template(v-slot:title) Dialog 2
+    w-button.my-6(@click="showDialog4 = false" bg-color="error" dark) Close
+
+  h2 Animations
+
+  w-button(@click="showDialog5 = !showDialog5" bg-color="primary" dark) Open dialog from bottom
+  w-dialog(v-model="showDialog5" :max-width="400")
+    template(v-slot:title) Dialog opening from the bottom
+    w-button.my-6(@click="showDialog5 = false" bg-color="error" dark) Close
 </template>
 
 <script>
@@ -48,6 +71,9 @@ export default {
   data: () => ({
     showDialog: false,
     showDialog2: false,
+    showDialog3: false,
+    showDialog4: false,
+    showDialog5: false,
     fullscreen: false,
     persistent: false,
     persistentNoAnimation: false,
@@ -55,7 +81,3 @@ export default {
   })
 }
 </script>
-
-<style lang="scss">
-
-</style>
