@@ -1,15 +1,21 @@
 <template lang="pug">
   w-overlay.w-dialog(
-    v-if="value"
-    :value="value"
+    v-if="showWrapper"
+    :value="showWrapper"
     @input="onOutsideClick"
+    :bg-color="overlayColor"
+    :opacity="overlayOpacity"
     :class="classes")
-    w-card.w-dialog__content(no-border :style="contentStyles")
-      template(v-slot:title)
-        slot(name="title")
-      slot
-      template(v-slot:actions)
-        slot(name="actions")
+    transition(
+      :name="transition"
+      appear
+      @after-leave="showWrapper = false;$emit('input', false)")
+      w-card.w-dialog__content(v-if="showContent" no-border :style="contentStyles")
+        template(v-slot:title)
+          slot(name="title")
+        slot
+        template(v-slot:actions)
+          slot(name="actions")
 </template>
 
 <script>
@@ -22,11 +28,19 @@ export default {
     persistent: { type: Boolean, default: false },
     persistentNoAnimation: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
+    transition: { type: String, default: 'fade' },
+    noOverlay: { type: Boolean, default: false },
+    overlayColor: { type: [String, Boolean], default: false },
+    overlayOpacity: { type: [Number, String, Boolean], default: false }
   },
 
-  data: () => ({
-    persistentAnimate: false
-  }),
+  data () {
+    return {
+      showWrapper: this.value,
+      showContent: this.value,
+      persistentAnimate: false
+    }
+  },
 
   computed: {
     classes () {
@@ -45,12 +59,23 @@ export default {
   },
 
   methods: {
-    onOutsideClick (value) {
-      if (!this.persistent) this.$emit('input', value)
+    onOutsideClick () {
+      if (!this.persistent) this.showContent = false
       if (this.persistent && !this.persistentNoAnimation) {
         this.persistentAnimate = true
         setTimeout(() => (this.persistentAnimate = false), 100)
       }
+    }
+  },
+
+  watch: {
+    value (value) {
+      // If value is true, mount the wrapper in DOM and open the drawer.
+      // If value is false, keep the wrapper in DOM and close the drawer;
+      // At the end of the drawer transition the value is updated and wrapper
+      // removed from the DOM.
+      if (value) this.showWrapper = value
+      this.showContent = value
     }
   }
 }
