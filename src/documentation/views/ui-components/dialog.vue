@@ -5,8 +5,8 @@ div
     w-button.px-4.mr-6.shrink(@click="showDialog = !showDialog" bg-color="primary" dark) Open dialog
     .layout.column
       .subtitle.mb-2 Options
-      w-checkbox.mr-3(v-model="fullscreen" label="Fullscreen")
-      w-checkbox.mr-3(v-model="persistent" label="Persistent")
+      w-checkbox(v-model="fullscreen" label="Fullscreen")
+      w-checkbox(v-model="persistent" label="Persistent")
       w-checkbox(v-model="persistentNoAnimation" label="Persistent with no animation")
       w-radios(
         v-model="maxWidth"
@@ -58,12 +58,40 @@ div
     template(v-slot:title) Dialog 2
     w-button.my-6(@click="showDialog4 = false" bg-color="error" dark) Close
 
-  h2 Animations
+  h2 Transitions
 
-  w-button(@click="showDialog5 = !showDialog5" bg-color="primary" dark) Open dialog from bottom
-  w-dialog(v-model="showDialog5" :max-width="400")
-    template(v-slot:title) Dialog opening from the bottom
-    w-button.my-6(@click="showDialog5 = false" bg-color="error" dark) Close
+  .layout
+    w-button.px-4.mr-6(@click="showDialog5 = !showDialog5" bg-color="primary" dark) Open dialog
+    .layout.column
+      .subtitle.mb-2 Transition names
+      w-radios(
+        v-model="transition"
+        :items="transitions"
+        item-value="label"
+        @change="fullscreen2 = null")
+        template(v-slot:label="{ item }")
+          code.mb-1 {{ item.label }}
+
+      .subtitle.mb-2 Slide transitions for fullscreen
+      w-radios(
+        v-model="transition"
+        :items="transitionsForFullscreen"
+        item-value="label"
+        @change="fullscreen2 = null")
+        template(v-slot:label="{ item }")
+          code.mb-1 {{ item.label }}
+      w-checkbox(
+        :value="fullscreen2 === null ? fullscreenTransition : fullscreen2"
+        @change="fullscreen2 = $event"
+        label="Fullscreen")
+  w-dialog(
+    v-model="showDialog5"
+    :max-width="(fullscreen2 === null ? fullscreenTransition : fullscreen2) ? 0 : 400"
+    :fullscreen="fullscreen2 === null ? fullscreenTransition : fullscreen2"
+    :transition="transition")
+    template(v-slot:title) Dialog with custom transition
+    .layout.fill-height.align-center.justify-center
+      w-button.my-6(@click="showDialog5 = false" bg-color="error" dark) Close
 </template>
 
 <script>
@@ -75,9 +103,33 @@ export default {
     showDialog4: false,
     showDialog5: false,
     fullscreen: false,
+    fullscreen2: false,
     persistent: false,
     persistentNoAnimation: false,
-    maxWidth: 200
-  })
+    maxWidth: 200,
+    transition: 'fade',
+    transitions: [
+      { label: 'fade' },
+      { label: 'slide-fade-top' },
+      { label: 'slide-fade-bottom' },
+      { label: 'slide-fade-left' },
+      { label: 'slide-fade-right' },
+      { label: 'scale' },
+      { label: 'scale-fade' },
+      { label: 'bounce' }
+    ],
+    transitionsForFullscreen: [
+      { label: 'slide-top' },
+      { label: 'slide-bottom' },
+      { label: 'slide-left' },
+      { label: 'slide-right' },
+    ]
+  }),
+
+  computed: {
+    fullscreenTransition () {
+      return this.transitionsForFullscreen.map(item => item.label).includes(this.transition)
+    }
+  }
 }
 </script>
