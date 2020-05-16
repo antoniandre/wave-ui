@@ -4,22 +4,17 @@
       v-for="(item, i) in listItems"
       @mousedown="isSelectable && !item.disabled && selectItem(item)"
       :class="liClasses(item)")
-      w-checkbox.mr-2(
-        v-if="checklist"
-        @click.native.prevent
-        v-model="item.selected")
-      slot(
-        name="item"
-        :item="item"
-        :index="i"
-        :selected="item.selected")
-        template(v-if="nav && !item.disabled && item.route")
-          component(
-            :is="$router ? 'router-link' : 'a'"
-            :to="$router && item.route"
-            :href="item.route"
-            v-html="item[itemLabel]")
-        span(v-else v-html="item[itemLabel]")
+      .w-list__item-label
+        w-checkbox.mr-2(v-if="checklist" @click.native.prevent v-model="item.selected")
+        slot(name="item" :item="item" :index="i" :selected="item.selected")
+          template(v-if="nav && !item.disabled && item.route")
+            component(
+              :is="$router ? 'router-link' : 'a'"
+              :to="$router && item.route"
+              :href="item.route"
+              v-html="item[itemLabel]")
+          template(v-else) {{ item[itemLabel] }}
+      w-list(v-if="item.children" :items="item.children" :depth="depth + 1")
 </template>
 
 <script>
@@ -36,7 +31,8 @@ export default {
     // Navigation type adds a router-link on items with `route`.
     nav: { type: Boolean, default: false },
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
-    itemValue: { type: String, default: 'value' } // Name of the value field.
+    itemValue: { type: String, default: 'value' }, // Name of the value field.
+    depth: { type: Number, default: 0 }
   },
 
   data: () => ({
@@ -79,7 +75,8 @@ export default {
         'w-list--checklist': this.checklist,
         'w-list--navigation': this.nav,
         'w-list--hoverable': this.hover,
-        'w-list--selectable': this.isSelectable
+        'w-list--selectable': this.isSelectable,
+        [`w-list--child w-list--depth-${this.depth}`]: this.depth
       }
     }
   },
@@ -93,6 +90,7 @@ export default {
     liClasses (item) {
       return {
         'w-list__item--disabled': item.disabled,
+        'w-list__item--parent': item.children && item.children.length,
         'w-list__item--active': this.isSelectable && item.selected
       }
     },
@@ -127,37 +125,48 @@ export default {
   list-style-type: none;
   margin-left: 0;
 
+  &--child {margin-left: 6 * $base-increment;}
+
   &__item {
     position: relative;
     display: flex;
     align-items: center;
     font-size: round(1.1 * $base-font-size);
-  }
 
-  &--navigation &__item,
-  &--checklist &__item,
-  &--hoverable &__item,
-  &--selectable &__item {
-    padding: 2 * $base-increment;
-
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      z-index: -1;
-      background-color: currentColor;
-      opacity: 0;
-      transition: 0.2s;
+    &--parent {
+      flex-direction: column;
+      align-items: stretch;
     }
-    &:hover:before {opacity: 0.08;}
+
+    .w-list--navigation &,
+    .w-list--checklist &,
+    .w-list--hoverable &,
+    .w-list--selectable & {
+      padding: 2 * $base-increment;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        background-color: currentColor;
+        opacity: 0;
+        transition: 0.2s;
+      }
+      &:hover:before {opacity: 0.08;}
+    }
+
+    .w-list--navigation & {padding: 0;}
+    .w-list--selectable & {cursor: pointer;}
   }
 
+  // Navigation link.
+  // --------------------------------------------
   // Use less nesting for easier overrides.
-  &--navigation &__item {padding: 0;}
-  &--navigation a, &--navigation span {
+  &--navigation a, &--navigation &__item-label {
     display: flex;
     flex-grow: 1;
     padding: 2 * $base-increment;
@@ -185,10 +194,9 @@ export default {
 
     &:before, &:focus:before {opacity: 0.15;}
   }
+  // --------------------------------------------
 
   &--selectable &__item {
-    cursor: pointer;
-
     &:after {
       content: '';
       position: absolute;
