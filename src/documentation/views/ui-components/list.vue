@@ -48,6 +48,10 @@ div
     It will create a router link or a normal link (if not using vue-router) on those items.
   p It is possible to disable a link with a #[code disabled: true] attribute in the item.
   w-list.mt-6(:items="listItems2" nav color="primary")
+    template(v-slot:item="{ item }")
+      span {{ item.label }}
+      .spacer
+      w-icon {{ item.icon }}
 </template>
 
 <script>

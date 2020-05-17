@@ -1,25 +1,23 @@
 <template lang="pug">
   ul.w-list(:class="classes")
-    li.w-list__item(
-      v-for="(item, i) in listItems"
-      @mousedown.stop="isSelectable && !item.disabled && selectItem(item)"
-      :class="liClasses(item)")
+    li.w-list__item(v-for="(item, i) in listItems" :key="i" :class="liClasses(item)")
       //- If navigation list & item is a valid link.
       component.w-list__item-label(
         v-if="nav && !item.disabled && item.route"
+        @mousedown.stop="isSelectable && !item.disabled && selectItem(item)"
         :is="$router ? 'router-link' : 'a'"
         :to="$router && item.route"
         :href="item.route")
         slot(name="item" :item="item" :index="i" :selected="item.selected")
-          | {{ item[itemLabel] }}
-      //- If checklist.
-      .w-list__item-label(v-else-if="checklist")
-        w-checkbox.mr-2(@click.native.prevent v-model="item.selected")
+          span(v-html="item[itemLabel]")
+      //- If checklist or any other type of list.
+      .w-list__item-label(
+        v-else
+        @mousedown.stop="isSelectable && !item.disabled && selectItem(item)"
+        :tabindex="isSelectable && !item.disabled ? 0 : false")
+        w-checkbox.mr-2(v-if="checklist" @click.native.prevent v-model="item.selected")
         slot(name="item" :item="item" :index="i" :selected="item.selected")
-          | {{ item[itemLabel] }}
-      .w-list__item-label(v-else)
-        slot(name="item" :item="item" :index="i" :selected="item.selected")
-          template {{ item[itemLabel] }}
+          span(v-html="item[itemLabel]")
       w-list(v-if="item.children" v-bind="$props" :items="item.children" :depth="depth + 1")
 </template>
 
