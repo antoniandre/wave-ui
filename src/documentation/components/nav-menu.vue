@@ -15,7 +15,6 @@
 
   .title.mt-4 UI Components
 
-  p {{components}}
   w-list(:items="components" nav color="primary")
     //- template(v-slot:item="{ item }")
       router-link(v-if="!item.disabled" :to="item.route" v-html="item.label")
@@ -75,14 +74,14 @@ export default {
 </script>
 
 <style lang="scss">
-.nav-menu {
+div.nav-menu {
   width: 100%;
   min-width: 180px;
   max-width: 260px;
   border-right: 1px solid #ddd;
   margin-right: 4rem;
 
-  .w-list__item a, .w-list__item span {
+  .w-list__item-label {
     padding: 6px;
     padding-left: 4 * $base-increment;
     @include default-transition;

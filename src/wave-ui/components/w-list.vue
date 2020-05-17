@@ -2,19 +2,25 @@
   ul.w-list(:class="classes")
     li.w-list__item(
       v-for="(item, i) in listItems"
-      @mousedown="isSelectable && !item.disabled && selectItem(item)"
+      @mousedown.stop="isSelectable && !item.disabled && selectItem(item)"
       :class="liClasses(item)")
-      .w-list__item-label
-        w-checkbox.mr-2(v-if="checklist" @click.native.prevent v-model="item.selected")
+      //- If navigation list & item is a valid link.
+      component.w-list__item-label(
+        v-if="nav && !item.disabled && item.route"
+        :is="$router ? 'router-link' : 'a'"
+        :to="$router && item.route"
+        :href="item.route")
         slot(name="item" :item="item" :index="i" :selected="item.selected")
-          template(v-if="nav && !item.disabled && item.route")
-            component(
-              :is="$router ? 'router-link' : 'a'"
-              :to="$router && item.route"
-              :href="item.route"
-              v-html="item[itemLabel]")
-          template(v-else) {{ item[itemLabel] }}
-      w-list(v-if="item.children" :items="item.children" :depth="depth + 1")
+          | {{ item[itemLabel] }}
+      //- If checklist.
+      .w-list__item-label(v-else-if="checklist")
+        w-checkbox.mr-2(@click.native.prevent v-model="item.selected")
+        slot(name="item" :item="item" :index="i" :selected="item.selected")
+          | {{ item[itemLabel] }}
+      .w-list__item-label(v-else)
+        slot(name="item" :item="item" :index="i" :selected="item.selected")
+          template {{ item[itemLabel] }}
+      w-list(v-if="item.children" v-bind="$props" :items="item.children" :depth="depth + 1")
 </template>
 
 <script>
@@ -89,7 +95,7 @@ export default {
     },
     liClasses (item) {
       return {
-        'w-list__item--disabled': item.disabled,
+        'w-list__item--disabled': item.disabled || (this.nav && !item.route && !item.children),
         'w-list__item--parent': item.children && item.children.length,
         'w-list__item--active': this.isSelectable && item.selected
       }
@@ -127,16 +133,27 @@ export default {
 
   &--child {margin-left: 6 * $base-increment;}
 
-  &__item {
+  &__item {margin-top: 1px;}
+  &__item:first-child {margin-top: 0;}
+  &--selectable &__item {cursor: pointer;}
+  & &__item--disabled {
+    cursor: default;
+    opacity: 0.3;
+    user-select: none;
+  }
+
+  &__item--parent {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  // List item Label.
+  // --------------------------------------------
+  &__item-label {
     position: relative;
     display: flex;
     align-items: center;
     font-size: round(1.1 * $base-font-size);
-
-    &--parent {
-      flex-direction: column;
-      align-items: stretch;
-    }
 
     .w-list--navigation &,
     .w-list--checklist &,
@@ -156,36 +173,22 @@ export default {
         opacity: 0;
         transition: 0.2s;
       }
-      &:hover:before {opacity: 0.08;}
     }
-
-    .w-list--navigation & {padding: 0;}
-    .w-list--selectable & {cursor: pointer;}
   }
+
+  &--navigation .w-list__item-label:hover:before,
+  &--checklist .w-list__item-label:hover:before,
+  &--hoverable .w-list__item-label:hover:before,
+  &--selectable .w-list__item-label:hover:before,
+  &__item--active > .w-list__item-label:before {opacity: 0.08;}
+  &__item--disabled > .w-list__item-label:before {display: none;}
+  // --------------------------------------------
 
   // Navigation link.
   // --------------------------------------------
-  // Use less nesting for easier overrides.
-  &--navigation a, &--navigation &__item-label {
-    display: flex;
-    flex-grow: 1;
-    padding: 2 * $base-increment;
-  }
   &--navigation a {
     color: inherit;
 
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      z-index: -1;
-      background-color: currentColor;
-      opacity: 0;
-      transition: 0.2s;
-    }
     &:focus:before {opacity: 0.1;}
   }
 
@@ -196,25 +199,8 @@ export default {
   }
   // --------------------------------------------
 
-  &--selectable &__item {
-    &:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      z-index: -2;
-      background-color: currentColor;
-      border-top: 1px solid white;
-      opacity: 0;
-      transition: 0.1s;
-    }
-    &:active:after, &:focus:after, &--active:after {opacity: 0.15;}
+  &--selectable &__item-label {
+    &:active:before, &:focus:before, &--active:before {opacity: 0.15;}
   }
-
-  .w-list__item--disabled {cursor: auto;opacity: 0.3;}
-  .w-list__item--disabled:before,
-  .w-list__item--disabled:after {display: none;}
 }
 </style>
