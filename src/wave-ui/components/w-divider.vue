@@ -28,7 +28,7 @@ export default {
 
   &--default {border-top-color: rgba(0, 0, 0, 0.15);}
 
-  &--vertical {border-top-width: 1px;}
+  &--vertical {border-left-width: 1px;}
   &:not(.w-divider--vertical) {border-top-width: 1px;}
 }
 </style>
