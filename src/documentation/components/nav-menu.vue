@@ -63,8 +63,10 @@ export default {
           children: [
             { label: 'Checkbox', route: 'w-checkbox' },
             { label: 'Radio', route: 'w-radio' },
-            { label: 'Checkboxes', route: 'w-checkboxes' },
-            { label: 'Radios', route: 'w-radios' },
+            { label: 'Switch', route: 'w-switch' },
+            { label: 'Text field', route: 'w-text-field', disabled: true },
+            { label: 'Textarea', route: 'w-textarea', disabled: true },
+            { label: 'Select', route: 'w-select', disabled: true },
           ]
         }
       ]
