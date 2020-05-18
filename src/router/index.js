@@ -43,6 +43,7 @@ const components = [
   { id: 'button', label: 'Button' },
   { id: 'calendar', label: 'Calendar' },
   { id: 'card', label: 'Card' },
+  { id: 'checkbox', label: 'Checkbox' },
   { id: 'dialog', label: 'Dialog' },
   { id: 'drawer', label: 'Drawer' },
   { id: 'icon', label: 'Icon' },
@@ -52,10 +53,16 @@ const components = [
   { id: 'overlay', label: 'Overlay' },
   { id: 'progress', label: 'Progress' },
   { id: 'rating', label: 'Rating' },
+  { id: 'select', label: 'Select' },
+  { id: 'slider', label: 'Slider' },
   { id: 'slideshow', label: 'Slideshow' },
-  { id: 'toolbar', label: 'Toolbar' },
+  { id: 'switch', label: 'Switch' },
+  { id: 'radio', label: 'Radio' },
   { id: 'tabs', label: 'Tabs' },
   { id: 'tag', label: 'Tag' },
+  { id: 'textarea', label: 'Textarea' },
+  { id: 'text field', label: 'Text field' },
+  { id: 'toolbar', label: 'Toolbar' },
   { id: 'tooltip', label: 'Tooltip' }
 ]
 
