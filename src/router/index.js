@@ -45,6 +45,7 @@ const components = [
   { id: 'card', label: 'Card' },
   { id: 'checkbox', label: 'Checkbox' },
   { id: 'dialog', label: 'Dialog' },
+  { id: 'divider', label: 'Divider' },
   { id: 'drawer', label: 'Drawer' },
   { id: 'icon', label: 'Icon' },
   { id: 'list', label: 'List' },

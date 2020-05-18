@@ -39,6 +39,8 @@ div
       span.pr-2 {{ item.label }}
       w-icon.deep-purple {{ item.icon }}
 
+  w-divider.ma-10.ml-0
+
   h2 Individual radio buttons
   p.
     It is possible to use the #[code w-radio] component to render a single radio button

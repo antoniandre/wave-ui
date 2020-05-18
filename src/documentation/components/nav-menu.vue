@@ -44,6 +44,7 @@ export default {
         { label: 'Calendar', route: 'w-calendar', disabled: true },
         { label: 'Card', route: 'w-card' },
         { label: 'Dialog', route: 'w-dialog' },
+        { label: 'Divider', route: 'w-divider' },
         { label: 'Drawer', route: 'w-drawer' },
         { label: 'Icon', route: 'w-icon' },
         { label: 'List', route: 'w-list' },
