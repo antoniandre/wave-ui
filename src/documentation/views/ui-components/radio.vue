@@ -1,12 +1,86 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-radio]
+  h1.headline.mt-4 #[span.code w-radio] &amp; #[span.code w-radios]
+
+  h2 Multiple radio buttons using the #[code w-radios] tag
+  p.
+    The #[code w-radios] component allows a fast and easy rendering of
+    multiple radio buttons by passing the items through a prop.#[br]
+    It accepts an inline parameter to display the radio buttons inline,
+    and allows you to customize the label of each radio button through slot.
+
+  h3 V-model
+  p.
+    If a value is set in the choice's data, it will be returned by the v-model when selected.#[br]
+    If no value is set, the choice's label will be returned instead.
+  .layout
+    w-radios(v-model="selectedRadio1" :items="radios1")
+    div.subtitle.ml-8 Selected choice: #[code {{ selectedRadio1 || 'null' }}]
+
+
+  h3 Default column layout
+  w-radios(:items="radios2")
+
+  h3 Inline layout
+  w-radios(:items="radios2" inline)
+
+  h3 Color
+  p.
+    By default the #[code w-radios] &amp; #[code w-radio] components will
+    use the primary color.
+  w-radios(:items="radios2" color="purple")
+
+  h3 Custom label content
+  p.
+    #[code w-radios] provides a #[code label] slot to customize the label of each radio
+    button.
+  w-radios(:items="radios3" color="green")
+    template(v-slot:label="{ item }")
+      span.pr-2 {{ item.label }}
+      w-icon.deep-purple {{ item.icon }}
+
+  h2 Individual radio buttons
+  p.
+    It is possible to use the #[code w-radio] component to render a single radio button
+    at once.#[br]
+    Like in normal HTML, a set of radio buttons will only work together if they have the
+    same #[code name] attribute.
+
+  w-radio.mr-2(label="Choice 1" name="radios2" color="success")
+  w-radio.mr-2(label="Choice 2" name="radios2" color="warning")
+  w-radio(label="Choice 3" name="radios2" color="error")
+
+  h3 Custom label content
+  p.
+    #[code w-radio] provides a default slot to customize the content.
+  w-radio.mr-2(name="radios2" color="success")
+    span.pr-2 Choice 1
+    w-icon.primary wi-star
+
 
 </template>
 
 <script>
 export default {
-
+  data: () => ({
+    selectedRadio1: null,
+    radios1: [
+      { label: 'Choice 1', value: 1 },
+      { label: 'Choice 2', value: 2 },
+      { label: 'Choice 3', value: 3 },
+    ],
+    radios2: [
+      { label: 'Choice 1' },
+      { label: 'Choice 2' },
+      { label: 'Choice 3' },
+      { label: 'Choice 4' }
+    ],
+    radios3: [
+      { label: 'Square', icon: 'mdi mdi-square' },
+      { label: 'Circle', icon: 'mdi mdi-circle' },
+      { label: 'Triangle', icon: 'mdi mdi-triangle' }
+    ]
+  })
 }
 </script>
 

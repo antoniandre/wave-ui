@@ -1,13 +1,12 @@
 <template lang="pug">
-  component.w-radio(:is="hasLabel ? 'label' : 'span'" :class="classes")
+  component.w-radio(:is="hasLabel ? 'label' : 'span'")
     input(
       type="radio"
       :name="name"
       :checked="isChecked"
       @change="isChecked = !isChecked")
-    .w-radio__input(:class="{ 'mr-2': hasLabel }")
-    template(v-if="hasLabel")
-      slot {{ label }}
+    .w-radio__input(:class="{ 'mr-2': hasLabel, [this.color]: true }")
+    slot {{ label }}
 </template>
 
 <script>
@@ -31,11 +30,6 @@ export default {
       set (value) {
         this.$emit('input', value)
         this.$emit('change', value)
-      }
-    },
-    classes () {
-      return {
-        [this.color]: this.color
       }
     }
   }
@@ -69,6 +63,7 @@ $outline-width: 2px;
   }
   &__input:before {
     content: '';
+    position: absolute;
     border-radius: 100%;
     border: 0 solid currentColor;
     @include default-transition;
