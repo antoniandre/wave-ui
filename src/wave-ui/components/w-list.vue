@@ -1,27 +1,86 @@
-<template lang="pug">
-  ul.w-list(:class="classes")
-    li.w-list__item(v-for="(item, i) in listItems" :key="i" :class="liClasses(item)")
-      //- If navigation list & item is a valid link.
-      component.w-list__item-label(
-        v-if="nav && !item.disabled && item.route"
-        @mousedown.stop="isSelectable && !item.disabled && selectItem(item)"
-        :is="$router ? 'router-link' : 'a'"
-        :to="$router && item.route"
-        :href="item.route")
-        slot(name="item" :item="item" :index="i" :selected="item.selected")
-          span(v-html="item[itemLabel]")
-      //- If checklist or any other type of list.
-      .w-list__item-label(
-        v-else
-        @mousedown.stop="isSelectable && !item.disabled && selectItem(item)"
-        :tabindex="isSelectable && !item.disabled ? 0 : false")
-        w-checkbox.mr-2(v-if="checklist" @click.native.prevent v-model="item.selected")
-        slot(name="item" :item="item" :index="i" :selected="item.selected")
-          span(v-html="item[itemLabel]")
-      w-list(v-if="item.children" v-bind="$props" :items="item.children" :depth="depth + 1")
-</template>
-
 <script>
+const renderListItems = function (createEl) {
+  return this.listItems.map((li, index) => {
+    // Content nodes.
+    let vnodes = [renderListItemLabel.call(this, createEl, li, index)]
+    if (li.children) {
+      vnodes.push(createEl(
+        'w-list',
+        { props: { ...this.$props, items: li.children, depth: this.depth + 1 } }
+      ))
+    }
+
+    return createEl(
+      'li',
+      { class: { 'w-list__item': true, 'w-list__item--parent': (li.children || []).length } },
+      vnodes)
+  })
+}
+
+const renderListItemLabel = function (createEl, li, index) {
+  let componentName = 'div'
+  const isLink = this.nav && !li.disabled && li.route
+  const hasSlot = this.$scopedSlots.item
+  if (isLink) componentName = this.$router ? 'router-link' : 'a'
+
+  // HTML attributes.
+  const attributes = {}
+  if (isLink) attributes.href = li.route
+  // Links are naturally tabbable, add tabindex on other elements.
+  else if (this.isSelectable) attributes.tabindex = 0
+
+  // Props.
+  const props = {}
+  if (isLink && this.$router) props.to = li.route
+
+  // Content.
+  let vnodes = []
+  if (this.checklist) {
+    vnodes.push(createEl(
+      'w-checkbox',
+      {
+        class: 'mr-2',
+        props: { value: li.selected },
+        nativeOn: { click: e => e.preventDefault() },
+        on: {
+          input: e => {
+            li.selected = e.target.value
+            this.$emit('input', e.target.value)
+          }
+        }
+      }
+    ))
+
+    if (!hasSlot) {
+      vnodes.push(createEl(
+        'span',
+        { domProps: { innerHTML: li[this.itemLabel] } }
+      ))
+    }
+  }
+
+  if (hasSlot) {
+    vnodes.push(this.$scopedSlots.item({ item: li, selected: li.selected, index }))
+  }
+
+  return createEl(
+    componentName,
+    {
+      props,
+      class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
+      attrs: { ...attributes },
+      domProps: hasSlot || (!hasSlot && this.checklist) ? {} : { innerHTML: li[this.itemLabel] },
+      on: {
+        mousedown: e => {
+          e.stopPropagation()
+          this.isSelectable && !li.disabled && this.selectItem(li)
+        }
+      }
+    },
+    vnodes
+  )
+}
+
 export default {
   name: 'w-list',
   props: {
@@ -78,8 +137,6 @@ export default {
         [this.color]: this.color,
         'w-list--checklist': this.checklist,
         'w-list--navigation': this.nav,
-        'w-list--hoverable': this.hover,
-        'w-list--selectable': this.isSelectable,
         [`w-list--child w-list--depth-${this.depth}`]: this.depth
       }
     }
@@ -91,11 +148,12 @@ export default {
       if (!this.isMultipleSelect) this.selection = item.selected ? [item[this.itemValue]] : []
       else this.selection = this.listItems.filter(item => item.selected).map(item => item[this.itemValue])
     },
-    liClasses (item) {
+    liLabelClasses (item) {
       return {
-        'w-list__item--disabled': item.disabled || (this.nav && !item.route && !item.children),
-        'w-list__item--parent': item.children && item.children.length,
-        'w-list__item--active': this.isSelectable && item.selected
+        'w-list__item-label--disabled': item.disabled || (this.nav && !item.route && !item.children),
+        'w-list__item-label--active': this.isSelectable && item.selected,
+        'w-list__item-label--hoverable': this.hover,
+        'w-list__item-label--selectable': this.isSelectable
       }
     },
     // Make sure the items selection is always an array.
@@ -120,6 +178,15 @@ export default {
         this.selection = firstSelected ? [firstSelected[this.itemValue]] : []
       }
     }
+  },
+
+  render (createEl) {
+    // Render list wrapper.
+    return createEl(
+      'ul',
+      { class: { 'w-list': true, ...this.classes } },
+      renderListItems.call(this, createEl)
+    )
   }
 }
 </script>
@@ -133,12 +200,6 @@ export default {
 
   &__item {margin-top: 1px;}
   &__item:first-child {margin-top: 0;}
-  &--selectable &__item {cursor: pointer;}
-  & &__item--disabled {
-    cursor: default;
-    opacity: 0.3;
-    user-select: none;
-  }
 
   &__item--parent {
     flex-direction: column;
@@ -153,10 +214,15 @@ export default {
     align-items: center;
     font-size: round(1.1 * $base-font-size);
 
-    .w-list--navigation &,
-    .w-list--checklist &,
-    .w-list--hoverable &,
-    .w-list--selectable & {
+    &--selectable {cursor: pointer;}
+    &--disabled {
+      cursor: default;
+      opacity: 0.3;
+      user-select: none;
+    }
+
+    &--hoverable,
+    &--selectable {
       padding: 2 * $base-increment;
 
       &:before {
@@ -172,33 +238,28 @@ export default {
         transition: 0.2s;
       }
     }
+
+    // Hover state.
+    &--hoverable:hover:before,
+    &--selectable:hover:before {opacity: 0.08;}
+
+    // Focus state and active class.
+    &--selectable:focus:before,
+    &--active:before, &--active:hover:before {opacity: 0.15;}
+
+    // Active state.
+    &--selectable:active:before {opacity: 0.2;}
+
+    // Disabled.
+    &--disabled:before {display: none;}
   }
 
-  &--navigation .w-list__item-label:hover:before,
-  &--checklist .w-list__item-label:hover:before,
-  &--hoverable .w-list__item-label:hover:before,
-  &--selectable .w-list__item-label:hover:before,
-  &__item--active > .w-list__item-label:before {opacity: 0.08;}
-  &__item--disabled > .w-list__item-label:before {display: none;}
   // --------------------------------------------
 
   // Navigation link.
   // --------------------------------------------
-  &--navigation a {
-    color: inherit;
-
-    &:focus:before {opacity: 0.1;}
-  }
-
-  &--navigation .router-link-exact-active {
-    font-weight: bold;
-
-    &:before, &:focus:before {opacity: 0.15;}
-  }
+  &--navigation a {color: inherit;}
+  &--navigation .router-link-exact-active {font-weight: bold;}
   // --------------------------------------------
-
-  &--selectable &__item-label {
-    &:active:before, &:focus:before, &--active:before {opacity: 0.15;}
-  }
 }
 </style>
