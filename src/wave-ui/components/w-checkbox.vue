@@ -44,5 +44,7 @@ export default {
 
 <style lang="scss">
 .w-checkbox {
+  display: inline-flex;
+  align-items: center;
 }
 </style>

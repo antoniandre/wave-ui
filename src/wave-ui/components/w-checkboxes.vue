@@ -8,7 +8,7 @@
       :label="item[itemLabel]"
       :value="value === item[itemValue]"
       @input="$emit('input', item[itemValue]);$emit('change', item[itemValue])"
-      :class="{ 'ml-3': inline && i }")
+      :class="{ 'ml-3': inline && i, 'mt-1': !inline && i }")
       slot(v-if="item[itemLabel]" name="label" :item="item") {{ item[itemLabel] }}
 </template>
 
@@ -38,6 +38,8 @@ export default {
 
 <style lang="scss">
 .w-checkboxes {
+  &--inline {display: inline-flex;}
+
   &:not(.w-checkboxes--inline) .w-checkbox {display: block;}
 }
 </style>
