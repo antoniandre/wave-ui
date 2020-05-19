@@ -64,6 +64,7 @@ export default {
 
   &__title {
     display: flex;
+    align-items: center;
     padding: (2 * $base-increment) (4 * $base-increment);
     font-size: 1.3em;
     border-bottom: $border;
