@@ -45,8 +45,8 @@ div
   p.
     It is possible to use the #[code w-radio] component to render a single radio button
     at once.#[br]
-    Like in normal HTML, a set of radio buttons will only work together if they have the
-    same #[code name] attribute.
+    A set of radio buttons will only work together if they have the same v-model,
+    or the same #[code name] attribute (standard HTML).
 
   w-radio.mr-2(label="Choice 1" name="radios2" color="success")
   w-radio.mr-2(label="Choice 2" name="radios2" color="warning")

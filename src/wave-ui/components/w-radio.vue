@@ -13,7 +13,10 @@
 export default {
   name: 'w-radio',
   props: {
-    value: { type: Boolean, default: false }, // v-model to check or uncheck.
+    value: { default: false }, // v-model to check or uncheck.
+    // When `value` is taken by a v-model and multiple w-radio are plugged on
+    // the same v-model, this allow returning to the v-model a custom value.
+    returnValue: {},
     name: { type: String, default: '' },
     label: { type: String, default: '' },
     color: { type: String, default: 'primary' }
@@ -25,11 +28,11 @@ export default {
     },
     isChecked: {
       get () {
-        return this.value
+        return this.returnValue !== undefined ? this.returnValue === this.value : this.value
       },
       set (value) {
-        this.$emit('input', value)
-        this.$emit('change', value)
+        this.$emit('input', this.returnValue || value)
+        this.$emit('change', this.returnValue || value)
       }
     }
   }
@@ -44,7 +47,7 @@ $outline-width: 2px;
   cursor: pointer;
 
   // The hidden real radio button.
-  input {
+  input[type="radio"] {
     position: absolute;
     opacity: 0;
     z-index: -100;
@@ -57,6 +60,7 @@ $outline-width: 2px;
     width: round(1.3 * $base-font-size);
     height: round(1.3 * $base-font-size);
     display: flex;
+    flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
     justify-content: center;
     border: $outline-width solid currentColor;
