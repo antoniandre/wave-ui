@@ -29,7 +29,6 @@ export default {
     persistentNoAnimation: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
     transition: { type: String, default: 'fade' },
-    noOverlay: { type: Boolean, default: false },
     overlayColor: { type: [String, Boolean], default: false },
     overlayOpacity: { type: [Number, String, Boolean], default: false }
   },
@@ -53,7 +52,7 @@ export default {
     },
     contentStyles () {
       return {
-        maxWidth: this.maxWidth ? `${this.maxWidth}px` : false
+        maxWidth: !this.fullscreen && this.maxWidth ? `${this.maxWidth}px` : null
       }
     }
   },
