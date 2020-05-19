@@ -1,15 +1,16 @@
 <template lang="pug">
   .w-checkboxes(:class="classes")
     w-checkbox(
-      v-for="(item, i) in items"
+      v-for="(item, i) in checkboxItems"
       :key="i"
       type="checkbox"
       :name="name || `checkboxes-${_uid}`"
-      :label="item[itemLabel]"
-      :value="value === item[itemValue]"
-      @input="$emit('input', item[itemValue]);$emit('change', item[itemValue])"
+      :label="item.label"
+      :value="value === item.value"
+      :color="color"
+      @input="$emit('input', item.value);$emit('change', item.value)"
       :class="{ 'ml-3': inline && i, 'mt-1': !inline && i }")
-      slot(v-if="item[itemLabel]" name="label" :item="item") {{ item[itemLabel] }}
+      slot(name="label" :item="item") {{ item.label }}
 </template>
 
 <script>
@@ -22,14 +23,21 @@ export default {
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
     inline: { type: Boolean, default: false },
-    color: { type: String, default: null }
+    color: { type: String, default: 'primary' }
   },
 
   computed: {
+    checkboxItems () {
+      return this.items.map((item, i) => ({
+        ...item,
+        label: item[this.itemLabel],
+        // If no value is set then add one to prevent error.
+        value: item[this.itemValue] === undefined ? (item[this.itemLabel] || i) : item[this.itemValue]
+      }))
+    },
     classes () {
       return {
-        [this.color]: this.color,
-        'w-checkboxes--inline': this.inline
+        [`w-checkboxes--${this.inline ? 'inline' : 'column'}`]: true
       }
     }
   }
@@ -38,8 +46,12 @@ export default {
 
 <style lang="scss">
 .w-checkboxes {
-  &--inline {display: inline-flex;}
+  &--column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-  &:not(.w-checkboxes--inline) .w-checkbox {display: block;}
+  &--inline {display: inline-flex;}
 }
 </style>
