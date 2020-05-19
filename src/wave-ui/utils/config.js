@@ -4,6 +4,7 @@ const config = {
     sm: 900,
     md: 1200,
     lg: 1700,
+    // Xl only needs a greater value than lg but starts from lg.
     xl: 4000
   },
   colors: {

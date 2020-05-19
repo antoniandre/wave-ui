@@ -44,7 +44,7 @@ div
         sm: 900,
         md: 1200,
         lg: 1700,
-        xl: 4000
+        xl: 4000 // Xl only needs a greater value than lg but starts from lg
       }
     })
 
