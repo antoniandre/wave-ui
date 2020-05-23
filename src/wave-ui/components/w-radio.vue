@@ -1,13 +1,21 @@
 <template lang="pug">
-  label.w-radio(:class="classes")
+  .w-radio(:class="classes")
     input(
+      ref="input"
+      :id="`radio--${_uid}`"
       type="radio"
-      :name="name"
+      :name="inputName"
       :checked="isChecked"
       :disabled="disabled"
-      @change="isChecked = !isChecked")
-    .w-radio__input(:class="{ 'mr-2': hasLabel, [this.color]: true }")
-    slot {{ label }}
+      @change="isChecked = !isChecked"
+      :aria-checked="isChecked"
+      role="radio")
+    .w-radio__input(
+      @click="$refs.input.focus();$refs.input.click()"
+      :class="{ 'mr-2': hasLabel, [this.color]: true }")
+    label.w-radio__label(v-if="$slots.default" :for="`radio--${_uid}`")
+      slot
+    label.w-radio__label(v-else-if="label" :for="`radio--${_uid}`" v-html="label")
 </template>
 
 <script>
@@ -25,6 +33,9 @@ export default {
   },
 
   computed: {
+    inputName () {
+      return this.name || `radio--${this._uid}`
+    },
     hasLabel () {
       return (this.$slots.default && this.$slots.default.length) || this.label
     },

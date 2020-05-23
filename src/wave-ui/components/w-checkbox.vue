@@ -1,14 +1,21 @@
 <template lang="pug">
-  label.w-checkbox(:class="classes")
+  .w-checkbox(:class="classes")
     input(
+      ref="input"
+      :id="`checkbox--${_uid}`"
       type="checkbox"
-      :name="name"
+      :name="inputName"
       :checked="isChecked"
       :disabled="disabled"
-      @change="isChecked = !isChecked")
-    span.w-checkbox__input(:class="{ 'mr-2': hasLabel, [this.color]: true }")
-    slot
-      span(v-html="label")
+      @change="onChange"
+      :aria-checked="isChecked"
+      role="checkbox")
+    .w-checkbox__input(
+      @click="$refs.input.focus();$refs.input.click()"
+      :class="{ 'mr-2': hasLabel, [this.color]: true }")
+    label.w-checkbox__label(v-if="$slots.default" :for="`checkbox--${_uid}`")
+      slot
+    label.w-checkbox__label(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
 </template>
 
 <script>
@@ -25,23 +32,43 @@ export default {
     disabled: { type: Boolean, default: false }
   },
 
+  data () {
+    return {
+      isChecked: this.value,
+      doRipple: false
+    }
+  },
+
   computed: {
+    inputName () {
+      return this.name || `checkbox--${this._uid}`
+    },
     hasLabel () {
       return (this.$slots.default && this.$slots.default.length) || this.label
     },
-    isChecked: {
-      get () {
-        return this.returnValue !== undefined ? this.returnValue === this.value : this.value
-      },
-      set (value) {
-        this.$emit('input', this.returnValue || value)
-        this.$emit('change', this.returnValue || value)
-      }
-    },
     classes () {
       return {
-        'w-checkbox--disabled': this.disabled
+        'w-checkbox--disabled': this.disabled,
+        'w-checkbox--ripple': this.doRipple
       }
+    }
+  },
+
+  methods: {
+    onChange () {
+      this.isChecked = !this.isChecked
+      this.$emit('input', this.isChecked)
+
+      if (this.isChecked) {
+        this.doRipple = true
+        setTimeout(() => (this.doRipple = false), 900)
+      }
+    }
+  },
+
+  watch: {
+    value (value) {
+      this.isChecked = value
     }
   }
 }
@@ -59,9 +86,9 @@ $outline-width: 2px;
 
   // The hidden real checkbox.
   input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    z-index: -100;
+    // position: absolute;
+    // opacity: 0;
+    // z-index: -100;
     outline: none;
   }
 
@@ -97,6 +124,7 @@ $outline-width: 2px;
     transform: rotate(45deg) scale(0);
     opacity: 0;
     transition: inherit;
+    cursor: inherit;
 
     :checked + & {
       left: -2px;
@@ -120,7 +148,7 @@ $outline-width: 2px;
     transition: all 0.45s ease-in-out;
   }
 
-  :checked + &__input:before {
+  &--ripple &__input:before {
     animation: w-checkbox-ripple 0.9s ease-out;
     transition: all 0.45s ease;
   }
@@ -128,6 +156,10 @@ $outline-width: 2px;
   :focus + &__input:before {
     transform: scale(1.8);
     opacity: 0.2;
+  }
+
+  &__label {
+    cursor: inherit;
   }
 }
 
