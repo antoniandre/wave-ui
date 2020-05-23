@@ -1,12 +1,14 @@
 <template lang="pug">
-  component.w-checkbox(:is="hasLabel ? 'label' : 'span'")
+  label.w-checkbox(:class="classes")
     input(
       type="checkbox"
       :name="name"
       :checked="isChecked"
+      :disabled="disabled"
       @change="isChecked = !isChecked")
-    .w-checkbox__input(:class="{ 'mr-2': hasLabel, [this.color]: true }")
-    slot {{ label }}
+    span.w-checkbox__input(:class="{ 'mr-2': hasLabel, [this.color]: true }")
+    slot
+      span(v-html="label")
 </template>
 
 <script>
@@ -19,7 +21,8 @@ export default {
     returnValue: {},
     name: { type: String, default: '' },
     label: { type: String, default: '' },
-    color: { type: String, default: 'primary' }
+    color: { type: String, default: 'primary' },
+    disabled: { type: Boolean, default: false }
   },
 
   computed: {
@@ -34,6 +37,11 @@ export default {
         this.$emit('input', this.returnValue || value)
         this.$emit('change', this.returnValue || value)
       }
+    },
+    classes () {
+      return {
+        'w-checkbox--disabled': this.disabled
+      }
     }
   }
 }
@@ -41,56 +49,92 @@ export default {
 
 <style lang="scss">
 $outline-width: 2px;
+
 .w-checkbox {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+
+  &--disabled {cursor: default;opacity: 0.3;}
 
   // The hidden real checkbox.
   input[type="checkbox"] {
     position: absolute;
     opacity: 0;
     z-index: -100;
+    outline: none;
   }
 
   // The fake checkbox to substitute.
   &__input {
     position: relative;
     border-radius: $border-radius;
-    width: round(1.3 * $base-font-size);
-    height: round(1.3 * $base-font-size);
+    width: $base-font-size;
+    height: $base-font-size;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
     justify-content: center;
     border: $outline-width solid currentColor;
-  }
-  &__input:before {
-    content: '';
-    position: absolute;
-    border-radius: 0;
-    border: 0 solid currentColor;
     @include default-transition;
-  }
-  input:checked + &__input:before {
-    border-width: 4px;
+
+    // Checked state.
+    :checked + & {
+      border-width: 0.5em;
+    }
   }
 
-  // The focus outline.
+  // The checkmark.
   &__input:after {
     content: '';
     position: absolute;
-    top: -$outline-width;
-    bottom: -$outline-width;
-    left: -$outline-width;
-    right: -$outline-width;
-    display: flex;
-    border-radius: inherit;
-    opacity: 0.25;
-    box-shadow: 0 0 0 0 currentColor;
-    @include default-transition;
+    left: 3px;
+    top: -1px;
+    width: 3px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) scale(0);
+    opacity: 0;
+    transition: inherit;
+
+    :checked + & {
+      left: -2px;
+      top: -6px;
+      opacity: 1;
+      transform: rotate(45deg) scale(1);
+    }
   }
 
-  input:focus + &__input:after {box-shadow: 0 0 0 4px currentColor;}
+  // The focus outline & checked ripple.
+  &__input:before {
+    content: "";
+    position: absolute;
+    width: $base-font-size;
+    height: $base-font-size;
+    background-color: currentColor;
+    border-radius: 100%;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.45s ease-in-out;
+  }
+
+  :checked + &__input:before {
+    animation: w-checkbox-ripple 0.9s ease-out;
+    transition: all 0.45s ease;
+  }
+
+  :focus + &__input:before {
+    transform: scale(1.8);
+    opacity: 0.2;
+  }
+}
+
+@keyframes w-checkbox-ripple {
+  0% {opacity: 1;transform: scale(1);} // Start with visible ripple.
+  40% {opacity: 0;transform: scale(2.6);} // Propagate ripple to max radius and fade out.
+  40.1%, 80% {opacity: 0;transform: scale(1);} // Wait and from 80% reapply the focus state outline.
+  100% {opacity: 0.2;transform: scale(1.8);}
 }
 </style>
