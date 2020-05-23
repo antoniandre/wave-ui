@@ -4,7 +4,7 @@
       v-for="(item, i) in checkboxItems"
       :key="i"
       type="checkbox"
-      :name="name || `checkboxes-${_uid}`"
+      :name="`${name || `checkboxes-${_uid}`}[]`"
       :label="item.label"
       :value="value === item.value"
       :color="color"

@@ -87,9 +87,9 @@ $size: round(1.3 * $base-font-size);
 
   // The hidden real checkbox.
   input[type="checkbox"] {
-    // position: absolute;
-    // opacity: 0;
-    // z-index: -100;
+    position: absolute;
+    opacity: 0;
+    z-index: -100;
     outline: none;
   }
 
