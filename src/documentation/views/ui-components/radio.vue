@@ -10,12 +10,11 @@ div
     and allows you to customize the label of each radio button through slot.
 
   h3 States
-  .layout
-    w-radio.mr-3(:value="true" label="Checked")
-    w-radio.mr-3(:value="false" label="Unchecked")
-    w-radio.mr-3(:value="true" indeterminate label="Checked")
-    w-radio.mr-3(:value="true" disabled label="Checked &amp; Disabled")
-    w-radio.mr-3(:value="false" disabled label="Unchecked &amp; Disabled")
+  .layout.wrap
+    w-radio.mr-3.mb-1(:value="true" label="Checked")
+    w-radio.mr-3.mb-1(:value="false" label="Unchecked")
+    w-radio.mr-3.mb-1(:value="true" disabled label="Checked &amp; disabled")
+    w-radio.mr-3.mb-1(:value="false" disabled label="Unchecked &amp; disabled")
 
   h3 V-model
   p.

@@ -153,7 +153,11 @@ $disabled-color: #ccc;
   }
 
   &__label {
+    display: flex;
+    align-items: center;
     cursor: inherit;
+
+    .w-radio--disabled & {opacity: 0.5;}
   }
 }
 

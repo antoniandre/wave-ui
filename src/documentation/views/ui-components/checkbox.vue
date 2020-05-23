@@ -10,12 +10,12 @@ div
     and allows you to customize the label of each checkbox through slot.
 
   h3 States
-  .layout
-    w-checkbox.mr-3(:value="true" label="Checked")
-    w-checkbox.mr-3(:value="false" label="Unchecked")
-    w-checkbox.mr-3(:value="true" indeterminate label="Checked")
-    w-checkbox.mr-3(:value="true" disabled label="Checked &amp; Disabled")
-    w-checkbox.mr-3(:value="false" disabled label="Unchecked &amp; Disabled")
+  .layout.wrap
+    w-checkbox.mr-3.mb-1(:value="true" label="Checked")
+    w-checkbox.mr-3.mb-1(:value="false" label="Unchecked")
+    w-checkbox.mr-3.mb-1(:value="true" indeterminate label="Checked")
+    w-checkbox.mr-3.mb-1(:value="true" disabled label="Checked &amp; disabled")
+    w-checkbox.mr-3.mb-1(:value="false" disabled label="Unchecked &amp; disabled")
 
   h3 V-model
   p.
