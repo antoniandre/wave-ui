@@ -8,7 +8,7 @@
       :checked="isChecked"
       :disabled="disabled"
       @change="onChange"
-      :aria-checked="isChecked"
+      :aria-checked="isChecked || 'false'"
       role="checkbox")
     .w-checkbox__input(
       @click="$refs.input.focus();$refs.input.click()"
@@ -76,6 +76,7 @@ export default {
 
 <style lang="scss">
 $outline-width: 2px;
+$size: round(1.3 * $base-font-size);
 
 .w-checkbox {
   display: inline-flex;
@@ -96,18 +97,18 @@ $outline-width: 2px;
   &__input {
     position: relative;
     border-radius: $border-radius;
-    width: $base-font-size;
-    height: $base-font-size;
+    width: $size;
+    height: $size;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
     justify-content: center;
     border: $outline-width solid currentColor;
-    @include default-transition;
+    transition: $transition-duration;
 
     // Checked state.
     :checked + & {
-      border-width: 0.5em;
+      border-width: $size / 2;
     }
   }
 
@@ -123,7 +124,7 @@ $outline-width: 2px;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg) scale(0);
     opacity: 0;
-    transition: inherit;
+    transition: $transition-duration + 0.05s;
     cursor: inherit;
 
     :checked + & {
@@ -138,19 +139,19 @@ $outline-width: 2px;
   &__input:before {
     content: "";
     position: absolute;
-    width: $base-font-size;
-    height: $base-font-size;
+    width: inherit;
+    height: inherit;
     background-color: currentColor;
     border-radius: 100%;
     transform: scale(0);
     opacity: 0;
     pointer-events: none;
-    transition: all 0.45s ease-in-out;
+    transition: 0.45s ease-in-out;
   }
 
   &--ripple &__input:before {
     animation: w-checkbox-ripple 0.9s ease-out;
-    transition: all 0.45s ease;
+    transition: 0.45s ease;
   }
 
   :focus + &__input:before {
