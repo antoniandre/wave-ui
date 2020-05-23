@@ -1,9 +1,10 @@
 <template lang="pug">
-  component.w-radio(:is="hasLabel ? 'label' : 'span'")
+  label.w-radio(:class="classes")
     input(
       type="radio"
       :name="name"
       :checked="isChecked"
+      :disabled="disabled"
       @change="isChecked = !isChecked")
     .w-radio__input(:class="{ 'mr-2': hasLabel, [this.color]: true }")
     slot {{ label }}
@@ -19,7 +20,8 @@ export default {
     returnValue: {},
     name: { type: String, default: '' },
     label: { type: String, default: '' },
-    color: { type: String, default: 'primary' }
+    color: { type: String, default: 'primary' },
+    disabled: { type: Boolean, default: false }
   },
 
   computed: {
@@ -34,6 +36,11 @@ export default {
         this.$emit('input', this.returnValue || value)
         this.$emit('change', this.returnValue || value)
       }
+    },
+    classes () {
+      return {
+        'w-radio--disabled': this.disabled
+      }
     }
   }
 }
@@ -41,10 +48,13 @@ export default {
 
 <style lang="scss">
 $outline-width: 2px;
+
 .w-radio {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+
+  &--disabled {cursor: default;opacity: 0.3;}
 
   // The hidden real radio button.
   input[type="radio"] {

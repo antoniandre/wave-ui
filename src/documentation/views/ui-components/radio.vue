@@ -9,9 +9,17 @@ div
     It accepts an inline parameter to display the radio buttons inline,
     and allows you to customize the label of each radio button through slot.
 
+  h3 States
+  .layout
+    w-radio.mr-3(:value="true" label="Checked")
+    w-radio.mr-3(:value="false" label="Unchecked")
+    w-radio.mr-3(:value="true" indeterminate label="Checked")
+    w-radio.mr-3(:value="true" disabled label="Checked &amp; Disabled")
+    w-radio.mr-3(:value="false" disabled label="Unchecked &amp; Disabled")
+
   h3 V-model
   p.
-    If a value is set in the choice's data, it will be returned by the v-model when selected.#[br]
+    If a value is set in the choice's data, it will be returned through the v-model when selected.#[br]
     If no value is set, the choice's label will be returned instead.
   .layout
     w-radios(v-model="selectedRadio1" :items="radios1")
