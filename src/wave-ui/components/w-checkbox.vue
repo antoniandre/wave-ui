@@ -61,7 +61,7 @@ export default {
 
       if (this.isChecked) {
         this.doRipple = true
-        setTimeout(() => (this.doRipple = false), 900)
+        setTimeout(() => (this.doRipple = false), 1000)
       }
     }
   },
@@ -76,14 +76,16 @@ export default {
 
 <style lang="scss">
 $outline-width: 2px;
-$size: round(1.3 * $base-font-size);
+$size: round(1.6 * $base-font-size);
+$inactive-color: #666;
+$disabled-color: #ccc;
 
 .w-checkbox {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
 
-  &--disabled {cursor: default;opacity: 0.3;}
+  &--disabled {cursor: default;}
 
   // The hidden real checkbox.
   input[type="checkbox"] {
@@ -103,35 +105,42 @@ $size: round(1.3 * $base-font-size);
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
     justify-content: center;
-    border: $outline-width solid currentColor;
-    transition: $transition-duration;
+    border: $outline-width solid $inactive-color;
+    transition: 0.3s ease-in-out;
+
+    .w-checkbox--disabled & {border-color: $disabled-color;}
 
     // Checked state.
     :checked + & {
       border-width: $size / 2;
+      border-color: currentColor;
+      background-color: currentColor;
+    }
+    .w-checkbox--disabled :checked + & {
+      border-color: $disabled-color;
+      background-color: $disabled-color;
     }
   }
 
-  // The checkmark.
+  // The checkmark - visible when checked.
   &__input:after {
     content: '';
     position: absolute;
-    left: 3px;
-    top: -1px;
-    width: 3px;
-    height: 8px;
+    left: round(-$size / 8);
+    top: round(-$size / 3);
+    width: round($size / 6);
+    height: round($size / 2);
     border: solid #fff;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg) scale(0);
     opacity: 0;
-    transition: $transition-duration + 0.05s;
+    transition: $transition-duration;
     cursor: inherit;
 
     :checked + & {
-      left: -2px;
-      top: -6px;
       opacity: 1;
       transform: rotate(45deg) scale(1);
+      transition: 0.25s 0.15s;
     }
   }
 
@@ -150,8 +159,7 @@ $size: round(1.3 * $base-font-size);
   }
 
   &--ripple &__input:before {
-    animation: w-checkbox-ripple 0.9s ease-out;
-    transition: 0.45s ease;
+    animation: w-checkbox-ripple 1s ease-out;
   }
 
   :focus + &__input:before {
@@ -160,7 +168,11 @@ $size: round(1.3 * $base-font-size);
   }
 
   &__label {
+    display: flex;
+    align-items: center;
     cursor: inherit;
+
+    .w-checkbox--disabled & {opacity: 0.5;}
   }
 }
 

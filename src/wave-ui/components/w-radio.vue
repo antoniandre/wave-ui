@@ -77,13 +77,15 @@ export default {
 <style lang="scss">
 $outline-width: 2px;
 $size: round(1.3 * $base-font-size);
+$inactive-color: #666;
+$disabled-color: #ccc;
 
 .w-radio {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
 
-  &--disabled {cursor: default;opacity: 0.3;}
+  &--disabled {cursor: default;}
 
   // The hidden real radio button.
   input[type="radio"] {
@@ -103,7 +105,14 @@ $size: round(1.3 * $base-font-size);
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
     justify-content: center;
-    border: $outline-width solid currentColor;
+    border: $outline-width solid $inactive-color;
+    transition: 0.3s ease-in-out;
+
+    .w-radio--disabled & {border-color: $disabled-color;}
+
+    // Checked state.
+    :checked + & {border-color: currentColor;}
+    .w-radio--disabled :checked + & {border-color: $disabled-color;}
   }
 
   // The inner bullet.
@@ -111,12 +120,11 @@ $size: round(1.3 * $base-font-size);
     content: '';
     position: absolute;
     border-radius: 100%;
-    border: 0 solid currentColor;
+    border: 0 solid $inactive-color;
     @include default-transition;
 
-    :checked + & {
-      border-width: 4px;
-    }
+    :checked + & {border-width: 4px;border-color: currentColor;}
+    .w-radio--disabled & {border-color: $disabled-color;}
   }
 
   // The focus outline & checked ripple.
