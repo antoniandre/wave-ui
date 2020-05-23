@@ -7,8 +7,8 @@
       :name="inputName"
       :checked="isChecked"
       :disabled="disabled"
-      @change="isChecked = !isChecked"
-      :aria-checked="isChecked"
+      @change="onChange"
+      :aria-checked="isChecked || 'false'"
       role="radio")
     .w-radio__input(
       @click="$refs.input.focus();$refs.input.click()"
@@ -32,6 +32,13 @@ export default {
     disabled: { type: Boolean, default: false }
   },
 
+  data () {
+    return {
+      isChecked: this.value,
+      doRipple: false
+    }
+  },
+
   computed: {
     inputName () {
       return this.name || `radio--${this._uid}`
@@ -39,19 +46,29 @@ export default {
     hasLabel () {
       return (this.$slots.default && this.$slots.default.length) || this.label
     },
-    isChecked: {
-      get () {
-        return this.returnValue !== undefined ? this.returnValue === this.value : this.value
-      },
-      set (value) {
-        this.$emit('input', this.returnValue || value)
-        this.$emit('change', this.returnValue || value)
-      }
-    },
     classes () {
       return {
-        'w-radio--disabled': this.disabled
+        'w-radio--disabled': this.disabled,
+        'w-radio--ripple': this.doRipple
       }
+    }
+  },
+
+  methods: {
+    onChange () {
+      this.isChecked = !this.isChecked
+      this.$emit('input', this.isChecked)
+
+      if (this.isChecked) {
+        this.doRipple = true
+        setTimeout(() => (this.doRipple = false), 900)
+      }
+    }
+  },
+
+  watch: {
+    value (value) {
+      this.isChecked = value
     }
   }
 }
@@ -59,6 +76,7 @@ export default {
 
 <style lang="scss">
 $outline-width: 2px;
+$size: round(1.3 * $base-font-size);
 
 .w-radio {
   display: inline-flex;
@@ -72,46 +90,69 @@ $outline-width: 2px;
     position: absolute;
     opacity: 0;
     z-index: -100;
+    outline: none;
   }
 
   // The fake radio button to substitute.
   &__input {
     position: relative;
     border-radius: 100%;
-    width: round(1.3 * $base-font-size);
-    height: round(1.3 * $base-font-size);
+    width: $size;
+    height: $size;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
     justify-content: center;
     border: $outline-width solid currentColor;
   }
-  &__input:before {
+
+  // The inner bullet.
+  &__input:after {
     content: '';
     position: absolute;
     border-radius: 100%;
     border: 0 solid currentColor;
     @include default-transition;
-  }
-  input:checked + &__input:before {
-    border-width: 4px;
+
+    :checked + & {
+      border-width: 4px;
+    }
   }
 
-  // The focus outline.
-  &__input:after {
-    content: '';
+  // The focus outline & checked ripple.
+  &__input:before {
+    content: "";
     position: absolute;
-    top: -$outline-width;
-    bottom: -$outline-width;
-    left: -$outline-width;
-    right: -$outline-width;
-    display: flex;
+    width: inherit;
+    height: inherit;
+    background-color: currentColor;
     border-radius: 100%;
-    opacity: 0.25;
-    box-shadow: 0 0 0 0 currentColor;
-    @include default-transition;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.45s ease-in-out;
   }
 
-  input:focus + &__input:after {box-shadow: 0 0 0 5px currentColor;}
+  &--ripple &__input:before {
+    animation: w-radio-ripple 0.9s ease-out;
+    transition: 0.45s ease;
+  }
+
+  :focus + &__input:before {
+    transform: scale(1.8);
+    opacity: 0.2;
+    transition: 0.25s ease-out;
+  }
+
+  &__label {
+    cursor: inherit;
+  }
+}
+
+@keyframes w-radio-ripple {
+  0% {opacity: 1;transform: scale(1);} // Start with visible ripple.
+  40% {opacity: 0;transform: scale(2.6);} // Propagate ripple to max radius and fade out.
+  40.1%, 80% {opacity: 0;transform: scale(1);} // Wait and from 80% reapply the focus state outline.
+  100% {opacity: 0.2;transform: scale(1.8);}
 }
 </style>
