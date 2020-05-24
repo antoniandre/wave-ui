@@ -3,6 +3,8 @@ const renderListItems = function (createEl) {
   return this.listItems.map((li, index) => {
     // Content nodes.
     let vnodes = [renderListItemLabel.call(this, createEl, li, index)]
+
+    // If children, do a recursive call.
     if (li.children) {
       vnodes.push(createEl(
         'w-list',
@@ -97,7 +99,7 @@ export default {
     nav: { type: Boolean, default: false },
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
     itemValue: { type: String, default: 'value' }, // Name of the value field.
-    depth: { type: Number, default: 0 }
+    depth: { type: Number, default: 0 } // For recursive call.
   },
 
   data: () => ({
@@ -249,7 +251,8 @@ export default {
 
     // Focus state and active class.
     &--selectable:focus:before,
-    &--active:before, &--active:hover:before {opacity: 0.15;}
+    &--active:before, &--active:hover:before,
+    .w-list--navigation &.router-link-exact-active:before {opacity: 0.15;}
 
     // Active state.
     &--selectable:active:before {opacity: 0.2;}
