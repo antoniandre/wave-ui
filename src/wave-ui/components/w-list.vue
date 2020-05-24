@@ -40,7 +40,12 @@ const renderListItemLabel = function (createEl, li, index) {
       'w-checkbox',
       {
         class: 'mr-2',
-        props: { value: li.selected },
+        props: {
+          value: li.selected,
+          color: this.color,
+          round: this.roundCheckboxes,
+        },
+        // Prevent double check action resulting in no change of state.
         nativeOn: { click: e => e.preventDefault() },
         on: {
           input: e => {
@@ -87,6 +92,7 @@ export default {
     items: { type: Array, required: true }, // All the possible options.
     value: {}, // v-model on selected item if any.
     checklist: { type: Boolean, default: false },
+    roundCheckboxes: { type: Boolean, default: false }, // Checklist option.
     // If selectable (if value !== false), this allows multiple selections.
     multiple: { type: Boolean, default: false },
     hover: { type: Boolean, default: false },

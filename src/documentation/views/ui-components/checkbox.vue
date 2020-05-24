@@ -33,6 +33,9 @@ div
   h3 Inline layout
   w-checkboxes(:items="checkboxes2" inline)
 
+  h3 Round
+  w-checkboxes(:items="checkboxes2" round inline)
+
   h3 Color
   p.
     By default the #[code w-checkboxes] &amp; #[code w-checkbox] components will

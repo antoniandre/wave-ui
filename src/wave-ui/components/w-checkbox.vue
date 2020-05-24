@@ -30,7 +30,8 @@ export default {
     label: { type: String, default: '' },
     color: { type: String, default: 'primary' },
     disabled: { type: Boolean, default: false },
-    noRipple: { type: Boolean, default: true }
+    noRipple: { type: Boolean, default: false },
+    round: { type: Boolean, default: false }
   },
 
   data () {
@@ -55,7 +56,8 @@ export default {
       return {
         'w-checkbox--disabled': this.disabled,
         'w-checkbox--ripple': this.ripple.start,
-        'w-checkbox--rippled': this.ripple.end
+        'w-checkbox--rippled': this.ripple.end,
+        'w-checkbox--round': this.round
       }
     }
   },
@@ -92,7 +94,7 @@ export default {
 
 <style lang="scss">
 $outline-width: 2px;
-$size: round(1.6 * $base-font-size);
+$size: round(1.3 * $base-font-size);
 $inactive-color: #666;
 $disabled-color: #ccc;
 
@@ -125,6 +127,7 @@ $disabled-color: #ccc;
     transition: 0.3s ease-in-out;
     cursor: inherit;
 
+    .w-checkbox--round & {border-radius: 100%;}
     .w-checkbox--disabled & {border-color: $disabled-color;}
 
     // Checked state.

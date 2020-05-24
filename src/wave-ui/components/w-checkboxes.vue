@@ -8,6 +8,7 @@
       :label="item.label"
       :value="value === item.value"
       :color="color"
+      :round="round"
       @input="$emit('input', item.value);$emit('change', item.value)"
       :class="{ 'ml-3': inline && i, 'mt-1': !inline && i }")
       slot(name="label" :item="item") {{ item.label }}
@@ -23,6 +24,7 @@ export default {
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
     inline: { type: Boolean, default: false },
+    round: { type: Boolean, default: false },
     color: { type: String, default: 'primary' }
   },
 

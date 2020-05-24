@@ -26,10 +26,16 @@ div
     code.ml-2(v-else-if="multiple") {{ (selectedItem1 ? [selectedItem1] : '[]') }}
 
   h2 Checklists
-  w-list.mt-6(
-    :items="listItems1"
-    checklist
-    color="primary")
+  .layout.wrap
+    w-list.grow.mt-6.mr-4(
+      :items="listItems1"
+      checklist
+      color="green")
+    w-list.grow.mt-6(
+      :items="listItems1"
+      checklist
+      round-checkboxes
+      color="green")
 
   h3 Checklist and custom rendering
   w-list.mt-6(
@@ -70,14 +76,6 @@ export default {
       { label: 'Item 5', value: 5 },
       { label: 'Item 6', value: 6, disabled: true }
     ],
-    listItems3: [
-      { label: 'Item 1' },
-      { label: 'Item 2' },
-      { label: 'Item 3' },
-      { label: 'Item 4' },
-      { label: 'Item 5' },
-      { label: 'Item 6', disabled: true }
-    ],
     listItems2: [
       { label: 'Star', id: 'star', icon: 'mdi mdi-star', route: '#route-to-star' },
       { label: 'Check', id: 'check', icon: 'mdi mdi-check', route: '#route-to-check' },
@@ -85,6 +83,14 @@ export default {
       { label: 'Info', id: 'info', icon: 'mdi mdi-information', route: '#route-to-info' },
       { label: 'Warning', id: 'warning', icon: 'mdi mdi-alert', route: '#route-to-warning' },
       { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', route: '#disabled', disabled: true }
+    ],
+    listItems3: [
+      { label: 'Item 1' },
+      { label: 'Item 2' },
+      { label: 'Item 3' },
+      { label: 'Item 4' },
+      { label: 'Item 5' },
+      { label: 'Item 6', disabled: true }
     ],
     selectedItem1: 2,
     selectedItem2: 'check'
