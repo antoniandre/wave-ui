@@ -29,7 +29,8 @@ export default {
     name: { type: String, default: '' },
     label: { type: String, default: '' },
     color: { type: String, default: 'primary' },
-    disabled: { type: Boolean, default: false }
+    disabled: { type: Boolean, default: false },
+    noRipple: { type: Boolean, default: true }
   },
 
   data () {
@@ -64,17 +65,19 @@ export default {
       this.isChecked = !this.isChecked
       this.$emit('input', this.isChecked)
 
-      if (this.isChecked) {
-        this.ripple.start = true
-        this.ripple.timeout = setTimeout(() => {
+      if (!this.noRipple) {
+        if (this.isChecked) {
+          this.ripple.start = true
+          this.ripple.timeout = setTimeout(() => {
+            this.ripple.start = false
+            this.ripple.end = true
+            setTimeout(() => (this.ripple.end = false), 100)
+          }, 750)
+        }
+        else {
           this.ripple.start = false
-          this.ripple.end = true
-          setTimeout(() => (this.ripple.end = false), 100)
-        }, 750)
-      }
-      else {
-        this.ripple.start = false
-        clearTimeout(this.ripple.timeout)
+          clearTimeout(this.ripple.timeout)
+        }
       }
     }
   },
