@@ -35,7 +35,11 @@ export default {
   data () {
     return {
       isChecked: this.value,
-      doRipple: false
+      ripple: {
+        start: false,
+        end: false,
+        timeout: null
+      }
     }
   },
 
@@ -49,7 +53,8 @@ export default {
     classes () {
       return {
         'w-checkbox--disabled': this.disabled,
-        'w-checkbox--ripple': this.doRipple
+        'w-checkbox--ripple': this.ripple.start,
+        'w-checkbox--rippled': this.ripple.end
       }
     }
   },
@@ -60,8 +65,16 @@ export default {
       this.$emit('input', this.isChecked)
 
       if (this.isChecked) {
-        this.doRipple = true
-        setTimeout(() => (this.doRipple = false), 1000)
+        this.ripple.start = true
+        this.ripple.timeout = setTimeout(() => {
+          this.ripple.start = false
+          this.ripple.end = true
+          setTimeout(() => (this.ripple.end = false), 100)
+        }, 750)
+      }
+      else {
+        this.ripple.start = false
+        clearTimeout(this.ripple.timeout)
       }
     }
   },
@@ -107,6 +120,7 @@ $disabled-color: #ccc;
     justify-content: center;
     border: $outline-width solid $inactive-color;
     transition: 0.3s ease-in-out;
+    cursor: inherit;
 
     .w-checkbox--disabled & {border-color: $disabled-color;}
 
@@ -114,10 +128,12 @@ $disabled-color: #ccc;
     :checked + & {
       border-width: $size / 2;
       border-color: currentColor;
+      // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: currentColor;
     }
     .w-checkbox--disabled :checked + & {
       border-color: $disabled-color;
+      // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: $disabled-color;
     }
   }
@@ -127,24 +143,24 @@ $disabled-color: #ccc;
     content: '';
     position: absolute;
     left: round(-$size / 8);
-    top: round(-$size / 3);
+    top: round(-$size / 2.75);
     width: round($size / 6);
     height: round($size / 2);
-    border: solid #fff;
+    border: solid transparent;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg) scale(0);
     opacity: 0;
     transition: $transition-duration;
-    cursor: inherit;
 
     :checked + & {
       opacity: 1;
       transform: rotate(45deg) scale(1);
-      transition: 0.25s 0.15s;
+      transition: $transition-duration 0.3s cubic-bezier(0.42, 0.96, 1, 1.38);
+      border-color: #fff;
     }
   }
 
-  // The focus outline & checked ripple.
+  // The focus outline & ripple on check action.
   &__input:before {
     content: "";
     position: absolute;
@@ -155,16 +171,25 @@ $disabled-color: #ccc;
     transform: scale(0);
     opacity: 0;
     pointer-events: none;
-    transition: 0.45s ease-in-out;
+    transition: 0.25s ease-in-out;
   }
 
   &--ripple &__input:before {
-    animation: w-checkbox-ripple 1s ease-out;
+    background-color: transparent;
+    animation: w-checkbox-ripple 0.6s 0.15s ease;
   }
 
   :focus + &__input:before {
     transform: scale(1.8);
     opacity: 0.2;
+  }
+
+  // After ripple reset to default state, then remove the class via js and the
+  // `:focus + &__input:before` will re-transition to normal focused outline.
+  &--rippled &__input:before {
+    transition: none;
+    transform: scale(0);
+    opacity: 0;
   }
 
   &__label {
@@ -177,9 +202,7 @@ $disabled-color: #ccc;
 }
 
 @keyframes w-checkbox-ripple {
-  0% {opacity: 1;transform: scale(1);} // Start with visible ripple.
-  40% {opacity: 0;transform: scale(2.6);} // Propagate ripple to max radius and fade out.
-  40.1%, 80% {opacity: 0;transform: scale(1);} // Wait and from 80% reapply the focus state outline.
-  100% {opacity: 0.2;transform: scale(1.8);}
+  0% {opacity: 0.8;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
+  100% {opacity: 0;transform: scale(2.7);} // Propagate ripple to max radius and fade out.
 }
 </style>
