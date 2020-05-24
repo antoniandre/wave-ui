@@ -18,72 +18,68 @@ const renderListItems = function (createEl) {
 }
 
 const renderListItemLabel = function (createEl, li, index) {
-  let componentName = 'div'
-  const isLink = this.nav && !li.disabled && li.route
   const hasSlot = this.$scopedSlots.item
-  if (isLink) componentName = this.$router ? 'router-link' : 'a'
+  const mousedown = e => {
+    e.stopPropagation()
+    this.isSelectable && !li.disabled && this.selectItem(li)
+  }
+  const component = {
+    name: 'div',
+    class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
+    props: {},
+    attributes: {}, // HTML attributes.
+    on: {},
+    // nativeOn: {}, // Don't even define it if div, or Vue will raise a warning.
+    domProps: hasSlot || this.checklist ? {} : { innerHTML: li[this.itemLabel] }
+  }
+  const vnodes = []
 
-  // HTML attributes.
-  const attributes = {}
-  if (isLink) attributes.href = li.route
+  // Navigation list.
+  // ------------------------------------------------------
+  const isLink = this.nav && !li.disabled && li.route
+  if (isLink) {
+    component.name = this.$router ? 'router-link' : 'a'
+    component.attributes.href = li.route
+    if (this.$router) component.props.to = li.route
+  }
+  // ------------------------------------------------------
+
   // Links are naturally tabbable, add tabindex on other elements.
-  else if (this.isSelectable) attributes.tabindex = 0
+  else if (this.isSelectable) component.attributes.tabindex = 0
 
-  // Props.
-  const props = {}
-  if (isLink && this.$router) props.to = li.route
-
-  // Content.
-  let vnodes = []
+  // Checklist.
+  // ------------------------------------------------------
   if (this.checklist) {
-    vnodes.push(createEl(
-      'w-checkbox',
-      {
-        class: 'mr-2',
-        props: {
-          value: li.selected,
-          color: this.color,
-          round: this.roundCheckboxes,
-        },
-        // Prevent double check action resulting in no change of state.
-        nativeOn: { click: e => e.preventDefault() },
-        on: {
-          input: e => {
-            li.selected = e.target.value
-            this.$emit('input', e.target.value)
-          }
-        }
-      }
-    ))
+    component.name = 'w-checkbox'
+    component.props = {
+      value: li.selected,
+      color: this.color,
+      round: this.roundCheckboxes
+    }
+    if (!hasSlot) component.props.label = li[this.itemLabel] || false
 
-    if (!hasSlot) {
-      vnodes.push(createEl(
-        'span',
-        { domProps: { innerHTML: li[this.itemLabel] } }
-      ))
+    // Prevent double check action resulting in no change of state.
+    component.nativeOn = { click: e => e.preventDefault() }
+    component.on = {
+      input: e => {
+        li.selected = e.target.value
+        this.$emit('input', e.target.value)
+      }
     }
   }
+  // ------------------------------------------------------
 
   if (hasSlot) {
     vnodes.push(this.$scopedSlots.item({ item: li, selected: li.selected, index }))
   }
 
-  return createEl(
-    componentName,
-    {
-      props,
-      class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
-      attrs: { ...attributes },
-      domProps: hasSlot || (!hasSlot && this.checklist) ? {} : { innerHTML: li[this.itemLabel] },
-      on: {
-        mousedown: e => {
-          e.stopPropagation()
-          this.isSelectable && !li.disabled && this.selectItem(li)
-        }
-      }
-    },
-    vnodes
-  )
+  if (component.name === 'div') component.on.mousedown = mousedown
+  else {
+    if (!component.nativeOn) component.nativeOn = {}
+    component.nativeOn.mousedown = mousedown
+  }
+
+  return createEl(component.name, component, vnodes)
 }
 
 export default {
@@ -114,6 +110,8 @@ export default {
   computed: {
     listItems () {
       return this.items.map((item, i) => {
+        item = { ...item } // Don't modify the original.
+
         // If no value is set then add one to prevent error.
         if (item[this.itemValue] === undefined) item[this.itemValue] = i
 
@@ -133,7 +131,7 @@ export default {
       }
     },
     isMultipleSelect () {
-      return this.multiple || this.checklist
+      return this.multiple || this.checklist // Checklist is always multiple select.
     },
     isSelectable () {
       return this.value !== undefined || this.checklist || this.nav
@@ -157,7 +155,7 @@ export default {
     liLabelClasses (item) {
       return {
         'w-list__item-label--disabled': item.disabled || (this.nav && !item.route && !item.children),
-        'w-list__item-label--active': this.isSelectable && item.selected,
+        'w-list__item-label--active': this.isSelectable && item.selected || null,
         'w-list__item-label--hoverable': this.hover,
         'w-list__item-label--selectable': this.isSelectable
       }
@@ -259,7 +257,11 @@ export default {
     // Disabled.
     &--disabled:before {display: none;}
   }
+  // --------------------------------------------
 
+  // Checklist.
+  // --------------------------------------------
+  &--checklist .w-checkbox__label {flex-grow: 1;}
   // --------------------------------------------
 
   // Navigation link.

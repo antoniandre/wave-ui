@@ -27,15 +27,21 @@ div
 
   h2 Checklists
   .layout.wrap
-    w-list.grow.mt-6.mr-4(
-      :items="listItems1"
-      checklist
-      color="green")
-    w-list.grow.mt-6(
-      :items="listItems1"
-      checklist
-      round-checkboxes
-      color="green")
+    .grow
+      .subtitle Normal
+      w-list.mt-6.mr-4(
+        v-model="selectedItem3"
+        :items="listItems1"
+        checklist
+        color="green")
+    .grow
+      .subtitle Round checkboxes
+      w-list.mt-6(
+        v-model="selectedItem4"
+        :items="listItems1"
+        checklist
+        round-checkboxes
+        color="green")
 
   h3 Checklist and custom rendering
   w-list.mt-6(
@@ -93,7 +99,9 @@ export default {
       { label: 'Item 6', disabled: true }
     ],
     selectedItem1: 2,
-    selectedItem2: 'check'
+    selectedItem2: 'check',
+    selectedItem3: [1, 3],
+    selectedItem4: 1
   })
 }
 </script>
