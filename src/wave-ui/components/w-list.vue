@@ -2,7 +2,11 @@
 const renderListItems = function (createEl) {
   return this.listItems.map((li, index) => {
     // Content nodes.
-    let vnodes = [renderListItemLabel.call(this, createEl, li, index)]
+    const vnodes = []
+
+    if (this.icon) vnodes.push(createEl('w-icon', { class: 'w-list__item-bullet' }, [this.icon]))
+
+    vnodes.push(renderListItemLabel.call(this, createEl, li, index))
 
     // If children, do a recursive call.
     if (li.children) {
@@ -32,7 +36,7 @@ const renderListItemLabel = function (createEl, li, index) {
     attributes: {}, // HTML attributes.
     on: {},
     // nativeOn: {}, // Don't even define it if div, or Vue will raise a warning.
-    domProps: hasSlot || this.checklist ? {} : { innerHTML: li[this.itemLabel] }
+    domProps: {}
   }
   const vnodes = []
 
@@ -71,7 +75,8 @@ const renderListItemLabel = function (createEl, li, index) {
   }
   // ------------------------------------------------------
 
-  if (hasSlot) {
+  if (!hasSlot && !vnodes.length) component.domProps = { innerHTML: li[this.itemLabel] }
+  else if (hasSlot) {
     vnodes.push(this.$scopedSlots.item({ item: li, selected: li.selected, index }))
   }
 
@@ -97,6 +102,7 @@ export default {
     color: { type: String, default: null },
     // Navigation type adds a router-link on items with `route`.
     nav: { type: Boolean, default: false },
+    icon: { type: String, default: '' },
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
     itemValue: { type: String, default: 'value' }, // Name of the value field.
     depth: { type: Number, default: 0 } // For recursive call.
@@ -143,6 +149,7 @@ export default {
         [this.color]: this.color,
         'w-list--checklist': this.checklist,
         'w-list--navigation': this.nav,
+        'w-list--icon': this.icon,
         [`w-list--child w-list--depth-${this.depth}`]: this.depth
       }
     }
@@ -203,13 +210,27 @@ export default {
   margin-left: 0;
 
   &--child {margin-left: 6 * $base-increment;}
+  &--icon {padding-left: 8 * $base-increment;}
 
   &__item {margin-top: 1px;}
   &__item:first-child {margin-top: 0;}
+  &--icon &__item {position: relative;}
 
   &__item--parent {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  // List item bullet, if any.
+  // --------------------------------------------
+  &__item-bullet {
+    position: absolute;
+    right: 100%;
+    margin-right: 3 * $base-increment;
+
+    .w-list--hoverable &,
+    .w-list--selectable &,
+    .w-list--checklist & {margin-top: 3 * $base-increment;}
   }
 
   // List item Label.
@@ -218,7 +239,9 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
-    font-size: round(1.1 * $base-font-size);
+    font-size: round(1 * $base-font-size);
+    padding-top: 1px;
+    padding-bottom: 1px;
 
     &--selectable {cursor: pointer;}
     &--disabled {
