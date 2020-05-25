@@ -16,7 +16,7 @@ div
     w-checkbox.mt-2(v-model="dialog1.fullscreen" label="Fullscreen")
     w-checkbox.mt-2(v-model="dialog1.persistent" label="Persistent (try to click outside)")
     w-checkbox.mt-2(v-model="dialog1.persistentNoAnimation" label="Persistent with no animation")
-    .layout.mt-2.no-grow
+    .w-flex.mt-2.no-grow
       span.mr-2 Max width:
       w-radios(
         v-model="dialog1.maxWidth"
@@ -61,9 +61,9 @@ div
 
   h2 Transitions
 
-  .layout
+  .w-flex
     w-button.px-4.mr-6(@click="dialog5.show = true" bg-color="primary" dark) Open dialog
-    .layout.wrap
+    .w-flex.wrap
       div.ma-2
         .subtitle.mb-2 Transition names
         w-radios(
@@ -92,7 +92,7 @@ div
     :fullscreen="dialog5.fullscreen === null ? fullscreenTransition : dialog5.fullscreen"
     :transition="dialog5.transition")
     template(v-slot:title) Dialog with custom transition
-    .layout.fill-height.align-center.justify-center
+    .w-flex.fill-height.align-center.justify-center
       w-button.my-6(@click="dialog5.show = false" bg-color="error" dark) Close
 
   h2 Overlay opacity and color

@@ -1,6 +1,6 @@
 <template lang="pug">
 w-toolbar.main-toolbar(fixed)
-  router-link.layout.shrink.fill-height.align-center.home-link(to="/")
+  router-link.w-flex.no-grow.fill-height.align-center.home-link(to="/")
     wave.wave-logo
     | Wave UI
   .spacer

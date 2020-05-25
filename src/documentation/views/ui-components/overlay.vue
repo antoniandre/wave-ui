@@ -10,7 +10,7 @@ div
 
   h2 Overlay with custom opacity and control on #[span.code closeOnClick]
   p When closing on overlay click is allowed, the escape key will also close the overlay.
-  .layout.wrap.align-center.mb-2
+  .w-flex.wrap.align-center.mb-2
     w-button.mr-2(bg-color="primary" dark @click="showOverlay = true") Show overlay
     w-button.mr-2(
       :bg-color="closeOnClick ? 'green' : 'red'"
@@ -23,14 +23,14 @@ div
   h2 Overlay with custom background color
   w-button.mr-2(bg-color="primary" dark @click="showBlueOverlay = true") Show a blue overlay
 
-  w-overlay.layout.align-center.justify-center(
+  w-overlay.w-flex.align-center.justify-center(
     v-model="showOverlay"
     :close-on-click="closeOnClick"
     :opacity="opacity")
     w-button(bg-color="primary" lg dark @click="showOverlay = false")
       w-icon.mr-2 wi-cross
       | Hide overlay
-  w-overlay.layout.align-center.justify-center(v-model="showBlueOverlay" bg-color="rgba(35, 71, 129, 0.4)")
+  w-overlay.w-flex.align-center.justify-center(v-model="showBlueOverlay" bg-color="rgba(35, 71, 129, 0.4)")
     w-button(bg-color="primary" lg dark @click="showBlueOverlay = false")
       w-icon.mr-2 wi-cross
       | Hide overlay

@@ -53,7 +53,7 @@ div
       round
       color="primary"
       icon="wi-cross")
-    .layout.align-center.justify-center.fill-height
+    .w-flex.align-center.justify-center.fill-height
       w-button(
         @click="showLeftDrawer = false;showRightDrawer = true"
         dark

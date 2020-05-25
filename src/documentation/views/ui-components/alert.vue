@@ -38,26 +38,26 @@ div(style="max-width: 900px")
     w-alert(type="success" light no-border) This is a success alert with no border.
     w-alert(color="primary" no-border) This is a normal alert with no border.
     w-alert(bg-color="cyan-lighten-4" color="purple" no-border) This is an alert with a cyan background, purple color and no border.
-  .layout.wrap.ma-n2
-    w-alert.flex.ma-2(color="primary" border-left) This is a normal alert with a left border.
-    w-alert.flex.ma-2(color="primary" border-right) This is a normal alert with a right border.
-  .layout.wrap.mx-n2.mt-2
-    w-alert.flex.ma-2(color="primary" border-top) This is a normal alert with a top border.
-    w-alert.flex.ma-2(color="primary" border-bottom) This is a normal alert with a left border.
+  .w-flex.wrap.ma-n2
+    w-alert.grow.ma-2(color="primary" border-left) This is a normal alert with a left border.
+    w-alert.grow.ma-2(color="primary" border-right) This is a normal alert with a right border.
+  .w-flex.wrap.mx-n2.mt-2
+    w-alert.grow.ma-2(color="primary" border-top) This is a normal alert with a top border.
+    w-alert.grow.ma-2(color="primary" border-bottom) This is a normal alert with a left border.
 
   h2 Tile &amp; shadow
   w-alert(color="primary" tile) This is a tile alert.
   w-alert(color="primary" shadow) This is a normal alert with a shadow.
 
   h2 Sizes
-  .layout
-    .flex
+  .w-flex
+    .grow
       w-alert.size--xs(color="info") This is an extra small alert.
       w-alert.size--sm(color="info") This is a small alert.
       w-alert.size--md(color="info") This is a medium alert.
       w-alert.size--lg(color="info") This is a large alert.
       w-alert.size--xl(color="info") This is an extra large alert.
-    .spacer(v-if="$waveUI.breakpoint !== 'xs'")
+    .spacer(v-if="!$waveUI.breakpoint.xs")
 </template>
 
 <script>

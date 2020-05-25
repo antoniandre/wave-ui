@@ -10,7 +10,7 @@ div
     and allows you to customize the label of each checkbox through slot.
 
   h3 States
-  .layout.wrap
+  .w-flex.wrap
     w-checkbox.mr-3.mb-1(:value="true" label="Checked")
     w-checkbox.mr-3.mb-1(:value="false" label="Unchecked")
     w-checkbox.mr-3.mb-1(:value="true" indeterminate label="Checked")
@@ -21,7 +21,7 @@ div
   p.
     If a value is set in the choice's data, it will be returned through the v-model when selected.#[br]
     If no value is set, the choice's label will be returned instead.
-  .layout
+  .w-flex
     w-checkboxes(v-model="selectedCheckbox1" :items="checkboxes1")
     div.subtitle.ml-8
       | Selected choices:

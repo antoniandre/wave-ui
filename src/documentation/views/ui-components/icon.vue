@@ -46,7 +46,7 @@ div
       pre npm install ionicons
       pre.mb-4 import 'ionicons/dist/css/ionicons.min.css'
 
-      .layout
+      .w-flex
         div.mr-8
           div.mb-2.grey
             strong iOS

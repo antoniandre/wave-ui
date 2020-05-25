@@ -20,7 +20,7 @@ div
   w-tag(color="primary" shadow) Round
 
   h2 Sizes
-  .layout.align-center.ma-n1
+  .w-flex.align-center.ma-n1
     w-tag.ma-1(color="primary" xs) Extra small
     w-tag.ma-1(color="primary" sm) Small
     w-tag.ma-1(color="primary" md) Medium

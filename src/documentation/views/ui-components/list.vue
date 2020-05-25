@@ -3,12 +3,18 @@ div
   h1.headline.mt-4 #[span.code w-list]
 
   h2 Default items list rendering
-  w-list.mt-6(:items="listItems1" color="primary")
+  .w-flex.wrap
+    .grow
+      .subtitle Most basic
+      w-list.grow.mt-6(:items="listItems1" color="primary")
+    .grow
+      .subtitle With icons
+      w-list.grow.mt-6(:items="listItems1" icon="wi-check" color="primary")
 
   h2 Custom rendering &amp; hoverable
   w-list.mt-6(:items="listItems2" color="pink" hover)
     template(v-slot:item="{ item }")
-      .layout
+      .w-flex.align-center
         | {{ item.label }}
         .spacer
         w-icon {{ item.icon }}
@@ -26,7 +32,7 @@ div
     code.ml-2(v-else-if="multiple") {{ (selectedItem1 ? [selectedItem1] : '[]') }}
 
   h2 Checklists
-  .layout.wrap
+  .w-flex.wrap
     .grow
       .subtitle Normal
       w-list.mt-6.mr-4(

@@ -5,13 +5,14 @@ div
   h2 Layout classes
   ul
     li
-      code .layout
+      code .w-flex
       p column, wrap
     li.mt-1
-      code .flex
-      p grow
+      code .grow, .no-grow
+      p
     li.mt-1
-      code .shrink
+      code .shrink, .no-shrink
+      p
     li.mt-1
       code .spacer
     li.mt-1

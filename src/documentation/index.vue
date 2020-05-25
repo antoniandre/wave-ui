@@ -1,16 +1,16 @@
 <template lang="pug">
-w-app.fill-height.layout.column
+w-app.fill-height.w-flex.column
   w-drawer.nav-drawer(v-if="isMobile" v-model="drawerOpen" left)
     nav-menu(:drawer-open.sync="drawerOpen")
   header.no-shrink
     toolbar(:drawer-open.sync="drawerOpen")
   transition(name="fade")
     w-progress(v-if="loading" color="primary" tile absolute)
-  .content-wrap.layout.grow(:class="`page--${$route.name}`")
+  .content-wrap.w-flex(:class="`page--${$route.name}`")
     nav-menu.navigation.mt-6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
     transition(name="fade-page" mode="out-in")
-      router-view.flex
-  footer.pa-3.layout.justify-end.align-center.caption.no-grow
+      router-view.grow
+  footer.pa-3.w-flex.justify-end.align-center.caption.no-grow
     | Made with
     w-icon.ml-1(sm) mdi mdi-vuejs
     w-icon.ml-1(sm) mdi mdi-language-css3

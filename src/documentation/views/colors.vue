@@ -16,13 +16,13 @@ div(style="overflow: hidden")
     text color of your choice.
 
   h2 Status colors
-  .layout.wrap.mb-12.ma-n2
-    .color.success--bg.subtitle.text-center.flex.py-3.ma-2 success
-    .color.error--bg.subtitle.text-center.flex.py-3.ma-2 error
-    .color.warning--bg.subtitle.text-center.flex.py-3.ma-2 warning
-    .color.info--bg.subtitle.text-center.flex.py-3.ma-2 info
+  .w-flex.wrap.mb-12.ma-n2
+    .color.success--bg.subtitle.text-center.grow.py-3.ma-2 success
+    .color.error--bg.subtitle.text-center.grow.py-3.ma-2 error
+    .color.warning--bg.subtitle.text-center.grow.py-3.ma-2 warning
+    .color.info--bg.subtitle.text-center.grow.py-3.ma-2 info
 
-  h2.my-4.layout.align-center
+  h2.my-4.w-flex.align-center
     | Color Palette
     w-button.ml-6(
       bg-color="primary"
@@ -32,7 +32,7 @@ div(style="overflow: hidden")
       | {{ horizontal ? 'Vertical' : 'Horizontal' }} display
 
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
-    .layout.flex.wrap.ma-n2
+    .w-flex.wrap.ma-n2
       .color-palette.ma-2(
         v-for="({ color, label, tones }, i) in colors"
         :key="i")
@@ -49,7 +49,7 @@ div(style="overflow: hidden")
             small {{ tone.color }}
 
       .color-palette.ma-2
-        .layout.ma-n2(:class="{ column: !horizontal }")
+        .w-flex.ma-n2(:class="{ column: !horizontal }")
           .color.color--top.ma-2.black--bg
             span black
             small #000
@@ -82,6 +82,7 @@ export default {
   .horizontal & {
     display: flex;
     flex-direction: row;
+    flex-grow: 1;
     height: 100px;
   }
 
@@ -90,6 +91,7 @@ export default {
     .horizontal & {
       flex-direction: column;
       justify-content: center;
+      flex-grow: 1;
     }
   }
 
