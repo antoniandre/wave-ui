@@ -1,34 +1,29 @@
-// Layout classes.
-// ----------------------------------------------
-.layout {
-  display: flex;
-  flex: 1 1 auto;
-  &.column {flex-direction: column;}
-  &.wrap {flex-wrap: wrap;}
-}
-.flex {flex: 1 1 auto;} // Flex grow + flex shrink.
-.spacer {flex-grow: 1;}
-.grow {flex-shrink: 0;flex-grow: 1;}
-.no-grow {flex-grow: 0;}
-.shrink {flex-shrink: 1;flex-grow: 0;}
-.no-shrink {flex-shrink: 0;}
-.fill-height {height: 100%;}
-.align-start {align-items: flex-start;}
-.align-center {align-items: center;}
-.align-end {align-items: flex-end;}
-.justify-start {justify-content: flex-start;}
-.justify-center {justify-content: center;}
-.justify-end {justify-content: flex-end;}
-.justify-space-between {justify-content: space-between;}
-
-.text-left {text-align: left;}
-.text-center {text-align: center;}
-.text-right {text-align: right;}
-// ----------------------------------------------
-
-// Spaces.
-// ----------------------------------------------
 .w-app {
+  // Layout classes.
+  // ----------------------------------------------
+  .spacer {flex-grow: 1;}
+
+  .grow {flex-grow: 1;flex-basis: 0;}
+  .no-grow {flex-grow: 0;}
+  .shrink {flex-shrink: 1;}
+  .no-shrink {flex-shrink: 0;}
+  .fill-height {height: 100%;}
+
+  .align-start {align-items: flex-start;}
+  .align-center {align-items: center;}
+  .align-end {align-items: flex-end;}
+  .justify-start {justify-content: flex-start;}
+  .justify-center {justify-content: center;}
+  .justify-end {justify-content: flex-end;}
+  .justify-space-between {justify-content: space-between;}
+
+  .text-left {text-align: left;}
+  .text-center {text-align: center;}
+  .text-right {text-align: right;}
+  // ----------------------------------------------
+
+  // Spaces.
+  // ----------------------------------------------
   @for $i from 0 through 12 {
     $number: round($i * $base-increment);
     .ma-#{$i} {margin: $number;}
@@ -71,32 +66,32 @@
   .pr-0 {padding-right: 0;}
   .pb-0 {padding-bottom: 0;}
   .pl-0 {padding-left: 0;}
-}
-// ----------------------------------------------
+  // ----------------------------------------------
 
-// Sizes.
-// ----------------------------------------------
-// In all the sizes bellow, round(x / 2) * 2 to always have even numbers.
-// Different heights with a mix of odd and even numbers will misalign
-// when verticallly centering (vertical-align or align-items center).
-.size--xs {
-  font-size: round(0.9 * $base-font-size);
-  line-height: round(1.25 * $base-font-size / 2) * 2;
+  // Sizes.
+  // ----------------------------------------------
+  // In all the sizes bellow, round(x / 2) * 2 to always have even numbers.
+  // Different heights with a mix of odd and even numbers will misalign
+  // when verticallly centering (vertical-align or align-items center).
+  .size--xs {
+    font-size: round(0.9 * $base-font-size);
+    line-height: round(1.25 * $base-font-size / 2) * 2;
+  }
+  .size--sm {
+    font-size: round(1.1 * $base-font-size);
+    line-height: round(1.6 * $base-font-size / 2) * 2;
+  }
+  .size--md {
+    font-size: round(1.15 * $base-font-size);
+    line-height: round(1.9 * $base-font-size / 2) * 2;
+  }
+  .size--lg {
+    font-size: round(1.4 * $base-font-size);
+    line-height: round(2.35 * $base-font-size / 2) * 2;
+  }
+  .size--xl {
+    font-size: round(1.7 * $base-font-size);
+    line-height: round(2.75 * $base-font-size / 2) * 2;
+  }
+  // ----------------------------------------------
 }
-.size--sm {
-  font-size: round(1.1 * $base-font-size);
-  line-height: round(1.6 * $base-font-size / 2) * 2;
-}
-.size--md {
-  font-size: round(1.15 * $base-font-size);
-  line-height: round(1.9 * $base-font-size / 2) * 2;
-}
-.size--lg {
-  font-size: round(1.4 * $base-font-size);
-  line-height: round(2.35 * $base-font-size / 2) * 2;
-}
-.size--xl {
-  font-size: round(1.7 * $base-font-size);
-  line-height: round(2.75 * $base-font-size / 2) * 2;
-}
-// ----------------------------------------------
