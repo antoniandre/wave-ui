@@ -1,9 +1,11 @@
-import Vue from 'vue'
 import { mergeConfig } from './utils/config'
 import * as components from './components'
 // import * as directives from './directives'
 
-class WaveUI {
+export default class WaveUI {
+  static instance = null
+  static vueInstance = null // Needed until constructor.
+
   breakpoint = {
     name: '',
     xs: false,
@@ -34,17 +36,30 @@ class WaveUI {
     //   mounted () {
     //   }
     // })
+
+    // Save the Vue instance for use in the constructor.
+    WaveUI.vueInstance = Vue
   }
 
+  // Singleton.
   constructor (options = {}) {
-    // Make waveUI reactive!
-    Vue.prototype.$waveUI = Vue.observable(this)
+    if (WaveUI.instance) return WaveUI.instance
 
-    // Merge user options into default config.
-    mergeConfig(options)
+    else {
+      // Merge user options into default config.
+      mergeConfig(options)
+
+      WaveUI.instance = this
+      // Make waveUI reactive and expose the single instance in Vue.
+      WaveUI.vueInstance.prototype.$waveUI = WaveUI.vueInstance.observable(this)
+
+      delete WaveUI.vueInstance // Get rid of the Vue instance that we don't need anymore.
+      // return WaveUI.instance
+    }
   }
 }
-export default WaveUI
+
+WaveUI.version = '__VERSION__'
 
 // Automatic installation if Vue has been added to the global scope.
 if (typeof window !== 'undefined' && window.Vue) {
