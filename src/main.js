@@ -12,6 +12,10 @@ const waveui = new WaveUI({
   colors: {
     primary: '#234781',
     secondary: '#d3ebff'
+  },
+  presets: {
+    // @todo.
+    // 'w-button': {}
   }
 })
 

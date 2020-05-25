@@ -1,6 +1,6 @@
 const config = {
   breakpoints: {
-    xs: 550,
+    xs: 600,
     sm: 900,
     md: 1200,
     lg: 1700,
@@ -17,7 +17,8 @@ const config = {
     info: '#3d9ff5'
   },
   icons: [],
-  iconsLigature: false
+  iconsLigature: false,
+  presets: {} // User presets for each component.
 }
 
 export { config as default }

@@ -7,10 +7,10 @@ div
   ul
     li.mb-1
       code.mr-2 xs
-      span from 0 to 550px
+      span from 0 to 600px
     li.mb-1
       code.mr-2 sm
-      span from 551px to 900px
+      span from 601px to 900px
     li.mb-1
       code.mr-2 md
       span from 901px to 1200px
