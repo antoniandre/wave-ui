@@ -15,6 +15,11 @@ const routes = [
     component: GettingStarted
   },
   {
+    path: '/customization',
+    name: 'customization',
+    component: () => import(/* webpackChunkName: "customization" */ '@/documentation/views/customization.vue')
+  },
+  {
     path: '/breakpoints',
     name: 'breakpoints',
     component: () => import(/* webpackChunkName: "breakpoints" */ '@/documentation/views/breakpoints.vue')

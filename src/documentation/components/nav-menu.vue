@@ -31,6 +31,7 @@ export default {
     return {
       sections: [
         { label: 'Getting started', route: { name: 'getting-started' } },
+        { label: 'Customization', route: 'customization' },
         { label: 'Breakpoints', route: 'breakpoints' },
         { label: 'Layout', route: 'layout' },
         { label: 'Typography', route: 'typography' },
