@@ -30,7 +30,8 @@ export default {
   data () {
     return {
       sections: [
-        { label: 'Getting started', route: { name: 'getting-started' } },
+        { label: 'Wave UI Features', route: { name: 'wave-ui-features' } },
+        { label: 'Getting started', route: 'getting-started' },
         { label: 'Customization', route: 'customization' },
         { label: 'Breakpoints', route: 'breakpoints' },
         { label: 'Layout', route: 'layout' },

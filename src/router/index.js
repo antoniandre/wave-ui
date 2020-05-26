@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import GettingStarted from '@/documentation/views/getting-started'
+import WaveUIFeatures from '@/documentation/views/wave-ui-features'
 
 Vue.use(VueRouter)
 // The loading state of Vue Router is appended to $router, so a
@@ -11,8 +11,17 @@ const status = Vue.observable({ loading: true })
 const routes = [
   {
     path: '/',
+    redirect: 'wave-ui-features'
+  },
+  {
+    path: '/wave-ui-features',
+    name: 'wave-ui-features',
+    component: WaveUIFeatures
+  },
+  {
+    path: '/getting-started',
     name: 'getting-started',
-    component: GettingStarted
+    component: () => import(/* webpackChunkName: "getting-started" */ '@/documentation/views/getting-started.vue')
   },
   {
     path: '/customization',
