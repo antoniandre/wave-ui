@@ -1,4 +1,5 @@
 // Overridable defaults.
+$css-scope: '.w-app' !default; // Allows control on CSS rules priority.
 $base-font-size: 14px !default;
 $base-increment: round($base-font-size / 4) !default;
 $layout-padding: $base-increment * 4 !default;
