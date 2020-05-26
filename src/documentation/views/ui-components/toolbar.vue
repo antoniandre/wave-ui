@@ -10,6 +10,14 @@ div
     span.ml-2 Item 2
     span.ml-2 Item 3
 
+  h2 Background color &amp; text color
+  w-toolbar.mt-4(bg-color="blue-lighten-5" color="blue-darken-3")
+    .title.my-0 Title
+    .spacer
+    span.ml-2 Item 1
+    span.ml-2 Item 2
+    span.ml-2 Item 3
+
   h2 Toolbars inside w-card
   p.
     The w-card component will detect if there is a toolbar in the title slot or in the actions

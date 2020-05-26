@@ -8,6 +8,7 @@ export default {
   name: 'w-toolbar',
   props: {
     color: { type: String, default: '' },
+    bgColor: { type: String, default: '' },
     absolute: { type: Boolean, default: false },
     fixed: { type: Boolean, default: false },
     bottom: { type: Boolean, default: false },
@@ -26,6 +27,7 @@ export default {
     classes () {
       return {
         [this.color]: !!this.color,
+        [`${this.bgColor}--bg`]: !!this.bgColor,
         'w-toolbar--absolute': !!this.absolute,
         'w-toolbar--fixed': !!this.fixed,
         'w-toolbar--bottom': !!this.bottom,
