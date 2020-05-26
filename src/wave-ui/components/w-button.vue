@@ -92,12 +92,25 @@ $spinner-size: 40;
   box-shadow: 0 0 0 transparent;
   vertical-align: middle;
   align-self: center;
+  justify-content: center;
   user-select: none;
   cursor: pointer;
+  // Background-color must not transition to not affect the hover & focus states
+  // in :before & :after.
+  transition: $transition-duration, background-color none;
 
-  &--dark {color: rgba(255, 255, 255, 0.95);background-color: rgba(255, 255, 255, 0.15);}
-  &--outline {background-color: transparent;border-color: currentColor;}
-  &--text {background-color: transparent;border-color: transparent;}
+  &--dark {
+    color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  &--outline {
+    background-color: transparent;
+    border-color: currentColor;
+  }
+  &--text {
+    background-color: transparent;
+    border-color: transparent;
+  }
   &--round {
     border-radius: 12 * $base-increment;
     padding-left: round(3 * $base-increment);
@@ -112,8 +125,6 @@ $spinner-size: 40;
     cursor: auto;
     box-shadow: none;
     opacity: 0.3;
-    // border-color: rgba(0, 0, 0, 0.03);
-    // background-color: rgba(0, 0, 0, 0.12);
   }
   &--dark[disabled] {
     background-color: rgba(255, 255, 255, 0.12);
