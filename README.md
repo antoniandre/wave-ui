@@ -1,6 +1,6 @@
 # Wave UI - COMING SOON.
 
-An emerging UI framework for Vue.js with only the bright side. `:sunny:`
+An emerging UI framework for Vue.js with only the bright side. :sunny:
 
 Like other UI frameworks, Wave UI is very flexible and easy to use. But it is also:
 
