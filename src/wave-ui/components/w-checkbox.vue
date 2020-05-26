@@ -206,6 +206,7 @@ $disabled-color: #ccc;
     display: flex;
     align-items: center;
     cursor: inherit;
+    user-select: none;
 
     .w-checkbox--disabled & {opacity: 0.5;}
   }

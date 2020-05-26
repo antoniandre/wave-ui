@@ -191,6 +191,7 @@ $disabled-color: #ccc;
     display: flex;
     align-items: center;
     cursor: inherit;
+    user-select: none;
 
     .w-radio--disabled & {opacity: 0.5;}
   }
