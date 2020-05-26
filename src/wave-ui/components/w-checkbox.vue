@@ -74,7 +74,7 @@ export default {
             this.ripple.start = false
             this.ripple.end = true
             setTimeout(() => (this.ripple.end = false), 100)
-          }, 750)
+          }, 700)
         }
         else {
           this.ripple.start = false
@@ -148,20 +148,24 @@ $disabled-color: #ccc;
   &__input:after {
     content: '';
     position: absolute;
-    left: round(-$size / 8);
-    top: round(-$size / 2.75);
+    // left: round(-$size / 8);
+    // top: round(-$size / 2.75);
+    left: -5px;
+    bottom: -1px;
     width: round($size / 6);
     height: round($size / 2);
     border: solid transparent;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg) scale(0);
+    transform-origin: 0 100%;
     opacity: 0;
     transition: $transition-duration;
 
     :checked + & {
       opacity: 1;
       transform: rotate(45deg) scale(1);
-      transition: $transition-duration 0.3s cubic-bezier(0.42, 0.96, 1, 1.38);
+      transition: $transition-duration 0.1s cubic-bezier(0.42, 0.96, 1, 1.38);
+      animation: w-checkbox-checkmark 0.45s 0.1s forwards ease-out;
       border-color: #fff;
     }
   }
@@ -182,7 +186,7 @@ $disabled-color: #ccc;
 
   &--ripple &__input:before {
     background-color: transparent;
-    animation: w-checkbox-ripple 0.6s 0.15s ease;
+    animation: w-checkbox-ripple 0.55s 0.15s ease;
   }
 
   :focus + &__input:before {
@@ -209,6 +213,12 @@ $disabled-color: #ccc;
 
 @keyframes w-checkbox-ripple {
   0% {opacity: 0.8;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
-  100% {opacity: 0;transform: scale(2.7);} // Propagate ripple to max radius and fade out.
+  100% {opacity: 0;transform: scale(2.8);} // Propagate ripple to max radius and fade out.
+}
+
+@keyframes w-checkbox-checkmark {
+  0% {width: 0;height: 0;}
+  25% {width: round($size / 6);height: 0;}
+  100% {height: round($size / 2);}
 }
 </style>

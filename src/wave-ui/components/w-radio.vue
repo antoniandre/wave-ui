@@ -72,7 +72,7 @@ export default {
             this.ripple.start = false
             this.ripple.end = true
             setTimeout(() => (this.ripple.end = false), 100)
-          }, 750)
+          }, 700)
         }
         else {
           this.ripple.start = false
@@ -171,7 +171,7 @@ $disabled-color: #ccc;
 
   &--ripple &__input:before {
     background-color: transparent;
-    animation: w-radio-ripple 0.6s 0.15s ease-out;
+    animation: w-radio-ripple 0.55s 0.15s ease;
   }
 
   :focus + &__input:before {
@@ -198,6 +198,6 @@ $disabled-color: #ccc;
 
 @keyframes w-radio-ripple {
   0% {opacity: 1;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
-  100% {opacity: 0;transform: scale(2.7);} // Propagate ripple to max radius and fade out.
+  100% {opacity: 0;transform: scale(2.8);} // Propagate ripple to max radius and fade out.
 }
 </style>
