@@ -26,9 +26,13 @@ export default {
 .w-divider {
   border: 0 solid currentColor;
 
-  &--default {border-top-color: rgba(0, 0, 0, 0.15);}
+  &--default {border-color: rgba(0, 0, 0, 0.15);}
 
-  &--vertical {border-left-width: 1px;}
+  &--vertical {
+    display: flex;
+    border-left-width: 1px;
+    height: 100%;
+  }
   &:not(.w-divider--vertical) {border-top-width: 1px;}
 }
 </style>

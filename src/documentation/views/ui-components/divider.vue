@@ -2,13 +2,11 @@
 div
   h1.headline.mt-4 #[span.code w-divider]
 
+  h2 Horizontal
   p This horizontal line bellow is a divider.
   w-divider.ma-10.ml-0
 
-  h2 Color
-  w-divider.ma-10.ml-0(color="green")
-
-  h2 Divider in a #[code w-card]
+  h3 Divider in a #[code w-card]
   w-card
     p.
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, vitae et eos
@@ -32,4 +30,20 @@ div
       Quisquam soluta distinctio qui vel alias molestiae, doloremque totam eius sequi delectus
       optio quam magnam, eaque, voluptatum maxime excepturi perspiciatis saepe provident dicta
       sapiente similique quibusdam. Mollitia, vel quam. Laudantium!
+
+  h2 Vertical
+  h3 Divider in a #[code w-toolbar]
+  w-toolbar(bg-color="grey-lighten-5")
+    .title.my-0 Toolbar
+    .spacer
+    span.mx-1 Item 1
+    span.mx-1 Item 2
+    span.mx-1 Item 3
+    w-divider.mx-1(vertical)
+    span.mx-1 Item 4
+    span.mx-1 Item 5
+    span.mx-1 Item 6
+
+  h2 Color
+  w-divider.ma-10.ml-0(color="green")
 </template>
