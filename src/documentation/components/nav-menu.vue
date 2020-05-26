@@ -94,6 +94,7 @@ div.nav-menu {
     border-left: 2px solid transparent;
 
     &.router-link-exact-active {border-left-color: $primary;}
+    &:before {left: -2px;}
   }
 }
 

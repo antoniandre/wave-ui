@@ -59,14 +59,7 @@ div
           span.ml-2 Item 1
           span.ml-2 Item 2
           span.ml-2 Item 3
-
 </template>
-
-<script>
-export default {
-
-}
-</script>
 
 <style lang="scss">
 .page--toolbar {
