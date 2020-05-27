@@ -30,6 +30,8 @@ export default {
     width: { type: [Number, String, Boolean], default: false },
     height: { type: [Number, String, Boolean], default: false },
     zIndex: { type: [Number, String, Boolean], default: false },
+    color: { type: String, default: '' },
+    bgColor: { type: String, default: '' },
     noOverlay: { type: Boolean, default: false },
     overlayColor: { type: [String, Boolean], default: false },
     overlayOpacity: { type: [Number, String, Boolean], default: false }
@@ -69,14 +71,16 @@ export default {
     },
     classes () {
       return {
+        [this.color]: this.color,
+        [`${this.bgColor}--bg`]: this.bgColor,
         'w-drawer--open': !!this.showDrawer,
         [`w-drawer--${this.position}`]: true
       }
     },
     styles () {
       return {
-        [`max-${this.sizeProperty}`]: this.size || false,
-        zIndex: this.zIndex || this.zIndex === 0 || false
+        [`max-${this.sizeProperty}`]: this.size || null,
+        zIndex: this.zIndex || this.zIndex === 0 || null
       }
     },
     transitionName () {
