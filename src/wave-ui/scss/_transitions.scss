@@ -1,47 +1,47 @@
 // Fade.
-// --------------------------------------------------
+// --------------------------------------------------------
 .fade-enter-active, .fade-leave-active {transition: opacity $transition-duration;}
 .fade-enter, .fade-leave-to {opacity: 0;}
-// --------------------------------------------------
+// --------------------------------------------------------
 
 // Slide-right: translate x from left to right.
-// --------------------------------------------------
+// --------------------------------------------------------
 .slide-right-enter-active, .slide-right-leave-active {
   transition: transform $transition-duration;
   transform: translateX(0%);
 }
 .slide-right-enter, .slide-right-leave-to {transform: translateX(-100%);}
-// --------------------------------------------------
+// --------------------------------------------------------
 
 // Slide-left: translate x from right to left.
-// --------------------------------------------------
+// --------------------------------------------------------
 .slide-left-enter-active, .slide-left-leave-active {
   transition: transform $transition-duration;
   transform: translateX(0%);
 }
 .slide-left-enter, .slide-left-leave-to {transform: translateX(100%);}
-// --------------------------------------------------
+// --------------------------------------------------------
 
 // Slide-bottom: translate y from top to bottom.
-// --------------------------------------------------
+// --------------------------------------------------------
 .slide-bottom-enter-active, .slide-bottom-leave-active {
   transition: transform $transition-duration;
   transform: translateY(0%);
 }
 .slide-bottom-enter, .slide-bottom-leave-to {transform: translateY(-100%);}
-// --------------------------------------------------
+// --------------------------------------------------------
 
 // Slide-top: translate y from bottom to top.
-// --------------------------------------------------
+// --------------------------------------------------------
 .slide-top-enter-active, .slide-top-leave-active {
   transition: transform $transition-duration;
   transform: translateY(0%);
 }
 .slide-top-enter, .slide-top-leave-to {transform: translateY(100%);}
-// --------------------------------------------------
+// --------------------------------------------------------
 
 // Slide-fade-left.
-// --------------------------------------------------
+// --------------------------------------------------------
 .slide-fade-left-enter-active, .slide-fade-left-leave-active {
   transition: all $transition-duration ease-in-out;
 }
@@ -51,7 +51,7 @@
 }
 
 // Slide-fade-right.
-// --------------------------------------------------
+// --------------------------------------------------------
 .slide-fade-right-enter-active, .slide-fade-right-leave-active {
   transition: all $transition-duration ease-in-out;
 }
@@ -59,10 +59,10 @@
   transform: translateX(-12px);
   opacity: 0;
 }
-// --------------------------------------------------
+// --------------------------------------------------------
 
 // Slide-fade-top.
-// --------------------------------------------------
+// --------------------------------------------------------
 .slide-fade-top-enter-active, .slide-fade-top-leave-active {
   transition: all $transition-duration ease-in-out;
 }
@@ -70,10 +70,10 @@
   transform: translateY(12px);
   opacity: 0;
 }
-// --------------------------------------------------
+// --------------------------------------------------------
 
 // Slide-fade-bottom.
-// --------------------------------------------------
+// --------------------------------------------------------
 .slide-fade-bottom-enter-active, .slide-fade-bottom-leave-active {
   transition: all $transition-duration ease-in-out;
 }
@@ -81,30 +81,30 @@
   transform: translateY(-12px);
   opacity: 0;
 }
-// --------------------------------------------------
+// --------------------------------------------------------
 
 // Scale.
-// --------------------------------------------------
+// --------------------------------------------------------
 .scale-enter-active {animation: w-scale $transition-duration;}
 .scale-leave-active {animation: w-scale $transition-duration reverse;}
 @keyframes w-scale {
   0% {transform: scale(0);}
   100% {transform: scale(1);}
 }
-// --------------------------------------------------
+// --------------------------------------------------------
 
 // Scale-fade.
-// --------------------------------------------------
+// --------------------------------------------------------
 .scale-fade-enter-active {animation: w-scale-fade $transition-duration;}
 .scale-fade-leave-active {animation: w-scale-fade $transition-duration reverse;}
 @keyframes w-scale-fade {
   0% {transform: scale(0.7);opacity: 0;}
   100% {transform: scale(1);opacity: 1;}
 }
-// --------------------------------------------------
+// --------------------------------------------------------
 
 // Bounce.
-// --------------------------------------------------
+// --------------------------------------------------------
 .bounce-enter-active {animation: w-bounce ($transition-duration + 0.1s);}
 .bounce-leave-active {animation: w-bounce ($transition-duration + 0.1s) reverse;}
 @keyframes w-bounce {
@@ -112,4 +112,4 @@
   60% {transform: scale(1.15);opacity: 1;}
   100% {transform: scale(1);}
 }
-// --------------------------------------------------
+// --------------------------------------------------------
