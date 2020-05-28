@@ -1,8 +1,8 @@
 <template lang="pug">
 div
   slot(name="activator" :on="eventHandlers")
-  transition(name="fade")
-    .w-tooltip(v-if="showTooltip" :class="classes" :style="styles")
+  transition(:name="`w-tooltip-slide-fade-${this.position}`")
+    .w-tooltip(v-show="showTooltip" :class="classes" :style="styles")
       slot
 </template>
 
@@ -26,7 +26,6 @@ export default {
 
   data: () => ({
     showTooltip: false,
-    visibleTooltip: false,
     // The activator coordinates.
     coordinates: {
       top: 0,
@@ -90,7 +89,7 @@ export default {
         [`${this.bgColor}--bg`]: this.bgColor,
         [`w-tooltip--${this.position}`]: true,
         'w-tooltip--fixed': this.fixed,
-        'w-tooltip--active': this.visibleTooltip
+        'w-tooltip--active': this.showTooltip
       }
     },
 
@@ -125,8 +124,6 @@ export default {
       if (this.showTooltip) this.coordinates = this.getCoordinates(e)
       // Could be useful to have this class?
       e.target.classList[this.showTooltip ? 'add' : 'remove']('w-tooltip-activator')
-
-      setTimeout(() => (this.visibleTooltip = this.showTooltip), 0)
     },
 
     getCoordinates (e) {
@@ -160,35 +157,53 @@ export default {
 
   &--top {
     transform: translate(-50%, -100%);
-    margin-top: -2 * $base-increment;
-
-    &.w-tooltip--active {
-      transform: translate(-50%, -100%);
-    }
+    margin-top: -3 * $base-increment;
   }
   &--bottom {
     transform: translateX(-50%);
-    margin-top: 2 * $base-increment;
-
-    &.w-tooltip--active {
-      transform: translate(-50%, $base-increment);
-    }
+    margin-top: 3 * $base-increment;
   }
   &--left {
     transform: translate(-100%, -50%);
-    margin-left: -2 * $base-increment;
-
-    &.w-tooltip--active {
-      transform: translate(-100%, -50%);
-    }
+    margin-left: -3 * $base-increment;
   }
   &--right {
     transform: translateY(-50%);
-    margin-left: 2 * $base-increment;
-
-    &.w-tooltip--active {
-      transform: translate($base-increment, -50%);
-    }
+    margin-left: 3 * $base-increment;
   }
 }
+
+// Transitions.
+// --------------------------------------------------------
+.w-tooltip-slide-fade-top-enter-active, .w-tooltip-slide-fade-top-leave-active,
+.w-tooltip-slide-fade-bottom-enter-active, .w-tooltip-slide-fade-bottom-leave-active,
+.w-tooltip-slide-fade-left-enter-active, .w-tooltip-slide-fade-left-leave-active,
+.w-tooltip-slide-fade-right-enter-active, .w-tooltip-slide-fade-right-leave-active {
+  transition: margin $transition-duration ease-in-out, opacity $transition-duration ease-in-out;
+}
+
+// Slide-fade-top.
+.w-tooltip-slide-fade-top-enter, .w-tooltip-slide-fade-top-leave-to {
+  margin-top: -2 * $base-increment;
+  opacity: 0;
+}
+
+// Slide-fade-bottom.
+.w-tooltip-slide-fade-bottom-enter, .w-tooltip-slide-fade-bottom-leave-to {
+  margin-top: 2 * $base-increment;
+  opacity: 0;
+}
+
+// Slide-fade-left.
+.w-tooltip-slide-fade-left-enter, .w-tooltip-slide-fade-left-leave-to {
+  margin-left: -2 * $base-increment;
+  opacity: 0;
+}
+
+// Slide-fade-right.
+.w-tooltip-slide-fade-right-enter, .w-tooltip-slide-fade-right-leave-to {
+  margin-left: 2 * $base-increment;
+  opacity: 0;
+}
+// --------------------------------------------------------
 </style>
