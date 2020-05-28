@@ -77,14 +77,18 @@ div
       color="primary"
       icon="wi-cross")
 
-  w-drawer(v-model="showBottomDrawer" bottom :height="bottomDrawerHeight")
+  w-drawer(
+    v-model="showBottomDrawer"
+    bottom
+    :height="bottomDrawerHeight"
+    bg-color="blue-lighten-4")
     w-button.button--close(
       sm
       @click="showBottomDrawer = !showBottomDrawer"
       outline
       round
-      color="primary"
       icon="wi-cross")
+    .w-flex.fill-height.align-center.justify-center You can customize the background color as well.
 </template>
 
 <script>

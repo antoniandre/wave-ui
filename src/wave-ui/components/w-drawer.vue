@@ -9,7 +9,7 @@
       :name="transitionName"
       appear
       @after-leave="showWrapper = false;$emit('input', false)")
-      .w-drawer__content(v-if="showDrawer" :style="styles")
+      .w-drawer__content(v-if="showDrawer" :class="contentClasses" :style="styles")
         slot
 </template>
 
@@ -72,10 +72,14 @@ export default {
     },
     classes () {
       return {
-        [this.color]: this.color,
-        [`${this.bgColor}--bg`]: this.bgColor,
         'w-drawer--open': !!this.showDrawer,
         [`w-drawer--${this.position}`]: true
+      }
+    },
+    contentClasses () {
+      return {
+        [this.color]: this.color,
+        [`${this.bgColor}--bg`]: this.bgColor
       }
     },
     styles () {
