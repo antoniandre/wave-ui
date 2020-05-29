@@ -60,7 +60,8 @@ const renderListItemLabel = function (createEl, li, index) {
     component.props = {
       value: li.selected,
       color: this.color,
-      round: this.roundCheckboxes
+      round: this.roundCheckboxes,
+      disabled: li.disabled
     }
     if (!hasSlot) component.props.label = li[this.itemLabel] || false
 

@@ -133,7 +133,7 @@ export default {
   &.custom .w-list__item-label:before {display: none;}
   &.custom .w-list__item-label label {
     position: relative;
-    transition: 0.4s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
   &.custom .w-list__item-label--active label {
     opacity: 0.6;
@@ -147,7 +147,7 @@ export default {
     width: 0;
     border-top: 1px solid #999;
     pointer-events: none;
-    transition: 0.4s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
   &.custom .w-list__item-label--active label:before {
     width: 100%;
