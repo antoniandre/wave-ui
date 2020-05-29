@@ -49,16 +49,30 @@ div
         round-checkboxes
         color="green")
 
-  h3 Checklist and custom rendering
-  w-list.mt-6(
-    :items="listItems2"
-    item-value="id"
-    checklist
-    color="primary")
-    template(v-slot:item="{ item }")
-      span {{ item.label }}
-      .spacer
-      w-icon {{ item.icon }}
+  h3 Custom rendering
+  .w-flex.wrap
+    .grow
+      .subtitle Custom rendering, default styles
+      w-list.mt-6(
+        :items="listItems2"
+        item-value="id"
+        checklist
+        color="primary")
+        template(v-slot:item="{ item }")
+          span {{ item.label }}
+          .spacer
+          w-icon {{ item.icon }}
+    .grow
+      .subtitle Custom rendering &amp; styles
+      w-list.custom.mt-6(
+        :items="listItems2"
+        item-value="id"
+        checklist
+        color="primary")
+        template(v-slot:item="{ item }")
+          span {{ item.label }}
+          .spacer
+          w-icon {{ item.icon }}
 
   h2 Navigation lists
   p.
@@ -115,5 +129,28 @@ export default {
 <style lang="scss">
 .page--list .w-list {
   max-width: 300px;
+
+  &.custom .w-list__item-label:before {display: none;}
+  &.custom .w-list__item-label label {
+    position: relative;
+    transition: 0.4s ease-in-out;
+  }
+  &.custom .w-list__item-label--active label {
+    opacity: 0.6;
+    color: #999;
+  }
+  &.custom .w-list__item-label label:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    border-top: 1px solid #999;
+    pointer-events: none;
+    transition: 0.4s ease-in-out;
+  }
+  &.custom .w-list__item-label--active label:before {
+    width: 100%;
+  }
 }
 </style>
