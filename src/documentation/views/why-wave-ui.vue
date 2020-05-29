@@ -4,10 +4,12 @@ div
   .title
     | An emerging new UI framework for Vue.js with only the bright side.
     span.xl.ml-2 ☀️
-  p.
-    Like other UI frameworks, Wave UI is fully responsive, very flexible and easy to use.
-    But it is also:
-  w-list(:items="features" icon="wi-check")
+
+  .subtitle.mt-6 Like other UI frameworks, Wave UI is:
+  w-list(:items="features1" icon="wi-check")
+
+  .subtitle.mt-6 But it is also:
+  w-list(:items="features2" icon="wi-check")
 
   h2 Wave UI is developed with a particular care about CSS.
   p.subtitle.
@@ -32,7 +34,13 @@ div
 <script>
 export default {
   data: () => ({
-    features: [
+    features1: [
+      { label: 'fully responsive' },
+      { label: 'accessibility compliant' },
+      { label: 'very flexible' },
+      { label: 'easy to use' }
+    ],
+    features2: [
       { label: 'Lightweight' },
       { label: 'Providing powerful elements, e.g. write a navigation menu in a single line' },
       { label: 'Free of useless DOM wrappers inside UI elements, really' },

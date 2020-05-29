@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import WaveUIFeatures from '@/documentation/views/wave-ui-features'
+import WhyWaveUI from '@/documentation/views/why-wave-ui'
 
 Vue.use(VueRouter)
 // The loading state of Vue Router is appended to $router, so a
@@ -11,12 +11,12 @@ const status = Vue.observable({ loading: true })
 const routes = [
   {
     path: '/',
-    redirect: 'wave-ui-features'
+    redirect: 'why-wave-ui'
   },
   {
-    path: '/wave-ui-features',
-    name: 'wave-ui-features',
-    component: WaveUIFeatures
+    path: '/why-wave-ui',
+    name: 'why-wave-ui',
+    component: WhyWaveUI
   },
   {
     path: '/getting-started',
