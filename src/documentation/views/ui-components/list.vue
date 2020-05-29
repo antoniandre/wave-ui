@@ -34,7 +34,7 @@ div
   h2 Checklists
   .w-flex.wrap
     .grow
-      .subtitle Normal
+      .subtitle Default
       w-list.mt-6.mr-4(
         v-model="selectedItem3"
         :items="listItems1"
@@ -49,8 +49,7 @@ div
         round-checkboxes
         color="green")
 
-  h3 Custom rendering
-  .w-flex.wrap
+  .w-flex.wrap.mt-4
     .grow
       .subtitle Custom rendering, default styles
       w-list.mt-6(

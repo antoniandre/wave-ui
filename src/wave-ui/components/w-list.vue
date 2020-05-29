@@ -76,7 +76,7 @@ const renderListItemLabel = function (createEl, li, index) {
   }
   // ------------------------------------------------------
 
-  if (!hasSlot && !vnodes.length) component.domProps = { innerHTML: li[this.itemLabel] }
+  if (!hasSlot && !vnodes.length && !this.checklist) component.domProps = { innerHTML: li[this.itemLabel] }
   else if (hasSlot) {
     vnodes.push(this.$scopedSlots.item({ item: li, selected: li.selected, index }))
   }
