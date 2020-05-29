@@ -12,6 +12,7 @@ import { consoleWarn } from '@/wave-ui/utils/console'
 export default {
   name: 'w-tooltip',
   props: {
+    value: { default: false },
     showOnClick: { type: Boolean, default: false },
     detach: { type: [String, Object, Boolean], default: false },
     fixed: { type: Boolean, default: false },
@@ -21,7 +22,8 @@ export default {
     right: { type: Boolean, default: false },
     zIndex: { type: [Number, String, Boolean], default: false },
     color: { type: String, default: '' },
-    bgColor: { type: String, default: '' }
+    bgColor: { type: String, default: '' },
+    noBorder: { type: String, default: '' }
   },
 
   data: () => ({
@@ -89,7 +91,8 @@ export default {
         [`${this.bgColor}--bg`]: this.bgColor,
         [`w-tooltip--${this.position}`]: true,
         'w-tooltip--fixed': this.fixed,
-        'w-tooltip--active': this.showTooltip
+        'w-tooltip--active': this.showTooltip,
+        'w-tooltip--no-border': this.noBorder || this.bgColor
       }
     },
 
@@ -102,7 +105,7 @@ export default {
     },
 
     eventHandlers () {
-      let handlers = { keydown: this.toggle }
+      let handlers = { keydown: this.toggle, focus: this.toggle }
       if (this.showOnClick) handlers.click = this.toggle
       else handlers = { ...handlers, mouseenter: this.toggle, mouseleave: this.toggle }
       return handlers
@@ -110,6 +113,12 @@ export default {
   },
 
   mounted () {
+    this.$nextTick(() => {
+      console.log(this.$scopedSlots.myElement()[0])
+    })
+
+    if (this.value) this.toggle({ type: 'click', target: this.$scopedSlots.activator })
+
     if (this.detach && !this.detachTarget) {
       consoleWarn(`Unable to locate ${this.detach ? `target ${this.detach}` : '.w-app'}`, this)
     }
@@ -136,6 +145,12 @@ export default {
       }
       return coords
     }
+  },
+
+  watch: {
+    value () {
+      this.toggle({ type: 'click', target: this.$scopedSlots.activator()[0] })
+    }
   }
 }
 </script>
@@ -146,14 +161,19 @@ export default {
 .w-tooltip {
   display: flex;
   position: absolute;
-  padding: round($base-increment / 2) $base-increment;
+  padding: $base-increment round(1.5 * $base-increment);
   border-radius: $border-radius;
-  border: $border;
-  background-color: #fff;
+  border: 1px solid #ddd;
+  background-color: $tooltip-bg-color;
   pointer-events: none;
   transition: $transition-duration ease-in-out;
+  color: $tooltip-color;
+  align-items: center;
+  max-width: 300px;
 
   &--fixed {position: fixed;z-index: 1000;}
+
+  &--no-border {border: none;}
 
   &--top {
     transform: translate(-50%, -100%);
@@ -171,6 +191,95 @@ export default {
     transform: translateY(-50%);
     margin-left: 3 * $base-increment;
   }
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+  }
+  &--top:after {
+    top: 100%;
+    left: 50%;
+    border-top-color: $tooltip-bg-color;
+    transform: translateX(-50%);
+    margin-top: 1px;
+  }
+  &--bottom:after {
+    bottom: 100%;
+    left: 50%;
+    border-bottom-color: $tooltip-bg-color;
+    transform: translateX(-50%);
+    margin-bottom: 1px;
+  }
+  &--left:after {
+    left: 100%;
+    top: 50%;
+    border-left-color: $tooltip-bg-color;
+    transform: translateY(-50%);
+    margin-left: 1px;
+  }
+  &--right:after {
+    right: 100%;
+    top: 50%;
+    border-right-color: $tooltip-bg-color;
+    transform: translateY(-50%);
+    margin-right: 1px;
+  }
+
+  // Tooltip without border.
+  // --------------------------------------------------------
+  &--no-border.w-tooltip--top:after {margin-top: -1px;border-top-color: inherit;}
+  &--no-border.w-tooltip--bottom:after {margin-bottom: -1px;border-bottom-color: inherit;}
+  &--no-border.w-tooltip--left:after {margin-left: -1px;border-left-color: inherit;}
+  &--no-border.w-tooltip--right:after {margin-right: -1px;border-right-color: inherit;}
+
+  // Tooltip with border.
+  // --------------------------------------------------------
+  &:not(&--no-border).w-tooltip--top:after {margin-top: -1px;}
+  &:not(&--no-border).w-tooltip--bottom:after {margin-bottom: -1px;}
+  &:not(&--no-border).w-tooltip--left:after {margin-left: -1px;}
+  &:not(&--no-border).w-tooltip--right:after {margin-right: -1px;}
+
+  &:not(&--no-border) {
+    &:before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 7px solid transparent;
+    }
+    &.w-tooltip--top:before {
+      top: 100%;
+      left: 50%;
+      border-top-color: inherit;
+      transform: translateX(-50%);
+      margin-top: 0px;
+    }
+    &.w-tooltip--bottom:before {
+      bottom: 100%;
+      left: 50%;
+      border-bottom-color: inherit;
+      transform: translateX(-50%);
+      margin-bottom: 0px;
+    }
+    &.w-tooltip--left:before {
+      left: 100%;
+      top: 50%;
+      border-left-color: inherit;
+      transform: translateY(-50%);
+      margin-left: 0px;
+    }
+    &.w-tooltip--right:before {
+      right: 100%;
+      top: 50%;
+      border-right-color: inherit;
+      transform: translateY(-50%);
+      margin-right: 0px;
+    }
+  }
+  // --------------------------------------------------------
 }
 
 // Transitions.

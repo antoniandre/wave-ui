@@ -59,7 +59,7 @@ export default {
         { label: 'Tabs', route: 'w-tabs', disabled: true },
         { label: 'Tag', route: 'w-tag' },
         { label: 'Toolbar', route: 'w-toolbar' },
-        { label: 'Tooltip', route: 'w-tooltip', disabled: true },
+        { label: 'Tooltip', route: 'w-tooltip' },
         {
           label: 'Form elements',
           route: '#form',
