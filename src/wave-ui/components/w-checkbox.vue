@@ -54,6 +54,7 @@ export default {
     },
     classes () {
       return {
+        [`w-checkbox--${this.isChecked ? 'checked' : 'unchecked'}`]: true,
         'w-checkbox--disabled': this.disabled,
         'w-checkbox--ripple': this.ripple.start,
         'w-checkbox--rippled': this.ripple.end,
