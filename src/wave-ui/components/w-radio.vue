@@ -68,7 +68,9 @@ export default {
 
     onChange (e) {
       this.booleanValue = e.target.checked // The source of truth is the radio button.
-      this.$emit('input', this.booleanValue && this.returnValue !== undefined ? this.returnValue : this.booleanValue)
+      const returnValue = this.booleanValue && this.returnValue !== undefined ? this.returnValue : this.booleanValue
+      this.$emit('input', returnValue)
+      this.$emit('change', returnValue)
 
       if (!this.noRipple) {
         if (this.booleanValue) {

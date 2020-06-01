@@ -67,6 +67,7 @@ export default {
     onChange () {
       this.isChecked = !this.isChecked
       this.$emit('input', this.isChecked)
+      this.$emit('change', this.isChecked)
 
       if (!this.noRipple) {
         if (this.isChecked) {
