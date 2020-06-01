@@ -5,11 +5,11 @@
       :id="`switch--${_uid}`"
       type="checkbox"
       :name="inputName"
-      :checked="isChecked"
+      :checked="isOn"
       :disabled="disabled"
       @change="onChange"
-      :aria-checked="isChecked || 'false'"
-      role="checkbox")
+      :aria-checked="isOn || 'false'"
+      role="switch")
     .w-switch__input(
       @click="$refs.input.focus();$refs.input.click()"
       :class="{ 'mr-2': hasLabel, [this.color]: true }")
@@ -23,9 +23,6 @@ export default {
   name: 'w-switch',
   props: {
     value: { default: false }, // v-model to check or uncheck.
-    // When `value` is taken by a v-model and multiple w-switch are plugged on
-    // the same v-model, this allow returning to the v-model a custom value.
-    returnValue: {},
     name: { type: String, default: '' },
     label: { type: String, default: '' },
     color: { type: String, default: 'primary' },
@@ -35,7 +32,7 @@ export default {
 
   data () {
     return {
-      isChecked: this.value,
+      isOn: this.value,
       ripple: {
         start: false,
         end: false,
@@ -53,6 +50,7 @@ export default {
     },
     classes () {
       return {
+        [`w-switch--${this.isOn ? 'on' : 'off'}`]: true,
         'w-switch--disabled': this.disabled,
         'w-switch--ripple': this.ripple.start,
         'w-switch--rippled': this.ripple.end
@@ -62,11 +60,11 @@ export default {
 
   methods: {
     onChange () {
-      this.isChecked = !this.isChecked
-      this.$emit('input', this.isChecked)
+      this.isOn = !this.isOn
+      this.$emit('input', this.isOn)
 
       if (!this.noRipple) {
-        if (this.isChecked) {
+        if (this.isOn) {
           this.ripple.start = true
           this.ripple.timeout = setTimeout(() => {
             this.ripple.start = false
@@ -84,7 +82,7 @@ export default {
 
   watch: {
     value (value) {
-      this.isChecked = value
+      this.isOn = value
     }
   }
 }
