@@ -5,10 +5,10 @@
       :id="`radio--${_uid}`"
       type="radio"
       :name="inputName"
-      :checked="isChecked"
+      :checked="booleanValue"
       :disabled="disabled"
       @change="onChange"
-      :aria-checked="isChecked || 'false'"
+      :aria-checked="booleanValue || 'false'"
       role="radio")
     .w-radio__input(
       @click="$refs.input.focus();$refs.input.click()"
@@ -35,7 +35,7 @@ export default {
 
   data () {
     return {
-      isChecked: this.value,
+      booleanValue: false,
       ripple: {
         start: false,
         end: false,
@@ -53,6 +53,7 @@ export default {
     },
     classes () {
       return {
+        [`w-radio--${this.booleanValue ? 'checked' : 'unchecked'}`]: true,
         'w-radio--disabled': this.disabled,
         'w-radio--ripple': this.ripple.start,
         'w-radio--rippled': this.ripple.end
@@ -61,12 +62,16 @@ export default {
   },
 
   methods: {
-    onChange () {
-      this.isChecked = !this.isChecked
-      this.$emit('input', this.isChecked)
+    toggleFromOutside () {
+      this.booleanValue = this.returnValue !== undefined ? (this.returnValue === this.value) : this.value
+    },
+
+    onChange (e) {
+      this.booleanValue = e.target.checked // The source of truth is the radio button.
+      this.$emit('input', this.booleanValue && this.returnValue !== undefined ? this.returnValue : this.booleanValue)
 
       if (!this.noRipple) {
-        if (this.isChecked) {
+        if (this.booleanValue) {
           this.ripple.start = true
           this.ripple.timeout = setTimeout(() => {
             this.ripple.start = false
@@ -82,9 +87,13 @@ export default {
     }
   },
 
+  created () {
+    if (this.value !== undefined) this.toggleFromOutside()
+  },
+
   watch: {
-    value (value) {
-      this.isChecked = value
+    value () {
+      this.toggleFromOutside()
     }
   }
 }

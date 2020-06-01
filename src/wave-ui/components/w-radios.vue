@@ -10,7 +10,6 @@
       :color="color"
       @input="$emit('input', item.value);$emit('change', item.value)"
       :class="{ 'ml-3': inline && i, 'mt-1': !inline && i }")
-      slot(name="label" :item="item") {{ item.label }}
 </template>
 
 <script>
@@ -53,7 +52,5 @@ export default {
   }
 
   &--inline {display: inline-flex;}
-
-  // &:not(.w-radios--inline) .w-radio {display: flex;}
 }
 </style>
