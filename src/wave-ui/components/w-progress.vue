@@ -41,7 +41,7 @@ export default {
     value: { type: [Number, String, Boolean], default: -1 },
     label: { type: Boolean, default: false },
     roundCap: { type: Boolean, default: false },
-    color: { type: String, default: '' },
+    color: { type: String, default: 'primary' },
     bgColor: { type: String, default: '' },
     labelColor: { type: String, default: '' },
     size: { type: [Number, String], default: '' },

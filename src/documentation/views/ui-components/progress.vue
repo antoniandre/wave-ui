@@ -2,7 +2,7 @@
 div(style="max-width: 900px")
   h1.headline.mt-4 #[span.code w-progress]
 
-  w-radios(v-model="circular" :items="linearOrCircular" inline)
+  w-radios.subtitle(v-model="circular" :items="linearOrCircular" inline)
 
   h2 Default indeterminate progress &amp; colors
   w-progress(:circle="circular")
@@ -85,7 +85,6 @@ div(style="max-width: 900px")
     :size="circular ? '3em' : '1.3em'"
     outline
     round
-    color="primary"
     label)
 
   h3 Custom label
@@ -94,8 +93,7 @@ div(style="max-width: 900px")
     v-model="progress1"
     :size="circular ? '5em' : '1.5em'"
     outline
-    round
-    color="primary")
+    round)
     strong {{ progress1 }}%
 
   h3 Providing a color for the custom label
@@ -108,7 +106,6 @@ div(style="max-width: 900px")
     :size="circular ? '3em' : '2em'"
     outline
     round
-    color="primary"
     label
     label-color="indigo-lighten-4")
 
@@ -118,14 +115,12 @@ div(style="max-width: 900px")
     value="50.3"
     :size="circular ? '6em' : '2em'"
     round
-    round-cap
-    color="primary")
+    round-cap)
   w-progress.mt-4(
     :circle="circular"
     value="50.3"
     :size="circular ? '6em' : '2em'"
-    round
-    color="primary")
+    round)
 </template>
 
 <script>
