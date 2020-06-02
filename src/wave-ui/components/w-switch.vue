@@ -12,7 +12,7 @@
       role="switch")
     .w-switch__input(
       @click="$refs.input.focus();$refs.input.click()"
-      :class="{ 'mr-2': hasLabel, [this.color]: true }")
+      :class="[[this.color], hasLabel ? (thin ? 'mr-3' : 'mr-2') : '']")
     label.w-switch__label(v-if="$slots.default" :for="`switch--${_uid}`")
       slot
     label.w-switch__label(v-else-if="label" :for="`switch--${_uid}`" v-html="label")
@@ -26,6 +26,7 @@ export default {
     name: { type: String, default: '' },
     label: { type: String, default: '' },
     color: { type: String, default: 'primary' },
+    thin: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
     noRipple: { type: Boolean, default: false }
   },
@@ -51,6 +52,7 @@ export default {
     classes () {
       return {
         [`w-switch--${this.isOn ? 'on' : 'off'}`]: true,
+        'w-switch--thin': this.thin,
         'w-switch--disabled': this.disabled,
         'w-switch--ripple': this.ripple.start,
         'w-switch--rippled': this.ripple.end
@@ -125,13 +127,25 @@ $disabled-color: #ddd;
     cursor: inherit;
     box-sizing: initial;
 
-    .w-switch--disabled & {color: $disabled-color;}
-
     // Checked state.
     :checked + & {
       border-color: currentColor;
       background-color: currentColor;
     }
+
+    // Thin.
+    .w-switch--thin & {
+      box-sizing: border-box;
+      border: none;
+      // border: ($size / 2) solid rgba(255, 255, 255, 0.6);
+      height: round(0.7 * $size);
+    }
+    .w-switch--thin :checked + & {
+      background-color: $inactive-color;
+    }
+
+    // Disabled.
+    .w-switch--disabled & {color: $disabled-color;}
     .w-switch--disabled :checked + & {
       opacity: 0.5;
     }
@@ -149,8 +163,16 @@ $disabled-color: #ddd;
     border-radius: 100%;
     @include default-transition;
 
-    :checked + & {
-      transform: translateX(100%);
+    :checked + & {transform: translateX(100%);}
+
+    .w-switch--thin & {
+      top: - round(0.15 * $size);
+      transform: scale(1.1);
+      box-shadow: $box-shadow;
+    }
+    .w-switch--thin :checked + & {
+      transform: translateX(100%) scale(1.1);
+      background-color: currentColor;
     }
   }
 
@@ -168,6 +190,8 @@ $disabled-color: #ddd;
     opacity: 0;
     pointer-events: none;
     transition: 0.25s ease-in-out;
+
+    .w-switch--thin & {top: - round(0.15 * $size);}
   }
 
   &--ripple &__input:before {
