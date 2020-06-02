@@ -1,68 +1,78 @@
 <template lang="pug">
   .w-progress(:class="classes" :style="styles")
-    svg(v-if="circle" :viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`")
+    //- Linear progress.
+    .w-progress__progress(v-if="!circle" :class="{ full: progressValue === 100 }" :style="`width: ${progressValue}%`")
+
+    //- Circular progress.
+    svg(v-else :viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`")
       //- Background first, in SVG there is no z-index.
       circle.bg(
         v-if="bgColor || this.progressValue > -1"
         :class="bgColor"
         :cx="circleCenter"
         :cy="circleCenter"
-        r="20"
+        :r="circleRad"
         fill="transparent"
-        :stroke-width="width")
+        :stroke-dasharray="circleCircumference"
+        :stroke-width="stroke")
       circle.w-progress__progress(
         :cx="circleCenter"
         :cy="circleCenter"
-        r="20"
+        :r="circleRad"
         fill="transparent"
-        :stroke-width="width"
+        :stroke-width="stroke"
         :stroke-linecap="roundCap && 'round'"
+        :stroke-dasharray="circleCircumference"
         :style="`stroke-dashoffset: ${(1 - (progressValue / 100)) * circleCircumference}`")
 
-    .w-progress__progress(v-else :class="{ full: progressValue === 100 }" :style="`width: ${progressValue}%`")
-
     .w-progress__label(v-if="label || $slots.default" :class="labelColor || false")
-      slot {{ Math.round(progressValue) }}{{ !circle ? '%' : '' }}
+      slot {{ Math.round(progressValue) }}{{ circle ? '' : '%' }}
 </template>
 
 <script>
 // For circular progress.
 const circleSize = 40
-const circleCircumference = circleSize * 3.14
 
 export default {
   name: 'w-progress',
   props: {
     value: { type: [Number, String, Boolean], default: -1 },
     label: { type: Boolean, default: false },
-    circle: { type: Boolean, default: false },
     roundCap: { type: Boolean, default: false },
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     labelColor: { type: String, default: '' },
-    size: { type: String, default: '' },
-    width: { type: [Number, String], default: 4 }, // Circular progress thickness.
-    shadow: { type: Boolean, default: false }, // For linear progress.
-    tile: { type: Boolean, default: false }, // For linear progress.
-    round: { type: Boolean, default: false }, // For linear progress.
-    outline: { type: Boolean, default: false }, // For linear progress.
-    stripes: { type: Boolean, default: false }, // For linear progress.
-    absolute: { type: Boolean, default: false }
-  },
+    size: { type: [Number, String], default: '' },
 
-  data: () => ({
-    circleCircumference
-  }),
+    // Circular progress thickness.
+    circle: { type: Boolean, default: false },
+    stroke: { type: [Number, String], default: 4 },
+
+    // For linear progress.
+    shadow: { type: Boolean, default: false },
+    tile: { type: Boolean, default: false },
+    round: { type: Boolean, default: false },
+    outline: { type: Boolean, default: false },
+    stripes: { type: Boolean, default: false },
+    absolute: { type: Boolean, default: false },
+    fixed: { type: Boolean, default: false }
+  },
 
   computed: {
     progressValue () {
       return parseFloat(this.value)
     },
+    circleRad () {
+      return (~~this.size || circleSize) / 2
+    },
     circleRadius () {
-      return circleSize / 2 - (this.width / 2)
+      return (~~this.size || circleSize) / 2 - (this.stroke / 2)
     },
     circleCenter () {
-      return circleSize + this.width
+      return (~~this.size || circleSize) + this.stroke
+    },
+    circleCircumference () {
+      return (~~this.size || circleSize) * 3.14
     },
     classes () {
       return {
@@ -76,7 +86,8 @@ export default {
         'w-progress--stripes': !this.circle && this.stripes,
         'w-progress--round': !this.circle && this.round,
         'w-progress--shadow': this.shadow,
-        'w-progress--absolute': this.absolute,
+        'w-progress--absolute': !this.circle && this.absolute,
+        'w-progress--fixed': !this.circle && !this.absolute && this.fixed,
         [`w-progress--${this.roundCap ? 'round' : 'flat'}-cap`]: true
       }
     },
@@ -97,7 +108,9 @@ $circle-size: 40;
   justify-content: center;
   position: relative;
 
-  &--absolute {position: absolute;left: 0;right: 0;}
+  &--absolute, &--fixed {left: 0;right: 0;z-index: 1000;}
+  &--absolute {position: absolute;}
+  &--fixed {position: fixed;}
   &--shadow {box-shadow: $box-shadow;}
 
   // Linear progress.
@@ -159,7 +172,7 @@ $circle-size: 40;
         z-index: 1;
         will-change: transform;
         transform: translate3d(-100%, 0, 0);
-        animation: indeterminate-bars 2s infinite;
+        animation: w-progress-bars 2s infinite;
         transform-origin: right;
       }
       &:before {animation-delay: 0.8s;}
@@ -180,7 +193,7 @@ $circle-size: 40;
                         transparent
                       );
     background-size: 50px 50px;
-    animation: indeterminate-stripes 2s infinite linear;
+    animation: w-progress-stripes 2s infinite linear;
   }
 
   // Outline is only available on linear progress.
@@ -193,12 +206,13 @@ $circle-size: 40;
     margin-right: auto;
   }
 
-  @keyframes indeterminate-bars {
+  // Indeterminate progress.
+  @keyframes w-progress-bars {
     0% {transform: translate3d(-100%, 0, 0) scaleX(1);}
     100% {transform: translate3d(0, 0, 0) scaleX(0);}
   }
 
-  @keyframes indeterminate-stripes {
+  @keyframes w-progress-stripes {
     0% {background-position: 0 0;}
     100% {background-position: 50px 50px;}
   }
@@ -213,7 +227,6 @@ $circle-size: 40;
     font-size: round(0.9 * $base-font-size);
 
     svg {display: block;width: 100%;}
-    circle {stroke-dasharray: (3.14 * $circle-size);}
     circle.bg {stroke: currentColor;}
     &.w-progress--default-bg circle.bg {stroke: rgba(0, 0, 0, 0.1);}
 
@@ -225,10 +238,10 @@ $circle-size: 40;
     }
     &.w-progress--round-cap .w-progress__progress {stroke-linecap: round;}
     &.w-progress--indeterminate .w-progress__progress {
-      animation: spin 2s linear infinite;
+      animation: w-progress-spin 2s linear infinite;
     }
 
-    @keyframes spin {
+    @keyframes w-progress-spin {
       0% {transform: rotate(0deg);stroke-dashoffset: (0.66 * $circle-size);}
       50% {transform: rotate(720deg);stroke-dashoffset: (3.14 * $circle-size);}
       100% {transform: rotate(1080deg);stroke-dashoffset: (0.66 * $circle-size);}
