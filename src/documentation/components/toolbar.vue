@@ -31,6 +31,7 @@ div.main-toolbar {
 
   .home-link {
     @include default-transition;
+    &:hover {transform: scale(1.05);}
     &:focus {transform: scale(1.1);}
   }
 
