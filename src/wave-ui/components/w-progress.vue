@@ -11,14 +11,14 @@
         :class="bgColor"
         :cx="circleCenter"
         :cy="circleCenter"
-        :r="circleRad"
+        :r="circleRadius"
         fill="transparent"
         :stroke-dasharray="circleCircumference"
         :stroke-width="stroke")
       circle.w-progress__progress(
         :cx="circleCenter"
         :cy="circleCenter"
-        :r="circleRad"
+        :r="circleRadius"
         fill="transparent"
         :stroke-width="stroke"
         :stroke-linecap="roundCap && 'round'"
@@ -32,6 +32,8 @@
 <script>
 // For circular progress.
 const circleSize = 40
+const circleRadius = circleSize / 2
+const circleCircumference = Math.round(circleSize * 3.14 * 100) / 100
 
 export default {
   name: 'w-progress',
@@ -58,21 +60,18 @@ export default {
     fixed: { type: Boolean, default: false }
   },
 
+  data: () => ({
+    circleSize,
+    circleRadius,
+    circleCircumference
+  }),
+
   computed: {
     progressValue () {
       return parseFloat(this.value)
     },
-    circleRad () {
-      return (~~this.size || circleSize) / 2
-    },
-    circleRadius () {
-      return (~~this.size || circleSize) / 2 - (this.stroke / 2)
-    },
     circleCenter () {
-      return (~~this.size || circleSize) + this.stroke
-    },
-    circleCircumference () {
-      return (~~this.size || circleSize) * 3.14
+      return circleSize + this.stroke
     },
     classes () {
       return {
@@ -222,9 +221,9 @@ $circle-size: 40;
   // ------------------------------------------------------
   &--circular {
     display: inline-flex;
-    width: 2 * $base-font-size;
+    width: 3em;
     height: auto;
-    font-size: round(0.9 * $base-font-size);
+    font-size: $base-font-size;
 
     svg {display: block;width: 100%;}
     circle.bg {stroke: currentColor;}

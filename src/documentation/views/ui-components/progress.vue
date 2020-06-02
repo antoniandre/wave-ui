@@ -12,16 +12,18 @@ div(style="max-width: 900px")
   w-progress.mt-4(:circle="circular" color="yellow" bg-color="cyan")
 
   template(v-if="circular")
-    h2 Size &amp; width
-    w-progress.mt-4(circle value="38" size="5em" color="blue")
-    w-progress.mt-4(circle value="38" size="8em" color="blue")
-    w-progress.mt-4(circle value="38" size="5em" :width="4" color="blue")
-    w-progress.mt-4(circle value="38" size="8em" :width="40" color="blue")
+    h2 Size &amp; stroke thickness
+    w-progress.mt-4(circle value="50" color="blue")
+    w-progress.mt-4(circle value="50" size="4em" color="blue")
+    w-progress.mt-4(circle value="50" size="5em" color="blue")
+    w-progress.mt-4(circle value="50" size="6em" :stroke="2" color="blue")
+    w-progress.mt-4(circle value="50" size="6em" :stroke="15" color="blue")
+    w-progress.mt-4(circle value="50" size="6em" :stroke="40" color="blue")
 
   template(v-else)
     h2 Size
-    w-progress.mt-4(value="38" :size="circular ? '5em' : '1em'" color="blue")
-    w-progress.mt-4(value="38" :size="circular ? '8em' : '2.5em'" color="blue")
+    w-progress.mt-4(value="38" size="1em" color="blue")
+    w-progress.mt-4(value="38" size="2.5em" color="blue")
 
     h2 Tile &amp; round
     w-progress.mt-4(
@@ -75,12 +77,12 @@ div(style="max-width: 900px")
   w-progress.mt-4(
     :circle="circular"
     v-model="progress1"
-    :size="circular ? '5em' : '1.3em'"
+    :size="circular ? '3em' : '1.3em'"
     round color="primary" label)
   w-progress.mt-4(
     :circle="circular"
     v-model="progress1"
-    :size="circular ? '5em' : '1.3em'"
+    :size="circular ? '3em' : '1.3em'"
     outline
     round
     color="primary"
@@ -94,16 +96,16 @@ div(style="max-width: 900px")
     outline
     round
     color="primary")
-    strong {{ progress1 }}% done
+    strong {{ progress1 }}%
 
   h3 Providing a color for the custom label
-  p.
+  p(v-if="!circular").
     The color of the label should be readable on both the progress and the background.#[br]
     So you are free to decide what is the best color.
   w-progress.mt-4(
     :circle="circular"
     value="50.3"
-    :size="circular ? '5em' : '2em'"
+    :size="circular ? '3em' : '2em'"
     outline
     round
     color="primary"
@@ -114,14 +116,14 @@ div(style="max-width: 900px")
   w-progress.mt-4(
     :circle="circular"
     value="50.3"
-    :size="circular ? '5em' : '2em'"
+    :size="circular ? '6em' : '2em'"
     round
     round-cap
     color="primary")
   w-progress.mt-4(
     :circle="circular"
     value="50.3"
-    :size="circular ? '5em' : '2em'"
+    :size="circular ? '6em' : '2em'"
     round
     color="primary")
 </template>
@@ -129,13 +131,22 @@ div(style="max-width: 900px")
 <script>
 export default {
   data: () => ({
-    progress1: 37.76,
+    progress1: 37.86,
+    progress: 0,
     linearOrCircular: [
       { label: 'Linear', value: false },
       { label: 'Circular', value: true }
     ],
-    circular: false
-  })
+    circular: true
+  }),
+
+  mounted () {
+    // Emulating progress.
+    // const interval = setInterval(() => {
+    //   this.progress += 10
+    //   if (this.progress === 100) this.progress = 0
+    // }, 700)
+  }
 }
 </script>
 
