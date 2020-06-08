@@ -62,6 +62,7 @@ const components = [
   { id: 'divider', label: 'Divider' },
   { id: 'drawer', label: 'Drawer' },
   { id: 'icon', label: 'Icon' },
+  { id: 'input', label: 'Input' },
   { id: 'list', label: 'List' },
   { id: 'menu', label: 'Menu' },
   { id: 'notification', label: 'Notification' },
@@ -76,7 +77,6 @@ const components = [
   { id: 'tabs', label: 'Tabs' },
   { id: 'tag', label: 'Tag' },
   { id: 'textarea', label: 'Textarea' },
-  { id: 'text field', label: 'Text field' },
   { id: 'toolbar', label: 'Toolbar' },
   { id: 'tooltip', label: 'Tooltip' }
 ]

@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-text-field]
+  h1.headline.mt-4 #[span.code w-input]
 
 </template>
 
