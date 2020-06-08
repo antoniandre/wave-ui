@@ -4,7 +4,7 @@
       label.w-input__label.w-input__label--left(v-if="$slots.default" :for="`input--${_uid}`")
         slot
       label.w-input__label.w-input__label--left(v-else-if="label" :for="`input--${_uid}`" v-html="label")
-    .w-input__input-wrap(:class="{ [this.color]: this.color }")
+    .w-input__input-wrap(:class="{ [this.color]: this.color, [`${this.bgColor}--bg`]: this.bgColor }")
       input.w-input__input(
         :id="`input--${_uid}`"
         :type="type"
@@ -15,8 +15,7 @@
         @focus="onFocus"
         @blur="onBlur"
         :disabled="disabled"
-        :required="required"
-        :class="{ [this.color]: this.color, [`${this.bgColor}--bg`]: this.bgColor }")
+        :required="required")
     template(v-if="!inputValue && !placeholder && labelPosition === 'inside'")
       label.w-input__label.w-input__label--inside(v-if="$slots.default" :for="`input--${_uid}`" :class="isFocused && { [this.color]: this.color }")
         slot
@@ -47,8 +46,7 @@ export default {
     outline: { type: Boolean, default: false },
     round: { type: Boolean, default: false },
     shadow: { type: Boolean, default: false },
-    tile: { type: Boolean, default: false },
-    underline: { type: Boolean, default: false }
+    tile: { type: Boolean, default: false }
   },
 
   data () {
@@ -62,12 +60,15 @@ export default {
     classes () {
       return {
         'w-input--focused': this.isFocused,
-        'w-text-input--dark': this.dark && !this.outline,
+        'w-input--dark': this.dark,
         'w-input--outline': this.outline,
         'w-input--round': this.round,
         'w-input--tile': this.tile,
-        'w-input--underline': this.underline,
-        'w-input--shadow': this.shadow
+        'w-input--box': this.outline || this.bgColor || this.shadow,
+        // If there is a bgColor, a padding is needed.
+        'w-input--underline': !this.outline,
+        'w-input--shadow': this.shadow,
+        'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
       }
     },
     styles () {
@@ -114,55 +115,82 @@ $size: round(2 * $base-font-size);
     display: inline-flex;
     flex-grow: 1;
     height: 100%;
+    font-size: 0.9em;
+    border-radius: $border-radius;
+    border: $border;
+    font-size: 0.9em;
+    transition: $transition-duration;
   }
 
+  &--underline &__input-wrap {
+    border-bottom-left-radius: initial;
+    border-bottom-right-radius: initial;
+    border-width: 0 0 1px;
+  }
+
+  &--box &__input-wrap {
+    padding-left: 2 * $base-increment;
+    padding-right: 2 * $base-increment;
+  }
+
+  // &--no-padding &__input-wrap {
+  //   padding-left: 0;
+  //   padding-right: 0;
+  // }
+
+  &--round &__input-wrap {
+    border-radius: 4em;
+    padding-left: round(3 * $base-increment);
+    padding-right: round(3 * $base-increment);
+  }
+  &--tile &__input-wrap {border-radius: initial;}
+  &--shadow &__input-wrap {box-shadow: $box-shadow;}
+
+  &--focused &__input-wrap {border-color: currentColor;}
+
+  // Underline.
   &--underline &__input-wrap:after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 50%;
     width: 0;
+    height: 0;
     border-bottom: 2px solid currentColor;
     transition: $transition-duration;
     transform: translateX(-50%);
+    pointer-events: none;
   }
 
   &--underline.w-input--focused &__input-wrap:after {
     width: 100%;
   }
+  &--round.w-input--underline &__input-wrap:after {
+    border-radius: 4em;
+    transition: $transition-duration, height 0.035s;
+  }
+  &--round.w-input--underline.w-input--focused &__input-wrap:after {
+    height: 100%;
+    transition: $transition-duration, height 0s ($transition-duration - 0.035s);
+  }
 
   // Input field.
   // ------------------------------------------------------
   &__input {
-    border-radius: $border-radius;
-    border: $border;
-    padding-left: 2 * $base-increment;
-    padding-right: 2 * $base-increment;
     width: 100%;
-    font-size: 0.9em;
-    transition: $transition-duration;
+    height: 100%;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    outline: none;
   }
-
-  &--underline &__input {
-    border-radius: initial;
-    border-width: 0 0 1px;
-    padding-left: 0;
-  }
-
-  &--round &__input {
-    border-radius: 4em;
-    padding-left: round(3 * $base-increment);
-    padding-right: round(3 * $base-increment);
-  }
-  &--tile &__input {border-radius: initial;}
-  &--shadow &__input {box-shadow: $box-shadow;}
-
-  &__input:focus {border-color: currentColor;}
 
   // Label.
   // ------------------------------------------------------
   &__label {
     font-size: 0.9em;
+    transition: color $transition-duration;
 
     &--inside {
       position: absolute;
@@ -177,7 +205,7 @@ $size: round(2 * $base-font-size);
     &--right {margin-left: 2 * $base-increment;}
   }
 
-  &--underline &__label--inside {padding-left: 0;padding-right: 0;}
+  &--no-padding &__label--inside {padding-left: 0;padding-right: 0;}
   &--round &__label--inside {
     padding-left: round(3 * $base-increment);
     padding-right: round(3 * $base-increment);

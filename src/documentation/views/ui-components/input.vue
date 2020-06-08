@@ -6,37 +6,60 @@ div
   w-input.mb-1 First name
   w-input.mb-1(placeholder="First name")
 
-  h2 Round &amp; Tile
-  w-input.mb-1(label="Round" placeholder="Round" round)
-  w-input.mb-1(label="Tile" placeholder="Tile" tile)
+  h2 Outline
+  w-input.mb-1(label="Outline" outline)
+  w-input.mb-1(label="Outline" color="info" outline)
+  w-input.mb-1(label="Outline" bg-color="blue-lighten-5" outline)
+  w-input.mb-1(label="Outline" bg-color="blue-darken-5" color="white" outline)
 
   h2 Shadow
-  w-input.mb-1(label="Round" placeholder="Round" shadow)
+  w-input.mb-1(label="Shadow" shadow)
+  w-input.mb-1(label="outline style with Shadow" shadow outline)
 
-  h2 Underline style
-  w-input.mb-1(label="Round" underline)
-  w-input.mb-1(label="Round" color="info" underline)
+  h2 Round &amp; Tile
+  w-flex(wrap :gutter="2")
+    .grow.mb-4(style="min-width: 200px")
+      .mb-2 Default style
+      w-input.mb-1(label="Round" round)
+      w-input.mb-1(label="Round and shadow" round shadow)
+      w-input.mb-1(label="Tile" tile)
+    .grow.mb-4(style="min-width: 200px")
+      .mb-2 Outline
+      w-input.mb-1(label="Round" round outline)
+      w-input.mb-1(label="Round" round outline shadow)
+      w-input.mb-1(label="Tile" tile outline)
 
   h2 Color
-  p You can set the background color and the text color.
-  p By default, the text has the "primary" color.
-  w-input.mb-1(value="Some content")
-  w-input.mb-1(color="red" value="Some content")
-  w-input.mb-1(bg-color="red-lighten-5" value="Some content")
-  w-input.mb-1(color="red-darken-1" bg-color="red-lighten-5" value="Some content")
-  w-input.mb-1(color="orange-darken-1" bg-color="orange-lighten-5" value="Some content")
+  p.mb-4.
+    You can set the background color and the text color.#[br]
+    By default, the text has the "#[span.code primary]" color.
+  w-flex(wrap :gutter="2")
+    .grow.mb-4(style="min-width: 200px")
+      .mb-2 Default style
+      w-input.mb-1(value="Some content")
+      w-input.mb-1(color="red" value="Some content")
+      w-input.mb-1(bg-color="red-lighten-5" value="Some content")
+      w-input.mb-1(color="red-darken-1" bg-color="red-lighten-5" value="Some content")
+      w-input.mb-1(color="orange-darken-1" bg-color="orange-lighten-5" value="Some content")
+    .grow.mb-4(style="min-width: 200px")
+      .mb-2 Outline
+      w-input.mb-1(value="Some content" outline)
+      w-input.mb-1(color="red" value="Some content" outline)
+      w-input.mb-1(bg-color="red-lighten-5" value="Some content" outline)
+      w-input.mb-1(color="red-darken-1" bg-color="red-lighten-5" value="Some content" outline)
+      w-input.mb-1(color="orange-darken-1" bg-color="orange-lighten-5" value="Some content" outline)
 
   h2 Label position
-  p The default label position is "inside", but it can also be "left" or "right".
-  w-input.mb-1(label="Left" label-position="left")
-  w-input.mb-1(label="Inside" label-position="inside")
-  w-input.mb-1(label="Right" label-position="right")
+  p The default label position is "#[span.code inside]", but it can also be "#[span.code left]" or "#[span.code right]".
+  w-input.mb-1(label="Left" label-position="left" outline)
+  w-input.mb-1(label="Inside" label-position="inside" outline)
+  w-input.mb-1(label="Right" label-position="right" outline)
   p.mt-4.
     #[strong Notes:] when the label is positioned inside and a placeholder is set,
     the label will be hidden and the placeholder will be displayed.
 
   h2 Types
-  p The default type is "text".
+  p The default type is "#[span.code text]".
   h3 Textual inputs
   ul.input-types
     li
@@ -72,8 +95,8 @@ div
       span.code.mr-2 type="button"
       span.grey use #[code w-button] instead
     li
-      span.code.mr-2 type="checkbox"
-      span.grey use #[code w-checkbox] instead
+      span.code.mr-2 type="checkoutline"
+      span.grey use #[code w-checkoutline] instead
     li
       span.code.mr-2 type="color"
       span.grey use #[code w-color-picker] instead
