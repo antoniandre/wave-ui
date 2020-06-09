@@ -8,6 +8,7 @@ div
 
   h2 Outline
   w-input.mb-1(label="Outline" outline)
+  w-input.mb-1(placeholder="Outline" outline)
   w-input.mb-1(label="Outline" color="info" outline)
   w-input.mb-1(label="Outline" bg-color="blue-lighten-5" outline)
   w-input.mb-1(label="Outline" bg-color="blue-darken-5" color="white" outline)
