@@ -1,6 +1,7 @@
 <template lang="pug">
   .w-button(
     :is="to ? ($router && !externalLink ? 'router-link' : 'a') : 'button'"
+    :type="!to && type"
     :to="$router && to"
     :href="to"
     :class="classes"
@@ -38,6 +39,7 @@ export default {
     round: { type: Boolean, default: false },
     shadow: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
+    type: { type: String, default: 'button' },
     disabled: { type: Boolean, default: false },
     loading: { type: Boolean, default: false },
     // If an icon is passed, no text will display.
