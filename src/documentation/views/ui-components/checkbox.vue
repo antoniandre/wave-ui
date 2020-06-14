@@ -13,7 +13,7 @@ div
   .w-flex.wrap
     w-checkbox.mr-3.mb-1(:value="true" label="Checked")
     w-checkbox.mr-3.mb-1(:value="false" label="Unchecked")
-    w-checkbox.mr-3.mb-1(:value="true" indeterminate label="Checked")
+    w-checkbox.mr-3.mb-1(:value="true" indeterminate label="Indeterminate")
     w-checkbox.mr-3.mb-1(:value="true" disabled label="Checked &amp; disabled")
     w-checkbox.mr-3.mb-1(:value="false" disabled label="Unchecked &amp; disabled")
 
@@ -70,18 +70,16 @@ div
   w-checkbox.mr-2(name="checkboxes2" color="success")
     span.pr-2 Choice 1
     w-icon.primary wi-star
-
-
 </template>
 
 <script>
 export default {
   data: () => ({
-    selectedCheckbox1: null,
+    selectedCheckbox1: [],
     checkboxes1: [
       { label: 'Choice 1', value: 1 },
       { label: 'Choice 2', value: 2 },
-      { label: 'Choice 3', value: 3 },
+      { label: 'Choice 3', value: 3 }
     ],
     checkboxes2: [
       { label: 'Choice 1' },
