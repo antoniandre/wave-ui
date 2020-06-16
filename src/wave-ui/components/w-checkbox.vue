@@ -31,6 +31,7 @@ export default {
     color: { type: String, default: 'primary' },
     disabled: { type: Boolean, default: false },
     noRipple: { type: Boolean, default: false },
+    indeterminate: { type: Boolean, default: false },
     round: { type: Boolean, default: false }
   },
 
@@ -56,6 +57,7 @@ export default {
       return {
         [`w-checkbox--${this.isChecked ? 'checked' : 'unchecked'}`]: true,
         'w-checkbox--disabled': this.disabled,
+        'w-checkbox--indeterminate': this.indeterminate,
         'w-checkbox--ripple': this.ripple.start,
         'w-checkbox--rippled': this.ripple.end,
         'w-checkbox--round': this.round
@@ -126,7 +128,7 @@ $disabled-color: #ccc;
     align-items: center;
     justify-content: center;
     border: $outline-width solid $inactive-color;
-    transition: 0.3s ease-in-out;
+    transition: $transition-duration ease-in-out;
     cursor: inherit;
 
     .w-checkbox--round & {border-radius: 100%;}
@@ -163,12 +165,25 @@ $disabled-color: #ccc;
     opacity: 0;
     transition: $transition-duration;
 
+    .w-checkbox--indeterminate & {
+      border-right: none;
+      width: round($size / 2);
+      transform: scale(0) translateX(-50%);
+      left: 50%;
+    }
+
+    // When checked.
     :checked + & {
       opacity: 1;
       transform: rotate(45deg) scale(1);
-      transition: $transition-duration 0.1s cubic-bezier(0.42, 0.96, 1, 1.38);
-      animation: w-checkbox-checkmark 0.45s 0.1s forwards ease-out;
+      transition: $transition-duration 0.15s cubic-bezier(0.42, 0.96, 1, 1.38);
+      animation: w-checkbox-checkmark 0.45s 0.15s forwards ease-out;
       border-color: #fff;
+    }
+    .w-checkbox--indeterminate :checked + & {
+      transform: scale(1) translateX(-50%);
+      animation: none;
+      transition: $transition-duration 0.15s cubic-bezier(0.42, 0.96, 1, 1.38);
     }
   }
 
