@@ -59,6 +59,12 @@ div
     #[strong Notes:] when the label is positioned inside and a placeholder is set,
     the label will be hidden and the placeholder will be displayed.
 
+  h2 Disabled &amp; readonly
+  w-input.mb-1(label="Disabled" outline disabled)
+  w-input.mb-1(label="Disabled and filled" value="Some content" outline disabled)
+  w-input.mb-1(label="Readonly" outline readonly)
+  w-input.mb-1(label="Readonly and filled" value="Some content" outline readonly)
+
   h2 Types
   p The default type is "#[span.code text]".
   h3 Textual inputs

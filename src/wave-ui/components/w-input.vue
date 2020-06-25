@@ -8,6 +8,7 @@
       input.w-input__input(
         :id="`input--${_uid}`"
         :type="type"
+        :readonly="readonly"
         :name="name || null"
         :placeholder="placeholder || null"
         v-model="inputValue"
@@ -34,12 +35,14 @@ export default {
     type: { type: String, default: 'text' },
     name: { type: String, default: '' },
     label: { type: String, default: '' },
-    moveLabel: { type: Boolean, default: true },
     labelPosition: { type: String, default: 'inside' },
+    // When label is inside, allows to move the label above on focus or when filled.
+    moveLabel: { type: Boolean, default: true },
     placeholder: { type: String, default: '' },
     color: { type: String, default: 'primary' },
     bgColor: { type: String, default: '' },
     disabled: { type: Boolean, default: false },
+    readonly: { type: Boolean, default: false },
     required: { type: Boolean, default: false },
     minlength: { type: String, default: '' },
     maxlength: { type: String, default: '' },
@@ -69,10 +72,11 @@ export default {
     },
     classes () {
       return {
+        'w-input--disabled': this.disabled,
         'w-input--filled': this.hasValue,
         'w-input--focused': this.isFocused,
         'w-input--dark': this.dark,
-        'w-input--floatting-label': this.moveLabel,
+        'w-input--floatting-label': this.labelPosition === 'inside' && this.moveLabel,
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
       }
     },
@@ -120,6 +124,8 @@ export default {
 
 <style lang="scss">
 $size: round(2 * $base-font-size);
+$inactive-color: #666;
+$disabled-color: #ccc;
 
 .w-input {
   position: relative;
@@ -202,6 +208,7 @@ $size: round(2 * $base-font-size);
     border: none;
     outline: none;
   }
+  &--disabled &__input {color: $disabled-color;}
 
   // Label.
   // ------------------------------------------------------
@@ -219,6 +226,7 @@ $size: round(2 * $base-font-size);
     padding-left: 2 * $base-increment;
     transform: translateY(-50%);
     pointer-events: none;
+    .w-input--disabled & {color: $disabled-color;}
 
     .w-input--no-padding & {
       left: 0;
