@@ -70,4 +70,10 @@ export default {
 
 <style lang="scss">
 @import '../scss/index';
+
+.w-app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 </style>
