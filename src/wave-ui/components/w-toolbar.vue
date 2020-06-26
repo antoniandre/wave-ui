@@ -45,12 +45,10 @@ export default {
 <style lang="scss">
 .w-toolbar {
   position: relative;
-  height: 12 * $base-increment;
   display: flex;
   flex: 1 1 auto;
   align-items: center;
-  padding-left: 4 * $base-increment;
-  padding-right: 4 * $base-increment;
+  padding: (2 * $base-increment) (4 * $base-increment);
   background-color: #fff;
   z-index: 10;
 
