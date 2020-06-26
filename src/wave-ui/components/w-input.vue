@@ -15,6 +15,9 @@
         @input="onInput"
         @focus="onFocus"
         @blur="onBlur"
+        @keyup="$emit('keyup', inputValue)"
+        @keydown="$emit('keydown', inputValue)"
+        @keypress="$emit('keypress', inputValue)"
         :disabled="disabled"
         :required="required")
       template(v-if="labelPosition === 'inside' && showLabelInside")
@@ -100,7 +103,7 @@ export default {
 
   methods: {
     onInput (e) {
-      this.inputNumberError = e.target.validity.badInput
+      this.inputNumberError = e.target.validity.badInput // For input type number.
       // inputText = e.target.value
       this.$emit('input', this.inputValue)
     },
