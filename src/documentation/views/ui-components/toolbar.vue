@@ -11,7 +11,7 @@ div
     span.ml-2 Item 3
 
   h2 Background color &amp; text color
-  w-toolbar.mt-4(bg-color="blue-lighten-5" color="blue-darken-3")
+  w-toolbar.mt-4(bg-color="blue-lighter-5" color="blue-darker-3")
     .title.my-0 Title
     .spacer
     span.ml-2 Item 1

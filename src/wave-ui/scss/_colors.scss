@@ -34,10 +34,10 @@
     .#{$label} {color: $color;}
 
     @for $i from 1 through 5 {
-      .#{$label}-lighten-#{$i}--bg {background-color: lighten($color, 8 * $i);border-color: lighten($color, 8 * $i);}
-      .#{$label}-lighten-#{$i} {color: lighten($color, 8 * $i);}
-      .#{$label}-darken-#{$i}--bg {background-color: darken($color, 6 * $i);border-color: darken($color, 6 * $i);}
-      .#{$label}-darken-#{$i} {color: darken($color, 6 * $i);}
+      .#{$label}-lighter-#{$i}--bg {background-color: lighten($color, 8 * $i);border-color: lighten($color, 8 * $i);}
+      .#{$label}-lighter-#{$i} {color: lighten($color, 8 * $i);}
+      .#{$label}-darker-#{$i}--bg {background-color: darken($color, 6 * $i);border-color: darken($color, 6 * $i);}
+      .#{$label}-darker-#{$i} {color: darken($color, 6 * $i);}
     }
   }
 }

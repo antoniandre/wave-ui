@@ -44,7 +44,7 @@ div(style="overflow: hidden")
           //- tones colors.
           .color.color--tone(
             :key="i"
-            :class="[`${tone.label}--bg`, i >= 5 ? 'color--darken' : '']")
+            :class="[`${tone.label}--bg`, i >= 5 ? 'color--darker' : '']")
             span {{ tone.label }}
             small {{ tone.color }}
 
@@ -133,7 +133,7 @@ export default {
     }
     .horizontal & {min-width: 140px;}
 
-    &.color--darken {color: #fff;}
+    &.color--darker {color: #fff;}
     span {padding-bottom: 2px;font-size: 1.2em;}
     small {
       font-size: 1.1em;

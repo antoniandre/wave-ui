@@ -46,6 +46,7 @@ export default {
 <style lang="scss">
 .w-flex-wrap {
   @for $i from 1 through 12 {
+    // Divide by 2 as there are 2 elements having this space.
     $space: round($base-increment * $i / 2);
     > .gutter-#{$i} {margin: -$space;}
     > .gutter-#{$i} > * {margin: $space;}
