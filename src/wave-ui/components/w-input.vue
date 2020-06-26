@@ -130,6 +130,7 @@ $disabled-color: #ccc;
 .w-input {
   position: relative;
   display: flex;
+  flex-grow: 1;
   align-items: center;
   outline: none;
   font-size: $base-font-size;
