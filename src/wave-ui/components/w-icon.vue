@@ -44,14 +44,14 @@ export default {
         (this.sm && 'sm') ||
         (this.lg && 'lg') ||
         (this.xl && 'xl') ||
-        'md'
+        null
       )
     },
     classes () {
       return {
         [this.icon]: true,
         [this.color]: this.color,
-        [`size--${this.presetSize}`]: !this.forcedSize,
+        [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
         'w-icon--spin': this.spin,
         [this.ligature && this.ligature.fontName]: this.ligature
       }
@@ -77,6 +77,7 @@ export default {
   vertical-align: middle;
   user-select: none;
   line-height: 1;
+  font-size: 1.2em;
 
   .w-button & {padding: 0;}
   &.size--xs {font-size: round(0.85 * $base-font-size);}
