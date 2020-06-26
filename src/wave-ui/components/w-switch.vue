@@ -64,6 +64,7 @@ export default {
     onChange () {
       this.isOn = !this.isOn
       this.$emit('input', this.isOn)
+      this.$emit('change', this.isOn)
 
       if (!this.noRipple) {
         if (this.isOn) {
@@ -99,6 +100,7 @@ $disabled-color: #ddd;
 .w-switch {
   display: inline-flex;
   align-items: center;
+  vertical-align: middle;
   cursor: pointer;
 
   &--disabled {cursor: default;}
