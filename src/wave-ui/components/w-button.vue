@@ -94,6 +94,7 @@ $spinner-size: 40;
   box-shadow: 0 0 0 transparent;
   vertical-align: middle;
   align-self: center;
+  align-items: center;
   justify-content: center;
   user-select: none;
   cursor: pointer;
