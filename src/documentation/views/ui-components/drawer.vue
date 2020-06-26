@@ -81,7 +81,7 @@ div
     v-model="showBottomDrawer"
     bottom
     :height="bottomDrawerHeight"
-    bg-color="blue-lighten-4")
+    bg-color="blue-lighter-4")
     w-button.button--close(
       sm
       @click="showBottomDrawer = !showBottomDrawer"

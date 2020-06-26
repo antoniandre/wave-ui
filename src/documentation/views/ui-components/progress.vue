@@ -107,7 +107,7 @@ div(style="max-width: 900px")
     outline
     round
     label
-    label-color="indigo-lighten-4")
+    label-color="indigo-lighter-4")
 
   h3 Round linecap &amp; default flat line cap
   w-progress.mt-4(
