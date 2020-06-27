@@ -65,7 +65,7 @@ export default {
   &__title {
     display: flex;
     align-items: center;
-    padding: (2 * $base-increment) (4 * $base-increment);
+    padding: (2 * $base-increment) (3 * $base-increment);
     font-size: 1.3em;
     border-bottom: $border;
     border-top-left-radius: inherit;
@@ -84,7 +84,7 @@ export default {
 
   &__actions {
     display: flex;
-    padding: (2 * $base-increment) (4 * $base-increment) (4 * $base-increment);
+    padding: (2 * $base-increment) (3 * $base-increment) (3 * $base-increment);
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
 
