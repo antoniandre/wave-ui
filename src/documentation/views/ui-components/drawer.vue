@@ -16,7 +16,7 @@ div
       outline
       color="primary") Show top drawer
     w-button.ma-1(
-      @click="bottomDrawerHeight = null;showBottomDrawer = !showBottomDrawer"
+      @click="showBottomDrawer = !showBottomDrawer"
       outline
       color="primary") Show bottom drawer
 
@@ -24,7 +24,7 @@ div
   w-button.mr-2(
     @click="bottomDrawerHeight = '60px';showBottomDrawer = !showBottomDrawer"
     outline
-    color="primary") Show 60px height bottom drawer
+    color="primary") Show a 60px height bottom drawer
 
   h2 No overlay &amp; custom color overlay
   span Open top drawer with:
@@ -44,6 +44,13 @@ div
   p.mt-4.
     #[strong Note:] with no overlay the underneath content will be clickable and the drawer will not close.
     To allow closing the drawer when clicking outside of it, you can set a transparent background on the overlay.
+
+  h2 Persistent drawers
+  p A persistent drawer stays open when clicking outside or pressing the escape key.
+  w-button.mx-2.my-1(
+  @click="persistent = true;showBottomDrawer = !showBottomDrawer"
+  outline
+  color="primary") Persistent drawer
 
   w-drawer(v-model="showLeftDrawer" left)
     w-button.button--close(
@@ -80,8 +87,10 @@ div
   w-drawer(
     v-model="showBottomDrawer"
     bottom
+    :persistent="persistent"
     :height="bottomDrawerHeight"
-    bg-color="blue-lighter-4")
+    bg-color="blue-lighter-4"
+    @close="bottomDrawerHeight = null;persistent = false")
     w-button.button--close(
       sm
       @click="showBottomDrawer = !showBottomDrawer"
@@ -100,7 +109,8 @@ export default {
     showBottomDrawer: false,
     noOverlay: false,
     overlayColor: false,
-    bottomDrawerHeight: 0
+    bottomDrawerHeight: 0,
+    persistent: false
   })
 }
 </script>

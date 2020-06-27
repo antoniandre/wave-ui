@@ -4,11 +4,12 @@
       v-if="!noOverlay"
       v-model="showDrawer"
       :bg-color="overlayColor"
+      :persistent="persistent"
       :opacity="overlayOpacity")
     transition(
       :name="transitionName"
       appear
-      @after-leave="showWrapper = false;$emit('input', false)")
+      @after-leave="close")
       .w-drawer__content(v-if="showDrawer" :class="contentClasses" :style="styles")
         slot
 </template>
@@ -28,6 +29,7 @@ export default {
     right: { type: Boolean, default: false },
     top: { type: Boolean, default: false },
     bottom: { type: Boolean, default: false },
+    persistent: { type: Boolean, default: false },
     width: { type: [Number, String, Boolean], default: false },
     height: { type: [Number, String, Boolean], default: false },
     zIndex: { type: [Number, String, Boolean], default: false },
@@ -94,9 +96,10 @@ export default {
   },
 
   methods: {
-    hide () {
+    close () {
       this.showDrawer = false
-      setTimeout(() => this.$emit('input', false), 500)
+      this.$emit('input', false)
+      this.$emit('close', false)
     }
   },
 
