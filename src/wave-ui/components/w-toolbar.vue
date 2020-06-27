@@ -48,7 +48,7 @@ export default {
   display: flex;
   flex: 1 1 auto;
   align-items: center;
-  padding: (2 * $base-increment) (4 * $base-increment);
+  padding: (2 * $base-increment) (3 * $base-increment);
   background-color: #fff;
   z-index: 10;
 
