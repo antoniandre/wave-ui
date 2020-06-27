@@ -18,7 +18,7 @@ export default {
     opacity: { type: [Number, String, Boolean], default: false },
     bgColor: { type: [String, Boolean], default: false },
     zIndex: { type: [Number, String, Boolean], default: false },
-    closeOnClick: { type: Boolean, default: true }
+    persistent: { type: Boolean, default: true }
   },
 
   computed: {
@@ -35,7 +35,7 @@ export default {
 
   methods: {
     onClose (e) {
-      this.closeOnClick && e.target.classList.contains('w-overlay') && this.$emit('input', false)
+      !this.persistent && e.target.classList.contains('w-overlay') && this.$emit('input', false)
     }
   }
 }
