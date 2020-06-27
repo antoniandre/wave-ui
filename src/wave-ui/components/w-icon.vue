@@ -77,14 +77,22 @@ export default {
   vertical-align: middle;
   user-select: none;
   line-height: 1;
-  font-size: 1.2em;
+  width: 1em;
+  height: 1em;
 
-  .w-button & {padding: 0;}
   &.size--xs {font-size: round(0.85 * $base-font-size);}
   &.size--sm {font-size: round(1.15 * $base-font-size);}
   &.size--md {font-size: round(1.4 * $base-font-size);}
   &.size--lg {font-size: round(1.7 * $base-font-size);}
   &.size--xl {font-size: round(2 * $base-font-size);}
+
+  // In button.
+  .w-button & {padding: 0;}
+  .w-button.size--xs & {font-size: round(0.85 * $base-font-size);}
+  .w-button.size--sm & {font-size: round(1.15 * $base-font-size);}
+  .w-button.size--md & {font-size: round(1.4 * $base-font-size);}
+  .w-button.size--lg & {font-size: round(1.7 * $base-font-size);}
+  .w-button.size--xl & {font-size: round(2 * $base-font-size);}
 
   &--spin:before {
     animation: w-icon--spin 2s infinite linear;
