@@ -1,8 +1,8 @@
 <template lang="pug">
-  .w-flex-wrap(v-if="gutter")
+  component.w-flex-wrap(v-if="gutter" :is="tag")
     .w-flex(:class="classes")
       slot
-  .w-flex(v-else :class="classes")
+  component.w-flex(v-else :class="classes" :is="tag")
     slot
 </template>
 
@@ -10,6 +10,7 @@
 export default {
   name: 'w-flex',
   props: {
+    tag: { type: String, default: 'div' },
     column: { type: Boolean, default: false },
     grow: { type: Boolean, default: false },
     noGrow: { type: Boolean, default: false },
@@ -45,6 +46,8 @@ export default {
 
 <style lang="scss">
 .w-flex-wrap {
+  overflow: hidden;
+
   @for $i from 1 through 12 {
     // Divide by 2 as there are 2 elements having this space.
     $space: round($base-increment * $i / 2);
