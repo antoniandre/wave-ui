@@ -8,15 +8,15 @@ div
     It is very easy to overrides these defaults via CSS, but you can also pass them as
     parameters to the #[span.code w-overlay].
 
-  h2 Overlay with custom opacity and control on #[span.code closeOnClick]
+  h2 Overlay with custom opacity and control on #[span.code persistent]
   p When closing on overlay click is allowed, the escape key will also close the overlay.
   .w-flex.wrap.align-center.mb-2
     w-button.mr-2(bg-color="primary" dark @click="showOverlay = true") Show overlay
     w-button.mr-2(
-      :bg-color="closeOnClick ? 'green' : 'red'"
-      :class="closeOnClick ? 'px-4' : 'px-1'"
+      :bg-color="persistent ? 'green' : 'red'"
+      :class="persistent ? 'px-4' : 'px-1'"
       dark
-      @click="closeOnClick = !closeOnClick") {{ closeOnClick ? 'Closing' : 'Not closing' }} on overlay click
+      @click="persistent = !persistent") {{ persistent ? 'Closing' : 'Not closing' }} on overlay click
     | Overlay opacity
     input.ml-2(v-model="opacity" type="number" step="0.1" min="0" max="1")
 
@@ -25,7 +25,7 @@ div
 
   w-overlay.w-flex.align-center.justify-center(
     v-model="showOverlay"
-    :close-on-click="closeOnClick"
+    :persistent="persistent"
     :opacity="opacity")
     w-button(bg-color="primary" lg dark @click="showOverlay = false")
       w-icon.mr-2 wi-cross
@@ -42,7 +42,7 @@ export default {
     showOverlay: false,
     showBlueOverlay: false,
     opacity: 0.3,
-    closeOnClick: true
+    persistent: true
   })
 }
 </script>
