@@ -65,8 +65,9 @@ div
   w-button.ma-1.mr-6(bg-color="secondary" tile) tile
 
   h2 Icons &amp; mixed content
-  w-button.ma-1(bg-color="error" round icon="wi-cross")
-  w-button.ma-1.mr-6(bg-color="success" round icon="wi-check")
+  p Icon buttons are rounded by default.
+  w-button.ma-1(bg-color="error" icon="wi-cross")
+  w-button.ma-1.mr-6(bg-color="success" icon="wi-check")
   w-button.ma-1(bg-color="error")
     w-icon.mr-1 wi-cross
     | Cancel
