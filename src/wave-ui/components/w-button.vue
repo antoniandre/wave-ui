@@ -7,7 +7,7 @@
     :class="classes"
     :disabled="!!disabled"
     @click="$emit('click', $event)")
-    w-icon(v-if="icon" v-bind="{ [size]: true }") {{ icon }}
+    w-icon(v-if="icon") {{ icon }}
     span(v-else)
       slot
     .w-button__loader(v-if="loading")
@@ -100,7 +100,7 @@ $spinner-size: 40;
   cursor: pointer;
   // Background-color must not transition to not affect the hover & focus states
   // in :before & :after.
-  transition: $transition-duration, background-color none;
+  transition: $transition-duration, background-color 0s;
 
   &--dark {
     color: rgba(255, 255, 255, 0.95);
@@ -115,12 +115,14 @@ $spinner-size: 40;
     border-color: transparent;
   }
   &--round {
-    border-radius: 12 * $base-increment;
-    padding-left: round(3 * $base-increment);
-    padding-right: round(3 * $base-increment);
+    border-radius: 4 * $base-font-size;
+    padding-left: 3 * $base-increment;
+    padding-right: 3 * $base-increment;
   }
-  &--icon {padding: round(0.4 * $base-increment);}
-  &--icon.size--lg, &--icon.size--xl {padding: 2 * $base-increment;}
+  &--icon {
+    border-radius: 4 * $base-font-size;
+    padding: round(0.4 * $base-increment);
+  }
   &--tile {border-radius: initial;}
   &--shadow {box-shadow: $box-shadow;}
   &--loading {cursor: wait;opacity: 0.8;}
@@ -134,10 +136,15 @@ $spinner-size: 40;
     color: rgba(255, 255, 255, 0.3);
   }
 
+  // Sizes adjustments.
   &.size--xs {padding-left: $base-increment;padding-right: $base-increment;}
   &.size--xl {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
   &--round.size--xs {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
   &--round.size--xl {padding-left: round(4.5 * $base-increment);padding-right: round(4.5 * $base-increment);}
+  &--icon.size--xs, &--icon.size--sm, &--icon.size--md {padding: round(0.4 * $base-increment);}
+  &--icon.size--md {padding: $base-increment;}
+  &--icon.size--lg {padding: round(1.5 * $base-increment);}
+  &--icon.size--xl {padding: 2 * $base-increment;}
 
   // Overlay to mark the focus, hover and active state.
   &:before {
