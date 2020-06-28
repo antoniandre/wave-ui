@@ -28,6 +28,9 @@ export default {
 <style lang="scss">
 div.main-toolbar {
   background-color: rgba(255, 255, 255, 0.9);
+  height: 42px;
+  padding-top: 0;
+  padding-bottom: 0;
 
   .home-link {
     @include default-transition;
