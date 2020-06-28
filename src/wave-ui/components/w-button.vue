@@ -100,7 +100,7 @@ $spinner-size: 40;
   cursor: pointer;
   // Background-color must not transition to not affect the hover & focus states
   // in :before & :after.
-  transition: $transition-duration, background-color 0s;
+  transition: $transition-duration, background-color 0s, padding 0s;
 
   &--dark {
     color: rgba(255, 255, 255, 0.95);

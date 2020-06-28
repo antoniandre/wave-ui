@@ -52,11 +52,11 @@ div(style="max-width: 900px")
   h2 Sizes
   .w-flex
     .grow
-      w-alert.size--xs(color="info") This is an extra small alert.
-      w-alert.size--sm(color="info") This is a small alert.
-      w-alert.size--md(color="info") This is a medium alert.
-      w-alert.size--lg(color="info") This is a large alert.
-      w-alert.size--xl(color="info") This is an extra large alert.
+      w-alert.size--xs(color="info" type="success") This is an extra small alert.
+      w-alert.size--sm(color="info" type="success") This is a small alert.
+      w-alert.size--md(color="info" type="success") This is a medium alert.
+      w-alert.size--lg(color="info" type="success") This is a large alert.
+      w-alert.size--xl(color="info" type="success") This is an extra large alert.
     .spacer(v-if="!$waveUI.breakpoint.xs")
 </template>
 
