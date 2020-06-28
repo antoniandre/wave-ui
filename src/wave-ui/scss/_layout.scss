@@ -12,9 +12,15 @@
   .align-start {align-items: flex-start;}
   .align-center {align-items: center;}
   .align-end {align-items: flex-end;}
+  .align-self-start {align-self: flex-start;}
+  .align-self-center {align-self: center;}
+  .align-self-end {align-self: flex-end;}
   .justify-start {justify-content: flex-start;}
   .justify-center {justify-content: center;}
   .justify-end {justify-content: flex-end;}
+  .justify-self-start {justify-self: flex-start;}
+  .justify-self-center {justify-self: center;}
+  .justify-self-end {justify-self: flex-end;}
   .justify-space-between {justify-content: space-between;}
 
   .text-left {text-align: left;}
