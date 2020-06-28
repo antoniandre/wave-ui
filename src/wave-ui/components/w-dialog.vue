@@ -2,14 +2,13 @@
   w-overlay.w-dialog(
     v-if="showWrapper"
     :value="showWrapper"
-    @input="onOutsideClick"
+    :persistent="persistent"
+    :persistent-no-animation="persistentNoAnimation"
+    @click="onOutsideClick"
     :bg-color="overlayColor"
     :opacity="overlayOpacity"
     :class="classes")
-    transition(
-      :name="transition"
-      appear
-      @after-leave="showWrapper = false;$emit('input', false)")
+    transition(:name="transition" appear @after-leave="onClose")
       w-card.w-dialog__content(v-if="showContent" no-border :style="contentStyles")
         template(v-slot:title)
           slot(name="title")
@@ -59,11 +58,17 @@ export default {
 
   methods: {
     onOutsideClick () {
-      if (!this.persistent) this.showContent = false
-      if (this.persistent && !this.persistentNoAnimation) {
-        this.persistentAnimate = true
-        setTimeout(() => (this.persistentAnimate = false), 100)
+      if (!this.persistent) {
+        this.showContent = false
+        // If fade transition close both dialog and overlay at the same time
+        // (don't need to wait for the end of the dialog transition).
+        if (this.transition === 'fade') this.onClose()
       }
+    },
+    onClose () {
+      this.showWrapper = false
+      this.$emit('input', false)
+      this.$emit('close', false)
     }
   },
 
@@ -85,21 +90,16 @@ export default {
   &__content {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    max-width: 95%;
     overflow: auto;
     background-color: #fff;
-    width: 95%;
-    max-width: 95%;
 
     .w-dialog--fullscreen & {
       flex: 1 1 auto;
       height: 100%;
       max-width: none;
     }
-
-    .w-dialog--persistent & {
-      transition: 0.1s transform cubic-bezier(0.6, -0.28, 0.74, 0.05);
-    }
-    .w-dialog--persistent-animate & {transform: scale(1.06);}
   }
 }
 </style>

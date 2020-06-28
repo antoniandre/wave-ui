@@ -15,8 +15,11 @@ div
       | Control panel
     w-checkbox.mt-2(v-model="dialog1.fullscreen" label="Fullscreen")
     w-checkbox.mt-2(v-model="dialog1.persistent" label="Persistent (try to click outside)")
-    w-checkbox.mt-2(v-model="dialog1.persistentNoAnimation" label="Persistent with no animation")
-    .w-flex.mt-2.no-grow
+    w-checkbox.mt-2(
+      v-model="dialog1.persistentNoAnimation"
+      :disabled="!dialog1.persistent"
+      label="Persistent with no animation")
+    .w-flex.mt-6.no-grow
       span.mr-2 Max width:
       w-radios(
         v-model="dialog1.maxWidth"
