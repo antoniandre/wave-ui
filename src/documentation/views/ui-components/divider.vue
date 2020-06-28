@@ -38,9 +38,10 @@ div
     .spacer
     span.mx-1 Item 1
     span.mx-1 Item 2
-    span.mx-1 Item 3
     w-divider.mx-1(vertical)
+    span.mx-1 Item 3
     span.mx-1 Item 4
+    w-divider.mx-1(vertical)
     span.mx-1 Item 5
     span.mx-1 Item 6
 

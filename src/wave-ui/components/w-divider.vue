@@ -31,7 +31,7 @@ export default {
   &--vertical {
     display: flex;
     border-left-width: 1px;
-    height: 100%;
+    align-self: stretch;
   }
   &:not(.w-divider--vertical) {border-top-width: 1px;}
 }
