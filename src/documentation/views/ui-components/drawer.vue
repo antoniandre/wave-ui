@@ -42,8 +42,10 @@ div
     color="primary") Transparent overlay
 
   p.mt-4.
-    #[strong Note:] with no overlay the underneath content will be clickable and the drawer will not close.
-    To allow closing the drawer when clicking outside of it, you can set a transparent background on the overlay.
+    #[strong Note:] with no overlay the underneath content will be clickable and the drawer
+    will not close.
+    To allow closing the drawer when clicking outside of it, you can set a transparent background
+    on the overlay.
 
   h2 Persistent drawers
   p A persistent drawer stays open when clicking outside or pressing the escape key.
@@ -51,6 +53,39 @@ div
   @click="persistent = true;showBottomDrawer = !showBottomDrawer"
   outline
   color="primary") Persistent drawer
+
+  h2 Cookie notice example
+  p.
+    The cookie notice is a good use case of a persistent drawer, it will not let you click
+    anything until you accept.
+  w-button.mx-2.my-1(@click="showCookieNotice = true" outline color="primary")
+    | Show the cookie notice
+  w-drawer(
+    v-model="showCookieNotice"
+    content-class="cookie-notice"
+    overlay-color="transparent"
+    persistent
+    fit-content
+    bottom)
+    .w-flex.pa-2.align-center.wrap
+      .w-flex.align-center
+        w-icon.mr-3(color="primary" xl) wi-info-circle
+        span.grey-darker-3.
+          Our website uses cookies to give you the best user experience.
+          To continue browsing this site you must agree.
+      w-button.ml-auto(sm bg-color="primary" dark @click="showCookieNotice = false")
+        w-icon.mr-2 wi-check
+        | I agree
+  p You can then store the result of the acceptation in the localStorage.
+  pre.
+    w-button.ml-auto(sm bg-color="primary" dark @click="acceptCookies")
+      w-icon.mr-2 wi-check
+      | I agree
+
+    acceptCookies () {
+      localStorage.acceptCookies = 'yes'
+      this.showCookieNotice = false
+    }
 
   w-drawer(v-model="showLeftDrawer" left)
     w-button.button--close(
@@ -110,7 +145,8 @@ export default {
     noOverlay: false,
     overlayColor: false,
     bottomDrawerHeight: 0,
-    persistent: false
+    persistent: false,
+    showCookieNotice: false
   })
 }
 </script>
