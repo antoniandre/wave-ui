@@ -4,7 +4,7 @@ div
 
   h2 Horizontal
   p This horizontal line bellow is a divider.
-  w-divider.ma-10.ml-0
+  w-divider.ma-10
 
   h3 Divider in a #[code w-card]
   w-card
