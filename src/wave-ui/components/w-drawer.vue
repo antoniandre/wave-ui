@@ -3,8 +3,10 @@
     w-overlay(
       v-if="!noOverlay"
       v-model="showDrawer"
-      :bg-color="overlayColor"
+      @click="onOutsideClick"
       :persistent="persistent"
+      persistent-no-animation
+      :bg-color="overlayColor"
       :opacity="overlayOpacity")
     transition(
       :name="transitionName"
@@ -30,6 +32,8 @@ export default {
     top: { type: Boolean, default: false },
     bottom: { type: Boolean, default: false },
     persistent: { type: Boolean, default: false },
+    persistentNoAnimation: { type: Boolean, default: false },
+    fitContent: { type: Boolean, default: false },
     width: { type: [Number, String, Boolean], default: false },
     height: { type: [Number, String, Boolean], default: false },
     zIndex: { type: [Number, String, Boolean], default: false },
@@ -43,7 +47,8 @@ export default {
   data () {
     return {
       showWrapper: this.value,
-      showDrawer: this.value
+      showDrawer: this.value,
+      persistentAnimate: false
     }
   },
 
@@ -75,7 +80,10 @@ export default {
     classes () {
       return {
         'w-drawer--open': !!this.showDrawer,
-        [`w-drawer--${this.position}`]: true
+        [`w-drawer--${this.position}`]: true,
+        'w-drawer--fit-content': this.fitContent,
+        'w-drawer--persistent': this.persistent,
+        'w-drawer--persistent-animate': this.persistentAnimate
       }
     },
     contentClasses () {
@@ -100,6 +108,13 @@ export default {
       this.showDrawer = false
       this.$emit('input', false)
       this.$emit('close', false)
+    },
+    onOutsideClick () {
+      if (!this.persistent) this.showDrawer = false
+      if (this.persistent && !this.persistentNoAnimation) {
+        this.persistentAnimate = true
+        setTimeout(() => (this.persistentAnimate = false), 200) // Must match CSS animation duration.
+      }
     }
   },
 
@@ -142,11 +157,19 @@ export default {
       height: 100%;
       max-height: $drawer-max-size;
     }
+    .w-drawer--fit-content & {width: auto;height: auto;}
 
     .w-drawer--left & {left: 0;}
     .w-drawer--right & {right: 0;}
     .w-drawer--top & {top: 0;}
     .w-drawer--bottom & {bottom: 0;}
+
+    .w-drawer--persistent-animate & {animation: 0.2s w-drawer-pop cubic-bezier(0.6, -0.28, 0.74, 0.05);}
   }
+}
+
+@keyframes w-drawer-pop {
+  0%, 100% {transform: scale(1);}
+  50% {transform: scale(1.06);}
 }
 </style>
