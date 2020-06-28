@@ -11,6 +11,11 @@
         :readonly="readonly"
         :name="name || null"
         :placeholder="placeholder || null"
+        :step="step || null"
+        :min="min || null"
+        :max="max || null"
+        :minlength="minlength || null"
+        :maxlength="maxlength || null"
         v-model="inputValue"
         @input="onInput"
         @focus="onFocus"
@@ -47,8 +52,11 @@ export default {
     disabled: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false },
     required: { type: Boolean, default: false },
-    minlength: { type: String, default: '' },
-    maxlength: { type: String, default: '' },
+    minlength: { type: [String, Number], default: '' },
+    maxlength: { type: [String, Number], default: '' },
+    step: { type: [String, Number], default: '' },
+    min: { type: [String, Number], default: '' },
+    max: { type: [String, Number], default: '' },
     dark: { type: Boolean, default: false },
     outline: { type: Boolean, default: false },
     round: { type: Boolean, default: false },
