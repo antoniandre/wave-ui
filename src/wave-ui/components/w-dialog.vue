@@ -27,7 +27,7 @@ export default {
     persistent: { type: Boolean, default: false },
     persistentNoAnimation: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
-    transition: { type: String, default: 'fade' },
+    transition: { type: String, default: 'fade' }, // @todo: validator.
     overlayColor: { type: [String, Boolean], default: false },
     overlayOpacity: { type: [Number, String, Boolean], default: false }
   },
@@ -35,18 +35,14 @@ export default {
   data () {
     return {
       showWrapper: this.value,
-      showContent: this.value,
-      persistentAnimate: false
+      showContent: this.value
     }
   },
 
   computed: {
     classes () {
       return {
-        'w-dialog--fullscreen': this.fullscreen,
-        'w-dialog--persistent': this.persistent,
-        'w-dialog--no-animation': this.persistentNoAnimation,
-        'w-dialog--persistent-animate': this.persistentAnimate
+        'w-dialog--fullscreen': this.fullscreen
       }
     },
     contentStyles () {

@@ -33,8 +33,6 @@ export default {
     },
     classes () {
       return {
-        'w-overlay--persistent': this.persistent,
-        'w-overlay--no-animation': this.persistentNoAnimation,
         'w-overlay--persistent-animate': this.persistentAnimate
       }
     },
@@ -54,7 +52,7 @@ export default {
       // Quickly add the animation class and remove it.
       if (this.persistent && !this.persistentNoAnimation) {
         this.persistentAnimate = true
-        setTimeout(() => (this.persistentAnimate = false), 150)
+        setTimeout(() => (this.persistentAnimate = false), 150) // Must match CSS animation duration.
       }
       else if (!this.persistent) this.$emit('input', false)
 
