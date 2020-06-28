@@ -86,17 +86,15 @@ export default {
   &.size--lg {font-size: round(1.7 * $base-font-size);}
   &.size--xl {font-size: round(2 * $base-font-size);}
 
-  // In button.
-  .w-button & {padding: 0;}
-  .w-button.size--xs & {font-size: round(0.85 * $base-font-size);}
-  .w-button.size--sm & {font-size: round(1.15 * $base-font-size);}
-  .w-button.size--md & {font-size: round(1.4 * $base-font-size);}
-  .w-button.size--lg & {font-size: round(1.7 * $base-font-size);}
-  .w-button.size--xl & {font-size: round(2 * $base-font-size);}
+  // In w-button and w-alert.
+  .w-button &, .w-alert & {padding: 0;font-size: round(1.4 * $base-font-size);}
+  .w-button.size--xs, .w-alert.size--xs & {font-size: round(1 * $base-font-size);}
+  .w-button.size--sm, .w-alert.size--sm & {font-size: round(1.15 * $base-font-size);}
+  .w-button.size--md, .w-alert.size--md & {font-size: round(1.4 * $base-font-size);}
+  .w-button.size--lg, .w-alert.size--lg & {font-size: round(1.7 * $base-font-size);}
+  .w-button.size--xl, .w-alert.size--xl & {font-size: round(2 * $base-font-size);}
 
-  &--spin:before {
-    animation: w-icon--spin 2s infinite linear;
-  }
+  &--spin:before {animation: w-icon--spin 2s infinite linear;}
 }
 
 @keyframes w-icon--spin {
