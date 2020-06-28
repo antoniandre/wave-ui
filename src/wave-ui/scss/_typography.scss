@@ -20,6 +20,18 @@
     margin-bottom: 2 * $base-increment;
   }
 
+  .heading {
+    font-size: round(1.25 * $base-font-size);
+    font-weight: 400;
+    margin-bottom: 2 * $base-increment;
+  }
+
+  .subheading {
+    font-size: round(1.1 * $base-font-size);
+    font-weight: 600;
+    margin-bottom: 2 * $base-increment;
+  }
+
   .body {
     font-size: $base-font-size;
     font-weight: normal;
