@@ -59,6 +59,23 @@ div
           span.ml-2 Item 1
           span.ml-2 Item 2
           span.ml-2 Item 3
+
+  h2 Custom toolbar height
+  p.
+    The #[code w-toolbar] component also accepts a height. It can be set as a string with units
+    or a number of pixels (without unit).
+  w-toolbar.mt-4.py-0(bg-color="blue-lighter-5" color="blue-darker-3" height="5em")
+    .title.my-0 Title
+    .spacer
+    span.mx-1 Item 1
+    span.mx-1 Item 2
+    w-divider.mx-2(vertical)
+    span.mx-1 Item 3
+    span.mx-1 Item 4
+    w-divider.mx-2(vertical)
+    span.mx-1 Item 5
+    span.mx-1 Item 6
+
 </template>
 
 <style lang="scss">
