@@ -79,7 +79,7 @@ export default {
     flex-direction: column;
     overflow: auto;
     flex: 1 1 auto;
-    padding: 4 * $base-increment;
+    padding: 3 * $base-increment;
   }
 
   &__actions {
