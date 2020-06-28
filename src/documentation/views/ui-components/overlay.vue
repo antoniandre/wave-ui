@@ -9,16 +9,36 @@ div
     parameters to the #[span.code w-overlay].
 
   h2 Overlay with custom opacity and control on #[span.code persistent]
-  p When closing on overlay click is allowed, the escape key will also close the overlay.
-  .w-flex.wrap.align-center.mb-2
-    w-button.mr-2(bg-color="primary" dark @click="showOverlay = true") Show overlay
-    w-button.mr-2(
-      :bg-color="persistent ? 'green' : 'red'"
-      :class="persistent ? 'px-4' : 'px-1'"
-      dark
-      @click="persistent = !persistent") {{ persistent ? 'Closing' : 'Not closing' }} on overlay click
-    | Overlay opacity
-    input.ml-2(v-model="opacity" type="number" step="0.1" min="0" max="1")
+  P When the overlay is persistent, it will not close on click and on escape key.
+  p When persistent is set to false and by default, the escape key will also close the overlay.
+  w-flex.mt-4(wrap :gutter="12")
+    w-button(bg-color="primary" dark @click="showOverlay = true") Show overlay
+
+    w-divider.my-3(vertical color="grey-lighter-4")
+    .w-flex.column.no-grow
+      .heading Options
+      div
+        w-button(
+          color="primary"
+          bg-color="blue-lighter-5"
+          :class="persistent ? 'pr-4' : ''"
+          @click="persistent = !persistent")
+          .code.primary :persistent="{{ persistent }}"
+        w-button.ml-2(
+          color="primary"
+          bg-color="blue-lighter-5"
+          @click="persistentNoAnimation = !persistentNoAnimation"
+          :disabled="!persistent")
+          .code.primary :persistent-no-animation="{{ persistentNoAnimation }}"
+      w-input.mt-2.align-self-start(
+        v-model="opacity"
+        outline
+        type="number"
+        label="Overlay opacity"
+        label-position="left"
+        step="0.1"
+        min="0"
+        max="1")
 
   h2 Overlay with custom background color
   w-button.mr-2(bg-color="primary" dark @click="showBlueOverlay = true") Show a blue overlay
@@ -26,6 +46,7 @@ div
   w-overlay.w-flex.align-center.justify-center(
     v-model="showOverlay"
     :persistent="persistent"
+    :persistent-no-animation="persistentNoAnimation"
     :opacity="opacity")
     w-button(bg-color="primary" lg dark @click="showOverlay = false")
       w-icon.mr-2 wi-cross
@@ -42,7 +63,8 @@ export default {
     showOverlay: false,
     showBlueOverlay: false,
     opacity: 0.3,
-    persistent: true
+    persistent: false,
+    persistentNoAnimation: false
   })
 }
 </script>
