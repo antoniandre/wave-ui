@@ -39,7 +39,35 @@ export default {
           xl: breakpoint === 'xl'
         }
       }
+    },
+    dynamicStyles () {
+      let styles = ''
+      for (const color in config.colors) {
+        styles +=
+          `.w-app .${color}--bg{background-color:${config.colors[color]}}` +
+          `.w-app .${color}{color:${config.colors[color]}}`
 
+        let col = config.colors[color].replace('#', '')
+        if (col.length === 3) col = col[0] + '' + col[0] + col[1] + col[1] + col[2] + col[2]
+
+        for (let i = 1; i <= 3; i++) {
+          const lighterColor = this.shadeColor(`#${col}`, i * 40)
+          const darkerColor = this.shadeColor(`#${col}`, -i * 40)
+          styles +=
+            `.w-app .${color}-lighter-${i}--bg{background-color:${lighterColor}}` +
+            `.w-app .${color}-lighter-${i}{color:${lighterColor}}` +
+            `.w-app .${color}-darker-${i}--bg{background-color:${darkerColor}}` +
+            `.w-app .${color}-darker-${i}{color:${darkerColor}}`
+        }
+      }
+
+      return styles
+    },
+
+    shadeColor (col, amt) {
+      return '#' + col.slice(1).match(/../g)
+        .map(x => ( x =+ `0x${x}` + amt, x < 0 ? 0 : ( x > 255 ? 255 : x))
+        .toString(16).padStart(2, 0)).join('')
     }
   },
 
@@ -48,13 +76,8 @@ export default {
     if (!document.getElementById('wave-ui-styles')) {
       const css = document.createElement('style')
       css.id = 'wave-ui-styles'
-      css.innerHTML = ''
+      css.innerHTML = this.dynamicStyles()
 
-      for (const color in config.colors) {
-        css.innerHTML +=
-          `.w-app .${color}--bg{background-color: ${config.colors[color]}}` +
-          `.w-app .${color}{color: ${config.colors[color]}}`
-      }
       document.head.append(css)
     }
 

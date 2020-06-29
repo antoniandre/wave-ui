@@ -22,7 +22,51 @@ div(style="overflow: hidden")
     .color.warning--bg.subtitle.text-center.grow.py-3.ma-2 warning
     .color.info--bg.subtitle.text-center.grow.py-3.ma-2 info
 
-  h2.my-4.w-flex.align-center
+  h3 Status colors shades
+  .w-flex.wrap.mb-12.ma-n2
+    .w-flex.column
+      .color.success-lighter-3--bg.subtitle.text-center.grow.py-3.ma-2.body success-lighter-3
+      .color.success-lighter-2--bg.subtitle.text-center.grow.py-3.ma-2.body success-lighter-2
+      .color.success-lighter-1--bg.subtitle.text-center.grow.py-3.ma-2.body success-lighter-1
+      .color.success-darker-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body success-darker-1
+      .color.success-darker-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body success-darker-2
+      .color.success-darker-3--bg.subtitle.text-center.grow.py-3.ma-2.white.body success-darker-3
+    .w-flex.column
+      .color.error-lighter-3--bg.subtitle.text-center.grow.py-3.ma-2.body error-lighter-3
+      .color.error-lighter-2--bg.subtitle.text-center.grow.py-3.ma-2.body error-lighter-2
+      .color.error-lighter-1--bg.subtitle.text-center.grow.py-3.ma-2.body error-lighter-1
+      .color.error-darker-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body error-darker-1
+      .color.error-darker-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body error-darker-2
+      .color.error-darker-3--bg.subtitle.text-center.grow.py-3.ma-2.white.body error-darker-3
+    .w-flex.column
+      .color.warning-lighter-3--bg.subtitle.text-center.grow.py-3.ma-2.body warning-lighter-3
+      .color.warning-lighter-2--bg.subtitle.text-center.grow.py-3.ma-2.body warning-lighter-2
+      .color.warning-lighter-1--bg.subtitle.text-center.grow.py-3.ma-2.body warning-lighter-1
+      .color.warning-darker-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body warning-darker-1
+      .color.warning-darker-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body warning-darker-2
+      .color.warning-darker-3--bg.subtitle.text-center.grow.py-3.ma-2.white.body warning-darker-3
+    .w-flex.column
+      .color.info-lighter-3--bg.subtitle.text-center.grow.py-3.ma-2.body info-lighter-3
+      .color.info-lighter-2--bg.subtitle.text-center.grow.py-3.ma-2.body info-lighter-2
+      .color.info-lighter-1--bg.subtitle.text-center.grow.py-3.ma-2.body info-lighter-1
+      .color.info-darker-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body info-darker-1
+      .color.info-darker-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body info-darker-2
+      .color.info-darker-3--bg.subtitle.text-center.grow.py-3.ma-2.white.body info-darker-3
+
+  h2 Primary, secondary shades
+  p.
+    The primary color, and whichever color you add, will also have 6 different shades.
+    More shades would most likely be redundant with the bellow color palette.
+  .w-flex
+    .color.primary-lighter-3--bg.subtitle.text-center.grow.py-3.ma-2.body primary-lighter-3
+    .color.primary-lighter-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-lighter-2
+    .color.primary-lighter-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-lighter-1
+    .color.primary--bg.subtitle.text-center.grow.py-3.ma-2.white primary
+    .color.primary-darker-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-darker-1
+    .color.primary-darker-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-darker-2
+    .color.primary-darker-3--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-darker-3
+
+  h2.mt-12.mb-4.w-flex.align-center
     | Color Palette
     w-button.ml-6(
       bg-color="primary"
