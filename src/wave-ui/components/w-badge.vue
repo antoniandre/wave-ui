@@ -1,14 +1,15 @@
 <template lang="pug">
   .w-badge
-    slot(name="activator")
+    slot
     .w-badge__badge(:class="classes" :style="styles")
-      slot
+      slot(name="badge") {{ value || '' }}
 </template>
 
 <script>
 export default {
   name: 'w-badge',
   props: {
+    value: {},
     xs: { type: Boolean, default: false },
     sm: { type: Boolean, default: false },
     md: { type: Boolean, default: false },
@@ -75,6 +76,7 @@ export default {
     justify-content: center;
     user-select: none;
     border-radius: 4 * $base-font-size;
+    height: round(1.1 * $base-font-size);
 
     // Sizes.
     &.size--xs {font-size: round(0.7 * $base-font-size);}
