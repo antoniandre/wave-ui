@@ -42,6 +42,7 @@ export default {
         { label: 'Accordion', route: 'w-accordion', disabled: true },
         { label: 'Alert', route: 'w-alert' },
         { label: 'App', route: 'w-app' },
+        { label: 'Badge', route: 'w-badge' },
         { label: 'Button', route: 'w-button' },
         { label: 'Calendar', route: 'w-calendar', disabled: true },
         { label: 'Card', route: 'w-card' },
