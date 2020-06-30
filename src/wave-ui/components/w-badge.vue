@@ -77,6 +77,9 @@ export default {
     user-select: none;
     border-radius: 4 * $base-font-size;
     height: round(1.1 * $base-font-size);
+    min-width: round(1.1 * $base-font-size);
+    z-index: 1;
+    padding: 0 2px;
 
     // Sizes.
     &.size--xs {font-size: round(0.7 * $base-font-size);}
