@@ -55,6 +55,7 @@ const components = [
   { id: 'alert', label: 'Alert' },
   { id: 'app', label: 'App' },
   { id: 'button', label: 'Button' },
+  { id: 'badge', label: 'Badge' },
   { id: 'calendar', label: 'Calendar' },
   { id: 'card', label: 'Card' },
   { id: 'checkbox', label: 'Checkbox' },

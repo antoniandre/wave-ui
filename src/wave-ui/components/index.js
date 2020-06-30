@@ -1,6 +1,7 @@
 export { default as WAccordion } from './w-accordion'
 export { default as WAlert } from './w-alert'
 export { default as WApp } from './w-app'
+export { default as WBadge } from './w-badge'
 export { default as WButton } from './w-button'
 export { default as WCalendar } from './w-calendar'
 export { default as WCheckbox } from './w-checkbox'
