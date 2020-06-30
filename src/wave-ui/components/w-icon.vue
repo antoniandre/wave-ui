@@ -4,7 +4,7 @@
     @click="$emit('click', $event)"
     role="icon"
     aria-hidden="true"
-    :style="this.forcedSize && `font-size: ${this.forcedSize}`")
+    :style="styles")
     template(v-if="ligature") {{ ligature.icon }}
 </template>
 
@@ -55,6 +55,9 @@ export default {
         'w-icon--spin': this.spin,
         [this.ligature && this.ligature.fontName]: this.ligature
       }
+    },
+    styles () {
+      return this.forcedSize && `font-size: ${this.forcedSize}`
     }
   },
 
@@ -84,15 +87,15 @@ export default {
   &.size--sm {font-size: round(1.15 * $base-font-size);}
   &.size--md {font-size: round(1.4 * $base-font-size);}
   &.size--lg {font-size: round(1.7 * $base-font-size);}
-  &.size--xl {font-size: round(2 * $base-font-size);}
+  &.size--xl {font-size: 2 * $base-font-size;}
 
   // In w-button and w-alert.
   .w-button &, .w-alert & {padding: 0;font-size: round(1.4 * $base-font-size);}
-  .w-button.size--xs &, .w-alert.size--xs & {font-size: round(1 * $base-font-size);}
+  .w-button.size--xs &, .w-alert.size--xs & {font-size: $base-font-size;}
   .w-button.size--sm &, .w-alert.size--sm & {font-size: round(1.15 * $base-font-size);}
   .w-button.size--md &, .w-alert.size--md & {font-size: round(1.4 * $base-font-size);}
   .w-button.size--lg &, .w-alert.size--lg & {font-size: round(1.7 * $base-font-size);}
-  .w-button.size--xl &, .w-alert.size--xl & {font-size: round(2 * $base-font-size);}
+  .w-button.size--xl &, .w-alert.size--xl & {font-size: 2 * $base-font-size;}
 
   &--spin:before {animation: w-icon--spin 2s infinite linear;}
 }

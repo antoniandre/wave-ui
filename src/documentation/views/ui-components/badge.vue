@@ -6,6 +6,6 @@ div
   .w-flex.wrap.py-6
     w-badge
       template(v-slot:badge)
-        span.ma-2(v-on="on") 1
+        span.ma-2 1
       | Emails
 </template>
