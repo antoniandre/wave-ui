@@ -53,10 +53,15 @@ div(style="overflow: hidden")
       .color.info-darker-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body info-darker-2
       .color.info-darker-3--bg.subtitle.text-center.grow.py-3.ma-2.white.body info-darker-3
 
-  h2 Primary, secondary shades
+  h2 #[span.code primary] &amp; #[span.code secondary] colors and shades
   p.
     The primary color, and whichever color you add, will also have 6 different shades.
     More shades would most likely be redundant with the bellow color palette.
+
+  p.
+    Also note that the primary color is considered as dark by default, and will render,
+    as well as its 3 darker shades, with a white text when used as a background.
+
   .w-flex
     .color.primary-lighter-3--bg.subtitle.text-center.grow.py-3.ma-2.body primary-lighter-3
     .color.primary-lighter-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-lighter-2
