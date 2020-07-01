@@ -3,15 +3,15 @@
     w-checkbox(
       v-for="(item, i) in checkboxItems"
       :key="i"
-      type="checkbox"
       :name="`${name || `checkboxes-${_uid}`}[]`"
       :label="item.label"
+      :label-position="labelPosition"
       :value="item.isChecked"
       :color="color"
       :round="round"
       @input="toggleCheck(item)"
       :class="{ 'ml-3': inline && i, 'mt-1': !inline && i }")
-      slot(name="label" :item="item") {{ item.label }}
+      slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
 
 <script>
@@ -21,6 +21,7 @@ export default {
     items: { type: Array, required: true }, // All the possible options.
     value: { type: Array }, // v-model on selected option.
     name: { type: String, default: null },
+    labelPosition: { type: String, default: '' }, // @todo: add a validator (left or right).
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
     inline: { type: Boolean, default: false },
