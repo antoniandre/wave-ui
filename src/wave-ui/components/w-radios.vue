@@ -3,13 +3,14 @@
     w-radio(
       v-for="(item, i) in radioItems"
       :key="i"
-      type="radio"
       :name="name || `radios-${_uid}`"
       :label="item.label"
+      :label-position="labelPosition"
       :value="value === item.value"
       :color="color"
       @input="$emit('input', item.value);$emit('change', item.value)"
       :class="{ 'ml-3': inline && i, 'mt-1': !inline && i }")
+      slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
 
 <script>
@@ -19,6 +20,7 @@ export default {
     items: { type: Array, required: true }, // All the possible options.
     value: { type: [String, Number, Boolean] }, // v-model on selected option.
     name: { type: String, default: null },
+    labelPosition: { type: String, default: '' }, // @todo: add a validator (left or right).
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
     inline: { type: Boolean, default: false },
