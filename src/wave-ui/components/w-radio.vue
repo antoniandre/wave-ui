@@ -10,12 +10,17 @@
       @change="onChange"
       :aria-checked="booleanValue || 'false'"
       role="radio")
+    template(v-if="labelPosition === 'left'")
+      label.w-radio__label(v-if="$slots.default" :for="`radio--${_uid}`")
+        slot
+      label.w-radio__label(v-else-if="label" :for="`radio--${_uid}`" v-html="label")
     .w-radio__input(
       @click="$refs.input.focus();$refs.input.click()"
       :class="{ 'mr-2': hasLabel, [this.color]: true }")
-    label.w-radio__label(v-if="$slots.default" :for="`radio--${_uid}`")
-      slot
-    label.w-radio__label(v-else-if="label" :for="`radio--${_uid}`" v-html="label")
+    template(v-if="labelPosition !== 'left'")
+      label.w-radio__label(v-if="$slots.default" :for="`radio--${_uid}`")
+        slot
+      label.w-radio__label(v-else-if="label" :for="`radio--${_uid}`" v-html="label")
 </template>
 
 <script>
@@ -28,6 +33,7 @@ export default {
     returnValue: {},
     name: { type: String, default: '' },
     label: { type: String, default: '' },
+    labelPosition: { type: String, default: '' }, // @todo: add a validator (left or right).
     color: { type: String, default: 'primary' },
     disabled: { type: Boolean, default: false },
     noRipple: { type: Boolean, default: false }
@@ -139,8 +145,8 @@ $disabled-color: #ccc;
     .w-radio--disabled & {border-color: $disabled-color;}
 
     // Checked state.
-    :checked + & {border-color: currentColor;}
-    .w-radio--disabled :checked + & {border-color: $disabled-color;}
+    :checked ~ & {border-color: currentColor;}
+    .w-radio--disabled :checked ~ & {border-color: $disabled-color;}
   }
 
   // The inner bullet - visible when checked.
@@ -153,7 +159,7 @@ $disabled-color: #ccc;
     background-color: $inactive-color;
     transition: $transition-duration;
 
-    :checked + & {
+    :checked ~ & {
       border-width: 4px;
       border-color: currentColor;
       // Prevents a tiny hole while animating and in some browser zoom levels.

@@ -10,12 +10,17 @@
       @change="onChange"
       :aria-checked="isChecked || 'false'"
       role="checkbox")
+    template(v-if="labelPosition === 'left'")
+      label.w-checkbox__label(v-if="$slots.default" :for="`checkbox--${_uid}`")
+        slot
+      label.w-checkbox__label(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
     .w-checkbox__input(
       @click="$refs.input.focus();$refs.input.click()"
       :class="{ 'mr-2': hasLabel, [this.color]: true }")
-    label.w-checkbox__label(v-if="$slots.default" :for="`checkbox--${_uid}`")
-      slot
-    label.w-checkbox__label(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
+    template(v-if="labelPosition !== 'left'")
+      label.w-checkbox__label(v-if="$slots.default" :for="`checkbox--${_uid}`")
+        slot
+      label.w-checkbox__label(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
 </template>
 
 <script>
@@ -28,6 +33,7 @@ export default {
     returnValue: {},
     name: { type: String, default: '' },
     label: { type: String, default: '' },
+    labelPosition: { type: String, default: '' }, // @todo: add a validator (left or right).
     color: { type: String, default: 'primary' },
     disabled: { type: Boolean, default: false },
     noRipple: { type: Boolean, default: false },
@@ -135,13 +141,13 @@ $disabled-color: #ccc;
     .w-checkbox--disabled & {border-color: $disabled-color;}
 
     // Checked state.
-    :checked + & {
+    :checked ~ & {
       border-width: $size / 2;
       border-color: currentColor;
       // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: currentColor;
     }
-    .w-checkbox--disabled :checked + & {
+    .w-checkbox--disabled :checked ~ & {
       border-color: $disabled-color;
       // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: $disabled-color;
@@ -173,14 +179,14 @@ $disabled-color: #ccc;
     }
 
     // When checked.
-    :checked + & {
+    :checked ~ & {
       opacity: 1;
       transform: rotate(45deg) scale(1);
       transition: $transition-duration 0.15s cubic-bezier(0.42, 0.96, 1, 1.38);
       animation: w-checkbox-checkmark 0.45s 0.15s forwards ease-out;
       border-color: #fff;
     }
-    .w-checkbox--indeterminate :checked + & {
+    .w-checkbox--indeterminate :checked ~ & {
       transform: scale(1) translateX(-50%);
       animation: none;
       transition: $transition-duration 0.15s cubic-bezier(0.42, 0.96, 1, 1.38);
@@ -206,7 +212,7 @@ $disabled-color: #ccc;
     animation: w-checkbox-ripple 0.55s 0.15s ease;
   }
 
-  :focus + &__input:before {
+  :focus ~ &__input:before {
     transform: scale(1.8);
     opacity: 0.2;
   }
