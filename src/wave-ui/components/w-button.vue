@@ -136,7 +136,13 @@ $spinner-size: 40;
     color: rgba(255, 255, 255, 0.3);
   }
 
-  // Sizes adjustments.
+  // Sizes adjustments (always an even number for easier vertical alignments).
+  &.size--xs {line-height: round(1.25 * $base-font-size / 2) * 2;}
+  &.size--sm {line-height: round(1.6 * $base-font-size / 2) * 2;}
+  &.size--md {line-height: round(1.9 * $base-font-size / 2) * 2;}
+  &.size--lg {line-height: round(2.35 * $base-font-size / 2) * 2;}
+  &.size--xl {line-height: round(2.75 * $base-font-size / 2) * 2;}
+
   &.size--xs {padding-left: $base-increment;padding-right: $base-increment;}
   &.size--xl {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
   &--round.size--xs {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
