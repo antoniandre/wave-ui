@@ -80,6 +80,7 @@ export default {
   vertical-align: middle;
   user-select: none;
   line-height: 1;
+  font-size: 1.2em;
   width: 1em;
   height: 1em;
 
@@ -90,7 +91,7 @@ export default {
   &.size--xl {font-size: 2 * $base-font-size;}
 
   // In w-button and w-alert.
-  .w-button &, .w-alert & {padding: 0;font-size: round(1.4 * $base-font-size);}
+  .w-button &, .w-alert & {font-size: round(1.4 * $base-font-size);}
   .w-button.size--xs &, .w-alert.size--xs & {font-size: $base-font-size;}
   .w-button.size--sm &, .w-alert.size--sm & {font-size: round(1.15 * $base-font-size);}
   .w-button.size--md &, .w-alert.size--md & {font-size: round(1.4 * $base-font-size);}
@@ -103,4 +104,5 @@ export default {
 @keyframes w-icon--spin {
   0% {transform: rotate(0deg);}
   to {transform: rotate(359deg);}
-}</style>
+}
+</style>
