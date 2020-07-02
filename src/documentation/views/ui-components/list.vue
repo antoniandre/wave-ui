@@ -17,7 +17,7 @@ div
       .w-flex.align-center
         | {{ item.label }}
         .spacer
-        w-icon {{ item.icon }}
+        w-icon(md) {{ item.icon }}
 
   h2 Default items list rendering with selection
   w-radios.mt-4(v-model="multiple" name="multiple" :items="radios" inline)
@@ -60,7 +60,7 @@ div
         template(v-slot:item="{ item }")
           span {{ item.label }}
           .spacer
-          w-icon {{ item.icon }}
+          w-icon(md) {{ item.icon }}
     .grow
       .subtitle Custom rendering &amp; styles
       w-list.custom.mt-6(
@@ -71,7 +71,7 @@ div
         template(v-slot:item="{ item }")
           span {{ item.label }}
           .spacer
-          w-icon {{ item.icon }}
+          w-icon(md) {{ item.icon }}
 
   h2 Navigation lists
   p.
@@ -82,7 +82,7 @@ div
     template(v-slot:item="{ item }")
       span {{ item.label }}
       .spacer
-      w-icon {{ item.icon }}
+      w-icon(md) {{ item.icon }}
 </template>
 
 <script>

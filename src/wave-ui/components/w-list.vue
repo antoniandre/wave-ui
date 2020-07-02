@@ -240,7 +240,7 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
-    font-size: round(1 * $base-font-size);
+    font-size: $base-font-size;
     padding-top: 1px;
     padding-bottom: 1px;
 
