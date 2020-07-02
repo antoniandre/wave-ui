@@ -21,20 +21,20 @@ div
   w-button.ma-1(bg-color="secondary" disabled) disabled
 
   h2 Dark
-  w-button.ma-1(bg-color="primary" color="white" dark xs) extra small
-  w-button.ma-1(bg-color="primary" color="white" dark sm) small
-  w-button.ma-1(bg-color="primary" color="white" dark md) medium
-  w-button.ma-1(bg-color="primary" color="white" dark lg) large
-  w-button.ma-1(bg-color="primary" color="white" dark xl) extra large
-  w-button.ma-1(bg-color="primary" color="white" dark disabled) disabled
+  w-button.ma-1(bg-color="primary" color="white" xs) extra small
+  w-button.ma-1(bg-color="primary" color="white" sm) small
+  w-button.ma-1(bg-color="primary" color="white" md) medium
+  w-button.ma-1(bg-color="primary" color="white" lg) large
+  w-button.ma-1(bg-color="primary" color="white" xl) extra large
+  w-button.ma-1(bg-color="primary" color="white" disabled) disabled
 
   h3 Mix background and text colors
-  w-button.ma-1(bg-color="primary" color="yellow" dark xs) extra small
-  w-button.ma-1(bg-color="primary" color="yellow" dark sm) small
-  w-button.ma-1(bg-color="primary" color="yellow" dark md) medium
-  w-button.ma-1(bg-color="primary" color="yellow" dark lg) large
-  w-button.ma-1(bg-color="primary" color="yellow" dark xl) extra large
-  w-button.ma-1(bg-color="primary" color="yellow" dark disabled) disabled
+  w-button.ma-1(bg-color="primary" color="yellow" xs) extra small
+  w-button.ma-1(bg-color="primary" color="yellow" sm) small
+  w-button.ma-1(bg-color="primary" color="yellow" md) medium
+  w-button.ma-1(bg-color="primary" color="yellow" lg) large
+  w-button.ma-1(bg-color="primary" color="yellow" xl) extra large
+  w-button.ma-1(bg-color="primary" color="yellow" disabled) disabled
 
   h2 Outline
   w-button.ma-1(color="primary" outline xs) extra small
@@ -59,9 +59,9 @@ div
   w-button.ma-1(bg-color="info" shadow) info
 
   h2 Round &amp; tile
-  w-button.ma-1(bg-color="primary" dark round) round
+  w-button.ma-1(bg-color="primary" round) round
   w-button.ma-1.mr-6(bg-color="secondary" round) round
-  w-button.ma-1(bg-color="primary" dark tile) tile
+  w-button.ma-1(bg-color="primary" tile) tile
   w-button.ma-1.mr-6(bg-color="secondary" tile) tile
 
   h2 Icons &amp; mixed content
@@ -76,19 +76,19 @@ div
     | Save
 
   h2 Loading spinner &amp; custom loader
-  w-button.ma-1(bg-color="primary" dark :loading="button1loading" @click="buttonDoLoading(1)")
+  w-button.ma-1(bg-color="primary" :loading="button1loading" @click="buttonDoLoading(1)")
     w-icon.mr-1 wi-check
     | Save
-  w-button.ma-1.px-4(bg-color="primary" dark :loading="button2loading" @click="buttonDoLoading(2)")
+  w-button.ma-1.px-4(bg-color="primary" :loading="button2loading" @click="buttonDoLoading(2)")
     w-icon.mr-1 wi-check
     | Save
     template(v-slot:loading) Loading...
 
   h2 Links
-  w-button.ma-1(bg-color="primary" dark to="/")
+  w-button.ma-1(bg-color="primary" to="/")
     | Getting started
     w-icon.ml-1 wi-chevron-right
-  w-button.ma-1(bg-color="primary" dark to="https://github.com/antoniandre/wave-ui")
+  w-button.ma-1(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
     | Github
     w-icon.ml-2(sm) mdi mdi-open-in-new
 </template>
