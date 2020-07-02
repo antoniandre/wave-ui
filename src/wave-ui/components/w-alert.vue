@@ -120,5 +120,11 @@ export default {
   // &--type:after {opacity: 0.1;}
 
   .w-icon {opacity: 0.9;}
+
+  &.size--xs {padding-top: $base-increment;padding-bottom: $base-increment;}
+  &.size--sm {padding-top: $base-increment;padding-bottom: $base-increment;}
+  &.size--md {padding-top: round(2 * $base-increment);padding-bottom: round(2 * $base-increment);}
+  &.size--lg {padding-top: round(3 * $base-increment);padding-bottom: round(2.5 * $base-increment);}
+  &.size--xl {padding-top: round(3 * $base-increment);padding-bottom: round(3 * $base-increment);}
 }
 </style>
