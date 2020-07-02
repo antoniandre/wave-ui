@@ -47,7 +47,7 @@ div
     #[code w-checkboxes] provides a #[code label] slot to customize the label of each checkbox
     button.
   w-checkboxes(:items="checkboxes3" color="green")
-    template(v-slot:label="{ item }")
+    template(v-slot:item="{ item }")
       span.pr-2 {{ item.label }}
       w-icon.deep-purple {{ item.icon }}
 

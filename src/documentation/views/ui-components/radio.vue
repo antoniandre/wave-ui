@@ -42,7 +42,7 @@ div
     #[code w-radios] provides a #[code label] slot to customize the label of each radio
     button.
   w-radios(:items="radios3" color="green")
-    template(v-slot:label="{ item }")
+    template(v-slot:item="{ item }")
       span.pr-2 {{ item.label }}
       w-icon.deep-purple {{ item.icon }}
 
