@@ -62,7 +62,5 @@ blockquote {
   display: inline-block;
 }
 
-code {margin: 0 4px;}
-
 .w-list__item-bullet {color: green;}
 </style>
