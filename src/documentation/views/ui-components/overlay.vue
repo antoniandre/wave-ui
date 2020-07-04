@@ -18,13 +18,13 @@ div
     .w-flex.column.no-grow
       .heading Options
       div
-        w-button(
+        w-button.mr-2(
           color="primary"
           bg-color="blue-lighter-5"
           :class="persistent ? 'pr-4' : ''"
           @click="persistent = !persistent")
           .code.primary :persistent="{{ persistent }}"
-        w-button.ml-2(
+        w-button(
           color="primary"
           bg-color="blue-lighter-5"
           @click="persistentNoAnimation = !persistentNoAnimation"
