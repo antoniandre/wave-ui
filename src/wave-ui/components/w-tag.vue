@@ -80,7 +80,7 @@ export default {
 
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
-  &--round {border-radius: 4 * $base-font-size;}
+  &--round {border-radius: 5em;}
   &--tile {border-radius: initial;}
   &--shadow {box-shadow: $box-shadow;}
 
