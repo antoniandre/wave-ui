@@ -1,11 +1,11 @@
 {
-  "name": "waveui",
+  "name": "thewaveui",
   "version": "0.1.0-alpha.0",
-  "main": "./dist/waveui.common.js",
+  "main": "./dist/wave-ui.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name waveui ./src/wave-ui/index.js --dest ./dist",
+    "build-bundle": "vue-cli-service build --target lib --name wave-ui ./src/wave-ui/index.js --dest ./dist",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {},
