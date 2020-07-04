@@ -1,9 +1,9 @@
 # Wave UI - COMING SOON.
 
-<!-- [![Latest Version on NPM](https://img.shields.io/npm/v/wave-ui.svg)](https://npmjs.com/package/wave-ui)
+<!-- [![Latest Version on NPM](https://img.shields.io/npm/v/waveui.svg)](https://npmjs.com/package/waveui)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
-[![npm](https://img.shields.io/npm/dt/wave-ui.svg)](https://www.npmjs.com/package/wave-ui) -->
-<!-- [![npm](https://img.shields.io/npm/dw/wave-ui.svg)](https://www.npmjs.com/package/wave-ui) -->
+[![npm](https://img.shields.io/npm/dt/waveui.svg)](https://www.npmjs.com/package/waveui) -->
+<!-- [![npm](https://img.shields.io/npm/dw/waveui.svg)](https://www.npmjs.com/package/waveui) -->
 
 > An emerging UI framework for Vue.js with only the bright side. :sunny:
 
@@ -20,7 +20,7 @@ Like other UI frameworks, Wave UI is very flexible and easy to use. But it is al
 
 
 ## install - Coming soon.
-    npm i --S wave-ui
+    npm i --S waveui
 
 ___
 
