@@ -12,19 +12,29 @@ export default {
   name: 'w-alert',
   props: {
     value: { default: true }, // Show or hide.
+    // transition: { type: [String, Boolean], default: false },
     type: { type: [String, Boolean], default: false },
     color: { type: [String, Boolean], default: false },
     bgColor: { type: [String, Boolean], default: false },
     shadow: { type: Boolean, default: false },
+    tile: { type: Boolean, default: false },
+    round: { type: Boolean, default: false },
+    plain: { type: Boolean, default: false },
+    // Borders.
     noBorder: { type: Boolean, default: false },
     borderLeft: { type: Boolean, default: false },
     borderRight: { type: Boolean, default: false },
     borderTop: { type: Boolean, default: false },
     borderBottom: { type: Boolean, default: false },
     outline: { type: Boolean, default: false },
-    tile: { type: Boolean, default: false },
-    round: { type: Boolean, default: false },
-    plain: { type: Boolean, default: false },
+    // Position.
+    fixed: { type: Boolean, default: false },
+    absolute: { type: Boolean, default: false },
+    top: { type: Boolean, default: false },
+    bottom: { type: Boolean, default: false },
+    left: { type: Boolean, default: false },
+    right: { type: Boolean, default: false },
+    zIndex: { type: [Number, String, Boolean], default: false },
   },
 
   computed: {
@@ -42,6 +52,16 @@ export default {
         this.borderTop || this.borderBottom
     },
 
+    position () {
+      let position = []
+      if (!this.top && !this.bottom && !this.left && !this.right) position = ['top', 'right']
+      else position = [
+        (this.top && 'top') || (this.bottom && 'bottom') || 'top',
+        (this.left && 'left') || (this.right && 'right') || 'center'
+      ]
+      return position
+    },
+
     classes () {
       return {
         [`${this.bgColor || (this.plain && this.type)}--bg w-alert--bg`]: this.bgColor || (this.plain && this.type),
@@ -57,6 +77,10 @@ export default {
         'w-alert--border-right': !this.noBorder && this.borderRight,
         'w-alert--border-top': !this.noBorder && this.borderTop,
         'w-alert--border-bottom': !this.noBorder && this.borderBottom,
+        'w-alert--shadow': this.shadow,
+        'w-alert--fixed': this.fixed,
+        'w-alert--absolute': !this.fixed && this.absolute,
+        [this.position.join(' ')]: this.fixed || this.absolute
       }
     }
   }
@@ -78,6 +102,21 @@ export default {
     display: flex;
     align-items: center;
   }
+
+  // Position.
+  &--fixed, &--absolute {
+    position: fixed;
+    background-color: #fff;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  &--fixed {z-index: 400;}
+  &--absolute {position: absolute;}
+  &.top {top: 2 * $base-increment;}
+  &.bottom {bottom: 2 * $base-increment;}
+  &.top, &.bottom {left: 50%;transform: translateX(-50%);}
+  &.left {left: 2 * $base-increment;transform: none;}
+  &.right {left: auto;right: 2 * $base-increment;transform: none;}
 
   &--outline {border-color: currentColor;}
   &--tile {border-radius: 0;}
