@@ -82,10 +82,12 @@ div(style="max-width: 900px")
   w-alert(
     v-model="fixedAlert.show"
     fixed
-    color="success"
-    v-bind="{ [fixedAlert.position[0]]: true }")
-    | The alert is fixed on top right.
-
+    type="success"
+    plain
+    round
+    shadow
+    v-bind="{ [fixedAlert.position[0]]: true, [fixedAlert.position[1]]: true }")
+    | The alert is fixed on {{ fixedAlert.position[0] }} {{ fixedAlert.position[1] }}.
 </template>
 
 <script>
@@ -94,7 +96,7 @@ export default {
     showAlert: false,
     fixedAlert: {
       show: false,
-      position: ['top', 'right']
+      position: ['bottom', 'right']
     }
   })
 }
