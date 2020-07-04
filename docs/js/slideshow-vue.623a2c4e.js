@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["slideshow-vue"],{"5ebe":function(e,s,t){"use strict";t.r(s);var n=function(){var e=this,s=e.$createElement;e._self._c;return e._m(0)},l=[function(){var e=this,s=e.$createElement,t=e._self._c||s;return t("div",[t("h1",{staticClass:"headline mt-4"},[t("span",{staticClass:"code"},[e._v("w-slideshow")])])])}],a={},c=a,i=t("2877"),r=Object(i["a"])(c,n,l,!1,null,null,null);s["default"]=r.exports}}]);
+//# sourceMappingURL=slideshow-vue.623a2c4e.js.map
