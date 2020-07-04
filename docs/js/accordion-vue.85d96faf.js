@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["accordion-vue"],{"47aa":function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement;e._self._c;return e._m(0)},c=[function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[t("h1",{staticClass:"headline mt-4"},[t("span",{staticClass:"code"},[e._v("w-accordion")])])])}],s={},i=s,l=t("2877"),r=Object(l["a"])(i,a,c,!1,null,null,null);n["default"]=r.exports}}]);
+//# sourceMappingURL=accordion-vue.85d96faf.js.map
