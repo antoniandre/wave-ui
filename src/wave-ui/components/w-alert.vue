@@ -1,7 +1,10 @@
 <template lang="pug">
   .w-alert(:class="classes")
-    w-icon.mr-2(v-if="type") wi-{{ icon }}
-    slot
+    template(v-if="type")
+      w-icon.mr-2 wi-{{ icon }}
+      .w_alert__content
+        slot
+    slot(v-else)
 </template>
 
 <script>
@@ -19,8 +22,7 @@ export default {
     borderBottom: { type: Boolean, default: false },
     outline: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
-    plain: { type: Boolean, default: false },
-    // light: { type: Boolean, default: false }
+    plain: { type: Boolean, default: false }
   },
 
   computed: {
@@ -38,7 +40,7 @@ export default {
     },
     classes () {
       return {
-        [`${this.bgColor || (this.plain && this.type)}--bg`]: this.bgColor || (this.plain && this.type),
+        [`${this.bgColor || (this.plain && this.type)}--bg w-alert--bg`]: this.bgColor || (this.plain && this.type),
         [this.color || (!this.plain && this.type)]: this.color || (!this.plain && this.type),
         [`w-alert--type w-alert--${this.type}`]: this.type,
         'w-alert--plain': this.type && this.plain,
@@ -60,16 +62,20 @@ export default {
 <style lang="scss">
 .w-alert {
   position: relative;
-  display: flex;
-  align-items: center;
   margin-top: 4 * $base-increment;
   margin-bottom: 4 * $base-increment;
   padding: 2 * $base-increment;
   font-size: round(1.1 * $base-font-size);
   font-weight: 700;
   border-radius: $border-radius;
-  border: 1px solid currentColor;
+  border: 1px solid transparent;
 
+  &--type {
+    display: flex;
+    align-items: center;
+  }
+
+  &--outline {border-color: currentColor;}
   &--tile {border-radius: 0;}
   &--shadow {box-shadow: $box-shadow;}
   &--no-border, &--shadow, &--plain {border: none;}
@@ -117,9 +123,9 @@ export default {
 
   &:after {opacity: 0.15;content: '';border-radius: inherit;}
   &--outline:after {display: none;}
-  // &--type:after {opacity: 0.1;}
+  &--bg:after {background-color: #fff;opacity: 0.1;}
 
-  .w-icon {opacity: 0.9;}
+  &--type > .w-icon {opacity: 0.9;align-self: flex-start;}
 
   &.size--xs {padding-top: $base-increment;padding-bottom: $base-increment;}
   &.size--sm {padding-top: $base-increment;padding-bottom: $base-increment;}
