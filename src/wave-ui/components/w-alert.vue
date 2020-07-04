@@ -1,5 +1,5 @@
 <template lang="pug">
-  .w-alert(:class="classes")
+  .w-alert(v-if="value" :class="classes")
     template(v-if="type")
       w-icon.mr-2 wi-{{ icon }}
       .w_alert__content
@@ -11,6 +11,7 @@
 export default {
   name: 'w-alert',
   props: {
+    value: { default: true }, // Show or hide.
     type: { type: [String, Boolean], default: false },
     color: { type: [String, Boolean], default: false },
     bgColor: { type: [String, Boolean], default: false },
@@ -22,7 +23,8 @@ export default {
     borderBottom: { type: Boolean, default: false },
     outline: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
-    plain: { type: Boolean, default: false }
+    round: { type: Boolean, default: false },
+    plain: { type: Boolean, default: false },
   },
 
   computed: {
@@ -34,10 +36,12 @@ export default {
         (this.type === 'info' && 'info-circle')
       )
     },
+
     hasSingleBorder () {
       return this.borderLeft || this.borderRight ||
         this.borderTop || this.borderBottom
     },
+
     classes () {
       return {
         [`${this.bgColor || (this.plain && this.type)}--bg w-alert--bg`]: this.bgColor || (this.plain && this.type),
@@ -46,13 +50,13 @@ export default {
         'w-alert--plain': this.type && this.plain,
         'w-alert--outline': this.outline,
         'w-alert--tile': this.tile,
+        'w-alert--round': this.round,
         'w-alert--no-border': this.noBorder || this.hasSingleBorder || (this.plain && this.type),
         'w-alert--one-border': this.hasSingleBorder,
         'w-alert--border-left': !this.noBorder && this.borderLeft,
         'w-alert--border-right': !this.noBorder && this.borderRight,
         'w-alert--border-top': !this.noBorder && this.borderTop,
         'w-alert--border-bottom': !this.noBorder && this.borderBottom,
-        'w-alert--shadow': this.shadow
       }
     }
   }
@@ -77,6 +81,11 @@ export default {
 
   &--outline {border-color: currentColor;}
   &--tile {border-radius: 0;}
+  &--round {
+    border-radius: 5em;
+    padding-left: 3 * $base-increment;
+    padding-right: 3 * $base-increment;
+  }
   &--shadow {box-shadow: $box-shadow;}
   &--no-border, &--shadow, &--plain {border: none;}
 

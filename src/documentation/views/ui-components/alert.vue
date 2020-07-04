@@ -2,6 +2,13 @@
 div(style="max-width: 900px")
   h1.headline.mt-4 #[span.code w-alert]
 
+  h2 Show / hide with v-model
+  p.
+    By default alerts are visible, but if a value or v-model is provided,
+    it will show or hide according to it.
+  w-button(@click="showAlert = !showAlert" color="primary" outline) {{ showAlert ? 'Hide' : 'Show' }} alert
+  w-alert(v-model="showAlert" color="success") The alert is now visible.
+
   h2 Colors
   p.
     You can apply a color to the text with the #[code color] attribute,
@@ -45,8 +52,9 @@ div(style="max-width: 900px")
     w-alert.grow.ma-2(color="primary" border-top) This is a normal alert with a top border.
     w-alert.grow.ma-2(color="primary" border-bottom) This is a normal alert with a left border.
 
-  h2 Tile &amp; shadow
+  h2 Tile, round &amp; shadow
   w-alert(color="primary" tile) This is a tile alert.
+  w-alert(color="primary" round) This is a round alert.
   w-alert(color="primary" shadow) This is a normal alert with a shadow.
 
   h2 Sizes
@@ -62,6 +70,8 @@ div(style="max-width: 900px")
 
 <script>
 export default {
-
+  data: () => ({
+    showAlert: false
+  })
 }
 </script>
