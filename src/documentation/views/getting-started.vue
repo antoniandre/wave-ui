@@ -5,14 +5,14 @@ div
   h2 Installation
 
   h3 Download from NPM
-  code npm i --D wave-ui
+  code npm i --D the-wave-ui
 
   h3 Import in your project
   p In main.js
   pre.
     import Vue from 'vue'
     import App from './app'
-    import WaveUI from 'wave-ui'
+    import WaveUI from 'the-wave-ui'
 
     Vue.use(WaveUI)
 
