@@ -176,9 +176,9 @@ $disabled-color: #ccc;
   }
 
   &__input-wrap--round {
-    border-radius: 4em;
-    padding-left: round(3 * $base-increment);
-    padding-right: round(3 * $base-increment);
+    border-radius: 5em;
+    padding-left: 3 * $base-increment;
+    padding-right: 3 * $base-increment;
   }
   &__input-wrap--tile {border-radius: initial;}
   &__input-wrap--shadow {box-shadow: $box-shadow;}
@@ -201,7 +201,7 @@ $disabled-color: #ccc;
 
   &--focused &__input-wrap--underline:after {width: 100%;}
   &__input-wrap--round.w-input__input-wrap--underline:after {
-    border-radius: 4em;
+    border-radius: 5em;
     transition: $transition-duration, height 0.035s;
   }
   &--focused &__input-wrap--round.w-input__input-wrap--underline:after {

@@ -115,12 +115,12 @@ $spinner-size: 40;
     border-color: transparent;
   }
   &--round {
-    border-radius: 4 * $base-font-size;
+    border-radius: 5em;
     padding-left: 3 * $base-increment;
     padding-right: 3 * $base-increment;
   }
   &--icon {
-    border-radius: 4 * $base-font-size;
+    border-radius: 5em;
     padding: round(0.4 * $base-increment);
   }
   &--tile {border-radius: initial;}
