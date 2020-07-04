@@ -15,10 +15,11 @@ div
 
   h2 Text style
   div.ml-8
-    .uppercase.mt-4 Uppercase text using the #[code .uppercase] class.
-    .lowercase.mt-4 Lowercase text using the #[code .lowercase] class.
-    .bold.mt-4 Bold text using the #[code .bold] class.
-    .italic.mt-4 Italic text using the #[code .italic] class.
+    .text-up.mt-4 Uppercase text using the #[code .text-up] class.
+    .text-low.mt-4 Lowercase text using the #[code .text-low] class.
+    .text-light.mt-4 Bold text using the #[code .text-light] class.
+    .text-bold.mt-4 Bold text using the #[code .text-bold] class.
+    .text-italic.mt-4 Italic text using the #[code .text-italic] class.
 
   h2 Text alignment
   div.ml-8
