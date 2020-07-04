@@ -228,6 +228,7 @@ export default {
     position: absolute;
     right: 100%;
     margin-right: 3 * $base-increment;
+    top: 0.1em;
 
     .w-list--hoverable &,
     .w-list--selectable &,
@@ -238,12 +239,16 @@ export default {
   // --------------------------------------------
   &__item-label {
     position: relative;
-    display: flex;
-    align-items: center;
     font-size: $base-font-size;
     padding-top: 1px;
     padding-bottom: 1px;
+    display: block;
 
+    .w-list--navigation &,
+    .w-list--checklist & {
+      display: flex;
+      align-items: center;
+    }
     &--selectable {cursor: pointer;}
     &--disabled {
       cursor: default;
