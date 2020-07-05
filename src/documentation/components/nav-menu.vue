@@ -93,9 +93,15 @@ div.nav-menu {
     padding-left: 4 * $base-increment;
     @include default-transition;
     font-size: 1em;
+    font-weight: normal;
     border-left: 2px solid transparent;
+    &:before {display: none;}
 
-    &.router-link-exact-active {border-left-color: $primary;}
+    &.router-link-exact-active {
+      border-left-color: $primary;
+      font-weight: 700;
+      &:before {display: block;}
+    }
     &:before {left: -2px;}
   }
 }
