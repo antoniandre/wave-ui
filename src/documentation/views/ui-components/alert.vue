@@ -67,7 +67,7 @@ div(style="max-width: 900px")
       w-alert.size--xl(color="info" type="success") This is an extra large alert.
     .spacer(v-if="!$waveUI.breakpoint.xs")
 
-  h3 Fixed &amp; absolute positions
+  h2 Fixed &amp; absolute positions
   w-button(@click="fixedAlert.show = !fixedAlert.show" color="primary" outline)
     | {{ fixedAlert.show ? 'Hide' : 'Show' }} alert
   .heading.mt-3 Alert position
