@@ -16,8 +16,8 @@ div
     Practically Wave UI gives you more flexibility and more control over the CSS.
   blockquote.mt-2.
     Because inline styles and #[code !important] are a nightmare to override,
-    Wave UI has chosen to use not-too-specific selectors and promotes the CSS styling
-    rather than Javascript dynamic styles.
+    Wave UI has chosen to use not-too-specific selectors and promote the CSS styling
+    rather than Javascript dynamic styling.
 
   p.mt-3.
     In Wave UI framework, all the styles are scoped to the framework UI elements:
