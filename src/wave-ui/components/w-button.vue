@@ -30,7 +30,7 @@ export default {
     md: { type: Boolean, default: false },
     lg: { type: Boolean, default: false },
     xl: { type: Boolean, default: false },
-    to: { type: [String, Boolean], default: false }, // Creates a link.
+    to: { type: [String, Boolean, Object], default: false }, // Creates a link.
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     dark: { type: Boolean, default: false },
