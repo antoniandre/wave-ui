@@ -129,7 +129,7 @@ $spinner-size: 40;
   &[disabled] {
     cursor: auto;
     box-shadow: none;
-    opacity: 0.3;
+    opacity: 0.4;
   }
   &--dark[disabled] {
     background-color: rgba(255, 255, 255, 0.12);
