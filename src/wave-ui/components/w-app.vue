@@ -40,6 +40,7 @@ export default {
         }
       }
     },
+
     dynamicStyles () {
       let styles = ''
       for (const color in config.colors) {
@@ -98,5 +99,6 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 </style>
