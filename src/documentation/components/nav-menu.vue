@@ -37,6 +37,7 @@ export default {
         { label: 'Layout', route: 'layout' },
         { label: 'Typography', route: 'typography' },
         { label: 'Colors', route: 'colors' },
+        { label: 'Transitions', route: 'transitions' }
       ],
       components: [
         { label: 'Accordion', route: 'w-accordion', disabled: true },
