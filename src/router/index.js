@@ -47,6 +47,11 @@ const routes = [
     path: '/typography',
     name: 'typography',
     component: () => import(/* webpackChunkName: "typography" */ '@/documentation/views/typography.vue')
+  },
+  {
+    path: '/transitions',
+    name: 'transitions',
+    component: () => import(/* webpackChunkName: "transitions" */ '@/documentation/views/transitions.vue')
   }
 ]
 
