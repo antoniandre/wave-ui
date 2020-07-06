@@ -6,7 +6,8 @@
     :href="to"
     :class="classes"
     :disabled="!!disabled"
-    @click="$emit('click', $event)")
+    @click="$emit('click', $event)"
+    :style="styles")
     w-icon(v-if="icon") {{ icon }}
     span(v-else)
       slot
@@ -31,8 +32,8 @@ export default {
     lg: { type: Boolean, default: false },
     xl: { type: Boolean, default: false },
     to: { type: [String, Boolean, Object], default: false }, // Creates a link.
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
+    color: { type: String },
+    bgColor: { type: String },
     dark: { type: Boolean, default: false },
     outline: { type: Boolean, default: false },
     text: { type: Boolean, default: false },
@@ -43,7 +44,9 @@ export default {
     disabled: { type: Boolean, default: false },
     loading: { type: Boolean, default: false },
     // If an icon is passed, no text will display.
-    icon: { type: String, default: null }
+    icon: { type: String, default: null },
+    width: { type: [String, Number] },
+    height: { type: [String, Number] }
   },
 
   computed: {
@@ -73,6 +76,12 @@ export default {
         'w-button--icon': this.icon,
         [`size--${this.size}`]: true
       }
+    },
+    styles () {
+      return {
+        width: this.width,
+        height: this.height
+      }
     }
   }
 }
@@ -96,6 +105,8 @@ $spinner-size: 40;
   align-self: center;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   user-select: none;
   cursor: pointer;
   // Background-color must not transition to not affect the hover & focus states
