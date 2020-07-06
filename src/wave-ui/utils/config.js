@@ -10,7 +10,6 @@ const config = {
   colors: {
     primary: '#234781',
     secondary: '#d4e9ed',
-    accent: '#2196f3',
     success: '#54b946',
     error: '#f65555',
     warning: '#f80',

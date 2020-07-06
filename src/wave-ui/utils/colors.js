@@ -1,8 +1,8 @@
-export const colors = [
+export default [
   {
     label: 'pink',
     color: '#e91e63',
-    tones: [
+    shades: [
       { label: 'pink-lighter-5', color: '#fbd8e4' },
       { label: 'pink-lighter-4', color: '#f8b3ca' },
       { label: 'pink-lighter-3', color: '#f48db0' },
@@ -18,7 +18,7 @@ export const colors = [
   {
     label: 'purple',
     color: '#a741b9',
-    tones: [
+    shades: [
       { label: 'purple-lighter-5', color: '#ecd6f0' },
       { label: 'purple-lighter-4', color: '#dfb7e6' },
       { label: 'purple-lighter-3', color: '#d199db' },
@@ -34,7 +34,7 @@ export const colors = [
   {
     label: 'deep-purple',
     color: '#673ab7',
-    tones: [
+    shades: [
       { label: 'deep-purple-lighter-5', color: '#daceef' },
       { label: 'deep-purple-lighter-4', color: '#c2afe6' },
       { label: 'deep-purple-lighter-3', color: '#ab90dc' },
@@ -50,7 +50,7 @@ export const colors = [
   {
     label: 'indigo',
     color: '#3f51b5',
-    tones: [
+    shades: [
       { label: 'indigo-lighter-5', color: '#d1d6ef' },
       { label: 'indigo-lighter-4', color: '#b3bae4' },
       { label: 'indigo-lighter-3', color: '#949fda' },
@@ -66,7 +66,7 @@ export const colors = [
   {
     label: 'blue',
     color: '#2196f3',
-    tones: [
+    shades: [
       { label: 'blue-lighter-5', color: '#e3f2fd' },
       { label: 'blue-lighter-4', color: '#bcdffb' },
       { label: 'blue-lighter-3', color: '#95cdf9' },
@@ -82,7 +82,7 @@ export const colors = [
   {
     label: 'light-blue',
     color: '#03a9f4',
-    tones: [
+    shades: [
       { label: 'light-blue-lighter-5', color: '#c5ecfe' },
       { label: 'light-blue-lighter-4', color: '#9cdffe' },
       { label: 'light-blue-lighter-3', color: '#74d3fd' },
@@ -98,7 +98,7 @@ export const colors = [
   {
     label: 'cyan',
     color: '#04cbe5',
-    tones: [
+    shades: [
       { label: 'cyan-lighter-5', color: '#b7f6fe' },
       { label: 'cyan-lighter-4', color: '#8ff0fd' },
       { label: 'cyan-lighter-3', color: '#67ebfc' },
@@ -114,7 +114,7 @@ export const colors = [
   {
     label: 'teal',
     color: '#1db3a8',
-    tones: [
+    shades: [
       { label: 'teal-lighter-5', color: '#abf1ec' },
       { label: 'teal-lighter-4', color: '#88ece4' },
       { label: 'teal-lighter-3', color: '#64e6dc' },
@@ -130,7 +130,7 @@ export const colors = [
   {
     label: 'green',
     color: '#4caf50',
-    tones: [
+    shades: [
       { label: 'green-lighter-5', color: '#d9eeda' },
       { label: 'green-lighter-4', color: '#bce2be' },
       { label: 'green-lighter-3', color: '#a0d6a2' },
@@ -146,7 +146,7 @@ export const colors = [
   {
     label: 'light-green',
     color: '#90d73f',
-    tones: [
+    shades: [
       { label: 'light-green-lighter-5', color: '#f2fae8' },
       { label: 'light-green-lighter-4', color: '#def3c6' },
       { label: 'light-green-lighter-3', color: '#cbeca4' },
@@ -162,7 +162,7 @@ export const colors = [
   {
     label: 'lime',
     color: '#cee029',
-    tones: [
+    shades: [
       { label: 'lime-lighter-5', color: '#f7fadb' },
       { label: 'lime-lighter-4', color: '#eff5b8' },
       { label: 'lime-lighter-3', color: '#e6ef94' },
@@ -178,7 +178,7 @@ export const colors = [
   {
     label: 'yellow',
     color: '#ffe70f',
-    tones: [
+    shades: [
       { label: 'yellow-lighter-5', color: '#fffbdb' },
       { label: 'yellow-lighter-4', color: '#fff7b2' },
       { label: 'yellow-lighter-3', color: '#fff389' },
@@ -194,7 +194,7 @@ export const colors = [
   {
     label: 'amber',
     color: '#ffc107',
-    tones: [
+    shades: [
       { label: 'amber-lighter-5', color: '#fff4d3' },
       { label: 'amber-lighter-4', color: '#ffeaaa' },
       { label: 'amber-lighter-3', color: '#ffe081' },
@@ -210,7 +210,7 @@ export const colors = [
   {
     label: 'orange',
     color: '#ff9800',
-    tones: [
+    shades: [
       { label: 'orange-lighter-5', color: '#ffeacc' },
       { label: 'orange-lighter-4', color: '#ffdaa3' },
       { label: 'orange-lighter-3', color: '#ffc97a' },
@@ -226,7 +226,7 @@ export const colors = [
   {
     label: 'deep-orange',
     color: '#ff6825',
-    tones: [
+    shades: [
       { label: 'deep-orange-lighter-5', color: '#fff5f1' },
       { label: 'deep-orange-lighter-4', color: '#ffd9c8' },
       { label: 'deep-orange-lighter-3', color: '#ffbd9f' },
@@ -243,7 +243,7 @@ export const colors = [
   {
     label: 'red',
     color: '#fa3317',
-    tones: [
+    shades: [
       { label: 'red-lighter-5', color: '#fee3df' },
       { label: 'red-lighter-4', color: '#fdbfb7' },
       { label: 'red-lighter-3', color: '#fd9c8f' },
@@ -259,7 +259,7 @@ export const colors = [
   {
     label: 'brown',
     color: '#845848',
-    tones: [
+    shades: [
       { label: 'brown-lighter-5', color: '#dbc5bd' },
       { label: 'brown-lighter-4', color: '#cdaea3' },
       { label: 'brown-lighter-3', color: '#be9788' },
@@ -275,7 +275,7 @@ export const colors = [
   {
     label: 'blue-grey',
     color: '#6c8693',
-    tones: [
+    shades: [
       { label: 'blue-grey-lighter-5', color: '#e2e7e9' },
       { label: 'blue-grey-lighter-4', color: '#cad3d8' },
       { label: 'blue-grey-lighter-3', color: '#b3c0c7' },
@@ -291,7 +291,7 @@ export const colors = [
   {
     label: 'grey',
     color: '#848484',
-    tones: [
+    shades: [
       { label: 'grey-lighter-5', color: '#eaeaea' },
       { label: 'grey-lighter-4', color: '#d6d6d6' },
       { label: 'grey-lighter-3', color: '#c1c1c1' },
