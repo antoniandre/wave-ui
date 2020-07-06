@@ -83,19 +83,19 @@ div(style="overflow: hidden")
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
     .w-flex.wrap.ma-n2
       .color-palette.ma-2(
-        v-for="({ color, label, tones }, i) in colors"
+        v-for="({ color, label, shades }, i) in colors"
         :key="i")
-        template(v-for="(tone, i) in tones")
+        template(v-for="(shade, i) in shades")
           //- top color.
           .color.color--top(v-if="i === 5" :class="`${label}--bg`")
             span {{ label }}
             small {{ color }}
-          //- tones colors.
-          .color.color--tone(
+          //- shades colors.
+          .color.color--shade(
             :key="i"
-            :class="[`${tone.label}--bg`, i >= 5 ? 'color--darker' : '']")
-            span {{ tone.label }}
-            small {{ tone.color }}
+            :class="[`${shade.label}--bg`, i >= 5 ? 'color--darker' : '']")
+            span {{ shade.label }}
+            small {{ shade.color }}
 
       .color-palette.ma-2
         .w-flex.ma-n2(:class="{ column: !horizontal }")
@@ -111,7 +111,7 @@ div(style="overflow: hidden")
 </template>
 
 <script>
-import { colors } from './colors'
+import colors from '@/wave-ui/utils/colors'
 
 export default {
   data: () => ({
@@ -167,7 +167,7 @@ export default {
     &.white--bg, &.transparent--bg {border: 1px solid #999;}
   }
 
-  .color--tone {
+  .color--shade {
     font-size: 0.8em;
     color: rgba(0, 0, 0, 0.9);
     text-shadow: none;
