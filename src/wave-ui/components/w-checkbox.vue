@@ -231,7 +231,7 @@ $disabled-color: #ccc;
     cursor: inherit;
     user-select: none;
 
-    .w-checkbox--disabled & {opacity: 0.5;}
+    .w-checkbox--disabled & {opacity: 0.7;}
   }
 }
 

@@ -210,7 +210,7 @@ $disabled-color: #ccc;
     cursor: inherit;
     user-select: none;
 
-    .w-radio--disabled & {opacity: 0.5;}
+    .w-radio--disabled & {opacity: 0.7;}
   }
 }
 
