@@ -2,22 +2,21 @@
   transition(
     name="expand"
     v-bind="$props"
-    v-bind:css="true"
-    :duration="{ enter: 300, leave: 300 }"
-    v-on:before-appear="onBeforeAppear"
-    v-on:appear="onAppear"
-    v-on:after-appear="onAfterAppear"
-    v-on:appear-cancelled="onAppearCancelled"
+    v-bind:css="false"
+    @before-appear="beforeShow"
+    @appear="show"
+    @after-appear="applyOriginalStyles"
+    @appear-cancelled="onAppearCancelled"
 
-    v-on:before-enter="onBeforeEnter"
-    v-on:enter="onEnter"
-    v-on:after-enter="onAfterEnter"
-    v-on:enter-cancelled="onEnterCancelled"
+    @before-enter="beforeShow"
+    @enter="show"
+    @after-enter="applyOriginalStyles"
+    @enter-cancelled="onEnterCancelled"
 
-    v-on:before-leave="onBeforeLeave"
-    v-on:leave="onLeave"
-    v-on:after-leave="onAfterLeave"
-    v-on:leave-cancelled="onLeaveCancelled")
+    @before-leave="beforeHide"
+    @leave="hide"
+    @after-leave="applyOriginalStyles"
+    @leave-cancelled="onLeaveCancelled")
     slot
 </template>
 
@@ -52,34 +51,14 @@ export default {
     },
     applyOriginalStyles (el) {
       el.style.cssText = this.el.originalStyles
+      console.log('apply original styles')
     },
-
-    // Appear.
-    onBeforeAppear (el) {
-      // Keep original styles to restore them after transition.
-      this.el.originalStyles = el.style.cssText
-
-      el.style.transition = transition + 'ms ease-in-out'
-    },
-    onAppear () {
-
-    },
-    onAfterAppear () {
-
-    },
-    onAppearCancelled () {
-    },
-
-    // Enter.
-    onBeforeEnter (el) {
+    beforeShow (el) {
       // Keep original styles to restore them after transition.
       this.el.originalStyles = el.style.cssText
       console.log('onBeforeEnter', el)
-
-      // el.style.visibility = 'hidden'
-      // el.style.transition = '1s ease-in-out'
     },
-    onEnter (el, done) {
+    show (el, done) {
       console.log('onEnter', el, el.offsetHeight)
       // Save the width & height then set them to 0 as the animation starting point.
       this.el.width = el.offsetWidth
@@ -92,31 +71,23 @@ export default {
       setTimeout(() => this.applyShowStyles(el), 0)
       setTimeout(done, transition)
     },
-    onAfterEnter (el) {
-      console.log('onAfterEnter', !!el)
-      this.applyOriginalStyles(el)
-    },
-    onEnterCancelled (el) {
-      console.log('onEnterCancelled', !!el)
-      // el.style.visibility = null // Remove it.
-    },
-
-    // Leave.
-    onBeforeLeave (el) {
+    beforeHide (el) {
       this.applyShowStyles(el)
 
       console.log('onBeforeLeave', !!el)
     },
-    onLeave (el, done) {
+    hide (el, done) {
       setTimeout(() => this.applyHideStyles(el), 0)
       setTimeout(done, transition)
 
       console.log('onLeave', !!el)
-      // done()
     },
-    onAfterLeave (el) {
-      this.applyOriginalStyles(el)
-      console.log('onAfterLeave', !!el)
+
+    onAppearCancelled (el) {
+      console.log('onAppearCancelled', !!el)
+    },
+    onEnterCancelled (el) {
+      console.log('onEnterCancelled', !!el)
     },
     onLeaveCancelled (el) {
       console.log('onLeaveCancelled', !!el)
