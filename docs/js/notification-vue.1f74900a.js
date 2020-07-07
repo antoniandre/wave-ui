@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["notification-vue"],{e9d1:function(t,e,n){"use strict";n.r(e);var i=function(){var t=this,e=t.$createElement;t._self._c;return t._m(0)},a=[function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[n("h1",{staticClass:"headline mt-4"},[n("span",{staticClass:"code"},[t._v("w-notification")])])])}],s={},c=s,l=n("2877"),o=Object(l["a"])(c,i,a,!1,null,null,null);e["default"]=o.exports}}]);
-//# sourceMappingURL=notification-vue.1f74900a.js.map
