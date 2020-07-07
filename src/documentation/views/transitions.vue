@@ -42,7 +42,7 @@ div
     w-transition-scale-fade
       span(v-if="toggleScaleFade") Scaling &amp; fading transition
 
-  //- w-flex.mt-3(align-center)
+  w-flex.mt-3(align-center)
     w-button.mr-2(
       @click="toggleExpand = !toggleExpand"
       color="primary"
