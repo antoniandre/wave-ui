@@ -20,6 +20,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "font-awesome": "^4.7.0",
+    "ghspa": "^1.0.0",
     "ionicons": "^4.6.3",
     "material-design-icons": "^3.0.1",
     "node-sass": "^4.12.0",
