@@ -9,8 +9,8 @@
   /**
    * https://github.com/websemantics/gh-pages-spa
    */
-  (function(l, projectPages) {
-    var repo = projectPages ? '/' + l.pathname.split('/')[1] : ''
+  (function(l) {
+    var repo = '/' + l.pathname.split('/')[1]
 
     /* redirect all 404 trafic to index.html */
     function redirect() {
@@ -40,7 +40,7 @@
 
     /* if current document is 404 page page, redirect to index.html otherwise resolve */
     document.title === '404' ? redirect() : resolve()
-  }(window.location, window.projectPages || true ))
+  }(window.location))
   </script>
 </head>
 <body>
