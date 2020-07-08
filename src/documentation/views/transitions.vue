@@ -56,13 +56,12 @@ div
 
   w-flex.mt-3(align-center)
     w-button.mr-2(
-      disabled
       @click="toggleTwist = !toggleTwist"
       color="primary"
       sm
       outline
       width="7em") Twist {{ toggleTwist ? 'out' : 'in' }}
-    w-transition-bounce
+    w-transition-twist
       span(v-if="toggleTwist") Twisting transition
 
   w-flex.mt-3(align-center)
