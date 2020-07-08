@@ -122,8 +122,9 @@ $disabled-color: #ccc;
 
   // The hidden real radio button.
   input[type="radio"] {
-    position: absolute;
+    position: fixed;
     opacity: 0;
+    top: -99em;
     z-index: -100;
     outline: none;
   }

@@ -117,7 +117,8 @@ $disabled-color: #ccc;
 
   // The hidden real checkbox.
   input[type="checkbox"] {
-    position: absolute;
+    position: fixed;
+    top: -99em;
     opacity: 0;
     z-index: -100;
     outline: none;
