@@ -66,24 +66,26 @@ export default class WaveUI {
       mergeConfig(options)
 
       // Add color shades for each custom color given in options.
-      config.colorShades = {}
+      if (!options.disableColorShades) {
+        config.colorShades = {}
 
-      for (let color in config.colors) {
-        color = { label: color, color: config.colors[color].replace('#', '') }
-        const col = color.color
-        if (col.length === 3) color.color = col[0] + '' + col[0] + col[1] + col[1] + col[2] + col[2]
+        for (let color in config.colors) {
+          color = { label: color, color: config.colors[color].replace('#', '') }
+          const col = color.color
+          if (col.length === 3) color.color = col[0] + '' + col[0] + col[1] + col[1] + col[2] + col[2]
 
-        this.colors[color.label] = `#${color.color}`
+          this.colors[color.label] = `#${color.color}`
 
-        for (let i = 1; i <= 3; i++) {
-          const lighterColor = shadeColor(`#${color.color}`, i * 40)
-          const darkerColor = shadeColor(`#${color.color}`, -i * 40)
-          this.colors[`${color.label}-lighter-${i}`] = lighterColor
-          this.colors[`${color.label}-darker-${i}`] = darkerColor
+          for (let i = 1; i <= 3; i++) {
+            const lighterColor = shadeColor(`#${color.color}`, i * 40)
+            const darkerColor = shadeColor(`#${color.color}`, -i * 40)
+            this.colors[`${color.label}-lighter-${i}`] = lighterColor
+            this.colors[`${color.label}-darker-${i}`] = darkerColor
 
-          // Adding the shades to the config object to generate the CSS from w-app.
-          config.colorShades[`${color.label}-lighter-${i}`] = lighterColor
-          config.colorShades[`${color.label}-darker-${i}`] = darkerColor
+            // Adding the shades to the config object to generate the CSS from w-app.
+            config.colorShades[`${color.label}-lighter-${i}`] = lighterColor
+            config.colorShades[`${color.label}-darker-${i}`] = darkerColor
+          }
         }
       }
 

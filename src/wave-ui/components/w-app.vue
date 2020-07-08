@@ -49,11 +49,13 @@ export default {
           `.w-app .${color}{color:${config.colors[color]}}`
       }
 
-      Object.entries(config.colorShades).forEach(([label, color]) => {
-        styles +=
-          `.w-app .${label}--bg{background-color:${color}}` +
-          `.w-app .${label}{color:${color}}`
-      })
+      if (config.colorShades) {
+        Object.entries(config.colorShades).forEach(([label, color]) => {
+          styles +=
+            `.w-app .${label}--bg{background-color:${color}}` +
+            `.w-app .${label}{color:${color}}`
+        })
+      }
 
       return styles
     }
