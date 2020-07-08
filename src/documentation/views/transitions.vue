@@ -14,85 +14,77 @@ div
   //- p Each component has a css transition that you can also use in various components.
 
   h2 Testing transition
-  w-flex.mt-3(align-center)
-    w-button.mr-2(
+  w-flex(align-center)
+    w-button.transition-toggle(
       @click="toggleFade = !toggleFade"
       color="primary"
-      sm
       outline
-      width="7em") Fade {{ toggleFade ? 'out' : 'in' }}
+      width="7.3em") Fade {{ toggleFade ? 'out' : 'in' }}
     w-transition-fade
-      span(v-if="toggleFade") Fading transition
+      .transition-box(v-if="toggleFade") Fading transition
 
-  w-flex.mt-3(align-center)
-    w-button.mr-2(
+  w-flex(align-center)
+    w-button.transition-toggle(
       @click="toggleScale = !toggleScale"
       color="primary"
-      sm
       outline
-      width="7em") Scale {{ toggleScale ? 'out' : 'in' }}
+      width="7.3em") Scale {{ toggleScale ? 'out' : 'in' }}
     w-transition-scale
-      span(v-if="toggleScale") Scaling transition
+      .transition-box(v-if="toggleScale") Scaling transition
 
-  w-flex.mt-3(align-center)
-    w-button.mr-2(
+  w-flex(align-center)
+    w-button.transition-toggle(
       @click="toggleScaleFade = !toggleScaleFade"
       color="primary"
-      sm
       outline
-      width="7em") Scale fade {{ toggleScaleFade ? 'out' : 'in' }}
+      width="7.3em") Scale fade {{ toggleScaleFade ? 'out' : 'in' }}
     w-transition-scale-fade
-      span(v-if="toggleScaleFade") Scaling &amp; fading transition
+      .transition-box(v-if="toggleScaleFade") Scaling &amp; fading transition
 
-  w-flex.mt-3(align-center)
-    w-button.mr-2(
+  w-flex(align-center)
+    w-button.transition-toggle(
       @click="toggleBounce = !toggleBounce"
       color="primary"
-      sm
       outline
-      width="7em") Bounce {{ toggleBounce ? 'out' : 'in' }}
+      width="7.3em") Bounce {{ toggleBounce ? 'out' : 'in' }}
     w-transition-bounce
-      span(v-if="toggleBounce") Bouncing transition
+      .transition-box(v-if="toggleBounce") Bouncing transition
 
-  w-flex.mt-3(align-center)
-    w-button.mr-2(
+  w-flex(align-center)
+    w-button.transition-toggle(
       @click="toggleTwist = !toggleTwist"
       color="primary"
-      sm
       outline
-      width="7em") Twist {{ toggleTwist ? 'out' : 'in' }}
+      width="7.3em") Twist {{ toggleTwist ? 'out' : 'in' }}
     w-transition-twist
-      span(v-if="toggleTwist") Twisting transition
+      .transition-box(v-if="toggleTwist") Twisting transition
 
-  w-flex.mt-3(align-center)
-    w-button.mr-2(
+  w-flex(align-center)
+    w-button.transition-toggle(
       @click="toggleExpandX = !toggleExpandX"
       color="primary"
-      sm
       outline
-      width="7em") {{ toggleExpandX ? 'Collapse' : 'Expand' }} X
+      width="7.3em") {{ toggleExpandX ? 'Collapse' : 'Expand' }} X
     w-transition-expand(x)
-      span.px-8.py-4.grey-lighter-4--bg(v-if="toggleExpandX") X-expanding transition
+      .transition-box(v-if="toggleExpandX") X-expanding transition
 
-  w-flex.mt-3(align-center)
-    w-button.mr-2(
+  w-flex(align-center)
+    w-button.transition-toggle(
       @click="toggleExpandY = !toggleExpandY"
       color="primary"
-      sm
       outline
-      width="7em") {{ toggleExpandY ? 'Collapse' : 'Expand' }} Y
+      width="7.3em") {{ toggleExpandY ? 'Collapse' : 'Expand' }} Y
     w-transition-expand(y)
-      span.px-8.py-4.grey-lighter-4--bg(v-if="toggleExpandY") Y-expanding transition
+      .transition-box(v-if="toggleExpandY") Y-expanding transition
 
-  w-flex.mt-3(align-center)
-    w-button.mr-2(
+  w-flex(align-center)
+    w-button.transition-toggle(
       @click="toggleExpandXY = !toggleExpandXY"
       color="primary"
-      sm
       outline
-      width="7em") {{ toggleExpandXY ? 'Collapse' : 'Expand' }} X &amp; Y
+      width="7.3em") {{ toggleExpandXY ? 'Collapse' : 'Expand' }} X &amp; Y
     w-transition-expand
-      span.px-8.py-4.grey-lighter-4--bg(v-if="toggleExpandXY") X &amp; Y expanding transition
+      .transition-box(v-if="toggleExpandXY") X &amp; Y expanding transition
 </template>
 
 <script>
@@ -109,3 +101,16 @@ export default {
   })
 }
 </script>
+
+<style lang="scss">
+.transition-toggle {margin: 12px 24px 12px 0;}
+
+.transition-box {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 1em;
+  width: 14em;
+  text-align: center;
+}
+</style>
