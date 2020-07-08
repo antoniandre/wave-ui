@@ -62,7 +62,7 @@ div(style="overflow: hidden")
     Also note that the primary color is considered as dark by default, and will render,
     as well as its 3 darker shades, with a white text when used as a background.
 
-  .w-flex
+  .w-flex.wrap
     .color.primary-lighter-3--bg.subtitle.text-center.grow.py-3.ma-2.body primary-lighter-3
     .color.primary-lighter-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-lighter-2
     .color.primary-lighter-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-lighter-1
@@ -70,6 +70,10 @@ div(style="overflow: hidden")
     .color.primary-darker-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-darker-1
     .color.primary-darker-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-darker-2
     .color.primary-darker-3--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-darker-3
+
+  w-alert.text-light(type="info" bg-color="yellow-lighter-5" color="orange-darker-1").
+    You can add #[code disableColorShades: true] to the Wave UI options to disable the color shades
+    computing for the status colors and your custom colors.
 
   h2.mt-12.mb-4.w-flex.align-center
     | Color Palette
