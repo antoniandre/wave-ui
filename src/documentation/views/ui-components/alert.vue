@@ -7,7 +7,8 @@ div(style="max-width: 900px")
     By default alerts are visible, but if a value or v-model is provided,
     it will show or hide according to it.
   w-button(@click="showAlert = !showAlert" color="primary" outline) {{ showAlert ? 'Hide' : 'Show' }} alert
-  w-alert(v-model="showAlert" color="success") The alert is now visible.
+  w-transition-expand(y)
+    w-alert(v-if="showAlert" color="success") The alert is now visible.
 
   h2 Colors
   p.
@@ -79,15 +80,16 @@ div(style="max-width: 900px")
     v-model="fixedAlert.position[1]"
     :items="[{ label: 'left', value: 'left' }, { label: 'center', value: 'center' }, { label: 'right', value: 'right' }]"
     inline)
-  w-alert(
-    v-model="fixedAlert.show"
-    fixed
-    type="success"
-    plain
-    round
-    shadow
-    v-bind="{ [fixedAlert.position[0]]: true, [fixedAlert.position[1]]: true }")
-    | The alert is fixed on {{ fixedAlert.position[0] }} {{ fixedAlert.position[1] }}.
+  w-transition-bounce
+    w-alert(
+      v-if="fixedAlert.show"
+      fixed
+      type="success"
+      plain
+      round
+      shadow
+      v-bind="{ [fixedAlert.position[0]]: true, [fixedAlert.position[1]]: true }")
+      | The alert is fixed on {{ fixedAlert.position[0] }} {{ fixedAlert.position[1] }}.
 </template>
 
 <script>
