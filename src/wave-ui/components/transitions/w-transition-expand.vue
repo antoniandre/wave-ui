@@ -2,26 +2,26 @@
   transition(
     name="expand"
     v-bind="$props"
-    v-bind:css="false"
-    @before-appear="beforeShow"
-    @appear="show"
-    @after-appear="applyOriginalStyles"
-    @appear-cancelled="onAppearCancelled"
+    :css="false"
+    @before-appear="beforeAppear"
+    @appear="appear"
+    @after-appear="afterAppear"
+    @appear-cancelled="appearCancelled"
 
-    @before-enter="beforeShow"
-    @enter="show"
-    @after-enter="applyOriginalStyles"
-    @enter-cancelled="onEnterCancelled"
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="afterEnter"
+    @enter-cancelled="enterCancelled"
 
-    @before-leave="beforeHide"
-    @leave="hide"
-    @after-leave="applyOriginalStyles"
-    @leave-cancelled="onLeaveCancelled")
+    @before-leave="beforeLeave"
+    @leave="leave"
+    @after-leave="afterLeave"
+    @leave-cancelled="leaveCancelled")
     slot
 </template>
 
 <script>
-const transition = 3000 // ms.
+const duration = 250 // ms.
 
 export default {
   name: 'w-transition-expand',
@@ -57,7 +57,67 @@ export default {
   },
 
   methods: {
+    cl: (...params) => console.log(...params),
+
+    beforeAppear (el) {
+      console.log('beforeAppear', el)
+      this.saveOriginalStyles(el)
+    },
+    appear (el, done) {
+      this.show(el)
+      setTimeout(done, duration)
+      console.log('appear', el)
+    },
+    afterAppear (el) {
+      console.log('afterAppear', el)
+    },
+    appearCancelled (el) {
+      console.log('appearCancelled', el)
+    },
+    beforeEnter (el) {
+      console.group('1 SHOW cycle')
+      console.log('beforeEnter', {...el}, {...this.el})
+      // Only save original state once before a 'clean' transition start.
+      // Not when clicking very fast and mixing states order.
+      this.saveOriginalStyles(el)
+
+      // else debugger
+    },
+    enter (el, done) {
+      this.show(el)
+      console.log('enter', {...el}, {...this.el})
+      setTimeout(done, duration + 1000)
+    },
+    afterEnter (el) {
+      console.log('afterEnter', {...el}, {...this.el})
+      this.applyOriginalStyles(el)
+      console.groupEnd()
+    },
+    enterCancelled (el) {
+      console.log('enterCancelled', el)
+      console.groupEnd()
+    },
+    beforeLeave (el) {
+      console.group('2 HIDE cycle')
+      console.log('beforeLeave', el)
+      this.beforeHide(el)
+    },
+    leave (el, done) {
+      console.log('leave', el)
+      this.hide(el)
+
+      setTimeout(done, duration)
+    },
+    afterLeave (el) {
+      console.log('afterLeave', el)
+      console.groupEnd()
+    },
+    leaveCancelled (el) {
+      console.log('leaveCancelled', el)
+    },
+
     applyHideStyles (el) {
+      console.log('applyHideStyles', el)
       if (this.animX) {
         el.style.width = 0
         el.style.marginLeft = 0
@@ -77,6 +137,7 @@ export default {
       el.style.whiteSpace = 'nowrap'
     },
     applyShowStyles (el) {
+      console.log('applyShowStyles', el)
       if (this.animX) {
         el.style.width = this.el.width + 'px'
         el.style.marginLeft = this.el.marginLeft
@@ -92,20 +153,21 @@ export default {
         el.style.paddingBottom = this.el.paddingBottom
       }
 
-      el.style.transition = transition + 'ms ease-in-out'
+      el.style.transition = duration + 'ms ease-in-out'
     },
     applyOriginalStyles (el) {
+      console.log('applyOriginalStyles', el)
       el.style.cssText = this.el.originalStyles
-      console.log('apply original styles')
     },
-    beforeShow (el) {
+    saveOriginalStyles (el) {
+      console.log('saveOriginalStyles', el)
       // Keep the original styles to restore them after transition.
       this.el.originalStyles = el.style.cssText
-      console.log('onBeforeEnter', el)
     },
     show (el, done) {
+      console.log('show')
       const computedStyles = window.getComputedStyle(el, null)
-      console.log('onEnter', el, el.offsetHeight)
+
       // Save the width & height then set them to 0 as the animation starting point.
       if (this.animX) {
         this.el.width = el.offsetWidth
@@ -123,29 +185,19 @@ export default {
       }
       this.applyHideStyles(el)
 
-      setTimeout(() => this.applyShowStyles(el), 0)
-      setTimeout(done, transition)
+      setTimeout(() => this.applyShowStyles(el), 20)
+      setTimeout(done, duration)
     },
     beforeHide (el) {
+      console.log('beforeHide', el)
       this.applyShowStyles(el)
-
-      console.log('onBeforeLeave', !!el)
     },
     hide (el, done) {
+      console.log('hide', el)
       setTimeout(() => this.applyHideStyles(el), 0)
-      setTimeout(done, transition)
+      setTimeout(done, duration)
 
-      console.log('onLeave', !!el)
-    },
-
-    onAppearCancelled (el) {
-      console.log('onAppearCancelled', !!el)
-    },
-    onEnterCancelled (el) {
-      console.log('onEnterCancelled', !!el)
-    },
-    onLeaveCancelled (el) {
-      console.log('onLeaveCancelled', !!el)
+      console.log('onLeave', el)
     }
   }
 }
