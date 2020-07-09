@@ -85,6 +85,30 @@ div
       width="7.3em") {{ toggleExpandXY ? 'Collapse' : 'Expand' }} X &amp; Y
     w-transition-expand
       .transition-box(v-if="toggleExpandXY") X &amp; Y expanding transition
+
+  h3 Zoom on the expand transition
+  p.
+    The great thing with Wave UI is that it also animates any margin or padding on the transitionning
+    element! Look at this one:
+  w-flex(align-center)
+    w-button.transition-toggle(
+      @click="toggleExpandXY2 = !toggleExpandXY2"
+      color="primary"
+      outline
+      width="7.3em") {{ toggleExpandXY2 ? 'Collapse' : 'Expand' }} X &amp; Y
+    w-transition-expand(:duration="2000")
+      .transition-box.pa-6.ma-10.yellow-lighter-5--bg(
+        v-if="toggleExpandXY2" style="width: auto")
+        .amber-lighter-4--bg.pa-2(style="overflow: hidden;white-space: nowrap;width: 200px") X &amp; Y expanding transition
+
+  h2 Transition duration
+  p.
+    You can easily override the default transition/animation duration by setting an explicit
+    CSS transition/animation duration on the element being transitioned:
+    #[span.code style="animation-duration: 3s"].
+  p.
+    The expand transition being fully Javascript driven, it accepts a duration parameter in milliseconds.
+    So you don't need to override the duration from a CSS rule.
 </template>
 
 <script>
@@ -93,11 +117,12 @@ export default {
     toggleFade: false,
     toggleScale: false,
     toggleScaleFade: false,
+    toggleBounce: false,
     toggleTwist: false,
-    toggleExpandXY: false,
     toggleExpandX: false,
     toggleExpandY: false,
-    toggleBounce: false
+    toggleExpandXY: false,
+    toggleExpandXY2: false
   })
 }
 </script>
