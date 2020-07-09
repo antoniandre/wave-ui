@@ -119,8 +119,8 @@
 .twist-enter-active {animation: w-twist $transition-duration;}
 .twist-leave-active {animation: w-twist $transition-duration reverse;}
 @keyframes w-twist {
-  0% {transform: scale(0.3) rotate(-20deg);opacity: 0;}
-  60% {transform: scale(1.05) rotate(5deg);opacity: 1;}
+  0% {transform: scale(0) rotate(-30deg);}
+  60% {transform: scale(1.03) rotate(5deg);}
   100% {transform: scale(1) rotate(0deg);}
 }
 // --------------------------------------------------------
