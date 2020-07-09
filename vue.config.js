@@ -1,6 +1,12 @@
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/wave-ui' : '',
   outputDir: 'docs',
+  devServer: {
+    overlay: {
+      errors: true,
+      warnings: false
+    }
+  },
   chainWebpack: config => {
     const svgRule = config.module.rule('svg');
     svgRule.uses.clear();
