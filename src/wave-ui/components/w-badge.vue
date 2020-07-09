@@ -2,8 +2,15 @@
   .w-badge
     slot
     component(:is="`w-transition-${transition}`")
-      .w-badge__badge(v-if="value" :class="classes" :style="styles")
-        slot(name="badge") {{ value || '' }}
+      .w-badge__badge(
+        v-if="value"
+        :class="classes"
+        :style="styles"
+        aria-atomic="true"
+        aria-label="Badge"
+        aria-live="polite"
+        role="status")
+        slot(v-if="!dot" name="badge") {{ value || '' }}
 </template>
 
 <script>
@@ -26,6 +33,7 @@ export default {
     dark: { type: Boolean, default: false },
     outline: { type: Boolean, default: false },
     shadow: { type: Boolean, default: false },
+    dot: { type: Boolean, default: false },
     transition: { type: String, default: 'fade' }
   },
 
@@ -40,7 +48,7 @@ export default {
         (this.md && 'md') ||
         (this.lg && 'lg') ||
         (this.xl && 'xl') ||
-        null
+        'md'
       )
     },
     position () {
@@ -57,6 +65,7 @@ export default {
         'w-badge__badge--outline': this.outline,
         'w-badge__badge--shadow': this.shadow,
         'w-badge__badge--overlap': this.overlap,
+        'w-badge__badge--dot': this.dot,
         [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
         [this.position.join(' ')]: true
       }
@@ -71,6 +80,8 @@ export default {
 <style lang="scss">
 .w-badge {
   position: relative;
+  display: inline-flex;
+  align-self: center;
 
   &__badge {
     position: absolute;
@@ -127,6 +138,13 @@ export default {
       border-color: currentColor;
     }
     &--shadow {box-shadow: $box-shadow;}
+
+    .w-badge &--dot {min-width: 0;padding: 0;}
+    &--dot.size--xs {width: round(1.5 * $base-increment);height: round(1.5 * $base-increment);}
+    &--dot.size--sm {width: 2 * $base-increment;height: 2 * $base-increment;}
+    &--dot.size--md {width: 2 * $base-increment;height: 2 * $base-increment;}
+    &--dot.size--lg {width: 3 * $base-increment;height: 3 * $base-increment;}
+    &--dot.size--xl {width: 3 * $base-increment;height: 3 * $base-increment;}
   }
 }
 </style>
