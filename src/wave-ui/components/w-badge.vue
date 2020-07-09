@@ -1,15 +1,16 @@
 <template lang="pug">
   .w-badge
     slot
-    .w-badge__badge(:class="classes" :style="styles")
-      slot(name="badge") {{ value || '' }}
+    component(:is="`w-transition-${transition}`")
+      .w-badge__badge(v-if="value" :class="classes" :style="styles")
+        slot(name="badge") {{ value || '' }}
 </template>
 
 <script>
 export default {
   name: 'w-badge',
   props: {
-    value: {},
+    value: { default: true },
     xs: { type: Boolean, default: false },
     sm: { type: Boolean, default: false },
     md: { type: Boolean, default: false },
@@ -24,7 +25,8 @@ export default {
     bgColor: { type: String, default: 'primary' },
     dark: { type: Boolean, default: false },
     outline: { type: Boolean, default: false },
-    shadow: { type: Boolean, default: false }
+    shadow: { type: Boolean, default: false },
+    transition: { type: String, default: 'fade' }
   },
 
   computed: {
@@ -35,6 +37,7 @@ export default {
       return (
         (this.xs && 'xs') ||
         (this.sm && 'sm') ||
+        (this.md && 'md') ||
         (this.lg && 'lg') ||
         (this.xl && 'xl') ||
         null
@@ -76,24 +79,46 @@ export default {
     justify-content: center;
     user-select: none;
     border-radius: 4 * $base-font-size;
-    height: round(1.1 * $base-font-size);
-    min-width: round(1.1 * $base-font-size);
+    // Always get an even number for better text vertical align.
+    height: round(1.1 * $base-font-size / 2) * 2;
+    min-width: round(1.1 * $base-font-size / 2) * 2;
     z-index: 1;
-    padding: 0 2px;
+    padding: 0 $base-increment;
 
     // Sizes.
-    &.size--xs {font-size: round(0.7 * $base-font-size);}
-    &.size--sm {font-size: round(0.85 * $base-font-size);}
-    &.size--md {font-size: round(0.95 * $base-font-size);}
-    &.size--lg {font-size: round(1.1 * $base-font-size);}
-    &.size--xl {font-size: round(1.25 * $base-font-size);}
+    &.size--xs {
+      // Always get an even number for better text vertical align.
+      font-size: round(0.7 * $base-font-size / 2) * 2;
+      height: round(1 * $base-font-size / 2) * 2;
+      min-width: round(1 * $base-font-size / 2) * 2;
+    }
+    &.size--sm {
+      font-size: round(0.85 * $base-font-size / 2) * 2;
+      height: round(1.1 * $base-font-size / 2) * 2;
+      min-width: round(1.1 * $base-font-size / 2) * 2;
+    }
+    &.size--md {
+      font-size: round(0.95 * $base-font-size / 2) * 2;
+      height: round(1.3 * $base-font-size / 2) * 2;
+      min-width: round(1.3 * $base-font-size / 2) * 2;
+    }
+    &.size--lg {
+      font-size: round(1.1 * $base-font-size / 2) * 2;
+      height: round(1.5 * $base-font-size / 2) * 2;
+      min-width: round(1.5 * $base-font-size / 2) * 2;
+    }
+    &.size--xl {
+      font-size: round(1.25 * $base-font-size / 2) * 2;
+      height: round(1.8 * $base-font-size / 2) * 2;
+      min-width: round(1.8 * $base-font-size / 2) * 2;
+    }
 
     // Position.
     &.top {top: 0;}
     &.bottom {bottom: 0;}
     &.left {right: 100%;}
     &.right {left: 100%;}
-    &--overlap {transform: translate(-50%, -50%);}
+    &--overlap {margin: -2 * $base-increment;}
 
     // Look modifiers.
     &--dark {color: rgba(255, 255, 255, 0.95);}
