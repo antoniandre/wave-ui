@@ -1,7 +1,7 @@
 <template lang="pug">
 .w-tooltip-wrapper(ref="wrapper")
   slot(name="activator" :on="eventHandlers" v-inserted)
-  transition(:name="`w-tooltip-slide-fade-${this.position}`")
+  transition(:name="this.transitionName")
     .w-tooltip(ref="tooltip" v-show="showTooltip" :class="classes" :style="styles")
       //- When there is a bg color, another div wrapper is needed for
       //- the triangle to inherit the current color.
@@ -36,7 +36,8 @@ export default {
     zIndex: { type: [Number, String, Boolean], default: false },
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
-    noBorder: { type: String, default: '' }
+    noBorder: { type: String, default: '' },
+    transition: { type: String, default: '' }
   },
 
   data: () => ({
@@ -53,6 +54,10 @@ export default {
   }),
 
   computed: {
+    transitionName () {
+      return this.transition || `w-tooltip-slide-fade-${this.position}`
+    },
+
     detachTarget () {
       let target = this.detach
       if (target === true) target = '.w-app'
@@ -102,12 +107,12 @@ export default {
 
     classes () {
       return {
-        // [this.color]: this.color,
         [`${this.bgColor} ${this.bgColor}--bg`]: this.bgColor,
         [`w-tooltip--${this.position}`]: true,
         'w-tooltip--fixed': this.fixed,
         'w-tooltip--active': this.showTooltip,
-        'w-tooltip--no-border': this.noBorder || this.bgColor
+        'w-tooltip--no-border': this.noBorder || this.bgColor,
+        'w-tooltip--custom-transition': this.transition
       }
     },
 
@@ -141,10 +146,26 @@ export default {
     getCoordinates (e) {
       const { top, left, width, height } = e.target.getBoundingClientRect()
       let coords = { top, left, width, height }
+
       if (!this.fixed) {
         const { top: targetTop, left: targetLeft } = this.target.getBoundingClientRect()
         coords = { ...coords, top: top - targetTop, left: left - targetLeft }
       }
+
+      if (this.transition) {
+        const tooltipEl = this.$refs.tooltip
+        tooltipEl.style.visibility = 'hidden'
+        tooltipEl.style.display = 'block'
+
+        // If tooltip is on top or bottom.
+        coords.left -= tooltipEl.offsetWidth / 2
+        // If tooltip is on left or right.
+        coords.top -= tooltipEl.offsetHeight / 2
+
+        tooltipEl.style.visibility = null
+        tooltipEl.style.display = 'none'
+      }
+
       return coords
     },
 
@@ -158,16 +179,7 @@ export default {
       // Move the tooltip elsewhere in the DOM.
       // wrapper.parentNode.insertBefore(this.$refs.tooltip, wrapper)
       this.target.appendChild(this.$refs.tooltip)
-    },
-
-    // refreshTooltip () {
-    //   if (this.activatorEl) {
-    //     this.$refs.tooltip.remove()
-    //     this.activatorEl.remove()
-    //   }
-    //   debugger
-    //   this.insertTooltip()
-    // }
+    }
   },
 
   beforeMount () {
@@ -205,7 +217,6 @@ export default {
   border: 1px solid #ddd;
   background-color: $tooltip-bg-color;
   pointer-events: none;
-  transition: $transition-duration ease-in-out;
   color: $tooltip-color;
   align-items: center;
   max-width: 300px;
@@ -230,6 +241,8 @@ export default {
     transform: translateY(-50%);
     margin-left: 3 * $base-increment;
   }
+
+  &--custom-transition {transform: none;}
 
   &:after {
     content: '';
