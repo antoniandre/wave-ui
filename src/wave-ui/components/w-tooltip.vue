@@ -1,9 +1,13 @@
 <template lang="pug">
-.w-tooltip__wrapper(ref="wrapper")
+.w-tooltip-wrapper(ref="wrapper")
   slot(name="activator" :on="eventHandlers" v-inserted)
   transition(:name="`w-tooltip-slide-fade-${this.position}`")
     .w-tooltip(ref="tooltip" v-show="showTooltip" :class="classes" :style="styles")
-      slot
+      //- When there is a bg color, another div wrapper is needed for
+      //- the triangle to inherit the current color.
+      div(v-if="bgColor" :class="color")
+        slot
+      slot(v-else)
 </template>
 
 <script>
@@ -44,7 +48,8 @@ export default {
       width: 0,
       height: 0
     },
-    activatorEl: null
+    activatorEl: null,
+    target: null // DOM element to attach tooltip to.
   }),
 
   computed: {
@@ -97,8 +102,8 @@ export default {
 
     classes () {
       return {
-        [this.color]: this.color,
-        [`${this.bgColor}--bg`]: this.bgColor,
+        // [this.color]: this.color,
+        [`${this.bgColor} ${this.bgColor}--bg`]: this.bgColor,
         [`w-tooltip--${this.position}`]: true,
         'w-tooltip--fixed': this.fixed,
         'w-tooltip--active': this.showTooltip,
@@ -137,17 +142,13 @@ export default {
       const { top, left, width, height } = e.target.getBoundingClientRect()
       let coords = { top, left, width, height }
       if (!this.fixed) {
-        const app = document.querySelector('.w-app')
-        const { top: appTop, left: appLeft } = app.getBoundingClientRect()
-        coords = { ...coords, top: top - appTop, left: left - appLeft }
+        const { top: targetTop, left: targetLeft } = this.target.getBoundingClientRect()
+        coords = { ...coords, top: top - targetTop, left: left - targetLeft }
       }
       return coords
-    }
-  },
+    },
 
-  beforeMount () {
-    // Do this - first thing - on mounted (beforeMount + nextTick).
-    this.$nextTick(() => {
+    insertTooltip () {
       const wrapper = this.$refs.wrapper
 
       // Unwrap the activator element.
@@ -155,8 +156,26 @@ export default {
       wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
 
       // Move the tooltip elsewhere in the DOM.
-      wrapper.parentNode.insertBefore(this.$refs.tooltip, wrapper)
-      // document.querySelector('.w-app').appendChild(this.$refs.tooltip)
+      // wrapper.parentNode.insertBefore(this.$refs.tooltip, wrapper)
+      this.target.appendChild(this.$refs.tooltip)
+    },
+
+    // refreshTooltip () {
+    //   if (this.activatorEl) {
+    //     this.$refs.tooltip.remove()
+    //     this.activatorEl.remove()
+    //   }
+    //   debugger
+    //   this.insertTooltip()
+    // }
+  },
+
+  beforeMount () {
+    // Do this, first thing on mounted (beforeMount + nextTick).
+    this.$nextTick(() => {
+      this.target = document.querySelector('.w-app')
+
+      this.insertTooltip()
 
       if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
     })
@@ -176,7 +195,7 @@ export default {
 </script>
 
 <style lang="scss">
-.w-tooltip__wrapper {display: none;}
+.w-tooltip-wrapper {display: none;}
 
 .w-tooltip {
   display: flex;
