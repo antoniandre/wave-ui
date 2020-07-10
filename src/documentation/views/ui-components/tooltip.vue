@@ -1,40 +1,43 @@
 <template lang="pug">
-div
+div.tooltips-wrapper
   h1.headline.mt-4 #[span.code w-tooltip]
 
   h2 Default
   .w-flex.wrap.py-6
     w-tooltip(left)
       template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Home
+        w-icon.ma-2(v-on="on" xl) mdi mdi-home
       | Home
 
     w-tooltip(top)
       template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Home
+        w-icon.ma-2(v-on="on" xl) mdi mdi-home
       | Home
 
     w-tooltip
       template(v-slot:activator="{ on }")
-        //- w-icon(xl v-on="on") mdi mdi-home
-        span.ma-2(v-on="on") Home
+        w-icon.ma-2(v-on="on" xl) mdi mdi-home
       | Home
 
     w-tooltip(right)
       template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Home
+        w-icon.ma-2(v-on="on" xl) mdi mdi-home
       | Home
 
   h2 Toggle on click
-  .w-flex.wrap.py-6
+  .w-flex.wrap.align-center.py-6
     w-tooltip(show-on-click left)
       template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Star
+        w-button.ma-2(v-on="on" bg-color="info")
+          w-icon.mr-1 wi-star
+          | Star
       | Star
 
     w-tooltip(show-on-click top)
       template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Star
+        w-button.ma-2(v-on="on" bg-color="info-darker-2" dark)
+          w-icon.mr-1 wi-star
+          | Star
       | Star
 
     w-tooltip(show-on-click)
@@ -48,7 +51,11 @@ div
       | Star
 
   h2 Toggle with v-model
-  w-button(bg-color="primary" dark @click="showTooltip = !showTooltip")
+  w-button(
+    @click="showTooltip = !showTooltip"
+    bg-color="primary"
+    dark
+    width="7em")
     | {{ showTooltip ? 'Hide' : 'Show' }} tooltip
 
   .w-flex.wrap.py-6
@@ -72,26 +79,26 @@ div
         span.ma-2(v-on="on") Star
       | Star
 
-  h2 Background color &amp; color
+  h2 Background color &amp; text color
   .w-flex.wrap.py-6
     w-tooltip(color="white" bg-color="blue")
       template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Star
+        w-icon.ma-2(v-on="on" xl color="blue") wi-star
       | Star
 
     w-tooltip(color="white" bg-color="purple")
       template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Star
+        w-icon.ma-2(v-on="on" xl color="purple") wi-star
       | Star
 
-    w-tooltip(color="orange" bg-color="yellow-lighten-3")
+    w-tooltip(color="orange" bg-color="yellow-lighter-3")
       template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Star
+        w-icon.ma-2(v-on="on" xl color="amber") wi-star
       | Star
 
     w-tooltip(color="orange" no-border)
       template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Star
+        w-icon.ma-2(v-on="on" xl color="") wi-star
       | Star
 
   h2 Different contents
@@ -104,13 +111,31 @@ div
 
     w-tooltip(color="primary" no-border)
       template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Very long content
+        span.ma-2(v-on="on" ref="truc") Very long content
       | Lorem ipsum, dolor sit amet consectetur adipisicing elit.
       br
       | Esse quo non, beatae dolore nihil quae ratione dignissimos molestiae hic, tempore blanditiis soluta, quasi officia!
       br
       br
       | Recusandae distinctio perferendis expedita pariatur fuga.
+
+  h2 Transitions
+    w-tooltip(transition="bounce")
+      template(v-slot:activator="{ on }")
+        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+      | Home
+    w-tooltip(transition="bounce" top)
+      template(v-slot:activator="{ on }")
+        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+      | Home
+    w-tooltip(transition="bounce" left)
+      template(v-slot:activator="{ on }")
+        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+      | Home
+    w-tooltip(transition="bounce" right)
+      template(v-slot:activator="{ on }")
+        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+      | Home
 </template>
 
 <script>
@@ -120,3 +145,7 @@ export default {
   })
 }
 </script>
+
+<style lang="scss">
+.tooltips-wrapper {position: relative;}
+</style>
