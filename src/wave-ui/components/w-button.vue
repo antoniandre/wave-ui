@@ -225,6 +225,7 @@ $spinner-size: 40;
     position: relative;
     display: inline-flex;
     align-items: center;
+    pointer-events: none; // Disable events binding on nested content.
   }
   &--loading > span {opacity: 0;}
 
@@ -237,6 +238,7 @@ $spinner-size: 40;
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none; // Disable events binding on nested content.
 
     svg {height: 75%;}
     circle {
