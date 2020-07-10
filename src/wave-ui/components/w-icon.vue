@@ -93,7 +93,6 @@ export default {
   &.size--xl {font-size: 2 * $base-font-size;}
 
   // In w-button and w-alert.
-  .w-button & {pointer-events: none;} // Disable events binding.
   // .w-button &, .w-alert & {font-size: round(1.4 * $base-font-size);}
   // Always an even number to vertical align well in button.
   .w-button.size--xs & {font-size: round(0.95 * $base-font-size / 2) * 2;}
