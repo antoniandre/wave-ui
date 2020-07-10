@@ -1,13 +1,22 @@
 <template lang="pug">
-div
-  slot(name="activator" :on="eventHandlers")
+.w-tooltip__wrapper(ref="wrapper")
+  slot(name="activator" :on="eventHandlers" v-inserted)
   transition(:name="`w-tooltip-slide-fade-${this.position}`")
-    .w-tooltip(v-show="showTooltip" :class="classes" :style="styles")
+    .w-tooltip(ref="tooltip" v-show="showTooltip" :class="classes" :style="styles")
       slot
 </template>
 
 <script>
-import { consoleWarn } from '@/wave-ui/utils/console'
+/**
+ * Complexity of this component: Vue 2.x can only mount 1 single root elements, but we don't
+ * want to wrap the activator as it may break the layout.
+ * Another simpler way would be to append the tooltip inside the activator, but some HTML tags
+ * can't have children like <input>.
+ * So a solution is to mount both the activator element and the tooltip in a wrapper then unwrap
+ * and move the tooltip elsewhere in the DOM.
+ */
+
+// import { consoleWarn } from '../utils/console'
 
 export default {
   name: 'w-tooltip',
@@ -34,7 +43,8 @@ export default {
       left: 0,
       width: 0,
       height: 0
-    }
+    },
+    activatorEl: null
   }),
 
   computed: {
@@ -112,18 +122,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.$nextTick(() => {
-      console.log(this.$scopedSlots.myElement()[0])
-    })
-
-    if (this.value) this.toggle({ type: 'click', target: this.$scopedSlots.activator })
-
-    if (this.detach && !this.detachTarget) {
-      consoleWarn(`Unable to locate ${this.detach ? `target ${this.detach}` : '.w-app'}`, this)
-    }
-  },
-
   methods: {
     toggle (e) {
       if (e.type === 'click' && this.showOnClick) this.showTooltip = !this.showTooltip
@@ -147,16 +145,38 @@ export default {
     }
   },
 
+  beforeMount () {
+    // Do this - first thing - on mounted (beforeMount + nextTick).
+    this.$nextTick(() => {
+      const wrapper = this.$refs.wrapper
+
+      // Unwrap the activator element.
+      this.activatorEl = wrapper.firstChild
+      wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
+
+      // Move the tooltip elsewhere in the DOM.
+      wrapper.parentNode.insertBefore(this.$refs.tooltip, wrapper)
+      // document.querySelector('.w-app').appendChild(this.$refs.tooltip)
+
+      if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
+    })
+  },
+
+  beforeDestroy () {
+    this.$refs.tooltip.remove()
+    this.activatorEl.remove()
+  },
+
   watch: {
     value () {
-      this.toggle({ type: 'click', target: this.$scopedSlots.activator()[0] })
+      this.toggle({ type: 'click', target: this.activatorEl })
     }
   }
 }
 </script>
 
 <style lang="scss">
-.w-tooltip-activator {position: relative;}
+.w-tooltip__wrapper {display: none;}
 
 .w-tooltip {
   display: flex;
