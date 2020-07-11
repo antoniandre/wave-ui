@@ -116,15 +116,16 @@ $disabled-color: #ccc;
 .w-radio {
   display: inline-flex;
   align-items: center;
+  // Contain the hidden radio button, so browser doesn't pan to it when outside of the screen.
+  position: relative;
   cursor: pointer;
 
   &--disabled {cursor: default;}
 
   // The hidden real radio button.
   input[type="radio"] {
-    position: fixed;
+    position: absolute;
     opacity: 0;
-    top: -99em;
     z-index: -100;
     outline: none;
   }
