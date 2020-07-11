@@ -63,7 +63,7 @@ div(style="overflow: hidden")
     Also note that the primary color is considered as dark by default, and will render,
     as well as its 3 darker shades, with a white text when used as a background.
 
-  w-flex(wrap :gutter="4")
+  w-flex(wrap :gap="4")
     .color.primary-lighter-3--bg.subtitle.text-center.grow.py-3.ma-2.body primary-lighter-3
     .color.primary-lighter-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-lighter-2
     .color.primary-lighter-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-lighter-1

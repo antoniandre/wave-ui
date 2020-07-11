@@ -11,7 +11,7 @@ div
   title-link(h2) Overlay with custom opacity and control on #[span.code persistent]
   P When the overlay is persistent, it will not close on click and on escape key.
   p When persistent is set to false and by default, the escape key will also close the overlay.
-  w-flex.mt-4(wrap :gutter="12")
+  w-flex.mt-4(wrap :gap="12")
     w-button(bg-color="primary" dark @click="showOverlay = true") Show overlay
 
     w-divider.my-3(vertical color="grey-lighter-4")

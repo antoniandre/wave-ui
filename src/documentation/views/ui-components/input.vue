@@ -18,7 +18,7 @@ div
   w-input.mb-1(label="outline style with Shadow" shadow outline)
 
   title-link(h2) Round &amp; Tile
-  w-flex(wrap :gutter="2")
+  w-flex(wrap :gap="2")
     .grow.mb-4(style="min-width: 200px")
       .mb-2 Default style
       w-input.mb-1(label="Round" round)
@@ -34,7 +34,7 @@ div
   p.mb-4.
     You can set the background color and the text color.#[br]
     By default, the text has the "#[span.code primary]" color.
-  w-flex(wrap :gutter="2")
+  w-flex(wrap :gap="2")
     .grow.mb-4(style="min-width: 200px")
       .mb-2 Default style
       w-input.mb-1(value="Some content")
