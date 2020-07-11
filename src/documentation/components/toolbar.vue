@@ -1,11 +1,14 @@
 <template lang="pug">
 w-toolbar.main-toolbar(fixed)
-  router-link.w-flex.no-grow.fill-height.align-center.home-link(to="/")
+  router-link.primary.w-flex.no-grow.fill-height.align-center.home-link(to="/")
     wave.wave-logo
     | Wave UI
   .spacer
-  a.mr-2(href="https://github.com/antoniandre/wave-ui" target="_blank")
-    w-icon mdi mdi-github
+  w-tooltip(z-index="20")
+    template(#activator="{ on }")
+      a.mr-2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
+        w-icon(md) mdi mdi-github
+    .size--xs.text-nowrap View the project on Github
   .caption Version 1.0
   w-button.ml-2.mr-n1.hamburger-menu(
     v-if="$waveUI.breakpoint.xs"
