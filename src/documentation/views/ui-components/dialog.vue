@@ -29,7 +29,7 @@ div
       .spacer
       w-button(@click="dialog1.show = false") Close
 
-  h2 Persistent prompt dialog
+  title-link(h2) Persistent prompt dialog
 
   w-button.px-4(@click="dialog2.show = true" bg-color="primary" dark) Open dialog
   w-dialog(v-model="dialog2.show" persistent :max-width="550")
@@ -46,7 +46,7 @@ div
       w-button.mr-2(@click="dialog2.show = false" bg-color="error") I disagree
       w-button(@click="dialog2.show = false" bg-color="success") I agree
 
-  h2 Nesting
+  title-link(h2) Nesting
 
   w-button.px-4(@click="dialog3.show = true" bg-color="primary" dark) Open dialog
   w-dialog(v-model="dialog3.show" :max-width="600")
@@ -62,7 +62,7 @@ div
     template(v-slot:title) Dialog 2
     w-button.my-6(@click="dialog4.show = false" bg-color="error" dark) Close
 
-  h2 Transitions
+  title-link(h2) Transitions
 
   .w-flex
     w-button.px-4.mr-6(@click="dialog5.show = true" bg-color="primary" dark) Open dialog
@@ -98,7 +98,7 @@ div
     .w-flex.fill-height.align-center.justify-center
       w-button.my-6(@click="dialog5.show = false" bg-color="error" dark) Close
 
-  h2 Overlay opacity and color
+  title-link(h2) Overlay opacity and color
   w-button.px-4(@click="dialog6.show = true" bg-color="primary" dark) Open control panel
   w-dialog(
     v-model="dialog6.show"

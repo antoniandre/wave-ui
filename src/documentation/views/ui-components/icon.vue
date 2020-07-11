@@ -2,14 +2,14 @@
 div
   h1.headline.mt-4 #[span.code w-icon]
 
-  h2 Colors
+  title-link(h2) Colors
   w-icon.mr-1(xl color="primary-darker-1") mdi mdi-home
   w-icon.mr-1(xl color="primary") mdi mdi-home
   w-icon.mr-1(xl color="primary-lighter-1") mdi mdi-home
   w-icon.mr-1(xl color="primary-lighter-2") mdi mdi-home
   w-icon.mr-1(xl color="primary-lighter-3") mdi mdi-home
 
-  h2 Background colors
+  title-link(h2) Background colors
   p.mb-4
     | If you want to set a background on an icon, you may need an
     router-link.mx-1(to="/w-button") icon button
@@ -22,7 +22,7 @@ div
   w-icon.mr-1.pa-5(xl bg-color="primary-lighter-2" color="white") mdi mdi-home
   w-icon.mr-1.pa-5(xl bg-color="primary-lighter-3" color="white") mdi mdi-home
 
-  h2 Sizes
+  title-link(h2) Sizes
   p.
     By default the icons inherit their font-size from their parent DOM element.
     But you can easily control their size.
@@ -35,7 +35,7 @@ div
   w-icon.mr-2(color="primary-lighter-2" size="4em") mdi mdi-home
 
 
-  h2 Different icon fonts supported
+  title-link(h2) Different icon fonts supported
   p.
     Wave UI works with your favorite icon font or even your own custom one.#[br]
     Bellow are some examples using a few popular and free icons fonts.
@@ -119,7 +119,7 @@ div
       w-icon.mr-1(md color="primary") fa fa-heart
       w-icon.mr-1(xl color="primary") fa fa-heart
 
-  h2 Spin
+  title-link(h2) Spin
   p You can also spin the icons.
   w-icon.mr-1(xl color="primary" spin) mdi mdi-star
 </template>

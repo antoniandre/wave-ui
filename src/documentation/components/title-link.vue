@@ -1,8 +1,9 @@
 <template lang="pug">
   component.title-link(:is="tag" :class="classes")
-    a(v-if="label" :href="`#${Slug}`" v-html="label")
+    a(v-if="label" :href="`#${Slug}`")
       span.hash #
-    a(else :href="`#${Slug}`")
+      span(v-html="label")
+    a(v-else :href="`#${Slug}`")
       span.hash #
       slot
     a(:id="Slug" :name="Slug")
@@ -37,7 +38,12 @@ export default {
       if (this.slug) return this.slug
 
       const source = this.label || this.$slots.default.map(item => item.text).join(' ')
-      return source.toLowerCase().replace(/ /g, '-').replace(/[^\w\d-_]/g, '')
+      return (
+        source.toLowerCase()
+          .replace(/ /g, '-')
+          .replace(/&/g, 'and')
+          .replace(/[^\w\d-_]/g, '')
+      )
     },
 
     classes () {
@@ -62,8 +68,6 @@ export default {
     color: #e2e2e2;
   }
 
-  &.headline .hash {line-height: 1.3;}
-
   a {color: inherit;}
 
   a[name] {
@@ -71,5 +75,11 @@ export default {
     top: -3em;
     display: block;
   }
+}
+
+h1.title-link {
+  color: #000;
+
+  .hash {line-height: 1.3;}
 }
 </style>

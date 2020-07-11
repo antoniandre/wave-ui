@@ -2,7 +2,7 @@
 div.tooltips-demo
   h1.headline.mt-4 #[span.code w-tooltip]
 
-  h2 Tooltip position
+  title-link(h2) Tooltip position
   .w-flex.wrap.py-6
     w-tooltip(attach-to=".tooltips-demo" left)
       template(v-slot:activator="{ on }")
@@ -24,7 +24,7 @@ div.tooltips-demo
         w-icon.ma-2(v-on="on" xl) mdi mdi-home
       | Home
 
-  h2 Toggle on click
+  title-link(h2) Toggle on click
   .w-flex.wrap.align-center.py-6
     w-tooltip(attach-to=".tooltips-demo" show-on-click left)
       template(v-slot:activator="{ on }")
@@ -40,7 +40,7 @@ div.tooltips-demo
           | Star
       | Star
 
-  h2 Toggle with v-model
+  title-link(h2) Toggle with v-model
   w-button(
     @click="showTooltip = !showTooltip"
     bg-color="primary"
@@ -69,7 +69,7 @@ div.tooltips-demo
         span.ma-2(v-on="on") Star
       | Star
 
-  h2 Background color &amp; text color
+  title-link(h2) Background color &amp; text color
   .w-flex.wrap.py-6
     w-tooltip(attach-to=".tooltips-demo" color="white" bg-color="blue")
       template(v-slot:activator="{ on }")
@@ -91,7 +91,7 @@ div.tooltips-demo
         w-icon.ma-2(v-on="on" xl) wi-star
       | Star
 
-  h2 Different contents
+  title-link(h2) Different contents
   .w-flex.wrap.py-6
     w-tooltip(attach-to=".tooltips-demo" color="primary" no-border)
       template(v-slot:activator="{ on }")
@@ -109,7 +109,7 @@ div.tooltips-demo
       br
       | Recusandae distinctio perferendis expedita pariatur fuga.
 
-  h2 Transitions
+  title-link(h2) Transitions
   w-radios.my-4(inline v-model="transition" :items="transitions")
   .w-flex.wrap.py-6
     w-tooltip(attach-to=".tooltips-demo" :transition="transition" left)

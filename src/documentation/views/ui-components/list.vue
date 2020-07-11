@@ -2,7 +2,7 @@
 div
   h1.headline.mt-4 #[span.code w-list]
 
-  h2 Default items list rendering
+  title-link(h2) Default items list rendering
   .w-flex.wrap
     .grow
       .subtitle Most basic
@@ -11,7 +11,7 @@ div
       .subtitle With icons
       w-list.grow.mt-6(:items="listItems1" icon="wi-check" color="primary")
 
-  h2 Custom rendering &amp; hoverable
+  title-link(h2) Custom rendering &amp; hoverable
   w-list.mt-6(:items="listItems2" color="pink" hover)
     template(v-slot:item="{ item }")
       .w-flex.align-center
@@ -19,7 +19,7 @@ div
         .spacer
         w-icon(md) {{ item.icon }}
 
-  h2 Default items list rendering with selection
+  title-link(h2) Default items list rendering with selection
   w-radios.mt-4(v-model="multiple" name="multiple" :items="radios" inline)
   w-list.mt-6(
     v-model="selectedItem1"
@@ -31,7 +31,7 @@ div
     code.ml-2(v-if="!multiple || Array.isArray(selectedItem1)") {{ selectedItem1 || 'null' }}
     code.ml-2(v-else-if="multiple") {{ (selectedItem1 ? [selectedItem1] : '[]') }}
 
-  h2 Checklists
+  title-link(h2) Checklists
   .w-flex.wrap
     .grow
       .subtitle Default
@@ -73,7 +73,7 @@ div
           .spacer
           w-icon(md) {{ item.icon }}
 
-  h2 Navigation lists
+  title-link(h2) Navigation lists
   p.
     The navigation list expects a #[code route] attribute in the items that are links.#[br]
     It will create a router link or a normal link (if not using vue-router) on those items.

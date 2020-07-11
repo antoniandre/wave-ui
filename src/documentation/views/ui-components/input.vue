@@ -1,23 +1,23 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-input]
+  title-link.mt-4(h1 slug="w-input") #[span.code w-input]
 
   w-input.mb-1(label="First name" required)
   w-input.mb-1 First name
   w-input.mb-1(placeholder="First name")
 
-  h2 Outline
+  title-link(h2) Outline
   w-input.mb-1(label="Outline" outline)
   w-input.mb-1(placeholder="Outline" outline)
   w-input.mb-1(label="Outline" color="info" outline)
   w-input.mb-1(label="Outline" bg-color="blue-lighter-5" outline)
   w-input.mb-1(label="Outline" bg-color="blue-darker-5" color="white" outline)
 
-  h2 Shadow
+  title-link(h2) Shadow
   w-input.mb-1(label="Shadow" shadow)
   w-input.mb-1(label="outline style with Shadow" shadow outline)
 
-  h2 Round &amp; Tile
+  title-link(h2) Round &amp; Tile
   w-flex(wrap :gutter="2")
     .grow.mb-4(style="min-width: 200px")
       .mb-2 Default style
@@ -30,7 +30,7 @@ div
       w-input.mb-1(label="Round" round outline shadow)
       w-input.mb-1(label="Tile" tile outline)
 
-  h2 Color
+  title-link(h2) Color
   p.mb-4.
     You can set the background color and the text color.#[br]
     By default, the text has the "#[span.code primary]" color.
@@ -50,7 +50,7 @@ div
       w-input.mb-1(color="red-darker-1" bg-color="red-lighter-5" value="Some content" outline)
       w-input.mb-1(color="orange-darker-1" bg-color="orange-lighter-5" value="Some content" outline)
 
-  h2 Label position
+  title-link(h2) Label position
   p The default label position is "#[span.code inside]", but it can also be "#[span.code left]" or "#[span.code right]".
   w-input.mb-1(label="Left" label-position="left" outline)
   w-input.mb-1(label="Inside" label-position="inside" outline)
@@ -59,13 +59,13 @@ div
     #[strong Notes:] when the label is positioned inside and a placeholder is set,
     the label will be hidden and the placeholder will be displayed.
 
-  h2 Disabled &amp; readonly
+  title-link(h2) Disabled &amp; readonly
   w-input.mb-1(label="Disabled" outline disabled)
   w-input.mb-1(label="Disabled and filled" value="Some content" outline disabled)
   w-input.mb-1(label="Readonly" outline readonly)
   w-input.mb-1(label="Readonly and filled" value="Some content" outline readonly)
 
-  h2 Types
+  title-link(h2) Types
   p The default type is "#[span.code text]".
   h3 Textual inputs
   ul.input-types

@@ -15,7 +15,7 @@ div(style="overflow: hidden")
     This way, it is possible to mix a background color with a different
     text color of your choice.
 
-  h2 Status colors
+  title-link(h2) Status colors
   .w-flex.wrap.mb-12.ma-n2
     .color.success--bg.subtitle.text-center.grow.py-3.ma-2 success
     .color.error--bg.subtitle.text-center.grow.py-3.ma-2 error
@@ -53,7 +53,7 @@ div(style="overflow: hidden")
       .color.info-darker-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body info-darker-2
       .color.info-darker-3--bg.subtitle.text-center.grow.py-3.ma-2.white.body info-darker-3
 
-  h2 #[span.code primary] &amp; #[span.code secondary] colors and shades
+  title-link(h2 slug="primary-and-secondary-colors-and-shades") #[span.code primary] &amp; #[span.code secondary] colors and shades
   p.
     The primary color, and whichever color you add, will also have 6 different shades.
     More shades would most likely be redundant with the bellow color palette.
@@ -75,7 +75,7 @@ div(style="overflow: hidden")
     You can add #[code disableColorShades: true] to the Wave UI options to disable the color shades
     computing for the status colors and your custom colors.
 
-  h2.mt-12.mb-4.w-flex.align-center
+  title-link.mt-12.mb-4.w-flex.align-center(h2 slug="color-palette")
     | Color Palette
     w-button.ml-6(
       bg-color="primary"

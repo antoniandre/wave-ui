@@ -2,7 +2,7 @@
 div(style="max-width: 900px")
   h1.headline.mt-4 #[span.code w-alert]
 
-  h2 Show / hide with v-model
+  title-link(h2) Show / hide with v-model
   p.
     By default alerts are visible, but if a value or v-model is provided,
     it will show or hide according to it.
@@ -10,7 +10,7 @@ div(style="max-width: 900px")
   w-transition-expand(y)
     w-alert(v-if="showAlert" color="success") The alert is now visible.
 
-  h2 Colors
+  title-link(h2) Colors
   p.
     You can apply a color to the text with the #[code color] attribute,
     and color to the background with the #[code bg-color] attribute.
@@ -22,7 +22,7 @@ div(style="max-width: 900px")
   w-alert(bg-color="purple" color="cyan-lighter-4") This is an alert with a purple background and cyan color.
   w-alert(bg-color="cyan-lighter-4" color="purple") This is an alert with a cyan background and purple color.
 
-  h2 Types (adds an icon)
+  title-link(h2) Types (adds an icon)
   h3 Normal
   w-alert(type="success") This is a success alert.
   w-alert(type="warning") This is a warning alert.
@@ -35,14 +35,14 @@ div(style="max-width: 900px")
   w-alert(type="error" plain) This is an error alert.
   w-alert(type="info" plain) This is an info alert.
 
-  h2 Outline
+  title-link(h2) Outline
   w-alert(color="primary" outline) This is a normal alert with a primary color.
   w-alert(type="success" outline) This is a success alert.
   w-alert(type="warning" outline) This is an alert.
   w-alert(type="error" outline) This is an error alert.
   w-alert(type="info" outline) This is an info alert.
 
-  h2 Borders
+  title-link(h2) Borders
     w-alert(type="success" light no-border) This is a success alert with no border.
     w-alert(color="primary" no-border) This is a normal alert with no border.
     w-alert(bg-color="cyan-lighter-4" color="purple" no-border) This is an alert with a cyan background, purple color and no border.
@@ -53,12 +53,12 @@ div(style="max-width: 900px")
     w-alert.grow.ma-2(color="primary" border-top) This is a normal alert with a top border.
     w-alert.grow.ma-2(color="primary" border-bottom) This is a normal alert with a left border.
 
-  h2 Tile, round &amp; shadow
+  title-link(h2) Tile, round &amp; shadow
   w-alert(color="primary" tile) This is a tile alert.
   w-alert(color="primary" round) This is a round alert.
   w-alert(color="primary" shadow) This is a normal alert with a shadow.
 
-  h2 Sizes
+  title-link(h2) Sizes
   .w-flex
     .grow
       w-alert.size--xs(color="info" type="success") This is an extra small alert.
@@ -68,7 +68,7 @@ div(style="max-width: 900px")
       w-alert.size--xl(color="info" type="success") This is an extra large alert.
     .spacer(v-if="!$waveUI.breakpoint.xs")
 
-  h2 Fixed &amp; absolute positions
+  title-link(h2) Fixed &amp; absolute positions
   w-button(@click="fixedAlert.show = !fixedAlert.show" color="primary" outline)
     | {{ fixedAlert.show ? 'Hide' : 'Show' }} alert
   .heading.mt-3 Alert position
