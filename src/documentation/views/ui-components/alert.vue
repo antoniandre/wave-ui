@@ -1,6 +1,6 @@
 <template lang="pug">
 div(style="max-width: 900px")
-  h1.headline.mt-4 #[span.code w-alert]
+  title-link.mt-4.code(h1) w-alert
 
   title-link(h2) Show / hide with v-model
   p.

@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt-4(h1 slug="w-input") #[span.code w-input]
+  title-link.mt-4.code(h1) w-input
 
   w-input.mb-1(label="First name" required)
   w-input.mb-1 First name

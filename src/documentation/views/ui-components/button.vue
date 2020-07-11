@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-button]
+  title-link.mt-4.code(h1) w-button
 
   p.
     Setting colors on buttons is quite straightforword:

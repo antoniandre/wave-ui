@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-switch]
+  title-link.mt-4.code(h1) w-switch
 
   .w-flex.wrap.align-center
     w-switch.mr-4.mb-1(:value="true" label="On")

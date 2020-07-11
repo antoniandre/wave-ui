@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 Transitions
+  title-link.mt-4(h1) Transitions
 
   p Here is a list of all the available transition components.
   ul

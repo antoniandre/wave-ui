@@ -1,6 +1,6 @@
 <template lang="pug">
 div(style="max-width: 900px")
-  h1.headline.mt-4 #[span.code w-progress]
+  title-link.mt-4.code(h1) w-progress
 
   w-radios.subtitle(v-model="circular" :items="linearOrCircular" inline)
 

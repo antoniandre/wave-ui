@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-dialog]
+  title-link.mt-4.code(h1) w-dialog
   p This dialog contains some basic options to toggle on and off.
   w-button.px-4.mr-6.shrink(@click="dialog1.show = true" bg-color="primary" dark) Open dialog
 

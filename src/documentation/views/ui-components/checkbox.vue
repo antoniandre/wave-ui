@@ -1,8 +1,10 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-checkbox] &amp; #[span.code w-checkboxes]
+  title-link.mt-4(h1 slug="w-checkbox-and-w-checkboxes")
+    | #[span.code w-checkbox] &amp; #[span.code w-checkboxes]
 
-  title-link(h2) Multiple checkboxes using the #[code w-checkboxes] tag
+  title-link(h2 slug="multiple-checkboxes")
+    | Multiple checkboxes using the #[code w-checkboxes] tag
   p.
     The #[code w-checkboxes] component allows a fast and easy rendering of
     multiple checkboxes by passing the items through a prop.#[br]

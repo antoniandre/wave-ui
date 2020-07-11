@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 Wave UI
+  title-link.mt-4(h1) Why Wave UI
   .title
     | An emerging new UI framework for Vue.js with only the bright side.
     span.xl.ml-2 ☀️

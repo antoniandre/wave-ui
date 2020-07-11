@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-overlay]
+  title-link.mt-4.code(h1) w-overlay
 
   p.
     By default the overlay has a #[span.code 0.3] opacity with a black color and a z-index

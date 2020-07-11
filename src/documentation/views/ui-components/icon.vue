@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-icon]
+  title-link.mt-4.code(h1) w-icon
 
   title-link(h2) Colors
   w-icon.mr-1(xl color="primary-darker-1") mdi mdi-home

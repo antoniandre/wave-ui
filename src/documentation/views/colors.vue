@@ -1,6 +1,6 @@
 <template lang="pug">
 div(style="overflow: hidden")
-  h1.headline.mt-4 Colors
+  title-link.mt-4(h1) Colors
   p.
     Wave UI colors work in a very simple way: for instance the class
     #[code pink] (or any color listed bellow) can be applied to any
@@ -64,13 +64,13 @@ div(style="overflow: hidden")
     as well as its 3 darker shades, with a white text when used as a background.
 
   w-flex(wrap :gap="4")
-    .color.primary-lighter-3--bg.subtitle.text-center.grow.py-3.ma-2.body primary-lighter-3
-    .color.primary-lighter-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-lighter-2
-    .color.primary-lighter-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-lighter-1
-    .color.primary--bg.subtitle.text-center.grow.py-3.ma-2.white primary
-    .color.primary-darker-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-darker-1
-    .color.primary-darker-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-darker-2
-    .color.primary-darker-3--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-darker-3
+    .color.primary-lighter-3--bg.subtitle.text-center.grow.py-3.white.body primary-lighter-3
+    .color.primary-lighter-2--bg.subtitle.text-center.grow.py-3.white.body primary-lighter-2
+    .color.primary-lighter-1--bg.subtitle.text-center.grow.py-3.white.body primary-lighter-1
+    .color.primary--bg.subtitle.text-center.grow.py-3.white primary
+    .color.primary-darker-1--bg.subtitle.text-center.grow.py-3.white.body primary-darker-1
+    .color.primary-darker-2--bg.subtitle.text-center.grow.py-3.white.body primary-darker-2
+    .color.primary-darker-3--bg.subtitle.text-center.grow.py-3.white.body primary-darker-3
 
   w-alert.text-light(type="info" bg-color="yellow-lighter-5" color="orange-darker-1").
     You can add #[code disableColorShades: true] to the Wave UI options to disable the color shades

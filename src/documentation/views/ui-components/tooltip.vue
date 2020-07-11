@@ -1,6 +1,6 @@
 <template lang="pug">
 div.tooltips-demo
-  h1.headline.mt-4 #[span.code w-tooltip]
+  title-link.mt-4.code(h1) w-tooltip
 
   title-link(h2) Tooltip position
   .w-flex.wrap.py-6

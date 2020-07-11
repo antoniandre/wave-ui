@@ -48,7 +48,7 @@ export default {
 
     classes () {
       return {
-        'headline primary': this.h1
+        'headline': this.h1
       }
     }
   }
@@ -74,6 +74,11 @@ export default {
     position: relative;
     top: -3em;
     display: block;
+  }
+
+  .code {
+    display: inline-block;
+    margin-top: -3px;
   }
 }
 

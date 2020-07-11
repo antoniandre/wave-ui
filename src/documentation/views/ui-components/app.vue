@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-app]
+  title-link.mt-4.code(h1) w-app
 
   p.
     This tag is important for Wave UI proper functionning.#[br]

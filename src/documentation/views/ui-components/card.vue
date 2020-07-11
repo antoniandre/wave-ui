@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-card]
+  title-link.mt-4.code(h1) w-card
 
   title-link(h2) Card with a title and no color
   w-card.mt-4(card-title="Card title")

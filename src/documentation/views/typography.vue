@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 Typography
+  title-link.mt-4(h1) Typography
   p Here is a list of classes that will help you structure and emphasize your content.
 
   title-link(h2) Content architecture
