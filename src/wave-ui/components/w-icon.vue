@@ -16,6 +16,7 @@ export default {
   name: 'w-icon',
   props: {
     color: { type: String, default: '' },
+    bgColor: { type: String, default: '' },
     xs: { type: Boolean, default: false },
     sm: { type: Boolean, default: false },
     md: { type: Boolean, default: false },
@@ -53,6 +54,7 @@ export default {
       return {
         [this.icon]: true,
         [this.color]: this.color,
+        [`${this.bgColor}--bg`]: this.bgColor,
         [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
         'w-icon--spin': this.spin,
         [this.ligature && this.ligature.fontName]: this.ligature
