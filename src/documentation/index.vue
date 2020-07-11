@@ -12,11 +12,26 @@ w-app.fill-height.w-flex.column
       router-view.main-content.grow
   footer.pa-3.w-flex.justify-end.align-center.caption.no-grow
     | Made with
-    w-icon.ml-1(sm) mdi mdi-vuejs
-    w-icon.ml-1(sm) mdi mdi-language-css3
-    w-icon.ml-1(sm) mdi mdi-language-html5
-    w-icon.ml-1(sm) mdi mdi-sass
-    w-icon.ml-1.heart(sm) mdi mdi-heart
+    w-tooltip(top)
+      template(#activator="{ on }")
+        w-icon.ml-1(v-on="on" sm) mdi mdi-vuejs
+      | Vue.js
+    w-tooltip(top)
+      template(#activator="{ on }")
+        w-icon.ml-1(v-on="on" sm) mdi mdi-language-css3
+      | CSS 3
+    w-tooltip(top)
+      template(#activator="{ on }")
+        w-icon.ml-1(v-on="on" sm) mdi mdi-language-html5
+      span.text-nowrap Html 5 &amp; Pug
+    w-tooltip(top)
+      template(#activator="{ on }")
+        w-icon.ml-1(v-on="on" sm) mdi mdi-sass
+      | Sass
+    w-tooltip(top)
+      template(#activator="{ on }")
+        w-icon.ml-1.heart(v-on="on" sm) mdi mdi-heart
+      | Love
 
 </template>
 
