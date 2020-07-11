@@ -53,7 +53,8 @@ div(style="overflow: hidden")
       .color.info-darker-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body info-darker-2
       .color.info-darker-3--bg.subtitle.text-center.grow.py-3.ma-2.white.body info-darker-3
 
-  title-link(h2 slug="primary-and-secondary-colors-and-shades") #[span.code primary] &amp; #[span.code secondary] colors and shades
+  title-link(h2 slug="primary-and-secondary-colors-and-shades")
+    | #[span.code primary] &amp; #[span.code secondary] colors and shades
   p.
     The primary color, and whichever color you add, will also have 6 different shades.
     More shades would most likely be redundant with the bellow color palette.
@@ -62,7 +63,7 @@ div(style="overflow: hidden")
     Also note that the primary color is considered as dark by default, and will render,
     as well as its 3 darker shades, with a white text when used as a background.
 
-  .w-flex.wrap
+  w-flex(wrap :gutter="4")
     .color.primary-lighter-3--bg.subtitle.text-center.grow.py-3.ma-2.body primary-lighter-3
     .color.primary-lighter-2--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-lighter-2
     .color.primary-lighter-1--bg.subtitle.text-center.grow.py-3.ma-2.white.body primary-lighter-1
@@ -81,7 +82,7 @@ div(style="overflow: hidden")
       bg-color="primary"
       sm
       dark
-      @click="horizontal = !horizontal")
+      @click.prevent="horizontal = !horizontal")
       | {{ horizontal ? 'Vertical' : 'Horizontal' }} display
 
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
