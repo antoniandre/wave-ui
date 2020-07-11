@@ -1,5 +1,5 @@
 <template lang="pug">
-  component.w-flex-wrap(v-if="gutter" :is="tag")
+  component.w-flex-wrap(v-if="gap" :is="tag")
     .w-flex(:class="classes")
       slot
   component.w-flex(v-else :class="classes" :is="tag")
@@ -21,7 +21,7 @@ export default {
     justifyCenter: { type: Boolean, default: false },
     justifyEnd: { type: Boolean, default: false },
     justifySpaceBetween: { type: Boolean, default: false },
-    gutter: { type: Number, default: 0 }
+    gap: { type: Number, default: 0 }
   },
 
   computed: {
@@ -37,7 +37,7 @@ export default {
         'justify-center': this.justifyCenter,
         'justify-end': this.justifyEnd,
         'justify-space-between': this.justifySpaceBetween,
-        [`gutter-${this.gutter}`]: this.gutter
+        [`gap-${this.gap}`]: this.gap
       }
     }
   }
@@ -49,8 +49,8 @@ export default {
   @for $i from 1 through 12 {
     // Divide by 2 as there are 2 elements having this space.
     $space: round($base-increment * $i / 2);
-    > .gutter-#{$i} {margin: -$space;}
-    > .gutter-#{$i} > * {margin: $space;}
+    > .gap-#{$i} {margin: -$space;}
+    > .gap-#{$i} > * {margin: $space;}
   }
 }
 
