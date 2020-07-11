@@ -2,7 +2,7 @@
 div
   h1.headline.mt-4 #[span.code w-checkbox] &amp; #[span.code w-checkboxes]
 
-  h2 Multiple checkboxes using the #[code w-checkboxes] tag
+  title-link(h2) Multiple checkboxes using the #[code w-checkboxes] tag
   p.
     The #[code w-checkboxes] component allows a fast and easy rendering of
     multiple checkboxes by passing the items through a prop.#[br]
@@ -53,7 +53,7 @@ div
 
   w-divider.ma-10.ml-0
 
-  h2 Individual checkbox
+  title-link(h2) Individual checkbox
   p.
     It is possible to use the #[code w-checkbox] component to render a single checkbox
     at once.#[br]

@@ -4,7 +4,7 @@ div(style="max-width: 900px")
 
   w-radios.subtitle(v-model="circular" :items="linearOrCircular" inline)
 
-  h2 Default indeterminate progress &amp; colors
+  title-link(h2) Default indeterminate progress &amp; colors
   w-progress(:circle="circular")
   w-progress.mt-4(:circle="circular" color="blue")
   w-progress.mt-4(:circle="circular" color="green")
@@ -12,7 +12,7 @@ div(style="max-width: 900px")
   w-progress.mt-4(:circle="circular" color="yellow" bg-color="cyan")
 
   template(v-if="circular")
-    h2 Size &amp; stroke thickness
+    title-link(h2) Size &amp; stroke thickness
     w-progress.mt-4(circle value="50" color="blue")
     w-progress.mt-4(circle value="50" size="4em" color="blue")
     w-progress.mt-4(circle value="50" size="5em" color="blue")
@@ -21,11 +21,11 @@ div(style="max-width: 900px")
     w-progress.mt-4(circle value="50" size="6em" :stroke="40" color="blue")
 
   template(v-else)
-    h2 Size
+    title-link(h2) Size
     w-progress.mt-4(value="38" size="1em" color="blue")
     w-progress.mt-4(value="38" size="2.5em" color="blue")
 
-    h2 Tile &amp; round
+    title-link(h2) Tile &amp; round
     w-progress.mt-4(
       :circle="circular"
       value="38"
@@ -39,7 +39,7 @@ div(style="max-width: 900px")
       round
       color="light-blue")
 
-    h2 Outline &amp; shadow
+    title-link(h2) Outline &amp; shadow
     w-progress.mt-4(
       :circle="circular"
       value="38"
@@ -54,7 +54,7 @@ div(style="max-width: 900px")
       shadow
       color="light-blue")
 
-    h2 Stripes (only if determinate)
+    title-link(h2) Stripes (only if determinate)
     w-progress.mt-4(
       :circle="circular"
       value="38"
@@ -72,7 +72,7 @@ div(style="max-width: 900px")
       color="primary"
       stripes)
 
-  h2 Progress value with label
+  title-link(h2) Progress value with label
   h3 Default label
   w-progress.mt-4(
     :circle="circular"

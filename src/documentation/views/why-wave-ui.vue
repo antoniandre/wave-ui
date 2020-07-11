@@ -11,7 +11,7 @@ div
   .subtitle.mt-6 But it is also:
   w-list(:items="features2" icon="wi-check")
 
-  h2 Wave UI is developed with a particular care about CSS.
+  title-link(h2) Wave UI is developed with a particular care about CSS.
   p.subtitle.
     Practically Wave UI gives you more flexibility and more control over the CSS.
   blockquote.mt-2.

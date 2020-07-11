@@ -2,7 +2,7 @@
 div
   h1.headline.mt-4 #[span.code w-toolbar]
 
-  h2 Simple toolbar with shadow
+  title-link(h2) Simple toolbar with shadow
   w-toolbar.mt-4(shadow)
     .title.my-0 Title
     .spacer
@@ -10,7 +10,7 @@ div
     span.ml-2 Item 2
     span.ml-2 Item 3
 
-  h2 Background color &amp; text color
+  title-link(h2) Background color &amp; text color
   w-toolbar.mt-4(bg-color="blue-lighter-5" color="blue-darker-3")
     .title.my-0 Title
     .spacer
@@ -18,7 +18,7 @@ div
     span.ml-2 Item 2
     span.ml-2 Item 3
 
-  h2 Toolbars inside w-card
+  title-link(h2) Toolbars inside w-card
   p.
     The w-card component will detect if there is a toolbar in the title slot or in the actions
     slot and will remove the default padding and border on this slot if there is.
@@ -60,7 +60,7 @@ div
           span.ml-2 Item 2
           span.ml-2 Item 3
 
-  h2 Custom toolbar height
+  title-link(h2) Custom toolbar height
   p.
     The #[code w-toolbar] component also accepts a height. It can be set as a string with units
     or a number of pixels (without unit).

@@ -8,7 +8,7 @@ div
     It is very easy to overrides these defaults via CSS, but you can also pass them as
     parameters to the #[span.code w-overlay].
 
-  h2 Overlay with custom opacity and control on #[span.code persistent]
+  title-link(h2) Overlay with custom opacity and control on #[span.code persistent]
   P When the overlay is persistent, it will not close on click and on escape key.
   p When persistent is set to false and by default, the escape key will also close the overlay.
   w-flex.mt-4(wrap :gutter="12")
@@ -40,7 +40,7 @@ div
         min="0"
         max="1")
 
-  h2 Overlay with custom background color
+  title-link(h2) Overlay with custom background color
   w-button.mr-2(bg-color="primary" dark @click="showBlueOverlay = true") Show a blue overlay
 
   w-overlay.w-flex.align-center.justify-center(

@@ -2,7 +2,7 @@
 div
   h1.headline.mt-4 #[span.code w-card]
 
-  h2 Card with a title and no color
+  title-link(h2) Card with a title and no color
   w-card.mt-4(card-title="Card title")
     p.
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
@@ -12,7 +12,7 @@ div
       dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
       aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
 
-  h2 Colored card with no title and no border
+  title-link(h2) Colored card with no title and no border
   w-card.mt-4(bg-color="secondary" no-border)
     p.
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
@@ -22,7 +22,7 @@ div
       dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
       aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
 
-  h2 Tiled card with a top toolbar
+  title-link(h2) Tiled card with a top toolbar
   p.
     The w-card component will detect if there is a toolbar in the title slot or in the actions
     slot and will remove the default padding and border on this slot if there is.
@@ -42,7 +42,7 @@ div
       dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
       aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
 
-  h2 Card with shadow
+  title-link(h2) Card with shadow
   w-card.mt-4(shadow)
     p.
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
@@ -52,7 +52,7 @@ div
       dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
       aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
 
-  h2 Card with actions
+  title-link(h2) Card with actions
   p The actions slot is optional but facilitates the addition of action buttons in a flex layout.
   w-card.mt-4
     template(v-slot:title) Terms and conditions

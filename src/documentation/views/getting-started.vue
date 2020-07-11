@@ -2,7 +2,7 @@
 div
   h1.headline.mt-4 Getting started
 
-  h2 Installation
+  title-link(h2) Installation
 
   h3 Download from NPM
   code npm i --D the-wave-ui
@@ -25,7 +25,7 @@ div
       render: h => h(App)
     }).$mount('#app')
 
-  h2 Options
+  title-link(h2) Options
   p Wave UI accepts these options:
   ul
     li colors

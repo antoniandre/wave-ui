@@ -2,7 +2,7 @@
 div
   h1.headline.mt-4 Customization
 
-  h2 Basic overrides
+  title-link(h2) Basic overrides
   //- p Wave UI components are pixel-based to avoid flickering on half-pixel value.
   p Wave UI components rely on SCSS variables that you can easily override from Your SCSS file:
   pre.
@@ -20,11 +20,11 @@ div
                  0 2px 2px 0 rgba(0, 0, 0, 0.15),
                  0 1px 5px 0 rgba(0, 0, 0, 0.15);
 
-  h2 Give Wave UI CSS more priority
+  title-link(h2) Give Wave UI CSS more priority
   p It is also possible to control Wave UI CSS rules priorities by overriding the CSS base scope:
   pre $css-scope: '.w-app';
 
-  h2 Presets
+  title-link(h2) Presets
   h3 Buttons
   span.code w-button { sm: true, outlined: true, round: true }
 </template>

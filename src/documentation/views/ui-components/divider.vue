@@ -2,7 +2,7 @@
 div
   h1.headline.mt-4 #[span.code w-divider]
 
-  h2 Horizontal
+  title-link(h2) Horizontal
   p This horizontal line bellow is a divider.
   w-divider.ma-10
 
@@ -31,7 +31,7 @@ div
       optio quam magnam, eaque, voluptatum maxime excepturi perspiciatis saepe provident dicta
       sapiente similique quibusdam. Mollitia, vel quam. Laudantium!
 
-  h2 Vertical
+  title-link(h2) Vertical
   h3 Divider in a #[code w-toolbar]
   w-toolbar(bg-color="grey-lighter-5")
     .title.my-0 Toolbar
@@ -45,6 +45,6 @@ div
     span.mx-1 Item 5
     span.mx-1 Item 6
 
-  h2 Color
+  title-link(h2) Color
   w-divider.ma-10.ml-0(color="green")
 </template>

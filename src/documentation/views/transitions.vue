@@ -13,7 +13,7 @@ div
 
   //- p Each component has a css transition that you can also use in various components.
 
-  h2 Testing transition
+  title-link(h2) Testing transition
   w-flex(align-center)
     w-button.transition-toggle(
       @click="toggleFade = !toggleFade"
@@ -101,7 +101,7 @@ div
         v-if="toggleExpandXY2" style="width: auto")
         .amber-lighter-4--bg.pa-2(style="overflow: hidden;white-space: nowrap;width: 200px") X &amp; Y expanding transition
 
-  h2 Transition duration
+  title-link(h2) Transition duration
   p.
     You can easily override the default transition/animation duration by setting an explicit
     CSS transition/animation duration on the element being transitioned:

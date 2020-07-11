@@ -1,15 +1,15 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-badge]
+  title-link.mt-4.code(h1) w-badge
 
-  h2 Default
+  title-link(h2) Default
   w-badge.mr-10
     template(v-slot:badge) 3
     div.grey-lighter-5--bg.pa-2.primary
       w-icon.mr-1 mdi mdi-email
       | Emails
 
-  h2 Overlap
+  title-link(h2) Overlap
   w-flex(wrap)
     w-badge.mr-10
       template(v-slot:badge) 3
@@ -25,13 +25,13 @@ div
       template(v-slot:badge) away
       w-icon.blue--bg.pa-6(size="2.5em" color="white") mdi mdi-account
 
-  h2 Dot
+  title-link(h2) Dot
   w-flex(wrap)
     w-badge.mr-10(dot)
       template(v-slot:badge)
       w-icon(size="2.5em") mdi mdi-account
 
-  h2 Sizes
+  title-link(h2) Sizes
   h3 Dots
   w-flex(wrap)
     w-badge.mr-10(dot xs)

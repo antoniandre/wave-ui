@@ -2,7 +2,7 @@
 div
   h1.headline.mt-4 #[span.code w-radio] &amp; #[span.code w-radios]
 
-  h2 Multiple radio buttons using the #[code w-radios] tag
+  title-link(h2) Multiple radio buttons using the #[code w-radios] tag
   p.
     The #[code w-radios] component allows a fast and easy rendering of
     multiple radio buttons by passing the items through a prop.#[br]
@@ -48,7 +48,7 @@ div
 
   w-divider.ma-10.ml-0
 
-  h2 Individual radio buttons
+  title-link(h2) Individual radio buttons
   p.
     It is possible to use the #[code w-radio] component to render a single radio button
     at once.#[br]

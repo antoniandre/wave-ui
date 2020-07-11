@@ -20,13 +20,13 @@ div
       outline
       color="primary") Show bottom drawer
 
-  h2 Control width or height
+  title-link(h2) Control width or height
   w-button.mr-2(
     @click="bottomDrawerHeight = '60px';showBottomDrawer = !showBottomDrawer"
     outline
     color="primary") Show a 60px height bottom drawer
 
-  h2 No overlay &amp; custom color overlay
+  title-link(h2) No overlay &amp; custom color overlay
   span Open top drawer with:
   w-button.mx-2.my-1(
     @click="noOverlay = true;overlayColor = false;showTopDrawer = !showTopDrawer"
@@ -47,14 +47,14 @@ div
     To allow closing the drawer when clicking outside of it, you can set a transparent background
     on the overlay.
 
-  h2 Persistent drawers
+  title-link(h2) Persistent drawers
   p A persistent drawer stays open when clicking outside or pressing the escape key.
   w-button.mx-2.my-1(
   @click="persistent = true;showBottomDrawer = !showBottomDrawer"
   outline
   color="primary") Persistent drawer
 
-  h2 Cookie notice example
+  title-link(h2) Cookie notice example
   p.
     The cookie notice is a good use case of a persistent drawer, it will not let you click
     anything until you accept.
