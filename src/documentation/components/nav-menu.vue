@@ -87,7 +87,6 @@ div.nav-menu {
   min-width: 180px;
   max-width: 260px;
   border-right: 1px solid #ddd;
-  margin-right: 4rem;
 
   .w-list__item-label {
     padding: 6px;
@@ -111,7 +110,6 @@ div.nav-menu {
   max-width: unset;
   margin-top: 3em;
   margin-left: 12px;
-  margin-right: 0;
   border-right: none;
 
   .close {

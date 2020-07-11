@@ -9,7 +9,7 @@ w-app.fill-height.w-flex.column
   .content-wrap.w-flex(:class="`page--${$route.name}`")
     nav-menu.navigation.mt-6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
     transition(name="fade-page" mode="out-in")
-      router-view.grow
+      router-view.main-content.grow
   footer.pa-3.w-flex.justify-end.align-center.caption.no-grow
     | Made with
     w-icon.ml-1(sm) mdi mdi-vuejs
@@ -48,6 +48,8 @@ export default {
 </script>
 
 <style lang="scss">
+.main-content {padding-left: 4em;}
+
 footer .heart:hover {
   animation: heartbeat 1s infinite;
 }
