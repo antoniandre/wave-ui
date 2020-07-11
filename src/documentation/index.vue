@@ -21,9 +21,13 @@ w-app.fill-height.w-flex.column
 </template>
 
 <script>
+import Vue from 'vue'
+import TitleLink from '@/documentation/components/title-link'
 import Toolbar from '@/documentation/components/toolbar'
 import NavMenu from '@/documentation/components/nav-menu'
 import '@/documentation/scss/index.scss'
+
+Vue.component('title-link', TitleLink)
 
 export default {
   components: { Toolbar, NavMenu },
