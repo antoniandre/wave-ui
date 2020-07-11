@@ -1,13 +1,48 @@
 <template lang="pug">
 div
   h1.headline.mt-4 #[span.code w-icon]
+
+  h2 Colors
+  w-icon.mr-1(xl color="primary-darker-1") mdi mdi-home
+  w-icon.mr-1(xl color="primary") mdi mdi-home
+  w-icon.mr-1(xl color="primary-lighter-1") mdi mdi-home
+  w-icon.mr-1(xl color="primary-lighter-2") mdi mdi-home
+  w-icon.mr-1(xl color="primary-lighter-3") mdi mdi-home
+
+  h2 Background colors
+  p.mb-4
+    | If you want to set a background on an icon, you may need an
+    router-link.mx-1(to="/w-button") icon button
+    | instead.
+    | #[br]Here is how you can apply a background color to an icon.
+
+  w-icon.mr-1.pa-5(xl bg-color="primary-darker-1") mdi mdi-home
+  w-icon.mr-1.pa-5(xl bg-color="primary") mdi mdi-home
+  w-icon.mr-1.pa-5(xl bg-color="primary-lighter-1" color="white") mdi mdi-home
+  w-icon.mr-1.pa-5(xl bg-color="primary-lighter-2" color="white") mdi mdi-home
+  w-icon.mr-1.pa-5(xl bg-color="primary-lighter-3" color="white") mdi mdi-home
+
+  h2 Sizes
   p.
-    Wave UI works with your favorite icon font or even your custom one.#[br]
+    By default the icons inherit their font-size from their parent DOM element.
+    But you can easily control their size.
+  w-icon.mr-2(xs color="primary-lighter-2") mdi mdi-home
+  w-icon.mr-2(sm color="primary-lighter-2") mdi mdi-home
+  w-icon.mr-2(md color="primary-lighter-2") mdi mdi-home
+  w-icon.mr-2(lg color="primary-lighter-2") mdi mdi-home
+  w-icon.mr-2(xl color="primary-lighter-2") mdi mdi-home
+  w-icon.mr-2(color="primary-lighter-2" :size="40") mdi mdi-home
+  w-icon.mr-2(color="primary-lighter-2" size="4em") mdi mdi-home
+
+
+  h2 Different icon fonts supported
+  p.
+    Wave UI works with your favorite icon font or even your own custom one.#[br]
     Bellow are some examples using a few popular and free icons fonts.
 
   ul
     li
-      h2 Material Design Icons with ligatures
+      h3 Material Design Icons with ligatures
       p
         a(href="https://material.io/resources/icons" target="_blank") Material Design Icons Cheatsheet
 
@@ -23,7 +58,7 @@ div
       w-icon.mr-1(xl color="primary") material-icons favorite
 
     li
-      h2 Material Design Icons - community full set
+      h3 Material Design Icons - community full set
       p
         a(href="https://materialdesignicons.com" target="_blank") Material Design Icons Cheatsheet
 
@@ -39,7 +74,7 @@ div
       w-icon.mr-1(xl color="primary") mdi mdi-heart
 
     li
-      h2 Ionicons 4: iOS &amp; Material Design
+      h3 Ionicons 4: iOS &amp; Material Design
       p
         a(href="https://ionicons.com/v4/cheatsheet.html" target="_blank") Ionicons V4 Cheatsheet
 
@@ -69,7 +104,7 @@ div
           w-icon.mr-1(xl color="primary") ion-md-heart
 
     li
-      h2 Font Awesome 4
+      h3 Font Awesome 4
       p
         a(href="https://fontawesome.com/v4.7.0/icons/" target="_blank") Font Awesome V4 Cheatsheet
 
