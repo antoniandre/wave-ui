@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-toolbar]
+  title-link.mt-4.code(h1) w-toolbar
 
   title-link(h2) Simple toolbar with shadow
   w-toolbar.mt-4(shadow)

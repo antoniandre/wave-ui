@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 Getting started
+  title-link.mt-4(h1) Getting started
 
   title-link(h2) Installation
 

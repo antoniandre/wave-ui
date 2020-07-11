@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-accordion]
+  title-link.mt-4.code(h1) w-accordion
 
 </template>
 

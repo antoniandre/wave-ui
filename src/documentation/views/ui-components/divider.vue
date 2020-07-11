@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-divider]
+  title-link.mt-4.code(h1) w-divider
 
   title-link(h2) Horizontal
   p This horizontal line bellow is a divider.

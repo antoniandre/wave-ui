@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 Customization
+  title-link.mt-4(h1) Customization
 
   title-link(h2) Basic overrides
   //- p Wave UI components are pixel-based to avoid flickering on half-pixel value.

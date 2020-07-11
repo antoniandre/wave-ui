@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 #[span.code w-tag]
+  title-link.mt-4.code(h1) w-tag
 
   title-link(h2) Default tag
   w-tag Tag

@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h1.headline.mt-4 Breakpoints
+  title-link.mt-4(h1) Breakpoints
 
   p
     | By default, 5 breakpoints are set:
