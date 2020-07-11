@@ -27,7 +27,7 @@ export default {
   props: {
     value: { default: false },
     showOnClick: { type: Boolean, default: false },
-    detach: { type: [String, Object, Boolean], default: false },
+    attachTo: { default: false },
     fixed: { type: Boolean, default: false },
     top: { type: Boolean, default: false },
     bottom: { type: Boolean, default: false },
@@ -49,8 +49,7 @@ export default {
       width: 0,
       height: 0
     },
-    activatorEl: null,
-    target: null // DOM element to attach tooltip to.
+    activatorEl: null
   }),
 
   computed: {
@@ -58,11 +57,14 @@ export default {
       return this.transition || `w-tooltip-slide-fade-${this.position}`
     },
 
-    detachTarget () {
-      let target = this.detach
+    // DOM element to attach tooltip to.
+    attachToTarget () {
+      let target = this.attachTo || '.w-app'
       if (target === true) target = '.w-app'
-      if (target && !['object', 'string'].includes(typeof target)) target = '.w-app'
+      else if (target && !['object', 'string'].includes(typeof target)) target = '.w-app'
+      else if (typeof target === 'object' && !target.nodeType) target = '.w-app'
       if (typeof target === 'string') target = document.querySelector(target)
+
       return target
     },
 
@@ -146,7 +148,7 @@ export default {
       let coords = { top, left, width, height }
 
       if (!this.fixed) {
-        const { top: targetTop, left: targetLeft } = this.target.getBoundingClientRect()
+        const { top: targetTop, left: targetLeft } = this.attachToTarget.getBoundingClientRect()
         coords = { ...coords, top: top - targetTop, left: left - targetLeft }
       }
 
@@ -179,15 +181,13 @@ export default {
 
       // Move the tooltip elsewhere in the DOM.
       // wrapper.parentNode.insertBefore(this.$refs.tooltip, wrapper)
-      this.target.appendChild(this.$refs.tooltip)
+      this.attachToTarget.appendChild(this.$refs.tooltip)
     }
   },
 
   beforeMount () {
     // Do this, first thing on mounted (beforeMount + nextTick).
     this.$nextTick(() => {
-      this.target = document.querySelector('.w-app')
-
       this.insertTooltip()
 
       if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
