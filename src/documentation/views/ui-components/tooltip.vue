@@ -2,7 +2,7 @@
 div.tooltips-wrapper
   h1.headline.mt-4 #[span.code w-tooltip]
 
-  h2 Default
+  h2 Tooltip position
   .w-flex.wrap.py-6
     w-tooltip(left)
       template(v-slot:activator="{ on }")
@@ -33,21 +33,11 @@ div.tooltips-wrapper
           | Star
       | Star
 
-    w-tooltip(show-on-click top)
+    w-tooltip(show-on-click right)
       template(v-slot:activator="{ on }")
         w-button.ma-2(v-on="on" bg-color="info-darker-2" dark)
           w-icon.mr-1 wi-star
           | Star
-      | Star
-
-    w-tooltip(show-on-click)
-      template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Star
-      | Star
-
-    w-tooltip(show-on-click right)
-      template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Star
       | Star
 
   h2 Toggle with v-model
@@ -55,7 +45,7 @@ div.tooltips-wrapper
     @click="showTooltip = !showTooltip"
     bg-color="primary"
     dark
-    width="7em")
+    width="6em")
     | {{ showTooltip ? 'Hide' : 'Show' }} tooltip
 
   .w-flex.wrap.py-6
@@ -91,14 +81,14 @@ div.tooltips-wrapper
         w-icon.ma-2(v-on="on" xl color="purple") wi-star
       | Star
 
-    w-tooltip(color="orange" bg-color="yellow-lighter-3")
+    w-tooltip(color="orange-darker-1" bg-color="yellow-lighter-3")
       template(v-slot:activator="{ on }")
         w-icon.ma-2(v-on="on" xl color="amber") wi-star
       | Star
 
     w-tooltip(color="orange" no-border)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl color="") wi-star
+        w-icon.ma-2(v-on="on" xl) wi-star
       | Star
 
   h2 Different contents
@@ -120,28 +110,39 @@ div.tooltips-wrapper
       | Recusandae distinctio perferendis expedita pariatur fuga.
 
   h2 Transitions
-    w-tooltip(transition="bounce")
+  w-radios.my-4(inline v-model="transition" :items="transitions")
+  .w-flex.wrap.py-6
+    w-tooltip(:transition="transition" left)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+        w-icon.ma-2(v-on="on" color="primary" xl) mdi mdi-home
       | Home
-    w-tooltip(transition="bounce" top)
+    w-tooltip(:transition="transition")
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+        w-icon.ma-2(v-on="on" color="primary" xl) mdi mdi-home
       | Home
-    w-tooltip(transition="bounce" left)
+    w-tooltip(:transition="transition" top)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+        w-icon.ma-2(v-on="on" color="primary" xl) mdi mdi-home
       | Home
-    w-tooltip(transition="bounce" right)
+    w-tooltip(:transition="transition" right)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+        w-icon.ma-2(v-on="on" color="primary" xl) mdi mdi-home
       | Home
 </template>
 
 <script>
 export default {
   data: () => ({
-    showTooltip: false
+    showTooltip: false,
+    transition: 'bounce',
+    transitions: [
+      { label: 'Default', value: '' },
+      { label: 'Bounce', value: 'bounce' },
+      { label: 'Scale', value: 'scale' },
+      { label: 'Twist', value: 'twist' },
+      { label: 'Fade', value: 'fade' },
+      { label: 'Scale-fade', value: 'scale-fade' }
+    ]
   })
 }
 </script>
