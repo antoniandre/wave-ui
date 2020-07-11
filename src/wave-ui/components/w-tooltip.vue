@@ -18,9 +18,12 @@
  * can't have children like <input>.
  * So a solution is to mount both the activator element and the tooltip in a wrapper then unwrap
  * and move the tooltip elsewhere in the DOM.
+ *
+ * @todo Add an option to attach tooltip to its activator.
+ *       It would simplify the calculations and avoid DOM manipulation.
  */
 
-// import { consoleWarn } from '../utils/console'
+import { consoleWarn } from '../utils/console'
 
 export default {
   name: 'w-tooltip',
@@ -62,8 +65,16 @@ export default {
       let target = this.attachTo || '.w-app'
       if (target === true) target = '.w-app'
       else if (target && !['object', 'string'].includes(typeof target)) target = '.w-app'
-      else if (typeof target === 'object' && !target.nodeType) target = '.w-app'
+      else if (typeof target === 'object' && !target.nodeType) {
+        target = '.w-app'
+        consoleWarn(`Invalid node provided to w-tooltip attach to. Falling back to w-app.`, this)
+      }
       if (typeof target === 'string') target = document.querySelector(target)
+
+      if (!target) {
+        consoleWarn(`Unable to locate ${this.attachTo ? `target ${this.attachTo}` : '.w-app'}`, this)
+        target = document.querySelector('.w-app')
+      }
 
       return target
     },
