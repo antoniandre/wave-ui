@@ -139,8 +139,6 @@ export default {
       if (e.type === 'mouseleave' && !this.showOnClick) this.showTooltip = false
 
       if (this.showTooltip) this.coordinates = this.getCoordinates(e)
-      // Could be useful to have this class?
-      e.target.classList[this.showTooltip ? 'add' : 'remove']('w-tooltip-activator')
     },
 
     getCoordinates (e) {
@@ -158,9 +156,12 @@ export default {
         tooltipEl.style.display = 'block'
 
         // If tooltip is on top or bottom.
-        coords.left -= tooltipEl.offsetWidth / 2
+        if (['top', 'bottom'].includes(this.position)) coords.left -= tooltipEl.offsetWidth / 2
         // If tooltip is on left or right.
-        coords.top -= tooltipEl.offsetHeight / 2
+        if (['left', 'right'].includes(this.position)) coords.top -= tooltipEl.offsetHeight / 2
+
+        if (this.position === 'left') coords.left -= tooltipEl.offsetWidth
+        if (this.position === 'top') coords.top -= tooltipEl.offsetHeight
 
         tooltipEl.style.visibility = null
         tooltipEl.style.display = 'none'
