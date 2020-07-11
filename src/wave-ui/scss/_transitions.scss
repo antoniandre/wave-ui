@@ -1,7 +1,12 @@
 // Fade.
 // --------------------------------------------------------
-.fade-enter-active, .fade-leave-active {transition: opacity $transition-duration;}
-.fade-enter, .fade-leave-to {opacity: 0;}
+.fade-enter-active {animation: w-fade $transition-duration;}
+.fade-leave-active {animation: w-fade $transition-duration reverse;}
+@keyframes w-fade {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
 // --------------------------------------------------------
 
 // Slide-right: translate x from left to right.
