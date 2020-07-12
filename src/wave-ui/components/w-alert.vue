@@ -1,5 +1,12 @@
 <template lang="pug">
-  .w-alert(v-if="value" :class="classes")
+  .w-alert-wrapper(v-if="needsWrapper" :class="wrapperClasses")
+    .w-alert(v-if="value" :class="classes")
+      template(v-if="type")
+        w-icon.mr-2 wi-{{ icon }}
+        .w_alert__content
+          slot
+      slot(v-else)
+  .w-alert(v-else-if="value" :class="classes")
     template(v-if="type")
       w-icon.mr-2 wi-{{ icon }}
       .w_alert__content
@@ -12,7 +19,6 @@ export default {
   name: 'w-alert',
   props: {
     value: { default: true }, // Show or hide.
-    // transition: { type: [String, Boolean], default: false },
     type: { type: [String, Boolean], default: false },
     color: { type: [String, Boolean], default: false },
     bgColor: { type: [String, Boolean], default: false },
@@ -62,6 +68,12 @@ export default {
       return position
     },
 
+    // Needs a wrapper when absolute or fixed and using the transform: translateX(-50%) CSS rule.
+    // CSS transitions like bounce also use transform and it would jump at the start of the animation.
+    needsWrapper () {
+      return this.value && (this.fixed || this.absolute)
+    },
+
     classes () {
       return {
         [`${this.bgColor || (this.plain && this.type)}--bg w-alert--bg`]: this.bgColor || (this.plain && this.type),
@@ -77,9 +89,14 @@ export default {
         'w-alert--border-right': !this.noBorder && this.borderRight,
         'w-alert--border-top': !this.noBorder && this.borderTop,
         'w-alert--border-bottom': !this.noBorder && this.borderBottom,
-        'w-alert--shadow': this.shadow,
-        'w-alert--fixed': this.fixed,
-        'w-alert--absolute': !this.fixed && this.absolute,
+        'w-alert--shadow': this.shadow
+      }
+    },
+
+    wrapperClasses () {
+      return {
+        'w-alert-wrapper--fixed': this.fixed,
+        'w-alert-wrapper--absolute': !this.fixed && this.absolute,
         [this.position.join(' ')]: this.fixed || this.absolute
       }
     }
@@ -88,6 +105,25 @@ export default {
 </script>
 
 <style lang="scss">
+.w-alert-wrapper {
+  display: flex;
+
+  // Position.
+  &--fixed, &--absolute {
+    left: 2 * $base-increment;
+    right: 2 * $base-increment;
+    justify-content: center;
+  }
+  &--fixed {position: fixed;z-index: 400;}
+  &--absolute {position: absolute;}
+  &.top {top: 2 * $base-increment;}
+  &.bottom {bottom: 2 * $base-increment;}
+  &.left {justify-content: flex-start;right: auto;}
+  &.right {justify-content: flex-end;left: auto;}
+
+  .w-alert {margin: 0;}
+}
+
 .w-alert {
   position: relative;
   margin-top: 4 * $base-increment;
@@ -102,21 +138,6 @@ export default {
     display: flex;
     align-items: center;
   }
-
-  // Position.
-  &--fixed, &--absolute {
-    position: fixed;
-    background-color: #fff;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  &--fixed {z-index: 400;}
-  &--absolute {position: absolute;}
-  &.top {top: 2 * $base-increment;}
-  &.bottom {bottom: 2 * $base-increment;}
-  &.top, &.bottom {left: 50%;transform: translateX(-50%);}
-  &.left {left: 2 * $base-increment;transform: none;}
-  &.right {left: auto;right: 2 * $base-increment;transform: none;}
 
   &--outline {border-color: currentColor;}
   &--tile {border-radius: 0;}
