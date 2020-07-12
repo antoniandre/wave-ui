@@ -64,7 +64,7 @@ export default {
         { label: 'Tooltip', route: 'w-tooltip' },
         {
           label: 'Form elements',
-          route: '#form',
+          route: 'form',
           children: [
             { label: 'Checkbox', route: 'w-checkbox' },
             { label: 'Input', route: 'w-input' },
@@ -97,10 +97,10 @@ div.nav-menu {
     border-left: 2px solid transparent;
     &:before {display: none;}
 
-    &.router-link-exact-active {
+    &.router-link-active {
       border-left-color: $primary;
       font-weight: 700;
-      &:before {display: block;}
+      &:before {display: block;opacity: 0.15;}
     }
     &:before {left: -2px;}
   }
