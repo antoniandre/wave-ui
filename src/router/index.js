@@ -52,6 +52,11 @@ const routes = [
     path: '/transitions',
     name: 'transitions',
     component: () => import(/* webpackChunkName: "transitions" */ '@/documentation/views/transitions.vue')
+  },
+  {
+    path: '/form',
+    name: 'form',
+    redirect: '/w-checkbox'
   }
 ]
 

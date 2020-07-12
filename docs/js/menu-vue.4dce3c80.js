@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["menu-vue"],{b9a3:function(t,e,n){"use strict";n.r(e);var l=function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[n("title-link",{staticClass:"mt-4 code",attrs:{h1:""}},[t._v("w-menu")])],1)},s=[],u={},a=u,c=n("2877"),i=Object(c["a"])(a,l,s,!1,null,null,null);e["default"]=i.exports}}]);
+//# sourceMappingURL=menu-vue.4dce3c80.js.map

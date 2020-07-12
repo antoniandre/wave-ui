@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["tabs-vue"],{5773:function(t,e,n){"use strict";n.r(e);var s=function(){var t=this,e=t.$createElement;t._self._c;return t._m(0)},a=[function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[n("h1",{staticClass:"headline mt-4"},[n("span",{staticClass:"code"},[t._v("w-tabs")])])])}],c={},l=c,i=n("2877"),r=Object(i["a"])(l,s,a,!1,null,null,null);e["default"]=r.exports}}]);
-//# sourceMappingURL=tabs-vue.f50979eb.js.map
