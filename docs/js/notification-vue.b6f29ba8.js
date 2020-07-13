@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["notification-vue"],{e9d1:function(t,n,e){"use strict";e.r(n);var i=function(){var t=this,n=t.$createElement,e=t._self._c||n;return e("div",[e("title-link",{staticClass:"mt-4 code",attrs:{h1:""}},[t._v("w-notification")])],1)},a=[],c={},l=c,o=e("2877"),s=Object(o["a"])(l,i,a,!1,null,null,null);n["default"]=s.exports}}]);
-//# sourceMappingURL=notification-vue.b6f29ba8.js.map
