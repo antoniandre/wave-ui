@@ -32,12 +32,3 @@ div
     li breakpoints
     li presets
 </template>
-
-<script>
-import SshPre from 'simple-syntax-highlighter'
-import 'simple-syntax-highlighter/dist/sshpre.css'
-
-export default {
-  components: { SshPre }
-}
-</script>

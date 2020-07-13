@@ -2,8 +2,11 @@
 div
   title-link.mt-4(h1) Breakpoints
 
-  p
-    | By default, 5 breakpoints are set:
+  w-card.blue-lighter-5--bg
+    .title.mt-0 Current breakpoint: #[code {{ this.$waveUI.breakpoint.name }}]
+    em.grey.mt-1 Resizing your browser will update the current breakpoint.
+
+  p.mt-6 By default, 5 breakpoints are set:
   ul
     li.mb-1
       code.mr-2 xs
@@ -37,7 +40,7 @@ div
       code xl
 
   p.mt-4 You can override the breakpoints with.
-  pre.
+  ssh-pre(language="js" dark).
     const waveui = new WaveUI({
       breakpoints: {
         xs: 550,
@@ -47,9 +50,6 @@ div
         xl: 4000 // Xl only needs a greater value than lg but starts from lg
       }
     })
-
-  p.mt-6 Resizing your browser will update the current breakpoint.
-  .title.mt-0 Current breakpoint: #[code {{ this.$waveUI.breakpoint.name }}]
 </template>
 
 <script>
