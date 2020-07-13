@@ -18,11 +18,11 @@
           color="primary")
     w-transition-expand(y)
       .example__source(v-show="showSource")
-        ssh-pre(v-if="$slots.html" language="html-vue" label="TEMPLATE")
+        ssh-pre(v-if="$slots.html" language="html-vue" label="TEMPLATE" dark)
           slot(name="html")
-        ssh-pre(v-if="$slots.js" language="js" label="JS")
+        ssh-pre(v-if="$slots.js" language="js" label="JS" dark)
           slot(name="js")
-        ssh-pre(v-if="$slots.css" language="css" label="CSS")
+        ssh-pre(v-if="$slots.css" language="css" label="CSS" dark)
           slot(name="css")
 </template>
 
@@ -60,30 +60,28 @@ export default {
 
   &__render {padding: 12px;}
 
-  &__source {
-    .ssh-pre {
-      padding: 0.7em;
-      margin: 0;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-width: 1px 0 0;
-      background-color: rgba(0, 0, 0, 0.8);
-      border-radius: 0;
-      font-family: arial;
-      color: rgba(255, 255, 255, 0.85);
-    }
+  pre.ssh-pre {
+    margin: 0;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-width: 1px 0 0;
+    background-color: rgba(0, 0, 0, 0.83);
+    border-radius: 0;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.3;
 
-    .ssh-pre[data-label]:before {
-      content: attr(data-label);
-      bottom: auto;
-      top: 2px;
-      right: 4px;
-      padding: 0;
-      background-color: transparent;
-      border: none;
-      color: #797979;
-      text-shadow: -1px -1px 0 #1b1b1b;
-      font-weight: bold;
-    }
+    &:last-child {border-radius: 0 0 4px 4px;}
+  }
+
+  pre.ssh-pre[data-label]:before {
+    font-family: arial;
+    bottom: auto;
+    top: 4px;
+    right: 6px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: #797979;
+    text-shadow: -1px -1px 0 #1b1b1b;
   }
 }
 </style>
