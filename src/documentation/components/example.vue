@@ -41,20 +41,26 @@ export default {
       ]
 
       const cssDeps = [
-        'https://cdn.materialdesignicons.com/5.1.45/css/materialdesignicons.min.css'
+        'https://cdn.materialdesignicons.com/5.1.45/css/materialdesignicons.min.css',
+        'https://cdn.jsdelivr.net/npm/the-wave-ui@0.1.0-alpha.2/dist/wave-ui.css'
       ]
 
       const jsDeps = [
-        'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js'
+        'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js',
+        'https://cdn.jsdelivr.net/npm/the-wave-ui@0.1.0-alpha.2/dist/wave-ui.umd.min.js'
       ]
 
-      const html = `<div id="app">\n  ${this.$slots.html && this.$slots.html[0].text || ''}\n</div>`
+      const html = '<div id="app">\n' +
+                   '  <w-app>\n' +
+                   `    ${this.$slots.html && this.$slots.html[0].text || ''}` +
+                   '  </w-app>\n' +
+                   '</div>'
+      const css = 'body {font-family: sans-serif;padding: 24px;}\n' +
+                  (this.$slots.css && this.$slots.css[0].text || '')
       const js = 'new Vue({\n' +
                  '  el: \'#app\',\n' +
-                 '  data () {\n' +
-                 '    return {\n' +
-                 '    }\n' +
-                 '  }\n' +
+                 '  data: () => ({\n' +
+                 '  })\n' +
                  '})\n'
 
       const data = {
@@ -63,9 +69,9 @@ export default {
         layout: 'top',
         html,
         html_pre_processor: 'none',
-        css: this.$slots.css && this.$slots.css[0].text || '',
-        css_pre_processor: 'sass',
-        // css_starter: 'normalize' || 'reset' || 'neither',
+        css,
+        css_pre_processor: 'scss',
+        css_starter: 'reset',
         js,
         js_pre_processor: 'babel',
         css_external: cssDeps.join(';'),
