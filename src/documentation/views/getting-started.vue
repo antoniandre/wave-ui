@@ -5,11 +5,11 @@ div
   title-link(h2) Installation
 
   h3 Download from NPM
-  code npm i --D the-wave-ui
+  ssh-pre(language="bash" dark).
+    npm i --D the-wave-ui
 
   h3 Import in your project
-  p In main.js
-  pre.
+  ssh-pre(language="js" label="main.js" dark).
     import Vue from 'vue'
     import App from './app'
     import WaveUI from 'the-wave-ui'
@@ -32,3 +32,12 @@ div
     li breakpoints
     li presets
 </template>
+
+<script>
+import SshPre from 'simple-syntax-highlighter'
+import 'simple-syntax-highlighter/dist/sshpre.css'
+
+export default {
+  components: { SshPre }
+}
+</script>
