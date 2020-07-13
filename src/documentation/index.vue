@@ -37,12 +37,15 @@ w-app.fill-height.w-flex.column
 
 <script>
 import Vue from 'vue'
+import SshPre from 'simple-syntax-highlighter'
+import 'simple-syntax-highlighter/dist/sshpre.css'
 import TitleLink from '@/documentation/components/title-link'
 import Example from '@/documentation/components/example'
 import Toolbar from '@/documentation/components/toolbar'
 import NavMenu from '@/documentation/components/nav-menu'
 import '@/documentation/scss/index.scss'
 
+Vue.component('ssh-pre', SshPre)
 Vue.component('title-link', TitleLink)
 Vue.component('example', Example)
 

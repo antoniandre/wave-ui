@@ -5,7 +5,7 @@ div
   title-link(h2) Basic overrides
   //- p Wave UI components are pixel-based to avoid flickering on half-pixel value.
   p Wave UI components rely on SCSS variables that you can easily override from Your SCSS file:
-  pre.
+  ssh-pre(language="scss" dark).
     // First import the Wave UI variables, then override what you want.
     @import '~wave-ui/src/scss/variables';
 
@@ -22,9 +22,12 @@ div
 
   title-link(h2) Give Wave UI CSS more priority
   p It is also possible to control Wave UI CSS rules priorities by overriding the CSS base scope:
-  pre $css-scope: '.w-app';
+  ssh-pre(language="scss" dark) $css-scope: '.w-app';
 
-  title-link(h2) Presets
-  h3 Buttons
-  span.code w-button { sm: true, outlined: true, round: true }
+  title-link(h2) Presets - COMING SOON
+  ssh-pre(language="js" dark).
+    // Buttons example.
+    {
+      'w-button': { sm: true, outlined: true, round: true }
+    }
 </template>
