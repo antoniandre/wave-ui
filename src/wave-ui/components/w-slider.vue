@@ -1,5 +1,6 @@
 <template lang="pug">
   .w-slider(:class="classes" :style="styles")
+    input(type="range")
     slot
 </template>
 
