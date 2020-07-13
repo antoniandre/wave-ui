@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["tabs-vue"],{5773:function(t,e,n){"use strict";n.r(e);var s=function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[n("title-link",{staticClass:"mt-4 code",attrs:{h1:""}},[t._v("w-tabs")])],1)},a=[],l={},c=l,i=n("2877"),u=Object(i["a"])(c,s,a,!1,null,null,null);e["default"]=u.exports}}]);
-//# sourceMappingURL=tabs-vue.df2447a1.js.map
