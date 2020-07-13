@@ -41,7 +41,8 @@ export default {
       paddingRight: 0,
       paddingTop: 0,
       paddingBottom: 0
-    }
+    },
+    cleanTransitionCycle: true
   }),
 
   computed: {
@@ -57,36 +58,49 @@ export default {
     beforeAppear (el) {
       // Only save original state once before a 'clean' transition start.
       // Not when clicking very fast and mixing states order.
-      this.saveOriginalStyles(el)
+      if (this.cleanTransitionCycle) this.saveOriginalStyles(el)
+      this.cleanTransitionCycle = false
     },
     appear (el, done) {
       this.show(el)
       setTimeout(done, this.duration)
+      this.cleanTransitionCycle = false
     },
     afterAppear (el) {
       this.applyOriginalStyles(el)
+      // May be transitioning with v-show, if so don't reapply display none.
+      el.style.cssText = el.style.cssText.replace('display: none;', '')
+      this.cleanTransitionCycle = false
     },
     beforeEnter (el) {
       // Only save original state once before a 'clean' transition start.
       // Not when clicking very fast and mixing states order.
-      this.saveOriginalStyles(el)
+      if (this.cleanTransitionCycle) this.saveOriginalStyles(el)
+      this.cleanTransitionCycle = false
     },
     enter (el, done) {
       this.show(el)
       setTimeout(done, this.duration)
+      this.cleanTransitionCycle = false
     },
     afterEnter (el) {
       this.applyOriginalStyles(el)
+      // May be transitioning with v-show, if so don't reapply display none.
+      el.style.cssText = el.style.cssText.replace('display: none;', '')
+      this.cleanTransitionCycle = false
     },
     beforeLeave (el) {
       this.beforeHide(el)
+      this.cleanTransitionCycle = false
     },
     leave (el, done) {
       this.hide(el)
       setTimeout(done, this.duration)
+      this.cleanTransitionCycle = false
     },
     afterLeave (el) {
       this.applyOriginalStyles(el)
+      this.cleanTransitionCycle = true
     },
 
     applyHideStyles (el) {
