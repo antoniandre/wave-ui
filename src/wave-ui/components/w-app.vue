@@ -12,7 +12,7 @@ const breakpointsValues = Object.values(config.breakpoints)
 export default {
   name: 'w-app',
   props: {
-    dark: { type: Boolean, default: false }
+    dark: { type: Boolean }
   },
 
   data: () => ({

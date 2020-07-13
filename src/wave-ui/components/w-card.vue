@@ -20,9 +20,9 @@ export default {
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     cardTitle: { type: String, default: '' },
-    shadow: { type: Boolean, default: false },
-    noBorder: { type: Boolean, default: false },
-    tile: { type: Boolean, default: false },
+    shadow: { type: Boolean },
+    noBorder: { type: Boolean },
+    tile: { type: Boolean },
     contentClass: { type: String, default: '' },
   },
 

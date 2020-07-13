@@ -26,9 +26,9 @@ export default {
     name: { type: String, default: '' },
     label: { type: String, default: '' },
     color: { type: String, default: 'primary' },
-    thin: { type: Boolean, default: false },
-    disabled: { type: Boolean, default: false },
-    noRipple: { type: Boolean, default: false }
+    thin: { type: Boolean },
+    disabled: { type: Boolean },
+    noRipple: { type: Boolean }
   },
 
   data () {

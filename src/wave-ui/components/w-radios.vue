@@ -23,7 +23,7 @@ export default {
     labelPosition: { type: String, default: '' }, // @todo: add a validator (left or right).
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
-    inline: { type: Boolean, default: false },
+    inline: { type: Boolean },
     color: { type: String, default: 'primary' }
   },
 
