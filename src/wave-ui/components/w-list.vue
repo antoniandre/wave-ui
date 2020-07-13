@@ -95,14 +95,14 @@ export default {
   props: {
     items: { type: Array, required: true }, // All the possible options.
     value: {}, // v-model on selected item if any.
-    checklist: { type: Boolean, default: false },
-    roundCheckboxes: { type: Boolean, default: false }, // Checklist option.
+    checklist: { type: Boolean },
+    roundCheckboxes: { type: Boolean }, // Checklist option.
     // If selectable (if value !== false), this allows multiple selections.
-    multiple: { type: Boolean, default: false },
-    hover: { type: Boolean, default: false },
+    multiple: { type: Boolean },
+    hover: { type: Boolean },
     color: { type: String, default: null },
     // Navigation type adds a router-link on items with `route`.
-    nav: { type: Boolean, default: false },
+    nav: { type: Boolean },
     icon: { type: String, default: '' },
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
     itemValue: { type: String, default: 'value' }, // Name of the value field.

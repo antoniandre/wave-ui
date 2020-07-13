@@ -49,19 +49,19 @@ export default {
     placeholder: { type: String, default: '' },
     color: { type: String, default: 'primary' },
     bgColor: { type: String, default: '' },
-    disabled: { type: Boolean, default: false },
-    readonly: { type: Boolean, default: false },
-    required: { type: Boolean, default: false },
+    disabled: { type: Boolean },
+    readonly: { type: Boolean },
+    required: { type: Boolean },
     minlength: { type: [String, Number], default: '' },
     maxlength: { type: [String, Number], default: '' },
     step: { type: [String, Number], default: '' },
     min: { type: [String, Number], default: '' },
     max: { type: [String, Number], default: '' },
-    dark: { type: Boolean, default: false },
-    outline: { type: Boolean, default: false },
-    round: { type: Boolean, default: false },
-    shadow: { type: Boolean, default: false },
-    tile: { type: Boolean, default: false }
+    dark: { type: Boolean },
+    outline: { type: Boolean },
+    round: { type: Boolean },
+    shadow: { type: Boolean },
+    tile: { type: Boolean }
   },
 
   data () {

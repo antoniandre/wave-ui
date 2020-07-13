@@ -17,12 +17,12 @@ export default {
   props: {
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
-    xs: { type: Boolean, default: false },
-    sm: { type: Boolean, default: false },
-    md: { type: Boolean, default: false },
-    lg: { type: Boolean, default: false },
-    xl: { type: Boolean, default: false },
-    spin: { type: Boolean, default: false },
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean },
+    spin: { type: Boolean },
     size: { type: [String, Number], default: null },
   },
 

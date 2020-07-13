@@ -21,15 +21,15 @@
 export default {
   name: 'w-dialog',
   props: {
-    value: { type: Boolean, default: false },
+    value: { type: Boolean },
     maxWidth: { type: Number, default: 0 },
-    fullscreen: { type: Boolean, default: false },
-    persistent: { type: Boolean, default: false },
-    persistentNoAnimation: { type: Boolean, default: false },
-    tile: { type: Boolean, default: false },
+    fullscreen: { type: Boolean },
+    persistent: { type: Boolean },
+    persistentNoAnimation: { type: Boolean },
+    tile: { type: Boolean },
     transition: { type: String, default: 'fade' }, // @todo: validator.
-    overlayColor: { type: [String, Boolean], default: false },
-    overlayOpacity: { type: [Number, String, Boolean], default: false }
+    overlayColor: { type: [String, Boolean] },
+    overlayOpacity: { type: [Number, String, Boolean] }
   },
 
   data () {

@@ -9,12 +9,12 @@ export default {
   props: {
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
-    absolute: { type: Boolean, default: false },
-    fixed: { type: Boolean, default: false },
-    bottom: { type: Boolean, default: false },
+    absolute: { type: Boolean },
+    fixed: { type: Boolean },
+    bottom: { type: Boolean },
     height: { type: [Number, String], default: null },
-    noBorder: { type: Boolean, default: false },
-    shadow: { type: Boolean, default: false }
+    noBorder: { type: Boolean },
+    shadow: { type: Boolean }
   },
 
   computed: {

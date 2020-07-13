@@ -35,8 +35,8 @@ export default {
     label: { type: String, default: '' },
     labelPosition: { type: String, default: '' }, // @todo: add a validator (left or right).
     color: { type: String, default: 'primary' },
-    disabled: { type: Boolean, default: false },
-    noRipple: { type: Boolean, default: false }
+    disabled: { type: Boolean },
+    noRipple: { type: Boolean }
   },
 
   data () {

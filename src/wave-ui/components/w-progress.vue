@@ -39,25 +39,25 @@ export default {
   name: 'w-progress',
   props: {
     value: { type: [Number, String, Boolean], default: -1 },
-    label: { type: Boolean, default: false },
-    roundCap: { type: Boolean, default: false },
+    label: { type: Boolean },
+    roundCap: { type: Boolean },
     color: { type: String, default: 'primary' },
     bgColor: { type: String, default: '' },
     labelColor: { type: String, default: '' },
     size: { type: [Number, String], default: '' },
 
     // Circular progress thickness.
-    circle: { type: Boolean, default: false },
+    circle: { type: Boolean },
     stroke: { type: [Number, String], default: 4 },
 
     // For linear progress.
-    shadow: { type: Boolean, default: false },
-    tile: { type: Boolean, default: false },
-    round: { type: Boolean, default: false },
-    outline: { type: Boolean, default: false },
-    stripes: { type: Boolean, default: false },
-    absolute: { type: Boolean, default: false },
-    fixed: { type: Boolean, default: false }
+    shadow: { type: Boolean },
+    tile: { type: Boolean },
+    round: { type: Boolean },
+    outline: { type: Boolean },
+    stripes: { type: Boolean },
+    absolute: { type: Boolean },
+    fixed: { type: Boolean }
   },
 
   data: () => ({

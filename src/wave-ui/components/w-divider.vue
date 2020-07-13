@@ -6,7 +6,7 @@
 export default {
   name: 'w-divider',
   props: {
-    vertical: { type: Boolean, default: false },
+    vertical: { type: Boolean },
     color: { type: String, default: null }
   },
 

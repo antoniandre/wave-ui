@@ -15,12 +15,12 @@
 export default {
   name: 'w-overlay',
   props: {
-    value: { type: Boolean, default: false },
-    opacity: { type: [Number, String, Boolean], default: false },
-    bgColor: { type: [String, Boolean], default: false },
-    zIndex: { type: [Number, String, Boolean], default: false },
-    persistent: { type: Boolean, default: false },
-    persistentNoAnimation: { type: Boolean, default: false }
+    value: { type: Boolean },
+    opacity: { type: [Number, String, Boolean] },
+    bgColor: { type: [String, Boolean] },
+    zIndex: { type: [Number, String, Boolean] },
+    persistent: { type: Boolean },
+    persistentNoAnimation: { type: Boolean }
   },
 
   data: () => ({
