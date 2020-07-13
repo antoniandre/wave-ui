@@ -11,7 +11,7 @@
           text
           color="primary")
         w-button(
-          @click=""
+          @click="createCodepen"
           lg
           icon="mdi mdi-codepen"
           text
@@ -29,8 +29,62 @@
 <script>
 export default {
   data: () => ({
-    showSource: false
-  })
+    showSource: false,
+  }),
+
+  methods: {
+    createCodepen (e) {
+      const openEditors = [
+        (!!this.$slots.html) * 1,
+        (!!this.$slots.css) * 1,
+        (!!this.$slots.js) * 1
+      ]
+
+      const cssDeps = [
+        'https://cdn.materialdesignicons.com/5.1.45/css/materialdesignicons.min.css'
+      ]
+
+      const jsDeps = [
+        'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js'
+      ]
+
+      const html = `<div id="app">\n  ${this.$slots.html && this.$slots.html[0].text || ''}\n</div>`
+      const js = 'new Vue({\n' +
+                 '  el: \'#app\',\n' +
+                 '  data () {\n' +
+                 '    return {\n' +
+                 '    }\n' +
+                 '  }\n' +
+                 '})\n'
+
+      const data = {
+        title: 'Wave UI Example Pen',
+        editors: openEditors.join(''),
+        layout: 'top',
+        html,
+        html_pre_processor: 'none',
+        css: this.$slots.css && this.$slots.css[0].text || '',
+        css_pre_processor: 'sass',
+        // css_starter: 'normalize' || 'reset' || 'neither',
+        js,
+        js_pre_processor: 'babel',
+        css_external: cssDeps.join(';'),
+        js_external: jsDeps.join(';')
+      }
+      const JSONstring = JSON.stringify(data).replace(/"/g, '&quot;').replace(/'/g, '&apos;')
+
+      e.target.insertAdjacentHTML(
+        'afterend',
+        `<form class="codepen-form" action="https://codepen.io/pen/define" method="POST" target="_blank">
+          <input type="hidden" name="data" value="${JSONstring}">
+        </form>`
+      );
+
+      const form = document.querySelector('.codepen-form')
+      form.submit()
+      form.remove()
+    }
+  }
 }
 </script>
 
@@ -78,6 +132,12 @@ export default {
     border: none;
     color: #797979;
     text-shadow: -1px -1px 0 #1b1b1b;
+  }
+
+  .codepen-form {
+    position: absolute;
+    z-index: -100;
+    opacity: 0;
   }
 }
 </style>
