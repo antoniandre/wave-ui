@@ -25,8 +25,18 @@ module.exports = {
       .loader('file-loader')
       .options({
         name: 'assets/[name].[hash:8].[ext]',
-      });
-  },
+      })
+
+    // Preserve white spaces for ssh-pre component.
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .loader('vue-loader')
+      .tap(options => {
+        options.compilerOptions.whitespace = 'preserve'
+        return options
+      })
+    },
   css: {
     loaderOptions: {
       sass: {
