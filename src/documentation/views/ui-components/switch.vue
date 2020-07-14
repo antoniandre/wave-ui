@@ -13,7 +13,7 @@ div
     w-switch.mr-3.mb-1(v-model="value")
     span.subtitle
       | v-model value:
-      code {{ value }}
+      code.ml-2 {{ value }}
 
   title-link(h2) Colors
   w-switch.mr-3.mb-1(:value="true" color="pink")
