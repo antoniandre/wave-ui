@@ -9,6 +9,16 @@
     "README.md",
     "LICENSE"
   ],
+  "keywords": [
+    "wave ui",
+    "ui framework",
+    "ui library",
+    "vue ui",
+    "vue framework",
+    "ui"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/antoniandre/wave-ui",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
