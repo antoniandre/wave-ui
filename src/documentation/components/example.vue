@@ -18,6 +18,7 @@
           color="primary")
     w-transition-expand(y)
       .example__source(v-show="showSource")
+        w-button(@click="copySource($event, 'html')" xs text color="primary") Copy
         ssh-pre(v-if="$slots.html" language="html-vue" label="TEMPLATE")
           slot(name="html")
         ssh-pre(v-if="$slots.js" language="js" label="JS")
@@ -89,6 +90,19 @@ export default {
       const form = document.querySelector('.codepen-form')
       form.submit()
       form.remove()
+    },
+
+    copySource (e, source) {
+      const content = this.$slots[source][0].text
+      e.target.insertAdjacentHTML('afterend', `<textarea id="clipboard-textarea">${content}</textarea>`)
+      const textarea = document.getElementById('clipboard-textarea')
+
+      textarea.select()
+      textarea.setSelectionRange(0, 99999) // For mobile devices.
+      document.execCommand('copy')
+      textarea.remove()
+
+      // console.log('Text copied to clipboard!')
     }
   }
 }
@@ -137,7 +151,7 @@ export default {
     color: #aaa;
   }
 
-  .codepen-form {
+  .codepen-form, #clipboard-textarea {
     position: absolute;
     z-index: -100;
     opacity: 0;
