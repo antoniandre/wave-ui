@@ -71,8 +71,9 @@ div.tooltips-demo
 
   title-link(h2 slug="appending-to-a-dom-node") Appending to a particular DOM node
   w-alert.text-light(type="info").
-    This step is important: if you don't append the tooltip to the correct DOM node,
-    you will most likely end up with a tooltip not following its activator on scroll.#[br]
+    This step is important for absolute positionning (default): if you don't append
+    the tooltip to the correct DOM node, you will most likely end up with a tooltip not
+    following its activator on scroll.#[br]
     The DOM element that will receive the tooltip must have a position (fixed, absolute or
     relative).
 
