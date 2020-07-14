@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style lang="scss">
-.main-content {padding-left: 4em;}
+.nav-menu ~ .main-content {padding-left: 4em;}
 
 footer .heart:hover {animation: heartbeat 1s infinite;}
 

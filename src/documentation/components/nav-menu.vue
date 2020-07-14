@@ -107,9 +107,10 @@ div.nav-menu {
 
 .nav-drawer .nav-menu {
   max-width: unset;
-  margin-top: 3em;
+  padding-top: 3em;
   margin-left: 12px;
   border-right: none;
+  overflow: auto;
 
   .close {
     position: absolute;
