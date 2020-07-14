@@ -34,8 +34,6 @@ export default {
     to: { type: [String, Boolean, Object] }, // Creates a link.
     color: { type: String },
     bgColor: { type: String },
-    fixed: { type: Boolean },
-    absolute: { type: Boolean },
     dark: { type: Boolean },
     outline: { type: Boolean },
     text: { type: Boolean },
