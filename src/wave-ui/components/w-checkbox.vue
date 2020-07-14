@@ -10,14 +10,14 @@
       @change="onChange"
       :aria-checked="isChecked || 'false'"
       role="checkbox")
-    template(v-if="hasLabel && labelPosition === 'left'")
+    template(v-if="hasLabel && labelOnLeft")
       label.w-checkbox__label.pr-2(v-if="$slots.default" :for="`checkbox--${_uid}`")
         slot
       label.w-checkbox__label.pr-2(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
     .w-checkbox__input(
       @click="$refs.input.focus();$refs.input.click()"
       :class="this.color")
-    template(v-if="hasLabel && labelPosition !== 'left'")
+    template(v-if="hasLabel && !labelOnLeft")
       label.w-checkbox__label.pl-2(v-if="$slots.default" :for="`checkbox--${_uid}`")
         slot
       label.w-checkbox__label.pl-2(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
@@ -33,7 +33,7 @@ export default {
     returnValue: {},
     name: { type: String, default: '' },
     label: { type: String, default: '' },
-    labelPosition: { type: String, default: '' }, // @todo: add a validator (left or right).
+    labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
     disabled: { type: Boolean },
     noRipple: { type: Boolean },
