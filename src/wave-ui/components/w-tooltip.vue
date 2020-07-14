@@ -247,6 +247,7 @@ export default {
   color: $tooltip-color;
   align-items: center;
   max-width: 300px;
+  width: fit-content; // Not supported in IE11. :/
 
   &--fixed {position: fixed;z-index: 1000;}
 
