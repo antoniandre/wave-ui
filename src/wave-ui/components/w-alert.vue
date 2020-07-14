@@ -157,6 +157,7 @@ export default {
     left: 0;
     right: 0;
     background-color: currentColor;
+    pointer-events: none;
   }
 
   // Single side border.

@@ -77,11 +77,18 @@ div
         w-icon.mr-2 wi-check
         | I agree
   p You can then store the result of the acceptation in the localStorage.
-  pre.
-    w-button.ml-auto(sm bg-color="primary" dark @click="acceptCookies")
-      w-icon.mr-2 wi-check
-      | I agree
+  ssh-pre(language="html-vue" label="Template").
+    &lt;w-button
+      class="ml-auto"
+      sm
+      bg-color="primary"
+      dark
+      @click="acceptCookies"&gt;
+      &lt;w-icon class="mr-2"&gt;wi-check&lt;/w-icon&gt;
+      I agree
+    &lt;/w-button&gt;
 
+  ssh-pre(language="js" label="Javascript").
     acceptCookies () {
       localStorage.acceptCookies = 'yes'
       this.showCookieNotice = false

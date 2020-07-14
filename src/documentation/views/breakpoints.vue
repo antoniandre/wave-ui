@@ -40,14 +40,14 @@ div
       code xl
 
   p.mt-4 You can override the breakpoints with.
-  ssh-pre(language="js" dark).
+  ssh-pre(language="js").
     const waveui = new WaveUI({
       breakpoints: {
         xs: 550,
         sm: 900,
         md: 1200,
         lg: 1700,
-        xl: 4000 // Xl only needs a greater value than lg but starts from lg
+        xl: 4000 // Xl only needs to be greater than lg but starts from lg &amp; goes to infinity.
       }
     })
 </template>

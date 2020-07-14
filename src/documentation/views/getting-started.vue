@@ -5,11 +5,11 @@ div
   title-link(h2) Installation
 
   h3 Download from NPM
-  ssh-pre(language="bash" dark).
+  ssh-pre(language="bash").
     npm i --D the-wave-ui
 
   h3 Import in your project
-  ssh-pre(language="js" label="main.js" dark).
+  ssh-pre(language="js" label="main.js").
     import Vue from 'vue'
     import App from './app'
     import WaveUI from 'the-wave-ui'
