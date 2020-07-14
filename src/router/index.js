@@ -76,7 +76,6 @@ const components = [
   { id: 'input', label: 'Input' },
   { id: 'list', label: 'List' },
   { id: 'menu', label: 'Menu' },
-  { id: 'notification', label: 'Notification' },
   { id: 'overlay', label: 'Overlay' },
   { id: 'progress', label: 'Progress' },
   { id: 'rating', label: 'Rating' },
