@@ -6,22 +6,22 @@ div.tooltips-demo
   .w-flex.wrap.py-6
     w-tooltip(attach-to=".tooltips-demo" left)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+        w-icon.ma-2(v-on="on" xl color="primary-lighter-2") mdi mdi-home
       | Home
 
     w-tooltip(attach-to=".tooltips-demo" top)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+        w-icon.ma-2(v-on="on" xl color="primary-lighter-2") mdi mdi-home
       | Home
 
     w-tooltip
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+        w-icon.ma-2(v-on="on" xl color="primary-lighter-2") mdi mdi-home
       | Home
 
     w-tooltip(attach-to=".tooltips-demo" right)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl) mdi mdi-home
+        w-icon.ma-2(v-on="on" xl color="primary-lighter-2") mdi mdi-home
       | Home
 
   title-link(h2) Toggle on click
@@ -41,14 +41,14 @@ div.tooltips-demo
       | Star
 
   title-link(h2) Toggle with v-model
-  w-button(
-    @click="showTooltip = !showTooltip"
-    bg-color="primary"
-    dark
-    width="6em")
-    | {{ showTooltip ? 'Hide' : 'Show' }} tooltip
-
   .w-flex.wrap.py-6
+    w-button.mr-12(
+      @click="showTooltip = !showTooltip"
+      bg-color="primary"
+      dark
+      width="6em")
+      | {{ showTooltip ? 'Hide' : 'Show' }} tooltip
+
     w-tooltip(attach-to=".tooltips-demo" v-model="showTooltip" show-on-click left)
       template(v-slot:activator="{ on }")
         span.ma-2(v-on="on") Star
@@ -68,6 +68,13 @@ div.tooltips-demo
       template(v-slot:activator="{ on }")
         span.ma-2(v-on="on") Star
       | Star
+
+  title-link(h2 slug="appending-to-a-dom-node") Appending to a particular DOM node
+  w-alert.text-light(type="info").
+    This step is important: if you don't append the tooltip to the correct DOM node,
+    you will most likely end up with a tooltip not following its activator on scroll.#[br]
+    The DOM element that will receive the tooltip must have a position (fixed, absolute or
+    relative).
 
   title-link(h2) Background color &amp; text color
   .w-flex.wrap.py-6
@@ -90,6 +97,21 @@ div.tooltips-demo
       template(v-slot:activator="{ on }")
         w-icon.ma-2(v-on="on" xl) wi-star
       | Star
+
+  title-link(h2) Tile, round and shadow
+  .w-flex.wrap.py-6
+    w-tooltip(attach-to=".tooltips-demo" color="red-lighter-2" tile)
+      template(v-slot:activator="{ on }")
+        w-icon.ma-2(v-on="on" xl color="red-lighter-2") mdi mdi-square
+      | Tile
+    w-tooltip(attach-to=".tooltips-demo" color="amber-darker-1" round)
+      template(v-slot:activator="{ on }")
+        w-icon.ma-2(v-on="on" xl color="amber") mdi mdi-circle
+      | Round
+    w-tooltip(attach-to=".tooltips-demo" color="pink-lighter-1" shadow)
+      template(v-slot:activator="{ on }")
+        w-icon.ma-2(v-on="on" xl color="pink-lighter-1") mdi mdi-heart
+      | Shadow
 
   title-link(h2) Different contents
   .w-flex.wrap.py-6
