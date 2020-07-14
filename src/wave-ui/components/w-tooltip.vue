@@ -1,10 +1,10 @@
 <template lang="pug">
 .w-tooltip-wrapper(ref="wrapper")
-  slot(name="activator" :on="eventHandlers" v-inserted)
-  transition(:name="this.transitionName")
+  slot(name="activator" :on="eventHandlers")
+  transition(:name="transitionName")
     .w-tooltip(ref="tooltip" v-show="showTooltip" :class="classes" :style="styles")
-      //- When there is a bg color, another div wrapper is needed for
-      //- the triangle to inherit the current color.
+      //- When there is a bg color, another div wrapper is needed for the triangle
+      //- to inherit the current color.
       div(v-if="bgColor" :class="color")
         slot
       slot(v-else)
@@ -30,17 +30,21 @@ export default {
   props: {
     value: {},
     showOnClick: { type: Boolean },
+    color: { type: String, default: '' },
+    bgColor: { type: String, default: '' },
+    noBorder: { type: String, default: '' },
+    shadow: { type: Boolean },
+    tile: { type: Boolean },
+    round: { type: Boolean },
+    transition: { type: String, default: '' },
+    // Position.
     attachTo: {},
     fixed: { type: Boolean },
     top: { type: Boolean },
     bottom: { type: Boolean },
     left: { type: Boolean },
     right: { type: Boolean },
-    zIndex: { type: [Number, String, Boolean] },
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
-    noBorder: { type: String, default: '' },
-    transition: { type: String, default: '' }
+    zIndex: { type: [Number, String, Boolean] }
   },
 
   data: () => ({
@@ -67,7 +71,7 @@ export default {
       else if (target && !['object', 'string'].includes(typeof target)) target = '.w-app'
       else if (typeof target === 'object' && !target.nodeType) {
         target = '.w-app'
-        consoleWarn(`Invalid node provided to w-tooltip attach to. Falling back to w-app.`, this)
+        consoleWarn('Invalid node provided in w-tooltip attach-to. Falling back to w-app.', this)
       }
       if (typeof target === 'string') target = document.querySelector(target)
 
@@ -120,8 +124,12 @@ export default {
 
     classes () {
       return {
+        [this.color]: !this.bgColor,
         [`${this.bgColor} ${this.bgColor}--bg`]: this.bgColor,
         [`w-tooltip--${this.position}`]: true,
+        'w-tooltip--tile': this.tile,
+        'w-tooltip--round': this.round,
+        'w-tooltip--shadow': this.shadow,
         'w-tooltip--fixed': this.fixed,
         'w-tooltip--active': this.showTooltip,
         'w-tooltip--no-border': this.noBorder || this.bgColor,
@@ -138,9 +146,16 @@ export default {
     },
 
     eventHandlers () {
-      let handlers = { keydown: this.toggle, focus: this.toggle }
-      if (this.showOnClick) handlers.click = this.toggle
-      else handlers = { ...handlers, mouseenter: this.toggle, mouseleave: this.toggle }
+      let handlers = {}
+      if (this.showOnClick) handlers = { click: this.toggle }
+      else {
+        handlers = {
+          focus: this.toggle,
+          blur: this.toggle,
+          mouseenter: this.toggle,
+          mouseleave: this.toggle
+        }
+      }
       return handlers
     }
   },
@@ -148,8 +163,8 @@ export default {
   methods: {
     toggle (e) {
       if (e.type === 'click' && this.showOnClick) this.showTooltip = !this.showTooltip
-      if (e.type === 'mouseenter' && !this.showOnClick) this.showTooltip = true
-      if (e.type === 'mouseleave' && !this.showOnClick) this.showTooltip = false
+      else if (['mouseenter', 'focus'].includes(e.type) && !this.showOnClick) this.showTooltip = true
+      else if (['mouseleave', 'blur'].includes(e.type) && !this.showOnClick) this.showTooltip = false
 
       if (this.showTooltip) this.coordinates = this.getCoordinates(e)
     },
@@ -235,6 +250,12 @@ export default {
 
   &--fixed {position: fixed;z-index: 1000;}
 
+  &--tile {border-radius: 0;}
+  &--round {
+    border-radius: 5em;
+    padding: $base-increment round(2.5 * $base-increment);
+  }
+  &--shadow {box-shadow: $box-shadow;}
   &--no-border {border: none;}
 
   &--top {
