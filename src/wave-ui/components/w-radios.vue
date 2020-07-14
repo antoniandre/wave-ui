@@ -5,11 +5,11 @@
       :key="i"
       :name="name || `radios-${_uid}`"
       :label="item.label"
-      :label-position="labelPosition"
+      :label-on-left="labelOnLeft"
       :value="value === item.value"
       :color="color"
       @input="$emit('input', item.value);$emit('change', item.value)"
-      :class="{ 'ml-3': inline && i, 'mt-1': !inline && i }")
+      :class="{ 'mt-1': !inline && i }")
       slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
 
@@ -20,7 +20,7 @@ export default {
     items: { type: Array, required: true }, // All the possible options.
     value: { type: [String, Number, Boolean] }, // v-model on selected option.
     name: { type: String, default: null },
-    labelPosition: { type: String, default: '' }, // @todo: add a validator (left or right).
+    labelOnLeft: { type: Boolean },
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
     inline: { type: Boolean },
@@ -53,6 +53,11 @@ export default {
     align-items: flex-start;
   }
 
-  &--inline {display: inline-flex;}
+  &--inline {
+    display: inline-flex;
+    flex-wrap: wrap;
+
+    .w-radio {margin-right: 3 * $base-increment;}
+  }
 }
 </style>
