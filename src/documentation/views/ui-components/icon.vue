@@ -46,8 +46,8 @@ div
       p
         a(href="https://material.io/resources/icons" target="_blank") Material Design Icons Cheatsheet
 
-      pre npm install material-design-icons
-      pre.mb-4 import 'material-design-icons/iconfont/material-icons.css'
+      ssh-pre(language="bash") npm install material-design-icons
+      ssh-pre(language="js") import 'material-design-icons/iconfont/material-icons.css'
 
       w-icon.mr-1(xs color="primary") material-icons star
       w-icon.mr-1(md color="primary") material-icons star
@@ -62,8 +62,8 @@ div
       p
         a(href="https://materialdesignicons.com" target="_blank") Material Design Icons Cheatsheet
 
-      pre npm install @mdi/font
-      pre.mb-4 import '@mdi/font/css/materialdesignicons.min.css'
+      ssh-pre(language="bash") npm install @mdi/font
+      ssh-pre(language="js") import '@mdi/font/css/materialdesignicons.min.css'
 
       w-icon.mr-1(xs color="primary") mdi mdi-star
       w-icon.mr-1(md color="primary") mdi mdi-star
@@ -78,8 +78,8 @@ div
       p
         a(href="https://ionicons.com/v4/cheatsheet.html" target="_blank") Ionicons V4 Cheatsheet
 
-      pre npm install ionicons
-      pre.mb-4 import 'ionicons/dist/css/ionicons.min.css'
+      ssh-pre(language="bash") npm install ionicons
+      ssh-pre(language="js") import 'ionicons/dist/css/ionicons.min.css'
 
       .w-flex
         div.mr-8
@@ -108,8 +108,8 @@ div
       p
         a(href="https://fontawesome.com/v4.7.0/icons/" target="_blank") Font Awesome V4 Cheatsheet
 
-      pre npm install font-awesome
-      pre.mb-4 import 'font-awesome/css/font-awesome.min.css'
+      ssh-pre(language="bash") npm install font-awesome
+      ssh-pre(language="js") import 'font-awesome/css/font-awesome.min.css'
 
       w-icon.mr-1(xs color="primary") fa fa-star
       w-icon.mr-1(md color="primary") fa fa-star
