@@ -18,11 +18,11 @@
           color="primary")
     w-transition-expand(y)
       .example__source(v-show="showSource")
-        ssh-pre(v-if="$slots.html" language="html-vue" label="TEMPLATE" dark)
+        ssh-pre(v-if="$slots.html" language="html-vue" label="TEMPLATE")
           slot(name="html")
-        ssh-pre(v-if="$slots.js" language="js" label="JS" dark)
+        ssh-pre(v-if="$slots.js" language="js" label="JS")
           slot(name="js")
-        ssh-pre(v-if="$slots.css" language="css" label="CSS" dark)
+        ssh-pre(v-if="$slots.css" language="css" label="CSS")
           slot(name="css")
 </template>
 
@@ -118,26 +118,23 @@ export default {
 
   pre.ssh-pre {
     margin: 0;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: solid rgba(0, 0, 0, 0.1);
     border-width: 1px 0 0;
-    background-color: rgba(0, 0, 0, 0.83);
     border-radius: 0;
-    color: rgba(255, 255, 255, 0.85);
     line-height: 1.3;
 
     &:last-child {border-radius: 0 0 4px 4px;}
   }
 
   pre.ssh-pre[data-label]:before {
-    font-family: arial;
+    font-family: 'Arial Narrow', Arial, sans-serif;
     bottom: auto;
     top: 4px;
     right: 6px;
     padding: 0;
     background-color: transparent;
     border: none;
-    color: #797979;
-    text-shadow: -1px -1px 0 #1b1b1b;
+    color: #aaa;
   }
 
   .codepen-form {
