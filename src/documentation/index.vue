@@ -70,10 +70,7 @@ export default {
 <style lang="scss">
 .main-content {padding-left: 4em;}
 
-footer .heart:hover {
-  animation: heartbeat 1s infinite;
-}
-
+footer .heart:hover {animation: heartbeat 1s infinite;}
 
 @keyframes heartbeat {
   0%, 30%, 60%, 100% {transform: scale(1);}

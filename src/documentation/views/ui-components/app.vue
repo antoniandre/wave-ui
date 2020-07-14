@@ -3,17 +3,11 @@ div
   title-link.mt-4.code(h1) w-app
 
   p.
-    This tag is important for Wave UI proper functionning.#[br]
-    When you place it #[strong at the root of your app], it will convert to
-    #[code &lt;div id="app" class="w-app"&gt;]. It should stand where the Vue instance was mounted.
+    This tag is required in your app for Wave UI proper functionning.#[br]
+    You should place it #[strong at the root of your app].
+
+  ssh-pre(language="html-vue").
+    &lt;w-app&gt;
+      &lt;!-- All your app's content goes here. --&gt;
+    &lt;/w-app&gt;
 </template>
-
-<script>
-export default {
-
-}
-</script>
-
-<style lang="scss">
-
-</style>

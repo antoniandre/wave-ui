@@ -1,5 +1,5 @@
 <template lang="pug">
-  #app.w-app(:class="{ 'theme--dark': dark }")
+  .w-app(:class="{ 'theme--dark': dark }")
     slot
 </template>
 
