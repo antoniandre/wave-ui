@@ -95,7 +95,7 @@ div.tooltips-demo
   .w-flex.wrap.py-6
     w-tooltip(attach-to=".tooltips-demo" color="primary" no-border)
       template(v-slot:activator="{ on }")
-        span.ma-2(v-on="on") Content with icon
+        span.ma-2.mr-8(v-on="on") Content with icon
       w-icon.mr-1 wi-star
       | Star
 
