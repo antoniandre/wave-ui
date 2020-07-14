@@ -2,7 +2,6 @@
   i.w-icon(
     :class="classes"
     v-on="$listeners"
-    @click="$emit('click', $event)"
     role="icon"
     aria-hidden="true"
     :style="styles")

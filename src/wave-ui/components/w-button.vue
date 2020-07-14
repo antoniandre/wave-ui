@@ -6,7 +6,7 @@
     :href="to"
     :class="classes"
     :disabled="!!disabled"
-    @click="$emit('click', $event)"
+    v-on="$listeners"
     :style="styles")
     w-icon(v-if="icon") {{ icon }}
     span(v-else)
