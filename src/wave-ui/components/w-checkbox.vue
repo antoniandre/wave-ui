@@ -10,17 +10,17 @@
       @change="onChange"
       :aria-checked="isChecked || 'false'"
       role="checkbox")
-    template(v-if="labelPosition === 'left'")
-      label.w-checkbox__label(v-if="$slots.default" :for="`checkbox--${_uid}`")
+    template(v-if="hasLabel && labelPosition === 'left'")
+      label.w-checkbox__label.pr-2(v-if="$slots.default" :for="`checkbox--${_uid}`")
         slot
-      label.w-checkbox__label(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
+      label.w-checkbox__label.pr-2(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
     .w-checkbox__input(
       @click="$refs.input.focus();$refs.input.click()"
-      :class="{ 'mr-2': hasLabel, [this.color]: true }")
-    template(v-if="labelPosition !== 'left'")
-      label.w-checkbox__label(v-if="$slots.default" :for="`checkbox--${_uid}`")
+      :class="this.color")
+    template(v-if="hasLabel && labelPosition !== 'left'")
+      label.w-checkbox__label.pl-2(v-if="$slots.default" :for="`checkbox--${_uid}`")
         slot
-      label.w-checkbox__label(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
+      label.w-checkbox__label.pl-2(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
 </template>
 
 <script>
