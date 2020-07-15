@@ -121,7 +121,7 @@ export default {
   &.left {justify-content: flex-start;right: auto;}
   &.right {justify-content: flex-end;left: auto;}
 
-  .w-alert {margin: 0;}
+  .w-alert {margin: 0;background-color: #fff;}
 }
 
 .w-alert {

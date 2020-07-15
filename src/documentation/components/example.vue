@@ -18,19 +18,42 @@
           color="primary")
     w-transition-expand(y)
       .example__source(v-show="showSource")
-        w-button(@click="copySource($event, 'html')" xs text color="primary") Copy
-        ssh-pre(v-if="$slots.html" language="html-vue" label="TEMPLATE")
+        ssh-pre(
+          v-if="$slots.html"
+          language="html-vue"
+          label="TEMPLATE"
+          copy-button
+          @copied="copied")
+          template(#copy-button)
+            w-icon(color="primary") mdi mdi-content-copy
           slot(name="html")
-        ssh-pre(v-if="$slots.js" language="js" label="JS")
+        ssh-pre(
+          v-if="$slots.js"
+          language="js"
+          label="JS"
+          copy-button
+          @copied="copied")
+          template(#copy-button)
+            w-icon(color="primary") mdi mdi-content-copy
           slot(name="js")
-        ssh-pre(v-if="$slots.css" language="css" label="CSS")
+        ssh-pre(
+          v-if="$slots.css"
+          language="css"
+          label="CSS"
+          copy-button
+          @copied="copied")
+          template(#copy-button)
+            w-icon(color="primary") mdi mdi-content-copy
           slot(name="css")
+    w-transition-bounce
+      w-alert(v-if="showCopied" type="success" fixed top right) Text copied to clipboard
 </template>
 
 <script>
 export default {
   data: () => ({
     showSource: false,
+    showCopied: false
   }),
 
   methods: {
@@ -91,18 +114,9 @@ export default {
       form.submit()
       form.remove()
     },
-
-    copySource (e, source) {
-      const content = this.$slots[source][0].text
-      e.target.insertAdjacentHTML('afterend', `<textarea id="clipboard-textarea">${content}</textarea>`)
-      const textarea = document.getElementById('clipboard-textarea')
-
-      textarea.select()
-      textarea.setSelectionRange(0, 99999) // For mobile devices.
-      document.execCommand('copy')
-      textarea.remove()
-
-      // console.log('Text copied to clipboard!')
+    copied () {
+      this.showCopied = true
+      setTimeout(() => (this.showCopied = false), 3000)
     }
   }
 }
@@ -130,8 +144,8 @@ export default {
 
   &__render {padding: 12px;}
 
-  pre.ssh-pre {
-    margin: 0;
+  .ssh-pre {
+    margin: 0 !important;
     border: solid rgba(0, 0, 0, 0.1);
     border-width: 1px 0 0;
     border-radius: 0;
@@ -140,18 +154,23 @@ export default {
     &:last-child {border-radius: 0 0 4px 4px;}
   }
 
-  pre.ssh-pre[data-label]:before {
+  .ssh-pre[data-label]:before {
     font-family: 'Arial Narrow', Arial, sans-serif;
     bottom: auto;
     top: 4px;
-    right: 6px;
+    right: 24px;
     padding: 0;
     background-color: transparent;
     border: none;
     color: #aaa;
   }
 
-  .codepen-form, #clipboard-textarea {
+  .ssh-pre__copy {
+    border: none;
+    background: none;
+  }
+
+  .codepen-form {
     position: absolute;
     z-index: -100;
     opacity: 0;
