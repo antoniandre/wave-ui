@@ -74,6 +74,7 @@ export default {
     flex-wrap: wrap;
 
     .w-checkbox {margin-right: 3 * $base-increment;}
+    .w-checkbox:last-child {margin-right: 0;}
   }
 }
 </style>

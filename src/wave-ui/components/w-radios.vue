@@ -58,6 +58,7 @@ export default {
     flex-wrap: wrap;
 
     .w-radio {margin-right: 3 * $base-increment;}
+    .w-radio:last-child {margin-right: 0;}
   }
 }
 </style>
