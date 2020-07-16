@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["form-vue"],{"97f8":function(t,o,s){"use strict";s.r(o);var e=function(){var t=this,o=t.$createElement,s=t._self._c||o;return s("div",[s("title-link",{staticClass:"mt-4 code",attrs:{h1:"",slug:"w-form"}},[t._v("w-form"),s("w-tag",{staticClass:"ml-3",attrs:{"bg-color":"red",color:"white"}},[t._v("Coming soon")])],1)],1)},l=[],n={},r=n,a=s("2877"),c=Object(a["a"])(r,e,l,!1,null,null,null);o["default"]=c.exports}}]);
+//# sourceMappingURL=form-vue.cda93bbe.js.map
