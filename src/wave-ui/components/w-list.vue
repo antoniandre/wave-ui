@@ -12,7 +12,10 @@ const renderListItems = function (createEl) {
     if (li.children) {
       vnodes.push(createEl(
         'w-list',
-        { props: { ...this.$props, items: li.children, depth: this.depth + 1 } }
+        {
+          props: { ...this.$props, items: li.children, depth: this.depth + 1 },
+          scopedSlots: { item: this.$scopedSlots.item }
+        }
       ))
     }
 
