@@ -82,7 +82,9 @@ export default {
     },
 
     styles () {
-      return false
+      return {
+        zIndex: this.zIndex || this.zIndex === 0 || null
+      }
     }
   },
 
