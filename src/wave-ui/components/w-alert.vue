@@ -12,6 +12,11 @@ export default {
   name: 'w-alert',
   props: {
     value: { default: true }, // Show or hide.
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean },
     type: { type: [String, Boolean] },
     color: { type: String },
     bgColor: { type: String },
@@ -38,6 +43,17 @@ export default {
       )
     },
 
+    presetSize () {
+      return (
+        (this.xs && 'xs') ||
+        (this.sm && 'sm') ||
+        (this.md && 'md') ||
+        (this.lg && 'lg') ||
+        (this.xl && 'xl') ||
+        null
+      )
+    },
+
     hasSingleBorder () {
       return this.borderLeft || this.borderRight ||
         this.borderTop || this.borderBottom
@@ -47,12 +63,13 @@ export default {
       return {
         [`${this.bgColor || (this.plain && this.type)}--bg w-alert--bg`]: this.bgColor || (this.plain && this.type),
         [this.color || (!this.plain && this.type)]: this.color || (!this.plain && this.type),
+        [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
         [`w-alert--type w-alert--${this.type}`]: this.type,
         'w-alert--plain': this.type && this.plain,
         'w-alert--outline': this.outline,
         'w-alert--tile': this.tile,
         'w-alert--round': this.round,
-        'w-alert--no-border': this.noBorder || this.hasSingleBorder || (this.plain && this.type),
+        'w-alert--no-border': this.noBorder || (this.plain && this.type),
         'w-alert--one-border': this.hasSingleBorder,
         'w-alert--border-left': !this.noBorder && this.borderLeft,
         'w-alert--border-right': !this.noBorder && this.borderRight,
@@ -74,7 +91,7 @@ export default {
   font-size: round(1.1 * $base-font-size);
   font-weight: 700;
   border-radius: $border-radius;
-  border: 1px solid transparent;
+  border: 1px solid currentColor;
 
   &--type {
     display: flex;
@@ -89,7 +106,7 @@ export default {
     padding-right: 3 * $base-increment;
   }
   &--shadow {box-shadow: $box-shadow;}
-  &--no-border, &--shadow, &--plain {border: none;}
+  &--no-border, &--one-border, &--plain {border: transparent;}
 
   // Before for the border, after for the background color.
   &:before, &:after {
@@ -139,6 +156,7 @@ export default {
 
   &--type > .w-icon {opacity: 0.9;align-self: flex-start;}
 
+  // Sizes.
   &.size--xs {padding-top: $base-increment;padding-bottom: $base-increment;}
   &.size--sm {padding-top: $base-increment;padding-bottom: $base-increment;}
   &.size--md {padding-top: round(2 * $base-increment);padding-bottom: round(2 * $base-increment);}
