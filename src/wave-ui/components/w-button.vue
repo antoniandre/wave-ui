@@ -10,15 +10,16 @@
     :style="styles")
     w-icon(v-if="icon") {{ icon }}
     slot(v-else)
-    .w-button__loader(v-if="loading")
-      slot(name="loading")
-        svg(viewBox="0 0 40 40")
-          circle(
-            cx="20" cy="20" r="18"
-            fill="transparent"
-            stroke="currentColor"
-            stroke-width="4"
-            stroke-linecap="round")
+    transition(name="scale-fade")
+      .w-button__loader(v-if="loading")
+        slot(name="loading")
+          svg(viewBox="0 0 40 40")
+            circle(
+              cx="20" cy="20" r="18"
+              fill="transparent"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round")
 </template>
 
 <script>
@@ -221,13 +222,6 @@ $spinner-size: 40;
 
   // Disable events binding on nested content.
   & * {pointer-events: none;}
-  // Button content must stay on top of the overlay.
-  & > span {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-  }
-  &--loading > span {opacity: 0;}
 
   &__loader {
     position: absolute;
@@ -238,6 +232,7 @@ $spinner-size: 40;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: inherit;
 
     svg {height: 75%;}
     circle {
