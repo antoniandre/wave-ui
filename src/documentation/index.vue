@@ -4,9 +4,9 @@ w-app.fill-height.w-flex.column
     nav-menu(:drawer-open.sync="drawerOpen")
   header.no-shrink
     toolbar(:drawer-open.sync="drawerOpen")
-  transition(name="fade")
-    w-progress(v-if="loading" color="primary" tile absolute)
   .content-wrap.w-flex(:class="`page--${$route.name}`")
+    transition(name="fade")
+      w-progress(v-if="loading" color="primary" tile absolute)
     nav-menu.navigation.mt-6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
     transition(name="fade-page" mode="out-in")
       router-view.main-content.grow
