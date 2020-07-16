@@ -54,7 +54,7 @@ export default {
         { label: 'Icon', route: 'w-icon' },
         { label: 'List', route: 'w-list' },
         { label: 'Menu', route: 'w-menu' },
-        { label: 'Notification', route: 'w-notification', disabled: true },
+        { label: 'Notification', route: 'w-notification' },
         { label: 'Overlay', route: 'w-overlay' },
         { label: 'Progress', route: 'w-progress' },
         { label: 'Rating', route: 'w-rating', disabled: true },

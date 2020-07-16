@@ -55,7 +55,7 @@ const routes = [
   },
   {
     path: '/form',
-    name: 'form',
+    name: 'form-elements',
     redirect: '/w-form'
   }
 ]
