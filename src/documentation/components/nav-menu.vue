@@ -54,6 +54,7 @@ export default {
         { label: 'Icon', route: 'w-icon' },
         { label: 'List', route: 'w-list' },
         { label: 'Menu', route: 'w-menu' },
+        { label: 'Notification', route: 'w-notification', disabled: true },
         { label: 'Overlay', route: 'w-overlay' },
         { label: 'Progress', route: 'w-progress' },
         { label: 'Rating', route: 'w-rating', disabled: true },
@@ -68,6 +69,7 @@ export default {
           children: [
             { label: 'Checkbox', route: 'w-checkbox' },
             { label: 'Input', route: 'w-input' },
+            { label: 'Form', route: 'w-form', disabled: true },
             { label: 'Radio', route: 'w-radio' },
             { label: 'Select', route: 'w-select', disabled: true },
             { label: 'Slider', route: 'w-slider', disabled: true },
