@@ -56,7 +56,7 @@ const routes = [
   {
     path: '/form',
     name: 'form',
-    redirect: '/w-checkbox'
+    redirect: '/w-form'
   }
 ]
 
@@ -72,10 +72,12 @@ const components = [
   { id: 'dialog', label: 'Dialog' },
   { id: 'divider', label: 'Divider' },
   { id: 'drawer', label: 'Drawer' },
+  { id: 'form', label: 'Form' },
   { id: 'icon', label: 'Icon' },
   { id: 'input', label: 'Input' },
   { id: 'list', label: 'List' },
   { id: 'menu', label: 'Menu' },
+  { id: 'notification', label: 'Notification' },
   { id: 'overlay', label: 'Overlay' },
   { id: 'progress', label: 'Progress' },
   { id: 'rating', label: 'Rating' },
