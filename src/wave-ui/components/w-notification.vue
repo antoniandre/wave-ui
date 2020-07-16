@@ -13,13 +13,18 @@ export default {
     value: { default: true }, // Show or hide.
     transition: { type: [String, Boolean] },
     timeout: { type: Number, default: 0 },
-    fixed: { type: Boolean },
+    absolute: { type: Boolean },
     top: { type: Boolean },
     bottom: { type: Boolean },
     left: { type: Boolean },
     right: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
     // Alert props.
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean },
     type: { type: [String, Boolean] },
     color: { type: String },
     bgColor: { type: String },
@@ -58,6 +63,11 @@ export default {
 
     alertProps () {
       return {
+        xs: this.xs,
+        sm: this.sm,
+        md: this.md,
+        lg: this.lg,
+        xl: this.xl,
         type: this.type,
         color: this.color,
         bgColor: this.bgColor,
@@ -76,7 +86,7 @@ export default {
 
     classes () {
       return {
-        'w-notification--fixed': this.fixed,
+        'w-notification--absolute': this.absolute,
         [this.position.join(' ')]: true
       }
     },
@@ -99,12 +109,12 @@ export default {
   justify-content: center;
   left: 2 * $base-increment;
   right: 2 * $base-increment;
-  position: absolute;
+  position: fixed;
   z-index: 300;
   pointer-events: none;
 
   // Position.
-  &--fixed {position: fixed;z-index: 400;}
+  &--absolute {position: absolute;z-index: 400;}
   &.top {top: 2 * $base-increment;}
   &.bottom {bottom: 2 * $base-increment;}
   &.left {justify-content: flex-start;right: auto;}
