@@ -9,8 +9,7 @@
     v-on="$listeners"
     :style="styles")
     w-icon(v-if="icon") {{ icon }}
-    span(v-else)
-      slot
+    slot(v-else)
     .w-button__loader(v-if="loading")
       slot(name="loading")
         svg(viewBox="0 0 40 40")
