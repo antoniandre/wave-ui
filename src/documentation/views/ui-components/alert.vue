@@ -2,7 +2,7 @@
 div(style="max-width: 900px")
   title-link.mt-4.code(h1) w-alert
 
-  title-link(h2) Show / hide with v-model
+  title-link(h2 slug="show-and-hide-with-v-model") Show / hide with v-model
   p.
     By default alerts are visible, but if a value or v-model is provided,
     it will show or hide according to it.
@@ -22,7 +22,7 @@ div(style="max-width: 900px")
   w-alert(bg-color="purple" color="cyan-lighter-4") This is an alert with a purple background and cyan color.
   w-alert(bg-color="cyan-lighter-4" color="purple") This is an alert with a cyan background and purple color.
 
-  title-link(h2) Types (adds an icon)
+  title-link(h2 slug="types") Types (adds an icon)
   h3 Normal
   w-alert(type="success") This is a success alert.
   w-alert(type="warning") This is a warning alert.
