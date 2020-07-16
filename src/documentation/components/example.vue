@@ -45,8 +45,13 @@
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="css")
-    w-transition-bounce
-      w-alert(v-if="showCopied" type="success" fixed top right) Text copied to clipboard
+        w-notification.mr-5.mt-n1(
+          v-model="showCopied"
+          transition="slide-fade-left"
+          plain
+          absolute
+          sm
+          type="success") Text copied to clipboard
 </template>
 
 <script>
@@ -136,13 +141,15 @@ export default {
     border-left: 1px solid #eee;
     display: flex;
     flex-direction: column;
-    padding: 4px 6px;
+    padding: 4px;
     background: #f0f8ff;
 
     .w-button {width: 30px;height: 30px;}
   }
 
   &__render {padding: 12px;}
+
+  &__source {position: relative;}
 
   .ssh-pre {
     margin: 0 !important;
@@ -157,8 +164,8 @@ export default {
   .ssh-pre[data-label]:before {
     font-family: 'Arial Narrow', Arial, sans-serif;
     bottom: auto;
-    top: 4px;
-    right: 24px;
+    top: 5px;
+    right: 26px;
     padding: 0;
     background-color: transparent;
     border: none;
@@ -168,6 +175,13 @@ export default {
   .ssh-pre__copy {
     border: none;
     background: none;
+
+    .w-icon {
+      padding: 10px;
+      transition: 0.25s;
+    }
+    &:hover .w-icon {background-color: rgba(35, 71, 129, 0.15);}
+    &:active .w-icon {background-color: rgba(35, 71, 129, 0.25);}
   }
 
   .codepen-form {
