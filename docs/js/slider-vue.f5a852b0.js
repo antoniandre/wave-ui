@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["slider-vue"],{f26f:function(t,e,n){"use strict";n.r(e);var s=function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[n("title-link",{staticClass:"mt-4 code",attrs:{h1:""}},[t._v("w-slider")]),n("input",{attrs:{type:"range"}}),n("w-slider")],1)},l=[],i={},r=i,a=n("2877"),u=Object(a["a"])(r,s,l,!1,null,null,null);e["default"]=u.exports}}]);
-//# sourceMappingURL=slider-vue.f5a852b0.js.map
