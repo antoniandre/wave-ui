@@ -1,12 +1,5 @@
 <template lang="pug">
-  .w-alert-wrapper(v-if="needsWrapper" :class="wrapperClasses")
-    .w-alert(v-if="value" :class="classes")
-      template(v-if="type")
-        w-icon.mr-2 wi-{{ icon }}
-        .w_alert__content
-          slot
-      slot(v-else)
-  .w-alert(v-else-if="value" :class="classes")
+  .w-alert(v-if="value" :class="classes")
     template(v-if="type")
       w-icon.mr-2 wi-{{ icon }}
       .w_alert__content
@@ -20,8 +13,8 @@ export default {
   props: {
     value: { default: true }, // Show or hide.
     type: { type: [String, Boolean] },
-    color: { type: [String, Boolean] },
-    bgColor: { type: [String, Boolean] },
+    color: { type: String },
+    bgColor: { type: String },
     shadow: { type: Boolean },
     tile: { type: Boolean },
     round: { type: Boolean },
@@ -32,15 +25,7 @@ export default {
     borderRight: { type: Boolean },
     borderTop: { type: Boolean },
     borderBottom: { type: Boolean },
-    outline: { type: Boolean },
-    // Position.
-    fixed: { type: Boolean },
-    absolute: { type: Boolean },
-    top: { type: Boolean },
-    bottom: { type: Boolean },
-    left: { type: Boolean },
-    right: { type: Boolean },
-    zIndex: { type: [Number, String, Boolean] },
+    outline: { type: Boolean }
   },
 
   computed: {
@@ -56,22 +41,6 @@ export default {
     hasSingleBorder () {
       return this.borderLeft || this.borderRight ||
         this.borderTop || this.borderBottom
-    },
-
-    position () {
-      let position = []
-      if (!this.top && !this.bottom && !this.left && !this.right) position = ['top', 'right']
-      else position = [
-        (this.top && 'top') || (this.bottom && 'bottom') || 'top',
-        (this.left && 'left') || (this.right && 'right') || 'center'
-      ]
-      return position
-    },
-
-    // Needs a wrapper when absolute or fixed and using the transform: translateX(-50%) CSS rule.
-    // CSS transitions like bounce also use transform and it would jump at the start of the animation.
-    needsWrapper () {
-      return this.value && (this.fixed || this.absolute)
     },
 
     classes () {
@@ -91,39 +60,12 @@ export default {
         'w-alert--border-bottom': !this.noBorder && this.borderBottom,
         'w-alert--shadow': this.shadow
       }
-    },
-
-    wrapperClasses () {
-      return {
-        'w-alert-wrapper--fixed': this.fixed,
-        'w-alert-wrapper--absolute': !this.fixed && this.absolute,
-        [this.position.join(' ')]: this.fixed || this.absolute
-      }
     }
   }
 }
 </script>
 
 <style lang="scss">
-.w-alert-wrapper {
-  display: flex;
-
-  // Position.
-  &--fixed, &--absolute {
-    left: 2 * $base-increment;
-    right: 2 * $base-increment;
-    justify-content: center;
-  }
-  &--fixed {position: fixed;z-index: 400;}
-  &--absolute {position: absolute;}
-  &.top {top: 2 * $base-increment;}
-  &.bottom {bottom: 2 * $base-increment;}
-  &.left {justify-content: flex-start;right: auto;}
-  &.right {justify-content: flex-end;left: auto;}
-
-  .w-alert {margin: 0;background-color: #fff;}
-}
-
 .w-alert {
   position: relative;
   margin-top: 4 * $base-increment;
