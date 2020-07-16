@@ -1,4 +1,4 @@
-# Wave UI - COMING SOON.
+# Wave UI - ALPHA VERSION AVAILABLE! :tada:
 
 <!-- [![Latest Version on NPM](https://img.shields.io/npm/v/the-wave-ui.svg)](https://npmjs.com/package/the-wave-ui)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
@@ -19,8 +19,10 @@ Like other UI frameworks, Wave UI is very flexible and easy to use. But it is al
 - Providing straightforward attributes and component names
 
 
-## install - Coming soon.
+## install - ALPHA VERSION AVAILABLE!
     npm i --S the-wave-ui
+
+> WARNING: the name `wave-ui` is being disputed on NPM at the moment... :( Make sure to install `the-wave-ui`!
 
 ___
 
