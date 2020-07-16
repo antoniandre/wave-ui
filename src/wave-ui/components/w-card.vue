@@ -1,9 +1,9 @@
 <template lang="pug">
   .w-card(:class="classes" :style="styles")
-    .w-card__title(v-if="cardTitle" v-html="cardTitle")
+    .w-card__title(v-if="cardTitle" :class="titleClass || false" v-html="cardTitle")
     .w-card__title(
       v-else-if="$slots.title"
-      :class="{ 'w-card__title--has-toolbar': titleHasToolbar }")
+      :class="{ 'w-card__title--has-toolbar': titleHasToolbar, [titleClass]: titleClass || false }")
       slot(name="title")
     .w-card__content(:class="contentClass || false")
       slot
@@ -23,6 +23,7 @@ export default {
     shadow: { type: Boolean },
     noBorder: { type: Boolean },
     tile: { type: Boolean },
+    titleClass: { type: String, default: '' },
     contentClass: { type: String, default: '' },
   },
 
