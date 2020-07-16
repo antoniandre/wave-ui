@@ -12,7 +12,7 @@
 
 <script>
 /**
- * Complexity of this component: Vue 2.x can only mount 1 single root elements, but we don't
+ * Complexity of this component: Vue 2.x can only mount 1 single root element, but we don't
  * want to wrap the activator as it may break the layout.
  * Another simpler way would be to append the tooltip inside the activator, but some HTML tags
  * can't have children like <input>.
@@ -37,6 +37,7 @@ export default {
     tile: { type: Boolean },
     round: { type: Boolean },
     transition: { type: String, default: '' },
+    tooltipClass: { type: String, default: '' },
     // Position.
     attachTo: {},
     fixed: { type: Boolean },
@@ -126,6 +127,7 @@ export default {
       return {
         [this.color]: !this.bgColor,
         [`${this.bgColor} ${this.bgColor}--bg`]: this.bgColor,
+        [this.tooltipClass]: this.tooltipClass,
         [`w-tooltip--${this.position}`]: true,
         'w-tooltip--tile': this.tile,
         'w-tooltip--round': this.round,
@@ -248,6 +250,7 @@ export default {
   align-items: center;
   max-width: 300px;
   width: fit-content; // Not supported in IE11. :/
+  z-index: 100;
 
   &--fixed {position: fixed;z-index: 1000;}
 
