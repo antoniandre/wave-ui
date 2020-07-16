@@ -57,7 +57,10 @@ export default {
     outline: { type: Boolean },
     stripes: { type: Boolean },
     absolute: { type: Boolean },
-    fixed: { type: Boolean }
+    fixed: { type: Boolean },
+    top: { type: Boolean },
+    bottom: { type: Boolean },
+    zIndex: { type: [Number, String, Boolean] }
   },
 
   data: () => ({
@@ -70,14 +73,22 @@ export default {
     progressValue () {
       return parseFloat(this.value)
     },
+
     circleCenter () {
       return circleSize + this.stroke
     },
+
+    // If linear, with position fixed or absolute.
+    position () {
+      return (this.top && 'top') || (this.bottom && 'bottom') || 'top'
+    },
+
     classes () {
       return {
         [`w-progress--${this.circle ? 'circular' : 'linear'}`]: true,
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor && !this.circle,
+        [`w-progress--${this.position}`]: !this.circle && (this.absolute || this.fixed),
         'w-progress--default-bg': !this.bgColor,
         'w-progress--indeterminate': this.value === -1,
         'w-progress--outline': !this.circle && this.outline,
@@ -90,6 +101,7 @@ export default {
         [`w-progress--${this.roundCap ? 'round' : 'flat'}-cap`]: true
       }
     },
+
     styles () {
       return {
         [this.circle ? 'width' : 'height']: this.size || false
@@ -107,9 +119,12 @@ $circle-size: 40;
   justify-content: center;
   position: relative;
 
-  &--absolute, &--fixed {left: 0;right: 0;z-index: 1000;}
+  &--absolute, &--fixed {left: 0;right: 0;}
   &--absolute {position: absolute;}
-  &--fixed {position: fixed;}
+  &--fixed {position: fixed;z-index: 10;}
+  &--top {top: 0;}
+  &--bottom {bottom: 0;}
+
   &--shadow {box-shadow: $box-shadow;}
 
   // Linear progress.
