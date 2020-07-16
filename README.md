@@ -22,7 +22,7 @@ Like other UI frameworks, Wave UI is very flexible and easy to use. But it is al
 ## install - ALPHA VERSION AVAILABLE!
     npm i --S the-wave-ui
 
-> WARNING: the name `wave-ui` is being disputed on NPM at the moment... :( Make sure to install `the-wave-ui`!
+> WARNING: the name `wave-ui` is taken at the moment. :( Make sure to install `the-wave-ui`!
 
 ___
 
