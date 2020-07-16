@@ -11,7 +11,7 @@ export default {
   props: {
     // Notification props.
     value: { default: true }, // Show or hide.
-    transition: { type: String, default: '' },
+    transition: { type: [String, Boolean] },
     timeout: { type: Number, default: 0 },
     fixed: { type: Boolean },
     top: { type: Boolean },
@@ -37,7 +37,13 @@ export default {
 
   computed: {
     transitionName () {
-      return this.transition || 'bounce'
+      if (this.transition === false) return ''
+      if (!this.transition) {
+        const opposites = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' }
+        return `slide-${opposites[this.position[this.position[1] === 'center' ? 0 : 1]]}`
+      }
+
+      return this.transition
     },
 
     position () {
@@ -93,6 +99,7 @@ export default {
   right: 2 * $base-increment;
   position: absolute;
   z-index: 300;
+  pointer-events: none;
 
   // Position.
   &--fixed {position: fixed;z-index: 400;}
@@ -101,6 +108,10 @@ export default {
   &.left {justify-content: flex-start;right: auto;}
   &.right {justify-content: flex-end;left: auto;}
 
-  .w-alert {margin: 0;background-color: #fff;}
+  .w-alert {
+    margin: 0;
+    background-color: #fff;
+    pointer-events: all;
+  }
 }
 </style>

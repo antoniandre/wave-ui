@@ -67,39 +67,12 @@ div(style="max-width: 900px")
       w-alert.size--lg(color="info" type="success") This is a large alert.
       w-alert.size--xl(color="info" type="success") This is an extra large alert.
     .spacer(v-if="!$waveUI.breakpoint.xs")
-
-  title-link(h2) Fixed &amp; absolute positions
-  w-button(@click="fixedAlert.show = !fixedAlert.show" color="primary" outline)
-    | {{ fixedAlert.show ? 'Hide' : 'Show' }} alert
-  .heading.mt-3 Alert position
-  w-radios.mr-4(
-    v-model="fixedAlert.position[0]"
-    :items="[{ label: 'top', value: 'top' }, { label: 'bottom', value: 'bottom' }]"
-    inline)
-  w-radios(
-    v-model="fixedAlert.position[1]"
-    :items="[{ label: 'left', value: 'left' }, { label: 'center', value: 'center' }, { label: 'right', value: 'right' }]"
-    inline)
-  w-transition-bounce
-    w-alert(
-      v-if="fixedAlert.show"
-      fixed
-      type="success"
-      plain
-      round
-      shadow
-      v-bind="{ [fixedAlert.position[0]]: true, [fixedAlert.position[1]]: true }")
-      | The alert is fixed on {{ fixedAlert.position[0] }} {{ fixedAlert.position[1] }}.
 </template>
 
 <script>
 export default {
   data: () => ({
-    showAlert: false,
-    fixedAlert: {
-      show: false,
-      position: ['bottom', 'right']
-    }
+    showAlert: false
   })
 }
 </script>
