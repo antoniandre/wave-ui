@@ -9,16 +9,12 @@
     color="primary"
     icon="wi-cross")
   w-list(:items="sections" nav color="primary")
-    //- template(#item="{ item }")
-      router-link(v-if="!item.disabled" :to="item.route" v-html="item.label")
-      span(v-else v-html="item.label")
 
   .title.mt-4 UI Components
 
   w-list(:items="components" nav color="primary")
     template(#item="{ item }")
-      router-link(v-if="!item.disabled" :to="item.route" v-html="item.label")
-      span(v-else v-html="item.label")
+      span(v-html="item.label")
       w-tag.ml-2.px-1(v-if="item.disabled" bg-color="red" color="white") Coming soon
 </template>
 
@@ -98,6 +94,7 @@ div.nav-menu {
     font-weight: normal;
     border-left: 2px solid transparent;
     &:before {display: none;}
+    &:hover:before {display: block;}
 
     &.router-link-active {
       border-left-color: $primary;
