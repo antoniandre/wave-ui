@@ -1,6 +1,8 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1) w-badge
+  title-link.mt-4.code(h1 slug="w-badge")
+    | w-badge
+    w-tag.ml-3(bg-color="orange" color="white") In progress
 
   title-link(h2) Default
   example
