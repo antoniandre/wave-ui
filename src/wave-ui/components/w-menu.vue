@@ -2,13 +2,22 @@
   .w-menu-wrapper(ref="wrapper")
     slot(name="activator" :on="eventHandlers")
     transition(:name="transitionName")
-      .w-menu(ref="menu" v-show="showMenu" :class="classes" :style="styles")
+      w-card.w-menu(
+        v-if="card"
+        ref="menu"
+        v-show="showMenu"
+        :tile="tile"
+        :shadow="shadow"
+        :class="classes"
+        :style="styles")
+        slot
+      .w-menu(v-else ref="menu" v-show="showMenu" :class="classes" :style="styles")
         slot
 </template>
 
 <script>
 /**
- * Complexity of this component: Vue 2.x can only mount 1 single root elements, but we don't
+ * Complexity of this component: Vue 2.x can only mount 1 single root element, but we don't
  * want to wrap the activator as it may break the layout.
  * Another simpler way would be to append the menu inside the activator, but some HTML tags
  * can't have children like <input>.
@@ -17,6 +26,7 @@
  *
  * @todo Add an option to attach menu to its activator.
  *       It would simplify the calculations and avoid DOM manipulation.
+ * @todo Fix slide-fade-bottom transition.
  */
 
 import { consoleWarn } from '../utils/console'
@@ -27,12 +37,14 @@ export default {
     value: {}, // Show or hide.
     showOnHover: { type: Boolean },
     hideOnMenuClick: { type: Boolean },
-    color: { type: [String, Boolean] },
-    bgColor: { type: [String, Boolean] },
+    color: { type: String, default: '' },
+    bgColor: { type: String, default: '' },
     shadow: { type: Boolean },
+    card: { type: Boolean }, // Include a w-card or not.
     tile: { type: Boolean },
     round: { type: Boolean },
     transition: { type: String, default: '' },
+    menuClass: { type: String, default: '' },
     // Position.
     attachTo: {},
     fixed: { type: Boolean },
@@ -121,7 +133,9 @@ export default {
       return {
         [`${this.bgColor}--bg`]: this.bgColor,
         [this.color]: this.color,
+        [this.menuClass]: this.menuClass,
         'w-menu--tile': this.tile,
+        'w-menu--card': this.card,
         'w-menu--round': this.round,
         'w-menu--shadow': this.shadow,
         'w-menu--fixed': this.fixed
@@ -170,7 +184,7 @@ export default {
       }
 
       if (this.transition) {
-        const menuEl = this.$refs.menu
+        const menuEl = this.$refs.menu.$el || this.$refs.menu
         menuEl.style.visibility = 'hidden'
         menuEl.style.display = 'block'
 
@@ -197,8 +211,8 @@ export default {
       wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
 
       // Move the menu elsewhere in the DOM.
-      // wrapper.parentNode.insertBefore(this.$refs.menu, wrapper)
-      this.attachToTarget.appendChild(this.$refs.menu)
+      // wrapper.parentNode.insertBefore((this.$refs.menu.$el || this.$refs.menu), wrapper)
+      this.attachToTarget.appendChild((this.$refs.menu.$el || this.$refs.menu))
     }
   },
 
@@ -212,7 +226,7 @@ export default {
   },
 
   beforeDestroy () {
-    this.$refs.menu.remove()
+    (this.$refs.menu.$el || this.$refs.menu).remove()
     this.activatorEl.remove()
   },
 
@@ -228,20 +242,10 @@ export default {
 .w-menu-wrapper {display: none;}
 
 .w-menu {
-  padding: $base-increment;
-  border-radius: $border-radius;
-  border: 1px solid #ddd;
-  background-color: $tooltip-bg-color;
   position: absolute;
+  z-index: 100;
 
   &--fixed {position: fixed;z-index: 1000;}
-
-  &--tile {border-radius: 0;}
-  &--round {
-    border-radius: 5em;
-    padding: $base-increment round(2 * $base-increment);
-  }
-  &--shadow {box-shadow: $box-shadow;}
-  &--no-border {border: none;}
+  &--card {background-color: #fff;}
 }
 </style>
