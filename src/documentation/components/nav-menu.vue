@@ -116,6 +116,7 @@ div.nav-menu {
     position: absolute;
     top: 2 * $base-increment;
     right: 2 * $base-increment;
+    z-index: 10;
   }
 }
 </style>

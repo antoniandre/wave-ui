@@ -24,7 +24,9 @@ div
   p It is also possible to control Wave UI CSS rules priorities by overriding the CSS base scope:
   ssh-pre(language="scss" label="SCSS") $css-scope: '.w-app';
 
-  title-link(h2) Presets - COMING SOON
+  title-link(h2 slug="presets")
+    | Presets
+    w-tag.ml-3(bg-color="red" color="white") Coming soon
   ssh-pre(language="js" label="Javascript").
     // Buttons example.
     {
