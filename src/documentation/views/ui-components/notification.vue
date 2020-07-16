@@ -22,7 +22,6 @@ div
 
   w-notification(
     v-show="notification.show"
-    fixed
     type="success"
     plain
     round
@@ -55,12 +54,10 @@ div
 
   w-notification(
     v-show="notification2.show"
-    fixed
     type="info"
     color="primary"
     round
     shadow
-    absolute
     :transition="transition"
     v-bind="{ [notification2.position[0]]: true, [notification2.position[1]]: true }")
     | The alert is fixed on {{ notification2.position[0] }} {{ notification2.position[1] }}.
