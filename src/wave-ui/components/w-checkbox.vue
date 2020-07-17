@@ -8,6 +8,7 @@
       :checked="isChecked"
       :disabled="disabled"
       @change="onChange"
+      @keypress.enter="onChange"
       :aria-checked="isChecked || 'false'"
       role="checkbox")
     template(v-if="hasLabel && labelOnLeft")
