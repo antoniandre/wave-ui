@@ -7,6 +7,7 @@
       :name="inputName"
       :checked="booleanValue"
       :disabled="disabled"
+      @focus="$emit('focus', $event)"
       @change="onChange"
       :aria-checked="booleanValue || 'false'"
       role="radio")
