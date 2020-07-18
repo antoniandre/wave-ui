@@ -7,6 +7,7 @@
       :name="inputName"
       :checked="isChecked"
       :disabled="disabled"
+      @focus="$emit('focus', $event)"
       @change="onChange"
       @keypress.enter="onChange"
       :aria-checked="isChecked || 'false'"
