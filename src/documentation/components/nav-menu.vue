@@ -8,11 +8,11 @@
     round
     color="primary"
     icon="wi-cross")
-  w-list(:items="sections" nav color="primary")
+  w-list(:items="sections" nav color="primary" @item-click="$emit('update:drawerOpen', false)")
 
   .title.mt-4 UI Components
 
-  w-list(:items="components" nav color="primary" @item-click="cl($event);$emit('update:drawerOpen', false)")
+  w-list(:items="components" nav color="primary" @item-click="$emit('update:drawerOpen', false)")
     template(#item="{ item }")
       span(v-html="item.label")
       w-tag.ml-2.px-1(v-if="item.disabled" bg-color="red" color="white") Coming soon
