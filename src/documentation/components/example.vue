@@ -70,27 +70,29 @@ export default {
       ]
 
       const cssDeps = [
-        'https://cdn.materialdesignicons.com/5.1.45/css/materialdesignicons.min.css',
-        'https://cdn.jsdelivr.net/npm/the-wave-ui@0.1.0-alpha.2/dist/wave-ui.css'
+        'https://unpkg.com/the-wave-ui@alpha/dist/wave-ui.css',
+        'https://cdn.materialdesignicons.com/5.1.45/css/materialdesignicons.min.css'
       ]
 
       const jsDeps = [
-        'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js',
-        'https://cdn.jsdelivr.net/npm/the-wave-ui@0.1.0-alpha.2/dist/wave-ui.umd.min.js'
+        'https://unpkg.com/vue@latest/dist/vue.js',
+        'https://unpkg.com/the-wave-ui@alpha/dist/wave-ui.umd.min.js'
       ]
 
+      const slots = {
+        html: this.$slots.html && this.$slots.html[0].text || '',
+        js: this.$slots.js && this.$slots.js[0].text || '',
+        css: this.$slots.css && this.$slots.css[0].text || ''
+      }
       const html = '<div id="app">\n' +
-                   '  <w-app>\n' +
-                   `    ${this.$slots.html && this.$slots.html[0].text || ''}` +
-                   '  </w-app>\n' +
+                   '  <w-app>\n    ' +
+                   slots.html.replace(/\n$/, '').replace(/\n/g, '\n    ') +
+                   '\n  </w-app>\n' +
                    '</div>'
-      const css = 'body {font-family: sans-serif;padding: 24px;}\n' +
-                  (this.$slots.css && this.$slots.css[0].text || '')
-      const js = 'new Vue({\n' +
-                 '  el: \'#app\',\n' +
-                 '  data: () => ({\n' +
-                 '  })\n' +
-                 '})\n'
+      const css = 'body {font-family: sans-serif;padding: 24px;}\n\n' + slots.css
+      const js = 'new Vue({\n  ' +
+                 slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') +
+                 '\n}).$mount(\'#app\')'
 
       const data = {
         title: 'Wave UI Example Pen',
@@ -101,6 +103,7 @@ export default {
         css,
         css_pre_processor: 'scss',
         css_starter: 'reset',
+        css_prefix: 'autoprefixer',
         js,
         js_pre_processor: 'babel',
         css_external: cssDeps.join(';'),
@@ -113,7 +116,7 @@ export default {
         `<form class="codepen-form" action="https://codepen.io/pen/define" method="POST" target="_blank">
           <input type="hidden" name="data" value="${JSONstring}">
         </form>`
-      );
+      )
 
       const form = document.querySelector('.codepen-form')
       form.submit()
