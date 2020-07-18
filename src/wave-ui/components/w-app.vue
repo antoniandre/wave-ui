@@ -16,7 +16,7 @@ export default {
   },
 
   data: () => ({
-    currentBreakPoint: null
+    currentBreakpoint: null
   }),
 
   methods: {
@@ -28,8 +28,8 @@ export default {
       breakpoints.sort((a, b) => a - b)
       const breakpoint = breakpointsNames[breakpoints.indexOf(width)] || 'xl'
 
-      if (breakpoint !== this.currentBreakPoint) {
-        this.currentBreakPoint = breakpoint
+      if (breakpoint !== this.currentBreakpoint) {
+        this.currentBreakpoint = breakpoint
         this.$waveUI.breakpoint = {
           name: breakpoint,
           xs: breakpoint === 'xs',

@@ -92,7 +92,7 @@ div.nav-menu {
     font-weight: normal;
     border-left: 2px solid transparent;
     &:before {display: none;}
-    &:hover:before {display: block;}
+    &:focus:before, &:hover:before {display: block;}
 
     &.router-link-active {
       border-left-color: $primary;
