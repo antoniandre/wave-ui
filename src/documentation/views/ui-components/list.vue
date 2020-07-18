@@ -21,15 +21,22 @@ div
 
   title-link(h2) Default items list rendering with selection
   w-radios.mt-4(v-model="multiple" name="multiple" :items="radios" inline)
-  w-list.mt-6(
-    v-model="selectedItem1"
-    :items="listItems1"
-    color="deep-purple"
-    :multiple="multiple")
+  w-flex(wrap align-center)
+    w-list.mt-6.grow.mr-4(
+      v-model="selectedItem1"
+      :items="listItems1"
+      color="deep-purple"
+      :multiple="multiple"
+      @item-click="itemClicked = $event")
+    div(v-if="itemClicked")
+      .subtitle clicked item (#[span.code item-click] event):
+      br
+      span.code {{ itemClicked }}
   .subtitle.mt-2
     | Selected item:
     code.ml-2(v-if="!multiple || Array.isArray(selectedItem1)") {{ selectedItem1 || 'null' }}
     code.ml-2(v-else-if="multiple") {{ (selectedItem1 ? [selectedItem1] : '[]') }}
+  p Note: you can get the list selection from the v-model, or by listening to the #[span.code input] event.
 
   title-link(h2) Checklists
   .w-flex.wrap
@@ -120,7 +127,8 @@ export default {
     selectedItem1: 2,
     selectedItem2: 'check',
     selectedItem3: [1, 3],
-    selectedItem4: 1
+    selectedItem4: 1,
+    itemClicked: null
   })
 }
 </script>

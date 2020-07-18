@@ -26,39 +26,53 @@ const renderListItems = function (createEl) {
   })
 }
 
+// Responsible for item selection if selectable list.
 const renderListItemLabel = function (createEl, li, index) {
-  const hasSlot = this.$scopedSlots.item
-  const mousedown = e => {
-    e.stopPropagation()
-    this.isSelectable && !li.disabled && this.selectItem(li)
-  }
+  // Init the final vnode, can be a div, a router-link/a or a w-checkbox.
   const component = {
     name: 'div',
     class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
     props: {},
-    attributes: {}, // HTML attributes.
-    on: {},
-    // nativeOn: {}, // Don't even define it if div, or Vue will raise a warning.
-    domProps: {}
+    attrs: {}, // HTML attributes.
+    domProps: {},
+    on: {}, // Events handlers are added bellow.
+    // nativeOn: {} // Don't even define it if div, or Vue will raise a warning.
   }
-  const vnodes = []
+
+  // Event handlers - will be appended in `on` or `nativeOn` according to the vnode type.
+  // ------------------------------------------------------
+  const click = () => !li.disabled && this.$emit('item-click', li)
+  // If selectable list, on mousedown select the item.
+  const mousedown = this.isSelectable && (e => {
+    e.stopPropagation()
+    !li.disabled && this.selectItem(li)
+  })
+  // If selectable list, on enter key press select item.
+  const keydown = this.isSelectable && (e => (!li.disabled && e.keyCode === 13 && this.selectItem(li)))
+  // ------------------------------------------------------
+
+  const hasSlot = this.$scopedSlots.item
 
   // Navigation list.
+  // Note: on enter key press, a click event is fired => this is default HTML behavior.
   // ------------------------------------------------------
   const isLink = this.nav && !li.disabled && li.route
   if (isLink) {
     component.name = this.$router ? 'router-link' : 'a'
-    component.attributes.href = li.route
-    if (this.$router) component.props.to = li.route
+    if (this.$router) {
+      component.props.to = li.route
+      component.nativeOn = { click, keydown, mousedown }
+    }
+    else {
+      component.attrs.href = li.route
+      component.on = { click, keydown, mousedown }
+    }
   }
   // ------------------------------------------------------
 
-  // Links are naturally tabbable, add tabindex on other elements.
-  else if (this.isSelectable) component.attributes.tabindex = 0
-
   // Checklist.
   // ------------------------------------------------------
-  if (this.checklist) {
+  else if (this.checklist) {
     component.name = 'w-checkbox'
     component.props = {
       value: li.selected,
@@ -66,35 +80,47 @@ const renderListItemLabel = function (createEl, li, index) {
       round: this.roundCheckboxes,
       disabled: li.disabled
     }
+
     if (!hasSlot) component.props.label = li[this.itemLabel] || false
 
-    // Prevent double check action resulting in no change of state.
-    component.nativeOn = { click: e => e.preventDefault() }
-    component.on = {
-      input: e => {
-        li.selected = e.target.value
-        this.$emit('input', e.target.value)
+    component.nativeOn = {
+      // The checkbox component is not fully covering the list-item-label, when clicking on list
+      // item label, toggle the checkbox.
+      click: e => {
+        if (e.target.classList.contains('w-checkbox')) {
+          this.selectItem(li)
+          component.props.value = li.selected
+        }
       }
+    }
+    component.on = {
+      input: value => this.selectItem(li, value),
+      // @todo: on checkbox focus, focus the liste item.
+      // focus: e => console.log(this, e, 'on checkbox focus')
+
     }
   }
   // ------------------------------------------------------
 
-  if (!hasSlot && !vnodes.length && !this.checklist) component.domProps = { innerHTML: li[this.itemLabel] }
-  else if (hasSlot) {
-    vnodes.push(this.$scopedSlots.item({ item: li, selected: li.selected, index }))
+  // Selectable simple div.
+  // ------------------------------------------------------
+  else if (this.isSelectable) {
+    // Links are naturally tabable, add tabindex on other elements.
+    component.attrs.tabindex = 0
+    component.on = { click, keydown, mousedown }
   }
+  // ------------------------------------------------------
 
-  if (component.name === 'div') component.on.mousedown = mousedown
-  else {
-    if (!component.nativeOn) component.nativeOn = {}
-    component.nativeOn.mousedown = mousedown
-  }
+  const vnodes = []
+  if (!hasSlot && !this.checklist) component.domProps = { innerHTML: li[this.itemLabel] }
+  else if (hasSlot) vnodes.push(this.$scopedSlots.item({ item: li, selected: li.selected, index }))
 
   return createEl(component.name, component, vnodes)
 }
 
 export default {
   name: 'w-list',
+
   props: {
     items: { type: Array, required: true }, // All the possible options.
     value: {}, // v-model on selected item if any.
@@ -131,6 +157,7 @@ export default {
         return item
       })
     },
+
     // Selection is always an array, but emits a single value if not multiple.
     selection: {
       get () {
@@ -142,12 +169,15 @@ export default {
         this.$emit('input', this.isMultipleSelect ? items : (items[0] || null))
       }
     },
+
     isMultipleSelect () {
       return this.multiple || this.checklist // Checklist is always multiple select.
     },
+
     isSelectable () {
       return this.value !== undefined || this.checklist || this.nav
     },
+
     classes () {
       return {
         [this.color]: this.color,
@@ -160,11 +190,12 @@ export default {
   },
 
   methods: {
-    selectItem (item) {
-      item.selected = !item.selected
+    selectItem (item, forcedValue) {
+      item.selected = forcedValue !== undefined ? forcedValue : !item.selected
       if (!this.isMultipleSelect) this.selection = item.selected ? [item[this.itemValue]] : []
       else this.selection = this.listItems.filter(item => item.selected).map(item => item[this.itemValue])
     },
+
     liLabelClasses (item) {
       return {
         'w-list__item-label--disabled': item.disabled || (this.nav && !item.route && !item.children),
@@ -187,6 +218,7 @@ export default {
     value (items) {
       this.selectedItems = this.checkSelection(items)
     },
+
     multiple (boolean) {
       // If more than 1 selection and going back to single select,
       // just keep the first selected item.
@@ -273,19 +305,20 @@ export default {
         background-color: currentColor;
         opacity: 0;
         transition: 0.2s;
+        pointer-events: none;
       }
     }
 
-    // Hover state.
+    // Hover & focus states.
     &--hoverable:hover:before,
+    &--selectable:focus:before,
     &--selectable:hover:before {opacity: 0.08;}
 
-    // Focus state and active class.
-    &--selectable:focus:before,
-    &--active:before, &--active:hover:before,
+    // Active class (when item is selected).
+    &--active:before, &--active:focus:before, &--active:hover:before,
     .w-list--navigation &.router-link-exact-active:before {opacity: 0.15;}
 
-    // Active state.
+    // Active state (while pressing key or mouse).
     &--selectable:active:before {opacity: 0.2;}
 
     // Disabled.
@@ -296,6 +329,7 @@ export default {
   // Checklist.
   // --------------------------------------------
   &--checklist .w-checkbox__label {flex-grow: 1;}
+  // &--checklist .w-checkbox * {pointer-events: none;}
   // --------------------------------------------
 
   // Navigation link.
