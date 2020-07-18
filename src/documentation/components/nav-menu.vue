@@ -12,7 +12,7 @@
 
   .title.mt-4 UI Components
 
-  w-list(:items="components" nav color="primary")
+  w-list(:items="components" nav color="primary" @item-click="cl($event);$emit('update:drawerOpen', false)")
     template(#item="{ item }")
       span(v-html="item.label")
       w-tag.ml-2.px-1(v-if="item.disabled" bg-color="red" color="white") Coming soon
@@ -24,58 +24,56 @@ export default {
     drawerOpen: { type: Boolean, default: false }
   },
 
-  data () {
-    return {
-      sections: [
-        { label: 'Why Wave UI?', route: { name: 'why-wave-ui' } },
-        { label: 'Getting started', route: 'getting-started' },
-        { label: 'Customization', route: 'customization' },
-        { label: 'Breakpoints', route: 'breakpoints' },
-        { label: 'Layout', route: 'layout' },
-        { label: 'Typography', route: 'typography' },
-        { label: 'Colors', route: 'colors' },
-        { label: 'Transitions', route: 'transitions' }
-      ],
-      components: [
-        { label: 'Accordion', route: 'w-accordion', disabled: true },
-        { label: 'Alert', route: 'w-alert' },
-        { label: 'App', route: 'w-app' },
-        { label: 'Badge', route: 'w-badge' },
-        { label: 'Button', route: 'w-button' },
-        { label: 'Calendar', route: 'w-calendar', disabled: true },
-        { label: 'Card', route: 'w-card' },
-        { label: 'Dialog', route: 'w-dialog' },
-        { label: 'Divider', route: 'w-divider' },
-        { label: 'Drawer', route: 'w-drawer' },
-        { label: 'Icon', route: 'w-icon' },
-        { label: 'List', route: 'w-list' },
-        { label: 'Menu', route: 'w-menu' },
-        { label: 'Notification', route: 'w-notification' },
-        { label: 'Overlay', route: 'w-overlay' },
-        { label: 'Progress', route: 'w-progress' },
-        { label: 'Rating', route: 'w-rating', disabled: true },
-        { label: 'Slideshow', route: 'w-slideshow', disabled: true },
-        { label: 'Tabs', route: 'w-tabs', disabled: true },
-        { label: 'Tag', route: 'w-tag' },
-        { label: 'Toolbar', route: 'w-toolbar' },
-        { label: 'Tooltip', route: 'w-tooltip' },
-        {
-          label: 'Form elements',
-          route: 'form',
-          children: [
-            { label: 'Checkbox', route: 'w-checkbox' },
-            { label: 'Input', route: 'w-input' },
-            { label: 'Form', route: 'w-form', disabled: true },
-            { label: 'Radio', route: 'w-radio' },
-            { label: 'Select', route: 'w-select', disabled: true },
-            { label: 'Slider', route: 'w-slider', disabled: true },
-            { label: 'Switch', route: 'w-switch' },
-            { label: 'Textarea', route: 'w-textarea', disabled: true }
-          ]
-        }
-      ]
-    }
-  }
+  data: () => ({
+    sections: [
+      { label: 'Why Wave UI?', route: { name: 'why-wave-ui' } },
+      { label: 'Getting started', route: 'getting-started' },
+      { label: 'Customization', route: 'customization' },
+      { label: 'Breakpoints', route: 'breakpoints' },
+      { label: 'Layout', route: 'layout' },
+      { label: 'Typography', route: 'typography' },
+      { label: 'Colors', route: 'colors' },
+      { label: 'Transitions', route: 'transitions' }
+    ],
+    components: [
+      { label: 'Accordion', route: 'w-accordion', disabled: true },
+      { label: 'Alert', route: 'w-alert' },
+      { label: 'App', route: 'w-app' },
+      { label: 'Badge', route: 'w-badge' },
+      { label: 'Button', route: 'w-button' },
+      { label: 'Calendar', route: 'w-calendar', disabled: true },
+      { label: 'Card', route: 'w-card' },
+      { label: 'Dialog', route: 'w-dialog' },
+      { label: 'Divider', route: 'w-divider' },
+      { label: 'Drawer', route: 'w-drawer' },
+      { label: 'Icon', route: 'w-icon' },
+      { label: 'List', route: 'w-list' },
+      { label: 'Menu', route: 'w-menu' },
+      { label: 'Notification', route: 'w-notification' },
+      { label: 'Overlay', route: 'w-overlay' },
+      { label: 'Progress', route: 'w-progress' },
+      { label: 'Rating', route: 'w-rating', disabled: true },
+      { label: 'Slideshow', route: 'w-slideshow', disabled: true },
+      { label: 'Tabs', route: 'w-tabs', disabled: true },
+      { label: 'Tag', route: 'w-tag' },
+      { label: 'Toolbar', route: 'w-toolbar' },
+      { label: 'Tooltip', route: 'w-tooltip' },
+      {
+        label: 'Form elements',
+        route: 'form',
+        children: [
+          { label: 'Checkbox', route: 'w-checkbox' },
+          { label: 'Input', route: 'w-input' },
+          { label: 'Form', route: 'w-form', disabled: true },
+          { label: 'Radio', route: 'w-radio' },
+          { label: 'Select', route: 'w-select', disabled: true },
+          { label: 'Slider', route: 'w-slider', disabled: true },
+          { label: 'Switch', route: 'w-switch' },
+          { label: 'Textarea', route: 'w-textarea', disabled: true }
+        ]
+      }
+    ]
+  })
 }
 </script>
 
