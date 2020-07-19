@@ -4,18 +4,26 @@
       .example__render.grow
         slot
       .buttons
-        w-button(
-          @click="showSource = !showSource"
-          lg
-          icon="mdi mdi-code-tags"
-          text
-          color="primary")
-        w-button(
-          @click="createCodepen"
-          lg
-          icon="mdi mdi-codepen"
-          text
-          color="primary")
+        w-tooltip(left)
+          template(#activator="{ on }")
+            w-button(
+              v-on="on"
+              @click="showSource = !showSource"
+              lg
+              icon="mdi mdi-code-tags"
+              text
+              color="primary")
+          | View the source code
+        w-tooltip(left)
+          template(#activator="{ on }")
+            w-button(
+              v-on="on"
+              @click="createCodepen"
+              lg
+              icon="mdi mdi-codepen"
+              text
+              color="primary")
+          | Edit on Codepen
     w-transition-expand(y)
       .example__source(v-show="showSource")
         ssh-pre(
