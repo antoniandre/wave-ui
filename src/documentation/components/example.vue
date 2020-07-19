@@ -97,7 +97,7 @@ export default {
                    slots.html.replace(/\n$/, '').replace(/\n/g, '\n    ') +
                    '\n  </w-app>\n' +
                    '</div>'
-      const css = 'body {font-family: sans-serif;padding: 24px;}\n\n' + slots.css
+      const css = '.w-app {font-family: sans-serif;padding: 24px;}\n\n' + slots.css
       const js = 'new Vue({\n  ' +
                  slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') +
                  '\n}).$mount(\'#app\')'

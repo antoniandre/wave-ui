@@ -1,7 +1,6 @@
 <template lang="pug">
 div
   title-link.mt-4(h1) Getting started
-
   title-link(h2) Installation
 
   h3 Download from NPM
@@ -13,6 +12,7 @@ div
     import Vue from 'vue'
     import App from './app'
     import WaveUI from 'the-wave-ui'
+    import 'the-wave-ui/dist/wave-ui.css'
 
     Vue.use(WaveUI)
 
