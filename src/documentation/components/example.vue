@@ -98,7 +98,8 @@ export default {
                    '\n  </w-app>\n' +
                    '</div>'
       const css = '.w-app {font-family: sans-serif;padding: 24px;}\n\n' + slots.css
-      const js = 'new Vue({\n  ' +
+      const js = 'new Vue({' +
+                 '\n  waveui: new WaveUI(),\n  ' +
                  slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') +
                  '\n}).$mount(\'#app\')'
 
