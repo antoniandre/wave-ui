@@ -15,12 +15,21 @@ div
       &lt;w-flex wrap&gt;
         &lt;div class="grow"&gt;
           &lt;div class="subtitle"&gt;Most basic&lt;/div&gt;
-          &lt;w-list class="grow mt-6" :items="listItems" color="primary" /&gt;
+          &lt;w-list
+            class="grow mt-6"
+            :items="listItems"
+            color="primary"&gt;
+          &lt;/w-list&gt;
         &lt;/div&gt;
 
         &lt;div class="grow"&gt;
           &lt;div class="subtitle"&gt;With icons&lt;/div&gt;
-          &lt;w-list class="grow mt-6" :items="listItems" icon="wi-check" color="primary" /&gt;
+          &lt;w-list
+            class="grow mt-6"
+            :items="listItems"
+            icon="wi-check"
+            color="primary"&gt;
+          &lt;/w-list&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
     template(#js).
@@ -82,7 +91,7 @@ div
       code.ml-2(v-if="!multiple || Array.isArray(selectedItem1)") {{ selectedItem1 || 'null' }}
       code.ml-2(v-else-if="multiple") {{ selectedItem1 ? [selectedItem1] : '[]' }}
     template(#html).
-      &lt;w-radios v-model="multiple" name="multiple" :items="radios" inline /&gt;
+      &lt;w-radios v-model="multiple" name="multiple" :items="radios" inline&gt;&lt;/w-radios&gt;
 
       &lt;w-flex wrap align-center&gt;
         &lt;w-list
