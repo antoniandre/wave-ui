@@ -9,7 +9,8 @@ module.exports = {
   },
   configureWebpack: {
     output: {
-      library: 'WaveUI'
+      library: 'WaveUI',
+      libraryExport: 'default'
     }
   },
   chainWebpack: config => {
