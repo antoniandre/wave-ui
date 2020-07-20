@@ -16,6 +16,7 @@ export default {
     noGrow: { type: Boolean },
     shrink: { type: Boolean },
     noShrink: { type: Boolean },
+    fillHeight: { type: Boolean },
     wrap: { type: Boolean },
     alignStart: { type: Boolean },
     alignCenter: { type: Boolean },
@@ -24,8 +25,8 @@ export default {
     justifyCenter: { type: Boolean },
     justifyEnd: { type: Boolean },
     justifySpaceBetween: { type: Boolean },
-    gap: { type: Number, default: 0 },
-    equal: { type: Boolean }
+    ['basis-0']: { type: Boolean },
+    gap: { type: Number, default: 0 }
   },
 
   computed: {
@@ -36,6 +37,7 @@ export default {
         'no-grow': this.noGrow,
         shrink: this.shrink,
         'no-shrink': this.noShrink,
+        'fill-height': this.fillHeight,
         wrap: this.wrap,
         'align-start': this.alignStart,
         'align-center': this.alignCenter,
@@ -44,7 +46,7 @@ export default {
         'justify-center': this.justifyCenter,
         'justify-end': this.justifyEnd,
         'justify-space-between': this.justifySpaceBetween,
-        'basis-0': this.equal,
+        'basis-0': this['basis-0'],
         [`gap-${this.gap}`]: this.gap
       }
     }

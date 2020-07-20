@@ -18,9 +18,11 @@
   .justify-start {justify-content: flex-start;}
   .justify-center {justify-content: center;}
   .justify-end {justify-content: flex-end;}
-  .justify-self-start {justify-self: flex-start;}
-  .justify-self-center {justify-self: center;}
-  .justify-self-end {justify-self: flex-end;}
+  // There is no justify-self in Flexbox.
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Alignment/Box_Alignment_in_Flexbox
+  // .justify-self-start {justify-self: flex-start;}
+  // .justify-self-center {justify-self: center;}
+  // .justify-self-end {justify-self: flex-end;}
   .justify-space-between {justify-content: space-between;}
 
   .text-left {text-align: left;}
