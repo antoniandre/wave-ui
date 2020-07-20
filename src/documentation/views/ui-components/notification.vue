@@ -6,19 +6,20 @@ div
     Notifications accepts all the parameters of the #[span.code w-alert] component, plus positioning
     &amp; transitioning options.
 
-  title-link(h2) Default
+  title-link(h2) Notification position
   p Notifications have a fixed position by default.
-  w-button(@click="notification.show = !notification.show" color="primary" outline)
-    | {{ notification.show ? 'Hide' : 'Show' }} notification
-  .heading.mt-3 Notification position
-  w-radios.mr-4(
-    v-model="notification.position[0]"
-    :items="[{ label: 'top', value: 'top' }, { label: 'bottom', value: 'bottom' }]"
-    inline)
-  w-radios(
-    v-model="notification.position[1]"
-    :items="[{ label: 'left', value: 'left' }, { label: 'center', value: 'center' }, { label: 'right', value: 'right' }]"
-    inline)
+  w-flex(align-start)
+    w-button(@click="notification.show = !notification.show" color="primary" outline)
+      | {{ notification.show ? 'Hide' : 'Show' }} notification
+    .w-flex.wrap.pa-6
+      w-radios.my-1.mr-6(
+        v-model="notification.position[0]"
+        :items="[{ label: 'top', value: 'top' }, { label: 'bottom', value: 'bottom' }]"
+        inline)
+      w-radios.my-1(
+        v-model="notification.position[1]"
+        :items="[{ label: 'left', value: 'left' }, { label: 'center', value: 'center' }, { label: 'right', value: 'right' }]"
+        inline)
 
   w-notification(
     v-show="notification.show"
@@ -43,7 +44,7 @@ div
         | {{ item.label }}
         code.ml-2 {{ item.value || (item.value === false ? 'false' : "''") }}
   .heading.mt-3 Notification position
-  w-radios.mr-4(
+  w-radios.mr-6(
     v-model="notification2.position[0]"
     :items="[{ label: 'top', value: 'top' }, { label: 'bottom', value: 'bottom' }]"
     inline)
