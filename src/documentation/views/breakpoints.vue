@@ -2,7 +2,7 @@
 div
   title-link.mt-4(h1) Breakpoints
 
-  w-card.blue-lighter-5--bg
+  w-card.blue-light-5--bg
     .title.mt-0 Current breakpoint: #[code {{ this.$waveui.breakpoint.name }}]
     em.grey.mt-1 Resizing your browser will update the current breakpoint.
 

@@ -12,8 +12,8 @@ div
   w-input.mb-1(label="Outline" outline)
   w-input.mb-1(placeholder="Outline" outline)
   w-input.mb-1(label="Outline" color="info" outline)
-  w-input.mb-1(label="Outline" bg-color="blue-lighter-5" outline)
-  w-input.mb-1(label="Outline" bg-color="blue-darker-5" color="white" outline)
+  w-input.mb-1(label="Outline" bg-color="blue-light-5" outline)
+  w-input.mb-1(label="Outline" bg-color="blue-dark-5" color="white" outline)
 
   title-link(h2) Shadow
   w-input.mb-1(label="Shadow" shadow)
@@ -41,16 +41,16 @@ div
       .mb-2 Default style
       w-input.mb-1(value="Some content")
       w-input.mb-1(color="red" value="Some content")
-      w-input.mb-1(bg-color="red-lighter-5" value="Some content")
-      w-input.mb-1(color="red-darker-1" bg-color="red-lighter-5" value="Some content")
-      w-input.mb-1(color="orange-darker-1" bg-color="orange-lighter-5" value="Some content")
+      w-input.mb-1(bg-color="red-light-5" value="Some content")
+      w-input.mb-1(color="red-dark-1" bg-color="red-light-5" value="Some content")
+      w-input.mb-1(color="orange-dark-1" bg-color="orange-light-5" value="Some content")
     .grow.mb-4(style="min-width: 200px")
       .mb-2 Outline
       w-input.mb-1(value="Some content" outline)
       w-input.mb-1(color="red" value="Some content" outline)
-      w-input.mb-1(bg-color="red-lighter-5" value="Some content" outline)
-      w-input.mb-1(color="red-darker-1" bg-color="red-lighter-5" value="Some content" outline)
-      w-input.mb-1(color="orange-darker-1" bg-color="orange-lighter-5" value="Some content" outline)
+      w-input.mb-1(bg-color="red-light-5" value="Some content" outline)
+      w-input.mb-1(color="red-dark-1" bg-color="red-light-5" value="Some content" outline)
+      w-input.mb-1(color="orange-dark-1" bg-color="orange-light-5" value="Some content" outline)
 
   title-link(h2) Label position
   p The default label position is "#[span.code inside]", but it can also be "#[span.code left]" or "#[span.code right]".

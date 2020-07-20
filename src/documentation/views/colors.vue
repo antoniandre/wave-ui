@@ -25,33 +25,33 @@ div(style="overflow: hidden")
   h3 Status colors shades
   .w-flex.wrap.mb-12.ma-n2
     .w-flex.column.basis-0
-      .color.success-lighter-3--bg.subtitle.text-center.py-3.ma-2.body success-lighter-3
-      .color.success-lighter-2--bg.subtitle.text-center.py-3.ma-2.body success-lighter-2
-      .color.success-lighter-1--bg.subtitle.text-center.py-3.ma-2.body success-lighter-1
-      .color.success-darker-1--bg.subtitle.text-center.py-3.ma-2.white.body success-darker-1
-      .color.success-darker-2--bg.subtitle.text-center.py-3.ma-2.white.body success-darker-2
-      .color.success-darker-3--bg.subtitle.text-center.py-3.ma-2.white.body success-darker-3
+      .color.success-light-3--bg.subtitle.text-center.py-3.ma-2.body success-light-3
+      .color.success-light-2--bg.subtitle.text-center.py-3.ma-2.body success-light-2
+      .color.success-light-1--bg.subtitle.text-center.py-3.ma-2.body success-light-1
+      .color.success-dark-1--bg.subtitle.text-center.py-3.ma-2.white.body success-dark-1
+      .color.success-dark-2--bg.subtitle.text-center.py-3.ma-2.white.body success-dark-2
+      .color.success-dark-3--bg.subtitle.text-center.py-3.ma-2.white.body success-dark-3
     .w-flex.column.basis-0
-      .color.error-lighter-3--bg.subtitle.text-center.py-3.ma-2.body error-lighter-3
-      .color.error-lighter-2--bg.subtitle.text-center.py-3.ma-2.body error-lighter-2
-      .color.error-lighter-1--bg.subtitle.text-center.py-3.ma-2.body error-lighter-1
-      .color.error-darker-1--bg.subtitle.text-center.py-3.ma-2.white.body error-darker-1
-      .color.error-darker-2--bg.subtitle.text-center.py-3.ma-2.white.body error-darker-2
-      .color.error-darker-3--bg.subtitle.text-center.py-3.ma-2.white.body error-darker-3
+      .color.error-light-3--bg.subtitle.text-center.py-3.ma-2.body error-light-3
+      .color.error-light-2--bg.subtitle.text-center.py-3.ma-2.body error-light-2
+      .color.error-light-1--bg.subtitle.text-center.py-3.ma-2.body error-light-1
+      .color.error-dark-1--bg.subtitle.text-center.py-3.ma-2.white.body error-dark-1
+      .color.error-dark-2--bg.subtitle.text-center.py-3.ma-2.white.body error-dark-2
+      .color.error-dark-3--bg.subtitle.text-center.py-3.ma-2.white.body error-dark-3
     .w-flex.column.basis-0
-      .color.warning-lighter-3--bg.subtitle.text-center.py-3.ma-2.body warning-lighter-3
-      .color.warning-lighter-2--bg.subtitle.text-center.py-3.ma-2.body warning-lighter-2
-      .color.warning-lighter-1--bg.subtitle.text-center.py-3.ma-2.body warning-lighter-1
-      .color.warning-darker-1--bg.subtitle.text-center.py-3.ma-2.white.body warning-darker-1
-      .color.warning-darker-2--bg.subtitle.text-center.py-3.ma-2.white.body warning-darker-2
-      .color.warning-darker-3--bg.subtitle.text-center.py-3.ma-2.white.body warning-darker-3
+      .color.warning-light-3--bg.subtitle.text-center.py-3.ma-2.body warning-light-3
+      .color.warning-light-2--bg.subtitle.text-center.py-3.ma-2.body warning-light-2
+      .color.warning-light-1--bg.subtitle.text-center.py-3.ma-2.body warning-light-1
+      .color.warning-dark-1--bg.subtitle.text-center.py-3.ma-2.white.body warning-dark-1
+      .color.warning-dark-2--bg.subtitle.text-center.py-3.ma-2.white.body warning-dark-2
+      .color.warning-dark-3--bg.subtitle.text-center.py-3.ma-2.white.body warning-dark-3
     .w-flex.column.basis-0
-      .color.info-lighter-3--bg.subtitle.text-center.py-3.ma-2.body info-lighter-3
-      .color.info-lighter-2--bg.subtitle.text-center.py-3.ma-2.body info-lighter-2
-      .color.info-lighter-1--bg.subtitle.text-center.py-3.ma-2.body info-lighter-1
-      .color.info-darker-1--bg.subtitle.text-center.py-3.ma-2.white.body info-darker-1
-      .color.info-darker-2--bg.subtitle.text-center.py-3.ma-2.white.body info-darker-2
-      .color.info-darker-3--bg.subtitle.text-center.py-3.ma-2.white.body info-darker-3
+      .color.info-light-3--bg.subtitle.text-center.py-3.ma-2.body info-light-3
+      .color.info-light-2--bg.subtitle.text-center.py-3.ma-2.body info-light-2
+      .color.info-light-1--bg.subtitle.text-center.py-3.ma-2.body info-light-1
+      .color.info-dark-1--bg.subtitle.text-center.py-3.ma-2.white.body info-dark-1
+      .color.info-dark-2--bg.subtitle.text-center.py-3.ma-2.white.body info-dark-2
+      .color.info-dark-3--bg.subtitle.text-center.py-3.ma-2.white.body info-dark-3
 
   title-link(h2 slug="primary-and-secondary-colors-and-shades")
     | #[span.code primary] &amp; #[span.code secondary] colors and shades
@@ -64,15 +64,15 @@ div(style="overflow: hidden")
     as well as its 3 darker shades, with a white text when used as a background.
 
   w-flex(wrap :gap="4")
-    .color.primary-lighter-3--bg.subtitle.text-center.grow.py-3.white.body primary-lighter-3
-    .color.primary-lighter-2--bg.subtitle.text-center.grow.py-3.white.body primary-lighter-2
-    .color.primary-lighter-1--bg.subtitle.text-center.grow.py-3.white.body primary-lighter-1
+    .color.primary-light-3--bg.subtitle.text-center.grow.py-3.white.body primary-light-3
+    .color.primary-light-2--bg.subtitle.text-center.grow.py-3.white.body primary-light-2
+    .color.primary-light-1--bg.subtitle.text-center.grow.py-3.white.body primary-light-1
     .color.primary--bg.subtitle.text-center.grow.py-3.white primary
-    .color.primary-darker-1--bg.subtitle.text-center.grow.py-3.white.body primary-darker-1
-    .color.primary-darker-2--bg.subtitle.text-center.grow.py-3.white.body primary-darker-2
-    .color.primary-darker-3--bg.subtitle.text-center.grow.py-3.white.body primary-darker-3
+    .color.primary-dark-1--bg.subtitle.text-center.grow.py-3.white.body primary-dark-1
+    .color.primary-dark-2--bg.subtitle.text-center.grow.py-3.white.body primary-dark-2
+    .color.primary-dark-3--bg.subtitle.text-center.grow.py-3.white.body primary-dark-3
 
-  w-alert.text-light(type="info" bg-color="yellow-lighter-5" color="orange-darker-1").
+  w-alert.text-light(type="info" bg-color="yellow-light-5" color="orange-dark-1").
     You can add #[code disableColorShades: true] to the Wave UI options to disable the color shades
     computing for the status colors and your custom colors.
 
@@ -101,18 +101,17 @@ div(style="overflow: hidden")
             :class="[`${shade.label}--bg`, i >= 5 ? 'color--darker' : '']")
             span {{ shade.label }}
             small {{ shade.color }}
-
-    .color-palette.ma-2.sticky
-      .w-flex.ma-n2(:class="{ column: !horizontal }")
-        .color.color--top.ma-2.black--bg
-          span black
-          small #000
-        .color.color--top.ma-2.white--bg.black
-          span white
-          small #fff
-        .color.color--top.ma-2.transparent--bg.black
-          span transparent
-          small transparent
+      .color-palette.ma-2
+        .w-flex.ma-n2(:class="{ column: !horizontal }")
+          .color.color--top.ma-2.black--bg
+            span black
+            small #000
+          .color.color--top.ma-2.white--bg.black
+            span white
+            small #fff
+          .color.color--top.ma-2.transparent--bg.black
+            span transparent
+            small transparent
 </template>
 
 <script>
@@ -132,7 +131,6 @@ export default {
 }
 
 .color-palette {
-  &.sticky {position: sticky;left: 0}
   .vertical & {min-width: 250px;flex-grow: 1;}
   .horizontal & {
     display: flex;

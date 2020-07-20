@@ -6,22 +6,22 @@ div.tooltips-demo
   .w-flex.wrap.py-6
     w-tooltip(attach-to=".tooltips-demo" left)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl color="primary-lighter-2") mdi mdi-home
+        w-icon.ma-2(v-on="on" xl color="primary-light-2") mdi mdi-home
       | Home
 
     w-tooltip(attach-to=".tooltips-demo" top)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl color="primary-lighter-2") mdi mdi-home
+        w-icon.ma-2(v-on="on" xl color="primary-light-2") mdi mdi-home
       | Home
 
     w-tooltip
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl color="primary-lighter-2") mdi mdi-home
+        w-icon.ma-2(v-on="on" xl color="primary-light-2") mdi mdi-home
       | Home
 
     w-tooltip(attach-to=".tooltips-demo" right)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl color="primary-lighter-2") mdi mdi-home
+        w-icon.ma-2(v-on="on" xl color="primary-light-2") mdi mdi-home
       | Home
 
   title-link(h2) Toggle on click
@@ -35,7 +35,7 @@ div.tooltips-demo
 
     w-tooltip(attach-to=".tooltips-demo" show-on-click right)
       template(v-slot:activator="{ on }")
-        w-button.ma-2(v-on="on" bg-color="info-darker-2" dark)
+        w-button.ma-2(v-on="on" bg-color="info-dark-2" dark)
           w-icon.mr-1 wi-star
           | Star
       | Star
@@ -89,7 +89,7 @@ div.tooltips-demo
         w-icon.ma-2(v-on="on" xl color="purple") wi-star
       | Star
 
-    w-tooltip(attach-to=".tooltips-demo" color="orange-darker-1" bg-color="yellow-lighter-3")
+    w-tooltip(attach-to=".tooltips-demo" color="orange-dark-1" bg-color="yellow-light-3")
       template(v-slot:activator="{ on }")
         w-icon.ma-2(v-on="on" xl color="amber") wi-star
       | Star
@@ -101,17 +101,17 @@ div.tooltips-demo
 
   title-link(h2) Tile, round and shadow
   .w-flex.wrap.py-6
-    w-tooltip(attach-to=".tooltips-demo" color="red-lighter-2" tile)
+    w-tooltip(attach-to=".tooltips-demo" color="red-light-2" tile)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl color="red-lighter-2") mdi mdi-square
+        w-icon.ma-2(v-on="on" xl color="red-light-2") mdi mdi-square
       | Tile
-    w-tooltip(attach-to=".tooltips-demo" color="amber-darker-1" round)
+    w-tooltip(attach-to=".tooltips-demo" color="amber-dark-1" round)
       template(v-slot:activator="{ on }")
         w-icon.ma-2(v-on="on" xl color="amber") mdi mdi-circle
       | Round
-    w-tooltip(attach-to=".tooltips-demo" color="pink-lighter-1" shadow)
+    w-tooltip(attach-to=".tooltips-demo" color="pink-light-1" shadow)
       template(v-slot:activator="{ on }")
-        w-icon.ma-2(v-on="on" xl color="pink-lighter-1") mdi mdi-heart
+        w-icon.ma-2(v-on="on" xl color="pink-light-1") mdi mdi-heart
       | Shadow
 
   title-link(h2) Different contents

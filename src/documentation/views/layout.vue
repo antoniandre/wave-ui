@@ -13,29 +13,44 @@ div
     #[code="mx-[number]"], #[code="px-[number]"].
 
   example
-    .pa-12.orange-lighter-4--bg
-      .yellow-lighter-5--bg.pa-3.
+    .pa-12.orange-light-4--bg
+      .yellow-light-5--bg.pa-3.
         The orange container has a #[span.code pa-12] class which results in a padding of: 12 x 4 x
         base-font-size pixels.#[br]
         The default base font size is 14px but it's easy to override it in your SCSS, as well as the
         increment for #[span.code pa-x] and #[span.code ma-x] classes. Read on in the
         #[router-link(to="customization") customization] page.#[br]
 
-      .green-lighter-4--bg.mt-8.pa-3.
+      .green-light-4--bg.mt-8.pa-3.
         This green container has a #[span.code mt-8] class which results in a top margin of: 8 x 4 x
         base-font-size pixels.
     template(#html).
-      &lt;div class="pa-12 orange-lighter-4--bg"&gt;
-        &lt;div class="yellow-lighter-5--bg pa-3"&gt;
+      &lt;div class="pa-12 orange-light-4--bg"&gt;
+        &lt;div class="yellow-light-5--bg pa-3"&gt;
           The orange container has a pa-12 class which results in a padding of: 12 x 4 x base-font-size pixels.
           The default base font size is 14px but it's easy to override it in your SCSS, as well as the
           increment for pa-x and ma-x classes.
         &lt;/div&gt;
 
-        &lt;div class="green-lighter-4--bg mt-8 pa-3"&gt;
+        &lt;div class="green-light-4--bg mt-8 pa-3"&gt;
           This green container has an mt-8 class which results in a top margin of: 8 x 4 x base-font-size pixels.
         &lt;/div&gt;
       &lt;/div&gt;
+
+  title-link(h3) Negative margin
+  p Sometimes you may need negative margins, Wave UI also provide 12 increments for this purpose.
+  example
+    .pa-12.orange-light-4--bg
+      .yellow-light-5--bg.pa-3.
+        The orange container has a #[span.code pa-12] class which results in a padding of: 12 x 4 x
+        base-font-size pixels.#[br]
+        The default base font size is 14px but it's easy to override it in your SCSS, as well as the
+        increment for #[span.code pa-x] and #[span.code ma-x] classes. Read on in the
+        #[router-link(to="customization") customization] page.#[br]
+
+      .green-light-4--bg.mt-8.pa-3.
+        This green container has a #[span.code mt-8] class which results in a top margin of: 8 x 4 x
+        base-font-size pixels.
 
   title-link(h2) Flex layout classes
   p the #[code .w-flex] class allows a flex layout that you can easily control with the following classes.
@@ -116,22 +131,22 @@ div
     .subtitle w-flex, row direction (default)
     example
       .code.mb-1 .justify-start (default)
-      .w-flex.pa-3.blue-lighter-5--bg.align-center.justify-start
+      .w-flex.pa-3.blue-light-5--bg.align-center.justify-start
         .box
         .box
         .box
       .code.mt-2.mb-1 .justify-center
-      .w-flex.pa-3.blue-lighter-5--bg.align-center.justify-center
+      .w-flex.pa-3.blue-light-5--bg.align-center.justify-center
         .box
         .box
         .box
       .code.mt-2.mb-1 .justify-space-between
-      .w-flex.pa-3.blue-lighter-5--bg.align-center.justify-space-between
+      .w-flex.pa-3.blue-light-5--bg.align-center.justify-space-between
         .box
         .box
         .box
       .code.mt-2.mb-1 .justify-end
-      .w-flex.pa-3.blue-lighter-5--bg.align-center.justify-end
+      .w-flex.pa-3.blue-light-5--bg.align-center.justify-end
         .box
         .box
         .box
@@ -142,25 +157,25 @@ div
       .wrapper.w-flex
         .w-flex.column.mx-1.fill-height.basis-0
           p.code.mb-1 .justify-start (default)
-          .w-flex.column.fill-height.pa-3.blue-lighter-5--bg.align-center.justify-start
+          .w-flex.column.fill-height.pa-3.blue-light-5--bg.align-center.justify-start
             .box
             .box
             .box
         .w-flex.column.mx-1.fill-height.basis-0
           p.code.mb-1 .justify-center
-          .w-flex.column.fill-height.pa-3.blue-lighter-5--bg.align-center.justify-center
+          .w-flex.column.fill-height.pa-3.blue-light-5--bg.align-center.justify-center
             .box
             .box
             .box
         .w-flex.column.mx-1.fill-height.basis-0
           p.code.mb-1 .justify-space-between
-          .w-flex.column.fill-height.pa-3.blue-lighter-5--bg.align-center.justify-space-between
+          .w-flex.column.fill-height.pa-3.blue-light-5--bg.align-center.justify-space-between
             .box
             .box
             .box
         .w-flex.column.mx-1.fill-height.basis-0
           p.code.mb-1 .justify-end
-          .w-flex.column.fill-height.pa-3.blue-lighter-5--bg.align-center.justify-end
+          .w-flex.column.fill-height.pa-3.blue-light-5--bg.align-center.justify-end
             .box
             .box
             .box

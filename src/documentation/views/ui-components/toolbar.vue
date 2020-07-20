@@ -11,7 +11,7 @@ div
     span.ml-2 Item 3
 
   title-link(h2) Background color &amp; text color
-  w-toolbar.mt-4(bg-color="blue-lighter-5" color="blue-darker-3")
+  w-toolbar.mt-4(bg-color="blue-light-5" color="blue-dark-3")
     .title.my-0 Title
     .spacer
     span.ml-2 Item 1
@@ -64,7 +64,7 @@ div
   p.
     The #[code w-toolbar] component also accepts a height. It can be set as a string with units
     or a number of pixels (without unit).
-  w-toolbar.mt-4.py-0(bg-color="blue-lighter-5" color="blue-darker-3" height="5em")
+  w-toolbar.mt-4.py-0(bg-color="blue-light-5" color="blue-dark-3" height="5em")
     .title.my-0 Title
     .spacer
     span.mx-1 Item 1

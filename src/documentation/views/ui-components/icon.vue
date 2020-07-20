@@ -3,11 +3,11 @@ div
   title-link.mt-4.code(h1) w-icon
 
   title-link(h2) Colors
-  w-icon.mr-1(xl color="primary-darker-1") mdi mdi-home
+  w-icon.mr-1(xl color="primary-dark-1") mdi mdi-home
   w-icon.mr-1(xl color="primary") mdi mdi-home
-  w-icon.mr-1(xl color="primary-lighter-1") mdi mdi-home
-  w-icon.mr-1(xl color="primary-lighter-2") mdi mdi-home
-  w-icon.mr-1(xl color="primary-lighter-3") mdi mdi-home
+  w-icon.mr-1(xl color="primary-light-1") mdi mdi-home
+  w-icon.mr-1(xl color="primary-light-2") mdi mdi-home
+  w-icon.mr-1(xl color="primary-light-3") mdi mdi-home
 
   title-link(h2) Background colors
   p.mb-4
@@ -16,23 +16,23 @@ div
     | instead.
     | #[br]Here is how you can apply a background color to an icon.
 
-  w-icon.mr-1.pa-5(xl bg-color="primary-darker-1") mdi mdi-home
+  w-icon.mr-1.pa-5(xl bg-color="primary-dark-1") mdi mdi-home
   w-icon.mr-1.pa-5(xl bg-color="primary") mdi mdi-home
-  w-icon.mr-1.pa-5(xl bg-color="primary-lighter-1" color="white") mdi mdi-home
-  w-icon.mr-1.pa-5(xl bg-color="primary-lighter-2" color="white") mdi mdi-home
-  w-icon.mr-1.pa-5(xl bg-color="primary-lighter-3" color="white") mdi mdi-home
+  w-icon.mr-1.pa-5(xl bg-color="primary-light-1" color="white") mdi mdi-home
+  w-icon.mr-1.pa-5(xl bg-color="primary-light-2" color="white") mdi mdi-home
+  w-icon.mr-1.pa-5(xl bg-color="primary-light-3" color="white") mdi mdi-home
 
   title-link(h2) Sizes
   p.
     By default the icons inherit their font-size from their parent DOM element.
     But you can easily control their size.
-  w-icon.mr-2(xs color="primary-lighter-2") mdi mdi-home
-  w-icon.mr-2(sm color="primary-lighter-2") mdi mdi-home
-  w-icon.mr-2(md color="primary-lighter-2") mdi mdi-home
-  w-icon.mr-2(lg color="primary-lighter-2") mdi mdi-home
-  w-icon.mr-2(xl color="primary-lighter-2") mdi mdi-home
-  w-icon.mr-2(color="primary-lighter-2" :size="40") mdi mdi-home
-  w-icon.mr-2(color="primary-lighter-2" size="4em") mdi mdi-home
+  w-icon.mr-2(xs color="primary-light-2") mdi mdi-home
+  w-icon.mr-2(sm color="primary-light-2") mdi mdi-home
+  w-icon.mr-2(md color="primary-light-2") mdi mdi-home
+  w-icon.mr-2(lg color="primary-light-2") mdi mdi-home
+  w-icon.mr-2(xl color="primary-light-2") mdi mdi-home
+  w-icon.mr-2(color="primary-light-2" :size="40") mdi mdi-home
+  w-icon.mr-2(color="primary-light-2" size="4em") mdi mdi-home
 
 
   title-link(h2) Different icon fonts supported
