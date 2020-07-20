@@ -30,7 +30,8 @@ export default {
       { label: 'Getting started', route: 'getting-started' },
       { label: 'Customization', route: 'customization' },
       { label: 'Breakpoints', route: 'breakpoints' },
-      { label: 'Layout', route: 'layout' },
+      { label: 'Layout - spaces', route: 'layout--spaces' },
+      { label: 'Layout - flex', route: 'layout--flex' },
       { label: 'Typography', route: 'typography' },
       { label: 'Colors', route: 'colors' },
       { label: 'Transitions', route: 'transitions' }
