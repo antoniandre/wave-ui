@@ -17,11 +17,15 @@ export default {
     shrink: { type: Boolean },
     noShrink: { type: Boolean },
     wrap: { type: Boolean },
+    alignStart: { type: Boolean },
     alignCenter: { type: Boolean },
+    alignEnd: { type: Boolean },
+    justifyStart: { type: Boolean },
     justifyCenter: { type: Boolean },
     justifyEnd: { type: Boolean },
     justifySpaceBetween: { type: Boolean },
-    gap: { type: Number, default: 0 }
+    gap: { type: Number, default: 0 },
+    equal: { type: Boolean }
   },
 
   computed: {
@@ -33,10 +37,14 @@ export default {
         shrink: this.shrink,
         'no-shrink': this.noShrink,
         wrap: this.wrap,
+        'align-start': this.alignStart,
         'align-center': this.alignCenter,
+        'align-end': this.alignEnd,
+        'justify-start': this.justifyStart,
         'justify-center': this.justifyCenter,
         'justify-end': this.justifyEnd,
         'justify-space-between': this.justifySpaceBetween,
+        'basis-0': this.equal,
         [`gap-${this.gap}`]: this.gap
       }
     }
@@ -60,5 +68,6 @@ export default {
 
   &.column {flex-direction: column;}
   &.wrap {flex-wrap: wrap;}
+  &.basis-0 {flex-basis: 0;}
 }
 </style>
