@@ -1,2 +1,0 @@
-(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["calendar-vue"],{"4d2a":function(e,t,a){"use strict";a.r(t);var n=function(){var e=this,t=e.$createElement,a=e._self._c||t;return a("div",[a("title-link",{staticClass:"mt-4 code",attrs:{h1:""}},[e._v("w-calendar")])],1)},l=[],c={},s=c,r=a("2877"),i=Object(r["a"])(s,n,l,!1,null,null,null);t["default"]=i.exports}}]);
-//# sourceMappingURL=calendar-vue.d907343b.js.map
