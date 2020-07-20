@@ -23,8 +23,8 @@ div
     The w-card component will detect if there is a toolbar in the title slot or in the actions
     slot and will remove the default padding and border on this slot if there is.
 
-  .w-flex.mt-4
-    w-card.mr-2
+  w-flex.mt-4(wrap :gap="4")
+    w-card
       template(v-slot:title)
         w-toolbar
           .title.my-0 Top Bar
@@ -32,7 +32,7 @@ div
           span.ml-2 Item 1
           span.ml-2 Item 2
           span.ml-2 Item 3
-    w-card.ml-2
+    w-card
       template(v-slot:actions)
         w-toolbar(bottom)
           .title.my-0 Bottom Bar
@@ -42,8 +42,8 @@ div
           span.ml-2 Item 3
 
   h3 With shadow
-  .w-flex.mt-4
-    w-card.mr-2
+  w-flex.mt-4(wrap :gap="4")
+    w-card
       template(v-slot:title)
         w-toolbar(shadow)
           .title.my-0 Top Bar
@@ -51,7 +51,7 @@ div
           span.ml-2 Item 1
           span.ml-2 Item 2
           span.ml-2 Item 3
-    w-card.ml-2
+    w-card
       template(v-slot:actions)
         w-toolbar(bottom shadow)
           .title.my-0 Bottom Bar
@@ -75,7 +75,6 @@ div
     w-divider.mx-2(vertical)
     span.mx-1 Item 5
     span.mx-1 Item 6
-
 </template>
 
 <style lang="scss">
