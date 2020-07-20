@@ -100,7 +100,8 @@ div
           color="deep-purple"
           :multiple="multiple"
           @item-click="itemClicked = $event"
-          class="mt-6 mr-4 grow" /&gt;
+          class="mt-6 mr-4 grow"&gt;
+        &lt;/w-list&gt;
         &lt;div v-if="itemClicked"&gt;
           &lt;div class="subtitle"&gt;clicked item:&lt;/div&gt;
           &lt;span&gt;{{ '\{\{ itemClicked \}\}' }}&lt;/span&gt;
@@ -156,7 +157,7 @@ div
 
     .w-flex.wrap.mt-4
       .grow
-        .subtitle Custom rendering, default styles
+        p.subtitle Custom rendering, default styles
         w-list.mt-6(
           :items="listItems2"
           item-value="id"
@@ -167,7 +168,7 @@ div
             .spacer
             w-icon(md) {{ item.icon }}
       .grow
-        .subtitle Custom rendering &amp; styles
+        p.subtitle Custom rendering &amp; styles
         w-list.custom.mt-6(
           :items="listItems2"
           item-value="id"
@@ -178,46 +179,62 @@ div
             .spacer
             w-icon(md) {{ item.icon }}
     template(#html).
-      .w-flex.wrap
-        .grow
-          .subtitle Default
-          w-list.mt-6.mr-4(
+      &lt;w-flex wrap&gt;
+        &lt;div class="grow"&gt;
+          &lt;p class="subtitle"&gt;Default&lt;/p&gt;
+          &lt;w-list
             v-model="selectedItem1"
             :items="listItems1"
             checklist
-            color="green")
-        .grow
-          .subtitle Round checkboxes
-          w-list.mt-6(
+            color="green"
+            class="mt-6 mr-4 grow"&gt;
+          &lt;/w-list&gt;
+        &lt;/div&gt;
+        &lt;div class="grow"&gt;
+          &lt;p class="subtitle"&gt;Round checkboxes&lt;/p&gt;
+          &lt;w-list
             v-model="selectedItem2"
             :items="listItems1"
             checklist
             round-checkboxes
-            color="green")
+            color="green"
+            class="mt-6 mr-4 grow"&gt;
+          &lt;/w-list&gt;
+        &lt;/div&gt;
+      &lt;/w-flex&gt;
 
-      .w-flex.wrap.mt-4
-        .grow
-          .subtitle Custom rendering, default styles
-          w-list.mt-6(
+      &lt;w-flex wrap class="mt-4"&gt;
+        &lt;div class="grow"&gt;
+          &lt;p class="subtitle"&gt;Custom rendering, default styles&lt;/p&gt;
+          &lt;w-list
             :items="listItems2"
             item-value="id"
             checklist
-            color="primary")
-            template(#item="{ item }")
-              span {{ '\{\{ item.label \}\}' }}
-              .spacer
-              w-icon(md) {{ '\{\{ item.icon \}\}' }}
-        .grow
-          .subtitle Custom rendering &amp; styles
-          w-list.custom.mt-6(
+            color="primary"
+            class="mt-6 mr-4 grow"&gt;
+            &lt;template #item="{ item }"&gt;
+              &lt;span&gt;{{ '\{\{ item.label \}\}' }}&lt;/span&gt;
+              &lt;div class="spacer"&gt;&lt;/div&gt;
+              &lt;w-icon md&gt;{{ '\{\{ item.icon \}\}' }}&lt;/w-icon&gt;
+            &lt;/template&gt;
+          &lt;/w-list&gt;
+        &lt;/div&gt;
+        &lt;div class="grow"&gt;
+          &lt;p class="subtitle"&gt;Custom rendering &amp; styles&lt;/p&gt;
+          &lt;w-list
             :items="listItems2"
             item-value="id"
             checklist
-            color="primary")
-            template(#item="{ item }")
-              span {{ '\{\{ item.label \}\}' }}
-              .spacer
-              w-icon(md) {{ '\{\{ item.icon \}\}' }}
+            color="primary"
+            class="mt-6 custom"&gt;
+            &lt;template #item="{ item }"&gt;
+              &lt;span&gt;{{ '\{\{ item.label \}\}' }}&lt;/span&gt;
+              &lt;div class="spacer"&gt;&lt;/div&gt;
+              &lt;w-icon md&gt;{{ '\{\{ item.icon \}\}' }}&lt;/w-icon&gt;
+            &lt;/template&gt;
+          &lt;/w-list&gt;
+        &lt;/div&gt;
+      &lt;/w-flex&gt;
     template(#js).
       data: () => ({
         listItems1: [
@@ -239,6 +256,30 @@ div
         selectedItem1: [1, 3],
         selectedItem2: 1
       })
+    template(#css).
+      .w-list {max-width: 300px;}
+      .w-list.custom .w-list__item-label:before {display: none;}
+      .w-list.custom .w-list__item-label label {
+        position: relative;
+        transition: 0.3s ease-in-out;
+      }
+      .w-list.custom .w-list__item-label--active label {
+        opacity: 0.6;
+        color: #999;
+      }
+      .w-list.custom .w-list__item-label label:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 0;
+        border-top: 1px solid #999;
+        pointer-events: none;
+        transition: 0.3s ease-in-out;
+      }
+      .w-list.custom .w-list__item-label--active label:before {
+        width: 100%;
+      }
 
   title-link(h2) Navigation lists
   p.
@@ -246,17 +287,19 @@ div
     It will create a router link or a normal link (if not using vue-router) on those items.
   p It is possible to disable a link with a #[code disabled: true] attribute in the item.
   example
-    w-list.mt-6(:items="listItems2" nav color="primary")
+    w-list(:items="listItems2" nav color="primary")
       template(#item="{ item }")
         span {{ item.label }}
         .spacer
         w-icon(md) {{ item.icon }}
     template(#html).
-      w-list.mt-6(:items="listItems" nav color="primary")
-        template(#item="{ item }")
-          span {{ '\{\{ item.label \}\}' }}
-          .spacer
-          w-icon(md) {{ '\{\{ item.icon \}\}' }}
+      &lt;w-list :items="listItems" nav color="primary"&gt;
+        &lt;template #item="{ item }"&gt;
+          &lt;span&gt;{{ '\{\{ item.label \}\}' }}&lt;/span&gt;
+          &lt;div class="spacer"&gt;&lt;/div&gt;
+          &lt;w-icon md&gt;{{ '\{\{ item.icon \}\}' }}&lt;/w-icon&gt;
+        &lt;/template&gt;
+      &lt;/w-list&gt;
     template(#js).
       data: () => ({
         listItems: [
@@ -268,6 +311,8 @@ div
           { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', route: '#disabled', disabled: true }
         ]
       })
+    template(#css).
+      .w-list {max-width: 300px;}
 </template>
 
 <script>
