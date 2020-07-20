@@ -1,8 +1,8 @@
 # Wave UI - ALPHA VERSION AVAILABLE! :tada:
 
-<!-- [![Latest Version on NPM](https://img.shields.io/npm/v/the-wave-ui.svg)](https://npmjs.com/package/the-wave-ui)
+[![Latest Version on NPM](https://img.shields.io/npm/v/the-wave-ui.svg)](https://npmjs.com/package/the-wave-ui)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
-[![npm](https://img.shields.io/npm/dt/the-wave-ui.svg)](https://www.npmjs.com/package/the-wave-ui) -->
+[![npm](https://img.shields.io/npm/dt/the-wave-ui.svg)](https://www.npmjs.com/package/the-wave-ui)
 <!-- [![npm](https://img.shields.io/npm/dw/the-wave-ui.svg)](https://www.npmjs.com/package/the-wave-ui) -->
 
 > An emerging UI framework for Vue.js with only the bright side. :sunny:
@@ -18,16 +18,17 @@ Like other UI frameworks, Wave UI is very flexible and easy to use. But it is al
 - Handling all the sizes and spacings from a single `$base-font-size` variable that you can override
 - Providing straightforward attributes and component names
 
-
-## install - ALPHA VERSION AVAILABLE!
-    npm i --S the-wave-ui
-
-> WARNING: the name `wave-ui` is taken at the moment. :( Make sure to install `the-wave-ui`!
-
 ___
 
 ## Demo & Documentation
 > [antoniandre.github.io/wave-ui](https://antoniandre.github.io/wave-ui)
+
+___
+
+## install - ALPHA VERSION AVAILABLE!
+    npm i --S the-wave-ui
+
+> WARNING: the name `wave-ui` is taken at the moment. Make sure to install `the-wave-ui`!
 
 ___
 
