@@ -30,7 +30,7 @@ export default {
 
       if (breakpoint !== this.currentBreakpoint) {
         this.currentBreakpoint = breakpoint
-        this.$waveUI.breakpoint = {
+        this.$waveui.breakpoint = {
           name: breakpoint,
           xs: breakpoint === 'xs',
           sm: breakpoint === 'sm',

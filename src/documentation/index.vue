@@ -61,7 +61,7 @@ export default {
       return this.$router.status.loading
     },
     isMobile () {
-      return this.$waveUI.breakpoint.xs
+      return this.$waveui.breakpoint.xs
     }
   }
 }
