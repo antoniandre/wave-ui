@@ -39,9 +39,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "colors" */ '@/documentation/views/colors.vue')
   },
   {
-    path: '/layout',
-    name: 'layout',
-    component: () => import(/* webpackChunkName: "layout" */ '@/documentation/views/layout.vue')
+    path: '/layout--spaces',
+    name: 'layout-spaces',
+    component: () => import(/* webpackChunkName: "layout-spaces" */ '@/documentation/views/layout-spaces.vue')
+  },
+  {
+    path: '/layout--flex',
+    name: 'layout-flex',
+    component: () => import(/* webpackChunkName: "layout-flex" */ '@/documentation/views/layout-flex.vue')
   },
   {
     path: '/typography',
