@@ -170,6 +170,7 @@ export default {
     border-radius: 0;
     line-height: 1.3;
 
+    & + .ssh-pre {border-top-width: 3px;}
     &:last-child {border-radius: 0 0 4px 4px;}
   }
 

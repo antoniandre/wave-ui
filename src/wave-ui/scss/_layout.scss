@@ -3,7 +3,7 @@
   // ----------------------------------------------
   .spacer {flex-grow: 1;}
 
-  .grow {flex-grow: 1;flex-basis: 0;}
+  .grow {flex-grow: 1;flex-basis: 0;width: 100%;}
   .no-grow {flex-grow: 0;}
   .shrink {flex-shrink: 1;}
   .no-shrink {flex-shrink: 0;}
