@@ -1,7 +1,7 @@
 <template lang="pug">
 .nav-menu
   w-button.close(
-    v-if="$waveUI.breakpoint.xs"
+    v-if="$waveui.breakpoint.xs"
     @click="$emit('update:drawerOpen', false)"
     sm
     outline

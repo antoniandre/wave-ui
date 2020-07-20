@@ -3,7 +3,7 @@ div
   title-link.mt-4(h1) Breakpoints
 
   w-card.blue-lighter-5--bg
-    .title.mt-0 Current breakpoint: #[code {{ this.$waveUI.breakpoint.name }}]
+    .title.mt-0 Current breakpoint: #[code {{ this.$waveui.breakpoint.name }}]
     em.grey.mt-1 Resizing your browser will update the current breakpoint.
 
   p.mt-6 By default, 5 breakpoints are set:
@@ -25,8 +25,8 @@ div
       span from 1701px and more
   p.mt-4.
     You can access the current breakpoint from anywhere using
-    #[code this.$waveUI.breakpoint.name], or one of these quick booleans from
-    the same #[code this.$waveUI.breakpoint] object:
+    #[code this.$waveui.breakpoint.name], or one of these quick booleans from
+    the same #[code this.$waveui.breakpoint] object:
   ul
     li.mb-1
       code xs

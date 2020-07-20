@@ -13,7 +13,7 @@ export default class WaveUI {
   static instance = null
   static vueInstance = null // Needed until constructor.
 
-  // Public breakpoint object. Accessible from this.$waveUI.breakpoint.
+  // Public breakpoint object. Accessible from this.$waveui.breakpoint.
   breakpoint = {
     name: '',
     xs: false,
@@ -24,7 +24,7 @@ export default class WaveUI {
   }
 
   // A public object containing pairs of color-name => color hex.
-  // Accessible from this.$waveUI.colors.
+  // Accessible from this.$waveui.colors.
   colors = colors.reduce((obj, color) => {
     obj[color.label] = color.color
     color.shades.forEach(shade => (obj[shade.label] = shade.color))
@@ -90,11 +90,10 @@ export default class WaveUI {
       }
 
       WaveUI.instance = this
-      // Make waveUI reactive and expose the single instance in Vue.
-      WaveUI.vueInstance.prototype.$waveUI = WaveUI.vueInstance.observable(this)
+      // Make waveui reactive and expose the single instance in Vue.
+      WaveUI.vueInstance.prototype.$waveui = WaveUI.vueInstance.observable(this)
 
       delete WaveUI.vueInstance // Get rid of the Vue instance that we don't need anymore.
-      // return WaveUI.instance
     }
   }
 }

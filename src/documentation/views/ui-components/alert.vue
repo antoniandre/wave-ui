@@ -66,7 +66,7 @@ div(style="max-width: 900px")
       w-alert.size--md(color="info" type="success") This is a medium alert.
       w-alert.size--lg(color="info" type="success") This is a large alert.
       w-alert.size--xl(color="info" type="success") This is an extra large alert.
-    .spacer(v-if="!$waveUI.breakpoint.xs")
+    .spacer(v-if="!$waveui.breakpoint.xs")
 </template>
 
 <script>

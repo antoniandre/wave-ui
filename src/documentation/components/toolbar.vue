@@ -11,7 +11,7 @@ w-toolbar.main-toolbar(fixed)
     .size--xs.text-nowrap View the project on Github
   .caption Version 1.0
   w-button.ml-2.mr-n1.hamburger-menu(
-    v-if="$waveUI.breakpoint.xs"
+    v-if="$waveui.breakpoint.xs"
     @click="$emit('update:drawerOpen', !drawerOpen)"
     large text round
     :icon="drawerOpen ? 'wi-cross' : 'mdi mdi-menu'")
