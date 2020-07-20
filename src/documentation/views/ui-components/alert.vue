@@ -19,8 +19,8 @@ div(style="max-width: 900px")
   w-alert(color="pink") This is an alert with a pink color.
   w-alert(bg-color="pink" color="white") This is an alert with a pink background color.
   p You can even mix different colors and background colors.
-  w-alert(bg-color="purple" color="cyan-lighter-4") This is an alert with a purple background and cyan color.
-  w-alert(bg-color="cyan-lighter-4" color="purple") This is an alert with a cyan background and purple color.
+  w-alert(bg-color="purple" color="cyan-light-4") This is an alert with a purple background and cyan color.
+  w-alert(bg-color="cyan-light-4" color="purple") This is an alert with a cyan background and purple color.
 
   title-link(h2 slug="types") Types (adds an icon)
   h3 Normal
@@ -45,7 +45,7 @@ div(style="max-width: 900px")
   title-link(h2) Borders
     w-alert(type="success" light no-border) This is a success alert with no border.
     w-alert(color="primary" no-border) This is a normal alert with no border.
-    w-alert(bg-color="cyan-lighter-4" color="purple" no-border) This is an alert with a cyan background, purple color and no border.
+    w-alert(bg-color="cyan-light-4" color="purple" no-border) This is an alert with a cyan background, purple color and no border.
   .w-flex.wrap.ma-n2
     w-alert.grow.ma-2(color="primary" border-left) This is a normal alert with a left border.
     w-alert.grow.ma-2(color="primary" border-right) This is a normal alert with a right border.

@@ -34,7 +34,7 @@ div
   w-tag(v-model="tagOn2" close color="primary") v-model &amp; close
 
   title-link(h2) Custom content
-  w-tag(v-model="tagOn3" color="pink-lighter-1" bg-color="pink-lighter-5")
+  w-tag(v-model="tagOn3" color="pink-light-1" bg-color="pink-light-5")
     w-icon.mr-1(sm) mdi mdi-heart
     | Like it
 </template>

@@ -24,7 +24,7 @@ div
     relative).
 
   title-link(h2) Color &amp; background color
-  w-menu(color="blue-darker-2" bg-color="blue-lighter-5")
+  w-menu(color="blue-dark-2" bg-color="blue-light-5")
     template(#activator="{ on }")
       w-button(v-on="on" outline color="primary") Show menu on hover
     | Menu content

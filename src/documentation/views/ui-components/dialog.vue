@@ -52,7 +52,7 @@ div
   w-dialog(v-model="dialog3.show" :max-width="600")
     template(v-slot:title) Dialog 1
     p Lorem ipsum, dolor sit amet consectetur adipisicing elit...
-    w-button.mt-6(@click="dialog4.show = true" bg-color="indigo-lighter-1" dark) Open dialog 2
+    w-button.mt-6(@click="dialog4.show = true" bg-color="indigo-light-1" dark) Open dialog 2
 
     template(v-slot:actions)
       .spacer

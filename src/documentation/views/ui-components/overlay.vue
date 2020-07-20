@@ -14,19 +14,19 @@ div
   w-flex.mt-4(wrap :gap="12")
     w-button(bg-color="primary" dark @click="showOverlay = true") Show overlay
 
-    w-divider.my-3(vertical color="grey-lighter-4")
+    w-divider.my-3(vertical color="grey-light-4")
     .w-flex.column.no-grow
       .heading Options
       div
         w-button.mr-2(
           color="primary"
-          bg-color="blue-lighter-5"
+          bg-color="blue-light-5"
           :class="persistent ? 'pr-4' : ''"
           @click="persistent = !persistent")
           .code.primary :persistent="{{ persistent }}"
         w-button(
           color="primary"
-          bg-color="blue-lighter-5"
+          bg-color="blue-light-5"
           @click="persistentNoAnimation = !persistentNoAnimation"
           :disabled="!persistent")
           .code.primary :persistent-no-animation="{{ persistentNoAnimation }}"
