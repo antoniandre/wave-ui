@@ -41,7 +41,7 @@ export default {
       { label: 'App', route: 'w-app' },
       { label: 'Badge', route: 'w-badge' },
       { label: 'Button', route: 'w-button' },
-      { label: 'Calendar', route: 'w-calendar', disabled: true },
+      { label: 'Calendar', route: 'w-calendar' },
       { label: 'Card', route: 'w-card' },
       { label: 'Dialog', route: 'w-dialog' },
       { label: 'Divider', route: 'w-divider' },
