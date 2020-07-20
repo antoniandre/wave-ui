@@ -115,8 +115,8 @@ export default {
 
   // Position.
   &--absolute {position: absolute;z-index: 400;}
-  &.top {top: 2 * $base-increment;}
-  &.bottom {bottom: 2 * $base-increment;}
+  &.top {top: 0;padding-top: 2 * $base-increment;}
+  &.bottom {bottom: 0;padding-bottom: 2 * $base-increment;}
   &.left {justify-content: flex-start;right: auto;}
   &.right {justify-content: flex-end;left: auto;}
 
