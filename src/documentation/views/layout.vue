@@ -13,7 +13,7 @@ div
     #[code="mx-[number]"], #[code="px-[number]"].
 
   example
-    .pa-12.orange-light-4--bg
+    .orange-light-4--bg.pa-12
       .yellow-light-5--bg.pa-3.
         The orange container has a #[span.code pa-12] class which results in a padding of: 12 x 4 x
         base-font-size pixels.#[br]
@@ -25,7 +25,7 @@ div
         This green container has a #[span.code mt-8] class which results in a top margin of: 8 x 4 x
         base-font-size pixels.
     template(#html).
-      &lt;div class="pa-12 orange-light-4--bg"&gt;
+      &lt;div class="orange-light-4--bg pa-12"&gt;
         &lt;div class="yellow-light-5--bg pa-3"&gt;
           The orange container has a pa-12 class which results in a padding of: 12 x 4 x base-font-size pixels.
           The default base font size is 14px but it's easy to override it in your SCSS, as well as the
@@ -38,19 +38,22 @@ div
       &lt;/div&gt;
 
   title-link(h3) Negative margin
-  p Sometimes you may need negative margins, Wave UI also provide 12 increments for this purpose.
+  p.
+    Sometimes you may need negative margins, Wave UI also provides 12 increments for this purpose.#[br]
+    In this example, the green container is moved up whereas its top should touch the bottom of the
+    orange container.
   example
-    .pa-12.orange-light-4--bg
-      .yellow-light-5--bg.pa-3.
-        The orange container has a #[span.code pa-12] class which results in a padding of: 12 x 4 x
-        base-font-size pixels.#[br]
-        The default base font size is 14px but it's easy to override it in your SCSS, as well as the
-        increment for #[span.code pa-x] and #[span.code ma-x] classes. Read on in the
-        #[router-link(to="customization") customization] page.#[br]
-
-      .green-light-4--bg.mt-8.pa-3.
-        This green container has a #[span.code mt-8] class which results in a top margin of: 8 x 4 x
-        base-font-size pixels.
+    .orange-light-4--bg.pa-8
+    .green-light-4--bg.mt-n8.mx-8.pa-3.
+      This green container has a #[span.code mt-n8] class which results in a negative top margin of: 8 x 4 x
+      base-font-size pixels.
+    template(#html).
+      &lt;div class="orange-light-4--bg pa-8"&gt;
+        &lt;div class="green-light-4--bg mt-n8 mx-8 pa-3"&gt;
+          This green container has a mt-n8 class which results in a negative top margin of: 8 x 4 x
+          base-font-size pixels.
+        &lt;/div&gt;
+      &lt;/div&gt;
 
   title-link(h2) Flex layout classes
   p the #[code .w-flex] class allows a flex layout that you can easily control with the following classes.
@@ -82,6 +85,7 @@ div
       | Sets a height of 100%.
 
   title-link(h3) Alignments
+  p Align children with these classes on the parent container:
   ul
     li.mt-1
       code.mr-2 .align-start
@@ -93,15 +97,6 @@ div
       code.mr-2 .align-end
       | Applies this CSS rule: #[span.code align: flex-end].
     li.mt-1
-      code.mr-2 .align-self-start
-      | Applies this CSS rule: #[span.code align-self: flex-start].
-    li.mt-1
-      code.mr-2 .align-self-center
-      | Applies this CSS rule: #[span.code align-self: center].
-    li.mt-1
-      code.mr-2 .align-self-end
-      | Applies this CSS rule: #[span.code align-self: flex-end].
-    li.mt-1
       code.mr-2 .justify-start
       | Applies this CSS rule: #[span.code justify: flex-start].
     li.mt-1
@@ -111,6 +106,21 @@ div
       code.mr-2 .justify-end
       | Applies this CSS rule: #[span.code justify: flex-end].
     li.mt-1
+      code.mr-2 .justify-space-between
+      | Applies this CSS rule: #[span.code justify: space-between].
+
+  p.mt-4 Align a child with these classes directly on the child element:
+  ul
+    li.mt-1
+      code.mr-2 .align-self-start
+      | Applies this CSS rule: #[span.code align-self: flex-start].
+    li.mt-1
+      code.mr-2 .align-self-center
+      | Applies this CSS rule: #[span.code align-self: center].
+    li.mt-1
+      code.mr-2 .align-self-end
+      | Applies this CSS rule: #[span.code align-self: flex-end].
+    li.mt-1
       code.mr-2 .justify-self-start
       | Applies this CSS rule: #[span.code justify-self: flex-start].
     li.mt-1
@@ -119,37 +129,68 @@ div
     li.mt-1
       code.mr-2 .justify-self-end
       | Applies this CSS rule: #[span.code justify-self: flex-end].
-    li.mt-1
-      code.mr-2 .justify-space-between
-      | Applies this CSS rule: #[span.code justify: space-between].
 
   p.mt-6.
-    The #[code.mx-1 .spacer] class is also very helpful to separate 2 elements as is will occupy the available
-    space and push the elements on each side.
+    The #[code.mx-1 .spacer] class is also very helpful to separate 2 elements as is will occupy the
+    available space and push the elements on each side.
 
   div.grow.mt-6
     .subtitle w-flex, row direction (default)
     example
-      .code.mb-1 .justify-start (default)
-      .w-flex.pa-3.blue-light-5--bg.align-center.justify-start
+      p.code.mb-1 .justify-start (default)
+      .w-flex.pa-3.blue-light-5--bg.justify-start
         .box
         .box
         .box
-      .code.mt-2.mb-1 .justify-center
-      .w-flex.pa-3.blue-light-5--bg.align-center.justify-center
+      p.code.mt-2.mb-1 .justify-center
+      .w-flex.pa-3.blue-light-5--bg.justify-center
         .box
         .box
         .box
-      .code.mt-2.mb-1 .justify-space-between
-      .w-flex.pa-3.blue-light-5--bg.align-center.justify-space-between
+      p.code.mt-2.mb-1 .justify-space-between
+      .w-flex.pa-3.blue-light-5--bg.justify-space-between
         .box
         .box
         .box
-      .code.mt-2.mb-1 .justify-end
-      .w-flex.pa-3.blue-light-5--bg.align-center.justify-end
+      p.code.mt-2.mb-1 .justify-end
+      .w-flex.pa-3.blue-light-5--bg.justify-end
         .box
         .box
         .box
+      template(#html).
+        &lt;p&gt;.justify-start (default)&lt;/p&gt;
+        &lt;w-flex justify-start class="blue-light-5--bg pa-3"&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+        &lt;/w-flex&gt;
+
+        &lt;p&gt;.justify-center&lt;/p&gt;
+        &lt;w-flex justify-center class="blue-light-5--bg pa-3"&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+        &lt;/w-flex&gt;
+
+        &lt;p&gt;.justify-space-between&lt;/p&gt;
+        &lt;w-flex justify-space-between class="blue-light-5--bg pa-3"&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+        &lt;/w-flex&gt;
+
+        &lt;p&gt;.justify-end&lt;/p&gt;
+        &lt;w-flex justify-end class="blue-light-5--bg pa-3"&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+        &lt;/w-flex&gt;
+      template(#css).
+        .box {
+          background-color: #9bbff9;
+          border: 1px solid #55f;
+          padding: 12px;
+        }
 
   div.grow
     .subtitle w-flex, column direction
@@ -179,6 +220,52 @@ div
             .box
             .box
             .box
+      template(#html).
+        &lt;w-flex class="wrapper"&gt;
+          &lt;w-flex column basis-0 class="mx-1 fill-height"&gt;
+            &lt;p&gt;.justify-start (default)&lt;/p&gt;
+            &lt;w-flex column align-center justify-start class="fill-height pa-3 blue-light-5--bg"&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+            &lt;/w-flex&gt;
+          &lt;/w-flex&gt;
+
+          &lt;w-flex column basis-0 class="mx-1 fill-height"&gt;
+            &lt;p&gt;.justify-center&lt;/p&gt;
+            &lt;w-flex column align-center justify-center class="fill-height pa-3 blue-light-5--bg"&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+            &lt;/w-flex&gt;
+          &lt;/w-flex&gt;
+
+          &lt;w-flex column basis-0 class="mx-1 fill-height"&gt;
+            &lt;p&gt;.justify-space-between&lt;/p&gt;
+            &lt;w-flex column align-center justify-space-between class="fill-height pa-3 blue-light-5--bg"&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+            &lt;/w-flex&gt;
+          &lt;/w-flex&gt;
+
+          &lt;w-flex column basis-0 class="mx-1 fill-height"&gt;
+            &lt;p&gt;.justify-end&lt;/p&gt;
+            &lt;w-flex column align-center justify-end class="fill-height pa-3 blue-light-5--bg"&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+              &lt;div class="box"&gt;&lt;/div&gt;
+            &lt;/w-flex&gt;
+          &lt;/w-flex&gt;
+        &lt;/w-flex&gt;
+      template(#css).
+        .box {
+          background-color: #9bbff9;
+          border: 1px solid #55f;
+          padding: 12px;
+        }
+
+        .wrapper {height: 200px;}
 
   title-link(h2 slug="grid-system")
     | Grid system
