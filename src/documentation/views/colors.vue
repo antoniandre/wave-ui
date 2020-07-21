@@ -53,15 +53,14 @@ div(style="overflow: hidden")
       .color.info-dark2--bg.subtitle.text-center.py3.ma2.white.body info-dark2
       .color.info-dark3--bg.subtitle.text-center.py3.ma2.white.body info-dark3
 
-  title-link(h2 slug="primary-and-secondary-colors-and-shades")
-    | #[span.code primary] &amp; #[span.code secondary] colors and shades
+  title-link(h2 slug="primary-secondary-and-your-own-colors-and-shades")
+    | #[span.code primary], #[span.code secondary] and your own colors &amp; shades
   p.
-    The primary color, and whichever color you add, will also have 6 different shades.
-    More shades would most likely be redundant with the bellow color palette.
-
-  p.
-    Also note that the primary color is considered as dark by default, and will render,
-    as well as its 3 darker shades, with a white text when used as a background.
+    In addition to the built-in status colors and color palette bellow, you can define a set
+    of custom colors.#[br]
+    The primary color, and whichever color you add, will also be computed to 6 different shades:
+    3 lighter ones and 3 darker ones.#[br]
+    More shades would most likely be redundant with the color palette.
 
   w-flex(wrap :gap="4")
     .color.primary-light3--bg.subtitle.text-center.grow.py3.white.body primary-light3
@@ -72,9 +71,22 @@ div(style="overflow: hidden")
     .color.primary-dark2--bg.subtitle.text-center.grow.py3.white.body primary-dark2
     .color.primary-dark3--bg.subtitle.text-center.grow.py3.white.body primary-dark3
 
+  p.mt6.subtitle To start defining your own colors add them to the WaveUI options:
+  ssh-pre(language="js").
+    const waveui = new WaveUI({
+      colors: {
+        primary: '#9ac332',
+        secondary: '#5d9a26'
+      }
+    })
+
+  p.
+    Also note that the primary color is considered as dark by default, and will render,
+    as well as its 3 darker shades, with a white text when used as a background.
+
   w-alert.text-light(type="info" bg-color="yellow-light5" color="orange-dark1").
-    You can add #[code disableColorShades: true] to the Wave UI options to disable the color shades
-    computing for the status colors and your custom colors.
+    If you don't need it, you can add #[code disableColorShades: true] to the Wave UI options to disable
+    the color shades computing of the status colors and your custom colors.
 
   title-link.mt12.mb4.w-flex.align-center(h2 slug="color-palette")
     | Color Palette
@@ -84,6 +96,9 @@ div(style="overflow: hidden")
       dark
       @click.prevent="horizontal = !horizontal")
       | {{ horizontal ? 'Vertical' : 'Horizontal' }} display
+  p.
+    This built-in color palette will complete your collection of available colors for fast and easy designs.
+
 
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
     .w-flex.wrap.ma-2
