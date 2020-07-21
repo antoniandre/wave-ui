@@ -9,7 +9,11 @@ div
   title-link(h2) Notification position
   p Notifications have a fixed position by default.
   w-flex(align-start)
-    w-button(@click="notification.show = !notification.show" color="primary" outline)
+    w-button(
+      @click="notification.show = !notification.show"
+      color="primary"
+      outline
+      width="8em")
       | {{ notification.show ? 'Hide' : 'Show' }} notification
     .w-flex.wrap.pa6
       w-radios.my1.mr6(
