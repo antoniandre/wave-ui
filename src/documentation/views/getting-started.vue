@@ -27,8 +27,22 @@ div
 
   title-link(h2) Options
   p Wave UI accepts these options:
-  ul
-    li colors
-    li breakpoints
-    li presets
+  w-list(:items="waveUiOptions" icon="wi-check")
+    template(#item="{ item }")
+      span {{ item.label }}
+      template(v-if="item.route")
+        span.ml1 - read on in
+        router-link.ml1(:to="item.route") {{ item.label }}
 </template>
+
+<script>
+export default {
+  data: () => ({
+    waveUiOptions: [
+      { label: 'colors', route: 'colors#primary-secondary-and-your-own-colors-and-shades' },
+      { label: 'breakpoints', route: 'breakpoints' },
+      { label: 'presets', route: 'customization#presets' }
+    ]
+  })
+}
+</script>

@@ -81,7 +81,7 @@ div
 .page--toolbar {
   .w-card {
     flex-grow: 1;
-    max-width: 350px;
+    max-width: 550px;
     height: 200px;
   }
 }

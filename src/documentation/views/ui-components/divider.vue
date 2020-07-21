@@ -16,7 +16,7 @@ div
       rovident iste possimus explicabo saepe laborum. Beatae perspiciatis at enim eaque?
 
     w-divider.my6.mx-4
-    pre.mb4 w-divider.my6.mx-4
+    ssh-pre.mb4(language="html-vue") &lt;w-divider class="my6 mx-4"&gt;&lt;/w-divider&gt;
 
     p.
       Et possimus corporis ducimus rem tenetur. Deleniti, culpa magni repellendus adipisci
@@ -24,7 +24,7 @@ div
       Quia rem ut ab nesciunt dignissimos natus. Eum corporis officiis natus velit illum.
 
     w-divider.ma6(color="amber")
-    pre.mb4 w-divider.ma6.amber
+    ssh-pre.mb4(language="html-vue") &lt;w-divider color="amber" class="ma6"&gt;&lt;/w-divider&gt;
 
     p.
       Quisquam soluta distinctio qui vel alias molestiae, doloremque totam eius sequi delectus
