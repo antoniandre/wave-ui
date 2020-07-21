@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt-4(h1 slug="w-checkbox-and-w-checkboxes")
+  title-link.mt4(h1 slug="w-checkbox-and-w-checkboxes")
     | #[span.code w-checkbox] &amp; #[span.code w-checkboxes]
 
   title-link(h2 slug="multiple-checkboxes")
@@ -13,11 +13,11 @@ div
 
   h3 States
   .w-flex.wrap
-    w-checkbox.mr-3.mb-1(:value="true" label="Checked")
-    w-checkbox.mr-3.mb-1(:value="false" label="Unchecked")
-    w-checkbox.mr-3.mb-1(:value="true" indeterminate label="Indeterminate")
-    w-checkbox.mr-3.mb-1(:value="true" disabled label="Checked &amp; disabled")
-    w-checkbox.mr-3.mb-1(:value="false" disabled label="Unchecked &amp; disabled")
+    w-checkbox.mr3.mb1(:value="true" label="Checked")
+    w-checkbox.mr3.mb1(:value="false" label="Unchecked")
+    w-checkbox.mr3.mb1(:value="true" indeterminate label="Indeterminate")
+    w-checkbox.mr3.mb1(:value="true" disabled label="Checked &amp; disabled")
+    w-checkbox.mr3.mb1(:value="false" disabled label="Unchecked &amp; disabled")
 
   h3 V-model
   p.
@@ -25,7 +25,7 @@ div
     If no value is set, the choice's label will be returned instead.
   .w-flex
     w-checkboxes(v-model="selectedCheckbox1" :items="checkboxes1")
-    div.subtitle.ml-8
+    div.subtitle.ml8
       | Selected choices:
       code {{ selectedCheckbox1 || '[]' }}
 
@@ -50,10 +50,10 @@ div
     button.
   w-checkboxes(:items="checkboxes3" color="green")
     template(v-slot:item="{ item }")
-      span.pr-2 {{ item.label }}
+      span.pr2 {{ item.label }}
       w-icon.deep-purple {{ item.icon }}
 
-  w-divider.ma-10.ml-0
+  w-divider.ma10.ml0
 
   title-link(h2) Individual checkbox
   p.
@@ -62,15 +62,15 @@ div
     A set of checkboxes will only work together if they have the same v-model,
     or the same #[code name] attribute (standard HTML).
 
-  w-checkbox.mr-2(label="Choice 1" name="checkboxes2" color="success")
-  w-checkbox.mr-2(label="Choice 2" name="checkboxes2" color="warning")
+  w-checkbox.mr2(label="Choice 1" name="checkboxes2" color="success")
+  w-checkbox.mr2(label="Choice 2" name="checkboxes2" color="warning")
   w-checkbox(label="Choice 3" name="checkboxes2" color="error")
 
   h3 Custom label content
   p.
     #[code w-checkbox] provides a default slot to customize the content.
-  w-checkbox.mr-2(name="checkboxes2" color="success")
-    span.pr-2 Choice 1
+  w-checkbox.mr2(name="checkboxes2" color="success")
+    span.pr2 Choice 1
     w-icon.primary wi-star
 </template>
 

@@ -1,47 +1,47 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1) w-drawer
+  title-link.mt4.code(h1) w-drawer
 
   .text-center
-    w-button.ma-1(
+    w-button.ma1(
       @click="showLeftDrawer = !showLeftDrawer"
       outline
       color="primary") Show left drawer
-    w-button.ma-1(
+    w-button.ma1(
       @click="showRightDrawer = !showRightDrawer"
       outline
       color="primary") Show right drawer
-    w-button.ma-1(
+    w-button.ma1(
       @click="noOverlay = false;showTopDrawer = !showTopDrawer"
       outline
       color="primary") Show top drawer
-    w-button.ma-1(
+    w-button.ma1(
       @click="showBottomDrawer = !showBottomDrawer"
       outline
       color="primary") Show bottom drawer
 
   title-link(h2) Control width or height
-  w-button.mr-2(
+  w-button.mr2(
     @click="bottomDrawerHeight = '60px';showBottomDrawer = !showBottomDrawer"
     outline
     color="primary") Show a 60px height bottom drawer
 
   title-link(h2) No overlay &amp; custom color overlay
   span Open top drawer with:
-  w-button.mx-2.my-1(
+  w-button.mx2.my1(
     @click="noOverlay = true;overlayColor = false;showTopDrawer = !showTopDrawer"
     outline
     color="primary") No overlay
-  w-button.mr-2.my-1(
+  w-button.mr2.my1(
     @click="noOverlay = false;overlayColor = 'rgba(35, 71, 129, 0.5)';showTopDrawer = !showTopDrawer"
     outline
     color="primary") Custom color overlay
-  w-button.mr-2.my-1(
+  w-button.mr2.my1(
     @click="noOverlay = false;overlayColor = 'transparent';showTopDrawer = !showTopDrawer"
     outline
     color="primary") Transparent overlay
 
-  p.mt-4.
+  p.mt4.
     #[strong Note:] with no overlay the underneath content will be clickable and the drawer
     will not close.
     To allow closing the drawer when clicking outside of it, you can set a transparent background
@@ -49,7 +49,7 @@ div
 
   title-link(h2) Persistent drawers
   p A persistent drawer stays open when clicking outside or pressing the escape key.
-  w-button.mx-2.my-1(
+  w-button.mx2.my1(
   @click="persistent = true;showBottomDrawer = !showBottomDrawer"
   outline
   color="primary") Persistent drawer
@@ -58,7 +58,7 @@ div
   p.
     The cookie notice is a good use case of a persistent drawer, it will not let you click
     anything until you accept.
-  w-button.mx-2.my-1(@click="showCookieNotice = true" outline color="primary")
+  w-button.mx2.my1(@click="showCookieNotice = true" outline color="primary")
     | Show the cookie notice
   w-drawer(
     v-model="showCookieNotice"
@@ -67,14 +67,14 @@ div
     persistent
     fit-content
     bottom)
-    .w-flex.pa-2.align-center.wrap
+    .w-flex.pa2.align-center.wrap
       .w-flex.align-center
-        w-icon.mr-3(color="primary" xl) wi-info-circle
+        w-icon.mr3(color="primary" xl) wi-info-circle
         span.grey-dark-3.
           Our website uses cookies to give you the best user experience.
           To continue browsing this site you must agree.
       w-button.ml-auto(sm bg-color="primary" dark @click="showCookieNotice = false")
-        w-icon.mr-2 wi-check
+        w-icon.mr2 wi-check
         | I agree
   p You can then store the result of the acceptation in the localStorage.
   ssh-pre(language="html-vue" label="Template").
@@ -84,7 +84,7 @@ div
       bg-color="primary"
       dark
       @click="acceptCookies"&gt;
-      &lt;w-icon class="mr-2"&gt;wi-check&lt;/w-icon&gt;
+      &lt;w-icon class="mr2"&gt;wi-check&lt;/w-icon&gt;
       I agree
     &lt;/w-button&gt;
 

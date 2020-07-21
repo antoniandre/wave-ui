@@ -10,12 +10,12 @@
     icon="wi-cross")
   w-list(:items="sections" nav color="primary" @item-click="$emit('update:drawerOpen', false)")
 
-  .title.mt-4 UI Components
+  .title.mt4 UI Components
 
   w-list(:items="components" nav color="primary" @item-click="$emit('update:drawerOpen', false)")
     template(#item="{ item }")
       span(v-html="item.label")
-      w-tag.ml-2.px-1(v-if="item.disabled" bg-color="red" color="white") Coming soon
+      w-tag.ml2.px1(v-if="item.disabled" bg-color="red" color="white") Coming soon
 </template>
 
 <script>

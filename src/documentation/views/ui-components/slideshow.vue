@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1) w-slideshow
+  title-link.mt4.code(h1) w-slideshow
 
 </template>
 

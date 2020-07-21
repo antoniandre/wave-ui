@@ -1,8 +1,8 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1) w-dialog
+  title-link.mt4.code(h1) w-dialog
   p This dialog contains some basic options to toggle on and off.
-  w-button.px-4.mr-6.shrink(@click="dialog1.show = true" bg-color="primary" dark) Open dialog
+  w-button.px4.mr6.shrink(@click="dialog1.show = true" bg-color="primary" dark) Open dialog
 
   w-dialog(
     v-model="dialog1.show"
@@ -11,16 +11,16 @@ div
     :persistent="dialog1.persistent"
     :persistent-no-animation="dialog1.persistentNoAnimation")
     template(v-slot:title)
-      w-icon.mr-2 mdi mdi-tune
+      w-icon.mr2 mdi mdi-tune
       | Control panel
-    w-checkbox.mt-2(v-model="dialog1.fullscreen" label="Fullscreen")
-    w-checkbox.mt-2(v-model="dialog1.persistent" label="Persistent (try to click outside)")
-    w-checkbox.mt-2(
+    w-checkbox.mt2(v-model="dialog1.fullscreen" label="Fullscreen")
+    w-checkbox.mt2(v-model="dialog1.persistent" label="Persistent (try to click outside)")
+    w-checkbox.mt2(
       v-model="dialog1.persistentNoAnimation"
       :disabled="!dialog1.persistent"
       label="Persistent with no animation")
-    .w-flex.mt-6.no-grow
-      span.mr-2 Max width:
+    .w-flex.mt6.no-grow
+      span.mr2 Max width:
       w-radios(
         v-model="dialog1.maxWidth"
         :items="[{ value: 300, label: '300px' }, { value: 500, label: '500px' }]"
@@ -31,7 +31,7 @@ div
 
   title-link(h2) Persistent prompt dialog
 
-  w-button.px-4(@click="dialog2.show = true" bg-color="primary" dark) Open dialog
+  w-button.px4(@click="dialog2.show = true" bg-color="primary" dark) Open dialog
   w-dialog(v-model="dialog2.show" persistent :max-width="550")
     template(v-slot:title) Terms and conditions
     p.
@@ -43,16 +43,16 @@ div
       aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
     template(v-slot:actions)
       .spacer
-      w-button.mr-2(@click="dialog2.show = false" bg-color="error") I disagree
+      w-button.mr2(@click="dialog2.show = false" bg-color="error") I disagree
       w-button(@click="dialog2.show = false" bg-color="success") I agree
 
   title-link(h2) Nesting
 
-  w-button.px-4(@click="dialog3.show = true" bg-color="primary" dark) Open dialog
+  w-button.px4(@click="dialog3.show = true" bg-color="primary" dark) Open dialog
   w-dialog(v-model="dialog3.show" :max-width="600")
     template(v-slot:title) Dialog 1
     p Lorem ipsum, dolor sit amet consectetur adipisicing elit...
-    w-button.mt-6(@click="dialog4.show = true" bg-color="indigo-light-1" dark) Open dialog 2
+    w-button.mt6(@click="dialog4.show = true" bg-color="indigo-light-1" dark) Open dialog 2
 
     template(v-slot:actions)
       .spacer
@@ -60,15 +60,15 @@ div
 
   w-dialog(v-model="dialog4.show" :max-width="250")
     template(v-slot:title) Dialog 2
-    w-button.my-6(@click="dialog4.show = false" bg-color="error" dark) Close
+    w-button.my6(@click="dialog4.show = false" bg-color="error" dark) Close
 
   title-link(h2) Transitions
 
   .w-flex
-    w-button.px-4.mr-6(@click="dialog5.show = true" bg-color="primary" dark) Open dialog
+    w-button.px4.mr6(@click="dialog5.show = true" bg-color="primary" dark) Open dialog
     .w-flex.wrap
-      div.ma-2
-        .subtitle.mb-2 Transition names
+      div.ma2
+        .subtitle.mb2 Transition names
         w-radios(
           v-model="dialog5.transition"
           :items="transitions"
@@ -76,8 +76,8 @@ div
           @change="dialog5.fullscreen = null")
           template(v-slot:label="{ item }")
             code {{ item.label }}
-      div.ma-2
-        .subtitle.mb-2 Slide transitions for fullscreen
+      div.ma2
+        .subtitle.mb2 Slide transitions for fullscreen
         w-radios(
           v-model="dialog5.transition"
           :items="transitionsForFullscreen"
@@ -85,7 +85,7 @@ div
           @change="dialog5.fullscreen = null")
           template(v-slot:label="{ item }")
             code {{ item.label }}
-        w-checkbox.mt-2(
+        w-checkbox.mt2(
           :value="dialog5.fullscreen === null ? fullscreenTransition : dialog5.fullscreen"
           @change="dialog5.fullscreen = $event"
           label="Fullscreen dialog")
@@ -96,24 +96,24 @@ div
     :transition="dialog5.transition")
     template(v-slot:title) Dialog with custom transition
     .w-flex.fill-height.align-center.justify-center
-      w-button.my-6(@click="dialog5.show = false" bg-color="error" dark) Close
+      w-button.my6(@click="dialog5.show = false" bg-color="error" dark) Close
 
   title-link(h2) Overlay opacity and color
-  w-button.px-4(@click="dialog6.show = true" bg-color="primary" dark) Open control panel
+  w-button.px4(@click="dialog6.show = true" bg-color="primary" dark) Open control panel
   w-dialog(
     v-model="dialog6.show"
     :max-width="500"
     :overlay-opacity="dialog6.overlayChoice === 'opacity' && dialog6.overlayOpacity"
     :overlay-color="dialog6.overlayChoice !== 'opacity' && dialog6.overlayChoice")
     template(v-slot:title)
-      w-icon.mr-2 mdi mdi-tune
+      w-icon.mr2 mdi mdi-tune
       | Control panel
-    w-radio.mt-1(v-model="dialog6.overlayChoice" return-value="opacity")
+    w-radio.mt1(v-model="dialog6.overlayChoice" return-value="opacity")
       | Overlay opacity
-      input.ml-2(v-model="dialog6.overlayOpacity" type="number" step="0.1" min="0" max="1")
-    w-radio.mt-1(v-model="dialog6.overlayChoice" return-value="rgba(35, 71, 129, 0.5)") Custom color: transparent blue
-    w-radio.mt-1(v-model="dialog6.overlayChoice" return-value="#e91e63") Custom color: opaque pink
-    w-radio.mt-1(v-model="dialog6.overlayChoice" return-value="transparent") Custom color: transparent
+      input.ml2(v-model="dialog6.overlayOpacity" type="number" step="0.1" min="0" max="1")
+    w-radio.mt1(v-model="dialog6.overlayChoice" return-value="rgba(35, 71, 129, 0.5)") Custom color: transparent blue
+    w-radio.mt1(v-model="dialog6.overlayChoice" return-value="#e91e63") Custom color: opaque pink
+    w-radio.mt1(v-model="dialog6.overlayChoice" return-value="transparent") Custom color: transparent
     template(v-slot:actions)
       .spacer
       w-button(@click="dialog6.show = false" bg-color="error" dark) Close

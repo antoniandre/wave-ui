@@ -1,80 +1,80 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1) w-toolbar
+  title-link.mt4.code(h1) w-toolbar
 
   title-link(h2) Simple toolbar with shadow
-  w-toolbar.mt-4(shadow)
-    .title.my-0 Title
+  w-toolbar.mt4(shadow)
+    .title.my0 Title
     .spacer
-    span.ml-2 Item 1
-    span.ml-2 Item 2
-    span.ml-2 Item 3
+    span.ml2 Item 1
+    span.ml2 Item 2
+    span.ml2 Item 3
 
   title-link(h2) Background color &amp; text color
-  w-toolbar.mt-4(bg-color="blue-light-5" color="blue-dark-3")
-    .title.my-0 Title
+  w-toolbar.mt4(bg-color="blue-light-5" color="blue-dark-3")
+    .title.my0 Title
     .spacer
-    span.ml-2 Item 1
-    span.ml-2 Item 2
-    span.ml-2 Item 3
+    span.ml2 Item 1
+    span.ml2 Item 2
+    span.ml2 Item 3
 
   title-link(h2) Toolbars inside w-card
   p.
     The w-card component will detect if there is a toolbar in the title slot or in the actions
     slot and will remove the default padding and border on this slot if there is.
 
-  w-flex.mt-4(wrap :gap="4")
+  w-flex.mt4(wrap :gap="4")
     w-card
       template(v-slot:title)
         w-toolbar
-          .title.my-0 Top Bar
+          .title.my0 Top Bar
           .spacer
-          span.ml-2 Item 1
-          span.ml-2 Item 2
-          span.ml-2 Item 3
+          span.ml2 Item 1
+          span.ml2 Item 2
+          span.ml2 Item 3
     w-card
       template(v-slot:actions)
         w-toolbar(bottom)
-          .title.my-0 Bottom Bar
+          .title.my0 Bottom Bar
           .spacer
-          span.ml-2 Item 1
-          span.ml-2 Item 2
-          span.ml-2 Item 3
+          span.ml2 Item 1
+          span.ml2 Item 2
+          span.ml2 Item 3
 
   h3 With shadow
-  w-flex.mt-4(wrap :gap="4")
+  w-flex.mt4(wrap :gap="4")
     w-card
       template(v-slot:title)
         w-toolbar(shadow)
-          .title.my-0 Top Bar
+          .title.my0 Top Bar
           .spacer
-          span.ml-2 Item 1
-          span.ml-2 Item 2
-          span.ml-2 Item 3
+          span.ml2 Item 1
+          span.ml2 Item 2
+          span.ml2 Item 3
     w-card
       template(v-slot:actions)
         w-toolbar(bottom shadow)
-          .title.my-0 Bottom Bar
+          .title.my0 Bottom Bar
           .spacer
-          span.ml-2 Item 1
-          span.ml-2 Item 2
-          span.ml-2 Item 3
+          span.ml2 Item 1
+          span.ml2 Item 2
+          span.ml2 Item 3
 
   title-link(h2) Custom toolbar height
   p.
     The #[code w-toolbar] component also accepts a height. It can be set as a string with units
     or a number of pixels (without unit).
-  w-toolbar.mt-4.py-0(bg-color="blue-light-5" color="blue-dark-3" height="5em")
-    .title.my-0 Title
+  w-toolbar.mt4.py0(bg-color="blue-light-5" color="blue-dark-3" height="5em")
+    .title.my0 Title
     .spacer
-    span.mx-1 Item 1
-    span.mx-1 Item 2
-    w-divider.mx-2(vertical)
-    span.mx-1 Item 3
-    span.mx-1 Item 4
-    w-divider.mx-2(vertical)
-    span.mx-1 Item 5
-    span.mx-1 Item 6
+    span.mx1 Item 1
+    span.mx1 Item 2
+    w-divider.mx2(vertical)
+    span.mx1 Item 3
+    span.mx1 Item 4
+    w-divider.mx2(vertical)
+    span.mx1 Item 5
+    span.mx1 Item 6
 </template>
 
 <style lang="scss">

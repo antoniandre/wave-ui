@@ -1,6 +1,6 @@
 <template lang="pug">
 div(style="overflow: hidden")
-  title-link.mt-4(h1) Colors
+  title-link.mt4(h1) Colors
   p.
     Wave UI colors work in a very simple way: for instance the class
     #[code pink] (or any color listed bellow) can be applied to any
@@ -16,42 +16,42 @@ div(style="overflow: hidden")
     text color of your choice.
 
   title-link(h2) Status colors
-  .w-flex.wrap.mb-12.ma-n2
-    .color.success--bg.subtitle.text-center.grow.py-3.ma-2 success
-    .color.error--bg.subtitle.text-center.grow.py-3.ma-2 error
-    .color.warning--bg.subtitle.text-center.grow.py-3.ma-2 warning
-    .color.info--bg.subtitle.text-center.grow.py-3.ma-2 info
+  .w-flex.wrap.mb12.ma-2
+    .color.success--bg.subtitle.text-center.grow.py3.ma2 success
+    .color.error--bg.subtitle.text-center.grow.py3.ma2 error
+    .color.warning--bg.subtitle.text-center.grow.py3.ma2 warning
+    .color.info--bg.subtitle.text-center.grow.py3.ma2 info
 
   h3 Status colors shades
-  .w-flex.wrap.mb-12.ma-n2
+  .w-flex.wrap.mb12.ma-2
     .w-flex.column.basis-0
-      .color.success-light-3--bg.subtitle.text-center.py-3.ma-2.body success-light-3
-      .color.success-light-2--bg.subtitle.text-center.py-3.ma-2.body success-light-2
-      .color.success-light-1--bg.subtitle.text-center.py-3.ma-2.body success-light-1
-      .color.success-dark-1--bg.subtitle.text-center.py-3.ma-2.white.body success-dark-1
-      .color.success-dark-2--bg.subtitle.text-center.py-3.ma-2.white.body success-dark-2
-      .color.success-dark-3--bg.subtitle.text-center.py-3.ma-2.white.body success-dark-3
+      .color.success-light-3--bg.subtitle.text-center.py3.ma2.body success-light-3
+      .color.success-light-2--bg.subtitle.text-center.py3.ma2.body success-light-2
+      .color.success-light-1--bg.subtitle.text-center.py3.ma2.body success-light-1
+      .color.success-dark-1--bg.subtitle.text-center.py3.ma2.white.body success-dark-1
+      .color.success-dark-2--bg.subtitle.text-center.py3.ma2.white.body success-dark-2
+      .color.success-dark-3--bg.subtitle.text-center.py3.ma2.white.body success-dark-3
     .w-flex.column.basis-0
-      .color.error-light-3--bg.subtitle.text-center.py-3.ma-2.body error-light-3
-      .color.error-light-2--bg.subtitle.text-center.py-3.ma-2.body error-light-2
-      .color.error-light-1--bg.subtitle.text-center.py-3.ma-2.body error-light-1
-      .color.error-dark-1--bg.subtitle.text-center.py-3.ma-2.white.body error-dark-1
-      .color.error-dark-2--bg.subtitle.text-center.py-3.ma-2.white.body error-dark-2
-      .color.error-dark-3--bg.subtitle.text-center.py-3.ma-2.white.body error-dark-3
+      .color.error-light-3--bg.subtitle.text-center.py3.ma2.body error-light-3
+      .color.error-light-2--bg.subtitle.text-center.py3.ma2.body error-light-2
+      .color.error-light-1--bg.subtitle.text-center.py3.ma2.body error-light-1
+      .color.error-dark-1--bg.subtitle.text-center.py3.ma2.white.body error-dark-1
+      .color.error-dark-2--bg.subtitle.text-center.py3.ma2.white.body error-dark-2
+      .color.error-dark-3--bg.subtitle.text-center.py3.ma2.white.body error-dark-3
     .w-flex.column.basis-0
-      .color.warning-light-3--bg.subtitle.text-center.py-3.ma-2.body warning-light-3
-      .color.warning-light-2--bg.subtitle.text-center.py-3.ma-2.body warning-light-2
-      .color.warning-light-1--bg.subtitle.text-center.py-3.ma-2.body warning-light-1
-      .color.warning-dark-1--bg.subtitle.text-center.py-3.ma-2.white.body warning-dark-1
-      .color.warning-dark-2--bg.subtitle.text-center.py-3.ma-2.white.body warning-dark-2
-      .color.warning-dark-3--bg.subtitle.text-center.py-3.ma-2.white.body warning-dark-3
+      .color.warning-light-3--bg.subtitle.text-center.py3.ma2.body warning-light-3
+      .color.warning-light-2--bg.subtitle.text-center.py3.ma2.body warning-light-2
+      .color.warning-light-1--bg.subtitle.text-center.py3.ma2.body warning-light-1
+      .color.warning-dark-1--bg.subtitle.text-center.py3.ma2.white.body warning-dark-1
+      .color.warning-dark-2--bg.subtitle.text-center.py3.ma2.white.body warning-dark-2
+      .color.warning-dark-3--bg.subtitle.text-center.py3.ma2.white.body warning-dark-3
     .w-flex.column.basis-0
-      .color.info-light-3--bg.subtitle.text-center.py-3.ma-2.body info-light-3
-      .color.info-light-2--bg.subtitle.text-center.py-3.ma-2.body info-light-2
-      .color.info-light-1--bg.subtitle.text-center.py-3.ma-2.body info-light-1
-      .color.info-dark-1--bg.subtitle.text-center.py-3.ma-2.white.body info-dark-1
-      .color.info-dark-2--bg.subtitle.text-center.py-3.ma-2.white.body info-dark-2
-      .color.info-dark-3--bg.subtitle.text-center.py-3.ma-2.white.body info-dark-3
+      .color.info-light-3--bg.subtitle.text-center.py3.ma2.body info-light-3
+      .color.info-light-2--bg.subtitle.text-center.py3.ma2.body info-light-2
+      .color.info-light-1--bg.subtitle.text-center.py3.ma2.body info-light-1
+      .color.info-dark-1--bg.subtitle.text-center.py3.ma2.white.body info-dark-1
+      .color.info-dark-2--bg.subtitle.text-center.py3.ma2.white.body info-dark-2
+      .color.info-dark-3--bg.subtitle.text-center.py3.ma2.white.body info-dark-3
 
   title-link(h2 slug="primary-and-secondary-colors-and-shades")
     | #[span.code primary] &amp; #[span.code secondary] colors and shades
@@ -64,21 +64,21 @@ div(style="overflow: hidden")
     as well as its 3 darker shades, with a white text when used as a background.
 
   w-flex(wrap :gap="4")
-    .color.primary-light-3--bg.subtitle.text-center.grow.py-3.white.body primary-light-3
-    .color.primary-light-2--bg.subtitle.text-center.grow.py-3.white.body primary-light-2
-    .color.primary-light-1--bg.subtitle.text-center.grow.py-3.white.body primary-light-1
-    .color.primary--bg.subtitle.text-center.grow.py-3.white primary
-    .color.primary-dark-1--bg.subtitle.text-center.grow.py-3.white.body primary-dark-1
-    .color.primary-dark-2--bg.subtitle.text-center.grow.py-3.white.body primary-dark-2
-    .color.primary-dark-3--bg.subtitle.text-center.grow.py-3.white.body primary-dark-3
+    .color.primary-light-3--bg.subtitle.text-center.grow.py3.white.body primary-light-3
+    .color.primary-light-2--bg.subtitle.text-center.grow.py3.white.body primary-light-2
+    .color.primary-light-1--bg.subtitle.text-center.grow.py3.white.body primary-light-1
+    .color.primary--bg.subtitle.text-center.grow.py3.white primary
+    .color.primary-dark-1--bg.subtitle.text-center.grow.py3.white.body primary-dark-1
+    .color.primary-dark-2--bg.subtitle.text-center.grow.py3.white.body primary-dark-2
+    .color.primary-dark-3--bg.subtitle.text-center.grow.py3.white.body primary-dark-3
 
   w-alert.text-light(type="info" bg-color="yellow-light-5" color="orange-dark-1").
     You can add #[code disableColorShades: true] to the Wave UI options to disable the color shades
     computing for the status colors and your custom colors.
 
-  title-link.mt-12.mb-4.w-flex.align-center(h2 slug="color-palette")
+  title-link.mt12.mb4.w-flex.align-center(h2 slug="color-palette")
     | Color Palette
-    w-button.ml-6(
+    w-button.ml6(
       bg-color="primary"
       sm
       dark
@@ -86,8 +86,8 @@ div(style="overflow: hidden")
       | {{ horizontal ? 'Vertical' : 'Horizontal' }} display
 
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
-    .w-flex.wrap.ma-n2
-      .color-palette.ma-2(
+    .w-flex.wrap.ma-2
+      .color-palette.ma2(
         v-for="({ color, label, shades }, i) in colors"
         :key="i")
         template(v-for="(shade, i) in shades")
@@ -101,15 +101,15 @@ div(style="overflow: hidden")
             :class="[`${shade.label}--bg`, i >= 5 ? 'color--darker' : '']")
             span {{ shade.label }}
             small {{ shade.color }}
-      .color-palette.ma-2
-        .w-flex.ma-n2(:class="{ column: !horizontal }")
-          .color.color--top.ma-2.black--bg
+      .color-palette.ma2
+        .w-flex.ma-2(:class="{ column: !horizontal }")
+          .color.color--top.ma2.black--bg
             span black
             small #000
-          .color.color--top.ma-2.white--bg.black
+          .color.color--top.ma2.white--bg.black
             span white
             small #fff
-          .color.color--top.ma-2.transparent--bg.black
+          .color.color--top.ma2.transparent--bg.black
             span transparent
             small transparent
 </template>

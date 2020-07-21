@@ -1,134 +1,134 @@
 <template lang="pug">
 div
-  title-link.mt-4(h1) Flex layout classes
+  title-link.mt4(h1) Flex layout classes
 
   title-link(h2 slug="w-flex-component-and-helper-classes") #[span.code w-flex] component &amp; helper classes
   p.
     the #[code w-flex] component and the #[code .w-flex] class both allow a flex layout that you can
     easily control with the following classes or attributes on the component.
-  ul.mt-4
+  ul.mt4
     li
-      code.mr-2 .column
+      code.mr2 .column
       | Displays in column (#[span.code flex-direction: column]).
-    li.mt-1
-      code.mr-2 .wrap
+    li.mt1
+      code.mr2 .wrap
       | Wraps the flex content when it does not fit (#[span.code flex-wrap: wrap]).
-    li.mt-1
-      code.mr-2 .grow
+    li.mt1
+      code.mr2 .grow
       | Tells the element to occupy the available space (#[span.code flex-grow: 1]).
-    li.mt-1
-      code.mr-2 .no-grow
+    li.mt1
+      code.mr2 .no-grow
       | Tells the element to #[strong not] occupy the available space (#[span.code flex-grow: 0]).
-    li.mt-1
-      code.mr-2 .shrink
+    li.mt1
+      code.mr2 .shrink
       | Tells the element to shrink if there is not enough space (#[span.code flex-shrink: 1]).
-    li.mt-1
-      code.mr-2 .no-shrink
+    li.mt1
+      code.mr2 .no-shrink
       | Tells the element to #[strong not] shrink if there is not enough space (#[span.code flex-shrink: 0]).
-    li.mt-1
-      code.mr-2 .basis-0
+    li.mt1
+      code.mr2 .basis-0
       | Distribute the children elements with equal space (#[span.code flex-basis: 0]).#[br]
       | By default, flex containers will distribute children elements according to their content width.
-    li.mt-1
-      code.mr-2 .fill-height
+    li.mt1
+      code.mr2 .fill-height
       | Sets a height of 100%.
 
   title-link(h2) Alignments
   p Align children with these classes on the parent container:
   ul
-    li.mt-1
-      code.mr-2 .align-start
+    li.mt1
+      code.mr2 .align-start
       | Applies this CSS rule: #[span.code align: flex-start].
-    li.mt-1
-      code.mr-2 .align-center
+    li.mt1
+      code.mr2 .align-center
       | Applies this CSS rule: #[span.code align: center].
-    li.mt-1
-      code.mr-2 .align-end
+    li.mt1
+      code.mr2 .align-end
       | Applies this CSS rule: #[span.code align: flex-end].
-    li.mt-1
-      code.mr-2 .justify-start
+    li.mt1
+      code.mr2 .justify-start
       | Applies this CSS rule: #[span.code justify: flex-start].
-    li.mt-1
-      code.mr-2 .justify-center
+    li.mt1
+      code.mr2 .justify-center
       | Applies this CSS rule: #[span.code justify: center].
-    li.mt-1
-      code.mr-2 .justify-end
+    li.mt1
+      code.mr2 .justify-end
       | Applies this CSS rule: #[span.code justify: flex-end].
-    li.mt-1
-      code.mr-2 .justify-space-between
+    li.mt1
+      code.mr2 .justify-space-between
       | Applies this CSS rule: #[span.code justify: space-between].
 
-  p.mt-4 Align a child with these classes directly on the child element:
+  p.mt4 Align a child with these classes directly on the child element:
   ul
-    li.mt-1
-      code.mr-2 .align-self-start
+    li.mt1
+      code.mr2 .align-self-start
       | Applies this CSS rule: #[span.code align-self: flex-start].
-    li.mt-1
-      code.mr-2 .align-self-center
+    li.mt1
+      code.mr2 .align-self-center
       | Applies this CSS rule: #[span.code align-self: center].
-    li.mt-1
-      code.mr-2 .align-self-end
+    li.mt1
+      code.mr2 .align-self-end
       | Applies this CSS rule: #[span.code align-self: flex-end].
-    li.mt-1
-      code.mr-2 .justify-self-start
+    li.mt1
+      code.mr2 .justify-self-start
       | Applies this CSS rule: #[span.code justify-self: flex-start].
-    li.mt-1
-      code.mr-2 .justify-self-center
+    li.mt1
+      code.mr2 .justify-self-center
       | Applies this CSS rule: #[span.code justify-self: center].
-    li.mt-1
-      code.mr-2 .justify-self-end
+    li.mt1
+      code.mr2 .justify-self-end
       | Applies this CSS rule: #[span.code justify-self: flex-end].
 
-  p.mt-6.
-    The #[code.mx-1 .spacer] class is also very helpful to separate 2 elements as is will occupy the
+  p.mt6.
+    The #[code.mx1 .spacer] class is also very helpful to separate 2 elements as is will occupy the
     available space and push the elements on each side.
 
-  .heading.mt-6 w-flex, row direction (default)
+  .heading.mt6 w-flex, row direction (default)
   example
-    p.code.mb-1 .justify-start (default)
-    .w-flex.pa-3.blue-light-5--bg.justify-start
+    p.code.mb1 .justify-start (default)
+    .w-flex.pa3.blue-light-5--bg.justify-start
       .box
       .box
       .box
-    p.code.mt-2.mb-1 .justify-center
-    .w-flex.pa-3.blue-light-5--bg.justify-center
+    p.code.mt2.mb1 .justify-center
+    .w-flex.pa3.blue-light-5--bg.justify-center
       .box
       .box
       .box
-    p.code.mt-2.mb-1 .justify-space-between
-    .w-flex.pa-3.blue-light-5--bg.justify-space-between
+    p.code.mt2.mb1 .justify-space-between
+    .w-flex.pa3.blue-light-5--bg.justify-space-between
       .box
       .box
       .box
-    p.code.mt-2.mb-1 .justify-end
-    .w-flex.pa-3.blue-light-5--bg.justify-end
+    p.code.mt2.mb1 .justify-end
+    .w-flex.pa3.blue-light-5--bg.justify-end
       .box
       .box
       .box
     template(#html).
       &lt;p&gt;.justify-start (default)&lt;/p&gt;
-      &lt;w-flex justify-start class="blue-light-5--bg pa-3"&gt;
+      &lt;w-flex justify-start class="blue-light-5--bg pa3"&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
       &lt;/w-flex&gt;
 
       &lt;p&gt;.justify-center&lt;/p&gt;
-      &lt;w-flex justify-center class="blue-light-5--bg pa-3"&gt;
+      &lt;w-flex justify-center class="blue-light-5--bg pa3"&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
       &lt;/w-flex&gt;
 
       &lt;p&gt;.justify-space-between&lt;/p&gt;
-      &lt;w-flex justify-space-between class="blue-light-5--bg pa-3"&gt;
+      &lt;w-flex justify-space-between class="blue-light-5--bg pa3"&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
       &lt;/w-flex&gt;
 
       &lt;p&gt;.justify-end&lt;/p&gt;
-      &lt;w-flex justify-end class="blue-light-5--bg pa-3"&gt;
+      &lt;w-flex justify-end class="blue-light-5--bg pa3"&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
@@ -143,33 +143,33 @@ div
   .heading w-flex, column direction
   example
     w-flex
-      .grow.mx-1
-        p.code.mb-1 .justify-start (default)
+      .grow.mx1
+        p.code.mb1 .justify-start (default)
         w-flex.wrapper(column align-center justify-start)
           .box
           .box
           .box
-      .grow.mx-1
-        p.code.mb-1 .justify-center
+      .grow.mx1
+        p.code.mb1 .justify-center
         w-flex.wrapper(column align-center justify-center)
           .box
           .box
           .box
-      .grow.mx-1
-        p.code.mb-1 .justify-space-between
+      .grow.mx1
+        p.code.mb1 .justify-space-between
         w-flex.wrapper(column align-center justify-space-between)
           .box
           .box
           .box
-      .grow.mx-1
-        p.code.mb-1 .justify-end
+      .grow.mx1
+        p.code.mb1 .justify-end
         w-flex.wrapper(column align-center justify-end)
           .box
           .box
           .box
     template(#html).
       &lt;w-flex&gt;
-        &lt;div class="grow mx-1"&gt;
+        &lt;div class="grow mx1"&gt;
           &lt;p&gt;.justify-start (default)&lt;/p&gt;
           &lt;w-flex column align-center justify-start class="wrapper"&gt;
             &lt;div class="box"&gt;&lt;/div&gt;
@@ -178,7 +178,7 @@ div
           &lt;/w-flex&gt;
         &lt;/div&gt;
 
-        &lt;div class="grow mx-1"&gt;
+        &lt;div class="grow mx1"&gt;
           &lt;p&gt;.justify-center&lt;/p&gt;
           &lt;w-flex column align-center justify-center class="wrapper"&gt;
             &lt;div class="box"&gt;&lt;/div&gt;
@@ -187,7 +187,7 @@ div
           &lt;/w-flex&gt;
         &lt;/div&gt;
 
-        &lt;div class="grow mx-1"&gt;
+        &lt;div class="grow mx1"&gt;
           &lt;p&gt;.justify-space-between&lt;/p&gt;
           &lt;w-flex column align-center justify-space-between class="wrapper"&gt;
             &lt;div class="box"&gt;&lt;/div&gt;
@@ -196,7 +196,7 @@ div
           &lt;/w-flex&gt;
         &lt;/div&gt;
 
-        &lt;div class="grow mx-1"&gt;
+        &lt;div class="grow mx1"&gt;
           &lt;p&gt;.justify-end&lt;/p&gt;
           &lt;w-flex column align-center justify-end class="wrapper"&gt;
             &lt;div class="box"&gt;&lt;/div&gt;
@@ -218,7 +218,7 @@ div
         height: 140px;
       }
 
-  title-link.mt-10(h3 slug="align-self") #[span.code align-self] and #[em not] #[span.code justify-self]
+  title-link.mt10(h3 slug="align-self") #[span.code align-self] and #[em not] #[span.code justify-self]
   p.
     By default if you don't set an alignment on the #[span.code w-flex] component, the content will
     be stretched vertically.#[br]
@@ -226,19 +226,19 @@ div
     (case 2), or a self align on the children (case 3).
   example
     w-flex
-      .grow.mx-1
+      .grow.mx1
         p 1. Default
         w-flex.wrapper2(justify-center)
           .box
           .box
           .box
-      .grow.mx-1
+      .grow.mx1
         p 2. align-center
         w-flex.wrapper2(justify-center align-center)
           .box
           .box
           .box
-      .grow.mx-1
+      .grow.mx1
         p 3. align self start, center, end
         w-flex.wrapper2(justify-center)
           .box.align-self-start
@@ -246,7 +246,7 @@ div
           .box.align-self-end
     template(#html).
       &lt;w-flex&gt;
-        &lt;div class="grow mx-1"&gt;
+        &lt;div class="grow mx1"&gt;
           &lt;p&gt;Default&lt;/p&gt;
           &lt;w-flex justify-center class="wrapper"&gt;
             &lt;div class="box"&gt;&lt;/div&gt;
@@ -254,7 +254,7 @@ div
             &lt;div class="box"&gt;&lt;/div&gt;
           &lt;/w-flex&gt;
         &lt;/div&gt;
-        &lt;div class="grow mx-1"&gt;
+        &lt;div class="grow mx1"&gt;
           &lt;p&gt;2. align-center&lt;/p&gt;
           &lt;w-flex justify-center align-center class="wrapper"&gt;
             &lt;div class="box"&gt;&lt;/div&gt;
@@ -262,7 +262,7 @@ div
             &lt;div class="box"&gt;&lt;/div&gt;
           &lt;/w-flex&gt;
         &lt;/div&gt;
-        &lt;div class="grow mx-1"&gt;
+        &lt;div class="grow mx1"&gt;
           &lt;p&gt;3. align self start, center, end&lt;/p&gt;
           &lt;w-flex justify-center class="wrapper"&gt;
             &lt;div class="box align-self-start"&gt;&lt;/div&gt;
@@ -286,7 +286,7 @@ div
 
   w-alert.text-light(type="warning")
     strong Note:
-    a.black.ml-1(
+    a.black.ml1(
       href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Alignment/Box_Alignment_in_Flexbox"
       target="_blank"
       style="text-decoration: underline")

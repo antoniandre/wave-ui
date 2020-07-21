@@ -1,15 +1,15 @@
 <template lang="pug">
 div
-  title-link.mt-4(h1) Transitions
+  title-link.mt4(h1) Transitions
 
   p Here is a list of all the available transition components.
   ul
     li #[code w-transition-fade]
-    li.mt-1 #[code w-transition-scale]
-    li.mt-1 #[code w-transition-scale-fade]
-    li.mt-1 #[code w-transition-bounce]
-    li.mt-1 #[code w-transition-twist]
-    li.mt-1 #[code w-transition-expand]
+    li.mt1 #[code w-transition-scale]
+    li.mt1 #[code w-transition-scale-fade]
+    li.mt1 #[code w-transition-bounce]
+    li.mt1 #[code w-transition-twist]
+    li.mt1 #[code w-transition-expand]
 
   //- p Each component has a css transition that you can also use in various components.
 
@@ -223,10 +223,10 @@ div
         outline
         width="7.3em") {{ toggleExpandXY2 ? 'Collapse' : 'Expand' }} X &amp; Y
       w-transition-expand(:duration="2000")
-        .transition-box.pa-6.ma-10.yellow-light-5--bg(
+        .transition-box.pa6.ma10.yellow-light-5--bg(
           v-if="toggleExpandXY2"
           style="width: auto")
-          .amber-light-4--bg.pa-2(style="overflow: hidden;white-space: nowrap;width: 200px")
+          .amber-light-4--bg.pa2(style="overflow: hidden;white-space: nowrap;width: 200px")
             | X &amp; Y expanding transition
     template(#html).
       &lt;w-flex align-center&gt;
@@ -241,9 +241,9 @@ div
         &lt;w-transition-expand :duration="2000"&gt;
           &lt;div
             v-if="toggleExpandXY"
-            class="transition-box pa-6 ma-10 yellow-light-5--bg"
+            class="transition-box pa6 ma10 yellow-light-5--bg"
             style="width: auto"&gt;
-            &lt;div class="amber-light-4--bg pa-2"&gt;
+            &lt;div class="amber-light-4--bg pa2"&gt;
               X &amp; Y expanding transition
             &lt;/div&gt;
           &lt;/div&gt;

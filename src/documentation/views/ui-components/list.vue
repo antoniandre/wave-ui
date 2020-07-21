@@ -1,22 +1,22 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1) w-list
+  title-link.mt4.code(h1) w-list
 
   title-link(h2) Default items list rendering
   example
     .w-flex.wrap
       .grow
         .subtitle Most basic
-        w-list.grow.mt-6(:items="listItems1" color="primary")
+        w-list.grow.mt6(:items="listItems1" color="primary")
       .grow
         .subtitle With icons
-        w-list.grow.mt-6(:items="listItems1" icon="wi-check" color="primary")
+        w-list.grow.mt6(:items="listItems1" icon="wi-check" color="primary")
     template(#html).
       &lt;w-flex wrap&gt;
         &lt;div class="grow"&gt;
           &lt;div class="subtitle"&gt;Most basic&lt;/div&gt;
           &lt;w-list
-            class="grow mt-6"
+            class="grow mt6"
             :items="listItems"
             color="primary"&gt;
           &lt;/w-list&gt;
@@ -25,7 +25,7 @@ div
         &lt;div class="grow"&gt;
           &lt;div class="subtitle"&gt;With icons&lt;/div&gt;
           &lt;w-list
-            class="grow mt-6"
+            class="grow mt6"
             :items="listItems"
             icon="wi-check"
             color="primary"&gt;
@@ -76,7 +76,7 @@ div
   example
     w-radios(v-model="multiple" name="multiple" :items="radios" inline)
     w-flex(wrap align-center)
-      w-list.mt-6.grow.mr-4(
+      w-list.mt6.grow.mr4(
         v-model="selectedItem1"
         :items="listItems1"
         color="deep-purple"
@@ -86,10 +86,10 @@ div
         .subtitle clicked item (#[span.code item-click] event):
         br
         span.code {{ itemClicked }}
-    .subtitle.mt-2
+    .subtitle.mt2
       | Selected item:
-      code.ml-2(v-if="!multiple || Array.isArray(selectedItem1)") {{ selectedItem1 || 'null' }}
-      code.ml-2(v-else-if="multiple") {{ selectedItem1 ? [selectedItem1] : '[]' }}
+      code.ml2(v-if="!multiple || Array.isArray(selectedItem1)") {{ selectedItem1 || 'null' }}
+      code.ml2(v-else-if="multiple") {{ selectedItem1 ? [selectedItem1] : '[]' }}
     template(#html).
       &lt;w-radios v-model="multiple" name="multiple" :items="radios" inline&gt;&lt;/w-radios&gt;
 
@@ -100,19 +100,19 @@ div
           color="deep-purple"
           :multiple="multiple"
           @item-click="itemClicked = $event"
-          class="mt-6 mr-4 grow"&gt;
+          class="mt6 mr4 grow"&gt;
         &lt;/w-list&gt;
         &lt;div v-if="itemClicked"&gt;
           &lt;div class="subtitle"&gt;clicked item:&lt;/div&gt;
           &lt;span&gt;{{ '\{\{ itemClicked \}\}' }}&lt;/span&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
-      &lt;div class="subtitle mt-2"&gt;
+      &lt;div class="subtitle mt2"&gt;
         Selected item:
-        &lt;code v-if="!multiple || Array.isArray(selectedItem)" class="ml-2"&gt;
+        &lt;code v-if="!multiple || Array.isArray(selectedItem)" class="ml2"&gt;
           {{ '\{\{ selectedItem || \'null\' \}\}' }}
         &lt;/code&gt;
-        &lt;code v-else-if="multiple" class="ml-2"&gt;
+        &lt;code v-else-if="multiple" class="ml2"&gt;
           {{ '\{\{ selectedItem ? [selectedItem] : \'[]\' \}\}' }}
         &lt;/code&gt;
       &lt;/div&gt;
@@ -141,24 +141,24 @@ div
     .w-flex.wrap
       .grow
         .subtitle Default
-        w-list.mt-6.mr-4(
+        w-list.mt6.mr4(
           v-model="selectedItem3"
           :items="listItems1"
           checklist
           color="green")
       .grow
         .subtitle Round checkboxes
-        w-list.mt-6(
+        w-list.mt6(
           v-model="selectedItem4"
           :items="listItems1"
           checklist
           round-checkboxes
           color="green")
 
-    .w-flex.wrap.mt-4
+    .w-flex.wrap.mt4
       .grow
         p.subtitle Custom rendering, default styles
-        w-list.mt-6(
+        w-list.mt6(
           :items="listItems2"
           item-value="id"
           checklist
@@ -169,7 +169,7 @@ div
             w-icon(md) {{ item.icon }}
       .grow
         p.subtitle Custom rendering &amp; styles
-        w-list.custom.mt-6(
+        w-list.custom.mt6(
           :items="listItems2"
           item-value="id"
           checklist
@@ -187,7 +187,7 @@ div
             :items="listItems1"
             checklist
             color="green"
-            class="mt-6 mr-4 grow"&gt;
+            class="mt6 mr4 grow"&gt;
           &lt;/w-list&gt;
         &lt;/div&gt;
         &lt;div class="grow"&gt;
@@ -198,12 +198,12 @@ div
             checklist
             round-checkboxes
             color="green"
-            class="mt-6 mr-4 grow"&gt;
+            class="mt6 mr4 grow"&gt;
           &lt;/w-list&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
 
-      &lt;w-flex wrap class="mt-4"&gt;
+      &lt;w-flex wrap class="mt4"&gt;
         &lt;div class="grow"&gt;
           &lt;p class="subtitle"&gt;Custom rendering, default styles&lt;/p&gt;
           &lt;w-list
@@ -211,7 +211,7 @@ div
             item-value="id"
             checklist
             color="primary"
-            class="mt-6 mr-4 grow"&gt;
+            class="mt6 mr4 grow"&gt;
             &lt;template #item="{ item }"&gt;
               &lt;span&gt;{{ '\{\{ item.label \}\}' }}&lt;/span&gt;
               &lt;div class="spacer"&gt;&lt;/div&gt;
@@ -226,7 +226,7 @@ div
             item-value="id"
             checklist
             color="primary"
-            class="mt-6 custom"&gt;
+            class="mt6 custom"&gt;
             &lt;template #item="{ item }"&gt;
               &lt;span&gt;{{ '\{\{ item.label \}\}' }}&lt;/span&gt;
               &lt;div class="spacer"&gt;&lt;/div&gt;

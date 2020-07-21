@@ -12,16 +12,16 @@
       :aria-checked="booleanValue || 'false'"
       role="radio")
     template(v-if="hasLabel && labelOnLeft")
-      label.w-radio__label.pr-2(v-if="$slots.default" :for="`radio--${_uid}`")
+      label.w-radio__label.pr2(v-if="$slots.default" :for="`radio--${_uid}`")
         slot
-      label.w-radio__label.pr-2(v-else-if="label" :for="`radio--${_uid}`" v-html="label")
+      label.w-radio__label.pr2(v-else-if="label" :for="`radio--${_uid}`" v-html="label")
     .w-radio__input(
       @click="$refs.input.focus();$refs.input.click()"
       :class="this.color")
     template(v-if="hasLabel && !labelOnLeft")
-      label.w-radio__label.pl-2(v-if="$slots.default" :for="`radio--${_uid}`")
+      label.w-radio__label.pl2(v-if="$slots.default" :for="`radio--${_uid}`")
         slot
-      label.w-radio__label.pl-2(v-else-if="label" :for="`radio--${_uid}`" v-html="label")
+      label.w-radio__label.pl2(v-else-if="label" :for="`radio--${_uid}`" v-html="label")
 </template>
 
 <script>

@@ -10,7 +10,7 @@
       :color="color"
       :round="round"
       @input="toggleCheck(item)"
-      :class="{ 'mt-1': !inline && i }")
+      :class="{ 'mt1': !inline && i }")
       slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
 

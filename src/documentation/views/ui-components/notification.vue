@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1 slug="w-notification") w-notification
+  title-link.mt4.code(h1 slug="w-notification") w-notification
 
   p.
     Notifications accepts all the parameters of the #[span.code w-alert] component, plus positioning
@@ -11,12 +11,12 @@ div
   w-flex(align-start)
     w-button(@click="notification.show = !notification.show" color="primary" outline)
       | {{ notification.show ? 'Hide' : 'Show' }} notification
-    .w-flex.wrap.pa-6
-      w-radios.my-1.mr-6(
+    .w-flex.wrap.pa6
+      w-radios.my1.mr6(
         v-model="notification.position[0]"
         :items="[{ label: 'top', value: 'top' }, { label: 'bottom', value: 'bottom' }]"
         inline)
-      w-radios.my-1(
+      w-radios.my1(
         v-model="notification.position[1]"
         :items="[{ label: 'left', value: 'left' }, { label: 'center', value: 'center' }, { label: 'right', value: 'right' }]"
         inline)
@@ -33,18 +33,18 @@ div
 
   title-link(h2) Transitions
   w-flex(align-center)
-    w-button.mr-3(
+    w-button.mr3(
       @click="notification2.show = !notification2.show"
       color="primary"
       outline
       width="8em")
       | {{ notification2.show ? 'Hide' : 'Show' }} notification
-    w-radios.my-4(v-model="transition" :items="transitions")
+    w-radios.my4(v-model="transition" :items="transitions")
       template(#item="{ item }")
         | {{ item.label }}
-        code.ml-2 {{ item.value || (item.value === false ? 'false' : "''") }}
-  .heading.mt-3 Notification position
-  w-radios.mr-6(
+        code.ml2 {{ item.value || (item.value === false ? 'false' : "''") }}
+  .heading.mt3 Notification position
+  w-radios.mr6(
     v-model="notification2.position[0]"
     :items="[{ label: 'top', value: 'top' }, { label: 'bottom', value: 'bottom' }]"
     inline)

@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1) w-overlay
+  title-link.mt4.code(h1) w-overlay
 
   p.
     By default the overlay has a #[span.code 0.3] opacity with a black color and a z-index
@@ -11,17 +11,17 @@ div
   title-link(h2) Overlay with custom opacity and control on #[span.code persistent]
   P When the overlay is persistent, it will not close on click and on escape key.
   p When persistent is set to false and by default, the escape key will also close the overlay.
-  w-flex.mt-4(wrap :gap="12")
+  w-flex.mt4(wrap :gap="12")
     w-button(bg-color="primary" dark @click="showOverlay = true") Show overlay
 
-    w-divider.my-3(vertical color="grey-light-4")
+    w-divider.my3(vertical color="grey-light-4")
     .w-flex.column.no-grow
       .heading Options
       div
-        w-button.mr-2(
+        w-button.mr2(
           color="primary"
           bg-color="blue-light-5"
-          :class="persistent ? 'pr-4' : ''"
+          :class="persistent ? 'pr4' : ''"
           @click="persistent = !persistent")
           .code.primary :persistent="{{ persistent }}"
         w-button(
@@ -30,7 +30,7 @@ div
           @click="persistentNoAnimation = !persistentNoAnimation"
           :disabled="!persistent")
           .code.primary :persistent-no-animation="{{ persistentNoAnimation }}"
-      w-input.mt-2.align-self-start(
+      w-input.mt2.align-self-start(
         v-model="opacity"
         outline
         type="number"
@@ -41,7 +41,7 @@ div
         max="1")
 
   title-link(h2) Overlay with custom background color
-  w-button.mr-2(bg-color="primary" dark @click="showBlueOverlay = true") Show a blue overlay
+  w-button.mr2(bg-color="primary" dark @click="showBlueOverlay = true") Show a blue overlay
 
   w-overlay.w-flex.align-center.justify-center(
     v-model="showOverlay"
@@ -49,11 +49,11 @@ div
     :persistent-no-animation="persistentNoAnimation"
     :opacity="opacity")
     w-button(bg-color="primary" lg dark @click="showOverlay = false")
-      w-icon.mr-2 wi-cross
+      w-icon.mr2 wi-cross
       | Hide overlay
   w-overlay.w-flex.align-center.justify-center(v-model="showBlueOverlay" bg-color="rgba(35, 71, 129, 0.4)")
     w-button(bg-color="primary" lg dark @click="showBlueOverlay = false")
-      w-icon.mr-2 wi-cross
+      w-icon.mr2 wi-cross
       | Hide overlay
 </template>
 
