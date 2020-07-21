@@ -28,6 +28,35 @@ div
         .primary-light3--bg.py3 xs2
       .xs1.pa1(v-for="i in 12" :key="`d${i}`")
         .blue-light4--bg.pa3 xs1
+    template(#html).
+      &lt;w-flex wrap class="text-center"&gt;
+        &lt;div class="xs12 pa1"&gt;
+          &lt;div class="primary-dark1--bg py3"&gt;xs12&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="xs6 pa1"&gt;
+          &lt;div class="primary--bg py3"&gt;xs6&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="xs6 pa1"&gt;
+          &lt;div class="primary--bg py3"&gt;xs6&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div v-for="i in 3" :key="`a${i}`" class="xs4 pa1"&gt;
+          &lt;div class="primary-light1--bg white py3"&gt;xs4&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div v-for="i in 4" :key="`b${i}`" class="xs3 pa1"&gt;
+          &lt;div class="primary-light2--bg white py3"&gt;xs3&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div v-for="i in 6" :key="`c${i}`" class="xs2 pa1"&gt;
+          &lt;div class="primary-light3--bg py3"&gt;xs2&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div v-for="i in 12" :key="`d${i}`" class="xs1 pa1"&gt;
+          &lt;div class="blue-light4--bg pa3"&gt;xs1&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/w-flex&gt;
 
   example.mt8
     w-flex.text-center(wrap)
@@ -51,6 +80,43 @@ div
         .primary-light3--bg.py3 xs5
       .xs7.pa1
         .primary-light3--bg.py3 xs7
+    template(#html).
+      &lt;w-flex wrap class="text-center"&gt;
+        &lt;div class="xs1 pa1"&gt;
+          &lt;div class="primary-dark1--bg py3"&gt;xs1&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="xs11 pa1"&gt;
+          &lt;div class="primary-dark1--bg py3"&gt;xs11&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="xs2 pa1"&gt;
+          &lt;div class="primary--bg py3"&gt;xs2&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="xs10 pa1"&gt;
+          &lt;div class="primary--bg py3"&gt;xs10&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="xs3 pa1"&gt;
+          &lt;div class="primary-light1--bg white py3"&gt;xs3&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="xs9 pa1"&gt;
+          &lt;div class="primary-light1--bg white py3"&gt;xs9&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="xs4 pa1"&gt;
+          &lt;div class="primary-light2--bg white py3"&gt;xs4&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="xs8 pa1"&gt;
+          &lt;div class="primary-light2--bg white py3"&gt;xs8&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="xs5 pa1"&gt;
+          &lt;div class="primary-light3--bg py3"&gt;xs5&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="xs7 pa1"&gt;
+          &lt;div class="primary-light3--bg py3"&gt;xs7&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/w-flex&gt;
 
   title-link(h2) Operating with breakpoints
   p For this example, resize your browser and observe the different layout when crossing a breakpoint.
@@ -92,4 +158,55 @@ div
           template(v-else-if="$waveui.breakpoint.md") md6
           template(v-else-if="$waveui.breakpoint.lg") lg4
           template(v-else-if="$waveui.breakpoint.xl") xl2
+    template(#html).
+      &lt;w-flex wrap class="text-center"&gt;
+        &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
+          &lt;div class="primary-light3--bg py3"&gt;
+            &lt;template v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm"&gt;xs12&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.md"&gt;md6&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.lg"&gt;lg4&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.xl"&gt;xl2&lt;/template&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
+          &lt;div class="primary-light3--bg py3"&gt;
+            &lt;template v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm"&gt;xs12&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.md"&gt;md6&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.lg"&gt;lg4&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.xl"&gt;xl2&lt;/template&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
+          &lt;div class="primary-light3--bg py3"&gt;
+            &lt;template v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm"&gt;xs12&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.md"&gt;md6&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.lg"&gt;lg4&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.xl"&gt;xl2&lt;/template&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
+          &lt;div class="primary-light3--bg py3"&gt;
+            &lt;template v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm"&gt;xs12&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.md"&gt;md6&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.lg"&gt;lg4&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.xl"&gt;xl2&lt;/template&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
+          &lt;div class="primary-light3--bg py3"&gt;
+            &lt;template v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm"&gt;xs12&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.md"&gt;md6&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.lg"&gt;lg4&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.xl"&gt;xl2&lt;/template&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
+          &lt;div class="primary-light3--bg py3"&gt;
+            &lt;template v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm"&gt;xs12&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.md"&gt;md6&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.lg"&gt;lg4&lt;/template&gt;
+            &lt;template v-else-if="$waveui.breakpoint.xl"&gt;xl2&lt;/template&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/w-flex&gt;
 </template>
