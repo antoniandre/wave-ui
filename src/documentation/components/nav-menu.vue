@@ -30,8 +30,15 @@ export default {
       { label: 'Getting started', route: 'getting-started' },
       { label: 'Customization', route: 'customization' },
       { label: 'Breakpoints', route: 'breakpoints' },
-      { label: 'Layout - spaces', route: 'layout--spaces' },
-      { label: 'Layout - flex', route: 'layout--flex' },
+      {
+        label: 'Layout',
+        route: 'layout',
+        children: [
+          { label: 'Spaces', route: 'layout--spaces' },
+          { label: 'Grid system', route: 'layout--grid-system' },
+          { label: 'Flex', route: 'layout--flex' }
+        ]
+      },
       { label: 'Typography', route: 'typography' },
       { label: 'Colors', route: 'colors' },
       { label: 'Transitions', route: 'transitions' }

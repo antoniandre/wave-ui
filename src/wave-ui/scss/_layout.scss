@@ -87,4 +87,40 @@
   .size--lg {font-size: round(1.4 * $base-font-size);}
   .size--xl {font-size: round(1.7 * $base-font-size);}
   // ----------------------------------------------
+
+  // Grid system.
+  // ----------------------------------------------
+  $grid-base: 12;
+  @for $i from 0 through $grid-base {
+    .xs#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+    .sm#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+    .md#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+    .lg#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+    .xl#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+  }
+
+  @media screen and (min-width: 600px) {
+    @for $i from 0 through $grid-base {
+      .sm#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    @for $i from 0 through $grid-base {
+      .md#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    @for $i from 0 through $grid-base {
+      .lg#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+    }
+  }
+
+  @media screen and (min-width: 1700px) {
+    @for $i from 0 through $grid-base {
+      .xl#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+    }
+  }
+  // ----------------------------------------------
 }

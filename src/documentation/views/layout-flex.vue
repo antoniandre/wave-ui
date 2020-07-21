@@ -291,13 +291,6 @@ div
       target="_blank"
       style="text-decoration: underline")
       | There is no justify-self in Flexbox.
-
-
-  title-link(h2 slug="grid-system")
-    | Grid system
-    w-tag.ml-3(bg-color="red" color="white") Coming soon
-
-  p 12-cell based.
 </template>
 
 <style lang="scss">
