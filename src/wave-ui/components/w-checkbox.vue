@@ -13,16 +13,16 @@
       :aria-checked="isChecked || 'false'"
       role="checkbox")
     template(v-if="hasLabel && labelOnLeft")
-      label.w-checkbox__label.pr-2(v-if="$slots.default" :for="`checkbox--${_uid}`")
+      label.w-checkbox__label.pr2(v-if="$slots.default" :for="`checkbox--${_uid}`")
         slot
-      label.w-checkbox__label.pr-2(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
+      label.w-checkbox__label.pr2(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
     .w-checkbox__input(
       @click="$refs.input.focus();$refs.input.click()"
       :class="this.color")
     template(v-if="hasLabel && !labelOnLeft")
-      label.w-checkbox__label.pl-2(v-if="$slots.default" :for="`checkbox--${_uid}`")
+      label.w-checkbox__label.pl2(v-if="$slots.default" :for="`checkbox--${_uid}`")
         slot
-      label.w-checkbox__label.pl-2(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
+      label.w-checkbox__label.pl2(v-else-if="label" :for="`checkbox--${_uid}`" v-html="label")
 </template>
 
 <script>

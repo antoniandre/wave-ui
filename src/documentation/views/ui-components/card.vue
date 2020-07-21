@@ -1,9 +1,9 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1) w-card
+  title-link.mt4.code(h1) w-card
 
   title-link(h2) Card with a title and no color
-  w-card.mt-4(card-title="Card title")
+  w-card.mt4(card-title="Card title")
     p.
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
       quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
@@ -13,7 +13,7 @@ div
       aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
 
   title-link(h2) Colored card with no title and no border
-  w-card.mt-4(bg-color="secondary" no-border)
+  w-card.mt4(bg-color="secondary" no-border)
     p.
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
       quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
@@ -26,14 +26,14 @@ div
   p.
     The w-card component will detect if there is a toolbar in the title slot or in the actions
     slot and will remove the default padding and border on this slot if there is.
-  w-card.mt-4(tile)
+  w-card.mt4(tile)
     template(v-slot:title)
       w-toolbar
-        .subtitle.my-0 Card title
+        .subtitle.my0 Card title
         .spacer
-        span.ml-2 Item 1
-        span.ml-2 Item 2
-        span.ml-2 Item 3
+        span.ml2 Item 1
+        span.ml2 Item 2
+        span.ml2 Item 3
     p.
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
       quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
@@ -43,7 +43,7 @@ div
       aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
 
   title-link(h2) Card with shadow
-  w-card.mt-4(shadow)
+  w-card.mt4(shadow)
     p.
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
       quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
@@ -54,7 +54,7 @@ div
 
   title-link(h2) Card with actions
   p The actions slot is optional but facilitates the addition of action buttons in a flex layout.
-  w-card.mt-4
+  w-card.mt4
     template(v-slot:title) Terms and conditions
     p.
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
@@ -62,7 +62,7 @@ div
       odit dolor labore eveniet at vel sequi nostrum.
     template(v-slot:actions)
       .spacer
-      w-button.mr-2(bg-color="error") I disagree
+      w-button.mr2(bg-color="error") I disagree
       w-button(bg-color="success") I agree
 </template>
 

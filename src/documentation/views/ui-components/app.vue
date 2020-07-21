@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1) w-app
+  title-link.mt4.code(h1) w-app
 
   p.
     This tag is required in your app for Wave UI proper functionning.#[br]

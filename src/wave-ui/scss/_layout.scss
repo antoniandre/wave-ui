@@ -49,13 +49,13 @@
     .mb-n#{$i} {margin-bottom: -$number;}
     .ml-n#{$i} {margin-left: -$number;}
   }
-  .ma-0 {margin: 0;}
-  .mx-0 {margin-left: 0;margin-right: 0;}
-  .my-0 {margin-top: 0;margin-bottom: 0;}
-  .mt-0 {margin-top: 0;}
-  .mr-0 {margin-right: 0;}
-  .mb-0 {margin-bottom: 0;}
-  .ml-0 {margin-left: 0;}
+  .ma0 {margin: 0;}
+  .mx0 {margin-left: 0;margin-right: 0;}
+  .my0 {margin-top: 0;margin-bottom: 0;}
+  .mt0 {margin-top: 0;}
+  .mr0 {margin-right: 0;}
+  .mb0 {margin-bottom: 0;}
+  .ml0 {margin-left: 0;}
 
   @for $i from 1 through 12 {
     $number: round($i * $base-increment);
@@ -67,13 +67,13 @@
     .pb-#{$i} {padding-bottom: $number;}
     .pl-#{$i} {padding-left: $number;}
   }
-  .pa-0 {padding: 0;}
-  .px-0 {padding-left: 0;padding-right: 0;}
-  .py-0 {padding-top: 0;padding-bottom: 0;}
-  .pt-0 {padding-top: 0;}
-  .pr-0 {padding-right: 0;}
-  .pb-0 {padding-bottom: 0;}
-  .pl-0 {padding-left: 0;}
+  .pa0 {padding: 0;}
+  .px0 {padding-left: 0;padding-right: 0;}
+  .py0 {padding-top: 0;padding-bottom: 0;}
+  .pt0 {padding-top: 0;}
+  .pr0 {padding-right: 0;}
+  .pb0 {padding-bottom: 0;}
+  .pl0 {padding-left: 0;}
   // ----------------------------------------------
 
   // Sizes.

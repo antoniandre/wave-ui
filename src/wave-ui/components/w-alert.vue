@@ -1,7 +1,7 @@
 <template lang="pug">
   .w-alert(v-if="value" :class="classes")
     template(v-if="type")
-      w-icon.mr-2 wi-{{ icon }}
+      w-icon.mr2 wi-{{ icon }}
       .w_alert__content
         slot
     slot(v-else)

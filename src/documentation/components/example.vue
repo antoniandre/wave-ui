@@ -53,7 +53,7 @@
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="css")
-        w-notification.mr-5.mt-n1(
+        w-notification.mr5.mt-1(
           v-model="showCopied"
           transition="slide-fade-left"
           plain

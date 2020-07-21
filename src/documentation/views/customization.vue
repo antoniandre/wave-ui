@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt-4(h1) Customization
+  title-link.mt4(h1) Customization
 
   title-link(h2) Basic overrides
   //- p Wave UI components are pixel-based to avoid flickering on half-pixel value.
@@ -26,7 +26,7 @@ div
 
   title-link(h2 slug="presets")
     | Presets
-    w-tag.ml-3(bg-color="red" color="white") Coming soon
+    w-tag.ml3(bg-color="red" color="white") Coming soon
   ssh-pre(language="js" label="Javascript").
     // Buttons example.
     {

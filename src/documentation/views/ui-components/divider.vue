@@ -1,10 +1,10 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1) w-divider
+  title-link.mt4.code(h1) w-divider
 
   title-link(h2) Horizontal
   p This horizontal line bellow is a divider.
-  w-divider.ma-10
+  w-divider.ma10
 
   h3 Divider in a #[code w-card]
   w-card
@@ -15,16 +15,16 @@ div
       olestias assumenda est obcaecati quaerat ullam corporis voluptatibus ratione, eum
       rovident iste possimus explicabo saepe laborum. Beatae perspiciatis at enim eaque?
 
-    w-divider.my-6.mx-n4
-    pre.mb-4 w-divider.my-6.mx-n4
+    w-divider.my6.mx-4
+    pre.mb4 w-divider.my6.mx-4
 
     p.
       Et possimus corporis ducimus rem tenetur. Deleniti, culpa magni repellendus adipisci
       impedit cum eum explicabo alias natus modi asperiores ratione dignissimos qui eligendi?
       Quia rem ut ab nesciunt dignissimos natus. Eum corporis officiis natus velit illum.
 
-    w-divider.ma-6(color="amber")
-    pre.mb-4 w-divider.ma-6.amber
+    w-divider.ma6(color="amber")
+    pre.mb4 w-divider.ma6.amber
 
     p.
       Quisquam soluta distinctio qui vel alias molestiae, doloremque totam eius sequi delectus
@@ -34,17 +34,17 @@ div
   title-link(h2) Vertical
   h3 Divider in a #[code w-toolbar]
   w-toolbar(bg-color="grey-light-5")
-    .title.my-0 Toolbar
+    .title.my0 Toolbar
     .spacer
-    span.mx-1 Item 1
-    span.mx-1 Item 2
-    w-divider.mx-1(vertical)
-    span.mx-1 Item 3
-    span.mx-1 Item 4
-    w-divider.mx-1(vertical)
-    span.mx-1 Item 5
-    span.mx-1 Item 6
+    span.mx1 Item 1
+    span.mx1 Item 2
+    w-divider.mx1(vertical)
+    span.mx1 Item 3
+    span.mx1 Item 4
+    w-divider.mx1(vertical)
+    span.mx1 Item 5
+    span.mx1 Item 6
 
   title-link(h2) Color
-  w-divider.ma-10.ml-0(color="green")
+  w-divider.ma10.ml0(color="green")
 </template>

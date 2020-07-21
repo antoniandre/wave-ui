@@ -12,7 +12,7 @@
       role="switch")
     .w-switch__input(
       @click="$refs.input.focus();$refs.input.click()"
-      :class="[[this.color], hasLabel ? (thin ? 'mr-3' : 'mr-2') : '']")
+      :class="[[this.color], hasLabel ? (thin ? 'mr3' : 'mr2') : '']")
     label.w-switch__label(v-if="$slots.default" :for="`switch--${_uid}`")
       slot
     label.w-switch__label(v-else-if="label" :for="`switch--${_uid}`" v-html="label")

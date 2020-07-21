@@ -1,6 +1,6 @@
 <template lang="pug">
 div(style="max-width: 900px")
-  title-link.mt-4.code(h1) w-alert
+  title-link.mt4.code(h1) w-alert
 
   title-link(h2 slug="show-and-hide-with-v-model") Show / hide with v-model
   p.
@@ -46,12 +46,12 @@ div(style="max-width: 900px")
     w-alert(type="success" light no-border) This is a success alert with no border.
     w-alert(color="primary" no-border) This is a normal alert with no border.
     w-alert(bg-color="cyan-light-4" color="purple" no-border) This is an alert with a cyan background, purple color and no border.
-  .w-flex.wrap.ma-n2
-    w-alert.grow.ma-2(color="primary" border-left) This is a normal alert with a left border.
-    w-alert.grow.ma-2(color="primary" border-right) This is a normal alert with a right border.
-  .w-flex.wrap.mx-n2.mt-2
-    w-alert.grow.ma-2(color="primary" border-top) This is a normal alert with a top border.
-    w-alert.grow.ma-2(color="primary" border-bottom) This is a normal alert with a left border.
+  .w-flex.wrap.ma-2
+    w-alert.grow.ma2(color="primary" border-left) This is a normal alert with a left border.
+    w-alert.grow.ma2(color="primary" border-right) This is a normal alert with a right border.
+  .w-flex.wrap.mx-2.mt2
+    w-alert.grow.ma2(color="primary" border-top) This is a normal alert with a top border.
+    w-alert.grow.ma2(color="primary" border-bottom) This is a normal alert with a left border.
 
   title-link(h2) Tile, round &amp; shadow
   w-alert(color="primary" tile) This is a tile alert.

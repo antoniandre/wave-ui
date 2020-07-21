@@ -9,7 +9,7 @@
       :value="value === item.value"
       :color="color"
       @input="$emit('input', item.value);$emit('change', item.value)"
-      :class="{ 'mt-1': !inline && i }")
+      :class="{ 'mt1': !inline && i }")
       slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
 

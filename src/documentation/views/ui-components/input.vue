@@ -1,99 +1,99 @@
 <template lang="pug">
 div
-  title-link.mt-4.code(h1 slug="w-input")
+  title-link.mt4.code(h1 slug="w-input")
     | w-input
-    w-tag.ml-3(bg-color="orange" color="white") In progress
+    w-tag.ml3(bg-color="orange" color="white") In progress
 
-  w-input.mb-1(label="First name" required)
-  w-input.mb-1 First name
-  w-input.mb-1(placeholder="First name")
+  w-input.mb1(label="First name" required)
+  w-input.mb1 First name
+  w-input.mb1(placeholder="First name")
 
   title-link(h2) Outline
-  w-input.mb-1(label="Outline" outline)
-  w-input.mb-1(placeholder="Outline" outline)
-  w-input.mb-1(label="Outline" color="info" outline)
-  w-input.mb-1(label="Outline" bg-color="blue-light-5" outline)
-  w-input.mb-1(label="Outline" bg-color="blue-dark-5" color="white" outline)
+  w-input.mb1(label="Outline" outline)
+  w-input.mb1(placeholder="Outline" outline)
+  w-input.mb1(label="Outline" color="info" outline)
+  w-input.mb1(label="Outline" bg-color="blue-light-5" outline)
+  w-input.mb1(label="Outline" bg-color="blue-dark-5" color="white" outline)
 
   title-link(h2) Shadow
-  w-input.mb-1(label="Shadow" shadow)
-  w-input.mb-1(label="outline style with Shadow" shadow outline)
+  w-input.mb1(label="Shadow" shadow)
+  w-input.mb1(label="outline style with Shadow" shadow outline)
 
   title-link(h2) Round &amp; Tile
   w-flex(wrap :gap="2")
-    .grow.mb-4(style="min-width: 200px")
-      .mb-2 Default style
-      w-input.mb-1(label="Round" round)
-      w-input.mb-1(label="Round and shadow" round shadow)
-      w-input.mb-1(label="Tile" tile)
-    .grow.mb-4(style="min-width: 200px")
-      .mb-2 Outline
-      w-input.mb-1(label="Round" round outline)
-      w-input.mb-1(label="Round" round outline shadow)
-      w-input.mb-1(label="Tile" tile outline)
+    .grow.mb4(style="min-width: 200px")
+      .mb2 Default style
+      w-input.mb1(label="Round" round)
+      w-input.mb1(label="Round and shadow" round shadow)
+      w-input.mb1(label="Tile" tile)
+    .grow.mb4(style="min-width: 200px")
+      .mb2 Outline
+      w-input.mb1(label="Round" round outline)
+      w-input.mb1(label="Round" round outline shadow)
+      w-input.mb1(label="Tile" tile outline)
 
   title-link(h2) Color
-  p.mb-4.
+  p.mb4.
     You can set the background color and the text color.#[br]
     By default, the text has the "#[span.code primary]" color.
   w-flex(wrap :gap="2")
-    .grow.mb-4(style="min-width: 200px")
-      .mb-2 Default style
-      w-input.mb-1(value="Some content")
-      w-input.mb-1(color="red" value="Some content")
-      w-input.mb-1(bg-color="red-light-5" value="Some content")
-      w-input.mb-1(color="red-dark-1" bg-color="red-light-5" value="Some content")
-      w-input.mb-1(color="orange-dark-1" bg-color="orange-light-5" value="Some content")
-    .grow.mb-4(style="min-width: 200px")
-      .mb-2 Outline
-      w-input.mb-1(value="Some content" outline)
-      w-input.mb-1(color="red" value="Some content" outline)
-      w-input.mb-1(bg-color="red-light-5" value="Some content" outline)
-      w-input.mb-1(color="red-dark-1" bg-color="red-light-5" value="Some content" outline)
-      w-input.mb-1(color="orange-dark-1" bg-color="orange-light-5" value="Some content" outline)
+    .grow.mb4(style="min-width: 200px")
+      .mb2 Default style
+      w-input.mb1(value="Some content")
+      w-input.mb1(color="red" value="Some content")
+      w-input.mb1(bg-color="red-light-5" value="Some content")
+      w-input.mb1(color="red-dark-1" bg-color="red-light-5" value="Some content")
+      w-input.mb1(color="orange-dark-1" bg-color="orange-light-5" value="Some content")
+    .grow.mb4(style="min-width: 200px")
+      .mb2 Outline
+      w-input.mb1(value="Some content" outline)
+      w-input.mb1(color="red" value="Some content" outline)
+      w-input.mb1(bg-color="red-light-5" value="Some content" outline)
+      w-input.mb1(color="red-dark-1" bg-color="red-light-5" value="Some content" outline)
+      w-input.mb1(color="orange-dark-1" bg-color="orange-light-5" value="Some content" outline)
 
   title-link(h2) Label position
   p The default label position is "#[span.code inside]", but it can also be "#[span.code left]" or "#[span.code right]".
-  w-input.mb-1(label="Left" label-position="left" outline)
-  w-input.mb-1(label="Inside" label-position="inside" outline)
-  w-input.mb-1(label="Right" label-position="right" outline)
-  p.mt-4.
+  w-input.mb1(label="Left" label-position="left" outline)
+  w-input.mb1(label="Inside" label-position="inside" outline)
+  w-input.mb1(label="Right" label-position="right" outline)
+  p.mt4.
     #[strong Notes:] when the label is positioned inside and a placeholder is set,
     the label will be hidden and the placeholder will be displayed.
 
   title-link(h2) Disabled &amp; readonly
-  w-input.mb-1(label="Disabled" outline disabled)
-  w-input.mb-1(label="Disabled and filled" value="Some content" outline disabled)
-  w-input.mb-1(label="Readonly" outline readonly)
-  w-input.mb-1(label="Readonly and filled" value="Some content" outline readonly)
+  w-input.mb1(label="Disabled" outline disabled)
+  w-input.mb1(label="Disabled and filled" value="Some content" outline disabled)
+  w-input.mb1(label="Readonly" outline readonly)
+  w-input.mb1(label="Readonly and filled" value="Some content" outline readonly)
 
   title-link(h2) Types
   p The default type is "#[span.code text]".
   h3 Textual inputs
   ul.input-types
     li
-      .code.mb-1 type="email"
+      .code.mb1 type="email"
       w-input(type="email") Email address
     li
-      .code.mb-1 type="number"
+      .code.mb1 type="number"
       w-input(type="number" min="0" max="100") Age
     li
-      .code.mb-1 type="password"
+      .code.mb1 type="password"
       w-input(type="password") Password
     li
-      .code.mb-1 type="search"
+      .code.mb1 type="search"
       w-input(type="search") Search
     li
-      .code.mb-1 type="tel"
+      .code.mb1 type="tel"
       w-input(type="tel") Tel
     li
-      .code.mb-1 type="text"
+      .code.mb1 type="text"
       w-input Text
     li
-      .code.mb-1 type="url"
+      .code.mb1 type="url"
       w-input(type="url") Url
     li
-      span.code.mb-1.mr-2 type="hidden"
+      span.code.mb1.mr2 type="hidden"
       | The hidden type is also accepted.
       w-input(type="hidden")
 
@@ -101,37 +101,37 @@ div
   p For all the other types of input listed bellow, a specific Wave UI component should be used instead:
   ul.other-input-types
     li
-      span.code.mr-2 type="button"
+      span.code.mr2 type="button"
       span.grey use #[code w-button] instead
     li
-      span.code.mr-2 type="checkoutline"
+      span.code.mr2 type="checkoutline"
       span.grey use #[code w-checkoutline] instead
     li
-      span.code.mr-2 type="color"
+      span.code.mr2 type="color"
       span.grey use #[code w-color-picker] instead
     li
-      span.code.mr-2 type="date"
+      span.code.mr2 type="date"
       span.grey use #[code w-date-picker] instead
     li
-      span.code.mr-2 type="file"
+      span.code.mr2 type="file"
       span.grey use #[code w-file-input] instead
     li
-      span.code.mr-2 type="image"
+      span.code.mr2 type="image"
       span.grey use #[code w-image] instead
     li
-      span.code.mr-2 type="radio"
+      span.code.mr2 type="radio"
       span.grey use #[code w-radio] instead
     li
-      span.code.mr-2 type="range"
+      span.code.mr2 type="range"
       span.grey use #[code w-slider] instead
     li
-      span.code.mr-2 type="reset"
+      span.code.mr2 type="reset"
       span.grey use #[code w-button] instead
     li
-      span.code.mr-2 type="submit"
+      span.code.mr2 type="submit"
       span.grey use #[code w-button] instead
     li
-      span.code.mr-2 type="time"
+      span.code.mr2 type="time"
       span.grey use #[code w-time-picker] instead
 </template>
 

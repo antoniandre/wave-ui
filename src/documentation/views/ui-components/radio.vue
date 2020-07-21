@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt-4(h1 slug="w-radio-and-w-radios")
+  title-link.mt4(h1 slug="w-radio-and-w-radios")
     | #[span.code w-radio] &amp; #[span.code w-radios]
 
   title-link(h2 slug="multiple-radio-buttons")
@@ -13,10 +13,10 @@ div
 
   h3 States
   .w-flex.wrap
-    w-radio.mr-3.mb-1(:value="true" label="Checked")
-    w-radio.mr-3.mb-1(:value="false" label="Unchecked")
-    w-radio.mr-3.mb-1(:value="true" disabled label="Checked &amp; disabled")
-    w-radio.mr-3.mb-1(:value="false" disabled label="Unchecked &amp; disabled")
+    w-radio.mr3.mb1(:value="true" label="Checked")
+    w-radio.mr3.mb1(:value="false" label="Unchecked")
+    w-radio.mr3.mb1(:value="true" disabled label="Checked &amp; disabled")
+    w-radio.mr3.mb1(:value="false" disabled label="Unchecked &amp; disabled")
 
   h3 V-model
   p.
@@ -24,7 +24,7 @@ div
     If no value is set, the choice's label will be returned instead.
   .w-flex
     w-radios(v-model="selectedRadio1" :items="radios1")
-    div.subtitle.ml-8 Selected choice: #[code {{ selectedRadio1 || 'null' }}]
+    div.subtitle.ml8 Selected choice: #[code {{ selectedRadio1 || 'null' }}]
 
 
   h3 Default column layout
@@ -45,10 +45,10 @@ div
     button.
   w-radios(:items="radios3" color="green")
     template(v-slot:item="{ item }")
-      span.pr-2 {{ item.label }}
+      span.pr2 {{ item.label }}
       w-icon.deep-purple {{ item.icon }}
 
-  w-divider.ma-10.ml-0
+  w-divider.ma10.ml0
 
   title-link(h2) Individual radio buttons
   p.
@@ -57,15 +57,15 @@ div
     A set of radio buttons will only work together if they have the same v-model,
     or the same #[code name] attribute (standard HTML).
 
-  w-radio.mr-2(label="Choice 1" name="radios2" color="success")
-  w-radio.mr-2(label="Choice 2" name="radios2" color="warning")
+  w-radio.mr2(label="Choice 1" name="radios2" color="success")
+  w-radio.mr2(label="Choice 2" name="radios2" color="warning")
   w-radio(label="Choice 3" name="radios2" color="error")
 
   h3 Custom label content
   p.
     #[code w-radio] provides a default slot to customize the content.
-  w-radio.mr-2(name="radios2" color="success")
-    span.pr-2 Choice 1
+  w-radio.mr2(name="radios2" color="success")
+    span.pr2 Choice 1
     w-icon.primary wi-star
 
 

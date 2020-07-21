@@ -6,11 +6,11 @@ w-toolbar.main-toolbar(fixed)
   .spacer
   w-tooltip(z-index="20")
     template(#activator="{ on }")
-      a.mr-2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
+      a.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
         w-icon(md) mdi mdi-github
     .size--xs.text-nowrap View the project on Github
   .caption Version 1.0
-  w-button.ml-2.mr-n1.hamburger-menu(
+  w-button.ml2.mr-1.hamburger-menu(
     v-if="$waveui.breakpoint.xs"
     @click="$emit('update:drawerOpen', !drawerOpen)"
     large text round
