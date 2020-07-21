@@ -25,33 +25,33 @@ div(style="overflow: hidden")
   h3 Status colors shades
   .w-flex.wrap.mb12.ma-2
     .w-flex.column.basis-0
-      .color.success-light-3--bg.subtitle.text-center.py3.ma2.body success-light-3
-      .color.success-light-2--bg.subtitle.text-center.py3.ma2.body success-light-2
-      .color.success-light-1--bg.subtitle.text-center.py3.ma2.body success-light-1
-      .color.success-dark-1--bg.subtitle.text-center.py3.ma2.white.body success-dark-1
-      .color.success-dark-2--bg.subtitle.text-center.py3.ma2.white.body success-dark-2
-      .color.success-dark-3--bg.subtitle.text-center.py3.ma2.white.body success-dark-3
+      .color.success-light3--bg.subtitle.text-center.py3.ma2.body success-light3
+      .color.success-light2--bg.subtitle.text-center.py3.ma2.body success-light2
+      .color.success-light1--bg.subtitle.text-center.py3.ma2.body success-light1
+      .color.success-dark1--bg.subtitle.text-center.py3.ma2.white.body success-dark1
+      .color.success-dark2--bg.subtitle.text-center.py3.ma2.white.body success-dark2
+      .color.success-dark3--bg.subtitle.text-center.py3.ma2.white.body success-dark3
     .w-flex.column.basis-0
-      .color.error-light-3--bg.subtitle.text-center.py3.ma2.body error-light-3
-      .color.error-light-2--bg.subtitle.text-center.py3.ma2.body error-light-2
-      .color.error-light-1--bg.subtitle.text-center.py3.ma2.body error-light-1
-      .color.error-dark-1--bg.subtitle.text-center.py3.ma2.white.body error-dark-1
-      .color.error-dark-2--bg.subtitle.text-center.py3.ma2.white.body error-dark-2
-      .color.error-dark-3--bg.subtitle.text-center.py3.ma2.white.body error-dark-3
+      .color.error-light3--bg.subtitle.text-center.py3.ma2.body error-light3
+      .color.error-light2--bg.subtitle.text-center.py3.ma2.body error-light2
+      .color.error-light1--bg.subtitle.text-center.py3.ma2.body error-light1
+      .color.error-dark1--bg.subtitle.text-center.py3.ma2.white.body error-dark1
+      .color.error-dark2--bg.subtitle.text-center.py3.ma2.white.body error-dark2
+      .color.error-dark3--bg.subtitle.text-center.py3.ma2.white.body error-dark3
     .w-flex.column.basis-0
-      .color.warning-light-3--bg.subtitle.text-center.py3.ma2.body warning-light-3
-      .color.warning-light-2--bg.subtitle.text-center.py3.ma2.body warning-light-2
-      .color.warning-light-1--bg.subtitle.text-center.py3.ma2.body warning-light-1
-      .color.warning-dark-1--bg.subtitle.text-center.py3.ma2.white.body warning-dark-1
-      .color.warning-dark-2--bg.subtitle.text-center.py3.ma2.white.body warning-dark-2
-      .color.warning-dark-3--bg.subtitle.text-center.py3.ma2.white.body warning-dark-3
+      .color.warning-light3--bg.subtitle.text-center.py3.ma2.body warning-light3
+      .color.warning-light2--bg.subtitle.text-center.py3.ma2.body warning-light2
+      .color.warning-light1--bg.subtitle.text-center.py3.ma2.body warning-light1
+      .color.warning-dark1--bg.subtitle.text-center.py3.ma2.white.body warning-dark1
+      .color.warning-dark2--bg.subtitle.text-center.py3.ma2.white.body warning-dark2
+      .color.warning-dark3--bg.subtitle.text-center.py3.ma2.white.body warning-dark3
     .w-flex.column.basis-0
-      .color.info-light-3--bg.subtitle.text-center.py3.ma2.body info-light-3
-      .color.info-light-2--bg.subtitle.text-center.py3.ma2.body info-light-2
-      .color.info-light-1--bg.subtitle.text-center.py3.ma2.body info-light-1
-      .color.info-dark-1--bg.subtitle.text-center.py3.ma2.white.body info-dark-1
-      .color.info-dark-2--bg.subtitle.text-center.py3.ma2.white.body info-dark-2
-      .color.info-dark-3--bg.subtitle.text-center.py3.ma2.white.body info-dark-3
+      .color.info-light3--bg.subtitle.text-center.py3.ma2.body info-light3
+      .color.info-light2--bg.subtitle.text-center.py3.ma2.body info-light2
+      .color.info-light1--bg.subtitle.text-center.py3.ma2.body info-light1
+      .color.info-dark1--bg.subtitle.text-center.py3.ma2.white.body info-dark1
+      .color.info-dark2--bg.subtitle.text-center.py3.ma2.white.body info-dark2
+      .color.info-dark3--bg.subtitle.text-center.py3.ma2.white.body info-dark3
 
   title-link(h2 slug="primary-and-secondary-colors-and-shades")
     | #[span.code primary] &amp; #[span.code secondary] colors and shades
@@ -64,15 +64,15 @@ div(style="overflow: hidden")
     as well as its 3 darker shades, with a white text when used as a background.
 
   w-flex(wrap :gap="4")
-    .color.primary-light-3--bg.subtitle.text-center.grow.py3.white.body primary-light-3
-    .color.primary-light-2--bg.subtitle.text-center.grow.py3.white.body primary-light-2
-    .color.primary-light-1--bg.subtitle.text-center.grow.py3.white.body primary-light-1
+    .color.primary-light3--bg.subtitle.text-center.grow.py3.white.body primary-light3
+    .color.primary-light2--bg.subtitle.text-center.grow.py3.white.body primary-light2
+    .color.primary-light1--bg.subtitle.text-center.grow.py3.white.body primary-light1
     .color.primary--bg.subtitle.text-center.grow.py3.white primary
-    .color.primary-dark-1--bg.subtitle.text-center.grow.py3.white.body primary-dark-1
-    .color.primary-dark-2--bg.subtitle.text-center.grow.py3.white.body primary-dark-2
-    .color.primary-dark-3--bg.subtitle.text-center.grow.py3.white.body primary-dark-3
+    .color.primary-dark1--bg.subtitle.text-center.grow.py3.white.body primary-dark1
+    .color.primary-dark2--bg.subtitle.text-center.grow.py3.white.body primary-dark2
+    .color.primary-dark3--bg.subtitle.text-center.grow.py3.white.body primary-dark3
 
-  w-alert.text-light(type="info" bg-color="yellow-light-5" color="orange-dark-1").
+  w-alert.text-light(type="info" bg-color="yellow-light5" color="orange-dark1").
     You can add #[code disableColorShades: true] to the Wave UI options to disable the color shades
     computing for the status colors and your custom colors.
 

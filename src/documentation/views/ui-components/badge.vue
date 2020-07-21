@@ -8,13 +8,13 @@ div
   example
     w-badge.mr10
       template(#badge) 3
-      div.grey-light-5--bg.pa2.primary
+      div.grey-light5--bg.pa2.primary
         w-icon.mr1 mdi mdi-email
         | Emails
     template(#html).
       &lt;w-badge class="mr10"&gt;
         &lt;template #badge&gt;3&lt;/template&gt;
-        &lt;div class="pa2 grey-light-5--bg primary"&gt;
+        &lt;div class="pa2 grey-light5--bg primary"&gt;
           &lt;w-icon class="mr1"&gt;mdi mdi-email&lt;/w-icon&gt;
           Emails
         &lt;/div&gt;
@@ -24,7 +24,7 @@ div
   w-flex(wrap)
     w-badge.mr10
       template(#badge) 3
-      div.grey-light-5--bg.pa2.primary
+      div.grey-light5--bg.pa2.primary
         w-icon.mr1 mdi mdi-email
         | Emails
 

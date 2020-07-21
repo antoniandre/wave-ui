@@ -1,8 +1,8 @@
 #{$css-scope} {
   .primary--bg,
-  .primary-dark-1--bg,
-  .primary-dark-2--bg,
-  .primary-dark-3--bg {color: #fff;}
+  .primary-dark1--bg,
+  .primary-dark2--bg,
+  .primary-dark3--bg {color: #fff;}
   .white--bg {background-color: #fff;}
   .white {color: #fff;}
   .grey--bg {background-color: #888;}
@@ -38,10 +38,10 @@
     .#{$label} {color: $color;}
 
     @for $i from 1 through 5 {
-      .#{$label}-light-#{$i}--bg {background-color: lighten($color, 8 * $i);}
-      .#{$label}-light-#{$i} {color: lighten($color, 8 * $i);}
-      .#{$label}-dark-#{$i}--bg {background-color: darken($color, 6 * $i);}
-      .#{$label}-dark-#{$i} {color: darken($color, 6 * $i);}
+      .#{$label}-light#{$i}--bg {background-color: lighten($color, 8 * $i);}
+      .#{$label}-light#{$i} {color: lighten($color, 8 * $i);}
+      .#{$label}-dark#{$i}--bg {background-color: darken($color, 6 * $i);}
+      .#{$label}-dark#{$i} {color: darken($color, 6 * $i);}
     }
   }
 }

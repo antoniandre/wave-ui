@@ -33,7 +33,7 @@ div
 
   title-link(h2) Vertical
   h3 Divider in a #[code w-toolbar]
-  w-toolbar(bg-color="grey-light-5")
+  w-toolbar(bg-color="grey-light5")
     .title.my0 Toolbar
     .spacer
     span.mx1 Item 1
