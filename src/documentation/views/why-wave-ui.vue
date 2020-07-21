@@ -48,7 +48,7 @@ export default {
       { label: 'Avoiding the use of the <code>!important</code> keyword' },
       { label: 'CSS-scoping to UI elements &amp; helper classes - no side-effect' },
       { label: 'Handling all the sizes and spacings from a single <code>$base-font-size</code> variable that you can override' },
-      { label: 'Providing straightforward attributes and component names' }
+      { label: 'Providing straightforward and consistent options and component names' }
     ]
   })
 }
