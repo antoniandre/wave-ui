@@ -70,7 +70,7 @@ div
     .w-flex.pa2.align-center.wrap
       .w-flex.align-center
         w-icon.mr3(color="primary" xl) wi-info-circle
-        span.grey-dark-3.
+        span.grey-dark3.
           Our website uses cookies to give you the best user experience.
           To continue browsing this site you must agree.
       w-button.ml-auto(sm bg-color="primary" dark @click="showCookieNotice = false")
@@ -131,7 +131,7 @@ div
     bottom
     :persistent="persistent"
     :height="bottomDrawerHeight"
-    bg-color="blue-light-4"
+    bg-color="blue-light4"
     @close="bottomDrawerHeight = null;persistent = false")
     w-button.button--close(
       sm

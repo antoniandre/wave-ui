@@ -79,12 +79,12 @@ export default class WaveUI {
           for (let i = 1; i <= 3; i++) {
             const lighterColor = shadeColor(`#${color.color}`, i * 40)
             const darkerColor = shadeColor(`#${color.color}`, -i * 40)
-            this.colors[`${color.label}-light-${i}`] = lighterColor
-            this.colors[`${color.label}-dark-${i}`] = darkerColor
+            this.colors[`${color.label}-light${i}`] = lighterColor
+            this.colors[`${color.label}-dark${i}`] = darkerColor
 
             // Adding the shades to the config object to generate the CSS from w-app.
-            config.colorShades[`${color.label}-light-${i}`] = lighterColor
-            config.colorShades[`${color.label}-dark-${i}`] = darkerColor
+            config.colorShades[`${color.label}-light${i}`] = lighterColor
+            config.colorShades[`${color.label}-dark${i}`] = darkerColor
           }
         }
       }

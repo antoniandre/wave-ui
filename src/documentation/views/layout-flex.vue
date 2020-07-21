@@ -86,49 +86,49 @@ div
   .heading.mt6 w-flex, row direction (default)
   example
     p.code.mb1 .justify-start (default)
-    .w-flex.pa3.blue-light-5--bg.justify-start
+    .w-flex.pa3.blue-light5--bg.justify-start
       .box
       .box
       .box
     p.code.mt2.mb1 .justify-center
-    .w-flex.pa3.blue-light-5--bg.justify-center
+    .w-flex.pa3.blue-light5--bg.justify-center
       .box
       .box
       .box
     p.code.mt2.mb1 .justify-space-between
-    .w-flex.pa3.blue-light-5--bg.justify-space-between
+    .w-flex.pa3.blue-light5--bg.justify-space-between
       .box
       .box
       .box
     p.code.mt2.mb1 .justify-end
-    .w-flex.pa3.blue-light-5--bg.justify-end
+    .w-flex.pa3.blue-light5--bg.justify-end
       .box
       .box
       .box
     template(#html).
       &lt;p&gt;.justify-start (default)&lt;/p&gt;
-      &lt;w-flex justify-start class="blue-light-5--bg pa3"&gt;
+      &lt;w-flex justify-start class="blue-light5--bg pa3"&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
       &lt;/w-flex&gt;
 
       &lt;p&gt;.justify-center&lt;/p&gt;
-      &lt;w-flex justify-center class="blue-light-5--bg pa3"&gt;
+      &lt;w-flex justify-center class="blue-light5--bg pa3"&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
       &lt;/w-flex&gt;
 
       &lt;p&gt;.justify-space-between&lt;/p&gt;
-      &lt;w-flex justify-space-between class="blue-light-5--bg pa3"&gt;
+      &lt;w-flex justify-space-between class="blue-light5--bg pa3"&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
       &lt;/w-flex&gt;
 
       &lt;p&gt;.justify-end&lt;/p&gt;
-      &lt;w-flex justify-end class="blue-light-5--bg pa3"&gt;
+      &lt;w-flex justify-end class="blue-light5--bg pa3"&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
