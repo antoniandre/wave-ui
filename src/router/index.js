@@ -39,9 +39,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "colors" */ '@/documentation/views/colors.vue')
   },
   {
+    path: '/layout',
+    name: 'layout',
+    redirect: '/layout--spaces'
+  },
+  {
     path: '/layout--spaces',
     name: 'layout-spaces',
     component: () => import(/* webpackChunkName: "layout-spaces" */ '@/documentation/views/layout-spaces.vue')
+  },
+  {
+    path: '/layout--grid-system',
+    name: 'layout-grid-system',
+    component: () => import(/* webpackChunkName: "layout-grid-system" */ '@/documentation/views/layout-grid-system.vue')
   },
   {
     path: '/layout--flex',
