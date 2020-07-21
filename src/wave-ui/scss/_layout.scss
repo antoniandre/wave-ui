@@ -34,20 +34,20 @@
   // ----------------------------------------------
   @for $i from 0 through 12 {
     $number: round($i * $base-increment);
-    .ma-#{$i} {margin: $number;}
-    .mx-#{$i} {margin-left: $number;margin-right: $number;}
-    .my-#{$i} {margin-top: $number;margin-bottom: $number;}
-    .mt-#{$i} {margin-top: $number;}
-    .mr-#{$i} {margin-right: $number;}
-    .mb-#{$i} {margin-bottom: $number;}
-    .ml-#{$i} {margin-left: $number;}
-    .ma-n#{$i} {margin: -$number;}
-    .mx-n#{$i} {margin-left: -$number;margin-right: -$number;}
-    .my-n#{$i} {margin-top: -$number;margin-bottom: -$number;}
-    .mt-n#{$i} {margin-top: -$number;}
-    .mr-n#{$i} {margin-right: -$number;}
-    .mb-n#{$i} {margin-bottom: -$number;}
-    .ml-n#{$i} {margin-left: -$number;}
+    .ma#{$i} {margin: $number;}
+    .mx#{$i} {margin-left: $number;margin-right: $number;}
+    .my#{$i} {margin-top: $number;margin-bottom: $number;}
+    .mt#{$i} {margin-top: $number;}
+    .mr#{$i} {margin-right: $number;}
+    .mb#{$i} {margin-bottom: $number;}
+    .ml#{$i} {margin-left: $number;}
+    .ma-#{$i} {margin: -$number;}
+    .mx-#{$i} {margin-left: -$number;margin-right: -$number;}
+    .my-#{$i} {margin-top: -$number;margin-bottom: -$number;}
+    .mt-#{$i} {margin-top: -$number;}
+    .mr-#{$i} {margin-right: -$number;}
+    .mb-#{$i} {margin-bottom: -$number;}
+    .ml-#{$i} {margin-left: -$number;}
   }
   .ma0 {margin: 0;}
   .mx0 {margin-left: 0;margin-right: 0;}
@@ -59,13 +59,13 @@
 
   @for $i from 1 through 12 {
     $number: round($i * $base-increment);
-    .pa-#{$i} {padding: $number;}
-    .px-#{$i} {padding-left: $number;padding-right: $number;}
-    .py-#{$i} {padding-top: $number;padding-bottom: $number;}
-    .pt-#{$i} {padding-top: $number;}
-    .pr-#{$i} {padding-right: $number;}
-    .pb-#{$i} {padding-bottom: $number;}
-    .pl-#{$i} {padding-left: $number;}
+    .pa#{$i} {padding: $number;}
+    .px#{$i} {padding-left: $number;padding-right: $number;}
+    .py#{$i} {padding-top: $number;padding-bottom: $number;}
+    .pt#{$i} {padding-top: $number;}
+    .pr#{$i} {padding-right: $number;}
+    .pb#{$i} {padding-bottom: $number;}
+    .pl#{$i} {padding-left: $number;}
   }
   .pa0 {padding: 0;}
   .px0 {padding-left: 0;padding-right: 0;}
