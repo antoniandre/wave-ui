@@ -16,7 +16,7 @@ Like other UI frameworks, Wave UI is very flexible and easy to use. But it is al
 - Avoiding the use of the `!important` keyword
 - CSS-scoping to UI elements &amp; helper classes - no side-effect
 - Handling all the sizes and spacings from a single `$base-font-size` variable that you can override
-- Providing straightforward attributes and component names
+- Providing straightforward and consistent options and component names
 
 ___
 
