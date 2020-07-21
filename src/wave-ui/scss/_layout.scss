@@ -93,10 +93,6 @@
   $grid-base: 12;
   @for $i from 0 through $grid-base {
     .xs#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
-    .sm#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
-    .md#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
-    .lg#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
-    .xl#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
   }
 
   @media screen and (min-width: 600px) {
