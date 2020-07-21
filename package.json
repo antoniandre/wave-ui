@@ -3,6 +3,7 @@
   "version": "1.0.0-alpha.10",
   "main": "./dist/wave-ui.common.js",
   "unpkg": "dist/wave-ui.umd.min.js",
+  "jsdelivr": "dist/wave-ui.umd.min.js",
   "files": [
     "dist",
     "package.json",
