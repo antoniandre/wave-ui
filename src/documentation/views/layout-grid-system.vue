@@ -50,4 +50,44 @@ div
         .primary-light-3--bg.py-3 xs5
       .xs7.pa-1
         .primary-light-3--bg.py-3 xs7
+
+  p For this example, resize your browser and observe the different layout when crossing a breakpoint.
+  example.mt-8
+    w-flex.text-center(wrap)
+      .xs12.md6.lg4.xl2.pa-1
+        .primary-light-3--bg.py-3
+          template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+          template(v-else-if="$waveui.breakpoint.md") md6
+          template(v-else-if="$waveui.breakpoint.lg") lg4
+          template(v-else-if="$waveui.breakpoint.xl") xl2
+      .xs12.md6.lg4.xl2.pa-1
+        .primary-light-3--bg.py-3
+          template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+          template(v-else-if="$waveui.breakpoint.md") md6
+          template(v-else-if="$waveui.breakpoint.lg") lg4
+          template(v-else-if="$waveui.breakpoint.xl") xl2
+      .xs12.md6.lg4.xl2.pa-1
+        .primary-light-3--bg.py-3
+          template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+          template(v-else-if="$waveui.breakpoint.md") md6
+          template(v-else-if="$waveui.breakpoint.lg") lg4
+          template(v-else-if="$waveui.breakpoint.xl") xl2
+      .xs12.md6.lg4.xl2.pa-1
+        .primary-light-3--bg.py-3
+          template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+          template(v-else-if="$waveui.breakpoint.md") md6
+          template(v-else-if="$waveui.breakpoint.lg") lg4
+          template(v-else-if="$waveui.breakpoint.xl") xl2
+      .xs12.md6.lg4.xl2.pa-1
+        .primary-light-3--bg.py-3
+          template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+          template(v-else-if="$waveui.breakpoint.md") md6
+          template(v-else-if="$waveui.breakpoint.lg") lg4
+          template(v-else-if="$waveui.breakpoint.xl") xl2
+      .xs12.md6.lg4.xl2.pa-1
+        .primary-light-3--bg.py-3
+          template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+          template(v-else-if="$waveui.breakpoint.md") md6
+          template(v-else-if="$waveui.breakpoint.lg") lg4
+          template(v-else-if="$waveui.breakpoint.xl") xl2
 </template>
