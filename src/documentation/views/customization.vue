@@ -2,7 +2,7 @@
 div
   title-link.mt4(h1) Customization
 
-  title-link(h2) Basic overrides
+  title-link(h2) Basic SCSS overrides
   //- p Wave UI components are pixel-based to avoid flickering on half-pixel value.
   p Wave UI components rely on SCSS variables that you can easily override from Your SCSS file:
   ssh-pre(language="scss" label="SCSS").

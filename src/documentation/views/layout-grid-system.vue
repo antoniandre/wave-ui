@@ -7,7 +7,8 @@ div
     of a container in 12 cells to easily let you create the design that you want.#[br]
     You can then assign this created layout to a particular breakpoint.
 
-  p.mt6.
+  title-link(h2) Basic grid
+  p.
     Let's start with a basic example. The following splitting is applied on the #[span.code xs]
     breakpoint and will thus be applied on all the breakpoints.
 
@@ -51,8 +52,9 @@ div
       .xs7.pa1
         .primary-light3--bg.py3 xs7
 
+  title-link(h2) Operating with breakpoints
   p For this example, resize your browser and observe the different layout when crossing a breakpoint.
-  example.mt8
+  example
     w-flex.text-center(wrap)
       .xs12.md6.lg4.xl2.pa1
         .primary-light3--bg.py3
