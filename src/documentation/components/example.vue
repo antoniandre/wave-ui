@@ -23,7 +23,7 @@
               icon="mdi mdi-codepen"
               text
               color="primary")
-          | Edit on Codepen
+          | Edit in Codepen
     w-transition-expand(y)
       .example__source(v-show="showSource")
         ssh-pre(
