@@ -1,7 +1,5 @@
 #{$css-scope} {
   .headline {
-    margin-top: 10 * $base-increment;
-    margin-bottom: 5 * $base-increment;
     font-size: round(2.2 * $base-font-size);
     font-weight: 100;
     letter-spacing: 1px;
@@ -10,26 +8,21 @@
   .title {
     font-size: round(1.7 * $base-font-size);
     font-weight: 400;
-    margin-top: 4 * $base-increment;
-    margin-bottom: 2 * $base-increment;
   }
 
   .subtitle {
     font-size: round(1.4 * $base-font-size);
     font-weight: 400;
-    margin-bottom: 2 * $base-increment;
   }
 
   .heading {
     font-size: round(1.25 * $base-font-size);
     font-weight: 400;
-    margin-bottom: 2 * $base-increment;
   }
 
   .subheading {
     font-size: round(1.1 * $base-font-size);
     font-weight: 600;
-    margin-bottom: 2 * $base-increment;
   }
 
   .body {

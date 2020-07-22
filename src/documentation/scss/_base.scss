@@ -1,43 +1,8 @@
-html {
-  font-size: $base-font-size;
-  font-family: Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #444;
-  height: 100%;
-}
+html {height: 100%;}
 
 body {height: 100%;}
 
 a {color: $links;}
-
-h1 {
-  color: $primary;
-  margin-top: 6 * $base-increment;
-  margin-bottom: 2 * $base-increment;
-  font-size: 2em;
-  font-weight: 400;
-}
-.w-app h1.headline {margin-bottom: 30px;}
-
-h2 {
-  color: $primary;
-  margin-top: 10 * $base-increment;
-  margin-bottom: 3 * $base-increment;
-  font-size: 1.7em;
-  font-weight: 400;
-}
-
-h3 {
-  margin-top: 6 * $base-increment;
-  margin-bottom: 2 * $base-increment;
-  font-size: 1.25em;
-  font-weight: 400;
-}
-
-h4 {
-  font-size: 1em;
-}
 
 ul {margin-left: 4 * $base-increment + 2px;}
 
