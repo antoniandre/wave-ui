@@ -181,8 +181,8 @@ div
         | Github
         w-icon.ml2(sm) mdi mdi-open-in-new
 
-  title-link(h2) Position absolute &amp; fixed
-  w-alert.text-light(type="warning").
+  //- title-link(h2) Position absolute &amp; fixed
+  //- w-alert.text-light(type="warning").
     The #[span.code w-button] component does not have an #[span.code absolute] or #[span.code fixed]
     prop.#[br]
     This is a trade off as adding those parameters needs more internal code and loss of performance
