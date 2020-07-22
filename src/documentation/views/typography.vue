@@ -5,11 +5,11 @@ div
 
   title-link(h2) Content architecture
   div.ml8
-    .headline.mt6 Headline using the #[code .headline] class.
-    .title.mt4 Title using the #[code .title] class.
-    .subtitle.mt4 Subtitle using the #[code .subtitle] class.
-    .heading.mt4 Heading using the #[code .heading] class.
-    .subheading.mt4 Subheading using the #[code .subheading] class.
+    .headline.mt6 Headline using the #[code .headline] class or #[code .title-1].
+    .title-2.mt4 Title using the #[code .title-2] class.
+    .title-3.mt4 Subtitle using the #[code .title-3] class.
+    .title-4.mt4 Heading using the #[code .title-4] class.
+    .title-5.mt4 Subheading using the #[code .title-5] class.
     .body.mt4 Body text using the #[code .body] class.
     .caption.mt4 Caption text using the #[code .caption] class.
 
@@ -17,8 +17,8 @@ div
   div.ml8
     .text-up.mt4 Uppercase text using the #[code .text-up] class.
     .text-low.mt4 Lowercase text using the #[code .text-low] class.
-    .text-light.mt4 Bold text using the #[code .text-light] class.
     .text-bold.mt4 Bold text using the #[code .text-bold] class.
+    .text-light.mt4 Normal (not bold) text using the #[code .text-light] class.
     .text-italic.mt4 Italic text using the #[code .text-italic] class.
 
   title-link(h2) Text alignment

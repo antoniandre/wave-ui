@@ -1,26 +1,26 @@
 #{$css-scope} {
-  .headline {
+  .headline, .title-1 {
     font-size: round(2.2 * $base-font-size);
     font-weight: 100;
     letter-spacing: 1px;
   }
 
-  .title {
+  .title-2 {
     font-size: round(1.7 * $base-font-size);
     font-weight: 400;
   }
 
-  .subtitle {
+  .title-3 {
     font-size: round(1.4 * $base-font-size);
     font-weight: 400;
   }
 
-  .heading {
+  .title-4 {
     font-size: round(1.25 * $base-font-size);
     font-weight: 400;
   }
 
-  .subheading {
+  .title-5 {
     font-size: round(1.1 * $base-font-size);
     font-weight: 600;
   }
