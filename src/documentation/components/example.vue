@@ -36,6 +36,15 @@
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="html")
         ssh-pre(
+          v-if="$slots.pug"
+          language="pug"
+          label="TEMPLATE (PUG)"
+          copy-button
+          @copied="copied")
+          template(#copy-button)
+            w-icon(color="primary") mdi mdi-content-copy
+          slot(name="pug")
+        ssh-pre(
           v-if="$slots.js"
           language="js"
           label="JS"
@@ -53,6 +62,15 @@
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="css")
+        ssh-pre(
+          v-if="$slots.scss"
+          language="scss"
+          label="SCSS"
+          copy-button
+          @copied="copied")
+          template(#copy-button)
+            w-icon(color="primary") mdi mdi-content-copy
+          slot(name="scss")
         w-notification.mr5.mt-1(
           v-model="showCopied"
           transition="slide-fade-left"
@@ -73,8 +91,8 @@ export default {
   methods: {
     createCodepen (e) {
       const openEditors = [
-        (!!this.$slots.html) * 1,
-        (!!this.$slots.css) * 1,
+        (!!this.$slots.html || !!this.$slots.pug) * 1,
+        (!!this.$slots.css || !!this.$slots.scss) * 1,
         (!!this.$slots.js) * 1
       ]
 
@@ -90,15 +108,26 @@ export default {
 
       const slots = {
         html: this.$slots.html && this.$slots.html[0].text || '',
+        pug: this.$slots.pug && this.$slots.pug[0].text || '',
         js: this.$slots.js && this.$slots.js[0].text || '',
-        css: this.$slots.css && this.$slots.css[0].text || ''
+        css: this.$slots.css && this.$slots.css[0].text || '',
+        scss: this.$slots.scss && this.$slots.scss[0].text || ''
       }
-      const html = '<div id="app">\n' +
+      let html = ''
+
+      if (slots.pug) {
+        html = '#app\n' +
+               '  w-app\n    ' +
+               slots.pug.replace(/\n$/, '').replace(/\n/g, '\n    ')
+      }
+      else {
+        html = '<div id="app">\n' +
                    '  <w-app>\n    ' +
                    slots.html.replace(/\n$/, '').replace(/\n/g, '\n    ') +
                    '\n  </w-app>\n' +
                    '</div>'
-      const css = '.w-app {font-family: sans-serif;padding: 24px;}\n\n' + slots.css
+      }
+      const css = '.w-app {font-family: sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
       const js = 'new Vue({' +
                  '\n  waveui: new WaveUI(),\n  ' +
                  slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') +
@@ -109,7 +138,7 @@ export default {
         editors: openEditors.join(''),
         layout: 'top',
         html,
-        html_pre_processor: 'none',
+        html_pre_processor: slots.pug ? 'pug' : 'none',
         css,
         css_pre_processor: 'scss',
         css_starter: 'reset',
