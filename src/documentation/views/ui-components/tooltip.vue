@@ -3,26 +3,48 @@ div.tooltips-demo
   title-link.mt4.code(h1) w-tooltip
 
   title-link(h2) Tooltip position
-  .w-flex.wrap.py6
-    w-tooltip(attach-to=".tooltips-demo" left)
-      template(v-slot:activator="{ on }")
-        w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
-      | Home
+  example
+    .w-flex.wrap.py6
+      w-tooltip(attach-to=".tooltips-demo" left)
+        template(v-slot:activator="{ on }")
+          w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
+        | Home
 
-    w-tooltip(attach-to=".tooltips-demo" top)
-      template(v-slot:activator="{ on }")
-        w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
-      | Home
+      w-tooltip(attach-to=".tooltips-demo" top)
+        template(v-slot:activator="{ on }")
+          w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
+        | Home
 
-    w-tooltip
-      template(v-slot:activator="{ on }")
-        w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
-      | Home
+      w-tooltip
+        template(v-slot:activator="{ on }")
+          w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
+        | Home
 
-    w-tooltip(attach-to=".tooltips-demo" right)
-      template(v-slot:activator="{ on }")
-        w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
-      | Home
+      w-tooltip(attach-to=".tooltips-demo" right)
+        template(v-slot:activator="{ on }")
+          w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
+        | Home
+    template(#pug).
+      .w-flex.wrap.py6
+        w-tooltip(attach-to=".tooltips-demo" left)
+          template(v-slot:activator="{ on }")
+            w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
+          | Home
+
+        w-tooltip(attach-to=".tooltips-demo" top)
+          template(v-slot:activator="{ on }")
+            w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
+          | Home
+
+        w-tooltip
+          template(v-slot:activator="{ on }")
+            w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
+          | Home
+
+        w-tooltip(attach-to=".tooltips-demo" right)
+          template(v-slot:activator="{ on }")
+            w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
+          | Home
 
   title-link(h2) Toggle on click
   .w-flex.wrap.align-center.py6
