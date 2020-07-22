@@ -24,7 +24,7 @@ div
     If no value is set, the choice's label will be returned instead.
   .w-flex
     w-radios(v-model="selectedRadio1" :items="radios1")
-    div.subtitle.ml8 Selected choice: #[code {{ selectedRadio1 || 'null' }}]
+    div.title-3.ml8 Selected choice: #[code {{ selectedRadio1 || 'null' }}]
 
 
   h3 Default column layout

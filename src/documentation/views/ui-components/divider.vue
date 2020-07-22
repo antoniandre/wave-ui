@@ -33,8 +33,8 @@ div
 
   title-link(h2) Vertical
   h3 Divider in a #[code w-toolbar]
-  w-toolbar(bg-color="grey-light5")
-    .title.my0 Toolbar
+  w-toolbar.py0(bg-color="grey-light5")
+    .title-2 Toolbar
     .spacer
     span.mx1 Item 1
     span.mx1 Item 2

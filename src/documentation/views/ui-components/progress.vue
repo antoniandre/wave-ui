@@ -2,7 +2,7 @@
 div(style="max-width: 900px")
   title-link.mt4.code(h1) w-progress
 
-  w-radios.subtitle(v-model="circular" :items="linearOrCircular" inline)
+  w-radios.title-3(v-model="circular" :items="linearOrCircular" inline)
 
   title-link(h2) Default indeterminate progress &amp; colors
   w-progress(:circle="circular")

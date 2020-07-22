@@ -83,7 +83,7 @@ div
     The #[code.mx1 .spacer] class is also very helpful to separate 2 elements as is will occupy the
     available space and push the elements on each side.
 
-  .heading.mt6 w-flex, row direction (default)
+  .title-4.mt6 w-flex, row direction (default)
   example
     p.code.mb1 .justify-start (default)
     .w-flex.pa3.blue-light5--bg.justify-start
@@ -140,7 +140,7 @@ div
         padding: 12px;
       }
 
-  .heading w-flex, column direction
+  .title-4 w-flex, column direction
   example
     w-flex
       .grow.mx1
