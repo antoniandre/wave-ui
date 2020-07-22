@@ -4,13 +4,14 @@ div
 
   title-link(h2) Content spacing
   p.
-    Margins and paddings are incrementable from 1 to 12 using this syntax: #[code="ma[number]"],
-    #[code="pa[number]"] where number is a number between 1 and 12.#[br]
-    You can also set a space on a single side with #[span.code l], #[span.code r], #[span.code t],
-    #[span.code b] for left, right, top, bottom like so: #[code="m[side][number]"],
+    Margins and paddings are incrementable from 0 to 12 using this syntax: #[code="ma[number]"],
+    #[code="pa[number]"] where number is a number in this interval #[span.code="[0, 12]"] for paddings
+    and #[span.code="[-12, 12]"] for margins.#[br]
+    You can also set a space on a single side with #[code l], #[code r], #[code t],
+    #[code b] for left, right, top, bottom like so: #[code="m[side][number]"],
     #[code="p[side][number]"].#[br]#[br]
-    #[span.code x] and #[span.code y] will set both left and right or top and bottom together:
-    #[code="mx[number]"], #[code="px[number]"].
+    #[code x] and #[code y] will set both left and right or top and bottom together:
+    #[code="mx[number]"], #[code="px[number]"]. And #[code a] is for all the sides.
 
   example
     .orange-light4--bg.pa12
