@@ -11,7 +11,7 @@ div
   title-link(h2) V-model
   w-flex.wrap.align-center
     w-switch.mr3.mb1(v-model="value")
-    span.subtitle
+    span.title-3
       | v-model value:
       code.ml2 {{ value }}
 

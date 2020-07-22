@@ -1,18 +1,18 @@
 <template lang="pug">
 div
   title-link.mt4(h1) Why Wave UI
-  .title
+  .title-2
     | An emerging new UI framework for Vue.js with only the bright side.
     span.xl.ml2 ☀️
 
-  .subtitle.mt6 Like other UI frameworks, Wave UI is:
+  .title-3.mt6 Like other UI frameworks, Wave UI is:
   w-list(:items="features1" icon="wi-check")
 
-  .subtitle.mt6 But it is also:
+  .title-3.mt6 But it is also:
   w-list(:items="features2" icon="wi-check")
 
   title-link(h2) Wave UI is developed with a particular care about CSS.
-  p.subtitle.
+  p.title-3.
     Practically Wave UI gives you more flexibility and more control over the CSS.
   blockquote.mt2.
     Because inline styles and #[code !important] are a nightmare to override,
