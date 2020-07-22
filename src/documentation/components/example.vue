@@ -1,7 +1,7 @@
 <template lang="pug">
   .example
     .w-flex
-      .example__render.grow
+      .example__render.grow(:class="contentClass")
         slot
       .buttons
         w-tooltip(left)
@@ -64,6 +64,7 @@
 
 <script>
 export default {
+  props: ['contentClass'],
   data: () => ({
     showSource: false,
     showCopied: false
