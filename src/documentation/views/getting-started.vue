@@ -6,8 +6,10 @@ div
   h3 Download from NPM
   ssh-pre(language="bash").
     npm i --D the-wave-ui
+  strong WARNING
+  div.mt1 The name #[span.code wave-ui] is taken at the moment. Make sure to install #[span.code the-wave-ui]!
 
-  h3 Import in your project
+  h3.mt8 Import in your project
   ssh-pre(language="js" label="main.js").
     import Vue from 'vue'
     import App from './app'
@@ -24,6 +26,12 @@ div
       waveui,
       render: h => h(App)
     }).$mount('#app')
+
+  h3.mt8 Place a #[span.code w-app] at the root of your app
+  ssh-pre(language="html-vue" label="App.js").
+    &lt;w-app&gt;
+      &lt;!-- All your app's content goes here. --&gt;
+    &lt;/w-app&gt;
 
   title-link(h2) Options
   p Wave UI accepts these options:
