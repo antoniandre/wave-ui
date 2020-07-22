@@ -6,7 +6,7 @@ div(style="max-width: 1000px")
   p.
     By default alerts are visible, but if a value or v-model is provided,
     it will show or hide according to it.
-  example
+  example(content-class="pt5")
     w-button(@click="showAlert = !showAlert" color="primary" outline) {{ showAlert ? 'Hide' : 'Show' }} alert
     w-transition-expand(y)
       w-alert(v-if="showAlert" color="success") The alert is now visible.
@@ -23,7 +23,7 @@ div(style="max-width: 1000px")
   p.
     You can apply a color to the text with the #[code color] attribute,
     and color to the background with the #[code bg-color] attribute.
-  example
+  example(content-class="py0")
     w-alert(color="primary") This is an alert with a primary color.
     w-alert(bg-color="primary" color="white") This is an alert with a primary background color.
     w-alert(color="pink") This is an alert with a pink color.
@@ -42,7 +42,7 @@ div(style="max-width: 1000px")
 
   title-link(h2 slug="types") Types (adds an icon)
   h3 Normal
-  example
+  example(content-class="py0")
     w-alert(type="success") This is a success alert.
     w-alert(type="warning") This is a warning alert.
     w-alert(type="error") This is an error alert.
@@ -54,7 +54,7 @@ div(style="max-width: 1000px")
       w-alert(type="info") This is an info alert.
 
   h3 Plain
-  example
+  example(content-class="py0")
     w-alert(type="success" plain) This is a success alert.
     w-alert(type="warning" plain) This is an alert.
     w-alert(type="error" plain) This is an error alert.
@@ -66,7 +66,7 @@ div(style="max-width: 1000px")
       w-alert(type="info" plain) This is an info alert.
 
   title-link(h2) Outline
-  example
+  example(content-class="py0")
     w-alert(color="primary" outline) This is a normal alert with a primary color.
     w-alert(type="success" outline) This is a success alert.
     w-alert(type="warning" outline) This is an alert.
@@ -80,7 +80,7 @@ div(style="max-width: 1000px")
       w-alert(type="info" outline) This is an info alert.
 
   title-link(h2) Borders
-  example
+  example(content-class="py0")
     w-alert(type="success" light no-border) This is a success alert with no border.
     w-alert(color="primary" no-border) This is a normal alert with no border.
     w-alert(bg-color="cyan-light4" color="purple" no-border) This is an alert with a cyan background, purple color and no border.
@@ -102,7 +102,7 @@ div(style="max-width: 1000px")
         w-alert.grow.ma2(color="primary" border-bottom) This is a normal alert with a left border.
 
   title-link(h2) Tile, round &amp; shadow
-  example
+  example(content-class="py0")
     w-alert(color="primary" tile) This is a tile alert.
     w-alert(color="primary" round) This is a round alert.
     w-alert(color="primary" shadow) This is a normal alert with a shadow.
@@ -112,7 +112,7 @@ div(style="max-width: 1000px")
       w-alert(color="primary" shadow) This is a normal alert with a shadow.
 
   title-link(h2) Sizes
-  example
+  example(content-class="py0")
     w-alert.size--xs(color="info" type="success") This is an extra small alert.
     w-alert.size--sm(color="info" type="success") This is a small alert.
     w-alert.size--md(color="info" type="success") This is a medium alert.
