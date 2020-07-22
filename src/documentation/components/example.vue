@@ -117,12 +117,12 @@ export default {
 
       if (slots.pug) {
         html = '#app\n' +
-               '  w-app\n    ' +
+               '  w-app(block)\n    ' +
                slots.pug.replace(/\n$/, '').replace(/\n/g, '\n    ')
       }
       else {
         html = '<div id="app">\n' +
-                   '  <w-app>\n    ' +
+                   '  <w-app block>\n    ' +
                    slots.html.replace(/\n$/, '').replace(/\n/g, '\n    ') +
                    '\n  </w-app>\n' +
                    '</div>'

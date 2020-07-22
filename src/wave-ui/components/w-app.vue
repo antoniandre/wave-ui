@@ -1,5 +1,5 @@
 <template lang="pug">
-  .w-app(:class="{ 'theme--dark': dark }")
+  .w-app(:class="{ 'theme--dark': dark, 'd-block': block }")
     slot
 </template>
 
@@ -12,7 +12,8 @@ const breakpointsValues = Object.values(config.breakpoints)
 export default {
   name: 'w-app',
   props: {
-    dark: { type: Boolean }
+    dark: { type: Boolean },
+    block: { type: Boolean }
   },
 
   data: () => ({
@@ -89,5 +90,7 @@ export default {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+
+  &.d-block {display: block;}
 }
 </style>
