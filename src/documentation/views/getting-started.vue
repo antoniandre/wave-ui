@@ -4,7 +4,7 @@ div
   title-link(h2) Installation
 
   h3 Download from NPM
-  ssh-pre(language="bash").
+  ssh-pre(language="shell").
     npm i --D the-wave-ui
   strong WARNING
   div.mt1 The name #[span.code wave-ui] is taken at the moment. Make sure to install #[span.code the-wave-ui]!

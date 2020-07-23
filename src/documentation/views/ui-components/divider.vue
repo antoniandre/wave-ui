@@ -33,18 +33,34 @@ div
 
   title-link(h2) Vertical
   h3 Divider in a #[code w-toolbar]
-  w-toolbar.py0(bg-color="grey-light5")
-    .title-2 Toolbar
-    .spacer
-    span.mx1 Item 1
-    span.mx1 Item 2
-    w-divider.mx1(vertical)
-    span.mx1 Item 3
-    span.mx1 Item 4
-    w-divider.mx1(vertical)
-    span.mx1 Item 5
-    span.mx1 Item 6
+  example
+    w-toolbar.py0(bg-color="grey-light5")
+      .title-2.my2 Toolbar
+      .spacer
+      span.mx1 Item 1
+      span.mx1 Item 2
+      w-divider.mx1(vertical)
+      span.mx1 Item 3
+      span.mx1 Item 4
+      w-divider.mx1(vertical)
+      span.mx1 Item 5
+      span.mx1 Item 6
+    template(#pug).
+      w-toolbar.py0(bg-color="grey-light5")
+        .title-2.my2 Toolbar
+        .spacer
+        span.mx1 Item 1
+        span.mx1 Item 2
+        w-divider.mx1(vertical)
+        span.mx1 Item 3
+        span.mx1 Item 4
+        w-divider.mx1(vertical)
+        span.mx1 Item 5
+        span.mx1 Item 6
 
   title-link(h2) Color
-  w-divider.ma10.ml0(color="green")
+  example
+    w-divider.ma6(color="green")
+    template(#pug).
+      w-divider.ma6(color="green")
 </template>
