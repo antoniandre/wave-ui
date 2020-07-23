@@ -1,6 +1,6 @@
 {
   "name": "the-wave-ui",
-  "version": "1.0.0-alpha.11",
+  "version": "1.0.0-alpha.12",
   "main": "./dist/wave-ui.common.js",
   "unpkg": "dist/wave-ui.umd.min.js",
   "jsdelivr": "dist/wave-ui.umd.min.js",
