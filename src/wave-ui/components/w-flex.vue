@@ -47,7 +47,7 @@ export default {
         'justify-end': this.justifyEnd,
         'justify-space-between': this.justifySpaceBetween,
         'basis-zero': this.basisZero,
-        [`gap-${this.gap}`]: this.gap
+        [`w-flex--gap${this.gap}`]: this.gap
       }
     }
   }
@@ -55,15 +55,6 @@ export default {
 </script>
 
 <style lang="scss">
-.w-flex-wrap {
-  @for $i from 1 through 12 {
-    // Divide by 2 as there are 2 elements having this space.
-    $space: round($base-increment * $i / 2);
-    > .gap-#{$i} {margin: -$space;}
-    > .gap-#{$i} > * {margin: $space;}
-  }
-}
-
 .w-flex {
   display: flex;
   flex: 1 1 auto;
@@ -71,5 +62,12 @@ export default {
   &.column {flex-direction: column;}
   &.wrap {flex-wrap: wrap;}
   &.basis-zero {flex-basis: 0;}
+
+  @for $i from 1 through 12 {
+    // Divide by 2 as there are 2 elements having this space.
+    $space: round($base-increment * $i / 2);
+    &--gap#{$i} {margin: -$space;}
+    &--gap#{$i} > * {margin: $space;}
+  }
 }
 </style>
