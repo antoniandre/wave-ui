@@ -180,14 +180,6 @@ div
       w-button.ma1(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
         | Github
         w-icon.ml2(sm) mdi mdi-open-in-new
-
-  //- title-link(h2) Position absolute &amp; fixed
-  //- w-alert.text-light(type="warning").
-    The #[span.code w-button] component does not have an #[span.code absolute] or #[span.code fixed]
-    prop.#[br]
-    This is a trade off as adding those parameters needs more internal code and loss of performance
-    than if you add a #[span.code position: absolute] css style!#[br]
-    On the bright side, thanks to that Wave UI remains very flexible and CSS overridable! 😉
 </template>
 
 <script>

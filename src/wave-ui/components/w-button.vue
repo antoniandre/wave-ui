@@ -46,7 +46,15 @@ export default {
     // If an icon is passed, no text will display.
     icon: { type: String, default: null },
     width: { type: [String, Number] },
-    height: { type: [String, Number] }
+    height: { type: [String, Number] },
+    // Positions.
+    absolute: { type: Boolean },
+    fixed: { type: Boolean },
+    top: { type: Boolean },
+    bottom: { type: Boolean },
+    left: { type: Boolean },
+    right: { type: Boolean },
+    zIndex: { type: [Number, String, Boolean] }
   },
 
   computed: {
@@ -58,6 +66,12 @@ export default {
         (this.xl && 'xl') ||
         'md'
       )
+    },
+    position () {
+      return [
+        (this.top && 'top') || (this.bottom && 'bottom') || 'top',
+        (this.left && 'left') || (this.right && 'right') || 'right'
+      ]
     },
     externalLink () {
       return /^(http|\/\/)/.test(this.to)
@@ -74,13 +88,17 @@ export default {
         'w-button--shadow': this.shadow,
         'w-button--loading': this.loading,
         'w-button--icon': this.icon,
-        [`size--${this.size}`]: true
+        [`size--${this.size}`]: true,
+        'w-button--absolute': this.absolute,
+        'w-button--fixed': this.fixed,
+        [this.position.join(' ')]: this.absolute || this.fixed
       }
     },
     styles () {
       return {
         width: this.width,
-        height: this.height
+        height: this.height,
+        zIndex: this.zIndex || this.zIndex === 0 || null
       }
     }
   }
@@ -112,6 +130,14 @@ $spinner-size: 40;
   // Background-color must not transition to not affect the hover & focus states
   // in :before & :after.
   transition: $transition-duration, background-color 0s, padding 0s;
+
+  // Position.
+  &--absolute {position: absolute;}
+  &--fixed {position: fixed;}
+  &.top {top: 2 * $base-increment;}
+  &.bottom {bottom: 2 * $base-increment;}
+  &.left {left: 2 * $base-increment;}
+  &.right {right: 2 * $base-increment;}
 
   &--dark {
     color: rgba(255, 255, 255, 0.95);
