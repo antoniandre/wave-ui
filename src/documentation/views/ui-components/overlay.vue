@@ -11,50 +11,109 @@ div
   title-link(h2) Overlay with custom opacity and control on #[span.code persistent]
   P When the overlay is persistent, it will not close on click and on escape key.
   p When persistent is set to false and by default, the escape key will also close the overlay.
-  w-flex.mt4(wrap :gap="12")
-    w-button(bg-color="primary" dark @click="showOverlay = true") Show overlay
+  example
+    w-flex(wrap)
+      w-button(bg-color="primary" dark @click="showOverlay = true") Show overlay
 
-    w-divider.my3(vertical color="grey-light4")
-    .w-flex.column.no-grow
-      .title4 Options
+      w-divider.mx6(vertical color="grey-light4")
       div
+        .title4 Options
         w-button.mr2(
-          color="primary"
-          bg-color="blue-light5"
+          bg-color="primary-light1"
           :class="persistent ? 'pr4' : ''"
-          @click="persistent = !persistent")
-          .code.primary :persistent="{{ persistent }}"
+          @click="persistent = !persistent"
+          sm
+          dark)
+          .code.white :persistent="{{ persistent }}"
         w-button(
-          color="primary"
-          bg-color="blue-light5"
+          bg-color="primary-light1"
           @click="persistentNoAnimation = !persistentNoAnimation"
-          :disabled="!persistent")
-          .code.primary :persistent-no-animation="{{ persistentNoAnimation }}"
-      w-input.mt2.align-self-start(
-        v-model="opacity"
-        outline
-        type="number"
-        label="Overlay opacity"
-        label-position="left"
-        step="0.1"
-        min="0"
-        max="1")
+          :disabled="!persistent"
+          sm
+          dark)
+          .code.white :persistent-no-animation="{{ persistentNoAnimation }}"
+        w-input.mt2.d-block(
+          v-model="opacity"
+          outline
+          type="number"
+          label="Overlay opacity"
+          label-position="left"
+          step="0.1"
+          min="0"
+          max="1")
+    w-overlay(
+      v-model="showOverlay"
+      :persistent="persistent"
+      :persistent-no-animation="persistentNoAnimation"
+      :opacity="opacity")
+      w-button(bg-color="primary" lg dark @click="showOverlay = false")
+        w-icon.mr2 wi-cross
+        | Hide overlay
+    template(#pug).
+      w-flex(wrap)
+        w-button(bg-color="primary" dark @click="showOverlay = true") Show overlay
+
+        w-divider.mx6(vertical color="grey-light4")
+        div
+          .title4 Options
+          w-button.mr2(
+            bg-color="primary-light1"
+            :class="persistent ? 'pr4' : ''"
+            @click="persistent = !persistent"
+            sm
+            dark)
+            .code.white :persistent="{{ persistent }}"
+          w-button(
+            bg-color="primary-light1"
+            @click="persistentNoAnimation = !persistentNoAnimation"
+            :disabled="!persistent"
+            sm
+            dark)
+            .code.white :persistent-no-animation="{{ persistentNoAnimation }}"
+          w-input.mt2.d-block(
+            v-model="opacity"
+            outline
+            type="number"
+            label="Overlay opacity"
+            label-position="left"
+            step="0.1"
+            min="0"
+            max="1")
+      w-overlay(
+        v-model="showOverlay"
+        :persistent="persistent"
+        :persistent-no-animation="persistentNoAnimation"
+        :opacity="opacity")
+        w-button(bg-color="primary" lg dark @click="showOverlay = false")
+          w-icon.mr2 wi-cross
+          | Hide overlay
+    template(#js).
+      data: () => ({
+        showOverlay: false,
+        opacity: 0.3,
+        persistent: false,
+        persistentNoAnimation: false
+      })
 
   title-link(h2) Overlay with custom background color
-  w-button.mr2(bg-color="primary" dark @click="showBlueOverlay = true") Show a blue overlay
+  example(content-class="w-flex align-center")
+    w-button(bg-color="primary" dark @click="showBlueOverlay = true") Show a blue overlay
 
-  w-overlay.w-flex.align-center.justify-center(
-    v-model="showOverlay"
-    :persistent="persistent"
-    :persistent-no-animation="persistentNoAnimation"
-    :opacity="opacity")
-    w-button(bg-color="primary" lg dark @click="showOverlay = false")
-      w-icon.mr2 wi-cross
-      | Hide overlay
-  w-overlay.w-flex.align-center.justify-center(v-model="showBlueOverlay" bg-color="rgba(35, 71, 129, 0.4)")
-    w-button(bg-color="primary" lg dark @click="showBlueOverlay = false")
-      w-icon.mr2 wi-cross
-      | Hide overlay
+    w-overlay(v-model="showBlueOverlay" bg-color="rgba(35, 71, 129, 0.4)")
+      w-button(bg-color="primary" lg dark @click="showBlueOverlay = false")
+        w-icon.mr2 wi-cross
+        | Hide overlay
+    template(#pug).
+      w-button(bg-color="primary" dark @click="showBlueOverlay = true") Show a blue overlay
+
+      w-overlay(v-model="showBlueOverlay" bg-color="rgba(35, 71, 129, 0.4)")
+        w-button(bg-color="primary" lg dark @click="showBlueOverlay = false")
+          w-icon.mr2 wi-cross
+          | Hide overlay
+    template(#js).
+      data: () => ({
+        showBlueOverlay: false
+      })
 </template>
 
 <script>
@@ -68,7 +127,3 @@ export default {
   })
 }
 </script>
-
-<style lang="scss">
-
-</style>
