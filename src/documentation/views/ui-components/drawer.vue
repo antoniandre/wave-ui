@@ -2,7 +2,8 @@
 div
   title-link.mt4.code(h1) w-drawer
 
-  .text-center
+  title-link(h2) Positions
+  example(content-class="w-flex align-center")
     w-button.ma1(
       @click="showLeftDrawer = !showLeftDrawer"
       outline
@@ -19,27 +20,119 @@ div
       @click="showBottomDrawer = !showBottomDrawer"
       outline
       color="primary") Show bottom drawer
+    template(#pug).
+      w-button.ma1(
+        @click="showDrawer = 'left'"
+        outline
+        color="primary") Show left drawer
+      w-button.ma1(
+        @click="showDrawer = 'right'"
+        outline
+        color="primary") Show right drawer
+      w-button.ma1(
+        @click="showDrawer = 'top'"
+        outline
+        color="primary") Show top drawer
+      w-button.ma1(
+        @click="showDrawer = 'bottom'"
+        outline
+        color="primary") Show bottom drawer
+
+      w-drawer(
+        :value="!!showDrawer"
+        :[position]="true"
+        @close="showDrawer = false")
+        w-button.button--close(
+          @click="showDrawer = false"
+          sm
+          outline
+          round
+          absolute
+          color="primary"
+          icon="wi-cross")
+
+    template(#js).
+      data: () => ({
+        showDrawer: false
+      }),
+
+      computed: {
+        position () {
+          return this.showDrawer || 'right'
+        }
+      }
 
   title-link(h2) Control width or height
-  w-button.mr2(
-    @click="bottomDrawerHeight = '60px';showBottomDrawer = !showBottomDrawer"
-    outline
-    color="primary") Show a 60px height bottom drawer
+  example(content-class="w-flex align-center")
+    w-button(
+      @click="bottomDrawerHeight = '60px';showBottomDrawer = !showBottomDrawer"
+      outline
+      color="primary") Show a 60px height bottom drawer
+    template(#pug).
+      w-button(
+        @click="showDrawer = true"
+        outline
+        color="primary") Show a 60px height bottom drawer
+
+      w-drawer(v-model="showDrawer" bottom height="60px")
+        w-button.button--close(
+          @click="showDrawer = false"
+          sm
+          outline
+          round
+          absolute
+          color="primary"
+          icon="wi-cross")
+    template(#js).
+      data: () => ({
+        showDrawer: false
+      })
 
   title-link(h2) No overlay &amp; custom color overlay
-  span Open top drawer with:
-  w-button.mx2.my1(
-    @click="noOverlay = true;overlayColor = false;showTopDrawer = !showTopDrawer"
-    outline
-    color="primary") No overlay
-  w-button.mr2.my1(
-    @click="noOverlay = false;overlayColor = 'rgba(35, 71, 129, 0.5)';showTopDrawer = !showTopDrawer"
-    outline
-    color="primary") Custom color overlay
-  w-button.mr2.my1(
-    @click="noOverlay = false;overlayColor = 'transparent';showTopDrawer = !showTopDrawer"
-    outline
-    color="primary") Transparent overlay
+  example(content-class="w-flex align-center")
+    span Open top drawer with a:
+    w-button.mx1(
+      @click="noOverlay = false;overlayColor = 'rgba(35, 71, 129, 0.5)';showTopDrawer = !showTopDrawer"
+      outline
+      color="primary") Custom color overlay
+    w-button.mx1(
+      @click="noOverlay = false;overlayColor = 'transparent';showTopDrawer = !showTopDrawer"
+      outline
+      color="primary") Transparent overlay
+    w-button.mx1(
+      @click="noOverlay = true;overlayColor = false;showTopDrawer = !showTopDrawer"
+      outline
+      color="primary") No overlay
+    template(#pug).
+      span Open top drawer with a:
+      w-button.mx1(
+        @click="noOverlay = false;overlayColor = 'rgba(35, 71, 129, 0.5&amp;#041;';showDrawer = !showDrawer"
+        outline
+        color="primary") Custom color overlay
+      w-button.mx1(
+        @click="noOverlay = false;overlayColor = 'transparent';showDrawer = !showDrawer"
+        outline
+        color="primary") Transparent overlay
+      w-button.mx1(
+        @click="noOverlay = true;overlayColor = false;showDrawer = !showDrawer"
+        outline
+        color="primary") No overlay
+
+      w-drawer(v-model="showDrawer" top :no-overlay="noOverlay" :overlay-color="overlayColor")
+        w-button.button--close(
+          @click="showDrawer = false"
+          sm
+          outline
+          absolute
+          round
+          color="primary"
+          icon="wi-cross")
+    template(#js).
+      data: () => ({
+        showDrawer: false,
+        noOverlay: false,
+        overlayColor: false
+      })
 
   p.mt4.
     #[strong Note:] with no overlay the underneath content will be clickable and the drawer
@@ -49,33 +142,81 @@ div
 
   title-link(h2) Persistent drawers
   p A persistent drawer stays open when clicking outside or pressing the escape key.
-  w-button.mx2.my1(
-  @click="persistent = true;showBottomDrawer = !showBottomDrawer"
-  outline
-  color="primary") Persistent drawer
+  example(content-class="w-flex align-center")
+    w-button(
+      @click="persistent = true;showBottomDrawer = !showBottomDrawer"
+      outline
+      color="primary") Persistent drawer
+    template(#pug).
+      w-button(@click="showDrawer = true" outline color="primary")
+        | Persistent drawer
+
+      w-drawer(
+        v-model="showDrawer"
+        bottom
+        persistent
+        bg-color="blue-light4")
+        w-button.button--close(
+          sm
+          @click="showDrawer = false"
+          outline
+          absolute
+          round
+          icon="wi-cross")
+        .w-flex.fill-height.align-center.justify-center You can customize the background color as well.
+    template(#js).
+      data: () => ({
+        showDrawer: false
+      })
 
   title-link(h2) Cookie notice example
   p.
     The cookie notice is a good use case of a persistent drawer, it will not let you click
     anything until you accept.
-  w-button.mx2.my1(@click="showCookieNotice = true" outline color="primary")
-    | Show the cookie notice
-  w-drawer(
-    v-model="showCookieNotice"
-    content-class="cookie-notice"
-    overlay-color="transparent"
-    persistent
-    fit-content
-    bottom)
-    .w-flex.pa2.align-center.wrap
-      .w-flex.align-center
-        w-icon.mr3(color="primary" xl) wi-info-circle
-        span.grey-dark3.
-          Our website uses cookies to give you the best user experience.
-          To continue browsing this site you must agree.
-      w-button.ml-auto(sm bg-color="primary" dark @click="showCookieNotice = false")
-        w-icon.mr2 wi-check
-        | I agree
+  example(content-class="w-flex align-center")
+    w-button(@click="showCookieNotice = true" outline color="primary")
+      | Show the cookie notice
+    w-drawer(
+      v-model="showCookieNotice"
+      content-class="cookie-notice"
+      overlay-color="transparent"
+      persistent
+      fit-content
+      bottom)
+      .w-flex.pa2.align-center.wrap
+        .w-flex.align-center
+          w-icon.mr3(color="primary" xl) wi-info-circle
+          span.grey-dark3.
+            Our website uses cookies to give you the best user experience.
+            To continue browsing this site you must agree.
+        w-button(sm bg-color="primary" dark @click="showCookieNotice = false")
+          w-icon.mr2 wi-check
+          | I agree
+    template(#pug).
+      w-button(@click="showCookieNotice = true" outline color="primary")
+        | Show the cookie notice
+
+      w-drawer(
+        v-model="showCookieNotice"
+        content-class="cookie-notice"
+        overlay-color="transparent"
+        persistent
+        fit-content
+        bottom)
+        .w-flex.pa2.align-center.wrap
+          .w-flex.align-center
+            w-icon.mr3(color="primary" xl) wi-info-circle
+            span.grey-dark3.
+              Our website uses cookies to give you the best user experience.
+              To continue browsing this site you must agree.
+          w-button(sm bg-color="primary" dark @click="showCookieNotice = false")
+            w-icon.mr2 wi-check
+            | I agree
+    template(#js).
+      data: () => ({
+        showCookieNotice: false
+      })
+
   p You can then store the result of the acceptation in the localStorage.
   ssh-pre(language="html-vue" label="Template").
     &lt;w-button
@@ -83,6 +224,7 @@ div
       sm
       bg-color="primary"
       dark
+      absolute
       @click="acceptCookies"&gt;
       &lt;w-icon class="mr2"&gt;wi-check&lt;/w-icon&gt;
       I agree
@@ -99,6 +241,7 @@ div
       @click="showLeftDrawer = !showLeftDrawer"
       sm
       outline
+      absolute
       round
       color="primary"
       icon="wi-cross")
@@ -113,6 +256,7 @@ div
       @click="showRightDrawer = !showRightDrawer"
       sm
       outline
+      absolute
       round
       color="primary"
       icon="wi-cross")
@@ -122,6 +266,7 @@ div
       @click="showTopDrawer = !showTopDrawer"
       sm
       outline
+      absolute
       round
       color="primary"
       icon="wi-cross")
@@ -137,6 +282,7 @@ div
       sm
       @click="showBottomDrawer = !showBottomDrawer"
       outline
+      absolute
       round
       icon="wi-cross")
     .w-flex.fill-height.align-center.justify-center You can customize the background color as well.
@@ -157,11 +303,3 @@ export default {
   })
 }
 </script>
-
-<style lang="scss">
-.button--close {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-}
-</style>
