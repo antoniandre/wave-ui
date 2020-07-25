@@ -82,7 +82,12 @@
 
 <script>
 export default {
-  props: ['contentClass'],
+  props: {
+    contentClass: { type: String },
+    externalJs: { type: String },
+    externalCss: { type: String },
+    fullJs: { type: Boolean }
+  },
   data: () => ({
     showSource: false,
     showCopied: false
@@ -100,11 +105,13 @@ export default {
         'https://unpkg.com/the-wave-ui@alpha/dist/wave-ui.css',
         'https://cdn.materialdesignicons.com/5.1.45/css/materialdesignicons.min.css'
       ]
+      if (this.externalCss) cssDeps.push(this.externalCss)
 
       const jsDeps = [
         'https://unpkg.com/vue@latest/dist/vue.js',
         'https://unpkg.com/the-wave-ui@alpha/dist/wave-ui.umd.min.js'
       ]
+      if (this.externalJs) jsDeps.push(this.externalJs)
 
       const slots = {
         html: this.$slots.html && this.$slots.html[0].text || '',
@@ -128,10 +135,10 @@ export default {
                    '</div>'
       }
       const css = '.w-app {font-family: sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
-      const js = 'new Vue({' +
+      const js = this.fullJs ? slots.js : ('new Vue({' +
                  '\n  waveui: new WaveUI(),\n  ' +
                  slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') +
-                 '\n}).$mount(\'#app\')'
+                 '\n}).$mount(\'#app\')')
 
       const data = {
         title: 'Wave UI Example Pen',
