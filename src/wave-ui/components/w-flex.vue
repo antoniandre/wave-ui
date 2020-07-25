@@ -25,7 +25,7 @@ export default {
     justifyCenter: { type: Boolean },
     justifyEnd: { type: Boolean },
     justifySpaceBetween: { type: Boolean },
-    ['basis-0']: { type: Boolean },
+    basisZero: { type: Boolean },
     gap: { type: Number, default: 0 }
   },
 
@@ -46,7 +46,7 @@ export default {
         'justify-center': this.justifyCenter,
         'justify-end': this.justifyEnd,
         'justify-space-between': this.justifySpaceBetween,
-        'basis-0': this['basis-0'],
+        'basis-zero': this.basisZero,
         [`gap-${this.gap}`]: this.gap
       }
     }
@@ -70,6 +70,6 @@ export default {
 
   &.column {flex-direction: column;}
   &.wrap {flex-wrap: wrap;}
-  &.basis-0 {flex-basis: 0;}
+  &.basis-zero {flex-basis: 0;}
 }
 </style>

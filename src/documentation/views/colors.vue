@@ -17,41 +17,41 @@ div(style="overflow: hidden")
 
   title-link(h2) Status colors
   .w-flex.wrap.mb12.ma-2
-    .color.success--bg.title-3.text-center.grow.py3.ma2 success
-    .color.error--bg.title-3.text-center.grow.py3.ma2 error
-    .color.warning--bg.title-3.text-center.grow.py3.ma2 warning
-    .color.info--bg.title-3.text-center.grow.py3.ma2 info
+    .color.success--bg.title3.text-center.grow.py3.ma2 success
+    .color.error--bg.title3.text-center.grow.py3.ma2 error
+    .color.warning--bg.title3.text-center.grow.py3.ma2 warning
+    .color.info--bg.title3.text-center.grow.py3.ma2 info
 
   h3 Status colors shades
   .w-flex.wrap.mb12.ma-2
-    .w-flex.column.basis-0
-      .color.success-light3--bg.title-3.text-center.py3.ma2.body success-light3
-      .color.success-light2--bg.title-3.text-center.py3.ma2.body success-light2
-      .color.success-light1--bg.title-3.text-center.py3.ma2.body success-light1
-      .color.success-dark1--bg.title-3.text-center.py3.ma2.white.body success-dark1
-      .color.success-dark2--bg.title-3.text-center.py3.ma2.white.body success-dark2
-      .color.success-dark3--bg.title-3.text-center.py3.ma2.white.body success-dark3
-    .w-flex.column.basis-0
-      .color.error-light3--bg.title-3.text-center.py3.ma2.body error-light3
-      .color.error-light2--bg.title-3.text-center.py3.ma2.body error-light2
-      .color.error-light1--bg.title-3.text-center.py3.ma2.body error-light1
-      .color.error-dark1--bg.title-3.text-center.py3.ma2.white.body error-dark1
-      .color.error-dark2--bg.title-3.text-center.py3.ma2.white.body error-dark2
-      .color.error-dark3--bg.title-3.text-center.py3.ma2.white.body error-dark3
-    .w-flex.column.basis-0
-      .color.warning-light3--bg.title-3.text-center.py3.ma2.body warning-light3
-      .color.warning-light2--bg.title-3.text-center.py3.ma2.body warning-light2
-      .color.warning-light1--bg.title-3.text-center.py3.ma2.body warning-light1
-      .color.warning-dark1--bg.title-3.text-center.py3.ma2.white.body warning-dark1
-      .color.warning-dark2--bg.title-3.text-center.py3.ma2.white.body warning-dark2
-      .color.warning-dark3--bg.title-3.text-center.py3.ma2.white.body warning-dark3
-    .w-flex.column.basis-0
-      .color.info-light3--bg.title-3.text-center.py3.ma2.body info-light3
-      .color.info-light2--bg.title-3.text-center.py3.ma2.body info-light2
-      .color.info-light1--bg.title-3.text-center.py3.ma2.body info-light1
-      .color.info-dark1--bg.title-3.text-center.py3.ma2.white.body info-dark1
-      .color.info-dark2--bg.title-3.text-center.py3.ma2.white.body info-dark2
-      .color.info-dark3--bg.title-3.text-center.py3.ma2.white.body info-dark3
+    .w-flex.column.basis-zero
+      .color.success-light3--bg.title3.text-center.py3.ma2.body success-light3
+      .color.success-light2--bg.title3.text-center.py3.ma2.body success-light2
+      .color.success-light1--bg.title3.text-center.py3.ma2.body success-light1
+      .color.success-dark1--bg.title3.text-center.py3.ma2.white.body success-dark1
+      .color.success-dark2--bg.title3.text-center.py3.ma2.white.body success-dark2
+      .color.success-dark3--bg.title3.text-center.py3.ma2.white.body success-dark3
+    .w-flex.column.basis-zero
+      .color.error-light3--bg.title3.text-center.py3.ma2.body error-light3
+      .color.error-light2--bg.title3.text-center.py3.ma2.body error-light2
+      .color.error-light1--bg.title3.text-center.py3.ma2.body error-light1
+      .color.error-dark1--bg.title3.text-center.py3.ma2.white.body error-dark1
+      .color.error-dark2--bg.title3.text-center.py3.ma2.white.body error-dark2
+      .color.error-dark3--bg.title3.text-center.py3.ma2.white.body error-dark3
+    .w-flex.column.basis-zero
+      .color.warning-light3--bg.title3.text-center.py3.ma2.body warning-light3
+      .color.warning-light2--bg.title3.text-center.py3.ma2.body warning-light2
+      .color.warning-light1--bg.title3.text-center.py3.ma2.body warning-light1
+      .color.warning-dark1--bg.title3.text-center.py3.ma2.white.body warning-dark1
+      .color.warning-dark2--bg.title3.text-center.py3.ma2.white.body warning-dark2
+      .color.warning-dark3--bg.title3.text-center.py3.ma2.white.body warning-dark3
+    .w-flex.column.basis-zero
+      .color.info-light3--bg.title3.text-center.py3.ma2.body info-light3
+      .color.info-light2--bg.title3.text-center.py3.ma2.body info-light2
+      .color.info-light1--bg.title3.text-center.py3.ma2.body info-light1
+      .color.info-dark1--bg.title3.text-center.py3.ma2.white.body info-dark1
+      .color.info-dark2--bg.title3.text-center.py3.ma2.white.body info-dark2
+      .color.info-dark3--bg.title3.text-center.py3.ma2.white.body info-dark3
 
   title-link(h2 slug="primary-secondary-and-your-own-colors-and-shades")
     | #[span.code primary], #[span.code secondary] and your own colors &amp; shades
@@ -63,15 +63,15 @@ div(style="overflow: hidden")
     More shades would most likely be redundant with the color palette.
 
   w-flex(wrap :gap="4")
-    .color.primary-light3--bg.title-3.text-center.grow.py3.white.body primary-light3
-    .color.primary-light2--bg.title-3.text-center.grow.py3.white.body primary-light2
-    .color.primary-light1--bg.title-3.text-center.grow.py3.white.body primary-light1
-    .color.primary--bg.title-3.text-center.grow.py3.white primary
-    .color.primary-dark1--bg.title-3.text-center.grow.py3.white.body primary-dark1
-    .color.primary-dark2--bg.title-3.text-center.grow.py3.white.body primary-dark2
-    .color.primary-dark3--bg.title-3.text-center.grow.py3.white.body primary-dark3
+    .color.primary-light3--bg.title3.text-center.grow.py3.white.body primary-light3
+    .color.primary-light2--bg.title3.text-center.grow.py3.white.body primary-light2
+    .color.primary-light1--bg.title3.text-center.grow.py3.white.body primary-light1
+    .color.primary--bg.title3.text-center.grow.py3.white primary
+    .color.primary-dark1--bg.title3.text-center.grow.py3.white.body primary-dark1
+    .color.primary-dark2--bg.title3.text-center.grow.py3.white.body primary-dark2
+    .color.primary-dark3--bg.title3.text-center.grow.py3.white.body primary-dark3
 
-  p.mt6.title-3 To start defining your own colors add them to the WaveUI options:
+  p.mt6.title3 To start defining your own colors add them to the WaveUI options:
   ssh-pre(language="js").
     const waveui = new WaveUI({
       colors: {

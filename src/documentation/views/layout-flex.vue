@@ -26,7 +26,7 @@ div
       code.mr2 .no-shrink
       | Tells the element to #[strong not] shrink if there is not enough space (#[span.code flex-shrink: 0]).
     li.mt1
-      code.mr2 .basis-0
+      code.mr2 .basis-zero
       | Distribute the children elements with equal space (#[span.code flex-basis: 0]).#[br]
       | By default, flex containers will distribute children elements according to their content width.
     li.mt1
@@ -83,7 +83,7 @@ div
     The #[code.mx1 .spacer] class is also very helpful to separate 2 elements as is will occupy the
     available space and push the elements on each side.
 
-  .title-4.mt6 w-flex, row direction (default)
+  .title4.mt6 w-flex, row direction (default)
   example
     p.code.mb1 .justify-start (default)
     .w-flex.pa3.blue-light5--bg.justify-start
@@ -140,7 +140,7 @@ div
         padding: 12px;
       }
 
-  .title-4 w-flex, column direction
+  .title4 w-flex, column direction
   example
     w-flex
       .grow.mx1

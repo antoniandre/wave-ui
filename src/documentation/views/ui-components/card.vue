@@ -50,7 +50,7 @@ div
     w-card(tile)
       template(#title)
         w-toolbar
-          .title-3.my0 Card title
+          .title3.my0 Card title
           .spacer
           span.ml2 Item 1
           span.ml2 Item 2
@@ -66,7 +66,7 @@ div
       w-card(tile)
         template(#title="")
           w-toolbar
-            .title-3.my0 Card title
+            .title3.my0 Card title
             .spacer
             span.ml2 Item 1
             span.ml2 Item 2

@@ -25,7 +25,7 @@ div
     If no value is set, the choice's label will be returned instead.
   .w-flex
     w-checkboxes(v-model="selectedCheckbox1" :items="checkboxes1")
-    div.title-3.ml8
+    div.title3.ml8
       | Selected choices:
       code {{ selectedCheckbox1 || '[]' }}
 

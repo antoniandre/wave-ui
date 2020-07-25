@@ -35,7 +35,7 @@ div
   h3 Divider in a #[code w-toolbar]
   example
     w-toolbar.py0(bg-color="grey-light5")
-      .title-2.my2 Toolbar
+      .title2.my2 Toolbar
       .spacer
       span.mx1 Item 1
       span.mx1 Item 2
@@ -47,7 +47,7 @@ div
       span.mx1 Item 6
     template(#pug).
       w-toolbar.py0(bg-color="grey-light5")
-        .title-2.my2 Toolbar
+        .title2.my2 Toolbar
         .spacer
         span.mx1 Item 1
         span.mx1 Item 2

@@ -6,10 +6,10 @@ div
   example
     .w-flex.wrap
       .grow
-        .title-3 Most basic
+        .title3 Most basic
         w-list.grow.mt6(:items="listItems1" color="primary")
       .grow
-        .title-3 With icons
+        .title3 With icons
         w-list.grow.mt6(:items="listItems1" icon="wi-check" color="primary")
     template(#html).
       &lt;w-flex wrap&gt;
@@ -83,10 +83,10 @@ div
         :multiple="multiple"
         @item-click="itemClicked = $event")
       div(v-if="itemClicked")
-        .title-3 clicked item (#[span.code item-click] event):
+        .title3 clicked item (#[span.code item-click] event):
         br
         span.code {{ itemClicked }}
-    .title-3.mt2
+    .title3.mt2
       | Selected item:
       code.ml2(v-if="!multiple || Array.isArray(selectedItem1)") {{ selectedItem1 || 'null' }}
       code.ml2(v-else-if="multiple") {{ selectedItem1 ? [selectedItem1] : '[]' }}
@@ -140,14 +140,14 @@ div
   example
     .w-flex.wrap
       .grow
-        .title-3 Default
+        .title3 Default
         w-list.mt6.mr4(
           v-model="selectedItem3"
           :items="listItems1"
           checklist
           color="green")
       .grow
-        .title-3 Round checkboxes
+        .title3 Round checkboxes
         w-list.mt6(
           v-model="selectedItem4"
           :items="listItems1"
@@ -157,7 +157,7 @@ div
 
     .w-flex.wrap.mt4
       .grow
-        p.title-3 Custom rendering, default styles
+        p.title3 Custom rendering, default styles
         w-list.mt6(
           :items="listItems2"
           item-value="id"
@@ -168,7 +168,7 @@ div
             .spacer
             w-icon(md) {{ item.icon }}
       .grow
-        p.title-3 Custom rendering &amp; styles
+        p.title3 Custom rendering &amp; styles
         w-list.custom.mt6(
           :items="listItems2"
           item-value="id"

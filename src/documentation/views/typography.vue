@@ -5,11 +5,11 @@ div
 
   title-link(h2) Content architecture
   div.ml8
-    .headline.mt6 Headline using the #[code .headline] class or #[code .title-1].
-    .title-2.mt4 Title using the #[code .title-2] class.
-    .title-3.mt4 Subtitle using the #[code .title-3] class.
-    .title-4.mt4 Heading using the #[code .title-4] class.
-    .title-5.mt4 Subheading using the #[code .title-5] class.
+    .headline.mt6 Headline using the #[code .headline] class or #[code .title1].
+    .title2.mt4 Title using the #[code .title2] class.
+    .title3.mt4 Subtitle using the #[code .title3] class.
+    .title4.mt4 Heading using the #[code .title4] class.
+    .title5.mt4 Subheading using the #[code .title5] class.
     .body.mt4 Body text using the #[code .body] class.
     .caption.mt4 Caption text using the #[code .caption] class.
 
