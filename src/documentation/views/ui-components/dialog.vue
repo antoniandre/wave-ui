@@ -143,7 +143,7 @@ div
       w-button.px4.mr6(@click="dialog5.show = true" bg-color="primary" dark) Open dialog
       .w-flex.wrap
         div.ma2
-          .title-3.mb2 Transition names
+          .title3.mb2 Transition names
           w-radios(
             v-model="dialog5.transition"
             :items="transitions"
@@ -152,7 +152,7 @@ div
             template(#label="{ item }")
               code {{ item.label }}
         div.ma2
-          .title-3.mb2 Slide transitions for fullscreen
+          .title3.mb2 Slide transitions for fullscreen
           w-radios(
             v-model="dialog5.transition"
             :items="transitionsForFullscreen"
@@ -177,7 +177,7 @@ div
         w-button.px4.mr6(@click="dialog.show = true" bg-color="primary" dark) Open dialog
         .w-flex.wrap
           div.ma2
-            .title-3.mb2 Transition names
+            .title3.mb2 Transition names
             w-radios(
               v-model="dialog.transition"
               :items="transitions"
@@ -186,7 +186,7 @@ div
               template(#label="{ item }")
                 code {{ '\{\{ item.label \}\}' }}
           div.ma2
-            .title-3.mb2 Slide transitions for fullscreen
+            .title3.mb2 Slide transitions for fullscreen
             w-radios(
               v-model="dialog.transition"
               :items="transitionsForFullscreen"

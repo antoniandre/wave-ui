@@ -16,7 +16,7 @@ div
 
     w-divider.my3(vertical color="grey-light4")
     .w-flex.column.no-grow
-      .title-4 Options
+      .title4 Options
       div
         w-button.mr2(
           color="primary"

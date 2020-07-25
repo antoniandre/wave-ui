@@ -5,7 +5,7 @@ div
   title-link(h2) Simple toolbar with shadow
   example(content-class="pa4")
     w-toolbar(shadow)
-      .title-2.my0 Title
+      .title2.my0 Title
       .spacer
       span.ml2 Item 1
       span.ml2 Item 2
@@ -22,7 +22,7 @@ div
   title-link(h2) Background color &amp; text color
   example(content-class="pa4")
     w-toolbar(bg-color="blue-light5" color="blue-dark3")
-      .title-2.my0 Title
+      .title2.my0 Title
       .spacer
       span.ml2 Item 1
       span.ml2 Item 2
@@ -46,7 +46,7 @@ div
       w-card
         template(#title)
           w-toolbar
-            .title-2.my0 Top Bar
+            .title2.my0 Top Bar
             .spacer
             span.ml2 Item 1
             span.ml2 Item 2
@@ -54,7 +54,7 @@ div
       w-card
         template(#actions)
           w-toolbar(bottom)
-            .title-2.my0 Bottom Bar
+            .title2.my0 Bottom Bar
             .spacer
             span.ml2 Item 1
             span.ml2 Item 2
@@ -65,7 +65,7 @@ div
       w-card
         template(#title)
           w-toolbar(shadow)
-            .title-2.my0 Top Bar
+            .title2.my0 Top Bar
             .spacer
             span.ml2 Item 1
             span.ml2 Item 2
@@ -73,7 +73,7 @@ div
       w-card
         template(#actions)
           w-toolbar(bottom shadow)
-            .title-2.my0 Bottom Bar
+            .title2.my0 Bottom Bar
             .spacer
             span.ml2 Item 1
             span.ml2 Item 2
@@ -146,7 +146,7 @@ div
 
   example(content-class="pa0")
     w-toolbar.py0(bg-color="blue-light5" color="blue-dark3" height="5em")
-      .title-2.my0 Title
+      .title2.my0 Title
       .spacer
       span.mx1 Item 1
       span.mx1 Item 2

@@ -47,7 +47,7 @@ div
       template(#item="{ item }")
         | {{ item.label }}
         code.ml2 {{ item.value || (item.value === false ? 'false' : "''") }}
-  .title-4.mt3 Notification position
+  .title4.mt3 Notification position
   w-radios.mr6(
     v-model="notification2.position[0]"
     :items="[{ label: 'top', value: 'top' }, { label: 'bottom', value: 'bottom' }]"

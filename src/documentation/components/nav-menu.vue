@@ -10,7 +10,7 @@
     icon="wi-cross")
   w-list(:items="sections" nav color="primary" @item-click="$emit('update:drawerOpen', false)")
 
-  .title-2.mt4 UI Components
+  .title2.mt4 UI Components
 
   w-list(:items="components" nav color="primary" @item-click="$emit('update:drawerOpen', false)")
     template(#item="{ item }")

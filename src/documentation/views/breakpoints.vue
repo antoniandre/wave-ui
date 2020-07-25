@@ -3,7 +3,7 @@ div
   title-link.mt4(h1) Breakpoints
 
   w-card.blue-light5--bg
-    .title-2.mt0 Current breakpoint: #[code {{ this.$waveui.breakpoint.name }}]
+    .title2.mt0 Current breakpoint: #[code {{ this.$waveui.breakpoint.name }}]
     em.grey.mt1 Resizing your browser will update the current breakpoint.
 
   p.mt6 By default, 5 breakpoints are set:
