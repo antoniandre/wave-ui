@@ -56,6 +56,7 @@ export default {
   &--inline {
     display: inline-flex;
     flex-wrap: wrap;
+    vertical-align: middle;
 
     .w-radio {margin-right: 3 * $base-increment;}
     .w-radio:last-child {margin-right: 0;}

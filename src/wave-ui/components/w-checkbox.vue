@@ -113,6 +113,7 @@ $disabled-color: #ccc;
 .w-checkbox {
   display: inline-flex;
   align-items: center;
+  vertical-align: middle;
   // Contain the hidden radio button, so browser doesn't pan to it when outside of the screen.
   position: relative;
   cursor: pointer;
