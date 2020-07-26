@@ -249,6 +249,7 @@ $circle-size: 40;
       transform: rotate(-90deg);
       stroke: currentColor;
       will-change: stroke-dashoffset;
+      @include default-transition;
     }
     &.w-progress--round-cap .w-progress__progress {stroke-linecap: round;}
     &.w-progress--indeterminate .w-progress__progress {
@@ -270,6 +271,7 @@ $circle-size: 40;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    user-select: none;
   }
 }
 </style>
