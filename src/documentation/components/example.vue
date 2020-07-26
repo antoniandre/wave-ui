@@ -214,7 +214,7 @@ export default {
 
   &__source {position: relative;}
 
-  .w-alert {
+  &__source .w-alert {
     padding: 2px 4px;
     font-size: 13px !important;
     border-top: 1px solid #ddd;
