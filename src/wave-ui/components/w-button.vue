@@ -96,8 +96,8 @@ export default {
     },
     styles () {
       return {
-        width: this.width,
-        height: this.height,
+        width: (!isNaN(this.width) ? `${this.width}px` : this.width) || null,
+        height: (!isNaN(this.height) ? `${this.height}px` : this.height) || null,
         zIndex: this.zIndex || this.zIndex === 0 || null
       }
     }
