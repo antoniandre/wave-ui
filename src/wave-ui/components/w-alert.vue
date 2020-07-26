@@ -1,5 +1,5 @@
 <template lang="pug">
-  .w-alert(v-if="value" :class="classes")
+  .w-alert(v-if="value" v-on="$listeners" :class="classes")
     template(v-if="type")
       w-icon.mr2 wi-{{ icon }}
       .w_alert__content
