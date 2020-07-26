@@ -47,3 +47,18 @@ h4 {font-size: 1em;}
 .title4 {margin-bottom: 2 * $base-increment;}
 
 .title5 {margin-bottom: 2 * $base-increment;}
+
+code, .code {
+  display: inline-block;
+  font-family: monospace;
+}
+
+code {
+  padding: round(0.5 * $base-increment) round(1.5 * $base-increment);
+  background-color: rgba(80, 80, 80, 0.1);
+  border-radius: $border-radius;
+  font-size: 1.1em;
+  color: #c33;
+}
+
+.code {color: #000;}
