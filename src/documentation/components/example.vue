@@ -36,7 +36,7 @@
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="html")
-        w-tooltip(v-if="$slots.pug" tooltip-class="pa3 w400" color="blue")
+        w-tooltip.d-block(v-if="$slots.pug" tooltip-class="pa3 w400" color="blue")
           template(#activator="{ on }")
             w-alert.text-light.ma0(v-on="on" sm type="info" no-border tile)
               | What is Pug?
@@ -198,7 +198,7 @@ export default {
   border: 1px solid #eee;
   background-color: #fcfcfc;
   border-radius: 3px;
-  overflow: hidden;
+  // overflow: hidden;
 
   .buttons {
     border-left: 1px solid #eee;
