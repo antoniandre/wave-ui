@@ -31,7 +31,7 @@
           language="html-vue"
           label="TEMPLATE"
           copy-button
-          @copied="copied")
+          @copied="copied('TEMPLATE')")
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="html")
@@ -40,7 +40,7 @@
           language="pug"
           label="TEMPLATE (PUG)"
           copy-button
-          @copied="copied")
+          @copied="copied('TEMPLATE (PUG)')")
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="pug")
@@ -49,7 +49,7 @@
           language="js"
           label="JS"
           copy-button
-          @copied="copied")
+          @copied="copied('JS')")
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="js")
@@ -58,7 +58,7 @@
           language="css"
           label="CSS"
           copy-button
-          @copied="copied")
+          @copied="copied('CSS')")
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="css")
@@ -67,17 +67,17 @@
           language="scss"
           label="SCSS"
           copy-button
-          @copied="copied")
+          @copied="copied('SCSS')")
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="scss")
         w-notification.mr5.mt-1(
-          v-model="showCopied"
+          :value="!!showCopied"
           transition="slide-fade-left"
           plain
           absolute
           sm
-          type="success") Text copied to clipboard
+          type="success") {{ showCopied }} code copied to clipboard
 </template>
 
 <script>
@@ -168,8 +168,9 @@ export default {
       form.submit()
       form.remove()
     },
-    copied () {
-      this.showCopied = true
+
+    copied (source) {
+      this.showCopied = source
       setTimeout(() => (this.showCopied = false), 3000)
     }
   }
