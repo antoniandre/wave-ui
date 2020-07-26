@@ -31,7 +31,8 @@
           language="html-vue"
           label="TEMPLATE"
           copy-button
-          @copied="copied('TEMPLATE')")
+          @copied="copied('TEMPLATE')"
+          :reactive="reactive")
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="html")
@@ -39,14 +40,16 @@
           template(#activator="{ on }")
             w-alert.text-light.ma0(v-on="on" sm type="info" no-border tile)
               | What is Pug?
-          | Wave UI Vue templates are coded in Pug. The examples will soon be rewritten in HTML.
-          | You can edit in Codepen and view the compiled HTML if you are more familiar with it.
+          | Wave UI Vue templates are coded in Pug.#[br]The examples will soon be rewritten in HTML.
+          | For now, if you are not familiar with Pug, you can edit in Codepen and view the compiled HTML.
         ssh-pre(
           v-if="$slots.pug"
           language="pug"
           label="TEMPLATE (PUG)"
           copy-button
-          @copied="copied('TEMPLATE (PUG)')")
+          reactiv
+          @copied="copied('TEMPLATE (PUG)')"
+          :reactive="reactive")
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="pug")
@@ -55,7 +58,8 @@
           language="js"
           label="JS"
           copy-button
-          @copied="copied('JS')")
+          @copied="copied('JS')"
+          :reactive="reactive")
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="js")
@@ -64,7 +68,8 @@
           language="css"
           label="CSS"
           copy-button
-          @copied="copied('CSS')")
+          @copied="copied('CSS')"
+          :reactive="reactive")
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="css")
@@ -73,7 +78,8 @@
           language="scss"
           label="SCSS"
           copy-button
-          @copied="copied('SCSS')")
+          @copied="copied('SCSS')"
+          :reactive="reactive")
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="scss")
@@ -92,7 +98,8 @@ export default {
     contentClass: { type: String },
     externalJs: { type: String },
     externalCss: { type: String },
-    fullJs: { type: Boolean }
+    fullJs: { type: Boolean },
+    reactive: { type: Boolean }
   },
   data: () => ({
     showSource: false,
