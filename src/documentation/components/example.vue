@@ -226,9 +226,11 @@ export default {
   .ssh-pre__copy {
     border: none;
     background: none;
+    top: 1px;
+    right: 1px;
 
     .w-icon {
-      padding: 10px;
+      padding: 12px;
       transition: 0.25s;
     }
     &:hover .w-icon {background-color: rgba(35, 71, 129, 0.15);}
