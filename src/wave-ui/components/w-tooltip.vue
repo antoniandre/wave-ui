@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-tooltip-wrapper(ref="wrapper")
+.w-tooltip-wrapper(ref="wrapper" :class="{ 'w-tooltip-wrapper--attached': !detachTo }")
   slot(name="activator" :on="eventHandlers")
   transition(:name="transitionName")
     .w-tooltip(ref="tooltip" v-show="showTooltip" :class="classes" :style="styles")
@@ -39,7 +39,7 @@ export default {
     transition: { type: String, default: '' },
     tooltipClass: { type: String, default: '' },
     // Position.
-    attachTo: {},
+    detachTo: {},
     fixed: { type: Boolean },
     top: { type: Boolean },
     bottom: { type: Boolean },
@@ -65,9 +65,8 @@ export default {
       return this.transition || `w-tooltip-slide-fade-${this.position}`
     },
 
-    // DOM element to attach tooltip to.
-    attachToTarget () {
-      let target = this.attachTo || '.w-app'
+    detachToTarget () {
+      let target = this.detachTo || '.w-app'
       if (target === true) target = '.w-app'
       else if (target && !['object', 'string'].includes(typeof target)) target = '.w-app'
       else if (typeof target === 'object' && !target.nodeType) {
@@ -77,11 +76,16 @@ export default {
       if (typeof target === 'string') target = document.querySelector(target)
 
       if (!target) {
-        consoleWarn(`Unable to locate ${this.attachTo ? `target ${this.attachTo}` : '.w-app'}`, this)
+        consoleWarn(`Unable to locate ${this.detachTo ? `target ${this.detachTo}` : '.w-app'}`, this)
         target = document.querySelector('.w-app')
       }
 
       return target
+    },
+
+    // DOM element to attach tooltip to.
+    tooltipWrapperEl () {
+      return this.detachTo ? this.detachToTarget : this.$refs.wrapper
     },
 
     position () {
@@ -176,7 +180,7 @@ export default {
       let coords = { top, left, width, height }
 
       if (!this.fixed) {
-        const { top: targetTop, left: targetLeft } = this.attachToTarget.getBoundingClientRect()
+        const { top: targetTop, left: targetLeft } = this.tooltipWrapperEl.getBoundingClientRect()
         coords = { ...coords, top: top - targetTop, left: left - targetLeft }
       }
 
@@ -204,27 +208,29 @@ export default {
       const wrapper = this.$refs.wrapper
 
       // Unwrap the activator element.
-      this.activatorEl = wrapper.firstChild
       wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
 
       // Move the tooltip elsewhere in the DOM.
       // wrapper.parentNode.insertBefore(this.$refs.tooltip, wrapper)
-      this.attachToTarget.appendChild(this.$refs.tooltip)
+      this.detachToTarget.appendChild(this.$refs.tooltip)
     }
   },
 
   beforeMount () {
     // Do this, first thing on mounted (beforeMount + nextTick).
     this.$nextTick(() => {
-      this.insertTooltip()
+      this.activatorEl = this.$refs.wrapper.firstChild
+      if (this.detachTo) this.insertTooltip()
 
       if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
     })
   },
 
   beforeDestroy () {
-    this.$refs.tooltip.remove()
-    this.activatorEl.remove()
+    if (this.detachTo) {
+      this.$refs.tooltip.remove()
+      this.activatorEl.remove()
+    }
   },
 
   watch: {
@@ -236,7 +242,11 @@ export default {
 </script>
 
 <style lang="scss">
-.w-tooltip-wrapper {display: none;}
+.w-tooltip-wrapper {
+  display: none;
+
+  &--attached {display: inline-block;position: relative;}
+}
 
 .w-tooltip {
   display: flex;
@@ -249,7 +259,7 @@ export default {
   color: $tooltip-color;
   align-items: center;
   max-width: 300px;
-  width: fit-content; // Not supported in IE11. :/
+  width: max-content; // Not supported in IE11. :/
   z-index: 100;
 
   &--fixed {position: fixed;z-index: 1000;}
@@ -344,28 +354,28 @@ export default {
       left: 50%;
       border-top-color: inherit;
       transform: translateX(-50%);
-      margin-top: 0px;
+      margin-top: 0;
     }
     &.w-tooltip--bottom:before {
       bottom: 100%;
       left: 50%;
       border-bottom-color: inherit;
       transform: translateX(-50%);
-      margin-bottom: 0px;
+      margin-bottom: 0;
     }
     &.w-tooltip--left:before {
       left: 100%;
       top: 50%;
       border-left-color: inherit;
       transform: translateY(-50%);
-      margin-left: 0px;
+      margin-left: 0;
     }
     &.w-tooltip--right:before {
       right: 100%;
       top: 50%;
       border-right-color: inherit;
       transform: translateY(-50%);
-      margin-right: 0px;
+      margin-right: 0;
     }
   }
   // --------------------------------------------------------
