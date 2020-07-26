@@ -76,10 +76,7 @@ export default {
     display: block;
   }
 
-  .code {
-    display: inline-block;
-    margin-top: -3px;
-  }
+  .code {margin-top: -3px;}
 }
 
 h1.title-link {
