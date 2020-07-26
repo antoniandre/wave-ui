@@ -31,7 +31,7 @@ div
       })
 
   title-link(h2) Colors
-  example
+  example(content-class="pt4")
     w-switch.ma2(:value="true" color="pink")
     w-switch.ma2(:value="true" color="error")
     w-switch.ma2(:value="true" color="warning")
