@@ -63,8 +63,8 @@ export default {
     },
     styles () {
       return {
-        width: !isNaN(this.width) ? `${this.width}px` : this.width,
-        height: !isNaN(this.height) ? `${this.height}px` : this.height,
+        width: (!isNaN(this.width) ? `${this.width}px` : this.width) || null,
+        height: (!isNaN(this.height) ? `${this.height}px` : this.height) || null
       }
     }
   }
