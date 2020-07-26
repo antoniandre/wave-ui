@@ -35,6 +35,12 @@
           template(#copy-button)
             w-icon(color="primary") mdi mdi-content-copy
           slot(name="html")
+        w-tooltip(v-if="$slots.pug" tooltip-class="pa3 w400" color="blue")
+          template(#activator="{ on }")
+            w-alert.text-light.ma0(v-on="on" sm type="info" no-border tile)
+              | What is Pug?
+          | Wave UI Vue templates are coded in Pug. The examples will soon be rewritten in HTML.
+          | You can edit in Codepen and view the compiled HTML if you are more familiar with it.
         ssh-pre(
           v-if="$slots.pug"
           language="pug"
@@ -201,6 +207,14 @@ export default {
 
   &__source {position: relative;}
 
+  .w-alert {
+    padding: 2px 4px;
+    font-size: 13px !important;
+    border-top: 1px solid #ddd;
+
+    &:after {background-color: #b0dcff;}
+  }
+
   .ssh-pre {
     margin: 0 !important;
     border: solid rgba(0, 0, 0, 0.1);
@@ -208,6 +222,7 @@ export default {
     border-radius: 0;
     line-height: 1.3;
 
+    &[data-type="pug"] {border-width: 0;}
     & + .ssh-pre {border-top-width: 3px;}
     &:last-child {border-radius: 0 0 4px 4px;}
   }
@@ -243,4 +258,6 @@ export default {
     opacity: 0;
   }
 }
+
+.w-tooltip.w400 {max-width: 400px;}
 </style>
