@@ -211,28 +211,26 @@ div
     h3 Default label
     example(reactive)
       w-progress(v-model="progress1" size="1.3em" round color="primary" label)
-      w-progress.mt4(
-        v-model="progress1"
-        size="1.3em"
-        outline
-        round
-        label)
+      w-progress.mt4(v-model="progress1" size="1.3em" outline round label)
       template(#pug).
-        w-progress(v-model="progress1" size="1.3em" round color="primary" label)
-        w-progress.mt4(
-          v-model="progress1"
-          size="1.3em"
-          outline
-          round
-          label)
+        w-progress(v-model="progress" size="1.3em" round color="primary" label)
+        w-progress.mt4(v-model="progress" size="1.3em" outline round label)
+      template(#js).
+        data: () => ({
+          progress: 37.86
+        })
 
     h3 Custom label
     example(reactive)
       w-progress.mt3(v-model="progress1" size="1.5em" outline round)
         strong {{ progress1 }}%
       template(#pug).
-        w-progress(v-model="progress1" size="1.5em" outline round)
-          strong {{ progress1 }}%
+        w-progress(v-model="progress" size="1.5em" outline round)
+          strong {{ '\{\{ progress \}\}' }}%
+      template(#js).
+        data: () => ({
+          progress: 37.86
+        })
 
     h3 Providing a color for the custom label
     p.
@@ -257,11 +255,11 @@ div
 
     title-link(h2) Round linecap &amp; default flat line cap
     example(reactive)
-      w-progress(value="50.3" size="2em" round round-cap)
-      w-progress.mt4(value="50.3" size="2em" round)
+      w-progress(value="38" size="2em" round round-cap)
+      w-progress.mt4(value="38" size="2em" round)
       template(#pug).
-        w-progress(value="50.3" size="2em" round round-cap)
-        w-progress.mt4(value="50.3" size="2em" round)
+        w-progress(value="38" size="2em" round round-cap)
+        w-progress.mt4(value="38" size="2em" round)
 </template>
 
 <script>
