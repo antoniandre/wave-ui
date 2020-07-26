@@ -1,6 +1,7 @@
 <template lang="pug">
   span.w-tag(
     @click="$emit('input', !value)"
+    @keypress.enter="$emit('input', !value)"
     :class="classes"
     :role="value !== -1 && 'button'"
     :aria-pressed="value !== -1 && (value ? 'true' : 'false')"
@@ -8,11 +9,11 @@
     :style="styles")
     slot
     i(
-      v-if="close && value"
+      v-if="closable && value"
       @click.stop="$emit('input', false)"
       role="icon"
       aria-hidden="true"
-      class="w-icon w-tag__close wi-cross")
+      class="w-icon w-tag__closable wi-cross")
 </template>
 
 <script>
@@ -26,13 +27,15 @@ export default {
     shadow: { type: Boolean },
     tile: { type: Boolean },
     round: { type: Boolean },
-    close: { type: Boolean },
+    closable: { type: Boolean },
     outline: { type: Boolean },
     xs: { type: Boolean },
     sm: { type: Boolean },
     md: { type: Boolean },
     lg: { type: Boolean },
-    xl: { type: Boolean }
+    xl: { type: Boolean },
+    width: { type: [String, Number] },
+    height: { type: [String, Number] }
   },
 
   computed: {
@@ -59,7 +62,10 @@ export default {
       }
     },
     styles () {
-      return false
+      return {
+        width: !isNaN(this.width) ? `${this.width}px` : this.width,
+        height: !isNaN(this.height) ? `${this.height}px` : this.height,
+      }
     }
   }
 }
@@ -70,6 +76,7 @@ export default {
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   vertical-align: middle;
   border-radius: $border-radius;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -105,20 +112,20 @@ export default {
     cursor: pointer;
     user-select: none;
 
-    .w-tag__close {
+    .w-tag__closable {
       margin-left: 3px;
       margin-right: -3px;
       padding: 1px;
       transition: $transition-duration;
     }
-    &.size--lg .w-tag__close,
-    &.size--xl .w-tag__close {
+    &.size--lg .w-tag__closable,
+    &.size--xl .w-tag__closable {
       margin-right: -2px;
       padding: 2px;
     }
 
     &:hover {
-      .w-tag__close {background-color: rgba(0, 0, 0, 0.1);}
+      .w-tag__closable {background-color: rgba(0, 0, 0, 0.1);}
     }
 
     // Overlay to mark the focus and active state.
@@ -131,7 +138,8 @@ export default {
       bottom: 0;
       opacity: 0;
       background-color: transparent;
-      border-radius: inherit;
+      // As this overlay is a smaller rectangle, the radius must be smaller to cover perfectly.
+      border-radius: $border-radius - 1;
       transition: 0.2s;
     }
 
