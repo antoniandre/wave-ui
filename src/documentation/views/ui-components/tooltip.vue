@@ -2,7 +2,7 @@
 div.tooltips-demo
   title-link.mt4.code(h1) w-tooltip
 
-  w-alert.pa0.pl4.text-light(info color="blue-dark1" outline border-left tile).
+  w-alert.alert--tip(icon-outside icon="mdi mdi-lightbulb-on").
     #[strong Important notes]#[br]
     By default when you use #[code &lt;w-tooltip&gt;], it creates a wrapper around the activator
     element and the tooltip is added inside this wrapper.#[br]
@@ -10,7 +10,7 @@ div.tooltips-demo
     But in some cases, for instance if the activator element is placed in a container that has a hidden
     overflow, the tooltip needs to be placed outside of this container to be fully visible.#[br]
     You can use the #[code detachTo] prop to place it elsewhere in the DOM, like in the
-    #[a.primary(href="#appending-to-a-dom-node") Appending to a particular DOM node] example.#[br]
+    #[a(href="#appending-to-a-dom-node") Appending to a particular DOM node] example.#[br]
     In this case, the wrapper will be hidden and unstylable whereas the tooltip itself will be appended to
     the DOM node you provided.
 
@@ -357,7 +357,7 @@ div.tooltips-demo
 
       .w-tag {z-index: 1;}
 
-  w-alert.pa0.pl5.text-light(info border-left outline tile).
+  w-alert.alert--warning(warning icon-outside).
     The DOM element that the tooltip is detached to must have a position (fixed, absolute or
     relative).
 </template>
