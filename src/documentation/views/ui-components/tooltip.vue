@@ -2,6 +2,18 @@
 div.tooltips-demo
   title-link.mt4.code(h1) w-tooltip
 
+  w-alert.pa0.pl4.text-light(type="info" color="blue-dark1" outline border-left tile).
+    #[strong Important notes]#[br]
+    By default when you use #[code &lt;w-tooltip&gt;], it creates a wrapper around the activator
+    element and the tooltip is added inside this wrapper.#[br]
+    In this case you can add classes to the wrapper to style it as desired.#[br]#[br]
+    But in some cases, for instance if the activator element is placed in a container that has a hidden
+    overflow, the tooltip needs to be placed outside of this container to be fully visible.#[br]
+    You can use the #[code detachTo] prop to place it elsewhere in the DOM, like in the
+    #[a.primary(href="#appending-to-a-dom-node") Appending to a particular DOM node] example.#[br]
+    In this case, the wrapper will be hidden and unstylable whereas the tooltip itself will be appended to
+    the DOM node you provided.
+
   title-link(h2) Tooltip position
   example(content-class="text-center")
     w-tooltip(left)
@@ -303,13 +315,52 @@ div.tooltips-demo
       })
 
   title-link(h2 slug="appending-to-a-dom-node") Appending to a particular DOM node
-  w-alert.text-light(type="info").
-    This step is important for absolute positionning (default): if you don't append
-    the tooltip to the correct DOM node, you will most likely end up with a tooltip not
-    following its activator on scroll.#[br]
-    The DOM element that will receive the tooltip must have a position (fixed, absolute or
+  p.
+    In this example, the yellow container of the pink activator has an overflow hidden, but we want the
+    tooltip to be fully visible. So we detach it to the green container.
+  example.mb12(content-class="pa0")
+    .another-container.text-center.green-light5--bg.pa6
+      w-card(bg-color="yellow-light5")
+        w-tooltip(detach-to=".another-container")
+          template(#activator="{ on }")
+            w-tag(v-on="on" lg color="pink-light1" bg-color="pink-light5")
+              w-icon.mr1 mdi mdi-bomb
+              | Hover me
+          span This tooltip is appended to the #[span.green green] container!
+    template(#pug).
+      .another-container.text-center.green-light5--bg.pa6
+        w-card(bg-color="yellow-light5")
+          w-tooltip(detach-to=".another-container")
+            template(#activator="{ on }")
+              w-tag(v-on="on" lg color="pink-light1" bg-color="pink-light5")
+                w-icon.mr1 mdi mdi-bomb
+                | Hover me
+            span This tooltip is appended to the green container!
+    template(#css).
+      .w-card {
+        overflow: hidden;
+        display: inline-block;
+        padding: 8px;
+      }
+
+      .w-card:before, .w-card:after {
+        content: '';
+        position: absolute;
+        background-color: #ffea62;
+        width: 6em;
+        height: 6em;
+        border-radius: 100%;
+      }
+
+      .w-card:before {top: 0;left: 0;}
+      .w-card:after {bottom: 0;right: 0;}
+
+      .w-tag {z-index: 1;}
+
+  w-alert.pa0.pl5.text-light(type="info" border-left outline tile).
+    The DOM element that the tooltip is detached to must have a position (fixed, absolute or
     relative).
- </template>
+</template>
 
 <script>
 export default {
@@ -330,7 +381,26 @@ export default {
 
 <style lang="scss">
 .tooltips-demo {
-  position: relative;
+  .w-card {
+    overflow: hidden;
+    display: inline-block;
+    padding: 8px;
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      background-color: #ffea62;
+      width: 6em;
+      height: 6em;
+      border-radius: 100%;
+    }
+
+    &:before {top: -3em;left: -3em;}
+    &:after {bottom: -3em;right: -3em;}
+
+    .w-tag {z-index: 1;}
+  }
+  .another-container {position: relative;}
 
   .example__render {overflow: visible;}
 }
