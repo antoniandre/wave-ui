@@ -284,7 +284,7 @@ div
         height: 140px;
       }
 
-  w-alert.text-light(type="warning")
+  w-alert.text-light(warning)
     strong Note:
     a.black.ml1(
       href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Alignment/Box_Alignment_in_Flexbox"

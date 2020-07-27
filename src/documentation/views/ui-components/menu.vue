@@ -16,7 +16,7 @@ div
     | Menu content
 
   title-link(h2 slug="appending-to-a-dom-node") Appending to a particular DOM node
-  w-alert.text-light(type="info").
+  w-alert.text-light(info).
     This step is important for absolute positionning (default): if you don't append
     the menu to the correct DOM node, you will most likely end up with a menu not
     following its activator on scroll.#[br]
