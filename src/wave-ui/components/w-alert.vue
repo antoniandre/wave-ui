@@ -1,8 +1,8 @@
 <template lang="pug">
   .w-alert(v-if="value" v-on="$listeners" :class="classes")
-    template(v-if="type")
-      w-icon.mr2 wi-{{ icon }}
-      .w_alert__content
+    template(v-if="type || icon")
+      w-icon.mr2 {{ type ? typeIcon : icon }}
+      .w-alert__content
         slot
     slot(v-else)
 </template>
@@ -17,6 +17,8 @@ export default {
     shadow: { type: Boolean },
     tile: { type: Boolean },
     round: { type: Boolean },
+    icon: { type: String },
+    iconOutside: { type: Boolean },
     plain: { type: Boolean },
     // Types (with icon).
     success: { type: Boolean },
@@ -39,12 +41,12 @@ export default {
   },
 
   computed: {
-    icon () {
+    typeIcon () {
       return (
-        (this.type === 'success' && 'check-circle') ||
-        (this.type === 'warning' && 'warning-circle') ||
-        (this.type === 'error' && 'cross-circle') ||
-        (this.type === 'info' && 'info-circle')
+        (this.type === 'success' && 'wi-check-circle') ||
+        (this.type === 'warning' && 'wi-warning-circle') ||
+        (this.type === 'error' && 'wi-cross-circle') ||
+        (this.type === 'info' && 'wi-info-circle')
       )
     },
 
@@ -79,14 +81,16 @@ export default {
         [`${this.bgColor || (this.plain && this.type)}--bg w-alert--bg`]: this.bgColor || (this.plain && this.type),
         [this.color || (!this.plain && this.type)]: this.color || (!this.plain && this.type),
         [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
-        [`w-alert--type w-alert--${this.type}`]: this.type,
+        [`w-alert--${this.type}`]: this.type,
+        'w-alert--has-icon': this.type || this.icon,
+        'w-alert--icon-outside': this.iconOutside,
         'w-alert--plain': this.type && this.plain,
         'w-alert--outline': this.outline,
         'w-alert--tile': this.tile,
         'w-alert--round': this.round,
         'w-alert--no-border': this.noBorder || (this.plain && this.type),
-        'w-alert--one-border': this.hasSingleBorder,
-        'w-alert--border-left': !this.noBorder && this.borderLeft,
+        'w-alert--one-border': this.hasSingleBorder || this.iconOutside,
+        'w-alert--border-left': (!this.noBorder && this.borderLeft) || this.iconOutside,
         'w-alert--border-right': !this.noBorder && this.borderRight,
         'w-alert--border-top': !this.noBorder && this.borderTop,
         'w-alert--border-bottom': !this.noBorder && this.borderBottom,
@@ -108,7 +112,7 @@ export default {
   border-radius: $border-radius;
   border: 1px solid currentColor;
 
-  &--type {
+  &--has-icon {
     display: flex;
     align-items: center;
   }
@@ -139,7 +143,8 @@ export default {
   &--border-right {padding-right: 3 * $base-increment;}
   &--border-top {padding-top: 3 * $base-increment;}
   &--border-bottom {padding-bottom: 3 * $base-increment;}
-  &--one-border:before {content: '';opacity: 0.25;}
+
+  &--one-border:before {content: '';opacity: 0.3;}
   &--border-left:before {
     right: auto;
     width: $base-increment;
@@ -164,12 +169,30 @@ export default {
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
   }
+  &--one-border.w-alert--icon-outside:before {
+    content: '';
+    opacity: 0.7;
+    width: 3px;
+  }
 
-  &:after {opacity: 0.15;content: '';border-radius: inherit;}
+  &:after {opacity: 0.12;content: '';border-radius: inherit;}
   &--outline:after {display: none;}
   &--bg:after {background-color: #fff;opacity: 0.1;}
 
-  &--type > .w-icon {opacity: 0.9;align-self: flex-start;}
+  &--has-icon > .w-icon {opacity: 0.9;align-self: flex-start;}
+
+  &--icon-outside > .w-icon {
+    position: absolute;
+    opacity: 1;
+    left: 1px;
+    z-index: 1;
+    transform: translateX(-50%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background-color: #fff;
+  }
+  &--icon-outside > .w-icon:before {transform: scale(1.05);}
+
+  &--icon-outside &__content {padding-left: 3 * $base-increment;}
 
   // Sizes.
   &.size--xs {padding-top: $base-increment;padding-bottom: $base-increment;}
