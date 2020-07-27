@@ -43,45 +43,45 @@ div(style="max-width: 1000px")
   title-link(h2 slug="types") Types (adds an icon)
   h3 Normal
   example(content-class="py0")
-    w-alert(type="success") This is a success alert.
-    w-alert(type="warning") This is a warning alert.
-    w-alert(type="error") This is an error alert.
-    w-alert(type="info") This is an info alert.
+    w-alert(success) This is a success alert.
+    w-alert(warning) This is a warning alert.
+    w-alert(error) This is an error alert.
+    w-alert(info) This is an info alert.
     template(#pug).
-      w-alert(type="success") This is a success alert.
-      w-alert(type="warning") This is a warning alert.
-      w-alert(type="error") This is an error alert.
-      w-alert(type="info") This is an info alert.
+      w-alert(success) This is a success alert.
+      w-alert(warning) This is a warning alert.
+      w-alert(error) This is an error alert.
+      w-alert(info) This is an info alert.
 
   h3 Plain
   example(content-class="py0")
-    w-alert(type="success" plain) This is a success alert.
-    w-alert(type="warning" plain) This is an alert.
-    w-alert(type="error" plain) This is an error alert.
-    w-alert(type="info" plain) This is an info alert.
+    w-alert(success plain) This is a success alert.
+    w-alert(warning plain) This is an alert.
+    w-alert(error plain) This is an error alert.
+    w-alert(info plain) This is an info alert.
     template(#pug).
-      w-alert(type="success" plain) This is a success alert.
-      w-alert(type="warning" plain) This is an alert.
-      w-alert(type="error" plain) This is an error alert.
-      w-alert(type="info" plain) This is an info alert.
+      w-alert(success plain) This is a success alert.
+      w-alert(warning plain) This is an alert.
+      w-alert(error plain) This is an error alert.
+      w-alert(info plain) This is an info alert.
 
   title-link(h2) Outline
   example(content-class="py0")
     w-alert(color="primary" outline) This is a normal alert with a primary color.
-    w-alert(type="success" outline) This is a success alert.
-    w-alert(type="warning" outline) This is an alert.
-    w-alert(type="error" outline) This is an error alert.
-    w-alert(type="info" outline) This is an info alert.
+    w-alert(success outline) This is a success alert.
+    w-alert(warning outline) This is an alert.
+    w-alert(error outline) This is an error alert.
+    w-alert(info outline) This is an info alert.
     template(#pug).
       w-alert(color="primary" outline) This is a normal alert with a primary color.
-      w-alert(type="success" outline) This is a success alert.
-      w-alert(type="warning" outline) This is an alert.
-      w-alert(type="error" outline) This is an error alert.
-      w-alert(type="info" outline) This is an info alert.
+      w-alert(success outline) This is a success alert.
+      w-alert(warning outline) This is an alert.
+      w-alert(error outline) This is an error alert.
+      w-alert(info outline) This is an info alert.
 
   title-link(h2) Borders
   example(content-class="py0")
-    w-alert(type="success" light no-border) This is a success alert with no border.
+    w-alert(success light no-border) This is a success alert with no border.
     w-alert(color="primary" no-border) This is a normal alert with no border.
     w-alert(bg-color="cyan-light4" color="purple" no-border) This is an alert with a cyan background, purple color and no border.
     .w-flex.wrap.ma-2
@@ -91,7 +91,7 @@ div(style="max-width: 1000px")
       w-alert.grow.ma2(color="primary" border-top) This is a normal alert with a top border.
       w-alert.grow.ma2(color="primary" border-bottom) This is a normal alert with a left border.
     template(#pug).
-      w-alert(type="success" light no-border) This is a success alert with no border.
+      w-alert(success light no-border) This is a success alert with no border.
       w-alert(color="primary" no-border) This is a normal alert with no border.
       w-alert(bg-color="cyan-light4" color="purple" no-border) This is an alert with a cyan background, purple color and no border.
       .w-flex.wrap.ma-2
@@ -113,17 +113,17 @@ div(style="max-width: 1000px")
 
   title-link(h2) Sizes
   example(content-class="py0")
-    w-alert.size--xs(color="info" type="success") This is an extra small alert.
-    w-alert.size--sm(color="info" type="success") This is a small alert.
-    w-alert.size--md(color="info" type="success") This is a medium alert.
-    w-alert.size--lg(color="info" type="success") This is a large alert.
-    w-alert.size--xl(color="info" type="success") This is an extra large alert.
+    w-alert.size--xs(color="info" success) This is an extra small alert.
+    w-alert.size--sm(color="info" success) This is a small alert.
+    w-alert.size--md(color="info" success) This is a medium alert.
+    w-alert.size--lg(color="info" success) This is a large alert.
+    w-alert.size--xl(color="info" success) This is an extra large alert.
     template(#pug).
-      w-alert.size--xs(color="info" type="success") This is an extra small alert.
-      w-alert.size--sm(color="info" type="success") This is a small alert.
-      w-alert.size--md(color="info" type="success") This is a medium alert.
-      w-alert.size--lg(color="info" type="success") This is a large alert.
-      w-alert.size--xl(color="info" type="success") This is an extra large alert.
+      w-alert.size--xs(color="info" success) This is an extra small alert.
+      w-alert.size--sm(color="info" success) This is a small alert.
+      w-alert.size--md(color="info" success) This is a medium alert.
+      w-alert.size--lg(color="info" success) This is a large alert.
+      w-alert.size--xl(color="info" success) This is an extra large alert.
 </template>
 
 <script>

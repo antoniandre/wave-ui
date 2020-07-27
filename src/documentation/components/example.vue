@@ -38,7 +38,7 @@
           slot(name="html")
         w-tooltip.d-block(v-if="$slots.pug" tooltip-class="pa3 w400" color="blue")
           template(#activator="{ on }")
-            w-alert.text-light.ma0(v-on="on" sm type="info" no-border tile)
+            w-alert.text-light.ma0(v-on="on" sm info no-border tile)
               | What is Pug?
           | Wave UI Vue templates are coded in Pug.#[br]The examples will soon be rewritten in HTML.
           | For now, if you are not familiar with Pug, you can edit in Codepen and view the compiled HTML.

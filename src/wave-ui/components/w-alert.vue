@@ -12,18 +12,23 @@ export default {
   name: 'w-alert',
   props: {
     value: { default: true }, // Show or hide.
-    xs: { type: Boolean },
-    sm: { type: Boolean },
-    md: { type: Boolean },
-    lg: { type: Boolean },
-    xl: { type: Boolean },
-    type: { type: [String, Boolean] },
     color: { type: String },
     bgColor: { type: String },
     shadow: { type: Boolean },
     tile: { type: Boolean },
     round: { type: Boolean },
     plain: { type: Boolean },
+    // Types (with icon).
+    success: { type: Boolean },
+    info: { type: Boolean },
+    warning: { type: Boolean },
+    error: { type: Boolean },
+    // Sizes.
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean },
     // Borders.
     noBorder: { type: Boolean },
     borderLeft: { type: Boolean },
@@ -40,6 +45,16 @@ export default {
         (this.type === 'warning' && 'warning-circle') ||
         (this.type === 'error' && 'cross-circle') ||
         (this.type === 'info' && 'info-circle')
+      )
+    },
+
+    type () {
+      return (
+        (this.success && 'success') ||
+        (this.info && 'info') ||
+        (this.warning && 'warning') ||
+        (this.error && 'error') ||
+        null
       )
     },
 
