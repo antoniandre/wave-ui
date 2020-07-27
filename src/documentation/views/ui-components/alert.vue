@@ -5,7 +5,8 @@ div(style="max-width: 1000px")
   title-link(h2 slug="show-and-hide-with-v-model") Show / hide with v-model
   p.
     By default alerts are visible, but if a value or v-model is provided,
-    it will show or hide according to it.
+    it will show or hide according to it.#[br]
+    Like in this example you can add a transition to animate its apparition.
   example(content-class="pt5")
     w-button(@click="showAlert = !showAlert" color="primary" outline) {{ showAlert ? 'Hide' : 'Show' }} alert
     w-transition-expand(y)
@@ -56,26 +57,48 @@ div(style="max-width: 1000px")
   h3 Plain
   example(content-class="py0")
     w-alert(success plain) This is a success alert.
-    w-alert(warning plain) This is an alert.
+    w-alert(warning plain) This is a warning alert.
     w-alert(error plain) This is an error alert.
     w-alert(info plain) This is an info alert.
     template(#pug).
       w-alert(success plain) This is a success alert.
-      w-alert(warning plain) This is an alert.
+      w-alert(warning plain) This is a warning alert.
       w-alert(error plain) This is an error alert.
       w-alert(info plain) This is an info alert.
+
+  title-link(h2) Custom icon
+  example(content-class="py0")
+    w-alert(bg-color="yellow-light5" color="amber" icon="wi-star") This is an alert with a custom icon.
+    template(#pug).
+      w-alert(bg-color="yellow-light5" color="amber" icon="wi-star") This is an alert with a custom icon.
+
+  title-link(h2) Icon outside
+  example(content-class="py0")
+    w-alert(success icon-outside) This is a success alert.
+    w-alert(warning icon-outside) This is a warning alert.
+    w-alert(error icon-outside) This is an error alert.
+    w-alert(info icon-outside) This is an info alert.
+    w-alert(bg-color="yellow-light5" color="amber" icon="mdi mdi-star-circle" icon-outside)
+      | This is an alert with a custom icon.
+    template(#pug).
+      w-alert(success icon-outside) This is a success alert.
+      w-alert(warning icon-outside) This is a warning alert.
+      w-alert(error icon-outside) This is an error alert.
+      w-alert(info icon-outside) This is an info alert.
+      w-alert(bg-color="yellow-light5" color="amber" icon="mdi mdi-star-circle" icon-outside)
+        | This is an alert with a custom icon.
 
   title-link(h2) Outline
   example(content-class="py0")
     w-alert(color="primary" outline) This is a normal alert with a primary color.
     w-alert(success outline) This is a success alert.
-    w-alert(warning outline) This is an alert.
+    w-alert(warning outline) This is a warning alert.
     w-alert(error outline) This is an error alert.
     w-alert(info outline) This is an info alert.
     template(#pug).
       w-alert(color="primary" outline) This is a normal alert with a primary color.
       w-alert(success outline) This is a success alert.
-      w-alert(warning outline) This is an alert.
+      w-alert(warning outline) This is a warning alert.
       w-alert(error outline) This is an error alert.
       w-alert(info outline) This is an info alert.
 
