@@ -14,7 +14,7 @@ div
   title-link(h2) Wave UI is developed with a particular care about CSS.
   p.title3.
     Practically Wave UI gives you more flexibility and more control over the CSS.
-  blockquote.mt2.
+  w-alert.alert--tip.my5(icon-outside icon="mdi mdi-lightbulb-on").
     Because inline styles and #[code !important] are a nightmare to override,
     Wave UI has chosen to use not-too-specific selectors and promote the CSS styling
     rather than Javascript dynamic styling.
@@ -55,12 +55,5 @@ export default {
 </script>
 
 <style lang="scss">
-blockquote {
-  background-color: #fffedc;
-  border: 1px solid #eee;
-  padding: 0.6em 1em;
-  display: inline-block;
-}
-
 .w-list__item-bullet {color: green;}
 </style>
