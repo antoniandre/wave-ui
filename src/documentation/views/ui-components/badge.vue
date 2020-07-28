@@ -2,7 +2,7 @@
 div
   title-link.mt4.code(h1 slug="w-badge")
     | w-badge
-    w-tag.ml3(bg-color="orange" color="white") In progress
+    w-tag.ml3(bg-color="orange" color="white" lg) In progress
 
   title-link(h2) Default
   example
