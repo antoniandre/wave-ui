@@ -2,7 +2,7 @@
 div
   title-link.mt4.code(h1 slug="w-input")
     | w-input
-    w-tag.ml3(bg-color="orange" color="white") In progress
+    w-tag.ml3(bg-color="orange" color="white" lg) In progress
 
   w-input.mb1(label="First name" required)
   w-input.mb1 First name
