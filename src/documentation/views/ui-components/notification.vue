@@ -25,7 +25,7 @@ div
       inline)
     w-notification(
       v-show="notification.show"
-      type="success"
+      success
       plain
       round
       shadow
@@ -53,7 +53,7 @@ div
 
       w-notification(
         v-show="notification.show"
-        type="success"
+        success
         plain
         round
         shadow
@@ -94,7 +94,7 @@ div
 
     w-notification(
       v-show="notification2.show"
-      type="info"
+      info
       color="primary"
       round
       shadow
@@ -128,7 +128,7 @@ div
 
       w-notification(
         v-show="notification.show"
-        type="info"
+        info
         color="primary"
         round
         shadow

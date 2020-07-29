@@ -89,7 +89,7 @@
           plain
           absolute
           sm
-          type="success") {{ showCopied }} code copied to clipboard
+          success) {{ showCopied }} code copied to clipboard
 </template>
 
 <script>
