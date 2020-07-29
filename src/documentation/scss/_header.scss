@@ -61,3 +61,11 @@ header {
   header {height: 130px;}
   header:before {background-size: 600px;}
 }
+
+// For iOS: https://stackoverflow.com/a/23420490/2012407, https://stackoverflow.com/a/47818418/2012407.
+@supports (-webkit-touch-callout: none) {
+  header {
+    height: 130px;
+    background-attachment: scroll;
+  }
+}
