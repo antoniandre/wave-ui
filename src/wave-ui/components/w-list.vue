@@ -106,7 +106,7 @@ const renderListItemLabel = function (createEl, li, index) {
   // ------------------------------------------------------
   else if (this.isSelectable) {
     // Links are naturally tabable, add tabindex on other elements.
-    component.attrs.tabindex = 0
+    if (!li.disabled) component.attrs.tabindex = 0
     component.on = { click, keydown, mousedown }
   }
   // ------------------------------------------------------
