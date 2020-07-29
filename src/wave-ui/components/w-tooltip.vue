@@ -246,7 +246,10 @@ export default {
 }
 
 .w-tooltip {
-  display: flex;
+  // Fix Safari where `width: max-content` does not take padding and border into consideration.
+  display: table;
+  // display: flex;
+
   position: absolute;
   padding: $base-increment round(1.5 * $base-increment);
   border-radius: $border-radius;
