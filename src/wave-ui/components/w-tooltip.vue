@@ -158,6 +158,8 @@ export default {
           mouseenter: this.toggle,
           mouseleave: this.toggle
         }
+
+        if ('ontouchstart' in window) handlers.click = this.toggle
       }
       return handlers
     }
@@ -165,7 +167,10 @@ export default {
 
   methods: {
     toggle (e) {
-      if (e.type === 'click' && this.showOnClick) this.showTooltip = !this.showTooltip
+      if ('ontouchstart' in window) {
+        if (e.type === 'click') this.showTooltip = !this.showTooltip
+      }
+      else if (e.type === 'click' && this.showOnClick) this.showTooltip = !this.showTooltip
       else if (['mouseenter', 'focus'].includes(e.type) && !this.showOnClick) this.showTooltip = true
       else if (['mouseleave', 'blur'].includes(e.type) && !this.showOnClick) this.showTooltip = false
 
