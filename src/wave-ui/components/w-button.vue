@@ -127,6 +127,8 @@ $spinner-size: 40;
   text-overflow: ellipsis;
   user-select: none;
   cursor: pointer;
+  color: inherit; // Override the default color in Safari.
+  z-index: 1;
   // Background-color must not transition to not affect the hover & focus states
   // in :before & :after.
   transition: $transition-duration, background-color 0s, padding 0s;
@@ -158,7 +160,7 @@ $spinner-size: 40;
   }
   &--icon {
     border-radius: 5em;
-    padding: round(0.4 * $base-increment);
+    padding: 0;
   }
   &--tile {border-radius: initial;}
   &--shadow {box-shadow: $box-shadow;}
@@ -174,20 +176,21 @@ $spinner-size: 40;
   }
 
   // Sizes adjustments (always an even number for easier vertical alignments).
-  &.size--xs {line-height: round(1.25 * $base-font-size / 2) * 2;}
-  &.size--sm {line-height: round(1.6 * $base-font-size / 2) * 2;}
-  &.size--md {line-height: round(1.9 * $base-font-size / 2) * 2;}
-  &.size--lg {line-height: round(2.35 * $base-font-size / 2) * 2;}
-  &.size--xl {line-height: round(2.75 * $base-font-size / 2) * 2;}
+  &.size--xs {height: round(1.25 * $base-font-size / 2) * 2;}
+  &.size--sm {height: round(1.6 * $base-font-size / 2) * 2;}
+  &.size--md {height: round(1.95 * $base-font-size / 2) * 2;}
+  &.size--lg {height: round(2.35 * $base-font-size / 2) * 2;}
+  &.size--xl {height: round(2.75 * $base-font-size / 2) * 2;}
 
   &.size--xs {padding-left: $base-increment;padding-right: $base-increment;}
   &.size--xl {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
   &--round.size--xs {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
   &--round.size--xl {padding-left: round(4.5 * $base-increment);padding-right: round(4.5 * $base-increment);}
-  &--icon.size--xs, &--icon.size--sm, &--icon.size--md {padding: round(0.4 * $base-increment);}
-  &--icon.size--md {padding: $base-increment;}
-  &--icon.size--lg {padding: round(1.5 * $base-increment);}
-  &--icon.size--xl {padding: 2 * $base-increment;}
+  &--icon.size--xs {width: round(1.25 * $base-font-size / 2) * 2;}
+  &--icon.size--sm {width: round(1.6 * $base-font-size / 2) * 2;}
+  &--icon.size--md {width: round(1.95 * $base-font-size / 2) * 2;}
+  &--icon.size--lg {width: round(2.35 * $base-font-size / 2) * 2;}
+  &--icon.size--xl {width: round(2.75 * $base-font-size / 2) * 2;}
 
   // Overlay to mark the focus, hover and active state.
   &:before {
@@ -198,18 +201,19 @@ $spinner-size: 40;
     right: 0;
     bottom: 0;
     opacity: 0;
-    background-color: currentColor;
+    background-color: #000;
     border-radius: inherit;
-    transition: opacity 0.3s ease-out, background-color 0s 0.3s ease-out;
+    @include default-transition;
   }
 
-  &--dark:before {background-color: #fff;}
+  &--dark:before, &.primary--bg:before {background-color: #fff;}
+  &--outline:before, &--text:before {background-color: currentColor;}
 
   // Button states.
   // ------------------------------------------------------
   // Hover & focus states - inside button.
   &:hover:before, &:focus:before {opacity: 0.08;}
-  &--dark:hover:before, &--dark:focus:before,
+  &--dark:hover:before, &--dark:focus:before {opacity: 0.2;}
   &--outline:hover:before, &--outline:focus:before,
   &--text:hover:before, &--text:focus:before {opacity: 0.12;}
 
@@ -237,7 +241,7 @@ $spinner-size: 40;
 
   // Active state.
   &:active:before {opacity: 0.2;}
-  &--dark:active:before {opacity: 0.3;}
+  &--dark:active:before, &.primary--bg:active:before {opacity: 0.25;}
 
   // Disable visual feedback on loading and disabled buttons.
   &--loading:hover:before,
