@@ -18,9 +18,6 @@
  * can't have children like <input>.
  * So a solution is to mount both the activator element and the tooltip in a wrapper then unwrap
  * and move the tooltip elsewhere in the DOM.
- *
- * @todo Add an option to attach tooltip to its activator.
- *       It would simplify the calculations and avoid DOM manipulation.
  */
 
 import { consoleWarn } from '../utils/console'
@@ -71,7 +68,7 @@ export default {
       else if (target && !['object', 'string'].includes(typeof target)) target = '.w-app'
       else if (typeof target === 'object' && !target.nodeType) {
         target = '.w-app'
-        consoleWarn('Invalid node provided in w-tooltip attach-to. Falling back to w-app.', this)
+        consoleWarn('Invalid node provided in w-tooltip `attach-to`. Falling back to .w-app.', this)
       }
       if (typeof target === 'string') target = document.querySelector(target)
 
@@ -83,8 +80,8 @@ export default {
       return target
     },
 
-    // DOM element to attach tooltip to.
-    tooltipWrapperEl () {
+    // DOM element that will receive the tooltip.
+    tooltipParentEl () {
       return this.detachTo ? this.detachToTarget : this.$refs.wrapper
     },
 
@@ -180,7 +177,7 @@ export default {
       let coords = { top, left, width, height }
 
       if (!this.fixed) {
-        const { top: targetTop, left: targetLeft } = this.tooltipWrapperEl.getBoundingClientRect()
+        const { top: targetTop, left: targetLeft } = this.tooltipParentEl.getBoundingClientRect()
         coords = { ...coords, top: top - targetTop, left: left - targetLeft }
       }
 
@@ -228,8 +225,8 @@ export default {
 
   beforeDestroy () {
     if (this.detachTo) {
-      this.$refs.tooltip.remove()
-      this.activatorEl.remove()
+      if (this.$refs.tooltip) this.$refs.tooltip.remove()
+      if (this.activatorEl) this.activatorEl.remove()
     }
   },
 
