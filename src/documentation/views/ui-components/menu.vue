@@ -7,7 +7,7 @@ div
   title-link(h2) Show on click or on hover
   w-menu
     template(#activator="{ on }")
-      w-button.mr4(v-on="on" outline color="primary") Show menu on click
+      w-button.mr3(v-on="on" outline color="primary") Show menu on click
     | Menu content
 
   w-menu(show-on-hover)
@@ -16,7 +16,7 @@ div
     | Menu content
 
   title-link(h2) Position
-  w-flex(:gap="4" wrap)
+  w-flex(:gap="3" wrap)
     w-menu(left)
       template(#activator="{ on }")
         w-button(v-on="on" outline color="primary") Show menu on left
@@ -37,11 +37,11 @@ div
   title-link(h2) Color &amp; background color
   w-menu(color="blue-dark2" bg-color="blue-light5")
     template(#activator="{ on }")
-      w-button(v-on="on" outline color="primary") Show menu on hover
+      w-button(v-on="on" outline color="primary") Show a blue menu
     | Menu content
 
   title-link(h2) Tile, round and shadow
-  w-flex(wrap :gap="4")
+  w-flex(wrap :gap="3")
     w-menu(tile)
       template(#activator="{ on }")
         w-button(v-on="on" outline color="primary") Show a tile menu
@@ -57,22 +57,25 @@ div
 
   title-link(h2) Menu content: w-card
   p By default the menu is a w-card, so it accepts all the props of a w-card.
-  w-menu(shadow)
-    template(#activator="{ on }")
-      w-button(v-on="on" outline color="primary") Show a list menu
+  w-menu(shadow v-model="showMenu")
+    template(#activator)
+      w-button.mr3(@click="showMenu = true" outline color="primary") Show a w-card menu
     p How much do you like Wave UI?
     p Pick a serious answer.
-    w-flex.pl6.mt4(wrap justify-end)
-      w-button.mr2(text color="green") Love it!
-      w-button.mr2(text color="green") Love it!
-      w-button(text color="green") Love it!
-  //- w-menu(shadow)
+    w-flex.pl10.mt4(wrap justify-end)
+      w-button.mr1(text color="green" @click="showMenu = false") Love it!
+      w-button.mr1(text color="green" @click="showMenu = false") Love it!
+      w-button(text color="green" @click="showMenu = false") Love it!
+  w-menu(shadow custom)
     template(#activator="{ on }")
       w-button(v-on="on" outline color="primary") Show a list menu
-    w-toolbar.pa0(top)
-     .title3 Menu Title
-     span Item 1
-     span Item 2
+    w-card.white--bg(content-class="pa0")
+      w-toolbar
+        .title3.ma0 Menu Title
+        .spacer
+        span.ml1 Item 1
+        span.ml1 Item 2
+      .pa3 This is some content in a w-card component.
 
   title-link(h2) Custom content: List menu
   p.
@@ -81,15 +84,28 @@ div
   w-menu(shadow custom)
     template(#activator="{ on }")
       w-button(v-on="on" outline color="primary") Show a list menu
-    w-list.px2.white--bg(
+    w-list.white--bg(
       hover
       nav
-      :items="[{ label: 'Item 1', route: '#item1' }, { label: 'Item 2', route: '#item2' }, { label: 'Item 3', route: '#item3' }]")
+      :items="[{ label: 'Item 1', route: '#item1' }, { label: 'Item 2', route: '#item2' }, { label: 'Item 3', route: '#item3' }]"
+      item-class="px8")
+
+  title-link(h2) Menu with overlay
+  w-menu(shadow custom overlay)
+    template(#activator="{ on }")
+      w-button(v-on="on" outline color="primary") Show a menu &amp; overlay
+    w-list.white--bg(
+      hover
+      nav
+      :items="[{ label: 'Item 1', route: '#item1' }, { label: 'Item 2', route: '#item2' }, { label: 'Item 3', route: '#item3' }]"
+      item-class="px8")
 
 </template>
 
 <script>
 export default {
-
+  data: () => ({
+    showMenu: false
+  })
 }
 </script>

@@ -13,7 +13,13 @@
         :class="classes"
         :style="styles")
         slot
-    w-overlay(v-if="overlay" ref="overlay" :value="showMenu" :z-index="(zIndex || 100) - 1")
+    w-overlay(
+      v-if="overlay"
+      ref="overlay"
+      :value="showMenu"
+      :persistent="persistent"
+      :z-index="(zIndex || 100) - 1"
+      @input="showMenu = false")
 </template>
 
 <script>
@@ -53,8 +59,9 @@ export default {
     bottom: { type: Boolean },
     left: { type: Boolean },
     right: { type: Boolean },
-    overlay: { type: Boolean, default: true },
-    zIndex: { type: [Number, String, Boolean] }
+    zIndex: { type: [Number, String, Boolean] },
+    overlay: { type: Boolean },
+    persistent: { type: Boolean }
   },
 
   data: () => ({
