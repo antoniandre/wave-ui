@@ -21,7 +21,12 @@ const renderListItems = function (createEl) {
 
     return createEl(
       'li',
-      { class: { 'w-list__item': true, 'w-list__item--parent': (li.children || []).length } },
+      {
+        class: {
+          'w-list__item': true,
+          'w-list__item--parent': (li.children || []).length
+        }
+      },
       vnodes)
   })
 }
@@ -135,6 +140,7 @@ export default {
     icon: { type: String, default: '' },
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
     itemValue: { type: String, default: 'value' }, // Name of the value field.
+    itemClass: { type: String },
     depth: { type: Number, default: 0 } // For recursive call.
   },
 
@@ -201,7 +207,8 @@ export default {
         'w-list__item-label--disabled': item.disabled || (this.nav && !item.route && !item.children),
         'w-list__item-label--active': this.isSelectable && item.selected || null,
         'w-list__item-label--hoverable': this.hover,
-        'w-list__item-label--selectable': this.isSelectable
+        'w-list__item-label--selectable': this.isSelectable,
+        [this.itemClass]: !!this.itemClass
       }
     },
     // Make sure the items selection is always an array.
