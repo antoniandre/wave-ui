@@ -2,16 +2,16 @@
   .w-menu-wrapper(ref="wrapper")
     slot(name="activator" :on="eventHandlers")
     transition(:name="transitionName")
+      .w-menu(v-if="custom" ref="menu" v-show="showMenu" :class="classes" :style="styles")
+        slot
       w-card.w-menu(
-        v-if="card"
+        v-else
         ref="menu"
         v-show="showMenu"
         :tile="tile"
         :shadow="shadow"
         :class="classes"
         :style="styles")
-        slot
-      .w-menu(v-else ref="menu" v-show="showMenu" :class="classes" :style="styles")
         slot
 </template>
 
@@ -24,12 +24,12 @@
  * So a solution is to mount both the activator element and the menu in a wrapper then unwrap
  * and move the menu elsewhere in the DOM.
  *
- * @todo Add an option to attach menu to its activator.
- *       It would simplify the calculations and avoid DOM manipulation.
  * @todo Fix slide-fade-bottom transition.
  */
 
 import { consoleWarn } from '../utils/console'
+
+const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
 
 export default {
   name: 'w-menu',
@@ -40,13 +40,13 @@ export default {
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     shadow: { type: Boolean },
-    card: { type: Boolean }, // Include a w-card or not.
+    custom: { type: Boolean }, // Include a w-card or not. It does by default.
     tile: { type: Boolean },
     round: { type: Boolean },
     transition: { type: String, default: '' },
     menuClass: { type: String, default: '' },
     // Position.
-    attachTo: {},
+    detachTo: {},
     fixed: { type: Boolean },
     top: { type: Boolean },
     bottom: { type: Boolean },
@@ -54,6 +54,7 @@ export default {
     right: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] }
   },
+
   data: () => ({
     showMenu: false,
     // The activator coordinates.
@@ -63,7 +64,9 @@ export default {
       width: 0,
       height: 0
     },
-    activatorEl: null
+    activatorEl: null,
+    menuEl: null,
+    timeoutId: null
   }),
 
   computed: {
@@ -72,22 +75,27 @@ export default {
     },
 
     // DOM element to attach menu to.
-    attachToTarget () {
-      let target = this.attachTo || '.w-app'
+    detachToTarget () {
+      let target = this.detachTo || '.w-app'
       if (target === true) target = '.w-app'
       else if (target && !['object', 'string'].includes(typeof target)) target = '.w-app'
       else if (typeof target === 'object' && !target.nodeType) {
         target = '.w-app'
-        consoleWarn('Invalid node provided in w-menu attach-to. Falling back to w-app.', this)
+        consoleWarn('Invalid node provided in w-menu `detach-to`. Falling back to .w-app.', this)
       }
       if (typeof target === 'string') target = document.querySelector(target)
 
       if (!target) {
-        consoleWarn(`Unable to locate ${this.attachTo ? `target ${this.attachTo}` : '.w-app'}`, this)
+        consoleWarn(`Unable to locate ${this.detachTo ? `target ${this.detachTo}` : '.w-app'}`, this)
         target = document.querySelector('.w-app')
       }
 
       return target
+    },
+
+    // DOM element that will receive the menu.
+    menuParentEl () {
+      return this.detachToTarget
     },
 
     position () {
@@ -103,7 +111,8 @@ export default {
     menuCoordinates () {
       const coords = {}
       const { top, left, width, height } = this.coordinates
-      switch(this.position) {
+
+      switch (this.position) {
         case 'top': {
           coords.top = top
           coords.left = left + width / 2 // left: 50%.
@@ -131,11 +140,12 @@ export default {
 
     classes () {
       return {
-        [`${this.bgColor}--bg`]: this.bgColor,
         [this.color]: this.color,
+        [`${this.bgColor}--bg`]: this.bgColor,
         [this.menuClass]: this.menuClass,
+        [`w-menu--${this.position}`]: true,
         'w-menu--tile': this.tile,
-        'w-menu--card': this.card,
+        'w-menu--card': !this.custom,
         'w-menu--round': this.round,
         'w-menu--shadow': this.shadow,
         'w-menu--fixed': this.fixed
@@ -159,6 +169,8 @@ export default {
           mouseenter: this.toggle,
           mouseleave: this.toggle
         }
+
+        if ('ontouchstart' in window) handlers.click = this.toggle
       }
       else handlers = { click: this.toggle }
       return handlers
@@ -167,11 +179,23 @@ export default {
 
   methods: {
     toggle (e) {
-      if (e.type === 'click' && !this.showOnHover) this.showMenu = !this.showMenu
-      if (e.type === 'mouseenter' && this.showOnHover) this.showMenu = true
-      if (e.type === 'mouseleave' && this.showOnHover) this.showMenu = false
+      let shouldShowMenu = this.showMenu
+      if ('ontouchstart' in window && this.showOnHover) {
+        if (e.type === 'click') shouldShowMenu = !shouldShowMenu
+      }
+      if (e.type === 'click' && !this.showOnHover) shouldShowMenu = !shouldShowMenu
+      if (e.type === 'mouseenter' && this.showOnHover) shouldShowMenu = true
+      if (e.type === 'mouseleave' && this.showOnHover) shouldShowMenu = false
 
-      if (this.showMenu) this.coordinates = this.getCoordinates(e)
+      this.timeoutId = clearTimeout(this.timeoutId)
+      if (shouldShowMenu) {
+        this.coordinates = this.getCoordinates(e)
+        // In `getCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
+        // if we don't postpone the Menu apparition it will start transition from a visible menu and
+        // thus will not transition.
+        this.timeoutId = setTimeout(() => (this.showMenu = true), 10)
+      }
+      else this.showMenu = false
     },
 
     getCoordinates (e) {
@@ -179,46 +203,69 @@ export default {
       let coords = { top, left, width, height }
 
       if (!this.fixed) {
-        const { top: targetTop, left: targetLeft } = this.attachToTarget.getBoundingClientRect()
+        const { top: targetTop, left: targetLeft } = this.menuParentEl.getBoundingClientRect()
         coords = { ...coords, top: top - targetTop, left: left - targetLeft }
       }
 
-      if (this.transition) {
-        const menuEl = this.$refs.menu.$el || this.$refs.menu
-        menuEl.style.visibility = 'hidden'
-        menuEl.style.display = 'block'
+      // 1. First display the menu but hide it (So we can get its dimension).
+      this.menuEl.style.visibility = 'hidden'
+      this.menuEl.style.display = 'table'
+      const computedStyles = window.getComputedStyle(this.menuEl, null)
 
-        // If menu is on top or bottom.
-        if (['top', 'bottom'].includes(this.position)) coords.left -= menuEl.offsetWidth / 2
-        // If menu is on left or right.
-        if (['left', 'right'].includes(this.position)) coords.top -= menuEl.offsetHeight / 2
-
-        if (this.position === 'left') coords.left -= menuEl.offsetWidth
-        if (this.position === 'top') coords.top -= menuEl.offsetHeight
-
-        menuEl.style.visibility = null
-        menuEl.style.display = 'none'
+      // Keep fully in viewport.
+      // --------------------------------------------------
+      if (this.position === 'top' && ((top - this.menuEl.offsetHeight) < 0)) {
+        const margin = - parseInt(computedStyles.getPropertyValue('margin-top'))
+        coords.top -= top - this.menuEl.offsetHeight - margin - marginFromWindowSide
       }
+      else if (this.position === 'left' && left - this.menuEl.offsetWidth < 0) {
+        const margin = - parseInt(computedStyles.getPropertyValue('margin-left'))
+        coords.left -= left - this.menuEl.offsetWidth - margin - marginFromWindowSide
+      }
+      else if (this.position === 'right' && left + width + this.menuEl.offsetWidth > window.innerWidth) {
+        const margin = parseInt(computedStyles.getPropertyValue('margin-left'))
+        coords.left -= left + width + this.menuEl.offsetWidth - window.innerWidth + margin + marginFromWindowSide
+      }
+      else if (this.position === 'bottom' && top + height + this.menuEl.offsetHeight > window.innerHeight) {
+        const margin = parseInt(computedStyles.getPropertyValue('margin-top'))
+        coords.top -= top + height + this.menuEl.offsetHeight - window.innerHeight + margin + marginFromWindowSide
+      }
+      // --------------------------------------------------
+
+      // 2. Update left & top for custom transition.
+      // Menu position relies on transform translate, the custom animation may override the transform property
+      // so do without it and subtract half width or height manually.
+      // If menu is on top or bottom.
+      if (['top', 'bottom'].includes(this.position)) coords.left -= this.menuEl.offsetWidth / 2
+      // If menu is on left or right.
+      if (['left', 'right'].includes(this.position)) coords.top -= this.menuEl.offsetHeight / 2
+
+      if (this.position === 'left') coords.left -= this.menuEl.offsetWidth
+      if (this.position === 'top') coords.top -= this.menuEl.offsetHeight
+
+      // 3. Hide the menu again so the transition happens correctly.
+      this.menuEl.style.visibility = null
+      this.menuEl.style.display = 'none'
 
       return coords
     },
 
     insertMenu () {
       const wrapper = this.$refs.wrapper
-
+      this.menuEl = this.$refs.menu.$el || this.$refs.menu
       // Unwrap the activator element.
-      this.activatorEl = wrapper.firstChild
       wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
 
       // Move the menu elsewhere in the DOM.
-      // wrapper.parentNode.insertBefore((this.$refs.menu.$el || this.$refs.menu), wrapper)
-      this.attachToTarget.appendChild((this.$refs.menu.$el || this.$refs.menu))
+      // wrapper.parentNode.insertBefore(this.menuEl, wrapper)
+      this.detachToTarget.appendChild(this.menuEl)
     }
   },
 
   beforeMount () {
     // Do this, first thing on mounted (beforeMount + nextTick).
     this.$nextTick(() => {
+      this.activatorEl = this.$refs.wrapper.firstChild
       this.insertMenu()
 
       if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
@@ -226,8 +273,8 @@ export default {
   },
 
   beforeDestroy () {
-    (this.$refs.menu.$el || this.$refs.menu).remove()
-    this.activatorEl.remove()
+    if (this.menuEl) this.menuEl.remove()
+    if (this.activatorEl) this.activatorEl.remove()
   },
 
   watch: {
@@ -242,10 +289,24 @@ export default {
 .w-menu-wrapper {display: none;}
 
 .w-menu {
+  // Fix Safari where `width: max-content` does not take padding and border into consideration.
+  display: table;
+
   position: absolute;
   z-index: 100;
 
   &--fixed {position: fixed;z-index: 1000;}
   &--card {background-color: #fff;}
+  &--tile {border-radius: 0;}
+  &--round {
+    border-radius: 5em;
+    padding: $base-increment round(2.5 * $base-increment);
+  }
+  &--shadow {box-shadow: $box-shadow;}
+
+  &--top {margin-top: -3 * $base-increment;}
+  &--bottom {margin-top: 3 * $base-increment;}
+  &--left {margin-left: -3 * $base-increment;}
+  &--right {margin-left: 3 * $base-increment;}
 }
 </style>
