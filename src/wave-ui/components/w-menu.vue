@@ -13,6 +13,7 @@
         :class="classes"
         :style="styles")
         slot
+    w-overlay(v-if="overlay" ref="overlay" :value="showMenu" :z-index="(zIndex || 100) - 1")
 </template>
 
 <script>
@@ -52,6 +53,7 @@ export default {
     bottom: { type: Boolean },
     left: { type: Boolean },
     right: { type: Boolean },
+    overlay: { type: Boolean, default: true },
     zIndex: { type: [Number, String, Boolean] }
   },
 
@@ -154,7 +156,7 @@ export default {
 
     styles () {
       return {
-        zIndex: this.zIndex || this.zIndex === 0 || null,
+        zIndex: this.zIndex || this.zIndex === 0 || (this.overlay && !this.zIndex && 100) || null,
         top: `${~~this.menuCoordinates.top}px`,
         left: `${~~this.menuCoordinates.left}px`
       }
@@ -256,6 +258,9 @@ export default {
       // Unwrap the activator element.
       wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
 
+      // Unwrap the overlay
+      if (this.overlay) wrapper.parentNode.insertBefore(this.overlayEl, wrapper)
+
       // Move the menu elsewhere in the DOM.
       // wrapper.parentNode.insertBefore(this.menuEl, wrapper)
       this.detachToTarget.appendChild(this.menuEl)
@@ -266,6 +271,7 @@ export default {
     // Do this, first thing on mounted (beforeMount + nextTick).
     this.$nextTick(() => {
       this.activatorEl = this.$refs.wrapper.firstChild
+      this.overlayEl = this.overlay ? this.$refs.overlay.$el : null
       this.insertMenu()
 
       if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
@@ -274,6 +280,7 @@ export default {
 
   beforeDestroy () {
     if (this.menuEl) this.menuEl.remove()
+    if (this.overlay) this.overlayEl.remove()
     if (this.activatorEl) this.activatorEl.remove()
   },
 
