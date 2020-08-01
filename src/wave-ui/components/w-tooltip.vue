@@ -227,7 +227,7 @@ export default {
       // --------------------------------------------------
 
       // 2. Update left & top if there is a custom transition.
-      // Tooltip position relies on transform translate, the custom animation may override the trnasform property
+      // Tooltip position relies on transform translate, the custom animation may override the transform property
       // so do without it and subtract half width or height manually.
       if (this.transition) {
         // If tooltip is on top or bottom.
