@@ -22,6 +22,8 @@
 
 import { consoleWarn } from '../utils/console'
 
+const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
+
 export default {
   name: 'w-tooltip',
   props: {
@@ -54,7 +56,8 @@ export default {
       width: 0,
       height: 0
     },
-    activatorEl: null
+    activatorEl: null,
+    timeoutId: null
   }),
 
   computed: {
@@ -98,7 +101,8 @@ export default {
     tooltipCoordinates () {
       const coords = {}
       const { top, left, width, height } = this.coordinates
-      switch(this.position) {
+
+      switch (this.position) {
         case 'top': {
           coords.top = top
           coords.left = left + width / 2 // left: 50%.
@@ -167,18 +171,27 @@ export default {
 
   methods: {
     toggle (e) {
+      let shouldShowTooltip = this.showTooltip
       if ('ontouchstart' in window) {
-        if (e.type === 'click') this.showTooltip = !this.showTooltip
+        if (e.type === 'click') shouldShowTooltip = !shouldShowTooltip
       }
-      else if (e.type === 'click' && this.showOnClick) this.showTooltip = !this.showTooltip
-      else if (['mouseenter', 'focus'].includes(e.type) && !this.showOnClick) this.showTooltip = true
-      else if (['mouseleave', 'blur'].includes(e.type) && !this.showOnClick) this.showTooltip = false
+      else if (e.type === 'click' && this.showOnClick) shouldShowTooltip = !shouldShowTooltip
+      else if (['mouseenter', 'focus'].includes(e.type) && !this.showOnClick) shouldShowTooltip = true
+      else if (['mouseleave', 'blur'].includes(e.type) && !this.showOnClick) shouldShowTooltip = false
 
-      if (this.showTooltip) this.coordinates = this.getCoordinates(e)
+      this.timeoutId = clearTimeout(this.timeoutId)
+      if (shouldShowTooltip) {
+        this.coordinates = this.getCoordinates(e)
+        // In `getCoordinates` accessing the tooltip computed styles takes a few ms (less than 10ms),
+        // if we don't postpone the tooltip apparition it will start transition from a visible tooltip and
+        // thus will not transition.
+        this.timeoutId = setTimeout(() => (this.showTooltip = true), 10)
+      }
+      else this.showTooltip = false
     },
 
-    getCoordinates (e) {
-      const { top, left, width, height } = e.target.getBoundingClientRect()
+    getCoordinates () {
+      const { top, left, width, height } = this.activatorEl.getBoundingClientRect()
       let coords = { top, left, width, height }
 
       if (!this.fixed) {
@@ -186,11 +199,37 @@ export default {
         coords = { ...coords, top: top - targetTop, left: left - targetLeft }
       }
 
-      if (this.transition) {
-        const tooltipEl = this.$refs.tooltip
-        tooltipEl.style.visibility = 'hidden'
-        tooltipEl.style.display = 'block'
+      const tooltipEl = this.$refs.tooltip
 
+      // 1. First display the tooltip but hide it (So we can get its dimension).
+      tooltipEl.style.visibility = 'hidden'
+      tooltipEl.style.display = 'table'
+      const computedStyles = window.getComputedStyle(tooltipEl, null)
+
+      // Keep fully in viewport.
+      // --------------------------------------------------
+      if (this.position === 'top' && ((top - tooltipEl.offsetHeight) < 0)) {
+        const margin = - parseInt(computedStyles.getPropertyValue('margin-top'))
+        coords.top -= top - tooltipEl.offsetHeight - margin - marginFromWindowSide
+      }
+      else if (this.position === 'left' && left - tooltipEl.offsetWidth < 0) {
+        const margin = - parseInt(computedStyles.getPropertyValue('margin-left'))
+        coords.left -= left - tooltipEl.offsetWidth - margin - marginFromWindowSide
+      }
+      else if (this.position === 'right' && left + width + tooltipEl.offsetWidth > window.innerWidth) {
+        const margin = parseInt(computedStyles.getPropertyValue('margin-left'))
+        coords.left -= left + width + tooltipEl.offsetWidth - window.innerWidth + margin + marginFromWindowSide
+      }
+      else if (this.position === 'bottom' && top + height + tooltipEl.offsetHeight > window.innerHeight) {
+        const margin = parseInt(computedStyles.getPropertyValue('margin-top'))
+        coords.top -= top + height + tooltipEl.offsetHeight - window.innerHeight + margin + marginFromWindowSide
+      }
+      // --------------------------------------------------
+
+      // 2. Update left & top if there is a custom transition.
+      // Tooltip position relies on transform translate, the custom animation may override the trnasform property
+      // so do without it and subtract half width or height manually.
+      if (this.transition) {
         // If tooltip is on top or bottom.
         if (['top', 'bottom'].includes(this.position)) coords.left -= tooltipEl.offsetWidth / 2
         // If tooltip is on left or right.
@@ -198,10 +237,11 @@ export default {
 
         if (this.position === 'left') coords.left -= tooltipEl.offsetWidth
         if (this.position === 'top') coords.top -= tooltipEl.offsetHeight
-
-        tooltipEl.style.visibility = null
-        tooltipEl.style.display = 'none'
       }
+
+      // 3. Hide the tooltip again so the transition happens correctly.
+      tooltipEl.style.visibility = null
+      tooltipEl.style.display = 'none'
 
       return coords
     },
@@ -253,7 +293,6 @@ export default {
 .w-tooltip {
   // Fix Safari where `width: max-content` does not take padding and border into consideration.
   display: table;
-  // display: flex;
 
   position: absolute;
   padding: $base-increment round(1.5 * $base-increment);
