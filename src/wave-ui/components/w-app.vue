@@ -86,6 +86,7 @@ export default {
 @import '../scss/index';
 
 .w-app {
+  position: relative; // Make the .w-app a referential for tooltips / menus.
   height: 100%;
   display: flex;
   flex-direction: column;
