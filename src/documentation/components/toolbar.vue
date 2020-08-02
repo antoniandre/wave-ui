@@ -9,7 +9,7 @@ w-toolbar.main-toolbar(fixed)
       a.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
         w-icon(md) mdi mdi-github
     .size--xs.text-nowrap View the project on Github
-  .caption Version 1.0 alpha
+  .caption Version 1.0 Beta
   w-button.ml2.mr-1.hamburger-menu(
     v-if="$waveui.breakpoint.xs"
     @click="$emit('update:drawerOpen', !drawerOpen)"
