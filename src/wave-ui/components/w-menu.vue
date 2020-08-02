@@ -30,8 +30,6 @@
  * can't have children like <input>.
  * So a solution is to mount both the activator element and the menu in a wrapper then unwrap
  * and move the menu elsewhere in the DOM.
- *
- * @todo Fix slide-fade-bottom transition.
  */
 
 import { consoleWarn } from '../utils/console'
