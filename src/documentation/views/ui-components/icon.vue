@@ -197,12 +197,38 @@ div
           w-icon.mr1(md color="primary") fa fa-heart
           w-icon.mr1(xl color="primary") fa fa-heart
 
-  title-link(h2) Spin
-  p You can also spin the icons.
-  example(content-class="w-flex align-center")
+  title-link(h2) Transformations
+  p You can also spin the icons, rotate and flip them.
+  example
+    .title4 Spin
     w-icon.mr1(xl color="primary" spin) mdi mdi-star
+
+    .title4.mt6 Rotate
+    w-icon.mr1(xl color="primary") mdi mdi-paw
+    w-icon.mr1(xl color="primary" rotate45) mdi mdi-paw
+    w-icon.mr1(xl color="primary" rotate90) mdi mdi-paw
+    w-icon.mr1(xl color="primary" rotate135) mdi mdi-paw
+    w-icon.mr1(xl color="primary" rotate180) mdi mdi-paw
+
+    .title4.mt6 Flip
+    w-icon.mr1(xl color="primary") mdi mdi-thumb-up
+    w-icon.mr1(xl color="primary" flip-x) mdi mdi-thumb-up
+    w-icon.mr1(xl color="primary" flip-y) mdi mdi-thumb-up
     template(#pug).
+      .title4 Spin
       w-icon.mr1(xl color="primary" spin) mdi mdi-star
+
+      .title4.mt6 Rotate
+      w-icon.mr1(xl color="primary") mdi mdi-paw
+      w-icon.mr1(xl color="primary" rotate45) mdi mdi-paw
+      w-icon.mr1(xl color="primary" rotate90) mdi mdi-paw
+      w-icon.mr1(xl color="primary" rotate135) mdi mdi-paw
+      w-icon.mr1(xl color="primary" rotate180) mdi mdi-paw
+
+      .title4.mt6 Flip
+      w-icon.mr1(xl color="primary") mdi mdi-thumb-up
+      w-icon.mr1(xl color="primary" flip-x) mdi mdi-thumb-up
+      w-icon.mr1(xl color="primary" flip-y) mdi mdi-thumb-up
 </template>
 
 <script>
