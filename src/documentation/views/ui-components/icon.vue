@@ -208,7 +208,6 @@ div
 <script>
 import 'material-design-icons/iconfont/material-icons.css'
 import 'font-awesome/css/font-awesome.min.css'
-import 'ionicons/dist/css/ionicons.min.css'
 import config from '@/wave-ui/utils/config'
 
 export default {
@@ -221,3 +220,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+@import '~ionicons/dist/css/ionicons.min.css';
+</style>
