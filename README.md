@@ -1,4 +1,4 @@
-# Wave UI - ALPHA VERSION AVAILABLE! :tada:
+# Wave UI - Beta
 
 [![Latest Version on NPM](https://img.shields.io/npm/v/the-wave-ui.svg)](https://npmjs.com/package/the-wave-ui)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
@@ -25,7 +25,7 @@ ___
 
 ___
 
-## install - ALPHA VERSION AVAILABLE!
+## install
     npm i --S the-wave-ui
 
 > WARNING: the name `wave-ui` is taken at the moment. Make sure to install `the-wave-ui`!
