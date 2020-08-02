@@ -60,7 +60,7 @@ div
   w-menu(shadow v-model="showMenu")
     template(#activator)
       w-button.mr3(@click="showMenu = true" outline color="primary") Show a w-card menu
-    p How much do you like Wave UI?
+    .title4 How much do you like Wave UI?
     p Pick a serious answer.
     w-flex.pl10.mt4(wrap justify-end)
       w-button.mr1(text color="green" @click="showMenu = false") Love it!
@@ -81,31 +81,34 @@ div
   p.
     By default the menu is a w-card but if you need more flexibility, you can set the custom prop and put
     whatever you want in it, free of style.
-  w-menu(shadow custom)
+  w-menu(v-model="showListMenu1" shadow custom)
     template(#activator="{ on }")
       w-button(v-on="on" outline color="primary") Show a list menu
     w-list.white--bg(
-      hover
-      nav
+      v-model="list"
       :items="[{ label: 'Item 1', route: '#item1' }, { label: 'Item 2', route: '#item2' }, { label: 'Item 3', route: '#item3' }]"
-      item-class="px8")
+      item-class="px8"
+      @item-click="showListMenu1 = false")
 
   title-link(h2) Menu with overlay
-  w-menu(shadow custom overlay)
+  w-menu(v-model="showListMenu2" shadow custom overlay)
     template(#activator="{ on }")
       w-button(v-on="on" outline color="primary") Show a menu &amp; overlay
     w-list.white--bg(
-      hover
       nav
       :items="[{ label: 'Item 1', route: '#item1' }, { label: 'Item 2', route: '#item2' }, { label: 'Item 3', route: '#item3' }]"
-      item-class="px8")
+      item-class="px8"
+      @item-click="showListMenu2 = false")
 
 </template>
 
 <script>
 export default {
   data: () => ({
-    showMenu: false
+    showMenu: false,
+    showListMenu1: false,
+    showListMenu2: false,
+    list: []
   })
 }
 </script>
