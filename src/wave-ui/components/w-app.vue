@@ -90,7 +90,6 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
 
   &.d-block {display: block;}
 }
