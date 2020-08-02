@@ -2,6 +2,156 @@
 div
   title-link.mt4.code(h1) w-icon
 
+  title-link(h2) Different icon fonts supported
+  p.
+    Wave UI works with your favorite icon font or even your own custom one.#[br]
+    Bellow are some examples using a few popular and free icons fonts.
+
+  ul
+    li
+      h3.title3 Material Design Icons - community full set
+      p
+        a(href="https://materialdesignicons.com" target="_blank")
+          | Material Design Icons Cheatsheet
+          w-icon.ml1 mdi mdi-open-in-new
+
+      ssh-pre(language="bash") npm install @mdi/font
+      ssh-pre(language="js") import '@mdi/font/css/materialdesignicons.min.css'
+
+      example
+        w-icon.mr1(xs color="primary") mdi mdi-star
+        w-icon.mr1(md color="primary") mdi mdi-star
+        w-icon.mr1(xl color="primary") mdi mdi-star
+        br
+        w-icon.mr1(xs color="primary") mdi mdi-heart
+        w-icon.mr1(md color="primary") mdi mdi-heart
+        w-icon.mr1(xl color="primary") mdi mdi-heart
+        template(#pug).
+          w-icon.mr1(xs color="primary") mdi mdi-star
+          w-icon.mr1(md color="primary") mdi mdi-star
+          w-icon.mr1(xl color="primary") mdi mdi-star
+          br
+          w-icon.mr1(xs color="primary") mdi mdi-heart
+          w-icon.mr1(md color="primary") mdi mdi-heart
+          w-icon.mr1(xl color="primary") mdi mdi-heart
+
+    li
+      h3.title3 Material Design Icons #[strong with ligatures]
+      p
+        | This set of icons works differently as it uses ligatures.#[br]
+        | To use icons ligatures, you need to activate it in the Wave UI options:
+        code.ml1 { iconsLigature: 'material-icons' }
+      p
+        a(href="https://material.io/resources/icons" target="_blank")
+          | Material Design Icons Cheatsheet
+          w-icon.ml1 mdi mdi-open-in-new
+
+      ssh-pre(language="bash") npm install material-design-icons
+      ssh-pre(language="js") import 'material-design-icons/iconfont/material-icons.css'
+
+      example(
+        external-css="https://fonts.googleapis.com/icon?family=Material+Icons"
+        full-js)
+        w-icon.mr1(xs color="primary") material-icons star
+        w-icon.mr1(md color="primary") material-icons star
+        w-icon.mr1(xl color="primary") material-icons star
+        br
+        w-icon.mr1(xs color="primary") material-icons favorite
+        w-icon.mr1(md color="primary") material-icons favorite
+        w-icon.mr1(xl color="primary") material-icons favorite
+        template(#pug).
+          w-icon.mr1(xs color="primary") material-icons star
+          w-icon.mr1(md color="primary") material-icons star
+          w-icon.mr1(xl color="primary") material-icons star
+          br
+          w-icon.mr1(xs color="primary") material-icons favorite
+          w-icon.mr1(md color="primary") material-icons favorite
+          w-icon.mr1(xl color="primary") material-icons favorite
+        template(#js).
+          new Vue({
+            waveui: new WaveUI({ iconsLigature: 'material-icons' })
+          }).$mount('#app')
+
+    li
+      h3.title3 Ionicons 4: iOS &amp; Material Design
+      p
+        a(href="https://ionicons.com/v4/cheatsheet.html" target="_blank")
+          | Ionicons V4 Cheatsheet
+          w-icon.ml1 mdi mdi-open-in-new
+
+      ssh-pre(language="bash") npm install ionicons
+      ssh-pre(language="js") import 'ionicons/dist/css/ionicons.min.css'
+
+      example(external-css="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.6.3/css/ionicons.min.css")
+        .w-flex
+          div.mr8
+            .text-bold.mb2.grey iOS
+            w-icon.mr1(xs color="primary") ion-ios-star
+            w-icon.mr1(md color="primary") ion-ios-star
+            w-icon.mr1(xl color="primary") ion-ios-star
+            br
+            w-icon.mr1(xs color="primary") ion-ios-heart
+            w-icon.mr1(md color="primary") ion-ios-heart
+            w-icon.mr1(xl color="primary") ion-ios-heart
+          div
+            .text-bold.mb2.grey Material Design
+            w-icon.mr1(xs color="primary") ion-md-star
+            w-icon.mr1(md color="primary") ion-md-star
+            w-icon.mr1(xl color="primary") ion-md-star
+            br
+            w-icon.mr1(xs color="primary") ion-md-heart
+            w-icon.mr1(md color="primary") ion-md-heart
+            w-icon.mr1(xl color="primary") ion-md-heart
+        template(#pug).
+          .w-flex
+            div.mr8
+              .text-bold.mb2.grey iOS
+              w-icon.mr1(xs color="primary") ion-ios-star
+              w-icon.mr1(md color="primary") ion-ios-star
+              w-icon.mr1(xl color="primary") ion-ios-star
+              br
+              w-icon.mr1(xs color="primary") ion-ios-heart
+              w-icon.mr1(md color="primary") ion-ios-heart
+              w-icon.mr1(xl color="primary") ion-ios-heart
+            div
+              .text-bold.mb2.grey Material Design
+              w-icon.mr1(xs color="primary") ion-md-star
+              w-icon.mr1(md color="primary") ion-md-star
+              w-icon.mr1(xl color="primary") ion-md-star
+              br
+              w-icon.mr1(xs color="primary") ion-md-heart
+              w-icon.mr1(md color="primary") ion-md-heart
+              w-icon.mr1(xl color="primary") ion-md-heart
+
+    li
+      h3.title3 Font Awesome 4
+      p
+        a(href="https://fontawesome.com/v4.7.0/icons/" target="_blank")
+          | Font Awesome V4 Cheatsheet
+          w-icon.ml1 mdi mdi-open-in-new
+
+      ssh-pre(language="bash") npm install font-awesome
+      ssh-pre(language="js") import 'font-awesome/css/font-awesome.min.css'
+
+      example(external-css="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+        w-icon.mr1(xs color="primary") fa fa-star
+        w-icon.mr1(md color="primary") fa fa-star
+        w-icon.mr1(xl color="primary") fa fa-star
+        br
+        w-icon.mr1(xs color="primary") fa fa-heart
+        w-icon.mr1(md color="primary") fa fa-heart
+        w-icon.mr1(xl color="primary") fa fa-heart
+        template(#pug).
+          w-icon.mr1(xs color="primary") fa fa-star
+          w-icon.mr1(md color="primary") fa fa-star
+          w-icon.mr1(xl color="primary") fa fa-star
+          br
+          w-icon.mr1(xs color="primary") fa fa-heart
+          w-icon.mr1(md color="primary") fa fa-heart
+          w-icon.mr1(xl color="primary") fa fa-heart
+
+  w-divider.my12
+
   title-link(h2) Colors
   example(content-class="w-flex align-center")
     w-icon.mr1(xl color="primary-dark1") mdi mdi-home
@@ -56,146 +206,6 @@ div
       w-icon.mr2(xl color="primary-light2") mdi mdi-home
       w-icon.mr2(color="primary-light2" :size="40") mdi mdi-home
       w-icon.mr2(color="primary-light2" size="4em") mdi mdi-home
-
-  title-link(h2) Different icon fonts supported
-  p.
-    Wave UI works with your favorite icon font or even your own custom one.#[br]
-    Bellow are some examples using a few popular and free icons fonts.
-
-  ul
-    li
-      h3.title3 Material Design Icons - community full set
-      p
-        a(href="https://materialdesignicons.com" target="_blank") Material Design Icons Cheatsheet
-
-      ssh-pre(language="bash") npm install @mdi/font
-      ssh-pre(language="js") import '@mdi/font/css/materialdesignicons.min.css'
-
-      example
-        w-icon.mr1(xs color="primary") mdi mdi-star
-        w-icon.mr1(md color="primary") mdi mdi-star
-        w-icon.mr1(xl color="primary") mdi mdi-star
-        br
-        w-icon.mr1(xs color="primary") mdi mdi-heart
-        w-icon.mr1(md color="primary") mdi mdi-heart
-        w-icon.mr1(xl color="primary") mdi mdi-heart
-        template(#pug).
-          w-icon.mr1(xs color="primary") mdi mdi-star
-          w-icon.mr1(md color="primary") mdi mdi-star
-          w-icon.mr1(xl color="primary") mdi mdi-star
-          br
-          w-icon.mr1(xs color="primary") mdi mdi-heart
-          w-icon.mr1(md color="primary") mdi mdi-heart
-          w-icon.mr1(xl color="primary") mdi mdi-heart
-
-    li
-      h3.title3 Material Design Icons #[strong with ligatures]
-      p
-        | This set of icons works differently as it uses ligatures.#[br]
-        | To use icons ligatures, you need to activate it in the Wave UI options:
-        code.ml1 { iconsLigature: 'material-icons' }
-      p
-        a(href="https://material.io/resources/icons" target="_blank") Material Design Icons Cheatsheet
-
-      ssh-pre(language="bash") npm install material-design-icons
-      ssh-pre(language="js") import 'material-design-icons/iconfont/material-icons.css'
-
-      example(
-        external-css="https://fonts.googleapis.com/icon?family=Material+Icons"
-        full-js)
-        w-icon.mr1(xs color="primary") material-icons star
-        w-icon.mr1(md color="primary") material-icons star
-        w-icon.mr1(xl color="primary") material-icons star
-        br
-        w-icon.mr1(xs color="primary") material-icons favorite
-        w-icon.mr1(md color="primary") material-icons favorite
-        w-icon.mr1(xl color="primary") material-icons favorite
-        template(#pug).
-          w-icon.mr1(xs color="primary") material-icons star
-          w-icon.mr1(md color="primary") material-icons star
-          w-icon.mr1(xl color="primary") material-icons star
-          br
-          w-icon.mr1(xs color="primary") material-icons favorite
-          w-icon.mr1(md color="primary") material-icons favorite
-          w-icon.mr1(xl color="primary") material-icons favorite
-        template(#js).
-          new Vue({
-            waveui: new WaveUI({ iconsLigature: 'material-icons' })
-          }).$mount('#app')
-
-    li
-      h3.title3 Ionicons 4: iOS &amp; Material Design
-      p
-        a(href="https://ionicons.com/v4/cheatsheet.html" target="_blank") Ionicons V4 Cheatsheet
-
-      ssh-pre(language="bash") npm install ionicons
-      ssh-pre(language="js") import 'ionicons/dist/css/ionicons.min.css'
-
-      example(external-css="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.6.3/css/ionicons.min.css")
-        .w-flex
-          div.mr8
-            .text-bold.mb2.grey iOS
-            w-icon.mr1(xs color="primary") ion-ios-star
-            w-icon.mr1(md color="primary") ion-ios-star
-            w-icon.mr1(xl color="primary") ion-ios-star
-            br
-            w-icon.mr1(xs color="primary") ion-ios-heart
-            w-icon.mr1(md color="primary") ion-ios-heart
-            w-icon.mr1(xl color="primary") ion-ios-heart
-          div
-            .text-bold.mb2.grey Material Design
-            w-icon.mr1(xs color="primary") ion-md-star
-            w-icon.mr1(md color="primary") ion-md-star
-            w-icon.mr1(xl color="primary") ion-md-star
-            br
-            w-icon.mr1(xs color="primary") ion-md-heart
-            w-icon.mr1(md color="primary") ion-md-heart
-            w-icon.mr1(xl color="primary") ion-md-heart
-        template(#pug).
-          .w-flex
-            div.mr8
-              .text-bold.mb2.grey iOS
-              w-icon.mr1(xs color="primary") ion-ios-star
-              w-icon.mr1(md color="primary") ion-ios-star
-              w-icon.mr1(xl color="primary") ion-ios-star
-              br
-              w-icon.mr1(xs color="primary") ion-ios-heart
-              w-icon.mr1(md color="primary") ion-ios-heart
-              w-icon.mr1(xl color="primary") ion-ios-heart
-            div
-              .text-bold.mb2.grey Material Design
-              w-icon.mr1(xs color="primary") ion-md-star
-              w-icon.mr1(md color="primary") ion-md-star
-              w-icon.mr1(xl color="primary") ion-md-star
-              br
-              w-icon.mr1(xs color="primary") ion-md-heart
-              w-icon.mr1(md color="primary") ion-md-heart
-              w-icon.mr1(xl color="primary") ion-md-heart
-
-    li
-      h3.title3 Font Awesome 4
-      p
-        a(href="https://fontawesome.com/v4.7.0/icons/" target="_blank") Font Awesome V4 Cheatsheet
-
-      ssh-pre(language="bash") npm install font-awesome
-      ssh-pre(language="js") import 'font-awesome/css/font-awesome.min.css'
-
-      example(external-css="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
-        w-icon.mr1(xs color="primary") fa fa-star
-        w-icon.mr1(md color="primary") fa fa-star
-        w-icon.mr1(xl color="primary") fa fa-star
-        br
-        w-icon.mr1(xs color="primary") fa fa-heart
-        w-icon.mr1(md color="primary") fa fa-heart
-        w-icon.mr1(xl color="primary") fa fa-heart
-        template(#pug).
-          w-icon.mr1(xs color="primary") fa fa-star
-          w-icon.mr1(md color="primary") fa fa-star
-          w-icon.mr1(xl color="primary") fa fa-star
-          br
-          w-icon.mr1(xs color="primary") fa fa-heart
-          w-icon.mr1(md color="primary") fa fa-heart
-          w-icon.mr1(xl color="primary") fa fa-heart
 
   title-link(h2) Transformations
   p You can also spin the icons, rotate and flip them.
