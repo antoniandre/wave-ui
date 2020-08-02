@@ -169,7 +169,7 @@ div
         template(#activator="{ on }")
           w-button(v-on="on" outline color="primary") Show a list menu
         w-list.white--bg(
-          v-model="list"
+          v-model="listSelection"
           :items="listItems"
           item-class="px8"
           @item-click="showMenu = false")
