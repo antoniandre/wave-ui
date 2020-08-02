@@ -202,9 +202,9 @@ export default {
         // In `getCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
         // if we don't postpone the Menu apparition it will start transition from a visible menu and
         // thus will not transition.
-        this.timeoutId = setTimeout(() => (this.showMenu = true), 10)
+        this.timeoutId = setTimeout(() => this.$emit('input', (this.showMenu = true)), 10)
       }
-      else this.showMenu = false
+      else this.$emit('input', (this.showMenu = false))
     },
 
     getCoordinates (e) {
@@ -297,8 +297,8 @@ export default {
   },
 
   watch: {
-    value () {
-      this.toggle({ type: 'click', target: this.activatorEl })
+    value (value) {
+      if (!!value !== this.showMenu) this.toggle({ type: 'click', target: this.activatorEl })
     }
   }
 }
