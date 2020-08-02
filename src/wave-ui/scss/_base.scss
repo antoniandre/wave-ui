@@ -5,7 +5,7 @@ body {overflow-x: hidden;}
 
 a {text-decoration: none;}
 
-.w-app * {box-sizing: border-box;}
+.w-app, .w-app * {box-sizing: border-box;}
 
 .w-main {
   padding-left: 3 * $base-increment;

@@ -136,16 +136,13 @@ export default {
       let html = ''
 
       if (slots.pug) {
-        html = '#app\n' +
-               '  w-app(block)\n    ' +
-               slots.pug.replace(/\n$/, '').replace(/\n/g, '\n    ')
+        html = 'w-app#app(block)\n  ' +
+               slots.pug.replace(/\n$/, '').replace(/\n/g, '\n  ')
       }
       else {
-        html = '<div id="app">\n' +
-                   '  <w-app block>\n    ' +
-                   slots.html.replace(/\n$/, '').replace(/\n/g, '\n    ') +
-                   '\n  </w-app>\n' +
-                   '</div>'
+        html = '<w-app id="app" block>\n  ' +
+               slots.html.replace(/\n$/, '').replace(/\n/g, '\n  ') +
+               '\n</w-app>\n'
       }
       const css = '.w-app {font-family: sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
       const js = this.fullJs ? slots.js : ('new Vue({' +
