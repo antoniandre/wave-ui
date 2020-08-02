@@ -18,7 +18,7 @@
       ref="overlay"
       :value="showMenu"
       :persistent="persistent"
-      :z-index="(zIndex || 100) - 1"
+      :z-index="(zIndex || 200) - 1"
       @input="showMenu = false")
 </template>
 
@@ -163,7 +163,7 @@ export default {
 
     styles () {
       return {
-        zIndex: this.zIndex || this.zIndex === 0 || (this.overlay && !this.zIndex && 100) || null,
+        zIndex: this.zIndex || this.zIndex === 0 || (this.overlay && !this.zIndex && 200) || null,
         top: `${~~this.menuCoordinates.top}px`,
         left: `${~~this.menuCoordinates.left}px`
       }
@@ -209,11 +209,16 @@ export default {
 
     getCoordinates (e) {
       const { top, left, width, height } = e.target.getBoundingClientRect()
-      let coords = { top, left, width, height }
+      let coords = { top, left, width, height } // Coords from window.
 
+      // If absolute position, adjust top & left.
       if (!this.fixed) {
         const { top: targetTop, left: targetLeft } = this.menuParentEl.getBoundingClientRect()
-        coords = { ...coords, top: top - targetTop, left: left - targetLeft }
+        coords = {
+          ...coords,
+          top: top - targetTop + this.menuParentEl.scrollTop,
+          left: left - targetLeft + this.menuParentEl.scrollLeft
+        }
       }
 
       // 1. First display the menu but hide it (So we can get its dimension).
