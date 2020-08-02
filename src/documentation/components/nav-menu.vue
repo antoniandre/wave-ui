@@ -10,10 +10,10 @@
     icon="wi-cross")
 
   .title2.mt0 Knowledge base
-  w-list(:items="sections" nav color="primary" @item-click="$emit('update:drawerOpen', false)")
+  w-list(:items="sections" nav color="primary" @item-click="onItemClick")
 
   .title2.mt4 UI Components
-  w-list(:items="components" nav color="primary" @item-click="$emit('update:drawerOpen', false)")
+  w-list(:items="components" nav color="primary" @item-click="onItemClick")
     template(#item="{ item }")
       span(v-html="item.label")
       w-tag.ml2.px1(v-if="item.disabled" bg-color="red" color="white") Coming soon
@@ -82,7 +82,14 @@ export default {
         ]
       }
     ]
-  })
+  }),
+
+  methods: {
+    onItemClick () {
+      this.$emit('update:drawerOpen', false)
+      setTimeout(() => (document.querySelector('.w-app').scrollTop = 0), 100)
+    }
+  }
 }
 </script>
 
