@@ -10,29 +10,32 @@ w-app.fill-height.w-flex.column
     nav-menu.navigation.mt6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
     transition(name="fade-page" mode="out-in")
       router-view.main-content.grow
-  footer.pa3.w-flex.justify-end.align-center.caption.no-grow
-    | Made with
-    w-tooltip(top)
-      template(#activator="{ on }")
-        w-icon.ml1(v-on="on" sm) mdi mdi-vuejs
-      | Vue.js
-    w-tooltip(top)
-      template(#activator="{ on }")
-        w-icon.ml1(v-on="on" sm) mdi mdi-language-css3
-      | CSS 3
-    w-tooltip(top)
-      template(#activator="{ on }")
-        w-icon.ml1(v-on="on" sm) mdi mdi-language-html5
-      span.text-nowrap Html 5 &amp; Pug
-    w-tooltip(top)
-      template(#activator="{ on }")
-        w-icon.ml1(v-on="on" sm) mdi mdi-sass
-      | Sass
-    w-tooltip(top)
-      template(#activator="{ on }")
-        w-icon.ml1.heart(v-on="on" sm) mdi mdi-heart
-      | Love
 
+  footer.pa3.w-flex.justify-end.align-center.no-grow.wrap
+    small.grey-light2.text-up Copyright © Antoni Andre {{ new Date().getFullYear() }}
+    .spacer
+    .caption
+      | Made with
+      w-tooltip(top)
+        template(#activator="{ on }")
+          w-icon.ml1(v-on="on" sm) mdi mdi-vuejs
+        | Vue.js
+      w-tooltip(top)
+        template(#activator="{ on }")
+          w-icon.ml1(v-on="on" sm) mdi mdi-language-css3
+        | CSS 3
+      w-tooltip(top)
+        template(#activator="{ on }")
+          w-icon.ml1(v-on="on" sm) mdi mdi-language-html5
+        span.text-nowrap Html 5 &amp; Pug
+      w-tooltip(top)
+        template(#activator="{ on }")
+          w-icon.ml1(v-on="on" sm) mdi mdi-sass
+        | Sass
+      w-tooltip(top)
+        template(#activator="{ on }")
+          w-icon.ml1.heart(v-on="on" sm) mdi mdi-heart
+        | Love
 </template>
 
 <script>
