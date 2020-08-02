@@ -8,10 +8,11 @@
     round
     color="primary"
     icon="wi-cross")
+
+  .title2.mt0 Knowledge base
   w-list(:items="sections" nav color="primary" @item-click="$emit('update:drawerOpen', false)")
 
   .title2.mt4 UI Components
-
   w-list(:items="components" nav color="primary" @item-click="$emit('update:drawerOpen', false)")
     template(#item="{ item }")
       span(v-html="item.label")

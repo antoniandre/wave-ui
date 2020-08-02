@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt4(h1) Customization
+  title-link.mt4(h1 slug="customization") Customization (optional)
 
   title-link(h2) Basic SCSS overrides
   //- p Wave UI components are pixel-based to avoid flickering on half-pixel value.
