@@ -129,9 +129,6 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-router.afterEach(() => {
-  status.loading = false
-  setTimeout(() => (document.querySelector('.w-app').scrollTop = 0), 100)
-})
+router.afterEach(() => (status.loading = false))
 
 export default router
