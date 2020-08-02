@@ -116,10 +116,10 @@ div
     If no value is set, the choice's label will be returned instead.
   example
     .w-flex.align-center
-      w-checkboxes(v-model="selectedCheckbox1" :items="checkboxes1")
+      w-checkboxes(v-model="selectedCheckboxes1" :items="checkboxes1")
       div.title3.ml8
         | Selected choices:
-        code.ml1 {{ selectedCheckbox1 || '[]' }}
+        code.ml1 {{ selectedCheckboxes1 || '[]' }}
     template(#pug).
       .w-flex.align-center
         w-checkboxes(v-model="selectedCheckboxes" :items="checkboxesItems")
