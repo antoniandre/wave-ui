@@ -38,8 +38,25 @@
     .#{$label} {color: $color;}
 
     @for $i from 1 through 5 {
-      .#{$label}-light#{$i}--bg {background-color: lighten($color, 8 * $i);}
-      .#{$label}-light#{$i} {color: lighten($color, 8 * $i);}
+      $light-increment: 8;
+      // Some color shades need bigger or smaller increments to end up with the same scale.
+      @if $label == 'deep-orange' {
+        $light-increment: 7;
+      }
+      @if $label == 'green' or $label == 'amber' {
+        $light-increment: 8.3;
+      }
+      @if $label == 'pink' or $label == 'orange' {
+        $light-increment: 8.5;
+      }
+      @if $label == 'cyan' or $label == 'purple' or $label == 'deep-purple' or $label == 'indigo' or $label == 'light-blue' {
+        $light-increment: 9;
+      }
+      @if $label == 'teal' or $label == 'brown' {
+        $light-increment: 10;
+      }
+      .#{$label}-light#{$i}--bg {background-color: lighten($color, $light-increment * $i);}
+      .#{$label}-light#{$i} {color: lighten($color, $light-increment * $i);}
       .#{$label}-dark#{$i}--bg {background-color: darken($color, 6 * $i);}
       .#{$label}-dark#{$i} {color: darken($color, 6 * $i);}
     }
