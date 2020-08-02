@@ -14,7 +14,11 @@ const renderListItems = function (createEl) {
         'w-list',
         {
           props: { ...this.$props, items: li.children, depth: this.depth + 1 },
-          scopedSlots: { item: this.$scopedSlots.item }
+          scopedSlots: { item: this.$scopedSlots.item },
+          on: {
+            'input': value => this.$emit('input', value),
+            'item-click': value => this.$emit('item-click', value)
+          }
         }
       ))
     }
