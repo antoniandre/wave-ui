@@ -129,3 +129,9 @@
   100% {transform: scale(1) rotate(0deg);}
 }
 // --------------------------------------------------------
+
+@keyframes w-shake {
+  0% {margin-left: 0;}
+  20%, 60% {margin-left: 2px;}
+  40%, 80% {margin-left: -2px;}
+}

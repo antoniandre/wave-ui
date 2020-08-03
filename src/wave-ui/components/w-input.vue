@@ -111,7 +111,7 @@ export default {
     },
     inputWrapClasses () {
       return {
-        [this.color]: this.color,
+        [this.Validation.message ? 'error' : this.color]: this.color || this.Validation.message,
         [`${this.bgColor}--bg`]: this.bgColor,
         'w-input__input-wrap--round': this.round,
         'w-input__input-wrap--tile': this.tile,
@@ -184,7 +184,7 @@ $disabled-color: #ccc;
     border-radius: $border-radius;
     border: $border;
     font-size: 0.9em;
-    transition: $transition-duration;
+    transition: border $transition-duration;
   }
 
   &--floatting-label &__input-wrap {
@@ -293,12 +293,13 @@ $disabled-color: #ccc;
     .w-input--focused & {color: currentColor;}
   }
 
+  .w-input--has-error &__label {animation: w-shake 0.3s $transition-duration ease-in-out;}
+
   // Error message.
   // ------------------------------------------------------
-  // &--has-error {}
   &__error {
     width: 100%;
-    font-size: round(0.8 * $base-font-size);
+    font-size: 0.75em;
     margin-top: $base-increment;
   }
 }
