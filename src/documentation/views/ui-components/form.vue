@@ -2,45 +2,92 @@
 div
   title-link.mt4.code(h1 slug="w-form")
     | w-form
-    w-tag.ml3(bg-color="red" color="white") Coming soon
+    w-tag.ml3(bg-color="orange" lg color="white") In Progress
 
   title-link(h2) Form &amp; validation
-  w-card.pa6
-    w-transition-expand(y)
-      w-alert(v-if="formSuccess1" success outline) The form is valid, ready to send it!
-      w-alert(v-else-if="formSuccess1 === false" error outline) The form has errors.
-    w-transition-expand(y)
-      w-alert(v-if="formSent1" success) The form was sent successfully!
+  p This example shows a simple yet full lifecycle of a form.
+  p.
+    It handles the error and success states of the form elements, displays a global message using the
+    fired w-form custom events, simulates a form sending to a backend and displays a notification when
+    the form is sent.
+  example
+    w-card.white--bg(content-class="pa0")
+      .message-box
+        w-transition-fade
+          w-alert.my0.text-light(v-if="formValid1" success no-border)
+            | The form is valid, ready to send it!
+          w-alert.my0.text-light(v-else-if="formValid1 === false" error no-border)
+            | The form has errors.
+      w-form.px8.pt2.pb12(
+        v-model="formValid1"
+        @validate="formSent1 = false"
+        @success="onSuccess(1)"
+        @error="")
+        w-input(required label="First name" :validation="validations.firstName")
+        w-flex.mt4(wrap align-center justify-end)
+          w-checkbox(required :validation="validations.consent") I agree to the terms &amp; conditions
+          .spacer
+          w-button(bg-color="primary" type="submit" :loading="formValid1 && !formSent1") Validate
+      w-notification(
+        v-model="formSent1"
+        success
+        transition="bounce"
+        absolute
+        plain
+        round
+        bottom) The form was sent successfully!
+    template(#pug).
+      w-card.white--bg(content-class="pa0")
+        .message-box
+          w-transition-fade
+            w-alert.my0.text-light(v-if="formValid" success no-border)
+              | The form is valid, ready to send it!
+            w-alert.my0.text-light(v-else-if="formValid === false" error no-border)
+              | The form has errors.
 
-    w-form(v-model="formSuccess1" @validate="formSent1 = false" @success="onSuccess(1)" @error="")
-      w-input(required label="First name" :validation="validations.firstName")
-      w-flex.mt4(wrap align-center justify-end)
-        w-checkbox(required :validation="validations.consent") I agree
-        .spacer
-        w-button(type="submit") Validate
+        w-form.px8.pt2.pb12(
+          v-model="formValid"
+          @validate="formSent = false"
+          @success="onSuccess"
+          @error="")
+          w-input(required label="First name" :validation="validations.firstName")
+          w-flex.mt4(wrap align-center justify-end)
+            w-checkbox I agree to the terms &amp; conditions
+            .spacer
+            w-button(bg-color="primary" type="submit" :loading="formValid &amp;&amp; !formSent") Validate
 
-  //- title-link(h2) Version 2
-  //- w-card.pa6
-    w-transition-expand(y)
-      w-alert(v-if="formSuccess2" success outline) The form is valid, ready to send it!
-      w-alert(v-else-if="formSuccess2 === false" error outline) The form has errors.
-    w-transition-expand(y)
-      w-alert(v-if="formSent2" success) The form was sent successfully!
+        w-notification(
+          v-model="formSent"
+          success
+          transition="bounce"
+          absolute
+          plain
+          round
+          bottom) The form was sent successfully!
+    template(#js).
+      data: () => ({
+        formValid: null,
+        formSent: false,
+        validations: {
+          firstName: value => !!value || 'This field is required'
+        }
+      }),
 
-    w-form(v-model="formSuccess2" @validate="formSent2 = false" @success="onSuccess(2)" @error="")
-      w-input(label="First name" :validation="validations.firstName")
-      w-flex.mt4(wrap align-center justify-end)
-        w-checkbox(:validation="validations.consent") I agree
-        .spacer
-        w-button(type="submit") Validate
+      methods: {
+        onSuccess () {
+          setTimeout(() => (this.formSent = true), 2000)
+        }
+      }
+    template(#css).
+      .message-box {min-height: 35px;}
 </template>
 
 <script>
 export default {
   data: () => ({
-    formSuccess1: null,
+    formValid1: null,
     formSent1: false,
-    // formSuccess2: null,
+    // formValid2: null,
     // formSent2: false,
     validations: {
       firstName: value => !!value || 'This field is required',
@@ -53,9 +100,12 @@ export default {
 
   methods: {
     onSuccess (id) {
-      console.log('Success, it worked!')
-      setTimeout(() => (this[`formSent${id}`] = true), 1000)
+      setTimeout(() => (this[`formSent${id}`] = true), 2000)
     }
   }
 }
 </script>
+
+<style lang="scss">
+.message-box {min-height: 35px;}
+</style>
