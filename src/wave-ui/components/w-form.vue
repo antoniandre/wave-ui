@@ -7,6 +7,12 @@
 <script>
 export default {
   name: 'w-form',
+  provide () {
+    return {
+      formRegister: this.register,
+      formUnregister: this.unregister
+    }
+  },
 
   props: {
     value: {}
@@ -27,9 +33,19 @@ export default {
   },
 
   methods: {
+    register (formElement) {
+      this.formElements.push(formElement)
+    },
+
+    unregister (formElement) {
+      this.formElements = this.formElements.filter(item => item._uid !== formElement._uid)
+    },
+
     validate (e) {
       this.$emit('validate')
-      const hasError = Math.random() > 0.5
+      const hasError = this.formElements.some(item => {
+        return typeof item.validation(item.inputValue) === 'string'
+      })
 
       this.$emit('input', !hasError)
       this.$emit(...([hasError ? 'error' : 'success'].concat(e || [])))
