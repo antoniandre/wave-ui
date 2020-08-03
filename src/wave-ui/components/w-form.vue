@@ -44,7 +44,9 @@ export default {
     validate (e) {
       this.$emit('validate')
       const hasError = this.formElements.some(item => {
-        return typeof item.validation(item.inputValue) === 'string'
+        const result = item.validation(item.inputValue)
+        item.Validation.message = typeof result === 'string' ? result : ''
+        return typeof result === 'string'
       })
 
       this.$emit('input', !hasError)
