@@ -1,7 +1,6 @@
 <template lang="pug">
-  .w-form(:class="classes" :style="styles")
-    form(@submit.prevent="onSubmit" novalidate)
-      slot
+  form.w-form(:class="classes" :style="styles" @submit.prevent="onSubmit" novalidate)
+    slot
 </template>
 
 <script>
