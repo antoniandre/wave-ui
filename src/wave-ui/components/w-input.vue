@@ -38,6 +38,7 @@
 <script>
 export default {
   name: 'w-input',
+  inject: ['formRegister', 'formUnregister'],
   props: {
     value: { default: '' },
     type: { type: String, default: 'text' },
@@ -61,7 +62,8 @@ export default {
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },
-    tile: { type: Boolean }
+    tile: { type: Boolean },
+    validation: { type: Function }
   },
 
   data () {
@@ -123,6 +125,14 @@ export default {
       this.$emit('blur', this.inputValue)
       this.isFocused = false
     }
+  },
+
+  created () {
+    this.formRegister(this)
+  },
+
+  beforeDestroy () {
+    this.formUnregister(this)
   },
 
   watch: {
