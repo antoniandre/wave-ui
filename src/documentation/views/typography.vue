@@ -15,8 +15,8 @@ div
 
   title-link(h2) Text style
   div.ml8
-    .text-up.mt4 Uppercase text using the #[code .text-up] class.
-    .text-low.mt4 Lowercase text using the #[code .text-low] class.
+    .text-upper.mt4 Uppercase text using the #[code .text-upper] class.
+    .text-lower.mt4 Lowercase text using the #[code .text-lower] class.
     .text-bold.mt4 Bold text using the #[code .text-bold] class.
     .text-light.mt4 Normal (not bold) text using the #[code .text-light] class.
     .text-italic.mt4 Italic text using the #[code .text-italic] class.

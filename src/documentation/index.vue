@@ -12,7 +12,7 @@ w-app.fill-height.w-flex.column
       router-view.main-content.grow
 
   footer.pa3.w-flex.justify-end.align-center.no-grow.wrap
-    small.grey-light2.text-up Copyright © Antoni Andre {{ new Date().getFullYear() }}
+    small.grey-light2.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
     .spacer
     .caption
       | Made with
@@ -74,6 +74,7 @@ export default {
 .nav-menu ~ .main-content {padding-left: 4em;}
 
 footer .heart:hover {animation: heartbeat 1s infinite;}
+footer small {font-size: 11px;}
 
 @keyframes heartbeat {
   0%, 30%, 60%, 100% {transform: scale(1);}

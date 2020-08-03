@@ -12,11 +12,12 @@
   .title2.mt0 Knowledge base
   w-list(:items="sections" nav color="primary" @item-click="onItemClick")
 
-  .title2.mt4 UI Components
+  .title2.mt4 UI components
   w-list(:items="components" nav color="primary" @item-click="onItemClick")
     template(#item="{ item }")
       span(v-html="item.label")
-      w-tag.ml2.px1(v-if="item.disabled" bg-color="red" color="white") Coming soon
+      w-tag.ml2.text-upper(v-if="item.disabled" xs color="red" outline) Coming soon
+      w-tag.ml2.text-upper(v-if="item.inProgress" xs color="orange" outline) In progress
 </template>
 
 <script>
@@ -48,7 +49,7 @@ export default {
       { label: 'Accordion', route: 'w-accordion', disabled: true },
       { label: 'Alert', route: 'w-alert' },
       { label: 'App', route: 'w-app' },
-      { label: 'Badge', route: 'w-badge' },
+      { label: 'Badge', route: 'w-badge', inProgress: true },
       { label: 'Button', route: 'w-button' },
       { label: 'Calendar', route: 'w-calendar' },
       { label: 'Card', route: 'w-card' },
@@ -72,8 +73,8 @@ export default {
         route: 'form',
         children: [
           { label: 'Checkbox', route: 'w-checkbox' },
-          { label: 'Input', route: 'w-input' },
-          { label: 'Form', route: 'w-form', disabled: true },
+          { label: 'Input', route: 'w-input', inProgress: true },
+          { label: 'Form', route: 'w-form', inProgress: true },
           { label: 'Radio', route: 'w-radio' },
           { label: 'Select', route: 'w-select', disabled: true },
           { label: 'Slider', route: 'w-slider', disabled: true },
@@ -118,6 +119,8 @@ div.nav-menu {
     }
     &:before {left: -2px;}
   }
+
+  .w-tag {line-height: 1;padding: 2px 4px;}
 }
 
 .nav-drawer .nav-menu {
