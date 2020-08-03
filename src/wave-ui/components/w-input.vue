@@ -26,19 +26,31 @@
         :disabled="disabled"
         :required="required")
       template(v-if="labelPosition === 'inside' && showLabelInside")
-        label.w-input__label.w-input__label--inside(v-if="$slots.default" :for="`input--${_uid}`" :class="isFocused && { [this.color]: this.color }")
+        label.w-input__label.w-input__label--inside(
+          v-if="$slots.default" :for="`input--${_uid}`"
+          :class="isFocused && { [Validation.message ? 'error' : this.color]: this.color || Validation.message }")
           slot
-        label.w-input__label.w-input__label--inside(v-else-if="label" :for="`input--${_uid}`" v-html="label" :class="isFocused && { [this.color]: this.color }")
+        label.w-input__label.w-input__label--inside(
+          v-else-if="label" :for="`input--${_uid}`"
+          v-html="label"
+          :class="isFocused && { [Validation.message ? 'error' : this.color]: this.color || Validation.message }")
     template(v-if="labelPosition === 'right'")
       label.w-input__label.w-input__label--right(v-if="$slots.default" :for="`input--${_uid}`")
         slot
       label.w-input__label.w-input__label--right(v-else-if="label" :for="`input--${_uid}`" v-html="label")
+    w-transition-expand(v-if="Validation.message" y)
+      .w-input__error.error(v-if="$slots['error-message']")
+        slot(name="error-message" :message="Validation.message")
+      .w-input__error.error(v-else v-html="Validation.message")
 </template>
 
 <script>
 export default {
   name: 'w-input',
-  inject: ['formRegister', 'formUnregister'],
+  inject: {
+    formRegister: { default: null },
+    formUnregister: { default: null }
+  },
   props: {
     value: { default: '' },
     type: { type: String, default: 'text' },
@@ -72,7 +84,10 @@ export default {
       // In case of incorrect input type="number", the inputValue gets emptied,
       // and the label would come back on top of the input text.
       inputNumberError: false,
-      isFocused: false
+      isFocused: false,
+      Validation: {
+        message: '' // Updated on w-form validation.
+      }
     }
   },
 
@@ -91,6 +106,7 @@ export default {
         'w-input--dark': this.dark,
         'w-input--floatting-label': this.labelPosition === 'inside' && this.moveLabel,
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
+        'w-input--has-error': this.Validation.message
       }
     },
     inputWrapClasses () {
@@ -128,11 +144,11 @@ export default {
   },
 
   created () {
-    this.formRegister(this)
+    if (this.formRegister) this.formRegister(this)
   },
 
   beforeDestroy () {
-    this.formUnregister(this)
+    if (this.formUnregister) this.formUnregister(this)
   },
 
   watch: {
@@ -152,6 +168,7 @@ $disabled-color: #ccc;
   position: relative;
   display: flex;
   flex-grow: 1;
+  flex-wrap: wrap;
   align-items: center;
   outline: none;
   font-size: $base-font-size;
@@ -199,7 +216,7 @@ $disabled-color: #ccc;
   &__input-wrap--underline:after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -1px;
     left: 50%;
     width: 0;
     height: 0;
@@ -274,6 +291,15 @@ $disabled-color: #ccc;
     }
 
     .w-input--focused & {color: currentColor;}
+  }
+
+  // Error message.
+  // ------------------------------------------------------
+  // &--has-error {}
+  &__error {
+    width: 100%;
+    font-size: round(0.8 * $base-font-size);
+    margin-top: $base-increment;
   }
 }
 </style>
