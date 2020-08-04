@@ -2,9 +2,9 @@
 div
   title-link.mt4.code(h1) w-card
 
-  title-link(h2) Card with a title and no color
+  title-link(h2) Simple card with a title
   example
-    w-card(card-title="Card title")
+    w-card(card-title="Card title" title-class="blue-light5--bg")
       p.
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
         quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
@@ -12,15 +12,17 @@ div
         Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
         dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
         aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
-    template(#pug).
-      w-card(card-title="Card title")
-        p.
+    template(#html).
+      &lt;w-card card-title="Card title" title-class="blue-light5--bg"&gt;
+        &lt;p&gt;
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
           quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
-          odit dolor labore eveniet at vel sequi nostrum.#[="#[br]#[br]"]
+          odit dolor labore eveniet at vel sequi nostrum.&lt;br&gt;&lt;br&gt;
           Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
           dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
           aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+        &lt;/p&gt;
+      &lt;/w-card&gt;
 
   title-link(h2) Colored card with no title and no border
   example
@@ -32,15 +34,17 @@ div
         Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
         dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
         aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
-    template(#pug).
-      w-card(bg-color="secondary" no-border)
-        p.
+    template(#html).
+      &lt;w-card bg-color="secondary" no-border&gt;
+        &lt;p&gt;
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
           quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
-          odit dolor labore eveniet at vel sequi nostrum.#[="#[br]#[br]"]
+          odit dolor labore eveniet at vel sequi nostrum.&lt;br&gt;&lt;br&gt;
           Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
           dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
           aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+        &lt;/p&gt;
+      &lt;/w-card&gt;
 
   title-link(h2) Tiled card with a top toolbar
   p.
@@ -62,22 +66,27 @@ div
         Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
         dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
         aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
-    template(#pug).
-      w-card(tile)
-        template(#title="")
-          w-toolbar
-            .title3.my0 Card title
-            .spacer
-            span.ml2 Item 1
-            span.ml2 Item 2
-            span.ml2 Item 3
-        p.
+    template(#html).
+      &lt;w-card tile&gt;
+        &lt;template #title&gt;
+          &lt;w-toolbar&gt;
+            &lt;div class="title3"&gt;Card title&lt;/div&gt;
+            &lt;div class="spacer"&gt;&lt;/div&gt;
+            &lt;span class="ml2"&gt;Item 1&lt;/span&gt;
+            &lt;span class="ml2"&gt;Item 2&lt;/span&gt;
+            &lt;span class="ml2"&gt;Item 3&lt;/span&gt;
+          &lt;/w-toolbar&gt;
+        &lt;/template&gt;
+
+        &lt;p&gt;
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
           quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
-          odit dolor labore eveniet at vel sequi nostrum.#[="#[br]#[br]"]
+          odit dolor labore eveniet at vel sequi nostrum.&lt;br&gt;&lt;br&gt;
           Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
           dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
           aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+        &lt;/p&gt;
+      &lt;/w-card&gt;
 
   title-link(h2) Card with shadow
   example
@@ -89,15 +98,17 @@ div
         Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
         dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
         aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
-    template(#pug).
-      w-card(shadow)
-        p.
+    template(#html).
+      &lt;w-card shadow&gt;
+        &lt;p&gt;
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
           quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
-          odit dolor labore eveniet at vel sequi nostrum.#[="#[br]#[br]"]
+          odit dolor labore eveniet at vel sequi nostrum.&lt;br&gt;&lt;br&gt;
           Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
           dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
           aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+        &lt;/p&gt;
+      &lt;/w-card&gt;
 
   title-link(h2) Card with actions
   p The actions slot is optional but facilitates the addition of action buttons in a flex layout.
@@ -112,17 +123,20 @@ div
         .spacer
         w-button.mr2(bg-color="error") I disagree
         w-button(bg-color="success") I agree
-    template(#pug).
-      w-card
-        template(#title="") Terms and conditions
-        p.
+    template(#html).
+      &lt;w-card card-title="Terms and conditions"&gt;
+        &lt;p&gt;
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
           quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
           odit dolor labore eveniet at vel sequi nostrum.
-        template(#actions="")
-          .spacer
-          w-button.mr2(bg-color="error") I disagree
-          w-button(bg-color="success") I agree
+        &lt;/p&gt;
+
+        &lt;template #actions&gt;
+          &lt;div class="spacer"&gt;&lt;/div&gt;
+          &lt;w-button bg-color="error" class="mr2"&gt;I disagree&lt;/w-button&gt;
+          &lt;w-button bg-color="success"&gt;I agree&lt;/w-button&gt;
+        &lt;/template&gt;
+      &lt;/w-card&gt;
 </template>
 
 <script>
