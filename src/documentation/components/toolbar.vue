@@ -1,7 +1,7 @@
 <template lang="pug">
 w-toolbar.main-toolbar(fixed)
   router-link.primary.w-flex.no-grow.fill-height.align-center.home-link(to="/")
-    wave.wave-logo
+    w-icon.wave-logo.mr3(size="3em") wi-wave
     | Wave UI
   .spacer
   w-tooltip(z-index="20")
@@ -18,13 +18,11 @@ w-toolbar.main-toolbar(fixed)
 </template>
 
 <script>
-import Wave from '@/assets/wave.svg?inline'
 
 export default {
   props: {
     drawerOpen: { type: Boolean, default: false }
-  },
-  components: { Wave }
+  }
 }
 </script>
 
@@ -42,11 +40,7 @@ div.main-toolbar {
     &:focus {transform: scale(1.1);}
   }
 
-  .wave-logo {
-    height: 70%;
-    margin-right: 1em;
-    fill: #497ca2;
-  }
+  .wave-logo {color: #497ca2;}
 
   .hamburger-menu .w-icon {width: 26px;height: 26px;}
 }
