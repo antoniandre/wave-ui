@@ -3,14 +3,15 @@ div
   title-link.mt4.code(h1) w-dialog
   p This dialog contains some basic options to toggle on and off.
 
-  example
+  example(content-class="pt5")
     w-button.px4.mr6.shrink(@click="dialog1.show = true" bg-color="primary" dark) Open dialog
     w-dialog(
       v-model="dialog1.show"
       :fullscreen="dialog1.fullscreen"
       :max-width="dialog1.maxWidth"
       :persistent="dialog1.persistent"
-      :persistent-no-animation="dialog1.persistentNoAnimation")
+      :persistent-no-animation="dialog1.persistentNoAnimation"
+      title-class="primary-light1--bg white")
       template(#title)
         w-icon.mr2 mdi mdi-tune
         | Control panel
@@ -36,7 +37,8 @@ div
         :fullscreen="dialog.fullscreen"
         :max-width="dialog.maxWidth"
         :persistent="dialog.persistent"
-        :persistent-no-animation="dialog.persistentNoAnimation")
+        :persistent-no-animation="dialog.persistentNoAnimation"
+        title-class="primary-light1--bg white")
         template(#title="")
           w-icon.mr2 mdi mdi-tune
           | Control panel
@@ -67,7 +69,7 @@ div
       })
 
   title-link(h2) Persistent prompt dialog
-  example
+  example(content-class="pt5")
     w-button.px4(@click="dialog2.show = true" bg-color="primary" dark) Open dialog
     w-dialog(v-model="dialog2.show" persistent :max-width="550")
       template(#title) Terms and conditions
@@ -103,7 +105,7 @@ div
       })
 
   title-link(h2) Nesting
-  example
+  example(content-class="pt5")
     w-button.px4(@click="dialog3.show = true" bg-color="primary" dark) Open dialog
     w-dialog(v-model="dialog3.show" :max-width="600")
       template(#title) Dialog 1
@@ -238,7 +240,7 @@ div
       }
 
   title-link(h2) Overlay opacity and color
-  example
+  example(content-class="pt5")
     w-button.px4(@click="dialog6.show = true" bg-color="primary" dark) Open control panel
     w-dialog(
       v-model="dialog6.show"

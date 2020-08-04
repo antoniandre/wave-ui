@@ -9,7 +9,11 @@
     :opacity="overlayOpacity"
     :class="classes")
     transition(:name="transition" appear @after-leave="onClose")
-      w-card.w-dialog__content(v-if="showContent" no-border :style="contentStyles")
+      w-card.w-dialog__content(
+        v-if="showContent" no-border
+        :title-class="titleClass"
+        :content-class="contentClass"
+        :style="contentStyles")
         template(v-slot:title)
           slot(name="title")
         slot
@@ -28,6 +32,8 @@ export default {
     persistentNoAnimation: { type: Boolean },
     tile: { type: Boolean },
     transition: { type: String, default: 'fade' }, // @todo: validator.
+    titleClass: { type: String },
+    contentClass: { type: String },
     overlayColor: { type: [String, Boolean] },
     overlayOpacity: { type: [Number, String, Boolean] }
   },
