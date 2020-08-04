@@ -34,6 +34,7 @@ div.main-toolbar {
   height: 42px;
   padding-top: 0;
   padding-bottom: 0;
+  z-index: 200;
 
   .home-link {
     @include default-transition;
