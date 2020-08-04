@@ -120,7 +120,6 @@ export default {
       }
 
       el.style.overflow = 'hidden'
-      el.style.whiteSpace = 'nowrap'
     },
     applyShowStyles (el) {
       if (this.animX) {

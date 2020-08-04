@@ -61,7 +61,7 @@ div
         color="primary"
         outline) {{ toggleExpandX ? 'Collapse' : 'Expand' }} X
       w-transition-expand(x)
-        .transition-box(v-if="toggleExpandX") X-expanding transition
+        .transition-box.text-nowrap(v-if="toggleExpandX") X-expanding transition
 
     w-flex(align-center)
       w-button.transition-toggle(
@@ -77,7 +77,7 @@ div
         color="primary"
         outline) {{ toggleExpandXY ? 'Collapse' : 'Expand' }} X &amp; Y
       w-transition-expand
-        .transition-box(v-if="toggleExpandXY") X &amp; Y expanding transition
+        .transition-box.text-nowrap(v-if="toggleExpandXY") X &amp; Y expanding transition
 
     template(#html).
       &lt;w-flex align-center&gt;
@@ -154,7 +154,7 @@ div
           {{ toggleExpandX ? 'Collapse' : 'Expand' }} X
         &lt;/w-button&gt;
         &lt;w-transition-expand x&gt;
-          &lt;div class="transition-box" v-if="toggleExpandX"&gt;X-expanding transition&lt;/div&gt;
+          &lt;div class="transition-box text-nowrap" v-if="toggleExpandX"&gt;X-expanding transition&lt;/div&gt;
         &lt;/w-transition-expand&gt;
       &lt;/w-flex&gt;
 
@@ -180,7 +180,7 @@ div
           {{ toggleExpandXY ? 'Collapse' : 'Expand' }} X &amp; Y
         &lt;/w-button&gt;
         &lt;w-transition-expand&gt;
-          &lt;div class="transition-box" v-if="toggleExpandXY"&gt;X &amp; Y expanding transition&lt;/div&gt;
+          &lt;div class="transition-box text-nowrap" v-if="toggleExpandXY"&gt;X &amp; Y expanding transition&lt;/div&gt;
         &lt;/w-transition-expand&gt;
       &lt;/w-flex&gt;
 
@@ -210,6 +210,11 @@ div
         width: 14em;
         text-align: center;
       }
+
+  w-alert.alert--tip(icon-outside icon="mdi mdi-lightbulb").
+    When using the x or xy transitions, you may want to prevent the content to wrap to a new line while
+    the animation, like in the above example.
+    To do so, you can add the #[span.code text-nowrap] class on the element being transitioned.
 
   h3 Zoom on the expand transition
   p.
