@@ -5,7 +5,7 @@ div
     w-tag.ml3(bg-color="orange" lg color="white") In Progress
 
   title-link(h2) Form &amp; validation
-  p This example shows a simple yet full lifecycle of a form.
+  p This example shows a simple yet complete lifecycle of a form.
   p.
     It handles the error and success states of the form elements, displays a global message using the
     fired w-form custom events, simulates a form sending to a backend and displays a notification when
