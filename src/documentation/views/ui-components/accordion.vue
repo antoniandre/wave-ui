@@ -6,7 +6,7 @@ div
   w-accordion.white--bg(:items="items")
   p.grey-light2.my4.
     Now that you've seen the default accordion in real context, all the examples of this page will have a
-    light blue background and the accordions have a white background to help vizualize where it ends.
+    light blue background and accordions a white background to help vizualize where they end.
 
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(v-model="accordion1" :items="items")
@@ -14,31 +14,142 @@ div
       | v-model:
       code.ml1 {{ accordion1 }}
     template(#pug).
+      w-accordion(v-model="accordion" :items="items")
+      div.mt3
+        | v-model:
+        code.ml1 {{ '\{\{ accordion \}\}' }}
+    template(#js).
+      data: () => ({
+        items: [
+          {
+            title: 'Item 1',
+            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+          },
+          {
+            title: 'Item 2',
+            content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+          },
+          {
+            title: 'Item 3',
+            content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+          }
+        ],
+        accordion: []
+      })
+
+  title-link(h2) Shadow
+  example(content-class="pa4 aliceblue")
+    w-accordion.white--bg(:items="items" shadow)
+    template(#pug).
+      w-accordion(:items="items" shadow)
+    template(#js).
+      data: () => ({
+        items: [
+          {
+            title: 'Item 1',
+            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+          },
+          {
+            title: 'Item 2',
+            content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+          },
+          {
+            title: 'Item 3',
+            content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+          }
+        ]
+      })
 
   title-link(h2) Color &amp; background color
   p No background color is set by default and the text color is inherited.
   example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(v-model="accordion2" color="amber-dark1" :items="items")
-    w-accordion.mt6(v-model="accordion3" bg-color="yellow-light5" :items="items")
+    w-accordion.white--bg(:items="items" color="amber-dark1")
+    w-accordion.mt6(:items="items" bg-color="yellow-light5")
     template(#pug).
+      w-accordion(:items="items" color="amber-dark1")
+      w-accordion.mt6(:items="items" bg-color="yellow-light5")
+    template(#js).
+      data: () => ({
+        items: [
+          {
+            title: 'Item 1',
+            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+          },
+          {
+            title: 'Item 2',
+            content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+          },
+          {
+            title: 'Item 3',
+            content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+          }
+        ]
+      })
 
-  title-link(h2) Expand single item at a time
+  title-link(h2) Expand a single item at a time
   example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(v-model="accordion4" :items="items" expand-single)
-    div
+    w-accordion.white--bg(v-model="accordion2" :items="items" expand-single)
+    div.mt3
       | v-model:
-      code.ml1 {{ accordion4 }}
+      code.ml1 {{ accordion2 }}
     template(#pug).
+      w-accordion(v-model="accordion" :items="items" expand-single)
+      div.mt3
+        | v-model:
+        code.ml1 {{ '\{\{ accordion \}\}' }}
+    template(#js).
+      data: () => ({
+        items: [
+          {
+            title: 'Item 1',
+            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+          },
+          {
+            title: 'Item 2',
+            content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+          },
+          {
+            title: 'Item 3',
+            content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+          }
+        ],
+        accordion: []
+      })
 
   title-link(h2) External control
   example(content-class="pa4 aliceblue")
-    w-button.mr2(@click="accordion5 = Array(3).fill(true)" bg-color="primary" sm) Expand all
-    w-button(@click="accordion5 = Array(3).fill(false)" bg-color="primary" sm) Collapse all
-    w-accordion.mt4.white--bg(v-model="accordion5" :items="items")
-    div
+    w-button.mr2(@click="accordion3 = Array(3).fill(true)" bg-color="primary" sm) Expand all
+    w-button(@click="accordion3 = Array(3).fill(false)" bg-color="primary" sm) Collapse all
+    w-accordion.mt4.white--bg(v-model="accordion3" :items="items")
+    div.mt3
       | v-model:
-      code.ml1 {{ accordion5 }}
+      code.ml1 {{ accordion3 }}
     template(#pug).
+      w-button.mr2(@click="accordion = Array(3).fill(true)" bg-color="primary" sm) Expand all
+      w-button(@click="accordion = Array(3).fill(false)" bg-color="primary" sm) Collapse all
+
+      w-accordion.mt4(v-model="accordion" :items="items")
+      div.mt3
+        | v-model:
+        code.ml1 {{ '\{\{ accordion \}\}' }}
+    template(#js).
+      data: () => ({
+        items: [
+          {
+            title: 'Item 1',
+            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+          },
+          {
+            title: 'Item 2',
+            content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+          },
+          {
+            title: 'Item 3',
+            content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+          }
+        ],
+        accordion: []
+      })
 
   title-link(h2) Custom rendering
   example(content-class="pa4 aliceblue")
@@ -47,19 +158,142 @@ div
         w-icon(lg :color="item.color") {{ item.icon }}
         .title3.my0.ml2(:class="item.color") {{ item.title }}
       template(#item-content="{ item }")
-        w-alert.my0.pb3(border-left tile :color="`${item.color}`" v-html="item.content")
+        w-alert.my0.pb3(border-left tile :color="item.color" v-html="item.content")
     template(#pug).
+      w-accordion(:items="items" content-class="pa0")
+        template(#item-title="{ item }")
+          w-icon(lg :color="item.color") {{ '\{\{ item.icon \}\}' }}
+          .title3.ml2(:class="item.color") {{ '\{\{ item.title \}\}' }}
+        template(#item-content="{ item }")
+          w-alert.my0.pb3(border-left tile :color="item.color" v-html="item.content")
+    template(#js).
+      data: () => ({
+        items: [
+          {
+            title: 'Item 1',
+            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.',
+            icon: 'mdi mdi-home',
+            color: 'blue'
+          },
+          {
+            title: 'Item 2',
+            content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!',
+            icon: 'mdi mdi-github',
+            color: 'green'
+          },
+          {
+            title: 'Item 3',
+            content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.',
+            icon: 'mdi mdi-codepen',
+            color: 'orange'
+          }
+        ]
+      })
 
-  title-link(h2) Custom toggle icon, or no icon
+  title-link(h2) Do you (really) need even more flexibility?
+  p No problem, Wave UI's got you covered.
   example(content-class="pa4 aliceblue")
-    .title4 2 icons (expand &amp; collapse)
-    w-accordion.white--bg(:items="items" expand-icon="wi-chevron-down" collapse-icon="wi-chevron-up")
-    .title4.mt6 1 icon (only expand)
+    w-accordion.white--bg(:items="itemsCustom")
+      template(#item-title-item1="{ item }")
+        | This is the 1st item
+        w-tag.ml2(color="red" sm outline) HOT
+      template(#item-content-item1="{ item }")
+        p This content has a checklist.
+        .title4 To do
+        w-list(checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]")
+
+      template(#item-title-item2="{ item }")
+        w-icon.mr1(md color="amber") mdi mdi-emoticon-excited-outline
+        em This is the 2nd item
+      template(#item-content-item2="{ item }")
+        p The full content here is custom and completely distinct and independent from the other items.
+        p
+          | You also have access to the item's data if you need:
+          code {{ item }}
+
+      template(#item-title-item3="{ item }")
+        strong This is the 3rd item
+        w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
+      template(#item-content-item3="{ item }")
+        p Do you want to check the project on Github?
+        w-button(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
+          | Github
+          w-icon.ml2(sm) mdi mdi-open-in-new
+    template(#pug).
+      w-accordion(:items="items")
+        template(#item-title-item1="{ item }")
+          | This is the 1st item
+          w-tag.ml2(color="red" sm outline) HOT
+        template(#item-content-item1="{ item }")
+          p This content has a checklist.
+          .title4 To do
+          w-list(checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]")
+
+        template(#item-title-item2="{ item }")
+          w-icon.mr1(md color="amber") mdi mdi-emoticon-excited-outline
+          em This is the 2nd item
+        template(#item-content-item2="{ item }")
+          p The full content here is custom and completely distinct and independent from the other items.
+          p
+            | You also have access to the item's data if you need:
+            code {{ '\{\{ item \}\}' }}
+
+        template(#item-title-item3="{ item }")
+          strong This is the 3rd item
+          w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
+        template(#item-content-item3="{ item }")
+          p Do you want to check the project on Github?
+          w-button(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
+            | Github
+            w-icon.ml2(sm) mdi mdi-open-in-new
+    template(#js).
+      data: () => ({
+        items: [
+          { id: 'item1' },
+          { id: 'item2' },
+          { id: 'item3' }
+        ]
+      })
+
+  title-link(h2) Toggle icon options
+  example(content-class="pa4 aliceblue")
+    .title4 1 custom icon (only expand)
     w-accordion.white--bg(:items="items" expand-icon="wi-chevron-down")
+    .title4.mt6 2 custom icons (expand &amp; collapse)
+    w-accordion.white--bg(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
     .title4.mt6 No icon
     w-accordion.white--bg(:items="items" expand-icon="")
+    .title4.mt6 Icon on the right
+    w-accordion.white--bg(:items="items" expand-icon-right)
     template(#pug).
+      .title4 1 custom icon (only expand)
+      w-accordion.white--bg(:items="items" expand-icon="wi-chevron-down")
 
+      .title4.mt6 2 custom icons (expand &amp; collapse)
+      w-accordion.white--bg(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
+
+      .title4.mt6 No icon
+      w-accordion.white--bg(:items="items" expand-icon="")
+
+      .title4.mt6 Icon on the right
+      w-accordion.white--bg(:items="items" expand-icon-right)
+    template(#js).
+      data: () => ({
+        items: [
+          {
+            title: 'Item 1',
+            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+          },
+          {
+            title: 'Item 2',
+            content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+          },
+          {
+            title: 'Item 3',
+            content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+          }
+        ]
+      })
 </template>
 
 <script>
@@ -85,11 +319,14 @@ export default {
         color: 'orange'
       }
     ],
+    itemsCustom: [
+      { id: 'item1' },
+      { id: 'item2' },
+      { id: 'item3' }
+    ],
     accordion1: [],
     accordion2: [],
-    accordion3: [],
-    accordion4: [],
-    accordion5: []
+    accordion3: []
   })
 }
 </script>
