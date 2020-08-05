@@ -26,7 +26,7 @@ export default {
   name: 'w-dialog',
   props: {
     value: { type: Boolean },
-    maxWidth: { type: Number, default: 0 },
+    width: { type: Number, default: 0 },
     fullscreen: { type: Boolean },
     persistent: { type: Boolean },
     persistentNoAnimation: { type: Boolean },
@@ -53,7 +53,7 @@ export default {
     },
     contentStyles () {
       return {
-        maxWidth: !this.fullscreen && this.maxWidth ? `${this.maxWidth}px` : null
+        maxWidth: !this.fullscreen && this.width ? `${this.width}px` : null
       }
     }
   },
