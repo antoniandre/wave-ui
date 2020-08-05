@@ -1,48 +1,79 @@
 <template lang="pug">
-  .w-accordion
+  .w-accordion(:class="accordionClasses")
     .w-accordion__item(
       v-for="(item, i) in accordionItems"
       :key="i"
-      tabindex="0"
-      @keypress.enter="item.open = true"
-      :class="{ ...itemClasses, 'w-accordion__item--open': item.open }")
-      .w-accordion__item-title(@click="item.open = !item.open")
-        w-button.w-accordion__expand-icon(:icon="expandIcon" text @click.stop="item.open = !item.open")
+      :class="{ ...itemClasses, 'w-accordion__item--expanded': item.open }")
+      .w-accordion__item-title(
+        @click="toggleItem(item)"
+        tabindex="0"
+        @keypress.enter="toggleItem(item)"
+        :class="titleClass")
+        w-button.w-accordion__expand-icon(
+          :icon="(item.open && collapseIcon) || expandIcon"
+          text
+          @click.stop="toggleItem(item)")
         slot(name="item-title" :item="item")
           div(v-html="item.title")
       w-transition-expand(y)
-        .w-accordion__item-content(v-if="item.open")
+        .w-accordion__item-content(v-if="item.open" :class="contentClass")
           slot(name="item-content" :item="item")
             div(v-html="item.content")
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'w-accordion',
   props: {
     value: { type: Array },
+    color: { type: String, default: '' },
+    bgColor: { type: String, default: '' },
     items: { type: Array },
     itemClass: { type: String },
-    expandIcon: { type: String, default: 'wi-triangle-down' },
+    titleClass: { type: String },
+    contentClass: { type: String },
+    expandIcon: { type: [String, Boolean], default: 'wi-triangle-down' },
+    expandIconRight: { type: Boolean },
+    expandSingle: { type: Boolean },
     collapseIcon: { type: String },
   },
 
   data: () => ({
-    open: []
   }),
 
   computed: {
     accordionItems () {
-      return this.items.slice(0).map(item => {
-        this.$set(item, 'open', false)
-        return item
-      })
+      return this.items.map((item, index) => new Vue.observable({ ...item, index, open: false }))
+    },
+
+    accordionClasses () {
+      return {
+        [this.color]: this.color,
+        [`${this.bgColor}--bg`]: this.bgColor,
+        'w-accordion--rotating-icon': this.expandIcon && !this.collapseIcon
+      }
     },
 
     itemClasses () {
       return {
         [this.itemClass]: this.itemClass || null
       }
+    }
+  },
+
+  methods: {
+    toggleItem (item) {
+      item.open = !item.open
+      if (this.expandSingle) this.accordionItems.forEach(obj => obj.index !== item.index && (obj.open = false))
+      this.$emit('input', this.accordionItems.map(item => item.open))
+    }
+  },
+
+  watch: {
+    value (array) {
+      this.accordionItems.forEach((item, i) => this.$set(item, 'open', array[i]))
     }
   }
 }
@@ -56,20 +87,27 @@ export default {
     position: relative;
   }
 
-  button.w-accordion__expand-icon {
-    color: #999;
-    .w-icon:before {font-size: 1.2em;}
+  button.w-accordion__expand-icon {color: #999;}
+  &__expand-icon {
+    margin-right: $base-increment;
+
+    .w-accordion--rotating-icon & {@include default-transition;}
+    .w-accordion--rotating-icon .w-accordion__item--expanded & {transform: rotate(180deg);}
+
+    .w-icon:before {font-size: 1.1em;}
   }
 
   &__item-title {
     position: relative;
     display: flex;
     align-items: center;
-    font-size: round(1.5 * $base-font-size);
-    padding-top: 2 * $base-increment;
-    padding-bottom: 2 * $base-increment;
+    font-size: round(1.2 * $base-font-size);
+    padding: 1 * $base-increment;
     user-select: none;
     cursor: pointer;
+    border-top: 1px solid #ddd;
+
+    .w-accordion__item:first-child & {border-top-color: transparent;}
 
     &:before {
       content: '';
@@ -80,14 +118,14 @@ export default {
       bottom: 0;
       background-color: currentColor;
       opacity: 0;
-      @include default-fast-transition;
+      transition: $fast-transition-duration;
     }
-    &:hover:before {
-      opacity: 0.05;
-    }
+
+    &:focus:before, &:hover:before {opacity: 0.03;}
   }
 
   &__item-content {
+    padding: (2 * $base-increment) (3 * $base-increment);
   }
 }
 </style>
