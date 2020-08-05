@@ -9,15 +9,27 @@
         tabindex="0"
         @keypress.enter="toggleItem(item)"
         :class="titleClass")
+        //- Expand icon on left.
         w-button.w-accordion__expand-icon(
+          v-if="expandIcon && !expandIconRight"
           :icon="(item.open && collapseIcon) || expandIcon"
           text
           @click.stop="toggleItem(item)")
-        slot(name="item-title" :item="item")
-          div(v-html="item.title")
+        //- Title.
+        slot(v-if="$scopedSlots[`item-title-${item.id}`]" :name="`item-title-${item.id}`" :item="item")
+        slot(v-else name="item-title" :item="item")
+          div.grow(v-html="item.title")
+        //- Expand icon on right.
+        w-button.w-accordion__expand-icon(
+          v-if="expandIcon && expandIconRight"
+          :icon="(item.open && collapseIcon) || expandIcon"
+          text
+          @click.stop="toggleItem(item)")
+      //- Content.
       w-transition-expand(y)
         .w-accordion__item-content(v-if="item.open" :class="contentClass")
-          slot(name="item-content" :item="item")
+          slot(v-if="$scopedSlots[`item-content-${item.id}`]" :name="`item-content-${item.id}`" :item="item")
+          slot(v-else name="item-content" :item="item")
             div(v-html="item.content")
 </template>
 
@@ -38,6 +50,7 @@ export default {
     expandIconRight: { type: Boolean },
     expandSingle: { type: Boolean },
     collapseIcon: { type: String },
+    shadow: { type: Boolean },
   },
 
   data: () => ({
@@ -52,6 +65,9 @@ export default {
       return {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
+        'w-accordion--shadow': this.shadow,
+        'w-accordion--no-icon': !this.expandIcon && !this.collapseIcon,
+        'w-accordion--icon-right': this.expandIcon && this.expandIconRight,
         'w-accordion--rotating-icon': this.expandIcon && !this.collapseIcon
       }
     },
@@ -73,7 +89,9 @@ export default {
 
   watch: {
     value (array) {
-      this.accordionItems.forEach((item, i) => this.$set(item, 'open', array[i]))
+      this.accordionItems.forEach((item, i) => {
+        this.$set(item, 'open', (Array.isArray(array) && array[i]) || false)
+      })
     }
   }
 }
@@ -83,9 +101,9 @@ export default {
 .w-accordion {
   z-index: 1;
 
-  &__item {
-    position: relative;
-  }
+  &--shadow {box-shadow: $box-shadow;}
+
+  &__item {position: relative;}
 
   button.w-accordion__expand-icon {color: #999;}
   &__expand-icon {
@@ -105,7 +123,9 @@ export default {
     padding: 1 * $base-increment;
     user-select: none;
     cursor: pointer;
-    border-top: 1px solid #ddd;
+    border-top: $border;
+
+    .w-accordion--no-icon &, .w-accordion--icon-right & {padding-left: 3 * $base-increment;}
 
     .w-accordion__item:first-child & {border-top-color: transparent;}
 
