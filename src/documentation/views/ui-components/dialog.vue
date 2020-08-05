@@ -8,7 +8,7 @@ div
     w-dialog(
       v-model="dialog1.show"
       :fullscreen="dialog1.fullscreen"
-      :max-width="dialog1.maxWidth"
+      :width="dialog1.width"
       :persistent="dialog1.persistent"
       :persistent-no-animation="dialog1.persistentNoAnimation"
       title-class="primary-light1--bg white")
@@ -22,11 +22,15 @@ div
         :disabled="!dialog1.persistent"
         label="Persistent with no animation")
       .w-flex.mt6.no-grow
-        span.mr2 Max width:
+        span.mr2 Width:
         w-radios(
-          v-model="dialog1.maxWidth"
+          v-model="dialog1.width"
           :items="[{ value: 300, label: '300px' }, { value: 500, label: '500px' }]"
           inline)
+      p.mt4.grey-light1.
+        The #[span.code.grey-light1 width] parameter is called so for simplicity, but it internally translates to
+        a #[span.code.grey-light1 max-width] to fit on small screens.
+
       template(#actions)
         .spacer
         w-button(@click="dialog1.show = false") Close
@@ -35,7 +39,7 @@ div
       w-dialog(
         v-model="dialog.show"
         :fullscreen="dialog.fullscreen"
-        :max-width="dialog.maxWidth"
+        :width="dialog.width"
         :persistent="dialog.persistent"
         :persistent-no-animation="dialog.persistentNoAnimation"
         title-class="primary-light1--bg white")
@@ -49,9 +53,9 @@ div
           :disabled="!dialog.persistent"
           label="Persistent with no animation")
         .w-flex.mt6.no-grow
-          span.mr2 Max width:
+          span.mr2 Width:
           w-radios(
-            v-model="dialog.maxWidth"
+            v-model="dialog.width"
             :items="[{ value: 300, label: '300px' }, { value: 500, label: '500px' }]"
             inline)
         template(#actions="")
@@ -64,14 +68,14 @@ div
           fullscreen: false,
           persistent: false,
           persistentNoAnimation: false,
-          maxWidth: 300
+          width: 300
         }
       })
 
   title-link(h2) Persistent prompt dialog
   example(content-class="pt5")
     w-button.px4(@click="dialog2.show = true" bg-color="primary" dark) Open dialog
-    w-dialog(v-model="dialog2.show" persistent :max-width="550")
+    w-dialog(v-model="dialog2.show" persistent :width="550")
       template(#title) Terms and conditions
       p.
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
@@ -86,7 +90,7 @@ div
         w-button(@click="dialog2.show = false" bg-color="success") I agree
     template(#pug).
       w-button.px4(@click="dialog.show = true" bg-color="primary" dark) Open dialog
-      w-dialog(v-model="dialog.show" persistent :max-width="550")
+      w-dialog(v-model="dialog.show" persistent :width="550")
         template(#title="") Terms and conditions
         p.
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
@@ -107,7 +111,7 @@ div
   title-link(h2) Nesting
   example(content-class="pt5")
     w-button.px4(@click="dialog3.show = true" bg-color="primary" dark) Open dialog
-    w-dialog(v-model="dialog3.show" :max-width="600")
+    w-dialog(v-model="dialog3.show" :width="600")
       template(#title) Dialog 1
       p Lorem ipsum, dolor sit amet consectetur adipisicing elit...
       w-button.mt6(@click="dialog4.show = true" bg-color="indigo-light1" dark) Open dialog 2
@@ -116,12 +120,12 @@ div
         .spacer
         w-button(@click="dialog3.show = false" bg-color="error" dark) Close
 
-    w-dialog(v-model="dialog4.show" :max-width="250")
+    w-dialog(v-model="dialog4.show" :width="250")
       template(#title) Dialog 2
       w-button.my6(@click="dialog4.show = false" bg-color="error" dark) Close
     template(#pug).
       w-button.px4(@click="dialog1.show = true" bg-color="primary" dark) Open dialog
-      w-dialog(v-model="dialog1.show" :max-width="600")
+      w-dialog(v-model="dialog1.show" :width="600")
         template(#title="") Dialog 1
         p Lorem ipsum, dolor sit amet consectetur adipisicing elit...
         w-button.mt6(@click="dialog2.show = true" bg-color="indigo-light1" dark) Open dialog 2
@@ -130,7 +134,7 @@ div
           .spacer
           w-button(@click="dialog1.show = false" bg-color="error" dark) Close
 
-      w-dialog(v-model="dialog2.show" :max-width="250")
+      w-dialog(v-model="dialog2.show" :width="250")
         template(#title="") Dialog 2
         w-button.my6(@click="dialog2.show = false" bg-color="error" dark) Close
     template(#js).
@@ -168,7 +172,7 @@ div
             label="Fullscreen dialog")
     w-dialog(
       v-model="dialog5.show"
-      :max-width="(dialog5.fullscreen === null ? fullscreenTransition : dialog5.fullscreen) ? 0 : 400"
+      :width="(dialog5.fullscreen === null ? fullscreenTransition : dialog5.fullscreen) ? 0 : 400"
       :fullscreen="dialog5.fullscreen === null ? fullscreenTransition : dialog5.fullscreen"
       :transition="dialog5.transition")
       template(#title) Dialog with custom transition
@@ -202,7 +206,7 @@ div
               label="Fullscreen dialog")
       w-dialog(
         v-model="dialog.show"
-        :max-width="(dialog.fullscreen === null ? fullscreenTransition : dialog.fullscreen) ? 0 : 400"
+        :width="(dialog.fullscreen === null ? fullscreenTransition : dialog.fullscreen) ? 0 : 400"
         :fullscreen="dialog.fullscreen === null ? fullscreenTransition : dialog.fullscreen"
         :transition="dialog.transition")
         template(#title="") Dialog with custom transition
@@ -244,7 +248,7 @@ div
     w-button.px4(@click="dialog6.show = true" bg-color="primary" dark) Open control panel
     w-dialog(
       v-model="dialog6.show"
-      :max-width="500"
+      :width="500"
       :overlay-opacity="dialog6.overlayChoice === 'opacity' && dialog6.overlayOpacity"
       :overlay-color="dialog6.overlayChoice !== 'opacity' && dialog6.overlayChoice")
       template(#title)
@@ -263,7 +267,7 @@ div
       w-button.px4(@click="dialog.show = true" bg-color="primary" dark) Open control panel
       w-dialog(
         v-model="dialog.show"
-        :max-width="500"
+        :width="500"
         :overlay-opacity="dialog.overlayChoice === 'opacity' &amp;&amp; dialog.overlayOpacity"
         :overlay-color="dialog.overlayChoice !== 'opacity' &amp;&amp; dialog.overlayChoice")
         template(#title="")
@@ -296,7 +300,7 @@ export default {
       fullscreen: false,
       persistent: false,
       persistentNoAnimation: false,
-      maxWidth: 300
+      width: 300
     },
     dialog2: { show: false },
     dialog3: { show: false },

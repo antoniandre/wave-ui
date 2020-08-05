@@ -63,6 +63,14 @@ div
       }
 
   title-link(h2) Control width or height
+  p.
+    The #[span.code w-drawer] component accepts a #[span.code width] or #[span.code height] parameter
+    depending on its position on screen to override the default one.
+  p.grey-light1.
+    #[span.code.grey-light1 width] and #[span.code.grey-light1 height] are called so for simplicity but
+    they internally translate to #[span.code.grey-light1 max-width] and #[span.code.grey-light1 max-height]
+    to fit on small screens.
+
   example(content-class="w-flex align-center")
     w-button(
       @click="bottomDrawerHeight = '60px';showBottomDrawer = !showBottomDrawer"
