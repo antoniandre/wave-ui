@@ -46,7 +46,7 @@ export default {
       { label: 'Transitions', route: 'transitions' }
     ],
     components: [
-      { label: 'Accordion', route: 'w-accordion', inProgress: true },
+      { label: 'Accordion', route: 'w-accordion' },
       { label: 'Alert', route: 'w-alert' },
       { label: 'App', route: 'w-app' },
       { label: 'Badge', route: 'w-badge', inProgress: true },

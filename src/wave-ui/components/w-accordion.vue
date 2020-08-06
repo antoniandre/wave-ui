@@ -110,7 +110,8 @@ export default {
     margin-right: $base-increment;
 
     .w-accordion--rotating-icon & {@include default-transition;}
-    .w-accordion--rotating-icon .w-accordion__item--expanded & {transform: rotate(180deg);}
+    .w-accordion--rotating-icon .w-accordion__item--expanded & {transform: rotate(-180deg);}
+    .w-accordion--rotating-icon.w-accordion--icon-right .w-accordion__item--expanded & {transform: rotate(180deg);}
 
     .w-icon:before {font-size: 1.1em;}
   }
