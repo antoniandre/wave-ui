@@ -9,7 +9,7 @@ w-toolbar.main-toolbar(fixed)
       a.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
         w-icon(md) mdi mdi-github
     .size--xs.text-nowrap View the project on Github
-  .caption Version 1.0 Beta
+  .caption(v-html="`Version ${version}`")
   w-button.ml2.mr-1.hamburger-menu(
     v-if="$waveui.breakpoint.xs"
     @click="$emit('update:drawerOpen', !drawerOpen)"
@@ -22,6 +22,12 @@ w-toolbar.main-toolbar(fixed)
 export default {
   props: {
     drawerOpen: { type: Boolean, default: false }
+  },
+
+  computed: {
+    version () {
+      return process.env.VUE_APP_VERSION.replace(/-(\w)(\w+)\.(\d+)/, (m0, m1, m2, m3) => ` <strong>${m1.toUpperCase()}${m2} ${m3}</strong>`)
+    }
   }
 }
 </script>
