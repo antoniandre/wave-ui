@@ -5,6 +5,10 @@
 
 <script>
 export default {
-  name: 'w-transition-bounce'
+  name: 'w-transition-bounce',
+  props: {
+    appear: { type: Boolean },
+    duration: { type: [Number, String] }
+  }
 }
 </script>

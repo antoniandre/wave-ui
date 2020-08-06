@@ -5,6 +5,10 @@
 
 <script>
 export default {
-  name: 'w-transition-twist'
+  name: 'w-transition-twist',
+  props: {
+    appear: { type: Boolean },
+    duration: { type: [Number, String] }
+  }
 }
 </script>
