@@ -5,6 +5,10 @@
 
 <script>
 export default {
-  name: 'w-transition-scale'
+  name: 'w-transition-scale',
+  props: {
+    appear: { type: Boolean },
+    duration: { type: [Number, String] }
+  }
 }
 </script>

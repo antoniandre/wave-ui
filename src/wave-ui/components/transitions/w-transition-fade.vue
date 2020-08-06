@@ -5,6 +5,10 @@
 
 <script>
 export default {
-  name: 'w-transition-fade'
+  name: 'w-transition-fade',
+  props: {
+    appear: { type: Boolean },
+    duration: { type: [Number, String] }
+  }
 }
 </script>
