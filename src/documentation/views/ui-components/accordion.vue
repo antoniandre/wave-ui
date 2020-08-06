@@ -125,8 +125,8 @@ div
       | v-model:
       code.ml1 {{ accordion3 }}
     template(#pug).
-      w-button.mr2(@click="accordion = Array(3).fill(true)" bg-color="primary" sm) Expand all
-      w-button(@click="accordion = Array(3).fill(false)" bg-color="primary" sm) Collapse all
+      w-button.mr2(@click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;true&amp;#41;" bg-color="primary" sm) Expand all
+      w-button(@click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;false&amp;#41;" bg-color="primary" sm) Collapse all
 
       w-accordion.mt4(v-model="accordion" :items="items")
       div.mt3
