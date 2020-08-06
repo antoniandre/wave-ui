@@ -133,6 +133,10 @@ $spinner-size: 40;
   // in :before & :after.
   transition: $transition-duration, background-color 0s, padding 0s;
 
+  // In w-flex wrapper, allow overriding the default `align-self: center`.
+  .w-flex.align-start > & {align-self: flex-start;}
+  .w-flex.align-end > & {align-self: flex-end;}
+
   // Position.
   &--absolute {position: absolute;}
   &--fixed {position: fixed;}
