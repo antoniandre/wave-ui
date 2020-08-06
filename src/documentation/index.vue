@@ -74,7 +74,7 @@ export default {
 .nav-menu ~ .main-content {padding-left: 4em;}
 
 footer .heart:hover {animation: heartbeat 1s infinite;}
-footer small {font-size: 11px;}
+footer small {font-size: 10px;}
 
 @keyframes heartbeat {
   0%, 30%, 60%, 100% {transform: scale(1);}
