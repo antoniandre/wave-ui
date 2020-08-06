@@ -158,7 +158,7 @@ export default {
         html_pre_processor: slots.pug ? 'pug' : 'none',
         css,
         css_pre_processor: 'scss',
-        css_starter: 'reset',
+        css_starter: 'normalize',
         css_prefix: 'autoprefixer',
         js,
         js_pre_processor: 'babel',
