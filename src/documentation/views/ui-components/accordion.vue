@@ -209,7 +209,7 @@ div
         p The full content here is custom and completely distinct and independent from the other items.
         p
           | You also have access to the item's data if you need:
-          code {{ item }}
+          code.ml1 {{ item }}
 
       template(#item-title-item3="{ item }")
         strong This is the 3rd item
@@ -226,7 +226,7 @@ div
           w-tag.ml2(color="red" sm outline) HOT
         template(#item-content-item1="{ item }")
           p This content has a checklist.
-          .title4 To do
+          .title4.my3 To do
           w-list(checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]")
 
         template(#item-title-item2="{ item }")
@@ -236,14 +236,14 @@ div
           p The full content here is custom and completely distinct and independent from the other items.
           p
             | You also have access to the item's data if you need:
-            code {{ '\{\{ item \}\}' }}
+            code.ml1 {{ '\{\{ item \}\}' }}
 
         template(#item-title-item3="{ item }")
           strong This is the 3rd item
           w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
         template(#item-content-item3="{ item }")
           p Do you want to check the project on Github?
-          w-button(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
+          w-button.mt2(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
             | Github
             w-icon.ml2(sm) mdi mdi-open-in-new
     template(#js).
@@ -262,21 +262,21 @@ div
     .title4.mt6 2 custom icons (expand &amp; collapse)
     w-accordion.white--bg(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
     .title4.mt6 No icon
-    w-accordion.white--bg(:items="items" expand-icon="")
+    w-accordion.white--bg(:items="items" expand-icon="" title-class="py2")
     .title4.mt6 Icon on the right
     w-accordion.white--bg(:items="items" expand-icon-right)
     template(#pug).
-      .title4 1 custom icon (only expand)
-      w-accordion.white--bg(:items="items" expand-icon="wi-chevron-down")
+      .title4.mb2 1 custom icon (only expand)
+      w-accordion(:items="items" expand-icon="wi-chevron-down")
 
-      .title4.mt6 2 custom icons (expand &amp; collapse)
-      w-accordion.white--bg(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
+      .title4.mt8.mb2 2 custom icons (expand &amp; collapse)
+      w-accordion(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
 
-      .title4.mt6 No icon
-      w-accordion.white--bg(:items="items" expand-icon="")
+      .title4.mt8.mb2 No icon
+      w-accordion(:items="items" expand-icon="" title-class="py2")
 
-      .title4.mt6 Icon on the right
-      w-accordion.white--bg(:items="items" expand-icon-right)
+      .title4.mt8.mb2 Icon on the right
+      w-accordion(:items="items" expand-icon-right)
     template(#js).
       data: () => ({
         items: [
