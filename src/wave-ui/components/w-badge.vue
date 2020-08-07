@@ -73,7 +73,7 @@ export default {
         'w-badge__badge--overlap': this.overlap,
         'w-badge__badge--dot': this.dot,
         [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
-        [this.position.join(' ')]: true
+        [`w-badge__badge--${this.position.join(' w-badge__badge--')}`]: true
       }
     },
     styles () {
@@ -139,11 +139,16 @@ export default {
     }
 
     // Position.
-    &.top {top: 0;}
-    &.bottom {bottom: 0;}
-    &.left {right: 100%;}
-    &.right {left: 100%;}
-    &--overlap {margin: -2 * $base-increment;}
+    &--top {top: 0;}
+    &--bottom {bottom: 0;}
+    &--left {right: 100%;}
+    &--right {left: 100%;}
+    &--overlap {
+      &.w-badge__badge--top {margin-top: -1 * $base-increment;}
+      &.w-badge__badge--bottom {margin-bottom: -1 * $base-increment;}
+      &.w-badge__badge--left {margin-right: -3 * $base-increment;}
+      &.w-badge__badge--right {margin-left: -3 * $base-increment;}
+    }
 
     // Look modifiers.
     &--dark {color: rgba(255, 255, 255, 0.95);}

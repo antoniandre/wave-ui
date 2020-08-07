@@ -201,35 +201,46 @@ div
 
   title-link(h2) Overlap
   example
-    w-flex(wrap)
-      w-badge.mr10
+    .title4.mb2 Top
+    .w-flex.wrap.align-center
+      w-badge.ml4.mr10(top left)
         template(#badge) 3
-        div.grey-light5--bg.pa2.primary
-          w-icon.mr1 mdi mdi-email
-          | Emails
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
 
-      w-badge.my4.mr10(overlap bottom dot bg-color="green")
-        w-icon.blue--bg.pa6(size="2.5em" color="white") mdi mdi-account
+      w-badge.mr10(top right)
+        template(#badge) 3
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
 
-    w-flex(wrap)
-      w-badge.my4.mr10(overlap bottom bg-color="orange" sm color="white")
-        template(#badge) away
-        w-icon.blue--bg.pa6(size="2.5em" color="white") mdi mdi-account
+      w-icon.ml6.mr12.grey-light3(size="2.5em") mdi mdi-arrow-right
+
+      w-badge.mr10(top left overlap)
+        template(#badge) 3
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+      w-badge(top right overlap)
+        template(#badge) 3
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+    .title4.mt6.mb2 Bottom
+    .w-flex.wrap.align-center
+      w-badge.ml4.mr10(bottom left)
+        template(#badge) 3
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+      w-badge.mr10(bottom right)
+        template(#badge) 3
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+      w-icon.ml6.mr12.grey-light3(size="2.5em") mdi mdi-arrow-right
+
+      w-badge.mr10(bottom left overlap)
+        template(#badge) 3
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+      w-badge(bottom right overlap)
+        template(#badge) 3
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
     template(#pug).
-      w-flex(wrap)
-        w-badge.mr10
-          template(#badge="") 3
-          div.grey-light5--bg.pa2.primary
-            w-icon.mr1 mdi mdi-email
-            | Emails
-
-        w-badge.my4.mr10(overlap bottom dot bg-color="green")
-          w-icon.blue--bg.pa6(size="2.5em" color="white") mdi mdi-account
-
-      w-flex(wrap)
-        w-badge.my4.mr10(overlap bottom bg-color="orange" sm color="white")
-          template(#badge="") away
-          w-icon.blue--bg.pa6(size="2.5em" color="white") mdi mdi-account
 
   title-link(h2) Force round badge
   p.
@@ -262,6 +273,36 @@ div
           template(#badge="")
             span.size--sm 11
           w-icon(size="2.5em") mdi mdi-account
+
+  title-link(h2) Icons
+  example
+    w-badge.mr10(bg-color="success" overlap round)
+      template(#badge)
+        w-icon mdi mdi-check
+      w-icon(size="2.5em") mdi mdi-account
+    w-badge.mr10(bg-color="error" overlap round)
+      template(#badge)
+        w-icon mdi mdi-close
+      w-icon(size="2.5em") mdi mdi-account
+    w-badge.mr10(bg-color="transparent" overlap round)
+      template(#badge)
+        w-icon(color="pink-light1" md) mdi mdi-heart
+      w-icon(size="2.5em") mdi mdi-account
+    template(#pug).
+      w-badge.mr10(bg-color="success" overlap round)
+        template(#badge="")
+          w-icon mdi mdi-check
+        w-icon(size="2.5em") mdi mdi-account
+
+      w-badge.mr10(bg-color="error" overlap round)
+        template(#badge="")
+          w-icon mdi mdi-close
+        w-icon(size="2.5em") mdi mdi-account
+
+      w-badge.mr10(bg-color="transparent" overlap round)
+        template(#badge="")
+          w-icon(color="pink-light1" md) mdi mdi-heart
+        w-icon(size="2.5em") mdi mdi-account
 
   title-link(h2) Override badge padding
   example
