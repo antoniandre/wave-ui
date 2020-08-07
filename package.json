@@ -1,5 +1,5 @@
 {
-  "name": "the-wave-ui",
+  "name": "wave-ui",
   "version": "1.0.0-beta.7",
   "main": "./dist/wave-ui.common.js",
   "unpkg": "dist/wave-ui.umd.min.js",
