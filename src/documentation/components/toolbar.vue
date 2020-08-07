@@ -26,7 +26,10 @@ export default {
 
   computed: {
     version () {
-      return process.env.VUE_APP_VERSION.replace(/-(\w)(\w+)\.(\d+)/, (m0, m1, m2, m3) => ` <strong>${m1.toUpperCase()}${m2} ${m3}</strong>`)
+      return process.env.VUE_APP_VERSION.replace(
+        /-(\w)(\w+)\.(\d+)/,
+        (m0, m1, m2, m3) => ` <strong>${m1.toUpperCase()}${m2} ${m3}</strong>`
+      )
     }
   }
 }
