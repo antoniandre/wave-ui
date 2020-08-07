@@ -5,17 +5,14 @@ div
 
   title-link(h3) Download from NPM
   ssh-pre(language="shell").
-    npm i the-wave-ui
-  w-alert.alert--warning(warning icon-outside)
-    strong.mr2 WARNING:
-    span.mt1 The name #[span.code wave-ui] is taken at the moment. Make sure to install #[strong.grey-dark2.code the-wave-ui]!
+    npm i wave-ui
 
   title-link(h3).mt8 Import in your project
   ssh-pre(language="js" label="main.js").
     import Vue from 'vue'
     import App from './app'
-    import WaveUI from 'the-wave-ui'
-    import 'the-wave-ui/dist/wave-ui.css'
+    import WaveUI from 'wave-ui'
+    import 'wave-ui/dist/wave-ui.css'
 
     Vue.use(WaveUI)
 

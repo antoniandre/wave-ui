@@ -115,14 +115,14 @@ export default {
       ]
 
       const cssDeps = [
-        'https://unpkg.com/the-wave-ui@beta/dist/wave-ui.css',
+        'https://unpkg.com/wave-ui@latest/dist/wave-ui.css',
         'https://cdn.materialdesignicons.com/5.1.45/css/materialdesignicons.min.css'
       ]
       if (this.externalCss) cssDeps.push(this.externalCss)
 
       const jsDeps = [
         'https://unpkg.com/vue@latest/dist/vue.js',
-        'https://unpkg.com/the-wave-ui@beta/dist/wave-ui.umd.min.js'
+        'https://unpkg.com/wave-ui@latest/dist/wave-ui.umd.min.js'
       ]
       if (this.externalJs) jsDeps.push(this.externalJs)
 
