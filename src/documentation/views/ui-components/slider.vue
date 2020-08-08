@@ -11,7 +11,7 @@ div
       w-slider(:value="50")
 
   title-link(h2) V-model
-  example(content-class="mt2")
+  example
     w-flex(align-center)
       w-button(@click="sliderValue -= 5" icon="wi-minus" bg-color="success" sm)
       w-slider.mx3.grow(v-model="sliderValue" color="green")
@@ -31,6 +31,32 @@ div
       data: () => ({
         sliderValue: 50
       })
+
+  title-link(h2) Label
+  example(content-class="pt12")
+    w-slider.mb4(:value="24" thumb-label)
+
+  title-link(h3) Customize with the label slot
+  example(content-class="pt12 pb8")
+    w-slider(:value="46.3" color="green" thumb-label)
+      template(#label="{ value }") {{ ~~(value * 10) / 10 }}%
+
+  title-link(h3) Droplet style label
+  p With this option you can have a more modern look, but the drawback is that it can't contain long text.
+  p
+    | Of course it is a breeze to override the droplet label size via CSS. This will suffice:
+    code .w-slider {font-size: 1.4em}
+  p
+    | If you need you can also adjust the content font-size with:
+    code .w-slider__thumb-label div {font-size: 2em;}
+
+  p.
+    It is also possible to add classes to the thumb label through the #[code thumb-label-class] option
+    to add a color for instance.
+  example(content-class="pt12")
+    w-slider.mt2.mb12(:value="30" color="green" thumb-label="droplet")
+    w-slider.big-label.mt12.mb4(:value="60" color="green" thumb-label="droplet" thumb-label-class="success--bg")
+    template(#pug).
 </template>
 
 <script>
@@ -40,3 +66,7 @@ export default {
   })
 }
 </script>
+
+<style lang="scss">
+.big-label {font-size: 1.4em;}
+</style>
