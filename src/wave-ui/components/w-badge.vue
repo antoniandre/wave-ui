@@ -87,7 +87,6 @@ export default {
 .w-badge {
   position: relative;
   display: inline-flex;
-  align-self: center;
 
   &__badge {
     position: absolute;
