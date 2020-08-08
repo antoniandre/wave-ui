@@ -73,14 +73,14 @@ export default {
       this.track.left = left
       this.dragging = true
 
-      this.updateRange(((e.clientX - left) / width) * 100)
+      this.updateRange(e.clientX)
 
       document.addEventListener('mousemove', this.onDrag)
       document.addEventListener('mouseup', this.onMouseUp, { once: true })
     },
 
     onDrag (e) {
-      this.updateRange(((e.clientX - this.track.left) / this.track.width) * 100)
+      this.updateRange(e.clientX)
     },
 
     onMouseUp () {
@@ -89,12 +89,12 @@ export default {
     },
 
     onKeyPress (e) {
-      this.updateRange(((e.clientX - this.track.left) / this.track.width) * 100)
+      this.updateRange(e.clientX)
     },
 
-    updateRange (value) {
-      this.rangeValue = value
-      this.$emit('input', value)
+    updateRange (cursorPositionX) {
+      this.rangeValue = Math.max(0, Math.min(((cursorPositionX - this.track.left) / this.track.width) * 100, 100))
+      this.$emit('input', this.rangeValue)
     }
   },
 
@@ -106,7 +106,7 @@ export default {
 
   watch: {
     value (value) {
-      this.updateRange(value)
+      this.rangeValue = Math.max(0, Math.min(value, 100))
     }
   }
 }
