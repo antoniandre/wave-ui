@@ -137,4 +137,8 @@ div.nav-menu {
     z-index: 10;
   }
 }
+
+@media screen and (max-width: 800px) {
+  div.nav-menu {max-width: 220px;}
+}
 </style>
