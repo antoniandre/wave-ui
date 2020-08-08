@@ -1,8 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1 slug="w-badge")
-    | w-badge
-    w-tag.ml3(bg-color="orange" color="white" lg) In progress
+  title-link.mt4.code(h1 slug="w-badge") w-badge
 
   title-link(h2) Default
   p The default badge background color is primary.
