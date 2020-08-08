@@ -4,7 +4,10 @@ div
     | w-slider
     w-tag.ml3(bg-color="orange" color="white" lg) In progress
 
-  w-slider
+  title-link(h2) Default
+  example(content-class="mt2")
+    w-slider(:value="33")
+    w-slider.mt12
 </template>
 
 <script>
