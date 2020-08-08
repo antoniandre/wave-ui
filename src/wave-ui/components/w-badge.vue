@@ -148,6 +148,14 @@ export default {
       &.w-badge__badge--bottom {margin-bottom: -1 * $base-increment;}
       &.w-badge__badge--left {margin-right: -3 * $base-increment;}
       &.w-badge__badge--right {margin-left: -3 * $base-increment;}
+      &.size--xs.w-badge__badge--top {margin-top: round(-0.5 * $base-increment);}
+      &.size--xs.w-badge__badge--bottom {margin-bottom: round(-0.5 * $base-increment);}
+      &.size--sm.w-badge__badge--top {margin-top: round(-0.75 * $base-increment);}
+      &.size--sm.w-badge__badge--bottom {margin-bottom: round(-0.75 * $base-increment);}
+      &.size--lg.w-badge__badge--top {margin-top: round(-1.5 * $base-increment);}
+      &.size--lg.w-badge__badge--bottom {margin-bottom: round(-1.5 * $base-increment);}
+      &.size--xl.w-badge__badge--top {margin-top: -2 * $base-increment;}
+      &.size--xl.w-badge__badge--bottom {margin-bottom: -2 * $base-increment;}
     }
 
     // Look modifiers.
