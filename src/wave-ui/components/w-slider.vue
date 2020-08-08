@@ -5,10 +5,15 @@
       :class="trackClasses"
       @mousedown="onTrackMouseDown")
       .w-slider__range(:class="rangeClasses" :style="rangeStyles")
-        .w-slider__thumb(:class="thumbClasses")
-          button.w-slider__thumb-button(:class="[color]" @keypress="onKeyPress")
-          .w-slider__thumb-label(v-if="thumbLabel" :class="thumbClasses")
-            slot(name="thumb") 0%
+        .w-slider__thumb()
+          button.w-slider__thumb-button(:id="`button-${_uid}`" :class="[color]" @keypress="onKeyPress")
+          label.w-slider__thumb-label(
+            v-if="thumbLabel"
+            :for="`button-${_uid}`"
+            :class="thumbClasses")
+            div(v-if="thumbLabel === 'droplet'")
+              slot(name="label" :value="rangeValue") {{ ~~rangeValue }}
+            slot(v-else name="label" :value="rangeValue") {{ ~~rangeValue }}
 </template>
 
 <script>
@@ -18,10 +23,10 @@ export default {
     value: { type: Number, default: 0 },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
-    thumbLabel: { type: Boolean },
+    thumbLabel: { type: [Boolean, String] }, // One of true, false, 'droplet'
+    thumbLabelClass: { type: String },
     trackClass: { type: String },
     rangeClass: { type: String },
-    thumbLabelClass: { type: String },
   },
 
   data () {
@@ -56,7 +61,8 @@ export default {
     },
     thumbClasses () {
       return {
-        [this.thumbClass]: this.thumbClass || null
+        [this.thumbLabelClass]: this.thumbLabelClass || null,
+        'w-slider__thumb-label--droplet': this.thumbLabel === 'droplet'
       }
     },
     wrapperClasses () {
@@ -126,6 +132,8 @@ export default {
     cursor: pointer;
   }
 
+  // Track.
+  // ------------------------------------------------------
   &__track {
     height: $slider-height;
     background-color: $slider-track-color;
@@ -142,6 +150,8 @@ export default {
     }
   }
 
+  // Range.
+  // ------------------------------------------------------
   &__range {
     height: 100%;
     z-index: 1;
@@ -151,12 +161,15 @@ export default {
     .w-slider--dragging & {transition: none;}
   }
 
+  // Thumb.
+  // ------------------------------------------------------
   &__thumb {
     position: absolute;
     width: 3 * $base-increment;
     height: 3 * $base-increment;
     left: 100%;
     top: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
   }
 
@@ -164,7 +177,6 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
-    transform: translate(-50%, -50%);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.35);
     border: none;
     border-radius: 5em;
@@ -200,10 +212,56 @@ export default {
     }
   }
 
+  // Thumb label.
+  // ------------------------------------------------------
   &__thumb-label {
     position: absolute;
+    left: 50%;
     bottom: 100%;
-    margin-bottom: $base-increment;
+    margin-bottom: round(3 * $base-increment);
+    transform: translateX(-50%);
+    padding: round(0.75 * $base-increment) (2 * $base-increment);
+    background-color: #fff;
+    border-radius: $border-radius;
+    border: $border;
+    font-size: 0.85em;
+    color:rgba(0, 0, 0, 0.7);
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border: solid transparent;
+    }
+
+    &:before {border-width: 7px;border-top-color: inherit;}
+    &:after {border-width: 6px;border-top-color: #fff;}
+
+    &--droplet {
+      transform: translateX(-50%) rotate(-45deg);
+      border-radius: 5em 5em 5em 0;
+      width: 2.8em;
+      height: 2.8em;
+
+      & > div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        transform: rotate(45deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1em;
+      }
+
+      &:before, &:after {display: none;}
+    }
   }
 }
 </style>
