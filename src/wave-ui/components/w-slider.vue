@@ -1,11 +1,13 @@
 <template lang="pug">
   .w-slider(:class="wrapperClasses")
+    .w-slider__label.w-slider__label--left(v-if="$slots['label-left']")
+      slot(name="label-left")
+    .w-slider__label.w-slider__label--left(v-else-if="labelLeft" v-html="labelLeft")
     .w-slider__track(
       ref="track"
       @mousedown="onTrackMouseDown"
       :class="trackClasses"
       role="slider"
-      tabindex="0"
       aria-label="Slider"
       :aria-valuemin="minVal"
       :aria-valuemax="maxVal"
@@ -30,6 +32,9 @@
           div(v-if="thumbLabel === 'droplet'")
             slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
           slot(v-else name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
+    .w-slider__label.w-slider__label--right(v-if="$slots['label-right']")
+      slot(name="label-right")
+    .w-slider__label.w-slider__label--right(v-else-if="labelRight" v-html="labelRight")
 </template>
 
 <script>
@@ -49,6 +54,8 @@ export default {
     step: { type: [Number, String] },
     disabled: { type: Boolean },
     readonly: { type: Boolean },
+    labelLeft: { type: String },
+    labelRight: { type: String }
   },
 
   data: () => ({
@@ -184,21 +191,26 @@ export default {
 .w-slider {
   position: relative;
   display: flex;
+  align-items: center;
   user-select: none;
   min-width: 20px;
 
   &__track, &__range {
-    position: absolute;
-    left: 0;
-    right: 0;
     cursor: pointer;
 
     .w-slider--disabled &, .w-slider--readonly & {cursor: auto;}
   }
 
+  // Slider label, left & right.
+  // ------------------------------------------------------
+  &__label--left {margin-right: 3 * $base-increment;}
+  &__label--right {margin-left: 3 * $base-increment;}
+
   // Track.
   // ------------------------------------------------------
   &__track {
+    position: relative;
+    flex-grow: 1;
     height: $slider-height;
     background-color: $slider-track-color;
     border-radius: $border-radius;
@@ -217,6 +229,9 @@ export default {
   // Range.
   // ------------------------------------------------------
   &__range {
+    position: absolute;
+    left: 0;
+    right: 0;
     height: 100%;
     z-index: 1;
     transition: $transition-duration;
@@ -243,6 +258,8 @@ export default {
 
   &__thumb-button {
     position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
     border: none;

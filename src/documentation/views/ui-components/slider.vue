@@ -5,6 +5,7 @@ div
     w-tag.ml3(bg-color="orange" color="white" lg) In progress
 
   title-link(h2) Default
+  p By default the range will have the #[code primary] color.
   example(content-class="mt5")
     w-slider(:value="50")
     template(#pug).
@@ -62,20 +63,36 @@ div
     w-slider.mt2(:value="50" disabled)
     w-slider.mt8(:value="50" readonly)
     template(#pug).
+      w-slider.mt2(:value="50" disabled)
+      w-slider.mt8(:value="50" readonly)
 
-  title-link(h2) Label
+  title-link(h2) Labels on the left &amp; right
+  example
+    w-slider.mt2(:value="50" label-left="0" label-right="100")
+    w-slider.mt6(:value="50" label-left="Left")
+    w-slider.mt6(:value="50" label-right="Right")
+    w-slider.mt12(:value="50")
+      template(#label-left)
+        span Weight
+        w-icon.ml2.green mdi mdi-feather
+      template(#label-right)
+        w-icon.red mdi mdi-weight
+        w-icon.red mdi mdi-weight
+    template(#pug).
+
+  title-link(h2) Thumb label
   example(content-class="pt12")
     w-slider.mb4(:value="24" thumb-label)
 
-  title-link(h3) Customize with the label slot
+  title-link(h3 slug="custom-label-with-label-slot") Customize the label with the #[span.code label] slot
   example(content-class="pt12 pb8")
     w-slider(:value="46.3" color="green" thumb-label)
       template(#label="{ value }") {{ ~~(value * 10) / 10 }}%
 
   title-link(h3) Droplet style label
-  p With this option you can have a more modern look, but the drawback is that it can't contain long text.
+  p With this option you can have a more modern look, but the drawback is that it can't contain long texts.
   p
-    | Of course it is a breeze to override the droplet label size via CSS. This will suffice:
+    | It is a breeze to override the droplet label size via CSS, this will suffice:
     code .w-slider {font-size: 1.4em}
   p
     | If you need you can also adjust the content font-size with:
