@@ -15,7 +15,10 @@
       .w-slider__range(:class="rangeClasses" :style="rangeStyles")
         input(:name="inputName" type="hidden" :value="rangeValueScaled")
         .w-slider__thumb
-          button.w-slider__thumb-button(:id="`button-${_uid}`" :class="[color]" @keypress="onKeyPress")
+          button.w-slider__thumb-button(
+            :id="`button-${_uid}`" :class="[color]"
+            @keydown.left="onKeyDown(-1)"
+            @keydown.right="onKeyDown(1)")
           label.w-slider__thumb-label(
             v-if="thumbLabel"
             :for="`button-${_uid}`"
@@ -128,8 +131,9 @@ export default {
       document.removeEventListener('mousemove', this.onDrag)
     },
 
-    onKeyPress (e) {
-      this.updateRange(e.clientX)
+    onKeyDown (direction) {
+      this.rangeValuePercent += direction * this.rangeValuePercent * 5 / 100
+      this.rangeValueScaled = this.percentToScaled(this.rangeValuePercent)
     },
 
     updateRange (cursorPositionX) {
