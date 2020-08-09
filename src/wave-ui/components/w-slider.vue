@@ -5,15 +5,15 @@
       :class="trackClasses"
       @mousedown="onTrackMouseDown")
       .w-slider__range(:class="rangeClasses" :style="rangeStyles")
-        .w-slider__thumb()
+        .w-slider__thumb
           button.w-slider__thumb-button(:id="`button-${_uid}`" :class="[color]" @keypress="onKeyPress")
           label.w-slider__thumb-label(
             v-if="thumbLabel"
             :for="`button-${_uid}`"
             :class="thumbClasses")
             div(v-if="thumbLabel === 'droplet'")
-              slot(name="label" :value="rangeValue") {{ ~~rangeValue }}
-            slot(v-else name="label" :value="rangeValue") {{ ~~rangeValue }}
+              slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
+            slot(v-else name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
 </template>
 
 <script>
@@ -27,24 +27,36 @@ export default {
     thumbLabelClass: { type: String },
     trackClass: { type: String },
     rangeClass: { type: String },
+    min: { type: [Number, String], default: 0 },
+    max: { type: [Number, String], default: 100 },
+    step: { type: [Number, String] }
   },
 
-  data () {
-    return {
-      track: {
-        el: null,
-        left: 0,
-        width: 0
-      },
-      rangeValue: this.value,
-      dragging: false
-    }
-  },
+  data: () => ({
+    track: {
+      el: null,
+      left: 0,
+      width: 0
+    },
+    dragging: false,
+    rangeValuePercent: 0,
+    rangeValueScaled: 0
+  }),
 
   computed: {
+    minVal () {
+      return parseFloat(this.min)
+    },
+    maxVal () {
+      return parseFloat(this.max)
+    },
+    // Lighten the maths while dragging by caching some of the maths - it's already that!
+    scaledRange () {
+      return this.maxVal - this.minVal
+    },
     rangeStyles () {
       return {
-        width: `${this.rangeValue}%`
+        width: `${this.rangeValuePercent}%`
       }
     },
     rangeClasses () {
@@ -73,6 +85,15 @@ export default {
   },
 
   methods: {
+    scaledToPercent (value) {
+      // percentage = (value - min) / (max - min)
+      return Math.max(0, Math.min((value - this.minVal) / this.scaledRange * 100, 100))
+    },
+
+    percentToScaled (value) {
+      return ((value / 100) * this.scaledRange) + this.minVal
+    },
+
     onTrackMouseDown (e) {
       const { left, width } = this.track.el.getBoundingClientRect()
       this.track.width = width
@@ -99,20 +120,24 @@ export default {
     },
 
     updateRange (cursorPositionX) {
-      this.rangeValue = Math.max(0, Math.min(((cursorPositionX - this.track.left) / this.track.width) * 100, 100))
-      this.$emit('input', this.rangeValue)
+      this.rangeValuePercent = Math.max(0, Math.min(((cursorPositionX - this.track.left) / this.track.width) * 100, 100))
+      this.rangeValueScaled = this.percentToScaled(this.rangeValuePercent)
+      this.$emit('input', this.rangeValueScaled)
     }
   },
 
   beforeMount () {
     this.$nextTick(() => {
       this.track.el = this.$refs.track
+      this.rangeValueScaled = this.value
+      this.rangeValuePercent = this.scaledToPercent(this.value)
     })
   },
 
   watch: {
     value (value) {
-      this.rangeValue = Math.max(0, Math.min(value, 100))
+      this.rangeValueScaled = value
+      this.rangeValuePercent = this.scaledToPercent(value)
     }
   }
 }

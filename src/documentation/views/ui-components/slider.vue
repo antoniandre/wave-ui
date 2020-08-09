@@ -10,7 +10,7 @@ div
     template(#pug).
       w-slider(:value="50")
 
-  title-link(h2) V-model
+  title-link(h2) V-model &amp; external controls
   example
     w-flex(align-center)
       w-button(@click="sliderValue -= 5" icon="wi-minus" bg-color="success" sm)
@@ -31,6 +31,21 @@ div
       data: () => ({
         sliderValue: 50
       })
+
+  title-link(h2) Min &amp; max
+  example
+    .title4.mb4 From 4 to 5
+    w-slider(v-model="minMaxValue" :min="4" :max="5")
+    div.mt4
+      | v-model:
+      code.ml1 {{ minMaxValue }}
+    .title4.mt8.mb4 From -10 to 10
+    w-slider(v-model="minMaxValue2" :min="-10" :max="10")
+    div.mt4
+      | v-model:
+      code.ml1 {{ minMaxValue2 }}
+    template(#pug).
+      w-slider(:value="50")
 
   title-link(h2) Label
   example(content-class="pt12")
@@ -62,7 +77,9 @@ div
 <script>
 export default {
   data: () => ({
-    sliderValue: 50
+    sliderValue: 50,
+    minMaxValue: 4.5,
+    minMaxValue2: 0
   })
 }
 </script>
