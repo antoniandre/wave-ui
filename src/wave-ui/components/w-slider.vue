@@ -13,12 +13,14 @@
       aria-readonly="false"
       aria-orientation="horizontal")
       .w-slider__range(:class="rangeClasses" :style="rangeStyles")
-        input(:name="inputName" type="hidden" :value="rangeValueScaled")
         .w-slider__thumb
           button.w-slider__thumb-button(
+            ref="thumb"
             :id="`button-${_uid}`" :class="[color]"
-            @keydown.left="onKeyDown(-1)"
-            @keydown.right="onKeyDown(1)")
+            :name="inputName"
+            :value="rangeValueScaled"
+            @keydown.left="onKeyDown($event, -1)"
+            @keydown.right="onKeyDown($event, 1)")
           label.w-slider__thumb-label(
             v-if="thumbLabel"
             :for="`button-${_uid}`"
@@ -129,11 +131,13 @@ export default {
     onMouseUp () {
       this.dragging = false
       document.removeEventListener('mousemove', this.onDrag)
+      this.$refs.thumb.focus()
     },
 
-    onKeyDown (direction) {
-      this.rangeValuePercent += direction * this.rangeValuePercent * 5 / 100
+    onKeyDown (e, direction) {
+      this.rangeValuePercent += direction * this.rangeValuePercent * (e.shiftKey ? 5 : 1) / 100
       this.rangeValueScaled = this.percentToScaled(this.rangeValuePercent)
+      this.$emit('input', this.rangeValueScaled)
     },
 
     updateRange (cursorPositionX) {
@@ -239,7 +243,7 @@ export default {
       border: 1px solid currentColor;
       @include default-transition;
     }
-    &:hover:before, &:focus:before {opacity: 0.3;}
+    &:hover:before, &:focus:before, .w-slider--dragging &:before {opacity: 0.3;}
     &:active:before {
       opacity: 0.5;
       box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
