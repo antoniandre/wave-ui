@@ -45,7 +45,23 @@ div
       | v-model:
       code.ml1 {{ minMaxValue2 }}
     template(#pug).
-      w-slider(:value="50")
+      .title4.mb4 From 4 to 5
+      w-slider(v-model="minMaxValue" :min="4" :max="5")
+      div.mt4
+        | v-model:
+        code.ml1 {{ '\{\{ minMaxValue \}\}' }}
+
+      .title4.mt8.mb4 From -10 to 10
+      w-slider(v-model="minMaxValue2" :min="-10" :max="10")
+      div.mt4
+        | v-model:
+        code.ml1 {{ '\{\{ minMaxValue2 \}\}' }}
+
+  title-link(h2) Disabled &amp; readonly
+  example
+    w-slider.mt2(:value="50" disabled)
+    w-slider.mt8(:value="50" readonly)
+    template(#pug).
 
   title-link(h2) Label
   example(content-class="pt12")

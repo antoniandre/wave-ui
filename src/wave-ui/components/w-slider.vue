@@ -10,24 +10,26 @@
       :aria-valuemin="minVal"
       :aria-valuemax="maxVal"
       :aria-valuenow="rangeValueScaled"
-      aria-readonly="false"
+      :aria-readonly="readonly"
       aria-orientation="horizontal")
       .w-slider__range(:class="rangeClasses" :style="rangeStyles")
-        .w-slider__thumb
-          button.w-slider__thumb-button(
-            ref="thumb"
-            :id="`button-${_uid}`" :class="[color]"
-            :name="inputName"
-            :value="rangeValueScaled"
-            @keydown.left="onKeyDown($event, -1)"
-            @keydown.right="onKeyDown($event, 1)")
-          label.w-slider__thumb-label(
-            v-if="thumbLabel"
-            :for="`button-${_uid}`"
-            :class="thumbClasses")
-            div(v-if="thumbLabel === 'droplet'")
-              slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
-            slot(v-else name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
+      .w-slider__thumb(:style="thumbStyles")
+        button.w-slider__thumb-button(
+          ref="thumb"
+          :id="`button-${_uid}`" :class="[color]"
+          :name="inputName"
+          :value="rangeValueScaled"
+          :disabled="disabled"
+          :readonly="readonly"
+          @keydown.left="onKeyDown($event, -1)"
+          @keydown.right="onKeyDown($event, 1)")
+        label.w-slider__thumb-label(
+          v-if="thumbLabel"
+          :for="`button-${_uid}`"
+          :class="thumbClasses")
+          div(v-if="thumbLabel === 'droplet'")
+            slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
+          slot(v-else name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
 </template>
 
 <script>
@@ -44,7 +46,9 @@ export default {
     rangeClass: { type: String },
     min: { type: [Number, String], default: 0 },
     max: { type: [Number, String], default: 100 },
-    step: { type: [Number, String] }
+    step: { type: [Number, String] },
+    disabled: { type: Boolean },
+    readonly: { type: Boolean },
   },
 
   data: () => ({
@@ -77,6 +81,11 @@ export default {
         width: `${this.rangeValuePercent}%`
       }
     },
+    thumbStyles () {
+      return {
+        left: `${this.rangeValuePercent}%`
+      }
+    },
     rangeClasses () {
       return {
         [`${this.color}--bg`]: this.color,
@@ -97,7 +106,9 @@ export default {
     },
     wrapperClasses () {
       return {
-        'w-slider--dragging': this.dragging
+        'w-slider--dragging': this.dragging,
+        'w-slider--disabled': this.disabled,
+        'w-slider--readonly': this.readonly
       }
     }
   },
@@ -113,6 +124,8 @@ export default {
     },
 
     onTrackMouseDown (e) {
+      if (this.disabled || this.readonly) return
+
       const { left, width } = this.track.el.getBoundingClientRect()
       this.track.width = width
       this.track.left = left
@@ -135,7 +148,10 @@ export default {
     },
 
     onKeyDown (e, direction) {
-      this.rangeValuePercent += direction * this.rangeValuePercent * (e.shiftKey ? 5 : 1) / 100
+      if (this.disabled || this.readonly) return
+
+      this.rangeValuePercent += direction * (e.shiftKey ? 5 : 1)
+      this.rangeValuePercent = Math.max(0, Math.min(this.rangeValuePercent, 100))
       this.rangeValueScaled = this.percentToScaled(this.rangeValuePercent)
       this.$emit('input', this.rangeValueScaled)
     },
@@ -176,6 +192,8 @@ export default {
     left: 0;
     right: 0;
     cursor: pointer;
+
+    .w-slider--disabled &, .w-slider--readonly & {cursor: auto;}
   }
 
   // Track.
@@ -205,6 +223,7 @@ export default {
     border-radius: inherit;
 
     .w-slider--dragging & {transition: none;}
+    .w-slider--disabled & {opacity: 0.35;}
   }
 
   // Thumb.
@@ -217,17 +236,21 @@ export default {
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
+    transition: $transition-duration;
+
+    .w-slider--dragging & {transition: none;}
   }
 
   &__thumb-button {
     position: absolute;
     width: 100%;
     height: 100%;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.35);
     border: none;
     border-radius: 5em;
     cursor: pointer;
     background-color: #fff;
+
+    .w-slider--disabled &, .w-slider--readonly & {cursor: auto;}
 
     &:before, &:after {
       content: '';
@@ -238,18 +261,21 @@ export default {
       right: 0;
       top: 0;
       bottom: 0;
-      opacity: 0;
+      opacity: 0.5;
       border-radius: inherit;
       border: 1px solid currentColor;
       @include default-transition;
     }
-    &:hover:before, &:focus:before, .w-slider--dragging &:before {opacity: 0.3;}
-    &:active:before {
-      opacity: 0.5;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    &:hover:before, &:focus:before {opacity: 0.7;}
+    &:active:before, .w-slider--dragging &:before {
+      opacity: 1;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
       transition-duration: $fast-transition-duration;
     }
+    .w-slider--disabled &:before,
+    .w-slider--readonly &:before {box-shadow: none;opacity: 0.4;}
 
+    // For fat fingers.
     &:after {
       left: -5px;
       right: -5px;
