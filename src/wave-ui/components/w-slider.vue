@@ -2,9 +2,18 @@
   .w-slider(:class="wrapperClasses")
     .w-slider__track(
       ref="track"
+      @mousedown="onTrackMouseDown"
       :class="trackClasses"
-      @mousedown="onTrackMouseDown")
+      role="slider"
+      tabindex="0"
+      aria-label="Slider"
+      :aria-valuemin="minVal"
+      :aria-valuemax="maxVal"
+      :aria-valuenow="rangeValueScaled"
+      aria-readonly="false"
+      aria-orientation="horizontal")
       .w-slider__range(:class="rangeClasses" :style="rangeStyles")
+        input(:name="inputName" type="hidden" :value="rangeValueScaled")
         .w-slider__thumb
           button.w-slider__thumb-button(:id="`button-${_uid}`" :class="[color]" @keypress="onKeyPress")
           label.w-slider__thumb-label(
@@ -22,6 +31,7 @@ export default {
   props: {
     value: { type: Number, default: 0 },
     color: { type: String, default: 'primary' },
+    name: { type: String }, // When sending data through form.
     bgColor: { type: String },
     thumbLabel: { type: [Boolean, String] }, // One of true, false, 'droplet'
     thumbLabelClass: { type: String },
@@ -44,6 +54,9 @@ export default {
   }),
 
   computed: {
+    inputName () {
+      return this.name || `w-slider-${this._uid}`
+    },
     minVal () {
       return parseFloat(this.min)
     },
