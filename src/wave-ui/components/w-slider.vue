@@ -6,6 +6,7 @@
     .w-slider__track(
       ref="track"
       @mousedown="onTrackMouseDown"
+      @touchstart="onTrackMouseDown"
       :class="trackClasses"
       role="slider"
       aria-label="Slider"
@@ -132,26 +133,28 @@ export default {
 
     onTrackMouseDown (e) {
       if (this.disabled || this.readonly) return
+      // On touch screen don't listen for both touchstart & mousedown.
+      if ('ontouchstart' in window && e.type === 'mousedown') return
 
       const { left, width } = this.track.el.getBoundingClientRect()
       this.track.width = width
       this.track.left = left
       this.dragging = true
 
-      this.updateRange(e.clientX)
+      this.updateRange(e.type === 'touchstart' ? e.touches[0].clientX : e.clientX)
 
-      document.addEventListener('mousemove', this.onDrag)
-      document.addEventListener('mouseup', this.onMouseUp, { once: true })
+      document.addEventListener(e.type === 'touchstart' ? 'touchmove' : 'mousemove', this.onDrag)
+      document.addEventListener(e.type === 'touchstart' ? 'touchend' : 'mouseup', this.onMouseUp, { once: true })
     },
 
     onDrag (e) {
-      this.updateRange(e.clientX)
+      this.updateRange(e.type === 'touchmove' ? e.touches[0].clientX : e.clientX)
     },
 
-    onMouseUp () {
+    onMouseUp (e) {
       this.dragging = false
-      document.removeEventListener('mousemove', this.onDrag)
-      this.$refs.thumb.focus()
+      document.removeEventListener(e.type === 'touchend' ? 'touchmove' : 'mousemove', this.onDrag)
+      if (this.$refs.thumb) this.$refs.thumb.focus()
     },
 
     onKeyDown (e, direction) {
@@ -195,12 +198,6 @@ export default {
   user-select: none;
   min-width: 20px;
 
-  &__track, &__range {
-    cursor: pointer;
-
-    .w-slider--disabled &, .w-slider--readonly & {cursor: auto;}
-  }
-
   // Slider label, left & right.
   // ------------------------------------------------------
   &__label--left {margin-right: 3 * $base-increment;}
@@ -213,7 +210,12 @@ export default {
     flex-grow: 1;
     height: $slider-height;
     background-color: $slider-track-color;
+    -webkit-tap-highlight-color: transparent;
     border-radius: $border-radius;
+    touch-action: none;
+    cursor: pointer;
+
+    .w-slider--disabled &, .w-slider--readonly & {cursor: auto;touch-action: initial;}
 
     &:before {
       content: '';
@@ -294,10 +296,10 @@ export default {
 
     // For fat fingers.
     &:after {
-      left: -5px;
-      right: -5px;
-      top: -5px;
-      bottom: -5px;
+      left: -6px;
+      right: -6px;
+      top: -6px;
+      bottom: -6px;
     }
   }
 
