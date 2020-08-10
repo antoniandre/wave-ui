@@ -3,36 +3,41 @@
     .w-slider__label.w-slider__label--left(v-if="$slots['label-left']")
       slot(name="label-left")
     .w-slider__label.w-slider__label--left(v-else-if="labelLeft" v-html="labelLeft")
-    .w-slider__track(
-      ref="track"
-      @mousedown="onTrackMouseDown"
-      @touchstart="onTrackMouseDown"
-      :class="trackClasses"
-      role="slider"
-      aria-label="Slider"
-      :aria-valuemin="minVal"
-      :aria-valuemax="maxVal"
-      :aria-valuenow="rangeValueScaled"
-      :aria-readonly="readonly"
-      aria-orientation="horizontal")
-      .w-slider__range(:class="rangeClasses" :style="rangeStyles")
-      .w-slider__thumb(:style="thumbStyles")
-        button.w-slider__thumb-button(
-          ref="thumb"
-          :id="`button-${_uid}`" :class="[color]"
-          :name="inputName"
-          :value="rangeValueScaled"
-          :disabled="disabled"
-          :readonly="readonly"
-          @keydown.left="onKeyDown($event, -1)"
-          @keydown.right="onKeyDown($event, 1)")
-        label.w-slider__thumb-label(
-          v-if="thumbLabel"
-          :for="`button-${_uid}`"
-          :class="thumbClasses")
-          div(v-if="thumbLabel === 'droplet'")
-            slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
-          slot(v-else name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
+    .w-slider__track-wrapper
+      .w-slider__track(
+        ref="track"
+        @mousedown="onTrackMouseDown"
+        @touchstart="onTrackMouseDown"
+        :class="trackClasses"
+        role="slider"
+        aria-label="Slider"
+        :aria-valuemin="minVal"
+        :aria-valuemax="maxVal"
+        :aria-valuenow="rangeValueScaled"
+        :aria-readonly="readonly"
+        aria-orientation="horizontal")
+        .w-slider__range(:class="rangeClasses" :style="rangeStyles")
+        .w-slider__thumb(:style="thumbStyles")
+          button.w-slider__thumb-button(
+            ref="thumb"
+            :id="`button-${_uid}`" :class="[color]"
+            :name="inputName"
+            :value="rangeValueScaled"
+            :disabled="disabled"
+            :readonly="readonly"
+            @keydown.left="onKeyDown($event, -1)"
+            @keydown.right="onKeyDown($event, 1)")
+          label.w-slider__thumb-label(
+            v-if="thumbLabel"
+            :for="`button-${_uid}`"
+            :class="thumbClasses")
+            div(v-if="thumbLabel === 'droplet'")
+              slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
+            slot(v-else name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
+      .w-slider__step-labels(v-if="stepLabels && step")
+        .w-slider__step-label {{ this.minVal }}
+        .w-slider__step-label(v-for="step in steps" :key="step" :style="`left: ${step * (100 / steps)}%`")
+          | {{ percentToScaled(step * (100 / steps)) }}
     .w-slider__label.w-slider__label--right(v-if="$slots['label-right']")
       slot(name="label-right")
     .w-slider__label.w-slider__label--right(v-else-if="labelRight" v-html="labelRight")
@@ -46,7 +51,8 @@ export default {
     color: { type: String, default: 'primary' },
     name: { type: String }, // When sending data through form.
     bgColor: { type: String },
-    thumbLabel: { type: [Boolean, String] }, // One of true, false, 'droplet'
+    stepLabels: { type: [Boolean, Array] },
+    thumbLabel: { type: [Boolean, String] }, // One of true, false, 'droplet'.
     thumbLabelClass: { type: String },
     trackClass: { type: String },
     rangeClass: { type: String },
@@ -87,6 +93,9 @@ export default {
     scaledRange () {
       return this.maxVal - this.minVal
     },
+    steps () {
+      return this.scaledRange / this.step
+    },
     rangeStyles () {
       return {
         width: `${this.rangeValuePercent}%`
@@ -119,7 +128,8 @@ export default {
       return {
         'w-slider--dragging': this.dragging,
         'w-slider--disabled': this.disabled,
-        'w-slider--readonly': this.readonly
+        'w-slider--readonly': this.readonly,
+        'w-slider--has-step-labels': this.step && this.stepLabels
       }
     }
   },
@@ -205,15 +215,54 @@ export default {
   display: flex;
   align-items: center;
   user-select: none;
-  min-width: 20px;
 
   // Slider label, left & right.
   // ------------------------------------------------------
   &__label--left {margin-right: 3 * $base-increment;}
   &__label--right {margin-left: 3 * $base-increment;}
 
+  // Steps labels.
+  // ------------------------------------------------------
+  &--has-step-labels {padding-bottom: 4 * $base-increment;}
+  &__step-labels {
+    position: absolute;
+    top: 0;
+    display: flex;
+    width: 100%;
+  }
+
+  &__step-label {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    padding-top: 2 * $base-increment;
+    color:rgba(0, 0, 0, 0.5);
+    z-index: 1;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      width: $base-increment;
+      height: $base-increment;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 5em;
+      // box-shadow: 0 0 0 1px #fff;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+    &:first-child:before, &:last-child:before {display: none;}
+  }
+
   // Track.
   // ------------------------------------------------------
+  &__track-wrapper {
+    position: relative;
+    flex-grow: 1;
+  }
+
   &__track {
     position: relative;
     flex-grow: 1;
@@ -324,6 +373,7 @@ export default {
     background-color: #fff;
     border-radius: $border-radius;
     border: $border;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
     font-size: 0.85em;
     color:rgba(0, 0, 0, 0.7);
 
