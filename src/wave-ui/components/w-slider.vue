@@ -80,6 +80,9 @@ export default {
     maxVal () {
       return parseFloat(this.max)
     },
+    stepVal () {
+      return parseFloat(this.step)
+    },
     // Lighten the maths while dragging by caching some of the maths - it's already that!
     scaledRange () {
       return this.maxVal - this.minVal
@@ -128,7 +131,7 @@ export default {
     },
 
     percentToScaled (value) {
-      return ((value / 100) * this.scaledRange) + this.minVal
+      return Math.round((((value / 100) * this.scaledRange) + this.minVal) * 100) / 100
     },
 
     onTrackMouseDown (e) {
@@ -160,7 +163,7 @@ export default {
     onKeyDown (e, direction) {
       if (this.disabled || this.readonly) return
 
-      this.rangeValuePercent += direction * (e.shiftKey ? 5 : 1)
+      this.rangeValuePercent += direction * (e.shiftKey ? 5 : 1) * (this.step || 1)
       this.rangeValuePercent = Math.max(0, Math.min(this.rangeValuePercent, 100))
       this.rangeValueScaled = this.percentToScaled(this.rangeValuePercent)
       this.$emit('input', this.rangeValueScaled)
@@ -168,6 +171,10 @@ export default {
 
     updateRange (cursorPositionX) {
       this.rangeValuePercent = Math.max(0, Math.min(((cursorPositionX - this.track.left) / this.track.width) * 100, 100))
+      if (this.step) {
+        const valuePlusHalfStep = this.rangeValuePercent + (this.stepVal / 2)
+        this.rangeValuePercent = valuePlusHalfStep - (valuePlusHalfStep % this.stepVal)
+      }
       this.rangeValueScaled = this.percentToScaled(this.rangeValuePercent)
       this.$emit('input', this.rangeValueScaled)
     }
@@ -183,8 +190,10 @@ export default {
 
   watch: {
     value (value) {
-      this.rangeValueScaled = value
-      this.rangeValuePercent = this.scaledToPercent(value)
+      if (this.rangeValueScaled !== value) {
+        this.rangeValueScaled = value
+        this.rangeValuePercent = this.scaledToPercent(value)
+      }
     }
   }
 }
