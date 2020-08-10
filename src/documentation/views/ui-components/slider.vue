@@ -47,16 +47,17 @@ div
       code.ml1 {{ minMaxValue2 }}
     template(#pug).
       .title4.mb4 From 4 to 5
-      w-slider(v-model="minMaxValue" :min="4" :max="5")
+      w-slider(v-model="sliderValue" :min="4" :max="5")
       div.mt4
         | v-model:
-        code.ml1 {{ '\{\{ minMaxValue \}\}' }}
+        code.ml1 {{ '\{\{ sliderValue \}\}' }}
 
       .title4.mt8.mb4 From -10 to 10
-      w-slider(v-model="minMaxValue2" :min="-10" :max="10")
+      w-slider(v-model="slider2Value" :min="-10" :max="10")
       div.mt4
         | v-model:
-        code.ml1 {{ '\{\{ minMaxValue2 \}\}' }}
+        code.ml1 {{ '\{\{ slider2Value \}\}' }}
+    template(#js).
 
   title-link(h2) Disabled &amp; readonly
   example
@@ -65,6 +66,30 @@ div
     template(#pug).
       w-slider.mt2(:value="50" disabled)
       w-slider.mt8(:value="50" readonly)
+
+  title-link(h2) Steps
+  p.
+    There is no step by default to ensure a very smooth movement while dragging. This also means that
+    the v-model will contain decimals.#[br]
+    If you don't want to deal with decimals you can use the #[code step] option to make the slider only
+    stop on integer values.
+  p This
+  example
+    .title4.mb2 Step = 1
+    w-slider(v-model="sliderStepsValue1" :value="50" :step="1")
+    div.mt4
+      | v-model:
+      code.ml1 {{ sliderStepsValue1 }}
+    .title4.mt8.mb2 Step = 10
+    w-slider(v-model="sliderStepsValue2" :value="50" :step="10")
+    div.mt4
+      | v-model:
+      code.ml1 {{ sliderStepsValue2 }}
+    template(#pug).
+      div.mt4
+        | v-model:
+        code.ml1 {{ '\{\{ sliderValue \}\}' }}
+    template(#js).
 
   title-link(h2) Labels on the left &amp; right
   example
@@ -112,7 +137,9 @@ export default {
   data: () => ({
     sliderValue: 50,
     minMaxValue: 4.5,
-    minMaxValue2: 0
+    minMaxValue2: 0,
+    sliderStepsValue1: 0,
+    sliderStepsValue2: 0
   })
 }
 </script>
