@@ -35,9 +35,16 @@
               slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
             slot(v-else name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
       .w-slider__step-labels(v-if="stepLabels && step")
-        .w-slider__step-label {{ this.minVal }}
-        .w-slider__step-label(v-for="step in steps" :key="step" :style="`left: ${step * (100 / steps)}%`")
-          | {{ percentToScaled(step * (100 / steps)) }}
+        .w-slider__step-label(@click="onStepLabelClick(0)") {{ this.minVal }}
+        .w-slider__step-label(
+          v-for="currStep in ~~numberOfSteps"
+          :key="currStep"
+          @click="onStepLabelClick(currStep * (100 / numberOfSteps))"
+          :style="`left: ${currStep * (100 / numberOfSteps)}%`") {{ percentToScaled(currStep * (100 / numberOfSteps)) }}
+        .w-slider__step-label(
+          v-if="~~numberOfSteps !== numberOfSteps"
+          @click="onStepLabelClick(100)"
+          style="left: 100%") {{ this.maxVal }}
     .w-slider__label.w-slider__label--right(v-if="$slots['label-right']")
       slot(name="label-right")
     .w-slider__label.w-slider__label--right(v-else-if="labelRight" v-html="labelRight")
@@ -86,15 +93,16 @@ export default {
     maxVal () {
       return parseFloat(this.max)
     },
-    stepVal () {
-      return parseFloat(this.step)
+    stepValPercent () {
+      // Don't allow a step that is bigger than the whole scale.
+      return Math.min(parseFloat(this.step), this.scaledRange) / this.scaledRange * 100
     },
     // Lighten the maths while dragging by caching some of the maths - it's already that!
     scaledRange () {
       return this.maxVal - this.minVal
     },
-    steps () {
-      return this.scaledRange / this.step
+    numberOfSteps () {
+      return 100 / this.stepValPercent
     },
     rangeStyles () {
       return {
@@ -170,21 +178,29 @@ export default {
       if (this.$refs.thumb) this.$refs.thumb.focus()
     },
 
+    onStepLabelClick (step) {
+      this.rangeValuePercent = step
+      this.updateRangeValueScaled()
+    },
+
     onKeyDown (e, direction) {
       if (this.disabled || this.readonly) return
 
-      this.rangeValuePercent += direction * (e.shiftKey ? 5 : 1) * (this.step || 1)
+      this.rangeValuePercent += direction * (e.shiftKey ? 5 : 1) * (this.stepValPercent || 1)
       this.rangeValuePercent = Math.max(0, Math.min(this.rangeValuePercent, 100))
-      this.rangeValueScaled = this.percentToScaled(this.rangeValuePercent)
-      this.$emit('input', this.rangeValueScaled)
+      this.updateRangeValueScaled()
     },
 
     updateRange (cursorPositionX) {
       this.rangeValuePercent = Math.max(0, Math.min(((cursorPositionX - this.track.left) / this.track.width) * 100, 100))
       if (this.step) {
-        const valuePlusHalfStep = this.rangeValuePercent + (this.stepVal / 2)
-        this.rangeValuePercent = valuePlusHalfStep - (valuePlusHalfStep % this.stepVal)
+        const valuePlusHalfStep = this.rangeValuePercent + (this.stepValPercent / 2)
+        this.rangeValuePercent = valuePlusHalfStep - (valuePlusHalfStep % this.stepValPercent)
       }
+      this.updateRangeValueScaled()
+    },
+
+    updateRangeValueScaled () {
       this.rangeValueScaled = this.percentToScaled(this.rangeValuePercent)
       this.$emit('input', this.rangeValueScaled)
     }

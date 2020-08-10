@@ -87,11 +87,11 @@ div
 
   title-link(h2) Thumb label
   example(content-class="pt12 px8")
-    w-slider.mb4(:value="24" thumb-label)
+    w-slider.mb4(:value="24" thumb-label color="primary-light3")
 
   title-link(h3 slug="custom-label-with-label-slot") Customize the label with the #[span.code label] slot
   example(content-class="pt12 pb8 px8")
-    w-slider(:value="46.3" color="green" thumb-label)
+    w-slider(:value="46.3" thumb-label color="primary-light3")
       template(#label="{ value }") {{ ~~(value * 10) / 10 }}%
 
   title-link(h3) Droplet style label
@@ -107,8 +107,8 @@ div
     It is also possible to add classes to the thumb label through the #[code thumb-label-class] option
     to add a color for instance.
   example(content-class="pt12 pl10 pr12")
-    w-slider.mt2.mb12(:value="30" color="green" thumb-label="droplet")
-    w-slider.big-label.mt12.mb4(:value="60" color="green" thumb-label="droplet" thumb-label-class="success--bg")
+    w-slider.mt2.mb12(:value="30" thumb-label="droplet")
+    w-slider.big-label.mt12.mb4(:value="60" thumb-label="droplet" thumb-label-class="primary--bg")
     template(#pug).
 
   title-link(h2) Steps
@@ -119,24 +119,24 @@ div
     stop on integer values.
   example(content-class="px6")
     .title4.mb4 Step = 1
-    w-slider(v-model="sliderStepsValue1" :value="50" :step="1")
+    w-slider(v-model="sliderStepsValue1" :step="1")
     div.mt4
       | v-model:
       code.ml1 {{ sliderStepsValue1 }}
     .title4.mt8.mb4 Step = 10
-    w-slider(v-model="sliderStepsValue2" :value="50" :step="10")
+    w-slider(v-model="sliderStepsValue2" :step="10")
     div.mt4
       | v-model:
       code.ml1 {{ sliderStepsValue2 }}
     template(#pug).
       .title4.mb4 Step = 1
-      w-slider(v-model="sliderValue" :value="50" :step="1")
+      w-slider(v-model="sliderValue" :step="1")
       div.mt4
         | v-model:
         code.ml1 {{ '\{\{ sliderValue \}\}' }}
 
       .title4.mt8.mb4 Step = 10
-      w-slider(v-model="slider2Value" :value="50" :step="10")
+      w-slider(v-model="slider2Value" :step="10")
       div.mt4
         | v-model:
         code.ml1 {{ '\{\{ slider2Value \}\}' }}
@@ -149,11 +149,10 @@ div
   title-link(h2) Step labels
   example(content-class="px6")
     .title4.mb4 Default step labels
-    w-slider(v-model="sliderStepsValue3" color="primary-light2" :value="50" :step="20" step-labels)
-    .title4.mt8.mb4 Custom step labels
-    w-slider(v-model="sliderStepsValue4" color="primary-light2" :value="50" :step="20" step-labels)
-    .title4.mt8.mb4 Custom step labels
-    w-slider(v-model="sliderStepsValue5" color="primary-light2" :value="50" :step="20" step-labels label-left="left" label-right="right")
+    w-slider(v-model="sliderStepsValue3" color="primary-light2" :step="20" step-labels)
+    //- .title4.mt8.mb4 Custom step labels
+    //- w-slider(v-model="sliderStepsValue4" color="primary-light2" :min="20" :max="30" :step="3" step-labels)
+    //- w-slider(v-model="sliderStepsValue5" color="primary-light2" :min="20" :max="30" :step="3" step-labels)
     template(#pug).
     template(#js).
 </template>
