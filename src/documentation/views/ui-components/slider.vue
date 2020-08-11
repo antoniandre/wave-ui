@@ -1,8 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1 slug="w-slider")
-    | w-slider
-    w-tag.ml3(bg-color="orange" color="white" lg) In progress
+  title-link.mt4.code(h1) w-slider
 
   title-link(h2) Default
   p By default the range will have the #[code primary] color.
@@ -84,15 +82,30 @@ div
         w-icon.red mdi mdi-weight
         w-icon.red mdi mdi-weight
     template(#pug).
+      w-slider.mt2(:value="50" label-left="0" label-right="100")
+      w-slider.mt6(:value="50" label-left="Left")
+      w-slider.mt6(:value="50" label-right="Right")
+      w-slider.mt12(:value="50")
+        template(#label-left="")
+          span Weight
+          w-icon.ml2.green mdi mdi-feather
+        template(#label-right="")
+          w-icon.red mdi mdi-weight
+          w-icon.red mdi mdi-weight
 
   title-link(h2) Thumb label
   example(content-class="pt12 px8")
     w-slider.mb4(:value="24" thumb-label color="primary-light3")
+    template(#pug).
+      w-slider.mt12(:value="24" thumb-label color="primary-light3")
 
   title-link(h3 slug="custom-label-with-label-slot") Customize the label with the #[span.code label] slot
   example(content-class="pt12 pb8 px8")
     w-slider(:value="46.3" thumb-label color="primary-light3")
       template(#label="{ value }") {{ ~~(value * 10) / 10 }}%
+    template(#pug).
+      w-slider.ma12(:value="46.3" thumb-label color="primary-light3")
+        template(#label="{ value }") {{ '\{\{ parseInt(value * 10) / 10 \}\}' }}%
 
   title-link(h3) Droplet style label
   p With this option you can have a more modern look, but the drawback is that it can't contain long texts.
@@ -108,8 +121,12 @@ div
     to add a color for instance.
   example(content-class="pt12 pl10 pr12")
     w-slider.mt2.mb12(:value="30" thumb-label="droplet")
-    w-slider.big-label.mt12.mb4(:value="60" thumb-label="droplet" thumb-label-class="primary--bg")
+    w-slider.big-label.mt12.mb4(:value="60" thumb-label="droplet" thumb-label-class="info--bg")
     template(#pug).
+      w-slider.ma12(:value="30" thumb-label="droplet")
+      w-slider.big-label.ma12(:value="60" thumb-label="droplet" thumb-label-class="info--bg")
+    template(#css).
+      .big-label {font-size: 1.4em;}
 
   title-link(h2) Steps
   p.
@@ -154,7 +171,12 @@ div
     //- w-slider(v-model="sliderStepsValue4" color="primary-light2" :min="20" :max="30" :step="3" step-labels)
     //- w-slider(v-model="sliderStepsValue5" color="primary-light2" :min="20" :max="30" :step="3" step-labels)
     template(#pug).
+      .title4.mb4 Default step labels
+      w-slider(v-model="sliderValue" color="primary-light2" :step="20" step-labels)
     template(#js).
+      data: () => ({
+        sliderValue: 40
+      })
 </template>
 
 <script>
