@@ -61,7 +61,7 @@ export default {
 
   &.column {flex-direction: column;}
   &.wrap {flex-wrap: wrap;}
-  &.basis-zero {flex-basis: 0;}
+  &.basis-zero > * {flex-basis: 0;}
 
   @for $i from 1 through 12 {
     // Divide by 2 as there are 2 elements having this space.
