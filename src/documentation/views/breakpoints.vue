@@ -43,7 +43,7 @@ div
   ssh-pre(language="js").
     const waveui = new WaveUI({
       breakpoints: {
-        xs: 550,
+        xs: 600,
         sm: 900,
         md: 1200,
         lg: 1700,

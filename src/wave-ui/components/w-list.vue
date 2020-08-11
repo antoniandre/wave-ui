@@ -138,7 +138,7 @@ export default {
     // If selectable (if value !== false), this allows multiple selections.
     multiple: { type: Boolean },
     hover: { type: Boolean },
-    color: { type: String, default: null },
+    color: { type: String },
     // Navigation type adds a router-link on items with `route`.
     nav: { type: Boolean },
     icon: { type: String, default: '' },
@@ -190,7 +190,7 @@ export default {
 
     classes () {
       return {
-        [this.color]: this.color,
+        [this.color]: this.color || null,
         'w-list--checklist': this.checklist,
         'w-list--navigation': this.nav,
         'w-list--icon': this.icon,

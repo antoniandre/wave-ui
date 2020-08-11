@@ -22,7 +22,7 @@ const config = {
 
 export { config as default }
 
-export const mergeConfig = (options) => {
+export const mergeConfig = options => {
   for (let key in options) {
     const option = options[key]
     if (typeof option === 'object') Object.assign(config[key], option)
