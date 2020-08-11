@@ -3,11 +3,14 @@
   // ----------------------------------------------
   .spacer {flex-grow: 1;}
 
-  .grow {flex-grow: 1;flex-basis: 0;width: 100%;}
+  .grow {flex-grow: 1;flex-basis: auto;}
   .no-grow {flex-grow: 0;}
-  .shrink {flex-shrink: 1;}
+  .shrink {flex-shrink: 1;margin-left: auto;margin-right: auto;}
   .no-shrink {flex-shrink: 0;}
+  .fill-width {width: 100%;}
   .fill-height {height: 100%;}
+  .basis-zero {flex-basis: 0;}
+
 
   .align-start {align-items: flex-start;}
   .align-center {align-items: center;}
@@ -24,6 +27,7 @@
   // .justify-self-center {justify-self: center;}
   // .justify-self-end {justify-self: flex-end;}
   .justify-space-between {justify-content: space-between;}
+  .justify-space-evenly {justify-content: space-evenly;}
 
   .text-left {text-align: left;}
   .text-center {text-align: center;}

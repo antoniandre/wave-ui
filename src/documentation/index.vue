@@ -7,7 +7,7 @@ w-app.fill-height.w-flex.column
   .content-wrap.w-flex.no-shrink(:class="`page--${$route.name}`")
     transition(name="fade")
       w-progress(v-if="loading" color="primary" tile absolute)
-    nav-menu.navigation.mt6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
+    nav-menu.navigation.no-shrink.mt6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
     transition(name="fade-page" mode="out-in")
       router-view.main-content.grow
 

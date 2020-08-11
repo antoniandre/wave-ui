@@ -30,6 +30,9 @@ div
       | Distribute the children elements with equal space (#[span.code flex-basis: 0]).#[br]
       | By default, flex containers will distribute children elements according to their content width.
     li.mt1
+      code.mr2 .fill-width
+      | Sets a width of 100%.
+    li.mt1
       code.mr2 .fill-height
       | Sets a height of 100%.
 
@@ -57,6 +60,9 @@ div
     li.mt1
       code.mr2 .justify-space-between
       | Applies this CSS rule: #[span.code justify: space-between].
+    li.mt1
+      code.mr2 .justify-space-evenly
+      | Applies this CSS rule: #[span.code justify: space-evenly].
 
   p.mt4 Align a child with these classes directly on the child element:
   ul
@@ -78,6 +84,9 @@ div
     li.mt1
       code.mr2 .justify-self-end
       | Applies this CSS rule: #[span.code justify-self: flex-end].
+    li.mt1
+      code.mr2 .basis-zero
+      | Applies this CSS rule directly on the element: #[span.code flex-basis: 0].
 
   p.mt6.
     The #[code.mx1 .spacer] class is also very helpful to separate 2 elements as is will occupy the
@@ -90,18 +99,23 @@ div
       .box
       .box
       .box
-    p.code.mt2.mb1 .justify-center
+    p.code.mt4.mb1 .justify-center
     .w-flex.pa3.blue-light5--bg.justify-center
       .box
       .box
       .box
-    p.code.mt2.mb1 .justify-space-between
+    p.code.mt4.mb1 .justify-end
+    .w-flex.pa3.blue-light5--bg.justify-end
+      .box
+      .box
+      .box
+    p.code.mt4.mb1 .justify-space-between
     .w-flex.pa3.blue-light5--bg.justify-space-between
       .box
       .box
       .box
-    p.code.mt2.mb1 .justify-end
-    .w-flex.pa3.blue-light5--bg.justify-end
+    p.code.mt4.mb1 .justify-space-evenly
+    .w-flex.pa3.blue-light5--bg.justify-space-evenly
       .box
       .box
       .box
@@ -120,6 +134,13 @@ div
         &lt;div class="box"&gt;&lt;/div&gt;
       &lt;/w-flex&gt;
 
+      &lt;p&gt;.justify-end&lt;/p&gt;
+      &lt;w-flex justify-end class="blue-light5--bg pa3"&gt;
+        &lt;div class="box"&gt;&lt;/div&gt;
+        &lt;div class="box"&gt;&lt;/div&gt;
+        &lt;div class="box"&gt;&lt;/div&gt;
+      &lt;/w-flex&gt;
+
       &lt;p&gt;.justify-space-between&lt;/p&gt;
       &lt;w-flex justify-space-between class="blue-light5--bg pa3"&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
@@ -127,8 +148,8 @@ div
         &lt;div class="box"&gt;&lt;/div&gt;
       &lt;/w-flex&gt;
 
-      &lt;p&gt;.justify-end&lt;/p&gt;
-      &lt;w-flex justify-end class="blue-light5--bg pa3"&gt;
+      &lt;p&gt;.justify-space-evenly&lt;/p&gt;
+      &lt;w-flex justify-space-evenly class="blue-light5--bg pa3"&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
         &lt;div class="box"&gt;&lt;/div&gt;
@@ -218,7 +239,7 @@ div
         height: 140px;
       }
 
-  title-link.mt10(h3 slug="align-self") #[span.code align-self] and #[em not] #[span.code justify-self]
+  title-link.mt10(h3 slug="align-self") #[span.code align-self] and #[em not #[span.code justify-self]]
   p.
     By default if you don't set an alignment on the #[span.code w-flex] component, the content will
     be stretched vertically.#[br]
@@ -284,7 +305,7 @@ div
         height: 140px;
       }
 
-  w-alert.text-light(warning)
+  w-alert.alert--warning(warning icon-outside)
     strong Note:
     a.black.ml1(
       href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Alignment/Box_Alignment_in_Flexbox"
