@@ -78,7 +78,6 @@ export default {
   &__content {
     display: flex;
     flex-direction: column;
-    overflow: auto;
     flex: 1 1 auto;
     padding: 3 * $base-increment;
   }
