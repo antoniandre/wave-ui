@@ -85,6 +85,7 @@ export default {
   created () {
     this.icon = this.$slots.default[0].text || ''
   },
+
   beforeUpdate () {
     this.icon = this.$slots.default[0].text
   }
