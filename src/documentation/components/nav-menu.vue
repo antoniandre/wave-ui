@@ -63,7 +63,7 @@ export default {
       { label: 'Overlay', route: 'w-overlay' },
       { label: 'Progress', route: 'w-progress' },
       { label: 'Rating', route: 'w-rating', disabled: true },
-      { label: 'Slideshow', route: 'w-slideshow', disabled: true },
+      { label: 'Slideshow', route: 'w-slideshow' },
       { label: 'Tabs', route: 'w-tabs', disabled: true },
       { label: 'Tag', route: 'w-tag' },
       { label: 'Toolbar', route: 'w-toolbar' },
@@ -77,7 +77,7 @@ export default {
           { label: 'Form', route: 'w-form', inProgress: true },
           { label: 'Radio', route: 'w-radio' },
           { label: 'Select', route: 'w-select', disabled: true },
-          { label: 'Slider', route: 'w-slider', inProgress: true },
+          { label: 'Slider', route: 'w-slider' },
           { label: 'Switch', route: 'w-switch' },
           { label: 'Textarea', route: 'w-textarea', disabled: true }
         ]
