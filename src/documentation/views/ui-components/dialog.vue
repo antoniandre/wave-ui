@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   title-link.mt4.code(h1) w-dialog
-  p This dialog contains some basic options to toggle on and off.
+  p This dialog contains some basic options for the w-dialog.
 
   example(content-class="pt5")
     w-button.px4.mr6.shrink(@click="dialog1.show = true" bg-color="primary" dark) Open dialog
@@ -27,8 +27,8 @@ div
           v-model="dialog1.width"
           :items="[{ value: 300, label: '300px' }, { value: 500, label: '500px' }]"
           inline)
-      p.mt4.grey-light1.
-        The #[span.code.grey-light1 width] parameter is called so for simplicity, but it internally translates to
+      .mt4.mb-2.grey-light1.
+        The #[span.code.grey-light1 width] prop is called so for simplicity, but it internally translates to
         a #[span.code.grey-light1 max-width] to fit on small screens.
 
       template(#actions)
@@ -75,30 +75,26 @@ div
   title-link(h2) Persistent prompt dialog
   example(content-class="pt5")
     w-button.px4(@click="dialog2.show = true" bg-color="primary" dark) Open dialog
-    w-dialog(v-model="dialog2.show" persistent :width="550")
-      template(#title) Terms and conditions
-      p.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
-        quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
-        odit dolor labore eveniet at vel sequi nostrum.#[br]#[br]
-        Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
-        dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
-        aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+    w-dialog(v-model="dialog2.show" title="Terms and conditions" persistent :width="550")
+      | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+      | quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+      | odit dolor labore eveniet at vel sequi nostrum.#[br]#[br]
+      | Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
+      | dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
+      | aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
       template(#actions)
         .spacer
         w-button.mr2(@click="dialog2.show = false" bg-color="error") I disagree
         w-button(@click="dialog2.show = false" bg-color="success") I agree
     template(#pug).
       w-button.px4(@click="dialog.show = true" bg-color="primary" dark) Open dialog
-      w-dialog(v-model="dialog.show" persistent :width="550")
-        template(#title="") Terms and conditions
-        p.
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
-          quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
-          odit dolor labore eveniet at vel sequi nostrum.#[="#[br]#[br]"]
-          Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
-          dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
-          aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+      w-dialog(v-model="dialog.show" title="Terms and conditions" persistent :width="550")
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+        quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+        odit dolor labore eveniet at vel sequi nostrum.#[="#[br]#[br]"]
+        Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
+        dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
+        aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
         template(#actions="")
           .spacer
           w-button.mr2(@click="dialog.show = false" bg-color="error") I disagree
