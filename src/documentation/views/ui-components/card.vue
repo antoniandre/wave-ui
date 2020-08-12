@@ -3,8 +3,12 @@ div
   title-link.mt4.code(h1) w-card
 
   title-link(h2) Simple card with a title
+  p.
+    When the title is simple you can pass it directly as a prop like in this example.#[br]
+    You can also use the #[code title] slot to pass more complex data and benefit from the Vue template
+    compilation.
   example
-    w-card(card-title="Card title" title-class="blue-light5--bg")
+    w-card(title="Card title" title-class="blue-light5--bg")
       p.
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
         quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
@@ -13,7 +17,7 @@ div
         dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
         aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
     template(#html).
-      &lt;w-card card-title="Card title" title-class="blue-light5--bg"&gt;
+      &lt;w-card title="Card title" title-class="blue-light5--bg"&gt;
         &lt;p&gt;
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
           quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
@@ -113,23 +117,19 @@ div
   title-link(h2) Card with actions
   p The actions slot is optional but facilitates the addition of action buttons in a flex layout.
   example
-    w-card
-      template(#title) Terms and conditions
-      p.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
-        quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
-        odit dolor labore eveniet at vel sequi nostrum.
+    w-card(title="Terms and conditions")
+      | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+      | quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+      | odit dolor labore eveniet at vel sequi nostrum.
       template(#actions)
         .spacer
         w-button.mr2(bg-color="error") I disagree
         w-button(bg-color="success") I agree
     template(#html).
-      &lt;w-card card-title="Terms and conditions"&gt;
-        &lt;p&gt;
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
-          quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
-          odit dolor labore eveniet at vel sequi nostrum.
-        &lt;/p&gt;
+      &lt;w-card title="Terms and conditions"&gt;
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+        quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+        odit dolor labore eveniet at vel sequi nostrum.
 
         &lt;template #actions&gt;
           &lt;div class="spacer"&gt;&lt;/div&gt;
