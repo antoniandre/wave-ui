@@ -254,6 +254,7 @@ export default {
     padding-top: 2 * $base-increment;
     color:rgba(0, 0, 0, 0.5);
     z-index: 1;
+    cursor: pointer;
 
     &:before {
       content: '';
@@ -289,7 +290,10 @@ export default {
     touch-action: none;
     cursor: pointer;
 
-    .w-slider--disabled &, .w-slider--readonly & {cursor: auto;touch-action: initial;}
+    .w-slider--disabled &, .w-slider--readonly & {
+      cursor: not-allowed;
+      touch-action: initial;
+    }
 
     &:before {
       content: '';

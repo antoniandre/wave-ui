@@ -162,7 +162,6 @@ export default {
 <style lang="scss">
 $size: round(2 * $base-font-size);
 $inactive-color: #666;
-$disabled-color: #ccc;
 
 .w-input {
   position: relative;
@@ -247,7 +246,11 @@ $disabled-color: #ccc;
     border: none;
     outline: none;
   }
-  &--disabled &__input {color: $disabled-color;}
+
+  &--disabled &__input {
+    color: $disabled-color;
+    cursor: not-allowed;
+  }
 
   // Label.
   // ------------------------------------------------------
