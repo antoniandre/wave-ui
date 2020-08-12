@@ -11,7 +11,53 @@ div
   title-link(h2) Default
   w-button.ma1 normal
 
-  title-link(h2) Secondary color
+  title-link(h2) Colors
+  p.
+    Here is an example of buttons using all types of colors as a background: status colors, primary color,
+    secondary color and a color palette color shade.
+  p
+    strong.mr1 Note:
+    | The 4 status colors as well as the primary color have a white text by default.
+  example
+    w-flex.wrap
+      w-button.ma1(bg-color="success") success
+      w-button.ma1(bg-color="error") error
+      w-button.ma1(bg-color="warning") warning
+      w-button.ma1(bg-color="info") info
+      w-button.ma1(bg-color="primary") primary
+      w-button.ma1(bg-color="secondary") secondary
+      w-button.ma1(bg-color="purple-light4") purple-light4
+    template(#pug).
+      w-flex.wrap
+        w-button.ma1(bg-color="success") success
+        w-button.ma1(bg-color="error") error
+        w-button.ma1(bg-color="warning") warning
+        w-button.ma1(bg-color="info") info
+        w-button.ma1(bg-color="primary") primary
+        w-button.ma1(bg-color="secondary") secondary
+        w-button.ma1(bg-color="purple-light4") purple-light4
+
+  h3 Mix background and text colors
+  example
+    w-button.ma1(bg-color="success" color="yellow-light2") success
+    w-button.ma1(bg-color="error" color="amber-light2") error
+    w-button.ma1(bg-color="primary" color="success-light2") warning
+    template(#pug).
+      w-button.ma1(bg-color="success" color="yellow-light2") success
+      w-button.ma1(bg-color="error" color="amber-light2") error
+      w-button.ma1(bg-color="primary" color="success-light2") warning
+
+  h3 Dark
+  example
+    w-button.ma1(bg-color="primary-light3") normal
+    w-icon.mx6.grey-light3(size="2.5em") mdi mdi-arrow-right
+    w-button.ma1(bg-color="primary-light3" dark) dark
+    template(#pug).
+      w-button.ma1(bg-color="primary-light3") normal
+      w-icon.mx6.grey-light3(size="2.5em") mdi mdi-arrow-right
+      w-button.ma1(bg-color="primary-light3" dark) dark
+
+  title-link(h2) Sizes
   example
     w-button.ma1(bg-color="secondary" xs) extra small
     w-button.ma1(bg-color="secondary" sm) small
@@ -19,16 +65,8 @@ div
     w-button.ma1(bg-color="secondary" lg) large
     w-button.ma1(bg-color="secondary" xl) extra large
     w-button.ma1(bg-color="secondary" disabled) disabled
-    template(#pug).
-      w-button.ma1(bg-color="secondary" xs) extra small
-      w-button.ma1(bg-color="secondary" sm) small
-      w-button.ma1(bg-color="secondary" md) medium
-      w-button.ma1(bg-color="secondary" lg) large
-      w-button.ma1(bg-color="secondary" xl) extra large
-      w-button.ma1(bg-color="secondary" disabled) disabled
-
-  title-link(h2) Dark
-  example
+    br
+    br
     w-button.ma1(bg-color="primary" color="white" xs) extra small
     w-button.ma1(bg-color="primary" color="white" sm) small
     w-button.ma1(bg-color="primary" color="white" md) medium
@@ -36,6 +74,14 @@ div
     w-button.ma1(bg-color="primary" color="white" xl) extra large
     w-button.ma1(bg-color="primary" color="white" disabled) disabled
     template(#pug).
+      w-button.ma1(bg-color="secondary" xs) extra small
+      w-button.ma1(bg-color="secondary" sm) small
+      w-button.ma1(bg-color="secondary" md) medium
+      w-button.ma1(bg-color="secondary" lg) large
+      w-button.ma1(bg-color="secondary" xl) extra large
+      w-button.ma1(bg-color="secondary" disabled) disabled
+      br
+      br
       w-button.ma1(bg-color="primary" color="white" xs) extra small
       w-button.ma1(bg-color="primary" color="white" sm) small
       w-button.ma1(bg-color="primary" color="white" md) medium
@@ -43,21 +89,22 @@ div
       w-button.ma1(bg-color="primary" color="white" xl) extra large
       w-button.ma1(bg-color="primary" color="white" disabled) disabled
 
-  h3 Mix background and text colors
+  h3 Stretch to the available space
   example
-    w-button.ma1(bg-color="primary" color="yellow" xs) extra small
-    w-button.ma1(bg-color="primary" color="yellow" sm) small
-    w-button.ma1(bg-color="primary" color="yellow" md) medium
-    w-button.ma1(bg-color="primary" color="yellow" lg) large
-    w-button.ma1(bg-color="primary" color="yellow" xl) extra large
-    w-button.ma1(bg-color="primary" color="yellow" disabled) disabled
+    w-flex
+      w-button.ma1.grow(bg-color="primary") primary
     template(#pug).
-      w-button.ma1(bg-color="primary" color="yellow" xs) extra small
-      w-button.ma1(bg-color="primary" color="yellow" sm) small
-      w-button.ma1(bg-color="primary" color="yellow" md) medium
-      w-button.ma1(bg-color="primary" color="yellow" lg) large
-      w-button.ma1(bg-color="primary" color="yellow" xl) extra large
-      w-button.ma1(bg-color="primary" color="yellow" disabled) disabled
+      w-flex
+        w-button.ma1.grow(bg-color="primary") primary
+
+  h3 Custom width and height
+  p.
+    Eventhough you can easily override the dimensions via CSS, a #[code width] and #[code height] props
+    are available on the #[span.code w-button] component.
+  example(content-class="pt6")
+    w-button.ma1(bg-color="info" width="10em" :height="18") info
+    template(#pug).
+      w-button.ma1.grow(bg-color="info" width="10em" :height="18") info
 
   title-link(h2) Outline
   example
@@ -91,18 +138,6 @@ div
       w-button.ma1(color="primary" text xl) extra large
       w-button.ma1(color="primary" text disabled) disabled
 
-  title-link(h2) Shadow &amp; colors
-  example(content-class="w-flex")
-    w-button.ma1(bg-color="success" shadow) success
-    w-button.ma1(bg-color="error" shadow) error
-    w-button.ma1(bg-color="warning" shadow) warning
-    w-button.ma1(bg-color="info" shadow) info
-    template(#pug).
-      w-button.ma1(bg-color="success" shadow) success
-      w-button.ma1(bg-color="error" shadow) error
-      w-button.ma1(bg-color="warning" shadow) warning
-      w-button.ma1(bg-color="info" shadow) info
-
   title-link(h2) Round &amp; tile
   example(content-class="w-flex")
     w-button.ma1(bg-color="primary" round) round
@@ -114,6 +149,18 @@ div
       w-button.ma1.mr6(bg-color="secondary" round) round
       w-button.ma1(bg-color="primary" tile) tile
       w-button.ma1.mr6(bg-color="secondary" tile) tile
+
+  title-link(h2) Shadow
+  example(content-class="w-flex")
+    w-button.ma1(bg-color="success" shadow) success
+    w-button.ma1(bg-color="error" shadow) error
+    w-button.ma1(bg-color="warning" shadow) warning
+    w-button.ma1(bg-color="info" shadow) info
+    template(#pug).
+      w-button.ma1(bg-color="success" shadow) success
+      w-button.ma1(bg-color="error" shadow) error
+      w-button.ma1(bg-color="warning" shadow) warning
+      w-button.ma1(bg-color="info" shadow) info
 
   title-link(h2) Icons &amp; mixed content
   p Icon buttons are rounded by default.

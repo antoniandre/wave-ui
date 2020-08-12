@@ -170,7 +170,7 @@ $spinner-size: 40;
   &--shadow {box-shadow: $box-shadow;}
   &--loading {cursor: wait;opacity: 0.8;}
   &[disabled] {
-    cursor: auto;
+    cursor: not-allowed;
     box-shadow: none;
     opacity: 0.4;
   }
@@ -210,7 +210,8 @@ $spinner-size: 40;
     @include default-transition;
   }
 
-  &--dark:before, &.primary--bg:before {background-color: #fff;}
+  &--dark:before, &.primary--bg:before,
+  &.success--bg:before, &.error--bg:before, &.warning--bg:before, &.info--bg:before {background-color: #fff;}
   &--outline:before, &--text:before {background-color: currentColor;}
 
   // Button states.
