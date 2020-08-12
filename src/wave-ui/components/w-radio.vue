@@ -112,7 +112,6 @@ export default {
 $outline-width: 2px;
 $size: round(1.3 * $base-font-size);
 $inactive-color: #666;
-$disabled-color: #ccc;
 
 .w-radio {
   display: inline-flex;
@@ -122,7 +121,7 @@ $disabled-color: #ccc;
   position: relative;
   cursor: pointer;
 
-  &--disabled {cursor: default;}
+  &--disabled {cursor: not-allowed;}
 
   // The hidden real radio button.
   input[type="radio"] {

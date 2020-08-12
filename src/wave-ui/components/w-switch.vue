@@ -103,7 +103,7 @@ $disabled-color: #ddd;
   vertical-align: middle;
   cursor: pointer;
 
-  &--disabled {cursor: default;}
+  &--disabled {cursor: not-allowed;}
 
   // Hidden checkbox.
   input[type="checkbox"] {

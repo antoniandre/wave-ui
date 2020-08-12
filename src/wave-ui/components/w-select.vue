@@ -39,6 +39,11 @@ export default {
   display: inline-flex;
   position: relative;
 
+  &--disabled {
+    color: $disabled-color;
+    cursor: not-allowed;
+  }
+
   &__input-wrap--round {
     border-radius: 5em;
     padding-left: 3 * $base-increment;
