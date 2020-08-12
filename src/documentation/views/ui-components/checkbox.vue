@@ -4,7 +4,7 @@ div
     | #[span.code w-checkbox] &amp; #[span.code w-checkboxes]
 
   w-card(bg-color="blue-light5")
-    p.mb3 In short this is what it looks like:
+    p.mb3 What it looks like:
     w-checkboxes(:items="checkboxes1" inline)
 
     .title4.mt4 States

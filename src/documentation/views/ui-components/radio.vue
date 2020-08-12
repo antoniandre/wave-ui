@@ -4,7 +4,7 @@ div
     | #[span.code w-radio] &amp; #[span.code w-radios]
 
   w-card(bg-color="blue-light5")
-    p.mb3 In short this is what it looks like:
+    p.mb3 What it looks like:
     w-radios(v-model="selectedRadio1" :items="radios1" inline)
 
     .title4.mt4 States
