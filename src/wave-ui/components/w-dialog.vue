@@ -78,10 +78,9 @@ export default {
 
   watch: {
     value (value) {
-      // If value is true, mount the wrapper in DOM and open the drawer.
-      // If value is false, keep the wrapper in DOM and close the drawer;
-      // At the end of the drawer transition the value is updated and wrapper
-      // removed from the DOM.
+      // If value is true, mount the wrapper in DOM and open the dialog.
+      // If value is false, keep the wrapper in DOM and close the dialog;
+      // At the end of the dialog transition the value is updated and wrapper removed from the DOM.
       if (value) this.showWrapper = value
       this.showContent = value
     }

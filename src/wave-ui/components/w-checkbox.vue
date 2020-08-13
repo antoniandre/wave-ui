@@ -166,7 +166,7 @@ $inactive-color: #666;
     // top: round(-$size / 2.75);
     left: -5px;
     bottom: -1px;
-    width: round($size / 6);
+    width: round($size / 4);
     height: round($size / 2);
     border: solid transparent;
     border-width: 0 2px 2px 0;
