@@ -24,6 +24,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "getting-started" */ '@/documentation/views/getting-started.vue')
   },
   {
+    path: '/browser-support',
+    name: 'browser-support',
+    component: () => import(/* webpackChunkName: "browser-support" */ '@/documentation/views/browser-support.vue')
+  },
+  {
     path: '/customization',
     name: 'customization',
     component: () => import(/* webpackChunkName: "customization" */ '@/documentation/views/customization.vue')

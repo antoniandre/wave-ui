@@ -30,6 +30,7 @@ export default {
     sections: [
       { label: 'Why Wave UI?', route: { name: 'why-wave-ui' } },
       { label: 'Getting started', route: 'getting-started' },
+      { label: 'Browser support', route: 'browser-support' },
       { label: 'Customization', route: 'customization' },
       { label: 'Breakpoints', route: 'breakpoints' },
       {
