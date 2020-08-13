@@ -176,7 +176,7 @@ export default {
 
       const form = document.querySelector('.codepen-form')
       form.submit()
-      form.remove()
+      form.parentNode.removeChild(form) // el.remove() doesn't work on IE11.
     },
 
     copied (source) {
