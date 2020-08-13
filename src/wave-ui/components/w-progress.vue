@@ -4,32 +4,41 @@
     .w-progress__progress(v-if="!circle" :class="{ full: progressValue === 100 }" :style="`width: ${progressValue}%`")
 
     //- Circular progress.
-    svg(v-else :viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`")
-      //- Background first, in SVG there is no z-index.
-      circle.bg(
-        v-if="bgColor || this.progressValue > -1"
-        :class="bgColor"
-        :cx="circleCenter"
-        :cy="circleCenter"
-        :r="circleRadius"
-        fill="transparent"
-        :stroke-dasharray="circleCircumference"
-        :stroke-width="stroke")
-      circle.w-progress__progress(
-        :cx="circleCenter"
-        :cy="circleCenter"
-        :r="circleRadius"
-        fill="transparent"
-        :stroke-width="stroke"
-        :stroke-linecap="roundCap && 'round'"
-        :stroke-dasharray="circleCircumference"
+    template(v-else)
+      svg(:viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`")
+        circle.bg(
+          v-if="bgColor || this.progressValue > -1"
+          :class="bgColor"
+          :cx="circleCenter"
+          :cy="circleCenter"
+          :r="circleRadius"
+          fill="transparent"
+          :stroke-dasharray="circleCircumference"
+          :stroke-width="stroke")
+      svg.w-progress__progress(
+        :viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`"
         :style="`stroke-dashoffset: ${(1 - (progressValue / 100)) * circleCircumference}`")
+        circle(
+          :cx="circleCenter"
+          :cy="circleCenter"
+          :r="circleRadius"
+          fill="transparent"
+          :stroke-width="stroke"
+          :stroke-linecap="roundCap && 'round'"
+          :stroke-dasharray="circleCircumference")
 
     .w-progress__label(v-if="label || $slots.default" :class="labelColor || false")
       slot {{ Math.round(progressValue) }}{{ circle ? '' : '%' }}
 </template>
 
 <script>
+/**
+ * This component (circular) is hacked to work on Edge as it does not support transform on svg elements.
+ * https://caniuse.com/#feat=mdn-css_properties_transform-origin_support_in_svg
+ * It is meant to be 2 circles in 1 svg, with animation on the circle, now instead, there are 2 svgs,
+ * and the animation is on the second svg itself.
+ */
+
 // For circular progress.
 const circleSize = 40
 const circleRadius = circleSize / 2
@@ -245,10 +254,19 @@ $circle-size: 40;
     &.w-progress--default-bg circle.bg {stroke: rgba(0, 0, 0, 0.1);}
 
     .w-progress__progress {
-      transform-origin: 100% 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      circle {
+        stroke: currentColor;
+        stroke-dashoffset: inherit;
+        will-change: stroke-dashoffset;
+      }
       transform: rotate(-90deg);
-      stroke: currentColor;
-      will-change: stroke-dashoffset;
+      will-change: transform;
       @include default-transition;
     }
     &.w-progress--round-cap .w-progress__progress {stroke-linecap: round;}
