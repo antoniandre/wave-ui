@@ -289,9 +289,10 @@ export default {
   },
 
   beforeDestroy () {
-    if (this.menuEl) this.menuEl.remove()
-    if (this.overlay) this.overlayEl.remove()
-    if (this.activatorEl) this.activatorEl.remove()
+    // el.remove() doesn't work on IE11.
+    if (this.menuEl) this.menuEl.parentNode.removeChild(this.menuEl)
+    if (this.overlay) this.overlayEl.parentNode.removeChild(this.overlayEl)
+    if (this.activatorEl) this.activatorEl.parentNode.removeChild(this.activatorEl)
   },
 
   watch: {

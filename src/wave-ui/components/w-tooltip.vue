@@ -270,8 +270,9 @@ export default {
 
   beforeDestroy () {
     if (this.detachTo) {
-      if (this.$refs.tooltip) this.$refs.tooltip.remove()
-      if (this.activatorEl) this.activatorEl.remove()
+      // el.remove() doesn't work on IE11.
+      if (this.$refs.tooltip) this.$refs.tooltip.parentNode.removeChild(this.$refs.tooltip)
+      if (this.activatorEl) this.activatorEl.parentNode.removeChild(this.activatorEl)
     }
   },
 
