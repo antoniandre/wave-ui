@@ -69,7 +69,7 @@ export default {
       css.id = 'wave-ui-styles'
       css.innerHTML = this.dynamicStyles()
 
-      document.head.append(css)
+      document.head.appendChild(css)
     }
 
     this.getBreakpoint(window.innerWidth)
