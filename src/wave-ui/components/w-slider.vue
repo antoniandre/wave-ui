@@ -26,7 +26,8 @@
             :disabled="disabled"
             :readonly="readonly"
             @keydown.left="onKeyDown($event, -1)"
-            @keydown.right="onKeyDown($event, 1)")
+            @keydown.right="onKeyDown($event, 1)"
+            @click.prevent)
           label.w-slider__thumb-label(
             v-if="thumbLabel"
             :for="`button-${_uid}`"
