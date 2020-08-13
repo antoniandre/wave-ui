@@ -184,6 +184,7 @@ export default {
   &--icon-outside > .w-icon {
     position: absolute;
     opacity: 1;
+    top: 2 * $base-increment - 1px;
     left: 1px;
     z-index: 1;
     transform: translateX(-50%);

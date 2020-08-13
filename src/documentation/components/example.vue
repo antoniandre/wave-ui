@@ -249,7 +249,8 @@ export default {
     right: 1px;
 
     .w-icon {
-      padding: 12px;
+      padding: 12px 0;
+      width: 24px; // For IE11.
       transition: 0.25s;
     }
     &:hover .w-icon {background-color: rgba(35, 71, 129, 0.15);}
