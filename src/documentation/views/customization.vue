@@ -39,6 +39,7 @@ div
       | Import this SCSS variables file globally from Vue config and re-serve the app.
       ssh-pre.mt5(language="js" label="vue.config.js").
         module.exports = {
+          transpileDependencies: ['wave-ui'],
           css: {
             loaderOptions: {
               sass: { prependData: '@import "@/scss/_variables.scss";' }
