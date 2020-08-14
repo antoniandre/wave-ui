@@ -3,12 +3,7 @@ div
   title-link.mt4(h1) Browser support
   title-link(h2) All major browsers supported
   p Wave UI supports:
-  ul
-    li Chrome
-    li Safari
-    li Firefox
-    li Edge
-    li Opera
+  w-list.ml-1(:items="listItems" icon="wi-check")
 
   title-link(h2) Dropping support for IE11
   a.title3(href="https://gs.statcounter.com/browser-market-share")
@@ -33,6 +28,15 @@ div
 
 <script>
 export default {
+  data: () => ({
+    listItems: [
+      { label: 'Chrome' },
+      { label: 'Safari' },
+      { label: 'Firefox' },
+      { label: 'Edge' },
+      { label: 'Opera' }
+    ]
+  })
 }
 </script>
 
