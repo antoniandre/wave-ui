@@ -15,7 +15,7 @@ div
       | Mostly for more flexibility and control, and less work to override when building more complex UI
       | designs.
 
-  title-link.mt12(h2) What is Wave UI?
+  title-link(h2) What is Wave UI?
   .title3.mt6 Like other UI frameworks, Wave UI is:
   w-list(:items="features1" icon="wi-check")
 
