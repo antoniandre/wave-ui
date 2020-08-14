@@ -7,7 +7,8 @@ div
   ssh-pre(language="shell").
     npm i wave-ui
 
-  title-link(h3).mt8 Import in your project
+  title-link(h3) Import in your project
+  p Import Wave UI library at the root of your app - usually #[span.code main.js].
   ssh-pre(language="js" label="main.js").
     import Vue from 'vue'
     import App from './app'
@@ -30,13 +31,7 @@ div
     &lt;w-app&gt;
       &lt;!-- All your app's content goes here. --&gt;
     &lt;/w-app&gt;
-
-  title-link(h3).mt8 Icons font
-  p.
-    The next thing you might need at this point is an icon font.#[br]
-    You are free to use the one of your choice, but if you don't know where to start, we have
-    selectioned and tested a handful of them for you:
-    check out the #[router-link(to="w-icon") w-icon] page to know more.
+  .caption.grey-light1 This is required for Wave UI base styles and for a few components needing to be moved in the DOM.
 
   w-divider.my12
   title-link(h2) What next?
@@ -44,7 +39,13 @@ div
   h3 Then what next?
   p Now that you are up and running, check out a UI component of your choice and explore its examples.
   p You can open each example in Codepen, that will help you learn faster by trying it yourself.
-  p The #[router-link(to="w-icon") w-icon] component is probably good to start with.
+
+  title-link(h3).mt8 Icons font
+  p.
+    An icon font is probably the next thing you need at this point.#[br]
+    You are free to use the one of your choice, but if you don't know where to start, we have
+    picked and tested a handful of them for you:
+    check out the #[router-link(to="w-icon") w-icon] page to know more.
 
   w-divider.my12
   title-link(h2) Wave UI Options
