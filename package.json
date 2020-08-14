@@ -6,9 +6,7 @@
   "jsdelivr": "dist/wave-ui.umd.min.js",
   "files": [
     "dist",
-    "package.json",
-    "README.md",
-    "LICENSE"
+    "src/wave-ui"
   ],
   "keywords": [
     "wave ui",
