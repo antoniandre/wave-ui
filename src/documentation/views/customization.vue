@@ -1,15 +1,61 @@
 <template lang="pug">
 div
-  title-link.mt4(h1 slug="customization") Customization (optional)
+  title-link.mt4(h1 slug="customization") Customization Via SCSS (optional)
 
-  title-link(h2) Basic SCSS overrides
-  //- p Wave UI components are pixel-based to avoid flickering on half-pixel value.
-  p Wave UI components rely on SCSS variables that you can easily override from Your SCSS file:
+  p Wave UI components rely on SCSS variables that you can easily override from Your SCSS file, just like this:
   pre.ssh-pre(data-label="SCSS")
+    span.purple.text-bold @import&nbsp;
+    span.red-light2 'wave-ui/src/wave-ui/scss/_variables'
+    span.blue-grey ;
+    br
+    br
+
+    span.pink $base-font-size
+    span.blue-grey :&nbsp;
+    span.deep-orange 14px
+    span.blue-grey ;
+    br
+    span.pink $base-increment
+    span.blue-grey :&nbsp;
+    span.deep-orange 5px
+    span.blue-grey ;
+
+  .title4 But to do so, you need to slightly modify your config.
+
+  title-link(h2) Modify your config
+  .title4.mt4 1. Update #[span.code main.js]
+  p In main.js, replace the 2 Wave UI imports with:
+  ssh-pre.mt5(language="js" label="main.js").
+    import WaveUI from 'wave-ui/src/wave-ui'
+    import 'wave-ui/src/wave-ui/scss/index.scss'
+
+  .title4.mt6 2. Create an SCSS file &amp; import it globally
+  ul
+    li.
+      In your project #[span.code src] folder, create a #[code _variables.scss], usually in an #[span.code scss]
+      folder.
+
+    li.mt2
+      | Import this SCSS variables file globally from Vue config and re-serve the app.
+      ssh-pre.mt5(language="js" label="vue.config.js").
+        module.exports = {
+          css: {
+            loaderOptions: {
+              sass: { prependData: '@import "@/scss/_variables.scss";' }
+            }
+          }
+        }
+
+  .title4.mt8 Voilà !
+  p You're all set, you can now override the SCSS variables.
+
+  .w-divider.my12
+  title-link(h2) Basic SCSS overrides
+  pre.ssh-pre(data-label="@/scss/_variables.scss")
     span.grey-light1.text-italic // First import the Wave UI variables, then override what you want.
     br
     span.purple.text-bold @import&nbsp;
-    span.red-light2 '~wave-ui/src/scss/variables'
+    span.red-light2 'wave-ui/src/wave-ui/scss/_variables'
     span.blue-grey ;
     br
     br
@@ -90,5 +136,5 @@ div
 </template>
 
 <style lang="scss">
-.ssh-pre {white-space: pre-wrap;}
+pre.ssh-pre {white-space: pre-wrap;}
 </style>
