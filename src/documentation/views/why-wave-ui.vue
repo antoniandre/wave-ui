@@ -49,6 +49,22 @@ div
     override styles via CSS rather than appending dynamic styles via Javascript.
 
   p And to keep your CSS easy to override, always avoid the #[code !important] keyword.
+
+  .w-divider.my12
+
+  title-link(h2) What it doesn't do
+  .title4.my4.
+    Wave UI's philosophy is to focus on more CSS flexibility to allow more complex designs and an overall
+    easy and pleasant CSS experience.
+
+  p.
+    In consequence, you may not find all the (edge case) options on a UI component to make you 100% happy
+    out of the box, without adding a line of CSS.#[br]#[br]
+
+    That's a trade-off: the more options a component has, the more it becomes complex, heavy, and harder to
+    override via CSS.#[br]#[br]
+
+    #[strong Let's face it: a great UI, especially the one you are creating, is built with CSS! ;)]
 </template>
 
 <script>
