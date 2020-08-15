@@ -9,9 +9,16 @@
         ref="menu"
         v-show="showMenu"
         :tile="tile"
+        :title-class="titleClass"
+        :content-class="contentClass"
         :shadow="shadow"
+        :no-border="noBorder"
         :class="classes"
         :style="styles")
+        template(v-if="$slots.title" #title)
+          slot(name="title")
+        template(v-if="$slots.actions" #actions)
+          slot(name="actions")
         slot
     w-overlay(
       v-if="overlay"
@@ -42,14 +49,17 @@ export default {
     value: {}, // Show or hide.
     showOnHover: { type: Boolean },
     hideOnMenuClick: { type: Boolean },
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
+    color: { type: String },
+    bgColor: { type: String },
     shadow: { type: Boolean },
     custom: { type: Boolean }, // Include a w-card or not. It does by default.
     tile: { type: Boolean },
     round: { type: Boolean },
-    transition: { type: String, default: '' },
-    menuClass: { type: String, default: '' },
+    noBorder: { type: Boolean },
+    transition: { type: String },
+    menuClass: { type: String },
+    titleClass: { type: String },
+    contentClass: { type: String },
     // Position.
     detachTo: {},
     fixed: { type: Boolean },
