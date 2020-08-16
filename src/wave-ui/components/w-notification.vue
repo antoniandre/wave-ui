@@ -1,6 +1,6 @@
 <template lang="pug">
-  transition(:name="transitionName")
-    .w-notification(v-if="value" :class="classes" :style="styles")
+  transition(:name="transitionName" appear)
+    .w-notification(v-if="show" :class="classes" :style="styles")
       w-alert(v-bind="alertProps")
         slot
 </template>
@@ -11,8 +11,8 @@ export default {
   props: {
     // Notification props.
     value: { default: true }, // Show or hide.
-    transition: { type: [String, Boolean] },
-    timeout: { type: Number, default: 0 },
+    transition: { type: [String, Boolean], default: '' },
+    timeout: { type: [Number, String], default: 0 },
     absolute: { type: Boolean },
     top: { type: Boolean },
     bottom: { type: Boolean },
@@ -41,6 +41,13 @@ export default {
     borderTop: { type: Boolean },
     borderBottom: { type: Boolean },
     outline: { type: Boolean }
+  },
+
+  data () {
+    return {
+      show: this.value,
+      timeoutId: null
+    }
   },
 
   computed: {
@@ -101,10 +108,22 @@ export default {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || null
       }
+    },
+
+    timeoutVal () {
+      return parseInt(this.timeout)
     }
   },
 
-  methods: {
+  watch: {
+    value (value) {
+      clearTimeout(this.timeoutId)
+      this.show = value
+
+      if (value && this.timeoutVal) {
+        this.timeoutId = setTimeout(() => this.$emit('input', this.show = false), this.timeoutVal)
+      }
+    }
   }
 }
 </script>
