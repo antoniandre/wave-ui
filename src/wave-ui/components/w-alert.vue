@@ -1,9 +1,17 @@
 <template lang="pug">
-  .w-alert(v-if="value" v-on="$listeners" :class="classes")
-    template(v-if="type || icon")
-      w-icon.mr2 {{ type ? typeIcon : icon }}
+  .w-alert(v-if="show" v-on="$listeners" :class="classes")
+    //- Add a wrapper around the content when needed.
+    template(v-if="type || icon || dismiss")
+      w-icon.mr2(v-if="type || icon") {{ type ? typeIcon : icon }}
       .w-alert__content
         slot
+      w-button.w-alert__dismiss(
+        v-if="dismiss"
+        @click="$emit('input', show = false)"
+        icon="wi-cross"
+        sm
+        text)
+    //- No wrapper case.
     slot(v-else)
 </template>
 
@@ -20,6 +28,7 @@ export default {
     icon: { type: String },
     iconOutside: { type: Boolean },
     plain: { type: Boolean },
+    dismiss: { type: Boolean },
     // Types (with icon).
     success: { type: Boolean },
     info: { type: Boolean },
@@ -38,6 +47,12 @@ export default {
     borderTop: { type: Boolean },
     borderBottom: { type: Boolean },
     outline: { type: Boolean }
+  },
+
+  data () {
+    return {
+      show: this.value
+    }
   },
 
   computed: {
@@ -82,7 +97,7 @@ export default {
         [this.color || (!this.plain && this.type)]: this.color || (!this.plain && this.type),
         [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
         [`w-alert--${this.type}`]: this.type,
-        'w-alert--has-icon': this.type || this.icon,
+        'w-alert--has-icon': this.type || this.icon || this.dismiss,
         'w-alert--icon-outside': this.iconOutside,
         'w-alert--plain': this.type && this.plain,
         'w-alert--outline': this.outline,
@@ -96,6 +111,12 @@ export default {
         'w-alert--border-bottom': !this.noBorder && this.borderBottom,
         'w-alert--shadow': this.shadow
       }
+    }
+  },
+
+  watch: {
+    value (value) {
+      this.show = value
     }
   }
 }
@@ -128,6 +149,7 @@ export default {
   &--no-border, &--one-border, &--plain {border: transparent;}
 
   // Before for the border, after for the background color.
+  // ------------------------------------------------------
   &:before, &:after {
     position: absolute;
     top: 0;
@@ -139,6 +161,7 @@ export default {
   }
 
   // Single side border.
+  // ------------------------------------------------------
   &--border-left {padding-left: 3 * $base-increment;}
   &--border-right {padding-right: 3 * $base-increment;}
   &--border-top {padding-top: 3 * $base-increment;}
@@ -179,7 +202,21 @@ export default {
   &--outline:after {display: none;}
   &--bg:after {background-color: #fff;opacity: 0.1;}
 
-  &--has-icon > .w-icon {opacity: 0.9;align-self: flex-start;}
+  // Left icon and dismiss button.
+  // ------------------------------------------------------
+  &__dismiss.w-button {
+    align-self: flex-start;
+    margin-left: 2 * $base-increment;
+    margin-top: round(-0.5 * $base-increment);
+    margin-right: round(-0.5 * $base-increment);
+  }
+
+  &--has-icon > .w-icon {
+    opacity: 0.9;
+    align-self: flex-start;
+    margin-right: 2 * $base-increment;
+  }
+  &--has-icon &__content {flex-grow: 1;}
 
   &--icon-outside > .w-icon {
     position: absolute;
@@ -196,6 +233,7 @@ export default {
   &--icon-outside &__content {padding-left: 3 * $base-increment;}
 
   // Sizes.
+  // ------------------------------------------------------
   &.size--xs {padding-top: $base-increment;padding-bottom: $base-increment;}
   &.size--sm {padding-top: $base-increment;padding-bottom: $base-increment;}
   &.size--md {padding-top: round(2 * $base-increment);padding-bottom: round(2 * $base-increment);}

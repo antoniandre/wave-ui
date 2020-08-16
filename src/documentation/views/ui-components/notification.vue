@@ -3,11 +3,13 @@ div
   title-link.mt4.code(h1 slug="w-notification") w-notification
 
   p.
-    Notifications accepts all the parameters of the #[span.code w-alert] component, plus positioning
-    &amp; transitioning options.
+    The #[span.code w-notification] component is pretty much a wrapper around the #[span.code w-alert]
+    component with added functionalities.#[br]
+    They accept all the parameters of the #[span.code w-alert] component, plus positioning,
+    transitioning &amp; timeout options.
 
   title-link(h2) Notification position
-  p Notifications have a fixed position by default.
+  p Notifications have a fixed position by default (positioned relative to the viewport).
   example(content-class="mt2")
     w-button.mr6(
       @click="notification.show = !notification.show"
@@ -95,6 +97,7 @@ div
       plain
       round
       shadow
+      dismiss
       absolute)
       | This alert is
       | {{ ~~notification2.timeout ? `auto-hiding after ${notification2.timeout} ms` : 'not auto-hiding' }}.

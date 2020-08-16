@@ -134,6 +134,30 @@ div(style="max-width: 1000px")
       w-alert(color="primary" round) This is a round alert.
       w-alert(color="primary" shadow) This is a normal alert with a shadow.
 
+  title-link(h2) Dismiss
+  example
+    w-alert.mt0.mb2(v-model="dismissible1" color="primary" dismiss) This is a dismissible alert.
+    w-alert.my2(v-model="dismissible2" dismiss error) This is a dismissible error type alert.
+    w-alert.my2(v-model="dismissible3" color="amber" dismiss round) This is a dismissible round alert.
+    w-button.mt2(
+      bg-color="primary"
+      @click="dismissible1 = dismissible2 = dismissible3 = true"
+      :disabled="dismissible1 && dismissible2 && dismissible3") Reset alerts
+    template(#pug).
+      w-alert(v-model="dismissible1" color="primary" dismiss) This is a dismissible alert.
+      w-alert(v-model="dismissible2" dismiss error) This is a dismissible error type alert.
+      w-alert(v-model="dismissible3" color="amber" dismiss round) This is a dismissible round alert.
+      w-button(
+        bg-color="primary"
+        @click="dismissible1 = dismissible2 = dismissible3 = true"
+        :disabled="dismissible1 &amp;&amp; dismissible2 &amp;&amp; dismissible3") Reset alerts
+    template(#js).
+      data: () => ({
+        dismissible1: true,
+        dismissible2: true,
+        dismissible3: true
+      })
+
   title-link(h2) Sizes
   example(content-class="py0")
     w-alert.size--xs(color="info" success) This is an extra small alert.
@@ -152,7 +176,10 @@ div(style="max-width: 1000px")
 <script>
 export default {
   data: () => ({
-    showAlert: false
+    showAlert: false,
+    dismissible1: true,
+    dismissible2: true,
+    dismissible3: true
   })
 }
 </script>
