@@ -9,7 +9,8 @@ div
     This allows you to easily mix a background color with a different text color of your choice.
 
   title-link(h2) Default
-  w-button.ma1 normal
+  p By default (if no color or bg-color is applied) the primary color will be applied.
+  w-button.ma1 default
 
   title-link(h2) Colors
   p.
@@ -48,6 +49,10 @@ div
       w-button.ma1(bg-color="primary" color="success-light2") warning
 
   h3 Dark
+  p.
+    By default the #[span.code primary] color is considered as dark as well as the four status colors:
+    #[span.code success], #[span.code error], #[span.code warning] &amp; #[span.code info].
+    For the rest you can use the #[code dark] prop.
   example
     w-button.ma1(bg-color="primary-light3") normal
     w-icon.mx6.grey-light3(size="2.5em") mdi mdi-arrow-right

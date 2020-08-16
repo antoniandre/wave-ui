@@ -79,6 +79,10 @@ export default {
     },
     classes () {
       return {
+        // If no color / bg color is set, set a primary color by default.
+        'primary--bg': !this.bgColor && !this.color && !(this.outline || this.text),
+        'primary': !this.bgColor && !this.color && (this.outline || this.text),
+
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         'w-button--dark': this.dark && !this.outline,
@@ -92,7 +96,7 @@ export default {
         [`size--${this.size}`]: true,
         'w-button--absolute': this.absolute,
         'w-button--fixed': this.fixed,
-        [this.position.join(' ')]: this.absolute || this.fixed
+        [`w-button--${this.position.join(' w-button--')}`]: this.absolute || this.fixed
       }
     },
     styles () {
@@ -141,10 +145,10 @@ $spinner-size: 40;
   // Position.
   &--absolute {position: absolute;}
   &--fixed {position: fixed;}
-  &.top {top: 2 * $base-increment;}
-  &.bottom {bottom: 2 * $base-increment;}
-  &.left {left: 2 * $base-increment;}
-  &.right {right: 2 * $base-increment;}
+  &--top {top: 2 * $base-increment;}
+  &--bottom {bottom: 2 * $base-increment;}
+  &--left {left: 2 * $base-increment;}
+  &--right {right: 2 * $base-increment;}
 
   &--dark {
     color: rgba(255, 255, 255, 0.95);

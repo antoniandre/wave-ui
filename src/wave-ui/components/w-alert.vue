@@ -9,6 +9,7 @@
         v-if="dismiss"
         @click="$emit('input', show = false)"
         icon="wi-cross"
+        color="inherit"
         sm
         text)
     //- No wrapper case.
