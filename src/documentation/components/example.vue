@@ -47,7 +47,6 @@
           language="pug"
           label="TEMPLATE (PUG)"
           copy-button
-          reactiv
           @copied="copied('TEMPLATE (PUG)')"
           :reactive="reactive")
           template(#copy-button)

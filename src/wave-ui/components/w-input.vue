@@ -177,7 +177,7 @@ $inactive-color: #666;
   &__input-wrap {
     position: relative;
     display: inline-flex;
-    flex-grow: 1;
+    flex: 1 1 0;
     height: $size;
     font-size: 0.9em;
     border-radius: $border-radius;
@@ -257,8 +257,8 @@ $inactive-color: #666;
   &__label {
     transition: color $transition-duration;
 
-    &--left {margin-right: 2 * $base-increment;font-size: 0.9em;}
-    &--right {margin-left: 2 * $base-increment;font-size: 0.9em;}
+    &--left {margin-right: 2 * $base-increment;}
+    &--right {margin-left: 2 * $base-increment;}
   }
 
   &__label--inside {
