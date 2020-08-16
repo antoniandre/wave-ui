@@ -7,13 +7,13 @@ export default {
   name: 'w-divider',
   props: {
     vertical: { type: Boolean },
-    color: { type: String, default: null }
+    color: { type: String }
   },
 
   computed: {
     classes () {
       return {
-        [this.color]: this.color,
+        [`w-divider--has-color ${this.color}`]: this.color,
         'w-divider--vertical': this.vertical
       }
     }
@@ -25,6 +25,8 @@ export default {
 .w-divider {
   border: 0 solid rgba(0, 0, 0, 0.15);
   border-top-width: 1px;
+
+  &--has-color {border-color: inherit;}
 
   &--vertical {
     display: flex;
