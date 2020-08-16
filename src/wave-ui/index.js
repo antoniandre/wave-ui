@@ -29,7 +29,7 @@ export default class WaveUI {
     obj[color.label] = color.color
     color.shades.forEach(shade => (obj[shade.label] = shade.color))
     return obj
-  }, { ...config.colors, black: '#000', white: '#fff', transparent: 'transparent' })
+  }, { ...config.colors, black: '#000', white: '#fff', transparent: 'transparent', inherit: 'inherit' })
 
   static install (Vue) {
     // Register directives.
