@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div.slideshow
   title-link.mt4(h1) Slideshow / Carousel
 
   p
@@ -45,5 +45,5 @@ export default {
 }
 </script>
 <style lang="scss">
-.page--slideshow img {max-width: 100%;}
+.slideshow img {max-width: 100%;}
 </style>
