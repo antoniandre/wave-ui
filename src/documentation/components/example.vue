@@ -194,7 +194,7 @@ export default {
   border: 1px solid #eee;
   background-color: #fcfcfc;
   border-radius: 3px;
-  // overflow: hidden;
+  overflow: hidden;
 
   .buttons {
     border-left: 1px solid #eee;

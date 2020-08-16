@@ -3,7 +3,7 @@ div
   title-link.mt4.code(h1) w-drawer
 
   title-link(h2) Positions
-  example(content-class="w-flex align-center")
+  example(content-class="w-flex align-center wrap")
     w-button.ma1(
       @click="showLeftDrawer = !showLeftDrawer"
       outline
@@ -97,31 +97,31 @@ div
       })
 
   title-link(h2) No overlay &amp; custom color overlay
-  example(content-class="w-flex align-center")
+  example(content-class="w-flex align-center wrap")
     span Open top drawer with a:
-    w-button.mx1(
+    w-button.ma1(
       @click="noOverlay = false;overlayColor = 'rgba(35, 71, 129, 0.5)';showTopDrawer = !showTopDrawer"
       outline
       color="primary") Custom color overlay
-    w-button.mx1(
+    w-button.ma1(
       @click="noOverlay = false;overlayColor = 'transparent';showTopDrawer = !showTopDrawer"
       outline
       color="primary") Transparent overlay
-    w-button.mx1(
+    w-button.ma1(
       @click="noOverlay = true;overlayColor = false;showTopDrawer = !showTopDrawer"
       outline
       color="primary") No overlay
     template(#pug).
       span Open top drawer with a:
-      w-button.mx1(
+      w-button.ma1(
         @click="noOverlay = false;overlayColor = 'rgba(35, 71, 129, 0.5&amp;#041;';showDrawer = !showDrawer"
         outline
         color="primary") Custom color overlay
-      w-button.mx1(
+      w-button.ma1(
         @click="noOverlay = false;overlayColor = 'transparent';showDrawer = !showDrawer"
         outline
         color="primary") Transparent overlay
-      w-button.mx1(
+      w-button.ma1(
         @click="noOverlay = true;overlayColor = false;showDrawer = !showDrawer"
         outline
         color="primary") No overlay
@@ -197,6 +197,7 @@ div
           span.grey-dark3.
             Our website uses cookies to give you the best user experience.
             To continue browsing this site you must agree.
+        .spacer
         w-button(sm bg-color="primary" dark @click="showCookieNotice = false")
           w-icon.mr2 wi-check
           | I agree
@@ -217,6 +218,7 @@ div
             span.grey-dark3.
               Our website uses cookies to give you the best user experience.
               To continue browsing this site you must agree.
+          .spacer
           w-button(sm bg-color="primary" dark @click="showCookieNotice = false")
             w-icon.mr2 wi-check
             | I agree

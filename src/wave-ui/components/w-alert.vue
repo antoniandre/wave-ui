@@ -216,7 +216,7 @@ export default {
     align-self: flex-start;
     margin-right: 2 * $base-increment;
   }
-  &--has-icon &__content {flex-grow: 1;}
+  &--has-icon &__content {flex-grow: 1;align-self: flex-start;}
 
   &--icon-outside > .w-icon {
     position: absolute;

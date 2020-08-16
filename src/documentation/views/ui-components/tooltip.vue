@@ -381,6 +381,12 @@ export default {
 
 <style lang="scss">
 .tooltips-demo {
+  .example {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+  }
+
   .w-card {
     overflow: hidden;
     display: inline-block;

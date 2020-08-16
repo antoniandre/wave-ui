@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div.layout-grid-system
   title-link.mt4(h1) Grid system
 
   p.
@@ -210,3 +210,8 @@ div
         &lt;/div&gt;
       &lt;/w-flex&gt;
 </template>
+
+<style lang="scss">
+.layout-grid-system .xs1 {overflow: hidden;}
+.layout-grid-system .xs1 div {display: flex;justify-content: center;}
+</style>

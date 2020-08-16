@@ -1,17 +1,17 @@
 <template lang="pug">
-div
+div.ovv
   title-link.mt4.code(h1 slug="w-menu") w-menu
 
   title-link(h2) Show on click or on hover
   example.example1(content-class="pt5")
     w-menu(detach-to=".example1")
       template(#activator="{ on }")
-        w-button.mr3(v-on="on" outline color="primary") Show menu on click
+        w-button.mb2.mr3(v-on="on" outline color="primary") Show menu on click
       | Menu content
 
     w-menu(detach-to=".example1" show-on-hover)
       template(#activator="{ on }")
-        w-button(v-on="on" outline color="primary") Show menu on hover
+        w-button.mb2(v-on="on" outline color="primary") Show menu on hover
       | Menu content
     template(#pug).
       w-menu
@@ -79,15 +79,15 @@ div
     w-flex(wrap :gap="3")
       w-menu(detach-to=".example4" tile)
         template(#activator="{ on }")
-          w-button(v-on="on" outline color="primary") Show a tile menu
+          w-button.mt1(v-on="on" outline color="primary") Show a tile menu
         | Menu content
       w-menu(detach-to=".example4" round)
         template(#activator="{ on }")
-          w-button(v-on="on" outline color="primary") Show a round menu
+          w-button.mt1(v-on="on" outline color="primary") Show a round menu
         | Menu content
       w-menu(detach-to=".example4" shadow)
         template(#activator="{ on }")
-          w-button(v-on="on" outline color="primary") Show a shadow menu
+          w-button.mt1(v-on="on" outline color="primary") Show a shadow menu
         | Menu content
     template(#pug).
       w-flex(wrap :gap="3")
@@ -109,7 +109,7 @@ div
   example.example5(content-class="mb12 pb12")
     w-menu(detach-to=".example5" shadow v-model="showMenu")
       template(#activator)
-        w-button.mr3(@click="showMenu = true" outline color="primary") Show a w-card menu
+        w-button.mr3.mb2(@click="showMenu = true" outline color="primary") Show a w-card menu
       .title4 How much do you like Wave UI?
       p Pick a serious answer.
       w-flex.pl10.mt4(wrap justify-end)
@@ -118,7 +118,7 @@ div
         w-button(text color="green" @click="showMenu = false") Love it!
     w-menu(detach-to=".example5" shadow custom)
       template(#activator="{ on }")
-        w-button(v-on="on" outline color="primary") Show a list menu
+        w-button.mb2(v-on="on" outline color="primary") Show a list menu
       w-card.white--bg(content-class="pa0")
         w-toolbar
           .title3.ma0 Menu Title
@@ -226,5 +226,11 @@ export default {
 </script>
 
 <style lang="scss">
-.example {display: flex;flex-direction: column;}
+.page--menu {
+  .example {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+  }
+}
 </style>
