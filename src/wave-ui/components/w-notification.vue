@@ -1,7 +1,7 @@
 <template lang="pug">
   transition(:name="transitionName" appear)
     .w-notification(v-if="show" :class="classes" :style="styles")
-      w-alert(v-bind="alertProps")
+      w-alert(v-bind="alertProps" @input="$emit('input', false)")
         slot
 </template>
 
@@ -20,11 +20,6 @@ export default {
     right: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
     // Alert props.
-    xs: { type: Boolean },
-    sm: { type: Boolean },
-    md: { type: Boolean },
-    lg: { type: Boolean },
-    xl: { type: Boolean },
     success: { type: Boolean },
     info: { type: Boolean },
     warning: { type: Boolean },
@@ -40,7 +35,13 @@ export default {
     borderRight: { type: Boolean },
     borderTop: { type: Boolean },
     borderBottom: { type: Boolean },
-    outline: { type: Boolean }
+    outline: { type: Boolean },
+    dismiss: { type: Boolean },
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean }
   },
 
   data () {
@@ -73,11 +74,7 @@ export default {
 
     alertProps () {
       return {
-        xs: this.xs,
-        sm: this.sm,
-        md: this.md,
-        lg: this.lg,
-        xl: this.xl,
+        value: this.show,
         success: this.success,
         info: this.info,
         warning: this.warning,
@@ -93,7 +90,13 @@ export default {
         borderRight: this.borderRight,
         borderTop: this.borderTop,
         borderBottom: this.borderBottom,
-        outline: this.outline
+        outline: this.outline,
+        dismiss: this.dismiss,
+        xs: this.xs,
+        sm: this.sm,
+        md: this.md,
+        lg: this.lg,
+        xl: this.xl
       }
     },
 
