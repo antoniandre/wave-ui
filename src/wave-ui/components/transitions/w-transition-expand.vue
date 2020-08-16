@@ -40,7 +40,11 @@ export default {
       paddingLeft: 0,
       paddingRight: 0,
       paddingTop: 0,
-      paddingBottom: 0
+      paddingBottom: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+      borderTopWidth: 0,
+      borderBottomWidth: 0
     },
     cleanTransitionCycle: true
   }),
@@ -110,6 +114,8 @@ export default {
         el.style.marginRight = 0
         el.style.paddingLeft = 0
         el.style.paddingRight = 0
+        el.style.borderLeftWidth = 0
+        el.style.borderRightWidth = 0
       }
       if (this.animY) {
         el.style.height = 0
@@ -117,6 +123,8 @@ export default {
         el.style.marginBottom = 0
         el.style.paddingTop = 0
         el.style.paddingBottom = 0
+        el.style.borderTopWidth = 0
+        el.style.borderBottomWidth = 0
       }
 
       el.style.overflow = 'hidden'
@@ -128,6 +136,8 @@ export default {
         el.style.marginRight = this.el.marginRight
         el.style.paddingLeft = this.el.paddingLeft
         el.style.paddingRight = this.el.paddingRight
+        el.style.borderLeftWidth = this.el.borderLeftWidth
+        el.style.borderRightWidth = this.el.borderRightWidth
       }
       if (this.animY) {
         el.style.height = this.el.height + 'px'
@@ -135,6 +145,8 @@ export default {
         el.style.marginBottom = this.el.marginBottom
         el.style.paddingTop = this.el.paddingTop
         el.style.paddingBottom = this.el.paddingBottom
+        el.style.borderTopWidth = this.el.borderTopWidth
+        el.style.borderBottomWidth = this.el.borderBottomWidth
       }
 
       el.style.transition = this.duration + 'ms ease-in-out'
@@ -156,6 +168,8 @@ export default {
         this.el.marginRight = computedStyles.getPropertyValue('marginRight')
         this.el.paddingLeft = computedStyles.getPropertyValue('paddingLeft')
         this.el.paddingRight = computedStyles.getPropertyValue('paddingRight')
+        this.el.borderLeftWidth = computedStyles.getPropertyValue('borderLeftWidth')
+        this.el.borderRightWidth = computedStyles.getPropertyValue('borderRightWidth')
       }
       if (this.animY) {
         this.el.height = el.offsetHeight
@@ -163,6 +177,8 @@ export default {
         this.el.marginBottom = computedStyles.getPropertyValue('marginBottom')
         this.el.paddingTop = computedStyles.getPropertyValue('paddingTop')
         this.el.paddingBottom = computedStyles.getPropertyValue('paddingBottom')
+        this.el.borderTopWidth = computedStyles.getPropertyValue('borderTopWidth')
+        this.el.borderBottomWidth = computedStyles.getPropertyValue('borderBottomWidth')
       }
       this.applyHideStyles(el)
 
