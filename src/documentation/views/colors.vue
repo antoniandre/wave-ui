@@ -127,6 +127,9 @@ div(style="overflow: hidden")
           .color.color--top.ma2.transparent--bg.black
             span transparent
             small transparent
+          .color.color--top.ma2.inherit--bg.black
+            span inherit
+            small inherit
 </template>
 
 <script>
@@ -183,7 +186,7 @@ export default {
 
     &.black {text-shadow: none;color: #000;}
     &.black--bg {text-shadow: none;color: #fff;}
-    &.white--bg, &.transparent--bg {border: 1px solid #999;}
+    &.white--bg, &.transparent--bg, &.inherit--bg {border: 1px solid #999;}
   }
 
   .color--shade {
