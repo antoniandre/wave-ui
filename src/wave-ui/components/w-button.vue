@@ -26,12 +26,6 @@
 export default {
   name: 'w-button',
   props: {
-    xs: { type: Boolean },
-    sm: { type: Boolean },
-    md: { type: Boolean },
-    lg: { type: Boolean },
-    xl: { type: Boolean },
-    to: { type: [String, Boolean, Object] }, // Creates a link.
     color: { type: String },
     bgColor: { type: String },
     dark: { type: Boolean },
@@ -40,13 +34,12 @@ export default {
     round: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
+    to: { type: [String, Boolean, Object] }, // Creates a link.
     type: { type: String, default: 'button' },
     disabled: { type: Boolean },
     loading: { type: Boolean },
     // If an icon is passed, no text will display.
     icon: { type: String, default: null },
-    width: { type: [String, Number] },
-    height: { type: [String, Number] },
     // Positions.
     absolute: { type: Boolean },
     fixed: { type: Boolean },
@@ -54,7 +47,15 @@ export default {
     bottom: { type: Boolean },
     left: { type: Boolean },
     right: { type: Boolean },
-    zIndex: { type: [Number, String, Boolean] }
+    zIndex: { type: [Number, String, Boolean] },
+    // Sizes.
+    width: { type: [String, Number] },
+    height: { type: [String, Number] },
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean }
   },
 
   computed: {
