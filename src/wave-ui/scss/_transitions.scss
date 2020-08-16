@@ -12,37 +12,57 @@
 // Slide-right: translate x from left to right.
 // --------------------------------------------------------
 .slide-right-enter-active, .slide-right-leave-active {
-  transition: transform $transition-duration;
+  transition: $transition-duration ease-in-out;
+  transition-property: transform, left, margin-left;
   transform: translateX(0%);
 }
-.slide-right-enter, .slide-right-leave-to {transform: translateX(-100%);}
+.slide-right-enter, .slide-right-leave-to {
+  transform: translateX(-100%);
+  left: 0 !important;
+  margin-left: 0 !important;
+}
 // --------------------------------------------------------
 
 // Slide-left: translate x from right to left.
 // --------------------------------------------------------
 .slide-left-enter-active, .slide-left-leave-active {
-  transition: transform $transition-duration;
+  transition: $transition-duration ease-in-out;
+  transition-property: transform, right, margin-right;
   transform: translateX(0%);
 }
-.slide-left-enter, .slide-left-leave-to {transform: translateX(100%);}
+.slide-left-enter, .slide-left-leave-to {
+  transform: translateX(100%);
+  right: 0 !important;
+  margin-right: 0 !important;
+}
 // --------------------------------------------------------
 
 // Slide-bottom: translate y from top to bottom.
 // --------------------------------------------------------
 .slide-bottom-enter-active, .slide-bottom-leave-active {
-  transition: transform $transition-duration;
+  transition: transform $transition-duration ease-in-out;
+  transition-property: transform, top, margin-top;
   transform: translateY(0%);
 }
-.slide-bottom-enter, .slide-bottom-leave-to {transform: translateY(-100%);}
+.slide-bottom-enter, .slide-bottom-leave-to {
+  transform: translateY(-100%);
+  top: 0 !important;
+  margin-top: 0 !important;
+}
 // --------------------------------------------------------
 
 // Slide-top: translate y from bottom to top.
 // --------------------------------------------------------
 .slide-top-enter-active, .slide-top-leave-active {
-  transition: transform $transition-duration;
+  transition: transform $transition-duration ease-in-out;
+  transition-property: transform, bottom, margin-bottom;
   transform: translateY(0%);
 }
-.slide-top-enter, .slide-top-leave-to {transform: translateY(100%);}
+.slide-top-enter, .slide-top-leave-to {
+  transform: translateY(100%);
+  bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
 // --------------------------------------------------------
 
 // Slide-fade-left.
