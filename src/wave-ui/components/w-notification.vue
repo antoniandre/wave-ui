@@ -100,7 +100,7 @@ export default {
     classes () {
       return {
         'w-notification--absolute': this.absolute,
-        [this.position.join(' ')]: true
+        [`w-notification--${this.position.join(' w-notification--')}`]: true
       }
     },
 
@@ -140,10 +140,10 @@ export default {
 
   // Position.
   &--absolute {position: absolute;z-index: 400;}
-  &.top {top: 0;padding-top: 2 * $base-increment;}
-  &.bottom {bottom: 0;padding-bottom: 2 * $base-increment;}
-  &.left {justify-content: flex-start;right: auto;}
-  &.right {justify-content: flex-end;left: auto;}
+  &--top {top: 0;padding-top: 2 * $base-increment;}
+  &--bottom {bottom: 0;padding-bottom: 2 * $base-increment;}
+  &--left {justify-content: flex-start;right: auto;}
+  &--right {justify-content: flex-end;left: auto;}
 
   .w-alert {
     margin: 0;
