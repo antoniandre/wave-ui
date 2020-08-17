@@ -9,6 +9,10 @@
   .grey {color: #888;}
   .black--bg {background-color: #000;}
   .black {color: #000;}
+  .transparent--bg {background-color: transparent;}
+  .transparent {color: transparent;}
+  .inherit--bg {background-color: inherit;}
+  .inherit {color: inherit;}
   .success--bg, .error--bg, .warning--bg, .info--bg {color: #fff;}
 
   $colors:(
