@@ -1,5 +1,5 @@
 <template lang="pug">
-div.ovv
+div
   title-link.mt4.code(h1 slug="w-menu") w-menu
 
   title-link(h2) Show on click or on hover

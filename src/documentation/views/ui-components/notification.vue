@@ -148,11 +148,11 @@ div
           | {{ item.label }}
           code.ml2 {{ item.value || (item.value === false ? 'false' : "''") }}
     .title4.mt3 Notification position
-    w-radios.mr6(
+    w-radios.my1.mr6(
       v-model="notification3.position[0]"
       :items="[{ label: 'top' }, { label: 'bottom' }]"
       inline)
-    w-radios(
+    w-radios.my1(
       v-model="notification3.position[1]"
       :items="[{ label: 'left' }, { label: 'center' }, { label: 'right' }]"
       inline)

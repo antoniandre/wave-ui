@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div.ovh
   title-link.mt4.code(h1) w-divider
 
   title-link(h2) Horizontal
