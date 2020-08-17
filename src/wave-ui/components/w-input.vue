@@ -1,10 +1,14 @@
 <template lang="pug">
   .w-input(:class="classes" :style="styles")
+    //- Left label.
     template(v-if="labelPosition === 'left'")
       label.w-input__label.w-input__label--left(v-if="$slots.default" :for="`input--${_uid}`")
         slot
       label.w-input__label.w-input__label--left(v-else-if="label" :for="`input--${_uid}`" v-html="label")
+    //- Input wrapper.
     .w-input__input-wrap(:class="inputWrapClasses")
+      label(:for="`input--${_uid}`")
+        w-icon.w-input__icon.w-input__icon--inside-left(v-if="iconInsideLeft" md) {{ iconInsideLeft }}
       input.w-input__input(
         :id="`input--${_uid}`"
         :type="type"
@@ -34,10 +38,14 @@
           v-else-if="label" :for="`input--${_uid}`"
           v-html="label"
           :class="isFocused && { [Validation.message ? 'error' : this.color]: this.color || Validation.message }")
+      label(:for="`input--${_uid}`")
+        w-icon.w-input__icon.w-input__icon--inside-right(v-if="iconInsideRight" md) {{ iconInsideRight }}
+    //- Right label.
     template(v-if="labelPosition === 'right'")
       label.w-input__label.w-input__label--right(v-if="$slots.default" :for="`input--${_uid}`")
         slot
       label.w-input__label.w-input__label--right(v-else-if="label" :for="`input--${_uid}`" v-html="label")
+    //- Error message.
     w-transition-expand(v-if="Validation.message" y)
       .w-input__error.error(v-if="$slots['error-message']")
         slot(name="error-message" :message="Validation.message")
@@ -57,6 +65,8 @@ export default {
     name: { type: String },
     label: { type: String },
     labelPosition: { type: String, default: 'inside' },
+    iconInsideLeft: { type: String },
+    iconInsideRight: { type: String },
     // When label is inside, allows to move the label above on focus or when filled.
     moveLabel: { type: Boolean, default: true },
     placeholder: { type: String },
@@ -104,9 +114,11 @@ export default {
         'w-input--filled': this.hasValue,
         'w-input--focused': this.isFocused,
         'w-input--dark': this.dark,
-        'w-input--floatting-label': this.labelPosition === 'inside' && this.moveLabel,
+        'w-input--floatting-label': this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
-        'w-input--has-error': this.Validation.message
+        'w-input--has-error': this.Validation.message,
+        'w-input--icon-inside-left': this.iconInsideLeft,
+        'w-input--icon-inside-right': this.iconInsideRight
       }
     },
     inputWrapClasses () {
@@ -178,11 +190,10 @@ $inactive-color: #666;
     position: relative;
     display: inline-flex;
     flex: 1 1 0;
+    align-items: center;
     height: $size;
-    font-size: 0.9em;
     border-radius: $border-radius;
     border: $border;
-    font-size: 0.9em;
     transition: border $transition-duration;
   }
 
@@ -252,6 +263,12 @@ $inactive-color: #666;
     cursor: not-allowed;
   }
 
+  // Icons inside.
+  // ------------------------------------------------------
+  &__icon {}
+  &__icon--inside-left {left: -$base-increment;}
+  &__icon--inside-right {right: -$base-increment;}
+
   // Label.
   // ------------------------------------------------------
   &__label {
@@ -269,6 +286,7 @@ $inactive-color: #666;
     transform: translateY(-50%);
     pointer-events: none;
     .w-input--disabled & {color: $disabled-color;}
+    .w-input--icon-inside-left & {left: 20px;}
 
     .w-input--no-padding & {
       left: 0;
@@ -292,6 +310,8 @@ $inactive-color: #666;
     .w-input--filled.w-input--floatting-label .w-input__input-wrap--box & {
       transform: translateY(-180%) scale(0.85);
     }
+    .w-input--focused.w-input--floatting-label.w-input--icon-inside-left &,
+    .w-input--filled.w-input--floatting-label.w-input--icon-inside-left & {left: -1px;}
 
     .w-input--focused & {color: currentColor;}
   }
