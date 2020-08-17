@@ -41,7 +41,7 @@
 
 import { consoleWarn } from '../utils/console'
 
-const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
+// const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
 
 export default {
   name: 'w-menu',
@@ -67,6 +67,10 @@ export default {
     bottom: { type: Boolean },
     left: { type: Boolean },
     right: { type: Boolean },
+    alignTop: { type: Boolean },
+    alignBottom: { type: Boolean },
+    alignLeft: { type: Boolean },
+    alignRight: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
     overlay: { type: Boolean },
     persistent: { type: Boolean }
@@ -74,12 +78,10 @@ export default {
 
   data: () => ({
     showMenu: false,
-    // The activator coordinates.
-    coordinates: {
+    // The menu computed top & left coordinates.
+    menuCoordinates: {
       top: 0,
-      left: 0,
-      width: 0,
-      height: 0
+      left: 0
     },
     activatorEl: null,
     menuEl: null,
@@ -125,34 +127,14 @@ export default {
       )
     },
 
-    menuCoordinates () {
-      const coords = {}
-      const { top, left, width, height } = this.coordinates
-
-      switch (this.position) {
-        case 'top': {
-          coords.top = top
-          coords.left = left + width / 2 // left: 50%.
-          break
-        }
-        case 'bottom': {
-          coords.top = top + height
-          coords.left = left + width / 2 // left: 50%.
-          break
-        }
-        case 'left': {
-          coords.top = top + height / 2 // top: 50%.
-          coords.left = left
-          break
-        }
-        case 'right': {
-          coords.top = top + height / 2 // top: 50%.
-          coords.left = left + width
-          break
-        }
-      }
-
-      return coords
+    alignment () {
+      return (
+        ((this.top || this.bottom) && this.alignLeft && 'left') ||
+        ((this.top || this.bottom) && this.alignRight && 'right') ||
+        ((this.left || this.right) && this.alignTop && 'top') ||
+        ((this.left || this.right) && this.alignBottom && 'bottom') ||
+        ''
+      )
     },
 
     classes () {
@@ -161,6 +143,7 @@ export default {
         [`${this.bgColor}--bg`]: this.bgColor,
         [this.menuClass]: this.menuClass,
         [`w-menu--${this.position}`]: true,
+        [`w-menu--align-${this.alignment}`]: true,
         'w-menu--tile': this.tile,
         'w-menu--card': !this.custom,
         'w-menu--round': this.round,
@@ -206,7 +189,8 @@ export default {
 
       this.timeoutId = clearTimeout(this.timeoutId)
       if (shouldShowMenu) {
-        this.coordinates = this.getCoordinates(e)
+        this.computeMenuPosition(e)
+
         // In `getCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
         // if we don't postpone the Menu apparition it will start transition from a visible menu and
         // thus will not transition.
@@ -216,60 +200,107 @@ export default {
     },
 
     getCoordinates (e) {
+      // Get the activator coordinates relative to window.
       const { top, left, width, height } = e.target.getBoundingClientRect()
-      let coords = { top, left, width, height } // Coords from window.
+      let coords = { top, left, width, height }
 
       // If absolute position, adjust top & left.
       if (!this.fixed) {
         const { top: targetTop, left: targetLeft } = this.menuParentEl.getBoundingClientRect()
+        const computedStyles = window.getComputedStyle(this.menuParentEl, null)
         coords = {
           ...coords,
-          top: top - targetTop + this.menuParentEl.scrollTop,
-          left: left - targetLeft + this.menuParentEl.scrollLeft
+          top: top - targetTop + this.menuParentEl.scrollTop - parseInt(computedStyles.getPropertyValue('border-top-width')),
+          left: left - targetLeft + this.menuParentEl.scrollLeft - parseInt(computedStyles.getPropertyValue('border-left-width'))
         }
       }
 
+      return coords
+    },
+
+    computeMenuPosition (e) {
+      // Get the activator coordinates.
+      let { top, left, width, height } = this.getCoordinates(e)
+
       // 1. First display the menu but hide it (So we can get its dimension).
+      // --------------------------------------------------
       this.menuEl.style.visibility = 'hidden'
-      this.menuEl.style.display = 'table'
+      this.menuEl.style.display = 'flex'
       const computedStyles = window.getComputedStyle(this.menuEl, null)
 
-      // Keep fully in viewport.
+      // 2. Position the menu top, left, right, bottom and apply chosen alignment.
       // --------------------------------------------------
-      if (this.position === 'top' && ((top - this.menuEl.offsetHeight) < 0)) {
-        const margin = - parseInt(computedStyles.getPropertyValue('margin-top'))
-        coords.top -= top - this.menuEl.offsetHeight - margin - marginFromWindowSide
+      // Subtract half or full activator width or height and menu width or height according to the
+      // menu alignment.
+      // Note: the menu position relies on transform translate, the custom animation may override the
+      // css transform property so do without it i.e. no translateX(-50%), and recalculate top & left
+      // manually.
+      switch (this.position) {
+        case 'top': {
+          top -= this.menuEl.offsetHeight
+          if (this.alignRight) {
+            // left: 100% of activator.
+            left += width - this.menuEl.offsetWidth +
+                    parseInt(computedStyles.getPropertyValue('border-right-width'))
+          }
+          else if (!this.alignLeft) left += (width - this.menuEl.offsetWidth) / 2 // left: 50% of activator - half menu width.
+          break
+        }
+        case 'bottom': {
+          top += height
+          if (this.alignRight) {
+            // left: 100% of activator.
+            left += width - this.menuEl.offsetWidth +
+                    parseInt(computedStyles.getPropertyValue('border-right-width'))
+          }
+          else if (!this.alignLeft) left += (width - this.menuEl.offsetWidth) / 2 // left: 50% of activator - half menu width.
+          break
+        }
+        case 'left': {
+          left -= this.menuEl.offsetWidth
+          if (this.alignBottom) top += height - this.menuEl.offsetHeight
+          else if (!this.alignTop) top += (height - this.menuEl.offsetHeight) / 2 // top: 50% of activator - half menu height.
+          break
+        }
+        case 'right': {
+          left += width
+          if (this.alignBottom) {
+            top += height - this.menuEl.offsetHeight +
+                   parseInt(computedStyles.getPropertyValue('margin-top'))
+          }
+          else if (!this.alignTop) {
+            top += (height - this.menuEl.offsetHeight) / 2 + // top: 50% of activator - half menu height.
+                   parseInt(computedStyles.getPropertyValue('margin-top'))
+          }
+          break
+        }
       }
-      else if (this.position === 'left' && left - this.menuEl.offsetWidth < 0) {
-        const margin = - parseInt(computedStyles.getPropertyValue('margin-left'))
-        coords.left -= left - this.menuEl.offsetWidth - margin - marginFromWindowSide
-      }
-      else if (this.position === 'right' && left + width + this.menuEl.offsetWidth > window.innerWidth) {
-        const margin = parseInt(computedStyles.getPropertyValue('margin-left'))
-        coords.left -= left + width + this.menuEl.offsetWidth - window.innerWidth + margin + marginFromWindowSide
-      }
-      else if (this.position === 'bottom' && top + height + this.menuEl.offsetHeight > window.innerHeight) {
-        const margin = parseInt(computedStyles.getPropertyValue('margin-top'))
-        coords.top -= top + height + this.menuEl.offsetHeight - window.innerHeight + margin + marginFromWindowSide
-      }
+
+      // 3. Keep fully in viewport.
       // --------------------------------------------------
+      // if (this.position === 'top' && ((top - this.menuEl.offsetHeight) < 0)) {
+      //   const margin = - parseInt(computedStyles.getPropertyValue('margin-top'))
+      //   top -= top - this.menuEl.offsetHeight - margin - marginFromWindowSide
+      // }
+      // else if (this.position === 'left' && left - this.menuEl.offsetWidth < 0) {
+      //   const margin = - parseInt(computedStyles.getPropertyValue('margin-left'))
+      //   left -= left - this.menuEl.offsetWidth - margin - marginFromWindowSide
+      // }
+      // else if (this.position === 'right' && left + width + this.menuEl.offsetWidth > window.innerWidth) {
+      //   const margin = parseInt(computedStyles.getPropertyValue('margin-left'))
+      //   left -= left + width + this.menuEl.offsetWidth - window.innerWidth + margin + marginFromWindowSide
+      // }
+      // else if (this.position === 'bottom' && top + height + this.menuEl.offsetHeight > window.innerHeight) {
+      //   const margin = parseInt(computedStyles.getPropertyValue('margin-top'))
+      //   top -= top + height + this.menuEl.offsetHeight - window.innerHeight + margin + marginFromWindowSide
+      // }
 
-      // 2. Update left & top for custom transition.
-      // Menu position relies on transform translate, the custom animation may override the transform property
-      // so do without it and subtract half width or height manually.
-      // If menu is on top or bottom.
-      if (['top', 'bottom'].includes(this.position)) coords.left -= this.menuEl.offsetWidth / 2
-      // If menu is on left or right.
-      if (['left', 'right'].includes(this.position)) coords.top -= this.menuEl.offsetHeight / 2
-
-      if (this.position === 'left') coords.left -= this.menuEl.offsetWidth
-      if (this.position === 'top') coords.top -= this.menuEl.offsetHeight
-
-      // 3. Hide the menu again so the transition happens correctly.
+      // 4. Hide the menu again so the transition happens correctly.
+      // --------------------------------------------------
       this.menuEl.style.visibility = null
       this.menuEl.style.display = 'none'
 
-      return coords
+      this.menuCoordinates = { top, left }
     },
 
     insertMenu () {
@@ -317,9 +348,6 @@ export default {
 .w-menu-wrapper {display: none;}
 
 .w-menu {
-  // Fix Safari where `width: max-content` does not take padding and border into consideration.
-  display: table;
-
   position: absolute;
   z-index: 100;
 

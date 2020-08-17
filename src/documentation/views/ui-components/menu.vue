@@ -62,11 +62,70 @@ div
             w-button(v-on="on" outline color="primary") Show menu on right
           | Menu content
 
+  title-link(h2) Alignments
+  p In addition to positions, you can align the menu with its activator.
+  example.example2
+    .title4.mb2 top position
+    w-menu(detach-to=".example2" top align-left)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Align left
+      | Menu content
+    w-menu(detach-to=".example2" top)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Centered
+      | Menu content
+    w-menu(detach-to=".example2" top align-right)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Align right
+      | Menu content
+
+    .title4.mt6.mb2 Bottom position
+    w-menu(detach-to=".example2" align-left)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Align left
+      | Menu content
+    w-menu(detach-to=".example2")
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Centered
+      | Menu content
+    w-menu(detach-to=".example2" align-right)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Align right
+      | Menu content
+
+    .title4.mt6.mb2 Right position
+    w-menu(detach-to=".example2" right align-top)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Align top
+      | Menu content
+    w-menu(detach-to=".example2" right)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Centered
+      | Menu content
+    w-menu(detach-to=".example2" right align-bottom)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Align bottom
+      | Menu content
+
+    .title4.mt6.mb2 Left position
+    w-menu(detach-to=".example2" left align-top)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Align top
+      | Menu content
+    w-menu(detach-to=".example2" left)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Centered
+      | Menu content
+    w-menu(detach-to=".example2" left align-bottom)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on" outline color="primary") Align bottom
+      | Menu content
+
   title-link(h2) Color &amp; background color
   example.example3(content-class="pb12")
     w-menu(detach-to=".example3" color="blue-dark2" bg-color="blue-light5")
       template(#activator="{ on }")
-        w-button(v-on="on" outline color="primary") Show a blue menu
+        w-button.ma1(v-on="on" outline color="primary") Show a blue menu
       | Menu content
     template(#pug).
       w-menu(color="blue-dark2" bg-color="blue-light5")
