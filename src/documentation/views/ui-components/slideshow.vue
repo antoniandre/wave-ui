@@ -7,13 +7,13 @@ div.slideshow
     a.mx1(href="https://antoniandre.github.io/vueper-slides" target="_blank") Vueper Slides
     | by the same awesome author! ;)
 
-  .w-flex.align-center.mt8
+  .w-flex.align-center.wrap.mt8
     w-icon.grey-light4.ml-2.mr2(xl) mdi mdi-chevron-right
-    a.title2.my0(href="https://antoniandre.github.io/vueper-slides" target="_blank") Vueper Slides
-    a.ml2(href="https://www.npmjs.com/package/vueperslides" target="_blank")
-      img(src="https://img.shields.io/npm/dt/vueperslides.svg")
-    a.ml1(href="https://www.npmjs.com/package/vueperslides" target="_blank")
-      img(src="https://img.shields.io/npm/dw/vueperslides.svg")
+    a.title2.my0.mr2(href="https://antoniandre.github.io/vueper-slides" target="_blank") Vueper Slides
+    a.my2.mr1(href="https://www.npmjs.com/package/vueperslides" target="_blank")
+      img.mb-1(src="https://img.shields.io/npm/dt/vueperslides.svg")
+    a.my2(href="https://www.npmjs.com/package/vueperslides" target="_blank")
+      img.mb-1(src="https://img.shields.io/npm/dw/vueperslides.svg")
 
   ssh-pre.mt6(language="shell") npm i vueper-slides
 

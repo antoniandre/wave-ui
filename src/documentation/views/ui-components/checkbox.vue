@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div.ovh
   title-link.mt4(h1 slug="w-checkbox-and-w-checkboxes")
     | #[span.code w-checkbox] &amp; #[span.code w-checkboxes]
 

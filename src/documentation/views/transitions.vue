@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div.ovh
   title-link.mt4(h1) Transitions
 
   p Here is a list of all the available transition components.
@@ -312,5 +312,12 @@ export default {
   padding: 1em;
   width: 14em;
   text-align: center;
+}
+
+@media screen and (max-width: 420px) {
+  .transition-box {
+    padding: 0.4em;
+    width: 14em;
+  }
 }
 </style>

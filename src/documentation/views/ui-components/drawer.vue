@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div.ovh
   title-link.mt4.code(h1) w-drawer
 
   title-link(h2) Positions
@@ -192,7 +192,7 @@ div
       fit-content
       bottom)
       .w-flex.pa2.align-center.wrap
-        .w-flex.align-center
+        .w-flex.align-center.py1
           w-icon.mr3(color="primary" xl) wi-info-circle
           span.grey-dark3.
             Our website uses cookies to give you the best user experience.

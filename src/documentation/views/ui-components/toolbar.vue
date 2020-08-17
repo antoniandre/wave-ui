@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div.ovh
   title-link.mt4.code(h1) w-toolbar
 
   title-link(h2) Simple toolbar with shadow
@@ -194,6 +194,15 @@ div
     flex-grow: 1;
     max-width: 550px;
     height: 200px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .page--toolbar .w-toolbar {
+    button {margin: 0;}
+    .ml2 {margin-left:4px;}
+    .title2 {font-size: 19px;}
+    .title3 {font-size: 16px;}
   }
 }
 </style>
