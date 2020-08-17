@@ -30,9 +30,9 @@ export default {
         [`${this.bgColor}--bg`]: !!this.bgColor,
         'w-toolbar--absolute': !!this.absolute,
         'w-toolbar--fixed': !!this.fixed,
-        'w-toolbar--bottom': !!this.bottom,
+        [`w-toolbar--${this.bottom ? 'bottom' : 'top'}`]: true,
         'w-toolbar--no-border': this.noBorder,
-        'w-toolbar--shadow': !!this.shadow,
+        'w-toolbar--shadow': !!this.shadow
       }
     },
     styles () {
@@ -55,9 +55,16 @@ export default {
   &--absolute, &--fixed {top: 0;left: 0;right: 0;}
   &--absolute {position: absolute;}
   &--fixed {position: fixed;}
-  &--bottom {bottom: 0;top: auto;}
-  &--bottom:not(&--no-border) {border-top: $border;}
-  &:not(&--no-border):not(&--bottom) {border-bottom: $border;}
+  &--top {border-bottom: $border;}
+  &--bottom {
+    bottom: 0;
+    top: auto;
+    border-top: $border;
+  }
+  &--no-border, &--shadow {
+    border-top-width: 0;
+    border-bottom-width: 0;
+  }
   &--shadow {box-shadow: $box-shadow;}
 
   .w-app > & {z-index: 200;}
