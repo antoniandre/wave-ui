@@ -1,55 +1,66 @@
 <template lang="pug">
   .w-input(:class="classes" :style="styles")
-    //- Left label.
-    template(v-if="labelPosition === 'left'")
-      label.w-input__label.w-input__label--left(v-if="$slots.default" :for="`input--${_uid}`")
-        slot
-      label.w-input__label.w-input__label--left(v-else-if="label" :for="`input--${_uid}`" v-html="label")
-    //- Input wrapper.
-    .w-input__input-wrap(:class="inputWrapClasses")
-      label(:for="`input--${_uid}`")
-        w-icon.w-input__icon.w-input__icon--inside-left(v-if="iconInsideLeft" md) {{ iconInsideLeft }}
-      input.w-input__input(
-        :id="`input--${_uid}`"
-        :type="type"
-        :readonly="readonly"
-        :name="name || null"
-        :placeholder="placeholder || null"
-        :step="step || null"
-        :min="min || null"
-        :max="max || null"
-        :minlength="minlength || null"
-        :maxlength="maxlength || null"
-        v-model="inputValue"
-        @input="onInput"
-        @focus="onFocus"
-        @blur="onBlur"
-        @keyup="$emit('keyup', inputValue)"
-        @keydown="$emit('keydown', inputValue)"
-        @keypress="$emit('keypress', inputValue)"
-        :disabled="disabled"
-        :required="required")
-      template(v-if="labelPosition === 'inside' && showLabelInside")
-        label.w-input__label.w-input__label--inside(
-          v-if="$slots.default" :for="`input--${_uid}`"
-          :class="isFocused && { [Validation.message ? 'error' : this.color]: this.color || Validation.message }")
+    input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
+    template(v-else)
+      //- Left label.
+      template(v-if="labelPosition === 'left'")
+        label.w-input__label.w-input__label--left(v-if="$slots.default" :for="`input--${_uid}`")
           slot
-        label.w-input__label.w-input__label--inside(
-          v-else-if="label" :for="`input--${_uid}`"
-          v-html="label"
-          :class="isFocused && { [Validation.message ? 'error' : this.color]: this.color || Validation.message }")
-      label(:for="`input--${_uid}`")
-        w-icon.w-input__icon.w-input__icon--inside-right(v-if="iconInsideRight" md) {{ iconInsideRight }}
-    //- Right label.
-    template(v-if="labelPosition === 'right'")
-      label.w-input__label.w-input__label--right(v-if="$slots.default" :for="`input--${_uid}`")
-        slot
-      label.w-input__label.w-input__label--right(v-else-if="label" :for="`input--${_uid}`" v-html="label")
-    //- Error message.
-    w-transition-expand(v-if="Validation.message" y)
-      .w-input__error.error(v-if="$slots['error-message']")
-        slot(name="error-message" :message="Validation.message")
-      .w-input__error.error(v-else v-html="Validation.message")
+        label.w-input__label.w-input__label--left(v-else-if="label" :for="`input--${_uid}`" v-html="label")
+
+      //- Input wrapper.
+      .w-input__input-wrap(:class="inputWrapClasses")
+        w-icon.w-input__icon.w-input__icon--inner-left(
+          v-if="innerIconLeft"
+          tag="label"
+          :for="`input--${_uid}`"
+          @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
+        input.w-input__input(
+          :id="`input--${_uid}`"
+          :type="type"
+          :name="name || null"
+          :placeholder="placeholder || null"
+          :step="step || null"
+          :min="min || null"
+          :max="max || null"
+          :minlength="minlength || null"
+          :maxlength="maxlength || null"
+          v-model="inputValue"
+          @input="onInput"
+          @focus="onFocus"
+          @blur="onBlur"
+          @keyup="$emit('keyup', inputValue)"
+          @keydown="$emit('keydown', inputValue)"
+          @keypress="$emit('keypress', inputValue)"
+          :readonly="readonly"
+          :disabled="disabled"
+          :required="required")
+        template(v-if="labelPosition === 'inside' && showLabelInside")
+          label.w-input__label.w-input__label--inside(
+            v-if="$slots.default" :for="`input--${_uid}`"
+            :class="isFocused && { [Validation.message ? 'error' : this.color]: this.color || Validation.message }")
+            slot
+          label.w-input__label.w-input__label--inside(
+            v-else-if="label" :for="`input--${_uid}`"
+            v-html="label"
+            :class="isFocused && { [Validation.message ? 'error' : this.color]: this.color || Validation.message }")
+        w-icon.w-input__icon.w-input__icon--inner-right(
+          v-if="innerIconRight"
+          tag="label"
+          :for="`input--${_uid}`"
+          @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
+
+      //- Right label.
+      template(v-if="labelPosition === 'right'")
+        label.w-input__label.w-input__label--right(v-if="$slots.default" :for="`input--${_uid}`")
+          slot
+        label.w-input__label.w-input__label--right(v-else-if="label" :for="`input--${_uid}`" v-html="label")
+
+      //- Error message.
+      w-transition-expand(v-if="Validation.message" y)
+        .w-input__error.error(v-if="$slots['error-message']")
+          slot(name="error-message" :message="Validation.message")
+        .w-input__error.error(v-else v-html="Validation.message")
 </template>
 
 <script>
@@ -65,8 +76,8 @@ export default {
     name: { type: String },
     label: { type: String },
     labelPosition: { type: String, default: 'inside' },
-    iconInsideLeft: { type: String },
-    iconInsideRight: { type: String },
+    innerIconLeft: { type: String },
+    innerIconRight: { type: String },
     // When label is inside, allows to move the label above on focus or when filled.
     moveLabel: { type: Boolean, default: true },
     placeholder: { type: String },
@@ -105,6 +116,9 @@ export default {
     hasValue () {
       return this.inputValue || (this.type === 'number' && this.inputNumberError)
     },
+    hasLabel () {
+      return this.label || this.$slots.default
+    },
     showLabelInside () {
       return this.moveLabel || (!this.hasValue && !this.placeholder)
     },
@@ -114,11 +128,12 @@ export default {
         'w-input--filled': this.hasValue,
         'w-input--focused': this.isFocused,
         'w-input--dark': this.dark,
-        'w-input--floatting-label': this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
+        'w-input--floatting-label': this.hasLabel && this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
-        'w-input--has-error': this.Validation.message,
-        'w-input--icon-inside-left': this.iconInsideLeft,
-        'w-input--icon-inside-right': this.iconInsideRight
+        'w-input--has-placeholder': this.placeholder,
+        'w-input--has-error error': this.Validation.message,
+        'w-input--inner-icon-left': this.innerIconLeft,
+        'w-input--inner-icon-right': this.innerIconRight
       }
     },
     inputWrapClasses () {
@@ -173,7 +188,7 @@ export default {
 
 <style lang="scss">
 $size: round(2 * $base-font-size);
-$inactive-color: #666;
+$inactive-color: #777;
 
 .w-input {
   position: relative;
@@ -181,7 +196,6 @@ $inactive-color: #666;
   flex-grow: 1;
   flex-wrap: wrap;
   align-items: center;
-  outline: none;
   font-size: $base-font-size;
 
   // Input field wrapper.
@@ -189,7 +203,7 @@ $inactive-color: #666;
   &__input-wrap {
     position: relative;
     display: inline-flex;
-    flex: 1 1 0;
+    flex: 1 1 auto;
     align-items: center;
     height: $size;
     border-radius: $border-radius;
@@ -207,16 +221,9 @@ $inactive-color: #666;
     border-width: 0 0 1px;
   }
 
-  &__input-wrap--box {
-    padding-left: 2 * $base-increment;
-    padding-right: 2 * $base-increment;
-  }
+  // &__input-wrap--box {}
 
-  &__input-wrap--round {
-    border-radius: 5em;
-    padding-left: 3 * $base-increment;
-    padding-right: 3 * $base-increment;
-  }
+  &__input-wrap--round {border-radius: 5em;}
   &__input-wrap--tile {border-radius: initial;}
   &__input-wrap--shadow {box-shadow: $box-shadow;}
 
@@ -250,43 +257,72 @@ $inactive-color: #666;
   // ------------------------------------------------------
   &__input {
     width: 100%;
+    // flex-grow: 1;
     height: 100%;
     font-size: inherit;
     color: inherit;
     background: none;
     border: none;
     outline: none;
+    padding-left: 2 * $base-increment;
+    padding-right: 2 * $base-increment;
   }
+
+  &--no-padding &__input {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &__input-wrap--round &__input {
+    padding-left: 3 * $base-increment;
+    padding-right: 3 * $base-increment;
+  }
+
+  &--inner-icon-left &__input {padding-left: 27px;}
+  &--inner-icon-right &__input {padding-right: 27px;}
 
   &--disabled &__input {
     color: $disabled-color;
     cursor: not-allowed;
   }
 
+  &--disabled input::placeholder,
+  &--has-error input::placeholder {color: inherit;}
+
   // Icons inside.
   // ------------------------------------------------------
-  &__icon {}
-  &__icon--inside-left {left: -$base-increment;}
-  &__icon--inside-right {right: -$base-increment;}
+  &__icon {position: absolute;}
+  &__icon--inner-left {left: 6px;}
+  &__icon--inner-right {right: 6px;}
+  &--no-padding &__icon--inner-left {left: 1px;}
+  &--no-padding &__icon--inner-right {right: 1px;}
+
+  .w-input--focused &__icon {color: currentColor;}
+
+  &--disabled &__icon {
+    color: $disabled-color;
+    cursor: not-allowed;
+  }
 
   // Label.
   // ------------------------------------------------------
   &__label {
     transition: color $transition-duration;
+    cursor: pointer;
 
     &--left {margin-right: 2 * $base-increment;}
     &--right {margin-left: 2 * $base-increment;}
+    .w-input--disabled & {color: $disabled-color;cursor: not-allowed;}
   }
 
   &__label--inside {
     position: absolute;
     top: 50%;
-    left: 1px;
+    left: 0;
     padding-left: 2 * $base-increment;
     transform: translateY(-50%);
     pointer-events: none;
-    .w-input--disabled & {color: $disabled-color;}
-    .w-input--icon-inside-left & {left: 20px;}
+    .w-input--inner-icon-left & {left: 18px;}
 
     .w-input--no-padding & {
       left: 0;
@@ -302,16 +338,21 @@ $inactive-color: #666;
       transform-origin: 0 0;
       transition: $transition-duration ease;
     }
+
+    // move label with underline style.
     .w-input--focused.w-input--floatting-label &,
-    .w-input--filled.w-input--floatting-label & {
+    .w-input--filled.w-input--floatting-label &,
+    .w-input--has-placeholder.w-input--floatting-label & {
       transform: translateY(-160%) scale(0.85);
     }
+    // Move label with outline style or with shadow.
     .w-input--focused.w-input--floatting-label .w-input__input-wrap--box &,
-    .w-input--filled.w-input--floatting-label .w-input__input-wrap--box & {
+    .w-input--filled.w-input--floatting-label .w-input__input-wrap--box &,
+    .w-input--has-placeholder.w-input--floatting-label .w-input__input-wrap--box & {
       transform: translateY(-180%) scale(0.85);
     }
-    .w-input--focused.w-input--floatting-label.w-input--icon-inside-left &,
-    .w-input--filled.w-input--floatting-label.w-input--icon-inside-left & {left: -1px;}
+    .w-input--focused.w-input--floatting-label.w-input--inner-icon-left &,
+    .w-input--filled.w-input--floatting-label.w-input--inner-icon-left & {left: 0px;}
 
     .w-input--focused & {color: currentColor;}
   }
@@ -322,6 +363,7 @@ $inactive-color: #666;
   // ------------------------------------------------------
   &__error {
     width: 100%;
+    flex-grow: 1;
     font-size: 0.75em;
     margin-top: $base-increment;
   }
