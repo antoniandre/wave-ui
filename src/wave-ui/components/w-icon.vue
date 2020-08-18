@@ -1,5 +1,6 @@
 <template lang="pug">
-  i.w-icon(
+  component.w-icon(
+    :is="tag || 'i'"
     :class="classes"
     v-on="$listeners"
     role="icon"
@@ -14,8 +15,9 @@ import config from '../utils/config'
 export default {
   name: 'w-icon',
   props: {
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
+    tag: { type: String },
+    color: { type: String },
+    bgColor: { type: String },
     xs: { type: Boolean },
     sm: { type: Boolean },
     md: { type: Boolean },
