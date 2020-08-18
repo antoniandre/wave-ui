@@ -42,15 +42,20 @@ export default {
 
     validate (e) {
       this.$emit('validate')
-      const hasError = this.formElements.some(item => {
-        const result = item.validation && item.validation(item.inputValue)
-        item.Validation.message = typeof result === 'string' ? result : ''
-        return typeof result === 'string'
-      })
+      const errorsCount = this.formElements.reduce((total, item) => {
+        const { validation, Validation = {}, inputValue, readonly, disabled } = item
 
-      this.$emit('input', !hasError)
-      this.$emit(...([hasError ? 'error' : 'success'].concat(e || [])))
-      return !hasError
+        // Skip validation and return ok if there is no validation or if disabled or readonly.
+        if (!validation || disabled || readonly) return total
+
+        const result = typeof validation === 'function' && validation(inputValue)
+        Validation.message = typeof result === 'string' ? result : ''
+        return total + ~~(typeof result === 'string')
+      }, 0)
+
+      this.$emit('input', !errorsCount)
+      this.$emit(errorsCount ? 'error' : 'success', { e, errorsCount })
+      return !errorsCount
     },
 
     onSubmit (e) {

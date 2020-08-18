@@ -14,22 +14,24 @@ div
     w-card.white--bg(content-class="pa0")
       .message-box
         w-transition-fade
-          w-alert.my0.text-light(v-if="formValid1" success no-border)
+          w-alert.my0.text-light(v-if="form1.valid" success no-border)
             | The form is valid, ready to send it!
-          w-alert.my0.text-light(v-else-if="formValid1 === false" error no-border)
-            | The form has errors.
+          w-alert.my0.text-light(v-else-if="form1.valid === false" error no-border)
+            | The form has {{ form1.errorsCount }} errors.
       w-form.px8.pt2.pb12(
-        v-model="formValid1"
-        @validate="formSent1 = false"
+        v-model="form1.valid"
+        @validate="form1.sent = false"
         @success="onSuccess(1)"
-        @error="")
+        @error="form1.errorsCount = $event.errorsCount")
         w-input(required label="First name" :validation="validations.firstName")
+        w-input(required label="Last name" :validation="validations.lastName")
+        w-input(disabled required label="User name" :validation="validations.firstName")
         w-flex.mt4(wrap align-center justify-end)
           w-checkbox(required :validation="validations.consent") I agree to the terms &amp; conditions
           .spacer
-          w-button(bg-color="primary" type="submit" :loading="formValid1 && !formSent1") Validate
+          w-button(bg-color="primary" type="submit" :loading="form1.valid && !form1.sent") Validate
       w-notification(
-        v-model="formSent1"
+        v-model="form1.sent"
         success
         transition="bounce"
         absolute
@@ -40,24 +42,25 @@ div
       w-card.white--bg(content-class="pa0")
         .message-box
           w-transition-fade
-            w-alert.my0.text-light(v-if="formValid" success no-border)
+            w-alert.my0.text-light(v-if="form.valid" success no-border)
               | The form is valid, ready to send it!
-            w-alert.my0.text-light(v-else-if="formValid === false" error no-border)
-              | The form has errors.
+            w-alert.my0.text-light(v-else-if="form.valid === false" error no-border)
+              | The form has {{ '\{\{ form.errorsCount \}\}' }} errors.
 
         w-form.px8.pt2.pb12(
-          v-model="formValid"
-          @validate="formSent = false"
+          v-model="form.valid"
+          @validate="form.sent = false"
           @success="onSuccess"
-          @error="")
+          @error="form.errorsCount = $event.errorsCount")
           w-input(required label="First name" :validation="validations.firstName")
+          w-input(required label="Last name" :validation="validations.lastName")
           w-flex.mt4(wrap align-center justify-end)
             w-checkbox I agree to the terms &amp; conditions
             .spacer
-            w-button(bg-color="primary" type="submit" :loading="formValid &amp;&amp; !formSent") Validate
+            w-button(bg-color="primary" type="submit" :loading="form.valid &amp;&amp; !form.sent") Validate
 
         w-notification(
-          v-model="formSent"
+          v-model="form.sent"
           success
           transition="bounce"
           absolute
@@ -66,16 +69,20 @@ div
           bottom) The form was sent successfully!
     template(#js).
       data: () => ({
-        formValid: null,
-        formSent: false,
+        form: {
+          valid: null,
+          sent: false,
+          errorsCount: 0
+        },
         validations: {
-          firstName: value => !!value || 'This field is required'
+          firstName: value => !!value || 'This field is required',
+          lastName: value => !!value || 'This field is required'
         }
       }),
 
       methods: {
         onSuccess () {
-          setTimeout(() => (this.formSent = true), 2000)
+          setTimeout(() => (this.form.sent = true), 2000)
         }
       }
     template(#css).
@@ -85,22 +92,26 @@ div
 <script>
 export default {
   data: () => ({
-    formValid1: null,
-    formSent1: false,
-    // formValid2: null,
-    // formSent2: false,
+    form1: {
+      valid: null,
+      sent: false,
+      errorsCount: 0
+    },
+    // form2: {
+    //   valid: null,
+    //   sent: false,
+    //   errorsCount: 0
+    // }
     validations: {
       firstName: value => !!value || 'This field is required',
+      lastName: value => !!value || 'This field is required',
       consent: value => !!value || 'You must agree'
     }
   }),
 
-  computed: {
-  },
-
   methods: {
     onSuccess (id) {
-      setTimeout(() => (this[`formSent${id}`] = true), 2000)
+      setTimeout(() => (this[`form${id}`].sent = true), 2000)
     }
   }
 }
