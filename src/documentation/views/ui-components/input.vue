@@ -6,28 +6,28 @@ div
 
   title-link(h2) Label and / or placeholder
   example
-    w-input.mb1(label="First name" required)
-    //- w-input.mb1 First name
-    w-input.mb1(placeholder="First name")
-    w-input.mb1(label="First name" placeholder="First name")
+    w-input.mb4(label="Label" required)
+    //- w-input.mb3 Label
+    w-input.mb3(placeholder="Placeholder")
+    w-input.mb3(label="Label" placeholder="Placeholder")
     template(#pug).
-      w-input.mb1(label="First name" required)
-      w-input.mb1(placeholder="First name")
-      w-input.mb1(label="First name" placeholder="First name")
+      w-input.mb4(label="Label" required)
+      w-input.mb3(placeholder="Placeholder")
+      w-input.mb3(label="Label" placeholder="Placeholder")
 
   title-link(h2) Outline
   example
-    w-input.mb1(label="Outline" outline)
-    w-input.mb1(placeholder="Outline" outline)
-    w-input.mb1(label="Outline" color="info" outline)
-    w-input.mb1(label="Outline" bg-color="blue-light5" outline)
-    w-input.mb1(label="Outline" bg-color="blue-dark5" color="blue-light4" outline)
+    w-input.mb4(label="Outline" outline)
+    w-input.mb2(placeholder="Outline" outline)
+    w-input.mb2(label="Outline" color="info" outline)
+    w-input.mb2(label="Outline" bg-color="blue-light5" outline)
+    w-input.mb2(label="Outline" bg-color="blue-dark5" color="blue-light4" outline)
     template(#pug).
-      w-input.mb1(label="Outline" outline)
-      w-input.mb1(placeholder="Outline" outline)
-      w-input.mb1(label="Outline" color="info" outline)
-      w-input.mb1(label="Outline" bg-color="blue-light5" outline)
-      w-input.mb1(label="Outline" bg-color="blue-dark5" color="blue-light4" outline)
+      w-input.mb2(label="Outline" outline)
+      w-input.mb2(placeholder="Outline" outline)
+      w-input.mb2(label="Outline" color="info" outline)
+      w-input.mb2(label="Outline" bg-color="blue-light5" outline)
+      w-input.mb2(label="Outline" bg-color="blue-dark5" color="blue-light4" outline)
 
   title-link(h2) Shadow
   example
@@ -104,6 +104,12 @@ div
 
   title-link(h2) Label position
   p The default label position is "#[span.code inside]", but it can also be "#[span.code left]" or "#[span.code right]".
+  alert(tip).
+    You could also set a label outside of the #[span.code w-input] and display it nicely with flex.
+    But it is convenient to let the #[span.code w-input] component handle the field focus event on
+    label click.#[br]
+    The #[span.code label] prop is here for this purpose and accepts any HTML.
+
   example
     w-input.mb2(label="Inside" label-position="inside" outline)
     w-input.mb2(label="Left" label-position="left" outline)
@@ -116,62 +122,106 @@ div
     #[strong Notes:] when the label is positioned inside and a placeholder is set,
     the label will be hidden and the placeholder will be displayed.
 
-  title-link(h2) Icons inside
+  title-link(h2) Custom label via default slot
+  p.
+    It is convenient to have the label inside the #[span.code w-input] component to let it handle
+    the field focus event on label click.#[br]
+    The #[span.code label] prop accepts any HTML, but because passing complex html via a prop is not fun,
+    there is also a prop for setting the label wish will grant more freedom.
+
+  example
+    w-input.mb2(label-position="inside" outline)
+      w-icon.orange mdi mdi-arrow-right
+      span.purple.mx1 Inside
+      w-icon.orange mdi mdi-arrow-left
+    w-input.mb2(label-position="left" outline)
+      span.green.mr1 Left
+      w-icon.orange mdi mdi-arrow-right
+    w-input.mb2(label-position="right" outline)
+      w-icon.orange mdi mdi-arrow-left
+      span.red.ml1 Right
+    template(#pug).
+      w-input.mb2(label="Inside" label-position="inside" outline)
+      w-input.mb2(label="Left" label-position="left" outline)
+      w-input.mb2(label="Right" label-position="right" outline)
+
+  title-link(h2) Inner icons
   example
     .title4.mb2 Label outside
-    w-input.mb2(label="Left" label-position="left" outline icon-inside-left="wi-check")
-    w-input.mb2(label="Right" label-position="right" outline icon-inside-left="wi-check")
-    w-input.mb2(label="Right" label-position="right" outline icon-inside-right="wi-check")
+    w-input.mb2(label="Username" label-position="left" outline inner-icon-left="mdi mdi-account")
+    w-input.mb2(
+      label="Password"
+      :type="isPassword ? 'password' : 'text'"
+      label-position="left"
+      :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+      :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+      @click:inner-icon-right="isPassword = !isPassword")
+    w-input.mb2(
+      label="Password"
+      :type="isPassword ? 'password' : 'text'"
+      label-position="left"
+      outline
+      :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+      @click:inner-icon-right="isPassword = !isPassword")
+    w-input.mb2(label="Right" label-position="right" outline inner-icon-left="wi-check")
+    w-input.mb2(label="Right" label-position="right" outline inner-icon-right="wi-check")
     .title4.mt6.mb2 Label inside
-    w-input.mb2(label="Inside" label-position="inside" outline icon-inside-left="wi-search")
-    w-input.mb2(label="Inside" label-position="inside" outline icon-inside-right="wi-search")
+    w-input.mb2(label="Inside" label-position="inside" outline inner-icon-left="wi-search")
+    w-input.mb2(label="Inside" label-position="inside" outline inner-icon-right="wi-search")
     template(#pug).
       .title4.mb2 Label outside
-      w-input.mb2(label="Left" label-position="left" outline icon-inside-left="wi-check")
-      w-input.mb2(label="Right" label-position="right" outline icon-inside-left="wi-check")
-      w-input.mb2(label="Right" label-position="right" outline icon-inside-right="wi-check")
+      w-input.mb2(label="Left" label-position="left" outline inner-icon-left="wi-check")
+      w-input.mb2(label="Right" label-position="right" outline inner-icon-left="wi-check")
+      w-input.mb2(label="Right" label-position="right" outline inner-icon-right="wi-check")
 
       .title4.mt6.mb2 Label inside
-      w-input.mb2(label="Inside" label-position="inside" outline icon-inside-left="wi-search")
-      w-input.mb2(label="Inside" label-position="inside" outline icon-inside-right="wi-search")
+      w-input.mb2(label="Inside" label-position="inside" outline inner-icon-left="wi-search")
+      w-input.mb2(label="Inside" label-position="inside" outline inner-icon-right="wi-search")
 
   title-link(h2) Disabled &amp; readonly
   example
-    w-input.mb3(label="Disabled" outline disabled)
-    w-input.mb3(label="Disabled and filled" value="Some content" outline disabled)
-    w-input.mb3(label="Readonly" outline readonly)
-    w-input.mb3(label="Readonly and filled" value="Some content" outline readonly)
+    w-input.mb3(label="Disabled" inner-icon-left="mdi mdi-minus-circle" outline disabled)
+    w-input.mb3(label="Disabled and filled" inner-icon-left="mdi mdi-minus-circle" value="Some content" outline disabled)
+    w-input.mb3(label="Readonly" inner-icon-left="mdi mdi-lock" outline readonly)
+    w-input.mb3(label="Readonly and filled" inner-icon-left="mdi mdi-lock" value="Some content" outline readonly)
     template(#pug).
+      w-input.mb3(label="Disabled" inner-icon-left="mdi mdi-minus-circle" outline disabled)
+      w-input.mb3(label="Disabled and filled" inner-icon-left="mdi mdi-minus-circle" value="Some content" outline disabled)
+      w-input.mb3(label="Readonly" inner-icon-left="mdi mdi-lock" outline readonly)
+      w-input.mb3(label="Readonly and filled" inner-icon-left="mdi mdi-lock" value="Some content" outline readonly)
 
   title-link(h2) Types
-  p The default type is "#[span.code text]".
+  p The default type is "#[span.code text]" but the types bellow are also supported.
+  p.
+    You will not notice a difference on desktop using a few of these fields like #[span.code tel],
+    but they make sense on touch devices where the keyboard appearing is tailored for the selected type of input.
   h3 Textual inputs
   example
     ul.input-types
       li
         .code.mb1 type="email"
         w-input(type="email") Email address
-      li
+      li.mt4
         .code.mb1 type="number"
         w-input(type="number" min="0" max="100") Age
-      li
+      li.mt4
         .code.mb1 type="password"
         w-input(type="password") Password
-      li
+      li.mt4
         .code.mb1 type="search"
         w-input(type="search") Search
-      li
+      li.mt4
         .code.mb1 type="tel"
         w-input(type="tel") Tel
-      li
+      li.mt4
         .code.mb1 type="text"
-        w-input Text
-      li
+        w-input(type="text") Text
+      li.mt4
         .code.mb1 type="url"
         w-input(type="url") Url
-      li
+      li.mt4
         span.code.mb1.mr2 type="hidden"
-        | The hidden type is also accepted.
+        | The hidden type is also accepted - but you don't need a winput for that!
         w-input(type="hidden")
     template(#pug).
       ul.input-types
@@ -198,7 +248,7 @@ div
           w-input(type="url") Url
         li
           span.code.mb1.mr2 type="hidden"
-          | The hidden type is also accepted.
+          | The hidden type is also accepted - but you don't need a winput for that!
           w-input(type="hidden")
 
   h3 Other types of inputs
@@ -241,7 +291,9 @@ div
 
 <script>
 export default {
-
+  data: () => ({
+    isPassword: true
+  })
 }
 </script>
 
