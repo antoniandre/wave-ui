@@ -123,7 +123,7 @@ div
     For instance if you set the scope to #[code html > body > div.w-app], the default
     #[code .w-app .primary {color: #234781;}] would become
     #[code html > body > div.w-app .primary {color: #234781;}].
-  w-alert.mt6.py3.alert--success(success icon-outside).
+  alert.mt6.py3(success).
     This means you can control all the css rules specificity and consequently their priority!
 
   title-link(h2 slug="presets")
