@@ -1,8 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1 slug="w-input")
-    | w-input
-    w-tag.ml3(bg-color="orange" color="white" lg) In progress
+  title-link.mt4.code(h1 slug="w-input") w-input
 
   title-link(h2) Label and / or placeholder
   example

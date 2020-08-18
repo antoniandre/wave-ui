@@ -74,7 +74,7 @@ export default {
         route: 'form',
         children: [
           { label: 'Checkbox', route: 'w-checkbox' },
-          { label: 'Input', route: 'w-input', inProgress: true },
+          { label: 'Input', route: 'w-input' },
           { label: 'Form', route: 'w-form', inProgress: true },
           { label: 'Radio', route: 'w-radio' },
           { label: 'Select', route: 'w-select', disabled: true },
