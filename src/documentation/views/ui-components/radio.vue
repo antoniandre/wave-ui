@@ -25,7 +25,7 @@ div
   .w-divider.grey-light5.mt1
 
   title-link.mt8(h2 slug="understanding-w-radio") Understanding the #[span.code w-radio] component
-  w-alert.alert--tip(icon-outside icon="mdi mdi-lightbulb-on")
+  alert(tip)
     strong Important
     div.
       With single radio buttons (using &lt;w-radio&gt;), the #[code name] prop is needed for the
@@ -95,7 +95,7 @@ div
         w-tag(bg-color="green-light5" color="green-dark2")
           | Choice 2 is a tag
           w-icon.ml1 mdi mdi-heart
-  w-alert.alert--tip(icon-outside icon="mdi mdi-lightbulb-on").
+  alert(tip).
     As seen in this example, the #[span.code w-radio] component allows you to have complete freedom
     in your radio buttons.#[br]
     But because in most cases you won't need that, the #[span.code w-radios] component will make you go
@@ -103,7 +103,7 @@ div
 
   title-link(h2) Color
   p By default the #[code w-radio] &amp; #[code w-radios] components will use the primary color.
-  w-alert.alert--info(info icon-outside).
+  alert(info).
     One thing that the #[span.code w-radios] component does not do is mixing colors: you can do it with
     #[span.code w-radio] like in this example.
   example(content-class="mt3")

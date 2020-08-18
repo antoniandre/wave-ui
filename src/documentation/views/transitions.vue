@@ -211,7 +211,7 @@ div.ovh
         text-align: center;
       }
 
-  w-alert.alert--tip(icon-outside icon="mdi mdi-lightbulb").
+  alert(tip).
     When using the x or xy transitions, you may want to prevent the content to wrap to a new line while
     the animation, like in the above example.
     To do so, you can add the #[span.code text-nowrap] class on the element being transitioned.

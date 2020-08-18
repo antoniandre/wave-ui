@@ -376,7 +376,7 @@ div
       }
 
   title-link.mt12.title2(h3) Using margin in flex context
-  w-alert.alert--warning(warning icon-outside).
+  alert(warning).
     It's important to note that setting a margin on an element in a flex content will override its
     default positioning.#[br]
     Look at the following examples where the boxes have different margins applied.#[br]
@@ -431,7 +431,7 @@ div
 
   title-link.mt12.title3(h3 slug="not-justify-self") #[em Not #[span.code justify-self]]
 
-  w-alert.alert--warning(warning icon-outside)
+  alert(warning)
     a.black.ml1(
       href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Alignment/Box_Alignment_in_Flexbox"
       target="_blank"

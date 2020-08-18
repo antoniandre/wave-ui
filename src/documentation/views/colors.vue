@@ -84,7 +84,7 @@ div(style="overflow: hidden")
     Also note that the primary color is considered as dark by default, and will render,
     as well as its 3 darker shades, with a white text when used as a background.
 
-  w-alert.alert--tip(icon-outside icon="mdi mdi-lightbulb-on").
+  alert(tip).
     If you don't need it, you can add #[code disableColorShades: true] to the Wave UI options to disable
     the color shades computing of the status colors and your custom colors.
 
