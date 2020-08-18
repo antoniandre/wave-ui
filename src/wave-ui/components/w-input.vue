@@ -203,7 +203,7 @@ $inactive-color: #777;
   &__input-wrap {
     position: relative;
     display: inline-flex;
-    flex: 1 1 auto;
+    flex: 1 1 0;
     align-items: center;
     height: $size;
     border-radius: $border-radius;
