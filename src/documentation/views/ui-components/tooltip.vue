@@ -2,7 +2,7 @@
 div.tooltips-demo
   title-link.mt4.code(h1) w-tooltip
 
-  w-alert.alert--tip(icon-outside icon="mdi mdi-lightbulb-on").
+  alert(tip).
     #[strong Important notes]#[br]
     By default when you use #[code &lt;w-tooltip&gt;], it creates a wrapper around the activator
     element and the tooltip is added inside this wrapper.#[br]
@@ -357,7 +357,7 @@ div.tooltips-demo
 
       .w-tag {z-index: 1;}
 
-  w-alert.alert--warning(warning icon-outside).
+  alert(warning).
     The DOM element that the tooltip is detached to must have a position (fixed, absolute or
     relative).
 </template>

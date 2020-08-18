@@ -26,7 +26,7 @@ div
   .title3 Wave UI is developed with a particular care about CSS.
   p.title3.
     Practically Wave UI gives you more flexibility and more control over the CSS.
-  w-alert.alert--tip.my5(icon-outside icon="mdi mdi-lightbulb-on").
+  alert.my5(tip).
     Because inline styles and #[code !important] are a nightmare to override,
     Wave UI has chosen to use not-too-specific selectors and promote the CSS styling
     rather than Javascript dynamic styling.

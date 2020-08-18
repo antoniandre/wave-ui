@@ -29,7 +29,7 @@ div.ovh
   title-link.title1.mt8(h2 slug="understanding-w-checkbox") Understanding &lt;w-checkbox&gt;
   .w-divider.grey-light5.mt1
 
-  w-alert.alert--info(info icon-outside).
+  alert(info).
     Unlike the radio buttons, checkboxes don't need the #[code name] prop in addition to the #[code v-model]
     to work together and control with arrow keys since the default HTML behavior does not include control from
     the keyboard arrows (you can navigate with #[kbd tab] and toggle with #[kbd space] or #[kbd enter]).#[br]
@@ -93,7 +93,7 @@ div.ovh
           | Choice 2 is a tag
           w-icon.ml1 mdi mdi-heart
 
-  w-alert.alert--tip.mt8(icon-outside icon="mdi mdi-lightbulb-on").
+  alert.mt8(tip).
     As seen in this example, the #[span.code w-checkbox] component allows you to have complete freedom
     regarding your checkboxes content, style and layout.#[br]
     But because in most cases you won't need that, the #[span.code w-checkboxes] component will make you go
@@ -197,7 +197,7 @@ div.ovh
 
   title-link(h2) Color
   p By default the #[code w-checkbox] &amp; #[code w-checkboxes] components will use the primary color.
-  w-alert.alert--info(info icon-outside).
+  alert(info).
     One thing that the #[span.code w-checkboxes] component does not do is mixing colors: you can do it with
     #[span.code w-checkbox] like in this example.
 

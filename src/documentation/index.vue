@@ -44,6 +44,7 @@ import SshPre from 'simple-syntax-highlighter'
 import 'simple-syntax-highlighter/dist/sshpre.css'
 import TitleLink from '@/documentation/components/title-link'
 import Example from '@/documentation/components/example'
+import Alert from '@/documentation/components/alert'
 import Toolbar from '@/documentation/components/toolbar'
 import NavMenu from '@/documentation/components/nav-menu'
 import '@/documentation/scss/index.scss'
@@ -51,6 +52,7 @@ import '@/documentation/scss/index.scss'
 Vue.component('ssh-pre', SshPre)
 Vue.component('title-link', TitleLink)
 Vue.component('example', Example)
+Vue.component('alert', Alert)
 
 export default {
   components: { Toolbar, NavMenu },
