@@ -1,5 +1,5 @@
 <template lang="pug">
-  form.w-form(:class="classes" :style="styles" @submit.prevent="onSubmit" novalidate)
+  form.w-form(@submit="onSubmit" novalidate :class="classes")
     slot
 </template>
 
@@ -14,20 +14,22 @@ export default {
   },
 
   props: {
-    value: {}
+    value: {},
+    allowSubmit: { type: Boolean }
   },
 
   data: () => ({
-    formElements: []
+    formElements: [],
+    status: null // null = pristine, false = error, true = success.
   }),
 
   computed: {
     classes () {
       return {
+        'w-form--pristine': this.status === null,
+        'w-form--error': this.status === false,
+        'w-form--success': this.status === true
       }
-    },
-    styles () {
-      return false
     }
   },
 
@@ -40,6 +42,13 @@ export default {
       this.formElements = this.formElements.filter(item => item._uid !== formElement._uid)
     },
 
+    /**
+     * Go through each validation rule of each form element, and count the number of errors.
+     * Display the element error inside the element if any error, and $emit the result.
+     *
+     * @param {Object} e the submit event
+     * @return {Boolean} true if the form is valid
+     */
     validate (e) {
       this.$emit('validate')
       const errorsCount = this.formElements.reduce((total, item) => {
@@ -53,20 +62,33 @@ export default {
         return total + ~~(typeof result === 'string')
       }, 0)
 
-      this.$emit('input', !errorsCount)
-      this.$emit(errorsCount ? 'error' : 'success', { e, errorsCount })
-      return !errorsCount
+      this.status = !errorsCount // True if valid.
+
+      this.$emit('input', this.status)
+      this.$emit(this.status ? 'success' : 'error', { e, errorsCount })
+      return this.status
+    },
+
+    reset (e) {
+      this.formElements.forEach(item => ((item.Validation || {}).message = ''))
     },
 
     onSubmit (e) {
       this.$emit('submit', e)
       this.validate(e)
+      if (!this.allowSubmit || !this.status) e.preventDefault()
+    }
+  },
+
+  created () {
+    this.status = this.value || null
+  },
+
+  watch: {
+    value (value) {
+      if (this.status === false && value || value === null) this.reset()
+      this.status = value
     }
   }
 }
 </script>
-
-<style lang="scss">
-.w-form {
-}
-</style>
