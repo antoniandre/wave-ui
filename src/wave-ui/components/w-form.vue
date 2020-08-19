@@ -69,7 +69,7 @@ export default {
       return this.status
     },
 
-    reset (e) {
+    reset () {
       this.formElements.forEach(item => ((item.Validation || {}).message = ''))
     },
 
