@@ -1,13 +1,8 @@
 <template lang="pug">
   w-form-element(
-    :valid="valid"
-    :input-value="inputValue"
-    element="w-input"
-    :validation="validation"
-    :disabled="disabled"
-    :readonly="readonly"
-    :class="classes"
-    :style="styles")
+    :element="$options._componentTag"
+    v-bind="{ valid, validation, inputValue, disabled, readonly }"
+    :class="classes")
     input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
     template(v-else)
       //- Left label.
@@ -144,9 +139,6 @@ export default {
         'w-input__input-wrap--shadow': this.shadow,
         'w-input__input-wrap--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
       }
-    },
-    styles () {
-      return false
     }
   },
 

@@ -4,7 +4,6 @@ div
     | w-form
     w-tag.ml3(bg-color="orange" lg color="white") In Progress
 
-
   alert.mt6(info)
     .title5 The #[span.code w-form] component is used for validation.
 
