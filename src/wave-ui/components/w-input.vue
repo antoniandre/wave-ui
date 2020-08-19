@@ -1,5 +1,13 @@
 <template lang="pug">
-  .w-input(:class="classes" :style="styles")
+  w-form-element(
+    :valid="valid"
+    :input-value="inputValue"
+    element="w-input"
+    :validation="validation"
+    :disabled="disabled"
+    :readonly="readonly"
+    :class="classes"
+    :style="styles")
     input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
     template(v-else)
       //- Left label.
@@ -38,12 +46,12 @@
         template(v-if="labelPosition === 'inside' && showLabelInside")
           label.w-input__label.w-input__label--inside(
             v-if="$slots.default" :for="`input--${_uid}`"
-            :class="isFocused && { [Validation.message ? 'error' : this.color]: this.color || Validation.message }")
+            :class="isFocused && { [valid ? this.color : 'error' ]: this.color || !valid }")
             slot
           label.w-input__label.w-input__label--inside(
             v-else-if="label" :for="`input--${_uid}`"
             v-html="label"
-            :class="isFocused && { [Validation.message ? 'error' : this.color]: this.color || Validation.message }")
+            :class="isFocused && { [valid ? this.color : 'error' ]: this.color || !valid }")
         w-icon.w-input__icon.w-input__icon--inner-right(
           v-if="innerIconRight"
           tag="label"
@@ -55,21 +63,11 @@
         label.w-input__label.w-input__label--right(v-if="$slots.default" :for="`input--${_uid}`")
           slot
         label.w-input__label.w-input__label--right(v-else-if="label" :for="`input--${_uid}`" v-html="label")
-
-      //- Error message.
-      w-transition-expand(v-if="Validation.message" y)
-        .w-input__error.error(v-if="$slots['error-message']")
-          slot(name="error-message" :message="Validation.message")
-        .w-input__error.error(v-else v-html="Validation.message")
 </template>
 
 <script>
 export default {
   name: 'w-input',
-  inject: {
-    formRegister: { default: null },
-    formUnregister: { default: null }
-  },
   props: {
     value: { default: '' },
     type: { type: String, default: 'text' },
@@ -106,9 +104,7 @@ export default {
       // and the label would come back on top of the input text.
       inputNumberError: false,
       isFocused: false,
-      Validation: {
-        message: '' // Updated on w-form validation.
-      }
+      valid: true
     }
   },
 
@@ -131,14 +127,14 @@ export default {
         'w-input--floatting-label': this.hasLabel && this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-input--has-placeholder': this.placeholder,
-        'w-input--has-error error': this.Validation.message,
+        // 'w-input--has-error error': this.Validation.message,
         'w-input--inner-icon-left': this.innerIconLeft,
         'w-input--inner-icon-right': this.innerIconRight
       }
     },
     inputWrapClasses () {
       return {
-        [this.Validation.message ? 'error' : this.color]: this.color || this.Validation.message,
+        [!this.valid ? 'error' : this.color]: this.color || !this.valid,
         [`${this.bgColor}--bg`]: this.bgColor,
         'w-input__input-wrap--round': this.round,
         'w-input__input-wrap--tile': this.tile,
@@ -170,14 +166,6 @@ export default {
     }
   },
 
-  created () {
-    if (this.formRegister) this.formRegister(this)
-  },
-
-  beforeDestroy () {
-    if (this.formUnregister) this.formUnregister(this)
-  },
-
   watch: {
     value (value) {
       this.inputValue = value
@@ -203,7 +191,7 @@ $inactive-color: #777;
   &__input-wrap {
     position: relative;
     display: inline-flex;
-    flex: 1 1 0;
+    flex: 1 1 auto;
     align-items: center;
     height: $size;
     border-radius: $border-radius;
