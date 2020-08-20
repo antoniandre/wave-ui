@@ -1,5 +1,5 @@
 <template lang="pug">
-  .w-form-el(:class="classes" v-on="$listeners")
+  div(:class="classes" v-on="$listeners")
     .w-flex.grow.align-center
       slot
 
@@ -35,7 +35,7 @@ export default {
   computed: {
     classes () {
       return {
-        [this.element]: true,
+        [`${this.element} w-form-el`]: true,
         'w-input--has-error error': this.Validation.message
       }
     }
