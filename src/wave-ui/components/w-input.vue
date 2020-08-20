@@ -2,6 +2,7 @@
   w-form-element(
     :element="$options._componentTag"
     v-bind="{ valid, validation, inputValue, disabled, readonly }"
+    @input="valid = $event"
     :class="classes")
     input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
     template(v-else)
@@ -40,11 +41,13 @@
           :required="required")
         template(v-if="labelPosition === 'inside' && showLabelInside")
           label.w-input__label.w-input__label--inside(
-            v-if="$slots.default" :for="`input--${_uid}`"
+            v-if="$slots.default"
+            :for="`input--${_uid}`"
             :class="isFocused && { [valid ? this.color : 'error' ]: this.color || !valid }")
             slot
           label.w-input__label.w-input__label--inside(
-            v-else-if="label" :for="`input--${_uid}`"
+            v-else-if="label"
+            :for="`input--${_uid}`"
             v-html="label"
             :class="isFocused && { [valid ? this.color : 'error' ]: this.color || !valid }")
         w-icon.w-input__icon.w-input__icon--inner-right(

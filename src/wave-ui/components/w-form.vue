@@ -58,8 +58,10 @@ export default {
         if (!validation || disabled || readonly) return total
 
         const result = typeof validation === 'function' && validation(inputValue)
-        Validation.message = typeof result === 'string' ? result : ''
-        return total + ~~(typeof result === 'string')
+        const isValid = typeof result !== 'string'
+        Validation.message = isValid ? '' : result
+        item.$emit('input', isValid)
+        return total + ~~(!isValid)
       }, 0)
 
       this.status = !errorsCount // True if valid.
@@ -70,7 +72,10 @@ export default {
     },
 
     reset () {
-      this.formElements.forEach(item => ((item.Validation || {}).message = ''))
+      this.formElements.forEach(item => {
+        item.$emit('input', true) // Update the form element's parent (e.g. w-input).
+        item.Validation && (item.Validation.message = '') // Remove the error message.
+      })
     },
 
     onSubmit (e) {
@@ -86,6 +91,7 @@ export default {
 
   watch: {
     value (value) {
+      // When user clicks the reset button, reset the errors in each form element.
       if (this.status === false && value || value === null) this.reset()
       this.status = value
     }
