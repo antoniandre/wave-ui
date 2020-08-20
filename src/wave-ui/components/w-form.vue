@@ -60,7 +60,7 @@ export default {
         const result = typeof validation === 'function' && validation(inputValue)
         const isValid = typeof result !== 'string'
         Validation.message = isValid ? '' : result
-        item.$emit('input', isValid)
+        item.$emit('input', isValid) //Update the form element's validity.
         return total + ~~(!isValid)
       }, 0)
 
@@ -72,10 +72,7 @@ export default {
     },
 
     reset () {
-      this.formElements.forEach(item => {
-        item.$emit('input', true) // Update the form element's parent (e.g. w-input).
-        item.Validation && (item.Validation.message = '') // Remove the error message.
-      })
+      this.formElements.forEach(item => item.reset())
     },
 
     onSubmit (e) {

@@ -3,6 +3,7 @@
     :element="$options._componentTag"
     v-bind="{ valid, validation, inputValue, disabled, readonly }"
     @input="valid = $event"
+    @reset="inputValue = ''"
     :class="classes")
     input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
     template(v-else)
@@ -125,7 +126,6 @@ export default {
         'w-input--floatting-label': this.hasLabel && this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-input--has-placeholder': this.placeholder,
-        // 'w-input--has-error error': this.Validation.message,
         'w-input--inner-icon-left': this.innerIconLeft,
         'w-input--inner-icon-right': this.innerIconRight
       }

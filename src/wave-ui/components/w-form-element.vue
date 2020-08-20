@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="classes" v-on="$listeners")
+  div(:class="classes")
     .w-flex.grow.align-center
       slot
 
@@ -42,6 +42,12 @@ export default {
   },
 
   methods: {
+    // Called from w-form reset.
+    reset () {
+      this.$emit('reset') // Notify parent to reset its input value.
+      this.$emit('input', true) // Notify parent that this field is valid again.
+      this.Validation.message = '' // Remove the error message.
+    }
   },
 
   created () {
