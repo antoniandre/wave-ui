@@ -35,8 +35,8 @@ export default {
   computed: {
     classes () {
       return {
-        [`${this.element} w-form-el`]: true,
-        'w-input--has-error error': this.Validation.message
+        'w-form-el': true,
+        [`${this.element}--has-error error`]: this.Validation.message
       }
     }
   },

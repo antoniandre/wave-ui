@@ -1,7 +1,8 @@
 <template lang="pug">
-  w-form-element(
-    :element="$options._componentTag"
-    v-bind="{ valid, validation, inputValue, disabled, readonly }"
+  component(
+    :is="formRegister ? 'w-form-element' : 'div'"
+    :element="formRegister && $options._componentTag"
+    v-bind="formRegister && { valid, validation, inputValue, disabled, readonly }"
     @input="valid = $event"
     @reset="inputValue = ''"
     :class="classes")
@@ -67,6 +68,7 @@
 <script>
 export default {
   name: 'w-input',
+  inject: { formRegister: { default: null } },
   props: {
     value: { default: '' },
     type: { type: String, default: 'text' },
@@ -119,6 +121,7 @@ export default {
     },
     classes () {
       return {
+        'w-input': true,
         'w-input--disabled': this.disabled,
         'w-input--filled': this.hasValue,
         'w-input--focused': this.isFocused,
