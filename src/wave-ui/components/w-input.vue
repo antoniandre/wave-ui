@@ -1,10 +1,9 @@
 <template lang="pug">
   component(
     :is="formRegister ? 'w-form-element' : 'div'"
-    :element="formRegister && $options._componentTag"
-    v-bind="formRegister && { valid, validation, inputValue, disabled, readonly }"
-    @input="valid = $event"
-    @reset="inputValue = ''"
+    v-bind="formRegister && { validation, inputValue, disabled, readonly, isFocused }"
+    :valid.sync="valid"
+    @reset="$emit('input', inputValue = '')"
     :class="classes")
     input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
     template(v-else)
@@ -32,12 +31,10 @@
           :minlength="minlength || null"
           :maxlength="maxlength || null"
           v-model="inputValue"
+          v-on="listeners"
           @input="onInput"
           @focus="onFocus"
           @blur="onBlur"
-          @keyup="$emit('keyup', inputValue)"
-          @keydown="$emit('keydown', inputValue)"
-          @keypress="$emit('keypress', inputValue)"
           :readonly="readonly"
           :disabled="disabled"
           :required="required")
@@ -45,13 +42,13 @@
           label.w-input__label.w-input__label--inside(
             v-if="$slots.default"
             :for="`input--${_uid}`"
-            :class="isFocused && { [valid ? this.color : 'error' ]: this.color || !valid }")
+            :class="isFocused && { [valid === false ? 'error' : this.color ]: this.color || valid === false }")
             slot
           label.w-input__label.w-input__label--inside(
             v-else-if="label"
             :for="`input--${_uid}`"
             v-html="label"
-            :class="isFocused && { [valid ? this.color : 'error' ]: this.color || !valid }")
+            :class="isFocused && { [valid === false ? 'error' : this.color ]: this.color || valid === false }")
         w-icon.w-input__icon.w-input__icon--inner-right(
           v-if="innerIconRight"
           tag="label"
@@ -105,11 +102,16 @@ export default {
       // and the label would come back on top of the input text.
       inputNumberError: false,
       isFocused: false,
-      valid: true
+      valid: null // Null is pristine (unknown), can also be true or false.
     }
   },
 
   computed: {
+    listeners () {
+      // Remove the events that are fired separately, so they don't fire twice.
+      const { input, focus, blur, ...listeners } = this.$listeners
+      return listeners
+    },
     hasValue () {
       return this.inputValue || (this.type === 'number' && this.inputNumberError)
     },
@@ -135,7 +137,7 @@ export default {
     },
     inputWrapClasses () {
       return {
-        [!this.valid ? 'error' : this.color]: this.color || !this.valid,
+        [this.valid === false ? 'error' : this.color]: this.color || this.valid === false,
         [`${this.bgColor}--bg`]: this.bgColor,
         'w-input__input-wrap--round': this.round,
         'w-input__input-wrap--tile': this.tile,
@@ -154,13 +156,13 @@ export default {
       // inputText = e.target.value
       this.$emit('input', this.inputValue)
     },
-    onFocus () {
-      this.$emit('focus', this.inputValue)
+    onFocus (e) {
       this.isFocused = true
+      this.$emit('focus', e)
     },
-    onBlur () {
-      this.$emit('blur', this.inputValue)
+    onBlur (e) {
       this.isFocused = false
+      this.$emit('blur', e)
     }
   },
 
@@ -272,8 +274,7 @@ $inactive-color: #777;
     cursor: not-allowed;
   }
 
-  &--disabled input::placeholder,
-  &--has-error input::placeholder {color: inherit;}
+  &--disabled input::placeholder {color: inherit;}
 
   // Icons inside.
   // ------------------------------------------------------
@@ -294,6 +295,7 @@ $inactive-color: #777;
   // ------------------------------------------------------
   &__label {
     transition: color $transition-duration;
+    position: relative; // For error shake animation.
     cursor: pointer;
 
     &--left {margin-right: 2 * $base-increment;}
@@ -343,15 +345,6 @@ $inactive-color: #777;
     .w-input--focused & {color: currentColor;}
   }
 
-  .w-input--has-error &__label {animation: w-shake 0.3s $transition-duration ease-in-out;}
-
-  // Error message.
-  // ------------------------------------------------------
-  &__error {
-    width: 100%;
-    flex-grow: 1;
-    font-size: 0.75em;
-    margin-top: $base-increment;
-  }
+  .w-form-el--error &__label {animation: w-form-el-shake 0.3s $transition-duration ease-in-out;}
 }
 </style>
