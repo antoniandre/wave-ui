@@ -59,7 +59,7 @@ export default {
   },
 
   watch: {
-    inputValue (val) {
+    inputValue () {
       if (this.hasJustReset) return (this.hasJustReset = false)
 
       // Update the form element's validity on input value change.
