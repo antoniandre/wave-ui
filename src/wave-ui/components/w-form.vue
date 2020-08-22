@@ -22,7 +22,6 @@ export default {
     noKeyupValidation: { type: Boolean },
     noBlurValidation: { type: Boolean }
   },
-  // no-keyup-validation no-blur-validation
 
   data: () => ({
     formElements: [],
