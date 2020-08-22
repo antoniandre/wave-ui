@@ -81,9 +81,10 @@ div
           w-alert.my0.text-light(v-if="form3.valid" success no-border)
             | The form is valid, ready to send it!
           w-alert.my0.text-light(v-else-if="form3.valid === false" error no-border)
-            | The form has {{ form3.errorsCount }} errors.
+            | The form has {{ form3.errorsCountSynced }} errors.
       w-form.px8.pt2.pb12(
         v-model="form3.valid"
+        :errors-count.sync="form3.errorsCountSynced"
         @validate="form3.sent = false"
         @success="onSuccess(3)"
         @error="form3.errorsCount = $event.errorsCount")
@@ -105,6 +106,7 @@ div
         w-flex.mt4(wrap align-center justify-end)
           w-checkbox(required :validation="validations.consent") I agree to the terms &amp; conditions
           .spacer
+          code {{ form3.errorsCountSynced }}
           w-button.mr2(bg-color="warning" type="reset" @click="form3.valid = null") Reset
           w-button(type="submit" :loading="form3.valid && !form3.sent") Validate
       w-notification(
@@ -178,7 +180,8 @@ export default {
     form3: {
       valid: null,
       sent: false,
-      errorsCount: 0
+      errorsCount: 0,
+      errorsCountSynced: 0
     },
     validations: {
       firstName: value => !!value || 'This field is required',
