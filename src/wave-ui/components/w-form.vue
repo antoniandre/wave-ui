@@ -9,18 +9,25 @@ export default {
   provide () {
     return {
       formRegister: this.register,
-      formUnregister: this.unregister
+      formUnregister: this.unregister,
+      validateElement: this.validateElement,
+      noKeyupValidation: this.noKeyupValidation,
+      noBlurValidation: this.noBlurValidation
     }
   },
 
   props: {
     value: {},
-    allowSubmit: { type: Boolean }
+    allowSubmit: { type: Boolean },
+    noKeyupValidation: { type: Boolean },
+    noBlurValidation: { type: Boolean }
   },
+  // no-keyup-validation no-blur-validation
 
   data: () => ({
     formElements: [],
-    status: null // null = pristine, false = error, true = success.
+    status: null, // null = pristine, false = error, true = success.
+    errorsCount: 0
   }),
 
   computed: {
@@ -51,8 +58,8 @@ export default {
      */
     validate (e) {
       this.$emit('validate')
-      const errorsCount = this.formElements.reduce((total, item) => {
-        const { validation, Validation = {}, inputValue, readonly, disabled } = item
+      const errorsCount = this.formElements.reduce((total, el) => {
+        const { validation, Validation = {}, inputValue, readonly, disabled } = el
 
         // Skip validation and return ok if there is no validation or if disabled or readonly.
         if (!validation || disabled || readonly) return total
@@ -60,19 +67,43 @@ export default {
         const result = typeof validation === 'function' && validation(inputValue)
         const isValid = typeof result !== 'string'
         Validation.message = isValid ? '' : result
-        item.$emit('input', isValid) //Update the form element's validity.
+        Validation.isValid = isValid
+        el.hasJustReset = false
+        el.$emit('update:valid', isValid) // Update the form element's validity.
         return total + ~~(!isValid)
       }, 0)
 
+      this.updateErrorsCount(errorsCount)
+
       this.status = !errorsCount // True if valid.
 
-      this.$emit('input', this.status)
       this.$emit(this.status ? 'success' : 'error', { e, errorsCount })
       return this.status
     },
 
+    validateElement (el) {
+      const result = typeof el.validation === 'function' && el.validation(el.inputValue)
+      const isValid = typeof result !== 'string'
+      el.Validation.message = isValid ? '' : result
+      el.Validation.isValid = isValid
+      el.hasJustReset = false
+      this.updateErrorsCount()
+
+      return isValid
+    },
+
     reset () {
-      this.formElements.forEach(item => item.reset())
+      this.formElements.forEach(item => !item.disabled && !item.readonly && item.reset())
+      this.updateErrorsCount(0, true)
+    },
+
+    updateErrorsCount (count = null, reset = false) {
+      this.errorsCount = count !== null ? count
+                       : this.formElements.reduce((sum, el) => sum + ~~(el.Validation.isValid === false), 0)
+      this.status = reset ? null : !this.errorsCount
+
+      this.$emit('input', this.status)
+      this.$emit('update:errorsCount', this.errorsCount)
     },
 
     onSubmit (e) {
@@ -89,7 +120,7 @@ export default {
   watch: {
     value (value) {
       // When user clicks the reset button, reset the errors in each form element.
-      if (this.status === false && value || value === null) this.reset()
+      if ((this.status === false && value) || value === null) this.reset()
       this.status = value
     }
   }
