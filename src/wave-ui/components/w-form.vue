@@ -56,7 +56,7 @@ export default {
      * @return {Boolean} true if the form is valid
      */
     validate (e) {
-      this.$emit('validate')
+      this.$emit('before-validate')
       const errorsCount = this.formElements.reduce((total, el) => {
         const { validation, Validation = {}, inputValue, readonly, disabled } = el
 
@@ -76,6 +76,7 @@ export default {
 
       this.status = !errorsCount // True if valid.
 
+      this.$emit('validate', { e, errorsCount })
       this.$emit(this.status ? 'success' : 'error', { e, errorsCount })
       return this.status
     },
