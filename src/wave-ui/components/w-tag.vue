@@ -86,6 +86,7 @@ export default {
   padding-right: 2 * $base-increment;
   font-size: round(0.85 * $base-font-size);
   cursor: default;
+  user-select: none;
 
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
