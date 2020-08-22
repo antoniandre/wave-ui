@@ -19,7 +19,7 @@ div
   example
     w-form.pa6.blue-light5--bg(v-model="form1.valid")
       w-input(label="First name" :validation="validations.firstName")
-      w-input(label="Last name" :validation="validations.lastName")
+      w-input.mt3(label="Last name" :validation="validations.lastName")
       .text-right.mt6
         | v-model:
         code.ml2.mr4 {{ form1.valid === false ? 'false' : form1.valid || 'null' }}
@@ -27,7 +27,7 @@ div
     template(#pug).
       w-form.pa6.blue-light5--bg(v-model="valid")
         w-input(label="First name" :validation="validations.required")
-        w-input(label="Last name" :validation="validations.required")
+        w-input.mt3(label="Last name" :validation="validations.required")
         .text-right.mt6
           | v-model:
           code.ml2.mr4 {{ "\{\{ valid === false ? 'false' : valid || 'null' \}\}" }}
@@ -62,13 +62,13 @@ div
   example
     w-form(action="test.php" method="post" target="_blank" allow-submit)
       w-input(label="First name" :validation="validations.firstName")
-      w-input(label="Last name" :validation="validations.lastName")
+      w-input.mt3(label="Last name" :validation="validations.lastName")
       .text-right.mt6
         w-button(type="submit") Validate
     template(#pug).
       w-form(action="test.php" method="post" target="_blank" allow-submit)
         w-input(label="First name" :validation="validations.required")
-        w-input(label="Last name" :validation="validations.required")
+        w-input.mt3(label="Last name" :validation="validations.required")
         .text-right.mt6
           w-button(type="submit") Validate
     template(#js).
@@ -85,13 +85,13 @@ div
   example
     w-form(no-keyup-validation no-blur-validation)
       w-input(label="First name" :validation="validations.firstName")
-      w-input(label="Last name" :validation="validations.lastName")
+      w-input.mt3(label="Last name" :validation="validations.lastName")
       .text-right.mt6
         w-button(type="submit") Validate
     template(#pug).
       w-form(no-keyup-validation no-blur-validation)
         w-input(label="First name" :validation="validations.required")
-        w-input(label="Last name" :validation="validations.required")
+        w-input.mt3(label="Last name" :validation="validations.required")
         .text-right.mt6
           w-button(type="submit") Validate
     template(#js).
@@ -108,14 +108,14 @@ div
   example
     w-form(v-model="form4.valid")
       w-input(label="First name" :validation="validations.firstName")
-      w-input(label="Last name" :validation="validations.lastName")
+      w-input.mt3(label="Last name" :validation="validations.lastName")
       .text-right.mt6
         w-button.mr2(bg-color="warning" type="reset" @click="form4.valid = null") Reset
         w-button(type="submit") Validate
     template(#pug).
       w-form(v-model="valid")
         w-input(label="First name" :validation="validations.required")
-        w-input(label="Last name" :validation="validations.required")
+        w-input.mt3(label="Last name" :validation="validations.required")
         .text-right.mt6
           w-button.mr2(bg-color="warning" type="reset" @click="valid = null") Reset
           w-button(type="submit") Validate
@@ -155,7 +155,7 @@ div
       @success="form5.success = true"
       @error="form5.error = true")
       w-input(label="First name" :validation="validations.firstName")
-      w-input(label="Last name" :validation="validations.lastName")
+      w-input.mt3(label="Last name" :validation="validations.lastName")
       .text-right.mt6
         w-button(type="submit") Validate
     template(#pug).
@@ -167,7 +167,7 @@ div
         @success="success = true"
         @error="error = true")
         w-input(label="First name" :validation="validations.required")
-        w-input(label="Last name" :validation="validations.required")
+        w-input.mt3(label="Last name" :validation="validations.required")
         .text-right.mt6
           w-button(type="submit") Validate
     template(#js).
@@ -206,8 +206,8 @@ div
         @validate="onValidate"
         @success="onSuccess")
         w-input(required label="First name" :validation="validations.firstName")
-        w-input(required label="Last name" :validation="validations.lastName")
-        w-input(disabled required label="User name" :validation="validations.firstName")
+        w-input.mt3(required label="Last name" :validation="validations.lastName")
+        w-input.mt3(disabled required label="User name" :validation="validations.firstName")
 
         w-flex.mt4(wrap align-center justify-end)
           w-checkbox(required :validation="validations.consent") I agree to the terms &amp; conditions
@@ -243,7 +243,8 @@ div
           @validate="onValidate"
           @success="onSuccess")
           w-input(required label="First name" :validation="validations.firstName")
-          w-input(required label="Last name" :validation="validations.lastName")
+          w-input.mt3(required label="Last name" :validation="validations.lastName")
+          w-input.mt3(disabled required label="User name" :validation="validations.firstName")
           w-flex.mt4(wrap align-center justify-end)
             w-checkbox I agree to the terms &amp; conditions
             .spacer
