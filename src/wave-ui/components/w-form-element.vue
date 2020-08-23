@@ -25,7 +25,7 @@ export default {
     disabled: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false },
     inputValue: { required: true }, // The form element's input value.
-    validation: { type: Function },
+    validators: { type: Array },
     isFocused: { default: false } // Watched.
   },
 

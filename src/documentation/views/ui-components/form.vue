@@ -13,26 +13,26 @@ div
         you can apply colors and spaces CSS classes on it (e.g. #[span.code .blue--bg], #[span.code .pa4]).
 
   title-link(h2) How it works
-  p Validation works in 3 steps:
+  .title3 The validation works in 3 steps:
   ol
     li
-      | Add a validation function on the field you want validated
+      | Add a validator function on the field you want validated
       ssh-pre(language="html-vue" label="Vue template").
-        &lt;w-input label="First name" :validation="validations.required"&gt;&lt;/w-input&gt;
+        &lt;w-input label="First name" :validators="[validators.required]"&gt;&lt;/w-input&gt;
       ssh-pre(language="js" label="Javascript").
         data: () => ({
-          validations: {
+          validators: {
             required: value => !!value || 'This field is required'
           }
         })
-    li Wrap it in a #[span.code w-form] and add a submit button
+    li.mt6 Wrap it in a #[span.code w-form] and add a submit button
       ssh-pre(language="html-vue" label="Vue template").
         &lt;w-form&gt;
-          &lt;w-input label="First name" :validation="validations.required"&gt;&lt;/w-input&gt;
+          &lt;w-input label="First name" :validators="[validators.required]"&gt;&lt;/w-input&gt;
 
           &lt;w-button type="submit"&gt;Submit&lt;/w-button&gt;
         &lt;/w-form&gt;
-    li Let the #[span.code w-form] component do the rest. But you might want more options, discover them in the examples bellow.
+    li.mt6 Let the #[span.code w-form] component do the rest. But you might want more options, discover them in the examples bellow.
 
   title-link(h2) Basic validation
   p.
@@ -40,16 +40,16 @@ div
     The v-model on the #[span.code w-form] gets updated with the form status.
   example
     w-form(v-model="form1.valid")
-      w-input(label="First name" :validation="validations.firstName")
-      w-input.mt3(label="Last name" :validation="validations.lastName")
+      w-input(label="First name" :validators="[validators.required, validators.alphabetical]")
+      w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
         strong v-model:
         code.ml2.mr4 {{ form1.valid === false ? 'false' : form1.valid || 'null' }}
         w-button(type="submit" :disabled="form1.valid === false") Validate
     template(#pug).
       w-form(v-model="valid")
-        w-input(label="First name" :validation="validations.required")
-        w-input.mt3(label="Last name" :validation="validations.required")
+        w-input(label="First name" :validators="[validators.required]")
+        w-input.mt3(label="Last name" :validators="[validators.required]")
         .text-right.mt6
           strong v-model:
           code.ml2.mr4 {{ "\{\{ valid === false ? 'false' : valid || 'null' \}\}" }}
@@ -57,7 +57,7 @@ div
     template(#js).
       data: () => ({
         valid: null,
-        validations: {
+        validators: {
           required: value => !!value || 'This field is required'
         }
       })
@@ -83,19 +83,19 @@ div
 
   example
     w-form(action="test.php" method="post" target="_blank" allow-submit)
-      w-input(label="First name" :validation="validations.firstName")
-      w-input.mt3(label="Last name" :validation="validations.lastName")
+      w-input(label="First name" :validators="[validators.required]")
+      w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
         w-button(type="submit") Validate
     template(#pug).
       w-form(action="test.php" method="post" target="_blank" allow-submit)
-        w-input(label="First name" :validation="validations.required")
-        w-input.mt3(label="Last name" :validation="validations.required")
+        w-input(label="First name" :validators="[validators.required]")
+        w-input.mt3(label="Last name" :validators="[validators.required]")
         .text-right.mt6
           w-button(type="submit") Validate
     template(#js).
       data: () => ({
-        validations: {
+        validators: {
           required: value => !!value || 'This field is required'
         }
       })
@@ -106,19 +106,19 @@ div
     keyup and blur validations with #[code no-keyup-validation] and #[code no-blur-validation].
   example
     w-form(no-keyup-validation no-blur-validation)
-      w-input(label="First name" :validation="validations.firstName")
-      w-input.mt3(label="Last name" :validation="validations.lastName")
+      w-input(label="First name" :validators="[validators.required]")
+      w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
         w-button(type="submit") Validate
     template(#pug).
       w-form(no-keyup-validation no-blur-validation)
-        w-input(label="First name" :validation="validations.required")
-        w-input.mt3(label="Last name" :validation="validations.required")
+        w-input(label="First name" :validators="[validators.required]")
+        w-input.mt3(label="Last name" :validators="[validators.required]")
         .text-right.mt6
           w-button(type="submit") Validate
     template(#js).
       data: () => ({
-        validations: {
+        validators: {
           required: value => !!value || 'This field is required'
         }
       })
@@ -129,22 +129,22 @@ div
     For that what you need to do is to set the v-model value to #[code null], like pristine.
   example
     w-form(v-model="form4.valid")
-      w-input(label="First name" :validation="validations.firstName")
-      w-input.mt3(label="Last name" :validation="validations.lastName")
+      w-input(label="First name" :validators="[validators.required]")
+      w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
         w-button.mr2(bg-color="warning" type="reset" @click="form4.valid = null") Reset
         w-button(type="submit") Validate
     template(#pug).
       w-form(v-model="valid")
-        w-input(label="First name" :validation="validations.required")
-        w-input.mt3(label="Last name" :validation="validations.required")
+        w-input(label="First name" :validators="[validators.required]")
+        w-input.mt3(label="Last name" :validators="[validators.required]")
         .text-right.mt6
           w-button.mr2(bg-color="warning" type="reset" @click="valid = null") Reset
           w-button(type="submit") Validate
     template(#js).
       data: () => ({
         valid: null,
-        validations: {
+        validators: {
           required: value => !!value || 'This field is required'
         }
       })
@@ -176,8 +176,8 @@ div
       @validate="form5.validated++;form5.success = form5.error = false"
       @success="form5.success = true"
       @error="form5.error = true")
-      w-input(label="First name" :validation="validations.firstName")
-      w-input.mt3(label="Last name" :validation="validations.lastName")
+      w-input(label="First name" :validators="[validators.required]")
+      w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
         w-button(type="submit") Validate
     template(#pug).
@@ -188,8 +188,8 @@ div
         @validate="validated++;success = error = false"
         @success="success = true"
         @error="error = true")
-        w-input(label="First name" :validation="validations.required")
-        w-input.mt3(label="Last name" :validation="validations.required")
+        w-input(label="First name" :validators="[validators.required]")
+        w-input.mt3(label="Last name" :validators="[validators.required]")
         .text-right.mt6
           w-button(type="submit") Validate
     template(#js).
@@ -197,7 +197,7 @@ div
         success: null,
         error: null,
         validated: 0,
-        validations: {
+        validators: {
           required: value => !!value || 'This field is required'
         }
       })
@@ -227,12 +227,12 @@ div
         :errors-count.sync="form6.errorsCount"
         @validate="onValidate"
         @success="onSuccess")
-        w-input(required label="First name" :validation="validations.firstName")
-        w-input.mt3(required label="Last name" :validation="validations.lastName")
-        w-input.mt3(disabled required label="User name" :validation="validations.firstName")
+        w-input(required label="First name" :validators="[validators.required]")
+        w-input.mt3(required label="Last name" :validators="[validators.required]")
+        w-input.mt3(disabled required label="User name" :validators="[validators.required]")
 
         w-flex.mt4(wrap align-center justify-end)
-          w-checkbox(required :validation="validations.consent") I agree to the terms &amp; conditions
+          w-checkbox(required :validators="[validators.consent]") I agree to the terms &amp; conditions
           .spacer
           w-button.mr2(
             bg-color="warning"
@@ -264,9 +264,9 @@ div
           :errors-count.sync="form.errorsCount"
           @validate="onValidate"
           @success="onSuccess")
-          w-input(required label="First name" :validation="validations.firstName")
-          w-input.mt3(required label="Last name" :validation="validations.lastName")
-          w-input.mt3(disabled required label="User name" :validation="validations.firstName")
+          w-input(required label="First name" :validators="[validators.required]")
+          w-input.mt3(required label="Last name" :validators="[validators.required]")
+          w-input.mt3(disabled required label="User name" :validators="[validators.required]")
           w-flex.mt4(wrap align-center justify-end)
             w-checkbox I agree to the terms &amp; conditions
             .spacer
@@ -295,7 +295,7 @@ div
           sent: false,
           errorsCount: 0
         },
-        validations: {
+        validators: {
           firstName: value => !!value || 'This field is required',
           lastName: value => !!value || 'This field is required'
         }
@@ -341,9 +341,9 @@ export default {
       sent: false,
       errorsCount: 0
     },
-    validations: {
-      firstName: value => !!value || 'This field is required',
-      lastName: value => !!value || 'This field is required',
+    validators: {
+      required: value => !!value || 'This field is required',
+      alphabetical: value => /^[a-z \-']+$/i.test(value) || 'This field only accepts letters.',
       consent: value => !!value || 'You must agree'
     }
   }),
