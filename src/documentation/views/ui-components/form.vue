@@ -12,24 +12,46 @@ div
         #[span.code w-card] (or put a #[span.code w-card] in it) to have some style. Alternatively,
         you can apply colors and spaces CSS classes on it (e.g. #[span.code .blue--bg], #[span.code .pa4]).
 
+  title-link(h2) How it works
+  p Validation works in 3 steps:
+  ol
+    li
+      | Add a validation function on the field you want validated
+      ssh-pre(language="html-vue" label="Vue template").
+        &lt;w-input label="First name" :validation="validations.required"&gt;&lt;/w-input&gt;
+      ssh-pre(language="js" label="Javascript").
+        data: () => ({
+          validations: {
+            required: value => !!value || 'This field is required'
+          }
+        })
+    li Wrap it in a #[span.code w-form] and add a submit button
+      ssh-pre(language="html-vue" label="Vue template").
+        &lt;w-form&gt;
+          &lt;w-input label="First name" :validation="validations.required"&gt;&lt;/w-input&gt;
+
+          &lt;w-button type="submit"&gt;Submit&lt;/w-button&gt;
+        &lt;/w-form&gt;
+    li Let the #[span.code w-form] component do the rest. But you might want more options, discover them in the examples bellow.
+
   title-link(h2) Basic validation
   p.
     In this example and by default, the fields are validated on keyup, on blur, and on submit.#[br]
     The v-model on the #[span.code w-form] gets updated with the form status.
   example
-    w-form.pa6.blue-light5--bg(v-model="form1.valid")
+    w-form(v-model="form1.valid")
       w-input(label="First name" :validation="validations.firstName")
       w-input.mt3(label="Last name" :validation="validations.lastName")
       .text-right.mt6
-        | v-model:
+        strong v-model:
         code.ml2.mr4 {{ form1.valid === false ? 'false' : form1.valid || 'null' }}
         w-button(type="submit" :disabled="form1.valid === false") Validate
     template(#pug).
-      w-form.pa6.blue-light5--bg(v-model="valid")
+      w-form(v-model="valid")
         w-input(label="First name" :validation="validations.required")
         w-input.mt3(label="Last name" :validation="validations.required")
         .text-right.mt6
-          | v-model:
+          strong v-model:
           code.ml2.mr4 {{ "\{\{ valid === false ? 'false' : valid || 'null' \}\}" }}
           w-button(type="submit" :disabled="valid === false") Validate
     template(#js).
@@ -160,7 +182,7 @@ div
         w-button(type="submit") Validate
     template(#pug).
       w-alert(:success="success" :error="error" :info="!success &amp;&amp; !error")
-      | {{ "\{\{ !success && !error ? 'The form is still pristine' : (success ? 'Success' : 'Error') \}\}" }}
+        | {{ "\{\{ !success && !error ? 'The form is still pristine' : (success ? 'Success' : 'Error') \}\}" }}
       p The form has been validated {{ '\{\{ validated \}\}' }} time(s).
       w-form(
         @validate="validated++;success = error = false"
