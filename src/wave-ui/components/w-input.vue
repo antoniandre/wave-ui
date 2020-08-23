@@ -1,7 +1,7 @@
 <template lang="pug">
   component(
     :is="formRegister ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validation, inputValue, disabled, readonly, isFocused }"
+    v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
     :valid.sync="valid"
     @reset="$emit('input', inputValue = '')"
     :class="classes")
@@ -92,7 +92,7 @@ export default {
     round: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
-    validation: { type: Function }
+    validators: { type: Array }
   },
 
   data () {

@@ -58,18 +58,24 @@ export default {
     validate (e) {
       this.$emit('before-validate')
       const errorsCount = this.formElements.reduce((total, el) => {
-        const { validation, Validation = {}, inputValue, readonly, disabled } = el
+        const { validators, Validation = {}, inputValue, readonly, disabled } = el
 
         // Skip validation and return ok if there is no validation or if disabled or readonly.
-        if (!validation || disabled || readonly) return total
+        if (!validators || disabled || readonly) return total
 
-        const result = typeof validation === 'function' && validation(inputValue)
-        const isValid = typeof result !== 'string'
-        Validation.message = isValid ? '' : result
-        Validation.isValid = isValid
+        // Execute the validators 1 by 1 until a failure is found. If it happens, raise the error
+        // message in the form element.
+        validators.some(validator => {
+          const result = typeof validator === 'function' && validator(inputValue)
+
+          Validation.isValid = typeof result !== 'string' // If string, it means there was an error.
+          Validation.message = Validation.isValid ? '' : result
+          return !Validation.isValid
+        })
+
         el.hasJustReset = false
-        el.$emit('update:valid', isValid) // Update the form element's validity.
-        return total + ~~(!isValid)
+        el.$emit('update:valid', Validation.isValid) // Update the form element's validity.
+        return total + ~~(!Validation.isValid)
       }, 0)
 
       this.updateErrorsCount(errorsCount)
@@ -82,14 +88,20 @@ export default {
     },
 
     validateElement (el) {
-      const result = typeof el.validation === 'function' && el.validation(el.inputValue)
-      const isValid = typeof result !== 'string'
-      el.Validation.message = isValid ? '' : result
-      el.Validation.isValid = isValid
+      // Execute the validators 1 by 1 until a failure is found. If it happens, raise the error
+      // message in the form element.
+      el.validators.some(validator => {
+        const result = typeof validator === 'function' && validator(el.inputValue)
+
+        el.Validation.isValid = typeof result !== 'string' // If string, it means there was an error.
+        el.Validation.message = el.Validation.isValid ? '' : result
+        return !el.Validation.isValid
+      })
+
       el.hasJustReset = false
       this.updateErrorsCount()
 
-      return isValid
+      return el.Validation.isValid
     },
 
     reset () {
