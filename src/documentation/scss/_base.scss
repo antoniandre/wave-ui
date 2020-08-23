@@ -4,7 +4,7 @@ body {height: 100%;}
 
 a {color: $links;}
 
-ul {margin-left: 4 * $base-increment + 2px;}
+ul, ol {margin-left: 4 * $base-increment + 2px;}
 
 p {margin-bottom: 2 * $base-increment;}
 
