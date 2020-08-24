@@ -4,50 +4,50 @@ div
 
   title-link(h2) Default tag &amp; outline
   example(content-class="w-flex align-center")
-    w-tag.mr4 Tag
-    w-tag(outline) Tag
+    w-tag.mr4 tag
+    w-tag(outline) tag
     template(#pug).
-      w-tag.mr4 Tag
-      w-tag(outline) Tag
+      w-tag.mr4 tag
+      w-tag(outline) tag
 
   title-link(h2) Colors
   p You can set a text color and a background color separately or together.
   example(content-class="w-flex align-center")
-    w-tag.mr4(color="primary") Tag
-    w-tag.mr4(bg-color="primary") Tag
-    w-tag(bg-color="primary" color="yellow") Tag
+    w-tag.mr4(color="primary") tag
+    w-tag.mr4(bg-color="primary") tag
+    w-tag(bg-color="primary" color="yellow") tag
     template(#pug).
-      w-tag.mr4(color="primary") Tag
-      w-tag.mr4(bg-color="primary") Tag
-      w-tag(bg-color="primary" color="yellow") Tag
+      w-tag.mr4(color="primary") tag
+      w-tag.mr4(bg-color="primary") tag
+      w-tag(bg-color="primary" color="yellow") tag
 
   title-link(h2) Round, tile &amp; shadow
   example(content-class="w-flex align-center")
-    w-tag.mr4(bg-color="primary" round) Round
-    w-tag.mr4(bg-color="primary" tile) Tile
-    w-tag(color="primary" shadow) Shadow
+    w-tag.mr4(bg-color="primary" round) round
+    w-tag.mr4(bg-color="primary" tile) tile
+    w-tag(color="primary" shadow) shadow
     template(#pug).
-      w-tag.mr4(bg-color="primary" round) Round
-      w-tag.mr4(bg-color="primary" tile) Tile
-      w-tag(color="primary" shadow) Shadow
+      w-tag.mr4(bg-color="primary" round) round
+      w-tag.mr4(bg-color="primary" tile) tile
+      w-tag(color="primary" shadow) shadow
 
   title-link(h2) Sizes
   example
     .w-flex.wrap.align-center
-      w-tag.ma1(color="primary" xs) Extra small
-      w-tag.ma1(color="primary" sm) Small
-      w-tag.ma1(color="primary" md) Medium
-      w-tag.ma1(color="primary" lg) Large
-      w-tag.ma1(color="primary" xl) Extra large
+      w-tag.ma1(color="primary" xs) extra small
+      w-tag.ma1(color="primary" sm) small
+      w-tag.ma1(color="primary" md) medium
+      w-tag.ma1(color="primary" lg) large
+      w-tag.ma1(color="primary" xl) extra large
     p.my4 You can also put a custom size using the #[code width] and #[code height] props.
     w-tag(outline color="primary" xl width="10em" height="3em") a bigger tag
     template(#pug).
       .w-flex.wrap.align-center
-        w-tag.ma1(color="primary" xs) Extra small
-        w-tag.ma1(color="primary" sm) Small
-        w-tag.ma1(color="primary" md) Medium
-        w-tag.ma1(color="primary" lg) Large
-        w-tag.ma1(color="primary" xl) Extra large
+        w-tag.ma1(color="primary" xs) extra small
+        w-tag.ma1(color="primary" sm) small
+        w-tag.ma1(color="primary" md) medium
+        w-tag.ma1(color="primary" lg) large
+        w-tag.ma1(color="primary" xl) extra large
       p.my4 You can also put a custom size using the width and height props.
       w-tag(outline color="primary" xl width="10em" height="3em") a bigger tag
 
@@ -94,11 +94,11 @@ div
   example(content-class="w-flex align-center")
     w-tag(color="pink-light1" bg-color="pink-light5")
       w-icon.mr1(sm) mdi mdi-heart
-      | Like it
+      | like it
     template(#pug).
       w-tag(color="pink-light1" bg-color="pink-light5")
         w-icon.mr1(sm) mdi mdi-heart
-        | Like it
+        | like it
 </template>
 
 <script>
