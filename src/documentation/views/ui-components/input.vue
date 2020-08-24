@@ -150,7 +150,6 @@ div
     w-input.mb2(
       label="Password"
       :type="isPassword ? 'password' : 'text'"
-      label-position="left"
       :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
       :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
       @click:inner-icon-right="isPassword = !isPassword")
