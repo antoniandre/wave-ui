@@ -274,7 +274,11 @@ export default {
     position: absolute;
     right: 100%;
     margin-right: 3 * $base-increment;
-    top: 0.1em;
+    top: 0.05em;
+
+    @-moz-document url-prefix() {
+      & {top: -0.05em;}
+    }
 
     .w-list--hoverable &,
     .w-list--selectable &,
