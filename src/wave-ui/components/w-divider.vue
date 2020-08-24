@@ -26,7 +26,7 @@ export default {
   border: 0 solid rgba(0, 0, 0, 0.15);
   border-top-width: 1px;
 
-  &--has-color {border-color: inherit;}
+  &--has-color {border-color: currentColor;}
 
   &--vertical {
     display: flex;

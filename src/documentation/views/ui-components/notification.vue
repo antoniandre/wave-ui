@@ -15,7 +15,7 @@ div
       @click="notification.show = !notification.show"
       color="primary"
       outline
-      width="8em")
+      width="8.5em")
       | {{ notification.show ? 'Hide' : 'Show' }} notification
     w-radios.my1.mr6(
       v-model="notification.position[0]"
@@ -40,7 +40,7 @@ div
         @click="notification.show = !notification.show"
         color="primary"
         outline
-        width="8em")
+        width="8.5em")
         | {{ "\{\{ notification.show ? 'Hide' : 'Show' \}\}" }} notification
 
       w-radios.mr6(
@@ -79,7 +79,7 @@ div
       @click="notification2.show = !notification2.show"
       color="primary"
       outline
-      width="8em")
+      width="8.5em")
       | {{ notification2.show ? 'Hide' : 'Show' }} notification
     w-input.d-iflex(
       v-model="notification2.timeout"
@@ -106,7 +106,7 @@ div
         @click="showNotification = !showNotification"
         color="primary"
         outline
-        width="8em")
+        width="8.5em")
         | {{ "\{\{ showNotification ? 'Hide' : 'Show' \}\}" }} notification
       w-input.d-iflex(
         v-model="timeout"
@@ -141,7 +141,7 @@ div
         @click="notification3.show = !notification3.show"
         color="primary"
         outline
-        width="8em")
+        width="8.5em")
         | {{ notification3.show ? 'Hide' : 'Show' }} notification
       w-radios.my4(v-model="transition" :items="transitions")
         template(#item="{ item }")
@@ -173,7 +173,7 @@ div
           @click="notification.show = !notification.show"
           color="primary"
           outline
-          width="8em")
+          width="8.5em")
           | {{ "\{\{ notification.show ? 'Hide' : 'Show' \}\}" }} notification
         w-radios.my4(v-model="transition" :items="transitions")
           template(#item="{ item }")
