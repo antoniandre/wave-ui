@@ -218,6 +218,9 @@ export default {
     margin-right: 2 * $base-increment;
   }
   &--has-icon &__content {flex-grow: 1;align-self: flex-start;}
+  @-moz-document url-prefix() {
+    &--has-icon &__content {margin-top: 0.18em;}
+  }
 
   &--icon-outside > .w-icon {
     position: absolute;
