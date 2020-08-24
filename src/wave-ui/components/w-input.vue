@@ -154,7 +154,6 @@ export default {
   methods: {
     onInput (e) {
       this.inputNumberError = e.target.validity.badInput // For input type number.
-      // inputText = e.target.value
       this.$emit('input', this.inputValue)
     },
     onFocus (e) {
@@ -246,7 +245,6 @@ $inactive-color: #777;
   // ------------------------------------------------------
   &__input {
     width: 100%;
-    // flex-grow: 1;
     height: 100%;
     font-size: inherit;
     color: inherit;
@@ -255,6 +253,10 @@ $inactive-color: #777;
     outline: none;
     padding-left: 2 * $base-increment;
     padding-right: 2 * $base-increment;
+
+    // For type="search" on Safari.
+    -webkit-appearance: none;
+    &::-webkit-search-decoration {-webkit-appearance: none;}
   }
 
   &--no-padding &__input {
@@ -311,7 +313,6 @@ $inactive-color: #777;
     padding-left: 2 * $base-increment;
     transform: translateY(-50%);
     pointer-events: none;
-    .w-input--inner-icon-left & {left: 18px;}
 
     .w-input--no-padding & {
       left: 0;
@@ -322,6 +323,8 @@ $inactive-color: #777;
       padding-left: round(3 * $base-increment);
       padding-right: round(3 * $base-increment);
     }
+    .w-input--inner-icon-left & {left: 18px;}
+    .w-input--no-padding.w-input--inner-icon-left & {left: 26px;}
 
     .w-input--floatting-label & {
       transform-origin: 0 0;
@@ -334,6 +337,10 @@ $inactive-color: #777;
     .w-input--has-placeholder.w-input--floatting-label & {
       transform: translateY(-160%) scale(0.85);
     }
+    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+    .w-input--floatting-label .w-input__input:-webkit-autofill & {
+      transform: translateY(-160%) scale(0.85);
+    }
     // Move label with outline style or with shadow.
     .w-input--focused.w-input--floatting-label .w-input__input-wrap--box &,
     .w-input--filled.w-input--floatting-label .w-input__input-wrap--box &,
@@ -341,7 +348,9 @@ $inactive-color: #777;
       transform: translateY(-180%) scale(0.85);
     }
     .w-input--focused.w-input--floatting-label.w-input--inner-icon-left &,
-    .w-input--filled.w-input--floatting-label.w-input--inner-icon-left & {left: 0px;}
+    .w-input--filled.w-input--floatting-label.w-input--inner-icon-left & {left: 0;}
+    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+    .w-input--floatting-label.w-input--inner-icon-left .w-input__input:-webkit-autofill & {left: 0;}
 
     .w-input--focused & {color: currentColor;}
   }
