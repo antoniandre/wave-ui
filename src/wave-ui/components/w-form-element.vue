@@ -84,6 +84,12 @@ export default {
 </script>
 
 <style lang="scss">
+div.w-form-el {
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
 .w-form-el {
   &--has-error input::placeholder {color: inherit;}
 
