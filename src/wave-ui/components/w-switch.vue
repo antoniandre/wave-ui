@@ -7,7 +7,7 @@
     :class="classes")
     input(
       ref="input"
-      :id="`switch--${_uid}`"
+      :id="`w-switch--${_uid}`"
       type="checkbox"
       :name="inputName"
       :checked="isOn"
@@ -17,12 +17,17 @@
       @change="onChange"
       :aria-checked="isOn || 'false'"
       role="switch")
+    template(v-if="hasLabel && labelOnLeft")
+      label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_uid}`")
+        slot
+      label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_uid}`" v-html="label")
     .w-switch__input(
       @click="$refs.input.focus();$refs.input.click()"
       :class="[[this.color], hasLabel ? (thin ? 'mr3' : 'mr2') : '']")
-    label.w-switch__label(v-if="$slots.default" :for="`switch--${_uid}`")
-      slot
-    label.w-switch__label(v-else-if="label" :for="`switch--${_uid}`" v-html="label")
+    template(v-if="hasLabel && !labelOnLeft")
+      label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_uid}`")
+        slot
+      label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_uid}`" v-html="label")
 </template>
 
 <script>
@@ -34,6 +39,7 @@ export default {
   props: {
     value: { default: false }, // v-model.
     label: { type: String, default: '' },
+    labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
     thin: { type: Boolean },
     noRipple: { type: Boolean }

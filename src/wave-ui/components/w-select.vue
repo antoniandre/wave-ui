@@ -6,11 +6,20 @@
     @reset="$emit('input', inputValue = '')"
     :class="classes"
     :style="styles")
+    template(v-if="hasLabel && labelOnLeft")
+      label.w-select__label.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
+        slot
+      label.w-select__label.w-form-el-shakable(v-else-if="label" :for="`w-select--${_uid}`" v-html="label")
     select(
+      :id="`w-select--${_uid}`"
       :name="inputName"
       :multiple="multiple"
       :required="required")
       option(v-for="(item, i) in items" :key="i" :value="item[itemValue]" v-html="item[itemLabel]")
+    template(v-if="hasLabel && !labelOnLeft")
+      label.w-select__label.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
+        slot
+      label.w-select__label.w-form-el-shakable(v-else-if="label" :for="`w-select--${_uid}`" v-html="label")
 </template>
 
 <script>
@@ -24,9 +33,12 @@ export default {
     value: {}, // v-model on selected item if any.
     multiple: { type: Boolean },
     placeholder: { type: String },
+    label: { type: String },
+    labelOnLeft: { type: Boolean },
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
     itemValue: { type: String, default: 'value' }, // Name of the value field.
     itemClass: { type: String },
+    color: { type: String, default: 'primary' },
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },
@@ -39,6 +51,9 @@ export default {
   }),
 
   computed: {
+    hasLabel () {
+      return (this.$slots.default && this.$slots.default.length) || this.label
+    },
     classes () {
       return {
         'w-select': true

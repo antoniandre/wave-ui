@@ -7,7 +7,7 @@
     :class="classes")
     input(
       ref="input"
-      :id="`radio--${_uid}`"
+      :id="`w-radio--${_uid}`"
       type="radio"
       :name="inputName"
       :checked="inputValue"
@@ -18,16 +18,16 @@
       :aria-checked="inputValue || 'false'"
       role="radio")
     template(v-if="hasLabel && labelOnLeft")
-      label.w-radio__label.pr2(v-if="$slots.default" :for="`radio--${_uid}`")
+      label.w-radio__label.w-form-el-shakable.pr2(v-if="$slots.default" :for="`w-radio--${_uid}`")
         slot
-      label.w-radio__label.pr2(v-else-if="label" :for="`radio--${_uid}`" v-html="label")
+      label.w-radio__label.w-form-el-shakable.pr2(v-else-if="label" :for="`w-radio--${_uid}`" v-html="label")
     .w-radio__input(
       @click="$refs.input.focus();$refs.input.click()"
       :class="this.color")
     template(v-if="hasLabel && !labelOnLeft")
-      label.w-radio__label.pl2(v-if="$slots.default" :for="`radio--${_uid}`")
+      label.w-radio__label.w-form-el-shakable.pl2(v-if="$slots.default" :for="`w-radio--${_uid}`")
         slot
-      label.w-radio__label.pl2(v-else-if="label" :for="`radio--${_uid}`" v-html="label")
+      label.w-radio__label.w-form-el-shakable.pl2(v-else-if="label" :for="`w-radio--${_uid}`" v-html="label")
 </template>
 
 <script>
