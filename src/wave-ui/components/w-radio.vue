@@ -1,15 +1,20 @@
 <template lang="pug">
-  .w-radio(:class="classes")
+  component(
+    :is="formRegister ? 'w-form-element' : 'div'"
+    v-bind="formRegister && { validators, inputValue, disabled }"
+    :valid.sync="valid"
+    @reset="$emit('input', inputValue = false)"
+    :class="classes")
     input(
       ref="input"
       :id="`radio--${_uid}`"
       type="radio"
       :name="inputName"
-      :checked="booleanValue"
+      :checked="inputValue"
       :disabled="disabled"
       @focus="$emit('focus', $event)"
       @change="onChange"
-      :aria-checked="booleanValue || 'false'"
+      :aria-checked="inputValue || 'false'"
       role="radio")
     template(v-if="hasLabel && labelOnLeft")
       label.w-radio__label.pr2(v-if="$slots.default" :for="`radio--${_uid}`")
@@ -27,6 +32,7 @@
 <script>
 export default {
   name: 'w-radio',
+  inject: { formRegister: { default: null } },
   props: {
     value: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-radio are plugged on
@@ -37,17 +43,19 @@ export default {
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
     disabled: { type: Boolean },
-    noRipple: { type: Boolean }
+    noRipple: { type: Boolean },
+    validators: { type: Array }
   },
 
   data () {
     return {
-      booleanValue: false,
+      inputValue: false,
       ripple: {
         start: false,
         end: false,
         timeout: null
-      }
+      },
+      valid: null // Null is pristine (unknown), can also be true or false.
     }
   },
 
@@ -60,7 +68,7 @@ export default {
     },
     classes () {
       return {
-        [`w-radio--${this.booleanValue ? 'checked' : 'unchecked'}`]: true,
+        [`w-radio w-radio--${this.inputValue ? 'checked' : 'unchecked'}`]: true,
         'w-radio--disabled': this.disabled,
         'w-radio--ripple': this.ripple.start,
         'w-radio--rippled': this.ripple.end
@@ -70,17 +78,17 @@ export default {
 
   methods: {
     toggleFromOutside () {
-      this.booleanValue = this.returnValue !== undefined ? (this.returnValue === this.value) : this.value
+      this.inputValue = this.returnValue !== undefined ? (this.returnValue === this.value) : this.value
     },
 
     onChange (e) {
-      this.booleanValue = e.target.checked // The source of truth is the radio button.
-      const returnValue = this.booleanValue && this.returnValue !== undefined ? this.returnValue : this.booleanValue
+      this.inputValue = e.target.checked // The source of truth is the radio button.
+      const returnValue = this.inputValue && this.returnValue !== undefined ? this.returnValue : this.inputValue
       this.$emit('input', returnValue)
       this.$emit('change', returnValue)
 
       if (!this.noRipple) {
-        if (this.booleanValue) {
+        if (this.inputValue) {
           this.ripple.start = true
           this.ripple.timeout = setTimeout(() => {
             this.ripple.start = false

@@ -1,5 +1,10 @@
 <template lang="pug">
-  .w-checkbox(:class="classes")
+  component(
+    :is="formRegister ? 'w-form-element' : 'div'"
+    v-bind="formRegister && { validators, inputValue: isChecked, disabled }"
+    :valid.sync="valid"
+    @reset="$emit('input', isChecked = false)"
+    :class="classes")
     input(
       ref="input"
       :id="`checkbox--${_uid}`"
@@ -28,6 +33,7 @@
 <script>
 export default {
   name: 'w-checkbox',
+  inject: { formRegister: { default: null } },
   props: {
     value: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-checkbox are plugged on
@@ -40,7 +46,8 @@ export default {
     disabled: { type: Boolean },
     noRipple: { type: Boolean },
     indeterminate: { type: Boolean },
-    round: { type: Boolean }
+    round: { type: Boolean },
+    validators: { type: Array }
   },
 
   data () {
@@ -50,7 +57,8 @@ export default {
         start: false,
         end: false,
         timeout: null
-      }
+      },
+      valid: null // Null is pristine (unknown), can also be true or false.
     }
   },
 
@@ -63,7 +71,7 @@ export default {
     },
     classes () {
       return {
-        [`w-checkbox--${this.isChecked ? 'checked' : 'unchecked'}`]: true,
+        [`w-checkbox w-checkbox--${this.isChecked ? 'checked' : 'unchecked'}`]: true,
         'w-checkbox--disabled': this.disabled,
         'w-checkbox--indeterminate': this.indeterminate,
         'w-checkbox--ripple': this.ripple.start,
