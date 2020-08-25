@@ -1,5 +1,10 @@
 <template lang="pug">
-  .w-slider(:class="wrapperClasses")
+  component(
+    :is="formRegister ? 'w-form-element' : 'div'"
+    v-bind="formRegister && { validators, inputValue: rangeValueScaled, disabled, readonly }"
+    :valid.sync="valid"
+    @reset="rangeValuePercent = 0;updateRangeValueScaled()"
+    :class="wrapperClasses")
     .w-slider__label.w-slider__label--left(v-if="$slots['label-left']")
       slot(name="label-left")
     .w-slider__label.w-slider__label--left(v-else-if="labelLeft" v-html="labelLeft")
@@ -54,6 +59,7 @@
 <script>
 export default {
   name: 'w-slider',
+  inject: { formRegister: { default: null } },
   props: {
     value: { type: Number, default: 0 },
     color: { type: String, default: 'primary' },
@@ -70,7 +76,8 @@ export default {
     disabled: { type: Boolean },
     readonly: { type: Boolean },
     labelLeft: { type: String },
-    labelRight: { type: String }
+    labelRight: { type: String },
+    validators: { type: Array }
   },
 
   data: () => ({
@@ -81,7 +88,8 @@ export default {
     },
     dragging: false,
     rangeValuePercent: 0,
-    rangeValueScaled: 0
+    rangeValueScaled: 0,
+    valid: null // Null is pristine (unknown), can also be true or false.
   }),
 
   computed: {
@@ -135,6 +143,7 @@ export default {
     },
     wrapperClasses () {
       return {
+        'w-slider': true,
         'w-slider--dragging': this.dragging,
         'w-slider--disabled': this.disabled,
         'w-slider--readonly': this.readonly,

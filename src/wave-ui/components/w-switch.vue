@@ -1,5 +1,10 @@
 <template lang="pug">
-  .w-switch(:class="classes")
+  component(
+    :is="formRegister ? 'w-form-element' : 'div'"
+    v-bind="formRegister && { validators, inputValue: isOn, disabled }"
+    :valid.sync="valid"
+    @reset="$emit('input', isOn = '')"
+    :class="classes")
     input(
       ref="input"
       :id="`switch--${_uid}`"
@@ -21,6 +26,7 @@
 <script>
 export default {
   name: 'w-switch',
+  inject: { formRegister: { default: null } },
   props: {
     value: { default: false }, // v-model to check or uncheck.
     name: { type: String, default: '' },
@@ -28,7 +34,8 @@ export default {
     color: { type: String, default: 'primary' },
     thin: { type: Boolean },
     disabled: { type: Boolean },
-    noRipple: { type: Boolean }
+    noRipple: { type: Boolean },
+    validators: { type: Array }
   },
 
   data () {
@@ -38,7 +45,8 @@ export default {
         start: false,
         end: false,
         timeout: null
-      }
+      },
+      valid: null // Null is pristine (unknown), can also be true or false.
     }
   },
 
@@ -51,7 +59,7 @@ export default {
     },
     classes () {
       return {
-        [`w-switch--${this.isOn ? 'on' : 'off'}`]: true,
+        [`w-switch w-switch--${this.isOn ? 'on' : 'off'}`]: true,
         'w-switch--thin': this.thin,
         'w-switch--disabled': this.disabled,
         'w-switch--ripple': this.ripple.start,
