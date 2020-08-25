@@ -12,6 +12,7 @@
       :name="inputName"
       :checked="inputValue"
       :disabled="disabled"
+      :required="required"
       @focus="$emit('focus', $event)"
       @change="onChange"
       :aria-checked="inputValue || 'false'"
@@ -30,21 +31,21 @@
 </template>
 
 <script>
+import FormElementMixin from '../mixins/form-elements'
+
 export default {
   name: 'w-radio',
-  inject: { formRegister: { default: null } },
+  mixins: [FormElementMixin],
   props: {
     value: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-radio are plugged on
     // the same v-model, this allow returning to the v-model a custom value.
     returnValue: {},
-    name: { type: String, default: '' },
-    label: { type: String, default: '' },
+    label: { type: String },
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
-    disabled: { type: Boolean },
-    noRipple: { type: Boolean },
-    validators: { type: Array }
+    noRipple: { type: Boolean }
+    // Also name, disabled, readonly, required and validators in the mixin.
   },
 
   data () {
@@ -54,15 +55,11 @@ export default {
         start: false,
         end: false,
         timeout: null
-      },
-      valid: null // Null is pristine (unknown), can also be true or false.
+      }
     }
   },
 
   computed: {
-    inputName () {
-      return this.name || `radio--${this._uid}`
-    },
     hasLabel () {
       return (this.$slots.default && this.$slots.default.length) || this.label
     },

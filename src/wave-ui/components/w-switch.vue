@@ -1,7 +1,7 @@
 <template lang="pug">
   component(
     :is="formRegister ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validators, inputValue: isOn, disabled }"
+    v-bind="formRegister && { validators, inputValue: isOn, disabled, readonly }"
     :valid.sync="valid"
     @reset="$emit('input', isOn = '')"
     :class="classes")
@@ -12,6 +12,8 @@
       :name="inputName"
       :checked="isOn"
       :disabled="disabled"
+      :readonly="readonly"
+      :required="required"
       @change="onChange"
       :aria-checked="isOn || 'false'"
       role="switch")
@@ -24,18 +26,18 @@
 </template>
 
 <script>
+import FormElementMixin from '../mixins/form-elements'
+
 export default {
   name: 'w-switch',
-  inject: { formRegister: { default: null } },
+  mixins: [FormElementMixin],
   props: {
-    value: { default: false }, // v-model to check or uncheck.
-    name: { type: String, default: '' },
+    value: { default: false }, // v-model.
     label: { type: String, default: '' },
     color: { type: String, default: 'primary' },
     thin: { type: Boolean },
-    disabled: { type: Boolean },
-    noRipple: { type: Boolean },
-    validators: { type: Array }
+    noRipple: { type: Boolean }
+    // Also name, disabled, readonly, required and validators in the mixin.
   },
 
   data () {
@@ -45,15 +47,11 @@ export default {
         start: false,
         end: false,
         timeout: null
-      },
-      valid: null // Null is pristine (unknown), can also be true or false.
+      }
     }
   },
 
   computed: {
-    inputName () {
-      return this.name || `switch--${this._uid}`
-    },
     hasLabel () {
       return (this.$slots.default && this.$slots.default.length) || this.label
     },
