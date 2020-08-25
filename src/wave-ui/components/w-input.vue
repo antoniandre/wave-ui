@@ -23,7 +23,7 @@
         input.w-input__input(
           :id="`input--${_uid}`"
           :type="type"
-          :name="name || null"
+          :name="inputName"
           :placeholder="placeholder || null"
           :step="step || null"
           :min="min || null"
@@ -63,13 +63,14 @@
 </template>
 
 <script>
+import FormElementMixin from '../mixins/form-elements'
+
 export default {
   name: 'w-input',
-  inject: { formRegister: { default: null } },
+  mixins: [FormElementMixin],
   props: {
     value: { default: '' },
     type: { type: String, default: 'text' },
-    name: { type: String },
     label: { type: String },
     labelPosition: { type: String, default: 'inside' },
     innerIconLeft: { type: String },
@@ -79,9 +80,6 @@ export default {
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
-    disabled: { type: Boolean },
-    readonly: { type: Boolean },
-    required: { type: Boolean },
     minlength: { type: [String, Number] },
     maxlength: { type: [String, Number] },
     step: { type: [String, Number] },
@@ -91,8 +89,8 @@ export default {
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },
-    tile: { type: Boolean },
-    validators: { type: Array }
+    tile: { type: Boolean }
+    // Also name, disabled, readonly, required and validators in the mixin.
   },
 
   data () {
@@ -101,8 +99,7 @@ export default {
       // In case of incorrect input type="number", the inputValue gets emptied,
       // and the label would come back on top of the input text.
       inputNumberError: false,
-      isFocused: false,
-      valid: null // Null is pristine (unknown), can also be true or false.
+      isFocused: false
     }
   },
 

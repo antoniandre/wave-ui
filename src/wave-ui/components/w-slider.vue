@@ -57,13 +57,14 @@
 </template>
 
 <script>
+import FormElementMixin from '../mixins/form-elements'
+
 export default {
   name: 'w-slider',
-  inject: { formRegister: { default: null } },
+  mixins: [FormElementMixin],
   props: {
     value: { type: Number, default: 0 },
     color: { type: String, default: 'primary' },
-    name: { type: String }, // When sending data through form.
     bgColor: { type: String },
     stepLabels: { type: [Boolean, Array] },
     thumbLabel: { type: [Boolean, String] }, // One of true, false, 'droplet'.
@@ -73,11 +74,9 @@ export default {
     min: { type: [Number, String], default: 0 },
     max: { type: [Number, String], default: 100 },
     step: { type: [Number, String] },
-    disabled: { type: Boolean },
-    readonly: { type: Boolean },
     labelLeft: { type: String },
-    labelRight: { type: String },
-    validators: { type: Array }
+    labelRight: { type: String }
+    // Also name, disabled, readonly, required and validators in the mixin.
   },
 
   data: () => ({
@@ -88,14 +87,10 @@ export default {
     },
     dragging: false,
     rangeValuePercent: 0,
-    rangeValueScaled: 0,
-    valid: null // Null is pristine (unknown), can also be true or false.
+    rangeValueScaled: 0
   }),
 
   computed: {
-    inputName () {
-      return this.name || `w-slider-${this._uid}`
-    },
     minVal () {
       return parseFloat(this.min)
     },

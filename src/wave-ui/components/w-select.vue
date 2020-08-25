@@ -6,34 +6,36 @@
     @reset="$emit('input', inputValue = '')"
     :class="classes"
     :style="styles")
-    select(:name="name || null" :multiple="multiple")
+    select(
+      :name="inputName"
+      :multiple="multiple"
+      :required="required")
       option(v-for="(item, i) in items" :key="i" :value="item[itemValue]" v-html="item[itemLabel]")
 </template>
 
 <script>
+import FormElementMixin from '../mixins/form-elements'
+
 export default {
   name: 'w-select',
-  inject: { formRegister: { default: null } },
+  mixins: [FormElementMixin],
   props: {
     items: { type: Array, required: true },
     value: {}, // v-model on selected item if any.
-    name: { type: String },
     multiple: { type: Boolean },
     placeholder: { type: String },
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
     itemValue: { type: String, default: 'value' }, // Name of the value field.
     itemClass: { type: String },
-    disabled: { type: Boolean },
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },
-    tile: { type: Boolean },
-    validators: { type: Array }
+    tile: { type: Boolean }
+    // Also name, disabled, readonly, required and validators in the mixin.
   },
 
   data: () => ({
-    inputValue: null,
-    valid: null // Null is pristine (unknown), can also be true or false.
+    inputValue: null
   }),
 
   computed: {
