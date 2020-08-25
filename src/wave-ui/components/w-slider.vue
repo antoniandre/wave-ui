@@ -5,9 +5,9 @@
     :valid.sync="valid"
     @reset="rangeValuePercent = 0;updateRangeValueScaled()"
     :class="wrapperClasses")
-    .w-slider__label.w-slider__label--left(v-if="$slots['label-left']")
+    .w-slider__label.w-slider__label--left.w-form-el-shakable(v-if="$slots['label-left']")
       slot(name="label-left")
-    .w-slider__label.w-slider__label--left(v-else-if="labelLeft" v-html="labelLeft")
+    .w-slider__label.w-slider__label--left.w-form-el-shakable(v-else-if="labelLeft" v-html="labelLeft")
     .w-slider__track-wrapper
       .w-slider__track(
         ref="track"
@@ -51,9 +51,9 @@
           v-if="~~numberOfSteps !== numberOfSteps"
           @click="onStepLabelClick(100)"
           style="left: 100%") {{ this.maxVal }}
-    .w-slider__label.w-slider__label--right(v-if="$slots['label-right']")
+    .w-slider__label.w-slider__label--right.w-form-el-shakable(v-if="$slots['label-right']")
       slot(name="label-right")
-    .w-slider__label.w-slider__label--right(v-else-if="labelRight" v-html="labelRight")
+    .w-slider__label.w-slider__label--right.w-form-el-shakable(v-else-if="labelRight" v-html="labelRight")
 </template>
 
 <script>

@@ -9,19 +9,19 @@
     template(v-else)
       //- Left label.
       template(v-if="labelPosition === 'left'")
-        label.w-input__label.w-input__label--left(v-if="$slots.default" :for="`input--${_uid}`")
+        label.w-input__label.w-input__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-input--${_uid}`")
           slot
-        label.w-input__label.w-input__label--left(v-else-if="label" :for="`input--${_uid}`" v-html="label")
+        label.w-input__label.w-input__label--left.w-form-el-shakable(v-else-if="label" :for="`w-input--${_uid}`" v-html="label")
 
       //- Input wrapper.
       .w-input__input-wrap(:class="inputWrapClasses")
         w-icon.w-input__icon.w-input__icon--inner-left(
           v-if="innerIconLeft"
           tag="label"
-          :for="`input--${_uid}`"
+          :for="`w-input--${_uid}`"
           @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
         input.w-input__input(
-          :id="`input--${_uid}`"
+          :id="`w-input--${_uid}`"
           :type="type"
           :name="inputName"
           :placeholder="placeholder || null"
@@ -39,27 +39,27 @@
           :disabled="disabled"
           :required="required")
         template(v-if="labelPosition === 'inside' && showLabelInside")
-          label.w-input__label.w-input__label--inside(
+          label.w-input__label.w-input__label--inside.w-form-el-shakable(
             v-if="$slots.default"
-            :for="`input--${_uid}`"
+            :for="`w-input--${_uid}`"
             :class="isFocused && { [valid === false ? 'error' : this.color ]: this.color || valid === false }")
             slot
-          label.w-input__label.w-input__label--inside(
+          label.w-input__label.w-input__label--inside.w-form-el-shakable(
             v-else-if="label"
-            :for="`input--${_uid}`"
+            :for="`w-input--${_uid}`"
             v-html="label"
             :class="isFocused && { [valid === false ? 'error' : this.color ]: this.color || valid === false }")
-        w-icon.w-input__icon.w-input__icon--inner-right(
+        w-icon.w-input__icon.w-input__icon--inner-right.w-form-el-shakable(
           v-if="innerIconRight"
           tag="label"
-          :for="`input--${_uid}`"
+          :for="`w-input--${_uid}`"
           @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
 
       //- Right label.
       template(v-if="labelPosition === 'right'")
-        label.w-input__label.w-input__label--right(v-if="$slots.default" :for="`input--${_uid}`")
+        label.w-input__label.w-input__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-input--${_uid}`")
           slot
-        label.w-input__label.w-input__label--right(v-else-if="label" :for="`input--${_uid}`" v-html="label")
+        label.w-input__label.w-input__label--right.w-form-el-shakable(v-else-if="label" :for="`w-input--${_uid}`" v-html="label")
 </template>
 
 <script>
@@ -295,7 +295,6 @@ $inactive-color: #777;
   // ------------------------------------------------------
   &__label {
     transition: color $transition-duration;
-    position: relative; // For error shake animation.
     cursor: pointer;
 
     &--left {margin-right: 2 * $base-increment;}
@@ -351,7 +350,5 @@ $inactive-color: #777;
 
     .w-input--focused & {color: currentColor;}
   }
-
-  .w-form-el--error &__label {animation: w-form-el-shake 0.3s $transition-duration ease-in-out;}
 }
 </style>

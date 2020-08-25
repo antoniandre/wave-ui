@@ -87,6 +87,9 @@ export default {
 .w-form-el {
   &--has-error input::placeholder {color: inherit;}
 
+  &-shakable {position: relative;}
+  &--error &-shakable {animation: w-form-el-shake 0.3s $transition-duration ease-in-out;}
+
   // Error message.
   // ------------------------------------------------------
   &__error {
