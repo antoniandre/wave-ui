@@ -5,9 +5,14 @@
     :valid.sync="valid"
     @reset="rangeValuePercent = 0;updateRangeValueScaled()"
     :class="wrapperClasses")
-    .w-slider__label.w-slider__label--left.w-form-el-shakable(v-if="$slots['label-left']")
+    label.w-slider__label.w-slider__label--left.w-form-el-shakable(
+      v-if="$slots['label-left']"
+      :for="`button--${_uid}`")
       slot(name="label-left")
-    .w-slider__label.w-slider__label--left.w-form-el-shakable(v-else-if="labelLeft" v-html="labelLeft")
+    label.w-slider__label.w-slider__label--left.w-form-el-shakable(
+      v-else-if="labelLeft"
+      :for="`button--${_uid}`"
+      v-html="labelLeft")
     .w-slider__track-wrapper
       .w-slider__track(
         ref="track"
@@ -25,7 +30,7 @@
         .w-slider__thumb(:style="thumbStyles")
           button.w-slider__thumb-button(
             ref="thumb"
-            :id="`button-${_uid}`" :class="[color]"
+            :id="`button--${_uid}`" :class="[color]"
             :name="inputName"
             :value="rangeValueScaled"
             :disabled="disabled"
@@ -35,7 +40,7 @@
             @click.prevent)
           label.w-slider__thumb-label(
             v-if="thumbLabel"
-            :for="`button-${_uid}`"
+            :for="`button--${_uid}`"
             :class="thumbClasses")
             div(v-if="thumbLabel === 'droplet'")
               slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
@@ -46,14 +51,20 @@
           v-for="currStep in ~~numberOfSteps"
           :key="currStep"
           @click="onStepLabelClick(currStep * (100 / numberOfSteps))"
-          :style="`left: ${currStep * (100 / numberOfSteps)}%`") {{ percentToScaled(currStep * (100 / numberOfSteps)) }}
+          :style="`left: ${currStep * (100 / numberOfSteps)}%`")
+          | {{ percentToScaled(currStep * (100 / numberOfSteps)) }}
         .w-slider__step-label(
           v-if="~~numberOfSteps !== numberOfSteps"
           @click="onStepLabelClick(100)"
           style="left: 100%") {{ this.maxVal }}
-    .w-slider__label.w-slider__label--right.w-form-el-shakable(v-if="$slots['label-right']")
+    label.w-slider__label.w-slider__label--right.w-form-el-shakable(
+      v-if="$slots['label-right']"
+      :for="`button--${_uid}`")
       slot(name="label-right")
-    .w-slider__label.w-slider__label--right.w-form-el-shakable(v-else-if="labelRight" v-html="labelRight")
+    label.w-slider__label.w-slider__label--right.w-form-el-shakable(
+      v-else-if="labelRight"
+      :for="`button--${_uid}`"
+      v-html="labelRight")
 </template>
 
 <script>
