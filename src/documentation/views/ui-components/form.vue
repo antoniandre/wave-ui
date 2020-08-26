@@ -1,8 +1,6 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1 slug="w-form")
-    | w-form
-    w-tag.ml3(bg-color="orange" lg color="white") In Progress
+  title-link.mt4.code(h1 slug="w-form") w-form
 
   alert.mt6(tip)
     ul
@@ -264,11 +262,11 @@ div
           :errors-count.sync="form.errorsCount"
           @validate="onValidate"
           @success="onSuccess")
-          w-input(label="First name" :validators="[validators.required]")
-          w-input.mt3(label="Last name" :validators="[validators.required]")
-          w-input.mt3(disabled label="User name" :validators="[validators.required]")
+          w-input(required label="First name" :validators="[validators.required]")
+          w-input.mt3(required label="Last name" :validators="[validators.required]")
+          w-input.mt3(disabled required label="User name" :validators="[validators.required]")
           w-flex.mt4(wrap align-center justify-end)
-            w-checkbox(:validators="[validators.consent]") I agree to the terms &amp; conditions
+            w-checkbox I agree to the terms &amp; conditions
             .spacer
             w-button.mr2(
               bg-color="warning"
@@ -296,8 +294,8 @@ div
           errorsCount: 0
         },
         validators: {
-          required: value => !!value || 'This field is required',
-          consent: value => !!value || 'You must agree'
+          firstName: value => !!value || 'This field is required',
+          lastName: value => !!value || 'This field is required'
         }
       }),
 
