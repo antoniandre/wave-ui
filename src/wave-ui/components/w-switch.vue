@@ -11,8 +11,8 @@
       type="checkbox"
       :name="inputName"
       :checked="isOn"
-      :disabled="disabled"
-      :readonly="readonly"
+      :disabled="disabled || readonly"
+      :aria-readonly="readonly"
       :required="required"
       @change="onChange"
       :aria-checked="isOn || 'false'"
@@ -66,6 +66,7 @@ export default {
         [`w-switch w-switch--${this.isOn ? 'on' : 'off'}`]: true,
         'w-switch--thin': this.thin,
         'w-switch--disabled': this.disabled,
+        'w-switch--readonly': this.readonly,
         'w-switch--ripple': this.ripple.start,
         'w-switch--rippled': this.ripple.end
       }
@@ -115,7 +116,10 @@ $disabled-color: #ddd;
   vertical-align: middle;
   cursor: pointer;
 
-  &--disabled {cursor: not-allowed;}
+  &--disabled, &--readonly {
+    cursor: not-allowed;
+    touch-action: initial;
+  }
 
   // Hidden checkbox.
   input[type="checkbox"] {
