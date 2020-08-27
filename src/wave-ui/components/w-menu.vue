@@ -72,6 +72,7 @@ export default {
     alignLeft: { type: Boolean },
     alignRight: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
+    minWidth: { type: [Number, String] }, // can be like: `40`, `5em`, `activator`.
     overlay: { type: Boolean },
     persistent: { type: Boolean }
   },
@@ -84,6 +85,7 @@ export default {
       left: 0
     },
     activatorEl: null,
+    activatorWidth: 0,
     menuEl: null,
     timeoutId: null
   }),
@@ -127,6 +129,11 @@ export default {
       )
     },
 
+    menuMinWidth () {
+      if (this.minWidth === 'activator') return `${this.activatorWidth}px`
+      else return isNaN(this.minWidth) ? this.minWidth : `${this.minWidth}px`
+    },
+
     alignment () {
       return (
         ((this.top || this.bottom) && this.alignLeft && 'left') ||
@@ -156,7 +163,8 @@ export default {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || (this.overlay && !this.zIndex && 200) || null,
         top: `${~~this.menuCoordinates.top}px`,
-        left: `${~~this.menuCoordinates.left}px`
+        left: `${~~this.menuCoordinates.left}px`,
+        minWidth: this.minWidth ? this.menuMinWidth : null
       }
     },
 
@@ -189,6 +197,8 @@ export default {
 
       this.timeoutId = clearTimeout(this.timeoutId)
       if (shouldShowMenu) {
+        if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
+
         this.computeMenuPosition(e)
 
         // In `getCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
@@ -332,7 +342,7 @@ export default {
   beforeDestroy () {
     // el.remove() doesn't work on IE11.
     if (this.menuEl) this.menuEl.parentNode.removeChild(this.menuEl)
-    if (this.overlay) this.overlayEl.parentNode.removeChild(this.overlayEl)
+    if (this.overlay && this.overlayEl.parentNode) this.overlayEl.parentNode.removeChild(this.overlayEl)
     if (this.activatorEl) this.activatorEl.parentNode.removeChild(this.activatorEl)
   },
 
