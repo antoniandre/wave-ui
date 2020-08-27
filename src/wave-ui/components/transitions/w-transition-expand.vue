@@ -25,7 +25,7 @@ export default {
   props: {
     x: { type: Boolean },
     y: { type: Boolean },
-    duration: { type: Number, default: 250 }
+    duration: { type: Number, default: 200 }
   },
 
   data: () => ({
