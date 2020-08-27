@@ -77,7 +77,7 @@ export default {
           { label: 'Input', route: 'w-input' },
           { label: 'Form', route: 'w-form' },
           { label: 'Radio', route: 'w-radio' },
-          { label: 'Select', route: 'w-select', inProgress: true },
+          { label: 'Select', route: 'w-select', disabled: true },
           { label: 'Slider', route: 'w-slider' },
           { label: 'Switch', route: 'w-switch' },
           { label: 'Textarea', route: 'w-textarea', disabled: true }
