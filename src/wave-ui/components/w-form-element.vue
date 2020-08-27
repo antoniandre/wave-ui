@@ -63,13 +63,17 @@ export default {
       if (this.hasJustReset) return (this.hasJustReset = false)
 
       // Update the form element's validity on input value change.
-      if (!this.noKeyupValidation) this.$emit('update:valid', this.validateElement(this))
+      if (!this.noKeyupValidation && this.validators) {
+        this.$emit('update:valid', this.validateElement(this))
+      }
     },
     isFocused (val) {
       // When focusing, reset the hasJustReset flag so the input value is watched again.
       if (val) this.hasJustReset = false
       // On blur, Update the form element's validity.
-      else if (!this.noBlurValidation) this.$emit('update:valid', this.validateElement(this))
+      else if (!this.noBlurValidation && this.validators) {
+        this.$emit('update:valid', this.validateElement(this))
+      }
     }
   },
 
