@@ -42,14 +42,14 @@
           label.w-input__label.w-input__label--inside.w-form-el-shakable(
             v-if="$slots.default"
             :for="`w-input--${_uid}`"
-            :class="isFocused && { [valid === false ? 'error' : this.color ]: this.color || valid === false }")
+            :class="isFocused && { [valid === false ? 'error' : this.color]: this.color || valid === false }")
             slot
           label.w-input__label.w-input__label--inside.w-form-el-shakable(
             v-else-if="label"
             :for="`w-input--${_uid}`"
             v-html="label"
-            :class="isFocused && { [valid === false ? 'error' : this.color ]: this.color || valid === false }")
-        w-icon.w-input__icon.w-input__icon--inner-right.w-form-el-shakable(
+            :class="isFocused && { [valid === false ? 'error' : this.color]: this.color || valid === false }")
+        w-icon.w-input__icon.w-input__icon--inner-right(
           v-if="innerIconRight"
           tag="label"
           :for="`w-input--${_uid}`"
@@ -143,7 +143,7 @@ export default {
         'w-input__input-wrap--box': this.outline || this.bgColor || this.shadow,
         'w-input__input-wrap--underline': !this.outline,
         'w-input__input-wrap--shadow': this.shadow,
-        'w-input__input-wrap--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
+        'w-input__input-wrap--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round
       }
     }
   },
