@@ -1,3 +1,5 @@
+$fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
+
 // Fade.
 // --------------------------------------------------------
 .fade-enter-active {animation: w-fade $transition-duration;}
@@ -11,7 +13,7 @@
 // Slide-right: translate x from left to right.
 // --------------------------------------------------------
 .slide-right-enter-active, .slide-right-leave-active {
-  transition: $transition-duration ease-in-out;
+  transition: $transition-duration $fast-out-slow-in;
   transition-property: transform, left, margin-left;
   transform: translateX(0%);
 }
@@ -25,7 +27,7 @@
 // Slide-left: translate x from right to left.
 // --------------------------------------------------------
 .slide-left-enter-active, .slide-left-leave-active {
-  transition: $transition-duration ease-in-out;
+  transition: $transition-duration ;
   transition-property: transform, right, margin-right;
   transform: translateX(0%);
 }
@@ -39,7 +41,7 @@
 // Slide-down: translate y from top to bottom.
 // --------------------------------------------------------
 .slide-down-enter-active, .slide-down-leave-active {
-  transition: transform $transition-duration ease-in-out;
+  transition: transform $transition-duration $fast-out-slow-in;
   transition-property: transform, top, margin-top;
   transform: translateY(0%);
 }
@@ -53,7 +55,7 @@
 // Slide-up: translate y from bottom to top.
 // --------------------------------------------------------
 .slide-up-enter-active, .slide-up-leave-active {
-  transition: transform $transition-duration ease-in-out;
+  transition: transform $transition-duration $fast-out-slow-in;
   transition-property: transform, bottom, margin-bottom;
   transform: translateY(0%);
 }
@@ -67,7 +69,7 @@
 // Slide-fade-left.
 // --------------------------------------------------------
 .slide-fade-left-enter-active, .slide-fade-left-leave-active {
-  transition: all $transition-duration ease-in-out;
+  transition: all $transition-duration $fast-out-slow-in;
 }
 .slide-fade-left-enter, .slide-fade-left-leave-to {
   transform: translateX(12px);
@@ -77,7 +79,7 @@
 // Slide-fade-right.
 // --------------------------------------------------------
 .slide-fade-right-enter-active, .slide-fade-right-leave-active {
-  transition: all $transition-duration ease-in-out;
+  transition: all $transition-duration $fast-out-slow-in;
 }
 .slide-fade-right-enter, .slide-fade-right-leave-to {
   transform: translateX(-12px);
@@ -88,7 +90,7 @@
 // Slide-fade-up.
 // --------------------------------------------------------
 .slide-fade-up-enter-active, .slide-fade-up-leave-active {
-  transition: all $transition-duration ease-in-out;
+  transition: all $transition-duration $fast-out-slow-in;
 }
 .slide-fade-up-enter, .slide-fade-up-leave-to {
   transform: translateY(12px);
@@ -99,7 +101,7 @@
 // Slide-fade-down.
 // --------------------------------------------------------
 .slide-fade-down-enter-active, .slide-fade-down-leave-active {
-  transition: all $transition-duration ease-in-out;
+  transition: all $transition-duration $fast-out-slow-in;
 }
 .slide-fade-down-enter, .slide-fade-down-leave-to {
   transform: translateY(-12px);
