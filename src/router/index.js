@@ -103,7 +103,8 @@ const components = [
   { id: 'rating', label: 'Rating' },
   { id: 'select', label: 'Select' },
   { id: 'slider', label: 'Slider' },
-  { id: 'slideshow', label: 'Slideshow' },
+  { id: 'slideshow', label: 'Slideshow', path: '/slideshow' },
+  { id: 'splitter', label: 'Splitter', path: '/splitter' },
   { id: 'switch', label: 'Switch' },
   { id: 'radio', label: 'Radio' },
   { id: 'tabs', label: 'Tabs' },
@@ -115,7 +116,7 @@ const components = [
 
 components.forEach(item => {
   routes.push({
-    path: `/w-${item.id}`,
+    path: item.path || `/w-${item.id}`,
     name: item.id,
     component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/ui-components/${item.id}.vue`)
   })
