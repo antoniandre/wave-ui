@@ -261,7 +261,7 @@ div.ovh
     | the #[span.code slide-fade] transition take the direction in parameter, e.g. #[span.code left],
     | #[span.code right], #[span.code up], #[span.code down] and defaults to #[span.code down].
 
-  h3 Zoom on the expand transition
+  title-link(h2 slug="the-expand-transition") The #[span.code expand] transition
   p.
     The great thing with Wave UI's expand transition is that it also animates any margin or padding on the
     transitioning element! Look at this one:
@@ -326,6 +326,34 @@ div.ovh
     the animation, like in the above example.
     To do so, you can add the #[span.code text-nowrap] class on the element being transitioned.
 
+  title-link(h2 slug="the-slide-transition") The #[span.code slide] transition
+  p.
+    The slide transition is only designed for elements sliding from outside the view into the view or
+    vice-versa, they will slide from 0% visibility to 100% visibility.#[br]
+    It works well for full screen elements or elements that are in a hidden-overflow container like
+    in this example.
+  example
+    .wrapper(style="height: 90px")
+      w-button.mb2(@click="showCard = !showCard") {{ showCard ? 'Hide' : 'Show' }} Card
+      w-transition-slide(left)
+        w-card.primary-light3--bg.white(v-if="showCard")
+          .title3 A sliding card.
+    template(#html).
+      &lt;div style="height: 90px"&gt;
+        &lt;w-button class="mb2" @click="showCard = !showCard"&gt;
+          {{ "\{\{ showCard ? 'Hide' : 'Show' \}\}" }} Card
+        &lt;/w-button&gt;
+        &lt;w-transition-slide left&gt;
+          &lt;w-card v-if="showCard" class="primary-light3--bg white"&gt;
+            &lt;div class="title3"&gt;A sliding card.&lt;/div&gt;
+          &lt;/w-card&gt;
+        &lt;/w-transition-slide&gt;
+      &lt;/div&gt;
+    template(#js).
+      data: () => ({
+        showCard: false
+      })
+
   title-link(h2) Transition duration
   p.
     You can easily override the default transition/animation duration by setting an explicit
@@ -349,7 +377,8 @@ export default {
     toggleExpandXY: false,
     toggleExpandXY2: false,
     toggleSlideFadeDown: false,
-    toggleSlideFadeRight: false
+    toggleSlideFadeRight: false,
+    showCard: false
   })
 }
 </script>
