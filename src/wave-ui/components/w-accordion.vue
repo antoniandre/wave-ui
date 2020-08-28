@@ -58,7 +58,11 @@ export default {
 
   computed: {
     accordionItems () {
-      return this.items.map((item, index) => new Vue.observable({ ...item, index, open: false }))
+      return this.items.map((item, index) => new Vue.observable({
+        ...item,
+        index,
+        open: this.value && this.value[index]
+      }))
     },
 
     accordionClasses () {

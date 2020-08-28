@@ -37,6 +37,39 @@ div
         accordion: []
       })
 
+  title-link(h2) Open by default
+  p.
+    You can open one or multiple panes by default by providing a v-model array of booleans:
+    #[span.code true] to open, #[span.code false] to close.
+  example(content-class="pa4 aliceblue")
+    w-accordion.white--bg(v-model="accordion2" :items="items")
+    div.mt3
+      | v-model:
+      code.ml1 {{ accordion2 }}
+    template(#pug).
+      w-accordion(v-model="accordion" :items="items")
+      div.mt3
+        | v-model:
+        code.ml1 {{ '\{\{ accordion \}\}' }}
+    template(#js).
+      data: () => ({
+        items: [
+          {
+            title: 'Item 1',
+            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+          },
+          {
+            title: 'Item 2',
+            content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+          },
+          {
+            title: 'Item 3',
+            content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+          }
+        ],
+        accordion: [false, true, false]
+      })
+
   title-link(h2) Shadow
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items" shadow)
@@ -88,10 +121,10 @@ div
 
   title-link(h2) Expand a single item at a time
   example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(v-model="accordion2" :items="items" expand-single)
+    w-accordion.white--bg(v-model="accordion3" :items="items" expand-single)
     div.mt3
       | v-model:
-      code.ml1 {{ accordion2 }}
+      code.ml1 {{ accordion3 }}
     template(#pug).
       w-accordion(v-model="accordion" :items="items" expand-single)
       div.mt3
@@ -118,12 +151,12 @@ div
 
   title-link(h2) External control
   example(content-class="pa4 aliceblue")
-    w-button.mr2(@click="accordion3 = Array(3).fill(true)" bg-color="primary" sm) Expand all
-    w-button(@click="accordion3 = Array(3).fill(false)" bg-color="primary" sm) Collapse all
-    w-accordion.mt4.white--bg(v-model="accordion3" :items="items")
+    w-button.mr2(@click="accordion4 = Array(3).fill(true)" bg-color="primary" sm) Expand all
+    w-button(@click="accordion4 = Array(3).fill(false)" bg-color="primary" sm) Collapse all
+    w-accordion.mt4.white--bg(v-model="accordion4" :items="items")
     div.mt3
       | v-model:
-      code.ml1 {{ accordion3 }}
+      code.ml1 {{ accordion4 }}
     template(#pug).
       w-button.mr2(@click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;true&amp;#41;" bg-color="primary" sm) Expand all
       w-button(@click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;false&amp;#41;" bg-color="primary" sm) Collapse all
@@ -325,8 +358,9 @@ export default {
       { id: 'item3' }
     ],
     accordion1: [],
-    accordion2: [],
-    accordion3: []
+    accordion2: [false, true, false],
+    accordion3: [],
+    accordion4: []
   })
 }
 </script>
