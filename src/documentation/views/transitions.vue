@@ -10,10 +10,12 @@ div.ovh
     li.mt1 #[code w-transition-bounce]
     li.mt1 #[code w-transition-twist]
     li.mt1 #[code w-transition-expand]
+    li.mt1 #[code w-transition-slide]
+    li.mt1 #[code w-transition-slide-fade]
 
   //- p Each component has a css transition that you can also use in various components.
 
-  title-link(h2) Testing transition
+  title-link(h2) Transitions showcase
   example
     w-flex(align-center)
       w-button.transition-toggle(
@@ -79,6 +81,21 @@ div.ovh
       w-transition-expand
         .transition-box.text-nowrap(v-if="toggleExpandXY") X &amp; Y expanding transition
 
+    w-flex(align-center)
+      w-button.transition-toggle(
+        @click="toggleSlideFadeDown = !toggleSlideFadeDown"
+        color="primary"
+        outline) Slide fade {{ toggleSlideFadeDown ? 'up' : 'down' }}
+      w-transition-slide-fade
+        .transition-box.text-nowrap(v-if="toggleSlideFadeDown") Slide fade down transition
+    w-flex(align-center)
+      w-button.transition-toggle(
+        @click="toggleSlideFadeRight = !toggleSlideFadeRight"
+        color="primary"
+        outline) Slide fade {{ toggleSlideFadeRight ? 'left' : 'right' }}
+      w-transition-slide-fade(right)
+        .transition-box.text-nowrap(v-if="toggleSlideFadeRight") Slide fade right transition
+
     template(#html).
       &lt;w-flex align-center&gt;
         &lt;w-button
@@ -86,7 +103,7 @@ div.ovh
           @click="toggleFade = !toggleFade"
           color="primary"
           outline&gt;
-          Fade {{ toggleFade ? 'out' : 'in' }}
+          Fade {{ "\{\{ toggleFade ? 'out' : 'in' \}\}" }}
         &lt;/w-button&gt;
         &lt;w-transition-fade&gt;
           &lt;div class="transition-box" v-if="toggleFade"&gt;Fading transition&lt;/div&gt;
@@ -99,7 +116,7 @@ div.ovh
           @click="toggleScale = !toggleScale"
           color="primary"
           outline&gt;
-          Scale {{ toggleScale ? 'out' : 'in' }}
+          Scale {{ "\{\{ toggleScale ? 'out' : 'in' \}\}" }}
         &lt;/w-button&gt;
         &lt;w-transition-scale&gt;
           &lt;div class="transition-box" v-if="toggleScale"&gt;Scaling transition&lt;/div&gt;
@@ -112,7 +129,7 @@ div.ovh
           @click="toggleScaleFade = !toggleScaleFade"
           color="primary"
           outline&gt;
-          Scale fade {{ toggleScaleFade ? 'out' : 'in' }}
+          Scale fade {{ "\{\{ toggleScaleFade ? 'out' : 'in' \}\}" }}
         &lt;/w-button&gt;
         &lt;w-transition-scale-fade&gt;
           &lt;div class="transition-box" v-if="toggleScaleFade"&gt;Scaling &amp; fading transition&lt;/div&gt;
@@ -125,7 +142,7 @@ div.ovh
           @click="toggleBounce = !toggleBounce"
           color="primary"
           outline&gt;
-          Bounce {{ toggleBounce ? 'out' : 'in' }}
+          Bounce {{ "\{\{ toggleBounce ? 'out' : 'in' \}\}" }}
         &lt;/w-button&gt;
         &lt;w-transition-bounce&gt;
           &lt;div class="transition-box" v-if="toggleBounce"&gt;Bouncing transition&lt;/div&gt;
@@ -138,7 +155,7 @@ div.ovh
           @click="toggleTwist = !toggleTwist"
           color="primary"
           outline&gt;
-          Twist {{ toggleTwist ? 'out' : 'in' }}
+          Twist {{ "\{\{ toggleTwist ? 'out' : 'in' \}\}" }}
         &lt;/w-button&gt;
         &lt;w-transition-twist&gt;
           &lt;div class="transition-box" v-if="toggleTwist"&gt;Twisting transition&lt;/div&gt;
@@ -151,7 +168,7 @@ div.ovh
           @click="toggleExpandX = !toggleExpandX"
           color="primary"
           outline&gt;
-          {{ toggleExpandX ? 'Collapse' : 'Expand' }} X
+          {{ "\{\{ toggleExpandX ? 'Collapse' : 'Expand' \}\}" }} X
         &lt;/w-button&gt;
         &lt;w-transition-expand x&gt;
           &lt;div class="transition-box text-nowrap" v-if="toggleExpandX"&gt;X-expanding transition&lt;/div&gt;
@@ -164,7 +181,7 @@ div.ovh
           @click="toggleExpandY = !toggleExpandY"
           color="primary"
           outline&gt;
-          {{ toggleExpandY ? 'Collapse' : 'Expand' }} Y
+          {{ "\{\{ toggleExpandY ? 'Collapse' : 'Expand' \}\}" }} Y
         &lt;/w-button&gt;
         &lt;w-transition-expand y&gt;
           &lt;div class="transition-box" v-if="toggleExpandY"&gt;Y-expanding transition&lt;/div&gt;
@@ -177,11 +194,37 @@ div.ovh
           @click="toggleExpandXY = !toggleExpandXY"
           color="primary"
           outline&gt;
-          {{ toggleExpandXY ? 'Collapse' : 'Expand' }} X &amp; Y
+          {{ "\{\{ toggleExpandXY ? 'Collapse' : 'Expand' \}\}" }} X &amp; Y
         &lt;/w-button&gt;
         &lt;w-transition-expand&gt;
           &lt;div class="transition-box text-nowrap" v-if="toggleExpandXY"&gt;X &amp; Y expanding transition&lt;/div&gt;
         &lt;/w-transition-expand&gt;
+      &lt;/w-flex&gt;
+
+      &lt;w-flex align-center&gt;
+        &lt;w-button
+          class="transition-toggle"
+          @click="toggleSlideFadeDown = !toggleSlideFadeDown"
+          color="primary"
+          outline&gt;
+          Slide fade {{ "\{\{ toggleSlideFadeDown ? 'up' : 'down' \}\}" }}
+        &lt;/w-button&gt;
+        &lt;w-transition-slide-fade&gt;
+          &lt;div class="transition-box text-nowrap" v-if="toggleSlideFadeDown"&gt;Slide fade down transition&lt;/div&gt;
+        &lt;/w-transition-slide-fade&gt;
+      &lt;/w-flex&gt;
+
+      &lt;w-flex align-center&gt;
+        &lt;w-button
+          class="transition-toggle"
+          @click="toggleSlideFadeRight = !toggleSlideFadeRight"
+          color="primary"
+          outline&gt;
+          Slide fade {{ "\{\{ toggleSlideFadeRight ? 'left' : 'right' \}\}" }}
+        &lt;/w-button&gt;
+        &lt;w-transition-slide-fade right&gt;
+          &lt;div class="transition-box text-nowrap" v-if="toggleSlideFadeRight"&gt;Slide fade down transition&lt;/div&gt;
+        &lt;/w-transition-slide-fade&gt;
       &lt;/w-flex&gt;
 
     template(#js).
@@ -193,13 +236,15 @@ div.ovh
         toggleTwist: false,
         toggleExpandX: false,
         toggleExpandY: false,
-        toggleExpandXY: false
+        toggleExpandXY: false,
+        toggleSlideFadeDown: false,
+        toggleSlideFadeRight: false
       })
 
     template(#css).
       .transition-toggle {
         margin: 12px 24px 12px 0;
-        width: 7.3em;
+        width: 7.7em;
       }
 
       .transition-box {
@@ -211,15 +256,15 @@ div.ovh
         text-align: center;
       }
 
-  alert(tip).
-    When using the x or xy transitions, you may want to prevent the content to wrap to a new line while
-    the animation, like in the above example.
-    To do so, you can add the #[span.code text-nowrap] class on the element being transitioned.
+  p
+    strong.mr1 Note:
+    | the #[span.code slide-fade] transition take the direction in parameter, e.g. #[span.code left],
+    | #[span.code right], #[span.code up], #[span.code down] and defaults to #[span.code down].
 
   h3 Zoom on the expand transition
   p.
-    The great thing with Wave UI is that it also animates any margin or padding on the transitionning
-    element! Look at this one:
+    The great thing with Wave UI's expand transition is that it also animates any margin or padding on the
+    transitioning element! Look at this one:
   example
     w-flex(align-center)
       w-button.transition-toggle(
@@ -276,6 +321,11 @@ div.ovh
         width: 200px;
       }
 
+  alert(tip).
+    When using the x or xy expand transition, you may want to prevent the content to wrap to a new line while
+    the animation, like in the above example.
+    To do so, you can add the #[span.code text-nowrap] class on the element being transitioned.
+
   title-link(h2) Transition duration
   p.
     You can easily override the default transition/animation duration by setting an explicit
@@ -297,13 +347,15 @@ export default {
     toggleExpandX: false,
     toggleExpandY: false,
     toggleExpandXY: false,
-    toggleExpandXY2: false
+    toggleExpandXY2: false,
+    toggleSlideFadeDown: false,
+    toggleSlideFadeRight: false
   })
 }
 </script>
 
 <style lang="scss">
-.transition-toggle {margin: 12px 24px 12px 0;width: 7.3em;}
+.transition-toggle {margin: 12px 24px 12px 0;width: 7.7em;}
 
 .transition-box {
   background-color: #eee;
