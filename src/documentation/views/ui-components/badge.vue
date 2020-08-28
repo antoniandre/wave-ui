@@ -425,8 +425,8 @@ div
         w-button.code.ma1(@click="transition = 'scale-fade';showBadge2 = !showBadge2" bg-color="primary" xs) scale-fade
         w-button.code.ma1(@click="transition = 'slide-fade-left';showBadge2 = !showBadge2" bg-color="primary" xs) slide-fade-left
         w-button.code.ma1(@click="transition = 'slide-fade-right';showBadge2 = !showBadge2" bg-color="primary" xs) slide-fade-right
-        w-button.code.ma1(@click="transition = 'slide-fade-top';showBadge2 = !showBadge2" bg-color="primary" xs) slide-fade-top
-        w-button.code.ma1(@click="transition = 'slide-fade-bottom';showBadge2 = !showBadge2" bg-color="primary" xs) slide-fade-bottom
+        w-button.code.ma1(@click="transition = 'slide-fade-up';showBadge2 = !showBadge2" bg-color="primary" xs) slide-fade-up
+        w-button.code.ma1(@click="transition = 'slide-fade-down';showBadge2 = !showBadge2" bg-color="primary" xs) slide-fade-down
       .w-flex.grow
         .xs2
         .xs10
@@ -444,8 +444,8 @@ div
           w-button.code.ma1(@click="transition = 'scale-fade';showBadge = !showBadge" bg-color="primary" xs) scale-fade
           w-button.code.ma1(@click="transition = 'slide-fade-left';showBadge = !showBadge" bg-color="primary" xs) slide-fade-left
           w-button.code.ma1(@click="transition = 'slide-fade-right';showBadge = !showBadge" bg-color="primary" xs) slide-fade-right
-          w-button.code.ma1(@click="transition = 'slide-fade-top';showBadge = !showBadge" bg-color="primary" xs) slide-fade-top
-          w-button.code.ma1(@click="transition = 'slide-fade-bottom';showBadge = !showBadge" bg-color="primary" xs) slide-fade-bottom
+          w-button.code.ma1(@click="transition = 'slide-fade-up';showBadge = !showBadge" bg-color="primary" xs) slide-fade-up
+          w-button.code.ma1(@click="transition = 'slide-fade-down';showBadge = !showBadge" bg-color="primary" xs) slide-fade-down
 
         .w-flex.grow
           .xs2

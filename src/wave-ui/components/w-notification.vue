@@ -55,7 +55,7 @@ export default {
     transitionName () {
       if (this.transition === false) return ''
       if (!this.transition) {
-        const opposites = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' }
+        const opposites = { top: 'down', bottom: 'up', left: 'right', right: 'left' }
         return `slide-${opposites[this.position[this.position[1] === 'center' ? 0 : 1]]}`
       }
 

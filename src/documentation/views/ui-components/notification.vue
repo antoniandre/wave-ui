@@ -216,8 +216,8 @@ div
           { label: 'Fade', value: 'fade' },
           { label: 'Slide fade left', value: 'slide-fade-left' },
           { label: 'Slide fade right', value: 'slide-fade-right' },
-          { label: 'Slide fade top', value: 'slide-fade-top' },
-          { label: 'Slide fade bottom', value: 'slide-fade-bottom' },
+          { label: 'Slide fade top', value: 'slide-fade-up' },
+          { label: 'Slide fade bottom', value: 'slide-fade-down' },
           { label: 'Scale fade', value: 'scale-fade' },
           { label: 'None', value: false }
         ]
@@ -245,8 +245,8 @@ export default {
       { label: 'Fade', value: 'fade' },
       { label: 'Slide fade left', value: 'slide-fade-left' },
       { label: 'Slide fade right', value: 'slide-fade-right' },
-      { label: 'Slide fade top', value: 'slide-fade-top' },
-      { label: 'Slide fade bottom', value: 'slide-fade-bottom' },
+      { label: 'Slide fade top', value: 'slide-fade-up' },
+      { label: 'Slide fade bottom', value: 'slide-fade-down' },
       { label: 'Scale fade', value: 'scale-fade' },
       { label: 'None', value: false }
     ]

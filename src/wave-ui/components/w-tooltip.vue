@@ -62,7 +62,8 @@ export default {
 
   computed: {
     transitionName () {
-      return this.transition || `w-tooltip-slide-fade-${this.position}`
+      const direction = this.position.replace(/top|bottom/, m => ({ top: 'up', bottom: 'down' }[m]))
+      return this.transition || `w-tooltip-slide-fade-${direction}`
     },
 
     detachToTarget () {
@@ -428,21 +429,21 @@ export default {
 
 // Transitions.
 // --------------------------------------------------------
-.w-tooltip-slide-fade-top-enter-active, .w-tooltip-slide-fade-top-leave-active,
-.w-tooltip-slide-fade-bottom-enter-active, .w-tooltip-slide-fade-bottom-leave-active,
+.w-tooltip-slide-fade-up-enter-active, .w-tooltip-slide-fade-up-leave-active,
+.w-tooltip-slide-fade-down-enter-active, .w-tooltip-slide-fade-down-leave-active,
 .w-tooltip-slide-fade-left-enter-active, .w-tooltip-slide-fade-left-leave-active,
 .w-tooltip-slide-fade-right-enter-active, .w-tooltip-slide-fade-right-leave-active {
   transition: margin $transition-duration ease-in-out, opacity $transition-duration ease-in-out;
 }
 
-// Slide-fade-top.
-.w-tooltip-slide-fade-top-enter, .w-tooltip-slide-fade-top-leave-to {
+// slide-fade-up.
+.w-tooltip-slide-fade-up-enter, .w-tooltip-slide-fade-up-leave-to {
   margin-top: -2 * $base-increment;
   opacity: 0;
 }
 
-// Slide-fade-bottom.
-.w-tooltip-slide-fade-bottom-enter, .w-tooltip-slide-fade-bottom-leave-to {
+// slide-fade-down.
+.w-tooltip-slide-fade-down-enter, .w-tooltip-slide-fade-down-leave-to {
   margin-top: 2 * $base-increment;
   opacity: 0;
 }

@@ -14,7 +14,7 @@
       v-model="showMenu"
       menu-class="pa0 mt0"
       content-class="pa0"
-      transition="slide-fade-bottom"
+      transition="slide-fade-down"
       detach-to=".w-app"
       min-width="activator")
       template(#activator="{ on }")

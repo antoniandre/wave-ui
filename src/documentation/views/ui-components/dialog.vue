@@ -217,8 +217,8 @@ div
         },
         transitions: [
           { label: 'fade' },
-          { label: 'slide-fade-top' },
-          { label: 'slide-fade-bottom' },
+          { label: 'slide-fade-up' },
+          { label: 'slide-fade-down' },
           { label: 'slide-fade-left' },
           { label: 'slide-fade-right' },
           { label: 'scale' },
@@ -226,8 +226,8 @@ div
           { label: 'bounce' }
         ],
         transitionsForFullscreen: [
-          { label: 'slide-top' },
-          { label: 'slide-bottom' },
+          { label: 'slide-up' },
+          { label: 'slide-down' },
           { label: 'slide-left' },
           { label: 'slide-right' }
         ]
@@ -313,8 +313,8 @@ export default {
     },
     transitions: [
       { label: 'fade' },
-      { label: 'slide-fade-top' },
-      { label: 'slide-fade-bottom' },
+      { label: 'slide-fade-up' },
+      { label: 'slide-fade-down' },
       { label: 'slide-fade-left' },
       { label: 'slide-fade-right' },
       { label: 'scale' },
@@ -322,8 +322,8 @@ export default {
       { label: 'bounce' }
     ],
     transitionsForFullscreen: [
-      { label: 'slide-top' },
-      { label: 'slide-bottom' },
+      { label: 'slide-up' },
+      { label: 'slide-down' },
       { label: 'slide-left' },
       { label: 'slide-right' }
     ]

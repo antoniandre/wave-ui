@@ -21,7 +21,7 @@
 // we must keep the wrapper in the DOM until the drawer transition is finished.
 // Then emit the value update that will trigger the removal of the wrapper from the DOM.
 
-const oppositeSides = { left: 'right', right: 'left', top: 'bottom', bottom: 'top' }
+const oppositeSides = { left: 'right', right: 'left', top: 'down', bottom: 'up' }
 
 export default {
   name: 'w-drawer',
