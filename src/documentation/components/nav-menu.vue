@@ -18,6 +18,9 @@
       span(v-html="item.label")
       w-tag.ml2.text-upper(v-if="item.disabled" xs color="red" outline) Coming soon
       w-tag.ml2.text-upper(v-if="item.inProgress" xs color="orange" outline) In progress
+  .title3.mt4 External UI components
+  p By the same author
+  w-list(:items="externalComponents" nav color="primary" @item-click="onItemClick")
 </template>
 
 <script>
@@ -52,7 +55,6 @@ export default {
       { label: 'App', route: 'w-app' },
       { label: 'Badge', route: 'w-badge' },
       { label: 'Button', route: 'w-button' },
-      { label: 'Calendar', route: 'w-calendar' },
       { label: 'Card', route: 'w-card' },
       { label: 'Dialog', route: 'w-dialog' },
       { label: 'Divider', route: 'w-divider' },
@@ -64,8 +66,6 @@ export default {
       { label: 'Overlay', route: 'w-overlay' },
       { label: 'Progress', route: 'w-progress' },
       { label: 'Rating', route: 'w-rating', disabled: true },
-      { label: 'Slideshow', route: 'slideshow' },
-      { label: 'Splitter', route: 'splitter' },
       { label: 'Tabs', route: 'w-tabs', disabled: true },
       { label: 'Tag', route: 'w-tag' },
       { label: 'Toolbar', route: 'w-toolbar' },
@@ -84,7 +84,13 @@ export default {
           { label: 'Textarea', route: 'w-textarea', disabled: true }
         ]
       }
-    ]
+    ],
+    externalComponents: [
+      { label: 'Calendar', route: 'calendar' },
+      { label: 'Slideshow', route: 'slideshow' },
+      { label: 'Splitter', route: 'splitter' }
+    ],
+
   }),
 
   methods: {

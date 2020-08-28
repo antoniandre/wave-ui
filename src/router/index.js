@@ -86,7 +86,6 @@ const components = [
   { id: 'app', label: 'App' },
   { id: 'button', label: 'Button' },
   { id: 'badge', label: 'Badge' },
-  { id: 'calendar', label: 'Calendar' },
   { id: 'card', label: 'Card' },
   { id: 'checkbox', label: 'Checkbox' },
   { id: 'dialog', label: 'Dialog' },
@@ -103,8 +102,6 @@ const components = [
   { id: 'rating', label: 'Rating' },
   { id: 'select', label: 'Select' },
   { id: 'slider', label: 'Slider' },
-  { id: 'slideshow', label: 'Slideshow', path: '/slideshow' },
-  { id: 'splitter', label: 'Splitter', path: '/splitter' },
   { id: 'switch', label: 'Switch' },
   { id: 'radio', label: 'Radio' },
   { id: 'tabs', label: 'Tabs' },
@@ -114,7 +111,13 @@ const components = [
   { id: 'tooltip', label: 'Tooltip' }
 ]
 
-components.forEach(item => {
+const externalComponents = [
+  { id: 'calendar', label: 'Calendar', path: '/calendar' },
+  { id: 'slideshow', label: 'Slideshow', path: '/slideshow' },
+  { id: 'splitter', label: 'Splitter', path: '/splitter' }
+]
+
+components.concat(externalComponents).forEach(item => {
   routes.push({
     path: item.path || `/w-${item.id}`,
     name: item.id,
