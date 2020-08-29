@@ -154,6 +154,9 @@ div.tooltips-demo
       })
 
   title-link(h2) Background color &amp; text color
+  p.
+    Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
+    background.
   example(content-class="text-center pb8")
     w-tooltip(color="white" bg-color="blue")
       template(#activator="{ on }")

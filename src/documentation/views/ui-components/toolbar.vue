@@ -37,6 +37,9 @@ div.ovh
       &lt;/w-toolbar&gt;
 
   title-link(h2) Background color &amp; text color
+  p.
+    Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
+    background.
   example(content-class="pa4")
     w-toolbar(bg-color="blue-light5" color="blue-dark3")
       .title2.my0 Title

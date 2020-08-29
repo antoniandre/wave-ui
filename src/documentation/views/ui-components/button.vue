@@ -39,6 +39,9 @@ div.ovh
         w-button.ma1(bg-color="purple-light4") purple-light4
 
   h3 Mix background and text colors
+  p.
+    Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
+    background.
   example
     w-button.ma1(bg-color="success" color="yellow-light2") success
     w-button.ma1(bg-color="error" color="amber-light2") error

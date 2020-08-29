@@ -10,13 +10,17 @@ div
   //-------------------------------------------------------
   div(v-if="circular")
     title-link(h2) Default indeterminate progress &amp; colors
-    p By default, the progress foreground color is #[code primary].
+    p.
+      Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
+      background.#[br]
+      By default, the progress foreground color is #[code primary].
     example(reactive)
       w-progress.ma1(circle)
       w-progress.ma1(circle color="blue")
       w-progress.ma1(circle color="green")
 
       h3 Mixing colors
+
       w-progress.ma1(circle color="yellow" bg-color="cyan")
       template(#pug).
         w-progress.ma1(circle)
@@ -138,6 +142,9 @@ div
   //-------------------------------------------------------
   div(v-else)
     title-link(h2) Default indeterminate progress &amp; colors
+    p.
+      Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
+      background.
     example(reactive)
       w-progress
       w-progress.mt4(color="blue")

@@ -112,7 +112,10 @@ div
       })
 
   title-link(h2) Color &amp; background color
-  p No background color is set by default and the text color is inherited.
+  p.
+    Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
+    background.#[br]
+    No background color is set by default and the text color is inherited.
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items" color="amber-dark1")
     w-accordion.mt6(:items="items" bg-color="yellow-light5")

@@ -122,6 +122,7 @@ div
       | Menu content
 
   title-link(h2) Color &amp; background color
+  p Like in most components, you can define a #[code color] and a  #[code bg-color].
   example.example3(content-class="pb12")
     w-menu(detach-to=".example3" color="blue-dark2" bg-color="blue-light5")
       template(#activator="{ on }")
