@@ -14,7 +14,11 @@ const renderListItems = function (createEl) {
         'w-list',
         {
           props: { ...this.$props, items: li.children, depth: this.depth + 1 },
-          scopedSlots: { item: this.$scopedSlots.item },
+          scopedSlots: {
+            item: this.$scopedSlots.item, // Accepts `template(#item)`.
+             // Accepts `template(#item.2)`.
+            [`item.${li.id || index + 1}`]: this.$scopedSlots[`item.${li.id || index + 1}`]
+          },
           on: {
             'input': value => this.$emit('input', value),
             'item-click': value => this.$emit('item-click', value)
@@ -61,6 +65,7 @@ const renderListItemLabel = function (createEl, li, index) {
   // ------------------------------------------------------
 
   const hasSlot = this.$scopedSlots.item
+  const hasSingleItemSlot = this.$scopedSlots[`item.${li.id || index + 1}`]
 
   // Navigation list.
   // Note: on enter key press, a click event is fired => this is default HTML behavior.
@@ -121,9 +126,12 @@ const renderListItemLabel = function (createEl, li, index) {
   // ------------------------------------------------------
 
   const vnodes = []
-  if (!hasSlot && !this.checklist) component.domProps = { innerHTML: li[this.itemLabel] }
+  // Allow overriding the common slot using `template(#item.2)` where to is the index of the item.
+  if (hasSingleItemSlot) {
+    vnodes.push(this.$scopedSlots[`item.${li.id || index + 1}`]({ item: li, selected: li.selected, index }))
+  }
   else if (hasSlot) vnodes.push(this.$scopedSlots.item({ item: li, selected: li.selected, index }))
-
+  else if (!this.checklist) component.domProps = { innerHTML: li[this.itemLabel] }
   return createEl(component.name, component, vnodes)
 }
 
@@ -131,7 +139,7 @@ export default {
   name: 'w-list',
 
   props: {
-    items: { type: Array, required: true }, // All the possible options.
+    items: { type: [Array, Number], required: true }, // All the possible options.
     value: {}, // v-model on selected item if any.
     checklist: { type: Boolean },
     roundCheckboxes: { type: Boolean }, // Checklist option.
@@ -139,6 +147,7 @@ export default {
     multiple: { type: Boolean },
     hover: { type: Boolean },
     color: { type: String },
+    bgColor: { type: String },
     // Navigation type adds a router-link on items with `route`.
     nav: { type: Boolean },
     icon: { type: String, default: '' },
@@ -157,7 +166,8 @@ export default {
 
   computed: {
     listItems () {
-      return this.items.map((item, i) => {
+      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items
+      return items.map((item, i) => {
         item = { ...item } // Don't modify the original.
 
         // If no value is set then add one to prevent error.
@@ -191,6 +201,7 @@ export default {
     classes () {
       return {
         [this.color]: this.color || null,
+        [`${this.bgColor}--bg`]: this.bgColor || null,
         'w-list--checklist': this.checklist,
         'w-list--navigation': this.nav,
         'w-list--icon': this.icon,
