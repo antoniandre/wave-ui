@@ -17,7 +17,7 @@
           text
           @click.stop="!item.disabled && toggleItem(item)")
         //- Title.
-        slot(v-if="$scopedSlots[`item-title-${item.id}`]" :name="`item-title-${item.id}`" :item="item")
+        slot(v-if="$scopedSlots[`item-title.${item.id || i + 1}`]" :name="`item-title.${item.id || i + 1}`" :item="item")
         slot(v-else name="item-title" :item="item")
           div.grow(v-html="item.title")
         //- Expand icon on right.
@@ -29,7 +29,7 @@
       //- Content.
       w-transition-expand(y)
         .w-accordion__item-content(v-if="item.open" :class="contentClass")
-          slot(v-if="$scopedSlots[`item-content-${item.id}`]" :name="`item-content-${item.id}`" :item="item")
+          slot(v-if="$scopedSlots[`item-content.${item.id || i + 1}`]" :name="`item-content.${item.id || i + 1}`" :item="item")
           slot(v-else name="item-content" :item="item")
             div(v-html="item.content")
 </template>
@@ -43,7 +43,7 @@ export default {
     value: { type: Array },
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
-    items: { type: Array },
+    items: { type: [Array, Number] },
     itemClass: { type: String },
     titleClass: { type: String },
     contentClass: { type: String },
@@ -59,7 +59,8 @@ export default {
 
   computed: {
     accordionItems () {
-      return this.items.map((item, index) => new Vue.observable({
+      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items
+      return items.map((item, index) => new Vue.observable({
         ...item,
         index,
         open: this.value && this.value[index],
@@ -153,6 +154,7 @@ export default {
     }
 
     &:focus:before, &:hover:before {opacity: 0.03;}
+    &:active:before {opacity: 0.05;}
     .w-accordion__item--disabled &:before {display: none;}
   }
 

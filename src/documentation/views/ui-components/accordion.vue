@@ -242,57 +242,85 @@ div
       })
 
   title-link(h2) Do you (really) need even more flexibility?
-  p No problem, Wave UI's got you covered.
+  p.
+    No problem, Wave UI's got you covered.#[br]
+    If you don't need data objects at all, you can simply define a number of items: #[code :items="3"].
+
+  example(content-class="pa4 aliceblue")
+    w-accordion.white--bg(:items="3")
+      template(#item-title.1) Item title 1
+      template(#item-content.1) Item content 1
+
+      template(#item-title.2) Item title 2
+      template(#item-content.2) Item content 2
+
+      template(#item-title.3) Item title 3
+      template(#item-content.3) Item content 3
+    template(#pug).
+      w-accordion(:items="3")
+        template(#item-title.1="") Item title 1
+        template(#item-content.1="") Item content 1
+
+        template(#item-title.2="") Item title 2
+        template(#item-content.2="") Item content 2
+
+        template(#item-title.3="") Item title 3
+        template(#item-content.3="") Item content 3
+
+  p.
+    Here is an example of 3 totally diferent pane titles and contents using more lines of code.#[br]
+    This time, an array of object is defined to show you can also do a mix of contents coming from the
+    the component's data or directly in the template.
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="itemsCustom")
-      template(#item-title-item1="{ item }")
+      template(#item-title.item1)
         | This is the 1st item
         w-tag.ml2(color="red" sm outline) HOT
-      template(#item-content-item1="{ item }")
+      template(#item-content.item1)
         p This content has a checklist.
         .title4 To do
         w-list(checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]")
 
-      template(#item-title-item2="{ item }")
+      template(#item-title.item2)
         w-icon.mr1(md color="amber") mdi mdi-emoticon-excited-outline
         em This is the 2nd item
-      template(#item-content-item2="{ item }")
+      template(#item-content.item2="{ item }")
         p The full content here is custom and completely distinct and independent from the other items.
         p
           | You also have access to the item's data if you need:
           code.ml1 {{ item }}
 
-      template(#item-title-item3="{ item }")
+      template(#item-title.item3)
         strong This is the 3rd item
         w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
-      template(#item-content-item3="{ item }")
+      template(#item-content.item3)
         p Do you want to check the project on Github?
         w-button(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
           | Github
           w-icon.ml2(sm) mdi mdi-open-in-new
     template(#pug).
       w-accordion(:items="items")
-        template(#item-title-item1="{ item }")
+        template(#item-title.item1="")
           | This is the 1st item
           w-tag.ml2(color="red" sm outline) HOT
-        template(#item-content-item1="{ item }")
+        template(#item-content.item1="")
           p This content has a checklist.
           .title4.my3 To do
           w-list(checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]")
 
-        template(#item-title-item2="{ item }")
+        template(#item-title.item2="")
           w-icon.mr1(md color="amber") mdi mdi-emoticon-excited-outline
           em This is the 2nd item
-        template(#item-content-item2="{ item }")
+        template(#item-content.item2="{ item }")
           p The full content here is custom and completely distinct and independent from the other items.
           p
             | You also have access to the item's data if you need:
             code.ml1 {{ '\{\{ item \}\}' }}
 
-        template(#item-title-item3="{ item }")
+        template(#item-title.item3="")
           strong This is the 3rd item
           w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
-        template(#item-content-item3="{ item }")
+        template(#item-content.item3="")
           p Do you want to check the project on Github?
           w-button.mt2(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
             | Github
