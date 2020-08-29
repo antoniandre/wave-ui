@@ -64,7 +64,8 @@ div
 
   title-link(h2) Color
   p.mb4.
-    You can set the background color and the text color.#[br]
+    Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
+    background.#[br]
     By default, the text has the "#[span.code primary]" color.
   example
     w-flex(wrap :gap="2")

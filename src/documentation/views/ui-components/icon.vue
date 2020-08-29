@@ -152,7 +152,11 @@ div
 
   w-divider.my12
 
-  title-link(h2) Colors
+  title-link(h2) Colors &amp; Background colors
+  p.
+    Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
+    background.
+
   example(content-class="w-flex align-center")
     w-icon.mr1(xl color="primary-dark1") mdi mdi-home
     w-icon.mr1(xl color="primary") mdi mdi-home
@@ -166,12 +170,10 @@ div
       w-icon.mr1(xl color="primary-light2") mdi mdi-home
       w-icon.mr1(xl color="primary-light3") mdi mdi-home
 
-  title-link(h2) Background colors
   p.mb4
     | If you want to set a background on an icon, you may need an
     router-link.mx1(to="/w-button") icon button
-    | instead.
-    | #[br]Here is how you can apply a background color to an icon.
+    | instead. If not, just set a #[code bg-color].
 
   example(content-class="w-flex align-center")
     w-icon.mr1.pa5(xl bg-color="primary-dark1") mdi mdi-home

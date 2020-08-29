@@ -29,6 +29,10 @@ div
       &lt;/w-card&gt;
 
   title-link(h2) Colored card with no title and no border
+  p.
+    Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
+    background.
+
   example
     w-card(bg-color="secondary" no-border)
       p.

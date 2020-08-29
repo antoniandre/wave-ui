@@ -22,8 +22,8 @@ div(style="max-width: 1000px")
 
   title-link(h2) Colors
   p.
-    You can apply a color to the text with the #[code color] attribute,
-    and color to the background with the #[code bg-color] attribute.
+    Like in most components, you can apply a color to the text with the #[code color] attribute,
+    and a color to the background with the #[code bg-color] attribute.
   example(content-class="py0")
     w-alert(color="primary") This is an alert with a primary color.
     w-alert(bg-color="primary" color="white") This is an alert with a primary background color.

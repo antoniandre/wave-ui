@@ -11,7 +11,9 @@ div
       w-tag(outline) tag
 
   title-link(h2) Colors
-  p You can set a text color and a background color separately or together.
+  p.
+    Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
+    background.
   example(content-class="w-flex align-center")
     w-tag.mr4(color="primary") tag
     w-tag.mr4(bg-color="primary") tag

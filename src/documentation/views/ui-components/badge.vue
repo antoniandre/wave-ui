@@ -81,6 +81,9 @@ div
         w-icon.grey-light1(size="2.5em") mdi mdi-email
 
   title-link(h2) Color and background color
+  p.
+    Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
+    background.
   example(content-class="mt1")
     w-badge.mr10(bg-color="error")
       template(#badge) 3
