@@ -70,6 +70,24 @@ div
         accordion: [false, true, false]
       })
 
+  title-link(h2) Disabled pane
+  p.
+    Specify which pane should be disabled - open or closed - by adding the #[span.code disabled] property
+    directly in the object.
+  example(content-class="pa4 aliceblue")
+    w-accordion.white--bg(v-model="accordion3" :items="itemsDisabled")
+    template(#pug).
+      w-accordion(v-model="accordion" :items="items")
+    template(#js).
+      data: () => ({
+        items: [
+          { title: 'Item 1 - disabled closed', content: 'Disabled', disabled: true },
+          { title: 'Item 2 - disabled open', content: 'You can\'t close this pane.', disabled: true },
+          { title: 'Item 3 - fully enabled', content: 'You can toggle this pane to open and close.' }
+        ],
+        accordion: [false, true, true]
+      })
+
   title-link(h2) Shadow
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items" shadow)
@@ -121,10 +139,10 @@ div
 
   title-link(h2) Expand a single item at a time
   example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(v-model="accordion3" :items="items" expand-single)
+    w-accordion.white--bg(v-model="accordion4" :items="items" expand-single)
     div.mt3
       | v-model:
-      code.ml1 {{ accordion3 }}
+      code.ml1 {{ accordion4 }}
     template(#pug).
       w-accordion(v-model="accordion" :items="items" expand-single)
       div.mt3
@@ -151,12 +169,12 @@ div
 
   title-link(h2) External control
   example(content-class="pa4 aliceblue")
-    w-button.mr2(@click="accordion4 = Array(3).fill(true)" bg-color="primary" sm) Expand all
-    w-button(@click="accordion4 = Array(3).fill(false)" bg-color="primary" sm) Collapse all
-    w-accordion.mt4.white--bg(v-model="accordion4" :items="items")
+    w-button.mr2(@click="accordion5 = Array(3).fill(true)" bg-color="primary" sm) Expand all
+    w-button(@click="accordion5 = Array(3).fill(false)" bg-color="primary" sm) Collapse all
+    w-accordion.mt4.white--bg(v-model="accordion5" :items="items")
     div.mt3
       | v-model:
-      code.ml1 {{ accordion4 }}
+      code.ml1 {{ accordion5 }}
     template(#pug).
       w-button.mr2(@click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;true&amp;#41;" bg-color="primary" sm) Expand all
       w-button(@click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;false&amp;#41;" bg-color="primary" sm) Collapse all
@@ -352,6 +370,11 @@ export default {
         color: 'orange'
       }
     ],
+    itemsDisabled: [
+      { title: 'Item 1 - disabled closed', content: 'Disabled', disabled: true },
+      { title: 'Item 2 - disabled open', content: 'You can\'t close this pane.', disabled: true },
+      { title: 'Item 3 - fully enabled', content: 'You can toggle this pane to open and close.' }
+    ],
     itemsCustom: [
       { id: 'item1' },
       { id: 'item2' },
@@ -359,8 +382,9 @@ export default {
     ],
     accordion1: [],
     accordion2: [false, true, false],
-    accordion3: [],
-    accordion4: []
+    accordion3: [false, true, true],
+    accordion4: [],
+    accordion5: []
   })
 }
 </script>

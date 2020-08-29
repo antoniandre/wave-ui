@@ -3,18 +3,19 @@
     .w-accordion__item(
       v-for="(item, i) in accordionItems"
       :key="i"
-      :class="{ ...itemClasses, 'w-accordion__item--expanded': item.open }")
+      :class="{ ...itemClasses, 'w-accordion__item--expanded': item.open, 'w-accordion__item--disabled': item.disabled }")
       .w-accordion__item-title(
-        @click="toggleItem(item)"
-        tabindex="0"
-        @keypress.enter="toggleItem(item)"
+        @click="!item.disabled && toggleItem(item)"
+        :tabindex="!item.disabled && 0"
+        @keypress.enter="!item.disabled && toggleItem(item)"
         :class="titleClass")
         //- Expand icon on left.
         w-button.w-accordion__expand-icon(
           v-if="expandIcon && !expandIconRight"
           :icon="(item.open && collapseIcon) || expandIcon"
+          :disabled="item.disabled"
           text
-          @click.stop="toggleItem(item)")
+          @click.stop="!item.disabled && toggleItem(item)")
         //- Title.
         slot(v-if="$scopedSlots[`item-title-${item.id}`]" :name="`item-title-${item.id}`" :item="item")
         slot(v-else name="item-title" :item="item")
@@ -24,7 +25,7 @@
           v-if="expandIcon && expandIconRight"
           :icon="(item.open && collapseIcon) || expandIcon"
           text
-          @click.stop="toggleItem(item)")
+          @click.stop="!item.disabled && toggleItem(item)")
       //- Content.
       w-transition-expand(y)
         .w-accordion__item-content(v-if="item.open" :class="contentClass")
@@ -61,7 +62,8 @@ export default {
       return this.items.map((item, index) => new Vue.observable({
         ...item,
         index,
-        open: this.value && this.value[index]
+        open: this.value && this.value[index],
+        disabled: !!item.disabled
       }))
     },
 
@@ -130,6 +132,10 @@ export default {
     cursor: pointer;
     border-top: $border;
 
+    .w-accordion__item--disabled & {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
     .w-accordion--no-icon &, .w-accordion--icon-right & {padding-left: 3 * $base-increment;}
 
     .w-accordion__item:first-child & {border-top-color: transparent;}
@@ -147,6 +153,7 @@ export default {
     }
 
     &:focus:before, &:hover:before {opacity: 0.03;}
+    .w-accordion__item--disabled &:before {display: none;}
   }
 
   &__item-content {
