@@ -239,13 +239,13 @@ $spinner-size: 40;
     opacity: 0;
     border-radius: inherit;
     z-index: -1;
-    transition: opacity .2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-in;
+    transition: opacity 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-in;
     transform: scale(0.85, 0.7);
   }
   &:focus:after {
     opacity: 0.4;
     transform: scale(1);
-    transition: opacity .2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-out;
+    transition: opacity 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-out;
   }
   &--dark:focus:after {opacity: 0.2;}
 

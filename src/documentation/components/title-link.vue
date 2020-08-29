@@ -69,6 +69,7 @@ export default {
   }
 
   a {color: inherit;}
+  a:focus {text-decoration: underline;}
 
   a[name] {
     position: relative;
