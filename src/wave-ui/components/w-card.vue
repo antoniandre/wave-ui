@@ -58,10 +58,11 @@ export default {
   display: flex;
   flex-direction: column;
   border-radius: $border-radius;
+  border: $border;
 
   &--tile {border-radius: 0;}
   &--shadow {box-shadow: $box-shadow;}
-  &:not(&--no-border):not(&--shadow) {border: $border;}
+  &--no-border, &--shadow {border: none;}
 
   &__title {
     display: flex;
