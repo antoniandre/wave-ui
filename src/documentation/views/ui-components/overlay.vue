@@ -13,19 +13,19 @@ div.ovh
   p When persistent is set to false and by default, the escape key will also close the overlay.
   example
     w-flex(wrap)
-      w-button(bg-color="primary" dark @click="showOverlay = true") Show overlay
+      w-button.my2(bg-color="primary" dark @click="showOverlay = true") Show overlay
 
       w-divider.mx6(vertical color="grey-light4")
       div
         .title4 Options
-        w-button.mr2(
+        w-button.d-block.mr2(
           bg-color="primary-light1"
           :class="persistent ? 'pr4' : ''"
           @click="persistent = !persistent"
           sm
           dark)
           .code.white :persistent="{{ persistent }}"
-        w-button(
+        w-button.d-block.mt2(
           bg-color="primary-light1"
           @click="persistentNoAnimation = !persistentNoAnimation"
           :disabled="!persistent"
