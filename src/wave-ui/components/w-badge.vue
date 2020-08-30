@@ -108,7 +108,7 @@ export default {
 
     // Sizes.
     &.size--xs {
-      // Always get an even number for better text vertical align.
+      // Always get an even number for better text vertical alignment.
       $height: round($base-font-size / 2) * 2;
       font-size: round(0.67 * $base-font-size / 2) * 2;
       height: $height;

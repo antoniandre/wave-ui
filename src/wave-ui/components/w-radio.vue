@@ -115,7 +115,7 @@ export default {
 
 <style lang="scss">
 $outline-width: 2px;
-$size: round(1.3 * $base-font-size);
+$size: round(1.3 * $base-font-size / 2) * 2; // Always an even number for better vertical alignment.
 $inactive-color: #666;
 
 .w-radio {
