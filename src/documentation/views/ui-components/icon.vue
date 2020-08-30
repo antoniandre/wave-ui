@@ -12,7 +12,7 @@ div
       h3.title3 Material Design Icons - community full set
       p
         a(href="https://materialdesignicons.com" target="_blank")
-          | Material Design Icons Cheatsheet
+          | Material Design Icons Cheat sheet
           w-icon.ml1 mdi mdi-open-in-new
 
       ssh-pre(language="bash") npm install @mdi/font
@@ -43,7 +43,7 @@ div
         code.ml1 { iconsLigature: 'material-icons' }
       p
         a(href="https://material.io/resources/icons" target="_blank")
-          | Material Design Icons Cheatsheet
+          | Material Design Icons Cheat sheet
           w-icon.ml1 mdi mdi-open-in-new
 
       ssh-pre(language="bash") npm install material-design-icons
@@ -75,8 +75,8 @@ div
     li
       h3.title3 Ionicons 4: iOS &amp; Material Design
       p
-        a(href="https://ionicons.com/v4/cheatsheet.html" target="_blank")
-          | Ionicons V4 Cheatsheet
+        a(href="https://ionicons.com/v4/cheat sheet.html" target="_blank")
+          | Ionicons V4 Cheat sheet
           w-icon.ml1 mdi mdi-open-in-new
 
       ssh-pre(language="bash") npm install ionicons
@@ -127,7 +127,7 @@ div
       h3.title3 Font Awesome 4
       p
         a(href="https://fontawesome.com/v4.7.0/icons/" target="_blank")
-          | Font Awesome V4 Cheatsheet
+          | Font Awesome V4 Cheat sheet
           w-icon.ml1 mdi mdi-open-in-new
 
       ssh-pre(language="bash") npm install font-awesome

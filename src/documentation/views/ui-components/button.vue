@@ -3,7 +3,7 @@ div.ovh
   title-link.mt4.code(h1) w-button
 
   p.
-    Setting colors on buttons is quite straightforword:
+    Setting colors on buttons is quite straightforward:
     a text color is set via the attribute #[code color], and a background color is set via the
     attribute #[code bg-color].#[br]
     This allows you to easily mix a background color with a different text color of your choice.
@@ -107,7 +107,7 @@ div.ovh
 
   h3 Custom width and height
   p.
-    Eventhough you can easily override the dimensions via CSS, a #[code width] and #[code height] props
+    Even though you can easily override the dimensions via CSS, a #[code width] and #[code height] props
     are available on the #[span.code w-button] component.
   example(content-class="pt6")
     w-button.ma1(bg-color="info" width="10em" :height="18") info

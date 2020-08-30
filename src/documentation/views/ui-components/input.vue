@@ -219,7 +219,7 @@ div
         w-input(type="url") Url
       li.mt4
         span.code.mb1.mr2 type="hidden"
-        | The hidden type is also accepted - but you don't need a winput for that!
+        | The hidden type is also accepted - but you don't need a #[span.code w-input] for that!
         w-input(type="hidden")
     template(#pug).
       ul.input-types
@@ -246,7 +246,7 @@ div
           w-input(type="url") Url
         li
           span.code.mb1.mr2 type="hidden"
-          | The hidden type is also accepted - but you don't need a winput for that!
+          | The hidden type is also accepted - but you don't need a w-input for that!
           w-input(type="hidden")
 
   h3 Other types of inputs

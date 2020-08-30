@@ -3,7 +3,7 @@ div
   title-link.mt4.code(h1) w-app
 
   p.
-    This tag is required in your app for Wave UI proper functionning.#[br]
+    This tag is required in your app for Wave UI proper functioning.#[br]
     You should place it #[strong at the root of your app].
 
   ssh-pre(language="html-vue").

@@ -56,8 +56,8 @@ div
 
   title-link(h2) Tiled card with a top toolbar
   p.
-    The w-card component will detect if there is a toolbar in the title slot or in the actions
-    slot and will remove the default padding and border on this slot if there is.
+    The #[span.code w-card] component will detect if there is a toolbar in the title slot or in the
+    actions slot and will remove the default padding and border on this slot if there is.
   example
     w-card(tile)
       template(#title)
