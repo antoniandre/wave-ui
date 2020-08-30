@@ -66,7 +66,7 @@ export default {
       { label: 'Overlay', route: 'w-overlay' },
       { label: 'Progress', route: 'w-progress' },
       { label: 'Rating', route: 'w-rating', disabled: true },
-      { label: 'Tabs', route: 'w-tabs', disabled: true },
+      { label: 'Tabs', route: 'w-tabs', inProgress: true },
       { label: 'Tag', route: 'w-tag' },
       { label: 'Toolbar', route: 'w-toolbar' },
       { label: 'Tooltip', route: 'w-tooltip' },
