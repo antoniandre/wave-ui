@@ -1,10 +1,10 @@
 <template lang="pug">
   .w-tabs(:class="tabsClasses")
-    .w-tabs__bar
+    .w-tabs__bar(ref="tabs-bar")
       .w-tabs__bar-item(
         v-for="(item, i) in tabsItems"
         :key="i"
-        :class="{ 'w-tabs__bar-item--active': item.active, 'w-tabs__bar-item--disabled': item.disabled, [titleClass]: titleClass }"
+        :class="barItemClasses(item)"
         @click="!item.disabled && openTab(item)"
         :tabindex="!item.disabled && 0"
         @keypress.enter="!item.disabled && openTab(item)")
@@ -14,8 +14,8 @@
             :item="item")
           slot(v-else name="item-title" :item="item")
             div(v-html="item.title")
-      .w-tabs__slider
-    transition(:name="transition")
+      .w-tabs__slider(:class="sliderColor" :style="sliderStyles")
+    transition(:name="transition" mode="out-in")
       .w-tabs__content(v-if="activeTab" :class="contentClass")
         slot(
           v-if="$scopedSlots[`item-content.${activeTab.id || activeTab.index + 1}`]"
@@ -36,12 +36,21 @@ export default {
     bgColor: { type: String, default: '' },
     items: { type: [Array, Number] },
     titleClass: { type: String },
+    activeClass: { type: String, default: 'primary' },
+    sliderColor: { type: String, default: 'primary' },
     contentClass: { type: String },
     transition: { type: String, default: 'fade' },
+    fillBar: { type: Boolean },
     shadow: { type: Boolean }
   },
 
   data: () => ({
+    activeTabEl: null,
+    slider: {
+      left: 0,
+      width: 0
+    },
+    init: true
   }),
 
   computed: {
@@ -66,19 +75,63 @@ export default {
 
     tabsClasses () {
       return {
-        [this.color]: this.color,
-        [`${this.bgColor}--bg`]: this.bgColor,
-        'w-tabs--shadow': this.shadow
+        'w-tabs--shadow': this.shadow,
+        'w-tabs--fill-bar': this.fillBar,
+        'w-tabs--init': this.init
+      }
+    },
+
+    sliderStyles () {
+      return {
+        left: this.slider.left,
+        width: this.slider.width
       }
     }
   },
 
   methods: {
+    barItemClasses (item) {
+      return {
+        [`${this.bgColor}--bg`]: this.bgColor,
+        [this.color]: this.color && !item.disabled && !(this.activeClass && item.active),
+        [`w-tabs__bar-item--active ${this.activeClass}`]: item.active,
+        'w-tabs__bar-item--disabled': item.disabled,
+        [this.titleClass]: this.titleClass
+      }
+    },
     openTab (item) {
       item.active = true
+      this.$nextTick(() => {
+        this.activeTabEl = this.$refs['tabs-bar'].querySelector('.w-tabs__bar-item--active')
+        this.updateSlider()
+      })
+
+      // Unset active on other tabs.
       this.tabsItems.forEach(obj => obj.index !== item.index && (obj.active = false))
       this.$emit('input', this.tabsItems.map(item => item.active))
+    },
+
+    updateSlider () {
+      if (!this.fillBar && this.activeTabEl) {
+        const { left, width } = this.activeTabEl.getBoundingClientRect()
+        const { left: parentLeft } = this.activeTabEl.parentNode.getBoundingClientRect()
+        this.slider.left = `${left - parentLeft + this.activeTabEl.parentNode.scrollLeft}px`
+        this.slider.width = `${width}px`
+      }
+      else {
+        this.slider.left = `${this.activeTab.index * 100 / this.tabsItems.length}%`,
+        this.slider.width = `${100 / this.tabsItems.length}%`
+      }
     }
+  },
+
+  beforeMount () {
+    this.$nextTick(() => {
+      this.activeTabEl = this.$refs['tabs-bar'].querySelector('.w-tabs__bar-item--active')
+      this.updateSlider()
+      // Disable the slider transition while loading.
+      setTimeout(() => (this.init = false), 0) // Next tick is not sufficient here.
+    })
   },
 
   watch: {
@@ -95,29 +148,34 @@ export default {
 .w-tabs {
   z-index: 1;
   border-radius: $border-radius;
+  border: $border;
 
   &--tile {border-radius: 0;}
   &--shadow {box-shadow: $box-shadow;}
-  &:not(&--no-border):not(&--shadow) {border: $border;}
+  &--no-border, &--shadow {border: none;}
 
   &__bar {
+    position: relative;
     display: flex;
     align-items: center;
-    padding: 0 (2 * $base-increment);
   }
 
+  // Bar item.
+  // ------------------------------------------------------
   &__bar-item {
     position: relative;
     display: flex;
     align-items: center;
-    padding: (2 * $base-increment) 0;
-    text-align: center;
+    padding: (2 * $base-increment) (3 * $base-increment);
+    justify-content: center;
     font-size: round(1.2 * $base-font-size);
-    padding: 1 * $base-increment;
+    transition: $transition-duration ease-in-out;
     user-select: none;
     cursor: pointer;
 
-    .w-tabs__item--disabled & {
+    .w-tabs--fill-bar & {flex-grow: 1;flex-basis: 0;}
+
+    &--disabled {
       cursor: not-allowed;
       opacity: 0.6;
     }
@@ -134,14 +192,27 @@ export default {
       transition: $fast-transition-duration;
     }
 
-    &:focus:before, &:hover:before {opacity: 0.03;}
-    &--active:before, &:active:before {opacity: 0.05;}
-    .w-tabs__item--disabled &:before {display: none;}
+    &--active:before, &:focus:before, &:hover:before {opacity: 0.05;}
+    &:active:before {opacity: 0.08;}
+    &--disabled:before {display: none;}
   }
 
+  // Slider.
+  // ------------------------------------------------------
+  &__slider {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: $transition-duration ease-in-out;
+  }
+  &--init &__slider {transition: none;}
+
+  // Content.
+  // ------------------------------------------------------
   &__content {
     position: relative;
-    padding: 2 * $base-increment;
+    padding: 3 * $base-increment;
   }
 }
 </style>
