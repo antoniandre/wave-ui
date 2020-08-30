@@ -30,14 +30,14 @@ div
     w-flex(align-center)
       w-button(@click="showBadge--" icon="wi-minus" bg-color="success" sm)
       w-badge.mx6(v-model="showBadge" bg-color="error" overlap)
-        w-icon(color="grey-light1" size="2.5em") mdi mdi-email
+        w-icon(color="grey-light1" size="2.4em") mdi mdi-email
       w-button(@click="showBadge++" icon="wi-plus" bg-color="success" sm)
     template(#pug).
       w-flex(align-center)
         w-button(@click="showBadge--" icon="wi-minus" bg-color="success" sm)
 
         w-badge.mx6(v-model="showBadge" bg-color="error" overlap)
-          w-icon(color="grey-light1" size="2.5em") mdi mdi-email
+          w-icon(color="grey-light1" size="2.4em") mdi mdi-email
 
         w-button(@click="showBadge++" icon="wi-plus" bg-color="success" sm)
     template(#js).
