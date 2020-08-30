@@ -165,7 +165,7 @@ div.ovh
     or a number of pixels (without unit).
 
   example(content-class="pa0")
-    w-toolbar.py0(bg-color="blue-light5" color="blue-dark3" height="5em")
+    w-toolbar.py0(bg-color="blue-light5" color="blue-dark3" height="5.4em")
       .title2.my0 Title
       .spacer
       span.mx1 Item 1

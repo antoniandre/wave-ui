@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div.layout-flex-demo
   title-link.mt4(h1) Flex layout classes
 
   title-link(h2 slug="w-flex-component-and-helper-classes") #[span.code w-flex] component &amp; helper classes
@@ -440,16 +440,18 @@ div
 </template>
 
 <style lang="scss">
-.box {
-  background-color: #9bbff9;
-  border: 1px solid #55f;
-  padding: 12px;
-}
+.layout-flex-demo {
+  .box {
+    background-color: #9bbff9;
+    border: 1px solid #55f;
+    padding: 12px;
+  }
 
-.wrapper, .wrapper2 {
-  background-color: #eef7ff;
-  padding: 12px;
-  height: 140px;
+  .wrapper, .wrapper2 {
+    background-color: #eef7ff;
+    padding: 12px;
+    height: 140px;
+  }
+  .wrapper2 {height: 100px;}
 }
-.wrapper2 {height: 100px;}
 </style>

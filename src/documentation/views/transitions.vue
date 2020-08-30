@@ -337,7 +337,7 @@ div.ovh
       w-button.mb2(@click="showCard = !showCard") {{ showCard ? 'Hide' : 'Show' }} Card
       w-transition-slide(left)
         w-card.primary-light3--bg.white(v-if="showCard")
-          .title3 A sliding card.
+          .title3.mb0 A sliding card.
     template(#html).
       &lt;div style="height: 90px"&gt;
         &lt;w-button class="mb2" @click="showCard = !showCard"&gt;
