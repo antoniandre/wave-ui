@@ -30,11 +30,14 @@ div
 
           &lt;w-button type="submit"&gt;Submit&lt;/w-button&gt;
         &lt;/w-form&gt;
-    li.mt6 Let the #[span.code w-form] component do the rest. But you might want more options, discover them in the examples bellow.
+    li.mt6.
+      Let the #[span.code w-form] component do the rest. But you might want more options, discover
+      them in the examples bellow.
 
   title-link(h2) Basic validation
   p.
-    In this example and by default, the fields are validated on keyup, on blur, and on submit.#[br]
+    In this example and by default, the fields are validated on #[span.code keyup], on #[span.code blur],
+    and on #[span.code submit].#[br]
     The v-model on the #[span.code w-form] gets updated with the form status.
   example
     w-form(v-model="form1.valid")
@@ -100,8 +103,9 @@ div
 
   title-link(h2) Validate on submit, on blur, on keyup
   p.
-    By default the validation happens on keyup, on blur and on submit. You can disable the
-    keyup and blur validations with #[code no-keyup-validation] and #[code no-blur-validation].
+    By default the validation happens on #[span.code keyup], on #[span.code blur] and on
+    #[span.code submit]. You can disable the #[span.code keyup] and #[span.code blur] validations
+    with #[code no-keyup-validation] and #[code no-blur-validation].
   example
     w-form(no-keyup-validation no-blur-validation)
       w-input(label="First name" :validators="[validators.required]")
@@ -153,7 +157,7 @@ div
     li.mt1 #[code before-validate] is always fired as soon as a submission is attempted (e.g. submit button click), prior validation.
     li.mt1 #[code validate] is always fired as soon as a submission is attempted, after validation.
     li.mt1.
-        #[code success] is fired after submission when the validation is successfull.
+        #[code success] is fired after submission when the validation is successful.
         You should send the data to the server from this hook.
     li.mt1.
         #[code error] is fired after submission when the validation is failing.

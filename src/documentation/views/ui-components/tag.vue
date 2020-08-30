@@ -53,7 +53,7 @@ div
       p.my4 You can also put a custom size using the width and height props.
       w-tag(outline color="primary" xl width="10em" height="3em") a bigger tag
 
-  title-link(h2) Togglable state &amp; closable
+  title-link(h2) Toggleable state &amp; closable
   p.
     When a tag has a #[code v-model] or #[code value], it becomes clickable and its #[code v-model]
     value is updated when user clicks on it.

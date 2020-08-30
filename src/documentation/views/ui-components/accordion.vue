@@ -6,7 +6,7 @@ div
   w-accordion.white--bg(:items="items")
   p.grey-light2.my4.
     Now that you've seen the default accordion in real context, all the examples of this page will have a
-    light blue background and accordions a white background to help vizualize where they end.
+    light blue background and accordions a white background to help visualize where they end.
 
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(v-model="accordion1" :items="items")
