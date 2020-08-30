@@ -51,11 +51,8 @@ export default {
     expandIconRight: { type: Boolean },
     expandSingle: { type: Boolean },
     collapseIcon: { type: String },
-    shadow: { type: Boolean },
+    shadow: { type: Boolean }
   },
-
-  data: () => ({
-  }),
 
   computed: {
     accordionItems () {
