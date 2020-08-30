@@ -131,8 +131,8 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 
 // Bounce.
 // --------------------------------------------------------
-.bounce-enter-active {animation: w-bounce ($transition-duration + 0.1s);}
-.bounce-leave-active {animation: w-bounce ($transition-duration + 0.1s) reverse;}
+.bounce-enter-active {animation: w-bounce ($transition-duration + 0.05s);}
+.bounce-leave-active {animation: w-bounce ($transition-duration + 0.05s) reverse;}
 @keyframes w-bounce {
   0% {transform: scale(0.7);opacity: 0;}
   60% {transform: scale(1.1);opacity: 1;}

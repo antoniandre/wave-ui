@@ -146,6 +146,11 @@ export default {
 <style lang="scss">
 .page--colors {
   .horizontal {overflow-x: auto;overflow-y: hidden;}
+  .color {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .color-palette {
@@ -159,6 +164,7 @@ export default {
 
   .color {
     display: flex;
+
     .horizontal & {
       flex-direction: column;
       justify-content: center;
