@@ -11,17 +11,19 @@
           slot(
             v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
             :name="`item-title.${item.id || i + 1}`"
-            :item="item")
-          slot(v-else name="item-title" :item="item")
+            :item="item"
+            :index="item.index")
+          slot(v-else name="item-title" :item="item" :index="item.index")
             div(v-html="item.title")
-      .w-tabs__slider(:class="sliderColor" :style="sliderStyles")
+      .w-tabs__slider(v-if="!noSlider" :class="sliderColor" :style="sliderStyles")
     transition(:name="transition" mode="out-in")
-      .w-tabs__content(v-if="activeTab" :class="contentClass")
+      .w-tabs__content(v-if="activeTab" :class="contentClass" :key="activeTab.index")
         slot(
           v-if="$scopedSlots[`item-content.${activeTab.id || activeTab.index + 1}`]"
           :name="`item-content.${activeTab.id || activeTab.index + 1}`"
-          :item="activeTab")
-        slot(v-else name="item-content" :item="activeTab")
+          :item="activeTab"
+          :index="activeTab.index")
+        slot(v-else name="item-content" :item="activeTab" :index="activeTab.index")
           div(v-html="activeTab.content")
 </template>
 
@@ -37,6 +39,7 @@ export default {
     items: { type: [Array, Number] },
     titleClass: { type: String },
     activeClass: { type: String, default: 'primary' },
+    noSlider: { type: Boolean },
     sliderColor: { type: String, default: 'primary' },
     contentClass: { type: String },
     transition: { type: String, default: 'fade' },
@@ -68,7 +71,8 @@ export default {
       let activeTab = this.tabsItems.find(item => item.active)
       if (!activeTab) {
         activeTab = this.tabsItems.find(item => !item.disabled)
-        activeTab.active = true
+        if (activeTab) activeTab.active = true
+        else activeTab = {}
       }
       return activeTab
     },
@@ -76,6 +80,7 @@ export default {
     tabsClasses () {
       return {
         'w-tabs--shadow': this.shadow,
+        'w-tabs--no-slider': this.noSlider,
         'w-tabs--fill-bar': this.fillBar,
         'w-tabs--init': this.init
       }
@@ -90,6 +95,9 @@ export default {
   },
 
   methods: {
+    onResize () {
+      this.updateSlider(false)
+    },
     barItemClasses (item) {
       return {
         [`${this.bgColor}--bg`]: this.bgColor,
@@ -101,17 +109,17 @@ export default {
     },
     openTab (item) {
       item.active = true
-      this.$nextTick(() => {
-        this.activeTabEl = this.$refs['tabs-bar'].querySelector('.w-tabs__bar-item--active')
-        this.updateSlider()
-      })
-
       // Unset active on other tabs.
       this.tabsItems.forEach(obj => obj.index !== item.index && (obj.active = false))
       this.$emit('input', this.tabsItems.map(item => item.active))
+
+      if (!this.noSlider) this.$nextTick(this.updateSlider)
     },
 
-    updateSlider () {
+    updateSlider (domLookup = true) {
+      if (domLookup) {
+        this.activeTabEl = this.$refs['tabs-bar'].querySelector('.w-tabs__bar-item--active')
+      }
       if (!this.fillBar && this.activeTabEl) {
         const { left, width } = this.activeTabEl.getBoundingClientRect()
         const { left: parentLeft } = this.activeTabEl.parentNode.getBoundingClientRect()
@@ -127,11 +135,16 @@ export default {
 
   beforeMount () {
     this.$nextTick(() => {
-      this.activeTabEl = this.$refs['tabs-bar'].querySelector('.w-tabs__bar-item--active')
       this.updateSlider()
       // Disable the slider transition while loading.
       setTimeout(() => (this.init = false), 0) // Next tick is not sufficient here.
     })
+
+    if (!this.noSlider) window.addEventListener('resize', this.onResize)
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('resize', this.onResize)
   },
 
   watch: {
@@ -139,6 +152,19 @@ export default {
       this.tabsItems.forEach((item, i) => {
         this.$set(item, 'active', (Array.isArray(array) && array[i]) || false)
       })
+    },
+    items () {
+      if (!this.noSlider) this.$nextTick(this.updateSlider)
+    },
+    fillBar () {
+      if (!this.noSlider) this.$nextTick(this.updateSlider)
+    },
+    noSlider (value) {
+      if (!value) {
+        this.updateSlider()
+        window.addEventListener('resize', this.onResize)
+      }
+      else window.removeEventListener('resize', this.onResize)
     }
   }
 }
@@ -149,6 +175,7 @@ export default {
   z-index: 1;
   border-radius: $border-radius;
   border: $border;
+  overflow: hidden;
 
   &--tile {border-radius: 0;}
   &--shadow {box-shadow: $box-shadow;}
@@ -169,7 +196,7 @@ export default {
     padding: (2 * $base-increment) (3 * $base-increment);
     justify-content: center;
     font-size: round(1.2 * $base-font-size);
-    transition: $transition-duration ease-in-out;
+    transition: $transition-duration ease-in-out, flex-grow 0s;
     user-select: none;
     cursor: pointer;
 
