@@ -223,7 +223,8 @@ div
           { label: 'slide-fade-right' },
           { label: 'scale' },
           { label: 'scale-fade' },
-          { label: 'bounce' }
+          { label: 'bounce' },
+          { label: 'none', value: '' }
         ],
         transitionsForFullscreen: [
           { label: 'slide-up' },
@@ -319,7 +320,8 @@ export default {
       { label: 'slide-fade-right' },
       { label: 'scale' },
       { label: 'scale-fade' },
-      { label: 'bounce' }
+      { label: 'bounce' },
+      { label: 'none', value: '' }
     ],
     transitionsForFullscreen: [
       { label: 'slide-up' },
