@@ -15,7 +15,7 @@
             :index="item.index")
           slot(v-else name="item-title" :item="item" :index="item.index")
             div(v-html="item.title")
-      .w-tabs__slider(v-if="!noSlider" :class="sliderColor" :style="sliderStyles")
+      .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
     transition(:name="transition" mode="out-in")
       .w-tabs__content(v-if="activeTab" :class="contentClass" :key="activeTab.index")
         slot(
@@ -44,7 +44,7 @@ export default {
     contentClass: { type: String },
     transition: { type: String, default: 'fade' },
     fillBar: { type: Boolean },
-    shadow: { type: Boolean }
+    card: { type: Boolean }
   },
 
   data: () => ({
@@ -79,7 +79,7 @@ export default {
 
     tabsClasses () {
       return {
-        'w-tabs--shadow': this.shadow,
+        'w-tabs--card': this.card,
         'w-tabs--no-slider': this.noSlider,
         'w-tabs--fill-bar': this.fillBar,
         'w-tabs--init': this.init
@@ -178,13 +178,22 @@ export default {
   overflow: hidden;
 
   &--tile {border-radius: 0;}
-  &--shadow {box-shadow: $box-shadow;}
+  &--card {border: none;}
   &--no-border, &--shadow {border: none;}
 
   &__bar {
     position: relative;
     display: flex;
     align-items: center;
+
+    // .w-tabs--card & {border-bottom: $border;}
+    .w-tabs--card &:after {
+      content: '';
+      display: flex;
+      flex-grow: 1;
+      border-bottom: $border;
+      align-self: flex-end;
+    }
   }
 
   // Bar item.
@@ -201,6 +210,12 @@ export default {
     cursor: pointer;
 
     .w-tabs--fill-bar & {flex-grow: 1;flex-basis: 0;}
+    .w-tabs--card & {
+      border: $border;
+      border-radius: $border-radius $border-radius 0 0;
+      margin-right: -1px;
+    }
+    .w-tabs--card &--active {border-bottom-color: transparent;}
 
     &--disabled {
       cursor: not-allowed;
@@ -240,6 +255,12 @@ export default {
   &__content {
     position: relative;
     padding: 3 * $base-increment;
+
+    .w-tabs--card & {
+      border: $border;
+      border-top: none;
+      border-radius: 0 0 $border-radius $border-radius;
+    }
   }
 }
 </style>
