@@ -108,6 +108,7 @@ div.nav-menu {
   min-width: 180px;
   max-width: 260px;
   border-right: 1px solid #ddd;
+  overflow: auto;
 
   .w-list__item-label {
     padding: 6px;
@@ -131,12 +132,24 @@ div.nav-menu {
   .w-tag {line-height: 1;padding: 2px 4px;}
 }
 
+.content-wrap > .nav-menu {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  bottom: 16px;
+  padding-top: 24px;
+
+  &--fixed {
+    position: fixed;
+    top: 30px;
+  }
+}
+
 .nav-drawer .nav-menu {
   max-width: unset;
-  padding-top: 3em;
+  padding: 3em 0 16px;
   margin-left: 12px;
   border-right: none;
-  overflow: auto;
 
   .close {
     position: absolute;

@@ -7,7 +7,11 @@ w-app.fill-height.w-flex.column
   .content-wrap.w-flex.no-shrink(:class="`page--${$route.name}`")
     transition(name="fade")
       w-progress(v-if="loading" color="primary" tile absolute)
-    nav-menu.navigation.no-shrink.mt6(v-if="!isMobile" :drawer-open.sync="drawerOpen")
+    nav-menu.navigation.no-shrink(
+      v-if="!isMobile"
+      ref="nav-menu"
+      :class="{ 'nav-menu--fixed': fixNavMenu }"
+      :drawer-open.sync="drawerOpen")
     transition(name="fade-page" mode="out-in")
       router-view.main-content.grow
 
@@ -57,7 +61,11 @@ Vue.component('alert', Alert)
 export default {
   components: { Toolbar, NavMenu },
   data: () => ({
-    drawerOpen: false
+    drawerOpen: false,
+    fixNavMenu: false,
+    navMenuTop: 0,
+    wAppEl: null,
+    contentWrapEl: null
   }),
 
   computed: {
@@ -68,6 +76,28 @@ export default {
     isMobile () {
       return this.$waveui.breakpoint.xs
     }
+  },
+
+  methods: {
+    onScroll () {
+      this.fixNavMenu = this.wAppEl.scrollTop >= this.navMenuTop
+    },
+    onResize () {
+      this.navMenuTop = this.contentWrapEl.offsetTop - 12
+    }
+  },
+
+  beforeDestroy () {
+    this.wAppEl.removeEventListener('scroll', this.onScroll)
+    window.removeEventListener('resize', this.onResize)
+  },
+
+  mounted () {
+    this.contentWrapEl = document.querySelector('.content-wrap')
+    this.navMenuTop = this.contentWrapEl.offsetTop - 12
+    this.wAppEl = document.querySelector('.w-app')
+    this.wAppEl.addEventListener('scroll', this.onScroll)
+    window.addEventListener('resize', this.onResize)
   }
 }
 </script>
