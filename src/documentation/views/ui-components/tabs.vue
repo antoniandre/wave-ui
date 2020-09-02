@@ -47,11 +47,15 @@ div
     w-flex.mb3(align-center)
       | Number of tabs:
       w-button.mx2(icon="wi-minus" sm @click="tabs3.tabsCount -= tabs3.tabsCount < 1 ? 0 : 1")
-      | {{ tabs3.tabsCount }}
+      code {{ tabs3.tabsCount }}
       w-button.mx2(icon="wi-plus" sm @click="tabs3.tabsCount++")
     w-tabs(:items="tabs3.tabsCount")
       template(#item-title="{ index }") Tab {{ index }}
       template(#item-content) Content
+
+  title-link(h2) Card style tabs
+  example
+    w-tabs(:items="tabs1" card)
 </template>
 
 <script>
