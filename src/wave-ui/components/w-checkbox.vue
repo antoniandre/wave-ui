@@ -22,9 +22,9 @@
       label.w-checkbox__label.w-form-el-shakable.pr2(v-if="$slots.default" :for="`w-checkbox--${_uid}`")
         slot
       label.w-checkbox__label.w-form-el-shakable.pr2(v-else-if="label" :for="`w-checkbox--${_uid}`" v-html="label")
-    .w-checkbox__input(
-      @click="$refs.input.focus();$refs.input.click()"
-      :class="this.color")
+    .w-checkbox__input(@click="$refs.input.focus();$refs.input.click()" :class="this.color")
+      svg(width="11px" height="9px" viewbox="0 0 12 9")
+        polyline(points="1 5 4 8 10 2")
     template(v-if="hasLabel && !labelOnLeft")
       label.w-checkbox__label.w-form-el-shakable.pl2(v-if="$slots.default" :for="`w-checkbox--${_uid}`")
         slot
@@ -135,16 +135,49 @@ $inactive-color: #666;
   // The fake checkbox to substitute.
   &__input {
     position: relative;
-    border-radius: $border-radius;
     width: $size;
     height: $size;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
     justify-content: center;
-    border: $outline-width solid $inactive-color;
-    transition: $transition-duration ease-in-out;
     cursor: inherit;
+    z-index: 0;
+  }
+
+  // The checkmark - visible when checked.
+  &__input svg {
+    width: auto;
+    height: auto;
+    fill: none;
+    stroke-width: 2;
+    stroke: white;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 16px;
+    stroke-dashoffset: 16px;
+    transition: $transition-duration ease-out;
+    opacity: 0;
+    position: relative;
+    top: -0.5px; // For browser zoom levels.
+    z-index: 1;
+
+    :checked ~ & {
+      opacity: 1;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 0.5s 0.1s, opacity 0s;
+    }
+
+    .w-checkbox--indeterminate & {opacity: 0;}
+  }
+  &__input:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: $outline-width solid $inactive-color;
+    border-radius: $border-radius;
+    transition: $transition-duration ease-in-out;
 
     .w-checkbox--round & {border-radius: 100%;}
     .w-checkbox--disabled & {border-color: $disabled-color;}
@@ -161,44 +194,9 @@ $inactive-color: #666;
       // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: $disabled-color;
     }
-  }
-
-  // The checkmark - visible when checked.
-  &__input:after {
-    content: '';
-    position: absolute;
-    // left: round(-$size / 8);
-    // top: round(-$size / 2.75);
-    left: -5px;
-    bottom: -1px;
-    width: round($size / 4);
-    height: round($size / 2);
-    border: solid transparent;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg) scale(0);
-    transform-origin: 0 100%;
-    opacity: 0;
-    transition: $transition-duration;
-
-    .w-checkbox--indeterminate & {
-      border-right: none;
-      width: round($size / 2);
-      transform: scale(0) translateX(-50%);
-      left: 50%;
-    }
-
-    // When checked.
-    :checked ~ & {
-      opacity: 1;
-      transform: rotate(45deg) scale(1);
-      transition: $transition-duration 0.15s cubic-bezier(0.42, 0.96, 1, 1.38);
-      animation: w-checkbox-checkmark 0.45s 0.15s forwards ease-out;
-      border-color: #fff;
-    }
     .w-checkbox--indeterminate :checked ~ & {
-      transform: scale(1) translateX(-50%);
-      animation: none;
-      transition: $transition-duration 0.15s cubic-bezier(0.42, 0.96, 1, 1.38);
+      border-width: (($size / 2) - 1px) 3px;
+      background-color: white;
     }
   }
 
@@ -247,11 +245,5 @@ $inactive-color: #666;
 @keyframes w-checkbox-ripple {
   0% {opacity: 0.8;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
   100% {opacity: 0;transform: scale(2.8);} // Propagate ripple to max radius and fade out.
-}
-
-@keyframes w-checkbox-checkmark {
-  0% {width: 0;height: 0;}
-  25% {width: round($size / 6);height: 0;}
-  100% {height: round($size / 2);}
 }
 </style>
