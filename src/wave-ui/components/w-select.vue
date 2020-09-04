@@ -180,7 +180,7 @@ $size: round(2 * $base-font-size);
   }
 
   &__selection-wrap--round {
-    border-radius: 5em;
+    border-radius: 9em;
     padding-left: 3 * $base-increment;
     padding-right: 3 * $base-increment;
   }
@@ -212,7 +212,7 @@ $size: round(2 * $base-font-size);
 
   // &__selection-wrap--box {}
 
-  &__selection-wrap--round {border-radius: 5em;}
+  &__selection-wrap--round {border-radius: 9em;}
   &__selection-wrap--tile {border-radius: initial;}
   &__selection-wrap--shadow {box-shadow: $box-shadow;}
 
@@ -234,7 +234,7 @@ $size: round(2 * $base-font-size);
 
   &--focused &__selection-wrap--underline:after {width: 100%;}
   &__selection-wrap--round.w-selection__selection-wrap--underline:after {
-    border-radius: 5em;
+    border-radius: 9em;
     transition: $transition-duration, height 0.035s;
   }
   &--focused &__selection-wrap--round.w-selection__selection-wrap--underline:after {

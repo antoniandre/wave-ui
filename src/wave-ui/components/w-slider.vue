@@ -281,7 +281,7 @@ export default {
       width: $base-increment;
       height: $base-increment;
       background-color: rgba(0, 0, 0, 0.2);
-      border-radius: 5em;
+      border-radius: 9em;
       // box-shadow: 0 0 0 1px #fff;
       box-sizing: border-box;
       pointer-events: none;
@@ -359,7 +359,7 @@ export default {
     width: 100%;
     height: 100%;
     border: none;
-    border-radius: 5em;
+    border-radius: 9em;
     cursor: pointer;
     background-color: #fff;
 
@@ -429,7 +429,7 @@ export default {
 
     &--droplet {
       transform: translateX(-50%) rotate(-45deg);
-      border-radius: 5em 5em 5em 0;
+      border-radius: 9em 9em 9em 0;
       width: 2.8em;
       height: 2.8em;
 

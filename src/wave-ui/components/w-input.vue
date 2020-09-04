@@ -208,7 +208,7 @@ $inactive-color: #777;
 
   // &__input-wrap--box {}
 
-  &__input-wrap--round {border-radius: 5em;}
+  &__input-wrap--round {border-radius: 9em;}
   &__input-wrap--tile {border-radius: initial;}
   &__input-wrap--shadow {box-shadow: $box-shadow;}
 
@@ -230,7 +230,7 @@ $inactive-color: #777;
 
   &--focused &__input-wrap--underline:after {width: 100%;}
   &__input-wrap--round.w-input__input-wrap--underline:after {
-    border-radius: 5em;
+    border-radius: 9em;
     transition: $transition-duration, height 0.035s;
   }
   &--focused &__input-wrap--round.w-input__input-wrap--underline:after {
