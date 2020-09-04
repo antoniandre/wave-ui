@@ -16,15 +16,16 @@
           slot(v-else name="item-title" :item="item" :index="item.index")
             div(v-html="item.title")
       .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
-    transition(:name="transition" mode="out-in")
-      .w-tabs__content(v-if="activeTab" :class="contentClass" :key="activeTab.index")
-        slot(
-          v-if="$scopedSlots[`item-content.${activeTab.id || activeTab.index + 1}`]"
-          :name="`item-content.${activeTab.id || activeTab.index + 1}`"
-          :item="activeTab"
-          :index="activeTab.index")
-        slot(v-else name="item-content" :item="activeTab" :index="activeTab.index")
-          div(v-html="activeTab.content")
+    .w-tabs__content(:class="contentClass")
+      transition(:name="transition" mode="out-in")
+        div(v-if="activeTab" :key="activeTab.index")
+          slot(
+            v-if="$scopedSlots[`item-content.${activeTab.id || activeTab.index + 1}`]"
+            :name="`item-content.${activeTab.id || activeTab.index + 1}`"
+            :item="activeTab"
+            :index="activeTab.index")
+          slot(v-else name="item-content" :item="activeTab" :index="activeTab.index")
+            div(v-html="activeTab.content")
 </template>
 
 <script>
