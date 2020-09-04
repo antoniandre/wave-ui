@@ -12,6 +12,8 @@ p {margin-bottom: 2 * $base-increment;}
   overflow: hidden;
   margin: -16px;
   padding: 16px;
+
+  .nav-menu + & {margin-left: 0;}
 }
 
 .w-app .content-wrap {padding-left: 276px;}

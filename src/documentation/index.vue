@@ -12,34 +12,35 @@ w-app.fill-height.w-flex.column
       ref="nav-menu"
       :class="{ 'nav-menu--fixed': fixNavMenu }"
       :drawer-open.sync="drawerOpen")
-    transition(name="fade-page" mode="out-in")
-      router-view.main-content.grow
+    .main-content.w-flex.column.grow
+      transition(name="fade-page" mode="out-in")
+        router-view.grow
 
-  footer.pa3.w-flex.justify-end.align-center.no-grow.wrap
-    small.grey-light2.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
-    .spacer
-    .caption
-      | Made with
-      w-tooltip(top)
-        template(#activator="{ on }")
-          w-icon.ml1(v-on="on" sm) mdi mdi-vuejs
-        | Vue.js
-      w-tooltip(top)
-        template(#activator="{ on }")
-          w-icon.ml1(v-on="on" sm) mdi mdi-language-css3
-        | CSS 3
-      w-tooltip(top)
-        template(#activator="{ on }")
-          w-icon.ml1(v-on="on" sm) mdi mdi-language-html5
-        span.text-nowrap Html 5 &amp; Pug
-      w-tooltip(top)
-        template(#activator="{ on }")
-          w-icon.ml1(v-on="on" sm) mdi mdi-sass
-        | Sass
-      w-tooltip(top)
-        template(#activator="{ on }")
-          w-icon.ml1.heart(v-on="on" sm) mdi mdi-heart
-        | Love
+      footer.w-flex.justify-end.align-center.no-grow.wrap
+        small.grey-light2.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
+        .spacer
+        .caption
+          | Made with
+          w-tooltip(top)
+            template(#activator="{ on }")
+              w-icon.ml1(v-on="on" sm) mdi mdi-vuejs
+            | Vue.js
+          w-tooltip(top)
+            template(#activator="{ on }")
+              w-icon.ml1(v-on="on" sm) mdi mdi-language-css3
+            | CSS 3
+          w-tooltip(top)
+            template(#activator="{ on }")
+              w-icon.ml1(v-on="on" sm) mdi mdi-language-html5
+            span.text-nowrap Html 5 &amp; Pug
+          w-tooltip(top)
+            template(#activator="{ on }")
+              w-icon.ml1(v-on="on" sm) mdi mdi-sass
+            | Sass
+          w-tooltip(top)
+            template(#activator="{ on }")
+              w-icon.ml1.heart(v-on="on" sm) mdi mdi-heart
+            | Love
 </template>
 
 <script>
@@ -105,8 +106,14 @@ export default {
 <style lang="scss">
 .nav-menu ~ .main-content {padding-left: 4em;}
 
-footer .heart:hover {animation: heartbeat 1s infinite;}
-footer small {font-size: 10px;}
+footer {
+  margin-top: 5em;
+
+  .nav-drawer ~ & {padding-left: 12px;}
+
+  .heart:hover {animation: heartbeat 1s infinite;}
+  small {font-size: 10px;}
+}
 
 @keyframes heartbeat {
   0%, 30%, 60%, 100% {transform: scale(1);}
