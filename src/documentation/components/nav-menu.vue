@@ -142,6 +142,8 @@ div.nav-menu {
   &--fixed {
     position: fixed;
     top: 30px;
+    bottom: 0;
+    padding-bottom: 24px;
   }
 }
 
