@@ -312,7 +312,7 @@ export default {
 
   &--tile {border-radius: 0;}
   &--round {
-    border-radius: 5em;
+    border-radius: 9em;
     padding: $base-increment round(2.5 * $base-increment);
   }
   &--shadow {box-shadow: $box-shadow;}
