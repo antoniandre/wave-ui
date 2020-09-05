@@ -9,6 +9,7 @@ div
     w-textarea Textarea label
     w-textarea.mt4(placeholder="Textarea Placeholder")
     template(#pug).
+      w-textarea Textarea label
       w-textarea.mt4(placeholder="Textarea Placeholder")
 
   title-link(h2) No autogrow &amp; resizable
@@ -16,6 +17,7 @@ div
     w-textarea(no-autogrow rows="6") Textarea label
     w-textarea.mt4(no-autogrow resizable rows="6") Textarea label
     template(#pug).
+      w-textarea(no-autogrow rows="6") Textarea label
       w-textarea.mt4(no-autogrow resizable rows="6") Textarea label
 
   title-link(h2) Outline
@@ -27,18 +29,18 @@ div
   title-link(h2) Shadow
   example
     w-textarea(shadow) Textarea label
-    w-textarea(outline shadow) Textarea label
+    w-textarea.mt4(outline shadow) Textarea label
     template(#pug).
       w-textarea(shadow) Textarea label
-      w-textarea(outline shadow) Textarea label
+      w-textarea.mt4(outline shadow) Textarea label
 
   title-link(h2) Tile
   example
     w-textarea(tile) Textarea label
-    w-textarea(outline tile) Textarea label
+    w-textarea.mt4(outline tile) Textarea label
     template(#pug).
       w-textarea(tile) Textarea label
-      w-textarea(outline tile) Textarea label
+      w-textarea.mt4(outline tile) Textarea label
 
   title-link(h2) Colors
   p.mb4.
@@ -47,14 +49,14 @@ div
     By default, the text has the "#[span.code primary]" color.
   example
     w-textarea(color="blue") Textarea label
-    w-textarea(outline color="blue") Textarea label
-    w-textarea(bg-color="blue-light5" color="blue-dark3") Textarea label
-    w-textarea(outline bg-color="blue-light5" color="blue-dark3") Textarea label
+    w-textarea.mt4(outline color="blue") Textarea label
+    w-textarea.mt4(bg-color="blue-light5" color="blue-dark3") Textarea label
+    w-textarea.mt4(outline bg-color="blue-light5" color="blue-dark3") Textarea label
     template(#pug).
       w-textarea(color="blue") Textarea label
-      w-textarea(outline color="blue") Textarea label
-      w-textarea(bg-color="blue-light5" color="blue-dark3") Textarea label
-      w-textarea(outline bg-color="blue-light5" color="blue-dark3") Textarea label
+      w-textarea.mt4(outline color="blue") Textarea label
+      w-textarea.mt4(bg-color="blue-light5" color="blue-dark3") Textarea label
+      w-textarea.mt4(outline bg-color="blue-light5" color="blue-dark3") Textarea label
 
   title-link(h2) Label position
   p.
@@ -77,44 +79,44 @@ div
     there is also a prop for setting the label wish will grant more freedom.
 
   example
-    w-textarea.mb2(label-position="inside" outline)
+    w-textarea(label-position="inside" outline)
       w-icon.orange mdi mdi-arrow-right
       span.purple.mx1 Inside
       w-icon.orange mdi mdi-arrow-left
-    w-textarea.mb2(label-position="left" outline)
+    w-textarea.mt4(label-position="left" outline)
       span.green.mr1 Left
       w-icon.orange mdi mdi-arrow-right
-    w-textarea.mb2(label-position="right" outline)
+    w-textarea.mt4(label-position="right" outline)
       w-icon.orange mdi mdi-arrow-left
       span.red.ml1 Right
     template(#pug).
-      w-textarea.mb2(label-position="inside" outline)
+      w-textarea(label-position="inside" outline)
         w-icon.orange mdi mdi-arrow-right
         span.purple.mx1 Inside
         w-icon.orange mdi mdi-arrow-left
-      w-textarea.mb2(label-position="left" outline)
+      w-textarea.mt4(label-position="left" outline)
         span.green.mr1 Left
         w-icon.orange mdi mdi-arrow-right
-      w-textarea.mb2(label-position="right" outline)
+      w-textarea.mt4(label-position="right" outline)
         w-icon.orange mdi mdi-arrow-left
         span.red.ml1 Right
 
   title-link(h2) Inner icons
   example
     .title4.mb2 Label outside
-    w-textarea.mb2(label="Message" label-position="left" outline inner-icon-left="mdi mdi-email")
-    w-textarea.mb2(label="Message" label-position="right" outline inner-icon-right="mdi mdi-email")
+    w-textarea(label="Message" label-position="left" outline inner-icon-left="mdi mdi-email")
+    w-textarea.mt4(label="Message" label-position="right" outline inner-icon-right="mdi mdi-email")
     .title4.mt6.mb2 Label inside
-    w-textarea.mb2(label="Message" label-position="inside" outline inner-icon-left="mdi mdi-email")
-    w-textarea(label="Message" label-position="inside" outline inner-icon-right="mdi mdi-email")
+    w-textarea(label="Message" label-position="inside" outline inner-icon-left="mdi mdi-email")
+    w-textarea.mt4(label="Message" label-position="inside" outline inner-icon-right="mdi mdi-email")
     template(#pug).
       .title4.mb2 Label outside
-      w-textarea.mb2(label="Left" label-position="left" outline inner-icon-left="mdi mdi-email")
-      w-textarea.mb2(label="Right" label-position="right" outline inner-icon-right="mdi mdi-email")
+      w-textarea(label="Left" label-position="left" outline inner-icon-left="mdi mdi-email")
+      w-textarea.mt4(label="Right" label-position="right" outline inner-icon-right="mdi mdi-email")
 
       .title4.mt6.mb2 Label inside
-      w-textarea.mb2(label="Message" label-position="inside" outline inner-icon-left="mdi mdi-email")
-      w-textarea.mb2(label="Message" label-position="inside" outline inner-icon-right="mdi mdi-email")
+      w-textarea(label="Message" label-position="inside" outline inner-icon-left="mdi mdi-email")
+      w-textarea.mt4(label="Message" label-position="inside" outline inner-icon-right="mdi mdi-email")
 
   title-link(h2) Disabled &amp; readonly
   example
