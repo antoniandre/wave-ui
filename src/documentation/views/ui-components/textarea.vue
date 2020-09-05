@@ -4,14 +4,21 @@ div
     .code w-textarea
     w-tag.ml3(bg-color="orange" lg color="white") In Progress
 
-  title-link(h2)
+  title-link(h2) Basic
   example
-    w-textarea textarea
+    w-textarea Textarea label
+    w-textarea.mt3(placeholder="Textarea Placeholder")
     template(#pug).
 
-  title-link(h2)
+  title-link(h2) No autogrow
   example
-    w-textarea(no-autogrow rows="6") textarea
+    w-textarea(no-autogrow rows="6") Textarea label
+    w-textarea.mt3(no-autogrow resizable rows="6") Textarea label
+    template(#pug).
+
+  title-link(h2) Outline
+  example
+    w-textarea(outline) Textarea label
     template(#pug).
 </template>
 
@@ -20,7 +27,3 @@ export default {
 
 }
 </script>
-
-<style lang="scss">
-
-</style>
