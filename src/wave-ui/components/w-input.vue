@@ -21,6 +21,11 @@
           :for="`w-input--${_uid}`"
           @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
         input.w-input__input(
+          v-model="inputValue"
+          v-on="listeners"
+          @input="onInput"
+          @focus="onFocus"
+          @blur="onBlur"
           :id="`w-input--${_uid}`"
           :type="type"
           :name="inputName"
@@ -30,11 +35,6 @@
           :max="max || null"
           :minlength="minlength || null"
           :maxlength="maxlength || null"
-          v-model="inputValue"
-          v-on="listeners"
-          @input="onInput"
-          @focus="onFocus"
-          @blur="onBlur"
           :readonly="readonly"
           :disabled="disabled"
           :required="required")
@@ -126,7 +126,7 @@ export default {
         'w-input--filled': this.hasValue,
         'w-input--focused': this.isFocused,
         'w-input--dark': this.dark,
-        'w-input--floatting-label': this.hasLabel && this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
+        'w-input--floating-label': this.hasLabel && this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-input--has-placeholder': this.placeholder,
         'w-input--inner-icon-left': this.innerIconLeft,
@@ -196,7 +196,7 @@ $inactive-color: #777;
     transition: border $transition-duration;
   }
 
-  &--floatting-label &__input-wrap {
+  &--floating-label &__input-wrap {
     margin-top: 3 * $base-increment;
   }
 
@@ -322,31 +322,31 @@ $inactive-color: #777;
     .w-input--inner-icon-left & {left: 18px;}
     .w-input--no-padding.w-input--inner-icon-left & {left: 26px;}
 
-    .w-input--floatting-label & {
+    .w-input--floating-label & {
       transform-origin: 0 0;
       transition: $transition-duration ease;
     }
 
     // move label with underline style.
-    .w-input--focused.w-input--floatting-label &,
-    .w-input--filled.w-input--floatting-label &,
-    .w-input--has-placeholder.w-input--floatting-label & {
+    .w-input--focused.w-input--floating-label &,
+    .w-input--filled.w-input--floating-label &,
+    .w-input--has-placeholder.w-input--floating-label & {
       transform: translateY(-160%) scale(0.85);
     }
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
-    .w-input--floatting-label .w-input__input:-webkit-autofill & {
+    .w-input--floating-label .w-input__input:-webkit-autofill & {
       transform: translateY(-160%) scale(0.85);
     }
     // Move label with outline style or with shadow.
-    .w-input--focused.w-input--floatting-label .w-input__input-wrap--box &,
-    .w-input--filled.w-input--floatting-label .w-input__input-wrap--box &,
-    .w-input--has-placeholder.w-input--floatting-label .w-input__input-wrap--box & {
+    .w-input--focused.w-input--floating-label .w-input__input-wrap--box &,
+    .w-input--filled.w-input--floating-label .w-input__input-wrap--box &,
+    .w-input--has-placeholder.w-input--floating-label .w-input__input-wrap--box & {
       transform: translateY(-180%) scale(0.85);
     }
-    .w-input--focused.w-input--floatting-label.w-input--inner-icon-left &,
-    .w-input--filled.w-input--floatting-label.w-input--inner-icon-left & {left: 0;}
+    .w-input--focused.w-input--floating-label.w-input--inner-icon-left &,
+    .w-input--filled.w-input--floating-label.w-input--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
-    .w-input--floatting-label.w-input--inner-icon-left .w-input__input:-webkit-autofill & {left: 0;}
+    .w-input--floating-label.w-input--inner-icon-left .w-input__input:-webkit-autofill & {left: 0;}
 
     .w-input--focused & {color: currentColor;}
   }
