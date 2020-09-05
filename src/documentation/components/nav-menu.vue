@@ -81,7 +81,7 @@ export default {
           { label: 'Select', route: 'w-select', disabled: true },
           { label: 'Slider', route: 'w-slider' },
           { label: 'Switch', route: 'w-switch' },
-          { label: 'Textarea', route: 'w-textarea', disabled: true }
+          { label: 'Textarea', route: 'w-textarea', inProgress: true }
         ]
       }
     ],

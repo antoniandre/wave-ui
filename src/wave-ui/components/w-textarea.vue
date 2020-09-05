@@ -80,6 +80,7 @@ export default {
     round: { type: Boolean },
     shadow: { type: Boolean },
     noAutogrow: { type: Boolean },
+    resizable: { type: Boolean }, // Toggle the HTML built-in bottom right corner resize handle.
     tile: { type: Boolean },
     rows: { type: [String, Number], default: 3 },
     cols: { type: [String, Number] },
@@ -93,7 +94,7 @@ export default {
       // When autogrow, calculate the height from the number of carriage return & font size.
       height: null,
       lineHeight: null,
-      fontSize: null
+      paddingY: null
     }
   },
 
@@ -120,6 +121,7 @@ export default {
         'w-textarea--filled': this.hasValue,
         'w-textarea--focused': this.isFocused,
         'w-textarea--dark': this.dark,
+        'w-textarea--resizable': this.resizable,
         'w-textarea--floating-label': this.hasLabel && this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
         'w-textarea--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-textarea--has-placeholder': this.placeholder,
@@ -142,15 +144,17 @@ export default {
     },
 
     textareaStyles () {
+      if (this.noAutogrow || this.resizable) return {}
+
       return {
-        height: this.noAutogrow ? null : `${this.height}px`
+        height: this.height ? `${this.height}px` : null
       }
     }
   },
 
   methods: {
     onInput (e) {
-      this.computeHeight()
+      if (!this.noAutogrow && !this.resizable) this.computeHeight()
       this.$emit('input', this.inputValue)
     },
     onFocus (e) {
@@ -163,23 +167,28 @@ export default {
     },
     computeHeight () {
       const lines = (this.inputValue.match(/\n/g) || []).length + 1
-      this.height = Math.max(lines, this.rows) * this.lineHeight
+      this.height = Math.max(lines, this.rows) * this.lineHeight + this.paddingY
     },
     getLineHeight () {
       const computedStyles = window.getComputedStyle(this.$refs.textarea, null)
-      this.fontSize = parseFloat(computedStyles.getPropertyValue('fontSize'))
       this.lineHeight = parseFloat(computedStyles.getPropertyValue('line-height'))
+      this.paddingY = parseFloat(computedStyles.getPropertyValue('padding-top'))
+      this.paddingY += parseFloat(computedStyles.getPropertyValue('padding-bottom'))
     }
   },
 
   mounted () {
-    if (!this.noAutogrow) this.getLineHeight()
+    if (!this.noAutogrow && !this.resizable) this.getLineHeight()
   },
 
   watch: {
     value (value) {
       this.inputValue = value
       this.computeHeight()
+    },
+    resizable (value) {
+      if (value) this.height = null
+      else if (!this.noAutogrow) this.getLineHeight()
     },
     noAutogrow (value) {
       if (value) this.getLineHeight()
@@ -262,36 +271,34 @@ $inactive-color: #777;
   &__textarea {
     width: 100%;
     height: 100%;
-    font-size: inherit;
+    font: inherit;
     line-height: $line-height;
     color: inherit;
     background: none;
     border: none;
     outline: none;
-    padding-left: 2 * $base-increment;
-    padding-right: 2 * $base-increment;
-    resize: vertical;
+    padding: $base-increment (2 * $base-increment);
+    resize: none;
 
-    // For type="search" on Safari.
-    // -webkit-appearance: none;
-  }
+    .w-textarea--resizable & {resize: vertical;}
 
-  &--no-padding &__textarea {
-    padding-left: 0;
-    padding-right: 0;
-  }
+    .w-textarea--no-padding & {
+      padding-left: 0;
+      padding-right: 0;
+    }
 
-  &__textarea-wrap--round &__textarea {
-    padding-left: 3 * $base-increment;
-    padding-right: 3 * $base-increment;
-  }
+    .w-textarea__textarea-wrap--round & {
+      padding-left: 3 * $base-increment;
+      padding-right: 3 * $base-increment;
+    }
 
-  &--inner-icon-left &__textarea {padding-left: 27px;}
-  &--inner-icon-right &__textarea {padding-right: 27px;}
+    .w-textarea--inner-icon-left & {padding-left: 27px;}
+    .w-textarea--inner-icon-right & {padding-right: 27px;}
 
-  &--disabled &__textarea {
-    color: $disabled-color;
-    cursor: not-allowed;
+    .w-textarea--disabled & {
+      color: $disabled-color;
+      cursor: not-allowed;
+    }
   }
 
   &--disabled input::placeholder {color: inherit;}
@@ -324,10 +331,10 @@ $inactive-color: #777;
 
   &__label--inside {
     position: absolute;
-    top: 50%;
+    top: $base-increment;
     left: 0;
     padding-left: 2 * $base-increment;
-    transform: translateY(-50%);
+    transform: translateY(0%);
     pointer-events: none;
 
     .w-textarea--no-padding & {
@@ -351,17 +358,17 @@ $inactive-color: #777;
     .w-textarea--focused.w-textarea--floating-label &,
     .w-textarea--filled.w-textarea--floating-label &,
     .w-textarea--has-placeholder.w-textarea--floating-label & {
-      transform: translateY(-160%) scale(0.85);
+      transform: translateY(-110%) scale(0.85);
     }
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
     .w-textarea--floating-label .w-textarea__textarea:-webkit-autofill & {
-      transform: translateY(-160%) scale(0.85);
+      transform: translateY(-110%) scale(0.85);
     }
     // Move label with outline style or with shadow.
     .w-textarea--focused.w-textarea--floating-label .w-textarea__textarea-wrap--box &,
     .w-textarea--filled.w-textarea--floating-label .w-textarea__textarea-wrap--box &,
     .w-textarea--has-placeholder.w-textarea--floating-label .w-textarea__textarea-wrap--box & {
-      transform: translateY(-180%) scale(0.85);
+      transform: translateY(-130%) scale(0.85);
     }
     .w-textarea--focused.w-textarea--floating-label.w-textarea--inner-icon-left &,
     .w-textarea--filled.w-textarea--floating-label.w-textarea--inner-icon-left & {left: 0;}
