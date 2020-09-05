@@ -1,6 +1,15 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1 slug="w-input") w-input
+  title-link.mt4.code(h1) w-input
+
+  title-link(h2) Default
+  p.
+    By default the #[span.code w-input] component has a label inside the input field, that moves up
+    above the field on focus or when the field has some content or a placeholder.#[br]
+  example
+    w-input Label
+    template(#pug).
+      w-input Label
 
   title-link(h2) Label and / or placeholder
   example
@@ -223,14 +232,22 @@ div
   title-link(h2) Types
   p The default type is "#[span.code text]" but the types bellow are also supported.
   p.
-    You will not notice a difference on desktop using a few of these fields like #[span.code tel],
-    but they make sense on touch devices where the keyboard appearing is tailored for the selected type of input.
+    On desktop you will not notice the difference between the fields #[span.code email], #[span.code tel],
+    #[span.code url], and the default text type. But on touch devices, the keyboard is tailored for the
+    type of input.
   h3 Textual inputs
   example
     ul.input-types
       li
+        .code.mb1 type="date"
+        w-input(type="date") date
+      li.mt4
         .code.mb1 type="email"
         w-input(type="email") Email address
+      li.mt4
+        .code.mb1 type="file"
+        w-tag.px1.ml1(color="red" outline) coming soon
+        //- w-input(type="file") file
       li.mt4
         .code.mb1 type="number"
         w-input(type="number" min="0" max="100") Age
@@ -247,6 +264,9 @@ div
         .code.mb1 type="text"
         w-input(type="text") Text
       li.mt4
+        .code.mb1 type="time"
+        w-input(type="time") time
+      li.mt4
         .code.mb1 type="url"
         w-input(type="url") Url
       li.mt4
@@ -255,6 +275,9 @@ div
         w-input(type="hidden")
     template(#pug).
       ul.input-types
+        li
+          .code.mb1 type="date"
+          w-input(type="date") date
         li
           .code.mb1 type="email"
           w-input(type="email") Email address
@@ -274,6 +297,9 @@ div
           .code.mb1 type="text"
           w-input Text
         li
+          .code.mb1 type="time"
+          w-input(type="time") time
+        li
           .code.mb1 type="url"
           w-input(type="url") Url
         li
@@ -284,39 +310,39 @@ div
   h3 Other types of inputs
   p For all the other types of input listed bellow, a specific Wave UI component should be used instead:
   ul.other-input-types
-    li
+    li.mt1
       span.code.mr2 type="button"
       span.grey use #[code w-button] instead
-    li
-      span.code.mr2 type="checkoutline"
-      span.grey use #[code w-checkoutline] instead
-    li
+    li.mt1
+      span.code.mr2 type="checkbox"
+      span.grey use #[code w-checkbox] instead
+    li.mt1
       span.code.mr2 type="color"
       span.grey use #[code w-color-picker] instead
-    li
+      w-tag.px1.ml1(color="red" outline) coming soon
+    //- li.mt1
       span.code.mr2 type="date"
       span.grey use #[code w-date-picker] instead
-    li
-      span.code.mr2 type="file"
-      span.grey use #[code w-file-input] instead
-    li
+      w-tag.px1.ml1(color="red" outline) coming soon
+    li.mt1
       span.code.mr2 type="image"
-      span.grey use #[code w-image] instead
-    li
+      span.grey use the #[code img] HTML tag instead
+    li.mt1
       span.code.mr2 type="radio"
       span.grey use #[code w-radio] instead
-    li
+    li.mt1
       span.code.mr2 type="range"
       span.grey use #[code w-slider] instead
-    li
+    li.mt1
       span.code.mr2 type="reset"
       span.grey use #[code w-button] instead
-    li
+    li.mt1
       span.code.mr2 type="submit"
       span.grey use #[code w-button] instead
-    li
+    li.mt1
       span.code.mr2 type="time"
       span.grey use #[code w-time-picker] instead
+      w-tag.px1.ml1(color="red" outline) coming soon
 </template>
 
 <script>

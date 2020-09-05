@@ -111,7 +111,7 @@ export default {
       return listeners
     },
     hasValue () {
-      return this.inputValue || (this.type === 'number' && this.inputNumberError)
+      return this.inputValue || ['date', 'time'].includes(this.type) || (this.type === 'number' && this.inputNumberError)
     },
     hasLabel () {
       return this.label || this.$slots.default
