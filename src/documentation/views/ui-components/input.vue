@@ -5,7 +5,6 @@ div
   title-link(h2) Label and / or placeholder
   example
     w-input.mb4(label="Label" required)
-    //- w-input.mb3 Label
     w-input.mb3(placeholder="Placeholder")
     w-input.mb3(label="Label" placeholder="Placeholder")
     template(#pug).
@@ -13,19 +12,31 @@ div
       w-input.mb3(placeholder="Placeholder")
       w-input.mb3(label="Label" placeholder="Placeholder")
 
+  title-link(h2) Static label
+  p.
+    By default the label is positioned inside and on field focus, it will move up above the field
+    and shrink.#[br]
+    It is possible to keep it inside and disable the animation with the #[code static-label] option.
+  p.mt4.
+    #[strong Note:] If this option is set to true and the label is positioned inside when a placeholder is set,
+    only the placeholder will be displayed.
+
+  example
+    w-input.mb3(label="Label" static-label)
+    template(#pug).
+      w-input.mb4(label="Label" static-label)
+
   title-link(h2) Outline
   example
     w-input.mb4(label="Outline" outline)
     w-input.mb2(placeholder="Outline" outline)
     w-input.mb2(label="Outline" color="info" outline)
     w-input.mb2(label="Outline" bg-color="blue-light5" outline)
-    w-input.mb2(label="Outline" bg-color="blue-dark5" color="blue-light4" outline)
     template(#pug).
       w-input.mb2(label="Outline" outline)
       w-input.mb2(placeholder="Outline" outline)
       w-input.mb2(label="Outline" color="info" outline)
       w-input.mb2(label="Outline" bg-color="blue-light5" outline)
-      w-input.mb2(label="Outline" bg-color="blue-dark5" color="blue-light4" outline)
 
   title-link(h2) Shadow
   example
@@ -62,7 +73,7 @@ div
           w-input.mb1(label="Round and shadow" round outline shadow)
           w-input.mb1(label="Tile" tile outline)
 
-  title-link(h2) Color
+  title-link(h2) Colors
   p.mb4.
     Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
     background.#[br]
@@ -117,9 +128,6 @@ div
       w-input.mb2(label="Inside" label-position="inside" outline)
       w-input.mb2(label="Left" label-position="left" outline)
       w-input.mb2(label="Right" label-position="right" outline)
-  p.mt4.
-    #[strong Notes:] when the label is positioned inside and a placeholder is set,
-    the label will be hidden and the placeholder will be displayed.
 
   title-link(h2) Custom label via default slot
   p.
@@ -140,9 +148,16 @@ div
       w-icon.orange mdi mdi-arrow-left
       span.red.ml1 Right
     template(#pug).
-      w-input.mb2(label="Inside" label-position="inside" outline)
-      w-input.mb2(label="Left" label-position="left" outline)
-      w-input.mb2(label="Right" label-position="right" outline)
+      w-input.mb2(label-position="inside" outline)
+        w-icon.orange mdi mdi-arrow-right
+        span.purple.mx1 Inside
+        w-icon.orange mdi mdi-arrow-left
+      w-input.mb2(label-position="left" outline)
+        span.green.mr1 Left
+        w-icon.orange mdi mdi-arrow-right
+      w-input.mb2(label-position="right" outline)
+        w-icon.orange mdi mdi-arrow-left
+        span.red.ml1 Right
 
   title-link(h2) Inner icons
   example
@@ -168,13 +183,30 @@ div
     w-input.mb2(label="Inside" label-position="inside" outline inner-icon-right="wi-search")
     template(#pug).
       .title4.mb2 Label outside
-      w-input.mb2(label="Left" label-position="left" outline inner-icon-left="wi-check")
+      w-input.mb2(label="Username" label-position="left" outline inner-icon-left="mdi mdi-account")
+      w-input.mb2(
+        label="Password"
+        :type="isPassword ? 'password' : 'text'"
+        :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+        :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+        @click:inner-icon-right="isPassword = !isPassword")
+      w-input.mb2(
+        label="Password"
+        :type="isPassword ? 'password' : 'text'"
+        label-position="left"
+        outline
+        :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+        @click:inner-icon-right="isPassword = !isPassword")
       w-input.mb2(label="Right" label-position="right" outline inner-icon-left="wi-check")
       w-input.mb2(label="Right" label-position="right" outline inner-icon-right="wi-check")
 
       .title4.mt6.mb2 Label inside
       w-input.mb2(label="Inside" label-position="inside" outline inner-icon-left="wi-search")
       w-input.mb2(label="Inside" label-position="inside" outline inner-icon-right="wi-search")
+    template(#js).
+      data: () => ({
+        isPassword: true
+      })
 
   title-link(h2) Disabled &amp; readonly
   example
