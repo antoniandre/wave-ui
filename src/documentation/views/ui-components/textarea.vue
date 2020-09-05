@@ -1,16 +1,26 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1 slug="w-textarea")
-    .code w-textarea
-    w-tag.ml3(bg-color="orange" lg color="white") In Progress
+  title-link.mt4.code(h1) w-textarea
 
-  title-link(h2) Basic
+  title-link(h2) Default
+  p.
+    By default the #[span.code w-textarea] component has a label inside the textarea that moves up above
+    the textarea on focus or when the textarea is filled by some content or a placeholder.#[br]
+    The default number of rows is 3, and when adding lines the textarea will adjust its size.
   example
-    w-textarea Textarea label
-    w-textarea.mt4(placeholder="Textarea Placeholder")
+    w-textarea Label
     template(#pug).
-      w-textarea Textarea label
-      w-textarea.mt4(placeholder="Textarea Placeholder")
+      w-textarea Label
+
+  title-link(h2) Label and / or placeholder
+  example
+    w-textarea Label
+    w-textarea.mt4(placeholder="Placeholder")
+    w-textarea.mt4(label="Label" placeholder="Placeholder")
+    template(#pug).
+      w-textarea Label
+      w-textarea.mt4(placeholder="Placeholder")
+      w-textarea.mt4(label="Label" placeholder="Placeholder")
 
   title-link(h2) No autogrow &amp; resizable
   example
