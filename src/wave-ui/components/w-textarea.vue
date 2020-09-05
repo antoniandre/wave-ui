@@ -71,7 +71,7 @@ export default {
     innerIconLeft: { type: String },
     innerIconRight: { type: String },
     // When label is inside, allows to move the label above on focus or when filled.
-    moveLabel: { type: Boolean, default: true },
+    staticLabel: { type: Boolean, default: true },
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
@@ -111,7 +111,7 @@ export default {
       return this.label || this.$slots.default
     },
     showLabelInside () {
-      return this.moveLabel || (!this.hasValue && !this.placeholder)
+      return !this.staticLabel || (!this.hasValue && !this.placeholder)
     },
     classes () {
       return {
@@ -121,7 +121,7 @@ export default {
         'w-textarea--focused': this.isFocused,
         'w-textarea--dark': this.dark,
         'w-textarea--resizable': this.resizable,
-        'w-textarea--floating-label': this.hasLabel && this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
+        'w-textarea--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel && !(this.readonly && !this.hasValue),
         'w-textarea--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-textarea--has-placeholder': this.placeholder,
         'w-textarea--inner-icon-left': this.innerIconLeft,
