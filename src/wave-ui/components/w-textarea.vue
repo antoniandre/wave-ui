@@ -51,11 +51,11 @@
         :for="`w-textarea--${_uid}`"
         @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
 
-      //- Right label.
-      template(v-if="labelPosition === 'right'")
-        label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
-          slot
-        label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
+    //- Right label.
+    template(v-if="labelPosition === 'right'")
+      label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
+        slot
+      label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
 </template>
 
 <script>
@@ -77,7 +77,6 @@ export default {
     bgColor: { type: String },
     dark: { type: Boolean },
     outline: { type: Boolean },
-    round: { type: Boolean },
     shadow: { type: Boolean },
     noAutogrow: { type: Boolean },
     resizable: { type: Boolean }, // Toggle the HTML built-in bottom right corner resize handle.
@@ -133,7 +132,6 @@ export default {
       return {
         [this.valid === false ? 'error' : this.color]: this.color || this.valid === false,
         [`${this.bgColor}--bg`]: this.bgColor,
-        'w-textarea__textarea-wrap--round': this.round,
         'w-textarea__textarea-wrap--tile': this.tile,
         // Box adds a padding on input. If there is a bgColor or shadow, a padding is needed.
         'w-textarea__textarea-wrap--box': this.outline || this.bgColor || this.shadow,
@@ -153,7 +151,7 @@ export default {
   },
 
   methods: {
-    onInput (e) {
+    onInput () {
       if (!this.noAutogrow && !this.resizable) this.computeHeight()
       this.$emit('input', this.inputValue)
     },
@@ -208,7 +206,6 @@ $inactive-color: #777;
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
-  align-items: center;
   font-size: $base-font-size;
 
   // textarea wrapper.
@@ -217,7 +214,6 @@ $inactive-color: #777;
     position: relative;
     display: inline-flex;
     flex: 1 1 auto;
-    align-items: center;
     min-height: $size;
     border-radius: $border-radius;
     border: $border;
@@ -225,7 +221,7 @@ $inactive-color: #777;
   }
 
   &--floating-label &__textarea-wrap {
-    margin-top: 3 * $base-increment;
+    margin-top: 4 * $base-increment;
   }
 
   &__textarea-wrap--underline {
@@ -234,9 +230,6 @@ $inactive-color: #777;
     border-width: 0 0 1px;
   }
 
-  // &__textarea-wrap--box {}
-
-  &__textarea-wrap--round {border-radius: 9em;}
   &__textarea-wrap--tile {border-radius: initial;}
   &__textarea-wrap--shadow {box-shadow: $box-shadow;}
 
@@ -305,7 +298,7 @@ $inactive-color: #777;
 
   // Icons inside.
   // ------------------------------------------------------
-  &__icon {position: absolute;}
+  &__icon {position: absolute;margin-top: $base-increment;}
   &__icon--inner-left {left: 6px;}
   &__icon--inner-right {right: 6px;}
   &--no-padding &__icon--inner-left {left: 1px;}
@@ -324,8 +317,14 @@ $inactive-color: #777;
     transition: color $transition-duration;
     cursor: pointer;
 
-    &--left {margin-right: 2 * $base-increment;}
-    &--right {margin-left: 2 * $base-increment;}
+    &--left {
+      margin-top: $base-increment;
+      margin-right: 2 * $base-increment;
+    }
+    &--right {
+      margin-top: $base-increment;
+      margin-left: 2 * $base-increment;
+    }
     .w-textarea--disabled & {color: $disabled-color;cursor: not-allowed;}
   }
 
