@@ -16,9 +16,9 @@
           slot(v-else name="item-title" :item="item" :index="item.index")
             div(v-html="item.title")
       .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
-    .w-tabs__content(:class="contentClass")
+    .w-tabs__content-wrap(v-if="items.length" :class="contentClass")
       transition(:name="transition" mode="out-in")
-        div(v-if="activeTab" :key="activeTab.index")
+        .w-tabs__content(v-if="activeTab" :key="activeTab.index")
           slot(
             v-if="$scopedSlots[`item-content.${activeTab.id || activeTab.index + 1}`]"
             :name="`item-content.${activeTab.id || activeTab.index + 1}`"
@@ -72,7 +72,10 @@ export default {
       let activeTab = this.tabsItems.find(item => item.active)
       if (!activeTab) {
         activeTab = this.tabsItems.find(item => !item.disabled)
-        if (activeTab) activeTab.active = true
+        if (activeTab) {
+          activeTab.active = true
+          this.$nextTick(this.updateSlider)
+        }
         else activeTab = {}
       }
       return activeTab
@@ -121,6 +124,7 @@ export default {
       if (domLookup) {
         this.activeTabEl = this.$refs['tabs-bar'].querySelector('.w-tabs__bar-item--active')
       }
+
       if (!this.fillBar && this.activeTabEl) {
         const { left, width } = this.activeTabEl.getBoundingClientRect()
         const { left: parentLeft } = this.activeTabEl.parentNode.getBoundingClientRect()
@@ -253,8 +257,10 @@ export default {
 
   // Content.
   // ------------------------------------------------------
-  &__content {
+  &__content-wrap {
     position: relative;
+  }
+  &__content {
     padding: 3 * $base-increment;
 
     .w-tabs--card & {
