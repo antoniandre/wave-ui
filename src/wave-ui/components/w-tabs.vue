@@ -17,7 +17,7 @@
             div(v-html="item.title")
       .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
     .w-tabs__content-wrap(v-if="tabsItems.length" :class="contentClass")
-      transition(:name="transition" mode="out-in")
+      transition(:name="transitionName" :mode="transitionMode")
         .w-tabs__content(v-if="activeTab" :key="activeTab.index")
           slot(
             v-if="$scopedSlots[`item-content.${activeTab.id || activeTab.index + 1}`]"
@@ -43,7 +43,7 @@ export default {
     noSlider: { type: Boolean },
     sliderColor: { type: String, default: 'primary' },
     contentClass: { type: String },
-    transition: { type: String, default: 'fade' },
+    transition: { type: [String, Boolean], default: '' },
     fillBar: { type: Boolean },
     center: { type: Boolean },
     right: { type: Boolean },
@@ -52,6 +52,7 @@ export default {
 
   data: () => ({
     activeTabEl: null,
+    prevTabIndex: null, // To detect transition direction.
     slider: {
       left: 0,
       width: 0
@@ -60,6 +61,19 @@ export default {
   }),
 
   computed: {
+    transitionName () {
+      if (this.transition === false) return ''
+      return this.transition || `w-tabs-slide-${this.direction}`
+    },
+
+    transitionMode () {
+      return ['w-tabs-slide-left', 'w-tabs-slide-right'].includes(this.transitionName) ? '' : 'out-in'
+    },
+
+    direction () {
+      return this.activeTab.index < this.prevTabIndex ? 'right' : 'left'
+    },
+
     tabsItems () {
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items
       return items.map((item, index) => new Vue.observable({
@@ -121,6 +135,7 @@ export default {
       }
     },
     openTab (item) {
+      this.prevTabIndex = this.activeTab.index
       item.active = true
       // Unset active on other tabs.
       this.tabsItems.forEach(obj => obj.index !== item.index && (obj.active = false))
@@ -200,7 +215,6 @@ export default {
     display: flex;
     align-items: center;
 
-    // .w-tabs--card & {border-bottom: $border;}
     .w-tabs--card &:after {
       content: '';
       display: flex;
@@ -268,9 +282,6 @@ export default {
   // ------------------------------------------------------
   &__content-wrap {
     position: relative;
-  }
-  &__content {
-    padding: 3 * $base-increment;
 
     .w-tabs--card & {
       border: $border;
@@ -278,5 +289,35 @@ export default {
       border-radius: 0 0 $border-radius $border-radius;
     }
   }
+  &__content {padding: 3 * $base-increment;}
+}
+
+.w-tabs-slide-left-leave-active,
+.w-tabs-slide-right-leave-active {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.w-tabs-slide-left-enter-active {animation: w-tabs-slide-left-enter $transition-duration + 0.15s;}
+.w-tabs-slide-left-leave-active {animation: w-tabs-slide-left-leave $transition-duration + 0.15s;}
+@keyframes w-tabs-slide-left-enter {
+  0% {transform: translateX(100%);}
+  100% {transform: translateX(0);}
+}
+@keyframes w-tabs-slide-left-leave {
+  0% {transform: translateX(0);}
+  100% {transform: translateX(-100%);}
+}
+
+.w-tabs-slide-right-enter-active {animation: w-tabs-slide-right-enter $transition-duration + 0.15s;}
+.w-tabs-slide-right-leave-active {animation: w-tabs-slide-right-leave $transition-duration + 0.15s;}
+@keyframes w-tabs-slide-right-enter {
+  0% {transform: translateX(-100%);}
+  100% {transform: translateX(0);}
+}
+@keyframes w-tabs-slide-right-leave {
+  0% {transform: translateX(0);}
+  100% {transform: translateX(100%);}
 }
 </style>

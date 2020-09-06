@@ -147,13 +147,14 @@ div
         ],
         transition: 'fade',
         transitions: [
+          { label: 'default', value: '' },
           { label: 'fade' },
           { label: 'slide-fade-up' },
           { label: 'slide-fade-down' },
           { label: 'slide-fade-left' },
           { label: 'slide-fade-right' },
           { label: 'scale-fade' },
-          { label: 'none', value: '' }
+          { label: 'none', value: false }
         ]
       })
 
@@ -311,13 +312,14 @@ export default {
       ],
     },
     transitions: [
+      { label: 'default', value: '' },
       { label: 'fade' },
       { label: 'slide-fade-up' },
       { label: 'slide-fade-down' },
       { label: 'slide-fade-left' },
       { label: 'slide-fade-right' },
       { label: 'scale-fade' },
-      { label: 'none', value: '' }
+      { label: 'none', value: false }
     ]
   })
 }
