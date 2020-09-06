@@ -42,7 +42,7 @@
               | What is Pug?
           | Wave UI Vue templates are coded in Pug.#[br]The examples will soon be rewritten in HTML.
           | For now, if you are not familiar with Pug, you can edit in Codepen and view the compiled HTML.#[br]
-          | But now you are here, hold on a minute you might get to like it! See how concise it is?
+          | But now you are here, hold on a minute and look how concise it is! You could get to like it!
         ssh-pre(
           v-if="$slots.pug"
           language="pug"
