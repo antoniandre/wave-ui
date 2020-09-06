@@ -52,7 +52,8 @@ export default {
 
   data: () => ({
     activeTabEl: null,
-    prevTabIndex: null, // To detect transition direction.
+    prevTabIndex: -1, // To detect transition direction.
+    activeTabIndex: -1,
     slider: {
       left: 0,
       width: 0
@@ -76,10 +77,16 @@ export default {
 
     tabsItems () {
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items
+      if (typeof this.items === 'number' && this.activeTabIndex > -1) {
+        // Array.fill({}) copies the same object by reference, make sure to modify only 1 by
+        // giving a full object override (item = {}).
+        if (items[this.activeTabIndex]) items[this.activeTabIndex] = { active: true }
+      }
+
       return items.map((item, index) => new Vue.observable({
         ...item,
         index,
-        active: this.value && this.value[index],
+        active: item.active || (this.activeTabIndex === -1 && this.value && this.value[index]),
         disabled: !!item.disabled
       }))
     },
@@ -87,7 +94,8 @@ export default {
     activeTab () {
       let activeTab = this.tabsItems.find(item => item.active)
       if (!activeTab) {
-        activeTab = this.tabsItems.find(item => !item.disabled)
+        // If no active tab, open the first not disabled tab.
+        if (!activeTab) activeTab = this.tabsItems.find(item => !item.disabled)
         if (activeTab) {
           activeTab.active = true
           this.$nextTick(this.updateSlider)
@@ -136,6 +144,8 @@ export default {
     },
     openTab (item) {
       this.prevTabIndex = this.activeTab.index
+      this.activeTabIndex = item.index
+
       item.active = true
       // Unset active on other tabs.
       this.tabsItems.forEach(obj => obj.index !== item.index && (obj.active = false))
