@@ -86,7 +86,7 @@ export default {
       return items.map((item, index) => new Vue.observable({
         ...item,
         index,
-        active: item.active || (this.activeTabIndex === -1 && this.value && this.value[index]),
+        active: item.active || (this.value && this.value[index]),
         disabled: !!item.disabled
       }))
     },
