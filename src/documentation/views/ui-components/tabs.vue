@@ -136,13 +136,7 @@ div
           { label: 'slide-fade-down' },
           { label: 'slide-fade-left' },
           { label: 'slide-fade-right' },
-          { label: 'slide-up' },
-          { label: 'slide-down' },
-          { label: 'slide-left' },
-          { label: 'slide-right' },
-          { label: 'scale' },
           { label: 'scale-fade' },
-          { label: 'bounce' },
           { label: 'none', value: '' }
         ]
       })
@@ -306,13 +300,7 @@ export default {
       { label: 'slide-fade-down' },
       { label: 'slide-fade-left' },
       { label: 'slide-fade-right' },
-      { label: 'slide-up' },
-      { label: 'slide-down' },
-      { label: 'slide-left' },
-      { label: 'slide-right' },
-      { label: 'scale' },
       { label: 'scale-fade' },
-      { label: 'bounce' },
       { label: 'none', value: '' }
     ]
   })
