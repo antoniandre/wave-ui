@@ -1,6 +1,6 @@
 <template lang="pug">
   .w-tabs(:class="tabsClasses")
-    .w-tabs__bar(ref="tabs-bar")
+    .w-tabs__bar(ref="tabs-bar" :class="tabsBarClasses")
       .w-tabs__bar-item(
         v-for="(item, i) in tabsItems"
         :key="i"
@@ -16,7 +16,7 @@
           slot(v-else name="item-title" :item="item" :index="item.index")
             div(v-html="item.title")
       .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
-    .w-tabs__content-wrap(v-if="items.length" :class="contentClass")
+    .w-tabs__content-wrap(v-if="tabsItems.length" :class="contentClass")
       transition(:name="transition" mode="out-in")
         .w-tabs__content(v-if="activeTab" :key="activeTab.index")
           slot(
@@ -45,6 +45,8 @@ export default {
     contentClass: { type: String },
     transition: { type: String, default: 'fade' },
     fillBar: { type: Boolean },
+    center: { type: Boolean },
+    right: { type: Boolean },
     card: { type: Boolean }
   },
 
@@ -87,6 +89,13 @@ export default {
         'w-tabs--no-slider': this.noSlider,
         'w-tabs--fill-bar': this.fillBar,
         'w-tabs--init': this.init
+      }
+    },
+
+    tabsBarClasses () {
+      return {
+        'justify-end': this.right,
+        'justify-center': this.center
       }
     },
 

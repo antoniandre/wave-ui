@@ -16,6 +16,22 @@ div
         ]
       })
 
+  title-link(h2) Align center and right
+  example
+    w-tabs(:items="tabs4.items" center)
+    w-tabs.mt4(:items="tabs4.items" right)
+    template(#pug).
+      w-tabs(:items="tabs" center)
+      w-tabs(:items="tabs" right)
+    template(#js).
+      data: () => ({
+        tabs: [
+          { title: 'Tab 1', content: 'Tab 1 content.' },
+          { title: 'Tab 2', content: 'Tab 2 content.' },
+          { title: 'Tab 3', content: 'Tab 3 content.' }
+        ]
+      })
+
   title-link(h2) Fill bar &amp; disabled items
   example
     w-switch.mb3(v-model="tabs2.fillBar") Fill bar
@@ -150,7 +166,7 @@ div
       w-button.mx2(icon="wi-plus" sm @click="tabs3.tabsCount++")
     w-tabs(:items="tabs3.tabsCount")
       template(#item-title="{ index }") Tab {{ index + 1 }}
-      template(#item-content) Content
+      template(#item-content="{ index }") Content {{ index + 1 }}
     template(#pug).
       w-flex.mb3(align-center)
         | Number of tabs:
@@ -159,7 +175,7 @@ div
         w-button.mx2(icon="wi-plus" sm @click="tabsCount++")
       w-tabs(:items="tabsCount")
         template(#item-title="{ index }") Tab {{ '\{\{ index + 1 \}\}' }}
-        template(#item-content="") Content
+        template(#item-content="{ index }") Content {{ '\{\{ index + 1 \}\}' }}
     template(#js).
       data: () => ({
         tabsCount: 3
@@ -223,7 +239,7 @@ div
         span.pink.mx1 {{ item.title }}
         w-icon.pink mdi mdi-heart
       template(#item-content.1="{ item }")
-        .title3 You can customize the tab contents.
+        .title3 This is a custom tab content.
         div(v-html="item.content")
     template(#pug).
       w-tabs(:items="tabs" card)
@@ -235,7 +251,7 @@ div
           span.pink.mx1 {{ '\{\{ item.title \}\}' }}
           w-icon.pink mdi mdi-heart
         template(#item-content.1="{ item }")
-          .title3 You can customize the tab contents.
+          .title3 This is a custom tab content.
           div(v-html="item.content")
     template(#js).
       data: () => ({
