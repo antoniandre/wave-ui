@@ -27,7 +27,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 // Slide-left: translate x from right to left.
 // --------------------------------------------------------
 .slide-left-enter-active, .slide-left-leave-active {
-  transition: $transition-duration ;
+  transition: $transition-duration;
   transition-property: transform, right, margin-right;
   transform: translateX(0%);
 }
