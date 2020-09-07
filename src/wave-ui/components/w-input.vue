@@ -80,7 +80,7 @@ export default {
     innerIconLeft: { type: String },
     innerIconRight: { type: String },
     // When label is inside, allows to move the label above on focus or when filled.
-    staticLabel: { type: Boolean, default: false },
+    staticLabel: { type: Boolean },
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
@@ -230,7 +230,7 @@ $inactive-color: #777;
     }
 
     .w-input--focused &--underline:after {width: 100%;}
-    &__input-wrap--round.w-input__input-wrap--underline:after {
+    &--round.w-input__input-wrap--underline:after {
       border-radius: 9em;
       transition: $transition-duration, height 0.035s;
     }

@@ -93,7 +93,7 @@ export default {
     innerIconLeft: { type: String },
     innerIconRight: { type: String, default: 'wi-triangle-down' },
     // When label is inside, allows to move the label above on focus or when filled.
-    moveLabel: { type: Boolean, default: true },
+    staticLabel: { type: Boolean },
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
     itemValue: { type: String, default: 'value' }, // Name of the value field.
     itemClass: { type: String },
@@ -121,7 +121,7 @@ export default {
       return this.label || this.$slots.default
     },
     showLabelInside () {
-      return this.moveLabel || (!this.hasValue && !this.placeholder)
+      return !this.staticLabel || (!this.hasValue && !this.placeholder)
     },
     classes () {
       return {
@@ -130,7 +130,7 @@ export default {
         'w-select--filled': this.hasValue,
         'w-select--focused': this.isFocused,
         'w-select--dark': this.dark,
-        'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
+        'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel && !(this.readonly && !this.hasValue),
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-select--has-placeholder': this.placeholder,
         'w-select--inner-icon-left': this.innerIconLeft,
