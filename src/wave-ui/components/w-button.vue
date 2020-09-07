@@ -178,6 +178,7 @@ $spinner-size: 40;
     cursor: not-allowed;
     box-shadow: none;
     opacity: 0.4;
+    -webkit-tap-highlight-color: transparent;
   }
   &--dark[disabled] {
     background-color: rgba(255, 255, 255, 0.12);

@@ -276,6 +276,7 @@ $inactive-color: #777;
   &--disabled &__input {
     color: $disabled-color;
     cursor: not-allowed;
+    -webkit-tap-highlight-color: transparent;
   }
 
   &--disabled input::placeholder {color: inherit;}
@@ -293,6 +294,7 @@ $inactive-color: #777;
   &--disabled &__icon {
     color: $disabled-color;
     cursor: not-allowed;
+    -webkit-tap-highlight-color: transparent;
   }
 
   // Label.
@@ -303,7 +305,11 @@ $inactive-color: #777;
 
     &--left {margin-right: 2 * $base-increment;}
     &--right {margin-left: 2 * $base-increment;}
-    .w-input--disabled & {color: $disabled-color;cursor: not-allowed;}
+    .w-input--disabled & {
+      color: $disabled-color;
+      cursor: not-allowed;
+      -webkit-tap-highlight-color: transparent;
+    }
   }
 
   &__label--inside {

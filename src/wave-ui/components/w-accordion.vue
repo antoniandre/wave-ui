@@ -133,6 +133,7 @@ export default {
     .w-accordion__item--disabled & {
       cursor: not-allowed;
       opacity: 0.6;
+      -webkit-tap-highlight-color: transparent;
     }
     .w-accordion--no-icon &, .w-accordion--icon-right & {padding-left: 3 * $base-increment;}
 

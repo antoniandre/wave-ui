@@ -126,7 +126,10 @@ $inactive-color: #666;
   position: relative;
   cursor: pointer;
 
-  &--disabled {cursor: not-allowed;}
+  &--disabled {
+    cursor: not-allowed;
+    -webkit-tap-highlight-color: transparent;
+  }
 
   // The hidden real radio button.
   input[type="radio"] {

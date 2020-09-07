@@ -119,6 +119,7 @@ $disabled-color: #ddd;
   &--disabled, &--readonly {
     cursor: not-allowed;
     touch-action: initial;
+    -webkit-tap-highlight-color: transparent;
   }
 
   // Hidden checkbox.
