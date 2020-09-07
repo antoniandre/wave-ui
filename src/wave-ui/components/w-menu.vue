@@ -196,6 +196,7 @@ export default {
       if (e.type === 'mouseleave' && this.showOnHover) shouldShowMenu = false
 
       this.timeoutId = clearTimeout(this.timeoutId)
+      // Open the menu.
       if (shouldShowMenu) {
         if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
 
@@ -205,8 +206,22 @@ export default {
         // if we don't postpone the Menu apparition it will start transition from a visible menu and
         // thus will not transition.
         this.timeoutId = setTimeout(() => this.$emit('input', (this.showMenu = true)), 10)
+
+        if (!this.persistent) document.addEventListener('mousedown', this.onOutsideMousedown)
       }
-      else this.$emit('input', (this.showMenu = false))
+      // Close the menu.
+      else {
+        this.$emit('input', (this.showMenu = false))
+        // Remove the mousedown listener if the menu got closed without a mousedown outside of the menu.
+        return document.removeEventListener('mousedown', this.onOutsideMousedown)
+      }
+    },
+
+    onOutsideMousedown (e) {
+      if (!this.menuEl.contains(e.target)) {
+        this.$emit('input', (this.showMenu = false))
+        return document.removeEventListener('mousedown', this.onOutsideMousedown)
+      }
     },
 
     getCoordinates (e) {
@@ -287,6 +302,7 @@ export default {
       }
 
       // 3. Keep fully in viewport.
+      // @todo: do this.
       // --------------------------------------------------
       // if (this.position === 'top' && ((top - this.menuEl.offsetHeight) < 0)) {
       //   const margin = - parseInt(computedStyles.getPropertyValue('margin-top'))
