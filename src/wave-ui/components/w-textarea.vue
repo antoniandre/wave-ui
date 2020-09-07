@@ -44,7 +44,7 @@
           v-else-if="label"
           :for="`w-textarea--${_uid}`"
           v-html="label"
-          :class="isFocused && { [valid === false ? 'error' : this.color]: this.color || valid === false }")
+          :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
       w-icon.w-textarea__icon.w-textarea__icon--inner-right(
         v-if="innerIconRight"
         tag="label"
