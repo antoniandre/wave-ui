@@ -5,10 +5,10 @@
     :valid.sync="valid"
     @reset="$emit('input', inputValue = '')"
     :class="classes")
-    template(v-if="hasLabel && labelOnLeft")
-      label.w-select__label.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
+    template(v-if="labelPosition === 'left'")
+      label.w-select__label.w-select__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
         slot
-      label.w-select__label.w-form-el-shakable(v-else-if="label" :for="`w-select--${_uid}`" v-html="label")
+      label.w-select__label.w-select__label--left.w-form-el-shakable(v-else-if="label" :for="`w-select--${_uid}`" v-html="label")
 
     w-menu(
       v-model="showMenu"
@@ -20,11 +20,8 @@
       template(#activator="{ on }")
         //- Input wrapper.
         .w-select__selection-wrap(
-          v-on="on"
           ref="selection-wrap"
-          :class="inputWrapClasses"
-          tabindex="0"
-          @focus="showMenu = !showMenu")
+          :class="inputWrapClasses")
           w-icon.w-select__icon.w-select__icon--inner-left(
             v-if="innerIconLeft"
             tag="label"
@@ -32,13 +29,17 @@
             @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
           div {{ inputValue }}
           input.w-select__selection(
-            type="hidden"
+            v-model="inputValue"
+            @click="!disabled && !readonly && (showMenu = true)"
+            @focus="!disabled && !readonly && (showMenu = true)"
+            @keyup.escape="!disabled && !readonly && (showMenu = false)"
+            @keydown.enter.prevent
+            @keyup.enter="!disabled && !readonly && (showMenu = true)"
             :id="`w-select--${_uid}`"
             :name="inputName"
             :placeholder="placeholder || null"
-            v-model="inputValue"
-            v-on="$listeners"
             :disabled="disabled"
+            :readonly="readonly"
             :required="required")
           template(v-if="labelPosition === 'inside' && showLabelInside")
             label.w-select__label.w-select__label--inside.w-form-el-shakable(
@@ -60,23 +61,18 @@
         v-model="inputValue"
         :multiple="multiple"
         :items="items"
-        @item-click="showMenu = false")
+        @item-click="!multiple && (showMenu = false)")
 
-    //- select(
-      :id="`w-select--${_uid}`"
-      :name="inputName"
-      :multiple="multiple"
-      :required="required")
       option(v-for="(item, i) in items" :key="i" :value="item[itemValue]" v-html="item[itemLabel]")
-    template(v-if="hasLabel && !labelOnLeft")
-      label.w-select__label.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
+    template(v-if="labelPosition === 'right'")
+      label.w-select__label.w-select__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
         slot
-      label.w-select__label.w-form-el-shakable(v-else-if="label" :for="`w-select--${_uid}`" v-html="label")
+      label.w-select__label.w-select__label--right.w-form-el-shakable(v-else-if="label" :for="`w-select--${_uid}`" v-html="label")
 </template>
 
 <script>
 /**
- * @todo combine this element and w-select.
+ * @todo Share the common parts between w-input, w-textarea & w-select.
  **/
 
 import FormElementMixin from '../mixins/form-elements'
@@ -92,7 +88,7 @@ export default {
     label: { type: String },
     labelPosition: { type: String, default: 'inside' },
     innerIconLeft: { type: String },
-    innerIconRight: { type: String },
+    innerIconRight: { type: String, default: 'wi-triangle-down' },
     // When label is inside, allows to move the label above on focus or when filled.
     moveLabel: { type: Boolean, default: true },
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
@@ -110,7 +106,8 @@ export default {
   data: () => ({
     inputValue: [],
     showMenu: false,
-    menuMinWidth: 0
+    menuMinWidth: 0,
+    isFocused: false
   }),
 
   computed: {
@@ -130,11 +127,12 @@ export default {
         'w-select--filled': this.hasValue,
         'w-select--focused': this.isFocused,
         'w-select--dark': this.dark,
-        'w-select--floatting-label': this.hasLabel && this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
+        'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && this.moveLabel && !(this.readonly && !this.hasValue),
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-select--has-placeholder': this.placeholder,
         'w-select--inner-icon-left': this.innerIconLeft,
-        'w-select--inner-icon-right': this.innerIconRight
+        'w-select--inner-icon-right': this.innerIconRight,
+        'w-select--open': this.showMenu
       }
     },
     inputWrapClasses () {
@@ -171,12 +169,16 @@ export default {
 $size: round(2 * $base-font-size);
 
 .w-select {
-  display: flex;
   position: relative;
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  align-items: center;
 
   &--disabled {
     color: $disabled-color;
     cursor: not-allowed;
+    -webkit-tap-highlight-color: transparent;
   }
 
   &__selection-wrap--round {
@@ -200,7 +202,7 @@ $size: round(2 * $base-font-size);
     transition: border $transition-duration;
   }
 
-  &--floatting-label &__selection-wrap {
+  &--floating-label &__selection-wrap {
     margin-top: 3 * $base-increment;
   }
 
@@ -276,23 +278,34 @@ $size: round(2 * $base-font-size);
   &--disabled &__selection {
     color: $disabled-color;
     cursor: not-allowed;
+    -webkit-tap-highlight-color: transparent;
   }
 
   &--disabled input::placeholder {color: inherit;}
 
   // Icons inside.
   // ------------------------------------------------------
-  &__icon {position: absolute;}
-  &__icon--inner-left {left: 6px;}
-  &__icon--inner-right {right: 6px;}
-  &--no-padding &__icon--inner-left {left: 1px;}
-  &--no-padding &__icon--inner-right {right: 1px;}
+  &__icon {
+    position: absolute;
+    font-size: 1.4em;
 
-  .w-selection--focused &__icon {color: currentColor;}
+    .w-selection--focused & {color: currentColor;}
 
-  &--disabled &__icon {
-    color: $disabled-color;
-    cursor: not-allowed;
+    .w-select--disabled & {
+      color: $disabled-color;
+      cursor: not-allowed;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    &--inner-left {left: 6px;}
+    &--inner-right {
+      right: 6px;
+      @include default-transition;
+    }
+    .w-select--no-padding &--inner-left {left: 1px;}
+    .w-select--no-padding &--inner-right {right: 1px;}
+
+    .w-select--open &--inner-right {transform: rotate(180deg);}
   }
 
   // Label.
@@ -303,7 +316,12 @@ $size: round(2 * $base-font-size);
 
     &--left {margin-right: 2 * $base-increment;}
     &--right {margin-left: 2 * $base-increment;}
-    .w-selection--disabled & {color: $disabled-color;cursor: not-allowed;}
+
+    .w-selection--disabled & {
+      color: $disabled-color;
+      cursor: not-allowed;
+      -webkit-tap-highlight-color: transparent;
+    }
   }
 
   &__label--inside {
@@ -326,31 +344,31 @@ $size: round(2 * $base-font-size);
     .w-selection--inner-icon-left & {left: 18px;}
     .w-selection--no-padding.w-selection--inner-icon-left & {left: 26px;}
 
-    .w-selection--floatting-label & {
+    .w-selection--floating-label & {
       transform-origin: 0 0;
       transition: $transition-duration ease;
     }
 
     // move label with underline style.
-    .w-selection--focused.w-selection--floatting-label &,
-    .w-selection--filled.w-selection--floatting-label &,
-    .w-selection--has-placeholder.w-selection--floatting-label & {
+    .w-selection--focused.w-selection--floating-label &,
+    .w-selection--filled.w-selection--floating-label &,
+    .w-selection--has-placeholder.w-selection--floating-label & {
       transform: translateY(-160%) scale(0.85);
     }
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
-    .w-selection--floatting-label .w-selection__selection:-webkit-autofill & {
+    .w-selection--floating-label .w-selection__selection:-webkit-autofill & {
       transform: translateY(-160%) scale(0.85);
     }
     // Move label with outline style or with shadow.
-    .w-selection--focused.w-selection--floatting-label .w-selection__selection-wrap--box &,
-    .w-selection--filled.w-selection--floatting-label .w-selection__selection-wrap--box &,
-    .w-selection--has-placeholder.w-selection--floatting-label .w-selection__selection-wrap--box & {
+    .w-selection--focused.w-selection--floating-label .w-selection__selection-wrap--box &,
+    .w-selection--filled.w-selection--floating-label .w-selection__selection-wrap--box &,
+    .w-selection--has-placeholder.w-selection--floating-label .w-selection__selection-wrap--box & {
       transform: translateY(-180%) scale(0.85);
     }
-    .w-selection--focused.w-selection--floatting-label.w-selection--inner-icon-left &,
-    .w-selection--filled.w-selection--floatting-label.w-selection--inner-icon-left & {left: 0;}
+    .w-selection--focused.w-selection--floating-label.w-selection--inner-icon-left &,
+    .w-selection--filled.w-selection--floating-label.w-selection--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
-    .w-selection--floatting-label.w-selection--inner-icon-left .w-selection__selection:-webkit-autofill & {left: 0;}
+    .w-selection--floating-label.w-selection--inner-icon-left .w-selection__selection:-webkit-autofill & {left: 0;}
 
     .w-selection--focused & {color: currentColor;}
   }
