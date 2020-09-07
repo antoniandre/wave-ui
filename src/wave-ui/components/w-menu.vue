@@ -188,8 +188,8 @@ export default {
   methods: {
     toggle (e) {
       let shouldShowMenu = this.showMenu
-      if ('ontouchstart' in window && this.showOnHover) {
-        if (e.type === 'click') shouldShowMenu = !shouldShowMenu
+      if ('ontouchstart' in window && this.showOnHover && e.type === 'click') {
+        shouldShowMenu = !shouldShowMenu
       }
       if (e.type === 'click' && !this.showOnHover) shouldShowMenu = !shouldShowMenu
       if (e.type === 'mouseenter' && this.showOnHover) shouldShowMenu = true
