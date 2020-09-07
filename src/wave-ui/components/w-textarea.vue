@@ -75,7 +75,7 @@ export default {
     innerIconLeft: { type: String },
     innerIconRight: { type: String },
     // When label is inside, allows to move the label above on focus or when filled.
-    staticLabel: { type: Boolean, default: true },
+    staticLabel: { type: Boolean },
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
