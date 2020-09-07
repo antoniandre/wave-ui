@@ -42,13 +42,13 @@
           label.w-input__label.w-input__label--inside.w-form-el-shakable(
             v-if="$slots.default"
             :for="`w-input--${_uid}`"
-            :class="isFocused && { [valid === false ? 'error' : this.color]: this.color || valid === false }")
+            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
             slot
           label.w-input__label.w-input__label--inside.w-form-el-shakable(
             v-else-if="label"
             :for="`w-input--${_uid}`"
             v-html="label"
-            :class="isFocused && { [valid === false ? 'error' : this.color]: this.color || valid === false }")
+            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
         w-icon.w-input__icon.w-input__icon--inner-right(
           v-if="innerIconRight"
           tag="label"
@@ -198,48 +198,46 @@ $inactive-color: #777;
     border-radius: $border-radius;
     border: $border;
     transition: border $transition-duration;
-  }
 
-  &--floating-label &__input-wrap {
-    margin-top: 3 * $base-increment;
-  }
+    .w-input--floating-label & {
+      margin-top: 3 * $base-increment;
+    }
 
-  &__input-wrap--underline {
-    border-bottom-left-radius: initial;
-    border-bottom-right-radius: initial;
-    border-width: 0 0 1px;
-  }
+    &--underline {
+      border-bottom-left-radius: initial;
+      border-bottom-right-radius: initial;
+      border-width: 0 0 1px;
+    }
 
-  // &__input-wrap--box {}
+    &--round {border-radius: 9em;}
+    &--tile {border-radius: initial;}
+    &--shadow {box-shadow: $box-shadow;}
 
-  &__input-wrap--round {border-radius: 9em;}
-  &__input-wrap--tile {border-radius: initial;}
-  &__input-wrap--shadow {box-shadow: $box-shadow;}
+    .w-input--focused & {border-color: currentColor;}
 
-  &--focused &__input-wrap {border-color: currentColor;}
+    // Underline.
+    &--underline:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-bottom: 2px solid currentColor;
+      transition: $transition-duration;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
 
-  // Underline.
-  &__input-wrap--underline:after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-bottom: 2px solid currentColor;
-    transition: $transition-duration;
-    transform: translateX(-50%);
-    pointer-events: none;
-  }
-
-  &--focused &__input-wrap--underline:after {width: 100%;}
-  &__input-wrap--round.w-input__input-wrap--underline:after {
-    border-radius: 9em;
-    transition: $transition-duration, height 0.035s;
-  }
-  &--focused &__input-wrap--round.w-input__input-wrap--underline:after {
-    height: 100%;
-    transition: $transition-duration, height 0s ($transition-duration - 0.035s);
+    .w-input--focused &--underline:after {width: 100%;}
+    &__input-wrap--round.w-input__input-wrap--underline:after {
+      border-radius: 9em;
+      transition: $transition-duration, height 0.035s;
+    }
+    .w-input--focused &--round.w-input__input-wrap--underline:after {
+      height: 100%;
+      transition: $transition-duration, height 0s ($transition-duration - 0.035s);
+    }
   }
 
   // Input field.
