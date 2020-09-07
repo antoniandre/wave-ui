@@ -258,6 +258,7 @@ export default {
     &--disabled {
       cursor: not-allowed;
       opacity: 0.6;
+      -webkit-tap-highlight-color: transparent;
     }
 
     &:before {

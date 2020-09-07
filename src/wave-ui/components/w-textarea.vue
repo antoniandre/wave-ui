@@ -295,6 +295,7 @@ $inactive-color: #777;
     .w-textarea--disabled & {
       color: $disabled-color;
       cursor: not-allowed;
+      -webkit-tap-highlight-color: transparent;
     }
   }
 
@@ -313,6 +314,7 @@ $inactive-color: #777;
   &--disabled &__icon {
     color: $disabled-color;
     cursor: not-allowed;
+    -webkit-tap-highlight-color: transparent;
   }
 
   // Label.
@@ -329,7 +331,11 @@ $inactive-color: #777;
       margin-top: $base-increment;
       margin-left: 2 * $base-increment;
     }
-    .w-textarea--disabled & {color: $disabled-color;cursor: not-allowed;}
+    .w-textarea--disabled & {
+      color: $disabled-color;
+      cursor: not-allowed;
+      -webkit-tap-highlight-color: transparent;
+    }
   }
 
   &__label--inside {
