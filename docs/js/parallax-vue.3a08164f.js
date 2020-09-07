@@ -1,2 +1,0 @@
-(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["parallax-vue"],{2434:function(a,t,e){"use strict";e.r(t);var l=function(){var a=this,t=a.$createElement,e=a._self._c||t;return e("div",[e("title-link",{staticClass:"mt4 code",attrs:{h1:""}},[a._v("w-parallax")])],1)},n=[],s={},r=s,c=e("2877"),i=Object(c["a"])(r,l,n,!1,null,null,null);t["default"]=i.exports}}]);
-//# sourceMappingURL=parallax-vue.3a08164f.js.map
