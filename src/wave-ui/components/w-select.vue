@@ -40,7 +40,8 @@
             :placeholder="placeholder || null"
             :disabled="disabled"
             :readonly="readonly"
-            :required="required")
+            :required="required"
+            autocomplete="off")
           template(v-if="labelPosition === 'inside' && showLabelInside")
             label.w-select__label.w-select__label--inside.w-form-el-shakable(
               v-if="$slots.default"
@@ -63,7 +64,6 @@
         :items="items"
         @item-click="!multiple && (showMenu = false)")
 
-      option(v-for="(item, i) in items" :key="i" :value="item[itemValue]" v-html="item[itemLabel]")
     template(v-if="labelPosition === 'right'")
       label.w-select__label.w-select__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
         slot
