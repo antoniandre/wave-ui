@@ -16,6 +16,7 @@
       content-class="pa0"
       transition="slide-fade-down"
       detach-to=".w-app"
+      align-left
       min-width="activator")
       template(#activator="{ on }")
         //- Input wrapper.
@@ -27,11 +28,12 @@
             tag="label"
             :for="`w-select--${_uid}`"
             @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
-          div {{ inputValue }}
           input.w-select__selection(
             v-model="inputValue"
             @click="!disabled && !readonly && (showMenu = true)"
-            @focus="!disabled && !readonly && (showMenu = true)"
+            @focus="!disabled && !readonly && onFocus($event)"
+            @blur="onBlur"
+            @input="onInput"
             @keyup.escape="!disabled && !readonly && (showMenu = false)"
             @keydown.enter.prevent
             @keyup.enter="!disabled && !readonly && (showMenu = true)"
@@ -46,13 +48,13 @@
             label.w-select__label.w-select__label--inside.w-form-el-shakable(
               v-if="$slots.default"
               :for="`w-select--${_uid}`"
-              :class="isFocused && { [valid === false ? 'error' : this.color ]: this.color || valid === false }")
+              :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
               slot
             label.w-select__label.w-select__label--inside.w-form-el-shakable(
               v-else-if="label"
               :for="`w-select--${_uid}`"
               v-html="label"
-              :class="isFocused && { [valid === false ? 'error' : this.color ]: this.color || valid === false }")
+              :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
           w-icon.w-select__icon.w-select__icon--inner-right.w-form-el-shakable(
             v-if="innerIconRight"
             tag="label"
@@ -62,6 +64,7 @@
         v-model="inputValue"
         :multiple="multiple"
         :items="items"
+        :color="color"
         @item-click="!multiple && (showMenu = false)")
 
     template(v-if="labelPosition === 'right'")
@@ -112,7 +115,7 @@ export default {
 
   computed: {
     hasValue () {
-      return this.inputValue.length || (this.type === 'number' && this.inputNumberError)
+      return Array.isArray(this.inputValue) ? this.inputValue.length : (this.inputValue !== null)
     },
     hasLabel () {
       return this.label || this.$slots.default
@@ -147,14 +150,22 @@ export default {
         'w-select__selection-wrap--shadow': this.shadow,
         'w-select__selection-wrap--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round
       }
-    },
-    menuClasses () {
-      return {
-      }
     }
   },
 
   methods: {
+    onInput () {
+      this.$emit('input', this.inputValue)
+    },
+    onFocus (e) {
+      this.showMenu = true
+      this.isFocused = true
+      this.$emit('focus', e)
+    },
+    onBlur (e) {
+      this.isFocused = false
+      this.$emit('blur', e)
+    }
   },
 
   watch: {
@@ -181,14 +192,6 @@ $size: round(2 * $base-font-size);
     -webkit-tap-highlight-color: transparent;
   }
 
-  &__selection-wrap--round {
-    border-radius: 9em;
-    padding-left: 3 * $base-increment;
-    padding-right: 3 * $base-increment;
-  }
-  &__selection-wrap--tile {border-radius: initial;}
-  &__selection-wrap--shadow {box-shadow: $box-shadow;}
-
   // Selection wrapper.
   // ------------------------------------------------------
   &__selection-wrap {
@@ -200,48 +203,50 @@ $size: round(2 * $base-font-size);
     border-radius: $border-radius;
     border: $border;
     transition: border $transition-duration;
-  }
 
-  &--floating-label &__selection-wrap {
-    margin-top: 3 * $base-increment;
-  }
+    &--round {
+      border-radius: 9em;
+      padding-left: 3 * $base-increment;
+      padding-right: 3 * $base-increment;
+    }
+    &--tile {border-radius: initial;}
+    &--shadow {box-shadow: $box-shadow;}
 
-  &__selection-wrap--underline {
-    border-bottom-left-radius: initial;
-    border-bottom-right-radius: initial;
-    border-width: 0 0 1px;
-  }
+    .w-select--floating-label & {
+      margin-top: 3 * $base-increment;
+    }
 
-  // &__selection-wrap--box {}
+    &--underline {
+      border-bottom-left-radius: initial;
+      border-bottom-right-radius: initial;
+      border-width: 0 0 1px;
+    }
 
-  &__selection-wrap--round {border-radius: 9em;}
-  &__selection-wrap--tile {border-radius: initial;}
-  &__selection-wrap--shadow {box-shadow: $box-shadow;}
+    .w-select--focused & {border-color: currentColor;}
 
-  &--focused &__selection-wrap {border-color: currentColor;}
+    // Underline.
+    &--underline:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-bottom: 2px solid currentColor;
+      transition: $transition-duration;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
 
-  // Underline.
-  &__selection-wrap--underline:after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-bottom: 2px solid currentColor;
-    transition: $transition-duration;
-    transform: translateX(-50%);
-    pointer-events: none;
-  }
-
-  &--focused &__selection-wrap--underline:after {width: 100%;}
-  &__selection-wrap--round.w-selection__selection-wrap--underline:after {
-    border-radius: 9em;
-    transition: $transition-duration, height 0.035s;
-  }
-  &--focused &__selection-wrap--round.w-selection__selection-wrap--underline:after {
-    height: 100%;
-    transition: $transition-duration, height 0s ($transition-duration - 0.035s);
+    .w-select--focused &--underline:after {width: 100%;}
+    &--round.w-selection__selection-wrap--underline:after {
+      border-radius: 9em;
+      transition: $transition-duration, height 0.035s;
+    }
+    .w-select--focused &--round.w-selection__selection-wrap--underline:after {
+      height: 100%;
+      transition: $transition-duration, height 0s ($transition-duration - 0.035s);
+    }
   }
 
   // selection field.
@@ -289,7 +294,7 @@ $size: round(2 * $base-font-size);
     position: absolute;
     font-size: 1.4em;
 
-    .w-selection--focused & {color: currentColor;}
+    .w-select--focused & {color: currentColor;}
 
     .w-select--disabled & {
       color: $disabled-color;
@@ -317,7 +322,7 @@ $size: round(2 * $base-font-size);
     &--left {margin-right: 2 * $base-increment;}
     &--right {margin-left: 2 * $base-increment;}
 
-    .w-selection--disabled & {
+    .w-select--disabled & {
       color: $disabled-color;
       cursor: not-allowed;
       -webkit-tap-highlight-color: transparent;
@@ -332,7 +337,7 @@ $size: round(2 * $base-font-size);
     transform: translateY(-50%);
     pointer-events: none;
 
-    .w-selection--no-padding & {
+    .w-select--no-padding & {
       left: 0;
       padding-left: 0;
       padding-right: 0;
@@ -341,36 +346,36 @@ $size: round(2 * $base-font-size);
       padding-left: round(3 * $base-increment);
       padding-right: round(3 * $base-increment);
     }
-    .w-selection--inner-icon-left & {left: 18px;}
-    .w-selection--no-padding.w-selection--inner-icon-left & {left: 26px;}
+    .w-select--inner-icon-left & {left: 18px;}
+    .w-select--no-padding.w-select--inner-icon-left & {left: 26px;}
 
-    .w-selection--floating-label & {
+    .w-select--floating-label & {
       transform-origin: 0 0;
       transition: $transition-duration ease;
     }
 
     // move label with underline style.
-    .w-selection--focused.w-selection--floating-label &,
-    .w-selection--filled.w-selection--floating-label &,
-    .w-selection--has-placeholder.w-selection--floating-label & {
+    .w-select--focused.w-select--floating-label &,
+    .w-select--filled.w-select--floating-label &,
+    .w-select--has-placeholder.w-select--floating-label & {
       transform: translateY(-160%) scale(0.85);
     }
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
-    .w-selection--floating-label .w-selection__selection:-webkit-autofill & {
+    .w-select--floating-label .w-select__select:-webkit-autofill & {
       transform: translateY(-160%) scale(0.85);
     }
     // Move label with outline style or with shadow.
-    .w-selection--focused.w-selection--floating-label .w-selection__selection-wrap--box &,
-    .w-selection--filled.w-selection--floating-label .w-selection__selection-wrap--box &,
-    .w-selection--has-placeholder.w-selection--floating-label .w-selection__selection-wrap--box & {
+    .w-select--focused.w-select--floating-label .w-select__select-wrap--box &,
+    .w-select--filled.w-select--floating-label .w-select__select-wrap--box &,
+    .w-select--has-placeholder.w-select--floating-label .w-select__select-wrap--box & {
       transform: translateY(-180%) scale(0.85);
     }
-    .w-selection--focused.w-selection--floating-label.w-selection--inner-icon-left &,
-    .w-selection--filled.w-selection--floating-label.w-selection--inner-icon-left & {left: 0;}
+    .w-select--focused.w-select--floating-label.w-select--inner-icon-left &,
+    .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
-    .w-selection--floating-label.w-selection--inner-icon-left .w-selection__selection:-webkit-autofill & {left: 0;}
+    .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
 
-    .w-selection--focused & {color: currentColor;}
+    .w-select--focused & {color: currentColor;}
   }
 }
 </style>
