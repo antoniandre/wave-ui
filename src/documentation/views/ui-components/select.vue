@@ -6,7 +6,8 @@ div
 
   title-link(h2) Basic
   example
-    w-select(:items="items1")
+    w-select(:items="items1" label="Select an item")
+    w-select.mt4(:items="items1" placeholder="Select an item")
     template(#pug).
 
   title-link(h2) Multiple selection
