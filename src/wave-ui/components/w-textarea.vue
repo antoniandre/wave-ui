@@ -59,6 +59,10 @@
 </template>
 
 <script>
+/**
+ * @todo Share the common parts between w-input, w-textarea & w-select.
+ **/
+
 import FormElementMixin from '../mixins/form-elements'
 
 export default {
