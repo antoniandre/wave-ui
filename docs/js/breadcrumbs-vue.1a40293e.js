@@ -1,2 +1,0 @@
-(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["breadcrumbs-vue"],{b435:function(e,t,a){"use strict";a.r(t);var n=function(){var e=this,t=e.$createElement,a=e._self._c||t;return a("div",[a("title-link",{staticClass:"mt4 code",attrs:{h1:""}},[e._v("w-breadcrumbs")])],1)},s=[],r={},c=r,l=a("2877"),u=Object(l["a"])(c,n,s,!1,null,null,null);t["default"]=u.exports}}]);
-//# sourceMappingURL=breadcrumbs-vue.1a40293e.js.map
