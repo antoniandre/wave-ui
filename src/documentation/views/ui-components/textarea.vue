@@ -131,50 +131,44 @@ div
   title-link(h2) Disabled &amp; readonly
   example
     w-textarea.mb4(
-      label="Disabled"
+      label="Disabled & empty"
       inner-icon-left="mdi mdi-minus-circle"
       outline
       disabled)
     w-textarea.mb4(
-      label="Disabled and filled"
+      label="Disabled & filled"
       inner-icon-left="mdi mdi-minus-circle" value="Some content"
       outline
       disabled)
     w-textarea.mb4(
-      label="Readonly"
+      label="Readonly & empty"
       inner-icon-left="mdi mdi-lock"
       outline
       readonly)
     w-textarea(
-      label="Readonly and filled"
+      label="Readonly & filled"
       inner-icon-left="mdi mdi-lock" value="Some content"
       outline
       readonly)
     template(#pug).
       w-textarea.mb4(
-        label="Disabled"
+        label="Disabled &amp; empty"
         inner-icon-left="mdi mdi-minus-circle"
         outline
         disabled)
       w-textarea.mb4(
-        label="Disabled and filled"
+        label="Disabled &amp; filled"
         inner-icon-left="mdi mdi-minus-circle" value="Some content"
         outline
         disabled)
       w-textarea.mb4(
-        label="Readonly"
+        label="Readonly &amp; empty"
         inner-icon-left="mdi mdi-lock"
         outline
         readonly)
       w-textarea(
-        label="Readonly and filled"
+        label="Readonly &amp; filled"
         inner-icon-left="mdi mdi-lock" value="Some content"
         outline
         readonly)
 </template>
-
-<script>
-export default {
-
-}
-</script>

@@ -78,6 +78,7 @@ export default {
         label: 'Form elements',
         route: 'form',
         children: [
+          // { label: 'Autocomplete', route: 'w-autocomplete', disabled: true },
           { label: 'Checkbox', route: 'w-checkbox' },
           { label: 'Input', route: 'w-input' },
           { label: 'Form', route: 'w-form' },

@@ -219,15 +219,15 @@ div
 
   title-link(h2) Disabled &amp; readonly
   example
-    w-input.mb3(label="Disabled" inner-icon-left="mdi mdi-minus-circle" outline disabled)
-    w-input.mb3(label="Disabled and filled" inner-icon-left="mdi mdi-minus-circle" value="Some content" outline disabled)
-    w-input.mb3(label="Readonly" inner-icon-left="mdi mdi-lock" outline readonly)
-    w-input.mb3(label="Readonly and filled" inner-icon-left="mdi mdi-lock" value="Some content" outline readonly)
+    w-input.mb3(label="Disabled & empty" inner-icon-left="mdi mdi-minus-circle" outline disabled)
+    w-input.mb3(label="Disabled & filled" inner-icon-left="mdi mdi-minus-circle" value="Some content" outline disabled)
+    w-input.mb3(label="Readonly & empty" inner-icon-left="mdi mdi-lock" outline readonly)
+    w-input.mb3(label="Readonly & filled" inner-icon-left="mdi mdi-lock" value="Some content" outline readonly)
     template(#pug).
-      w-input.mb3(label="Disabled" inner-icon-left="mdi mdi-minus-circle" outline disabled)
-      w-input.mb3(label="Disabled and filled" inner-icon-left="mdi mdi-minus-circle" value="Some content" outline disabled)
-      w-input.mb3(label="Readonly" inner-icon-left="mdi mdi-lock" outline readonly)
-      w-input.mb3(label="Readonly and filled" inner-icon-left="mdi mdi-lock" value="Some content" outline readonly)
+      w-input.mb3(label="Disabled &amp; empty" inner-icon-left="mdi mdi-minus-circle" outline disabled)
+      w-input.mb3(label="Disabled &amp; filled" inner-icon-left="mdi mdi-minus-circle" value="Some content" outline disabled)
+      w-input.mb3(label="Readonly &amp; empty" inner-icon-left="mdi mdi-lock" outline readonly)
+      w-input.mb3(label="Readonly &amp; filled" inner-icon-left="mdi mdi-lock" value="Some content" outline readonly)
 
   title-link(h2) Types
   p The default type is "#[span.code text]" but the types bellow are also supported.
