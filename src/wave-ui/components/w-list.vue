@@ -187,7 +187,7 @@ export default {
       },
       set (items) {
         this.selectedItems = items
-        this.$emit('input', this.isMultipleSelect ? items : (items[0] || null))
+        this.$emit('input', this.isMultipleSelect ? items : (items[0] !== undefined ? items[0] : null))
       }
     },
 
