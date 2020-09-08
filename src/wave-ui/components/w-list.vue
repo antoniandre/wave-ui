@@ -154,7 +154,8 @@ export default {
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
     itemValue: { type: String, default: 'value' }, // Name of the value field.
     itemClass: { type: String },
-    depth: { type: Number, default: 0 } // For recursive call.
+    depth: { type: Number, default: 0 }, // For recursive call.
+    returnObject: { type: Boolean }
   },
 
   data: () => ({
@@ -214,7 +215,10 @@ export default {
     selectItem (item, forcedValue) {
       item.selected = forcedValue !== undefined ? forcedValue : !item.selected
       if (!this.isMultipleSelect) this.selection = item.selected ? [item[this.itemValue]] : []
-      else this.selection = this.listItems.filter(item => item.selected).map(item => item[this.itemValue])
+      else {
+        const filteredItems = this.listItems.filter(item => item.selected)
+        this.selection = this.returnObject ? filteredItems : filteredItems.map(item => item[this.itemValue])
+      }
     },
 
     liLabelClasses (item) {
@@ -228,7 +232,9 @@ export default {
     },
     // Make sure the items selection is always an array.
     checkSelection (items) {
-      return Array.isArray(items) ? items : (items ? [items] : [])
+      items = Array.isArray(items) ? items : (items ? [items] : [])
+      if (this.returnObject) items = items.map(item => item[this.itemValue] !== undefined ? item[this.itemValue] : item)
+      return items
     }
   },
 
