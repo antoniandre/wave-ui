@@ -121,7 +121,8 @@ export default {
       return {
         'w-textarea': true,
         'w-textarea--disabled': this.disabled,
-        'w-textarea--filled': this.hasValue,
+        'w-textarea--readonly': this.readonly,
+        [`w-textarea--${this.hasValue ? 'filled' : 'empty'}`]: true,
         'w-textarea--focused': this.isFocused,
         'w-textarea--dark': this.dark,
         'w-textarea--resizable': this.resizable,
@@ -335,6 +336,10 @@ $inactive-color: #777;
       color: $disabled-color;
       cursor: not-allowed;
       -webkit-tap-highlight-color: transparent;
+    }
+    .w-textarea--readonly.w-textarea--empty & {
+      opacity: 0.5;
+      cursor: auto;
     }
   }
 

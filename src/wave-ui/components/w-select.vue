@@ -134,7 +134,8 @@ export default {
       return {
         'w-select': true,
         'w-select--disabled': this.disabled,
-        'w-select--filled': this.hasValue,
+        'w-select--readonly': this.readonly,
+        [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
         'w-select--focused': this.isFocused,
         'w-select--dark': this.dark,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' &&
@@ -293,6 +294,8 @@ $size: round(2 * $base-font-size);
 
   &--disabled input::placeholder {color: inherit;}
 
+  &--readonly.w-select--empty &__selection {cursor: auto;}
+
   // Icons inside.
   // ------------------------------------------------------
   &__icon {
@@ -331,6 +334,10 @@ $size: round(2 * $base-font-size);
       color: $disabled-color;
       cursor: not-allowed;
       -webkit-tap-highlight-color: transparent;
+    }
+    .w-select--readonly.w-select--empty & {
+      opacity: 0.5;
+      cursor: auto;
     }
   }
 
