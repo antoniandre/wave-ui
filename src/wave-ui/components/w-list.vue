@@ -167,7 +167,7 @@ export default {
 
   computed: {
     listItems () {
-      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items
+      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
       return items.map((item, i) => {
         item = { ...item } // Don't modify the original.
 
