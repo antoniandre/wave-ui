@@ -127,7 +127,8 @@ export default {
       return {
         'w-input': true,
         'w-input--disabled': this.disabled,
-        'w-input--filled': this.hasValue,
+        'w-input--readonly': this.readonly,
+        [`w-input--${this.hasValue ? 'filled' : 'empty'}`]: true,
         'w-input--focused': this.isFocused,
         'w-input--dark': this.dark,
         'w-input--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel && !(this.readonly && !this.hasValue),
@@ -303,10 +304,15 @@ $inactive-color: #777;
 
     &--left {margin-right: 2 * $base-increment;}
     &--right {margin-left: 2 * $base-increment;}
+
     .w-input--disabled & {
       color: $disabled-color;
       cursor: not-allowed;
       -webkit-tap-highlight-color: transparent;
+    }
+    .w-input--readonly.w-input--empty & {
+      opacity: 0.5;
+      cursor: auto;
     }
   }
 
