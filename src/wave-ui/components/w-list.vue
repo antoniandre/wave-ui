@@ -214,10 +214,13 @@ export default {
   methods: {
     selectItem (item, forcedValue) {
       item.selected = forcedValue !== undefined ? forcedValue : !item.selected
-      if (!this.isMultipleSelect) this.selection = item.selected ? [item[this.itemValue]] : []
-      else {
+
+      if (this.isMultipleSelect) {
         const filteredItems = this.listItems.filter(item => item.selected)
         this.selection = this.returnObject ? filteredItems : filteredItems.map(item => item[this.itemValue])
+      }
+      else {
+        this.selection = item.selected ? [this.returnObject ? item : item[this.itemValue]] : []
       }
     },
 
@@ -230,7 +233,9 @@ export default {
         [this.itemClass]: !!this.itemClass
       }
     },
-    // Make sure the items selection is always an array.
+    // Convert the received items selection to array if it is a unique value.
+    // Also accept objects if returnObject is true and convert to the object's value.
+    // In any case, always end up with an array of flat values.
     checkSelection (items) {
       items = Array.isArray(items) ? items : (items ? [items] : [])
       if (this.returnObject) items = items.map(item => item[this.itemValue] !== undefined ? item[this.itemValue] : item)
