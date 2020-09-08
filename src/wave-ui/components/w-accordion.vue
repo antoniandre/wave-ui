@@ -43,7 +43,7 @@ export default {
     value: { type: Array },
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
-    items: { type: [Array, Number] },
+    items: { type: [Array, Number], required: true },
     itemClass: { type: String },
     titleClass: { type: String },
     contentClass: { type: String },
@@ -56,7 +56,7 @@ export default {
 
   computed: {
     accordionItems () {
-      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items
+      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
       return items.map((item, index) => new Vue.observable({
         ...item,
         index,
