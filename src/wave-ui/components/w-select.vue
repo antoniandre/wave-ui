@@ -370,9 +370,9 @@ $size: round(2 * $base-font-size);
       transform: translateY(-160%) scale(0.85);
     }
     // Move label with outline style or with shadow.
-    .w-select--focused.w-select--floating-label .w-select__select-wrap--box &,
-    .w-select--filled.w-select--floating-label .w-select__select-wrap--box &,
-    .w-select--has-placeholder.w-select--floating-label .w-select__select-wrap--box & {
+    .w-select--focused.w-select--floating-label .w-select__selection-wrap--box &,
+    .w-select--filled.w-select--floating-label .w-select__selection-wrap--box &,
+    .w-select--has-placeholder.w-select--floating-label .w-select__selection-wrap--box & {
       transform: translateY(-180%) scale(0.85);
     }
     .w-select--focused.w-select--floating-label.w-select--inner-icon-left &,
