@@ -3,7 +3,7 @@
     :is="formRegister ? 'w-form-element' : 'div'"
     v-bind="formRegister && { validators, inputValue, disabled, readonly }"
     :valid.sync="valid"
-    @reset="$emit('input', inputValue = '')"
+    @reset="$emit('input', inputValue = [])"
     :class="classes")
     template(v-if="labelPosition === 'left'")
       label.w-select__label.w-select__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
@@ -29,7 +29,7 @@
             :for="`w-select--${_uid}`"
             @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
           input.w-select__selection(
-            v-model="inputValue"
+            :value="selectionString"
             @click="!disabled && !readonly && (showMenu = true)"
             @focus="!disabled && !readonly && onFocus($event)"
             @blur="onBlur"
@@ -41,7 +41,7 @@
             :name="inputName"
             :placeholder="placeholder || null"
             :disabled="disabled"
-            :readonly="readonly"
+            readonly
             :required="required"
             autocomplete="off")
           template(v-if="labelPosition === 'inside' && showLabelInside")
@@ -61,8 +61,10 @@
             :for="`w-select--${_uid}`"
             @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
       w-list.white--bg(
-        v-model="inputValue"
+        :value="inputValue"
+        @input="inputValue = $event === null ? [] : (multiple ? $event : [$event])"
         :multiple="multiple"
+        return-object
         :items="items"
         :color="color"
         @item-click="!multiple && (showMenu = false)")
@@ -107,7 +109,7 @@ export default {
   },
 
   data: () => ({
-    inputValue: [],
+    inputValue: [], // Selection is always an array (internally), but emits a single value if not multiple.
     showMenu: false,
     menuMinWidth: 0,
     isFocused: false
@@ -123,6 +125,11 @@ export default {
     showLabelInside () {
       return !this.staticLabel || (!this.hasValue && !this.placeholder)
     },
+    selectionString () {
+      return this.inputValue && this.inputValue.map(
+        item => item[this.itemValue] !== undefined ? item[this.itemLabel] : item
+      ).join(', ')
+    },
     classes () {
       return {
         'w-select': true,
@@ -130,7 +137,8 @@ export default {
         'w-select--filled': this.hasValue,
         'w-select--focused': this.isFocused,
         'w-select--dark': this.dark,
-        'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel && !(this.readonly && !this.hasValue),
+        'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' &&
+                                    !this.staticLabel && !(this.readonly && !this.hasValue),
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-select--has-placeholder': this.placeholder,
         'w-select--inner-icon-left': this.innerIconLeft,
@@ -170,7 +178,7 @@ export default {
 
   watch: {
     value (value) {
-      this.inputValue = Array.isArray(value) ? value : [value]
+      this.inputValue = value === null ? [] : (Array.isArray(value) ? value : [value])
     }
   }
 }
@@ -249,7 +257,7 @@ $size: round(2 * $base-font-size);
     }
   }
 
-  // selection field.
+  // selection (input) field.
   // ------------------------------------------------------
   &__selection {
     width: 100%;
@@ -261,10 +269,7 @@ $size: round(2 * $base-font-size);
     outline: none;
     padding-left: 2 * $base-increment;
     padding-right: 2 * $base-increment;
-
-    // For type="search" on Safari.
-    -webkit-appearance: none;
-    &::-webkit-search-decoration {-webkit-appearance: none;}
+    cursor: pointer;
   }
 
   &--no-padding &__selection {
