@@ -118,50 +118,46 @@ div
     w-select.mb4(
       :items="items1"
       label="Disabled & empty"
-      inner-icon-left="mdi mdi-minus-circle"
       outline
       disabled)
     w-select.mb4(
       :items="items1"
       label="Disabled & filled"
-      inner-icon-left="mdi mdi-minus-circle" value="Some content"
+      value="Item 1"
       outline
       disabled)
     w-select.mb4(
       :items="items1"
       label="Readonly & empty"
-      inner-icon-left="mdi mdi-lock"
       outline
       readonly)
     w-select(
       :items="items1"
+      value="Item 1"
       label="Readonly & filled"
-      inner-icon-left="mdi mdi-lock" value="Some content"
       outline
       readonly)
     template(#pug).
       w-select.mb4(
         :items="items"
         label="Disabled &amp; empty"
-        inner-icon-left="mdi mdi-minus-circle"
         outline
         disabled)
       w-select.mb4(
         :items="items"
+        value="Item 1"
         label="Disabled &amp; filled"
-        inner-icon-left="mdi mdi-minus-circle" value="Some content"
         outline
         disabled)
       w-select.mb4(
         :items="items"
         label="Readonly &amp; empty"
-        inner-icon-left="mdi mdi-lock"
         outline
         readonly)
       w-select(
         :items="items"
+        value="Item 1"
         label="Readonly &amp; filled"
-        inner-icon-left="mdi mdi-lock" value="Some content"
         outline
         readonly)
 </template>

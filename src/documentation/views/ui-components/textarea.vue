@@ -132,43 +132,39 @@ div
   example
     w-textarea.mb4(
       label="Disabled & empty"
-      inner-icon-left="mdi mdi-minus-circle"
       outline
       disabled)
     w-textarea.mb4(
+      value="Some content"
       label="Disabled & filled"
-      inner-icon-left="mdi mdi-minus-circle" value="Some content"
       outline
       disabled)
     w-textarea.mb4(
       label="Readonly & empty"
-      inner-icon-left="mdi mdi-lock"
       outline
       readonly)
     w-textarea(
+      value="Some content"
       label="Readonly & filled"
-      inner-icon-left="mdi mdi-lock" value="Some content"
       outline
       readonly)
     template(#pug).
       w-textarea.mb4(
         label="Disabled &amp; empty"
-        inner-icon-left="mdi mdi-minus-circle"
         outline
         disabled)
       w-textarea.mb4(
+        value="Some content"
         label="Disabled &amp; filled"
-        inner-icon-left="mdi mdi-minus-circle" value="Some content"
         outline
         disabled)
       w-textarea.mb4(
         label="Readonly &amp; empty"
-        inner-icon-left="mdi mdi-lock"
         outline
         readonly)
       w-textarea(
+        value="Some content"
         label="Readonly &amp; filled"
-        inner-icon-left="mdi mdi-lock" value="Some content"
         outline
         readonly)
 </template>
