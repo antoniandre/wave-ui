@@ -8,6 +8,8 @@ p {margin-bottom: 2 * $base-increment;}
 
 .ovv {overflow: visible;}
 .ovh {overflow: hidden;}
+
+.main-content {max-width: 100%;}
 .main-content.ovh {
   overflow: hidden;
   margin: -16px;
@@ -29,6 +31,10 @@ p {margin-bottom: 2 * $base-increment;}
 // Vue Transitions.
 .fade-page-enter-active, .fade-page-leave-active {transition: opacity 0.12s;}
 .fade-page-enter, .fade-page-leave-to {opacity: 0;}
+
+@media screen and (max-width: 800px) {
+  .w-app .content-wrap {padding-left: 236px;}
+}
 
 @media screen and (max-width: 600px) {
   .w-app .content-wrap {padding-left: 16px;}
