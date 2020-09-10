@@ -55,6 +55,11 @@ div
     w-select(:items="items1" multiple)
     template(#pug).
 
+  title-link(h2) V-model
+  example
+    w-select(v-model="selection1" :items="items1" multiple)
+    template(#pug).
+
   title-link(h2) Label position
   p.
     By default the label is positioned inside, you can also place it on the left or right outside of
@@ -176,7 +181,8 @@ export default {
       { label: 'Item 3' },
       { label: 'Item 4' },
       { label: 'Item 5', disabled: true }
-    ]
+    ],
+    selection1: ['Item 1', 'Item 3']
   })
 }
 </script>

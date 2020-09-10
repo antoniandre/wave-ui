@@ -116,6 +116,10 @@ export default {
   }),
 
   computed: {
+    // Cached and fast lookup of object from value (used in checkSelection).
+    itemsValues () {
+      return this.items.map(item => item[this.itemValue] !== undefined ? item[this.itemValue] : item[this.itemLabel])
+    },
     hasValue () {
       return Array.isArray(this.inputValue) ? this.inputValue.length : (this.inputValue !== null)
     },
@@ -127,7 +131,7 @@ export default {
     },
     selectionString () {
       return this.inputValue && this.inputValue.map(
-        item => item[this.itemValue] !== undefined ? item[this.itemLabel] : item
+        item => item[this.itemValue] !== undefined ? item[this.itemLabel] : (item[this.itemLabel] !== undefined ? item[this.itemLabel] : item)
       ).join(', ')
     },
     classes () {
@@ -174,12 +178,23 @@ export default {
     onBlur (e) {
       this.isFocused = false
       this.$emit('blur', e)
+    },
+    // Convert the received items selection to array if it is a unique value.
+    // Also accept objects if returnObject is true.
+    // In any case, always end up with an array of objects.
+    checkSelection (items) {
+      items = Array.isArray(items) ? items : (items ? [items] : [])
+      return items.map(item => this.items[this.itemsValues.indexOf(item)])
     }
+  },
+
+  created () {
+    this.inputValue = this.checkSelection(this.value)
   },
 
   watch: {
     value (value) {
-      this.inputValue = value === null ? [] : (Array.isArray(value) ? value : [value])
+      this.inputValue = this.checkSelection(value)
     }
   }
 }
