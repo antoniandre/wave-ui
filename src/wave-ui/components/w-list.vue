@@ -171,24 +171,13 @@ export default {
       return items.map((item, i) => {
         item = { ...item } // Don't modify the original.
 
-        // If no value is set then add one to prevent error.
-        if (item[this.itemValue] === undefined) item[this.itemValue] = i
+        // If no value is set on the item, add one from its label, or from its index. the result is
+        // store in a _value attribute.
+        item._value = item[this.itemValue] === undefined ? item[this.itemLabel] || i : item[this.itemValue]
 
-        item.selected = this.selection.includes(item[this.itemValue])
+        item.selected = this.selectedItems.map(obj => obj._value !== undefined ? obj._value : obj).includes(item._value)
         return item
       })
-    },
-
-    // Selection is always an array, but emits a single value if not multiple.
-    selection: {
-      get () {
-        if (!this.isSelectable) return []
-        return this.selectedItems || []
-      },
-      set (items) {
-        this.selectedItems = items
-        this.$emit('input', this.isMultipleSelect ? items : (items[0] !== undefined ? items[0] : null))
-      }
     },
 
     isMultipleSelect () {
@@ -212,16 +201,30 @@ export default {
   },
 
   methods: {
+    // If object, get the item value, if none, get the item label, if none get the id.
+    // If simple value, return as is.
+    getItemValue (item) {
+      if (item && typeof item === 'object') {
+        if (item[this.itemValue] !== undefined) return item[this.itemValue]
+        else return item[this.itemLabel] !== undefined ? item[this.itemLabel] : item.index
+      }
+      else return item
+    },
+
+    // Action of selecting 1 item.
     selectItem (item, forcedValue) {
+      // Select or unselect the item.
       item.selected = forcedValue !== undefined ? forcedValue : !item.selected
 
+      // Set the `selection` computed that emits the value to the outside world.
       if (this.isMultipleSelect) {
         const filteredItems = this.listItems.filter(item => item.selected)
-        this.selection = this.returnObject ? filteredItems : filteredItems.map(item => item[this.itemValue])
+        this.selectedItems = this.returnObject ? filteredItems : filteredItems.map(item._value)
       }
       else {
-        this.selection = item.selected ? [this.returnObject ? item : item[this.itemValue]] : []
+        this.selectedItems = item.selected ? [this.returnObject ? item : this.getItemValue(item)] : []
       }
+      this.emitSelection()
     },
 
     liLabelClasses (item) {
@@ -233,13 +236,22 @@ export default {
         [this.itemClass]: !!this.itemClass
       }
     },
+
     // Convert the received items selection to array if it is a unique value.
     // Also accept objects if returnObject is true and convert to the object's value.
     // In any case, always end up with an array of flat values.
+    // The values given can be (in this order) a value, a label or the index of the item.
     checkSelection (items) {
       items = Array.isArray(items) ? items : (items ? [items] : [])
-      if (this.returnObject) items = items.map(item => item[this.itemValue] !== undefined ? item[this.itemValue] : item)
+      if (this.returnObject) items = items.map(this.getItemValue)
+
       return items
+    },
+
+    emitSelection () {
+      const items = this.selectedItems
+      // `selectedItems` is always an array of items, but on set, it emits a single value if not `multiple`.
+      this.$emit('input', this.isMultipleSelect ? items : (items[0] !== undefined ? items[0] : null))
     }
   },
 
@@ -257,7 +269,8 @@ export default {
       // just keep the first selected item.
       if (!boolean) {
         const firstSelected = this.listItems.find(item => item.selected)
-        this.selection = firstSelected ? [firstSelected[this.itemValue]] : []
+        this.selectedItems = firstSelected ? [firstSelected._value] : []
+        this.emitSelection()
       }
     }
   },
