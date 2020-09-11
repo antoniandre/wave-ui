@@ -1,64 +1,241 @@
 <template lang="pug">
 div
-  title-link.mt4(h1 slug="w-select")
-    .code w-select
+  //- title-link.mt4(h1 slug="w-select")
+    //- .code w-select
     w-tag.ml3(bg-color="orange" lg color="white") In Progress
 
+  alert(info).
+    //- The #[span.code w-select] component can be placed in a hidden overflow container and the dropdown
+    menu will still be fully visible when open.#[br]
+    This is because the select dropdown menu is placed at the #[span.code .w-app] level in the DOM,
+    just so you don't have to worry about this annoying case.
+
   title-link(h2) Basic
+  //- p This is the most basic use of the #[span.code w-select] component. No label, no v-model only items.
   example
     w-select(:items="items1")
     template(#pug).
+      w-select(:items="items")
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
 
   title-link(h2) Label and / or placeholder
+  p.
+    The select list can have a label or not and a placeholder or not.#[br]
+
   example
     w-select(:items="items1" label="Label")
     w-select.mt4(:items="items1" placeholder="Placeholder")
     w-select.mt4(:items="items1" label="Label" placeholder="Placeholder")
     template(#pug).
+      w-select(:items="items" label="Label")
+      w-select.mt4(:items="items" placeholder="Placeholder")
+      w-select.mt4(:items="items" label="Label" placeholder="Placeholder")
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
+
+  alert(tip).
+    The items of the select list should have a label, which is by default expected in each item
+    object under the #[code label] name.#[br]
+    If this is a constraint, you can use the option #[code item-label] to specify the name of another
+    attribute to be used instead.
 
   title-link(h2) Outline
   example
-    w-select(:items="items1" outline) Select label
+    w-select(:items="items1" outline) Label
     template(#pug).
-      w-select(:items="items" outline) Select label
-
-  title-link(h2) Shadow
-  example
-    w-select(:items="items1" shadow) Select label
-    w-select.mt4(:items="items1" outline shadow) Select label
-    template(#pug).
-      w-select(:items="items" shadow) Select label
-      w-select.mt4(:items="items" outline shadow) Select label
-
-  title-link(h2) Tile
-  example
-    w-select(:items="items1" tile) Select label
-    w-select.mt4(:items="items1" outline tile) Select label
-    template(#pug).
-      w-select(:items="items" tile) Select label
-      w-select.mt4(:items="items" outline tile) Select label
+      w-select(:items="items" outline) Label
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
 
   title-link(h2) Colors
   p.mb4.
     Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
     background.#[br]
     By default, the text has the "#[span.code primary]" color.
+  .title3 Default style (Underline)
   example
-    w-select(:items="items1" color="blue") Select label
-    w-select.mt4(:items="items1" outline color="blue") Select label
-    w-select.mt4(:items="items1" bg-color="blue-light5" color="blue-dark3") Select label
-    w-select.mt4(:items="items1" outline bg-color="blue-light5" color="blue-dark3") Select label
+    w-select(:items="items1" color="blue") Label
+    w-select.mt4(:items="items1" bg-color="blue-light5" color="blue-dark3") Label
     template(#pug).
+      w-select(:items="items" color="blue") Label
+      w-select.mt4(:items="items" bg-color="blue-light5" color="blue-dark3") Label
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
+
+  .title3 Outline style
+  example
+    w-select(:items="items1" outline color="blue") Label
+    w-select.mt4(:items="items1" outline bg-color="blue-light5" color="blue-dark3") Label
+    template(#pug).
+      w-select(:items="items" outline color="blue") Label
+      w-select.mt4(:items="items" outline bg-color="blue-light5" color="blue-dark3") Label
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
+
+  title-link(h2) Shadow
+  example
+    .title4 Default style (Underline)
+    w-select(:items="items1" shadow) Label
+    .title4.mt6 Outline style
+    w-select(:items="items1" outline shadow) Label
+    template(#pug).
+      .title4 Default style (Underline)
+      w-select(:items="items" shadow) Label
+
+      .title4.mt6 Outline style
+      w-select(:items="items" outline shadow) Label
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
+
+  title-link(h2) Tile &amp; round
+  example
+    .title4 Default style (Underline)
+    w-select(:items="items1" bg-color="purple-light5" tile) Tile
+    w-select(:items="items1" bg-color="purple-light5" round) Round
+    .title4.mt6 Outline style
+    w-select.mt4(:items="items1" outline tile) Tile
+    w-select.mt4(:items="items1" outline round) Round
+    template(#pug).
+      .title4 Default style (Underline)
+      w-select(:items="items" bg-color="purple-light5" tile) Tile
+      w-select(:items="items" bg-color="purple-light5" round) Round
+
+      .title4.mt6 Outline style
+      w-select.mt4(:items="items" outline tile) Tile
+      w-select.mt4(:items="items" outline round) Round
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
 
   title-link(h2) Multiple selection
   example
     w-select(:items="items1" multiple)
     template(#pug).
+      w-select(:items="items" multiple)
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
 
   title-link(h2) V-model
+  alert(tip).
+    //- By default, the #[span.code w-select] component expects the items to have a #[code value] attribute.#[br]
+    If this is a constraint, you can use the option #[code item-value] to specify the name of another
+    attribute to be used instead (must have a unique value), like an id for instance.
   example
-    w-select(v-model="selection1" :items="items1" multiple)
+    w-select(v-model="vModelSelect1" :items="items3" multiple)
+    w-flex.align-center.mt4
+      span v-model:
+      code.ml2 {{ vModelSelect1 }}
     template(#pug).
+      w-select(v-model="selection" :items="items" multiple)
+      w-flex.align-center.mt4
+        span v-model:
+        code.ml2 {{ '\{\{ selection \}\}' }}
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1', value: 1 },
+          { label: 'Item 2', value: 2 },
+          { label: 'Item 3', value: 3 }
+        ],
+        selection: [1, 3]
+      })
+
+  title-link(h3) Without values (using labels)
+  p If no values are provided in the items objects, the labels will be used to identify the selected items.
+  example
+    w-select(v-model="vModelSelect2" :items="items1" multiple)
+    w-flex.align-center.mt4
+      span v-model:
+      code.ml2 {{ vModelSelect2 }}
+    template(#pug).
+      w-select(v-model="selection" :items="items1" multiple)
+      w-flex.align-center.mt4
+        span v-model:
+        code.ml2 {{ '\{\{ selection \}\}' }}
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ],
+        selection: ['Item 1', 'Item 3']
+      })
+
+  title-link(h3) Using full objects in v-model
+  p.
+    If it's more convenient for you, you can ask the #[span.code w-select] component to return the
+    full items objects in the selection.#[br]
+    You then have the choice to provide an array of either values or full objects in the v-model,
+    if you want to prefill the select list.
+  p
+  example
+    w-select(v-model="vModelSelect3" :items="items1" multiple return-object)
+    w-flex.align-center.mt4
+      span v-model:
+      code.ml2 {{ vModelSelect3 }}
+    template(#pug).
+      w-select(v-model="selection" :items="items" multiple)
+      w-flex.align-center.mt4
+        span v-model:
+        code.ml2 {{ '\{\{ selection \}\}' }}
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ],
+        selection: [{ label: 'Item 3' }]
+      })
 
   title-link(h2) Label position
   p.
@@ -69,10 +246,18 @@ div
     w-select.mt4(:items="items1" label="Select an item" label-position="left")
     w-select.mt4(:items="items1" label="Select an item" label-position="right")
     template(#pug).
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
 
   title-link(h2) Custom label via default slot
   p.
-    It is convenient to have the label inside the #[span.code w-select] component to let it handle
+    //- It is convenient to have the label inside the #[span.code w-select] component to let it handle
     the field focus event on label click.#[br]
     The #[span.code label] prop accepts any HTML, but because passing complex html via a prop is not fun,
     there is also a prop for setting the label wish will grant more freedom.
@@ -99,6 +284,14 @@ div
       w-select.mt4(:items="items" label-position="right" outline)
         w-icon.orange mdi mdi-arrow-left
         span.red.ml1 Right
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
 
   title-link(h2) Inner icons
   example
@@ -117,6 +310,14 @@ div
       .title4.mt6.mb2 Label inside
       w-select(:items="items" label="Select" label-position="inside" outline inner-icon-left="mdi mdi-star")
       w-select.mt4(:items="items" label="Select" label-position="inside" outline inner-icon-right="mdi mdi-arrow-down")
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
 
   title-link(h2) Disabled &amp; readonly
   example
@@ -165,6 +366,14 @@ div
         label="Readonly &amp; filled"
         outline
         readonly)
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
 </template>
 
 <script>
@@ -182,7 +391,14 @@ export default {
       { label: 'Item 4' },
       { label: 'Item 5', disabled: true }
     ],
-    selection1: ['Item 1', 'Item 3']
+    items3: [
+      { label: 'Item 1', value: 1 },
+      { label: 'Item 2', value: 2 },
+      { label: 'Item 3', value: 3 }
+    ],
+    vModelSelect1: [1, 3],
+    vModelSelect2: ['Item 1', 'Item 3'],
+    vModelSelect3: [{ label: 'Item 3' }]
   })
 }
 </script>
