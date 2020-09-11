@@ -109,7 +109,7 @@ const renderListItemLabel = function (createEl, li, index) {
     }
     component.on = {
       input: value => this.selectItem(li, value),
-      // @todo: on checkbox focus, focus the liste item.
+      // @todo: on checkbox focus, focus the list item.
       // focus: e => console.log(this, e, 'on checkbox focus')
 
     }
@@ -219,7 +219,7 @@ export default {
       // Set the `selection` computed that emits the value to the outside world.
       if (this.isMultipleSelect) {
         const filteredItems = this.listItems.filter(item => item.selected)
-        this.selectedItems = this.returnObject ? filteredItems : filteredItems.map(item._value)
+        this.selectedItems = this.returnObject ? filteredItems : filteredItems.map(item => item._value)
       }
       else {
         this.selectedItems = item.selected ? [this.returnObject ? item : this.getItemValue(item)] : []
@@ -248,8 +248,15 @@ export default {
       return items
     },
 
+    // Emit the cleaned-up selection to the v-model.
     emitSelection () {
-      const items = this.selectedItems
+      const items = this.selectedItems.map(item => {
+        if (!this.returnObject) return item._value
+
+        const { _value, selected, ...Item } = item
+        return Item
+      })
+
       // `selectedItems` is always an array of items, but on set, it emits a single value if not `multiple`.
       this.$emit('input', this.isMultipleSelect ? items : (items[0] !== undefined ? items[0] : null))
     }
