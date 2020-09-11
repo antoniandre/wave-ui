@@ -201,8 +201,6 @@ export default {
 </script>
 
 <style lang="scss">
-$size: round(2 * $base-font-size);
-
 .w-select {
   position: relative;
   display: flex;
@@ -223,7 +221,7 @@ $size: round(2 * $base-font-size);
     display: inline-flex;
     flex: 1 1 auto;
     align-items: center;
-    height: $size;
+    height: $form-field-height;
     border-radius: $border-radius;
     border: $border;
     transition: border $transition-duration;

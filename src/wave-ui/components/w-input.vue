@@ -177,7 +177,6 @@ export default {
 </script>
 
 <style lang="scss">
-$size: round(2 * $base-font-size);
 $inactive-color: #777;
 
 .w-input {
@@ -195,7 +194,7 @@ $inactive-color: #777;
     display: inline-flex;
     flex: 1 1 auto;
     align-items: center;
-    height: $size;
+    height: $form-field-height;
     border-radius: $border-radius;
     border: $border;
     transition: border $transition-duration;

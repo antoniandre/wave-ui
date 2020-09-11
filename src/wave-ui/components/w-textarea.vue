@@ -202,7 +202,6 @@ export default {
 </script>
 
 <style lang="scss">
-$size: round(2 * $base-font-size);
 $line-height: 1.2;
 $inactive-color: #777;
 
@@ -219,7 +218,7 @@ $inactive-color: #777;
     position: relative;
     display: inline-flex;
     flex: 1 1 auto;
-    min-height: $size;
+    min-height: $form-field-height;
     border-radius: $border-radius;
     border: $border;
     transition: border $transition-duration;
