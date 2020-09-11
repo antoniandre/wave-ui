@@ -234,6 +234,7 @@ export default {
   flex-grow: 1;
   flex-wrap: wrap;
   align-items: center;
+  font-size: $base-font-size;
 
   &--disabled {
     color: $disabled-color;
@@ -360,6 +361,8 @@ export default {
   // Label.
   // ------------------------------------------------------
   &__label {
+    display: flex;
+    align-items: center;
     transition: color $transition-duration;
     cursor: pointer;
 
