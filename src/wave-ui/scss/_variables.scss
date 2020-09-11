@@ -14,6 +14,7 @@ $box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
              0 1px 5px 0 rgba(0, 0, 0, 0.15) !default;
 // When a form element is disabled (checkbox, radio, input, select list).
 $disabled-color: #ccc;
+$form-field-height: round(2 * $base-font-size) !default;
 
 // Mixins.
 @mixin default-transition($duration: $transition-duration, $delay: 0s) {
