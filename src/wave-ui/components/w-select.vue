@@ -3,7 +3,7 @@
     :is="formRegister ? 'w-form-element' : 'div'"
     v-bind="formRegister && { validators, inputValue, disabled, readonly }"
     :valid.sync="valid"
-    @reset="$emit('input', inputValue = [])"
+    @reset="onChange([])"
     :class="classes")
     template(v-if="labelPosition === 'left'")
       label.w-select__label.w-select__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
@@ -33,7 +33,6 @@
             @click="!disabled && !readonly && (showMenu = true)"
             @focus="!disabled && !readonly && onFocus($event)"
             @blur="onBlur"
-            @input="onInput"
             @keyup.escape="!disabled && !readonly && (showMenu = false)"
             @keydown.enter.prevent
             @keyup.enter="!disabled && !readonly && (showMenu = true)"
@@ -62,10 +61,10 @@
             @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
       w-list.white--bg(
         :value="inputValue"
-        @input="inputValue = $event === null ? [] : (multiple ? $event : [$event])"
+        @input="onChange"
         :multiple="multiple"
         return-object
-        :items="items"
+        :items="selectItems"
         :color="color"
         @item-click="!multiple && (showMenu = false)")
 
@@ -104,7 +103,8 @@ export default {
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },
-    tile: { type: Boolean }
+    tile: { type: Boolean },
+    returnObject: { type: Boolean }
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
@@ -116,9 +116,18 @@ export default {
   }),
 
   computed: {
-    // Cached and fast lookup of object from value (used in checkSelection).
-    itemsValues () {
-      return this.items.map(item => item[this.itemValue] !== undefined ? item[this.itemValue] : item[this.itemLabel])
+    // Check all the items and add a `value` if missing, containing either: value, label or index
+    // in this order.
+    selectItems () {
+      return this.items.map((item, i) => {
+        const obj = { ...item } // Don't modify the original.
+
+        // If no value is set on the item, add one from its label, or from its index. the result is
+        // store in the value attribute for easy use in the w-list component (which tries the same logic).
+        obj.value = obj[this.itemValue] === undefined ? obj[this.itemLabel] || i : obj[this.itemValue]
+        obj.index = i
+        return obj
+      })
     },
     hasValue () {
       return Array.isArray(this.inputValue) ? this.inputValue.length : (this.inputValue !== null)
@@ -167,9 +176,6 @@ export default {
   },
 
   methods: {
-    onInput () {
-      this.$emit('input', this.inputValue)
-    },
     onFocus (e) {
       this.showMenu = true
       this.isFocused = true
@@ -179,12 +185,33 @@ export default {
       this.isFocused = false
       this.$emit('blur', e)
     },
+    // The items are given by the w-list component.
+    onChange (items) {
+      this.inputValue = items === null ? [] : (this.multiple ? items : [items])
+      // Return the original items when returnObject is true (no `value` if there wasn't),
+      // or the the item value otherwise.
+      items = this.inputValue.map(item => this.returnObject ? this.items[item.index] : item.value)
+
+      // Emit the selection to the v-model.
+      // Note: this.inputValue is always an array of objects that have a `value`.
+      this.$emit('input', this.multiple ? items : items[0])
+    },
     // Convert the received items selection to array if it is a unique value.
     // Also accept objects if returnObject is true.
-    // In any case, always end up with an array of objects.
+    // In any case, always end up with an array.
     checkSelection (items) {
       items = Array.isArray(items) ? items : (items ? [items] : [])
-      return items.map(item => this.items[this.itemsValues.indexOf(item)])
+      // `selectItems` items always have a value.
+      const allValues = this.selectItems.map(item => item.value)
+
+      return items.map(item => {
+        let value = item
+        if (typeof item === 'object') {
+          value = item[this.itemValue] !== undefined ? item[this.itemValue] : (item[this.itemLabel] !== undefined ? item[this.itemLabel] : item)
+        }
+
+        return this.selectItems[allValues.indexOf(value)]
+      }).filter(item => item !== undefined)
     }
   },
 
@@ -194,7 +221,7 @@ export default {
 
   watch: {
     value (value) {
-      this.inputValue = this.checkSelection(value)
+      if (value !== this.inputValue) this.inputValue = this.checkSelection(value)
     }
   }
 }
@@ -238,11 +265,7 @@ export default {
       border-width: 0 0 1px;
     }
 
-    &--round {
-      border-radius: 9em;
-      padding-left: 3 * $base-increment;
-      padding-right: 3 * $base-increment;
-    }
+    &--round {border-radius: 9em;}
 
     .w-select--focused & {border-color: currentColor;}
 
@@ -358,18 +381,18 @@ export default {
     position: absolute;
     top: 50%;
     left: 0;
-    padding-left: 2 * $base-increment;
+    // Use margin instead of padding as the scale transformation bellow decreases the real padding
+    // size and misaligns the label.
+    margin-left: 2 * $base-increment;
     transform: translateY(-50%);
     pointer-events: none;
 
     .w-select--no-padding & {
       left: 0;
-      padding-left: 0;
-      padding-right: 0;
+      margin-left: 0;
     }
-    .w-selection__selection-wrap--round & {
-      padding-left: round(3 * $base-increment);
-      padding-right: round(3 * $base-increment);
+    .w-select__selection-wrap--round & {
+      margin-left: round(3 * $base-increment);
     }
     .w-select--inner-icon-left & {left: 18px;}
     .w-select--no-padding.w-select--inner-icon-left & {left: 26px;}
