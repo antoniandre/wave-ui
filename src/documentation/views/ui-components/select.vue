@@ -296,6 +296,28 @@ div
         ]
       })
 
+  title-link(h2) Custom list items
+  example
+    w-select(:items="items3")
+      template(#item="{ item, selected }")
+        w-icon.primary.mr1(v-if="selected") wi-check
+        span {{ item.label }}
+        w-tag.ml2(bg-color="grey-light4" xs) {{ item.value }}
+    template(#pug).
+      w-select(:items="items")
+        template(#item="{ item, selected }")
+          w-icon.primary.mr1(v-if="selected") wi-check
+          span {{ '\{\{ item.label \}\}' }}
+          w-tag.ml2(bg-color="grey-light4" xs) {{ '\{\{ item.value \}\}' }}
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1', value: 1 },
+          { label: 'Item 2', value: 2 },
+          { label: 'Item 3', value: 3 }
+        ]
+      })
+
   title-link(h2) Inner icons
   example
     .title4.mb2 Label outside
