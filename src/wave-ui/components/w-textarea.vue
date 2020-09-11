@@ -202,7 +202,6 @@ export default {
 </script>
 
 <style lang="scss">
-$line-height: 1.2;
 $inactive-color: #777;
 
 .w-textarea {
@@ -269,7 +268,7 @@ $inactive-color: #777;
     width: 100%;
     height: 100%;
     font: inherit;
-    line-height: $line-height;
+    line-height: $textarea-line-height;
     color: inherit;
     background: none;
     border: none;
