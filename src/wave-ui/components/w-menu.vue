@@ -150,7 +150,7 @@ export default {
         [`${this.bgColor}--bg`]: this.bgColor,
         [this.menuClass]: this.menuClass,
         [`w-menu--${this.position}`]: true,
-        [`w-menu--align-${this.alignment}`]: true,
+        [`w-menu--align-${this.alignment}`]: this.alignment,
         'w-menu--tile': this.tile,
         'w-menu--card': !this.custom,
         'w-menu--round': this.round,

@@ -12,11 +12,11 @@
 
     w-menu(
       v-model="showMenu"
-      menu-class="pa0 mt0"
-      content-class="pa0"
+      :menu-class="`w-select__menu ${menuClass || ''}`"
       transition="slide-fade-down"
       detach-to=".w-app"
       align-left
+      custom
       min-width="activator")
       template(#activator="{ on }")
         //- Input wrapper.
@@ -59,7 +59,7 @@
             tag="label"
             :for="`w-select--${_uid}`"
             @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
-      w-list.white--bg(
+      w-list(
         :value="inputValue"
         @input="onChange"
         :multiple="multiple"
@@ -67,6 +67,8 @@
         :items="selectItems"
         :color="color"
         @item-click="!multiple && (showMenu = false)")
+        template(#item="{ item, selected, index }")
+          slot(name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabel] }}
 
     template(v-if="labelPosition === 'right'")
       label.w-select__label.w-select__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
@@ -98,6 +100,7 @@ export default {
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
     itemValue: { type: String, default: 'value' }, // Name of the value field.
     itemClass: { type: String },
+    menuClass: { type: String },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
     outline: { type: Boolean },
@@ -427,6 +430,17 @@ export default {
     .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
 
     .w-select--focused & {color: currentColor;}
+  }
+
+  // Menu.
+  // ------------------------------------------------------
+  &__menu {
+    margin: 0;
+    max-height: 300px;
+    overflow: auto;
+    background-color: #fff;
+    border: $border;
+    border-radius: $border-radius;
   }
 }
 </style>
