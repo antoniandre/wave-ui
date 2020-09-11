@@ -208,25 +208,34 @@ export default {
         this.timeoutId = setTimeout(() => this.$emit('input', (this.showMenu = true)), 10)
 
         if (!this.persistent) document.addEventListener('mousedown', this.onOutsideMousedown)
+        window.addEventListener('resize', this.onResize)
       }
+
       // Close the menu.
       else {
         this.$emit('input', (this.showMenu = false))
         // Remove the mousedown listener if the menu got closed without a mousedown outside of the menu.
-        return document.removeEventListener('mousedown', this.onOutsideMousedown)
+        document.removeEventListener('mousedown', this.onOutsideMousedown)
+        window.removeEventListener('resize', this.onResize)
       }
     },
 
     onOutsideMousedown (e) {
       if (!this.menuEl.contains(e.target)) {
         this.$emit('input', (this.showMenu = false))
-        return document.removeEventListener('mousedown', this.onOutsideMousedown)
+        document.removeEventListener('mousedown', this.onOutsideMousedown)
+        window.removeEventListener('resize', this.onResize)
       }
+    },
+
+    onResize (e) {
+      if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
+      this.computeMenuPosition()
     },
 
     getCoordinates (e) {
       // Get the activator coordinates relative to window.
-      const { top, left, width, height } = e.target.getBoundingClientRect()
+      const { top, left, width, height } = (e ? e.target : this.activatorEl).getBoundingClientRect()
       let coords = { top, left, width, height }
 
       // If absolute position, adjust top & left.
@@ -324,7 +333,9 @@ export default {
       // 4. Hide the menu again so the transition happens correctly.
       // --------------------------------------------------
       this.menuEl.style.visibility = null
-      this.menuEl.style.display = 'none'
+
+      // The menu coordinates are also recalculated while resizing window with open menu: keep the menu visible.
+      if (!this.showMenu) this.menuEl.style.display = 'none'
 
       this.menuCoordinates = { top, left }
     },
