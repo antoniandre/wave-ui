@@ -227,12 +227,6 @@ $size: round(2 * $base-font-size);
     border-radius: $border-radius;
     border: $border;
     transition: border $transition-duration;
-
-    &--round {
-      border-radius: 9em;
-      padding-left: 3 * $base-increment;
-      padding-right: 3 * $base-increment;
-    }
     &--tile {border-radius: initial;}
     &--shadow {box-shadow: $box-shadow;}
 
@@ -244,6 +238,12 @@ $size: round(2 * $base-font-size);
       border-bottom-left-radius: initial;
       border-bottom-right-radius: initial;
       border-width: 0 0 1px;
+    }
+
+    &--round {
+      border-radius: 9em;
+      padding-left: 3 * $base-increment;
+      padding-right: 3 * $base-increment;
     }
 
     .w-select--focused & {border-color: currentColor;}
@@ -263,11 +263,11 @@ $size: round(2 * $base-font-size);
     }
 
     .w-select--focused &--underline:after {width: 100%;}
-    &--round.w-selection__selection-wrap--underline:after {
+    &--round.w-select__selection-wrap--underline:after {
       border-radius: 9em;
       transition: $transition-duration, height 0.035s;
     }
-    .w-select--focused &--round.w-selection__selection-wrap--underline:after {
+    .w-select--focused &--round.w-select__selection-wrap--underline:after {
       height: 100%;
       transition: $transition-duration, height 0s ($transition-duration - 0.035s);
     }
