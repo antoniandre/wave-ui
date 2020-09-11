@@ -111,7 +111,6 @@ export default {
 
 <style lang="scss">
 $outline-width: 2px;
-$size: round(1.3 * $base-font-size / 2) * 2; // Always an even number for better vertical alignment.
 $inactive-color: #666;
 
 .w-checkbox {
@@ -138,8 +137,8 @@ $inactive-color: #666;
   // The fake checkbox to substitute.
   &__input {
     position: relative;
-    width: $size;
-    height: $size;
+    width: $small-form-el-size;
+    height: $small-form-el-size;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
@@ -187,7 +186,7 @@ $inactive-color: #666;
 
     // Checked state.
     :checked ~ & {
-      border-width: $size / 2;
+      border-width: $small-form-el-size / 2;
       border-color: currentColor;
       // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: currentColor;
@@ -198,7 +197,7 @@ $inactive-color: #666;
       background-color: $disabled-color;
     }
     .w-checkbox--indeterminate :checked ~ & {
-      border-width: (($size / 2) - 1px) 3px;
+      border-width: (($small-form-el-size / 2) - 1px) 3px;
       background-color: white;
     }
   }

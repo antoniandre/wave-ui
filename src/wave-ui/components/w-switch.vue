@@ -106,7 +106,6 @@ export default {
 
 <style lang="scss">
 $outline-width: 2px;
-$size: round(1.3 * $base-font-size / 2) * 2; // Always an even number for better vertical alignment.
 $inactive-color: #ccc;
 $disabled-color: #ddd;
 
@@ -134,8 +133,8 @@ $disabled-color: #ddd;
   &__input {
     position: relative;
     border-radius: 3em;
-    width: 2 * $size;
-    height: $size;
+    width: 2 * $small-form-el-size;
+    height: $small-form-el-size;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
@@ -156,8 +155,8 @@ $disabled-color: #ddd;
     .w-switch--thin & {
       box-sizing: border-box;
       border: none;
-      // border: ($size / 2) solid rgba(255, 255, 255, 0.6);
-      height: round(0.7 * $size);
+      // border: ($small-form-el-size / 2) solid rgba(255, 255, 255, 0.6);
+      height: round(0.7 * $small-form-el-size);
     }
     .w-switch--thin :checked + & {
       background-color: $inactive-color;
@@ -176,8 +175,8 @@ $disabled-color: #ddd;
     position: absolute;
     left: 0;
     top: 0;
-    width: $size;
-    height: $size;
+    width: $small-form-el-size;
+    height: $small-form-el-size;
     background-color: #fff;
     border-radius: 100%;
     @include default-transition;
@@ -185,7 +184,7 @@ $disabled-color: #ddd;
     :checked + & {transform: translateX(100%);}
 
     .w-switch--thin & {
-      top: - round(0.15 * $size);
+      top: - round(0.15 * $small-form-el-size);
       transform: scale(1.1);
       box-shadow: $box-shadow;
     }
@@ -201,8 +200,8 @@ $disabled-color: #ddd;
     position: absolute;
     left: 0;
     top: 0;
-    width: $size;
-    height: $size;
+    width: $small-form-el-size;
+    height: $small-form-el-size;
     background-color: currentColor;
     border-radius: 100%;
     transform: translateX(100%) scale(0);
@@ -210,7 +209,7 @@ $disabled-color: #ddd;
     pointer-events: none;
     transition: 0.25s ease-in-out;
 
-    .w-switch--thin & {top: - round(0.15 * $size);}
+    .w-switch--thin & {top: - round(0.15 * $small-form-el-size);}
   }
 
   &--ripple &__input:before {

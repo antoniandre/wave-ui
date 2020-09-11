@@ -115,7 +115,6 @@ export default {
 
 <style lang="scss">
 $outline-width: 2px;
-$size: round(1.3 * $base-font-size / 2) * 2; // Always an even number for better vertical alignment.
 $inactive-color: #666;
 
 .w-radio {
@@ -143,8 +142,8 @@ $inactive-color: #666;
   &__input {
     position: relative;
     border-radius: 100%;
-    width: $size;
-    height: $size;
+    width: $small-form-el-size;
+    height: $small-form-el-size;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
