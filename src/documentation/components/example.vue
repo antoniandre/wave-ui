@@ -144,7 +144,7 @@ export default {
                slots.html.replace(/\n$/, '').replace(/\n/g, '\n  ') +
                '\n</w-app>\n'
       }
-      const css = '.w-app {font-family: sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
+      const css = '.w-app {font: 14px sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
       const js = this.fullJs ? slots.js : ('new Vue({' +
                  '\n  waveui: new WaveUI(),\n  ' +
                  slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') +

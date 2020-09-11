@@ -110,10 +110,10 @@ div
     .title4.mt6 Outline style
     w-select(:items="items1" outline shadow) Label
     template(#pug).
-      .title4 Default style (Underline)
+      .title4.mb2 Default style (Underline)
       w-select(:items="items" shadow) Label
 
-      .title4.mt6 Outline style
+      .title4.mt6.mb2 Outline style
       w-select(:items="items" outline shadow) Label
     template(#js).
       data: () => ({
@@ -128,17 +128,17 @@ div
   example
     .title4 Default style (Underline)
     w-select(:items="items1" bg-color="purple-light5" tile) Tile
-    w-select(:items="items1" bg-color="purple-light5" round) Round
+    w-select.mt4(:items="items1" bg-color="purple-light5" round) Round
     .title4.mt6 Outline style
-    w-select.mt4(:items="items1" outline tile) Tile
+    w-select(:items="items1" outline tile) Tile
     w-select.mt4(:items="items1" outline round) Round
     template(#pug).
       .title4 Default style (Underline)
-      w-select(:items="items" bg-color="purple-light5" tile) Tile
-      w-select(:items="items" bg-color="purple-light5" round) Round
+      w-select.mt3(:items="items" bg-color="purple-light5" tile) Tile
+      w-select.mt4(:items="items" bg-color="purple-light5" round) Round
 
       .title4.mt6 Outline style
-      w-select.mt4(:items="items" outline tile) Tile
+      w-select.mt3(:items="items" outline tile) Tile
       w-select.mt4(:items="items" outline round) Round
     template(#js).
       data: () => ({
@@ -196,7 +196,7 @@ div
       span v-model:
       code.ml2 {{ vModelSelect2 }}
     template(#pug).
-      w-select(v-model="selection" :items="items1" multiple)
+      w-select(v-model="selection" :items="items" multiple)
       w-flex.align-center.mt4
         span v-model:
         code.ml2 {{ '\{\{ selection \}\}' }}
@@ -223,7 +223,7 @@ div
       span v-model:
       code.ml2 {{ vModelSelect3 }}
     template(#pug).
-      w-select(v-model="selection" :items="items" multiple)
+      w-select(v-model="selection" :items="items" multiple return-object)
       w-flex.align-center.mt4
         span v-model:
         code.ml2 {{ '\{\{ selection \}\}' }}
@@ -246,6 +246,9 @@ div
     w-select.mt4(:items="items1" label="Select an item" label-position="left")
     w-select.mt4(:items="items1" label="Select an item" label-position="right")
     template(#pug).
+      w-select(:items="items" label="Select an item")
+      w-select.mt4(:items="items" label="Select an item" label-position="left")
+      w-select.mt4(:items="items" label="Select an item" label-position="right")
     template(#js).
       data: () => ({
         items: [
