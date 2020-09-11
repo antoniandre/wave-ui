@@ -1,17 +1,17 @@
 <template lang="pug">
 div
-  //- title-link.mt4(h1 slug="w-select")
-    //- .code w-select
+  title-link.mt4(h1 slug="w-select")
+    .code w-select
     w-tag.ml3(bg-color="orange" lg color="white") In Progress
 
   alert(info).
-    //- The #[span.code w-select] component can be placed in a hidden overflow container and the dropdown
+    The #[span.code w-select] component can be placed in a hidden overflow container and the dropdown
     menu will still be fully visible when open.#[br]
     This is because the select dropdown menu is placed at the #[span.code .w-app] level in the DOM,
     just so you don't have to worry about this annoying case.
 
   title-link(h2) Basic
-  //- p This is the most basic use of the #[span.code w-select] component. No label, no v-model only items.
+  p This is the most basic use of the #[span.code w-select] component. No label, no v-model only items.
   example
     w-select(:items="items1")
     template(#pug).
@@ -165,7 +165,7 @@ div
 
   title-link(h2) V-model
   alert(tip).
-    //- By default, the #[span.code w-select] component expects the items to have a #[code value] attribute.#[br]
+    By default, the #[span.code w-select] component expects the items to have a #[code value] attribute.#[br]
     If this is a constraint, you can use the option #[code item-value] to specify the name of another
     attribute to be used instead (must have a unique value), like an id for instance.
   example
@@ -257,7 +257,7 @@ div
 
   title-link(h2) Custom label via default slot
   p.
-    //- It is convenient to have the label inside the #[span.code w-select] component to let it handle
+    It is convenient to have the label inside the #[span.code w-select] component to let it handle
     the field focus event on label click.#[br]
     The #[span.code label] prop accepts any HTML, but because passing complex html via a prop is not fun,
     there is also a prop for setting the label wish will grant more freedom.
