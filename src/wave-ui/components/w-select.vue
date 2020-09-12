@@ -22,7 +22,7 @@
         //- Input wrapper.
         .w-select__selection-wrap(
           ref="selection-wrap"
-          @click="!disabled && !readonly && (showMenu = true)"
+          @click="!disabled && !readonly && openMenu()"
           role="button"
           aria-haspopup="listbox"
           :aria-expanded="showMenu ? 'true' : 'false'"
@@ -35,13 +35,13 @@
             :for="`w-select--${_uid}`"
             @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
           input.w-select__selection(
+            ref="selection-input"
             type="text"
             :value="selectionString"
             @focus="!disabled && !readonly && onFocus($event)"
             @blur="onBlur"
-            @keyup.escape="!disabled && !readonly && (showMenu = false)"
-            @keydown.enter.prevent
-            @keyup.enter="!disabled && !readonly && (showMenu = true)"
+            @keydown.escape="!disabled && !readonly && closeMenu()"
+            @keydown.space.prevent="!disabled && !readonly && openMenu()"
             :id="`w-select--${_uid}`"
             :placeholder="placeholder || null"
             :disabled="disabled"
@@ -73,8 +73,9 @@
             :for="`w-select--${_uid}`"
             @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
       w-list(
+        ref="w-list"
         @input="onChange"
-        @item-click="!multiple && (showMenu = false)"
+        @keydown:escape="closeMenu"
         :value="inputValue"
         :items="selectItems"
         :multiple="multiple"
@@ -198,7 +199,6 @@ export default {
 
   methods: {
     onFocus (e) {
-      this.showMenu = true
       this.isFocused = true
       this.$emit('focus', e)
     },
@@ -212,6 +212,9 @@ export default {
       // Return the original items when returnObject is true (no `value` if there wasn't),
       // or the the item value otherwise.
       items = this.inputValue.map(item => this.returnObject ? this.items[item.index] : item.value)
+
+      // If single selection, close the menu after selecting a value (keyboard selection).
+      if (!this.multiple) this.closeMenu()
 
       // Emit the selection to the v-model.
       // Note: this.inputValue is always an array of objects that have a `value`.
@@ -233,6 +236,18 @@ export default {
 
         return this.selectItems[allValues.indexOf(value)]
       }).filter(item => item !== undefined)
+    },
+    // Open the dropdown selection list.
+    openMenu () {
+      this.showMenu = true
+      // Set the focus on the first option.
+      setTimeout(() => this.$refs['w-list'].$el.querySelector(`#w-select-menu--${this._uid}_item-1`).focus(), 100)
+    },
+    // Close the dropdown selection list.
+    closeMenu () {
+      this.showMenu = false
+      // Set the focus back on the main w-select input.
+      setTimeout(() => this.$refs['selection-input'].focus(), 50)
     }
   },
 
@@ -289,7 +304,7 @@ export default {
 
     &--round {border-radius: 9em;}
 
-    .w-select--focused & {border-color: currentColor;}
+    .w-select--focused &, .w-select--open & {border-color: currentColor;}
 
     // Underline.
     &--underline:after {
@@ -305,12 +320,14 @@ export default {
       pointer-events: none;
     }
 
-    .w-select--focused &--underline:after {width: 100%;}
+    .w-select--focused &--underline:after,
+    .w-select--open &--underline:after {width: 100%;}
     &--round.w-select__selection-wrap--underline:after {
       border-radius: 9em;
       transition: $transition-duration, height 0.035s;
     }
-    .w-select--focused &--round.w-select__selection-wrap--underline:after {
+    .w-select--focused &--round.w-select__selection-wrap--underline:after,
+    .w-select--open &--round.w-select__selection-wrap--underline:after {
       height: 100%;
       transition: $transition-duration, height 0s ($transition-duration - 0.035s);
     }
