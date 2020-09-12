@@ -22,6 +22,12 @@
         //- Input wrapper.
         .w-select__selection-wrap(
           ref="selection-wrap"
+          @click="!disabled && !readonly && (showMenu = true)"
+          role="button"
+          aria-haspopup="listbox"
+          :aria-expanded="showMenu ? 'true' : 'false'"
+          :aria-owns="`w-select-menu--${_uid}`"
+          :aria-activedescendant="`w-select-menu--${_uid}_item-1`"
           :class="inputWrapClasses")
           w-icon.w-select__icon.w-select__icon--inner-left(
             v-if="innerIconLeft"
@@ -31,7 +37,6 @@
           input.w-select__selection(
             type="text"
             :value="selectionString"
-            @click="!disabled && !readonly && (showMenu = true)"
             @focus="!disabled && !readonly && onFocus($event)"
             @blur="onBlur"
             @keyup.escape="!disabled && !readonly && (showMenu = false)"
@@ -68,13 +73,16 @@
             :for="`w-select--${_uid}`"
             @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
       w-list(
-        :value="inputValue"
         @input="onChange"
+        @item-click="!multiple && (showMenu = false)"
+        :value="inputValue"
+        :items="selectItems"
         :multiple="multiple"
         return-object
-        :items="selectItems"
         :color="color"
-        @item-click="!multiple && (showMenu = false)")
+        :add-ids="`w-select-menu--${_uid}`"
+        role="listbox"
+        tabindex="-1")
         template(#item="{ item, selected, index }")
           slot(name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabel] }}
 
