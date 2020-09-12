@@ -48,7 +48,7 @@ const renderListItemLabel = function (createEl, li, index) {
     props: {},
     attrs: { // HTML attributes.
       tabindex: '0',
-      ariaSelected: 'false',
+      'aria-selected': li.selected ? 'true' : 'false',
       id: this.addIds
           ? `${typeof this.addIds === 'string' ? this.addIds : `w-list--${this._uid}`}_item-${index + 1}`
           : null,
