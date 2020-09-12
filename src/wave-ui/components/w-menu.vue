@@ -130,8 +130,8 @@ export default {
     },
 
     menuMinWidth () {
-      if (this.minWidth === 'activator') return `${this.activatorWidth}px`
-      else return isNaN(this.minWidth) ? this.minWidth : `${this.minWidth}px`
+      if (this.minWidth === 'activator') return this.activatorWidth ? `${this.activatorWidth}px` : 0
+      else return isNaN(this.minWidth) ? this.minWidth : (this.minWidth ? `${this.minWidth}px` : 0)
     },
 
     alignment () {
@@ -162,9 +162,9 @@ export default {
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || (this.overlay && !this.zIndex && 200) || null,
-        top: `${~~this.menuCoordinates.top}px`,
-        left: `${~~this.menuCoordinates.left}px`,
-        minWidth: this.minWidth ? this.menuMinWidth : null
+        top: (this.menuCoordinates.top && `${~~this.menuCoordinates.top}px`) || null,
+        left: (this.menuCoordinates.left && `${~~this.menuCoordinates.left}px`) || null,
+        minWidth: (this.minWidth && this.menuMinWidth) || null
       }
     },
 
@@ -228,7 +228,7 @@ export default {
       }
     },
 
-    onResize (e) {
+    onResize () {
       if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
       this.computeMenuPosition()
     },
