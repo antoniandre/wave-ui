@@ -31,6 +31,7 @@
         :rows="rows || null"
         :cols="cols || null"
         :readonly="readonly"
+        :aria-readonly="readonly ? 'true' : 'false'"
         :disabled="disabled"
         :required="required"
         :style="textareaStyles")
