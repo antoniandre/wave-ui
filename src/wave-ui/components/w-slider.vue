@@ -24,7 +24,7 @@
         :aria-valuemin="minVal"
         :aria-valuemax="maxVal"
         :aria-valuenow="rangeValueScaled"
-        :aria-readonly="readonly"
+        :aria-readonly="readonly ? 'true' : 'false'"
         aria-orientation="horizontal")
         .w-slider__range(:class="rangeClasses" :style="rangeStyles")
         .w-slider__thumb(:style="thumbStyles")
@@ -35,6 +35,7 @@
             :value="rangeValueScaled"
             :disabled="disabled"
             :readonly="readonly"
+            :aria-readonly="readonly ? 'true' : 'false'"
             @keydown.left="onKeyDown($event, -1)"
             @keydown.right="onKeyDown($event, 1)"
             @click.prevent)

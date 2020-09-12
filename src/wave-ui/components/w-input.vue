@@ -36,6 +36,7 @@
           :minlength="minlength || null"
           :maxlength="maxlength || null"
           :readonly="readonly"
+          :aria-readonly="readonly ? 'true' : 'false'"
           :disabled="disabled"
           :required="required")
         template(v-if="labelPosition === 'inside' && showLabelInside")

@@ -41,6 +41,7 @@
             :placeholder="placeholder || null"
             :disabled="disabled"
             readonly
+            aria-readonly="true"
             :required="required"
             autocomplete="off")
           //- For standard HTML form submission.
