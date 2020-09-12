@@ -68,7 +68,10 @@ const renderListItemLabel = function (createEl, li, index) {
     !li.disabled && this.selectItem(li)
   })
   // If selectable list, on enter key press select item.
-  const keydown = this.isSelectable && (e => (!li.disabled && e.keyCode === 13 && this.selectItem(li)))
+  const keydown = this.isSelectable && (e => {
+    if (!li.disabled && e.keyCode === 13) this.selectItem(li)
+    if (e.keyCode === 27) this.$emit('keydown:escape')
+  })
   // ------------------------------------------------------
 
   const hasSlot = this.$scopedSlots.item
@@ -262,7 +265,7 @@ export default {
     emitSelection () {
       const items = this.selectedItems.map(item => {
         if (!this.returnObject) return item._value
-
+        // eslint-disable-next-line no-unused-vars
         const { _value, selected, ...Item } = item
         return Item
       })
