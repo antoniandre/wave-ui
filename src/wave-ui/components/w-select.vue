@@ -29,6 +29,7 @@
             :for="`w-select--${_uid}`"
             @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
           input.w-select__selection(
+            type="text"
             :value="selectionString"
             @click="!disabled && !readonly && (showMenu = true)"
             @focus="!disabled && !readonly && onFocus($event)"
@@ -37,12 +38,18 @@
             @keydown.enter.prevent
             @keyup.enter="!disabled && !readonly && (showMenu = true)"
             :id="`w-select--${_uid}`"
-            :name="inputName"
             :placeholder="placeholder || null"
             :disabled="disabled"
             readonly
             :required="required"
             autocomplete="off")
+          //- For standard HTML form submission.
+          input(
+            v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
+            :key="i"
+            type="hidden"
+            :value="val.value || ''"
+            :name="inputName + (multiple ? '[]' : '')")
           template(v-if="labelPosition === 'inside' && showLabelInside")
             label.w-select__label.w-select__label--inside.w-form-el-shakable(
               v-if="$slots.default"
@@ -112,7 +119,9 @@ export default {
   },
 
   data: () => ({
-    inputValue: [], // Selection is always an array (internally), but emits a single value if not multiple.
+    // Selection is always an array (internally), but emits a single value if not multiple.
+    // inputValue is always an array of objects that have a `value`.
+    inputValue: [],
     showMenu: false,
     menuMinWidth: 0,
     isFocused: false
