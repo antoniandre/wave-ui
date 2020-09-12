@@ -46,7 +46,14 @@ const renderListItemLabel = function (createEl, li, index) {
     name: 'div',
     class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
     props: {},
-    attrs: {}, // HTML attributes.
+    attrs: { // HTML attributes.
+      tabindex: '0',
+      ariaSelected: 'false',
+      id: this.addIds
+          ? `${typeof this.addIds === 'string' ? this.addIds : `w-list--${this._uid}`}_item-${index + 1}`
+          : null,
+      role: 'option'
+    },
     domProps: {},
     on: {}, // Events handlers are added bellow.
     // nativeOn: {} // Don't even define it if div, or Vue will raise a warning.
@@ -145,6 +152,9 @@ export default {
     roundCheckboxes: { type: Boolean }, // Checklist option.
     // If selectable (if value !== false), this allows multiple selections.
     multiple: { type: Boolean },
+    // When true, will add an id on the list and on all the list items.
+    // Useful for a11y aria fields (e.g. use with w-select).
+    addIds: { type: [Boolean, String] },
     hover: { type: Boolean },
     color: { type: String },
     bgColor: { type: String },
@@ -286,7 +296,14 @@ export default {
     // Render list wrapper.
     return createEl(
       'ul',
-      { class: { 'w-list': true, ...this.classes } },
+      {
+        class: { 'w-list': true, ...this.classes },
+        attrs: {
+          id: this.addIds
+            ? typeof this.addIds === 'string' ? this.addIds : `w-list--${this._uid}`
+            : null
+        }
+      },
       renderListItems.call(this, createEl)
     )
   }
