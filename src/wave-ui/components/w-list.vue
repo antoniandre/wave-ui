@@ -49,9 +49,7 @@ const renderListItemLabel = function (createEl, li, index) {
     attrs: { // HTML attributes.
       tabindex: '0',
       'aria-selected': li.selected ? 'true' : 'false',
-      id: this.addIds
-          ? `${typeof this.addIds === 'string' ? this.addIds : `w-list--${this._uid}`}_item-${index + 1}`
-          : null,
+      id: this.listId ? `${this.listId}_item-${index + 1}` : null,
       role: 'option'
     },
     domProps: {},
@@ -70,7 +68,12 @@ const renderListItemLabel = function (createEl, li, index) {
   // If selectable list, on enter key press select item.
   const keydown = this.isSelectable && (e => {
     if (!li.disabled && e.keyCode === 13) this.selectItem(li)
-    if (e.keyCode === 27) this.$emit('keydown:escape')
+    else if (e.keyCode === 27) this.$emit('keydown:escape')
+    else if (this.arrowsNavigation) {
+      e.preventDefault()
+      if (e.keyCode === 38) this.focusPrevItem(li.index)
+      if (e.keyCode === 40) this.focusNextItem(li.index)
+    }
   })
   // ------------------------------------------------------
 
@@ -121,7 +124,6 @@ const renderListItemLabel = function (createEl, li, index) {
       input: value => this.selectItem(li, value),
       // @todo: on checkbox focus, focus the list item.
       // focus: e => console.log(this, e, 'on checkbox focus')
-
     }
   }
   // ------------------------------------------------------
@@ -168,7 +170,8 @@ export default {
     itemValue: { type: String, default: 'value' }, // Name of the value field.
     itemClass: { type: String },
     depth: { type: Number, default: 0 }, // For recursive call.
-    returnObject: { type: Boolean }
+    returnObject: { type: Boolean },
+    arrowsNavigation: { type: Boolean }
   },
 
   data: () => ({
@@ -179,6 +182,10 @@ export default {
   }),
 
   computed: {
+    listId () {
+      return this.addIds ? (typeof this.addIds === 'string' ? this.addIds : `w-list--${this._uid}`) : null
+    },
+
     listItems () {
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
       return items.map((item, i) => {
@@ -191,6 +198,11 @@ export default {
         item.selected = this.selectedItems.map(obj => obj._value !== undefined ? obj._value : obj).includes(item._value)
         return item
       })
+    },
+
+    // Faster cached enabled items lookup.
+    enabledItemsIndexes () {
+      return this.listItems.filter(item => !item.disabled).map(item => item.index)
     },
 
     isMultipleSelect () {
@@ -272,6 +284,22 @@ export default {
 
       // `selectedItems` is always an array of items, but on set, it emits a single value if not `multiple`.
       this.$emit('input', this.isMultipleSelect ? items : (items[0] !== undefined ? items[0] : null))
+    },
+
+    focusPrevItem (index) {
+      // The index of the previous item in the array of enabled items.
+      index = this.enabledItemsIndexes[this.enabledItemsIndexes.indexOf(index) - 1]
+      if (index === undefined) index = this.enabledItemsIndexes[this.enabledItemsIndexes.length - 1]
+
+      this.$refs['w-list'].querySelector(`#${this.listId}_item-${index + 1}`).focus()
+    },
+
+    focusNextItem (index) {
+      // The index of the next item in the array of enabled items.
+      index = this.enabledItemsIndexes[this.enabledItemsIndexes.indexOf(index) + 1]
+      if (index === undefined) index = this.enabledItemsIndexes[0]
+
+      this.$refs['w-list'].querySelector(`#${this.listId}_item-${index + 1}`).focus()
     }
   },
 
@@ -300,12 +328,9 @@ export default {
     return createEl(
       'ul',
       {
+        ref: 'w-list',
         class: { 'w-list': true, ...this.classes },
-        attrs: {
-          id: this.addIds
-            ? typeof this.addIds === 'string' ? this.addIds : `w-list--${this._uid}`
-            : null
-        }
+        attrs: { id: this.listId }
       },
       renderListItems.call(this, createEl)
     )
@@ -396,6 +421,9 @@ export default {
     .w-list--navigation &.router-link-exact-active:before {opacity: 0.15;}
 
     // Active state (while pressing key or mouse).
+    &--active.w-list__item-label--hoverable:hover:before,
+    &--active.w-list__item-label--selectable:focus:before,
+    &--active.w-list__item-label--selectable:hover:before,
     &--selectable:active:before {opacity: 0.2;}
 
     // Disabled.
