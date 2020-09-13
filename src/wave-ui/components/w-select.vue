@@ -79,6 +79,7 @@
         :value="inputValue"
         :items="selectItems"
         :multiple="multiple"
+        arrows-navigation
         return-object
         :color="color"
         :add-ids="`w-select-menu--${_uid}`"
@@ -241,7 +242,11 @@ export default {
     openMenu () {
       this.showMenu = true
       // Set the focus on the first option.
-      setTimeout(() => this.$refs['w-list'].$el.querySelector(`#w-select-menu--${this._uid}_item-1`).focus(), 100)
+      setTimeout(() => {
+        const itemIndex = this.inputValue.length ? this.inputValue[0].index : 0 // Real index starts at 0.
+        // User visible index starts at 1.
+        this.$refs['w-list'].$el.querySelector(`#w-select-menu--${this._uid}_item-${itemIndex + 1}`).focus()
+      }, 100)
     },
     // Close the dropdown selection list.
     closeMenu () {
@@ -377,7 +382,7 @@ export default {
     position: absolute;
     font-size: 1.4em;
 
-    .w-select--focused & {color: currentColor;}
+    .w-select--focused &, .w-select--open & {color: currentColor;}
 
     .w-select--disabled & {
       color: $disabled-color;
@@ -445,6 +450,7 @@ export default {
 
     // move label with underline style.
     .w-select--focused.w-select--floating-label &,
+    .w-select--open.w-select--floating-label &,
     .w-select--filled.w-select--floating-label &,
     .w-select--has-placeholder.w-select--floating-label & {
       transform: translateY(-160%) scale(0.85);
@@ -455,16 +461,18 @@ export default {
     }
     // Move label with outline style or with shadow.
     .w-select--focused.w-select--floating-label .w-select__selection-wrap--box &,
+    .w-select--open.w-select--floating-label .w-select__selection-wrap--box &,
     .w-select--filled.w-select--floating-label .w-select__selection-wrap--box &,
     .w-select--has-placeholder.w-select--floating-label .w-select__selection-wrap--box & {
       transform: translateY(-180%) scale(0.85);
     }
     .w-select--focused.w-select--floating-label.w-select--inner-icon-left &,
+    .w-select--open.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
     .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
 
-    .w-select--focused & {color: currentColor;}
+    .w-select--focused &, .w-select--open & {color: currentColor;}
   }
 
   // Menu.
