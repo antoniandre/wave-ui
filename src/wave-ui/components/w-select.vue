@@ -34,10 +34,12 @@
             tag="label"
             :for="`w-select--${_uid}`"
             @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
+          .w-select__selection-slot(v-if="$scopedSlots.selection")
+            slot(name="selection" :items="inputValue")
           input.w-select__selection(
             ref="selection-input"
             type="text"
-            :value="selectionString"
+            :value="$scopedSlots.selection ? '' : selectionString"
             @focus="!disabled && !readonly && onFocus($event)"
             @blur="onBlur"
             @keydown.escape="!disabled && !readonly && closeMenu()"
@@ -290,7 +292,7 @@ export default {
     display: inline-flex;
     flex: 1 1 auto;
     align-items: center;
-    height: $form-field-height;
+    min-height: $form-field-height; // Min-height to allow multiple lines.
     border-radius: $border-radius;
     border: $border;
     transition: border $transition-duration;
@@ -351,30 +353,37 @@ export default {
     padding-left: 2 * $base-increment;
     padding-right: 2 * $base-increment;
     cursor: pointer;
+
+    .w-select__selection-slot + & {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .w-select--no-padding & {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .w-select__selection-wrap--round & {
+      padding-left: 3 * $base-increment;
+      padding-right: 3 * $base-increment;
+    }
+
+    .w-select--inner-icon-left & {padding-left: 27px;}
+    .w-select--inner-icon-right & {padding-right: 27px;}
+
+    .w-select--disabled & {
+      color: $disabled-color;
+      cursor: not-allowed;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .w-select--disabled input::placeholder {color: inherit;}
+
+    .w-select--readonly.w-select--empty & {cursor: auto;}
   }
 
-  &--no-padding &__selection {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  &__selection-wrap--round &__selection {
-    padding-left: 3 * $base-increment;
-    padding-right: 3 * $base-increment;
-  }
-
-  &--inner-icon-left &__selection {padding-left: 27px;}
-  &--inner-icon-right &__selection {padding-right: 27px;}
-
-  &--disabled &__selection {
-    color: $disabled-color;
-    cursor: not-allowed;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  &--disabled input::placeholder {color: inherit;}
-
-  &--readonly.w-select--empty &__selection {cursor: auto;}
+  // &__selection-slot {}
 
   // Icons inside.
   // ------------------------------------------------------
@@ -484,6 +493,8 @@ export default {
     background-color: #fff;
     border: $border;
     border-radius: $border-radius;
+
+    .w-list {width: 100%;}
   }
 }
 </style>

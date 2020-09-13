@@ -258,7 +258,7 @@ div
         ]
       })
 
-  title-link(h2) Custom label via default slot
+  title-link(h2) Custom label
   p.
     It is convenient to have the label inside the #[span.code w-select] component to let it handle
     the field focus event on label click.#[br]
@@ -294,6 +294,27 @@ div
           { label: 'Item 2' },
           { label: 'Item 3' }
         ]
+      })
+
+  title-link(h2) Custom selection string
+  example
+    w-select(:items="items3" v-model="customSelection" multiple)
+      template(#selection="{ items }")
+        w-tag.mr2(v-for="(item, i) in items" :key="i" bg-color="grey-light4")
+          | {{ item.label }}
+    template(#pug).
+      w-select(:items="items" v-model="selection" multiple)
+        template(#selection="{ items }")
+          w-tag.mr2(v-for="(item, i) in items" :key="i" bg-color="grey-light4")
+            | {{ '\{\{ item.label \}\}' }}
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1', value: 1 },
+          { label: 'Item 2', value: 2 },
+          { label: 'Item 3', value: 3 }
+        ],
+        selection: [1, 3]
       })
 
   title-link(h2) Custom list items
@@ -422,6 +443,7 @@ export default {
       { label: 'Item 3', value: 3 }
     ],
     vModelSelect1: [1, 3],
+    customSelection: [1, 3],
     vModelSelect2: ['Item 1', 'Item 3'],
     vModelSelect3: [{ label: 'Item 3' }]
   })
