@@ -1,21 +1,30 @@
 <template lang="pug">
-  .w-radios(:class="classes")
+  component(
+    :is="formRegister ? 'w-form-element' : 'div'"
+    v-bind="formRegister && { validators, inputValue, disabled }"
+    :valid.sync="valid"
+    @reset="$emit('input', inputValue = null)"
+    :column="!inline"
+    :class="classes")
     w-radio(
       v-for="(item, i) in radioItems"
       :key="i"
+      @input="onChange"
       :name="name || `radios-${_uid}`"
+      :value="value === item.value"
       :label="item.label"
       :label-on-left="labelOnLeft"
-      :value="value === item.value"
       :color="color"
-      @input="$emit('input', item.value);$emit('change', item.value)"
-      :class="{ 'mt1': !inline && i }")
+      :class="{ mt1: !inline && i }")
       slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
 
 <script>
+import FormElementMixin from '../mixins/form-elements'
+
 export default {
   name: 'w-radios',
+  mixins: [FormElementMixin],
   props: {
     items: { type: Array, required: true }, // All the possible options.
     value: { type: [String, Number, Boolean] }, // v-model on selected option.
@@ -27,6 +36,16 @@ export default {
     color: { type: String, default: 'primary' }
   },
 
+  provide () {
+    // Disable w-form-el wrapping in each w-radio when inside a w-radios component that already does it.
+    // Don't do a simple prop that can be turned on and off by user.
+    return { wRadios: true }
+  },
+
+  data: () => ({
+    inputValue: null
+  }),
+
   computed: {
     radioItems () {
       return this.items.map((item, i) => ({
@@ -37,9 +56,18 @@ export default {
       }))
     },
     classes () {
-      return {
-        [`w-radios--${this.inline ? 'inline' : 'column'}`]: true
-      }
+      return [
+        'w-radios',
+        `w-radios--${this.inline ? 'inline' : 'column'}`
+      ]
+    }
+  },
+
+  methods: {
+    onChange (value) {
+      this.inputValue = value
+      this.$emit('input', value)
+      this.$emit('change', value)
     }
   }
 }

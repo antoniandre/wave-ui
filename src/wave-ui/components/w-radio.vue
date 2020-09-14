@@ -1,6 +1,6 @@
 <template lang="pug">
   component(
-    :is="formRegister ? 'w-form-element' : 'div'"
+    :is="formRegister && !wRadios ? 'w-form-element' : 'div'"
     v-bind="formRegister && { validators, inputValue, disabled }"
     :valid.sync="valid"
     @reset="$emit('input', inputValue = false)"
@@ -36,6 +36,7 @@ import FormElementMixin from '../mixins/form-elements'
 export default {
   name: 'w-radio',
   mixins: [FormElementMixin],
+  inject: { wRadios: { default: null } },
   props: {
     value: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-radio are plugged on
@@ -48,16 +49,14 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  data () {
-    return {
-      inputValue: false,
-      ripple: {
-        start: false,
-        end: false,
-        timeout: null
-      }
+  data: () => ({
+    inputValue: false,
+    ripple: {
+      start: false,
+      end: false,
+      timeout: null
     }
-  },
+  }),
 
   computed: {
     hasLabel () {

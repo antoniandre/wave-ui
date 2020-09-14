@@ -1,6 +1,6 @@
 <template lang="pug">
   div(:class="classes")
-    .w-flex.grow.align-center
+    .w-flex.grow(:class="column ? 'column' : 'align-center'")
       slot
 
     //- Error message.
@@ -22,11 +22,12 @@ export default {
   },
   props: {
     valid: { required: true },
-    disabled: { type: Boolean, default: false },
-    readonly: { type: Boolean, default: false },
+    disabled: { type: Boolean },
+    readonly: { type: Boolean },
     inputValue: { required: true }, // The form element's input value.
     validators: { type: Array },
-    isFocused: { default: false } // Watched.
+    isFocused: { default: false }, // Watched.
+    column: { default: false } // Flex direction of the embedded component: column or row by default.
   },
 
   data: () => ({
