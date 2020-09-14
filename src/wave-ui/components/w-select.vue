@@ -1,9 +1,9 @@
 <template lang="pug">
   component(
     :is="formRegister ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validators, inputValue, disabled, readonly }"
+    v-bind="formRegister && { validators, inputValue: selectionString, disabled, readonly }"
     :valid.sync="valid"
-    @reset="onChange([])"
+    @reset="onReset"
     :class="classes")
     template(v-if="labelPosition === 'left'")
       label.w-select__label.w-select__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
@@ -69,7 +69,7 @@
               :for="`w-select--${_uid}`"
               v-html="label"
               :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
-          w-icon.w-select__icon.w-select__icon--inner-right.w-form-el-shakable(
+          w-icon.w-select__icon.w-select__icon--inner-right(
             v-if="innerIconRight"
             tag="label"
             :for="`w-select--${_uid}`"
@@ -222,6 +222,12 @@ export default {
       // Emit the selection to the v-model.
       // Note: this.inputValue is always an array of objects that have a `value`.
       this.$emit('input', this.multiple ? items : items[0])
+    },
+    onReset () {
+      this.inputValue = []
+      // Emit the selection to the v-model.
+      // Note: this.inputValue is always an array of objects that have a `value`.
+      this.$emit('input', this.multiple ? this.inputValue : this.inputValue[0])
     },
     // Convert the received items selection to array if it is a unique value.
     // Also accept objects if returnObject is true.
