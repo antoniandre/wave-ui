@@ -14,7 +14,7 @@ div
   .title3 The validation works in 3 steps:
   ol
     li
-      | Add a validator function on the field you want validated
+      | Add one or more validator functions on the field you want validated
       ssh-pre(language="html-vue" label="Vue template").
         &lt;w-input label="First name" :validators="[validators.required]"&gt;&lt;/w-input&gt;
       ssh-pre(language="js" label="Javascript").
@@ -23,7 +23,7 @@ div
             required: value => !!value || 'This field is required'
           }
         })
-    li.mt6 Wrap it in a #[span.code w-form] and add a submit button
+    li.mt6 Wrap the field in a #[span.code w-form] and add a submit button
       ssh-pre(language="html-vue" label="Vue template").
         &lt;w-form&gt;
           &lt;w-input label="First name" :validators="[validators.required]"&gt;&lt;/w-input&gt;
@@ -31,8 +31,8 @@ div
           &lt;w-button type="submit"&gt;Submit&lt;/w-button&gt;
         &lt;/w-form&gt;
     li.mt6.
-      Let the #[span.code w-form] component do the rest. But you might want more options, discover
-      them in the examples bellow.
+      That's enough, you can let the #[span.code w-form] component do the rest!#[br]
+      But you might want more options, discover them in the examples bellow.
 
   title-link(h2) Basic validation
   p.
