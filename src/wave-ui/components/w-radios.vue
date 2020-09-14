@@ -10,7 +10,7 @@
       v-for="(item, i) in radioItems"
       :key="i"
       @input="onChange"
-      :name="name || `radios-${_uid}`"
+      :name="inputName"
       :value="value === item.value"
       :label="item.label"
       :label-on-left="labelOnLeft"
@@ -28,7 +28,7 @@ export default {
   props: {
     items: { type: Array, required: true }, // All the possible options.
     value: { type: [String, Number, Boolean] }, // v-model on selected option.
-    name: { type: String, default: null },
+    name: { type: String },
     labelOnLeft: { type: Boolean },
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
