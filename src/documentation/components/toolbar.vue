@@ -7,7 +7,7 @@ w-toolbar.main-toolbar(fixed)
   w-tooltip(z-index="20")
     template(#activator="{ on }")
       a.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
-        w-icon(md) mdi mdi-github
+        w-icon(lg) mdi mdi-github
     .size--xs.text-nowrap View the project on Github
   .caption(v-html="`Version ${version}`")
   w-button.ml2.mr-1.hamburger-menu(
