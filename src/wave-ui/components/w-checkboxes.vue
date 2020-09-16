@@ -1,22 +1,31 @@
 <template lang="pug">
-  .w-checkboxes(:class="classes")
+  component(
+    :is="formRegister ? 'w-form-element' : 'div'"
+    v-bind="formRegister && { validators, inputValue: checkedItems.length, disabled }"
+    :valid.sync="valid"
+    @reset="reset"
+    :column="!inline"
+    :class="classes")
     w-checkbox(
       v-for="(item, i) in checkboxItems"
       :key="i"
-      :name="`${name || `checkboxes-${_uid}`}[]`"
+      :name="`${name || `w-checkboxes--${_uid}`}[]`"
       :label="item.label"
       :label-on-left="labelOnLeft"
       :value="item.isChecked"
       :color="color"
       :round="round"
       @input="toggleCheck(item)"
-      :class="{ 'mt1': !inline && i }")
+      :class="{ mt1: !inline && i }")
       slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
 
 <script>
+import FormElementMixin from '../mixins/form-elements'
+
 export default {
   name: 'w-checkboxes',
+  mixins: [FormElementMixin],
   props: {
     items: { type: Array, required: true }, // All the possible options.
     value: { type: Array }, // v-model on selected option.
@@ -27,6 +36,17 @@ export default {
     inline: { type: Boolean },
     round: { type: Boolean },
     color: { type: String, default: 'primary' }
+  },
+
+  data: () => ({
+    checkedItems: []
+  }),
+
+  provide () {
+    // Disable w-form-el wrapping in each w-checkbox when inside a w-checkboxes component that already
+    // does it.
+    // Don't do a simple prop that can be turned on and off by user.
+    return { wCheckboxes: true }
   },
 
   computed: {
@@ -43,20 +63,34 @@ export default {
         }
       })
     },
+
     classes () {
-      return {
-        [`w-checkboxes--${this.inline ? 'inline' : 'column'}`]: true
-      }
+      return [
+        'w-checkboxes',
+        `w-checkboxes--${this.inline ? 'inline' : 'column'}`
+      ]
     }
   },
 
   methods: {
+    reset () {
+      this.checkboxItems.forEach(item => (item.isChecked = false))
+      this.checkedItems = []
+      this.$emit('input', [])
+      this.$emit('change', [])
+    },
+
     toggleCheck (checkbox) {
       checkbox.isChecked = !checkbox.isChecked
-      const checkedItems = this.checkboxItems.filter(item => item.isChecked).map(item => item.value)
-      this.$emit('input', checkedItems)
-      this.$emit('change', checkedItems)
+
+      this.$set(this, 'checkedItems', this.checkboxItems.filter(item => item.isChecked).map(item => item.value))
+      this.$emit('input', this.checkedItems)
+      this.$emit('change', this.checkedItems)
     }
+  },
+
+  created () {
+    this.checkedItems = this.checkboxItems.filter(item => item.isChecked).map(item => item.value)
   }
 }
 </script>
