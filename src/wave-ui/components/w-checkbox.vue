@@ -1,6 +1,6 @@
 <template lang="pug">
   component(
-    :is="formRegister ? 'w-form-element' : 'div'"
+    :is="formRegister && !wCheckboxes ? 'w-form-element' : 'div'"
     v-bind="formRegister && { validators, inputValue: isChecked, disabled }"
     :valid.sync="valid"
     @reset="$emit('input', isChecked = false)"
@@ -37,6 +37,7 @@ import FormElementMixin from '../mixins/form-elements'
 export default {
   name: 'w-checkbox',
   mixins: [FormElementMixin],
+  inject: { wCheckboxes: { default: null } },
   props: {
     value: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-checkbox are plugged on
