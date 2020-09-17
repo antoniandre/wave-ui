@@ -96,6 +96,10 @@ div.w-form-el {
 }
 
 .w-form-el {
+  .w-form--error-placeholders & {
+    position: relative;
+    padding-bottom: 1.2em;
+  }
   &--has-error input::placeholder {color: inherit;}
 
   &-shakable {position: relative;}
@@ -106,8 +110,10 @@ div.w-form-el {
   &__error {
     width: 100%;
     flex-grow: 1;
-    font-size: 0.75em;
+    font-size: 0.775em;
     margin-top: $base-increment;
+
+    .w-form--error-placeholders & {position: absolute;bottom: 0;}
   }
 }
 
