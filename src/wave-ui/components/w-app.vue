@@ -44,7 +44,9 @@ export default {
 
     dynamicStyles () {
       let styles = ''
-      for (const color in config.colors) {
+      // Extract status colors and place them after the other colors.
+      const { info, warning, success, error, ...colors } = config.colors
+      for (const color in colors) {
         styles +=
           `.w-app .${color}--bg{background-color:${config.colors[color]}}` +
           `.w-app .${color}{color:${config.colors[color]}}`
@@ -56,6 +58,15 @@ export default {
             `.w-app .${label}--bg{background-color:${color}}` +
             `.w-app .${label}{color:${color}}`
         })
+      }
+
+      // Status colors must remain after the other colors so they have priority in form validations.
+      // That only makes sense when there are 2 colors on the same element: e.g. `span.primary.error`.
+      const statusColors = { info, warning, success, error } // This order is also important for priorities.
+      for (const color in statusColors) {
+        styles +=
+          `.w-app .${color}--bg{background-color:${config.colors[color]}}` +
+          `.w-app .${color}{color:${config.colors[color]}}`
       }
 
       return styles

@@ -24,7 +24,8 @@ export default class WaveUI {
   }
 
   // A public object containing pairs of color-name => color hex.
-  // Accessible from this.$waveui.colors.
+  // Accessible from anywhere via `this.$waveui.colors`.
+  // These colors generate the CSS in `w-app` on mounted.
   colors = colors.reduce((obj, color) => {
     obj[color.label] = color.color
     color.shades.forEach(shade => (obj[shade.label] = shade.color))
