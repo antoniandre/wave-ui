@@ -20,7 +20,8 @@ export default {
     value: {},
     allowSubmit: { type: Boolean },
     noKeyupValidation: { type: Boolean },
-    noBlurValidation: { type: Boolean }
+    noBlurValidation: { type: Boolean },
+    errorPlaceholders: { type: Boolean }
   },
 
   data: () => ({
@@ -34,7 +35,8 @@ export default {
       return {
         'w-form--pristine': this.status === null,
         'w-form--error': this.status === false,
-        'w-form--success': this.status === true
+        'w-form--success': this.status === true,
+        'w-form--error-placeholders': this.errorPlaceholders
       }
     }
   },
