@@ -9,9 +9,9 @@
     w-radio(
       v-for="(item, i) in radioItems"
       :key="i"
-      @input="onChange"
+      @input="onChange(item)"
       :name="inputName"
-      :value="value === item.value"
+      :value="item.value === value"
       :label="item.label"
       :label-on-left="labelOnLeft"
       :color="color"
@@ -64,10 +64,10 @@ export default {
   },
 
   methods: {
-    onChange (value) {
-      this.inputValue = value
-      this.$emit('input', value)
-      this.$emit('change', value)
+    onChange (item) {
+      this.inputValue = true
+      this.$emit('input', item.value)
+      this.$emit('change', item.value)
     }
   }
 }
