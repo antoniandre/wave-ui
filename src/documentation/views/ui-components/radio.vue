@@ -21,10 +21,9 @@ div
 
   //- W-radio.
   //-------------------------------------------------------
-  .title1.mt8 &lt;w-radio&gt;
-  .w-divider.grey-light5.mt1
+  title-link.title1.mt12(h2 slug="w-radio") &lt;w-radio&gt;
+  .w-divider
 
-  title-link.mt8(h2 slug="understanding-w-radio") Understanding the #[span.code w-radio] component
   alert(tip)
     strong Important
     div.
@@ -128,29 +127,28 @@ div
 
   //- W-radios.
   //-------------------------------------------------------
-  .title1.mt12 &lt;w-radios&gt;
-  .w-divider.grey-light5.mt1
+  title-link.title1.mt12(h2 slug="w-radios") &lt;w-radios&gt;
+  .w-divider
 
-  title-link(h2 slug="understanding-w-radios")
-    | Understanding the #[span.code w-radios] component
-  p.
+  p.my5.
     The #[code w-radios] component allows a fast and easy rendering of
     multiple radio buttons by passing the items through a prop.#[br]
     It accepts an inline parameter to display the radio buttons inline,
     and allows you to customize the label of each radio button through slot.
 
-  h3 V-model
-  p.
+  title-link.title2.primary(h3) V-model
+  alert(info).
     If a value is set in the choice's data, it will be returned through the v-model when selected.#[br]
     If no value is set, the choice's label will be returned instead.
+  p The v-model can also be preset, or updated externally.
   example
     .w-flex.align-center
       w-radios(v-model="selectedRadio1" :items="radios1")
-      div.title3.ml10 Selected choice: #[code {{ selectedRadio1 || 'null' }}]
+      div.title3.ml10 v-model: #[code {{ selectedRadio1 || 'null' }}]
     template(#pug).
       .w-flex.align-center
         w-radios(v-model="selectedRadio" :items="radioItems")
-        div.title3.ml10 Selected choice: {{ "\{\{ selectedRadio || 'null' \}\}" }}
+        div.title3.ml10 v-model: {{ "\{\{ selectedRadio || 'null' \}\}" }}
     template(#js).
       data: () => ({
         selectedRadio: 1,
