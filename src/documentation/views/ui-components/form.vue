@@ -127,21 +127,22 @@ div
 
   title-link(h2) Reset the form
   p.
-    Once the form is invalid, you can reset it with a basic HTML reset button.#[br]
-    For that what you need to do is to set the v-model value to #[code null], like pristine.
+    Once the form is invalid, you can reset it with a basic HTML reset button, like in this example.#[br]
+    Alternatively, you can programmatically reset the form and all its element by setting the form
+    value (or v-model) to #[code null], like pristine.
   example
     w-form(v-model="form4.valid")
       w-input(label="First name" :validators="[validators.required]")
       w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
-        w-button.mr2(bg-color="warning" type="reset" @click="form4.valid = null") Reset
+        w-button.mr2(bg-color="warning" type="reset") Reset
         w-button(type="submit") Validate
     template(#pug).
       w-form(v-model="valid")
         w-input(label="First name" :validators="[validators.required]")
         w-input.mt3(label="Last name" :validators="[validators.required]")
         .text-right.mt6
-          w-button.mr2(bg-color="warning" type="reset" @click="valid = null") Reset
+          w-button.mr2(bg-color="warning" type="reset") Reset
           w-button(type="submit") Validate
     template(#js).
       data: () => ({
@@ -154,7 +155,9 @@ div
   title-link(h2) On validate, on success &amp; on error events
   p.title5 These events are fired on submit.
   ul
-    li.mt1 #[code before-validate] is always fired as soon as a submission is attempted (e.g. submit button click), prior validation.
+    li.mt1.
+      #[code before-validate] is always fired as soon as a submission is attempted (e.g. submit
+      button click), prior validation.
     li.mt1 #[code validate] is always fired as soon as a submission is attempted, after validation.
     li.mt1.
         #[code success] is fired after submission when the validation is successful.
@@ -239,7 +242,7 @@ div
           w-button.mr2(
             bg-color="warning"
             type="reset"
-            @click="form6.valid = null;form6.submitted = form6.sent = false") Reset
+            @click="form6.submitted = form6.sent = false") Reset
           w-button(
             type="submit"
             :disabled="form6.valid === false"
@@ -275,7 +278,7 @@ div
             w-button.mr2(
               bg-color="warning"
               type="reset"
-              @click="form.valid = null;form.submitted = form.sent = false") Reset
+              @click="form.submitted = form.sent = false") Reset
             w-button(
               type="submit"
               :disabled="form.valid === false"
