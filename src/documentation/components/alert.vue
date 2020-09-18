@@ -33,6 +33,7 @@ export default {
   font-weight: normal;
 
   &:after {display: none;}
+  .w-icon {height: auto;}
 
   &.alert--success {
     background-color: rgba(102, 204, 0, 0.1);
