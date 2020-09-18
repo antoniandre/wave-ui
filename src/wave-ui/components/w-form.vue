@@ -1,5 +1,5 @@
 <template lang="pug">
-  form.w-form(@submit="onSubmit" novalidate :class="classes")
+  form.w-form(@submit="onSubmit" @reset="reset" novalidate :class="classes")
     slot
 </template>
 
@@ -106,9 +106,17 @@ export default {
       return el.Validation.isValid
     },
 
-    reset () {
+    reset (e) {
+      // Reset is called from:
+      //   - the form `reset` event listener
+      //   - the value watcher when set to `null`.
+      // Prevent resetting twice on form reset that sets the value to null.
+      if (!e) return
+      this.status = null
+
       this.formElements.forEach(item => !item.disabled && !item.readonly && item.reset())
       this.updateErrorsCount(0, true)
+      this.$emit('reset', e)
     },
 
     updateErrorsCount (count = null, reset = false) {
@@ -134,7 +142,7 @@ export default {
   watch: {
     value (value) {
       // When user clicks the reset button, reset the errors in each form element.
-      if ((this.status === false && value) || value === null) this.reset()
+      if ((this.status === false && value) || (value === null && this.status !== null)) this.reset()
       this.status = value
     }
   }
