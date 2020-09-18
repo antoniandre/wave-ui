@@ -1,2 +1,0 @@
-(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["spinner-vue"],{c365:function(e,n,t){"use strict";t.r(n);var s=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[t("title-link",{staticClass:"mt4 code",attrs:{h1:""}},[e._v("w-spinner")])],1)},a=[],i={},l=i,c=t("2877"),r=Object(c["a"])(l,s,a,!1,null,null,null);n["default"]=r.exports}}]);
-//# sourceMappingURL=spinner-vue.6dec65d7.js.map
