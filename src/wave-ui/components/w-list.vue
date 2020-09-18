@@ -244,11 +244,9 @@ export default {
       // Set the `selection` computed that emits the value to the outside world.
       if (this.isMultipleSelect) {
         const filteredItems = this.listItems.filter(item => item.selected)
-        this.selectedItems = this.returnObject ? filteredItems : filteredItems.map(item => item._value)
+        this.selectedItems = filteredItems
       }
-      else {
-        this.selectedItems = item.selected ? [this.returnObject ? item : this.getItemValue(item)] : []
-      }
+      else this.selectedItems = item.selected ? [item] : []
       this.emitSelection()
     },
 
@@ -264,7 +262,7 @@ export default {
 
     // Convert the received items selection to array if it is a unique value.
     // Also accept objects if returnObject is true and convert to the object's value.
-    // In any case, always end up with an array of flat values.
+    // In any case, always end up with an array of objects.
     // The values given can be (in this order) a value, a label or the index of the item.
     checkSelection (items) {
       items = Array.isArray(items) ? items : (items ? [items] : [])
@@ -317,7 +315,7 @@ export default {
       // just keep the first selected item.
       if (!boolean) {
         const firstSelected = this.listItems.find(item => item.selected)
-        this.selectedItems = firstSelected ? [firstSelected._value] : []
+        this.selectedItems = firstSelected ? [firstSelected] : []
         this.emitSelection()
       }
     }
