@@ -26,8 +26,8 @@ div.ovh
 
   //- W-checkbox.
   //-------------------------------------------------------
-  title-link.title1.mt8(h2 slug="understanding-w-checkbox") Understanding &lt;w-checkbox&gt;
-  .w-divider.grey-light5.mt1
+  title-link.title1.mt12(h2 slug="w-checkbox") &lt;w-checkbox&gt;
+  .w-divider
 
   alert(info).
     Unlike the radio buttons, checkboxes don't need the #[code name] prop in addition to the #[code v-model]
@@ -96,38 +96,67 @@ div.ovh
   alert.mt8(tip).
     As seen in this example, the #[span.code w-checkbox] component allows you to have complete freedom
     regarding your checkboxes content, style and layout.#[br]
-    But because in most cases you won't need that, the #[span.code w-checkboxes] component will make you go
-    much faster.
+    But because in most cases you won't need that, the #[span.code w-checkboxes] component will make you
+    go much faster.
 
   //- W-checkboxes.
   //-------------------------------------------------------
-  title-link.title1.mt8(h2 slug="understanding-w-checkboxes") Understanding &lt;w-checkboxes&gt;
-  .w-divider.grey-light5.mt1
+  title-link.title1.mt12(h2 slug="w-checkboxes") &lt;w-checkboxes&gt;
+  .w-divider
 
-  p.
+  p.my5.
     The #[code w-checkboxes] component allows a fast and easy rendering of
     multiple checkboxes by passing the items through a prop.#[br]
     It accepts an inline parameter to display the checkboxes inline,
     and allows you to customize the label of each checkbox through slot.
 
-  h3 V-model
-  p.
+  title-link.title2.primary(h3) V-model
+  alert(info).
     If a value is set in the choice's data, it will be returned through the v-model when selected.#[br]
     If no value is set, the choice's label will be returned instead.
   example
     .w-flex.align-center
       w-checkboxes(v-model="selectedCheckboxes1" :items="checkboxes1")
       div.title3.ml8
-        | Selected choices:
+        | v-model:
         code.ml1 {{ selectedCheckboxes1 || '[]' }}
     template(#pug).
       .w-flex.align-center
-        w-checkboxes(v-model="selectedCheckboxes" :items="checkboxesItems")
-        .title3.ml10 Selected choice: {{ "\{\{ selectedCheckboxes || '[]' \}\}" }}
+        w-checkboxes(v-model="selectedCheckboxes" :items="checkboxes")
+        .title3.ml8 v-model: {{ "\{\{ selectedCheckboxes || '[]' \}\}" }}
     template(#js).
       data: () => ({
         selectedCheckboxes: [],
-        checkboxesItems: [
+        checkboxes: [
+          { label: 'Choice 1', value: 1 },
+          { label: 'Choice 2', value: 2 },
+          { label: 'Choice 3', value: 3 }
+        ]
+      })
+
+  p The v-model can also be preset, or updated externally.
+  example
+    .w-flex.align-center
+      div
+        w-checkboxes(v-model="selectedCheckboxes3" :items="checkboxes1")
+        w-button.mt2(@click="selectedCheckboxes3 = selectedCheckboxes3.length ? [] : [2]")
+          | Toggle checkbox 2
+      div.title3.ml8
+        | v-model:
+        code.ml1 {{ selectedCheckboxes3 || '[]' }}
+    template(#pug).
+      .w-flex.align-center
+        div
+          w-checkboxes(v-model="selectedCheckboxes" :items="checkboxes")
+          w-button.mt2(@click="selectedCheckboxes = selectedCheckboxes.length ? [] : [2]")
+            | Toggle checkbox 2
+        div.title3.ml8
+          | v-model:
+          code.ml1 {{ "\{\{ selectedCheckboxes || '[]' \}\}" }}
+    template(#js).
+      data: () => ({
+        selectedCheckboxes: [],
+        checkboxes: [
           { label: 'Choice 1', value: 1 },
           { label: 'Choice 2', value: 2 },
           { label: 'Choice 3', value: 3 }
@@ -143,13 +172,13 @@ div.ovh
     w-checkboxes(:items="checkboxes1" inline)
     template(#pug).
       .title4.mb2 Default column layout
-      w-checkboxes(:items="checkboxesItems")
+      w-checkboxes(:items="checkboxes")
 
       .title4.mt6.mb2 Inline layout
-      w-checkboxes(:items="checkboxesItems" inline)
+      w-checkboxes(:items="checkboxes" inline)
     template(#js).
       data: () => ({
-        checkboxesItems: [
+        checkboxes: [
           { label: 'Choice 1', value: 1 },
           { label: 'Choice 2', value: 2 },
           { label: 'Choice 3', value: 3 }
@@ -164,13 +193,13 @@ div.ovh
         span.pr2 {{ item.label }}
         w-icon.deep-purple {{ item.icon }}
     template(#pug).
-      w-checkboxes(:items="checkboxesItems" color="green")
+      w-checkboxes(:items="checkboxes" color="green")
         template(#item="{ item }")
           span.pr2 {{ '\{\{ item.label \}\}' }}
           w-icon.deep-purple {{ '\{\{ item.icon \}\}' }}
     template(#js).
       data: () => ({
-        checkboxesItems: [
+        checkboxes: [
           { label: 'Square', icon: 'mdi mdi-square' },
           { label: 'Circle', icon: 'mdi mdi-circle' },
           { label: 'Triangle', icon: 'mdi mdi-triangle' }
@@ -185,10 +214,10 @@ div.ovh
   example(content-class="mt3")
     w-checkboxes(:items="checkboxes1" round inline)
     template(#pug).
-      w-checkboxes(:items="checkboxesItems" round inline)
+      w-checkboxes(:items="checkboxes" round inline)
     template(#js).
       data: () => ({
-        checkboxesItems: [
+        checkboxes: [
           { label: 'Choice 1', value: 1 },
           { label: 'Choice 2', value: 2 },
           { label: 'Choice 3', value: 3 }
@@ -242,6 +271,7 @@ export default {
     selectedCheckbox1: false,
     selectedCheckboxes1: [],
     selectedCheckboxes2: [false, false, false],
+    selectedCheckboxes3: [2],
     selectedCheckboxes4: [1, 3],
     selectedCheckboxes5: [true, true],
     selectedCheckboxes6: [true, true],
