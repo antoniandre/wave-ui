@@ -1,7 +1,7 @@
 <template lang="pug">
   component(
     :is="formRegister ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validators, inputValue: checkedItems.length, disabled }"
+    v-bind="formRegister && { validators, inputValue: checkboxItems.some(item => item.isChecked), disabled }"
     :valid.sync="valid"
     @reset="reset"
     :column="!inline"
@@ -15,12 +15,13 @@
       :value="item.isChecked"
       :color="color"
       :round="round"
-      @input="toggleCheck(item)"
+      @input="toggleCheck(item, $event)"
       :class="{ mt1: !inline && i }")
       slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
 
 <script>
+import Vue from 'vue'
 import FormElementMixin from '../mixins/form-elements'
 
 export default {
@@ -38,10 +39,6 @@ export default {
     color: { type: String, default: 'primary' }
   },
 
-  data: () => ({
-    checkedItems: []
-  }),
-
   provide () {
     // Disable w-form-el wrapping in each w-checkbox when inside a w-checkboxes component that already
     // does it.
@@ -54,13 +51,13 @@ export default {
       return this.items.map((item, i) => {
         const itemValue = item[this.itemValue] === undefined ? (item[this.itemLabel] || i) : item[this.itemValue]
 
-        return {
+        return Vue.observable({
           ...item,
           label: item[this.itemLabel],
-          // If no value is set then add one to prevent error.
-          value: itemValue,
+          index: i,
+          value: itemValue, // If no value is set then add one to prevent error.
           isChecked: this.value && this.value.includes(itemValue)
-        }
+        })
       })
     },
 
@@ -74,23 +71,18 @@ export default {
 
   methods: {
     reset () {
-      this.checkboxItems.forEach(item => (item.isChecked = false))
-      this.checkedItems = []
+      this.checkboxItems.forEach(item => (item.isChecked = null))
       this.$emit('input', [])
       this.$emit('change', [])
     },
 
-    toggleCheck (checkbox) {
-      checkbox.isChecked = !checkbox.isChecked
+    toggleCheck (checkbox, isChecked) {
+      checkbox.isChecked = isChecked
+      const selection = this.checkboxItems.filter(item => item.isChecked).map(item => item.value)
 
-      this.$set(this, 'checkedItems', this.checkboxItems.filter(item => item.isChecked).map(item => item.value))
-      this.$emit('input', this.checkedItems)
-      this.$emit('change', this.checkedItems)
+      this.$emit('input', selection)
+      this.$emit('change', selection)
     }
-  },
-
-  created () {
-    this.checkedItems = this.checkboxItems.filter(item => item.isChecked).map(item => item.value)
   }
 }
 </script>
