@@ -40,7 +40,7 @@ export default {
   props: {
     value: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-radio are plugged on
-    // the same v-model, this allow returning to the v-model a custom value.
+    // the same v-model, this allows returning a custom value to the v-model.
     returnValue: {},
     label: { type: String },
     labelOnLeft: { type: Boolean },

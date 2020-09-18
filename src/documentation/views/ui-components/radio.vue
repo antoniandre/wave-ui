@@ -71,10 +71,14 @@ div
         radio3: false
       })
 
-  p.
-    The above example (case 3 &amp; 4) shows that the radio buttons work without the name attribute,
-    using a v-model, but the navigation using the keyboard arrows will not work as the names are not provided.
-    #[br]Case 4 is fully operational. #[span.code :tada:]
+  p
+    | The above example (case 3 &amp; 4) shows that the radio buttons work without the name attribute,
+    | using a v-model, but the navigation using the keyboard arrows will not work as the names are not
+    | provided.#[br]
+    | Case 4 is fully operational. #[span.code :tada:]#[br]
+    strong.
+      Note that when you use the #[span.code w-radios] component, a unique name is set by default so you don't
+      have to worry about it if you don't need it.
 
   title-link(h2) Custom label in w-radio
   p #[code w-radio] provides a default slot to customize the content.
