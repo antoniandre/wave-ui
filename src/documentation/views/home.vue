@@ -32,7 +32,51 @@ w-app.home
       path.path2.top(fill="url(#grad)" d="M 0 55 C 880 -10 1044 206 1441 75 V 90 C 970 294 936 30 0 139 Z")
 
     .section__content
-      w-list.mb2(:items="listItems" icon="wi-check")
+      w-flex.title2.align-center
+        w-icon.mr2 wi-check
+        | All the components that you need in a lightweight package.
+      p.my4.
+        More than 30 UI &amp; form elements are available as well as a form validation.#[br]
+        This form uses 9 different components and a form validation.
+      w-card.white--bg(content-class="pa0")
+        .message-box
+          w-transition-fade
+            w-alert.my0.text-light(v-if="form6.submitted" success no-border)
+              | The form is valid, ready to send it!
+            w-alert.my0.text-light(v-else-if="form6.valid === false" error no-border)
+              | The form has {{ form6.errorsCount }} errors.
+        w-form.px8.pt2.pb10.grey(
+          v-model="form6.valid"
+          :errors-count.sync="form6.errorsCount"
+          @validate="onValidate"
+          @success="onSuccess")
+          w-input(required label="First name" :validators="[validators.required]")
+          w-input.mt3(required label="Last name" :validators="[validators.required]")
+
+          w-flex.mt4(wrap align-center justify-end)
+            w-checkbox(required :validators="[validators.consent]") I agree to the terms &amp; conditions
+            .spacer
+            w-button.mr2(
+              bg-color="warning"
+              type="reset"
+              @click="form6.submitted = form6.sent = false") Reset
+            w-button(
+              type="submit"
+              :disabled="form6.valid === false"
+              :loading="form6.submitted && !form6.sent") Validate
+        w-notification(
+          v-model="form6.sent"
+          success
+          transition="bounce"
+          absolute
+          plain
+          round
+          bottom) The form was sent successfully!
+
+      w-flex.title2.align-center.mt12
+        w-icon.mr2 wi-check
+        | Build great UIs with flexible &amp; powerful elements.
+      p.my4 See for yourself with this checklist component for instance.
       .w-flex.example.pa1.basis-zero.align-center
         .grow
           ssh-pre(language="html-vue" dark).
@@ -59,12 +103,9 @@ w-app.home
           round-checkboxes
           color="blue-light1")
 
-      w-list.mt8.mb2(:items="1" icon="wi-check")
-        template(#item)
-          | All the components that you need in a lightweight package.
-      w-alert.white--bg(info) This is an info alert.
-      ssh-pre(language="html-vue" dark).
-        &lt;w-alert info&gt;This is an info alert.&lt;/w-access&gt;
+      w-flex.title2.align-center.mt12
+        w-icon.mr2 wi-check
+        | Keep full control on the CSS.
 
   section.section.section--2
     svg(viewBox="0 0 1440 90")
@@ -73,8 +114,8 @@ w-app.home
     .section__content
       .w-flex.basis-zero.text-center.mb10
         .feature.grow
-          svg(viewBox="0 0 200 200")
-            path(fill="#61829d" d="M56.7,-32C69.8,-10,74.2,17.7,63.3,34.6C52.4,51.4,26.2,57.5,1,56.9C-24.2,56.4,-48.4,49.1,-57.9,33C-67.4,17,-62.3,-8,-50.2,-29.4C-38.1,-50.8,-19,-68.7,1.4,-69.5C21.8,-70.3,43.6,-54,56.7,-32Z" transform="translate(100 100)")
+          svg(viewBox="6 0 194 194")
+            path(fill="#61829d" d="M 57 -32 C 70 -10 74 18 63 35 C 52 51 26 58 1 57 C -24 56 -48 49 -58 33 C -67 17 -62 -8 -50 -29 C -38 -51 -19 -69 1 -70 C 22 -70 44 -54 57 -32 Z" transform="translate(100 100)")
           svg.icon(viewBox="0 0 432.4 432.4")
             path(d="M217 93a111 111 0 00-74 195c18 18 16 55 16 56 0 2 0 3 2 5l4 2h102l5-2 2-5c0-1-2-38 16-56l1-1a111 111 0 00-74-194zm64 185l-2 1c-15 17-18 45-18 58h-89c0-13-3-42-20-59a97 97 0 11129 0z")
             path(d="M216 122c-3 0-7 3-7 6 0 4 4 7 7 7 41 0 73 33 73 73 0 4 3 7 7 7 3 0 7-3 7-7 0-48-39-86-87-86zM261 358h-89c-9 0-17 8-17 17s8 17 17 17h88a17 17 0 000-34zm0 20h-89c-2 0-3-1-3-3s1-3 3-3h88c2 0 3 1 3 3s-1 3-2 3zM247 399h-62c-9 0-17 7-17 17s8 16 17 16h62c10 0 17-7 17-16 0-10-7-17-17-17zm0 19h-62c-2 0-3-1-3-3s1-3 3-3h62c2 0 4 1 4 3s-2 3-4 3zM216 60c4 0 7-3 7-7V7c0-4-3-7-7-7-3 0-7 3-7 7v46c0 4 4 7 7 7zM329 34c-3-2-7-1-9 2l-25 38c-3 4-2 8 1 10l4 1c2 0 4-1 5-3l26-38c2-3 2-8-2-10zM135 84l4-2c3-2 4-6 2-9l-25-39c-2-3-7-4-10-2s-4 6-2 10l25 38c2 3 4 4 6 4zM87 126l-41-22c-3-2-7 0-9 3s-1 7 3 9l40 22 3 1c3 0 5-1 6-4 2-3 1-7-2-9zM396 107c-2-3-6-5-9-3l-41 22c-3 2-5 6-3 9 1 3 4 4 6 4l3-1 41-22c3-2 4-6 3-9z")
@@ -103,7 +144,7 @@ w-app.home
             path(d="M362 219h-1c-8 1-16 4-23 9-4-15-18-26-34-26-8 0-16 3-22 8-3-17-18-30-35-31-8 0-15 3-21 7v-19a88 88 0 10-78 0v84l-19-24a38 38 0 00-53-8 38 38 0 00-5 53l71 139c22 43 57 49 72 50l37 1c39 0 72-2 72-2h1c58 0 74-62 75-96V258c0-20-16-38-37-39zM147 110v38a72 72 0 1178 0v-38a39 39 0 00-78 0zm175 334s-57 3-108 1c-11 0-40-5-58-41L85 264v-1c-8-9-8-23 2-31 9-7 23-5 30 5l32 44 3 2 1 1h5l1-1h1v-1l2-1v-1l1-1V110a23 23 0 1146 0v141a8 8 0 0016 0v-33a21 21 0 1141 0v58a8 8 0 0016 0v-35a21 21 0 1142 0v64a8 8 0 0016 0v-47a21 21 0 1141 0l1 106c0 4-2 80-60 80z")
           p Fully accessible
 
-    .text-center.mt12
+    .text-center.ready-to-dive
       .title1.mb2 Ready to dive in?
       w-button.ma1(lg shadow to="/why-wave-ui") Why Wave UI
       w-button.ma1(lg shadow to="/getting-started") Get started
@@ -120,16 +161,23 @@ w-app.home
 
 export default {
   data: () => ({
-    listItems: [
-      { label: 'Build great UIs in no time with powerful elements.' },
-      { label: 'Keep control of the CSS. Very easy to override!' },
-    ],
     demoListItems: [
       { label: 'Item 1' },
       { label: 'Item 2' },
       { label: 'Item 3' }
     ],
-    selectedItem: 'Item 2'
+    selectedItem: 'Item 2',
+    form6: {
+      valid: null,
+      submitted: false,
+      sent: false,
+      errorsCount: 0
+    },
+    validators: {
+      required: value => !!value || 'This field is required',
+      alphabetical: value => /^[a-z \-']+$/i.test(value) || 'This field only accepts letters.',
+      consent: value => !!value || 'You must agree'
+    }
   }),
 
   computed: {
@@ -138,6 +186,16 @@ export default {
         /-(\w)(\w+)\.(\d+)/,
         (m0, m1, m2, m3) => ` <strong>${m1.toUpperCase()}${m2} ${m3}</strong>`
       )
+    }
+  },
+
+  methods: {
+    onSuccess () {
+      setTimeout(() => (this.form6.sent = true), 2000)
+    },
+    onValidate () {
+      this.form6.sent = false
+      this.form6.submitted = this.form6.errorsCount === 0
     }
   }
 }
@@ -159,6 +217,7 @@ export default {
       .w-icon {color: #4079b0;}
       h1 {
         font: 3.9em 'title font';
+        color: rgba(0, 0, 0, 0.5);
         letter-spacing: -4px;
       }
     }
@@ -182,54 +241,74 @@ export default {
       max-width: 700px;
       z-index: 1;
     }
+  }
 
-    &.section--1 {
-      background-image: linear-gradient(#044f8c, #09304f);
-      color: #fff;
-      padding-bottom: 10vw;
+  .section--1 {
+    background-image: linear-gradient(#044f8c, #09304f);
+    color: #fff;
+    padding-bottom: 10vw;
 
-      p, ul {font-size: 1.1em;}
-      .w-list__item-bullet {color: inherit;}
+    p, ul {font-size: 1.1em;}
+    .w-list__item-bullet {color: inherit;}
+  }
+
+  .section--2 {
+    color: #666;
+    padding-bottom: 10vw;
+    margin-bottom: 13vw;
+    padding-top: 4em;
+
+    > svg path {fill: #fff;}
+
+    .w-button {
+      font-family: "title font";
+      height: 2.3em;
+      width: 10em;
+      padding-top: 4px;
+      font-size: 1.2em;
+      font-weight: 600;
     }
+    .feature {
+      position: relative;
+      height: 0;
+      padding-bottom: 25%;
 
-    &.section--2 {
-      color: #666;
-      padding-bottom: 10vw;
-      margin-bottom: 13vw;
-      padding-top: 4em;
-
-      > svg path {fill: #fff;}
-
-      .w-button {
-        font-family: "title font";
-        letter-spacing: -1px;
-        line-height: 3;
-        height: 2em;
-      }
-      .feature {position: relative;}
-      .icon {
+      p {
         position: absolute;
-        width: 6vw;
-        top: 30%;
-        left: 50%;
-        transform: translateX(-50%);
-        fill: #fff;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin: 0;
+        font-weight: 100;
+        font-size: 1.2em;
       }
-
     }
 
-    &.section--3 {
-      background-color: #0f5388;
-      color: #666;
-
-      svg {box-shadow: 0 40px 20px -5px rgba(0, 0, 0, 0.2) inset;}
-
-      &, svg {
-        background: url('~@/assets/wave-pattern.svg') fixed left;
-        background-size: 300px;
-      }
-      path {fill: #fff;}
+    .icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      padding: 33%;
+      fill: #fff;
     }
+
+    .ready-to-dive {margin-top: 4em;}
+  }
+
+  .section--3 {
+    background-color: #0f5388;
+    color: #666;
+
+    svg {box-shadow: 0 40px 20px -5px rgba(0, 0, 0, 0.2) inset;}
+
+    &, svg {
+      background: url('~@/assets/wave-pattern.svg') fixed left;
+      background-size: 300px;
+    }
+    path {fill: #fff;}
   }
 
   .example {
@@ -244,4 +323,6 @@ export default {
 //     background-size: 1280px;
 //   }
 }
+
+.message-box {min-height: 35px;}
 </style>
