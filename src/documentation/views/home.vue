@@ -106,6 +106,16 @@ w-app.home
       w-flex.title2.align-center.mt12
         w-icon.mr2 wi-check
         | Keep full control on the CSS.
+      p.my4.
+        Wave UI is developed with a particular care about CSS.#[br]
+        Practically Wave UI gives you more flexibility and more control over the CSS.
+      p.my4.
+        If you use SASS, you can even control Wave UI CSS rules priorities by overriding the CSS base scope like so.
+      pre.example.ssh-pre.pa2(dark)
+        span.pink $css-scope
+        span.blue-grey.mr1 :
+        span.red-light2 '.w-app'
+        span.blue-grey ;
 
   section.section.section--2
     svg(viewBox="0 0 1440 90")
@@ -254,7 +264,6 @@ export default {
 
   .section--2 {
     color: #666;
-    padding-bottom: 10vw;
     margin-bottom: 13vw;
     padding-top: 4em;
 
@@ -268,6 +277,7 @@ export default {
       font-size: 1.2em;
       font-weight: 600;
     }
+
     .feature {
       position: relative;
       height: 0;
@@ -295,7 +305,7 @@ export default {
       fill: #fff;
     }
 
-    .ready-to-dive {margin-top: 4em;}
+    .ready-to-dive {margin-top: 6em;}
   }
 
   .section--3 {
