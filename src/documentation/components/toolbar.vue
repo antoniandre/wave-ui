@@ -2,7 +2,7 @@
 w-toolbar.main-toolbar(fixed)
   router-link.primary.w-flex.no-grow.fill-height.align-center.home-link(to="/")
     w-icon.wave-logo.mr3(size="3em") wi-wave
-    | Wave UI
+    span Wave UI
   .spacer
   w-tooltip(z-index="20")
     template(#activator="{ on }")
@@ -47,6 +47,8 @@ div.main-toolbar {
     @include default-transition;
     &:hover {transform: scale(1.05);}
     &:focus {transform: scale(1.1);}
+
+    span {font: 22px 'title font', helvetica, arial;}
   }
 
   .wave-logo {color: #497ca2;}
