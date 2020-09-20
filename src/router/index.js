@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import WhyWaveUI from '@/documentation/views/why-wave-ui'
+import Home from '@/documentation/views/home'
 
 Vue.use(VueRouter)
 // The loading state of Vue Router is appended to $router, so a
@@ -11,7 +12,12 @@ const status = Vue.observable({ loading: true })
 const routes = [
   {
     path: '/',
-    redirect: 'why-wave-ui'
+    redirect: 'home'
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: Home
   },
   {
     path: '/why-wave-ui',
