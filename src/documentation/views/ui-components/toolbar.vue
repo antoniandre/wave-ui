@@ -14,9 +14,9 @@ div.ovh
       w-icon.mr3(size="2.5em" style="color: #497ca2") wi-wave
       .title3.my0 Wave UI
       .spacer
-      w-button.ml3(icon="mdi mdi-home" color="primary" text lg)
-      w-button.ml3(icon="mdi mdi-chat" color="primary" text lg)
-      w-button.ml3(icon="mdi mdi-email" color="primary" text lg)
+      w-button.ml3(icon="mdi mdi-home" text lg)
+      w-button.ml3(icon="mdi mdi-chat" text lg)
+      w-button.ml3(icon="mdi mdi-email" text lg)
     template(#html).
       &lt;w-toolbar shadow&gt;
         &lt;div class="title2"&gt;Title&lt;/div&gt;
@@ -28,12 +28,11 @@ div.ovh
 
       &lt;w-toolbar shadow class="mt6 py1"&gt;
         &lt;w-icon color="light-blue-dark3" size="2.5em"&gt;wi-wave&lt;/w-icon&gt;
-        &lt;w-icon lg class="mr2 primary"&gt;mdi mdi-star&lt;/w-icon&gt;
         &lt;div class="title3"&gt;Wave UI&lt;/div&gt;
         &lt;div class="spacer"&gt;&lt;/div&gt;
-        &lt;w-button icon="mdi mdi-home" text lg class="ml3 primary"&gt;&lt;/w-button&gt;
-        &lt;w-button icon="mdi mdi-chat" text lg class="ml3 primary"&gt;&lt;/w-button&gt;
-        &lt;w-button icon="mdi mdi-email" text lg class="ml3 primary"&gt;&lt;/w-button&gt;
+        &lt;w-button icon="mdi mdi-home" text lg class="ml3"&gt;&lt;/w-button&gt;
+        &lt;w-button icon="mdi mdi-chat" text lg class="ml3"&gt;&lt;/w-button&gt;
+        &lt;w-button icon="mdi mdi-email" text lg class="ml3"&gt;&lt;/w-button&gt;
       &lt;/w-toolbar&gt;
 
   title-link(h2) Background color &amp; text color

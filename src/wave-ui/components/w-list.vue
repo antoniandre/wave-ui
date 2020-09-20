@@ -340,6 +340,7 @@ export default {
 .w-list {
   list-style-type: none;
   margin-left: 0;
+  font-size: $base-font-size;
 
   &--child {margin-left: 6 * $base-increment;}
   &--icon {padding-left: 8 * $base-increment;}
@@ -374,7 +375,6 @@ export default {
   // --------------------------------------------
   &__item-label {
     position: relative;
-    font-size: $base-font-size;
     padding-top: 1px;
     padding-bottom: 1px;
     display: block;
