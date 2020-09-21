@@ -65,7 +65,7 @@ export default {
     drawerOpen: false,
     fixNavMenu: false,
     navMenuTop: 0,
-    wAppEl: null,
+    scrollingEl: null,
     contentWrapEl: null
   }),
 
@@ -81,7 +81,7 @@ export default {
 
   methods: {
     onScroll () {
-      this.fixNavMenu = this.wAppEl.scrollTop >= this.navMenuTop
+      this.fixNavMenu = this.scrollingEl.scrollTop >= this.navMenuTop
     },
     onResize () {
       this.navMenuTop = this.contentWrapEl.offsetTop - 12
@@ -89,15 +89,16 @@ export default {
   },
 
   beforeDestroy () {
-    this.wAppEl.removeEventListener('scroll', this.onScroll)
+    window.removeEventListener('scroll', this.onScroll)
     window.removeEventListener('resize', this.onResize)
   },
 
   mounted () {
     this.contentWrapEl = document.querySelector('.content-wrap')
     this.navMenuTop = this.contentWrapEl.offsetTop - 12
-    this.wAppEl = document.querySelector('.w-app')
-    this.wAppEl.addEventListener('scroll', this.onScroll)
+    this.scrollingEl = document.documentElement
+
+    window.addEventListener('scroll', this.onScroll)
     window.addEventListener('resize', this.onResize)
   }
 }
