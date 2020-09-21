@@ -26,7 +26,7 @@ w-app.home
           | Get started
 
   section.section.section--1
-    svg(viewBox="0 0 1440 170")
+    svg(viewBox="0 0 1440 170" preserveAspectRatio="none")
       defs
         linearGradient(id="grad" x1="0%" y1="25%" x2="19%" y2="0%")
           stop(offset="0%" style="stop-color: #f8f8f8;stop-opacity: 0")
@@ -64,14 +64,15 @@ w-app.home
           w-flex.mt4(wrap align-center justify-end)
             w-checkbox(required :validators="[validators.consent]") I agree to the terms &amp; conditions
             .spacer
-            w-button.mr2(
-              bg-color="warning"
-              type="reset"
-              @click="form6.submitted = form6.sent = false") Reset
-            w-button(
-              type="submit"
-              :disabled="form6.valid === false"
-              :loading="form6.submitted && !form6.sent") Validate
+            div
+              w-button.mr2(
+                bg-color="warning"
+                type="reset"
+                @click="form6.submitted = form6.sent = false") Reset
+              w-button(
+                type="submit"
+                :disabled="form6.valid === false"
+                :loading="form6.submitted && !form6.sent") Validate
         w-notification(
           v-model="form6.sent"
           success
@@ -127,20 +128,20 @@ w-app.home
         span.blue-grey ;
 
   section.section.section--2
-    svg(viewBox="0 0 1440 90")
+    svg(viewBox="0 0 1440 90" preserveAspectRatio="none")
       path(d="M 0 32 C 240 53 480 75 720 80 C 960 85 1200 75 1440 60 V 100 H 0 Z")
 
     .section__content
       .w-flex.basis-zero.text-center.mb10
         .feature.grow
-          svg(viewBox="6 0 194 194")
+          svg(viewBox="6 0 194 194" preserveAspectRatio="none")
             path(fill="#61829d" d="M 57 -32 C 70 -10 74 18 63 35 C 52 51 26 58 1 57 C -24 56 -48 49 -58 33 C -67 17 -62 -8 -50 -29 C -38 -51 -19 -69 1 -70 C 22 -70 44 -54 57 -32 Z" transform="translate(100 100)")
           svg.icon(viewBox="0 0 432.4 432.4")
             path(d="M217 93a111 111 0 00-74 195c18 18 16 55 16 56 0 2 0 3 2 5l4 2h102l5-2 2-5c0-1-2-38 16-56l1-1a111 111 0 00-74-194zm64 185l-2 1c-15 17-18 45-18 58h-89c0-13-3-42-20-59a97 97 0 11129 0z")
             path(d="M216 122c-3 0-7 3-7 6 0 4 4 7 7 7 41 0 73 33 73 73 0 4 3 7 7 7 3 0 7-3 7-7 0-48-39-86-87-86zM261 358h-89c-9 0-17 8-17 17s8 17 17 17h88a17 17 0 000-34zm0 20h-89c-2 0-3-1-3-3s1-3 3-3h88c2 0 3 1 3 3s-1 3-2 3zM247 399h-62c-9 0-17 7-17 17s8 16 17 16h62c10 0 17-7 17-16 0-10-7-17-17-17zm0 19h-62c-2 0-3-1-3-3s1-3 3-3h62c2 0 4 1 4 3s-2 3-4 3zM216 60c4 0 7-3 7-7V7c0-4-3-7-7-7-3 0-7 3-7 7v46c0 4 4 7 7 7zM329 34c-3-2-7-1-9 2l-25 38c-3 4-2 8 1 10l4 1c2 0 4-1 5-3l26-38c2-3 2-8-2-10zM135 84l4-2c3-2 4-6 2-9l-25-39c-2-3-7-4-10-2s-4 6-2 10l25 38c2 3 4 4 6 4zM87 126l-41-22c-3-2-7 0-9 3s-1 7 3 9l40 22 3 1c3 0 5-1 6-4 2-3 1-7-2-9zM396 107c-2-3-6-5-9-3l-41 22c-3 2-5 6-3 9 1 3 4 4 6 4l3-1 41-22c3-2 4-6 3-9z")
           p Modern design
         .feature.grow
-          svg(viewBox="0 0 200 200")
+          svg(viewBox="0 0 200 200" preserveAspectRatio="none")
             path(fill="#135182" d="M45.8,-34C59.2,-19.7,69.8,-0.7,67.7,18.2C65.6,37.1,50.7,55.8,31.3,65.4C11.8,74.9,-12.3,75.3,-30.4,65.6C-48.4,55.9,-60.4,36.2,-67,13.5C-73.6,-9.2,-74.9,-34.9,-62.8,-48.9C-50.7,-62.8,-25.4,-65,-4.6,-61.3C16.2,-57.6,32.4,-48.2,45.8,-34Z" transform="translate(100 100)")
           svg.icon(viewBox="0 0 512 512")
             path(d="M90 396c-7 0-14 2-20 5A236 236 0 01303 25a10 10 0 004-20A258 258 0 0075 75a254 254 0 00-20 340 42 42 0 005 53 42 42 0 0060 0 42 42 0 000-60c-8-8-19-12-30-12zm16 58a22 22 0 01-32 0 22 22 0 010-32 22 22 0 0132 0 22 22 0 010 32zm0 0M457 97a42 42 0 10-15 14 236 236 0 01-233 376 10 10 0 00-3 20 258 258 0 00231-70 254 254 0 0020-340zm-51-7a22 22 0 010-32 22 22 0 0132 0 22 22 0 01-32 32zm0 0")
@@ -148,7 +149,7 @@ w-app.home
             path(d="M339 256a83 83 0 10-166 0 83 83 0 00166 0zm-146 0a63 63 0 11126 0 63 63 0 01-126 0zm0 0M348 38a10 10 0 0010-10c0-3-1-5-3-7a10 10 0 00-14 0 10 10 0 000 14c2 2 4 3 7 3zm0 0M164 474a10 10 0 00-10 10 10 10 0 0010 10 10 10 0 0010-10 10 10 0 00-10-10zm0 0")
           p Highly customizable
         .feature.grow
-          svg(viewBox="0 0 200 200")
+          svg(viewBox="0 0 200 200" preserveAspectRatio="none")
             path(fill="#3877a9" d="M54.1,-52.3C67.8,-40.3,75.2,-20.1,73.4,-1.8C71.6,16.5,60.6,33,46.8,48.6C33,64.2,16.5,78.8,0.6,78.2C-15.2,77.6,-30.5,61.6,-41.2,46.1C-51.8,30.5,-58,15.2,-60.2,-2.2C-62.4,-19.6,-60.6,-39.3,-50,-51.2C-39.3,-63.2,-19.6,-67.5,0.3,-67.8C20.1,-68,40.3,-64.2,54.1,-52.3Z" transform="translate(100 100)")
           svg.icon(viewBox="0 0 512 512")
             circle(cx="279.3" cy="349.1" r="11.6")
@@ -157,7 +158,7 @@ w-app.home
             path(d="M454 303H198c-7 0-12 4-12 11s5 12 12 12h256c7 0 11-5 11-12s-4-11-11-11zM128 233H35c-20 0-35 15-35 35v163c0 19 15 34 35 34h93c20 0 35-15 35-34V268c0-20-15-35-35-35zm12 198c0 7-5 11-12 11H35c-7 0-12-4-12-11V268c0-7 5-12 12-12h93c7 0 12 5 12 12v163z")
           p Fully responsive
         .feature.grow
-          svg(viewBox="0 0 200 200")
+          svg(viewBox="0 0 200 200" preserveAspectRatio="none")
             path(fill="#7db0da" d="M60.4,-48.9C73.3,-32.1,75.2,-7.3,67.4,10.9C59.7,29,42.3,40.3,23,50.8C3.7,61.3,-17.6,71,-32.9,64.9C-48.3,58.9,-57.7,37.1,-62.2,14.9C-66.8,-7.3,-66.3,-29.9,-55.1,-46.3C-43.9,-62.7,-22,-72.9,0.9,-73.6C23.8,-74.4,47.6,-65.7,60.4,-48.9Z" transform="translate(100 100)")
           svg.icon(viewBox="0 0 461.8 461.8")
             path(d="M362 219h-1c-8 1-16 4-23 9-4-15-18-26-34-26-8 0-16 3-22 8-3-17-18-30-35-31-8 0-15 3-21 7v-19a88 88 0 10-78 0v84l-19-24a38 38 0 00-53-8 38 38 0 00-5 53l71 139c22 43 57 49 72 50l37 1c39 0 72-2 72-2h1c58 0 74-62 75-96V258c0-20-16-38-37-39zM147 110v38a72 72 0 1178 0v-38a39 39 0 00-78 0zm175 334s-57 3-108 1c-11 0-40-5-58-41L85 264v-1c-8-9-8-23 2-31 9-7 23-5 30 5l32 44 3 2 1 1h5l1-1h1v-1l2-1v-1l1-1V110a23 23 0 1146 0v141a8 8 0 0016 0v-33a21 21 0 1141 0v58a8 8 0 0016 0v-35a21 21 0 1142 0v64a8 8 0 0016 0v-47a21 21 0 1141 0l1 106c0 4-2 80-60 80z")
@@ -169,9 +170,9 @@ w-app.home
       w-button.ma1(lg shadow to="/getting-started") Get started
 
   section.section.section--3
-    //- svg(viewBox="0 0 1440 100")
+    //- svg(viewBox="0 0 1440 100" preserveAspectRatio="none")
       path(d="M 0 85 C 240 42 480 0 720 -0.3 C 960 0 1200 42 1440 81 V 100 H 0 Z")
-    svg(viewBox="0 0 1440 100")
+    svg(viewBox="0 0 1440 100" preserveAspectRatio="none")
       path(d="M 0 0 H 1440 V 81 C 1250 61 552 0 0 67 Z")
     .section__content
 </template>
@@ -250,6 +251,8 @@ export default {
       position: absolute;
       left: 0;
       right: 0;
+      width: 100%;
+      display: block;
       bottom: 100%;
       z-index: 0;
     }
@@ -276,12 +279,14 @@ export default {
     margin-bottom: 13vw;
     padding-top: 4em;
 
+    .section__content {overflow: hidden;}
+
     > svg path {fill: #fff;}
 
     .w-button {
       font-family: "title font";
       height: 2.3em;
-      width: 10em;
+      width: 10.2em;
       padding-top: 4px;
       font-size: 1.2em;
       font-weight: 600;
@@ -305,12 +310,10 @@ export default {
 
     .icon {
       position: absolute;
-      top: 0;
-      left: 0;
-      display: flex;
-      align-items: center;
-      justify-items: center;
-      padding: 33%;
+      top: 50%;
+      left: 50%;
+      width: 35%;
+      transform: translate(-50%, -50%);
       fill: #fff;
     }
 
@@ -333,19 +336,18 @@ export default {
   .example {
     background-color: #262626;
     border: none;
+    overflow: hidden;
   }
+
+  .message-box {min-height: 35px;}
 }
 
 @media screen and (max-width: 400px) {
   .home__header .title h1 {font-size: 3.3em;}
 }
 
-@media screen and (min-width: 1500px) {
-// .home__bg .bg--bottom:after {
-//     padding-bottom: 20%;
-//     background-size: 1280px;
-//   }
+// For iOS: https://stackoverflow.com/a/23420490/2012407, https://stackoverflow.com/a/47818418/2012407.
+@supports (-webkit-touch-callout: none) {
+  .home .section--3 svg {background-attachment: scroll;}
 }
-
-.message-box {min-height: 35px;}
 </style>
