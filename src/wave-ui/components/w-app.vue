@@ -98,10 +98,10 @@ export default {
 
 .w-app {
   position: relative; // Make the .w-app a referential for tooltips / menus.
-  height: 100%;
+  // height: 100%;
+  // overflow: auto;
   display: flex;
   flex-direction: column;
-  overflow: auto;
 
   &.d-block {display: block;}
 }
