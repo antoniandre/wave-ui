@@ -1,21 +1,29 @@
 <template lang="pug">
 w-app.home
-  .home__header
-    .w-flex.align-center.justify-end.pa3.pb0
-      w-tooltip(z-index="20")
-        template(#activator="{ on }")
-          a.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
-            w-icon(lg) mdi mdi-github
-        .size--xs.text-nowrap View the project on Github
-      .text-italic.grey(v-html="`Version ${version}`")
-
-    .title
-      .w-flex.align-center
+  .home__header.w-flex.wrap.no-shrink
+    .title.align-self-center
+      .w-flex.align-center.no-grow
         w-icon.wave-logo.mr3(size="4.5em") wi-wave
         h1.my0 Wave UI
       p.grey-light1
         | A Vue.js UI framework with only the bright side.
         w-icon.ml1(size="1.5em" style="color: #ffc518") mdi mdi-white-balance-sunny
+
+    .w-flex.column.align-end.pa3
+      div
+        w-tooltip(z-index="20")
+          template(#activator="{ on }")
+            a.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
+              w-icon(lg) mdi mdi-github
+          .size--xs.text-nowrap View the project on Github
+        span.text-italic.grey(v-html="`Version ${version}`")
+      .mt4
+        w-button.white--bg(outline to="/why-wave-ui")
+          w-icon.ml-1 wi-chevron-right
+          | Why Wave UI
+        w-button.white--bg.ml2(outline to="/getting-started")
+          w-icon.ml-1 wi-chevron-right
+          | Get started
 
   section.section.section--1
     svg(viewBox="0 0 1440 170")
@@ -32,7 +40,7 @@ w-app.home
       path.path2.top(fill="url(#grad)" d="M 0 55 C 880 -10 1044 206 1441 75 V 90 C 970 294 936 30 0 139 Z")
 
     .section__content
-      w-flex.title2.align-center
+      w-flex.title2
         w-icon.mr2 wi-check
         | All the components that you need in a lightweight package.
       p.my4.
@@ -73,12 +81,12 @@ w-app.home
           round
           bottom) The form was sent successfully!
 
-      w-flex.title2.align-center.mt12
+      w-flex.title2.mt12
         w-icon.mr2 wi-check
         | Build great UIs with flexible &amp; powerful elements.
       p.my4 See for yourself with this checklist component for instance.
       .w-flex.example.pa1.basis-zero.align-center
-        .grow
+        .grow(style="min-width: 200px")
           ssh-pre(language="html-vue" dark).
             &lt;w-list
               v-model="selection"
@@ -101,9 +109,10 @@ w-app.home
           :items="demoListItems"
           checklist
           round-checkboxes
-          color="blue-light1")
+          color="blue-light1"
+          style="min-width: 150px")
 
-      w-flex.title2.align-center.mt12
+      w-flex.title2.mt12
         w-icon.mr2 wi-check
         | Keep full control on the CSS.
       p.my4.
@@ -325,6 +334,10 @@ export default {
     background-color: #262626;
     border: none;
   }
+}
+
+@media screen and (max-width: 400px) {
+  .home__header .title h1 {font-size: 3.3em;}
 }
 
 @media screen and (min-width: 1500px) {
