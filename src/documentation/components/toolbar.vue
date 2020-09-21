@@ -1,12 +1,12 @@
 <template lang="pug">
 w-toolbar.main-toolbar(fixed)
-  router-link.primary.w-flex.no-grow.fill-height.align-center.home-link(to="/")
+  router-link.w-flex.no-grow.fill-height.align-center.home-link(to="/")
     w-icon.wave-logo.mr3(size="3em") wi-wave
-    span Wave UI
+    span.grey-dark1 Wave UI
   .spacer
   w-tooltip(z-index="20")
     template(#activator="{ on }")
-      a.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
+      a.github-link.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
         w-icon(lg) mdi mdi-github
     .size--xs.text-nowrap View the project on Github
   .caption(v-html="`Version ${version}`")
@@ -51,7 +51,7 @@ div.main-toolbar {
     span {font: 22px 'title font', helvetica, arial;}
   }
 
-  .wave-logo {color: #497ca2;}
+  .github-link .w-icon, .wave-logo {color: #1670b4;}
 
   .hamburger-menu .w-icon {width: 26px;height: 26px;}
 }
