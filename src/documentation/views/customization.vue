@@ -113,7 +113,7 @@ div
     span.blue-grey ;
 
   title-link(h2) Give Wave UI CSS more priority
-  p It is also possible to control Wave UI CSS rules priorities by overriding the CSS base scope:
+  p It is also possible to control Wave UI's CSS rules priorities by overriding the CSS base scope:
   pre.ssh-pre(data-label="SCSS")
     span.pink $css-scope
     span.blue-grey.mr1 :

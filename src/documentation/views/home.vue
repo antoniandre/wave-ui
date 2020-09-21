@@ -1,19 +1,19 @@
 <template lang="pug">
 w-app.home
   .home__header.w-flex.wrap.no-shrink
-    .title.align-self-center
+    .title
       .w-flex.align-center.no-grow
         w-icon.wave-logo.mr3(size="4.5em") wi-wave
-        h1.my0 Wave UI
-      p.grey-light1
+        h1.mt1.mb-1 Wave UI
+      p.grey-light1.mr-1
         | A Vue.js UI framework with only the bright side.
         w-icon.ml1(size="1.5em" style="color: #ffc518") mdi mdi-white-balance-sunny
 
-    .w-flex.column.align-end.pa3
+    .right.w-flex.column.align-end.pa3
       div
         w-tooltip(z-index="20")
           template(#activator="{ on }")
-            a.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
+            a.github-link.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
               w-icon(lg) mdi mdi-github
           .size--xs.text-nowrap View the project on Github
         span.text-italic.grey(v-html="`Version ${version}`")
@@ -26,7 +26,7 @@ w-app.home
           | Get started
 
   section.section.section--1
-    svg(viewBox="0 0 1440 170" preserveAspectRatio="none")
+    svg(viewBox="0 0 1440 400" preserveAspectRatio="none")
       defs
         linearGradient(id="grad" x1="0%" y1="25%" x2="19%" y2="0%")
           stop(offset="0%" style="stop-color: #f8f8f8;stop-opacity: 0")
@@ -34,10 +34,12 @@ w-app.home
         linearGradient(id="grad2" x1="0%" y1="0%" x2="50%" y2="100%")
           stop(offset="0%" style="stop-color: #f8f8f8;stop-opacity: 1")
           stop(offset="70%" style="stop-color: rgb(150, 190, 255);stop-opacity: 0")
+        filter(id="filter1" x="0" y="0" filterUnits="userSpaceOnUse")
+          feDropShadow(dx="0" dy="0" stdDeviation="8" flood-color="rgba(0,0,0,0.25)")
 
-      path.path1.bottom(fill="#044f8c" d="M 0 110 C 826 191 726 -17 1444 76 V 180 H 0 Z")
-      path.path1.bottom(fill="url(#grad2)" d="M 0 110 C 826 191 726 -17 1444 76 V 180 H 0 Z")
-      path.path2.top(fill="url(#grad)" d="M 0 55 C 880 -10 1044 206 1441 75 V 90 C 970 294 936 30 0 139 Z")
+      path.path1.bottom(fill="#b9deff" filter="url(#filter1)" d="M 0 115 C 490 400 1113 -100 1440 130 V 400 H 0 Z")
+      path.path1.bottom(fill="#56b1eb" filter="url(#filter1)" d="M 0 135 C 490 450 1130 -95 1440 235 V 400 H 0 Z")
+      path.path1.bottom(fill="#1a6fb4" filter="url(#filter1)" d="M 1 155 C 554 521 1126 -37 1440 321 V 400 H 0 Z")
 
     .section__content
       w-flex.title2
@@ -120,7 +122,7 @@ w-app.home
         Wave UI is developed with a particular care about CSS.#[br]
         Practically Wave UI gives you more flexibility and more control over the CSS.
       p.my4.
-        If you use SASS, you can even control Wave UI CSS rules priorities by overriding the CSS base scope like so.
+        If you use SASS, you can even control Wave UI's CSS rules priorities by overriding the CSS base scope like so.
       pre.example.ssh-pre.pa2(dark)
         span.pink $css-scope
         span.blue-grey.mr1 :
@@ -170,11 +172,34 @@ w-app.home
       w-button.ma1(lg shadow to="/getting-started") Get started
 
   section.section.section--3
-    //- svg(viewBox="0 0 1440 100" preserveAspectRatio="none")
-      path(d="M 0 85 C 240 42 480 0 720 -0.3 C 960 0 1200 42 1440 81 V 100 H 0 Z")
     svg(viewBox="0 0 1440 100" preserveAspectRatio="none")
       path(d="M 0 0 H 1440 V 81 C 1250 61 552 0 0 67 Z")
-    .section__content
+
+    .section__content.w-flex.justify-end.align-center.no-grow.wrap
+      small.grey-light2.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
+      .spacer
+      .caption
+        | Made with
+        w-tooltip(top)
+          template(#activator="{ on }")
+            w-icon.ml1(v-on="on" sm) mdi mdi-vuejs
+          | Vue.js
+        w-tooltip(top)
+          template(#activator="{ on }")
+            w-icon.ml1(v-on="on" sm) mdi mdi-language-css3
+          | CSS 3
+        w-tooltip(top)
+          template(#activator="{ on }")
+            w-icon.ml1(v-on="on" sm) mdi mdi-language-html5
+          span.text-nowrap Html 5 &amp; Pug
+        w-tooltip(top)
+          template(#activator="{ on }")
+            w-icon.ml1(v-on="on" sm) mdi mdi-sass
+          | Sass
+        w-tooltip(top)
+          template(#activator="{ on }")
+            w-icon.ml1.heart(v-on="on" sm) mdi mdi-heart
+          | Love
 </template>
 
 <script>
@@ -223,16 +248,21 @@ export default {
 
 <style lang="scss">
 .home {
+  background: url('~@/assets/wave-pattern.svg') left;
+  background-size: 300px;
+
   &__header {
-    height: 21vw;
+    height: 30vw;
     flex-shrink: 0;
     min-height: 200px;
+    background-color: #fff;
 
     .title {
+      margin-top: 4vw;
       margin-left: 5vw;
       display: inline-flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-end;
 
       .w-icon {color: #4079b0;}
       h1 {
@@ -241,6 +271,12 @@ export default {
         letter-spacing: -4px;
       }
     }
+
+    .right {z-index: 2;}
+
+    .github-link .w-icon,
+    .wave-logo,
+    a.w-button {color: #1670b4;}
   }
 
   .section {
@@ -266,7 +302,7 @@ export default {
   }
 
   .section--1 {
-    background-image: linear-gradient(#044f8c, #09304f);
+    background-image: linear-gradient(#1a6fb4, #09304f);
     color: #fff;
     padding-bottom: 10vw;
 
@@ -275,9 +311,10 @@ export default {
   }
 
   .section--2 {
+    background-color: #fff;
     color: #666;
-    margin-bottom: 13vw;
     padding-top: 4em;
+    padding-bottom: 6em;
 
     .section__content {overflow: hidden;}
 
@@ -321,14 +358,15 @@ export default {
   }
 
   .section--3 {
-    background-color: #0f5388;
     color: #666;
+    padding: 0;
+    flex-shrink: 0;
 
-    svg {box-shadow: 0 40px 20px -5px rgba(0, 0, 0, 0.2) inset;}
-
-    &, svg {
-      background: url('~@/assets/wave-pattern.svg') fixed left;
-      background-size: 300px;
+    svg {
+      box-shadow: 0 40px 20px -5px rgba(0, 0, 0, 0.2) inset;
+      position: static;
+      max-height: 60px;
+      overflow: hidden;
     }
     path {fill: #fff;}
   }
@@ -342,12 +380,11 @@ export default {
   .message-box {min-height: 35px;}
 }
 
-@media screen and (max-width: 400px) {
-  .home__header .title h1 {font-size: 3.3em;}
+@media screen and (max-width: 600px) {
+  .home .section--3 svg {box-shadow: 0 20px 10px -5px rgba(0, 0, 0, 0.2) inset;}
 }
 
-// For iOS: https://stackoverflow.com/a/23420490/2012407, https://stackoverflow.com/a/47818418/2012407.
-@supports (-webkit-touch-callout: none) {
-  .home .section--3 svg {background-attachment: scroll;}
+@media screen and (max-width: 400px) {
+  .home__header .title h1 {font-size: 3.3em;}
 }
 </style>
