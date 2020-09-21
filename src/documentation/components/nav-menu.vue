@@ -102,7 +102,9 @@ export default {
   methods: {
     onItemClick () {
       this.$emit('update:drawerOpen', false)
-      setTimeout(() => (document.querySelector('.w-app').scrollTop = 0), 100)
+      setTimeout(() => {
+        document.documentElement.scrollTop = document.querySelector('.content-wrap').offsetTop - 40
+      }, 100)
     }
   }
 }
