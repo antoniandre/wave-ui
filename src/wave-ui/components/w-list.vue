@@ -103,7 +103,7 @@ const renderListItemLabel = function (createEl, li, index) {
     component.name = 'w-checkbox'
     component.props = {
       value: li.selected,
-      color: this.color,
+      color: li[this.itemColor] || this.color,
       round: this.roundCheckboxes,
       disabled: li.disabled
     }
@@ -168,6 +168,7 @@ export default {
     icon: { type: String, default: '' },
     itemLabel: { type: String, default: 'label' }, // Name of the label field.
     itemValue: { type: String, default: 'value' }, // Name of the value field.
+    itemColor: { type: String, default: 'color' }, // Support a different color per item.
     itemClass: { type: String },
     depth: { type: Number, default: 0 }, // For recursive call.
     returnObject: { type: Boolean },
@@ -256,6 +257,7 @@ export default {
         'w-list__item-label--active': this.isSelectable && item.selected || null,
         'w-list__item-label--hoverable': this.hover,
         'w-list__item-label--selectable': this.isSelectable,
+        [item.color]: !!item.color,
         [this.itemClass]: !!this.itemClass
       }
     },
