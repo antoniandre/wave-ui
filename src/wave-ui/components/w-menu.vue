@@ -368,9 +368,9 @@ export default {
 
   beforeDestroy () {
     // el.remove() doesn't work on IE11.
-    if (this.menuEl) this.menuEl.parentNode.removeChild(this.menuEl)
+    if (this.menuEl && this.menuEl.parentNode) this.menuEl.parentNode.removeChild(this.menuEl)
     if (this.overlay && this.overlayEl.parentNode) this.overlayEl.parentNode.removeChild(this.overlayEl)
-    if (this.activatorEl) this.activatorEl.parentNode.removeChild(this.activatorEl)
+    if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.parentNode.removeChild(this.activatorEl)
   },
 
   watch: {
