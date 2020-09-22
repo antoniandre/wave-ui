@@ -49,7 +49,7 @@ export default {
 
   computed: {
     checkboxItems () {
-      return this.items.map((item, i) => {
+      return (this.items || []).map((item, i) => {
         const itemValue = item[this.itemValue] === undefined ? (item[this.itemLabel] || i) : item[this.itemValue]
 
         return Vue.observable({
