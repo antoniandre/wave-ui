@@ -13,7 +13,7 @@
       :label="item.label"
       :label-on-left="labelOnLeft"
       :value="item.isChecked"
-      :color="color"
+      :color="item.color"
       :round="round"
       @input="toggleCheck(item, $event)"
       :class="{ mt1: !inline && i }")
@@ -34,6 +34,7 @@ export default {
     labelOnLeft: { type: Boolean },
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
+    itemColor: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
     round: { type: Boolean },
     color: { type: String, default: 'primary' }
@@ -56,6 +57,7 @@ export default {
           label: item[this.itemLabel],
           index: i,
           value: itemValue, // If no value is set then add one to prevent error.
+          color: item[this.itemColor] || this.color,
           isChecked: this.value && this.value.includes(itemValue)
         })
       })
