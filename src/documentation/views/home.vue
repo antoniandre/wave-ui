@@ -10,14 +10,14 @@ w-app.home
         w-icon.ml1(size="1.5em" style="color: #ffc518") mdi mdi-white-balance-sunny
 
     .right.w-flex.column.align-end.pa3
-      div
+      .version
         w-tooltip(z-index="20")
           template(#activator="{ on }")
             a.github-link.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
               w-icon(lg) mdi mdi-github
           .size--xs.text-nowrap View the project on Github
-        span.text-italic.grey(v-html="`Version ${version}`")
-      .mt4
+        em.grey(v-html="`Version ${version}`")
+      .buttons
         w-button.white--bg(outline to="/why-wave-ui")
           w-icon.ml-1 wi-chevron-right
           | Why Wave UI
@@ -284,6 +284,7 @@ export default {
 .home {
   background: url('~@/assets/wave-pattern.svg') left;
   background-size: 300px;
+  height: auto;
 
   &__header {
     height: 30vw;
@@ -307,6 +308,7 @@ export default {
     }
 
     .right {z-index: 2;}
+    .buttons {margin-top: 16px;}
 
     .github-link .w-icon,
     .wave-logo,
@@ -464,8 +466,30 @@ export default {
   100% { -webkit-transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
 }
 
+@media screen and (max-width: 840px) {
+  .home__header {min-height: 240px;}
+}
+
+
 @media screen and (max-width: 600px) {
+  .home .section--1 {padding-top: 5em;}
+  .home__header .buttons {
+    position: absolute;
+    left: 8px;
+    top: 210px;
+  }
   .home .section--3 svg {box-shadow: 0 20px 10px -5px rgba(0, 0, 0, 0.2) inset;}
+}
+
+@media screen and (max-width: 500px) {
+  .home__header {min-height: 215px;}
+  .home__header .version {
+    position: absolute;
+    left: 8px;
+    top: 198px;
+  }
+  .home__header .github-link .w-icon, .home__header em {color: #fff !important;}
+  .home .section--1 {padding-top: 7em;}
 }
 
 @media screen and (max-width: 400px) {
