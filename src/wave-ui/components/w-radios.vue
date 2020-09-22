@@ -49,7 +49,7 @@ export default {
 
   computed: {
     radioItems () {
-      return this.items.map((item, i) => ({
+      return (this.items || []).map((item, i) => ({
         ...item,
         label: item[this.itemLabel],
         // If no value is set then add one to prevent error.
