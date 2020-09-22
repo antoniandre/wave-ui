@@ -14,7 +14,7 @@
       :value="item.value === value"
       :label="item.label"
       :label-on-left="labelOnLeft"
-      :color="color"
+      :color="item.color"
       :class="{ mt1: !inline && i }")
       slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
@@ -32,6 +32,7 @@ export default {
     labelOnLeft: { type: Boolean },
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
+    itemColor: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
     color: { type: String, default: 'primary' }
   },
@@ -52,7 +53,8 @@ export default {
         ...item,
         label: item[this.itemLabel],
         // If no value is set then add one to prevent error.
-        value: item[this.itemValue] === undefined ? (item[this.itemLabel] || i) : item[this.itemValue]
+        value: item[this.itemValue] === undefined ? (item[this.itemLabel] || i) : item[this.itemValue],
+        color: item[this.itemColor] || this.color
       }))
     },
     classes () {
