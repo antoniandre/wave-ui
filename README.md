@@ -1,4 +1,4 @@
-# Wave UI - Beta
+# Wave UI
 
 [![Latest Version on NPM](https://img.shields.io/npm/v/wave-ui.svg)](https://npmjs.com/package/wave-ui)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
