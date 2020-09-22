@@ -37,8 +37,7 @@ div.lists-demo
           { label: 'Item 2' },
           { label: 'Item 3' },
           { label: 'Item 4' },
-          { label: 'Item 5' },
-          { label: 'Item 6', disabled: true }
+          { label: 'Item 5', disabled: true }
         ]
       })
 
@@ -47,22 +46,35 @@ div.lists-demo
     Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
     background.
   example
-    w-list(:items="listItems2" color="pink" hover)
+    w-list(:items="listItems4" color="pink" hover)
     br
-    w-list(:items="listItems2" bg-color="blue-light5" color="primary" hover)
+    w-list(:items="listItems4" bg-color="blue-light5" color="primary" hover)
     template(#html).
-      &lt;w-list :items="items" color="pink" hover&gt;&lt;/w-list&gt;
+      &lt;w-list :items="items1" color="pink" hover&gt;&lt;/w-list&gt;
       &lt;br /&gt;
-      &lt;w-list :items="items" bg-color="blue-light5" color="primary" hover&gt;&lt;/w-list&gt;
+      &lt;w-list :items="items1" bg-color="blue-light5" color="primary" hover&gt;&lt;/w-list&gt;
+    template(#js).
+      data: () => ({
+        items1: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' },
+          { label: 'Item 4' }
+        ]
+      })
+
+  title-link(h3) Different color per item
+  example
+    w-list(:items="listItems5" hover)
+    template(#html).
+      &lt;w-list :items="items" hover&gt;&lt;/w-list&gt;
     template(#js).
       data: () => ({
         items: [
-          { label: 'Star' },
-          { label: 'Check' },
-          { label: 'Cross' },
-          { label: 'Info' },
-          { label: 'Warning' },
-          { label: 'Disabled' }
+          { label: 'Item 1', color: 'amber' },
+          { label: 'Item 2', color: 'warning' },
+          { label: 'Item 3', color: 'error' },
+          { label: 'Item 4', color: 'pink' }
         ]
       })
 
@@ -120,7 +132,7 @@ div.lists-demo
     w-radios.mb6(v-model="multiple" :items="radios" inline)
     w-flex(wrap align-center)
       w-list.grow.mr4(
-        v-model="selectedItem1"
+        v-model="selection1"
         :items="listItems1"
         color="deep-purple"
         :multiple="multiple"
@@ -131,14 +143,14 @@ div.lists-demo
         span.code {{ itemClicked }}
     .title3.mt2
       | Selected item:
-      code.ml2(v-if="!multiple || Array.isArray(selectedItem1)") {{ selectedItem1 || 'null' }}
-      code.ml2(v-else-if="multiple") {{ selectedItem1 ? [selectedItem1] : '[]' }}
+      code.ml2(v-if="!multiple || Array.isArray(selection1)") {{ selection1 || 'null' }}
+      code.ml2(v-else-if="multiple") {{ selection1 ? [selection1] : '[]' }}
     template(#html).
       &lt;w-radios v-model="multiple" :items="radios" inline&gt;&lt;/w-radios&gt;
 
       &lt;w-flex wrap align-center&gt;
         &lt;w-list
-          v-model="selectedItem"
+          v-model="selection"
           :items="items"
           color="deep-purple"
           :multiple="multiple"
@@ -152,11 +164,11 @@ div.lists-demo
       &lt;/w-flex&gt;
       &lt;div class="title3 mt2"&gt;
         Selected item:
-        &lt;code v-if="!multiple || Array.isArray(selectedItem)" class="ml2"&gt;
-          {{ '\{\{ selectedItem || \'null\' \}\}' }}
+        &lt;code v-if="!multiple || Array.isArray(selection)" class="ml2"&gt;
+          {{ '\{\{ selection || \'null\' \}\}' }}
         &lt;/code&gt;
         &lt;code v-else-if="multiple" class="ml2"&gt;
-          {{ '\{\{ selectedItem ? [selectedItem] : \'[]\' \}\}' }}
+          {{ '\{\{ selection ? [selection] : \'[]\' \}\}' }}
         &lt;/code&gt;
       &lt;/div&gt;
     template(#js).
@@ -171,10 +183,9 @@ div.lists-demo
           { label: 'Item 2', value: 2 },
           { label: 'Item 3', value: 3 },
           { label: 'Item 4', value: 4 },
-          { label: 'Item 5', value: 5 },
-          { label: 'Item 6', value: 6, disabled: true }
+          { label: 'Item 5', value: 5, disabled: true }
         ],
-        selectedItem: 2,
+        selection: 2,
         itemClicked: null
       })
   p Note: you can get the list selection from the v-model, or by listening to the #[span.code input] event.
@@ -185,14 +196,14 @@ div.lists-demo
       .grow
         .title3.mb4 Default
         w-list(
-          v-model="selectedItem3"
+          v-model="selection3"
           :items="listItems1"
           checklist
           color="green")
       .grow
         .title3.mb4 Round checkboxes
         w-list(
-          v-model="selectedItem4"
+          v-model="selection4"
           :items="listItems1"
           checklist
           round-checkboxes
@@ -226,7 +237,7 @@ div.lists-demo
         &lt;div class="grow"&gt;
           &lt;p class="title3 mb4"&gt;Default&lt;/p&gt;
           &lt;w-list
-            v-model="selectedItem1"
+            v-model="selection1"
             :items="listItems1"
             checklist
             color="green"&gt;
@@ -235,7 +246,7 @@ div.lists-demo
         &lt;div class="grow"&gt;
           &lt;p class="title3 mb4"&gt;Round checkboxes&lt;/p&gt;
           &lt;w-list
-            v-model="selectedItem2"
+            v-model="selection2"
             :items="listItems1"
             checklist
             round-checkboxes
@@ -282,8 +293,7 @@ div.lists-demo
           { label: 'Item 2', value: 2 },
           { label: 'Item 3', value: 3 },
           { label: 'Item 4', value: 4 },
-          { label: 'Item 5', value: 5 },
-          { label: 'Item 6', value: 6, disabled: true }
+          { label: 'Item 5', value: 5, disabled: true }
         ],
         listItems2: [
           { label: 'Star', id: 'star', icon: 'mdi mdi-star', route: '#route-to-star' },
@@ -293,8 +303,8 @@ div.lists-demo
           { label: 'Warning', id: 'warning', icon: 'mdi mdi-alert', route: '#route-to-warning' },
           { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', route: '#disabled', disabled: true }
         ],
-        selectedItem1: [1, 3],
-        selectedItem2: 1
+        selection1: [1, 3],
+        selection2: 1
       })
     template(#css).
       .w-list {max-width: 300px;}
@@ -320,6 +330,24 @@ div.lists-demo
       .w-list.custom .w-list__item-label--active label:before {
         width: 100%;
       }
+
+  title-link(h3) Checklist colors
+  p A checklist can have all the color options that the normal list can have, even a different color per item.
+
+  example
+    w-list(v-model="selection5" :items="listItems5" checklist)
+    template(#html).
+      &lt;w-list v-model="selection" :items="items" checklist&gt;&lt;/w-list&gt;
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1', value: 1, color: 'amber' },
+          { label: 'Item 2', value: 2, color: 'warning' },
+          { label: 'Item 3', value: 3, color: 'error' },
+          { label: 'Item 4', value: 4, color: 'pink' }
+        ],
+        selection: [1, 2, 3, 4]
+      })
 
   title-link(h2) Navigation lists
   p.
@@ -368,8 +396,7 @@ export default {
       { label: 'Item 2', value: 2 },
       { label: 'Item 3', value: 3 },
       { label: 'Item 4', value: 4 },
-      { label: 'Item 5', value: 5 },
-      { label: 'Item 6', value: 6, disabled: true }
+      { label: 'Item 5', value: 5, disabled: true }
     ],
     listItems2: [
       { label: 'Star', id: 'star', icon: 'mdi mdi-star', route: '#route-to-star' },
@@ -384,13 +411,25 @@ export default {
       { label: 'Item 2' },
       { label: 'Item 3' },
       { label: 'Item 4' },
-      { label: 'Item 5' },
-      { label: 'Item 6', disabled: true }
+      { label: 'Item 5', disabled: true }
     ],
-    selectedItem1: 2,
-    selectedItem2: 'check',
-    selectedItem3: [1, 3],
-    selectedItem4: 1,
+    listItems4: [
+      { label: 'Item 1' },
+      { label: 'Item 2' },
+      { label: 'Item 3' },
+      { label: 'Item 4' }
+    ],
+    listItems5: [
+      { label: 'Item 1', value: 1, color: 'amber' },
+      { label: 'Item 2', value: 2, color: 'warning' },
+      { label: 'Item 3', value: 3, color: 'error' },
+      { label: 'Item 4', value: 4, color: 'pink' }
+    ],
+    selection1: 2,
+    selection2: 'check',
+    selection3: [1, 3],
+    selection4: 1,
+    selection5: [1, 2, 3, 4],
     itemClicked: null
   })
 }
