@@ -140,6 +140,20 @@ div
         ]
       })
 
+  title-link(h3) Different color per item
+  example
+    w-accordion(:items="items2")
+    template(#pug).
+      w-accordion(:items="items")
+    template(#js).
+      data: () => ({
+        items: [
+          { title: 'Item 1', content: 'Content 1', color: 'amber' },
+          { title: 'Item 2', content: 'Content 2', color: 'warning' },
+          { title: 'Item 3', content: 'Content 3', color: 'error' }
+        ]
+      })
+
   title-link(h2) Expand a single item at a time
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(v-model="accordion4" :items="items" expand-single)
@@ -209,17 +223,17 @@ div
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items" content-class="pa0")
       template(#item-title="{ item }")
-        w-icon(lg :color="item.color") {{ item.icon }}
-        .title3.my0.ml2(:class="item.color") {{ item.title }}
+        w-icon(lg :color="item.itemColor") {{ item.icon }}
+        .title3.my0.ml2(:class="item.itemColor") {{ item.title }}
       template(#item-content="{ item }")
-        w-alert.my0.pb3(border-left tile :color="item.color" v-html="item.content")
+        w-alert.my0.pb3(border-left tile :color="item.itemColor" v-html="item.content")
     template(#pug).
       w-accordion(:items="items" content-class="pa0")
         template(#item-title="{ item }")
-          w-icon(lg :color="item.color") {{ '\{\{ item.icon \}\}' }}
-          .title3.ml2(:class="item.color") {{ '\{\{ item.title \}\}' }}
+          w-icon(lg :color="item.itemColor") {{ '\{\{ item.icon \}\}' }}
+          .title3.ml2(:class="item.itemColor") {{ '\{\{ item.title \}\}' }}
         template(#item-content="{ item }")
-          w-alert.my0.pb3(border-left tile :color="item.color" v-html="item.content")
+          w-alert.my0.pb3(border-left tile :color="item.itemColor" v-html="item.content")
     template(#js).
       data: () => ({
         items: [
@@ -227,19 +241,19 @@ div
             title: 'Item 1',
             content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.',
             icon: 'mdi mdi-home',
-            color: 'blue'
+            itemColor: 'blue'
           },
           {
             title: 'Item 2',
             content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!',
             icon: 'mdi mdi-github',
-            color: 'green'
+            itemColor: 'green'
           },
           {
             title: 'Item 3',
             content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.',
             icon: 'mdi mdi-codepen',
-            color: 'orange'
+            itemColor: 'orange'
           }
         ]
       })
@@ -386,19 +400,36 @@ export default {
         title: 'Item 1',
         content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.',
         icon: 'mdi mdi-home',
-        color: 'blue'
+        itemColor: 'blue'
       },
       {
         title: 'Item 2',
         content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!',
         icon: 'mdi mdi-github',
-        color: 'green'
+        itemColor: 'green'
       },
       {
         title: 'Item 3',
         content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.',
         icon: 'mdi mdi-codepen',
-        color: 'orange'
+        itemColor: 'orange'
+      }
+    ],
+    items2: [
+      {
+        title: 'Item 1',
+        content: 'content 1',
+        color: 'amber'
+      },
+      {
+        title: 'Item 2',
+        content: 'content 2',
+        color: 'warning'
+      },
+      {
+        title: 'Item 3',
+        content: 'content 3',
+        color: 'error'
       }
     ],
     itemsDisabled: [

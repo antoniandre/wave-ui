@@ -3,7 +3,7 @@
     .w-accordion__item(
       v-for="(item, i) in accordionItems"
       :key="i"
-      :class="{ ...itemClasses, 'w-accordion__item--expanded': item.open, 'w-accordion__item--disabled': item.disabled }")
+      :class="{ ...itemClasses, 'w-accordion__item--expanded': item.open, 'w-accordion__item--disabled': item.disabled, [item[itemColor]]: item[itemColor] }")
       .w-accordion__item-title(
         @click="!item.disabled && toggleItem(item)"
         :tabindex="!item.disabled && 0"
@@ -45,6 +45,7 @@ export default {
     bgColor: { type: String, default: '' },
     items: { type: [Array, Number], required: true },
     itemClass: { type: String },
+    itemColor: { type: String, default: 'color' }, // Support a different color per item.
     titleClass: { type: String },
     contentClass: { type: String },
     expandIcon: { type: [String, Boolean], default: 'wi-triangle-down' },
