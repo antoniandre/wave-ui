@@ -1,7 +1,5 @@
 <template lang="pug">
 div(style="max-width: 1000px")
-  title-link.mt4.code(h1) w-alert
-
   title-link(h2 slug="show-and-hide-with-v-model") Show / hide with v-model
   p.
     By default alerts are visible, but if a value or v-model is provided,
