@@ -263,9 +263,8 @@ export default {
 
 <style lang="scss">
 .home {
-  background: url('~@/assets/wave-pattern.svg') left fixed;
-  background-size: 300px;
   height: auto;
+  overflow: hidden;
 
   &__header {
     position: relative;
@@ -374,7 +373,19 @@ export default {
   .section--2 {
     background: linear-gradient(to right, #145181, #3777a9);
     color: #fff;
-    padding: 13em 0 11em;
+    padding: 13em 0 26%;
+
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      background: url('~@/assets/japanese-wave.png') repeat-x bottom;
+      background-size: cover;
+      padding-bottom: 23%;
+    }
 
     .section__content {overflow: hidden;}
 
@@ -482,7 +493,7 @@ export default {
       display: block;
     }
   }
-  .home .section--2 {padding-top: 4em;}
+  .home .section--2 {padding-top: 4em;padding-bottom: 40%;}
   .home .section--2 .feature {
     margin-top: 4em;
     padding-bottom: 50%;
