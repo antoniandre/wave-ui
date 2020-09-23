@@ -12,10 +12,6 @@ const status = Vue.observable({ loading: true })
 const routes = [
   {
     path: '/',
-    redirect: 'home'
-  },
-  {
-    path: '/home',
     name: 'home',
     component: Home
   },
