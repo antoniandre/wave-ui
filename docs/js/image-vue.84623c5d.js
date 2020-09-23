@@ -1,2 +1,0 @@
-(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["image-vue"],{b238:function(e,t,a){"use strict";a.r(t);var n=function(){var e=this,t=e.$createElement,a=e._self._c||t;return a("div",[a("title-link",{staticClass:"mt4 code",attrs:{h1:""}},[e._v("w-image")])],1)},i=[],l={},s=l,c=a("2877"),u=Object(c["a"])(s,n,i,!1,null,null,null);t["default"]=u.exports}}]);
-//# sourceMappingURL=image-vue.84623c5d.js.map
