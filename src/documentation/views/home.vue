@@ -1,45 +1,35 @@
 <template lang="pug">
 w-app.home
-  .home__header.w-flex.wrap.no-shrink
+  .home__header.text-center
     .title
-      .w-flex.align-center.no-grow
-        w-icon.wave-logo.mr3(size="4.5em") wi-wave
-        h1.mt1.mb-1 Wave UI
-      p.grey-light1.mr-1
-        | A Vue.js UI framework with only the bright side.
-        w-icon.ml1(size="1.5em" style="color: #ffc518") mdi mdi-white-balance-sunny
+      h1
+        w-icon.wave-logo wi-wave
+        | Wave UI
+      em A Vue.js UI framework with only the bright side.
+    .buttons
+      w-button(outline sm round to="/why-wave-ui" color="white")
+        w-icon.ml-1 wi-chevron-right
+        | Why Wave UI
+      w-button.ml2(outline sm round to="/getting-started" color="white")
+        w-icon.ml-1 wi-chevron-right
+        | Get started
 
-    .right.w-flex.column.align-end.pa3
-      .version
-        w-tooltip(z-index="20")
-          template(#activator="{ on }")
-            a.github-link.mr2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
-              w-icon(lg) mdi mdi-github
-          .size--xs.text-nowrap View the project on Github
-        em.grey(v-html="`Version ${version}`")
-      .buttons
-        w-button.white--bg(outline to="/why-wave-ui")
-          w-icon.ml-1 wi-chevron-right
-          | Why Wave UI
-        w-button.white--bg.ml2(outline to="/getting-started")
-          w-icon.ml-1 wi-chevron-right
-          | Get started
+    .version
+      w-tooltip(z-index="20")
+        template(#activator="{ on }")
+          w-button.mr2(v-on="on" text lg icon="mdi mdi-github" to="https://github.com/antoniandre/wave-ui" target="_blank")
+        .size--xs.text-nowrap View the project on Github
+      em(v-html="`Version ${version}`")
+
+    svg(viewBox="0 0 1440 90" preserveAspectRatio="none")
+      path(d="M 0 90 C 662 97 1200 75 1440 0 V 100 H 0 Z")
+      path(d="M 0 90 C 662 97 1200 75 1440 45 V 100 H 0 Z")
+    svg(viewBox="0 0 1440 90" preserveAspectRatio="none")
+      path(d="M 1440 10 C 778 3 240 25 0 55 V 0 H 1440 Z")
+    svg(viewBox="0 0 1440 90" preserveAspectRatio="none")
+      path(d="M 0 32 C 240 53 480 75 720 80 C 960 85 1200 75 1440 60 V 100 H 0 Z")
 
   section.section.section--1
-    svg(viewBox="0 0 1440 400" preserveAspectRatio="none")
-      defs
-        linearGradient(id="grad" x1="0%" y1="25%" x2="19%" y2="0%")
-          stop(offset="0%" style="stop-color: #f8f8f8;stop-opacity: 0")
-          stop(offset="100%" style="stop-color: rgb(150, 190, 255);stop-opacity: 0.3")
-        linearGradient(id="grad2" x1="0%" y1="0%" x2="50%" y2="100%")
-          stop(offset="0%" style="stop-color: #f8f8f8;stop-opacity: 1")
-          stop(offset="70%" style="stop-color: rgb(150, 190, 255);stop-opacity: 0")
-        filter(id="filter1" x="0" y="0" filterUnits="userSpaceOnUse")
-          feDropShadow(dx="0" dy="0" stdDeviation="8" flood-color="rgba(0,0,0,0.25)")
-
-      path.path1.bottom(fill="#b9deff" filter="url(#filter1)" d="M 0 115 C 490 400 1113 -100 1440 130 V 400 H 0 Z")
-      path.path1.bottom(fill="#56b1eb" filter="url(#filter1)" d="M 0 135 C 490 450 1130 -95 1440 235 V 400 H 0 Z")
-      path.path1.bottom(fill="#1a6fb4" filter="url(#filter1)" d="M 1 155 C 554 521 1126 -37 1440 321 V 400 H 0 Z")
 
     .section__content
       .block.block--1
@@ -86,7 +76,7 @@ w-app.home
             bottom) The form was sent successfully!
 
       .block.block--2
-        w-flex.title2.mt12
+        w-flex.title2
           w-icon.mr2 wi-check
           | Build great UIs with flexible &amp; powerful elements.
         p.my4 See for yourself with this checklist component for instance.
@@ -118,7 +108,7 @@ w-app.home
             style="min-width: 150px")
 
       .block.block--3
-        w-flex.title2.mt12
+        w-flex.title2
           w-icon.mr2 wi-check
           | Keep full control on the CSS.
         p.my4.
@@ -133,14 +123,14 @@ w-app.home
           span.blue-grey ;
 
   section.section.section--2
-    svg(viewBox="0 0 1440 90" preserveAspectRatio="none")
-      path(d="M 0 32 C 240 53 480 75 720 80 C 960 85 1200 75 1440 60 V 100 H 0 Z")
+    svg(viewBox="0 0 1440 100" preserveAspectRatio="none")
+      path(d="M 0 0 H 1440 V 81 C 1250 61 552 0 0 67 Z")
 
     .section__content
       .w-flex.basis-zero.text-center.mb10
         .feature.grow
           svg.blob(viewBox="6 0 194 194" preserveAspectRatio="none")
-            path(fill="#61829d" d="M 57 -32 C 70 -10 74 18 63 35 C 52 51 26 58 1 57 C -24 56 -48 49 -58 33 C -67 17 -62 -8 -50 -29 C -38 -51 -19 -69 1 -70 C 22 -70 44 -54 57 -32 Z" transform="translate(100 100)")
+            path(fill="rgb(255, 255, 255, 0.15)" d="M 57 -32 C 70 -10 74 18 63 35 C 52 51 26 58 1 57 C -24 56 -48 49 -58 33 C -67 17 -62 -8 -50 -29 C -38 -51 -19 -69 1 -70 C 22 -70 44 -54 57 -32 Z" transform="translate(100 100)")
           svg.icon(viewBox="0 0 432.4 432.4")
             path(d="M217 93a111 111 0 00-74 195c18 18 16 55 16 56 0 2 0 3 2 5l4 2h102l5-2 2-5c0-1-2-38 16-56l1-1a111 111 0 00-74-194zm64 185l-2 1c-15 17-18 45-18 58h-89c0-13-3-42-20-59a97 97 0 11129 0z")
             path(d="M216 122c-3 0-7 3-7 6 0 4 4 7 7 7 41 0 73 33 73 73 0 4 3 7 7 7 3 0 7-3 7-7 0-48-39-86-87-86zM261 358h-89c-9 0-17 8-17 17s8 17 17 17h88a17 17 0 000-34zm0 20h-89c-2 0-3-1-3-3s1-3 3-3h88c2 0 3 1 3 3s-1 3-2 3zM247 399h-62c-9 0-17 7-17 17s8 16 17 16h62c10 0 17-7 17-16 0-10-7-17-17-17zm0 19h-62c-2 0-3-1-3-3s1-3 3-3h62c2 0 4 1 4 3s-2 3-4 3zM216 60c4 0 7-3 7-7V7c0-4-3-7-7-7-3 0-7 3-7 7v46c0 4 4 7 7 7zM329 34c-3-2-7-1-9 2l-25 38c-3 4-2 8 1 10l4 1c2 0 4-1 5-3l26-38c2-3 2-8-2-10zM135 84l4-2c3-2 4-6 2-9l-25-39c-2-3-7-4-10-2s-4 6-2 10l25 38c2 3 4 4 6 4zM87 126l-41-22c-3-2-7 0-9 3s-1 7 3 9l40 22 3 1c3 0 5-1 6-4 2-3 1-7-2-9zM396 107c-2-3-6-5-9-3l-41 22c-3 2-5 6-3 9 1 3 4 4 6 4l3-1 41-22c3-2 4-6 3-9z")
@@ -171,17 +161,13 @@ w-app.home
 
     .text-center.ready-to-dive
       .title1.mb2 Ready to dive in?
-      w-button.ma1(lg shadow to="/why-wave-ui") Why Wave UI
-      w-button.ma1(lg shadow to="/getting-started") Get started
+      w-button.ma1(lg outline round color="white" to="/why-wave-ui") Why Wave UI
+      w-button.ma1(lg outline round color="white" to="/getting-started") Get started
 
-  section.section.section--3
-    svg(viewBox="0 0 1440 100" preserveAspectRatio="none")
-      path(d="M 0 0 H 1440 V 81 C 1250 61 552 0 0 67 Z")
-
-    .section__content.w-flex.justify-end.align-center.no-grow.wrap
-      small.grey-light2.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
+    .footer.w-flex.justify-end.align-center.no-grow.wrap
+      small.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
       .spacer
-      .caption
+      .text-italic
         | Made with
         w-tooltip(top)
           template(#activator="{ on }")
@@ -282,42 +268,75 @@ export default {
 
 <style lang="scss">
 .home {
-  background: url('~@/assets/wave-pattern.svg') left;
+  background: url('~@/assets/wave-pattern.svg') left fixed;
   background-size: 300px;
   height: auto;
 
   &__header {
-    height: 30vw;
-    flex-shrink: 0;
-    min-height: 200px;
-    background-color: #fff;
+    position: relative;
+    height: 300px;
+    background: linear-gradient(to right, #145181, #3777a9);
+    color: #fff;
 
     .title {
-      margin-top: 4vw;
-      margin-left: 5vw;
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-end;
+      margin-top: 5em;
 
-      .w-icon {color: #4079b0;}
+      .w-icon {font-size: 1.2em;margin-right: 16px;}
       h1 {
-        font: 3.9em 'title font';
+        font: 3.8em 'title font';
         color: rgba(0, 0, 0, 0.5);
-        letter-spacing: -4px;
+        letter-spacing: -2px;
+        margin: 0;
+        color: inherit;
       }
+
+      em {opacity: 0.7;font-size: 14px;}
     }
 
-    .right {z-index: 2;}
-    .buttons {margin-top: 16px;}
+    .version {
+      position: absolute;
+      top: 8px;
+      right: 8px;
 
-    .github-link .w-icon,
-    .wave-logo,
-    a.w-button {color: #1670b4;}
+      a {color: inherit;}
+    }
+
+    .buttons .w-button {
+      margin-top: 1.5em;
+      width: 9em;
+      height: 24px;
+      z-index: 1;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    svg {
+      position: absolute;
+      left: -10px;
+      right: -10px;
+      fill: #3b588d;
+    }
+    svg:nth-of-type(1) {
+      bottom: 0;
+      fill: #fff;
+      path {opacity: 0.1;}
+    }
+    svg:nth-of-type(2) {
+      z-index: 1;
+      opacity: 0;
+      top: 100%;
+      transform: rotate(-181.5deg);
+    }
+    svg:nth-of-type(3) {
+      z-index: 1;
+      opacity: 0.3;
+      top: 100%;
+      transform: rotate(-180deg);
+    }
   }
 
   .section {
     position: relative;
-    padding: 1em 0;
+    padding: 3em 0;
 
     > svg {
       position: absolute;
@@ -335,49 +354,43 @@ export default {
       max-width: 700px;
       z-index: 1;
     }
+
+    .title2 {margin-top: 5em;color: #2a5198;}
   }
 
   // Section 1.
   // ------------------------------------------------------
   .section--1 {
-    background-image: linear-gradient(#1a6fb4, #09304f);
-    color: #fff;
-    padding-bottom: 10vw;
+    background-color: #fff;
+
+    svg {fill: #1a6fb4;}
 
     p, ul {font-size: 1.1em;}
     .w-list__item-bullet {color: inherit;}
   }
 
   // Appear transition.
-  .section--1 .block {
-    opacity: 0;
-    // transform: translateX(16px);
-    // transition: 0.5s ease-in-out;
-
-    // &.active {
-    //   opacity: 1;
-    //   transform: translateX(0);
-    // }
-  }
+  .section--1 .block {opacity: 0;}
 
   // Section 2.
   // ------------------------------------------------------
   .section--2 {
-    background-color: #fff;
-    color: #666;
-    padding-top: 4em;
-    padding-bottom: 6em;
+    background: linear-gradient(to right, #145181, #3777a9);
+    color: #fff;
+    padding: 13em 0 9em;
 
     .section__content {overflow: hidden;}
 
+    > svg {top: 0;}
     > svg path {fill: #fff;}
 
     .w-button {
       font-family: "title font";
       height: 2.3em;
-      width: 10.2em;
+      width: 10.5em;
+      margin-top: 0.5em;
       padding-top: 4px;
-      font-size: 1.2em;
+      font-size: 1.1em;
       font-weight: 600;
     }
 
@@ -410,22 +423,15 @@ export default {
     }
 
     .ready-to-dive {margin-top: 6em;}
-  }
 
-  // Section 3.
-  // ------------------------------------------------------
-  .section--3 {
-    color: #666;
-    padding: 0;
-    flex-shrink: 0;
-
-    svg {
-      box-shadow: 0 40px 20px -5px rgba(0, 0, 0, 0.2) inset;
-      position: static;
-      max-height: 60px;
-      overflow: hidden;
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px;
+      opacity: 0.7;
     }
-    path {fill: #fff;}
   }
 
   .example {
@@ -466,33 +472,14 @@ export default {
   100% { -webkit-transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
 }
 
-@media screen and (max-width: 840px) {
-  .home__header {min-height: 240px;}
+@media screen and (max-width: 1280px) {
+  .home__header {height: 250px;}
 }
-
 
 @media screen and (max-width: 600px) {
-  .home .section--1 {padding-top: 5em;}
-  .home__header .buttons {
-    position: absolute;
-    left: 8px;
-    top: 210px;
+  .home__header .title {
+    h1 {font-size: 2.8em;}
+    em {font-size: 1em;}
   }
-  .home .section--3 svg {box-shadow: 0 20px 10px -5px rgba(0, 0, 0, 0.2) inset;}
-}
-
-@media screen and (max-width: 500px) {
-  .home__header {min-height: 215px;}
-  .home__header .version {
-    position: absolute;
-    left: 8px;
-    top: 198px;
-  }
-  .home__header .github-link .w-icon, .home__header em {color: #fff !important;}
-  .home .section--1 {padding-top: 7em;}
-}
-
-@media screen and (max-width: 400px) {
-  .home__header .title h1 {font-size: 3.3em;}
 }
 </style>
