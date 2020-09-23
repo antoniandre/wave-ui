@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-accordion
-
   title-link(h2) Basic
   w-accordion.white--bg(:items="items")
   p.grey-light2.my4.

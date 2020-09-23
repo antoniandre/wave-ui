@@ -128,7 +128,7 @@ components.concat(externalComponents).forEach(item => {
   routes.push({
     path: item.path || `/w-${item.id}`,
     name: item.id,
-    component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/ui-components/${item.id}.vue`)
+    component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/ui-components/${item.id}/index.vue`)
   })
 })
 
