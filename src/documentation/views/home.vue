@@ -1,14 +1,14 @@
 <template lang="pug">
 w-app.home
-  .home__header.text-center
-    .title
+  .home__header
+    .text-center
       h1
         w-icon.wave-logo wi-wave
         | Wave UI
       em A Vue.js UI framework with only the bright side.
-    .buttons
-      w-button(outline sm round to="/why-wave-ui" color="white") Why Wave UI
-      w-button.ml2(outline sm round to="/getting-started" color="white") Get started
+      .buttons
+        w-button(outline sm round to="/why-wave-ui" color="white") Why Wave UI
+        w-button.ml2(outline sm round to="/getting-started" color="white") Get started
 
     .version
       w-tooltip(z-index="20")
@@ -24,6 +24,19 @@ w-app.home
       path(d="M 1440 10 C 778 3 240 25 0 55 V 0 H 1440 Z")
     svg(viewBox="0 0 1440 90" preserveAspectRatio="none")
       path(d="M 0 32 C 240 53 480 75 720 80 C 960 85 1200 75 1440 60 V 100 H 0 Z")
+
+    .bubbles
+      .bubbles__plan
+        .bubble
+        .bubble
+        .bubble
+        .bubble
+      .bubbles__plan
+        .bubble
+        .bubble
+        .bubble
+        .bubble
+        .bubble
 
   section.section.section--1
     .section__content
@@ -222,7 +235,7 @@ export default {
   },
 
   mounted () {
-    setTimeout(this.initScrollAnimation, 500)
+    setTimeout(this.initScrollAnimation, 200)
   },
 
   methods: {
@@ -232,7 +245,6 @@ export default {
       gsap.set('.block', { y: 30, opacity: 0 })
       ScrollTrigger.batch('.block', {
         start: 'top 88%',
-        // markers: true,
         onEnter: batch => gsap.to(batch, { opacity: 1, y: -30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
         onLeave: batch => gsap.to(batch, { opacity: 0, y: 30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
         onEnterBack: batch => gsap.to(batch, { opacity: 1, y: -30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
@@ -247,8 +259,21 @@ export default {
         onEnterBack: batch => gsap.to(batch, { opacity: 1, y: -60, stagger: { each: 0.15 }, overwrite: true }),
         onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 60, stagger: { each: 0.15 }, overwrite: true })
       })
-
       ScrollTrigger.addEventListener('refreshInit', () => gsap.set('.feature', { y: 0 }))
+
+      const header = document.querySelector('.home__header')
+      gsap.utils.toArray('.bubbles__plan').forEach((plan, i) => {
+        gsap.to(plan, {
+          yPercent: i ? -50 : -20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: header,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true
+          }
+        })
+      })
     },
     onSuccess () {
       setTimeout(() => (this.form6.sent = true), 2000)
@@ -268,13 +293,15 @@ export default {
 
   &__header {
     position: relative;
-    height: 300px;
+    height: 400px;
     background: linear-gradient(to right, #145181, #3777a9);
     color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    .title {
-      margin-top: 5em;
-
+    .text-center {
+      display: block;
       .w-icon {font-size: 1.2em;margin-right: 16px;}
       h1 {
         font: 3.8em 'title font';
@@ -449,6 +476,112 @@ export default {
   }
 
   .message-box {min-height: 35px;}
+
+  .bubbles__plan {
+    position: absolute;
+    top: 0;
+    bottom: -30%; // Taller than the container to create a parallax effect.
+    left: 0;
+    right: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .bubble {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10em;
+    font-size: 50px;
+  }
+  // @for $j from 1 through 2 {
+  //   @for $i from 1 through 5 {
+  //     $size: random() + 0.2em;
+  //     .bubbles__plan:nth-of-type(#{$j}) .bubble:nth-of-type(#{$i}) {
+  //       position: absolute;
+  //       width: $size;
+  //       height: $size;
+  //       left: random(100) * 1%;
+  //       top: random(100) * 1%;
+  //       // border-radius: floor(random() * 2) + em;
+  //       filter: blur(floor(random() * 8) + px);
+  //       opacity: (random() * 4 + 2) / 10; // Random between 0.2 & 0.6.
+  //       // box-shadow: 0 0 random() + em #fff;
+  //     }
+  //   }
+  // }
+
+  .bubbles__plan:nth-of-type(1) .bubble:nth-of-type(1) {
+    width: 0.80611em;
+    height: 0.80611em;
+    left: 77%;
+    top: 19%;
+    filter: blur(10px);
+    opacity: 0.2;
+  }
+  .bubbles__plan:nth-of-type(1) .bubble:nth-of-type(2) {
+    width: 0.83365em;
+    height: 0.83365em;
+    left: 88%;
+    top: 35%;
+    filter: blur(6px);
+    opacity: 0.1;
+  }
+  .bubbles__plan:nth-of-type(1) .bubble:nth-of-type(3) {
+    width: 0.28805em;
+    height: 0.28805em;
+    left: 27%;
+    top: 84%;
+    filter: blur(4px);
+    opacity: 0.4;
+  }
+  .bubbles__plan:nth-of-type(1) .bubble:nth-of-type(4) {
+    width: 0.47745em;
+    height: 0.47745em;
+    left: 95%;
+    top: 82%;
+    filter: blur(6px);
+    opacity: 0.4;
+  }
+  .bubbles__plan:nth-of-type(2) .bubble:nth-of-type(1) {
+    width: 0.95094em;
+    height: 0.95094em;
+    left: 30%;
+    top: 91%;
+    filter: blur(7px);
+    opacity: 0.2;
+  }
+  .bubbles__plan:nth-of-type(2) .bubble:nth-of-type(2) {
+    width: 0.81841em;
+    height: 0.81841em;
+    left: 85%;
+    top: 53%;
+    filter: blur(4px);
+    opacity: 0.2;
+  }
+  .bubbles__plan:nth-of-type(2) .bubble:nth-of-type(3) {
+    width: 0.34189em;
+    height: 0.34189em;
+    left: 84%;
+    top: 62%;
+    filter: blur(7px);
+    opacity: 0.48803;
+  }
+  .bubbles__plan:nth-of-type(2) .bubble:nth-of-type(4) {
+    width: 1.1126em;
+    height: 1.1126em;
+    left: 95%;
+    top: 20%;
+    filter: blur(6px);
+    opacity: 0.3;
+  }
+  .bubbles__plan:nth-of-type(2) .bubble:nth-of-type(5) {
+    width: 0.76077em;
+    height: 0.76077em;
+    left: 4%;
+    top: 66%;
+    filter: blur(6px);
+    opacity: 0.1;
+  }
 }
 
 @keyframes jelly {
@@ -480,12 +613,9 @@ export default {
   100% { -webkit-transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
 }
 
-@media screen and (max-width: 1280px) {
-  .home__header {height: 250px;}
-}
-
 @media screen and (max-width: 600px) {
-  .home__header .title {
+  .home__header {height: 300px;}
+  .home__header .text-center {
     h1 {font-size: 2.8em;letter-spacing: 2px;}
     em {
       font-size: 1em;
