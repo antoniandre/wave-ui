@@ -139,8 +139,8 @@ div
       })
 
   title-link(h3) Different color per item
-  example
-    w-accordion(:items="items2")
+  example(content-class="pa4 aliceblue")
+    w-accordion.white--bg(:items="items2")
     template(#pug).
       w-accordion(:items="items")
     template(#js).
