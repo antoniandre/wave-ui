@@ -17,14 +17,19 @@ w-app.home
         .size--xs.text-nowrap View the project on Github
       em(v-html="`Version ${version}`")
 
-    svg(viewBox="0 0 1440 90" preserveAspectRatio="none")
+    svg.hz1(viewBox="0 0 1440 90" preserveAspectRatio="none")
       path(d="M 0 90 C 662 97 1200 75 1440 0 V 100 H 0 Z")
       path(d="M 0 90 C 662 97 1200 75 1440 45 V 100 H 0 Z")
-    svg(viewBox="0 0 1440 90" preserveAspectRatio="none")
+    svg.hz2(viewBox="0 0 1440 90" preserveAspectRatio="none")
       path(d="M 1440 10 C 778 3 240 25 0 55 V 0 H 1440 Z")
-    svg(viewBox="0 0 1440 90" preserveAspectRatio="none")
+    svg.hz3(viewBox="0 0 1440 90" preserveAspectRatio="none")
       path(d="M 0 32 C 240 53 480 75 720 80 C 960 85 1200 75 1440 60 V 100 H 0 Z")
-
+    //- svg.blob1(viewBox="0 0 200 200" preserveAspectRatio="none")
+      path(d="M35.4,-59.6C48.3,-53.8,63.1,-49.4,73.2,-39.7C83.3,-30,88.7,-15,87.4,-0.7C86.2,13.5,78.2,27.1,70.8,41.4C63.4,55.7,56.5,70.9,44.8,79.6C33.1,88.3,16.6,90.6,2.9,85.5C-10.7,80.4,-21.3,67.9,-33,59.2C-44.7,50.5,-57.5,45.5,-66.4,36.3C-75.4,27,-80.5,13.5,-80.6,0C-80.6,-13.5,-75.5,-27.1,-68.3,-39.3C-61.1,-51.6,-51.7,-62.5,-40,-69C-28.3,-75.6,-14.1,-77.8,-1.5,-75.2C11.2,-72.7,22.4,-65.5,35.4,-59.6Z" transform="translate(100 100)" style="fill: #ffffff0a;")
+    //- svg.blob2(viewBox="0 0 200 200" preserveAspectRatio="none")
+      path(d="M35.4,-59.6C48.3,-53.8,63.1,-49.4,73.2,-39.7C83.3,-30,88.7,-15,87.4,-0.7C86.2,13.5,78.2,27.1,70.8,41.4C63.4,55.7,56.5,70.9,44.8,79.6C33.1,88.3,16.6,90.6,2.9,85.5C-10.7,80.4,-21.3,67.9,-33,59.2C-44.7,50.5,-57.5,45.5,-66.4,36.3C-75.4,27,-80.5,13.5,-80.6,0C-80.6,-13.5,-75.5,-27.1,-68.3,-39.3C-61.1,-51.6,-51.7,-62.5,-40,-69C-28.3,-75.6,-14.1,-77.8,-1.5,-75.2C11.2,-72.7,22.4,-65.5,35.4,-59.6Z" transform="translate(100 150)" style="fill: #8fe6ff0a;transform: rotate(-5deg);")
+    //- svg.blob3(viewBox="0 0 200 200" preserveAspectRatio="none")
+      path(d="M26.4,-47.7C35.1,-40.7,43.7,-35.5,52.1,-27.8C60.4,-20.1,68.6,-10.1,71.2,1.5C73.8,13.1,70.9,26.2,63.6,35.7C56.3,45.2,44.7,51.2,33.3,57C22,62.9,11,68.5,-2.4,72.6C-15.7,76.7,-31.5,79.3,-45.7,75.1C-59.8,70.9,-72.4,60,-77.7,46.3C-83,32.7,-81.1,16.3,-75,3.5C-69,-9.3,-58.8,-18.7,-53.1,-31.8C-47.5,-44.9,-46.4,-61.7,-38.3,-69C-30.2,-76.3,-15.1,-74.1,-3.1,-68.7C8.9,-63.3,17.7,-54.6,26.4,-47.7Z" transform="translate(300 300)" style="fill: #8fe6ff0a;transform: rotate(5deg);")
     .bubbles
       .bubbles__plan
         .bubble
@@ -90,7 +95,7 @@ w-app.home
         p.my4 See for yourself with this checklist component for instance.
         .w-flex.example.pa1.basis-zero.align-center.wrap
           .grow(style="min-width: 200px")
-            ssh-pre(language="html-vue" dark).
+            ssh-pre(language="html-vue").
               &lt;w-list
                 v-model="selection"
                 :items="items"
@@ -98,7 +103,7 @@ w-app.home
                 round-checkboxes
                 color="blue-light1"&gt;
               &lt;/w-list&gt;
-            ssh-pre(language="js" dark).
+            ssh-pre(language="js").
               data: () => ({
                 items: [
                   { label: 'Item 1' },
@@ -124,7 +129,7 @@ w-app.home
           Practically Wave UI gives you more flexibility and more control over the CSS.
         p.my4.
           If you use SASS, you can even control Wave UI's CSS rules priorities by overriding the CSS base scope like so.
-        pre.example.ssh-pre.pa2(dark)
+        pre.example.ssh-pre.pa2
           span.pink $css-scope
           span.blue-grey.mr1 :
           span.red-light2 '.w-app'
@@ -264,7 +269,7 @@ export default {
       const header = document.querySelector('.home__header')
       gsap.utils.toArray('.bubbles__plan').forEach((plan, i) => {
         gsap.to(plan, {
-          yPercent: i ? -50 : -20,
+          yPercent: i ? -25 : -10,
           ease: 'none',
           scrollTrigger: {
             trigger: header,
@@ -337,23 +342,29 @@ export default {
       width: 102%;
       fill: #3b588d;
     }
-    svg:nth-of-type(1) {
+    svg.hz1 {
       bottom: 0;
       fill: #fff;
       path {opacity: 0.1;}
     }
-    svg:nth-of-type(2) {
+    svg.hz2 {
       z-index: 1;
       opacity: 0;
       top: 100%;
       transform: rotate(-181.5deg);
     }
-    svg:nth-of-type(3) {
+    svg.hz3 {
       z-index: 1;
       opacity: 0.3;
       top: 100%;
       transform: rotate(-180deg);
     }
+    // svg.blob1, svg.blob2, svg.blob3 {
+    //   animation: rotate 200s linear infinite;
+    // }
+    // svg.blob2 {
+    //   animation: rotate 200s linear infinite reverse;
+    // }
   }
 
   .section {
@@ -389,7 +400,7 @@ export default {
 
     p, ul {font-size: 1.1em;}
     .w-list__item-bullet {color: inherit;}
-    .w-card {background: linear-gradient(45deg, rgba(0, 0, 0, 0.05), #fff);}
+    .w-card {background: #f8f8f8;}
   }
 
   // Appear transition.
@@ -470,9 +481,11 @@ export default {
   }
 
   .example {
-    background-color: #262626;
+    background-color: #f2f2f2;
     border: none;
     overflow: hidden;
+
+    .ssh-pre {background: none;border: none;}
   }
 
   .message-box {min-height: 35px;}
@@ -582,6 +595,10 @@ export default {
     filter: blur(6px);
     opacity: 0.1;
   }
+}
+
+@keyframes rotate {
+  100% {transform: rotate(360deg);}
 }
 
 @keyframes jelly {
