@@ -1,14 +1,12 @@
 <template lang="pug">
 w-app.home
   .home__header
-    .text-center
+    .header__content
       h1
         w-icon.wave-logo wi-wave
         | Wave UI
       em A Vue.js UI framework with only the bright side.
-      .buttons
-        w-button(outline sm round to="/why-wave-ui" color="white") Why Wave UI
-        w-button.ml2(outline sm round to="/getting-started" color="white") Get started
+      w-button.get-started(outline round to="/getting-started" color="white") Get started
 
     .version
       w-tooltip(z-index="20")
@@ -17,31 +15,25 @@ w-app.home
         .size--xs.text-nowrap View the project on Github
       em(v-html="`Version ${version}`")
 
-    svg.hz1(viewBox="0 0 1440 90" preserveAspectRatio="none")
-      path(d="M 0 90 C 662 97 1200 75 1440 0 V 100 H 0 Z")
-      path(d="M 0 90 C 662 97 1200 75 1440 45 V 100 H 0 Z")
-    svg.hz2(viewBox="0 0 1440 90" preserveAspectRatio="none")
-      path(d="M 1440 10 C 778 3 240 25 0 55 V 0 H 1440 Z")
-    svg.hz3(viewBox="0 0 1440 90" preserveAspectRatio="none")
-      path(d="M 0 32 C 240 53 480 75 720 80 C 960 85 1200 75 1440 60 V 100 H 0 Z")
+    svg.wave.wave--sm(viewBox="0 0 1440 320" preserveAspectRatio="none")
+      path(d="M0,64L60,58.7C120,53,240,43,360,69.3C480,96,600,160,720,186.7C840,213,960,203,1080,186.7C1200,171,1320,149,1380,138.7L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z")
+    svg.wave.wave--md(viewBox="0 0 1440 320" preserveAspectRatio="none")
+      path(d="M0,64L60,58.7C120,53,240,43,360,69.3C480,96,600,160,720,186.7C840,213,960,203,1080,186.7C1200,171,1320,149,1380,138.7L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z")
+    svg.wave.wave--lg(viewBox="0 0 1440 320" preserveAspectRatio="none")
+      path(d="M0,320L80,320C160,320,320,320,480,282.7C640,245,800,171,960,165.3C1120,160,1280,224,1360,256L1440,288L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z")
+    svg.header-bottom(viewBox="0 0 1400 27" preserveAspectRatio="none")
+      path(d="M 0 27 C 381 -6 1072 -10 1400 27")
     //- svg.blob1(viewBox="0 0 200 200" preserveAspectRatio="none")
       path(d="M35.4,-59.6C48.3,-53.8,63.1,-49.4,73.2,-39.7C83.3,-30,88.7,-15,87.4,-0.7C86.2,13.5,78.2,27.1,70.8,41.4C63.4,55.7,56.5,70.9,44.8,79.6C33.1,88.3,16.6,90.6,2.9,85.5C-10.7,80.4,-21.3,67.9,-33,59.2C-44.7,50.5,-57.5,45.5,-66.4,36.3C-75.4,27,-80.5,13.5,-80.6,0C-80.6,-13.5,-75.5,-27.1,-68.3,-39.3C-61.1,-51.6,-51.7,-62.5,-40,-69C-28.3,-75.6,-14.1,-77.8,-1.5,-75.2C11.2,-72.7,22.4,-65.5,35.4,-59.6Z" transform="translate(100 100)" style="fill: #ffffff0a;")
-    //- svg.blob2(viewBox="0 0 200 200" preserveAspectRatio="none")
-      path(d="M35.4,-59.6C48.3,-53.8,63.1,-49.4,73.2,-39.7C83.3,-30,88.7,-15,87.4,-0.7C86.2,13.5,78.2,27.1,70.8,41.4C63.4,55.7,56.5,70.9,44.8,79.6C33.1,88.3,16.6,90.6,2.9,85.5C-10.7,80.4,-21.3,67.9,-33,59.2C-44.7,50.5,-57.5,45.5,-66.4,36.3C-75.4,27,-80.5,13.5,-80.6,0C-80.6,-13.5,-75.5,-27.1,-68.3,-39.3C-61.1,-51.6,-51.7,-62.5,-40,-69C-28.3,-75.6,-14.1,-77.8,-1.5,-75.2C11.2,-72.7,22.4,-65.5,35.4,-59.6Z" transform="translate(100 150)" style="fill: #8fe6ff0a;transform: rotate(-5deg);")
-    //- svg.blob3(viewBox="0 0 200 200" preserveAspectRatio="none")
-      path(d="M26.4,-47.7C35.1,-40.7,43.7,-35.5,52.1,-27.8C60.4,-20.1,68.6,-10.1,71.2,1.5C73.8,13.1,70.9,26.2,63.6,35.7C56.3,45.2,44.7,51.2,33.3,57C22,62.9,11,68.5,-2.4,72.6C-15.7,76.7,-31.5,79.3,-45.7,75.1C-59.8,70.9,-72.4,60,-77.7,46.3C-83,32.7,-81.1,16.3,-75,3.5C-69,-9.3,-58.8,-18.7,-53.1,-31.8C-47.5,-44.9,-46.4,-61.7,-38.3,-69C-30.2,-76.3,-15.1,-74.1,-3.1,-68.7C8.9,-63.3,17.7,-54.6,26.4,-47.7Z" transform="translate(300 300)" style="fill: #8fe6ff0a;transform: rotate(5deg);")
     .bubbles
-      .bubbles__plan
-        .bubble
-        .bubble
-        .bubble
-        .bubble
-      .bubbles__plan
-        .bubble
-        .bubble
-        .bubble
-        .bubble
-        .bubble
+      .bubbles__plan.bubbles__plan--1
+        .bubble.bubble--1
+        .bubble.bubble--2
+      .bubbles__plan.bubbles__plan--2
+        .bubble.bubble--1
+        .bubble.bubble--2
+        .bubble.bubble--3
+        .bubble.bubble--4
 
   section.section.section--1
     .section__content
@@ -176,32 +168,6 @@ w-app.home
       .title1.mb2 Ready to dive in?
       w-button.ma1(lg outline round color="white" to="/why-wave-ui") Why Wave UI
       w-button.ma1(lg outline round color="white" to="/getting-started") Get started
-
-    .footer.w-flex.justify-end.align-center.no-grow.wrap
-      small.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
-      .spacer
-      .text-italic
-        | Made with
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-vuejs
-          | Vue.js
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-language-css3
-          | CSS 3
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-language-html5
-          span.text-nowrap Html 5 &amp; Pug
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-sass
-          | Sass
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1.heart(v-on="on" sm) mdi mdi-heart
-          | Love
 </template>
 
 <script>
@@ -247,25 +213,7 @@ export default {
     initScrollAnimation () {
       gsap.defaults({ ease: 'power4' })
 
-      gsap.set('.block', { y: 30, opacity: 0 })
-      ScrollTrigger.batch('.block', {
-        start: 'top 88%',
-        onEnter: batch => gsap.to(batch, { opacity: 1, y: -30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
-        onLeave: batch => gsap.to(batch, { opacity: 0, y: 30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
-        onEnterBack: batch => gsap.to(batch, { opacity: 1, y: -30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
-        onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 30, duration: 1, stagger: { each: 0.15 }, overwrite: true })
-      })
-
-      gsap.set('.feature', { y: 60 })
-      ScrollTrigger.batch('.feature', {
-        start: 'top 88%',
-        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: { each: 0.15 }, overwrite: true }),
-        onLeave: batch => gsap.set(batch, { opacity: 0, y: -60, stagger: { each: 0.15 }, overwrite: true }),
-        onEnterBack: batch => gsap.to(batch, { opacity: 1, y: -60, stagger: { each: 0.15 }, overwrite: true }),
-        onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 60, stagger: { each: 0.15 }, overwrite: true })
-      })
-      ScrollTrigger.addEventListener('refreshInit', () => gsap.set('.feature', { y: 0 }))
-
+      // Header
       const header = document.querySelector('.home__header')
       gsap.utils.toArray('.bubbles__plan').forEach((plan, i) => {
         gsap.to(plan, {
@@ -279,10 +227,44 @@ export default {
           }
         })
       })
+
+      gsap.to('.header__content', {
+        yPercent: -30,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: header,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      })
+
+      // Every content block.
+      gsap.set('.block', { y: 30, opacity: 0 })
+      ScrollTrigger.batch('.block', {
+        start: 'top 88%',
+        onEnter: batch => gsap.to(batch, { opacity: 1, y: -30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
+        onLeave: batch => gsap.to(batch, { opacity: 0, y: 30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
+        onEnterBack: batch => gsap.to(batch, { opacity: 1, y: -30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
+        onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 30, duration: 1, stagger: { each: 0.15 }, overwrite: true })
+      })
+
+      // Features.
+      gsap.set('.feature', { y: 60 })
+      ScrollTrigger.batch('.feature', {
+        start: 'top 88%',
+        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: { each: 0.15 }, overwrite: true }),
+        onLeave: batch => gsap.set(batch, { opacity: 0, y: -60, stagger: { each: 0.15 }, overwrite: true }),
+        onEnterBack: batch => gsap.to(batch, { opacity: 1, y: -60, stagger: { each: 0.15 }, overwrite: true }),
+        onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 60, stagger: { each: 0.15 }, overwrite: true })
+      })
+      ScrollTrigger.addEventListener('refreshInit', () => gsap.set('.feature', { y: 0 }))
     },
+
     onSuccess () {
       setTimeout(() => (this.form6.sent = true), 2000)
     },
+
     onValidate () {
       this.form6.sent = false
       this.form6.submitted = this.form6.errorsCount === 0
@@ -295,78 +277,162 @@ export default {
 .home {
   height: auto;
   overflow: hidden;
+}
 
-  &__header {
-    position: relative;
-    height: 400px;
-    background: linear-gradient(to right, #145181, #3777a9);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.home__header {
+  position: relative;
+  height: 400px;
+  background: linear-gradient(to right, #145181, #3777a9);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    .text-center {
-      display: block;
-      .w-icon {font-size: 1.2em;margin-right: 16px;}
-      h1 {
-        font: 3.8em 'title font';
-        color: rgba(0, 0, 0, 0.5);
-        letter-spacing: -2px;
-        margin: 0;
-        color: inherit;
-      }
+  .version {
+    position: absolute;
+    top: 8px;
+    right: 8px;
 
-      em {opacity: 0.7;font-size: 14px;}
-    }
-
-    .version {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-
-      a {color: inherit;}
-    }
-
-    .buttons .w-button {
-      margin-top: 1.5em;
-      width: 8.5em;
-      height: 24px;
-      z-index: 1;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-    }
-
-    svg {
-      position: absolute;
-      left: -1%;
-      right: -1%;
-      width: 102%;
-      fill: #3b588d;
-    }
-    svg.hz1 {
-      bottom: 0;
-      fill: #fff;
-      path {opacity: 0.1;}
-    }
-    svg.hz2 {
-      z-index: 1;
-      opacity: 0;
-      top: 100%;
-      transform: rotate(-181.5deg);
-    }
-    svg.hz3 {
-      z-index: 1;
-      opacity: 0.3;
-      top: 100%;
-      transform: rotate(-180deg);
-    }
-    // svg.blob1, svg.blob2, svg.blob3 {
-    //   animation: rotate 200s linear infinite;
-    // }
-    // svg.blob2 {
-    //   animation: rotate 200s linear infinite reverse;
-    // }
+    a {color: inherit;}
   }
 
+  svg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    fill: #fff;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  svg.header-bottom {opacity: 1;}
+  svg.wave--sm {
+    height: 6vw;
+    min-height: 35px;
+  }
+  svg.wave--md {
+    bottom: -20px;
+    height: 11vw;
+    min-height: 70px;
+  }
+  svg.wave--lg {
+    height: 26vw;
+    max-height: 240px;
+  }
+
+  .bubbles__plan {
+    position: absolute;
+    top: 0;
+    bottom: -36%; // Taller than the container to create a parallax effect.
+    left: 0;
+    right: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .bubble {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10em;
+    font-size: 50px;
+  }
+  // @for $j from 1 through 2 {
+  //   @for $i from 1 through 5 {
+  //     $size: random() + 0.2em;
+  //     .bubbles__plan:nth-of-type(#{$j}) .bubble:nth-of-type(#{$i}) {
+  //       position: absolute;
+  //       width: $size;
+  //       height: $size;
+  //       left: random(100) * 1%;
+  //       top: random(100) * 1%;
+  //       // border-radius: floor(random() * 2) + em;
+  //       filter: blur(floor(random() * 8) + px);
+  //       opacity: (random() * 4 + 2) / 10; // Random between 0.2 & 0.6.
+  //       // box-shadow: 0 0 random() + em #fff;
+  //     }
+  //   }
+  // }
+
+  .bubbles__plan--1 .bubble--1 {
+    width: 0.833em;
+    height: 0.833em;
+    left: 90%;
+    top: 44%;
+    filter: blur(6px);
+    opacity: 0.1;
+  }
+  .bubbles__plan--1 .bubble--2 {
+    width: 1.11em;
+    height: 1.11em;
+    left: 95%;
+    top: 28%;
+    filter: blur(6px);
+    opacity: 0.2;
+  }
+
+  .bubbles__plan--2 .bubble--1 {
+    width: 0.95em;
+    height: 0.95em;
+    left: 83%;
+    top: 41%;
+    filter: blur(4px);
+    opacity: 0.2;
+  }
+  .bubbles__plan--2 .bubble--2 {
+    width: 0.81em;
+    height: 0.81em;
+    left: 91%;
+    top: 53%;
+    filter: blur(4px);
+    opacity: 0.2;
+  }
+  .bubbles__plan--2 .bubble--3 {
+    width: 0.34em;
+    height: 0.34em;
+    left: 90%;
+    top: 62%;
+    filter: blur(7px);
+    opacity: 0.5;
+  }
+  .bubbles__plan--2 .bubble--4 {
+    width: 0.76em;
+    height: 0.76em;
+    left: 4%;
+    top: 66%;
+    filter: blur(6px);
+    opacity: 0.1;
+  }
+}
+
+.home .header__content {
+  text-align: center;
+
+  .w-icon {font-size: 1.2em;margin-right: 16px;}
+  h1 {
+    font: 4.4em 'title font';
+    color: rgba(0, 0, 0, 0.5);
+    letter-spacing: -2px;
+    margin: 0;
+    color: inherit;
+  }
+
+  em {
+    opacity: 0.7;
+    font-size: 14px;
+    display: block;
+  }
+
+  .get-started {
+    margin-top: 1.5em;
+    width: 8.5em;
+    height: 26px;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+}
+
+.home {
   .section {
     position: relative;
     padding: 3em 0;
@@ -420,9 +486,10 @@ export default {
       left: 0;
       right: 0;
       z-index: 1;
-      background: url('~@/assets/japanese-wave.png') repeat-x bottom;
+      background: url('~@/assets/japanese-wave.png') repeat-x bottom left;
       background-size: cover;
       padding-bottom: 23%;
+      min-height: 110px;
     }
 
     .section__content {overflow: hidden;}
@@ -489,112 +556,6 @@ export default {
   }
 
   .message-box {min-height: 35px;}
-
-  .bubbles__plan {
-    position: absolute;
-    top: 0;
-    bottom: -30%; // Taller than the container to create a parallax effect.
-    left: 0;
-    right: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .bubble {
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10em;
-    font-size: 50px;
-  }
-  // @for $j from 1 through 2 {
-  //   @for $i from 1 through 5 {
-  //     $size: random() + 0.2em;
-  //     .bubbles__plan:nth-of-type(#{$j}) .bubble:nth-of-type(#{$i}) {
-  //       position: absolute;
-  //       width: $size;
-  //       height: $size;
-  //       left: random(100) * 1%;
-  //       top: random(100) * 1%;
-  //       // border-radius: floor(random() * 2) + em;
-  //       filter: blur(floor(random() * 8) + px);
-  //       opacity: (random() * 4 + 2) / 10; // Random between 0.2 & 0.6.
-  //       // box-shadow: 0 0 random() + em #fff;
-  //     }
-  //   }
-  // }
-
-  .bubbles__plan:nth-of-type(1) .bubble:nth-of-type(1) {
-    width: 0.80611em;
-    height: 0.80611em;
-    left: 77%;
-    top: 19%;
-    filter: blur(10px);
-    opacity: 0.2;
-  }
-  .bubbles__plan:nth-of-type(1) .bubble:nth-of-type(2) {
-    width: 0.83365em;
-    height: 0.83365em;
-    left: 88%;
-    top: 35%;
-    filter: blur(6px);
-    opacity: 0.1;
-  }
-  .bubbles__plan:nth-of-type(1) .bubble:nth-of-type(3) {
-    width: 0.28805em;
-    height: 0.28805em;
-    left: 27%;
-    top: 84%;
-    filter: blur(4px);
-    opacity: 0.4;
-  }
-  .bubbles__plan:nth-of-type(1) .bubble:nth-of-type(4) {
-    width: 0.47745em;
-    height: 0.47745em;
-    left: 95%;
-    top: 82%;
-    filter: blur(6px);
-    opacity: 0.4;
-  }
-  .bubbles__plan:nth-of-type(2) .bubble:nth-of-type(1) {
-    width: 0.95094em;
-    height: 0.95094em;
-    left: 30%;
-    top: 91%;
-    filter: blur(7px);
-    opacity: 0.2;
-  }
-  .bubbles__plan:nth-of-type(2) .bubble:nth-of-type(2) {
-    width: 0.81841em;
-    height: 0.81841em;
-    left: 85%;
-    top: 53%;
-    filter: blur(4px);
-    opacity: 0.2;
-  }
-  .bubbles__plan:nth-of-type(2) .bubble:nth-of-type(3) {
-    width: 0.34189em;
-    height: 0.34189em;
-    left: 84%;
-    top: 62%;
-    filter: blur(7px);
-    opacity: 0.48803;
-  }
-  .bubbles__plan:nth-of-type(2) .bubble:nth-of-type(4) {
-    width: 1.1126em;
-    height: 1.1126em;
-    left: 95%;
-    top: 20%;
-    filter: blur(6px);
-    opacity: 0.3;
-  }
-  .bubbles__plan:nth-of-type(2) .bubble:nth-of-type(5) {
-    width: 0.76077em;
-    height: 0.76077em;
-    left: 4%;
-    top: 66%;
-    filter: blur(6px);
-    opacity: 0.1;
-  }
 }
 
 @keyframes rotate {
@@ -630,16 +591,26 @@ export default {
   100% { -webkit-transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
 }
 
+@media screen and (max-width: 1280px) {
+  .home__header svg.wave--sm {bottom: 10px;}
+  .home__header svg.wave--md {bottom: -10px;height: 13vw;}
+}
+
 @media screen and (max-width: 600px) {
-  .home__header {height: 300px;}
-  .home__header .text-center {
-    h1 {font-size: 2.8em;letter-spacing: 2px;}
-    em {
-      font-size: 1em;
-      margin-top: 4px;
-      display: block;
+  .home__header {
+    height: 300px;
+
+    .header__content {
+      h1 {font-size: 3.2em;}
+      em {
+        font-size: 1em;
+        margin-top: 4px;
+        display: block;
+      }
     }
+    svg.wave--md {bottom: 0;}
   }
+
   .home .section--2 {padding-top: 4em;padding-bottom: 40%;}
   .home .section--2 .feature {
     margin-top: 4em;
