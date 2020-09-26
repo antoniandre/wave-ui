@@ -47,12 +47,12 @@ w-app.home
           w-flex.title2
             w-icon.mr2 wi-check
             | All the components that you need in a lightweight package
-          .w-flex.align-center.mt6.mx8
+          .w-flex.align-center.mt6.ml8
             strong.count.mr8(:style="`opacity: ${count.alpha}`") {{ count.count }}
             .no-less
               | No less than#[br]
               | UI components
-          .w-flex.align-center.and-more.mx8
+          .w-flex.align-center.and-more.ml8
             .title3.grow.text-right.mr8.extra-anim And also
             div
               .extra.extra-anim
@@ -612,11 +612,12 @@ export default {
       .extra {margin-top: 0.4em;}
       .extra-anim {opacity: 0;}
       .extra:first-of-type {margin-top: 0;}
-      .extra .w-icon {
-        font-size: 2em;
-        color: transparent;
+      .extra .w-icon {font-size: 2em;}
+      // Safari needs the gradient to be on the pseudo-element.
+      .extra .w-icon:before {
         background: linear-gradient(45deg, #12446b, #78a2c7 80%);
         background-clip: text;
+        color: transparent;
       }
     }
     .block--2 strong {
@@ -632,7 +633,7 @@ export default {
   .section--2 {
     margin-top: 2em;
     padding-top: 6em;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.04), #fff);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 0%,rgba(255, 255, 255, 0) 100%);
 
     > svg {fill: rgba(0, 0, 0, 0.04);}
     .block--4 {margin-top: 7em;}
@@ -650,7 +651,7 @@ export default {
       width: 50%;
       margin-top: -3%;
       margin-left: 7%;
-      background-image: linear-gradient(-205deg, #ffe688, #e8a63a);
+      background-image: linear-gradient(-205deg, #ffe688, #ffac62);
     }
     .card--4 {
       position: absolute;
@@ -764,7 +765,9 @@ export default {
 }
 
 @media screen and (max-width: 760px) {
+  .home .section--1 .block--1 {margin-top: 0;}
   .section--1 .section__content {flex-wrap: wrap;}
+  .home .section--1 .mobiles {margin-top: 4em;}
   .section--2 .ui-demo div {flex-basis: auto;}
   .section--2 .ui-demo div .left-col {width: 100%;flex-basis: auto;}
   .section--2 .right-col {flex-grow: 1;}
@@ -784,7 +787,8 @@ export default {
     }
     svg.wave--md {bottom: 0;}
   }
-
+  .home .section--1 .mobile--1 {width: 190px;}
+  .home .section--1 .mobile--2 {width: 220px;}
   .home .section--3 {padding-top: 4em;padding-bottom: 40%;}
   .home .section--3 .feature {
     margin-top: 4em;
@@ -793,6 +797,19 @@ export default {
 }
 
 @media screen and (max-width: 430px) {
+  .home .section--1 .block--2 strong {font-size: 6em;}
+  .home .section--1 .section__content > div {margin-right: 0;}
+  .home .section--1 .mobile--1 {width: 185px;margin-right: -80px;}
+  .home .section--1 .mobile--2 {width: 200px;}
+  .home .section--1 .block--2 .no-less,
+  .home .section--1 .block--2 .and-more {
+    font-size: 1.4em;
+    line-height: 1.1;
+    margin-left: 0;
+  }
+  .home .section--1 .block--2 .and-more .title3 {margin-right: 16px;}
+  .home .section--1 .block--2 .and-more .extra .w-icon {font-size: 1.6em;}
+  .home .section--2 {padding-top: 0;}
   .section--2 .ui-demo div .left-col {display: none;}
 }
 </style>
