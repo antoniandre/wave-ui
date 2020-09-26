@@ -58,6 +58,9 @@ div.layout-flex-demo
       code.mr2 .justify-end
       | Applies this CSS rule: #[span.code justify: flex-end].
     li.mt1
+      code.mr2 .justify-space-around
+      | Applies this CSS rule: #[span.code justify: space-around].
+    li.mt1
       code.mr2 .justify-space-between
       | Applies this CSS rule: #[span.code justify: space-between].
     li.mt1
