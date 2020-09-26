@@ -36,86 +36,107 @@ w-app.home
         .bubble.bubble--4
 
   section.section.section--1
+    .section__content.w-flex.block
+      div.mr8
+        .block.block--1
+          w-flex.title2
+            w-icon.mr2 wi-check
+            | All the components that you need in a lightweight package
+          .w-flex.align-center.mt12.mx8.mb4
+            strong.count.mr8 {{ count }}
+            .no-less
+              | No less than#[br]
+              | UI components
+
+        .block.block--2
+          w-flex.title2
+            w-icon.mr2 wi-check
+            | Fully responsive and touch-ready
+
+      .mobiles.no-shrink
+        img.mobile.mobile--1(src="@/assets/wave-ui-mobile-1.png")
+        img.mobile.mobile--2(src="@/assets/wave-ui-mobile-2.png")
+
+  section.section.section--2
+    svg(viewBox="0 0 1000 100" preserveAspectRatio="none")
+      path(d="M 0 90 C 51 90 375 102 1000 0 V 100 H 0Z")
+
     .section__content
-      .block.block--1
-        w-flex.title2
-          w-icon.mr2 wi-check
-          | All the components that you need in a lightweight package
-        p.my4.
-          More than 30 UI &amp; form elements are available as well as a form validation.#[br]
-          This form uses 9 different components and a form validation.
-        w-card.white--bg(content-class="pa0")
-          .message-box
-            w-transition-fade
-              w-alert.my0.text-light(v-if="form6.submitted" success no-border)
-                | The form is valid, ready to send it!
-              w-alert.my0.text-light(v-else-if="form6.valid === false" error no-border)
-                | The form has {{ form6.errorsCount }} errors.
-          w-form.px8.pt2.pb10.grey(
-            v-model="form6.valid"
-            :errors-count.sync="form6.errorsCount"
-            @validate="onValidate"
-            @success="onSuccess")
-            w-input(required label="First name" :validators="[validators.required]")
-            w-input.mt3(required label="Last name" :validators="[validators.required]")
-
-            w-flex.mt4(wrap align-center justify-end)
-              w-checkbox.my4(required :validators="[validators.consent]") I agree to the terms &amp; conditions
-              .spacer
-              div
-                w-button.mr2(
-                  bg-color="warning"
-                  type="reset"
-                  @click="form6.submitted = form6.sent = false") Reset
-                w-button(
-                  type="submit"
-                  :disabled="form6.valid === false"
-                  :loading="form6.submitted && !form6.sent") Validate
-          w-notification(
-            v-model="form6.sent"
-            success
-            transition="bounce"
-            absolute
-            plain
-            round
-            bottom) The form was sent successfully!
-
-      .block.block--2
-        w-flex.title2
-          w-icon.mr2 wi-check
-          | Build great UIs with flexible &amp; powerful elements
-        p.my4 See for yourself with this checklist component for instance.
-        .w-flex.example.pa1.basis-zero.align-center.wrap
-          .grow(style="min-width: 200px")
-            ssh-pre(language="html-vue").
-              &lt;w-list
-                v-model="selection"
-                :items="items"
-                checklist
-                round-checkboxes
-                color="blue-light1"&gt;
-              &lt;/w-list&gt;
-            ssh-pre(language="js").
-              data: () => ({
-                items: [
-                  { label: 'Item 1' },
-                  { label: 'Item 2' },
-                  { label: 'Item 3' }
-                ],
-                selection: ['Item 2']
-              })
-          w-list.ml2.my2.grow(
-            v-model="selectedItem"
-            :items="demoListItems"
-            checklist
-            round-checkboxes
-            color="blue-light1"
-            style="min-width: 150px")
-
       .block.block--3
         w-flex.title2
           w-icon.mr2 wi-check
-          | Keep full control on the CSS
+          | Build great UIs with flexible &amp; powerful elements
+        w-flex(align-center wrap :gap="8")
+          .grow
+            p.my4 See for yourself with this checklist component for instance.
+            .w-flex.example.pa1.basis-zero.align-center.wrap
+              .grow(style="min-width: 200px")
+                ssh-pre(language="html-vue").
+                  &lt;w-list
+                    v-model="selection"
+                    :items="items"
+                    checklist
+                    round-checkboxes
+                    color="blue-light1"&gt;
+                  &lt;/w-list&gt;
+                ssh-pre(language="js").
+                  data: () => ({
+                    items: [
+                      { label: 'Item 1' },
+                      { label: 'Item 2' },
+                      { label: 'Item 3' }
+                    ],
+                    selection: ['Item 2']
+                  })
+              w-list.ml2.my2.grow(
+                v-model="selectedItem"
+                :items="demoListItems"
+                checklist
+                round-checkboxes
+                color="blue-light1"
+                style="min-width: 150px")
+          .grow
+            p A straightforward form validation
+            w-card.white--bg(content-class="pa0")
+              .message-box
+                w-transition-fade
+                  w-alert.my0.text-light(v-if="form6.submitted" success no-border)
+                    | The form is valid, ready to send it!
+                  w-alert.my0.text-light(v-else-if="form6.valid === false" error no-border)
+                    | The form has {{ form6.errorsCount }} errors.
+              w-form.pa4.pt2.grey(
+                v-model="form6.valid"
+                :errors-count.sync="form6.errorsCount"
+                @validate="onValidate"
+                @success="onSuccess")
+                w-input(required label="First name" :validators="[validators.required]")
+                w-input.mt3(required label="Last name" :validators="[validators.required]")
+
+                w-flex.mt4(wrap align-center justify-end)
+                  w-checkbox.my4(required :validators="[validators.consent]") I agree to the terms
+                  .spacer
+                  div
+                    w-button.mr2(
+                      bg-color="warning"
+                      type="reset"
+                      @click="form6.submitted = form6.sent = false") Reset
+                    w-button(
+                      type="submit"
+                      :disabled="form6.valid === false"
+                      :loading="form6.submitted && !form6.sent") Validate
+              w-notification(
+                v-model="form6.sent"
+                success
+                transition="bounce"
+                absolute
+                plain
+                round
+                bottom) The form was sent successfully!
+
+      .block.block--4
+        w-flex.title2
+          w-icon.mr2 wi-check
+          | Stay in control of your CSS
         p.my4.
           Wave UI is developed with a particular care about CSS.#[br]
           Practically Wave UI gives you more flexibility and more control over the CSS.
@@ -127,7 +148,7 @@ w-app.home
           span.red-light2 '.w-app'
           span.blue-grey ;
 
-  section.section.section--2
+  section.section.section--3
     svg(viewBox="0 0 1440 100" preserveAspectRatio="none")
       path(d="M 0 0 H 1440 V 81 C 1250 61 552 0 0 67 Z")
 
@@ -175,8 +196,12 @@ import { gsap, TimelineMax, Power4 } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(TimelineMax, Power4, ScrollTrigger)
 
+const componentsCount = 45
+let intervalId = null
+
 export default {
   data: () => ({
+    count: 0,
     demoListItems: [
       { label: 'Item 1' },
       { label: 'Item 2' },
@@ -206,14 +231,20 @@ export default {
   },
 
   mounted () {
-    setTimeout(this.initScrollAnimation, 200)
+    setTimeout(() => {
+      this.initScrollAnimation()
+      intervalId = setInterval(() => {
+        if (this.count < componentsCount) this.count++
+        else clearInterval(intervalId)
+      }, 50)
+    }, 200)
   },
 
   methods: {
     initScrollAnimation () {
       gsap.defaults({ ease: 'power4' })
 
-      // Header
+      // Header.
       const header = document.querySelector('.home__header')
       gsap.utils.toArray('.bubbles__plan').forEach((plan, i) => {
         gsap.to(plan, {
@@ -259,6 +290,29 @@ export default {
         onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 60, stagger: { each: 0.15 }, overwrite: true })
       })
       ScrollTrigger.addEventListener('refreshInit', () => gsap.set('.feature', { y: 0 }))
+
+      // Mobiles.
+      gsap.to('.mobile--1', {
+        yPercent: 20,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: header,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      })
+
+      gsap.to('.mobile--2', {
+        yPercent: 30,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: header,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      })
     },
 
     onSuccess () {
@@ -450,31 +504,65 @@ export default {
     &__content {
       padding: 12px;
       margin: auto;
-      max-width: 700px;
+      max-width: 1050px;
       z-index: 1;
+      position: relative;
     }
 
-    .title2 {margin-top: 5em;color: #2a5198;}
+    .title2 {margin-top: 3em;color: #2a5198;}
   }
 
   // Section 1.
   // ------------------------------------------------------
   .section--1 {
     background-color: #fff;
+    margin-top: 5em;
+    padding-bottom: 11em;
 
     svg {fill: #1a6fb4;}
 
     p, ul {font-size: 1.1em;}
     .w-list__item-bullet {color: inherit;}
     .w-card {background: #f8f8f8;}
-  }
 
-  // Appear transition.
-  .section--1 .block {opacity: 0;}
+    .w-notification--bottom {
+      top: 100%;
+      bottom: auto;
+      padding-top: 8px;
+    }
+
+    .mobiles {
+      margin: auto;
+      z-index: 10;
+      position: relative;
+    }
+    .mobile--1 {width: 240px;margin-right: -70px;}
+    .mobile--2 {width: 270px;}
+
+    // Appear transitions.
+    .block {
+      opacity: 0;
+      max-width: 1050px;
+      margin: auto;
+    }
+    .block--1 {margin-top: 14em;}
+    .block--1 .no-less {font-size: 1.5em;}
+    .block--1 strong {font-size: 8em;color: rgba(0, 0, 0, 0.25);}
+    .block--3 {margin-top: 14em;}
+  }
 
   // Section 2.
   // ------------------------------------------------------
   .section--2 {
+    margin-top: 2em;
+    padding-top: 6em;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.04), #fff);
+    > svg {fill: rgba(0, 0, 0, 0.04);}
+  }
+
+  // Section 3.
+  // ------------------------------------------------------
+  .section--3 {
     background: linear-gradient(to right, #145181, #3777a9);
     color: #fff;
     padding: 13em 0 26%;
@@ -494,8 +582,7 @@ export default {
 
     .section__content {overflow: hidden;}
 
-    > svg {top: 0;}
-    > svg path {fill: #fff;}
+    > svg {top: 0;fill: #fff;}
 
     .w-button {
       font-family: "title font";
@@ -594,6 +681,17 @@ export default {
 @media screen and (max-width: 1280px) {
   .home__header svg.wave--sm {bottom: 10px;}
   .home__header svg.wave--md {bottom: -10px;height: 13vw;}
+}
+
+@media screen and (max-width: 840px) {
+  .home .mobiles {
+    .mobile--1 {width: 200px;}
+    .mobile--2 {width: 220px;}
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .section--1 .section__content {flex-wrap: wrap;}
 }
 
 @media screen and (max-width: 600px) {
