@@ -84,10 +84,10 @@ w-app.home
             w-card.white--bg.card--1(content-class="w-flex column" title="Form Elements" title-class="py1 title4")
               w-checkbox.mt3(:value="true" color="pink") Checkbox
               w-radio.mt3(:value="true" color="red") Radio
-              w-switch.mt3(:value="true" color="orange") Switch
-              w-slider.mt12.mb4.size--xs(
+              w-switch.mt3(:value="true" color="deep-orange") Switch
+              w-slider.mt12.mb4.size--sm(
                 :value="75"
-                thumb-label-class="orange-light2--bg white"
+                thumb-label-class="orange--bg white"
                 thumb-label="droplet"
                 color="amber")
             w-card.white--bg.card--2(title="Icons, badges, Alerts..." title-class="py1 title4")
@@ -313,7 +313,7 @@ export default {
       // Every content block.
       gsap.set('.block', { y: 60, opacity: 0 })
       ScrollTrigger.batch('.block', {
-        start: 'top 88%',
+        start: 'top bottom-=30px',
         onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
         onLeave: batch => gsap.to(batch, { opacity: 0, y: 60, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
         onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
@@ -345,9 +345,9 @@ export default {
         yPercent: 18,
         ease: 'none',
         scrollTrigger: {
-          trigger: header,
-          start: 'top top',
-          end: 'bottom top',
+          trigger: '.mobiles',
+          start: 'top 70%',
+          end: 'bottom 50%',
           scrub: true
         }
       })
@@ -356,9 +356,45 @@ export default {
         yPercent: 25,
         ease: 'none',
         scrollTrigger: {
-          trigger: header,
-          start: 'top top',
-          end: 'bottom top',
+          trigger: '.mobiles',
+          start: 'top 70%',
+          end: 'bottom 50%',
+          scrub: true
+        }
+      })
+
+      // Cards.
+      gsap.to('.card--2', {
+        xPercent: 8,
+        yPercent: -5,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.left-col',
+          start: 'top 80%',
+          end: 'top 25%',
+          scrub: true
+        }
+      })
+
+      gsap.to('.card--3', {
+        xPercent: -7,
+        yPercent: 7,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.left-col',
+          start: 'top 80%',
+          end: 'top 25%',
+          scrub: true
+        }
+      })
+
+      gsap.to('.card--4', {
+        yPercent: 15,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.left-col',
+          start: 'top 80%',
+          end: 'top 25%',
           scrub: true
         }
       })
@@ -643,7 +679,7 @@ export default {
     .card--2 {
       width: 30%;
       position: absolute;
-      top: -2%;
+      top: 3%;
       left: 30%;
       min-width: 200px;
     }
@@ -798,7 +834,8 @@ export default {
 
 @media screen and (max-width: 430px) {
   .home .section--1 .block--2 strong {font-size: 6em;}
-  .home .section--1 .section__content > div {margin-right: 0;}
+  .home .section--1 .title2 {margin-top: 1em;}
+  .home .section--1 .section__content > div:first-child {margin-right: 0;}
   .home .section--1 .mobile--1 {width: 185px;margin-right: -80px;}
   .home .section--1 .mobile--2 {width: 200px;}
   .home .section--1 .block--2 .no-less,
