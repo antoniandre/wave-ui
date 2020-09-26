@@ -42,11 +42,23 @@ w-app.home
           w-flex.title2
             w-icon.mr2 wi-check
             | All the components that you need in a lightweight package
-          .w-flex.align-center.mt12.mx8.mb4
-            strong.count.mr8 {{ count }}
+          .w-flex.align-center.mt6.mx8.mb4
+            strong.count.mr8(:style="`opacity: ${count.alpha}`") {{ count.count }}
             .no-less
               | No less than#[br]
               | UI components
+          .w-flex.align-center.and-more.mx8
+            .title3.grow.text-right.mr8.extra-anim And also
+            div
+              .extra.extra-anim
+                w-icon.mr3(xl) mdi mdi-palette
+                | Colors
+              .extra.extra-anim
+                w-icon.mr3(xl) mdi mdi-auto-fix
+                | Utilities
+              .extra.extra-anim
+                w-icon.mr3(xl) mdi mdi-shield-check
+                | Form validation
 
         .block.block--2
           w-flex.title2
@@ -192,16 +204,17 @@ w-app.home
 </template>
 
 <script>
-import { gsap, TimelineMax, Power4 } from 'gsap'
+import { gsap, TimelineMax, Power1, Power4, TweenMax } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-gsap.registerPlugin(TimelineMax, Power4, ScrollTrigger)
+gsap.registerPlugin(TimelineMax, TweenMax, Power4, Power1, ScrollTrigger)
 
-const componentsCount = 45
+// const componentsCount = 45
+let componentsCount = { curr: 0, total: 45 }
 let intervalId = null
 
 export default {
   data: () => ({
-    count: 0,
+    count: { count: 0, alpha: 0 },
     demoListItems: [
       { label: 'Item 1' },
       { label: 'Item 2' },
@@ -233,10 +246,10 @@ export default {
   mounted () {
     setTimeout(() => {
       this.initScrollAnimation()
-      intervalId = setInterval(() => {
-        if (this.count < componentsCount) this.count++
-        else clearInterval(intervalId)
-      }, 50)
+      // intervalId = setInterval(() => {
+      //   if (this.count < componentsCount) ~~((this.count++) / Math.log(componentsCount + 1))
+      //   else clearInterval(intervalId)
+      // }, 50)
     }, 200)
   },
 
@@ -271,25 +284,34 @@ export default {
       })
 
       // Every content block.
-      gsap.set('.block', { y: 30, opacity: 0 })
+      gsap.set('.block', { y: 60, opacity: 0 })
       ScrollTrigger.batch('.block', {
         start: 'top 88%',
-        onEnter: batch => gsap.to(batch, { opacity: 1, y: -30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
-        onLeave: batch => gsap.to(batch, { opacity: 0, y: 30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
-        onEnterBack: batch => gsap.to(batch, { opacity: 1, y: -30, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
-        onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 30, duration: 1, stagger: { each: 0.15 }, overwrite: true })
+        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
+        onLeave: batch => gsap.to(batch, { opacity: 0, y: 60, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
+        onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
+        onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 60, duration: 1, stagger: { each: 0.15 }, overwrite: true })
       })
 
-      // Features.
-      gsap.set('.feature', { y: 60 })
-      ScrollTrigger.batch('.feature', {
-        start: 'top 88%',
-        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: { each: 0.15 }, overwrite: true }),
-        onLeave: batch => gsap.set(batch, { opacity: 0, y: -60, stagger: { each: 0.15 }, overwrite: true }),
-        onEnterBack: batch => gsap.to(batch, { opacity: 1, y: -60, stagger: { each: 0.15 }, overwrite: true }),
-        onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 60, stagger: { each: 0.15 }, overwrite: true })
+      // Components count.
+      TweenMax.to(componentsCount, 3.5, {
+        curr: componentsCount.total,
+        ease: Power1.easeOut,
+        onUpdate: () => {
+          this.count.count = Math.round(componentsCount.curr)
+          this.count.alpha = this.count.count / componentsCount.total
+        },
+        onComplete: () => {
+          gsap.set('.extra-anim', { y: 50, opacity: 0 })
+          ScrollTrigger.batch('.extra-anim', {
+            start: 'top 88%',
+            onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
+            onLeave: batch => gsap.to(batch, { opacity: 0, y: 50, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
+            onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
+            onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 50, duration: 1, stagger: { each: 0.15 }, overwrite: true })
+          })
+        }
       })
-      ScrollTrigger.addEventListener('refreshInit', () => gsap.set('.feature', { y: 0 }))
 
       // Mobiles.
       gsap.to('.mobile--1', {
@@ -313,6 +335,17 @@ export default {
           scrub: true
         }
       })
+
+      // Features.
+      gsap.set('.feature', { y: 60 })
+      ScrollTrigger.batch('.feature', {
+        start: 'top 88%',
+        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: { each: 0.15 }, overwrite: true }),
+        onLeave: batch => gsap.set(batch, { opacity: 0, y: -60, stagger: { each: 0.15 }, overwrite: true }),
+        onEnterBack: batch => gsap.to(batch, { opacity: 1, y: -60, stagger: { each: 0.15 }, overwrite: true }),
+        onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 60, stagger: { each: 0.15 }, overwrite: true })
+      })
+      ScrollTrigger.addEventListener('refreshInit', () => gsap.set('.feature', { y: 0 }))
     },
 
     onSuccess () {
@@ -509,20 +542,17 @@ export default {
       position: relative;
     }
 
-    .title2 {margin-top: 3em;color: #2a5198;}
+    .title2 {margin-top: 3em;color: #3c75a5;}
   }
 
   // Section 1.
   // ------------------------------------------------------
   .section--1 {
     background-color: #fff;
-    margin-top: 5em;
+    // margin-top: 5em;
     padding-bottom: 11em;
 
-    svg {fill: #1a6fb4;}
-
-    p, ul {font-size: 1.1em;}
-    .w-list__item-bullet {color: inherit;}
+    p {font-size: 1.1em;}
     .w-card {background: #f8f8f8;}
 
     .w-notification--bottom {
@@ -546,9 +576,26 @@ export default {
       margin: auto;
     }
     .block--1 {margin-top: 14em;}
-    .block--1 .no-less {font-size: 1.5em;}
-    .block--1 strong {font-size: 8em;color: rgba(0, 0, 0, 0.25);}
-    .block--3 {margin-top: 14em;}
+    .block--1 .no-less {font-size: 1.5em;line-height: 1.5;}
+    .block--1 .and-more {
+      font-size: 1.5em;
+      line-height: 1.5;
+      .extra {margin-top: 0.4em;}
+      .extra-anim {opacity: 0;}
+      .extra:first-of-type {margin-top: 0;}
+      .extra .w-icon {
+        font-size: 2em;
+        color: transparent;
+        background: linear-gradient(45deg, #12446b, #78a2c7 80%);
+        background-clip: text;
+      }
+    }
+    .block--1 strong {
+      font-size: 8em;
+      color: transparent;
+      background: linear-gradient(45deg, #12446b, #78a2c7 80%);
+      background-clip: text;
+    }
   }
 
   // Section 2.
@@ -557,7 +604,9 @@ export default {
     margin-top: 2em;
     padding-top: 6em;
     background-image: linear-gradient(rgba(0, 0, 0, 0.04), #fff);
+
     > svg {fill: rgba(0, 0, 0, 0.04);}
+    .block--4 {margin-top: 7em;}
   }
 
   // Section 3.
