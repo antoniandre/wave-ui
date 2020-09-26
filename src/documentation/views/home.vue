@@ -41,8 +41,13 @@ w-app.home
         .block.block--1
           w-flex.title2
             w-icon.mr2 wi-check
+            | Fully responsive and touch-ready
+
+        .block.block--2
+          w-flex.title2
+            w-icon.mr2 wi-check
             | All the components that you need in a lightweight package
-          .w-flex.align-center.mt6.mx8.mb4
+          .w-flex.align-center.mt6.mx8
             strong.count.mr8(:style="`opacity: ${count.alpha}`") {{ count.count }}
             .no-less
               | No less than#[br]
@@ -60,11 +65,6 @@ w-app.home
                 w-icon.mr3(xl) mdi mdi-shield-check
                 | Form validation
 
-        .block.block--2
-          w-flex.title2
-            w-icon.mr2 wi-check
-            | Fully responsive and touch-ready
-
       .mobiles.no-shrink
         img.mobile.mobile--1(src="@/assets/wave-ui-mobile-1.png")
         img.mobile.mobile--2(src="@/assets/wave-ui-mobile-2.png")
@@ -78,38 +78,32 @@ w-app.home
         w-flex.title2
           w-icon.mr2 wi-check
           | Build great UIs with flexible &amp; powerful elements
-        w-flex(align-center wrap :gap="8")
-          .grow
-            p.my4 See for yourself with this checklist component for instance.
-            .w-flex.example.pa1.basis-zero.align-center.wrap
-              .grow(style="min-width: 200px")
-                ssh-pre(language="html-vue").
-                  &lt;w-list
-                    v-model="selection"
-                    :items="items"
-                    checklist
-                    round-checkboxes
-                    color="blue-light1"&gt;
-                  &lt;/w-list&gt;
-                ssh-pre(language="js").
-                  data: () => ({
-                    items: [
-                      { label: 'Item 1' },
-                      { label: 'Item 2' },
-                      { label: 'Item 3' }
-                    ],
-                    selection: ['Item 2']
-                  })
-              w-list.ml2.my2.grow(
-                v-model="selectedItem"
-                :items="demoListItems"
-                checklist
-                round-checkboxes
-                color="blue-light1"
-                style="min-width: 150px")
-          .grow
-            p A straightforward form validation
-            w-card.white--bg(content-class="pa0")
+
+        w-flex.mt8.ui-demo(basis-zero wrap justify-center :gap="8")
+          .left-col.grow
+            w-card.white--bg.card--1(content-class="w-flex column" title="Form Elements" title-class="py1 title4")
+              w-checkbox.mt3(:value="true" color="pink") Checkbox
+              w-radio.mt3(:value="true" color="red") Radio
+              w-switch.mt3(:value="true" color="orange") Switch
+              w-slider.mt12.mb4.size--xs(
+                :value="75"
+                thumb-label-class="orange-light2--bg white"
+                thumb-label="droplet"
+                color="amber")
+            w-card.white--bg.card--2(title="Icons, badges, Alerts..." title-class="py1 title4")
+              .w-flex.align-center.justify-space-around.mt1
+                w-icon.success(xl) mdi mdi-check
+                w-icon.error(xl) mdi mdi-close
+                w-badge(bg-color="green" dot bottom sm overlap value="1")
+                  w-icon.pr2.grey(xl) mdi mdi-account
+                w-badge(bg-color="error" overlap value="1")
+                  w-icon.grey(xl) mdi mdi-email
+              w-alert.mt4.mb0.text-light(success round dismiss) All good!
+
+            w-card.yellow-grad.card--3(content-class="pa0")
+              w-accordion(:value="[true, false, false]" expand-single :items="accordionItems")
+
+            w-card.white--bg.card--4(content-class="pa0" title="Form validation" title-class="py1 title4")
               .message-box
                 w-transition-fade
                   w-alert.my0.text-light(v-if="form6.submitted" success no-border)
@@ -128,8 +122,8 @@ w-app.home
                   w-checkbox.my4(required :validators="[validators.consent]") I agree to the terms
                   .spacer
                   div
-                    w-button.mr2(
-                      bg-color="warning"
+                    w-button.mr2.white(
+                      bg-color="orange-light1"
                       type="reset"
                       @click="form6.submitted = form6.sent = false") Reset
                     w-button(
@@ -144,6 +138,33 @@ w-app.home
                 plain
                 round
                 bottom) The form was sent successfully!
+
+          .right-col.checklist
+            .title4 See how easy it is to build a checklist.
+            ssh-pre(language="html-vue").
+              &lt;w-list
+                v-model="selection"
+                :items="items"
+                checklist
+                round-checkboxes
+                color="blue-light1"&gt;
+              &lt;/w-list&gt;
+            ssh-pre(language="js").
+              data: () => ({
+                items: [
+                  { label: 'Item 1' },
+                  { label: 'Item 2' },
+                  { label: 'Item 3' }
+                ],
+                selection: ['Item 2']
+              })
+            w-list.my2.grow(
+              v-model="selectedItem"
+              :items="demoListItems"
+              checklist
+              round-checkboxes
+              color="blue-light1"
+              style="min-width: 150px")
 
       .block.block--4
         w-flex.title2
@@ -208,9 +229,7 @@ import { gsap, TimelineMax, Power1, Power4, TweenMax } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(TimelineMax, TweenMax, Power4, Power1, ScrollTrigger)
 
-// const componentsCount = 45
 let componentsCount = { curr: 0, total: 45 }
-let intervalId = null
 
 export default {
   data: () => ({
@@ -219,6 +238,20 @@ export default {
       { label: 'Item 1' },
       { label: 'Item 2' },
       { label: 'Item 3' }
+    ],
+    accordionItems: [
+      {
+        title: 'Item 1',
+        content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+      },
+      {
+        title: 'Item 2',
+        content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+      },
+      {
+        title: 'Item 3',
+        content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+      }
     ],
     selectedItem: 'Item 2',
     form6: {
@@ -244,13 +277,7 @@ export default {
   },
 
   mounted () {
-    setTimeout(() => {
-      this.initScrollAnimation()
-      // intervalId = setInterval(() => {
-      //   if (this.count < componentsCount) ~~((this.count++) / Math.log(componentsCount + 1))
-      //   else clearInterval(intervalId)
-      // }, 50)
-    }, 200)
+    setTimeout(this.initScrollAnimation, 200)
   },
 
   methods: {
@@ -294,7 +321,7 @@ export default {
       })
 
       // Components count.
-      TweenMax.to(componentsCount, 3.5, {
+      TweenMax.to(componentsCount, 3, {
         curr: componentsCount.total,
         ease: Power1.easeOut,
         onUpdate: () => {
@@ -302,20 +329,20 @@ export default {
           this.count.alpha = this.count.count / componentsCount.total
         },
         onComplete: () => {
-          gsap.set('.extra-anim', { y: 50, opacity: 0 })
+          gsap.set('.extra-anim', { y: 35, opacity: 0 })
           ScrollTrigger.batch('.extra-anim', {
             start: 'top 88%',
-            onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
-            onLeave: batch => gsap.to(batch, { opacity: 0, y: 50, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
-            onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: { each: 0.15 }, overwrite: true }),
-            onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 50, duration: 1, stagger: { each: 0.15 }, overwrite: true })
+            onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, stagger: { each: 0.25 }, overwrite: true }),
+            onLeave: batch => gsap.to(batch, { opacity: 0, y: 35, duration: 0.6, stagger: { each: 0.25 }, overwrite: true }),
+            onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, stagger: { each: 0.25 }, overwrite: true }),
+            onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 35, duration: 0.6, stagger: { each: 0.25 }, overwrite: true })
           })
         }
       })
 
       // Mobiles.
       gsap.to('.mobile--1', {
-        yPercent: 20,
+        yPercent: 18,
         ease: 'none',
         scrollTrigger: {
           trigger: header,
@@ -326,7 +353,7 @@ export default {
       })
 
       gsap.to('.mobile--2', {
-        yPercent: 30,
+        yPercent: 25,
         ease: 'none',
         scrollTrigger: {
           trigger: header,
@@ -576,8 +603,10 @@ export default {
       margin: auto;
     }
     .block--1 {margin-top: 14em;}
-    .block--1 .no-less {font-size: 1.5em;line-height: 1.5;}
-    .block--1 .and-more {
+    .block--2 {margin-top: 0;}
+    .block--2 .title2 {margin-top: 1.5em;}
+    .block--2 .no-less {font-size: 1.5em;line-height: 1.5;}
+    .block--2 .and-more {
       font-size: 1.5em;
       line-height: 1.5;
       .extra {margin-top: 0.4em;}
@@ -590,7 +619,7 @@ export default {
         background-clip: text;
       }
     }
-    .block--1 strong {
+    .block--2 strong {
       font-size: 8em;
       color: transparent;
       background: linear-gradient(45deg, #12446b, #78a2c7 80%);
@@ -607,6 +636,30 @@ export default {
 
     > svg {fill: rgba(0, 0, 0, 0.04);}
     .block--4 {margin-top: 7em;}
+
+    .left-col {position: relative;max-width: 630px;}
+    .card--1 {width: 175px;}
+    .card--2 {
+      width: 30%;
+      position: absolute;
+      top: -2%;
+      left: 30%;
+      min-width: 200px;
+    }
+    .card--3 {
+      width: 50%;
+      margin-top: -3%;
+      margin-left: 7%;
+      background-image: linear-gradient(-205deg, #ffe688, #e8a63a);
+    }
+    .card--4 {
+      position: absolute;
+      top: 25%;
+      width: 58%;
+      right: 0;
+      z-index: 2;
+    }
+    .checklist {min-width: 240px;}
   }
 
   // Section 3.
@@ -698,35 +751,6 @@ export default {
   100% {transform: rotate(360deg);}
 }
 
-@keyframes jelly {
-  0% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  3.4% { -webkit-transform: matrix3d(1.316, 0, 0, 0, 0, 1.407, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.316, 0, 0, 0, 0, 1.407, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  4.7% { -webkit-transform: matrix3d(1.45, 0, 0, 0, 0, 1.599, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.45, 0, 0, 0, 0, 1.599, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  6.81% { -webkit-transform: matrix3d(1.659, 0, 0, 0, 0, 1.893, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.659, 0, 0, 0, 0, 1.893, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  9.41% { -webkit-transform: matrix3d(1.883, 0, 0, 0, 0, 2.168, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.883, 0, 0, 0, 0, 2.168, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  10.21% { -webkit-transform: matrix3d(1.942, 0, 0, 0, 0, 2.226, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.942, 0, 0, 0, 0, 2.226, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  13.61% { -webkit-transform: matrix3d(2.123, 0, 0, 0, 0, 2.332, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.123, 0, 0, 0, 0, 2.332, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  14.11% { -webkit-transform: matrix3d(2.141, 0, 0, 0, 0, 2.331, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.141, 0, 0, 0, 0, 2.331, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  17.52% { -webkit-transform: matrix3d(2.208, 0, 0, 0, 0, 2.239, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.208, 0, 0, 0, 0, 2.239, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  18.72% { -webkit-transform: matrix3d(2.212, 0, 0, 0, 0, 2.187, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.212, 0, 0, 0, 0, 2.187, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  21.32% { -webkit-transform: matrix3d(2.196, 0, 0, 0, 0, 2.069, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.196, 0, 0, 0, 0, 2.069, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  24.32% { -webkit-transform: matrix3d(2.151, 0, 0, 0, 0, 1.96, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.151, 0, 0, 0, 0, 1.96, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  25.23% { -webkit-transform: matrix3d(2.134, 0, 0, 0, 0, 1.938, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.134, 0, 0, 0, 0, 1.938, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  29.03% { -webkit-transform: matrix3d(2.063, 0, 0, 0, 0, 1.897, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.063, 0, 0, 0, 0, 1.897, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  29.93% { -webkit-transform: matrix3d(2.048, 0, 0, 0, 0, 1.899, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.048, 0, 0, 0, 0, 1.899, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  35.54% { -webkit-transform: matrix3d(1.979, 0, 0, 0, 0, 1.962, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.979, 0, 0, 0, 0, 1.962, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  36.74% { -webkit-transform: matrix3d(1.972, 0, 0, 0, 0, 1.979, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.972, 0, 0, 0, 0, 1.979, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  41.04% { -webkit-transform: matrix3d(1.961, 0, 0, 0, 0, 2.022, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.961, 0, 0, 0, 0, 2.022, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  44.44% { -webkit-transform: matrix3d(1.966, 0, 0, 0, 0, 2.032, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.966, 0, 0, 0, 0, 2.032, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  52.15% { -webkit-transform: matrix3d(1.991, 0, 0, 0, 0, 2.006, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.991, 0, 0, 0, 0, 2.006, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  59.86% { -webkit-transform: matrix3d(2.006, 0, 0, 0, 0, 1.99, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.006, 0, 0, 0, 0, 1.99, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  63.26% { -webkit-transform: matrix3d(2.007, 0, 0, 0, 0, 1.992, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.007, 0, 0, 0, 0, 1.992, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  75.28% { -webkit-transform: matrix3d(2.001, 0, 0, 0, 0, 2.003, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2.001, 0, 0, 0, 0, 2.003, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  85.49% { -webkit-transform: matrix3d(1.999, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.999, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  90.69% { -webkit-transform: matrix3d(1.999, 0, 0, 0, 0, 1.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.999, 0, 0, 0, 0, 1.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  100% { -webkit-transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-}
-
 @media screen and (max-width: 1280px) {
   .home__header svg.wave--sm {bottom: 10px;}
   .home__header svg.wave--md {bottom: -10px;height: 13vw;}
@@ -741,6 +765,9 @@ export default {
 
 @media screen and (max-width: 760px) {
   .section--1 .section__content {flex-wrap: wrap;}
+  .section--2 .ui-demo div {flex-basis: auto;}
+  .section--2 .ui-demo div .left-col {width: 100%;flex-basis: auto;}
+  .section--2 .right-col {flex-grow: 1;}
 }
 
 @media screen and (max-width: 600px) {
@@ -758,10 +785,14 @@ export default {
     svg.wave--md {bottom: 0;}
   }
 
-  .home .section--2 {padding-top: 4em;padding-bottom: 40%;}
-  .home .section--2 .feature {
+  .home .section--3 {padding-top: 4em;padding-bottom: 40%;}
+  .home .section--3 .feature {
     margin-top: 4em;
     padding-bottom: 50%;
   }
+}
+
+@media screen and (max-width: 430px) {
+  .section--2 .ui-demo div .left-col {display: none;}
 }
 </style>
