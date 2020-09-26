@@ -10,7 +10,7 @@
         aria-label="Badge"
         aria-live="polite"
         role="status")
-        slot(v-if="!dot" name="badge") {{ value || '' }}
+        slot(v-if="!dot" name="badge") {{ value === true ? '' : (value || '') }}
 </template>
 
 <script>
