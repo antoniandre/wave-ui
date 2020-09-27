@@ -21,6 +21,10 @@
   .title3.mt4 External UI components
   p By the same author
   w-list(:items="externalComponents" nav color="primary" @item-click="onItemClick")
+
+  router-link.mt3.d-iblock(v-if="$waveui.breakpoint.xs" to="/release-notes" @click="onItemClick")
+    w-icon.mr2 mdi mdi-update
+    | Release notes
 </template>
 
 <script>
@@ -104,7 +108,7 @@ export default {
       this.$emit('update:drawerOpen', false)
       setTimeout(() => {
         document.documentElement.scrollTop = document.querySelector('.content-wrap').offsetTop - 40
-      }, 100)
+      }, 150)
     }
   }
 }
