@@ -1,16 +1,12 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-accordion
-
+  ui-component-title w-accordion
   examples
   api
 </template>
 
 <script>
-import Examples from './examples'
-import Api from './api'
-
 export default {
-  components: { Examples, Api }
+  components: { Examples: () => import('./examples'), Api: () => import('./api') }
 }
 </script>

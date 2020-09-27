@@ -1,14 +1,12 @@
 <template lang="pug">
 div
+  ui-component-title w-switch
   examples
   api
 </template>
 
 <script>
-import Examples from './examples'
-import Api from './api'
-
 export default {
-  components: { Examples, Api }
+  components: { Examples: () => import('./examples'), Api: () => import('./api') }
 }
 </script>
