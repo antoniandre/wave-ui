@@ -10,6 +10,7 @@ w-toolbar.main-toolbar(fixed)
         w-icon(lg) mdi mdi-github
     .size--xs.text-nowrap View the project on Github
   .caption(v-html="`Version ${version}`")
+  router-link.ml2(to="/release-notes") Release notes
   w-button.ml2.mr-1.hamburger-menu(
     v-if="$waveui.breakpoint.xs"
     @click="$emit('update:drawerOpen', !drawerOpen)"

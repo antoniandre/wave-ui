@@ -41,6 +41,6 @@ If you have any idea, feel free to open an issue to discuss a new feature or for
 
 ___
 
-<!-- ## Release Notes
+## Release Notes
 
-[antoniandre.github.io/wave-ui/#release-notes](https://antoniandre.github.io/wave-ui/#release-notes) -->
+[antoniandre.github.io/wave-ui/release-notes](https://antoniandre.github.io/wave-ui/release-notes)

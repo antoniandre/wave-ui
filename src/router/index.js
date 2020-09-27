@@ -76,6 +76,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "transitions" */ '@/documentation/views/transitions.vue')
   },
   {
+    path: '/release-notes',
+    name: 'release-notes',
+    component: () => import(/* webpackChunkName: "release-notes" */ '@/documentation/views/release-notes.vue')
+  },
+  {
     path: '/form',
     name: 'form-elements',
     redirect: '/w-form'
@@ -118,17 +123,25 @@ const components = [
   { id: 'tooltip', label: 'Tooltip' }
 ]
 
+components.forEach(item => {
+  routes.push({
+    path: item.path || `/w-${item.id}`,
+    name: item.id,
+    component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/ui-components/${item.id}/index.vue`)
+  })
+})
+
 const externalComponents = [
   { id: 'calendar', label: 'Calendar', path: '/calendar' },
   { id: 'slideshow', label: 'Slideshow', path: '/slideshow' },
   { id: 'splitter', label: 'Splitter', path: '/splitter' }
 ]
 
-components.concat(externalComponents).forEach(item => {
+externalComponents.forEach(item => {
   routes.push({
     path: item.path || `/w-${item.id}`,
     name: item.id,
-    component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/ui-components/${item.id}/index.vue`)
+    component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/ui-components/${item.id}.vue`)
   })
 })
 
