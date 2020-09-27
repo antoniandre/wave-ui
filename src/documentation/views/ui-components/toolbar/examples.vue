@@ -1,7 +1,5 @@
 <template lang="pug">
 div.ovh
-  title-link.mt4.code(h1) w-toolbar
-
   title-link(h2) Simple toolbar with shadow
   example(content-class="pa4")
     w-toolbar(shadow)

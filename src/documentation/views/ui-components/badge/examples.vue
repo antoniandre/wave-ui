@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1 slug="w-badge") w-badge
-
   title-link(h2) Default
   p The default badge background color is primary.
   example(content-class="mt2")

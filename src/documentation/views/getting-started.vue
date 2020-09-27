@@ -18,7 +18,7 @@ div
     Vue.use(WaveUI)
 
     const waveui = new WaveUI({
-      // some Wave UI options.
+      // Some Wave UI options.
     })
 
     new Vue({
@@ -54,8 +54,9 @@ div
     template(#item="{ item }")
       span {{ item.label }}
       template(v-if="item.route")
-        span.ml1 - read on in
-        router-link.ml1(:to="item.route") {{ item.label }}
+        span.ml1 - read on in the
+        router-link.mx1(:to="item.route") {{ item.label }}
+        | knowledge base page.
 </template>
 
 <script>

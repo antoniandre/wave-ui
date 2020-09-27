@@ -1,7 +1,5 @@
 <template lang="pug">
 div.lists-demo
-  title-link.mt4.code(h1) w-list
-
   p The #[span.code w-list] component has multiple uses:
   w-list(:items="4" icon="wi-check")
     template(#item.1) Simple list with or without icons

@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-textarea
-
   title-link(h2) Default
   p.
     By default the #[span.code w-textarea] component has a label inside the textarea that moves up above

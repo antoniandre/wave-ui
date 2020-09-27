@@ -1,7 +1,5 @@
 <template lang="pug">
 div.ovh
-  title-link.mt4.code(h1) w-button
-
   p.
     Setting colors on buttons is quite straightforward:
     a text color is set via the attribute #[code color], and a background color is set via the

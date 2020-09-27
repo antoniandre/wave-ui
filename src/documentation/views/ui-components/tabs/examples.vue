@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-tabs
-
   title-link(h2) Basic
   example
     w-tabs(:items="tabs1")

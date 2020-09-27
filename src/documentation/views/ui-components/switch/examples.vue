@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-switch
-
   title-link(h2 slug="on-off-and-disabled") On, off &amp; disabled
   example(content-class="pt4")
     w-switch.ma2(:value="true" label="On")

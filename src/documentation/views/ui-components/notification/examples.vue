@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1 slug="w-notification") w-notification
-
   p.
     The #[span.code w-notification] component is pretty much a wrapper around the #[span.code w-alert]
     component with added functionalities.#[br]

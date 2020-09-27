@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1 slug="w-menu") w-menu
-
   title-link(h2) Show on click or on hover
   example.example1(content-class="pt5")
     w-menu(detach-to=".example1")

@@ -1,5 +1,5 @@
 <template lang="pug">
-div.calendar
+.calendar
   title-link.mt4(h1) Calendar
 
   p

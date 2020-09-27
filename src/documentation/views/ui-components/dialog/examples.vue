@@ -1,6 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-dialog
   p This dialog contains some basic options for the w-dialog.
 
   example(content-class="pt5")
