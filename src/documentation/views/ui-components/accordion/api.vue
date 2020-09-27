@@ -1,30 +1,52 @@
 <template lang="pug">
-.api
+div
   .w-divider.my12
   title-link.title1(h2) API
 
-  title-link.title2(h3) Options
-  pre.
-    value: { type: Array },
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
-    items: { type: [Array, Number], required: true },
-    itemClass: { type: String },
-    itemColor: { type: String, default: 'color' }, // Support a different color per item.
-    titleClass: { type: String },
-    contentClass: { type: String },
-    expandIcon: { type: [String, Boolean], default: 'wi-triangle-down' },
-    expandIconRight: { type: Boolean },
-    expandSingle: { type: Boolean },
-    collapseIcon: { type: String },
-    shadow: { type: Boolean }
+  api.mt0(:items="props" :descriptions="propsDescriptions" title="Props")
 
-  title-link.title2(h3) Slots
+  api(:items="slots" title="Slots")
 
-  title-link.title2(h3) Events
+  api(:items="events" title="Events")
 </template>
 
 <script>
+import WAccordion from '@/wave-ui/components/w-accordion'
+
+const propsDescriptions = {
+  value: '',
+  color: '',
+  bgColor: 'Provide a background color for the component. Accepts all the color names of the color palette, status colors, or custom colors <a href="/colors">colors</a>.<br>Providing a color hex will not work.',
+  items: '',
+  itemClass: '',
+  itemColor: '',
+  titleClass: '',
+  contentClass: '',
+  expandIcon: '',
+  expandIconRight: '',
+  expandSingle: '',
+  collapseIcon: '',
+  shadow: ''
+}
+const slots = {
+  'item-title': { description: '' },
+  'item-title.x': { description: '' },
+  'item-content': { description: '' },
+  'item-content.x': { description: '' }
+}
+const events = {}
+
 export default {
+  data: () => ({
+    propsDescriptions,
+    slots,
+    events
+  }),
+
+  computed: {
+    props () {
+      return WAccordion.props
+    }
+  }
 }
 </script>
