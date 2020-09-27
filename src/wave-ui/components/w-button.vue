@@ -1,6 +1,6 @@
 <template lang="pug">
   .w-button(
-    :is="to ? ($router && !externalLink ? 'router-link' : 'a') : 'button'"
+    :is="to ? ($router && !externalLink && !forceLink ? 'router-link' : 'a') : 'button'"
     :type="!to && type"
     :to="$router && to"
     :href="to"
@@ -35,6 +35,9 @@ export default {
     shadow: { type: Boolean },
     tile: { type: Boolean },
     to: { type: [String, Boolean, Object] }, // Creates a link.
+    // Force use of `a` instead of router-link.
+    // Router link does not go to a url starting with `#` with history mode.
+    forceLink: { type: Boolean },
     type: { type: String, default: 'button' },
     disabled: { type: Boolean },
     loading: { type: Boolean },
