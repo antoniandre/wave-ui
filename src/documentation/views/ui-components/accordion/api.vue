@@ -28,12 +28,14 @@ const propsDescriptions = {
   collapseIcon: '',
   shadow: ''
 }
+
 const slots = {
   'item-title': { description: '' },
   'item-title.x': { description: '' },
   'item-content': { description: '' },
   'item-content.x': { description: '' }
 }
+
 const events = {}
 
 export default {
