@@ -1,8 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4(h1 slug="w-radio-and-w-radios")
-    | #[span.code w-radio] &amp; #[span.code w-radios]
-
   w-card(bg-color="blue-light5")
     p.mb3 What it looks like:
     w-radios(v-model="selection1" :items="radios1" inline)

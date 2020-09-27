@@ -1,5 +1,5 @@
 <template lang="pug">
-.api
+.api(v-if="sortedItems.length")
   title-link.title2.api__title(h3) {{ title }}
   ul(v-if="sortedItems.length")
     li.api__item(v-for="item in sortedItems" :key="item.label")

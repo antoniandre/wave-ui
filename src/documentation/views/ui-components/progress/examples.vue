@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-progress
-
   w-card(bg-color="blue-light5")
     p First choose your progress style:
     w-radios.title3(v-model="circular" :items="linearOrCircular" inline)

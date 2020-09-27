@@ -1,7 +1,5 @@
 <template lang="pug">
 div.ovh
-  title-link.mt4.code(h1) w-drawer
-
   title-link(h2) Positions
   example(content-class="w-flex align-center wrap")
     w-button.ma1(

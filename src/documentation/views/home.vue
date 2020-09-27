@@ -229,7 +229,7 @@ import { gsap, TimelineMax, Power1, Power4, TweenMax } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(TimelineMax, TweenMax, Power4, Power1, ScrollTrigger)
 
-let componentsCount = { curr: 0, total: 45 }
+let componentsCount = { curr: 0, total: 40 }
 
 export default {
   data: () => ({

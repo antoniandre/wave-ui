@@ -1,6 +1,7 @@
 <template lang="pug">
 div
-  ui-component-title w-radio
+  ui-component-title(slug="w-radio-and-w-radios" :code="false")
+    | #[span.code w-radio] &amp; #[span.code w-radios]
   examples
   api
 </template>

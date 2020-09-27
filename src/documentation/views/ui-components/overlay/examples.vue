@@ -1,7 +1,5 @@
 <template lang="pug">
 div.ovh
-  title-link.mt4.code(h1) w-overlay
-
   p.
     By default the overlay has a #[span.code 0.3] opacity with a black color and a z-index
     of #[span.code 500].#[br]

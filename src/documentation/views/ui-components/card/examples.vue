@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-card
-
   title-link(h2) Simple card with a title
   p.
     When the title is simple you can pass it directly as a prop like in this example.#[br]

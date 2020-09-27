@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-tag
-
   title-link(h2) Default tag &amp; outline
   example(content-class="w-flex align-center")
     w-tag.mr4 tag

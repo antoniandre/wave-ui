@@ -1,7 +1,5 @@
 <template lang="pug">
 div.ovh
-  title-link.mt4.code(h1) w-divider
-
   title-link(h2) Horizontal
   p This horizontal line bellow is a divider.
   w-divider.ma10

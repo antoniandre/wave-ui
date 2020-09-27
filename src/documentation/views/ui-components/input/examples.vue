@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-input
-
   title-link(h2) Default
   p.
     By default the #[span.code w-input] component has a label inside the input field, that moves up

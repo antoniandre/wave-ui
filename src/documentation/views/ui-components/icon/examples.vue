@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-icon
-
   title-link(h2) Different icon fonts supported
   p.
     Wave UI works with your favorite icon font or even your own custom one.#[br]

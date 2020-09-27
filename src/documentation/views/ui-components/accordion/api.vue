@@ -17,7 +17,7 @@ import WAccordion from '@/wave-ui/components/w-accordion'
 const propsDescriptions = {
   value: '',
   color: '',
-  bgColor: 'Provide a background color for the component. Accepts all the color names of the color palette, status colors, or custom colors <a href="/colors">colors</a>.<br>Providing a color hex will not work.',
+  bgColor: 'Provide a background color for the component. Accepts all the color names of the color palette, status colors, or custom colors (learn more about all the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex will not work.',
   items: '',
   itemClass: '',
   itemColor: '',

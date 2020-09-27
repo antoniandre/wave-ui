@@ -1,7 +1,5 @@
 <template lang="pug">
 div.tooltips-demo
-  title-link.mt4.code(h1) w-tooltip
-
   alert(tip).
     #[strong Important notes]#[br]
     By default when you use #[code &lt;w-tooltip&gt;], it creates a wrapper around the activator

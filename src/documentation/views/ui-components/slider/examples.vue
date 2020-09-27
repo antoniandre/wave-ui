@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1) w-slider
-
   title-link(h2) Default
   p By default the range will have the #[code primary] color.
   example(content-class="mt5 px6")

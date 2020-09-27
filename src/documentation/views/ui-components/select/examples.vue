@@ -1,7 +1,5 @@
 <template lang="pug">
 div
-  title-link.mt4.code(h1 slug="w-select") w-select
-
   alert(info).
     The #[span.code w-select] component can be placed in a hidden overflow container and the dropdown
     menu will still be fully visible when open.#[br]

@@ -1,8 +1,5 @@
 <template lang="pug">
 div.ovh
-  title-link.mt4(h1 slug="w-checkbox-and-w-checkboxes")
-    | #[span.code w-checkbox] &amp; #[span.code w-checkboxes]
-
   w-card(bg-color="blue-light5")
     p.mb3 What it looks like:
     w-checkboxes(:items="checkboxes1" inline)
