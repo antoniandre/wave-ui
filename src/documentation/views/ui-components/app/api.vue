@@ -2,6 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
+  alert.mb6(info) This API will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescriptions" title="Props")
 
@@ -16,7 +17,7 @@ import WApp from '@/wave-ui/components/w-app'
 const propsDescriptions = {
 }
 
-const slots = {}
+const slots = { default: { description: 'The content of the app.' } }
 
 const events = {}
 

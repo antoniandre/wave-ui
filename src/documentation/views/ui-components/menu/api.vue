@@ -2,6 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
+  alert.mb6(info) This API will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescriptions" title="Props")
 

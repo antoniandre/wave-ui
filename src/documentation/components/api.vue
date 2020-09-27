@@ -1,7 +1,7 @@
 <template lang="pug">
 .api
   title-link.title2.api__title(h3) {{ title }}
-  ul
+  ul(v-if="sortedItems.length")
     li.api__item(v-for="item in sortedItems" :key="item.label")
       title-link(h4 :slug="item.label") {{ item.label }}
       template(v-if="title === 'Props'")
@@ -12,6 +12,7 @@
           | Default:
           strong.default-value.code.deep-orange-light1.ml2 {{ item.default }}
       p(v-html="item.description")
+  div.grey(v-else) None
 </template>
 
 <script>
@@ -29,13 +30,19 @@ export default {
       return keys.map(key => {
         const item = { ...this.items[key] } // Keep original intact.
         if (this.title === 'Props') {
-          item.type = Array.isArray(item.type) ? item.type.map(f => f.name) : [item.type.name]
-          if (item.type[0] === 'Number') item.default = item.default === undefined ? '0' : item.default
-          else if (item.type[0] === 'String') item.default = `'${item.default || ''}'`
-          else if (item.type[0] === 'Boolean') item.default = item.default ? 'true' : 'false'
-          else if (item.type[0] === 'Array') item.default = item.default === undefined ? '[]' : item.default
-          else if (item.type[0] === 'Object') item.default = item.default === undefined ? '() => ({})' : item.default
-          else if (item.type[0] === 'Function') item.default = item.default === undefined ? '() => {}' : item.default
+          if (!item.type) {
+            item.type = ['Any']
+            item.default = item.default === undefined ? 'undefined' : item.default
+          }
+          else {
+            item.type = Array.isArray(item.type) ? item.type.map(f => f.name) : [item.type.name]
+            if (item.type[0] === 'Number') item.default = item.default === undefined ? '0' : item.default
+            else if (item.type[0] === 'String') item.default = `'${item.default || ''}'`
+            else if (item.type[0] === 'Boolean') item.default = item.default ? 'true' : 'false'
+            else if (item.type[0] === 'Array') item.default = item.default === undefined ? '[]' : item.default
+            else if (item.type[0] === 'Object') item.default = item.default === undefined ? '() => ({})' : item.default
+            else if (item.type[0] === 'Function') item.default = item.default === undefined ? '() => {}' : item.default
+          }
         }
 
         return {
