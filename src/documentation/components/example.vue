@@ -1,95 +1,95 @@
 <template lang="pug">
-  .example
-    .w-flex
-      .example__render.grow(:class="contentClass")
-        slot
-      .buttons
-        w-tooltip(left)
-          template(#activator="{ on }")
-            w-button(
-              v-on="on"
-              @click="showSource = !showSource"
-              lg
-              icon="mdi mdi-code-tags"
-              text
-              color="primary")
-          | View the source code
-        w-tooltip(left)
-          template(#activator="{ on }")
-            w-button(
-              v-on="on"
-              @click="createCodepen"
-              lg
-              icon="mdi mdi-codepen"
-              text
-              color="primary")
-          | Edit in Codepen
-    w-transition-expand(y)
-      .example__source(v-show="showSource")
-        ssh-pre(
-          v-if="$slots.html"
-          language="html-vue"
-          label="TEMPLATE"
-          copy-button
-          @copied="copied('TEMPLATE')"
-          :reactive="reactive")
-          template(#copy-button)
-            w-icon(color="primary") mdi mdi-content-copy
-          slot(name="html")
-        w-tooltip.d-block(v-if="$slots.pug" tooltip-class="pa3 w480" color="blue")
-          template(#activator="{ on }")
-            w-alert.text-light.ma0(v-on="on" sm info no-border tile)
-              | What is Pug?
-          | Wave UI Vue templates are coded in Pug.#[br]The examples will soon be rewritten in HTML.
-          | For now, if you are not familiar with Pug, you can edit in Codepen and view the compiled HTML.#[br]
-          | But now you are here, hold on a minute and look how concise it is! You could get to like it!
-        ssh-pre(
-          v-if="$slots.pug"
-          language="pug"
-          label="TEMPLATE (PUG)"
-          copy-button
-          @copied="copied('TEMPLATE (PUG)')"
-          :reactive="reactive")
-          template(#copy-button)
-            w-icon(color="primary") mdi mdi-content-copy
-          slot(name="pug")
-        ssh-pre(
-          v-if="$slots.js"
-          language="js"
-          label="JS"
-          copy-button
-          @copied="copied('JS')"
-          :reactive="reactive")
-          template(#copy-button)
-            w-icon(color="primary") mdi mdi-content-copy
-          slot(name="js")
-        ssh-pre(
-          v-if="$slots.css"
-          language="css"
-          label="CSS"
-          copy-button
-          @copied="copied('CSS')"
-          :reactive="reactive")
-          template(#copy-button)
-            w-icon(color="primary") mdi mdi-content-copy
-          slot(name="css")
-        ssh-pre(
-          v-if="$slots.scss"
-          language="scss"
-          label="SCSS"
-          copy-button
-          @copied="copied('SCSS')"
-          :reactive="reactive")
-          template(#copy-button)
-            w-icon(color="primary") mdi mdi-content-copy
-          slot(name="scss")
-        w-notification.mr5.mt-1(
-          :value="!!showCopied"
-          transition="slide-fade-left"
-          plain
-          absolute
-          sm
-          success) {{ showCopied }} code copied to clipboard
+.example
+  .w-flex
+    .example__render.grow(:class="contentClass")
+      slot
+    .buttons
+      w-tooltip(left)
+        template(#activator="{ on }")
+          w-button(
+            v-on="on"
+            @click="showSource = !showSource"
+            lg
+            icon="mdi mdi-code-tags"
+            text
+            color="primary")
+        | View the source code
+      w-tooltip(left)
+        template(#activator="{ on }")
+          w-button(
+            v-on="on"
+            @click="createCodepen"
+            lg
+            icon="mdi mdi-codepen"
+            text
+            color="primary")
+        | Edit in Codepen
+  w-transition-expand(y)
+    .example__source(v-show="showSource")
+      ssh-pre(
+        v-if="$slots.html"
+        language="html-vue"
+        label="TEMPLATE"
+        copy-button
+        @copied="copied('TEMPLATE')"
+        :reactive="reactive")
+        template(#copy-button)
+          w-icon(color="primary") mdi mdi-content-copy
+        slot(name="html")
+      w-tooltip.d-block(v-if="$slots.pug" tooltip-class="pa3 w480" color="blue")
+        template(#activator="{ on }")
+          w-alert.text-light.ma0(v-on="on" sm info no-border tile)
+            | What is Pug?
+        | Wave UI Vue templates are coded in Pug.#[br]The examples will soon be rewritten in HTML.
+        | For now, if you are not familiar with Pug, you can edit in Codepen and view the compiled HTML.#[br]
+        | But now you are here, hold on a minute and look how concise it is! You could get to like it!
+      ssh-pre(
+        v-if="$slots.pug"
+        language="pug"
+        label="TEMPLATE (PUG)"
+        copy-button
+        @copied="copied('TEMPLATE (PUG)')"
+        :reactive="reactive")
+        template(#copy-button)
+          w-icon(color="primary") mdi mdi-content-copy
+        slot(name="pug")
+      ssh-pre(
+        v-if="$slots.js"
+        language="js"
+        label="JS"
+        copy-button
+        @copied="copied('JS')"
+        :reactive="reactive")
+        template(#copy-button)
+          w-icon(color="primary") mdi mdi-content-copy
+        slot(name="js")
+      ssh-pre(
+        v-if="$slots.css"
+        language="css"
+        label="CSS"
+        copy-button
+        @copied="copied('CSS')"
+        :reactive="reactive")
+        template(#copy-button)
+          w-icon(color="primary") mdi mdi-content-copy
+        slot(name="css")
+      ssh-pre(
+        v-if="$slots.scss"
+        language="scss"
+        label="SCSS"
+        copy-button
+        @copied="copied('SCSS')"
+        :reactive="reactive")
+        template(#copy-button)
+          w-icon(color="primary") mdi mdi-content-copy
+        slot(name="scss")
+      w-notification.mr5.mt-1(
+        :value="!!showCopied"
+        transition="slide-fade-left"
+        plain
+        absolute
+        sm
+        success) {{ showCopied }} code copied to clipboard
 </template>
 
 <script>

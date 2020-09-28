@@ -1,6 +1,6 @@
 <template lang="pug">
-  .w-slideshow(:class="classes" :style="styles")
-    slot
+.w-slideshow(:class="classes" :style="styles")
+  slot
 </template>
 
 <script>

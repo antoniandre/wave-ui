@@ -1,10 +1,10 @@
 <template lang="pug">
-  w-alert.w-alert--docs(
-    icon-outside
-    v-bind="$props"
-    :class="classes"
-    :icon="tip ? 'mdi mdi-lightbulb-on' : ''")
-    slot
+w-alert.w-alert--docs(
+  icon-outside
+  v-bind="$props"
+  :class="classes"
+  :icon="tip ? 'mdi mdi-lightbulb-on' : ''")
+  slot
 </template>
 
 <script>

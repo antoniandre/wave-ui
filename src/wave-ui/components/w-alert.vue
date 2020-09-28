@@ -1,19 +1,19 @@
 <template lang="pug">
-  .w-alert(v-if="show" v-on="$listeners" :class="classes")
-    //- Add a wrapper around the content when needed.
-    template(v-if="type || icon || dismiss")
-      w-icon.mr2(v-if="type || icon") {{ type ? typeIcon : icon }}
-      .w-alert__content
-        slot
-      w-button.w-alert__dismiss(
-        v-if="dismiss"
-        @click="$emit('input', show = false)"
-        icon="wi-cross"
-        color="inherit"
-        sm
-        text)
-    //- No wrapper case.
-    slot(v-else)
+.w-alert(v-if="show" v-on="$listeners" :class="classes")
+  //- Add a wrapper around the content when needed.
+  template(v-if="type || icon || dismiss")
+    w-icon.mr2(v-if="type || icon") {{ type ? typeIcon : icon }}
+    .w-alert__content
+      slot
+    w-button.w-alert__dismiss(
+      v-if="dismiss"
+      @click="$emit('input', show = false)"
+      icon="wi-cross"
+      color="inherit"
+      sm
+      text)
+  //- No wrapper case.
+  slot(v-else)
 </template>
 
 <script>

@@ -1,20 +1,20 @@
 <template lang="pug">
-  span.w-tag(
-    v-on="$listeners"
-    @click="$emit('input', !value)"
-    @keypress.enter="$emit('input', !value)"
-    :class="classes"
-    :role="value !== -1 && 'button'"
-    :aria-pressed="value !== -1 && (value ? 'true' : 'false')"
-    :tabindex="value !== -1 && 0"
-    :style="styles")
-    slot
-    i(
-      v-if="closable && value"
-      @click.stop="$emit('input', false)"
-      role="icon"
-      aria-hidden="true"
-      class="w-icon w-tag__closable wi-cross")
+span.w-tag(
+  v-on="$listeners"
+  @click="$emit('input', !value)"
+  @keypress.enter="$emit('input', !value)"
+  :class="classes"
+  :role="value !== -1 && 'button'"
+  :aria-pressed="value !== -1 && (value ? 'true' : 'false')"
+  :tabindex="value !== -1 && 0"
+  :style="styles")
+  slot
+  i(
+    v-if="closable && value"
+    @click.stop="$emit('input', false)"
+    role="icon"
+    aria-hidden="true"
+    class="w-icon w-tag__closable wi-cross")
 </template>
 
 <script>

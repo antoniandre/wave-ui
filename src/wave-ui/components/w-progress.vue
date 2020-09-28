@@ -1,34 +1,34 @@
 <template lang="pug">
-  .w-progress(:class="classes" :style="styles")
-    //- Linear progress.
-    .w-progress__progress(v-if="!circle" :class="{ full: progressValue === 100 }" :style="`width: ${progressValue}%`")
+.w-progress(:class="classes" :style="styles")
+  //- Linear progress.
+  .w-progress__progress(v-if="!circle" :class="{ full: progressValue === 100 }" :style="`width: ${progressValue}%`")
 
-    //- Circular progress.
-    template(v-else)
-      svg(:viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`")
-        circle.bg(
-          v-if="bgColor || this.progressValue > -1"
-          :class="bgColor"
-          :cx="circleCenter"
-          :cy="circleCenter"
-          :r="circleRadius"
-          fill="transparent"
-          :stroke-dasharray="circleCircumference"
-          :stroke-width="stroke")
-      svg.w-progress__progress(
-        :viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`"
-        :style="`stroke-dashoffset: ${(1 - (progressValue / 100)) * circleCircumference}`")
-        circle(
-          :cx="circleCenter"
-          :cy="circleCenter"
-          :r="circleRadius"
-          fill="transparent"
-          :stroke-width="stroke"
-          :stroke-linecap="roundCap && 'round'"
-          :stroke-dasharray="circleCircumference")
+  //- Circular progress.
+  template(v-else)
+    svg(:viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`")
+      circle.bg(
+        v-if="bgColor || this.progressValue > -1"
+        :class="bgColor"
+        :cx="circleCenter"
+        :cy="circleCenter"
+        :r="circleRadius"
+        fill="transparent"
+        :stroke-dasharray="circleCircumference"
+        :stroke-width="stroke")
+    svg.w-progress__progress(
+      :viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`"
+      :style="`stroke-dashoffset: ${(1 - (progressValue / 100)) * circleCircumference}`")
+      circle(
+        :cx="circleCenter"
+        :cy="circleCenter"
+        :r="circleRadius"
+        fill="transparent"
+        :stroke-width="stroke"
+        :stroke-linecap="roundCap && 'round'"
+        :stroke-dasharray="circleCircumference")
 
-    .w-progress__label(v-if="label || $slots.default" :class="labelColor || false")
-      slot {{ Math.round(progressValue) }}{{ circle ? '' : '%' }}
+  .w-progress__label(v-if="label || $slots.default" :class="labelColor || false")
+    slot {{ Math.round(progressValue) }}{{ circle ? '' : '%' }}
 </template>
 
 <script>

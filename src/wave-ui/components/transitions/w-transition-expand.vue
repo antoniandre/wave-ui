@@ -1,19 +1,19 @@
 <template lang="pug">
-  transition(
-    name="expand"
-    mode="out-in"
-    v-bind="$props"
-    :css="false"
-    @before-appear="beforeAppear"
-    @appear="appear"
-    @after-appear="afterAppear"
-    @before-enter="beforeEnter"
-    @enter="enter"
-    @after-enter="afterEnter"
-    @before-leave="beforeLeave"
-    @leave="leave"
-    @after-leave="afterLeave")
-    slot
+transition(
+  name="expand"
+  mode="out-in"
+  v-bind="$props"
+  :css="false"
+  @before-appear="beforeAppear"
+  @appear="appear"
+  @after-appear="afterAppear"
+  @before-enter="beforeEnter"
+  @enter="enter"
+  @after-enter="afterEnter"
+  @before-leave="beforeLeave"
+  @leave="leave"
+  @after-leave="afterLeave")
+  slot
 </template>
 
 <script>

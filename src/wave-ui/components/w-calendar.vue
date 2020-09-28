@@ -1,6 +1,6 @@
 <template lang="pug">
-  .w-calendar(:class="classes" :style="styles")
-    slot
+.w-calendar(:class="classes" :style="styles")
+  slot
 </template>
 
 <script>

@@ -1,25 +1,25 @@
 <template lang="pug">
-  w-overlay.w-dialog(
-    v-if="showWrapper"
-    :value="showWrapper"
-    :persistent="persistent"
-    :persistent-no-animation="persistentNoAnimation"
-    @click="onOutsideClick"
-    :bg-color="overlayColor"
-    :opacity="overlayOpacity"
-    :class="classes")
-    transition(:name="transition" appear @after-leave="onClose")
-      w-card.w-dialog__content(
-        v-if="showContent" no-border
-        :title-class="titleClass"
-        :content-class="contentClass"
-        :title="title || undefined"
-        :style="contentStyles")
-        template(v-if="$slots.title" v-slot:title)
-          slot(name="title")
-        slot
-        template(v-if="$slots.actions" v-slot:actions)
-          slot(name="actions")
+w-overlay.w-dialog(
+  v-if="showWrapper"
+  :value="showWrapper"
+  :persistent="persistent"
+  :persistent-no-animation="persistentNoAnimation"
+  @click="onOutsideClick"
+  :bg-color="overlayColor"
+  :opacity="overlayOpacity"
+  :class="classes")
+  transition(:name="transition" appear @after-leave="onClose")
+    w-card.w-dialog__content(
+      v-if="showContent" no-border
+      :title-class="titleClass"
+      :content-class="contentClass"
+      :title="title || undefined"
+      :style="contentStyles")
+      template(v-if="$slots.title" v-slot:title)
+        slot(name="title")
+      slot
+      template(v-if="$slots.actions" v-slot:actions)
+        slot(name="actions")
 </template>
 
 <script>
