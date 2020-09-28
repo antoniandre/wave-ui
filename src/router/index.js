@@ -149,13 +149,14 @@ const router = createRouter({
   routes
 })
 
+Object.defineProperty(router, 'status', { get: () => status, set: value => status.loading = value })
+
 router.beforeEach((to, from, next) => {
-  // Update through the property observer getter for reactivity.
-  status.loading = true
-  router.status = status
+  // Update through the property observer for reactivity.
+  router.status = true
   next()
 })
 
-router.afterEach(() => (status.loading = false))
+router.afterEach(() => (router.status = false))
 
 export default router
