@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { reactive } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import WhyWaveUI from '@/documentation/views/why-wave-ui'
 import Home from '@/documentation/views/home'
@@ -6,7 +6,7 @@ import Home from '@/documentation/views/home'
 // The loading state of Vue Router is appended to $router, so a
 // spinner can be shown while loading. This status needs to be reactive, it is
 // set to true on beforeRoute and false on afterRoute.
-const status = Vue.observable({ loading: true })
+const status = reactive({ loading: true })
 
 const routes = [
   {

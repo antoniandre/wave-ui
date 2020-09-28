@@ -92,7 +92,7 @@ export default class WaveUI {
 
       WaveUI.instance = this
       // Make waveui reactive and expose the single instance in Vue.
-      WaveUI.vueInstance.prototype.$waveui = WaveUI.vueInstance.observable(this)
+      WaveUI.vueInstance.prototype.$waveui = WaveUI.vueInstance.reactive(this)
 
       delete WaveUI.vueInstance // Get rid of the Vue instance that we don't need anymore.
     }

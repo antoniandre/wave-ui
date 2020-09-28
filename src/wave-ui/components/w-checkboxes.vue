@@ -21,7 +21,7 @@ component(
 </template>
 
 <script>
-import Vue from 'vue'
+import { reactive } from 'vue'
 import FormElementMixin from '../mixins/form-elements'
 
 export default {
@@ -52,7 +52,7 @@ export default {
       return (this.items || []).map((item, i) => {
         const itemValue = item[this.itemValue] === undefined ? (item[this.itemLabel] || i) : item[this.itemValue]
 
-        return Vue.observable({
+        return reactive({
           ...item,
           label: item[this.itemLabel],
           index: i,
