@@ -30,8 +30,7 @@ div
       round
       shadow
       transition="bounce"
-      :[notification.position[0]]="true"
-      :[notification.position[1]]="true")
+      v-bind="{ [notification.position[0]]: true, [notification.position[1]]: true }")
       | The alert is fixed on {{ notification.position[0] }} {{ notification.position[1] }}.
     template(#pug).
       w-button.mr6(
@@ -162,8 +161,7 @@ div
       round
       shadow
       :transition="transition"
-      :[notification3.position[0]]="true"
-      :[notification3.position[1]]="true")
+      v-bind="{ [notification3.position[0]]: true, [notification3.position[1]]: true }")
       | The alert is fixed on {{ notification3.position[0] }} {{ notification3.position[1] }}.
     template(#pug).
       w-flex(wrap align-center)
