@@ -186,7 +186,7 @@ export default {
 
   computed: {
     listId () {
-      return this.addIds ? (typeof this.addIds === 'string' ? this.addIds : `w-list--${this._uid}`) : null
+      return this.addIds ? (typeof this.addIds === 'string' ? this.addIds : `w-list--${this._.uid}`) : null
     },
 
     listItems () {

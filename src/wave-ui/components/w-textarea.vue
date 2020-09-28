@@ -7,16 +7,16 @@ component(
   :class="classes")
   //- Left label.
   template(v-if="labelPosition === 'left'")
-    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
+    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_.uid}`")
       slot
-    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
+    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_.uid}`" v-html="label")
 
   //- Input wrapper.
   .w-textarea__textarea-wrap(:class="inputWrapClasses")
     w-icon.w-textarea__icon.w-textarea__icon--inner-left(
       v-if="innerIconLeft"
       tag="label"
-      :for="`w-textarea--${_uid}`"
+      :for="`w-textarea--${_.uid}`"
       @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
     textarea.w-textarea__textarea(
       ref="textarea"
@@ -25,7 +25,7 @@ component(
       @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
-      :id="`w-textarea--${_uid}`"
+      :id="`w-textarea--${_.uid}`"
       :name="inputName"
       :placeholder="placeholder || null"
       :rows="rows || null"
@@ -38,25 +38,25 @@ component(
     template(v-if="labelPosition === 'inside' && showLabelInside")
       label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
         v-if="$slots.default"
-        :for="`w-textarea--${_uid}`"
+        :for="`w-textarea--${_.uid}`"
         :class="isFocused && { [valid === false ? 'error' : this.color]: this.color || valid === false }")
         slot
       label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
         v-else-if="label"
-        :for="`w-textarea--${_uid}`"
+        :for="`w-textarea--${_.uid}`"
         v-html="label"
         :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
     w-icon.w-textarea__icon.w-textarea__icon--inner-right(
       v-if="innerIconRight"
       tag="label"
-      :for="`w-textarea--${_uid}`"
+      :for="`w-textarea--${_.uid}`"
       @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
 
   //- Right label.
   template(v-if="labelPosition === 'right'")
-    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
+    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_.uid}`")
       slot
-    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
+    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_.uid}`" v-html="label")
 </template>
 
 <script>

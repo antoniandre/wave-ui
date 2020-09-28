@@ -9,7 +9,7 @@ component(
   w-checkbox(
     v-for="(item, i) in checkboxItems"
     :key="i"
-    :name="`${name || `w-checkboxes--${_uid}`}[]`"
+    :name="`${name || `w-checkboxes--${_.uid}`}[]`"
     :label="item.label"
     :label-on-left="labelOnLeft"
     :value="item.isChecked"

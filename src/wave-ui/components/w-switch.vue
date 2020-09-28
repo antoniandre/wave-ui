@@ -7,7 +7,7 @@ component(
   :class="classes")
   input(
     ref="input"
-    :id="`w-switch--${_uid}`"
+    :id="`w-switch--${_.uid}`"
     type="checkbox"
     :name="inputName"
     :checked="isOn"
@@ -19,16 +19,16 @@ component(
     :aria-checked="isOn || 'false'"
     role="switch")
   template(v-if="hasLabel && labelOnLeft")
-    label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_uid}`")
+    label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_.uid}`")
       slot
-    label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_uid}`" v-html="label")
+    label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_.uid}`" v-html="label")
   .w-switch__input(
     @click="$refs.input.focus();$refs.input.click()"
     :class="[[this.color], hasLabel ? (thin ? 'mr3' : 'mr2') : '']")
   template(v-if="hasLabel && !labelOnLeft")
-    label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_uid}`")
+    label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_.uid}`")
       slot
-    label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_uid}`" v-html="label")
+    label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_.uid}`" v-html="label")
 </template>
 
 <script>

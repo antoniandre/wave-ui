@@ -47,7 +47,7 @@ export default {
     },
 
     unregister (formElement) {
-      this.formElements = this.formElements.filter(item => item._uid !== formElement._uid)
+      this.formElements = this.formElements.filter(item => item._.uid !== formElement._.uid)
     },
 
     /**
