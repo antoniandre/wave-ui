@@ -127,11 +127,11 @@ export default {
       if (this.externalJs) jsDeps.push(this.externalJs)
 
       const slots = {
-        html: this.$slots.html && this.$slots.html()[0].text || '',
-        pug: this.$slots.pug && this.$slots.pug()[0].text || '',
-        js: this.$slots.js && this.$slots.js()[0].text || '',
-        css: this.$slots.css && this.$slots.css()[0].text || '',
-        scss: this.$slots.scss && this.$slots.scss()[0].text || ''
+        html: this.$slots.html && this.$slots.html()[0].children || '',
+        pug: this.$slots.pug && this.$slots.pug()[0].children || '',
+        js: this.$slots.js && this.$slots.js()[0].children || '',
+        css: this.$slots.css && this.$slots.css()[0].children || '',
+        scss: this.$slots.scss && this.$slots.scss()[0].children || ''
       }
       let html = ''
 

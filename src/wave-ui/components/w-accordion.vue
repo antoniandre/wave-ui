@@ -17,7 +17,7 @@
         text
         @click.stop="!item.disabled && toggleItem(item)")
       //- Title.
-      slot(v-if="$scopedSlots[`item-title.${item.id || i + 1}`]" :name="`item-title.${item.id || i + 1}`" :item="item")
+      slot(v-if="$slots[`item-title.${item.id || i + 1}`]" :name="`item-title.${item.id || i + 1}`" :item="item")
       slot(v-else name="item-title" :item="item")
         div.grow(v-html="item.title")
       //- Expand icon on right.
@@ -29,7 +29,7 @@
     //- Content.
     w-transition-expand(y)
       .w-accordion__item-content(v-if="item.open" :class="contentClass")
-        slot(v-if="$scopedSlots[`item-content.${item.id || i + 1}`]" :name="`item-content.${item.id || i + 1}`" :item="item")
+        slot(v-if="$slots[`item-content.${item.id || i + 1}`]" :name="`item-content.${item.id || i + 1}`" :item="item")
         slot(v-else name="item-content" :item="item")
           div(v-html="item.content")
 </template>

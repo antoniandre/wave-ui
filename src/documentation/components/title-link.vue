@@ -37,7 +37,7 @@ export default {
     Slug () {
       if (this.slug) return this.slug
 
-      const source = this.label || ((this.$slots.default && this.$slots.default()) || []).map(item => item.text).join(' ')
+      const source = this.label || ((this.$slots.default && this.$slots.default()) || []).map(item => item.children).join(' ')
       return (
         source.toLowerCase()
           .replace(/ /g, '-')
