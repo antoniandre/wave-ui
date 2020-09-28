@@ -1,35 +1,37 @@
 <script>
-import { h } from 'vue'
+import { h, resolveComponent } from 'vue'
 
-const renderListItems = function (createEl) {
+const renderListItems = function () {
   return this.listItems.map((li, index) => {
     // Content nodes.
     const vnodes = []
 
-    if (this.icon) vnodes.push(createEl('w-icon', { class: 'w-list__item-bullet' }, [this.icon]))
+    if (this.icon) {
+      vnodes.push(h(resolveComponent('w-icon'), { class: 'w-list__item-bullet' }, { default: () => this.icon }))
+    }
 
-    vnodes.push(renderListItemLabel.call(this, createEl, li, index))
+    vnodes.push(renderListItemLabel.call(this, li, index))
 
     // If children, do a recursive call.
     if (li.children) {
-      vnodes.push(createEl(
-        'w-list',
+      vnodes.push(h(
+        resolveComponent('w-list'),
         {
-          props: { ...this.$props, items: li.children, depth: this.depth + 1 },
+          ...this.$props,
+          items: li.children,
+          depth: this.depth + 1,
           slots: {
-            item: this.$slots.item, // Accepts `template(#item)`.
+            item: props => this.$slots.item(...props), // Accepts `template(#item)`.
              // Accepts `template(#item.2)`.
-            [`item.${li.id || index + 1}`]: this.$slots[`item.${li.id || index + 1}`]
+            [`item.${li.id || index + 1}`]: props => this.$slots[`item.${li.id || index + 1}`](...props)
           },
-          on: {
-            'input': value => this.$emit('input', value),
-            'item-click': value => this.$emit('item-click', value)
-          }
+          onInput: value => this.$emit('input', value),
+          onItemClick: value => this.$emit('item-click', value)
         }
       ))
     }
 
-    return createEl(
+    return h(
       'li',
       {
         class: {
@@ -42,22 +44,17 @@ const renderListItems = function (createEl) {
 }
 
 // Responsible for item selection if selectable list.
-const renderListItemLabel = function (createEl, li, index) {
+const renderListItemLabel = function (li, index) {
   // Init the final vnode, can be a div, a router-link/a or a w-checkbox.
   const component = {
-    name: 'div',
+    is: 'div',
     class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
-    props: {},
-    attrs: { // HTML attributes.
-      tabindex: '0',
-      'aria-selected': li.selected ? 'true' : 'false',
-      id: this.listId ? `${this.listId}_item-${index + 1}` : null,
-      role: 'option'
-    },
-    domProps: {},
-    on: {}, // Events handlers are added bellow.
-    // nativeOn: {} // Don't even define it if div, or Vue will raise a warning.
+    tabindex: '0',
+    'aria-selected': li.selected ? 'true' : 'false',
+    id: this.listId ? `${this.listId}_item-${index + 1}` : null,
+    role: 'option'
   }
+  let vnodes = []
 
   // Event handlers - will be appended in `on` or `nativeOn` according to the vnode type.
   // ------------------------------------------------------
@@ -88,14 +85,16 @@ const renderListItemLabel = function (createEl, li, index) {
   // ------------------------------------------------------
   const isLink = this.nav && !li.disabled && li.route
   if (isLink) {
-    component.name = this.$router ? 'router-link' : 'a'
+    component.is = this.$router ? resolveComponent('router-link') : 'a'
     if (this.$router) {
-      component.props.to = li.route
+      component.to = li.route
       component.nativeOn = { click, keydown, mousedown }
     }
     else {
-      component.attrs.href = li.route
-      component.on = { click, keydown, mousedown }
+      component.href = li.route
+      component.onClick = click
+      component.onKeydown = keydown
+      component.onMousedown = mousedown
     }
   }
   // ------------------------------------------------------
@@ -103,15 +102,13 @@ const renderListItemLabel = function (createEl, li, index) {
   // Checklist.
   // ------------------------------------------------------
   else if (this.checklist) {
-    component.name = 'w-checkbox'
-    component.props = {
-      value: li.selected,
-      color: li[this.itemColor] || this.color,
-      round: this.roundCheckboxes,
-      disabled: li.disabled
-    }
+    component.is = resolveComponent('w-checkbox')
+    component.value = li.selected
+    component.color = li[this.itemColor] || this.color
+    component.round = this.roundCheckboxes
+    component.disabled = li.disabled
 
-    if (!hasSlot) component.props.label = li[this.itemLabel] || false
+    if (!hasSlot) component.label = li[this.itemLabel] || false
 
     component.nativeOn = {
       // The checkbox component is not fully covering the list-item-label, when clicking on list
@@ -119,15 +116,13 @@ const renderListItemLabel = function (createEl, li, index) {
       click: e => {
         if (e.target.classList.contains('w-checkbox')) {
           this.selectItem(li)
-          component.props.value = li.selected
+          component.value = li.selected
         }
       }
     }
-    component.on = {
-      input: value => this.selectItem(li, value),
-      // @todo: on checkbox focus, focus the list item.
-      // focus: e => console.log(this, e, 'on checkbox focus')
-    }
+    component.onInput = value => this.selectItem(li, value)
+    // @todo: on checkbox focus, focus the list item.
+    // component.onFocus: e => console.log(this, e, 'on checkbox focus')
   }
   // ------------------------------------------------------
 
@@ -135,19 +130,23 @@ const renderListItemLabel = function (createEl, li, index) {
   // ------------------------------------------------------
   else if (this.isSelectable) {
     // Links are naturally tabable, add tabindex on other elements.
-    if (!li.disabled) component.attrs.tabindex = 0
-    component.on = { click, keydown, mousedown }
+    if (!li.disabled) component.tabindex = 0
+    component.onClick = click
+    component.onKeydown = keydown
+    component.onMousedown = mousedown
   }
   // ------------------------------------------------------
 
-  const vnodes = []
   // Allow overriding the common slot using `template(#item.2)` where to is the index of the item.
   if (hasSingleItemSlot) {
     vnodes.push(this.$slots[`item.${li.id || index + 1}`]({ item: li, selected: li.selected, index }))
   }
   else if (hasSlot) vnodes.push(this.$slots.item({ item: li, selected: li.selected, index }))
-  else if (!this.checklist) component.domProps = { innerHTML: li[this.itemLabel] }
-  return createEl(component.name, component, vnodes)
+  else {
+    if (isLink) vnodes = {} // Prevents Vue warning about slot not being a function.
+    if (!this.checklist) component.innerHTML = li[this.itemLabel]
+  }
+  return h(component.is, component, vnodes)
 }
 
 export default {
@@ -333,9 +332,9 @@ export default {
       {
         ref: 'w-list',
         class: { 'w-list': true, ...this.classes },
-        attrs: { id: this.listId }
+        id: this.listId
       },
-      renderListItems.call(this, h)
+      renderListItems.call(this)
     )
   }
 }
