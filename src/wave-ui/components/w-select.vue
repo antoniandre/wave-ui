@@ -34,12 +34,12 @@ component(
           tag="label"
           :for="`w-select--${_uid}`"
           @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
-        .w-select__selection-slot(v-if="$scopedSlots.selection")
+        .w-select__selection-slot(v-if="$slots.selection")
           slot(name="selection" :items="inputValue")
         input.w-select__selection(
           ref="selection-input"
           type="text"
-          :value="$scopedSlots.selection ? '' : selectionString"
+          :value="$slots.selection ? '' : selectionString"
           @focus="!disabled && !readonly && onFocus($event)"
           @blur="onBlur"
           @keydown.escape="!disabled && !readonly && closeMenu()"

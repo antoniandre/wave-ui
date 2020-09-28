@@ -9,7 +9,7 @@
       :tabindex="!item.disabled && 0"
       @keypress.enter="!item.disabled && openTab(item)")
         slot(
-          v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
+          v-if="$slots[`item-title.${item.id || i + 1}`]"
           :name="`item-title.${item.id || i + 1}`"
           :item="item"
           :index="item.index")
@@ -20,7 +20,7 @@
     transition(:name="transitionName" :mode="transitionMode")
       .w-tabs__content(v-if="activeTab" :key="activeTab.index")
         slot(
-          v-if="$scopedSlots[`item-content.${activeTab.id || activeTab.index + 1}`]"
+          v-if="$slots[`item-content.${activeTab.id || activeTab.index + 1}`]"
           :name="`item-content.${activeTab.id || activeTab.index + 1}`"
           :item="activeTab"
           :index="activeTab.index")

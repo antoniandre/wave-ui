@@ -17,7 +17,7 @@ component(
     :round="round"
     @input="toggleCheck(item, $event)"
     :class="{ mt1: !inline && i }")
-    slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
+    slot(name="item" v-if="$slots.item" :item="item" v-html="item.label")
 </template>
 
 <script>

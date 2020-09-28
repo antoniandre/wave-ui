@@ -1,4 +1,6 @@
 <script>
+import { h } from 'vue'
+
 const renderListItems = function (createEl) {
   return this.listItems.map((li, index) => {
     // Content nodes.
@@ -14,7 +16,7 @@ const renderListItems = function (createEl) {
         'w-list',
         {
           props: { ...this.$props, items: li.children, depth: this.depth + 1 },
-          scopedSlots: {
+          slots: {
             item: this.$slots.item, // Accepts `template(#item)`.
              // Accepts `template(#item.2)`.
             [`item.${li.id || index + 1}`]: this.$slots[`item.${li.id || index + 1}`]
@@ -68,6 +70,7 @@ const renderListItemLabel = function (createEl, li, index) {
   // If selectable list, on enter key press select item.
   const keydown = this.isSelectable && (e => {
     if (!li.disabled && e.keyCode === 13) this.selectItem(li)
+    // eslint-disable-next-line vue/custom-event-name-casing
     else if (e.keyCode === 27) this.$emit('keydown:escape')
     else if (this.arrowsNavigation) {
       e.preventDefault()
@@ -323,16 +326,16 @@ export default {
     }
   },
 
-  render (createEl) {
+  render () {
     // Render list wrapper.
-    return createEl(
+    return h(
       'ul',
       {
         ref: 'w-list',
         class: { 'w-list': true, ...this.classes },
         attrs: { id: this.listId }
       },
-      renderListItems.call(this, createEl)
+      renderListItems.call(this, h)
     )
   }
 }
