@@ -14,6 +14,7 @@ transition(name="fade" mode="out-in" appear)
 <script>
 export default {
   name: 'w-overlay',
+
   props: {
     value: { type: Boolean },
     opacity: { type: [Number, String, Boolean] },
@@ -22,6 +23,8 @@ export default {
     persistent: { type: Boolean },
     persistentNoAnimation: { type: Boolean }
   },
+
+  emits: ['input', 'click'],
 
   data: () => ({
     persistentAnimate: false

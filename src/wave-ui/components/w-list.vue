@@ -26,6 +26,7 @@ const renderListItems = function () {
             [`item.${li.id || index + 1}`]: props => this.$slots[`item.${li.id || index + 1}`](...props)
           },
           onInput: value => this.$emit('input', value),
+          onChange: value => this.$emit('change', value),
           onItemClick: value => this.$emit('item-click', value)
         }
       ))
@@ -177,6 +178,8 @@ export default {
     arrowsNavigation: { type: Boolean }
   },
 
+  emits: ['input', 'item-click', 'keydown:escape'],
+
   data: () => ({
     // The selected items are given in the value prop.
     // But if no value prop is set for checklist for instance, it has to still
@@ -285,7 +288,9 @@ export default {
       })
 
       // `selectedItems` is always an array of items, but on set, it emits a single value if not `multiple`.
-      this.$emit('input', this.isMultipleSelect ? items : (items[0] !== undefined ? items[0] : null))
+      const selection = this.isMultipleSelect ? items : (items[0] !== undefined ? items[0] : null)
+      this.$emit('input', selection)
+      this.$emit('change', selection)
     },
 
     focusPrevItem (index) {

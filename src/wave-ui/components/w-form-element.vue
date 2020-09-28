@@ -13,6 +13,7 @@ div(:class="classes")
 <script>
 export default {
   name: 'w-form-element',
+
   inject: {
     formRegister: { default: null },
     formUnregister: { default: null },
@@ -20,6 +21,7 @@ export default {
     noKeyupValidation: { default: false },
     noBlurValidation: { default: false }
   },
+
   props: {
     valid: { required: true },
     disabled: { type: Boolean },
@@ -29,6 +31,8 @@ export default {
     isFocused: { default: false }, // Watched.
     column: { default: false } // Flex direction of the embedded component: column or row by default.
   },
+
+  emits: ['reset'],
 
   data: () => ({
       Validation: {

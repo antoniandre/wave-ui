@@ -25,6 +25,7 @@ const oppositeSides = { left: 'right', right: 'left', top: 'down', bottom: 'up' 
 
 export default {
   name: 'w-drawer',
+
   props: {
     value: { default: true },
     left: { type: Boolean },
@@ -43,6 +44,8 @@ export default {
     overlayColor: { type: [String, Boolean] },
     overlayOpacity: { type: [Number, String, Boolean] }
   },
+
+  emits: ['input', 'close'],
 
   data () {
     return {

@@ -74,6 +74,7 @@ import FormElementMixin from '../mixins/form-elements'
 export default {
   name: 'w-slider',
   mixins: [FormElementMixin],
+
   props: {
     value: { type: Number, default: 0 },
     color: { type: String, default: 'primary' },
@@ -90,6 +91,8 @@ export default {
     labelRight: { type: String }
     // Also name, disabled, readonly, required and validators in the mixin.
   },
+
+  emits: ['input'],
 
   data: () => ({
     track: {
