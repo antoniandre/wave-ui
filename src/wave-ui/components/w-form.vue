@@ -1,6 +1,6 @@
 <template lang="pug">
-  form.w-form(@submit="onSubmit" @reset="reset" novalidate :class="classes")
-    slot
+form.w-form(@submit="onSubmit" @reset="reset" novalidate :class="classes")
+  slot
 </template>
 
 <script>

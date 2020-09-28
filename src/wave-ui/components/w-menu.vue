@@ -1,32 +1,32 @@
 <template lang="pug">
-  .w-menu-wrapper(ref="wrapper")
-    slot(name="activator" :on="eventHandlers")
-    transition(:name="transitionName")
-      .w-menu(v-if="custom" ref="menu" v-show="showMenu" :class="classes" :style="styles")
-        slot
-      w-card.w-menu(
-        v-else
-        ref="menu"
-        v-show="showMenu"
-        :tile="tile"
-        :title-class="titleClass"
-        :content-class="contentClass"
-        :shadow="shadow"
-        :no-border="noBorder"
-        :class="classes"
-        :style="styles")
-        template(v-if="$slots.title" #title)
-          slot(name="title")
-        template(v-if="$slots.actions" #actions)
-          slot(name="actions")
-        slot
-    w-overlay(
-      v-if="overlay"
-      ref="overlay"
-      :value="showMenu"
-      :persistent="persistent"
-      :z-index="(zIndex || 200) - 1"
-      @input="showMenu = false")
+.w-menu-wrapper(ref="wrapper")
+  slot(name="activator" :on="eventHandlers")
+  transition(:name="transitionName")
+    .w-menu(v-if="custom" ref="menu" v-show="showMenu" :class="classes" :style="styles")
+      slot
+    w-card.w-menu(
+      v-else
+      ref="menu"
+      v-show="showMenu"
+      :tile="tile"
+      :title-class="titleClass"
+      :content-class="contentClass"
+      :shadow="shadow"
+      :no-border="noBorder"
+      :class="classes"
+      :style="styles")
+      template(v-if="$slots.title" #title)
+        slot(name="title")
+      template(v-if="$slots.actions" #actions)
+        slot(name="actions")
+      slot
+  w-overlay(
+    v-if="overlay"
+    ref="overlay"
+    :value="showMenu"
+    :persistent="persistent"
+    :z-index="(zIndex || 200) - 1"
+    @input="showMenu = false")
 </template>
 
 <script>
@@ -366,7 +366,7 @@ export default {
     })
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     // el.remove() doesn't work on IE11.
     if (this.menuEl && this.menuEl.parentNode) this.menuEl.parentNode.removeChild(this.menuEl)
     if (this.overlay && this.overlayEl.parentNode) this.overlayEl.parentNode.removeChild(this.overlayEl)

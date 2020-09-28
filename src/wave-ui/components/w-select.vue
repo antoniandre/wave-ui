@@ -1,99 +1,99 @@
 <template lang="pug">
-  component(
-    :is="formRegister ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validators, inputValue: selectionString, disabled, readonly }"
-    :valid.sync="valid"
-    @reset="onReset"
-    :class="classes")
-    template(v-if="labelPosition === 'left'")
-      label.w-select__label.w-select__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
-        slot
-      label.w-select__label.w-select__label--left.w-form-el-shakable(v-else-if="label" :for="`w-select--${_uid}`" v-html="label")
+component(
+  :is="formRegister ? 'w-form-element' : 'div'"
+  v-bind="formRegister && { validators, inputValue: selectionString, disabled, readonly }"
+  :valid.sync="valid"
+  @reset="onReset"
+  :class="classes")
+  template(v-if="labelPosition === 'left'")
+    label.w-select__label.w-select__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
+      slot
+    label.w-select__label.w-select__label--left.w-form-el-shakable(v-else-if="label" :for="`w-select--${_uid}`" v-html="label")
 
-    w-menu(
-      v-model="showMenu"
-      :menu-class="`w-select__menu ${menuClass || ''}`"
-      transition="slide-fade-down"
-      detach-to=".w-app"
-      align-left
-      custom
-      min-width="activator")
-      template(#activator="{ on }")
-        //- Input wrapper.
-        .w-select__selection-wrap(
-          ref="selection-wrap"
-          @click="!disabled && !readonly && openMenu()"
-          role="button"
-          aria-haspopup="listbox"
-          :aria-expanded="showMenu ? 'true' : 'false'"
-          :aria-owns="`w-select-menu--${_uid}`"
-          :aria-activedescendant="`w-select-menu--${_uid}_item-1`"
-          :class="inputWrapClasses")
-          w-icon.w-select__icon.w-select__icon--inner-left(
-            v-if="innerIconLeft"
-            tag="label"
+  w-menu(
+    v-model="showMenu"
+    :menu-class="`w-select__menu ${menuClass || ''}`"
+    transition="slide-fade-down"
+    detach-to=".w-app"
+    align-left
+    custom
+    min-width="activator")
+    template(#activator="{ on }")
+      //- Input wrapper.
+      .w-select__selection-wrap(
+        ref="selection-wrap"
+        @click="!disabled && !readonly && openMenu()"
+        role="button"
+        aria-haspopup="listbox"
+        :aria-expanded="showMenu ? 'true' : 'false'"
+        :aria-owns="`w-select-menu--${_uid}`"
+        :aria-activedescendant="`w-select-menu--${_uid}_item-1`"
+        :class="inputWrapClasses")
+        w-icon.w-select__icon.w-select__icon--inner-left(
+          v-if="innerIconLeft"
+          tag="label"
+          :for="`w-select--${_uid}`"
+          @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
+        .w-select__selection-slot(v-if="$scopedSlots.selection")
+          slot(name="selection" :items="inputValue")
+        input.w-select__selection(
+          ref="selection-input"
+          type="text"
+          :value="$scopedSlots.selection ? '' : selectionString"
+          @focus="!disabled && !readonly && onFocus($event)"
+          @blur="onBlur"
+          @keydown.escape="!disabled && !readonly && closeMenu()"
+          @keydown.space.prevent="!disabled && !readonly && openMenu()"
+          :id="`w-select--${_uid}`"
+          :placeholder="placeholder || null"
+          :disabled="disabled"
+          readonly
+          aria-readonly="true"
+          :required="required"
+          autocomplete="off")
+        //- For standard HTML form submission.
+        input(
+          v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
+          :key="i"
+          type="hidden"
+          :value="val.value || ''"
+          :name="inputName + (multiple ? '[]' : '')")
+        template(v-if="labelPosition === 'inside' && showLabelInside")
+          label.w-select__label.w-select__label--inside.w-form-el-shakable(
+            v-if="$slots.default"
             :for="`w-select--${_uid}`"
-            @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
-          .w-select__selection-slot(v-if="$scopedSlots.selection")
-            slot(name="selection" :items="inputValue")
-          input.w-select__selection(
-            ref="selection-input"
-            type="text"
-            :value="$scopedSlots.selection ? '' : selectionString"
-            @focus="!disabled && !readonly && onFocus($event)"
-            @blur="onBlur"
-            @keydown.escape="!disabled && !readonly && closeMenu()"
-            @keydown.space.prevent="!disabled && !readonly && openMenu()"
-            :id="`w-select--${_uid}`"
-            :placeholder="placeholder || null"
-            :disabled="disabled"
-            readonly
-            aria-readonly="true"
-            :required="required"
-            autocomplete="off")
-          //- For standard HTML form submission.
-          input(
-            v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
-            :key="i"
-            type="hidden"
-            :value="val.value || ''"
-            :name="inputName + (multiple ? '[]' : '')")
-          template(v-if="labelPosition === 'inside' && showLabelInside")
-            label.w-select__label.w-select__label--inside.w-form-el-shakable(
-              v-if="$slots.default"
-              :for="`w-select--${_uid}`"
-              :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
-              slot
-            label.w-select__label.w-select__label--inside.w-form-el-shakable(
-              v-else-if="label"
-              :for="`w-select--${_uid}`"
-              v-html="label"
-              :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
-          w-icon.w-select__icon.w-select__icon--inner-right(
-            v-if="innerIconRight"
-            tag="label"
+            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+            slot
+          label.w-select__label.w-select__label--inside.w-form-el-shakable(
+            v-else-if="label"
             :for="`w-select--${_uid}`"
-            @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
-      w-list(
-        ref="w-list"
-        @input="onChange"
-        @keydown:escape="closeMenu"
-        :value="inputValue"
-        :items="selectItems"
-        :multiple="multiple"
-        arrows-navigation
-        return-object
-        :color="color"
-        :add-ids="`w-select-menu--${_uid}`"
-        role="listbox"
-        tabindex="-1")
-        template(#item="{ item, selected, index }")
-          slot(name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabel] }}
+            v-html="label"
+            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+        w-icon.w-select__icon.w-select__icon--inner-right(
+          v-if="innerIconRight"
+          tag="label"
+          :for="`w-select--${_uid}`"
+          @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
+    w-list(
+      ref="w-list"
+      @input="onChange"
+      @keydown:escape="closeMenu"
+      :value="inputValue"
+      :items="selectItems"
+      :multiple="multiple"
+      arrows-navigation
+      return-object
+      :color="color"
+      :add-ids="`w-select-menu--${_uid}`"
+      role="listbox"
+      tabindex="-1")
+      template(#item="{ item, selected, index }")
+        slot(name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabel] }}
 
-    template(v-if="labelPosition === 'right'")
-      label.w-select__label.w-select__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
-        slot
-      label.w-select__label.w-select__label--right.w-form-el-shakable(v-else-if="label" :for="`w-select--${_uid}`" v-html="label")
+  template(v-if="labelPosition === 'right'")
+    label.w-select__label.w-select__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_uid}`")
+      slot
+    label.w-select__label.w-select__label--right.w-form-el-shakable(v-else-if="label" :for="`w-select--${_uid}`" v-html="label")
 </template>
 
 <script>

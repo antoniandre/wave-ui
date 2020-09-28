@@ -1,62 +1,62 @@
 <template lang="pug">
-  component(
-    :is="formRegister ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
-    :valid.sync="valid"
-    @reset="$emit('input', inputValue = '')"
-    :class="classes")
-    //- Left label.
-    template(v-if="labelPosition === 'left'")
-      label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
-        slot
-      label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
+component(
+  :is="formRegister ? 'w-form-element' : 'div'"
+  v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
+  :valid.sync="valid"
+  @reset="$emit('input', inputValue = '')"
+  :class="classes")
+  //- Left label.
+  template(v-if="labelPosition === 'left'")
+    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
+      slot
+    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
 
-    //- Input wrapper.
-    .w-textarea__textarea-wrap(:class="inputWrapClasses")
-      w-icon.w-textarea__icon.w-textarea__icon--inner-left(
-        v-if="innerIconLeft"
-        tag="label"
+  //- Input wrapper.
+  .w-textarea__textarea-wrap(:class="inputWrapClasses")
+    w-icon.w-textarea__icon.w-textarea__icon--inner-left(
+      v-if="innerIconLeft"
+      tag="label"
+      :for="`w-textarea--${_uid}`"
+      @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
+    textarea.w-textarea__textarea(
+      ref="textarea"
+      v-model="inputValue"
+      v-on="listeners"
+      @input="onInput"
+      @focus="onFocus"
+      @blur="onBlur"
+      :id="`w-textarea--${_uid}`"
+      :name="inputName"
+      :placeholder="placeholder || null"
+      :rows="rows || null"
+      :cols="cols || null"
+      :readonly="readonly"
+      :aria-readonly="readonly ? 'true' : 'false'"
+      :disabled="disabled"
+      :required="required"
+      :style="textareaStyles")
+    template(v-if="labelPosition === 'inside' && showLabelInside")
+      label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
+        v-if="$slots.default"
         :for="`w-textarea--${_uid}`"
-        @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
-      textarea.w-textarea__textarea(
-        ref="textarea"
-        v-model="inputValue"
-        v-on="listeners"
-        @input="onInput"
-        @focus="onFocus"
-        @blur="onBlur"
-        :id="`w-textarea--${_uid}`"
-        :name="inputName"
-        :placeholder="placeholder || null"
-        :rows="rows || null"
-        :cols="cols || null"
-        :readonly="readonly"
-        :aria-readonly="readonly ? 'true' : 'false'"
-        :disabled="disabled"
-        :required="required"
-        :style="textareaStyles")
-      template(v-if="labelPosition === 'inside' && showLabelInside")
-        label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
-          v-if="$slots.default"
-          :for="`w-textarea--${_uid}`"
-          :class="isFocused && { [valid === false ? 'error' : this.color]: this.color || valid === false }")
-          slot
-        label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
-          v-else-if="label"
-          :for="`w-textarea--${_uid}`"
-          v-html="label"
-          :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
-      w-icon.w-textarea__icon.w-textarea__icon--inner-right(
-        v-if="innerIconRight"
-        tag="label"
-        :for="`w-textarea--${_uid}`"
-        @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
-
-    //- Right label.
-    template(v-if="labelPosition === 'right'")
-      label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
+        :class="isFocused && { [valid === false ? 'error' : this.color]: this.color || valid === false }")
         slot
-      label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
+      label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
+        v-else-if="label"
+        :for="`w-textarea--${_uid}`"
+        v-html="label"
+        :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+    w-icon.w-textarea__icon.w-textarea__icon--inner-right(
+      v-if="innerIconRight"
+      tag="label"
+      :for="`w-textarea--${_uid}`"
+      @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
+
+  //- Right label.
+  template(v-if="labelPosition === 'right'")
+    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
+      slot
+    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
 </template>
 
 <script>

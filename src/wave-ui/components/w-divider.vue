@@ -1,5 +1,5 @@
 <template lang="pug">
-  .w-divider(:class="classes")
+.w-divider(:class="classes")
 </template>
 
 <script>

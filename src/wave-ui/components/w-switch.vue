@@ -1,34 +1,34 @@
 <template lang="pug">
-  component(
-    :is="formRegister ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validators, inputValue: isOn, disabled, readonly }"
-    :valid.sync="valid"
-    @reset="$emit('input', isOn = '')"
-    :class="classes")
-    input(
-      ref="input"
-      :id="`w-switch--${_uid}`"
-      type="checkbox"
-      :name="inputName"
-      :checked="isOn"
-      :disabled="disabled || readonly"
-      :readonly="readonly"
-      :aria-readonly="readonly ? 'true' : 'false'"
-      :required="required"
-      @change="onChange"
-      :aria-checked="isOn || 'false'"
-      role="switch")
-    template(v-if="hasLabel && labelOnLeft")
-      label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_uid}`")
-        slot
-      label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_uid}`" v-html="label")
-    .w-switch__input(
-      @click="$refs.input.focus();$refs.input.click()"
-      :class="[[this.color], hasLabel ? (thin ? 'mr3' : 'mr2') : '']")
-    template(v-if="hasLabel && !labelOnLeft")
-      label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_uid}`")
-        slot
-      label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_uid}`" v-html="label")
+component(
+  :is="formRegister ? 'w-form-element' : 'div'"
+  v-bind="formRegister && { validators, inputValue: isOn, disabled, readonly }"
+  :valid.sync="valid"
+  @reset="$emit('input', isOn = '')"
+  :class="classes")
+  input(
+    ref="input"
+    :id="`w-switch--${_uid}`"
+    type="checkbox"
+    :name="inputName"
+    :checked="isOn"
+    :disabled="disabled || readonly"
+    :readonly="readonly"
+    :aria-readonly="readonly ? 'true' : 'false'"
+    :required="required"
+    @change="onChange"
+    :aria-checked="isOn || 'false'"
+    role="switch")
+  template(v-if="hasLabel && labelOnLeft")
+    label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_uid}`")
+      slot
+    label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_uid}`" v-html="label")
+  .w-switch__input(
+    @click="$refs.input.focus();$refs.input.click()"
+    :class="[[this.color], hasLabel ? (thin ? 'mr3' : 'mr2') : '']")
+  template(v-if="hasLabel && !labelOnLeft")
+    label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_uid}`")
+      slot
+    label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_uid}`" v-html="label")
 </template>
 
 <script>
