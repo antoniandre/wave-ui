@@ -44,24 +44,9 @@ w-app.fill-height.w-flex.column
 </template>
 
 <script>
-import Vue from 'vue'
-import SshPre from 'simple-syntax-highlighter'
-import 'simple-syntax-highlighter/dist/sshpre.css'
-import TitleLink from '@/documentation/components/title-link'
-import UiComponentTitle from '@/documentation/components/ui-component-title'
-import Example from '@/documentation/components/example'
-import Api from '@/documentation/components/api'
-import Alert from '@/documentation/components/alert'
 import Toolbar from '@/documentation/components/toolbar'
 import NavMenu from '@/documentation/components/nav-menu'
 import '@/documentation/scss/index.scss'
-
-Vue.component('ssh-pre', SshPre)
-Vue.component('title-link', TitleLink)
-Vue.component('ui-component-title', UiComponentTitle)
-Vue.component('example', Example)
-Vue.component('alert', Alert)
-Vue.component('api', Api)
 
 export default {
   components: { Toolbar, NavMenu },
