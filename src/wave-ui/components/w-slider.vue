@@ -7,11 +7,11 @@ component(
   :class="wrapperClasses")
   label.w-slider__label.w-slider__label--left.w-form-el-shakable(
     v-if="$slots['label-left']"
-    :for="`button--${_uid}`")
+    :for="`button--${_.uid}`")
     slot(name="label-left")
   label.w-slider__label.w-slider__label--left.w-form-el-shakable(
     v-else-if="labelLeft"
-    :for="`button--${_uid}`"
+    :for="`button--${_.uid}`"
     v-html="labelLeft")
   .w-slider__track-wrapper
     .w-slider__track(
@@ -30,7 +30,7 @@ component(
       .w-slider__thumb(:style="thumbStyles")
         button.w-slider__thumb-button(
           ref="thumb"
-          :id="`button--${_uid}`" :class="[color]"
+          :id="`button--${_.uid}`" :class="[color]"
           :name="inputName"
           :value="rangeValueScaled"
           :disabled="disabled || null"
@@ -41,7 +41,7 @@ component(
           @click.prevent)
         label.w-slider__thumb-label(
           v-if="thumbLabel"
-          :for="`button--${_uid}`"
+          :for="`button--${_.uid}`"
           :class="thumbClasses")
           div(v-if="thumbLabel === 'droplet'")
             slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
@@ -60,11 +60,11 @@ component(
         style="left: 100%") {{ this.maxVal }}
   label.w-slider__label.w-slider__label--right.w-form-el-shakable(
     v-if="$slots['label-right']"
-    :for="`button--${_uid}`")
+    :for="`button--${_.uid}`")
     slot(name="label-right")
   label.w-slider__label.w-slider__label--right.w-form-el-shakable(
     v-else-if="labelRight"
-    :for="`button--${_uid}`"
+    :for="`button--${_.uid}`"
     v-html="labelRight")
 </template>
 

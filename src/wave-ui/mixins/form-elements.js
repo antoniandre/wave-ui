@@ -15,7 +15,7 @@ export default {
 
   computed: {
     inputName () {
-      return this.name || `${this.$options.name}--${this._uid}`
+      return this.name || `${this.$options.name}--${this._.uid}`
     }
   }
 }
