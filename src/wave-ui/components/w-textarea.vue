@@ -106,7 +106,7 @@ export default {
     listeners () {
       // Remove the events that are fired separately, so they don't fire twice.
       // eslint-disable-next-line no-unused-vars
-      const { input, focus, blur, ...listeners } = this.$listeners
+      const { input, focus, blur, ...listeners } = this.$attrs
       return listeners
     },
     hasValue () {
