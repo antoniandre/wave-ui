@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import { reactive } from 'vue'
 
 export default {
   name: 'w-accordion',
@@ -58,7 +58,7 @@ export default {
   computed: {
     accordionItems () {
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
-      return items.map((item, index) => new Vue.observable({
+      return items.map((item, index) => reactive({
         ...item,
         index,
         open: this.value && this.value[index],

@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import { reactive } from 'vue'
 
 export default {
   name: 'w-tabs',
@@ -83,7 +83,7 @@ export default {
         if (items[this.activeTabIndex]) items[this.activeTabIndex] = { active: true }
       }
 
-      return items.map((item, index) => new Vue.observable({
+      return items.map((item, index) => reactive({
         ...item,
         index,
         active: item.active || (this.value && this.value[index]),
