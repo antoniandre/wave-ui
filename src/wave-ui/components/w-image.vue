@@ -1,5 +1,5 @@
 <template lang="pug">
-  .w-image
+.w-image
 </template>
 
 <script>

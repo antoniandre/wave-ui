@@ -1,5 +1,5 @@
 <template lang="pug">
-  .w-breadcrumbs
+.w-breadcrumbs
 </template>
 
 <script>

@@ -1,16 +1,16 @@
 <template lang="pug">
-  .w-badge
-    slot
-    transition(:name="`${transition}`")
-      .w-badge__badge(
-        v-if="value"
-        :class="classes"
-        :style="styles"
-        aria-atomic="true"
-        aria-label="Badge"
-        aria-live="polite"
-        role="status")
-        slot(v-if="!dot" name="badge") {{ value === true ? '' : (value || '') }}
+.w-badge
+  slot
+  transition(:name="`${transition}`")
+    .w-badge__badge(
+      v-if="value"
+      :class="classes"
+      :style="styles"
+      aria-atomic="true"
+      aria-label="Badge"
+      aria-live="polite"
+      role="status")
+      slot(v-if="!dot" name="badge") {{ value === true ? '' : (value || '') }}
 </template>
 
 <script>

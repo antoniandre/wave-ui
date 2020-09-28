@@ -1,31 +1,31 @@
 <template lang="pug">
-  .w-tabs(:class="tabsClasses")
-    .w-tabs__bar(ref="tabs-bar" :class="tabsBarClasses")
-      .w-tabs__bar-item(
-        v-for="(item, i) in tabsItems"
-        :key="i"
-        :class="barItemClasses(item)"
-        @click="!item.disabled && openTab(item)"
-        :tabindex="!item.disabled && 0"
-        @keypress.enter="!item.disabled && openTab(item)")
-          slot(
-            v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
-            :name="`item-title.${item.id || i + 1}`"
-            :item="item"
-            :index="item.index")
-          slot(v-else name="item-title" :item="item" :index="item.index")
-            div(v-html="item.title")
-      .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
-    .w-tabs__content-wrap(v-if="tabsItems.length" :class="contentClass")
-      transition(:name="transitionName" :mode="transitionMode")
-        .w-tabs__content(v-if="activeTab" :key="activeTab.index")
-          slot(
-            v-if="$scopedSlots[`item-content.${activeTab.id || activeTab.index + 1}`]"
-            :name="`item-content.${activeTab.id || activeTab.index + 1}`"
-            :item="activeTab"
-            :index="activeTab.index")
-          slot(v-else name="item-content" :item="activeTab" :index="activeTab.index")
-            div(v-html="activeTab.content")
+.w-tabs(:class="tabsClasses")
+  .w-tabs__bar(ref="tabs-bar" :class="tabsBarClasses")
+    .w-tabs__bar-item(
+      v-for="(item, i) in tabsItems"
+      :key="i"
+      :class="barItemClasses(item)"
+      @click="!item.disabled && openTab(item)"
+      :tabindex="!item.disabled && 0"
+      @keypress.enter="!item.disabled && openTab(item)")
+        slot(
+          v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
+          :name="`item-title.${item.id || i + 1}`"
+          :item="item"
+          :index="item.index")
+        slot(v-else name="item-title" :item="item" :index="item.index")
+          div(v-html="item.title")
+    .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
+  .w-tabs__content-wrap(v-if="tabsItems.length" :class="contentClass")
+    transition(:name="transitionName" :mode="transitionMode")
+      .w-tabs__content(v-if="activeTab" :key="activeTab.index")
+        slot(
+          v-if="$scopedSlots[`item-content.${activeTab.id || activeTab.index + 1}`]"
+          :name="`item-content.${activeTab.id || activeTab.index + 1}`"
+          :item="activeTab"
+          :index="activeTab.index")
+        slot(v-else name="item-content" :item="activeTab" :index="activeTab.index")
+          div(v-html="activeTab.content")
 </template>
 
 <script>
@@ -182,7 +182,7 @@ export default {
     if (!this.noSlider) window.addEventListener('resize', this.onResize)
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('resize', this.onResize)
   },
 

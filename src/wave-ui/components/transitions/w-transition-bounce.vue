@@ -1,6 +1,6 @@
 <template lang="pug">
-  transition(name="bounce" v-bind="$props")
-    slot
+transition(name="bounce" v-bind="$props")
+  slot
 </template>
 
 <script>

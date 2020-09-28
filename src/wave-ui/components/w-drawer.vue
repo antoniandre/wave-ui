@@ -1,19 +1,19 @@
 <template lang="pug">
-  .w-drawer(v-if="showWrapper" :class="classes")
-    w-overlay(
-      v-if="!noOverlay"
-      v-model="showDrawer"
-      @click="onOutsideClick"
-      :persistent="persistent"
-      persistent-no-animation
-      :bg-color="overlayColor"
-      :opacity="overlayOpacity")
-    transition(
-      :name="transitionName"
-      appear
-      @after-leave="close")
-      .w-drawer__content(v-if="showDrawer" :class="contentClasses" :style="styles")
-        slot
+.w-drawer(v-if="showWrapper" :class="classes")
+  w-overlay(
+    v-if="!noOverlay"
+    v-model="showDrawer"
+    @click="onOutsideClick"
+    :persistent="persistent"
+    persistent-no-animation
+    :bg-color="overlayColor"
+    :opacity="overlayOpacity")
+  transition(
+    :name="transitionName"
+    appear
+    @after-leave="close")
+    .w-drawer__content(v-if="showDrawer" :class="contentClasses" :style="styles")
+      slot
 </template>
 
 <script>

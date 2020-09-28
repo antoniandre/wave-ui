@@ -1,12 +1,12 @@
 <template lang="pug">
-  component.title-link(:is="tag" :class="classes")
-    a(v-if="label" :href="`#${Slug}`")
-      span.hash #
-      span(v-html="label")
-    a(v-else :href="`#${Slug}`")
-      span.hash #
-      slot
-    a(:id="Slug" :name="Slug")
+component.title-link(:is="tag" :class="classes")
+  a(v-if="label" :href="`#${Slug}`")
+    span.hash #
+    span(v-html="label")
+  a(v-else :href="`#${Slug}`")
+    span.hash #
+    slot
+  a(:id="Slug" :name="Slug")
 </template>
 
 <script>

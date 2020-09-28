@@ -1,66 +1,66 @@
 <template lang="pug">
-  component(
-    :is="formRegister ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
-    :valid.sync="valid"
-    @reset="$emit('input', inputValue = '')"
-    :class="classes")
-    input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
-    template(v-else)
-      //- Left label.
-      template(v-if="labelPosition === 'left'")
-        label.w-input__label.w-input__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-input--${_uid}`")
-          slot
-        label.w-input__label.w-input__label--left.w-form-el-shakable(v-else-if="label" :for="`w-input--${_uid}`" v-html="label")
+component(
+  :is="formRegister ? 'w-form-element' : 'div'"
+  v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
+  :valid.sync="valid"
+  @reset="$emit('input', inputValue = '')"
+  :class="classes")
+  input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
+  template(v-else)
+    //- Left label.
+    template(v-if="labelPosition === 'left'")
+      label.w-input__label.w-input__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-input--${_uid}`")
+        slot
+      label.w-input__label.w-input__label--left.w-form-el-shakable(v-else-if="label" :for="`w-input--${_uid}`" v-html="label")
 
-      //- Input wrapper.
-      .w-input__input-wrap(:class="inputWrapClasses")
-        w-icon.w-input__icon.w-input__icon--inner-left(
-          v-if="innerIconLeft"
-          tag="label"
+    //- Input wrapper.
+    .w-input__input-wrap(:class="inputWrapClasses")
+      w-icon.w-input__icon.w-input__icon--inner-left(
+        v-if="innerIconLeft"
+        tag="label"
+        :for="`w-input--${_uid}`"
+        @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
+      input.w-input__input(
+        v-model="inputValue"
+        v-on="listeners"
+        @input="onInput"
+        @focus="onFocus"
+        @blur="onBlur"
+        :id="`w-input--${_uid}`"
+        :type="type"
+        :name="inputName"
+        :placeholder="placeholder || null"
+        :step="step || null"
+        :min="min || null"
+        :max="max || null"
+        :minlength="minlength || null"
+        :maxlength="maxlength || null"
+        :readonly="readonly"
+        :aria-readonly="readonly ? 'true' : 'false'"
+        :disabled="disabled"
+        :required="required")
+      template(v-if="labelPosition === 'inside' && showLabelInside")
+        label.w-input__label.w-input__label--inside.w-form-el-shakable(
+          v-if="$slots.default"
           :for="`w-input--${_uid}`"
-          @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
-        input.w-input__input(
-          v-model="inputValue"
-          v-on="listeners"
-          @input="onInput"
-          @focus="onFocus"
-          @blur="onBlur"
-          :id="`w-input--${_uid}`"
-          :type="type"
-          :name="inputName"
-          :placeholder="placeholder || null"
-          :step="step || null"
-          :min="min || null"
-          :max="max || null"
-          :minlength="minlength || null"
-          :maxlength="maxlength || null"
-          :readonly="readonly"
-          :aria-readonly="readonly ? 'true' : 'false'"
-          :disabled="disabled"
-          :required="required")
-        template(v-if="labelPosition === 'inside' && showLabelInside")
-          label.w-input__label.w-input__label--inside.w-form-el-shakable(
-            v-if="$slots.default"
-            :for="`w-input--${_uid}`"
-            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
-            slot
-          label.w-input__label.w-input__label--inside.w-form-el-shakable(
-            v-else-if="label"
-            :for="`w-input--${_uid}`"
-            v-html="label"
-            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
-        w-icon.w-input__icon.w-input__icon--inner-right(
-          v-if="innerIconRight"
-          tag="label"
-          :for="`w-input--${_uid}`"
-          @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
-
-      //- Right label.
-      template(v-if="labelPosition === 'right'")
-        label.w-input__label.w-input__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-input--${_uid}`")
+          :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
           slot
-        label.w-input__label.w-input__label--right.w-form-el-shakable(v-else-if="label" :for="`w-input--${_uid}`" v-html="label")
+        label.w-input__label.w-input__label--inside.w-form-el-shakable(
+          v-else-if="label"
+          :for="`w-input--${_uid}`"
+          v-html="label"
+          :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+      w-icon.w-input__icon.w-input__icon--inner-right(
+        v-if="innerIconRight"
+        tag="label"
+        :for="`w-input--${_uid}`"
+        @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
+
+    //- Right label.
+    template(v-if="labelPosition === 'right'")
+      label.w-input__label.w-input__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-input--${_uid}`")
+        slot
+      label.w-input__label.w-input__label--right.w-form-el-shakable(v-else-if="label" :for="`w-input--${_uid}`" v-html="label")
 </template>
 
 <script>

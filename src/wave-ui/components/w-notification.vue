@@ -1,8 +1,8 @@
 <template lang="pug">
-  transition(:name="transitionName" appear)
-    .w-notification(v-if="show" :class="classes" :style="styles")
-      w-alert(v-bind="alertProps" @input="$emit('input', false)")
-        slot
+transition(:name="transitionName" appear)
+  .w-notification(v-if="show" :class="classes" :style="styles")
+    w-alert(v-bind="alertProps" @input="$emit('input', false)")
+      slot
 </template>
 
 <script>

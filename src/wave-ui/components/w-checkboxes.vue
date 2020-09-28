@@ -1,23 +1,23 @@
 <template lang="pug">
-  component(
-    :is="formRegister ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validators, inputValue: checkboxItems.some(item => item.isChecked), disabled }"
-    :valid.sync="valid"
-    @reset="reset"
-    :column="!inline"
-    :class="classes")
-    w-checkbox(
-      v-for="(item, i) in checkboxItems"
-      :key="i"
-      :name="`${name || `w-checkboxes--${_uid}`}[]`"
-      :label="item.label"
-      :label-on-left="labelOnLeft"
-      :value="item.isChecked"
-      :color="item.color"
-      :round="round"
-      @input="toggleCheck(item, $event)"
-      :class="{ mt1: !inline && i }")
-      slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
+component(
+  :is="formRegister ? 'w-form-element' : 'div'"
+  v-bind="formRegister && { validators, inputValue: checkboxItems.some(item => item.isChecked), disabled }"
+  :valid.sync="valid"
+  @reset="reset"
+  :column="!inline"
+  :class="classes")
+  w-checkbox(
+    v-for="(item, i) in checkboxItems"
+    :key="i"
+    :name="`${name || `w-checkboxes--${_uid}`}[]`"
+    :label="item.label"
+    :label-on-left="labelOnLeft"
+    :value="item.isChecked"
+    :color="item.color"
+    :round="round"
+    @input="toggleCheck(item, $event)"
+    :class="{ mt1: !inline && i }")
+    slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
 
 <script>

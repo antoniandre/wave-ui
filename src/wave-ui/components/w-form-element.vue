@@ -1,13 +1,13 @@
 <template lang="pug">
-  div(:class="classes")
-    .w-flex.grow(:class="column ? 'column' : 'align-center'")
-      slot
+div(:class="classes")
+  .w-flex.grow(:class="column ? 'column' : 'align-center'")
+    slot
 
-    //- Error message.
-    w-transition-expand(v-if="Validation.message" y)
-      .w-form-el__error.error(v-if="$slots['error-message']" class="w-form-el__error w-form-el__error")
-        slot(name="error-message" :message="Validation.message")
-      .w-form-el__error.error(v-else v-html="Validation.message" class="w-form-el__error w-form-el__error")
+  //- Error message.
+  w-transition-expand(v-if="Validation.message" y)
+    .w-form-el__error.error(v-if="$slots['error-message']" class="w-form-el__error w-form-el__error")
+      slot(name="error-message" :message="Validation.message")
+    .w-form-el__error.error(v-else v-html="Validation.message" class="w-form-el__error w-form-el__error")
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .w-parallax
+.w-parallax
 </template>
 
 <script>

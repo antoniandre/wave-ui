@@ -1,9 +1,9 @@
 <template lang="pug">
-  component.w-flex-wrap(v-if="gap" :is="tag")
-    .w-flex(:class="classes")
-      slot
-  component.w-flex(v-else :class="classes" :is="tag")
+component.w-flex-wrap(v-if="gap" :is="tag")
+  .w-flex(:class="classes")
     slot
+component.w-flex(v-else :class="classes" :is="tag")
+  slot
 </template>
 
 <script>

@@ -1,16 +1,16 @@
 <template lang="pug">
-  .w-card(:class="classes" :style="styles")
-    .w-card__title(
-      v-if="$slots.title"
-      :class="{ 'w-card__title--has-toolbar': titleHasToolbar, [titleClass]: titleClass || false }")
-      slot(name="title")
-    .w-card__title(v-else-if="title" :class="titleClass || false" v-html="title")
-    .w-card__content(:class="contentClass || false")
-      slot
-    .w-card__actions(
-      v-if="$slots.actions"
-      :class="{ 'w-card__actions--has-toolbar': actionsHasToolbar }")
-      slot(name="actions")
+.w-card(:class="classes" :style="styles")
+  .w-card__title(
+    v-if="$slots.title"
+    :class="{ 'w-card__title--has-toolbar': titleHasToolbar, [titleClass]: titleClass || false }")
+    slot(name="title")
+  .w-card__title(v-else-if="title" :class="titleClass || false" v-html="title")
+  .w-card__content(:class="contentClass || false")
+    slot
+  .w-card__actions(
+    v-if="$slots.actions"
+    :class="{ 'w-card__actions--has-toolbar': actionsHasToolbar }")
+    slot(name="actions")
 </template>
 
 <script>
