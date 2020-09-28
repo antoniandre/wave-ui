@@ -13,7 +13,7 @@
       w-button.w-accordion__expand-icon(
         v-if="expandIcon && !expandIconRight"
         :icon="(item.open && collapseIcon) || expandIcon"
-        :disabled="item.disabled"
+        :disabled="item.disabled || null"
         text
         @click.stop="!item.disabled && toggleItem(item)")
       //- Title.

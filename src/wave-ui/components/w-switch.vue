@@ -11,10 +11,10 @@ component(
     type="checkbox"
     :name="inputName"
     :checked="isOn"
-    :disabled="disabled || readonly"
-    :readonly="readonly"
+    :disabled="disabled || readonly || null"
+    :readonly="readonly || null"
     :aria-readonly="readonly ? 'true' : 'false'"
-    :required="required"
+    :required="required || null"
     @change="onChange"
     :aria-checked="isOn || 'false'"
     role="switch")
