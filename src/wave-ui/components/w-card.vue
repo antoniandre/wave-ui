@@ -30,11 +30,11 @@ export default {
   computed: {
     titleHasToolbar () {
       const { title } = this.$slots
-      return title && title.map(vnode => vnode.tag).join('').includes('w-toolbar')
+      return title && title().map(vnode => vnode.tag).join('').includes('w-toolbar')
     },
     actionsHasToolbar () {
       const { actions } = this.$slots
-      return actions && actions.map(vnode => vnode.tag).join('').includes('w-toolbar')
+      return actions && actions().map(vnode => vnode.tag).join('').includes('w-toolbar')
     },
     classes () {
       return {

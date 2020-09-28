@@ -15,9 +15,9 @@ const renderListItems = function (createEl) {
         {
           props: { ...this.$props, items: li.children, depth: this.depth + 1 },
           scopedSlots: {
-            item: this.$scopedSlots.item, // Accepts `template(#item)`.
+            item: this.$slots.item, // Accepts `template(#item)`.
              // Accepts `template(#item.2)`.
-            [`item.${li.id || index + 1}`]: this.$scopedSlots[`item.${li.id || index + 1}`]
+            [`item.${li.id || index + 1}`]: this.$slots[`item.${li.id || index + 1}`]
           },
           on: {
             'input': value => this.$emit('input', value),
@@ -77,8 +77,8 @@ const renderListItemLabel = function (createEl, li, index) {
   })
   // ------------------------------------------------------
 
-  const hasSlot = this.$scopedSlots.item
-  const hasSingleItemSlot = this.$scopedSlots[`item.${li.id || index + 1}`]
+  const hasSlot = this.$slots.item
+  const hasSingleItemSlot = this.$slots[`item.${li.id || index + 1}`]
 
   // Navigation list.
   // Note: on enter key press, a click event is fired => this is default HTML behavior.
@@ -140,9 +140,9 @@ const renderListItemLabel = function (createEl, li, index) {
   const vnodes = []
   // Allow overriding the common slot using `template(#item.2)` where to is the index of the item.
   if (hasSingleItemSlot) {
-    vnodes.push(this.$scopedSlots[`item.${li.id || index + 1}`]({ item: li, selected: li.selected, index }))
+    vnodes.push(this.$slots[`item.${li.id || index + 1}`]({ item: li, selected: li.selected, index }))
   }
-  else if (hasSlot) vnodes.push(this.$scopedSlots.item({ item: li, selected: li.selected, index }))
+  else if (hasSlot) vnodes.push(this.$slots.item({ item: li, selected: li.selected, index }))
   else if (!this.checklist) component.domProps = { innerHTML: li[this.itemLabel] }
   return createEl(component.name, component, vnodes)
 }
