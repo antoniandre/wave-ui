@@ -87,7 +87,7 @@ export default {
     window.addEventListener('resize', this.getBreakpoint)
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('resize', this.getBreakpoint)
   }
 }
