@@ -1,3 +1,4 @@
+import { reactive } from 'vue'
 import config, { mergeConfig } from './utils/config'
 import colors from './utils/colors'
 import * as components from './components'
@@ -11,7 +12,7 @@ const shadeColor = (col, amt) => {
 
 export default class WaveUI {
   static instance = null
-  static vueInstance = null // Needed until constructor.
+  static registered = false
 
   // Public breakpoint object. Accessible from this.$waveui.breakpoint.
   breakpoint = {
@@ -32,12 +33,12 @@ export default class WaveUI {
     return obj
   }, { ...config.colors, black: '#000', white: '#fff', transparent: 'transparent', inherit: 'inherit' })
 
-  static install (Vue) {
+  static install (app) {
     // Register directives.
     // for (const id in directives) {
-    //   if (directives[id]) Vue.directive(id, directives[id])
+    //   if (directives[id]) app.directive(id, directives[id])
     // }
-    Vue.directive('focus', {
+    app.directive('focus', {
       // When the bound element is inserted into the DOM...
       inserted: el => el.focus()
     })
@@ -45,7 +46,7 @@ export default class WaveUI {
     // Register components.
     for (let id in components) {
       const component = components[id]
-      Vue.component(component.name, component)
+      app.component(component.name, component)
     }
 
     // Register mixins.
@@ -54,15 +55,16 @@ export default class WaveUI {
     //   }
     // })
 
-    // Save the Vue instance for use in the constructor.
-    WaveUI.vueInstance = Vue
+    WaveUI.registered = true
   }
 
   // Singleton.
-  constructor (options = {}) {
+  constructor (app, options = {}) {
     if (WaveUI.instance) return WaveUI.instance
 
     else {
+      if (!WaveUI.registered) app.use(WaveUI)
+
       // Merge user options into default config.
       mergeConfig(options)
 
@@ -91,10 +93,8 @@ export default class WaveUI {
       }
 
       WaveUI.instance = this
-      // Make waveui reactive and expose the single instance in Vue.
-      WaveUI.vueInstance.prototype.$waveui = WaveUI.vueInstance.reactive(this)
-
-      delete WaveUI.vueInstance // Get rid of the Vue instance that we don't need anymore.
+      // Make waveui reactive and expose the single instance in the app.
+      app.config.globalProperties.$waveui = reactive(this)
     }
   }
 }
