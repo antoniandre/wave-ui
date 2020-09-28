@@ -13,8 +13,9 @@ w-app.fill-height.w-flex.column
       :class="{ 'nav-menu--fixed': fixNavMenu }"
       :drawer-open.sync="drawerOpen")
     .main-content.w-flex.column.grow
-      transition(name="fade-page" mode="out-in")
-        router-view.grow
+      router-view.grow(#default="{ Component }")
+        transition(name="fade-page" mode="out-in")
+          component(:is="Component")
 
       footer.w-flex.justify-end.align-center.no-grow.wrap
         small.grey-light2.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
