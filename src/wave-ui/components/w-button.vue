@@ -5,7 +5,7 @@
   :to="$router && to"
   :href="to"
   :class="classes"
-  :disabled="!!disabled"
+  :disabled="disabled || null"
   v-on="$attrs"
   :style="styles")
   w-icon(v-if="icon") {{ icon }}

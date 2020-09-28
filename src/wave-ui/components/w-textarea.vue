@@ -30,10 +30,10 @@ component(
       :placeholder="placeholder || null"
       :rows="rows || null"
       :cols="cols || null"
-      :readonly="readonly"
+      :readonly="readonly || null"
       :aria-readonly="readonly ? 'true' : 'false'"
-      :disabled="disabled"
-      :required="required"
+      :disabled="disabled || null"
+      :required="required || null"
       :style="textareaStyles")
     template(v-if="labelPosition === 'inside' && showLabelInside")
       label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(

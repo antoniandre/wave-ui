@@ -46,10 +46,10 @@ component(
           @keydown.space.prevent="!disabled && !readonly && openMenu()"
           :id="`w-select--${_uid}`"
           :placeholder="placeholder || null"
-          :disabled="disabled"
+          :disabled="disabled || null"
           readonly
           aria-readonly="true"
-          :required="required"
+          :required="required || null"
           autocomplete="off")
         //- For standard HTML form submission.
         input(
