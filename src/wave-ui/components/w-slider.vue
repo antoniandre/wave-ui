@@ -1,71 +1,71 @@
 <template lang="pug">
-  component(
-    :is="formRegister ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validators, inputValue: rangeValueScaled, disabled, readonly }"
-    :valid.sync="valid"
-    @reset="rangeValuePercent = 0;updateRangeValueScaled()"
-    :class="wrapperClasses")
-    label.w-slider__label.w-slider__label--left.w-form-el-shakable(
-      v-if="$slots['label-left']"
-      :for="`button--${_uid}`")
-      slot(name="label-left")
-    label.w-slider__label.w-slider__label--left.w-form-el-shakable(
-      v-else-if="labelLeft"
-      :for="`button--${_uid}`"
-      v-html="labelLeft")
-    .w-slider__track-wrapper
-      .w-slider__track(
-        ref="track"
-        @mousedown="onTrackMouseDown"
-        @touchstart="onTrackMouseDown"
-        :class="trackClasses"
-        role="slider"
-        aria-label="Slider"
-        :aria-valuemin="minVal"
-        :aria-valuemax="maxVal"
-        :aria-valuenow="rangeValueScaled"
-        :aria-readonly="readonly ? 'true' : 'false'"
-        aria-orientation="horizontal")
-        .w-slider__range(:class="rangeClasses" :style="rangeStyles")
-        .w-slider__thumb(:style="thumbStyles")
-          button.w-slider__thumb-button(
-            ref="thumb"
-            :id="`button--${_uid}`" :class="[color]"
-            :name="inputName"
-            :value="rangeValueScaled"
-            :disabled="disabled"
-            :readonly="readonly"
-            :aria-readonly="readonly ? 'true' : 'false'"
-            @keydown.left="onKeyDown($event, -1)"
-            @keydown.right="onKeyDown($event, 1)"
-            @click.prevent)
-          label.w-slider__thumb-label(
-            v-if="thumbLabel"
-            :for="`button--${_uid}`"
-            :class="thumbClasses")
-            div(v-if="thumbLabel === 'droplet'")
-              slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
-            slot(v-else name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
-      .w-slider__step-labels(v-if="stepLabels && step")
-        .w-slider__step-label(@click="onStepLabelClick(0)") {{ this.minVal }}
-        .w-slider__step-label(
-          v-for="currStep in ~~numberOfSteps"
-          :key="currStep"
-          @click="onStepLabelClick(currStep * (100 / numberOfSteps))"
-          :style="`left: ${currStep * (100 / numberOfSteps)}%`")
-          | {{ percentToScaled(currStep * (100 / numberOfSteps)) }}
-        .w-slider__step-label(
-          v-if="~~numberOfSteps !== numberOfSteps"
-          @click="onStepLabelClick(100)"
-          style="left: 100%") {{ this.maxVal }}
-    label.w-slider__label.w-slider__label--right.w-form-el-shakable(
-      v-if="$slots['label-right']"
-      :for="`button--${_uid}`")
-      slot(name="label-right")
-    label.w-slider__label.w-slider__label--right.w-form-el-shakable(
-      v-else-if="labelRight"
-      :for="`button--${_uid}`"
-      v-html="labelRight")
+component(
+  :is="formRegister ? 'w-form-element' : 'div'"
+  v-bind="formRegister && { validators, inputValue: rangeValueScaled, disabled, readonly }"
+  :valid.sync="valid"
+  @reset="rangeValuePercent = 0;updateRangeValueScaled()"
+  :class="wrapperClasses")
+  label.w-slider__label.w-slider__label--left.w-form-el-shakable(
+    v-if="$slots['label-left']"
+    :for="`button--${_uid}`")
+    slot(name="label-left")
+  label.w-slider__label.w-slider__label--left.w-form-el-shakable(
+    v-else-if="labelLeft"
+    :for="`button--${_uid}`"
+    v-html="labelLeft")
+  .w-slider__track-wrapper
+    .w-slider__track(
+      ref="track"
+      @mousedown="onTrackMouseDown"
+      @touchstart="onTrackMouseDown"
+      :class="trackClasses"
+      role="slider"
+      aria-label="Slider"
+      :aria-valuemin="minVal"
+      :aria-valuemax="maxVal"
+      :aria-valuenow="rangeValueScaled"
+      :aria-readonly="readonly ? 'true' : 'false'"
+      aria-orientation="horizontal")
+      .w-slider__range(:class="rangeClasses" :style="rangeStyles")
+      .w-slider__thumb(:style="thumbStyles")
+        button.w-slider__thumb-button(
+          ref="thumb"
+          :id="`button--${_uid}`" :class="[color]"
+          :name="inputName"
+          :value="rangeValueScaled"
+          :disabled="disabled"
+          :readonly="readonly"
+          :aria-readonly="readonly ? 'true' : 'false'"
+          @keydown.left="onKeyDown($event, -1)"
+          @keydown.right="onKeyDown($event, 1)"
+          @click.prevent)
+        label.w-slider__thumb-label(
+          v-if="thumbLabel"
+          :for="`button--${_uid}`"
+          :class="thumbClasses")
+          div(v-if="thumbLabel === 'droplet'")
+            slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
+          slot(v-else name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
+    .w-slider__step-labels(v-if="stepLabels && step")
+      .w-slider__step-label(@click="onStepLabelClick(0)") {{ this.minVal }}
+      .w-slider__step-label(
+        v-for="currStep in ~~numberOfSteps"
+        :key="currStep"
+        @click="onStepLabelClick(currStep * (100 / numberOfSteps))"
+        :style="`left: ${currStep * (100 / numberOfSteps)}%`")
+        | {{ percentToScaled(currStep * (100 / numberOfSteps)) }}
+      .w-slider__step-label(
+        v-if="~~numberOfSteps !== numberOfSteps"
+        @click="onStepLabelClick(100)"
+        style="left: 100%") {{ this.maxVal }}
+  label.w-slider__label.w-slider__label--right.w-form-el-shakable(
+    v-if="$slots['label-right']"
+    :for="`button--${_uid}`")
+    slot(name="label-right")
+  label.w-slider__label.w-slider__label--right.w-form-el-shakable(
+    v-else-if="labelRight"
+    :for="`button--${_uid}`"
+    v-html="labelRight")
 </template>
 
 <script>

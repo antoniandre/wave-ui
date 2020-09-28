@@ -1,37 +1,37 @@
 <template lang="pug">
-  .w-accordion(:class="accordionClasses")
-    .w-accordion__item(
-      v-for="(item, i) in accordionItems"
-      :key="i"
-      :class="{ ...itemClasses, 'w-accordion__item--expanded': item.open, 'w-accordion__item--disabled': item.disabled, [item[itemColor]]: item[itemColor] }")
-      .w-accordion__item-title(
-        @click="!item.disabled && toggleItem(item)"
-        :tabindex="!item.disabled && 0"
-        @keypress.enter="!item.disabled && toggleItem(item)"
-        :class="titleClass")
-        //- Expand icon on left.
-        w-button.w-accordion__expand-icon(
-          v-if="expandIcon && !expandIconRight"
-          :icon="(item.open && collapseIcon) || expandIcon"
-          :disabled="item.disabled"
-          text
-          @click.stop="!item.disabled && toggleItem(item)")
-        //- Title.
-        slot(v-if="$scopedSlots[`item-title.${item.id || i + 1}`]" :name="`item-title.${item.id || i + 1}`" :item="item")
-        slot(v-else name="item-title" :item="item")
-          div.grow(v-html="item.title")
-        //- Expand icon on right.
-        w-button.w-accordion__expand-icon(
-          v-if="expandIcon && expandIconRight"
-          :icon="(item.open && collapseIcon) || expandIcon"
-          text
-          @click.stop="!item.disabled && toggleItem(item)")
-      //- Content.
-      w-transition-expand(y)
-        .w-accordion__item-content(v-if="item.open" :class="contentClass")
-          slot(v-if="$scopedSlots[`item-content.${item.id || i + 1}`]" :name="`item-content.${item.id || i + 1}`" :item="item")
-          slot(v-else name="item-content" :item="item")
-            div(v-html="item.content")
+.w-accordion(:class="accordionClasses")
+  .w-accordion__item(
+    v-for="(item, i) in accordionItems"
+    :key="i"
+    :class="{ ...itemClasses, 'w-accordion__item--expanded': item.open, 'w-accordion__item--disabled': item.disabled, [item[itemColor]]: item[itemColor] }")
+    .w-accordion__item-title(
+      @click="!item.disabled && toggleItem(item)"
+      :tabindex="!item.disabled && 0"
+      @keypress.enter="!item.disabled && toggleItem(item)"
+      :class="titleClass")
+      //- Expand icon on left.
+      w-button.w-accordion__expand-icon(
+        v-if="expandIcon && !expandIconRight"
+        :icon="(item.open && collapseIcon) || expandIcon"
+        :disabled="item.disabled"
+        text
+        @click.stop="!item.disabled && toggleItem(item)")
+      //- Title.
+      slot(v-if="$scopedSlots[`item-title.${item.id || i + 1}`]" :name="`item-title.${item.id || i + 1}`" :item="item")
+      slot(v-else name="item-title" :item="item")
+        div.grow(v-html="item.title")
+      //- Expand icon on right.
+      w-button.w-accordion__expand-icon(
+        v-if="expandIcon && expandIconRight"
+        :icon="(item.open && collapseIcon) || expandIcon"
+        text
+        @click.stop="!item.disabled && toggleItem(item)")
+    //- Content.
+    w-transition-expand(y)
+      .w-accordion__item-content(v-if="item.open" :class="contentClass")
+        slot(v-if="$scopedSlots[`item-content.${item.id || i + 1}`]" :name="`item-content.${item.id || i + 1}`" :item="item")
+        slot(v-else name="item-content" :item="item")
+          div(v-html="item.content")
 </template>
 
 <script>

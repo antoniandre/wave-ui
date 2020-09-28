@@ -1,14 +1,14 @@
 <template lang="pug">
-  transition(name="fade" mode="out-in" appear)
-    .w-overlay(
-      v-if="value"
-      :style="(value && styles) || false"
-      @keydown.escape.stop="onClick"
-      @click="onClick"
-      v-focus
-      tabindex="0"
-      :class="classes")
-      slot
+transition(name="fade" mode="out-in" appear)
+  .w-overlay(
+    v-if="value"
+    :style="(value && styles) || false"
+    @keydown.escape.stop="onClick"
+    @click="onClick"
+    v-focus
+    tabindex="0"
+    :class="classes")
+    slot
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .w-spinner
+.w-spinner
 </template>
 
 <script>

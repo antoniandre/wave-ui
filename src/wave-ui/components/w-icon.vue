@@ -1,12 +1,12 @@
 <template lang="pug">
-  component.w-icon(
-    :is="tag || 'i'"
-    :class="classes"
-    v-on="$listeners"
-    role="icon"
-    aria-hidden="true"
-    :style="styles")
-    template(v-if="ligature") {{ ligature.icon }}
+component.w-icon(
+  :is="tag || 'i'"
+  :class="classes"
+  v-on="$listeners"
+  role="icon"
+  aria-hidden="true"
+  :style="styles")
+  template(v-if="ligature") {{ ligature.icon }}
 </template>
 
 <script>

@@ -1,25 +1,25 @@
 <template lang="pug">
-  .w-button(
-    :is="to ? ($router && !externalLink && !forceLink ? 'router-link' : 'a') : 'button'"
-    :type="!to && type"
-    :to="$router && to"
-    :href="to"
-    :class="classes"
-    :disabled="!!disabled"
-    v-on="$listeners"
-    :style="styles")
-    w-icon(v-if="icon") {{ icon }}
-    slot(v-else)
-    transition(name="scale-fade")
-      .w-button__loader(v-if="loading")
-        slot(name="loading")
-          svg(viewBox="0 0 40 40")
-            circle(
-              cx="20" cy="20" r="18"
-              fill="transparent"
-              stroke="currentColor"
-              stroke-width="4"
-              stroke-linecap="round")
+.w-button(
+  :is="to ? ($router && !externalLink && !forceLink ? 'router-link' : 'a') : 'button'"
+  :type="!to && type"
+  :to="$router && to"
+  :href="to"
+  :class="classes"
+  :disabled="!!disabled"
+  v-on="$listeners"
+  :style="styles")
+  w-icon(v-if="icon") {{ icon }}
+  slot(v-else)
+  transition(name="scale-fade")
+    .w-button__loader(v-if="loading")
+      slot(name="loading")
+        svg(viewBox="0 0 40 40")
+          circle(
+            cx="20" cy="20" r="18"
+            fill="transparent"
+            stroke="currentColor"
+            stroke-width="4"
+            stroke-linecap="round")
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template lang="pug">
-  .w-rating(:class="classes" :style="styles")
-    slot
+.w-rating(:class="classes" :style="styles")
+  slot
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template lang="pug">
-  .w-toolbar(:class="classes" :style="styles")
-    slot
+.w-toolbar(:class="classes" :style="styles")
+  slot
 </template>
 
 <script>

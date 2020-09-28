@@ -1,6 +1,6 @@
 <template lang="pug">
-  router-view.grow(v-if="$route.name === 'home'")
-  documentation(v-else)
+router-view.grow(v-if="$route.name === 'home'")
+documentation(v-else)
 </template>
 
 <script>

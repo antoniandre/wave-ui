@@ -1,34 +1,34 @@
 <template lang="pug">
-  component(
-    :is="formRegister && !wCheckboxes ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validators, inputValue: isChecked, disabled }"
-    :valid.sync="valid"
-    @reset="$emit('input', isChecked = false)"
-    :class="classes")
-    input(
-      ref="input"
-      :id="`w-checkbox--${_uid}`"
-      type="checkbox"
-      :name="inputName"
-      :checked="isChecked"
-      :disabled="disabled"
-      :required="required"
-      @focus="$emit('focus', $event)"
-      @change="onChange"
-      @keypress.enter="onChange"
-      :aria-checked="isChecked || 'false'"
-      role="checkbox")
-    template(v-if="hasLabel && labelOnLeft")
-      label.w-checkbox__label.w-form-el-shakable.pr2(v-if="$slots.default" :for="`w-checkbox--${_uid}`")
-        slot
-      label.w-checkbox__label.w-form-el-shakable.pr2(v-else-if="label" :for="`w-checkbox--${_uid}`" v-html="label")
-    .w-checkbox__input(@click="$refs.input.focus();$refs.input.click()" :class="this.color")
-      svg(width="11px" height="9px" viewbox="0 0 12 9")
-        polyline(points="1 5 4 8 10 2")
-    template(v-if="hasLabel && !labelOnLeft")
-      label.w-checkbox__label.w-form-el-shakable.pl2(v-if="$slots.default" :for="`w-checkbox--${_uid}`")
-        slot
-      label.w-checkbox__label.w-form-el-shakable.pl2(v-else-if="label" :for="`w-checkbox--${_uid}`" v-html="label")
+component(
+  :is="formRegister && !wCheckboxes ? 'w-form-element' : 'div'"
+  v-bind="formRegister && { validators, inputValue: isChecked, disabled }"
+  :valid.sync="valid"
+  @reset="$emit('input', isChecked = false)"
+  :class="classes")
+  input(
+    ref="input"
+    :id="`w-checkbox--${_uid}`"
+    type="checkbox"
+    :name="inputName"
+    :checked="isChecked"
+    :disabled="disabled"
+    :required="required"
+    @focus="$emit('focus', $event)"
+    @change="onChange"
+    @keypress.enter="onChange"
+    :aria-checked="isChecked || 'false'"
+    role="checkbox")
+  template(v-if="hasLabel && labelOnLeft")
+    label.w-checkbox__label.w-form-el-shakable.pr2(v-if="$slots.default" :for="`w-checkbox--${_uid}`")
+      slot
+    label.w-checkbox__label.w-form-el-shakable.pr2(v-else-if="label" :for="`w-checkbox--${_uid}`" v-html="label")
+  .w-checkbox__input(@click="$refs.input.focus();$refs.input.click()" :class="this.color")
+    svg(width="11px" height="9px" viewbox="0 0 12 9")
+      polyline(points="1 5 4 8 10 2")
+  template(v-if="hasLabel && !labelOnLeft")
+    label.w-checkbox__label.w-form-el-shakable.pl2(v-if="$slots.default" :for="`w-checkbox--${_uid}`")
+      slot
+    label.w-checkbox__label.w-form-el-shakable.pl2(v-else-if="label" :for="`w-checkbox--${_uid}`" v-html="label")
 </template>
 
 <script>

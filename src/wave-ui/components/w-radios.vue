@@ -1,22 +1,22 @@
 <template lang="pug">
-  component(
-    :is="formRegister ? 'w-form-element' : 'div'"
-    v-bind="formRegister && { validators, inputValue, disabled }"
-    :valid.sync="valid"
-    @reset="$emit('input', inputValue = null)"
-    :column="!inline"
-    :class="classes")
-    w-radio(
-      v-for="(item, i) in radioItems"
-      :key="i"
-      @input="onChange(item)"
-      :name="inputName"
-      :value="item.value === value"
-      :label="item.label"
-      :label-on-left="labelOnLeft"
-      :color="item.color"
-      :class="{ mt1: !inline && i }")
-      slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
+component(
+  :is="formRegister ? 'w-form-element' : 'div'"
+  v-bind="formRegister && { validators, inputValue, disabled }"
+  :valid.sync="valid"
+  @reset="$emit('input', inputValue = null)"
+  :column="!inline"
+  :class="classes")
+  w-radio(
+    v-for="(item, i) in radioItems"
+    :key="i"
+    @input="onChange(item)"
+    :name="inputName"
+    :value="item.value === value"
+    :label="item.label"
+    :label-on-left="labelOnLeft"
+    :color="item.color"
+    :class="{ mt1: !inline && i }")
+    slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
 
 <script>
