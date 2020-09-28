@@ -6,6 +6,7 @@
       :key="i"
       :class="barItemClasses(item)"
       @click="!item.disabled && openTab(item)"
+      @focus="$emit('focus', $event)"
       :tabindex="!item.disabled && 0"
       @keypress.enter="!item.disabled && openTab(item)")
         slot(
@@ -33,6 +34,7 @@ import Vue from 'vue'
 
 export default {
   name: 'w-tabs',
+
   props: {
     value: { type: Array },
     color: { type: String, default: '' },
@@ -49,6 +51,8 @@ export default {
     right: { type: Boolean },
     card: { type: Boolean }
   },
+
+  emits: ['input', 'change', 'focus'],
 
   data: () => ({
     activeTabEl: null,
@@ -149,7 +153,9 @@ export default {
       item.active = true
       // Unset active on other tabs.
       this.tabsItems.forEach(obj => obj.index !== item.index && (obj.active = false))
-      this.$emit('input', this.tabsItems.map(item => item.active))
+      const activeItem = this.tabsItems.map(item => item.active)
+      this.$emit('input', activeItem)
+      this.$emit('change', activeItem)
 
       if (!this.noSlider) this.$nextTick(this.updateSlider)
     },

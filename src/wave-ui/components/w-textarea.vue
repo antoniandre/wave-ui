@@ -69,6 +69,7 @@ import FormElementMixin from '../mixins/form-elements'
 export default {
   name: 'w-textarea',
   mixins: [FormElementMixin],
+
   props: {
     value: { default: '' },
     label: { type: String },
@@ -90,6 +91,8 @@ export default {
     cols: { type: [String, Number] },
     // Also name, disabled, readonly, required and validators in the mixin.
   },
+
+  emits: ['input', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
 
   data () {
     return {

@@ -37,6 +37,7 @@ export default {
   name: 'w-radio',
   mixins: [FormElementMixin],
   inject: { wRadios: { default: null } },
+
   props: {
     value: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-radio are plugged on
@@ -48,6 +49,8 @@ export default {
     noRipple: { type: Boolean }
     // Also name, disabled, readonly, required and validators in the mixin.
   },
+
+  emits: ['input', 'focus', 'change'],
 
   data: () => ({
     inputValue: false,
