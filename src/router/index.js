@@ -1,9 +1,8 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import WhyWaveUI from '@/documentation/views/why-wave-ui'
 import Home from '@/documentation/views/home'
 
-Vue.use(VueRouter)
 // The loading state of Vue Router is appended to $router, so a
 // spinner can be shown while loading. This status needs to be reactive, it is
 // set to true on beforeRoute and false on afterRoute.
@@ -145,9 +144,8 @@ externalComponents.forEach(item => {
   })
 })
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes
 })
 
