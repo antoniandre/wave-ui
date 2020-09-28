@@ -1,6 +1,6 @@
 <template lang="pug">
 span.w-tag(
-  v-on="$listeners"
+  v-on="$attrs"
   @click="$emit('input', !value)"
   @keypress.enter="$emit('input', !value)"
   :class="classes"

@@ -2,7 +2,7 @@
 component.w-icon(
   :is="tag || 'i'"
   :class="classes"
-  v-on="$listeners"
+  v-on="$attrs"
   role="icon"
   aria-hidden="true"
   :style="styles")
