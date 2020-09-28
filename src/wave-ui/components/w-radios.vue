@@ -10,6 +10,7 @@ component(
     v-for="(item, i) in radioItems"
     :key="i"
     @input="onChange(item)"
+    @focus="$emit('focus', $event)"
     :name="inputName"
     :value="item.value === value"
     :label="item.label"
@@ -25,6 +26,7 @@ import FormElementMixin from '../mixins/form-elements'
 export default {
   name: 'w-radios',
   mixins: [FormElementMixin],
+
   props: {
     items: { type: Array, required: true }, // All the possible options.
     value: { type: [String, Number, Boolean] }, // v-model on selected option.
@@ -36,6 +38,8 @@ export default {
     inline: { type: Boolean },
     color: { type: String, default: 'primary' }
   },
+
+  emits: ['input', 'change', 'focus'],
 
   provide () {
     // Disable w-form-el wrapping in each w-radio when inside a w-radios component that already does it.

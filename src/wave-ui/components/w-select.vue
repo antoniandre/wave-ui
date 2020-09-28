@@ -106,6 +106,7 @@ import FormElementMixin from '../mixins/form-elements'
 export default {
   name: 'w-select',
   mixins: [FormElementMixin],
+
   props: {
     items: { type: Array, required: true },
     value: {}, // v-model on selected item if any.
@@ -130,6 +131,8 @@ export default {
     returnObject: { type: Boolean }
     // Also name, disabled, readonly, required and validators in the mixin.
   },
+
+  emits: ['input', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
 
   data: () => ({
     // Selection is always an array (internally), but emits a single value if not multiple.

@@ -20,6 +20,7 @@ span.w-tag(
 <script>
 export default {
   name: 'w-tag',
+
   props: {
     value: { type: [Boolean, Number], default: -1 },
     color: { type: String, default: '' },
@@ -38,6 +39,8 @@ export default {
     width: { type: [String, Number] },
     height: { type: [String, Number] }
   },
+
+  emits: ['input'],
 
   computed: {
     presetSize () {

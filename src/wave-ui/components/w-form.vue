@@ -6,6 +6,7 @@ form.w-form(@submit="onSubmit" @reset="reset" novalidate :class="classes")
 <script>
 export default {
   name: 'w-form',
+
   provide () {
     return {
       formRegister: this.register,
@@ -23,6 +24,8 @@ export default {
     noBlurValidation: { type: Boolean },
     errorPlaceholders: { type: Boolean }
   },
+
+  emits: ['before-validate', 'validate', 'success', 'error', 'reset', 'input', 'submit'],
 
   data: () => ({
     formElements: [],
