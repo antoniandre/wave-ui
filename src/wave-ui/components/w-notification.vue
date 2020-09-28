@@ -8,6 +8,7 @@ transition(:name="transitionName" appear)
 <script>
 export default {
   name: 'w-notification',
+
   props: {
     // Notification props.
     value: { default: true }, // Show or hide.
@@ -43,6 +44,8 @@ export default {
     lg: { type: Boolean },
     xl: { type: Boolean }
   },
+
+  emits: ['input'],
 
   data () {
     return {

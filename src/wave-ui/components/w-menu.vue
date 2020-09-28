@@ -45,6 +45,7 @@ import { consoleWarn } from '../utils/console'
 
 export default {
   name: 'w-menu',
+
   props: {
     value: {}, // Show or hide.
     showOnHover: { type: Boolean },
@@ -76,6 +77,8 @@ export default {
     overlay: { type: Boolean },
     persistent: { type: Boolean }
   },
+
+  emits: ['input'],
 
   data: () => ({
     showMenu: false,
@@ -358,7 +361,7 @@ export default {
   beforeMount () {
     // Do this, first thing on mounted (beforeMount + nextTick).
     this.$nextTick(() => {
-      this.activatorEl = this.$refs.wrapper.firstChild
+      this.activatorEl = this.$refs.wrapper.firstElementChild
       this.overlayEl = this.overlay ? this.$refs.overlay.$el : null
       this.insertMenu()
 

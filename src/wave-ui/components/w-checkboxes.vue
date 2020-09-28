@@ -16,6 +16,7 @@ component(
     :color="item.color"
     :round="round"
     @input="toggleCheck(item, $event)"
+    @focus="this.$emit('input', $event)"
     :class="{ mt1: !inline && i }")
     slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
@@ -27,6 +28,7 @@ import FormElementMixin from '../mixins/form-elements'
 export default {
   name: 'w-checkboxes',
   mixins: [FormElementMixin],
+
   props: {
     items: { type: Array, required: true }, // All the possible options.
     value: { type: Array }, // v-model on selected option.
@@ -39,6 +41,8 @@ export default {
     round: { type: Boolean },
     color: { type: String, default: 'primary' }
   },
+
+  emits: ['input', 'focus', 'change'],
 
   provide () {
     // Disable w-form-el wrapping in each w-checkbox when inside a w-checkboxes component that already

@@ -25,6 +25,7 @@ w-overlay.w-dialog(
 <script>
 export default {
   name: 'w-dialog',
+
   props: {
     value: { type: Boolean, default: true },
     width: { type: Number, default: 0 },
@@ -39,6 +40,8 @@ export default {
     overlayColor: { type: [String, Boolean] },
     overlayOpacity: { type: [Number, String, Boolean] }
   },
+
+  emits: ['input', 'close'],
 
   data () {
     return {

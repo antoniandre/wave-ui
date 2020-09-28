@@ -19,6 +19,7 @@
 <script>
 export default {
   name: 'w-alert',
+
   props: {
     value: { default: true }, // Show or hide.
     color: { type: String },
@@ -49,6 +50,8 @@ export default {
     borderBottom: { type: Boolean },
     outline: { type: Boolean }
   },
+
+  emits: ['input'],
 
   data () {
     return {

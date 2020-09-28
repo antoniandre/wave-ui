@@ -6,6 +6,7 @@
     :class="{ ...itemClasses, 'w-accordion__item--expanded': item.open, 'w-accordion__item--disabled': item.disabled, [item[itemColor]]: item[itemColor] }")
     .w-accordion__item-title(
       @click="!item.disabled && toggleItem(item)"
+      @focus="$emit('focus', $event)"
       :tabindex="!item.disabled && 0"
       @keypress.enter="!item.disabled && toggleItem(item)"
       :class="titleClass")
@@ -39,6 +40,7 @@ import Vue from 'vue'
 
 export default {
   name: 'w-accordion',
+
   props: {
     value: { type: Array },
     color: { type: String, default: '' },
@@ -54,6 +56,8 @@ export default {
     collapseIcon: { type: String },
     shadow: { type: Boolean }
   },
+
+  emits: ['input', 'change', 'focus'],
 
   computed: {
     accordionItems () {
@@ -88,7 +92,9 @@ export default {
     toggleItem (item) {
       item.open = !item.open
       if (this.expandSingle) this.accordionItems.forEach(obj => obj.index !== item.index && (obj.open = false))
-      this.$emit('input', this.accordionItems.map(item => item.open))
+      const openItems = this.accordionItems.map(item => item.open)
+      this.$emit('input', openItems)
+      this.$emit('change', openItems)
     }
   },
 

@@ -16,6 +16,7 @@ component(
     :aria-readonly="readonly ? 'true' : 'false'"
     :required="required || null"
     @change="onChange"
+    @focus="$emit('focus', $event)"
     :aria-checked="isOn || 'false'"
     role="switch")
   template(v-if="hasLabel && labelOnLeft")
@@ -37,6 +38,7 @@ import FormElementMixin from '../mixins/form-elements'
 export default {
   name: 'w-switch',
   mixins: [FormElementMixin],
+
   props: {
     value: { default: false }, // v-model.
     label: { type: String, default: '' },
@@ -46,6 +48,8 @@ export default {
     noRipple: { type: Boolean }
     // Also name, disabled, readonly, required and validators in the mixin.
   },
+
+  emits: ['input', 'change', 'focus'],
 
   data () {
     return {
