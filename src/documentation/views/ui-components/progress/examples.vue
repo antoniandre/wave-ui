@@ -288,7 +288,7 @@ export default {
     }, 700)
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     clearInterval(this.intervalId)
   }
 }

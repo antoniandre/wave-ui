@@ -269,7 +269,7 @@ export default {
     })
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.detachTo) {
       // el.remove() doesn't work on IE11.
       if (this.$refs.tooltip) this.$refs.tooltip.parentNode.removeChild(this.$refs.tooltip)
