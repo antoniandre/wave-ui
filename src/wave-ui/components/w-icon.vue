@@ -85,11 +85,11 @@ export default {
   },
 
   created () {
-    this.icon = this.$slots.default[0].text || ''
+    this.icon = this.$slots.default && this.$slots.default()[0].text || ''
   },
 
   beforeUpdate () {
-    this.icon = this.$slots.default[0].text
+    this.icon = this.$slots.default && this.$slots.default()[0].text
   }
 }
 </script>

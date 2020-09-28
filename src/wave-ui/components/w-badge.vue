@@ -60,7 +60,7 @@ export default {
       ]
     },
     classes () {
-      const slotText = this.$slots.badge && this.$slots.badge.map(item => item.text).join('')
+      const slotText = this.$slots.badge && this.$slots.badge().map(item => item.text).join('')
 
       return {
         [this.color]: this.color,
