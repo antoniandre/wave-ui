@@ -46,9 +46,9 @@
     "sass-loader": "^8.0.2",
     "simple-syntax-highlighter": "^1.4.2",
     "splitpanes": "^2.2.1",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-router": "^3.4.3",
     "vue-svg-loader": "^0.16.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.12"
   }
 }
