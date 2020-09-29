@@ -33,6 +33,8 @@ export default {
     drawerOpen: { type: Boolean, default: false }
   },
 
+  emits: ['update:drawerOpen'],
+
   data: () => ({
     sections: [
       { label: 'Why Wave UI?', route: { name: 'why-wave-ui' } },
@@ -107,8 +109,8 @@ export default {
     onItemClick () {
       this.$emit('update:drawerOpen', false)
       setTimeout(() => {
-        document.documentElement.scrollTop = document.querySelector('.content-wrap').offsetTop - 40
-      }, 150)
+        document.documentElement.scrollTop = document.querySelector('.content-wrap').offsetTop - 42
+      }, 200)
     }
   }
 }
