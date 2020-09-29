@@ -29,6 +29,7 @@ export default {
     bottom: { type: Boolean },
     overlap: { type: Boolean },
     color: { type: String },
+    size: { type: [Number, String] },
     bgColor: { type: String, default: 'primary' },
     dark: { type: Boolean },
     badgeClass: { type: String },
