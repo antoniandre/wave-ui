@@ -2,7 +2,7 @@
 component(
   :is="formRegister && !wRadios ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="$emit('update:modelValue', inputValue = false);$emit('input', false);$emit('change', false)"
   :class="classes")
   input(

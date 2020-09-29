@@ -2,7 +2,7 @@
 component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="$emit('update:modelValue', inputValue = '');$emit('input', '');$emit('change', '')"
   :class="classes")
   //- Left label.

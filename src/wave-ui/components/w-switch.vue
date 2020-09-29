@@ -2,7 +2,7 @@
 component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: isOn, disabled, readonly }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="$emit('update:modelValue', isOn = '');$emit('input', '');$emit('change', '')"
   :class="classes")
   input(

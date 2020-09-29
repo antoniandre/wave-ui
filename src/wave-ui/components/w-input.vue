@@ -2,7 +2,7 @@
 component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="$emit('update:modelValue', inputValue = '');$emit('input', '');$emit('change', '')"
   :class="classes")
   input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")

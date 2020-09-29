@@ -1,9 +1,9 @@
 <template lang="pug">
 w-app.fill-height.w-flex.column
   w-drawer.nav-drawer(v-if="isMobile" v-model="drawerOpen" right :width="330")
-    nav-menu(:drawer-open.sync="drawerOpen")
+    nav-menu(v-model:drawer-open="drawerOpen")
   header.no-shrink
-    toolbar(:drawer-open.sync="drawerOpen")
+    toolbar(v-model:drawer-open="drawerOpen")
   .content-wrap.w-flex.no-shrink.basis-zero(:class="`page--${$route.name}`")
     transition(name="fade")
       w-progress(v-if="loading" color="primary" tile absolute)
@@ -11,7 +11,7 @@ w-app.fill-height.w-flex.column
       v-if="!isMobile"
       ref="nav-menu"
       :class="{ 'nav-menu--fixed': fixNavMenu }"
-      :drawer-open.sync="drawerOpen")
+      v-model:drawer-open="drawerOpen")
     .main-content.w-flex.column.grow
       router-view.grow(#default="{ Component }")
         transition(name="fade-page" mode="out-in")

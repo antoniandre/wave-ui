@@ -112,7 +112,7 @@ w-app.home
                     | The form has {{ form6.errorsCount }} errors.
               w-form.pa4.pt2.grey(
                 v-model="form6.valid"
-                :errors-count.sync="form6.errorsCount"
+                v-model:errors-count="form6.errorsCount"
                 @validate="onValidate"
                 @success="onSuccess")
                 w-input(required label="First name" :validators="[validators.required]")

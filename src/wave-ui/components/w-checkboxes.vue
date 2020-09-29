@@ -2,7 +2,7 @@
 component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: checkboxItems.some(item => item.isChecked), disabled }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="reset"
   :column="!inline"
   :class="classes")
