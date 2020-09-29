@@ -99,7 +99,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur', 'change', 'click:inner-icon-left', 'click:inner-icon-right'],
 
   data () {
     return {
