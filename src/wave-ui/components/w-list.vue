@@ -141,11 +141,11 @@ const renderListItemLabel = function (li, index) {
 
   // Allow overriding the common slot using `template(#item.2)` where to is the index of the item.
   if (hasSingleItemSlot) {
-    vnodes.push(this.$slots[`item.${li.id || index + 1}`]({ item: li, selected: li.selected, index }))
+    vnodes = { default: () => this.$slots[`item.${li.id || index + 1}`]({ item: li, selected: li.selected, index }) }
   }
-  else if (hasSlot) vnodes.push(this.$slots.item({ item: li, selected: li.selected, index }))
+  else if (hasSlot) vnodes = { default: () => this.$slots.item({ item: li, selected: li.selected, index }) }
   else {
-    if (isLink) vnodes = {} // Prevents Vue warning about slot not being a function.
+    vnodes = {} // Prevents Vue warning about slot not being a function.
     if (!this.checklist) component.innerHTML = li[this.itemLabel]
   }
   return h(component.is, component, vnodes)
