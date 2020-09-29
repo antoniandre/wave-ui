@@ -3,7 +3,7 @@ component(
   :is="formRegister && !wCheckboxes ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: isChecked, disabled }"
   :valid.sync="valid"
-  @reset="$emit('input', isChecked = false)"
+  @reset="$emit('update:modelValue', isChecked = false);$emit('input', false);$emit('change', false)"
   :class="classes")
   input(
     ref="input"
@@ -53,7 +53,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'focus', 'change'],
+  emits: ['input', 'update:modelValue', 'focus', 'change'],
 
   data () {
     return {
@@ -85,6 +85,7 @@ export default {
   methods: {
     onChange () {
       this.isChecked = !this.isChecked
+      this.$emit('update:modelValue', this.isChecked)
       this.$emit('input', this.isChecked)
       this.$emit('change', this.isChecked)
 
