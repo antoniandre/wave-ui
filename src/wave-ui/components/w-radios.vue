@@ -2,7 +2,7 @@
 component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="$emit('update:modelValue', inputValue = null);$emit('input', null);$emit('change', null)"
   :column="!inline"
   :class="classes")

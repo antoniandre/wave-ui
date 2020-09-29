@@ -25,6 +25,8 @@ export default {
     drawerOpen: { type: Boolean, default: false }
   },
 
+  emits: ['update:drawerOpen'],
+
   computed: {
     version () {
       return process.env.VUE_APP_VERSION.replace(

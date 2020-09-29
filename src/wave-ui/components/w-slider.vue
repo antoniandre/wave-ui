@@ -2,7 +2,7 @@
 component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: rangeValueScaled, disabled, readonly }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="rangeValuePercent = 0;updateRangeValueScaled()"
   :class="wrapperClasses")
   label.w-slider__label.w-slider__label--left.w-form-el-shakable(

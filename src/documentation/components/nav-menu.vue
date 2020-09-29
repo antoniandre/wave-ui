@@ -33,6 +33,8 @@ export default {
     drawerOpen: { type: Boolean, default: false }
   },
 
+  emits: ['update:drawerOpen'],
+
   data: () => ({
     sections: [
       { label: 'Why Wave UI?', route: { name: 'why-wave-ui' } },

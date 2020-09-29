@@ -2,7 +2,7 @@
 component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: selectionString, disabled, readonly }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="onReset"
   :class="classes")
   template(v-if="labelPosition === 'left'")
