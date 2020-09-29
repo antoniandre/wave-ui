@@ -26,6 +26,7 @@ const marginFromWindowSide = 4 // Amount of px from a window side, instead of ov
 
 export default {
   name: 'w-tooltip',
+
   props: {
     value: {},
     showOnClick: { type: Boolean },
@@ -46,6 +47,8 @@ export default {
     right: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] }
   },
+
+  emits: [],
 
   data: () => ({
     showTooltip: false,
