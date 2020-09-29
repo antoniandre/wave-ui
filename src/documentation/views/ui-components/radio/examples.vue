@@ -81,7 +81,8 @@ div
     | The above example (case 3 &amp; 4) shows that the radio buttons work without the name attribute,
     | using a v-model, but the navigation using the keyboard arrows will not work as the names are not
     | provided.#[br]
-    | Case 4 is fully operational. #[span.code :tada:]#[br]
+    | Case 4 is fully operational. #[span.code :tada:]
+    | (Keyboard arrows navigation is a browser choice, Safari doesn't have it)#[br]
     strong.
       Note that when you use the #[span.code w-radios] component, a unique name is set by default so you don't
       have to worry about it if you don't need it.

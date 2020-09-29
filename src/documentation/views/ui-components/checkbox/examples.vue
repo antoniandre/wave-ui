@@ -1,5 +1,5 @@
 <template lang="pug">
-div.ovh
+div
   w-card(bg-color="blue-light5")
     p.mb3 What it looks like:
     w-checkboxes(:items="checkboxes1" inline)
