@@ -78,6 +78,7 @@ export default {
 
   &__content {
     padding: 3 * $base-increment;
+    flex-grow: 1;
   }
 
   &__actions {
