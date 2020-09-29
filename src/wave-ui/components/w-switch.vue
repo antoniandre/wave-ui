@@ -3,7 +3,7 @@ component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: isOn, disabled, readonly }"
   :valid.sync="valid"
-  @reset="$emit('input', isOn = '')"
+  @reset="$emit('update:modelValue', isOn = '');$emit('input', '');$emit('change', '')"
   :class="classes")
   input(
     ref="input"
@@ -49,7 +49,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'change', 'focus'],
+  emits: ['input', 'update:modelValue', 'change', 'focus'],
 
   data () {
     return {
@@ -81,6 +81,7 @@ export default {
   methods: {
     onChange () {
       this.isOn = !this.isOn
+      this.$emit('update:modelValue', this.isOn)
       this.$emit('input', this.isOn)
       this.$emit('change', this.isOn)
 

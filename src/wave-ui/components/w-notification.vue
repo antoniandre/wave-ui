@@ -1,7 +1,7 @@
 <template lang="pug">
 transition(:name="transitionName" appear)
   .w-notification(v-if="show" :class="classes" :style="styles")
-    w-alert(v-bind="alertProps" @input="$emit('input', false)")
+    w-alert(v-bind="alertProps" @input="$emit('update:modelValue', false);$emit('input', false)")
       slot
 </template>
 
@@ -45,7 +45,7 @@ export default {
     xl: { type: Boolean }
   },
 
-  emits: ['input'],
+  emits: ['input', 'update:modelValue', 'close'],
 
   data () {
     return {
@@ -127,7 +127,11 @@ export default {
       this.show = value
 
       if (value && this.timeoutVal) {
-        this.timeoutId = setTimeout(() => this.$emit('input', this.show = false), this.timeoutVal)
+        this.timeoutId = setTimeout(() => {
+          this.$emit('update:modelValue', this.show = false)
+          this.$emit('input', false)
+          this.$emit('close')
+        }, this.timeoutVal)
       }
     }
   }

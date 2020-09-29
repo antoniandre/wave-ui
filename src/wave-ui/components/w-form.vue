@@ -25,7 +25,18 @@ export default {
     errorPlaceholders: { type: Boolean }
   },
 
-  emits: ['before-validate', 'validate', 'success', 'error', 'reset', 'input', 'submit'],
+  emits: [
+    'submit',
+    'before-validate',
+    'validate',
+    'success',
+    'error',
+    'reset',
+    'input',
+    'update:modelValue',
+    'update:valid',
+    'update:errorsCount'
+  ],
 
   data: () => ({
     formElements: [],
@@ -127,6 +138,7 @@ export default {
                        : this.formElements.reduce((sum, el) => sum + ~~(el.Validation.isValid === false), 0)
       this.status = reset ? null : !this.errorsCount
 
+      this.$emit('update:modelValue', this.status)
       this.$emit('input', this.status)
       this.$emit('update:errorsCount', this.errorsCount)
     },

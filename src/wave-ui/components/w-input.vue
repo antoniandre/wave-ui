@@ -3,7 +3,7 @@ component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
   :valid.sync="valid"
-  @reset="$emit('input', inputValue = '')"
+  @reset="$emit('update:modelValue', inputValue = '');$emit('input', '');$emit('change', '')"
   :class="classes")
   input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
   template(v-else)
@@ -99,7 +99,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
 
   data () {
     return {
@@ -160,7 +160,9 @@ export default {
   methods: {
     onInput (e) {
       this.inputNumberError = e.target.validity.badInput // For input type number.
+      this.$emit('update:modelValue', this.inputValue)
       this.$emit('input', this.inputValue)
+      this.$emit('change', this.inputValue)
     },
     onFocus (e) {
       this.isFocused = true

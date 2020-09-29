@@ -52,7 +52,7 @@ export default {
     card: { type: Boolean }
   },
 
-  emits: ['input', 'change', 'focus'],
+  emits: ['input', 'update:modelValue', 'change', 'focus'],
 
   data: () => ({
     activeTabEl: null,
@@ -154,6 +154,7 @@ export default {
       // Unset active on other tabs.
       this.tabsItems.forEach(obj => obj.index !== item.index && (obj.active = false))
       const activeItem = this.tabsItems.map(item => item.active)
+      this.$emit('update:modelValue', activeItem)
       this.$emit('input', activeItem)
       this.$emit('change', activeItem)
 
