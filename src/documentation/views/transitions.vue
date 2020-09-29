@@ -13,8 +13,6 @@ div
     li.mt1 #[code w-transition-slide]
     li.mt1 #[code w-transition-slide-fade]
 
-  //- p Each component has a css transition that you can also use in various components.
-
   title-link(h2) Transitions showcase
   example
     w-flex(align-center)
