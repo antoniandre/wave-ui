@@ -10,7 +10,8 @@ w-overlay.w-dialog(
   :class="classes")
   transition(:name="transition" appear @after-leave="onClose")
     w-card.w-dialog__content(
-      v-if="showContent" no-border
+      v-if="showContent"
+      no-border
       :title-class="titleClass"
       :content-class="contentClass"
       :title="title || undefined"
@@ -41,7 +42,7 @@ export default {
     overlayOpacity: { type: [Number, String, Boolean] }
   },
 
-  emits: ['input', 'close'],
+  emits: ['input', 'update:modelValue', 'close'],
 
   data () {
     return {
@@ -74,6 +75,7 @@ export default {
     },
     onClose () {
       this.showWrapper = false
+      this.$emit('update:modelValue', false)
       this.$emit('input', false)
       this.$emit('close', false)
     }

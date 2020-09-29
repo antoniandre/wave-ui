@@ -24,7 +24,7 @@ export default {
     persistentNoAnimation: { type: Boolean }
   },
 
-  emits: ['input', 'click'],
+  emits: ['input', 'update:modelValue', 'click', 'close'],
 
   data: () => ({
     persistentAnimate: false
@@ -57,7 +57,11 @@ export default {
         this.persistentAnimate = true
         setTimeout(() => (this.persistentAnimate = false), 150) // Must match CSS animation duration.
       }
-      else if (!this.persistent) this.$emit('input', false)
+      else if (!this.persistent) {
+        this.$emit('update:modelValue', false)
+        this.$emit('input', false)
+        this.$emit('close', false)
+      }
 
       this.$emit('click')
     }

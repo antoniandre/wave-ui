@@ -30,7 +30,8 @@ component(
       .w-slider__thumb(:style="thumbStyles")
         button.w-slider__thumb-button(
           ref="thumb"
-          :id="`button--${_uid}`" :class="[color]"
+          :id="`button--${_uid}`"
+          :class="[color]"
           :name="inputName"
           :value="rangeValueScaled"
           :disabled="disabled || null"
@@ -38,6 +39,7 @@ component(
           :aria-readonly="readonly ? 'true' : 'false'"
           @keydown.left="onKeyDown($event, -1)"
           @keydown.right="onKeyDown($event, 1)"
+          @focus="$emit('focus', $event)"
           @click.prevent)
         label.w-slider__thumb-label(
           v-if="thumbLabel"
@@ -92,7 +94,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input'],
+  emits: ['input', 'update:modelValue', 'change', 'focus'],
 
   data: () => ({
     track: {
@@ -222,7 +224,9 @@ export default {
 
     updateRangeValueScaled () {
       this.rangeValueScaled = this.percentToScaled(this.rangeValuePercent)
+      this.$emit('update:modelValue', this.rangeValueScaled)
       this.$emit('input', this.rangeValueScaled)
+      this.$emit('change', this.rangeValueScaled)
     }
   },
 

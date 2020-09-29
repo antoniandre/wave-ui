@@ -3,7 +3,7 @@ component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled }"
   :valid.sync="valid"
-  @reset="$emit('input', inputValue = null)"
+  @reset="$emit('update:modelValue', inputValue = null);$emit('input', null);$emit('change', null)"
   :column="!inline"
   :class="classes")
   w-radio(
@@ -39,7 +39,7 @@ export default {
     color: { type: String, default: 'primary' }
   },
 
-  emits: ['input', 'change', 'focus'],
+  emits: ['input', 'update:modelValue', 'change', 'focus'],
 
   provide () {
     // Disable w-form-el wrapping in each w-radio when inside a w-radios component that already does it.
@@ -72,6 +72,7 @@ export default {
   methods: {
     onChange (item) {
       this.inputValue = true
+      this.$emit('update:modelValue', item.value)
       this.$emit('input', item.value)
       this.$emit('change', item.value)
     }

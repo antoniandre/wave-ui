@@ -16,7 +16,7 @@ component(
     :color="item.color"
     :round="round"
     @input="toggleCheck(item, $event)"
-    @focus="this.$emit('input', $event)"
+    @focus="$emit('focus', $event)"
     :class="{ mt1: !inline && i }")
     slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
@@ -42,7 +42,7 @@ export default {
     color: { type: String, default: 'primary' }
   },
 
-  emits: ['input', 'focus', 'change'],
+  emits: ['input', 'update:modelValue', 'focus', 'change'],
 
   provide () {
     // Disable w-form-el wrapping in each w-checkbox when inside a w-checkboxes component that already
@@ -78,6 +78,7 @@ export default {
   methods: {
     reset () {
       this.checkboxItems.forEach(item => (item.isChecked = null))
+      this.$emit('update:modelValue', [])
       this.$emit('input', [])
       this.$emit('change', [])
     },
@@ -86,6 +87,7 @@ export default {
       checkbox.isChecked = isChecked
       const selection = this.checkboxItems.filter(item => item.isChecked).map(item => item.value)
 
+      this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
       this.$emit('change', selection)
     }

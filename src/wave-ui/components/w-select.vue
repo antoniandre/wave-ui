@@ -132,7 +132,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
+  emits: ['input', 'update:modelValue', 'change', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
 
   data: () => ({
     // Selection is always an array (internally), but emits a single value if not multiple.
@@ -224,13 +224,19 @@ export default {
 
       // Emit the selection to the v-model.
       // Note: this.inputValue is always an array of objects that have a `value`.
-      this.$emit('input', this.multiple ? items : items[0])
+      const selection = this.multiple ? items : items[0]
+      this.$emit('update:modelValue', selection)
+      this.$emit('input', selection)
+      this.$emit('change', selection)
     },
     onReset () {
       this.inputValue = []
       // Emit the selection to the v-model.
       // Note: this.inputValue is always an array of objects that have a `value`.
-      this.$emit('input', this.multiple ? this.inputValue : this.inputValue[0])
+      const selection = this.multiple ? [] : null
+      this.$emit('update:modelValue', selection)
+      this.$emit('input', selection)
+      this.$emit('change', selection)
     },
     // Convert the received items selection to array if it is a unique value.
     // Also accept objects if returnObject is true.

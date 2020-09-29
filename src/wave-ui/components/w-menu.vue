@@ -78,7 +78,7 @@ export default {
     persistent: { type: Boolean }
   },
 
-  emits: ['input'],
+  emits: ['input', 'update:modelValue', 'open', 'close'],
 
   data: () => ({
     showMenu: false,
@@ -208,7 +208,11 @@ export default {
         // In `getCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
         // if we don't postpone the Menu apparition it will start transition from a visible menu and
         // thus will not transition.
-        this.timeoutId = setTimeout(() => this.$emit('input', (this.showMenu = true)), 10)
+        this.timeoutId = setTimeout(() => {
+          this.$emit('update:modelValue', (this.showMenu = true))
+          this.$emit('input', true)
+          this.$emit('open')
+        }, 10)
 
         if (!this.persistent) document.addEventListener('mousedown', this.onOutsideMousedown)
         window.addEventListener('resize', this.onResize)
@@ -216,7 +220,9 @@ export default {
 
       // Close the menu.
       else {
-        this.$emit('input', (this.showMenu = false))
+        this.$emit('update:modelValue', (this.showMenu = false))
+        this.$emit('input', false)
+        this.$emit('close')
         // Remove the mousedown listener if the menu got closed without a mousedown outside of the menu.
         document.removeEventListener('mousedown', this.onOutsideMousedown)
         window.removeEventListener('resize', this.onResize)
@@ -225,7 +231,9 @@ export default {
 
     onOutsideMousedown (e) {
       if (!this.menuEl.contains(e.target)) {
-        this.$emit('input', (this.showMenu = false))
+        this.$emit('update:modelValue', (this.showMenu = false))
+        this.$emit('input', false)
+        this.$emit('close')
         document.removeEventListener('mousedown', this.onOutsideMousedown)
         window.removeEventListener('resize', this.onResize)
       }

@@ -1,8 +1,8 @@
 <template lang="pug">
 span.w-tag(
   v-on="$listeners"
-  @click="$emit('input', !value)"
-  @keypress.enter="$emit('input', !value)"
+  @click="$emit('update:modelValue', !value);$emit('input', !value)"
+  @keypress.enter="$emit('update:modelValue', !value);$emit('input', !value)"
   :class="classes"
   :role="value !== -1 && 'button'"
   :aria-pressed="value !== -1 && (value ? 'true' : 'false')"
@@ -11,7 +11,7 @@ span.w-tag(
   slot
   i(
     v-if="closable && value"
-    @click.stop="$emit('input', false)"
+    @click.stop="$emit('update:modelValue', false);$emit('input', false)"
     role="icon"
     aria-hidden="true"
     class="w-icon w-tag__closable wi-cross")
@@ -40,7 +40,7 @@ export default {
     height: { type: [String, Number] }
   },
 
-  emits: ['input'],
+  emits: ['input', 'update:modelValue'],
 
   computed: {
     presetSize () {

@@ -3,7 +3,7 @@ component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
   :valid.sync="valid"
-  @reset="$emit('input', inputValue = '')"
+  @reset="$emit('update:modelValue', inputValue = '');$emit('input', '');$emit('change', '')"
   :class="classes")
   //- Left label.
   template(v-if="labelPosition === 'left'")
@@ -92,7 +92,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
 
   data () {
     return {
@@ -162,7 +162,9 @@ export default {
   methods: {
     onInput () {
       if (!this.noAutogrow && !this.resizable) this.computeHeight()
+      this.$emit('update:modelValue', this.inputValue)
       this.$emit('input', this.inputValue)
+      this.$emit('change', this.inputValue)
     },
     onFocus (e) {
       this.isFocused = true

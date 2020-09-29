@@ -3,7 +3,7 @@ component(
   :is="formRegister && !wRadios ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled }"
   :valid.sync="valid"
-  @reset="$emit('input', inputValue = false)"
+  @reset="$emit('update:modelValue', inputValue = false);$emit('input', false);$emit('change', false)"
   :class="classes")
   input(
     ref="input"
@@ -50,7 +50,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'focus', 'change'],
+  emits: ['input', 'update:modelValue', 'focus', 'change'],
 
   data: () => ({
     inputValue: false,
@@ -83,6 +83,7 @@ export default {
     onChange (e) {
       this.inputValue = e.target.checked // The source of truth is the radio button.
       const returnValue = this.inputValue && this.returnValue !== undefined ? this.returnValue : this.inputValue
+      this.$emit('update:modelValue', returnValue)
       this.$emit('input', returnValue)
       this.$emit('change', returnValue)
 
