@@ -16,8 +16,9 @@ module.exports = {
     }
   },
   chainWebpack: config => {
-    const svgRule = config.module.rule('svg');
-    svgRule.uses.clear();
+    const svgRule = config.module.rule('svg')
+    svgRule.uses.clear()
+
     svgRule
       .oneOf('inline')
       .resourceQuery(/inline/)
@@ -36,15 +37,14 @@ module.exports = {
       })
 
     // Preserve white spaces for ssh-pre component.
-    config.module
-      .rule('vue')
-      .use('vue-loader')
-      .loader('vue-loader')
-      .tap(options => {
-        options.compilerOptions.whitespace = 'preserve'
-        return options
-      })
-    },
+    // config.module
+    //   .rule('vue')
+    //   .use('vue-loader')
+    //   .tap(options => {
+    //     options.compilerOptions.whitespace = 'preserve'
+    //     return options
+    //   })
+  },
   css: {
     loaderOptions: {
       sass: {
