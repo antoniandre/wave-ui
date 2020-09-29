@@ -63,6 +63,7 @@ const renderListItemLabel = function (createEl, li, index) {
   // ------------------------------------------------------
   const click = () => {
     if (!li.disabled) {
+      // eslint-disable-next-line no-unused-vars
       const { _value, ...cleanLi } = li // Keep `_selected` as it may be useful.
       this.$emit('item-click', cleanLi)
     }
