@@ -45,7 +45,7 @@ export default {
     overlayOpacity: { type: [Number, String, Boolean] }
   },
 
-  emits: ['input', 'close'],
+  emits: ['update:modelValue', 'close'],
 
   data () {
     return {
@@ -109,7 +109,7 @@ export default {
   methods: {
     close () {
       this.showDrawer = false
-      this.$emit('input', false)
+      this.$emit('update:modelValue', false)
       this.$emit('close', false)
     },
     onOutsideClick () {

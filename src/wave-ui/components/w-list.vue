@@ -25,6 +25,7 @@ const renderListItems = function () {
              // Accepts `template(#item.2)`.
             [`item.${li.id || index + 1}`]: props => this.$slots[`item.${li.id || index + 1}`](...props)
           },
+          'onUpdate:modelValue': value => this.$emit('update:modelValue', value),
           onInput: value => this.$emit('input', value),
           onChange: value => this.$emit('change', value),
           onItemClick: value => this.$emit('item-click', value)
@@ -178,7 +179,7 @@ export default {
     arrowsNavigation: { type: Boolean }
   },
 
-  emits: ['input', 'item-click', 'keydown:escape'],
+  emits: ['input', 'update:modelValue', 'change', 'item-click', 'keydown:escape'],
 
   data: () => ({
     // The selected items are given in the value prop.
@@ -289,6 +290,7 @@ export default {
 
       // `selectedItems` is always an array of items, but on set, it emits a single value if not `multiple`.
       const selection = this.isMultipleSelect ? items : (items[0] !== undefined ? items[0] : null)
+      this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
       this.$emit('change', selection)
     },

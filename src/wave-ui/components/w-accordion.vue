@@ -57,7 +57,7 @@ export default {
     shadow: { type: Boolean }
   },
 
-  emits: ['input', 'change', 'focus'],
+  emits: ['input', 'update:modelValue', 'change', 'focus'],
 
   computed: {
     accordionItems () {
@@ -93,6 +93,7 @@ export default {
       item.open = !item.open
       if (this.expandSingle) this.accordionItems.forEach(obj => obj.index !== item.index && (obj.open = false))
       const openItems = this.accordionItems.map(item => item.open)
+      this.$emit('update:modelValue', openItems)
       this.$emit('input', openItems)
       this.$emit('change', openItems)
     }

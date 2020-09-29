@@ -32,7 +32,7 @@ export default {
     column: { default: false } // Flex direction of the embedded component: column or row by default.
   },
 
-  emits: ['reset'],
+  emits: ['reset', 'update:valid'],
 
   data: () => ({
       Validation: {
