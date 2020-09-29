@@ -1,5 +1,5 @@
 <template lang="pug">
-div.ovh
+div
   title-link(h2) Simple toolbar with shadow
   example(content-class="pa4")
     w-toolbar(shadow)

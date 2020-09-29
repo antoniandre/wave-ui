@@ -1,5 +1,5 @@
 <template lang="pug">
-div.ovh
+div
   title-link.mt4(h1) Transitions
 
   p Here is a list of all the available transition components.

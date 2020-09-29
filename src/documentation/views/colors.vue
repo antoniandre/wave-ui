@@ -1,5 +1,5 @@
 <template lang="pug">
-div.ovh
+div
   title-link.mt4(h1) Colors
   p.
     Wave UI colors work in a very simple way: for instance the class
