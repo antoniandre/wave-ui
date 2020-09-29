@@ -103,8 +103,8 @@ div.ovh
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
     .w-flex.wrap.ma-2.basis-zero
       .color-palette.ma2(
-        v-for="({ color, label, shades }, i) in colors"
-        :key="i")
+        v-for="({ color, label, shades }, j) in colors"
+        :key="j")
         template(v-for="(shade, i) in shades")
           //- top color.
           .color.color--top(v-if="i === 5" :class="`${label}--bg`")

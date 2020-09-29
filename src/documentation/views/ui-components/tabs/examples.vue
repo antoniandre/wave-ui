@@ -169,7 +169,7 @@ div
     template(#pug).
       w-flex.mb3(align-center)
         | Number of tabs:
-        w-button.mx2(icon="wi-minus" sm @click="tabsCount -= tabsCount < 1 ? 0 : 1")
+        w-button.mx2(icon="wi-minus" sm @click="tabsCount -= tabsCount &lt; 1 ? 0 : 1")
         code {{ '\{\{ tabsCount \}\}' }}
         w-button.mx2(icon="wi-plus" sm @click="tabsCount++")
       w-tabs(:items="tabsCount")
