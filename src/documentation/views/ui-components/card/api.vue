@@ -4,7 +4,7 @@ div
   title-link.title1(h2) API
   alert.mb6(info) This API will soon be more detailed.
 
-  api.mt0(:items="props" :descriptions="propsDescriptions" title="Props")
+  api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
   api(:items="slots" title="Slots")
 
@@ -14,23 +14,26 @@ div
 <script>
 import WCard from '@/wave-ui/components/w-card'
 
-const propsDescriptions = {
-}
+const propsDescs = {}
 
 const slots = {}
 
-const events = {}
+const eventsDescs = {}
 
 export default {
   data: () => ({
-    propsDescriptions,
-    slots,
-    events
+    propsDescs,
+    slots
   }),
 
   computed: {
+    // Reads all the props and events directly from the component, so that as soon as a new prop or event
+    // is added it will appear even if no description is yet provided.
     props () {
       return WCard.props
+    },
+    events () {
+      return WCard.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
     }
   }
 }

@@ -16,6 +16,7 @@
 <script>
 export default {
   name: 'w-card',
+
   props: {
     color: { type: String },
     bgColor: { type: String },
@@ -26,6 +27,8 @@ export default {
     titleClass: { type: String },
     contentClass: { type: String }
   },
+
+  emits: [],
 
   computed: {
     titleHasToolbar () {

@@ -4,7 +4,7 @@ div
   title-link.title1(h2) API
   alert.mb6(info) This API will soon be more detailed.
 
-  api.mt0(:items="props" :descriptions="propsDescriptions" title="Props")
+  api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
   api(:items="slots" title="Slots")
 
@@ -14,23 +14,28 @@ div
 <script>
 import WApp from '@/wave-ui/components/w-app'
 
-const propsDescriptions = {
+const propsDescs = {}
+
+const slots = {
+  default: { description: 'The content of the app.' }
 }
 
-const slots = { default: { description: 'The content of the app.' } }
-
-const events = {}
+const eventsDescs = {}
 
 export default {
   data: () => ({
-    propsDescriptions,
-    slots,
-    events
+    propsDescs,
+    slots
   }),
 
   computed: {
+    // Reads all the props and events directly from the component, so that as soon as a new prop or event
+    // is added it will appear even if no description is yet provided.
     props () {
       return WApp.props
+    },
+    events () {
+      return (WApp.emits || []).reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
     }
   }
 }
