@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-button(
+component.w-button(
   :is="to ? ($router && !externalLink && !forceLink ? 'router-link' : 'a') : 'button'"
   :type="!to && type"
   :to="$router && to"
