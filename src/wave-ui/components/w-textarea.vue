@@ -71,7 +71,7 @@ export default {
   mixins: [FormElementMixin],
 
   props: {
-    value: { default: '' },
+    modelValue: { default: '' },
     label: { type: String },
     labelPosition: { type: String, default: 'inside' },
     innerIconLeft: { type: String },
@@ -96,7 +96,7 @@ export default {
 
   data () {
     return {
-      inputValue: this.value,
+      inputValue: this.modelValue,
       isFocused: false,
       // When autogrow, calculate the height from the number of carriage return & font size.
       height: null,
@@ -191,7 +191,7 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       this.inputValue = value
       this.computeHeight()
     },

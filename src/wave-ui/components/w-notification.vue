@@ -11,7 +11,7 @@ export default {
 
   props: {
     // Notification props.
-    value: { default: true }, // Show or hide.
+    modelValue: { default: true }, // Show or hide.
     transition: { type: [String, Boolean], default: '' },
     timeout: { type: [Number, String], default: 0 },
     absolute: { type: Boolean },
@@ -49,7 +49,7 @@ export default {
 
   data () {
     return {
-      show: this.value,
+      show: this.modelValue,
       timeoutId: null
     }
   },
@@ -77,7 +77,7 @@ export default {
 
     alertProps () {
       return {
-        value: this.show,
+        modelValue: this.show,
         success: this.success,
         info: this.info,
         warning: this.warning,
@@ -122,7 +122,7 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       clearTimeout(this.timeoutId)
       this.show = value
 

@@ -89,35 +89,35 @@ div
     w-flex(wrap :gap="2")
       .grow.mb4(style="min-width: 200px")
         .title4.mb2 Underline style (default)
-        w-input.mb1(value="Some content")
-        w-input.mb1(color="red" value="Some content")
-        w-input.mb1(bg-color="red-light5" value="Some content")
-        w-input.mb1(color="red-dark1" bg-color="red-light5" value="Some content")
-        w-input.mb1(color="orange-dark1" bg-color="orange-light5" value="Some content")
+        w-input.mb1(model-value="Some content")
+        w-input.mb1(color="red" model-value="Some content")
+        w-input.mb1(bg-color="red-light5" model-value="Some content")
+        w-input.mb1(color="red-dark1" bg-color="red-light5" model-value="Some content")
+        w-input.mb1(color="orange-dark1" bg-color="orange-light5" model-value="Some content")
       .grow.mb4(style="min-width: 200px")
         .title4.mb2 Outline style
-        w-input.mb1(value="Some content" outline)
-        w-input.mb1(color="red" value="Some content" outline)
-        w-input.mb1(bg-color="red-light5" value="Some content" outline)
-        w-input.mb1(color="red-dark1" bg-color="red-light5" value="Some content" outline)
-        w-input.mb1(color="orange-dark1" bg-color="orange-light5" value="Some content" outline)
+        w-input.mb1(model-value="Some content" outline)
+        w-input.mb1(color="red" model-value="Some content" outline)
+        w-input.mb1(bg-color="red-light5" model-value="Some content" outline)
+        w-input.mb1(color="red-dark1" bg-color="red-light5" model-value="Some content" outline)
+        w-input.mb1(color="orange-dark1" bg-color="orange-light5" model-value="Some content" outline)
     template(#pug).
       w-flex(wrap :gap="2")
         .grow.mb4(style="min-width: 200px")
           .title4.mb2 Underline style (default)
-          w-input.mb1(value="Some content")
-          w-input.mb1(color="red" value="Some content")
-          w-input.mb1(bg-color="red-light5" value="Some content")
-          w-input.mb1(color="red-dark1" bg-color="red-light5" value="Some content")
-          w-input.mb1(color="orange-dark1" bg-color="orange-light5" value="Some content")
+          w-input.mb1(model-value="Some content")
+          w-input.mb1(color="red" model-value="Some content")
+          w-input.mb1(bg-color="red-light5" model-value="Some content")
+          w-input.mb1(color="red-dark1" bg-color="red-light5" model-value="Some content")
+          w-input.mb1(color="orange-dark1" bg-color="orange-light5" model-value="Some content")
 
         .grow.mb4(style="min-width: 200px")
           .title4.mb2 Outline style
-          w-input.mb1(value="Some content" outline)
-          w-input.mb1(color="red" value="Some content" outline)
-          w-input.mb1(bg-color="red-light5" value="Some content" outline)
-          w-input.mb1(color="red-dark1" bg-color="red-light5" value="Some content" outline)
-          w-input.mb1(color="orange-dark1" bg-color="orange-light5" value="Some content" outline)
+          w-input.mb1(model-value="Some content" outline)
+          w-input.mb1(color="red" model-value="Some content" outline)
+          w-input.mb1(bg-color="red-light5" model-value="Some content" outline)
+          w-input.mb1(color="red-dark1" bg-color="red-light5" model-value="Some content" outline)
+          w-input.mb1(color="orange-dark1" bg-color="orange-light5" model-value="Some content" outline)
 
   title-link(h2) Label position
   p The default label position is "#[span.code inside]", but it can also be "#[span.code left]" or "#[span.code right]".
@@ -218,14 +218,14 @@ div
   title-link(h2) Disabled &amp; readonly
   example
     w-input.mb3(label="Disabled & empty" outline disabled)
-    w-input.mb3(label="Disabled & filled" value="Some content" outline disabled)
+    w-input.mb3(label="Disabled & filled" model-value="Some content" outline disabled)
     w-input.mb3(label="Readonly & empty" outline readonly)
-    w-input.mb3(label="Readonly & filled" value="Some content" outline readonly)
+    w-input.mb3(label="Readonly & filled" model-value="Some content" outline readonly)
     template(#pug).
       w-input.mb3(label="Disabled &amp; empty" outline disabled)
-      w-input.mb3(label="Disabled &amp; filled" value="Some content" outline disabled)
+      w-input.mb3(label="Disabled &amp; filled" model-value="Some content" outline disabled)
       w-input.mb3(label="Readonly &amp; empty" outline readonly)
-      w-input.mb3(label="Readonly &amp; filled" value="Some content" outline readonly)
+      w-input.mb3(label="Readonly &amp; filled" model-value="Some content" outline readonly)
 
   title-link(h2) Types
   p The default type is "#[span.code text]" but the types bellow are also supported.

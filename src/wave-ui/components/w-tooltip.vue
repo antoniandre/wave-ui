@@ -27,7 +27,7 @@ const marginFromWindowSide = 4 // Amount of px from a window side, instead of ov
 export default {
   name: 'w-tooltip',
   props: {
-    value: {},
+    modelValue: {},
     showOnClick: { type: Boolean },
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
@@ -265,7 +265,7 @@ export default {
       this.activatorEl = this.$refs.wrapper.firstElementChild
       if (this.detachTo) this.insertTooltip()
 
-      if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
+      if (this.modelValue) this.toggle({ type: 'click', target: this.activatorEl })
     })
   },
 
@@ -278,7 +278,7 @@ export default {
   },
 
   watch: {
-    value () {
+    modelValue () {
       this.toggle({ type: 'click', target: this.activatorEl })
     }
   }

@@ -33,7 +33,7 @@ component(
           :id="`button--${_.uid}`"
           :class="[color]"
           :name="inputName"
-          :value="rangeValueScaled"
+          :model-value="rangeValueScaled"
           :disabled="disabled || null"
           :readonly="readonly || null"
           :aria-readonly="readonly ? 'true' : 'false'"
@@ -78,7 +78,7 @@ export default {
   mixins: [FormElementMixin],
 
   props: {
-    value: { type: Number, default: 0 },
+    modelValue: { type: Number, default: 0 },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
     stepLabels: { type: [Boolean, Array] },
@@ -233,13 +233,13 @@ export default {
   beforeMount () {
     this.$nextTick(() => {
       this.track.el = this.$refs.track
-      this.rangeValueScaled = this.value
-      this.rangeValuePercent = this.scaledToPercent(this.value)
+      this.rangeValueScaled = this.modelValue
+      this.rangeValuePercent = this.scaledToPercent(this.modelValue)
     })
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       if (this.rangeValueScaled !== value) {
         this.rangeValueScaled = value
         this.rangeValuePercent = this.scaledToPercent(value)

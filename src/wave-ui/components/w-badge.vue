@@ -3,21 +3,21 @@
   slot
   transition(:name="`${transition}`")
     .w-badge__badge(
-      v-if="value"
+      v-if="modelValue"
       :class="classes"
       :style="styles"
       aria-atomic="true"
       aria-label="Badge"
       aria-live="polite"
       role="status")
-      slot(v-if="!dot" name="badge") {{ value === true ? '' : (value || '') }}
+      slot(v-if="!dot" name="badge") {{ modelValue === true ? '' : (modelValue || '') }}
 </template>
 
 <script>
 export default {
   name: 'w-badge',
   props: {
-    value: { default: true },
+    modelValue: { default: true },
     xs: { type: Boolean },
     sm: { type: Boolean },
     md: { type: Boolean },
@@ -67,7 +67,7 @@ export default {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         [this.badgeClass]: this.badgeClass || null,
-        'w-badge__badge--round': this.round || (slotText || this.value + '' || '').length < 2,
+        'w-badge__badge--round': this.round || (slotText || this.modelValue + '' || '').length < 2,
         'w-badge__badge--dark': this.dark && !this.outline,
         'w-badge__badge--outline': this.outline,
         'w-badge__badge--shadow': this.shadow,

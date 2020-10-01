@@ -78,7 +78,7 @@ component(
       ref="w-list"
       @input="onChange"
       @keydown:escape="closeMenu"
-      :value="inputValue"
+      :model-value="inputValue"
       :items="selectItems"
       :multiple="multiple"
       arrows-navigation
@@ -109,7 +109,7 @@ export default {
 
   props: {
     items: { type: Array, required: true },
-    value: {}, // v-model on selected item if any.
+    modelValue: {}, // v-model on selected item if any.
     multiple: { type: Boolean },
     placeholder: { type: String },
     label: { type: String },
@@ -274,11 +274,11 @@ export default {
   },
 
   created () {
-    this.inputValue = this.checkSelection(this.value)
+    this.inputValue = this.checkSelection(this.modelValue)
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       if (value !== this.inputValue) this.inputValue = this.checkSelection(value)
     }
   }

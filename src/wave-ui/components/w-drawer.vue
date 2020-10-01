@@ -19,7 +19,7 @@
 <script>
 // The complexity in this component is on close:
 // we must keep the wrapper in the DOM until the drawer transition is finished.
-// Then emit the value update that will trigger the removal of the wrapper from the DOM.
+// Then emit the modelValue update that will trigger the removal of the wrapper from the DOM.
 
 const oppositeSides = { left: 'right', right: 'left', top: 'down', bottom: 'up' }
 
@@ -27,7 +27,7 @@ export default {
   name: 'w-drawer',
 
   props: {
-    value: { default: true },
+    modelValue: { default: true },
     left: { type: Boolean },
     right: { type: Boolean },
     top: { type: Boolean },
@@ -49,8 +49,8 @@ export default {
 
   data () {
     return {
-      showWrapper: this.value,
-      showDrawer: this.value,
+      showWrapper: this.modelValue,
+      showDrawer: this.modelValue,
       persistentAnimate: false
     }
   },
@@ -122,7 +122,7 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       // If value is true, mount the wrapper in DOM and open the drawer.
       // If value is false, keep the wrapper in DOM and close the drawer;
       // At the end of the drawer transition the value is updated and wrapper

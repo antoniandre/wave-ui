@@ -3,9 +3,9 @@ div
   title-link(h2) Default
   p By default the range will have the #[code primary] color.
   example(content-class="mt5 px6")
-    w-slider(:value="50")
+    w-slider(:model-value="50")
     template(#pug).
-      w-slider(:value="50")
+      w-slider(:model-value="50")
 
   title-link(h2) V-model &amp; external controls
   example(content-class="px6")
@@ -61,18 +61,18 @@ div
 
   title-link(h2) Disabled &amp; readonly
   example(content-class="px6")
-    w-slider.mt2(:value="50" disabled)
-    w-slider.mt8(:value="50" readonly)
+    w-slider.mt2(:model-value="50" disabled)
+    w-slider.mt8(:model-value="50" readonly)
     template(#pug).
-      w-slider.mt2(:value="50" disabled)
-      w-slider.mt8(:value="50" readonly)
+      w-slider.mt2(:model-value="50" disabled)
+      w-slider.mt8(:model-value="50" readonly)
 
   title-link(h2) Labels on the left &amp; right
   example(content-class="px6")
-    w-slider.mt2(:value="50" label-left="0" label-right="100")
-    w-slider.mt6(:value="50" label-left="Left")
-    w-slider.mt6(:value="50" label-right="Right")
-    w-slider.mt12(:value="50")
+    w-slider.mt2(:model-value="50" label-left="0" label-right="100")
+    w-slider.mt6(:model-value="50" label-left="Left")
+    w-slider.mt6(:model-value="50" label-right="Right")
+    w-slider.mt12(:model-value="50")
       template(#label-left)
         span Weight
         w-icon.ml2.green mdi mdi-feather
@@ -80,10 +80,10 @@ div
         w-icon.red mdi mdi-weight
         w-icon.red mdi mdi-weight
     template(#pug).
-      w-slider.mt2(:value="50" label-left="0" label-right="100")
-      w-slider.mt6(:value="50" label-left="Left")
-      w-slider.mt6(:value="50" label-right="Right")
-      w-slider.mt12(:value="50")
+      w-slider.mt2(:model-value="50" label-left="0" label-right="100")
+      w-slider.mt6(:model-value="50" label-left="Left")
+      w-slider.mt6(:model-value="50" label-right="Right")
+      w-slider.mt12(:model-value="50")
         template(#label-left="")
           span Weight
           w-icon.ml2.green mdi mdi-feather
@@ -93,16 +93,16 @@ div
 
   title-link(h2) Thumb label
   example(content-class="pt12 px8")
-    w-slider.mb4(:value="24" thumb-label color="primary-light3")
+    w-slider.mb4(:model-value="24" thumb-label color="primary-light3")
     template(#pug).
-      w-slider.mt12(:value="24" thumb-label color="primary-light3")
+      w-slider.mt12(:model-value="24" thumb-label color="primary-light3")
 
   title-link(h3 slug="custom-label-with-label-slot") Customize the label with the #[span.code label] slot
   example(content-class="pt12 pb8 px8")
-    w-slider(:value="46.3" thumb-label color="primary-light3")
+    w-slider(:model-value="46.3" thumb-label color="primary-light3")
       template(#label="{ value }") {{ ~~(value * 10) / 10 }}%
     template(#pug).
-      w-slider.ma12(:value="46.3" thumb-label color="primary-light3")
+      w-slider.ma12(:model-value="46.3" thumb-label color="primary-light3")
         template(#label="{ value }") {{ '\{\{ parseInt(value * 10) / 10 \}\}' }}%
 
   title-link(h3) Droplet style label
@@ -118,11 +118,11 @@ div
     It is also possible to add classes to the thumb label through the #[code thumb-label-class] option
     to add a color for instance.
   example(content-class="pt12 pl10 pr12")
-    w-slider.mt2.mb12(:value="30" thumb-label="droplet")
-    w-slider.big-label.mt12.mb4(:value="60" thumb-label="droplet" thumb-label-class="info--bg")
+    w-slider.mt2.mb12(:model-value="30" thumb-label="droplet")
+    w-slider.big-label.mt12.mb4(:model-value="60" thumb-label="droplet" thumb-label-class="info--bg")
     template(#pug).
-      w-slider.ma12(:value="30" thumb-label="droplet")
-      w-slider.big-label.ma12(:value="60" thumb-label="droplet" thumb-label-class="info--bg")
+      w-slider.ma12(:model-value="30" thumb-label="droplet")
+      w-slider.big-label.ma12(:model-value="60" thumb-label="droplet" thumb-label-class="info--bg")
     template(#css).
       .big-label {font-size: 1.4em;}
 

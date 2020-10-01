@@ -1,8 +1,8 @@
 <template lang="pug">
 transition(name="fade" mode="out-in" appear)
   .w-overlay(
-    v-if="value"
-    :style="(value && styles) || false"
+    v-if="modelValue"
+    :style="(modelValue && styles) || false"
     @keydown.escape.stop="onClick"
     @click="onClick"
     v-focus
@@ -16,7 +16,7 @@ export default {
   name: 'w-overlay',
 
   props: {
-    value: { type: Boolean },
+    modelValue: { type: Boolean },
     opacity: { type: [Number, String, Boolean] },
     bgColor: { type: [String, Boolean] },
     zIndex: { type: [Number, String, Boolean] },

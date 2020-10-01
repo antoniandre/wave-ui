@@ -105,7 +105,7 @@ const renderListItemLabel = function (li, index) {
   // ------------------------------------------------------
   else if (this.checklist) {
     component.is = resolveComponent('w-checkbox')
-    component.value = li.selected
+    component.modelValue = li.selected
     component.color = li[this.itemColor] || this.color
     component.round = this.roundCheckboxes
     component.disabled = li.disabled
@@ -118,7 +118,7 @@ const renderListItemLabel = function (li, index) {
       click: e => {
         if (e.target.classList.contains('w-checkbox')) {
           this.selectItem(li)
-          component.value = li.selected
+          component.modelValue = li.selected
         }
       }
     }
@@ -156,7 +156,7 @@ export default {
 
   props: {
     items: { type: [Array, Number], required: true }, // All the possible options.
-    value: {}, // v-model on selected item if any.
+    modelValue: {}, // v-model on selected item if any.
     checklist: { type: Boolean },
     roundCheckboxes: { type: Boolean }, // Checklist option.
     // If selectable (if value !== false), this allows multiple selections.
@@ -182,8 +182,8 @@ export default {
   emits: ['input', 'update:modelValue', 'change', 'item-click', 'keydown:escape'],
 
   data: () => ({
-    // The selected items are given in the value prop.
-    // But if no value prop is set for checklist for instance, it has to still
+    // The selected items are given in the modelValue prop.
+    // But if no modelValue prop is set for checklist for instance, it has to still
     // keep track of the selected items.
     selectedItems: []
   }),
@@ -217,7 +217,7 @@ export default {
     },
 
     isSelectable () {
-      return this.value !== undefined || this.checklist || this.nav
+      return this.modelValue !== undefined || this.checklist || this.nav
     },
 
     classes () {
@@ -313,11 +313,11 @@ export default {
   },
 
   created () {
-    this.selectedItems = this.checkSelection(this.value)
+    this.selectedItems = this.checkSelection(this.modelValue)
   },
 
   watch: {
-    value (items) {
+    modelValue (items) {
       this.selectedItems = this.checkSelection(items)
     },
 

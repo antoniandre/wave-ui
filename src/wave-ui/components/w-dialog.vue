@@ -1,7 +1,7 @@
 <template lang="pug">
 w-overlay.w-dialog(
   v-if="showWrapper"
-  :value="showWrapper"
+  :model-value="showWrapper"
   :persistent="persistent"
   :persistent-no-animation="persistentNoAnimation"
   @click="onOutsideClick"
@@ -27,7 +27,7 @@ export default {
   name: 'w-dialog',
 
   props: {
-    value: { type: Boolean, default: true },
+    modelValue: { type: Boolean, default: true },
     width: { type: Number, default: 0 },
     fullscreen: { type: Boolean },
     persistent: { type: Boolean },
@@ -45,8 +45,8 @@ export default {
 
   data () {
     return {
-      showWrapper: this.value,
-      showContent: this.value
+      showWrapper: this.modelValue,
+      showContent: this.modelValue
     }
   },
 
@@ -80,7 +80,7 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       // If value is true, mount the wrapper in DOM and open the dialog.
       // If value is false, keep the wrapper in DOM and close the dialog;
       // At the end of the dialog transition the value is updated and wrapper removed from the DOM.

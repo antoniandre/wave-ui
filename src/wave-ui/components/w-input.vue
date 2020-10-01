@@ -75,7 +75,7 @@ export default {
   mixins: [FormElementMixin],
 
   props: {
-    value: { default: '' },
+    modelValue: { default: '' },
     type: { type: String, default: 'text' },
     label: { type: String },
     labelPosition: { type: String, default: 'inside' },
@@ -103,7 +103,7 @@ export default {
 
   data () {
     return {
-      inputValue: this.value,
+      inputValue: this.modelValue,
       // In case of incorrect input type="number", the inputValue gets emptied,
       // and the label would come back on top of the input text.
       inputNumberError: false,
@@ -175,7 +175,7 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       this.inputValue = value
     }
   }

@@ -37,7 +37,7 @@ div.ovh
         color="primary") Show bottom drawer
 
       w-drawer(
-        :value="!!showDrawer"
+        :model-value="!!showDrawer"
         :[position]="true"
         @close="showDrawer = false")
         w-button.button--close(
