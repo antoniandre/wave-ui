@@ -99,7 +99,7 @@ export default {
       return {
         [`${this.bgColor || (this.plain && this.type)}--bg w-alert--bg`]: this.bgColor || (this.plain && this.type),
         [this.color || (!this.plain && this.type)]: this.color || (!this.plain && this.type),
-        [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
+        [`size--${this.presetSize}`]: this.presetSize,
         [`w-alert--${this.type}`]: this.type,
         'w-alert--has-icon': this.type || this.icon || this.dismiss,
         'w-alert--icon-outside': this.iconOutside,
