@@ -7,7 +7,10 @@ div
 </template>
 
 <script>
+import Examples from './examples'
+import Api from './api'
+
 export default {
-  components: { Examples: () => import('./examples'), Api: () => import('./api') }
+  components: { Examples, Api }
 }
 </script>
