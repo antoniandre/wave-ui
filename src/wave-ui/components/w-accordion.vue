@@ -16,6 +16,7 @@
         :icon="(item.open && collapseIcon) || expandIcon"
         :disabled="item.disabled || null"
         text
+        @keypress.stop
         @click.stop="!item.disabled && toggleItem(item)")
       //- Title.
       slot(v-if="$scopedSlots[`item-title.${item.id || i + 1}`]" :name="`item-title.${item.id || i + 1}`" :item="item")
@@ -26,6 +27,7 @@
         v-if="expandIcon && expandIconRight"
         :icon="(item.open && collapseIcon) || expandIcon"
         text
+        @keypress.stop
         @click.stop="!item.disabled && toggleItem(item)")
     //- Content.
     w-transition-expand(y)
