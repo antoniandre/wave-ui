@@ -18,8 +18,8 @@ export default {
   computed: {
     direction () {
       return (
-        (this.top && 'up') ||
-        (this.bottom && 'down') ||
+        (this.up && 'up') ||
+        (this.down && 'down') ||
         (this.left && 'left') ||
         (this.right && 'right') ||
         'down'
