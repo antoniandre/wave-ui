@@ -14,9 +14,9 @@ import Api from '@/documentation/components/api'
 
 const app = createApp({
   render: () => h(App)
-})
+}).use(router)
 
-const waveui = new WaveUI(app, {
+new WaveUI(app, {
   colors: {
     primary: '#234781',
     secondary: '#d3ebff'
@@ -26,8 +26,6 @@ const waveui = new WaveUI(app, {
     // 'w-button': {}
   }
 })
-
-app.use(router).use(waveui)
 
 app.component('ssh-pre', SshPre)
 app.component('title-link', TitleLink)
