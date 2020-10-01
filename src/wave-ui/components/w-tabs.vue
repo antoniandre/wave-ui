@@ -196,7 +196,7 @@ export default {
   watch: {
     value (array) {
       this.tabsItems.forEach((item, i) => {
-        this.$set(item, 'active', (Array.isArray(array) && array[i]) || false)
+        item.active = (Array.isArray(array) && array[i]) || false
       })
     },
     items () {
