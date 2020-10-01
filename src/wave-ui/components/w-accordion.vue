@@ -104,7 +104,7 @@ export default {
   watch: {
     value (array) {
       this.accordionItems.forEach((item, i) => {
-        this.$set(item, 'open', (Array.isArray(array) && array[i]) || false)
+        item.open = (Array.isArray(array) && array[i]) || false
       })
     }
   }
