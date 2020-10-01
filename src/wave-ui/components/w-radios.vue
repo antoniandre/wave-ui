@@ -9,10 +9,10 @@ component(
   w-radio(
     v-for="(item, i) in radioItems"
     :key="i"
+    :model-value="item.value === modelValue"
     @input="onChange(item)"
     @focus="$emit('focus', $event)"
     :name="inputName"
-    :value="item.value === value"
     :label="item.label"
     :label-on-left="labelOnLeft"
     :color="item.color"
@@ -29,7 +29,7 @@ export default {
 
   props: {
     items: { type: Array, required: true }, // All the possible options.
-    value: { type: [String, Number, Boolean] }, // v-model on selected option.
+    modelValue: { type: [String, Number, Boolean] }, // v-model on selected option.
     name: { type: String },
     labelOnLeft: { type: Boolean },
     itemLabel: { type: String, default: 'label' },

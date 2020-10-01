@@ -21,7 +21,7 @@ export default {
   name: 'w-alert',
 
   props: {
-    value: { default: true }, // Show or hide.
+    modelValue: { default: true }, // Show or hide.
     color: { type: String },
     bgColor: { type: String },
     shadow: { type: Boolean },
@@ -55,7 +55,7 @@ export default {
 
   data () {
     return {
-      show: this.value
+      show: this.modelValue
     }
   },
 
@@ -119,7 +119,7 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       this.show = value
     }
   }

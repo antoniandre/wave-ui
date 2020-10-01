@@ -82,11 +82,11 @@ w-app.home
         w-flex.mt8.ui-demo(basis-zero wrap justify-center :gap="8")
           .left-col.grow
             w-card.white--bg.card--1(content-class="w-flex column" title="Form Elements" title-class="py1 title4")
-              w-checkbox.mt3(:value="true" color="pink") Checkbox
-              w-radio.mt3(:value="true" color="red") Radio
-              w-switch.mt3(:value="true" color="deep-orange") Switch
+              w-checkbox.mt3(:model-value="true" color="pink") Checkbox
+              w-radio.mt3(:model-value="true" color="red") Radio
+              w-switch.mt3(:model-value="true" color="deep-orange") Switch
               w-slider.mt12.mb4.size--sm(
-                :value="75"
+               :model-value="75"
                 thumb-label-class="orange--bg white"
                 thumb-label="droplet"
                 color="amber")
@@ -94,14 +94,14 @@ w-app.home
               .w-flex.align-center.justify-space-around.mt1
                 w-icon.success(xl) mdi mdi-check
                 w-icon.error(xl) mdi mdi-close
-                w-badge(bg-color="green" dot bottom sm overlap value="1")
+                w-badge(bg-color="green" dot bottom sm overlap model-value="1")
                   w-icon.pr2.grey(xl) mdi mdi-account
-                w-badge(bg-color="error" overlap value="1")
+                w-badge(bg-color="error" overlap model-value="1")
                   w-icon.grey(xl) mdi mdi-email
               w-alert.mt4.mb0.text-light(success round dismiss) All good!
 
             w-card.yellow-grad.card--3(content-class="pa0")
-              w-accordion(:value="[true, false, false]" expand-single :items="accordionItems")
+              w-accordion(:model-value="[true, false, false]" expand-single :items="accordionItems")
 
             w-card.white--bg.card--4(content-class="pa0" title="Form validation" title-class="py1 title4")
               .message-box

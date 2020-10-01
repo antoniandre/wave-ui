@@ -6,10 +6,10 @@ div
 
     .title4.mt4 States
     .w-flex.wrap
-      w-radio.mr3.mb1(:value="true" label="Checked")
-      w-radio.mr3.mb1(:value="false" label="Unchecked")
-      w-radio.mr3.mb1(:value="true" disabled label="Checked &amp; disabled")
-      w-radio.mr3.mb1(:value="false" disabled label="Unchecked &amp; disabled")
+      w-radio.mr3.mb1(:model-value="true" label="Checked")
+      w-radio.mr3.mb1(:model-value="false" label="Unchecked")
+      w-radio.mr3.mb1(:model-value="true" disabled label="Checked &amp; disabled")
+      w-radio.mr3.mb1(:model-value="false" disabled label="Unchecked &amp; disabled")
 
   p.mt12.
     There are 2 components: #[span.code w-radio] &amp; #[span.code w-radios].

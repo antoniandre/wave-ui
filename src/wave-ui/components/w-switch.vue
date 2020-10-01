@@ -40,7 +40,7 @@ export default {
   mixins: [FormElementMixin],
 
   props: {
-    value: { default: false }, // v-model.
+    modelValue: { default: false }, // v-model.
     label: { type: String, default: '' },
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
@@ -53,7 +53,7 @@ export default {
 
   data () {
     return {
-      isOn: this.value,
+      isOn: this.modelValue,
       ripple: {
         start: false,
         end: false,
@@ -103,7 +103,7 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       this.isOn = value
     }
   }

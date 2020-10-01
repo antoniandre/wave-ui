@@ -39,7 +39,7 @@ export default {
   inject: { wRadios: { default: null } },
 
   props: {
-    value: { default: false }, // v-model to check or uncheck.
+    modelValue: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-radio are plugged on
     // the same v-model, this allows returning a custom value to the v-model.
     returnValue: {},
@@ -77,7 +77,7 @@ export default {
 
   methods: {
     toggleFromOutside () {
-      this.inputValue = this.returnValue !== undefined ? (this.returnValue === this.value) : this.value
+      this.inputValue = this.returnValue !== undefined ? (this.returnValue === this.modelValue) : this.modelValue
     },
 
     onChange (e) {
@@ -105,11 +105,11 @@ export default {
   },
 
   created () {
-    if (this.value !== undefined) this.toggleFromOutside()
+    if (this.modelValue !== undefined) this.toggleFromOutside()
   },
 
   watch: {
-    value () {
+    modelValue () {
       this.toggleFromOutside()
     }
   }

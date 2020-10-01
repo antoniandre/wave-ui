@@ -44,7 +44,7 @@ export default {
   name: 'w-accordion',
 
   props: {
-    value: { type: Array },
+    modelValue: { type: Array },
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     items: { type: [Array, Number], required: true },
@@ -67,7 +67,7 @@ export default {
       return items.map((item, index) => reactive({
         ...item,
         index,
-        open: this.value && this.value[index],
+        open: this.modelValue && this.modelValue[index],
         disabled: !!item.disabled
       }))
     },
@@ -102,7 +102,7 @@ export default {
   },
 
   watch: {
-    value (array) {
+    modelValue (array) {
       this.accordionItems.forEach((item, i) => {
         item.open = (Array.isArray(array) && array[i]) || false
       })

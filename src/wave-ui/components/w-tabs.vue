@@ -36,7 +36,7 @@ export default {
   name: 'w-tabs',
 
   props: {
-    value: { type: Array },
+    modelValue: { type: Array },
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     items: { type: [Array, Number] },
@@ -90,7 +90,7 @@ export default {
       return items.map((item, index) => reactive({
         ...item,
         index,
-        active: item.active || (this.value && this.value[index]),
+        active: item.active || (this.modelValue && this.modelValue[index]),
         disabled: !!item.disabled
       }))
     },
@@ -194,7 +194,7 @@ export default {
   },
 
   watch: {
-    value (array) {
+    modelValue (array) {
       this.tabsItems.forEach((item, i) => {
         item.active = (Array.isArray(array) && array[i]) || false
       })

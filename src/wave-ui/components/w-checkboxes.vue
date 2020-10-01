@@ -9,10 +9,10 @@ component(
   w-checkbox(
     v-for="(item, i) in checkboxItems"
     :key="i"
+    :model-value="item.isChecked"
     :name="`${name || `w-checkboxes--${_.uid}`}[]`"
     :label="item.label"
     :label-on-left="labelOnLeft"
-    :value="item.isChecked"
     :color="item.color"
     :round="round"
     @input="toggleCheck(item, $event)"
@@ -31,7 +31,7 @@ export default {
 
   props: {
     items: { type: Array, required: true }, // All the possible options.
-    value: { type: Array }, // v-model on selected option.
+    modelValue: { type: Array }, // v-model on selected option.
     name: { type: String, default: null },
     labelOnLeft: { type: Boolean },
     itemLabel: { type: String, default: 'label' },
@@ -62,7 +62,7 @@ export default {
           index: i,
           value: itemValue, // If no value is set then add one to prevent error.
           color: item[this.itemColor] || this.color,
-          isChecked: this.value && this.value.includes(itemValue)
+          isChecked: this.modelValue && this.modelValue.includes(itemValue)
         })
       })
     },

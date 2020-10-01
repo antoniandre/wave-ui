@@ -84,7 +84,7 @@
           w-icon(color="primary") mdi mdi-content-copy
         slot(name="scss")
       w-notification.mr5.mt-1(
-        :value="!!showCopied"
+        :model-value="!!showCopied"
         transition="slide-fade-left"
         plain
         absolute

@@ -40,7 +40,7 @@ export default {
   inject: { wCheckboxes: { default: null } },
 
   props: {
-    value: { default: false }, // v-model to check or uncheck.
+    modelValue: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-checkbox are plugged on
     // the same v-model, this allow returning to the v-model a custom value.
     returnValue: {},
@@ -57,7 +57,7 @@ export default {
 
   data () {
     return {
-      isChecked: this.value,
+      isChecked: this.modelValue,
       ripple: {
         start: false,
         end: false,
@@ -107,7 +107,7 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       this.isChecked = value
     }
   }
