@@ -46,8 +46,8 @@
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^8.0.2",
-    "simple-syntax-highlighter": "^1.4.2",
-    "splitpanes": "^2.2.1",
+    "simple-syntax-highlighter": "^1.0.0-next",
+    "splitpanes": "^3.0.0-next",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-alpha.6",
     "vue-svg-loader": "^0.16.0"
