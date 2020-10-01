@@ -437,25 +437,25 @@ export default {
 }
 
 // slide-fade-up.
-.w-tooltip-slide-fade-up-enter, .w-tooltip-slide-fade-up-leave-to {
+.w-tooltip-slide-fade-up-enter-from, .w-tooltip-slide-fade-up-leave-to {
   margin-top: -2 * $base-increment;
   opacity: 0;
 }
 
 // slide-fade-down.
-.w-tooltip-slide-fade-down-enter, .w-tooltip-slide-fade-down-leave-to {
+.w-tooltip-slide-fade-down-enter-from, .w-tooltip-slide-fade-down-leave-to {
   margin-top: 2 * $base-increment;
   opacity: 0;
 }
 
 // Slide-fade-left.
-.w-tooltip-slide-fade-left-enter, .w-tooltip-slide-fade-left-leave-to {
+.w-tooltip-slide-fade-left-enter-from, .w-tooltip-slide-fade-left-leave-to {
   margin-left: -2 * $base-increment;
   opacity: 0;
 }
 
 // Slide-fade-right.
-.w-tooltip-slide-fade-right-enter, .w-tooltip-slide-fade-right-leave-to {
+.w-tooltip-slide-fade-right-enter-from, .w-tooltip-slide-fade-right-leave-to {
   margin-left: 2 * $base-increment;
   opacity: 0;
 }

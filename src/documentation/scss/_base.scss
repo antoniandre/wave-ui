@@ -28,8 +28,8 @@ p {margin-bottom: 2 * $base-increment;}
 }
 
 // Vue Transitions.
-.fade-page-enter-active, .fade-page-leave-active {transition: opacity 0.12s;}
-.fade-page-enter, .fade-page-leave-to {opacity: 0;}
+.fade-page-enter-active, .fade-page-leave-from-active {transition: opacity 0.12s;}
+.fade-page-enter-from, .fade-page-leave-to {opacity: 0;}
 
 @media screen and (max-width: 800px) {
   .w-app .content-wrap {padding-left: 236px;}
