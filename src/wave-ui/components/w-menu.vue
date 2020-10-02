@@ -26,7 +26,7 @@
     :model-value="showMenu"
     :persistent="persistent"
     :z-index="(zIndex || 200) - 1"
-    @input="showMenu = false")
+    @update:model-value="showMenu = false")
 </template>
 
 <script>

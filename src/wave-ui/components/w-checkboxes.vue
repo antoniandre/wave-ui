@@ -15,7 +15,7 @@ component(
     :label-on-left="labelOnLeft"
     :color="item.color"
     :round="round"
-    @input="toggleCheck(item, $event)"
+    @update:model-value="toggleCheck(item, $event)"
     @focus="$emit('focus', $event)"
     :class="{ mt1: !inline && i }")
     slot(name="item" v-if="$slots.item" :item="item" v-html="item.label")
