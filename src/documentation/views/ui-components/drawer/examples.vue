@@ -1,5 +1,5 @@
 <template lang="pug">
-div.ovh
+div
   title-link(h2) Positions
   example(content-class="w-flex align-center wrap")
     w-button.ma1(

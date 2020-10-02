@@ -16,6 +16,7 @@
 <script>
 export default {
   name: 'w-badge',
+
   props: {
     modelValue: { default: true },
     xs: { type: Boolean },
@@ -39,6 +40,8 @@ export default {
     round: { type: Boolean },
     transition: { type: String, default: 'fade' }
   },
+
+  emits: [],
 
   computed: {
     forcedSize () {

@@ -37,18 +37,24 @@ const slots = {
   'item-content.x': { description: '' }
 }
 
-const events = {}
+const eventsDescs = {
+  'update:modelValue': 'This event is fired in prevision of the Vue 3 support coming soon. It updates the v-model value.'
+}
 
 export default {
   data: () => ({
     propsDescs,
-    slots,
-    events
+    slots
   }),
 
   computed: {
+    // Reads all the props and events directly from the component, so that as soon as a new prop or event
+    // is added it will appear even if no description is yet provided.
     props () {
       return WAccordion.props
+    },
+    events () {
+      return WAccordion.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
     }
   }
 }

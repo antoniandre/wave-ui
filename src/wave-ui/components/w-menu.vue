@@ -232,6 +232,7 @@ export default {
     onOutsideMousedown (e) {
       if (!this.menuEl.contains(e.target)) {
         this.$emit('update:modelValue', (this.showMenu = false))
+        this.$emit('input', false)
         this.$emit('close')
         document.removeEventListener('mousedown', this.onOutsideMousedown)
         window.removeEventListener('resize', this.onResize)

@@ -1,5 +1,5 @@
 <template lang="pug">
-div.ovh
+div
   title-link.mt4(h1) Transitions
 
   p Here is a list of all the available transition components.
@@ -12,8 +12,6 @@ div.ovh
     li.mt1 #[code w-transition-expand]
     li.mt1 #[code w-transition-slide]
     li.mt1 #[code w-transition-slide-fade]
-
-  //- p Each component has a css transition that you can also use in various components.
 
   title-link(h2) Transitions showcase
   example

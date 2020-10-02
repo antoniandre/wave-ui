@@ -4,7 +4,7 @@ w-app.fill-height.w-flex.column
     nav-menu(v-model:drawer-open="drawerOpen")
   header.no-shrink
     toolbar(v-model:drawer-open="drawerOpen")
-  .content-wrap.w-flex.no-shrink.basis-zero(:class="`page--${$route.name}`")
+  .content-wrap.w-flex.no-shrink(:class="`page--${$route.name}`")
     transition(name="fade")
       w-progress(v-if="loading" color="primary" tile absolute)
     nav-menu.navigation.no-shrink(

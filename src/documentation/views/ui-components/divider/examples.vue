@@ -1,5 +1,5 @@
 <template lang="pug">
-div.ovh
+div
   title-link(h2) Horizontal
   p This horizontal line bellow is a divider.
   w-divider.ma10

@@ -14,6 +14,7 @@ import config from '../utils/config'
 
 export default {
   name: 'w-icon',
+
   props: {
     tag: { type: String },
     color: { type: String },
@@ -35,6 +36,8 @@ export default {
     flipY: { type: Boolean },
     size: { type: [String, Number], default: null },
   },
+
+  emits: [],
 
   data: () => ({
     icon: ''
