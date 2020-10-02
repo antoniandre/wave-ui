@@ -76,9 +76,9 @@ component(
           @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
     w-list(
       ref="w-list"
-      @input="onChange"
-      @keydown:escape="closeMenu"
       :model-value="inputValue"
+      @update:model-value="onChange"
+      @keydown:escape="closeMenu"
       :items="selectItems"
       :multiple="multiple"
       arrows-navigation

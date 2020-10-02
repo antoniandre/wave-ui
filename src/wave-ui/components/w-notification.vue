@@ -1,7 +1,7 @@
 <template lang="pug">
 transition(:name="transitionName" appear)
   .w-notification(v-if="show" :class="classes" :style="styles")
-    w-alert(v-bind="alertProps" @input="$emit('update:modelValue', false);$emit('input', false)")
+    w-alert(v-bind="alertProps" @update:model-value="$emit('update:modelValue', false);$emit('input', false)")
       slot
 </template>
 

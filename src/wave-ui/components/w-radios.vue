@@ -10,7 +10,7 @@ component(
     v-for="(item, i) in radioItems"
     :key="i"
     :model-value="item.value === modelValue"
-    @input="onChange(item)"
+    @update:model-value="onChange(item)"
     @focus="$emit('focus', $event)"
     :name="inputName"
     :label="item.label"
