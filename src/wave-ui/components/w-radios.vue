@@ -17,7 +17,8 @@ component(
     :label-on-left="labelOnLeft"
     :color="item.color"
     :class="{ mt1: !inline && i }")
-    slot(name="item" v-if="$slots.item" :item="item" v-html="item.label")
+    slot(v-if="$slots.item" name="item" :item="item")
+    div(v-else-if="item.label" v-html="item.label")
 </template>
 
 <script>
