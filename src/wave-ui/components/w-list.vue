@@ -52,7 +52,7 @@ const renderListItemLabel = function (li, index) {
     is: 'div',
     class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
     tabindex: '0',
-    'aria-selected': li.selected ? 'true' : 'false',
+    'aria-selected': li._selected ? 'true' : 'false',
     id: this.listId ? `${this.listId}_item-${index + 1}` : null,
     role: 'option'
   }
@@ -60,7 +60,13 @@ const renderListItemLabel = function (li, index) {
 
   // Event handlers - will be appended in `on` or `nativeOn` according to the vnode type.
   // ------------------------------------------------------
-  const click = () => !li.disabled && this.$emit('item-click', li)
+  const click = () => {
+    if (!li.disabled) {
+      // eslint-disable-next-line no-unused-vars
+      const { _value, ...cleanLi } = li // Keep `_selected` as it may be useful.
+      this.$emit('item-click', cleanLi)
+    }
+  }
   // If selectable list, on mousedown select the item.
   const mousedown = this.isSelectable && (e => {
     e.stopPropagation()
@@ -105,7 +111,7 @@ const renderListItemLabel = function (li, index) {
   // ------------------------------------------------------
   else if (this.checklist) {
     component.is = resolveComponent('w-checkbox')
-    component.modelValue = li.selected
+    component.modelValue = li._selected
     component.color = li[this.itemColor] || this.color
     component.round = this.roundCheckboxes
     component.disabled = li.disabled
@@ -118,7 +124,7 @@ const renderListItemLabel = function (li, index) {
       click: e => {
         if (e.target.classList.contains('w-checkbox')) {
           this.selectItem(li)
-          component.modelValue = li.selected
+          component.modelValue = li._selected
         }
       }
     }
@@ -141,9 +147,9 @@ const renderListItemLabel = function (li, index) {
 
   // Allow overriding the common slot using `template(#item.2)` where to is the index of the item.
   if (hasSingleItemSlot) {
-    vnodes = { default: () => this.$slots[`item.${li.id || index + 1}`]({ item: li, selected: li.selected, index }) }
+    vnodes = { default: () => this.$slots[`item.${li.id || index + 1}`]({ item: li, selected: li._selected, index }) }
   }
-  else if (hasSlot) vnodes = { default: () => this.$slots.item({ item: li, selected: li.selected, index }) }
+  else if (hasSlot) vnodes = { default: () => this.$slots.item({ item: li, selected: li._selected, index }) }
   else {
     vnodes = {} // Prevents Vue warning about slot not being a function.
     if (!this.checklist) component.innerHTML = li[this.itemLabel]
@@ -197,12 +203,11 @@ export default {
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
       return items.map((item, i) => {
         item = { ...item } // Don't modify the original.
-
         // If no value is set on the item, add one from its label, or from its index. the result is
         // store in a _value attribute.
-        item._value = item[this.itemValue] === undefined ? item[this.itemLabel] || i : item[this.itemValue]
+        item._value = item[this.itemValue] === undefined ? item[this.itemLabel] || i : item[this.itemValue],
+        item._selected = this.selectedItems.map(obj => obj._value !== undefined ? obj._value : obj).includes(item._value)
 
-        item.selected = this.selectedItems.map(obj => obj._value !== undefined ? obj._value : obj).includes(item._value)
         return item
       })
     },
@@ -246,21 +251,21 @@ export default {
     // Action of selecting 1 item.
     selectItem (item, forcedValue) {
       // Select or unselect the item.
-      item.selected = forcedValue !== undefined ? forcedValue : !item.selected
+      item._selected = forcedValue !== undefined ? forcedValue : !item._selected
 
       // Set the `selection` computed that emits the value to the outside world.
       if (this.isMultipleSelect) {
-        const filteredItems = this.listItems.filter(item => item.selected)
+        const filteredItems = this.listItems.filter(item => item._selected)
         this.selectedItems = filteredItems
       }
-      else this.selectedItems = item.selected ? [item] : []
+      else this.selectedItems = item._selected ? [item] : []
       this.emitSelection()
     },
 
     liLabelClasses (item) {
       return {
         'w-list__item-label--disabled': item.disabled || (this.nav && !item.route && !item.children),
-        'w-list__item-label--active': this.isSelectable && item.selected || null,
+        'w-list__item-label--active': this.isSelectable && item._selected || null,
         'w-list__item-label--hoverable': this.hover,
         'w-list__item-label--selectable': this.isSelectable,
         [item.color]: !!item.color,
@@ -284,7 +289,7 @@ export default {
       const items = this.selectedItems.map(item => {
         if (!this.returnObject) return item._value
         // eslint-disable-next-line no-unused-vars
-        const { _value, selected, ...Item } = item
+        const { _value, _selected, ...Item } = item
         return Item
       })
 
@@ -325,7 +330,7 @@ export default {
       // If more than 1 selection and going back to single select,
       // just keep the first selected item.
       if (!boolean) {
-        const firstSelected = this.listItems.find(item => item.selected)
+        const firstSelected = this.listItems.find(item => item._selected)
         this.selectedItems = firstSelected ? [firstSelected] : []
         this.emitSelection()
       }

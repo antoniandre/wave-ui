@@ -46,6 +46,7 @@ const circleCircumference = Math.round(circleSize * 3.14 * 100) / 100
 
 export default {
   name: 'w-progress',
+
   props: {
     modelValue: { type: [Number, String, Boolean], default: -1 },
     label: { type: Boolean },
@@ -71,6 +72,8 @@ export default {
     bottom: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] }
   },
+
+  emits: [],
 
   data: () => ({
     circleSize,

@@ -6,6 +6,7 @@
 <script>
 export default {
   name: 'w-toolbar',
+
   props: {
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
@@ -16,6 +17,8 @@ export default {
     noBorder: { type: Boolean },
     shadow: { type: Boolean }
   },
+
+  emits: [],
 
   computed: {
     // Return the width or height value if defined, or false otherwise.

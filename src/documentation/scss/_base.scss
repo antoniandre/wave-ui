@@ -6,15 +6,9 @@ ul, ol {margin-left: 4 * $base-increment + 2px;}
 
 p {margin-bottom: 2 * $base-increment;}
 
-.ovv {overflow: visible;}
 .ovh {overflow: hidden;}
 
 .main-content {max-width: 100%;}
-.main-content > .ovh {
-  overflow: hidden;
-  margin-left: -2em;
-  padding-left: 2em;
-}
 
 .w-app {height: 100%;}
 .w-app .content-wrap {padding-left: 276px;}

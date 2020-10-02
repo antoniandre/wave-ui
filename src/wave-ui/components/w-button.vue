@@ -25,6 +25,7 @@ component.w-button(
 <script>
 export default {
   name: 'w-button',
+
   props: {
     color: { type: String },
     bgColor: { type: String },
@@ -60,6 +61,8 @@ export default {
     lg: { type: Boolean },
     xl: { type: Boolean }
   },
+
+  emits: [],
 
   computed: {
     size () {

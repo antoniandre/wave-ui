@@ -109,8 +109,8 @@ export default {
     onItemClick () {
       this.$emit('update:drawerOpen', false)
       setTimeout(() => {
-        document.documentElement.scrollTop = document.querySelector('.content-wrap').offsetTop - 40
-      }, 150)
+        document.documentElement.scrollTop = document.querySelector('.content-wrap').offsetTop - 42
+      }, 200)
     }
   }
 }

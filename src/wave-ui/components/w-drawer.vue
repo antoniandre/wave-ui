@@ -45,7 +45,7 @@ export default {
     overlayOpacity: { type: [Number, String, Boolean] }
   },
 
-  emits: ['update:modelValue', 'close'],
+  emits: ['input', 'update:modelValue', 'close'],
 
   data () {
     return {
@@ -110,10 +110,11 @@ export default {
     close () {
       this.showDrawer = false
       this.$emit('update:modelValue', false)
+      this.$emit('input', false)
       this.$emit('close', false)
     },
     onOutsideClick () {
-      if (!this.persistent) this.showDrawer = false
+      if (!this.persistent) this.showDrawer = false // The close method is called on animation end.
       if (this.persistent && !this.persistentNoAnimation) {
         this.persistentAnimate = true
         setTimeout(() => (this.persistentAnimate = false), 200) // Must match CSS animation duration.
