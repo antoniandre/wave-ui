@@ -131,7 +131,7 @@ export default {
         'w-textarea--dark': this.dark,
         'w-textarea--resizable': this.resizable,
         'w-textarea--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel && !(this.readonly && !this.hasValue),
-        'w-textarea--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
+        'w-textarea--no-padding': !this.outline && !this.bgColor && !this.shadow,
         'w-textarea--has-placeholder': this.placeholder,
         'w-textarea--inner-icon-left': this.innerIconLeft,
         'w-textarea--inner-icon-right': this.innerIconRight
@@ -146,7 +146,7 @@ export default {
         'w-textarea__textarea-wrap--box': this.outline || this.bgColor || this.shadow,
         'w-textarea__textarea-wrap--underline': !this.outline,
         'w-textarea__textarea-wrap--shadow': this.shadow,
-        'w-textarea__textarea-wrap--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round
+        'w-textarea__textarea-wrap--no-padding': !this.outline && !this.bgColor && !this.shadow
       }
     },
 
@@ -259,14 +259,6 @@ $inactive-color: #777;
   }
 
   &--focused &__textarea-wrap--underline:after {width: 100%;}
-  &__textarea-wrap--round.w-textarea__textarea-wrap--underline:after {
-    border-radius: 9em;
-    transition: $transition-duration, height 0.035s;
-  }
-  &--focused &__textarea-wrap--round.w-textarea__textarea-wrap--underline:after {
-    height: 100%;
-    transition: $transition-duration, height 0s ($transition-duration - 0.035s);
-  }
 
   // Textarea field.
   // ------------------------------------------------------
@@ -287,11 +279,6 @@ $inactive-color: #777;
     .w-textarea--no-padding & {
       padding-left: 0;
       padding-right: 0;
-    }
-
-    .w-textarea__textarea-wrap--round & {
-      padding-left: 3 * $base-increment;
-      padding-right: 3 * $base-increment;
     }
 
     .w-textarea--inner-icon-left & {padding-left: 27px;}
@@ -359,10 +346,6 @@ $inactive-color: #777;
       left: 0;
       padding-left: 0;
       padding-right: 0;
-    }
-    .w-textarea__textarea-wrap--round & {
-      padding-left: round(3 * $base-increment);
-      padding-right: round(3 * $base-increment);
     }
     .w-textarea--inner-icon-left & {left: 18px;}
     .w-textarea--no-padding.w-textarea--inner-icon-left & {left: 26px;}
