@@ -128,6 +128,7 @@ export default {
     round: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
+    dark: { type: Boolean },
     returnObject: { type: Boolean }
     // Also name, disabled, readonly, required and validators in the mixin.
   },
