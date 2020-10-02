@@ -39,8 +39,7 @@ export default class WaveUI {
     //   if (directives[id]) app.directive(id, directives[id])
     // }
     app.directive('focus', {
-      // When the bound element is inserted into the DOM...
-      inserted: el => el.focus()
+      mounted: el => el.focus()
     })
 
     // Register components.
