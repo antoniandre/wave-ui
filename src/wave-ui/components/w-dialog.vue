@@ -1,6 +1,5 @@
 <template lang="pug">
 w-overlay.w-dialog(
-  v-if="showWrapper"
   :model-value="showWrapper"
   :persistent="persistent"
   :persistent-no-animation="persistentNoAnimation"
