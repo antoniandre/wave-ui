@@ -46,7 +46,7 @@
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^8.0.2",
-    "simple-syntax-highlighter": "^2.0.1",
+    "simple-syntax-highlighter": "^2.0.2",
     "splitpanes": "^3.0.0-next",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-alpha.6",
