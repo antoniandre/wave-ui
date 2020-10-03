@@ -99,7 +99,7 @@ const routes = [
     ]
   },
   {
-    path: '*',
+    path: '/*',
     name: 'not-found',
     component: () => import(/* webpackChunkName: "not-found" */ '@/documentation/views/404.vue'),
   }
