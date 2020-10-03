@@ -16,8 +16,11 @@ module.exports = {
     }
   },
   chainWebpack: config => {
-    const svgRule = config.module.rule('svg');
-    svgRule.uses.clear();
+    // Remove prefetch.
+    config.plugins.delete('prefetch')
+
+    const svgRule = config.module.rule('svg')
+    svgRule.uses.clear()
     svgRule
       .oneOf('inline')
       .resourceQuery(/inline/)
@@ -31,9 +34,7 @@ module.exports = {
       .oneOf('external')
       .use('file-loader')
       .loader('file-loader')
-      .options({
-        name: 'assets/[name].[hash:8].[ext]',
-      })
+      .options({ name: 'assets/[name].[hash:8].[ext]' })
 
     // Preserve white spaces for ssh-pre component.
     config.module
