@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import WhyWaveUI from '@/documentation/views/why-wave-ui'
+import GettingStarted from '@/documentation/views/getting-started'
 import Home from '@/documentation/views/home'
 
 Vue.use(VueRouter)
@@ -18,12 +18,12 @@ const routes = [
   {
     path: '/why-wave-ui',
     name: 'why-wave-ui',
-    component: WhyWaveUI
+    component: () => import(/* webpackChunkName: "why-wave-ui" */ '@/documentation/views/why-wave-ui.vue')
   },
   {
     path: '/getting-started',
     name: 'getting-started',
-    component: () => import(/* webpackChunkName: "getting-started" */ '@/documentation/views/getting-started.vue')
+    component: GettingStarted
   },
   {
     path: '/browser-support',
