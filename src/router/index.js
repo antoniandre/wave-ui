@@ -83,6 +83,24 @@ const routes = [
     path: '/form',
     name: 'form-elements',
     redirect: '/w-form'
+  },
+  {
+    path: '/w-list',
+    name: 'w-list',
+    component: () => import(/* webpackChunkName: "w-list" */ '@/documentation/views/ui-components/list/index.vue'),
+    children: [
+      {
+        path: ':item',
+        name: 'w-list-item',
+        component: () => import(/* webpackChunkName: "w-list-item" */ '@/documentation/views/ui-components/list/item.vue'),
+        props: true
+      }
+    ]
+  },
+  {
+    path: '*',
+    name: 'not-found',
+    component: () => import(/* webpackChunkName: "not-found" */ '@/documentation/views/404.vue'),
   }
 ]
 

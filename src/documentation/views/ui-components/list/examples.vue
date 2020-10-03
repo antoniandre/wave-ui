@@ -294,18 +294,17 @@ div.lists-demo
           { label: 'Item 5', value: 5, disabled: true }
         ],
         listItems2: [
-          { label: 'Star', id: 'star', icon: 'mdi mdi-star', route: '#route-to-star' },
-          { label: 'Check', id: 'check', icon: 'mdi mdi-check', route: '#route-to-check' },
-          { label: 'Cross', id: 'cross', icon: 'mdi mdi-close', route: '#route-to-cross' },
-          { label: 'Info', id: 'info', icon: 'mdi mdi-information', route: '#route-to-info' },
-          { label: 'Warning', id: 'warning', icon: 'mdi mdi-alert', route: '#route-to-warning' },
-          { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', route: '#disabled', disabled: true }
+          { label: 'Star', id: 'star', icon: 'mdi mdi-star' },
+          { label: 'Check', id: 'check', icon: 'mdi mdi-check' },
+          { label: 'Cross', id: 'cross', icon: 'mdi mdi-close' },
+          { label: 'Info', id: 'info', icon: 'mdi mdi-information' },
+          { label: 'Warning', id: 'warning', icon: 'mdi mdi-alert' },
+          { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', disabled: true }
         ],
         selection1: [1, 3],
         selection2: 1
       })
     template(#css).
-      .w-list {max-width: 300px;}
       .w-list.custom .w-list__item-label:before {display: none;}
       .w-list.custom .w-list__item-label label {
         position: relative;
@@ -369,16 +368,15 @@ div.lists-demo
     template(#js).
       data: () => ({
         items: [
-          { label: 'Star', id: 'star', icon: 'mdi mdi-star', route: '#route-to-star' },
-          { label: 'Check', id: 'check', icon: 'mdi mdi-check', route: '#route-to-check' },
-          { label: 'Cross', id: 'cross', icon: 'mdi mdi-close', route: '#route-to-cross' },
-          { label: 'Info', id: 'info', icon: 'mdi mdi-information', route: '#route-to-info' },
-          { label: 'Warning', id: 'warning', icon: 'mdi mdi-alert', route: '#route-to-warning' },
-          { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', route: '#disabled', disabled: true }
+          { label: 'Star', id: 'star', icon: 'mdi mdi-star', route: '/w-list/star' },
+          { label: 'Check', id: 'check', icon: 'mdi mdi-check', route: '/w-list/check' },
+          { label: 'Cross', id: 'cross', icon: 'mdi mdi-close', route: '/w-list/cross' },
+          { label: 'Info', id: 'info', icon: 'mdi mdi-information', route: '/w-list/info' },
+          { label: 'Warning', id: 'warning', icon: 'mdi mdi-alert', route: '/w-list/warning' },
+          { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', route: '/w-list/disabled', disabled: true }
         ]
       })
-    template(#css).
-      .w-list {max-width: 300px;}
+  router-view
 </template>
 
 <script>
@@ -397,12 +395,12 @@ export default {
       { label: 'Item 5', value: 5, disabled: true }
     ],
     listItems2: [
-      { label: 'Star', id: 'star', icon: 'mdi mdi-star', route: '#route-to-star' },
-      { label: 'Check', id: 'check', icon: 'mdi mdi-check', route: '#route-to-check' },
-      { label: 'Cross', id: 'cross', icon: 'mdi mdi-close', route: '#route-to-cross' },
-      { label: 'Info', id: 'info', icon: 'mdi mdi-information', route: '#route-to-info' },
-      { label: 'Warning', id: 'warning', icon: 'mdi mdi-alert', route: '#route-to-warning' },
-      { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', route: '#disabled', disabled: true }
+      { label: 'Star', id: 'star', icon: 'mdi mdi-star', route: '/w-list/star' },
+      { label: 'Check', id: 'check', icon: 'mdi mdi-check', route: '/w-list/check' },
+      { label: 'Cross', id: 'cross', icon: 'mdi mdi-close', route: '/w-list/cross' },
+      { label: 'Info', id: 'info', icon: 'mdi mdi-information', route: '/w-list/info' },
+      { label: 'Warning', id: 'warning', icon: 'mdi mdi-alert', route: '/w-list/warning' },
+      { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', route: '/w-list/disabled', disabled: true }
     ],
     listItems3: [
       { label: 'Item 1' },

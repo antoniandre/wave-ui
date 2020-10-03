@@ -1,7 +1,7 @@
 process.env.VUE_APP_VERSION = process.env.npm_package_version
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/wave-ui' : '',
+  publicPath: process.env.NODE_ENV === 'production' ? '/wave-ui' : '/',
   outputDir: 'docs',
   devServer: {
     overlay: {
@@ -16,9 +16,11 @@ module.exports = {
     }
   },
   chainWebpack: config => {
+    // Remove prefetch.
+    config.plugins.delete('prefetch')
+
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
-
     svgRule
       .oneOf('inline')
       .resourceQuery(/inline/)
@@ -32,9 +34,7 @@ module.exports = {
       .oneOf('external')
       .use('file-loader')
       .loader('file-loader')
-      .options({
-        name: 'assets/[name].[hash:8].[ext]',
-      })
+      .options({ name: 'assets/[name].[hash:8].[ext]' })
 
     // Preserve white spaces for ssh-pre component.
     // config.module
