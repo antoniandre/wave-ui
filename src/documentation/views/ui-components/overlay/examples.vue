@@ -7,7 +7,7 @@ div
     parameters to the #[span.code w-overlay].
 
   title-link(h2) Overlay with custom opacity and control on #[span.code persistent]
-  P When the overlay is persistent, it will not close on click and on escape key.
+  p When the overlay is persistent, it will not close on click and on escape key.
   p When persistent is set to false and by default, the escape key will also close the overlay.
   example
     w-flex(wrap)
