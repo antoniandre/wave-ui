@@ -1,7 +1,7 @@
 process.env.VUE_APP_VERSION = process.env.npm_package_version
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/wave-ui' : '',
+  publicPath: process.env.NODE_ENV === 'production' ? '/wave-ui' : '/',
   outputDir: 'docs',
   devServer: {
     overlay: {
