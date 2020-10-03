@@ -96,9 +96,10 @@ const renderListItemLabel = function (li, index) {
     component.is = this.$router ? resolveComponent('router-link') : 'a'
     if (this.$router) {
       component.to = li.route
-      component.onClick = click
       component.onKeydown = keydown
       component.onMousedown = mousedown
+      // Click event is used by vue-router in Vue 3, it must remain untouched or it will trigger a page reload on click!
+      component.onMouseUp = click
     }
     else {
       component.href = li.route
@@ -154,7 +155,8 @@ const renderListItemLabel = function (li, index) {
     vnodes = {} // Prevents Vue warning about slot not being a function.
     if (!this.checklist) component.innerHTML = li[this.itemLabel]
   }
-  return h(component.is, component, vnodes)
+  const { is, ...Component } = component
+  return h(component.is, Component, vnodes)
 }
 
 export default {
