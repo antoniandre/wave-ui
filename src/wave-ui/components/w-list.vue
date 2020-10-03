@@ -152,7 +152,9 @@ const renderListItemLabel = function (createEl, li, index) {
   }
   else if (hasSlot) vnodes.push(this.$scopedSlots.item({ item: li, selected: li._selected, index }))
   else if (!this.checklist) component.domProps = { innerHTML: li[this.itemLabel] }
-  return createEl(component.name, component, vnodes)
+  // Remove the `name` from the component props (towards Vue 3).
+  const { name, ...Component } = component
+  return createEl(name, Component, vnodes)
 }
 
 export default {
