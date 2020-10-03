@@ -96,7 +96,9 @@ const renderListItemLabel = function (li, index) {
     component.is = this.$router ? resolveComponent('router-link') : 'a'
     if (this.$router) {
       component.to = li.route
-      component.nativeOn = { click, keydown, mousedown }
+      component.onClick = click
+      component.onKeydown = keydown
+      component.onMousedown = mousedown
     }
     else {
       component.href = li.route
@@ -118,14 +120,12 @@ const renderListItemLabel = function (li, index) {
 
     if (!hasSlot) component.label = li[this.itemLabel] || false
 
-    component.nativeOn = {
-      // The checkbox component is not fully covering the list-item-label, when clicking on list
-      // item label, toggle the checkbox.
-      click: e => {
-        if (e.target.classList.contains('w-checkbox')) {
-          this.selectItem(li)
-          component.modelValue = li._selected
-        }
+    // The checkbox component is not fully covering the list-item-label, when clicking on list
+    // item label, toggle the checkbox.
+    component.onClick = e => {
+      if (e.target.classList.contains('w-checkbox')) {
+        this.selectItem(li)
+        component.modelValue = li._selected
       }
     }
     component.onInput = value => this.selectItem(li, value)
