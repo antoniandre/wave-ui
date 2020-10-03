@@ -155,8 +155,9 @@ const renderListItemLabel = function (li, index) {
     vnodes = {} // Prevents Vue warning about slot not being a function.
     if (!this.checklist) component.innerHTML = li[this.itemLabel]
   }
+  // Remove the `is` from the component props.
   const { is, ...Component } = component
-  return h(component.is, Component, vnodes)
+  return h(is, Component, vnodes)
 }
 
 export default {
