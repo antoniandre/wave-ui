@@ -7,7 +7,11 @@ const renderListItems = function () {
     const vnodes = []
 
     if (this.icon) {
-      vnodes.push(h(resolveComponent('w-icon'), { class: 'w-list__item-bullet' }, { default: () => this.icon }))
+      vnodes.push(h(
+        resolveComponent('w-icon'),
+        { class: 'w-list__item-bullet' },
+        { default: () => this.icon }
+      ))
     }
 
     vnodes.push(renderListItemLabel.call(this, li, index))
