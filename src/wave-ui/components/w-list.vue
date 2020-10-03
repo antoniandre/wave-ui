@@ -98,8 +98,18 @@ const renderListItemLabel = function (li, index) {
       component.to = li.route
       component.onKeydown = keydown
       component.onMousedown = mousedown
-      // Click event is used by vue-router in Vue 3, it must remain untouched or it will trigger a page reload on click!
-      component.onMouseUp = click
+      // In HTML5 history mode, Vue 3 router-link will intercept the click event so that the browser
+      // doesn't try to reload the page.
+      // (in Vue 2, the click event was on `nativeOn`, since in Vue 3 the component options/props
+      // definitions are flattened the issue appears)
+      // So in Vue 3, we can either use the custom prop and pass a default slot and create the
+      // `a` link ourselves, or call preventDefault & `$router.push` directly which is done
+      // internally by vue-router.
+      component.onClick = e => {
+        e.preventDefault()
+        this.$router.push(li.route)
+        click(e)
+      }
     }
     else {
       component.href = li.route

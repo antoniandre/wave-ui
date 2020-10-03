@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import { reactive } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-=======
-import Vue from 'vue'
-import VueRouter from 'vue-router'
->>>>>>> master
 import GettingStarted from '@/documentation/views/getting-started'
 import Home from '@/documentation/views/home'
 
