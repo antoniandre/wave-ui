@@ -49,7 +49,7 @@ const renderListItemLabel = function (createEl, li, index) {
     class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
     props: {},
     attrs: { // HTML attributes.
-      tabindex: '0',
+      tabindex: li.disabled ? null : '0',
       'aria-selected': li._selected ? 'true' : 'false',
       id: this.listId ? `${this.listId}_item-${index + 1}` : null,
       role: 'option'
