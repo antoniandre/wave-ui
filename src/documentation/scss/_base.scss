@@ -3,6 +3,7 @@ html, body {height: 100%;}
 a {color: $links;}
 
 ul, ol {margin-left: 4 * $base-increment + 2px;}
+.w-list--icon .w-list__item-bullet {color: green;}
 
 p {margin-bottom: 2 * $base-increment;}
 
