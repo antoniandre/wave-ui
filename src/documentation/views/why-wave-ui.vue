@@ -105,6 +105,4 @@ export default {
     stroke-width: 6px;
   }
 }
-
-.w-list__item-bullet {color: green;}
 </style>
