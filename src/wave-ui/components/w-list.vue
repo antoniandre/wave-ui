@@ -8,14 +8,14 @@ ul.w-list(:class="classes")
 
     component.w-list__item-label(
       v-if="$slots[`item.${i + 1}`] || $slots.item || $slots.default"
-      :is="checklist ? 'w-checkbox' : (nav && !li.disabled && li.route ? ($router ? 'router-link' : 'a') : 'div')"
+      :is="checklist ? 'w-checkbox' : (nav && !li.disabled && li.route ? (hasRouter ? 'router-link' : 'a') : 'div')"
       v-bind="liLabelProps(li, i, li._selected)")
       slot(v-if="$slots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i" :selected="li._selected")
       slot(v-else-if="$slots.item" name="item" :item="cleanLi(li)" :index="i" :selected="li._selected")
       slot(v-else :item="cleanLi(li)" :index="i" :selected="li._selected") {{ li._label }}
     component.w-list__item-label(
       v-else
-      :is="checklist ? 'w-checkbox' : (nav && !li.disabled && li.route ? ($router ? 'router-link' : 'a') : 'div')"
+      :is="checklist ? 'w-checkbox' : (nav && !li.disabled && li.route ? (hasRouter ? 'router-link' : 'a') : 'div')"
       v-bind="liLabelProps(li, i, li._selected)"
       v-html="li._label")
 
@@ -76,6 +76,10 @@ export default {
   }),
 
   computed: {
+    hasRouter () {
+      return '$router' in this
+    },
+
     listId () {
       return this.addIds ? (typeof this.addIds === 'string' ? this.addIds : `w-list--${this._.uid}`) : null
     },
