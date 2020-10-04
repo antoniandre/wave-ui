@@ -195,6 +195,10 @@ export default {
   }),
 
   computed: {
+    hasRouter () {
+      return '$router' in this
+    },
+
     listId () {
       return this.addIds ? (typeof this.addIds === 'string' ? this.addIds : `w-list--${this._uid}`) : null
     },

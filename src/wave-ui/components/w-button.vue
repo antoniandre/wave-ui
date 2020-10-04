@@ -1,8 +1,8 @@
 <template lang="pug">
 component.w-button(
-  :is="to ? ($router && !externalLink && !forceLink ? 'router-link' : 'a') : 'button'"
+  :is="to ? (hasRouter && !externalLink && !forceLink ? 'router-link' : 'a') : 'button'"
   :type="!to && type"
-  :to="$router && to"
+  :to="hasRouter && to"
   :href="to"
   :class="classes"
   :disabled="!!disabled || null"
@@ -65,6 +65,9 @@ export default {
   emits: [],
 
   computed: {
+    hasRouter () {
+      return '$router' in this
+    },
     size () {
       return (
         (this.xs && 'xs') ||
