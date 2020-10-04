@@ -63,7 +63,7 @@ div
 export default {
   data: () => ({
     waveUiOptions: [
-      { label: 'colors', route: 'colors#primary-secondary-and-your-own-colors-and-shades' },
+      { label: 'colors', route: 'colors' },
       { label: 'breakpoints', route: 'breakpoints' },
       { label: 'presets', route: 'customization#presets' }
     ]
