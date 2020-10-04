@@ -175,7 +175,7 @@ export default {
 
       const props = {
         class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
-        tabindex: '0',
+        tabindex: li.disabled ? null : '0',
         'aria-selected': selected ? 'true' : 'false',
         id: this.listId ? `${this.listId}_item-${index + 1}` : null,
         role: 'option'
