@@ -137,13 +137,16 @@ export default {
       let html = ''
 
       if (slots.pug) {
-        html = 'w-app#app(block)\n  ' +
-               slots.pug.replace(/\n$/, '').replace(/\n/g, '\n  ')
+        html = '#app\n' +
+               '  w-app(block)\n' +
+               '    ' + slots.pug.replace(/\n$/, '').replace(/\n/g, '\n    ')
       }
       else {
-        html = '<w-app id="app" block>\n  ' +
-               slots.html.replace(/\n$/, '').replace(/\n/g, '\n  ') +
-               '\n</w-app>\n'
+        html = '<div id="app">\n' +
+               '  <w-app id="app" block>\n' +
+               '    ' + slots.html.replace(/\n$/, '').replace(/\n/g, '\n    ') +
+               '\n  </w-app>\n' +
+               '</div>\n'
       }
       const css = '.w-app {font: 14px sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
       const js = this.fullJs ? slots.js : (
