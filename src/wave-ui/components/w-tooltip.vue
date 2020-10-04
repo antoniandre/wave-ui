@@ -262,14 +262,11 @@ export default {
     }
   },
 
-  beforeMount () {
-    // Do this, first thing on mounted (beforeMount + nextTick).
-    this.$nextTick(() => {
-      this.activatorEl = this.$refs.wrapper.firstElementChild
-      if (this.detachTo) this.insertTooltip()
+  mounted () {
+    this.activatorEl = this.$refs.wrapper.firstElementChild
+    if (this.detachTo) this.insertTooltip()
 
-      if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
-    })
+    if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
   },
 
   beforeDestroy () {
