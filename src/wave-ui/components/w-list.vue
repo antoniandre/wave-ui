@@ -1,179 +1,37 @@
+<template lang="pug">
+ul.w-list(:class="classes")
+  li.w-list__item(
+    v-for="(li, i) in listItems"
+    :key="i"
+    :class="{ 'w-list__item--parent': (li.children || []).length }")
+    w-icon.w-list__item-bullet(v-if="icon") {{ icon }}
+
+    component.w-list__item-label(
+      :is="checklist ? 'w-checkbox' : (nav && !li.disabled && li.route ? ($router ? 'router-link' : 'a') : 'div')"
+      v-bind="liLabelProps(li, i, li._selected)")
+      slot(v-if="$slots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i" :selected="li._selected")
+      slot(v-else-if="$slots.item" name="item" :item="cleanLi(li)" :index="i" :selected="li._selected")
+      slot(v-else :item="cleanLi(li)" :index="i" :selected="li._selected") {{ li._label }}
+
+    //- Children.
+    w-list(
+      v-if="(li.children || []).length"
+      v-bind="$props"
+      :items="li.children"
+      :depth="depth + 1"
+      @update:model-value="$emit('update:modelValue', $event)",
+      @input="$emit('input', $event)",
+      @change="$emit('change', $event)",
+      @item-click="$emit('item-click', $event)")
+      //- template(#item.x="{ item, index, selected }")
+        slot(v-if="$slots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(item)" :index="index" :selected="selected")
+      template(v-if="$slots.item" #item="{ item, index, selected }")
+        slot(name="item" :item="cleanLi(item)" :index="index" :selected="selected")
+      template(v-else #default="{ item, index, selected }")
+        slot(:item="cleanLi(item)" :index="index" :selected="selected") {{ item[itemLabel] }}
+</template>
+
 <script>
-import { h, resolveComponent } from 'vue'
-
-const renderListItems = function () {
-  return this.listItems.map((li, index) => {
-    // Content nodes.
-    const vnodes = []
-
-    if (this.icon) {
-      vnodes.push(h(
-        resolveComponent('w-icon'),
-        { class: 'w-list__item-bullet' },
-        { default: () => this.icon }
-      ))
-    }
-
-    vnodes.push(renderListItemLabel.call(this, li, index))
-
-    // If children, do a recursive call.
-    if (li.children) {
-      vnodes.push(h(
-        resolveComponent('w-list'),
-        {
-          ...this.$props,
-          items: li.children,
-          depth: this.depth + 1,
-          slots: {
-            item: props => this.$slots.item(...props), // Accepts `template(#item)`.
-             // Accepts `template(#item.2)`.
-            [`item.${li.id || index + 1}`]: props => this.$slots[`item.${li.id || index + 1}`](...props)
-          },
-          'onUpdate:modelValue': value => this.$emit('update:modelValue', value),
-          onInput: value => this.$emit('input', value),
-          onChange: value => this.$emit('change', value),
-          onItemClick: value => this.$emit('item-click', value)
-        }
-      ))
-    }
-
-    return h(
-      'li',
-      {
-        class: {
-          'w-list__item': true,
-          'w-list__item--parent': (li.children || []).length
-        }
-      },
-      vnodes)
-  })
-}
-
-// Responsible for item selection if selectable list.
-const renderListItemLabel = function (li, index) {
-  // Init the final vnode, can be a div, a router-link/a or a w-checkbox.
-  const component = {
-    is: 'div',
-    class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
-    tabindex: '0',
-    'aria-selected': li._selected ? 'true' : 'false',
-    id: this.listId ? `${this.listId}_item-${index + 1}` : null,
-    role: 'option'
-  }
-  let vnodes = []
-
-  // Event handlers - will be appended in `on` or `nativeOn` according to the vnode type.
-  // ------------------------------------------------------
-  const click = () => {
-    if (!li.disabled) {
-      // eslint-disable-next-line no-unused-vars
-      const { _value, ...cleanLi } = li // Keep `_selected` as it may be useful.
-      this.$emit('item-click', cleanLi)
-    }
-  }
-  // If selectable list, on mousedown select the item.
-  const mousedown = this.isSelectable && (e => {
-    e.stopPropagation()
-    !li.disabled && this.selectItem(li)
-  })
-  // If selectable list, on enter key press select item.
-  const keydown = this.isSelectable && (e => {
-    if (!li.disabled && e.keyCode === 13) this.selectItem(li)
-    // eslint-disable-next-line vue/custom-event-name-casing
-    else if (e.keyCode === 27) this.$emit('keydown:escape')
-    else if (this.arrowsNavigation) {
-      e.preventDefault()
-      if (e.keyCode === 38) this.focusPrevItem(li.index)
-      if (e.keyCode === 40) this.focusNextItem(li.index)
-    }
-  })
-  // ------------------------------------------------------
-
-  const hasSlot = this.$slots.item
-  const hasSingleItemSlot = this.$slots[`item.${li.id || index + 1}`]
-
-  // Navigation list.
-  // Note: on enter key press, a click event is fired => this is default HTML behavior.
-  // ------------------------------------------------------
-  const isLink = this.nav && !li.disabled && li.route
-  if (isLink) {
-    component.is = this.$router ? resolveComponent('router-link') : 'a'
-    if (this.$router) {
-      component.to = li.route
-      component.onKeydown = keydown
-      component.onMousedown = mousedown
-      // In HTML5 history mode, Vue 3 router-link will intercept the click event so that the browser
-      // doesn't try to reload the page.
-      // (in Vue 2, the click event was on `nativeOn`, since in Vue 3 the component options/props
-      // definitions are flattened the issue appears)
-      // So in Vue 3, we can either use the custom prop and pass a default slot and create the
-      // `a` link ourselves, or call preventDefault & `$router.push` directly which is done
-      // internally by vue-router.
-      component.onClick = e => {
-        e.preventDefault()
-        this.$router.push(li.route)
-        click(e)
-      }
-    }
-    else {
-      component.href = li.route
-      component.onClick = click
-      component.onKeydown = keydown
-      component.onMousedown = mousedown
-    }
-  }
-  // ------------------------------------------------------
-
-  // Checklist.
-  // ------------------------------------------------------
-  else if (this.checklist) {
-    component.is = resolveComponent('w-checkbox')
-    component.modelValue = li._selected
-    component.color = li[this.itemColor] || this.color
-    component.round = this.roundCheckboxes
-    component.disabled = li.disabled
-
-    if (!hasSlot) component.label = li[this.itemLabel] || false
-
-    // The checkbox component is not fully covering the list-item-label, when clicking on list
-    // item label, toggle the checkbox.
-    component.onClick = e => {
-      if (e.target.classList.contains('w-checkbox')) {
-        this.selectItem(li)
-        component.modelValue = li._selected
-      }
-    }
-    component.onInput = value => this.selectItem(li, value)
-    // @todo: on checkbox focus, focus the list item.
-    // component.onFocus: e => console.log(this, e, 'on checkbox focus')
-  }
-  // ------------------------------------------------------
-
-  // Selectable simple div.
-  // ------------------------------------------------------
-  else if (this.isSelectable) {
-    // Links are naturally tabable, add tabindex on other elements.
-    if (!li.disabled) component.tabindex = 0
-    component.onClick = click
-    component.onKeydown = keydown
-    component.onMousedown = mousedown
-  }
-  // ------------------------------------------------------
-
-  // Allow overriding the common slot using `template(#item.2)` where to is the index of the item.
-  if (hasSingleItemSlot) {
-    vnodes = { default: () => this.$slots[`item.${li.id || index + 1}`]({ item: li, selected: li._selected, index }) }
-  }
-  else if (hasSlot) vnodes = { default: () => this.$slots.item({ item: li, selected: li._selected, index }) }
-  else {
-    vnodes = {} // Prevents Vue warning about slot not being a function.
-    if (!this.checklist) component.innerHTML = li[this.itemLabel]
-  }
-  // Remove the `is` from the component props.
-  const { is, ...Component } = component
-  return h(is, Component, vnodes)
-}
-
 export default {
   name: 'w-list',
 
@@ -223,7 +81,8 @@ export default {
         // If no value is set on the item, add one from its label, or from its index. the result is
         // store in a _value attribute.
         item._value = item[this.itemValue] === undefined ? item[this.itemLabel] || i : item[this.itemValue],
-        item._selected = this.selectedItems.map(obj => obj._value !== undefined ? obj._value : obj).includes(item._value)
+        item._selected = this.selectedItems.map(obj => obj._value !== undefined ? obj._value : obj).includes(item._value),
+        item._label = item[this.itemLabel] || ''
 
         return item
       })
@@ -290,6 +149,109 @@ export default {
       }
     },
 
+    liLabelProps (li, index, selected) {
+      // Event handlers.
+      // ------------------------------------------------------
+      const click = () => {
+        if (!li.disabled) this.$emit('item-click', this.cleanLi(li))
+      }
+      // If selectable list, on mousedown select the item.
+      const mousedown = this.isSelectable && (e => {
+        e.stopPropagation()
+        !li.disabled && this.selectItem(li)
+      })
+      // If selectable list, on enter key press select item.
+      const keydown = this.isSelectable && (e => {
+        if (!li.disabled && e.keyCode === 13) this.selectItem(li)
+        // eslint-disable-next-line vue/custom-event-name-casing
+        else if (e.keyCode === 27) this.$emit('keydown:escape')
+        else if (this.arrowsNavigation) {
+          e.preventDefault()
+          if (e.keyCode === 38) this.focusPrevItem(li.index)
+          if (e.keyCode === 40) this.focusNextItem(li.index)
+        }
+      })
+      // ------------------------------------------------------
+
+      const props = {
+        class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
+        tabindex: '0',
+        'aria-selected': selected ? 'true' : 'false',
+        id: this.listId ? `${this.listId}_item-${index + 1}` : null,
+        role: 'option'
+      }
+
+      // Checklist.
+      // ------------------------------------------------------
+      if (this.checklist) {
+        props.modelValue = li._selected
+        props.color = li[this.itemColor] || this.color
+        props.round = this.roundCheckboxes
+        props.disabled = li.disabled
+
+        // if (!hasSlot) props.label = li[this.itemLabel] || false
+
+        // The checkbox component is not fully covering the list-item-label, when clicking on list
+        // item label, toggle the checkbox.
+        props.onClick = e => {
+          if (e.target.classList.contains('w-checkbox')) {
+            this.selectItem(li)
+            props.modelValue = li._selected
+          }
+        }
+        props.onInput = value => this.selectItem(li, value)
+        // @todo: on checkbox focus, focus the list item.
+        // props.onFocus: e => console.log(this, e, 'on checkbox focus')
+      }
+      // ------------------------------------------------------
+
+      // Navigation list.
+      // Note: on enter key press, a click event is fired => this is default HTML behavior.
+      // ------------------------------------------------------
+      else if (this.nav) {
+        const isLink = this.nav && !li.disabled && li.route
+        if (isLink) {
+          if (this.$router) {
+            props.to = li.route
+            props.onKeydown = keydown
+            props.onMousedown = mousedown
+            // In HTML5 history mode, Vue 3 router-link will intercept the click event so that the browser
+            // doesn't try to reload the page.
+            // (in Vue 2, the click event was on `nativeOn`, since in Vue 3 the component options/props
+            // definitions are flattened the issue appears)
+            // So in Vue 3, we can either use the custom prop and pass a default slot and create the
+            // `a` link ourselves, or call preventDefault & `$router.push` directly which is done
+            // internally by vue-router.
+            props.onClick = e => {
+              e.preventDefault()
+              this.$router.push(li.route)
+              click(e)
+            }
+          }
+          else {
+            props.href = li.route
+            props.onClick = click
+            props.onKeydown = keydown
+            props.onMousedown = mousedown
+          }
+        }
+      }
+      // ------------------------------------------------------
+
+      // Selectable simple div.
+      // ------------------------------------------------------
+      else if (this.isSelectable) {
+        // Links are naturally tabable, add tabindex on other elements.
+        if (!li.disabled) props.tabindex = 0
+        props.onClick = click
+        props.onKeydown = keydown
+        props.onMousedown = mousedown
+      }
+      // ------------------------------------------------------
+
+      return props
+    },
+
     // Convert the received items selection to array if it is a unique value.
     // Also accept objects if returnObject is true and convert to the object's value.
     // In any case, always end up with an array of objects.
@@ -322,7 +284,7 @@ export default {
       index = this.enabledItemsIndexes[this.enabledItemsIndexes.indexOf(index) - 1]
       if (index === undefined) index = this.enabledItemsIndexes[this.enabledItemsIndexes.length - 1]
 
-      this.$refs['w-list'].querySelector(`#${this.listId}_item-${index + 1}`).focus()
+      this.$el.querySelector(`#${this.listId}_item-${index + 1}`).focus()
     },
 
     focusNextItem (index) {
@@ -330,7 +292,13 @@ export default {
       index = this.enabledItemsIndexes[this.enabledItemsIndexes.indexOf(index) + 1]
       if (index === undefined) index = this.enabledItemsIndexes[0]
 
-      this.$refs['w-list'].querySelector(`#${this.listId}_item-${index + 1}`).focus()
+      this.$el.querySelector(`#${this.listId}_item-${index + 1}`).focus()
+    },
+
+    cleanLi (li) {
+      // eslint-disable-next-line no-unused-vars
+      const { _value, _selected, _label, ...cleanLi } = li
+      return cleanLi
     }
   },
 
@@ -352,19 +320,6 @@ export default {
         this.emitSelection()
       }
     }
-  },
-
-  render () {
-    // Render list wrapper.
-    return h(
-      'ul',
-      {
-        ref: 'w-list',
-        class: { 'w-list': true, ...this.classes },
-        id: this.listId
-      },
-      renderListItems.call(this)
-    )
   }
 }
 </script>
