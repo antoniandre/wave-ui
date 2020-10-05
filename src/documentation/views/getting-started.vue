@@ -53,7 +53,6 @@ div
     a.ml1(href="https://codepen.io/antoniandre/pen/RwaXMLd?editors=1010" target="_blank")
       | Vue 3 Wave UI demo on Codepen
       w-icon.ml1 mdi mdi-open-in-new
-    | .
 
   title-link(h3).mt8 3. Place a #[span.code w-app] at the root of your app
   ssh-pre(language="html-vue" label="App.js").

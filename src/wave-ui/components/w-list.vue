@@ -22,7 +22,6 @@ const renderListItems = function (createEl) {
           on: {
             'onUpdate:modelValue': value => this.$emit('update:modelValue', value),
             input: value => this.$emit('input', value),
-            change: value => this.$emit('change', value),
             'item-click': value => this.$emit('item-click', value)
           }
         }
@@ -185,7 +184,7 @@ export default {
     arrowsNavigation: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue', 'change', 'item-click', 'keydown:escape'],
+  emits: ['input', 'update:modelValue', 'item-click', 'keydown:escape'],
 
   data: () => ({
     // The selected items are given in the value prop.
@@ -301,7 +300,6 @@ export default {
       const selection = this.isMultipleSelect ? items : (items[0] !== undefined ? items[0] : null)
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
-      this.$emit('change', selection)
     },
 
     focusPrevItem (index) {
