@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/dt/wave-ui.svg)](https://www.npmjs.com/package/wave-ui)
 <!-- [![npm](https://img.shields.io/npm/dw/wave-ui.svg)](https://www.npmjs.com/package/wave-ui) -->
 
-> An emerging UI framework for Vue.js with only the bright side. :sunny:
+> An emerging UI framework for Vue.js & Vue 3 with only the bright side. :sunny:
 
 ___
 
@@ -15,7 +15,15 @@ ___
 ___
 
 ## install
-    npm i wave-ui
+```
+npm i wave-ui
+```
+
+**Vue 3**
+
+```
+npm i wave-ui@next
+```
 
 ___
 
