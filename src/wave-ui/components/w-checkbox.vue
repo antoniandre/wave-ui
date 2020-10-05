@@ -3,7 +3,7 @@ component(
   :is="formRegister && !wCheckboxes ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: isChecked, disabled }"
   v-model:valid="valid"
-  @reset="$emit('update:modelValue', isChecked = false);$emit('input', false);$emit('change', false)"
+  @reset="$emit('update:modelValue', isChecked = false);$emit('input', false)"
   :class="classes")
   input(
     ref="input"
@@ -14,8 +14,8 @@ component(
     :disabled="disabled || null"
     :required="required || null"
     @focus="$emit('focus', $event)"
-    @change="onChange"
-    @keypress.enter="onChange"
+    @input="onInput"
+    @keypress.enter="onInput"
     :aria-checked="isChecked || 'false'"
     role="checkbox")
   template(v-if="hasLabel && labelOnLeft")
@@ -53,7 +53,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'update:modelValue', 'focus', 'change'],
+  emits: ['input', 'update:modelValue', 'focus'],
 
   data () {
     return {
@@ -83,11 +83,10 @@ export default {
   },
 
   methods: {
-    onChange () {
+    onInput () {
       this.isChecked = !this.isChecked
       this.$emit('update:modelValue', this.isChecked)
       this.$emit('input', this.isChecked)
-      this.$emit('change', this.isChecked)
 
       if (!this.noRipple) {
         if (this.isChecked) {

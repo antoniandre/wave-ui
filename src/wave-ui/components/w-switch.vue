@@ -3,7 +3,7 @@ component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: isOn, disabled, readonly }"
   v-model:valid="valid"
-  @reset="$emit('update:modelValue', isOn = '');$emit('input', '');$emit('change', '')"
+  @reset="$emit('update:modelValue', isOn = '');$emit('input', '')"
   :class="classes")
   input(
     ref="input"
@@ -15,7 +15,7 @@ component(
     :readonly="readonly || null"
     :aria-readonly="readonly ? 'true' : 'false'"
     :required="required || null"
-    @change="onChange"
+    @input="onInput"
     @focus="$emit('focus', $event)"
     :aria-checked="isOn || 'false'"
     role="switch")
@@ -49,7 +49,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'update:modelValue', 'change', 'focus'],
+  emits: ['input', 'update:modelValue', 'focus'],
 
   data () {
     return {
@@ -79,11 +79,10 @@ export default {
   },
 
   methods: {
-    onChange () {
+    onInput () {
       this.isOn = !this.isOn
       this.$emit('update:modelValue', this.isOn)
       this.$emit('input', this.isOn)
-      this.$emit('change', this.isOn)
 
       if (!this.noRipple) {
         if (this.isOn) {

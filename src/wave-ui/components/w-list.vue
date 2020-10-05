@@ -27,7 +27,6 @@ ul.w-list(:class="classes")
       :depth="depth + 1"
       @update:model-value="$emit('update:modelValue', $event)",
       @input="$emit('input', $event)",
-      @change="$emit('change', $event)",
       @item-click="$emit('item-click', $event)")
       //- template(#item.x="{ item, index, selected }")
         slot(v-if="$slots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(item)" :index="index" :selected="selected")
@@ -66,7 +65,7 @@ export default {
     arrowsNavigation: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue', 'change', 'item-click', 'keydown:escape'],
+  emits: ['input', 'update:modelValue', 'item-click', 'keydown:escape'],
 
   data: () => ({
     // The selected items are given in the modelValue prop.
@@ -286,7 +285,6 @@ export default {
       const selection = this.isMultipleSelect ? items : (items[0] !== undefined ? items[0] : null)
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
-      this.$emit('change', selection)
     },
 
     focusPrevItem (index) {

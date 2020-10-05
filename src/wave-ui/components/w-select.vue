@@ -77,7 +77,7 @@ component(
     w-list(
       ref="w-list"
       :model-value="inputValue"
-      @update:model-value="onChange"
+      @update:model-value="onInput"
       @keydown:escape="closeMenu"
       :items="selectItems"
       :multiple="multiple"
@@ -133,7 +133,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'update:modelValue', 'change', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
 
   data: () => ({
     // Selection is always an array (internally), but emits a single value if not multiple.
@@ -214,7 +214,7 @@ export default {
       this.$emit('blur', e)
     },
     // The items are given by the w-list component.
-    onChange (items) {
+    onInput (items) {
       this.inputValue = items === null ? [] : (this.multiple ? items : [items])
       // Return the original items when returnObject is true (no `value` if there wasn't),
       // or the the item value otherwise.
@@ -228,7 +228,6 @@ export default {
       const selection = this.multiple ? items : items[0]
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
-      this.$emit('change', selection)
     },
     onReset () {
       this.inputValue = []
@@ -237,7 +236,6 @@ export default {
       const selection = this.multiple ? [] : null
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
-      this.$emit('change', selection)
     },
     // Convert the received items selection to array if it is a unique value.
     // Also accept objects if returnObject is true.

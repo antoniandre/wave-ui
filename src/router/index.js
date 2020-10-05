@@ -96,11 +96,6 @@ const routes = [
         props: true
       }
     ]
-  },
-  {
-    path: '/*',
-    name: 'not-found',
-    component: () => import(/* webpackChunkName: "not-found" */ '@/documentation/views/404.vue'),
   }
 ]
 
@@ -160,6 +155,13 @@ externalComponents.forEach(item => {
     name: item.id,
     component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/ui-components/${item.id}.vue`)
   })
+})
+
+// Keep this route last!
+routes.push({
+  path: '/*',
+  name: 'not-found',
+  component: () => import(/* webpackChunkName: "not-found" */ '@/documentation/views/404.vue')
 })
 
 const router = createRouter({
