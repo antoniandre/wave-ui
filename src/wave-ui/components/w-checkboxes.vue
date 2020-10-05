@@ -43,7 +43,7 @@ export default {
     color: { type: String, default: 'primary' }
   },
 
-  emits: ['input', 'update:modelValue', 'focus', 'change'],
+  emits: ['input', 'update:modelValue', 'focus'],
 
   provide () {
     // Disable w-form-el wrapping in each w-checkbox when inside a w-checkboxes component that already
@@ -81,7 +81,6 @@ export default {
       this.checkboxItems.forEach(item => (item.isChecked = null))
       this.$emit('update:modelValue', [])
       this.$emit('input', [])
-      this.$emit('change', [])
     },
 
     toggleCheck (checkbox, isChecked) {
@@ -90,7 +89,6 @@ export default {
 
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
-      this.$emit('change', selection)
     }
   }
 }

@@ -145,7 +145,7 @@ div
             v-model="dialog5.transition"
             :items="transitions"
             item-value="label"
-            @change="dialog5.fullscreen = null")
+            @input="dialog5.fullscreen = null")
             template(#label="{ item }")
               code {{ item.label }}
         div.ma2
@@ -154,12 +154,12 @@ div
             v-model="dialog5.transition"
             :items="transitionsForFullscreen"
             item-value="label"
-            @change="dialog5.fullscreen = null")
+            @input="dialog5.fullscreen = null")
             template(#label="{ item }")
               code {{ item.label }}
           w-checkbox.mt2(
             :model-value="dialog5.fullscreen === null ? fullscreenTransition : dialog5.fullscreen"
-            @change="dialog5.fullscreen = $event"
+            @input="dialog5.fullscreen = $event"
             label="Fullscreen dialog")
     w-dialog(
       v-model="dialog5.show"
@@ -179,7 +179,7 @@ div
               v-model="dialog.transition"
               :items="transitions"
               item-value="label"
-              @change="dialog.fullscreen = null")
+              @input="dialog.fullscreen = null")
               template(#label="{ item }")
                 code {{ '\{\{ item.label \}\}' }}
           div.ma2
@@ -188,12 +188,12 @@ div
               v-model="dialog.transition"
               :items="transitionsForFullscreen"
               item-value="label"
-              @change="dialog.fullscreen = null")
+              @input="dialog.fullscreen = null")
               template(#label="{ item }")
                 code {{ '\{\{ item.label \}\}' }}
             w-checkbox.mt2(
              :model-value="dialog.fullscreen === null ? fullscreenTransition : dialog.fullscreen"
-              @change="dialog.fullscreen = $event"
+              @input="dialog.fullscreen = $event"
               label="Fullscreen dialog")
       w-dialog(
         v-model="dialog.show"

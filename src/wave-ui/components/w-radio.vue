@@ -3,7 +3,7 @@ component(
   :is="formRegister && !wRadios ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled }"
   v-model:valid="valid"
-  @reset="$emit('update:modelValue', inputValue = false);$emit('input', false);$emit('change', false)"
+  @reset="$emit('update:modelValue', inputValue = false);$emit('input', false)"
   :class="classes")
   input(
     ref="input"
@@ -14,7 +14,7 @@ component(
     :disabled="disabled || null"
     :required="required || null"
     @focus="$emit('focus', $event)"
-    @change="onChange"
+    @input="onInput"
     :aria-checked="inputValue || 'false'"
     role="radio")
   template(v-if="hasLabel && labelOnLeft")
@@ -50,7 +50,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'update:modelValue', 'focus', 'change'],
+  emits: ['input', 'update:modelValue', 'focus'],
 
   data: () => ({
     inputValue: false,
@@ -80,12 +80,11 @@ export default {
       this.inputValue = this.returnValue !== undefined ? (this.returnValue === this.modelValue) : this.modelValue
     },
 
-    onChange (e) {
+    onInput (e) {
       this.inputValue = e.target.checked // The source of truth is the radio button.
       const returnValue = this.inputValue && this.returnValue !== undefined ? this.returnValue : this.inputValue
       this.$emit('update:modelValue', returnValue)
       this.$emit('input', returnValue)
-      this.$emit('change', returnValue)
 
       if (!this.noRipple) {
         if (this.inputValue) {

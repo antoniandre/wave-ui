@@ -29,6 +29,7 @@ export default {
     right: { type: Boolean },
     bottom: { type: Boolean },
     overlap: { type: Boolean },
+    inline: { type: Boolean },
     color: { type: String },
     size: { type: [Number, String] },
     bgColor: { type: String, default: 'primary' },
@@ -73,6 +74,7 @@ export default {
         'w-badge__badge--round': this.round || (slotText || this.modelValue + '' || '').length < 2,
         'w-badge__badge--dark': this.dark && !this.outline,
         'w-badge__badge--outline': this.outline,
+        'w-badge__badge--inline': this.inline,
         'w-badge__badge--shadow': this.shadow,
         'w-badge__badge--overlap': this.overlap,
         'w-badge__badge--dot': this.dot,
@@ -104,6 +106,8 @@ export default {
     min-width: round(1.1 * $base-font-size / 2) * 2;
     z-index: 1;
     padding: 0 $base-increment;
+
+    &--inline {position: static;}
 
     &--round {
       width: round(1.1 * $base-font-size / 2) * 2;

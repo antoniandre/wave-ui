@@ -94,7 +94,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'update:modelValue', 'change', 'focus'],
+  emits: ['input', 'update:modelValue', 'focus'],
 
   data: () => ({
     track: {
@@ -226,7 +226,6 @@ export default {
       this.rangeValueScaled = this.percentToScaled(this.rangeValuePercent)
       this.$emit('update:modelValue', this.rangeValueScaled)
       this.$emit('input', this.rangeValueScaled)
-      this.$emit('change', this.rangeValueScaled)
     }
   },
 
