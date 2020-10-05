@@ -1,5 +1,5 @@
 <template lang="pug">
-w-app.fill-height.w-flex.column
+w-app
   w-drawer.nav-drawer(v-if="isMobile" v-model="drawerOpen" right :width="330")
     nav-menu(:drawer-open.sync="drawerOpen")
   header.no-shrink
