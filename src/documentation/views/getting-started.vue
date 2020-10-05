@@ -3,30 +3,59 @@ div
   title-link.mt4(h1) Getting started
   title-link(h2) Installation
 
-  title-link(h3) Download from NPM
+  title-link(h3) 1. Download from NPM
   ssh-pre(language="shell").
-    npm i wave-ui
+    npm i wave-ui # Vue 2.x.
 
-  title-link(h3) Import in your project
+  ssh-pre(language="shell").
+    npm i wave-ui@next # Vue 3.
+
+  title-link(h3) 2. Import in your project
   p Import Wave UI library at the root of your app - usually #[span.code main.js].
-  ssh-pre(language="js" label="main.js").
-    import Vue from 'vue'
-    import App from './app'
-    import WaveUI from 'wave-ui'
-    import 'wave-ui/dist/wave-ui.css'
+  w-flex(basis-zero wrap :gap="4")
+    ssh-pre.grow.ma2.mt8(language="js" label="VUE 2.x - main.js" style="min-width: 290px").
+      // VUE 2.x.
+      import Vue from 'vue'
+      import App from './app'
+      import WaveUI from 'wave-ui'
+      import 'wave-ui/dist/wave-ui.css'
 
-    Vue.use(WaveUI)
+      Vue.use(WaveUI)
 
-    const waveui = new WaveUI({
-      // Some Wave UI options.
-    })
+      const waveui = new WaveUI({
+        // Some Wave UI options.
+      })
 
-    new Vue({
-      waveui,
-      render: h => h(App)
-    }).$mount('#app')
+      new Vue({
+        waveui,
+        render: h => h(App)
+      }).$mount('#app')
+    ssh-pre.grow.ma2.mt8(language="js" label="VUE 3 - main.js" style="min-width: 290px").
+      // VUE 3.
+      import { createApp, h } from 'vue'
+      import App from './app'
+      import WaveUI from 'wave-ui'
+      import 'wave-ui/dist/wave-ui.css'
 
-  title-link(h3).mt8 Place a #[span.code w-app] at the root of your app
+      const app = createApp({
+        render: () => h(App)
+      })
+
+      new WaveUI(app, {
+        // Some Wave UI options.
+      })
+
+      app.mount('#app')
+
+  p.mt2.grey-light1.text-right
+    w-icon.mr1 wi-chevron-right
+    | Edit a
+    a.ml1(href="https://codepen.io/antoniandre/pen/RwaXMLd?editors=1010" target="_blank")
+      | Vue 3 Wave UI demo on Codepen
+      w-icon.ml1 mdi mdi-open-in-new
+    | .
+
+  title-link(h3).mt8 3. Place a #[span.code w-app] at the root of your app
   ssh-pre(language="html-vue" label="App.js").
     &lt;w-app&gt;
       &lt;!-- All your app's content goes here. --&gt;
