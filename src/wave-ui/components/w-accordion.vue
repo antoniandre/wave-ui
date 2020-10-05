@@ -59,7 +59,7 @@ export default {
     shadow: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue', 'change', 'focus'],
+  emits: ['input', 'update:modelValue', 'focus'],
 
   computed: {
     accordionItems () {
@@ -97,7 +97,6 @@ export default {
       const openItems = this.accordionItems.map(item => item.open)
       this.$emit('update:modelValue', openItems)
       this.$emit('input', openItems)
-      this.$emit('change', openItems)
     }
   },
 

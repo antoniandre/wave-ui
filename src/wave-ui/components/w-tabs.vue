@@ -52,7 +52,7 @@ export default {
     card: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue', 'change', 'focus'],
+  emits: ['input', 'update:modelValue', 'focus'],
 
   data: () => ({
     activeTabEl: null,
@@ -156,7 +156,6 @@ export default {
       const activeItem = this.tabsItems.map(item => item.active)
       this.$emit('update:modelValue', activeItem)
       this.$emit('input', activeItem)
-      this.$emit('change', activeItem)
 
       if (!this.noSlider) this.$nextTick(this.updateSlider)
     },
