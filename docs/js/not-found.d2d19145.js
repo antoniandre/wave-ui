@@ -1,2 +1,0 @@
-(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["not-found"],{"14ab":function(t,e,n){"use strict";n.r(e);var o=function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[n("title-link",{staticClass:"mt4",attrs:{h1:""}},[t._v("404 - Not found")]),n("p",[t._v("The page you are looking for was not found on the server.")])],1)},a=[],s=n("2877"),l={},r=Object(s["a"])(l,o,a,!1,null,null,null);e["default"]=r.exports}}]);
-//# sourceMappingURL=not-found.d2d19145.js.map
