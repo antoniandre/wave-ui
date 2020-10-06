@@ -356,7 +356,7 @@ div
     .title4.mt6 2 custom icons (expand &amp; collapse)
     w-accordion.white--bg(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
     .title4.mt6 No icon
-    w-accordion.white--bg(:items="items" expand-icon="" title-class="py2")
+    w-accordion.white--bg(:items="items" :expand-icon="false" title-class="py2")
     .title4.mt6 Icon on the right
     w-accordion.white--bg(:items="items" expand-icon-right)
     template(#pug).
@@ -367,7 +367,7 @@ div
       w-accordion(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
 
       .title4.mt8.mb2 No icon
-      w-accordion(:items="items" expand-icon="" title-class="py2")
+      w-accordion(:items="items" :expand-icon="false" title-class="py2")
 
       .title4.mt8.mb2 Icon on the right
       w-accordion(:items="items" expand-icon-right)
