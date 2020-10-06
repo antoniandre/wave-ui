@@ -12,6 +12,7 @@ div
 </template>
 
 <script>
+import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WInput from '@/wave-ui/components/w-input'
 
 const propsDescs = {
@@ -42,7 +43,9 @@ const propsDescs = {
   validators: ''
 }
 
-const slots = {}
+const slots = {
+  default: { description: 'The label content, if the label prop is not flexible enough.' }
+}
 
 const eventsDescs = {
   input: 'Emitted each time the input text changes. It updates the v-model value in Vue 2.x only.<br>The new input value is passed as a parameter.',
@@ -63,7 +66,7 @@ export default {
     // Reads all the props and events directly from the component, so that as soon as a new prop or event
     // is added it will appear even if no description is yet provided.
     props () {
-      return WInput.props
+      return { ...WInput.props, ...FormElementMixin.props }
     },
     events () {
       return WInput.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})

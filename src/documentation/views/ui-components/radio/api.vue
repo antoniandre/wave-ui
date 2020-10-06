@@ -25,6 +25,7 @@ div
 </template>
 
 <script>
+import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WRadios from '@/wave-ui/components/w-radios'
 import WRadio from '@/wave-ui/components/w-radio'
 
@@ -45,7 +46,7 @@ const radios = {
     validators: ''
   },
   slots: {
-    item: { description: '' }
+    item: { description: 'Provide a custom content for each radio button label.' }
   },
   eventsDescs: {
     input: 'Emitted each time any of the radio buttons is toggled. It updates the v-model value in Vue 2.x only.<br>The return-value of the selected radio button is passed as a parameter.<br>The return-value will be one of these attributes, if they exist, in this order: the item value, the item label, the item index.',
@@ -69,7 +70,7 @@ const radio = {
     validators: ''
   },
   slots: {
-    default: { description: '' }
+    default: { description: 'The radio button label content.' }
   },
   eventsDescs: {
     input: 'Emitted each time the state of the radio button changes. It updates the v-model value in Vue 2.x only.<br>A boolean for the current state is passed as a parameter.',
@@ -88,10 +89,10 @@ export default {
     // Reads all the props and events directly from the component, so that as soon as a new prop or event
     // is added it will appear even if no description is yet provided.
     radiosProps () {
-      return WRadios.props
+      return { ...WRadios.props, ...FormElementMixin.props }
     },
     radioProps () {
-      return WRadio.props
+      return { ...WRadio.props, ...FormElementMixin.props }
     },
     radiosEvents () {
       return WRadios.emits.reduce((obj, label) => (obj[label] = { description: radios.eventsDescs[label] || '' }) && obj, {})

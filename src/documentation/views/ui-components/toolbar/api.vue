@@ -15,17 +15,21 @@ div
 import WToolbar from '@/wave-ui/components/w-toolbar'
 
 const propsDescs = {
+  color: '',
+  bgColor: '',
+  absolute: '',
+  fixed: '',
+  bottom: '',
+  height: '',
+  noBorder: '',
+  shadow: ''
 }
 
 const slots = {
-  default: { description: '' }
+  default: { description: 'The toolbar content.' }
 }
 
-const eventsDescs = {
-  input: 'Emitted each time the state of the component changes. It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  'update:modelValue': 'Emitted each time the state of the component changes (when an item is expanded or collapsed). It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  focus: 'Emitted on each item title focus. The focused item is returned as a parameter.'
-}
+const eventsDescs = {}
 
 export default {
   data: () => ({
