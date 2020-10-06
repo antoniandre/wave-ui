@@ -6,7 +6,7 @@
     :class="{ ...itemClasses, 'w-accordion__item--expanded': item.open, 'w-accordion__item--disabled': item.disabled, [item[itemColor]]: item[itemColor] }")
     .w-accordion__item-title(
       @click="!item.disabled && toggleItem(item)"
-      @focus="$emit('focus', $event)"
+      @focus="$emit('focus', item)"
       :tabindex="!item.disabled && 0"
       @keypress.enter="!item.disabled && toggleItem(item)"
       :class="titleClass")
@@ -15,13 +15,14 @@
         v-if="expandIcon && !expandIconRight"
         :icon="(item.open && collapseIcon) || expandIcon"
         :disabled="item.disabled || null"
+        :tabindex="-1"
         text
         @keypress.stop
         @click.stop="!item.disabled && toggleItem(item)")
       //- Title.
       slot(v-if="$scopedSlots[`item-title.${item.id || i + 1}`]" :name="`item-title.${item.id || i + 1}`" :item="item")
       slot(v-else name="item-title" :item="item")
-        div.grow(v-html="item.title")
+        div.grow(v-html="item[itemTitle]")
       //- Expand icon on right.
       w-button.w-accordion__expand-icon(
         v-if="expandIcon && expandIconRight"
@@ -34,7 +35,7 @@
       .w-accordion__item-content(v-if="item.open" :class="contentClass")
         slot(v-if="$scopedSlots[`item-content.${item.id || i + 1}`]" :name="`item-content.${item.id || i + 1}`" :item="item")
         slot(v-else name="item-content" :item="item")
-          div(v-html="item.content")
+          div(v-html="item[itemContent]")
 </template>
 
 <script>
@@ -48,8 +49,10 @@ export default {
     color: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     items: { type: [Array, Number], required: true },
-    itemClass: { type: String },
     itemColor: { type: String, default: 'color' }, // Support a different color per item.
+    itemTitle: { type: String, default: 'title' },
+    itemContent: { type: String, default: 'content' },
+    itemClass: { type: String },
     titleClass: { type: String },
     contentClass: { type: String },
     expandIcon: { type: [String, Boolean], default: 'wi-triangle-down' },
