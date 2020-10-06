@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -15,30 +14,34 @@ div
 import WAccordion from '@/wave-ui/components/w-accordion'
 
 const propsDescs = {
-  value: '',
-  color: '',
+  value: 'Provide an array of booleans to dictate the state (expanded and collapsed) of all the accordion items. This value gets updated by the accordion when using a v-model.',
+  color: 'Provide a text color for the component. Accepts all the color names of the color palette, status colors, or custom colors (learn more about all the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex will not work.',
   bgColor: 'Provide a background color for the component. Accepts all the color names of the color palette, status colors, or custom colors (learn more about all the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex will not work.',
-  items: '',
-  itemClass: '',
-  itemColor: '',
-  titleClass: '',
-  contentClass: '',
-  expandIcon: '',
-  expandIconRight: '',
-  expandSingle: '',
-  collapseIcon: '',
-  shadow: ''
+  items: 'Expecting an array of objects. Each object represent an accordion item and should include a <code>title</code> and <code>content</code> attributes.<br>Alternatively, you can provide an integer number (call it <em class="code">x</em>), to loop through and create <em class="code">x</em> items in the accordion. You can then use the individual slots <code>item-title.x</code> &amp; <code>item-content.x</code> to define each item title and content.',
+  itemTitle: 'Specifies the name of the attribute in each item object where to find the item\'s title string.',
+  itemContent: 'Specifies the name of the attribute in each item object where to find the item\'s content string.',
+  itemColor: 'Specifies the name of the attribute in each item object where to find the item\'s desired color string. This allows a different color for each accordion item.',
+  itemClass: 'Applies a custom CSS class (or space separated classes) on every item container (which includes both the title and the content of the item).',
+  titleClass: 'Applies a custom CSS class (or space separated classes) on every title container.',
+  contentClass: 'Applies a custom CSS class (or space separated classes) on every content container.',
+  expandIcon: 'Specifies the name of the icon to display in the toggle button. If set to false or empty string, the button will be removed.',
+  expandIconRight: 'When set to true, the expand button will be placed at the right end of the item\'s title.',
+  expandSingle: 'Specifies the accordion behavior, whether only one item can be expanded at a time or multiple. When set to true, expanding another item than the one already expanded is still possible, but it will collapse the other expanded item.',
+  collapseIcon: 'Provide a different icon than the expand icon, to show when the accordion item is expanded. By default and when empty, there is no collapse icon: the expand icon rotates to show a closing ability.',
+  shadow: 'Applies a shadow to the whole accordion container.'
 }
 
 const slots = {
-  'item-title': { description: '' },
-  'item-title.x': { description: '' },
-  'item-content': { description: '' },
-  'item-content.x': { description: '' }
+  'item-title': { description: 'Provide a custom title for every item. Applies to all the items, but can be overridden by the <code>item-title.x</code> slot.' },
+  'item-title.x': { description: 'Provide a custom title for a single item: the item at the index <em class="code">x</em>.' },
+  'item-content': { description: 'Provide a custom content for every item. Applies to all the items, but can be overridden by the <code>item-content.x</code> slot.' },
+  'item-content.x': { description: 'Provide a custom content for a single item: the item at the index <em class="code">x</em>.' }
 }
 
 const eventsDescs = {
-  'update:modelValue': 'This event is fired in prevision of the Vue 3 support coming soon. It updates the v-model value.'
+  input: 'This event is fired each time the state of the accordion changes (when an item is expanded or collapsed). It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
+  'update:modelValue': 'This event is fired each time the state of the accordion changes (when an item is expanded or collapsed). It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
+  focus: 'Fired on each item title focus. The focused item is returned as a parameter.'
 }
 
 export default {
