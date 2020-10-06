@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,11 +14,18 @@ div
 <script>
 import WToolbar from '@/wave-ui/components/w-toolbar'
 
-const propsDescs = {}
+const propsDescs = {
+}
 
-const slots = {}
+const slots = {
+  default: { description: '' }
+}
 
-const eventsDescs = {}
+const eventsDescs = {
+  input: 'Emitted each time the state of the component changes. It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
+  'update:modelValue': 'Emitted each time the state of the component changes (when an item is expanded or collapsed). It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
+  focus: 'Emitted on each item title focus. The focused item is returned as a parameter.'
+}
 
 export default {
   data: () => ({

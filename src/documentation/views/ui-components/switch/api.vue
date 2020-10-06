@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,11 +14,23 @@ div
 <script>
 import WSwitch from '@/wave-ui/components/w-switch'
 
-const propsDescs = {}
+const propsDescs = {
+  name: '',
+  disabled: '',
+  readonly: '',
+  required: '',
+  validators: ''
+}
 
-const slots = {}
+const slots = {
+  default: { description: '' }
+}
 
-const eventsDescs = {}
+const eventsDescs = {
+    input: 'Emitted each time the state of the switch changes. It updates the v-model value in Vue 2.x only.<br>A boolean for the current state is passed as a parameter.',
+    'update:modelValue': 'Emitted each time the state of the switch changes. It updates the v-model value in Vue 3 only.<br>A boolean for the current state is passed as a parameter.',
+    focus: 'Emitted on each switch focus. The focus DOM event is returned as a parameter.'
+}
 
 export default {
   data: () => ({

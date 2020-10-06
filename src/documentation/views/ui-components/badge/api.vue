@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,9 +14,35 @@ div
 <script>
 import WBadge from '@/wave-ui/components/w-badge'
 
-const propsDescs = {}
+const propsDescs = {
+  value: '',
+  xs: '',
+  sm: '',
+  md: '',
+  lg: '',
+  xl: '',
+  top: '',
+  left: '',
+  right: '',
+  bottom: '',
+  overlap: '',
+  inline: '',
+  color: '',
+  size: '',
+  bgColor: '',
+  dark: '',
+  badgeClass: '',
+  outline: '',
+  shadow: '',
+  dot: '',
+  round: '',
+  transition: ''
+}
 
-const slots = {}
+const slots = {
+  default: { description: 'The element receiving the badge. Can be any visible DOM element or mounted component.' },
+  badge: { description: 'The badge content.' }
+}
 
 const eventsDescs = {}
 
