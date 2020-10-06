@@ -7,7 +7,7 @@
       slot
     w-button.w-alert__dismiss(
       v-if="dismiss"
-      @click="$emit('update:modelValue', show = false);$emit('input', false)"
+      @click="$emit('update:modelValue', show = false);$emit('input', false);$emit('close', false)"
       icon="wi-cross"
       color="inherit"
       sm
@@ -51,7 +51,7 @@ export default {
     outline: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue'],
+  emits: ['input', 'update:modelValue', 'close'],
 
   data () {
     return {
