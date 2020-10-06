@@ -49,6 +49,23 @@ div
         fillBar: true
       })
 
+  title-link(h2) V-model
+  p It is possible to open a particular tab programmatically via the v-model.
+  example
+    w-tabs(:value="[false, false, true, false, false]" :items="tabs2.items")
+    template(#pug).
+      w-tabs(:value="[false, false, true, false, false]" :items="tabs")
+    template(#js).
+      data: () => ({
+        tabs: [
+          { title: 'Tab 1', content: 'Tab 1 content.' },
+          { title: 'Tab 2', content: 'Tab 2 content.' },
+          { title: 'Tab 3', content: 'Tab 3 content.' },
+          { title: 'Tab 4', content: 'Tab 4 content.' },
+          { title: 'Tab 5', content: 'Tab 5 content.', disabled: true }
+        ]
+      })
+
   title-link(h2) Colors
   p.
     Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
