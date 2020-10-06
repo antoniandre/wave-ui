@@ -16,6 +16,8 @@ component(
     :label="item.label"
     :label-on-left="labelOnLeft"
     :color="item.color"
+    :disabled="disabled || null"
+    :readonly="readonly || null"
     :class="{ mt1: !inline && i }")
     slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
 </template>
@@ -30,13 +32,13 @@ export default {
   props: {
     items: { type: Array, required: true }, // All the possible options.
     value: { type: [String, Number, Boolean] }, // v-model on selected option.
-    name: { type: String },
     labelOnLeft: { type: Boolean },
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
     itemColor: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
     color: { type: String, default: 'primary' }
+    // Also name, disabled, readonly, required and validators in the mixin.
   },
 
   emits: ['input', 'update:modelValue', 'focus'],
