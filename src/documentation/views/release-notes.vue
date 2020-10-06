@@ -4,6 +4,14 @@ div
 
   ul
     li
+      strong.version v1.2.1
+      ul
+        li Emit a #[code close] event on #[span.code w-alert] dismiss/hide.
+        li Emit a #[code focus] event on #[span.code w-accordion] item focus.
+        li Added #[code item-title] &amp; #[code item-content] props on #[span.code w-accordion].
+        li Added #[code disabled] &amp; #[code readonly] props on #[span.code w-checkboxes] &amp; #[span.code w-radios].
+  ul
+    li
       strong.version v1.2.0
       ul
         li.
