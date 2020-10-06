@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,11 +14,30 @@ div
 <script>
 import WForm from '@/wave-ui/components/w-form'
 
-const propsDescs = {}
+const propsDescs = {
+  value: '',
+  allowSubmit: '',
+  noKeyupValidation: '',
+  noBlurValidation: '',
+  errorPlaceholders: ''
+}
 
-const slots = {}
+const slots = {
+  default: { description: '' }
+}
 
-const eventsDescs = {}
+const eventsDescs = {
+  submit: '',
+  'before-validate': '',
+  validate: '',
+  success: '',
+  error: '',
+  reset: '',
+  input: '',
+  'update:modelValue': '',
+  'update:valid': '',
+  'update:errorsCount': ''
+}
 
 export default {
   data: () => ({

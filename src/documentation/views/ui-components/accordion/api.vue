@@ -33,15 +33,15 @@ const propsDescs = {
 
 const slots = {
   'item-title': { description: 'Provide a custom title for every item. Applies to all the items, but can be overridden by the <code>item-title.x</code> slot.' },
-  'item-title.x': { description: 'Provide a custom title for a single item: the item at the index <em class="code">x</em>.' },
+  'item-title.x': { description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom title for a single item: the item at the index <em class="code">x</em>.' },
   'item-content': { description: 'Provide a custom content for every item. Applies to all the items, but can be overridden by the <code>item-content.x</code> slot.' },
-  'item-content.x': { description: 'Provide a custom content for a single item: the item at the index <em class="code">x</em>.' }
+  'item-content.x': { description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single item: the item at the index <em class="code">x</em> (<em class="code">x</em>.' }
 }
 
 const eventsDescs = {
-  input: 'This event is fired each time the state of the accordion changes (when an item is expanded or collapsed). It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  'update:modelValue': 'This event is fired each time the state of the accordion changes (when an item is expanded or collapsed). It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  focus: 'Fired on each item title focus. The focused item is returned as a parameter.'
+  input: 'Emitted each time the state of the accordion changes (when an item is expanded or collapsed). It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
+  'update:modelValue': 'Emitted each time the state of the accordion changes (when an item is expanded or collapsed). It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
+  focus: 'Emitted on each item title focus. The focused item is returned as a parameter.'
 }
 
 export default {

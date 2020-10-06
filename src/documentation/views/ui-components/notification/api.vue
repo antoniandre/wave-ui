@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,11 +14,49 @@ div
 <script>
 import WNotification from '@/wave-ui/components/w-notification'
 
-const propsDescs = {}
+const propsDescs = {
+  value: '',
+  transition: '',
+  timeout: '',
+  absolute: '',
+  top: '',
+  bottom: '',
+  left: '',
+  right: '',
+  zIndex: '',
+  success: '',
+  info: '',
+  warning: '',
+  error: '',
+  color: '',
+  bgColor: '',
+  shadow: '',
+  tile: '',
+  round: '',
+  plain: '',
+  noBorder: '',
+  borderLeft: '',
+  borderRight: '',
+  borderTop: '',
+  borderBottom: '',
+  outline: '',
+  dismiss: '',
+  xs: '',
+  sm: '',
+  md: '',
+  lg: '',
+  xl: '',
+}
 
-const slots = {}
+const slots = {
+  default: { description: 'The notification content.' }
+}
 
-const eventsDescs = {}
+const eventsDescs = {
+  input: 'Emitted on notification dismiss/hide. It updates the v-model value in Vue 2.x only.',
+  'update:modelValue': 'Emitted on notification dismiss/hide. It updates the v-model value in Vue 3 only.',
+  close: 'Emitted on notification dismiss/hide.'
+}
 
 export default {
   data: () => ({

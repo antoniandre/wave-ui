@@ -1,7 +1,9 @@
 <template lang="pug">
 div
   title-link(h2) Horizontal
-  p This horizontal line bellow is a divider.
+  p.
+    This horizontal line bellow is a divider.#[br]
+    You can set margins on a divider space out or reduce the width/height of the divider.
   w-divider.ma10
 
   h3 Divider in a #[code w-card]

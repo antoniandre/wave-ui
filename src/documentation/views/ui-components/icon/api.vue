@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,9 +14,31 @@ div
 <script>
 import WIcon from '@/wave-ui/components/w-icon'
 
-const propsDescs = {}
+const propsDescs = {
+  tag: '',
+  color: '',
+  bgColor: '',
+  xs: '',
+  sm: '',
+  md: '',
+  lg: '',
+  xl: '',
+  spin: '',
+  rotate45: '',
+  rotate90: '',
+  rotate135: '',
+  rotate180: '',
+  rotate225: '',
+  rotate270: '',
+  rotate315: '',
+  flipX: '',
+  flipY: '',
+  size: ''
+}
 
-const slots = {}
+const slots = {
+  default: { description: 'Provide the icon to use as a string. E.g. `mdi mdi-home`.' }
+}
 
 const eventsDescs = {}
 
