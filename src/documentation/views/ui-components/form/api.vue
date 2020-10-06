@@ -23,20 +23,19 @@ const propsDescs = {
 }
 
 const slots = {
-  default: { description: '' }
+  default: { description: 'The form content.' }
 }
 
 const eventsDescs = {
-  submit: '',
-  'before-validate': '',
-  validate: '',
-  success: '',
-  error: '',
-  reset: '',
-  input: '',
-  'update:modelValue': '',
-  'update:valid': '',
-  'update:errorsCount': ''
+  submit: 'Emmited on form submit.',
+  'before-validate': 'Emmited before validation, every time a validation is triggered.',
+  validate: 'Emmited on form validate, every time a validation is triggered.',
+  success: 'Emmited on form success, when there is no error in the form and the validation is successful.',
+  error: 'Emmited on form error, when there is at least one error in the form and the validation fails.',
+  reset: 'Emmited on form reset. A reset can be triggered by setting the v-model value to null or by clicking on a reset button.',
+  input: 'Emmited every time the form status changes. It updates the v-model value in Vue 2.x only.<br>The new status value is passed as a parameter.',
+  'update:modelValue': 'Emmited every time the form status changes. It updates the v-model value in Vue 3 only.<br>The new status value is passed as a parameter.',
+  'update:errorsCount': 'Emmited every time the errorsCount changes. To be used with <code>:errors-count.sync</code> on Vue 2.x or <code>v-model:errors-count</code> on Vue 3.'
 }
 
 export default {
