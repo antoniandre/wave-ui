@@ -15,6 +15,8 @@ component(
     :value="item.isChecked"
     :color="item.color"
     :round="round"
+    :disabled="disabled || null"
+    :readonly="readonly || null"
     @input="toggleCheck(item, $event)"
     @focus="$emit('focus', $event)"
     :class="{ mt1: !inline && i }")
@@ -32,7 +34,6 @@ export default {
   props: {
     items: { type: Array, required: true }, // All the possible options.
     value: { type: Array }, // v-model on selected option.
-    name: { type: String, default: null },
     labelOnLeft: { type: Boolean },
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
@@ -40,6 +41,7 @@ export default {
     inline: { type: Boolean },
     round: { type: Boolean },
     color: { type: String, default: 'primary' }
+    // Also name, disabled, readonly, required and validators in the mixin.
   },
 
   emits: ['input', 'update:modelValue', 'focus'],
