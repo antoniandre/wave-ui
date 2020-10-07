@@ -6,6 +6,7 @@ ul.w-list(:class="classes")
     :class="{ 'w-list__item--parent': (li.children || []).length }")
     w-icon.w-list__item-bullet(v-if="icon") {{ icon }}
 
+    //- List items.
     component.w-list__item-label(
       v-if="$slots[`item.${i + 1}`] || $slots.item || $slots.default"
       :is="checklist ? 'w-checkbox' : (nav && !li.disabled && li.route ? (hasRouter ? 'router-link' : 'a') : 'div')"
@@ -16,10 +17,9 @@ ul.w-list(:class="classes")
     component.w-list__item-label(
       v-else
       :is="checklist ? 'w-checkbox' : (nav && !li.disabled && li.route ? (hasRouter ? 'router-link' : 'a') : 'div')"
-      v-bind="liLabelProps(li, i, li._selected)"
-      v-html="li._label")
+      v-bind="liLabelProps(li, i, li._selected)")
 
-    //- Children.
+    //- Children lists.
     w-list(
       v-if="(li.children || []).length"
       v-bind="$props"
@@ -159,6 +159,8 @@ export default {
     },
 
     liLabelProps (li, index, selected) {
+      const hasSlot = this.$slots[`item.${index + 1}`] || this.$slots.item
+
       // Event handlers.
       // ------------------------------------------------------
       const click = () => {
@@ -198,7 +200,7 @@ export default {
         props.round = this.roundCheckboxes
         props.disabled = li.disabled
 
-        // if (!hasSlot) props.label = li[this.itemLabel] || false
+        if (!hasSlot) props.label = li._label || null
 
         // The checkbox component is not fully covering the list-item-label, when clicking on list
         // item label, toggle the checkbox.
@@ -244,6 +246,8 @@ export default {
             props.onMousedown = mousedown
           }
         }
+
+        if (!hasSlot) props.innerHTML = li._label
       }
       // ------------------------------------------------------
 
@@ -255,6 +259,7 @@ export default {
         props.onClick = click
         props.onKeydown = keydown
         props.onMousedown = mousedown
+        if (!hasSlot) props.innerHTML = li._label
       }
       // ------------------------------------------------------
 
