@@ -56,8 +56,7 @@ export default {
 </script>
 
 <style lang="scss">
-.page--backers {
-  .backer {}
+.backers {
   .avatar, .plus {
     display: inline-flex;
     align-items: center;
