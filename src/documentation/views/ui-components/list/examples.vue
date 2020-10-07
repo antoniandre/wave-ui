@@ -433,7 +433,7 @@ export default {
 
 <style lang="scss">
 .lists-demo {max-width: 1250px;}
-.page--list .w-list {
+.lists-demo .w-list {
   &.custom .w-list__item-label:before {display: none;}
   &.custom .w-list__item-label label {
     position: relative;
