@@ -47,8 +47,8 @@ module.exports = {
   },
   css: {
     loaderOptions: {
-      sass: {
-        prependData: `@import "@/wave-ui/scss/_variables.scss";@import "@/documentation/scss/_variables.scss";`
+      scss: {
+        additionalData: `@import "@/wave-ui/scss/_variables.scss";@import "@/documentation/scss/_variables.scss";`
       }
     }
   }

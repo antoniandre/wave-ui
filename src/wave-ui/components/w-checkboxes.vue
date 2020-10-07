@@ -16,6 +16,8 @@ component(
     :color="item.color"
     :round="round"
     @update:model-value="toggleCheck(item, $event)"
+    :disabled="disabled || null"
+    :readonly="readonly || null"
     @focus="$emit('focus', $event)"
     :class="{ mt1: !inline && i }")
     slot(v-if="$slots.item" name="item" :item="item")
@@ -33,7 +35,6 @@ export default {
   props: {
     items: { type: Array, required: true }, // All the possible options.
     modelValue: { type: Array }, // v-model on selected option.
-    name: { type: String, default: null },
     labelOnLeft: { type: Boolean },
     itemLabel: { type: String, default: 'label' },
     itemValue: { type: String, default: 'value' },
@@ -41,6 +42,7 @@ export default {
     inline: { type: Boolean },
     round: { type: Boolean },
     color: { type: String, default: 'primary' }
+    // Also name, disabled, readonly, required and validators in the mixin.
   },
 
   emits: ['input', 'update:modelValue', 'focus'],

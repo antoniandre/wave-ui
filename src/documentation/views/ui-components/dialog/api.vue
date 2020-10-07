@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,11 +14,32 @@ div
 <script>
 import WDialog from '@/wave-ui/components/w-dialog'
 
-const propsDescs = {}
+const propsDescs = {
+  value: '',
+  width: '',
+  fullscreen: '',
+  persistent: '',
+  persistentNoAnimation: '',
+  tile: '',
+  title: '',
+  transition: '',
+  titleClass: '',
+  contentClass: '',
+  overlayColor: '',
+  overlayOpacity: ''
+}
 
-const slots = {}
+const slots = {
+  title: { description: 'The dialog uses a <span class="code">w-card</span>. This slot allows a custom title for the <span class="code">w-card</span>.' },
+  default: { description: 'The dialog content.' },
+  actions: { description: 'The dialog uses a <span class="code">w-card</span>. This slot allows setting the actions slot of the <span class="code">w-card</span>.' }
+}
 
-const eventsDescs = {}
+const eventsDescs = {
+  input: 'Emitted on dialog close. It updates the v-model value in Vue 2.x only.',
+  'update:modelValue': 'Emitted on dialog close. It updates the v-model value in Vue 3 only.',
+  close: 'Emitted on dialog close.',
+}
 
 export default {
   data: () => ({

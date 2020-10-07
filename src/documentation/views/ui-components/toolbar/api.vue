@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,9 +14,20 @@ div
 <script>
 import WToolbar from '@/wave-ui/components/w-toolbar'
 
-const propsDescs = {}
+const propsDescs = {
+  color: '',
+  bgColor: '',
+  absolute: '',
+  fixed: '',
+  bottom: '',
+  height: '',
+  noBorder: '',
+  shadow: ''
+}
 
-const slots = {}
+const slots = {
+  default: { description: 'The toolbar content.' }
+}
 
 const eventsDescs = {}
 
