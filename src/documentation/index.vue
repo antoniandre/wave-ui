@@ -17,8 +17,11 @@ w-app
         router-view.grow
 
       footer.w-flex.justify-end.align-center.no-grow.wrap
-        small.grey-light2.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
+        small.grey-light3.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
         .spacer
+        router-link.pink-light1.mr4(to="/backers")
+          w-icon.mr1 mdi mdi-heart-multiple-outline
+          | Backers
         .caption
           | Made with
           w-tooltip(top)
@@ -118,6 +121,7 @@ footer {
 
   .heart:hover {animation: heartbeat 1s infinite;}
   small {font-size: 10px;}
+  .caption {padding-top: 1px;}
 }
 
 @keyframes heartbeat {
