@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,9 +14,22 @@ div
 <script>
 import WCard from '@/wave-ui/components/w-card'
 
-const propsDescs = {}
+const propsDescs = {
+  color: '',
+  bgColor: '',
+  shadow: '',
+  noBorder: '',
+  tile: '',
+  title: '',
+  titleClass: '',
+  contentClass: ''
+}
 
-const slots = {}
+const slots = {
+  title: { description: 'The card title, if the <code>title</code> prop isn\'t flexible enough.' },
+  default: { description: 'The card content.' },
+  actions: { description: 'Some card actions that will be displayed at the bottom of the card.<br>Has a flex layout.' }
+}
 
 const eventsDescs = {}
 

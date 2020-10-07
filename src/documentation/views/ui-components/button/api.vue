@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,9 +14,41 @@ div
 <script>
 import WButton from '@/wave-ui/components/w-button'
 
-const propsDescs = {}
+const propsDescs = {
+  color: '',
+  bgColor: '',
+  dark: '',
+  outline: '',
+  text: '',
+  round: '',
+  shadow: '',
+  tile: '',
+  to: '',
+  forceLink: '',
+  type: '',
+  disabled: '',
+  loading: '',
+  icon: '',
+  absolute: '',
+  fixed: '',
+  top: '',
+  bottom: '',
+  left: '',
+  right: '',
+  zIndex: '',
+  width: '',
+  height: '',
+  xs: '',
+  sm: '',
+  md: '',
+  lg: '',
+  xl: ''
+}
 
-const slots = {}
+const slots = {
+  default: { description: 'The button content.' },
+  loading: { description: 'Provide a custom loading content, if the default spinner doesn\'t fit.' }
+}
 
 const eventsDescs = {}
 

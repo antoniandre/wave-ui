@@ -34,7 +34,6 @@ export default {
     'reset',
     'input',
     'update:modelValue',
-    'update:valid',
     'update:errorsCount'
   ],
 
@@ -90,7 +89,8 @@ export default {
         })
 
         el.hasJustReset = false
-        el.$emit('update:valid', Validation.isValid) // Update the form element's validity.
+        // Update the form element's validity. Internal emit not listed in `emits`.
+        el.$emit('update:valid', Validation.isValid)
         return total + ~~(!Validation.isValid)
       }, 0)
 

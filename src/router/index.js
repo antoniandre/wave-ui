@@ -80,6 +80,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "release-notes" */ '@/documentation/views/release-notes.vue')
   },
   {
+    path: '/backers',
+    name: 'backers',
+    component: () => import(/* webpackChunkName: "backers" */ '@/documentation/views/backers.vue')
+  },
+  {
     path: '/form',
     name: 'form-elements',
     redirect: '/w-form'

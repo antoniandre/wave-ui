@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,11 +14,33 @@ div
 <script>
 import WTag from '@/wave-ui/components/w-tag'
 
-const propsDescs = {}
+const propsDescs = {
+  value: '',
+  color: '',
+  bgColor: '',
+  dark: '',
+  shadow: '',
+  tile: '',
+  round: '',
+  closable: '',
+  outline: '',
+  xs: '',
+  sm: '',
+  md: '',
+  lg: '',
+  xl: '',
+  width: '',
+  height: ''
+}
 
-const slots = {}
+const slots = {
+  default: { description: 'The tag content.' }
+}
 
-const eventsDescs = {}
+const eventsDescs = {
+  input: 'For vue 2 only.<br>If a value or v-model is provided, the tag becomes toggleable on click.<br>On click, it updates the v-model value in Vue 2.x only.<br>The boolean value is passed as a parameter.',
+  'update:modelValue': 'For vue 3 only.<br>If a model-value or v-model is provided, the tag becomes toggleable on click.<br>On click, it updates the v-model value in Vue 3 only.<br>The boolean value is passed as a parameter.',
+}
 
 export default {
   data: () => ({

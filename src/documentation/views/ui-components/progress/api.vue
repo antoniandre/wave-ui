@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) This API will soon be more detailed.
+  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,9 +14,35 @@ div
 <script>
 import WProgress from '@/wave-ui/components/w-progress'
 
-const propsDescs = {}
+const propsDescs = {
+  value: '',
+  label: '',
+  roundCap: '',
+  color: '',
+  bgColor: '',
+  labelColor: '',
+  size: '',
 
-const slots = {}
+  // Circular progress thickness.
+  circle: '',
+  stroke: '',
+
+  // For linear progress.
+  shadow: '',
+  tile: '',
+  round: '',
+  outline: '',
+  stripes: '',
+  absolute: '',
+  fixed: '',
+  top: '',
+  bottom: '',
+  zIndex: ''
+}
+
+const slots = {
+  default: { description: 'Provide a custom progress label.' }
+}
 
 const eventsDescs = {}
 
