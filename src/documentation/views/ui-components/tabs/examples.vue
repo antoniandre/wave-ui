@@ -52,9 +52,9 @@ div
   title-link(h2) V-model
   p It is possible to open a particular tab programmatically via the v-model.
   example
-    w-tabs(:value="[false, false, true, false, false]" :items="tabs2.items")
+    w-tabs(:model-value="[false, false, true, false, false]" :items="tabs2.items")
     template(#pug).
-      w-tabs(:value="[false, false, true, false, false]" :items="tabs")
+      w-tabs(:model-value="[false, false, true, false, false]" :items="tabs")
     template(#js).
       data: () => ({
         tabs: [
