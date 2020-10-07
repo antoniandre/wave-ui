@@ -19,7 +19,7 @@ div
 
   title-link(h2) Examples of common layouts
   w-flex.common-layouts.mt4(:gap="6" wrap basis-zero)
-    w-badge(bg-color="orange" color="white" overlap :value="1")
+    w-badge(bg-color="orange" color="white" overlap :model-value="1")
       fieldset.app
         legend w-app
         section.header Header
@@ -28,7 +28,7 @@ div
           section.content.block.grow Main content
         section.footer Footer
 
-    w-badge(bg-color="orange" color="white" overlap :value="2")
+    w-badge(bg-color="orange" color="white" overlap :model-value="2")
       fieldset.app
         legend w-app
         .w-flex
@@ -38,14 +38,14 @@ div
             section.content.block.grow Main content
             section.footer Footer
 
-    w-badge(bg-color="orange" color="white" overlap :value="3")
+    w-badge(bg-color="orange" color="white" overlap :model-value="3")
       fieldset.app
         legend w-app
         section.header Header
         section.content.block.grow Main content
         section.footer Footer
 
-    w-badge(bg-color="orange" color="white" overlap :value="4")
+    w-badge(bg-color="orange" color="white" overlap :model-value="4")
       fieldset.app
         legend w-app
         section.header Header
@@ -56,9 +56,9 @@ div
   ul.mt6
     li.
       In the above cases
-      #[w-badge(inline bg-color="orange" color="white" :value="1")],
-      #[w-badge(inline bg-color="orange" color="white" :value="2")],
-      #[w-badge(inline bg-color="orange" color="white" :value="3")],
+      #[w-badge(inline bg-color="orange" color="white" :model-value="1")],
+      #[w-badge(inline bg-color="orange" color="white" :model-value="2")],
+      #[w-badge(inline bg-color="orange" color="white" :model-value="3")],
       you always want the footer to stick to the bottom of the screen.#[br]
       But if possible without covering the content (so not #[code position: absolute]).#[br]
       Also you don't know the exact height of the footer since it may change if the screen is too
@@ -68,12 +68,12 @@ div
       (and on the nav-menu in case 1 and 2).
 
     li.mt2.
-      In #[w-badge(inline bg-color="orange" color="white" :value="4")], you may also want to have
+      In #[w-badge(inline bg-color="orange" color="white" :model-value="4")], you may also want to have
       a flex column layout in the case your nav menu must remain in the screen while the main content
       is scrolled, for instance.
 
     li.mt2.
-      In #[w-badge(inline bg-color="orange" color="white" :value="3")], if you don't need to have the
+      In #[w-badge(inline bg-color="orange" color="white" :model-value="3")], if you don't need to have the
       footer always at the bottom of the page, a simple block layout would suffice. For that you can add
       the #[code block] prop on the #[code w-app] component.
 
