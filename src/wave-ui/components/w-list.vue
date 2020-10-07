@@ -75,6 +75,7 @@ const renderListItemLabel = function (createEl, li, index) {
   // If selectable list, on enter key press select item.
   const keydown = this.isSelectable && (e => {
     if (!li.disabled && e.keyCode === 13) this.selectItem(li)
+    // eslint-disable-next-line vue/custom-event-name-casing
     else if (e.keyCode === 27) this.$emit('keydown:escape')
     else if (this.arrowsNavigation) {
       e.preventDefault()
