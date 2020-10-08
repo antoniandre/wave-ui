@@ -125,7 +125,7 @@ div.lists-demo
         ]
       })
 
-  title-link(h2) Default items list rendering with selection
+  title-link(h2) Default list items rendering with selection
   example
     w-radios.mb6(v-model="multiple" :items="radios" inline)
     w-flex(wrap align-center)

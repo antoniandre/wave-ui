@@ -68,10 +68,7 @@ export default {
   emits: ['input', 'update:modelValue', 'item-click', 'keydown:escape'],
 
   data: () => ({
-    // The selected items are given in the modelValue prop.
-    // But if no modelValue prop is set for checklist for instance, it has to still
-    // keep track of the selected items.
-    selectedItems: []
+    listItems: []
   }),
 
   computed: {
@@ -83,18 +80,8 @@ export default {
       return this.addIds ? (typeof this.addIds === 'string' ? this.addIds : `w-list--${this._.uid}`) : null
     },
 
-    listItems () {
-      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
-      return items.map((item, i) => {
-        item = { ...item } // Don't modify the original.
-        // If no value is set on the item, add one from its label, or from its index. the result is
-        // store in a _value attribute.
-        item._value = item[this.itemValue] === undefined ? item[this.itemLabel] || i : item[this.itemValue],
-        item._selected = this.selectedItems.map(obj => obj._value !== undefined ? obj._value : obj).includes(item._value),
-        item._label = item[this.itemLabel] || ''
-
-        return item
-      })
+    selectedItems () {
+      return this.listItems.filter(item => item._selected)
     },
 
     // Faster cached enabled items lookup.
@@ -138,12 +125,10 @@ export default {
       // Select or unselect the item.
       item._selected = forcedValue !== undefined ? forcedValue : !item._selected
 
-      // Set the `selection` computed that emits the value to the outside world.
-      if (this.isMultipleSelect) {
-        const filteredItems = this.listItems.filter(item => item._selected)
-        this.selectedItems = filteredItems
+      // If not multiple selection and just selected an item, unselect any other.
+      if (item._selected && !this.isMultipleSelect) {
+        this.listItems.forEach(i => i._index !== item._index && (i._selected = false))
       }
-      else this.selectedItems = item._selected ? [item] : []
       this.emitSelection()
     },
 
@@ -151,6 +136,7 @@ export default {
       return {
         'w-list__item-label--disabled': item.disabled || (this.nav && !item.route && !item.children),
         'w-list__item-label--active': this.isSelectable && item._selected || null,
+        'w-list__item-label--focused': item._focused,
         'w-list__item-label--hoverable': this.hover,
         'w-list__item-label--selectable': this.isSelectable,
         [item.color]: !!item.color,
@@ -185,8 +171,8 @@ export default {
       // ------------------------------------------------------
 
       const props = {
-        class: { 'w-list__item-label': true, ...this.liLabelClasses(li) },
-        tabindex: li.disabled ? null : '0',
+        class: this.liLabelClasses(li),
+        tabindex: li.disabled || this.checklist ? null : '0',
         'aria-selected': selected ? 'true' : 'false',
         id: this.listId ? `${this.listId}_item-${index + 1}` : null,
         role: 'option'
@@ -202,17 +188,17 @@ export default {
 
         if (!hasSlot) props.label = li._label || null
 
-        // The checkbox component is not fully covering the list-item-label, when clicking on list
-        // item label, toggle the checkbox.
+        props.onFocus = () => (li._focused = true)
+        props.onBlur = () => (li._focused = false)
+        props.onInput = value => this.selectItem(li, value)
+        // When clicking on the checkbox component wrapper, trigger a focus & click on the checkbox.
         props.onClick = e => {
-          if (e.target.classList.contains('w-checkbox')) {
-            this.selectItem(li)
-            props.modelValue = li._selected
+          const checkbox = e.target.querySelector('input[type="checkbox"]')
+          if (checkbox) {
+            checkbox.focus()
+            checkbox.click()
           }
         }
-        props.onInput = value => this.selectItem(li, value)
-        // @todo: on checkbox focus, focus the list item.
-        // props.onFocus: e => console.log(this, e, 'on checkbox focus')
       }
       // ------------------------------------------------------
 
@@ -220,12 +206,12 @@ export default {
       // Note: on enter key press, a click event is fired => this is default HTML behavior.
       // ------------------------------------------------------
       else if (this.nav) {
-        const isLink = this.nav && !li.disabled && li.route
-        if (isLink) {
+        if (!li.disabled && li.route) {
+          props.onKeydown = keydown
+          props.onMousedown = mousedown
+
           if (this.$router) {
             props.to = li.route
-            props.onKeydown = keydown
-            props.onMousedown = mousedown
             // In HTML5 history mode, Vue 3 router-link will intercept the click event so that the browser
             // doesn't try to reload the page.
             // (in Vue 2, the click event was on `nativeOn`, since in Vue 3 the component options/props
@@ -242,8 +228,6 @@ export default {
           else {
             props.href = li.route
             props.onClick = click
-            props.onKeydown = keydown
-            props.onMousedown = mousedown
           }
         }
 
@@ -263,12 +247,14 @@ export default {
       }
       // ------------------------------------------------------
 
+      else if (!hasSlot) props.innerHTML = li._label
+
       return props
     },
 
     // Convert the received items selection to array if it is a unique value.
     // Also accept objects if returnObject is true and convert to the object's value.
-    // In any case, always end up with an array of objects.
+    // In any case, always end up with an array of values.
     // The values given can be (in this order) a value, a label or the index of the item.
     checkSelection (items) {
       items = Array.isArray(items) ? items : (items ? [items] : [])
@@ -310,26 +296,54 @@ export default {
 
     cleanLi (li) {
       // eslint-disable-next-line no-unused-vars
-      const { _value, _selected, _label, ...cleanLi } = li
+      const { _index, _value, _label, _selected, _focused, ...cleanLi } = li
       return cleanLi
+    },
+
+    refreshListItems () {
+      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
+      this.listItems = items.map((item, i) => ({
+        ...item,
+        _index: i,
+        // If no value is set on the item, add one from its label, or from its index.
+        // The result is store in a _value attribute.
+        _value: item[this.itemValue] === undefined ? item[this.itemLabel] || i : item[this.itemValue],
+        _selected: item._selected || false,
+        _label: item[this.itemLabel] || '',
+        _focused: false
+      }))
+    },
+
+    applySelectionOnItems (selection) {
+      this.checkSelection(selection) // Create an array with the selected values.
+        .forEach(val => this.listItems.find(item => item._value === val)._selected = true)
     }
   },
 
   created () {
-    this.selectedItems = this.checkSelection(this.modelValue)
+    this.refreshListItems()
+    this.applySelectionOnItems(this.modelValue)
   },
 
   watch: {
+    items () {
+      this.refreshListItems()
+      this.applySelectionOnItems(this.modelValue)
+    },
+
     modelValue (items) {
-      this.selectedItems = this.checkSelection(items)
+      this.applySelectionOnItems(items)
     },
 
     multiple (boolean) {
       // If more than 1 selection and going back to single select,
       // just keep the first selected item.
       if (!boolean) {
-        const firstSelected = this.listItems.find(item => item._selected)
-        this.selectedItems = firstSelected ? [firstSelected] : []
+        let firstSelected = null
+        this.listItems.forEach(item => {
+          if (item._selected && !firstSelected) firstSelected = item
+          else if (item._selected) item._selected = false
+        })
         this.emitSelection()
       }
     }
@@ -413,6 +427,7 @@ export default {
     // Hover & focus states.
     &--hoverable:hover:before,
     &--selectable:focus:before,
+    &--focused:before,
     &--selectable:hover:before {opacity: 0.08;}
 
     // Active class (when item is selected).
