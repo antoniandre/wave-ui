@@ -164,7 +164,7 @@ externalComponents.forEach(item => {
 
 // Keep this route last!
 routes.push({
-  path: '/*',
+  path: '/:pathMatch(.*)',
   name: 'not-found',
   component: () => import(/* webpackChunkName: "not-found" */ '@/documentation/views/404.vue')
 })
