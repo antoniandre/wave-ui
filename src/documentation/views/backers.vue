@@ -65,6 +65,7 @@ export default {
     height: 3.5em;
     border-radius: 3.5em;
     background-color: #ddd;
+    overflow: hidden;
   }
 }
 </style>
