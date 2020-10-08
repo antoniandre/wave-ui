@@ -39,6 +39,10 @@ export default {
   name: 'w-checkbox',
   mixins: [FormElementMixin],
 
+  inject: {
+    wCheckboxes: { default: null }
+  },
+
   props: {
     modelValue: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-checkbox are plugged on
