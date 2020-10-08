@@ -48,12 +48,12 @@ w-app.home
             w-icon.mr2 wi-check
             | All the components that you need in a lightweight package
           .w-flex.align-center.mt6.ml8
-            strong.count.mr8(:style="`opacity: ${count.alpha}`") {{ count.count }}
-            .no-less
-              | No less than#[br]
-              | UI components
+            strong.count.mr8(:style="`opacity: ${count.alpha}`")
+              | {{ count.count }}
+              span.plus +
+            .components-text UI components
           .w-flex.align-center.and-more.ml8
-            .title3.grow.text-right.mr8.extra-anim And also
+            .title3.grow.text-right.mr8.extra-anim &amp; also
             div
               .extra.extra-anim
                 w-icon.mr3(xl) mdi mdi-palette
@@ -103,7 +103,7 @@ w-app.home
             w-card.yellow-grad.card--3(content-class="pa0")
               w-accordion(:model-value="[true, false, false]" expand-single :items="accordionItems")
 
-            w-card.white--bg.card--4(content-class="pa0" title="Form validation" title-class="py1 title4")
+            w-card.white--bg.card--4(content-class="pa0" title="Form validation" title-class="py1 title4 mb0")
               .message-box
                 w-transition-fade
                   w-alert.my0.text-light(v-if="form6.submitted" success no-border)
@@ -346,7 +346,7 @@ export default {
         ease: 'none',
         scrollTrigger: {
           trigger: '.mobiles',
-          start: 'top 70%',
+          start: 'top 60%',
           end: 'bottom 50%',
           scrub: true
         }
@@ -357,7 +357,7 @@ export default {
         ease: 'none',
         scrollTrigger: {
           trigger: '.mobiles',
-          start: 'top 70%',
+          start: 'top 60%',
           end: 'bottom 50%',
           scrub: true
         }
@@ -365,7 +365,7 @@ export default {
 
       // Cards.
       gsap.to('.card--2', {
-        xPercent: 8,
+        xPercent: 18,
         yPercent: -5,
         ease: 'none',
         scrollTrigger: {
@@ -377,8 +377,8 @@ export default {
       })
 
       gsap.to('.card--3', {
-        xPercent: -7,
-        yPercent: 7,
+        xPercent: -8,
+        yPercent: 9,
         ease: 'none',
         scrollTrigger: {
           trigger: '.left-col',
@@ -389,6 +389,7 @@ export default {
       })
 
       gsap.to('.card--4', {
+        xPercent: 3,
         yPercent: 15,
         ease: 'none',
         scrollTrigger: {
@@ -641,7 +642,8 @@ export default {
     .block--1 {margin-top: 14em;}
     .block--2 {margin-top: 0;}
     .block--2 .title2 {margin-top: 1.5em;}
-    .block--2 .no-less {font-size: 1.5em;line-height: 1.5;}
+    .block--2 .plus {font-size: 0.6em;vertical-align: text-top;}
+    .block--2 .components-text {font-size: 2em;line-height: 1.5;}
     .block--2 .and-more {
       font-size: 1.5em;
       line-height: 1.5;
@@ -793,7 +795,7 @@ export default {
   .home__header svg.wave--md {bottom: -10px;height: 13vw;}
 }
 
-@media screen and (max-width: 840px) {
+@media screen and (max-width: 900px) {
   .home .mobiles {
     .mobile--1 {width: 200px;}
     .mobile--2 {width: 220px;}
@@ -838,7 +840,7 @@ export default {
   .home .section--1 .section__content > div:first-child {margin-right: 0;}
   .home .section--1 .mobile--1 {width: 185px;margin-right: -80px;}
   .home .section--1 .mobile--2 {width: 200px;}
-  .home .section--1 .block--2 .no-less,
+  .home .section--1 .block--2 .components-text,
   .home .section--1 .block--2 .and-more {
     font-size: 1.4em;
     line-height: 1.1;
