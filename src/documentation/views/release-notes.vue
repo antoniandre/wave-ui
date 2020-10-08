@@ -4,6 +4,10 @@ div
 
   ul.history
     li.patch
+      strong.version v1.2.2
+      p Improve tabbing in a checklist with the #[span.code w-list] component.
+
+    li.patch
       strong.version v1.2.1
       ul
         li Emit a #[code close] event on #[span.code w-alert] dismiss/hide.
@@ -87,7 +91,7 @@ div
       height: 1em;
     }
 
-    p {margin: 0.2em 0 1.5em;line-height: 1.2;}
+    p {margin: 0.2em 0 0;line-height: 1.2;}
     code {padding: 0 4px;font-size: 1em;}
   }
 }
