@@ -14,6 +14,7 @@ component(
     :disabled="disabled || null"
     :required="required || null"
     @focus="$emit('focus', $event)"
+    @blur="$emit('blur', $event)"
     @input="onInput"
     @keypress.enter="onInput"
     :aria-checked="isChecked || 'false'"
@@ -53,7 +54,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'update:modelValue', 'focus'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur'],
 
   data () {
     return {
