@@ -9,7 +9,7 @@ div
       w-icon.ml1(size="1.2em" style="color: #ffc518") mdi mdi-white-balance-sunny
 
     .title4.mt6 Now why? You ask.
-    .w-flex
+    .w-flex.align-start
       w-icon.ml-1 wi-chevron-right
       | Mostly for more flexibility and control, and less work to override when building more complex UI
       | designs.
