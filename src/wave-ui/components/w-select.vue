@@ -17,7 +17,8 @@ component(
     detach-to=".w-app"
     align-left
     custom
-    min-width="activator")
+    min-width="activator"
+    v-bind="menuProps || {}")
     template(#activator="{ on }")
       //- Input wrapper.
       .w-select__selection-wrap(
@@ -129,7 +130,8 @@ export default {
     shadow: { type: Boolean },
     tile: { type: Boolean },
     dark: { type: Boolean },
-    returnObject: { type: Boolean }
+    returnObject: { type: Boolean },
+    menuProps: { type: Object }
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
