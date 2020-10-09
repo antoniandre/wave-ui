@@ -7,7 +7,7 @@ div
 
   title-link(h2) Dropping support for IE11
   a.title3(href="https://gs.statcounter.com/browser-market-share")
-    span IE's current market share is less than 1.3% worldwide (gs.statcounter.com)
+    span IE's current market share is less than 1.2% worldwide (gs.statcounter.com)
     w-icon.ml2(md) mdi mdi-open-in-new
 
   p.title5.
@@ -18,7 +18,7 @@ div
   .title4.mt8 The distance between Internet Explorer 11 (year 2015) and every other major browser is huge.
   p.
     Adding support for this technologically obsolete browser considerably increases the development time
-    and #[strong adding IE11 hacks and workarounds penalizes all the other browser users (more than 98.7%)].
+    and #[strong adding IE11 hacks and workarounds penalizes all the other browser users (more than 98.8%)].
 
   p IE11 now only exists to support the sites that use it until they’re modernized.
 
