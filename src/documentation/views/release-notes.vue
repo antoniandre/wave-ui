@@ -3,6 +3,9 @@ div
   title-link.mt4(h1) Release notes
 
   ul.history
+    li.minor
+      strong.version v1.3.0
+      p Allow dynamic breakpoints customization.
     li.patch
       strong.version v1.2.2
       p Improve tabbing in a checklist with the #[span.code w-list] component.
