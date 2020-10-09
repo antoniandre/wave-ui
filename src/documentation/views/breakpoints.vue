@@ -46,13 +46,9 @@ div
         xs: 600,
         sm: 900,
         md: 1200,
-        lg: 1700,
-        xl: 4000 // Xl only needs to be greater than lg but starts from lg &amp; goes to infinity.
+        lg: 1700
+        // Xl doesn't need to be overridden:
+        // it always starts from lg &amp; goes to infinity.
       }
     })
 </template>
-
-<script>
-export default {
-}
-</script>
