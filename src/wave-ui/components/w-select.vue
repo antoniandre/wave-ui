@@ -84,6 +84,7 @@ component(
       :multiple="multiple"
       arrows-navigation
       return-object
+      :no-unselect="noUnselect"
       :color="color"
       :add-ids="`w-select-menu--${_uid}`"
       role="listbox"
@@ -131,6 +132,9 @@ export default {
     tile: { type: Boolean },
     dark: { type: Boolean },
     returnObject: { type: Boolean },
+    // By default you can unselect a list item by re-selecting it.
+    // Allow preventing that on single selection lists only.
+    noUnselect: { type: Boolean },
     menuProps: { type: Object }
     // Also name, disabled, readonly, required and validators in the mixin.
   },
