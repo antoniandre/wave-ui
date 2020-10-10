@@ -293,6 +293,10 @@ div
       })
 
   title-link(h2) Custom selection string
+  p.
+    The selection string is customizable through the #[code selection] slot.#[br]
+    For consistency, the name of the provided parameter containing the selected item(s) is #[code item],
+    whether you use a multiple or single select list.
   example
     w-select(:items="items3" v-model="customSelection" multiple)
       template(#selection="{ items }")
