@@ -5,18 +5,23 @@ div
   ul.history
     li.minor
       strong.version v1.3.0
-      p Allow dynamic breakpoints customization.
+      ul
+        li Allow dynamic breakpoints customization.
+        li Add the #[code no-unselect] option on #[strong.code w-select] &amp; #[strong.code w-list] components.
+        li Add the #[code hide-error] option on all the form elements.
+        li Layout improvement on #[strong.code w-select] component &amp; add the #[code menu-props] option.
+        li Bug fix: unmounting #[strong.code w-menu] &amp; #[strong.code w-tabs].
     li.patch
       strong.version v1.2.2
-      p Improve tabbing in a checklist with the #[span.code w-list] component.
+      p Improve tabbing in a checklist with the #[strong.code w-list] component.
 
     li.patch
       strong.version v1.2.1
       ul
-        li Emit a #[code close] event on #[span.code w-alert] dismiss/hide.
-        li Emit a #[code focus] event on #[span.code w-accordion] item focus.
-        li Added #[code item-title] &amp; #[code item-content] props on #[span.code w-accordion].
-        li Added #[code disabled] &amp; #[code readonly] props on #[span.code w-checkboxes] &amp; #[span.code w-radios].
+        li Emit a #[code close] event on #[strong.code w-alert] dismiss/hide.
+        li Emit a #[code focus] event on #[strong.code w-accordion] item focus.
+        li Added #[code item-title] &amp; #[code item-content] props on #[strong.code w-accordion].
+        li Added #[code disabled] &amp; #[code readonly] props on #[strong.code w-checkboxes] &amp; #[strong.code w-radios].
 
     li.minor
       strong.version v1.2.0
@@ -24,7 +29,7 @@ div
         li.
           Removed all the #[code change] emitted events on all the UI components as redundant.
           You can use #[code input] instead.
-        li Added an #[code inline] option on #[span.code w-badge].
+        li Added an #[code inline] option on #[strong.code w-badge].
 
     li.major
       strong.version v1.0.0
