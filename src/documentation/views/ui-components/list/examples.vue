@@ -61,6 +61,24 @@ div.lists-demo
         ]
       })
 
+  title-link(h3) Selection-only color
+  p.
+    You may want a default color for all the items, but a different color for the selection only.#[br]
+    You can use the #[code selection-color] option for this purpose.
+  example
+    w-list(:value="[]" :items="listItems4" selection-color="pink" multiple)
+    template(#html).
+      &lt;w-list :value="[]" :items="listItems4" selection-color="pink" multiple&gt;&lt;/w-list&gt;
+    template(#js).
+      data: () => ({
+        items1: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' },
+          { label: 'Item 4' }
+        ]
+      })
+
   title-link(h3) Different color per item
   example
     w-list(:items="listItems5" hover)
@@ -125,7 +143,8 @@ div.lists-demo
         ]
       })
 
-  title-link(h2) Default items list rendering with selection
+  title-link(h2) Selectable list items
+  p If you provide a #[code v-model] or #[code value], the list items become selectable.
   example
     w-radios.mb6(v-model="multiple" :items="radios" inline)
     w-flex(wrap align-center)
