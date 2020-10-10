@@ -188,7 +188,7 @@ export default {
     if (!this.noSlider) window.addEventListener('resize', this.onResize)
   },
 
-  beforeUnmount () {
+  beforeDestroy () {
     window.removeEventListener('resize', this.onResize)
   },
 
