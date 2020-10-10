@@ -92,7 +92,7 @@ export default {
     addIds: { type: [Boolean, String] },
     hover: { type: Boolean },
     color: { type: String }, // Applies to all the items.
-    selectionColor: { type: String, default: 'primary' }, // Applies to the selected items only.
+    selectionColor: { type: String }, // Applies to the selected items only.
     bgColor: { type: String }, // Applies to all the items.
     // Navigation type adds a router-link on items with `route`.
     nav: { type: Boolean },
@@ -141,6 +141,12 @@ export default {
       return this.value !== undefined || this.checklist || this.nav
     },
 
+    SelectionColor () {
+      // Only if no color & no selectionColor is set, set the selectionColor to primary.
+      const selectionColor = this.selectionColor === undefined ? (!this.color && 'primary') : this.selectionColor
+      return this.isSelectable && selectionColor
+    },
+
     classes () {
       return {
         [this.color]: this.color || null,
@@ -187,7 +193,7 @@ export default {
         'w-list__item-label--hoverable': this.hover,
         'w-list__item-label--selectable': this.isSelectable,
         [item.color]: !!item.color,
-        [this.selectionColor]: !!this.selectionColor && item._selected,
+        [this.SelectionColor]: item._selected && !item.color && this.SelectionColor,
         [this.itemClass]: !!this.itemClass
       }
     },
