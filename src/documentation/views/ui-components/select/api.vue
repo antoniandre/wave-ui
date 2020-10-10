@@ -46,7 +46,9 @@ const propsDescs = {
 }
 
 const slots = {
-  default: { description: 'The label content, if the label prop is not flexible enough.' }
+  default: { description: 'The label content, if the label prop is not flexible enough.' },
+  selection: { description: 'Provide a custom template for the selection string.<br>This slot provides the parameter <code>item</code> containing the selected item(s) object(s). It may be an array if <code>multiple</code> is true, or a single object otherwise.' },
+  item: { description: 'Provide a common custom template for all the list items.<br>This slot provides the parameter <code>item</code> containing the current item object.' },
 }
 
 const eventsDescs = {

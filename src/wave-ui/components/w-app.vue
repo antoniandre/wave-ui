@@ -69,6 +69,13 @@ export default {
           `.w-app .${color}{color:${config.colors[color]}}`
       }
 
+      // Add dynamic breakpoints as CSS variables.
+      const cssVariables = []
+      Object.entries(config.breakpoints).forEach(([label, value]) => {
+        cssVariables.push(`--breakpoint-${label}: ${value}px`)
+      })
+      styles += `:root {${cssVariables.join(';')}}`
+
       return styles
     }
   },

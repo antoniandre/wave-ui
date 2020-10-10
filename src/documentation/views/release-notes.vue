@@ -3,13 +3,26 @@ div
   title-link.mt4(h1) Release notes
 
   ul.history
+    li.minor
+      strong.version v1.3.0
+      ul
+        li Allow dynamic breakpoints customization.
+        li Added the #[code no-unselect] option on #[strong.code w-select] &amp; #[strong.code w-list] components.
+        li Added the #[code selection-color] option on #[strong.code w-select] &amp; #[strong.code w-list] components.
+        //- li Add the #[code hide-error] option on all the form elements.
+        li Layout improvement on #[strong.code w-select] component &amp; added the #[code menu-props] option.
+        li Bug fix: unmounting #[strong.code w-menu] &amp; #[strong.code w-tabs].
+    li.patch
+      strong.version v1.2.2
+      p Improve tabbing in a checklist with the #[strong.code w-list] component.
+
     li.patch
       strong.version v1.2.1
       ul
-        li Emit a #[code close] event on #[span.code w-alert] dismiss/hide.
-        li Emit a #[code focus] event on #[span.code w-accordion] item focus.
-        li Added #[code item-title] &amp; #[code item-content] props on #[span.code w-accordion].
-        li Added #[code disabled] &amp; #[code readonly] props on #[span.code w-checkboxes] &amp; #[span.code w-radios].
+        li Emit a #[code close] event on #[strong.code w-alert] dismiss/hide.
+        li Emit a #[code focus] event on #[strong.code w-accordion] item focus.
+        li Added #[code item-title] &amp; #[code item-content] props on #[strong.code w-accordion].
+        li Added #[code disabled] &amp; #[code readonly] props on #[strong.code w-checkboxes] &amp; #[strong.code w-radios].
 
     li.minor
       strong.version v1.2.0
@@ -17,7 +30,7 @@ div
         li.
           Removed all the #[code change] emitted events on all the UI components as redundant.
           You can use #[code input] instead.
-        li Added an #[code inline] option on #[span.code w-badge].
+        li Added an #[code inline] option on #[strong.code w-badge].
 
     li.major
       strong.version v1.0.0
@@ -87,7 +100,7 @@ div
       height: 1em;
     }
 
-    p {margin: 0.2em 0 1.5em;line-height: 1.2;}
+    p {margin: 0.2em 0 0;line-height: 1.2;}
     code {padding: 0 4px;font-size: 1em;}
   }
 }

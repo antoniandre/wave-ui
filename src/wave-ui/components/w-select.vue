@@ -17,7 +17,8 @@ component(
     detach-to=".w-app"
     align-left
     custom
-    min-width="activator")
+    min-width="activator"
+    v-bind="menuProps || {}")
     template(#activator="{ on }")
       //- Input wrapper.
       .w-select__selection-wrap(
@@ -35,7 +36,7 @@ component(
           :for="`w-select--${_.uid}`"
           @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
         .w-select__selection-slot(v-if="$slots.selection")
-          slot(name="selection" :items="inputValue")
+          slot(name="selection" :item="inputValue")
         input.w-select__selection(
           ref="selection-input"
           type="text"
@@ -45,7 +46,7 @@ component(
           @keydown.escape="!disabled && !readonly && closeMenu()"
           @keydown.space.prevent="!disabled && !readonly && openMenu()"
           :id="`w-select--${_.uid}`"
-          :placeholder="placeholder || null"
+          :placeholder="(!$slots.selection && placeholder) || null"
           :disabled="disabled || null"
           readonly
           aria-readonly="true"
@@ -83,8 +84,9 @@ component(
       :multiple="multiple"
       arrows-navigation
       return-object
-      :color="color"
       :add-ids="`w-select-menu--${_.uid}`"
+      :no-unselect="noUnselect"
+      :selection-color="selectionColor"
       role="listbox"
       tabindex="-1")
       template(#item="{ item, selected, index }")
@@ -122,14 +124,19 @@ export default {
     itemValue: { type: String, default: 'value' }, // Name of the value field.
     itemClass: { type: String },
     menuClass: { type: String },
-    color: { type: String, default: 'primary' },
-    bgColor: { type: String },
+    color: { type: String, default: 'primary' }, // Applies to all the items.
+    selectionColor: { type: String, default: 'primary' }, // Applies to the selected items only.
+    bgColor: { type: String }, // Applies to all the items.
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
     dark: { type: Boolean },
-    returnObject: { type: Boolean }
+    returnObject: { type: Boolean },
+    // By default you can unselect a list item by re-selecting it.
+    // Allow preventing that on single selection lists only.
+    noUnselect: { type: Boolean },
+    menuProps: { type: Object }
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
@@ -384,7 +391,7 @@ export default {
     }
 
     .w-select--inner-icon-left & {padding-left: 27px;}
-    .w-select--inner-icon-right & {padding-right: 27px;}
+    &-slot, .w-select--inner-icon-right & {padding-right: 22px;}
 
     .w-select--disabled & {
       color: $disabled-color;
@@ -397,7 +404,10 @@ export default {
     .w-select--readonly.w-select--empty & {cursor: auto;}
   }
 
-  // &__selection-slot {}
+  &__selection-slot {
+    z-index: 1;
+    pointer-events: none;
+  }
 
   // Icons inside.
   // ------------------------------------------------------

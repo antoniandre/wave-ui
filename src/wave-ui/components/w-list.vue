@@ -51,8 +51,9 @@ export default {
     // Useful for a11y aria fields (e.g. use with w-select).
     addIds: { type: [Boolean, String] },
     hover: { type: Boolean },
-    color: { type: String },
-    bgColor: { type: String },
+    color: { type: String }, // Applies to all the items.
+    selectionColor: { type: String }, // Applies to the selected items only.
+    bgColor: { type: String }, // Applies to all the items.
     // Navigation type adds a router-link on items with `route`.
     nav: { type: Boolean },
     icon: { type: String, default: '' },
@@ -62,6 +63,9 @@ export default {
     itemClass: { type: String },
     depth: { type: Number, default: 0 }, // For recursive call.
     returnObject: { type: Boolean },
+    // By default you can unselect a list item by re-selecting it.
+    // Allow preventing that on single selection lists only.
+    noUnselect: { type: Boolean },
     arrowsNavigation: { type: Boolean }
   },
 
@@ -97,6 +101,12 @@ export default {
       return this.modelValue !== undefined || this.checklist || this.nav
     },
 
+    SelectionColor () {
+      // Only if no color & no selectionColor is set, set the selectionColor to primary.
+      const selectionColor = this.selectionColor === undefined ? (!this.color && 'primary') : this.selectionColor
+      return this.isSelectable && selectionColor
+    },
+
     classes () {
       return {
         [this.color]: this.color || null,
@@ -122,6 +132,9 @@ export default {
 
     // Action of selecting 1 item.
     selectItem (item, forcedValue) {
+      // Prevent unselecting a selected item if noUnselect is true in single selection list.
+      if (item._selected && !this.multiple && this.noUnselect) return
+
       // Select or unselect the item.
       item._selected = forcedValue !== undefined ? forcedValue : !item._selected
 
@@ -140,6 +153,7 @@ export default {
         'w-list__item-label--hoverable': this.hover,
         'w-list__item-label--selectable': this.isSelectable,
         [item.color]: !!item.color,
+        [this.SelectionColor]: item._selected && !item.color && this.SelectionColor,
         [this.itemClass]: !!this.itemClass
       }
     },
@@ -392,7 +406,7 @@ export default {
     position: relative;
     padding-top: 1px;
     padding-bottom: 1px;
-    display: block;
+    display: flex;
 
     .w-list--navigation &,
     .w-list--checklist & {

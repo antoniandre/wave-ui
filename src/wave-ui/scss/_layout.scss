@@ -126,25 +126,25 @@
     .xs#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: --breakpoint-xs) {
     @for $i from 0 through $grid-base {
       .sm#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
     }
   }
 
-  @media screen and (min-width: 900px) {
+  @media screen and (min-width: --breakpoint-sm) {
     @for $i from 0 through $grid-base {
       .md#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
     }
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: --breakpoint-md) {
     @for $i from 0 through $grid-base {
       .lg#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
     }
   }
 
-  @media screen and (min-width: 1700px) {
+  @media screen and (min-width: --breakpoint-lg) {
     @for $i from 0 through $grid-base {
       .xl#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
     }
