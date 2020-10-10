@@ -69,6 +69,6 @@ div.main-toolbar {
 }
 
 @media screen and (max-width: 410px) {
-  .version {display: none;}
+  .main-toolbar .version {display: none;}
 }
 </style>
