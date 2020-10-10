@@ -102,6 +102,9 @@ export default {
     itemClass: { type: String },
     depth: { type: Number, default: 0 }, // For recursive call.
     returnObject: { type: Boolean },
+    // By default you can unselect a list item by re-selecting it.
+    // Allow preventing that on single selection lists only.
+    noUnselect: { type: Boolean },
     arrowsNavigation: { type: Boolean }
   },
 
@@ -162,6 +165,9 @@ export default {
 
     // Action of selecting 1 item.
     selectItem (item, forcedValue) {
+      // Prevent unselecting a selected item if noUnselect is true in single selection list.
+      if (item._selected && !this.multiple && this.noUnselect) return
+
       // Select or unselect the item.
       item._selected = forcedValue !== undefined ? forcedValue : !item._selected
 
