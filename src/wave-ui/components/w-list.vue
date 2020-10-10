@@ -424,7 +424,7 @@ export default {
     position: relative;
     padding-top: 1px;
     padding-bottom: 1px;
-    display: block;
+    display: flex;
 
     .w-list--navigation &,
     .w-list--checklist & {
