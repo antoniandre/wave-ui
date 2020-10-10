@@ -85,7 +85,7 @@ component(
       arrows-navigation
       return-object
       :no-unselect="noUnselect"
-      :color="color"
+      :selection-color="selectionColor"
       :add-ids="`w-select-menu--${_uid}`"
       role="listbox"
       tabindex="-1")
@@ -124,8 +124,9 @@ export default {
     itemValue: { type: String, default: 'value' }, // Name of the value field.
     itemClass: { type: String },
     menuClass: { type: String },
-    color: { type: String, default: 'primary' },
-    bgColor: { type: String },
+    color: { type: String, default: 'primary' }, // Applies to all the items.
+    selectionColor: { type: String, default: 'primary' }, // Applies to the selected items only.
+    bgColor: { type: String }, // Applies to all the items.
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },

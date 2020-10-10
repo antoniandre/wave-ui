@@ -91,8 +91,9 @@ export default {
     // Useful for a11y aria fields (e.g. use with w-select).
     addIds: { type: [Boolean, String] },
     hover: { type: Boolean },
-    color: { type: String },
-    bgColor: { type: String },
+    color: { type: String }, // Applies to all the items.
+    selectionColor: { type: String, default: 'primary' }, // Applies to the selected items only.
+    bgColor: { type: String }, // Applies to all the items.
     // Navigation type adds a router-link on items with `route`.
     nav: { type: Boolean },
     icon: { type: String, default: '' },
@@ -186,6 +187,7 @@ export default {
         'w-list__item-label--hoverable': this.hover,
         'w-list__item-label--selectable': this.isSelectable,
         [item.color]: !!item.color,
+        [this.selectionColor]: !!this.selectionColor && item._selected,
         [this.itemClass]: !!this.itemClass
       }
     },

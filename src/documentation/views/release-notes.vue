@@ -8,6 +8,7 @@ div
       ul
         li Allow dynamic breakpoints customization.
         li Add the #[code no-unselect] option on #[strong.code w-select] &amp; #[strong.code w-list] components.
+        li Add the #[code selection-color] option on #[strong.code w-select] &amp; #[strong.code w-list] components.
         li Add the #[code hide-error] option on all the form elements.
         li Layout improvement on #[strong.code w-select] component &amp; add the #[code menu-props] option.
         li Bug fix: unmounting #[strong.code w-menu] &amp; #[strong.code w-tabs].
