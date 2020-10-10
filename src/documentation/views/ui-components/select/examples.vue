@@ -293,6 +293,10 @@ div
       })
 
   title-link(h2) Custom selection string
+  p.
+    The selection string is customizable through the #[code selection] slot.#[br]
+    For consistency, the name of the provided parameter containing the selected item(s) is #[code item],
+    whether you use a multiple or single select list.
   example
     w-select(:items="items3" v-model="customSelection" multiple)
       template(#selection="{ items }")
@@ -317,14 +321,16 @@ div
   example
     w-select(:items="items3")
       template(#item="{ item, selected }")
-        w-icon.primary.mr1(v-if="selected") wi-check
-        span {{ item.label }}
+        w-icon.primary(v-if="selected") wi-check
+        span.px2(v-else)
+        span.ml1 {{ item.label }}
         w-tag.ml2(bg-color="grey-light4" xs) {{ item.value }}
     template(#pug).
       w-select(:items="items")
         template(#item="{ item, selected }")
-          w-icon.primary.mr1(v-if="selected") wi-check
-          span {{ '\{\{ item.label \}\}' }}
+          w-icon.primary(v-if="selected") wi-check
+          span.px2(v-else)
+          span.ml1 {{ '\{\{ item.label \}\}' }}
           w-tag.ml2(bg-color="grey-light4" xs) {{ '\{\{ item.value \}\}' }}
     template(#js).
       data: () => ({

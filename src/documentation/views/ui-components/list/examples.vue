@@ -76,6 +76,33 @@ div.lists-demo
         ]
       })
 
+  title-link(h3) Selection-only color
+  p.grey-light1.
+    In addition to the hover effect, the items may also be selectable (as per the
+    #[a(href="#selectable-list-items") Selectable list items example]),
+    but in this example we are only demonstrating the selection color.
+  p.
+    You may want a default color for all the items, but a different color for the selection only.#[br]
+    You can use the #[code selection-color] option for this purpose.
+  p.
+    If no #[code color] and no #[code selection-color] are set, the #[code selection-color] will be set
+    to primary by default.#[br]
+    In that case, if you don't want to default to the primary color, you can explicitly set
+    #[code selection-color] to a falsy value (false, null, or empty string), or another color.
+  example
+    w-list(:model-value="[]" :items="listItems4" selection-color="pink" multiple)
+    template(#html).
+      &lt;w-list :model-value="[]" :items="listItems4" selection-color="pink" multiple&gt;&lt;/w-list&gt;
+    template(#js).
+      data: () => ({
+        items1: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' },
+          { label: 'Item 4' }
+        ]
+      })
+
   title-link(h2) Custom rendering
   p.
     In this example, we don't use the component's data at all.#[br]
@@ -125,7 +152,8 @@ div.lists-demo
         ]
       })
 
-  title-link(h2) Default list items rendering with selection
+  title-link(h2) Selectable list items
+  p If you provide a #[code v-model] or #[code model-value], the list items become selectable.
   example
     w-radios.mb6(v-model="multiple" :items="radios" inline)
     w-flex(wrap align-center)
