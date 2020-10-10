@@ -61,24 +61,6 @@ div.lists-demo
         ]
       })
 
-  title-link(h3) Selection-only color
-  p.
-    You may want a default color for all the items, but a different color for the selection only.#[br]
-    You can use the #[code selection-color] option for this purpose.
-  example
-    w-list(:value="[]" :items="listItems4" selection-color="pink" multiple)
-    template(#html).
-      &lt;w-list :value="[]" :items="listItems4" selection-color="pink" multiple&gt;&lt;/w-list&gt;
-    template(#js).
-      data: () => ({
-        items1: [
-          { label: 'Item 1' },
-          { label: 'Item 2' },
-          { label: 'Item 3' },
-          { label: 'Item 4' }
-        ]
-      })
-
   title-link(h3) Different color per item
   example
     w-list(:items="listItems5" hover)
@@ -91,6 +73,33 @@ div.lists-demo
           { label: 'Item 2', color: 'warning' },
           { label: 'Item 3', color: 'error' },
           { label: 'Item 4', color: 'pink' }
+        ]
+      })
+
+  title-link(h3) Selection-only color
+  p.grey-light1.
+    In addition to the hover effect, the items may also be selectable (as per the
+    #[a(href="#selectable-list-items") Selectable list items example]),
+    but in this example we are only demonstrating the selection color.
+  p.
+    You may want a default color for all the items, but a different color for the selection only.#[br]
+    You can use the #[code selection-color] option for this purpose.
+  p.
+    If no #[code color] and no #[code selection-color] are set, the #[code selection-color] will be set
+    to primary by default.#[br]
+    In that case, if you don't want to default to the primary color, you can explicitly set
+    #[code selection-color] to a falsy value (false, null, or empty string), or another color.
+  example
+    w-list(:value="[]" :items="listItems4" selection-color="pink" multiple)
+    template(#html).
+      &lt;w-list :value="[]" :items="listItems4" selection-color="pink" multiple&gt;&lt;/w-list&gt;
+    template(#js).
+      data: () => ({
+        items1: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' },
+          { label: 'Item 4' }
         ]
       })
 
