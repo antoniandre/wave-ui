@@ -46,7 +46,7 @@ component(
           @keydown.escape="!disabled && !readonly && closeMenu()"
           @keydown.space.prevent="!disabled && !readonly && openMenu()"
           :id="`w-select--${_uid}`"
-          :placeholder="placeholder || null"
+          :placeholder="(!$scopedSlots.selection && placeholder) || null"
           :disabled="disabled || null"
           readonly
           aria-readonly="true"
@@ -386,7 +386,7 @@ export default {
     }
 
     .w-select--inner-icon-left & {padding-left: 27px;}
-    .w-select--inner-icon-right & {padding-right: 27px;}
+    &-slot, .w-select--inner-icon-right & {padding-right: 22px;}
 
     .w-select--disabled & {
       color: $disabled-color;
@@ -399,7 +399,10 @@ export default {
     .w-select--readonly.w-select--empty & {cursor: auto;}
   }
 
-  // &__selection-slot {}
+  &__selection-slot {
+    z-index: 1;
+    pointer-events: none;
+  }
 
   // Icons inside.
   // ------------------------------------------------------
