@@ -321,14 +321,16 @@ div
   example
     w-select(:items="items3")
       template(#item="{ item, selected }")
-        w-icon.primary.mr1(v-if="selected") wi-check
-        span {{ item.label }}
+        w-icon.primary(v-if="selected") wi-check
+        span.px2(v-else)
+        span.ml1 {{ item.label }}
         w-tag.ml2(bg-color="grey-light4" xs) {{ item.value }}
     template(#pug).
       w-select(:items="items")
         template(#item="{ item, selected }")
-          w-icon.primary.mr1(v-if="selected") wi-check
-          span {{ '\{\{ item.label \}\}' }}
+          w-icon.primary(v-if="selected") wi-check
+          span.px2(v-else)
+          span.ml1 {{ '\{\{ item.label \}\}' }}
           w-tag.ml2(bg-color="grey-light4" xs) {{ '\{\{ item.value \}\}' }}
     template(#js).
       data: () => ({
