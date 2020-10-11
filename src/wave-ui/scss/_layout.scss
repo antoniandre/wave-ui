@@ -111,7 +111,7 @@
   // ----------------------------------------------
   // In all the sizes bellow, round(x / 2) * 2 to always have even numbers.
   // Different heights with a mix of odd and even numbers will misalign
-  // when verticallly centering (vertical-align or align-items center).
+  // when vertically centering (vertical-align or align-items center).
   .size--xs {font-size: round(0.85 * $base-font-size);}
   .size--sm {font-size: round(1 * $base-font-size);}
   .size--md {font-size: round(1.1 * $base-font-size);}
@@ -126,28 +126,31 @@
     .xs#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
   }
 
-  @media screen and (min-width: --breakpoint-xs) {
-    @for $i from 0 through $grid-base {
-      .sm#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
-    }
-  }
+  // CSS variables are not supported in media queries yet.
+  // https://www.w3.org/TR/css-variables-1/#using-variables
+  // So done in w-app instead.
+  // @media screen and (min-width: var(--breakpoint-xs)) {
+  //   @for $i from 0 through $grid-base {
+  //     .sm#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+  //   }
+  // }
 
-  @media screen and (min-width: --breakpoint-sm) {
-    @for $i from 0 through $grid-base {
-      .md#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
-    }
-  }
+  // @media screen and (min-width: var(--breakpoint-sm)) {
+  //   @for $i from 0 through $grid-base {
+  //     .md#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+  //   }
+  // }
 
-  @media screen and (min-width: --breakpoint-md) {
-    @for $i from 0 through $grid-base {
-      .lg#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
-    }
-  }
+  // @media screen and (min-width: var(--breakpoint-md)) {
+  //   @for $i from 0 through $grid-base {
+  //     .lg#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+  //   }
+  // }
 
-  @media screen and (min-width: --breakpoint-lg) {
-    @for $i from 0 through $grid-base {
-      .xl#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
-    }
-  }
+  // @media screen and (min-width: var(--breakpoint-lg)) {
+  //   @for $i from 0 through $grid-base {
+  //     .xl#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
+  //   }
+  // }
   // ----------------------------------------------
 }

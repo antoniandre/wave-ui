@@ -8,6 +8,7 @@ import config from '../utils/config'
 
 const breakpointsNames = Object.keys(config.breakpoints)
 const breakpointsValues = Object.values(config.breakpoints)
+const gridSystem = 12
 
 export default {
   name: 'w-app',
@@ -69,12 +70,22 @@ export default {
           `.w-app .${color}{color:${config.colors[color]}}`
       }
 
-      // Add dynamic breakpoints as CSS variables.
-      const cssVariables = []
-      Object.entries(config.breakpoints).forEach(([label, value]) => {
-        cssVariables.push(`--breakpoint-${label}: ${value}px`)
+      // Can't add dynamic breakpoints as CSS variables:
+      // CSS variables are not supported in media queries yet.
+      // https://www.w3.org/TR/css-variables-1/#using-variables
+      // const cssVariables = []
+      // Object.entries(config.breakpoints).forEach(([label, value]) => {
+      //   cssVariables.push(`--breakpoint-${label}: ${value}px`)
+      // })
+      // styles += `:root {${cssVariables.join(';')}}`
+
+      Object.values(config.breakpoints).forEach(value => {
+        styles += `@media (min-width: ${value}px){`
+        for (let i = 1;i <= gridSystem; i++) {
+          styles += `.w-app .sm${gridSystem - i}{width:${parseFloat(((gridSystem - i) * 100 / gridSystem).toFixed(4))}%;}`
+        }
+        styles += '}'
       })
-      styles += `:root {${cssVariables.join(';')}}`
 
       return styles
     }
