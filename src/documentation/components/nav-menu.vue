@@ -75,7 +75,7 @@ export default {
       // { label: 'Parallax', route: '/w-parallax', disabled: true },
       { label: 'Progress', route: '/w-progress' },
       { label: 'Rating', route: '/w-rating', disabled: true },
-      { label: 'Spinner', route: '/w-spinner', disabled: true },
+      { label: 'Spinner', route: '/w-spinner', inProgress: true },
       { label: 'Tabs', route: '/w-tabs' },
       { label: 'Tag', route: '/w-tag' },
       { label: 'Toolbar', route: '/w-toolbar' },
