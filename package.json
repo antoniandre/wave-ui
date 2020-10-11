@@ -42,7 +42,7 @@
     "eslint-plugin-vue": "^7.0.1",
     "font-awesome": "^4.7.0",
     "ghspa": "^1.0.0",
-    "gsap": "file:gsap-bonus.tgz",
+    "gsap": "^3.5.1",
     "ionicons": "^4.6.3",
     "material-design-icons": "^3.0.1",
     "node-sass": "^4.14.1",
