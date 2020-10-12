@@ -4,6 +4,9 @@ div
 
   ul.history
     li.minor
+      strong.version v1.4.0
+      p Added a new #[strong.code w-spinner] component.
+    li.minor
       strong.version v1.3.0
       ul
         li Allow dynamic breakpoints customization.
