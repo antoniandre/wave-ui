@@ -16,7 +16,7 @@ export default {
   name: 'w-overlay',
 
   props: {
-    value: { type: Boolean },
+    value: {},
     opacity: { type: [Number, String, Boolean] },
     bgColor: { type: [String, Boolean] },
     zIndex: { type: [Number, String, Boolean] },

@@ -29,8 +29,8 @@ const propsDescs = {
   md: 'Sets the size of the tag.',
   lg: 'Sets the size of the tag.',
   xl: 'Sets the size of the tag.',
-  width: '',
-  height: ''
+  width: 'Sets a width on the tag.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
+  height: 'Sets a height on the tag.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.'
 }
 
 const slots = {

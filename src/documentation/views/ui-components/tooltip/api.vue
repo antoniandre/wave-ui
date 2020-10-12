@@ -15,6 +15,24 @@ div
 import WTooltip from '@/wave-ui/components/w-tooltip'
 
 const propsDescs = {
+  value: 'This prop controls the visibility of the tooltip. Any truthy value will show the tooltip whereas any falsy value will hide it.',
+  showOnClick: '',
+  color: 'Applies a color to the tooltip\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Applies a color to the tooltip\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  shadow: 'Applies a drop shadow to the tooltip.',
+  noBorder: 'Removes the default border from the tooltip element.',
+  transition: 'Applies a particular transition to the tooltip element when showing and hiding.<br>Accepts all the transitions listed in the <a href="/transitions">transitions</a> knowledge base page. You can also disable the transition by setting this prop to an empty string.',
+  tile: 'Removes the default border-radius and sets sharp edges on the tooltip.',
+  round: 'Sets a maximum border-radius on the corners of the tooltip, giving it a round look.',
+  tooltipClass: 'Applies a custom CSS class to the tooltip element.',
+  // Position.
+  detachTo: '',
+  fixed: '',
+  top: '',
+  bottom: '',
+  left: '',
+  right: '',
+  zIndex: 'Applies a z-index (positive or negative integer) to the tooltip.'
 }
 
 const slots = {

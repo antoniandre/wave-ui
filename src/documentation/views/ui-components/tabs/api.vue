@@ -24,7 +24,7 @@ const propsDescs = {
   noSlider: '',
   sliderColor: 'Provide a custom color for the tabs slider (<code>primary</code> by default).<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   contentClass: 'Applies a custom CSS class to the tab content.',
-  transition: '',
+  transition: 'Applies a particular transition to the tab contents when switching tab.<br>Check all the transitions that apply to this component in the <a href="#content-transitions">Content transitions</a> example.',
   fillBar: '',
   center: '',
   right: '',
