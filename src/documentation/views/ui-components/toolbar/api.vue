@@ -20,7 +20,7 @@ const propsDescs = {
   absolute: '',
   fixed: '',
   bottom: '',
-  height: '',
+  height: 'Sets a height on the toolbar.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
   noBorder: 'Removes the default border from the toolbar element.',
   shadow: 'Applies a drop shadow to the toolbar.'
 }

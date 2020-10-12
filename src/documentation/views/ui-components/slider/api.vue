@@ -14,7 +14,26 @@ div
 <script>
 import WSlider from '@/wave-ui/components/w-slider'
 
-const propsDescs = {}
+const propsDescs = {
+  value: '',
+  color: 'Applies a foreground color to the slider. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Applies a background color to the slider\'s track. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  stepLabels: '',
+  thumbLabel: '',
+  thumbLabelClass: 'Applies a custom CSS class to the slider\'s thumb label.',
+  trackClass: 'Applies a custom CSS class to the slider\'s track.',
+  rangeClass: 'Applies a custom CSS class to the slider\'s highlighted range.',
+  min: '',
+  max: '',
+  step: '',
+  labelLeft: '',
+  labelRight: '',
+  name: '',
+  disabled: '',
+  readonly: '',
+  required: '',
+  validators: ''
+}
 
 const slots = {}
 

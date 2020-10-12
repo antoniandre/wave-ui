@@ -36,7 +36,7 @@ const propsDescs = {
   shadow: 'Applies a drop shadow to the badge.',
   dot: 'Displays a much smaller dot with no content in it.',
   round: 'Forces the badge to be round, when the content is too wide and causes a natural increase of the badge width.',
-  transition: ''
+  transition: 'Applies a particular transition to this component when showing and hiding.<br>Check all the transitions that apply to the badge component in the <a href="#transitions">Transitions</a> example.'
 }
 
 const slots = {

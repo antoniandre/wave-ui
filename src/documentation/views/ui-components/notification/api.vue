@@ -15,15 +15,15 @@ div
 import WNotification from '@/wave-ui/components/w-notification'
 
 const propsDescs = {
-  value: '',
-  transition: '',
+  value: 'This prop controls the visibility of the notification. Any truthy value will show the notification whereas any falsy value will hide it.',
+  transition: 'Applies a particular transition to this component when showing and hiding.<br>Check all the transitions that apply to this component in the <a href="#transitions">Transitions</a> example.',
   timeout: '',
   absolute: '',
   top: '',
   bottom: '',
   left: '',
   right: '',
-  zIndex: '',
+  zIndex: 'Applies a z-index (positive or negative integer) to the notification.',
   success: '',
   info: '',
   warning: '',

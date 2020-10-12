@@ -37,7 +37,7 @@ const propsDescs = {
   fixed: '',
   top: '',
   bottom: '',
-  zIndex: ''
+  zIndex: 'Applies a z-index (positive or negative integer) to the progress.'
 }
 
 const slots = {
