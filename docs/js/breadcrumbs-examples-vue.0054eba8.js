@@ -1,2 +1,0 @@
-(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["breadcrumbs-examples-vue"],{c857:function(e,n,a){"use strict";a.r(n);var t=function(){var e=this,n=e.$createElement,a=e._self._c||n;return a("div")},u=[],c={},l=c,r=a("2877"),s=Object(r["a"])(l,t,u,!1,null,null,null);n["default"]=s.exports}}]);
-//# sourceMappingURL=breadcrumbs-examples-vue.0054eba8.js.map
