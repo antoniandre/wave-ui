@@ -15,7 +15,7 @@ import WSpinner from '@/wave-ui/components/w-spinner'
 
 const propsDescs = {
   value: 'The <code>value</code> or <code>v-model</code> controls the visibility of the spinner. If none or <code>undefined</code> is provided, the spinner will be visible.',
-  color: 'Sets the color of the spinner.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex will not work.',
+  color: 'Sets the color of the spinner.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   xs: 'Sets the size of the spinner.',
   sm: 'Sets the size of the spinner.',
   md: 'Sets the size of the spinner.',

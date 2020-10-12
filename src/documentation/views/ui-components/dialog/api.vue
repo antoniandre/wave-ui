@@ -15,18 +15,18 @@ div
 import WDialog from '@/wave-ui/components/w-dialog'
 
 const propsDescs = {
-  value: '',
+  value: 'This prop controls the visibility of the dialog. Any truthy value will show the dialog whereas any falsy value will hide it.',
   width: '',
   fullscreen: '',
   persistent: '',
   persistentNoAnimation: '',
-  tile: '',
-  title: '',
+  tile: 'Removes the default border-radius and sets sharp edges on the dialog.',
+  title: 'Provide a dialog title.',
   transition: '',
-  titleClass: '',
-  contentClass: '',
-  overlayColor: '',
-  overlayOpacity: ''
+  titleClass: 'Applies a custom CSS class to the dialog\'s title.',
+  contentClass: 'Applies a custom CSS class to the dialog\'s content.',
+  overlayColor: 'Provide a custom background color for the dialog background overlay (<code>rgba(0, 0, 0, 0.3)</code> by default).<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  overlayOpacity: 'Provide a custom opacity for the dialog background overlay.'
 }
 
 const slots = {
