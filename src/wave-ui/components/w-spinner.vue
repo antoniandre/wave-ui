@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-spinner(:class="classes")
+.w-spinner(v-if="value || value === undefined" :class="classes" :style="styles")
   span(v-if="isThreeDots")
 </template>
 
@@ -21,10 +21,6 @@ export default {
 
   emits: [],
 
-  data: () => ({
-
-  }),
-
   computed: {
     isThreeDots () {
       return !this.bounce && !this.fade
@@ -41,6 +37,9 @@ export default {
         (this.xl && 'xl') ||
         null
       )
+    },
+    styles () {
+      return this.forcedSize && `font-size: ${this.forcedSize}`
     },
     classes () {
       return {
@@ -64,6 +63,12 @@ export default {
   width: 1em;
   height: 1em;
 
+  &.size--xs {font-size: round(0.9 * $base-font-size / 2) * 2;}
+  &.size--sm {font-size: round(1.5 * $base-font-size);}
+  &.size--md {font-size: round(2 * $base-font-size);}
+  &.size--lg {font-size: round(2.5 * $base-font-size);}
+  &.size--xl {font-size: 3 * $base-font-size;}
+
   &:before, &:after {
     content: '';
     position: absolute;
@@ -83,6 +88,11 @@ export default {
     }
 
     &:after {animation-delay: -1.0s;}
+
+    @keyframes w-spinner-bounce {
+      0%, 100% {transform: scale(0);}
+      50% {transform: scale(1);}
+    }
   }
 
   &--fade {
@@ -98,7 +108,7 @@ export default {
   &--three-dots {
     position: relative;
     width: 3.8em;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 
     &:before, span, &:after {
       width: 1em;
@@ -120,17 +130,11 @@ export default {
       left: auto;
       animation-delay: 0.666s;
     }
+
+    @keyframes w-spinner-three-dots {
+      0%, 40% {transform: scale(0);opacity: 0;}
+      100% {transform: scale(1);opacity: 1;}
+    }
   }
-}
-
-
-@keyframes w-spinner-three-dots {
-  0%, 40% {transform: scale(0);opacity: 0;}
-  100% {transform: scale(1);opacity: 1;}
-}
-
-@keyframes w-spinner-bounce {
-  0%, 100% {transform: scale(0);}
-  50% {transform: scale(1);}
 }
 </style>
