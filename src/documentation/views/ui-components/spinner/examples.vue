@@ -32,6 +32,10 @@ div
     template(#html).
       &lt;w-button @click="showSpinner = !showSpinner"&gt;Toggle spinner&lt;/w-button&gt;
       &lt;w-spinner :value="showSpinner" /&gt;
+    template(#js).
+      data: () => ({
+        showSpinner: false
+      })
 
   title-link(h2) Sizes
   p.
@@ -71,7 +75,7 @@ div
 <script>
 export default {
   data: () => ({
-    showSpinner: 'hide'
+    showSpinner: false
   })
 }
 </script>
