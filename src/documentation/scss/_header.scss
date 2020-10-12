@@ -13,7 +13,7 @@ header {
     bottom: 0;
     left: 0;
     right: 0;
-    background: url('~@/assets/japanese-wave.png') repeat-x 0 0;
+    background: url('~@/assets/japanese-wave.png') repeat-x 0 5px;
   }
 
   &:after {
@@ -33,7 +33,7 @@ header {
 }
 
 @media screen and (min-width: 1281px) and (max-width: 1500px) {
-  header {height: 260px;}
+  header {height: 280px;}
   header:before {
     display: block;
     position: relative;
@@ -53,19 +53,16 @@ header {
 }
 
 @media screen and (min-width: 601px) and (max-width: 1020px) {
-  header {height: 170px;}
+  header {height: 180px;}
   header:before {background-size: 800px;}
 }
 
 @media screen and (max-width: 600px) {
-  header {height: 130px;}
+  header {height: 135px;}
   header:before {background-size: 600px;}
 }
 
 // For iOS: https://stackoverflow.com/a/23420490/2012407, https://stackoverflow.com/a/47818418/2012407.
 @supports (-webkit-touch-callout: none) {
-  header {
-    height: 130px;
-    background-attachment: scroll;
-  }
+  header {background-attachment: scroll;}
 }
