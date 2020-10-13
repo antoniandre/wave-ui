@@ -15,20 +15,20 @@ div
 import WMenu from '@/wave-ui/components/w-menu'
 
 const propsDescs = {
-  value: '',
+  value: 'This prop controls the visibility of the menu. Any truthy value will show the menu whereas any falsy value will hide it.',
   showOnHover: '',
   hideOnMenuClick: '',
-  color: '',
-  bgColor: '',
-  shadow: '',
-  custom: '',
-  tile: '',
-  round: '',
-  noBorder: '',
-  transition: '',
-  menuClass: '',
-  titleClass: '',
-  contentClass: '',
+  color: 'Applies a color to the menu\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Applies a color to the menu\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  shadow: 'Applies a drop shadow to the menu.',
+  custom: 'By default, the menu layout is a <span class="code">w-card</span>. To have more flexibility, you can set this option to true.',
+  tile: 'Removes the default border-radius and sets sharp edges on the menu.',
+  round: 'Sets a maximum border-radius on the corners of the menu, giving it a round look.',
+  noBorder: 'Removes the default border from the menu element.',
+  transition: 'Applies a particular transition to the menu element when showing and hiding.<br>Accepts all the transitions listed in the <a href="/transitions">transitions</a> knowledge base page. You can also disable the transition by setting this prop to an empty string.',
+  menuClass: 'Applies a custom CSS class to the menu element.',
+  titleClass: 'Applies a custom CSS class to the menu\'s title when using the default card layout (when not using the <code>custom</code> prop).',
+  contentClass: 'Applies a custom CSS class to the menu\'s content when using the default card layout (when not using the <code>custom</code> prop).',
   detachTo: '',
   fixed: '',
   top: '',
@@ -39,10 +39,10 @@ const propsDescs = {
   alignBottom: '',
   alignLeft: '',
   alignRight: '',
-  zIndex: '',
-  minWidth: '',
+  zIndex: 'Applies a z-index (positive or negative integer) to the menu.',
+  minWidth: 'Sets a min-width on the menu.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
   overlay: '',
-  persistent: ''
+  persistent: 'When set to true, clicking outside of the menu will not close the menu.'
 }
 
 const slots = {

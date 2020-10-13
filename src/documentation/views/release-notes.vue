@@ -3,6 +3,14 @@ div
   title-link.mt4(h1) Release notes
 
   ul.history
+    li.patch
+      strong.version v1.4.1
+      p Fix the dynamic breakpoints.
+
+    li.minor
+      strong.version v1.4.0
+      p Added a new #[strong.code w-spinner] component.
+
     li.minor
       strong.version v1.3.0
       ul
@@ -12,6 +20,7 @@ div
         //- li Add the #[code hide-error] option on all the form elements.
         li Layout improvement on #[strong.code w-select] component &amp; added the #[code menu-props] option.
         li Bug fix: unmounting #[strong.code w-menu] &amp; #[strong.code w-tabs].
+
     li.patch
       strong.version v1.2.2
       p Improve tabbing in a checklist with the #[strong.code w-list] component.

@@ -15,14 +15,14 @@ div
 import WToolbar from '@/wave-ui/components/w-toolbar'
 
 const propsDescs = {
-  color: '',
-  bgColor: '',
+  color: 'Applies a color to the toolbar\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Applies a color to the toolbar\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   absolute: '',
   fixed: '',
   bottom: '',
-  height: '',
-  noBorder: '',
-  shadow: ''
+  height: 'Sets a height on the toolbar.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
+  noBorder: 'Removes the default border from the toolbar element.',
+  shadow: 'Applies a drop shadow to the toolbar.'
 }
 
 const slots = {

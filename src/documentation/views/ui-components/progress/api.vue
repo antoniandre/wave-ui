@@ -18,9 +18,9 @@ const propsDescs = {
   value: '',
   label: '',
   roundCap: '',
-  color: '',
-  bgColor: '',
-  labelColor: '',
+  color: 'Applies a foreground color to the progress. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Applies a color to the progress\' background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  labelColor: 'Applies a color to the progress label\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   size: '',
 
   // Circular progress thickness.
@@ -28,16 +28,16 @@ const propsDescs = {
   stroke: '',
 
   // For linear progress.
-  shadow: '',
-  tile: '',
-  round: '',
+  shadow: 'Applies a drop shadow to the component.',
+  tile: 'Removes the default border-radius and sets sharp edges on the component.',
+  round: 'Sets a maximum border-radius on the corners of the component, giving it a round look.',
   outline: '',
   stripes: '',
   absolute: '',
   fixed: '',
   top: '',
   bottom: '',
-  zIndex: ''
+  zIndex: 'Applies a z-index (positive or negative integer) to the progress.'
 }
 
 const slots = {

@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -14,7 +13,18 @@ div
 <script>
 import WSpinner from '@/wave-ui/components/w-spinner'
 
-const propsDescs = {}
+const propsDescs = {
+  value: 'The <code>value</code> or <code>v-model</code> controls the visibility of the spinner. If none or <code>undefined</code> is provided, the spinner will be visible.',
+  color: 'Sets the color of the spinner.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  xs: 'Sets the size of the spinner.',
+  sm: 'Sets the size of the spinner.',
+  md: 'Sets the size of the spinner.',
+  lg: 'Sets the size of the spinner.',
+  xl: 'Sets the size of the spinner.',
+  size: 'Sets the size of the spinner. Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
+  bounce: 'Sets the style of the spinner.',
+  fade: 'Sets the style of the spinner.'
+}
 
 const slots = {}
 
