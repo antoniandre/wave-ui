@@ -15,14 +15,14 @@ div
 import WButton from '@/wave-ui/components/w-button'
 
 const propsDescs = {
-  color: '',
-  bgColor: '',
+  color: 'Applies a color to the button\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Applies a color to the button\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   dark: '',
   outline: '',
   text: '',
-  round: '',
-  shadow: '',
-  tile: '',
+  round: 'Sets a maximum border-radius on the corners of the button, giving it a round look.',
+  shadow: 'Applies a drop shadow to the button.',
+  tile: 'Removes the default border-radius and sets sharp edges on the button.',
   to: '',
   forceLink: '',
   type: '',
@@ -35,14 +35,14 @@ const propsDescs = {
   bottom: '',
   left: '',
   right: '',
-  zIndex: '',
-  width: '',
-  height: '',
-  xs: '',
-  sm: '',
-  md: '',
-  lg: '',
-  xl: ''
+  zIndex: 'Applies a z-index (positive or negative integer) to the button.',
+  width: 'Sets a width on the button.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
+  height: 'Sets a height on the button.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
+  xs: 'Sets the size of the button.',
+  sm: 'Sets the size of the button.',
+  md: 'Sets the size of the button.',
+  lg: 'Sets the size of the button.',
+  xl: 'Sets the size of the button.'
 }
 
 const slots = {

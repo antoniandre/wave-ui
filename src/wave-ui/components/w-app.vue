@@ -79,12 +79,17 @@ export default {
       // })
       // styles += `:root {${cssVariables.join(';')}}`
 
-      Object.values(config.breakpoints).forEach(value => {
-        styles += `@media (min-width: ${value}px){`
-        for (let i = 1;i <= gridSystem; i++) {
-          styles += `.w-app .sm${gridSystem - i}{width:${parseFloat(((gridSystem - i) * 100 / gridSystem).toFixed(4))}%;}`
+      const entries = Object.entries(config.breakpoints)
+      entries.forEach(([label], i) => {
+        // The xs breakpoint should not be placed in a media query (min-width: 0px), so discard it
+        // here and leave in _layout css.
+        if (entries[i - 1]) {
+          styles += `@media (min-width: ${entries[i - 1] && entries[i - 1][1] || 0}px){`
+          for (let i = 0;i < gridSystem; i++) {
+            styles += `.w-app .${label}${gridSystem - i}{width:${parseFloat(((gridSystem - i) * 100 / gridSystem).toFixed(4))}%;}`
+          }
+          styles += '}'
         }
-        styles += '}'
       })
 
       return styles
