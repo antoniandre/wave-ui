@@ -1,13 +1,15 @@
 <template lang="pug">
-.w-calendar(:class="classes" :style="styles")
+.w-date-picker(:class="classes" :style="styles")
   slot
 </template>
 
 <script>
 export default {
-  name: 'w-calendar',
+  name: 'w-date-picker',
   props: {
   },
+
+  emits: [],
 
   computed: {
     classes () {
@@ -22,6 +24,6 @@ export default {
 </script>
 
 <style lang="scss">
-.w-calendar {
+.w-date-picker {
 }
 </style>

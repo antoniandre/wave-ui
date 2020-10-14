@@ -63,6 +63,7 @@ export default {
       // { label: 'Breadcrumbs', route: '/w-breadcrumbs', disabled: true },
       { label: 'Button', route: '/w-button' },
       { label: 'Card', route: '/w-card' },
+      // { label: 'Date picker', route: '/w-date-picker', disabled: true },
       { label: 'Dialog', route: '/w-dialog' },
       { label: 'Divider', route: '/w-divider' },
       { label: 'Drawer', route: '/w-drawer' },
