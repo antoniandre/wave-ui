@@ -132,6 +132,7 @@ const components = [
   { id: 'slider', label: 'Slider' },
   { id: 'spinner', label: 'Spinner' },
   { id: 'steps', label: 'Steps' },
+  { id: 'timeline', label: 'Timeline' },
   { id: 'switch', label: 'Switch' },
   { id: 'radio', label: 'Radio' },
   { id: 'tabs', label: 'Tabs' },
