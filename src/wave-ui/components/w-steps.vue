@@ -9,6 +9,8 @@ export default {
 
   },
 
+  emits: [],
+
   data: () => ({
 
   })
