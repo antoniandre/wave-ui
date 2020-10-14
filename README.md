@@ -36,7 +36,7 @@ ___
 
 ## Donating
 
-If you want to support the development of this library, you can buy me a beer!
+If you want to support the development of this library, you can buy me a beer or [become a sponsor](https://github.com/sponsors/antoniandre)!
 
 [![paypal](https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/antoniandre1)
 Thank you!
