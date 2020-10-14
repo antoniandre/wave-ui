@@ -3,6 +3,10 @@ div
   title-link.mt4(h1) Release notes
 
   ul.history
+    li.minor
+      strong.version v1.5.0
+      p Add a new #[strong.code timeline] component.
+
     li.patch
       strong.version v1.4.1
       p Fix the dynamic breakpoints.
