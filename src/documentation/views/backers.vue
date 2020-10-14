@@ -22,7 +22,7 @@ div
         | Add yourself!
 
     p.mt12
-      | If you would like to support us, you can
+      | If you would like to support Wave UI, you can
       a.mx1(href="https://github.com/sponsors/antoniandre" target="_blank") become a sponsor
       | or
       a.ml1(href="https://www.paypal.me/antoniandre1" target="_blank") make a donation
