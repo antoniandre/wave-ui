@@ -26,32 +26,36 @@ export default {
 
 <style lang="scss">
 .w-timeline {
-  margin-left: 4px;
+  margin-left: $base-increment;
 
-  > li {padding-left: 20px;}
-  > li + li {margin-top: 10px;}
+  > li {
+    padding-left: 5 * $base-increment;
+    padding-bottom: 3 * $base-increment;
+  }
+  > li:last-child {padding-bottom: 0;}
   li {list-style-type: none;position: relative;}
 
   // Bullet.
   > li:before {
     content: '';
     position: absolute;
-    top: 11px;
+    top: 2px;
     left: 0;
     background-color: #fff;
     border-radius: 1em;
     border: 1px solid #ddd;
     width: 1em;
     height: 1em;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     z-index: 1;
   }
+  > li:last-child:after {display: none;}
   // Left border.
   > li:after {
     content: '';
     position: absolute;
-    top: 11px;
-    bottom: -21px; // 11px top + 10px margin between each li.
+    top: 2px;
+    bottom: -2px;
     left: -0.5px;
     border-left: 1px solid #ddd;
   }
