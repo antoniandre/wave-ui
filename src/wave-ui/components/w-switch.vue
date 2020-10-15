@@ -15,7 +15,7 @@ component(
     :readonly="readonly || null"
     :aria-readonly="readonly ? 'true' : 'false'"
     :required="required || null"
-    @input="onInput"
+    @change="onInput() /* Edge doesn't fire input on checkbox/radio/select change */"
     @focus="$emit('focus', $event)"
     :aria-checked="isOn || 'false'"
     role="switch")

@@ -14,7 +14,7 @@ component(
     :disabled="disabled || null"
     :required="required || null"
     @focus="$emit('focus', $event)"
-    @input="onInput"
+    @change="onInput() /* Edge doesn't fire input on checkbox/radio/select change */"
     :aria-checked="inputValue || 'false'"
     role="radio")
   template(v-if="hasLabel && labelOnLeft")
