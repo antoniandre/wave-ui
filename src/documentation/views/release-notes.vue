@@ -1,6 +1,9 @@
 <template lang="pug">
 div
   title-link.mt4(h1) Release notes
+  p.mt-6.mb10.grey-light2.text-italic
+    | Follows the
+    a.ml1(href="https://semver.org" target="_blank") Semantic versioning specs.
 
   ul.history
     li.minor

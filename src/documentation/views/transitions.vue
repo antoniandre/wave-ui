@@ -331,13 +331,13 @@ div
     It works well for full screen elements or elements that are in a hidden-overflow container like
     in this example.
   example
-    .wrapper(style="height: 80px")
+    .wrapper(style="height: 80px;overflow: hidden")
       w-button.mb2(@click="showCard = !showCard") {{ showCard ? 'Hide' : 'Show' }} Card
       w-transition-slide(left)
         w-card.primary-light3--bg.white(v-if="showCard")
           .title3.mb0 A sliding card.
     template(#html).
-      &lt;div style="height: 90px"&gt;
+      &lt;div style="height: 90px;overflow: hidden"&gt;
         &lt;w-button class="mb2" @click="showCard = !showCard"&gt;
           {{ "\{\{ showCard ? 'Hide' : 'Show' \}\}" }} Card
         &lt;/w-button&gt;
