@@ -1,0 +1,2 @@
+(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["parallax-examples-vue"],{"067b":function(e,a,n){"use strict";n.r(a);var l=function(){var e=this,a=e.$createElement,n=e._self._c||a;return n("div")},t=[],u={},r=u,s=n("2877"),c=Object(s["a"])(r,l,t,!1,null,null,null);a["default"]=c.exports}}]);
+//# sourceMappingURL=parallax-examples-vue.e3aef782.js.map
