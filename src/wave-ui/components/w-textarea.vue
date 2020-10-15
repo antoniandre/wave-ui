@@ -248,16 +248,16 @@ $inactive-color: #777;
     content: '';
     position: absolute;
     bottom: -1px;
-    left: 50%;
-    width: 0;
+    left: 0;
+    width: 100%;
     height: 0;
     border-bottom: 2px solid currentColor;
     transition: $transition-duration;
-    transform: translateX(-50%);
+    transform: scaleX(0);
     pointer-events: none;
   }
 
-  &--focused &__textarea-wrap--underline:after {width: 100%;}
+  &--focused &__textarea-wrap--underline:after {transform: scaleX(1);}
 
   // Textarea field.
   // ------------------------------------------------------
