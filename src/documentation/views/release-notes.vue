@@ -8,7 +8,9 @@ div
   ul.history
     li.minor
       strong.version v1.5.0
-      p Add a new #[strong.code timeline] component.
+      ul
+        li Add a new #[strong.code timeline] component.
+        li Fix checkbox &amp; radio not emiting #[code input] event on Edge (known Edge bug).
 
     li.patch
       strong.version v1.4.1
