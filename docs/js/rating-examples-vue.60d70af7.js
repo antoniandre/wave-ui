@@ -1,0 +1,2 @@
+(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["rating-examples-vue"],{"59e3":function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div")},l=[],u={},r=u,s=t("2877"),c=Object(s["a"])(r,a,l,!1,null,null,null);n["default"]=c.exports}}]);
+//# sourceMappingURL=rating-examples-vue.60d70af7.js.map
