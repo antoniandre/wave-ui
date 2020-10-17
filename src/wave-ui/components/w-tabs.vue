@@ -8,7 +8,9 @@
       @click="!item.disabled && openTab(item)"
       @focus="$emit('focus', $event)"
       :tabindex="!item.disabled && 0"
-      @keypress.enter="!item.disabled && openTab(item)")
+      @keypress.enter="!item.disabled && openTab(item)"
+      :aria-selected="item._active ? 'true' : 'false'"
+      role="tab")
         slot(
           v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
           :name="`item-title.${item.id || i + 1}`"
