@@ -111,12 +111,12 @@ div.lists-demo
   example
     w-list(:items="5" hover)
       template(#item="{ index }")
-        | Item {{ index + 1 }}
+        | Item {{ index }}
       template(#item.3)
         strong This is the great item #3
     template(#html).
       &lt;w-list :items="5" hover&gt;
-        &lt;template #item="{ index }"&gt;{{ '\{\{ index + 1 \}\}' }}&lt;/template&gt;
+        &lt;template #item="{ index }"&gt;{{ '\{\{ index \}\}' }}&lt;/template&gt;
         &lt;template #item.3&gt;
           &lt;strong&gt;This is the great item #3&lt;/strong&gt;
         &lt;/template&gt;
