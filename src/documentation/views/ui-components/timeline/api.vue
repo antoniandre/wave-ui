@@ -16,7 +16,22 @@ import WTimeline from '@/wave-ui/components/w-timeline'
 
 const propsDescs = {}
 
-const slots = {}
+const slots = {
+  item: {
+    description: 'Provide a custom template for every item. Applies to all the items, but can be overridden by the <code>item.x</code> slot.',
+    params: {
+      item: 'The current item object.',
+      index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.'
+    }
+  },
+  'item.x': {
+    description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom template for a single item: the item at the index <em class="code">x</em>.',
+    params: {
+      item: 'The current item object.',
+      index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.'
+    }
+  }
+}
 
 const eventsDescs = {}
 
