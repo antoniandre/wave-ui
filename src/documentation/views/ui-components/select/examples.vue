@@ -45,7 +45,7 @@ div
   alert(tip).
     The items of the select list should have a label, which is by default expected in each item
     object under the #[code label] name.#[br]
-    If this is a constraint, you can use the option #[code item-label] to specify the name of another
+    If this is a constraint, you can use the option #[code item-label-key] to specify the name of another
     attribute to be used instead.
 
   title-link(h2) Outline
@@ -162,7 +162,7 @@ div
   title-link(h2) V-model
   alert(tip).
     By default, the #[span.code w-select] component expects the items to have a #[code value] attribute.#[br]
-    If this is a constraint, you can use the option #[code item-value] to specify the name of another
+    If this is a constraint, you can use the option #[code item-value-key] to specify the name of another
     attribute to be used instead (must have a unique value), like an id for instance.
   example
     w-select(v-model="vModelSelect1" :items="items3" multiple)

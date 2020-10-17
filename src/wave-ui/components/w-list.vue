@@ -73,7 +73,7 @@ ul.w-list(:class="classes")
       template(v-if="$scopedSlots.item" #item="{ item, index, selected }")
         slot(name="item" :item="cleanLi(item)" :index="index" :selected="selected")
       template(v-else #default="{ item, index, selected }")
-        slot(:item="cleanLi(item)" :index="index" :selected="selected") {{ item[itemLabel] }}
+        slot(:item="cleanLi(item)" :index="index" :selected="selected") {{ item[itemLabelKey] }}
 </template>
 
 <script>
@@ -97,9 +97,9 @@ export default {
     // Navigation type adds a router-link on items with `route`.
     nav: { type: Boolean },
     icon: { type: String, default: '' },
-    itemLabel: { type: String, default: 'label' }, // Name of the label field.
-    itemValue: { type: String, default: 'value' }, // Name of the value field.
-    itemColor: { type: String, default: 'color' }, // Support a different color per item.
+    itemLabelKey: { type: String, default: 'label' }, // Name of the label field.
+    itemValueKey: { type: String, default: 'value' }, // Name of the value field.
+    itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     itemClass: { type: String },
     depth: { type: Number, default: 0 }, // For recursive call.
     returnObject: { type: Boolean },
@@ -164,8 +164,8 @@ export default {
     // If simple value, return as is.
     getItemValue (item) {
       if (item && typeof item === 'object') {
-        if (item[this.itemValue] !== undefined) return item[this.itemValue]
-        else return item[this.itemLabel] !== undefined ? item[this.itemLabel] : item.index
+        if (item[this.itemValueKey] !== undefined) return item[this.itemValueKey]
+        else return item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item.index
       }
       else return item
     },
@@ -211,7 +211,7 @@ export default {
       // ------------------------------------------------------
       if (this.checklist) {
         props.value = li._selected
-        props.color = li[this.itemColor] || this.color
+        props.color = li[this.itemColorKey] || this.color
         props.round = this.roundCheckboxes
         props.disabled = li.disabled
 
@@ -353,9 +353,9 @@ export default {
         _index: i,
         // If no value is set on the item, add one from its label, or from its index.
         // The result is store in a _value attribute.
-        _value: item[this.itemValue] === undefined ? item[this.itemLabel] || i : item[this.itemValue],
+        _value: item[this.itemValueKey] === undefined ? item[this.itemLabelKey] || i : item[this.itemValueKey],
         _selected: item._selected || false,
-        _label: item[this.itemLabel] || '',
+        _label: item[this.itemLabelKey] || '',
         _focused: false
       }))
     },

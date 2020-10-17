@@ -224,7 +224,7 @@ div
       template(#item-title="{ item, index }")
         | {{ item.title }}
         w-button.ml1.mr-1(
-          @click="tabs6.items = tabs6.items.filter((tab, i) => i !== index)"
+          @click="tabs6.items = tabs6.items.filter((tab, i) => i !== index - 1)"
           icon="wi-cross"
           outline
           xs)
@@ -238,7 +238,7 @@ div
         template(#item-title="{ item, index }")
           | {{ '\{\{ item.title \}\}' }}
           w-button.ml1.mr-1(
-            @click="tabs = tabs.filter&amp;#40;&amp;#40;tab, i&amp;#41; => i !== index&amp;#41;"
+            @click="tabs = tabs.filter&amp;#40;&amp;#40;tab, i&amp;#41; => i !== index - 1&amp;#41;"
             icon="wi-cross"
             outline
             xs)

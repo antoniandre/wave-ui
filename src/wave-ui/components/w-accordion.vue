@@ -3,7 +3,7 @@
   .w-accordion__item(
     v-for="(item, i) in accordionItems"
     :key="i"
-    :class="{ ...itemClasses, 'w-accordion__item--expanded': item._expanded, 'w-accordion__item--disabled': item._disabled, [item[itemColor]]: item[itemColor] }"
+    :class="{ ...itemClasses, 'w-accordion__item--expanded': item._expanded, 'w-accordion__item--disabled': item._disabled, [item[itemColorKey]]: item[itemColorKey] }"
     :aria-expanded="item._expanded ? 'true' : 'false'")
     .w-accordion__item-title(
       @click="!item._disabled && toggleItem(item)"
@@ -27,7 +27,7 @@
         :item="cleanItem(item)"
         :expanded="item._expanded" :index="i + 1")
       slot(v-else name="item-title" :item="cleanItem(item)" :expanded="item._expanded" :index="i + 1")
-        div.grow(v-html="item[itemTitle]")
+        div.grow(v-html="item[itemTitleKey]")
       //- Expand icon on right.
       w-button.w-accordion__expand-icon(
         v-if="expandIcon && expandIconRight"
@@ -44,7 +44,7 @@
           :item="cleanItem(item)"
           :expanded="item._expanded" :index="i + 1")
         slot(v-else name="item-content" :item="cleanItem(item)" :expanded="item._expanded" :index="i + 1")
-          div(v-html="item[itemContent]")
+          div(v-html="item[itemContentKey]")
 </template>
 
 <script>
@@ -58,9 +58,9 @@ export default {
     color: { type: String },
     bgColor: { type: String },
     items: { type: [Array, Number], required: true },
-    itemColor: { type: String, default: 'color' }, // Support a different color per item.
-    itemTitle: { type: String, default: 'title' },
-    itemContent: { type: String, default: 'content' },
+    itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
+    itemTitleKey: { type: String, default: 'title' },
+    itemContentKey: { type: String, default: 'content' },
     itemClass: { type: String },
     titleClass: { type: String },
     contentClass: { type: String },

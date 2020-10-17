@@ -37,7 +37,7 @@ div
   p.
     It is possible to set a different color per item (and override the global #[code color] prop)
     by providing a #[code color] attribute in the item object.#[br]
-    The name of this attribute can be changed via the #[code item-color] prop.
+    The name of this attribute can be changed via the #[code item-color-key] prop.
   example
     w-timeline(:items="items2")
     template(#pug).
@@ -72,7 +72,7 @@ div
   p.
     It is possible to set a different icon per item (and override the global #[code icon] prop)
     by providing an #[code icon] attribute in the item object.#[br]
-    The name of this attribute can be changed via the #[code item-icon] prop.
+    The name of this attribute can be changed via the #[code item-icon-key] prop.
   example
     w-timeline(:items="items3" color="primary")
     template(#pug).

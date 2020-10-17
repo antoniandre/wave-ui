@@ -144,7 +144,7 @@ div
           w-radios(
             v-model="dialog5.transition"
             :items="transitions"
-            item-value="label"
+            item-value-key="label"
             @input="dialog5.fullscreen = null")
             template(#label="{ item }")
               code {{ item.label }}
@@ -153,7 +153,7 @@ div
           w-radios(
             v-model="dialog5.transition"
             :items="transitionsForFullscreen"
-            item-value="label"
+            item-value-key="label"
             @input="dialog5.fullscreen = null")
             template(#label="{ item }")
               code {{ item.label }}
@@ -178,7 +178,7 @@ div
             w-radios(
               v-model="dialog.transition"
               :items="transitions"
-              item-value="label"
+              item-value-key="label"
               @input="dialog.fullscreen = null")
               template(#label="{ item }")
                 code {{ '\{\{ item.label \}\}' }}
@@ -187,7 +187,7 @@ div
             w-radios(
               v-model="dialog.transition"
               :items="transitionsForFullscreen"
-              item-value="label"
+              item-value-key="label"
               @input="dialog.fullscreen = null")
               template(#label="{ item }")
                 code {{ '\{\{ item.label \}\}' }}
