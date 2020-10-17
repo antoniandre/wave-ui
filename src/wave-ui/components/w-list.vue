@@ -14,27 +14,27 @@ ul.w-list(:class="classes")
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)"
         @click.native="onCheckboxWrapperClick")
-        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i" :selected="li._selected")
-        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i" :selected="li._selected")
-        slot(v-else :item="cleanLi(li)" :index="i" :selected="li._selected") {{ li._label }}
+        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
       //- Router link list items. (separated case cz it needs a @click.native, can't be in v-on)
       router-link.w-list__item-label(
         v-else-if="nav && !li.disabled && li.route && hasRouter"
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)"
         @click.native="$emit('item-click', cleanLi(li))")
-        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i" :selected="li._selected")
-        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i" :selected="li._selected")
-        slot(v-else :item="cleanLi(li)" :index="i" :selected="li._selected") {{ li._label }}
+        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
       //- Nav & simple list items.
       component.w-list__item-label(
         v-else
         :is="nav && !li.disabled && li.route ? 'a' : 'div'"
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)")
-        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i" :selected="li._selected")
-        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i" :selected="li._selected")
-        slot(v-else :item="cleanLi(li)" :index="i" :selected="li._selected") {{ li._label }}
+        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
 
     //- When there are no slots.
     template(v-else)
