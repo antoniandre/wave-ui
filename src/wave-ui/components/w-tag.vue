@@ -23,8 +23,8 @@ export default {
 
   props: {
     value: { type: [Boolean, Number], default: -1 },
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
+    color: { type: String },
+    bgColor: { type: String },
     dark: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },

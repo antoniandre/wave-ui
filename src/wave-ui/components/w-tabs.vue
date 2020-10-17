@@ -45,8 +45,8 @@ export default {
 
   props: {
     value: { type: Array },
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
+    color: { type: String },
+    bgColor: { type: String },
     items: { type: [Array, Number] },
     titleClass: { type: String },
     activeClass: { type: String, default: 'primary' },

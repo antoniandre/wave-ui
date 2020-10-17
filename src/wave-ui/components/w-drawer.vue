@@ -38,8 +38,8 @@ export default {
     width: { type: [Number, String, Boolean] },
     height: { type: [Number, String, Boolean] },
     zIndex: { type: [Number, String, Boolean] },
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
+    color: { type: String },
+    bgColor: { type: String },
     noOverlay: { type: Boolean },
     overlayColor: { type: [String, Boolean] },
     overlayOpacity: { type: [Number, String, Boolean] }

@@ -55,8 +55,8 @@ export default {
 
   props: {
     value: { type: Array },
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
+    color: { type: String },
+    bgColor: { type: String },
     items: { type: [Array, Number], required: true },
     itemColor: { type: String, default: 'color' }, // Support a different color per item.
     itemTitle: { type: String, default: 'title' },

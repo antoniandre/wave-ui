@@ -89,7 +89,7 @@ export default {
     classes () {
       return {
         // If no color / bg color is set, set a primary color by default.
-        'primary--bg': !this.bgColor && !this.color && !(this.outline || this.text) && !this.dark,
+        'primary--bg': !this.bgColor && !this.color && !this.dark && !(this.outline || this.text),
         'primary': !this.bgColor && !this.color && !this.dark && (this.outline || this.text),
 
         [this.color]: this.color,

@@ -30,14 +30,14 @@ export default {
   props: {
     value: {},
     showOnClick: { type: Boolean },
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
-    noBorder: { type: String, default: '' },
+    color: { type: String },
+    bgColor: { type: String },
+    noBorder: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
     round: { type: Boolean },
     transition: { type: String, default: '' },
-    tooltipClass: { type: String, default: '' },
+    tooltipClass: { type: String },
     // Position.
     detachTo: {},
     fixed: { type: Boolean },
