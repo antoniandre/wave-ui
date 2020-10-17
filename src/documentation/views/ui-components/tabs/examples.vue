@@ -50,11 +50,17 @@ div
       })
 
   title-link(h2) V-model
-  p It is possible to open a particular tab programmatically via the v-model.
+  p It is possible to open a particular tab programmatically via #[code v-model] or #[code value].
   example
-    w-tabs(:value="[false, false, true, false, false]" :items="tabs2.items")
+    w-tabs.mb2(v-model="tabs2.active" :items="tabs2.items")
+    strong
+      | v-model:
+      code.ml2 {{ tabs2.active }}
     template(#pug).
-      w-tabs(:value="[false, false, true, false, false]" :items="tabs")
+      w-tabs(v-model="activeTabs" :items="tabs")
+      strong
+        | v-model:
+        code.ml2 {{ '\{\{ activeTabs \}\}' }}
     template(#js).
       data: () => ({
         tabs: [
@@ -63,7 +69,8 @@ div
           { title: 'Tab 3', content: 'Tab 3 content.' },
           { title: 'Tab 4', content: 'Tab 4 content.' },
           { title: 'Tab 5', content: 'Tab 5 content.', disabled: true }
-        ]
+        ],
+        activeTabs: [false, false, true, false, false]
       })
 
   title-link(h2) Colors
@@ -181,8 +188,8 @@ div
       code {{ tabs3.tabsCount }}
       w-button.mx2(icon="wi-plus" sm @click="tabs3.tabsCount++")
     w-tabs(:items="tabs3.tabsCount")
-      template(#item-title="{ index }") Tab {{ index + 1 }}
-      template(#item-content="{ index }") Content {{ index + 1 }}
+      template(#item-title="{ index }") Tab {{ index }}
+      template(#item-content="{ index }") Content {{ index }}
     template(#pug).
       w-flex.mb3(align-center)
         | Number of tabs:
@@ -190,8 +197,8 @@ div
         code {{ '\{\{ tabsCount \}\}' }}
         w-button.mx2(icon="wi-plus" sm @click="tabsCount++")
       w-tabs(:items="tabsCount")
-        template(#item-title="{ index }") Tab {{ '\{\{ index + 1 \}\}' }}
-        template(#item-content="{ index }") Content {{ '\{\{ index + 1 \}\}' }}
+        template(#item-title="{ index }") Tab {{ '\{\{ index \}\}' }}
+        template(#item-content="{ index }") Content {{ '\{\{ index \}\}' }}
     template(#js).
       data: () => ({
         tabsCount: 3
@@ -295,6 +302,7 @@ export default {
         { title: 'Tab 4', content: 'Tab 4 content.' },
         { title: 'Tab 5', content: 'Tab 5 content.', disabled: true }
       ],
+      active: [false, false, true, false, false],
       fillBar: true,
       slider: false
     },
