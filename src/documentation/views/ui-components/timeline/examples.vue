@@ -99,7 +99,7 @@ div
         template(#item="{ item, index }")
           w-icon wi-check
           span.mx2 This is the custom item
-          w-tag.white.grey-light2--bg {{ index }}
+          w-tag.white.grey-light2--bg {{ '\{\{ index \}\}' }}
     template(#js).
       data: () => ({
         items: [
@@ -119,7 +119,7 @@ div
     template(#pug).
       w-timeline(:items="items")
         template(#item.3)
-          .pink My favorite item: {{ index }}
+          .pink My favorite item: 3
           w-icon.pink mdi mdi-heart
     template(#js).
       data: () => ({
