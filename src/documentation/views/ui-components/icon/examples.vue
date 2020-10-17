@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div.icons-demo
   title-link(h2) Different icon fonts supported
   p.
     Wave UI works with your favorite icon font or even your own custom one.#[br]
@@ -214,16 +214,32 @@ div
     w-icon.mr1(xl color="primary" spin) mdi mdi-star
 
     .title4.mt6 Rotate
-    w-icon.mr1(xl color="primary") mdi mdi-paw
-    w-icon.mr1(xl color="primary" rotate45) mdi mdi-paw
-    w-icon.mr1(xl color="primary" rotate90) mdi mdi-paw
-    w-icon.mr1(xl color="primary" rotate135) mdi mdi-paw
-    w-icon.mr1(xl color="primary" rotate180) mdi mdi-paw
+    w-icon.rotated-icon.mr1(xl color="primary" rotate-135) mdi mdi-paw
+    w-icon.rotated-icon.mr1(xl color="primary" rotate-90) mdi mdi-paw
+    w-icon.rotated-icon.mr1(xl color="primary" rotate-45) mdi mdi-paw
+    w-icon.rotated-icon.mr1(xl color="primary") mdi mdi-paw
+    w-icon.rotated-icon.mr1(xl color="primary" rotate45) mdi mdi-paw
+    w-icon.rotated-icon.mr1(xl color="primary" rotate90) mdi mdi-paw
+    w-icon.rotated-icon.mr1(xl color="primary" rotate135) mdi mdi-paw
+    w-icon.rotated-icon.mr1(xl color="primary" rotate180) mdi mdi-paw
+    div
+      code.rotation -135º
+      code.rotation -90º
+      code.rotation -45º
+      code.rotation 0º
+      code.rotation 45º
+      code.rotation 90º
+      code.rotation 135º
+      code.rotation 180º
 
     .title4.mt6 Flip
-    w-icon.mr1(xl color="primary") mdi mdi-thumb-up
-    w-icon.mr1(xl color="primary" flip-x) mdi mdi-thumb-up
-    w-icon.mr1(xl color="primary" flip-y) mdi mdi-thumb-up
+    w-icon.flipped-icon.mr1(xl color="primary") mdi mdi-thumb-up
+    w-icon.flipped-icon.mr1(xl color="primary" flip-x) mdi mdi-thumb-up
+    w-icon.flipped-icon.mr1(xl color="primary" flip-y) mdi mdi-thumb-up
+    div
+      span.flip default
+      code.flip flip-x
+      code.flip flip-y
     template(#pug).
       .title4 Spin
       w-icon.mr1(xl color="primary" spin) mdi mdi-star
@@ -259,4 +275,18 @@ export default {
 
 <style lang="scss">
 @import '~ionicons/dist/css/ionicons.min.css';
+
+.icons-demo {
+  .rotated-icon {width: 40px;}
+  .flipped-icon {width: 54px;}
+  .rotation, .flip {
+    margin-top: 4px;
+    margin-right: 4px;
+    text-align: center;
+    width: 40px;
+    font-size: 12px;
+    padding: 2px 0;
+  }
+  .flip {display: inline-block;width: 54px;}
+}
 </style>
