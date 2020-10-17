@@ -3,7 +3,8 @@
   .w-accordion__item(
     v-for="(item, i) in accordionItems"
     :key="i"
-    :class="{ ...itemClasses, 'w-accordion__item--expanded': item.expanded, 'w-accordion__item--disabled': item.disabled, [item[itemColor]]: item[itemColor] }")
+    :class="{ ...itemClasses, 'w-accordion__item--expanded': item._expanded, 'w-accordion__item--disabled': item.disabled, [item[itemColor]]: item[itemColor] }"
+    :aria-expanded="item.__expanded ? 'true' : 'false'")
     .w-accordion__item-title(
       @click="!item.disabled && toggleItem(item)"
       @focus="$emit('focus', item)"
@@ -13,7 +14,7 @@
       //- Expand icon on left.
       w-button.w-accordion__expand-icon(
         v-if="expandIcon && !expandIconRight"
-        :icon="(item.expanded && collapseIcon) || expandIcon"
+        :icon="(item._expanded && collapseIcon) || expandIcon"
         :disabled="item.disabled || null"
         :tabindex="-1"
         text
@@ -24,25 +25,25 @@
         v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
         :name="`item-title.${item.id || i + 1}`"
         :item="item"
-        :expanded="item.expanded")
-      slot(v-else name="item-title" :item="item" :expanded="item.expanded")
+        :expanded="item._expanded" :index="i + 1")
+      slot(v-else name="item-title" :item="item" :expanded="item._expanded" :index="i + 1")
         div.grow(v-html="item[itemTitle]")
       //- Expand icon on right.
       w-button.w-accordion__expand-icon(
         v-if="expandIcon && expandIconRight"
-        :icon="(item.expanded && collapseIcon) || expandIcon"
+        :icon="(item._expanded && collapseIcon) || expandIcon"
         text
         @keypress.stop
         @click.stop="!item.disabled && toggleItem(item)")
     //- Content.
     w-transition-expand(y)
-      .w-accordion__item-content(v-if="item.expanded" :class="contentClass")
+      .w-accordion__item-content(v-if="item._expanded" :class="contentClass")
         slot(
           v-if="$scopedSlots[`item-content.${item.id || i + 1}`]"
           :name="`item-content.${item.id || i + 1}`"
           :item="item"
-          :expanded="item.expanded")
-        slot(v-else name="item-content" :item="item" :expanded="item.expanded")
+          :expanded="item._expanded" :index="i + 1")
+        slot(v-else name="item-content" :item="item" :expanded="item._expanded" :index="i + 1")
           div(v-html="item[itemContent]")
 </template>
 
@@ -75,10 +76,10 @@ export default {
   computed: {
     accordionItems () {
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
-      return items.map((item, index) => new Vue.observable({
+      return items.map((item, _index) => new Vue.observable({
         ...item,
-        index,
-        expanded: this.value && this.value[index],
+        _index,
+        _expanded: this.value && this.value[_index],
         disabled: !!item.disabled
       }))
     },
@@ -103,9 +104,9 @@ export default {
 
   methods: {
     toggleItem (item) {
-      item.expanded = !item.expanded
-      if (this.expandSingle) this.accordionItems.forEach(obj => obj.index !== item.index && (obj.expanded = false))
-      const expandedItems = this.accordionItems.map(item => item.expanded)
+      item._expanded = !item._expanded
+      if (this.expandSingle) this.accordionItems.forEach(obj => obj._index !== item._index && (obj._expanded = false))
+      const expandedItems = this.accordionItems.map(item => item._expanded)
       this.$emit('update:modelValue', expandedItems)
       this.$emit('input', expandedItems)
     }
