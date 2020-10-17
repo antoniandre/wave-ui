@@ -26,9 +26,9 @@ const propsDescs = {
   bgColor: 'Applies a color to the list items\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   nav: 'Set the list as a navigation menu. All the items having a `route` attribute will be converted to link or router-link if vue-router is present.',
   icon: '',
-  itemLabel: '',
-  itemValue: '',
-  itemColor: '',
+  itemLabelKey: '',
+  itemValueKey: '',
+  itemColorKey: '',
   itemClass: 'Applies a custom CSS class to every list item.',
   depth: false, // Hide this prop.
   returnObject: '',

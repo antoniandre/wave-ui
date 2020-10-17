@@ -240,7 +240,7 @@ div.lists-demo
         .title3.mb4 Custom rendering, default styles
         w-list(
           :items="listItems2"
-          item-value="id"
+          item-value-key="id"
           checklist
           color="primary")
           template(#item="{ item }")
@@ -251,7 +251,7 @@ div.lists-demo
         .title3.mb4 Custom rendering &amp; styles
         w-list.custom(
           :items="listItems2"
-          item-value="id"
+          item-value-key="id"
           checklist
           color="primary")
           template(#item="{ item }")
@@ -286,7 +286,7 @@ div.lists-demo
           &lt;p class="title3 mb4"&gt;Custom rendering, default styles&lt;/p&gt;
           &lt;w-list
             :items="listItems2"
-            item-value="id"
+            item-value-key="id"
             checklist
             color="primary"&gt;
             &lt;template #item="{ item }"&gt;
@@ -300,7 +300,7 @@ div.lists-demo
           &lt;p class="title3 mb4"&gt;Custom rendering &amp; styles&lt;/p&gt;
           &lt;w-list
             :items="listItems2"
-            item-value="id"
+            item-value-key="id"
             checklist
             color="primary"
             class="custom"&gt;

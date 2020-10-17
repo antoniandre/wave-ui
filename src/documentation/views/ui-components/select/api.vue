@@ -26,8 +26,8 @@ const propsDescs = {
   innerIconRight: '',
   // When label is inside, allows to move the label above on focus or when filled.
   staticLabel: '',
-  itemLabel: '',
-  itemValue: '',
+  itemLabelKey: '',
+  itemValueKey: '',
   itemClass: 'Applies a custom CSS class to each seelct list item.',
   menuClass: 'Applies a custom CSS class to the select list\'s floatting menu element.',
   color: 'Applies a color to the select\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',

@@ -18,9 +18,9 @@ const propsDescs = {
   color: 'Applies a text color on each accordion item. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a background color on each accordion item. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   items: 'Expecting an array of objects. Each object represent an accordion item and should include a <code>title</code> and <code>content</code> attributes.<br>Alternatively, you can provide an integer number (call it <em class="code">x</em>), to loop through and create <em class="code">x</em> items in the accordion. You can then use the individual slots <code>item-title.x</code> &amp; <code>item-content.x</code> to define each item title and content.',
-  itemTitle: 'Specifies the name of the attribute in each item object where to find the item\'s title string.',
-  itemContent: 'Specifies the name of the attribute in each item object where to find the item\'s content string.',
-  itemColor: 'Specifies the name of the attribute in each item object where to find the item\'s desired color string. This allows a different color for each accordion item.',
+  itemTitleKey: 'Specifies the name of the attribute in each item object where to find the item\'s title string.',
+  itemContentKey: 'Specifies the name of the attribute in each item object where to find the item\'s content string.',
+  itemColorKey: 'Specifies the name of the attribute in each item object where to find the item\'s desired color string. This allows a different color for each accordion item.',
   itemClass: 'Applies a custom CSS class (or space separated classes) on every item container (which includes both the title and the content of the item).',
   titleClass: 'Applies a custom CSS class (or space separated classes) on every title container.',
   contentClass: 'Applies a custom CSS class (or space separated classes) on every content container.',
@@ -32,7 +32,7 @@ const propsDescs = {
 }
 
 const slots = {
-  'item-title': {
+  'item-title-key': {
     description: 'Provide a custom title for every item. Applies to all the items, but can be overridden by the <code>item-title.x</code> slot.',
     params: {
       item: 'The current item object.',
@@ -48,7 +48,7 @@ const slots = {
       expanded: 'A boolean representing the expanded state of the item.'
     }
   },
-  'item-content': {
+  'item-content-key': {
     description: 'Provide a custom content for every item. Applies to all the items, but can be overridden by the <code>item-content.x</code> slot.',
     params: {
       item: 'The current item object.',
