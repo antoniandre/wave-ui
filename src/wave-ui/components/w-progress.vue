@@ -52,9 +52,9 @@ export default {
     label: { type: Boolean },
     roundCap: { type: Boolean },
     color: { type: String, default: 'primary' },
-    bgColor: { type: String, default: '' },
-    labelColor: { type: String, default: '' },
-    size: { type: [Number, String], default: '' },
+    bgColor: { type: String },
+    labelColor: { type: String },
+    size: { type: [Number, String] },
 
     // Circular progress thickness.
     circle: { type: Boolean },

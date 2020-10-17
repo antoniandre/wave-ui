@@ -27,7 +27,7 @@ export default {
   name: 'w-dialog',
 
   props: {
-    value: { type: Boolean, default: true },
+    value: { default: true },
     width: { type: Number, default: 0 },
     fullscreen: { type: Boolean },
     persistent: { type: Boolean },
