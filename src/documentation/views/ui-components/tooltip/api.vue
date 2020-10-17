@@ -15,7 +15,7 @@ div
 import WTooltip from '@/wave-ui/components/w-tooltip'
 
 const propsDescs = {
-  value: 'This prop controls the visibility of the tooltip. Any truthy value will show the tooltip whereas any falsy value will hide it.',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the tooltip. Any truthy value will show the tooltip whereas any falsy value will hide it.',
   showOnClick: '',
   color: 'Applies a color to the tooltip\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the tooltip\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
@@ -27,7 +27,7 @@ const propsDescs = {
   tooltipClass: 'Applies a custom CSS class to the tooltip element.',
   // Position.
   detachTo: '',
-  fixed: '',
+  fixed: 'Sets the CSS position of the element to <code>fixed</code>.',
   top: '',
   bottom: '',
   left: '',
@@ -41,9 +41,8 @@ const slots = {
 }
 
 const eventsDescs = {
-  input: 'Emitted each time the state of the component changes. It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  'update:modelValue': 'Emitted each time the state of the component changes (when an item is expanded or collapsed). It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  focus: 'Emitted on each item title focus. The focused item is returned as a parameter.'
+  // input: 'Emitted each time the state of the component changes (when showing or hiding the tooltip). It updates the v-model value in Vue 2.x only.',
+  // 'update:modelValue': 'Emitted each time the state of the component changes (when showing or hiding the tooltip). It updates the v-model value in Vue 3 only.'
 }
 
 export default {

@@ -39,7 +39,7 @@ div
       w-tag.ma1(color="primary" md) medium
       w-tag.ma1(color="primary" lg) large
       w-tag.ma1(color="primary" xl) extra large
-    p.my4 You can also put a custom size using the #[code width] and #[code height] props.
+    p.my4 You can also set a custom size using the #[code width] and #[code height] props.
     w-tag(outline color="primary" xl width="10em" height="3em") a bigger tag
     template(#pug).
       .w-flex.wrap.align-center
@@ -48,13 +48,13 @@ div
         w-tag.ma1(color="primary" md) medium
         w-tag.ma1(color="primary" lg) large
         w-tag.ma1(color="primary" xl) extra large
-      p.my4 You can also put a custom size using the width and height props.
+      p.my4 You can also set a custom size using the width and height props.
       w-tag(outline color="primary" xl width="10em" height="3em") a bigger tag
 
   title-link(h2) Toggleable state &amp; closable
   p.
-    When a tag has a #[code v-model] or #[code value], it becomes clickable and its #[code v-model]
-    value is updated when user clicks on it.
+    When a tag has a #[code v-model] or #[code value], it becomes toggleable (two different states) and clickable.
+    When the user clicks it, its #[code v-model] boolean value is updated.
   example(content-class="w-flex align-center")
     w-tag(
       v-model="tagOn1"

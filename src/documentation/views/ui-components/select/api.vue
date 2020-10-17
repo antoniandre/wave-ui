@@ -17,7 +17,7 @@ import WSelect from '@/wave-ui/components/w-select'
 
 const propsDescs = {
   items: '',
-  value: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
   multiple: '',
   placeholder: '',
   label: '',
@@ -32,11 +32,11 @@ const propsDescs = {
   menuClass: 'Applies a custom CSS class to the select list\'s floatting menu element.',
   color: 'Applies a color to the select\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the select\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  outline: '',
+  outline: 'The outline style applies the provided <code>color</code> (by default the <code>primary</code> color is used) to the text and border and no background color is set.',
   round: 'Sets a maximum border-radius on the corners of the component, giving it a round look.',
   shadow: 'Applies a drop shadow to the component.',
   tile: 'Removes the default border-radius and sets sharp edges on the component.',
-  dark: '',
+  dark: false, // Hide the prop. 'When set to true, the text color will be set to white.',
   returnObject: '',
   name: '',
   disabled: '',

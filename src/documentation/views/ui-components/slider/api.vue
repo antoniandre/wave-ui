@@ -15,7 +15,7 @@ div
 import WSlider from '@/wave-ui/components/w-slider'
 
 const propsDescs = {
-  value: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
   color: 'Applies a foreground color to the slider. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a background color to the slider\'s track. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   stepLabels: '',
@@ -38,9 +38,9 @@ const propsDescs = {
 const slots = {}
 
 const eventsDescs = {
-  input: 'Emitted each time the state of the component changes. It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  'update:modelValue': 'Emitted each time the state of the component changes (when an item is expanded or collapsed). It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  focus: 'Emitted on each item title focus. The focused item is returned as a parameter.'
+  input: 'Emitted each time the slider range changes. It updates the v-model value in Vue 2.x only.<br>The current value of the slider is passed as a parameter.',
+  'update:modelValue': 'Emitted each time the slider range changes. It updates the v-model value in Vue 3 only.<br>The current value of the slider is passed as a parameter.',
+  focus: 'Emitted when the slider is focused (the thumb button). The native focus event is returned as a parameter.'
 }
 
 export default {

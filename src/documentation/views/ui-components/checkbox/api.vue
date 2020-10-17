@@ -30,7 +30,7 @@ import WCheckbox from '@/wave-ui/components/w-checkbox'
 const checkboxes = {
   propsDescs: {
     items: '',
-    value: '',
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
     labelOnLeft: '',
     itemLabel: '',
     itemValue: '',
@@ -56,8 +56,8 @@ const checkboxes = {
 
 const checkbox = {
   propsDescs: {
-    value: '',
-    returnValue: '',
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
+    returnvalue: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
     label: '',
     labelOnLeft: '',
     color: 'Applies a color to the checkbox when active. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',

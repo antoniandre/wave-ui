@@ -16,7 +16,7 @@ import WList from '@/wave-ui/components/w-list'
 
 const propsDescs = {
   items: '',
-  value: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
   checklist: '',
   roundCheckboxes: '',
   multiple: 'When selectable, this allows a multiple selections.',
@@ -30,19 +30,33 @@ const propsDescs = {
   itemValue: '',
   itemColor: '',
   itemClass: 'Applies a custom CSS class to every list item.',
-  depth: '',
+  depth: false, // Hide this prop.
   returnObject: '',
   arrowsNavigation: ''
 }
 
 const slots = {
-  item: { description: 'Provide a custom content for every item. Applies to all the items, but can be overridden by the <code>item.x</code> slot.' },
-  'item.x': { description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single item: the item at the index <em class="code">x</em>.' }
+  item: {
+    description: 'Provide a custom content for every item. Applies to all the items, but can be overridden by the <code>item.x</code> slot.',
+    params: {
+      item: 'The current item object.',
+      index: 'The item index in the list. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      selected: 'A boolean representing the selected state of the current item.'
+    }
+  },
+  'item.x': {
+    description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single item: the item at the index <em class="code">x</em>.',
+    params: {
+      item: 'The current item object.',
+      index: 'The item index in the list. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      selected: 'A boolean representing the selected state of the current item.'
+    }
+  }
 }
 
 const eventsDescs = {
-  input: 'Emitted each time the state of the component changes. It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  'update:modelValue': 'Emitted each time the state of the component changes (when an item is expanded or collapsed). It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
+  input: 'Emitted each time the state of the component changes. It updates the v-model value in Vue 2.x only.<br>An array of values of all the selected list items is passed as a parameter.',
+  'update:modelValue': 'Emitted each time the state of the component changes (when an item is selected or unselected). It updates the v-model value in Vue 3 only.<br>An array of values of all the selected list items is passed as a parameter.',
   focus: 'Emitted on each item title focus. The focused item is returned as a parameter.',
   'item-click': 'Emitted on each item click. The clicked item is returned as a parameter.',
   'keydown:escape': 'Emitted on escape key press, when the focus is on any of the list items.'

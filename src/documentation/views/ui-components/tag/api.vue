@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -15,15 +14,16 @@ div
 import WTag from '@/wave-ui/components/w-tag'
 
 const propsDescs = {
-  value: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>When a tag has a <code>v-model</code> or <code>value</code>, it becomes toggleable (two different states) and clickable. When the user clicks it, its <code>v-model</code> boolean value is updated.',
   color: 'Applies a color to the tag\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the tag\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  dark: '',
-  shadow: 'Applies a drop shadow to the tag.',
+  dark: 'When set to true, the text color will be set to white.',
+  shadow: 'Applies a drop shadow to the tag and removes the default border.',
   tile: 'Removes the default border-radius and sets sharp edges on the tag.',
   round: 'Sets a maximum border-radius on the corners of the tag, giving it a round look.',
-  closable: '',
-  outline: '',
+  closable: 'Adds a close button in the tag. On click of that button, the <code>v-model</code> boolean value is updated. You can then decide to hide the tag with a v-if or v-show based on the <code>v-model</code> value.',
+  outline: 'The outline style applies the provided <code>color</code> (by default the color is inherited) to the text and border and no background color is set.',
+  noBorder: 'Removes the default border from the tag element.',
   xs: 'Sets the size of the tag.',
   sm: 'Sets the size of the tag.',
   md: 'Sets the size of the tag.',

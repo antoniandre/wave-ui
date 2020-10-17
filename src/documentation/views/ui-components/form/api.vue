@@ -15,7 +15,7 @@ div
 import WForm from '@/wave-ui/components/w-form'
 
 const propsDescs = {
-  value: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
   allowSubmit: '',
   noKeyupValidation: '',
   noBlurValidation: '',
