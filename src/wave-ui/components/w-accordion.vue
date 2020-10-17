@@ -3,30 +3,30 @@
   .w-accordion__item(
     v-for="(item, i) in accordionItems"
     :key="i"
-    :class="{ ...itemClasses, 'w-accordion__item--expanded': item._expanded, 'w-accordion__item--disabled': item.disabled, [item[itemColor]]: item[itemColor] }"
+    :class="{ ...itemClasses, 'w-accordion__item--expanded': item._expanded, 'w-accordion__item--disabled': item._disabled, [item[itemColor]]: item[itemColor] }"
     :aria-expanded="item._expanded ? 'true' : 'false'")
     .w-accordion__item-title(
-      @click="!item.disabled && toggleItem(item)"
+      @click="!item._disabled && toggleItem(item)"
       @focus="$emit('focus', item)"
-      :tabindex="!item.disabled && 0"
-      @keypress.enter="!item.disabled && toggleItem(item)"
+      :tabindex="!item._disabled && 0"
+      @keypress.enter="!item._disabled && toggleItem(item)"
       :class="titleClass")
       //- Expand icon on left.
       w-button.w-accordion__expand-icon(
         v-if="expandIcon && !expandIconRight"
         :icon="(item._expanded && collapseIcon) || expandIcon"
-        :disabled="item.disabled || null"
+        :disabled="item._disabled || null"
         :tabindex="-1"
         text
         @keypress.stop
-        @click.stop="!item.disabled && toggleItem(item)")
+        @click.stop="!item._disabled && toggleItem(item)")
       //- Title.
       slot(
         v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
         :name="`item-title.${item.id || i + 1}`"
-        :item="item"
+        :item="cleanItem(item)"
         :expanded="item._expanded" :index="i + 1")
-      slot(v-else name="item-title" :item="item" :expanded="item._expanded" :index="i + 1")
+      slot(v-else name="item-title" :item="cleanItem(item)" :expanded="item._expanded" :index="i + 1")
         div.grow(v-html="item[itemTitle]")
       //- Expand icon on right.
       w-button.w-accordion__expand-icon(
@@ -34,16 +34,16 @@
         :icon="(item._expanded && collapseIcon) || expandIcon"
         text
         @keypress.stop
-        @click.stop="!item.disabled && toggleItem(item)")
+        @click.stop="!item._disabled && toggleItem(item)")
     //- Content.
     w-transition-expand(y)
       .w-accordion__item-content(v-if="item._expanded" :class="contentClass")
         slot(
           v-if="$scopedSlots[`item-content.${item.id || i + 1}`]"
           :name="`item-content.${item.id || i + 1}`"
-          :item="item"
+          :item="cleanItem(item)"
           :expanded="item._expanded" :index="i + 1")
-        slot(v-else name="item-content" :item="item" :expanded="item._expanded" :index="i + 1")
+        slot(v-else name="item-content" :item="cleanItem(item)" :expanded="item._expanded" :index="i + 1")
           div(v-html="item[itemContent]")
 </template>
 
@@ -80,7 +80,7 @@ export default {
         ...item,
         _index,
         _expanded: this.value && this.value[_index],
-        disabled: !!item.disabled
+        _disabled: !!item.disabled
       }))
     },
 
@@ -109,6 +109,11 @@ export default {
       const expandedItems = this.accordionItems.map(item => item._expanded || false)
       this.$emit('update:modelValue', expandedItems)
       this.$emit('input', expandedItems)
+    },
+    cleanItem (item) {
+      // eslint-disable-next-line no-unused-vars
+      const { _index, _expanded, _disabled, ...Item } = item
+      return Item
     }
   },
 
