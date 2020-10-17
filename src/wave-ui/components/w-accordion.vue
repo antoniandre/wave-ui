@@ -4,7 +4,7 @@
     v-for="(item, i) in accordionItems"
     :key="i"
     :class="{ ...itemClasses, 'w-accordion__item--expanded': item._expanded, 'w-accordion__item--disabled': item.disabled, [item[itemColor]]: item[itemColor] }"
-    :aria-expanded="item.__expanded ? 'true' : 'false'")
+    :aria-expanded="item._expanded ? 'true' : 'false'")
     .w-accordion__item-title(
       @click="!item.disabled && toggleItem(item)"
       @focus="$emit('focus', item)"
@@ -106,7 +106,7 @@ export default {
     toggleItem (item) {
       item._expanded = !item._expanded
       if (this.expandSingle) this.accordionItems.forEach(obj => obj._index !== item._index && (obj._expanded = false))
-      const expandedItems = this.accordionItems.map(item => item._expanded)
+      const expandedItems = this.accordionItems.map(item => item._expanded || false)
       this.$emit('update:modelValue', expandedItems)
       this.$emit('input', expandedItems)
     }

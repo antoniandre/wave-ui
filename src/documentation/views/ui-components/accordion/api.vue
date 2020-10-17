@@ -32,10 +32,38 @@ const propsDescs = {
 }
 
 const slots = {
-  'item-title': { description: 'Provide a custom title for every item. Applies to all the items, but can be overridden by the <code>item-title.x</code> slot.' },
-  'item-title.x': { description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom title for a single item: the item at the index <em class="code">x</em>.' },
-  'item-content': { description: 'Provide a custom content for every item. Applies to all the items, but can be overridden by the <code>item-content.x</code> slot.' },
-  'item-content.x': { description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single item: the item at the index <em class="code">x</em>.' }
+  'item-title': {
+    description: 'Provide a custom title for every item. Applies to all the items, but can be overridden by the <code>item-title.x</code> slot.',
+    params: {
+      item: 'The current item object.',
+      index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      expanded: 'A boolean representing the expanded state of the item.'
+    }
+  },
+  'item-title.x': {
+    description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom title for a single item: the item at the index <em class="code">x</em>.',
+    params: {
+      item: 'The current item object.',
+      index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      expanded: 'A boolean representing the expanded state of the item.'
+    }
+  },
+  'item-content': {
+    description: 'Provide a custom content for every item. Applies to all the items, but can be overridden by the <code>item-content.x</code> slot.',
+    params: {
+      item: 'The current item object.',
+      index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      expanded: 'A boolean representing the expanded state of the item.'
+    }
+  },
+  'item-content.x': {
+    description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single item: the item at the index <em class="code">x</em>.',
+    params: {
+      item: 'The current item object.',
+      index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      expanded: 'A boolean representing the expanded state of the item.'
+    }
+  }
 }
 
 const eventsDescs = {
