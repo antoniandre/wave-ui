@@ -15,10 +15,10 @@ div
 import WNotification from '@/wave-ui/components/w-notification'
 
 const propsDescs = {
-  value: 'This prop controls the visibility of the notification. Any truthy value will show the notification whereas any falsy value will hide it.',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the notification. Any truthy value will show the notification whereas any falsy value will hide it.',
   transition: 'Applies a particular transition to this component when showing and hiding.<br>Check all the transitions that apply to this component in the <a href="#transitions">Transitions</a> example.',
   timeout: '',
-  absolute: '',
+  absolute: 'Sets the CSS position of the element to <code>absolute</code>.',
   top: '',
   bottom: '',
   left: '',
@@ -39,7 +39,7 @@ const propsDescs = {
   borderRight: '',
   borderTop: '',
   borderBottom: '',
-  outline: '',
+  outline: 'The outline style applies the provided <code>color</code> (by default the color is inherited) to the text and border and no background color is set.',
   dismiss: '',
   xs: 'Sets the size of the notification.',
   sm: 'Sets the size of the notification.',

@@ -16,7 +16,7 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import Wtextarea from '@/wave-ui/components/w-textarea'
 
 const propsDescs = {
-  value: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
   label: '',
   labelPosition: '',
   innerIconLeft: '',
@@ -26,8 +26,8 @@ const propsDescs = {
   placeholder: '',
   color: 'Applies a color to the textarea\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the textarea\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  dark: '',
-  outline: '',
+  dark: false, // Hide the prop. 'When set to true, the text color will be set to white.',
+  outline: 'The outline style applies the provided <code>color</code> (by default the <code>primary</code> color is used) to the text and border and no background color is set.',
   shadow: 'Applies a drop shadow to the textarea.',
   noAutogrow: '',
   resizable: '',

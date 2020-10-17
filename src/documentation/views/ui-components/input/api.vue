@@ -16,7 +16,7 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WInput from '@/wave-ui/components/w-input'
 
 const propsDescs = {
-  value: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
   type: '',
   label: '',
   labelPosition: '',
@@ -31,8 +31,8 @@ const propsDescs = {
   step: '',
   min: '',
   max: '',
-  dark: '',
-  outline: '',
+  dark: false, // Hide the prop. 'When set to true, the text color will be set to white.',
+  outline: 'The outline style applies the provided <code>color</code> (by default the <code>primary</code> color is used) to the text and border and no background color is set.',
   round: 'Sets a maximum border-radius on the corners of the input field, giving it a round look.',
   shadow: 'Applies a drop shadow to the input field.',
   tile: 'Removes the default border-radius and sets sharp edges on the input field.',

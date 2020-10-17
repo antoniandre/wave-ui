@@ -15,10 +15,10 @@ div
 import WButton from '@/wave-ui/components/w-button'
 
 const propsDescs = {
-  color: 'Applies a color to the button\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  bgColor: 'Applies a color to the button\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  dark: '',
-  outline: '',
+  color: 'Applies a color to the button\'s text.<br>If no <code>color</code> and no <code>bg-color</code> are set, and if either <code>outline</code> or <code>text</code> is set to true, the <code>primary</code> color will be applied.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Applies a color to the button\'s background.<br>If no <code>color</code> and no <code>bg-color</code> are set, and if neither <code>outline</code> nor <code>text</code> are set to true, the <code>primary</code> color will be applied.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  dark: 'When set to true, the text color will be set to white.',
+  outline: 'The outline style applies the provided <code>color</code> (by default the <code>primary</code> color is used) to the text and border and no background color is set.',
   text: '',
   round: 'Sets a maximum border-radius on the corners of the button, giving it a round look.',
   shadow: 'Applies a drop shadow to the button.',
@@ -29,8 +29,8 @@ const propsDescs = {
   disabled: '',
   loading: '',
   icon: '',
-  absolute: '',
-  fixed: '',
+  absolute: 'Sets the CSS position of the element to <code>absolute</code>.',
+  fixed: 'Sets the CSS position of the element to <code>fixed</code>.',
   top: '',
   bottom: '',
   left: '',

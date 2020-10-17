@@ -16,7 +16,7 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WSwitch from '@/wave-ui/components/w-switch'
 
 const propsDescs = {
-  value: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
   label: '',
   labelOnLeft: '',
   color: 'Applies a color to the switch. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',

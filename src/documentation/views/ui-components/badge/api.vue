@@ -15,7 +15,7 @@ div
 import WBadge from '@/wave-ui/components/w-badge'
 
 const propsDescs = {
-  value: 'This prop controls the visibility of the badge. Any truthy value will show the badge whereas any falsy value will hide it.',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the badge. Any truthy value will show the badge whereas any falsy value will hide it.',
   xs: 'Sets the size of the badge.',
   sm: 'Sets the size of the badge.',
   md: 'Sets the size of the badge.',
@@ -30,9 +30,9 @@ const propsDescs = {
   color: 'Applies a color to the badge\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the badge\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   size: '',
-  dark: '',
+  dark: 'When set to true, the text color will be set to white.',
   badgeClass: 'Applies a custom CSS class to the badge element.',
-  outline: '',
+  outline: 'The outline style applies the provided <code>color</code> (by default the color is inherited) to the text and border and no background color is set.',
   shadow: 'Applies a drop shadow to the badge.',
   dot: 'Displays a much smaller dot with no content in it.',
   round: 'Forces the badge to be round, when the content is too wide and causes a natural increase of the badge width.',

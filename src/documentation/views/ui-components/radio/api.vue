@@ -32,7 +32,7 @@ import WRadio from '@/wave-ui/components/w-radio'
 const radios = {
   propsDescs: {
     items: '',
-    value: '',
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
     labelOnLeft: '',
     itemLabel: '',
     itemValue: '',
@@ -57,7 +57,7 @@ const radios = {
 
 const radio = {
   propsDescs: {
-    value: '',
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
     returnValue: '',
     label: '',
     labelOnLeft: '',

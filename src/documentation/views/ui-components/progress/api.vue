@@ -15,7 +15,7 @@ div
 import WProgress from '@/wave-ui/components/w-progress'
 
 const propsDescs = {
-  value: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
   label: '',
   roundCap: '',
   color: 'Applies a foreground color to the progress. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
@@ -31,10 +31,10 @@ const propsDescs = {
   shadow: 'Applies a drop shadow to the component.',
   tile: 'Removes the default border-radius and sets sharp edges on the component.',
   round: 'Sets a maximum border-radius on the corners of the component, giving it a round look.',
-  outline: '',
+  outline: 'When using the linear progress, the outline style applies the provided <code>color</code> (by default the <code>primary</code> color is used) to the progress, border and label and no background color is set.',
   stripes: '',
-  absolute: '',
-  fixed: '',
+  absolute: 'Sets the CSS position of the element to <code>absolute</code>.',
+  fixed: 'Sets the CSS position of the element to <code>fixed</code>.',
   top: '',
   bottom: '',
   zIndex: 'Applies a z-index (positive or negative integer) to the progress.'
