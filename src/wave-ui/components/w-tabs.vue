@@ -5,19 +5,19 @@
       v-for="(item, i) in tabsItems"
       :key="i"
       :class="barItemClasses(item)"
-      @click="!item.disabled && openTab(item)"
+      @click="!item._disabled && openTab(item)"
       @focus="$emit('focus', $event)"
-      :tabindex="!item.disabled && 0"
-      @keypress.enter="!item.disabled && openTab(item)"
+      :tabindex="!item._disabled && 0"
+      @keypress.enter="!item._disabled && openTab(item)"
       :aria-selected="item._active ? 'true' : 'false'"
       role="tab")
         slot(
           v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
           :name="`item-title.${item.id || i + 1}`"
-          :item="item"
+          :item="cleanTab(item)"
           :index="i + 1"
           :active="item._active")
-        slot(v-else name="item-title" :item="item" :index="i + 1" :active="item._active")
+        slot(v-else name="item-title" :item="cleanTab(item)" :index="i + 1" :active="item._active")
           div(v-html="item.title")
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
   .w-tabs__content-wrap(v-if="tabsItems.length" :class="contentClass")
@@ -26,10 +26,14 @@
         slot(
           v-if="$scopedSlots[`item-content.${activeTab.id || activeTab._index + 1}`]"
           :name="`item-content.${activeTab.id || activeTab._index + 1}`"
-          :item="activeTab"
-          :index="i + 1"
-          :active="item._active")
-        slot(v-else name="item-content" :item="activeTab" :index="i + 1" :active="item._active")
+          :item="cleanTab(activeTab)"
+          :index="activeTab._index + 1"
+          :active="activeTab._active")
+        slot(
+          v-else name="item-content"
+          :item="cleanTab(activeTab)"
+          :index="activeTab._index + 1"
+          :active="activeTab._active")
           div(v-html="activeTab.content")
 </template>
 
@@ -95,7 +99,7 @@ export default {
         ...item,
         _index,
         _active: item._active || (this.value && this.value[_index]),
-        disabled: !!item.disabled
+        _disabled: !!item.disabled
       }))
     },
 
@@ -103,7 +107,7 @@ export default {
       let activeTab = this.tabsItems.find(item => item._active)
       if (!activeTab) {
         // If no active tab, open the first not disabled tab.
-        if (!activeTab) activeTab = this.tabsItems.find(item => !item.disabled)
+        if (!activeTab) activeTab = this.tabsItems.find(item => !item._disabled)
         if (activeTab) {
           activeTab._active = true
           this.$nextTick(this.updateSlider)
@@ -141,15 +145,17 @@ export default {
     onResize () {
       this.updateSlider(false)
     },
+
     barItemClasses (item) {
       return {
         [`${this.bgColor}--bg`]: this.bgColor,
-        [this.color]: this.color && !item.disabled && !(this.activeClass && item._active),
+        [this.color]: this.color && !item._disabled && !(this.activeClass && item._active),
         [`w-tabs__bar-item--active ${this.activeClass}`]: item._active,
-        'w-tabs__bar-item--disabled': item.disabled,
+        'w-tabs__bar-item--disabled': item._disabled,
         [this.titleClass]: this.titleClass
       }
     },
+
     openTab (item) {
       this.prevTabIndex = this.activeTab._index
       this.activeTabIndex = item._index
@@ -179,6 +185,12 @@ export default {
         this.slider.left = `${this.activeTab._index * 100 / this.tabsItems.length}%`,
         this.slider.width = `${100 / this.tabsItems.length}%`
       }
+    },
+
+    cleanTab (tab) {
+      // eslint-disable-next-line no-unused-vars
+      const { _index, _expanded, _disabled, ...Tab } = tab
+      return Tab
     }
   },
 
