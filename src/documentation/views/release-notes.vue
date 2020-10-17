@@ -6,16 +6,28 @@ div
     a.ml1(href="https://semver.org" target="_blank") Semantic versioning specs.
 
   ul.history
+    //- li Added the #[code hide-error] option on all the form elements.
+    li.minor
+      strong.version v1.6.0
+      ul
+        li Added a #[code no-border] prop on the #[strong.code w-tag] component.
+        li Improved the #[strong.code w-timeline] component.
+        li Renamed the #[strong.code w-icon]'s #[code rotate225], #[code rotate270], #[code rotate315] props to #[code rotate-45], #[code rotate-90], #[code rotate-135].
+        li Added accessibility attributes to #[strong.code w-accordion] &amp; #[strong.code w-tabs].
+        li #[strong.code w-accordion], #[strong.code w-timeline] and #[strong.code w-list] scoped slots return the index of item starting from 1.
+        li #[strong.code w-accordion]'s scoped slots return the expanded state of the item.
+        li Renamed all the #[code="item-[prop]"] props to #[code="item-[prop]-key"]. E.g. #[code item-color] to #[code item-color-key].
+
     li.minor
       strong.version v1.5.0
       ul
-        li Add a new #[strong.code w-timeline] component.
-        li Fix checkbox &amp; radio not emiting #[code input] event on Edge (known Edge bug).
-        li Fix #[strong.code w-input], #[strong.code w-textarea] &amp; #[strong.code w-select] underline animations on Edge.
+        li Added a new #[strong.code w-timeline] component.
+        li Fixed checkbox &amp; radio not emiting #[code input] event on Edge (known Edge bug).
+        li Fixed #[strong.code w-input], #[strong.code w-textarea] &amp; #[strong.code w-select] underline animations on Edge.
 
     li.patch
       strong.version v1.4.1
-      p Fix the dynamic breakpoints.
+      p Fixed the dynamic breakpoints.
 
     li.minor
       strong.version v1.4.0
@@ -27,9 +39,8 @@ div
         li Allow dynamic breakpoints customization.
         li Added the #[code no-unselect] option on #[strong.code w-select] &amp; #[strong.code w-list] components.
         li Added the #[code selection-color] option on #[strong.code w-select] &amp; #[strong.code w-list] components.
-        //- li Add the #[code hide-error] option on all the form elements.
         li Layout improvement on #[strong.code w-select] component &amp; added the #[code menu-props] option.
-        li Bug fix: unmounting #[strong.code w-menu] &amp; #[strong.code w-tabs].
+        li Fixed unmounting #[strong.code w-menu] &amp; #[strong.code w-tabs].
 
     li.patch
       strong.version v1.2.2
