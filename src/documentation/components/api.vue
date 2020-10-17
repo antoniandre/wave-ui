@@ -2,7 +2,7 @@
 .api(v-if="sortedItems.length")
   title-link.title2.api__title(h3) {{ title }}
   ul(v-if="sortedItems.length")
-    li.api__item(v-for="item in sortedItems" :key="item.label")
+    li.api__item(v-for="item in sortedItems" :key="item.label" v-if="!item.hide")
       title-link(h4 :slug="item.label") {{ item.label }}
       template(v-if="title === 'Props'")
         span.types.teal="[{{ item.type.join(', ') }}]"
@@ -55,6 +55,7 @@ export default {
         return {
           label: key.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase(), // Convert camelCase to kebab-case.
           ...item,
+          hide: item.description === false || this.descriptions[key] === false,
           description: item.description || this.descriptions[key] || ''
         }
       })
