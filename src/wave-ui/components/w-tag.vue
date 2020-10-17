@@ -31,6 +31,7 @@ export default {
     round: { type: Boolean },
     closable: { type: Boolean },
     outline: { type: Boolean },
+    noBorder: { type: Boolean },
     xs: { type: Boolean },
     sm: { type: Boolean },
     md: { type: Boolean },
@@ -60,6 +61,7 @@ export default {
         'w-tag--dark': this.dark && !this.outline,
         'w-tag--clickable': this.value !== -1,
         'w-tag--outline': this.outline,
+        'w-tag--no-border': this.noBorder || this.shadow,
         'w-tag--tile': this.tile,
         'w-tag--round': this.round,
         'w-tag--shadow': this.shadow
@@ -93,6 +95,7 @@ export default {
 
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
+  &--no-border {border-color: transparent;}
   &--round {border-radius: 9em;}
   &--tile {border-radius: initial;}
   &--shadow {box-shadow: $box-shadow;}
