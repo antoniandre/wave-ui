@@ -1,8 +1,6 @@
 <template lang="pug">
 div
-  ui-component-title(slug="w-timeline" :code="false")
-    .code w-timeline
-    w-tag.orange.ml2.text-upper.text-bold(outline) in progress
+  ui-component-title w-timeline
   examples
   api
 </template>
