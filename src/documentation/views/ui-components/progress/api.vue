@@ -33,8 +33,8 @@ const propsDescs = {
   // Position.
   absolute: 'Sets the CSS position of the progress element to <code>absolute</code>.',
   fixed: 'Sets the CSS position of the progress element to <code>fixed</code>.',
-  top: '',
-  bottom: '',
+  top: 'Places the progress element at the top of the screen when the <code>fixed</code> prop is set to true or at the top of its container when the <code>absolute</code> prop is set to true.',
+  bottom: 'Places the progress element at the bottom of the screen when the <code>fixed</code> prop is set to true or at the bottom of its container when the <code>absolute</code> prop is set to true.',
   zIndex: 'Applies a z-index (positive or negative integer) to the progress element.'
 }
 

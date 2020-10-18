@@ -26,8 +26,8 @@ const propsDescs = {
   contentClass: 'Applies a custom CSS class to the tab content.',
   transition: 'Applies a particular transition to the tab contents when switching tab.<br>Check all the transitions that apply to this component in the <a href="#content-transitions">Content transitions</a> example.',
   fillBar: 'When set to true, the tabs titles will occupy the full available width.',
-  center: '',
-  right: '',
+  center: 'Centers the tabs titles.',
+  right: 'Aligns the tabs titles to the right.',
   card: 'Applies the card style on all the tabs titles.'
 }
 
