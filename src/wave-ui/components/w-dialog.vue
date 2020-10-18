@@ -37,7 +37,7 @@ export default {
     transition: { type: String, default: 'fade' }, // @todo: validator.
     titleClass: { type: String },
     contentClass: { type: String },
-    overlayColor: { type: [String, Boolean] },
+    overlayColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] }
   },
 
