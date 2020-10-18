@@ -16,10 +16,10 @@ import WDrawer from '@/wave-ui/components/w-drawer'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the drawer. Any truthy value will show the drawer whereas any falsy value will hide it.',
-  left: '',
-  right: '',
-  top: '',
-  bottom: '',
+  left: 'Places the drawer at the left of the screen.',
+  right: 'Places the drawer at the right of the screen.',
+  top: 'Places the drawer at the top of the screen.',
+  bottom: 'Places the drawer at the bottom of the screen.',
   persistent: 'When set to true, clicking outside of the drawer or pressing the escape key will not close the drawer.<br>A bounce animation will give the user a feedback that this drawer needs attention and cannot be closed.',
   persistentNoAnimation: 'When this and the <code>persistent</code> props are set to true, clicking outside of the drawer or pressing the escape key will not trigger the default bounce animation (no feedback is given to the user).',
   fitContent: '',

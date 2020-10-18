@@ -27,11 +27,11 @@ const propsDescs = {
   tooltipClass: 'Applies a custom CSS class to the tooltip element.',
   // Position.
   detachTo: '',
-  fixed: 'Sets the CSS position of the element to <code>fixed</code>.',
-  top: '',
-  bottom: '',
-  left: '',
-  right: '',
+  fixed: 'Sets the CSS position of the tooltip to <code>fixed</code> (absolute by default).',
+  top: 'Places the tooltip at the top of the screen when the <code>fixed</code> prop is set to true or at the top of its container otherwise.',
+  bottom: 'Places the tooltip at the bottom of the screen when the <code>fixed</code> prop is set to true or at the bottom of its container otherwise.',
+  left: 'Places the tooltip at the left of the screen when the <code>fixed</code> prop is set to true or at the left of its container otherwise.',
+  right: 'Places the tooltip at the right of the screen when the <code>fixed</code> prop is set to true or at the right of its container otherwise.',
   zIndex: 'Applies a z-index (positive or negative integer) to the tooltip.'
 }
 
