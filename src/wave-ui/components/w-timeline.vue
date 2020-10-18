@@ -26,11 +26,7 @@ export default {
     itemColorKey: { type: String, default: 'color' }
   },
 
-  emits: [],
-
-  data: () => ({
-
-  })
+  emits: []
 }
 </script>
 
