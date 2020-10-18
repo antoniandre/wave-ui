@@ -15,29 +15,27 @@ div
 import WProgress from '@/wave-ui/components/w-progress'
 
 const propsDescs = {
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
-  label: '',
-  roundCap: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Accepts a percentage value (ranging from 0 to 100) as a number or a string.<br>If the value is <code>undefined</code>, <code>-1</code> or not provided at all, it will be assumed indeterminate.',
+  label: 'Shows or hides the label of the progress containing the current progress value.',
+  roundCap: 'Applies a round line-cap to the progress.',
   color: 'Applies a foreground color to the progress. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the progress\' background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   labelColor: 'Applies a color to the progress label\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  size: '',
-
-  // Circular progress thickness.
-  circle: '',
-  stroke: '',
-
+  size: 'Sets the size of the progress element: the width if circular, or the height if linear.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
+  circle: 'Sets the progress style to circle.',
+  stroke: 'Only applies to a circular progress.<br>Sets the thickness of the circular progress.',
   // For linear progress.
-  shadow: 'Applies a drop shadow to the component.',
-  tile: 'Removes the default border-radius and sets sharp edges on the component.',
-  round: 'Sets a maximum border-radius on the corners of the component, giving it a round look.',
-  outline: 'When using the linear progress, the outline style applies the provided <code>color</code> (by default the <code>primary</code> color is used) to the progress, border and label and no background color is set.',
-  stripes: '',
-  absolute: 'Sets the CSS position of the element to <code>absolute</code>.',
-  fixed: 'Sets the CSS position of the element to <code>fixed</code>.',
+  shadow: 'Only applies to a linear progress.<br>Applies a drop shadow to the progress bar.',
+  tile: 'Only applies to a linear progress.<br>Removes the default border-radius and sets sharp edges on the progress bar.',
+  round: 'Only applies to a linear progress.<br>Sets a maximum border-radius on the corners of the progress, giving it a round look.',
+  outline: 'Only applies to a linear progress.<br>When using the linear progress, the outline style applies the provided <code>color</code> (by default the <code>primary</code> color is used) to the progress, border and label and no background color is set.',
+  stripes: 'Only applies to a linear progress.<br>Applies an animated stripes background on the progress bar.',
+  // Position.
+  absolute: 'Sets the CSS position of the progress element to <code>absolute</code>.',
+  fixed: 'Sets the CSS position of the progress element to <code>fixed</code>.',
   top: '',
   bottom: '',
-  zIndex: 'Applies a z-index (positive or negative integer) to the progress.'
+  zIndex: 'Applies a z-index (positive or negative integer) to the progress element.'
 }
 
 const slots = {

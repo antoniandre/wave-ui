@@ -19,7 +19,7 @@ const propsDescs = {
   color: 'Applies a foreground color to the slider. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a background color to the slider\'s track. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   stepLabels: '',
-  thumbLabel: '',
+  thumblabel: 'Sets a visible label for the slider.',
   thumbLabelClass: 'Applies a custom CSS class to the slider\'s thumb label.',
   trackClass: 'Applies a custom CSS class to the slider\'s track.',
   rangeClass: 'Applies a custom CSS class to the slider\'s highlighted range.',
@@ -28,11 +28,11 @@ const propsDescs = {
   step: '',
   labelLeft: '',
   labelRight: '',
-  name: '',
-  disabled: '',
-  readonly: '',
-  required: '',
-  validators: ''
+  name: 'Provide a native HTML <code>name</code> attribute to the slider. If not provided, a unique name will be computed.',
+  disabled: 'Disables the slider making it unreactive to user interactions.',
+  readonly: 'The slider will still look like an interactive slider except that it is read-only: its current value cannot be changed by user interaction.',
+  required: 'Applies the native HTML <code>required</code> attribute to the slider.',
+  validators: '<span class="deep-orange">Only for validation, when the slider is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the slider. Each function will be executed on slider validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the slider.'
 }
 
 const slots = {}

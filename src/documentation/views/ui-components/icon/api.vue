@@ -18,11 +18,11 @@ const propsDescs = {
   tag: '',
   color: 'Applies a color to the icon\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the icon\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  xs: 'Sets the size of the icon.',
-  sm: 'Sets the size of the icon.',
-  md: 'Sets the size of the icon.',
-  lg: 'Sets the size of the icon.',
-  xl: 'Sets the size of the icon.',
+  xs: 'Sets the size of the icon (font-size).',
+  sm: 'Sets the size of the icon (font-size).',
+  md: 'Sets the size of the icon (font-size).',
+  lg: 'Sets the size of the icon (font-size).',
+  xl: 'Sets the size of the icon (font-size).',
   spin: '',
   rotate45: '',
   rotate90: '',
@@ -33,7 +33,7 @@ const propsDescs = {
   rotate315: '',
   flipX: '',
   flipY: '',
-  size: ''
+  size: 'Sets the font-size of the icon.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.'
 }
 
 const slots = {
