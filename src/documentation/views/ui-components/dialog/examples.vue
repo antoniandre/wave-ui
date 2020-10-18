@@ -242,7 +242,7 @@ div
       v-model="dialog6.show"
       :width="500"
       :overlay-opacity="dialog6.overlayChoice === 'opacity' && dialog6.overlayOpacity"
-      :overlay-color="dialog6.overlayChoice !== 'opacity' && dialog6.overlayChoice")
+      :overlay-color="(dialog6.overlayChoice !== 'opacity' && dialog6.overlayChoice) || ''")
       template(#title)
         w-icon.mr2 mdi mdi-tune
         | Control panel
@@ -261,7 +261,7 @@ div
         v-model="dialog.show"
         :width="500"
         :overlay-opacity="dialog.overlayChoice === 'opacity' &amp;&amp; dialog.overlayOpacity"
-        :overlay-color="dialog.overlayChoice !== 'opacity' &amp;&amp; dialog.overlayChoice")
+        :overlay-color="(dialog.overlayChoice !== 'opacity' &amp;&amp; dialog.overlayChoice) || ''")
         template(#title="")
           w-icon.mr2 mdi mdi-tune
           | Control panel
