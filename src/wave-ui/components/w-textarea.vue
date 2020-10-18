@@ -87,8 +87,8 @@ export default {
     noAutogrow: { type: Boolean },
     resizable: { type: Boolean }, // Toggle the HTML built-in bottom right corner resize handle.
     tile: { type: Boolean },
-    rows: { type: [String, Number], default: 3 },
-    cols: { type: [String, Number] },
+    rows: { type: [Number, String], default: 3 },
+    cols: { type: [Number, String] },
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 

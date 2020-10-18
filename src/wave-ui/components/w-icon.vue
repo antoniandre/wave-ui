@@ -34,7 +34,7 @@ export default {
     'rotate--135': { type: Boolean },
     flipX: { type: Boolean },
     flipY: { type: Boolean },
-    size: { type: [String, Number], default: null },
+    size: { type: [Number, String] },
   },
 
   emits: [],

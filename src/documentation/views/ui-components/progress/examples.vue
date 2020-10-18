@@ -32,7 +32,7 @@ div
     p The value can be given as a number or a string.
     p.
       When the value is #[code undefined], #[code -1] or not provided at all, it will be assumed
-      to be indeterminate.
+      indeterminate.
     example(reactive)
       w-progress.ma1(circle :value="undefined")
       w-progress.ma1.mr8(circle :value="-1")
@@ -93,15 +93,15 @@ div
     p You can customize the label to display the value as you wish.
     example(reactive)
       p Default label &nbsp; - &nbsp; Custom label
-      w-progress.ma1.mr8(circle v-model="progress1" size="5em" round label)
-      w-progress.ma1(circle v-model="progress1" size="5em" round)
+      w-progress.ma1.mr8(circle v-model="progress1" size="5em" label)
+      w-progress.ma1(circle v-model="progress1" size="5em")
         strong {{ progress1 }}%
       template(#pug).
         p Default label - Custom label
 
-        w-progress.ma1.mr8(circle v-model="progress" size="5em" round label)
+        w-progress.ma1.mr8(circle v-model="progress" size="5em" label)
 
-        w-progress.ma1(circle v-model="progress" size="5em" round)
+        w-progress.ma1(circle v-model="progress" size="5em")
           strong {{ '\{\{ progress \}\}' }}%
       template(#js).
         data: () => ({
@@ -114,8 +114,6 @@ div
         circle
         value="38"
         size="3em"
-        outline
-        round
         label
         label-color="indigo-light4")
       template(#pug).
@@ -123,18 +121,16 @@ div
           circle
           value="38"
           size="3em"
-          outline
-          round
           label
           label-color="indigo-light4")
 
     title-link(h2) Round linecap &amp; default flat line cap
     example(reactive)
-      w-progress.ma1(circle value="38" size="6em" round round-cap)
-      w-progress.ma1(circle value="38" size="6em" round)
+      w-progress.ma1(circle value="38" size="6em" round-cap)
+      w-progress.ma1(circle value="38" size="6em")
       template(#pug).
-        w-progress.ma1(circle value="38" size="6em" round round-cap)
-        w-progress.ma1(circle value="38" size="6em" round)
+        w-progress.ma1(circle value="38" size="6em" round-cap)
+        w-progress.ma1(circle value="38" size="6em")
 
   //- Linear progress.
   //-------------------------------------------------------

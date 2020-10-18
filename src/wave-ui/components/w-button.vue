@@ -53,8 +53,8 @@ export default {
     right: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
     // Sizes.
-    width: { type: [String, Number] },
-    height: { type: [String, Number] },
+    width: { type: [Number, String] },
+    height: { type: [Number, String] },
     xs: { type: Boolean },
     sm: { type: Boolean },
     md: { type: Boolean },
