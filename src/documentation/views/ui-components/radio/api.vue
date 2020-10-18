@@ -33,17 +33,17 @@ const radios = {
   propsDescs: {
     items: '',
     value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
-    labelOnLeft: '',
-    itemLabelKey: '',
-    itemValueKey: '',
-    itemColorKey: '',
+    labelOnLeft: 'Moves the label to the left of each radio button. By default the label is displayed on the right.',
+    itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item.',
+    itemValueKey: 'The property name (aka key) in each item object where to find the value of the item.',
+    itemColorKey: 'The property name (aka key) in each item object where to find the color of the item.',
     inline: '',
     color: 'Applies a color to the active radio buttons. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-    name: '',
-    disabled: '',
-    readonly: '',
-    required: '',
-    validators: ''
+    name: 'Provide a native HTML <code>name</code> attribute to each radio button. If not provided, a unique common name will be computed and applied to all the radio buttons.',
+    disabled: 'Disables all the radio buttons making them unreactive to user interactions.',
+    readonly: 'The radio button will still look like an interactive radio button except that it is read-only: its current value cannot be changed by user interaction.',
+    required: 'Applies the native HTML <code>required</code> attribute to each radio button.',
+    validators: '<span class="deep-orange">Only for validation, when the <strong class="code">w-radios</strong> component is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the radio button. Each function will be executed on radio button validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the radio button.'
   },
   slots: {
     item: { description: 'Provide a custom content for each radio button label.' }
@@ -59,15 +59,15 @@ const radio = {
   propsDescs: {
     value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
     returnValue: '',
-    label: '',
-    labelOnLeft: '',
+    label: 'Sets a visible label for the radio button.',
+    labelOnLeft: 'Moves the label to the left of the radio button. By default the label is displayed on the right.',
     color: 'Applies a color to the radio button when active. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-    noRipple: '',
-    name: '',
-    disabled: '',
-    readonly: '',
-    required: '',
-    validators: ''
+    noRipple: 'Removes the ripple animation on select.',
+    name: 'Provide a native HTML <code>name</code> attribute to the radio button. If not provided, a unique name will be computed.',
+    disabled: 'Disables the radio button making it unreactive to user interactions.',
+    readonly: 'The radio button will still look like an interactive radio button except that it is read-only: its current value cannot be changed by user interaction.',
+    required: 'Applies the native HTML <code>required</code> attribute to the radio button.',
+    validators: '<span class="deep-orange">Only for validation, when this radio button is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the radio button. Each function will be executed on radio button validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the radio button.'
   },
   slots: {
     default: { description: 'The radio button label content.' }

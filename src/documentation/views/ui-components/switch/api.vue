@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -16,17 +15,17 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WSwitch from '@/wave-ui/components/w-switch'
 
 const propsDescs = {
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
-  label: '',
-  labelOnLeft: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Dictates the state of the switch. When the user toggles the switch, the <code>v-model</code> value will be updated.',
+  label: 'Sets a visible label for the switch.',
+  labelOnLeft: 'Moves the label to the left of the switch. By default the label is displayed on the right.',
   color: 'Applies a color to the switch. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  thin: '',
-  noRipple: '',
-  name: '',
-  disabled: '',
-  readonly: '',
-  required: '',
-  validators: ''
+  thin: 'Applies a thiner style to the switch.',
+  noRipple: 'Removes the ripple animation on activation.',
+  name: 'Provide a native HTML <code>name</code> attribute to the switch. If not provided, a unique name will be computed.',
+  disabled: 'Disables the switch making it unreactive to user interactions.',
+  readonly: 'The switch will still look like an interactive switch except that it is read-only: its current state cannot be changed by user interaction.',
+  required: 'Applies the native HTML <code>required</code> attribute to the switch.',
+  validators: '<span class="deep-orange">Only for validation, when the switch is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the switch. Each function will be executed on switch validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the switch.'
 }
 
 const slots = {
