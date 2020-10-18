@@ -106,7 +106,7 @@ div
       outline
       color="primary") Transparent overlay
     w-button.ma1(
-      @click="noOverlay = true;overlayColor = false;showTopDrawer = !showTopDrawer"
+      @click="noOverlay = true;overlayColor = '';showTopDrawer = !showTopDrawer"
       outline
       color="primary") No overlay
     template(#pug).
@@ -120,7 +120,7 @@ div
         outline
         color="primary") Transparent overlay
       w-button.ma1(
-        @click="noOverlay = true;overlayColor = false;showDrawer = !showDrawer"
+        @click="noOverlay = true;overlayColor = '';showDrawer = !showDrawer"
         outline
         color="primary") No overlay
 
@@ -137,7 +137,7 @@ div
       data: () => ({
         showDrawer: false,
         noOverlay: false,
-        overlayColor: false
+        overlayColor: ''
       })
 
   p.mt4.
@@ -304,7 +304,7 @@ export default {
     showTopDrawer: false,
     showBottomDrawer: false,
     noOverlay: false,
-    overlayColor: false,
+    overlayColor: '',
     bottomDrawerHeight: 0,
     persistent: false,
     showCookieNotice: false

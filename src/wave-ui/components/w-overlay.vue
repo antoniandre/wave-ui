@@ -2,7 +2,7 @@
 transition(name="fade" mode="out-in" appear)
   .w-overlay(
     v-if="value"
-    :style="(value && styles) || false"
+    :style="(value && styles) || null"
     @keydown.escape.stop="onClick"
     @click="onClick"
     v-focus

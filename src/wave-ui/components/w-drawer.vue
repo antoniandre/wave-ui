@@ -41,7 +41,7 @@ export default {
     color: { type: String },
     bgColor: { type: String },
     noOverlay: { type: Boolean },
-    overlayColor: { type: [String, Boolean] },
+    overlayColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] }
   },
 
