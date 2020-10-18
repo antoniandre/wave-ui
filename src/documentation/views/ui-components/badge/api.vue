@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The props will soon be more detailed.
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -25,8 +24,8 @@ const propsDescs = {
   left: 'Places the badge at the left of its activator, either at the top or bottom (top by default).',
   right: 'Places the badge at the right of its activator, either at the top or bottom (top by default).',
   bottom: 'Places the badge at the bottom of its activator, either on the left or right (right by default).',
-  overlap: '',
-  inline: '',
+  overlap: 'Overlaps the activator element narrowing the distance between the activator and the badge.',
+  inline: 'Displays the badge inline, in a <code>static</code> position instead of <code>absolute</code> by default.',
   color: 'Applies a color to the badge\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the badge\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   size: 'Sets the font-size of the badge.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',

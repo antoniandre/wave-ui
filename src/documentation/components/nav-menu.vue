@@ -79,7 +79,7 @@ export default {
       { label: 'Spinner', route: '/w-spinner' },
       { label: 'Tabs', route: '/w-tabs' },
       { label: 'Tag', route: '/w-tag' },
-      { label: 'Timeline', route: '/w-timeline', inProgress: true },
+      { label: 'Timeline', route: '/w-timeline' },
       { label: 'Toolbar', route: '/w-toolbar' },
       { label: 'Tooltip', route: '/w-tooltip' },
       {
