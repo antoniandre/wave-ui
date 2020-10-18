@@ -18,7 +18,7 @@ export default {
   props: {
     value: {},
     opacity: { type: [Number, String, Boolean] },
-    bgColor: { type: [String, Boolean] },
+    bgColor: { type: String },
     zIndex: { type: [Number, String, Boolean] },
     persistent: { type: Boolean },
     persistentNoAnimation: { type: Boolean }

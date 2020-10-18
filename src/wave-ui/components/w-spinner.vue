@@ -14,7 +14,7 @@ export default {
     md: { type: Boolean },
     lg: { type: Boolean },
     xl: { type: Boolean },
-    size: { type: [String, Number], default: null },
+    size: { type: [Number, String] },
     bounce: { type: Boolean },
     fade: { type: Boolean }
   },
@@ -39,7 +39,7 @@ export default {
       )
     },
     styles () {
-      return this.forcedSize && `font-size: ${this.forcedSize}`
+      return (this.forcedSize && `font-size: ${this.forcedSize}`) || null
     },
     classes () {
       return {

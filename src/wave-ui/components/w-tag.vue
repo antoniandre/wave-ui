@@ -37,8 +37,8 @@ export default {
     md: { type: Boolean },
     lg: { type: Boolean },
     xl: { type: Boolean },
-    width: { type: [String, Number] },
-    height: { type: [String, Number] }
+    width: { type: [Number, String] },
+    height: { type: [Number, String] }
   },
 
   emits: ['input', 'update:modelValue'],
