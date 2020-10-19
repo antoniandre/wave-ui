@@ -79,7 +79,7 @@ div
       w-timeline(:items="items" color="primary")
     template(#js).
       data: () => ({
-        items3: [
+        items: [
           { title: 'Item 1', content: 'Content 1', icon: 'wi-check-circle' },
           { title: 'Item 2', content: 'Content 2', icon: 'wi-cross-circle' },
           { title: 'Item 3', content: 'Content 3', icon: 'wi-warning-circle' },
@@ -118,7 +118,7 @@ div
         w-icon.pink mdi mdi-heart
     template(#pug).
       w-timeline(:items="items")
-        template(#item.3)
+        template(#item.3="")
           .pink My favorite item: 3
           w-icon.pink mdi mdi-heart
     template(#js).
