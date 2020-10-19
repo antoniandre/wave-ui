@@ -8,10 +8,7 @@
     persistent-no-animation
     :bg-color="overlayColor"
     :opacity="overlayOpacity")
-  transition(
-    :name="transitionName"
-    appear
-    @after-leave="close")
+  transition(:name="transitionName" appear @after-leave="close")
     .w-drawer__content(v-if="showDrawer" :class="contentClasses" :style="styles")
       slot
 </template>
@@ -41,6 +38,7 @@ export default {
     color: { type: String },
     bgColor: { type: String },
     noOverlay: { type: Boolean },
+    absolute: { type: Boolean },
     overlayColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] }
   },
@@ -61,22 +59,16 @@ export default {
       let size = this.width || this.height
       // If a number is passed without units, append `px`.
       if (size && parseInt(size) == size) size += 'px'
-      return (this.left || this.right || this.top || this.bottom) && size || false
+      return size || false
     },
     // Return `width` or `height`, `width` by default (position right by default).
     sizeProperty () {
-      return (
-        ((this.left || this.right) && 'width') ||
-        ((this.top || this.bottom) && 'height') ||
-        'width'
-      )
+      return (['left', 'right'].includes(this.position) && 'width') || 'height'
     },
     position () {
       return (
-        (this.left && 'left') ||
-        (this.right && 'right') ||
-        (this.top && 'top') ||
-        (this.bottom && 'bottom') ||
+        (this.left && 'left') || (this.right && 'right') ||
+        (this.top && 'top') || (this.bottom && 'bottom') ||
         'right'
       )
     },
@@ -84,6 +76,7 @@ export default {
       return {
         'w-drawer--open': !!this.showDrawer,
         [`w-drawer--${this.position}`]: true,
+        'w-drawer--absolute': this.absolute,
         'w-drawer--fit-content': this.fitContent,
         'w-drawer--persistent': this.persistent,
         'w-drawer--persistent-animate': this.persistentAnimate
@@ -108,7 +101,7 @@ export default {
 
   methods: {
     close () {
-      this.showDrawer = false
+      this.showWrapper = false
       this.$emit('update:modelValue', false)
       this.$emit('input', false)
       this.$emit('close', false)
@@ -140,10 +133,19 @@ export default {
   position: fixed;
   z-index: 500;
 
-  .w-overlay {z-index: 0;}
+  &--absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+  }
+
+  .w-overlay {z-index: 0;position: inherit;}
 
   &__content {
-    position: fixed;
+    position: inherit;
     display: flex;
     z-index: 1;
     background: #fff;
