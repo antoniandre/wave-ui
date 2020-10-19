@@ -3,7 +3,7 @@ div
   .w-divider.my12
   //- w-checkboxes.
   title-link.title1(h2 slug="w-checkboxes-api") &lt;w-checkboxes&gt; API
-  alert.mb6(info) The props will soon be more detailed.
+  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="checkboxesProps" :descriptions="checkboxes.propsDescs" title="Props")
 

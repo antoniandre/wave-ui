@@ -4,7 +4,7 @@ div
 
   //- w-radios.
   title-link.title1(h2 slug="w-radios-api") &lt;w-radios&gt; API
-  alert.mb6(info) The props will soon be more detailed.
+  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="radiosProps" :descriptions="radios.propsDescs" title="Props")
 
