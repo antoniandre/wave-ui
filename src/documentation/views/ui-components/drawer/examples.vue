@@ -60,6 +60,24 @@ div
         }
       }
 
+  title-link(h3) Absolute position
+  example(content-class="relative")
+    w-button(
+      @click="showAbsoluteDrawer = !showAbsoluteDrawer"
+      outline
+      color="primary") Show drawer
+    w-drawer(v-model="showAbsoluteDrawer" absolute width="160px")
+    template(#pug).
+      w-button(
+        @click="showDrawer = !showDrawer"
+        outline
+        color="primary") Show drawer
+      w-drawer(v-model="showDrawer" absolute width="160px")
+    template(#js).
+      data: () => ({
+        showDrawer: false
+      })
+
   title-link(h2) Control width or height
   p.
     The #[span.code w-drawer] component accepts a #[span.code width] or #[span.code height] parameter
@@ -303,6 +321,7 @@ export default {
     showRightDrawer: false,
     showTopDrawer: false,
     showBottomDrawer: false,
+    showAbsoluteDrawer: false,
     noOverlay: false,
     overlayColor: '',
     bottomDrawerHeight: 0,
@@ -311,3 +330,7 @@ export default {
   })
 }
 </script>
+
+<style lang="scss">
+.example .relative {position: relative;}
+</style>
