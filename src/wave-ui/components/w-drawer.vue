@@ -1,16 +1,33 @@
 <template lang="pug">
-.w-drawer(v-if="showWrapper" :class="classes")
-  w-overlay(
-    v-if="!noOverlay"
-    v-model="showDrawer"
-    @click="onOutsideClick"
-    :persistent="persistent"
-    persistent-no-animation
-    :bg-color="overlayColor"
-    :opacity="overlayOpacity")
-  transition(:name="transitionName" appear @after-leave="close")
-    .w-drawer__content(v-if="showDrawer" :class="contentClasses" :style="styles")
-      slot
+.w-drawer-wrap(v-if="showWrapper || pushContent" :class="wrapperClasses")
+  //- Pushing content.
+  .w-drawer-wrap__track(v-if="pushContent" :style="trackStyles")
+    .w-drawer-wrap__pushable
+      w-overlay(
+        v-if="!noOverlay"
+        v-model="showDrawer"
+        @click="onOutsideClick"
+        :persistent="persistent"
+        persistent-no-animation
+        :bg-color="overlayColor"
+        :opacity="overlayOpacity")
+      slot(name="pushable")
+    transition(name="fade")
+      .w-drawer(v-if="!unmountDrawer" :class="drawerClasses" :style="styles")
+        slot
+  //- Other cases.
+  template(v-else)
+    w-overlay(
+      v-if="!noOverlay"
+      v-model="showDrawer"
+      @click="onOutsideClick"
+      :persistent="persistent"
+      persistent-no-animation
+      :bg-color="overlayColor"
+      :opacity="overlayOpacity")
+    transition(:name="transitionName" appear @after-leave="close")
+      .w-drawer(v-if="showDrawer" :class="drawerClasses" :style="styles")
+        slot
 </template>
 
 <script>
@@ -38,6 +55,7 @@ export default {
     color: { type: String },
     bgColor: { type: String },
     noOverlay: { type: Boolean },
+    pushContent: { type: Boolean },
     absolute: { type: Boolean },
     overlayColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] }
@@ -72,20 +90,29 @@ export default {
         'right'
       )
     },
-    classes () {
+    wrapperClasses () {
       return {
-        'w-drawer--open': !!this.showDrawer,
-        [`w-drawer--${this.position}`]: true,
-        'w-drawer--absolute': this.absolute,
-        'w-drawer--fit-content': this.fitContent,
-        'w-drawer--persistent': this.persistent,
-        'w-drawer--persistent-animate': this.persistentAnimate
+        'w-drawer-wrap--fixed': !this.absolute && !this.pushContent,
+        'w-drawer-wrap--absolute': this.absolute,
+        'w-drawer-wrap--push-content': this.pushContent
       }
     },
-    contentClasses () {
+    drawerClasses () {
       return {
         [this.color]: this.color,
-        [`${this.bgColor}--bg`]: this.bgColor
+        [`${this.bgColor}--bg`]: this.bgColor,
+        'w-drawer--open': !!this.showDrawer,
+        [`w-drawer--${this.position}`]: true,
+        'w-drawer--fit-content': this.fitContent,
+        'w-drawer--persistent': this.persistent,
+        'w-drawer--persistent-animate': this.persistent && this.persistentAnimate
+      }
+    },
+    // The track is a wrapper around the pushable content and drawer.
+    // It moves inside the overflow hidden outer wrap.
+    trackStyles () {
+      return this.pushContent && this.showDrawer && {
+        transform: `translateX(${this.position === 'left' ? '' : '-'}${this.size})`
       }
     },
     styles () {
@@ -93,6 +120,11 @@ export default {
         [`max-${this.sizeProperty}`]: this.size || null,
         zIndex: this.zIndex || this.zIndex === 0 || null
       }
+    },
+    // In case of pushing content, the showWrapper variable doesn't reflect the behavior:
+    // unmount the drawer (remove from DOM) is what it does when showWrapper is false.
+    unmountDrawer () {
+      return !this.showWrapper
     },
     transitionName () {
       return `slide-${oppositeSides[this.position]}`
@@ -107,8 +139,13 @@ export default {
       this.$emit('close', false)
     },
     onOutsideClick () {
-      if (!this.persistent) this.showDrawer = false // The close method is called on animation end.
-      if (this.persistent && !this.persistentNoAnimation) {
+      if (!this.persistent) {
+        // The close method is called on animation end, except with pushContent
+        // (not using the same transition).
+        this.showDrawer = false
+        if (this.pushContent) this.close()
+      }
+      else if (!this.persistentNoAnimation) {
         this.persistentAnimate = true
         setTimeout(() => (this.persistentAnimate = false), 200) // Must match CSS animation duration.
       }
@@ -121,7 +158,7 @@ export default {
       // If value is false, keep the wrapper in DOM and close the drawer;
       // At the end of the drawer transition the value is updated and wrapper
       // removed from the DOM.
-      if (value) this.showWrapper = value
+      if (value) this.showWrapper = true
       this.showDrawer = value
     }
   }
@@ -129,9 +166,11 @@ export default {
 </script>
 
 <style lang="scss">
-.w-drawer {
-  position: fixed;
-  z-index: 500;
+.w-drawer-wrap {
+  &--fixed {
+    position: fixed;
+    z-index: 500;
+  }
 
   &--absolute {
     position: absolute;
@@ -140,38 +179,69 @@ export default {
     bottom: 0;
     right: 0;
     overflow: hidden;
+
+    .w-overlay {z-index: 1;position: absolute;}
   }
 
-  .w-overlay {z-index: 0;position: inherit;}
+  .w-overlay {position: inherit;}
 
-  &__content {
-    position: inherit;
-    display: flex;
-    z-index: 1;
-    background: #fff;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+  &--push-content {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
 
-    .w-drawer--left &, .w-drawer--right & {
+    .w-overlay {
+      position: absolute;
       top: 0;
       bottom: 0;
-      width: 100%;
-      max-width: $drawer-max-size;
-    }
-    .w-drawer--top &, .w-drawer--bottom & {
       left: 0;
       right: 0;
-      height: 100%;
-      max-height: $drawer-max-size;
+      z-index: 2;
     }
-    .w-drawer--fit-content & {width: auto;height: auto;}
-
-    .w-drawer--left & {left: 0;}
-    .w-drawer--right & {right: 0;}
-    .w-drawer--top & {top: 0;}
-    .w-drawer--bottom & {bottom: 0;}
-
-    .w-drawer--persistent-animate & {animation: 0.2s w-drawer-pop cubic-bezier(0.6, -0.28, 0.74, 0.05);}
+    .w-drawer {position: absolute;}
+    .w-drawer--left {right: 100%;left: auto !important;}
+    .w-drawer--right {left: 100%;}
   }
+
+  &__track {
+    display: flex;
+    height: 100%;
+    @include default-transition;
+  }
+
+  &__pushable {
+    position: relative;
+    flex-grow: 1;
+  }
+}
+
+.w-drawer {
+  position: inherit;
+  display: flex;
+  z-index: 1;
+  background: #fff;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+
+  &--left, &--right {
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: $drawer-max-size;
+  }
+  &--top, &--bottom {
+    left: 0;
+    right: 0;
+    height: 100%;
+    max-height: $drawer-max-size;
+  }
+  &--fit-content {width: auto;height: auto;}
+
+  &--left {left: 0;}
+  &--right {right: 0;}
+  &--top {top: 0;}
+  &--bottom {bottom: 0;}
+
+  &--persistent-animate {animation: 0.2s w-drawer-pop cubic-bezier(0.6, -0.28, 0.74, 0.05);}
 }
 
 @keyframes w-drawer-pop {
