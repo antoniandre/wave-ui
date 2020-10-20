@@ -162,7 +162,7 @@ div.lists-demo
         :items="listItems1"
         color="deep-purple"
         :multiple="multiple"
-        @item-click="itemClicked = $event")
+        @itemClick="itemClicked = $event")
       div(v-if="itemClicked")
         .title3 clicked item (#[span.code item-click] event):
         br
