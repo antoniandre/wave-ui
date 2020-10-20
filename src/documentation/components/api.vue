@@ -2,16 +2,24 @@
 .api(v-if="sortedItems.length")
   title-link.title2.api__title(h3) {{ title }}
   ul(v-if="sortedItems.length")
-    li.api__item(v-for="item in sortedItems" :key="item.label")
-      title-link(h4 :slug="item.label") {{ item.label }}
-      template(v-if="title === 'Props'")
-        span.types.teal="[{{ item.type.join(', ') }}]"
-        | ,
-        w-tag.text-upper.ml2(v-if="item.required" sm outline color="red") Required
-        span.grey.ml2(v-else)
-          | Default:
-          strong.default-value.code.deep-orange-light1.ml2 {{ item.default }}
-      p(v-html="item.description")
+    template(v-for="item in sortedItems" :key="item.label")
+      li.api__item(v-if="!item.hide")
+        title-link(h4 :slug="item.label") {{ item.label }}
+        template(v-if="title === 'Props'")
+          span.types.teal="[{{ item.type.join(', ') }}]"
+          | ,
+          w-tag.text-upper.ml2(v-if="item.required" sm outline color="red") Required
+          span.grey.ml2(v-else)
+            | Default:
+            strong.default-value.code.deep-orange-light1.ml2 {{ item.default }}
+        p(v-html="item.description")
+        .mt2(v-if="item.params")
+          w-icon.teal.ml-1 wi-chevron-right
+          span.teal Params
+          ul.mt1.ml7
+            li(v-for="(desc, label) in item.params" :key="label")
+              strong.code {{ label }}:
+              span.ml2(v-html="desc")
   div.grey(v-else) None
 </template>
 
@@ -48,6 +56,7 @@ export default {
         return {
           label: key.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase(), // Convert camelCase to kebab-case.
           ...item,
+          hide: item.description === false || this.descriptions[key] === false,
           description: item.description || this.descriptions[key] || ''
         }
       })
@@ -60,10 +69,9 @@ export default {
 .api {
   margin-top: 5em;
 
-  ul {list-style-type: none;}
-
   &__item {
-    margin-top: 1.4em;
+    margin-top: 1.6em;
+    list-style-type: none;
 
     .title-link {
       font: bold 1.3rem monospace;
@@ -71,10 +79,12 @@ export default {
       display: inline-block;
       margin-right: 6px;
     }
+
+    .hash {padding-top: 0.3em;}
     .types {font-size: 1.1em;}
     .default-value {font-size: 1.1em;}
     .w-tag {padding-top: 2px;}
-    p {margin-top: 0.4em;}
+    p {margin-top: 0.3em;}
   }
 }
 </style>
