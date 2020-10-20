@@ -27,7 +27,7 @@ export default {
   name: 'w-dialog',
 
   props: {
-    modelValue: { type: Boolean, default: true },
+    modelValue: { default: true },
     width: { type: Number, default: 0 },
     fullscreen: { type: Boolean },
     persistent: { type: Boolean },
@@ -37,7 +37,7 @@ export default {
     transition: { type: String, default: 'fade' }, // @todo: validator.
     titleClass: { type: String },
     contentClass: { type: String },
-    overlayColor: { type: [String, Boolean] },
+    overlayColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] }
   },
 

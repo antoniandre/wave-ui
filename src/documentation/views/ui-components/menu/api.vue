@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The props will soon be more detailed.
+  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -15,12 +15,12 @@ div
 import WMenu from '@/wave-ui/components/w-menu'
 
 const propsDescs = {
-  value: 'This prop controls the visibility of the menu. Any truthy value will show the menu whereas any falsy value will hide it.',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the menu. Any truthy value will show the menu whereas any falsy value will hide it.',
   showOnHover: '',
   hideOnMenuClick: '',
   color: 'Applies a color to the menu\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the menu\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  shadow: 'Applies a drop shadow to the menu.',
+  shadow: 'Applies a drop shadow to the menu element.',
   custom: 'By default, the menu layout is a <span class="code">w-card</span>. To have more flexibility, you can set this option to true.',
   tile: 'Removes the default border-radius and sets sharp edges on the menu.',
   round: 'Sets a maximum border-radius on the corners of the menu, giving it a round look.',
@@ -30,11 +30,11 @@ const propsDescs = {
   titleClass: 'Applies a custom CSS class to the menu\'s title when using the default card layout (when not using the <code>custom</code> prop).',
   contentClass: 'Applies a custom CSS class to the menu\'s content when using the default card layout (when not using the <code>custom</code> prop).',
   detachTo: '',
-  fixed: '',
-  top: '',
-  bottom: '',
-  left: '',
-  right: '',
+  fixed: 'Sets the CSS position of the menu to <code>fixed</code> (absolute by default).',
+  top: 'Places the menu at the top of the screen when the <code>fixed</code> prop is set to true or at the top of its container otherwise.',
+  bottom: 'Places the menu at the bottom of the screen when the <code>fixed</code> prop is set to true or at the bottom of its container otherwise.',
+  left: 'Places the menu at the left of the screen when the <code>fixed</code> prop is set to true or at the left of its container otherwise.',
+  right: 'Places the menu at the right of the screen when the <code>fixed</code> prop is set to true or at the right of its container otherwise.',
   alignTop: '',
   alignBottom: '',
   alignLeft: '',
@@ -53,8 +53,8 @@ const slots = {
 }
 
 const eventsDescs = {
-  input: 'Emitted each time the state of the component changes. It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  'update:modelValue': 'Emitted each time the state of the component changes (when an item is expanded or collapsed). It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
+  input: 'Emitted each time the state of the component changes (when opening or closing the menu). It updates the v-model value in Vue 2.x only.',
+  'update:modelValue': 'Emitted each time the state of the component changes (when opening or closing the menu). It updates the v-model value in Vue 3 only.',
   close: 'Emitted on menu close.',
   open: 'Emitted on menu open.'
 }

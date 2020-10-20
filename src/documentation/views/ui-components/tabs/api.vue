@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The props will soon be more detailed.
+  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -15,20 +15,20 @@ div
 import WTabs from '@/wave-ui/components/w-tabs'
 
 const propsDescs = {
-  value: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
   color: 'Applies a color to the each tab title\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the each tab title\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   items: '',
   titleClass: 'Applies a custom CSS class to the tab title.',
   activeClass: 'Applies a custom CSS class to the active tab title.',
-  noSlider: '',
+  noSlider: 'When set to true, removes the slider underneath the active tab title.',
   sliderColor: 'Provide a custom color for the tabs slider (<code>primary</code> by default).<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   contentClass: 'Applies a custom CSS class to the tab content.',
   transition: 'Applies a particular transition to the tab contents when switching tab.<br>Check all the transitions that apply to this component in the <a href="#content-transitions">Content transitions</a> example.',
-  fillBar: '',
-  center: '',
-  right: '',
-  card: ''
+  fillBar: 'When set to true, the tabs titles will occupy the full available width.',
+  center: 'Centers the tabs titles.',
+  right: 'Aligns the tabs titles to the right.',
+  card: 'Applies the card style on all the tabs titles.'
 }
 
 const slots = {

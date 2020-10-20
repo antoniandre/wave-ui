@@ -3,7 +3,7 @@ div
   .w-divider.my12
   //- w-checkboxes.
   title-link.title1(h2 slug="w-checkboxes-api") &lt;w-checkboxes&gt; API
-  alert.mb6(info) The props will soon be more detailed.
+  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="checkboxesProps" :descriptions="checkboxes.propsDescs" title="Props")
 
@@ -30,19 +30,19 @@ import WCheckbox from '@/wave-ui/components/w-checkbox'
 const checkboxes = {
   propsDescs: {
     items: '',
-    value: '',
-    labelOnLeft: '',
-    itemLabel: '',
-    itemValue: '',
-    itemColor: '',
-    inline: '',
-    round: 'Sets a maximum border-radius on the corners of the component, giving it a round look.',
-    color: 'Applies a color to the active checkboxes. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-    name: '',
-    disabled: '',
-    readonly: '',
-    required: '',
-    validators: ''
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
+    labelOnLeft: 'Moves the label to the left of each checkbox.',
+    itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item.',
+    itemValueKey: 'The property name (aka key) in each item object where to find the value of the item.',
+    itemColorKey: 'The property name (aka key) in each item object where to find the color of the item.',
+    inline: 'Displays all the checkboxes inline instead of in column.',
+    round: 'Displays round checkboxes instead of square ones.',
+    color: 'Applies a color to the active checkbox. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+    name: 'Provide a native HTML <code>name</code> attribute to the checkbox. If not provided, a unique common name will be computed and applied to all the checkboxes.',
+    disabled: 'Disables all the checkboxes making them unreactive to user interactions.',
+    readonly: 'The checkbox will still look like an interactive checkbox except that it is read-only: its current value cannot be changed by user interaction.',
+    required: 'Applies the native HTML <code>required</code> attribute to each checkbox.',
+    validators: '<span class="deep-orange">Only for validation, when the <strong class="code">w-checkboxes</strong> component is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the checkbox. Each function will be executed on checkbox validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the checkbox.'
   },
   slots: {
     item: { description: 'Provide a custom content for each checkbox label.' }
@@ -56,19 +56,19 @@ const checkboxes = {
 
 const checkbox = {
   propsDescs: {
-    value: '',
-    returnValue: '',
-    label: '',
-    labelOnLeft: '',
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
+    returnvalue: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
+    label: 'Sets a visible label for the checkbox.',
+    labelOnLeft: 'Moves the label to the left of the checkbox. By default the label is displayed on the right.',
     color: 'Applies a color to the checkbox when active. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-    noRipple: '',
-    indeterminate: '',
-    round: 'Sets a maximum border-radius on the corners of the component, giving it a round look.',
-    name: '',
-    disabled: '',
-    readonly: '',
-    required: '',
-    validators: ''
+    noRipple: 'Removes the ripple animation on check.',
+    indeterminate: 'Applies an indeterminate state on the checkbox. E.g. when it represents the selected state of a collection of elements where some are checked and some not.',
+    round: 'Displays a round checkbox instead of a square one.',
+    name: 'Provide a native HTML <code>name</code> attribute to the checkbox. If not provided, a unique name will be computed.',
+    disabled: 'Disables the checkbox making it unreactive to user interactions.',
+    readonly: 'The checkbox will still look like an interactive checkbox except that it is read-only: its current value cannot be changed by user interaction.',
+    required: 'Applies the native HTML <code>required</code> attribute to the checkbox.',
+    validators: '<span class="deep-orange">Only for validation, when the checkbox is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the checkbox. Each function will be executed on checkbox validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the checkbox.'
   },
   slots: {
     default: { description: 'The checkbox label content.' }

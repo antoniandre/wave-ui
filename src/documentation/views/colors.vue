@@ -9,13 +9,16 @@ div
 
   p.
     All the components that accept colors, will accept the #[code color]
-    prop for the text color, and #[code bg-color] for the background.
+    prop for the text color, and #[code bg-color] for the background when applicable.
 
   p.
     This way, it is possible to mix a background color with a different
     text color of your choice.
 
   title-link(h2) Status colors
+  alert(warning).
+    The four status colors are considered dark and will therefore have a white text by default when used as a background color.
+    You can override this via CSS.
   .w-flex.wrap.mb12.ma-2.text-center.basis-zero
     .color.success--bg.title3.grow.py3.ma2 success
     .color.error--bg.title3.grow.py3.ma2 error
@@ -71,6 +74,10 @@ div
     .color.primary-dark2--bg.title3.grow.basis-zero.py3.white.body primary-dark2
     .color.primary-dark3--bg.title3.grow.basis-zero.py3.white.body primary-dark3
 
+  alert(warning).
+    The primary color is considered dark by default, and will render,
+    as well as its 3 darker shades, with a white text when used as a background.
+
   p.mt6.title3 To start defining your own colors add them to the WaveUI options:
   ssh-pre(language="js").
     const waveui = new WaveUI({
@@ -79,10 +86,6 @@ div
         secondary: '#5d9a26'
       }
     })
-
-  p.
-    Also note that the primary color is considered as dark by default, and will render,
-    as well as its 3 darker shades, with a white text when used as a background.
 
   alert(tip).
     If you don't need it, you can add #[code disableColorShades: true] to the Wave UI options to disable

@@ -35,10 +35,10 @@ div
         accordion: []
       })
 
-  title-link(h2) Open by default
+  title-link(h2) Expanded by default
   p.
-    You can open one or multiple panes by default by providing a v-model array of booleans:
-    #[span.code true] to open, #[span.code false] to close.
+    You can expand one or multiple panes by default by providing a v-model array of booleans:
+    #[span.code true] to expand, #[span.code false] to collapse the item.
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(v-model="accordion2" :items="items")
     div.mt3
@@ -70,7 +70,7 @@ div
 
   title-link(h2) Disabled pane
   p.
-    Specify which pane should be disabled - open or closed - by adding the #[span.code disabled] property
+    Specify which pane should be disabled - expanded or collapsed - by adding the #[span.code disabled] property
     directly in the object.
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(v-model="accordion3" :items="itemsDisabled")
@@ -79,9 +79,9 @@ div
     template(#js).
       data: () => ({
         items: [
-          { title: 'Item 1 - disabled closed', content: 'Disabled', disabled: true },
-          { title: 'Item 2 - disabled open', content: 'You can\'t close this pane.', disabled: true },
-          { title: 'Item 3 - fully enabled', content: 'You can toggle this pane to open and close.' }
+          { title: 'Item 1 - disabled collapsed', content: 'Disabled', disabled: true },
+          { title: 'Item 2 - disabled expanded', content: 'You can\'t collapse this pane.', disabled: true },
+          { title: 'Item 3 - fully enabled', content: 'You can toggle this pane to expand and collapse.' }
         ],
         accordion: [false, true, true]
       })
@@ -431,9 +431,9 @@ export default {
       }
     ],
     itemsDisabled: [
-      { title: 'Item 1 - disabled closed', content: 'Disabled', disabled: true },
-      { title: 'Item 2 - disabled open', content: 'You can\'t close this pane.', disabled: true },
-      { title: 'Item 3 - fully enabled', content: 'You can toggle this pane to open and close.' }
+      { title: 'Item 1 - disabled collapsed', content: 'Disabled', disabled: true },
+      { title: 'Item 2 - disabled expanded', content: 'You can\'t collapse this pane.', disabled: true },
+      { title: 'Item 3 - fully enabled', content: 'You can toggle this pane to expand and collapse.' }
     ],
     itemsCustom: [
       { id: 'item1' },

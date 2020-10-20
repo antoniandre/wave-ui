@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The props will soon be more detailed.
+  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -15,11 +15,11 @@ div
 import WSlider from '@/wave-ui/components/w-slider'
 
 const propsDescs = {
-  value: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
   color: 'Applies a foreground color to the slider. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a background color to the slider\'s track. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   stepLabels: '',
-  thumbLabel: '',
+  thumblabel: 'Sets a visible label for the slider.',
   thumbLabelClass: 'Applies a custom CSS class to the slider\'s thumb label.',
   trackClass: 'Applies a custom CSS class to the slider\'s track.',
   rangeClass: 'Applies a custom CSS class to the slider\'s highlighted range.',
@@ -28,19 +28,19 @@ const propsDescs = {
   step: '',
   labelLeft: '',
   labelRight: '',
-  name: '',
-  disabled: '',
-  readonly: '',
-  required: '',
-  validators: ''
+  name: 'Provide a native HTML <code>name</code> attribute to the slider. If not provided, a unique name will be computed.',
+  disabled: 'Disables the slider making it unreactive to user interactions.',
+  readonly: 'The slider will still look like an interactive slider except that it is read-only: its current value cannot be changed by user interaction.',
+  required: 'Applies the native HTML <code>required</code> attribute to the slider.',
+  validators: '<span class="deep-orange">Only for validation, when the slider is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the slider. Each function will be executed on slider validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the slider.'
 }
 
 const slots = {}
 
 const eventsDescs = {
-  input: 'Emitted each time the state of the component changes. It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  'update:modelValue': 'Emitted each time the state of the component changes (when an item is expanded or collapsed). It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  focus: 'Emitted on each item title focus. The focused item is returned as a parameter.'
+  input: 'Emitted each time the slider range changes. It updates the v-model value in Vue 2.x only.<br>The current value of the slider is passed as a parameter.',
+  'update:modelValue': 'Emitted each time the slider range changes. It updates the v-model value in Vue 3 only.<br>The current value of the slider is passed as a parameter.',
+  focus: 'Emitted when the slider is focused (the thumb button). The native focus event is returned as a parameter.'
 }
 
 export default {

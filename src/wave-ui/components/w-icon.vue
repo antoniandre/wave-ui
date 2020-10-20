@@ -29,12 +29,12 @@ export default {
     rotate90: { type: Boolean },
     rotate135: { type: Boolean },
     rotate180: { type: Boolean },
-    rotate225: { type: Boolean },
-    rotate270: { type: Boolean },
-    rotate315: { type: Boolean },
+    'rotate--45': { type: Boolean },
+    'rotate--90': { type: Boolean },
+    'rotate--135': { type: Boolean },
     flipX: { type: Boolean },
     flipY: { type: Boolean },
-    size: { type: [String, Number], default: null },
+    size: { type: [Number, String] },
   },
 
   emits: [],
@@ -74,9 +74,9 @@ export default {
         'w-icon--rotate90': this.rotate90,
         'w-icon--rotate135': this.rotate135,
         'w-icon--rotate180': this.rotate180,
-        'w-icon--rotate225': this.rotate225,
-        'w-icon--rotate270': this.rotate270,
-        'w-icon--rotate315': this.rotate315,
+        'w-icon--rotate-45': this['rotate-45'],
+        'w-icon--rotate-90': this['rotate-90'],
+        'w-icon--rotate-135': this['rotate-135'],
         'w-icon--flip-x': this.flipX,
         'w-icon--flip-y': this.flipY,
         [this.ligature && this.ligature.fontName]: this.ligature
@@ -132,9 +132,9 @@ export default {
   &--rotate90:before {transform: rotate(90deg);}
   &--rotate135:before {transform: rotate(135deg);}
   &--rotate180:before {transform: rotate(180deg);}
-  &--rotate225:before {transform: rotate(225deg);}
-  &--rotate270:before {transform: rotate(270deg);}
-  &--rotate315:before {transform: rotate(315deg);}
+  &--rotate-45:before {transform: rotate(-45deg);}
+  &--rotate-90:before {transform: rotate(-90deg);}
+  &--rotate-135:before {transform: rotate(-135deg);}
   &--flip-x:before {transform: scaleX(-1);}
   &--flip-y:before {transform: scaleY(-1);}
 }

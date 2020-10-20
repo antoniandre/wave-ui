@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The props will soon be more detailed.
+  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -15,14 +15,14 @@ div
 import WNotification from '@/wave-ui/components/w-notification'
 
 const propsDescs = {
-  value: 'This prop controls the visibility of the notification. Any truthy value will show the notification whereas any falsy value will hide it.',
-  transition: 'Applies a particular transition to this component when showing and hiding.<br>Check all the transitions that apply to this component in the <a href="#transitions">Transitions</a> example.',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the notification. Any truthy value will show the notification whereas any falsy value will hide it.',
+  transition: 'Applies a particular transition to the notification when showing and hiding.<br>Check all the transitions that apply to the notification in the <a href="#transitions">Transitions</a> example.',
   timeout: '',
-  absolute: '',
-  top: '',
-  bottom: '',
-  left: '',
-  right: '',
+  absolute: 'Sets the CSS position of the notification to <code>absolute</code> (fixed by default).',
+  top: 'Places the notification at the top of the screen or at the top of its container if the <code>absolute</code> prop is set to true.',
+  bottom: 'Places the notification at the bottom of the screen or at the bottom of its container if the <code>absolute</code> prop is set to true.',
+  left: 'Places the notification at the left of the screen or at the left of its container if the <code>absolute</code> prop is set to true.',
+  right: 'Places the notification at the right of the screen or at the right of its container if the <code>absolute</code> prop is set to true.',
   zIndex: 'Applies a z-index (positive or negative integer) to the notification.',
   success: '',
   info: '',
@@ -39,7 +39,7 @@ const propsDescs = {
   borderRight: '',
   borderTop: '',
   borderBottom: '',
-  outline: '',
+  outline: 'The outline style applies the provided <code>color</code> (by default the color is inherited) to the text and border and no background color is set.',
   dismiss: '',
   xs: 'Sets the size of the notification.',
   sm: 'Sets the size of the notification.',

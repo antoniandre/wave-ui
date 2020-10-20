@@ -111,12 +111,12 @@ div.lists-demo
   example
     w-list(:items="5" hover)
       template(#item="{ index }")
-        | Item {{ index + 1 }}
+        | Item {{ index }}
       template(#item.3)
         strong This is the great item #3
     template(#html).
       &lt;w-list :items="5" hover&gt;
-        &lt;template #item="{ index }"&gt;{{ '\{\{ index + 1 \}\}' }}&lt;/template&gt;
+        &lt;template #item="{ index }"&gt;{{ '\{\{ index \}\}' }}&lt;/template&gt;
         &lt;template #item.3&gt;
           &lt;strong&gt;This is the great item #3&lt;/strong&gt;
         &lt;/template&gt;
@@ -240,7 +240,7 @@ div.lists-demo
         .title3.mb4 Custom rendering, default styles
         w-list(
           :items="listItems2"
-          item-value="id"
+          item-value-key="id"
           checklist
           color="primary")
           template(#item="{ item }")
@@ -251,7 +251,7 @@ div.lists-demo
         .title3.mb4 Custom rendering &amp; styles
         w-list.custom(
           :items="listItems2"
-          item-value="id"
+          item-value-key="id"
           checklist
           color="primary")
           template(#item="{ item }")
@@ -286,7 +286,7 @@ div.lists-demo
           &lt;p class="title3 mb4"&gt;Custom rendering, default styles&lt;/p&gt;
           &lt;w-list
             :items="listItems2"
-            item-value="id"
+            item-value-key="id"
             checklist
             color="primary"&gt;
             &lt;template #item="{ item }"&gt;
@@ -300,7 +300,7 @@ div.lists-demo
           &lt;p class="title3 mb4"&gt;Custom rendering &amp; styles&lt;/p&gt;
           &lt;w-list
             :items="listItems2"
-            item-value="id"
+            item-value-key="id"
             checklist
             color="primary"
             class="custom"&gt;

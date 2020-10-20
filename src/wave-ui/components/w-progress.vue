@@ -52,9 +52,9 @@ export default {
     label: { type: Boolean },
     roundCap: { type: Boolean },
     color: { type: String, default: 'primary' },
-    bgColor: { type: String, default: '' },
-    labelColor: { type: String, default: '' },
-    size: { type: [Number, String], default: '' },
+    bgColor: { type: String },
+    labelColor: { type: String },
+    size: { type: [Number, String] },
 
     // Circular progress thickness.
     circle: { type: Boolean },
@@ -90,6 +90,10 @@ export default {
       return circleSize + this.stroke
     },
 
+    forcedSize () {
+      return this.size && (!isNaN(this.size) ? `${this.size}px` : this.size)
+    },
+
     // If linear, with position fixed or absolute.
     position () {
       return (this.top && 'top') || (this.bottom && 'bottom') || 'top'
@@ -116,7 +120,7 @@ export default {
 
     styles () {
       return {
-        [this.circle ? 'width' : 'height']: this.size || false
+        [this.circle ? 'width' : 'height']: this.forcedSize || null
       }
     }
   }

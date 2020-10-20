@@ -189,7 +189,7 @@ w-app.home
       .w-flex.wrap.text-center.mb10
         .feature.xs6.sm3
           svg.blob(viewBox="6 0 194 194" preserveAspectRatio="none")
-            path(fill="rgb(255, 255, 255, 0.15)" d="M 57 -32 C 70 -10 74 18 63 35 C 52 51 26 58 1 57 C -24 56 -48 49 -58 33 C -67 17 -62 -8 -50 -29 C -38 -51 -19 -69 1 -70 C 22 -70 44 -54 57 -32 Z" transform="translate(100 100)")
+            path(fill="rgba(255, 255, 255, 0.15)" d="M 57 -32 C 70 -10 74 18 63 35 C 52 51 26 58 1 57 C -24 56 -48 49 -58 33 C -67 17 -62 -8 -50 -29 C -38 -51 -19 -69 1 -70 C 22 -70 44 -54 57 -32 Z" transform="translate(100 100)")
           svg.icon(viewBox="0 0 432.4 432.4")
             path(d="M217 93a111 111 0 00-74 195c18 18 16 55 16 56 0 2 0 3 2 5l4 2h102l5-2 2-5c0-1-2-38 16-56l1-1a111 111 0 00-74-194zm64 185l-2 1c-15 17-18 45-18 58h-89c0-13-3-42-20-59a97 97 0 11129 0z")
             path(d="M216 122c-3 0-7 3-7 6 0 4 4 7 7 7 41 0 73 33 73 73 0 4 3 7 7 7 3 0 7-3 7-7 0-48-39-86-87-86zM261 358h-89c-9 0-17 8-17 17s8 17 17 17h88a17 17 0 000-34zm0 20h-89c-2 0-3-1-3-3s1-3 3-3h88c2 0 3 1 3 3s-1 3-2 3zM247 399h-62c-9 0-17 7-17 17s8 16 17 16h62c10 0 17-7 17-16 0-10-7-17-17-17zm0 19h-62c-2 0-3-1-3-3s1-3 3-3h62c2 0 4 1 4 3s-2 3-4 3zM216 60c4 0 7-3 7-7V7c0-4-3-7-7-7-3 0-7 3-7 7v46c0 4 4 7 7 7zM329 34c-3-2-7-1-9 2l-25 38c-3 4-2 8 1 10l4 1c2 0 4-1 5-3l26-38c2-3 2-8-2-10zM135 84l4-2c3-2 4-6 2-9l-25-39c-2-3-7-4-10-2s-4 6-2 10l25 38c2 3 4 4 6 4zM87 126l-41-22c-3-2-7 0-9 3s-1 7 3 9l40 22 3 1c3 0 5-1 6-4 2-3 1-7-2-9zM396 107c-2-3-6-5-9-3l-41 22c-3 2-5 6-3 9 1 3 4 4 6 4l3-1 41-22c3-2 4-6 3-9z")
@@ -227,6 +227,10 @@ w-app.home
 <script>
 import { gsap, TimelineMax, Power1, Power4, TweenMax } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+// For Edge. https://github.com/greensock/GSAP/issues/412#issuecomment-679841254
+window.requestAnimationFrame = window.requestAnimationFrame.bind(window)
+
 gsap.registerPlugin(TimelineMax, TweenMax, Power4, Power1, ScrollTrigger)
 
 let componentsCount = { curr: 0, total: 40 }
@@ -264,7 +268,9 @@ export default {
       required: value => !!value || 'This field is required',
       alphabetical: value => /^[a-z \-']+$/i.test(value) || 'This field only accepts letters.',
       consent: value => !!value || 'You must agree'
-    }
+    },
+    // Gsap callback function when the count is done. Keep a ref to that to cancel on destroy.
+    onCountComplete: null
   }),
 
   computed: {
@@ -321,6 +327,19 @@ export default {
       })
 
       // Components count.
+      this.onCountComplete = () => {
+        // When the home page is destroyed, this complete callback may still get called.
+        if (!this.onCountComplete) return
+
+        gsap.set('.extra-anim', { y: 35, opacity: 0 })
+        ScrollTrigger.batch('.extra-anim', {
+          start: 'top 88%',
+          onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, stagger: { each: 0.25 }, overwrite: true }),
+          onLeave: batch => gsap.to(batch, { opacity: 0, y: 35, duration: 0.6, stagger: { each: 0.25 }, overwrite: true }),
+          onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, stagger: { each: 0.25 }, overwrite: true }),
+          onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 35, duration: 0.6, stagger: { each: 0.25 }, overwrite: true })
+        })
+      }
       TweenMax.to(componentsCount, 3, {
         curr: componentsCount.total,
         ease: Power1.easeOut,
@@ -328,16 +347,7 @@ export default {
           this.count.count = Math.round(componentsCount.curr)
           this.count.alpha = this.count.count / componentsCount.total
         },
-        onComplete: () => {
-          gsap.set('.extra-anim', { y: 35, opacity: 0 })
-          ScrollTrigger.batch('.extra-anim', {
-            start: 'top 88%',
-            onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, stagger: { each: 0.25 }, overwrite: true }),
-            onLeave: batch => gsap.to(batch, { opacity: 0, y: 35, duration: 0.6, stagger: { each: 0.25 }, overwrite: true }),
-            onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, stagger: { each: 0.25 }, overwrite: true }),
-            onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 35, duration: 0.6, stagger: { each: 0.25 }, overwrite: true })
-          })
-        }
+        onComplete: this.onCountComplete
       })
 
       // Mobiles.
@@ -420,6 +430,11 @@ export default {
       this.form6.sent = false
       this.form6.submitted = this.form6.errorsCount === 0
     }
+  },
+
+  beforeUnmount () {
+    this.onCountComplete = null
+    gsap.killTweensOf('*')
   }
 }
 </script>

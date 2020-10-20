@@ -51,8 +51,9 @@ div
 
   h3 Dark
   p.
-    By default the #[span.code primary] color is considered as dark as well as the four status colors:
-    #[span.code success], #[span.code error], #[span.code warning] &amp; #[span.code info].
+    By default the #[code primary] color is considered dark as well as the four status colors:
+    #[code success], #[code error], #[code warning] &amp; #[code info].
+    They will therefore have a white text by default when used as a background color.#[br]
     For the rest you can use the #[code dark] prop.
   example
     w-button.ma1(bg-color="primary-light3") normal
