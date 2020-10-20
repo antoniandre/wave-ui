@@ -299,13 +299,13 @@ div
     whether you use a multiple or single select list.
   example
     w-select(:items="items3" v-model="customSelection" multiple)
-      template(#selection="{ items }")
-        w-tag.mr2(v-for="(item, i) in items" :key="i" bg-color="grey-light4")
+      template(#selection="{ item }")
+        w-tag.mr2(v-for="(item, i) in item" :key="i" bg-color="grey-light4")
           | {{ item.label }}
     template(#pug).
       w-select(:items="items" v-model="selection" multiple)
-        template(#selection="{ items }")
-          w-tag.mr2(v-for="(item, i) in items" :key="i" bg-color="grey-light4")
+        template(#selection="{ item }")
+          w-tag.mr2(v-for="(item, i) in item" :key="i" bg-color="grey-light4")
             | {{ '\{\{ item.label \}\}' }}
     template(#js).
       data: () => ({
