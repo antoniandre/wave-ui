@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-tooltip-wrapper(ref="wrapper" :class="{ 'w-tooltip-wrapper--attached': !detachTo }")
+.w-tooltip-wrap(ref="wrapper" :class="{ 'w-tooltip-wrap--attached': !detachTo }")
   slot(name="activator" :on="eventHandlers")
   transition(:name="transitionName")
     .w-tooltip(ref="tooltip" v-show="showTooltip" :class="classes" :style="styles")
@@ -288,7 +288,7 @@ export default {
 </script>
 
 <style lang="scss">
-.w-tooltip-wrapper {
+.w-tooltip-wrap {
   display: none;
 
   &--attached {display: inline-block;position: relative;}

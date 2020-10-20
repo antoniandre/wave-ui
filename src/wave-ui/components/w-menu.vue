@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-menu-wrapper(ref="wrapper")
+.w-menu-wrap(ref="wrapper")
   slot(name="activator" :on="eventHandlers")
   transition(:name="transitionName")
     .w-menu(v-if="custom" ref="menu" v-show="showMenu" :class="classes" :style="styles")
@@ -393,7 +393,7 @@ export default {
 </script>
 
 <style lang="scss">
-.w-menu-wrapper {display: none;}
+.w-menu-wrap {display: none;}
 
 .w-menu {
   position: absolute;

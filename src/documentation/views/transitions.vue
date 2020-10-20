@@ -331,7 +331,7 @@ div
     It works well for full screen elements or elements that are in a hidden-overflow container like
     in this example.
   example
-    .wrapper(style="height: 80px;overflow: hidden")
+    div(style="height: 80px;overflow: hidden")
       w-button.mb2(@click="showCard = !showCard") {{ showCard ? 'Hide' : 'Show' }} Card
       w-transition-slide(left)
         w-card.primary-light3--bg.white(v-if="showCard")
