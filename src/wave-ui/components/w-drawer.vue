@@ -167,10 +167,7 @@ export default {
 
 <style lang="scss">
 .w-drawer-wrap {
-  &--fixed {
-    position: fixed;
-    z-index: 500;
-  }
+  &--fixed {position: fixed;z-index: 500;}
 
   &--absolute {
     position: absolute;
@@ -179,11 +176,9 @@ export default {
     bottom: 0;
     right: 0;
     overflow: hidden;
-
-    .w-overlay {z-index: 1;position: absolute;}
   }
 
-  .w-overlay {position: inherit;}
+  .w-overlay {z-index: 1;position: inherit;}
 
   &--push-content {
     position: relative;
@@ -246,6 +241,6 @@ export default {
 
 @keyframes w-drawer-pop {
   0%, 100% {transform: scale(1);}
-  50% {transform: scale(1.06);}
+  50% {transform: scale(1.05);}
 }
 </style>

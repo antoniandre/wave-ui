@@ -8,6 +8,13 @@ div
   ul.history
     //- li Added the #[code hide-error] option on all the form elements.
     li.minor
+      strong.version v1.7.0
+      ul
+        li Added a #[code push-content] prop to the #[strong.code w-drawer] component.
+        li Added an #[code absolute] prop to the #[strong.code w-drawer] component.
+        li Renamed the #[code content-class] prop of the #[strong.code w-drawer] component to #[code drawer-class].
+        li Consistently renamed the wrapper elements of the #[strong.code w-badge], #[strong.code w-drawer], #[strong.code w-menu], #[strong.code w-slider] and #[strong.code w-tooltip] components to #[code="w-[component]-wrap"].
+    li.minor
       strong.version v1.6.0
       ul
         li Added a #[code no-border] prop on the #[strong.code w-tag] component.

@@ -61,14 +61,19 @@ div
       }
 
   title-link(h3) Absolute position
+  p.
+    The #[span.code w-drawer] component can be placed in a deeper structure than the root of
+    the site.#[br]
+    When using the #[code absolute] position, don't forget to put an #[code overflow: hidden]
+    on the parent to prevent a scrollbar to appear.
   example(content-class="relative")
-    w-button(
+    w-button.my12(
       @click="showAbsoluteDrawer = !showAbsoluteDrawer"
       outline
       color="primary") Show drawer
     w-drawer(v-model="showAbsoluteDrawer" absolute width="160px")
     template(#pug).
-      w-button(
+      w-button.my12(
         @click="showDrawer = !showDrawer"
         outline
         color="primary") Show drawer
@@ -107,6 +112,63 @@ div
           absolute
           color="primary"
           icon="wi-cross")
+    template(#js).
+      data: () => ({
+        showDrawer: false
+      })
+
+  title-link(h2) Push content
+  p.
+    The #[code push-content] prop can be used on #[code left] and #[code right] positions.
+    It will allow the drawer to push the content either on the left or right when it's open.#[br]
+    To use the push-content layout, an explicit drawer #[code width] is required (don't only set a
+    width via CSS). Any valid CSS width will work.#[br]
+    The pushable content should be provided via the #[code pushable] slot.
+  example(content-class="relative pa0")
+    w-drawer(v-model="showPushContentRightDrawer" push-content :overlay-opacity="0.15" width="160px")
+      template(#pushable)
+        .py12.w-flex.column.align-center.justify-center
+          p Pushable content
+          w-button(
+            @click="showPushContentRightDrawer = !showPushContentRightDrawer"
+            outline
+            color="primary") Show drawer
+      .ma2 Drawer content
+    template(#pug).
+      w-drawer(v-model="showDrawer" push-content :overlay-opacity="0.15" width="160px")
+        template(#pushable="")
+          .py12.w-flex.column.align-center.justify-center
+            p Pushable content
+            w-button(
+              @click="showDrawer = !showDrawer"
+              outline
+              color="primary") Show drawer
+        .ma2 Drawer content
+    template(#js).
+      data: () => ({
+        showDrawer: false
+      })
+
+  example(content-class="relative pa0")
+    w-drawer(v-model="showPushContentLeftDrawer" push-content :overlay-opacity="0.15" left width="160px")
+      template(#pushable)
+        .py12.w-flex.column.align-center.justify-center
+          p Pushable content
+          w-button(
+            @click="showPushContentLeftDrawer = !showPushContentLeftDrawer"
+            outline
+            color="primary") Show drawer
+      .ma2 Drawer content
+    template(#pug).
+      w-drawer(v-model="showDrawer" push-content :overlay-opacity="0.15" left width="160px")
+        template(#pushable="")
+          .py12.w-flex.column.align-center.justify-center
+            p Pushable content
+            w-button(
+              @click="showDrawer = !showDrawer"
+              outline
+              color="primary") Show drawer
+        .ma2 Drawer content
     template(#js).
       data: () => ({
         showDrawer: false
@@ -322,6 +384,8 @@ export default {
     showTopDrawer: false,
     showBottomDrawer: false,
     showAbsoluteDrawer: false,
+    showPushContentLeftDrawer: false,
+    showPushContentRightDrawer: false,
     noOverlay: false,
     overlayColor: '',
     bottomDrawerHeight: 0,
