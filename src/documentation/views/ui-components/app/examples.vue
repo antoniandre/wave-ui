@@ -86,7 +86,7 @@ div
 
 <style lang="scss">
 .common-layouts {
-  .w-badge {flex-grow: 1;min-width: 240px;}
+  .w-badge-wrap {flex-grow: 1;min-width: 240px;}
   fieldset, section {
     border: 1px solid rgba(0, 0, 0, 0.05);
     padding: 0.8em;
