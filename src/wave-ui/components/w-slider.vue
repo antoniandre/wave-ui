@@ -13,7 +13,7 @@ component(
     v-else-if="labelLeft"
     :for="`button--${_uid}`"
     v-html="labelLeft")
-  .w-slider__track-wrapper
+  .w-slider__track-wrap
     .w-slider__track(
       ref="track"
       @mousedown="onTrackMouseDown"
@@ -298,7 +298,7 @@ export default {
 
   // Track.
   // ------------------------------------------------------
-  &__track-wrapper {
+  &__track-wrap {
     position: relative;
     flex-grow: 1;
   }
