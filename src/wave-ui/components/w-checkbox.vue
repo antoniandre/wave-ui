@@ -15,7 +15,7 @@ component(
     :required="required || null"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
-    @input="onInput"
+    @change="onInput() /* Edge doesn't fire input on checkbox/radio/select change */"
     @keypress.enter="onInput"
     :aria-checked="isChecked || 'false'"
     role="checkbox")

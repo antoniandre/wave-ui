@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-tooltip-wrapper(ref="wrapper" :class="{ 'w-tooltip-wrapper--attached': !detachTo }")
+.w-tooltip-wrap(ref="wrapper" :class="{ 'w-tooltip-wrap--attached': !detachTo }")
   slot(name="activator" :on="eventHandlers")
   transition(:name="transitionName")
     //- In Vue 3, a ref in a transition doesn't stay in $refs, it must be set as a function.
@@ -36,14 +36,14 @@ export default {
   props: {
     modelValue: {},
     showOnClick: { type: Boolean },
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
-    noBorder: { type: String, default: '' },
+    color: { type: String },
+    bgColor: { type: String },
+    noBorder: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
     round: { type: Boolean },
     transition: { type: String, default: '' },
-    tooltipClass: { type: String, default: '' },
+    tooltipClass: { type: String },
     // Position.
     detachTo: {},
     fixed: { type: Boolean },
@@ -294,7 +294,7 @@ export default {
 </script>
 
 <style lang="scss">
-.w-tooltip-wrapper {
+.w-tooltip-wrap {
   display: none;
 
   &--attached {display: inline-block;position: relative;}

@@ -2,7 +2,7 @@
 transition(name="fade" mode="out-in" appear)
   .w-overlay(
     v-if="modelValue"
-    :style="(modelValue && styles) || false"
+    :style="(modelValue && styles) || null"
     @keydown.escape.stop="onClick"
     @click="onClick"
     v-focus
@@ -18,7 +18,7 @@ export default {
   props: {
     modelValue: {},
     opacity: { type: [Number, String, Boolean] },
-    bgColor: { type: [String, Boolean] },
+    bgColor: { type: String },
     zIndex: { type: [Number, String, Boolean] },
     persistent: { type: Boolean },
     persistentNoAnimation: { type: Boolean }

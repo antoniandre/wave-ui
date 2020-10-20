@@ -63,6 +63,7 @@ export default {
       // { label: 'Breadcrumbs', route: '/w-breadcrumbs', disabled: true },
       { label: 'Button', route: '/w-button' },
       { label: 'Card', route: '/w-card' },
+      // { label: 'Date picker', route: '/w-date-picker', disabled: true },
       { label: 'Dialog', route: '/w-dialog' },
       { label: 'Divider', route: '/w-divider' },
       { label: 'Drawer', route: '/w-drawer' },
@@ -78,6 +79,7 @@ export default {
       { label: 'Spinner', route: '/w-spinner' },
       { label: 'Tabs', route: '/w-tabs' },
       { label: 'Tag', route: '/w-tag' },
+      { label: 'Timeline', route: '/w-timeline' },
       { label: 'Toolbar', route: '/w-toolbar' },
       { label: 'Tooltip', route: '/w-tooltip' },
       {

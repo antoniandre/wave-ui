@@ -90,7 +90,7 @@ component(
       role="listbox"
       tabindex="-1")
       template(#item="{ item, selected, index }")
-        slot(name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabel] }}
+        slot(name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabelKey] }}
 
   template(v-if="labelPosition === 'right'")
     label.w-select__label.w-select__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_.uid}`")
@@ -120,8 +120,8 @@ export default {
     innerIconRight: { type: String, default: 'wi-triangle-down' },
     // When label is inside, allows to move the label above on focus or when filled.
     staticLabel: { type: Boolean },
-    itemLabel: { type: String, default: 'label' }, // Name of the label field.
-    itemValue: { type: String, default: 'value' }, // Name of the value field.
+    itemLabelKey: { type: String, default: 'label' }, // Name of the label field.
+    itemValueKey: { type: String, default: 'value' }, // Name of the value field.
     itemClass: { type: String },
     menuClass: { type: String },
     color: { type: String, default: 'primary' }, // Applies to all the items.
@@ -160,7 +160,7 @@ export default {
 
         // If no value is set on the item, add one from its label, or from its index. the result is
         // store in the value attribute for easy use in the w-list component (which tries the same logic).
-        obj.value = obj[this.itemValue] === undefined ? obj[this.itemLabel] || i : obj[this.itemValue]
+        obj.value = obj[this.itemValueKey] === undefined ? obj[this.itemLabelKey] || i : obj[this.itemValueKey]
         obj.index = i
         return obj
       })
@@ -176,7 +176,7 @@ export default {
     },
     selectionString () {
       return this.inputValue && this.inputValue.map(
-        item => item[this.itemValue] !== undefined ? item[this.itemLabel] : (item[this.itemLabel] !== undefined ? item[this.itemLabel] : item)
+        item => item[this.itemValueKey] !== undefined ? item[this.itemLabelKey] : (item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item)
       ).join(', ')
     },
     classes () {
@@ -255,7 +255,7 @@ export default {
       return items.map(item => {
         let value = item
         if (typeof item === 'object') {
-          value = item[this.itemValue] !== undefined ? item[this.itemValue] : (item[this.itemLabel] !== undefined ? item[this.itemLabel] : item)
+          value = item[this.itemValueKey] !== undefined ? item[this.itemValueKey] : (item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item)
         }
 
         return this.selectItems[allValues.indexOf(value)]
@@ -339,17 +339,17 @@ export default {
       content: '';
       position: absolute;
       bottom: -1px;
-      left: 50%;
-      width: 0;
+      left: 0;
+      width: 100%;
       height: 0;
       border-bottom: 2px solid currentColor;
       transition: $transition-duration;
-      transform: translateX(-50%);
+      transform: scaleX(0);
       pointer-events: none;
     }
 
     .w-select--focused &--underline:after,
-    .w-select--open &--underline:after {width: 100%;}
+    .w-select--open &--underline:after {transform: scaleX(1);}
     &--round.w-select__selection-wrap--underline:after {
       border-radius: 9em;
       transition: $transition-duration, height 0.035s;

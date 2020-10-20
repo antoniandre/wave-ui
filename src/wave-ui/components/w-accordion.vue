@@ -3,39 +3,48 @@
   .w-accordion__item(
     v-for="(item, i) in accordionItems"
     :key="i"
-    :class="{ ...itemClasses, 'w-accordion__item--expanded': item.open, 'w-accordion__item--disabled': item.disabled, [item[itemColor]]: item[itemColor] }")
+    :class="{ ...itemClasses, 'w-accordion__item--expanded': item._expanded, 'w-accordion__item--disabled': item._disabled, [item[itemColorKey]]: item[itemColorKey] }"
+    :aria-expanded="item._expanded ? 'true' : 'false'")
     .w-accordion__item-title(
-      @click="!item.disabled && toggleItem(item)"
+      @click="!item._disabled && toggleItem(item)"
       @focus="$emit('focus', item)"
-      :tabindex="!item.disabled && 0"
-      @keypress.enter="!item.disabled && toggleItem(item)"
+      :tabindex="!item._disabled && 0"
+      @keypress.enter="!item._disabled && toggleItem(item)"
       :class="titleClass")
       //- Expand icon on left.
       w-button.w-accordion__expand-icon(
         v-if="expandIcon && !expandIconRight"
-        :icon="(item.open && collapseIcon) || expandIcon"
-        :disabled="item.disabled || null"
+        :icon="(item._expanded && collapseIcon) || expandIcon"
+        :disabled="item._disabled || null"
         :tabindex="-1"
         text
         @keypress.stop
-        @click.stop="!item.disabled && toggleItem(item)")
+        @click.stop="!item._disabled && toggleItem(item)")
       //- Title.
-      slot(v-if="$slots[`item-title.${item.id || i + 1}`]" :name="`item-title.${item.id || i + 1}`" :item="item")
-      slot(v-else name="item-title" :item="item")
-        div.grow(v-html="item[itemTitle]")
+      slot(
+        v-if="$slots[`item-title.${item.id || i + 1}`]"
+        :name="`item-title.${item.id || i + 1}`"
+        :item="cleanItem(item)"
+        :expanded="item._expanded" :index="i + 1")
+      slot(v-else name="item-title" :item="cleanItem(item)" :expanded="item._expanded" :index="i + 1")
+        div.grow(v-html="item[itemTitleKey]")
       //- Expand icon on right.
       w-button.w-accordion__expand-icon(
         v-if="expandIcon && expandIconRight"
-        :icon="(item.open && collapseIcon) || expandIcon"
+        :icon="(item._expanded && collapseIcon) || expandIcon"
         text
         @keypress.stop
-        @click.stop="!item.disabled && toggleItem(item)")
+        @click.stop="!item._disabled && toggleItem(item)")
     //- Content.
     w-transition-expand(y)
-      .w-accordion__item-content(v-if="item.open" :class="contentClass")
-        slot(v-if="$slots[`item-content.${item.id || i + 1}`]" :name="`item-content.${item.id || i + 1}`" :item="item")
-        slot(v-else name="item-content" :item="item")
-          div(v-html="item[itemContent]")
+      .w-accordion__item-content(v-if="item._expanded" :class="contentClass")
+        slot(
+          v-if="$slots[`item-content.${item.id || i + 1}`]"
+          :name="`item-content.${item.id || i + 1}`"
+          :item="cleanItem(item)"
+          :expanded="item._expanded" :index="i + 1")
+        slot(v-else name="item-content" :item="cleanItem(item)" :expanded="item._expanded" :index="i + 1")
+          div(v-html="item[itemContentKey]")
 </template>
 
 <script>
@@ -46,12 +55,12 @@ export default {
 
   props: {
     modelValue: { type: Array },
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
+    color: { type: String },
+    bgColor: { type: String },
     items: { type: [Array, Number], required: true },
-    itemColor: { type: String, default: 'color' }, // Support a different color per item.
-    itemTitle: { type: String, default: 'title' },
-    itemContent: { type: String, default: 'content' },
+    itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
+    itemTitleKey: { type: String, default: 'title' },
+    itemContentKey: { type: String, default: 'content' },
     itemClass: { type: String },
     titleClass: { type: String },
     contentClass: { type: String },
@@ -67,11 +76,11 @@ export default {
   computed: {
     accordionItems () {
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
-      return items.map((item, index) => reactive({
+      return items.map((item, _index) => reactive({
         ...item,
-        index,
-        open: this.modelValue && this.modelValue[index],
-        disabled: !!item.disabled
+        _index,
+        _expanded: this.modelValue && this.modelValue[_index],
+        _disabled: !!item.disabled
       }))
     },
 
@@ -95,18 +104,23 @@ export default {
 
   methods: {
     toggleItem (item) {
-      item.open = !item.open
-      if (this.expandSingle) this.accordionItems.forEach(obj => obj.index !== item.index && (obj.open = false))
-      const openItems = this.accordionItems.map(item => item.open)
-      this.$emit('update:modelValue', openItems)
-      this.$emit('input', openItems)
+      item._expanded = !item._expanded
+      if (this.expandSingle) this.accordionItems.forEach(obj => obj._index !== item._index && (obj._expanded = false))
+      const expandedItems = this.accordionItems.map(item => item._expanded || false)
+      this.$emit('update:modelValue', expandedItems)
+      this.$emit('input', expandedItems)
+    },
+    cleanItem (item) {
+      // eslint-disable-next-line no-unused-vars
+      const { _index, _expanded, _disabled, ...Item } = item
+      return Item
     }
   },
 
   watch: {
     modelValue (array) {
       this.accordionItems.forEach((item, i) => {
-        item.open = (Array.isArray(array) && array[i]) || false
+        item.expanded = (Array.isArray(array) && array[i]) || false
       })
     }
   }

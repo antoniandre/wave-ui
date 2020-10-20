@@ -36,9 +36,9 @@ export default {
     items: { type: Array, required: true }, // All the possible options.
     modelValue: { type: Array }, // v-model on selected option.
     labelOnLeft: { type: Boolean },
-    itemLabel: { type: String, default: 'label' },
-    itemValue: { type: String, default: 'value' },
-    itemColor: { type: String, default: 'color' }, // Support a different color per item.
+    itemLabelKey: { type: String, default: 'label' },
+    itemValueKey: { type: String, default: 'value' },
+    itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
     round: { type: Boolean },
     color: { type: String, default: 'primary' }
@@ -57,14 +57,14 @@ export default {
   computed: {
     checkboxItems () {
       return (this.items || []).map((item, i) => {
-        const itemValue = item[this.itemValue] === undefined ? (item[this.itemLabel] || i) : item[this.itemValue]
+        const itemValue = item[this.itemValueKey] === undefined ? (item[this.itemLabelKey] || i) : item[this.itemValueKey]
 
         return reactive({
           ...item,
-          label: item[this.itemLabel],
+          label: item[this.itemLabelKey],
           index: i,
           value: itemValue, // If no value is set then add one to prevent error.
-          color: item[this.itemColor] || this.color,
+          color: item[this.itemColorKey] || this.color,
           isChecked: this.modelValue && this.modelValue.includes(itemValue)
         })
       })

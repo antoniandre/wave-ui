@@ -2,7 +2,7 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The props will soon be more detailed.
+  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -16,29 +16,29 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import Wtextarea from '@/wave-ui/components/w-textarea'
 
 const propsDescs = {
-  value: '',
-  label: '',
-  labelPosition: '',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
+  label: 'Sets a visible label for the textarea.',
+  labelPosition: 'Sets the position of the label to one of the following positions: \'left\', \'right\', \'inside\'.',
   innerIconLeft: '',
   innerIconRight: '',
   // When label is inside, allows to move the label above on focus or when filled.
   staticLabel: '',
-  placeholder: '',
+  placeholder: 'Provide a placeholder for the textarea. If a label is positioned inside, it will be moved above the textarea so it doesn\'t overlap.',
   color: 'Applies a color to the textarea\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the textarea\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  dark: '',
-  outline: '',
+  dark: false, // Hide the prop. 'When set to true, the text color will be set to white.',
+  outline: 'The outline style applies the provided <code>color</code> (by default the <code>primary</code> color is used) to the text and border and no background color is set.',
   shadow: 'Applies a drop shadow to the textarea.',
-  noAutogrow: '',
-  resizable: '',
+  noAutogrow: 'Disables the ability to fit the textarea height to the content.<br>The height will not be smaller than the number of rows set via the <code>rows</code> prop.',
+  resizable: 'Allows native resizing of the textarea\'s height.',
   tile: 'Removes the default border-radius and sets sharp edges on the textarea.',
-  rows: '',
-  cols: '',
-  name: '',
-  disabled: '',
-  readonly: '',
-  required: '',
-  validators: ''
+  rows: 'The default and minimum number of rows to display in the textarea.',
+  cols: 'Applies the native HTML <code>cols</code> attribute to the textarea.',
+  name: 'Provide a native HTML <code>name</code> attribute to the textarea. If not provided, a unique name will be computed.',
+  disabled: 'Disables the textarea making it unreactive to user interactions.',
+  readonly: 'The textarea will still look like an interactive textarea except that it is read-only: its current content cannot be changed by user interaction.',
+  required: 'Applies the native HTML <code>required</code> attribute to the textarea.',
+  validators: '<span class="deep-orange">Only for validation, when the textarea is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the textarea. Each function will be executed on textarea validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the textarea.'
 }
 
 const slots = {

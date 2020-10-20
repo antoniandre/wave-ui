@@ -8,8 +8,8 @@ export default {
   name: 'w-toolbar',
 
   props: {
-    color: { type: String, default: '' },
-    bgColor: { type: String, default: '' },
+    color: { type: String },
+    bgColor: { type: String },
     absolute: { type: Boolean },
     fixed: { type: Boolean },
     bottom: { type: Boolean },

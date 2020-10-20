@@ -86,11 +86,11 @@ export default {
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
-    minlength: { type: [String, Number] },
-    maxlength: { type: [String, Number] },
-    step: { type: [String, Number] },
-    min: { type: [String, Number] },
-    max: { type: [String, Number] },
+    minlength: { type: [Number, String] },
+    maxlength: { type: [Number, String] },
+    step: { type: [Number, String] },
+    min: { type: [Number, String] },
+    max: { type: [Number, String] },
     dark: { type: Boolean },
     outline: { type: Boolean },
     round: { type: Boolean },
@@ -225,16 +225,16 @@ $inactive-color: #777;
       content: '';
       position: absolute;
       bottom: -1px;
-      left: 50%;
-      width: 0;
+      left: 0;
+      width: 100%;
       height: 0;
       border-bottom: 2px solid currentColor;
       transition: $transition-duration;
-      transform: translateX(-50%);
+      transform: scaleX(0);
       pointer-events: none;
     }
 
-    .w-input--focused &--underline:after {width: 100%;}
+    .w-input--focused &--underline:after {transform: scaleX(1);}
     &--round.w-input__input-wrap--underline:after {
       border-radius: 9em;
       transition: $transition-duration, height 0.035s;

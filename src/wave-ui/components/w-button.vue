@@ -53,8 +53,8 @@ export default {
     right: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
     // Sizes.
-    width: { type: [String, Number] },
-    height: { type: [String, Number] },
+    width: { type: [Number, String] },
+    height: { type: [Number, String] },
     xs: { type: Boolean },
     sm: { type: Boolean },
     md: { type: Boolean },
@@ -89,7 +89,7 @@ export default {
     classes () {
       return {
         // If no color / bg color is set, set a primary color by default.
-        'primary--bg': !this.bgColor && !this.color && !(this.outline || this.text) && !this.dark,
+        'primary--bg': !this.bgColor && !this.color && !this.dark && !(this.outline || this.text),
         'primary': !this.bgColor && !this.color && !this.dark && (this.outline || this.text),
 
         [this.color]: this.color,

@@ -9,6 +9,8 @@ export default {
   props: {
   },
 
+  emits: [],
+
   computed: {
     classes () {
       return {

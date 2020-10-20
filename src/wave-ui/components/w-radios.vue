@@ -34,9 +34,9 @@ export default {
     items: { type: Array, required: true }, // All the possible options.
     modelValue: { type: [String, Number, Boolean] }, // v-model on selected option.
     labelOnLeft: { type: Boolean },
-    itemLabel: { type: String, default: 'label' },
-    itemValue: { type: String, default: 'value' },
-    itemColor: { type: String, default: 'color' }, // Support a different color per item.
+    itemLabelKey: { type: String, default: 'label' },
+    itemValueKey: { type: String, default: 'value' },
+    itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
     color: { type: String, default: 'primary' }
     // Also name, disabled, readonly, required and validators in the mixin.
@@ -58,10 +58,10 @@ export default {
     radioItems () {
       return (this.items || []).map((item, i) => ({
         ...item,
-        label: item[this.itemLabel],
+        label: item[this.itemLabelKey],
         // If no value is set then add one to prevent error.
-        value: item[this.itemValue] === undefined ? (item[this.itemLabel] || i) : item[this.itemValue],
-        color: item[this.itemColor] || this.color
+        value: item[this.itemValueKey] === undefined ? (item[this.itemLabelKey] || i) : item[this.itemValueKey],
+        color: item[this.itemColorKey] || this.color
       }))
     },
     classes () {
