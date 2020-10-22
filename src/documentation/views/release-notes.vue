@@ -8,6 +8,9 @@ div
   ul.history
     //- li Added the #[code hide-error] option on all the form elements.
     li.minor
+      strong.version v1.8.0
+      p Add a #[strong.code w-rating] component.
+    li.minor
       strong.version v1.7.0
       ul
         li Added a #[code push-content] prop to the #[strong.code w-drawer] component.
