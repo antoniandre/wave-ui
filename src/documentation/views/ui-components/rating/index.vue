@@ -1,6 +1,8 @@
 <template lang="pug">
 div
-  ui-component-title w-rating
+  ui-component-title(slug="w-rating")
+    .code w-rating
+    w-tag.ml2.text-upper(color="orange" outline) In progress
   examples
   api
 </template>
