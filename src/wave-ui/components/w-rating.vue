@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-rating(:class="classes" :style="styles")
+.w-rating(:class="classes")
   input(type="hidden" :value="rating")
   w-button.w-rating__button(
     v-for="i in max"
@@ -10,7 +10,7 @@
     @mouseenter="hover = i"
     @mouseleave="hover = 0"
     @click="onButtonClick(i)"
-    :color="hover >= i ? color : bgColor"
+    :color="hover >= i || (hover === 0 && rating >= i) ? color : bgColor"
     text)
   slot
 </template>
@@ -36,7 +36,7 @@ export default {
 
   data () {
     return {
-      rating: this.value,
+      rating: parseInt(this.value),
       hover: 0
     }
   },
@@ -54,15 +54,12 @@ export default {
     classes () {
       return {
       }
-    },
-    styles () {
-      return false
     }
   },
 
   methods: {
     onButtonClick (i) {
-      this.rating = i + 1
+      this.rating = i
       this.$emit('input', this.rating)
     }
   }
@@ -78,6 +75,17 @@ export default {
     margin-left: -$base-increment;
 
     &:hover {transform: scale(1.1);}
+
+    // Sizes.
+    &.size--xs {margin-left: round(-0.5 * $base-increment);}
+    &.size--lg {margin-left: round(-0.5 * $base-increment);}
+    &.size--xl {margin-left: 0;}
+    &.size--xs .w-icon {font-size: round(1.1 * $base-font-size / 2) * 2;}
+    &.size--sm .w-icon {font-size: round(1.4 * $base-font-size / 2) * 2;}
+    &.size--md .w-icon {font-size: round(1.6 * $base-font-size / 2) * 2;}
+    &.size--lg .w-icon {font-size: round(1.8 * $base-font-size / 2) * 2;}
+    &.size--xl .w-icon {font-size: round(2.5 * $base-font-size / 2) * 2;}
+
   }
 }
 </style>
