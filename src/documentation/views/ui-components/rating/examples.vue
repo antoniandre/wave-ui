@@ -6,6 +6,18 @@ div
     template(#pug).
       w-rating
 
+  title-link(h2) V-model
+  example
+    w-rating(v-model="rating1")
+    div.mt2
+      strong.mr2 v-model:
+      code {{ rating1 }}
+    template(#pug).
+      w-rating(v-model="rating")
+      div.mt2
+        strong.mr2 v-model:
+        code {{ '\{\{ rating \}\}' }}
+
   title-link(h2) Color
   example
     w-rating.d-block.my4(color="green")
@@ -34,3 +46,11 @@ div
       w-rating.d-block.my4(lg)
       w-rating.d-block.my4(xl)
 </template>
+
+<script>
+export default {
+  data: () => ({
+    rating1: 3
+  })
+}
+</script>
