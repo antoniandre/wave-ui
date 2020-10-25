@@ -1,6 +1,8 @@
 <template lang="pug">
 div
-  ui-component-title w-breadcrumbs
+  ui-component-title(slug="w-breadcrumbs")
+    .code w-breadcrumbs
+    w-tag.ml2.text-upper(color="orange" outline) In progress
   examples
   api
 </template>
