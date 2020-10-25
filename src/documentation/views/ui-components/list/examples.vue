@@ -377,7 +377,7 @@ div.lists-demo
   title-link(h2) Navigation lists
   p.
     The navigation list expects a #[code route] attribute in the items that are links.#[br]
-    It will create a router link or a normal link (if not using vue-router) on those items.
+    If you are using Vue Router, all the links will automatically be #[strong.code router-link]s.#[br]
   p It is possible to disable a link with a #[code disabled: true] attribute in the item.
   example
     w-list(:items="listItems2" nav color="primary")
