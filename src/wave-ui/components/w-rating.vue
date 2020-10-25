@@ -85,7 +85,6 @@ export default {
     &.size--md .w-icon {font-size: round(1.6 * $base-font-size / 2) * 2;}
     &.size--lg .w-icon {font-size: round(1.8 * $base-font-size / 2) * 2;}
     &.size--xl .w-icon {font-size: round(2.5 * $base-font-size / 2) * 2;}
-
   }
 }
 </style>
