@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -18,7 +17,10 @@ const propsDescs = {
   color: 'Applies a text color to the breadcrumb\'s links.<br>If no <code>color</code> and no <code>bg-color</code> are set, and if either <code>outline</code> or <code>text</code> is set to true, the <code>primary</code> color will be applied.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   separatorColor: 'Applies a text color (also applies to icons) to the breadcrumb\'s separators.<br>If no <code>color</code> and no <code>bg-color</code> are set, and if either <code>outline</code> or <code>text</code> is set to true, the <code>primary</code> color will be applied.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   icon: 'Provide a custom icon for the separators.',
+  items: 'An array of items to display in the breadcrumbs. Each item must be an object containing a <code>label</code> and a <code>route</code>.<br>If no route is found the item will be wrapped in a span instead of a link.',
   linkLastItem: 'When set to true, and if the last item has a provided route, the last item will be a link.',
+  itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item.',
+  itemRouteKey: 'The property name (aka key) in each item object where to find the link of the item.',
   xs: 'Sets the font size of the items.',
   sm: 'Sets the font size of the items.',
   md: 'Sets the font size of the items.',
@@ -29,11 +31,17 @@ const propsDescs = {
 const slots = {
   separator: {
     description: 'Provide a custom template for the breadcrumbs\' separator.',
-    parameters: []
+    params: {
+      index: 'The separator index in the array of items. Starts at 1.'
+    }
   },
   item: {
     description: 'Provide a custom template for the breadcrumbs\' item.',
-    parameters: []
+    params: {
+      item: 'The current item object.',
+      index: 'The item index in the array of items. Starts at 1.',
+      isLast: 'A boolean indicating if the current item is the last one. May be useful if you want a particular template for the current page.'
+    }
   }
 }
 
