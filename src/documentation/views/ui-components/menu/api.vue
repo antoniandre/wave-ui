@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -16,8 +15,8 @@ import WMenu from '@/wave-ui/components/w-menu'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the menu. Any truthy value will show the menu whereas any falsy value will hide it.',
-  showOnHover: '',
-  hideOnMenuClick: '',
+  showOnHover: 'Triggers the menu apparition on activator hover instead of click by default. A mouseleave on the activator will hide the menu.',
+  hideOnMenuClick: 'Hides the menu when a click is made inside the menu. For instance when selecting a list item inside a menu.',
   color: 'Applies a color to the menu\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the menu\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   shadow: 'Applies a drop shadow to the menu element.',
@@ -29,19 +28,19 @@ const propsDescs = {
   menuClass: 'Applies a custom CSS class to the menu element.',
   titleClass: 'Applies a custom CSS class to the menu\'s title when using the default card layout (when not using the <code>custom</code> prop).',
   contentClass: 'Applies a custom CSS class to the menu\'s content when using the default card layout (when not using the <code>custom</code> prop).',
-  detachTo: '',
+  detachTo: 'Moves the menu element into another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `.w-app` will be the target.<br>By default a wrapper is created around the activator element and the menu is appended inside it.',
   fixed: 'Sets the CSS position of the menu to <code>fixed</code> (absolute by default).',
   top: 'Places the menu at the top of the screen when the <code>fixed</code> prop is set to true or at the top of its container otherwise.',
   bottom: 'Places the menu at the bottom of the screen when the <code>fixed</code> prop is set to true or at the bottom of its container otherwise.',
   left: 'Places the menu at the left of the screen when the <code>fixed</code> prop is set to true or at the left of its container otherwise.',
   right: 'Places the menu at the right of the screen when the <code>fixed</code> prop is set to true or at the right of its container otherwise.',
-  alignTop: '',
-  alignBottom: '',
-  alignLeft: '',
-  alignRight: '',
+  alignTop: 'Aligns the top of the menu with the top of the activator.',
+  alignBottom: 'Aligns the bottom of the menu with the bottom of the activator.',
+  alignLeft: 'Aligns the left side of the menu with the left side of the activator.',
+  alignRight: 'Aligns the right side of the menu with the right side of the activator.',
   zIndex: 'Applies a z-index (positive or negative integer) to the menu.',
   minWidth: 'Sets a min-width on the menu.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
-  overlay: '',
+  overlay: 'Displays a full screen overlay underneath the menu.',
   persistent: 'When set to true, clicking outside of the menu will not close the menu.'
 }
 
