@@ -11,7 +11,7 @@ div
       strong.version v1.9.0
       ul
         li Added a new #[strong.code w-breadcrumbs] component.
-        li Renamed #[strong.code w-button]'s `to` prop to `route`.
+        li Renamed #[strong.code w-button]'s #[code to] prop to #[code route].
 
     li.patch
       strong.version v1.8.1
