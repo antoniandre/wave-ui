@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-breadcrumbs
+.w-breadcrumbs(:class="classes")
   template(v-for="(item, i) in items")
     //- Separator.
     span.w-breadcrumbs__separator(
@@ -73,6 +73,11 @@ export default {
         (this.xl && 'xl') ||
         'md'
       )
+    },
+    classes () {
+      return {
+        [`size--${this.size}`]: true
+      }
     }
   }
 }
@@ -82,6 +87,12 @@ export default {
 .w-breadcrumbs {
   display: flex;
   align-items: center;
+
+  &.size--xs {font-size: round(0.8 * $base-font-size);}
+  &.size--sm {font-size: round(0.9 * $base-font-size);}
+  &.size--md {font-size: round(1.05 * $base-font-size);}
+  &.size--lg {font-size: round(1.2 * $base-font-size);}
+  &.size--xl {font-size: round(1.4 * $base-font-size);}
 
   &__separator {
     margin-left: $base-increment;
