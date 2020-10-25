@@ -221,17 +221,17 @@ div
 
   title-link(h2) Links
   example(content-class="w-flex")
-    w-button.ma1(bg-color="primary" to="/getting-started")
+    w-button.ma1(bg-color="primary" route="/getting-started")
       | Getting started
       w-icon.ml1 wi-chevron-right
-    w-button.ma1(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
+    w-button.ma1(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
       | Github
       w-icon.ml2(sm) mdi mdi-open-in-new
     template(#pug).
-      w-button.ma1(bg-color="primary" to="/getting-started")
+      w-button.ma1(bg-color="primary" route="/getting-started")
         | Getting started
         w-icon.ml1 wi-chevron-right
-      w-button.ma1(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
+      w-button.ma1(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
         | Github
         w-icon.ml2(sm) mdi mdi-open-in-new
 </template>

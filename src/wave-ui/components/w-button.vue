@@ -1,9 +1,9 @@
 <template lang="pug">
 component.w-button(
-  :is="to ? (hasRouter && !externalLink && !forceLink ? 'router-link' : 'a') : 'button'"
-  :type="!to && type"
-  :to="hasRouter && to"
-  :href="to"
+  :is="route ? (hasRouter && !externalLink && !forceLink ? 'router-link' : 'a') : 'button'"
+  :type="!route && type"
+  :to="hasRouter && route"
+  :href="route"
   :class="classes"
   :disabled="!!disabled || null"
   v-on="$listeners"
@@ -35,7 +35,7 @@ export default {
     round: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
-    to: { type: [String, Boolean, Object] }, // Creates a link.
+    route: { type: [String, Object] }, // Creates a link.
     // Force use of `a` instead of router-link.
     // Router link does not go to a url starting with `#` with history mode.
     forceLink: { type: Boolean },
@@ -51,7 +51,7 @@ export default {
     bottom: { type: Boolean },
     left: { type: Boolean },
     right: { type: Boolean },
-    zIndex: { type: [Number, String, Boolean] },
+    zIndex: { type: [Number, String] },
     // Sizes.
     width: { type: [Number, String] },
     height: { type: [Number, String] },
@@ -84,7 +84,7 @@ export default {
       ]
     },
     externalLink () {
-      return /^(http|\/\/)/.test(this.to)
+      return /^(http|\/\/)/.test(this.route)
     },
     classes () {
       return {
