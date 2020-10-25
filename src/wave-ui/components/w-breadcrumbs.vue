@@ -21,7 +21,7 @@
         :to="hasRouter && item[itemRouteKey]"
         :href="item[itemRouteKey]"
         :class="color || null")
-        slot(name="item" :item="item" :index="i" :is-last="i === items.length - 1")
+        slot(name="item" :item="item" :index="i + 1" :is-last="i === items.length - 1")
       component.w-breadcrumbs__item(
         v-else
         :key="i"
@@ -32,7 +32,12 @@
         :class="color || null")
 
     //- Current page when linkLastItem is false.
-    slot(v-else-if="$scopedSlots.item" name="item" :item="item" :index="i" :is-last="i === items.length - 1")
+    slot(
+      v-else-if="$scopedSlots.item"
+      name="item"
+      :item="item"
+      :index="i + 1"
+      :is-last="i === items.length - 1")
     span(v-else :key="i" v-html="item[itemLabelKey]")
 </template>
 
