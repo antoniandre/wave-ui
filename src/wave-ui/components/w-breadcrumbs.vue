@@ -3,26 +3,36 @@
   template(v-for="(item, i) in items")
     //- Separator.
     span.w-breadcrumbs__separator(
-      v-if="i && $slots.separator"
+      v-if="i && $scopedSlots.separator"
       :key="`${i}s`"
       :class="separatorColor")
-      slot(name="separator")
+      slot(name="separator" :index="i")
     w-icon.w-breadcrumbs__separator(
       v-else-if="i"
       :key="`${i}s`"
       :class="separatorColor") {{ icon }}
 
     //- Link to parent pages.
-    component.w-breadcrumbs__item(
-      v-if="item[itemRouteKey] && (i < items.length - 1 || linkLastItem)"
-      :key="i"
-      :is="hasRouter ? 'router-link' : 'a'"
-      :to="hasRouter && item[itemRouteKey]"
-      :href="item[itemRouteKey]"
-      v-html="item[itemLabelKey]"
-      :class="color || null")
+    template(v-if="item[itemRouteKey] && (i < items.length - 1 || linkLastItem)")
+      component.w-breadcrumbs__item(
+        v-if="$scopedSlots.item"
+        :key="i"
+        :is="hasRouter ? 'router-link' : 'a'"
+        :to="hasRouter && item[itemRouteKey]"
+        :href="item[itemRouteKey]"
+        :class="color || null")
+        slot(name="item" :item="item" :index="i" :is-last="i === items.length - 1")
+      component.w-breadcrumbs__item(
+        v-else
+        :key="i"
+        :is="hasRouter ? 'router-link' : 'a'"
+        :to="hasRouter && item[itemRouteKey]"
+        :href="item[itemRouteKey]"
+        v-html="item[itemLabelKey]"
+        :class="color || null")
 
     //- Current page when linkLastItem is false.
+    slot(v-else-if="$scopedSlots.item" name="item" :item="item" :index="i" :is-last="i === items.length - 1")
     span(v-else :key="i" v-html="item[itemLabelKey]")
 </template>
 
@@ -46,10 +56,6 @@ export default {
 
   emits: [],
 
-  data: () => ({
-
-  }),
-
   computed: {
     hasRouter () {
       return '$router' in this
@@ -71,8 +77,6 @@ export default {
 .w-breadcrumbs {
   display: flex;
   align-items: center;
-
-  &__item {}
 
   &__separator {
     margin-left: $base-increment;
