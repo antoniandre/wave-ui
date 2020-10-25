@@ -5,9 +5,22 @@ div
     By default, each item except the last one will be a link providing that a route attribute is found
     in the item (you can use the #[code item-route-key] prop to name another attribute).#[br]
     If you are using Vue Router, all the links will automatically be #[strong.code router-link]s.
+  p.
+    The items should have a #[code label] attribute or otherwise nominated attribute via the
+    #[code item-label-key] prop.
+
   example
     w-breadcrumbs(:items="items1")
     template(#pug).
+      w-breadcrumbs(:items="items1")
+    template(#js).
+      data: () => ({
+        items1: [
+          { label: 'Sitemap', route: '/sitemap' },
+          { label: 'Home', route: '/' },
+          { label: 'Current page', route: '/w-breadcrumbs' }
+        ]
+      })
 
   title-link(h2) Colors
   p.
@@ -18,22 +31,81 @@ div
   example
     w-breadcrumbs(:items="items1" color="orange")
     template(#pug).
+      w-breadcrumbs(:items="items1" color="orange")
+    template(#js).
+      data: () => ({
+        items1: [
+          { label: 'Sitemap', route: '/sitemap' },
+          { label: 'Home', route: '/' },
+          { label: 'Current page', route: '/w-breadcrumbs' }
+        ]
+      })
 
   title-link(h3) Separator color
   example
     w-breadcrumbs(:items="items1" separator-color="orange")
     template(#pug).
+      w-breadcrumbs(:items="items1" separator-color="orange")
+    template(#js).
+      data: () => ({
+        items1: [
+          { label: 'Sitemap', route: '/sitemap' },
+          { label: 'Home', route: '/' },
+          { label: 'Current page', route: '/w-breadcrumbs' }
+        ]
+      })
 
-  title-link(h2) Custom separator icon
+  title-link(h2) Custom separator
+  p.
+    You can customize the separator simply by providing a different icon, or using the #[code separator]
+    slot.
+  title-link(h3) Icon
   example
     w-breadcrumbs(:items="items1" icon="mdi mdi-arrow-right")
     template(#pug).
+      w-breadcrumbs(:items="items1" icon="mdi mdi-arrow-right")
+    template(#js).
+      data: () => ({
+        items1: [
+          { label: 'Sitemap', route: '/sitemap' },
+          { label: 'Home', route: '/' },
+          { label: 'Current page', route: '/w-breadcrumbs' }
+        ]
+      })
 
-  title-link(h2) Custom separator via slot
+  title-link(h3) Slot
   example
     w-breadcrumbs(:items="items1")
       template(#separator) //
     template(#pug).
+      w-breadcrumbs(:items="items1")
+        template(#separator) //
+    template(#js).
+      data: () => ({
+        items1: [
+          { label: 'Sitemap', route: '/sitemap' },
+          { label: 'Home', route: '/' },
+          { label: 'Current page', route: '/w-breadcrumbs' }
+        ]
+      })
+
+  title-link(h2) Custom item template
+  example
+    w-breadcrumbs(:items="items1")
+      template(#item="{ item, isLast }")
+        w-tag(:color="isLast ? 'grey' : 'green'" round outline v-html="item.label")
+    template(#pug).
+      w-breadcrumbs(:items="items1")
+        template(#item="{ item, isLast }")
+          w-tag(:color="isLast ? 'grey' : 'green'" round outline v-html="item.label")
+    template(#js).
+      data: () => ({
+        items1: [
+          { label: 'Sitemap', route: '/sitemap' },
+          { label: 'Home', route: '/' },
+          { label: 'Current page', route: '/w-breadcrumbs' }
+        ]
+      })
 
   title-link(h2) Link on the last item
   p.
@@ -42,6 +114,16 @@ div
   example
     w-breadcrumbs(:items="items1" link-last-item)
     template(#pug).
+      w-breadcrumbs(:items="items1" link-last-item)
+    template(#js).
+      data: () => ({
+        items1: [
+          { label: 'Sitemap', route: '/sitemap' },
+          { label: 'Home', route: '/' },
+          { label: 'Current page', route: '/w-breadcrumbs' }
+        ]
+      })
+
 </template>
 
 <script>
@@ -49,7 +131,7 @@ export default {
   data: () => ({
     items1: [
       { label: 'Sitemap', route: '/sitemap' },
-      { label: 'Home', route: '/home' },
+      { label: 'Home', route: '/' },
       { label: 'Current page', route: '/w-breadcrumbs' }
     ]
   })
