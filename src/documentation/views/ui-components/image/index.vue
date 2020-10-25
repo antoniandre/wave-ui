@@ -1,6 +1,8 @@
 <template lang="pug">
 div
-  ui-component-title w-image
+  ui-component-title(slug="w-image")
+    .code w-image
+    w-tag.ml2.text-upper(color="orange" outline) In progress
   examples
   api
 </template>
