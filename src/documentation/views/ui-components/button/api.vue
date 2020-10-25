@@ -24,7 +24,7 @@ const propsDescs = {
   shadow: 'Applies a drop shadow to the button.',
   tile: 'Removes the default border-radius and sets sharp edges on the button.',
   to: '',
-  forceLink: '',
+  forceLink: 'In some cases, you may want to use a normal link instead of a <code>router-link</code>, for instance when using anchor links (starting with <code>#</code>), you can use the <code>force-link</code> prop to force a normal link.',
   type: '',
   disabled: 'Disables the button making it unreactive to user interactions.',
   loading: '',
