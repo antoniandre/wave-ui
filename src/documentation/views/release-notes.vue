@@ -7,15 +7,21 @@ div
 
   ul.history
     //- li Added the #[code hide-error] option on all the form elements.
+    li.minor
+      strong.version v1.9.0
+      ul
+        li Added a new #[strong.code w-breadcrumbs] component.
+        li Renamed #[strong.code w-button]'s `to` prop to `route`.
+
     li.patch
       strong.version v1.8.1
       p.
-        Add #[code .vue] extensions for Vite &amp; Rollup
+        Added #[code .vue] extensions for Vite &amp; Rollup
         #[a(href="https://github.com/antoniandre/wave-ui/issues/2" target="_blank") #2].
 
     li.minor
       strong.version v1.8.0
-      p Add a #[strong.code w-rating] component.
+      p Added a new #[strong.code w-rating] component.
 
     li.minor
       strong.version v1.7.0
@@ -51,7 +57,7 @@ div
       strong.version v1.5.0
       ul
         li Added a new #[strong.code w-timeline] component.
-        li Fixed checkbox &amp; radio not emiting #[code input] event on Edge (known Edge bug).
+        li Fixed checkbox &amp; radio not emitting #[code input] event on Edge (known Edge bug).
         li.
           Fixed #[strong.code w-input], #[strong.code w-textarea] &amp; #[strong.code w-select]
           underline animations on Edge.

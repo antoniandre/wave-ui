@@ -145,7 +145,7 @@ div.nav-menu {
     &:before {left: -2px;}
   }
 
-  .w-tag {line-height: 1;padding: 2px 4px;}
+  .w-tag {padding: 2px 4px;}
 }
 
 .content-wrap > .nav-menu {
