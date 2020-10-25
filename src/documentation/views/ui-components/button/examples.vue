@@ -220,6 +220,13 @@ div
       }
 
   title-link(h2) Links
+  p.
+    If you are using Vue Router, all the links will automatically be #[strong.code router-link]s
+    unless they start with #[code http] or #[code https].#[br]
+    In some cases, you may want to use a normal link instead of a #[strong.code router-link], for
+    instance when using anchor links (starting with #[code #]), you can use the #[code force-link]
+    prop to force a normal link.
+
   example(content-class="w-flex")
     w-button.ma1(bg-color="primary" route="/getting-started")
       | Getting started
