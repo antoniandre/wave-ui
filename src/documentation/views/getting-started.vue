@@ -83,7 +83,7 @@ div
       span {{ item.label }}
       template(v-if="item.route")
         span.ml1 - read on in the
-        router-link.mx1(:to="item.route") {{ item.label }}
+        router-link.mx1(:route="item.route") {{ item.label }}
         | knowledge base page.
 </template>
 

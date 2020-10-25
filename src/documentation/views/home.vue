@@ -6,12 +6,12 @@ w-app.home
         w-icon.wave-logo wi-wave
         | Wave UI
       em A Vue.js UI framework with only the bright side.
-      w-button.get-started(outline round to="/getting-started" color="white") Get started
+      w-button.get-started(outline round route="/getting-started" color="white") Get started
 
     .version
       w-tooltip(z-index="20")
         template(#activator="{ on }")
-          w-button.mr2(v-on="on" text lg icon="mdi mdi-github" to="https://github.com/antoniandre/wave-ui" target="_blank")
+          w-button.mr2(v-on="on" text lg icon="mdi mdi-github" route="https://github.com/antoniandre/wave-ui" target="_blank")
         .size--xs.text-nowrap View the project on Github
       em(v-html="`Version ${version}`")
 
@@ -220,8 +220,8 @@ w-app.home
 
     .text-center.ready-to-dive
       .title1.mb2 Ready to dive in?
-      w-button.ma1(lg outline round color="white" to="/why-wave-ui") Why Wave UI
-      w-button.ma1(lg outline round color="white" to="/getting-started") Get started
+      w-button.ma1(lg outline round color="white" route="/why-wave-ui") Why Wave UI
+      w-button.ma1(lg outline round color="white" route="/getting-started") Get started
 </template>
 
 <script>
