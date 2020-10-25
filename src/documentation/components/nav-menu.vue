@@ -60,7 +60,7 @@ export default {
       { label: 'Alert', route: '/w-alert' },
       { label: 'App', route: '/w-app' },
       { label: 'Badge', route: '/w-badge' },
-      { label: 'Breadcrumbs', route: '/w-breadcrumbs', disabled: true },
+      { label: 'Breadcrumbs', route: '/w-breadcrumbs', inProgress: true },
       { label: 'Button', route: '/w-button' },
       { label: 'Card', route: '/w-card' },
       // { label: 'Date picker', route: '/w-date-picker', disabled: true },
