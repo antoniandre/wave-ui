@@ -32,12 +32,12 @@ const propsDescs = {
 }
 
 const slots = {
-  'item-title-key': {
+  'item-title': {
     description: 'Provide a custom title for every item. Applies to all the items, but can be overridden by the <code>item-title.x</code> slot.',
     params: {
       item: 'The current item object.',
       index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.',
-      expanded: 'A boolean representing the expanded state of the item.'
+      expanded: 'A boolean representing the expanded state of the accordion item.'
     }
   },
   'item-title.x': {
@@ -45,15 +45,15 @@ const slots = {
     params: {
       item: 'The current item object.',
       index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.',
-      expanded: 'A boolean representing the expanded state of the item.'
+      expanded: 'A boolean representing the expanded state of the accordion item.'
     }
   },
-  'item-content-key': {
+  'item-content': {
     description: 'Provide a custom content for every item. Applies to all the items, but can be overridden by the <code>item-content.x</code> slot.',
     params: {
       item: 'The current item object.',
       index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.',
-      expanded: 'A boolean representing the expanded state of the item.'
+      expanded: 'A boolean representing the expanded state of the accordion item.'
     }
   },
   'item-content.x': {
@@ -61,15 +61,30 @@ const slots = {
     params: {
       item: 'The current item object.',
       index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.',
-      expanded: 'A boolean representing the expanded state of the item.'
+      expanded: 'A boolean representing the expanded state of the accordion item.'
     }
   }
 }
 
-const eventsDescs = {
-  input: 'Emitted each time the state of the accordion changes (when an item is expanded or collapsed). It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  'update:modelValue': 'Emitted each time the state of the accordion changes (when an item is expanded or collapsed). It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the expanded state of every accordion item).',
-  focus: 'Emitted on each item title focus. The focused item is returned as a parameter.'
+const events = {
+  input: {
+    description: 'Emitted each time the state of the accordion changes (when an item is expanded or collapsed).<br>Updates the v-model value in Vue 2.x only.',
+    params: {
+      '[Array]': 'An array of booleans representing the expanded state of each accordion item.'
+    }
+  },
+  'update:modelValue': {
+    description: 'Emitted each time the state of the accordion changes (when an item is expanded or collapsed).<br>Updates the v-model value in Vue 3 only.',
+    params: {
+      '[Array]': 'An array of booleans representing the expanded state of each accordion item.'
+    }
+  },
+  focus: {
+    description: 'Emitted on each accordion item title focus.',
+    params: {
+      '[Object]': 'The focused accordion item object.'
+    }
+  }
 }
 
 export default {
@@ -85,7 +100,7 @@ export default {
       return WAccordion.props
     },
     events () {
-      return WAccordion.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WAccordion.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
     }
   }
 }

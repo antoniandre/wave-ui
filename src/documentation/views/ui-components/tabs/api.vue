@@ -31,16 +31,60 @@ const propsDescs = {
 }
 
 const slots = {
-  'item-title': { description: 'Provide a custom title for every tab. Applies to all the tabs, but can be overridden by the <code>item-title.x</code> slot.' },
-  'item-title.x': { description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom title for a single tab: the tab at the index <em class="code">x</em>.' },
-  'item-content': { description: 'Provide a custom content for every tab. Applies to all the tabs, but can be overridden by the <code>item-content.x</code> slot.' },
-  'item-content.x': { description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single tab: the tab at the index <em class="code">x</em>.' }
+  'item-title': {
+    description: 'Provide a custom title for every tab. Applies to all the tabs, but can be overridden by the <code>item-title.x</code> slot.',
+    params: {
+      item: 'The current tab object.',
+      index: 'The tab index in the array of tabs. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      active: 'A boolean representing the active state of the tab.'
+    }
+  },
+  'item-title.x': {
+    description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom title for a single tab: the tab at the index <em class="code">x</em>.',
+    params: {
+      item: 'The current tab object.',
+      index: 'The tab index in the array of tabs. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      active: 'A boolean representing the active state of the tab.'
+    }
+  },
+  'item-content': {
+    description: 'Provide a custom content for every tab. Applies to all the tabs, but can be overridden by the <code>item-content.x</code> slot.',
+    params: {
+      item: 'The current tab object.',
+      index: 'The tab index in the array of tabs. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      active: 'A boolean representing the active state of the tab.'
+    }
+  },
+  'item-content.x': {
+    description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single tab: the tab at the index <em class="code">x</em>.',
+    params: {
+      item: 'The current tab object.',
+      index: 'The tab index in the array of tabs. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      active: 'A boolean representing the active state of the tab.'
+    }
+  }
+
 }
 
-const eventsDescs = {
-  input: 'Emitted each time the current tab changes. It updates the v-model value in Vue 2.x only.<br>An array of booleans is passed as a parameter (representing the active state of every tab).',
-  'update:modelValue': 'Emitted each time the current tab changes. It updates the v-model value in Vue 3 only.<br>An array of booleans is passed as a parameter (representing the active state of every tab).',
-  focus: 'Emitted on each tab title focus. The focus DOM event is returned as a parameter.'
+const events = {
+  input: {
+    description: 'Emitted each time the current tab changes.<br>Updates the v-model value in Vue 2.x only.',
+    params: {
+      '[Array]': 'An array of booleans representing the active state of each tab.'
+    }
+  },
+  'update:modelValue': {
+    description: 'Emitted each time the current tab changes.<br>Updates the v-model value in Vue 3 only.',
+    params: {
+      '[Array]': 'An array of booleans representing the active state of each tab.'
+    }
+  },
+  focus: {
+    description: 'Emitted on each tab title focus.',
+    params: {
+      '[Object]': 'The focused tab item object.'
+    }
+  }
 }
 
 export default {
@@ -56,7 +100,7 @@ export default {
       return WTabs.props
     },
     events () {
-      return WTabs.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WTabs.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
     }
   }
 }

@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -16,13 +15,13 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import Wtextarea from '@/wave-ui/components/w-textarea'
 
 const propsDescs = {
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
+  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>The text content of the textarea.<br>Gets updated on textarea input.',
   label: 'Sets a visible label for the textarea.',
   labelPosition: 'Sets the position of the label to one of the following positions: \'left\', \'right\', \'inside\'.',
-  innerIconLeft: '',
-  innerIconRight: '',
+  innerIconLeft: 'Adds an icon on the left inside the textarea.<br>Accepts a string: e.g. <code>mdi mdi-eye</code>.',
+  innerIconRight: 'Adds an icon on the right inside the textarea.<br>Accepts a string: e.g. <code>mdi mdi-eye</code>.',
   // When label is inside, allows to move the label above on focus or when filled.
-  staticLabel: '',
+  staticLabel: 'Prevents moving the label above the textarea when the <code>labelPosition</code> is equal to <code>inside</code>. If a placeholder is present, it will be hidden and the label will be displayed instead.<br>When a value is set the static label is replaced by the textual value.',
   placeholder: 'Provide a placeholder for the textarea. If a label is positioned inside, it will be moved above the textarea so it doesn\'t overlap.',
   color: 'Applies a color to the textarea\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the textarea\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
@@ -32,8 +31,8 @@ const propsDescs = {
   noAutogrow: 'Disables the ability to fit the textarea height to the content.<br>The height will not be smaller than the number of rows set via the <code>rows</code> prop.',
   resizable: 'Allows native resizing of the textarea\'s height.',
   tile: 'Removes the default border-radius and sets sharp edges on the textarea.',
-  rows: 'The default and minimum number of rows to display in the textarea.',
-  cols: 'Applies the native HTML <code>cols</code> attribute to the textarea.',
+  rows: 'The default and minimum number of rows to display in the textarea (native HTML attribute).',
+  cols: 'Applies the native HTML <code>cols</code> attribute to the textarea (native HTML attribute).',
   name: 'Provide a native HTML <code>name</code> attribute to the textarea. If not provided, a unique name will be computed.',
   disabled: 'Disables the textarea making it unreactive to user interactions.',
   readonly: 'The textarea will still look like an interactive textarea except that it is read-only: its current content cannot be changed by user interaction.',
@@ -42,16 +41,46 @@ const propsDescs = {
 }
 
 const slots = {
-  default: { description: 'The label content, if the label prop is not flexible enough.' }
+  default: { description: 'The label content, if the <code>label</code> prop is not flexible enough.' }
 }
 
-const eventsDescs = {
-  input: 'Emitted each time the textarea text changes. It updates the v-model value in Vue 2.x only.<br>The new textarea value is passed as a parameter.',
-  'update:modelValue': 'Emitted each time the textarea text changes. It updates the v-model value in Vue 3 only.<br>The new textarea value is passed as a parameter.',
-  focus: 'Emitted on textarea focus. The focus DOM event is returned as a parameter.',
-  blur: 'Emitted on textarea blur. The blur DOM event is returned as a parameter.',
-  'click:inner-icon-left': 'Emitted on click of the left inner icon, if any.',
-  'click:inner-icon-right': 'Emitted on click of the right inner icon, if any.'
+const events = {
+  input: {
+    description: 'Emitted each time the textarea text changes.<br>Updates the v-model value in Vue 2.x only.',
+    params: {
+      '[String]': 'The new textarea value.'
+    }
+  },
+  'update:modelValue': {
+    description: 'Emitted each time the textarea text changes.<br>Updates the v-model value in Vue 3 only.',
+    params: {
+      '[String]': 'The new textarea value.'
+    }
+  },
+  focus: {
+    description: 'Emitted on textarea focus.',
+    params: {
+      '[DOM event object]': 'The associated focus DOM event.'
+    }
+  },
+  blur: {
+    description: 'Emitted on textarea blur.',
+    params: {
+      '[DOM event object]': 'The associated blur DOM event.'
+    }
+  },
+  'click:inner-icon-left': {
+    description: 'Emitted on click of the left inner icon, if any.',
+    params: {
+      '[DOM event object]': 'The associated click DOM event.'
+    }
+  },
+  'click:inner-icon-right': {
+    description: 'Emitted on click of the right inner icon, if any.',
+    params: {
+      '[DOM event object]': 'The associated click DOM event.'
+    }
+  }
 }
 
 export default {
@@ -67,7 +96,7 @@ export default {
       return { ...Wtextarea.props, ...FormElementMixin.props }
     },
     events () {
-      return Wtextarea.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return Wtextarea.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
     }
   }
 }

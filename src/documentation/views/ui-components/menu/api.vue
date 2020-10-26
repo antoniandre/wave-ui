@@ -52,8 +52,8 @@ const slots = {
 }
 
 const eventsDescs = {
-  input: 'Emitted each time the state of the component changes (when opening or closing the menu). It updates the v-model value in Vue 2.x only.',
-  'update:modelValue': 'Emitted each time the state of the component changes (when opening or closing the menu). It updates the v-model value in Vue 3 only.',
+  input: 'Emitted each time the state of the component changes (when opening or closing the menu).<br>Updates the v-model value in Vue 2.x only.',
+  'update:modelValue': 'Emitted each time the state of the component changes (when opening or closing the menu).<br>Updates the v-model value in Vue 3 only.',
   close: 'Emitted on menu close.',
   open: 'Emitted on menu open.'
 }

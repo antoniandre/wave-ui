@@ -34,19 +34,19 @@ const slots = {
 
 const events = {
     input: {
-      description: 'Emitted each time the state of the switch changes. It updates the v-model value in Vue 2.x only.',
+      description: 'Emitted each time the state of the switch changes.<br>Updates the v-model value in Vue 2.x only.',
       params: {
-        '[Boolean]': 'A boolean representing the current state.'
+        '[Boolean]': 'A boolean representing the current state of the switch.'
       }
     },
     'update:modelValue': {
-      description: 'Emitted each time the state of the switch changes. It updates the v-model value in Vue 3 only.',
+      description: 'Emitted each time the state of the switch changes.<br>Updates the v-model value in Vue 3 only.',
       params: {
-        '[Boolean]': 'A boolean representing the current state.'
+        '[Boolean]': 'A boolean representing the current state of the switch.'
       }
     },
     focus: {
-      description: 'Emitted on switch focus. The focus DOM event is returned as a parameter.',
+      description: 'Emitted on switch focus.',
       params: {
         '[DOM event object]': 'The associated focus DOM event.'
       }
