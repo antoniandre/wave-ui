@@ -49,8 +49,8 @@ const radios = {
     item: { description: 'Provide a custom content for each radio button label.' }
   },
   eventsDescs: {
-    input: 'Emitted each time any of the radio buttons is toggled. It updates the v-model value in Vue 2.x only.<br>The return-value of the selected radio button is passed as a parameter.<br>The return-value will be one of these attributes, if they exist, in this order: the item value, the item label, the item index.',
-    'update:modelValue': 'Emitted each time any of the radio buttons is toggled. It updates the v-model value in Vue 3 only.<br>The return-value of the selected radio button is passed as a parameter.<br>The return-value will be one of these attributes, if they exist, in this order: the item value, the item label, the item index.',
+    input: 'Emitted each time any of the radio buttons is toggled.<br>Updates the v-model value in Vue 2.x only.<br>The return-value of the selected radio button is passed as a parameter.<br>The return-value will be one of these attributes, if they exist, in this order: the item value, the item label, the item index.',
+    'update:modelValue': 'Emitted each time any of the radio buttons is toggled.<br>Updates the v-model value in Vue 3 only.<br>The return-value of the selected radio button is passed as a parameter.<br>The return-value will be one of these attributes, if they exist, in this order: the item value, the item label, the item index.',
     focus: 'Emitted on each radio button focus. The focus DOM event is returned as a parameter.'
   }
 }
@@ -73,8 +73,8 @@ const radio = {
     default: { description: 'The radio button label content.' }
   },
   eventsDescs: {
-    input: 'Emitted each time the state of the radio button changes. It updates the v-model value in Vue 2.x only.<br>A boolean for the current state is passed as a parameter.',
-    'update:modelValue': 'Emitted each time the state of the radio button changes. It updates the v-model value in Vue 3 only.<br>A boolean for the current state is passed as a parameter.',
+    input: 'Emitted each time the state of the radio button changes.<br>Updates the v-model value in Vue 2.x only.<br>A boolean for the current state is passed as a parameter.',
+    'update:modelValue': 'Emitted each time the state of the radio button changes.<br>Updates the v-model value in Vue 3 only.<br>A boolean for the current state is passed as a parameter.',
     focus: 'Emitted on each radio button focus. The focus DOM event is returned as a parameter.'
   }
 }

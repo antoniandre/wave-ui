@@ -40,8 +40,8 @@ const slots = {
 }
 
 const eventsDescs = {
-  // input: 'Emitted each time the state of the component changes (when showing or hiding the tooltip). It updates the v-model value in Vue 2.x only.',
-  // 'update:modelValue': 'Emitted each time the state of the component changes (when showing or hiding the tooltip). It updates the v-model value in Vue 3 only.'
+  // input: 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 2.x only.',
+  // 'update:modelValue': 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 3 only.'
 }
 
 export default {

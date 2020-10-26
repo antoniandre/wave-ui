@@ -63,13 +63,13 @@ const events = {
     }
   },
   input: {
-    description: 'Emmited every time the form status changes. It updates the v-model value in Vue 2.x only.',
+    description: 'Emmited every time the form status changes.<br>Updates the v-model value in Vue 2.x only.',
     params: {
       '[Boolean, Null]': 'The new status of the form: one of <code>null</code> when pristine, <code>false</code> when invalid, <code>true</code> when valid.'
     }
   },
   'update:modelValue': {
-    description: 'Emmited every time the form status changes. It updates the v-model value in Vue 3 only.',
+    description: 'Emmited every time the form status changes.<br>Updates the v-model value in Vue 3 only.',
     params: {
       '[Boolean, Null]': 'The new status of the form: one of <code>null</code> when pristine, <code>false</code> when invalid, <code>true</code> when valid.'
     }

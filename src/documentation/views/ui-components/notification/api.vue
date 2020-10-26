@@ -52,8 +52,8 @@ const slots = {
 }
 
 const eventsDescs = {
-  input: 'Emitted on notification dismiss/hide. It updates the v-model value in Vue 2.x only.',
-  'update:modelValue': 'Emitted on notification dismiss/hide. It updates the v-model value in Vue 3 only.',
+  input: 'Emitted on notification dismiss/hide.<br>Updates the v-model value in Vue 2.x only.',
+  'update:modelValue': 'Emitted on notification dismiss/hide.<br>Updates the v-model value in Vue 3 only.',
   close: 'Emitted on notification dismiss/hide.'
 }
 

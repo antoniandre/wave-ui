@@ -55,12 +55,34 @@ const slots = {
   }
 }
 
-const eventsDescs = {
-  input: 'Emitted each time the state of the component changes. It updates the <code>v-model</code> value in Vue 2.x only.<br>An array of values of all the selected list items is passed as a parameter.',
-  'update:modelValue': 'Emitted each time the state of the component changes (when an item is selected or unselected). It updates the v-model value in Vue 3 only.<br>An array of values of all the selected list items is passed as a parameter.',
-  focus: 'Emitted on each item title focus. The focused item is returned as a parameter.',
-  'item-click': 'Emitted on each item click. The clicked item is returned as a parameter.',
-  'keydown:escape': 'Emitted on escape key press, when the focus is on any of the list items.'
+const events = {
+  input: {
+    description: 'Emitted each time the state of the list changes.<br>Updates the <code>v-model</code> value in Vue 2.x only.',
+    params: {
+      '[Array]': 'An array of values of all the selected list items.'
+    }
+  },
+  'update:modelValue': {
+    description: 'Emitted each time the state of the list changes (when an item is selected or unselected).<br>Updates the v-model value in Vue 3 only.',
+    params: {
+      '[Array]': 'An array of values of all the selected list items.'
+    }
+  },
+  // focus: {
+  //   description: 'Emitted on each list item title focus.',
+  //   params: {
+  //     '[DOM event object]': 'The associated focus DOM event.'
+  //   }
+  // },
+  'item-click': {
+    description: 'Emitted on each list item click. The clicked item is returned as a parameter.',
+    params: {
+      '[Object]': 'The clicked list item\'s object.'
+    }
+  },
+  'keydown:escape': {
+    description: 'Emitted on escape key down, when the focus is on any of the list items.'
+  }
 }
 
 export default {
@@ -76,7 +98,7 @@ export default {
       return WList.props
     },
     events () {
-      return WList.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WList.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
     }
   }
 }

@@ -48,8 +48,8 @@ const checkboxes = {
     item: { description: 'Provide a custom content for each checkbox label.' }
   },
   eventsDescs: {
-    input: 'Emitted each time any of the checkboxes is toggled. It updates the v-model value in Vue 2.x only.<br>An array of return-value of each checked checkbox is passed as a parameter.<br>A return-value is, in this order (if they exist), either: the item value, the item label, the item index.',
-    'update:modelValue': 'Emitted each time any of the checkboxes is toggled. It updates the v-model value in Vue 3 only.<br>An array of return-value of each checked checkbox is passed as a parameter.<br>A return-value is, in this order (if they exist), either: the item value, the item label, the item index.',
+    input: 'Emitted each time any of the checkboxes is toggled.<br>Updates the v-model value in Vue 2.x only.<br>An array of return-value of each checked checkbox is passed as a parameter.<br>A return-value is, in this order (if they exist), either: the item value, the item label, the item index.',
+    'update:modelValue': 'Emitted each time any of the checkboxes is toggled.<br>Updates the v-model value in Vue 3 only.<br>An array of return-value of each checked checkbox is passed as a parameter.<br>A return-value is, in this order (if they exist), either: the item value, the item label, the item index.',
     focus: 'Emitted on each checkbox focus. The focus DOM event is returned as a parameter.'
   }
 }
@@ -74,8 +74,8 @@ const checkbox = {
     default: { description: 'The checkbox label content.' }
   },
   eventsDescs: {
-    input: 'Emitted each time the state of the checkbox changes. It updates the v-model value in Vue 2.x only.<br>A boolean for the current state is passed as a parameter.',
-    'update:modelValue': 'Emitted each time the state of the checkbox changes. It updates the v-model value in Vue 3 only.<br>A boolean for the current state is passed as a parameter.',
+    input: 'Emitted each time the state of the checkbox changes.<br>Updates the v-model value in Vue 2.x only.<br>A boolean for the current state is passed as a parameter.',
+    'update:modelValue': 'Emitted each time the state of the checkbox changes.<br>Updates the v-model value in Vue 3 only.<br>A boolean for the current state is passed as a parameter.',
     focus: 'Emitted on each checkbox focus. The focus DOM event is returned as a parameter.'
   }
 }
