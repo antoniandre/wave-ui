@@ -22,12 +22,12 @@ const propsDescs = {
   round: 'Sets a maximum border-radius on the corners of the alert container, giving it a round look.',
   icon: 'Provide a custom icon string (e.g. <code>mdi mdi-star</code>) to display on the left of the alert message.',
   iconOutside: 'If an icon is provided, this option changes the style and displays the icon on the left border.',
-  plain: 'When a type is set (one of <code>success</code>, <code>info</code>, <code>warning</code>, <code>error</code>)',
+  plain: 'Emphasizes a "typed" alert (one of <code>success</code>, <code>info</code>, <code>warning</code>, <code>error</code>) by applying a white text color and a full opacity background of the chosen type color.',
   dismiss: 'Adds a close button (cross icon) on the right in the alert. Clicking on this button hides the alert.',
-  success: 'Sets the type of the alert, applying the <code>success</code> class (green color) and adding an icon on the left in the alert.',
-  info: 'Sets the type of the alert, applying the <code>info</code> class (blue color) and adding an icon on the left in the alert.',
-  warning: 'Sets the type of the alert, applying the <code>warning</code> class (orange color) and adding an icon on the left in the alert.',
-  error: 'Sets the type of the alert, applying the <code>error</code> class (red color) and adding an icon on the left in the alert.',
+  success: 'Sets the type of the alert, applying the <code>success</code> class (green color) and adding a success icon on the left in the alert.',
+  info: 'Sets the type of the alert, applying the <code>info</code> class (blue color) and adding an info icon on the left in the alert.',
+  warning: 'Sets the type of the alert, applying the <code>warning</code> class (orange color) and adding a warning icon on the left in the alert.',
+  error: 'Sets the type of the alert, applying the <code>error</code> class (red color) and adding an error icon on the left in the alert.',
   xs: 'Sets the size of the alert.',
   sm: 'Sets the size of the alert.',
   md: 'Sets the size of the alert.',
@@ -48,7 +48,7 @@ const slots = {
 const eventsDescs = {
   input: 'Emitted on alert dismiss/hide. It updates the v-model value in Vue 2.x only.',
   'update:modelValue': 'Emitted on alert dismiss/hide. It updates the v-model value in Vue 3 only.',
-  close: 'Emitted on alert dismiss/hide.',
+  close: 'Emitted on alert dismiss/hide.'
 }
 
 export default {

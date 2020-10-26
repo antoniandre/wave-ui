@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -15,7 +14,7 @@ div
 import WIcon from '@/wave-ui/components/w-icon'
 
 const propsDescs = {
-  tag: '',
+  tag: 'The HTML tag to render the icon into. <code>&lt;i&gt;</code> by default.',
   color: 'Applies a color to the icon\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the icon\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   xs: 'Sets the size of the icon (font-size).',
@@ -23,21 +22,21 @@ const propsDescs = {
   md: 'Sets the size of the icon (font-size).',
   lg: 'Sets the size of the icon (font-size).',
   xl: 'Sets the size of the icon (font-size).',
-  spin: '',
-  rotate45: '',
-  rotate90: '',
-  rotate135: '',
-  rotate180: '',
-  rotate225: '',
-  rotate270: '',
-  rotate315: '',
-  flipX: '',
-  flipY: '',
+  spin: 'Applies a continuous centered spin movement on the icon.',
+  rotate45: 'Rotates the icon of 45 degrees clockwise.',
+  rotate90: 'Rotates the icon of 90 degrees clockwise.',
+  rotate135: 'Rotates the icon of 135 degrees clockwise.',
+  rotate180: 'Rotates the icon of 180 degrees clockwise.',
+  'rotate-45': 'Rotates the icon of 45 degrees anticlockwise.',
+  'rotate-90': 'Rotates the icon of 90 degrees anticlockwise.',
+  'rotate-135': 'Rotates the icon of 135 degrees anticlockwise.',
+  flipX: 'Flips the icon horizontally.',
+  flipY: 'Flips the icon vertically.',
   size: 'Sets the font-size of the icon.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.'
 }
 
 const slots = {
-  default: { description: 'Provide the icon to use as a string. E.g. `mdi mdi-home`.' }
+  default: { description: 'Provide the icon to use as a string. E.g. <code>mdi mdi-home</code>.' }
 }
 
 const eventsDescs = {}

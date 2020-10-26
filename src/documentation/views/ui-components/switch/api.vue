@@ -32,10 +32,25 @@ const slots = {
   default: { description: 'The switch label content, if the label prop is not flexible enough.' }
 }
 
-const eventsDescs = {
-    input: 'Emitted each time the state of the switch changes. It updates the v-model value in Vue 2.x only.<br>A boolean for the current state is passed as a parameter.',
-    'update:modelValue': 'Emitted each time the state of the switch changes. It updates the v-model value in Vue 3 only.<br>A boolean for the current state is passed as a parameter.',
-    focus: 'Emitted on switch focus. The focus DOM event is returned as a parameter.',
+const events = {
+    input: {
+      description: 'Emitted each time the state of the switch changes. It updates the v-model value in Vue 2.x only.',
+      params: {
+        '[Boolean]': 'A boolean representing the current state.'
+      }
+    },
+    'update:modelValue': {
+      description: 'Emitted each time the state of the switch changes. It updates the v-model value in Vue 3 only.',
+      params: {
+        '[Boolean]': 'A boolean representing the current state.'
+      }
+    },
+    focus: {
+      description: 'Emitted on switch focus. The focus DOM event is returned as a parameter.',
+      params: {
+        '[DOM event object]': 'The associated focus DOM event.'
+      }
+    }
 }
 
 export default {
@@ -51,7 +66,7 @@ export default {
       return { ...WSwitch.props, ...FormElementMixin.props }
     },
     events () {
-      return WSwitch.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WSwitch.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
     }
   }
 }
