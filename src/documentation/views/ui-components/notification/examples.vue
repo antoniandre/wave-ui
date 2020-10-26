@@ -1,9 +1,9 @@
 <template lang="pug">
 div
-  p.
+  alert(info).
     The #[span.code w-notification] component is pretty much a wrapper around the #[span.code w-alert]
     component with added functionalities.#[br]
-    They accept all the parameters of the #[span.code w-alert] component, plus positioning,
+    it accepts all the parameters of the #[span.code w-alert] component, plus positioning,
     transitioning &amp; timeout options.
 
   title-link(h2) Notification position
