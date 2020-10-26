@@ -65,6 +65,9 @@ div
       w-button.ma1(bg-color="primary-light3" dark) dark
 
   title-link(h2) Sizes
+  p.
+    The button size can be controlled via the preset sizes #[code xs], #[code sm], #[code md],
+    #[code lg], #[code xl] or via the #[code width] and #[code height] props.
   example
     w-button.ma1(bg-color="secondary" xs) extra small
     w-button.ma1(bg-color="secondary" sm) small
@@ -220,18 +223,25 @@ div
       }
 
   title-link(h2) Links
+  p.
+    If you are using Vue Router, all the links will automatically be #[strong.code router-link]s
+    unless they start with #[code http] or #[code https].#[br]
+    In some cases, you may want to use a normal link instead of a #[strong.code router-link], for
+    instance when using anchor links (starting with #[code #]), you can use the #[code force-link]
+    prop to force a normal link.
+
   example(content-class="w-flex")
-    w-button.ma1(bg-color="primary" to="/getting-started")
+    w-button.ma1(bg-color="primary" route="/getting-started")
       | Getting started
       w-icon.ml1 wi-chevron-right
-    w-button.ma1(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
+    w-button.ma1(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
       | Github
       w-icon.ml2(sm) mdi mdi-open-in-new
     template(#pug).
-      w-button.ma1(bg-color="primary" to="/getting-started")
+      w-button.ma1(bg-color="primary" route="/getting-started")
         | Getting started
         w-icon.ml1 wi-chevron-right
-      w-button.ma1(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
+      w-button.ma1(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
         | Github
         w-icon.ml2(sm) mdi mdi-open-in-new
 </template>

@@ -8,14 +8,24 @@ div
   ul.history
     //- li Added the #[code hide-error] option on all the form elements.
     li.patch
+      strong.version v1.9.1
+      p Return original DOM event when applicable in multiple UI components event emissions.
+
+    li.minor
+      strong.version v1.9.0
+      ul
+        li Added a new #[strong.code w-breadcrumbs] component.
+        li Renamed #[strong.code w-button]'s #[code to] prop to #[code route].
+
+    li.patch
       strong.version v1.8.1
       p.
-        Add #[code .vue] extensions for Vite &amp; Rollup
+        Added #[code .vue] extensions for Vite &amp; Rollup
         #[a(href="https://github.com/antoniandre/wave-ui/issues/2" target="_blank") #2].
 
     li.minor
       strong.version v1.8.0
-      p Add a #[strong.code w-rating] component.
+      p Added a new #[strong.code w-rating] component.
 
     li.minor
       strong.version v1.7.0
@@ -51,7 +61,7 @@ div
       strong.version v1.5.0
       ul
         li Added a new #[strong.code w-timeline] component.
-        li Fixed checkbox &amp; radio not emiting #[code input] event on Edge (known Edge bug).
+        li Fixed checkbox &amp; radio not emitting #[code input] event on Edge (known Edge bug).
         li.
           Fixed #[strong.code w-input], #[strong.code w-textarea] &amp; #[strong.code w-select]
           underline animations on Edge.
@@ -104,7 +114,7 @@ div
     margin-left: 4px;
 
     > li {padding-left: 20px;}
-    > li + li {margin-top: 10px;}
+    > li + li {margin-top: 20px;}
     li {list-style-type: none;position: relative;}
 
     // Bullet.
@@ -126,7 +136,7 @@ div
       content: '';
       position: absolute;
       top: 11px;
-      bottom: -21px; // 11px top + 10px margin between each li.
+      bottom: -31px; // 11px top + 20px margin between each li.
       left: -0.5px;
       border-left: 1px solid #ddd;
     }

@@ -40,8 +40,8 @@ const slots = {
 }
 
 const eventsDescs = {
-  input: 'Emitted on drawer close. It updates the v-model value in Vue 2.x only.',
-  'update:modelValue': 'Emitted on drawer close. It updates the v-model value in Vue 3 only.',
+  input: 'Emitted on drawer close.<br>Updates the v-model value in Vue 2.x only.',
+  'update:modelValue': 'Emitted on drawer close.<br>Updates the v-model value in Vue 3 only.',
   close: 'Emitted on drawer close.'
 }
 

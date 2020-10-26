@@ -4,11 +4,9 @@ div
   title-link(h2) Installation
 
   title-link(h3) 1. Download from NPM
-  ssh-pre(language="shell").
-    npm i wave-ui # Vue 2.x.
+  ssh-pre(language="shell") npm i wave-ui # Vue 2.x.
 
-  ssh-pre(language="shell").
-    npm i wave-ui@next # Vue 3.
+  ssh-pre(language="shell") npm i wave-ui@next # Vue 3.
 
   title-link(h3) 2. Import in your project
   p Import Wave UI library at the root of your app - usually #[span.code main.js].

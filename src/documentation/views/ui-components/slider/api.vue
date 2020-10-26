@@ -23,9 +23,9 @@ const propsDescs = {
   thumbLabelClass: 'Applies a custom CSS class to the slider\'s thumb label.',
   trackClass: 'Applies a custom CSS class to the slider\'s track.',
   rangeClass: 'Applies a custom CSS class to the slider\'s highlighted range.',
-  min: '',
-  max: '',
-  step: '',
+  step: 'Sets an incremental/decremental integer or floating step number for the slider, e.g. <code>0.3</code>.',
+  min: 'Sets an integer or floating minimum number for the slider.',
+  max: 'Sets an integer or floating maximum number for the slider.',
   labelLeft: '',
   labelRight: '',
   name: 'Provide a native HTML <code>name</code> attribute to the slider. If not provided, a unique name will be computed.',
@@ -37,10 +37,25 @@ const propsDescs = {
 
 const slots = {}
 
-const eventsDescs = {
-  input: 'Emitted each time the slider range changes. It updates the v-model value in Vue 2.x only.<br>The current value of the slider is passed as a parameter.',
-  'update:modelValue': 'Emitted each time the slider range changes. It updates the v-model value in Vue 3 only.<br>The current value of the slider is passed as a parameter.',
-  focus: 'Emitted when the slider is focused (the thumb button). The native focus event is returned as a parameter.'
+const events = {
+  input: {
+    description: 'Emitted each time the slider range changes.<br>Updates the v-model value in Vue 2.x only.',
+    params: {
+      '[Number]': 'The current value of the slider.'
+    }
+  },
+  'update:modelValue': {
+    description: 'Emitted each time the slider range changes.<br>Updates the v-model value in Vue 3 only.',
+    params: {
+      '[Number]': 'The current value of the slider.'
+    }
+  },
+  focus: {
+    description: 'Emitted when the slider is focused (the thumb button).',
+    params: {
+      '[DOM event object]': 'The associated focus DOM event.'
+    }
+  }
 }
 
 export default {
@@ -56,7 +71,7 @@ export default {
       return WSlider.props
     },
     events () {
-      return WSlider.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WSlider.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
     }
   }
 }

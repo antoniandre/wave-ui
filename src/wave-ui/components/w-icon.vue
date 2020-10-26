@@ -16,7 +16,7 @@ export default {
   name: 'w-icon',
 
   props: {
-    tag: { type: String },
+    tag: { type: String, default: 'i' },
     color: { type: String },
     bgColor: { type: String },
     xs: { type: Boolean },
