@@ -310,7 +310,7 @@ div
         w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
       template(#item-content.item3)
         p Do you want to check the project on Github?
-        w-button(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
+        w-button(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
           | Github
           w-icon.ml2(sm) mdi mdi-open-in-new
     template(#pug).
@@ -337,7 +337,7 @@ div
           w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
         template(#item-content.item3="")
           p Do you want to check the project on Github?
-          w-button.mt2(bg-color="primary" to="https://github.com/antoniandre/wave-ui")
+          w-button.mt2(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
             | Github
             w-icon.ml2(sm) mdi mdi-open-in-new
     template(#js).

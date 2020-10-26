@@ -6,7 +6,7 @@
       :key="i"
       :class="barItemClasses(item)"
       @click="!item._disabled && openTab(item)"
-      @focus="$emit('focus', $event)"
+      @focus="$emit('focus', cleanTab(item))"
       :tabindex="!item._disabled && 0"
       @keypress.enter="!item._disabled && openTab(item)"
       :aria-selected="item._active ? 'true' : 'false'"

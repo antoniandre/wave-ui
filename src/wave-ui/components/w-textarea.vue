@@ -17,7 +17,7 @@ component(
       v-if="innerIconLeft"
       tag="label"
       :for="`w-textarea--${_.uid}`"
-      @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
+      @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
     textarea.w-textarea__textarea(
       ref="textarea"
       v-model="inputValue"
@@ -50,7 +50,7 @@ component(
       v-if="innerIconRight"
       tag="label"
       :for="`w-textarea--${_.uid}`"
-      @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
+      @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
   //- Right label.
   template(v-if="labelPosition === 'right'")

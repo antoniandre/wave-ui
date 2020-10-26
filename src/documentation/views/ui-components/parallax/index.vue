@@ -1,6 +1,8 @@
 <template lang="pug">
 div
-  ui-component-title w-parallax
+  ui-component-title(slug="w-parallax")
+    .code w-parallax
+    w-tag.ml2.text-upper(color="orange" outline) In progress
   examples
   api
 </template>

@@ -19,7 +19,7 @@ component(
         v-if="innerIconLeft"
         tag="label"
         :for="`w-input--${_.uid}`"
-        @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
+        @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
       input.w-input__input(
         v-model="inputValue"
         v-on="listeners"
@@ -54,7 +54,7 @@ component(
         v-if="innerIconRight"
         tag="label"
         :for="`w-input--${_.uid}`"
-        @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
+        @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
     //- Right label.
     template(v-if="labelPosition === 'right'")

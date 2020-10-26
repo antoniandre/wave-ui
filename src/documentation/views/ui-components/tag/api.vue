@@ -38,8 +38,8 @@ const slots = {
 }
 
 const eventsDescs = {
-  input: 'For vue 2 only.<br>If a value or v-model is provided, the tag becomes toggleable on click.<br>On click, it updates the v-model value in Vue 2.x only.<br>The boolean value is passed as a parameter.',
-  'update:modelValue': 'For vue 3 only.<br>If a model-value or v-model is provided, the tag becomes toggleable on click.<br>On click, it updates the v-model value in Vue 3 only.<br>The boolean value is passed as a parameter.',
+  input: 'For vue 2 only.<br>If a value or v-model is provided, the tag becomes toggleable on click.<br>On click,<br>Updates the v-model value in Vue 2.x only.<br>The boolean value is passed as a parameter.',
+  'update:modelValue': 'For vue 3 only.<br>If a model-value or v-model is provided, the tag becomes toggleable on click.<br>On click,<br>Updates the v-model value in Vue 3 only.<br>The boolean value is passed as a parameter.',
 }
 
 export default {

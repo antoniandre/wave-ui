@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  ui-component-title w-breadcrumbs
+  ui-component-title(slug="w-breadcrumbs") w-breadcrumbs
   examples
   api
 </template>

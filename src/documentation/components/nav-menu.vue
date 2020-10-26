@@ -16,8 +16,8 @@
   w-list(:items="components" nav color="primary" @item-click="onItemClick")
     template(#item="{ item }")
       span(v-html="item.label")
-      w-tag.ml2.text-upper(v-if="item.disabled" xs color="red" outline) Coming soon
-      w-tag.ml2.text-upper(v-if="item.inProgress" xs color="orange" outline) In progress
+      w-tag.ml2.text-upper(v-if="item.disabled" round xs color="red" outline) Coming soon
+      w-tag.ml2.text-upper(v-if="item.inProgress" round xs color="orange" outline) In progress
   .title3.mt4 External UI components
   p By the same author
   w-list(:items="externalComponents" nav color="primary" @item-click="onItemClick")
@@ -60,7 +60,7 @@ export default {
       { label: 'Alert', route: '/w-alert' },
       { label: 'App', route: '/w-app' },
       { label: 'Badge', route: '/w-badge' },
-      { label: 'Breadcrumbs', route: '/w-breadcrumbs', disabled: true },
+      { label: 'Breadcrumbs', route: '/w-breadcrumbs' },
       { label: 'Button', route: '/w-button' },
       { label: 'Card', route: '/w-card' },
       // { label: 'Date picker', route: '/w-date-picker', disabled: true },
@@ -145,7 +145,9 @@ div.nav-menu {
     &:before {left: -2px;}
   }
 
-  .w-tag {line-height: 1;padding: 2px 4px;}
+  .w-list__item--parent > .w-list__item-label {text-transform: uppercase;font-weight: bold;}
+
+  .w-tag {padding: 2px 4px 1px;}
 }
 
 .content-wrap > .nav-menu {

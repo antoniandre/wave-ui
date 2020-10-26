@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -16,7 +15,7 @@ import WTooltip from '@/wave-ui/components/w-tooltip'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the tooltip. Any truthy value will show the tooltip whereas any falsy value will hide it.',
-  showOnClick: '',
+  showOnClick: 'Triggers the tooltip apparition on activator click instead of hover by default. Another click on the activator will hide the tooltip.',
   color: 'Applies a color to the tooltip\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the tooltip\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   shadow: 'Applies a drop shadow to the tooltip.',
@@ -26,7 +25,7 @@ const propsDescs = {
   round: 'Sets a maximum border-radius on the corners of the tooltip, giving it a round look.',
   tooltipClass: 'Applies a custom CSS class to the tooltip element.',
   // Position.
-  detachTo: '',
+  detachTo: 'Moves the tooltip element into another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `.w-app` will be the target.<br>By default a wrapper is created around the activator element and the tooltip is appended inside it.',
   fixed: 'Sets the CSS position of the tooltip to <code>fixed</code> (absolute by default).',
   top: 'Places the tooltip at the top of the screen when the <code>fixed</code> prop is set to true or at the top of its container otherwise.',
   bottom: 'Places the tooltip at the bottom of the screen when the <code>fixed</code> prop is set to true or at the bottom of its container otherwise.',
@@ -41,8 +40,8 @@ const slots = {
 }
 
 const eventsDescs = {
-  // input: 'Emitted each time the state of the component changes (when showing or hiding the tooltip). It updates the v-model value in Vue 2.x only.',
-  // 'update:modelValue': 'Emitted each time the state of the component changes (when showing or hiding the tooltip). It updates the v-model value in Vue 3 only.'
+  // input: 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 2.x only.',
+  // 'update:modelValue': 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 3 only.'
 }
 
 export default {
