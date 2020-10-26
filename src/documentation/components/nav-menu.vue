@@ -145,6 +145,8 @@ div.nav-menu {
     &:before {left: -2px;}
   }
 
+  .w-list__item--parent > .w-list__item-label {text-transform: uppercase;font-weight: bold;}
+
   .w-tag {padding: 2px 4px 1px;}
 }
 
