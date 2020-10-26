@@ -189,7 +189,9 @@ div.icons-demo
   title-link(h2) Sizes
   p.
     By default the icons inherit their font-size from their parent DOM element.
-    But you can easily control their size.
+    But you can easily control their size via the preset sizes #[code xs], #[code sm], #[code md],
+    #[code lg], #[code xl] or via the #[code size] prop (sets the font-size).
+
   example
     w-icon.mr2(xs color="primary-light2") mdi mdi-home
     w-icon.mr2(sm color="primary-light2") mdi mdi-home

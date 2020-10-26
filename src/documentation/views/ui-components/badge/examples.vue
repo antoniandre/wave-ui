@@ -116,6 +116,9 @@ div
         w-icon(size="2.5em") mdi mdi-account
 
   title-link(h2) Sizes
+  p.
+    The badge size can be controlled via the preset sizes #[code xs], #[code sm], #[code md],
+    #[code lg], #[code xl] or via the #[code size] prop (sets the font-size).
   example
     .title3.mb2 Dots
     w-flex(wrap)

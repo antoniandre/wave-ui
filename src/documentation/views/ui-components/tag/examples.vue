@@ -32,6 +32,9 @@ div
       w-tag(color="primary" shadow) shadow
 
   title-link(h2) Sizes
+  p.
+    The tag size can be controlled via the preset sizes #[code xs], #[code sm], #[code md],
+    #[code lg], #[code xl], or via the #[code width] and #[code height] props.
   example
     .w-flex.wrap.align-center
       w-tag.ma1(color="primary" xs) extra small
@@ -39,7 +42,7 @@ div
       w-tag.ma1(color="primary" md) medium
       w-tag.ma1(color="primary" lg) large
       w-tag.ma1(color="primary" xl) extra large
-    p.my4 You can also set a custom size using the #[code width] and #[code height] props.
+    .title3.my4 Custom width and height
     w-tag(outline color="primary" xl width="10em" height="3em") a bigger tag
     template(#pug).
       .w-flex.wrap.align-center
@@ -48,7 +51,7 @@ div
         w-tag.ma1(color="primary" md) medium
         w-tag.ma1(color="primary" lg) large
         w-tag.ma1(color="primary" xl) extra large
-      p.my4 You can also set a custom size using the width and height props.
+      .title3.my4 Custom width and height
       w-tag(outline color="primary" xl width="10em" height="3em") a bigger tag
 
   title-link(h2) Toggleable state &amp; closable

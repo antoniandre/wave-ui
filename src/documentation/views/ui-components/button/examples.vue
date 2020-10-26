@@ -65,6 +65,9 @@ div
       w-button.ma1(bg-color="primary-light3" dark) dark
 
   title-link(h2) Sizes
+  p.
+    The button size can be controlled via the preset sizes #[code xs], #[code sm], #[code md],
+    #[code lg], #[code xl] or via the #[code width] and #[code height] props.
   example
     w-button.ma1(bg-color="secondary" xs) extra small
     w-button.ma1(bg-color="secondary" sm) small
