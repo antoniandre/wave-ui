@@ -110,7 +110,7 @@ div
     margin-left: 4px;
 
     > li {padding-left: 20px;}
-    > li + li {margin-top: 10px;}
+    > li + li {margin-top: 20px;}
     li {list-style-type: none;position: relative;}
 
     // Bullet.
@@ -132,7 +132,7 @@ div
       content: '';
       position: absolute;
       top: 11px;
-      bottom: -21px; // 11px top + 10px margin between each li.
+      bottom: -31px; // 11px top + 20px margin between each li.
       left: -0.5px;
       border-left: 1px solid #ddd;
     }

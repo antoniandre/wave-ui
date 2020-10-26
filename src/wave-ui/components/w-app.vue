@@ -123,6 +123,7 @@ export default {
   position: relative; // Make the .w-app a referential for tooltips / menus.
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 
   &.d-block {display: block;}
 }
