@@ -7,6 +7,10 @@ div
 
   ul.history
     //- li Added the #[code hide-error] option on all the form elements.
+    li.patch
+      strong.version v1.9.1
+      p Return original DOM event when applicable in multiple UI components event emissions.
+
     li.minor
       strong.version v1.9.0
       ul

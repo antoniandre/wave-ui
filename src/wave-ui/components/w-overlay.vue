@@ -63,7 +63,7 @@ export default {
         this.$emit('close', false)
       }
 
-      this.$emit('click')
+      this.$emit('click', e)
     }
   }
 }

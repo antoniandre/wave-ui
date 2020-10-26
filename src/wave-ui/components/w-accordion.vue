@@ -7,7 +7,7 @@
     :aria-expanded="item._expanded ? 'true' : 'false'")
     .w-accordion__item-title(
       @click="!item._disabled && toggleItem(item)"
-      @focus="$emit('focus', item)"
+      @focus="$emit('focus', cleanItem(item))"
       :tabindex="!item._disabled && 0"
       @keypress.enter="!item._disabled && toggleItem(item)"
       :class="titleClass")

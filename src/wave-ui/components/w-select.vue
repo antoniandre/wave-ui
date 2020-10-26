@@ -34,7 +34,7 @@ component(
           v-if="innerIconLeft"
           tag="label"
           :for="`w-select--${_uid}`"
-          @click="$emit('click:inner-icon-left')") {{ innerIconLeft }}
+          @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
         .w-select__selection-slot(v-if="$scopedSlots.selection")
           slot(name="selection" :item="inputValue")
         input.w-select__selection(
@@ -74,7 +74,7 @@ component(
           v-if="innerIconRight"
           tag="label"
           :for="`w-select--${_uid}`"
-          @click="$emit('click:inner-icon-right')") {{ innerIconRight }}
+          @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
     w-list(
       ref="w-list"
       @input="onInput"
