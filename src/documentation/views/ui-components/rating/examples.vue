@@ -33,6 +33,10 @@ div
       w-rating.d-block.my4(icon="mdi mdi-heart")
 
   title-link(h2) Sizes
+  p.
+    The rating size can be controlled via the preset sizes #[code xs], #[code sm], #[code md],
+    #[code lg], #[code xl] or via CSS override.
+
   example
     w-rating.d-block.my4(xs)
     w-rating.d-block.my4(sm)
