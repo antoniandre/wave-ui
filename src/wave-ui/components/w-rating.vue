@@ -20,6 +20,7 @@ component(
     @mouseleave="hover = 0"
     @click="onButtonClick(i)"
     @focus="onFocus"
+    @keydown="onKeydown"
     :color="hover >= i || (hover === 0 && rating >= i) ? color : bgColor"
     text
     :tabindex="i === 1 ? 0 : -1")
@@ -81,6 +82,14 @@ export default {
 
     onFocus (e) {
       this.$emit('focus', e)
+    },
+
+    onKeydown (e) {
+      if ([37, 38, 39, 40].includes(e.keyCode)) {
+        if ([39, 40].includes(e.keyCode)) this.rating++
+        else this.rating--
+        e.preventDefault()
+      }
     }
   }
 }
@@ -92,16 +101,14 @@ export default {
   align-items: center;
 
   &__button {
-    margin-left: -$base-increment;
+    margin-left: round(-0.5 * $base-increment);
 
     &:hover {transform: scale(1.1);}
 
     // Sizes.
-    &.size--xs {margin-left: round(-0.5 * $base-increment);}
-    &.size--lg {margin-left: round(-0.5 * $base-increment);}
     &.size--xl {margin-left: 0;}
     &.size--xs .w-icon {font-size: round(1.1 * $base-font-size / 2) * 2;}
-    &.size--sm .w-icon {font-size: round(1.4 * $base-font-size / 2) * 2;}
+    &.size--sm .w-icon {font-size: round(1.45 * $base-font-size / 2) * 2;}
     &.size--md .w-icon {font-size: round(1.6 * $base-font-size / 2) * 2;}
     &.size--lg .w-icon {font-size: round(1.8 * $base-font-size / 2) * 2;}
     &.size--xl .w-icon {font-size: round(2.5 * $base-font-size / 2) * 2;}
