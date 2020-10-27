@@ -10,21 +10,24 @@ component(
     :name="inputName"
     type="hidden"
     :value="rating")
-  w-button.w-rating__button(
-    v-for="i in max"
-    :key="i"
-    :icon="icon"
-    :[size]="true"
-    :class="{ 'w-rating__button--on': hover >= i || (hover === 0 && rating >= i) }"
-    @mouseenter="hover = i"
-    @mouseleave="hover = 0"
-    @click="onButtonClick(i)"
-    @focus="onFocus"
-    @keydown="onKeydown"
-    :color="hover >= i || (hover === 0 && rating >= i) ? color : bgColor"
-    text
-    :tabindex="i === 1 ? 0 : -1")
-    slot(name="item" :index="i + 1")
+  template(v-for="i in max")
+    slot(v-if="$scopedSlots.item" name="item" :index="i + 1")
+    w-icon.w-rating__button(
+      v-else
+      tag="button"
+      type="button"
+      :key="i"
+      :icon="icon"
+      :[size]="true"
+      :class="{ 'w-rating__button--on': hover >= i || (hover === 0 && rating >= i) }"
+      @mouseenter="hover = i"
+      @mouseleave="hover = 0"
+      @click="onButtonClick(i)"
+      @focus="onFocus"
+      @keydown="onKeydown"
+      :color="hover >= i || (hover === 0 && rating >= i) ? color : bgColor"
+      text
+      :tabindex="i === 1 ? 0 : -1") {{ icon }}
 </template>
 
 <script>
@@ -37,7 +40,7 @@ export default {
   props: {
     value: {},
     max: { type: Number, default: 5 },
-    color: { type: String },
+    color: { type: String, default: 'primary' },
     bgColor: { type: String, default: 'grey-light4' },
     icon: { type: String, default: 'wi-star' },
     xs: { type: Boolean },
@@ -86,8 +89,8 @@ export default {
 
     onKeydown (e) {
       if ([37, 38, 39, 40].includes(e.keyCode)) {
-        if ([39, 40].includes(e.keyCode)) this.rating++
-        else this.rating--
+        if ([39, 40].includes(e.keyCode)) this.rating <= this.max - 1 && this.rating++
+        else if (this.rating > 1) this.rating--
         e.preventDefault()
       }
     }
@@ -101,17 +104,30 @@ export default {
   align-items: center;
 
   &__button {
-    margin-left: round(-0.5 * $base-increment);
+    padding: 0.58em;
+    border: none;
+    background: none;
+    @include default-transition($fast-transition-duration);
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: currentColor;
+      opacity: 0;
+      border-radius: 50%;
+      transition: inherit;
+    }
 
     &:hover {transform: scale(1.1);}
+    &:focus:after {opacity: 0.15;}
+    &:active:after {opacity: 0.25;}
 
     // Sizes.
     &.size--xl {margin-left: 0;}
-    &.size--xs .w-icon {font-size: round(1.1 * $base-font-size / 2) * 2;}
-    &.size--sm .w-icon {font-size: round(1.45 * $base-font-size / 2) * 2;}
-    &.size--md .w-icon {font-size: round(1.6 * $base-font-size / 2) * 2;}
-    &.size--lg .w-icon {font-size: round(1.8 * $base-font-size / 2) * 2;}
-    &.size--xl .w-icon {font-size: round(2.5 * $base-font-size / 2) * 2;}
   }
 }
 </style>

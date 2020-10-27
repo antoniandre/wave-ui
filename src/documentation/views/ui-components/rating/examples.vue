@@ -12,11 +12,20 @@ div
     div.mt2
       strong.mr2 v-model:
       code {{ rating1 }}
+    w-rating.mt4(v-model="rating2")
+    div.mt2
+      strong.mr2 v-model:
+      code {{ rating2 }}
     template(#pug).
       w-rating(v-model="rating")
       div.mt2
         strong.mr2 v-model:
         code {{ '\{\{ rating \}\}' }}
+
+      w-rating.mt4(v-model="rating2")
+      div.mt2
+        strong.mr2 v-model:
+        code {{ '\{\{ rating2 \}\}' }}
 
   title-link(h2) Color
   example
@@ -34,8 +43,8 @@ div
 
   title-link(h2) Sizes
   p.
-    The rating size can be controlled via the preset sizes #[code xs], #[code sm], #[code md],
-    #[code lg], #[code xl] or via CSS override.
+    The rating component's size can be controlled via the preset sizes #[code xs], #[code sm],
+    #[code md], #[code lg], #[code xl] or via CSS override.
 
   example
     w-rating.d-block.my4(xs)
@@ -54,7 +63,8 @@ div
 <script>
 export default {
   data: () => ({
-    rating1: 3
+    rating1: 3,
+    rating2: 4.71
   })
 }
 </script>
