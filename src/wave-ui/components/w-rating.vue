@@ -1,6 +1,15 @@
 <template lang="pug">
-.w-rating(:class="classes")
-  input(type="hidden" :value="rating")
+component(
+  :is="formRegister ? 'w-form-element' : 'div'"
+  v-bind="formRegister && { validators, inputValue: rating, disabled, readonly }"
+  :valid.sync="valid"
+  @reset="rangeValuePercent = 0;updateRangeValueScaled()"
+  :class="classes")
+  input(
+    :id="inputName"
+    :name="inputName"
+    type="hidden"
+    :value="rating")
   w-button.w-rating__button(
     v-for="i in max"
     :key="i"
@@ -10,14 +19,20 @@
     @mouseenter="hover = i"
     @mouseleave="hover = 0"
     @click="onButtonClick(i)"
+    @focus="onFocus"
     :color="hover >= i || (hover === 0 && rating >= i) ? color : bgColor"
-    text)
-  slot
+    text
+    :tabindex="i === 1 ? 0 : -1")
+    slot(name="item" :index="i + 1")
 </template>
 
 <script>
+import FormElementMixin from '../mixins/form-elements'
+
 export default {
   name: 'w-rating',
+  mixins: [FormElementMixin],
+
   props: {
     value: {},
     max: { type: Number, default: 5 },
@@ -28,16 +43,16 @@ export default {
     sm: { type: Boolean },
     md: { type: Boolean },
     lg: { type: Boolean },
-    xl: { type: Boolean },
-    disabled: { type: Boolean }
+    xl: { type: Boolean }
+    // Also name, disabled, readonly, required and validators in the mixin.
   },
 
   emits: ['input'],
 
   data () {
     return {
-      rating: parseInt(this.value),
-      hover: 0
+      rating: parseFloat(this.value || 0),
+      hover: 0 // The index (starts at 1) of the currently hovered button.
     }
   },
 
@@ -53,6 +68,7 @@ export default {
     },
     classes () {
       return {
+        'w-rating': true
       }
     }
   },
@@ -61,6 +77,10 @@ export default {
     onButtonClick (i) {
       this.rating = i
       this.$emit('input', this.rating)
+    },
+
+    onFocus (e) {
+      this.$emit('focus', e)
     }
   }
 }
