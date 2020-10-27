@@ -109,7 +109,7 @@ export default {
     arrowsNavigation: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue', 'item-click', 'keydown:escape'],
+  emits: ['input', 'update:modelValue', 'item-click', 'keydown:escape', 'keydown:enter'],
 
   data: () => ({
     listItems: []
@@ -252,13 +252,17 @@ export default {
       })
       // If selectable list, on enter key press select item.
       const keydown = this.isSelectable && (e => {
-        if (!li.disabled && e.keyCode === 13) this.selectItem(li)
+        if (!li.disabled && e.keyCode === 13) {
+          this.selectItem(li)
+          // eslint-disable-next-line vue/custom-event-name-casing
+          this.$emit('keydown:enter')
+        }
         // eslint-disable-next-line vue/custom-event-name-casing
         else if (e.keyCode === 27) this.$emit('keydown:escape')
         else if (this.arrowsNavigation) {
           e.preventDefault()
-          if (e.keyCode === 38) this.focusPrevItem(li._index)
-          if (e.keyCode === 40) this.focusNextItem(li._index)
+          if (e.keyCode === 38) this.focusPrevNextItem(li._index, false)
+          if (e.keyCode === 40) this.focusPrevNextItem(li._index, true)
         }
       })
       // ------------------------------------------------------
@@ -324,18 +328,11 @@ export default {
       this.$emit('input', selection)
     },
 
-    focusPrevItem (index) {
-      // The index of the previous item in the array of enabled items.
-      index = this.enabledItemsIndexes[this.enabledItemsIndexes.indexOf(index) - 1]
-      if (index === undefined) index = this.enabledItemsIndexes[this.enabledItemsIndexes.length - 1]
-
-      this.$el.querySelector(`#${this.listId}_item-${index + 1}`).focus()
-    },
-
-    focusNextItem (index) {
-      // The index of the next item in the array of enabled items.
-      index = this.enabledItemsIndexes[this.enabledItemsIndexes.indexOf(index) + 1]
-      if (index === undefined) index = this.enabledItemsIndexes[0]
+    focusPrevNextItem (index, next = true) {
+      // The index of the previous or next item in the array of enabled items.
+      index = this.enabledItemsIndexes[this.enabledItemsIndexes.indexOf(index) + (next ? 1 : -1)]
+      const firstOrLastIndex = next ? 0 : this.enabledItemsIndexes.length - 1
+      if (index === undefined) index = this.enabledItemsIndexes[firstOrLastIndex]
 
       this.$el.querySelector(`#${this.listId}_item-${index + 1}`).focus()
     },
