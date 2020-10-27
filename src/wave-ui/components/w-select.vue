@@ -36,7 +36,8 @@ component(
           :for="`w-select--${_uid}`"
           @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
         .w-select__selection-slot(v-if="$scopedSlots.selection")
-          slot(name="selection" :item="inputValue")
+          //- inputValue is always an array.
+          slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
         input.w-select__selection(
           ref="selection-input"
           type="text"
