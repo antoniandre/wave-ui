@@ -78,6 +78,8 @@ component(
     w-list(
       ref="w-list"
       @input="onInput"
+      @item-click="noUnselect && !multiple && closeMenu() /* Close menu when clicking a selected item */"
+      @keydown:enter="noUnselect && !multiple && closeMenu()"
       @keydown:escape="closeMenu"
       :value="inputValue"
       :items="selectItems"
