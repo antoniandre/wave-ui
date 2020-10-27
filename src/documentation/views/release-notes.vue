@@ -10,6 +10,7 @@ div
     li.patch
       strong.version v1.9.2
       ul
+        li Improved the #[strong.code w-rating] component.
         li Improved the #[strong.code w-select] component.
         li #[strong.code w-list] emits event on #[kbd enter] keydown.
 
