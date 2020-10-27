@@ -8,6 +8,12 @@ div
   ul.history
     //- li Added the #[code hide-error] option on all the form elements.
     li.patch
+      strong.version v1.9.2
+      ul
+        li Improved the #[strong.code w-select] component.
+        li #[strong.code w-list] emits event on #[kbd enter] keydown.
+
+    li.patch
       strong.version v1.9.1
       p Return original DOM event when applicable in multiple UI components event emissions.
 
