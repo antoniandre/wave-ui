@@ -2,8 +2,7 @@
 component.w-button(
   :is="route ? 'a' : 'button'"
   :type="!route && type"
-  :to="hasRouter && route"
-  :href="route"
+  :href="(route && resolvedRoute) || null"
   :class="classes"
   :disabled="!!disabled || null"
   v-on="listeners"
@@ -68,13 +67,16 @@ export default {
     hasRouter () {
       return '$router' in this
     },
+    resolvedRoute () {
+      return this.hasRouter ? this.$router.resolve(this.route).href : this.route
+    },
     listeners () {
       // If the button is a router-link, we can't apply events on it since vue-router needs the .native
       // modifier but it's not available with the v-on directive.
       // So do a manual router.push if $router is present.
       return this.route && this.hasRouter && !this.forceLink ? {
         ...this.$listeners,
-        click: e => e.preventDefault() && this.$router.push(this.route)
+        click: e => this.$router.push(this.route) && e.preventDefault()
       } : this.$listeners
     },
     size () {
