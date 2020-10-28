@@ -1,12 +1,12 @@
 <template lang="pug">
 component.w-button(
-  :is="route ? (hasRouter && !externalLink && !forceLink ? 'router-link' : 'a') : 'button'"
+  :is="route ? 'a' : 'button'"
   :type="!route && type"
   :to="hasRouter && route"
   :href="route"
   :class="classes"
   :disabled="!!disabled || null"
-  v-on="$listeners"
+  v-on="listeners"
   :style="styles")
   w-icon(v-if="icon") {{ icon }}
   slot(v-else)
@@ -67,6 +67,15 @@ export default {
   computed: {
     hasRouter () {
       return '$router' in this
+    },
+    listeners () {
+      // If the button is a router-link, we can't apply events on it since vue-router needs the .native
+      // modifier but it's not available with the v-on directive.
+      // So do a manual router.push if $router is present.
+      return this.route && this.hasRouter && !this.forceLink ? {
+        ...this.$listeners,
+        click: e => e.preventDefault() && this.$router.push(this.route)
+      } : this.$listeners
     },
     size () {
       return (
