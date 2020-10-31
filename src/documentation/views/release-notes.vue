@@ -8,6 +8,11 @@ div
   ul.history
     //- li Added the #[code hide-error] option on all the form elements.
     li.patch
+      strong.version v1.9.4
+      ul
+        li Rename the #[strong.code w-icon] rotation props.
+
+    li.patch
       strong.version v1.9.3
       ul
         li Allow #[strong.code w-tooltip] on a #[strong.code router-link] #[strong.code w-button].
