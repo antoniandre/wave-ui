@@ -153,6 +153,7 @@ $spinner-size: 40;
   user-select: none;
   cursor: pointer;
   color: inherit; // Override the default color in Safari.
+  font-family: inherit;
   z-index: 1;
   // Background-color must not transition to not affect the hover & focus states
   // in :before & :after.
