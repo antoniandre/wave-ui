@@ -366,15 +366,12 @@ export default {
     }
   },
 
-  beforeMount () {
-    // Do this, first thing on mounted (beforeMount + nextTick).
-    this.$nextTick(() => {
-      this.activatorEl = this.$refs.wrapper.firstElementChild
-      this.overlayEl = this.overlay ? this.$refs.overlay.$el : null
-      this.insertMenu()
+  mounted () {
+    this.activatorEl = this.$refs.wrapper.firstElementChild
+    this.overlayEl = this.overlay ? this.$refs.overlay.$el : null
+    this.insertMenu()
 
-      if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
-    })
+    if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
   },
 
   beforeDestroy () {
