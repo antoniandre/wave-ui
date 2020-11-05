@@ -363,6 +363,11 @@ export default {
       // Move the menu elsewhere in the DOM.
       // wrapper.parentNode.insertBefore(this.menuEl, wrapper)
       this.detachToTarget.appendChild(this.menuEl)
+    },
+
+    removeMenu () {
+      // el.remove() doesn't work on IE11.
+      if (this.menuEl && this.menuEl.parentNode) this.menuEl.parentNode.removeChild(this.menuEl)
     }
   },
 
@@ -375,8 +380,8 @@ export default {
   },
 
   beforeDestroy () {
+    this.removeMenu()
     // el.remove() doesn't work on IE11.
-    if (this.menuEl && this.menuEl.parentNode) this.menuEl.parentNode.removeChild(this.menuEl)
     if (this.overlay && this.overlayEl.parentNode) this.overlayEl.parentNode.removeChild(this.overlayEl)
     if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.parentNode.removeChild(this.activatorEl)
   },
@@ -384,6 +389,10 @@ export default {
   watch: {
     value (value) {
       if (!!value !== this.showMenu) this.toggle({ type: 'click', target: this.activatorEl })
+    },
+    detachTo () {
+      this.removeMenu()
+      this.insertMenu()
     }
   }
 }
