@@ -252,6 +252,7 @@ $inactive-color: #777;
     height: 100%;
     font-size: inherit;
     color: inherit;
+    text-align: inherit;
     background: none;
     border: none;
     outline: none;
