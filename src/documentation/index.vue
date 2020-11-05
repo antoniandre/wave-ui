@@ -14,7 +14,7 @@ w-app
       :drawer-open.sync="drawerOpen")
     .main-content.w-flex.column.grow
       transition(name="fade-page" mode="out-in")
-        router-view.grow
+        router-view.grow(:class="`main--${$route.name}`")
 
       footer.w-flex.justify-end.align-center.no-grow.wrap
         small.grey-light3.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
