@@ -1,8 +1,6 @@
 <template lang="pug">
 div
-  ui-component-title(slug="w-date-picker")
-    .code w-date-picker
-    w-tag.ml2.text-upper(color="orange" outline) In progress
+  ui-component-title(slug="w-date-picker" in-progress) w-date-picker
   examples
   api
 </template>
