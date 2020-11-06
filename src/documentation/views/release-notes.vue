@@ -8,9 +8,15 @@ main
   ul.history
     //- li Added the #[code hide-error] option on all the form elements.
     li.patch
+      strong.version v1.9.5
+      ul
+        li Use vertical padding instead of line height in the #[strong.code w-tag] component.
+
+    li.patch
       strong.version v1.9.4
       ul
-        li Rename the #[strong.code w-icon] rotation props.
+        li Renamed the #[strong.code w-icon] rotation props #[code rotate45a], #[code rotate90a], #[code rotate135a].
+
 
     li.patch
       strong.version v1.9.3
@@ -168,7 +174,7 @@ main
     > li.major .version {color: #000;}
 
     ul {margin-left: -2px;}
-    li li {padding-left: 20px;}
+    li li {padding-left: 20px;margin-top: 2px;}
 
     // Bullet.
     li li:before {
