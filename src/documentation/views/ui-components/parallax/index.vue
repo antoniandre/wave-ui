@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   ui-component-title(slug="w-parallax" in-progress) w-parallax
   examples
   api

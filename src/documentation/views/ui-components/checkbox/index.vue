@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   ui-component-title(slug="w-checkbox-and-w-checkboxes" :code="false")
     | #[span.code w-checkbox] &amp; #[span.code w-checkboxes]
 

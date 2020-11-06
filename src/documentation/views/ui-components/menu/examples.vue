@@ -284,7 +284,7 @@ export default {
 </script>
 
 <style lang="scss">
-.page--menu {
+.main--menu {
   .example {
     display: flex;
     flex-direction: column;

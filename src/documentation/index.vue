@@ -4,7 +4,7 @@ w-app
     nav-menu(:drawer-open.sync="drawerOpen")
   header.no-shrink
     toolbar(:drawer-open.sync="drawerOpen")
-  .content-wrap.w-flex.no-shrink(:class="`page--${$route.name}`")
+  .content-wrap.w-flex.no-shrink
     transition(name="fade")
       w-progress(v-if="loading" color="primary" tile absolute)
     nav-menu.navigation.no-shrink(

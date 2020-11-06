@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   title-link.mt4(h1) Release notes
   p.mt-6.mb10.grey-light2.text-italic
     | Follows the
@@ -126,7 +126,7 @@ div
 </template>
 
 <style lang="scss">
-.page--release-notes {
+.main--release-notes {
   .history {
     margin-left: 4px;
 

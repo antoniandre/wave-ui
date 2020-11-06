@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   title-link.mt4(h1) Spaces
 
   title-link(h2) Content spacing
