@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   ui-component-title(slug="w-rating" in-progress) w-rating
   examples
   api

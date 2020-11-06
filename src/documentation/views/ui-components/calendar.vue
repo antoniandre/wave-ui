@@ -1,5 +1,5 @@
 <template lang="pug">
-.calendar
+main
   title-link.mt4(h1) Calendar
 
   p
@@ -22,5 +22,5 @@
 </template>
 
 <style lang="scss">
-.calendar img {max-width: 100%;}
+.main--calendar img {max-width: 100%;}
 </style>

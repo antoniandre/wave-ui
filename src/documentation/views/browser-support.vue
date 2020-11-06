@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   title-link.mt4(h1) Browser support
   title-link(h2) All major browsers supported
   p Wave UI supports:
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="scss">
-.page--browser-support {
+.main--browser-support {
   p {margin-top: 1.5em;}
 }
 </style>

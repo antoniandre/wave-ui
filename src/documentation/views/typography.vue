@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   title-link.mt4(h1) Typography
   p Here is a list of classes that will help you structure and emphasize your content.
 
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="scss">
-.page--typography {
+.main--typography {
   code {
     font-weight: normal;
     font-style: normal;

@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   title-link.mt4(h1) Colors
   p.
     Wave UI colors work in a very simple way: for instance the class
@@ -147,7 +147,7 @@ export default {
 </script>
 
 <style lang="scss">
-.page--colors {
+.main--colors {
   .horizontal {overflow-x: auto;overflow-y: hidden;}
   .color {
     align-items: center;

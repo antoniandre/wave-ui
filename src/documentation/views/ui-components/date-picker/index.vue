@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   ui-component-title(slug="w-date-picker" in-progress) w-date-picker
   examples
   api

@@ -189,7 +189,7 @@ div
 </template>
 
 <style lang="scss">
-.page--toolbar {
+.main--toolbar {
   .w-card {
     flex-grow: 1;
     max-width: 550px;
@@ -198,7 +198,7 @@ div
 }
 
 @media screen and (max-width: 400px) {
-  .page--toolbar .w-toolbar {
+  .main--toolbar .w-toolbar {
     button {margin: 0;}
     .ml2 {margin-left:4px;}
     .title2 {font-size: 19px;}
