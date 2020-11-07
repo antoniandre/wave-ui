@@ -79,6 +79,7 @@ export default {
       return {
         'w-rating': true,
         'w-rating--focus': this.hasFocus,
+        'w-rating--hover': this.hover,
         'w-rating--disabled': this.disabled,
         'w-rating--readonly': this.readonly,
         'w-rating--ripple': this.ripple.start,
@@ -145,6 +146,12 @@ export default {
         [isOn ? this.color : this.bgColor]: true
       }
     }
+  },
+
+  watch: {
+    value (value) {
+      this.rating = value
+    }
   }
 }
 </script>
@@ -177,29 +184,29 @@ export default {
     &.size--lg {font-size: round(1.7 * $base-font-size);}
     &.size--xl {font-size: 2 * $base-font-size;margin-left: 0;}
 
+    &:before {font-size: 1.1em;}
     &:before, .w-icon:before {
       width: 1em;
-      font-size: 1.1em;
       height: 1em;
       display: inline-flex;
       transition: 0.15s transform;
     }
   }
 
-  &:hover &__button--on:before,
-  &:hover &__button--on .w-icon:before,
+  &--hover &__button--on:before,
+  &--hover &__button--on .w-icon:before,
   &--focus &__button--on:before,
   &--focus &__button--on .w-icon:before {transform: scale(1.12);}
 
   // Disabled & readonly.
   &--readonly &__button--on:before,
-  &--readonly:hover &__button--on:before,
+  &--readonly.w-rating--hover &__button--on:before,
   &--readonly &__button--on .w-icon:before,
-  &--readonly:hover &__button--on .w-icon:before,
+  &--readonly.w-rating--hover &__button--on .w-icon:before,
   &--disabled &__button--on:before,
-  &--disabled:hover &__button--on:before,
+  &--disabled.w-rating--hover &__button--on:before,
   &--disabled &__button--on .w-icon:before,
-  &--disabled:hover &__button--on .w-icon:before {transform: none;}
+  &--disabled.w-rating--hover &__button--on .w-icon:before {transform: none;}
 
   // Half star.
   &__button .w-icon {
@@ -212,7 +219,7 @@ export default {
     display: inline-flex;
     border-radius: 0;
   }
-  &__button:hover ~ &__button .w-icon {width: 0 !important;}
+  .w-rating--hover &__button .w-icon {display: none;}
 
   // The focus outline & ripple on button click.
   &__button:after {
