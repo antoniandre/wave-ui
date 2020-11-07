@@ -12,22 +12,23 @@ component(
     :value="rating")
   template(v-for="i in max")
     slot(v-if="$scopedSlots.item" name="item" :index="i + 1")
-    w-icon.w-rating__button(
-      v-else
-      tag="button"
-      type="button"
+    button.w-rating__button(
       :key="i"
-      :icon="icon"
-      :[size]="true"
-      :class="{ 'w-rating__button--on': hover >= i || (hover === 0 && rating >= i) }"
       @mouseenter="hover = i"
       @mouseleave="hover = 0"
       @click="onButtonClick(i)"
       @focus="onFocus"
+      @blur="onBlur"
       @keydown="onKeydown"
-      :color="hover >= i || (hover === 0 && rating >= i) ? color : bgColor"
-      text
-      :tabindex="i === 1 ? 0 : -1") {{ icon }}
+      :class="buttonClasses(i)"
+      type="button"
+      :tabindex="i === 1 ? 0 : -1")
+      i.w-icon(
+        v-if="i - 1 === ~~rating && rating - ~~rating"
+        role="icon"
+        :class="`${icon} ${color}`"
+        aria-hidden="true"
+        :style="halfStarStyle")
 </template>
 
 <script>
@@ -56,7 +57,8 @@ export default {
   data () {
     return {
       rating: parseFloat(this.value || 0),
-      hover: 0 // The index (starts at 1) of the currently hovered button.
+      hover: 0, // The index (starts at 1) of the currently hovered button.
+      hasFocus: false
     }
   },
 
@@ -72,7 +74,14 @@ export default {
     },
     classes () {
       return {
-        'w-rating': true
+        'w-rating': true,
+        'w-rating--focus': this.hasFocus
+      }
+    },
+
+    halfStarStyle () {
+      return {
+        width: this.hover <= ~~this.rating && `${(this.rating - ~~this.rating) * 100}%`
       }
     }
   },
@@ -84,7 +93,13 @@ export default {
     },
 
     onFocus (e) {
+      this.hasFocus = true
       this.$emit('focus', e)
+    },
+
+    onBlur (e) {
+      this.hasFocus = false
+      this.$emit('blur', e)
     },
 
     onKeydown (e) {
@@ -92,6 +107,18 @@ export default {
         if ([39, 40].includes(e.keyCode)) this.rating <= this.max - 1 && this.rating++
         else if (this.rating > 1) this.rating--
         e.preventDefault()
+      }
+    },
+
+    buttonClasses (i) {
+      const isHalf = i - 1 === ~~this.rating && this.rating - ~~this.rating
+      const isOn = this.hover >= i || (!isHalf && this.hover === 0 && this.rating >= i)
+      return {
+        'w-rating__button--on': isOn,
+        'w-rating__button--half': isHalf,
+        [this.icon]: true,
+        [`size--${this.size}`]: true,
+        [isOn ? this.color : this.bgColor]: true
       }
     }
   }
@@ -104,9 +131,15 @@ export default {
   align-items: center;
 
   &__button {
-    padding: 0.58em;
+    position: relative;
+    width: 1.1em;
+    height: 1.1em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     background: none;
+    cursor: pointer;
     @include default-transition($fast-transition-duration);
 
     &:after {
@@ -122,12 +155,37 @@ export default {
       transition: inherit;
     }
 
-    &:hover {transform: scale(1.1);}
     &:focus:after {opacity: 0.15;}
     &:active:after {opacity: 0.25;}
 
     // Sizes.
-    &.size--xl {margin-left: 0;}
+    &.size--xs {font-size: round(0.85 * $base-font-size);}
+    &.size--sm {font-size: round(1.15 * $base-font-size);}
+    &.size--md {font-size: round(1.4 * $base-font-size);}
+    &.size--lg {font-size: round(1.7 * $base-font-size);}
+    &.size--xl {font-size: 2 * $base-font-size;margin-left: 0;}
+
+    &:before, .w-icon:before {
+      width: 1em;
+      font-size: 1.1em;
+      height: 1em;
+      display: inline-flex;
+    }
   }
+
+  &:hover &__button--on:before, &:hover &__button--on .w-icon:before {transform: scale(1.1);}
+  &--focus &__button--on:before, &--focus &__button--on .w-icon:before {transform: scale(1.1);}
+
+  &__button .w-icon {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    font-size: 1em;
+    justify-content: flex-start;
+    overflow: hidden;
+    display: inline-flex;
+    border-radius: 0;
+  }
+  &__button:hover ~ &__button .w-icon {width: 0 !important;}
 }
 </style>
