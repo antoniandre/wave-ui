@@ -29,17 +29,20 @@ div
 
   title-link(h2) Color
   example
-    w-rating.d-block.my4(color="green")
-    w-rating.d-block.my4(bg-color="light-green" color="yellow")
+    w-rating.my2(color="green")
+    br
+    w-rating.my2(bg-color="light-green" color="yellow")
+
     template(#pug).
-      w-rating.d-block.my4(color="green")
-      w-rating.d-block.my4(bg-color="light-green")
+      w-rating.my2(color="green")
+      br
+      w-rating.my2(bg-color="light-green")
 
   title-link(h2) Custom Icons
   example
-    w-rating.d-block.my4(icon="mdi mdi-heart")
+    w-rating.my2(icon="mdi mdi-heart")
     template(#pug).
-      w-rating.d-block.my4(icon="mdi mdi-heart")
+      w-rating.my2(icon="mdi mdi-heart")
 
   title-link(h2) Sizes
   p.
@@ -47,24 +50,33 @@ div
     #[code md], #[code lg], #[code xl] or via CSS override.
 
   example
-    w-rating.d-block.my4(xs)
-    w-rating.d-block.my4(sm)
-    w-rating.d-block.my4(md)
-    w-rating.d-block.my4(lg)
-    w-rating.d-block.my4(xl)
+    w-rating.my2(xs)
+    br
+    w-rating.my2(sm)
+    br
+    w-rating.my2(md)
+    br
+    w-rating.my2(lg)
+    br
+    w-rating.my2(xl)
+
     template(#pug).
-      w-rating.d-block.my4(xs)
-      w-rating.d-block.my4(sm)
-      w-rating.d-block.my4(md)
-      w-rating.d-block.my4(lg)
-      w-rating.d-block.my4(xl)
+      w-rating.my2(xs)
+      br
+      w-rating.my2(sm)
+      br
+      w-rating.my2(md)
+      br
+      w-rating.my2(lg)
+      br
+      w-rating.my2(xl)
 </template>
 
 <script>
 export default {
   data: () => ({
     rating1: 3,
-    rating2: 4.71
+    rating2: 3.42
   })
 }
 </script>
