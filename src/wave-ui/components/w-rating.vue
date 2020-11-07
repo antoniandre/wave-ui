@@ -5,11 +5,7 @@ component(
   :valid.sync="valid"
   @reset="rangeValuePercent = 0;updateRangeValueScaled()"
   :class="classes")
-  input(
-    :id="inputName"
-    :name="inputName"
-    type="hidden"
-    :value="rating")
+  input(:id="inputName" :name="inputName" type="hidden" :value="rating")
   template(v-for="i in max")
     slot(v-if="$scopedSlots.item" name="item" :index="i + 1")
     button.w-rating__button(
@@ -52,7 +48,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur'],
 
   data () {
     return {
@@ -89,6 +85,7 @@ export default {
   methods: {
     onButtonClick (i) {
       this.rating = i
+      this.$emit('update:modelValue', this.rating)
       this.$emit('input', this.rating)
     },
 
@@ -142,6 +139,7 @@ export default {
     cursor: pointer;
     @include default-transition($fast-transition-duration);
 
+    // The focus outline & ripple on button click.
     &:after {
       content: '';
       position: absolute;
@@ -170,12 +168,14 @@ export default {
       font-size: 1.1em;
       height: 1em;
       display: inline-flex;
+      transition: inherit transform;
     }
   }
 
   &:hover &__button--on:before, &:hover &__button--on .w-icon:before {transform: scale(1.1);}
   &--focus &__button--on:before, &--focus &__button--on .w-icon:before {transform: scale(1.1);}
 
+  // Half star.
   &__button .w-icon {
     position: absolute;
     left: 0;
