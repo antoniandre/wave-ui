@@ -10,8 +10,7 @@ component(
     slot(v-if="$scopedSlots.item" name="item" :index="i + 1")
     button.w-rating__button(
       :key="i"
-      :disabled="disabled"
-      :readonly="readonly"
+      :disabled="disabled || readonly"
       @mouseenter="hover = i"
       @mouseleave="hover = 0"
       @click="onButtonClick(i)"
@@ -167,8 +166,9 @@ export default {
     cursor: pointer;
     @include default-transition($fast-transition-duration);
 
-    // Disabled.
-    .w-rating--disabled & {color: $disabled-color;}
+    // Disabled & readonly.
+    .w-rating--disabled & {opacity: 0.6;cursor: not-allowed;}
+    .w-rating--readonly & {cursor: auto;}
 
     // Sizes.
     &.size--xs {font-size: round(0.85 * $base-font-size);}
@@ -190,6 +190,16 @@ export default {
   &:hover &__button--on .w-icon:before,
   &--focus &__button--on:before,
   &--focus &__button--on .w-icon:before {transform: scale(1.12);}
+
+  // Disabled & readonly.
+  &--readonly &__button--on:before,
+  &--readonly:hover &__button--on:before,
+  &--readonly &__button--on .w-icon:before,
+  &--readonly:hover &__button--on .w-icon:before,
+  &--disabled &__button--on:before,
+  &--disabled:hover &__button--on:before,
+  &--disabled &__button--on .w-icon:before,
+  &--disabled:hover &__button--on .w-icon:before {transform: none;}
 
   // Half star.
   &__button .w-icon {
