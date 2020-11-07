@@ -7,9 +7,16 @@ main
 
   ul.history
     //- li Added the #[code hide-error] option on all the form elements.
-    li.patch
-      strong.version v1.9.5
+    li.minor
+      strong.version v1.10.0
       ul
+        li Improved the #[strong.code w-rating] component: represent decimal values, add ripple effect and #[code disabled] &amp; #[code readonly] props.
+        li Allow detaching a #[strong.code w-select]'s menu to a custom DOM node via #[code menuProps.detachTo].
+        li Emit an #[code item-select] event on #[strong.code w-list] item select (via click or keyboard #[kbd enter] key press).
+        li Emit both #[code item-select] and #[code item-click] events from #[strong.code w-select]'s menu on item select (via click or keyboard #[kbd enter] key press) or item click.
+        li Keep a #[strong.code w-select]'s menu open when #[code menuProps.hideOnMenuClick] is explicitly set to false.
+        li Added a #[code no-position] prop to skip computing a #[strong.code w-menu] position (top &amp; left).
+        li Re-mount a #[strong.code w-menu] &amp; #[strong.code w-tooltip] in DOM when the #[code detach-to] prop changes.
         li Use vertical padding instead of line height in the #[strong.code w-tag] component.
 
     li.patch
@@ -38,7 +45,7 @@ main
       strong.version v1.9.0
       ul
         li Added a new #[strong.code w-breadcrumbs] component.
-        li Renamed #[strong.code w-button]'s #[code to] prop to #[code route].
+        li Renamed the #[strong.code w-button]'s #[code to] prop to #[code route].
 
     li.patch
       strong.version v1.8.1
