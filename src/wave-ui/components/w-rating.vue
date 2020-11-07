@@ -3,13 +3,15 @@ component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: rating, disabled, readonly }"
   :valid.sync="valid"
-  @reset="rangeValuePercent = 0;updateRangeValueScaled()"
+  @reset="$emit('update:modelValue', rating = '');$emit('input', '')"
   :class="classes")
   input(:id="inputName" :name="inputName" type="hidden" :value="rating")
   template(v-for="i in max")
     slot(v-if="$scopedSlots.item" name="item" :index="i + 1")
     button.w-rating__button(
       :key="i"
+      :disabled="disabled"
+      :readonly="readonly"
       @mouseenter="hover = i"
       @mouseleave="hover = 0"
       @click="onButtonClick(i)"
@@ -44,7 +46,8 @@ export default {
     sm: { type: Boolean },
     md: { type: Boolean },
     lg: { type: Boolean },
-    xl: { type: Boolean }
+    xl: { type: Boolean },
+    noRipple: { type: Boolean }
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
@@ -54,7 +57,12 @@ export default {
     return {
       rating: parseFloat(this.value || 0),
       hover: 0, // The index (starts at 1) of the currently hovered button.
-      hasFocus: false
+      hasFocus: 0, // The index (starts at 1) of the currently focused button.
+      ripple: {
+        start: false,
+        end: false,
+        timeout: null
+      }
     }
   },
 
@@ -71,7 +79,11 @@ export default {
     classes () {
       return {
         'w-rating': true,
-        'w-rating--focus': this.hasFocus
+        'w-rating--focus': this.hasFocus,
+        'w-rating--disabled': this.disabled,
+        'w-rating--readonly': this.readonly,
+        'w-rating--ripple': this.ripple.start,
+        'w-rating--rippled': this.ripple.end
       }
     },
 
@@ -87,6 +99,15 @@ export default {
       this.rating = i
       this.$emit('update:modelValue', this.rating)
       this.$emit('input', this.rating)
+
+      if (!this.noRipple) {
+        this.ripple.start = true
+        this.ripple.timeout = setTimeout(() => {
+          this.ripple.start = false
+          this.ripple.end = true
+          setTimeout(() => (this.ripple.end = false), 100)
+        }, 700)
+      }
     },
 
     onFocus (e) {
@@ -103,6 +124,13 @@ export default {
       if ([37, 38, 39, 40].includes(e.keyCode)) {
         if ([39, 40].includes(e.keyCode)) this.rating <= this.max - 1 && this.rating++
         else if (this.rating > 1) this.rating--
+
+        const sibling = this.$el.querySelectorAll('button')[this.rating - 1]
+        if (sibling) {
+          sibling.focus()
+          sibling.click()
+        }
+
         e.preventDefault()
       }
     },
@@ -139,22 +167,8 @@ export default {
     cursor: pointer;
     @include default-transition($fast-transition-duration);
 
-    // The focus outline & ripple on button click.
-    &:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: currentColor;
-      opacity: 0;
-      border-radius: 50%;
-      transition: inherit;
-    }
-
-    &:focus:after {opacity: 0.15;}
-    &:active:after {opacity: 0.25;}
+    // Disabled.
+    .w-rating--disabled & {color: $disabled-color;}
 
     // Sizes.
     &.size--xs {font-size: round(0.85 * $base-font-size);}
@@ -168,12 +182,14 @@ export default {
       font-size: 1.1em;
       height: 1em;
       display: inline-flex;
-      transition: inherit transform;
+      transition: 0.15s transform;
     }
   }
 
-  &:hover &__button--on:before, &:hover &__button--on .w-icon:before {transform: scale(1.1);}
-  &--focus &__button--on:before, &--focus &__button--on .w-icon:before {transform: scale(1.1);}
+  &:hover &__button--on:before,
+  &:hover &__button--on .w-icon:before,
+  &--focus &__button--on:before,
+  &--focus &__button--on .w-icon:before {transform: scale(1.12);}
 
   // Half star.
   &__button .w-icon {
@@ -187,5 +203,49 @@ export default {
     border-radius: 0;
   }
   &__button:hover ~ &__button .w-icon {width: 0 !important;}
+
+  // The focus outline & ripple on button click.
+  &__button:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: currentColor;
+    border-radius: 100%;
+    transform: translateX(100%) scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.25s ease-in-out;
+  }
+
+  &--ripple &__button:focus:after {
+    background-color: transparent;
+    animation: w-rating-ripple 0.55s ease;
+  }
+
+  &__button:focus:after {
+    transform: scale(1.8);
+    opacity: 0.2;
+  }
+  &__button--on:focus:after {
+    transform: scale(1.8);
+  }
+
+  // After ripple reset to default state, then remove the class via js and the
+  // `:focus + &__button:after` will re-transition to normal focused outline.
+  &--rippled &__button:focus:after {
+    transition: none;
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  &__button * {pointer-events: none;}
+}
+
+@keyframes w-rating-ripple {
+  0% {opacity: 0.8;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
+  100% {opacity: 0;transform: scale(2.8);} // Propagate ripple to max radius and fade out.
 }
 </style>
