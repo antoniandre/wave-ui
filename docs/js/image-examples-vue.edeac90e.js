@@ -1,2 +1,0 @@
-(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["image-examples-vue"],{b254:function(e,t,n){"use strict";n.r(t);var l=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",[n("title-link",{attrs:{h2:""}},[e._v("Default")]),n("example",{scopedSlots:e._u([{key:"pug",fn:function(){},proxy:!0}])})],1)},a=[],u={},s=u,i=n("2877"),o=Object(i["a"])(s,l,a,!1,null,null,null);t["default"]=o.exports}}]);
-//# sourceMappingURL=image-examples-vue.edeac90e.js.map
