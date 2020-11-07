@@ -75,7 +75,8 @@ export default {
     zIndex: { type: [Number, String, Boolean] },
     minWidth: { type: [Number, String] }, // can be like: `40`, `5em`, `activator`.
     overlay: { type: Boolean },
-    persistent: { type: Boolean }
+    persistent: { type: Boolean },
+    noPosition: { type: Boolean }
   },
 
   emits: ['input', 'update:modelValue', 'open', 'close'],
@@ -203,7 +204,7 @@ export default {
       if (shouldShowMenu) {
         if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
 
-        this.computeMenuPosition(e)
+        if (!this.noPosition) this.computeMenuPosition(e)
 
         // In `getCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
         // if we don't postpone the Menu apparition it will start transition from a visible menu and
@@ -215,7 +216,7 @@ export default {
         }, 10)
 
         if (!this.persistent) document.addEventListener('mousedown', this.onOutsideMousedown)
-        window.addEventListener('resize', this.onResize)
+        if (!this.noPosition) window.addEventListener('resize', this.onResize)
       }
 
       // Close the menu.
