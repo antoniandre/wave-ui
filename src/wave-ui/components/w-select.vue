@@ -14,7 +14,7 @@ component(
     v-model="showMenu"
     :menu-class="`w-select__menu ${menuClass || ''}`"
     transition="slide-fade-down"
-    detach-to=".w-app"
+    :detach-to="menuProps.detachTo !== undefined ? menuProps.detachTo : '.w-app'"
     align-left
     custom
     min-width="activator"
@@ -79,7 +79,7 @@ component(
     w-list(
       ref="w-list"
       @input="onInput"
-      @item-click="noUnselect && !multiple && closeMenu() /* Close menu when clicking a selected item */"
+      @item-click="onListItemClick"
       @keydown:enter="noUnselect && !multiple && closeMenu()"
       @keydown:escape="closeMenu"
       :value="inputValue"
@@ -219,10 +219,12 @@ export default {
       this.isFocused = true
       this.$emit('focus', e)
     },
+
     onBlur (e) {
       this.isFocused = false
       this.$emit('blur', e)
     },
+
     // The items are given by the w-list component.
     onInput (items) {
       this.inputValue = items === null ? [] : (this.multiple ? items : [items])
@@ -239,6 +241,13 @@ export default {
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
     },
+
+    onListItemClick (e) {
+      this.$emit('item-click', e)
+      // Close menu when clicking a selected item.
+      if (this.noUnselect && !this.multiple) this.closeMenu()
+    },
+
     onReset () {
       this.inputValue = []
       // Emit the selection to the v-model.
@@ -247,6 +256,7 @@ export default {
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
     },
+
     // Convert the received items selection to array if it is a unique value.
     // Also accept objects if returnObject is true.
     // In any case, always end up with an array.
@@ -264,6 +274,7 @@ export default {
         return this.selectItems[allValues.indexOf(value)]
       }).filter(item => item !== undefined)
     },
+
     // Open the dropdown selection list.
     openMenu () {
       this.showMenu = true
@@ -274,8 +285,11 @@ export default {
         this.$refs['w-list'].$el.querySelector(`#w-select-menu--${this._uid}_item-${itemIndex + 1}`).focus()
       }, 100)
     },
+
     // Close the dropdown selection list.
     closeMenu () {
+      if (this.menuProps.hideOnMenuClick === false) return
+
       this.showMenu = false
       // Set the focus back on the main w-select input.
       setTimeout(() => this.$refs['selection-input'].focus(), 50)
