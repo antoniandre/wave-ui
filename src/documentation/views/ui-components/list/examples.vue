@@ -184,7 +184,7 @@ div.lists-demo
           class="mt6 mr4 grow"&gt;
         &lt;/w-list&gt;
         &lt;div v-if="itemClicked"&gt;
-          &lt;div class="title3"&gt;clicked item:&lt;/div&gt;
+          &lt;div class="title3"&gt;Clicked item:&lt;/div&gt;
           &lt;span&gt;{{ '\{\{ itemClicked \}\}' }}&lt;/span&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;

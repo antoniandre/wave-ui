@@ -221,7 +221,7 @@ div
         v-model="list"
         :items="[{ label: 'Item 1' }, { label: 'Item 2' }, { label: 'Item 3' }]"
         item-class="px8"
-        @item-click="showListMenu1 = false")
+        @item-select="showListMenu1 = false")
     template(#pug).
       w-menu(v-model="showMenu" shadow custom)
         template(#activator="{ on }")
@@ -230,7 +230,7 @@ div
           v-model="listSelection"
           :items="listItems"
           item-class="px8"
-          @item-click="showMenu = false")
+          @item-select="showMenu = false")
     template(#js).
       data: () => ({
         showMenu: false,
@@ -251,7 +251,7 @@ div
         nav
         :items="[{ label: 'Item 1', route: '#item1' }, { label: 'Item 2', route: '#item2' }, { label: 'Item 3', route: '#item3' }]"
         item-class="px8"
-        @item-click="showListMenu2 = false")
+        @item-select="showListMenu2 = false")
     template(#pug).
       w-menu(v-model="showMenu" shadow custom overlay)
         template(#activator="{ on }")
@@ -260,7 +260,7 @@ div
           nav
           :items="listItems"
           item-class="px8"
-          @item-click="showMenu = false")
+          @item-select="showMenu = false")
     template(#js).
       data: () => ({
         showMenu: false,

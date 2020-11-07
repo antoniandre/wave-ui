@@ -79,7 +79,8 @@ component(
     w-list(
       ref="w-list"
       @input="onInput"
-      @item-click="onListItemClick"
+      @item-click="emit('item-click', $event)"
+      @item-select="onListItemSelect"
       @keydown:enter="noUnselect && !multiple && closeMenu()"
       @keydown:escape="closeMenu"
       :value="inputValue"
@@ -143,7 +144,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur', 'item-click', 'item-select', 'click:inner-icon-left', 'click:inner-icon-right'],
 
   data: () => ({
     // Selection is always an array (internally), but emits a single value if not multiple.
@@ -242,8 +243,8 @@ export default {
       this.$emit('input', selection)
     },
 
-    onListItemClick (e) {
-      this.$emit('item-click', e)
+    onListItemSelect (e) {
+      this.$emit('item-select', e)
       // Close menu when clicking a selected item.
       if (this.noUnselect && !this.multiple) this.closeMenu()
     },

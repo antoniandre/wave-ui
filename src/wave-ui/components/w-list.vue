@@ -22,7 +22,7 @@ ul.w-list(:class="classes")
         v-else-if="nav && !li.disabled && li.route && hasRouter"
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)"
-        @click.native="$emit('item-click', cleanLi(li))")
+        @click.native="$emit('item-select', cleanLi(li))")
         slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
         slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
         slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
@@ -49,7 +49,7 @@ ul.w-list(:class="classes")
         v-else-if="nav && !li.disabled && li.route && hasRouter"
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)"
-        @click.native="$emit('item-click', cleanLi(li))"
+        @click.native="$emit('item-select', cleanLi(li))"
         v-html="li._label")
       //- Nav & simple list items.
       component.w-list__item-label(
@@ -67,7 +67,7 @@ ul.w-list(:class="classes")
       :depth="depth + 1"
       @update:model-value="$emit('update:modelValue', $event)",
       @input="$emit('input', $event)",
-      @item-click="$emit('item-click', $event)")
+      @item-select="$emit('item-select', $event)")
       //- template(#item.x="{ item, index, selected }")
         slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(item)" :index="index" :selected="selected")
       template(v-if="$scopedSlots.item" #item="{ item, index, selected }")
@@ -109,7 +109,7 @@ export default {
     arrowsNavigation: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue', 'item-click', 'keydown:escape', 'keydown:enter'],
+  emits: ['input', 'update:modelValue', 'item-click', 'item-select', 'keydown:escape', 'keydown:enter'],
 
   data: () => ({
     listItems: []
@@ -243,7 +243,11 @@ export default {
       // Event handlers.
       // ------------------------------------------------------
       const click = () => {
-        if (!li.disabled) this.$emit('item-click', this.cleanLi(li))
+        if (!li.disabled) {
+          const cleanLi = this.cleanLi(li)
+          this.$emit('item-click', cleanLi)
+          this.$emit('item-select', cleanLi)
+        }
       }
       // If selectable list, on mousedown select the item.
       const mousedown = this.isSelectable && (e => {
@@ -256,6 +260,7 @@ export default {
           this.selectItem(li)
           // eslint-disable-next-line vue/custom-event-name-casing
           this.$emit('keydown:enter')
+          this.$emit('item-select', this.cleanLi(li))
         }
         // eslint-disable-next-line vue/custom-event-name-casing
         else if (e.keyCode === 27) this.$emit('keydown:escape')

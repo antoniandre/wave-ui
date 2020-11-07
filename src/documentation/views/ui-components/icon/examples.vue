@@ -148,6 +148,12 @@ div.icons-demo
           w-icon.mr1(md color="primary") fa fa-heart
           w-icon.mr1(xl color="primary") fa fa-heart
 
+    li
+      h3.title3 Use your own
+      p.
+        Once you have your icon font ready, just use it in #[strong.code w-icon] or other components
+        by providing the CSS class. E.g. #[code icon-heart].
+
   w-divider.my12
 
   title-link(h2) Colors &amp; Background colors
