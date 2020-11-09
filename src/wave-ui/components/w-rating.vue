@@ -7,7 +7,7 @@ component(
   :class="classes")
   input(:id="inputName" :name="inputName" type="hidden" :value="rating")
   template(v-for="i in max" :key="i")
-    slot(v-if="$scopedSlots.item" name="item" :index="i + 1")
+    slot(v-if="$slots.item" name="item" :index="i + 1")
     button.w-rating__button(
       :disabled="disabled || readonly"
       @mouseenter="hover = i"
@@ -53,7 +53,7 @@ export default {
 
   data () {
     return {
-      rating: parseInt(this.modelValue || 0),
+      rating: parseFloat(this.modelValue || 0),
       hover: 0, // The index (starts at 1) of the currently hovered button.
       hasFocus: 0, // The index (starts at 1) of the currently focused button.
       ripple: {
