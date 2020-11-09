@@ -53,6 +53,7 @@
     "vue": "^2.6.12",
     "vue-router": "^3.4.6",
     "vue-svg-loader": "^0.16.0",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.12",
+    "vueperslides": "^2.11.0"
   }
 }
