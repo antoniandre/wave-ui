@@ -259,13 +259,13 @@ export default {
 
     insertTooltip () {
       const wrapper = this.$refs.wrapper
-      this.tooltipEl = this.$refs.tooltip.$el || this.$refs.tooltip
 
       // Unwrap the activator element.
       wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
 
       // Move the tooltip elsewhere in the DOM.
       // wrapper.parentNode.insertBefore(this.tooltipEl, wrapper)
+      // this.tooltipEl is set in the dynamic ref.
       this.detachToTarget.appendChild(this.tooltipEl)
     },
 
