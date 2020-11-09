@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   title-link.mt4(h1) Breakpoints
 
   w-card.blue-light5--bg

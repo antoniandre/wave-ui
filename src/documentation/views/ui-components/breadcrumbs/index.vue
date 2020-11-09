@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   ui-component-title(slug="w-breadcrumbs") w-breadcrumbs
   examples
   api

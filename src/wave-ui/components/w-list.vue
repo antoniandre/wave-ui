@@ -19,15 +19,72 @@ ul.w-list(:class="classes")
       :is="checklist ? 'w-checkbox' : (nav && !li.disabled && li.route ? (hasRouter ? 'router-link' : 'a') : 'div')"
       v-bind="liLabelProps(li, i, li._selected)")
 
+    //- Vue 2.x only. Keep this comment to simplify the master branch merge into next.
+    //-----------------------------------------------------
+    //- When there are slots.
+    //- template(v-if="$scopedSlots[`item.${i + 1}`] || $scopedSlots.item || $scopedSlots.default")
+      //- Checklist items. (separated case cz it needs a @click.native, can't be in v-on)
+      w-checkbox.w-list__item-label(
+        v-if="checklist"
+        v-bind="liLabelProps(li, i, li._selected)"
+        v-on="liLabelEvents(li)"
+        @click.native="onCheckboxWrapperClick")
+        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
+      //- Router link list items. (separated case cz it needs a @click.native, can't be in v-on)
+      router-link.w-list__item-label(
+        v-else-if="nav && !li.disabled && li.route && hasRouter"
+        v-bind="liLabelProps(li, i, li._selected)"
+        v-on="liLabelEvents(li)"
+        @click.native="$emit('item-select', cleanLi(li))")
+        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
+      //- Nav & simple list items.
+      component.w-list__item-label(
+        v-else
+        :is="nav && !li.disabled && li.route ? 'a' : 'div'"
+        v-bind="liLabelProps(li, i, li._selected)"
+        v-on="liLabelEvents(li)")
+        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
+
+    //- When there are no slots.
+    //- template(v-else)
+      //- Checklist items. (separated case cz it needs a @click.native, can't be in v-on)
+      w-checkbox.w-list__item-label(
+        v-if="checklist"
+        v-bind="liLabelProps(li, i, li._selected)"
+        v-on="liLabelEvents(li)"
+        @click.native="onCheckboxWrapperClick")
+      //- Router link list items. (separated case cz it needs a @click.native, can't be in v-on)
+      router-link.w-list__item-label(
+        v-else-if="nav && !li.disabled && li.route && hasRouter"
+        v-bind="liLabelProps(li, i, li._selected)"
+        v-on="liLabelEvents(li)"
+        @click.native="$emit('item-select', cleanLi(li))"
+        v-html="li._label")
+      //- Nav & simple list items.
+      component.w-list__item-label(
+        v-else
+        :is="nav && !li.disabled && li.route ? 'a' : 'div'"
+        v-bind="liLabelProps(li, i, li._selected)"
+        v-on="liLabelEvents(li)"
+        v-html="li._label")
+    //-----------------------------------------------------
+
     //- Children lists.
     w-list(
       v-if="(li.children || []).length"
       v-bind="$props"
       :items="li.children"
       :depth="depth + 1"
-      @update:model-value="$emit('update:modelValue', $event)",
-      @input="$emit('input', $event)",
-      @item-click="$emit('item-click', $event)")
+      @update:model-value="$emit('update:modelValue', $event)"
+      @input="$emit('input', $event)"
+      @item-click="$emit('item-click', $event)"
+      @item-select="$emit('item-select', $event)")
       //- template(#item.x="{ item, index, selected }")
         slot(v-if="$slots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(item)" :index="index" :selected="selected")
       template(v-if="$slots.item" #item="{ item, index, selected }")
@@ -69,7 +126,7 @@ export default {
     arrowsNavigation: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue', 'item-click', 'keydown:escape'],
+  emits: ['input', 'update:modelValue', 'item-click', 'item-select', 'keydown:escape', 'keydown:enter'],
 
   data: () => ({
     listItems: []
@@ -164,7 +221,11 @@ export default {
       // Event handlers.
       // ------------------------------------------------------
       const click = () => {
-        if (!li.disabled) this.$emit('item-click', this.cleanLi(li))
+        if (!li.disabled) {
+          const cleanLi = this.cleanLi(li)
+          this.$emit('item-click', cleanLi)
+          this.$emit('item-select', cleanLi)
+        }
       }
       // If selectable list, on mousedown select the item.
       const mousedown = this.isSelectable && (e => {
@@ -173,13 +234,18 @@ export default {
       })
       // If selectable list, on enter key press select item.
       const keydown = this.isSelectable && (e => {
-        if (!li.disabled && e.keyCode === 13) this.selectItem(li)
+        if (!li.disabled && e.keyCode === 13) {
+          this.selectItem(li)
+          // eslint-disable-next-line vue/custom-event-name-casing
+          this.$emit('keydown:enter')
+          this.$emit('item-select', this.cleanLi(li))
+        }
         // eslint-disable-next-line vue/custom-event-name-casing
         else if (e.keyCode === 27) this.$emit('keydown:escape')
         else if (this.arrowsNavigation) {
           e.preventDefault()
-          if (e.keyCode === 38) this.focusPrevItem(li.index)
-          if (e.keyCode === 40) this.focusNextItem(li.index)
+          if (e.keyCode === 38) this.focusPrevNextItem(li._index, false)
+          if (e.keyCode === 40) this.focusPrevNextItem(li._index, true)
         }
       })
       // ------------------------------------------------------
@@ -212,6 +278,8 @@ export default {
             checkbox.focus()
             checkbox.click()
           }
+
+          click() // Emit the `item-click` & `item-select` events.
         }
       }
       // ------------------------------------------------------
@@ -236,7 +304,7 @@ export default {
             props.onClick = e => {
               e.preventDefault()
               this.$router.push(li.route)
-              click(e)
+              click() // Emit the `item-click` & `item-select` events.
             }
           }
           else {
@@ -292,18 +360,11 @@ export default {
       this.$emit('input', selection)
     },
 
-    focusPrevItem (index) {
-      // The index of the previous item in the array of enabled items.
-      index = this.enabledItemsIndexes[this.enabledItemsIndexes.indexOf(index) - 1]
-      if (index === undefined) index = this.enabledItemsIndexes[this.enabledItemsIndexes.length - 1]
-
-      this.$el.querySelector(`#${this.listId}_item-${index + 1}`).focus()
-    },
-
-    focusNextItem (index) {
-      // The index of the next item in the array of enabled items.
-      index = this.enabledItemsIndexes[this.enabledItemsIndexes.indexOf(index) + 1]
-      if (index === undefined) index = this.enabledItemsIndexes[0]
+    focusPrevNextItem (index, next = true) {
+      // The index of the previous or next item in the array of enabled items.
+      index = this.enabledItemsIndexes[this.enabledItemsIndexes.indexOf(index) + (next ? 1 : -1)]
+      const firstOrLastIndex = next ? 0 : this.enabledItemsIndexes.length - 1
+      if (index === undefined) index = this.enabledItemsIndexes[firstOrLastIndex]
 
       this.$el.querySelector(`#${this.listId}_item-${index + 1}`).focus()
     },
@@ -389,10 +450,10 @@ export default {
     position: absolute;
     right: 100%;
     margin-right: 3 * $base-increment;
-    top: 0.05em;
+    top: 0.06em;
 
     @-moz-document url-prefix() {
-      & {top: -0.05em;}
+      & {top: -0.06em;}
     }
 
     .w-list--hoverable &,

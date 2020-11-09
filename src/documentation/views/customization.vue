@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   title-link.mt4(h1 slug="customization") Customization Via SCSS (optional)
 
   p Wave UI components rely on SCSS variables that you can easily override from Your SCSS file, just like this:

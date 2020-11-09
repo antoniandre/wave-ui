@@ -148,6 +148,12 @@ div.icons-demo
           w-icon.mr1(md color="primary") fa fa-heart
           w-icon.mr1(xl color="primary") fa fa-heart
 
+    li
+      h3.title3 Use your own
+      p.
+        Once you have your icon font ready, just use it in #[strong.code w-icon] or other components
+        by providing the CSS class. E.g. #[code icon-heart].
+
   w-divider.my12
 
   title-link(h2) Colors &amp; Background colors
@@ -211,14 +217,19 @@ div.icons-demo
 
   title-link(h2) Transformations
   p You can also spin the icons, rotate and flip them.
+  alert(info)
+    | When rotating anti-clockwise add an #[code a] at the end. E.g. #[code rotate90a].#[br]
+    small.grey.
+      (the minus #[code -] notation is not possible in this case as it would mix up with
+      positive values due to the Vue internal CamelCasing).
   example
     .title4 Spin
     w-icon.mr1(xl color="primary" spin) mdi mdi-star
 
     .title4.mt6 Rotate
-    w-icon.rotated-icon.mr1(xl color="primary" rotate-135) mdi mdi-paw
-    w-icon.rotated-icon.mr1(xl color="primary" rotate-90) mdi mdi-paw
-    w-icon.rotated-icon.mr1(xl color="primary" rotate-45) mdi mdi-paw
+    w-icon.rotated-icon.mr1(xl color="primary" rotate135a) mdi mdi-paw
+    w-icon.rotated-icon.mr1(xl color="primary" rotate90a) mdi mdi-paw
+    w-icon.rotated-icon.mr1(xl color="primary" rotate45a) mdi mdi-paw
     w-icon.rotated-icon.mr1(xl color="primary") mdi mdi-paw
     w-icon.rotated-icon.mr1(xl color="primary" rotate45) mdi mdi-paw
     w-icon.rotated-icon.mr1(xl color="primary" rotate90) mdi mdi-paw
@@ -247,11 +258,14 @@ div.icons-demo
       w-icon.mr1(xl color="primary" spin) mdi mdi-star
 
       .title4.mt6 Rotate
-      w-icon.mr1(xl color="primary") mdi mdi-paw
-      w-icon.mr1(xl color="primary" rotate45) mdi mdi-paw
-      w-icon.mr1(xl color="primary" rotate90) mdi mdi-paw
-      w-icon.mr1(xl color="primary" rotate135) mdi mdi-paw
-      w-icon.mr1(xl color="primary" rotate180) mdi mdi-paw
+      w-icon.rotated-icon.mr1(xl color="primary" rotate135a) mdi mdi-paw
+      w-icon.rotated-icon.mr1(xl color="primary" rotate90a) mdi mdi-paw
+      w-icon.rotated-icon.mr1(xl color="primary" rotate45a) mdi mdi-paw
+      w-icon.rotated-icon.mr1(xl color="primary") mdi mdi-paw
+      w-icon.rotated-icon.mr1(xl color="primary" rotate45) mdi mdi-paw
+      w-icon.rotated-icon.mr1(xl color="primary" rotate90) mdi mdi-paw
+      w-icon.rotated-icon.mr1(xl color="primary" rotate135) mdi mdi-paw
+      w-icon.rotated-icon.mr1(xl color="primary" rotate180) mdi mdi-paw
 
       .title4.mt6 Flip
       w-icon.mr1(xl color="primary") mdi mdi-thumb-up

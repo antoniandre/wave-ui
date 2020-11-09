@@ -75,7 +75,8 @@ export default {
     zIndex: { type: [Number, String, Boolean] },
     minWidth: { type: [Number, String] }, // can be like: `40`, `5em`, `activator`.
     overlay: { type: Boolean },
-    persistent: { type: Boolean }
+    persistent: { type: Boolean },
+    noPosition: { type: Boolean }
   },
 
   emits: ['input', 'update:modelValue', 'open', 'close'],
@@ -203,7 +204,7 @@ export default {
       if (shouldShowMenu) {
         if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
 
-        this.computeMenuPosition(e)
+        if (!this.noPosition) this.computeMenuPosition(e)
 
         // In `getCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
         // if we don't postpone the Menu apparition it will start transition from a visible menu and
@@ -215,7 +216,7 @@ export default {
         }, 10)
 
         if (!this.persistent) document.addEventListener('mousedown', this.onOutsideMousedown)
-        window.addEventListener('resize', this.onResize)
+        if (!this.noPosition) window.addEventListener('resize', this.onResize)
       }
 
       // Close the menu.
@@ -363,23 +364,25 @@ export default {
       // Move the menu elsewhere in the DOM.
       // wrapper.parentNode.insertBefore(this.menuEl, wrapper)
       this.detachToTarget.appendChild(this.menuEl)
+    },
+
+    removeMenu () {
+      // el.remove() doesn't work on IE11.
+      if (this.menuEl && this.menuEl.parentNode) this.menuEl.parentNode.removeChild(this.menuEl)
     }
   },
 
-  beforeMount () {
-    // Do this, first thing on mounted (beforeMount + nextTick).
-    this.$nextTick(() => {
-      this.activatorEl = this.$refs.wrapper.firstElementChild
-      this.overlayEl = this.overlay ? this.$refs.overlay.$el : null
-      this.insertMenu()
+  mounted () {
+    this.activatorEl = this.$refs.wrapper.firstElementChild
+    this.overlayEl = this.overlay ? this.$refs.overlay.$el : null
+    this.insertMenu()
 
-      if (this.modelValue) this.toggle({ type: 'click', target: this.activatorEl })
-    })
+    if (this.modelValue) this.toggle({ type: 'click', target: this.activatorEl })
   },
 
   beforeUnmount () {
+    this.removeMenu()
     // el.remove() doesn't work on IE11.
-    if (this.menuEl && this.menuEl.parentNode) this.menuEl.parentNode.removeChild(this.menuEl)
     if (this.overlay && this.overlayEl.parentNode) this.overlayEl.parentNode.removeChild(this.overlayEl)
     if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.parentNode.removeChild(this.activatorEl)
   },
@@ -387,6 +390,10 @@ export default {
   watch: {
     modelValue (value) {
       if (!!value !== this.showMenu) this.toggle({ type: 'click', target: this.activatorEl })
+    },
+    detachTo () {
+      this.removeMenu()
+      this.insertMenu()
     }
   }
 }

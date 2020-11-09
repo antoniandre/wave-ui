@@ -4,7 +4,7 @@ w-app
     nav-menu(v-model:drawer-open="drawerOpen")
   header.no-shrink
     toolbar(v-model:drawer-open="drawerOpen")
-  .content-wrap.w-flex.no-shrink(:class="`page--${$route.name}`")
+  .content-wrap.w-flex.no-shrink
     transition(name="fade")
       w-progress(v-if="loading" color="primary" tile absolute)
     nav-menu.navigation.no-shrink(
@@ -13,7 +13,7 @@ w-app
       :class="{ 'nav-menu--fixed': fixNavMenu }"
       v-model:drawer-open="drawerOpen")
     .main-content.w-flex.column.grow
-      router-view.grow(#default="{ Component }")
+      router-view.grow(#default="{ Component }" :class="`main--${$route.name}`")
         transition(name="fade-page" mode="out-in")
           component(:is="Component")
 

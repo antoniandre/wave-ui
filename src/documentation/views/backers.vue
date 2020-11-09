@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   title-link.mt4(h1) Backers
 
   .text-center

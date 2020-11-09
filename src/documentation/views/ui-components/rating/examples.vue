@@ -12,49 +12,105 @@ div
     div.mt2
       strong.mr2 v-model:
       code {{ rating1 }}
+    w-rating.mt4(v-model="rating2")
+    div.mt2
+      strong.mr2 v-model:
+      code {{ rating2 }}
     template(#pug).
-      w-rating(v-model="rating")
+      w-rating(v-model="rating1")
       div.mt2
         strong.mr2 v-model:
-        code {{ '\{\{ rating \}\}' }}
+        code {{ '\{\{ rating1 \}\}' }}
+
+      w-rating.mt4(v-model="rating2")
+      div.mt2
+        strong.mr2 v-model:
+        code {{ '\{\{ rating2 \}\}' }}
+    template(#js).
+      data: () => ({
+        rating1: 3,
+        rating2: 3.42
+      })
 
   title-link(h2) Color
   example
-    w-rating.d-block.my4(color="green")
-    w-rating.d-block.my4(bg-color="light-green" color="yellow")
+    w-rating.my2(color="green")
+    br
+    w-rating.my2(bg-color="light-green" color="yellow")
+
     template(#pug).
-      w-rating.d-block.my4(color="green")
-      w-rating.d-block.my4(bg-color="light-green")
+      w-rating.my2(color="green")
+      br
+      w-rating.my2(bg-color="light-green")
 
   title-link(h2) Custom Icons
   example
-    w-rating.d-block.my4(icon="mdi mdi-heart")
+    w-rating.my2(icon="mdi mdi-heart" :value="3")
+    br
+    w-rating.my2(icon="mdi mdi-heart-outline" :value="3")
     template(#pug).
-      w-rating.d-block.my4(icon="mdi mdi-heart")
+      w-rating.my2(icon="mdi mdi-heart" :value="3")
+      br
+      w-rating.my2(icon="mdi mdi-heart-outline" :value="3")
+
+  title-link(h2 slug="max") Max (number of buttons)
+  p.
+    The number of buttons is set via the #[code max] prop.#[br]
+    As expected, the #[code max] prop also sets the maximum number you can set or display via the
+    #[span.code w-rating] component.#[br]
+    When setting a rating, the component will always return an integer between 1 and #[code max] included.
+  example
+    w-rating.my2(:value="2" :max="3")
+    br
+    w-rating.my2(:value="6" :max="10")
+    template(#pug).
+      w-rating.my2(:value="2" :max="3")
+      br
+      w-rating.my2(:value="6" :max="10")
 
   title-link(h2) Sizes
   p.
-    The rating size can be controlled via the preset sizes #[code xs], #[code sm], #[code md],
-    #[code lg], #[code xl] or via CSS override.
+    The rating component's size can be controlled via the preset sizes #[code xs], #[code sm],
+    #[code md], #[code lg], #[code xl] or via CSS override.
 
   example
-    w-rating.d-block.my4(xs)
-    w-rating.d-block.my4(sm)
-    w-rating.d-block.my4(md)
-    w-rating.d-block.my4(lg)
-    w-rating.d-block.my4(xl)
+    w-rating.my2(xs)
+    br
+    w-rating.my2(sm)
+    br
+    w-rating.my2(md)
+    br
+    w-rating.my2(lg)
+    br
+    w-rating.my2(xl)
+
     template(#pug).
-      w-rating.d-block.my4(xs)
-      w-rating.d-block.my4(sm)
-      w-rating.d-block.my4(md)
-      w-rating.d-block.my4(lg)
-      w-rating.d-block.my4(xl)
+      w-rating.my2(xs)
+      br
+      w-rating.my2(sm)
+      br
+      w-rating.my2(md)
+      br
+      w-rating.my2(lg)
+      br
+      w-rating.my2(xl)
+
+  title-link(h2) Disabled &amp; readonly
+  example
+    w-rating.my2(:value="3" disabled)
+    br
+    w-rating.my2(:value="3" readonly)
+    template(#pug).
+      w-rating.my2(:value="3" disabled)
+      br
+      w-rating.my2(:value="3" readonly)
 </template>
 
 <script>
 export default {
   data: () => ({
-    rating1: 3
+    rating1: 3,
+    rating2: 3.42
   })
 }
 </script>

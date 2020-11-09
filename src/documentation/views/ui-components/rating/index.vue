@@ -1,8 +1,6 @@
 <template lang="pug">
-div
-  ui-component-title(slug="w-rating")
-    .code w-rating
-    w-tag.ml2.text-upper(color="orange" outline) In progress
+main
+  ui-component-title(slug="w-rating" in-progress) w-rating
   examples
   api
 </template>

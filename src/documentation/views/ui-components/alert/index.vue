@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   ui-component-title w-alert
   examples
   api
