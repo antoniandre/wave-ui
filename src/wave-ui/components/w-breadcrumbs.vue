@@ -3,7 +3,7 @@
   template(v-for="(item, i) in items")
     //- Separator.
     span.w-breadcrumbs__separator(
-      v-if="i && $scopedSlots.separator"
+      v-if="i && $slots.separator"
       :key="`${i}-1`"
       :class="separatorColor")
       slot(name="separator" :index="i")
@@ -15,13 +15,13 @@
     //- Link to parent pages.
     template(v-if="item[itemRouteKey] && (i < items.length - 1 || linkLastItem)")
       component.w-breadcrumbs__item(
-        v-if="$scopedSlots.item"
+        v-if="$slots.item"
         :key="`${i}-3`"
         :is="hasRouter ? 'router-link' : 'a'"
         :to="hasRouter && item[itemRouteKey]"
         :href="item[itemRouteKey]"
         :class="color || null")
-        slot(name="item" :item="item" :index="i + 1" :is-last="i === items.length - 1")
+        slot(name="item" :item="item" :index="i + 1" :isLast="i === items.length - 1")
       component.w-breadcrumbs__item(
         v-else
         :key="`${i}-4`"
@@ -33,11 +33,11 @@
 
     //- Current page when linkLastItem is false.
     slot(
-      v-else-if="$scopedSlots.item"
+      v-else-if="$slots.item"
       name="item"
       :item="item"
       :index="i + 1"
-      :is-last="i === items.length - 1")
+      :isLast="/* Vue3 camelcase issue: https://github.com/vuejs/vue-next/issues/2488 */ i === items.length - 1")
     span(v-else :key="`${i}-5`" v-html="item[itemLabelKey]")
 </template>
 
