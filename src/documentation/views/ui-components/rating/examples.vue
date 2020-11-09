@@ -45,13 +45,13 @@ div
 
   title-link(h2) Custom Icons
   example
-    w-rating.my2(icon="mdi mdi-heart" :value="3")
+    w-rating.my2(icon="mdi mdi-heart" :model-value="3")
     br
-    w-rating.my2(icon="mdi mdi-heart-outline" :value="3")
+    w-rating.my2(icon="mdi mdi-heart-outline" :model-value="3")
     template(#pug).
-      w-rating.my2(icon="mdi mdi-heart" :value="3")
+      w-rating.my2(icon="mdi mdi-heart" :model-value="3")
       br
-      w-rating.my2(icon="mdi mdi-heart-outline" :value="3")
+      w-rating.my2(icon="mdi mdi-heart-outline" :model-value="3")
 
   title-link(h2 slug="max") Max (number of buttons)
   p.
@@ -60,13 +60,13 @@ div
     #[span.code w-rating] component.#[br]
     When setting a rating, the component will always return an integer between 1 and #[code max] included.
   example
-    w-rating.my2(:value="2" :max="3")
+    w-rating.my2(:model-value="2" :max="3")
     br
-    w-rating.my2(:value="6" :max="10")
+    w-rating.my2(:model-value="6" :max="10")
     template(#pug).
-      w-rating.my2(:value="2" :max="3")
+      w-rating.my2(:model-value="2" :max="3")
       br
-      w-rating.my2(:value="6" :max="10")
+      w-rating.my2(:model-value="6" :max="10")
 
   title-link(h2) Sizes
   p.
@@ -97,13 +97,13 @@ div
 
   title-link(h2) Disabled &amp; readonly
   example
-    w-rating.my2(:value="3" disabled)
+    w-rating.my2(:model-value="3" disabled)
     br
-    w-rating.my2(:value="3" readonly)
+    w-rating.my2(:model-value="3" readonly)
     template(#pug).
-      w-rating.my2(:value="3" disabled)
+      w-rating.my2(:model-value="3" disabled)
       br
-      w-rating.my2(:value="3" readonly)
+      w-rating.my2(:model-value="3" readonly)
 </template>
 
 <script>
