@@ -14,7 +14,7 @@ component(
     v-model="showMenu"
     :menu-class="`w-select__menu ${menuClass || ''}`"
     transition="slide-fade-down"
-    :detach-to="menuProps.detachTo !== undefined ? menuProps.detachTo : '.w-app'"
+    :detach-to="(menuProps || {}).detachTo !== undefined ? (menuProps || {}).detachTo : '.w-app'"
     align-left
     custom
     min-width="activator"
@@ -79,7 +79,7 @@ component(
     w-list(
       ref="w-list"
       @input="onInput"
-      @item-click="emit('item-click', $event)"
+      @item-click="$emit('item-click', $event)"
       @item-select="onListItemSelect"
       @keydown:enter="noUnselect && !multiple && closeMenu()"
       @keydown:escape="closeMenu"
@@ -289,7 +289,7 @@ export default {
 
     // Close the dropdown selection list.
     closeMenu () {
-      if (this.menuProps.hideOnMenuClick === false) return
+      if ((this.menuProps || {}).hideOnMenuClick === false) return
 
       this.showMenu = false
       // Set the focus back on the main w-select input.
@@ -419,7 +419,7 @@ export default {
 
     .w-select--disabled input::placeholder {color: inherit;}
 
-    .w-select--readonly.w-select--empty & {cursor: auto;}
+    .w-select--readonly & {cursor: auto;}
   }
 
   &__selection-slot {
@@ -435,7 +435,8 @@ export default {
 
     .w-select--focused &, .w-select--open & {color: currentColor;}
 
-    .w-select--disabled & {
+    .w-select--disabled &,
+    .w-select--readonly & {
       color: $disabled-color;
       cursor: not-allowed;
       -webkit-tap-highlight-color: transparent;
