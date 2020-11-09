@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   title-link.mt4(h1) Why Wave UI?
   alert.top-alert.pa5(info)
     .title3
@@ -16,10 +16,10 @@ div
 
   title-link(h2) What is Wave UI?
   .title3.mt6 Like other UI frameworks, Wave UI is:
-  w-list(:items="features1" icon="wi-check")
+  w-list.title4(:items="features1" icon="wi-check")
 
   .title3.mt6 But it is also:
-  w-list(:items="features2" icon="wi-check")
+  w-list.title4(:items="features2" icon="wi-check")
 
   title-link(h2) CSS-wise...
   .title3 Wave UI is developed with a particular care about CSS.
@@ -70,20 +70,21 @@ div
 export default {
   data: () => ({
     features1: [
-      { label: 'fully responsive' },
-      { label: 'accessibility compliant' },
-      { label: 'very flexible' },
-      { label: 'easy to use' }
+      { label: 'Fully responsive' },
+      { label: 'Accessibility compliant' },
+      { label: 'Very flexible' },
+      { label: 'Easy to use' }
     ],
     features2: [
       { label: 'Obviously awesome!' },
+      { label: 'Supporting Vue 3' },
       { label: 'Lightweight' },
       { label: 'Providing powerful elements, e.g. write a navigation menu in a single line' },
       { label: 'Free of useless DOM wrappers inside UI elements, really' },
       { label: 'Very easy to override via CSS' },
-      { label: 'Avoiding the use of the <code>!important</code> keyword' },
+      { label: 'Avoiding the use of the <code class="mx1">!important</code> keyword' },
       { label: 'CSS-scoping to UI elements &amp; helper classes - no side-effect' },
-      { label: 'Handling all the sizes and spacings from a single <code>$base-font-size</code> SASS variable that you can override' },
+      { label: 'Handling all the sizes and spacings from a single <code class="mx1">$base-font-size</code> SASS variable that you can override' },
       { label: 'Providing straightforward and consistent options and component names' }
     ]
   })
@@ -104,5 +105,13 @@ export default {
     stroke: #497ca2;
     stroke-width: 6px;
   }
+}
+
+.main--why-wave-ui .w-list__item {
+  align-items: center;
+  display: flex;
+
+  &-label {align-items: center;}
+  &-bullet {top: auto;}
 }
 </style>

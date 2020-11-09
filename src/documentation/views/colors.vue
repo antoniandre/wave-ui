@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+main
   title-link.mt4(h1) Colors
   p.
     Wave UI colors work in a very simple way: for instance the class
@@ -16,14 +16,14 @@ div
     text color of your choice.
 
   title-link(h2) Status colors
-  alert(warning).
-    The four status colors are considered dark and will therefore have a white text by default when used as a background color.
-    You can override this via CSS.
-  .w-flex.wrap.mb12.ma-2.text-center.basis-zero
+  .w-flex.wrap.ma-2.text-center.basis-zero
     .color.success--bg.title3.grow.py3.ma2 success
     .color.error--bg.title3.grow.py3.ma2 error
     .color.warning--bg.title3.grow.py3.ma2 warning
     .color.info--bg.title3.grow.py3.ma2 info
+  alert(warning).mb12.
+    The four status colors are considered dark and will therefore have a white text by default when used as a background color.
+    You can override this via CSS.
 
   h3 Status colors shades
   .w-flex.wrap.mb12.ma-2.text-center.basis-zero
@@ -76,7 +76,7 @@ div
 
   alert(warning).
     The primary color is considered dark by default, and will render,
-    as well as its 3 darker shades, with a white text when used as a background.
+    as well as its 3 darker shades, with a white text when used as a background color.
 
   p.mt6.title3 To start defining your own colors add them to the WaveUI options:
   ssh-pre(language="js").
@@ -101,7 +101,6 @@ div
       | {{ horizontal ? 'Vertical' : 'Horizontal' }} display
   p.
     This built-in color palette will complete your collection of available colors for fast and easy designs.
-
 
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
     .w-flex.wrap.ma-2.basis-zero
@@ -132,6 +131,20 @@ div
           .color.color--top.ma2.inherit--bg.black
             span inherit
             small inherit
+
+  title-link(h2) Your own CSS color classes
+  p.
+    All the presented colors above are here to make you go faster when you need a color.#[br]
+    But you are completely free to define CSS classes in your CSS to associate a color to a class.#[br]
+    For instance, you can define:
+  ssh-pre(language="css").
+    .pale-green {color: #eafddd;}
+    .pale-blue--bg {background-color: #e3ffff;}
+
+  p ...and use it on a component like this:
+  ssh-pre(language="html-vue").
+    &lt;w-tag color="pale-green" bg-color="pale-blue"&gt;tag&lt;/w-tag&gt;
+
 </template>
 
 <script>
@@ -146,13 +159,14 @@ export default {
 </script>
 
 <style lang="scss">
-.page--colors {
+.main--colors {
   .horizontal {overflow-x: auto;overflow-y: hidden;}
   .color {
     align-items: center;
     display: flex;
     justify-content: center;
   }
+  .ssh-pre .color {display: inline-block;}
 }
 
 .color-palette {

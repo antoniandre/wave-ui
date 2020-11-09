@@ -10,17 +10,17 @@
     icon="wi-cross")
 
   .title2.mt0 Knowledge base
-  w-list(:items="sections" nav color="primary" @item-click="onItemClick")
+  w-list(:items="sections" nav color="primary" @item-select="onItemClick")
 
   .title2.mt4 UI components
-  w-list(:items="components" nav color="primary" @item-click="onItemClick")
+  w-list(:items="components" nav color="primary" @item-select="onItemClick")
     template(#item="{ item }")
       span(v-html="item.label")
       w-tag.ml2.text-upper(v-if="item.disabled" round xs color="red" outline) Coming soon
       w-tag.ml2.text-upper(v-if="item.inProgress" round xs color="orange" outline) In progress
   .title3.mt4 External UI components
   p By the same author
-  w-list(:items="externalComponents" nav color="primary" @item-click="onItemClick")
+  w-list(:items="externalComponents" nav color="primary" @item-select="onItemClick")
 
   router-link.mt3.d-iblock(v-if="$waveui.breakpoint.xs" to="/release-notes" @click="onItemClick")
     w-icon.mr2 mdi mdi-update

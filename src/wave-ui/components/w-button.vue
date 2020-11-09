@@ -1,12 +1,11 @@
 <template lang="pug">
 component.w-button(
-  :is="route ? (hasRouter && !externalLink && !forceLink ? 'router-link' : 'a') : 'button'"
+  :is="route ? 'a' : 'button'"
   :type="!route && type"
-  :to="hasRouter && route"
-  :href="route"
+  :href="(route && resolvedRoute) || null"
   :class="classes"
-  :disabled="disabled || null"
-  v-on="$attrs"
+  :disabled="!!disabled || null"
+  v-on="listeners"
   :style="styles")
   w-icon(v-if="icon") {{ icon }}
   slot(v-else)
@@ -67,6 +66,18 @@ export default {
   computed: {
     hasRouter () {
       return '$router' in this
+    },
+    resolvedRoute () {
+      return this.hasRouter ? this.$router.resolve(this.route).href : this.route
+    },
+    listeners () {
+      // If the button is a router-link, we can't apply events on it since vue-router needs the .native
+      // modifier but it's not available with the v-on directive.
+      // So do a manual router.push if $router is present.
+      return this.route && this.hasRouter && !this.forceLink ? {
+        ...this.$attrs,
+        click: e => this.$router.push(this.route) && e.preventDefault()
+      } : this.$attrs
     },
     size () {
       return (
@@ -142,6 +153,7 @@ $spinner-size: 40;
   user-select: none;
   cursor: pointer;
   color: inherit; // Override the default color in Safari.
+  font-family: inherit;
   z-index: 1;
   // Background-color must not transition to not affect the hover & focus states
   // in :before & :after.

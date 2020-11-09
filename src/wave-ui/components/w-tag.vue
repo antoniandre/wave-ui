@@ -100,21 +100,26 @@ export default {
   &--tile {border-radius: initial;}
   &--shadow {box-shadow: $box-shadow;}
 
-  &.size--xs {
-    font-size: round(0.7 * $base-font-size);
-    padding-left: $base-increment;
-    padding-right: $base-increment;
-    line-height: 1.3;
-  }
+  &.size--xs {font-size: round(0.7 * $base-font-size);}
   &.size--sm {
     font-size: round(0.82 * $base-font-size);
-    padding-left: $base-increment;
-    padding-right: $base-increment;
-    line-height: 1.3;
+    padding: round(0.25 * $base-increment) $base-increment;
   }
-  &.size--md {font-size: round(0.95 * $base-font-size);line-height: 1.3;}
-  &.size--lg {font-size: round(1.1 * $base-font-size);line-height: 1.5;}
-  &.size--xl {font-size: round(1.3 * $base-font-size);line-height: 1.5;}
+  &.size--md {
+    font-size: round(0.95 * $base-font-size);
+    padding-top: round(0.25 * $base-increment);
+    padding-bottom: round(0.25 * $base-increment);
+  }
+  &.size--lg {
+    font-size: round(1.1 * $base-font-size);
+    padding-top: round(0.5 * $base-increment);
+    padding-bottom: round(0.5 * $base-increment);
+  }
+  &.size--xl {
+    font-size: round(1.3 * $base-font-size);
+    padding-top: round(1 * $base-increment);
+    padding-bottom: round(1 * $base-increment);
+  }
 
   &--clickable {
     cursor: pointer;

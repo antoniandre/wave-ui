@@ -75,13 +75,22 @@ const events = {
   //   }
   // },
   'item-click': {
-    description: 'Emitted on each list item click. The clicked item is returned as a parameter.',
+    description: 'Emitted on each list item click.',
     params: {
       '[Object]': 'The clicked list item\'s object.'
     }
   },
+  'item-select': {
+    description: 'Emitted on each list item selection or unselection (via click or keyboard <kbd>enter</kbd> key when focused).',
+    params: {
+      '[Object]': 'The selected list item\'s object.'
+    }
+  },
+  'keydown:enter': {
+    description: 'Emitted on <kbd>enter</kbd> key down, when the focus is on any of the list items.'
+  },
   'keydown:escape': {
-    description: 'Emitted on escape key down, when the focus is on any of the list items.'
+    description: 'Emitted on <kbd>escape</kbd> key down, when the focus is on any of the list items.'
   }
 }
 

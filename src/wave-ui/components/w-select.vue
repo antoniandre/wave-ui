@@ -14,7 +14,7 @@ component(
     v-model="showMenu"
     :menu-class="`w-select__menu ${menuClass || ''}`"
     transition="slide-fade-down"
-    detach-to=".w-app"
+    :detach-to="(menuProps || {}).detachTo !== undefined ? (menuProps || {}).detachTo : '.w-app'"
     align-left
     custom
     min-width="activator"
@@ -36,7 +36,8 @@ component(
           :for="`w-select--${_.uid}`"
           @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
         .w-select__selection-slot(v-if="$slots.selection")
-          slot(name="selection" :item="inputValue")
+          //- inputValue is always an array.
+          slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
         input.w-select__selection(
           ref="selection-input"
           type="text"
@@ -79,6 +80,9 @@ component(
       ref="w-list"
       :model-value="inputValue"
       @update:model-value="onInput"
+      @item-click="$emit('item-click', $event)"
+      @item-select="onListItemSelect"
+      @keydown:enter="noUnselect && !multiple && closeMenu()"
       @keydown:escape="closeMenu"
       :items="selectItems"
       :multiple="multiple"
@@ -140,7 +144,7 @@ export default {
     // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur', 'item-click', 'item-select', 'click:inner-icon-left', 'click:inner-icon-right'],
 
   data: () => ({
     // Selection is always an array (internally), but emits a single value if not multiple.
@@ -216,10 +220,12 @@ export default {
       this.isFocused = true
       this.$emit('focus', e)
     },
+
     onBlur (e) {
       this.isFocused = false
       this.$emit('blur', e)
     },
+
     // The items are given by the w-list component.
     onInput (items) {
       this.inputValue = items === null ? [] : (this.multiple ? items : [items])
@@ -236,6 +242,13 @@ export default {
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
     },
+
+    onListItemSelect (e) {
+      this.$emit('item-select', e)
+      // Close menu when clicking a selected item.
+      if (this.noUnselect && !this.multiple) this.closeMenu()
+    },
+
     onReset () {
       this.inputValue = []
       // Emit the selection to the v-model.
@@ -244,6 +257,7 @@ export default {
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
     },
+
     // Convert the received items selection to array if it is a unique value.
     // Also accept objects if returnObject is true.
     // In any case, always end up with an array.
@@ -261,6 +275,7 @@ export default {
         return this.selectItems[allValues.indexOf(value)]
       }).filter(item => item !== undefined)
     },
+
     // Open the dropdown selection list.
     openMenu () {
       this.showMenu = true
@@ -271,8 +286,11 @@ export default {
         this.$refs['w-list'].$el.querySelector(`#w-select-menu--${this._.uid}_item-${itemIndex + 1}`).focus()
       }, 100)
     },
+
     // Close the dropdown selection list.
     closeMenu () {
+      if ((this.menuProps || {}).hideOnMenuClick === false) return
+
       this.showMenu = false
       // Set the focus back on the main w-select input.
       setTimeout(() => this.$refs['selection-input'].focus(), 50)
@@ -401,7 +419,7 @@ export default {
 
     .w-select--disabled input::placeholder {color: inherit;}
 
-    .w-select--readonly.w-select--empty & {cursor: auto;}
+    .w-select--readonly & {cursor: auto;}
   }
 
   &__selection-slot {
@@ -417,7 +435,8 @@ export default {
 
     .w-select--focused &, .w-select--open & {color: currentColor;}
 
-    .w-select--disabled & {
+    .w-select--disabled &,
+    .w-select--readonly & {
       color: $disabled-color;
       cursor: not-allowed;
       -webkit-tap-highlight-color: transparent;

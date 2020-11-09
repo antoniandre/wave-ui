@@ -1,8 +1,6 @@
 <template lang="pug">
-div
-  ui-component-title(slug="w-steps")
-    .code w-steps
-    w-tag.ml2.text-upper(color="orange" outline) In progress
+main
+  ui-component-title(slug="w-steps" in-progress) w-steps
   examples
   api
 </template>

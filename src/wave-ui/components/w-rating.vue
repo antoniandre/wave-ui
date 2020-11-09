@@ -1,27 +1,44 @@
 <template lang="pug">
-.w-rating(:class="classes")
-  input(type="hidden" :value="rating")
-  w-button.w-rating__button(
-    v-for="i in max"
-    :key="i"
-    :icon="icon"
-    :[size]="true"
-    :class="{ 'w-rating__button--on': hover >= i || (hover === 0 && rating >= i) }"
-    @mouseenter="hover = i"
-    @mouseleave="hover = 0"
-    @click="onButtonClick(i)"
-    :color="hover >= i || (hover === 0 && rating >= i) ? color : bgColor"
-    text)
-  slot
+component(
+  :is="formRegister ? 'w-form-element' : 'div'"
+  v-bind="formRegister && { validators, inputValue: rating, disabled, readonly }"
+  :valid.sync="valid"
+  @reset="$emit('update:modelValue', rating = '');$emit('input', '')"
+  :class="classes")
+  input(:id="inputName" :name="inputName" type="hidden" :value="rating")
+  template(v-for="i in max")
+    slot(v-if="$scopedSlots.item" name="item" :index="i + 1")
+    button.w-rating__button(
+      :key="i"
+      :disabled="disabled || readonly"
+      @mouseenter="hover = i"
+      @mouseleave="hover = 0"
+      @click="onButtonClick(i)"
+      @focus="onFocus"
+      @blur="onBlur"
+      @keydown="onKeydown"
+      :class="buttonClasses(i)"
+      type="button"
+      :tabindex="i === 1 ? 0 : -1")
+      i.w-icon(
+        v-if="i - 1 === ~~rating && rating - ~~rating"
+        role="icon"
+        :class="`${icon} ${color}`"
+        aria-hidden="true"
+        :style="halfStarStyle")
 </template>
 
 <script>
+import FormElementMixin from '../mixins/form-elements'
+
 export default {
   name: 'w-rating',
+  mixins: [FormElementMixin],
+
   props: {
     modelValue: {},
     max: { type: Number, default: 5 },
-    color: { type: String },
+    color: { type: String, default: 'primary' },
     bgColor: { type: String, default: 'grey-light4' },
     icon: { type: String, default: 'wi-star' },
     xs: { type: Boolean },
@@ -29,15 +46,22 @@ export default {
     md: { type: Boolean },
     lg: { type: Boolean },
     xl: { type: Boolean },
-    disabled: { type: Boolean }
+    noRipple: { type: Boolean }
+    // Also name, disabled, readonly, required and validators in the mixin.
   },
 
-  emits: ['input', 'update:modelValue'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur'],
 
   data () {
     return {
-      rating: parseInt(this.modelValue),
-      hover: 0
+      rating: parseInt(this.modelValue || 0),
+      hover: 0, // The index (starts at 1) of the currently hovered button.
+      hasFocus: 0, // The index (starts at 1) of the currently focused button.
+      ripple: {
+        start: false,
+        end: false,
+        timeout: null
+      }
     }
   },
 
@@ -53,6 +77,19 @@ export default {
     },
     classes () {
       return {
+        'w-rating': true,
+        'w-rating--focus': this.hasFocus,
+        'w-rating--hover': this.hover,
+        'w-rating--disabled': this.disabled,
+        'w-rating--readonly': this.readonly,
+        'w-rating--ripple': this.ripple.start,
+        'w-rating--rippled': this.ripple.end
+      }
+    },
+
+    halfStarStyle () {
+      return {
+        width: this.hover <= ~~this.rating && `${(this.rating - ~~this.rating) * 100}%`
       }
     }
   },
@@ -62,6 +99,58 @@ export default {
       this.rating = i
       this.$emit('update:modelValue', this.rating)
       this.$emit('input', this.rating)
+
+      if (!this.noRipple) {
+        this.ripple.start = true
+        this.ripple.timeout = setTimeout(() => {
+          this.ripple.start = false
+          this.ripple.end = true
+          setTimeout(() => (this.ripple.end = false), 100)
+        }, 700)
+      }
+    },
+
+    onFocus (e) {
+      this.hasFocus = true
+      this.$emit('focus', e)
+    },
+
+    onBlur (e) {
+      this.hasFocus = false
+      this.$emit('blur', e)
+    },
+
+    onKeydown (e) {
+      if ([37, 38, 39, 40].includes(e.keyCode)) {
+        if ([39, 40].includes(e.keyCode)) this.rating <= this.max - 1 && this.rating++
+        else if (this.rating > 1) this.rating--
+
+        const sibling = this.$el.querySelectorAll('button')[this.rating - 1]
+        if (sibling) {
+          sibling.focus()
+          sibling.click()
+        }
+
+        e.preventDefault()
+      }
+    },
+
+    buttonClasses (i) {
+      const isHalf = i - 1 === ~~this.rating && this.rating - ~~this.rating
+      const isOn = this.hover >= i || (!isHalf && this.hover === 0 && this.rating >= i)
+      return {
+        'w-rating__button--on': isOn,
+        'w-rating__button--half': isHalf,
+        [this.icon]: true,
+        [`size--${this.size}`]: true,
+        [isOn ? this.color : this.bgColor]: true
+      }
+    }
+  },
+
+  watch: {
+    value (value) {
+      this.rating = value
     }
   }
 }
@@ -73,19 +162,107 @@ export default {
   align-items: center;
 
   &__button {
-    margin-left: -$base-increment;
+    position: relative;
+    width: 1.1em;
+    height: 1.1em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    @include default-transition($fast-transition-duration);
 
-    &:hover {transform: scale(1.1);}
+    // Disabled & readonly.
+    .w-rating--disabled & {opacity: 0.6;cursor: not-allowed;}
+    .w-rating--readonly & {cursor: auto;}
 
     // Sizes.
-    &.size--xs {margin-left: round(-0.5 * $base-increment);}
-    &.size--lg {margin-left: round(-0.5 * $base-increment);}
-    &.size--xl {margin-left: 0;}
-    &.size--xs .w-icon {font-size: round(1.1 * $base-font-size / 2) * 2;}
-    &.size--sm .w-icon {font-size: round(1.4 * $base-font-size / 2) * 2;}
-    &.size--md .w-icon {font-size: round(1.6 * $base-font-size / 2) * 2;}
-    &.size--lg .w-icon {font-size: round(1.8 * $base-font-size / 2) * 2;}
-    &.size--xl .w-icon {font-size: round(2.5 * $base-font-size / 2) * 2;}
+    &.size--xs {font-size: round(0.85 * $base-font-size);}
+    &.size--sm {font-size: round(1.15 * $base-font-size);}
+    &.size--md {font-size: round(1.4 * $base-font-size);}
+    &.size--lg {font-size: round(1.7 * $base-font-size);}
+    &.size--xl {font-size: 2 * $base-font-size;margin-left: 0;}
+
+    &:before {font-size: 1.1em;}
+    &:before, .w-icon:before {
+      width: 1em;
+      height: 1em;
+      display: inline-flex;
+      transition: 0.15s transform;
+    }
   }
+
+  &--hover &__button--on:before,
+  &--hover &__button--on .w-icon:before,
+  &--focus &__button--on:before,
+  &--focus &__button--on .w-icon:before {transform: scale(1.12);}
+
+  // Disabled & readonly.
+  &--readonly &__button--on:before,
+  &--readonly.w-rating--hover &__button--on:before,
+  &--readonly &__button--on .w-icon:before,
+  &--readonly.w-rating--hover &__button--on .w-icon:before,
+  &--disabled &__button--on:before,
+  &--disabled.w-rating--hover &__button--on:before,
+  &--disabled &__button--on .w-icon:before,
+  &--disabled.w-rating--hover &__button--on .w-icon:before {transform: none;}
+
+  // Half star.
+  &__button .w-icon {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    font-size: 1em;
+    justify-content: flex-start;
+    overflow: hidden;
+    display: inline-flex;
+    border-radius: 0;
+  }
+  .w-rating--hover &__button .w-icon {display: none;}
+
+  // The focus outline & ripple on button click.
+  &__button:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: currentColor;
+    border-radius: 100%;
+    transform: translateX(100%) scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.25s ease-in-out;
+  }
+
+  &--ripple &__button:focus:after {
+    background-color: transparent;
+    animation: w-rating-ripple 0.55s ease;
+  }
+
+  &__button:focus:after {
+    transform: scale(1.8);
+    opacity: 0.2;
+  }
+  &__button--on:focus:after {
+    transform: scale(1.8);
+  }
+
+  // After ripple reset to default state, then remove the class via js and the
+  // `:focus + &__button:after` will re-transition to normal focused outline.
+  &--rippled &__button:focus:after {
+    transition: none;
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  &__button * {pointer-events: none;}
+}
+
+@keyframes w-rating-ripple {
+  0% {opacity: 0.8;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
+  100% {opacity: 0;transform: scale(2.8);} // Propagate ripple to max radius and fade out.
 }
 </style>

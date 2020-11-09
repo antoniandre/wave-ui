@@ -1,5 +1,5 @@
 <template lang="pug">
-div.layout-flex-demo
+main
   title-link.mt4(h1) Flex layout classes
 
   title-link(h2 slug="w-flex-component-and-helper-classes") #[span.code w-flex] component &amp; helper classes
@@ -443,7 +443,7 @@ div.layout-flex-demo
 </template>
 
 <style lang="scss">
-.layout-flex-demo {
+.main--layout-flex {
   .box {
     background-color: #9bbff9;
     border: 1px solid #55f;

@@ -66,6 +66,7 @@ export default {
       height: 0
     },
     activatorEl: null,
+    tooltipEl: null,
     timeoutId: null
   }),
 
@@ -258,6 +259,7 @@ export default {
 
     insertTooltip () {
       const wrapper = this.$refs.wrapper
+      this.tooltipEl = this.$refs.tooltip.$el || this.$refs.tooltip
 
       // Unwrap the activator element.
       wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
@@ -265,6 +267,11 @@ export default {
       // Move the tooltip elsewhere in the DOM.
       // wrapper.parentNode.insertBefore(this.tooltipEl, wrapper)
       this.detachToTarget.appendChild(this.tooltipEl)
+    },
+
+    removeTooltip () {
+      // el.remove() doesn't work on IE11.
+      if (this.tooltipEl && this.tooltipEl.parentNode) this.tooltipEl.parentNode.removeChild(this.tooltipEl)
     }
   },
 
@@ -276,18 +283,19 @@ export default {
   },
 
   beforeUnmount () {
-    if (this.detachTo) {
-      // el.remove() doesn't work on IE11.
-      if (this.tooltipEl) this.tooltipEl.parentNode.removeChild(this.tooltipEl)
-      if (this.activatorEl && this.activatorEl.parentNode) {
-        this.activatorEl.parentNode.removeChild(this.activatorEl)
-      }
-    }
+    this.removeTooltip()
+
+    // el.remove() doesn't work on IE11.
+    if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.parentNode.removeChild(this.activatorEl)
   },
 
   watch: {
     modelValue () {
       this.toggle({ type: 'click', target: this.activatorEl })
+    },
+    detachTo () {
+      this.removeTooltip()
+      this.insertTooltip()
     }
   }
 }

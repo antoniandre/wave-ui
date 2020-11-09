@@ -1,5 +1,5 @@
 <template lang="pug">
-div.splitter
+main
   title-link.mt4(h1) Splitter
 
   p
