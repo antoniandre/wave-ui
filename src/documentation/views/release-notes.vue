@@ -6,7 +6,8 @@ main
     a.ml1(href="https://semver.org" target="_blank") Semantic versioning specs.
 
   ul.history
-    //- li Added the #[code hide-error] option on all the form elements.
+    //- Vue 3.
+    //-----------------------------------------------------
     li.major.dashed
       strong.version v2.x (Vue 3 only)
       p.
@@ -17,7 +18,15 @@ main
       br
       br
 
+    //- Vue 2.
+    //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
+    li.patch
+      strong.version v1.11.0
+      ul
+        li Improved and finished the #[strong.code w-rating] component. Now validatable in #[strong.code w-form].
+        li Added a #[code tag] prop to the #[strong.code w-drawer] component and default to #[code &lt;aside&gt;].
+
     li.minor
       strong.version v1.10.0
       ul
