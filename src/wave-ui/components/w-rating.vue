@@ -6,10 +6,9 @@ component(
   @reset="$emit('update:modelValue', rating = '');$emit('input', '')"
   :class="classes")
   input(:id="inputName" :name="inputName" type="hidden" :value="rating")
-  template(v-for="i in max")
+  template(v-for="i in max" :key="i")
     slot(v-if="$scopedSlots.item" name="item" :index="i + 1")
     button.w-rating__button(
-      :key="i"
       :disabled="disabled || readonly"
       @mouseenter="hover = i"
       @mouseleave="hover = 0"
