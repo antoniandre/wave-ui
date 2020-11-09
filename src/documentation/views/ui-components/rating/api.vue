@@ -11,6 +11,7 @@ div
 </template>
 
 <script>
+import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WRating from '@/wave-ui/components/w-rating'
 
 const propsDescs = {
@@ -24,6 +25,7 @@ const propsDescs = {
   md: 'Sets the size of the rating component (font-size).',
   lg: 'Sets the size of the rating component (font-size).',
   xl: 'Sets the size of the rating component (font-size).',
+  noRipple: 'Removes the ripple animation on click of one of the buttons.',
   name: 'Provide a native HTML <code>name</code> attribute to the rating component. If not provided, a unique name will be computed.',
   disabled: 'Disables the rating component making it unreactive to user interactions.',
   readonly: 'The rating component will still look like an interactive rating component except that it is read-only: its current value cannot be changed by user interaction.',
@@ -58,6 +60,12 @@ const events = {
     params: {
       '[DOM event object]': 'The associated focus DOM event.'
     }
+  },
+  blur: {
+    description: 'Emitted when the rating component is blurred (any button).',
+    params: {
+      '[DOM event object]': 'The associated blur DOM event.'
+    }
   }
 }
 
@@ -71,7 +79,7 @@ export default {
     // Reads all the props and events directly from the component, so that as soon as a new prop or event
     // is added it will appear even if no description is yet provided.
     props () {
-      return WRating.props
+      return { ...WRating.props, ...FormElementMixin.props }
     },
     events () {
       return WRating.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})

@@ -186,7 +186,7 @@ export default {
 
     &:before {font-size: 1.1em;}
     &:before, .w-icon:before {
-      width: 1em;
+      width: 100%;
       height: 1em;
       display: inline-flex;
       transition: 0.15s transform;
@@ -218,6 +218,8 @@ export default {
     overflow: hidden;
     display: inline-flex;
     border-radius: 0;
+
+    &:before {padding-left: 0.05em;padding-right: 0.05em;}
   }
   .w-rating--hover &__button .w-icon {display: none;}
 
