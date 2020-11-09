@@ -7,6 +7,17 @@ main
 
   ul.history
     //- li Added the #[code hide-error] option on all the form elements.
+    li.major.dashed
+      strong.version v2.x (Vue 3 only)
+      p.
+        #[code wave-ui@next] should always be including the last version changes listed bellow
+        (maintaining 2 different versions of the documentation and release notes is a lot of extra
+        work!).#[br]
+        If you find anything missing or not working as expected please open an issue precising the Vue and Wave UI versions! :)
+      br
+      br
+
+    //- li Added the #[code hide-error] option on all the form elements.
     li.minor
       strong.version v1.10.0
       ul
@@ -161,6 +172,7 @@ main
       transform: translate(-50%, -50%);
       z-index: 1;
     }
+
     // Left border.
     > li:after {
       content: '';
@@ -171,14 +183,16 @@ main
       border-left: 1px solid #ddd;
     }
     > li:last-child:after {display: none;}
+    > li.dashed:after {border-left-style: dashed;}
     > li.patch:before {font-size: 7px;border-color: #ccc;}
     > li.minor:before {font-size: 11px;border-color: #999;}
-    > li.major:before {font-size: 14px;border-color: #333;}
+    > li.major:before {font-size: 14px;border-color: #09c;}
 
     .version {font: bold 1.2rem monospace;}
     > li.patch .version {color: #999;}
     > li.minor .version {color: #555;}
-    > li.major .version {color: #000;}
+    > li.major .version {color: #09c;font-size: 1.4rem;}
+    > li:nth-child(2) .version:after {content: ' (Vue 2.x)';}
 
     ul {margin-left: -2px;}
     li li {padding-left: 20px;margin-top: 2px;}
