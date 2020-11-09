@@ -33,6 +33,10 @@ div
       })
 
   title-link(h2) Color
+  p.
+    Like in most components, you can set a #[code color] for the foreground icons (when on) and a #[code bg-color] for the
+    background icons when off.#[br]
+    The default background color is grey and the default active color is #[code primary].
   example
     w-rating.my2(color="green")
     br
@@ -41,13 +45,13 @@ div
     template(#pug).
       w-rating.my2(color="green")
       br
-      w-rating.my2(bg-color="light-green")
+      w-rating.my2(bg-color="light-green" color="yellow")
 
   title-link(h2) Custom Icons
   example
-    w-rating.my2(icon="mdi mdi-heart" :value="3")
+    w-rating.my2(icon="mdi mdi-heart" :value="3.4")
     br
-    w-rating.my2(icon="mdi mdi-heart-outline" :value="3")
+    w-rating.my2(icon="mdi mdi-heart-outline" :value="3.4")
     template(#pug).
       w-rating.my2(icon="mdi mdi-heart" :value="3")
       br
@@ -96,6 +100,7 @@ div
       w-rating.my2(xl)
 
   title-link(h2) Disabled &amp; readonly
+  p Use the disabled or readonly options to display a rating but prevent user votes.
   example
     w-rating.my2(:value="3" disabled)
     br
