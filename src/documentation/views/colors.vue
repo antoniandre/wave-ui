@@ -142,7 +142,7 @@ main
     .pale-green {color: #eafddd;}
     .pale-blue--bg {background-color: #e3ffff;}
 
-  p ...and use it in a component like this:
+  p ...and use it on a component like this:
   ssh-pre(language="html-vue").
     &lt;w-tag color="pale-green" bg-color="pale-blue"&gt;tag&lt;/w-tag&gt;
 
