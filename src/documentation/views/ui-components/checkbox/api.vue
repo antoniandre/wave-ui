@@ -3,7 +3,6 @@ div
   .w-divider.my12
   //- w-checkboxes.
   title-link.title1(h2 slug="w-checkboxes-api") &lt;w-checkboxes&gt; API
-  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="checkboxesProps" :descriptions="checkboxes.propsDescs" title="Props")
 
@@ -29,12 +28,12 @@ import WCheckbox from '@/wave-ui/components/w-checkbox'
 
 const checkboxes = {
   propsDescs: {
-    items: '',
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
+    items: 'An array of checkbox items to display. Each item object should contain at least a <code>label</code> or <code>value</code> attribute.',
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide an array of values to dictate the checked state of all the checkboxes.<br>This value gets updated when using a v-model.',
     labelOnLeft: 'Moves the label to the left of each checkbox.',
-    itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item.',
-    itemValueKey: 'The property name (aka key) in each item object where to find the value of the item.',
-    itemColorKey: 'The property name (aka key) in each item object where to find the color of the item.',
+    itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item (if any).',
+    itemValueKey: 'The property name (aka key) in each item object where to find the value of the item (if any).',
+    itemColorKey: 'The property name (aka key) in each item object where to find the color of the item (if any).',
     inline: 'Displays all the checkboxes inline instead of in column.',
     round: 'Displays round checkboxes instead of square ones.',
     color: 'Applies a color to the active checkbox. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
@@ -56,8 +55,8 @@ const checkboxes = {
 
 const checkbox = {
   propsDescs: {
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
-    returnvalue: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide a boolean to dictate the checked state the checkbox.<br>This value gets updated when using a v-model.',
+    returnValue: 'Since the native HTML checkbox element uses the <code>value</code> attribute to define the checked state, the <code>return-value</code> prop let you specify a value to return to the <code>v-model</code> when the checkbox is checked (instead of returning <code>true</code>).',
     label: 'Sets a visible label for the checkbox.',
     labelOnLeft: 'Moves the label to the left of the checkbox. By default the label is displayed on the right.',
     color: 'Applies a color to the checkbox when active. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
