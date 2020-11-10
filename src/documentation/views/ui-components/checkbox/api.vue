@@ -28,7 +28,7 @@ import WCheckbox from '@/wave-ui/components/w-checkbox'
 
 const checkboxes = {
   propsDescs: {
-    items: 'An array of checkbox items to display. Each item object should contain at least a <code>label</code> or <code>value</code> attribute.',
+    items: 'An array of checkbox items to display. Each item object should contain at least a <code>label</code> or a <code>value</code> attribute.',
     value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide an array of values to dictate the checked state of all the checkboxes.<br>This value gets updated when using a v-model.',
     labelOnLeft: 'Moves the label to the left of each checkbox.',
     itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item (if any).',
@@ -46,10 +46,25 @@ const checkboxes = {
   slots: {
     item: { description: 'Provide a custom content for each checkbox label.' }
   },
-  eventsDescs: {
-    input: 'Emitted each time any of the checkboxes is toggled.<br>Updates the v-model value in Vue 2.x only.<br>An array of return-value of each checked checkbox is passed as a parameter.<br>A return-value is, in this order (if they exist), either: the item value, the item label, the item index.',
-    'update:modelValue': 'Emitted each time any of the checkboxes is toggled.<br>Updates the v-model value in Vue 3 only.<br>An array of return-value of each checked checkbox is passed as a parameter.<br>A return-value is, in this order (if they exist), either: the item value, the item label, the item index.',
-    focus: 'Emitted on each checkbox focus. The focus DOM event is returned as a parameter.'
+  events: {
+    input: {
+      description: 'Emitted each time any of the checkboxes is toggled.<br>Updates the v-model value in Vue 2.x only.',
+      params: {
+        '[Array]': 'Array of <code>return-value</code> of each checked checkbox.<br>The <code>return-value</code> is one of the following attributes, if they exist, in this order: the item value, the item label, the item index.'
+      }
+    },
+    'update:modelValue': {
+      description: 'Emitted each time any of the checkboxes is toggled.<br>Updates the v-model value in Vue 3 only.',
+      params: {
+        '[Array]': 'Array of <code>return-value</code> of each checked checkbox.<br>The <code>return-value</code> is one of the following attributes, if they exist, in this order: the item value, the item label, the item index.'
+      }
+    },
+    focus: {
+      description: 'Emitted on each checkbox focus.',
+      params: {
+        '[DOM event object]': 'The associated focus DOM event.'
+      }
+    }
   }
 }
 
@@ -72,10 +87,25 @@ const checkbox = {
   slots: {
     default: { description: 'The checkbox label content.' }
   },
-  eventsDescs: {
-    input: 'Emitted each time the state of the checkbox changes.<br>Updates the v-model value in Vue 2.x only.<br>A boolean for the current state is passed as a parameter.',
-    'update:modelValue': 'Emitted each time the state of the checkbox changes.<br>Updates the v-model value in Vue 3 only.<br>A boolean for the current state is passed as a parameter.',
-    focus: 'Emitted on each checkbox focus. The focus DOM event is returned as a parameter.'
+  events: {
+    input: {
+      description: 'Emitted each time the state of the checkbox changes.<br>Updates the v-model value in Vue 2.x only.',
+      params: {
+        '[Boolean]': 'The current state of the checkbox.'
+      }
+    },
+    'update:modelValue': {
+      description: 'Emitted each time the state of the checkbox changes.<br>Updates the v-model value in Vue 3 only.',
+      params: {
+        '[Boolean]': 'The current state of the checkbox.'
+      }
+    },
+    focus: {
+      description: 'Emitted on each checkbox focus.',
+      params: {
+        '[DOM event object]': 'The associated focus DOM event.'
+      }
+    }
   }
 }
 
@@ -95,10 +125,10 @@ export default {
       return { ...WCheckbox.props, ...FormElementMixin.props }
     },
     checkboxesEvents () {
-      return WCheckboxes.emits.reduce((obj, label) => (obj[label] = { description: checkboxes.eventsDescs[label] || '' }) && obj, {})
+      return WCheckboxes.emits.reduce((obj, label) => (obj[label] = checkboxes.events[label] || {}) && obj, {})
     },
     checkboxEvents () {
-      return WCheckbox.emits.reduce((obj, label) => (obj[label] = { description: checkbox.eventsDescs[label] || '' }) && obj, {})
+      return WCheckbox.emits.reduce((obj, label) => (obj[label] = checkbox.events[label] || {}) && obj, {})
     }
   }
 }
