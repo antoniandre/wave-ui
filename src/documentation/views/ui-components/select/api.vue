@@ -46,21 +46,33 @@ const propsDescs = {
 
 const slots = {
   default: { description: 'The label content, if the <code>label</code> prop is not flexible enough.' },
-  selection: { description: 'Provide a custom template for the selection string.<br>This slot provides the parameter <code>item</code> containing the selected item(s) object(s). It may be an array if <code>multiple</code> is true, or a single object otherwise.' },
-  item: { description: 'Provide a common custom template for all the select list items.<br>This slot provides the parameter <code>item</code> containing the current item object.' },
+  selection: {
+    description: 'Provide a custom template for the selection string.',
+    params: {
+      item: 'The selected item(s) object(s). May be an array if <code>multiple</code> is true, or a single object otherwise.'
+    }
+  },
+  item: {
+    description: 'Provide a common custom template for all the select list items.',
+    params: {
+      item: 'The current item object.',
+      selected: 'A Boolean representing the selected state of the list item.',
+      index: 'The index of the list item.'
+    }
+  }
 }
 
 const events = {
   input: {
     description: 'Emitted each time the selected item(s) changes.<br>Updates the v-model value in Vue 2.x only.',
     params: {
-      '[Array, Object, Mixed value]': 'The new selected value(s) is/are passed as a parameter. Array if <code>multiple</code> is set to true, single value otherwise.'
+      '[Array, Object, Mixed value]': 'The new selected value(s). Array if <code>multiple</code> is set to true, single value otherwise.'
     }
   },
   'update:modelValue': {
     description: 'Emitted each time the selected item(s) changes.<br>Updates the v-model value in Vue 3 only.',
     params: {
-      '[Array, Object, Mixed value]': 'The new selected value(s) is/are passed as a parameter. Array if <code>multiple</code> is set to true, single value otherwise.'
+      '[Array, Object, Mixed value]': 'The new selected value(s). Array if <code>multiple</code> is set to true, single value otherwise.'
     }
   },
   focus: {

@@ -18,9 +18,11 @@ const propsDescs = {
   vertical: 'When set to true, the divider will display vertically.'
 }
 
-const slots = {}
+const slots = {
+  default: { description: 'An optional HTML content to display in the middle of the divider.' }
+}
 
-const eventsDescs = {}
+const events = {}
 
 export default {
   data: () => ({
@@ -35,7 +37,7 @@ export default {
       return WDivider.props
     },
     events () {
-      return WDivider.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WDivider.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
     }
   }
 }

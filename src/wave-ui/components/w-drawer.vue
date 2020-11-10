@@ -26,7 +26,7 @@
       :bg-color="overlayColor"
       :opacity="overlayOpacity")
     transition(:name="transitionName" appear @after-leave="close")
-      .w-drawer(v-if="showDrawer" :class="drawerClasses" :style="styles")
+      component.w-drawer(v-if="showDrawer" :is="tag || 'aside'" :class="drawerClasses" :style="styles")
         slot
 </template>
 
@@ -58,7 +58,8 @@ export default {
     pushContent: { type: Boolean },
     absolute: { type: Boolean },
     overlayColor: { type: String },
-    overlayOpacity: { type: [Number, String, Boolean] }
+    overlayOpacity: { type: [Number, String, Boolean] },
+    tag: { type: String, default: 'aside' }
   },
 
   emits: ['input', 'update:modelValue', 'close'],
