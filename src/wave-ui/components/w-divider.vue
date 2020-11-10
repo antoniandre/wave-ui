@@ -1,5 +1,6 @@
 <template lang="pug">
 .w-divider(:class="classes")
+  slot
 </template>
 
 <script>
@@ -17,7 +18,8 @@ export default {
     classes () {
       return {
         [`w-divider--has-color ${this.color}`]: this.color,
-        'w-divider--vertical': this.vertical
+        'w-divider--vertical': this.vertical,
+        'w-divider--has-content': this.$slots.default
       }
     }
   }
@@ -36,6 +38,34 @@ export default {
     border-top-width: 0;
     border-left-width: 1px;
     align-self: stretch;
+  }
+
+  // With a slot.
+  &--has-content {
+    border-width: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Horizontal.
+    &:before, &:after {
+      content: '';
+      border: inherit;
+      border-top-width: 1px;
+      display: flex;
+      flex: 1 1 auto;
+    }
+    &:before {margin-right: 2 * $base-increment;}
+    &:after {margin-left: 2 * $base-increment;}
+
+    // Vertical.
+    &.w-divider--vertical {
+      flex-direction: column;
+      &:before, &:after {border-top-width: 0;border-left-width: 1px;}
+      &:before {margin-right: 0;margin-bottom: 2 * $base-increment;}
+      &:after {margin-left: 0;margin-top: 2 * $base-increment;}
+    }
   }
 }
 </style>

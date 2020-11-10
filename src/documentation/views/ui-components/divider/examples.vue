@@ -63,4 +63,29 @@ div
     w-divider.ma6(color="green")
     template(#pug).
       w-divider.ma6(color="green")
+
+  title-link(h2) With content
+  p.
+    A default slot is available to provide some content to display in the middle of the divider.
+    This is often use with a OR keyword to offer an alternative.
+  example
+    .w-flex.align-center.justify-center
+      w-button.my6 Log in
+      w-divider.mx6(vertical color="pink") OR
+      w-button.my6 Sign in
+    template(#pug).
+      .w-flex.align-center.justify-center
+        w-button.my6 Log in
+        w-divider.mx6(vertical color="pink") OR
+        w-button.my6 Sign in
+  example
+    w-card.md6.maa.text-center
+      w-button.my12 Log in
+      w-divider.mx6(color="pink") OR
+      w-button.my12 Sign in
+    template(#pug).
+      w-card.md6.maa.text-center
+        w-button.my12 Log in
+        w-divider.mx6(color="pink") OR
+        w-button.my12 Sign in
 </template>
