@@ -37,9 +37,19 @@ const slots = {
   default: { description: 'The tag content.' }
 }
 
-const eventsDescs = {
-  input: 'For vue 2 only.<br>If a value or v-model is provided, the tag becomes toggleable on click.<br>On click,<br>Updates the v-model value in Vue 2.x only.<br>The boolean value is passed as a parameter.',
-  'update:modelValue': 'For vue 3 only.<br>If a model-value or v-model is provided, the tag becomes toggleable on click.<br>On click,<br>Updates the v-model value in Vue 3 only.<br>The boolean value is passed as a parameter.',
+const events = {
+  input: {
+    description: 'For vue 2 only.<br>If a <code>value</code> or <code>v-model</code> is provided, the tag becomes toggleable on click (two states).<br>Updates the v-model value in Vue 2.x only.',
+    params: {
+      '[Boolean]': 'A Boolean representing the active state of the tag.'
+    }
+  },
+  'update:modelValue': {
+    description: 'For vue 3 only.<br>If a <code>model-value</code> or <code>v-model</code> is provided, the tag becomes toggleable on click (two states).<br>Updates the v-model value in Vue 3 only.',
+    params: {
+      '[Boolean]': 'A Boolean representing the active state of the tag.'
+    }
+  }
 }
 
 export default {
@@ -55,7 +65,7 @@ export default {
       return WTag.props
     },
     events () {
-      return WTag.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WTag.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
     }
   }
 }
