@@ -3,7 +3,6 @@ div
   .w-divider.my12
   //- w-checkboxes.
   title-link.title1(h2 slug="w-checkboxes-api") &lt;w-checkboxes&gt; API
-  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="checkboxesProps" :descriptions="checkboxes.propsDescs" title="Props")
 
@@ -29,12 +28,12 @@ import WCheckbox from '@/wave-ui/components/w-checkbox'
 
 const checkboxes = {
   propsDescs: {
-    items: '',
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
+    items: 'An array of checkbox items to display. Each item object should contain at least a <code>label</code> or a <code>value</code> attribute.',
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide an array of values to dictate the checked state of all the checkboxes.<br>This value gets updated when using a v-model.',
     labelOnLeft: 'Moves the label to the left of each checkbox.',
-    itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item.',
-    itemValueKey: 'The property name (aka key) in each item object where to find the value of the item.',
-    itemColorKey: 'The property name (aka key) in each item object where to find the color of the item.',
+    itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item (if any).',
+    itemValueKey: 'The property name (aka key) in each item object where to find the value of the item (if any).',
+    itemColorKey: 'The property name (aka key) in each item object where to find the color of the item (if any).',
     inline: 'Displays all the checkboxes inline instead of in column.',
     round: 'Displays round checkboxes instead of square ones.',
     color: 'Applies a color to the active checkbox. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
@@ -47,17 +46,32 @@ const checkboxes = {
   slots: {
     item: { description: 'Provide a custom content for each checkbox label.' }
   },
-  eventsDescs: {
-    input: 'Emitted each time any of the checkboxes is toggled.<br>Updates the v-model value in Vue 2.x only.<br>An array of return-value of each checked checkbox is passed as a parameter.<br>A return-value is, in this order (if they exist), either: the item value, the item label, the item index.',
-    'update:modelValue': 'Emitted each time any of the checkboxes is toggled.<br>Updates the v-model value in Vue 3 only.<br>An array of return-value of each checked checkbox is passed as a parameter.<br>A return-value is, in this order (if they exist), either: the item value, the item label, the item index.',
-    focus: 'Emitted on each checkbox focus. The focus DOM event is returned as a parameter.'
+  events: {
+    input: {
+      description: 'Emitted each time any of the checkboxes is toggled.<br>Updates the v-model value in Vue 2.x only.',
+      params: {
+        '[Array]': 'Array of <code>return-value</code> of each checked checkbox.<br>The <code>return-value</code> is one of the following attributes, if they exist, in this order: the item value, the item label, the item index.'
+      }
+    },
+    'update:modelValue': {
+      description: 'Emitted each time any of the checkboxes is toggled.<br>Updates the v-model value in Vue 3 only.',
+      params: {
+        '[Array]': 'Array of <code>return-value</code> of each checked checkbox.<br>The <code>return-value</code> is one of the following attributes, if they exist, in this order: the item value, the item label, the item index.'
+      }
+    },
+    focus: {
+      description: 'Emitted on each checkbox focus.',
+      params: {
+        '[DOM event object]': 'The associated focus DOM event.'
+      }
+    }
   }
 }
 
 const checkbox = {
   propsDescs: {
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
-    returnvalue: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide a boolean to dictate the checked state the checkbox.<br>This value gets updated when using a v-model.',
+    returnValue: 'Since the native HTML checkbox element uses the <code>value</code> attribute to define the checked state, the <code>return-value</code> prop let you specify a value to return to the <code>v-model</code> when the checkbox is checked (instead of returning <code>true</code>).',
     label: 'Sets a visible label for the checkbox.',
     labelOnLeft: 'Moves the label to the left of the checkbox. By default the label is displayed on the right.',
     color: 'Applies a color to the checkbox when active. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
@@ -73,10 +87,25 @@ const checkbox = {
   slots: {
     default: { description: 'The checkbox label content.' }
   },
-  eventsDescs: {
-    input: 'Emitted each time the state of the checkbox changes.<br>Updates the v-model value in Vue 2.x only.<br>A boolean for the current state is passed as a parameter.',
-    'update:modelValue': 'Emitted each time the state of the checkbox changes.<br>Updates the v-model value in Vue 3 only.<br>A boolean for the current state is passed as a parameter.',
-    focus: 'Emitted on each checkbox focus. The focus DOM event is returned as a parameter.'
+  events: {
+    input: {
+      description: 'Emitted each time the state of the checkbox changes.<br>Updates the v-model value in Vue 2.x only.',
+      params: {
+        '[Boolean]': 'The current state of the checkbox.'
+      }
+    },
+    'update:modelValue': {
+      description: 'Emitted each time the state of the checkbox changes.<br>Updates the v-model value in Vue 3 only.',
+      params: {
+        '[Boolean]': 'The current state of the checkbox.'
+      }
+    },
+    focus: {
+      description: 'Emitted on each checkbox focus.',
+      params: {
+        '[DOM event object]': 'The associated focus DOM event.'
+      }
+    }
   }
 }
 
@@ -96,10 +125,10 @@ export default {
       return { ...WCheckbox.props, ...FormElementMixin.props }
     },
     checkboxesEvents () {
-      return WCheckboxes.emits.reduce((obj, label) => (obj[label] = { description: checkboxes.eventsDescs[label] || '' }) && obj, {})
+      return WCheckboxes.emits.reduce((obj, label) => (obj[label] = checkboxes.events[label] || {}) && obj, {})
     },
     checkboxEvents () {
-      return WCheckbox.emits.reduce((obj, label) => (obj[label] = { description: checkbox.eventsDescs[label] || '' }) && obj, {})
+      return WCheckbox.emits.reduce((obj, label) => (obj[label] = checkbox.events[label] || {}) && obj, {})
     }
   }
 }

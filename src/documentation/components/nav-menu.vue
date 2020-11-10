@@ -75,7 +75,7 @@ export default {
       { label: 'Overlay', route: '/w-overlay' },
       // { label: 'Parallax', route: '/w-parallax', disabled: true },
       { label: 'Progress', route: '/w-progress' },
-      { label: 'Rating', route: '/w-rating', inProgress: true },
+      { label: 'Rating', route: '/w-rating' },
       { label: 'Spinner', route: '/w-spinner' },
       { label: 'Tabs', route: '/w-tabs' },
       { label: 'Tag', route: '/w-tag' },

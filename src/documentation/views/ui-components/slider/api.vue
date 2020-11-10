@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
@@ -18,7 +17,7 @@ const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Dictates the range selection of the slider. When the user changes the range, the <code>v-model</code> value will be updated.',
   color: 'Applies a foreground color to the slider. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a background color to the slider\'s track. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  stepLabels: '',
+  stepLabels: 'A Boolean to display or hide the labels of each steps under the slider.<br>A future version will allow passing an array of custom labels.',
   thumblabel: 'Sets a visible label for the slider.',
   thumbLabelClass: 'Applies a custom CSS class to the slider\'s thumb label.',
   trackClass: 'Applies a custom CSS class to the slider\'s track.',
@@ -26,8 +25,8 @@ const propsDescs = {
   step: 'Sets an incremental/decremental integer or floating step number for the slider, e.g. <code>0.3</code>.',
   min: 'Sets an integer or floating minimum number for the slider.',
   max: 'Sets an integer or floating maximum number for the slider.',
-  labelLeft: '',
-  labelRight: '',
+  labelLeft: 'Defines a label to display on the left of the slider.',
+  labelRight: 'Defines a label to display on the right of the slider.',
   name: 'Provide a native HTML <code>name</code> attribute to the slider. If not provided, a unique name will be computed.',
   disabled: 'Disables the slider making it unreactive to user interactions.',
   readonly: 'The slider will still look like an interactive slider except that it is read-only: its current value cannot be changed by user interaction.',

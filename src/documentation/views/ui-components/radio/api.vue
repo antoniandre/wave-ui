@@ -4,7 +4,6 @@ div
 
   //- w-radios.
   title-link.title1(h2 slug="w-radios-api") &lt;w-radios&gt; API
-  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   api.mt0(:items="radiosProps" :descriptions="radios.propsDescs" title="Props")
 
@@ -31,13 +30,13 @@ import WRadio from '@/wave-ui/components/w-radio'
 
 const radios = {
   propsDescs: {
-    items: '',
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
+    items: 'An array of radio button items to display. Each item object should contain at least a <code>label</code> or a <code>value</code> attribute.',
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide a value (of one of the <code>items</code> objects) to dictate the selected choice.<br>This value gets updated when using a v-model.',
     labelOnLeft: 'Moves the label to the left of each radio button. By default the label is displayed on the right.',
-    itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item.',
-    itemValueKey: 'The property name (aka key) in each item object where to find the value of the item.',
-    itemColorKey: 'The property name (aka key) in each item object where to find the color of the item.',
-    inline: '',
+    itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item (if any).',
+    itemValueKey: 'The property name (aka key) in each item object where to find the value of the item (if any).',
+    itemColorKey: 'The property name (aka key) in each item object where to find the color of the item (if any).',
+    inline: 'Displays all the radio buttons inline instead of in column.',
     color: 'Applies a color to the active radio buttons. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
     name: 'Provide a native HTML <code>name</code> attribute to each radio button. If not provided, a unique common name will be computed and applied to all the radio buttons.',
     disabled: 'Disables all the radio buttons making them unreactive to user interactions.',
@@ -48,17 +47,32 @@ const radios = {
   slots: {
     item: { description: 'Provide a custom content for each radio button label.' }
   },
-  eventsDescs: {
-    input: 'Emitted each time any of the radio buttons is toggled.<br>Updates the v-model value in Vue 2.x only.<br>The return-value of the selected radio button is passed as a parameter.<br>The return-value will be one of these attributes, if they exist, in this order: the item value, the item label, the item index.',
-    'update:modelValue': 'Emitted each time any of the radio buttons is toggled.<br>Updates the v-model value in Vue 3 only.<br>The return-value of the selected radio button is passed as a parameter.<br>The return-value will be one of these attributes, if they exist, in this order: the item value, the item label, the item index.',
-    focus: 'Emitted on each radio button focus. The focus DOM event is returned as a parameter.'
+  events: {
+    input: {
+      description: 'Emitted each time any of the radio buttons is toggled.<br>Updates the v-model value in Vue 2.x only.',
+      params: {
+        '[String, Number, Boolean]': 'The <code>return-value</code> of the selected radio button.<br>The <code>return-value</code> will be one of the following attributes, if they exist, in this order: the item value, the item label, the item index.'
+      }
+    },
+    'update:modelValue': {
+      description: 'Emitted each time any of the radio buttons is toggled.<br>Updates the v-model value in Vue 3 only.',
+      params: {
+        '[String, Number, Boolean]': 'The <code>return-value</code> of the selected radio button.<br>The <code>return-value</code> will be one of the following attributes, if they exist, in this order: the item value, the item label, the item index.'
+      }
+    },
+    focus: {
+      description: 'Emitted on each radio button focus.',
+      params: {
+        '[DOM event object]': 'The associated focus DOM event.'
+      }
+    }
   }
 }
 
 const radio = {
   propsDescs: {
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>',
-    returnValue: '',
+    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide a boolean to dictate the selected state of the radio button.<br>This value gets updated when using a v-model.',
+    returnValue: 'Since the native HTML radio uses the <code>value</code> attribute to define the selected state, the <code>return-value</code> prop let you specify a value to return to the <code>v-model</code> when the radio is selected (instead of returning <code>true</code>).',
     label: 'Sets a visible label for the radio button.',
     labelOnLeft: 'Moves the label to the left of the radio button. By default the label is displayed on the right.',
     color: 'Applies a color to the radio button when active. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
@@ -72,10 +86,25 @@ const radio = {
   slots: {
     default: { description: 'The radio button label content.' }
   },
-  eventsDescs: {
-    input: 'Emitted each time the state of the radio button changes.<br>Updates the v-model value in Vue 2.x only.<br>A boolean for the current state is passed as a parameter.',
-    'update:modelValue': 'Emitted each time the state of the radio button changes.<br>Updates the v-model value in Vue 3 only.<br>A boolean for the current state is passed as a parameter.',
-    focus: 'Emitted on each radio button focus. The focus DOM event is returned as a parameter.'
+  events: {
+    input: {
+      description: 'Emitted each time the state of the radio button changes.<br>Updates the v-model value in Vue 2.x only.',
+      params: {
+        '[Boolean]': 'The current state of the radio button.'
+      }
+    },
+    'update:modelValue': {
+      description: 'Emitted each time the state of the radio button changes.<br>Updates the v-model value in Vue 3 only.',
+      params: {
+        '[Boolean]': 'The current state of the radio button.'
+      }
+    },
+    focus: {
+      description: 'Emitted on each radio button focus.',
+      params: {
+        '[DOM event object]': 'The associated focus DOM event.'
+      }
+    }
   }
 }
 
@@ -95,10 +124,10 @@ export default {
       return { ...WRadio.props, ...FormElementMixin.props }
     },
     radiosEvents () {
-      return WRadios.emits.reduce((obj, label) => (obj[label] = { description: radios.eventsDescs[label] || '' }) && obj, {})
+      return WRadios.emits.reduce((obj, label) => (obj[label] = radios.events[label] || {}) && obj, {})
     },
     radioEvents () {
-      return WRadio.emits.reduce((obj, label) => (obj[label] = { description: radio.eventsDescs[label] || '' }) && obj, {})
+      return WRadio.emits.reduce((obj, label) => (obj[label] = radio.events[label] || {}) && obj, {})
     }
   }
 }

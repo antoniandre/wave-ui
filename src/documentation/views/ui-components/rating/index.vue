@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  ui-component-title(slug="w-rating" in-progress) w-rating
+  ui-component-title(slug="w-rating") w-rating
   examples
   api
 </template>
