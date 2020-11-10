@@ -21,7 +21,11 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
-    li.patch
+    li.minor
+      strong.version v1.12.0
+      p Added an optional #[code default] slot to the #[strong.code w-divider] component to display content in the middle of the divider.
+
+    li.minor
       strong.version v1.11.0
       ul
         li Improved and finished the #[strong.code w-rating] component. Now validatable in #[strong.code w-form].
