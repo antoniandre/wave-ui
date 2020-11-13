@@ -1,6 +1,6 @@
 <template lang="pug">
 component.w-image(:is="tag" :class="classes" :style="styles")
-  w-progress(v-if="!loaded" circle indeterminate)
+  w-progress(v-if="!loading" circle indeterminate)
 </template>
 
 <script>
@@ -20,6 +20,7 @@ export default {
 
   data () {
     return {
+      loading: false,
       loaded: false,
       imgWidth: this.width,
       imgHeight: this.height
@@ -43,26 +44,40 @@ export default {
 
   methods: {
     loadImage () {
-      let image = new Image()
-      image.onload = e => {
-        this.imgWidth = e.target.width
-        this.imgHeight = e.target.height
-      }
-      image.src = this.src
-      this.loaded = true
-    }
+      // Don't try to reload image if already loaded.
+      if (this.loading || this.loaded) return
+
+      this.loading = true
+
+      return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload = e => {
+          this.imgWidth = e.target.width
+          this.imgHeight = e.target.height
+          this.loading = false
+          this.loaded = true
+          resolve()
+        }
+        img.onerror = () => {
+          this.loading = false
+          this.loaded = false
+          reject() // Always call reject.
+        }
+        img.src = this.image
+      })
+    },
   },
 
   mounted () {
     if (!this.src) return consoleWarn('The w-image component was used without src.')
 
-    this.loadImage()
+    this.loadImage().finally(() => (this.loaded = true) && (this.loading = false))
   },
 
   watch: {
     src () {
       this.loaded = false
-      this.loadImage()
+      this.loadImage().finally(() => (this.loaded = true) && (this.loading = false))
     }
   }
 }
