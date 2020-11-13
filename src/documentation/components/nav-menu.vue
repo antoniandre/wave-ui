@@ -94,7 +94,7 @@ export default {
           { label: 'Select', route: '/w-select' },
           { label: 'Slider', route: '/w-slider' },
           { label: 'Switch', route: '/w-switch' },
-          // { label: 'Steps', route: '/w-steps', disabled: true },
+          { label: 'Steps', route: '/w-steps', disabled: true },
           { label: 'Textarea', route: '/w-textarea' }
         ]
       }
