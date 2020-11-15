@@ -19,6 +19,16 @@ div
   example
     w-image(src="/favicon.png")
     template(#pug).
+
+  title-link(h2) Given dimensions
+  example
+    w-image(src="/favicon.png" :width="250" :height="250")
+    template(#pug).
+
+  title-link(h2) Fallback
+  example
+    w-image(src="/favicon.png" fallback="/")
+    template(#pug).
 </template>
 
 <script>
