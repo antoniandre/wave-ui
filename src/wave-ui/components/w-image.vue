@@ -1,6 +1,6 @@
 <template lang="pug">
 component.w-image(:is="tag" :class="classes" :style="styles")
-  w-progress(v-if="!loading" circle indeterminate)
+  w-progress(v-if="loading" circle indeterminate)
 </template>
 
 <script>
@@ -13,7 +13,11 @@ export default {
     src: { type: String },
     width: { type: [Number, String] },
     height: { type: [Number, String] },
-    lazy: { type: Boolean }
+    lazy: { type: Boolean },
+    absolute: { type: Boolean },
+    fixed: { type: Boolean },
+    contain: { type: Boolean },
+    fallback: { type: String, default: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' }, // 1px blank gif.
   },
 
   emits: ['loaded', 'failed'],
@@ -22,22 +26,26 @@ export default {
     return {
       loading: false,
       loaded: false,
-      imgWidth: this.width,
-      imgHeight: this.height
+      imgWidth: this.width || 0,
+      imgHeight: this.height || 0
     }
   },
 
   computed: {
     classes () {
       return {
-        'w-image--loaded': this.loaded
+        'w-image--loading': this.loading,
+        'w-image--loaded': this.loaded,
+        'w-image--absolute': this.absolute,
+        'w-image--fixed': this.fixed,
+        'w-image--contain': this.contain
       }
     },
     styles () {
       return {
-        'background-image': `url('${this.src}')`,
-        width: this.imgWidth ? `${this.imgWidth}px` : null,
-        height: this.imgHeight ? `${this.imgHeight}px` : null
+        'background-image': this.loaded ? `url('${this.src}')` : null,
+        width: (!isNaN(this.imgWidth) ? `${this.imgWidth}px` : this.imgWidth) || null,
+        height: (!isNaN(this.imgHeight) ? `${this.imgHeight}px` : this.imgHeight) || null
       }
     }
   },
@@ -48,22 +56,25 @@ export default {
       if (this.loading || this.loaded) return
 
       this.loading = true
+      this.loaded = false
 
       return new Promise((resolve, reject) => {
         const img = new Image()
         img.onload = e => {
-          this.imgWidth = e.target.width
-          this.imgHeight = e.target.height
+          if (!this.imgWidth) this.imgWidth = e.target.width
+          if (!this.imgHeight) this.imgHeight = e.target.height
           this.loading = false
           this.loaded = true
-          resolve()
+          console.log('resolve')
+          return resolve(img)
         }
-        img.onerror = () => {
+        img.onerror = error => {
+          console.log('reject')
           this.loading = false
           this.loaded = false
-          reject() // Always call reject.
+          return reject(error)
         }
-        img.src = this.image
+        setTimeout(() => img.src = this.src, 3000)
       })
     },
   },
@@ -71,13 +82,12 @@ export default {
   mounted () {
     if (!this.src) return consoleWarn('The w-image component was used without src.')
 
-    this.loadImage().finally(() => (this.loaded = true) && (this.loading = false))
+    this.loadImage()
   },
 
   watch: {
     src () {
-      this.loaded = false
-      this.loadImage().finally(() => (this.loaded = true) && (this.loading = false))
+      this.loadImage()
     }
   }
 }
@@ -85,11 +95,13 @@ export default {
 
 <style lang="scss">
 .w-image {
-  display: inline-block;
+  display: inline-flex;
   width: 4em;
   height: 4em;
   background-repeat: no-repeat;
   background-size: cover;
+  align-items: center;
+  justify-content: center;
 
   &--contain {background-size: contain;}
 }
