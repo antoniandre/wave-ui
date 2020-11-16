@@ -17,15 +17,16 @@ export default {
     absolute: { type: Boolean },
     fixed: { type: Boolean },
     contain: { type: Boolean },
-    fallback: { type: String, default: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' }, // 1px blank gif.
+    fallback: { type: String }
   },
 
-  emits: ['loaded', 'failed'],
+  emits: ['loading', 'loaded', 'error'],
 
   data () {
     return {
       loading: false,
       loaded: false,
+      imgSrc: '',
       imgWidth: this.width || 0,
       imgHeight: this.height || 0
     }
@@ -43,7 +44,7 @@ export default {
     },
     styles () {
       return {
-        'background-image': this.loaded ? `url('${this.src}')` : null,
+        'background-image': this.loaded ? `url('${this.imgSrc}')` : null,
         width: (!isNaN(this.imgWidth) ? `${this.imgWidth}px` : this.imgWidth) || null,
         height: (!isNaN(this.imgHeight) ? `${this.imgHeight}px` : this.imgHeight) || null
       }
@@ -51,30 +52,42 @@ export default {
   },
 
   methods: {
-    loadImage () {
+    loadImage (loadFallback = false) {
       // Don't try to reload image if already loaded.
       if (this.loading || this.loaded) return
 
       this.loading = true
       this.loaded = false
+      this.$emit('loading')
 
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         const img = new Image()
         img.onload = e => {
           if (!this.imgWidth) this.imgWidth = e.target.width
           if (!this.imgHeight) this.imgHeight = e.target.height
           this.loading = false
           this.loaded = true
-          console.log('resolve')
+          this.imgSrc = loadFallback ? this.fallback : this.src
+          this.$emit('loaded', this.imgSrc)
+
           return resolve(img)
         }
         img.onerror = error => {
-          console.log('reject')
-          this.loading = false
-          this.loaded = false
-          return reject(error)
+          this.$emit('error', error)
+          // If a fallback is provided & not already trying to load it, load the fallback src.
+          if (this.fallback && !loadFallback) {
+            this.loading = false
+            this.loaded = false
+            this.loadImage(true)
+          }
+          else {
+            this.loading = false
+            this.loaded = false
+          }
+
+          // return reject(error)
         }
-        setTimeout(() => img.src = this.src, 3000)
+        img.src = loadFallback ? this.fallback : this.src
       })
     },
   },
@@ -98,8 +111,10 @@ export default {
   display: inline-flex;
   width: 4em;
   height: 4em;
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1px blank gif.
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
   align-items: center;
   justify-content: center;
 
