@@ -78,6 +78,7 @@ export default {
     features2: [
       { label: 'Obviously awesome!' },
       { label: 'Supporting Vue 3' },
+      { label: 'No dependency' },
       { label: 'Lightweight' },
       { label: 'Providing powerful elements, e.g. write a navigation menu in a single line' },
       { label: 'Free of useless DOM wrappers inside UI elements, really' },
