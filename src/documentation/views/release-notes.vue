@@ -21,6 +21,12 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
+    li.patch
+      strong.version v1.12.1
+      p.
+        Prevent browser scroll while opening a #[strong.code w-accordion] item when #[code expand-single] is set to #[code true].
+        (#[a(href="https://github.com/antoniandre/wave-ui/issues/3" target="_blank") #3])
+
     li.minor
       strong.version v1.12.0
       p Added an optional #[code default] slot to the #[strong.code w-divider] component to display content in the middle of the divider.
