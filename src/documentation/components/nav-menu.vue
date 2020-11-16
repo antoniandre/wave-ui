@@ -68,7 +68,7 @@ export default {
       { label: 'Divider', route: '/w-divider' },
       { label: 'Drawer', route: '/w-drawer' },
       { label: 'Icon', route: '/w-icon' },
-      { label: 'Image', route: '/w-image', disabled: true },
+      { label: 'Image', route: '/w-image', inProgress: true },
       { label: 'List', route: '/w-list' },
       { label: 'Menu', route: '/w-menu' },
       { label: 'Notification', route: '/w-notification' },
