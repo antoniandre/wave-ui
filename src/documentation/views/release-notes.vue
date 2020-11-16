@@ -21,6 +21,10 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
+    li.minor
+      strong.version v1.13.0
+      p Added a new #[strong.code w-image] component.
+
     li.patch
       strong.version v1.12.1
       p.
