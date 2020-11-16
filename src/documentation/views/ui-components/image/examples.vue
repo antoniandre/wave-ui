@@ -21,12 +21,27 @@ div
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/favicon.png`")
     template(#pug).
+      w-image(:src="`${baseUrl}images/favicon.png`")
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
 
   title-link(h2) Given dimensions
   example(content-class="text-center w-flex justify-space-around")
     w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
     template(#pug).
+      w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
 
   title-link(h2) Loading spinner
   p.
@@ -35,6 +50,13 @@ div
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :width="500" :height="250")
     template(#pug).
+      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :width="500" :height="250")
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
 
   title-link(h2) Fallback
   p.
@@ -46,18 +68,19 @@ div
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/broken.png`" :fallback="`${baseUrl}images/not-found.jpg`")
     template(#pug).
+      w-image(:src="`${baseUrl}images/broken.png`" :fallback="`${baseUrl}images/not-found.jpg`")
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
 </template>
 
 <script>
 export default {
   data: () => ({
     baseUrl: process.env.BASE_URL
-  }),
-
-  methods: {
-    // loadImage (img) {
-    //   setTimeout(() => img.src = this.src, 3000)
-    // }
-  }
+  })
 }
 </script>
