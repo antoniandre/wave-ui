@@ -2,7 +2,7 @@
 component.w-image-wrap(:is="wrapperTag" :class="wrapperClasses" :style="wrapperStyles")
   transition(:name="transition" appear)
     component.w-image(v-if="loaded" :is="tag" :class="imageClasses" :style="imageStyles")
-  .w-image__loader(v-if="loading")
+  .w-image__loader(v-if="!noSpinner && loading")
     slot(v-if="$slots.loading" name="loading")
     w-progress(v-else circle indeterminate)
 </template>
@@ -21,6 +21,7 @@ export default {
     absolute: { type: Boolean },
     fixed: { type: Boolean },
     contain: { type: Boolean },
+    noSpinner: { type: Boolean },
     fallback: { type: String },
     transition: { type: String, default: 'fade' }
   },
