@@ -43,9 +43,21 @@ div
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 
+  title-link(h2) Image ratio
+  example(content-class="text-center")
+    w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" :ratio="233 / 1000")
+    template(#pug).
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :ratio="233 / 1000")
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
+
   title-link(h2) Loading spinner
   p.
-    This image is very big, so that you have time to see the spinner while loading.
+    This image is quite big, so that you have time to see the spinner while loading.
     Refresh the page if you haven't seen it!
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :width="500" :height="250")
@@ -57,6 +69,58 @@ div
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
+  alert(tip).
+    #[strong Dev notes:] disabling the browser cache will prevent you from seeing the transition.#[br]
+    The reason for it is that the image first loads in the #[strong.code w-image] component, then
+    once it's fully loaded, the image src is filled (or background url) and the image would load again
+    if you disable the cache. On big images, you would then see a truncated image until completely
+    loaded, just like a standard &lt;img&gt;.
+
+  title-link(h2) Transitions
+  example
+    .w-flex.wrap.justify-center
+      div.mr4
+        .title3.mb2 Transition names
+        w-radios(
+          v-model="img.transition"
+          :items="transitions"
+          item-value-key="label")
+          template(#label="{ item }")
+            code {{ item.label }}
+        w-button.mt2(@click="reload()") Reload image
+      w-image(:src="img.src" :width="500" :height="250" :transition="img.transition")
+    template(#pug).
+    template(#js).
+      data: () => ({
+        img: {
+          src: `${baseUrl}images/spirit-island--alberta.png`,
+          transition: 'fade'
+        },
+        transitions: [
+          { label: 'fade' },
+          { label: 'slide-fade-up' },
+          { label: 'slide-fade-down' },
+          { label: 'slide-fade-left' },
+          { label: 'slide-fade-right' },
+          { label: 'scale' },
+          { label: 'scale-fade' },
+          { label: 'bounce' },
+          { label: 'twist' },
+          { label: 'none', value: '' }
+        ]
+      }),
+      methods: {
+        reload () {
+          this.img.src = ''
+          setTimeout(() => this.img.src = this.img.initialSrc, 500)
+        }
+      }
+  alert(tip).
+    #[strong Dev notes:] disabling the browser cache will prevent you from seeing the transition.#[br]
+    The reason for it is that the image first loads in the #[strong.code w-image] component, then
+    once it's fully loaded, the image src is filled (or background url) and the image would load again
+    if you disable the cache. On big images, you would then see a truncated image until completely
+    loaded, just like a standard &lt;img&gt;.
 
   title-link(h2) Fallback
   p.
@@ -80,7 +144,31 @@ div
 <script>
 export default {
   data: () => ({
-    baseUrl: process.env.BASE_URL
-  })
+    baseUrl: process.env.BASE_URL,
+    img: {
+      initialSrc: `${process.env.BASE_URL}images/spirit-island--alberta.png`,
+      src: `${process.env.BASE_URL}images/spirit-island--alberta.png`,
+      transition: 'fade'
+    },
+    transitions: [
+      { label: 'fade' },
+      { label: 'slide-fade-up' },
+      { label: 'slide-fade-down' },
+      { label: 'slide-fade-left' },
+      { label: 'slide-fade-right' },
+      { label: 'scale' },
+      { label: 'scale-fade' },
+      { label: 'bounce' },
+      { label: 'twist' },
+      { label: 'none', value: '' }
+    ],
+  }),
+
+  methods: {
+    reload () {
+      this.img.src = ''
+      setTimeout(() => (this.img.src = this.img.initialSrc), 500)
+    }
+  }
 }
 </script>
