@@ -17,6 +17,7 @@ export default {
     src: { type: String },
     width: { type: [Number, String] },
     height: { type: [Number, String] },
+    ratio: { type: [Number, String] },
     lazy: { type: Boolean },
     absolute: { type: Boolean },
     fixed: { type: Boolean },
@@ -39,6 +40,9 @@ export default {
   },
 
   computed: {
+    imgRatio () {
+      return parseFloat(this.ratio)
+    },
     wrapperTag () {
       return ['span' || 'div'].includes(this.tag) ? this.tag : 'span'
     },
@@ -53,7 +57,8 @@ export default {
     wrapperStyles () {
       return {
         width: (!isNaN(this.imgWidth) ? `${this.imgWidth}px` : this.imgWidth) || null,
-        height: (!isNaN(this.imgHeight) ? `${this.imgHeight}px` : this.imgHeight) || null
+        height: (!isNaN(this.imgHeight) ? `${this.imgHeight}px` : this.imgHeight) || null,
+        'padding-bottom': this.imgRatio && `${this.imgRatio * 100}%`
       }
     },
 
@@ -84,8 +89,8 @@ export default {
       return new Promise(resolve => {
         const img = new Image()
         img.onload = e => {
-          if (!this.imgWidth) this.imgWidth = e.target.width
-          if (!this.imgHeight) this.imgHeight = e.target.height
+          if (!this.imgWidth && !this.imgRatio) this.imgWidth = e.target.width
+          if (!this.imgHeight && !this.imgRatio) this.imgHeight = e.target.height
           this.loading = false
           this.loaded = true
           this.imgSrc = loadFallback ? this.fallback : this.src
