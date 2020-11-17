@@ -114,7 +114,6 @@ export default {
   background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1px blank gif.
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
   align-items: center;
   justify-content: center;
 
