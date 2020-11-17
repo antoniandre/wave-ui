@@ -45,7 +45,7 @@ div
 
   title-link(h2) Loading spinner
   p.
-    This image is quite big, so that you have time to see the spinner while loading.
+    This image is very big, so that you have time to see the spinner while loading.
     Refresh the page if you haven't seen it!
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :width="500" :height="250")
