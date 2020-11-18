@@ -145,6 +145,22 @@ div
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
+
+  title-link(h2) Lazy
+  p.
+    By using the lazy attribute, it is possible to load the image only when it is in the viewport.#[br]
+    Wave UI internally uses an IntersectionObserver and will only start loading the image when it is
+    visible.
+  example(content-class="text-center")
+    w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy)
+    template(#pug).
+      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy)
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
 </template>
 
 <script>

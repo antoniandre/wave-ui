@@ -120,7 +120,17 @@ export default {
   mounted () {
     if (!this.src) return consoleWarn('The w-image component was used without src.')
 
-    this.loadImage()
+    if (this.lazy) {
+      const IntersectObserver = new IntersectionObserver(entry => {
+        if (entry[0] && entry[0].isIntersecting) {
+          this.loadImage()
+          IntersectObserver.disconnect()
+        }
+      }, this.intersectionConfig)
+      IntersectObserver.observe(this.$el)
+    }
+
+    else this.loadImage()
   },
 
   watch: {
@@ -136,6 +146,7 @@ export default {
   position: relative;
   display: inline-flex;
   width: 4em;
+  max-width: 100%;
   height: 4em;
 }
 
