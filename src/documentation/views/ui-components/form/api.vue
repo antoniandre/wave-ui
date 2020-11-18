@@ -27,55 +27,55 @@ const slots = {
 
 const events = {
   submit: {
-    description: 'Emmited on form submit.',
+    description: 'Emitted on form submit.',
     params: {
       '[DOM event object]': 'The associated reset DOM event.'
     }
   },
   'before-validate': {
-    description: 'Emmited before validation, every time a validation is triggered.'
+    description: 'Emitted before validation, every time a validation is triggered.'
   },
   validate: {
-    description: 'Emmited on form validate, every time a validation is triggered.<br>Returns a single object containing:',
+    description: 'Emitted on form validate, every time a validation is triggered.<br>Returns a single object containing:',
     params: {
       e: 'The associated DOM event.',
       errorsCount: 'An integer representing the number of errors in the form.'
     }
   },
   success: {
-    description: 'Emmited on form success, when there is no error in the form and the validation is successful.<br>Returns a single object containing:',
+    description: 'Emitted on form success, when there is no error in the form and the validation is successful.<br>Returns a single object containing:',
     params: {
       e: 'The associated DOM event.',
       errorsCount: 'An integer representing the number of errors in the form.'
     }
   },
   error: {
-    description: 'Emmited on form error, when there is at least one error in the form and the validation fails.<br>Returns a single object containing:',
+    description: 'Emitted on form error, when there is at least one error in the form and the validation fails.<br>Returns a single object containing:',
     params: {
       e: 'The associated DOM event.',
       errorsCount: 'An integer representing the number of errors in the form.'
     }
   },
   reset: {
-    description: 'Emmited on form reset. A reset can be triggered by setting the v-model value to null or by clicking on a reset button.',
+    description: 'Emitted on form reset. A reset can be triggered by setting the v-model value to null or by clicking on a reset button.',
     params: {
       '[DOM event object]': 'The associated reset DOM event.'
     }
   },
   input: {
-    description: 'Emmited every time the form status changes.<br>Updates the v-model value in Vue 2.x only.',
+    description: 'Emitted every time the form status changes.<br>Updates the v-model value in Vue 2.x only.',
     params: {
       '[Boolean, Null]': 'The new status of the form: one of <code>null</code> when pristine, <code>false</code> when invalid, <code>true</code> when valid.'
     }
   },
   'update:modelValue': {
-    description: 'Emmited every time the form status changes.<br>Updates the v-model value in Vue 3 only.',
+    description: 'Emitted every time the form status changes.<br>Updates the v-model value in Vue 3 only.',
     params: {
       '[Boolean, Null]': 'The new status of the form: one of <code>null</code> when pristine, <code>false</code> when invalid, <code>true</code> when valid.'
     }
   },
   'update:errorsCount': {
-    description: 'Emmited every time the errorsCount changes. To be used with <code>:errors-count.sync</code> on Vue 2.x or <code>v-model:errors-count</code> on Vue 3.',
+    description: 'Emitted every time the errorsCount changes. To be used with <code>:errors-count.sync</code> on Vue 2.x or <code>v-model:errors-count</code> on Vue 3.',
     params: {
       '[Integer]': 'The number of errors in the form.'
     }
