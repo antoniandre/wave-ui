@@ -7,6 +7,7 @@ div
         A #[span.code w-form] is invisible and has no style by default. You can put it in a
         #[span.code w-card] (or put a #[span.code w-card] in it) to have some style. Alternatively,
         you can apply colors and spaces CSS classes on it (e.g. #[span.code .blue--bg], #[span.code .pa4]).
+      li The #[span.code w-form] tag translates to a #[span.code &lt;form&gt;] tag.
 
   title-link(h2) How it works
   .title3 The validation works in 3 steps:
@@ -70,15 +71,20 @@ div
     Even in the most advanced case, Wave UI's form validation is very simple, it doesn't
     require you to use #[code $refs].
 
-  title-link(h2) Submission to a server
+  title-link(h2) Direct submission to a server
   p.mt6.
     The #[span.code w-form] prevents the form submission by default - for modern usage where an AJAX
-    call is made on success (#[a(href="#advanced-validation") see the last example: Advanced validation]).#[br]
-    But in case you need to send the form as is to the server you can set the #[code allow-submit]
-    option to #[span.code true].
+    call is made on success (#[a(href="#advanced-validation") see the last example: Advanced validation]).
+    #[br]
+    But in case you need to send the form as is to the server, you can set the #[code allow-submit]
+    option to #[span.code true] and provide a URL via the usual #[code action] attribute, and optionally
+    set a #[code method] attribute. Just like a normal #[span.code &lt;form&gt;] tag.#[br]#[br]
+
+    The #[span.code w-form] will handle the validation and prevent the form submission
+    until the form is valid. Once the form is valid, the form submission will not be prevented and the
+    data will be submitted to the URL set in the #[code action] attribute.
   p.mt2.
-    In this example, the #[span.code w-form] will handle the validation and block the form submission
-    until the form is valid. Then the form will be submitted in another tab to a fake #[span.code test.php].
+    In this example, the form data will be submitted in another tab to a fake #[span.code test.php].
 
   example
     w-form(action="test.php" method="post" target="_blank" allow-submit)
@@ -98,6 +104,10 @@ div
           required: value => !!value || 'This field is required'
         }
       })
+
+  alert(tip).
+    To submit a form via the HTML standard way like in this example, you need to add
+    the #[code action] attribute and optionally a #[code method] attribute.
 
   title-link(h2) Validate on submit, on blur, on keyup
   p.
@@ -205,7 +215,7 @@ div
         }
       })
 
-  title-link(h2) Advanced validation with everything
+  title-link(h2 slug="advanced-validation") Advanced validation with everything
   p.
     This example shows a full form validation and lifecycle - everything you could need.#[br]
   ul
