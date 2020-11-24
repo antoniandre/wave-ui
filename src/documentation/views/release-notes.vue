@@ -21,6 +21,10 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
+    li.patch
+      strong.version v1.13.2
+      p Fix the #[strong.code w-button] external link detection. (#[a(href="https://github.com/antoniandre/wave-ui/issues/9" target="_blank") #9])
+
     li.minor
       strong.version v1.13.0
       p Added a new #[strong.code w-image] component.
