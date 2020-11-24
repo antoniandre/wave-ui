@@ -23,7 +23,7 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
     li.patch
       strong.version v1.13.2
-      p Fix the #[strong.code w-button] external link detection. (#[a(href="https://github.com/antoniandre/wave-ui/issues/9" target="_blank") #9])
+      p Fix the #[strong.code w-button] external link detection. #[issue-link 9]
 
     li.minor
       strong.version v1.13.0
@@ -33,7 +33,7 @@ main
       strong.version v1.12.1
       p.
         Prevent browser scroll while opening a #[strong.code w-accordion] item when #[code expand-single] is set to #[code true].
-        (#[a(href="https://github.com/antoniandre/wave-ui/issues/3" target="_blank") #3])
+        #[issue-link 3]
 
     li.minor
       strong.version v1.12.0
@@ -89,7 +89,7 @@ main
       strong.version v1.8.1
       p.
         Added #[code .vue] extensions for Vite &amp; Rollup
-        #[a(href="https://github.com/antoniandre/wave-ui/issues/2" target="_blank") #2].
+        #[issue-link 2].
 
     li.minor
       strong.version v1.8.0
