@@ -2,7 +2,7 @@
 component.w-button(
   :is="route ? 'a' : 'button'"
   :type="!route && type"
-  :href="(route && resolvedRoute) || null"
+  :href="(route && (externalLink ? route : resolvedRoute)) || null"
   :class="classes"
   :disabled="!!disabled || null"
   v-on="listeners"
@@ -95,7 +95,7 @@ export default {
       ]
     },
     externalLink () {
-      return /^(http|\/\/)/.test(this.route)
+      return /^(https?:)?\/\//.test(this.route)
     },
     classes () {
       return {
