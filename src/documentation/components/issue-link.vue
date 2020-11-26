@@ -9,7 +9,7 @@ export default {
   }),
 
   mounted () {
-    this.number = this.$slots.default[0].text || ''
+    this.number = (this.$slots.default() || [])[0].text || ''
   }
 }
 </script>
