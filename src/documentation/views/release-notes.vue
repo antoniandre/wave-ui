@@ -21,6 +21,25 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
+
+    li.patch
+      strong.version v1.13.3
+      p Added a scrollbar on #[strong.code w-tabs] tabs row when needed. #[issue-link 11]
+
+    li.patch
+      strong.version v1.13.2
+      p Fix the #[strong.code w-button] external link detection. #[issue-link 9]
+
+    li.minor
+      strong.version v1.13.0
+      p Added a new #[strong.code w-image] component.
+
+    li.patch
+      strong.version v1.12.1
+      p.
+        Prevent browser scroll while opening a #[strong.code w-accordion] item when #[code expand-single] is set to #[code true].
+        #[issue-link 3]
+
     li.minor
       strong.version v1.12.0
       p Added an optional #[code default] slot to the #[strong.code w-divider] component to display content in the middle of the divider.
@@ -75,7 +94,7 @@ main
       strong.version v1.8.1
       p.
         Added #[code .vue] extensions for Vite &amp; Rollup
-        #[a(href="https://github.com/antoniandre/wave-ui/issues/2" target="_blank") #2].
+        #[issue-link 2].
 
     li.minor
       strong.version v1.8.0

@@ -68,7 +68,7 @@ export default {
       { label: 'Divider', route: '/w-divider' },
       { label: 'Drawer', route: '/w-drawer' },
       { label: 'Icon', route: '/w-icon' },
-      { label: 'Image', route: '/w-image', disabled: true },
+      { label: 'Image', route: '/w-image', inProgress: true },
       { label: 'List', route: '/w-list' },
       { label: 'Menu', route: '/w-menu' },
       { label: 'Notification', route: '/w-notification' },
@@ -94,7 +94,7 @@ export default {
           { label: 'Select', route: '/w-select' },
           { label: 'Slider', route: '/w-slider' },
           { label: 'Switch', route: '/w-switch' },
-          // { label: 'Steps', route: '/w-steps', disabled: true },
+          { label: 'Steps', route: '/w-steps', disabled: true },
           { label: 'Textarea', route: '/w-textarea' }
         ]
       }

@@ -3,13 +3,13 @@
   .w-accordion__item(
     v-for="(item, i) in accordionItems"
     :key="i"
-    :class="{ ...itemClasses, 'w-accordion__item--expanded': item._expanded, 'w-accordion__item--disabled': item._disabled, [item[itemColorKey]]: item[itemColorKey] }"
+    :class="itemClasses(item)"
     :aria-expanded="item._expanded ? 'true' : 'false'")
     .w-accordion__item-title(
-      @click="!item._disabled && toggleItem(item)"
+      @click="!item._disabled && toggleItem(item, $event)"
       @focus="$emit('focus', cleanItem(item))"
+      @keypress.enter="!item._disabled && toggleItem(item, $event)"
       :tabindex="!item._disabled && 0"
-      @keypress.enter="!item._disabled && toggleItem(item)"
       :class="titleClass")
       //- Expand icon on left.
       w-button.w-accordion__expand-icon(
@@ -19,7 +19,7 @@
         :tabindex="-1"
         text
         @keypress.stop
-        @click.stop="!item._disabled && toggleItem(item)")
+        @click.stop="!item._disabled && toggleItem(item, $event)")
       //- Title.
       slot(
         v-if="$slots[`item-title.${item.id || i + 1}`]"
@@ -34,7 +34,7 @@
         :icon="(item._expanded && collapseIcon) || expandIcon"
         text
         @keypress.stop
-        @click.stop="!item._disabled && toggleItem(item)")
+        @click.stop="!item._disabled && toggleItem(item, $event)")
     //- Content.
     w-transition-expand(y)
       .w-accordion__item-content(v-if="item._expanded" :class="contentClass")
@@ -93,27 +93,36 @@ export default {
         'w-accordion--icon-right': this.expandIcon && this.expandIconRight,
         'w-accordion--rotate-icon': this.expandIcon && !this.collapseIcon
       }
-    },
-
-    itemClasses () {
-      return {
-        [this.itemClass]: this.itemClass || null
-      }
     }
   },
 
   methods: {
-    toggleItem (item) {
+    toggleItem (item, e) {
+
       item._expanded = !item._expanded
       if (this.expandSingle) this.accordionItems.forEach(obj => obj._index !== item._index && (obj._expanded = false))
       const expandedItems = this.accordionItems.map(item => item._expanded || false)
       this.$emit('update:modelValue', expandedItems)
       this.$emit('input', expandedItems)
+
+      // When a focused item moves in the page, the scrollTop is naturally updated by the browser.
+      // So if expandSingle is set to true, clicking on the next title of an open pane would shift the
+      // scrollTop unless unfocused while transitioning. #3.
+      e.target.blur()
+      setTimeout(() => e.target.focus(), 300)
     },
     cleanItem (item) {
       // eslint-disable-next-line no-unused-vars
       const { _index, _expanded, _disabled, ...Item } = item
       return Item
+    },
+    itemClasses (item) {
+      return {
+        [this.itemClass]: this.itemClass || null,
+        'w-accordion__item--expanded': item._expanded,
+        'w-accordion__item--disabled': item._disabled,
+        [item[this.itemColorKey]]: item[this.itemColorKey]
+      }
     }
   },
 

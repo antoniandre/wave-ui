@@ -246,6 +246,7 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
+    overflow-x: auto;
 
     .w-tabs--card &:after {
       content: '';
