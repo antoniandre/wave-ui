@@ -7,6 +7,7 @@ import '@mdi/font/css/materialdesignicons.min.css'
 import SshPre from 'simple-syntax-highlighter'
 import 'simple-syntax-highlighter/dist/sshpre.css'
 import TitleLink from '@/documentation/components/title-link'
+import IssueLink from '@/documentation/components/issue-link'
 import UiComponentTitle from '@/documentation/components/ui-component-title'
 import Example from '@/documentation/components/example'
 import Alert from '@/documentation/components/alert'
@@ -33,5 +34,6 @@ app.component('ui-component-title', UiComponentTitle)
 app.component('example', Example)
 app.component('alert', Alert)
 app.component('api', Api)
+app.component('issue-link', IssueLink)
 
 app.mount('#app')
