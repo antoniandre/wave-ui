@@ -21,6 +21,11 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
+
+    li.patch
+      strong.version v1.13.3
+      p Added a scrollbar on #[strong.code w-tabs] tabs row when needed. #[issue-link 11]
+
     li.patch
       strong.version v1.13.2
       p Fix the #[strong.code w-button] external link detection. #[issue-link 9]
