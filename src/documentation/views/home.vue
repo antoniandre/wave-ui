@@ -174,7 +174,7 @@ w-app.home
           Wave UI is developed with a particular care about CSS.#[br]
           Practically Wave UI gives you more flexibility and more control over the CSS.
         p.my4.
-          If you use SASS, you can even control Wave UI's CSS rules priorities by overriding the CSS base scope like so.
+          If you use Sass, you can even control Wave UI's CSS rules priorities by overriding the CSS base scope like so.
         pre.example.ssh-pre.pa2
           span.pink $css-scope
           span.blue-grey.mr1 :

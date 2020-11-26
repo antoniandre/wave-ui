@@ -78,13 +78,14 @@ export default {
     features2: [
       { label: 'Obviously awesome!' },
       { label: 'Supporting Vue 3' },
+      { label: 'No dependency' },
       { label: 'Lightweight' },
       { label: 'Providing powerful elements, e.g. write a navigation menu in a single line' },
       { label: 'Free of useless DOM wrappers inside UI elements, really' },
       { label: 'Very easy to override via CSS' },
       { label: 'Avoiding the use of the <code class="mx1">!important</code> keyword' },
       { label: 'CSS-scoping to UI elements &amp; helper classes - no side-effect' },
-      { label: 'Handling all the sizes and spacings from a single <code class="mx1">$base-font-size</code> SASS variable that you can override' },
+      { label: 'Handling all the sizes and spacings from a single <code class="mx1">$base-font-size</code> Sass variable that you can override' },
       { label: 'Providing straightforward and consistent options and component names' }
     ]
   })
