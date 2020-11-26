@@ -181,6 +181,9 @@ div
       })
 
   title-link(h2) Add / remove tabs
+  p.
+    The tabs will naturally try to fit in the available space. But if they can't fit because there are
+    too many, a scrollbar will allow navigation to all the tabs.
   example
     w-flex.mb3(align-center)
       | Number of tabs:
