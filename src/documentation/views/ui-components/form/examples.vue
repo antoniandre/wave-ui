@@ -309,8 +309,7 @@ div
           errorsCount: 0
         },
         validators: {
-          firstName: value => !!value || 'This field is required',
-          lastName: value => !!value || 'This field is required'
+          required: value => !!value || 'This field is required'
         }
       }),
 
