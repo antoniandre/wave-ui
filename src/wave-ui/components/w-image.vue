@@ -157,6 +157,12 @@ export default {
   watch: {
     src () {
       this.loadImage()
+    },
+    width (value) {
+      this.imgWidth = value
+    },
+    height (value) {
+      this.imgHeight = value
     }
   }
 }
