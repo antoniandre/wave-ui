@@ -1,13 +1,27 @@
 <template lang="pug">
 component.w-image-wrap(:is="wrapperTag" :class="wrapperClasses" :style="wrapperStyles")
   transition(:name="transition" appear)
-    component.w-image(v-if="loaded" :is="tag" :class="imageClasses" :style="imageStyles")
+    component.w-image(
+      v-if="loaded"
+      :is="tag"
+      :class="imageClasses"
+      :style="imageStyles"
+      :src="tag === 'img' ? imgSrc : null")
   .w-image__loader(v-if="!noSpinner && loading")
     slot(v-if="$slots.loading" name="loading")
     w-progress(v-else circle indeterminate)
 </template>
 
 <script>
+/**
+ * Different use cases of w-image:
+ * - fixed size: no width and no height (use bg)
+ * - fixed size: given width + height (use bg)
+ * - adaptive size: given ratio + width 100% (use bg)
+ * - adaptive size: given ratio + height 100% (use bg)
+ * - adaptive & locked size: given width or height and using <img>
+ **/
+
 import { consoleWarn } from '../utils/console'
 
 export default {
@@ -35,30 +49,33 @@ export default {
       loaded: false,
       imgSrc: '',
       imgWidth: this.width || 0,
-      imgHeight: this.height || 0
+      imgHeight: this.height || 0,
+      imgComputedRatio: 0
     }
   },
 
   computed: {
-    imgRatio () {
+    imgGivenRatio () {
       return parseFloat(this.ratio)
     },
+
     wrapperTag () {
       return ['span' || 'div'].includes(this.tag) ? this.tag : 'span'
     },
 
     wrapperClasses () {
       return {
-        'w-image--absolute': this.absolute,
-        'w-image--fixed': this.fixed
+        'w-image-wrap--absolute': this.absolute,
+        'w-image-wrap--fixed': this.fixed,
+        'w-image-wrap--has-ratio': this.imgGivenRatio
       }
     },
 
     wrapperStyles () {
       return {
-        width: (!isNaN(this.imgWidth) ? `${this.imgWidth}px` : this.imgWidth) || null,
-        height: (!isNaN(this.imgHeight) ? `${this.imgHeight}px` : this.imgHeight) || null,
-        'padding-bottom': this.imgRatio && `${this.imgRatio * 100}%`
+        width: this.imgGivenRatio ? null : ((!isNaN(this.imgWidth) ? `${this.imgWidth}px` : this.imgWidth) || null),
+        height: this.imgGivenRatio || this.tag === 'img' ? null : ((!isNaN(this.imgHeight) ? `${this.imgHeight}px` : this.imgHeight) || null),
+        'padding-bottom': this.imgGivenRatio && `${this.imgGivenRatio * 100}%`
       }
     },
 
@@ -72,14 +89,14 @@ export default {
 
     imageStyles () {
       return {
-        'background-image': this.loaded ? `url('${this.imgSrc}')` : null
+        'background-image': this.tag !== 'img' && this.loaded ? `url('${this.imgSrc}')` : null
       }
     }
   },
 
   methods: {
     loadImage (loadFallback = false) {
-      // Don't try to reload image if already loaded.
+      // Don't try to reload image if already loading.
       if (this.loading) return
 
       this.loading = true
@@ -89,8 +106,12 @@ export default {
       return new Promise(resolve => {
         const img = new Image()
         img.onload = e => {
-          if (!this.imgWidth && !this.imgRatio) this.imgWidth = e.target.width
-          if (!this.imgHeight && !this.imgRatio) this.imgHeight = e.target.height
+          if (!this.width && !this.height && !this.imgGivenRatio) {
+            this.imgWidth = e.target.width
+            this.imgHeight = e.target.height
+          }
+          this.imgComputedRatio = e.target.height / e.target.width
+
           this.loading = false
           this.loaded = true
           this.imgSrc = loadFallback ? this.fallback : this.src
@@ -114,7 +135,7 @@ export default {
         }
         img.src = loadFallback ? this.fallback : this.src
       })
-    },
+    }
   },
 
   mounted () {
@@ -146,8 +167,14 @@ export default {
   position: relative;
   display: inline-flex;
   width: 4em;
-  max-width: 100%;
-  height: 4em;
+
+  &--has-ratio {width: 100%;}
+
+  img {
+    width: 100%;
+    height: auto;
+    position: static;
+  }
 }
 
 .w-image {
