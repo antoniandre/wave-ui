@@ -9,22 +9,23 @@ div
     If ever it fails to load a broken image icon will display instead (different on every browser).#[br]
   .title3 The w-image
   p.
-    let you put a spinner while the image is loading, and display the image all at once with an
-    animation (like fade-in) when ready.#[br]
-    It allows you to set a fallback image in case the provided image might be unfound (convenient with
+    can show a spinner while the image is loading, and display the image all at once with a nice
+    animation (like fade-in) when the iamge is ready.#[br]
+    It also allows you to set a fallback image in case the provided image might be unfound (convenient with
     dynamic sources).#[br]
-    If ever the no image is found in the end, w-image will handle the error gracefully and will emit a
-    #[code @error] event containing the error.
+    If ever no image is found, #[strong.code w-image] will handle the error gracefully and will emit a
+    #[code @error] event containing the error. A blank transparent image will be displayed in place of the
+    image itself. So that, nothing looks broken.
 
   title-link(h2) Default
-  p The image is loaded full-size.
+  p With no given width, height or ratio, the image is loaded full-size.
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/favicon.png`")
     template(#pug).
       w-image(:src="`${baseUrl}images/favicon.png`")
     template(#js).
       data: () => ({
-        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -38,7 +39,7 @@ div
       w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
     template(#js).
       data: () => ({
-        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -46,14 +47,35 @@ div
   title-link(h2) Image ratio
   p.
     You may want to have a responsive image. By setting an image ratio (height / width) and a width
-    to 100% the image will always keep the ratio while resizing.
+    to 100% the image will always keep the ratio while resizing.#[br]
+    If no #[code width] or #[code height] is set but a #[code ratio] is given, the #[code width] will
+    be set to 100%.
   example(content-class="text-center")
-    w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" :ratio="233 / 1000")
+    w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="233 / 1000")
     template(#pug).
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="100%" :ratio="233 / 1000")
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="233 / 1000")
     template(#js).
       data: () => ({
-        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can use process.env.BASE_URL
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
+
+  title-link(h2 slug="use-the-img-tag") Using the &lt;img&gt; tag
+  p.
+    You can choose which tag the #[strong.code w-image] should use.#[br]
+    If you use an #[code img] tag, the image will behave exactly like a standard image.
+    The biggest benefit of that, is that you can set a #[code width] or #[code height] only, keep a ratio,
+    and apply a #[code max-width] or #[code max-height] on top of that so if the image would be bigger
+    than the container it would still apply the ratio on the constrained image.
+
+  example(content-class="text-center")
+    w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="650" tag="img" style="max-width: 100%")
+    template(#pug).
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="650" tag="img" style="max-width: 100%")
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue CLI, you can use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -68,7 +90,7 @@ div
       w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :width="500" :height="250")
     template(#js).
       data: () => ({
-        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -141,7 +163,7 @@ div
       w-image(:src="`${baseUrl}images/broken.png`" :fallback="`${baseUrl}images/not-found.jpg`")
     template(#js).
       data: () => ({
-        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -152,12 +174,12 @@ div
     Wave UI internally uses an IntersectionObserver and will only start loading the image when it is
     visible.
   example(content-class="text-center")
-    w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy)
+    w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy :ratio="2550 / 5098")
     template(#pug).
       w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy)
     template(#js).
       data: () => ({
-        // With Webpack or Vue Cli, You can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
