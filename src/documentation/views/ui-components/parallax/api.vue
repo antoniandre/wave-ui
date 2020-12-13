@@ -18,7 +18,7 @@ const propsDescs = {}
 
 const slots = {}
 
-const eventsDescs = {}
+const events = {}
 
 export default {
   data: () => ({
@@ -33,7 +33,7 @@ export default {
       return WParallax.props
     },
     events () {
-      return WParallax.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WParallax.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
     }
   }
 }
