@@ -101,7 +101,7 @@ export default {
 
       this.loading = true
       this.loaded = false
-      this.$emit('loading')
+      this.$emit('loading', loadFallback ? this.fallback : this.src)
 
       return new Promise(resolve => {
         const img = new Image()
@@ -184,7 +184,7 @@ export default {
 }
 
 .w-image {
-  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1px blank gif.
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1x1 blank gif.
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
