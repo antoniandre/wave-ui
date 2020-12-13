@@ -61,7 +61,7 @@ div
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 
-  title-link(h2 slug="use-the-img-tag") Using the &lt;img&gt; tag
+  title-link(h2 slug="using-the-img-tag") Using the &lt;img&gt; tag
   p.
     You can choose which tag the #[strong.code w-image] should use.#[br]
     If you use an #[code img] tag, the image will behave exactly like a standard image.
@@ -106,8 +106,8 @@ div
     Once the image is fully loaded, it will display in one piece with a fade transition by default.
     You can customize the transition.
   example
-    .w-flex.wrap.justify-center
-      div.mr4
+    .w-flex.wrap.justify-center.align-center
+      div.mr4.my2
         .title3.mb2 Transition names
         w-radios(
           v-model="img.transition"
@@ -115,13 +115,24 @@ div
           item-value-key="label")
           template(#label="{ item }")
             code {{ item.label }}
-        w-button.mt2(@click="reload()") Reload image
+        w-button.mt2(@click="reload") Reload image
       w-image(:src="img.src" :width="500" :height="250" :transition="img.transition")
     template(#pug).
+      .w-flex.wrap.justify-center.align-center
+        div.mr4.my2
+          .title3.mb2 Transition names
+          w-radios(
+            v-model="img.transition"
+            :items="transitions"
+            item-value-key="label")
+            template(#label="{ item }")
+              code {{ '\{\{ item.label \}\}' }}
+          w-button.mt2(@click="reload") Reload image
+        w-image(:src="img.src" :width="500" :height="250" :transition="img.transition")
     template(#js).
       data: () => ({
         img: {
-          src: `${baseUrl}images/spirit-island--alberta.png`,
+          src: `https://antoniandre.github.io/wave-ui/images/spirit-island--alberta.png`,
           transition: 'fade'
         },
         transitions: [
