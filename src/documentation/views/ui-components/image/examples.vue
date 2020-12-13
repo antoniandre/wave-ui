@@ -156,16 +156,25 @@ div
     background will be there instead preventing the browser's broken image logo.#[br]
     You can also provide a custom fallback image to display if the image cannot load.#[br]
     For instance, in a e-boutique you may try to load the image of an item without knowing if this item
-    has an available image or not.
+    has an available image or not.#[br]#[br]
+    Thanks to the #[code error] emitted event, you can trigger a specific action, such as displaying an
+    error message like in this example. But this is optional, and without the custom alert nothing would
+    look broken when you provide a valid fallback image!
   example(content-class="text-center")
-    w-image(:src="`${baseUrl}images/broken.png`" :fallback="`${baseUrl}images/not-found.jpg`")
+    w-image(
+      :src="`${baseUrl}images/broken.png`"
+      :fallback="`${baseUrl}images/not-found.jpg`"
+      @error="showError = true")
+    w-alert(v-if="showError" error) Oops. The image could not load!
     template(#pug).
       w-image(:src="`${baseUrl}images/broken.png`" :fallback="`${baseUrl}images/not-found.jpg`")
+      w-alert(v-if="showError" error) Oops. The image could not load!
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can use process.env.BASE_URL
         // if the image is in the public/ folder.
-        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+        baseUrl: 'https://antoniandre.github.io/wave-ui/',
+        showError: false
       })
 
   title-link(h2) Lazy
@@ -174,9 +183,10 @@ div
     Wave UI internally uses an IntersectionObserver and will only start loading the image when it is
     visible.
   example(content-class="text-center")
-    w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy :ratio="2550 / 5098")
+    //- ?v1 to prevent cache from reloading the image without request.
+    w-image(:src="`${baseUrl}images/spirit-island--alberta.png?v1`" lazy :ratio="2550 / 5098")
     template(#pug).
-      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy)
+      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy :ratio="2550 / 5098")
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can use process.env.BASE_URL
@@ -206,6 +216,7 @@ export default {
       { label: 'twist' },
       { label: 'none', value: '' }
     ],
+    showError: false
   }),
 
   methods: {
