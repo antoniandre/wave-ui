@@ -27,13 +27,12 @@
     "build-bundle": "vue-cli-service build --target lib --name wave-ui ./src/wave-ui/index.js --dest ./dist && rm ./dist/demo.html",
     "lint": "vue-cli-service lint"
   },
-  "dependencies": {},
   "devDependencies": {
     "@mdi/font": "^5.8.55",
-    "@vue/cli-plugin-babel": "^4.5.8",
-    "@vue/cli-plugin-eslint": "^4.5.8",
-    "@vue/cli-plugin-router": "^4.5.8",
-    "@vue/cli-service": "^4.5.8",
+    "@vue/cli-plugin-babel": "^4.5.9",
+    "@vue/cli-plugin-eslint": "^4.5.9",
+    "@vue/cli-plugin-router": "^4.5.9",
+    "@vue/cli-service": "^4.5.9",
     "@vue/compiler-sfc": "^3.0.2",
     "axios": "^0.20.0",
     "babel-eslint": "^10.1.0",
@@ -52,7 +51,7 @@
     "simple-syntax-highlighter": "^2.0.4",
     "splitpanes": "^3.0.3",
     "vue": "^3.0.3",
-    "vue-router": "^4.0.0-rc.2",
+    "vue-router": "^4.0.1",
     "vue-svg-loader": "^0.16.0",
     "vueperslides": "^3.1.0"
   }
