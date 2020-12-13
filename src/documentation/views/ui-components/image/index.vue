@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  ui-component-title(slug="w-image" in-progress) w-image
+  ui-component-title(slug="w-image") w-image
   examples
   api
 </template>
