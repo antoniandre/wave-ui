@@ -137,6 +137,7 @@ const components = [
   { id: 'switch', label: 'Switch' },
   { id: 'radio', label: 'Radio' },
   { id: 'tabs', label: 'Tabs' },
+  { id: 'table', label: 'Table' },
   { id: 'tag', label: 'Tag' },
   { id: 'textarea', label: 'Textarea' },
   { id: 'toolbar', label: 'Toolbar' },
