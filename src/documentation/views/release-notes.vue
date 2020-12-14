@@ -23,6 +23,12 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.13.4
+      ul
+        li Improved and completed the #[strong.code w-image] component.
+        li Allow a click handler on a #[strong.code w-button] that has a route.
+
+    li.patch
       strong.version v1.13.3
       p Added a scrollbar on #[strong.code w-tabs] tabs row when needed. #[issue-link 11]
 
