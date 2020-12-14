@@ -76,7 +76,13 @@ export default {
       // So do a manual router.push if $router is present.
       return this.route && this.hasRouter && !this.forceLink ? {
         ...this.$attrs,
-        click: e => this.$router.push(this.route) && e.preventDefault()
+        click: e => {
+          if (this.$attrs.click) this.$attrs.click(e)
+
+          this.$router.push(this.route)
+          e.stopPropagation() // If going to a route, no need to bubble up the event.
+          e.preventDefault()
+        }
       } : this.$attrs
     },
     size () {
