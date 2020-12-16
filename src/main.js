@@ -33,7 +33,7 @@ app.component('title-link', TitleLink)
 app.component('ui-component-title', UiComponentTitle)
 app.component('example', Example)
 app.component('alert', Alert)
-app.component('api', Api)
+app.component('component-api', Api) // The `api` keyword in template crashes Vue 3.
 app.component('issue-link', IssueLink)
 
 app.mount('#app')

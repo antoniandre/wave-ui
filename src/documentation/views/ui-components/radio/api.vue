@@ -5,22 +5,22 @@ div
   //- w-radios.
   title-link.title1(h2 slug="w-radios-api") &lt;w-radios&gt; API
 
-  api.mt0(:items="radiosProps" :descriptions="radios.propsDescs" title="Props")
+  component-api.mt0(:items="radiosProps" :descriptions="radios.propsDescs" title="Props")
 
-  api(:items="radios.slots" title="Slots")
+  component-api(:items="radios.slots" title="Slots")
 
-  api(:items="radiosEvents" title="Events")
+  component-api(:items="radiosEvents" title="Events")
 
   .w-divider.my12
 
   //- w-radio.
   title-link.title1(h2 slug="w-radio-api") &lt;w-radio&gt; API
 
-  api.mt0(:items="radioProps" :descriptions="radio.propsDescs" title="Props")
+  component-api.mt0(:items="radioProps" :descriptions="radio.propsDescs" title="Props")
 
-  api(:items="radio.slots" title="Slots")
+  component-api(:items="radio.slots" title="Slots")
 
-  api(:items="radioEvents" title="Events")
+  component-api(:items="radioEvents" title="Events")
 </template>
 
 <script>
