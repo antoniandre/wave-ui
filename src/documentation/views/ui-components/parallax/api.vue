@@ -4,11 +4,11 @@ div
   title-link.title1(h2) API
   alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
-  api.mt0(:items="props" :descriptions="propsDescs" title="Props")
+  component-api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
-  api(:items="slots" title="Slots")
+  component-api(:items="slots" title="Slots")
 
-  api(:items="events" title="Events")
+  component-api(:items="events" title="Events")
 </template>
 
 <script>

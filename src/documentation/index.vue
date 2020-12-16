@@ -65,7 +65,7 @@ Vue.component('title-link', TitleLink)
 Vue.component('ui-component-title', UiComponentTitle)
 Vue.component('example', Example)
 Vue.component('alert', Alert)
-Vue.component('api', Api)
+Vue.component('component-api', Api)
 Vue.component('issue-link', IssueLink)
 
 export default {
