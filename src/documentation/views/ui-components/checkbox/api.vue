@@ -4,21 +4,21 @@ div
   //- w-checkboxes.
   title-link.title1(h2 slug="w-checkboxes-api") &lt;w-checkboxes&gt; API
 
-  api.mt0(:items="checkboxesProps" :descriptions="checkboxes.propsDescs" title="Props")
+  component-api.mt0(:items="checkboxesProps" :descriptions="checkboxes.propsDescs" title="Props")
 
-  api(:items="checkboxes.slots" title="Slots")
+  component-api(:items="checkboxes.slots" title="Slots")
 
-  api(:items="checkboxesEvents" title="Events")
+  component-api(:items="checkboxesEvents" title="Events")
 
   .w-divider.my12
 
   //- w-checkbox.
   title-link.title1(h2 slug="w-checkbox-api") &lt;w-checkbox&gt; API
-  api.mt0(:items="checkboxProps" :descriptions="checkbox.propsDescs" title="Props")
+  component-api.mt0(:items="checkboxProps" :descriptions="checkbox.propsDescs" title="Props")
 
-  api(:items="checkbox.slots" title="Slots")
+  component-api(:items="checkbox.slots" title="Slots")
 
-  api(:items="checkboxEvents" title="Events")
+  component-api(:items="checkboxEvents" title="Events")
 </template>
 
 <script>
