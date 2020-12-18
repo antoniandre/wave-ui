@@ -12,8 +12,27 @@ div
     template(#pug).
 
   title-link(h2) No headers
+  p.
+    Even with the #[code no-headers] option, the #[code headers] are still required for various
+    reasons, like getting the number of columns and sorting/filtering keys.
   example
     w-table(:items="[]" :headers="table1.headers" no-headers)
+    template(#pug).
+
+  title-link(h2) Sorting
+  example
+    w-table(
+      :items="table1.items"
+      :headers="table1.headers"
+      :sort="[{ firstName: 'asc' }]")
+    template(#pug).
+
+  title-link(h2) Filters
+  example
+    w-table(
+      :items="[]"
+      :headers="table1.headers"
+      :filters="() => {}")
     template(#pug).
 </template>
 
