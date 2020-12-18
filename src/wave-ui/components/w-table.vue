@@ -21,8 +21,8 @@ export default {
     headers: { type: Array, required: true },
     noHeaders: { type: Boolean },
     fixedHeaders: { type: Boolean },
-    sort: { type: Object },
-    filters: { type: Object }
+    sort: { type: [Array, Object] },
+    filters: { type: Function }
   },
 
   emits: [],
@@ -36,7 +36,17 @@ export default {
       return this.items
     },
     sortedItems () {
-      return this.filteredItems
+      let sortingKey, sortingDirection
+      if (!this.sort || this.sort === []) return this.filteredItems
+
+      Object.entries(this.sort[0]).forEach(([k, v]) => {
+        sortingKey = k
+        sortingDirection = v
+      })
+
+      return [...this.filteredItems].sort((a, b) => {
+        return (a[sortingKey] > b[sortingKey] ? 1 : -1) * (sortingDirection === 'asc' ? 1 : -1)
+      })
     }
   }
 }
