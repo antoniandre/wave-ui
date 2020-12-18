@@ -8,7 +8,7 @@
       template(v-if="items.length")
         tr(v-for="(item, i) in sortedItems")
           td(v-for="(header, i) in headers" v-html="item[header.key] || ''")
-      tr(v-else)
+      tr.no-data(v-else)
         td.text-center(:colspan="headers.length")
           slot(name="no-data") No data to show.
 </template>
@@ -43,12 +43,33 @@ export default {
 </script>
 
 <style lang="scss">
-.w-table-wrap {position: relative;}
+.w-table-wrap {
+  position: relative;
+  border-radius: $border-radius;
+  border: $border;
+}
 
 .w-table {
   width: 100%;
+  border-collapse: collapse;
+
+  tbody tr {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  tbody tr:nth-child(odd):not(.no-data) {background-color: rgba(0, 0, 0, 0.02);}
+  tbody tr:hover:not(.no-data) {background-color: rgba(0, 0, 0, 0.05);}
 
   th {text-align: left;}
-  th, td {padding-left: $base-increment;padding-right: $base-increment;}
+  th {
+    padding: $base-increment;
+  }
+  td {
+    padding: round($base-increment / 2) $base-increment;
+  }
+
+  .no-data td {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: (2 * $base-increment) $base-increment;
+  }
 }
 </style>
