@@ -16,21 +16,22 @@ div
     Even with the #[code no-headers] option, the #[code headers] are still required for various
     reasons, like getting the number of columns and sorting/filtering keys.
   example
-    w-table(:items="[]" :headers="table1.headers" no-headers)
+    w-table(:items="table1.items" :headers="table1.headers" no-headers)
     template(#pug).
 
-  title-link(h2) Sorting
+  title-link(h2) Initial Sorting
   example
     w-table(
       :items="table1.items"
       :headers="table1.headers"
-      :sort="[{ firstName: 'asc' }]")
+      :sort.sync="table1.sort")
     template(#pug).
 
   title-link(h2) Filters
   example
-    w-table(
-      :items="[]"
+    | Coming soon.
+    //- w-table(
+      :items="table1.items"
       :headers="table1.headers"
       :filters="() => {}")
     template(#pug).
@@ -51,7 +52,8 @@ export default {
         { id: '3', firstName: 'Rory', lastName: 'Bristol' },
         { id: '4', firstName: 'Daley', lastName: 'Elliott' },
         { id: '5', firstName: 'Virgil', lastName: 'Carman' },
-      ]
+      ],
+      sort: [{ firstName: 'asc' }]
     }
   })
 }
