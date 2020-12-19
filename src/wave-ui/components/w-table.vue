@@ -63,19 +63,21 @@ export default {
   width: 100%;
   border-collapse: collapse;
 
+  // Table headers.
+  // ------------------------------------------------------
+  th {text-align: left;padding: $base-increment;}
+
+  // Table body.
+  // ------------------------------------------------------
   tbody tr {
     border-top: 1px solid rgba(0, 0, 0, 0.06);
   }
-  tbody tr:nth-child(odd):not(.no-data) {background-color: rgba(0, 0, 0, 0.02);}
-  tbody tr:hover:not(.no-data) {background-color: rgba(0, 0, 0, 0.05);}
+  tbody tr:nth-child(odd):not(.no-data) {background-color: $table-tr-odd-color;}
+  tbody tr:hover:not(.no-data) {background-color: $table-tr-hover-color;}
 
-  th {text-align: left;}
-  th {
-    padding: $base-increment;
-  }
-  td {
-    padding: round($base-increment / 2) $base-increment;
-  }
+  td {padding: round($base-increment / 2) $base-increment;}
+  th:first-child, td:first-child {padding-left: 2 * $base-increment;}
+  th:last-child, td:last-child {padding-right: 2 * $base-increment;}
 
   .no-data td {
     background-color: rgba(255, 255, 255, 0.2);
