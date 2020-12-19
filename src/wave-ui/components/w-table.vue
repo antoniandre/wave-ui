@@ -3,11 +3,20 @@
   table.w-table
     thead(v-if="!noHeaders")
       tr
-        th(v-for="(header, i) in headers" v-html="header.label || ''")
+        th(
+          v-for="(header, i) in headers"
+          :key="i"
+          @click="header.sortable !== false && sortTable(header)"
+          :class="header.sortable !== false ? 'w-table__header--sortable' : null")
+          span.w-table__header(v-if="header.label" v-html="header.label || ''")
+          w-icon.w-table__header-sort.ml1(
+            v-if="header.sortable !== false"
+            :class="`w-table__header-sort--${sorts[header.key] ? 'active' : 'inactive'} ${(sorts[header.key] || {}).desc ? 'w-table__header-sort--desc' : 'w-table__header-sort--asc'}`")
+            | wi-arrow-down
     tbody
       template(v-if="items.length")
         tr(v-for="(item, i) in sortedItems")
-          td(v-for="(header, i) in headers" v-html="item[header.key] || ''")
+          td.w-table__cell(v-for="(header, i) in headers" v-html="item[header.key] || ''")
       tr.no-data(v-else)
         td.text-center(:colspan="headers.length")
           slot(name="no-data") No data to show.
@@ -21,6 +30,7 @@ export default {
     headers: { type: Array, required: true },
     noHeaders: { type: Boolean },
     fixedHeaders: { type: Boolean },
+    // Allow single sort: `{ id: 'desc' }`, or multiple in an array of objects ({ [key]: 'desc|asc' }).
     sort: { type: [Array, Object] },
     filters: { type: Function }
   },
@@ -36,17 +46,32 @@ export default {
       return this.items
     },
     sortedItems () {
-      let sortingKey, sortingDirection
       if (!this.sort || this.sort === []) return this.filteredItems
 
-      Object.entries(this.sort[0]).forEach(([k, v]) => {
-        sortingKey = k
-        sortingDirection = v
-      })
+      // Only sort with 1 key for now, may handle more later.
+      const [sortKey1, { desc: sortDesc1 }] = Object.entries(this.sorts).find(([, obj]) => !obj.order)
 
       return [...this.filteredItems].sort((a, b) => {
-        return (a[sortingKey] > b[sortingKey] ? 1 : -1) * (sortingDirection === 'asc' ? 1 : -1)
+        return (a[sortKey1] > b[sortKey1] ? 1 : -1) * (sortDesc1 ? -1 : 1)
       })
+    },
+    // Object containing the active sorts. E.g. `{ firstName: { desc: false, order: 0 } }`.
+    sorts () {
+      return this.sort && (Array.isArray(this.sort) ? this.sort : [this.sort]).reduce((obj, item, i) => {
+        const [key, direction] = Object.entries(item)[0]
+        obj[key] = { desc: direction === 'desc', order: i }
+        return obj
+      }, {}) || []
+    }
+  },
+
+  methods: {
+    sortTable (header) {
+      const alreadySortingThis = this.sorts[header.key]
+      if (alreadySortingThis && this.sorts[header.key].desc) return this.$emit('update:sort')
+      else if (alreadySortingThis) this.sorts[header.key].desc = !this.sorts[header.key].desc
+
+      this.$emit('update:sort', { [header.key]: (this.sorts[header.key] || {}).desc ? 'desc' : 'asc' })
     }
   }
 }
@@ -66,6 +91,19 @@ export default {
   // Table headers.
   // ------------------------------------------------------
   th {text-align: left;padding: $base-increment;}
+  // Sorting arrow.
+  &__header--sortable {cursor: pointer;}
+  &__header-sort {
+    color: rgba(0, 0, 0, 0.8);
+    @include default-transition;
+
+    &--asc {transform: rotate(180deg);}
+    &--desc {transform: rotate(0deg);}
+    &--inactive {opacity: 0;}
+    th:hover &--inactive {opacity: 0.5;}
+    th:hover &--active {opacity: 1;}
+    &--active {opacity: 0.7;}
+  }
 
   // Table body.
   // ------------------------------------------------------
