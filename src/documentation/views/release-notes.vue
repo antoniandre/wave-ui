@@ -22,6 +22,10 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v1.14.0
+      p Created a new #[strong.code w-table] component with basic functionality.
+
     li.patch
       strong.version v1.13.4
       ul
