@@ -11,7 +11,7 @@
           span.w-table__header(v-if="header.label" v-html="header.label || ''")
           w-icon.w-table__header-sort.ml1(
             v-if="header.sortable !== false"
-            :class="`w-table__header-sort--${sorts[header.key] ? 'active' : 'inactive'} ${(sorts[header.key] || {}).desc ? 'w-table__header-sort--desc' : 'w-table__header-sort--asc'}`")
+            :class="`w-table__header-sort--${activeSortingKeys[header.key] ? 'active' : 'inactive'} ${activeSortingKeys[header.key] === '-' ? 'w-table__header-sort--desc' : 'w-table__header-sort--asc'}`")
             | wi-arrow-down
     tbody
       template(v-if="items.length")
@@ -30,15 +30,15 @@ export default {
     headers: { type: Array, required: true },
     noHeaders: { type: Boolean },
     fixedHeaders: { type: Boolean },
-    // Allow single sort: `{ id: 'desc' }`, or multiple in an array of objects ({ [key]: 'desc|asc' }).
-    sort: { type: [Array, Object] },
+    // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
+    sort: { type: [String, Array] },
     filters: { type: Function }
   },
 
   emits: [],
 
   data: () => ({
-
+    activeSorting: []
   }),
 
   computed: {
@@ -46,32 +46,46 @@ export default {
       return this.items
     },
     sortedItems () {
-      if (!this.sort || this.sort === []) return this.filteredItems
+      if (!this.activeSorting.length) return this.filteredItems
 
       // Only sort with 1 key for now, may handle more later.
-      const [sortKey1, { desc: sortDesc1 }] = Object.entries(this.sorts).find(([, obj]) => !obj.order)
+      const sortKey1 = this.activeSorting[0].replace(/^[+-]/, '')
+      const sortDesc1 = this.activeSorting[0][0] === '-'
 
       return [...this.filteredItems].sort((a, b) => {
         return (a[sortKey1] > b[sortKey1] ? 1 : -1) * (sortDesc1 ? -1 : 1)
       })
     },
-    // Object containing the active sorts. E.g. `{ firstName: { desc: false, order: 0 } }`.
-    sorts () {
-      return this.sort && (Array.isArray(this.sort) ? this.sort : [this.sort]).reduce((obj, item, i) => {
-        const [key, direction] = Object.entries(item)[0]
-        obj[key] = { desc: direction === 'desc', order: i }
+    // Returns an object containing { key1: '+', key2: '-' }. With + or - for ASC/DESC.
+    activeSortingKeys () {
+      return this.activeSorting.reduce((obj, item) => {
+        obj[item.replace(/^[+-]/, '')] = item[0]
         return obj
-      }, {}) || []
+      }, {})
     }
   },
 
   methods: {
     sortTable (header) {
-      const alreadySortingThis = this.sorts[header.key]
-      if (alreadySortingThis && this.sorts[header.key].desc) return this.$emit('update:sort')
-      else if (alreadySortingThis) this.sorts[header.key].desc = !this.sorts[header.key].desc
+      const alreadySortingThis = this.activeSortingKeys[header.key]
+      if (alreadySortingThis && this.activeSortingKeys[header.key] === '-') {
+        this.activeSorting = []
+        return this.$emit('update:sort')
+      }
+      else this.$set(this.activeSorting, 0, (alreadySortingThis ? '-' : '+') + header.key)
 
-      this.$emit('update:sort', { [header.key]: (this.sorts[header.key] || {}).desc ? 'desc' : 'asc' })
+      this.$emit('update:sort', this.activeSorting)
+    }
+  },
+
+  created () {
+    if (!this.sort) this.activeSorting = []
+    else this.activeSorting = Array.isArray(this.sort) ? this.sort : [this.sort]
+  },
+
+  watch: {
+    sort (sorting) {
+      this.activeSorting = Array.isArray(sorting) ? sorting : [sorting]
     }
   }
 }
