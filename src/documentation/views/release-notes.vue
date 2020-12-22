@@ -22,6 +22,10 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v1.14.2
+      p Refactored the sorting feature on the #[strong.code w-table] component.
+
     li.minor
       strong.version v1.14.0
       p Created a new #[strong.code w-table] component with basic functionality.
