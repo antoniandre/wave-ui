@@ -85,7 +85,8 @@ export default {
 
   watch: {
     sort (sorting) {
-      this.activeSorting = Array.isArray(sorting) ? sorting : [sorting]
+      if (!sorting) this.activeSorting = []
+      else this.activeSorting = Array.isArray(sorting) ? sorting : [sorting]
     }
   }
 }
