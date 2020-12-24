@@ -53,7 +53,13 @@ export default {
       const sortDesc1 = this.activeSorting[0][0] === '-'
 
       return [...this.filteredItems].sort((a, b) => {
-        return (a[sortKey1] > b[sortKey1] ? 1 : -1) * (sortDesc1 ? -1 : 1)
+        a = a[sortKey1]
+        b = b[sortKey1]
+        if (!isNaN(a) && !isNaN(b)) {
+          a = parseFloat(a)
+          b = parseFloat(b)
+        }
+        return (a > b ? 1 : -1) * (sortDesc1 ? -1 : 1)
       })
     },
     // Returns an object containing { key1: '+', key2: '-' }. With + or - for ASC/DESC.
