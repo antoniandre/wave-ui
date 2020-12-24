@@ -68,9 +68,9 @@ div
 
   title-link(h2) Fixed headers
   example
-    w-table(:items="table2.items" :headers="table2.headers" fixed-headers)
+    w-table(:items="table2.items" :headers="table2.headers" fixed-headers style="height: 250px")
     template(#pug).
-      w-table(:items="table.items" :headers="table.headers" fixed-headers)
+      w-table(:items="table.items" :headers="table.headers" fixed-headers style="height: 250px")
     template(#js).
       data: () => ({
         table: {

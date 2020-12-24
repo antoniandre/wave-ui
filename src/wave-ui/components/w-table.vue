@@ -1,6 +1,6 @@
 <template lang="pug">
 .w-table-wrap
-  table.w-table
+  table.w-table(:class="classes")
     thead(v-if="!noHeaders")
       tr
         th(
@@ -62,6 +62,11 @@ export default {
         obj[item.replace(/^[+-]/, '')] = item[0]
         return obj
       }, {})
+    },
+    classes () {
+      return {
+        'w-table--fixed-header': this.fixedHeaders
+      }
     }
   },
 
@@ -97,15 +102,36 @@ export default {
   position: relative;
   border-radius: $border-radius;
   border: $border;
+  overflow: auto;
 }
 
 .w-table {
   width: 100%;
   border-collapse: collapse;
+  border: none;
 
   // Table headers.
   // ------------------------------------------------------
-  th {text-align: left;padding: $base-increment;}
+  th {
+    text-align: left;
+    padding: $base-increment;
+  }
+
+  &--fixed-header th {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-bottom: $border;
+    }
+  }
+
   // Sorting arrow.
   &__header--sortable {cursor: pointer;}
   &__header-sort {
