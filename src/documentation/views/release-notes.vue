@@ -23,8 +23,12 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
-      strong.version v1.14.2
-      p Refactored the sorting feature on the #[strong.code w-table] component.
+      strong.version v1.14.3
+      p #[strong.code w-table] component:
+      ul
+        li Refactored the sorting feature
+        li Add Natural sorting on numbers
+        li Add the fixed headers option
 
     li.minor
       strong.version v1.14.0
