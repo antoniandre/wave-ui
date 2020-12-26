@@ -17,5 +17,12 @@ export default {
     inputName () {
       return this.name || `${this.$options.name}--${this._uid}`
     }
+  },
+
+  methods: {
+    // Allow triggering a particular field validation manually via `$refs.myField.validate()`.
+    validate () {
+      this.$refs.formEl.validate(this)
+    }
   }
 }

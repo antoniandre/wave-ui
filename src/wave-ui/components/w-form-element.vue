@@ -61,6 +61,11 @@ export default {
       this.Validation.message = '' // Remove the error message.
       this.Validation.isValid = null // Reset the element to pristine.
       this.hasJustReset = true
+    },
+
+    // Allow triggering a particular field validation manually via `$refs.myField.validate()`.
+    validate () {
+      this.$emit('update:valid', this.validateElement(this))
     }
   },
 
