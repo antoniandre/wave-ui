@@ -1,5 +1,6 @@
 <template lang="pug">
 component(
+  ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: rating, disabled, readonly }"
   :valid.sync="valid"

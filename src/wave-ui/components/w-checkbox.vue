@@ -1,5 +1,6 @@
 <template lang="pug">
 component(
+  ref="formEl"
   :is="formRegister && !wCheckboxes ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: isChecked, disabled }"
   :valid.sync="valid"
