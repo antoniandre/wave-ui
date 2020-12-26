@@ -33,6 +33,13 @@ div
       That's enough, you can let the #[span.code w-form] component do the rest!#[br]
       But you might want more options, discover them in the examples bellow.
 
+  alert(tip)
+    strong As of version 1.14.4
+    p.
+      It is also possible to trigger a particular field validation programmatically via
+      #[code this.$refs.myField.validate()]. all the validator functions associated on this field will be
+      re-run.
+
   title-link(h2) Basic validation
   p.
     In this example and by default, the fields are validated on #[span.code keyup], on #[span.code blur],
@@ -143,15 +150,15 @@ div
       w-input(label="First name" :validators="[validators.required]")
       w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
-        w-button.mr2(bg-color="warning" type="reset") Reset
-        w-button(type="submit") Validate
+        w-button.my1.mr2(bg-color="warning" type="reset") Reset
+        w-button.my1(type="submit") Validate
     template(#pug).
       w-form(v-model="valid")
         w-input(label="First name" :validators="[validators.required]")
         w-input.mt3(label="Last name" :validators="[validators.required]")
         .text-right.mt6
-          w-button.mr2(bg-color="warning" type="reset") Reset
-          w-button(type="submit") Validate
+          w-button.my1.mr2(bg-color="warning" type="reset") Reset
+          w-button.my1(type="submit") Validate
     template(#js).
       data: () => ({
         valid: null,
@@ -247,11 +254,11 @@ div
         w-flex.mt4(wrap align-center justify-end)
           w-checkbox(required :validators="[validators.consent]") I agree to the terms &amp; conditions
           .spacer
-          w-button.mr2(
+          w-button.my1.mr2(
             bg-color="warning"
             type="reset"
             @click="form6.submitted = form6.sent = false") Reset
-          w-button(
+          w-button.my1(
             type="submit"
             :disabled="form6.valid === false"
             :loading="form6.submitted && !form6.sent") Validate
@@ -283,11 +290,11 @@ div
           w-flex.mt4(wrap align-center justify-end)
             w-checkbox(required :validators="[validators.consent]") I agree to the terms &amp; conditions
             .spacer
-            w-button.mr2(
+            w-button.my1.mr2(
               bg-color="warning"
               type="reset"
               @click="form.submitted = form.sent = false") Reset
-            w-button(
+            w-button.my1(
               type="submit"
               :disabled="form.valid === false"
               :loading="form.submitted &amp;&amp; !form.sent") Validate
