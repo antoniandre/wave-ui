@@ -314,6 +314,7 @@ $inactive-color: #777;
   &__label {
     transition: color $transition-duration;
     cursor: pointer;
+    align-self: flex-start;
 
     &--left {
       margin-top: $base-increment;
