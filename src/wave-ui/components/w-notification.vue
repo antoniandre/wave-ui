@@ -75,6 +75,10 @@ export default {
       return position
     },
 
+    hasType () {
+      return !!(this.success || this.info || this.warning || this.error)
+    },
+
     alertProps () {
       return {
         value: this.show,
@@ -83,7 +87,7 @@ export default {
         warning: this.warning,
         error: this.error,
         color: this.color,
-        bgColor: this.bgColor,
+        bgColor: this.bgColor || (!this.hasType && 'white') || '',
         shadow: this.shadow,
         tile: this.tile,
         round: this.round,
@@ -165,7 +169,6 @@ export default {
 
   .w-alert {
     margin: 0;
-    background-color: #fff;
     pointer-events: all;
   }
 }
