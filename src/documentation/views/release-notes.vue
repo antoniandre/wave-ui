@@ -23,6 +23,10 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.14.6
+      p Fix hiding the #[strong.code w-notification] on timeout when initially showing. #[issue-link 15]
+
+    li.patch
       strong.version v1.14.4
       p Allow triggering a particular field validation programmatically via #[code $refs.myField.validate()].
 
