@@ -1,9 +1,10 @@
 <template lang="pug">
 component(
+  ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: isOn, disabled, readonly }"
   v-model:valid="valid"
-  @reset="$emit('update:modelValue', isOn = '');$emit('input', '')"
+  @reset="$emit('update:modelValue', isOn = null);$emit('input', null)"
   :class="classes")
   input(
     ref="input"
