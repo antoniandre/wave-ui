@@ -35,7 +35,7 @@ export default {
     filters: { type: Function }
   },
 
-  emits: [],
+  emits: ['update:sort'],
 
   data: () => ({
     activeSorting: []
@@ -83,7 +83,7 @@ export default {
         this.activeSorting = []
         return this.$emit('update:sort')
       }
-      else this.$set(this.activeSorting, 0, (alreadySortingThis ? '-' : '+') + header.key)
+      else this.activeSorting[0] = (alreadySortingThis ? '-' : '+') + header.key
 
       this.$emit('update:sort', this.activeSorting)
     }
