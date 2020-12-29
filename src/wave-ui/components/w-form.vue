@@ -64,7 +64,8 @@ export default {
     },
 
     /**
-     * Go through each validation rule of each form element, and count the number of errors.
+     * On form submit or programmatic call, go through each validation rule of each form element,
+     * and count the number of errors.
      * Display the element error inside the element if any error, and $emit the result.
      *
      * @param {Object} e the submit event
