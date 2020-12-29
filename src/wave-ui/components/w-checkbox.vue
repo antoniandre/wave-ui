@@ -4,7 +4,7 @@ component(
   :is="formRegister && !wCheckboxes ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: isChecked, disabled }"
   :valid.sync="valid"
-  @reset="$emit('update:modelValue', isChecked = false);$emit('input', false)"
+  @reset="$emit('update:modelValue', isChecked = null);$emit('input', null)"
   :class="classes")
   input(
     ref="input"
