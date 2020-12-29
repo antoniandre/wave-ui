@@ -1,5 +1,6 @@
 <template lang="pug">
 component(
+  ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
   v-model:valid="valid"
@@ -313,6 +314,7 @@ $inactive-color: #777;
   &__label {
     transition: color $transition-duration;
     cursor: pointer;
+    align-self: flex-start;
 
     &--left {
       margin-top: $base-increment;

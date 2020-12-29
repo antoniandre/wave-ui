@@ -23,6 +23,22 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.14.4
+      p Allow triggering a particular field validation programmatically via #[code $refs.myField.validate()].
+
+    li.patch
+      strong.version v1.14.3
+      p #[strong.code w-table] component:
+      ul
+        li Refactored the sorting feature
+        li Add Natural sorting on numbers
+        li Add the fixed headers option
+
+    li.minor
+      strong.version v1.14.0
+      p Created a new #[strong.code w-table] component with basic functionality.
+
+    li.patch
       strong.version v1.13.4
       ul
         li Improved and completed the #[strong.code w-image] component.

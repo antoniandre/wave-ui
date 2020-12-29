@@ -78,7 +78,7 @@ export default {
       { label: 'Rating', route: '/w-rating' },
       { label: 'Spinner', route: '/w-spinner' },
       { label: 'Tabs', route: '/w-tabs' },
-      { label: 'Table', route: '/w-table', disabled: true },
+      { label: 'Table', route: '/w-table', inProgress: true },
       { label: 'Tag', route: '/w-tag' },
       { label: 'Timeline', route: '/w-timeline' },
       { label: 'Toolbar', route: '/w-toolbar' },
