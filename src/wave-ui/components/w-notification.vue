@@ -121,18 +121,26 @@ export default {
     }
   },
 
+  methods: {
+    countdown () {
+      this.timeoutId = setTimeout(() => {
+        this.$emit('update:modelValue', this.show = false)
+        this.$emit('input', false)
+        this.$emit('close')
+      }, this.timeoutVal)
+    }
+  },
+
+  created () {
+    if (this.modelValue && this.timeoutVal) this.countdown()
+  },
+
   watch: {
     modelValue (value) {
       clearTimeout(this.timeoutId)
       this.show = value
 
-      if (value && this.timeoutVal) {
-        this.timeoutId = setTimeout(() => {
-          this.$emit('update:modelValue', this.show = false)
-          this.$emit('input', false)
-          this.$emit('close')
-        }, this.timeoutVal)
-      }
+      if (value && this.timeoutVal) this.countdown()
     }
   }
 }
