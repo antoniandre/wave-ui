@@ -23,8 +23,10 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
-      strong.version v1.14.6
-      p Fix hiding the #[strong.code w-notification] on timeout when initially showing. #[issue-link 15]
+      strong.version v1.14.7
+      ul
+        li Allow #[code bg-color] on #[strong.code w-notification]. #[issue-link 15]
+        li Fix hiding the #[strong.code w-notification] on timeout when initially showing. #[issue-link 15]
 
     li.patch
       strong.version v1.14.4
