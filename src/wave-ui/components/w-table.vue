@@ -3,20 +3,25 @@
   table.w-table(:class="classes")
     thead(v-if="!noHeaders")
       tr
-        th(
+        th.w-table__header(
           v-for="(header, i) in headers"
           :key="i"
           @click="header.sortable !== false && sortTable(header)"
-          :class="header.sortable !== false ? 'w-table__header--sortable' : null")
-          span.w-table__header(v-if="header.label" v-html="header.label || ''")
-          w-icon.w-table__header-sort.ml1(
+          :align="header.align || 'left'"
+          :class="headerClasses(header)")
+          span(v-if="header.label && header.align !== 'right'" v-html="header.label || ''")
+          w-icon.w-table__header-sort(
             v-if="header.sortable !== false"
-            :class="`w-table__header-sort--${activeSortingKeys[header.key] ? 'active' : 'inactive'} ${activeSortingKeys[header.key] === '-' ? 'w-table__header-sort--desc' : 'w-table__header-sort--asc'}`")
-            | wi-arrow-down
+            :class="headerSortClasses(header)") wi-arrow-down
+          span(v-if="header.label && header.align === 'right'" v-html="header.label || ''")
     tbody
       template(v-if="items.length")
-        tr(v-for="(item, i) in sortedItems")
-          td.w-table__cell(v-for="(header, i) in headers" v-html="item[header.key] || ''")
+        tr(v-for="(item, i) in sortedItems" :key="i")
+          td.w-table__cell(
+            v-for="(header, j) in headers"
+            :key="j"
+            :align="header.align || 'left'"
+            v-html="item[header.key] || ''")
       tr.no-data(v-else)
         td.text-center(:colspan="headers.length")
           slot(name="no-data") No data to show.
@@ -35,7 +40,7 @@ export default {
     filters: { type: Function }
   },
 
-  emits: [],
+  emits: ['update:sort'],
 
   data: () => ({
     activeSorting: []
@@ -77,6 +82,19 @@ export default {
   },
 
   methods: {
+    headerClasses (header) {
+      return {
+        'w-table__header--sortable': header.sortable !== false
+      }
+    },
+    headerSortClasses (header) {
+      const headerSorting = this.activeSortingKeys[header.key]
+      return [
+        `w-table__header-sort--${headerSorting ? 'active' : 'inactive'}`,
+        `w-table__header-sort--${headerSorting === '-' ? 'desc' : 'asc'}`,
+        `m${header.align === 'right' ? 'r' : 'l'}1`
+      ]
+    },
     sortTable (header) {
       const alreadySortingThis = this.activeSortingKeys[header.key]
       if (alreadySortingThis && this.activeSortingKeys[header.key] === '-') {
@@ -118,8 +136,7 @@ export default {
 
   // Table headers.
   // ------------------------------------------------------
-  th {
-    text-align: left;
+  &__header {
     padding: $base-increment;
   }
 
@@ -142,6 +159,7 @@ export default {
   &__header--sortable {cursor: pointer;}
   &__header-sort {
     color: rgba(0, 0, 0, 0.8);
+    vertical-align: text-bottom;
     @include default-transition;
 
     &--asc {transform: rotate(180deg);}
