@@ -196,6 +196,26 @@ div
       :items="table3.items"
       :filter="table3.filters[table3.activeFilter]")
     template(#pug).
+      .w-flex.wrap.mb3
+        w-button.mr2.mb1(
+          @click="table.activeFilter = 0"
+          round
+          :outline="table.activeFilter !== 0")
+          | No filter
+        w-button.mr2.mb1(
+          @click="table.activeFilter = 1"
+          round
+          :outline="table.activeFilter !== 1")
+          | Last name starting with 'M'
+        w-button.mr2.mb1(
+          @click="table.activeFilter = 2"
+          round
+          :outline="table.activeFilter !== 2")
+          | ID >= 10
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        :filter="table.filters[table.activeFilter]")
     template(#js).
       data: () => ({
         table: {
