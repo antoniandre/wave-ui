@@ -23,6 +23,10 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.14.8
+      p Add the #[strong.code w-table] filter feature.
+
+    li.patch
       strong.version v1.14.7
       ul
         li Allow #[code bg-color] on #[strong.code w-notification]. #[issue-link 15]
