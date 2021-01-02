@@ -14,11 +14,11 @@ div
             { label: 'Last name', key: 'lastName' }
           ],
           items: [
-            { id: '1', firstName: 'Floretta', lastName: 'Sampson' },
-            { id: '2', firstName: 'Nellie', lastName: 'Lynn' },
-            { id: '3', firstName: 'Rory', lastName: 'Bristol' },
-            { id: '4', firstName: 'Daley', lastName: 'Elliott' },
-            { id: '5', firstName: 'Virgil', lastName: 'Carman' }
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
           ]
         }
       })
@@ -65,11 +65,11 @@ div
             { label: 'Last name', key: 'lastName', align: 'right' }
           ],
           items: [
-            { id: '1', firstName: 'Floretta', lastName: 'Sampson' },
-            { id: '2', firstName: 'Nellie', lastName: 'Lynn' },
-            { id: '3', firstName: 'Rory', lastName: 'Bristol' },
-            { id: '4', firstName: 'Daley', lastName: 'Elliott' },
-            { id: '5', firstName: 'Virgil', lastName: 'Carman' }
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
           ]
         }
       })
@@ -91,11 +91,11 @@ div
             { label: 'Last name', key: 'lastName' }
           ],
           items: [
-            { id: '1', firstName: 'Floretta', lastName: 'Sampson' },
-            { id: '2', firstName: 'Nellie', lastName: 'Lynn' },
-            { id: '3', firstName: 'Rory', lastName: 'Bristol' },
-            { id: '4', firstName: 'Daley', lastName: 'Elliott' },
-            { id: '5', firstName: 'Virgil', lastName: 'Carman' }
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
           ]
         }
       })
@@ -122,21 +122,21 @@ div
             { label: 'Last name', key: 'lastName' }
           ],
           items: [
-            { id: '1', firstName: 'Floretta', lastName: 'Sampson' },
-            { id: '2', firstName: 'Nellie', lastName: 'Lynn' },
-            { id: '3', firstName: 'Rory', lastName: 'Bristol' },
-            { id: '4', firstName: 'Daley', lastName: 'Elliott' },
-            { id: '5', firstName: 'Virgil', lastName: 'Carman' },
-            { id: '6', firstName: 'Baldwin', lastName: 'Morison' },
-            { id: '7', firstName: 'Beckah', lastName: 'Mann' },
-            { id: '8', firstName: 'Davie', lastName: 'Forester' },
-            { id: '9', firstName: 'Andi', lastName: 'Montgomery' },
-            { id: '10', firstName: 'Magnolia', lastName: 'Kirk' },
-            { id: '11', firstName: 'Hamilton', lastName: 'Mallory' },
-            { id: '12', firstName: 'Sheree', lastName: 'Castle' },
-            { id: '13', firstName: 'Rebekah', lastName: 'Eason' },
-            { id: '14', firstName: 'Maude', lastName: 'Hayley' },
-            { id: '15', firstName: 'Josie', lastName: 'Richard' }
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+            { id: 6, firstName: 'Baldwin', lastName: 'Morison' },
+            { id: 7, firstName: 'Beckah', lastName: 'Mann' },
+            { id: 8, firstName: 'Davie', lastName: 'Forester' },
+            { id: 9, firstName: 'Andi', lastName: 'Montgomery' },
+            { id: 10, firstName: 'Magnolia', lastName: 'Kirk' },
+            { id: 11, firstName: 'Hamilton', lastName: 'Mallory' },
+            { id: 12, firstName: 'Sheree', lastName: 'Castle' },
+            { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
+            { id: 14, firstName: 'Maude', lastName: 'Hayley' },
+            { id: 15, firstName: 'Josie', lastName: 'Richard' }
           ]
         }
       })
@@ -159,23 +159,42 @@ div
             { label: 'Last name', key: 'lastName' }
           ],
           items: [
-            { id: '1', firstName: 'Floretta', lastName: 'Sampson' },
-            { id: '2', firstName: 'Nellie', lastName: 'Lynn' },
-            { id: '3', firstName: 'Rory', lastName: 'Bristol' },
-            { id: '4', firstName: 'Daley', lastName: 'Elliott' },
-            { id: '5', firstName: 'Virgil', lastName: 'Carman' }
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
           ],
           sort: '+firstName'
         }
       })
 
-  title-link(h2) Filters
+  title-link(h2) Filter
+  p.
+    Filtering the table rows is very straightforward: you only need to provide your filtering function to the
+    #[strong.code w-table] component and it will be applied to the table.#[br]
+    Setting the filter to #[code null] or #[code false] or #[code undefined] will remove any previous filter.
   example
-    | Coming soon.
-    //- w-table(
-      :headers="table.headers"
-      :items="table.items"
-      :filters="() => {}")
+    .w-flex.wrap.mb3
+      w-button.mr2.mb1(
+        @click="table3.activeFilter = 0"
+        round
+        :outline="table3.activeFilter !== 0")
+        | No filter
+      w-button.mr2.mb1(
+        @click="table3.activeFilter = 1"
+        round
+        :outline="table3.activeFilter !== 1")
+        | Last name starting with 'M'
+      w-button.mr2.mb1(
+        @click="table3.activeFilter = 2"
+        round
+        :outline="table3.activeFilter !== 2")
+        | ID >= 10
+    w-table(
+      :headers="table3.headers"
+      :items="table3.items"
+      :filter="table3.filters[table3.activeFilter]")
     template(#pug).
     template(#js).
       data: () => ({
@@ -186,12 +205,28 @@ div
             { label: 'Last name', key: 'lastName' }
           ],
           items: [
-            { id: '1', firstName: 'Floretta', lastName: 'Sampson' },
-            { id: '2', firstName: 'Nellie', lastName: 'Lynn' },
-            { id: '3', firstName: 'Rory', lastName: 'Bristol' },
-            { id: '4', firstName: 'Daley', lastName: 'Elliott' },
-            { id: '5', firstName: 'Virgil', lastName: 'Carman' }
-          ]
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+            { id: 6, firstName: 'Baldwin', lastName: 'Morison' },
+            { id: 7, firstName: 'Beckah', lastName: 'Mann' },
+            { id: 8, firstName: 'Davie', lastName: 'Forester' },
+            { id: 9, firstName: 'Andi', lastName: 'Montgomery' },
+            { id: 10, firstName: 'Magnolia', lastName: 'Kirk' },
+            { id: 11, firstName: 'Hamilton', lastName: 'Mallory' },
+            { id: 12, firstName: 'Sheree', lastName: 'Castle' },
+            { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
+            { id: 14, firstName: 'Maude', lastName: 'Hayley' },
+            { id: 15, firstName: 'Josie', lastName: 'Richard' }
+          ],
+          filters: [
+            null,
+            item => item.lastName[0] === 'M',
+            item => item.id >= 10
+          ],
+          activeFilter: 0
         }
       })
 
@@ -199,9 +234,9 @@ div
   example
     | Coming soon.
     //- w-table(
-      :headers="table.headers"
-      :items="table.items"
-      :filters="() => {}")
+      :headers="table1.headers"
+      :items="table1.items"
+      :pagination="table1.pagination")
     template(#pug).
     template(#js).
       data: () => ({
@@ -212,33 +247,75 @@ div
             { label: 'Last name', key: 'lastName' }
           ],
           items: [
-            { id: '1', firstName: 'Floretta', lastName: 'Sampson' },
-            { id: '2', firstName: 'Nellie', lastName: 'Lynn' },
-            { id: '3', firstName: 'Rory', lastName: 'Bristol' },
-            { id: '4', firstName: 'Daley', lastName: 'Elliott' },
-            { id: '5', firstName: 'Virgil', lastName: 'Carman' }
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
           ]
         }
       })
+
+  title-link(h2) Loading state
+  example
+    | Coming soon.
+    //- w-table(
+      :headers="table1.headers"
+      :items="table1.items"
+      loading="table1.loading")
+    template(#pug).
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ]
+        }
+      })
+
+  //- title-link(h2) Expandable rows
+  //- example
+
+  //- title-link(h2) Change layout on mobile
+  //- example
+
+  title-link(h2 slug="slots") Headers &amp; Cells customization via slots
+  example
+    p Coming soon
+
+  //- title-link(h2) Rows selection
+  //- example
+
+  //- title-link(h2) Editable tables
+  //- example
 </template>
 
 <script>
 const allItems = [
-  { id: '1', firstName: 'Floretta', lastName: 'Sampson' },
-  { id: '2', firstName: 'Nellie', lastName: 'Lynn' },
-  { id: '3', firstName: 'Rory', lastName: 'Bristol' },
-  { id: '4', firstName: 'Daley', lastName: 'Elliott' },
-  { id: '5', firstName: 'Virgil', lastName: 'Carman' },
-  { id: '6', firstName: 'Baldwin', lastName: 'Morison' },
-  { id: '7', firstName: 'Beckah', lastName: 'Mann' },
-  { id: '8', firstName: 'Davie', lastName: 'Forester' },
-  { id: '9', firstName: 'Andi', lastName: 'Montgomery' },
-  { id: '10', firstName: 'Magnolia', lastName: 'Kirk' },
-  { id: '11', firstName: 'Hamilton', lastName: 'Mallory' },
-  { id: '12', firstName: 'Sheree', lastName: 'Castle' },
-  { id: '13', firstName: 'Rebekah', lastName: 'Eason' },
-  { id: '14', firstName: 'Maude', lastName: 'Hayley' },
-  { id: '15', firstName: 'Josie', lastName: 'Richard' }
+  { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+  { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+  { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+  { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+  { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+  { id: 6, firstName: 'Baldwin', lastName: 'Morison' },
+  { id: 7, firstName: 'Beckah', lastName: 'Mann' },
+  { id: 8, firstName: 'Davie', lastName: 'Forester' },
+  { id: 9, firstName: 'Andi', lastName: 'Montgomery' },
+  { id: 10, firstName: 'Magnolia', lastName: 'Kirk' },
+  { id: 11, firstName: 'Hamilton', lastName: 'Mallory' },
+  { id: 12, firstName: 'Sheree', lastName: 'Castle' },
+  { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
+  { id: 14, firstName: 'Maude', lastName: 'Hayley' },
+  { id: 15, firstName: 'Josie', lastName: 'Richard' }
 ]
 
 export default {
@@ -250,7 +327,8 @@ export default {
         { label: 'Last name', key: 'lastName' }
       ],
       items: allItems.slice(0, 5),
-      sort: '+firstName'
+      sort: '+firstName',
+      loading: true
     },
     table2: {
       headers: [
@@ -266,7 +344,13 @@ export default {
         { label: 'First name', key: 'firstName' },
         { label: 'Last name', key: 'lastName' }
       ],
-      items: allItems
+      items: allItems,
+      filters: [
+        null,
+        item => item.lastName[0] === 'M',
+        item => item.id >= 10
+      ],
+      activeFilter: 0
     }
   })
 }

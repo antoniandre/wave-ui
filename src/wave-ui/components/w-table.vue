@@ -37,7 +37,7 @@ export default {
     fixedHeaders: { type: Boolean },
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
-    filters: { type: Function }
+    filter: { type: Function }
   },
 
   emits: ['update:sort'],
@@ -48,6 +48,7 @@ export default {
 
   computed: {
     filteredItems () {
+      if (typeof this.filter === 'function') return this.items.filter(this.filter)
       return this.items
     },
     sortedItems () {
