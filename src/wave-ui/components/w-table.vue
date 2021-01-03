@@ -43,7 +43,8 @@ export default {
     loading: { type: Boolean },
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
-    filter: { type: Function }
+    filter: { type: Function },
+    mobileBreakpoint: { type: Number, default: 0 }
   },
 
   emits: ['update:sort'],
@@ -92,8 +93,13 @@ export default {
 
     classes () {
       return {
+        'w-table--mobile': this.isMobile || null,
         'w-table--fixed-header': this.fixedHeaders
       }
+    },
+
+    isMobile () {
+      return ~~this.mobileBreakpoint && this.$waveui.breakpoint.width <= ~~this.mobileBreakpoint
     }
   },
 
@@ -225,39 +231,37 @@ export default {
   }
 }
 
-@media (max-width: 30em) {
-  .w-table {
-    thead {display: none;}
-    td {display: block;}
-    tr {
-      display: block;
-      padding-top: $base-increment;
-      padding-bottom: $base-increment;
-    }
+.w-table--mobile {
+  thead {display: none;}
+  td {display: block;}
+  tr {
+    display: block;
+    padding-top: $base-increment;
+    padding-bottom: $base-increment;
+  }
 
-    &__cell {
-      display: flex;
-      padding-left: 2 * $base-increment;
-      padding-right: 2 * $base-increment;
-    }
+  .w-table__cell {
+    display: flex;
+    padding-left: 2 * $base-increment;
+    padding-right: 2 * $base-increment;
+  }
 
-    tr:not(.no-data) .text-center,
-    tr:not(.no-data) .text-right {text-align: left;}
+  tr:not(.no-data) .text-center,
+  tr:not(.no-data) .text-right {text-align: left;}
 
-    &__cell:before {
-      content: attr(data-label);
-      font-weight: bold;
-      width: 6.5em;
-      padding-right: 0.5em;
-      display: inline-flex;
-    }
-    .no-data &__cell:before {display: none;}
+  .w-table__cell:before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 6.5em;
+    padding-right: 0.5em;
+    display: inline-flex;
+  }
+  .no-data .w-table__cell:before {display: none;}
 
-    .w-table__progress-bar {
-      display: table-row;
-      td {display: table-cell;}
-      td:before {display: none;}
-    }
+  .w-table__progress-bar {
+    display: table-row;
+    td {display: table-cell;}
+    td:before {display: none;}
   }
 }
 </style>
