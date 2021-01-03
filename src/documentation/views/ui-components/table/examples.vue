@@ -373,6 +373,38 @@ div
 
   //- title-link(h2) Editable tables
   //- example
+
+  title-link(h2) Responsiveness &amp; mobile layout
+  p.
+    In addition to the full responsiveness, the #[code w-table] can be presented in a mobile friendly layout,
+    if the data it contains would not fit on mobile.#[br]
+    You can decide to trigger the mobile layout on each table individually via the #[code mobile-breakpoint]
+    parameter.#[br]
+    It can be very useful when multiple tables of data are presented, with more or less content, which
+    should be displayed differently.#[br]#[br]
+    For this example, resize your browser to 700px or less to trigger the mobile layout.
+
+  example
+    w-table(:headers="table2.headers" :items="table2.items" :mobile-breakpoint="700")
+    template(#pug).
+      w-table(:headers="table.headers" :items="table.items" :mobile-breakpoint="700")
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName', align: 'center' },
+            { label: 'Last name', key: 'lastName', align: 'right' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ]
+        }
+      })
 </template>
 
 <script>
