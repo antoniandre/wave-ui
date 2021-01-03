@@ -34,7 +34,7 @@ div
       w-table(:headers="table.headers" :items="[]")
       br
       w-table(:headers="table.headers" :items="[]")
-        template(#no-data) 👌 There is no data! 👌
+        template(#no-data="") 👌 There is no data! 👌
     template(#js).
       data: () => ({
         table: {
