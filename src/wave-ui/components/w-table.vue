@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-table-wrap
+.w-table-wrap(:class="wrapClasses")
   table.w-table(:class="classes")
     thead(v-if="!noHeaders")
       tr
@@ -7,7 +7,6 @@
           v-for="(header, i) in headers"
           :key="i"
           @click="header.sortable !== false && sortTable(header)"
-          :align="header.align || 'left'"
           :class="headerClasses(header)")
           span(v-if="header.label && header.align !== 'right'" v-html="header.label || ''")
           w-icon.w-table__header-sort(
@@ -25,10 +24,11 @@
           td.w-table__cell(
             v-for="(header, j) in headers"
             :key="j"
-            :align="header.align || 'left'"
-            v-html="item[header.key] || ''")
+            v-html="item[header.key] || ''"
+            :data-label="header.label"
+            :class="`text-${header.align || 'left'}`")
       tr.no-data(v-else)
-        td.text-center(:colspan="headers.length")
+        td.w-table__cell.text-center(:colspan="headers.length")
           slot(name="no-data") No data to show.
 </template>
 
@@ -57,6 +57,7 @@ export default {
       if (typeof this.filter === 'function') return this.items.filter(this.filter)
       return this.items
     },
+
     sortedItems () {
       if (!this.activeSorting.length) return this.filteredItems
 
@@ -74,6 +75,7 @@ export default {
         return (a > b ? 1 : -1) * (sortDesc1 ? -1 : 1)
       })
     },
+
     // Returns an object containing { key1: '+', key2: '-' }. With + or - for ASC/DESC.
     activeSortingKeys () {
       return this.activeSorting.reduce((obj, item) => {
@@ -81,6 +83,13 @@ export default {
         return obj
       }, {})
     },
+
+    wrapClasses () {
+      return {
+        'w-table-wrap--loading': this.loading
+      }
+    },
+
     classes () {
       return {
         'w-table--fixed-header': this.fixedHeaders
@@ -91,9 +100,11 @@ export default {
   methods: {
     headerClasses (header) {
       return {
-        'w-table__header--sortable': header.sortable !== false
+        'w-table__header--sortable': header.sortable !== false,
+        [`text-${header.align || 'left'}`]: true
       }
     },
+
     headerSortClasses (header) {
       const headerSorting = this.activeSortingKeys[header.key]
       return [
@@ -102,6 +113,7 @@ export default {
         `m${header.align === 'right' ? 'r' : 'l'}1`
       ]
     },
+
     sortTable (header) {
       const alreadySortingThis = this.activeSortingKeys[header.key]
       if (alreadySortingThis && this.activeSortingKeys[header.key] === '-') {
@@ -134,6 +146,8 @@ export default {
   border-radius: $border-radius;
   border: $border;
   overflow: auto;
+
+  &--loading {overflow: hidden;}
 }
 
 .w-table {
@@ -208,6 +222,42 @@ export default {
   .no-data &__cell {
     background-color: rgba(255, 255, 255, 0.2);
     padding: (2 * $base-increment) $base-increment;
+  }
+}
+
+@media (max-width: 30em) {
+  .w-table {
+    thead {display: none;}
+    td {display: block;}
+    tr {
+      display: block;
+      padding-top: $base-increment;
+      padding-bottom: $base-increment;
+    }
+
+    &__cell {
+      display: flex;
+      padding-left: 2 * $base-increment;
+      padding-right: 2 * $base-increment;
+    }
+
+    tr:not(.no-data) .text-center,
+    tr:not(.no-data) .text-right {text-align: left;}
+
+    &__cell:before {
+      content: attr(data-label);
+      font-weight: bold;
+      width: 6.5em;
+      padding-right: 0.5em;
+      display: inline-flex;
+    }
+    .no-data &__cell:before {display: none;}
+
+    .w-table__progress-bar {
+      display: table-row;
+      td {display: table-cell;}
+      td:before {display: none;}
+    }
   }
 }
 </style>
