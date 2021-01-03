@@ -23,8 +23,12 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
-      strong.version v1.14.8
-      p Add the #[strong.code w-table] filter feature.
+      strong.version v1.15.0
+      p #[strong.code w-table] component:
+      ul
+        li Add the filter feature
+        li Handle mobile layout with customizable breakpoint per table
+        li Removed the deprecated #[code align] attribute on #[span.code &lt;th&gt;] and #[span.code &lt;td&gt;]
 
     li.patch
       strong.version v1.14.7
@@ -256,7 +260,7 @@ main
     > li.patch .version {color: #999;}
     > li.minor .version {color: #555;}
     > li.major .version {color: #09c;font-size: 1.4rem;}
-    > li:nth-child(2) .version:after {content: ' (Vue 2.x)';}
+    > li:nth-child(2) .version:after {content: ' (Vue 2.x)';font-size: 1.2em;}
 
     ul {margin-left: -2px;}
     li li {padding-left: 20px;margin-top: 2px;}
