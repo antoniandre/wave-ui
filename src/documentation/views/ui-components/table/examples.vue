@@ -278,11 +278,13 @@ div
 
   title-link(h2) Loading state
   example
-    | Coming soon.
-    //- w-table(
+    w-button.mb2(:disabled="table1.loading" @click="") reload
+    w-table(
       :headers="table1.headers"
-      :items="table1.items"
-      loading="table1.loading")
+      :items="table3.items"
+      fixed-headers
+      :loading="table1.loading"
+      style="height: 200px")
     template(#pug).
     template(#js).
       data: () => ({
@@ -298,7 +300,8 @@ div
             { id: 3, firstName: 'Rory', lastName: 'Bristol' },
             { id: 4, firstName: 'Daley', lastName: 'Elliott' },
             { id: 5, firstName: 'Virgil', lastName: 'Carman' }
-          ]
+          ],
+          loading: true
         }
       })
 
@@ -372,6 +375,10 @@ export default {
       ],
       activeFilter: 0
     }
-  })
+  }),
+
+  mounted () {
+    setTimeout(() => (this.table1.loading = false), 2000)
+  }
 }
 </script>

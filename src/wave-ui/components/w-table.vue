@@ -15,7 +15,12 @@
             :class="headerSortClasses(header)") wi-arrow-down
           span(v-if="header.label && header.align === 'right'" v-html="header.label || ''")
     tbody
-      template(v-if="items.length")
+      tr.w-table__progress-bar(v-if="loading")
+        td(:colspan="headers.length")
+          w-progress(tile)
+          .w-table__loading-text
+            slot(name="loading") Loading...
+      template(v-else-if="items.length")
         tr(v-for="(item, i) in sortedItems" :key="i")
           td.w-table__cell(
             v-for="(header, j) in headers"
@@ -35,6 +40,7 @@ export default {
     headers: { type: Array, required: true },
     noHeaders: { type: Boolean },
     fixedHeaders: { type: Boolean },
+    loading: { type: Boolean },
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
     filter: { type: Function }
@@ -132,6 +138,7 @@ export default {
 
 .w-table {
   width: 100%;
+  min-height: 100%;
   border-collapse: collapse;
   border: none;
 
@@ -171,19 +178,34 @@ export default {
     &--active {opacity: 0.7;}
   }
 
+  // Progress bar when loading.
+  &__progress-bar:nth-child(odd) {background: none;}
+  &__progress-bar td {padding: 0;height: 1px;}
+  @-moz-document url-prefix() {
+    &__progress-bar td {height: 100%;}
+  }
+
+  &__loading-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+    width: 100%;
+    padding-top: 2 * $base-increment;
+    padding-bottom: 2 * $base-increment;
+  }
+
   // Table body.
   // ------------------------------------------------------
-  tbody tr {
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
-  }
+  tbody tr {border-top: 1px solid rgba(0, 0, 0, 0.06);}
   tbody tr:nth-child(odd):not(.no-data) {background-color: $table-tr-odd-color;}
-  tbody tr:hover:not(.no-data) {background-color: $table-tr-hover-color;}
+  tbody tr:hover:not(.no-data):not(&__progress-bar) {background-color: $table-tr-hover-color;}
 
-  td {padding: round($base-increment / 2) $base-increment;}
-  th:first-child, td:first-child {padding-left: 2 * $base-increment;}
-  th:last-child, td:last-child {padding-right: 2 * $base-increment;}
+  &__cell {padding: round($base-increment / 2) $base-increment;}
+  &__header:first-child, &__cell:first-child {padding-left: 2 * $base-increment;}
+  &__header:last-child, &__cell:last-child {padding-right: 2 * $base-increment;}
 
-  .no-data td {
+  .no-data &__cell {
     background-color: rgba(255, 255, 255, 0.2);
     padding: (2 * $base-increment) $base-increment;
   }
