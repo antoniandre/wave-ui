@@ -250,6 +250,88 @@ div
         }
       })
 
+  title-link(h2) Loading state
+  p.
+    When the table content is not ready straight away, you can use the #[code loading] prop to display
+    a progress bar while loading.
+  w-button.mb2(:disabled="table1.loading" @click="reload")
+    w-icon.mr1 mdi mdi-sync
+    | reload
+
+  title-link(h3) Simple table - no set height
+  example
+    w-table(
+      :headers="table1.headers"
+      :items="table1.items"
+      :loading="table1.loading")
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        :loading="table.loading")
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ],
+          loading: true // Set this to false when the data is loaded.
+        }
+      })
+
+  title-link(h3 slug="loading-with-fixed-header") Table with fixed header &amp; set height of 200px
+  example
+    w-table(
+      :headers="table1.headers"
+      :items="table3.items"
+      fixed-headers
+      :loading="table1.loading"
+      style="height: 200px")
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        :loading="table.loading"
+        style="height: 200px")
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+            { id: 6, firstName: 'Baldwin', lastName: 'Morison' },
+            { id: 7, firstName: 'Beckah', lastName: 'Mann' },
+            { id: 8, firstName: 'Davie', lastName: 'Forester' },
+            { id: 9, firstName: 'Andi', lastName: 'Montgomery' },
+            { id: 10, firstName: 'Magnolia', lastName: 'Kirk' },
+            { id: 11, firstName: 'Hamilton', lastName: 'Mallory' },
+            { id: 12, firstName: 'Sheree', lastName: 'Castle' },
+            { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
+            { id: 14, firstName: 'Maude', lastName: 'Hayley' },
+            { id: 15, firstName: 'Josie', lastName: 'Richard' }
+          ],
+          loading: true // Set this to false when the data is loaded.
+        }
+      })
+
   title-link(h2) Pagination
   example
     | Coming soon.
@@ -273,35 +355,6 @@ div
             { id: 4, firstName: 'Daley', lastName: 'Elliott' },
             { id: 5, firstName: 'Virgil', lastName: 'Carman' }
           ]
-        }
-      })
-
-  title-link(h2) Loading state
-  example
-    w-button.mb2(:disabled="table1.loading" @click="") reload
-    w-table(
-      :headers="table1.headers"
-      :items="table3.items"
-      fixed-headers
-      :loading="table1.loading"
-      style="height: 200px")
-    template(#pug).
-    template(#js).
-      data: () => ({
-        table: {
-          headers: [
-            { label: 'ID', key: 'id' },
-            { label: 'First name', key: 'firstName' },
-            { label: 'Last name', key: 'lastName' }
-          ],
-          items: [
-            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
-            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
-            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
-            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
-            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
-          ],
-          loading: true
         }
       })
 
@@ -377,8 +430,15 @@ export default {
     }
   }),
 
+  methods: {
+    reload () {
+      this.table1.loading = true
+      setTimeout(() => (this.table1.loading = false), 2000)
+    }
+  },
+
   mounted () {
-    setTimeout(() => (this.table1.loading = false), 2000)
+    this.reload()
   }
 }
 </script>
