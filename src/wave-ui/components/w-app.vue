@@ -38,9 +38,12 @@ export default {
           sm: breakpoint === 'sm',
           md: breakpoint === 'md',
           lg: breakpoint === 'lg',
-          xl: breakpoint === 'xl'
+          xl: breakpoint === 'xl',
+          width
         }
       }
+
+      this.$waveui.breakpoint.width = width
     },
 
     dynamicStyles () {

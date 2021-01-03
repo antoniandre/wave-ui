@@ -23,6 +23,20 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.15.0
+      p #[strong.code w-table] component:
+      ul
+        li Add the filter feature
+        li Handle mobile layout with customizable breakpoint per table
+        li Removed the deprecated #[code align] attribute on #[span.code &lt;th&gt;] and #[span.code &lt;td&gt;]
+
+    li.patch
+      strong.version v1.14.7
+      ul
+        li Allow #[code bg-color] on #[strong.code w-notification]. #[issue-link 15]
+        li Fix hiding the #[strong.code w-notification] on timeout when initially showing. #[issue-link 15]
+
+    li.patch
       strong.version v1.14.4
       p Allow triggering a particular field validation programmatically via #[code $refs.myField.validate()].
 
@@ -246,7 +260,7 @@ main
     > li.patch .version {color: #999;}
     > li.minor .version {color: #555;}
     > li.major .version {color: #09c;font-size: 1.4rem;}
-    > li:nth-child(2) .version:after {content: ' (Vue 2.x)';}
+    > li:nth-child(2) .version:after {content: ' (Vue 2.x)';font-size: 1.2em;}
 
     ul {margin-left: -2px;}
     li li {padding-left: 20px;margin-top: 2px;}

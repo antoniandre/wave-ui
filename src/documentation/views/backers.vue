@@ -33,7 +33,7 @@ main
 <script>
 import axios from 'axios'
 
-const githubBackers = ['consuman', 'helenetran', 'antoniandre']
+const githubBackers = ['crbast', 'consuman', 'helenetran', 'antoniandre']
 
 export default {
   data: () => ({
