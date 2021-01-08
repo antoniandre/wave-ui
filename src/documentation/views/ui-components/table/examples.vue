@@ -378,7 +378,7 @@ div
   p.
     In addition to the full responsiveness, the #[code w-table] can be presented in a mobile friendly layout,
     if the data it contains would not fit on mobile.#[br]
-    You can decide to trigger the mobile layout on each table individually via the #[code mobile-breakpoint]
+    You can decide to trigger the mobile layout or not on each table, individually, via the #[code mobile-breakpoint]
     parameter.#[br]
     It can be very useful when multiple tables of data are presented, with more or less content, which
     should be displayed differently.#[br]#[br]

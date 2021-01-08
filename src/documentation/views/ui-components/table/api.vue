@@ -16,7 +16,10 @@ import WTable from '@/wave-ui/components/w-table'
 
 const propsDescs = {}
 
-const slots = {}
+const slots = {
+  'no-data': { description: '' },
+  'loading': { description: '' }
+}
 
 const events = {}
 
