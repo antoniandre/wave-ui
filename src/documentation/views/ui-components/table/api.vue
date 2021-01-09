@@ -17,8 +17,25 @@ import WTable from '@/wave-ui/components/w-table'
 const propsDescs = {}
 
 const slots = {
-  'no-data': { description: '' },
-  'loading': { description: '' }
+  'no-data': { description: 'Provide a custom template when there is no data.' },
+  loading: { description: 'Provide a custom loading template.' },
+  'header-label': {
+    description: 'Provide a custom header label template.',
+    params: {
+      label: 'The label of the header being rendered.',
+      header: 'The full header object being rendered.',
+      index: 'The index of the header cell being rendered. Starts at 1.'
+    }
+  },
+  item: {
+    description: 'Provide a custom item template (each cell in each item row).',
+    params: {
+      item: 'The full item object of to the row being rendered.',
+      header: 'The related header object of the current column of the cell being rendered.',
+      label: 'The content of the cell being rendered.',
+      index: 'The index of the cell in the row being rendered. Starts at 1.'
+    }
+  },
 }
 
 const events = {}
