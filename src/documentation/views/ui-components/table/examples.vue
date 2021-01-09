@@ -361,12 +361,68 @@ div
   //- title-link(h2) Expandable rows
   //- example
 
-  //- title-link(h2) Change layout on mobile
-  //- example
-
   title-link(h2 slug="slots") Headers &amp; Cells customization via slots
+  p You can customize the headers labels and/or each row cells.
+
+  title-link(h3) Headers
+  p In this example, only the headers are customized via the #[code header-label] slot.
   example
-    p Coming soon
+    w-table(:headers="table1.headers" :items="table1.items")
+      template(#header-label="{ label, index }") {{ index }}: {{ label }} 👌
+    template(#pug).
+      w-table(:headers="table1.headers" :items="table1.items")
+        template(#header-label="{ label, index }") {{ '\{\{ index \}\}: \{\{ label \}\}' }} 👌
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ]
+        }
+      })
+
+  title-link(h3) Items
+  p.
+    In this example, only the items cells are customized via the #[code item] slot
+    (and the headers are hidden).
+  example
+    w-table(:headers="table1.headers" no-headers :items="table1.items")
+      template(#item="{ item, label, header, index }")
+        small(v-if="header.key === 'id'") \#{{ index }}
+        template(v-else)
+          small.grey.mr2 {{ header.label }}:
+          span {{ label }}
+    template(#pug).
+      w-table(:headers="table1.headers" no-headers :items="table1.items")
+        template(#item="{ item, label, header, index }")
+          small.grey.mr2 {{ '\{\{ header.label \}\}' }}:
+          span {{ '\{\{ label \}\}' }}
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ]
+        }
+      })
 
   //- title-link(h2) Rows selection
   //- example
@@ -405,6 +461,16 @@ div
           ]
         }
       })
+
+  alert(tip)
+    p.
+      To stay lean and performant, the minimum JavaScript behavior is added to the #[code w-table]
+      component.#[br]
+      One thing that is not calculated on the mobile layout is the labels column width (default: 6.5em).#[br]
+      You can override it so set the width you want via:
+
+    ssh-pre(language="css" label="CSS").
+      .w-table--mobile .w-table__cell:before {width: 8em;}
 </template>
 
 <script>
