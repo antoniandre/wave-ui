@@ -8,11 +8,20 @@
           :key="i"
           @click="header.sortable !== false && sortTable(header)"
           :class="headerClasses(header)")
-          span(v-if="header.label && header.align !== 'right'" v-html="header.label || ''")
           w-icon.w-table__header-sort(
-            v-if="header.sortable !== false"
+            v-if="header.sortable !== false && header.align === 'right'"
             :class="headerSortClasses(header)") wi-arrow-down
-          span(v-if="header.label && header.align === 'right'" v-html="header.label || ''")
+          template(v-if="header.label")
+            slot(
+              v-if="$scopedSlots['header-label']"
+              name="header-label"
+              :header="header"
+              :label="header.label"
+              :index="i + 1") {{ header.label || '' }}
+            span(v-else v-html="header.label || ''")
+          w-icon.w-table__header-sort(
+            v-if="header.sortable !== false && header.align !== 'right'"
+            :class="headerSortClasses(header)") wi-arrow-down
     tbody
       tr.w-table__progress-bar(v-if="loading")
         td(:colspan="headers.length")
@@ -21,12 +30,20 @@
             slot(name="loading") Loading...
       template(v-else-if="items.length")
         tr(v-for="(item, i) in sortedItems" :key="i")
-          td.w-table__cell(
-            v-for="(header, j) in headers"
-            :key="j"
-            v-html="item[header.key] || ''"
-            :data-label="header.label"
-            :class="`text-${header.align || 'left'}`")
+          template(v-for="(header, j) in headers")
+            td.w-table__cell(
+              v-if="$scopedSlots['item']"
+              :key="`${j}-1`"
+              :data-label="header.label"
+              :class="`text-${header.align || 'left'}`")
+              slot(name="item" :header="header" :item="item" :label="item[header.key] || ''" :index="i + 1")
+            td.w-table__cell(
+              v-else
+              :key="`${j}-2`"
+              :data-label="header.label"
+              :class="`text-${header.align || 'left'}`"
+              v-html="item[header.key] || ''")
+
       tr.no-data(v-else)
         td.w-table__cell.text-center(:colspan="headers.length")
           slot(name="no-data") No data to show.
