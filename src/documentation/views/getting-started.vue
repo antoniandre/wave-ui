@@ -3,7 +3,7 @@ main
   title-link.mt4(h1) Getting started
   w-accordion(
     :items="2"
-    :value="[true, false]"
+    :value="openPane"
     expand-single
     title-class="justify-space-between py4 pl6 blue-light5--bg"
     expand-icon="wi-chevron-right"
@@ -148,11 +148,11 @@ export default {
       { label: 'breakpoints', route: 'breakpoints' },
       { label: 'presets', route: 'customization#presets' }
     ],
-    openPane: 0
+    openPane: [true, false]
   }),
 
   mounted () {
-    if ((document.location.hash || '').includes('nuxt')) this.openPane = 1
+    if ((document.location.hash || '').includes('nuxt')) this.openPane = [false, true]
   }
 }
 </script>
