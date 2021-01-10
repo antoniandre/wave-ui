@@ -2,7 +2,14 @@
 main
   title-link.mt4(h1 slug="customization") Customization Via SCSS (optional)
 
-  p Wave UI components rely on SCSS variables that you can easily override from your SCSS file, just like this:
+  alert(info)
+    | #[strong If you are using Nuxt], the steps to follow are different. Check the last paragraph of the
+    a.ml1(href="/getting-started#installation-on-nuxt") Nuxt installation
+    | .
+
+  p.mt8.
+    Wave UI components rely on SCSS variables that you can easily override from your SCSS file,
+    just like this:
   pre.ssh-pre(data-label="SCSS")
     span.purple.text-bold @import&nbsp;
     span.red-light2 'wave-ui/src/wave-ui/scss/_variables'
@@ -39,13 +46,16 @@ main
       | Import this SCSS variables file globally from Vue config and re-serve the app.
       ssh-pre.mt5(language="js" label="vue.config.js").
         module.exports = {
-          transpileDependencies: ['wave-ui'],
+          transpileDependencies: ['wave-ui'], // ! \\
           css: {
             loaderOptions: {
               sass: { prependData: '@import "@/scss/_variables.scss";' }
             }
           }
         }
+
+      alert(info).
+        Note from the above code that since you import Wave UI source code, you need to transpile it.
 
   .title4.mt8 Voilà !
   p You're all set, you can now override the SCSS variables.
