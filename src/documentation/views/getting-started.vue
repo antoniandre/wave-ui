@@ -90,21 +90,15 @@ main
           em.grey The dev dependencies are only needed for building the project. They will not ship on production.
 
         li.mt8
-          p In #[span.code nuxt.config.js], add this:
+          p In #[span.code nuxt.config.js], add Wave UI to the #[code buildModules]:
 
           ssh-pre(language="js").
             buildModules: [
-              'wave-ui/nuxt'
-            ],
+              'wave-ui/nuxt' // Simple config.
 
-            WaveUI: {
-              // Your Wave UI configuration goes here.
-              colors: {
-                primary: '#9ac332'
-              },
-              // You can override the Wave UI SCSS variables in a custom file.
-              // scssVariables: '~/scss/_variables.scss'
-            }
+              // Or with options.
+              // ['wave-ui/nuxt', { /* Wave UI config here. */ }]
+            ]
 
         li.mt8
           p in #[span.code default.vue], wrap the #[code Nuxt] component in a #[code w-app]:
@@ -121,6 +115,24 @@ main
 
           ssh-pre(language="html-vue").
             &lt;w-button&gt;Testing&lt;/w-button&gt;
+
+      .w-divider.my12
+
+      title-link.title2.ml4.mb4(h3) For more flexibility, if you use SCSS
+      p If you use SCSS, you may want to override the Wave UI SCSS variables. Proceed as follows.
+
+      ssh-pre(language="js").
+        buildModules: [
+          [
+            'wave-ui/nuxt',
+            {
+              // Your Wave UI config here.
+
+              // Path to your SCSS variables.
+              useScss: '~/scss/_variables.scss'
+            }
+          ]
+        ]
 
   w-divider.my12
   title-link(h2) What next?
