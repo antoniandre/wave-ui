@@ -1,63 +1,118 @@
 <template lang="pug">
 main
   title-link.mt4(h1) Getting started
-  title-link(h2) Installation
+  w-accordion(
+    :items="2"
+    :value="[true, false]"
+    expand-single
+    title-class="justify-space-between py4 pl6 blue-light5--bg"
+    expand-icon="wi-chevron-right"
+    collapse-icon="wi-chevron-up"
+    expand-icon-right)
+    template(#item-title.1)
+      title-link.ma0(h2) Installation (Standard)
+    template(#item-content.1)
+      title-link(h3) 1. Download from NPM
+      ssh-pre(language="shell") npm i wave-ui # Vue 2.x.
 
-  title-link(h3) 1. Download from NPM
-  ssh-pre(language="shell") npm i wave-ui # Vue 2.x.
+      ssh-pre(language="shell") npm i wave-ui@next # Vue 3.
 
-  ssh-pre(language="shell") npm i wave-ui@next # Vue 3.
+      title-link(h3) 2. Import in your project
+      p Import Wave UI library at the root of your app - usually #[span.code main.js].
+      w-flex(basis-zero wrap :gap="4")
+        ssh-pre.grow.ma2.mt8(language="js" label="VUE 2.x - main.js" style="min-width: 290px").
+          // VUE 2.x.
+          import Vue from 'vue'
+          import App from './App.vue'
+          import WaveUI from 'wave-ui'
+          import 'wave-ui/dist/wave-ui.css'
 
-  title-link(h3) 2. Import in your project
-  p Import Wave UI library at the root of your app - usually #[span.code main.js].
-  w-flex(basis-zero wrap :gap="4")
-    ssh-pre.grow.ma2.mt8(language="js" label="VUE 2.x - main.js" style="min-width: 290px").
-      // VUE 2.x.
-      import Vue from 'vue'
-      import App from './App.vue'
-      import WaveUI from 'wave-ui'
-      import 'wave-ui/dist/wave-ui.css'
+          Vue.use(WaveUI)
 
-      Vue.use(WaveUI)
+          const waveui = new WaveUI({
+            // Some Wave UI options.
+          })
 
-      const waveui = new WaveUI({
-        // Some Wave UI options.
-      })
+          new Vue({
+            waveui,
+            render: h => h(App)
+          }).$mount('#app')
+        ssh-pre.grow.ma2.mt8(language="js" label="VUE 3 - main.js" style="min-width: 290px").
+          // VUE 3.
+          import { createApp, h } from 'vue'
+          import App from './App.vue'
+          import WaveUI from 'wave-ui'
+          import 'wave-ui/dist/wave-ui.css'
 
-      new Vue({
-        waveui,
-        render: h => h(App)
-      }).$mount('#app')
-    ssh-pre.grow.ma2.mt8(language="js" label="VUE 3 - main.js" style="min-width: 290px").
-      // VUE 3.
-      import { createApp, h } from 'vue'
-      import App from './App.vue'
-      import WaveUI from 'wave-ui'
-      import 'wave-ui/dist/wave-ui.css'
+          const app = createApp({
+            render: () => h(App)
+          })
 
-      const app = createApp({
-        render: () => h(App)
-      })
+          new WaveUI(app, {
+            // Some Wave UI options.
+          })
 
-      new WaveUI(app, {
-        // Some Wave UI options.
-      })
+          app.mount('#app')
 
-      app.mount('#app')
+      p.mt2.grey-light1.text-right
+        w-icon.mr1 wi-chevron-right
+        | Edit a
+        a.ml1(href="https://codepen.io/antoniandre/pen/RwaXMLd?editors=1010" target="_blank")
+          | Vue 3 Wave UI demo on Codepen
+          w-icon.ml1 mdi mdi-open-in-new
 
-  p.mt2.grey-light1.text-right
-    w-icon.mr1 wi-chevron-right
-    | Edit a
-    a.ml1(href="https://codepen.io/antoniandre/pen/RwaXMLd?editors=1010" target="_blank")
-      | Vue 3 Wave UI demo on Codepen
-      w-icon.ml1 mdi mdi-open-in-new
+      title-link(h3).mt8 3. Place a #[span.code w-app] at the root of your app
+      ssh-pre(language="html-vue" label="App.js").
+        &lt;w-app&gt;
+          &lt;!-- All your app's content goes here. --&gt;
+        &lt;/w-app&gt;
+      .caption.grey-light1.pb8
+        | This is required for Wave UI base styles and for a few components needing to be moved in the DOM.
 
-  title-link(h3).mt8 3. Place a #[span.code w-app] at the root of your app
-  ssh-pre(language="html-vue" label="App.js").
-    &lt;w-app&gt;
-      &lt;!-- All your app's content goes here. --&gt;
-    &lt;/w-app&gt;
-  .caption.grey-light1 This is required for Wave UI base styles and for a few components needing to be moved in the DOM.
+    //- Nuxt install.
+    template(#item-title.2)
+      title-link.ma0(h2) Installation on Nuxt
+    template(#item-content.2)
+      ol
+        li.mt8
+          p Install the dependencies &amp; dev dependencies:
+          ssh-pre.mb6(language="shell") npm i wave-ui
+          ssh-pre(language="shell") npm i -D @wave-ui/nuxt pug pug-plain-loader node-sass sass-loader
+
+          em.grey The dev dependencies are only needed for building the project. They will not ship on production.
+
+        li.mt8
+          p In #[span.code nuxt.config.js], add this:
+
+          ssh-pre(language="js").
+            buildModules: [
+              'wave-ui/nuxt'
+            ],
+
+            waveui: {
+              // Your Wave UI configuration goes here.
+              colors: {
+                primary: '#9ac332'
+              },
+              // You can override the Wave UI SCSS variables in a custom file.
+              // scssVariables: '~/scss/_variables.scss'
+            }
+
+        li.mt8
+          p in #[span.code default.vue], wrap the #[code Nuxt] component in a #[code w-app]:
+
+          ssh-pre(language="html-vue").
+            &lt;template&gt;
+              &lt;w-app&gt;
+                &lt;Nuxt /&gt;
+              &lt;/w-app&gt;
+            &lt;/template&gt;
+
+        li.mt8
+          p You can now try to add a #[code w-button] in the #[span.code pages/index.vue]:
+
+          ssh-pre(language="html-vue").
+            &lt;w-button&gt;Testing&lt;/w-button&gt;
 
   w-divider.my12
   title-link(h2) What next?
@@ -96,3 +151,14 @@ export default {
   })
 }
 </script>
+
+<style lang="scss">
+.main--getting-started {
+  .w-accordion__item-title {border-top: none;}
+  .w-accordion__item-content {background: #f7fbff;}
+  .w-button--icon.size--md {font-size: 20px;}
+
+  .w-accordion ol {font-size: 1.3em;}
+  .w-accordion .ssh-pre, .w-accordion em {font-size: 1rem;}
+}
+</style>
