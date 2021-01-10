@@ -154,6 +154,7 @@ export default {
 
 <style lang="scss">
 .main--getting-started {
+  .w-accordion__item {margin-bottom: 12px;}
   .w-accordion__item-title {border-top: none;}
   .w-accordion__item-content {background: #f7fbff;}
   .w-button--icon.size--md {font-size: 20px;}
