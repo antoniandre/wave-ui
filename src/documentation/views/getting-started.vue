@@ -71,8 +71,16 @@ main
 
     //- Nuxt install.
     template(#item-title.2)
-      title-link.ma0(h2) Installation on Nuxt
+      title-link.ma0(h2) Installation on Nuxt (Vue 2)
     template(#item-content.2)
+      p.mt4
+        em.grey
+          | Nuxt doesn't support Vue 3 yet.
+          a.ml1(href="https://github.com/nuxt/nuxt.js/issues/5708" target="_blank") Issue #5708.
+      .w-flex.title3.mt8
+        w-icon.green.mr2 wi-check
+        | With this setup, you can override the Wave UI SCSS variables.
+
       ol
         li.mt8
           p Install the dependencies &amp; dev dependencies:
