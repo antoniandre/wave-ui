@@ -101,7 +101,6 @@ export default class WaveUI {
 
 WaveUI.version = '__VERSION__'
 
+// Removing this for Nuxt (prevents generating the SCSS twice):
 // Automatic installation if Vue has been added to the global scope.
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(WaveUI)
-}
+// if (typeof window !== 'undefined' && window.Vue) window.Vue.use(WaveUI)
