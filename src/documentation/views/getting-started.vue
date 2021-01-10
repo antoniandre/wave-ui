@@ -97,7 +97,7 @@ main
               'wave-ui/nuxt'
             ],
 
-            waveui: {
+            WaveUI: {
               // Your Wave UI configuration goes here.
               colors: {
                 primary: '#9ac332'
