@@ -147,8 +147,13 @@ export default {
       { label: 'colors', route: 'colors' },
       { label: 'breakpoints', route: 'breakpoints' },
       { label: 'presets', route: 'customization#presets' }
-    ]
-  })
+    ],
+    openPane: 0
+  }),
+
+  mounted () {
+    if ((document.location.hash || '').includes('nuxt')) this.openPane = 1
+  }
 }
 </script>
 
