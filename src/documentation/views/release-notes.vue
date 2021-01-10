@@ -24,7 +24,9 @@ main
 
     li.minor
       strong.version v1.16.0
-      p Support Nuxt.
+      ul
+        li Support Nuxt.
+        li Add more slots in #[strong.code w-table] component.
 
     li.patch
       strong.version v1.15.0
