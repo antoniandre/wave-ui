@@ -77,27 +77,22 @@ main
         em.grey
           | Nuxt doesn't support Vue 3 yet.
           a.ml1(href="https://github.com/nuxt/nuxt.js/issues/5708" target="_blank") Issue #5708.
-      .w-flex.title3.mt8
-        w-icon.green.mr2 wi-check
-        | With this setup, you can override the Wave UI SCSS variables.
 
       ol
         li.mt8
-          p Install the dependencies &amp; dev dependencies:
-          ssh-pre.mb6(language="shell") npm i wave-ui
-          ssh-pre(language="shell") npm i -D @wave-ui/nuxt pug pug-plain-loader node-sass sass-loader
-
-          em.grey The dev dependencies are only needed for building the project. They will not ship on production.
+          p Install the dependencies:
+          ssh-pre(language="shell") npm i wave-ui
+          ssh-pre(language="shell") npm i -D @wave-ui/nuxt
 
         li.mt8
           p In #[span.code nuxt.config.js], add Wave UI to the #[code buildModules]:
 
           ssh-pre(language="js").
             buildModules: [
-              'wave-ui/nuxt' // Simple config.
+              '@wave-ui/nuxt' // Simple config.
 
               // Or with options.
-              // ['wave-ui/nuxt', { /* Wave UI config here. */ }]
+              // ['@wave-ui/nuxt', { /* Wave UI config here. */ }]
             ]
 
         li.mt8
@@ -110,8 +105,7 @@ main
               &lt;/w-app&gt;
             &lt;/template&gt;
 
-        li.mt8
-          p You can now try to add a #[code w-button] in the #[span.code pages/index.vue]:
+          p You're all set. Try to add a #[code w-button]:
 
           ssh-pre(language="html-vue").
             &lt;w-button&gt;Testing&lt;/w-button&gt;
@@ -119,12 +113,21 @@ main
       .w-divider.my12
 
       title-link.title2.ml4.mb4(h3) For more flexibility, if you use SCSS
-      p If you use SCSS, you may want to override the Wave UI SCSS variables. Proceed as follows.
+      .w-flex.title3.mt8
+        w-icon.green.mr2 wi-check
+        | With this setup, you can override the Wave UI SCSS variables.
 
+      p Also install these dev dependencies:
+      ssh-pre(language="shell") npm i -D pug pug-plain-loader node-sass sass-loader
+
+      small.text-italic.grey.
+        The dev dependencies are only needed for building the project. They will not ship on production.
+
+      p.mt4 Then update the buildModules in #[span.code nuxt.config.js]:
       ssh-pre(language="js").
         buildModules: [
           [
-            'wave-ui/nuxt',
+            '@wave-ui/nuxt',
             {
               // Your Wave UI config here.
 
