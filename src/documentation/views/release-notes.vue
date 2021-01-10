@@ -22,6 +22,10 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v1.16.0
+      p Support Nuxt.
+
     li.patch
       strong.version v1.15.0
       p #[strong.code w-table] component:
