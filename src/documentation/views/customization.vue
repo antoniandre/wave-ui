@@ -2,7 +2,7 @@
 main
   title-link.mt4(h1 slug="customization") Customization Via SCSS (optional)
 
-  p Wave UI components rely on SCSS variables that you can easily override from Your SCSS file, just like this:
+  p Wave UI components rely on SCSS variables that you can easily override from your SCSS file, just like this:
   pre.ssh-pre(data-label="SCSS")
     span.purple.text-bold @import&nbsp;
     span.red-light2 'wave-ui/src/wave-ui/scss/_variables'
