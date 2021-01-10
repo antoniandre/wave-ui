@@ -10,7 +10,7 @@ main
     collapse-icon="wi-chevron-up"
     expand-icon-right)
     template(#item-title.1)
-      title-link.ma0(h2) Installation (Standard)
+      title-link.ma0(h2 slug="installation") Installation (Standard)
     template(#item-content.1)
       title-link(h3) 1. Download from NPM
       ssh-pre(language="shell") npm i wave-ui # Vue 2.x.
@@ -71,7 +71,7 @@ main
 
     //- Nuxt install.
     template(#item-title.2)
-      title-link.ma0(h2) Installation on Nuxt (Vue 2)
+      title-link.ma0(h2 slug="installation-on-nuxt") Installation on Nuxt (Vue 2)
     template(#item-content.2)
       p.mt4
         em.grey
@@ -123,7 +123,7 @@ main
       small.text-italic.grey.
         The dev dependencies are only needed for building the project. They will not ship on production.
 
-      p.mt4 Then update the buildModules in #[span.code nuxt.config.js]:
+      p.mt4 Then update the #[span.code buildModules] in #[span.code nuxt.config.js]:
       ssh-pre(language="js").
         buildModules: [
           [
