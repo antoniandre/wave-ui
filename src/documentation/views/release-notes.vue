@@ -23,6 +23,12 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.17.0
+      ul
+        li Allow adding content on top of #[strong.code w-image].
+        li Fix #[strong.code w-image] #[code tag] option not accepting a #[code div] tag.
+
+    li.minor
       strong.version v1.16.0
       ul
         li Support Nuxt.

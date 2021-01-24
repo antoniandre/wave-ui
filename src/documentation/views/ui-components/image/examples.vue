@@ -193,11 +193,29 @@ div
     By using the lazy attribute, it is possible to load the image only when it is in the viewport.#[br]
     Wave UI internally uses an IntersectionObserver and will only start loading the image when it is
     visible.
-  example(content-class="text-center")
+  example
     //- ?v1 to prevent cache from reloading the image without request.
     w-image(:src="`${baseUrl}images/spirit-island--alberta.png?v1`" lazy :ratio="2550 / 5098")
     template(#pug).
       w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy :ratio="2550 / 5098")
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue CLI, you can use process.env.BASE_URL
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
+
+  title-link(h2 slug="content") Content - via default slot
+  p.
+    In some cases, it can be convenient to have some content on top of the image.#[br]
+    By default the content will be horizontally and vertically centered, but you could easily align it
+    at the bottom left for instance, with the attribute #[code content-class="align-end justify-start pa2"].
+  example
+    w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="2550 / 5098")
+      span.title1.pink Wave UI
+    template(#pug).
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="2550 / 5098")
+        span.title1.pink Wave UI
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can use process.env.BASE_URL
