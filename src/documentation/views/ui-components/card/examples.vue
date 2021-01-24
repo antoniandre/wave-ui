@@ -200,7 +200,9 @@ div
       &lt;/w-card&gt;
     template(#js).
       data: () => ({
-        baseUrl: process.env.BASE_URL
+        // With Webpack or Vue CLI, you can also use process.env.BASE_URL
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 </template>
 
