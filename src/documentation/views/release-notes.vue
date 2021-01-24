@@ -23,6 +23,10 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.18.0
+      p Add an image option to the #[strong.code w-card] component.
+
+    li.minor
       strong.version v1.17.0
       ul
         li Allow adding content on top of #[strong.code w-image].
