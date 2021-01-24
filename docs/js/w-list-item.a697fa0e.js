@@ -1,0 +1,2 @@
+(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["w-list-item"],{4627:function(t,e,l){"use strict";l.r(e);var i=function(){var t=this,e=t.$createElement,l=t._self._c||e;return l("w-card",{attrs:{"bg-color":"blue-light5",title:"Nested &lt;router-view&gt;","title-class":"title3"}},[l("div",{staticClass:"title1"},[t._v("Selected list item: "+t._s(t.item))])])},s=[],a={props:["item"]},r=a,c=l("2877"),n=Object(c["a"])(r,i,s,!1,null,null,null);e["default"]=n.exports}}]);
+//# sourceMappingURL=w-list-item.a697fa0e.js.map
