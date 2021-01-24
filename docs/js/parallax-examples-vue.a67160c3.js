@@ -1,0 +1,2 @@
+(window["webpackJsonpWaveUI"]=window["webpackJsonpWaveUI"]||[]).push([["parallax-examples-vue"],{"067b":function(e,t,l){"use strict";l.r(t);var n=function(){var e=this,t=e.$createElement,l=e._self._c||t;return l("div",[l("title-link",{attrs:{h2:""}},[e._v("Default")]),l("example",{scopedSlots:e._u([{key:"pug",fn:function(){},proxy:!0}])})],1)},a=[],u={},p=u,s=l("2877"),o=Object(s["a"])(p,n,a,!1,null,null,null);t["default"]=o.exports}}]);
+//# sourceMappingURL=parallax-examples-vue.a67160c3.js.map
