@@ -25,7 +25,7 @@ div
       w-image(:src="`${baseUrl}images/favicon.png`")
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can also use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -39,7 +39,7 @@ div
       w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can also use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -56,7 +56,7 @@ div
       w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="233 / 1000")
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can also use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -75,7 +75,7 @@ div
       w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="650" tag="img" style="max-width: 100%")
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can also use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -90,7 +90,7 @@ div
       w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :width="500" :height="250")
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can also use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -182,7 +182,7 @@ div
       w-alert(v-if="showError" error) Oops. The image could not load!
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can also use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/',
         showError: false
@@ -200,7 +200,7 @@ div
       w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy :ratio="2550 / 5098")
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can also use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -218,7 +218,7 @@ div
         span.title1.pink Wave UI
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can use process.env.BASE_URL
+        // With Webpack or Vue CLI, you can also use process.env.BASE_URL
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
