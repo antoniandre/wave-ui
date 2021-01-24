@@ -123,7 +123,7 @@ main
       small.text-italic.grey.
         The dev dependencies are only needed for building the project. They will not ship on production.
 
-      p.mt4 Then update the #[span.code buildModules] in #[span.code nuxt.config.js]:
+      p.mt4 Then update the #[span.code buildModules] &amp; #[span.code build] blocks in #[span.code nuxt.config.js]:
       ssh-pre(language="js").
         buildModules: [
           [
@@ -136,6 +136,10 @@ main
             }
           ]
         ]
+
+        build: {
+          transpile: ['wave-ui']
+        }
 
   w-divider.my12
   title-link(h2) What next?
