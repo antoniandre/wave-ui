@@ -21,7 +21,7 @@ main
               w-icon.white(xl) wi-plus
         | Add yourself!
 
-    p.mt12
+    p.mt10
       | If you would like to support Wave UI, you can
       a.mx1(href="https://github.com/sponsors/antoniandre" target="_blank") become a sponsor
       | or
@@ -68,7 +68,7 @@ export default {
   }
 
   h2.gold {
-    margin-top: 3.5em;
+    margin-top: 3.2em;
     margin-bottom: 1.4em;
     color: #ccad15;
   }
