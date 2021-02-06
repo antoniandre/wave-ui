@@ -13,6 +13,18 @@ main
     li.mt1 #[code w-transition-slide]
     li.mt1 #[code w-transition-slide-fade]
 
+  alert(info)
+    | The transitions (based on
+    | #[a(href="https://vuejs.org/v2/guide/transitions.html" target="_blank") Vue native transitions])
+    | work with element toggling using #[code v-if] or #[code v-show].
+    br
+    | Simple example (with #[code show] a boolean variable):
+    .w-flex
+      ssh-pre.mb0(language="html-vue").
+        &lt;w-transition-fade&gt;
+          &lt;span v-if="show"&gt;Hello!&lt;/span&gt;
+        &lt;/w-transition-fade&gt;
+
   title-link(h2) Transitions showcase
   example
     w-flex(align-center)
