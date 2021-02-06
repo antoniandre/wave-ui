@@ -3,7 +3,7 @@ main
   title-link.mt4(h1) Grid system
 
   p.
-    The grid system is 12-cell based. Its purpose is to divide the available width (in percentage)
+    The grid system (using flexbox) is 12-cell based. Its purpose is to divide the available width (in percentage)
     of a container in 12 cells to easily let you create the design that you want.#[br]
     You can then assign this created layout to a particular breakpoint.
 
