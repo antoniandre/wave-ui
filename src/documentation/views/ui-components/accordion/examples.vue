@@ -11,11 +11,12 @@ div
     div.mt3
       | v-model:
       code.ml1 {{ accordion1 }}
-    template(#pug).
-      w-accordion(v-model="accordion" :items="items")
-      div.mt3
-        | v-model:
-        code.ml1 {{ '\{\{ accordion \}\}' }}
+    template(#html).
+      &lt;w-accordion v-model="accordion" :items="items"/&gt;
+      &lt;div class="mt3"&gt;
+        v-model:
+        &lt;code class="ml1"&gt;{{ '\{\{ accordion \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
     template(#js).
       data: () => ({
         items: [
@@ -44,11 +45,12 @@ div
     div.mt3
       | v-model:
       code.ml1 {{ accordion2 }}
-    template(#pug).
-      w-accordion(v-model="accordion" :items="items")
-      div.mt3
-        | v-model:
-        code.ml1 {{ '\{\{ accordion \}\}' }}
+    template(#html).
+      &lt;w-accordion v-model="accordion" :items="items"/&gt;
+      &lt;div class="mt3"&gt;
+        v-model:
+        &lt;code class="ml1"&gt;{{ '\{\{ accordion \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
     template(#js).
       data: () => ({
         items: [
@@ -74,8 +76,8 @@ div
     directly in the object.
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(v-model="accordion3" :items="itemsDisabled")
-    template(#pug).
-      w-accordion(v-model="accordion" :items="items")
+    template(#html).
+      &lt;w-accordion v-model="accordion" :items="items"/&gt;
     template(#js).
       data: () => ({
         items: [
@@ -89,8 +91,8 @@ div
   title-link(h2) Shadow
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items" shadow)
-    template(#pug).
-      w-accordion(:items="items" shadow)
+    template(#html).
+      &lt;w-accordion :items="items" shadow/&gt;
     template(#js).
       data: () => ({
         items: [
@@ -117,9 +119,9 @@ div
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items" color="amber-dark1")
     w-accordion.mt6(:items="items" bg-color="yellow-light5")
-    template(#pug).
-      w-accordion(:items="items" color="amber-dark1")
-      w-accordion.mt6(:items="items" bg-color="yellow-light5")
+    template(#html).
+      &lt;w-accordion :items="items" color="amber-dark1"/&gt;
+      &lt;w-accordion class="mt6" :items="items" bg-color="yellow-light5"/&gt;
     template(#js).
       data: () => ({
         items: [
@@ -141,8 +143,8 @@ div
   title-link(h3) Different color per item
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items2")
-    template(#pug).
-      w-accordion(:items="items")
+    template(#html).
+      &lt;w-accordion :items="items"/&gt;
     template(#js).
       data: () => ({
         items: [
@@ -158,11 +160,12 @@ div
     div.mt3
       | v-model:
       code.ml1 {{ accordion4 }}
-    template(#pug).
-      w-accordion(v-model="accordion" :items="items" expand-single)
-      div.mt3
-        | v-model:
-        code.ml1 {{ '\{\{ accordion \}\}' }}
+    template(#html).
+      &lt;w-accordion v-model="accordion" :items="items" expand-single/&gt;
+      &lt;div class="mt3"&gt;
+        v-model:
+        &lt;code class="ml1"&gt;{{ '\{\{ accordion \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
     template(#js).
       data: () => ({
         items: [
@@ -190,14 +193,14 @@ div
     div.mt3
       | v-model:
       code.ml1 {{ accordion5 }}
-    template(#pug).
-      w-button.mr2(@click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;true&amp;#41;" bg-color="primary" sm) Expand all
-      w-button(@click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;false&amp;#41;" bg-color="primary" sm) Collapse all
+    template(#html).
+      &lt;w-button class="mr2" @click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;true&amp;#41;" bg-color="primary" sm&gt;Expand all&lt;/w-button&gt;
+      &lt;w-button @click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;false&amp;#41;" bg-color="primary" sm&gt;Collapse all&lt;/w-button&gt;
 
-      w-accordion.mt4(v-model="accordion" :items="items")
-      div.mt3
-        | v-model:
-        code.ml1 {{ '\{\{ accordion \}\}' }}
+      &lt;w-accordion class="mt4" v-model="accordion" :items="items"/&gt;
+      &lt;div class="mt3"&gt;
+        v-model:
+        &lt;code class="ml1"&gt;{{ '\{\{ accordion \}\}' }}&lt;/code&gt;
     template(#js).
       data: () => ({
         items: [
@@ -225,13 +228,15 @@ div
         .title3.my0.ml2(:class="item.itemColor") {{ item.title }}
       template(#item-content="{ item }")
         w-alert.my0.pb3(border-left tile :color="item.itemColor" v-html="item.content")
-    template(#pug).
-      w-accordion(:items="items" content-class="pa0")
-        template(#item-title="{ item }")
-          w-icon(lg :color="item.itemColor") {{ '\{\{ item.icon \}\}' }}
-          .title3.ml2(:class="item.itemColor") {{ '\{\{ item.title \}\}' }}
-        template(#item-content="{ item }")
-          w-alert.my0.pb3(border-left tile :color="item.itemColor" v-html="item.content")
+    template(#html).
+      &lt;w-accordion :items="items" content-class="pa0"&gt;
+        &lt;template #item-title="{ item }"&gt;
+          &lt;w-icon lg :color="item.itemColor"&gt;{{ '\{\{ item.icon \}\}' }}&lt;/w-icon&gt;
+          &lt;div class="title3 ml2" :class="item.itemColor"&gt;{{ '\{\{ item.title \}\}' }}&lt;/div&gt;
+        &lt;/template&gt;
+        &lt;template #item-content="{ item }")/&gt;
+          &lt;w-alert class="my0 pb3" border-left tile :color="item.itemColor" v-html="item.content"/&gt;
+        &lt;/template&gt;
     template(#js).
       data: () => ({
         items: [
@@ -271,16 +276,17 @@ div
 
       template(#item-title.3) Item title 3
       template(#item-content.3) Item content 3
-    template(#pug).
-      w-accordion(:items="3")
-        template(#item-title.1="") Item title 1
-        template(#item-content.1="") Item content 1
+    template(#html).
+      &lt;w-accordion :items="3"&gt;
+        &lt;template #item-title.1&gt;Item title 1&lt;/template&gt;
+        &lt;template #item-content.1&gt;Item content 1&lt;/template&gt;
 
-        template(#item-title.2="") Item title 2
-        template(#item-content.2="") Item content 2
+        &lt;template #item-title.2&gt;Item title 2&lt;/template&gt;
+        &lt;template #item-content.2&gt;Item content 2&lt;/template&gt;
 
-        template(#item-title.3="") Item title 3
-        template(#item-content.3="") Item content 3
+        &lt;template #item-title.3&gt;Item title 3&lt;/template&gt;
+        &lt;template #item-content.3&gt;Item content 3&lt;/template&gt;
+      &lt;/w-accordion&gt;
 
   p.
     Here is an example of 3 totally diferent pane titles and contents using more lines of code.#[br]
@@ -313,33 +319,42 @@ div
         w-button(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
           | Github
           w-icon.ml2(sm) mdi mdi-open-in-new
-    template(#pug).
-      w-accordion(:items="items")
-        template(#item-title.item1="")
-          | This is the 1st item
-          w-tag.ml2(color="red" sm outline) HOT
-        template(#item-content.item1="")
-          p This content has a checklist.
-          .title4.my3 To do
-          w-list(checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]")
+    template(#html).
+      &lt;w-accordion :items="items"&gt;
+        &lt;template #item-title.item1&gt;
+          This is the 1st item
+          &lt;w-tag class="ml2" color="red" sm outline&gt;HOT&lt;/w-tag&gt;
+        &lt;/template&gt;
+        &lt;template #item-content.item1&gt;
+          &lt;p&gt;This content has a checklist.&lt;/p&gt;
+          &lt;div class="title4 my3"&gt;To do&lt;/div&gt;
+          &lt;w-list checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]"/&gt;
+        &lt;/template&gt;
 
-        template(#item-title.item2="")
-          w-icon.mr1(md color="amber") mdi mdi-emoticon-excited-outline
-          em This is the 2nd item
-        template(#item-content.item2="{ item }")
-          p The full content here is custom and completely distinct and independent from the other items.
-          p
-            | You also have access to the item's data if you need:
-            code.ml1 {{ '\{\{ item \}\}' }}
-
-        template(#item-title.item3="")
-          strong This is the 3rd item
-          w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
-        template(#item-content.item3="")
-          p Do you want to check the project on Github?
-          w-button.mt2(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
-            | Github
-            w-icon.ml2(sm) mdi mdi-open-in-new
+        &lt;template #item-title.item2&gt;
+          &lt;w-icon class="mr1" md color="amber"&gt;mdi mdi-emoticon-excited-outline&lt;/w-icon&gt;
+          &lt;em&gt;This is the 2nd item&lt;/em&gt;
+        &lt;/template&gt;
+        &lt;template #item-content.item2="{ item }"&gt;
+          &lt;p&gt;The full content here is custom and completely distinct and independent from the other items.&lt;/p&gt;
+          &lt;p&gt;
+            You also have access to the item's data if you need:
+            &lt;code class="ml1"&gt;{{ '\{\{ item \}\}' }}&lt;/code&gt;
+          &lt;/p&gt;
+        &lt;/template&gt;
+        
+        &lt;template #item-title.item3=""&gt;
+          &lt;strong&gt; This is the 3rd item&lt;/strong&gt;
+          &lt;w-icon class="ml1" md color="pink"&gt;mdi mdi-emoticon-kiss-outline&lt;/w-icon&gt;
+        &lt;/template&gt;
+        &lt;template #item-content.item3&gt;
+          &lt;p&gt;Do you want to check the project on Github?&lt;/p&gt;
+          &lt;w-button class="mt2" bg-color="primary" route="https://github.com/antoniandre/wave-ui"&gt;
+            Github
+            &lt;w-icon class="ml2" sm&gt;mdi mdi-open-in-new&lt;/w-icon&gt;
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+      &lt;/w-accordion&gt;
     template(#js).
       data: () => ({
         items: [
@@ -359,18 +374,18 @@ div
     w-accordion.white--bg(:items="items" :expand-icon="false" title-class="py2")
     .title4.mt6 Icon on the right
     w-accordion.white--bg(:items="items" expand-icon-right)
-    template(#pug).
-      .title4.mb2 1 custom icon (only expand)
-      w-accordion(:items="items" expand-icon="wi-chevron-down")
+    template(#html).
+      &lt;div class="title4 mb2"&gt;1 custom icon (only expand)&lt;/div&gt;
+      &lt;w-accordion :items="items" expand-icon="wi-chevron-down"/&gt;
 
-      .title4.mt8.mb2 2 custom icons (expand &amp; collapse)
-      w-accordion(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
+      &lt;div class="title4 mt8 mb2"&gt;2 custom icons (expand &amp; collapse)&lt;/div&gt;
+      &lt;w-accordion :items="items" expand-icon="wi-plus" collapse-icon="wi-minus"/&gt;
 
-      .title4.mt8.mb2 No icon
-      w-accordion(:items="items" :expand-icon="false" title-class="py2")
+      &lt;div class="title4 mt8 mb2"&gt;No icon&lt;/div&gt;
+      &lt;w-accordion :items="items" :expand-icon="false" title-class="py2"/&gt;
 
-      .title4.mt8.mb2 Icon on the right
-      w-accordion(:items="items" expand-icon-right)
+      &lt;div class="title4 mt8 mb2"&gt;Icon on the right&lt;/div&gt;
+      &lt;w-accordion :items="items" expand-icon-right/&gt;
     template(#js).
       data: () => ({
         items: [
