@@ -116,7 +116,7 @@ main
           p You're all set. Try to add a #[code w-button]:
 
           ssh-pre(language="html-vue").
-            &lt;w-button&gt;Testing&lt;/w-button&gt;
+            &lt;w-button&gt;My button&lt;/w-button&gt;
 
       .w-divider.my12
 
@@ -203,6 +203,7 @@ export default {
   .w-accordion .ssh-pre, .w-accordion em {font-size: 1rem;}
 
   .vue-install .comment {user-select: none;}
+  .ssh-pre[data-label]:before {font-size: 12px;}
 }
 
 @media screen and (max-width: 600px) {
