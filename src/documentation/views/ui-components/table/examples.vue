@@ -358,6 +358,50 @@ div
         }
       })
 
+  title-link(h2) Rows selection
+  p Click a row to see it highlighted and get information about the selected item.
+  p.
+    By default, the selection will use the #[code primary] color and apply an opacity of #[code 0.2].
+    If this is not what you want, you can override it via CSS (#[code .w-table__row--selected td:before]).
+  example
+    w-table(
+      :headers="table1.headers"
+      :items="table1.items"
+      select-row
+      @row-select="selectedRow = $event")
+
+    p.mt4
+      strong Selected row:
+      span.ml2 {{ selectedRow || '-' }}
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        select-row
+        @row-select="table.selectedRow = $event")
+
+      p.mt4
+        strong Selected row:
+        span.ml2 {{ "\{\{ table.selectedRow || '-' \}\}" }}
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ],
+          selectedRow: null
+        }
+      })
+
   //- title-link(h2) Expandable rows
   //- example
 
@@ -423,9 +467,6 @@ div
           ]
         }
       })
-
-  //- title-link(h2) Rows selection
-  //- example
 
   //- title-link(h2) Editable tables
   //- example
@@ -525,7 +566,8 @@ export default {
         item => item.id >= 10
       ],
       activeFilter: 0
-    }
+    },
+    selectedRow: null
   }),
 
   methods: {

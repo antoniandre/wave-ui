@@ -29,7 +29,11 @@
           .w-table__loading-text
             slot(name="loading") Loading...
       template(v-else-if="items.length")
-        tr(v-for="(item, i) in sortedItems" :key="i")
+        tr.w-table__row(
+          v-for="(item, i) in sortedItems"
+          :key="i"
+          @click="doSelectRow(item, i)"
+          :class="{ 'w-table__row--selected': selectedRow === i }")
           template(v-for="(header, j) in headers")
             td.w-table__cell(
               v-if="$scopedSlots['item']"
@@ -60,6 +64,7 @@ export default {
     loading: { type: Boolean },
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
+    selectRow: { type: Boolean },
     filter: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 }
   },
@@ -67,7 +72,8 @@ export default {
   emits: ['update:sort'],
 
   data: () => ({
-    activeSorting: []
+    activeSorting: [],
+    selectedRow: null
   }),
 
   computed: {
@@ -146,6 +152,11 @@ export default {
       else this.$set(this.activeSorting, 0, (alreadySortingThis ? '-' : '+') + header.key)
 
       this.$emit('update:sort', this.activeSorting)
+    },
+
+    doSelectRow (item, index) {
+      this.selectRow && (this.selectedRow = index)
+      this.$emit('row-select', { item, index })
     }
   },
 
@@ -236,7 +247,19 @@ export default {
   // ------------------------------------------------------
   tbody tr {border-top: 1px solid rgba(0, 0, 0, 0.06);}
   tbody tr:nth-child(odd):not(.no-data) {background-color: $table-tr-odd-color;}
-  tbody tr:hover:not(.no-data):not(&__progress-bar) {background-color: $table-tr-hover-color;}
+  tbody .w-table__row:hover:not(.no-data) {background-color: $table-tr-hover-color;}
+  &__row--selected td {position: relative;}
+  &__row--selected td:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--primary);
+    opacity: 0.2;
+    pointer-events: none;
+  }
 
   &__cell {padding: round($base-increment / 2) $base-increment;}
   &__header:first-child, &__cell:first-child {padding-left: 2 * $base-increment;}
