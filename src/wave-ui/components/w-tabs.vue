@@ -20,9 +20,9 @@
         slot(v-else name="item-title" :item="cleanTab(item)" :index="i + 1" :active="item._active")
           div(v-html="item.title")
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
-  .w-tabs__content-wrap(v-if="tabsItems.length" :class="contentClass")
+  .w-tabs__content-wrap(v-if="tabsItems.length")
     transition(:name="transitionName" :mode="transitionMode")
-      .w-tabs__content(v-if="activeTab" :key="activeTab._index")
+      .w-tabs__content(v-if="activeTab" :key="activeTab._index" :class="contentClass")
         slot(
           v-if="$scopedSlots[`item-content.${activeTab.id || activeTab._index + 1}`]"
           :name="`item-content.${activeTab.id || activeTab._index + 1}`"
