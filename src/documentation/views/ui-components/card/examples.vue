@@ -139,11 +139,78 @@ div
           &lt;w-button bg-color="success"&gt;I agree&lt;/w-button&gt;
         &lt;/template&gt;
       &lt;/w-card&gt;
+
+  title-link(h2) Card with image
+  p.
+    Providing a card main image is as simple as #[code image="your-image-source"].
+  title-link(h3) Standard use
+  example
+    w-card(:image="`${baseUrl}images/japanese-wave.png`")
+      | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+      | quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+      | odit dolor labore eveniet at vel sequi nostrum.
+      template(#actions)
+        .spacer
+        w-button Read more
+    template(#html).
+      &lt;w-card :image="`${baseUrl}images/japanese-wave.png`"&gt;
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+        quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+        odit dolor labore eveniet at vel sequi nostrum.
+
+        &lt;template #actions&gt;
+          &lt;div class="spacer"&gt;&lt;/div&gt;
+          &lt;w-button&gt;Read more&lt;/w-button&gt;
+        &lt;/template&gt;
+      &lt;/w-card&gt;
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue CLI, you can also use `process.env.BASE_URL`
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
+
+  title-link(h3) Content on top of the image
+  p.
+    It is possible to add some content on top of the image using the #[code image-content] slot.#[br]
+    Using the #[code image-props] prop, you can tailor the #[strong.code w-image] use to your needs,
+    like adding CSS classes to the content wrapper or change the default image ratio.
+  example
+    w-card(
+      :image="`${baseUrl}images/japanese-wave.png`"
+      :image-props="{ contentClass: 'align-start pa1', ratio: 1 / 4 }")
+      | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+      | quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+      | odit dolor labore eveniet at vel sequi nostrum.
+      template(#image-content)
+        .title1.pink Wave UI
+      template(#actions)
+        .spacer
+        w-button Read more
+    template(#html).
+      &lt;w-card :image="`${baseUrl}images/japanese-wave.png`"&gt;
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+        quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+        odit dolor labore eveniet at vel sequi nostrum.
+
+        &lt;template #actions&gt;
+          &lt;div class="spacer"&gt;&lt;/div&gt;
+          &lt;w-button&gt;Read more&lt;/w-button&gt;
+        &lt;/template&gt;
+      &lt;/w-card&gt;
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue CLI, you can also use process.env.BASE_URL
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
 </template>
 
 <script>
 export default {
-
+  data: () => ({
+    baseUrl: process.env.BASE_URL
+  })
 }
 </script>
 

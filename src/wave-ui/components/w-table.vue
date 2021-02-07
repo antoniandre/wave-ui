@@ -8,25 +8,50 @@
           :key="i"
           @click="header.sortable !== false && sortTable(header)"
           :class="headerClasses(header)")
-          span(v-if="header.label && header.align !== 'right'" v-html="header.label || ''")
           w-icon.w-table__header-sort(
-            v-if="header.sortable !== false"
+            v-if="header.sortable !== false && header.align === 'right'"
             :class="headerSortClasses(header)") wi-arrow-down
-          span(v-if="header.label && header.align === 'right'" v-html="header.label || ''")
+          template(v-if="header.label")
+            slot(
+              v-if="$scopedSlots['header-label']"
+              name="header-label"
+              :header="header"
+              :label="header.label"
+              :index="i + 1") {{ header.label || '' }}
+            span(v-else v-html="header.label || ''")
+          w-icon.w-table__header-sort(
+            v-if="header.sortable !== false && header.align !== 'right'"
+            :class="headerSortClasses(header)") wi-arrow-down
     tbody
       tr.w-table__progress-bar(v-if="loading")
         td(:colspan="headers.length")
           w-progress(tile)
           .w-table__loading-text
             slot(name="loading") Loading...
-      template(v-else-if="items.length")
-        tr(v-for="(item, i) in sortedItems" :key="i")
-          td.w-table__cell(
-            v-for="(header, j) in headers"
-            :key="j"
-            v-html="item[header.key] || ''"
-            :data-label="header.label"
-            :class="`text-${header.align || 'left'}`")
+      template(v-else-if="tableItems.length")
+        template(v-for="(item, i) in sortedItems")
+          tr.w-table__row(
+            :key="i"
+            @click="doSelectRow(item)"
+            :class="{ 'w-table__row--selected': selectedRow === item.uid, 'w-table__row--expanded': expandedRow === item.uid }")
+            template(v-for="(header, j) in headers")
+              td.w-table__cell(
+                v-if="$scopedSlots['item']"
+                :key="`${j}-1`"
+                :data-label="header.label"
+                :class="`text-${header.align || 'left'}`")
+                slot(name="item" :header="header" :item="item" :label="item[header.key] || ''" :index="i + 1")
+              td.w-table__cell(
+                v-else
+                :key="`${j}-2`"
+                :data-label="header.label"
+                :class="`text-${header.align || 'left'}`"
+                v-html="item[header.key] || ''")
+          w-transition-expand(y)
+            tr.w-table__row(v-if="expandedRow === item.uid")
+              td(:colspan="headers.length")
+                slot(name="expanded-row") expanded row
+
       tr.no-data(v-else)
         td.w-table__cell.text-center(:colspan="headers.length")
           slot(name="no-data") No data to show.
@@ -43,6 +68,8 @@ export default {
     loading: { type: Boolean },
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
+    selectRow: { type: Boolean },
+    expandRow: { type: Boolean },
     filter: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 }
   },
@@ -50,13 +77,21 @@ export default {
   emits: ['update:sort'],
 
   data: () => ({
-    activeSorting: []
+    activeSorting: [],
+    selectedRow: null,
+    expandedRow: null
   }),
 
   computed: {
+    tableItems () {
+      return this.items.map((item, i) => {
+        item.uid = i
+        return item
+      })
+    },
     filteredItems () {
-      if (typeof this.filter === 'function') return this.items.filter(this.filter)
-      return this.items
+      if (typeof this.filter === 'function') return this.tableItems.filter(this.filter)
+      return this.tableItems
     },
 
     sortedItems () {
@@ -129,6 +164,17 @@ export default {
       else this.activeSorting[0] = (alreadySortingThis ? '-' : '+') + header.key
 
       this.$emit('update:sort', this.activeSorting)
+    },
+
+    doSelectRow (item) {
+      if (this.expandRow) {
+        this.expandedRow = item.uid
+        this.$emit('row-expand', { item, expanded: true })
+      }
+      else if (this.selectRow) {
+        this.selectedRow = item.uid
+        this.$emit('row-select', { item })
+      }
     }
   },
 
@@ -219,7 +265,19 @@ export default {
   // ------------------------------------------------------
   tbody tr {border-top: 1px solid rgba(0, 0, 0, 0.06);}
   tbody tr:nth-child(odd):not(.no-data) {background-color: $table-tr-odd-color;}
-  tbody tr:hover:not(.no-data):not(&__progress-bar) {background-color: $table-tr-hover-color;}
+  tbody .w-table__row:hover:not(.no-data) {background-color: $table-tr-hover-color;}
+  &__row--selected td {position: relative;}
+  &__row--selected td:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--primary);
+    opacity: 0.2;
+    pointer-events: none;
+  }
 
   &__cell {padding: round($base-increment / 2) $base-increment;}
   &__header:first-child, &__cell:first-child {padding-left: 2 * $base-increment;}

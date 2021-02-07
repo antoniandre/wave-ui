@@ -39,7 +39,8 @@ component(
         :readonly="readonly || null"
         :aria-readonly="readonly ? 'true' : 'false'"
         :disabled="disabled || null"
-        :required="required || null")
+        :required="required || null"
+        v-bind="$attrs")
       template(v-if="labelPosition === 'inside' && showLabelInside")
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
           v-if="$slots.default"

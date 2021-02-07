@@ -99,3 +99,6 @@ export default class WaveUI {
 }
 
 WaveUI.version = '__VERSION__'
+// Automatic installation if Vue has been added to the global scope.
+// Not on Vue 3.
+// if (typeof window !== 'undefined' && window.Vue) window.Vue.use(WaveUI)
