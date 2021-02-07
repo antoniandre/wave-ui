@@ -402,8 +402,32 @@ div
         }
       })
 
-  //- title-link(h2) Expandable rows
-  //- example
+  title-link(h2) Expandable rows
+  example
+    | Coming soon.
+    //- w-table(:headers="table1.headers" :items="table1.items" expand-row)
+      template(#expanded-row) Super cool
+    //- template(#pug).
+      w-table(:headers="table1.headers" :items="table1.items" expand-row)
+        template(#expanded-row) Super cool
+    //- template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ],
+          selectedRow: null
+        }
+      })
 
   title-link(h2 slug="slots") Headers &amp; Cells customization via slots
   p You can customize the headers labels and/or each row cells.
@@ -508,7 +532,7 @@ div
       To stay lean and performant, the minimum JavaScript behavior is added to the #[code w-table]
       component.#[br]
       One thing that is not calculated on the mobile layout is the labels column width (default: 6.5em).#[br]
-      You can override it so set the width you want via:
+      You can override it to set the width you want via:
 
     ssh-pre(language="css" label="CSS").
       .w-table--mobile .w-table__cell:before {width: 8em;}
