@@ -194,8 +194,19 @@ div
       | v-model:
       code.ml1 {{ accordion5 }}
     template(#html).
-      &lt;w-button class="mr2" @click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;true&amp;#41;" bg-color="primary" sm&gt;Expand all&lt;/w-button&gt;
-      &lt;w-button @click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;false&amp;#41;" bg-color="primary" sm&gt;Collapse all&lt;/w-button&gt;
+      &lt;w-button 
+        class="mr2" 
+        @click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;true&amp;#41;" 
+        bg-color="primary" 
+        sm&gt;
+        Expand all
+      &lt;/w-button&gt;
+      &lt;w-button 
+        @click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;false&amp;#41;" 
+        bg-color="primary" 
+        sm&gt;
+        Collapse all
+      &lt;/w-button&gt;
 
       &lt;w-accordion class="mt4" v-model="accordion" :items="items" /&gt;
       &lt;div class="mt3"&gt;
@@ -231,11 +242,24 @@ div
     template(#html).
       &lt;w-accordion :items="items" content-class="pa0"&gt;
         &lt;template #item-title="{ item }"&gt;
-          &lt;w-icon lg :color="item.itemColor"&gt;{{ '\{\{ item.icon \}\}' }}&lt;/w-icon&gt;
-          &lt;div class="title3 ml2" :class="item.itemColor"&gt;{{ '\{\{ item.title \}\}' }}&lt;/div&gt;
+          &lt;w-icon 
+            lg 
+            :color="item.itemColor"&gt;
+            {{ '\{\{ item.icon \}\}' }}
+          &lt;/w-icon&gt;
+          &lt;div 
+            class="title3 ml2" 
+            :class="item.itemColor"&gt;
+            {{ '\{\{ item.title \}\}' }}
+          &lt;/div&gt;
         &lt;/template&gt;
         &lt;template #item-content="{ item }") /&gt;
-          &lt;w-alert class="my0 pb3" border-left tile :color="item.itemColor" v-html="item.content" /&gt;
+          &lt;w-alert 
+            class="my0 pb3" 
+            border-left 
+            tile 
+            :color="item.itemColor" 
+            v-html="item.content" /&gt;
         &lt;/template&gt;
     template(#js).
       data: () => ({
@@ -328,15 +352,25 @@ div
         &lt;template #item-content.item1&gt;
           &lt;p&gt;This content has a checklist.&lt;/p&gt;
           &lt;div class="title4 my3"&gt;To do&lt;/div&gt;
-          &lt;w-list checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]" /&gt;
+          &lt;w-list 
+            checklist 
+            color="primary" 
+            :items="[{ label: 'do this' }, { label: 'do that next' }]" /&gt;
         &lt;/template&gt;
 
         &lt;template #item-title.item2&gt;
-          &lt;w-icon class="mr1" md color="amber"&gt;mdi mdi-emoticon-excited-outline&lt;/w-icon&gt;
+          &lt;w-icon 
+            class="mr1" 
+            md 
+            color="amber"&gt;
+            mdi mdi-emoticon-excited-outline
+          &lt;/w-icon&gt;
           &lt;em&gt;This is the 2nd item&lt;/em&gt;
         &lt;/template&gt;
         &lt;template #item-content.item2="{ item }"&gt;
-          &lt;p&gt;The full content here is custom and completely distinct and independent from the other items.&lt;/p&gt;
+          &lt;p&gt;
+            The full content here is custom and completely distinct and independent from the other items.
+          &lt;/p&gt;
           &lt;p&gt;
             You also have access to the item's data if you need:
             &lt;code class="ml1"&gt;{{ '\{\{ item \}\}' }}&lt;/code&gt;
@@ -345,11 +379,19 @@ div
         
         &lt;template #item-title.item3=""&gt;
           &lt;strong&gt; This is the 3rd item&lt;/strong&gt;
-          &lt;w-icon class="ml1" md color="pink"&gt;mdi mdi-emoticon-kiss-outline&lt;/w-icon&gt;
+          &lt;w-icon 
+            class="ml1" 
+            md 
+            color="pink"&gt;
+            mdi mdi-emoticon-kiss-outline
+          &lt;/w-icon&gt;
         &lt;/template&gt;
         &lt;template #item-content.item3&gt;
           &lt;p&gt;Do you want to check the project on Github?&lt;/p&gt;
-          &lt;w-button class="mt2" bg-color="primary" route="https://github.com/antoniandre/wave-ui"&gt;
+          &lt;w-button 
+            class="mt2" 
+            bg-color="primary" 
+            route="https://github.com/antoniandre/wave-ui"&gt;
             Github
             &lt;w-icon class="ml2" sm&gt;mdi mdi-open-in-new&lt;/w-icon&gt;
           &lt;/w-button&gt;
@@ -375,17 +417,39 @@ div
     .title4.mt6 Icon on the right
     w-accordion.white--bg(:items="items" expand-icon-right)
     template(#html).
-      &lt;div class="title4 mb2"&gt;1 custom icon (only expand)&lt;/div&gt;
-      &lt;w-accordion :items="items" expand-icon="wi-chevron-down" /&gt;
+      &lt;div class="title4 mb2"&gt;
+        1 custom icon (only expand)
+      &lt;/div&gt;
+      &lt;w-accordion 
+        :items="items" 
+        expand-icon="wi-chevron-down"&gt;
+      &lt;/w-accordion&gt;
 
-      &lt;div class="title4 mt8 mb2"&gt;2 custom icons (expand &amp; collapse)&lt;/div&gt;
-      &lt;w-accordion :items="items" expand-icon="wi-plus" collapse-icon="wi-minus" /&gt;
+      &lt;div class="title4 mt8 mb2"&gt;
+        2 custom icons (expand &amp; collapse)
+      &lt;/div&gt;
+      &lt;w-accordion 
+        :items="items" 
+        expand-icon="wi-plus" 
+        collapse-icon="wi-minus"&gt;
+      &lt;/w-accordion&gt;
 
-      &lt;div class="title4 mt8 mb2"&gt;No icon&lt;/div&gt;
-      &lt;w-accordion :items="items" :expand-icon="false" title-class="py2" /&gt;
+      &lt;div class="title4 mt8 mb2"&gt;
+        No icon
+      &lt;/div&gt;
+      &lt;w-accordion 
+        :items="items" 
+        :expand-icon="false" 
+        title-class="py2"&gt;
+      &lt;/w-accordion&gt;
 
-      &lt;div class="title4 mt8 mb2"&gt;Icon on the right&lt;/div&gt;
-      &lt;w-accordion :items="items" expand-icon-right /&gt;
+      &lt;div class="title4 mt8 mb2"&gt;
+        Icon on the right
+      &lt;/div&gt;
+      &lt;w-accordion 
+        :items="items" 
+        expand-icon-right&gt;
+      &lt;/w-accordion&gt;
     template(#js).
       data: () => ({
         items: [
