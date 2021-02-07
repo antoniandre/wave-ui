@@ -28,25 +28,29 @@
           w-progress(tile)
           .w-table__loading-text
             slot(name="loading") Loading...
-      template(v-else-if="items.length")
-        tr.w-table__row(
-          v-for="(item, i) in sortedItems"
-          :key="i"
-          @click="doSelectRow(item, i)"
-          :class="{ 'w-table__row--selected': selectedRow === i }")
-          template(v-for="(header, j) in headers")
-            td.w-table__cell(
-              v-if="$scopedSlots['item']"
-              :key="`${j}-1`"
-              :data-label="header.label"
-              :class="`text-${header.align || 'left'}`")
-              slot(name="item" :header="header" :item="item" :label="item[header.key] || ''" :index="i + 1")
-            td.w-table__cell(
-              v-else
-              :key="`${j}-2`"
-              :data-label="header.label"
-              :class="`text-${header.align || 'left'}`"
-              v-html="item[header.key] || ''")
+      template(v-else-if="tableItems.length")
+        template(v-for="(item, i) in sortedItems")
+          tr.w-table__row(
+            :key="i"
+            @click="doSelectRow(item)"
+            :class="{ 'w-table__row--selected': selectedRow === item.uid, 'w-table__row--expanded': expandedRow === item.uid }")
+            template(v-for="(header, j) in headers")
+              td.w-table__cell(
+                v-if="$scopedSlots['item']"
+                :key="`${j}-1`"
+                :data-label="header.label"
+                :class="`text-${header.align || 'left'}`")
+                slot(name="item" :header="header" :item="item" :label="item[header.key] || ''" :index="i + 1")
+              td.w-table__cell(
+                v-else
+                :key="`${j}-2`"
+                :data-label="header.label"
+                :class="`text-${header.align || 'left'}`"
+                v-html="item[header.key] || ''")
+          w-transition-expand(y)
+            tr.w-table__row(v-if="expandedRow === item.uid")
+              td(:colspan="headers.length")
+                slot(name="expanded-row") expanded row
 
       tr.no-data(v-else)
         td.w-table__cell.text-center(:colspan="headers.length")
@@ -65,6 +69,7 @@ export default {
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
     selectRow: { type: Boolean },
+    expandRow: { type: Boolean },
     filter: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 }
   },
@@ -73,13 +78,20 @@ export default {
 
   data: () => ({
     activeSorting: [],
-    selectedRow: null
+    selectedRow: null,
+    expandedRow: null
   }),
 
   computed: {
+    tableItems () {
+      return this.items.map((item, i) => {
+        item.uid = i
+        return item
+      })
+    },
     filteredItems () {
-      if (typeof this.filter === 'function') return this.items.filter(this.filter)
-      return this.items
+      if (typeof this.filter === 'function') return this.tableItems.filter(this.filter)
+      return this.tableItems
     },
 
     sortedItems () {
@@ -154,9 +166,15 @@ export default {
       this.$emit('update:sort', this.activeSorting)
     },
 
-    doSelectRow (item, index) {
-      this.selectRow && (this.selectedRow = index)
-      this.$emit('row-select', { item, index })
+    doSelectRow (item) {
+      if (this.expandRow) {
+        this.expandedRow = item.uid
+        this.$emit('row-expand', { item, expanded: true })
+      }
+      else if (this.selectRow) {
+        this.selectedRow = item.uid
+        this.$emit('row-select', { item })
+      }
     }
   },
 
