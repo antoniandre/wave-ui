@@ -13,7 +13,7 @@
             :class="headerSortClasses(header)") wi-arrow-down
           template(v-if="header.label")
             slot(
-              v-if="$scopedSlots['header-label']"
+              v-if="$slots['header-label']"
               name="header-label"
               :header="header"
               :label="header.label"
@@ -29,14 +29,13 @@
           .w-table__loading-text
             slot(name="loading") Loading...
       template(v-else-if="tableItems.length")
-        template(v-for="(item, i) in sortedItems")
+        template(v-for="(item, i) in sortedItems" :key="i")
           tr.w-table__row(
-            :key="i"
             @click="doSelectRow(item)"
             :class="{ 'w-table__row--selected': selectedRow === item.uid, 'w-table__row--expanded': expandedRow === item.uid }")
             template(v-for="(header, j) in headers")
               td.w-table__cell(
-                v-if="$scopedSlots['item']"
+                v-if="$slots.item"
                 :key="`${j}-1`"
                 :data-label="header.label"
                 :class="`text-${header.align || 'left'}`")
@@ -74,7 +73,7 @@ export default {
     mobileBreakpoint: { type: Number, default: 0 }
   },
 
-  emits: ['update:sort'],
+  emits: ['update:sort', 'row-select'],
 
   data: () => ({
     activeSorting: [],
