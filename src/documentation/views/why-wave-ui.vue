@@ -112,7 +112,7 @@ export default {
   align-items: center;
   display: flex;
 
-  &-label {align-items: center;}
+  &-label {align-items: center;display: block;}
   &-bullet {top: auto;}
 }
 </style>

@@ -2,8 +2,9 @@
 main
   title-link.mt4(h1) Grid system
 
+  .title3 The grid system (using flexbox) is 12-cell based.
   p.
-    The grid system is 12-cell based. Its purpose is to divide the available width (in percentage)
+    Its purpose is to divide the available width (in percentage)
     of a container in 12 cells to easily let you create the design that you want.#[br]
     You can then assign this created layout to a particular breakpoint.
 
@@ -11,6 +12,9 @@ main
   p.
     Let's start with a basic example. The following splitting is applied on the #[span.code xs]
     breakpoint and will thus be applied on all the breakpoints.
+  alert(tip).
+    The grid cells must be in a flex context to display inline, you can wrap them in a
+    #[strong.code w-flex] component or #[code .w-flex] CSS class.
 
   example
     w-flex.text-center(wrap)

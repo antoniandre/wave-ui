@@ -34,7 +34,7 @@ div
       w-table(:headers="table.headers" :items="[]")
       br
       w-table(:headers="table.headers" :items="[]")
-        template(#no-data) 👌 There is no data! 👌
+        template(#no-data="") 👌 There is no data! 👌
     template(#js).
       data: () => ({
         table: {
@@ -358,18 +358,139 @@ div
         }
       })
 
-  //- title-link(h2) Expandable rows
-  //- example
+  title-link(h2) Rows selection
+  p Click a row to see it highlighted and get information about the selected item.
+  p.
+    By default, the selection will use the #[code primary] color and apply an opacity of #[code 0.2].
+    If this is not what you want, you can override it via CSS (#[code .w-table__row--selected td:before]).
+  example
+    w-table(
+      :headers="table1.headers"
+      :items="table1.items"
+      select-row
+      @row-select="selectedRow = $event")
 
-  //- title-link(h2) Change layout on mobile
-  //- example
+    p.mt4
+      strong Selected row:
+      span.ml2 {{ selectedRow || '-' }}
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        select-row
+        @row-select="table.selectedRow = $event")
+
+      p.mt4
+        strong Selected row:
+        span.ml2 {{ "\{\{ table.selectedRow || '-' \}\}" }}
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ],
+          selectedRow: null
+        }
+      })
+
+  title-link(h2) Expandable rows
+  example
+    | Coming soon.
+    //- w-table(:headers="table1.headers" :items="table1.items" expand-row)
+      template(#expanded-row) Super cool
+    //- template(#pug).
+      w-table(:headers="table1.headers" :items="table1.items" expand-row)
+        template(#expanded-row) Super cool
+    //- template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ],
+          selectedRow: null
+        }
+      })
 
   title-link(h2 slug="slots") Headers &amp; Cells customization via slots
-  example
-    p Coming soon
+  p You can customize the headers labels and/or each row cells.
 
-  //- title-link(h2) Rows selection
-  //- example
+  title-link(h3) Headers
+  p In this example, only the headers are customized via the #[code header-label] slot.
+  example
+    w-table(:headers="table1.headers" :items="table1.items")
+      template(#header-label="{ label, index }") {{ index }}: {{ label }} 👌
+    template(#pug).
+      w-table(:headers="table1.headers" :items="table1.items")
+        template(#header-label="{ label, index }") {{ '\{\{ index \}\}: \{\{ label \}\}' }} 👌
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ]
+        }
+      })
+
+  title-link(h3) Items
+  p.
+    In this example, only the items cells are customized via the #[code item] slot
+    (and the headers are hidden).
+  example
+    w-table(:headers="table1.headers" no-headers :items="table1.items")
+      template(#item="{ item, label, header, index }")
+        small(v-if="header.key === 'id'") \#{{ index }}
+        template(v-else)
+          small.grey.mr2 {{ header.label }}:
+          span {{ label }}
+    template(#pug).
+      w-table(:headers="table1.headers" no-headers :items="table1.items")
+        template(#item="{ item, label, header, index }")
+          small.grey.mr2 {{ '\{\{ header.label \}\}' }}:
+          span {{ '\{\{ label \}\}' }}
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ]
+        }
+      })
 
   //- title-link(h2) Editable tables
   //- example
@@ -378,7 +499,7 @@ div
   p.
     In addition to the full responsiveness, the #[code w-table] can be presented in a mobile friendly layout,
     if the data it contains would not fit on mobile.#[br]
-    You can decide to trigger the mobile layout on each table individually via the #[code mobile-breakpoint]
+    You can decide to trigger the mobile layout or not on each table, individually, via the #[code mobile-breakpoint]
     parameter.#[br]
     It can be very useful when multiple tables of data are presented, with more or less content, which
     should be displayed differently.#[br]#[br]
@@ -405,6 +526,16 @@ div
           ]
         }
       })
+
+  alert(tip)
+    p.
+      To stay lean and performant, the minimum JavaScript behavior is added to the #[code w-table]
+      component.#[br]
+      One thing that is not calculated on the mobile layout is the labels column width (default: 6.5em).#[br]
+      You can override it to set the width you want via:
+
+    ssh-pre(language="css" label="CSS").
+      .w-table--mobile .w-table__cell:before {width: 8em;}
 </template>
 
 <script>
@@ -459,7 +590,8 @@ export default {
         item => item.id >= 10
       ],
       activeFilter: 0
-    }
+    },
+    selectedRow: null
   }),
 
   methods: {

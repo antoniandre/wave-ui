@@ -3,13 +3,15 @@ div
   p.
     This tag is required in your app for Wave UI proper functioning.#[br]
     You should place it #[strong at the root of your app].
+  .caption.grey-light1.
+    There should only be one &lt;w-app&gt; in your whole app.
 
   ssh-pre(language="html-vue").
     &lt;w-app&gt;
       &lt;!-- All your app's content goes here. --&gt;
     &lt;/w-app&gt;
 
-  alert.mb2(info).
+  alert.mt8.mb2(info).
     By default, the #[span.code w-app] wrapper will have a flex layout with a column direction,
     and a height of 100% of the full HTML document.#[br]
   p.
@@ -60,7 +62,7 @@ div
       #[w-badge(inline bg-color="orange" color="white" :model-value="2")],
       #[w-badge(inline bg-color="orange" color="white" :model-value="3")],
       you always want the footer to stick to the bottom of the screen.#[br]
-      But if possible without covering the content (so not #[code position: absolute]).#[br]
+      But if possible without covering the main content (so not #[code position: absolute]).#[br]
       Also you don't know the exact height of the footer since it may change if the screen is too
       small and the content flows onto multiple lines.#[br]
       For all these reasons, the best layout is to have a #[code display: flex] with a

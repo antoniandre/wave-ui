@@ -73,6 +73,11 @@ export default {
           `.w-app .${color}{color:${config.colors[color]}}`
       }
 
+      // Add the primary color to the CSS variables for reuse in components.
+      const cssVariables = []
+      cssVariables.push(`--primary: ${config.colors.primary}`)
+      styles += `:root {${cssVariables.join(';')}}`
+
       // Can't add dynamic breakpoints as CSS variables:
       // CSS variables are not supported in media queries yet.
       // https://www.w3.org/TR/css-variables-1/#using-variables

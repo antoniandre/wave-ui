@@ -21,19 +21,24 @@ main
               w-icon.white(xl) wi-plus
         | Add yourself!
 
-    p.mt12
+    p.mt10
       | If you would like to support Wave UI, you can
       a.mx1(href="https://github.com/sponsors/antoniandre" target="_blank") become a sponsor
       | or
       a.ml1(href="https://www.paypal.me/antoniandre1" target="_blank") make a donation
       | . Thank you! 🙏🙏
 
+    h2.gold Gold Sponsors
+    .gold-sponsors
+      a(href="https://divriots.com/" target="_blank")
+        strong &lt;div&gt;riots
+
 </template>
 
 <script>
 import axios from 'axios'
 
-const githubBackers = ['crbast', 'consuman', 'helenetran', 'antoniandre']
+const githubBackers = ['divriots', 'crbast', 'consuman', 'helenetran', 'antoniandre']
 
 export default {
   data: () => ({
@@ -56,6 +61,19 @@ export default {
 </script>
 
 <style lang="scss">
+.main--backers {
+  h2 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
+  }
+
+  h2.gold {
+    margin-top: 3.2em;
+    margin-bottom: 1.4em;
+    color: #ccad15;
+  }
+}
+
 .backers {
   .avatar, .plus {
     display: inline-flex;
@@ -67,5 +85,12 @@ export default {
     background-color: #ddd;
     overflow: hidden;
   }
+}
+
+.gold-sponsors {
+  text-align: center;
+
+  a {color: #000;}
+  strong {font-size: 2.5em;font-weight: 400;}
 }
 </style>

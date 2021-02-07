@@ -22,6 +22,26 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v1.19.0
+      p Add the row selection feature to the w-table.
+
+    li.minor
+      strong.version v1.18.0
+      p Add an image option to the #[strong.code w-card] component.
+
+    li.minor
+      strong.version v1.17.0
+      ul
+        li Allow adding content on top of #[strong.code w-image].
+        li Fix #[strong.code w-image] #[code tag] option not accepting a #[code div] tag.
+
+    li.minor
+      strong.version v1.16.0
+      ul
+        li Support Nuxt.
+        li Add more slots in #[strong.code w-table] component.
+
     li.patch
       strong.version v1.15.0
       p #[strong.code w-table] component:
