@@ -12,7 +12,7 @@ div
       | v-model:
       code.ml1 {{ accordion1 }}
     template(#html).
-      &lt;w-accordion v-model="accordion" :items="items"/&gt;
+      &lt;w-accordion v-model="accordion" :items="items" /&gt;
       &lt;div class="mt3"&gt;
         v-model:
         &lt;code class="ml1"&gt;{{ '\{\{ accordion \}\}' }}&lt;/code&gt;
@@ -46,7 +46,7 @@ div
       | v-model:
       code.ml1 {{ accordion2 }}
     template(#html).
-      &lt;w-accordion v-model="accordion" :items="items"/&gt;
+      &lt;w-accordion v-model="accordion" :items="items" /&gt;
       &lt;div class="mt3"&gt;
         v-model:
         &lt;code class="ml1"&gt;{{ '\{\{ accordion \}\}' }}&lt;/code&gt;
@@ -77,7 +77,7 @@ div
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(v-model="accordion3" :items="itemsDisabled")
     template(#html).
-      &lt;w-accordion v-model="accordion" :items="items"/&gt;
+      &lt;w-accordion v-model="accordion" :items="items" /&gt;
     template(#js).
       data: () => ({
         items: [
@@ -92,7 +92,7 @@ div
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items" shadow)
     template(#html).
-      &lt;w-accordion :items="items" shadow/&gt;
+      &lt;w-accordion :items="items" shadow /&gt;
     template(#js).
       data: () => ({
         items: [
@@ -120,8 +120,8 @@ div
     w-accordion.white--bg(:items="items" color="amber-dark1")
     w-accordion.mt6(:items="items" bg-color="yellow-light5")
     template(#html).
-      &lt;w-accordion :items="items" color="amber-dark1"/&gt;
-      &lt;w-accordion class="mt6" :items="items" bg-color="yellow-light5"/&gt;
+      &lt;w-accordion :items="items" color="amber-dark1" /&gt;
+      &lt;w-accordion class="mt6" :items="items" bg-color="yellow-light5" /&gt;
     template(#js).
       data: () => ({
         items: [
@@ -144,7 +144,7 @@ div
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items2")
     template(#html).
-      &lt;w-accordion :items="items"/&gt;
+      &lt;w-accordion :items="items" /&gt;
     template(#js).
       data: () => ({
         items: [
@@ -161,7 +161,7 @@ div
       | v-model:
       code.ml1 {{ accordion4 }}
     template(#html).
-      &lt;w-accordion v-model="accordion" :items="items" expand-single/&gt;
+      &lt;w-accordion v-model="accordion" :items="items" expand-single /&gt;
       &lt;div class="mt3"&gt;
         v-model:
         &lt;code class="ml1"&gt;{{ '\{\{ accordion \}\}' }}&lt;/code&gt;
@@ -197,7 +197,7 @@ div
       &lt;w-button class="mr2" @click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;true&amp;#41;" bg-color="primary" sm&gt;Expand all&lt;/w-button&gt;
       &lt;w-button @click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;false&amp;#41;" bg-color="primary" sm&gt;Collapse all&lt;/w-button&gt;
 
-      &lt;w-accordion class="mt4" v-model="accordion" :items="items"/&gt;
+      &lt;w-accordion class="mt4" v-model="accordion" :items="items" /&gt;
       &lt;div class="mt3"&gt;
         v-model:
         &lt;code class="ml1"&gt;{{ '\{\{ accordion \}\}' }}&lt;/code&gt;
@@ -234,8 +234,8 @@ div
           &lt;w-icon lg :color="item.itemColor"&gt;{{ '\{\{ item.icon \}\}' }}&lt;/w-icon&gt;
           &lt;div class="title3 ml2" :class="item.itemColor"&gt;{{ '\{\{ item.title \}\}' }}&lt;/div&gt;
         &lt;/template&gt;
-        &lt;template #item-content="{ item }")/&gt;
-          &lt;w-alert class="my0 pb3" border-left tile :color="item.itemColor" v-html="item.content"/&gt;
+        &lt;template #item-content="{ item }") /&gt;
+          &lt;w-alert class="my0 pb3" border-left tile :color="item.itemColor" v-html="item.content" /&gt;
         &lt;/template&gt;
     template(#js).
       data: () => ({
@@ -328,7 +328,7 @@ div
         &lt;template #item-content.item1&gt;
           &lt;p&gt;This content has a checklist.&lt;/p&gt;
           &lt;div class="title4 my3"&gt;To do&lt;/div&gt;
-          &lt;w-list checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]"/&gt;
+          &lt;w-list checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]" /&gt;
         &lt;/template&gt;
 
         &lt;template #item-title.item2&gt;
@@ -376,16 +376,16 @@ div
     w-accordion.white--bg(:items="items" expand-icon-right)
     template(#html).
       &lt;div class="title4 mb2"&gt;1 custom icon (only expand)&lt;/div&gt;
-      &lt;w-accordion :items="items" expand-icon="wi-chevron-down"/&gt;
+      &lt;w-accordion :items="items" expand-icon="wi-chevron-down" /&gt;
 
       &lt;div class="title4 mt8 mb2"&gt;2 custom icons (expand &amp; collapse)&lt;/div&gt;
-      &lt;w-accordion :items="items" expand-icon="wi-plus" collapse-icon="wi-minus"/&gt;
+      &lt;w-accordion :items="items" expand-icon="wi-plus" collapse-icon="wi-minus" /&gt;
 
       &lt;div class="title4 mt8 mb2"&gt;No icon&lt;/div&gt;
-      &lt;w-accordion :items="items" :expand-icon="false" title-class="py2"/&gt;
+      &lt;w-accordion :items="items" :expand-icon="false" title-class="py2" /&gt;
 
       &lt;div class="title4 mt8 mb2"&gt;Icon on the right&lt;/div&gt;
-      &lt;w-accordion :items="items" expand-icon-right/&gt;
+      &lt;w-accordion :items="items" expand-icon-right /&gt;
     template(#js).
       data: () => ({
         items: [
