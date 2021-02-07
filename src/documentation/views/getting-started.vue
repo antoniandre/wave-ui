@@ -84,7 +84,18 @@ main
       p.mt4
         em.grey
           | Nuxt doesn't support Vue 3 yet.
-          a.ml1(href="https://github.com/nuxt/nuxt.js/issues/5708" target="_blank") Issue #5708.
+          a.ml1(href="https://github.com/nuxt/nuxt.js/issues/5708" target="_blank")
+            | Issue #5708
+            w-icon.ml1 mdi mdi-open-in-new
+          | .
+
+      p.mt4
+        w-icon.mr2 wi-chevron-right
+        strong
+          | Nuxt + Wave UI demo repo:
+          a.ml1(href="https://github.com/antoniandre/nuxt-waveui" target="_blank")
+            | github.com/antoniandre/nuxt-waveui
+            w-icon.ml1 mdi mdi-open-in-new
 
       ol
         li.mt8
