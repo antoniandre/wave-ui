@@ -40,7 +40,7 @@ component(
         :aria-readonly="readonly ? 'true' : 'false'"
         :disabled="disabled || null"
         :required="required || null"
-        v-bind="$attrs")
+        v-bind="attrs")
       template(v-if="labelPosition === 'inside' && showLabelInside")
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
           v-if="$slots.default"
@@ -60,9 +60,14 @@ component(
 
     //- Right label.
     template(v-if="labelPosition === 'right'")
-      label.w-input__label.w-input__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-input--${_.uid}`")
+      label.w-input__label.w-input__label--right.w-form-el-shakable(
+        v-if="$slots.default"
+        :for="`w-input--${_.uid}`")
         slot
-      label.w-input__label.w-input__label--right.w-form-el-shakable(v-else-if="label" :for="`w-input--${_.uid}`" v-html="label")
+      label.w-input__label.w-input__label--right.w-form-el-shakable(
+        v-else-if="label"
+        :for="`w-input--${_.uid}`"
+        v-html="label")
 </template>
 
 <script>
@@ -119,6 +124,10 @@ export default {
       // eslint-disable-next-line no-unused-vars
       const { input, focus, blur, ...listeners } = this.$attrs
       return listeners
+    },
+    attrs () {
+      const { class: Class, ...htmlAttrs } = this.$attrs
+      return htmlAttrs
     },
     hasValue () {
       return this.inputValue || ['date', 'time'].includes(this.type) || (this.type === 'number' && this.inputNumberError)
