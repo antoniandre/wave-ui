@@ -26,7 +26,7 @@ main
       strong.version v1.20.0
       ul
         li
-          strong Add the #[em à la carte] feature!
+          strong Add the #[em à la carte] feature.
         li #[strong.code w-tabs]: move the custom #[code content-class] CSS class to the tab item content element.
 
     li.minor
