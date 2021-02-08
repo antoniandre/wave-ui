@@ -28,7 +28,8 @@
     "lint": "vue-cli-service lint"
   },
   "sideEffects": [
-    "*.scss"
+    "*.scss",
+    "*.css"
   ],
   "dependencies": {},
   "devDependencies": {
