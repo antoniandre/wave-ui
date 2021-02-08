@@ -27,10 +27,6 @@
     "build-bundle": "vue-cli-service build --target lib --name wave-ui ./src/wave-ui/index.js --dest ./dist && rm ./dist/demo.html",
     "lint": "vue-cli-service lint"
   },
-  "sideEffects": [
-    "*.scss",
-    "*.css"
-  ],
   "dependencies": {},
   "devDependencies": {
     "@mdi/font": "^5.8.55",
