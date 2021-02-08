@@ -22,7 +22,7 @@ main
 
     //- Custom install.
     template(#item-title.2)
-      title-link.grey-light2.ma0(h2 slug="a-la-carte") À la carte (tree shaking)
+      title-link.grey-light2.ma0(h2 slug="a-la-carte") À la carte (tree shaking) - Coming soon
     template(#item-content.2)
       custom-install
 
