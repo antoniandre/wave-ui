@@ -23,8 +23,15 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.20.0
+      ul
+        li
+          strong Add the #[em à la carte] feature!
+        li #[strong.code w-tabs]: move the custom #[code content-class] CSS class to the tab item content element.
+
+    li.minor
       strong.version v1.19.0
-      p Add the row selection feature to the w-table.
+      p Add the row selection feature to the #[strong.code w-table].
 
     li.minor
       strong.version v1.18.0
