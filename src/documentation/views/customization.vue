@@ -34,22 +34,22 @@ main
   p In main.js, replace the 2 Wave UI imports with:
   ssh-pre.mt5(language="js" label="main.js").
     import WaveUI from 'wave-ui/src/wave-ui'
-    import 'wave-ui/src/wave-ui/scss/index.scss'
 
   .title4.mt6 2. Create an SCSS file &amp; import it globally
   ul
     li.
-      In your project #[span.code src] folder, create a #[code _variables.scss], usually in an #[span.code scss]
-      folder.
+      In your project #[span.code src] folder, create a #[code _variables.scss] (usually in an #[span.code scss]
+      folder), and import Wave UI's variables: #[code @import 'wave-ui/src/wave-ui/scss/_variables';].
 
     li.mt2
-      | Import this SCSS variables file globally from Vue config and re-serve the app.
+      | Import your SCSS variables file globally from Vue config and re-serve the app.
       ssh-pre.mt5(language="js" label="vue.config.js").
         module.exports = {
           transpileDependencies: ['wave-ui'], // ! \\
           css: {
             loaderOptions: {
-              sass: { prependData: '@import "@/scss/_variables.scss";' }
+              // `additionalData` was called `prependData` prior sass-loader 9.
+              sass: { additionalData: '@import "@/scss/_variables.scss";' }
             }
           }
         }
