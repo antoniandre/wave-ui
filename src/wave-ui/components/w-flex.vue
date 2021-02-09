@@ -59,6 +59,7 @@ export default {
   display: flex;
   flex: 1 1 auto;
 
+  &.row {flex-direction: row;}
   &.column {flex-direction: column;}
   &.wrap {flex-wrap: wrap;}
   &.basis-zero > * {flex-basis: 0;flex-grow: 1;}
