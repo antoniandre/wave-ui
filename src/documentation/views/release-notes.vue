@@ -22,6 +22,12 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v1.20.1
+      ul
+        li Add a #[code row] class on #[strong.code w-flex] to reset the flex direction to row.
+        li Improve pushable-content #[strong.code w-drawer] default styles.
+
     li.minor
       strong.version v1.20.0
       ul
