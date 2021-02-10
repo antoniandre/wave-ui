@@ -126,6 +126,7 @@ export default {
       return listeners
     },
     attrs () {
+      // eslint-disable-next-line no-unused-vars
       const { class: Class, ...htmlAttrs } = this.$attrs
       return htmlAttrs
     },
