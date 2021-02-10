@@ -1,30 +1,31 @@
 <template lang="pug">
-.nav-menu
-  w-button.close(
-    v-if="$waveui.breakpoint.xs"
-    @click="$emit('update:drawerOpen', false)"
-    sm
-    outline
-    round
-    color="primary"
-    icon="wi-cross")
+.nav-menu-wrap
+  .nav-menu
+    w-button.close(
+      v-if="$waveui.breakpoint.xs"
+      @click="$emit('update:drawerOpen', false)"
+      sm
+      outline
+      round
+      color="primary"
+      icon="wi-cross")
 
-  .title2.mt0 Knowledge base
-  w-list(:items="sections" nav color="primary" @item-select="onItemClick")
+    .title2.mt0 Knowledge base
+    w-list(:items="sections" nav color="primary" @item-select="onItemClick")
 
-  .title2.mt4 UI components
-  w-list(:items="components" nav color="primary" @item-select="onItemClick")
-    template(#item="{ item }")
-      span(v-html="item.label")
-      w-tag.ml2.text-upper(v-if="item.disabled" round xs color="red" outline) Coming soon
-      w-tag.ml2.text-upper(v-if="item.inProgress" round xs color="orange" outline) In progress
-  .title3.mt4 External UI components
-  p By the same author
-  w-list(:items="externalComponents" nav color="primary" @item-select="onItemClick")
+    .title2.mt4 UI components
+    w-list(:items="components" nav color="primary" @item-select="onItemClick")
+      template(#item="{ item }")
+        span(v-html="item.label")
+        w-tag.ml2.text-upper(v-if="item.disabled" round xs color="red" outline) Coming soon
+        w-tag.ml2.text-upper(v-if="item.inProgress" round xs color="orange" outline) In progress
+    .title3.mt4 External UI components
+    p By the same author
+    w-list(:items="externalComponents" nav color="primary" @item-select="onItemClick")
 
-  router-link.mt3.d-iblock(v-if="$waveui.breakpoint.xs" to="/release-notes" @click="onItemClick")
-    w-icon.mr2 mdi mdi-update
-    | Release notes
+    router-link.mt3.d-iblock(v-if="$waveui.breakpoint.xs" to="/release-notes" @click="onItemClick")
+      w-icon.mr2 mdi mdi-update
+      | Release notes
 </template>
 
 <script>
@@ -120,11 +121,15 @@ export default {
 </script>
 
 <style lang="scss">
-div.nav-menu {
+.nav-menu-wrap {
   width: 100%;
   min-width: 180px;
   max-width: 260px;
   border-right: 1px solid #ddd;
+}
+
+div.nav-menu {
+  height: 100vh;
   overflow: auto;
 
   .w-list__item-label {
@@ -151,26 +156,21 @@ div.nav-menu {
   .w-tag {padding: 2px 4px 1px;}
 }
 
-.content-wrap > .nav-menu {
-  position: absolute;
-  left: 16px;
-  top: 16px;
-  bottom: 16px;
-  padding-top: 24px;
-
-  &--fixed {
-    position: fixed;
-    top: 30px;
-    bottom: 0;
-    padding-bottom: 24px;
-  }
+// Desktop left-side menu.
+.content-wrap .nav-menu-wrap {padding-top: 24px;margin-right: 32px;}
+.content-wrap .nav-menu {
+  position: sticky;
+  top: 60px;
 }
 
-.nav-drawer .nav-menu {
+// Mobile right-side menu.
+.nav-drawer .nav-menu-wrap {
   max-width: unset;
   padding: 3em 0 16px;
   margin-left: 12px;
   border-right: none;
+
+  .nav-menu {height: 100%;}
 
   .close {
     position: absolute;
@@ -181,6 +181,6 @@ div.nav-menu {
 }
 
 @media screen and (max-width: 800px) {
-  div.nav-menu {max-width: 220px;}
+  .nav-menu-wrap {max-width: 220px;}
 }
 </style>
