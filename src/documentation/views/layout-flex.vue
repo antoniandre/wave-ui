@@ -8,6 +8,9 @@ main
     easily control with the following classes or attributes on the component.
   ul.mt4
     li
+      code.mr2 .row
+      | By default. Displays in row (#[span.code flex-direction: row]).
+    li
       code.mr2 .column
       | Displays in column (#[span.code flex-direction: column]).
     li.mt1

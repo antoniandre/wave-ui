@@ -185,6 +185,9 @@ export default {
     position: relative;
     overflow: hidden;
     height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 
     .w-overlay {
       position: absolute;
@@ -201,6 +204,7 @@ export default {
 
   &__track {
     display: flex;
+    flex: 1;
     height: 100%;
     @include default-transition;
   }
