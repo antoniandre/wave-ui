@@ -28,7 +28,7 @@ export default {
 
   props: {
     value: { default: true },
-    width: { type: Number, default: 0 },
+    width: { type: [Number, String], default: 0 },
     fullscreen: { type: Boolean },
     persistent: { type: Boolean },
     persistentNoAnimation: { type: Boolean },
@@ -51,6 +51,11 @@ export default {
   },
 
   computed: {
+    maxWidth () {
+      let width = this.width
+      if (width && parseInt(width) == width) width += 'px'
+      return width
+    },
     classes () {
       return {
         'w-dialog--fullscreen': this.fullscreen
@@ -58,7 +63,7 @@ export default {
     },
     contentStyles () {
       return {
-        maxWidth: !this.fullscreen && this.width ? `${this.width}px` : null
+        maxWidth: !this.fullscreen && this.maxWidth ? this.maxWidth : null
       }
     }
   },
