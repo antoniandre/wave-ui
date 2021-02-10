@@ -23,6 +23,11 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.20.6
+      ul
+        li Fix #[strong.code w-button] external links.
+
+    li.patch
       strong.version v1.20.5
       ul
         li Add a #[code row] class on #[strong.code w-flex] to reset the flex direction to row.
