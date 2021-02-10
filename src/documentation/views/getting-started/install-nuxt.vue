@@ -56,10 +56,10 @@ div
     | With this setup, you can override the Wave UI SCSS variables.
 
   p.mt6 Also install these dev dependencies:
-  ssh-pre.mb1(language="shell") npm i -D pug pug-plain-loader node-sass sass-loader
-
+  ssh-pre.mb1(language="shell") npm i -D pug pug-plain-loader node-sass sass-loader@10
   small.text-italic.grey.
     The dev dependencies are only needed for building the project. They will not ship to production.
+  p.mt3 Notes: #[span.code sass-loader 11] only works with Webpack 5.
 
   p.mt6 Then update the #[span.code buildModules] &amp; #[span.code build] blocks in #[span.code nuxt.config.js]:
   ssh-pre(language="js").

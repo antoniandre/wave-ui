@@ -8,9 +8,10 @@ div
     li.mt8
       .title4 Install the dependencies &amp; devDependencies:
       ssh-pre(language="shell") npm i wave-ui
-      ssh-pre.mb2(language="shell") npm i -D pug pug-plain-loader node-sass sass-loader
+      ssh-pre.mb2(language="shell") npm i -D pug pug-plain-loader node-sass sass-loader@10
       small.text-italic.grey.
         The dev dependencies are only needed for building the project. They will not ship to production.
+      p.mt3 Notes: #[span.code sass-loader 11] only works with Webpack 5.
 
     li.mt8
       .title4 Create a #[span.code scss/_variables.scss] file
