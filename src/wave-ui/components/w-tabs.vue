@@ -245,7 +245,7 @@ export default {
   &__bar {
     position: relative;
     display: flex;
-    align-items: center;
+    // align-items: center;
     overflow-x: auto;
 
     .w-tabs--card &:after {
