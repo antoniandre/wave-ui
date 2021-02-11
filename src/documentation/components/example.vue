@@ -99,7 +99,9 @@ export default {
     externalJs: { type: String },
     externalCss: { type: String },
     fullJs: { type: Boolean },
-    reactive: { type: Boolean }
+    reactive: { type: Boolean },
+    // An array of languages (html, pug, css, scss, js) to keep a blank Codepen template on.
+    blankCodepen: { type: Array }
   },
   data: () => ({
     showSource: false,
@@ -134,21 +136,34 @@ export default {
         scss: this.$slots.scss && this.$slots.scss[0].text || ''
       }
       let html = ''
+      let css = ''
+      let js = ''
+      const blanks = this.blankCodepen || []
 
+      // Pug & HTML.
       if (slots.pug) {
-        html = 'w-app#app(block)\n  ' +
-               slots.pug.replace(/\n$/, '').replace(/\n/g, '\n  ')
+        if (blanks.includes('pug')) html = slots.pug.replace(/\n+$/, '')
+        else html = 'w-app#app(block)\n  ' + slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n  ')
       }
       else {
-        html = '<w-app id="app" block>\n  ' +
-               slots.html.replace(/\n$/, '').replace(/\n/g, '\n  ') +
-               '\n</w-app>\n'
+        if (blanks.includes('html')) html = slots.html.replace(/\n+$/, '')
+        else {
+          html = '<w-app id="app" block>\n  ' +
+                 slots.html.replace(/\n+$/, '').replace(/\n/g, '\n  ') +
+                 '\n</w-app>\n'
+        }
       }
-      const css = '.w-app {font: 14px sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
-      const js = this.fullJs ? slots.js : ('new Vue({' +
-                 '\n  waveui: new WaveUI(),\n  ' +
-                 slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') +
-                 '\n}).$mount(\'#app\')')
+
+      // CSS / SCSS.
+      if (blanks.includes('css') || blanks.includes('scss')) css = slots.css || slots.scss
+      else css = '.w-app {font: 14px sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
+
+      // JS.
+      if (blanks.includes('js')) js = slots.js
+      else js = 'new Vue({' +
+                '\n  waveui: new WaveUI()' + (slots.js ? ',\n  ' : '') +
+                slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') +
+                '\n}).$mount(\'#app\')'
 
       const data = {
         title: 'Wave UI Example Pen',
