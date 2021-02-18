@@ -17,8 +17,13 @@
           :item="cleanTab(item)"
           :index="i + 1"
           :active="item._active")
-        slot(v-else name="item-title" :item="cleanTab(item)" :index="i + 1" :active="item._active")
-          div(v-html="item.title")
+        slot(
+          v-else
+          name="item-title"
+          :item="cleanTab(item)"
+          :index="i + 1"
+          :active="item._active")
+          div(v-html="item[itemTitleKey]")
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
   .w-tabs__content-wrap(v-if="tabsItems.length")
     transition(:name="transitionName" :mode="transitionMode")
@@ -30,11 +35,12 @@
           :index="activeTab._index + 1"
           :active="activeTab._active")
         slot(
-          v-else name="item-content"
+          v-else
+          name="item-content"
           :item="cleanTab(activeTab)"
           :index="activeTab._index + 1"
           :active="activeTab._active")
-          div(v-html="activeTab.content")
+          div(v-html="activeTab[itemContentKey]")
 </template>
 
 <script>
@@ -48,6 +54,8 @@ export default {
     color: { type: String },
     bgColor: { type: String },
     items: { type: [Array, Number] },
+    itemTitleKey: { type: String, default: 'title' },
+    itemContentKey: { type: String, default: 'content' },
     titleClass: { type: String },
     activeClass: { type: String, default: 'primary' },
     noSlider: { type: Boolean },
@@ -189,8 +197,12 @@ export default {
 
     cleanTab (tab) {
       // eslint-disable-next-line no-unused-vars
-      const { _index, _expanded, _disabled, ...Tab } = tab
-      return Tab
+      delete tab._index
+      delete tab._active
+      delete tab._disabled
+      // const { _index, _active, _disabled, ...Tab } = tab
+      // return Tab
+      return tab
     }
   },
 
