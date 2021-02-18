@@ -23,6 +23,11 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.20.7
+      ul
+        li Add #[code item-title-key] &amp; #[code item-content-key] options on #[strong.code w-tabs] component and remove internal #[code _active] prop.
+
+    li.patch
       strong.version v1.20.6
       ul
         li Fix #[strong.code w-button] external links.
