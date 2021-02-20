@@ -45,8 +45,7 @@ component(
           :value="$scopedSlots.selection ? '' : selectionString"
           @focus="!disabled && !readonly && onFocus($event)"
           @blur="onBlur"
-          @keydown.escape="!disabled && !readonly && closeMenu()"
-          @keydown.space.prevent="!disabled && !readonly && openMenu()"
+          @keydown="!disabled && !readonly && onKeydown($event)"
           :id="`w-select--${_uid}`"
           :placeholder="(!$scopedSlots.selection && placeholder) || null"
           :disabled="disabled || null"
@@ -225,6 +224,35 @@ export default {
     onBlur (e) {
       this.isFocused = false
       this.$emit('blur', e)
+    },
+
+    onKeydown (e) {
+      if ([13, 27, 38, 40].includes(e.keyCode)) e.preventDefault()
+
+      if (e.keyCode === 27) this.closeMenu() // Escape.
+      else if (e.keyCode === 13) this.openMenu() // Enter.
+
+      // Up & down arrows.
+      else if ([38, 40].includes(e.keyCode)) {
+        if (this.multiple) this.openMenu()
+        else {
+          // Get the first selected item index.
+          let { index } = this.inputValue[0] || {} // Always an object containing index & value.
+          const items = this.selectItems
+
+          // If no selection, select the first or last item (down or up arrow).
+          if (index === undefined) index = e.keyCode === 38 ? items.length - 1 : 0
+
+          // Otherwise select the previous or next item.
+          else {
+            const direction = e.keyCode === 38 ? -1 : 1 // Prev or next.
+            // Circle through the array of items (prev/next), and reloop when out of range.
+            index = (index + items.length + direction) % items.length
+          }
+
+          this.onInput(items[index])
+        }
+      }
     },
 
     // The items are given by the w-list component.
