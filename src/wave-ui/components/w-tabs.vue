@@ -6,7 +6,7 @@
       :key="i"
       :class="barItemClasses(item)"
       @click="!item._disabled && openTab(item)"
-      @focus="$emit('focus', cleanTab(item))"
+      @focus="$emit('focus', getOriginalTab(item))"
       :tabindex="!item._disabled && 0"
       @keypress.enter="!item._disabled && openTab(item)"
       :aria-selected="item._active ? 'true' : 'false'"
@@ -14,13 +14,13 @@
         slot(
           v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
           :name="`item-title.${item.id || i + 1}`"
-          :item="cleanTab(item)"
+          :item="getOriginalTab(item)"
           :index="i + 1"
           :active="item._active")
         slot(
           v-else
           name="item-title"
-          :item="cleanTab(item)"
+          :item="getOriginalTab(item)"
           :index="i + 1"
           :active="item._active")
           div(v-html="item[itemTitleKey]")
@@ -31,13 +31,13 @@
         slot(
           v-if="$scopedSlots[`item-content.${activeTab.id || activeTab._index + 1}`]"
           :name="`item-content.${activeTab.id || activeTab._index + 1}`"
-          :item="cleanTab(activeTab)"
+          :item="getOriginalTab(activeTab)"
           :index="activeTab._index + 1"
           :active="activeTab._active")
         slot(
           v-else
           name="item-content"
-          :item="cleanTab(activeTab)"
+          :item="getOriginalTab(activeTab)"
           :index="activeTab._index + 1"
           :active="activeTab._active")
           div(v-html="activeTab[itemContentKey]")
@@ -195,14 +195,9 @@ export default {
       }
     },
 
-    cleanTab (tab) {
-      // eslint-disable-next-line no-unused-vars
-      delete tab._index
-      delete tab._active
-      delete tab._disabled
-      // const { _index, _active, _disabled, ...Tab } = tab
-      // return Tab
-      return tab
+    // Return the original tab item (so there is no `_index`, etc.).
+    getOriginalTab (tab) {
+      return this.items[tab._index]
     }
   },
 
