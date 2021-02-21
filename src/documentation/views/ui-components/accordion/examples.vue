@@ -232,7 +232,10 @@ div
         accordion: []
       })
 
-  title-link(h2) Custom rendering
+  title-link(h2 slug="custom-rendering") Custom rendering (via slots)
+  p.
+    Customize all the tab items titles and/or content via the single slot #[code item-title], and/or
+    all the tab items content via the single slot #[code item-content].
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items" content-class="pa0")
       template(#item-title="{ item }")
