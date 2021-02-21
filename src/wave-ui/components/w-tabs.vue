@@ -203,12 +203,8 @@ export default {
       this.activeTabIndex = index
     },
     items () {
-      // SetTimeout in case the items are filtered and reinjected (every tab changes).
-      // E.g. @click="tabs = tabs.filter((tab, i) => i !== index - 1)"
-      setTimeout(() => {
-        // When deleting a tab, activate the previous one.
-        while (this.activeTabIndex > 0 && !this.tabsItems[this.activeTabIndex]) this.activeTabIndex--
-      }, 0)
+      // When deleting a tab, activate the previous one.
+      while (this.activeTabIndex > 0 && !this.tabsItems[this.activeTabIndex]) this.activeTabIndex--
 
       if (!this.noSlider) this.$nextTick(this.updateSlider)
     },
