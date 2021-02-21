@@ -30,6 +30,7 @@ main
         li #[strong.code w-accordion]: return original accordion item in scoped slots.
         li #[strong.code w-tabs]: return original tab item in scoped slots.
         li #[strong.code w-tabs]: when deleting a tab, activate the previous one.
+        li.text-bold.red #[strong.code w-tabs]: now only accepts a numeric #[code value]/#[code v-model] instead of an array of boolean.
 
     li.patch
       strong.version v1.20.6
