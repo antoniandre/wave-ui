@@ -45,18 +45,19 @@ div
       w-divider.mx1(vertical)
       span.mx1 Item 5
       span.mx1 Item 6
-    template(#pug).
-      w-toolbar.py0(bg-color="grey-light5")
-        .title2.my2 Toolbar
-        .spacer
-        span.mx1 Item 1
-        span.mx1 Item 2
-        w-divider.mx1(vertical)
-        span.mx1 Item 3
-        span.mx1 Item 4
-        w-divider.mx1(vertical)
-        span.mx1 Item 5
-        span.mx1 Item 6
+    template(#html).
+      &lt;w-toolbar class="py0" bg-color="grey-light5"&gt;
+        &lt;div class="title2 my2"&gt;Toolbar&lt;/div&gt;
+        &lt;div class="spacer"&gt;
+        &lt;span class="mx1"&gt;Item 1&lt;/span&gt;
+        &lt;span class="mx1"&gt;Item 2&lt;/span&gt;
+        &lt;w-divider class="mx1" vertical /&gt;
+        &lt;span class="mx1"&gt;Item 3&lt;/span&gt;
+        &lt;span class="mx1"&gt;Item 4&lt;/span&gt;
+        &lt;w-divider class="mx1" vertical /&gt;
+        &lt;span class="mx1"&gt;Item 5&lt;/span&gt;
+        &lt;span class="mx1"&gt;Item 6&lt;/span&gt;
+      &lt;/w-toolbar&gt;
 
   title-link(h2) Color
   example
@@ -73,11 +74,11 @@ div
       w-button.my6 Log in
       w-divider.mx6(vertical color="pink") OR
       w-button.my6 Sign in
-    template(#pug).
-      .w-flex.align-center.justify-center
-        w-button.my6 Log in
-        w-divider.mx6(vertical color="pink") OR
-        w-button.my6 Sign in
+    template(#html).
+      &lt;.w-flex.align-center.justify-center
+        &lt;w-button.my6 Log in
+        &lt;w-divider.mx6(vertical color="pink") OR
+        &lt;w-button.my6 Sign in
   example
     w-card.md6.maa.text-center
       w-button.my12 Log in
