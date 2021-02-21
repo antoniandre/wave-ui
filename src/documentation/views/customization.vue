@@ -30,26 +30,32 @@ main
   .title4 But to do so, you need to slightly modify your config.
 
   title-link(h2) Modify your config
-  .title4.mt4 1. Update #[span.code main.js]
+  .title4.mt4 1. Install the devDependencies
+  ssh-pre.mb2(language="shell") npm i -D pug pug-plain-loader node-sass sass-loader@10
+  small.text-italic.grey.
+    The dev dependencies are only needed for building the project. They will not ship to production.
+  p.mt3 Notes: #[span.code sass-loader 11] only works with Webpack 5.
+
+  .title4.mt8 2. Update #[span.code main.js]
   p In main.js, replace the 2 Wave UI imports with:
   ssh-pre.mt5(language="js" label="main.js").
     import WaveUI from 'wave-ui/src/wave-ui'
-    import 'wave-ui/src/wave-ui/scss/index.scss'
 
-  .title4.mt6 2. Create an SCSS file &amp; import it globally
+  .title4.mt8 3. Create an SCSS file &amp; import it globally
   ul
     li.
-      In your project #[span.code src] folder, create a #[code _variables.scss], usually in an #[span.code scss]
-      folder.
+      In your project #[span.code src] folder, create a #[code _variables.scss] (usually in an #[span.code scss]
+      folder), and import Wave UI's variables: #[code @import 'wave-ui/src/wave-ui/scss/_variables';].
 
     li.mt2
-      | Import this SCSS variables file globally from Vue config and re-serve the app.
+      | Import your SCSS variables file globally from Vue config and re-serve the app.
       ssh-pre.mt5(language="js" label="vue.config.js").
         module.exports = {
           transpileDependencies: ['wave-ui'], // ! \\
           css: {
             loaderOptions: {
-              sass: { prependData: '@import "@/scss/_variables.scss";' }
+              // `additionalData` was called `prependData` prior sass-loader 9.
+              sass: { additionalData: '@import "@/scss/_variables.scss";' }
             }
           }
         }
