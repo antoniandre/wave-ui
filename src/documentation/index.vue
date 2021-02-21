@@ -7,17 +7,14 @@ w-app
   .content-wrap.w-flex.no-shrink
     transition(name="fade")
       w-progress(v-if="loading" color="primary" tile absolute)
-    nav-menu.navigation.no-shrink(
-      v-if="!isMobile"
-      ref="nav-menu"
-      :class="{ 'nav-menu--fixed': fixNavMenu }"
-      :drawer-open.sync="drawerOpen")
+    nav-menu.navigation.no-shrink(v-if="!isMobile" :drawer-open.sync="drawerOpen")
     .main-content.w-flex.column.grow
       transition(name="fade-page" mode="out-in")
         router-view.grow(:class="`main--${$route.name}`")
 
       footer.w-flex.justify-end.align-center.no-grow.wrap
-        small.grey-light3.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
+        small.grey-light3.text-upper
+          | Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
         .spacer
         router-link.pink-light1.mr4(to="/backers")
           w-icon.mr1 mdi mdi-heart-multiple-outline
