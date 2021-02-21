@@ -9,20 +9,20 @@
       @focus="$emit('focus', getOriginalTab(item))"
       :tabindex="!item._disabled && 0"
       @keypress.enter="!item._disabled && openTab(item)"
-      :aria-selected="item._active ? 'true' : 'false'"
+      :aria-selected="item._index === activeTabIndex ? 'true' : 'false'"
       role="tab")
         slot(
           v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
           :name="`item-title.${item.id || i + 1}`"
           :item="getOriginalTab(item)"
           :index="i + 1"
-          :active="item._active")
+          :active="item._index === activeTabIndex")
         slot(
           v-else
           name="item-title"
           :item="getOriginalTab(item)"
           :index="i + 1"
-          :active="item._active")
+          :active="item._index === activeTabIndex")
           div(v-html="item[itemTitleKey]")
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
   .w-tabs__content-wrap(v-if="tabsItems.length")
@@ -33,13 +33,13 @@
           :name="`item-content.${activeTab.id || activeTab._index + 1}`"
           :item="getOriginalTab(activeTab)"
           :index="activeTab._index + 1"
-          :active="activeTab._active")
+          :active="activeTab._index === activeTabIndex")
         slot(
           v-else
           name="item-content"
           :item="getOriginalTab(activeTab)"
           :index="activeTab._index + 1"
-          :active="activeTab._active")
+          :active="activeTab._index === activeTabIndex")
           div(v-html="activeTab[itemContentKey]")
 </template>
 
@@ -50,7 +50,7 @@ export default {
   name: 'w-tabs',
 
   props: {
-    value: { type: Array },
+    value: { type: [Number, String] },
     color: { type: String },
     bgColor: { type: String },
     items: { type: [Array, Number] },
@@ -72,8 +72,8 @@ export default {
 
   data: () => ({
     activeTabEl: null,
+    activeTabIndex: 0,
     prevTabIndex: -1, // To detect transition direction.
-    activeTabIndex: -1,
     slider: {
       left: 0,
       width: 0
@@ -97,32 +97,16 @@ export default {
 
     tabsItems () {
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items
-      if (typeof this.items === 'number' && this.activeTabIndex > -1) {
-        // Array.fill({}) copies the same object by reference, make sure to modify only 1 by
-        // giving a full object override (item = {}).
-        if (items[this.activeTabIndex]) items[this.activeTabIndex] = { _active: true }
-      }
 
       return items.map((item, _index) => new Vue.observable({
         ...item,
         _index,
-        _active: item._active || (this.value && this.value[_index]),
         _disabled: !!item.disabled
       }))
     },
 
     activeTab () {
-      let activeTab = this.tabsItems.find(item => item._active)
-      if (!activeTab) {
-        // If no active tab, open the first not disabled tab.
-        if (!activeTab) activeTab = this.tabsItems.find(item => !item._disabled)
-        if (activeTab) {
-          activeTab._active = true
-          this.$nextTick(this.updateSlider)
-        }
-        else activeTab = {}
-      }
-      return activeTab
+      return this.tabsItems[this.activeTabIndex] || this.tabsItems[0]
     },
 
     tabsClasses () {
@@ -155,25 +139,22 @@ export default {
     },
 
     barItemClasses (item) {
+      const isActive = item._index === this.activeTabIndex
+
       return {
         [`${this.bgColor}--bg`]: this.bgColor,
-        [this.color]: this.color && !item._disabled && !(this.activeClass && item._active),
-        [`w-tabs__bar-item--active ${this.activeClass}`]: item._active,
+        [this.color]: this.color && !item._disabled && !(this.activeClass && isActive),
+        [`w-tabs__bar-item--active ${this.activeClass}`]: isActive,
         'w-tabs__bar-item--disabled': item._disabled,
         [this.titleClass]: this.titleClass
       }
     },
 
     openTab (item) {
-      this.prevTabIndex = this.activeTab._index
+      this.prevTabIndex = this.activeTabIndex // To resolve the transition direction.
       this.activeTabIndex = item._index
-
-      item._active = true
-      // Unset active on other tabs.
-      this.tabsItems.forEach(obj => obj._index !== item._index && (obj._active = false))
-      const activeItem = this.tabsItems.map(item => item._active)
-      this.$emit('update:modelValue', activeItem)
-      this.$emit('input', activeItem)
+      this.$emit('update:modelValue', item._index)
+      this.$emit('input', item._index)
 
       if (!this.noSlider) this.$nextTick(this.updateSlider)
     },
@@ -216,10 +197,9 @@ export default {
   },
 
   watch: {
-    value (array) {
-      this.tabsItems.forEach((item, i) => {
-        this.$set(item, '_active', (Array.isArray(array) && array[i]) || false)
-      })
+    value (index) {
+      if (isNaN(index)) index = 0
+      this.activeTabIndex = index || 0
     },
     items () {
       if (!this.noSlider) this.$nextTick(this.updateSlider)
