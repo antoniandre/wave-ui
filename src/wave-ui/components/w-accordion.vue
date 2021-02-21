@@ -7,7 +7,7 @@
     :aria-expanded="item._expanded ? 'true' : 'false'")
     .w-accordion__item-title(
       @click="!item._disabled && toggleItem(item, $event)"
-      @focus="$emit('focus', cleanItem(item))"
+      @focus="$emit('focus', getOriginalItem(item))"
       @keypress.enter="!item._disabled && toggleItem(item, $event)"
       :tabindex="!item._disabled && 0"
       :class="titleClass")
@@ -24,9 +24,9 @@
       slot(
         v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
         :name="`item-title.${item.id || i + 1}`"
-        :item="cleanItem(item)"
+        :item="getOriginalItem(item)"
         :expanded="item._expanded" :index="i + 1")
-      slot(v-else name="item-title" :item="cleanItem(item)" :expanded="item._expanded" :index="i + 1")
+      slot(v-else name="item-title" :item="getOriginalItem(item)" :expanded="item._expanded" :index="i + 1")
         div.grow(v-html="item[itemTitleKey]")
       //- Expand icon on right.
       w-button.w-accordion__expand-icon(
@@ -41,9 +41,9 @@
         slot(
           v-if="$scopedSlots[`item-content.${item.id || i + 1}`]"
           :name="`item-content.${item.id || i + 1}`"
-          :item="cleanItem(item)"
+          :item="getOriginalItem(item)"
           :expanded="item._expanded" :index="i + 1")
-        slot(v-else name="item-content" :item="cleanItem(item)" :expanded="item._expanded" :index="i + 1")
+        slot(v-else name="item-content" :item="getOriginalItem(item)" :expanded="item._expanded" :index="i + 1")
           div(v-html="item[itemContentKey]")
 </template>
 
@@ -111,10 +111,9 @@ export default {
       e.target.blur()
       setTimeout(() => e.target.focus(), 300)
     },
-    cleanItem (item) {
-      // eslint-disable-next-line no-unused-vars
-      const { _index, _expanded, _disabled, ...Item } = item
-      return Item
+    // Return the original accordion item (so there is no `_index`, etc.).
+    getOriginalItem (item) {
+      return this.items[item._index]
     },
     itemClasses (item) {
       return {
