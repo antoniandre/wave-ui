@@ -106,7 +106,7 @@ export default {
     },
 
     activeTab () {
-      return this.tabsItems[this.activeTabIndex] || this.tabsItems[0]
+      return this.tabsItems[this.activeTabIndex] || this.tabsItems[0] || {}
     },
 
     tabsClasses () {
@@ -202,6 +202,8 @@ export default {
       this.activeTabIndex = index || 0
     },
     items () {
+      // When deleting a tab, activate the previous one.
+      while (this.activeTabIndex > 0 && !this.tabsItems[this.activeTabIndex]) this.activeTabIndex--
       if (!this.noSlider) this.$nextTick(this.updateSlider)
     },
     fillBar () {
