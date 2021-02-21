@@ -434,6 +434,8 @@ export default {
 
   beforeDestroy () {
     this.onCountComplete = null
+    ScrollTrigger.removeEventListener('refreshInit', () => gsap.set('.feature', { y: 0 }))
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     gsap.killTweensOf('*')
   }
 }
