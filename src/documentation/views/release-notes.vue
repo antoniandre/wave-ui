@@ -27,6 +27,8 @@ main
       ul
         li Add #[code item-title-key] &amp; #[code item-content-key] options on #[strong.code w-tabs] component and remove internal #[code _active] prop.
         li #[strong.code w-select]: allow selecting items using the keyboard arrows when the select list is closed. #[issue-link 25]
+        li #[strong.code w-tabs]: return original tab item in scoped slots.
+        li #[strong.code w-accordion]: return original accordion item in scoped slots.
 
     li.patch
       strong.version v1.20.6
