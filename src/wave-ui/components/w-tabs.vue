@@ -198,8 +198,9 @@ export default {
 
   watch: {
     value (index) {
-      if (isNaN(index)) index = 0
-      this.activeTabIndex = index || 0
+      if (typeof index === 'string') index = ~~index
+      else if (isNaN(index) || index < 0) index = 0
+      this.activeTabIndex = index
     },
     items () {
       // When deleting a tab, activate the previous one.
