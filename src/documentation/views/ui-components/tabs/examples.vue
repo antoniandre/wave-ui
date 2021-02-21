@@ -50,6 +50,8 @@ div
       })
 
   title-link(h2) V-model
+  alert(warning).
+    #[strong Since version 1.21.0], the v-model/value only accepts a numeric tab index (previously an array of boolean).
   p It is possible to open a particular tab programmatically via #[code v-model] or #[code value].
   example
     w-tabs.mb2(v-model="tabs2.active" :items="tabs2.items")
@@ -305,7 +307,7 @@ export default {
         { title: 'Tab 4', content: 'Tab 4 content.' },
         { title: 'Tab 5', content: 'Tab 5 content.', disabled: true }
       ],
-      active: [false, false, true, false, false],
+      active: 2,
       fillBar: true,
       slider: false
     },
