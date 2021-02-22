@@ -4,8 +4,8 @@ div
   p By default the range will have the #[code primary] color.
   example(content-class="mt5 px6")
     w-slider(:value="50")
-    template(#pug).
-      w-slider(:value="50")
+    template(#html).
+      &lt;w-slider :value="50"&gt;&lt;/w-slider&gt;
 
   title-link(h2) V-model &amp; external controls
   example(content-class="px6")
@@ -16,14 +16,33 @@ div
     div.mt4
       | v-model:
       code.ml1 {{ sliderValue }}
-    template(#pug).
-      w-flex(align-center)
-        w-button(@click="sliderValue -= 5" icon="wi-minus" bg-color="success" sm)
-        w-slider.mx3.grow(v-model="sliderValue" color="green")
-        w-button(@click="sliderValue += 5" icon="wi-plus" bg-color="success" sm)
-      div.mt4
-        | v-model:
-        code.ml1 {{ '\{\{ sliderValue \}\}' }}
+    template(#html).
+      &lt;w-flex align-center&gt;
+        &lt;w-button
+          @click="sliderValue -= 5"
+          icon="wi-minus"
+          bg-color="success"
+          sm&gt;
+        &lt;/w-button&gt;
+
+        &lt;w-slider
+          class="mx3 grow"
+          v-model="sliderValue"
+          color="green"&gt;
+        &lt;/w-slider&gt;
+
+        &lt;w-button
+          @click="sliderValue += 5"
+          icon="wi-plus"
+          bg-color="success"
+          sm&gt;
+        &lt;/w-button&gt;
+      &lt;/w-flex&gt;
+
+      &lt;div class="mt4"&gt;
+        v-model:
+        &lt;code class="ml1"&gt;{{ '\{\{ sliderValue \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
     template(#js).
       data: () => ({
         sliderValue: 50
@@ -41,18 +60,30 @@ div
     div.mt4
       | v-model:
       code.ml1 {{ minMaxValue2 }}
-    template(#pug).
-      .title4.mb4 From 4 to 5
-      w-slider(v-model="sliderValue" :min="4" :max="5")
-      div.mt4
-        | v-model:
-        code.ml1 {{ '\{\{ sliderValue \}\}' }}
+    template(#html).
+      &lt;div class="title4 mb4"&gt;From 4 to 5&lt;/div&gt;
+      &lt;w-slider
+        v-model="sliderValue"
+        :min="4"
+        :max="5"&gt;
+      &lt;/w-slider&gt;
 
-      .title4.mt8.mb4 From -10 to 10
-      w-slider(v-model="slider2Value" :min="-10" :max="10")
-      div.mt4
-        | v-model:
-        code.ml1 {{ '\{\{ slider2Value \}\}' }}
+      &lt;div class="mt4"&gt;
+        v-model:
+        &lt;code class="ml1"&gt;{{ '\{\{ sliderValue \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
+
+      &lt;div class="title4 mt8 mb4"&gt;From -10 to 10&lt;/div&gt;
+      &lt;w-slider
+        v-model="slider2Value"
+        :min="-10"
+        :max="10"&gt;
+      &lt;/w-slider&gt;
+
+      &lt;div class="mt4"&gt;
+        v-model:
+        &lt;code class="ml1"&gt;{{ '\{\{ slider2Value \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
     template(#js).
       data: () => ({
         sliderValue: 4.5,
@@ -63,9 +94,9 @@ div
   example(content-class="px6")
     w-slider.mt2(:value="50" disabled)
     w-slider.mt8(:value="50" readonly)
-    template(#pug).
-      w-slider.mt2(:value="50" disabled)
-      w-slider.mt8(:value="50" readonly)
+    template(#html).
+      &lt;w-slider class="mt2" :value="50" disabled&gt;&lt;/w-slider&gt;
+      &lt;w-slider class="mt8" :value="50" readonly&gt;&lt;/w-slider&gt;
 
   title-link(h2) Labels on the left &amp; right
   example(content-class="px6")
@@ -79,31 +110,64 @@ div
       template(#label-right)
         w-icon.red mdi mdi-weight
         w-icon.red mdi mdi-weight
-    template(#pug).
-      w-slider.mt2(:value="50" label-left="0" label-right="100")
-      w-slider.mt6(:value="50" label-left="Left")
-      w-slider.mt6(:value="50" label-right="Right")
-      w-slider.mt12(:value="50")
-        template(#label-left="")
-          span Weight
-          w-icon.ml2.green mdi mdi-feather
-        template(#label-right="")
-          w-icon.red mdi mdi-weight
-          w-icon.red mdi mdi-weight
+    template(#html).
+      &lt;w-slider
+        class="mt2"
+        :value="50"
+        label-left="0"
+        label-right="100"&gt;
+      &lt;/w-slider&gt;
+
+      &lt;w-slider
+        class="mt6"
+        :value="50"
+        label-left="Left"&gt;
+      &lt;/w-slider&gt;
+
+      &lt;w-slider
+        class="mt6"
+        :value="50"
+        label-right="Right"&gt;
+      &lt;/w-slider&gt;
+
+      &lt;w-slider
+        class="mt12"
+        :value="50"&gt;
+        &lt;template #label-left&gt;
+          &lt;span&gt;Weight&lt;/span&gt;
+          &lt;w-icon class="ml2 green"&gt;mdi mdi-feather&lt;/w-icon&gt;
+        &lt;/template&gt;
+        &lt;template #label-right&gt;
+          &lt;w-icon class="red"&gt;mdi mdi-weight&lt;/w-icon&gt;
+          &lt;w-icon class="red"&gt;mdi mdi-weight&lt;/w-icon&gt;
+        &lt;/template&gt;
+      &lt;/w-slider&gt;
 
   title-link(h2) Thumb label
   example(content-class="pt12 px8")
     w-slider.mb4(:value="24" thumb-label color="primary-light3")
-    template(#pug).
-      w-slider.mt12(:value="24" thumb-label color="primary-light3")
+    template(#html).
+      &lt;w-slider
+        class="mt12"
+        :value="24"
+        thumb-label
+        color="primary-light3"&gt;
+      &lt;/w-slider&gt;
 
   title-link(h3 slug="custom-label-with-label-slot") Customize the label with the #[span.code label] slot
   example(content-class="pt12 pb8 px8")
     w-slider(:value="46.3" thumb-label color="primary-light3")
       template(#label="{ value }") {{ ~~(value * 10) / 10 }}%
-    template(#pug).
-      w-slider.ma12(:value="46.3" thumb-label color="primary-light3")
-        template(#label="{ value }") {{ '\{\{ parseInt(value * 10) / 10 \}\}' }}%
+    template(#html).
+      &lt;w-slider
+        class="ma12"
+        :value="46.3"
+        thumb-label
+        color="primary-light3"&gt;
+        &lt;template #label="{ value }"&gt;
+          {{ '\{\{ parseInt(value * 10) / 10 \}\}' }}%
+        &lt;/template&gt;
+      &lt;/w-slider&gt;
 
   title-link(h3) Droplet style label
   p With this option you can have a more modern look, but the drawback is that it can't contain long texts.
@@ -120,9 +184,19 @@ div
   example(content-class="pt12 pl10 pr12")
     w-slider.mt2.mb12(:value="30" thumb-label="droplet")
     w-slider.big-label.mt12.mb4(:value="60" thumb-label="droplet" thumb-label-class="info--bg")
-    template(#pug).
-      w-slider.ma12(:value="30" thumb-label="droplet")
-      w-slider.big-label.ma12(:value="60" thumb-label="droplet" thumb-label-class="info--bg")
+    template(#html).
+      &lt;w-slider
+        class="ma12"
+        :value="30"
+        thumb-label="droplet"&gt;
+      &lt;/w-slider&gt;
+
+      &lt;w-slider
+        class="big-label.ma12"
+        :value="60"
+        thumb-label="droplet"
+        thumb-label-class="info--bg"&gt;
+      &lt;/w-slider&gt;
     template(#css).
       .big-label {font-size: 1.4em;}
 
@@ -143,18 +217,20 @@ div
     div.mt4
       | v-model:
       code.ml1 {{ sliderStepsValue2 }}
-    template(#pug).
-      .title4.mb4 Step = 1
-      w-slider(v-model="sliderValue" :step="1")
-      div.mt4
-        | v-model:
-        code.ml1 {{ '\{\{ sliderValue \}\}' }}
+    template(#html).
+      &lt;div class="title4 mb4"&gt;Step = 1&lt;/div&gt;
+      &lt;w-slider v-model="sliderValue" :step="1"&gt;&lt;/w-slider&gt;
+      &lt;div class="mt4"&gt;
+        v-model:
+        &lt;code class="ml1"&gt;{{ '\{\{ sliderValue \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
 
-      .title4.mt8.mb4 Step = 10
-      w-slider(v-model="slider2Value" :step="10")
-      div.mt4
-        | v-model:
-        code.ml1 {{ '\{\{ slider2Value \}\}' }}
+      &lt;div class="title4 mt8 mb4"&gt;Step = 10&lt;/div&gt;
+      &lt;w-slider v-model="slider2Value" :step="10"&gt;&lt;/w-slider&gt;
+      &lt;div class="mt4"&gt;
+        v-model:
+        &lt;code class="ml1"&gt;{{ '\{\{ slider2Value \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
     template(#js).
       data: () => ({
         sliderValue: 50,
@@ -168,9 +244,14 @@ div
     //- .title4.mt8.mb4 Custom step labels
     //- w-slider(v-model="sliderStepsValue4" color="primary-light2" :min="20" :max="30" :step="3" step-labels)
     //- w-slider(v-model="sliderStepsValue5" color="primary-light2" :min="20" :max="30" :step="3" step-labels)
-    template(#pug).
-      .title4.mb4 Default step labels
-      w-slider(v-model="sliderValue" color="primary-light2" :step="20" step-labels)
+    template(#html).
+      &lt;div class="title4 mb4"&gt;Default step labels&lt;/div&gt;
+      &lt;w-slider
+        v-model="sliderValue"
+        color="primary-light2"
+        :step="20"
+        step-labels&gt;
+      &lt;/w-slider&gt;
     template(#js).
       data: () => ({
         sliderValue: 40
