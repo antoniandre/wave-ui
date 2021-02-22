@@ -48,13 +48,13 @@ div
     template(#html).
       &lt;w-toolbar class="py0" bg-color="grey-light5"&gt;
         &lt;div class="title2 my2"&gt;Toolbar&lt;/div&gt;
-        &lt;div class="spacer"&gt;
+        &lt;div class="spacer"&gt;&lt;/div&gt;
         &lt;span class="mx1"&gt;Item 1&lt;/span&gt;
         &lt;span class="mx1"&gt;Item 2&lt;/span&gt;
-        &lt;w-divider class="mx1" vertical /&gt;
+        &lt;w-divider class="mx1" vertical&gt;&lt;/w-divider&gt;
         &lt;span class="mx1"&gt;Item 3&lt;/span&gt;
         &lt;span class="mx1"&gt;Item 4&lt;/span&gt;
-        &lt;w-divider class="mx1" vertical /&gt;
+        &lt;w-divider class="mx1" vertical&gt;&lt;/w-divider&gt;
         &lt;span class="mx1"&gt;Item 5&lt;/span&gt;
         &lt;span class="mx1"&gt;Item 6&lt;/span&gt;
       &lt;/w-toolbar&gt;
@@ -62,8 +62,8 @@ div
   title-link(h2) Color
   example
     w-divider.ma6(color="green")
-    template(#pug).
-      w-divider.ma6(color="green")
+    template(#html).
+      &lt;w-divider class="ma6" color="green" /&gt;
 
   title-link(h2) With content
   p.
@@ -75,18 +75,20 @@ div
       w-divider.mx6(vertical color="pink") OR
       w-button.my6 Sign in
     template(#html).
-      &lt;.w-flex.align-center.justify-center
-        &lt;w-button.my6 Log in
-        &lt;w-divider.mx6(vertical color="pink") OR
-        &lt;w-button.my6 Sign in
+      &lt;div class="w-flex align-center justify-center"&gt;
+        &lt;w-button class="my6"&gt;Log in&lt;/w-button&gt;
+        &lt;w-divider class="mx6" vertical color="pink"&gt;OR&lt;/w-divider&gt;
+        &lt;w-button class="my6"&gt;Sign in&lt;/w-button&gt;
+      &lt;/div&gt;
   example
     w-card.md6.maa.text-center
       w-button.my12 Log in
       w-divider.mx6(color="pink") OR
       w-button.my12 Sign in
-    template(#pug).
-      w-card.md6.maa.text-center
-        w-button.my12 Log in
-        w-divider.mx6(color="pink") OR
-        w-button.my12 Sign in
+    template(#html).
+      &lt;w-card class="md6 maa text-center"&gt;
+        &lt;w-button class="my12"&gt;Log in&lt;/w-button&gt;
+        &lt;w-divider class="mx6" color="pink"&gt;OR&lt;/w-divider&gt;
+        &lt;w-button class="my12"&gt;Sign in&lt;/w-button&gt;
+      &lt;/w-card&gt;
 </template>
