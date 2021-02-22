@@ -99,7 +99,12 @@ div
     template(#html).
       &lt;w-breadcrumbs :items="items"&gt;
         &lt;template #item="{ item, isLast }"&gt;
-          &lt;w-tag :color="isLast ? 'grey' : 'green'" round outline v-html="item.label" /&gt;
+          &lt;w-tag
+            :color="isLast ? 'grey' : 'green'"
+            round
+            outline
+            v-html="item.label"&gt;
+          &lt;/w-tag&gt;
         &lt;/template&gt;
       &lt;/w-breadcrumbs&gt;
     template(#js).

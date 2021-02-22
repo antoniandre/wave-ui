@@ -46,9 +46,26 @@ div
     w-button.ma1(bg-color="error" color="amber-light2") error
     w-button.ma1(bg-color="primary" color="success-light2") warning
     template(#html).
-      &lt;w-button class="ma1" bg-color="success" color="yellow-light2"&gt;success&lt;/w-button&gt;
-      &lt;w-button class="ma1" bg-color="error" color="amber-light2"&gt;error&lt;/w-button&gt;
-      &lt;w-button class="ma1" bg-color="primary" color="success-light2"&gt;warning&lt;/w-button&gt;
+      &lt;w-button
+        class="ma1"
+        bg-color="success"
+        color="yellow-light2"&gt;
+        success
+      &lt;/w-button&gt;
+
+      &lt;w-button
+        class="ma1"
+        bg-color="error"
+        color="amber-light2"&gt;
+        error
+      &lt;/w-button&gt;
+
+      &lt;w-button
+        class="ma1"
+        bg-color="primary"
+        color="success-light2"&gt;
+        warning
+      &lt;/w-button&gt;
 
   h3 Dark
   p.
@@ -62,7 +79,9 @@ div
     w-button.ma1(bg-color="primary-light3" dark) dark
     template(#html).
       &lt;w-button class="ma1" bg-color="primary-light3"&gt;normal&lt;/w-button&gt;
+
       &lt;w-icon class="mx6 grey-light3" size="2.5em"&gt;mdi mdi-arrow-right&lt;/w-icon&gt;
+
       &lt;w-button class="ma1" bg-color="primary-light3" dark&gt;dark&lt;/w-button&gt;
 
   title-link(h2) Sizes
@@ -116,7 +135,13 @@ div
   example(content-class="pt6")
     w-button.ma1(bg-color="info" width="10em" :height="18") info
     template(#html).
-      &lt;w-button class="ma1 grow" bg-color="info" width="10em" :height="18"&gt;info&lt;/w-button&gt;
+      &lt;w-button
+        class="ma1 grow"
+        bg-color="info"
+        width="10em"
+        :height="18"&gt;
+        info
+      &lt;/w-button&gt;
 
   title-link(h2) Outline
   example
@@ -188,6 +213,7 @@ div
     template(#html).
       &lt;w-button class="ma1" bg-color="error" icon="wi-cross"&gt;&lt;/w-button&gt;
       &lt;w-button class="ma1 mr6" bg-color="success" icon="wi-check"&gt;&lt;/w-button&gt;
+
       &lt;w-button class="ma1" bg-color="error"&gt;
         &lt;w-icon class="mr1"&gt;wi-cross&lt;/w-icon&gt;
         Cancel
@@ -207,11 +233,20 @@ div
       | Save
       template(#loading) Loading...
     template(#html).
-      &lt;w-button class="ma1" bg-color="primary" :loading="button1loading" @click="buttonDoLoading(1)"&gt;
+      &lt;w-button
+        class="ma1"
+        bg-color="primary"
+        :loading="button1loading"
+        @click="buttonDoLoading(1)"&gt;
         &lt;w-icon class="mr1" &gt;wi-check&lt;/w-icon&gt;
         Save
       &lt;/w-button&gt;
-      &lt;w-button class="ma1 px4" bg-color="primary" :loading="button2loading" @click="buttonDoLoading(2)"&gt;
+
+      &lt;w-button
+        class="ma1 px4"
+        bg-color="primary"
+        :loading="button2loading"
+        @click="buttonDoLoading(2)"&gt;
         &lt;w-icon class="mr1" &gt;wi-check&lt;/w-icon&gt;
         Save
         &lt;template #loading&gt;Loading...&lt;/template&gt;
@@ -244,11 +279,18 @@ div
       | Github
       w-icon.ml2(sm) mdi mdi-open-in-new
     template(#html).
-      &lt;w-button class="ma1" bg-color="primary" route="/getting-started"&gt;
+      &lt;w-button
+        class="ma1"
+        bg-color="primary"
+        route="/getting-started"&gt;
         Getting started
         &lt;w-icon class="ml1"&gt;wi-chevron-right&lt;/w-icon&gt;
       &lt;/w-button&gt;
-      &lt;w-button class="ma1" bg-color="primary" route="https://github.com/antoniandre/wave-ui"&gt;
+
+      &lt;w-button
+        class="ma1"
+        bg-color="primary"
+        route="https://github.com/antoniandre/wave-ui"&gt;
         Github
         &lt;w-icon class="ml2" sm&gt;mdi mdi-open-in-new&lt;/w-icon&gt;
       &lt;/w-button&gt;

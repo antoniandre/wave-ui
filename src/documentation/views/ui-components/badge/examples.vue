@@ -32,27 +32,29 @@ div
       w-button(@click="showBadge++" icon="wi-plus" bg-color="success" sm)
     template(#html).
       &lt;w-flex align-center&gt;
-        &lt;w-button 
-          @click="showBadge--" 
-          icon="wi-minus" 
-          bg-color="success" 
+        &lt;w-button
+          @click="showBadge--"
+          icon="wi-minus"
+          bg-color="success"
           sm&gt;
         &lt;/w-button&gt;
 
-        &lt;w-badge 
-          class="mx6" 
-          v-model="showBadge" 
-          bg-color="error" 
+        &lt;w-badge
+          class="mx6"
+          v-model="showBadge"
+          bg-color="error"
           overlap&gt;
-          &lt;w-icon color="grey-light1" size="2.4em"&gt; 
+          &lt;w-icon color="grey-light1" size="2.4em"&gt;
             mdi mdi-email
-          &lt;/w-icon&gt; 
+          &lt;/w-icon&gt;
         &lt;/w-badge&gt;
-        &lt;w-button 
-          @click="showBadge++" 
-          icon="wi-plus" 
-          bg-color="success" 
-          sm /&gt;
+
+        &lt;w-button
+          @click="showBadge++"
+          icon="wi-plus"
+          bg-color="success"
+          sm&gt;
+        &lt;/w-button&gt;
       &lt;/w-flex&gt;
     template(#js).
       data: () => ({
@@ -117,10 +119,12 @@ div
         &lt;template #badge&gt;3&lt;/template&gt;
         &lt;w-icon color="grey-light1" size="2.5em"&gt;mdi mdi-email&lt;/w-icon&gt;
       &lt;/w-badge&gt;
+
       &lt;w-badge class="mr10" color="yellow"&gt;
         &lt;template #badge&gt;3&lt;/template&gt;
         &lt;w-icon color="grey-light1" size="2.5em"&gt;mdi mdi-email&lt;/w-icon&gt;
       &lt;/w-badge&gt;
+
       &lt;w-badge bg-color="lime-light1" color="green-dark2"&gt;
         &lt;template #badge&gt;3&lt;/template&gt;
         &lt;w-icon color="grey-light1" size="2.5em"&gt;mdi mdi-email&lt;/w-icon&gt;
@@ -136,6 +140,7 @@ div
       &lt;w-badge class="mr10" dot bg-color="red"&gt;
         &lt;w-icon size="2.5em"&gt;mdi mdi-account&lt;/w-icon&gt;
       &lt;/w-badge&gt;
+
       &lt;w-badge dot bottom bg-color="red"&gt;
         &lt;w-icon size="2.5em"&gt;mdi mdi-account&lt;/w-icon&gt;
       &lt;/w-badge&gt;
@@ -305,8 +310,8 @@ div
       &lt;div class="w-flex wrap align-center"&gt;
         &lt;w-badge class="ml4 mr10" top left&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
-          &lt;w-icon 
-            class="grey-light1" 
+          &lt;w-icon
+            class="grey-light1"
             size="2.5em"&gt;
             mdi mdi-email
           &lt;/w-icon&gt;
@@ -314,24 +319,24 @@ div
 
         &lt;w-badge top right&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
-          &lt;w-icon 
-            class="grey-light1" 
+          &lt;w-icon
+            class="grey-light1"
             size="2.5em"&gt;
             mdi mdi-email
           &lt;/w-icon&gt;
         &lt;/w-badge&gt;
 
-        &lt;w-icon 
-          class="mx12 
-          grey-light3" 
+        &lt;w-icon
+          class="mx12
+          grey-light3"
           size="2.5em"&gt;
           mdi mdi-arrow-right
         &lt;/w-icon&gt;
 
         &lt;w-badge class="mr10" top left overlap&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
-          &lt;w-icon 
-            class="grey-light1" 
+          &lt;w-icon
+            class="grey-light1"
             size="2.5em"&gt;
             mdi mdi-email
           &lt;/w-icon&gt;
@@ -339,8 +344,8 @@ div
 
         &lt;w-badge top right overlap&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
-          &lt;w-icon 
-            class="grey-light1" 
+          &lt;w-icon
+            class="grey-light1"
             size="2.5em"&gt;
             mdi mdi-email
           &lt;/w-icon&gt;
@@ -351,8 +356,8 @@ div
       &lt;div class="w-flex wrap align-center"&gt;
         &lt;w-badge class="ml4 mr10" bottom left&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
-          &lt;w-icon 
-            class="grey-light1" 
+          &lt;w-icon
+            class="grey-light1"
             size="2.5em"&gt;
             mdi mdi-email
           &lt;/w-icon&gt;
@@ -360,24 +365,24 @@ div
 
         &lt;w-badge bottom right&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
-          &lt;w-icon 
-            class="grey-light1" 
+          &lt;w-icon
+            class="grey-light1"
             size="2.5em"&gt;
             mdi mdi-email
           &lt;/w-icon&gt;
         &lt;/w-badge&gt;
 
-        &lt;w-icon 
-          class="mx12 
-          grey-light3" 
+        &lt;w-icon
+          class="mx12
+          grey-light3"
           size="2.5em"&gt;
           mdi mdi-arrow-right
         &lt;/w-icon&gt;
 
         &lt;w-badge class="mr10" bottom left overlap&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
-          &lt;w-icon 
-            class="grey-light1" 
+          &lt;w-icon
+            class="grey-light1"
             size="2.5em"&gt;
             mdi mdi-email
           &lt;/w-icon&gt;
@@ -385,8 +390,8 @@ div
 
         &lt;w-badge bottom right overlap&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
-          &lt;w-icon 
-            class="grey-light1" 
+          &lt;w-icon
+            class="grey-light1"
             size="2.5em"&gt;
             mdi mdi-email
           &lt;/w-icon&gt;
@@ -417,18 +422,22 @@ div
           &lt;template #badge&gt;3&lt;/template&gt;
           &lt;w-icon class="grey-light1" size="2.5em"&gt;mdi mdi-email&lt;/w-icon&gt;
         &lt;/w-badge&gt;
+
         &lt;w-badge class="mr10" overlap sm&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
           &lt;w-icon class="grey-light1" size="2.5em"&gt;mdi mdi-email&lt;/w-icon&gt;
         &lt;/w-badge&gt;
+
         &lt;w-badge class="mr10" overlap md&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
           &lt;w-icon class="grey-light1" size="2.5em"&gt;mdi mdi-email&lt;/w-icon&gt;
         &lt;/w-badge&gt;
+
         &lt;w-badge class="mr10" overlap lg&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
           &lt;w-icon class="grey-light1" size="2.5em"&gt;mdi mdi-email&lt;/w-icon&gt;
         &lt;/w-badge&gt;
+
         &lt;w-badge overlap xl&gt;
           &lt;template #badge&gt;3&lt;/template&gt;
           &lt;w-icon class="grey-light1" size="2.5em"&gt;mdi mdi-email&lt;/w-icon&gt;
@@ -459,7 +468,12 @@ div
         &lt;/template&gt;
         &lt;w-icon size="2.5em"&gt;mdi mdi-account&lt;/w-icon&gt;
       &lt;/w-badge&gt;
-      &lt;w-icon class="ml12 mr6 grey-light3" size="2.5em"&gt;mdi mdi-arrow-right&lt;/w-icon&gt;
+
+      &lt;w-icon
+        class="ml12 mr6 grey-light3"
+        size="2.5em"&gt;
+        mdi mdi-arrow-right
+      &lt;/w-icon&gt;
 
       &lt;w-badge bg-color="error" round&gt;
         &lt;template #badge=""&gt;
@@ -521,7 +535,11 @@ div
         &lt;w-icon size="2.5em"&gt;mdi mdi-account&lt;/w-icon&gt;
       &lt;/w-badge&gt;
 
-      &lt;w-icon class="ml12 mr6 grey-light3" size="2.5em"&gt;mdi mdi-arrow-right&lt;/w-icon&gt;
+      &lt;w-icon
+        class="ml12 mr6 grey-light3"
+        size="2.5em"&gt;
+        mdi mdi-arrow-right
+      &lt;/w-icon&gt;
 
       &lt;w-badge bg-color="error" badge-class="px4"&gt;
         &lt;template #badge&gt;busy&lt;/template&gt;
@@ -553,70 +571,80 @@ div
       &lt;div class="w-flex align-center wrap"&gt;
         &lt;w-flex column no-grow align-end&gt;
           &lt;span class="mb2"&gt;Toggle with this transition effect:&lt;/span&gt;
-          &lt;w-button 
-            class="code ma1" 
-            @click="transition = 'fade';showBadge = !showBadge" bg-color="primary" 
+          &lt;w-button
+            class="code ma1"
+            @click="transition = 'fade';showBadge = !showBadge"
+            bg-color="primary"
             xs&gt;
             fade
           &lt;/w-button&gt;
-          &lt;w-button 
-            class="code ma1" 
-            @click="transition = 'bounce';showBadge = !showBadge" bg-color="primary" 
+          &lt;w-button
+            class="code ma1"
+            @click="transition = 'bounce';showBadge = !showBadge"
+            bg-color="primary"
             xs&gt;
             bounce
           &lt;/w-button&gt;
-          &lt;w-button 
-            class="code ma1" 
-            @click="transition = 'twist';showBadge = !showBadge" bg-color="primary" 
+          &lt;w-button
+            class="code ma1"
+            @click="transition = 'twist';showBadge = !showBadge"
+            bg-color="primary"
             xs&gt;
             twist
           &lt;/w-button&gt;
-          &lt;w-button 
-            class="code ma1" 
-            @click="transition = 'scale';showBadge = !showBadge" bg-color="primary" 
+          &lt;w-button
+            class="code ma1"
+            @click="transition = 'scale';showBadge = !showBadge"
+            bg-color="primary"
             xs&gt;
             scale
           &lt;/w-button&gt;
-          &lt;w-button 
-            class="code ma1" 
-            @click="transition = 'scale-fade';showBadge = !showBadge" bg-color="primary" 
+          &lt;w-button
+            class="code ma1"
+            @click="transition = 'scale-fade';showBadge = !showBadge"
+            bg-color="primary"
             xs&gt;
             scale-fade
           &lt;/w-button&gt;
-          &lt;w-button 
-            class="code ma1" 
-            @click="transition = 'slide-fade-left';showBadge = !showBadge" bg-color="primary" 
+          &lt;w-button
+            class="code ma1"
+            @click="transition = 'slide-fade-left';showBadge = !showBadge"
+            bg-color="primary"
             xs&gt;
             slide-fade-left
           &lt;/w-button&gt;
-          &lt;w-button 
-            class="code ma1" 
-            @click="transition = 'slide-fade-right';showBadge = !showBadge" bg-color="primary" 
+          &lt;w-button
+            class="code ma1"
+            @click="transition = 'slide-fade-right';showBadge = !showBadge"
+            bg-color="primary"
             xs&gt;
             slide-fade-right
           &lt;/w-button&gt;
-          &lt;w-button 
-            class="code ma1" 
-            @click="transition = 'slide-fade-up';showBadge = !showBadge" bg-color="primary" 
+          &lt;w-button
+            class="code ma1"
+            @click="transition = 'slide-fade-up';showBadge = !showBadge"
+            bg-color="primary"
             xs&gt;
             slide-fade-up
           &lt;/w-button&gt;
-          &lt;w-button 
-            class="code ma1" 
-            @click="transition = 'slide-fade-down';showBadge = !showBadge" bg-color="primary" 
+          &lt;w-button
+            class="code ma1"
+            @click="transition = 'slide-fade-down';showBadge = !showBadge"
+            bg-color="primary"
             xs&gt;
             slide-fade-down
           &lt;/w-button&gt;
         &lt;/w-flex&gt;
+
         &lt;div class="w-flex grow"&gt;
-          &lt;div class="xs2" /&gt;
+          &lt;div class="xs2"&gt;&lt;/div&gt;
           &lt;div class="xs10"&gt;
-            &lt;w-badge 
-              class="ma4" 
-              v-model="showBadge" 
-              :transition="transition" 
-              bg-color="error" 
-              overlap 
+            &lt;w-badge
+              class="ma4"
+              v-model="showBadge"
+              :transition="transition"
+              bg-color="error"
+              overlap
               round&gt;
               &lt;template #badge&gt;5&lt;/template&gt;
               &lt;w-icon color="grey-light1" size="2.5em"&gt;mdi mdi-email&lt;/w-icon&gt;

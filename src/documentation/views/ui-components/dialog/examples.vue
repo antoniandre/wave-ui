@@ -34,13 +34,14 @@ div
         .spacer
         w-button(@click="dialog1.show = false") Close
     template(#html).
-      &lt;w-button 
-        class="px4 mr6 shrink" 
-        @click="dialog.show = true" 
-        bg-color="primary" 
+      &lt;w-button
+        class="px4 mr6 shrink"
+        @click="dialog.show = true"
+        bg-color="primary"
         dark&gt;
         Open dialog
       &lt;/w-button&gt;
+
       &lt;w-dialog
         v-model="dialog.show"
         :fullscreen="dialog.fullscreen"
@@ -52,22 +53,24 @@ div
           &lt;w-icon class="mr2"&gt;mdi mdi-tune&lt;/w-icon&gt;
           Control panel
         &lt;/template&gt;
-        &lt;w-checkbox 
-          class="d-flex mt2" 
-          v-model="dialog.fullscreen" 
+
+        &lt;w-checkbox
+          class="d-flex mt2"
+          v-model="dialog.fullscreen"
           label="Fullscreen"&gt;
         &lt;/w-checkbox&gt;
-        &lt;w-checkbox 
-          class="d-flex mt2" 
-          v-model="dialog.persistent" 
+        &lt;w-checkbox
+          class="d-flex mt2"
+          v-model="dialog.persistent"
           label="Persistent (try to click outside)"&gt;
         &lt;/w-checkbox&gt;
-        &lt;w-checkbox 
-          class="d-flex mt2" 
+        &lt;w-checkbox
+          class="d-flex mt2"
           v-model="dialog.persistentNoAnimation"
           :disabled="!dialog.persistent"
           label="Persistent with no animation"&gt;
         &lt;/w-checkbox&gt;
+
         &lt;div class="w-flex mt6 no-grow"&gt;
           &lt;span class="mr2"&gt;Width:&lt;/span&gt;
           &lt;w-radios
@@ -75,6 +78,7 @@ div
             :items="[{ value: 300, label: '300px' }, { value: 500, label: '500px' }]"
             inline /&gt;
         &lt;/div&gt;
+
         &lt;template #actions&gt;
           &lt;div class="spacer" /&gt;
           &lt;w-button @click="dialog.show = false"&gt;Close&lt;/w-button&gt;
@@ -106,33 +110,35 @@ div
         w-button.mr2(@click="dialog2.show = false" bg-color="error") I disagree
         w-button(@click="dialog2.show = false" bg-color="success") I agree
     template(#html).
-      &lt;w-button class="px4" 
-        @click="dialog.show = true" 
-        bg-color="primary" 
+      &lt;w-button class="px4"
+        @click="dialog.show = true"
+        bg-color="primary"
         dark&gt;
         Open dialog
       &lt;/w-button&gt;
-      &lt;w-dialog 
-        v-model="dialog.show" 
-        title="Terms and conditions" 
-        persistent 
+
+      &lt;w-dialog
+        v-model="dialog.show"
+        title="Terms and conditions"
+        persistent
         :width="550"&gt;
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
         quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
-        odit dolor labore eveniet at vel sequi nostrum.#[="#[br]#[br]"]
+        odit dolor labore eveniet at vel sequi nostrum.&lt;br /&gt;&lt;br /&gt;
         Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
         dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
         aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+
         &lt;template #actions&gt;
           &lt;div class="spacer" /&gt;
-          &lt;w-button 
-            class="mr2" 
-            @click="dialog.show = false" 
+          &lt;w-button
+            class="mr2"
+            @click="dialog.show = false"
             bg-color="error"&gt;
             I disagree
           &lt;/w-button&gt;
-          &lt;w-button 
-            @click="dialog.show = false" 
+          &lt;w-button
+            @click="dialog.show = false"
             bg-color="success"&gt;
             I agree
           &lt;/w-button&gt;
@@ -157,44 +163,45 @@ div
     w-dialog(v-model="dialog4.show" :width="250" title="Dialog 2" content-class="text-center")
       w-button.my6(@click="dialog4.show = false" bg-color="error" dark) Close
     template(#html).
-      &lt;w-button 
-        class="px4" 
-        @click="dialog1.show = true" 
-        bg-color="primary" 
+      &lt;w-button
+        class="px4"
+        @click="dialog1.show = true"
+        bg-color="primary"
         dark&gt;
         Open dialog
       &lt;/w-button&gt;
-      &lt;w-dialog 
-        v-model="dialog1.show" 
-        :width="600" 
+
+      &lt;w-dialog
+        v-model="dialog1.show"
+        :width="600"
         title="Dialog 1"&gt;
         &lt;p&gt;Lorem ipsum, dolor sit amet consectetur adipisicing elit...&lt;/p&gt;
-        &lt;w-button 
-          class="mt6" 
-          @click="dialog2.show = true" 
-          bg-color="indigo-light1" 
+        &lt;w-button
+          class="mt6"
+          @click="dialog2.show = true"
+          bg-color="indigo-light1"
           dark&gt;
           Open dialog 2
         &lt;/w-button&gt;
 
         &lt;template #actions&gt;
           &lt;div class="spacer" /&gt;
-          &lt;w-button 
-            @click="dialog1.show = false" 
-            bg-color="error" 
+          &lt;w-button
+            @click="dialog1.show = false"
+            bg-color="error"
             dark&gt;
             Close
           &lt;/w-button&gt;
         &lt;/template&gt;
       &lt;/w-dialog&gt;
 
-      &lt;w-dialog 
-        v-model="dialog2.show" 
-        :width="250" 
+      &lt;w-dialog
+        v-model="dialog2.show"
+        :width="250"
         title="Dialog 2"&gt;
-        &lt;w-button class="my6" 
-          @click="dialog2.show = false" 
-          bg-color="error" 
+        &lt;w-button class="my6"
+          @click="dialog2.show = false"
+          bg-color="error"
           dark&gt;
           Close
         &lt;/w-button&gt;
@@ -242,13 +249,14 @@ div
       w-button.my6(@click="dialog5.show = false" bg-color="error" dark) Close
     template(#html).
       &lt;div class="w-flex"&gt;
-        &lt;w-button 
-          class="px4 mr6" 
-          @click="dialog.show = true" 
-          bg-color="primary" 
+        &lt;w-button
+          class="px4 mr6"
+          @click="dialog.show = true"
+          bg-color="primary"
           dark&gt;
           Open dialog
         &lt;/w-button&gt;
+
         &lt;div class="w-flex wrap"&gt;
           &lt;div class="ma2"&gt;
             &lt;div class="title3 mb2"&gt;Transition names&lt;/div&gt;
@@ -262,6 +270,7 @@ div
               &lt;/template&gt;
             &lt;/w-radios&gt;
           &lt;/div&gt;
+
           &lt;div class="ma2"&gt;
             &lt;div class="title3 mb2"&gt;
               Slide transitions for fullscreen
@@ -275,7 +284,7 @@ div
                 &lt;code&gt;{{ '\{\{ item.label \}\}' }}&lt;/code&gt;
               &lt;/template&gt;
             &lt;/w-radios&gt;
-            &lt;w-checkbox 
+            &lt;w-checkbox
               class="mt2"
               :value="dialog.fullscreen === null ? fullscreenTransition : dialog.fullscreen"
               @input="dialog.fullscreen = $event"
@@ -284,6 +293,7 @@ div
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
+
       &lt;w-dialog
         v-model="dialog.show"
         :width="(dialog.fullscreen === null ? fullscreenTransition : dialog.fullscreen) ? 0 : 400"
@@ -292,8 +302,8 @@ div
         title="Dialog with custom transition"
         content-class="w-flex align-center justify-center"&gt;
         &lt;w-button class="my6"
-          @click="dialog.show = false" 
-          bg-color="error" 
+          @click="dialog.show = false"
+          bg-color="error"
           dark&gt;
           Close
         &lt;/w-button&gt;
@@ -351,13 +361,14 @@ div
         .spacer
         w-button(@click="dialog6.show = false" bg-color="error" dark) Close
     template(#html).
-      &lt;w-button 
-        class="px4" 
-        @click="dialog.show = true" 
-        bg-color="primary" 
+      &lt;w-button
+        class="px4"
+        @click="dialog.show = true"
+        bg-color="primary"
         dark&gt;
         Open control panel
       &lt;/w-button&gt;
+
       &lt;w-dialog
         v-model="dialog.show"
         :width="500"
@@ -367,41 +378,43 @@ div
           &lt;w-icon class="mr2"&gt;mdi mdi-tune&lt;/w-icon&gt;
           Control panel
         &lt;/template&gt;
-        &lt;w-radio 
-          class="d-flex mt1" 
-          v-model="dialog.overlayChoice" 
+
+        &lt;w-radio
+          class="d-flex mt1"
+          v-model="dialog.overlayChoice"
           return-value="opacity"&gt;
           Overlay opacity
-          &lt;input 
-            class="ml2" 
-            v-model="dialog.overlayOpacity" 
-            type="number" 
-            step="0.1" min="0" 
+          &lt;input
+            class="ml2"
+            v-model="dialog.overlayOpacity"
+            type="number"
+            step="0.1" min="0"
             max="1" /&gt;
         &lt;/w-radio&gt;
-        &lt;w-radio 
-          class="d-flex mt1" 
-          v-model="dialog.overlayChoice" 
+        &lt;w-radio
+          class="d-flex mt1"
+          v-model="dialog.overlayChoice"
           return-value="rgba(35, 71, 129, 0.5)"&gt;
           Custom color: transparent blue
         &lt;/w-radio&gt;
-        &lt;w-radio 
-          class="d-flex mt1" 
-          v-model="dialog.overlayChoice" 
+        &lt;w-radio
+          class="d-flex mt1"
+          v-model="dialog.overlayChoice"
           return-value="#e91e63"&gt;
           Custom color: opaque pink
         &lt;/w-radio&gt;
-        &lt;w-radio 
-          class="d-flex mt1" 
-          v-model="dialog.overlayChoice" 
+        &lt;w-radio
+          class="d-flex mt1"
+          v-model="dialog.overlayChoice"
           return-value="transparent"&gt;
           Custom color: transparent
         &lt;/w-radio&gt;
+
         &lt;template #actions&gt;
           &lt;div class="spacer" /&gt;
-          &lt;w-button 
-            @click="dialog.show = false" 
-            bg-color="error" 
+          &lt;w-button
+            @click="dialog.show = false"
+            bg-color="error"
             dark&gt;
             Close
           &lt;/w-button&gt;
