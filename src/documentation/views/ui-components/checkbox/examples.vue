@@ -46,20 +46,24 @@ div
     template(#html).
       &lt;div class="title4 mb2"&gt;Basic use&lt;/div&gt;
       &lt;w-checkbox&gt;Single option&lt;/w-checkbox&gt;
+
       &lt;div class="title4 mt8 mb2"&gt;Using v-model on a single checkbox&lt;/div&gt;
       &lt;w-flex class="align-center"&gt;
         &lt;w-checkbox v-model="selection1"&gt;Single option&lt;/w-checkbox&gt;
+
         &lt;span class="ml6"&gt;
           v-model:
           &lt;code class="ml1"&gt;{{ '\{\{ selection1 \}\}' }}&lt;/code&gt;
         &lt;/span&gt;
       &lt;/w-flex&gt;
+
       &lt;div class="title4 mt8 mb2"&gt;Using an array of v-model for multiple checkboxes&lt;/div&gt;
       &lt;w-flex class="align-center"&gt;
         &lt;w-checkbox class="mr2" v-model="selection2[0]"&gt;Option 1&lt;/w-checkbox&gt;
         &lt;w-checkbox class="mr2" v-model="selection2[1]"&gt;Option 2&lt;/w-checkbox&gt;
         &lt;w-checkbox v-model="selection2[2]"&gt;Option 3&lt;/w-checkbox&gt;
-        &lt;span.ml6&gt;
+
+        &lt;span class="ml6"&gt;
           v-model:
           &lt;code class="ml1"&gt;{{ '\{\{ selection2 \}\}' }}&lt;/code&gt;
         &lt;/span&gt;
@@ -98,6 +102,7 @@ div
         &lt;span class="pr1"&gt;Choice 1 has an icon&lt;/span&gt;
         &lt;w-icon md&gt;mdi mdi-star&lt;/w-icon&gt;
       &lt;/w-checkbox&gt;
+
       &lt;w-checkbox name="checkbox1"&gt;
         &lt;w-tag bg-color="green-light5" color="green-dark2"&gt;
           Choice 2 is a tag
@@ -165,6 +170,7 @@ div
             Toggle checkbox 2
           &lt;/w-button&gt;
         &lt;/div&gt;
+
         &lt;div class="title3 ml8"&gt;
           v-model:
           &lt;code class="ml1"&gt;{{ "\{\{ selection || '[]' \}\}" }}&lt;/code&gt;
@@ -233,7 +239,12 @@ div
   example(content-class="mt3")
     w-checkboxes(v-model="selection8" :items="checkboxes1" round inline)
     template(#html).
-      &lt;w-checkboxes v-model="selection" :items="checkboxes" round inline /&gt;
+      &lt;w-checkboxes
+        v-model="selection"
+        :items="checkboxes"
+        round
+        inline&gt;
+      &lt;/w-checkboxes&gt;
     template(#js).
       data: () => ({
         selection: [1],
@@ -258,10 +269,17 @@ div
     .title4.mt8.mb2 Different color per item
     w-checkboxes(v-model="selection7" :items="checkboxes4")
     template(#html).
-      &lt;w-checkboxes v-model="selection1" :items="checkboxes1" color="purple"&gt;&lt;/w-checkboxes&gt;
+      &lt;w-checkboxes
+        v-model="selection1"
+        :items="checkboxes1"
+        color="purple"&gt;
+      &lt;/w-checkboxes&gt;
 
       &lt;div class="title4 mt8 mb2"&gt;Different color per item&lt;/div&gt;
-      &lt;w-checkboxes v-model="selection2" :items="checkboxes2"&gt;&lt;/w-checkboxes&gt;
+      &lt;w-checkboxes
+        v-model="selection2"
+        :items="checkboxes2"&gt;
+      &lt;/w-checkboxes&gt;
     template(#js).
       data: () => ({
         selection1: [1, 2, 3],
@@ -286,12 +304,30 @@ div
     w-checkbox.mr2(v-model="selection6[0]" color="pink-light3") Option 1
     w-checkbox(v-model="selection6[1]" color="blue-light1") Option 2
     template(#html).
-      &lt;w-checkbox class="mr2" v-model="selection1[0]" color="teal-light1"&gt;Option 1&lt;/w-checkbox&gt;
-      &lt;w-checkbox v-model="selection1[1]" color="teal-light1"&gt;Option 2&lt;/w-checkbox&gt;
+      &lt;w-checkbox
+        class="mr2"
+        v-model="selection1[0]"
+        color="teal-light1"&gt;
+        Option 1
+      &lt;/w-checkbox&gt;
+      &lt;w-checkbox
+        v-model="selection1[1]"
+        color="teal-light1"&gt;
+        Option 2
+      &lt;/w-checkbox&gt;
 
       &lt;div class="title4 mt8 mb2"&gt;Different color per item&lt;/div&gt;
-      &lt;w-checkbox class="mr2" v-model="selection2[0]" color="pink-light3"&gt;Option 1&lt;/w-checkbox&gt;
-      &lt;w-checkbox v-model="selection2[1]" color="blue-light1"&gt;Option 2&lt;/w-checkbox&gt;
+      &lt;w-checkbox
+        class="mr2"
+        v-model="selection2[0]"
+        color="pink-light3"&gt;
+        Option 1
+      &lt;/w-checkbox&gt;
+      &lt;w-checkbox
+        v-model="selection2[1]"
+        color="blue-light1"&gt;
+        Option 2
+      &lt;/w-checkbox&gt;
     template(#js).
       data: () => ({
         selection1: [true, true],
