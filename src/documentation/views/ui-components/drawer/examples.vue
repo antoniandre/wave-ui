@@ -18,36 +18,54 @@ div
       @click="showBottomDrawer = !showBottomDrawer"
       outline
       color="primary") Show bottom drawer
-    template(#pug).
-      w-button.ma1(
+    template(#html).
+      &lt;w-button 
+        class="ma1"
         @click="showDrawer = 'left'"
         outline
-        color="primary") Show left drawer
-      w-button.ma1(
+        color="primary"&gt;
+        Show left drawer
+      &lt;/w-button&gt;
+
+      &lt;w-button 
+        class="ma1"
         @click="showDrawer = 'right'"
         outline
-        color="primary") Show right drawer
-      w-button.ma1(
+        color="primary"&gt;
+        Show right drawer
+      &lt;/w-button&gt;
+
+      &lt;w-button 
+        class="ma1"
         @click="showDrawer = 'top'"
         outline
-        color="primary") Show top drawer
-      w-button.ma1(
+        color="primary"&gt;
+        Show top drawer
+      &lt;/w-button&gt;
+
+      &lt;w-button 
+        class="ma1"
         @click="showDrawer = 'bottom'"
         outline
-        color="primary") Show bottom drawer
+        color="primary"&gt;
+        Show bottom drawer
+      &lt;/w-button&gt;
 
-      w-drawer(
+      &lt;w-drawer
         :value="!!showDrawer"
         :[position]="true"
-        @close="showDrawer = false")
-        w-button.button--close(
+        @close="showDrawer = false"&gt;
+        &lt;w-button 
+          class="button--close"
           @click="showDrawer = false"
           sm
           outline
           round
           absolute
           color="primary"
-          icon="wi-cross")
+          icon="wi-cross"&gt;
+        &lt;/w-button&gt;
+      &lt;/w-drawer&gt;
 
     template(#js).
       data: () => ({
@@ -72,12 +90,15 @@ div
       outline
       color="primary") Show drawer
     w-drawer(v-model="showAbsoluteDrawer" absolute width="160px")
-    template(#pug).
-      w-button.my12(
+    template(#html).
+      &lt;w-button 
+        class="my12"
         @click="showDrawer = !showDrawer"
         outline
-        color="primary") Show drawer
-      w-drawer(v-model="showDrawer" absolute width="160px")
+        color="primary"&gt;
+        Show drawer
+      &lt;/w-button&gt;
+      &lt;w-drawer v-model="showDrawer" absolute width="160px" /&gt;
     template(#js).
       data: () => ({
         showDrawer: false
@@ -97,21 +118,26 @@ div
       @click="bottomDrawerHeight = '60px';showBottomDrawer = !showBottomDrawer"
       outline
       color="primary") Show a 60px height bottom drawer
-    template(#pug).
-      w-button(
+    template(#html).
+      &lt;w-button
         @click="showDrawer = true"
         outline
-        color="primary") Show a 60px height bottom drawer
+        color="primary"&gt;
+        Show a 60px height bottom drawer
+      &lt;/w-button&gt;
 
-      w-drawer(v-model="showDrawer" bottom height="60px")
-        w-button.button--close(
+      &lt;w-drawer v-model="showDrawer" bottom height="60px"&gt;
+        &lt;w-button 
+          class="button--close"
           @click="showDrawer = false"
           sm
           outline
           round
           absolute
           color="primary"
-          icon="wi-cross")
+          icon="wi-cross"&gt;
+        &lt;/w-button&gt;
+      &lt;/w-drawer&gt;
     template(#js).
       data: () => ({
         showDrawer: false
@@ -134,16 +160,27 @@ div
             outline
             color="primary") Show drawer
       .ma2 Drawer content
-    template(#pug).
-      w-drawer(v-model="showDrawer" push-content :overlay-opacity="0.15" width="160px")
-        template(#pushable="")
-          .py12.w-flex.column.align-center.justify-center
-            p Pushable content
-            w-button(
+    template(#html).
+      &lt;w-drawer 
+        v-model="showDrawer" 
+        push-content 
+        :overlay-opacity="0.15" 
+        width="160px"&gt;
+
+        &lt;template #pushable&gt;
+          &lt;div class="py12 w-flex column align-center justify-center"&gt;
+            &lt;p&gt;Pushable content&lt;/p&gt;
+            &lt;w-button
               @click="showDrawer = !showDrawer"
               outline
-              color="primary") Show drawer
-        .ma2 Drawer content
+              color="primary"&gt;
+              Show drawer
+            &lt;/w-button&gt;
+          &lt;/div&gt;
+        &lt;/template&gt;
+
+        &lt;div class="ma2"&gt;Drawer content&lt;/div&gt;
+      &lt;/w-drawer&gt;
     template(#js).
       data: () => ({
         showDrawer: false
@@ -159,16 +196,28 @@ div
             outline
             color="primary") Show drawer
       .ma2 Drawer content
-    template(#pug).
-      w-drawer(v-model="showDrawer" push-content :overlay-opacity="0.15" left width="160px")
-        template(#pushable="")
-          .py12.w-flex.column.align-center.justify-center
-            p Pushable content
-            w-button(
+    template(#html).
+      &lt;w-drawer 
+        v-model="showDrawer" 
+        push-content 
+        :overlay-opacity="0.15" 
+        left 
+        width="160px"&gt;
+        
+        &lt;template #pushable&gt;
+          &lt;div class="py12 w-flex column align-center justify-center"&gt;
+            &lt;p&gt;Pushable content&lt;/p&gt;
+            &lt;w-button
               @click="showDrawer = !showDrawer"
               outline
-              color="primary") Show drawer
-        .ma2 Drawer content
+              color="primary"&gt;
+              Show drawer
+            &lt;/w-button&gt;
+          &lt;/div&gt;
+        &lt;/template&gt;
+
+        &lt;div class="ma2"&gt;Drawer content&lt;/div&gt;
+      &lt;/w-drawer&gt;
     template(#js).
       data: () => ({
         showDrawer: false
@@ -189,30 +238,48 @@ div
       @click="noOverlay = true;overlayColor = '';showTopDrawer = !showTopDrawer"
       outline
       color="primary") No overlay
-    template(#pug).
-      span Open top drawer with a:
-      w-button.ma1(
+    template(#html).
+      &lt;span&gt;Open top drawer with a:&lt;/span&gt;
+      &lt;w-button
+        class="ma1"
         @click="noOverlay = false;overlayColor = 'rgba(35, 71, 129, 0.5&amp;#041;';showDrawer = !showDrawer"
         outline
-        color="primary") Custom color overlay
-      w-button.ma1(
+        color="primary"&gt;
+        Custom color overlay
+      &lt;/w-button&gt;
+      
+      &lt;w-button
+        class="ma1"
         @click="noOverlay = false;overlayColor = 'transparent';showDrawer = !showDrawer"
         outline
-        color="primary") Transparent overlay
-      w-button.ma1(
+        color="primary"&gt;
+        Transparent overlay
+      &lt;/w-button&gt;
+      
+      &lt;w-button
+        class="ma1"
         @click="noOverlay = true;overlayColor = '';showDrawer = !showDrawer"
         outline
-        color="primary") No overlay
+        color="primary"&gt;
+        No overlay
+      &lt;/w-button&gt;
 
-      w-drawer(v-model="showDrawer" top :no-overlay="noOverlay" :overlay-color="overlayColor")
-        w-button.button--close(
+      &lt;w-drawer 
+        v-model="showDrawer" 
+        top 
+        :no-overlay="noOverlay" 
+        :overlay-color="overlayColor"&gt;
+        &lt;w-button
+          class="button--close"
           @click="showDrawer = false"
           sm
           outline
           absolute
           round
           color="primary"
-          icon="wi-cross")
+          icon="wi-cross"&gt;
+        &lt;/w-button&gt;
+      &lt;/w-drawer&gt;
     template(#js).
       data: () => ({
         showDrawer: false,
@@ -233,23 +300,33 @@ div
       @click="persistent = true;showBottomDrawer = !showBottomDrawer"
       outline
       color="primary") Persistent drawer
-    template(#pug).
-      w-button(@click="showDrawer = true" outline color="primary")
-        | Persistent drawer
+    template(#html).
+      &lt;w-button 
+        @click="showDrawer = true" 
+        outline color="primary"&gt;
+        Persistent drawer
+      &lt;/w-button&gt;
 
-      w-drawer(
+      &lt;w-drawer
         v-model="showDrawer"
         bottom
         persistent
-        bg-color="blue-light4")
-        w-button.button--close(
+        bg-color="blue-light4"&gt;
+
+        &lt;w-button
+          class="button--close"
           sm
           @click="showDrawer = false"
           outline
           absolute
           round
-          icon="wi-cross")
-        .w-flex.fill-height.align-center.justify-center You can customize the background color as well.
+          icon="wi-cross"&gt;
+        &lt;/w-button&gt;
+
+        &lt;div class="w-flex fill-height align-center justify-center"&gt;
+          You can customize the background color as well.
+        &lt;/div&gt;
+      &lt;/w-drawer&gt;
     template(#js).
       data: () => ({
         showDrawer: false
@@ -279,27 +356,48 @@ div
         w-button(sm bg-color="primary" dark @click="showCookieNotice = false")
           w-icon.mr2 wi-check
           | I agree
-    template(#pug).
-      w-button(@click="showCookieNotice = true" outline color="primary")
-        | Show the cookie notice
+    template(#html).
+      &lt;w-button 
+        @click="showCookieNotice = true" 
+        outline 
+        color="primary"&gt;
+        Show the cookie notice
+      &lt;/w-button&gt;
 
-      w-drawer(
+      &lt;w-drawer
         v-model="showCookieNotice"
         content-class="cookie-notice"
         overlay-color="transparent"
         persistent
         fit-content
-        bottom)
-        .w-flex.pa2.align-center.wrap
-          .w-flex.align-center
-            w-icon.mr3(color="primary" xl) wi-info-circle
-            span.grey-dark3.
+        bottom&gt;
+        &lt;div class="w-flex pa2 align-center wrap"&gt;
+          &lt;div class="w-flex align-center"&gt;
+            &lt;w-icon 
+              class="mr3" 
+              color="primary" 
+              xl&gt;
+              wi-info-circle
+            &lt;/w-icon&gt;
+
+            &lt;span class="grey-dark3"&gt;
               Our website uses cookies to give you the best user experience.
               To continue browsing this site you must agree.
-          .spacer
-          w-button(sm bg-color="primary" dark @click="showCookieNotice = false")
-            w-icon.mr2 wi-check
-            | I agree
+            &lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;div class="spacer"/&gt;
+          
+          &lt;w-button 
+            sm 
+            bg-color="primary" 
+            dark 
+            @click="showCookieNotice = false"&gt;
+            &lt;w-icon class="mr2"&gt;wi-check&lt;/w-icon&gt;
+            I agree
+          &lt;/w-button&gt;
+        &lt;/div&gt;
+      &lt;/w-drawer&gt;
     template(#js).
       data: () => ({
         showCookieNotice: false
