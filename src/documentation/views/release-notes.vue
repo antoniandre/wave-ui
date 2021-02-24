@@ -23,6 +23,13 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.22.0
+      ul
+        li removed the useless full height on html &amp; body.
+        li added a #[code .align-self-stretch] helper class.
+        li Added the #[code color] &amp; #[code bg-color] options on the #[strong.code w-dialog] component.
+
+    li.minor
       strong.version v1.21.0
       ul
         li Add #[code item-title-key] &amp; #[code item-content-key] options on #[strong.code w-tabs] component and remove internal #[code _active] prop.
