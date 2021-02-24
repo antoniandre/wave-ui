@@ -22,11 +22,16 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v1.22.1
+      ul
+        li Add a #[code dialog-class] option on the #[strong.code w-dialog] component.
+
     li.minor
       strong.version v1.22.0
       ul
-        li removed the useless full height on html &amp; body.
-        li added a #[code .align-self-stretch] helper class.
+        li Removed the useless full height on html &amp; body.
+        li Added a #[code .align-self-stretch] helper class.
         li Added the #[code color] &amp; #[code bg-color] options on the #[strong.code w-dialog] component.
         li Trim the #[strong.code w-icon] icon name to work with ligatures.
 
