@@ -28,6 +28,7 @@ main
         li removed the useless full height on html &amp; body.
         li added a #[code .align-self-stretch] helper class.
         li Added the #[code color] &amp; #[code bg-color] options on the #[strong.code w-dialog] component.
+        li Trim the #[strong.code w-icon] icon name to work with ligatures.
 
     li.minor
       strong.version v1.21.0
