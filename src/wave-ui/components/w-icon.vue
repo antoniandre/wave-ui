@@ -88,11 +88,11 @@ export default {
   },
 
   created () {
-    this.icon = this.$slots.default[0].text || ''
+    this.icon = this.$slots.default[0].text.trim() || ''
   },
 
   beforeUpdate () {
-    this.icon = this.$slots.default[0].text
+    this.icon = this.$slots.default[0].text.trim()
   }
 }
 </script>
