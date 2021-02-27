@@ -21,11 +21,13 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
+    li.minor
+      strong.version v1.23.0
+      p Complete the #[em à la carte] feature, allowing tree-shaking.
 
     li.patch
       strong.version v1.22.1
-      ul
-        li Add a #[code dialog-class] option on the #[strong.code w-dialog] component.
+      p Add a #[code dialog-class] option on the #[strong.code w-dialog] component.
 
     li.minor
       strong.version v1.22.0
@@ -47,8 +49,7 @@ main
 
     li.patch
       strong.version v1.20.6
-      ul
-        li Fix #[strong.code w-button] external links.
+      p Fix #[strong.code w-button] external links.
 
     li.patch
       strong.version v1.20.5
