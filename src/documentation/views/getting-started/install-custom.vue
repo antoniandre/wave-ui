@@ -84,15 +84,14 @@ div
 
         template(#item-title.2) Vue 3
         template(#item-content.2)
-          ssh-pre.ma0.py12.text-center Coming Soon.
-          //- ssh-pre.ma0(language="js").
+          ssh-pre.ma0(language="js").
             // Keep these 2 imports.
             import { createApp, h } from 'vue'
             import App from './App.vue'
 
             // 1.
             // Import Wave UI from the src directory &amp; create the Vue app.
-            import WaveUI from 'wave-ui/src/wave-ui'
+            import WaveUI from 'wave-ui/src/wave-ui/core'
 
             const app = createApp({
               render: () => h(App)
@@ -102,7 +101,7 @@ div
             // Import only the components you need. e.g.
             import { WApp, WButton } from 'wave-ui/src/wave-ui/components'
 
-            Vue.use(WaveUI, {
+            app.use(WaveUI, {
               components: { WApp, WButton }
             })
 
