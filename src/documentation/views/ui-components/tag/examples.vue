@@ -56,7 +56,7 @@ div
 
   title-link(h2) Toggleable state &amp; closable
   p.
-    When a tag has a #[code v-model] or #[code value], it becomes toggleable (two different states) and clickable.
+    When a tag has a #[code v-model] or #[code model-value], it becomes toggleable (two different states) and clickable.
     When the user clicks it, its #[code v-model] boolean value is updated.
   example(content-class="w-flex align-center")
     w-tag(
