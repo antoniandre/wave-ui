@@ -176,6 +176,12 @@ export default {
       }
     },
 
+    updateActiveTab (index) {
+      if (typeof index === 'string') index = ~~index
+      else if (isNaN(index) || index < 0) index = 0
+      this.activeTabIndex = index
+    },
+
     // Return the original tab item (so there is no `_index`, etc.).
     getOriginalTab (tab) {
       return this.items[tab._index]
@@ -183,6 +189,8 @@ export default {
   },
 
   beforeMount () {
+    this.updateActiveTab(this.value)
+
     this.$nextTick(() => {
       this.updateSlider()
       // Disable the slider transition while loading.
@@ -198,9 +206,7 @@ export default {
 
   watch: {
     value (index) {
-      if (typeof index === 'string') index = ~~index
-      else if (isNaN(index) || index < 0) index = 0
-      this.activeTabIndex = index
+      this.updateActiveTab(index)
     },
     items () {
       // When deleting a tab, activate the previous one.
