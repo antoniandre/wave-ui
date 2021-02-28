@@ -98,8 +98,9 @@ export default {
     contentClass: { type: String },
     externalJs: { type: String },
     externalCss: { type: String },
-    fullJs: { type: Boolean },
-    reactive: { type: Boolean }
+    reactive: { type: Boolean },
+    // An array of languages (html, pug, css, scss, js) to keep a blank Codepen template on.
+    blankCodepen: { type: Array }
   },
   data: () => ({
     showSource: false,
@@ -135,27 +136,41 @@ export default {
         scss: scss && scss()[0].children || ''
       }
       let html = ''
+      let css = ''
+      let js = ''
+      const blanks = this.blankCodepen || []
 
+      // Pug & HTML.
       if (slots.pug) {
-        html = '#app\n' +
-               '  w-app(block)\n' +
-               '    ' + slots.pug.replace(/\n$/, '').replace(/\n/g, '\n    ')
+        if (blanks.includes('pug')) html = slots.pug.replace(/\n+$/, '')
+        else {
+          html = '#app\n' +
+                 '  w-app(block)\n' +
+                 '    ' + slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n    ')
+        }
       }
       else {
-        html = '<div id="app">\n' +
-               '  <w-app id="app" block>\n' +
-               '    ' + slots.html.replace(/\n$/, '').replace(/\n/g, '\n    ') +
-               '\n  </w-app>\n' +
-               '</div>\n'
+        if (blanks.includes('html')) html = slots.html.replace(/\n+$/, '')
+        else {
+          html = '<div id="app">\n' +
+                 '  <w-app block>\n' +
+                 '    ' + slots.html.replace(/\n+$/, '').replace(/\n/g, '\n    ') +
+                 '\n  </w-app>\n' +
+                 '</div>\n'
+        }
       }
-      const css = '.w-app {font: 14px sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
-      const js = this.fullJs ? slots.js : (
-        'const app = Vue.createApp({\n' +
-        '  ' + slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') + '\n' +
-        '})\n\n' +
-        'new WaveUI(app, {})\n\n' +
-        'app.mount(\'#app\')'
-      )
+
+      // CSS / SCSS.
+      if (blanks.includes('css') || blanks.includes('scss')) css = slots.css || slots.scss
+      else css = '.w-app {font: 14px sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
+
+      // JS.
+      if (blanks.includes('js')) js = slots.js
+      else js = 'const app = Vue.createApp({\n' +
+                '  ' + slots.js.replace(/\n+$/, '').replace(/\n/g, '\n  ') + '\n' +
+                '})\n\n' +
+                'new WaveUI(app, {})\n\n' +
+                'app.mount(\'#app\')'
 
       const data = {
         title: 'Wave UI Example Pen',

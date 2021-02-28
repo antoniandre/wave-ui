@@ -7,18 +7,15 @@ w-app
   .content-wrap.w-flex.no-shrink
     transition(name="fade")
       w-progress(v-if="loading" color="primary" tile absolute)
-    nav-menu.navigation.no-shrink(
-      v-if="!isMobile"
-      ref="nav-menu"
-      :class="{ 'nav-menu--fixed': fixNavMenu }"
-      v-model:drawer-open="drawerOpen")
+    nav-menu.navigation.no-shrink(v-if="!isMobile" v-model:drawer-open="drawerOpen")
     .main-content.w-flex.column.grow
       router-view.grow(#default="{ Component }" :class="`main--${$route.name}`")
         transition(name="fade-page" mode="out-in")
           component(:is="Component")
 
       footer.w-flex.justify-end.align-center.no-grow.wrap
-        small.grey-light3.text-upper Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
+        small.grey-light3.text-upper
+          | Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
         .spacer
         router-link.pink-light1.mr4(to="/backers")
           w-icon.mr1 mdi mdi-heart-multiple-outline
@@ -55,11 +52,7 @@ import '@/documentation/scss/index.scss'
 export default {
   components: { Toolbar, NavMenu },
   data: () => ({
-    drawerOpen: false,
-    fixNavMenu: false,
-    navMenuTop: 0,
-    scrollingEl: null,
-    contentWrapEl: null
+    drawerOpen: false
   }),
 
   computed: {
@@ -70,29 +63,6 @@ export default {
     isMobile () {
       return this.$waveui.breakpoint.xs
     }
-  },
-
-  methods: {
-    onScroll () {
-      this.fixNavMenu = this.scrollingEl.scrollTop >= this.navMenuTop
-    },
-    onResize () {
-      this.navMenuTop = this.contentWrapEl.offsetTop - 12
-    }
-  },
-
-  beforeUnmount () {
-    window.removeEventListener('scroll', this.onScroll)
-    window.removeEventListener('resize', this.onResize)
-  },
-
-  mounted () {
-    this.contentWrapEl = document.querySelector('.content-wrap')
-    this.navMenuTop = this.contentWrapEl.offsetTop - 12
-    this.scrollingEl = document.documentElement
-
-    window.addEventListener('scroll', this.onScroll)
-    window.addEventListener('resize', this.onResize)
   }
 }
 </script>

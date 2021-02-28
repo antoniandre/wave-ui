@@ -242,6 +242,7 @@ export default {
         }
         // eslint-disable-next-line vue/custom-event-name-casing
         else if (e.keyCode === 27) this.$emit('keydown:escape')
+        // On arrow keys press, navigate to prev/next item.
         else if (this.arrowsNavigation) {
           e.preventDefault()
           if (e.keyCode === 38) this.focusPrevNextItem(li._index, false)
@@ -390,6 +391,9 @@ export default {
     },
 
     applySelectionOnItems (selection) {
+      // Reset the selections when single selection allowed for w-select.
+      if (!this.isMultipleSelect) this.listItems.forEach(item => item._selected = false)
+
       this.checkSelection(selection) // Create an array with the selected values.
         .forEach(val => this.listItems.find(item => item._value === val)._selected = true)
     }

@@ -74,7 +74,7 @@ export default {
       // If the button is a router-link, we can't apply events on it since vue-router needs the .native
       // modifier but it's not available with the v-on directive.
       // So do a manual router.push if $router is present.
-      return this.route && this.hasRouter && !this.forceLink ? {
+      return this.route && this.hasRouter && !this.forceLink && !this.externalLink ? {
         ...this.$attrs,
         click: e => {
           if (this.$attrs.click) this.$attrs.click(e)

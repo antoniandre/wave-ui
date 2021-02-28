@@ -88,11 +88,13 @@ export default {
   },
 
   created () {
-    this.icon = this.$slots.default && this.$slots.default()[0].children || ''
+    const { default: slotContent } = this.$slots
+    this.icon = slotContent ? (slotContent()[0].children || '').trim() : ''
   },
 
   beforeUpdate () {
-    this.icon = this.$slots.default && this.$slots.default()[0].children
+    const { default: slotContent } = this.$slots
+    this.icon = slotContent ? (slotContent()[0].children || '').trim() : ''
   }
 }
 </script>

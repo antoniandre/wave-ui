@@ -26,15 +26,16 @@ div
       w-button.ma1(bg-color="primary") primary
       w-button.ma1(bg-color="secondary") secondary
       w-button.ma1(bg-color="purple-light4") purple-light4
-    template(#pug).
-      w-flex.wrap
-        w-button.ma1(bg-color="success") success
-        w-button.ma1(bg-color="error") error
-        w-button.ma1(bg-color="warning") warning
-        w-button.ma1(bg-color="info") info
-        w-button.ma1(bg-color="primary") primary
-        w-button.ma1(bg-color="secondary") secondary
-        w-button.ma1(bg-color="purple-light4") purple-light4
+    template(#html).
+      &lt;w-flex class="wrap"&gt;
+        &lt;w-button class="ma1" bg-color="success"&gt;success&lt;/w-button&gt;
+        &lt;w-button class="ma1" bg-color="error"&gt;error&lt;/w-button&gt;
+        &lt;w-button class="ma1" bg-color="warning"&gt;warning&lt;/w-button&gt;
+        &lt;w-button class="ma1" bg-color="info"&gt;info&lt;/w-button&gt;
+        &lt;w-button class="ma1" bg-color="primary"&gt;primary&lt;/w-button&gt;
+        &lt;w-button class="ma1" bg-color="secondary"&gt;secondary&lt;/w-button&gt;
+        &lt;w-button class="ma1" bg-color="purple-light4"&gt;purple-light4&lt;/w-button&gt;
+      &lt;/w-flex&gt;
 
   h3 Mix background and text colors
   p.
@@ -44,10 +45,27 @@ div
     w-button.ma1(bg-color="success" color="yellow-light2") success
     w-button.ma1(bg-color="error" color="amber-light2") error
     w-button.ma1(bg-color="primary" color="success-light2") warning
-    template(#pug).
-      w-button.ma1(bg-color="success" color="yellow-light2") success
-      w-button.ma1(bg-color="error" color="amber-light2") error
-      w-button.ma1(bg-color="primary" color="success-light2") warning
+    template(#html).
+      &lt;w-button
+        class="ma1"
+        bg-color="success"
+        color="yellow-light2"&gt;
+        success
+      &lt;/w-button&gt;
+
+      &lt;w-button
+        class="ma1"
+        bg-color="error"
+        color="amber-light2"&gt;
+        error
+      &lt;/w-button&gt;
+
+      &lt;w-button
+        class="ma1"
+        bg-color="primary"
+        color="success-light2"&gt;
+        warning
+      &lt;/w-button&gt;
 
   h3 Dark
   p.
@@ -59,10 +77,12 @@ div
     w-button.ma1(bg-color="primary-light3") normal
     w-icon.mx6.grey-light3(size="2.5em") mdi mdi-arrow-right
     w-button.ma1(bg-color="primary-light3" dark) dark
-    template(#pug).
-      w-button.ma1(bg-color="primary-light3") normal
-      w-icon.mx6.grey-light3(size="2.5em") mdi mdi-arrow-right
-      w-button.ma1(bg-color="primary-light3" dark) dark
+    template(#html).
+      &lt;w-button class="ma1" bg-color="primary-light3"&gt;normal&lt;/w-button&gt;
+
+      &lt;w-icon class="mx6 grey-light3" size="2.5em"&gt;mdi mdi-arrow-right&lt;/w-icon&gt;
+
+      &lt;w-button class="ma1" bg-color="primary-light3" dark&gt;dark&lt;/w-button&gt;
 
   title-link(h2) Sizes
   p.
@@ -83,29 +103,30 @@ div
     w-button.ma1(bg-color="primary" color="white" lg) large
     w-button.ma1(bg-color="primary" color="white" xl) extra large
     w-button.ma1(bg-color="primary" color="white" disabled) disabled
-    template(#pug).
-      w-button.ma1(bg-color="secondary" xs) extra small
-      w-button.ma1(bg-color="secondary" sm) small
-      w-button.ma1(bg-color="secondary" md) medium
-      w-button.ma1(bg-color="secondary" lg) large
-      w-button.ma1(bg-color="secondary" xl) extra large
-      w-button.ma1(bg-color="secondary" disabled) disabled
-      br
-      br
-      w-button.ma1(bg-color="primary" color="white" xs) extra small
-      w-button.ma1(bg-color="primary" color="white" sm) small
-      w-button.ma1(bg-color="primary" color="white" md) medium
-      w-button.ma1(bg-color="primary" color="white" lg) large
-      w-button.ma1(bg-color="primary" color="white" xl) extra large
-      w-button.ma1(bg-color="primary" color="white" disabled) disabled
+    template(#html).
+      &lt;w-button class="ma1" bg-color="secondary" xs&gt;extra small&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="secondary" sm&gt;small&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="secondary" md&gt;medium&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="secondary" lg&gt;large&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="secondary" xl&gt;extra large&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="secondary" disabled&gt;disabled&lt;/w-button&gt;
+      &lt;br&gt;
+      &lt;br&gt;
+      &lt;w-button class="ma1" bg-color="primary" color="white" xs&gt;extra small&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" color="white" sm&gt;small&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" color="white" md&gt;medium&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" color="white" lg&gt;large&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" color="white" xl&gt;extra large&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" color="white" disabled&gt;disabled&lt;/w-button&gt;
 
   h3 Stretch to the available space
   example
     w-flex
       w-button.ma1.grow(bg-color="primary") primary
-    template(#pug).
-      w-flex
-        w-button.ma1.grow(bg-color="primary") primary
+    template(#html).
+      &lt;w-flex&gt;
+        &lt;w-button class="ma1 grow" bg-color="primary"&gt;primary&lt;/w-button&gt;
+      &lt;/w-flex&gt;
 
   h3 Custom width and height
   p.
@@ -113,8 +134,14 @@ div
     are available on the #[span.code w-button] component.
   example(content-class="pt6")
     w-button.ma1(bg-color="info" width="10em" :height="18") info
-    template(#pug).
-      w-button.ma1.grow(bg-color="info" width="10em" :height="18") info
+    template(#html).
+      &lt;w-button
+        class="ma1 grow"
+        bg-color="info"
+        width="10em"
+        :height="18"&gt;
+        info
+      &lt;/w-button&gt;
 
   title-link(h2) Outline
   example
@@ -124,13 +151,13 @@ div
     w-button.ma1(color="primary" outline lg) large
     w-button.ma1(color="primary" outline xl) extra large
     w-button.ma1(color="primary" outline disabled) disabled
-    template(#pug).
-      w-button.ma1(color="primary" outline xs) extra small
-      w-button.ma1(color="primary" outline sm) small
-      w-button.ma1(color="primary" outline md) medium
-      w-button.ma1(color="primary" outline lg) large
-      w-button.ma1(color="primary" outline xl) extra large
-      w-button.ma1(color="primary" outline disabled) disabled
+    template(#html).
+      &lt;w-button class="ma1" color="primary" outline xs&gt;extra small&lt;/w-button&gt;
+      &lt;w-button class="ma1" color="primary" outline sm&gt;small&lt;/w-button&gt;
+      &lt;w-button class="ma1" color="primary" outline md&gt;medium&lt;/w-button&gt;
+      &lt;w-button class="ma1" color="primary" outline lg&gt;large&lt;/w-button&gt;
+      &lt;w-button class="ma1" color="primary" outline xl&gt;extra large&lt;/w-button&gt;
+      &lt;w-button class="ma1" color="primary" outline disabled&gt;disabled&lt;/w-button&gt;
 
   title-link(h2) Text
   example
@@ -140,13 +167,13 @@ div
     w-button.ma1(color="primary" text lg) large
     w-button.ma1(color="primary" text xl) extra large
     w-button.ma1(color="primary" text disabled) disabled
-    template(#pug).
-      w-button.ma1(color="primary" text xs) extra small
-      w-button.ma1(color="primary" text sm) small
-      w-button.ma1(color="primary" text md) medium
-      w-button.ma1(color="primary" text lg) large
-      w-button.ma1(color="primary" text xl) extra large
-      w-button.ma1(color="primary" text disabled) disabled
+    template(#html).
+      &lt;w-button class="ma1" color="primary" text xs&gt;extra small&lt;/w-button&gt;
+      &lt;w-button class="ma1" color="primary" text sm&gt;small&lt;/w-button&gt;
+      &lt;w-button class="ma1" color="primary" text md&gt;medium&lt;/w-button&gt;
+      &lt;w-button class="ma1" color="primary" text lg&gt;large&lt;/w-button&gt;
+      &lt;w-button class="ma1" color="primary" text xl&gt;extra large&lt;/w-button&gt;
+      &lt;w-button class="ma1" color="primary" text disabled&gt;disabled&lt;/w-button&gt;
 
   title-link(h2) Round &amp; tile
   example(content-class="w-flex")
@@ -154,11 +181,11 @@ div
     w-button.ma1.mr6(bg-color="secondary" round) round
     w-button.ma1(bg-color="primary" tile) tile
     w-button.ma1.mr6(bg-color="secondary" tile) tile
-    template(#pug).
-      w-button.ma1(bg-color="primary" round) round
-      w-button.ma1.mr6(bg-color="secondary" round) round
-      w-button.ma1(bg-color="primary" tile) tile
-      w-button.ma1.mr6(bg-color="secondary" tile) tile
+    template(#html).
+      &lt;w-button class="ma1" bg-color="primary" round&gt;round&lt;/w-button&gt;
+      &lt;w-button class="ma1 mr6" bg-color="secondary" round&gt;round&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" tile&gt;tile&lt;/w-button&gt;
+      &lt;w-button class="ma1 mr6" bg-color="secondary" tile&gt;tile&lt;/w-button&gt;
 
   title-link(h2) Shadow
   example(content-class="w-flex")
@@ -166,11 +193,11 @@ div
     w-button.ma1(bg-color="error" shadow) error
     w-button.ma1(bg-color="warning" shadow) warning
     w-button.ma1(bg-color="info" shadow) info
-    template(#pug).
-      w-button.ma1(bg-color="success" shadow) success
-      w-button.ma1(bg-color="error" shadow) error
-      w-button.ma1(bg-color="warning" shadow) warning
-      w-button.ma1(bg-color="info" shadow) info
+    template(#html).
+      &lt;w-button class="ma1" bg-color="success" shadow&gt;success&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="error" shadow&gt;error&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="warning" shadow&gt;warning&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="info" shadow&gt;info&lt;/w-button&gt;
 
   title-link(h2) Icons &amp; mixed content
   p Icon buttons are rounded by default.
@@ -183,15 +210,18 @@ div
     w-button.ma1(bg-color="success")
       w-icon.mr1 wi-check
       | Save
-    template(#pug).
-      w-button.ma1(bg-color="error" icon="wi-cross")
-      w-button.ma1.mr6(bg-color="success" icon="wi-check")
-      w-button.ma1(bg-color="error")
-        w-icon.mr1 wi-cross
-        | Cancel
-      w-button.ma1(bg-color="success")
-        w-icon.mr1 wi-check
-        | Save
+    template(#html).
+      &lt;w-button class="ma1" bg-color="error" icon="wi-cross"&gt;&lt;/w-button&gt;
+      &lt;w-button class="ma1 mr6" bg-color="success" icon="wi-check"&gt;&lt;/w-button&gt;
+
+      &lt;w-button class="ma1" bg-color="error"&gt;
+        &lt;w-icon class="mr1"&gt;wi-cross&lt;/w-icon&gt;
+        Cancel
+      &lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="success"&gt;
+        &lt;w-icon class="mr1"&gt;wi-check&lt;/w-icon&gt;
+        Save
+      &lt;/w-button&gt;
 
   title-link(h2) Loading spinner &amp; custom loader
   example(content-class="w-flex")
@@ -202,14 +232,25 @@ div
       w-icon.mr1 wi-check
       | Save
       template(#loading) Loading...
-    template(#pug).
-      w-button.ma1(bg-color="primary" :loading="button1loading" @click="buttonDoLoading(1)")
-        w-icon.mr1 wi-check
-        | Save
-      w-button.ma1.px4(bg-color="primary" :loading="button2loading" @click="buttonDoLoading(2)")
-        w-icon.mr1 wi-check
-        | Save
-        template(#loading="") Loading...
+    template(#html).
+      &lt;w-button
+        class="ma1"
+        bg-color="primary"
+        :loading="button1loading"
+        @click="buttonDoLoading(1)"&gt;
+        &lt;w-icon class="mr1" &gt;wi-check&lt;/w-icon&gt;
+        Save
+      &lt;/w-button&gt;
+
+      &lt;w-button
+        class="ma1 px4"
+        bg-color="primary"
+        :loading="button2loading"
+        @click="buttonDoLoading(2)"&gt;
+        &lt;w-icon class="mr1" &gt;wi-check&lt;/w-icon&gt;
+        Save
+        &lt;template #loading&gt;Loading...&lt;/template&gt;
+      &lt;/w-button&gt;
     template(#js).
       data: () => ({
         button1loading: false,
@@ -237,13 +278,22 @@ div
     w-button.ma1(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
       | Github
       w-icon.ml2(sm) mdi mdi-open-in-new
-    template(#pug).
-      w-button.ma1(bg-color="primary" route="/getting-started")
-        | Getting started
-        w-icon.ml1 wi-chevron-right
-      w-button.ma1(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
-        | Github
-        w-icon.ml2(sm) mdi mdi-open-in-new
+    template(#html).
+      &lt;w-button
+        class="ma1"
+        bg-color="primary"
+        route="/getting-started"&gt;
+        Getting started
+        &lt;w-icon class="ml1"&gt;wi-chevron-right&lt;/w-icon&gt;
+      &lt;/w-button&gt;
+
+      &lt;w-button
+        class="ma1"
+        bg-color="primary"
+        route="https://github.com/antoniandre/wave-ui"&gt;
+        Github
+        &lt;w-icon class="ml2" sm&gt;mdi mdi-open-in-new&lt;/w-icon&gt;
+      &lt;/w-button&gt;
 </template>
 
 <script>

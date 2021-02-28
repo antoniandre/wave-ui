@@ -22,10 +22,12 @@ w-toolbar.main-toolbar(fixed)
         router-link.pink-light1(to="/backers")
           w-icon(lg) mdi mdi-heart-multiple-outline
     | Backers
-  w-button.ml2.mr-1.hamburger-menu(
+  w-button.mr-1.hamburger-menu(
     v-if="$waveui.breakpoint.xs"
     @click="$emit('update:drawerOpen', !drawerOpen)"
-    large text round
+    lg
+    text
+    round
     :icon="drawerOpen ? 'wi-cross' : 'mdi mdi-menu'")
 </template>
 
@@ -67,10 +69,14 @@ div.main-toolbar {
 
   .github-link .w-icon, .wave-logo {color: #1670b4;}
 
+  .hamburger-menu {margin-left: 8px;}
   .hamburger-menu .w-icon {width: 26px;height: 26px;}
 }
 
 @media screen and (max-width: 410px) {
-  .main-toolbar .version {display: none;}
+  div.main-toolbar {
+    .version {display: none;}
+    .hamburger-menu {margin-left: 0;}
+  }
 }
 </style>
