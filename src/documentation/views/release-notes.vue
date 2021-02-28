@@ -21,6 +21,25 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
+    li.patch
+      strong.version v1.23.1
+      p Fix the #[strong.code w-tabs] initial state via #[code v-model].
+
+    li.minor
+      strong.version v1.23.0
+      p Complete the #[em à la carte] feature, allowing tree-shaking.
+
+    li.patch
+      strong.version v1.22.1
+      p Add a #[code dialog-class] option on the #[strong.code w-dialog] component.
+
+    li.minor
+      strong.version v1.22.0
+      ul
+        li Removed the useless full height on html &amp; body.
+        li Added a #[code .align-self-stretch] helper class.
+        li Added the #[code color] &amp; #[code bg-color] options on the #[strong.code w-dialog] component.
+        li Trim the #[strong.code w-icon] icon name to work with ligatures.
 
     li.minor
       strong.version v1.21.0
@@ -34,8 +53,7 @@ main
 
     li.patch
       strong.version v1.20.6
-      ul
-        li Fix #[strong.code w-button] external links.
+      p Fix #[strong.code w-button] external links.
 
     li.patch
       strong.version v1.20.5
