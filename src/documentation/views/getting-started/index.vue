@@ -22,11 +22,9 @@ main
 
     //- Custom install.
     template(#item-title.2)
-      title-link.grey-light2.ma0(h2 slug="a-la-carte") À la carte (tree shaking)
-      w-tag.red(outline round) COMING SOON
+      title-link.ma0(h2 slug="a-la-carte") À la carte (tree shaking)
     template(#item-content.2)
-      | Coming soon
-      //- custom-install
+      custom-install
 
     //- Nuxt install.
     template(#item-title.3)

@@ -129,7 +129,7 @@ export default {
 }
 
 div.nav-menu {
-  height: 100vh;
+  height: 90vh;
   overflow: auto;
 
   .w-list__item-label {

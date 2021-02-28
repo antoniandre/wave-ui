@@ -50,6 +50,8 @@ div
       })
 
   title-link(h2) V-model
+  alert(warning).
+    #[strong Since version 1.21.0], the v-model/value only accepts a numeric tab index (previously an array of boolean).
   p It is possible to open a particular tab programmatically via #[code v-model] or #[code value].
   example
     w-tabs.mb2(v-model="tabs2.active" :items="tabs2.items")
@@ -222,18 +224,21 @@ div
       })
 
   title-link(h2) Close button
+  alert(tip).
+    When using a close button, don't forget to stop the click propagation #[code @click.stop] to prevent
+    the navigation to the tab that you are deleting!
   example
     w-tabs(:items="tabs6.items" card)
       template(#item-title="{ item, index }")
         | {{ item.title }}
         w-button.ml1.mr-1(
-          @click="tabs6.items = tabs6.items.filter((tab, i) => i !== index - 1)"
+          @click.stop="tabs6.items.splice(index - 1, 1)"
           icon="wi-cross"
           outline
           xs)
     w-button.mt4(
       bg-color="primary"
-      @click="tabs6.items = tabs6.originals"
+      @click="tabs6.items = tabs6.originals.slice(0)"
       :disabled="tabs6.items.length === 3") Reset tabs
 
     template(#pug).
@@ -241,7 +246,7 @@ div
         template(#item-title="{ item, index }")
           | {{ '\{\{ item.title \}\}' }}
           w-button.ml1.mr-1(
-            @click="tabs = tabs.filter&amp;#40;&amp;#40;tab, i&amp;#41; => i !== index - 1&amp;#41;"
+            @click.stop="tabs.splice(index - 1, 1)"
             icon="wi-cross"
             outline
             xs)
@@ -305,7 +310,7 @@ export default {
         { title: 'Tab 4', content: 'Tab 4 content.' },
         { title: 'Tab 5', content: 'Tab 5 content.', disabled: true }
       ],
-      active: [false, false, true, false, false],
+      active: 2,
       fillBar: true,
       slider: false
     },

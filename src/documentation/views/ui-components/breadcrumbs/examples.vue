@@ -11,8 +11,8 @@ div
 
   example
     w-breadcrumbs(:items="items")
-    template(#pug).
-      w-breadcrumbs(:items="items")
+    template(#html).
+      &lt;w-breadcrumbs :items="items" /&gt;
     template(#js).
       data: () => ({
         items: [
@@ -30,8 +30,8 @@ div
 
   example
     w-breadcrumbs(:items="items" color="orange")
-    template(#pug).
-      w-breadcrumbs(:items="items" color="orange")
+    template(#html).
+      &lt;w-breadcrumbs :items="items" color="orange" /&gt;
     template(#js).
       data: () => ({
         items: [
@@ -44,8 +44,8 @@ div
   title-link(h3) Separator color
   example
     w-breadcrumbs(:items="items" separator-color="orange")
-    template(#pug).
-      w-breadcrumbs(:items="items" separator-color="orange")
+    template(#html).
+      &lt;w-breadcrumbs :items="items" separator-color="orange" /&gt;
     template(#js).
       data: () => ({
         items: [
@@ -62,8 +62,8 @@ div
   title-link(h3) Icon
   example
     w-breadcrumbs(:items="items" icon="mdi mdi-arrow-right")
-    template(#pug).
-      w-breadcrumbs(:items="items" icon="mdi mdi-arrow-right")
+    template(#html).
+      &lt;w-breadcrumbs :items="items" icon="mdi mdi-arrow-right" /&gt;
     template(#js).
       data: () => ({
         items: [
@@ -77,9 +77,10 @@ div
   example
     w-breadcrumbs(:items="items")
       template(#separator) //
-    template(#pug).
-      w-breadcrumbs(:items="items")
-        template(#separator) //
+    template(#html).
+      &lt;w-breadcrumbs :items="items"&gt;
+        &lt;template #separator&gt;//&lt;/template&gt;
+      &lt;/w-breadcrumbs&gt;
     template(#js).
       data: () => ({
         items: [
@@ -95,10 +96,17 @@ div
     w-breadcrumbs(:items="items")
       template(#item="{ item, isLast }")
         w-tag(:color="isLast ? 'grey' : 'green'" round outline v-html="item.label")
-    template(#pug).
-      w-breadcrumbs(:items="items")
-        template(#item="{ item, isLast }")
-          w-tag(:color="isLast ? 'grey' : 'green'" round outline v-html="item.label")
+    template(#html).
+      &lt;w-breadcrumbs :items="items"&gt;
+        &lt;template #item="{ item, isLast }"&gt;
+          &lt;w-tag
+            :color="isLast ? 'grey' : 'green'"
+            round
+            outline
+            v-html="item.label"&gt;
+          &lt;/w-tag&gt;
+        &lt;/template&gt;
+      &lt;/w-breadcrumbs&gt;
     template(#js).
       data: () => ({
         items: [
@@ -114,8 +122,8 @@ div
     If it makes sense in your application, you can use the #[code link-last-item] prop.
   example
     w-breadcrumbs(:items="items" link-last-item)
-    template(#pug).
-      w-breadcrumbs(:items="items" link-last-item)
+    template(#html).
+      &lt;w-breadcrumbs :items="items" link-last-item /&gt;
     template(#js).
       data: () => ({
         items: [
@@ -135,12 +143,12 @@ div
     w-breadcrumbs.my4(:items="items" md)
     w-breadcrumbs.my4(:items="items" lg)
     w-breadcrumbs.my4(:items="items" xl)
-    template(#pug).
-      w-breadcrumbs.my4(:items="items" xs)
-      w-breadcrumbs.my4(:items="items" sm)
-      w-breadcrumbs.my4(:items="items" md)
-      w-breadcrumbs.my4(:items="items" lg)
-      w-breadcrumbs.my4(:items="items" xl)
+    template(#html).
+      &lt;w-breadcrumbs class="my4" :items="items" xs&gt;&lt;/w-breadcrumbs&gt;
+      &lt;w-breadcrumbs class="my4" :items="items" sm&gt;&lt;/w-breadcrumbs&gt;
+      &lt;w-breadcrumbs class="my4" :items="items" md&gt;&lt;/w-breadcrumbs&gt;
+      &lt;w-breadcrumbs class="my4" :items="items" lg&gt;&lt;/w-breadcrumbs&gt;
+      &lt;w-breadcrumbs class="my4" :items="items" xl&gt;&lt;/w-breadcrumbs&gt;
     template(#js).
       data: () => ({
         items: [

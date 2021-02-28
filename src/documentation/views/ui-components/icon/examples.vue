@@ -49,7 +49,7 @@ div.icons-demo
 
       example(
         external-css="https://fonts.googleapis.com/icon?family=Material+Icons"
-        full-js)
+        :blank-codepen="['js']")
         w-icon.mr1(xs color="primary") material-icons star
         w-icon.mr1(md color="primary") material-icons star
         w-icon.mr1(xl color="primary") material-icons star
