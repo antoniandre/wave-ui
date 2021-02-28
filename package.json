@@ -1,6 +1,6 @@
 {
   "name": "wave-ui",
-  "version": "1.21.2",
+  "version": "1.23.1",
   "description": "An emerging UI framework for Vue.js & Vue 3 with only the bright side. :sunny:",
   "author": "Antoni Andre <antoniandre.web@gmail.com>",
   "main": "./dist/wave-ui.common.js",
@@ -27,6 +27,10 @@
     "build-bundle": "vue-cli-service build --target lib --name wave-ui ./src/wave-ui/index.js --dest ./dist && rm ./dist/demo.html",
     "lint": "vue-cli-service lint"
   },
+  "sideEffects": [
+    "*.scss",
+    "*.vue"
+  ],
   "dependencies": {},
   "devDependencies": {
     "@mdi/font": "^5.8.55",

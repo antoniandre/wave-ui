@@ -11,6 +11,9 @@ w-overlay.w-dialog(
     w-card.w-dialog__content(
       v-if="showContent"
       no-border
+      :color="color"
+      :bg-color="bgColor"
+      :class="dialogClass"
       :title-class="titleClass"
       :content-class="contentClass"
       :title="title || undefined"
@@ -37,7 +40,10 @@ export default {
     transition: { type: String, default: 'fade' }, // @todo: validator.
     titleClass: { type: String },
     contentClass: { type: String },
+    dialogClass: { type: String },
     overlayColor: { type: String },
+    color: { type: String },
+    bgColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] }
   },
 

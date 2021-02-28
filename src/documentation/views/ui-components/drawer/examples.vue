@@ -19,7 +19,7 @@ div
       outline
       color="primary") Show bottom drawer
     template(#html).
-      &lt;w-button 
+      &lt;w-button
         class="ma1"
         @click="showDrawer = 'left'"
         outline
@@ -27,7 +27,7 @@ div
         Show left drawer
       &lt;/w-button&gt;
 
-      &lt;w-button 
+      &lt;w-button
         class="ma1"
         @click="showDrawer = 'right'"
         outline
@@ -35,7 +35,7 @@ div
         Show right drawer
       &lt;/w-button&gt;
 
-      &lt;w-button 
+      &lt;w-button
         class="ma1"
         @click="showDrawer = 'top'"
         outline
@@ -43,7 +43,7 @@ div
         Show top drawer
       &lt;/w-button&gt;
 
-      &lt;w-button 
+      &lt;w-button
         class="ma1"
         @click="showDrawer = 'bottom'"
         outline
@@ -55,7 +55,7 @@ div
         :value="!!showDrawer"
         :[position]="true"
         @close="showDrawer = false"&gt;
-        &lt;w-button 
+        &lt;w-button
           class="button--close"
           @click="showDrawer = false"
           sm
@@ -91,14 +91,19 @@ div
       color="primary") Show drawer
     w-drawer(v-model="showAbsoluteDrawer" absolute width="160px")
     template(#html).
-      &lt;w-button 
+      &lt;w-button
         class="my12"
         @click="showDrawer = !showDrawer"
         outline
         color="primary"&gt;
         Show drawer
       &lt;/w-button&gt;
-      &lt;w-drawer v-model="showDrawer" absolute width="160px" /&gt;
+
+      &lt;w-drawer
+        v-model="showDrawer"
+        absolute
+        width="160px"&gt;
+      &lt;/w-drawer&gt;
     template(#js).
       data: () => ({
         showDrawer: false
@@ -127,7 +132,7 @@ div
       &lt;/w-button&gt;
 
       &lt;w-drawer v-model="showDrawer" bottom height="60px"&gt;
-        &lt;w-button 
+        &lt;w-button
           class="button--close"
           @click="showDrawer = false"
           sm
@@ -161,10 +166,10 @@ div
             color="primary") Show drawer
       .ma2 Drawer content
     template(#html).
-      &lt;w-drawer 
-        v-model="showDrawer" 
-        push-content 
-        :overlay-opacity="0.15" 
+      &lt;w-drawer
+        v-model="showDrawer"
+        push-content
+        :overlay-opacity="0.15"
         width="160px"&gt;
 
         &lt;template #pushable&gt;
@@ -197,13 +202,13 @@ div
             color="primary") Show drawer
       .ma2 Drawer content
     template(#html).
-      &lt;w-drawer 
-        v-model="showDrawer" 
-        push-content 
-        :overlay-opacity="0.15" 
-        left 
+      &lt;w-drawer
+        v-model="showDrawer"
+        push-content
+        :overlay-opacity="0.15"
+        left
         width="160px"&gt;
-        
+
         &lt;template #pushable&gt;
           &lt;div class="py12 w-flex column align-center justify-center"&gt;
             &lt;p&gt;Pushable content&lt;/p&gt;
@@ -247,7 +252,7 @@ div
         color="primary"&gt;
         Custom color overlay
       &lt;/w-button&gt;
-      
+
       &lt;w-button
         class="ma1"
         @click="noOverlay = false;overlayColor = 'transparent';showDrawer = !showDrawer"
@@ -255,7 +260,7 @@ div
         color="primary"&gt;
         Transparent overlay
       &lt;/w-button&gt;
-      
+
       &lt;w-button
         class="ma1"
         @click="noOverlay = true;overlayColor = '';showDrawer = !showDrawer"
@@ -264,10 +269,10 @@ div
         No overlay
       &lt;/w-button&gt;
 
-      &lt;w-drawer 
-        v-model="showDrawer" 
-        top 
-        :no-overlay="noOverlay" 
+      &lt;w-drawer
+        v-model="showDrawer"
+        top
+        :no-overlay="noOverlay"
         :overlay-color="overlayColor"&gt;
         &lt;w-button
           class="button--close"
@@ -301,9 +306,10 @@ div
       outline
       color="primary") Persistent drawer
     template(#html).
-      &lt;w-button 
-        @click="showDrawer = true" 
-        outline color="primary"&gt;
+      &lt;w-button
+        @click="showDrawer = true"
+        outline
+        color="primary"&gt;
         Persistent drawer
       &lt;/w-button&gt;
 
@@ -357,9 +363,9 @@ div
           w-icon.mr2 wi-check
           | I agree
     template(#html).
-      &lt;w-button 
-        @click="showCookieNotice = true" 
-        outline 
+      &lt;w-button
+        @click="showCookieNotice = true"
+        outline
         color="primary"&gt;
         Show the cookie notice
       &lt;/w-button&gt;
@@ -373,9 +379,9 @@ div
         bottom&gt;
         &lt;div class="w-flex pa2 align-center wrap"&gt;
           &lt;div class="w-flex align-center"&gt;
-            &lt;w-icon 
-              class="mr3" 
-              color="primary" 
+            &lt;w-icon
+              class="mr3"
+              color="primary"
               xl&gt;
               wi-info-circle
             &lt;/w-icon&gt;
@@ -387,11 +393,11 @@ div
           &lt;/div&gt;
 
           &lt;div class="spacer"/&gt;
-          
-          &lt;w-button 
-            sm 
-            bg-color="primary" 
-            dark 
+
+          &lt;w-button
+            sm
+            bg-color="primary"
+            dark
             @click="showCookieNotice = false"&gt;
             &lt;w-icon class="mr2"&gt;wi-check&lt;/w-icon&gt;
             I agree

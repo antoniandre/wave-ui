@@ -55,17 +55,17 @@ div
         w-button(type="submit" :disabled="form1.valid === false") Validate
     template(#html).
       &lt;w-form v-model="valid"&gt;
-        &lt;w-input 
-          label="First name" 
+        &lt;w-input
+          label="First name"
           :validators="[validators.required]"&gt;
         &lt;/w-input&gt;
 
-        &lt;w-input 
-          class="mt3" 
-          label="Last name" 
+        &lt;w-input
+          class="mt3"
+          label="Last name"
           :validators="[validators.required]"&gt;
         &lt;/w-input&gt;
-        
+
         &lt;div class="text-right mt6"&gt;
           &lt;strong&gt;v-model:&lt;/strong&gt;
           &lt;code class="ml2 mr4"&gt;
@@ -115,20 +115,20 @@ div
       .text-right.mt6
         w-button(type="submit") Validate
     template(#html).
-      &lt;w-form 
-        action="test.php" 
-        method="post" 
-        target="_blank" 
+      &lt;w-form
+        action="test.php"
+        method="post"
+        target="_blank"
         allow-submit&gt;
 
-        &lt;w-input 
-          label="First name" 
+        &lt;w-input
+          label="First name"
           :validators="[validators.required]"&gt;
         &lt;/w-input&gt;
 
-        &lt;w-input 
-          class="mt3" 
-          label="Last name" 
+        &lt;w-input
+          class="mt3"
+          label="Last name"
           :validators="[validators.required]"&gt;
         &lt;/w-input&gt;
 
@@ -160,14 +160,14 @@ div
         w-button(type="submit") Validate
     template(#html).
       &lt;w-form no-keyup-validation no-blur-validation&gt;
-        &lt;w-input 
-          label="First name" 
+        &lt;w-input
+          label="First name"
           :validators="[validators.required]"&gt;
         &lt;/w-input&gt;
 
-        &lt;w-input 
-          class="mt3" 
-          label="Last name" 
+        &lt;w-input
+          class="mt3"
+          label="Last name"
           :validators="[validators.required]"&gt;
         &lt;/w-input&gt;
 
@@ -196,26 +196,26 @@ div
         w-button.my1(type="submit") Validate
     template(#html).
       &lt;w-form v-model="valid"&gt;
-        &lt;w-input 
-          label="First name" 
+        &lt;w-input
+          label="First name"
           :validators="[validators.required]"&gt;
         &lt;/w-input&gt;
 
-        &lt;w-input 
-          class="mt3" 
-          label="Last name" 
+        &lt;w-input
+          class="mt3"
+          label="Last name"
           :validators="[validators.required]"&gt;
         &lt;/w-input&gt;
 
         &lt;div class="text-right mt6"&gt;
-          &lt;w-button 
-            class="my1 mr2" 
-            bg-color="warning" 
+          &lt;w-button
+            class="my1 mr2"
+            bg-color="warning"
             type="reset"&gt;
             Reset
           &lt;/w-button&gt;
-          &lt;w-button 
-            class="my1" 
+          &lt;w-button
+            class="my1"
             type="submit"&gt;
             Validate
           &lt;/w-button&gt;
@@ -263,9 +263,9 @@ div
       .text-right.mt6
         w-button(type="submit") Validate
     template(#html).
-      &lt;w-alert 
-        :success="success" 
-        :error="error" 
+      &lt;w-alert
+        :success="success"
+        :error="error"
         :info="!success &amp;&amp; !error"&gt;
         {{ "\{\{ !success && !error ? 'The form is still pristine' : (success ? 'Success' : 'Error') \}\}" }}
       &lt;/w-alert&gt;
@@ -278,18 +278,18 @@ div
         @validate="validated++;success = error = false"
         @success="success = true"
         @error="error = true"&gt;
-        
-        &lt;w-input 
-          label="First name" 
+
+        &lt;w-input
+          label="First name"
           :validators="[validators.required]"&gt;
         &lt;/w-input&gt;
-        
-        &lt;w-input 
-          class="mt3" 
-          label="Last name" 
+
+        &lt;w-input
+          class="mt3"
+          label="Last name"
           :validators="[validators.required]"&gt;
         &lt;/w-input&gt;
-        
+
         &lt;div class="text-right mt6"&gt;
           &lt;w-button type="submit"&gt;Validate&lt;/w-button&gt;
         &lt;/div&gt;
@@ -358,59 +358,60 @@ div
           &lt;w-transition-fade&gt;
             &lt;w-alert
               class="my0 text-light"
-              v-if="form.submitted" 
-              success 
+              v-if="form.submitted"
+              success
               no-border&gt;
               The form is valid, ready to send it!
             &lt;/w-alert&gt;
 
-            &lt;w-alert 
-              class="my0 text-light" 
-              v-else-if="form.valid === false" 
-              error 
+            &lt;w-alert
+              class="my0 text-light"
+              v-else-if="form.valid === false"
+              error
               no-border&gt;
               The form has {{ '\{\{ form.errorsCount \}\}' }} errors.
             &lt;/w-alert&gt;
           &lt;/w-transition-fade&gt;
+        &lt;/div&gt;
 
-        &lt;w-form 
+        &lt;w-form
           class="px8 pt2 pb12"
           v-model="form.valid"
           :errors-count.sync="form.errorsCount"
           @validate="onValidate"
           @success="onSuccess"&gt;
 
-          &lt;w-input 
-            required 
-            label="First name" 
+          &lt;w-input
+            required
+            label="First name"
             :validators="[validators.required]"&gt;
           &lt;/w-input&gt;
 
-          &lt;w-input 
-            class="mt3" 
-            required 
-            label="Last name" 
+          &lt;w-input
+            class="mt3"
+            required
+            label="Last name"
             :validators="[validators.required]"&gt;
           &lt;/w-input&gt;
 
-          &lt;w-input 
-            class="mt3" 
-            disabled 
-            required 
-            label="User name" 
+          &lt;w-input
+            class="mt3"
+            disabled
+            required
+            label="User name"
             :validators="[validators.required]"&gt;
           &lt;/w-input&gt;
-          
+
           &lt;w-flex class="mt4" wrap align-center justify-end&gt;
-            &lt;w-checkbox 
-              required 
+            &lt;w-checkbox
+              required
               :validators="[validators.consent]"&gt;
               I agree to the terms &amp; conditions
             &lt;/w-checkbox&gt;
-            
+
             &lt;div class="spacer" /&gt;
-            
-            &lt;w-button 
+
+            &lt;w-button
               class="my1 mr2"
               bg-color="warning"
               type="reset"
@@ -418,7 +419,7 @@ div
               Reset
             &lt;/w-button&gt;
 
-            &lt;w-button 
+            &lt;w-button
               class="my1"
               type="submit"
               :disabled="form.valid === false"
@@ -426,6 +427,7 @@ div
               Validate
             &lt;/w-button&gt;
           &lt;/w-flex&gt;
+        &lt;/w-form&gt;
 
         &lt;w-notification
           v-model="form.sent"
@@ -437,6 +439,7 @@ div
           bottom&gt;
           The form was sent successfully!
         &lt;/w-notification&gt;
+      &lt;/w-card&gt;
     template(#js).
       data: () => ({
         form: {
