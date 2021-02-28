@@ -21,6 +21,10 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
+    li.patch
+      strong.version v1.23.1
+      p Fix the #[strong.code w-tabs] initial state via #[code v-model].
+
     li.minor
       strong.version v1.23.0
       p Complete the #[em à la carte] feature, allowing tree-shaking.
