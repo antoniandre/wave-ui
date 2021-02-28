@@ -34,14 +34,16 @@ div
             section.content.block.grow Main content
           section.footer Footer
         template(#html).
-          &lt;w-app id="app"&gt;
-            &lt;header&gt;Header&lt;/header&gt;
-            &lt;w-flex grow&gt;
-              &lt;aside&gt;Nav menu&lt;/aside&gt;
-              &lt;main class="grow"&gt;Main content&lt;/main&gt;
-            &lt;/w-flex&gt;
-            &lt;footer&gt;Footer&lt;/footer&gt;
-          &lt;/w-app&gt;
+          &lt;div id="app"&gt;
+            &lt;w-app&gt;
+              &lt;header&gt;Header&lt;/header&gt;
+              &lt;w-flex grow&gt;
+                &lt;aside&gt;Nav menu&lt;/aside&gt;
+                &lt;main class="grow"&gt;Main content&lt;/main&gt;
+              &lt;/w-flex&gt;
+              &lt;footer&gt;Footer&lt;/footer&gt;
+            &lt;/w-app&gt;
+          &lt;/div&gt;
         template(#css).
           /* Demo styles - can be discarded. */
           .w-app, header, footer, aside, main {
@@ -67,14 +69,16 @@ div
               section.content.block.grow Main content
               section.footer Footer
         template(#html).
-          &lt;w-app id="app" class="w-flex row"&gt;
-            &lt;aside&gt;Nav menu&lt;/aside&gt;
-            &lt;w-flex column&gt;
-              &lt;header&gt;Header&lt;/header&gt;
-              &lt;main class="grow"&gt;Main content&lt;/main&gt;
-              &lt;footer&gt;Footer&lt;/footer&gt;
-            &lt;/w-flex&gt;
-          &lt;/w-app&gt;
+          &lt;div id="app"&gt;
+            &lt;w-app class="w-flex row"&gt;
+              &lt;aside&gt;Nav menu&lt;/aside&gt;
+              &lt;w-flex column&gt;
+                &lt;header&gt;Header&lt;/header&gt;
+                &lt;main class="grow"&gt;Main content&lt;/main&gt;
+                &lt;footer&gt;Footer&lt;/footer&gt;
+              &lt;/w-flex&gt;
+            &lt;/w-app&gt;
+          &lt;/div&gt;
         template(#css).
           /* Demo styles - can be discarded. */
           .w-app, header, footer, aside, main {
@@ -97,11 +101,13 @@ div
           section.content.block.grow Main content
           section.footer Footer
         template(#html).
-          &lt;w-app id="app"&gt;
-            &lt;header&gt;Header&lt;/header&gt;
-            &lt;main class="grow"&gt;Main content&lt;/main&gt;
-            &lt;footer&gt;Footer&lt;/footer&gt;
-          &lt;/w-app&gt;
+          &lt;div id="app"&gt;
+            &lt;w-app&gt;
+              &lt;header&gt;Header&lt;/header&gt;
+              &lt;main class="grow"&gt;Main content&lt;/main&gt;
+              &lt;footer&gt;Footer&lt;/footer&gt;
+            &lt;/w-app&gt;
+          &lt;/div&gt;
         template(#css).
           /* Demo styles - can be discarded. */
           .w-app, header, footer, aside, main {
@@ -125,14 +131,16 @@ div
             section.content.block.grow Main content
             section.nav-menu.block Nav menu
         template(#html).
-          &lt;w-app id="app" block&gt;
-            &lt;header&gt;Header&lt;/header&gt;
-            &lt;w-flex&gt;
-              &lt;main class="grow py12"&gt;Main content&lt;/main&gt;
-              &lt;aside&gt;Nav menu&lt;/aside&gt;
-            &lt;/w-flex&gt;
-            &lt;footer&gt;Footer&lt;/footer&gt;
-          &lt;/w-app&gt;
+          &lt;div id="app"&gt;
+            &lt;w-app block&gt;
+              &lt;header&gt;Header&lt;/header&gt;
+              &lt;w-flex&gt;
+                &lt;main class="grow py12"&gt;Main content&lt;/main&gt;
+                &lt;aside&gt;Nav menu&lt;/aside&gt;
+              &lt;/w-flex&gt;
+              &lt;footer&gt;Footer&lt;/footer&gt;
+            &lt;/w-app&gt;
+          &lt;/div&gt;
         template(#css).
           /* Demo styles - can be discarded. */
           .w-app, header, footer, aside, main {
