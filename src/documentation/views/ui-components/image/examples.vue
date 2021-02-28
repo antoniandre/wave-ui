@@ -31,7 +31,7 @@ div
       })
 
   title-link(h2) Given dimensions
-  example(content-class="text-center w-flex justify-space-around")
+  example(content-class="text-center w-flex justify-space-around wrap")
     w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
     template(#pug).
@@ -70,9 +70,9 @@ div
     than the container it would still apply the ratio on the constrained image.
 
   example(content-class="text-center")
-    w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="650" tag="img" style="max-width: 100%")
+    w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
     template(#pug).
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="650" tag="img" style="max-width: 100%")
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use process.env.BASE_URL
@@ -85,9 +85,9 @@ div
     This image is very big, so that you have time to see the spinner while loading.
     Refresh the page if you haven't seen it!
   example(content-class="text-center")
-    w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :width="500" :height="250")
+    w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" width="100%" :ratio="1 / 2")
     template(#pug).
-      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :width="500" :height="250")
+      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" width="100%" :ratio="1 / 2")
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use process.env.BASE_URL
@@ -132,7 +132,8 @@ div
     template(#js).
       data: () => ({
         img: {
-          src: `https://antoniandre.github.io/wave-ui/images/spirit-island--alberta.png`,
+          initialSrc: 'https://antoniandre.github.io/wave-ui/images/spirit-island--alberta.png',
+          src: 'https://antoniandre.github.io/wave-ui/images/spirit-island--alberta.png',
           transition: 'fade'
         },
         transitions: [
@@ -178,7 +179,10 @@ div
       @error="showError = true")
     w-alert(v-if="showError" error) Oops. The image could not load!
     template(#pug).
-      w-image(:src="`${baseUrl}images/broken.png`" :fallback="`${baseUrl}images/not-found.jpg`")
+      w-image(
+        :src="`${baseUrl}images/broken.png`"
+        :fallback="`${baseUrl}images/not-found.jpg`"
+        @error="showError = true")
       w-alert(v-if="showError" error) Oops. The image could not load!
     template(#js).
       data: () => ({
@@ -256,3 +260,7 @@ export default {
   }
 }
 </script>
+
+<style>
+.main-content--image {overflow: auto;}
+</style>
