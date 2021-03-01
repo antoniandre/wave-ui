@@ -21,8 +21,8 @@ div
   p With no given width, height or ratio, the image is loaded full-size.
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/favicon.png`")
-    template(#pug).
-      w-image(:src="`${baseUrl}images/favicon.png`")
+    template(#html).
+      &lt;w-image :src="`${baseUrl}images/favicon.png`"&gt;&lt;/w-image&gt;
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use process.env.BASE_URL
@@ -34,9 +34,18 @@ div
   example(content-class="text-center w-flex justify-space-around")
     w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
-    template(#pug).
-      w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
+    template(#html).
+      &lt;w-image 
+        class="mr5" 
+        :src="`${baseUrl}images/japanese-wave.png`" 
+        :width="150" 
+        :height="150"&gt;
+      &lt;/w-image&gt;
+      &lt;w-image 
+        :src="`${baseUrl}images/japanese-wave.png`" 
+        :width="500" 
+        :height="150"&gt;
+      &lt;/w-image&gt;
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use process.env.BASE_URL
@@ -52,8 +61,11 @@ div
     be set to 100%.
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="233 / 1000")
-    template(#pug).
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="233 / 1000")
+    template(#html).
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`" 
+        :ratio="233 / 1000"&gt;
+      &lt;/w-image&gt;
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use process.env.BASE_URL
@@ -71,8 +83,13 @@ div
 
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="650" tag="img" style="max-width: 100%")
-    template(#pug).
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="650" tag="img" style="max-width: 100%")
+    template(#html).
+      &lt;w-image 
+        :src="`${baseUrl}images/japanese-wave.png`" 
+        :width="650" 
+        tag="img" 
+        style="max-width: 100%"&gt;
+      &lt;/w-image&gt;
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use process.env.BASE_URL
@@ -86,8 +103,12 @@ div
     Refresh the page if you haven't seen it!
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :width="500" :height="250")
-    template(#pug).
-      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :width="500" :height="250")
+    template(#html).
+      &lt;w-image 
+        :src="`${baseUrl}images/spirit-island--alberta.png`" 
+        :width="500" 
+        :height="250"&gt;
+      &lt;/w-image&gt;
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use process.env.BASE_URL
@@ -117,18 +138,35 @@ div
             code {{ item.label }}
         w-button.mt2(@click="reload") Reload image
       w-image(:src="img.src" :width="500" :height="250" :transition="img.transition")
-    template(#pug).
-      .w-flex.wrap.justify-center.align-center
-        div.mr4.my2
-          .title3.mb2 Transition names
-          w-radios(
+    template(#html).
+      &lt;div class="w-flex wrap justify-center align-center"&gt;
+        &lt;div class="mr4 my2"&gt;
+          &lt;div class="title3 mb2"&gt;
+            Transition names
+          &lt;/div&gt;
+          &lt;w-radios
             v-model="img.transition"
             :items="transitions"
-            item-value-key="label")
-            template(#label="{ item }")
-              code {{ '\{\{ item.label \}\}' }}
-          w-button.mt2(@click="reload") Reload image
-        w-image(:src="img.src" :width="500" :height="250" :transition="img.transition")
+            item-value-key="label"&gt;
+            &lt;template #label="{ item }"&gt;
+              &lt;code&gt;
+                {{ '\{\{ item.label \}\}' }}
+              &lt;/code&gt;
+            &lt;/template&gt;
+          &lt;/w-radios&gt;
+          &lt;w-button 
+            class="mt2" 
+            @click="reload"&gt;
+            Reload image
+          &lt;/w-button&gt;
+        &lt;/div&gt;
+        &lt;w-image 
+          :src="img.src" 
+          :width="500" 
+          :height="250" 
+          :transition="img.transition"&gt;
+        &lt;/w-image&gt;
+      &lt;/div&gt;
     template(#js).
       data: () => ({
         img: {
@@ -177,9 +215,16 @@ div
       :fallback="`${baseUrl}images/not-found.jpg`"
       @error="showError = true")
     w-alert(v-if="showError" error) Oops. The image could not load!
-    template(#pug).
-      w-image(:src="`${baseUrl}images/broken.png`" :fallback="`${baseUrl}images/not-found.jpg`")
-      w-alert(v-if="showError" error) Oops. The image could not load!
+    template(#html).
+      &lt;w-image 
+        :src="`${baseUrl}images/broken.png`" 
+        :fallback="`${baseUrl}images/not-found.jpg`"&gt;
+      &lt;/w-image&gt;
+      &lt;w-alert 
+        v-if="showError" 
+        error&gt;
+        Oops. The image could not load!
+      &lt;/w-alert&gt;
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use process.env.BASE_URL
@@ -196,8 +241,12 @@ div
   example
     //- ?v1 to prevent cache from reloading the image without request.
     w-image(:src="`${baseUrl}images/spirit-island--alberta.png?v1`" lazy :ratio="2550 / 5098")
-    template(#pug).
-      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy :ratio="2550 / 5098")
+    template(#html).
+      &lt;w-image 
+        :src="`${baseUrl}images/spirit-island--alberta.png`" 
+        lazy 
+        :ratio="2550 / 5098"&gt;
+      &lt;/w-image&gt;
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use process.env.BASE_URL
@@ -213,9 +262,14 @@ div
   example
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="2550 / 5098")
       span.title1.pink Wave UI
-    template(#pug).
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="2550 / 5098")
-        span.title1.pink Wave UI
+    template(#html).
+      &lt;w-image 
+        :src="`${baseUrl}images/japanese-wave.png`" 
+        :ratio="2550 / 5098"&gt;
+        &lt;span class="title1 pink"&gt;
+          Wave UI
+        &lt;/span&gt;
+      &lt;/w-image&gt;
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use process.env.BASE_URL

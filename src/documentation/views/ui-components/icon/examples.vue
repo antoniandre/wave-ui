@@ -492,16 +492,14 @@ div.icons-demo
 
       &lt;w-icon 
         class="mr2" 
-        col
-        or="primary-light2" 
+        color="primary-light2" 
         :size="40"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
       &lt;w-icon 
         class="mr2" 
-        col
-        or="primary-light2" 
+        color="primary-light2" 
         size="4em"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
