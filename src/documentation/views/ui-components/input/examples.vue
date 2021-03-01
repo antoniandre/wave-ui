@@ -6,18 +6,36 @@ div
     above the field on focus or when the field has some content or a placeholder.#[br]
   example
     w-input Label
+    //- template(#pug).
+    //-   w-input Label
     template(#html).
-      &lt;w-input&gt; Label&lt;/w-input&gt;
+      &lt;w-input&gt;Label&lt;/w-input&gt;
 
   title-link(h2) Label and / or placeholder
   example
-    w-input.mb4(label="Label" required)
+    w-input.mb4(label="Label")
     w-input.mb3(placeholder="Placeholder")
     w-input.mb3(label="Label" placeholder="Placeholder")
+    //- template(#pug).
+    //-   w-input.mb4(label="Label")
+    //-   w-input.mb3(placeholder="Placeholder")
+    //-   w-input.mb3(label="Label" placeholder="Placeholder")
     template(#html).
-      &lt;w-input class="mb4" label="Label" required /&gt;
-      &lt;w-input class="mb3" placeholder="Placeholder" /&gt;
-      &lt;w-input class="mb3" label="Label" placeholder="Placeholder" /&gt;
+      &lt;w-input 
+        class="mb4" 
+        label="Label"&gt;
+      &lt;/w-input&gt;
+      
+      &lt;w-input 
+        class="mb3" 
+        placeholder="Placeholder"&gt;
+      &lt;/w-input&gt;
+      
+      &lt;w-input 
+        class="mb3" 
+        label="Label" 
+        placeholder="Placeholder"&gt;
+      &lt;/w-input&gt;
 
   title-link(h2) Static label
   p.
@@ -30,8 +48,14 @@ div
 
   example
     w-input.mb3(label="Label" static-label)
+    //- template(#pug).
+    //-   w-input.mb3(label="Label" static-label)
     template(#html).
-      &lt;w-input class="mb4" label="Label" static-label /&gt;
+      &lt;w-input 
+        class="mb4" 
+        label="Label" 
+        static-label&gt;
+      &lt;/w-input&gt;
 
   title-link(h2) Outline
   example
@@ -39,19 +63,59 @@ div
     w-input.mb2(placeholder="Outline" outline)
     w-input.mb2(label="Outline" color="info" outline)
     w-input.mb2(label="Outline" bg-color="blue-light5" outline)
+    //- template(#pug).
+      w-input.mb4(label="Outline" outline)
+      w-input.mb2(placeholder="Outline" outline)
+      w-input.mb2(label="Outline" color="info" outline)
+      w-input.mb2(label="Outline" bg-color="blue-light5" outline)
     template(#html).
-      &lt;w-input class="mb2" label="Outline" outline /&gt;
-      &lt;w-input class="mb2" placeholder="Outline" outline /&gt;
-      &lt;w-input class="mb2" label="Outline" color="info" outline /&gt;
-      &lt;w-input class="mb2" label="Outline" bg-color="blue-light5" outline /&gt;
+      &lt;w-input 
+        class="mb2" 
+        label="Outline" 
+        outline&gt;
+      &lt;/w-input&gt;
+
+      &lt;w-input 
+        class="mb2" 
+        placeholder="Outline" 
+        outline&gt;
+      &lt;/w-input&gt;
+
+      &lt;w-input 
+        class="mb2" 
+        label="Outline" 
+        color="info" 
+        outline&gt;
+      &lt;/w-input&gt;
+
+      &lt;w-input 
+        class="mb2" 
+        label="Outline" 
+        bg-color="blue-light5" 
+        outline&gt;
+      &lt;/w-input&gt;
 
   title-link(h2) Shadow
   example
     w-input.mb4(label="Shadow" shadow)
     w-input.mb2(label="Outline with shadow" shadow outline)
+    //- template(#pug).
+      w-input.mb4(label="Shadow" shadow)
+      w-input.mb2(label="Outline with shadow" shadow outline)
     template(#html).
-      &lt;w-input class="mb4" label="Shadow" shadow /&gt;
-      &lt;w-input class="mb2" label="Outline with shadow" shadow outline /&gt;
+      &lt;w-input 
+        class="mb4" 
+        label="Shadow" 
+        shadow&gt;
+      &lt;/w-input&gt;
+
+      &lt;w-input 
+        class="mb2" 
+        label="Outline 
+        with shadow" 
+        shadow 
+        outline&gt;
+      &lt;/w-input&gt;
 
   title-link(h2) Round &amp; Tile
   example
@@ -66,6 +130,18 @@ div
         w-input.mb1(label="Round" round outline)
         w-input.mb1(label="Round and shadow" round outline shadow)
         w-input.mb1(label="Tile" tile outline)
+    //- template(#pug).
+    //-   w-flex(wrap :gap="2")
+    //-     .grow.mb4(style="min-width: 200px")
+    //-       .title4.mb2 Underline style (default)
+    //-       w-input.mb1(label="Round" round)
+    //-       w-input.mb1(label="Round and shadow" round shadow)
+    //-       w-input.mb1(label="Tile" tile)
+    //-     .grow.mb4(style="min-width: 200px")
+    //-       .title4.mb2 Outline style
+    //-       w-input.mb1(label="Round" round outline)
+    //-       w-input.mb1(label="Round and shadow" round outline shadow)
+    //-       w-input.mb1(label="Tile" tile outline)
     template(#html).
       &lt;w-flex wrap :gap="2"&gt;
         &lt;div 
@@ -74,44 +150,56 @@ div
           &lt;div class="title4 mb2"&gt;
             Underline style (default)
           &lt;/div&gt;
+
           &lt;w-input 
             class="mb1" 
             label="Round" 
-            round /&gt;
+            round&gt;
+          &lt;/w-input&gt;
+
           &lt;w-input 
             class="mb1" 
             label="Round and shadow" 
             round 
-            shadow /&gt;
+            shadow&gt;
+          &lt;/w-input&gt;
+
           &lt;w-input 
             class="mb1" 
             label="Tile" 
-            tile /&gt;
+            tile&gt;
+          &lt;/w-input&gt;
         &lt;/div&gt;
 
         &lt;div 
           class="grow mb4" 
           style="min-width: 200px"&gt;
-          &lt;div 
-            class="title4 mb2"&gt;
+
+          &lt;div class="title4 mb2"&gt;
             Outline style
           &lt;/div&gt;
+
           &lt;w-input 
             class="mb1" 
             label="Round" 
             round 
-            outline /&gt;
+            outline&gt;
+          &lt;/w-input&gt;
+
           &lt;w-input 
             class="mb1" 
             label="Round and shadow" 
             round 
             outline 
-            shadow /&gt;
+            shadow&gt;
+          &lt;/w-input&gt;
+
           &lt;w-input 
             class="mb1" 
             label="Tile" 
             tile 
-            outline /&gt;
+            outline&gt;
+          &lt;/w-input&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
 
@@ -136,45 +224,103 @@ div
         w-input.mb1(bg-color="red-light5" value="Some content" outline)
         w-input.mb1(color="red-dark1" bg-color="red-light5" value="Some content" outline)
         w-input.mb1(color="orange-dark1" bg-color="orange-light5" value="Some content" outline)
+    //- template(#pug).
+      w-flex(wrap :gap="2")
+        .grow.mb4(style="min-width: 200px")
+          .title4.mb2 Underline style (default)
+          w-input.mb1(value="Some content")
+          w-input.mb1(color="red" value="Some content")
+          w-input.mb1(bg-color="red-light5" value="Some content")
+          w-input.mb1(color="red-dark1" bg-color="red-light5" value="Some content")
+          w-input.mb1(color="orange-dark1" bg-color="orange-light5" value="Some content")
+        .grow.mb4(style="min-width: 200px")
+          .title4.mb2 Outline style
+          w-input.mb1(value="Some content" outline)
+          w-input.mb1(color="red" value="Some content" outline)
+          w-input.mb1(bg-color="red-light5" value="Some content" outline)
+          w-input.mb1(color="red-dark1" bg-color="red-light5" value="Some content" outline)
+          w-input.mb1(color="orange-dark1" bg-color="orange-light5" value="Some content" outline)
     template(#html).
-      &lt;w-flex(wrap :gap="2"&gt;
-        &lt;div .grow.mb4(style="min-width: 200px"&gt;
-          &lt;div .title4.mb2&gt; Underline style (default)&lt;/div&gt;
-          &lt;w-input class="mb1" value="Some content" /&gt;
-          &lt;w-input class="mb1" color="red" value="Some content" /&gt;
-          &lt;w-input class="mb1" bg-color="red-light5" value="Some content" /&gt;
-          &lt;w-input class="mb1" color="red-dark1" bg-color="red-light5" value="Some content" /&gt;
-          &lt;w-input class="mb1" color="orange-dark1" bg-color="orange-light5" value="Some content" /&gt;
+      &lt;w-flex wrap :gap="2"&gt;
+        &lt;div class="grow mb4" style="min-width: 200px"&gt;
+          &lt;div class="title4 mb2"&gt;
+            Underline style (default)
+          &lt;/div&gt;
+
+          &lt;w-input 
+            class="mb1" 
+            value="Some content"&gt;
+          &lt;/w-input&gt;
+
+          &lt;w-input 
+            class="mb1" 
+            color="red" 
+            value="Some 
+            content"&gt;
+          &lt;/w-input&gt;
+
+          &lt;w-input 
+            class="mb1" 
+            bg-color="red-light5" 
+            value="Some 
+            content"&gt;
+          &lt;/w-input&gt;
+
+          &lt;w-input 
+            class="mb1" 
+            color="red-dark1" 
+            bg-color="red-light5" 
+            value="Some content"&gt;
+          &lt;/w-input&gt;
+
+          &lt;w-input 
+            class="mb1" 
+            color="orange-dark1" 
+            bg-color="orange-light5" 
+            value="Some content"&gt;
+          &lt;/w-input&gt;
         &lt;/div&gt;
 
         &lt;div class="grow mb4" style="min-width: 200px"&gt;
-          &lt;div class="title4 mb2"&gt;Outline style&lt;/div&gt;
+          &lt;div class="title4 mb2"&gt;
+            Outline style
+          &lt;/div&gt;
+
           &lt;w-input 
             class="mb1" 
             value="Some content" 
-            outline /&gt;
+            outline&gt;
+          &lt;/w-input&gt;
+
           &lt;w-input 
             class="mb1" 
             color="red" 
             value="Some content" 
-            outline /&gt;
+            outline&gt;
+          &lt;/w-input&gt;
+
           &lt;w-input 
             class="mb1" 
             bg-color="red-light5" 
             value="Some content" 
-            outline /&gt;
+            outline&gt;
+          &lt;/w-input&gt;
+
           &lt;w-input 
             class="mb1" 
             color="red-dark1" 
             bg-color="red-light5" 
             value="Some content" 
-            outline /&gt;
+            outline&gt;
+          &lt;/w-input&gt;
+
           &lt;w-input 
             class="mb1" 
             color="orange-dark1" 
             bg-color="orange-light5" 
             value="Some content" 
-            outline /&gt;
+            outline&gt;
+          &lt;/w-input&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
 
@@ -190,22 +336,31 @@ div
     w-input.mb2(label="Inside" label-position="inside" outline)
     w-input.mb2(label="Left" label-position="left" outline)
     w-input.mb2(label="Right" label-position="right" outline)
+    //- template(#pug).
+      w-input.mb2(label="Inside" label-position="inside" outline)
+      w-input.mb2(label="Left" label-position="left" outline)
+      w-input.mb2(label="Right" label-position="right" outline)
     template(#html).
       &lt;w-input 
         class="mb2" 
         label="Inside" 
         label-position="inside" 
-        outline /&gt;
+        outline&gt;
+      &lt;/w-input&gt;
+
       &lt;w-input 
         class="mb2" 
         label="Left" 
         label-position="left" 
-        outline /&gt;
+        outline&gt;
+      &lt;/w-input&gt;
+
       &lt;w-input 
         class="mb2" 
         label="Right" 
         label-position="right" 
-        outline /&gt;
+        outline&gt;
+      &lt;/w-input&gt;
 
   title-link(h2) Custom label via default slot
   p.
@@ -225,6 +380,17 @@ div
     w-input.mb2(label-position="right" outline)
       w-icon.orange mdi mdi-arrow-left
       span.red.ml1 Right
+    //- template(#pug).
+      w-input.mb2(label-position="inside" outline)
+        w-icon.orange mdi mdi-arrow-right
+        span.purple.mx1 Inside
+        w-icon.orange mdi mdi-arrow-left
+      w-input.mb2(label-position="left" outline)
+        span.green.mr1 Left
+        w-icon.orange mdi mdi-arrow-right
+      w-input.mb2(label-position="right" outline)
+        w-icon.orange mdi mdi-arrow-left
+        span.red.ml1 Right
     template(#html).
       &lt;w-input 
         class="mb2" 
@@ -291,22 +457,47 @@ div
     .title4.mt6.mb2 Label inside
     w-input.mb2(label="Inside" label-position="inside" outline inner-icon-left="wi-search")
     w-input.mb2(label="Inside" label-position="inside" outline inner-icon-right="wi-search")
+    //- template(#pug).
+      .title4.mb2 Label outside
+      w-input.mb2(label="Username" label-position="left" outline inner-icon-left="mdi mdi-account")
+      w-input.mb2(
+        label="Password"
+        :type="isPassword ? 'password' : 'text'"
+        :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+        :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+        @click:inner-icon-right="isPassword = !isPassword")
+      w-input.mb2(
+        label="Password"
+        :type="isPassword ? 'password' : 'text'"
+        label-position="left"
+        outline
+        :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+        @click:inner-icon-right="isPassword = !isPassword")
+      w-input.mb2(label="Right" label-position="right" outline inner-icon-left="wi-check")
+      w-input.mb2(label="Right" label-position="right" outline inner-icon-right="wi-check")
+      .title4.mt6.mb2 Label inside
+      w-input.mb2(label="Inside" label-position="inside" outline inner-icon-left="wi-search")
+      w-input.mb2(label="Inside" label-position="inside" outline inner-icon-right="wi-search")
     template(#html).
-      &lt;div class="title4 mb2"&gt;Label outside&lt;/div&gt;
+      &lt;div class="title4 mb2"&gt;
+        Label outside
+      &lt;/div&gt;
      
       &lt;w-input 
         class="mb2" 
         label="Username" 
         label-position="left" 
         outline 
-        inner-icon-left="mdi mdi-account" /&gt;
+        inner-icon-left="mdi mdi-account"&gt;
+      &lt;/w-input&gt;
       
       &lt;w-input class="mb2" 
         label="Password"
         :type="isPassword ? 'password' : 'text'"
         :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
         :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
-        @click:inner-icon-right="isPassword = !isPassword" /&gt;
+        @click:inner-icon-right="isPassword = !isPassword"&gt;
+      &lt;/w-input&gt;
       
       &lt;w-input class="mb2"
         label="Password"
@@ -314,21 +505,24 @@ div
         label-position="left"
         outline
         :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
-        @click:inner-icon-right="isPassword = !isPassword" /&gt;
+        @click:inner-icon-right="isPassword = !isPassword"&gt;
+      &lt;/w-input&gt;
       
       &lt;w-input 
         class="mb2" 
         label="Right" 
         label-position="right" 
         outline 
-        inner-icon-left="wi-check" /&gt;
+        inner-icon-left="wi-check"&gt;
+      &lt;/w-input&gt;
       
       &lt;w-input 
         class="mb2" 
         label="Right" 
         label-position="right" 
         outline 
-        inner-icon-right="wi-check" /&gt;
+        inner-icon-right="wi-check"&gt;
+      &lt;/w-input&gt;
 
       &lt;div class="title4 mt6 mb2"&gt;
         Label inside
@@ -339,14 +533,16 @@ div
         label="Inside" 
         label-position="inside" 
         outline 
-        inner-icon-left="wi-search" /&gt;
+        inner-icon-left="wi-search"&gt;
+      &lt;/w-input&gt;
       
       &lt;w-input 
         class="mb2" 
         label="Inside" 
         label-position="inside" 
         outline 
-        inner-icon-right="wi-search" /&gt;
+        inner-icon-right="wi-search"&gt;
+      &lt;/w-input&gt;
     template(#js).
       data: () => ({
         isPassword: true
@@ -358,26 +554,41 @@ div
     w-input.mb3(label="Disabled & filled" value="Some content" outline disabled)
     w-input.mb3(label="Readonly & empty" outline readonly)
     w-input.mb3(label="Readonly & filled" value="Some content" outline readonly)
+    //- template(#pug).
+      w-input.mb3(label="Disabled & empty" outline disabled)
+      w-input.mb3(label="Disabled & filled" value="Some content" outline disabled)
+      w-input.mb3(label="Readonly & empty" outline readonly)
+      w-input.mb3(label="Readonly & filled" value="Some content" outline readonly)
     template(#html).
       &lt;w-input 
         class="mb3" 
         label="Disabled &amp; empty" 
-        outline disabled /&gt;
+        outline 
+        disabled&gt;
+      &lt;/w-input&gt;
       
       &lt;w-input 
         class="mb3" 
         label="Disabled &amp; filled" 
-        value="Some content" outline disabled /&gt;
+        value="Some content" 
+        outline 
+        disabled&gt;
+      &lt;/w-input&gt;
       
       &lt;w-input 
         class="mb3" 
         label="Readonly &amp; empty" 
-        outline readonly /&gt;
+        outline 
+        readonly&gt;
+      &lt;/w-input&gt;
       
       &lt;w-input 
         class="mb3" 
         label="Readonly &amp; filled" 
-        value="Some content" outline readonly /&gt;
+        value="Some content" 
+        outline 
+        readonly&gt;
+      &lt;/w-input&gt;
 
   title-link(h2) Types
   p The default type is "#[span.code text]" but the types bellow are also supported.
@@ -423,39 +634,92 @@ div
         span.code.mb1.mr2 type="hidden"
         | The hidden type is also accepted - but you don't need a #[span.code w-input] for that!
         w-input(type="hidden")
+    //- template(#pug).
+      //- &lt;ul.input-types&gt;
+      //-   &lt;li&gt;
+      //-     &lt;.code.mb1 type="date"&lt;
+      //-     &lt;w-input(type="date") date&lt;
+      //-   &lt;li&gt;
+      //-     &lt;.code.mb1 type="email"&lt;
+      //-     &lt;w-input(type="email") Email address&lt;
+      //-   &lt;li&gt;
+      //-     &lt;.code.mb1 type="number"&lt;
+      //-     &lt;w-input(type="number" min="0" max="100") Age&lt;
+      //-   &lt;li&gt;
+      //-     &lt;.code.mb1 type="password"&lt;
+      //-     &lt;w-input(type="password") Password&lt;
+      //-   &lt;li&gt;
+      //-     &lt;.code.mb1 type="search"&lt;
+      //-     &lt;w-input(type="search") Search&lt;
+      //-   &lt;li&gt;
+      //-     &lt;.code.mb1 type="tel"&lt;
+      //-     &lt;w-input(type="tel") Tel&lt;
+      //-   &lt;li&gt;
+      //-     &lt;.code.mb1 type="text"&lt;
+      //-     &lt;w-input Text&lt;
+      //-   &lt;li&gt;
+      //-     &lt;.code.mb1 type="time"&lt;
+      //-     &lt;w-input(type="time") time&lt;
+      //-   &lt;li&gt;
+      //-     &lt;.code.mb1 type="url"&lt;
+      //-     &lt;w-input(type="url") Url&lt;
+      //-   &lt;li&gt;
+      //-     &lt;span.code.mb1.mr2 type="hidden"&lt;
+      //-     &lt;| The hidden type is also accepted - but you don't need a w-input for that!&lt;
+      //-     &lt;w-input(type="hidden")&lt;
     template(#html).
-      &lt;ul.input-types&gt;
+      &lt;ul class="input-types"&gt;
         &lt;li&gt;
-          &lt;.code.mb1 type="date"&lt;
-          &lt;w-input(type="date") date&lt;
+          &lt;div class="code mb1"&gt;type="date"&lt;/div&gt;
+          &lt;w-input type="date"&gt;date&lt;/w-input&gt;
+        &lt;/li&gt;
+
         &lt;li&gt;
-          &lt;.code.mb1 type="email"&lt;
-          &lt;w-input(type="email") Email address&lt;
+          &lt;div class="code mb1"&gt;type="email"&lt;/div&gt;
+          &lt;w-input type="email"&gt;Email address&lt;/w-input&gt;
+        &lt;/li&gt;
+
         &lt;li&gt;
-          &lt;.code.mb1 type="number"&lt;
-          &lt;w-input(type="number" min="0" max="100") Age&lt;
+          &lt;div class="code mb1"&gt;type="number"&lt;/div&gt;
+          &lt;w-input type="number" min="0" max="100"&gt;Age&lt;/w-input&gt;
+        &lt;/li&gt;
+
         &lt;li&gt;
-          &lt;.code.mb1 type="password"&lt;
-          &lt;w-input(type="password") Password&lt;
+          &lt;div class="code mb1"&gt;type="password"&lt;/div&gt;
+          &lt;w-input type="password"&gt;Password&lt;/w-input&gt;
+        &lt;/li&gt;
+
         &lt;li&gt;
-          &lt;.code.mb1 type="search"&lt;
-          &lt;w-input(type="search") Search&lt;
+          &lt;div class="code mb1"&gt;type="search"&lt;/div&gt;
+          &lt;w-input type="search"&gt;Search&lt;/w-input&gt;
+        &lt;/li&gt;
+
         &lt;li&gt;
-          &lt;.code.mb1 type="tel"&lt;
-          &lt;w-input(type="tel") Tel&lt;
+          &lt;div class="code mb1"&gt;type="tel"&lt;/div&gt;
+          &lt;w-input type="tel"&gt;Tel&lt;/w-input&gt;
+        &lt;/li&gt;
+
         &lt;li&gt;
-          &lt;.code.mb1 type="text"&lt;
-          &lt;w-input Text&lt;
+          &lt;div class="code mb1"&gt;type="text"&lt;/div&gt;
+          &lt;w-input&gt;Text&lt;/w-input&gt;
+        &lt;/li&gt;
+
         &lt;li&gt;
-          &lt;.code.mb1 type="time"&lt;
-          &lt;w-input(type="time") time&lt;
+          &lt;div class="code mb1"&gt;type="time"&lt;/div&gt;
+          &lt;w-input type="time"&gt;time&lt;/w-input&gt;
+        &lt;/li&gt;
+
         &lt;li&gt;
-          &lt;.code.mb1 type="url"&lt;
-          &lt;w-input(type="url") Url&lt;
+          &lt;div class="code mb1"&gt;type="url"&lt;/div&gt;
+          &lt;w-input type="url"&gt;Url&lt;/w-input&gt;
+        &lt;/li&gt;
+
         &lt;li&gt;
-          &lt;span.code.mb1.mr2 type="hidden"&lt;
-          &lt;| The hidden type is also accepted - but you don't need a w-input for that!&lt;
-          &lt;w-input(type="hidden")&lt;
+          &lt;span class="code mb1 mr2" type="hidden"&gt;
+            The hidden type is also accepted - but you don't need a w-input for that!
+          &lt;/span&gt;
+          &lt;w-input type="hidden"&gt;
+        &lt;/li&gt;
 
   h3 Other types of inputs
   p For all the other types of input listed bellow, a specific Wave UI component should be used instead:
