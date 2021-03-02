@@ -15,16 +15,10 @@ w-app.home
         .size--xs.text-nowrap View the project on Github
       em(v-html="`Version ${version}`")
 
-    svg.wave.wave--sm(viewBox="0 0 1440 320" preserveAspectRatio="none")
-      path(d="M0,64L60,58.7C120,53,240,43,360,69.3C480,96,600,160,720,186.7C840,213,960,203,1080,186.7C1200,171,1320,149,1380,138.7L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z")
-    svg.wave.wave--md(viewBox="0 0 1440 320" preserveAspectRatio="none")
-      path(d="M0,64L60,58.7C120,53,240,43,360,69.3C480,96,600,160,720,186.7C840,213,960,203,1080,186.7C1200,171,1320,149,1380,138.7L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z")
-    svg.wave.wave--lg(viewBox="0 0 1440 320" preserveAspectRatio="none")
-      path(d="M0,320L80,320C160,320,320,320,480,282.7C640,245,800,171,960,165.3C1120,160,1280,224,1360,256L1440,288L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z")
-    svg.header-bottom(viewBox="0 0 1400 27" preserveAspectRatio="none")
-      path(d="M 0 27 C 381 -6 1072 -10 1400 27")
-    //- svg.blob1(viewBox="0 0 200 200" preserveAspectRatio="none")
-      path(d="M35.4,-59.6C48.3,-53.8,63.1,-49.4,73.2,-39.7C83.3,-30,88.7,-15,87.4,-0.7C86.2,13.5,78.2,27.1,70.8,41.4C63.4,55.7,56.5,70.9,44.8,79.6C33.1,88.3,16.6,90.6,2.9,85.5C-10.7,80.4,-21.3,67.9,-33,59.2C-44.7,50.5,-57.5,45.5,-66.4,36.3C-75.4,27,-80.5,13.5,-80.6,0C-80.6,-13.5,-75.5,-27.1,-68.3,-39.3C-61.1,-51.6,-51.7,-62.5,-40,-69C-28.3,-75.6,-14.1,-77.8,-1.5,-75.2C11.2,-72.7,22.4,-65.5,35.4,-59.6Z" transform="translate(100 100)" style="fill: #ffffff0a;")
+    svg.wave(viewBox="0 0 1000 300" preserveAspectRatio="none")
+      path(d="M 1000 299 l 2 -279 c -155 -36 -310 135 -415 164 c -102.64 28.35 -149 -32 -232 -31 c -80 1 -142 53 -229 80 c -65.54 20.34 -101 15 -126 11.61 v 54.39 z")
+      path(d="M 1000 286 l 2 -252 c -157 -43 -302 144 -405 178 c -101.11 33.38 -159 -47 -242 -46 c -80 1 -145.09 54.07 -229 87 c -65.21 25.59 -104.07 16.72 -126 10.61 v 22.39 z")
+      path(d="M 1000 300 l 1 -230.29 c -217 -12.71 -300.47 129.15 -404 156.29 c -103 27 -174 -30 -257 -29 c -80 1 -130.09 37.07 -214 70 c -61.23 24 -108 15.61 -126 10.61 v 22.39 z")
     .bubbles
       .bubbles__plan.bubbles__plan--1
         .bubble.bubble--1
@@ -464,29 +458,18 @@ export default {
     a {color: inherit;}
   }
 
-  svg {
+  .wave {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
     width: 100%;
+    height: 50%;
     fill: #fff;
-    opacity: 0.05;
     pointer-events: none;
-  }
-  svg.header-bottom {opacity: 1;}
-  svg.wave--sm {
-    height: 6vw;
-    min-height: 35px;
-  }
-  svg.wave--md {
-    bottom: -20px;
-    height: 11vw;
-    min-height: 70px;
-  }
-  svg.wave--lg {
-    height: 26vw;
-    max-height: 240px;
+
+    path:nth-child(1) {opacity: 0.1;}
+    path:nth-child(2) {opacity: 0.15;}
   }
 
   .bubbles__plan {
@@ -581,7 +564,7 @@ export default {
     font: 4.4em 'title font';
     color: rgba(0, 0, 0, 0.5);
     letter-spacing: -2px;
-    margin: 0;
+    margin: -1.2em 0 0;
     color: inherit;
   }
 
@@ -807,11 +790,6 @@ export default {
   100% {transform: rotate(360deg);}
 }
 
-@media screen and (max-width: 1280px) {
-  .home__header svg.wave--sm {bottom: 10px;}
-  .home__header svg.wave--md {bottom: -10px;height: 13vw;}
-}
-
 @media screen and (max-width: 900px) {
   .home .mobiles {
     .mobile--1 {width: 200px;}
@@ -840,8 +818,9 @@ export default {
         display: block;
       }
     }
-    svg.wave--md {bottom: 0;}
   }
+
+  .home__header .wave {height: 40%;}
   .home .section--1 .mobile--1 {width: 190px;}
   .home .section--1 .mobile--2 {width: 220px;}
   .home .section--3 {padding-top: 4em;padding-bottom: 40%;}
@@ -852,6 +831,7 @@ export default {
 }
 
 @media screen and (max-width: 430px) {
+  .home__header .wave {height: 30%;}
   .home .section--1 .block--2 strong {font-size: 6em;}
   .home .section--1 .title2 {margin-top: 1em;}
   .home .section--1 .section__content > div:first-child {margin-right: 0;}
