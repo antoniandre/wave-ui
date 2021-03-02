@@ -24,10 +24,10 @@ div
     template(#html).
       &lt;w-menu&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button 
-            class="mr3" 
-            v-on="on" 
-            outline 
+          &lt;w-button
+            class="mr3"
+            v-on="on"
+            outline
             color="primary"&gt;
             Show menu on click
           &lt;/w-button&gt;
@@ -236,7 +236,7 @@ div
         | Menu content
     template(#html).
       &lt;div class="title4 mb2"&gt;Top position&lt;/div&gt;
-      &lt;w-menu detach-to=".example2" top align-left&gt;
+      &lt;w-menu top align-left&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
             Align left
@@ -245,7 +245,7 @@ div
         Menu content
       &lt;/w-menu&gt;
 
-      &lt;w-menu detach-to=".example2" top&gt;
+      &lt;w-menu top&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
             Centered
@@ -254,7 +254,7 @@ div
         Menu content
       &lt;/w-menu&gt;
 
-      &lt;w-menu detach-to=".example2" top align-right&gt;
+      &lt;w-menu top align-right&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
             Align right
@@ -264,7 +264,7 @@ div
       &lt;/w-menu&gt;
 
       &lt;div class="title4 mt6 mb2"&gt;Bottom position&lt;/div&gt;
-      &lt;w-menu detach-to=".example2" align-left&gt;
+      &lt;w-menu align-left&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
             Align left
@@ -273,7 +273,7 @@ div
         Menu content
       &lt;/w-menu&gt;
 
-      &lt;w-menu detach-to=".example2"&gt;
+      &lt;w-menu&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
             Centered
@@ -282,7 +282,7 @@ div
         Menu content
       &lt;/w-menu&gt;
 
-      &lt;w-menu detach-to=".example2" align-right&gt;
+      &lt;w-menu align-right&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
             Align right
@@ -292,7 +292,7 @@ div
       &lt;/w-menu&gt;
 
       &lt;div class="title4 mt6 mb2"&gt;Right position&lt;/div&gt;
-      &lt;w-menu detach-to=".example2" right align-top&gt;
+      &lt;w-menu right align-top&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
             Align top
@@ -301,7 +301,7 @@ div
         Menu content
       &lt;/w-menu&gt;
 
-      &lt;w-menu detach-to=".example2" right&gt;
+      &lt;w-menu right&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
             Centered
@@ -310,7 +310,7 @@ div
         Menu content
       &lt;/w-menu&gt;
 
-      &lt;w-menu detach-to=".example2" right align-bottom&gt;
+      &lt;w-menu right align-bottom&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;Alig
             n bottom
@@ -320,7 +320,7 @@ div
       &lt;/w-menu&gt;
 
       &lt;div class="title4 mt6 mb2"&gt;Left position&lt;/div&gt;
-      &lt;w-menu detach-to=".example2" left align-top&gt;
+      &lt;w-menu left align-top&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;A
             lign top
@@ -329,7 +329,7 @@ div
         Menu content
       &lt;/w-menu&gt;
 
-      &lt;w-menu detach-to=".example2" left&gt;
+      &lt;w-menu left&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
             Centered
@@ -338,7 +338,7 @@ div
         Menu content
       &lt;/w-menu&gt;
 
-      &lt;w-menu detach-to=".example2" left align-bottom&gt;
+      &lt;w-menu left align-bottom&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
             Align bottom
@@ -409,7 +409,7 @@ div
           Menu content
           &lt;/template&gt;
         &lt;/w-menu&gt;
-        
+
         &lt;w-menu round&gt;
           &lt;template #activator="{ on }"&gt;
             &lt;w-button v-on="on" outline color="primary"&gt;
@@ -466,7 +466,7 @@ div
       w-menu(shadow custom)
         template(#activator="{ on }")
           w-button(v-on="on" outline color="primary") Show a list menu
-        w-card.white--bg(content-class="pa0")
+        w-card(content-class="pa0")
           w-toolbar
             .title3.ma0 Menu Title
             .spacer
@@ -475,11 +475,11 @@ div
           .pa3 This is some content in a w-card component.
     template(#html).
       &lt;w-menu shadow v-model="showMenu"&gt;
-        &lt;template #activator=""&gt;
-          &lt;w-button 
-            class="mr3" 
-            @click="showMenu = true" 
-            outline 
+        &lt;template #activator&gt;
+          &lt;w-button
+            class="mr3"
+            @click="showMenu = true"
+            outline
             color="primary"&gt;
             Show a w-card menu
           &lt;/w-button&gt;
@@ -492,24 +492,25 @@ div
         &lt;p&gt;Pick a serious answer.&lt;/p&gt;
 
         &lt;w-flex class="pl10 mt4" wrap justify-end&gt;
-          &lt;w-button 
-            class="mr1" 
-            text color="green" 
+          &lt;w-button
+            class="mr1"
+            text
+            color="green"
             @click="showMenu = false"&gt;
             Love it!
           &lt;/w-button&gt;
 
-          &lt;w-button 
-            class="mr1" 
-            text 
-            color="green" 
+          &lt;w-button
+            class="mr1"
+            text
+            color="green"
             @click="showMenu = false"&gt;
             Love it!
           &lt;/w-button&gt;
 
-          &lt;w-button 
-            text 
-            color="green" 
+          &lt;w-button
+            text
+            color="green"
             @click="showMenu = false"&gt;
             Love it!
           &lt;/w-button&gt;
@@ -523,7 +524,7 @@ div
           &lt;/w-button&gt;
         &lt;/template&gt;
 
-        &lt;w-card.white--bg content-class="pa0"&gt;
+        &lt;w-card content-class="pa0"&gt;
           &lt;w-toolbar&gt;
             &lt;div class="title3 ma0"&gt;Menu Title&lt;/div&gt;
             &lt;div class="spacer"&gt;&lt;/div&gt;
@@ -533,7 +534,7 @@ div
 
           &lt;div class="pa3"&gt;
             This is some content in a w-card component.
-          &lt;/w-div&gt;
+          &lt;/div&gt;
         &lt;/w-card&gt;
       &lt;/w-menu&gt;
     template(#js).
@@ -617,7 +618,7 @@ div
           &lt;/w-button&gt;
         &lt;/template&gt;
 
-        &lt;w-list 
+        &lt;w-list
           class="white--bg"
           nav
           :items="listItems"

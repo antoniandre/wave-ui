@@ -160,7 +160,8 @@ div
         | This alert is
         | {{ "\{\{ parseInt(timeout) ? `auto-hiding after ${timeout} ms` : 'not auto-hiding'\}\}" }}.
     template(#html).
-      &lt;w-button class="mr6"
+      &lt;w-button
+        class="mr6"
         @click="showNotification = !showNotification"
         color="primary"
         outline
@@ -168,7 +169,8 @@ div
         {{ "\{\{ showNotification ? 'Hide' : 'Show' \}\}" }} notification
       &lt;/w-button&gt;
 
-      &lt;w-input class="d-iflex"
+      &lt;w-input
+        class="d-iflex"
         v-model="timeout"
         type="number"
         step="500"
@@ -265,7 +267,7 @@ div
         | The alert is fixed on {{ "\{\{ notification.position[0] \}\}" }} {{ "\{\{ notification.position[1] \}\}" }}.
     template(#html).
       &lt;w-flex wrap align-center&gt;
-        &lt;w-button 
+        &lt;w-button
           class="mr3"
           @click="notification.show = !notification.show"
           color="primary"
@@ -274,8 +276,9 @@ div
           {{ "\{\{ notification.show ? 'Hide' : 'Show' \}\}" }} notification
         &lt;/w-button&gt;
 
-        &lt;w-radios class="my4" 
-          v-model="transition" 
+        &lt;w-radios
+          class="my4"
+          v-model="transition"
           :items="transitions"&gt;
           &lt;template #item="{ item }"&gt;
             {{ "\{\{ item.label \}\}" }}
