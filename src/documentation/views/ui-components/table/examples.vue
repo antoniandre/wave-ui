@@ -6,8 +6,8 @@ div
     //- template(#pug).
       w-table(:headers="table.headers" :items="table.items")
     template(#html).
-      &lt;w-table 
-        :headers="table.headers" 
+      &lt;w-table
+        :headers="table.headers"
         :items="table.items"&gt;
       &lt;/w-table&gt;
     template(#js).
@@ -42,6 +42,7 @@ div
         template(#no-data="") 👌 There is no data! 👌
     template(#html).
       &lt;w-table :headers="table.headers" :items="[]"&gt;&lt;/w-table&gt;
+
       &lt;br /&gt;
       &lt;w-table :headers="table.headers" :items="[]"&gt;
         &lt;template #no-data=""&gt;
@@ -70,8 +71,8 @@ div
     //- template(#pug).
       w-table(:headers="table.headers" :items="table.items")
     template(#html).
-      &lt;w-table 
-        :headers="table.headers" 
+      &lt;w-table
+        :headers="table.headers"
         :items="table.items"&gt;
       &lt;/w-table&gt;
     template(#js).
@@ -101,9 +102,9 @@ div
     //- template(#pug).
       w-table(:items="table.items" :headers="table.headers" no-headers)
     template(#html).
-      &lt;w-table 
-        :items="table.items" 
-        :headers="table.headers" 
+      &lt;w-table
+        :items="table.items"
+        :headers="table.headers"
         no-headers&gt;
       &lt;/w-table&gt;
     template(#js).
@@ -176,9 +177,9 @@ div
     //- template(#pug).
       w-table(:headers="table.headers" :items="table.items" :sort.sync="table.sort")
     template(#html).
-      &lt;w-table 
-        :headers="table.headers" 
-        :items="table.items" 
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
         :sort.sync="table.sort"&gt;
       &lt;/w-table&gt;
     template(#js).
@@ -249,7 +250,7 @@ div
         :filter="table.filters[table.activeFilter]")
     template(#html).
       &lt;div class="w-flex wrap mb3"&gt;
-        &lt;w-button 
+        &lt;w-button
           class="mr2 mb1"
           @click="table.activeFilter = 0"
           round
@@ -257,7 +258,7 @@ div
           No filter
         &lt;/w-button&gt;
 
-        &lt;w-button 
+        &lt;w-button
           class="mr2 mb1"
           @click="table.activeFilter = 1"
           round
@@ -265,7 +266,7 @@ div
           Last name starting with 'M'
         &lt;/w-button&gt;
 
-        &lt;w-button 
+        &lt;w-button
           class="mr2 mb1"
           @click="table.activeFilter = 2"
           round
@@ -535,10 +536,10 @@ div
       w-table(:headers="table.headers" :items="table.items")
         template(#header-label="{ label, index }") {{ '\{\{ index \}\}: \{\{ label \}\}' }} 👌
     template(#html).
-      &lt;w-table 
-        :headers="table.headers" 
+      &lt;w-table
+        :headers="table.headers"
         :items="table.items"&gt;
-        &lt;template #header-label="{ label, index }"&gt; 
+        &lt;template #header-label="{ label, index }"&gt;
           {{ '\{\{ index \}\}: \{\{ label \}\}' }} 👌
         &lt;/template&gt;
       &lt;/w-table&gt;
@@ -577,9 +578,9 @@ div
           small.grey.mr2 {{ '\{\{ header.label \}\}' }}:
           span {{ '\{\{ label \}\}' }}
     template(#html).
-      &lt;w-table 
-        :headers="table.headers" 
-        no-headers 
+      &lt;w-table
+        :headers="table.headers"
+        no-headers
         :items="table.items"&gt;
         &lt;template #item="{ item, label, header, index }"&gt;
           &lt;small class="grey mr2"&gt;{{ '\{\{ header.label \}\}' }}:&lt;/span&gt;
@@ -622,9 +623,9 @@ div
     //- template(#pug).
       w-table(:headers="table.headers" :items="table.items" :mobile-breakpoint="700")
     template(#html).
-      &lt;w-table 
-        :headers="table.headers" 
-        :items="table.items" 
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
         :mobile-breakpoint="700"&gt;
       &lt;/w-table&gt;
     template(#js).

@@ -61,16 +61,17 @@ div
       br
       w-rating.my2(bg-color="light-green" color="yellow")
     template(#html).
-      &lt;w-rating 
-        class="my2" 
+      &lt;w-rating
+        class="my2"
         color="green"&gt;
       &lt;/w-rating&gt;
 
       &lt;br /&gt;
-      
-      &lt;w-rating 
-        class="my2" 
-        bg-color="light-green" color="yellow"&gt;
+
+      &lt;w-rating
+        class="my2"
+        bg-color="light-green"
+        color="yellow"&gt;
       &lt;/w-rating&gt;
 
   title-link(h2) Custom Icons
@@ -83,17 +84,17 @@ div
       br
       w-rating.my2(icon="mdi mdi-heart-outline" :value="3")
     template(#html).
-      &lt;w-rating 
-        class="my2" 
-        icon="mdi mdi-heart" 
+      &lt;w-rating
+        class="my2"
+        icon="mdi mdi-heart"
         :value="3"&gt;
       &lt;/w-rating&gt;
 
       &lt;br /&gt;
-      
-      &lt;w-rating 
-        class="my2" 
-        icon="mdi mdi-heart-outline" 
+
+      &lt;w-rating
+        class="my2"
+        icon="mdi mdi-heart-outline"
         :value="3"&gt;
       &lt;/w-rating&gt;
 

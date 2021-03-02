@@ -36,21 +36,21 @@ div
       w-select.mt4(:items="items" placeholder="Placeholder")
       w-select.mt4(:items="items" label="Label" placeholder="Placeholder")
     template(#html).
-      &lt;w-select 
-        :items="items" 
+      &lt;w-select
+        :items="items"
         label="Label"&gt;
       &lt;/w-select&gt;
 
-      &lt;w-select 
-        class="mt4" 
-        :items="items" 
+      &lt;w-select
+        class="mt4"
+        :items="items"
         placeholder="Placeholder"&gt;
       &lt;/w-select&gt;
 
-      &lt;w-select 
-        class="mt4" 
-        :items="items" 
-        label="Label" 
+      &lt;w-select
+        class="mt4"
+        :items="items"
+        label="Label"
         placeholder="Placeholder"&gt;
       &lt;/w-select&gt;
 
@@ -75,11 +75,7 @@ div
     //- template(#pug).
       w-select(:items="items" outline) Label
     template(#html).
-      &lt;w-select 
-        :items="items" 
-        outline&gt;
-        Label
-      &lt;/w-select&gt;
+      &lt;w-select :items="items" outline&gt;Label&lt;/w-select&gt;
     template(#js).
       data: () => ({
         items: [
@@ -102,16 +98,16 @@ div
       w-select(:items="items" color="blue") Label
       w-select.mt4(:items="items" bg-color="blue-light5" color="blue-dark3") Label
     template(#html).
-      &lt;w-select 
-        :items="items" 
+      &lt;w-select
+        :items="items"
         color="blue"&gt;
         Label
       &lt;/w-select&gt;
 
       &lt;w-select
-        class="mt4" 
-        :items="items" 
-        bg-color="blue-light5" 
+        class="mt4"
+        :items="items"
+        bg-color="blue-light5"
         color="blue-dark3"&gt;
         Label
       &lt;/w-select&gt;
@@ -132,18 +128,18 @@ div
       w-select(:items="items" outline color="blue") Label
       w-select.mt4(:items="items" outline bg-color="blue-light5" color="blue-dark3") Label
     template(#html).
-      &lt;w-select 
-        :items="items" 
-        outline 
+      &lt;w-select
+        :items="items"
+        outline
         color="blue"&gt;
         Label
       &lt;/w-select&gt;
 
-      &lt;w-select 
-        class="mt4" 
-        :items="items" 
-        outline 
-        bg-color="blue-light5" 
+      &lt;w-select
+        class="mt4"
+        :items="items"
+        outline
+        bg-color="blue-light5"
         color="blue-dark3"&gt;
         Label
       &lt;/w-select&gt;
@@ -210,43 +206,43 @@ div
       w-select.mt3(:items="items" outline tile) Tile
       w-select.mt4(:items="items" outline round) Round
     template(#html).
-      &lt;div class="title4"&gt; 
+      &lt;div class="title4"&gt;
         Default style (Underline)
       &lt;/div&gt;
 
-      &lt;w-select 
-        class="mt3" 
-        :items="items" 
-        bg-color="purple-light5" 
+      &lt;w-select
+        class="mt3"
+        :items="items"
+        bg-color="purple-light5"
         tile&gt;
         Tile
       &lt;/w-select&gt;
 
-      &lt;w-select 
-        class="mt4" 
-        :items="items" 
-        bg-color="purple-light5" 
+      &lt;w-select
+        class="mt4"
+        :items="items"
+        bg-color="purple-light5"
         round&gt;
         Round
       &lt;/w-select&gt;
 
 
-      &lt;div class="title4 mt6"&gt; 
+      &lt;div class="title4 mt6"&gt;
         Outline style
       &lt;/div&gt;
 
-      &lt;w-select 
-        class="mt3" 
-        :items="items" 
-        outline 
+      &lt;w-select
+        class="mt3"
+        :items="items"
+        outline
         tile&gt;
         Tile
       &lt;/w-select&gt;
 
-      &lt;w-select 
-        class="mt4" 
-        :items="items" 
-        outline 
+      &lt;w-select
+        class="mt4"
+        :items="items"
+        outline
         round&gt;
         Round
       &lt;/w-select&gt;
@@ -292,7 +288,12 @@ div
         span v-model:
         code.ml2 {{ '\{\{ selection \}\}' }}
     template(#html).
-      &lt;w-select v-model="selection" :items="items" multiple&gt;&lt;/w-select&gt;
+      &lt;w-select
+        v-model="selection"
+        :items="items"
+        multiple&gt;
+      &lt;/w-select&gt;
+
       &lt;w-flex class="align-center mt4"&gt;
         &lt;span&gt;v-model:&lt;/span&gt;
         &lt;code class="ml2"&gt;{{ '\{\{ selection \}\}' }}&lt;/code&gt;
@@ -320,7 +321,12 @@ div
         span v-model:
         code.ml2 {{ '\{\{ selection \}\}' }}
     template(#html).
-      &lt;w-select v-model="selection" :items="items" multiple&gt;&lt;/w-select&gt;
+      &lt;w-select
+        v-model="selection"
+        :items="items"
+        multiple&gt;
+      &lt;/w-select&gt;
+
       &lt;w-flex class="align-center mt4"&gt;
         &lt;span&gt;v-model:&lt;/span&gt;
         &lt;code class="ml2"&gt;{{ '\{\{ selection \}\}' }}&lt;/code&gt;
@@ -353,10 +359,10 @@ div
         span v-model:
         code.ml2 {{ '\{\{ selection \}\}' }}
     template(#html).
-      &lt;w-select 
-        v-model="selection" 
-        :items="items" 
-        multiple 
+      &lt;w-select
+        v-model="selection"
+        :items="items"
+        multiple
         return-object&gt;
       &lt;/w-select&gt;
 
@@ -387,22 +393,22 @@ div
       w-select.mt4(:items="items" label="Select an item" label-position="left")
       w-select.mt4(:items="items" label="Select an item" label-position="right")
     template(#html).
-      &lt;w-select 
-        :items="items" 
+      &lt;w-select
+        :items="items"
         label="Select an item"&gt;
       &lt;/w-select&gt;
 
-      &lt;w-select 
-        class="mt4" 
-        :items="items" 
-        label="Select an item" 
+      &lt;w-select
+        class="mt4"
+        :items="items"
+        label="Select an item"
         label-position="left"&gt;
       &lt;/w-select&gt;
 
-      &lt;w-select 
-        class="mt4" 
-        :items="items" 
-        label="Select an item" 
+      &lt;w-select
+        class="mt4"
+        :items="items"
+        label="Select an item"
         label-position="right"&gt;
       &lt;/w-select&gt;
     template(#js).
@@ -444,49 +450,31 @@ div
         w-icon.orange mdi mdi-arrow-left
         span.red.ml1 Right
     template(#html).
-      &lt;w-select 
-        :items="items" 
-        label-position="inside" 
+      &lt;w-select
+        :items="items"
+        label-position="inside"
         outline&gt;
-        &lt;w-icon class="orange"&gt;
-          mdi mdi-arrow-right
-        &lt;/w-icon&gt;
-
-        &lt;span class="purple mx1"&gt;
-          Inside
-        &lt;/span&gt;
-
-        &lt;w-icon class="orange"&gt;
-          mdi mdi-arrow-left
-        &lt;/w-icon&gt;
+        &lt;w-icon class="orange"&gt;mdi mdi-arrow-right&lt;/w-icon&gt;
+        &lt;span class="purple mx1"&gt;Inside&lt;/span&gt;
+        &lt;w-icon class="orange"&gt;mdi mdi-arrow-left&lt;/w-icon&gt;
       &lt;/w-select&gt;
 
-      &lt;w-select 
-        class="mt4" 
-        :items="items" 
-        label-position="left" 
+      &lt;w-select
+        class="mt4"
+        :items="items"
+        label-position="left"
         outline&gt;
-        &lt;span class="green mr1"&gt;
-          Left
-        &lt;/span&gt;
-
-        &lt;w-icon class="orange"&gt;
-          mdi mdi-arrow-right
-        &lt;/w-icon&gt;
+        &lt;span class="green mr1"&gt;Left&lt;/span&gt;
+        &lt;w-icon class="orange"&gt;mdi mdi-arrow-right&lt;/w-icon&gt;
       &lt;/w-select&gt;
 
-      &lt;w-select 
-        class="mt4" 
-        :items="items" 
-        label-position="right" 
+      &lt;w-select
+        class="mt4"
+        :items="items"
+        label-position="right"
         outline&gt;
-        &lt;w-icon class="orange"&gt;
-          mdi mdi-arrow-left
-        &lt;/w-icon&gt;
-
-        &lt;span class="red ml1"&gt;
-          Right
-        &lt;/span&gt;
+        &lt;w-icon class="orange"&gt;mdi mdi-arrow-left&lt;/w-icon&gt;
+        &lt;span class="red ml1"&gt;Right&lt;/span&gt;
       &lt;/w-select&gt;
 
     template(#js).
@@ -516,10 +504,10 @@ div
     template(#html).
       &lt;w-select :items="items" v-model="selection" multiple&gt;
         &lt;template #selection="{ item }"&gt;
-          &lt;w-tag 
-            class="mr2" 
-            v-for="(item, i) in item" 
-            :key="i" 
+          &lt;w-tag
+            class="mr2"
+            v-for="(item, i) in item"
+            :key="i"
             bg-color="grey-light4"&gt;
             {{ '\{\{ item.label \}\}' }}
           &lt;/w-tag&gt;
@@ -553,15 +541,10 @@ div
     template(#html).
       &lt;w-select :items="items"&gt;
         &lt;template #item="{ item, selected }"&gt;
-          &lt;w-icon class="primary" v-if="selected"&gt;
-            wi-check
-          &lt;/w-icon&gt;
+          &lt;w-icon v-if="selected" class="primary"&gt;wi-check&lt;/w-icon&gt;
+          &lt;span v-else class="px2"&gt;&lt;/span&gt;
 
-          &lt;span class="px2" v-else&gt;&lt;/span&gt;
-
-          &lt;span class="ml1"&gt;
-            {{ '\{\{ item.label \}\}' }}
-          &lt;/span&gt;
+          &lt;span class="ml1"&gt;{{ '\{\{ item.label \}\}' }}&lt;/span&gt;
 
           &lt;w-tag class="ml2" bg-color="grey-light4" xs&gt;
             {{ '\{\{ item.value \}\}' }}
@@ -599,20 +582,20 @@ div
         Label outside
       &lt;/div&gt;
 
-      &lt;w-select 
-        :items="items" 
-        label="Left" 
-        label-position="left" 
-        outline 
+      &lt;w-select
+        :items="items"
+        label="Left"
+        label-position="left"
+        outline
         inner-icon-left="mdi mdi-star"&gt;
       &lt;/w-select&gt;
 
-      &lt;w-select 
-        class="mt4" 
-        :items="items" 
-        label="Right" 
-        label-position="right" 
-        outline 
+      &lt;w-select
+        class="mt4"
+        :items="items"
+        label="Right"
+        label-position="right"
+        outline
         inner-icon-right="mdi mdi-arrow-down"&gt;
       &lt;/w-select&gt;
 
@@ -620,20 +603,20 @@ div
         Label inside
       &lt;/div&gt;
 
-      &lt;w-select 
-        :items="items" 
-        label="Select" 
-        label-position="inside" 
-        outline 
+      &lt;w-select
+        :items="items"
+        label="Select"
+        label-position="inside"
+        outline
         inner-icon-left="mdi mdi-star"&gt;
       &lt;/w-select&gt;
 
-      &lt;w-select 
-        class="mt4" 
-        :items="items" 
-        label="Select" 
-        label-position="inside" 
-        outline 
+      &lt;w-select
+        class="mt4"
+        :items="items"
+        label="Select"
+        label-position="inside"
+        outline
         inner-icon-right="mdi mdi-arrow-down"&gt;
       &lt;/w-select&gt;
     template(#js).
@@ -693,7 +676,7 @@ div
         outline
         readonly)
     template(#html).
-      &lt;w-select 
+      &lt;w-select
         class="mb4"
         :items="items"
         label="Disabled &amp; empty"
@@ -701,7 +684,7 @@ div
         disabled&gt;
       &lt;/w-select&gt;
 
-      &lt;w-select 
+      &lt;w-select
         class="mb4"
         :items="items"
         value="Item 1"
@@ -710,7 +693,7 @@ div
         disabled&gt;
       &lt;/w-select&gt;
 
-      &lt;w-select 
+      &lt;w-select
         class="mb4"
         :items="items"
         label="Readonly &amp; empty"

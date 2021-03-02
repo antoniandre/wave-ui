@@ -91,7 +91,11 @@ div
           Show overlay
         &lt;/w-button&gt;
 
-        &lt;w-divider class="mx6" vertical color="grey-light4" /&gt;
+        &lt;w-divider
+          class="mx6"
+          vertical
+          color="grey-light4"&gt;
+        &lt;/w-divider&gt;
 
         &lt;div&gt;
           &lt;div class="title4"&gt;Options&lt;/div&gt;
@@ -102,9 +106,7 @@ div
             @click="persistent = !persistent"
             sm
             dark&gt;
-            &lt;div class="code white"&gt;
-              :persistent="{{ persistent }}"
-            &lt;/div&gt;
+            :persistent="{{ persistent }}"
           &lt;/w-button&gt;
 
           &lt;w-button
@@ -113,9 +115,7 @@ div
             :disabled="!persistent"
             sm
             dark&gt;
-            &lt;div class="code white"&gt;
-              :persistent-no-animation="{{ persistentNoAnimation }}"
-            &lt;/div&gt;
+            :persistent-no-animation="{{ persistentNoAnimation }}"
           &lt;/w-button&gt;
 
           &lt;w-input
@@ -137,7 +137,11 @@ div
         :persistent="persistent"
         :persistent-no-animation="persistentNoAnimation"
         :opacity="opacity"&gt;
-        &lt;w-button bg-color="primary" lg dark @click="showOverlay = false"&gt;
+        &lt;w-button
+          bg-color="primary"
+          lg
+          dark
+          @click="showOverlay = false"&gt;
           &lt;w-icon class="mr2"&gt;wi-cross&lt;/w-icon&gt;
           Hide overlay
         &lt;/w-button&gt;
@@ -166,26 +170,22 @@ div
           w-icon.mr2 wi-cross
           | Hide overlay
     template(#html).
-      &lt;w-button 
-        bg-color="primary" 
-        dark 
+      &lt;w-button
+        bg-color="primary"
+        dark
         @click="showOverlay = true"&gt;
         Show a blue overlay
       &lt;/w-button&gt;
 
-      &lt;w-overlay 
-        v-model="showOverlay" 
+      &lt;w-overlay
+        v-model="showOverlay"
         bg-color="rgba(35, 71, 129, 0.4)"&gt;
-        &lt;w-button 
-          bg-color="primary" 
-          lg 
-          dark 
+        &lt;w-button
+          bg-color="primary"
+          lg
+          dark
           @click="showOverlay = false"&gt;
-
-          &lt;w-icon class="mr2"&gt;
-            wi-cross
-          &lt;/w-icon&gt;
-
+          &lt;w-icon class="mr2"&gt;wi-cross&lt;/w-icon&gt;
           Hide overlay
         &lt;/w-button&gt;
       &lt;/w-overlay&gt;

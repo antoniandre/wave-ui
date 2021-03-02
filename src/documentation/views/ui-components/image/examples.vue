@@ -35,15 +35,15 @@ div
     w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
     template(#html).
-      &lt;w-image 
-        class="mr5" 
-        :src="`${baseUrl}images/japanese-wave.png`" 
-        :width="150" 
+      &lt;w-image
+        class="mr5"
+        :src="`${baseUrl}images/japanese-wave.png`"
+        :width="150"
         :height="150"&gt;
       &lt;/w-image&gt;
-      &lt;w-image 
-        :src="`${baseUrl}images/japanese-wave.png`" 
-        :width="500" 
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        :width="500"
         :height="150"&gt;
       &lt;/w-image&gt;
     template(#js).
@@ -63,7 +63,7 @@ div
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="233 / 1000")
     template(#html).
       &lt;w-image
-        :src="`${baseUrl}images/japanese-wave.png`" 
+        :src="`${baseUrl}images/japanese-wave.png`"
         :ratio="233 / 1000"&gt;
       &lt;/w-image&gt;
     template(#js).
@@ -86,10 +86,10 @@ div
     //- template(#pug).
       w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
     template(#html).
-      &lt;w-image 
-        :src="`${baseUrl}images/japanese-wave.png`" 
-        width="100%" 
-        tag="img" 
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        width="100%"
+        tag="img"
         style="max-width: 700px"&gt;
       &lt;/w-image&gt;
     template(#js).
@@ -108,9 +108,9 @@ div
     //- template(#pug).
       w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" width="100%" :ratio="1 / 2")
     template(#html).
-      &lt;w-image 
-        :src="`${baseUrl}images/spirit-island--alberta.png`" 
-        width="100%" 
+      &lt;w-image
+        :src="`${baseUrl}images/spirit-island--alberta.png`"
+        width="100%"
         :ratio="1 / 2"&gt;
       &lt;/w-image&gt;
     template(#js).
@@ -158,16 +158,17 @@ div
               &lt;/code&gt;
             &lt;/template&gt;
           &lt;/w-radios&gt;
-          &lt;w-button 
-            class="mt2" 
+          &lt;w-button
+            class="mt2"
             @click="reload"&gt;
             Reload image
           &lt;/w-button&gt;
         &lt;/div&gt;
-        &lt;w-image 
-          :src="img.src" 
-          :width="500" 
-          :height="250" 
+
+        &lt;w-image
+          :src="img.src"
+          :width="500"
+          :height="250"
           :transition="img.transition"&gt;
         &lt;/w-image&gt;
       &lt;/div&gt;
@@ -227,14 +228,14 @@ div
         @error="showError = true")
       w-alert(v-if="showError" error) Oops. The image could not load!
     template(#html).
-      &lt;w-image 
-        :src="`${baseUrl}images/broken.png`" 
+      &lt;w-image
+        :src="`${baseUrl}images/broken.png`"
         :fallback="`${baseUrl}images/not-found.jpg`"
         @error="showError = true"&gt;
       &lt;/w-image&gt;
-      
-      &lt;w-alert 
-        v-if="showError" 
+
+      &lt;w-alert
+        v-if="showError"
         error&gt;
         Oops. The image could not load!
       &lt;/w-alert&gt;
@@ -255,9 +256,9 @@ div
     //- ?v1 to prevent cache from reloading the image without request.
     w-image(:src="`${baseUrl}images/spirit-island--alberta.png?v1`" lazy :ratio="2550 / 5098")
     template(#html).
-      &lt;w-image 
-        :src="`${baseUrl}images/spirit-island--alberta.png`" 
-        lazy 
+      &lt;w-image
+        :src="`${baseUrl}images/spirit-island--alberta.png`"
+        lazy
         :ratio="2550 / 5098"&gt;
       &lt;/w-image&gt;
     template(#js).
@@ -276,12 +277,10 @@ div
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="2550 / 5098")
       span.title1.pink Wave UI
     template(#html).
-      &lt;w-image 
-        :src="`${baseUrl}images/japanese-wave.png`" 
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
         :ratio="2550 / 5098"&gt;
-        &lt;span class="title1 pink"&gt;
-          Wave UI
-        &lt;/span&gt;
+        &lt;span class="title1 pink"&gt;Wave UI&lt;/span&gt;
       &lt;/w-image&gt;
     template(#js).
       data: () => ({

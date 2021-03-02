@@ -33,10 +33,10 @@ div
         &lt;w-progress class="ma1" circle color="green"&gt;&lt;/w-progress&gt;
 
         &lt;div class="title3 my6"&gt;Mixing colors&lt;/div&gt;
-        &lt;w-progress 
-          class="ma1" 
-          circle 
-          color="yellow" 
+        &lt;w-progress
+          class="ma1"
+          circle
+          color="yellow"
           bg-color="cyan"&gt;
         &lt;/w-progress&gt;
 
@@ -112,53 +112,53 @@ div
         w-progress.ma1(circle value="38" size="6em" :stroke="15" color="blue")
         w-progress.ma1(circle value="38" size="6em" :stroke="40" color="blue")
       template(#html).
-        &lt;w-progress 
-          class="ma1" 
-          circle 
-          value="38" 
+        &lt;w-progress
+          class="ma1"
+          circle
+          value="38"
           color="blue"&gt;
         &lt;/w-progress&gt;
 
-        &lt;w-progress 
-          class="ma1" 
-          circle 
-          value="38" 
-          size="4em" 
+        &lt;w-progress
+          class="ma1"
+          circle
+          value="38"
+          size="4em"
           color="blue"&gt;
         &lt;/w-progress&gt;
 
-        &lt;w-progress 
+        &lt;w-progress
           class="ma1 mr8"
-          circle 
-          value="38" 
-          size="5em" 
+          circle
+          value="38"
+          size="5em"
           color="blue"&gt;
         &lt;/w-progress&gt;
 
-        &lt;w-progress 
-          class="ma1" 
-          circle 
-          value="38" 
-          size="6em" 
-          :stroke="2" 
+        &lt;w-progress
+          class="ma1"
+          circle
+          value="38"
+          size="6em"
+          :stroke="2"
           color="blue"&gt;
         &lt;/w-progress&gt;
 
-        &lt;w-progress 
-          class="ma1" 
-          circle 
-          value="38" 
-          size="6em" 
-          :stroke="15" 
+        &lt;w-progress
+          class="ma1"
+          circle
+          value="38"
+          size="6em"
+          :stroke="15"
           color="blue"&gt;
         &lt;/w-progress&gt;
 
-        &lt;w-progress 
-          class="ma1" 
-          circle 
-          value="38" 
-          size="6em" 
-          :stroke="40" 
+        &lt;w-progress
+          class="ma1"
+          circle
+          value="38"
+          size="6em"
+          :stroke="40"
           color="blue"&gt;
         &lt;/w-progress&gt;
 
@@ -180,22 +180,20 @@ div
       template(#html).
         &lt;p&gt;Default label - Custom label&lt;/p&gt;
 
-        &lt;w-progress 
-          class="ma1 mr8" 
-          circle 
-          v-model="progress" 
-          size="5em" 
+        &lt;w-progress
+          class="ma1 mr8"
+          circle
+          v-model="progress"
+          size="5em"
           label&gt;
         &lt;/w-progress&gt;
 
-        &lt;w-progress 
-          class="ma1" 
-          circle 
-          v-model="progress" 
+        &lt;w-progress
+          class="ma1"
+          circle
+          v-model="progress"
           size="5em"&gt;
-          &lt;strong&gt;
-            {{ '\{\{ progress \}\}' }}%
-          &lt;/strong&gt;
+          &lt;strong&gt;{{ '\{\{ progress \}\}' }}%&lt;/strong&gt;
         &lt;/w-progress&gt;
       template(#js).
         data: () => ({
@@ -235,18 +233,18 @@ div
         w-progress.ma1(circle value="38" size="6em" round-cap)
         w-progress.ma1(circle value="38" size="6em")
       template(#html).
-        &lt;w-progress 
+        &lt;w-progress
           class="ma1"
-          circle 
-          value="38" 
-          size="6em" 
+          circle
+          value="38"
+          size="6em"
           round-cap&gt;
         &lt;/w-progress&gt;
-        
-        &lt;w-progress 
+
+        &lt;w-progress
           class="ma1"
-          circle 
-          value="38" 
+          circle
+          value="38"
           size="6em"&gt;
         &lt;/w-progress&gt;
 
@@ -295,8 +293,20 @@ div
         w-progress(value="38" size="1.4em" tile color="light-blue")
         w-progress.mt4(value="38" size="1.4em" round color="light-blue")
       template(#html).
-        &lt;w-progress value="38" size="1.4em" tile color="light-blue"&gt;&lt;/w-progress&gt;
-        &lt;w-progress class="mt4" value="38" size="1.4em" round color="light-blue"&gt;&lt;/w-progress&gt;
+        &lt;w-progress
+          value="38"
+          size="1.4em"
+          tile
+          color="light-blue"&gt;
+        &lt;/w-progress&gt;
+
+        &lt;w-progress
+          class="mt4"
+          value="38"
+          size="1.4em"
+          round
+          color="light-blue"&gt;
+        &lt;/w-progress&gt;
 
     title-link(h2) Outline &amp; shadow
     example(reactive)
@@ -306,8 +316,21 @@ div
         w-progress(value="38" size="1em" outline round color="light-blue")
         w-progress.mt4(value="38" size="1em" shadow color="light-blue")
       template(#html).
-        &lt;w-progress value="38" size="1em" outline round color="light-blue"&gt;&lt;/w-progress&gt;
-        &lt;w-progress class="mt4" value="38" size="1em" shadow color="light-blue"&gt;&lt;/w-progress&gt;
+        &lt;w-progress
+          value="38"
+          size="1em"
+          outline
+          round
+          color="light-blue"&gt;
+        &lt;/w-progress&gt;
+
+        &lt;w-progress
+          class="mt4"
+          value="38"
+          size="1em"
+          shadow
+          color="light-blue"&gt;
+        &lt;/w-progress&gt;
 
     title-link(h2) Stripes (only if determinate)
     example(reactive)
@@ -347,7 +370,9 @@ div
           outline
           round
           color="light-blue"
-          stripes&gt;&lt;/w-progress&gt;
+          stripes&gt;
+        &lt;/w-progress&gt;
+
         &lt;w-progress
           class="mt4"
           value="38"
@@ -355,7 +380,8 @@ div
           outline
           round
           color="primary"
-          stripes&gt;&lt;/w-progress&gt;
+          stripes&gt;
+        &lt;/w-progress&gt;
 
     title-link(h2) Progress value with label
     h3 Default label
@@ -366,8 +392,22 @@ div
         w-progress(v-model="progress" size="1.3em" round color="primary" label)
         w-progress.mt4(v-model="progress" size="1.3em" outline round label)
       template(#html).
-        &lt;w-progress v-model="progress" size="1.3em" round color="primary" label&gt;&lt;/w-progress&gt;
-        &lt;w-progress class="mt4" v-model="progress" size="1.3em" outline round label&gt;&lt;/w-progress&gt;
+        &lt;w-progress
+          v-model="progress"
+          size="1.3em"
+          round
+          color="primary"
+          label&gt;
+        &lt;/w-progress&gt;
+
+        &lt;w-progress
+          class="mt4"
+          v-model="progress"
+          size="1.3em"
+          outline
+          round
+          label&gt;
+        &lt;/w-progress&gt;
       template(#js).
         data: () => ({
           progress: 37.86
@@ -401,7 +441,7 @@ div
         round
         label
         label-color="indigo-light4")
-      template(#pug).
+      //- template(#pug).
         w-progress(
           value="50.3"
           size="2em"
@@ -409,6 +449,15 @@ div
           round
           label
           label-color="indigo-light4")
+      template(#html).
+        &lt;w-progress
+          value="50.3"
+          size="2em"
+          outline
+          round
+          label
+          label-color="indigo-light4"&gt;
+        &lt;/w-progress&gt;
 
     title-link(h2) Round linecap &amp; default flat line cap
     example(reactive)

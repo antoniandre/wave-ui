@@ -60,9 +60,19 @@ div.lists-demo
       br
       w-list(:items="listItems4" bg-color="blue-light5" color="primary" hover)
     template(#html).
-      &lt;w-list :items="items1" color="pink" hover&gt;&lt;/w-list&gt;
+      &lt;w-list
+        :items="items1"
+        color="pink"
+        hover&gt;
+      &lt;/w-list&gt;
+
       &lt;br /&gt;
-      &lt;w-list :items="items1" bg-color="blue-light5" color="primary" hover&gt;&lt;/w-list&gt;
+      &lt;w-list
+        :items="items1"
+        bg-color="blue-light5"
+        color="primary"
+        hover&gt;
+      &lt;/w-list&gt;
     template(#js).
       data: () => ({
         items1: [
@@ -108,7 +118,12 @@ div.lists-demo
     //- template(#pug).
       w-list(:value="[]" :items="listItems4" selection-color="pink" multiple)
     template(#html).
-      &lt;w-list :value="[]" :items="listItems4" selection-color="pink" multiple&gt;&lt;/w-list&gt;
+      &lt;w-list
+        :value="[]"
+        :items="listItems4"
+        selection-color="pink"
+        multiple&gt;
+      &lt;/w-list&gt;
     template(#js).
       data: () => ({
         items1: [
@@ -228,11 +243,13 @@ div.lists-demo
           @item-click="itemClicked = $event"
           class="mt6 mr4 grow"&gt;
         &lt;/w-list&gt;
+
         &lt;div v-if="itemClicked"&gt;
           &lt;div class="title3"&gt;Clicked item:&lt;/div&gt;
           &lt;span&gt;{{ '\{\{ itemClicked \}\}' }}&lt;/span&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
+
       &lt;div class="title3 mt2"&gt;
         Selected item:
         &lt;code v-if="!multiple || Array.isArray(selection)" class="ml2"&gt;
