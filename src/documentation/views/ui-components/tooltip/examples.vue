@@ -58,10 +58,10 @@ div.tooltips-demo
       &lt;div class="text-center"&gt;
         &lt;w-tooltip left&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-icon 
-              class="ma2" 
-              v-on="on" 
-              xl 
+            &lt;w-icon
+              class="ma2"
+              v-on="on"
+              xl
               color="primary-light2"&gt;
               mdi mdi-home
             &lt;/w-icon&gt;
@@ -71,10 +71,10 @@ div.tooltips-demo
 
         &lt;w-tooltip top&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-icon 
-              class="ma2" 
-              v-on="on" 
-              xl 
+            &lt;w-icon
+              class="ma2"
+              v-on="on"
+              xl
               color="primary-light2"&gt;
               mdi mdi-home
             &lt;/w-icon&gt;
@@ -84,10 +84,10 @@ div.tooltips-demo
 
         &lt;w-tooltip&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-icon 
-              class="ma2" 
-              v-on="on" 
-              xl 
+            &lt;w-icon
+              class="ma2"
+              v-on="on"
+              xl
               color="primary-light2"&gt;
               mdi mdi-home
             &lt;/w-icon&gt;
@@ -97,10 +97,10 @@ div.tooltips-demo
 
         &lt;w-tooltip right&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-icon 
-              class="ma2" 
-              v-on="on" 
-              xl 
+            &lt;w-icon
+              class="ma2"
+              v-on="on"
+              xl
               color="primary-light2"&gt;
               mdi mdi-home
             &lt;/w-icon&gt;
@@ -143,9 +143,9 @@ div.tooltips-demo
       &lt;div class="text-center"&gt;
         &lt;w-tooltip show-on-click left&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-button 
-              class="ma2" 
-              v-on="on" 
+            &lt;w-button
+              class="ma2"
+              v-on="on"
               bg-color="info"&gt;
               &lt;w-icon class="mr1"&gt;
                 wi-star
@@ -158,10 +158,10 @@ div.tooltips-demo
 
         &lt;w-tooltip show-on-click right&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-button 
-              class="ma2" 
-              v-on="on" 
-              bg-color="info-dark2" 
+            &lt;w-button
+              class="ma2"
+              v-on="on"
+              bg-color="info-dark2"
               dark&gt;
               &lt;w-icon class="mr1"&gt;
                 wi-star
@@ -244,53 +244,45 @@ div.tooltips-demo
         &lt;/w-button&gt;
 
         &lt;div class="d-iblock my2 mx6"&gt;
-          &lt;w-tooltip 
-            class="ma2" 
-            v-model="showTooltip" 
-            show-on-click 
+          &lt;w-tooltip
+            class="ma2"
+            v-model="showTooltip"
+            show-on-click
             left&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;span v-on="on"&gt;
-                Star
-              &lt;/span&gt;
+              &lt;span v-on="on"&gt;Star&lt;/span&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
 
-          &lt;w-tooltip 
-            class="ma2" 
-            v-model="showTooltip" 
-            show-on-click 
+          &lt;w-tooltip
+            class="ma2"
+            v-model="showTooltip"
+            show-on-click
             top&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;span v-on="on"&gt;
-                Star
-              &lt;/span&gt;
+              &lt;span v-on="on"&gt;Star&lt;/span&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
 
-          &lt;w-tooltip 
-            class="ma2" 
-            v-model="showTooltip" 
+          &lt;w-tooltip
+            class="ma2"
+            v-model="showTooltip"
             show-on-click&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;span v-on="on"&gt;
-                Star
-              &lt;/span&gt;
+              &lt;span v-on="on"&gt;Star&lt;/span&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
 
-          &lt;w-tooltip 
-            class="ma2" 
-            v-model="showTooltip" 
-            show-on-click 
+          &lt;w-tooltip
+            class="ma2"
+            v-model="showTooltip"
+            show-on-click
             right&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;span v-on="on"&gt;
-                Star
-              &lt;/span&gt;
+              &lt;span v-on="on"&gt;Star&lt;/span&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
@@ -350,10 +342,10 @@ div.tooltips-demo
       &lt;div class="text-center pb8"&gt;
         &lt;w-tooltip color="white" bg-color="blue"&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-icon 
-              class="ma2" 
-              v-on="on" 
-              xl 
+            &lt;w-icon
+              class="ma2"
+              v-on="on"
+              xl
               color="blue"&gt;
               wi-star
             &lt;/w-icon&gt;
@@ -363,10 +355,10 @@ div.tooltips-demo
 
         &lt;w-tooltip color="white" bg-color="purple"&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-icon 
-              class="ma2" 
-              v-on="on" 
-              xl 
+            &lt;w-icon
+              class="ma2"
+              v-on="on"
+              xl
               color="purple"&gt;
               wi-star
             &lt;/w-icon&gt;
@@ -374,14 +366,14 @@ div.tooltips-demo
           Star
         &lt;/w-tooltip&gt;
 
-        &lt;w-tooltip 
-          color="orange-dark1" 
+        &lt;w-tooltip
+          color="orange-dark1"
           bg-color="yellow-light3"&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-icon 
-              class="ma2" 
-              v-on="on" 
-              xl 
+            &lt;w-icon
+              class="ma2"
+              v-on="on"
+              xl
               color="amber"&gt;
               wi-star
             &lt;/w-icon&gt;
@@ -391,9 +383,9 @@ div.tooltips-demo
 
         &lt;w-tooltip color="orange"&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-icon 
-              class="ma2" 
-              v-on="on" 
+            &lt;w-icon
+              class="ma2"
+              v-on="on"
               xl&gt;
               wi-star
             &lt;/w-icon&gt;
@@ -434,10 +426,10 @@ div.tooltips-demo
       &lt;div class="text-center pb8"&gt;
         &lt;w-tooltip color="red-light2" tile&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-icon 
-              class="ma2" 
-              v-on="on" 
-              xl 
+            &lt;w-icon
+              class="ma2"
+              v-on="on"
+              xl
               color="red-light2"&gt;
               mdi mdi-square
             &lt;/w-icon&gt;
@@ -447,10 +439,10 @@ div.tooltips-demo
 
         &lt;w-tooltip color="amber-dark1" round&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-icon 
-              class="ma2" 
-              v-on="on" 
-              xl 
+            &lt;w-icon
+              class="ma2"
+              v-on="on"
+              xl
               color="amber"&gt;
               mdi mdi-circle
             &lt;/w-icon&gt;
@@ -460,10 +452,10 @@ div.tooltips-demo
 
         &lt;w-tooltip color="pink-light1" shadow&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-icon 
-              class="ma2" 
-              v-on="on" 
-              xl 
+            &lt;w-icon
+              class="ma2"
+              v-on="on"
+              xl
               color="pink-light1"&gt;
               mdi mdi-heart
             &lt;/w-icon&gt;
@@ -510,7 +502,7 @@ div.tooltips-demo
       &lt;div class="text-center"&gt;
         &lt;w-tooltip class="ma3" color="primary"&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;span v-on="on"&gt; 
+            &lt;span v-on="on"&gt;
               Content with icon
             &lt;/span&gt;
           &lt;/template&gt;
@@ -575,20 +567,20 @@ div.tooltips-demo
             | Home
     template(#html).
       &lt;div class="text-center"&gt;
-        &lt;w-radios 
-          class="my4" 
-          inline 
-          v-model="transition" 
+        &lt;w-radios
+          class="my4"
+          inline
+          v-model="transition"
           :items="transitions"&gt;
         &lt;/w-radios&gt;
 
         &lt;div class="text-center py6"&gt;
           &lt;w-tooltip :transition="transition" left&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon 
-                class="ma2" 
-                v-on="on" 
-                color="primary" 
+              &lt;w-icon
+                class="ma2"
+                v-on="on"
+                color="primary"
                 xl&gt;
                 mdi mdi-home
               &lt;/w-icon&gt;
@@ -598,10 +590,10 @@ div.tooltips-demo
 
           &lt;w-tooltip :transition="transition"&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon 
-                class="ma2" 
-                v-on="on" 
-                color="primary" 
+              &lt;w-icon
+                class="ma2"
+                v-on="on"
+                color="primary"
                 xl&gt;
                 mdi mdi-home
               &lt;/w-icon&gt;
@@ -611,10 +603,10 @@ div.tooltips-demo
 
           &lt;w-tooltip :transition="transition" top&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon 
-                class="ma2" 
-                v-on="on" 
-                color="primary" 
+              &lt;w-icon
+                class="ma2"
+                v-on="on"
+                color="primary"
                 xl&gt;
                 mdi mdi-home
               &lt;/w-icon&gt;
@@ -624,10 +616,10 @@ div.tooltips-demo
 
           &lt;w-tooltip :transition="transition" right&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon 
-                class="ma2" 
-                v-on="on" 
-                color="primary" 
+              &lt;w-icon
+                class="ma2"
+                v-on="on"
+                color="primary"
                 xl&gt;
                 mdi mdi-home
               &lt;/w-icon&gt;
@@ -673,14 +665,14 @@ div.tooltips-demo
                 | Hover me
             span This tooltip is appended to the green container!
     template(#html).
-      &lt;div class="another-container text-center green-light5--bg pa6"&gt;
+      &lt;div class="wrapper text-center green-light5--bg pa6"&gt;
         &lt;w-card bg-color="yellow-light5"&gt;
-          &lt;w-tooltip detach-to=".another-container"&gt;
+          &lt;w-tooltip detach-to=".wrapper"&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-tag 
-                v-on="on" 
-                lg 
-                color="pink-light1" 
+              &lt;w-tag
+                v-on="on"
+                lg
+                color="pink-light1"
                 bg-color="pink-light5"&gt;
                 &lt;w-icon class="mr1"&gt;mdi mdi-bomb&lt;/w-icon&gt;
                 Hover me
@@ -693,6 +685,8 @@ div.tooltips-demo
         &lt;/w-card&gt;
       &lt;/div&gt;
     template(#css).
+      .wrapper {position: relative;}
+
       .w-card {
         overflow: hidden;
         display: inline-block;

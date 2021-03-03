@@ -43,7 +43,7 @@ div
       w-switch.mb3(v-model="fillBar") Fill bar
       w-tabs(:items="tabs" :fill-bar="fillBar")
     template(#html).
-      &lt;w-switch class="mb3" v-model="fillBar"&gt;
+      &lt;w-switch v-model="fillBar" class="mb3"&gt;
         Fill bar
       &lt;/w-switch&gt;
 
@@ -76,6 +76,7 @@ div
         code.ml2 {{ '\{\{ activeTab \}\}' }}
     template(#html).
       &lt;w-tabs v-model="activeTab" :items="tabs"&gt;&lt;/w-tabs&gt;
+
       &lt;strong&gt;
         v-model:
         &lt;code class="ml2"&gt;
@@ -105,9 +106,9 @@ div
     //- template(#pug).
       w-tabs(:items="tabs" color="blue" bg-color="indigo-light5")
     template(#html).
-      &lt;w-tabs 
-        :items="tabs" 
-        color="blue" 
+      &lt;w-tabs
+        :items="tabs"
+        color="blue"
         bg-color="indigo-light5"&gt;
       &lt;/w-tabs&gt;
     template(#js).
@@ -127,8 +128,8 @@ div
     //- template(#pug).
       w-tabs(:items="tabs" slider-color="blue-light2")
     template(#html).
-      &lt;w-tabs 
-        :items="tabs" 
+      &lt;w-tabs
+        :items="tabs"
         slider-color="blue-light2"&gt;
       &lt;/w-tabs&gt;
     template(#js).
@@ -185,9 +186,9 @@ div
         Slider
       &lt;/w-switch&gt;
 
-      &lt;w-tabs 
-        :items="tabs" 
-        :no-slider="!tabsSlider" 
+      &lt;w-tabs
+        :items="tabs"
+        :no-slider="!tabsSlider"
         active-class="pink"&gt;
       &lt;/w-tabs&gt;
     template(#js).
@@ -210,14 +211,14 @@ div
       w-radios.mb3(:items="transitions" v-model="transition")
       w-tabs(:items="tabs" :transition="transition")
     template(#html).
-      &lt;w-radios 
-        class="mb3" 
-        :items="transitions" 
+      &lt;w-radios
+        class="mb3"
+        :items="transitions"
         v-model="transition"&gt;
       &lt;/w-radios&gt;
 
-      &lt;w-tabs 
-        :items="tabs" 
+      &lt;w-tabs
+        :items="tabs"
         :transition="transition"&gt;
       &lt;/w-tabs&gt;
     template(#js).
@@ -265,19 +266,19 @@ div
     template(#html).
       &lt;w-flex class="mb3" align-center&gt;
         Number of tabs:
-        &lt;w-button 
-          class="mx2" 
-          icon="wi-minus" 
-          sm 
+        &lt;w-button
+          class="mx2"
+          icon="wi-minus"
+          sm
           @click="tabsCount -= tabsCount &lt; 1 ? 0 : 1"&gt;
         &lt;/w-button&gt;
 
         &lt;code&gt;{{ '\{\{ tabsCount \}\}' }}&lt;/code&gt;
 
-        &lt;w-button 
-          class="mx2" 
-          icon="wi-plus" 
-          sm 
+        &lt;w-button
+          class="mx2"
+          icon="wi-plus"
+          sm
           @click="tabsCount++"&gt;
         &lt;/w-button&gt;
       &lt;/w-flex&gt;
@@ -342,16 +343,16 @@ div
     template(#html).
       &lt;w-tabs :items="tabs" card&gt;
         &lt;template #item-title="{ item, index }"&gt;
-          | {{ '\{\{ item.title \}\}' }}
-          &lt;w-button 
+          {{ '\{\{ item.title \}\}' }}
+          &lt;w-button
             class="ml1 mr-1"
             @click.stop="tabs.splice(index - 1, 1)"
             icon="wi-cross"
             outline
             xs&gt;
-          &lt;/w-button&gt; 
-        &lt;/template&gt; 
-      &lt;/w-tabs&gt;            
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+      &lt;/w-tabs&gt;
     template(#js).
       data: () => ({
         tabs: [
@@ -396,7 +397,7 @@ div
           &lt;span class="green"&gt;
             {{ '\{\{ item.title \}\}' }}
           &lt;/span&gt;
-        &lt;/template&gt; 
+        &lt;/template&gt;
 
         &lt;template #item-title.3="{ item }"&gt;
           &lt;w-icon class="pink"&gt;
@@ -410,16 +411,16 @@ div
           &lt;w-icon class="pink"&gt;
             mdi mdi-heart
           &lt;/w-icon&gt;
-        &lt;/template&gt; 
+        &lt;/template&gt;
 
         &lt;template #item-content.1="{ item }"&gt;
           &lt;div class="title3"&gt;
             This is a custom tab content.
-          &lt;/div&gt; 
+          &lt;/div&gt;
 
-          &lt;div v-html="item.content"&gt;&lt;/div&gt; 
-        &lt;/template&gt; 
-      &lt;/w-tabs&gt; 
+          &lt;div v-html="item.content"&gt;&lt;/div&gt;
+        &lt;/template&gt;
+      &lt;/w-tabs&gt;
     template(#js).
       data: () => ({
         tabs: [
