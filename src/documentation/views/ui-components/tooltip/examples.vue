@@ -656,9 +656,9 @@ div.tooltips-demo
               | Hover me
           span This tooltip is appended to the #[span.green green] container!
     //- template(#pug).
-      .another-container.text-center.green-light5--bg.pa6
+      .wrapper.text-center.green-light5--bg.pa6
         w-card(bg-color="yellow-light5")
-          w-tooltip(detach-to=".another-container")
+          w-tooltip(detach-to=".wrapper")
             template(#activator="{ on }")
               w-tag(v-on="on" lg color="pink-light1" bg-color="pink-light5")
                 w-icon.mr1 mdi mdi-bomb
