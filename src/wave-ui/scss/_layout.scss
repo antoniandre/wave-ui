@@ -37,7 +37,7 @@
   .d-iblock {display: inline-block;}
   // ----------------------------------------------
 
-  // Borders (from 0 to 6), radii (from 0 to 6 + `f` for full).
+  // Borders (from 0 to 6), radii (from 0 to 6 + `m` for max).
   // ----------------------------------------------
   @for $i from 1 through 6 {
     .bd#{$i} {border: $i + px solid $border-color;}
@@ -47,7 +47,8 @@
   @for $i from 1 through 6 {
     .bdrs#{$i} {border-radius: round($i * $base-increment);}
   }
-  .bdrsf {border-radius: 100%;}
+  .bdrsr {border-radius: 999em;}
+  .bdrsm {border-radius: 100%;}
   .bdrs0 {border-radius: 0;}
   // ----------------------------------------------
 
