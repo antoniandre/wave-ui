@@ -324,5 +324,9 @@ export default {
 </script>
 
 <style>
-.main-content--image {overflow: auto;}
+.main-content--image {
+  overflow: auto;
+  margin-left: -20px;
+  padding-left: 20px;
+}
 </style>
