@@ -25,6 +25,7 @@ export default {
     justifyCenter: { type: Boolean },
     justifyEnd: { type: Boolean },
     justifySpaceBetween: { type: Boolean },
+    justifySpaceAround: { type: Boolean },
     basisZero: { type: Boolean },
     gap: { type: Number, default: 0 }
   },
@@ -46,6 +47,7 @@ export default {
         'justify-center': this.justifyCenter,
         'justify-end': this.justifyEnd,
         'justify-space-between': this.justifySpaceBetween,
+        'justify-space-around': this.justifySpaceAround,
         'basis-zero': this.basisZero,
         [`w-flex--gap${this.gap}`]: this.gap
       }
