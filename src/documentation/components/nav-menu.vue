@@ -54,6 +54,7 @@ export default {
       },
       { label: 'Typography', route: '/typography' },
       { label: 'Colors', route: '/colors' },
+      { label: 'Shadows, borders &amp; radii', route: '/shadows-borders-radii' },
       { label: 'Transitions', route: '/transitions' }
     ],
     components: [
