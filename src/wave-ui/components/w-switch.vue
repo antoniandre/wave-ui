@@ -138,7 +138,6 @@ $disabled-color: #ddd;
   // Switch.
   &__input {
     position: relative;
-    border-radius: 3em;
     width: 2 * $small-form-el-size;
     height: $small-form-el-size;
     display: flex;
@@ -146,10 +145,13 @@ $disabled-color: #ddd;
     align-items: center;
     justify-content: center;
     border: $outline-width solid $inactive-color;
+    border-radius: 3em;
     background-color: $inactive-color;
-    @include default-transition;
     cursor: inherit;
     box-sizing: initial;
+    @include default-transition;
+
+    .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
 
     // Checked state.
     :checked + & {
@@ -187,6 +189,8 @@ $disabled-color: #ddd;
     border-radius: 100%;
     @include default-transition;
 
+    .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
+
     :checked + & {transform: translateX(100%);}
 
     .w-switch--thin & {
@@ -215,6 +219,7 @@ $disabled-color: #ddd;
     pointer-events: none;
     transition: 0.25s ease-in-out;
 
+    .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
     .w-switch--thin & {top: - round(0.15 * $small-form-el-size);}
   }
 
