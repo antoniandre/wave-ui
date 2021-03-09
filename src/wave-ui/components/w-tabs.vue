@@ -24,6 +24,8 @@
           :index="i + 1"
           :active="item._index === activeTabIndex")
           div(v-html="item[itemTitleKey]")
+    .w-tabs__bar-extra
+      slot(name="tabs-bar-extra")
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
   .w-tabs__content-wrap(v-if="tabsItems.length")
     transition(:name="transitionName" :mode="transitionMode")
@@ -297,6 +299,13 @@ export default {
     &--active:before, &:focus:before, &:hover:before {opacity: 0.05;}
     &:active:before {opacity: 0.08;}
     &--disabled:before {display: none;}
+  }
+
+  // Bar Extra.
+  // ------------------------------------------------------
+  &__bar-extra {
+    margin-left: auto;
+    align-self: center;
   }
 
   // Slider.
