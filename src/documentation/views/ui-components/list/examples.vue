@@ -20,10 +20,10 @@ div.lists-demo
       .w-flex.wrap
         .grow
           .title3 Most basic
-          w-list(:items="listItems1")
+          w-list(:items="items")
         .grow
           .title3 With icons
-          w-list(:items="listItems1" icon="wi-check")
+          w-list(:items="items" icon="wi-check")
     template(#html).
       &lt;w-flex wrap&gt;
         &lt;div class="grow"&gt;
@@ -56,26 +56,26 @@ div.lists-demo
     br
     w-list(:items="listItems4" bg-color="blue-light5" color="primary" hover)
     //- template(#pug).
-      w-list(:items="listItems4" color="pink" hover)
+      w-list(:items="items" color="pink" hover)
       br
-      w-list(:items="listItems4" bg-color="blue-light5" color="primary" hover)
+      w-list(:items="items" bg-color="blue-light5" color="primary" hover)
     template(#html).
       &lt;w-list
-        :items="items1"
+        :items="items"
         color="pink"
         hover&gt;
       &lt;/w-list&gt;
 
       &lt;br /&gt;
       &lt;w-list
-        :items="items1"
+        :items="items"
         bg-color="blue-light5"
         color="primary"
         hover&gt;
       &lt;/w-list&gt;
     template(#js).
       data: () => ({
-        items1: [
+        items: [
           { label: 'Item 1' },
           { label: 'Item 2' },
           { label: 'Item 3' },
@@ -87,7 +87,7 @@ div.lists-demo
   example
     w-list(:items="listItems5" hover)
     //- template(#pug).
-    //-   w-list(:items="listItems5" hover)
+    //-   w-list(:items="items" hover)
     template(#html).
       &lt;w-list :items="items" hover&gt;&lt;/w-list&gt;
     template(#js).
@@ -116,17 +116,17 @@ div.lists-demo
   example
     w-list(:value="[]" :items="listItems4" selection-color="pink" multiple)
     //- template(#pug).
-      w-list(:value="[]" :items="listItems4" selection-color="pink" multiple)
+      w-list(:value="[]" :items="items" selection-color="pink" multiple)
     template(#html).
       &lt;w-list
         :value="[]"
-        :items="listItems4"
+        :items="items"
         selection-color="pink"
         multiple&gt;
       &lt;/w-list&gt;
     template(#js).
       data: () => ({
-        items1: [
+        items: [
           { label: 'Item 1' },
           { label: 'Item 2' },
           { label: 'Item 3' },
@@ -169,7 +169,7 @@ div.lists-demo
           | {{ item.label }}
           w-icon(md) {{ item.icon }}
     //- template(#pug).
-      w-list(:items="listItems2" hover)
+      w-list(:items="items" hover)
         template(#item="{ item }")
           .w-flex.align-center.justify-space-between
             | {{ item.label }}
@@ -219,7 +219,7 @@ div.lists-demo
       w-flex(wrap align-center)
         w-list.grow.mr4(
           v-model="selection1"
-          :items="listItems1"
+          :items="items"
           color="deep-purple"
           :multiple="multiple"
           @item-click="itemClicked = $event")
@@ -547,9 +547,13 @@ div.lists-demo
   example
     w-list(v-model="selection5" :items="listItems5" checklist)
     //- template(#pug).
-      w-list(v-model="selection5" :items="listItems5" checklist)
+      w-list(v-model="selection5" :items="items" checklist)
     template(#html).
-      &lt;w-list v-model="selection" :items="items" checklist&gt;&lt;/w-list&gt;
+      &lt;w-list
+        v-model="selection"
+        :items="items"
+        checklist&gt;
+      &lt;/w-list&gt;
     template(#js).
       data: () => ({
         items: [
