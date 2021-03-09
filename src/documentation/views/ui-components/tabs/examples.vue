@@ -429,6 +429,47 @@ div
           { title: 'Tab 3', content: 'Tab 3 content.' }
         ]
       })
+
+  title-link(h2) Refreshing the slider width or position
+  p.
+    By default there is no data watcher on the tabs title to recalculate the slider width or position.#[br]
+    But you may need to update the slider width for various reasons.
+    Thanks to the #[code updateSlider] method, this is quite straightforward.#[br]
+    In this scenario, the slider width is updated on title change from the #[strong.code w-input] field,
+    so the slider width adapts to the number of characters on the current tab's title.
+  example
+    w-tabs(ref="tabs" :items="tabs7")
+      template(#item-content="{ item }")
+        w-input.my6(v-model="item.title" label="Tab title" @keyup="onTitleChange")
+    //- template(#pug).
+      w-tabs(ref="tabs" :items="tabs")
+        template(#item-content="{ item }")
+          w-input.my6(v-model="item.title" label="Tab title" @keyup="onTitleChange")
+    template(#html).
+      &lt;w-tabs ref="tabs" :items="tabs"&gt;
+        &lt;template #item-content="{ item }"&gt;
+          &lt;w-input
+            v-model="item.title"
+            class="my6"
+            label="Tab title"
+            @keyup="onTitleChange"&gt;
+          &lt;/w-input&gt;
+        &lt;/template&gt;
+      &lt;/w-tabs&gt;
+    template(#js).
+      data: () => ({
+        tabs:  [
+          { title: 'Tab 1' },
+          { title: 'Tab 2' },
+          { title: 'Tab 3' }
+        ]
+      }),
+
+      methods: {
+        onTitleChange () {
+          this.$refs.tabs.updateSlider()
+        }
+      }
 </template>
 
 <script>
@@ -479,6 +520,11 @@ export default {
         { title: 'Tab 3', content: 'Tab 3 content.' }
       ],
     },
+    tabs7:  [
+      { title: 'Tab 1' },
+      { title: 'Tab 2' },
+      { title: 'Tab 3' }
+    ],
     transitions: [
       { label: 'default', value: '' },
       { label: 'fade' },
@@ -489,6 +535,12 @@ export default {
       { label: 'scale-fade' },
       { label: 'none', value: false }
     ]
-  })
+  }),
+
+  methods: {
+    onTitleChange () {
+      this.$refs.tabs.updateSlider()
+    }
+  }
 }
 </script>

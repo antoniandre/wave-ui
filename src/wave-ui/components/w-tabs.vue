@@ -159,6 +159,7 @@ export default {
       if (!this.noSlider) this.$nextTick(this.updateSlider)
     },
 
+    // Updates the slider position.
     updateSlider (domLookup = true) {
       if (domLookup) {
         this.activeTabEl = this.$refs['tabs-bar'].querySelector('.w-tabs__bar-item--active')
