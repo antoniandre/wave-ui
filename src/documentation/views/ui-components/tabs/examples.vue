@@ -591,7 +591,7 @@ export default {
 
   methods: {
     onTitleChange () {
-      this.$refs.tabs.updateSlider()
+      this.$nextTick(this.$refs.tabs.updateSlider)
     }
   }
 }
