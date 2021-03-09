@@ -37,6 +37,37 @@
   .d-iblock {display: inline-block;}
   // ----------------------------------------------
 
+  // Borders (from 0 to 6), radii (from 0 to 6 + `m` for max).
+  // ----------------------------------------------
+  @for $i from 1 through 6 {
+    .bd#{$i} {border: $i + px solid $border-color;}
+  }
+  .bd0 {border: none;}
+
+  @for $i from 1 through 6 {
+    .bdrs#{$i} {border-radius: round($i * $base-increment);}
+  }
+  .bdrsr {border-radius: 999em;}
+  .bdrsm {border-radius: 100%;}
+  .bdrs0 {border-radius: 0;}
+  // ----------------------------------------------
+
+  // Shadows (from -6 to 6).
+  // ----------------------------------------------
+  @for $i from -6 through -1 {
+    .sh#{$i} {
+      box-shadow: 0 0 (-1 * round($i * $base-increment)) rgba(#000, max(0.15 * -$i / 2, 0.15)) inset;
+    }
+  }
+  @for $i from 1 through 6 {
+    .sh#{$i} {
+      box-shadow: 0 0 1px rgba(#000, 0.1),
+                  round($base-increment * $i / 4) round($base-increment * $i / 4) round($i * $base-increment) rgba(#000, max(0.15 * $i / 2, 0.15));
+    }
+  }
+  .sh0 {box-shadow: none;}
+  // ----------------------------------------------
+
   // Spaces.
   // ----------------------------------------------
   // Margin.

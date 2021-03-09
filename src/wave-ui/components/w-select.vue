@@ -364,12 +364,12 @@ export default {
     border-radius: $border-radius;
     border: $border;
     transition: border $transition-duration;
+
     &--tile {border-radius: initial;}
     &--shadow {box-shadow: $box-shadow;}
+    .w-select[class^="bdrs"] &, .w-select[class*=" bdrs"] & {border-radius: inherit;}
 
-    .w-select--floating-label & {
-      margin-top: 3 * $base-increment;
-    }
+    .w-select--floating-label & {margin-top: 3 * $base-increment;}
 
     &--underline {
       border-bottom-left-radius: initial;

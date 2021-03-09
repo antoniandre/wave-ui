@@ -40,11 +40,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "breakpoints" */ '@/documentation/views/breakpoints.vue')
   },
   {
-    path: '/colors',
-    name: 'colors',
-    component: () => import(/* webpackChunkName: "colors" */ '@/documentation/views/colors.vue')
-  },
-  {
     path: '/layout',
     name: 'layout',
     redirect: '/layout--spaces'
@@ -68,6 +63,16 @@ const routes = [
     path: '/typography',
     name: 'typography',
     component: () => import(/* webpackChunkName: "typography" */ '@/documentation/views/typography.vue')
+  },
+  {
+    path: '/colors',
+    name: 'colors',
+    component: () => import(/* webpackChunkName: "colors" */ '@/documentation/views/colors.vue')
+  },
+  {
+    path: '/shadows-borders-radii',
+    name: 'shadows-borders-radii',
+    component: () => import(/* webpackChunkName: "shadows-borders-radii" */ '@/documentation/views/shadows-borders-radii.vue')
   },
   {
     path: '/transitions',

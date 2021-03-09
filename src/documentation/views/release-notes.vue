@@ -14,13 +14,29 @@ main
         #[code wave-ui@next] should always be including the last version changes listed bellow
         (maintaining 2 different versions of the documentation and release notes is a lot of extra
         work!).#[br]
-        If you find anything missing or not working as expected please open an issue precising the Vue and Wave UI versions! :)
+        If you find anything missing or not working as expected please open an issue precising the Vue
+        and Wave UI versions! :)
       br
       br
 
     //- Vue 2.
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
+    li.minor
+      strong.version v1.25.0
+      p.
+        Added a #[code tabs-bar-extra] slot to allow adding an extra element on the
+        #[strong.code w-tabs] bar.
+
+    li.minor
+      strong.version v1.24.0
+      p.
+        Added #[router-link(to="/shadows-borders-radii") shadows, borders &amp; border radii] CSS classes.
+
+    li.patch
+      strong.version v1.23.1
+      p Fix the #[strong.code w-tabs] initial state via #[code v-model].
+
     li.minor
       strong.version v1.23.0
       p Complete the #[em à la carte] feature, allowing tree-shaking.

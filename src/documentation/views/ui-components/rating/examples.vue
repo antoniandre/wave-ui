@@ -3,8 +3,10 @@ div
   title-link(h2) Default
   example
     w-rating
-    template(#pug).
+    //- template(#pug).
       w-rating
+    template(#html).
+      &lt;w-rating&gt;&lt;/w-rating&gt;
 
   title-link(h2) V-model
   example
@@ -16,7 +18,7 @@ div
     div.mt2
       strong.mr2 v-model:
       code {{ rating2 }}
-    template(#pug).
+    //- template(#pug).
       w-rating(v-model="rating1")
       div.mt2
         strong.mr2 v-model:
@@ -26,6 +28,18 @@ div
       div.mt2
         strong.mr2 v-model:
         code {{ '\{\{ rating2 \}\}' }}
+    template(#html).
+      &lt;w-rating v-model="rating1"&gt;&lt;/w-rating&gt;
+      &lt;div class="mt2"&gt;
+        &lt;strong class="mr2"&gt;v-model:&lt;/strong&gt;
+        &lt;code&gt;{{ '\{\{ rating1 \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
+
+      &lt;w-rating class="mt4" v-model="rating2"&gt;&lt;/w-rating&gt;
+      &lt;div class="mt2"&gt;
+        &lt;strong class="mr2"&gt;v-model:&lt;/strong&gt;
+        &lt;code&gt;{{ '\{\{ rating2 \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
     template(#js).
       data: () => ({
         rating1: 3,
@@ -42,20 +56,47 @@ div
     br
     w-rating.my2(bg-color="light-green" color="yellow")
 
-    template(#pug).
+    //- template(#pug).
       w-rating.my2(color="green")
       br
       w-rating.my2(bg-color="light-green" color="yellow")
+    template(#html).
+      &lt;w-rating
+        class="my2"
+        color="green"&gt;
+      &lt;/w-rating&gt;
+
+      &lt;br /&gt;
+
+      &lt;w-rating
+        class="my2"
+        bg-color="light-green"
+        color="yellow"&gt;
+      &lt;/w-rating&gt;
 
   title-link(h2) Custom Icons
   example
     w-rating.my2(icon="mdi mdi-heart" :model-value="3")
     br
     w-rating.my2(icon="mdi mdi-heart-outline" :model-value="3")
-    template(#pug).
+    //- template(#pug).
       w-rating.my2(icon="mdi mdi-heart" :model-value="3")
       br
       w-rating.my2(icon="mdi mdi-heart-outline" :model-value="3")
+    template(#html).
+      &lt;w-rating
+        class="my2"
+        icon="mdi mdi-heart"
+        :model-value="3"&gt;
+      &lt;/w-rating&gt;
+
+      &lt;br /&gt;
+
+      &lt;w-rating
+        class="my2"
+        icon="mdi mdi-heart-outline"
+        :model-value="3"&gt;
+      &lt;/w-rating&gt;
 
   title-link(h2 slug="max") Max (number of buttons)
   p.
@@ -67,10 +108,22 @@ div
     w-rating.my2(:model-value="2" :max="3")
     br
     w-rating.my2(:model-value="6" :max="10")
-    template(#pug).
+    //- template(#pug).
       w-rating.my2(:model-value="2" :max="3")
       br
       w-rating.my2(:model-value="6" :max="10")
+    template(#html).
+      &lt;w-rating
+        :model-value="2"
+        class="my2"
+        :max="3"&gt;
+      &lt;/w-rating&gt;
+      &lt;br /&gt;
+      &lt;w-rating
+        :model-value="6"
+        class="my2"
+        :max="10"&gt;
+      &lt;/w-rating&gt;
 
   title-link(h2) Sizes
   p.
@@ -88,7 +141,7 @@ div
     br
     w-rating.my2(xl)
 
-    template(#pug).
+    //- template(#pug).
       w-rating.my2(xs)
       br
       w-rating.my2(sm)
@@ -98,6 +151,16 @@ div
       w-rating.my2(lg)
       br
       w-rating.my2(xl)
+    template(#html).
+      &lt;w-rating class="my2" xs&gt;&lt;/w-rating&gt;
+      &lt;br /&gt;
+      &lt;w-rating class="my2" sm&gt;&lt;/w-rating&gt;
+      &lt;br /&gt;
+      &lt;w-rating class="my2" md&gt;&lt;/w-rating&gt;
+      &lt;br /&gt;
+      &lt;w-rating class="my2" lg&gt;&lt;/w-rating&gt;
+      &lt;br /&gt;
+      &lt;w-rating class="my2" xl&gt;&lt;/w-rating&gt;
 
   title-link(h2) Disabled &amp; readonly
   p Use the disabled or readonly options to display a rating but prevent user votes.
@@ -105,10 +168,14 @@ div
     w-rating.my2(:model-value="3" disabled)
     br
     w-rating.my2(:model-value="3" readonly)
-    template(#pug).
+    //- template(#pug).
       w-rating.my2(:model-value="3" disabled)
       br
       w-rating.my2(:model-value="3" readonly)
+    template(#html).
+      &lt;w-rating class="my2" :model-value="3" disabled&gt;&lt;/w-rating&gt;
+      &lt;br /&gt;
+      &lt;w-rating class="my2" :model-value="3" readonly&gt;&lt;/w-rating&gt;
 </template>
 
 <script>

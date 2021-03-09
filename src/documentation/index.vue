@@ -8,7 +8,7 @@ w-app
     transition(name="fade")
       w-progress(v-if="loading" color="primary" tile absolute)
     nav-menu.navigation.no-shrink(v-if="!isMobile" v-model:drawer-open="drawerOpen")
-    .main-content.w-flex.column.grow
+    .main-content.w-flex.column.grow(:class="`main-content--${$route.name}`")
       router-view.grow(#default="{ Component }" :class="`main--${$route.name}`")
         transition(name="fade-page" mode="out-in")
           component(:is="Component")

@@ -47,7 +47,7 @@ div
       w-button(bg-color="primary" lg dark @click="showOverlay = false")
         w-icon.mr2 wi-cross
         | Hide overlay
-    template(#pug).
+    //- template(#pug).
       w-flex(wrap)
         w-button(bg-color="primary" dark @click="showOverlay = true") Show overlay
 
@@ -85,6 +85,67 @@ div
         w-button(bg-color="primary" lg dark @click="showOverlay = false")
           w-icon.mr2 wi-cross
           | Hide overlay
+    template(#html).
+      &lt;w-flex wrap&gt;
+        &lt;w-button bg-color="primary" dark @click="showOverlay = true"&gt;
+          Show overlay
+        &lt;/w-button&gt;
+
+        &lt;w-divider
+          class="mx6"
+          vertical
+          color="grey-light4"&gt;
+        &lt;/w-divider&gt;
+
+        &lt;div&gt;
+          &lt;div class="title4"&gt;Options&lt;/div&gt;
+          &lt;w-button
+            class="mr2"
+            bg-color="primary-light1"
+            :class="persistent ? 'pr4' : ''"
+            @click="persistent = !persistent"
+            sm
+            dark&gt;
+            :persistent="{{ persistent }}"
+          &lt;/w-button&gt;
+
+          &lt;w-button
+            bg-color="primary-light1"
+            @click="persistentNoAnimation = !persistentNoAnimation"
+            :disabled="!persistent"
+            sm
+            dark&gt;
+            :persistent-no-animation="{{ persistentNoAnimation }}"
+          &lt;/w-button&gt;
+
+          &lt;w-input
+            class="mt2 d-block"
+            v-model="opacity"
+            outline
+            type="number"
+            label="Overlay opacity"
+            label-position="left"
+            step="0.1"
+            min="0"
+            max="1"&gt;
+          &lt;/w-input&gt;
+        &lt;/div&gt;
+      &lt;/w-flex&gt;
+
+      &lt;w-overlay
+        v-model="showOverlay"
+        :persistent="persistent"
+        :persistent-no-animation="persistentNoAnimation"
+        :opacity="opacity"&gt;
+        &lt;w-button
+          bg-color="primary"
+          lg
+          dark
+          @click="showOverlay = false"&gt;
+          &lt;w-icon class="mr2"&gt;wi-cross&lt;/w-icon&gt;
+          Hide overlay
+        &lt;/w-button&gt;
+      &lt;/w-overlay&gt;
     template(#js).
       data: () => ({
         showOverlay: false,
@@ -101,13 +162,33 @@ div
       w-button(bg-color="primary" lg dark @click="showBlueOverlay = false")
         w-icon.mr2 wi-cross
         | Hide overlay
-    template(#pug).
+    //- template(#pug).
       w-button(bg-color="primary" dark @click="showOverlay = true") Show a blue overlay
 
       w-overlay(v-model="showOverlay" bg-color="rgba(35, 71, 129, 0.4)")
         w-button(bg-color="primary" lg dark @click="showOverlay = false")
           w-icon.mr2 wi-cross
           | Hide overlay
+    template(#html).
+      &lt;w-button
+        bg-color="primary"
+        dark
+        @click="showOverlay = true"&gt;
+        Show a blue overlay
+      &lt;/w-button&gt;
+
+      &lt;w-overlay
+        v-model="showOverlay"
+        bg-color="rgba(35, 71, 129, 0.4)"&gt;
+        &lt;w-button
+          bg-color="primary"
+          lg
+          dark
+          @click="showOverlay = false"&gt;
+          &lt;w-icon class="mr2"&gt;wi-cross&lt;/w-icon&gt;
+          Hide overlay
+        &lt;/w-button&gt;
+      &lt;/w-overlay&gt;
     template(#js).
       data: () => ({
         showOverlay: false

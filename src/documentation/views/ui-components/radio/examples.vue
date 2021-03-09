@@ -54,7 +54,7 @@ div
     w-radio.mr2(v-model="radio3" name="radio3" return-value="option 1") Option 1
     w-radio.mr2(v-model="radio3" name="radio3" return-value="option 2") Option 2
     w-radio(v-model="radio3" name="radio3" return-value="option 3") Option 3
-    template(#pug).
+    //- template(#pug).
       .title4.mb2 1. Here is a single radio button
       w-radio I am single - not very useful
 
@@ -71,6 +71,56 @@ div
       w-radio.mr2(v-model="radio3" name="radio3" return-value="option 1") Option 1
       w-radio.mr2(v-model="radio3" name="radio3" return-value="option 2") Option 2
       w-radio(v-model="radio3" name="radio3" return-value="option 3") Option 3
+    template(#html).
+      &lt;div class="title4 mb2"&gt;1. Here is a single radio button&lt;/div&gt;
+      &lt;w-radio&gt;I am single - not very useful&lt;/w-radio&gt;
+
+      &lt;div class="title4 mt8 mb2"&gt;2. Here is a duo&lt;/div&gt;
+      &lt;w-radio class="mr2" name="radio1"&gt;Option 1&lt;/w-radio&gt;
+      &lt;w-radio name="radio1"&gt;Option 2&lt;/w-radio&gt;
+
+      &lt;div class="title4 mt8 mb2"&gt;3. A trio using v-model&lt;/div&gt;
+      &lt;w-radio
+        class="mr2"
+        v-model="radio2"
+        return-value="option 1"&gt;
+        Option 1
+      &lt;/w-radio&gt;
+      &lt;w-radio
+        class="mr2"
+        v-model="radio2"
+        return-value="option 2"&gt;
+        Option 2
+      &lt;/w-radio&gt;
+      &lt;w-radio
+        v-model="radio2"
+        return-value="option 3"&gt;
+        Option 3
+      &lt;/w-radio&gt;
+
+      &lt;div class="title4 mt8 mb2"&gt;
+        4. A trio using v-model and a set name
+      &lt;/div&gt;
+      &lt;w-radio
+        class="mr2"
+        v-model="radio3"
+        name="radio3"
+        return-value="option 1"&gt;
+        Option 1
+      &lt;/w-radio&gt;
+      &lt;w-radio
+        class="mr2"
+        v-model="radio3"
+        name="radio3"
+        return-value="option 2"&gt;
+        Option 2
+      &lt;/w-radio&gt;
+      &lt;w-radio
+        v-model="radio3"
+        name="radio3"
+        return-value="option 3"&gt;
+        Option 3
+      &lt;/w-radio&gt;
     template(#js).
       data: () => ({
         radio2: false,
@@ -97,7 +147,7 @@ div
       w-tag(bg-color="green-light5" color="green-dark2")
         | Choice 2 is a tag
         w-icon.ml1 mdi mdi-heart
-    template(#pug).
+    //- template(#pug).
       w-radio.mr5(name="radio1")
         span.pr1 Choice 1 has an icon
         w-icon(md) mdi mdi-star
@@ -105,6 +155,18 @@ div
         w-tag(bg-color="green-light5" color="green-dark2")
           | Choice 2 is a tag
           w-icon.ml1 mdi mdi-heart
+    template(#html).
+      &lt;w-radio class="mr5" name="radio1"&gt;
+        &lt;span class="pr1"&gt;Choice 1 has an icon&lt;/span&gt;
+        &lt;w-icon md&gt;mdi mdi-star&lt;/w-icon&gt;
+      &lt;/w-radio&gt;
+
+      &lt;w-radio name="radio1"&gt;
+        &lt;w-tag bg-color="green-light5" color="green-dark2"&gt;
+          Choice 2 is a tag
+          &lt;w-icon class="ml1"&gt;mdi mdi-heart&lt;/w-icon&gt;
+        &lt;/w-tag&gt;
+      &lt;/w-radio&gt;
   alert(tip).
     As seen in this example, the #[span.code w-radio] component allows you to have complete freedom
     in your radio buttons.#[br]
@@ -131,10 +193,21 @@ div
     .w-flex.align-center
       w-radios(v-model="selection1" :items="radios1")
       div.title3.ml10 v-model: #[code {{ selection1 || 'null' }}]
-    template(#pug).
-      .w-flex.align-center
-        w-radios(v-model="selection" :items="radioItems")
-        div.title3.ml10 v-model: {{ "\{\{ selection || 'null' \}\}" }}
+    //- template(#pug).
+    //-   .w-flex.align-center
+    //-     w-radios(v-model="selection" :items="radioItems")
+    //-     div.title3.ml10 v-model: {{ "\{\{ selection || 'null' \}\}" }}
+    template(#html).
+      &lt;div class="w-flex align-center"&gt;
+        &lt;w-radios
+          v-model="selection"
+          :items="radioItems"&gt;
+        &lt;/w-radios&gt;
+
+        &lt;div class="title3 ml10"&gt;
+          v-model: {{ "\{\{ selection || 'null' \}\}" }}
+        &lt;/div&gt;
+      &lt;/div&gt;
     template(#js).
       data: () => ({
         selection: 1,
@@ -148,8 +221,10 @@ div
   title-link(h2) Inline layout
   example(content-class="mt3")
     w-radios(:items="radios2" inline)
-    template(#pug).
+    //- template(#pug).
       w-radios(:items="radioItems" inline)
+    template(#html).
+      &lt;w-radios :items="radioItems" inline&gt;&lt;/w-radios&gt;
     template(#js).
       data: () => ({
         radioItems: [
@@ -167,11 +242,21 @@ div
       template(#item="{ item }")
         span.pr2 {{ item.label }}
         w-icon.success {{ item.icon }}
-    template(#pug).
+    //- template(#pug).
       w-radios(v-model="selection" :items="radioItems" color="green")
         template(#item="{ item }")
           span.pr2 {{ '\{\{ item.label \}\}' }}
           w-icon.success {{ '\{\{ item.icon \}\}' }}
+    template(#html).
+      &lt;w-radios
+        v-model="selection"
+        :items="radioItems"
+        color="green"&gt;
+        &lt;template #item="{ item }"&gt;
+          &lt;span class="pr2"&gt;{{ '\{\{ item.label \}\}' }}&lt;/span&gt;
+          &lt;w-icon class="success"&gt;{{ '\{\{ item.icon \}\}' }}&lt;/w-icon&gt;
+        &lt;/template&gt;
+      &lt;/w-radios&gt;
     template(#js).
       data: () => ({
         selection: 'Square',
@@ -199,11 +284,29 @@ div
 
     .title4.mt8.mb2 Different color per item
     w-radios(v-model="selection7" :items="radios4") Option 2
-    template(#pug).
+    //- template(#pug).
       w-radios.mr2(v-model="selection1" :items="radios1" color="purple") Option 1
 
       .title4.mt8.mb2 Different color per item
       w-radios(v-model="selection2" :items="radios2") Option 2
+    template(#html).
+      &lt;w-radios
+        class="mr2"
+        v-model="selection1"
+        :items="radios1"
+        color="purple"&gt;
+        Option 1
+      &lt;/w-radios&gt;
+
+      &lt;div class="title4 mt8 mb2"&gt;
+        Different color per item
+      &lt;/div&gt;
+
+      &lt;w-radios
+        v-model="selection2"
+        :items="radios2"&gt;
+        Option 2
+      &lt;/w-radios&gt;
     template(#js).
       data: () => ({
         selection1: 1,
@@ -228,13 +331,52 @@ div
     .title4.mt8.mb2 Different color per item
     w-radio.mr2(v-model="selection4" name="radio6" color="pink-light3" :return-value="1") Option 1
     w-radio(v-model="selection4" name="radio6" color="blue-light1" :return-value="2") Option 2
-    template(#pug).
+    //- template(#pug).
       w-radio.mr2(v-model="selection1" name="radio1" color="teal-light1" :return-value="1") Option 1
       w-radio(v-model="selection1" name="radio1" color="teal-light1" :return-value="2") Option 2
 
       .title4.mt8.mb2 Different color per item
       w-radio.mr2(v-model="selection2" name="radio2" color="pink-light3" :return-value="1") Option 1
       w-radio(v-model="selection2" name="radio2" color="blue-light1" :return-value="2") Option 2
+    template(#html).
+      &lt;w-radio
+        class="mr2"
+        v-model="selection1"
+        name="radio1"
+        color="teal-light1"
+        :return-value="1"&gt;
+        Option 1
+      &lt;/w-radio&gt;
+
+      &lt;w-radio
+        v-model="selection1"
+        name="radio1"
+        color="teal-light1"
+        :return-value="2"&gt;
+        Option 2
+      &lt;/w-radio&gt;
+
+      &lt;div class="title4 mt8 mb2"&gt;
+        Different color per item
+      &lt;/div&gt;
+
+      &lt;w-radio
+        class="mr2"
+        v-model="selection2"
+        name="radio2"
+        color="pink-light3"
+        :return-value="1"&gt;
+        Option 1
+      &lt;/w-radio&gt;
+
+      &lt;w-radio
+        v-model="selection2"
+        name="radio2"
+        color="blue-light1"
+        :return-value="2"&gt;
+        Option 2
+      &lt;/w-radio&gt;
+
     template(#js).
       data: () => ({
         selection1: 1,
