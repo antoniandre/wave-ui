@@ -23,6 +23,12 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
     li.minor
+      strong.version v1.25.0
+      p.
+        Added a #[code tabs-bar-extra] slot to allow adding an extra element on the
+        #[strong.code w-tabs] bar.
+
+    li.minor
       strong.version v1.24.0
       p.
         Added #[router-link(to="/shadows-borders-radii") shadows, borders &amp; border radii] CSS classes.
