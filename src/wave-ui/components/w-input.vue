@@ -216,9 +216,8 @@ $inactive-color: #777;
     border: $border;
     transition: border $transition-duration;
 
-    .w-input--floating-label & {
-      margin-top: 3 * $base-increment;
-    }
+    .w-input--floating-label & {margin-top: 3 * $base-increment;}
+    .w-input[class^="bdrs"] &, .w-input[class*=" bdrs"] & {border-radius: inherit;}
 
     &--underline {
       border-bottom-left-radius: initial;

@@ -32,7 +32,7 @@ div
       transition="bounce"
       v-bind="{ [notification.position[0]]: true, [notification.position[1]]: true }")
       | The alert is fixed on {{ notification.position[0] }} {{ notification.position[1] }}.
-    template(#pug).
+    //- template(#pug).
       w-button.mr6(
         @click="notification.show = !notification.show"
         color="primary"
@@ -60,6 +60,40 @@ div
         :[notification.position[0]]="true"
         :[notification.position[1]]="true")
         | The alert is fixed on {{ "\{\{ notification.position[0] \}\}" }} {{ "\{\{ notification.position[1] \}\}" }}.
+    template(#html).
+      &lt;w-button
+        class="mr6"
+        @click="notification.show = !notification.show"
+        color="primary"
+        outline
+        width="8.5em"&gt;
+        {{ "\{\{ notification.show ? 'Hide' : 'Show' \}\}" }} notification
+      &lt;/w-button&gt;
+
+      &lt;w-radios
+        class="mr6"
+        v-model="notification.position[0]"
+        :items="[{ label: 'top' }, { label: 'bottom' }]"
+        inline&gt;
+      &lt;/w-radios&gt;
+
+      &lt;w-radios
+        v-model="notification.position[1]"
+        :items="[{ label: 'left' }, { label: 'center' }, { label: 'right' }]"
+        inline&gt;
+      &lt;/w-radios&gt;
+
+      &lt;w-notification
+        v-show="notification.show"
+        success
+        plain
+        round
+        shadow
+        transition="bounce"
+        :[notification.position[0]]="true"
+        :[notification.position[1]]="true"&gt;
+        The alert is fixed on {{ "\{\{ notification.position[0] \}\}" }} {{ "\{\{ notification.position[1] \}\}" }}.
+      &lt;/w-notification&gt;
     template(#js).
       data: () => ({
         notification: {
@@ -98,7 +132,7 @@ div
       absolute)
       | This alert is
       | {{ ~~notification2.timeout ? `auto-hiding after ${notification2.timeout} ms` : 'not auto-hiding' }}.
-    template(#pug).
+    //- template(#pug).
       w-button.mr6(
         @click="showNotification = !showNotification"
         color="primary"
@@ -125,6 +159,40 @@ div
         absolute)
         | This alert is
         | {{ "\{\{ parseInt(timeout) ? `auto-hiding after ${timeout} ms` : 'not auto-hiding'\}\}" }}.
+    template(#html).
+      &lt;w-button
+        class="mr6"
+        @click="showNotification = !showNotification"
+        color="primary"
+        outline
+        width="8.5em"&gt;
+        {{ "\{\{ showNotification ? 'Hide' : 'Show' \}\}" }} notification
+      &lt;/w-button&gt;
+
+      &lt;w-input
+        class="d-iflex"
+        v-model="timeout"
+        type="number"
+        step="500"
+        min="0"
+        label="Timeout:"
+        label-position="left"
+        style="max-width: 110px"&gt;
+      &lt;/w-input&gt;
+
+      &lt;span class="ml2"&gt;ms&lt;/span&gt;
+
+      &lt;w-notification
+        v-model="showNotification"
+        :timeout="timeout"
+        warning
+        plain
+        round
+        shadow
+        absolute&gt;
+        This alert is
+        {{ "\{\{ parseInt(timeout) ? `auto-hiding after ${timeout} ms` : 'not auto-hiding'\}\}" }}.
+      &lt;/w-notification&gt;
     template(#js).
       data: () => ({
         showNotification: false,
@@ -163,7 +231,7 @@ div
       :transition="transition"
       v-bind="{ [notification3.position[0]]: true, [notification3.position[1]]: true }")
       | The alert is fixed on {{ notification3.position[0] }} {{ notification3.position[1] }}.
-    template(#pug).
+    //- template(#pug).
       w-flex(wrap align-center)
         w-button.mr3(
           @click="notification.show = !notification.show"
@@ -197,6 +265,57 @@ div
         :[notification.position[0]]="true"
         :[notification.position[1]]="true")
         | The alert is fixed on {{ "\{\{ notification.position[0] \}\}" }} {{ "\{\{ notification.position[1] \}\}" }}.
+    template(#html).
+      &lt;w-flex wrap align-center&gt;
+        &lt;w-button
+          class="mr3"
+          @click="notification.show = !notification.show"
+          color="primary"
+          outline
+          width="8.5em"&gt;
+          {{ "\{\{ notification.show ? 'Hide' : 'Show' \}\}" }} notification
+        &lt;/w-button&gt;
+
+        &lt;w-radios
+          class="my4"
+          v-model="transition"
+          :items="transitions"&gt;
+          &lt;template #item="{ item }"&gt;
+            {{ "\{\{ item.label \}\}" }}
+            &lt;code class="ml2"&gt;
+              {{ "\{\{ item.value || (item.value === false ? 'false' : \"''\") \}\}" }}
+            &lt;/code&gt;
+          &lt;/template&gt;
+        &lt;/w-radios&gt;
+      &lt;/w-flex&gt;
+
+      &lt;div class="title4 mt3"&gt;
+        Notification position
+      &lt;/div&gt;
+
+      &lt;w-radios class="mr6"&gt;
+        v-model="notification.position[0]"
+        :items="[{ label: 'top' }, { label: 'bottom' }]"
+        inline&gt;
+      &lt;/w-radios&gt;
+
+      &lt;w-radios
+        v-model="notification.position[1]"
+        :items="[{ label: 'left' }, { label: 'center' }, { label: 'right' }]"
+        inline&gt;
+      &lt;/w-radios&gt;
+
+      &lt;w-notification
+        v-show="notification.show"
+        info
+        color="primary"
+        round
+        shadow
+        :transition="transition"
+        :[notification.position[0]]="true"
+        :[notification.position[1]]="true"&gt;
+        The alert is fixed on {{ "\{\{ notification.position[0] \}\}" }} {{ "\{\{ notification.position[1] \}\}" }}.
+      &lt;/w-notification&gt;
     template(#js).
       data: () => ({
         notification: {

@@ -179,6 +179,7 @@ export default {
   width: 4em;
 
   &--has-ratio {width: 100%;}
+  &[class^="bdrs"], &[class*=" bdrs"] {overflow: hidden;}
 
   img {
     width: 100%;

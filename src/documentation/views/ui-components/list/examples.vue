@@ -16,6 +16,14 @@ div.lists-demo
       .grow
         .title3 With icons
         w-list(:items="listItems1" icon="wi-check")
+    //- template(#pug).
+      .w-flex.wrap
+        .grow
+          .title3 Most basic
+          w-list(:items="listItems1")
+        .grow
+          .title3 With icons
+          w-list(:items="listItems1" icon="wi-check")
     template(#html).
       &lt;w-flex wrap&gt;
         &lt;div class="grow"&gt;
@@ -47,10 +55,24 @@ div.lists-demo
     w-list(:items="listItems4" color="pink" hover)
     br
     w-list(:items="listItems4" bg-color="blue-light5" color="primary" hover)
+    //- template(#pug).
+      w-list(:items="listItems4" color="pink" hover)
+      br
+      w-list(:items="listItems4" bg-color="blue-light5" color="primary" hover)
     template(#html).
-      &lt;w-list :items="items1" color="pink" hover&gt;&lt;/w-list&gt;
+      &lt;w-list
+        :items="items1"
+        color="pink"
+        hover&gt;
+      &lt;/w-list&gt;
+
       &lt;br /&gt;
-      &lt;w-list :items="items1" bg-color="blue-light5" color="primary" hover&gt;&lt;/w-list&gt;
+      &lt;w-list
+        :items="items1"
+        bg-color="blue-light5"
+        color="primary"
+        hover&gt;
+      &lt;/w-list&gt;
     template(#js).
       data: () => ({
         items1: [
@@ -64,6 +86,8 @@ div.lists-demo
   title-link(h3) Different color per item
   example
     w-list(:items="listItems5" hover)
+    //- template(#pug).
+    //-   w-list(:items="listItems5" hover)
     template(#html).
       &lt;w-list :items="items" hover&gt;&lt;/w-list&gt;
     template(#js).
@@ -91,11 +115,18 @@ div.lists-demo
     #[code selection-color] to a falsy value (false, null, or empty string), or another color.
   example
     w-list(:model-value="[]" :items="listItems4" selection-color="pink" multiple)
+    //- template(#pug).
+      w-list(:model-value="[]" :items="items" selection-color="pink" multiple)
     template(#html).
-      &lt;w-list :model-value="[]" :items="listItems4" selection-color="pink" multiple&gt;&lt;/w-list&gt;
+      &lt;w-list
+        :model-value="[]"
+        :items="items"
+        selection-color="pink"
+        multiple&gt;
+      &lt;/w-list&gt;
     template(#js).
       data: () => ({
-        items1: [
+        items: [
           { label: 'Item 1' },
           { label: 'Item 2' },
           { label: 'Item 3' },
@@ -114,6 +145,12 @@ div.lists-demo
         | Item {{ index }}
       template(#item.3)
         strong This is the great item #3
+    //- template(#pug).
+      w-list(:items="5" hover)
+        template(#item="{ index }")
+          | Item {{ index }}
+        template(#item.3)
+          strong This is the great item #3
     template(#html).
       &lt;w-list :items="5" hover&gt;
         &lt;template #item="{ index }"&gt;{{ '\{\{ index \}\}' }}&lt;/template&gt;
@@ -131,6 +168,12 @@ div.lists-demo
         .w-flex.align-center.justify-space-between
           | {{ item.label }}
           w-icon(md) {{ item.icon }}
+    //- template(#pug).
+      w-list(:items="listItems2" hover)
+        template(#item="{ item }")
+          .w-flex.align-center.justify-space-between
+            | {{ item.label }}
+            w-icon(md) {{ item.icon }}
     template(#html).
       &lt;w-list :items="items" hover&gt;
         &lt;template #item="{ item }"&gt;
@@ -171,6 +214,23 @@ div.lists-demo
       | Selected item:
       code.ml2(v-if="!multiple || Array.isArray(selection1)") {{ selection1 || 'null' }}
       code.ml2(v-else-if="multiple") {{ selection1 ? [selection1] : '[]' }}
+    //- template(#pug).
+      w-radios.mb6(v-model="multiple" :items="radios" inline)
+      w-flex(wrap align-center)
+        w-list.grow.mr4(
+          v-model="selection1"
+          :items="listItems1"
+          color="deep-purple"
+          :multiple="multiple"
+          @item-click="itemClicked = $event")
+        div(v-if="itemClicked")
+          .title3 clicked item (#[span.code item-click] event):
+          br
+          span.code {{ itemClicked }}
+      .title3.mt2
+        | Selected item:
+        code.ml2(v-if="!multiple || Array.isArray(selection1)") {{ selection1 || 'null' }}
+        code.ml2(v-else-if="multiple") {{ selection1 ? [selection1] : '[]' }}
     template(#html).
       &lt;w-radios v-model="multiple" :items="radios" inline&gt;&lt;/w-radios&gt;
 
@@ -183,11 +243,13 @@ div.lists-demo
           @item-click="itemClicked = $event"
           class="mt6 mr4 grow"&gt;
         &lt;/w-list&gt;
+
         &lt;div v-if="itemClicked"&gt;
           &lt;div class="title3"&gt;Clicked item:&lt;/div&gt;
           &lt;span&gt;{{ '\{\{ itemClicked \}\}' }}&lt;/span&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
+
       &lt;div class="title3 mt2"&gt;
         Selected item:
         &lt;code v-if="!multiple || Array.isArray(selection)" class="ml2"&gt;
@@ -258,6 +320,129 @@ div.lists-demo
             span {{ item.label }}
             .spacer
             w-icon(md) {{ item.icon }}
+    //- template(#pug).
+      w-flex(wrap basis-zero :gap="3")
+        .grow
+          .title3.mb4 Default
+          w-list(
+            v-model="selection3"
+            :items="listItems1"
+            checklist
+            color="green")
+        .grow
+          .title3.mb4 Round checkboxes
+          w-list(
+            v-model="selection4"
+            :items="listItems1"
+            checklist
+            round-checkboxes
+            color="green")
+
+      w-flex.mt4(wrap basis-zero :gap="3")
+        .grow
+          .title3.mb4 Custom rendering, default styles
+          w-list(
+            :items="listItems2"
+            item-value-key="id"
+            checklist
+            color="primary")
+            template(#item="{ item }")
+              span {{ item.label }}
+              .spacer
+              w-icon(md) {{ item.icon }}
+        .grow
+          .title3.mb4 Custom rendering &amp; styles
+          w-list.custom(
+            :items="listItems2"
+            item-value-key="id"
+            checklist
+            color="primary")
+            template(#item="{ item }")
+              span {{ item.label }}
+              .spacer
+              w-icon(md) {{ item.icon }}
+      template(#html).
+      w-flex(wrap basis-zero :gap="3")
+        .grow
+          .title3.mb4 Default
+          w-list(
+            v-model="selection3"
+            :items="listItems1"
+            checklist
+            color="green")
+        .grow
+          .title3.mb4 Round checkboxes
+          w-list(
+            v-model="selection4"
+            :items="listItems1"
+            checklist
+            round-checkboxes
+            color="green")
+
+      w-flex.mt4(wrap basis-zero :gap="3")
+        .grow
+          .title3.mb4 Custom rendering, default styles
+          w-list(
+            :items="listItems2"
+            item-value-key="id"
+            checklist
+            color="primary")
+            template(#item="{ item }")
+              span {{ item.label }}
+              .spacer
+              w-icon(md) {{ item.icon }}
+        .grow
+          .title3.mb4 Custom rendering &amp; styles
+          w-list.custom(
+            :items="listItems2"
+            item-value-key="id"
+            checklist
+            color="primary")
+            template(#item="{ item }")
+              span {{ item.label }}
+              .spacer
+              w-icon(md) {{ item.icon }}
+      template(#html).
+      w-flex(wrap basis-zero :gap="3")
+        .grow
+          .title3.mb4 Default
+          w-list(
+            v-model="selection3"
+            :items="listItems1"
+            checklist
+            color="green")
+        .grow
+          .title3.mb4 Round checkboxes
+          w-list(
+            v-model="selection4"
+            :items="listItems1"
+            checklist
+            round-checkboxes
+            color="green")
+
+      w-flex.mt4(wrap basis-zero :gap="3")
+        .grow
+          .title3.mb4 Custom rendering, default styles
+          w-list(
+            :items="listItems2"
+            item-value-key="id"
+            checklist
+            color="primary")
+            template(#item="{ item }")
+              span {{ item.label }}
+              .spacer
+              w-icon(md) {{ item.icon }}
+        .grow
+          .title3.mb4 Custom rendering &amp; styles
+          w-list.custom(
+            :items="listItems2"
+            item-value-key="id"
+            checklist
+            color="primary")
+            template(#item="{ item }")
+              span {{ item.label }}
+              .spacer
+              w-icon(md) {{ item.icon }}
     template(#html).
       &lt;w-flex wrap basis-zero :gap="3"&gt;
         &lt;div class="grow"&gt;
@@ -361,6 +546,8 @@ div.lists-demo
 
   example
     w-list(v-model="selection5" :items="listItems5" checklist)
+    //- template(#pug).
+      w-list(v-model="selection5" :items="listItems5" checklist)
     template(#html).
       &lt;w-list v-model="selection" :items="items" checklist&gt;&lt;/w-list&gt;
     template(#js).
@@ -385,6 +572,12 @@ div.lists-demo
         span {{ item.label }}
         .spacer
         w-icon(md) {{ item.icon }}
+    //- template(#pug).
+      w-list(:items="listItems2" nav color="primary")
+        template(#item="{ item }")
+          span {{ item.label }}
+          .spacer
+          w-icon(md) {{ item.icon }}
     template(#html).
       &lt;w-list :items="items" nav color="primary"&gt;
         &lt;template #item="{ item }"&gt;

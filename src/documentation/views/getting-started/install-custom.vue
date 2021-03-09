@@ -7,7 +7,10 @@ div
   ol
     li.mt10
       .title4 Install the dependencies &amp; devDependencies:
-      ssh-pre(language="shell") npm i wave-ui
+      .w-flex.align-center
+        ssh-pre.vue-install(language="shell") npm i wave-ui # Vue 2.x.
+        span.mx2 or
+        ssh-pre.vue-install(language="shell") npm i wave-ui@next # Vue 3.
       ssh-pre.mb2(language="shell") npm i -D pug pug-plain-loader node-sass sass-loader@10
       small.text-italic.grey.
         The dev dependencies are only needed for building the project. They will not ship to production.

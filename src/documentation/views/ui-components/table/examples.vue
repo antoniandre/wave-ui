@@ -3,8 +3,13 @@ div
   title-link(h2) Default
   example
     w-table(:headers="table1.headers" :items="table1.items")
-    template(#pug).
+    //- template(#pug).
       w-table(:headers="table.headers" :items="table.items")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
@@ -30,11 +35,20 @@ div
     br
     w-table(:headers="table1.headers" :items="[]")
       template(#no-data) 👌 There is no data! 👌
-    template(#pug).
+    //- template(#pug).
       w-table(:headers="table.headers" :items="[]")
       br
       w-table(:headers="table.headers" :items="[]")
         template(#no-data="") 👌 There is no data! 👌
+    template(#html).
+      &lt;w-table :headers="table.headers" :items="[]"&gt;&lt;/w-table&gt;
+
+      &lt;br /&gt;
+      &lt;w-table :headers="table.headers" :items="[]"&gt;
+        &lt;template #no-data=""&gt;
+          👌 There is no data! 👌
+        &lt;/template&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
@@ -54,8 +68,13 @@ div
 
   example
     w-table(:headers="table2.headers" :items="table2.items")
-    template(#pug).
+    //- template(#pug).
       w-table(:headers="table.headers" :items="table.items")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
@@ -80,8 +99,14 @@ div
     reasons, like getting the number of columns and sorting/filtering keys.
   example
     w-table(:headers="table1.headers" :items="table1.items" no-headers)
-    template(#pug).
+    //- template(#pug).
       w-table(:items="table.items" :headers="table.headers" no-headers)
+    template(#html).
+      &lt;w-table
+        :items="table.items"
+        :headers="table.headers"
+        no-headers&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
@@ -107,12 +132,13 @@ div
       :items="table3.items"
       fixed-headers
       style="height: 250px")
-    template(#pug).
-      w-table(
+    template(#html).
+      &lt;w-table
         :headers="table.headers"
         :items="table.items"
         fixed-headers
-        style="height: 250px")
+        style="height: 250px"&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
@@ -148,8 +174,14 @@ div
     or a #[code -] for DESC. For instance, in this example: #[code '+firstName'].
   example
     w-table(:headers="table1.headers" :items="table1.items" :sort.sync="table1.sort")
-    template(#pug).
+    //- template(#pug).
       w-table(:headers="table.headers" :items="table.items" :sort.sync="table.sort")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        :sort.sync="table.sort"&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
@@ -195,7 +227,7 @@ div
       :headers="table3.headers"
       :items="table3.items"
       :filter="table3.filters[table3.activeFilter]")
-    template(#pug).
+    //- template(#pug).
       .w-flex.wrap.mb3
         w-button.mr2.mb1(
           @click="table.activeFilter = 0"
@@ -216,6 +248,38 @@ div
         :headers="table.headers"
         :items="table.items"
         :filter="table.filters[table.activeFilter]")
+    template(#html).
+      &lt;div class="w-flex wrap mb3"&gt;
+        &lt;w-button
+          class="mr2 mb1"
+          @click="table.activeFilter = 0"
+          round
+          :outline="table.activeFilter !== 0"&gt;
+          No filter
+        &lt;/w-button&gt;
+
+        &lt;w-button
+          class="mr2 mb1"
+          @click="table.activeFilter = 1"
+          round
+          :outline="table.activeFilter !== 1"&gt;
+          Last name starting with 'M'
+        &lt;/w-button&gt;
+
+        &lt;w-button
+          class="mr2 mb1"
+          @click="table.activeFilter = 2"
+          round
+          :outline="table.activeFilter !== 2"&gt;
+          ID >= 10
+        &lt;/w-button&gt;
+      &lt;/div&gt;
+
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        :filter="table.filters[table.activeFilter]"&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
@@ -264,11 +328,17 @@ div
       :headers="table1.headers"
       :items="table1.items"
       :loading="table1.loading")
-    template(#pug).
+    //- template(#pug).
       w-table(
         :headers="table.headers"
         :items="table.items"
         :loading="table.loading")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        :loading="table.loading"&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
@@ -296,13 +366,21 @@ div
       fixed-headers
       :loading="table1.loading"
       style="height: 200px")
-    template(#pug).
+    //- template(#pug).
       w-table(
         :headers="table.headers"
         :items="table.items"
         fixed-headers
         :loading="table.loading"
         style="height: 200px")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        :loading="table.loading"
+        style="height: 200px"&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
@@ -373,7 +451,7 @@ div
     p.mt4
       strong Selected row:
       span.ml2 {{ selectedRow || '-' }}
-    template(#pug).
+    //- template(#pug).
       w-table(
         :headers="table.headers"
         :items="table.items"
@@ -383,6 +461,23 @@ div
       p.mt4
         strong Selected row:
         span.ml2 {{ "\{\{ table.selectedRow || '-' \}\}" }}
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        select-row
+        @row-select="table.selectedRow = $event"&gt;
+      &lt;/w-table&gt;
+
+      &lt;p class="mt4"&gt;
+        &lt;strong&gt;
+          Selected row:
+        &lt;/strong&gt;
+
+        &lt;span class="ml2"&gt;
+          {{ "\{\{ table.selectedRow || '-' \}\}" }}
+        &lt;/span&gt;
+      &lt;/p&gt;
     template(#js).
       data: () => ({
         table: {
@@ -437,9 +532,17 @@ div
   example
     w-table(:headers="table1.headers" :items="table1.items")
       template(#header-label="{ label, index }") {{ index }}: {{ label }} 👌
-    template(#pug).
-      w-table(:headers="table1.headers" :items="table1.items")
+    //- template(#pug).
+      w-table(:headers="table.headers" :items="table.items")
         template(#header-label="{ label, index }") {{ '\{\{ index \}\}: \{\{ label \}\}' }} 👌
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"&gt;
+        &lt;template #header-label="{ label, index }"&gt;
+          {{ '\{\{ index \}\}: \{\{ label \}\}' }} 👌
+        &lt;/template&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
@@ -469,11 +572,21 @@ div
         template(v-else)
           small.grey.mr2 {{ header.label }}:
           span {{ label }}
-    template(#pug).
-      w-table(:headers="table1.headers" no-headers :items="table1.items")
+    //- template(#pug).
+      w-table(:headers="table.headers" no-headers :items="table.items")
         template(#item="{ item, label, header, index }")
           small.grey.mr2 {{ '\{\{ header.label \}\}' }}:
           span {{ '\{\{ label \}\}' }}
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        no-headers
+        :items="table.items"&gt;
+        &lt;template #item="{ item, label, header, index }"&gt;
+          &lt;small class="grey mr2"&gt;{{ '\{\{ header.label \}\}' }}:&lt;/span&gt;
+          &lt;span&gt;{{ '\{\{ label \}\}' }}&lt;/span&gt;
+        &lt;/template&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
@@ -507,8 +620,14 @@ div
 
   example
     w-table(:headers="table2.headers" :items="table2.items" :mobile-breakpoint="700")
-    template(#pug).
+    //- template(#pug).
       w-table(:headers="table.headers" :items="table.items" :mobile-breakpoint="700")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        :mobile-breakpoint="700"&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {

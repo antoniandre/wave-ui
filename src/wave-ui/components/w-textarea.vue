@@ -227,11 +227,11 @@ $inactive-color: #777;
     border-radius: $border-radius;
     border: $border;
     transition: border $transition-duration;
+
+    .w-textarea[class^="bdrs"] &, .w-textarea[class*=" bdrs"] & {border-radius: inherit;}
   }
 
-  &--floating-label &__textarea-wrap {
-    margin-top: 4 * $base-increment;
-  }
+  &--floating-label &__textarea-wrap {margin-top: 4 * $base-increment;}
 
   &__textarea-wrap--underline {
     border-bottom-left-radius: initial;
