@@ -430,6 +430,54 @@ div
         ]
       })
 
+  title-link(h2) Adding a tabs bar extra element
+  p.
+    You can add extra elements at the right of the tabs title bar via the #[code tabs-bar-extra] slot.
+  example
+    w-tabs(ref="tabs" :items="tabs7.tabsCount" v-model="tabs7.currentTab")
+      template(#item-title="{ index }") Item title {{ index }}
+      template(#item-content="{ index }") Item content {{ index }}
+      template(#tabs-bar-extra)
+        w-button.bdrsr.mr2(
+          icon="wi-plus"
+          @click="tabs7.tabsCount++;tabs7.currentTab = tabs7.tabsCount - 1")
+    //- template(#pug).
+      w-tabs(ref="tabs" :items="tabs.tabsCount" v-model="tabs.currentTab")
+        template(#item-title="{ index }") Item title {{ index }}
+        template(#item-content="{ index }") Item content {{ index }}
+        template(#tabs-bar-extra)
+          w-button.bdrsr.mr2(
+            icon="wi-plus"
+            @click="tabs.tabsCount++;tabs.currentTab = tabs.tabsCount - 1")
+    template(#html).
+      &lt;w-tabs
+        ref="tabs"
+        :items="tabs.tabsCount"
+        v-model="tabs.currentTab"&gt;
+        &lt;template #item-title="{ index }"&gt;
+          Item title {{ '\{\{ index \}\}' }}
+        &lt;/template&gt;
+
+        &lt;template #item-content="{ index }"&gt;
+          Item content {{ '\{\{ index \}\}' }}
+        &lt;/template&gt;
+
+        &lt;template #tabs-bar-extra&gt;
+          &lt;w-button
+            icon="wi-plus"
+            @click="tabs.tabsCount++;tabs.currentTab = tabs.tabsCount - 1"
+            class="bdrsr mr2"&gt;
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+      &lt;/w-tabs&gt;
+    template(#js).
+      data: () => ({
+        tabs: {
+          tabsCount: 3,
+          currentTab: 1
+        }
+      })
+
   title-link(h2) Refreshing the slider width or position
   p.
     By default there is no data watcher on the tabs title to recalculate the slider width or position.#[br]
@@ -438,7 +486,7 @@ div
     In this scenario, the slider width is updated on title change from the #[strong.code w-input] field,
     so the slider width adapts to the number of characters on the current tab's title.
   example
-    w-tabs(ref="tabs" :items="tabs7")
+    w-tabs(ref="tabs" :items="tabs8")
       template(#item-content="{ item }")
         w-input.my6(v-model="item.title" label="Tab title" @keyup="onTitleChange")
     //- template(#pug).
@@ -458,7 +506,7 @@ div
       &lt;/w-tabs&gt;
     template(#js).
       data: () => ({
-        tabs:  [
+        tabs: [
           { title: 'Tab 1' },
           { title: 'Tab 2' },
           { title: 'Tab 3' }
@@ -520,7 +568,11 @@ export default {
         { title: 'Tab 3', content: 'Tab 3 content.' }
       ],
     },
-    tabs7:  [
+    tabs7: {
+      tabsCount: 3,
+      currentTab: 1
+    },
+    tabs8: [
       { title: 'Tab 1' },
       { title: 'Tab 2' },
       { title: 'Tab 3' }
