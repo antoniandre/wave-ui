@@ -145,8 +145,8 @@ export default {
     },
 
     onSubmit (e) {
-      this.$emit('submit', e)
       this.validate(e)
+      this.$emit('submit', e)
       if (!this.allowSubmit || !this.status) e.preventDefault()
     }
   },
