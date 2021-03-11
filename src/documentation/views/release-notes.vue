@@ -22,6 +22,11 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
+
+    li.patch
+      strong.version v1.25.1
+      p #[strong.code w-form]: Validate the form before emitting the #[code @submit] event. #[issue-link 40]
+
     li.minor
       strong.version v1.25.0
       p.
