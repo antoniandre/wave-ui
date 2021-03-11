@@ -319,35 +319,36 @@ div
     You could also apply a filter globally, which looks into all the columns at once.#[br]
     Here is one cool way to do it.
   example
-    .w-flex.wrap.mb3
-      w-input.mb1(
-        v-model="table4.keyword"
-        placeholder="Search anything..."
-        inner-icon-left="wi-search")
+    w-input.mb3(
+      v-model="table4.keyword"
+      placeholder="Search anything..."
+      inner-icon-left="wi-search")
     w-table(
       :headers="table4.headers"
       :items="table4.items"
       :filter="table4.keywordFilter(table4.keyword)")
-    template(#pug).
-      .w-flex.wrap.mb3
-        w-input.mb1(
-          v-model="table.keyword"
-          placeholder="Search anything..."
-          inner-icon-left="wi-search")
+    //- template(#pug).
+      w-input.mb3(
+        v-model="table.keyword"
+        placeholder="Search anything..."
+        inner-icon-left="wi-search")
       w-table(
         :headers="table.headers"
         :items="table.items"
         :filter="table.keywordFilter(table.keyword)")
-    template(#pug).
-      .w-flex.wrap.mb3
-        w-input.mb1(
-          v-model="table.keyword"
-          placeholder="Search anything..."
-          inner-icon-left="wi-search")
-      w-table(
+    template(#html).
+      &lt;w-input
+        v-model="table.keyword"
+        placeholder="Search anything..."
+        inner-icon-left="wi-search"
+        class="mb3"&gt;
+      &lt;/w-input&gt;
+
+      &lt;w-table
         :headers="table.headers"
         :items="table.items"
-        :filter="table.keywordFilter(table.keyword)")
+        :filter="table.keywordFilter(table.keyword)"&gt;
+      &lt;/w-table&gt;
     template(#js).
       data: () => ({
         table: {
