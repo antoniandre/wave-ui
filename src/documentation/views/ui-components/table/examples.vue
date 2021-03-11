@@ -314,6 +314,87 @@ div
         }
       })
 
+  title-link(h3) Global filter
+  p.
+    You could also apply a filter globally, which looks into all the columns at once.#[br]
+    Here is one cool way to do it.
+  example
+    .w-flex.wrap.mb3
+      w-input.mb1(
+        v-model="table4.keyword"
+        placeholder="Search anything..."
+        inner-icon-left="wi-search")
+    w-table(
+      :headers="table4.headers"
+      :items="table4.items"
+      :filter="table4.keywordFilter(table4.keyword)")
+    template(#pug).
+      .w-flex.wrap.mb3
+        w-input.mb1(
+          v-model="table.keyword"
+          placeholder="Search anything..."
+          inner-icon-left="wi-search")
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        :filter="table.keywordFilter(table.keyword)")
+    template(#pug).
+      .w-flex.wrap.mb3
+        w-input.mb1(
+          v-model="table.keyword"
+          placeholder="Search anything..."
+          inner-icon-left="wi-search")
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        :filter="table.keywordFilter(table.keyword)")
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+            { id: 6, firstName: 'Baldwin', lastName: 'Morison' },
+            { id: 7, firstName: 'Beckah', lastName: 'Mann' },
+            { id: 8, firstName: 'Davie', lastName: 'Forester' },
+            { id: 9, firstName: 'Andi', lastName: 'Montgomery' },
+            { id: 10, firstName: 'Magnolia', lastName: 'Kirk' },
+            { id: 11, firstName: 'Hamilton', lastName: 'Mallory' },
+            { id: 12, firstName: 'Sheree', lastName: 'Castle' },
+            { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
+            { id: 14, firstName: 'Maude', lastName: 'Hayley' },
+            { id: 15, firstName: 'Josie', lastName: 'Richard' }
+          ],
+          keyword: '',
+          keywordFilter: keyword => item => {
+            // Concatenate all the columns into a single string for a more performant lookup.
+            const allTheColumns = `${item.id} ${item.firstName} ${item.lastName}`
+
+            // Lookup the keyword variable in the string with case-insensitive flag.
+            return new RegExp(keyword, 'i').test(allTheColumns)
+          }
+        }
+      })
+  alert(tip)
+    strong.
+      If you don't need the RegExp power, you can simply return
+      #[code allTheColumns.toLowerCase().includes(keyword)] instead.
+
+    | #[br]#[br]But the real power of using a regular expression
+    | #[w-icon.red.mr1(size="0.9em") mdi mdi-heart] in this example's match, is that the user
+    | can benefit from the Regexp engine and use interpreted characters like #[code |] etc.#[br]
+    | You could also match only the full words by replacing #[code new RegExp(keyword, 'i')] with
+    | #[code new RegExp(`\\b${keyword}\\b`, 'i')] (it would return a result when typing #[code floretta]
+    | but not #[code florett] for instance).
+
   title-link(h2) Loading state
   p.
     When the table content is not ready straight away, you can use the #[code loading] prop to display
@@ -709,6 +790,19 @@ export default {
         item => item.id >= 10
       ],
       activeFilter: 0
+    },
+    table4: {
+      headers: [
+        { label: 'ID', key: 'id' },
+        { label: 'First name', key: 'firstName' },
+        { label: 'Last name', key: 'lastName' }
+      ],
+      items: allItems,
+      keyword: '',
+      keywordFilter: keyword => item => {
+        const allTheColumns = `${item.id} ${item.firstName} ${item.lastName}`
+        return new RegExp(keyword, 'i').test(allTheColumns)
+      }
     },
     selectedRow: null
   }),
