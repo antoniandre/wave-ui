@@ -24,6 +24,10 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.25.2
+      p #[strong.code w-form]: Keep the form valid after validation if the validators is an empty array. #[issue-link 40]
+
+    li.patch
       strong.version v1.25.1
       p #[strong.code w-form]: Validate the form before emitting the #[code @submit] event. #[issue-link 40]
 
