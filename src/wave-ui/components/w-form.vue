@@ -77,7 +77,7 @@ export default {
         const { validators, Validation = {}, inputValue, readonly, disabled } = el
 
         // Skip validation and return ok if there is no validation or if disabled or readonly.
-        if (!validators || disabled || readonly) return total
+        if (!validators || !validators.length || disabled || readonly) return total
 
         // Execute the validators 1 by 1 until a failure is found. If it happens, raise the error
         // message in the form element.
