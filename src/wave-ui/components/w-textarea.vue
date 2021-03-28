@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
+  v-bind="formRegister && { validators, inputValue, disabled: isDisabled, readonly: isReadonly, isFocused }"
   v-model:valid="valid"
   @reset="$emit('update:modelValue', inputValue = '');$emit('input', '')"
   :class="classes")
@@ -31,9 +31,9 @@ component(
       :placeholder="placeholder || null"
       :rows="rows || null"
       :cols="cols || null"
-      :readonly="readonly || null"
-      :aria-readonly="readonly ? 'true' : 'false'"
-      :disabled="disabled || null"
+      :readonly="isReadonly || null"
+      :aria-readonly="isReadonly ? 'true' : 'false'"
+      :disabled="isDisabled || null"
       :required="required || null"
       :style="textareaStyles")
     template(v-if="labelPosition === 'inside' && showLabelInside")
@@ -90,7 +90,8 @@ export default {
     tile: { type: Boolean },
     rows: { type: [Number, String], default: 3 },
     cols: { type: [Number, String] },
-    // Also name, disabled, readonly, required and validators in the mixin.
+    // Props from mixin: name, disabled, readonly, required, validators.
+    // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
@@ -125,13 +126,13 @@ export default {
     classes () {
       return {
         'w-textarea': true,
-        'w-textarea--disabled': this.disabled,
-        'w-textarea--readonly': this.readonly,
+        'w-textarea--disabled': this.isDisabled,
+        'w-textarea--readonly': this.isReadonly,
         [`w-textarea--${this.hasValue ? 'filled' : 'empty'}`]: true,
         'w-textarea--focused': this.isFocused,
         'w-textarea--dark': this.dark,
         'w-textarea--resizable': this.resizable,
-        'w-textarea--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel && !(this.readonly && !this.hasValue),
+        'w-textarea--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-textarea--no-padding': !this.outline && !this.bgColor && !this.shadow,
         'w-textarea--has-placeholder': this.placeholder,
         'w-textarea--inner-icon-left': this.innerIconLeft,
