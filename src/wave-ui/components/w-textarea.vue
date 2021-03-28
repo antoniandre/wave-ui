@@ -132,7 +132,7 @@ export default {
         'w-textarea--focused': this.isFocused,
         'w-textarea--dark': this.dark,
         'w-textarea--resizable': this.resizable,
-        'w-textarea--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel && !(this.isReadonly && !this.hasValue),
+        'w-textarea--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-textarea--no-padding': !this.outline && !this.bgColor && !this.shadow,
         'w-textarea--has-placeholder': this.placeholder,
         'w-textarea--inner-icon-left': this.innerIconLeft,
