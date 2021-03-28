@@ -1,8 +1,8 @@
 <template lang="pug">
 component(
   ref="formEl"
-  :is="form && !wRadios ? 'w-form-element' : 'div'"
-  v-bind="form && { validators, inputValue, disabled: isDisabled }"
+  :is="formRegister && !wRadios ? 'w-form-element' : 'div'"
+  v-bind="formRegister && { validators, inputValue, disabled: isDisabled }"
   :valid.sync="valid"
   @reset="$emit('update:modelValue', inputValue = null);$emit('input', null)"
   :class="classes")
