@@ -596,3 +596,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.main-content--tabs {
+  overflow: hidden;
+  margin-left: -20px;
+  padding-left: 20px;
+}
+</style>
