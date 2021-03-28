@@ -23,7 +23,14 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
-    li.patch
+    li.minor
+      strong.version v1.27.0
+      p #[strong.code w-table]
+      ul
+        li Allow multiple rows selection &amp; add the #[code force-selection] option. #[issue-link 45]
+        li The rows selection now allows multiple rows by default (previously only one).
+
+    li.minor
       strong.version v1.26.0
       ul
         li Add the #[code disabled] &amp; #[code readonly] options on #[strong.code w-form]. #[issue-link 38]
@@ -118,7 +125,7 @@ main
 
     li.patch
       strong.version v1.15.0
-      p #[strong.code w-table] component:
+      p #[strong.code w-table]
       ul
         li Add the filter feature
         li Handle mobile layout with customizable breakpoint per table

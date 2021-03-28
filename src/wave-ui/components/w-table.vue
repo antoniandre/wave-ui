@@ -32,7 +32,7 @@
         template(v-for="(item, i) in sortedItems" :key="i")
           tr.w-table__row(
             @click="doSelectRow(item)"
-            :class="{ 'w-table__row--selected': selectedRow === item.uid, 'w-table__row--expanded': expandedRow === item.uid }")
+            :class="{ 'w-table__row--selected': selectedRowsByUid[item.uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item.uid] !== undefined }")
             template(v-for="(header, j) in headers")
               td.w-table__cell(
                 v-if="$slots.item"
@@ -47,7 +47,7 @@
                 :class="`text-${header.align || 'left'}`"
                 v-html="item[header.key] || ''")
           w-transition-expand(y)
-            tr.w-table__row(v-if="expandedRow === item.uid")
+            tr.w-table__row(v-if="expandedRows === item.uid")
               td(:colspan="headers.length")
                 slot(name="expanded-row") expanded row
 
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import { consoleError } from '../utils/console'
+
 export default {
   name: 'w-table',
   props: {
@@ -67,8 +69,29 @@ export default {
     loading: { type: Boolean },
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
-    selectRow: { type: Boolean },
-    expandRow: { type: Boolean },
+    expandableRows: {
+      validator: value => {
+        if (![undefined, true, false, 1, '1', ''].includes(value)) {
+          consoleError(
+            'Wrong value for the w-table\'s `expandableRows` prop. ' +
+            `Given: "${value}", expected one of: [undefined, true, false, 1, '1', ''].`
+          )
+        }
+        return true
+      }
+    },
+    selectableRows: {
+      validator: value => {
+        if (![undefined, true, false, 1, '1', ''].includes(value)) {
+          consoleError(
+            'Wrong value for the w-table\'s `selectableRows` prop. ' +
+            `Given: "${value}", expected one of: [undefined, true, false, 1, '1', ''].`
+          )
+        }
+        return true
+      }
+    },
+    forceSelection: { type: Boolean },
     filter: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 }
   },
@@ -77,8 +100,8 @@ export default {
 
   data: () => ({
     activeSorting: [],
-    selectedRow: null,
-    expandedRow: null
+    selectedRows: [], // Array of uids.
+    expandedRows: [] // Array of uids.
   }),
 
   computed: {
@@ -134,6 +157,16 @@ export default {
 
     isMobile () {
       return ~~this.mobileBreakpoint && this.$waveui.breakpoint.width <= ~~this.mobileBreakpoint
+    },
+
+    // Faster lookup than array.includes(uid) and also cached.
+    selectedRowsByUid () {
+      return this.selectedRows.reduce((obj, uid) => (obj[uid] = true) && obj, {})
+    },
+
+    // Faster lookup than array.includes(uid) and also cached.
+    expandedRowsByUid () {
+      return this.expandedRows.reduce((obj, uid) => (obj[uid] = true) && obj, {})
     }
   },
 
@@ -166,13 +199,47 @@ export default {
     },
 
     doSelectRow (item) {
-      if (this.expandRow) {
-        this.expandedRow = item.uid
-        this.$emit('row-expand', { item, expanded: true })
+      if (this.expandableRows) {
+        const isExpanding = this.expandedRowsByUid[item.uid] === undefined
+        if (isExpanding) {
+          if (this.expandableRows.toString() === '1') this.expandedRows = [item.uid]
+          else this.expandedRows.push(item.uid)
+        }
+        else this.expandedRows = this.expandedRows.filter(uid => uid !== item.uid)
+        this.$emit(
+          'row-expand',
+          {
+            item,
+            expanded: isExpanding,
+            expandedRows: this.expandedRows.map(uid => this.filteredItems[uid])
+          }
+        )
       }
-      else if (this.selectRow) {
-        this.selectedRow = item.uid
-        this.$emit('row-select', { item })
+
+      else if (this.selectableRows) {
+        let updated = false
+        const isSelecting = this.selectedRowsByUid[item.uid] === undefined
+        if (isSelecting) {
+          if (this.selectableRows.toString() === '1') this.selectedRows = [item.uid]
+          else this.selectedRows.push(item.uid)
+          updated = true
+        }
+        else if (!this.forceSelection || this.selectedRows.length > 1) {
+          this.selectedRows = this.selectedRows.filter(uid => uid !== item.uid)
+          updated = true
+        }
+
+        // Only emit event if something has changed.
+        if (updated) {
+          this.$emit(
+            'row-select',
+            {
+              item,
+              selected: isSelecting,
+              selectedRows: this.selectedRows.map(uid => this.filteredItems[uid])
+            }
+          )
+        }
       }
     }
   },
@@ -186,6 +253,16 @@ export default {
     sort (sorting) {
       if (!sorting) this.activeSorting = []
       else this.activeSorting = Array.isArray(sorting) ? sorting : [sorting]
+    },
+
+    expandableRows (value) {
+      if (!value) this.expandedRows = []
+      else if (value.toString() === '1') this.expandedRows = this.expandedRows.slice(0, 1)
+    },
+
+    selectableRows (value) {
+      if (!value) this.selectedRows = []
+      else if (value.toString() === '1') this.selectedRows = this.selectedRows.slice(0, 1)
     }
   }
 }
