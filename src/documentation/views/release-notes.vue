@@ -24,8 +24,12 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.26.0
+      p Add the #[code disabled] &amp; #[code readonly] options on #[strong.code w-form]. #[issue-link 38]
+
+    li.patch
       strong.version v1.25.2
-      p #[strong.code w-form]: Keep the form valid after validation if the validators is an empty array. #[issue-link 40]
+      p #[strong.code w-form]: Keep the form valid after validation if the validators is an empty array. #[issue-link 46]
 
     li.patch
       strong.version v1.25.1
