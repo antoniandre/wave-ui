@@ -192,8 +192,7 @@ export default {
         [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
         'w-select--focused': this.isFocused,
         'w-select--dark': this.dark,
-        'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' &&
-                                    !this.staticLabel && !(this.isReadonly && !this.hasValue),
+        'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-select--has-placeholder': this.placeholder,
         'w-select--inner-icon-left': this.innerIconLeft,

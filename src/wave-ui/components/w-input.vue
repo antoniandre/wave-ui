@@ -138,7 +138,7 @@ export default {
         [`w-input--${this.hasValue ? 'filled' : 'empty'}`]: true,
         'w-input--focused': this.isFocused,
         'w-input--dark': this.dark,
-        'w-input--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel && !(this.isReadonly && !this.hasValue),
+        'w-input--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-input--has-placeholder': this.placeholder,
         'w-input--inner-icon-left': this.innerIconLeft,
