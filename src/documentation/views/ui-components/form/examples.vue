@@ -465,6 +465,99 @@ div
       }
     template(#css).
       .message-box {min-height: 35px;}
+
+  title-link(h2) Disabled &amp; readonly form
+  p.
+    You can add the #[code disabled] or #[code readonly] prop on the #[strong.code w-form] tag to
+    disable all the fields or set them all to readonly.
+  alert(warning)
+    strong Caution
+    div.
+      Wave UI will not reset the validity of the fields when you toggle the #[code disabled]
+      or #[code readonly] prop on the #[strong.code w-form]: the field is becoming uneditable but
+      may contain invalid data.
+  example
+    w-button(
+      :outline="!form7.disabled"
+      @click="form7.readonly = false;form7.disabled = !form7.disabled") Form disabled
+    w-button.ml2(
+      :outline="!form7.readonly"
+      @click="form7.disabled = false;form7.readonly = !form7.readonly") Form readonly
+
+    w-form.mt4(v-model="form7.valid" :disabled="form7.disabled" :readonly="form7.readonly")
+      w-input(label="First name" :validators="[validators.required, validators.alphabetical]")
+      w-input.mt3(label="Last name" :validators="[validators.required]")
+      w-flex.mt4(justify-end)
+        w-button(type="reset" bg-color="warning") Reset
+        w-button.ml2(type="submit" :disabled="form7.valid === false") Validate
+    //- template(#pug).
+      w-button(
+        :outline="!form.disabled"
+        @click="form.readonly = false;form.disabled = !form.disabled") Form disabled
+      w-button.ml2(
+        :outline="!form.readonly"
+        @click="form.disabled = false;form.readonly = !form.readonly") Form readonly
+
+      w-form.mt4(v-model="form.valid" :disabled="form.disabled" :readonly="form.readonly")
+        w-input(label="First name" :validators="[validators.required, validators.alphabetical]")
+        w-input.mt3(label="Last name" :validators="[validators.required]")
+        w-flex.mt4(justify-end)
+          w-button(type="reset" bg-color="warning") Reset
+          w-button.ml2(type="submit" :disabled="form.valid === false") Validate
+    template(#html).
+      &lt;w-button
+        :outline="!form.disabled"
+        @click="form.readonly = false;form.disabled = !form.disabled"&gt;
+        Form disabled
+      &lt;/w-button&gt;
+      &lt;w-button
+        class="ml2"
+        :outline="!form.readonly"
+        @click="form.disabled = false;form.readonly = !form.readonly"&gt;
+        Form readonly
+      &lt;/w-button&gt;
+
+      &lt;w-form
+        v-model="form.valid"
+        :disabled="form.disabled"
+        :readonly="form.readonly"
+        class="mt4"&gt;
+        &lt;w-input
+          label="First name"
+          :validators="[validators.required, validators.alphabetical]"&gt;
+        &lt;/w-input&gt;
+        &lt;w-input
+          label="Last name"
+          :validators="[validators.required]"
+          class="mt3"&gt;
+        &lt;/w-input&gt;
+
+        &lt;w-flex justify-end class="mt4"&gt;
+          &lt;w-button
+            type="reset"
+            bg-color="warning"&gt;
+            Reset
+          &lt;/w-button&gt;
+          &lt;w-button
+            type="submit"
+            :disabled="form.valid === false"
+            class="ml2"&gt;
+            Validate
+          &lt;/w-button&gt;
+        &lt;/w-flex&gt;
+      &lt;/w-form&gt;
+    template(#js).
+      data: () => ({
+        form: {
+          valid: null,
+          disabled: false,
+          readonly: false
+        },
+        validators: {
+          required: value => !!value || 'This field is required',
+          alphabetical: value => /^[a-z \-']+$/i.test(value) || 'This field only accepts letters.'
+        }
+      })
 </template>
 
 <script>
@@ -493,6 +586,11 @@ export default {
       submitted: false,
       sent: false,
       errorsCount: 0
+    },
+    form7: {
+      valid: null,
+      disabled: false,
+      readonly: false
     },
     validators: {
       required: value => !!value || 'This field is required',
