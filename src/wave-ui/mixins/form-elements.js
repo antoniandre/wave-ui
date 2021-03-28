@@ -1,5 +1,11 @@
 export default {
-  inject: { formRegister: { default: null } },
+  inject: {
+    // Used in each form component to determine whether to use the w-form-element wrap or not.
+    // So, if a form component is in a form, use the w-form-element wrap.
+    formRegister: { default: null },
+    // If the form is disabled or readonly, apply to all the form components.
+    formProps: { default: () => ({ disabled: false, readonly: false }) }
+  },
 
   props: {
     name: { type: String }, // When sending data through form.
@@ -16,6 +22,12 @@ export default {
   computed: {
     inputName () {
       return this.name || `${this.$options.name}--${this._uid}`
+    },
+    isDisabled () {
+      return this.disabled || this.formProps.disabled
+    },
+    isReadonly () {
+      return this.readonly || this.formProps.readonly
     }
   },
 

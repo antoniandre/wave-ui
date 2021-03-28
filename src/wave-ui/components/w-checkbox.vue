@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister && !wCheckboxes ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: isChecked, disabled }"
+  v-bind="formRegister && { validators, inputValue: isChecked, disabled: isDisabled }"
   :valid.sync="valid"
   @reset="$emit('update:modelValue', isChecked = null);$emit('input', null)"
   :class="classes")
@@ -12,7 +12,7 @@ component(
     type="checkbox"
     :name="inputName"
     :checked="isChecked || null"
-    :disabled="disabled || null"
+    :disabled="isDisabled || null"
     :required="required || null"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
@@ -52,7 +52,8 @@ export default {
     noRipple: { type: Boolean },
     indeterminate: { type: Boolean },
     round: { type: Boolean }
-    // Also name, disabled, readonly, required and validators in the mixin.
+    // Props from mixin: name, disabled, readonly, required, validators.
+    // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur'],
@@ -75,7 +76,7 @@ export default {
     classes () {
       return {
         [`w-checkbox w-checkbox--${this.isChecked ? 'checked' : 'unchecked'}`]: true,
-        'w-checkbox--disabled': this.disabled,
+        'w-checkbox--disabled': this.isDisabled,
         'w-checkbox--indeterminate': this.indeterminate,
         'w-checkbox--ripple': this.ripple.start,
         'w-checkbox--rippled': this.ripple.end,

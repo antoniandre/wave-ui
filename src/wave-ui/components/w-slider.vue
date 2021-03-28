@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: rangeValueScaled, disabled, readonly }"
+  v-bind="formRegister && { validators, inputValue: rangeValueScaled, disabled: isDisabled, readonly: isReadonly }"
   :valid.sync="valid"
   @reset="rangeValuePercent = 0;updateRangeValueScaled()"
   :class="wrapperClasses")
@@ -25,7 +25,7 @@ component(
       :aria-valuemin="minVal"
       :aria-valuemax="maxVal"
       :aria-valuenow="rangeValueScaled"
-      :aria-readonly="readonly ? 'true' : 'false'"
+      :aria-readonly="isReadonly ? 'true' : 'false'"
       aria-orientation="horizontal")
       .w-slider__range(:class="rangeClasses" :style="rangeStyles")
       .w-slider__thumb(:style="thumbStyles")
@@ -35,9 +35,9 @@ component(
           :class="[color]"
           :name="inputName"
           :value="rangeValueScaled"
-          :disabled="disabled || null"
-          :readonly="readonly || null"
-          :aria-readonly="readonly ? 'true' : 'false'"
+          :disabled="isDisabled || null"
+          :readonly="isReadonly || null"
+          :aria-readonly="isReadonly ? 'true' : 'false'"
           @keydown.left="onKeyDown($event, -1)"
           @keydown.right="onKeyDown($event, 1)"
           @focus="$emit('focus', $event)"
@@ -92,7 +92,8 @@ export default {
     step: { type: [Number, String] },
     labelLeft: { type: String },
     labelRight: { type: String }
-    // Also name, disabled, readonly, required and validators in the mixin.
+    // Props from mixin: name, disabled, readonly, required, validators.
+    // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus'],
@@ -158,8 +159,8 @@ export default {
       return {
         'w-slider': true,
         'w-slider--dragging': this.dragging,
-        'w-slider--disabled': this.disabled,
-        'w-slider--readonly': this.readonly,
+        'w-slider--disabled': this.isDisabled,
+        'w-slider--readonly': this.isReadonly,
         'w-slider--has-step-labels': this.step && this.stepLabels
       }
     }
@@ -176,7 +177,7 @@ export default {
     },
 
     onTrackMouseDown (e) {
-      if (this.disabled || this.readonly) return
+      if (this.isDisabled || this.isReadonly) return
       // On touch screen don't listen for both touchstart & mousedown.
       if ('ontouchstart' in window && e.type === 'mousedown') return
 
@@ -207,7 +208,7 @@ export default {
     },
 
     onKeyDown (e, direction) {
-      if (this.disabled || this.readonly) return
+      if (this.isDisabled || this.isReadonly) return
 
       this.rangeValuePercent += direction * (e.shiftKey ? 5 : 1) * (this.stepValPercent || 1)
       this.rangeValuePercent = Math.max(0, Math.min(this.rangeValuePercent, 100))

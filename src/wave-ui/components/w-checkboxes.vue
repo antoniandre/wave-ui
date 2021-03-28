@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: checkboxItems.some(item => item.isChecked), disabled }"
+  v-bind="formRegister && { validators, inputValue: checkboxItems.some(item => item.isChecked), disabled: isDisabled }"
   :valid.sync="valid"
   @reset="reset"
   :column="!inline"
@@ -16,8 +16,8 @@ component(
     :value="item.isChecked"
     :color="item.color"
     :round="round"
-    :disabled="disabled || null"
-    :readonly="readonly || null"
+    :disabled="isDisabled || null"
+    :readonly="isReadonly || null"
     @input="toggleCheck(item, $event)"
     @focus="$emit('focus', $event)"
     :class="{ mt1: !inline && i }")
@@ -42,7 +42,8 @@ export default {
     inline: { type: Boolean },
     round: { type: Boolean },
     color: { type: String, default: 'primary' }
-    // Also name, disabled, readonly, required and validators in the mixin.
+    // Props from mixin: name, disabled, readonly, required, validators.
+    // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus'],

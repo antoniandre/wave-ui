@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: selectionString, disabled, readonly }"
+  v-bind="formRegister && { validators, inputValue: selectionString, disabled: isDisabled, readonly: isReadonly }"
   :valid.sync="valid"
   @reset="onReset"
   :class="classes")
@@ -24,7 +24,7 @@ component(
       //- Input wrapper.
       .w-select__selection-wrap(
         ref="selection-wrap"
-        @click="!disabled && !readonly && openMenu()"
+        @click="!isDisabled && !isReadonly && openMenu()"
         role="button"
         aria-haspopup="listbox"
         :aria-expanded="showMenu ? 'true' : 'false'"
@@ -43,12 +43,12 @@ component(
           ref="selection-input"
           type="text"
           :value="$scopedSlots.selection ? '' : selectionString"
-          @focus="!disabled && !readonly && onFocus($event)"
+          @focus="!isDisabled && !isReadonly && onFocus($event)"
           @blur="onBlur"
-          @keydown="!disabled && !readonly && onKeydown($event)"
+          @keydown="!isDisabled && !isReadonly && onKeydown($event)"
           :id="`w-select--${_uid}`"
           :placeholder="(!$scopedSlots.selection && placeholder) || null"
-          :disabled="disabled || null"
+          :disabled="isDisabled || null"
           readonly
           aria-readonly="true"
           :required="required || null"
@@ -141,7 +141,8 @@ export default {
     // Allow preventing that on single selection lists only.
     noUnselect: { type: Boolean },
     menuProps: { type: Object }
-    // Also name, disabled, readonly, required and validators in the mixin.
+    // Props from mixin: name, disabled, readonly, required, validators.
+    // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur', 'item-click', 'item-select', 'click:inner-icon-left', 'click:inner-icon-right'],
@@ -186,13 +187,13 @@ export default {
     classes () {
       return {
         'w-select': true,
-        'w-select--disabled': this.disabled,
-        'w-select--readonly': this.readonly,
+        'w-select--disabled': this.isDisabled,
+        'w-select--readonly': this.isReadonly,
         [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
         'w-select--focused': this.isFocused,
         'w-select--dark': this.dark,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' &&
-                                    !this.staticLabel && !(this.readonly && !this.hasValue),
+                                    !this.staticLabel && !(this.isReadonly && !this.hasValue),
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-select--has-placeholder': this.placeholder,
         'w-select--inner-icon-left': this.innerIconLeft,

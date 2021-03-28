@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: isOn, disabled, readonly }"
+  v-bind="formRegister && { validators, inputValue: isOn, disabled: isDisabled, readonly: isReadonly }"
   :valid.sync="valid"
   @reset="$emit('update:modelValue', isOn = null);$emit('input', null)"
   :class="classes")
@@ -12,9 +12,9 @@ component(
     type="checkbox"
     :name="inputName"
     :checked="isOn"
-    :disabled="disabled || readonly || null"
-    :readonly="readonly || null"
-    :aria-readonly="readonly ? 'true' : 'false'"
+    :disabled="isDisabled || isReadonly || null"
+    :readonly="isReadonly || null"
+    :aria-readonly="isReadonly ? 'true' : 'false'"
     :required="required || null"
     @change="onInput() /* Edge doesn't fire input on checkbox/radio/select change */"
     @focus="$emit('focus', $event)"
@@ -47,7 +47,8 @@ export default {
     color: { type: String, default: 'primary' },
     thin: { type: Boolean },
     noRipple: { type: Boolean }
-    // Also name, disabled, readonly, required and validators in the mixin.
+    // Props from mixin: name, disabled, readonly, required, validators.
+    // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus'],
@@ -71,8 +72,8 @@ export default {
       return {
         [`w-switch w-switch--${this.isOn ? 'on' : 'off'}`]: true,
         'w-switch--thin': this.thin,
-        'w-switch--disabled': this.disabled,
-        'w-switch--readonly': this.readonly,
+        'w-switch--disabled': this.isDisabled,
+        'w-switch--readonly': this.isReadonly,
         'w-switch--ripple': this.ripple.start,
         'w-switch--rippled': this.ripple.end
       }
