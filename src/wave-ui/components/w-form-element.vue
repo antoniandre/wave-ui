@@ -19,8 +19,14 @@ export default {
     formRegister: { default: null },
     formUnregister: { default: null },
     validateElement: { default: null },
-    noKeyupValidation: { default: false },
-    noBlurValidation: { default: false }
+    formProps: {
+      default: () => ({
+        noKeyupValidation: false,
+        noBlurValidation: false,
+        disabled: false,
+        readonly: false
+      })
+    }
   },
 
   props: {
@@ -74,7 +80,7 @@ export default {
       if (this.hasJustReset) return (this.hasJustReset = false)
 
       // Update the form element's validity on input value change.
-      if (!this.noKeyupValidation && this.validators) {
+      if (!this.formProps.noKeyupValidation && this.validators) {
         this.$emit('update:valid', this.validateElement(this))
       }
     },
@@ -82,7 +88,7 @@ export default {
       // When focusing, reset the hasJustReset flag so the input value is watched again.
       if (val) this.hasJustReset = false
       // On blur, Update the form element's validity.
-      else if (!this.noBlurValidation && this.validators) {
+      else if (!this.formProps.noBlurValidation && this.validators) {
         this.$emit('update:valid', this.validateElement(this))
       }
     }

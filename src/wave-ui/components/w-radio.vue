@@ -1,8 +1,8 @@
 <template lang="pug">
 component(
   ref="formEl"
-  :is="formRegister && !wRadios ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue, disabled }"
+  :is="form && !wRadios ? 'w-form-element' : 'div'"
+  v-bind="form && { validators, inputValue, disabled: isDisabled }"
   :valid.sync="valid"
   @reset="$emit('update:modelValue', inputValue = null);$emit('input', null)"
   :class="classes")
@@ -12,7 +12,7 @@ component(
     type="radio"
     :name="inputName"
     :checked="inputValue || null"
-    :disabled="disabled || null"
+    :disabled="isDisabled || null"
     :required="required || null"
     @focus="$emit('focus', $event)"
     @change="onInput($event) /* Edge doesn't fire input on checkbox/radio/select change */"
@@ -48,7 +48,8 @@ export default {
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
     noRipple: { type: Boolean }
-    // Also name, disabled, readonly, required and validators in the mixin.
+    // Props from mixin: name, disabled, readonly, required, validators.
+    // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus'],
@@ -69,7 +70,7 @@ export default {
     classes () {
       return {
         [`w-radio w-radio--${this.inputValue ? 'checked' : 'unchecked'}`]: true,
-        'w-radio--disabled': this.disabled,
+        'w-radio--disabled': this.isDisabled,
         'w-radio--ripple': this.ripple.start,
         'w-radio--rippled': this.ripple.end
       }

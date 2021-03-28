@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue, disabled, readonly, isFocused }"
+  v-bind="formRegister && { validators, inputValue, disabled: isDisabled, readonly: isReadonly, isFocused }"
   :valid.sync="valid"
   @reset="$emit('update:modelValue', inputValue = '');$emit('input', '')"
   :class="classes")
@@ -36,9 +36,9 @@ component(
         :max="max || null"
         :minlength="minlength || null"
         :maxlength="maxlength || null"
-        :readonly="readonly || null"
-        :aria-readonly="readonly ? 'true' : 'false'"
-        :disabled="disabled || null"
+        :readonly="isReadonly || null"
+        :aria-readonly="isReadonly ? 'true' : 'false'"
+        :disabled="isDisabled || null"
         :required="required || null"
         v-bind="$attrs")
       template(v-if="labelPosition === 'inside' && showLabelInside")
@@ -98,7 +98,8 @@ export default {
     round: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean }
-    // Also name, disabled, readonly, required and validators in the mixin.
+    // Props from mixin: name, disabled, readonly, required, validators.
+    // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
@@ -132,12 +133,12 @@ export default {
     classes () {
       return {
         'w-input': true,
-        'w-input--disabled': this.disabled,
-        'w-input--readonly': this.readonly,
+        'w-input--disabled': this.isDisabled,
+        'w-input--readonly': this.isReadonly,
         [`w-input--${this.hasValue ? 'filled' : 'empty'}`]: true,
         'w-input--focused': this.isFocused,
         'w-input--dark': this.dark,
-        'w-input--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel && !(this.readonly && !this.hasValue),
+        'w-input--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel && !(this.isReadonly && !this.hasValue),
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-input--has-placeholder': this.placeholder,
         'w-input--inner-icon-left': this.innerIconLeft,
