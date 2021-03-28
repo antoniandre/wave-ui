@@ -25,7 +25,9 @@ main
 
     li.patch
       strong.version v1.26.0
-      p Add the #[code disabled] &amp; #[code readonly] options on #[strong.code w-form]. #[issue-link 38]
+      ul
+        li Add the #[code disabled] &amp; #[code readonly] options on #[strong.code w-form]. #[issue-link 38]
+        li Improve the #[strong.code w-form] component (props reactivity, UI consistency in form elements).
 
     li.patch
       strong.version v1.25.2
