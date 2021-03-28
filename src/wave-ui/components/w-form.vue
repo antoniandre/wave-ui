@@ -12,8 +12,9 @@ export default {
       formRegister: this.register,
       formUnregister: this.unregister,
       validateElement: this.validateElement,
-      noKeyupValidation: this.noKeyupValidation,
-      noBlurValidation: this.noBlurValidation
+      // Give access to the form params (like disabled) to all the form components.
+      // To keep it reactive, we need an object not a list of props (by design in Vue).
+      formProps: this.$props
     }
   },
 
@@ -22,7 +23,9 @@ export default {
     allowSubmit: { type: Boolean },
     noKeyupValidation: { type: Boolean },
     noBlurValidation: { type: Boolean },
-    errorPlaceholders: { type: Boolean }
+    errorPlaceholders: { type: Boolean },
+    disabled: { type: Boolean },
+    readonly: { type: Boolean }
   },
 
   emits: [
@@ -77,7 +80,7 @@ export default {
         const { validators, Validation = {}, inputValue, readonly, disabled } = el
 
         // Skip validation and return ok if there is no validation or if disabled or readonly.
-        if (!validators || disabled || readonly) return total
+        if (!validators || !validators.length || disabled || readonly) return total
 
         // Execute the validators 1 by 1 until a failure is found. If it happens, raise the error
         // message in the form element.

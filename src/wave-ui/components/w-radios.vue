@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue, disabled }"
+  v-bind="formRegister && { validators, inputValue, disabled: isDisabled }"
   v-model:valid="valid"
   @reset="$emit('update:modelValue', inputValue = null);$emit('input', null)"
   :column="!inline"
@@ -17,8 +17,8 @@ component(
     :label="item.label"
     :label-on-left="labelOnLeft"
     :color="item.color"
-    :disabled="disabled || null"
-    :readonly="readonly || null"
+    :disabled="isDisabled || null"
+    :readonly="isReadonly || null"
     :class="{ mt1: !inline && i }")
     slot(v-if="$slots.item" name="item" :item="item")
     div(v-else-if="item.label" v-html="item.label")
@@ -40,7 +40,8 @@ export default {
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
     color: { type: String, default: 'primary' }
-    // Also name, disabled, readonly, required and validators in the mixin.
+    // Props from mixin: name, disabled, readonly, required, validators.
+    // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus'],

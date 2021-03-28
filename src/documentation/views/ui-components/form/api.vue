@@ -18,7 +18,9 @@ const propsDescs = {
   allowSubmit: 'Native HTML submits the form to the server when all the form elements are valid.<br>Usually and by default, the form submission is prevented and an AJAX call is made from the front end. This is completely up to the developer.',
   noKeyupValidation: 'Prevents the form element validation on keyup (happening by default).',
   noBlurValidation: 'Prevents the form element validation on blur (happening by default).',
-  errorPlaceholders: 'Reserves a space under all the form elements so that triggering an error and showing the error message will not change the height of the form.'
+  errorPlaceholders: 'Reserves a space under all the form elements so that triggering an error and showing the error message will not change the height of the form.',
+  disabled: 'Disables all the form fields all at once, making them unreactive to user interactions.',
+  readonly: 'Set all the form fields to readonly all at once. The fields will still look interactive but their value will not be editable by user interaction.',
 }
 
 const slots = {

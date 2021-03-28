@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: rating, disabled, readonly }"
+  v-bind="formRegister && { validators, inputValue: rating, disabled: isDisabled, readonly: isReadonly }"
   :valid.sync="valid"
   @reset="$emit('update:modelValue', rating = null);$emit('input', null)"
   :class="classes")
@@ -10,7 +10,7 @@ component(
   template(v-for="i in max" :key="i")
     slot(v-if="$slots.item" name="item" :index="i + 1")
     button.w-rating__button(
-      :disabled="disabled || readonly"
+      :disabled="isDisabled || isReadonly"
       @mouseenter="hover = i"
       @mouseleave="hover = 0"
       @click="onButtonClick(i)"
@@ -47,7 +47,8 @@ export default {
     lg: { type: Boolean },
     xl: { type: Boolean },
     noRipple: { type: Boolean }
-    // Also name, disabled, readonly, required and validators in the mixin.
+    // Props from mixin: name, disabled, readonly, required, validators.
+    // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur'],
@@ -80,8 +81,8 @@ export default {
         'w-rating': true,
         'w-rating--focus': this.hasFocus,
         'w-rating--hover': this.hover,
-        'w-rating--disabled': this.disabled,
-        'w-rating--readonly': this.readonly,
+        'w-rating--disabled': this.isDisabled,
+        'w-rating--readonly': this.isReadonly,
         'w-rating--ripple': this.ripple.start,
         'w-rating--rippled': this.ripple.end
       }
