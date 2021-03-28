@@ -523,43 +523,96 @@ div
   p.
     By default, the selection will use the #[code primary] color and apply an opacity of #[code 0.2].
     If this is not what you want, you can override it via CSS (#[code .w-table__row--selected td:before]).
+
+  title-link(h3 slug="selectable-rows") The #[span.code selectable-rows] prop
+  p.
+    You can enable the rows selection by adding the #[code selectable-rows] prop, or disable it by
+    removing it (by default) - and this is the same as passing a boolean - but you can also set it to #[code 1]
+    to allow a single selection only.
+
+  title-link(h3 slug="force-selection") The #[span.code force-selection] prop
+  p.
+    Eventually, you can use the #[code force-selection] prop to prevent unselecting a row when only
+    one remain selected.
+
+  title-link(h3 slug="row-select") The #[span.code @row-select] event
+  p.
+    This event is fired each time a row is selected #[strong or unselected] (so you don't need to listen
+    to 2 different events). #[br]
+    As shown in this example (under the table), the #[span.code @row-select] event will give you access to useful
+    information such as:
+  ul
+    li #[code item]: the clicked row object
+    li #[code selected]: a boolean telling if the row is being selected or unselected
+    li #[code selectedRows]: an array of all the selected rows objects
+
   example
+    w-flex.mb4(wrap)
+      w-radios.mr6(v-model="table1.selectableRows" :items="selectableRowsOptions")
+      w-button.my3(
+        @click="table1.forceSelection = !table1.forceSelection"
+        round
+        :outline="!table1.forceSelection")
+        w-icon.mr2(v-if="table1.forceSelection") wi-check
+        | Force selection
+
     w-table(
       :headers="table1.headers"
       :items="table1.items"
-      select-row
-      @row-select="selectedRow = $event")
+      :selectable-rows="table1.selectableRows"
+      :force-selection="table1.forceSelection"
+      @row-select="selectionInfo = $event")
 
-    p.mt4
-      strong Selected row:
-      span.ml2 {{ selectedRow || '-' }}
+    .mt4.title4 Selection info:
+    pre {{ selectionInfo }}
     //- template(#pug).
+      w-flex.mb4(wrap)
+        w-radios.mr6(v-model="table.selectableRows" :items="selectableRowsOptions")
+        w-button.my3(
+          @click="table.forceSelection = !table.forceSelection"
+          round
+          :outline="!table.forceSelection")
+          w-icon.mr2(v-if="table.forceSelection") wi-check
+          | Force selection
+
       w-table(
         :headers="table.headers"
         :items="table.items"
-        select-row
-        @row-select="table.selectedRow = $event")
+        :selectable-rows="table.selectableRows"
+        :force-selection="table.forceSelection"
+        @row-select="selectionInfo = $event")
 
-      p.mt4
-        strong Selected row:
-        span.ml2 {{ "\{\{ table.selectedRow || '-' \}\}" }}
+      .mt4.title4 Selection info:
+      pre {{ "\{\{ selectionInfo \}\}" }}
     template(#html).
+      &lt;w-flex wrap class="mb4"&gt;
+        &lt;w-radios
+          v-model="table.selectableRows"
+          :items="selectableRowsOptions"
+          class="mr6"&gt;
+        &lt;/w-radios&gt;
+        &lt;w-button
+          @click="table.forceSelection = !table.forceSelection"
+          round
+          :outline="!table.forceSelection"
+          class="my3"&gt;
+          &lt;w-icon v-if="table.forceSelection" class="mr2"&gt;
+            wi-check
+          &lt;/w-icon&gt;
+          Force selection
+        &lt;/w-button&gt;
+      &lt;/w-flex&gt;
+
       &lt;w-table
         :headers="table.headers"
         :items="table.items"
-        select-row
-        @row-select="table.selectedRow = $event"&gt;
+        :selectable-rows="table.selectableRows"
+        :force-selection="table.forceSelection"
+        @row-select="selectionInfo = $event"&gt;
       &lt;/w-table&gt;
 
-      &lt;p class="mt4"&gt;
-        &lt;strong&gt;
-          Selected row:
-        &lt;/strong&gt;
-
-        &lt;span class="ml2"&gt;
-          {{ "\{\{ table.selectedRow || '-' \}\}" }}
-        &lt;/span&gt;
-      &lt;/p&gt;
+      &lt;div class="title4 mt4"&gt;Selection info:&lt;/div&gt;
+      &lt;pre&gt;{{ "\{\{ selectionInfo \}\}" }}&lt;/pre&gt;
     template(#js).
       data: () => ({
         table: {
@@ -575,8 +628,15 @@ div
             { id: 4, firstName: 'Daley', lastName: 'Elliott' },
             { id: 5, firstName: 'Virgil', lastName: 'Carman' }
           ],
-          selectedRow: null
-        }
+          selectableRows: true,
+          forceSelection: false
+        },
+        selectableRowsOptions: [
+          { label: '&lt;code class="mr2"&gt;:selectable-row="false"&lt;/code&gt; (default)', value: false },
+          { label: '&lt;code&gt;selectable-row&lt;/code&gt;', value: true },
+          { label: '&lt;code&gt;:selectable-row="1"&lt;/code&gt;', value: 1 }
+        ],
+        selectionInfo: {}
       })
 
   title-link(h2) Expandable rows
@@ -601,8 +661,7 @@ div
             { id: 3, firstName: 'Rory', lastName: 'Bristol' },
             { id: 4, firstName: 'Daley', lastName: 'Elliott' },
             { id: 5, firstName: 'Virgil', lastName: 'Carman' }
-          ],
-          selectedRow: null
+          ]
         }
       })
 
@@ -735,7 +794,7 @@ div
       One thing that is not calculated on the mobile layout is the labels column width (default: 6.5em).#[br]
       You can override it to set the width you want via:
 
-    ssh-pre(language="css" label="CSS").
+    ssh-pre.mt5.mb0(language="css" label="CSS").
       .w-table--mobile .w-table__cell:before {width: 8em;}
 </template>
 
@@ -768,7 +827,9 @@ export default {
       ],
       items: allItems.slice(0, 5),
       sort: '+firstName',
-      loading: true
+      loading: true,
+      selectableRows: true,
+      forceSelection: false
     },
     table2: {
       headers: [
@@ -805,7 +866,12 @@ export default {
         return new RegExp(keyword, 'i').test(allTheColumns)
       }
     },
-    selectedRow: null
+    selectableRowsOptions: [
+      { label: '<code class="mr2">:selectable-row="false"</code> (default)', value: false },
+      { label: '<code>selectable-row</code>', value: true },
+      { label: '<code>:selectable-row="1"</code>', value: 1 }
+    ],
+    selectionInfo: {}
   }),
 
   methods: {
