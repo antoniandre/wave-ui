@@ -28,6 +28,7 @@
     "lint": "vue-cli-service lint"
   },
   "sideEffects": [
+    "*.css",
     "*.scss",
     "*.vue"
   ],
