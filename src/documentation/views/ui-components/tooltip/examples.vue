@@ -173,7 +173,9 @@ div.tooltips-demo
         &lt;/w-tooltip&gt;
       &lt;/div&gt;
 
-  title-link(h2) Toggle with v-model
+  title-link(h2) Using v-model
+  title-link(h3) Toggle with v-model
+  p Click the button to toggle the tooltips.
   example(content-class="text-center my4")
     w-button.my2.mx6(
       @click="showTooltip = !showTooltip"
@@ -183,24 +185,24 @@ div.tooltips-demo
       | {{ showTooltip ? 'Hide' : 'Show' }} tooltip
 
     div.d-iblock.my2.mx6
-      w-tooltip.ma2(v-model="showTooltip" show-on-click left)
+      w-tooltip.ma2(:value="showTooltip" show-on-click left)
         template(#activator="{ on }")
-          span(v-on="on") Star
+          w-icon(v-on="on") wi-star
         | Star
 
-      w-tooltip.ma2(v-model="showTooltip" show-on-click top)
+      w-tooltip.ma2(:value="showTooltip" show-on-click top)
         template(#activator="{ on }")
-          span(v-on="on") Star
+          w-icon(v-on="on") wi-star
         | Star
 
-      w-tooltip.ma2(v-model="showTooltip" show-on-click)
+      w-tooltip.ma2(:value="showTooltip" show-on-click)
         template(#activator="{ on }")
-          span(v-on="on") Star
+          w-icon(v-on="on") wi-star
         | Star
 
-      w-tooltip.ma2(v-model="showTooltip" show-on-click right)
+      w-tooltip.ma2(:value="showTooltip" show-on-click right)
         template(#activator="{ on }")
-          span(v-on="on") Star
+          w-icon(v-on="on") wi-star
         | Star
 
     //- template(#pug).
@@ -215,22 +217,22 @@ div.tooltips-demo
         div.d-iblock.my2.mx6
           w-tooltip.ma2(v-model="showTooltip" show-on-click left)
             template(#activator="{ on }")
-              span(v-on="on") Star
+              w-icon(v-on="on") wi-star
             | Star
 
           w-tooltip.ma2(v-model="showTooltip" show-on-click top)
             template(#activator="{ on }")
-              span(v-on="on") Star
+              w-icon(v-on="on") wi-star
             | Star
 
           w-tooltip.ma2(v-model="showTooltip" show-on-click)
             template(#activator="{ on }")
-              span(v-on="on") Star
+              w-icon(v-on="on") wi-star
             | Star
 
           w-tooltip.ma2(v-model="showTooltip" show-on-click right)
             template(#activator="{ on }")
-              span(v-on="on") Star
+              w-icon(v-on="on") wi-star
             | Star
     template(#html).
       &lt;div class="text-center"&gt;
@@ -250,7 +252,7 @@ div.tooltips-demo
             show-on-click
             left&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;span v-on="on"&gt;Star&lt;/span&gt;
+              &lt;w-icon v-on="on"&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
@@ -261,7 +263,7 @@ div.tooltips-demo
             show-on-click
             top&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;span v-on="on"&gt;Star&lt;/span&gt;
+              &lt;w-icon v-on="on"&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
@@ -271,7 +273,7 @@ div.tooltips-demo
             v-model="showTooltip"
             show-on-click&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;span v-on="on"&gt;Star&lt;/span&gt;
+              &lt;w-icon v-on="on"&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
@@ -282,11 +284,46 @@ div.tooltips-demo
             show-on-click
             right&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;span v-on="on"&gt;Star&lt;/span&gt;
+              &lt;w-icon v-on="on"&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
         &lt;/div&gt;
+      &lt;/div&gt;
+    template(#js).
+      data: () => ({
+        showTooltip: false
+      })
+
+  title-link(h3) Using v-model to update a variable
+  p Click the star to toggle the tooltip.
+  example(content-class="text-center my4")
+    w-tooltip(v-model="showTooltip2" show-on-click right)
+      template(#activator="{ on }")
+        w-icon(v-on="on") wi-star
+      | Star
+    div.mt4 The tooltip is {{ showTooltip2 ? 'visible' : 'hidden' }}.
+
+    //- template(#pug).
+      w-tooltip(v-model="showTooltip" show-on-click right)
+        template(#activator="{ on }")
+          w-icon(v-on="on") wi-star
+        | Star
+      div.mt4 The tooltip is {{ "\{\{ showTooltip ? 'visible' : 'hidden' \}\}" }}.
+
+    template(#html).
+      &lt;w-tooltip
+        v-model="showTooltip"
+        show-on-click
+        right&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-icon v-on="on"&gt;wi-star&lt;/w-icon&gt;
+        &lt;/template&gt;
+        Star
+      &lt;/w-tooltip&gt;
+
+      &lt;div class="mt4"&gt;
+        The tooltip is {{ "\{\{ showTooltip ? 'visible' : 'hidden' \}\}" }}.
       &lt;/div&gt;
     template(#js).
       data: () => ({
@@ -716,6 +753,7 @@ div.tooltips-demo
 export default {
   data: () => ({
     showTooltip: false,
+    showTooltip2: false,
     transition: 'bounce',
     transitions: [
       { label: 'Default', value: '' },
