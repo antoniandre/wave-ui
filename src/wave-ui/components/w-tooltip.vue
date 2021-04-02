@@ -295,8 +295,8 @@ export default {
   },
 
   watch: {
-    value () {
-      this.toggle({ type: 'click', target: this.activatorEl })
+    value (bool) {
+      if (bool !== this.showTooltip) this.toggle({ type: 'click', target: this.activatorEl })
     },
     detachTo () {
       this.removeTooltip()
