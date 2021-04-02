@@ -23,6 +23,10 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v1.27.2
+      p #[strong.code w-tooltip]: Emit events on tooltip open and close.
+
     li.minor
       strong.version v1.27.0
       p #[strong.code w-table]
