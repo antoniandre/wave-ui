@@ -48,7 +48,7 @@ export default {
     zIndex: { type: [Number, String, Boolean] }
   },
 
-  emits: [],
+  emits: ['input', 'update:modelValue', 'open', 'close'],
 
   data: () => ({
     showTooltip: false,
@@ -190,9 +190,19 @@ export default {
         // In `getCoordinates` accessing the tooltip computed styles takes a few ms (less than 10ms),
         // if we don't postpone the tooltip apparition it will start transition from a visible tooltip and
         // thus will not transition.
-        this.timeoutId = setTimeout(() => (this.showTooltip = true), 10)
+        this.timeoutId = setTimeout(() => {
+          this.showTooltip = true
+          this.$emit('update:modelValue', true)
+          this.$emit('input', true)
+          this.$emit('open')
+        }, 10)
       }
-      else this.showTooltip = false
+      else {
+        this.showTooltip = false
+        this.$emit('update:modelValue', false)
+        this.$emit('input', false)
+        this.$emit('close')
+      }
     },
 
     getCoordinates () {
