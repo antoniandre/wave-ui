@@ -388,8 +388,8 @@ export default {
   },
 
   watch: {
-    value (value) {
-      if (!!value !== this.showMenu) this.toggle({ type: 'click', target: this.activatorEl })
+    value (bool) {
+      if (!!bool !== this.showMenu) this.toggle({ type: 'click', target: this.activatorEl })
     },
     detachTo () {
       this.removeMenu()
