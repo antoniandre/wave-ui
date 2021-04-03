@@ -23,6 +23,10 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v1.28.0
+      p Emit #[code item-expand] on #[strong.code w-accordion] item expand/collapse.
+
     li.patch
       strong.version v1.27.3
       p Improve the #[strong.code w-tooltip] component and emit events on tooltip open and close.
