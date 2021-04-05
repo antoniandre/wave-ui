@@ -24,7 +24,7 @@
           :index="i + 1"
           :active="item._index === activeTabIndex")
           div(v-html="item[itemTitleKey]")
-    .w-tabs__bar-extra
+    .w-tabs__bar-extra(v-if="$scopedSlots['tabs-bar-extra']")
       slot(name="tabs-bar-extra")
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
   .w-tabs__content-wrap(v-if="tabsItems.length")
@@ -122,8 +122,8 @@ export default {
 
     tabsBarClasses () {
       return {
-        'justify-end': this.right,
-        'justify-center': this.center
+        'w-tabs__bar--right': this.right,
+        'w-tabs__bar--center': this.center
       }
     },
 
@@ -248,6 +248,9 @@ export default {
     // align-items: center;
     overflow-x: auto;
 
+    &--center {justify-content: center;}
+    &--right {justify-content: flex-end;}
+
     .w-tabs--card &:after {
       content: '';
       display: flex;
@@ -306,6 +309,9 @@ export default {
   &__bar-extra {
     margin-left: auto;
     align-self: center;
+
+    .w-tabs__bar--right &,
+    .w-tabs__bar--center & {margin-left: 0;}
   }
 
   // Slider.
