@@ -23,6 +23,12 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v1.28.1
+      p.
+        #[strong.code w-tabs]: Fix the tabs bar center and right alignment after adding the
+        #[code tabs-bar-extra] slot.
+
     li.minor
       strong.version v1.28.0
       p Emit #[code item-expand] on #[strong.code w-accordion] item expand/collapse.
