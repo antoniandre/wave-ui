@@ -88,14 +88,21 @@ export default {
       // styles += `:root {${cssVariables.join(';')}}`
 
       const entries = Object.entries(config.breakpoints)
-      entries.forEach(([label], i) => {
-        // The xs breakpoint should not be placed in a media query (min-width: 0px), so discard it
-        // here and leave in _layout css.
-        if (entries[i - 1]) {
-          styles += `@media (min-width: ${entries[i - 1] && entries[i - 1][1] || 0}px){`
+      // Define media queries for each breakpoint: xs, sm, md, lg, xl.
+      entries.forEach(([label, max], i) => {
+        // Construct the breakpoint objects.
+        const [, value = 0] = entries[i - 1] || []
+        const bp = { label, min: value ? value + 1 : 0, max }
+
+        // Discard `xs` since the min is 0 (`media query (min-width: 0)`), and leave in _layout.scss.
+        if (bp.min) {
+          styles += `@media (min-width: ${bp.min}px){`
+
+          // For each breakpoint, loop from 1 to 12. E.g. xs1, xs2, ..., xl12.
           for (let i = 0;i < gridSystem; i++) {
             styles += `.w-app .${label}${gridSystem - i}{width:${parseFloat(((gridSystem - i) * 100 / gridSystem).toFixed(4))}%;}`
           }
+
           styles += '}'
         }
       })
