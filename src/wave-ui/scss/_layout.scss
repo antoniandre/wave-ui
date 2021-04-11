@@ -74,7 +74,7 @@
   @for $i from 0 through 12 {
     $number: round($i * $base-increment);
     .ma#{$i} {margin: $number;}
-    .ma-#{$i} {margin: -$number;}
+    @if ($i > 0) {.ma-#{$i} {margin: -$number;}}
   }
   .maa {margin: auto;}
   .ma0 {margin: 0;}
@@ -82,33 +82,37 @@
   @for $i from 0 through 12 {
     $number: round($i * $base-increment);
     .mx#{$i} {margin-left: $number;margin-right: $number;}
-    .mx-#{$i} {margin-left: -$number;margin-right: -$number;}
     .my#{$i} {margin-top: $number;margin-bottom: $number;}
-    .my-#{$i} {margin-top: -$number;margin-bottom: -$number;}
+    @if ($i > 0) {
+      .mx-#{$i} {margin-left: -$number;margin-right: -$number;}
+      .my-#{$i} {margin-top: -$number;margin-bottom: -$number;}
+    }
   }
   .mxa {margin-left: auto;margin-right: auto;}
-  .mx0 {margin-left: 0;margin-right: 0;}
   .mya {margin-top: auto;margin-bottom: auto;}
+  .mx0 {margin-left: 0;margin-right: 0;}
   .my0 {margin-top: 0;margin-bottom: 0;}
 
   @for $i from 0 through 12 {
     $number: round($i * $base-increment);
     .mt#{$i} {margin-top: $number;}
-    .mt-#{$i} {margin-top: -$number;}
     .mr#{$i} {margin-right: $number;}
-    .mr-#{$i} {margin-right: -$number;}
     .mb#{$i} {margin-bottom: $number;}
-    .mb-#{$i} {margin-bottom: -$number;}
     .ml#{$i} {margin-left: $number;}
-    .ml-#{$i} {margin-left: -$number;}
+    @if ($i > 0) {
+      .mt-#{$i} {margin-top: -$number;}
+      .mr-#{$i} {margin-right: -$number;}
+      .mb-#{$i} {margin-bottom: -$number;}
+      .ml-#{$i} {margin-left: -$number;}
+    }
   }
   .mta {margin-top: auto;}
-  .mt0 {margin-top: 0;}
   .mra {margin-right: auto;}
-  .mr0 {margin-right: 0;}
   .mba {margin-bottom: auto;}
-  .mb0 {margin-bottom: 0;}
   .mla {margin-left: auto;}
+  .mt0 {margin-top: 0;}
+  .mr0 {margin-right: 0;}
+  .mb0 {margin-bottom: 0;}
   .ml0 {margin-left: 0;}
 
   // Padding.
