@@ -28,14 +28,23 @@ const slots = {
     }
   },
   item: {
-    description: 'Provide a custom item template (each cell in each item row).',
+    description: 'Provide a custom item template for each full &lt;tr&gt;.',
+    params: {
+      item: 'The full item object of to the row being rendered.',
+      index: 'The index of the row being rendered. Starts at 1.',
+      select: 'When using <code>selectable-rows</code>: the select function to call on &lt;tr&gt; click (or on a custom event).',
+      classes: 'The internally computed CSS classes to apply to this &lt;tr&gt;. Given as an object.'
+    }
+  },
+  'item-cell': {
+    description: 'Provide a custom item cell template (each &lt;td&gt; of each item row).',
     params: {
       item: 'The full item object of to the row being rendered.',
       header: 'The related header object of the current column of the cell being rendered.',
       label: 'The content of the cell being rendered.',
       index: 'The index of the cell in the row being rendered. Starts at 1.'
     }
-  },
+  }
 }
 
 const events = {}
