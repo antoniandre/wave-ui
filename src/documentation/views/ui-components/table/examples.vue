@@ -665,7 +665,7 @@ div
         }
       })
 
-  title-link(h2 slug="slots") Headers &amp; Cells customization via slots
+  title-link(h2 slug="slots") Headers &amp; cells customization via slots
   p You can customize the headers labels and/or each row cells.
 
   title-link(h3) Headers
@@ -702,20 +702,20 @@ div
         }
       })
 
-  title-link(h3) Items
+  title-link(h3 slug="item-cells") Item cells (inside &lt;td&gt; element)
   p.
     In this example, only the items cells are customized via the #[code item] slot
     (and the headers are hidden).
   example
     w-table(:headers="table1.headers" no-headers :items="table1.items")
-      template(#item="{ item, label, header, index }")
+      template(#item-cell="{ item, label, header, index }")
         small(v-if="header.key === 'id'") \#{{ index }}
         template(v-else)
           small.grey.mr2 {{ header.label }}:
           span {{ label }}
     //- template(#pug).
       w-table(:headers="table.headers" no-headers :items="table.items")
-        template(#item="{ item, label, header, index }")
+        template(#item-cell="{ item, label, header, index }")
           small.grey.mr2 {{ '\{\{ header.label \}\}' }}:
           span {{ '\{\{ label \}\}' }}
     template(#html).
@@ -723,9 +723,189 @@ div
         :headers="table.headers"
         no-headers
         :items="table.items"&gt;
-        &lt;template #item="{ item, label, header, index }"&gt;
+        &lt;template #item-cell="{ item, label, header, index }"&gt;
           &lt;small class="grey mr2"&gt;{{ '\{\{ header.label \}\}' }}:&lt;/span&gt;
           &lt;span&gt;{{ '\{\{ label \}\}' }}&lt;/span&gt;
+        &lt;/template&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ]
+        }
+      })
+
+  title-link(h3 slug="override-1-particular-item-cell")
+    | override 1 particular item cell or column cells (inside &lt;td&gt; element)
+  p.
+    If you only need to override 1 particular column you can do it via the #[code item-cell.xxx] slot,
+    where #[code xxx] is a key defined in the headers.
+    In this example: #[code id], #[code firstName], #[code lastName].#[br]#[br]
+
+    If it's more convenient, you can also override a particular cell by its index like #[code item-cell.i],
+    where #[code i] is a an integer starting at 1.
+  example
+    w-table(:headers="table1.headers" :items="table1.items" no-headers)
+      template(#item-cell.firstName="{ item, label, header, index }")
+        div.px2.text-center.green-light5--bg.text-bold {{ label }}
+    //- template(#pug).
+      w-table(:headers="table.headers" :items="table.items" no-headers)
+        template(#item-cell.firstName="{ item, label, header, index }")
+          div.px2.text-center.green-light5--bg.text-bold {{ '\{\{ label \}\}' }}
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        no-headers&gt;
+        &lt;template #item-cell.firstName="{ item, label, header, index }"&gt;
+          &lt;div class="px2 text-center green-light5--bg text-bold"&gt;
+            {{ '\{\{ label \}\}' }}
+          &lt;/div&gt;
+        &lt;/template&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ]
+        }
+      })
+
+  title-link(h2) Fully custom row (&lt;tr&gt; element itself)
+  p.
+    In this example, the full &lt;tr&gt; DOM element is customized, so you can add your own classes and
+    full layout.#[br]
+    As you notice, the #[code item] slot gives you full flexibility, but the drawback is that's also
+    harder to write (more verbose).
+  example
+    w-table(:headers="table1.headers" :items="table1.items" selectable-rows)
+      template(#item="{ item, index, select, classes }")
+        tr(:class="classes" @click="select")
+          td(
+            v-for="(header, i) in table1.headers"
+            :key="i"
+            :class="`pa4 text-${header.align || 'left'}`")
+            | {{ item[header.key] || '' }}
+    //- template(#pug).
+      w-table(:headers="table.headers" :items="table.items" selectable-rows)
+        template(#item="{ item, index, select, classes }")
+          tr(:class="classes" @click="select")
+            td(
+              v-for="(header, i) in table.headers"
+              :key="i"
+              :class="`pa4 text-${header.align || 'left'}`")
+              | {{ "\{\{ item[header.key] || '' \}\}" }}
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        selectable-rows&gt;
+        &lt;template #item="{ item, index, select, classes }"&gt;
+          &lt;tr :class="classes" @click="select"&gt;
+            &lt;td
+              v-for="(header, i) in table.headers"
+              :key="i"
+              :class="`pa4 text-${header.align || 'left'}`"&gt;
+              {{ "\{\{ item[header.key] || '' \}\}" }}
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/template&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ]
+        }
+      })
+
+  title-link(h3 slug="colspan-on-td") #[span.code colspan] on &lt;td&gt;
+  p.
+    This example is showcasing another useful case: handling a colspan attribute.#[br]
+    All the cells of all the rows are #[code colspan]'d to one, and a custom row layout is applied.
+  example
+    w-table(:headers="table1.headers" :items="table1.items" no-headers selectable-rows)
+      template(#item="{ item, index, select, classes }")
+        tr(
+          :class="{ ...classes, 'indigo-light5--bg': index % 2, 'blue-light5--bg': !(index % 2) }"
+          @click="select")
+          td.pa2(:colspan="table1.headers.length")
+            .title3 Row \#{{ index }}
+            ul
+              li(v-for="(header, i) in table1.headers" :key="i")
+                strong.mr2 {{ header.label }}:
+                | {{ item[header.key] || '' }}
+    //- template(#pug).
+      w-table(:headers="table.headers" :items="table.items" no-headers selectable-rows)
+        template(#item="{ item, index, select, classes }")
+          tr(
+            :class="{ ...classes, 'indigo-light5--bg': index % 2, 'blue-light5--bg': !(index % 2) }"
+            @click="select")
+            td.pa2(:colspan="table.headers.length")
+              .title3 Row \#{{ '\{\{ index \}\}' }}
+              ul
+                li(v-for="(header, i) in table.headers" :key="i")
+                  strong.mr2 {{ '\{\{ header.label \}\}' }}:
+                  | {{ "\{\{ item[header.key] || '' \}\}" }}
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        no-headers
+        selectable-rows&gt;
+        &lt;template #item="{ item, index, select, classes }"&gt;
+          &lt;tr
+            :class="{
+              ...classes,
+              'indigo-light5--bg': index % 2,
+              'blue-light5--bg': !(index % 2)
+            }"
+            @click="select"&gt;
+            &lt;td :class="pa2" :colspan="table.headers.length"&gt;
+              &lt;div class="title3"&gt;
+                Row \#{{ '\{\{ index \}\}' }}
+              &lt;/div&gt;
+              &lt;ul&gt;
+                &lt;li v-for="(header, i) in table.headers" :key="i"&gt;
+                  &lt;strong class="mr2"&gt;
+                    {{ '\{\{ header.label \}\}' }}:
+                  &lt;/strong&gt;
+                  {{ "\{\{ item[header.key] || '' \}\}" }}
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
         &lt;/template&gt;
       &lt;/w-table&gt;
     template(#js).
