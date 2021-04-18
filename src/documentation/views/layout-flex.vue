@@ -95,7 +95,7 @@ main
       | Applies this CSS rule directly on the element: #[span.code flex-basis: 0].
 
   p.mt6.
-    The #[code.mx1 .spacer] class is also very helpful to separate 2 elements as is will occupy the
+    The #[code.mx1 .spacer] class is also very helpful to separate 2 elements as it will occupy the full
     available space and push the elements on each side.
 
   .w-divider.my12
@@ -443,6 +443,23 @@ main
       target="_blank"
       style="text-decoration: underline")
       | There is no justify-self in Flexbox.
+      w-icon.ml2(md) mdi mdi-open-in-new
+
+  title-link.mt12.title3(h3 slug="spacer") Spacer (#[code .spacer])
+  p In a flex context, the spacer will push the elements to the sides.
+  example
+    w-flex
+      .box
+      .box
+      .spacer
+      .box
+  example
+    w-flex(column style="height: 200px")
+      .box.shrink
+      .box.shrink
+      .spacer
+      .box.shrink
+
 </template>
 
 <style lang="scss">
