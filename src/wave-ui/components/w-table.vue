@@ -45,11 +45,26 @@
             :class="{ 'w-table__row--selected': selectedRowsByUid[item.uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item.uid] !== undefined }")
             template(v-for="(header, j) in headers")
               td.w-table__cell(
-                v-if="$scopedSlots['item-cell']"
-                :key="`${j}-1`"
+                v-if="$scopedSlots[`item-cell.${header.key}`] || $scopedSlots[`item-cell.${j + 1}`] || $scopedSlots['item-cell']"
+                :key="`${j}-a`"
                 :data-label="header.label"
                 :class="`text-${header.align || 'left'}`")
                 slot(
+                  v-if="$scopedSlots[`item-cell.${header.key}`]"
+                  :name="`item-cell.${header.key}`"
+                  :header="header"
+                  :item="item"
+                  :label="item[header.key] || ''"
+                  :index="i + 1")
+                slot(
+                  v-else-if="$scopedSlots[`item-cell.${j + 1}`]"
+                  :name="`item-cell.${j + 1}`"
+                  :header="header"
+                  :item="item"
+                  :label="item[header.key] || ''"
+                  :index="i + 1")
+                slot(
+                  v-else-if="$scopedSlots['item-cell']"
                   name="item-cell"
                   :header="header"
                   :item="item"
@@ -57,7 +72,7 @@
                   :index="i + 1")
               td.w-table__cell(
                 v-else
-                :key="`${j}-2`"
+                :key="`${j}-b`"
                 :data-label="header.label"
                 :class="`text-${header.align || 'left'}`"
                 v-html="item[header.key] || ''")
