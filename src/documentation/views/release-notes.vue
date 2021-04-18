@@ -23,6 +23,15 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v1.29.0
+      p #[strong.code w-table]
+      ul
+        li Allow full customization of the &lt;tr&gt; using the #[code item] slot.
+        li The #[code item] slot not designates the &lt;tr&gt; and #[code item-cell] each table cell.
+        li Allow &lt;tr&gt; bg-color overrides.
+        li Emit a #[code row-click] event on &lt;tr&gt; click.
+
     li.patch
       strong.version v1.28.1
       p.
