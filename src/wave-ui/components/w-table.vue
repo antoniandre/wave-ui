@@ -30,17 +30,31 @@
             slot(name="loading") Loading...
       template(v-else-if="tableItems.length")
         template(v-for="(item, i) in sortedItems")
+          slot(
+            v-if="$scopedSlots['item']"
+            name="item"
+            :item="item"
+            :index="i + 1"
+            :select="() => doSelectRow(item, i)"
+            :classes="{ 'w-table__row--selected': selectedRowsByUid[item.uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item.uid] !== undefined }")
+
           tr.w-table__row(
+            v-else
             :key="i"
-            @click="doSelectRow(item)"
+            @click="doSelectRow(item, i)"
             :class="{ 'w-table__row--selected': selectedRowsByUid[item.uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item.uid] !== undefined }")
             template(v-for="(header, j) in headers")
               td.w-table__cell(
-                v-if="$scopedSlots['item']"
+                v-if="$scopedSlots['item-cell']"
                 :key="`${j}-1`"
                 :data-label="header.label"
                 :class="`text-${header.align || 'left'}`")
-                slot(name="item" :header="header" :item="item" :label="item[header.key] || ''" :index="i + 1")
+                slot(
+                  name="item-cell"
+                  :header="header"
+                  :item="item"
+                  :label="item[header.key] || ''"
+                  :index="i + 1")
               td.w-table__cell(
                 v-else
                 :key="`${j}-2`"
@@ -97,7 +111,7 @@ export default {
     mobileBreakpoint: { type: Number, default: 0 }
   },
 
-  emits: ['update:sort'],
+  emits: ['update:sort', 'row-select', 'row-expand'],
 
   data: () => ({
     activeSorting: [],
@@ -112,6 +126,7 @@ export default {
         return item
       })
     },
+
     filteredItems () {
       if (typeof this.filter === 'function') return this.tableItems.filter(this.filter)
       return this.tableItems
@@ -199,11 +214,14 @@ export default {
       this.$emit('update:sort', this.activeSorting)
     },
 
-    doSelectRow (item) {
-      if (this.expandableRows) {
+    doSelectRow (item, index) {
+      const expandable = this.expandableRows === '' ? true : this.expandableRows
+      const selectable = this.selectableRows === '' ? true : this.selectableRows
+
+      if (expandable) {
         const isExpanding = this.expandedRowsByUid[item.uid] === undefined
         if (isExpanding) {
-          if (this.expandableRows.toString() === '1') this.expandedRows = [item.uid]
+          if (this.expandableRows === '1') this.expandedRows = [item.uid]
           else this.expandedRows.push(item.uid)
         }
         else this.expandedRows = this.expandedRows.filter(uid => uid !== item.uid)
@@ -211,17 +229,18 @@ export default {
           'row-expand',
           {
             item,
+            index,
             expanded: isExpanding,
             expandedRows: this.expandedRows.map(uid => this.filteredItems[uid])
           }
         )
       }
 
-      else if (this.selectableRows) {
+      else if (selectable) {
         let updated = false
         const isSelecting = this.selectedRowsByUid[item.uid] === undefined
         if (isSelecting) {
-          if (this.selectableRows.toString() === '1') this.selectedRows = [item.uid]
+          if (this.selectableRows === '1') this.selectedRows = [item.uid]
           else this.selectedRows.push(item.uid)
           updated = true
         }
@@ -236,6 +255,7 @@ export default {
             'row-select',
             {
               item,
+              index,
               selected: isSelecting,
               selectedRows: this.selectedRows.map(uid => this.filteredItems[uid])
             }
@@ -341,8 +361,10 @@ export default {
   // Table body.
   // ------------------------------------------------------
   tbody tr {border-top: 1px solid rgba(0, 0, 0, 0.06);}
-  tbody tr:nth-child(odd):not(.no-data) {background-color: $table-tr-odd-color;}
-  tbody .w-table__row:hover:not(.no-data) {background-color: $table-tr-hover-color;}
+  // Don't apply built-in bg color if a bg color is already found on a tr.
+  tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: $table-tr-odd-color;}
+  tbody .w-table__row:hover:not(.no-data):not([class*="--bg"]) {background-color: $table-tr-hover-color;}
+
   &__row--selected td {position: relative;}
   &__row--selected td:before {
     content: '';
