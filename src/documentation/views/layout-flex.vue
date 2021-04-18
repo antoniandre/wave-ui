@@ -440,26 +440,64 @@ main
   alert(warning)
     a.black.ml1(
       href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Alignment/Box_Alignment_in_Flexbox"
-      target="_blank"
-      style="text-decoration: underline")
+      target="_blank")
       | There is no justify-self in Flexbox.
-      w-icon.ml2(md) mdi mdi-open-in-new
+      w-icon.ml2(sm) mdi mdi-open-in-new
 
   title-link.mt12.title3(h3 slug="spacer") Spacer (#[code .spacer])
   p In a flex context, the spacer will push the elements to the sides.
-  example
-    w-flex
-      .box
-      .box
-      .spacer
-      .box
-  example
-    w-flex(column style="height: 200px")
-      .box.shrink
-      .box.shrink
-      .spacer
-      .box.shrink
+  w-flex.xs-column(wrap basis-zero)
+    example.grow(content-class="fill-height")
+      w-flex.wrapper(align-center)
+        .box
+        .box
+        .spacer
+        .box
+      template(#html).
+        &lt;w-flex align-center class="wrapper"&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+          &lt;div class="spacer"&gt;&lt;/div&gt;
+          &lt;div class="box"&gt;&lt;/div&gt;
+        &lt;/w-flex&gt;
+      template(#css).
+        .box {
+          background-color: #9bbff9;
+          border: 1px solid #55f;
+          padding: 12px;
+        }
 
+        .wrapper {
+          background-color: #eef7ff;
+          padding: 12px;
+          height: 140px;
+        }
+    .shrink.mx2.xs-hide
+    example.grow
+      w-flex.wrapper(column)
+        .box.shrink
+        .box.shrink
+        .spacer
+        .box.shrink
+      template(#html).
+        &lt;w-flex column class="wrapper"&gt;
+          &lt;div class="box shrink"&gt;&lt;/div&gt;
+          &lt;div class="box shrink"&gt;&lt;/div&gt;
+          &lt;div class="spacer"&gt;&lt;/div&gt;
+          &lt;div class="box shrink"&gt;&lt;/div&gt;
+        &lt;/w-flex&gt;
+      template(#css).
+        .box {
+          background-color: #9bbff9;
+          border: 1px solid #55f;
+          padding: 12px;
+        }
+
+        .wrapper {
+          background-color: #eef7ff;
+          padding: 12px;
+          height: 140px;
+        }
 </template>
 
 <style lang="scss">
