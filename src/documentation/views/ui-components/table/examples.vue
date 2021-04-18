@@ -724,7 +724,7 @@ div
         no-headers
         :items="table.items"&gt;
         &lt;template #item-cell="{ item, label, header, index }"&gt;
-          &lt;small class="grey mr2"&gt;{{ '\{\{ header.label \}\}' }}:&lt;/span&gt;
+          &lt;small class="grey mr2"&gt;{{ '\{\{ header.label \}\}' }}:&lt;/small&gt;
           &lt;span&gt;{{ '\{\{ label \}\}' }}&lt;/span&gt;
         &lt;/template&gt;
       &lt;/w-table&gt;
@@ -757,18 +757,18 @@ div
     where #[code i] is a an integer starting at 1.
   example
     w-table(:headers="table1.headers" :items="table1.items" no-headers)
-      template(#item-cell.firstName="{ item, label, header, index }")
+      template(#item-cell.id="{ item, label, header, index }")
         div.px2.text-center.green-light5--bg.text-bold {{ label }}
     //- template(#pug).
       w-table(:headers="table.headers" :items="table.items" no-headers)
-        template(#item-cell.firstName="{ item, label, header, index }")
+        template(#item-cell.id="{ item, label, header, index }")
           div.px2.text-center.green-light5--bg.text-bold {{ '\{\{ label \}\}' }}
     template(#html).
       &lt;w-table
         :headers="table.headers"
         :items="table.items"
         no-headers&gt;
-        &lt;template #item-cell.firstName="{ item, label, header, index }"&gt;
+        &lt;template #item-cell.id="{ item, label, header, index }"&gt;
           &lt;div class="px2 text-center green-light5--bg text-bold"&gt;
             {{ '\{\{ label \}\}' }}
           &lt;/div&gt;
