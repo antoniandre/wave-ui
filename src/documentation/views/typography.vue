@@ -24,8 +24,17 @@ main
   title-link(h2) Text alignment
   div.ml8
     .text-left.mt4 Left aligned text using the #[code .text-left] class.
-    .text-center Center aligned text using the #[code .text-center] class.
-    .text-right Right aligned text using the #[code .text-right] class.
+    .text-center.mt4 Center aligned text using the #[code .text-center] class.
+    .text-right.mt4 Right aligned text using the #[code .text-right] class.
+
+  title-link(h2) Line heights
+  div.ml8
+    .lh0.mt6 Apply a smaller line height of #[span.code 1]#[br]using the #[code.py0.bd0 .lh0] class.
+    .lh1.mt6 Apply a normal line height of #[span.code 1.2]#[br]using the #[code.py0.bd0 .lh1] class.
+    .lh2.mt6 Apply a line height of #[span.code 1.4]#[br]using the #[code.py0.bd0 .lh2] class.
+    .lh3.mt6 Apply a line height of #[span.code 1.6]#[br]using the #[code.py0.bd0 .lh3] class.
+    .lh4.mt6 Apply a line height of #[span.code 1.8]#[br]using the #[code.py0.bd0 .lh4] class.
+    .lh5.mt6 Apply a line height of #[span.code 2]#[br]using the #[code.py0.bd0 .lh5] class.
 </template>
 
 <script>
