@@ -111,7 +111,7 @@ export default {
     mobileBreakpoint: { type: Number, default: 0 }
   },
 
-  emits: ['update:sort', 'row-select', 'row-expand'],
+  emits: ['update:sort', 'row-select', 'row-expand', 'row-click'],
 
   data: () => ({
     activeSorting: [],
@@ -262,6 +262,8 @@ export default {
           )
         }
       }
+
+      this.$emit('row-click', { item, index })
     }
   },
 
