@@ -63,11 +63,11 @@ export default class WaveUI {
     if (WaveUI.instance) return WaveUI.instance
 
     else {
-      // Merge user options into default config.
+      // Merge user options into the default config.
       mergeConfig(options)
 
       // Add color shades for each custom color given in options.
-      if (!options.disableColorShades) {
+      if (config.css.colorShades) {
         config.colorShades = {}
 
         for (let color in config.colors) {
