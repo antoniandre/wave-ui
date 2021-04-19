@@ -1,3 +1,7 @@
+:root {
+  --base-increment: #{$base-increment};
+}
+
 #{$css-scope} {
   // Layout classes.
   // ----------------------------------------------
@@ -164,14 +168,10 @@
 
   // Grid system.
   // ----------------------------------------------
-  $grid-base: 12;
-  @for $i from 0 through $grid-base {
-    .xs#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
-  }
+  // CSS variables are not supported in media queries yet
+  // (https://www.w3.org/TR/css-variables-1/#using-variables),
+  // the grid system is done dynamically in dynamic-css.js.
 
-  // CSS variables are not supported in media queries yet.
-  // https://www.w3.org/TR/css-variables-1/#using-variables
-  // So done in w-app instead.
   // @media screen and (min-width: var(--breakpoint-xs)) {
   //   @for $i from 0 through $grid-base {
   //     .sm#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
