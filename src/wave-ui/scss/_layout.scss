@@ -7,6 +7,8 @@
 #{$css-scope} {
   // Layout classes.
   // ----------------------------------------------
+  .show {display: block;}
+  .hide {display: none;}
   .spacer {flex-grow: 1;}
 
   .grow {flex-grow: 1;flex-basis: auto;}
