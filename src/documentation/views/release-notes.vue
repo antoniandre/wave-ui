@@ -24,6 +24,17 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.30.0
+      ul
+        li
+          | added a new #[code css] config to allow:
+          ul
+            li breakpoint css layout classes
+            li 12-column or any custom grid (like 24-column)
+        li.red custom color shades: disableColorShades is now replaced with css.colorShades
+        li added #[code="lh[x]"] classes to control the text line-height
+
+    li.minor
       strong.version v1.29.0
       p #[strong.code w-table]
       ul
