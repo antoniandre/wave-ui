@@ -1,5 +1,7 @@
+// The CSS variables are used in the dynamic-css in order to reuse the same SCSS variable presets.
 :root {
   --base-increment: #{$base-increment};
+  --css-scope: #{$css-scope};
 }
 
 #{$css-scope} {
