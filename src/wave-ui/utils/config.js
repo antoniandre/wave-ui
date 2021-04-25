@@ -16,7 +16,9 @@ const config = {
     // colorPalette: true,
 
     breakpointSpaces: false, // Generate margin & padding classes for each breakpoint. E.g. `sm-ma2`.
-    breakpointLayoutClasses: false, // Generate helper classes for each breakpoint. E.g. `sm-text-left`.
+    // Generate helper classes for each breakpoint.
+    // E.g. `sm-text-left`, `xs-hide`.
+    breakpointLayoutClasses: true,
     grid: 12
   },
   colors: {
