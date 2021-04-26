@@ -114,11 +114,16 @@ main
     .justify-space-evenly {justify-content: space-evenly;}
 
   p.mt6.
-    To use them on a particular breakpoint, the syntax is: #[code=".[breakpoint]-[class]"], with:
+    To use them on a particular breakpoint, the syntax is: #[code=".[breakpoint][extend]-[class]"], with:
   ul
-    li #[span.code="[breakpoint]"] one of: #[code xs], #[code sm], #[code md], #[code lg], #[code xl].
-    li #[span.code="[class]"] one of the above CSS class name.
+    li #[strong.code="[breakpoint]"] one of: #[code xs], #[code sm], #[code md], #[code lg], #[code xl].
+    li.
+      #[strong.code="[extend]"] one of #[code u] (and up), #[code d] (and down) and
+      #[strong no character] to target only this breakpoint.
+    li #[strong.code="[class]"] one of the above CSS class name.
 
+  alert(info).
+    Note that #[code=".xsd-[class]"] and #[code=".xlu-[class]"] don't exist since they are the same as #[code=".xs-[class]"] and #[code=".xl-[class]"].
   p.mt6.
     In these two examples, resize your browser to less than 900px (default #[code md]) to see see the
     layout changed.
@@ -150,6 +155,16 @@ main
         &lt;span&gt;Some text in the center.&lt;/span&gt;
         &lt;span&gt;Some text on the right.&lt;/span&gt;
       &lt;/div&gt;
+
+  alert(tip)
+    | If you'd rather not have these CSS layout classes, you can disable them via the
+    | #[code breakpointLayoutClasses] config.
+    ssh-pre(language="js").mb0.
+      const waveui = new WaveUI({
+        css: {
+          breakpointLayoutClasses: false
+        }
+      })
 
   title-link(h2) Setting custom breakpoints
   p.mt4 You can override the default breakpoints values with:
