@@ -27,12 +27,26 @@ main
       strong.version v1.30.0
       ul
         li
-          | added a new #[code css] config to allow:
+          | added a new #[code css] object config:
           ul
-            li breakpoint css layout classes
-            li 12-column or any custom grid (like 24-column)
-        li.red custom color shades: disableColorShades is now replaced with css.colorShades
-        li added #[code="lh[x]"] classes to control the text line-height
+            li
+              | Control the generated CSS to add/remove breakpoint-specific css layout classes.
+              | Read more in
+              router-link.ml1(to="/layout--flex") Layout &gt; flex
+              | .
+            li
+              | allow 12-column or any custom grid (like 24-column).
+              | Read more in
+              router-link.ml1(to="/layout--grid") Layout &gt; grid
+              | .
+            li.red custom color shades: disableColorShades is now replaced with css.colorShades
+        li added the #[code show] &amp; #[code hide] CSS layout classes
+        li
+          | added #[code="lh[x]"] classes to control the text line-height
+          | Read more in
+          router-link.ml1(to="/typography") Typography
+          | .
+
 
     li.minor
       strong.version v1.29.0
