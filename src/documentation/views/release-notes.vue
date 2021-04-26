@@ -39,7 +39,8 @@ main
               | Read more in
               router-link.ml1(to="/layout--grid") Layout &gt; grid
               | .
-            li.red custom color shades: disableColorShades is now replaced with css.colorShades
+            li.red
+              strong custom color shades: disableColorShades is now replaced with css.colorShades
         li added the #[code show] &amp; #[code hide] CSS layout classes
         li
           | added #[code="lh[x]"] classes to control the text line-height
@@ -53,7 +54,7 @@ main
       p #[strong.code w-table]
       ul
         li.red
-          strong The #[code item] slot not designates the &lt;tr&gt; and #[code item-cell] each table cell.
+          strong The #[code item] slot now designates the &lt;tr&gt; and #[code item-cell] each table cell.
         li Allow full customization of the &lt;tr&gt; using the #[code item] slot.
         li Allow &lt;tr&gt; bg-color overrides.
         li Emit a #[code row-click] event on &lt;tr&gt; click.
