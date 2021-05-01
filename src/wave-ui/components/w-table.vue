@@ -77,7 +77,7 @@
                 :class="`text-${header.align || 'left'}`"
                 v-html="item[header.key] || ''")
           w-transition-expand(y)
-            tr.w-table__row(v-if="expandedRows === item.uid")
+            tr.w-table__row(v-if="expandedRowsInternal === item.uid")
               td(:colspan="headers.length")
                 slot(name="expanded-row") expanded row
 
@@ -99,6 +99,7 @@ export default {
     loading: { type: Boolean },
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
+
     expandableRows: {
       validator: value => {
         if (![undefined, true, false, 1, '1', ''].includes(value)) {
@@ -110,6 +111,9 @@ export default {
         return true
       }
     },
+    // Allow providing the expanded rows and keeping it in sync via .sync in Vue 2 or v-model:expandedRows in Vue 3.
+    expandedRows: { type: Array },
+
     selectableRows: {
       validator: value => {
         if (![undefined, true, false, 1, '1', ''].includes(value)) {
@@ -121,23 +125,30 @@ export default {
         return true
       }
     },
+    // Allow providing the selected rows and keeping it in sync via .sync in Vue 2 or v-model:selectedRows in Vue 3.
+    selectedRows: { type: Array },
+
     forceSelection: { type: Boolean },
+
+    // Useful to select or expand a row, and even after a filter, the same row will stay selected or exanded.
+    uidKey: { type: String, default: 'id' },
+
     filter: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 }
   },
 
-  emits: ['update:sort', 'row-select', 'row-expand', 'row-click'],
+  emits: ['row-select', 'row-expand', 'row-click', 'update:sort', 'update:selected-rows', 'update:expanded-rows'],
 
   data: () => ({
     activeSorting: [],
-    selectedRows: [], // Array of uids.
-    expandedRows: [] // Array of uids.
+    selectedRowsInternal: [], // Array of uids.
+    expandedRowsInternal: [] // Array of uids.
   }),
 
   computed: {
     tableItems () {
       return this.items.map((item, i) => {
-        item.uid = i
+        item.uid = item[this.uidKey] !== undefined ? item[this.uidKey] : i
         return item
       })
     },
@@ -192,12 +203,12 @@ export default {
 
     // Faster lookup than array.includes(uid) and also cached.
     selectedRowsByUid () {
-      return this.selectedRows.reduce((obj, uid) => (obj[uid] = true) && obj, {})
+      return this.selectedRowsInternal.reduce((obj, uid) => (obj[uid] = true) && obj, {})
     },
 
     // Faster lookup than array.includes(uid) and also cached.
     expandedRowsByUid () {
-      return this.expandedRows.reduce((obj, uid) => (obj[uid] = true) && obj, {})
+      return this.expandedRowsInternal.reduce((obj, uid) => (obj[uid] = true) && obj, {})
     }
   },
 
@@ -236,31 +247,35 @@ export default {
       if (expandable) {
         const isExpanding = this.expandedRowsByUid[item.uid] === undefined
         if (isExpanding) {
-          if (this.expandableRows === '1') this.expandedRows = [item.uid]
-          else this.expandedRows.push(item.uid)
+          if (this.expandableRows.toString() === '1') this.expandedRowsInternal = [item.uid]
+          else this.expandedRowsInternal.push(item.uid)
         }
-        else this.expandedRows = this.expandedRows.filter(uid => uid !== item.uid)
+        else this.expandedRowsInternal = this.expandedRowsInternal.filter(uid => uid !== item.uid)
+
         this.$emit(
           'row-expand',
           {
             item,
             index,
             expanded: isExpanding,
-            expandedRows: this.expandedRows.map(uid => this.filteredItems[uid])
+            expandedRows: this.expandedRowsInternal.map(uid => this.filteredItems[uid])
           }
         )
+
+        // Keep external `expanded-rows.sync` updated.
+        this.$emit('update:expanded-rows', this.expandedRowsInternal)
       }
 
       else if (selectable) {
         let updated = false
         const isSelecting = this.selectedRowsByUid[item.uid] === undefined
         if (isSelecting) {
-          if (this.selectableRows === '1') this.selectedRows = [item.uid]
-          else this.selectedRows.push(item.uid)
+          if (this.selectableRows.toString() === '1') this.selectedRowsInternal = [item.uid]
+          else this.selectedRowsInternal.push(item.uid)
           updated = true
         }
-        else if (!this.forceSelection || this.selectedRows.length > 1) {
-          this.selectedRows = this.selectedRows.filter(uid => uid !== item.uid)
+        else if (!this.forceSelection || this.selectedRowsInternal.length > 1) {
+          this.selectedRowsInternal = this.selectedRowsInternal.filter(uid => uid !== item.uid)
           updated = true
         }
 
@@ -272,9 +287,12 @@ export default {
               item,
               index,
               selected: isSelecting,
-              selectedRows: this.selectedRows.map(uid => this.filteredItems[uid])
+              selectedRows: this.selectedRowsInternal.map(uid => this.filteredItems[uid])
             }
           )
+
+          // Keep external `selected-rows.sync` updated.
+          this.$emit('update:selected-rows', this.selectedRowsInternal)
         }
       }
 
@@ -285,6 +303,9 @@ export default {
   created () {
     if (!this.sort) this.activeSorting = []
     else this.activeSorting = Array.isArray(this.sort) ? this.sort : [this.sort]
+
+    if ((this.expandedRows || []).length) this.expandedRowsInternal = this.expandedRows
+    if ((this.selectedRows || []).length) this.selectedRowsInternal = this.selectedRows
   },
 
   watch: {
@@ -294,13 +315,21 @@ export default {
     },
 
     expandableRows (value) {
-      if (!value) this.expandedRows = []
-      else if (value.toString() === '1') this.expandedRows = this.expandedRows.slice(0, 1)
+      if (!value) this.expandedRowsInternal = []
+      else if (value.toString() === '1') this.expandedRowsInternal = this.expandedRowsInternal.slice(0, 1)
+    },
+
+    expandedRows (array) {
+      this.expandedRowsInternal = Array.isArray(array) && array.length ? this.expandedRows: []
     },
 
     selectableRows (value) {
-      if (!value) this.selectedRows = []
-      else if (value.toString() === '1') this.selectedRows = this.selectedRows.slice(0, 1)
+      if (!value) this.selectedRowsInternal = []
+      else if (value.toString() === '1') this.selectedRowsInternal = this.selectedRowsInternal.slice(0, 1)
+    },
+
+    selectedRows (array) {
+      this.selectedRowsInternal = Array.isArray(array) && array.length ? this.selectedRows: []
     }
   }
 }
