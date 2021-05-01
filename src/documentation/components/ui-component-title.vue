@@ -10,7 +10,7 @@
       w-icon.ml-1.mr1.chevron-down(lg) wi-chevron-down
       | Jump to the API
 
-  alert.mt4.mb12(warning).
+  alert.mt4.mb12(v-if="inProgress" warning).
     While a component is in progress, the props, slots and events may change when you upgrade.#[br]
     Always keep track in the #[router-link(to="/release-notes") release notes].
 </template>

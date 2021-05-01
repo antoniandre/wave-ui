@@ -6,6 +6,21 @@ const config = {
     lg: 1700,
     xl: 9999 // Xl only needs a greater value than lg but starts from lg and goes to infinity.
   },
+  css: {
+    // Generate shades for custom colors and status colors.
+    // Palette color shades are always generated with palette.
+    colorShades: true,
+
+    // Generate palette colors and palette color shades.
+    // Can't have this option: color palette is generated via SCSS in colors.scss.
+    // colorPalette: true,
+
+    breakpointSpaces: false, // Generate margin & padding classes for each breakpoint. E.g. `sm-ma2`.
+    // Generate helper classes for each breakpoint.
+    // E.g. `sm-text-left`, `xs-hide`.
+    breakpointLayoutClasses: true,
+    grid: 12
+  },
   colors: {
     primary: '#234781',
     secondary: '#d3ebff',
@@ -21,10 +36,10 @@ const config = {
 
 export { config as default }
 
-export const mergeConfig = options => {
+export const mergeConfig = (options, conf = config) => {
   for (let key in options) {
     const option = options[key]
-    if (typeof option === 'object') Object.assign(config[key], option)
-    else config[key] = option
+    if (typeof option === 'object') mergeConfig(options[key], conf[key])
+    else conf[key] = option
   }
 }

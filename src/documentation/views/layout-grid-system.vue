@@ -2,11 +2,21 @@
 main
   title-link.mt4(h1) Grid system
 
-  .title3 The grid system (using flexbox) is 12-cell based.
+  .title3 The grid system (using flexbox) is 12-cell based by default.
   p.
     Its purpose is to divide the available width (in percentage)
     of a container in 12 cells to easily let you create the design that you want.#[br]
     You can then assign this created layout to a particular breakpoint.
+
+  alert(info)
+    | The grid is 12-cell based by default, but you can override it to make it a 24-cell grid,
+    | or whatever you want via the global Wave UI options:
+    ssh-pre(language="js").mb0.
+      new WaveUI({
+        css: {
+          grid: 24
+        }
+      })
 
   title-link(h2) Basic grid
   p.

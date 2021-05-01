@@ -71,7 +71,7 @@ export default {
     shadow: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue', 'focus'],
+  emits: ['input', 'update:modelValue', 'focus', 'item-expand'],
 
   computed: {
     accordionItems () {
@@ -98,12 +98,12 @@ export default {
 
   methods: {
     toggleItem (item, e) {
-
       item._expanded = !item._expanded
       if (this.expandSingle) this.accordionItems.forEach(obj => obj._index !== item._index && (obj._expanded = false))
       const expandedItems = this.accordionItems.map(item => item._expanded || false)
       this.$emit('update:modelValue', expandedItems)
       this.$emit('input', expandedItems)
+      this.$emit('item-expand', { item, expanded: item._expanded })
 
       // When a focused item moves in the page, the scrollTop is naturally updated by the browser.
       // So if expandSingle is set to true, clicking on the next title of an open pane would shift the
