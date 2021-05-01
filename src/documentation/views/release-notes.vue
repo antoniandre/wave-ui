@@ -24,6 +24,60 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.31.0
+      p #[strong.code w-table]: Added support for programmatic row selection. #[issue-link 50]
+
+    li.minor
+      strong.version v1.30.0
+      ul
+        li
+          | added a new #[code css] object config:
+          ul
+            li
+              | Control the generated CSS to add/remove breakpoint-specific css layout classes.
+              | Read more in
+              router-link.ml1(to="/layout--flex") Layout &gt; flex
+              | .
+            li
+              | allow 12-column or any custom grid (like 24-column).
+              | Read more in
+              router-link.ml1(to="/layout--grid") Layout &gt; grid
+              | .
+            li.red
+              strong custom color shades: disableColorShades is now replaced with css.colorShades
+        li added the #[code show] &amp; #[code hide] CSS layout classes
+        li
+          | added #[code="lh[x]"] classes to control the text line-height
+          | Read more in
+          router-link.ml1(to="/typography") Typography
+          | .
+
+
+    li.minor
+      strong.version v1.29.0
+      p #[strong.code w-table]
+      ul
+        li.red
+          strong The #[code item] slot now designates the &lt;tr&gt; and #[code item-cell] each table cell.
+        li Allow full customization of the &lt;tr&gt; using the #[code item] slot.
+        li Allow &lt;tr&gt; bg-color overrides.
+        li Emit a #[code row-click] event on &lt;tr&gt; click.
+
+    li.patch
+      strong.version v1.28.1
+      p.
+        #[strong.code w-tabs]: Fix the tabs bar center and right alignment after adding the
+        #[code tabs-bar-extra] slot.
+
+    li.minor
+      strong.version v1.28.0
+      p Emit #[code item-expand] on #[strong.code w-accordion] item expand/collapse.
+
+    li.patch
+      strong.version v1.27.3
+      p Improve the #[strong.code w-tooltip] component and emit events on tooltip open and close.
+
+    li.minor
       strong.version v1.27.0
       p #[strong.code w-table]
       ul

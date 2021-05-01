@@ -1,6 +1,7 @@
 <template lang="pug">
 .example
-  .w-flex
+  //- .fill-height in case the example is in a flex column.
+  .w-flex.fill-height
     .example__render.grow(:class="contentClass")
       slot
     .buttons

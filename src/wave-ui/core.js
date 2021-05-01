@@ -2,6 +2,7 @@ import { reactive } from 'vue'
 import config, { mergeConfig } from './utils/config'
 import colors from './utils/colors'
 // import * as directives from './directives'
+import { consoleWarn } from './utils/console'
 
 const shadeColor = (col, amt) => {
   return '#' + col.slice(1).match(/../g)
@@ -65,11 +66,19 @@ export default class WaveUI {
     else {
       if (!WaveUI.registered) app.use(WaveUI)
 
-      // Merge user options into default config.
+      // Merge user options into the default config.
       mergeConfig(options)
 
+      // @todo: remove this warning in version 1.40+.
+      if (config.disableColorShades) {
+        consoleWarn(
+          'WARNING - Since version 1.30 (Vue 2) & 2.17 (Vue 3), the option `disableColorShades` is replaced with `css.colorShades`.\n' +
+          'https://antoniandre.github.io/wave-ui/release-notes'
+        )
+      }
+
       // Add color shades for each custom color given in options.
-      if (!options.disableColorShades) {
+      if (config.css.colorShades) {
         config.colorShades = {}
 
         for (let color in config.colors) {

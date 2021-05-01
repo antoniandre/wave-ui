@@ -30,24 +30,53 @@
             slot(name="loading") Loading...
       template(v-else-if="tableItems.length")
         template(v-for="(item, i) in sortedItems" :key="i")
+          slot(
+            v-if="$slots.item"
+            name="item"
+            :item="item"
+            :index="i + 1"
+            :select="() => doSelectRow(item, i)"
+            :classes="{ 'w-table__row--selected': selectedRowsByUid[item.uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item.uid] !== undefined }")
+
           tr.w-table__row(
-            @click="doSelectRow(item)"
+            v-else
+            @click="doSelectRow(item, i)"
             :class="{ 'w-table__row--selected': selectedRowsByUid[item.uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item.uid] !== undefined }")
             template(v-for="(header, j) in headers")
               td.w-table__cell(
-                v-if="$slots.item"
-                :key="`${j}-1`"
+                v-if="$slots[`item-cell.${header.key}`] || $slots[`item-cell.${j + 1}`] || $slots['item-cell']"
+                :key="`${j}-a`"
                 :data-label="header.label"
                 :class="`text-${header.align || 'left'}`")
-                slot(name="item" :header="header" :item="item" :label="item[header.key] || ''" :index="i + 1")
+                slot(
+                  v-if="$slots[`item-cell.${header.key}`]"
+                  :name="`item-cell.${header.key}`"
+                  :header="header"
+                  :item="item"
+                  :label="item[header.key] || ''"
+                  :index="i + 1")
+                slot(
+                  v-else-if="$slots[`item-cell.${j + 1}`]"
+                  :name="`item-cell.${j + 1}`"
+                  :header="header"
+                  :item="item"
+                  :label="item[header.key] || ''"
+                  :index="i + 1")
+                slot(
+                  v-else-if="$slots['item-cell']"
+                  name="item-cell"
+                  :header="header"
+                  :item="item"
+                  :label="item[header.key] || ''"
+                  :index="i + 1")
               td.w-table__cell(
                 v-else
-                :key="`${j}-2`"
+                :key="`${j}-b`"
                 :data-label="header.label"
                 :class="`text-${header.align || 'left'}`"
                 v-html="item[header.key] || ''")
           w-transition-expand(y)
-            tr.w-table__row(v-if="expandedRows === item.uid")
+            tr.w-table__row(v-if="expandedRowsInternal === item.uid")
               td(:colspan="headers.length")
                 slot(name="expanded-row") expanded row
 
@@ -69,6 +98,7 @@ export default {
     loading: { type: Boolean },
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
+
     expandableRows: {
       validator: value => {
         if (![undefined, true, false, 1, '1', ''].includes(value)) {
@@ -80,6 +110,9 @@ export default {
         return true
       }
     },
+    // Allow providing the expanded rows and keeping it in sync via .sync in Vue 2 or v-model:expandedRows in Vue 3.
+    expandedRows: { type: Array },
+
     selectableRows: {
       validator: value => {
         if (![undefined, true, false, 1, '1', ''].includes(value)) {
@@ -91,26 +124,34 @@ export default {
         return true
       }
     },
+    // Allow providing the selected rows and keeping it in sync via .sync in Vue 2 or v-model:selectedRows in Vue 3.
+    selectedRows: { type: Array },
+
     forceSelection: { type: Boolean },
+
+    // Useful to select or expand a row, and even after a filter, the same row will stay selected or exanded.
+    uidKey: { type: String, default: 'id' },
+
     filter: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 }
   },
 
-  emits: ['update:sort', 'row-select'],
+  emits: ['row-select', 'row-expand', 'row-click', 'update:sort', 'update:selected-rows', 'update:expanded-rows'],
 
   data: () => ({
     activeSorting: [],
-    selectedRows: [], // Array of uids.
-    expandedRows: [] // Array of uids.
+    selectedRowsInternal: [], // Array of uids.
+    expandedRowsInternal: [] // Array of uids.
   }),
 
   computed: {
     tableItems () {
       return this.items.map((item, i) => {
-        item.uid = i
+        item.uid = item[this.uidKey] !== undefined ? item[this.uidKey] : i
         return item
       })
     },
+
     filteredItems () {
       if (typeof this.filter === 'function') return this.tableItems.filter(this.filter)
       return this.tableItems
@@ -161,12 +202,12 @@ export default {
 
     // Faster lookup than array.includes(uid) and also cached.
     selectedRowsByUid () {
-      return this.selectedRows.reduce((obj, uid) => (obj[uid] = true) && obj, {})
+      return this.selectedRowsInternal.reduce((obj, uid) => (obj[uid] = true) && obj, {})
     },
 
     // Faster lookup than array.includes(uid) and also cached.
     expandedRowsByUid () {
-      return this.expandedRows.reduce((obj, uid) => (obj[uid] = true) && obj, {})
+      return this.expandedRowsInternal.reduce((obj, uid) => (obj[uid] = true) && obj, {})
     }
   },
 
@@ -198,34 +239,42 @@ export default {
       this.$emit('update:sort', this.activeSorting)
     },
 
-    doSelectRow (item) {
-      if (this.expandableRows) {
+    doSelectRow (item, index) {
+      const expandable = this.expandableRows === '' ? true : this.expandableRows
+      const selectable = this.selectableRows === '' ? true : this.selectableRows
+
+      if (expandable) {
         const isExpanding = this.expandedRowsByUid[item.uid] === undefined
         if (isExpanding) {
-          if (this.expandableRows.toString() === '1') this.expandedRows = [item.uid]
-          else this.expandedRows.push(item.uid)
+          if (this.expandableRows.toString() === '1') this.expandedRowsInternal = [item.uid]
+          else this.expandedRowsInternal.push(item.uid)
         }
-        else this.expandedRows = this.expandedRows.filter(uid => uid !== item.uid)
+        else this.expandedRowsInternal = this.expandedRowsInternal.filter(uid => uid !== item.uid)
+
         this.$emit(
           'row-expand',
           {
             item,
+            index,
             expanded: isExpanding,
-            expandedRows: this.expandedRows.map(uid => this.filteredItems[uid])
+            expandedRows: this.expandedRowsInternal.map(uid => this.filteredItems[uid])
           }
         )
+
+        // Keep external `expanded-rows.sync` updated.
+        this.$emit('update:expanded-rows', this.expandedRowsInternal)
       }
 
-      else if (this.selectableRows) {
+      else if (selectable) {
         let updated = false
         const isSelecting = this.selectedRowsByUid[item.uid] === undefined
         if (isSelecting) {
-          if (this.selectableRows.toString() === '1') this.selectedRows = [item.uid]
-          else this.selectedRows.push(item.uid)
+          if (this.selectableRows.toString() === '1') this.selectedRowsInternal = [item.uid]
+          else this.selectedRowsInternal.push(item.uid)
           updated = true
         }
-        else if (!this.forceSelection || this.selectedRows.length > 1) {
-          this.selectedRows = this.selectedRows.filter(uid => uid !== item.uid)
+        else if (!this.forceSelection || this.selectedRowsInternal.length > 1) {
+          this.selectedRowsInternal = this.selectedRowsInternal.filter(uid => uid !== item.uid)
           updated = true
         }
 
@@ -235,18 +284,27 @@ export default {
             'row-select',
             {
               item,
+              index,
               selected: isSelecting,
-              selectedRows: this.selectedRows.map(uid => this.filteredItems[uid])
+              selectedRows: this.selectedRowsInternal.map(uid => this.filteredItems[uid])
             }
           )
+
+          // Keep external `selected-rows.sync` updated.
+          this.$emit('update:selected-rows', this.selectedRowsInternal)
         }
       }
+
+      this.$emit('row-click', { item, index })
     }
   },
 
   created () {
     if (!this.sort) this.activeSorting = []
     else this.activeSorting = Array.isArray(this.sort) ? this.sort : [this.sort]
+
+    if ((this.expandedRows || []).length) this.expandedRowsInternal = this.expandedRows
+    if ((this.selectedRows || []).length) this.selectedRowsInternal = this.selectedRows
   },
 
   watch: {
@@ -256,13 +314,21 @@ export default {
     },
 
     expandableRows (value) {
-      if (!value) this.expandedRows = []
-      else if (value.toString() === '1') this.expandedRows = this.expandedRows.slice(0, 1)
+      if (!value) this.expandedRowsInternal = []
+      else if (value.toString() === '1') this.expandedRowsInternal = this.expandedRowsInternal.slice(0, 1)
+    },
+
+    expandedRows (array) {
+      this.expandedRowsInternal = Array.isArray(array) && array.length ? this.expandedRows: []
     },
 
     selectableRows (value) {
-      if (!value) this.selectedRows = []
-      else if (value.toString() === '1') this.selectedRows = this.selectedRows.slice(0, 1)
+      if (!value) this.selectedRowsInternal = []
+      else if (value.toString() === '1') this.selectedRowsInternal = this.selectedRowsInternal.slice(0, 1)
+    },
+
+    selectedRows (array) {
+      this.selectedRowsInternal = Array.isArray(array) && array.length ? this.selectedRows: []
     }
   }
 }
@@ -340,8 +406,10 @@ export default {
   // Table body.
   // ------------------------------------------------------
   tbody tr {border-top: 1px solid rgba(0, 0, 0, 0.06);}
-  tbody tr:nth-child(odd):not(.no-data) {background-color: $table-tr-odd-color;}
-  tbody .w-table__row:hover:not(.no-data) {background-color: $table-tr-hover-color;}
+  // Don't apply built-in bg color if a bg color is already found on a tr.
+  tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: $table-tr-odd-color;}
+  tbody .w-table__row:hover:not(.no-data):not([class*="--bg"]) {background-color: $table-tr-hover-color;}
+
   &__row--selected td {position: relative;}
   &__row--selected td:before {
     content: '';
