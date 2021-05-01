@@ -639,6 +639,70 @@ div
         selectionInfo: {}
       })
 
+  title-link(h3) Updating the selected rows programmatically
+  p.
+    Wave UI offers a convenient way to provide an array of selected rows and keeping your array in sync
+    with the selected rows after user interaction.
+  alert(tip)
+    ul
+      li #[strong In Vue 2], you can do 2-way binding on any variable other than the #[strong.code v-model] using the #[code .sync] modifier.
+      li #[strong In Vue 3], multiple #[strong.code v-model] are supported in order to achieve 2-way binding. So you don't need #[code .sync].
+
+  example
+    w-table(
+      :headers="table1.headers"
+      :items="table1.items"
+      selectable-rows
+      :selected-rows.sync="table1.selectedRows")
+    .mt4
+      | Selected rows:
+      code.ml2 {{ table1.selectedRows }}
+    //- template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        selectable-rows
+        :selected-rows.sync="table.selectedRows")
+      .mt4
+        | Selected rows:
+        code.ml2 {{ '\{\{ table.selectedRows \}\}' }}
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        selectable-rows
+        :selected-rows.sync="table.selectedRows"&gt;
+      &lt;/w-table&gt;
+
+      &lt;div class="mt4"&gt;
+        Selected rows:
+        &lt;code class="ml2"&gt;{{ '\{\{ table.selectedRows \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ],
+          selectedRows: [2, 4]
+        }
+      })
+  alert(info).
+    In order to keep the same row selected after sorting or filtering, rows have unique identifiers.#[br]
+    By default the expanded rows array will use an #[code id] key, if present in the item object,
+    or will assign an internal unique ID otherwise.
+    If you want you can override the default unique ID (when internally needed) with
+    the #[code uid-key] prop, which is set to "id" by default.
+
   title-link(h2) Expandable rows
   example
     | Coming soon.
@@ -1009,6 +1073,7 @@ export default {
       sort: '+firstName',
       loading: true,
       selectableRows: true,
+      selectedRows: [2, 4],
       forceSelection: false
     },
     table2: {
