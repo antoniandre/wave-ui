@@ -47,7 +47,51 @@ const slots = {
   }
 }
 
-const events = {}
+const events = {
+  'row-click': {
+    description: '',
+    params: {
+      'item': 'The associated row item object.',
+      'index': 'The index of the row being clicked (starts at 0 in the current filtering state).'
+    }
+  },
+  'row-select': {
+    description: '<strong>This event fires on both selecting and unselecting a row</strong> (so you need only one listener for both), and a boolean is returned to know the selected state.',
+    params: {
+      item: 'The associated row item object.',
+      index: 'The index of the row being selected (starts at 0) in the current filtering state.',
+      selected: 'A boolean representing the selected state of the clicked row.',
+      selectedRows: ''
+    }
+  },
+  'row-expand': {
+    description: '<strong>This event fires on both expanding and collapsing a row</strong> (so you need only one listener for both), and a boolean is returned to know the expanded state.',
+    params: {
+      item: 'The associated row item object.',
+      index: 'The index of the row being expanded (starts at 0) in the current filtering state.',
+      selected: 'A boolean representing the selected state of the clicked row.',
+      selectedRows: ''
+    }
+  },
+  'update:sort': {
+    description: 'Emitted every time the sorting string is updated by a user interaction.',
+    params: {
+      '[String]': 'The currently applied sorting on the table rows. E.g. <code>+firstName</code>'
+    }
+  },
+  'update:selected-rows': {
+    description: 'Emitted every time the selected-rows array changes. To be used with <code>:selected-rows.sync</code> on Vue 2.x or <code>v-model:selected-rows</code> on Vue 3.',
+    params: {
+      '[Array]': 'The current array of selected rows.'
+    }
+  },
+  'update:expanded-rows': {
+    description: 'Emitted every time the expanded-rows array changes. To be used with <code>:expanded-rows.sync</code> on Vue 2.x or <code>v-model:expanded-rows</code> on Vue 3.',
+    params: {
+      '[Array]': 'The current array of expanded rows.'
+    }
+  }
+}
 
 export default {
   data: () => ({
