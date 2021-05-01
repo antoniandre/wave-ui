@@ -38,12 +38,12 @@
     "@vue/cli-plugin-eslint": "^4.5.12",
     "@vue/cli-plugin-router": "^4.5.12",
     "@vue/cli-service": "^4.5.12",
-    "@vue/compiler-sfc": "^3.0.9",
+    "@vue/compiler-sfc": "^3.0.11",
     "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
-    "core-js": "^3.9.1",
-    "eslint": "^7.23.0",
-    "eslint-plugin-vue": "^7.8.0",
+    "core-js": "^3.11.1",
+    "eslint": "^7.25.0",
+    "eslint-plugin-vue": "^7.9.0",
     "font-awesome": "^4.7.0",
     "ghspa": "^1.0.0",
     "gsap": "^3.6.1",
@@ -53,11 +53,11 @@
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^10.1.1",
-    "simple-syntax-highlighter": "^2.0.4",
+    "simple-syntax-highlighter": "^2.0.5",
     "splitpanes": "^3.0.3",
     "vue": "^3.0.11",
-    "vue-router": "^4.0.5",
+    "vue-router": "^4.0.6",
     "vue-svg-loader": "^0.16.0",
-    "vueperslides": "^3.1.0"
+    "vueperslides": "^3.3.0"
   }
 }
