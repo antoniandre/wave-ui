@@ -24,6 +24,10 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.31.0
+      p #[strong.code w-table]: Added support for programmatic row selection. #[issue-link 50]
+
+    li.minor
       strong.version v1.30.0
       ul
         li
