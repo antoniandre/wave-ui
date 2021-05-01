@@ -185,22 +185,22 @@ div.tooltips-demo
       | {{ showTooltip ? 'Hide' : 'Show' }} tooltip
 
     div.d-iblock.my2.mx6
-      w-tooltip.ma2(:value="showTooltip" show-on-click left)
+      w-tooltip.ma2(:model-value="showTooltip" show-on-click left)
         template(#activator="{ on }")
           w-icon(v-on="on") wi-star
         | Star
 
-      w-tooltip.ma2(:value="showTooltip" show-on-click top)
+      w-tooltip.ma2(:model-value="showTooltip" show-on-click top)
         template(#activator="{ on }")
           w-icon(v-on="on") wi-star
         | Star
 
-      w-tooltip.ma2(:value="showTooltip" show-on-click)
+      w-tooltip.ma2(:model-value="showTooltip" show-on-click)
         template(#activator="{ on }")
           w-icon(v-on="on") wi-star
         | Star
 
-      w-tooltip.ma2(:value="showTooltip" show-on-click right)
+      w-tooltip.ma2(:model-value="showTooltip" show-on-click right)
         template(#activator="{ on }")
           w-icon(v-on="on") wi-star
         | Star

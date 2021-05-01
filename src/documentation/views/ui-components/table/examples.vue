@@ -653,7 +653,7 @@ div
       :headers="table1.headers"
       :items="table1.items"
       selectable-rows
-      :selected-rows.sync="table1.selectedRows")
+      v-model:selected-rows="table1.selectedRows")
     .mt4
       | Selected rows:
       code.ml2 {{ table1.selectedRows }}
@@ -662,7 +662,7 @@ div
         :headers="table.headers"
         :items="table.items"
         selectable-rows
-        :selected-rows.sync="table.selectedRows")
+        v-model:selected-rows="table.selectedRows")
       .mt4
         | Selected rows:
         code.ml2 {{ '\{\{ table.selectedRows \}\}' }}
@@ -671,7 +671,7 @@ div
         :headers="table.headers"
         :items="table.items"
         selectable-rows
-        :selected-rows.sync="table.selectedRows"&gt;
+        v-model:selected-rows="table.selectedRows"&gt;
       &lt;/w-table&gt;
 
       &lt;div class="mt4"&gt;
