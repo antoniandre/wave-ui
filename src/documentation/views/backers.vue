@@ -28,7 +28,7 @@ main
       a.ml1(href="https://www.paypal.me/antoniandre1" target="_blank") make a donation
       | . Thank you! 🙏🙏
 
-    h2.gold Gold Sponsors
+    h2.gold Gold Sponsors 🔥
     .gold-sponsors
       a(href="https://divriots.com/" target="_blank")
         strong &lt;div&gt;riots
@@ -38,7 +38,7 @@ main
 <script>
 import axios from 'axios'
 
-const githubBackers = ['divriots', 'crbast', 'consuman', 'helenetran', 'antoniandre']
+const githubBackers = ['divriots', 'nmauersberg', 'crbast', 'bohdaq', 'consuman', 'helenetran', 'antoniandre']
 
 export default {
   data: () => ({
@@ -79,18 +79,31 @@ export default {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 3.5em;
-    height: 3.5em;
-    border-radius: 3.5em;
+    width: 4em;
+    height: 4em;
+    border-radius: 4em;
     background-color: #ddd;
     overflow: hidden;
   }
 }
 
 .gold-sponsors {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 
-  a {color: #000;}
-  strong {font-size: 2.5em;font-weight: 400;}
+  a {
+    color: #000;
+    background-color: rgba(0, 0, 0, 0.03);
+    width: 11em;
+    height: 11em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  strong {
+    font-size: 2em;
+    font-weight: 400;
+  }
 }
 </style>
