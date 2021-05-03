@@ -704,14 +704,30 @@ div
     the #[code uid-key] prop, which is set to "id" by default.
 
   title-link(h2) Expandable rows
+  alert(warning) This feature is in progress.
   example
-    | Coming soon.
-    //- w-table(:headers="table1.headers" :items="table1.items" expand-row)
-      template(#expanded-row) Super cool
+    w-table(:headers="table1.headers" :items="table5.items" expandable-rows)
+      template(#expanded-row="{ item }")
+        w-icon.mr2(:color="['blue', 'pink'][item.gender]") mdi {{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] }}
+        | {{ item.firstName }} weighs #[strong {{ item.weight }}kg] and is #[strong {{ item.height }}m] tall.
     //- template(#pug).
-      w-table(:headers="table1.headers" :items="table1.items" expand-row)
-        template(#expanded-row) Super cool
-    //- template(#js).
+      w-table(:headers="table.headers" :items="table.items" expandable-rows)
+        template(#expanded-row="{ item }")
+          w-icon.mr2(:color="['blue', 'pink'][item.gender]") mdi {{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] }}
+          | {{ item.firstName }} weighs #[strong {{ item.weight }}kg] and is #[strong {{ item.height }}m] tall.
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        expandable-rows&gt;
+        &lt;template #expanded-row="{ item }"&gt;
+          &lt;w-icon class="mr2" :color="['blue', 'pink'][item.gender]"&gt;
+            mdi {{ "\{\{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] \}\}" }}
+          &lt;/w-icon&gt;
+          {{ '\{\{ item.firstName \}\}' }} weighs #[strong {{ '\{\{ item.weight \}\}' }}kg] and is #[strong {{ '\{\{ item.height \}\}' }}m] tall.
+        &lt;/template&gt;
+      &lt;/w-table&gt;
+    template(#js).
       data: () => ({
         table: {
           headers: [
@@ -720,11 +736,11 @@ div
             { label: 'Last name', key: 'lastName' }
           ],
           items: [
-            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
-            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
-            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
-            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
-            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson', gender: 1, weight: 56, height: 1.69 },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn', gender: 1, weight: 62, height: 1.77 },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol', gender: 0, weight: 71, height: 1.75 },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott', gender: 0, weight: 84, height: 1.83 },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman', gender: 0, weight: 74, height: 1.72 }
           ]
         }
       })
@@ -1110,6 +1126,20 @@ export default {
         const allTheColumns = `${item.id} ${item.firstName} ${item.lastName}`
         return new RegExp(keyword, 'i').test(allTheColumns)
       }
+    },
+    table5: {
+      headers: [
+        { label: 'ID', key: 'id' },
+        { label: 'First name', key: 'firstName' },
+        { label: 'Last name', key: 'lastName' }
+      ],
+      items: [
+        { id: 1, firstName: 'Floretta', lastName: 'Sampson', gender: 1, weight: 56, height: 1.69 },
+        { id: 2, firstName: 'Nellie', lastName: 'Lynn', gender: 1, weight: 62, height: 1.77 },
+        { id: 3, firstName: 'Rory', lastName: 'Bristol', gender: 0, weight: 71, height: 1.75 },
+        { id: 4, firstName: 'Daley', lastName: 'Elliott', gender: 0, weight: 84, height: 1.83 },
+        { id: 5, firstName: 'Virgil', lastName: 'Carman', gender: 0, weight: 74, height: 1.72 }
+      ]
     },
     selectableRowsOptions: [
       { label: '<code class="mr2">:selectable-row="false"</code> (default)', value: false },
