@@ -36,13 +36,13 @@
             :item="item"
             :index="i + 1"
             :select="() => doSelectRow(item, i)"
-            :classes="{ 'w-table__row--selected': selectedRowsByUid[item.uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item.uid] !== undefined }")
+            :classes="{ 'w-table__row': true, 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--has-expanded': expandedRowsByUid[item._uid] !== undefined }")
 
           tr.w-table__row(
             v-else
             :key="i"
             @click="doSelectRow(item, i)"
-            :class="{ 'w-table__row--selected': selectedRowsByUid[item.uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item.uid] !== undefined }")
+            :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--has-expanded': expandedRowsByUid[item._uid] !== undefined }")
             template(v-for="(header, j) in headers")
               td.w-table__cell(
                 v-if="$scopedSlots[`item-cell.${header.key}`] || $scopedSlots[`item-cell.${j + 1}`] || $scopedSlots['item-cell']"
@@ -76,10 +76,10 @@
                 :data-label="header.label"
                 :class="`text-${header.align || 'left'}`"
                 v-html="item[header.key] || ''")
-          w-transition-expand(y)
-            tr.w-table__row(v-if="expandedRowsInternal === item.uid")
-              td(:colspan="headers.length")
-                slot(name="expanded-row") expanded row
+          tr.w-table__row.w-table__row--expanded(v-if="expandedRowsByUid[item._uid]")
+            td.w-table__cell(:colspan="headers.length")
+              div(v-if="expandedRowsByUid[item._uid]")
+                slot(name="expanded-row" :item="item" :index="i + 1")
 
       tr.no-data(v-else)
         td.w-table__cell.text-center(:colspan="headers.length")
@@ -148,7 +148,7 @@ export default {
   computed: {
     tableItems () {
       return this.items.map((item, i) => {
-        item.uid = item[this.uidKey] !== undefined ? item[this.uidKey] : i
+        item._uid = item[this.uidKey] !== undefined ? item[this.uidKey] : i
         return item
       })
     },
@@ -245,12 +245,12 @@ export default {
       const selectable = this.selectableRows === '' ? true : this.selectableRows
 
       if (expandable) {
-        const isExpanding = this.expandedRowsByUid[item.uid] === undefined
+        const isExpanding = this.expandedRowsByUid[item._uid] === undefined
         if (isExpanding) {
-          if (this.expandableRows.toString() === '1') this.expandedRowsInternal = [item.uid]
-          else this.expandedRowsInternal.push(item.uid)
+          if (this.expandableRows.toString() === '1') this.expandedRowsInternal = [item._uid]
+          else this.expandedRowsInternal.push(item._uid)
         }
-        else this.expandedRowsInternal = this.expandedRowsInternal.filter(uid => uid !== item.uid)
+        else this.expandedRowsInternal = this.expandedRowsInternal.filter(uid => uid !== item._uid)
 
         this.$emit(
           'row-expand',
@@ -268,14 +268,14 @@ export default {
 
       else if (selectable) {
         let updated = false
-        const isSelecting = this.selectedRowsByUid[item.uid] === undefined
+        const isSelecting = this.selectedRowsByUid[item._uid] === undefined
         if (isSelecting) {
-          if (this.selectableRows.toString() === '1') this.selectedRowsInternal = [item.uid]
-          else this.selectedRowsInternal.push(item.uid)
+          if (this.selectableRows.toString() === '1') this.selectedRowsInternal = [item._uid]
+          else this.selectedRowsInternal.push(item._uid)
           updated = true
         }
         else if (!this.forceSelection || this.selectedRowsInternal.length > 1) {
-          this.selectedRowsInternal = this.selectedRowsInternal.filter(uid => uid !== item.uid)
+          this.selectedRowsInternal = this.selectedRowsInternal.filter(uid => uid !== item._uid)
           updated = true
         }
 
