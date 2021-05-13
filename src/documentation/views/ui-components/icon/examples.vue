@@ -25,46 +25,46 @@ div.icons-demo
         w-icon.mr1(md color="primary") mdi mdi-heart
         w-icon.mr1(xl color="primary") mdi mdi-heart
         template(#html).
-          &lt;w-icon 
-            class="mr1" 
-            xs 
+          &lt;w-icon
+            class="mr1"
+            xs
             color="primary"&gt;
             mdi mdi-star
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
-            class="mr1" 
-            md 
+          &lt;w-icon
+            class="mr1"
+            md
             color="primary"&gt;
             mdi mdi-star
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
-            class="mr1" 
-            xl 
+          &lt;w-icon
+            class="mr1"
+            xl
             color="primary"&gt;
             mdi mdi-star
           &lt;/w-icon&gt;
 
           &lt;br /&gt;
 
-          &lt;w-icon 
-            class="mr1" 
-            xs 
+          &lt;w-icon
+            class="mr1"
+            xs
             color="primary"&gt;
             mdi mdi-heart
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
-            class="mr1" 
-            md 
+          &lt;w-icon
+            class="mr1"
+            md
             color="primary"&gt;
             mdi mdi-heart
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
-            class="mr1" 
-            xl 
+          &lt;w-icon
+            class="mr1"
+            xl
             color="primary"&gt;
             mdi mdi-heart
           &lt;/w-icon&gt;
@@ -94,46 +94,46 @@ div.icons-demo
         w-icon.mr1(md color="primary") material-icons favorite
         w-icon.mr1(xl color="primary") material-icons favorite
         template(#html).
-          &lt;w-icon 
+          &lt;w-icon
             class="mr1"
-            xs 
+            xs
             color="primary"&gt;
             material-icons star
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
+          &lt;w-icon
             class="mr1"
-            md 
+            md
             color="primary"&gt;
             material-icons star
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
+          &lt;w-icon
             class="mr1"
-            xl 
+            xl
             color="primary"&gt;
             material-icons star
           &lt;/w-icon&gt;
 
           &lt;br /&gt;
 
-          &lt;w-icon 
+          &lt;w-icon
             class="mr1"
-            xs 
+            xs
             color="primary"&gt;
             material-icons favorite
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
+          &lt;w-icon
             class="mr1"
-            md 
+            md
             color="primary"&gt;
             material-icons favorite
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
+          &lt;w-icon
             class="mr1"
-            xl 
+            xl
             color="primary"&gt;
             material-icons favorite
           &lt;/w-icon&gt;
@@ -178,22 +178,22 @@ div.icons-demo
             &lt;div class="mr8"&gt;
               &lt;div class="text-bold mb2 grey"&gt;iOS&lt;/div&gt;
               &lt;w-icon
-                class="mr1" 
-                xs 
+                class="mr1"
+                xs
                 color="primary"&gt;
                 ion-ios-star
               &lt;/w-icon&gt;
 
               &lt;w-icon
-                class="mr1" 
-                md 
+                class="mr1"
+                md
                 color="primary"&gt;
                 ion-ios-star
               &lt;/w-icon&gt;
 
               &lt;w-icon
-                class="mr1" 
-                xl 
+                class="mr1"
+                xl
                 color="primary"&gt;
                 ion-ios-star
               &lt;/w-icon&gt;
@@ -201,22 +201,22 @@ div.icons-demo
               &lt;br /&gt;
 
               &lt;w-icon
-                class="mr1" 
-                xs 
+                class="mr1"
+                xs
                 color="primary"&gt;
                 ion-ios-heart
               &lt;/w-icon&gt;
 
               &lt;w-icon
-                class="mr1" 
-                md 
+                class="mr1"
+                md
                 color="primary"&gt;
                 ion-ios-heart
               &lt;/w-icon&gt;
 
               &lt;w-icon
-                class="mr1" 
-                xl 
+                class="mr1"
+                xl
                 color="primary"&gt;
                 ion-ios-heart
               &lt;/w-icon&gt;
@@ -225,46 +225,46 @@ div.icons-demo
             &lt;div&gt;
               &lt;div class="text-bold mb2 grey"&gt;Material Design&lt;/div&gt;
 
-              &lt;w-icon 
-                class="mr1" 
-                xs 
+              &lt;w-icon
+                class="mr1"
+                xs
                 color="primary"&gt;
                 ion-md-star
               &lt;/w-icon&gt;
 
-              &lt;w-icon 
-                class="mr1" 
-                md 
+              &lt;w-icon
+                class="mr1"
+                md
                 color="primary"&gt;
                 ion-md-star
               &lt;/w-icon&gt;
 
-              &lt;w-icon 
-                class="mr1" 
-                xl 
+              &lt;w-icon
+                class="mr1"
+                xl
                 color="primary"&gt;
                 ion-md-star
               &lt;/w-icon&gt;
 
               &lt;br /&gt;
 
-              &lt;w-icon 
-                class="mr1" 
-                xs 
+              &lt;w-icon
+                class="mr1"
+                xs
                 color="primary"&gt;
                 ion-md-heart
               &lt;/w-icon&gt;
 
-              &lt;w-icon 
-                class="mr1" 
-                md 
+              &lt;w-icon
+                class="mr1"
+                md
                 color="primary"&gt;
                 ion-md-heart
               &lt;/w-icon&gt;
 
-              &lt;w-icon 
-                class="mr1" 
-                xl 
+              &lt;w-icon
+                class="mr1"
+                xl
                 color="primary"&gt;
                 ion-md-heart
               &lt;/w-icon&gt;
@@ -290,46 +290,46 @@ div.icons-demo
         w-icon.mr1(md color="primary") fa fa-heart
         w-icon.mr1(xl color="primary") fa fa-heart
         template(#html).
-          &lt;w-icon 
-            class="mr1" 
-            xs 
+          &lt;w-icon
+            class="mr1"
+            xs
             color="primary"&gt;
             fa fa-star
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
-            class="mr1" 
-            md 
+          &lt;w-icon
+            class="mr1"
+            md
             color="primary"&gt;
             fa fa-star
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
-            class="mr1" 
-            xl 
+          &lt;w-icon
+            class="mr1"
+            xl
             color="primary"&gt;
             fa fa-star
           &lt;/w-icon&gt;
 
           &lt;br /&gt;
 
-          &lt;w-icon 
-            class="mr1" 
-            xs 
+          &lt;w-icon
+            class="mr1"
+            xs
             color="primary"&gt;
             fa fa-heart
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
-            class="mr1" 
-            md 
+          &lt;w-icon
+            class="mr1"
+            md
             color="primary"&gt;
             fa fa-heart
           &lt;/w-icon&gt;
 
-          &lt;w-icon 
-            class="mr1" 
-            xl 
+          &lt;w-icon
+            class="mr1"
+            xl
             color="primary"&gt;
             fa fa-heart
           &lt;/w-icon&gt;
@@ -354,37 +354,37 @@ div.icons-demo
     w-icon.mr1(xl color="primary-light2") mdi mdi-home
     w-icon.mr1(xl color="primary-light3") mdi mdi-home
     template(#html).
-      &lt;w-icon 
-        class="mr1" 
-        xl 
+      &lt;w-icon
+        class="mr1"
+        xl
         color="primary-dark1"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr1" 
-        xl 
+      &lt;w-icon
+        class="mr1"
+        xl
         color="primary"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr1" 
-        xl 
+      &lt;w-icon
+        class="mr1"
+        xl
         color="primary-light1"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr1" 
-        xl 
+      &lt;w-icon
+        class="mr1"
+        xl
         color="primary-light2"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr1" 
-        xl 
+      &lt;w-icon
+        class="mr1"
+        xl
         color="primary-light3"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
@@ -401,40 +401,40 @@ div.icons-demo
     w-icon.mr1.pa5(xl bg-color="primary-light2" color="white") mdi mdi-home
     w-icon.mr1.pa5(xl bg-color="primary-light3" color="white") mdi mdi-home
     template(#html).
-      &lt;w-icon 
+      &lt;w-icon
         class="mr1 pa5"
-        xl 
+        xl
         bg-color="primary-dark1"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
+      &lt;w-icon
         class="mr1 pa5"
-        xl 
+        xl
         bg-color="primary"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
+      &lt;w-icon
         class="mr1 pa5"
-        xl 
-        bg-color="primary-light1" 
+        xl
+        bg-color="primary-light1"
         color="white"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
+      &lt;w-icon
         class="mr1 pa5"
-        xl 
-        bg-color="primary-light2" 
+        xl
+        bg-color="primary-light2"
         color="white"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
+      &lt;w-icon
         class="mr1 pa5"
-        xl 
-        bg-color="primary-light3" 
+        xl
+        bg-color="primary-light3"
         color="white"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
@@ -455,51 +455,51 @@ div.icons-demo
     w-icon.mr2(color="primary-light2" :size="40") mdi mdi-home
     w-icon.mr2(color="primary-light2" size="4em") mdi mdi-home
     template(#html).
-      &lt;w-icon 
-        class="mr2" 
-        xs 
+      &lt;w-icon
+        class="mr2"
+        xs
         color="primary-light2"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr2" 
-        sm 
+      &lt;w-icon
+        class="mr2"
+        sm
         color="primary-light2"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr2" 
-        md 
+      &lt;w-icon
+        class="mr2"
+        md
         color="primary-light2"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr2" 
-        lg 
+      &lt;w-icon
+        class="mr2"
+        lg
         color="primary-light2"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr2" 
-        xl 
+      &lt;w-icon
+        class="mr2"
+        xl
         color="primary-light2"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr2" 
-        color="primary-light2" 
+      &lt;w-icon
+        class="mr2"
+        color="primary-light2"
         :size="40"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr2" 
-        color="primary-light2" 
+      &lt;w-icon
+        class="mr2"
+        color="primary-light2"
         size="4em"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
@@ -515,6 +515,7 @@ div.icons-demo
   example
     .title4 Spin
     w-icon.mr1(xl color="primary" spin) mdi mdi-star
+    w-icon.mr1(xl color="primary" spin-a) mdi mdi-star
 
     .title4.mt6 Rotate
     w-icon.rotated-icon.mr1(xl color="primary" rotate135a) mdi mdi-paw
@@ -545,91 +546,98 @@ div.icons-demo
       code.flip flip-y
     template(#html).
       &lt;div class="title4"&gt;Spin&lt;/div&gt;
-      &lt;w-icon 
-        class="mr1" 
-        xl 
-        color="primary" 
+      &lt;w-icon
+        class="mr1"
+        xl
+        color="primary"
         spin&gt;
+        mdi mdi-star
+      &lt;/w-icon&gt;
+      &lt;w-icon
+        class="mr1"
+        xl
+        color="primary"
+        spin-a&gt;
         mdi mdi-star
       &lt;/w-icon&gt;
 
       &lt;div class="title4 mt6"&gt;Rotate&lt;/div&gt;
-      &lt;w-icon 
-        class="rotated-icon mr1" 
-        xl 
+      &lt;w-icon
+        class="rotated-icon mr1"
+        xl
         color="primary" rotate135a&gt;
         mdi mdi-paw
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="rotated-icon mr1" 
-        xl 
+      &lt;w-icon
+        class="rotated-icon mr1"
+        xl
         color="primary" rotate90a&gt;
         mdi mdi-paw
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="rotated-icon mr1" 
-        xl 
+      &lt;w-icon
+        class="rotated-icon mr1"
+        xl
         color="primary" rotate45a&gt;
         mdi mdi-paw
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="rotated-icon mr1" 
-        xl 
+      &lt;w-icon
+        class="rotated-icon mr1"
+        xl
         color="primary"&gt;
         mdi mdi-paw
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="rotated-icon mr1" 
-        xl 
+      &lt;w-icon
+        class="rotated-icon mr1"
+        xl
         color="primary" rotate45&gt;
         mdi mdi-paw
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="rotated-icon mr1" 
-        xl 
+      &lt;w-icon
+        class="rotated-icon mr1"
+        xl
         color="primary" rotate90&gt;
         mdi mdi-paw
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="rotated-icon mr1" 
-        xl 
+      &lt;w-icon
+        class="rotated-icon mr1"
+        xl
         color="primary" rotate135&gt;
         mdi mdi-paw
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="rotated-icon mr1" 
-        xl 
+      &lt;w-icon
+        class="rotated-icon mr1"
+        xl
         color="primary" rotate180&gt;
         mdi mdi-paw
       &lt;/w-icon&gt;
-      
+
       &lt;div class="title4 mt6"&gt;Flip&lt;/div&gt;
-      &lt;w-icon 
-        class="mr1" 
-        xl 
+      &lt;w-icon
+        class="mr1"
+        xl
         color="primary"&gt;
         mdi mdi-thumb-up
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr1" 
-        xl 
-        color="primary" 
+      &lt;w-icon
+        class="mr1"
+        xl
+        color="primary"
         flip-x&gt;
         mdi mdi-thumb-up
       &lt;/w-icon&gt;
 
-      &lt;w-icon 
-        class="mr1" 
-        xl 
-        color="primary" 
+      &lt;w-icon
+        class="mr1"
+        xl
+        color="primary"
         flip-y&gt;
         mdi mdi-thumb-up
       &lt;/w-icon&gt;

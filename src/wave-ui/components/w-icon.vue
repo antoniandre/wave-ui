@@ -25,6 +25,7 @@ export default {
     lg: { type: Boolean },
     xl: { type: Boolean },
     spin: { type: Boolean },
+    spinA: { type: Boolean },
     rotate135a: { type: Boolean },
     rotate90a: { type: Boolean },
     rotate45a: { type: Boolean },
@@ -70,6 +71,7 @@ export default {
         [`${this.bgColor}--bg`]: this.bgColor,
         [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
         'w-icon--spin': this.spin,
+        'w-icon--spin-a': this.spinA,
         'w-icon--rotate45': this.rotate45,
         'w-icon--rotate90': this.rotate90,
         'w-icon--rotate135': this.rotate135,
@@ -128,6 +130,7 @@ export default {
   .w-button.size--xl &, .w-alert.size--xl & {font-size: 2 * $base-font-size;}
 
   &--spin:before {animation: w-icon--spin 2s infinite linear;}
+  &--spin-a:before {animation: w-icon--spin-a 2s infinite linear;}
   &--rotate45:before {transform: rotate(45deg);}
   &--rotate90:before {transform: rotate(90deg);}
   &--rotate135:before {transform: rotate(135deg);}
@@ -142,5 +145,10 @@ export default {
 @keyframes w-icon--spin {
   0% {transform: rotate(0deg);}
   to {transform: rotate(359deg);}
+}
+
+@keyframes w-icon--spin-a {
+  0% {transform: rotate(0deg);}
+  to {transform: rotate(-359deg);}
 }
 </style>
