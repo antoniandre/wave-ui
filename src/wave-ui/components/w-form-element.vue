@@ -70,26 +70,26 @@ export default {
     },
 
     // Allow triggering a particular field validation manually via `$refs.myField.validate()`.
-    validate () {
-      this.$emit('update:valid', this.validateElement(this))
+    async validate () {
+      this.$emit('update:valid', await this.validateElement(this))
     }
   },
 
   watch: {
-    inputValue () {
+    async inputValue () {
       if (this.hasJustReset) return (this.hasJustReset = false)
 
       // Update the form element's validity on input value change.
       if (!this.formProps.noKeyupValidation && this.validators) {
-        this.$emit('update:valid', this.validateElement(this))
+        this.$emit('update:valid', await this.validateElement(this))
       }
     },
-    isFocused (val) {
+    async isFocused (val) {
       // When focusing, reset the hasJustReset flag so the input value is watched again.
       if (val) this.hasJustReset = false
       // On blur, Update the form element's validity.
       else if (!this.formProps.noBlurValidation && this.validators) {
-        this.$emit('update:valid', this.validateElement(this))
+        this.$emit('update:valid', await this.validateElement(this))
       }
     }
   },

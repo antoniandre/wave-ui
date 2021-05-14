@@ -23,6 +23,7 @@ const propsDescs = {
   lg: 'Sets the size of the icon (font-size).',
   xl: 'Sets the size of the icon (font-size).',
   spin: 'Applies a continuous centered spin movement on the icon.',
+  spinA: 'Applies a continuous centered anticlockwise spin movement on the icon.',
   rotate45: 'Rotates the icon of 45 degrees clockwise.',
   rotate90: 'Rotates the icon of 90 degrees clockwise.',
   rotate135: 'Rotates the icon of 135 degrees clockwise.',
