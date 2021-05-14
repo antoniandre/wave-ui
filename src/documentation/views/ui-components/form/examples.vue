@@ -12,26 +12,29 @@ div
   title-link(h2) How it works
   .title3 The validation works in 3 steps:
   ol
-    li
+    li.title4
       | Add one or more validator functions on the field you want validated
-      ssh-pre(language="html-vue" label="Vue template").
+      ssh-pre.body(language="html-vue" label="Vue template").
         &lt;w-input label="First name" :validators="[validators.required]"&gt;&lt;/w-input&gt;
-      ssh-pre(language="js" label="Javascript").
+      ssh-pre.body(language="js" label="Javascript").
         data: () => ({
           validators: {
             required: value => !!value || 'This field is required'
           }
         })
-    li.mt6 Wrap the field in a #[span.code w-form] and add a submit button
-      ssh-pre(language="html-vue" label="Vue template").
+    li.mt6.title4
+      | Wrap the field in a #[span.code w-form] and add a submit button
+      ssh-pre.body(language="html-vue" label="Vue template").
         &lt;w-form&gt;
           &lt;w-input label="First name" :validators="[validators.required]"&gt;&lt;/w-input&gt;
 
           &lt;w-button type="submit"&gt;Submit&lt;/w-button&gt;
         &lt;/w-form&gt;
-    li.mt6.
-      That's enough, you can let the #[span.code w-form] component do the rest!#[br]
-      But you might want more options, discover them in the examples bellow.
+    li.mt6.title4
+      | That's enough
+      p.body.
+        you can let the #[span.code w-form] component do the rest!#[br]
+        But you might want more options, discover them in the examples bellow.
 
   alert(tip)
     strong As of version 1.14.4
@@ -39,6 +42,26 @@ div
       It is also possible to trigger a particular field validation programmatically via
       #[code this.$refs.myField.validate()]. all the validator functions associated on this field will be
       re-run.
+
+  title-link.mt10(h3) Creating a validator function
+  p.
+    A validator is a custom function that tells Wave UI if the field is valid or invalid when the
+    validation happens. It must return either #[span.code true] or a string containing an error
+    message in case of invalidaty. An empty string also works.#[br]
+    The current value of the field is always passed in parameter to the validator.#[br]#[br]
+
+    In the following snippet, the value is converted to boolean (#[code !!]), and if falsy
+    (e.g. empty string) the JavaScript engine will continue through the #[code ||] and will return
+    a string to Wave UI, meaning the field is invalid.
+  ssh-pre(language="js" label="Javascript").
+    data: () => ({
+      validators: {
+        required: value => !!value || 'This field is required'
+        // Other validators...
+      }
+    })
+
+  w-divider.mt12
 
   title-link(h2) Basic validation
   p.
@@ -90,7 +113,7 @@ div
       #[code null] for pristine.#[br]
       Pristine represents the moment where the form is still untouched, neither valid, nor invalid.
   alert(success).
-    Even in the most advanced case, Wave UI's form validation is very simple, it doesn't
+    Even in the most advanced case, Wave UI's form validation is fairly simple, it doesn't
     require you to use #[code $refs].
 
   title-link(h2) Direct submission to a server
@@ -558,46 +581,109 @@ div
           alphabetical: value => /^[a-z \-']+$/i.test(value) || 'This field only accepts letters.'
         }
       })
+
+  title-link(h2) Asynchronous validations
+  p You may want to validate a field on server side, for this you can use an asynchronous validator.
+  alert(tip).
+    You should first be familiar with Promises and #[span.code async]/#[span.code await].
+    If you're not you can read about it
+    #[a(href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function" target="_blank") here].
+  p.
+    This example presents a common case: checking if a username is already in use from a user
+    registration page.#[br]
+    If you type exactly #[code waveui] which is already taken, an error message will appear after
+    connecting to to a server, via an Axios request for instance.#[br]
+    A spinner is also displayed while the server is being requested.
+
+  example(content-class="pa6")
+    w-form(error-placeholders)
+      w-input(
+        label="Username"
+        :validators="[validators.required, validators.username]"
+        :inner-icon-right="form1.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
+        autofill="off")
+    template(#pug).
+      w-form(error-placeholders)
+        w-input(
+          label="Username"
+          :validators="[validators.required, validators.username]"
+          :inner-icon-right="form1.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
+          autofill="off")
+    template(#js).
+      // Here we need access to `this`, so we can't use an arrow function.
+      data () {
+        return {
+          loading: false,
+          validators: {
+            required: value => !!value || 'This field is required',
+            username: async value => {
+              // Display the spinner while loading.
+              this.loading = true
+
+              // Simulate a server call: wait for 800ms.
+              await new Promise(r => setTimeout(r, 800))
+
+              // Remove the spinner.
+              this.loading = false
+
+              // If value is not 'waveui' return true (valid field).
+              // Otherwise (||) return the error message.
+              return value !== 'waveui' || 'This username is already in use'
+            }
+          }
+        }
+      }
 </template>
 
 <script>
 export default {
-  data: () => ({
-    form1: {
-      valid: null
-    },
-    form2: {
-      valid: null
-    },
-    form3: {
-      valid: null
-    },
-    form4: {
-      valid: null
-    },
-    form5: {
-      valid: null,
-      error: null,
-      success: null,
-      validated: 0
-    },
-    form6: {
-      valid: null,
-      submitted: false,
-      sent: false,
-      errorsCount: 0
-    },
-    form7: {
-      valid: null,
-      disabled: false,
-      readonly: false
-    },
-    validators: {
-      required: value => !!value || 'This field is required',
-      alphabetical: value => /^[a-z \-']+$/i.test(value) || 'This field only accepts letters.',
-      consent: value => !!value || 'You must agree'
+  data () {
+    return {
+      form1: {
+        valid: null,
+        loading: false
+      },
+      form2: {
+        valid: null
+      },
+      form3: {
+        valid: null
+      },
+      form4: {
+        valid: null
+      },
+      form5: {
+        valid: null,
+        error: null,
+        success: null,
+        validated: 0
+      },
+      form6: {
+        valid: null,
+        submitted: false,
+        sent: false,
+        errorsCount: 0
+      },
+      form7: {
+        valid: null,
+        disabled: false,
+        readonly: false
+      },
+      validators: {
+        username: async value => {
+          this.form1.loading = true
+          // Simulate a server call: wait for 800ms.
+          await new Promise(r => setTimeout(r, 800))
+
+          this.form1.loading = false
+          return value !== 'waveui' || 'This username is already in use'
+        },
+        required: value => !!value || 'This field is required',
+        alphabetical: value => /^[a-z \-']+$/i.test(value) || 'This field only accepts letters.',
+        consent: value => !!value || 'You must agree'
+      }
     }
-  }),
+  },
 
   methods: {
     onSuccess () {
