@@ -592,7 +592,7 @@ div
     This example presents a common case: checking if a username is already in use from a user
     registration page.#[br]
     If you type exactly #[code waveui] which is already taken, an error message will appear after
-    connecting to to a server, via an Axios request for instance.#[br]
+    connecting to a server, via an Axios request for instance.#[br]
     A spinner is also displayed while the server is being requested.
 
   example(content-class="pa6")
