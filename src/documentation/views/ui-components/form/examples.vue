@@ -602,13 +602,22 @@ div
         :validators="[validators.required, validators.username]"
         :inner-icon-right="form1.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
         autofill="off")
-    template(#pug).
+    //- template(#pug).
       w-form(error-placeholders)
         w-input(
           label="Username"
           :validators="[validators.required, validators.username]"
-          :inner-icon-right="form1.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
+          :inner-icon-right="form.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
           autofill="off")
+    template(#html).
+      &lt;w-form error-placeholders&gt;
+        &lt;w-input
+          label="Username"
+          :validators="[validators.required, validators.username]"
+          :inner-icon-right="form.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
+          autofill="off"&gt;
+        &lt;/w-input&gt;
+      &lt;/w-form&gt;
     template(#js).
       // Here we need access to `this`, so we can't use an arrow function.
       data () {
