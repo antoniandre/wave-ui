@@ -4,6 +4,15 @@ form.w-form(@submit="onSubmit" @reset="reset" novalidate :class="classes")
 </template>
 
 <script>
+// Like the ES6 Array.some function, but async.
+// Purpose: wait for any async validators.
+const asyncSome = async (array, predicate) => {
+	for (const item of array) {
+		if (await predicate(item)) return true
+	}
+	return false
+};
+
 export default {
   name: 'w-form',
 
@@ -74,9 +83,9 @@ export default {
      * @param {Object} e the submit event
      * @return {Boolean} true if the form is valid
      */
-    validate (e) {
-      this.$emit('before-validate')
-      const errorsCount = this.formElements.reduce((total, el) => {
+    async validate (e) {
+      this.$emit('before-validate', { e, errorsCount })
+      const errorsCount = await this.formElements.reduce(async (total, el) => {
         const { validators, Validation = {}, inputValue, readonly, disabled } = el
 
         // Skip validation and return ok if there is no validation or if disabled or readonly.
@@ -84,8 +93,8 @@ export default {
 
         // Execute the validators 1 by 1 until a failure is found. If it happens, raise the error
         // message in the form element.
-        validators.some(validator => {
-          const result = typeof validator === 'function' && validator(inputValue)
+        await asyncSome(validators, async validator => {
+          const result = await (typeof validator === 'function' && validator(inputValue))
 
           Validation.isValid = typeof result !== 'string' // If string, it means there was an error.
           Validation.message = Validation.isValid ? '' : result
@@ -107,11 +116,11 @@ export default {
       return this.status
     },
 
-    validateElement (el) {
+    async validateElement (el) {
       // Execute the validators 1 by 1 until a failure is found. If it happens, raise the error
       // message in the form element.
-      el.validators.some(validator => {
-        const result = typeof validator === 'function' && validator(el.inputValue)
+      await asyncSome(el.validators, async validator => {
+        const result = await (typeof validator === 'function' && validator(el.inputValue))
 
         el.Validation.isValid = typeof result !== 'string' // If string, it means there was an error.
         el.Validation.message = el.Validation.isValid ? '' : result
