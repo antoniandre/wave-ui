@@ -1,6 +1,6 @@
 {
   "name": "wave-ui",
-  "version": "1.31.2",
+  "version": "1.31.3",
   "description": "An emerging UI framework for Vue.js & Vue 3 with only the bright side. :sunny:",
   "author": "Antoni Andre <antoniandre.web@gmail.com>",
   "main": "./dist/wave-ui.common.js",
