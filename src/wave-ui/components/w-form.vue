@@ -74,29 +74,23 @@ export default {
      * @param {Object} e the submit event
      * @return {Boolean} true if the form is valid
      */
-    validate (e) {
-      this.$emit('before-validate')
-      const errorsCount = this.formElements.reduce((total, el) => {
-        const { validators, Validation = {}, inputValue, readonly, disabled } = el
+    async validate (e) {
+      this.$emit('before-validate', { e, errorsCount })
 
-        // Skip validation and return ok if there is no validation or if disabled or readonly.
-        if (!validators || !validators.length || disabled || readonly) return total
+      // Wait for this block to finish checking all the async validators before updating the errorsCount.
+      let errorsCount = 0
+      await (async () => {
+        for (const el of this.formElements) {
+          // Skip validation and return ok if there is no validation or if disabled or readonly.
+          if (!el.validators?.length || el.disabled || el.readonly) continue
 
-        // Execute the validators 1 by 1 until a failure is found. If it happens, raise the error
-        // message in the form element.
-        validators.some(validator => {
-          const result = typeof validator === 'function' && validator(inputValue)
+          await this.checkElementValidators(el)
+          errorsCount += ~~(!el.Validation.isValid)
 
-          Validation.isValid = typeof result !== 'string' // If string, it means there was an error.
-          Validation.message = Validation.isValid ? '' : result
-          return !Validation.isValid
-        })
-
-        el.hasJustReset = false
-        // Update the form element's validity. Internal emit not listed in `emits`.
-        el.$emit('update:valid', Validation.isValid)
-        return total + ~~(!Validation.isValid)
-      }, 0)
+          // Update the form element's validity. Internal emit not listed in `emits`.
+          el.$emit('update:valid', el.Validation.isValid)
+        }
+      })()
 
       this.updateErrorsCount(errorsCount)
 
@@ -107,21 +101,33 @@ export default {
       return this.status
     },
 
-    validateElement (el) {
-      // Execute the validators 1 by 1 until a failure is found. If it happens, raise the error
-      // message in the form element.
-      el.validators.some(validator => {
-        const result = typeof validator === 'function' && validator(el.inputValue)
-
-        el.Validation.isValid = typeof result !== 'string' // If string, it means there was an error.
-        el.Validation.message = el.Validation.isValid ? '' : result
-        return !el.Validation.isValid
-      })
-
-      el.hasJustReset = false
+    async validateElement (el) {
+      await this.checkElementValidators(el)
       this.updateErrorsCount()
 
       return el.Validation.isValid
+    },
+
+    // Execute the validators 1 by 1 until a failure is found. If it happens, raise the error
+    // message in the form element.
+    async checkElementValidators (el) {
+      // While iterating through all the async validators, do not modify `el.Validation.isValid`,
+      // or the w-form-element classes will recompute and the error message will briefly show and
+      // hide on each keyup.
+      // => Store in a temp var until the end of the async loop, then update `el.Validation.isValid`.
+      let validationsPassed = false
+      let validationMessage = ''
+      await asyncSome(el.validators, async validator => {
+        const result = await (typeof validator === 'function' && validator(el.inputValue))
+
+        validationsPassed = typeof result !== 'string' // If string, it means there was an error.
+        validationMessage = validationsPassed ? '' : result
+        return !validationsPassed
+      })
+
+      el.hasJustReset = false
+      el.Validation.isValid = validationsPassed
+      el.Validation.message = validationMessage
     },
 
     reset (e) {
