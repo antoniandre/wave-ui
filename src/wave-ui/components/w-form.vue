@@ -4,6 +4,15 @@ form.w-form(@submit="onSubmit" @reset="reset" novalidate :class="classes")
 </template>
 
 <script>
+// Like the ES6 Array.some function, but async.
+// Purpose: wait for any async validators.
+const asyncSome = async (array, predicate) => {
+	for (const item of array) {
+		if (await predicate(item)) return true
+	}
+	return false
+}
+
 export default {
   name: 'w-form',
 
