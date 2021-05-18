@@ -1,6 +1,6 @@
 <template lang="pug">
 div(:class="classes")
-  .w-flex.grow(:class="column ? 'column' : 'align-center'")
+  .w-flex.grow.wrap(:class="column ? 'column' : 'align-center'")
     slot
 
   //- Error message.
@@ -112,6 +112,7 @@ div.w-form-el {
 }
 
 .w-form-el {
+  > .w-flex {position: relative;}
   .w-form--error-placeholders & {
     position: relative;
     padding-bottom: 1.2rem;
