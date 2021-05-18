@@ -601,21 +601,24 @@ div
         label="Username"
         :validators="[validators.required, validators.username]"
         :inner-icon-right="form1.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
-        autofill="off")
+        :loading="form1.loading"
+        autocomplete="off")
     //- template(#pug).
       w-form(error-placeholders)
         w-input(
           label="Username"
           :validators="[validators.required, validators.username]"
           :inner-icon-right="form.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
-          autofill="off")
+          :loading="form1.loading"
+          autocomplete="off")
     template(#html).
       &lt;w-form error-placeholders&gt;
         &lt;w-input
           label="Username"
           :validators="[validators.required, validators.username]"
           :inner-icon-right="form.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
-          autofill="off"&gt;
+          :loading="form.loading"
+          autocomplete="off"&gt;
         &lt;/w-input&gt;
       &lt;/w-form&gt;
     template(#js).
@@ -642,6 +645,16 @@ div
           }
         }
       }
+
+  title-link(h3) Loading bar color
+  p.
+    You can provide a custom loading bar color via the prop #[code progress-color].#[br]
+    Example with #[code progress-color="cyan"]:
+  w-input.mt5(
+    label="Username"
+    :loading="true"
+    progress-color="cyan"
+    autocomplete="off")
 </template>
 
 <script>
