@@ -4,19 +4,19 @@
     //- Separator.
     span.w-breadcrumbs__separator(
       v-if="i && $scopedSlots.separator"
-      :key="`${i}s`"
+      :key="`${i}a`"
       :class="separatorColor")
       slot(name="separator" :index="i")
     w-icon.w-breadcrumbs__separator(
       v-else-if="i"
-      :key="`${i}s`"
+      :key="`${i}b`"
       :class="separatorColor") {{ icon }}
 
     //- Link to parent pages.
     template(v-if="item[itemRouteKey] && (i < items.length - 1 || linkLastItem)")
       component.w-breadcrumbs__item(
         v-if="$scopedSlots.item"
-        :key="i"
+        :key="`${i}c`"
         :is="hasRouter ? 'router-link' : 'a'"
         :to="hasRouter && item[itemRouteKey]"
         :href="item[itemRouteKey]"
@@ -24,7 +24,7 @@
         slot(name="item" :item="item" :index="i + 1" :is-last="i === items.length - 1")
       component.w-breadcrumbs__item(
         v-else
-        :key="i"
+        :key="`${i}d`"
         :is="hasRouter ? 'router-link' : 'a'"
         :to="hasRouter && item[itemRouteKey]"
         :href="item[itemRouteKey]"
@@ -34,11 +34,12 @@
     //- Current page when linkLastItem is false.
     slot(
       v-else-if="$scopedSlots.item"
+      :key="`${i}e`"
       name="item"
       :item="item"
       :index="i + 1"
       :is-last="i === items.length - 1")
-    span(v-else :key="i" v-html="item[itemLabelKey]")
+    span(v-else :key="`${i}f`" v-html="item[itemLabelKey]")
 </template>
 
 <script>
