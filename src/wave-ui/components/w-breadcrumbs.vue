@@ -4,19 +4,19 @@
     //- Separator.
     span.w-breadcrumbs__separator(
       v-if="i && $slots.separator"
-      :key="`${i}-1`"
+      :key="`${i}a`"
       :class="separatorColor")
       slot(name="separator" :index="i")
     w-icon.w-breadcrumbs__separator(
       v-else-if="i"
-      :key="`${i}-2`"
+      :key="`${i}b`"
       :class="separatorColor") {{ icon }}
 
     //- Link to parent pages.
     template(v-if="item[itemRouteKey] && (i < items.length - 1 || linkLastItem)")
       component.w-breadcrumbs__item(
         v-if="$slots.item"
-        :key="`${i}-3`"
+        :key="`${i}c`"
         :is="hasRouter ? 'router-link' : 'a'"
         :to="hasRouter && item[itemRouteKey]"
         :href="item[itemRouteKey]"
@@ -24,7 +24,7 @@
         slot(name="item" :item="item" :index="i + 1" :isLast="i === items.length - 1")
       component.w-breadcrumbs__item(
         v-else
-        :key="`${i}-4`"
+        :key="`${i}d`"
         :is="hasRouter ? 'router-link' : 'a'"
         :to="hasRouter && item[itemRouteKey]"
         :href="item[itemRouteKey]"
@@ -34,11 +34,12 @@
     //- Current page when linkLastItem is false.
     slot(
       v-else-if="$slots.item"
+      :key="`${i}e`"
       name="item"
       :item="item"
       :index="i + 1"
       :isLast="/* Vue3 camelcase issue: https://github.com/vuejs/vue-next/issues/2488 */ i === items.length - 1")
-    span(v-else :key="`${i}-5`" v-html="item[itemLabelKey]")
+    span(v-else :key="`${i}f`" v-html="item[itemLabelKey]")
 </template>
 
 <script>

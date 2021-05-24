@@ -37,7 +37,7 @@ export default {
 
   props: {
     modelValue: {},
-    max: { type: Number, default: 5 },
+    max: { type: [Number, String], default: 5 },
     color: { type: String, default: 'primary' },
     bgColor: { type: String, default: 'grey-light4' },
     icon: { type: String, default: 'wi-star' },
@@ -151,7 +151,7 @@ export default {
 
   watch: {
     value (value) {
-      this.rating = value
+      this.rating = parseFloat(value)
     }
   }
 }

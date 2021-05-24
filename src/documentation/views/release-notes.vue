@@ -23,6 +23,16 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v1.32.3
+      p #[strong.code w-input]: add a loading option to display while performing an async validation. #[issue-link 55]
+      p #[strong.code w-rating]: also accepts a string as the current value.
+
+    li.minor
+      strong.version v1.32.0
+      p #[strong.code w-form]: Support async form element validators. #[issue-link 55]
+      p #[strong.code w-icon]: Added option to spin icons anticlockwise.
+
     li.minor
       strong.version v1.31.0
       p #[strong.code w-table]: Added support for programmatic row selection. #[issue-link 50]

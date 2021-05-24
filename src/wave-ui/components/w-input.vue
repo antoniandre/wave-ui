@@ -68,6 +68,8 @@ component(
         v-else-if="label"
         :for="`w-input--${_.uid}`"
         v-html="label")
+
+    w-progress.fill-width(v-if="loading" size="2" :color="progressColor || color")
 </template>
 
 <script>
@@ -92,6 +94,7 @@ export default {
     staticLabel: { type: Boolean },
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
+    progressColor: { type: String },
     bgColor: { type: String },
     minlength: { type: [Number, String] },
     maxlength: { type: [Number, String] },
@@ -102,7 +105,8 @@ export default {
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },
-    tile: { type: Boolean }
+    tile: { type: Boolean },
+    loading: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -165,7 +169,8 @@ export default {
         'w-input__input-wrap--box': this.outline || this.bgColor || this.shadow,
         'w-input__input-wrap--underline': !this.outline,
         'w-input__input-wrap--shadow': this.shadow,
-        'w-input__input-wrap--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round
+        'w-input__input-wrap--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
+        'w-input__input-wrap--loading': this.loading
       }
     }
   },
@@ -229,8 +234,16 @@ $inactive-color: #777;
     &--round {border-radius: 9em;}
     &--tile {border-radius: initial;}
     &--shadow {box-shadow: $box-shadow;}
+    &--loading {border-bottom-color: transparent;}
+    &--loading ~ .w-progress {
+      height: 2px;
+      position: absolute;
+      top: 100%;
+      margin-top: -2px;
+    }
 
     .w-input--focused & {border-color: currentColor;}
+    .w-input--focused &--loading {border-bottom-color: transparent;}
 
     // Underline.
     &--underline:after {
@@ -245,6 +258,8 @@ $inactive-color: #777;
       transform: scaleX(0);
       pointer-events: none;
     }
+
+    &--loading:after {border-bottom-color: transparent;}
 
     .w-input--focused &--underline:after {transform: scaleX(1);}
     &--round.w-input__input-wrap--underline:after {
