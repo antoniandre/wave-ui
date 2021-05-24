@@ -164,7 +164,6 @@ $disabled-color: #ddd;
     .w-switch--thin & {
       box-sizing: border-box;
       border: none;
-      // border: ($small-form-el-size / 2) solid rgba(255, 255, 255, 0.6);
       height: round(0.7 * $small-form-el-size);
     }
     .w-switch--thin :checked + & {
