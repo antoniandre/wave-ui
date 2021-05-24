@@ -424,7 +424,7 @@ export default {
     pointer-events: none;
   }
 
-  &__cell {padding: round($base-increment / 2) $base-increment;}
+  &__cell {padding: round(divide($base-increment, 2)) $base-increment;}
   &__header:first-child, &__cell:first-child {padding-left: 2 * $base-increment;}
   &__header:last-child, &__cell:last-child {padding-right: 2 * $base-increment;}
 

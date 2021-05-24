@@ -103,47 +103,47 @@ export default {
   user-select: none;
   border-radius: 9em;
   // Always get an even number for better text vertical align.
-  height: round(1.1 * $base-font-size / 2) * 2;
-  min-width: round(1.1 * $base-font-size / 2) * 2;
+  height: round(1.1 * divide($base-font-size, 2)) * 2;
+  min-width: round(1.1 * divide($base-font-size, 2)) * 2;
   z-index: 1;
   padding: 0 $base-increment;
 
   &--inline {position: static;}
 
   &--round {
-    width: round(1.1 * $base-font-size / 2) * 2;
-    padding: 0 (round(1.1 * $base-font-size / 4) * 2);
+    width: round(1.1 * divide($base-font-size, 2)) * 2;
+    padding: 0 (round(1.1 * divide($base-font-size, 4)) * 2);
   }
 
   // Sizes.
   &.size--xs {
     // Always get an even number for better text vertical alignment.
-    $height: round($base-font-size / 2) * 2;
-    font-size: round(0.67 * $base-font-size / 2) * 2;
+    $height: round(divide($base-font-size, 2)) * 2;
+    font-size: round(0.67 * divide($base-font-size, 2)) * 2;
     height: $height;
     min-width: $height;
 
-    &--round {width: $height;padding: 0 round($height / 2);}
+    &--round {width: $height;padding: 0 round(divide($height, 2));}
   }
   &.size--sm {
-    font-size: round(0.75 * $base-font-size / 2) * 2;
-    height: round(1.1 * $base-font-size / 2) * 2;
-    min-width: round(1.1 * $base-font-size / 2) * 2;
+    font-size: round(0.75 * divide($base-font-size, 2)) * 2;
+    height: round(1.1 * divide($base-font-size, 2)) * 2;
+    min-width: round(1.1 * divide($base-font-size, 2)) * 2;
   }
   &.size--md {
-    font-size: round(0.9 * $base-font-size / 2) * 2;
-    height: round(1.3 * $base-font-size / 2) * 2;
-    min-width: round(1.3 * $base-font-size / 2) * 2;
+    font-size: round(0.9 * divide($base-font-size, 2)) * 2;
+    height: round(1.3 * divide($base-font-size, 2)) * 2;
+    min-width: round(1.3 * divide($base-font-size, 2)) * 2;
   }
   &.size--lg {
-    font-size: round(1.05 * $base-font-size / 2) * 2;
-    height: round(1.5 * $base-font-size / 2) * 2;
-    min-width: round(1.5 * $base-font-size / 2) * 2;
+    font-size: round(1.05 * divide($base-font-size, 2)) * 2;
+    height: round(1.5 * divide($base-font-size, 2)) * 2;
+    min-width: round(1.5 * divide($base-font-size, 2)) * 2;
   }
   &.size--xl {
-    font-size: round(1.2 * $base-font-size / 2) * 2;
-    height: round(1.8 * $base-font-size / 2) * 2;
-    min-width: round(1.8 * $base-font-size / 2) * 2;
+    font-size: round(1.2 * divide($base-font-size, 2)) * 2;
+    height: round(1.8 * divide($base-font-size, 2)) * 2;
+    min-width: round(1.8 * divide($base-font-size, 2)) * 2;
   }
 
   // Position.

@@ -193,7 +193,7 @@ $inactive-color: #666;
 
     // Checked state.
     :checked ~ & {
-      border-width: $small-form-el-size / 2;
+      border-width: divide($small-form-el-size, 2);
       border-color: currentColor;
       // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: currentColor;
@@ -204,7 +204,7 @@ $inactive-color: #666;
       background-color: $disabled-color;
     }
     .w-checkbox--indeterminate :checked ~ & {
-      border-width: (($small-form-el-size / 2) - 1px) 3px;
+      border-width: ((divide($small-form-el-size, 2)) - 1px) 3px;
       background-color: white;
     }
   }

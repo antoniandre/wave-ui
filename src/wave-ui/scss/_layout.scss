@@ -71,13 +71,13 @@
   // ----------------------------------------------
   @for $i from -6 through -1 {
     .sh#{$i} {
-      box-shadow: 0 0 (-1 * round($i * $base-increment)) rgba(#000, max(0.15 * -$i / 2, 0.15)) inset;
+      box-shadow: 0 0 (-1 * round($i * $base-increment)) rgba(#000, max(0.15 * divide(-$i, 2), 0.15)) inset;
     }
   }
   @for $i from 1 through 6 {
     .sh#{$i} {
       box-shadow: 0 0 1px rgba(#000, 0.1),
-                  round($base-increment * $i / 4) round($base-increment * $i / 4) round($i * $base-increment) rgba(#000, max(0.15 * $i / 2, 0.15));
+                  round($base-increment * divide($i, 4)) round($base-increment * divide($i, 4)) round($i * $base-increment) rgba(#000, max(0.15 * divide($i, 2), 0.15));
     }
   }
   .sh0 {box-shadow: none;}
