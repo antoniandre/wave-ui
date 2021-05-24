@@ -213,21 +213,21 @@ $spinner-size: 40;
   }
 
   // Sizes adjustments (always an even number for easier vertical alignments).
-  &.size--xs {height: round(1.25 * $base-font-size / 2) * 2;}
-  &.size--sm {height: round(1.55 * $base-font-size / 2) * 2;}
-  &.size--md {height: round(1.85 * $base-font-size / 2) * 2;}
-  &.size--lg {height: round(2.2 * $base-font-size / 2) * 2;}
-  &.size--xl {height: round(2.5 * $base-font-size / 2) * 2;}
+  &.size--xs {height: round(1.25 * divide($base-font-size, 2)) * 2;}
+  &.size--sm {height: round(1.55 * divide($base-font-size, 2)) * 2;}
+  &.size--md {height: round(1.85 * divide($base-font-size, 2)) * 2;}
+  &.size--lg {height: round(2.2 * divide($base-font-size, 2)) * 2;}
+  &.size--xl {height: round(2.5 * divide($base-font-size, 2)) * 2;}
 
   &.size--xs {padding-left: $base-increment;padding-right: $base-increment;}
   &.size--xl {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
   &--round.size--xs {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
   &--round.size--xl {padding-left: round(4.5 * $base-increment);padding-right: round(4.5 * $base-increment);}
-  &--icon.size--xs {width: round(1.25 * $base-font-size / 2) * 2;}
-  &--icon.size--sm {width: round(1.55 * $base-font-size / 2) * 2;}
-  &--icon.size--md {width: round(1.85 * $base-font-size / 2) * 2;}
-  &--icon.size--lg {width: round(2.2 * $base-font-size / 2) * 2;}
-  &--icon.size--xl {width: round(2.5 * $base-font-size / 2) * 2;}
+  &--icon.size--xs {width: round(1.25 * divide($base-font-size, 2)) * 2;}
+  &--icon.size--sm {width: round(1.55 * divide($base-font-size, 2)) * 2;}
+  &--icon.size--md {width: round(1.85 * divide($base-font-size, 2)) * 2;}
+  &--icon.size--lg {width: round(2.2 * divide($base-font-size, 2)) * 2;}
+  &--icon.size--xl {width: round(2.5 * divide($base-font-size, 2)) * 2;}
 
   // Overlay to mark the focus, hover and active state.
   &:before {
