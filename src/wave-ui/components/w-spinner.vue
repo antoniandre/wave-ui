@@ -63,7 +63,7 @@ export default {
   width: 1em;
   height: 1em;
 
-  &.size--xs {font-size: round(0.9 * $base-font-size / 2) * 2;}
+  &.size--xs {font-size: round(0.9 * divide($base-font-size, 2)) * 2;}
   &.size--sm {font-size: round(1.5 * $base-font-size);}
   &.size--md {font-size: round(2 * $base-font-size);}
   &.size--lg {font-size: round(2.5 * $base-font-size);}

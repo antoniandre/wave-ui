@@ -124,7 +124,7 @@ export default {
   // In w-button and w-alert.
   // .w-button &, .w-alert & {font-size: round(1.4 * $base-font-size);}
   // Always an even number to vertical align well in button.
-  .w-button.size--xs & {font-size: round(0.95 * $base-font-size / 2) * 2;}
+  .w-button.size--xs & {font-size: round(0.95 * divide($base-font-size, 2)) * 2;}
   .w-alert.size--xs & {font-size: $base-font-size;}
   .w-button.size--sm &, .w-alert.size--sm & {font-size: round(1.15 * $base-font-size);}
   // .w-button.size--md &, .w-alert.size--md & {font-size: round(1.4 * $base-font-size);}
