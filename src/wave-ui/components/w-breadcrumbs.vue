@@ -38,7 +38,7 @@
       name="item"
       :item="item"
       :index="i + 1"
-      :isLast="/* Vue3 camelcase issue: https://github.com/vuejs/vue-next/issues/2488 */ i === items.length - 1")
+      :is-last="i === items.length - 1")
     span(v-else :key="`${i}f`" v-html="item[itemLabelKey]")
 </template>
 
