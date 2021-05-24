@@ -50,7 +50,7 @@
     "gsap": "^3.6.1",
     "ionicons": "^4.6.3",
     "material-design-icons": "^3.0.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^6.0.0",
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^10.2.0",
