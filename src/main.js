@@ -1,4 +1,4 @@
-import { createApp, h } from 'vue'
+import { createApp } from 'vue'
 import App from './app'
 import router from './router'
 import WaveUI from '@/wave-ui/index'
@@ -13,9 +13,7 @@ import Example from '@/documentation/components/example'
 import Alert from '@/documentation/components/alert'
 import Api from '@/documentation/components/api'
 
-const app = createApp({
-  render: () => h(App)
-}).use(router)
+const app = createApp(App).use(router)
 
 new WaveUI(app, {
   colors: {
