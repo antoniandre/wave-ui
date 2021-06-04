@@ -84,7 +84,7 @@ export default {
      * @return {Boolean} true if the form is valid
      */
     async validate (e) {
-      this.$emit('before-validate', { e, errorsCount })
+      this.$emit('before-validate', { e, errorsCount: this.errorsCount })
 
       // Wait for this block to finish checking all the async validators before updating the errorsCount.
       let errorsCount = 0
