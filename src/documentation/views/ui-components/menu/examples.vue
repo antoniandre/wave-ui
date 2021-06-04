@@ -12,12 +12,12 @@ div
         w-button.mb2(v-on="on" outline color="primary") Show menu on hover
       | Menu content
     //- template(#pug).
-      w-menu(detach-to=".example1")
+      w-menu
         template(#activator="{ on }")
           w-button.mb2.mr3(v-on="on" outline color="primary") Show menu on click
         | Menu content
 
-      w-menu(detach-to=".example1" show-on-hover)
+      w-menu(show-on-hover)
         template(#activator="{ on }")
           w-button.mb2(v-on="on" outline color="primary") Show menu on hover
         | Menu content
@@ -25,10 +25,10 @@ div
       &lt;w-menu&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button
-            class="mr3"
             v-on="on"
             outline
-            color="primary"&gt;
+            color="primary"
+            class="mr3"&gt;
             Show menu on click
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -42,6 +42,32 @@ div
           &lt;/w-button&gt;
         &lt;/template&gt;
         Menu content
+      &lt;/w-menu&gt;
+
+  title-link(h2) Persistent menu
+  p A persistent menu can only be closed by clicking on the activator again, or programmatically.
+  example.example1(content-class="pt5")
+    w-menu(detach-to=".example1" persistent)
+      template(#activator="{ on }")
+        w-button.mb2.mr3(v-on="on" outline color="primary") Show menu on click
+      | Click on the button again to close
+    //- template(#pug).
+      w-menu(persistent)
+        template(#activator="{ on }")
+          w-button.mb2.mr3(v-on="on" outline color="primary") Show menu on click
+        | Click on the button again to close
+    template(#html).
+      &lt;w-menu persistent&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button
+            v-on="on"
+            outline
+            color="primary"
+            class="mr3"&gt;
+            Show menu on click
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Click on the button again to close
       &lt;/w-menu&gt;
 
   title-link(h2) Position
