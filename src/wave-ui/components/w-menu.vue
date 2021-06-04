@@ -195,9 +195,9 @@ export default {
       if ('ontouchstart' in window && this.showOnHover && e.type === 'click') {
         shouldShowMenu = !shouldShowMenu
       }
-      if (e.type === 'click' && !this.showOnHover) shouldShowMenu = !shouldShowMenu
-      if (e.type === 'mouseenter' && this.showOnHover) shouldShowMenu = true
-      if (e.type === 'mouseleave' && this.showOnHover) shouldShowMenu = false
+      else if (e.type === 'click' && !this.showOnHover) shouldShowMenu = !shouldShowMenu
+      else if (e.type === 'mouseenter' && this.showOnHover) shouldShowMenu = true
+      else if (e.type === 'mouseleave' && this.showOnHover) shouldShowMenu = false
 
       this.timeoutId = clearTimeout(this.timeoutId)
       // Open the menu.
@@ -231,7 +231,7 @@ export default {
     },
 
     onOutsideMousedown (e) {
-      if (!this.menuEl.contains(e.target)) {
+      if (!this.menuEl.contains(e.target) && !this.activatorEl.contains(e.target)) {
         this.$emit('update:modelValue', (this.showMenu = false))
         this.$emit('input', false)
         this.$emit('close')
