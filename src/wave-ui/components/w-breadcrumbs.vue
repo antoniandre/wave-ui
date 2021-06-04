@@ -34,7 +34,6 @@
     //- Current page when linkLastItem is false.
     slot(
       v-else-if="$scopedSlots.item"
-      :key="`${i}e`"
       name="item"
       :item="item"
       :index="i + 1"
