@@ -55,10 +55,10 @@
     "sass-loader": "^10.1.1",
     "simple-syntax-highlighter": "^1.4.5",
     "splitpanes": "^2.3.6",
-    "vue": "^2.6.12",
+    "vue": "^2.6.13",
     "vue-router": "^3.5.1",
     "vue-svg-loader": "^0.16.0",
-    "vue-template-compiler": "^2.6.12",
+    "vue-template-compiler": "^2.6.13",
     "vueperslides": "^2.15.0"
   }
 }
