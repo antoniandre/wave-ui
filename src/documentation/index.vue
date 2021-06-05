@@ -45,15 +45,6 @@ w-app
 </template>
 
 <script>
-import Vue from 'vue'
-import SshPre from 'simple-syntax-highlighter'
-import 'simple-syntax-highlighter/dist/sshpre.css'
-import TitleLink from '@/documentation/components/title-link.vue'
-import IssueLink from '@/documentation/components/issue-link.vue'
-import UiComponentTitle from '@/documentation/components/ui-component-title.vue'
-import Example from '@/documentation/components/example.vue'
-import Api from '@/documentation/components/api.vue'
-import Alert from '@/documentation/components/alert.vue'
 import Toolbar from '@/documentation/components/toolbar.vue'
 import NavMenu from '@/documentation/components/nav-menu.vue'
 import '@/documentation/scss/index.scss'

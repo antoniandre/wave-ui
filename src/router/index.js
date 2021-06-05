@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { reactive } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router'
 import GettingStarted from '@/documentation/views/getting-started/index.vue'
 import Home from '@/documentation/views/home.vue'
 
@@ -177,9 +177,8 @@ routes.push({
   component: () => import('@/documentation/views/404.vue')
 })
 
-const router = new VueRouter({
-  mode: 'history',
-  base: import.meta.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
 
