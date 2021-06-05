@@ -1,18 +1,19 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-import del from 'rollup-plugin-delete'
+import Delete from 'rollup-plugin-delete'
 import { createVuePlugin } from 'vite-plugin-vue2'
 
 const build = process.env.BUNDLE ? {
   lib: {
     entry: resolve(__dirname, '/src/wave-ui/index.js'),
-    name: 'WaveUI'
+    name: 'WaveUI',
+    formats: ['es', 'umd', 'cjs']
   },
   rollupOptions: {
     plugins: [
       // Rollup generates all the files, then remove what we don't want.
       // @todo: find a better way.
-      del({ targets: ['dist/{images,.htaccess,ghspa.js}', 'dist/*.{ico,txt,html}'], hook: 'generateBundle' })
+      Delete({ targets: ['dist/{images,.htaccess,ghspa.js}', 'dist/*.{ico,txt,html}'], hook: 'generateBundle' })
     ],
     // Make sure to externalize deps that shouldn't be bundled into library.
     external: ['vue'],
