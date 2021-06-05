@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import Delete from 'rollup-plugin-delete'
-import { createVuePlugin } from 'vite-plugin-vue2'
 
 const build = process.env.BUNDLE ? {
   lib: {
@@ -34,8 +34,8 @@ export default defineConfig({
     }
   },
   plugins: [
-    createVuePlugin({
-      vueTemplateOptions: {
+    vue({
+      template: {
         compilerOptions: {
           whitespace: 'preserve'
         }
