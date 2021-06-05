@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WDialog from '@/wave-ui/components/w-dialog'
+import WDialog from '@/wave-ui/components/w-dialog.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the dialog. Any truthy value will show the dialog whereas any falsy value will hide it.',

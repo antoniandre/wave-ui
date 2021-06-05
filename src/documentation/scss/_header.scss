@@ -3,7 +3,7 @@ header {
   position: relative;
   overflow: hidden;
   // box-shadow: inset 5em 0 3em #000;
-  background: url('~@/assets/wave-pattern.svg') fixed left;
+  background: url('@/assets/wave-pattern.svg') fixed left;
   background-size: 300px;
 
   &:before {
@@ -13,7 +13,7 @@ header {
     bottom: 0;
     left: 0;
     right: 0;
-    background: url('~@/assets/japanese-wave.png') repeat-x 0 5px;
+    background: url('@/assets/japanese-wave.png') repeat-x 0 5px;
   }
 
   &:after {

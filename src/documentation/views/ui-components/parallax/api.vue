@@ -12,7 +12,7 @@ div
 </template>
 
 <script>
-import WParallax from '@/wave-ui/components/w-parallax'
+import WParallax from '@/wave-ui/components/w-parallax.vue'
 
 const propsDescs = {}
 

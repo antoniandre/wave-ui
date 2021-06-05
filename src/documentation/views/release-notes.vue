@@ -24,6 +24,10 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.32.5
+      p #[strong.code w-tag]: Fix border radius on focused clickable round tag.
+
+    li.patch
       strong.version v1.32.4
       p #[strong.code w-menu]: Allow closing menu on activator click.
 

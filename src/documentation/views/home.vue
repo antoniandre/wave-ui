@@ -269,7 +269,7 @@ export default {
 
   computed: {
     version () {
-      return process.env.VUE_APP_VERSION.replace(
+      return process.env.VITE_APP_VERSION.replace(
         /-(\w)(\w+)\.(\d+)/,
         (m0, m1, m2, m3) => ` <strong>${m1.toUpperCase()}${m2} ${m3}</strong>`
       )
@@ -715,7 +715,7 @@ export default {
       left: 0;
       right: 0;
       z-index: 1;
-      background: url('~@/assets/japanese-wave.png') repeat-x bottom left;
+      background: url('@/assets/japanese-wave.png') repeat-x bottom left;
       background-size: cover;
       padding-bottom: 23%;
       min-height: 110px;

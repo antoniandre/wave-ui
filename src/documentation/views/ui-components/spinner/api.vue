@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WSpinner from '@/wave-ui/components/w-spinner'
+import WSpinner from '@/wave-ui/components/w-spinner.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>The <code>value</code> or <code>v-model</code> controls the visibility of the spinner. Any truthy value will show the spinner whereas any falsy value will hide it. If no value/v-model or <code>undefined</code> is provided, the spinner will be visible.',

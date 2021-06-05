@@ -28,14 +28,12 @@ div
         }).$mount('#app')
       ssh-pre.grow.ma2.mt8(language="js" label="VUE 3 - main.js" style="min-width: 290px").
         // VUE 3.
-        import { createApp, h } from 'vue'
+        import { createApp } from 'vue'
         import App from './App.vue'
         import WaveUI from 'wave-ui'
         import 'wave-ui/dist/wave-ui.css'
 
-        const app = createApp({
-          render: () => h(App)
-        })
+        const app = createApp(App)
 
         new WaveUI(app, {
           // Some Wave UI options.

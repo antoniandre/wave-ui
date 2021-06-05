@@ -12,7 +12,7 @@ div
 </template>
 
 <script>
-import WSteps from '@/wave-ui/components/w-steps'
+import WSteps from '@/wave-ui/components/w-steps.vue'
 
 const propsDescs = {}
 

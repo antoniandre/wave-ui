@@ -360,7 +360,7 @@ div
             To continue browsing this site you must agree.
         .spacer
         w-button(sm bg-color="primary" dark @click="showCookieNotice = false")
-          w-icon.mr2 wi-check
+          w-icon.mr2 mdi mdi-cookie
           | I agree
     template(#html).
       &lt;w-button
@@ -399,7 +399,7 @@ div
             bg-color="primary"
             dark
             @click="showCookieNotice = false"&gt;
-            &lt;w-icon class="mr2"&gt;wi-check&lt;/w-icon&gt;
+            &lt;w-icon class="mr2"&gt;mdi mdi-cookie&lt;/w-icon&gt;
             I agree
           &lt;/w-button&gt;
         &lt;/div&gt;

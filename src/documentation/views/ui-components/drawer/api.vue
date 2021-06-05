@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WDrawer from '@/wave-ui/components/w-drawer'
+import WDrawer from '@/wave-ui/components/w-drawer.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the drawer. Any truthy value will show the drawer whereas any falsy value will hide it.',

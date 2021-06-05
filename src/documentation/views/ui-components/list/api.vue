@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WList from '@/wave-ui/components/w-list'
+import WList from '@/wave-ui/components/w-list.vue'
 
 const propsDescs = {
   items: 'Expecting an array of objects. Each object being a list item, it should include at least a <code>label</code> attribute.<br>Alternatively, you can provide an integer number (call it <em class="code">x</em>), to loop through and create <em class="code">x</em> items in the list. You can then use the individual slots <code>item-title.x</code> &amp; <code>item-content.x</code> to define each item.',

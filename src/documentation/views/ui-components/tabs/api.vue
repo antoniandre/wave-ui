@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WTabs from '@/wave-ui/components/w-tabs'
+import WTabs from '@/wave-ui/components/w-tabs.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide a tab index (a number starting from 0) to open it. This value gets updated when using a v-model.',

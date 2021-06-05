@@ -45,7 +45,9 @@ div
       &lt;/w-menu&gt;
 
   title-link(h2) Persistent menu
-  p A persistent menu can only be closed by clicking on the activator again, or programmatically.
+  p.
+    A persistent menu can only be closed by clicking on the activator again, or programmatically.#[br]
+    Clicking outside the menu will not close it.
   example.example1(content-class="pt5")
     w-menu(detach-to=".example1" persistent)
       template(#activator="{ on }")
