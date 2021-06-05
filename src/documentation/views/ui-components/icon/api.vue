@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WIcon from '@/wave-ui/components/w-icon'
+import WIcon from '@/wave-ui/components/w-icon.vue'
 
 const propsDescs = {
   tag: 'The HTML tag to render the icon into. <code>&lt;i&gt;</code> by default.',

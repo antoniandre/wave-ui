@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WApp from '@/wave-ui/components/w-app'
+import WApp from '@/wave-ui/components/w-app.vue'
 
 const propsDescs = {
   block: 'Sets the layout to <code>display: block</code>. By default the layout is: <code>display: flex</code>, <code>flex-direction: column</code>.',

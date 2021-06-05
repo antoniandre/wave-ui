@@ -12,7 +12,7 @@ div
 </template>
 
 <script>
-import WDatePicker from '@/wave-ui/components/w-date-picker'
+import WDatePicker from '@/wave-ui/components/w-date-picker.vue'
 
 const propsDescs = {}
 

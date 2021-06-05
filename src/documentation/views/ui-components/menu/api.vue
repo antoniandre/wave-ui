@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WMenu from '@/wave-ui/components/w-menu'
+import WMenu from '@/wave-ui/components/w-menu.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the menu. Any truthy value will show the menu whereas any falsy value will hide it.',

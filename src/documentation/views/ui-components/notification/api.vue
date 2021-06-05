@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WNotification from '@/wave-ui/components/w-notification'
+import WNotification from '@/wave-ui/components/w-notification.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the notification. Any truthy value will show the notification whereas any falsy value will hide it.',

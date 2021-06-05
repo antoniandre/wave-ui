@@ -89,16 +89,14 @@ div
         template(#item-content.2)
           ssh-pre.ma0(language="js").
             // Keep these 2 imports.
-            import { createApp, h } from 'vue'
+            import { createApp } from 'vue'
             import App from './App.vue'
 
             // 1.
             // Import Wave UI from the src directory &amp; create the Vue app.
             import WaveUI from 'wave-ui/src/wave-ui/core'
 
-            const app = createApp({
-              render: () => h(App)
-            })
+            const app = createApp(App)
 
             // 2.
             // Import only the components you need. e.g.

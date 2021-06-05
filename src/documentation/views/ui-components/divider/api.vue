@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WDivider from '@/wave-ui/components/w-divider'
+import WDivider from '@/wave-ui/components/w-divider.vue'
 
 const propsDescs = {
   color: 'Provide a color for the divider. Accepts all the color names of the color palette, status colors, or custom colors (learn more about all the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',

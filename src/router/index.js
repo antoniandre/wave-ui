@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import GettingStarted from '@/documentation/views/getting-started'
-import Home from '@/documentation/views/home'
+import GettingStarted from '@/documentation/views/getting-started/index.vue'
+import Home from '@/documentation/views/home.vue'
 
 Vue.use(VueRouter)
 // The loading state of Vue Router is appended to $router, so a
@@ -18,7 +18,7 @@ const routes = [
   {
     path: '/why-wave-ui',
     name: 'why-wave-ui',
-    component: () => import(/* webpackChunkName: "why-wave-ui" */ '@/documentation/views/why-wave-ui.vue')
+    component: () => import('@/documentation/views/why-wave-ui.vue')
   },
   {
     path: '/getting-started',
@@ -28,17 +28,17 @@ const routes = [
   {
     path: '/browser-support',
     name: 'browser-support',
-    component: () => import(/* webpackChunkName: "browser-support" */ '@/documentation/views/browser-support.vue')
+    component: () => import('@/documentation/views/browser-support.vue')
   },
   {
     path: '/customization',
     name: 'customization',
-    component: () => import(/* webpackChunkName: "customization" */ '@/documentation/views/customization.vue')
+    component: () => import('@/documentation/views/customization.vue')
   },
   {
     path: '/breakpoints',
     name: 'breakpoints',
-    component: () => import(/* webpackChunkName: "breakpoints" */ '@/documentation/views/breakpoints.vue')
+    component: () => import('@/documentation/views/breakpoints.vue')
   },
   {
     path: '/layout',
@@ -48,47 +48,47 @@ const routes = [
   {
     path: '/layout--spaces',
     name: 'layout-spaces',
-    component: () => import(/* webpackChunkName: "layout-spaces" */ '@/documentation/views/layout-spaces.vue')
+    component: () => import('@/documentation/views/layout-spaces.vue')
   },
   {
     path: '/layout--grid-system',
     name: 'layout-grid-system',
-    component: () => import(/* webpackChunkName: "layout-grid-system" */ '@/documentation/views/layout-grid-system.vue')
+    component: () => import('@/documentation/views/layout-grid-system.vue')
   },
   {
     path: '/layout--flex',
     name: 'layout-flex',
-    component: () => import(/* webpackChunkName: "layout-flex" */ '@/documentation/views/layout-flex.vue')
+    component: () => import('@/documentation/views/layout-flex.vue')
   },
   {
     path: '/typography',
     name: 'typography',
-    component: () => import(/* webpackChunkName: "typography" */ '@/documentation/views/typography.vue')
+    component: () => import('@/documentation/views/typography.vue')
   },
   {
     path: '/colors',
     name: 'colors',
-    component: () => import(/* webpackChunkName: "colors" */ '@/documentation/views/colors.vue')
+    component: () => import('@/documentation/views/colors.vue')
   },
   {
     path: '/shadows-borders-radii',
     name: 'shadows-borders-radii',
-    component: () => import(/* webpackChunkName: "shadows-borders-radii" */ '@/documentation/views/shadows-borders-radii.vue')
+    component: () => import('@/documentation/views/shadows-borders-radii.vue')
   },
   {
     path: '/transitions',
     name: 'transitions',
-    component: () => import(/* webpackChunkName: "transitions" */ '@/documentation/views/transitions.vue')
+    component: () => import('@/documentation/views/transitions.vue')
   },
   {
     path: '/release-notes',
     name: 'release-notes',
-    component: () => import(/* webpackChunkName: "release-notes" */ '@/documentation/views/release-notes.vue')
+    component: () => import('@/documentation/views/release-notes.vue')
   },
   {
     path: '/backers',
     name: 'backers',
-    component: () => import(/* webpackChunkName: "backers" */ '@/documentation/views/backers.vue')
+    component: () => import('@/documentation/views/backers.vue')
   },
   {
     path: '/form',
@@ -98,12 +98,12 @@ const routes = [
   {
     path: '/w-list',
     name: 'w-list',
-    component: () => import(/* webpackChunkName: "w-list" */ '@/documentation/views/ui-components/list/index.vue'),
+    component: () => import('@/documentation/views/ui-components/list/index.vue'),
     children: [
       {
         path: ':item',
         name: 'w-list-item',
-        component: () => import(/* webpackChunkName: "w-list-item" */ '@/documentation/views/ui-components/list/item.vue'),
+        component: () => import('@/documentation/views/ui-components/list/item.vue'),
         props: true
       }
     ]
@@ -153,7 +153,7 @@ components.forEach(item => {
   routes.push({
     path: item.path || `/w-${item.id}`,
     name: item.id,
-    component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/ui-components/${item.id}/index.vue`)
+    component: () => import(`../documentation/views/ui-components/${item.id}/index.vue`)
   })
 })
 
@@ -167,7 +167,7 @@ externalComponents.forEach(item => {
   routes.push({
     path: item.path || `/w-${item.id}`,
     name: item.id,
-    component: () => import(/* webpackChunkName: "[request]" */ `@/documentation/views/ui-components/${item.id}.vue`)
+    component: () => import(`../documentation/views/ui-components/${item.id}.vue`)
   })
 })
 
@@ -175,7 +175,7 @@ externalComponents.forEach(item => {
 routes.push({
   path: '/*',
   name: 'not-found',
-  component: () => import(/* webpackChunkName: "not-found" */ '@/documentation/views/404.vue')
+  component: () => import('@/documentation/views/404.vue')
 })
 
 const router = new VueRouter({

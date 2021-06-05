@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './app'
+import App from './app.vue'
 import router from './router'
 import WaveUI from '@/wave-ui/index'
 import '@mdi/font/css/materialdesignicons.min.css'

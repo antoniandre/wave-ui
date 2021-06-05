@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WForm from '@/wave-ui/components/w-form'
+import WForm from '@/wave-ui/components/w-form.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Contains the status of the form validity at all times. Three values are possible: <code>null</code> when pristine (untouched), <code>false</code> when invalid, <code>true</code> when valid.<br>This value gets updated every time a validation is triggered on a single field or on all the fields at once on form submit.<br>Setting this value to <code>null</code> will reset the form.',
