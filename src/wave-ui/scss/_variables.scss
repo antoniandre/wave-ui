@@ -1,8 +1,8 @@
 @use "sass:math";
 
 @function divide($a, $b) {
-  // @return math.div($a, $b); // Atm this still breaks in vue-cli.
-  @return $a / $b;
+  @return math.div($a, $b); // Atm this still breaks in vue-cli.
+  // @return $a / $b;
 }
 
 // GLOBAL DEFAULTS.
