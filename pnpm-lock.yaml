@@ -18,6 +18,7 @@ specifiers:
   vite-plugin-pug: ^0.3.0
   vue: ^3.1.0-beta.6
   vue-cal: ^4.2.0
+  vue-router: ^4.0.8
   vueperslides: ^3.3.0
 
 devDependencies:
@@ -38,6 +39,7 @@ devDependencies:
   vite-plugin-pug: 0.3.0_vite@2.3.6
   vue: 3.1.0-beta.7
   vue-cal: 4.2.0
+  vue-router: 4.0.8_vue@3.1.0-beta.7
   vueperslides: 3.3.0
 
 packages:
@@ -171,6 +173,10 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.1.0-beta.6
       '@vue/shared': 3.1.0-beta.6
+    dev: true
+
+  /@vue/devtools-api/6.0.0-beta.12:
+    resolution: {integrity: sha512-PtHmAxFmCyCElV7uTWMrXj+fefwn4lCfTtPo9fPw0SK8/7e3UaFl8IL7lnugJmNFfeKQyuTkSoGvTq1uDaRF6Q==}
     dev: true
 
   /@vue/reactivity/3.1.0-beta.7:
@@ -1101,6 +1107,15 @@ packages:
 
   /vue-cal/4.2.0:
     resolution: {integrity: sha512-oJPuIwluNzsu34o2PB8v80iwEt8BkAjLxHVnMtFopvoqQKwwKS/EKPj+TpoeFRILy2iUscDf86WukuGEm163ag==}
+    dev: true
+
+  /vue-router/4.0.8_vue@3.1.0-beta.7:
+    resolution: {integrity: sha512-42mWSQaH7CCBQDspQTHv63f34VEnZC20g9QNK4WJ/zW8SdIUeT6TQ2i/78fjF/pVBUPLBWrGhvB7uDnaz7O/pA==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@vue/devtools-api': 6.0.0-beta.12
+      vue: 3.1.0-beta.7
     dev: true
 
   /vue/3.1.0-beta.7:
