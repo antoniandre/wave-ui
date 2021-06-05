@@ -1,11 +1,12 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@babel/eslint-parser': ^7.14.4
   '@mdi/font': ^5.9.55
   '@vitejs/plugin-vue': ^1.2.3
   '@vue/compiler-sfc': ^3.0.11
+  autoprefixer: ^10.2.6
   axios: ^0.21.1
-  babel-eslint: ^10.1.0
   core-js: ^3.13.1
   eslint: ^7.27.0
   eslint-plugin-vue: ^7.10.0
@@ -29,11 +30,12 @@ specifiers:
   vueperslides: ^2.15.0
 
 devDependencies:
+  '@babel/eslint-parser': 7.14.4_eslint@7.28.0
   '@mdi/font': 5.9.55
   '@vitejs/plugin-vue': 1.2.3_@vue+compiler-sfc@3.0.11
   '@vue/compiler-sfc': 3.0.11_vue@2.6.13
+  autoprefixer: 10.2.6
   axios: 0.21.1
-  babel-eslint: 10.1.0_eslint@7.28.0
   core-js: 3.13.1
   eslint: 7.28.0
   eslint-plugin-vue: 7.10.0_eslint@7.28.0
@@ -95,6 +97,19 @@ packages:
       source-map: 0.5.7
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@babel/eslint-parser/7.14.4_eslint@7.28.0:
+    resolution: {integrity: sha512-7CTckFLPBGEfCKqlrnJq2PIId3UmJ5hW+D4dsv/VvuA5DapgqyZFCttq+8oeRIJMZQizFIe5gel3xm2SbrqlYA==}
+    engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
+    peerDependencies:
+      '@babel/core': '>=7.11.0'
+      eslint: '>=7.5.0'
+    dependencies:
+      eslint: 7.28.0
+      eslint-scope: 5.1.1
+      eslint-visitor-keys: 2.1.0
+      semver: 6.3.0
     dev: true
 
   /@babel/generator/7.14.3:
@@ -709,6 +724,21 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
+  /autoprefixer/10.2.6:
+    resolution: {integrity: sha512-8lChSmdU6dCNMCQopIf4Pe5kipkAGj/fvTMslCsih0uHpOrXOPUEVOmYMMqmw3cekQkSD7EhIeuYl5y0BLdKqg==}
+    engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
+    peerDependencies:
+      postcss: ^8.1.0
+    dependencies:
+      browserslist: 4.16.6
+      caniuse-lite: 1.0.30001234
+      colorette: 1.2.2
+      fraction.js: 4.1.1
+      normalize-range: 0.1.2
+      postcss-value-parser: 4.1.0
+    dev: true
+
   /aws-sign2/0.7.0:
     resolution: {integrity: sha1-tG6JCTSpWR8tL2+G1+ap8bP+dqg=}
     dev: true
@@ -731,24 +761,6 @@ packages:
       chalk: 1.1.3
       esutils: 2.0.3
       js-tokens: 3.0.2
-    dev: true
-
-  /babel-eslint/10.1.0_eslint@7.28.0:
-    resolution: {integrity: sha512-ifWaTHQ0ce+448CYop8AdrQiBsGrnC+bMgfyKFdi6EsPLTAWG+QfyDeM6OH+FmWnKvEq5NnBMLvlBUPKQZoDSg==}
-    engines: {node: '>=6'}
-    deprecated: babel-eslint is now @babel/eslint-parser. This package will no longer receive updates.
-    peerDependencies:
-      eslint: '>= 4.12.1'
-    dependencies:
-      '@babel/code-frame': 7.12.13
-      '@babel/parser': 7.14.4
-      '@babel/traverse': 7.14.2
-      '@babel/types': 7.14.4
-      eslint: 7.28.0
-      eslint-visitor-keys: 1.3.0
-      resolve: 1.20.0
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /babel-helper-builder-binary-assignment-operator-visitor/6.24.1:
@@ -1941,6 +1953,10 @@ packages:
       mime-types: 2.1.31
     dev: true
 
+  /fraction.js/4.1.1:
+    resolution: {integrity: sha512-MHOhvvxHTfRFpF1geTK9czMIZ6xclsEor2wkIGYYq+PxcQqT7vStJqjhe6S1TenZrMZzo+wlqOufBDVepUEgPg==}
+    dev: true
+
   /fs-extra/9.1.0:
     resolution: {integrity: sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==}
     engines: {node: '>=10'}
@@ -2778,6 +2794,11 @@ packages:
 
   /normalize-path/3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
+  /normalize-range/0.1.2:
+    resolution: {integrity: sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=}
     engines: {node: '>=0.10.0'}
     dev: true
 
