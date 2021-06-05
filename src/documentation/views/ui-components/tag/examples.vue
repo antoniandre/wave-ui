@@ -133,6 +133,23 @@ div
         a bigger tag
       &lt;/w-tag&gt;
 
+  title-link(h2) Custom content
+  example(content-class="w-flex align-center")
+    w-tag(color="pink-light1" bg-color="pink-light5")
+      w-icon.mr1(sm) mdi mdi-heart
+      | like it
+    //- template(#pug).
+      w-tag(color="pink-light1" bg-color="pink-light5")
+        w-icon.mr1(sm) mdi mdi-heart
+        | like it
+    template(#html).
+      &lt;w-tag color="pink-light1" bg-color="pink-light5"&gt;
+        &lt;w-icon class="mr1" sm&gt;
+          mdi mdi-heart
+        &lt;/w-icon&gt;
+        like it
+      &lt;/w-tag&gt;
+
   title-link(h2) Toggleable state &amp; closable
   p.
     When a tag has a #[code v-model] or #[code value], it becomes toggleable (two different states) and clickable.
@@ -203,9 +220,10 @@ div
       &lt;w-tag
         v-model="tagOn"
         :color="tagOn ? 'primary' : 'grey'"
-        dark
         lg
-        toggle&gt;
+        round
+        outline
+        width="5.5em"&gt;
         &lt;w-icon v-if="tagOn" class="ml-1 mr1"&gt;wi-check&lt;/w-icon&gt;
         {{ "\{\{ tagOn ? 'active' : 'inactive' \}\}" }}
       &lt;/w-tag&gt;
@@ -238,23 +256,6 @@ div
       data: () => ({
         tagOn: true
       })
-
-  title-link(h2) Custom content
-  example(content-class="w-flex align-center")
-    w-tag(color="pink-light1" bg-color="pink-light5")
-      w-icon.mr1(sm) mdi mdi-heart
-      | like it
-    //- template(#pug).
-      w-tag(color="pink-light1" bg-color="pink-light5")
-        w-icon.mr1(sm) mdi mdi-heart
-        | like it
-    template(#html).
-      &lt;w-tag color="pink-light1" bg-color="pink-light5"&gt;
-        &lt;w-icon class="mr1" sm&gt;
-          mdi mdi-heart
-        &lt;/w-icon&gt;
-        like it
-      &lt;/w-tag&gt;
 </template>
 
 <script>
