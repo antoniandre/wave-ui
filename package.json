@@ -3,9 +3,16 @@
   "version": "1.32.4",
   "description": "An emerging UI framework for Vue.js & Vue 3 with only the bright side. :sunny:",
   "author": "Antoni Andre <antoniandre.web@gmail.com>",
-  "main": "./dist/wave-ui.common.js",
-  "unpkg": "dist/wave-ui.umd.min.js",
-  "jsdelivr": "dist/wave-ui.umd.min.js",
+  "main": "./dist/wave-ui.umd.js",
+  "unpkg": "dist/wave-ui.umd.js",
+  "jsdelivr": "dist/wave-ui.umd.js",
+  "module": "./dist/wave-ui.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/wave-ui.es.js",
+      "require": "./dist/wave-ui.umd.js"
+    }
+  },
   "files": [
     "dist",
     "src/wave-ui"
@@ -22,10 +29,11 @@
   "license": "MIT",
   "repository": "https://github.com/antoniandre/wave-ui",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name wave-ui ./src/wave-ui/index.js --dest ./dist && rm ./dist/demo.html",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build --base /wave-ui/",
+    "build-bundle": "BUNDLE=true vite build && mv ./dist/style.css ./dist/wave-ui.css",
+    "serve": "vite preview --root docs --base /wave-ui/",
+    "lint": "vite lint"
   },
   "sideEffects": [
     "*.css",
@@ -35,10 +43,8 @@
   "dependencies": {},
   "devDependencies": {
     "@mdi/font": "^5.9.55",
-    "@vue/cli-plugin-babel": "^4.5.13",
-    "@vue/cli-plugin-eslint": "^4.5.13",
-    "@vue/cli-plugin-router": "^4.5.13",
-    "@vue/cli-service": "^4.5.13",
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vue/compiler-sfc": "^3.0.11",
     "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.13.1",
@@ -50,15 +56,19 @@
     "ionicons": "^4.6.3",
     "material-design-icons": "^3.0.1",
     "node-sass": "^4.14.1",
-    "pug": "^3.0.2",
-    "pug-plain-loader": "^1.1.0",
-    "sass-loader": "^10.1.1",
+    "rollup-plugin-delete": "^2.0.0",
+    "sass": "^1.34.1",
     "simple-syntax-highlighter": "^1.4.5",
     "splitpanes": "^2.3.6",
+    "vite": "^2.3.6",
+    "vite-plugin-pug": "^0.3.0",
+    "vite-plugin-vue2": "^1.6.2",
     "vue": "^2.6.13",
     "vue-router": "^3.5.1",
     "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.13",
     "vueperslides": "^2.15.0"
+  },
+  "peerDependencies": {
   }
 }
