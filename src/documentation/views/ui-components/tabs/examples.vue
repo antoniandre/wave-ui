@@ -204,6 +204,7 @@ div
       })
 
   title-link(h2) Content transitions
+  p Change tab to see the transition.
   example
     w-radios.mb3(:items="transitions" v-model="tabs4.transition")
     w-tabs(:items="tabs4.items" :transition="tabs4.transition")

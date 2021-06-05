@@ -38,24 +38,24 @@ div
       w-tag.mr4(bg-color="primary" tile) tile
       w-tag(color="primary" shadow) shadow
     template(#html).
-      &lt;w-tag 
-        class="mr4" 
-        bg-color="primary" 
+      &lt;w-tag
+        class="mr4"
+        bg-color="primary"
         round&gt;
         round
       &lt;/w-tag&gt;
 
-      &lt;w-tag 
-        class="mr4" 
-        bg-color="primary" 
+      &lt;w-tag
+        class="mr4"
+        bg-color="primary"
         tile&gt;
         tile
       &lt;/w-tag&gt;
 
-      &lt;w-tag 
-        color="primary" 
+      &lt;w-tag
+        color="primary"
         shadow&gt;
-        shadow  
+        shadow
       &lt;/w-tag&gt;
 
   title-link(h2) Sizes
@@ -82,51 +82,53 @@ div
       w-tag(outline color="primary" xl width="10em" height="3em") a bigger tag
     template(#html).
       &lt;div class="w-flex wrap align-center"&gt;
-        &lt;w-tag 
-          class="ma1" 
-            color="primary" 
-            xs&gt;
-            extra small
+        &lt;w-tag
+          class="ma1"
+          color="primary"
+          xs&gt;
+          extra
+          small
         &lt;/w-tag&gt;
 
-        &lt;w-tag 
-          class="ma1" 
-            color="primary" 
-            sm&gt;
-            small
+        &lt;w-tag
+          class="ma1"
+          color="primary"
+          sm&gt;
+          small
         &lt;/w-tag&gt;
 
-        &lt;w-tag 
-          class="ma1" 
-            color="primary" 
-            md&gt;
-            medium
+        &lt;w-tag
+          class="ma1"
+          color="primary"
+          md&gt;
+          medium
         &lt;/w-tag&gt;
 
-        &lt;w-tag 
-          class="ma1" 
-            color="primary" 
-            lg&gt;
-            large
+        &lt;w-tag
+          class="ma1"
+          color="primary"
+          lg&gt;
+          large
         &lt;/w-tag&gt;
 
-        &lt;w-tag 
-          class="ma1" 
-            color="primary" 
-            xl&gt;
-            extra large
+        &lt;w-tag
+          class="ma1"
+          color="primary"
+          xl&gt;
+          extra
+          large
         &lt;/w-tag&gt;
       &lt;/div&gt;
 
       &lt;div class="title3 my4"&gt;
         Custom width and height
       &lt;/div&gt;
-      
-      &lt;w-tag 
-        outline 
-        color="primary" 
-        xl 
-        width="10em" 
+
+      &lt;w-tag
+        outline
+        color="primary"
+        xl
+        width="10em"
         height="3em"&gt;
         a bigger tag
       &lt;/w-tag&gt;
@@ -140,8 +142,7 @@ div
       v-model="tagOn1"
       :bg-color="tagOn1 ? 'primary' : 'primary-light2'"
       dark
-      lg
-      toggle) {{ tagOn1 ? 'active' : 'inactive' }}
+      lg) {{ tagOn1 ? 'active' : 'inactive' }}
     span.ml4
       | Value:
       code.ml1 {{ tagOn1 }}
@@ -150,8 +151,7 @@ div
         v-model="tagOn"
         :bg-color="tagOn ? 'primary' : 'primary-light2'"
         dark
-        lg
-        toggle) {{ "\{\{ tagOn ? 'active' : 'inactive' \}\}" }}
+        lg) {{ "\{\{ tagOn ? 'active' : 'inactive' \}\}" }}
       span.ml4
         | Value:
         code.ml1 {{ '\{\{ tagOn \}\}' }}
@@ -160,8 +160,53 @@ div
         v-model="tagOn"
         :bg-color="tagOn ? 'primary' : 'primary-light2'"
         dark
+        lg&gt;
+        {{ "\{\{ tagOn ? 'active' : 'inactive' \}\}" }}
+      &lt;/w-tag&gt;
+
+      &lt;span class="ml4"&gt;
+        Value:
+        &lt;code class="ml1"&gt;{{ '\{\{ tagOn \}\}' }}&lt;/code&gt;
+      &lt;/span&gt;
+    template(#js).
+      data: () => ({
+        tagOn: false
+      })
+
+  example(content-class="w-flex align-center")
+    w-tag(
+      v-model="tagOn1"
+      :color="tagOn1 ? 'primary' : 'grey'"
+      lg
+      round
+      outline
+      width="5.5em")
+      w-icon.ml-1.mr1(v-if="tagOn1") wi-check
+      | {{ tagOn1 ? 'active' : 'inactive' }}
+    span.ml4
+      | Value:
+      code.ml1 {{ tagOn1 }}
+    //- template(#pug).
+      w-tag(
+        v-model="tagOn"
+        :color="tagOn ? 'primary' : 'grey'"
+        lg
+        round
+        outline
+        width="5.5em")
+        w-icon.ml-1.mr1(v-if="tagOn") wi-check
+        | {{ "\{\{ tagOn ? 'active' : 'inactive' \}\}" }}
+      span.ml4
+        | Value:
+        code.ml1 {{ '\{\{ tagOn \}\}' }}
+    template(#html).
+      &lt;w-tag
+        v-model="tagOn"
+        :color="tagOn ? 'primary' : 'grey'"
+        dark
         lg
         toggle&gt;
+        &lt;w-icon v-if="tagOn" class="ml-1 mr1"&gt;wi-check&lt;/w-icon&gt;
         {{ "\{\{ tagOn ? 'active' : 'inactive' \}\}" }}
       &lt;/w-tag&gt;
 
@@ -180,12 +225,12 @@ div
     //- template(#pug).
       w-tag(v-model="tagOn" closable lg :outline="tagOn" color="primary" :width="145") v-model &amp; close
     template(#html).
-      &lt;w-tag 
-        v-model="tagOn" 
-        closable 
-        lg 
-        :outline="tagOn" 
-        color="primary" 
+      &lt;w-tag
+        v-model="tagOn"
+        closable
+        lg
+        :outline="tagOn"
+        color="primary"
         :width="145"&gt;
         v-model &amp; close
       &lt;/w-tag&gt;
