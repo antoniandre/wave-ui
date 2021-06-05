@@ -155,6 +155,7 @@ export default {
       border-radius: $border-radius - 1;
       transition: 0.2s;
     }
+    &.w-tag--round:before {border-radius: inherit;}
 
     // Hover state.
     &:hover:before {background-color: currentColor;opacity: 0.06;}

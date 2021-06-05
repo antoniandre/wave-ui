@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WTimeline from '@/wave-ui/components/w-timeline'
+import WTimeline from '@/wave-ui/components/w-timeline.vue'
 
 const propsDescs = {
   items: 'The items to display in the timeline. Usually an array of objects containing at least a <code>title</code>.<br>In some cases you may also provide an integer (items count) to loop through. Each item can then be defined in the template using the <code>item.x</code> slot for each iteration of this integer.',

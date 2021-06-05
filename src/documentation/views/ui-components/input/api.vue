@@ -12,7 +12,7 @@ div
 
 <script>
 import FormElementMixin from '@/wave-ui/mixins/form-elements'
-import WInput from '@/wave-ui/components/w-input'
+import WInput from '@/wave-ui/components/w-input.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>The text content of the input field.<br>Gets updated on text input.',

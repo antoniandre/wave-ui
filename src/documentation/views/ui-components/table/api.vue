@@ -12,7 +12,7 @@ div
 </template>
 
 <script>
-import WTable from '@/wave-ui/components/w-table'
+import WTable from '@/wave-ui/components/w-table.vue'
 
 const propsDescs = {}
 

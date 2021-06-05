@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WProgress from '@/wave-ui/components/w-progress'
+import WProgress from '@/wave-ui/components/w-progress.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Accepts a percentage value (ranging from 0 to 100) as a number or a string.<br>If the value is <code>undefined</code>, <code>-1</code> or not provided at all, it will be assumed indeterminate.',

@@ -23,8 +23,8 @@ div
 
 <script>
 import FormElementMixin from '@/wave-ui/mixins/form-elements'
-import WCheckboxes from '@/wave-ui/components/w-checkboxes'
-import WCheckbox from '@/wave-ui/components/w-checkbox'
+import WCheckboxes from '@/wave-ui/components/w-checkboxes.vue'
+import WCheckbox from '@/wave-ui/components/w-checkbox.vue'
 
 const checkboxes = {
   propsDescs: {

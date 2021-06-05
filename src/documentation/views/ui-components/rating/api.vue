@@ -12,7 +12,7 @@ div
 
 <script>
 import FormElementMixin from '@/wave-ui/mixins/form-elements'
-import WRating from '@/wave-ui/components/w-rating'
+import WRating from '@/wave-ui/components/w-rating.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Dictates the current rating value. When the user rates, the <code>v-model</code> value will be updated.',

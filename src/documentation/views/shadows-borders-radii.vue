@@ -270,7 +270,7 @@ export default {
   data: () => ({
     colors,
     horizontal: false,
-    baseUrl: process.env.BASE_URL
+    baseUrl: import.meta.env.BASE_URL
   })
 }
 </script>

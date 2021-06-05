@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WBadge from '@/wave-ui/components/w-badge'
+import WBadge from '@/wave-ui/components/w-badge.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the badge. Any truthy value will show the badge whereas any falsy value will hide it.',

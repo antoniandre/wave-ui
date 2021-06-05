@@ -59,9 +59,9 @@ main
 </template>
 
 <script>
-import StandardInstall from './install-standard'
-import CustomInstall from './install-custom'
-import NuxtInstall from './install-nuxt'
+import StandardInstall from './install-standard.vue'
+import CustomInstall from './install-custom.vue'
+import NuxtInstall from './install-nuxt.vue'
 
 export default {
   components: { StandardInstall, CustomInstall, NuxtInstall },

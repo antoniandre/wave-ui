@@ -12,7 +12,7 @@ div
 
 <script>
 import FormElementMixin from '@/wave-ui/mixins/form-elements'
-import WSelect from '@/wave-ui/components/w-select'
+import WSelect from '@/wave-ui/components/w-select.vue'
 
 const propsDescs = {
   items: 'Expecting an array of objects. Each object being a select list item, it should include at least a <code>label</code> attribute.',

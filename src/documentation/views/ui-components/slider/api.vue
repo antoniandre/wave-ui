@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WSlider from '@/wave-ui/components/w-slider'
+import WSlider from '@/wave-ui/components/w-slider.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Dictates the range selection of the slider. When the user changes the range, the <code>v-model</code> value will be updated.',

@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WTooltip from '@/wave-ui/components/w-tooltip'
+import WTooltip from '@/wave-ui/components/w-tooltip.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the tooltip. Any truthy value will show the tooltip whereas any falsy value will hide it.',

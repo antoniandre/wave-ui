@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WImage from '@/wave-ui/components/w-image'
+import WImage from '@/wave-ui/components/w-image.vue'
 
 const propsDescs = {
   tag: 'Tells which tag to use for the <strong class="code">w-image</strong>\'s image. It can be any valid HTML tag, like &lt;span&gt; or &lt;div&gt;. The wrapper of the image will use a &lt;span&gt; tag unless you use set the <code>tag</code> to div.<br><br>If you use the <code>img</code> tag, the image itself will use the &lt;img&gt; tag and the wrapper will use a &lt;span&gt; tag. The image will have a particular behavior as explained in the <a href="#using-the-img-tag">Using the &lt;img&gt; tag</a> example.',

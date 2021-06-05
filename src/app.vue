@@ -4,7 +4,7 @@ documentation(v-else)
 </template>
 
 <script>
-import Documentation from '@/documentation/index'
+import Documentation from '@/documentation/index.vue'
 
 export default {
   components: { Documentation }

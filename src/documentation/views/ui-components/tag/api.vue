@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WTag from '@/wave-ui/components/w-tag'
+import WTag from '@/wave-ui/components/w-tag.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>When a tag has a <code>v-model</code> or <code>value</code>, it becomes toggleable (two different states) and clickable. When the user clicks it, its <code>v-model</code> boolean value is updated.',

@@ -3,9 +3,16 @@
   "version": "2.19.3",
   "description": "An emerging UI framework for Vue.js & Vue 3 with only the bright side. :sunny:",
   "author": "Antoni Andre <antoniandre.web@gmail.com>",
-  "main": "./dist/wave-ui.common.js",
-  "unpkg": "dist/wave-ui.umd.min.js",
-  "jsdelivr": "dist/wave-ui.umd.min.js",
+  "main": "./dist/wave-ui.umd.js",
+  "unpkg": "dist/wave-ui.umd.js",
+  "jsdelivr": "dist/wave-ui.umd.js",
+  "module": "./dist/wave-ui.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/wave-ui.es.js",
+      "require": "./dist/wave-ui.umd.js"
+    }
+  },
   "files": [
     "dist",
     "src/wave-ui"
@@ -22,18 +29,19 @@
   "license": "MIT",
   "repository": "https://github.com/antoniandre/wave-ui",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name wave-ui ./src/wave-ui/index.js --dest ./dist && rm ./dist/demo.html",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build --base /wave-ui/",
+    "build-bundle": "BUNDLE=true vite build && mv ./dist/style.css ./dist/wave-ui.css",
+    "serve": "vite preview --root docs --base /wave-ui/",
+    "lint": "vite lint"
   },
   "sideEffects": [
     "*.css",
     "*.scss",
     "*.vue"
   ],
-  "dependencies": {},
   "devDependencies": {
+    "@babel/eslint-parser": "^7.14.4",
     "@mdi/font": "^5.9.55",
     "@vue/cli-plugin-babel": "^4.5.13",
     "@vue/cli-plugin-eslint": "^4.5.13",
