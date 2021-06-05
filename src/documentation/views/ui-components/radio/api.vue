@@ -25,8 +25,8 @@ div
 
 <script>
 import FormElementMixin from '@/wave-ui/mixins/form-elements'
-import WRadios from '@/wave-ui/components/w-radios'
-import WRadio from '@/wave-ui/components/w-radio'
+import WRadios from '@/wave-ui/components/w-radios.vue'
+import WRadio from '@/wave-ui/components/w-radio.vue'
 
 const radios = {
   propsDescs: {

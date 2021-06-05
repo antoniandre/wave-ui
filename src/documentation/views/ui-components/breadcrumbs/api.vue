@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WBreadcrumbs from '@/wave-ui/components/w-breadcrumbs'
+import WBreadcrumbs from '@/wave-ui/components/w-breadcrumbs.vue'
 
 const propsDescs = {
   color: 'Applies a text color to the breadcrumb\'s links.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',

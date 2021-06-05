@@ -12,7 +12,7 @@ div
 
 <script>
 import FormElementMixin from '@/wave-ui/mixins/form-elements'
-import WSwitch from '@/wave-ui/components/w-switch'
+import WSwitch from '@/wave-ui/components/w-switch.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Dictates the state of the switch. When the user toggles the switch, the <code>v-model</code> value will be updated.',

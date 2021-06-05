@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WOverlay from '@/wave-ui/components/w-overlay'
+import WOverlay from '@/wave-ui/components/w-overlay.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the overlay. Any truthy value will show the overlay whereas any falsy value will hide it.',

@@ -12,7 +12,7 @@ div
 
 <script>
 import FormElementMixin from '@/wave-ui/mixins/form-elements'
-import Wtextarea from '@/wave-ui/components/w-textarea'
+import Wtextarea from '@/wave-ui/components/w-textarea.vue'
 
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>The text content of the textarea.<br>Gets updated on textarea input.',

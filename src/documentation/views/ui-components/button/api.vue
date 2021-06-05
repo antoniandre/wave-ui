@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WButton from '@/wave-ui/components/w-button'
+import WButton from '@/wave-ui/components/w-button.vue'
 
 const propsDescs = {
   color: 'Applies a color to the button\'s text.<br>If no <code>color</code> and no <code>bg-color</code> are set, and if either <code>outline</code> or <code>text</code> is set to true, the <code>primary</code> color will be applied.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',

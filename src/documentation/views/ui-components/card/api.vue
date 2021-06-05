@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WCard from '@/wave-ui/components/w-card'
+import WCard from '@/wave-ui/components/w-card.vue'
 
 const propsDescs = {
   color: 'Applies a color to the card\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
