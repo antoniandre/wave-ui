@@ -31,10 +31,19 @@ main
 
   title-link(h2) Modify your config
   .title4.mt4 1. Install the devDependencies
-  ssh-pre.mb2(language="shell") npm i -D pug pug-plain-loader node-sass sass-loader@10
+  ssh-pre.mb2(language="shell") npm i -D pug pug-plain-loader sass sass-loader@10
   small.text-italic.grey.
     The dev dependencies are only needed for building the project. They will not ship to production.
-  p.mt3 Notes: #[span.code sass-loader 11] only works with Webpack 5.
+  p.mt3
+    strong Notes:
+    ul
+      li #[span.code sass-loader 11+] only works with Webpack 5.
+      li
+        | The #[span.code sass] update is needed to handle the
+        a.ml1(href="https://github.com/sass/sass/issues/2565" target="_blank")
+          | new Sass division
+          w-icon.ml1 mdi mdi-open-in-new
+        | .
 
   .title4.mt8 2. Update #[span.code main.js]
   p In main.js, replace the 2 Wave UI imports with:
