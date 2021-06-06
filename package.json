@@ -54,11 +54,11 @@
     "material-design-icons": "^3.0.1",
     "rollup-plugin-delete": "^2.0.0",
     "sass": "^1.34.0",
-    "simple-syntax-highlighter": "^2.0.5",
+    "simple-syntax-highlighter": "^2.0.6",
     "splitpanes": "^3.0.4",
     "vite": "^2.3.3",
     "vite-plugin-pug": "^0.3.0",
-    "vue": "^3.1.0-beta.6",
+    "vue": "^3.0.11",
     "vue-cal": "^4.2.0",
     "vue-router": "^4.0.8",
     "vueperslides": "^3.3.0"
