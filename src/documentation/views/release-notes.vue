@@ -24,6 +24,10 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.32.7
+      p #[strong.code w-select]: Close an open select list on click of the main input or side icon.
+
+    li.patch
       strong.version v1.32.5
       p #[strong.code w-tag]: Fix border radius on focused clickable round tag.
 
