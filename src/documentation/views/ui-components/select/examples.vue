@@ -7,7 +7,7 @@ div
     just so you don't have to worry about this annoying case.
 
   title-link(h2) Basic
-  p This is the most basic use of the #[span.code w-select] component. No label, no v-model only items.
+  p This is the most basic use of the #[span.code w-select] component. No label, no v-model, only items.
   example
     w-select(:items="items1")
     //- template(#pug).
