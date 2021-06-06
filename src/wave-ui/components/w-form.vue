@@ -147,7 +147,9 @@ export default {
       if (!e) return
       this.status = null
 
-      this.formElements.forEach(item => !item.disabled && !item.readonly && item.reset())
+      // Since the whole w-form may be disabled or readonly,
+      // reset all the fields regardless of their disabled or readonly attributes.
+      this.formElements.forEach(item => item.reset())
       this.updateErrorsCount(0, true)
       this.$emit('reset', e)
     },
