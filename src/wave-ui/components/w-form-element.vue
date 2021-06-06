@@ -88,7 +88,7 @@ export default {
       // When focusing, reset the hasJustReset flag so the input value is watched again.
       if (val) this.hasJustReset = false
       // On blur, Update the form element's validity.
-      else if (!this.formProps.noBlurValidation && this.validators) {
+      else if (!this.formProps.noBlurValidation && this.validators && !this.readonly) {
         this.$emit('update:valid', await this.validateElement(this))
       }
     }
