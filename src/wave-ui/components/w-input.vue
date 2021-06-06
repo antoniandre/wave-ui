@@ -140,7 +140,7 @@ export default {
         'w-input--disabled': this.isDisabled,
         'w-input--readonly': this.isReadonly,
         [`w-input--${this.hasValue ? 'filled' : 'empty'}`]: true,
-        'w-input--focused': this.isFocused,
+        'w-input--focused': this.isFocused && !this.isReadonly,
         'w-input--dark': this.dark,
         'w-input--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
