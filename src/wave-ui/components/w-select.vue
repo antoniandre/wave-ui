@@ -29,7 +29,7 @@ component(
       //- Input wrapper.
       .w-select__selection-wrap(
         ref="selection-wrap"
-        @click="!isDisabled && !isReadonly && (showMenu = !this.showMenu)"
+        @click="!isDisabled && !isReadonly && (showMenu = !showMenu)"
         role="button"
         aria-haspopup="listbox"
         :aria-expanded="showMenu ? 'true' : 'false'"
