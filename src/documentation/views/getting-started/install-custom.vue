@@ -11,10 +11,19 @@ div
         ssh-pre.vue-install(language="shell") npm i wave-ui # Vue 2.x.
         span.mx2 or
         ssh-pre.vue-install(language="shell") npm i wave-ui@next # Vue 3.
-      ssh-pre.mb2(language="shell") npm i -D pug pug-plain-loader node-sass sass-loader@10
+      ssh-pre.mb2(language="shell") npm i -D pug pug-plain-loader sass sass-loader@10
       small.text-italic.grey.
         The dev dependencies are only needed for building the project. They will not ship to production.
-      p.text-bold.mt3 Important notes: #[span.code sass-loader 11] only works with Webpack 5.
+      p.mt3
+        strong Notes:
+        ul
+          li #[span.code sass-loader 11+] only works with Webpack 5.
+          li
+            | The #[span.code sass] update is needed to handle the
+            a.ml1(href="https://github.com/sass/sass/issues/2565" target="_blank")
+              | new Sass division
+              w-icon.ml1 mdi mdi-open-in-new
+            | .
 
     li.mt10
       .title4
@@ -52,7 +61,7 @@ div
 
     li.mt8
       .title4 Import only what you need
-      p Update the #[span.code main.js] file, adding only the Wave UI components you will need.
+      p Update the #[span.code main.js] file, adding only the Wave UI components you need.
 
       w-tabs.mt4(:items="2" content-class="pa0")
         template(#item-title.1) Vue 2.x
@@ -118,7 +127,7 @@ div
           Some Wave UI elements use other elements under the hood. For instance #[strong.code w-dialog] uses
           #[strong.code w-overlay] &amp; #[strong.code w-card].#[br]#[br]
           If you encounter the following error, you need to also import the missing component:
-        strong.error [Vue warn]: Unknown custom element: &lt;w-overlay&gt; - did you register the component correctly?
+        strong.code.error [Vue warn]: Unknown custom element: &lt;w-overlay&gt; - did you register the component correctly?
 </template>
 
 <style lang="scss">
