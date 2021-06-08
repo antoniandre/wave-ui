@@ -190,12 +190,12 @@ $spinner-size: 40;
     border-color: transparent;
   }
   &--round {
-    border-radius: 9em;
+    border-radius: 99em;
     padding-left: 3 * $base-increment;
     padding-right: 3 * $base-increment;
   }
   &--icon {
-    border-radius: 9em;
+    border-radius: 99em;
     padding: 0;
   }
   &--tile {border-radius: initial;}
