@@ -6,7 +6,7 @@
         slot
       slot(v-else)
       w-tag.ml2.text-bold.text-upper(v-if="inProgress" color="orange" outline round) In progress
-    w-button.mla.mb3(route="#api" outline force-link)
+    w-button.mla.mb3(outline force-link @click="scrollToApi")
       w-icon.ml-1.mr1.chevron-down(lg) wi-chevron-down
       | Jump to the API
 
@@ -21,6 +21,12 @@ export default {
     code: { type: Boolean, default: true },
     inProgress: { type: Boolean },
     slug: String
+  },
+
+  methods: {
+    scrollToApi () {
+      document.getElementById('api').scrollIntoView({ behavior: 'smooth' })
+    }
   }
 }
 </script>
