@@ -410,7 +410,7 @@ export default {
   &--card {background-color: #fff;}
   &--tile {border-radius: 0;}
   &--round {
-    border-radius: 9em;
+    border-radius: 99em;
     padding: $base-increment round(2.5 * $base-increment);
   }
   &--shadow {box-shadow: $box-shadow;}

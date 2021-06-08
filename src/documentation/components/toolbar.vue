@@ -1,6 +1,6 @@
 <template lang="pug">
 w-toolbar.main-toolbar(fixed)
-  router-link.w-flex.no-grow.fill-height.align-center.home-link(to="/")
+  router-link.w-flex.no-grow.fill-height.align-center.home-link(to="/" @click.native="scrollTop")
     w-icon.wave-logo.mr3(size="3em") wi-wave
     span.grey-dark1 Wave UI
   .spacer
@@ -46,6 +46,13 @@ export default {
         /-(\w)(\w+)\.(\d+)/,
         (m0, m1, m2, m3) => ` <strong>${m1.toUpperCase()}${m2} ${m3}</strong>`
       )
+    }
+  },
+
+  methods: {
+    async scrollTop () {
+      await this.$nextTick()
+      document.documentElement.scrollTop = 0
     }
   }
 }
