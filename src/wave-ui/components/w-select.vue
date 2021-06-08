@@ -385,7 +385,7 @@ export default {
       border-width: 0 0 1px;
     }
 
-    &--round {border-radius: 9em;}
+    &--round {border-radius: 99em;}
 
     .w-select--focused &, .w-select--open & {border-color: currentColor;}
 
@@ -406,7 +406,7 @@ export default {
     .w-select--focused &--underline:after,
     .w-select--open &--underline:after {transform: scaleX(1);}
     &--round.w-select__selection-wrap--underline:after {
-      border-radius: 9em;
+      border-radius: 99em;
       transition: $transition-duration, height 0.035s;
     }
     .w-select--focused &--round.w-select__selection-wrap--underline:after,

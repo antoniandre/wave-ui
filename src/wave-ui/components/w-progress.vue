@@ -148,7 +148,7 @@ $circle-size: 40;
   &--linear {border-radius: $border-radius;}
   // Tile, round and outline are only available on linear progress.
   &--tile {border-radius: 0;}
-  &--round {border-radius: 9em;}
+  &--round {border-radius: 99em;}
   &--outline {border: 1px solid currentColor;padding: 2px;}
 
   &--linear {

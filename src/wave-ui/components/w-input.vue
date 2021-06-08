@@ -221,7 +221,7 @@ $inactive-color: #777;
       border-width: 0 0 1px;
     }
 
-    &--round {border-radius: 9em;}
+    &--round {border-radius: 99em;}
     &--tile {border-radius: initial;}
     &--shadow {box-shadow: $box-shadow;}
     &--loading {border-bottom-color: transparent;}
@@ -253,7 +253,7 @@ $inactive-color: #777;
 
     .w-input--focused &--underline:after {transform: scaleX(1);}
     &--round.w-input__input-wrap--underline:after {
-      border-radius: 9em;
+      border-radius: 99em;
       transition: $transition-duration, height 0.035s;
     }
     .w-input--focused &--round.w-input__input-wrap--underline:after {

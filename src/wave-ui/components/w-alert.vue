@@ -145,7 +145,7 @@ export default {
   &--outline {border-color: currentColor;}
   &--tile {border-radius: 0;}
   &--round {
-    border-radius: 9em;
+    border-radius: 99em;
     padding-left: 3 * $base-increment;
     padding-right: 3 * $base-increment;
   }
