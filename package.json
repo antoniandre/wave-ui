@@ -43,11 +43,11 @@
     "*.vue"
   ],
   "devDependencies": {
+    "@babel/core": "^7.14.3",
     "@babel/eslint-parser": "^7.14.4",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@mdi/font": "^5.9.55",
     "@vitejs/plugin-vue": "^1.2.3",
-    "@vue/compiler-sfc": "^3.0.11",
     "autoprefixer": "^10.2.6",
     "axios": "^0.21.1",
     "core-js": "^3.13.1",
@@ -58,7 +58,6 @@
     "gsap": "^3.6.1",
     "ionicons": "^4.6.3",
     "material-design-icons": "^3.0.1",
-    "node-sass": "^4.14.1",
     "rollup-plugin-delete": "^2.0.0",
     "sass": "^1.34.1",
     "simple-syntax-highlighter": "^1.4.5",
@@ -66,10 +65,10 @@
     "vite": "^2.3.6",
     "vite-plugin-pug": "^0.3.0",
     "vite-plugin-vue2": "^1.6.2",
-    "vue": "^2.6.13",
+    "vue": "^2.6.14",
     "vue-router": "^3.5.1",
     "vue-svg-loader": "^0.16.0",
-    "vue-template-compiler": "^2.6.13",
+    "vue-template-compiler": "^2.6.14",
     "vueperslides": "^2.15.0"
   }
 }
