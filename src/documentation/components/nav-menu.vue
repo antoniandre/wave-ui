@@ -23,7 +23,7 @@
     p By the same author
     w-list(:items="externalComponents" nav color="primary" @item-select="onItemClick")
 
-    router-link.mt3.d-iblock(v-if="$waveui.breakpoint.xs" to="/release-notes" @click="onItemClick")
+    router-link.mt3.d-iblock(v-if="$waveui.breakpoint.xs" to="/release-notes" @click.native="onItemClick")
       w-icon.mr2 mdi mdi-update
       | Release notes
 </template>

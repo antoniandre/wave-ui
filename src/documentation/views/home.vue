@@ -214,8 +214,8 @@ w-app.home
 
     .text-center.ready-to-dive
       .title1.mb2 Ready to dive in?
-      w-button.ma1(lg outline round color="white" route="/why-wave-ui") Why Wave UI
-      w-button.ma1(lg outline round color="white" route="/getting-started") Get started
+      w-button.ma1(lg outline round color="white" route="/why-wave-ui" @click="scrollTop") Why Wave UI
+      w-button.ma1(lg outline round color="white" route="/getting-started" @click="scrollTop") Get started
 </template>
 
 <script>
@@ -423,6 +423,11 @@ export default {
     onValidate () {
       this.form6.sent = false
       this.form6.submitted = this.form6.errorsCount === 0
+    },
+
+    async scrollTop () {
+      await this.$nextTick()
+      document.documentElement.scrollTop = 0
     }
   },
 

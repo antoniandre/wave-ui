@@ -101,7 +101,7 @@ export default {
   align-items: center;
   justify-content: center;
   user-select: none;
-  border-radius: 9em;
+  border-radius: 99em;
   // Always get an even number for better text vertical align.
   height: round(1.1 * divide($base-font-size, 2)) * 2;
   min-width: round(1.1 * divide($base-font-size, 2)) * 2;

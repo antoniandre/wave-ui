@@ -24,6 +24,14 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.32.7
+      ul
+        li #[strong.code w-select]: Close an open select list on click of the main input or side icon.
+        li #[strong.code w-form]: Allow resetting a disabled or readonly form.
+        li #[strong.code w-form]: Disable field validation on a readonly field.
+        li #[strong.code w-form]: Remove readonly fields interaction: no label moving or underline, no validation on blur.
+
+    li.patch
       strong.version v1.32.5
       p #[strong.code w-tag]: Fix border radius on focused clickable round tag.
 

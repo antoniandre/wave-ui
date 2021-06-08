@@ -150,7 +150,7 @@ export default {
         'w-input--disabled': this.isDisabled,
         'w-input--readonly': this.isReadonly,
         [`w-input--${this.hasValue ? 'filled' : 'empty'}`]: true,
-        'w-input--focused': this.isFocused,
+        'w-input--focused': this.isFocused && !this.isReadonly,
         'w-input--dark': this.dark,
         'w-input--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
@@ -231,7 +231,7 @@ $inactive-color: #777;
       border-width: 0 0 1px;
     }
 
-    &--round {border-radius: 9em;}
+    &--round {border-radius: 99em;}
     &--tile {border-radius: initial;}
     &--shadow {box-shadow: $box-shadow;}
     &--loading {border-bottom-color: transparent;}
@@ -263,7 +263,7 @@ $inactive-color: #777;
 
     .w-input--focused &--underline:after {transform: scaleX(1);}
     &--round.w-input__input-wrap--underline:after {
-      border-radius: 9em;
+      border-radius: 99em;
       transition: $transition-duration, height 0.035s;
     }
     .w-input--focused &--round.w-input__input-wrap--underline:after {

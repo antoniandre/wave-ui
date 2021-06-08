@@ -96,7 +96,7 @@ export default {
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
   &--no-border {border-color: transparent;}
-  &--round {border-radius: 9em;}
+  &--round {border-radius: 99em;}
   &--tile {border-radius: initial;}
   &--shadow {box-shadow: $box-shadow;}
 

@@ -129,7 +129,7 @@ export default {
         'w-textarea--disabled': this.isDisabled,
         'w-textarea--readonly': this.isReadonly,
         [`w-textarea--${this.hasValue ? 'filled' : 'empty'}`]: true,
-        'w-textarea--focused': this.isFocused,
+        'w-textarea--focused': this.isFocused && !this.isReadonly,
         'w-textarea--dark': this.dark,
         'w-textarea--resizable': this.resizable,
         'w-textarea--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,

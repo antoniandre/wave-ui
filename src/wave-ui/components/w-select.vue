@@ -7,9 +7,14 @@ component(
   @reset="onReset"
   :class="classes")
   template(v-if="labelPosition === 'left'")
-    label.w-select__label.w-select__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_.uid}`")
+    label.w-select__label.w-select__label--left.w-form-el-shakable(
+      v-if="$slots.default"
+      :for="`w-select--${_.uid}`")
       slot
-    label.w-select__label.w-select__label--left.w-form-el-shakable(v-else-if="label" :for="`w-select--${_.uid}`" v-html="label")
+    label.w-select__label.w-select__label--left.w-form-el-shakable(
+      v-else-if="label"
+      :for="`w-select--${_.uid}`"
+      v-html="label")
 
   w-menu(
     v-model="showMenu"
@@ -24,7 +29,7 @@ component(
       //- Input wrapper.
       .w-select__selection-wrap(
         ref="selection-wrap"
-        @click="!isDisabled && !isReadonly && openMenu()"
+        @click="!isDisabled && !isReadonly && (showMenu = !showMenu)"
         role="button"
         aria-haspopup="listbox"
         :aria-expanded="showMenu ? 'true' : 'false'"
@@ -34,7 +39,6 @@ component(
         w-icon.w-select__icon.w-select__icon--inner-left(
           v-if="innerIconLeft"
           tag="label"
-          :for="`w-select--${_.uid}`"
           @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
         .w-select__selection-slot(v-if="$slots.selection")
           //- inputValue is always an array.
@@ -74,7 +78,6 @@ component(
         w-icon.w-select__icon.w-select__icon--inner-right(
           v-if="innerIconRight"
           tag="label"
-          :for="`w-select--${_.uid}`"
           @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
     w-list(
       ref="w-list"
@@ -97,9 +100,14 @@ component(
         slot(name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabelKey] }}
 
   template(v-if="labelPosition === 'right'")
-    label.w-select__label.w-select__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-select--${_.uid}`")
+    label.w-select__label.w-select__label--right.w-form-el-shakable(
+      v-if="$slots.default"
+      :for="`w-select--${_.uid}`")
       slot
-    label.w-select__label.w-select__label--right.w-form-el-shakable(v-else-if="label" :for="`w-select--${_.uid}`" v-html="label")
+    label.w-select__label.w-select__label--right.w-form-el-shakable(
+      v-else-if="label"
+      :for="`w-select--${_.uid}`"
+      v-html="label")
 </template>
 
 <script>
@@ -190,7 +198,7 @@ export default {
         'w-select--disabled': this.isDisabled,
         'w-select--readonly': this.isReadonly,
         [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
-        'w-select--focused': this.isFocused,
+        'w-select--focused': this.isFocused && !this.isReadonly,
         'w-select--dark': this.dark,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
@@ -377,7 +385,7 @@ export default {
       border-width: 0 0 1px;
     }
 
-    &--round {border-radius: 9em;}
+    &--round {border-radius: 99em;}
 
     .w-select--focused &, .w-select--open & {border-color: currentColor;}
 
@@ -398,7 +406,7 @@ export default {
     .w-select--focused &--underline:after,
     .w-select--open &--underline:after {transform: scaleX(1);}
     &--round.w-select__selection-wrap--underline:after {
-      border-radius: 9em;
+      border-radius: 99em;
       transition: $transition-duration, height 0.035s;
     }
     .w-select--focused &--round.w-select__selection-wrap--underline:after,
@@ -461,6 +469,9 @@ export default {
   &__icon {
     position: absolute;
     font-size: 1.4em;
+    cursor: pointer;
+    border-radius: 5em;
+    @include default-transition;
 
     .w-select--focused &, .w-select--open & {color: currentColor;}
 
@@ -472,14 +483,14 @@ export default {
     }
 
     &--inner-left {left: 6px;}
-    &--inner-right {
-      right: 6px;
-      @include default-transition;
-    }
+    &--inner-right {right: 6px;}
     .w-select--no-padding &--inner-left {left: 1px;}
     .w-select--no-padding &--inner-right {right: 1px;}
 
     .w-select--open &--inner-right {transform: rotate(180deg);}
+
+    &:hover {background: rgba(0, 0, 0, 0.05);}
+    .w-select--disabled &:hover, .w-select--readonly &:hover {background-color: transparent;}
   }
 
   // Label.
