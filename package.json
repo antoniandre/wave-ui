@@ -44,6 +44,7 @@
   ],
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.4",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@mdi/font": "^5.9.55",
     "@vitejs/plugin-vue": "^1.2.3",
     "@vue/compiler-sfc": "^3.0.11",
