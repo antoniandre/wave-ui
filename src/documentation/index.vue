@@ -12,6 +12,16 @@ w-app
       transition(name="fade-page" mode="out-in")
         router-view.grow(:class="`main--${$route.name}`")
 
+      w-transition-bounce(v-if="goToTop" appear)
+        w-button.go-top.mb8.mr2(
+          icon="wi-chevron-up"
+          fixed
+          bottom
+          right
+          xl
+          bg-color="grey-light5"
+          @click="scrollTop")
+
       footer.w-flex.justify-end.align-center.no-grow.wrap
         small.grey-light3.text-upper
           | Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
@@ -72,7 +82,8 @@ export default {
     fixNavMenu: false,
     navMenuTop: 0,
     scrollingEl: null,
-    contentWrapEl: null
+    contentWrapEl: null,
+    goToTop: false
   }),
 
   computed: {
@@ -88,9 +99,14 @@ export default {
   methods: {
     onScroll () {
       this.fixNavMenu = this.scrollingEl.scrollTop >= this.navMenuTop
+      this.goToTop = this.scrollingEl.scrollTop >= this.contentWrapEl.offsetTop
     },
     onResize () {
       this.navMenuTop = this.contentWrapEl.offsetTop - 12
+    },
+    async scrollTop () {
+      await this.$nextTick()
+      document.documentElement.scrollTo({ top: 0, behavior: 'smooth' })
     }
   },
 
@@ -109,22 +125,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.nav-menu ~ .main-content {padding-left: 4em;}
-
-footer {
-  margin-top: 5em;
-
-  .nav-drawer ~ & {padding-left: 12px;}
-
-  .heart:hover {animation: heartbeat 1s infinite;}
-  small {font-size: 10px;}
-  .caption {padding-top: 1px;}
-}
-
-@keyframes heartbeat {
-  0%, 30%, 60%, 100% {transform: scale(1);}
-  15%, 45% {transform: scale(1.2);}
-}
-</style>
