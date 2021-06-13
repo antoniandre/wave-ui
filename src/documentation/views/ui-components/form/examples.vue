@@ -695,7 +695,7 @@ export default {
         username: async value => {
           this.form1.loading = true
           // Simulate a server call: wait for 800ms.
-          await new Promise(r => setTimeout(r, 800))
+          await new Promise(resolve => setTimeout(resolve, 800))
 
           this.form1.loading = false
           return value !== 'waveui' || 'This username is already in use'

@@ -42,11 +42,11 @@ export default {
   emits: ['reset', 'update:valid'],
 
   data: () => ({
-      Validation: {
-        isValid: null, // Null is pristine (unknown), can also be true or false.
-        message: '' // Updated on w-form validation.
-      },
-      hasJustReset: false
+    Validation: {
+      isValid: null, // Null is pristine (unknown), can also be true or false.
+      message: '' // Updated on w-form validation.
+    },
+    hasJustReset: false
   }),
 
   computed: {

@@ -63,7 +63,6 @@ main
         justify-content: center; /* You could use the class `justify-center`. */
       }
 
-
   title-link(h2) Borders
   p.
     Element borders range from #[code 0] to #[code 6], corresponding to the same number of pixels (for
@@ -104,7 +103,6 @@ main
         align-items: center; /* You could use the class `align-center`. */
         justify-content: center; /* You could use the class `justify-center`. */
       }
-
 
   title-link(h2) Border radii
   p.
@@ -165,7 +163,6 @@ main
         align-items: center; /* You could use the class `align-center`. */
         justify-content: center; /* You could use the class `justify-center`. */
       }
-
 
   w-divider.my12
 

@@ -130,11 +130,11 @@ export default {
       if (this.externalJs) jsDeps.push(this.externalJs)
 
       const slots = {
-        html: this.$slots.html && this.$slots.html[0].text || '',
-        pug: this.$slots.pug && this.$slots.pug[0].text || '',
-        js: this.$slots.js && this.$slots.js[0].text || '',
-        css: this.$slots.css && this.$slots.css[0].text || '',
-        scss: this.$slots.scss && this.$slots.scss[0].text || ''
+        html: (this.$slots.html && this.$slots.html[0].text) || '',
+        pug: (this.$slots.pug && this.$slots.pug[0].text) || '',
+        js: (this.$slots.js && this.$slots.js[0].text) || '',
+        css: (this.$slots.css && this.$slots.css[0].text) || '',
+        scss: (this.$slots.scss && this.$slots.scss[0].text) || ''
       }
       let html = ''
       let css = ''
@@ -161,10 +161,12 @@ export default {
 
       // JS.
       if (blanks.includes('js')) js = slots.js
-      else js = 'new Vue({' +
+      else {
+        js = 'new Vue({' +
                 '\n  waveui: new WaveUI()' + (slots.js ? ',\n  ' : '') +
                 slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') +
                 '\n}).$mount(\'#app\')'
+      }
 
       const data = {
         title: 'Wave UI Example Pen',

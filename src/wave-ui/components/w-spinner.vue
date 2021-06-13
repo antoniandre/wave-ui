@@ -80,7 +80,6 @@ export default {
     border-radius: 100%;
   }
 
-
   &--bounce {
     &:before, &:after {
       opacity: 0.6;

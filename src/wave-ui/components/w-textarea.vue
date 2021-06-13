@@ -89,7 +89,7 @@ export default {
     resizable: { type: Boolean }, // Toggle the HTML built-in bottom right corner resize handle.
     tile: { type: Boolean },
     rows: { type: [Number, String], default: 3 },
-    cols: { type: [Number, String] },
+    cols: { type: [Number, String] }
     // Props from mixin: name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },

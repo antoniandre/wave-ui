@@ -188,7 +188,7 @@ export default {
     liLabelClasses (item) {
       return {
         'w-list__item-label--disabled': item.disabled || (this.nav && !item.route && !item.children),
-        'w-list__item-label--active': this.isSelectable && item._selected || null,
+        'w-list__item-label--active': (this.isSelectable && item._selected) || null,
         'w-list__item-label--focused': item._focused,
         'w-list__item-label--hoverable': this.hover,
         'w-list__item-label--selectable': this.isSelectable,
@@ -365,10 +365,10 @@ export default {
 
     applySelectionOnItems (selection) {
       // Reset the selections when single selection allowed for w-select.
-      if (!this.isMultipleSelect) this.listItems.forEach(item => item._selected = false)
+      if (!this.isMultipleSelect) this.listItems.forEach(item => (item._selected = false))
 
       this.checkSelection(selection) // Create an array with the selected values.
-        .forEach(val => this.listItems.find(item => item._value === val)._selected = true)
+        .forEach(val => (this.listItems.find(item => item._value === val)._selected = true))
     }
   },
 

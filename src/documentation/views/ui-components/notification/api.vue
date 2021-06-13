@@ -44,7 +44,7 @@ const propsDescs = {
   sm: 'Sets the size of the notification.',
   md: 'Sets the size of the notification.',
   lg: 'Sets the size of the notification.',
-  xl: 'Sets the size of the notification.',
+  xl: 'Sets the size of the notification.'
 }
 
 const slots = {

@@ -154,7 +154,6 @@ export default {
       }, this.intersectionConfig)
       IntersectObserver.observe(this.$el)
     }
-
     else this.loadImage()
   },
 

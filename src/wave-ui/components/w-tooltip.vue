@@ -224,11 +224,11 @@ export default {
       // Keep fully in viewport.
       // --------------------------------------------------
       if (this.position === 'top' && ((top - tooltipEl.offsetHeight) < 0)) {
-        const margin = - parseInt(computedStyles.getPropertyValue('margin-top'))
+        const margin = -parseInt(computedStyles.getPropertyValue('margin-top'))
         coords.top -= top - tooltipEl.offsetHeight - margin - marginFromWindowSide
       }
       else if (this.position === 'left' && left - tooltipEl.offsetWidth < 0) {
-        const margin = - parseInt(computedStyles.getPropertyValue('margin-left'))
+        const margin = -parseInt(computedStyles.getPropertyValue('margin-left'))
         coords.left -= left - tooltipEl.offsetWidth - margin - marginFromWindowSide
       }
       else if (this.position === 'right' && left + width + tooltipEl.offsetWidth > window.innerWidth) {

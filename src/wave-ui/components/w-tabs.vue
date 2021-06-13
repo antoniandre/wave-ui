@@ -174,7 +174,7 @@ export default {
         this.slider.width = `${width}px`
       }
       else {
-        this.slider.left = `${this.activeTab._index * 100 / this.tabsItems.length}%`,
+        this.slider.left = `${this.activeTab._index * 100 / this.tabsItems.length}%`
         this.slider.width = `${100 / this.tabsItems.length}%`
       }
     },
