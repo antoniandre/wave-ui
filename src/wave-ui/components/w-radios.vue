@@ -21,10 +21,18 @@ component(
     :readonly="isReadonly || null"
     :class="{ mt1: !inline && i }")
     slot(
-      v-if="$scopedSlots.item"
-      name="item"
-      :item="item"
+      v-if="$scopedSlots[`item.${i + 1}`]"
+      :name="`item.${i + 1}`"
+      :item="getOriginalItem(item)"
       :index="i + 1"
+      :checked="item.value === value"
+      v-html="item.label")
+    slot(
+      v-else-if="$scopedSlots.item"
+      name="item"
+      :item="getOriginalItem(item)"
+      :index="i + 1"
+      :checked="item.value === value"
       v-html="item.label")
 </template>
 
@@ -64,6 +72,7 @@ export default {
     radioItems () {
       return (this.items || []).map((item, i) => ({
         ...item,
+        _index: i,
         label: item[this.itemLabelKey],
         // If no value is set then add one to prevent error.
         value: item[this.itemValueKey] === undefined ? (item[this.itemLabelKey] || i) : item[this.itemValueKey],
@@ -83,6 +92,11 @@ export default {
       this.inputValue = true
       this.$emit('update:modelValue', item.value)
       this.$emit('input', item.value)
+    },
+
+    // Return the original item (so there is no `_index`).
+    getOriginalItem (item) {
+      return this.items[item._index]
     }
   }
 }
