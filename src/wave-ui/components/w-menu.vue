@@ -2,12 +2,19 @@
 .w-menu-wrap(ref="wrapper")
   slot(name="activator" :on="eventHandlers")
   transition(:name="transitionName")
-    .w-menu(v-if="custom" ref="menu" v-show="showMenu" :class="classes" :style="styles")
+    .w-menu(
+      v-if="custom"
+      ref="menu"
+      v-show="showMenu"
+      @click="hideOnMenuClick && (showMenu = false)"
+      :class="classes"
+      :style="styles")
       slot
     w-card.w-menu(
       v-else
       ref="menu"
       v-show="showMenu"
+      @click.native="hideOnMenuClick && (showMenu = false)"
       :tile="tile"
       :title-class="titleClass"
       :content-class="contentClass"
