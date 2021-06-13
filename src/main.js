@@ -15,6 +15,7 @@ import Api from '@/documentation/components/api.vue'
 
 const app = createApp(App).use(router)
 
+// eslint-disable-next-line no-new
 new WaveUI(app, {
   colors: {
     primary: '#234781',

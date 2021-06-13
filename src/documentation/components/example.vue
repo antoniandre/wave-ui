@@ -167,11 +167,13 @@ export default {
 
       // JS.
       if (blanks.includes('js')) js = slots.js
-      else js = 'const app = Vue.createApp({\n' +
+      else {
+        js = 'const app = Vue.createApp({\n' +
                 '  ' + slots.js.replace(/\n+$/, '').replace(/\n/g, '\n  ') + '\n' +
                 '})\n\n' +
                 'new WaveUI(app, {})\n\n' +
                 'app.mount(\'#app\')'
+      }
 
       const data = {
         title: 'Wave UI Example Pen',
