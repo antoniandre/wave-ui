@@ -26,9 +26,9 @@ const propsDescs = {
   selectionColor: 'Applies a color to the selected list items\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   nav: 'Set the list as a navigation menu. All the items having a `route` attribute will be converted to link or router-link if vue-router is present.',
   icon: 'A global icon string to apply to all the list items. E.g. <code>mdi mdi-home</code>.',
-  itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item.',
-  itemValueKey: 'The property name (aka key) in each item object where to find the value of the item.',
-  itemColorKey: 'The property name (aka key) in each item object where to find the color of the item.',
+  itemLabelKey: 'The property name (aka "key") in each item object where to find the label of the item.',
+  itemValueKey: 'The property name (aka "key") in each item object where to find the value of the item.',
+  itemColorKey: 'The property name (aka "key") in each item object where to find the color of the item.',
   itemClass: 'Applies a custom CSS class to every list item.',
   depth: false, // Hide this prop.
   returnObject: 'The current list selection is returned via the <code>value</code> prop or <code>v-model</code> as an array of full objects or a single full object (returning the original as given) when <code>multiple</code> is set to false.',
