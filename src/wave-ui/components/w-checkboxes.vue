@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: checkboxItems.some(item => item.isChecked), disabled: isDisabled }"
+  v-bind="formRegister && { validators, inputValue: checkboxItems.some(item => item._isChecked), disabled: isDisabled }"
   :valid.sync="valid"
   @reset="reset"
   :column="!inline"
@@ -13,7 +13,7 @@ component(
     :name="`${name || `w-checkboxes--${_uid}`}[]`"
     :label="item.label"
     :label-on-left="labelOnLeft"
-    :value="item.isChecked"
+    :value="item._isChecked"
     :color="item.color"
     :round="round"
     :disabled="isDisabled || null"
@@ -22,9 +22,17 @@ component(
     @focus="$emit('focus', $event)"
     :class="{ mt1: !inline && i }")
     slot(
-      v-if="$scopedSlots.item"
+      v-if="$scopedSlots[`item.${i + 1}`]"
+      :name="`item.${i + 1}`"
+      :item="getOriginalItem(item)"
+      :checked="!!item._isChecked"
+      :index="i + 1"
+      v-html="item.label")
+    slot(
+      v-else-if="$scopedSlots.item"
       name="item"
-      :item="item"
+      :item="getOriginalItem(item)"
+      :checked="!!item._isChecked"
       :index="i + 1"
       v-html="item.label")
 </template>
@@ -68,10 +76,10 @@ export default {
         return Vue.observable({
           ...item,
           label: item[this.itemLabelKey],
-          index: i,
+          _index: i,
           value: itemValue, // If no value is set then add one to prevent error.
           color: item[this.itemColorKey] || this.color,
-          isChecked: this.value && this.value.includes(itemValue)
+          _isChecked: this.value && this.value.includes(itemValue)
         })
       })
     },
@@ -86,17 +94,22 @@ export default {
 
   methods: {
     reset () {
-      this.checkboxItems.forEach(item => (item.isChecked = null))
+      this.checkboxItems.forEach(item => (item._isChecked = null))
       this.$emit('update:modelValue', [])
       this.$emit('input', [])
     },
 
     toggleCheck (checkbox, isChecked) {
-      checkbox.isChecked = isChecked
-      const selection = this.checkboxItems.filter(item => item.isChecked).map(item => item.value)
+      checkbox._isChecked = isChecked
+      const selection = this.checkboxItems.filter(item => item._isChecked).map(item => item.value)
 
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
+    },
+
+    // Return the original item (so there is no `_index`, etc.).
+    getOriginalItem (item) {
+      return this.items[item._index]
     }
   }
 }
