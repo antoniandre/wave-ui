@@ -74,7 +74,7 @@ const generateBreakpoints = () => {
     // Discard `xs` since the min is 0 (`media query (min-width: 0)`), and leave in _layout.scss.
     if (label === 'xs') {
       // For each breakpoint, loop from 1 to 12. E.g. xs1, xs2, ..., xl12.
-      for (let i = 0;i < cssConfig.grid; i++) {
+      for (let i = 0; i < cssConfig.grid; i++) {
         styles +=
           `${cssScope} .${label}${cssConfig.grid - i}{` +
           `width:${parseFloat(((cssConfig.grid - i) * 100 / cssConfig.grid).toFixed(4))}%;}`
@@ -84,7 +84,7 @@ const generateBreakpoints = () => {
       styles += `@media(min-width:${min}px){`
 
       // For each breakpoint, loop from 1 to 12. E.g. xs1, xs2, ..., xl12.
-      for (let i = 0;i < cssConfig.grid; i++) {
+      for (let i = 0; i < cssConfig.grid; i++) {
         styles +=
           `${cssScope} .${label}${cssConfig.grid - i}{` +
           `width:${parseFloat(((cssConfig.grid - i) * 100 / cssConfig.grid).toFixed(4))}%;}`

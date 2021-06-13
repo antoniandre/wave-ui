@@ -227,7 +227,7 @@ window.requestAnimationFrame = window.requestAnimationFrame.bind(window)
 
 gsap.registerPlugin(TimelineMax, TweenMax, Power4, Power1, ScrollTrigger)
 
-let componentsCount = { curr: 0, total: 40 }
+const componentsCount = { curr: 0, total: 40 }
 
 export default {
   data: () => ({

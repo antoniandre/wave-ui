@@ -7,10 +7,10 @@ form.w-form(@submit="onSubmit" @reset="reset" novalidate :class="classes")
 // Like the ES6 Array.some function, but async.
 // Purpose: wait for any async validators.
 const asyncSome = async (array, predicate) => {
-	for (const item of array) {
-		if (await predicate(item)) return true
-	}
-	return false
+  for (const item of array) {
+    if (await predicate(item)) return true
+  }
+  return false
 }
 
 export default {
@@ -155,8 +155,9 @@ export default {
     },
 
     updateErrorsCount (count = null, reset = false) {
-      this.errorsCount = count !== null ? count
-                       : this.formElements.reduce((sum, el) => sum + ~~(el.Validation.isValid === false), 0)
+      this.errorsCount = count !== null
+        ? count
+        : this.formElements.reduce((sum, el) => sum + ~~(el.Validation.isValid === false), 0)
       this.status = reset ? null : !this.errorsCount
 
       this.$emit('update:modelValue', this.status)

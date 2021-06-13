@@ -319,7 +319,7 @@ export default {
     },
 
     expandedRows (array) {
-      this.expandedRowsInternal = Array.isArray(array) && array.length ? this.expandedRows: []
+      this.expandedRowsInternal = Array.isArray(array) && array.length ? this.expandedRows : []
     },
 
     selectableRows (value) {
@@ -328,7 +328,7 @@ export default {
     },
 
     selectedRows (array) {
-      this.selectedRowsInternal = Array.isArray(array) && array.length ? this.selectedRows: []
+      this.selectedRowsInternal = Array.isArray(array) && array.length ? this.selectedRows : []
     }
   }
 }

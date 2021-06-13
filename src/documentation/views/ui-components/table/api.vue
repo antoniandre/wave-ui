@@ -51,8 +51,8 @@ const events = {
   'row-click': {
     description: '',
     params: {
-      'item': 'The associated row item object.',
-      'index': 'The index of the row being clicked (starts at 0) in the current filtering state.'
+      item: 'The associated row item object.',
+      index: 'The index of the row being clicked (starts at 0) in the current filtering state.'
     }
   },
   'row-select': {

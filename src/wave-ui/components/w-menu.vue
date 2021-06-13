@@ -96,7 +96,7 @@ export default {
 
   computed: {
     transitionName () {
-      return this.transition || `scale-fade`
+      return this.transition || 'scale-fade'
     },
 
     // DOM element to attach menu to.

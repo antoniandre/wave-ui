@@ -1,7 +1,7 @@
 @use "sass:math";
 
 @function divide($a, $b) {
-  @return math.div($a, $b); // Atm this still breaks in vue-cli.
+  @return math.div($a, $b); // Must use `sass` & not `node-sass`.
   // @return $a / $b;
 }
 

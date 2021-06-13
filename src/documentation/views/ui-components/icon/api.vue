@@ -28,9 +28,9 @@ const propsDescs = {
   rotate90: 'Rotates the icon of 90 degrees clockwise.',
   rotate135: 'Rotates the icon of 135 degrees clockwise.',
   rotate180: 'Rotates the icon of 180 degrees clockwise.',
-  'rotate45a': 'Rotates the icon of 45 degrees anticlockwise.',
-  'rotate90a': 'Rotates the icon of 90 degrees anticlockwise.',
-  'rotate135a': 'Rotates the icon of 135 degrees anticlockwise.',
+  rotate45a: 'Rotates the icon of 45 degrees anticlockwise.',
+  rotate90a: 'Rotates the icon of 90 degrees anticlockwise.',
+  rotate135a: 'Rotates the icon of 135 degrees anticlockwise.',
   flipX: 'Flips the icon horizontally.',
   flipY: 'Flips the icon vertically.',
   size: 'Sets the font-size of the icon.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.'
