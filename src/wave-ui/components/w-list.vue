@@ -23,8 +23,18 @@ ul.w-list(:class="classes")
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)"
         @click.native="$emit('item-select', cleanLi(li))")
-        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
-        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(
+          v-if="$scopedSlots[`item.${i + 1}`]"
+          :name="`item.${i + 1}`"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
+        slot(
+          v-else-if="$scopedSlots.item"
+          name="item"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
         slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
       //- Nav & simple list items.
       component.w-list__item-label(
@@ -32,8 +42,17 @@ ul.w-list(:class="classes")
         :is="nav && !li.disabled && li.route ? 'a' : 'div'"
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)")
-        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
-        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(
+          v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
+        slot(
+          v-else-if="$scopedSlots.item"
+          name="item"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
         slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
 
     //- When there are no slots.
@@ -350,7 +369,9 @@ export default {
     },
 
     refreshListItems () {
+      // Items can be an array of objects, or a number to generate items on the fly.
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
+
       this.listItems = items.map((item, i) => ({
         ...item,
         _index: i,
