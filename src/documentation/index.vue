@@ -94,7 +94,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('scroll', this.onScroll)
     window.removeEventListener('resize', this.onResize)
   },
