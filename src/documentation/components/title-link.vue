@@ -48,7 +48,7 @@ export default {
 
     classes () {
       return {
-        'headline': this.h1
+        headline: this.h1
       }
     }
   }

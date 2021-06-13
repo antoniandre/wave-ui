@@ -68,10 +68,12 @@ export default {
     position () {
       let position = []
       if (!this.top && !this.bottom && !this.left && !this.right) position = ['top', 'right']
-      else position = [
-        (this.top && 'top') || (this.bottom && 'bottom') || 'top',
-        (this.left && 'left') || (this.right && 'right') || 'center'
-      ]
+      else {
+        position = [
+          (this.top && 'top') || (this.bottom && 'bottom') || 'top',
+          (this.left && 'left') || (this.right && 'right') || 'center'
+        ]
+      }
       return position
     },
 

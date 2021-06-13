@@ -78,7 +78,6 @@ main
           router-link.ml1(to="/typography") Typography
           | .
 
-
     li.minor
       strong.version v1.29.0
       p #[strong.code w-table]
@@ -283,7 +282,6 @@ main
       strong.version v1.9.4
       ul
         li Renamed the #[strong.code w-icon] rotation props #[code rotate45a], #[code rotate90a], #[code rotate135a].
-
 
     li.patch
       strong.version v1.9.3

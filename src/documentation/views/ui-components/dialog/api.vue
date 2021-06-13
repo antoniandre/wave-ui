@@ -40,7 +40,7 @@ const slots = {
 const eventsDescs = {
   input: 'Emitted on dialog close.<br>Updates the v-model value in Vue 2.x only.',
   'update:modelValue': 'Emitted on dialog close.<br>Updates the v-model value in Vue 3 only.',
-  close: 'Emitted on dialog close.',
+  close: 'Emitted on dialog close.'
 }
 
 export default {
