@@ -51,12 +51,12 @@ div
   example.example1(content-class="pt5")
     w-menu(detach-to=".example1" persistent)
       template(#activator="{ on }")
-        w-button.mb2.mr3(v-on="on" outline color="primary") Show menu on click
+        w-button.mb2.mr3(v-on="on" outline color="primary") Show persistent menu
       | Click on the button again to close
     //- template(#pug).
       w-menu(persistent)
         template(#activator="{ on }")
-          w-button.mb2.mr3(v-on="on" outline color="primary") Show menu on click
+          w-button.mb2.mr3(v-on="on" outline color="primary") Show persistent menu
         | Click on the button again to close
     template(#html).
       &lt;w-menu persistent&gt;
@@ -66,10 +66,38 @@ div
             outline
             color="primary"
             class="mr3"&gt;
-            Show menu on click
+            Show persistent menu
           &lt;/w-button&gt;
         &lt;/template&gt;
         Click on the button again to close
+      &lt;/w-menu&gt;
+
+  title-link(h2) Hide menu on click inside
+  p.
+    A persistent menu can only be closed by clicking on the activator again, or programmatically.#[br]
+    Clicking outside the menu will not close it.
+  example.example1(content-class="pt5")
+    w-menu(detach-to=".example1" hide-on-menu-click)
+      template(#activator="{ on }")
+        w-button.mb2.mr3(v-on="on" outline color="primary") Show menu
+      | A click here will close the menu.
+    //- template(#pug).
+      w-menu(hide-on-menu-click)
+        template(#activator="{ on }")
+          w-button.mb2.mr3(v-on="on" outline color="primary") Show menu
+        | A click here will close the menu.
+    template(#html).
+      &lt;w-menu hide-on-menu-click&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button
+            v-on="on"
+            outline
+            color="primary"
+            class="mr3"&gt;
+            Show menu
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        A click here will close the menu.
       &lt;/w-menu&gt;
 
   title-link(h2) Position
@@ -572,28 +600,39 @@ div
 
   title-link(h2) Custom content: List menu
   p.
-    By default the menu is a w-card but if you need more flexibility, you can set the custom prop and put
-    whatever you want in it, free of style.
+    By default the menu is a #[strong.code w-card]. But if you need more flexibility, you can set the
+    #[code custom] prop and put whatever you want in the free-of-style menu.#[br]
+    In this example, the menu is #[code persistent] so the user is forced to select an option from
+    the menu when open. Then on click of an option, the menu will hide thanks to the option
+    #[code hide-on-menu-click].
   example.example6(content-class="mb12 pb12")
-    w-menu(detach-to=".example6" v-model="showListMenu1" shadow custom)
+    w-menu(detach-to=".example6" custom hide-on-menu-click persistent shadow)
       template(#activator="{ on }")
         w-button(v-on="on" outline color="primary") Show a list menu
       w-list.white--bg(
         v-model="list"
         :items="[{ label: 'Item 1' }, { label: 'Item 2' }, { label: 'Item 3' }]"
-        item-class="px8"
-        @item-select="showListMenu1 = false")
+        item-class="px8")
+    div.mt4
+      strong Current selection:
+      code.ml1 {{ list || 'none' }}
     //- template(#pug).
-      w-menu(v-model="showMenu" shadow custom)
+      w-menu(custom hide-on-menu-click persistent shadow)
         template(#activator="{ on }")
           w-button(v-on="on" outline color="primary") Show a list menu
         w-list.white--bg(
           v-model="listSelection"
           :items="listItems"
-          item-class="px8"
-          @item-select="showMenu = false")
+          item-class="px8")
+      div.mt4
+        strong Current selection:
+        code.ml1 {{ "\{\{ listSelection || 'none' \}\}" }}
     template(#html).
-      &lt;w-menu v-model="showMenu" shadow custom&gt;
+      &lt;w-menu
+        custom
+        hide-on-menu-click
+        persistent
+        shadow&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button v-on="on" outline color="primary"&gt;
             Show a list menu
@@ -604,10 +643,14 @@ div
           class="white--bg"
           v-model="listSelection"
           :items="listItems"
-          item-class="px8"
-          @item-select="showMenu = false"&gt;
+          item-class="px8"&gt;
         &lt;/w-list&gt;
       &lt;/w-menu&gt;
+
+      &lt;div class="mt4"&gt;
+        &lt;strong&gt;Current selection:&lt;/strong&gt;
+        &lt;code class="ml1"&gt;{{ '\{\{ listSelection || \'none\' \}\}' }}&lt;/code&gt;
+      &lt;/div&gt;
     template(#js).
       data: () => ({
         showMenu: false,
@@ -671,7 +714,7 @@ export default {
     showMenu: false,
     showListMenu1: false,
     showListMenu2: false,
-    list: []
+    list: null
   })
 }
 </script>

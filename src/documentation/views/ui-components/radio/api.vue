@@ -1,5 +1,6 @@
 <template lang="pug">
 div
+  a(id="api" name="api")
   .w-divider.my12
 
   //- w-radios.
@@ -45,7 +46,22 @@ const radios = {
     validators: '<span class="deep-orange">Only for validation, when the <strong class="code">w-radios</strong> component is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the radio button. Each function will be executed on radio button validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the radio button.'
   },
   slots: {
-    item: { description: 'Provide a custom content for each radio button label.' }
+    item: {
+      description: 'Provide a custom content for each radio button label.',
+      params: {
+        item: 'The current item object.',
+        index: 'The item index in the array of radios. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+        checked: 'A boolean representing the checked state of this particular item.'
+      }
+    },
+    'item.x': {
+      description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single item: the item at the index <em class="code">x</em>.',
+      params: {
+        item: 'The current item object.',
+        index: 'The item index in the array of radios. Starts at 1 to be consistent with the slot name.',
+        checked: 'A boolean representing the checked state of this particular item.'
+      }
+    }
   },
   events: {
     input: {
