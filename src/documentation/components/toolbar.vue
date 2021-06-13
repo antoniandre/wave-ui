@@ -1,6 +1,6 @@
 <template lang="pug">
 w-toolbar.main-toolbar(fixed)
-  router-link.w-flex.no-grow.fill-height.align-center.home-link(to="/" @click.native="scrollTop")
+  router-link.w-flex.no-grow.fill-height.align-center.home-link(to="/" @click.native="scrollTop(false)")
     w-icon.wave-logo.mr3(size="3em") wi-wave
     span.grey-dark1 Wave UI
   .spacer
@@ -8,7 +8,7 @@ w-toolbar.main-toolbar(fixed)
   w-tooltip(z-index="20")
     template(#activator="{ on }")
       div.ml1(v-on="on")
-        router-link(to="/release-notes")
+        router-link(to="/release-notes" @click.native="scrollTop(true)")
           w-icon(lg) mdi mdi-update
     | Release notes
   w-tooltip(z-index="20")
@@ -19,7 +19,7 @@ w-toolbar.main-toolbar(fixed)
   w-tooltip(z-index="20")
     template(#activator="{ on }")
       div.ml2.mr1(v-on="on")
-        router-link.pink-light1(to="/backers")
+        router-link.pink-light1(to="/backers" @click.native="scrollTop(true)")
           w-icon(lg) mdi mdi-heart-multiple-outline
     | Backers
   w-button.mr-1.hamburger-menu(
@@ -48,9 +48,11 @@ export default {
   },
 
   methods: {
-    async scrollTop () {
+    async scrollTop (toContent = false) {
       await this.$nextTick()
-      document.documentElement.scrollTop = 0
+      document.documentElement.scrollTop = toContent
+        ? document.querySelector('.content-wrap').offsetTop - 42
+        : 0
     }
   }
 }
