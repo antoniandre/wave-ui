@@ -209,7 +209,7 @@ div
       })
 
   title-link(h2) Custom label content
-  p #[span.code w-checkboxes] provides a #[code label] slot to customize the label of each checkbox button.
+  p #[span.code w-checkboxes] provides a slot to customize the label of each checkbox button: #[code item].
   example
     w-checkboxes(:items="checkboxes3" color="green")
       template(#item="{ item }")

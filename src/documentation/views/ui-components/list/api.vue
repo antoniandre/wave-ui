@@ -49,7 +49,7 @@ const slots = {
     description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single item: the item at the index <em class="code">x</em>.',
     params: {
       item: 'The current item object.',
-      index: 'The item index in the list. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      index: 'The item index in the list. Starts at 1 to be consistent with the slot name.',
       selected: 'A boolean representing the selected state of the current item.'
     }
   }
