@@ -94,6 +94,7 @@ component(
       :no-unselect="noUnselect"
       :selection-color="selectionColor"
       :add-ids="`w-select-menu--${_uid}`"
+      :item-color-key="itemColorKey"
       role="listbox"
       tabindex="-1")
       template(#item="{ item, selected, index }")
@@ -133,6 +134,7 @@ export default {
     // When label is inside, allows to move the label above on focus or when filled.
     staticLabel: { type: Boolean },
     itemLabelKey: { type: String, default: 'label' }, // Name of the label field.
+    itemColorKey: { type: String, default: 'color' }, // Name of the color field.
     itemValueKey: { type: String, default: 'value' }, // Name of the value field.
     itemClass: { type: String },
     menuClass: { type: String },
@@ -148,7 +150,7 @@ export default {
     // By default you can unselect a list item by re-selecting it.
     // Allow preventing that on single selection lists only.
     noUnselect: { type: Boolean },
-    menuProps: { type: Object }
+    menuProps: { type: Object } // Allow passing down an object of props to the w-menu component.
     // Props from mixin: name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
