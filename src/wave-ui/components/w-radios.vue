@@ -20,7 +20,12 @@ component(
     :disabled="isDisabled || null"
     :readonly="isReadonly || null"
     :class="{ mt1: !inline && i }")
-    slot(name="item" v-if="$scopedSlots.item" :item="item" v-html="item.label")
+    slot(
+      v-if="$scopedSlots.item"
+      name="item"
+      :item="item"
+      :index="i + 1"
+      v-html="item.label")
 </template>
 
 <script>
