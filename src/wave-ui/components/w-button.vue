@@ -74,6 +74,7 @@ export default {
       // If the button is a router-link, we can't apply events on it since vue-router needs the .native
       // modifier but it's not available with the v-on directive.
       // So do a manual router.push if $router is present.
+      // eslint-disable-next-line multiline-ternary
       return this.route && this.hasRouter && !this.forceLink && !this.externalLink ? {
         ...this.$attrs,
         click: e => {
@@ -107,7 +108,7 @@ export default {
       return {
         // If no color / bg color is set, set a primary color by default.
         'primary--bg': !this.bgColor && !this.color && !this.dark && !(this.outline || this.text),
-        'primary': !this.bgColor && !this.color && !this.dark && (this.outline || this.text),
+        primary: !this.bgColor && !this.color && !this.dark && (this.outline || this.text),
 
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,

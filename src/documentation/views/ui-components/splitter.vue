@@ -33,7 +33,6 @@ main
     pane
       span 5
 
-
   title-link(h2) Features
   w-list(:items="listItems" icon="wi-check")
 </template>

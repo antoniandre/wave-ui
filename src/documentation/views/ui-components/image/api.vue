@@ -38,19 +38,19 @@ const events = {
   error: {
     description: 'Emitted on image load error.',
     params: {
-      '[DOM event]': 'The associated DOM event.',
+      '[DOM event]': 'The associated DOM event.'
     }
   },
   loaded: {
     description: 'Emitted on image successful load.',
     params: {
-      'String': 'The image source that was successfully loaded (can be the provided <code>src</code> or <code>fallback</code> if the <code>src</code> failed).'
+      String: 'The image source that was successfully loaded (can be the provided <code>src</code> or <code>fallback</code> if the <code>src</code> failed).'
     }
   },
   loading: {
     description: 'Emitted when the image starts loading.',
     params: {
-      'String': 'The image source that is being loaded (can be the provided <code>src</code> or <code>fallback</code> if the <code>src</code> already failed).'
+      String: 'The image source that is being loaded (can be the provided <code>src</code> or <code>fallback</code> if the <code>src</code> already failed).'
     }
   }
 }

@@ -45,7 +45,8 @@ const events = {
       '[Boolean]': 'Represents the open state of the overlay: false on overlay close.'
     }
   },
-  click: { description: 'Emitted on every overlay click. Whether the <code>persistent</code> prop is set to true or false.',
+  click: {
+    description: 'Emitted on every overlay click. Whether the <code>persistent</code> prop is set to true or false.',
     params: {
       '[DOM event object]': 'The associated click DOM event.'
     }

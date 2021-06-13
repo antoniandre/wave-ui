@@ -106,7 +106,7 @@ export default {
       { label: 'Calendar', route: '/calendar' },
       { label: 'Slideshow', route: '/slideshow' },
       { label: 'Splitter', route: '/splitter' }
-    ],
+    ]
 
   }),
 

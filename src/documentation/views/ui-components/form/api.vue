@@ -20,7 +20,7 @@ const propsDescs = {
   noBlurValidation: 'Prevents the form element validation on blur (happening by default).',
   errorPlaceholders: 'Reserves a space under all the form elements so that triggering an error and showing the error message will not change the height of the form.',
   disabled: 'Disables all the form fields all at once, making them unreactive to user interactions.',
-  readonly: 'Set all the form fields to readonly all at once. The fields will still look interactive but their value will not be editable by user interaction.',
+  readonly: 'Set all the form fields to readonly all at once. The fields will still look interactive but their value will not be editable by user interaction.'
 }
 
 const slots = {

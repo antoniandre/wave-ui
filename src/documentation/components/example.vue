@@ -130,11 +130,11 @@ export default {
 
       const { html: htmlSlot, pug, js: jsSlot, css: cssSlot, scss } = this.$slots
       const slots = {
-        html: htmlSlot && htmlSlot()[0].children || '',
-        pug: pug && pug()[0].children || '',
-        js: jsSlot && jsSlot()[0].children || '',
-        css: cssSlot && cssSlot()[0].children || '',
-        scss: scss && scss()[0].children || ''
+        html: (htmlSlot && htmlSlot()[0].children) || '',
+        pug: (pug && pug()[0].children) || '',
+        js: (jsSlot && jsSlot()[0].children) || '',
+        css: (cssSlot && cssSlot()[0].children) || '',
+        scss: (scss && scss()[0].children) || ''
       }
       let html = ''
       let css = ''

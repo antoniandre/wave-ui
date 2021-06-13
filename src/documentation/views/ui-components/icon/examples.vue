@@ -439,7 +439,6 @@ div.icons-demo
         mdi mdi-home
       &lt;/w-icon&gt;
 
-
   title-link(h2) Sizes
   p.
     By default the icons inherit their font-size from their parent DOM element.
@@ -503,7 +502,6 @@ div.icons-demo
         size="4em"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
-
 
   title-link(h2) Transformations
   p You can also spin the icons, rotate and flip them.

@@ -182,7 +182,10 @@ const router = createRouter({
   routes
 })
 
-Object.defineProperty(router, 'status', { get: () => status, set: value => { status.loading = value } })
+Object.defineProperty(router, 'status', {
+  get: () => status,
+  set: value => (status.loading = value)
+})
 
 router.beforeEach((to, from, next) => {
   // Update through the property observer for reactivity.
