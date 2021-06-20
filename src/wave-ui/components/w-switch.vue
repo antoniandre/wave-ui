@@ -139,8 +139,8 @@ $disabled-color: #ddd;
   // Switch.
   &__input {
     position: relative;
-    width: 2 * $small-form-el-size;
-    height: $small-form-el-size;
+    width: 2 * ($small-form-el-size + $outline-width);
+    height: $small-form-el-size + (2 * $outline-width);
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
@@ -149,7 +149,6 @@ $disabled-color: #ddd;
     border-radius: 3em;
     background-color: $inactive-color;
     cursor: inherit;
-    box-sizing: initial;
     @include default-transition;
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
@@ -164,6 +163,7 @@ $disabled-color: #ddd;
     .w-switch--thin & {
       box-sizing: border-box;
       border: none;
+      width: 2 * $small-form-el-size;
       height: round(0.7 * $small-form-el-size);
     }
     .w-switch--thin :checked + & {
