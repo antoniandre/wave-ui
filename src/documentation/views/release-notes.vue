@@ -23,7 +23,12 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
-    li.patch
+    li.minor
+      strong.version v1.34.0
+      ul
+        li #[strong.code w-select]: Add a new `item.x` slot to allow specific item override.
+
+    li.minor
       strong.version v1.33.0
       ul
         li
