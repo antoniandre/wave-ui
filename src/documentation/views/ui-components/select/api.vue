@@ -61,6 +61,14 @@ const slots = {
       selected: 'A Boolean representing the selected state of the list item.',
       index: 'The index of the list item.'
     }
+  },
+  'item.x': {
+    description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single select list item: the item at the index <em class="code">x</em>.',
+    params: {
+      item: 'The current item object.',
+      selected: 'A Boolean representing the selected state of the list item.',
+      index: 'The index of the list item.'
+    }
   }
 }
 
