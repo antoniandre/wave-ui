@@ -24,6 +24,13 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.34.1
+      ul
+        li.
+          #[strong.code w-select]: Re-apply the selection from v-model when the items array changes.
+          (Useful for asynchronous items)
+
+    li.minor
       strong.version v1.34.0
       ul
         li #[strong.code w-select]: Add a new `item.x` slot to allow specific item override.
