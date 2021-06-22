@@ -351,6 +351,9 @@ export default {
   watch: {
     value (value) {
       if (value !== this.inputValue) this.inputValue = this.checkSelection(value)
+    },
+    items () {
+      this.inputValue = this.checkSelection(this.value)
     }
   }
 }
