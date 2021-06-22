@@ -97,6 +97,14 @@ component(
       :item-color-key="itemColorKey"
       role="listbox"
       tabindex="-1")
+      template(v-for="i in items.length" #[`item.${i}`]="{ item, selected, index }")
+        slot(
+          v-if="$scopedSlots[`item.${i}`]"
+          :name="`item.${i}`"
+          :item="item"
+          :selected="selected"
+          :index="index")
+          | {{ item[itemLabelKey] }}
       template(#item="{ item, selected, index }")
         slot(name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabelKey] }}
 
