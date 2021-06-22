@@ -14,8 +14,18 @@ ul.w-list(:class="classes")
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)"
         @click.native="onCheckboxWrapperClick")
-        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
-        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(
+          v-if="$scopedSlots[`item.${i + 1}`] && $scopedSlots[`item.${i + 1}`]()"
+          :name="`item.${i + 1}`"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
+        slot(
+          v-else-if="$scopedSlots.item"
+          name="item"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
         slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
       //- Router link list items. (separated case cz it needs a @click.native, can't be in v-on)
       router-link.w-list__item-label(
@@ -24,7 +34,7 @@ ul.w-list(:class="classes")
         v-on="liLabelEvents(li)"
         @click.native="$emit('item-select', cleanLi(li))")
         slot(
-          v-if="$scopedSlots[`item.${i + 1}`]"
+          v-if="$scopedSlots[`item.${i + 1}`] && $scopedSlots[`item.${i + 1}`]()"
           :name="`item.${i + 1}`"
           :item="cleanLi(li)"
           :index="i + 1"
@@ -43,7 +53,8 @@ ul.w-list(:class="classes")
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)")
         slot(
-          v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`"
+          v-if="$scopedSlots[`item.${i + 1}`] && $scopedSlots[`item.${i + 1}`]()"
+          :name="`item.${i + 1}`"
           :item="cleanLi(li)"
           :index="i + 1"
           :selected="li._selected")
@@ -87,8 +98,13 @@ ul.w-list(:class="classes")
       @update:model-value="$emit('update:modelValue', $event)",
       @input="$emit('input', $event)",
       @item-select="$emit('item-select', $event)")
-      //- template(#item.x="{ item, index, selected }")
-        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(item)" :index="index" :selected="selected")
+      //- template(#item[`${depth}-x`]="{ item, index, selected }")
+        slot(
+          v-if="$scopedSlots[`item.${i + 1}`]"
+          :name="`item.${i + 1}`"
+          :item="cleanLi(item)"
+          :index="index"
+          :selected="selected")
       template(v-if="$scopedSlots.item" #item="{ item, index, selected }")
         slot(name="item" :item="cleanLi(item)" :index="index" :selected="selected")
       template(v-else #default="{ item, index, selected }")
