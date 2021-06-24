@@ -24,11 +24,13 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.minor
-      strong.version v1.34.1
+      strong.version v1.34.2
       ul
         li.
           #[strong.code w-select]: Re-apply the selection from v-model when the items array changes.
           (Useful for asynchronous items)
+        li.
+          #[strong.code w-switch]: Fix the switch style when the label is on the left. #[issue-link 59]
 
     li.minor
       strong.version v1.34.0
