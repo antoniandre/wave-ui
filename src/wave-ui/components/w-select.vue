@@ -97,16 +97,15 @@ component(
       :item-color-key="itemColorKey"
       role="listbox"
       tabindex="-1")
-      template(v-for="i in items.length" #[`item.${i}`]="{ item, selected, index }")
+      template(v-for="i in items.length" v-slot:[`item.${i}`]="{ item, selected, index }")
         slot(
-          v-if="$slots[`item.${i}`]"
+          v-if="$slots[`item.${i}`] && $slots[`item.${i}`](item, selected, index)"
           :name="`item.${i}`"
           :item="item"
           :selected="selected"
           :index="index")
           | {{ item[itemLabelKey] }}
-      template(#item="{ item, selected, index }")
-        slot(name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabelKey] }}
+        slot(v-else name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabelKey] }}
 
   template(v-if="labelPosition === 'right'")
     label.w-select__label.w-select__label--right.w-form-el-shakable(
