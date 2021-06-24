@@ -22,15 +22,25 @@ ul.w-list(:class="classes")
     //- Vue 2.x only. Keep this comment to simplify the master branch merge into next.
     //-----------------------------------------------------
     //- When there are slots.
-    //- template(v-if="$scopedSlots[`item.${i + 1}`] || $scopedSlots.item || $scopedSlots.default")
+    //- template(v-if="$slots[`item.${i + 1}`] || $slots.item || $slots.default")
       //- Checklist items. (separated case cz it needs a @click.native, can't be in v-on)
       w-checkbox.w-list__item-label(
         v-if="checklist"
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)"
         @click.native="onCheckboxWrapperClick")
-        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
-        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(
+          v-if="$slots[`item.${i + 1}`] && $slots[`item.${i + 1}`]()"
+          :name="`item.${i + 1}`"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
+        slot(
+          v-else-if="$slots.item"
+          name="item"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
         slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
       //- Router link list items. (separated case cz it needs a @click.native, can't be in v-on)
       router-link.w-list__item-label(
@@ -38,8 +48,18 @@ ul.w-list(:class="classes")
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)"
         @click.native="$emit('item-select', cleanLi(li))")
-        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
-        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(
+          v-if="$slots[`item.${i + 1}`] && $slots[`item.${i + 1}`]()"
+          :name="`item.${i + 1}`"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
+        slot(
+          v-else-if="$slots.item"
+          name="item"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
         slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
       //- Nav & simple list items.
       component.w-list__item-label(
@@ -47,8 +67,18 @@ ul.w-list(:class="classes")
         :is="nav && !li.disabled && li.route ? 'a' : 'div'"
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)")
-        slot(v-if="$scopedSlots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
-        slot(v-else-if="$scopedSlots.item" name="item" :item="cleanLi(li)" :index="i + 1" :selected="li._selected")
+        slot(
+          v-if="$slots[`item.${i + 1}`] && $slots[`item.${i + 1}`]()"
+          :name="`item.${i + 1}`"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
+        slot(
+          v-else-if="$slots.item"
+          name="item"
+          :item="cleanLi(li)"
+          :index="i + 1"
+          :selected="li._selected")
         slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
 
     //- When there are no slots.
@@ -85,8 +115,13 @@ ul.w-list(:class="classes")
       @input="$emit('input', $event)"
       @item-click="$emit('item-click', $event)"
       @item-select="$emit('item-select', $event)")
-      //- template(#item.x="{ item, index, selected }")
-        slot(v-if="$slots[`item.${i + 1}`]" :name="`item.${i + 1}`" :item="cleanLi(item)" :index="index" :selected="selected")
+      //- template(#item[`${depth}-x`]="{ item, index, selected }")
+        slot(
+          v-if="$slots[`item.${i + 1}`]"
+          :name="`item.${i + 1}`"
+          :item="cleanLi(item)"
+          :index="index"
+          :selected="selected")
       template(v-if="$slots.item" #item="{ item, index, selected }")
         slot(name="item" :item="cleanLi(item)" :index="index" :selected="selected")
       template(v-else #default="{ item, index, selected }")
@@ -377,7 +412,9 @@ export default {
     },
 
     refreshListItems () {
+      // Items can be an array of objects, or a number to generate items on the fly.
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
+
       this.listItems = items.map((item, i) => ({
         ...item,
         _index: i,

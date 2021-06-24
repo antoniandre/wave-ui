@@ -26,7 +26,7 @@ component(
     label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_.uid}`" v-html="label")
   .w-switch__input(
     @click="$refs.input.focus();$refs.input.click()"
-    :class="[[this.color], hasLabel ? (thin ? 'mr3' : 'mr2') : '']")
+    :class="inputClasses")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_.uid}`")
       slot
@@ -77,6 +77,13 @@ export default {
         'w-switch--ripple': this.ripple.start,
         'w-switch--rippled': this.ripple.end
       }
+    },
+    inputClasses () {
+      const side = this.hasLabel && this.labelOnLeft ? 'l' : 'r'
+      return [
+        this.color,
+        this.hasLabel ? (this.thin ? `m${side}3` : `m${side}2`) : ''
+      ]
     }
   },
 
@@ -139,8 +146,8 @@ $disabled-color: #ddd;
   // Switch.
   &__input {
     position: relative;
-    width: 2 * $small-form-el-size;
-    height: $small-form-el-size;
+    width: 2 * ($small-form-el-size + $outline-width);
+    height: $small-form-el-size + (2 * $outline-width);
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
@@ -149,13 +156,12 @@ $disabled-color: #ddd;
     border-radius: 3em;
     background-color: $inactive-color;
     cursor: inherit;
-    box-sizing: initial;
     @include default-transition;
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
 
     // Checked state.
-    :checked + & {
+    :checked ~ & {
       border-color: currentColor;
       background-color: currentColor;
     }
@@ -164,15 +170,16 @@ $disabled-color: #ddd;
     .w-switch--thin & {
       box-sizing: border-box;
       border: none;
+      width: 2 * $small-form-el-size;
       height: round(0.7 * $small-form-el-size);
     }
-    .w-switch--thin :checked + & {
+    .w-switch--thin :checked ~ & {
       background-color: $inactive-color;
     }
 
     // Disabled.
     .w-switch--disabled & {color: $disabled-color;}
-    .w-switch--disabled :checked + & {
+    .w-switch--disabled :checked ~ & {
       opacity: 0.5;
     }
   }
@@ -191,14 +198,14 @@ $disabled-color: #ddd;
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
 
-    :checked + & {transform: translateX(100%);}
+    :checked ~ & {transform: translateX(100%);}
 
     .w-switch--thin & {
       top: - round(0.15 * $small-form-el-size);
       transform: scale(1.1);
       box-shadow: $box-shadow;
     }
-    .w-switch--thin :checked + & {
+    .w-switch--thin :checked ~ & {
       transform: translateX(100%) scale(1.1);
       background-color: currentColor;
     }
@@ -228,16 +235,16 @@ $disabled-color: #ddd;
     animation: w-switch-ripple 0.55s 0.15s ease;
   }
 
-  :focus + &__input:before {
+  :focus ~ &__input:before {
     transform: translateX(0) scale(1.8);
     opacity: 0.2;
   }
-  :focus:checked + &__input:before {
+  :focus:checked ~ &__input:before {
     transform: translateX(100%) scale(1.8);
   }
 
   // After ripple reset to default state, then remove the class via js and the
-  // `:focus + &__input:before` will re-transition to normal focused outline.
+  // `:focus ~ &__input:before` will re-transition to normal focused outline.
   &--rippled &__input:before {
     transition: none;
     transform: translateX(100%) scale(0);
