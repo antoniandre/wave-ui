@@ -48,7 +48,7 @@
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@mdi/font": "^5.9.55",
     "@vitejs/plugin-vue": "^1.2.2",
-    "@vue/compiler-sfc": "3.1.1",
+    "@vue/compiler-sfc": "3.1.2",
     "autoprefixer": "^10.2.5",
     "axios": "^0.21.1",
     "eslint": "^7.28.0",
@@ -62,7 +62,7 @@
     "splitpanes": "^3.0.4",
     "vite": "^2.3.3",
     "vite-plugin-pug": "^0.3.0",
-    "vue": "^3.1.1",
+    "vue": "^3.1.2",
     "vue-cal": "^4.2.0",
     "vue-router": "^4.0.8",
     "vueperslides": "^3.3.0"
