@@ -90,7 +90,7 @@ div
     Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
     background.#[br]
     By default, the text has the "#[span.code primary]" color.
-  .title3 Default style (Underline)
+  title-link(h3 slug="default-style") Default style (Underline)
   example
     w-select(:items="items1" color="blue") Label
     w-select.mt4(:items="items1" bg-color="blue-light5" color="blue-dark3") Label
@@ -120,7 +120,7 @@ div
         ]
       })
 
-  .title3 Outline style
+  title-link(h3) Outline style
   example
     w-select(:items="items1" outline color="blue") Label
     w-select.mt4(:items="items1" outline bg-color="blue-light5" color="blue-dark3") Label
@@ -149,6 +149,29 @@ div
           { label: 'Item 1' },
           { label: 'Item 2' },
           { label: 'Item 3' }
+        ]
+      })
+
+  title-link(h3) List items colors
+  p.
+    If an item object contains the key #[code color], it will naturally be used by the
+    #[strong.code w-select] component to display this list item in this color.#[br]
+    To disable this you can set the #[code item-color-key] prop to an empty string.
+  example
+    w-select(:items="items4") Pick a color
+    //- template(#pug).
+      w-select(:items="items" color="blue") Pick a color
+    template(#html).
+      &lt;w-select :items="items"&gt;
+        Pick a color
+      &lt;/w-select&gt;
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Amber', color: 'amber' },
+          { label: 'Warning', color: 'warning' },
+          { label: 'Error', color: 'error' },
+          { label: 'Pink', color: 'pink' }
         ]
       })
 
@@ -737,6 +760,12 @@ export default {
       { label: 'Item 1', value: 1 },
       { label: 'Item 2', value: 2 },
       { label: 'Item 3', value: 3 }
+    ],
+    items4: [
+      { label: 'Amber', color: 'amber' },
+      { label: 'Warning', color: 'warning' },
+      { label: 'Error', color: 'error' },
+      { label: 'Pink', color: 'pink' }
     ],
     vModelSelect1: [1, 3],
     customSelection: [1, 3],

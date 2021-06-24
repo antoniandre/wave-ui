@@ -94,8 +94,17 @@ component(
       :add-ids="`w-select-menu--${_.uid}`"
       :no-unselect="noUnselect"
       :selection-color="selectionColor"
+      :item-color-key="itemColorKey"
       role="listbox"
       tabindex="-1")
+      template(v-for="i in items.length" #[`item.${i}`]="{ item, selected, index }")
+        slot(
+          v-if="$slots[`item.${i}`]"
+          :name="`item.${i}`"
+          :item="item"
+          :selected="selected"
+          :index="index")
+          | {{ item[itemLabelKey] }}
       template(#item="{ item, selected, index }")
         slot(name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabelKey] }}
 
@@ -133,6 +142,7 @@ export default {
     // When label is inside, allows to move the label above on focus or when filled.
     staticLabel: { type: Boolean },
     itemLabelKey: { type: String, default: 'label' }, // Name of the label field.
+    itemColorKey: { type: String, default: 'color' }, // Name of the color field.
     itemValueKey: { type: String, default: 'value' }, // Name of the value field.
     itemClass: { type: String },
     menuClass: { type: String },
@@ -148,7 +158,7 @@ export default {
     // By default you can unselect a list item by re-selecting it.
     // Allow preventing that on single selection lists only.
     noUnselect: { type: Boolean },
-    menuProps: { type: Object }
+    menuProps: { type: Object } // Allow passing down an object of props to the w-menu component.
     // Props from mixin: name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -341,6 +351,9 @@ export default {
   watch: {
     modelValue (value) {
       if (value !== this.inputValue) this.inputValue = this.checkSelection(value)
+    },
+    items () {
+      this.inputValue = this.checkSelection(this.modelValue)
     }
   }
 }

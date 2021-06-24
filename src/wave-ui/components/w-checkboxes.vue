@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: checkboxItems.some(item => item.isChecked), disabled: isDisabled }"
+  v-bind="formRegister && { validators, inputValue: checkboxItems.some(item => item._isChecked), disabled: isDisabled }"
   v-model:valid="valid"
   @reset="reset"
   :column="!inline"
@@ -10,7 +10,7 @@ component(
   w-checkbox(
     v-for="(item, i) in checkboxItems"
     :key="i"
-    :model-value="item.isChecked"
+    :model-value="item._isChecked"
     :name="`${name || `w-checkboxes--${_.uid}`}[]`"
     :label="item.label"
     :label-on-left="labelOnLeft"
@@ -21,7 +21,20 @@ component(
     :readonly="isReadonly || null"
     @focus="$emit('focus', $event)"
     :class="{ mt1: !inline && i }")
-    slot(v-if="$slots.item" name="item" :item="item")
+    slot(
+      v-if="$slots[`item.${i + 1}`]"
+      :name="`item.${i + 1}`"
+      :item="getOriginalItem(item)"
+      :checked="!!item._isChecked"
+      :index="i + 1"
+      v-html="item.label")
+    slot(
+      v-else-if="$slots.item"
+      name="item"
+      :item="getOriginalItem(item)"
+      :checked="!!item._isChecked"
+      :index="i + 1"
+      v-html="item.label")
     div(v-else-if="item.label" v-html="item.label")
 </template>
 
@@ -64,10 +77,10 @@ export default {
         return reactive({
           ...item,
           label: item[this.itemLabelKey],
-          index: i,
+          _index: i,
           value: itemValue, // If no value is set then add one to prevent error.
           color: item[this.itemColorKey] || this.color,
-          isChecked: this.modelValue && this.modelValue.includes(itemValue)
+          _isChecked: this.modelValue && this.modelValue.includes(itemValue)
         })
       })
     },
@@ -82,17 +95,22 @@ export default {
 
   methods: {
     reset () {
-      this.checkboxItems.forEach(item => (item.isChecked = null))
+      this.checkboxItems.forEach(item => (item._isChecked = null))
       this.$emit('update:modelValue', [])
       this.$emit('input', [])
     },
 
     toggleCheck (checkbox, isChecked) {
-      checkbox.isChecked = isChecked
-      const selection = this.checkboxItems.filter(item => item.isChecked).map(item => item.value)
+      checkbox._isChecked = isChecked
+      const selection = this.checkboxItems.filter(item => item._isChecked).map(item => item.value)
 
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
+    },
+
+    // Return the original item (so there is no `_index`, etc.).
+    getOriginalItem (item) {
+      return this.items[item._index]
     }
   }
 }

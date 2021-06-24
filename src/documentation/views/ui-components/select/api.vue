@@ -25,10 +25,12 @@ const propsDescs = {
   innerIconRight: 'Adds an icon on the right inside the select field.<br>Accepts a string: e.g. <code>mdi mdi-eye</code>.',
   // When label is inside, allows to move the label above on focus or when filled.
   staticLabel: 'Prevents moving the label above the select field when the <code>labelPosition</code> is equal to <code>inside</code>. If a placeholder is present, it will be hidden and the label will be displayed instead.<br>When a value is set the static label is replaced by the textual value.',
-  itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item.',
-  itemValueKey: 'The property name (aka key) in each item object where to find the value of the item.',
+  itemLabelKey: 'The property name (aka "key") in each item object where to find the label of the item.',
+  itemColorKey: 'The property name (aka "key") in each item object where to find the color of the item.<br>By default, the <code>color</code> key of the current item will be used to render this item in this color.<br>You can also provide an empty string to disable this feature.',
+  itemValueKey: 'The property name (aka "key") in each item object where to find the value of the item.',
   itemClass: 'Applies a custom CSS class to each select list item.',
   menuClass: 'Applies a custom CSS class to the select list\'s floatting menu element.',
+  menuProps: 'Internally, the <strong class="code">w-select</strong> component uses the <strong class="code">w-menu</strong> component.<br>This option allows you to pass down to the menu all the props that the <strong class="code">w-menu</strong> component can accept.<br>For instance, you could set <code>:menu-props="{ detachTo: \'.my-scrolling-container\' }"</code>, in order to move the select list floatting menu to a particular DOM node, and allowing it to scroll with its container.',
   color: 'Applies a color to the select\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the select\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   outline: 'The outline style applies the provided <code>color</code> (by default the <code>primary</code> color is used) to the text and border and no background color is set.',
@@ -54,6 +56,14 @@ const slots = {
   },
   item: {
     description: 'Provide a common custom template for all the select list items.',
+    params: {
+      item: 'The current item object.',
+      selected: 'A Boolean representing the selected state of the list item.',
+      index: 'The index of the list item.'
+    }
+  },
+  'item.x': {
+    description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single select list item: the item at the index <em class="code">x</em>.',
     params: {
       item: 'The current item object.',
       selected: 'A Boolean representing the selected state of the list item.',

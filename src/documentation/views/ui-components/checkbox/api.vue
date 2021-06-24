@@ -1,6 +1,8 @@
 <template lang="pug">
 div
+  a(id="api" name="api")
   .w-divider.my12
+
   //- w-checkboxes.
   title-link.title1(h2 slug="w-checkboxes-api") &lt;w-checkboxes&gt; API
 
@@ -31,9 +33,9 @@ const checkboxes = {
     items: 'An array of checkbox items to display. Each item object should contain at least a <code>label</code> or a <code>value</code> attribute.',
     value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide an array of values to dictate the checked state of all the checkboxes.<br>This value gets updated when using a v-model.',
     labelOnLeft: 'Moves the label to the left of each checkbox.',
-    itemLabelKey: 'The property name (aka key) in each item object where to find the label of the item (if any).',
-    itemValueKey: 'The property name (aka key) in each item object where to find the value of the item (if any).',
-    itemColorKey: 'The property name (aka key) in each item object where to find the color of the item (if any).',
+    itemLabelKey: 'The property name (aka "key") in each item object where to find the label of the item (if any).',
+    itemValueKey: 'The property name (aka "key") in each item object where to find the value of the item (if any).',
+    itemColorKey: 'The property name (aka "key") in each item object where to find the color of the item (if any).',
     inline: 'Displays all the checkboxes inline instead of in column.',
     round: 'Displays round checkboxes instead of square ones.',
     color: 'Applies a color to the active checkbox. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
@@ -44,7 +46,22 @@ const checkboxes = {
     validators: '<span class="deep-orange">Only for validation, when the <strong class="code">w-checkboxes</strong> component is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the checkbox. Each function will be executed on checkbox validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the checkbox.'
   },
   slots: {
-    item: { description: 'Provide a custom content for each checkbox label.' }
+    item: {
+      description: 'Provide a custom content for each checkbox label.',
+      params: {
+        item: 'The current item object.',
+        index: 'The item index in the array of radios. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+        checked: 'A boolean representing the checked state of this particular item.'
+      }
+    },
+    'item.x': {
+      description: '<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single item: the item at the index <em class="code">x</em>.',
+      params: {
+        item: 'The current item object.',
+        index: 'The item index in the array of radios. Starts at 1 to be consistent with the slot name.',
+        checked: 'A boolean representing the checked state of this particular item.'
+      }
+    }
   },
   events: {
     input: {

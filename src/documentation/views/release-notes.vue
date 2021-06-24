@@ -23,6 +23,35 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v1.34.2
+      ul
+        li.
+          #[strong.code w-select]: Re-apply the selection from v-model when the items array changes.
+          (Useful for asynchronous items)
+        li.
+          #[strong.code w-switch]: Fix the switch style when the label is on the left. #[issue-link 59]
+
+    li.minor
+      strong.version v1.34.0
+      ul
+        li #[strong.code w-select]: Add a new `item.x` slot to allow specific item override.
+
+    li.minor
+      strong.version v1.33.0
+      ul
+        li
+          p #[strong.code w-select]: Added the #[code item-color-key] option.
+        li
+          p #[strong.code w-menu]: Fixed the #[code hide-on-menu-click] option.
+        li
+          p #[strong.code w-radios] &amp; #[strong.code w-checkboxes]:
+          ul
+            li.
+              Improve the #[code item] scoped slots: now returns the #[strong original] #[code item],
+              the #[code index], and a #[code checked] boolean.
+            li Add a new #[code item.x] scoped slot to override 1 particular item only.
+
     li.patch
       strong.version v1.32.7
       ul
