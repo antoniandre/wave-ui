@@ -34,8 +34,7 @@ component(
       :readonly="isReadonly || null"
       :aria-readonly="isReadonly ? 'true' : 'false'"
       :disabled="isDisabled || null"
-      :required="required || null"
-      :style="textareaStyles")
+      :required="required || null")
     template(v-if="labelPosition === 'inside' && showLabelInside")
       label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
         v-if="$slots.default"
@@ -176,8 +175,15 @@ export default {
       this.$emit('blur', e)
     },
     computeHeight () {
-      const lines = (this.inputValue.match(/\n/g) || []).length + 1
-      this.height = Math.max(lines, this.rows) * this.lineHeight + this.paddingY
+      // Important notes:
+      // - The direct DOM manipulation is not data-driven but faster than Vue
+      //   for this case where we don't want to see a jump when resetting the height to recompute.
+      // - The number of lines is not only the carriage returns, it's also the natural line wraps.
+      this.$refs.textarea.style.height = ''
+      const linesCount = (this.$refs.textarea.scrollHeight - this.paddingY) / this.lineHeight
+      const height = Math.max(linesCount, this.rows) * this.lineHeight + this.paddingY
+      this.$refs.textarea.style.height = height + 'px'
+      console.log('here', linesCount, height)
     },
     getLineHeight () {
       const computedStyles = window.getComputedStyle(this.$refs.textarea, null)
@@ -188,7 +194,10 @@ export default {
   },
 
   mounted () {
-    if (!this.noAutogrow && !this.resizable) this.getLineHeight()
+    if (!this.noAutogrow && !this.resizable) {
+      this.getLineHeight()
+      this.computeHeight()
+    }
   },
 
   watch: {
