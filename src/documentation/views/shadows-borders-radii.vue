@@ -221,7 +221,7 @@ main
 
     w-accordion.mt8.bdrs2.bd1(:items="2")
       template(#item-title="{ index }")
-        .title5 Accordion with #[code.mx1 .bd1] and #[code.mx1 .bdrs2] classes.
+        .title5.mb0 Accordion with #[code.mx1 .bd1] and #[code.mx1 .bdrs2] classes.
       template(#item-title.2="{ index }") Item {{ index }}
       template(#item-content="{ index }") Content {{ index }}
     //- template(#pug).
