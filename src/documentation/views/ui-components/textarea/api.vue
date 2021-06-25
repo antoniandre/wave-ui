@@ -37,7 +37,7 @@ const propsDescs = {
   disabled: 'Disables the textarea making it unreactive to user interactions.',
   readonly: 'The textarea will still look like an interactive textarea except that it is read-only: its current content cannot be changed by user interaction.',
   required: 'Applies the native HTML <code>required</code> attribute to the textarea.',
-  validators: '<span class="deep-orange">Only for validation, when the textarea is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the textarea. Each function will be executed on textarea validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the textarea.'
+  validators: '<span class="deep-orange">Only for validation, when the textarea is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the textarea. Each function will be executed on textarea   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the textarea.'
 }
 
 const slots = {

@@ -43,7 +43,7 @@ const radios = {
     disabled: 'Disables all the radio buttons making them unreactive to user interactions.',
     readonly: 'The radio button will still look like an interactive radio button except that it is read-only: its current value cannot be changed by user interaction.',
     required: 'Applies the native HTML <code>required</code> attribute to each radio button.',
-    validators: '<span class="deep-orange">Only for validation, when the <strong class="code">w-radios</strong> component is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the radio button. Each function will be executed on radio button validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the radio button.'
+    validators: '<span class="deep-orange">Only for validation, when the <strong class="code">w-radios</strong> component is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the radio button. Each function will be executed on radio button   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the radio button.'
   },
   slots: {
     item: {
@@ -97,7 +97,7 @@ const radio = {
     disabled: 'Disables the radio button making it unreactive to user interactions.',
     readonly: 'The radio button will still look like an interactive radio button except that it is read-only: its current value cannot be changed by user interaction.',
     required: 'Applies the native HTML <code>required</code> attribute to the radio button.',
-    validators: '<span class="deep-orange">Only for validation, when this radio button is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the radio button. Each function will be executed on radio button validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the radio button.'
+    validators: '<span class="deep-orange">Only for validation, when this radio button is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the radio button. Each function will be executed on radio button   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the radio button.'
   },
   slots: {
     default: { description: 'The radio button label content.' }
