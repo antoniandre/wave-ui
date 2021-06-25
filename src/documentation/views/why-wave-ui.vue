@@ -113,6 +113,5 @@ export default {
   display: flex;
 
   &-label {align-items: center;display: block;}
-  &-bullet {top: auto;}
 }
 </style>

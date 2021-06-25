@@ -64,7 +64,7 @@
     "material-design-icons": "^3.0.1",
     "rollup-plugin-delete": "^2.0.0",
     "sass": "^1.34.1",
-    "simple-syntax-highlighter": "^1.4.5",
+    "simple-syntax-highlighter": "^1.4.8",
     "splitpanes": "^2.3.6",
     "vite": "^2.3.6",
     "vite-plugin-pug": "^0.3.0",
