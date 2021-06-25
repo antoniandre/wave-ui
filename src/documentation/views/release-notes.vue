@@ -33,6 +33,8 @@ main
           #[strong.code w-select]: Fix a selection bug when clicking the select to open and navigating with keyboard arrows.
         li.
           #[strong.code w-switch]: Fix the switch style when the label is on the left. #[issue-link 59]
+        li.
+          #[strong.code w-textarea]: Improve the auto height computation (also count natural line wraps), and also apply on mounted.
 
     li.minor
       strong.version v1.34.0
