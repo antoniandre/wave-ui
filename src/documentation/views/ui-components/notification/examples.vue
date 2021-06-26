@@ -11,30 +11,82 @@ div
         template(#item.2) Handles the stacking of simultaneous notifications
       .title3.mt4 Cons
       w-list(icon="wi-minus" :items="1")
-        template(#item.1) Less flexible than #[strong.code.mx1 w-notification] in terms of layout
+        template(#item.1).
+          Less flexible than #[strong.code.mx1 w-notification] in terms of layout (no slot available)
 
       title-link(h2) Simple use of the notify method
       p The notify method takes up to 3 parameters, here is the syntax:
       ssh-pre(language="js").
         this.$waveui.notify({String} message, {String} type?, {Number} timeout?)
-      p The default type is #[code info] and the default timeout is #[code 4000].
+      p.
+        The default type is #[code info] and the default timeout is #[code 4000].#[br]
+        A timeout of #[code 0] will keep the notification visible permanently (until dismissed).
       example
         w-button.ma1(@click="$waveui.notify('Information.')" bg-color="info") Notify info
         w-button.ma1(@click="$waveui.notify('Success!', 'success')" bg-color="success") Notify success
         w-button.ma1(@click="$waveui.notify('Warning!', 'warning')" bg-color="warning") Notify warning
         w-button.ma1(@click="$waveui.notify('Error :(', 'error', 0)" bg-color="error") Permanent error
         //- template(#pug).
+          w-button.ma1(@click="$waveui.notify('Information.')" bg-color="info") Notify info
+          w-button.ma1(@click="$waveui.notify('Success!', 'success')" bg-color="success") Notify success
+          w-button.ma1(@click="$waveui.notify('Warning!', 'warning')" bg-color="warning") Notify warning
+          w-button.ma1(@click="$waveui.notify('Error :(', 'error', 0)" bg-color="error") Permanent error
         template(#html).
+          &lt;w-button @click="$waveui.notify('Information.')" bg-color="info"&gt;
+            Notify info
+          &lt;/w-button&gt;
+
+          &lt;w-button @click="$waveui.notify('Success!', 'success')" bg-color="success"&gt;
+            Notify success
+          &lt;/w-button&gt;
+
+          &lt;w-button @click="$waveui.notify('Warning!', 'warning')" bg-color="warning"&gt;
+            Notify warning
+          &lt;/w-button&gt;
+
+          &lt;w-button @click="$waveui.notify('Error :(', 'error', 0)" bg-color="error"&gt;
+            Permanent error
+          &lt;/w-button&gt;
 
       title-link(h2) If you need more control
-      p The notify method also accepts a single Object parameter which will accept more options:
+      p.
+        The #[code notify] method also accepts a single Object parameter which will accept all the options
+        of the #[strong.code w-alert] component, plus the #[code message] and #[code timeout] options.#[br]
+        E.g.
       ssh-pre(language="js").
-        this.$waveui.notify({Object} options)
+        this.$waveui.notify({
+          message: 'Message.',
+          timeout: 3000, // ms.
+          ... // Other options from w-alert.
+        })
+
+      p.
+        Here is an example of a custom notification using a few different #[strong.code w-alert] options.
 
       example
-        w-button.ma1(@click="$waveui.notify({ message: 'Warning', type: 'warning', duration: 8000, plain: false, iconOutside: true })" bg-color="info") Notify info
+        w-button(@click="notify" bg-color="info") Notify custom
         //- template(#pug).
+          w-button(@click="notify" bg-color="info") Notify custom
         template(#html).
+          &lt;w-button @click="notify" bg-color="info"&gt;
+            Notify custom
+          &lt;/w-button&gt;
+        template(#js).
+          methods: {
+            notify () {
+              this.$waveui.notify({
+                message: 'Warning',
+                timeout: 6000,
+                bgColor: 'orange-light5',
+                color: 'warning',
+                dismiss: false,
+                shadow: true,
+                round: true,
+                sm: true,
+                icon: 'wi-star'
+              })
+            }
+          }
 
     //- w-notification.
     template(#item-title.2) #[span.code w-notification]
@@ -404,7 +456,23 @@ export default {
       { label: 'Scale fade', value: 'scale-fade' },
       { label: 'None', value: false }
     ]
-  })
+  }),
+
+  methods: {
+    notify () {
+      this.$waveui.notify({
+        message: 'Warning',
+        timeout: 6000,
+        bgColor: 'orange-light5',
+        color: 'warning',
+        dismiss: false,
+        shadow: true,
+        round: true,
+        sm: true,
+        icon: 'wi-star'
+      })
+    }
+  }
 }
 </script>
 
