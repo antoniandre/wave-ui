@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  w-tabs(:items="2")
+  w-tabs.mt4(:items="2" content-class="pl4")
     //- Buit-in notification manager.
     template(#item-title.1) Notification manager
     template(#item-content.1)
@@ -87,6 +87,13 @@ div
               })
             }
           }
+
+      title-link(h2) Styling
+      p.
+        By default, the notification manager is 280px-wide and all the notifications will inherit this width.#[br]
+        You can override this via CSS. For instance:
+      ssh-pre(language="css").
+        .w-notification-manager {width: 100%;max-width: 500px;}
 
     //- w-notification.
     template(#item-title.2) #[span.code w-notification]
