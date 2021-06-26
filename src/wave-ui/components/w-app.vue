@@ -2,19 +2,13 @@
 .w-app(:class="{ 'theme--dark': dark, 'd-block': block }")
   slot
   transition-group(tag="div" class="w-notification-manager" name="slide-left" appear)
-    w-alert(
+    w-alert.white--bg(
       v-for="notif in notifications"
       :key="notif._uid"
       v-model="notif._value"
       v-if="notif._value"
       @close="notifManager.dismiss(notif._uid)"
-      :[notif.type]="!!notif.type"
-      :plain="notif.plain"
-      :dismiss="notif.dismiss"
-      :icon-outside="notif.iconOutside"
-      :icon="notif.icon"
-      :color="notif.color"
-      :bg-color="notif.bgColor")
+      v-bind="notif")
       | {{ notif.message }}
 </template>
 

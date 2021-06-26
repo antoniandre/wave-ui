@@ -1,7 +1,6 @@
 <template lang="pug">
-div
-  .w-divider.my12
-  title-link.title1(h2) API
+div.mt12.pt6
+  title-link.title1(h2 slug="api") #[span.code &lt;w-notification&gt;] API
 
   component-api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 

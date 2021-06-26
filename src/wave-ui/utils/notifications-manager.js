@@ -3,8 +3,9 @@ import Vue from 'vue'
 export default class NotificationManager {
   static instance
   notifications
-  #notificationManagerEl // Private.
-  #uid = 0 // Private. A unique ID for each notification.
+   // Private fields.
+  #notificationManagerEl
+  #uid = 0 // A unique ID for each notification.
   #notificationDefaults
 
   constructor () {
@@ -17,10 +18,7 @@ export default class NotificationManager {
       _uid: 0,
       _value: true,
       message: '',
-      type: 'info',
-      duration: 4000,
-      plain: true,
-      iconOutside: false,
+      timeout: 4000,
       dismiss: true
     }
   }
@@ -34,20 +32,19 @@ export default class NotificationManager {
 
     if (typeof args[0] === 'object') notification = { ...notification, ...args[0] }
     else {
-      const [message, type, duration] = args
+      const [message, type, timeout] = args
       notification = {
         ...notification,
         message: message || '',
-        type: type || 'info',
-        duration: duration || duration === 0 ? parseFloat(duration) : 4000
+        [type === undefined ? 'info' : type]: true,
+        timeout: timeout || timeout === 0 ? parseFloat(timeout) : 4000
       }
     }
     Vue.set(this.notifications, this.notifications.length, notification)
-    if (~~notification.duration !== 0) setTimeout(() => this.dismiss(notification._uid), notification.duration)
+    if (~~notification.timeout !== 0) setTimeout(() => this.dismiss(notification._uid), notification.timeout)
   }
 
   dismiss (uid) {
     this.notifications = this.notifications.filter(item => item._uid !== uid)
-    console.log(this.notifications)
   }
 }

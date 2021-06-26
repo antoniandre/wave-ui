@@ -23,18 +23,23 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v1.35.0
+      ul
+        li #[strong.code $waveui.notify()]: New method to trigger a notification.
+        li.
+          #[strong.code w-select]: Fix a selection bug when clicking the select to open and navigating with keyboard arrows.
+        li.
+          #[strong.code w-textarea]: Improve the auto height computation (also count natural line wraps), and also apply on mounted.
+
     li.patch
-      strong.version v1.34.3
+      strong.version v1.34.2
       ul
         li.
           #[strong.code w-select]: Re-apply the selection from v-model when the items array changes.
           (Useful for asynchronous items)
         li.
-          #[strong.code w-select]: Fix a selection bug when clicking the select to open and navigating with keyboard arrows.
-        li.
           #[strong.code w-switch]: Fix the switch style when the label is on the left. #[issue-link 59]
-        li.
-          #[strong.code w-textarea]: Improve the auto height computation (also count natural line wraps), and also apply on mounted.
 
     li.minor
       strong.version v1.34.0
