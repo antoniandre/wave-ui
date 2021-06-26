@@ -1,12 +1,10 @@
-import Vue from 'vue'
-
 export default class NotificationManager {
   static instance
   notifications
    // Private fields.
-  #notificationManagerEl
-  #uid = 0 // A unique ID for each notification.
-  #notificationDefaults
+  _notificationManagerEl = null
+  _uid = 0 // A unique ID for each notification.
+  _notificationDefaults
 
   constructor () {
     // Singleton pattern.
@@ -14,7 +12,7 @@ export default class NotificationManager {
 
     NotificationManager.instance = this
     this.notifications = []
-    this.#notificationDefaults = {
+    this._notificationDefaults = {
       _uid: 0,
       _value: true,
       message: '',
@@ -24,11 +22,11 @@ export default class NotificationManager {
   }
 
   init () {
-    this.#notificationManagerEl = document.querySelector('.w-notification-manager')
+    this._notificationManagerEl = document.querySelector('.w-notification-manager')
   }
 
   notify (...args) {
-    let notification = { ...this.#notificationDefaults, _uid: this.#uid++ }
+    let notification = { ...this._notificationDefaults, _uid: this._uid++ }
 
     if (typeof args[0] === 'object') notification = { ...notification, ...args[0] }
     else {
@@ -40,7 +38,7 @@ export default class NotificationManager {
         timeout: timeout || timeout === 0 ? parseFloat(timeout) : 4000
       }
     }
-    Vue.set(this.notifications, this.notifications.length, notification)
+    this.notifications.push(notification)
     if (~~notification.timeout !== 0) setTimeout(() => this.dismiss(notification._uid), notification.timeout)
   }
 
