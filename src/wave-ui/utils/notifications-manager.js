@@ -1,8 +1,12 @@
+// @todo: find a way to use private fields with Vue 3 proxies.
+// https://github.com/tc39/proposal-class-fields/issues/106
+// https://github.com/tc39/proposal-class-fields/issues/227
+
 export default class NotificationManager {
   static instance
   notifications
    // Private fields.
-  _notificationManagerEl = null
+  notificationManagerEl = null
   _uid = 0 // A unique ID for each notification.
   _notificationDefaults
 
@@ -22,7 +26,7 @@ export default class NotificationManager {
   }
 
   init () {
-    this._notificationManagerEl = document.querySelector('.w-notification-manager')
+    this.notificationManagerEl = document.querySelector('.w-notification-manager')
   }
 
   notify (...args) {

@@ -11,10 +11,16 @@ const shadeColor = (col, amt) => {
     .join('')
 }
 
+// Keep the notification manager private.
+// @todo: find a way to use private fields with Vue 3 proxies.
+// https://github.com/tc39/proposal-class-fields/issues/106
+// https://github.com/tc39/proposal-class-fields/issues/227
+let notificationsManager = null
+
 export default class WaveUI {
   static instance = null
   static vueInstance = null // Needed until constructor is called.
-  _notificationsManager
+  // #notificationsManager
 
   // Public breakpoint object. Accessible from this.$waveui.breakpoint.
   breakpoint = {
@@ -67,7 +73,7 @@ export default class WaveUI {
 
     else {
       if (!WaveUI.registered) app.use(WaveUI)
-      this._notificationsManager = new NotificationsManager()
+      notificationsManager = reactive(new NotificationsManager())
 
       // Merge user options into the default config.
       mergeConfig(options)
@@ -111,7 +117,7 @@ export default class WaveUI {
   }
 
   notify (...args) {
-    this._notificationsManager.notify(...args)
+    notificationsManager.notify(...args)
   }
 }
 
