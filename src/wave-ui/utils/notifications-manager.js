@@ -18,7 +18,10 @@ export default class NotificationManager {
       _value: true,
       message: '',
       type: 'info',
-      duration: 4000
+      duration: 4000,
+      plain: true,
+      iconOutside: false,
+      dismiss: true
     }
   }
 
