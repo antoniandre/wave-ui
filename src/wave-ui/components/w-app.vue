@@ -1,10 +1,22 @@
 <template lang="pug">
 .w-app(:class="{ 'theme--dark': dark, 'd-block': block }")
   slot
+  transition-group(tag="div" class="w-notification-manager" name="slide-left" appear)
+    w-alert(
+      v-for="notif in notifications"
+      :key="notif._uid"
+      v-model="notif._value"
+      v-if="notif._value"
+      @close="notifManager.dismiss(notif._uid)"
+      :[notif.type]="!!notif.type"
+      plain
+      dismiss)
+      | {{ notif.message }}
 </template>
 
 <script>
 import config from '../utils/config'
+import NotificationsManager from '../utils/notifications-manager'
 import DynamicCSS from '../utils/dynamic-css'
 
 const breakpointsNames = Object.keys(config.breakpoints)
@@ -18,8 +30,15 @@ export default {
   },
 
   data: () => ({
-    currentBreakpoint: null
+    currentBreakpoint: null,
+    notifManager: null
   }),
+
+  computed: {
+    notifications () {
+      return this.notifManager.notifications
+    }
+  },
 
   methods: {
     getBreakpoint () {
@@ -49,6 +68,11 @@ export default {
     dynamicStyles () {
       return DynamicCSS()
     }
+  },
+
+  beforeMount () {
+    this.notifManager = new NotificationsManager()
+    this.notifManager.init()
   },
 
   mounted () {
@@ -81,5 +105,26 @@ export default {
   min-height: 100vh;
 
   &.d-block {display: block;}
+}
+
+.w-notification-manager {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+  pointer-events: none;
+  width: 280px;
+  overflow: auto;
+
+  .w-alert {
+    position: relative;
+    z-index: 400;
+    left: 0;
+    right: 0;
+    margin: 8px;
+    flex-grow: 1;
+    pointer-events: all;
+  }
 }
 </style>
