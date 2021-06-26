@@ -9,8 +9,12 @@
       v-if="notif._value"
       @close="notifManager.dismiss(notif._uid)"
       :[notif.type]="!!notif.type"
-      plain
-      dismiss)
+      :plain="notif.plain"
+      :dismiss="notif.dismiss"
+      :icon-outside="notif.iconOutside"
+      :icon="notif.icon"
+      :color="notif.color"
+      :bg-color="notif.bgColor")
       | {{ notif.message }}
 </template>
 
@@ -91,6 +95,7 @@ export default {
 
   beforeDestroy () {
     window.removeEventListener('resize', this.getBreakpoint)
+    this.notifManager.notifications = []
   }
 }
 </script>
