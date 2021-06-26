@@ -1,8 +1,9 @@
 import { reactive } from 'vue'
 import config, { mergeConfig } from './utils/config'
+import NotificationsManager from './utils/notifications-manager'
 import colors from './utils/colors'
-// import * as directives from './directives'
 import { consoleWarn } from './utils/console'
+// import * as directives from './directives'
 
 const shadeColor = (col, amt) => {
   return '#' + col.slice(1).match(/../g)
@@ -12,7 +13,8 @@ const shadeColor = (col, amt) => {
 
 export default class WaveUI {
   static instance = null
-  static vueInstance = null // Needed until constructor.
+  static vueInstance = null // Needed until constructor is called.
+  #notificationsManager
 
   // Public breakpoint object. Accessible from this.$waveui.breakpoint.
   breakpoint = {
@@ -65,6 +67,7 @@ export default class WaveUI {
 
     else {
       if (!WaveUI.registered) app.use(WaveUI)
+      this.#notificationsManager = new NotificationsManager()
 
       // Merge user options into the default config.
       mergeConfig(options)
@@ -105,6 +108,10 @@ export default class WaveUI {
       // Make waveui reactive and expose the single instance in Vue.
       app.config.globalProperties.$waveui = reactive(this)
     }
+  }
+
+  notify (...args) {
+    this.#notificationsManager.notify(...args)
   }
 }
 

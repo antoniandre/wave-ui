@@ -25,7 +25,7 @@ const propsDescs = {
   disabled: 'Disables the switch making it unreactive to user interactions.',
   readonly: 'The switch will still look like an interactive switch except that it is read-only: its current state cannot be changed by user interaction.',
   required: 'Applies the native HTML <code>required</code> attribute to the switch.',
-  validators: '<span class="deep-orange">Only for validation, when the switch is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the switch. Each function will be executed on switch validation and should return true when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the switch.'
+  validators: '<span class="deep-orange">Only for validation, when the switch is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the switch. Each function will be executed on switch   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the switch.'
 }
 
 const slots = {

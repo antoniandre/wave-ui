@@ -96,6 +96,7 @@ export default {
 .top-alert {
   .title3 {position: relative;padding-left: 50px;}
   > .w-icon {display: none;}
+  .i-chevron-right {margin-top: 2px;}
 
   .wave {
     position: absolute;
@@ -113,6 +114,5 @@ export default {
   display: flex;
 
   &-label {align-items: center;display: block;}
-  &-bullet {top: auto;}
 }
 </style>
