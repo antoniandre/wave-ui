@@ -88,6 +88,15 @@ div
             }
           }
 
+      alert.mt12(warning)
+        .title4.
+          #[strong Caution:] You could easily cause an #[strong.black infinite loop] by triggering a
+          notification from the template using this code for instance:
+        p #[code {{ '\{\{ $waveui.notify(\'test\') \}\}' }}]
+        p.mt4.
+          Indeed, if you write the above expression directly in a component's template without condition
+          around it, the notification will be triggered, which will trigger the Vue re-rendering which
+          will re-read and execute this expression and so on.
       title-link(h2) Styling
       p.
         By default, the notification manager is 280px-wide and all the notifications will inherit this width.#[br]
