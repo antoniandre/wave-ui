@@ -1,6 +1,7 @@
 <template lang="pug">
 main
-  ui-component-title w-notification
+  ui-component-title(:code="false" slug="notification-manager-and-w-notification")
+    | Built-in notification manager &amp; #[span.code w-notification]
   examples
   api
 </template>
