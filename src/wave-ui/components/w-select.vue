@@ -29,7 +29,7 @@ component(
       //- Input wrapper.
       .w-select__selection-wrap(
         ref="selection-wrap"
-        @click="!isDisabled && !isReadonly && (showMenu = !showMenu)"
+        @click="!isDisabled && !isReadonly && (showMenu ? closeMenu : openMenu)()"
         role="button"
         aria-haspopup="listbox"
         :aria-expanded="showMenu ? 'true' : 'false'"
@@ -279,9 +279,6 @@ export default {
       // or the the item value otherwise.
       items = this.inputValue.map(item => this.returnObject ? this.items[item.index] : item.value)
 
-      // If single selection, close the menu after selecting a value (keyboard selection).
-      if (!this.multiple) this.closeMenu()
-
       // Emit the selection to the v-model.
       // Note: this.inputValue is always an array of objects that have a `value`.
       const selection = this.multiple ? items : items[0]
@@ -289,10 +286,11 @@ export default {
       this.$emit('input', selection)
     },
 
+    // Called on item selection: on click & `enter` keydown.
     onListItemSelect (e) {
       this.$emit('item-select', e)
-      // Close menu when clicking a selected item.
-      if (this.noUnselect && !this.multiple) this.closeMenu()
+      // Close menu after selection on single select, but keep open if multiple.
+      if (!this.multiple) this.closeMenu()
     },
 
     onReset () {

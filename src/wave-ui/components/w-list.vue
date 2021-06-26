@@ -491,7 +491,7 @@ export default {
     position: absolute;
     right: 100%;
     margin-right: 3 * $base-increment;
-    top: 0.06em;
+    top: 0.1em;
 
     @-moz-document url-prefix() {
       & {top: -0.06em;}

@@ -2,7 +2,7 @@
 .w-alert(v-if="show" v-on="$attrs" :class="classes")
   //- Add a wrapper around the content when needed.
   template(v-if="type || icon || dismiss")
-    w-icon.mr2(v-if="type || icon") {{ type ? typeIcon : icon }}
+    w-icon.w-alert__icon.mr2(v-if="type || icon") {{ type ? typeIcon : icon }}
     .w-alert__content
       slot
     w-button.w-alert__dismiss(
@@ -215,17 +215,18 @@ export default {
     margin-right: round(-0.5 * $base-increment);
   }
 
-  &--has-icon > .w-icon {
+  & &__icon {
     opacity: 0.9;
     align-self: flex-start;
     margin-right: 2 * $base-increment;
+    font-size: 1.3em;
   }
   &--has-icon &__content {flex-grow: 1;align-self: flex-start;}
   @-moz-document url-prefix() {
     &--has-icon &__content {margin-top: 0.18em;}
   }
 
-  &--icon-outside > .w-icon {
+  &--icon-outside &__icon {
     position: absolute;
     opacity: 1;
     // top: 2 * $base-increment - 1px; // Needed for IE 11, but dropping support.
@@ -235,7 +236,7 @@ export default {
     border: 1px solid rgba(255, 255, 255, 0.7);
     background-color: #fff;
   }
-  &--icon-outside > .w-icon:before {transform: scale(1.05);}
+  &--icon-outside &__icon:before {transform: scale(1.05);}
 
   &--icon-outside &__content {padding-left: 3 * $base-increment;}
 
