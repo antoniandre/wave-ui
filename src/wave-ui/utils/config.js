@@ -1,4 +1,6 @@
-const config = {
+import { reactive } from 'vue'
+
+const config = reactive({
   breakpoints: {
     xs: 600,
     sm: 900,
@@ -36,7 +38,7 @@ const config = {
     transition: 'default' // Sliding from the side by default.
   },
   presets: {} // User presets for each component.
-}
+})
 
 export { config as default }
 
