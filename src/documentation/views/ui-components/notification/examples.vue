@@ -97,7 +97,53 @@ div
           Indeed, if you write the above expression directly in a component's template without condition
           around it, the notification will be triggered, which will trigger the Vue re-rendering which
           will re-read and execute this expression and so on.
-      title-link(h2) Styling
+
+      title-link(h2) Notification manager tweaking
+      p.
+        The global configuration allows you to override the default side and transition of the
+        notification manager.
+      ssh-pre(language="js").
+        new WaveUI({
+          notificationManager: {
+            align: 'right', // Or 'left'.
+            transition: 'default' // Sliding from the side by default.
+          }
+        })
+
+      title-link(h3) Align to the left or right
+      p.
+        Change the value of the #[strong.code align] option, in the above global config, to #[code left]
+        or #[code right].
+      w-button(@click="switchNotificationManagerSide") Change side &amp; notify
+      alert(tip).
+        After switching side, you can also test the different notifications from the above examples.
+
+      title-link(h3) Different transitions
+      p.
+        The default transition is #[code slide-left] when the notification manager is on the right and
+        #[code slide-right] when it's on the left.
+
+      .title4 Pick a transition
+      .w-flex.align-center
+        .xs6.md4.lg3
+          w-radios.ma1(
+            v-model="notifManagerTransition"
+            :items="transitionsForManager"
+            @input="switchNotifMgrTransition")
+            template(#item="{ item }")
+              code.ml2 {{ item.value || (item.value === false ? 'false' : "''") }}
+              span.ml2(v-if="!item.value") ({{ item.label }})
+        w-button.ma1(@click="$waveui.notify('Test')") Notify
+      p.mt4.
+        Change the value of the #[strong.code transition] option, in the above global config,
+        to #[code {{ notifManagerTransition ? `'${notifManagerTransition}'` : notifManagerTransition }}].
+      alert(tip)
+        | You could even
+        a.ml1(href="https://vuejs.org/v2/guide/transitions.html")
+          | create your own transition
+          w-icon.ml1(md) mdi mdi-open-in-new
+        | .
+      title-link(h3) Styling
       p.
         By default, the notification manager is 280px-wide and all the notifications will inherit this width.#[br]
         You can override this via CSS. For instance:
@@ -447,8 +493,11 @@ div
 </template>
 
 <script>
+import config from '@/wave-ui/utils/config'
+
 export default {
   data: () => ({
+    config,
     notification: {
       show: false,
       position: ['bottom', 'right']
@@ -459,6 +508,7 @@ export default {
       position: ['bottom', 'right']
     },
     transition: '',
+    notifManagerTransition: 'default',
     transitions: [
       { label: 'Default', value: '' },
       { label: 'Bounce', value: 'bounce' },
@@ -467,14 +517,37 @@ export default {
       { label: 'Fade', value: 'fade' },
       { label: 'Slide fade left', value: 'slide-fade-left' },
       { label: 'Slide fade right', value: 'slide-fade-right' },
-      { label: 'Slide fade top', value: 'slide-fade-up' },
-      { label: 'Slide fade bottom', value: 'slide-fade-down' },
+      { label: 'Slide fade up', value: 'slide-fade-up' },
+      { label: 'Slide fade down', value: 'slide-fade-down' },
+      { label: 'Scale fade', value: 'scale-fade' },
+      { label: 'None', value: false }
+    ],
+    transitionsForManager: [
+      { label: 'Default', value: 'default' },
+      { label: 'Bounce', value: 'bounce' },
+      { label: 'Scale', value: 'scale' },
+      { label: 'Twist', value: 'twist' },
+      { label: 'Fade', value: 'fade' },
+      { label: 'Slide fade left', value: 'slide-fade-left' },
+      { label: 'Slide fade right', value: 'slide-fade-right' },
+      { label: 'Slide fade up', value: 'slide-fade-up' },
+      { label: 'Slide fade down', value: 'slide-fade-down' },
       { label: 'Scale fade', value: 'scale-fade' },
       { label: 'None', value: false }
     ]
   }),
 
   methods: {
+    switchNotificationManagerSide () {
+      let { align } = config.notificationManager
+      config.notificationManager.align = align === 'left' ? 'right' : 'left'
+      this.$nextTick(() => this.$waveui.notify('Information.'))
+    },
+    switchNotifMgrTransition () {
+      let { transition } = config.notificationManager
+      config.notificationManager.transition = this.notifManagerTransition
+      this.$nextTick(() => this.$waveui.notify('Information.'))
+    },
     notify () {
       this.$waveui.notify({
         message: 'Warning',
