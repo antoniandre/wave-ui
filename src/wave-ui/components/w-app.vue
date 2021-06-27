@@ -1,20 +1,12 @@
 <template lang="pug">
 .w-app(:class="{ 'theme--dark': dark, 'd-block': block }")
   slot
-  transition-group(tag="div" class="w-notification-manager" name="slide-left" appear)
-    w-alert.white--bg(
-      v-for="notif in notifications"
-      :key="notif._uid"
-      v-model="notif._value"
-      v-if="notif._value"
-      @close="notifManager.dismiss(notif._uid)"
-      v-bind="notif")
-      | {{ notif.message }}
+  notification-manager
 </template>
 
 <script>
 import config from '../utils/config'
-import NotificationsManager from '../utils/notifications-manager'
+import NotificationManager from './w-notification-manager.vue'
 import DynamicCSS from '../utils/dynamic-css'
 
 const breakpointsNames = Object.keys(config.breakpoints)
@@ -27,16 +19,12 @@ export default {
     block: { type: Boolean }
   },
 
+  components: { NotificationManager },
+
   data: () => ({
     currentBreakpoint: null,
     notifManager: null
   }),
-
-  computed: {
-    notifications () {
-      return this.notifManager.notifications
-    }
-  },
 
   methods: {
     getBreakpoint () {
@@ -68,11 +56,6 @@ export default {
     }
   },
 
-  beforeMount () {
-    this.notifManager = new NotificationsManager()
-    this.notifManager.init()
-  },
-
   mounted () {
     // Inject global dynamic CSS classes in document head.
     if (!document.getElementById('wave-ui-styles')) {
@@ -89,7 +72,6 @@ export default {
 
   beforeDestroy () {
     window.removeEventListener('resize', this.getBreakpoint)
-    this.notifManager.notifications = []
   }
 }
 </script>
@@ -104,26 +86,5 @@ export default {
   min-height: 100vh;
 
   &.d-block {display: block;}
-}
-
-.w-notification-manager {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1000;
-  pointer-events: none;
-  width: 280px;
-  overflow: auto;
-
-  .w-alert {
-    position: relative;
-    z-index: 400;
-    left: 0;
-    right: 0;
-    margin: 8px;
-    flex-grow: 1;
-    pointer-events: all;
-  }
 }
 </style>
