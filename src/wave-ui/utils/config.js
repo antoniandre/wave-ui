@@ -31,6 +31,10 @@ const config = {
   },
   icons: [],
   iconsLigature: false,
+  notificationManager: {
+    align: 'right',
+    transition: 'default' // Sliding from the side by default.
+  },
   presets: {} // User presets for each component.
 }
 

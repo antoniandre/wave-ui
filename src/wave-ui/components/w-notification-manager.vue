@@ -1,5 +1,10 @@
 <template lang="pug">
-transition-group(tag="div" class="w-notification-manager" name="slide-left" appear)
+transition-group(
+  tag="div"
+  class="w-notification-manager"
+  :class="{ 'w-notification-manager--left': notifManager.align === 'left' }"
+  :name="transition"
+  appear)
   template(v-for="notif in notifications")
     w-alert.white--bg(
       v-if="notif._value"
@@ -11,6 +16,7 @@ transition-group(tag="div" class="w-notification-manager" name="slide-left" appe
 </template>
 
 <script>
+import config from '../utils/config'
 import NotificationManager from '../utils/notification-manager'
 
 export default {
@@ -23,12 +29,17 @@ export default {
   computed: {
     notifications () {
       return this.notifManager.notifications
+    },
+    // Possible transitions: slide-fade-down, slide-fade-left, slide-fade-right,
+    // slide-left, slide-right, bounce, twist, fade, scale, scale-fade.
+    transition () {
+      return this.notifManager.transition
+        .replace('default', `slide-${this.notifManager.align === 'left' ? 'right' : 'left'}`)
     }
   },
 
   beforeMount () {
     this.notifManager = new NotificationManager()
-    this.notifManager.init()
   },
 
   beforeUnmount () {
@@ -47,6 +58,8 @@ export default {
   pointer-events: none;
   width: 280px;
   overflow: auto;
+
+  &--left {right: auto;left: 0;}
 
   .w-alert {
     position: relative;
