@@ -4,6 +4,7 @@ component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled: isDisabled, readonly: isReadonly, isFocused }"
   :valid.sync="valid"
+  :wrap="hasLabel && labelPosition !== 'inside'"
   @reset="$emit('update:modelValue', inputValue = '');$emit('input', '')"
   :class="classes")
   //- Left label.
