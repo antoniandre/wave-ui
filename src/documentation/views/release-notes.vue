@@ -24,9 +24,15 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.36.0
+      ul
+        li #[strong.code Notification manager]: Add new #[code align] (left or right) &amp; #[code transition] options.
+        li Made the global config reactive.
+
+    li.minor
       strong.version v1.35.0
       ul
-        li #[strong.code $waveui.notify()]: New method to trigger a notification.
+        li #[strong.code Notification manager]: New #[strong.code $waveui.notify()] method to trigger a notification.
         li.
           #[strong.code w-select]: Fix a selection bug when clicking the select to open and navigating with keyboard arrows.
         li.
