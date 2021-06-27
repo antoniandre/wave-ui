@@ -5,6 +5,7 @@ component(
   v-bind="formRegister && { validators, inputValue, disabled: isDisabled, readonly: isReadonly, isFocused }"
   :valid.sync="valid"
   @reset="$emit('update:modelValue', inputValue = '');$emit('input', '')"
+  :wrap="hasLabel && labelPosition !== 'inside'"
   :class="classes")
   input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
   template(v-else)

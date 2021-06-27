@@ -5,6 +5,7 @@ component(
   v-bind="formRegister && { validators, inputValue: rangeValueScaled, disabled: isDisabled, readonly: isReadonly }"
   :valid.sync="valid"
   @reset="rangeValuePercent = 0;updateRangeValueScaled()"
+  wrap
   :class="wrapperClasses")
   label.w-slider__label.w-slider__label--left.w-form-el-shakable(
     v-if="$slots['label-left']"

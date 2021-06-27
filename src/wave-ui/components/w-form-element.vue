@@ -1,6 +1,6 @@
 <template lang="pug">
 div(:class="classes")
-  .w-flex.grow.wrap(:class="column ? 'column' : 'align-center'")
+  .w-flex.grow(:class="[column ? 'column' : 'align-center', wrap ? 'wrap' : '']")
     slot
 
   //- Error message.
@@ -36,7 +36,8 @@ export default {
     inputValue: { required: true }, // The form element's input value.
     validators: { type: Array },
     isFocused: { default: false }, // Watched.
-    column: { default: false } // Flex direction of the embedded component: column or row by default.
+    column: { default: false }, // Flex direction of the embedded component: column or row by default.
+    wrap: { default: false } // Flex-wrap if needed.
   },
 
   emits: ['reset', 'update:valid'],

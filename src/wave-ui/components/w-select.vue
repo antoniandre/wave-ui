@@ -5,6 +5,7 @@ component(
   v-bind="formRegister && { validators, inputValue: selectionString, disabled: isDisabled, readonly: isReadonly }"
   :valid.sync="valid"
   @reset="onReset"
+  :wrap="hasLabel && labelPosition !== 'inside'"
   :class="classes")
   template(v-if="labelPosition === 'left'")
     label.w-select__label.w-select__label--left.w-form-el-shakable(

@@ -6,6 +6,7 @@ component(
   :valid.sync="valid"
   @reset="$emit('update:modelValue', inputValue = null);$emit('input', null)"
   :column="!inline"
+  :wrap="inline"
   :class="classes")
   w-radio(
     v-for="(item, i) in radioItems"

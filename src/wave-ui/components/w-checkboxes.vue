@@ -6,6 +6,7 @@ component(
   :valid.sync="valid"
   @reset="reset"
   :column="!inline"
+  :wrap="inline"
   :class="classes")
   w-checkbox(
     v-for="(item, i) in checkboxItems"
