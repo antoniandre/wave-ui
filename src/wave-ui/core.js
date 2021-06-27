@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 import config, { mergeConfig } from './utils/config'
-import NotificationsManager from './utils/notifications-manager'
+import NotificationManager from './utils/notification-manager'
 import colors from './utils/colors'
 import { consoleWarn } from './utils/console'
 // import * as directives from './directives'
@@ -15,12 +15,12 @@ const shadeColor = (col, amt) => {
 // @todo: find a way to use private fields with Vue 3 proxies.
 // https://github.com/tc39/proposal-class-fields/issues/106
 // https://github.com/tc39/proposal-class-fields/issues/227
-let notificationsManager = null
+let notificationManager = null
 
 export default class WaveUI {
   static instance = null
   static vueInstance = null // Needed until constructor is called.
-  // #notificationsManager
+  // #notificationManager
 
   // Public breakpoint object. Accessible from this.$waveui.breakpoint.
   breakpoint = {
@@ -73,7 +73,7 @@ export default class WaveUI {
 
     else {
       if (!WaveUI.registered) app.use(WaveUI)
-      notificationsManager = reactive(new NotificationsManager())
+      notificationManager = reactive(new NotificationManager())
 
       // Merge user options into the default config.
       mergeConfig(options)
@@ -117,7 +117,7 @@ export default class WaveUI {
   }
 
   notify (...args) {
-    notificationsManager.notify(...args)
+    notificationManager.notify(...args)
   }
 }
 
