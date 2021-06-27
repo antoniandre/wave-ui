@@ -1,4 +1,7 @@
-const config = {
+import Vue from 'vue'
+
+// observable to react to a change of config.
+const config = Vue.observable({
   breakpoints: {
     xs: 600,
     sm: 900,
@@ -36,7 +39,7 @@ const config = {
     transition: 'default' // Sliding from the side by default.
   },
   presets: {} // User presets for each component.
-}
+})
 
 export { config as default }
 
