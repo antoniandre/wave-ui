@@ -183,7 +183,6 @@ export default {
       const linesCount = (this.$refs.textarea.scrollHeight - this.paddingY) / this.lineHeight
       const height = Math.max(linesCount, this.rows) * this.lineHeight + this.paddingY
       this.$refs.textarea.style.height = height + 'px'
-      console.log('here', linesCount, height)
     },
     getLineHeight () {
       const computedStyles = window.getComputedStyle(this.$refs.textarea, null)
