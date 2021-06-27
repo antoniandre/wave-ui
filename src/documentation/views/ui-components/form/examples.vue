@@ -494,7 +494,7 @@ div
     You can add the #[code disabled] or #[code readonly] prop on the #[strong.code w-form] tag to
     disable all the fields or set them all to readonly.
   alert(warning)
-    strong Caution
+    strong Attention
     div.
       Wave UI will not reset the validity of the fields when you toggle the #[code disabled]
       or #[code readonly] prop on the #[strong.code w-form]: the field is becoming uneditable but
