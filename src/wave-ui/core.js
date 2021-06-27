@@ -1,5 +1,5 @@
 import config, { mergeConfig } from './utils/config'
-import NotificationsManager from './utils/notifications-manager'
+import NotificationManager from './utils/notification-manager'
 import colors from './utils/colors'
 import { consoleWarn } from './utils/console'
 // import * as directives from './directives'
@@ -13,7 +13,7 @@ const shadeColor = (col, amt) => {
 export default class WaveUI {
   static instance = null
   static vueInstance = null // Needed until constructor is called.
-  #notificationsManager
+  #notificationManager
 
   // Public breakpoint object. Accessible from this.$waveui.breakpoint.
   breakpoint = {
@@ -66,7 +66,7 @@ export default class WaveUI {
     if (WaveUI.instance) return WaveUI.instance
 
     else {
-      this.#notificationsManager = new NotificationsManager()
+      this.#notificationManager = new NotificationManager()
 
       // Merge user options into the default config.
       mergeConfig(options)
@@ -112,7 +112,7 @@ export default class WaveUI {
   }
 
   notify (...args) {
-    this.#notificationsManager.notify(...args)
+    this.#notificationManager.notify(...args)
   }
 }
 
