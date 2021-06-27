@@ -2,7 +2,7 @@
 transition-group(
   tag="div"
   class="w-notification-manager"
-  :class="{ 'w-notification-manager--left': notifManager.align === 'left' }"
+  :class="{ 'w-notification-manager--left': conf.align === 'left' }"
   :name="transition"
   appear)
   template(v-for="notif in notifications")
@@ -27,14 +27,18 @@ export default {
   }),
 
   computed: {
+    conf () {
+      return config.notificationManager
+    },
     notifications () {
       return this.notifManager.notifications
     },
     // Possible transitions: slide-fade-down, slide-fade-left, slide-fade-right,
     // slide-left, slide-right, bounce, twist, fade, scale, scale-fade.
     transition () {
-      return this.notifManager.transition
-        .replace('default', `slide-${this.notifManager.align === 'left' ? 'right' : 'left'}`)
+      return this.conf.transition
+        ? this.conf.transition.replace('default', `slide-${this.conf.align === 'left' ? 'right' : 'left'}`)
+        : ''
     }
   },
 

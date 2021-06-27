@@ -1,12 +1,8 @@
 import Vue from 'vue'
 
-import config from '../utils/config'
-
 export default class NotificationManager {
   static instance
   notifications
-  align
-  transition
    // Private fields.
   #uid // A unique ID for each notification.
   #notificationDefaults
@@ -16,8 +12,6 @@ export default class NotificationManager {
     if (NotificationManager.instance) return NotificationManager.instance
 
     NotificationManager.instance = this
-    this.align = config.notificationManager.align === 'left' ? 'left' : 'right'
-    this.transition = config.notificationManager.transition || 'slide'
     this.notifications = []
     this.#uid = 0
     this.#notificationDefaults = {
