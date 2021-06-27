@@ -2,12 +2,15 @@
 // https://github.com/tc39/proposal-class-fields/issues/106
 // https://github.com/tc39/proposal-class-fields/issues/227
 
+import config from '../utils/config'
+
 export default class NotificationManager {
   static instance
   notifications
+  align
+  transition
    // Private fields.
-  notificationManagerEl = null
-  _uid = 0 // A unique ID for each notification.
+  _uid // A unique ID for each notification.
   _notificationDefaults
 
   constructor () {
@@ -15,7 +18,10 @@ export default class NotificationManager {
     if (NotificationManager.instance) return NotificationManager.instance
 
     NotificationManager.instance = this
+    this.align = config.notificationManager.align === 'left' ? 'left' : 'right'
+    this.transition = config.notificationManager.transition || 'slide'
     this.notifications = []
+    this._uid = 0
     this._notificationDefaults = {
       _uid: 0,
       _value: true,
@@ -23,10 +29,6 @@ export default class NotificationManager {
       timeout: 4000,
       dismiss: true
     }
-  }
-
-  init () {
-    this.notificationManagerEl = document.querySelector('.w-notification-manager')
   }
 
   notify (...args) {
