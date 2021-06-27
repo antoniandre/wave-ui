@@ -3,7 +3,7 @@ import Vue from 'vue'
 export default class NotificationManager {
   static instance
   notifications
-   // Private fields.
+  // Private fields.
   #uid // A unique ID for each notification.
   #notificationDefaults
 
