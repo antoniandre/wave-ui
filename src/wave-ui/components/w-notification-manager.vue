@@ -31,7 +31,7 @@ export default {
       return config.notificationManager
     },
     notifications () {
-      return this.notifManager.notifications
+      return this.notifManager?.notifications || []
     },
     // Possible transitions: slide-fade-down, slide-fade-left, slide-fade-right,
     // slide-left, slide-right, bounce, twist, fade, scale, scale-fade.
@@ -42,12 +42,13 @@ export default {
     }
   },
 
-  beforeMount () {
+  created () {
     this.notifManager = new NotificationManager()
   },
 
   beforeUnmount () {
     this.notifManager.notifications = []
+    delete this.notifManager
   }
 }
 </script>
