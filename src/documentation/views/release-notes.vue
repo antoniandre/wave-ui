@@ -24,6 +24,12 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.37.0
+      ul
+        li Added new #[span.code .text-nowrap] css class helper.
+        li Added a new #[span.code v-scroll] directive.
+
+    li.patch
       strong.version v1.36.1
       p Fix the notification manager on Nuxt. #[issue-link 60]
 
