@@ -40,8 +40,16 @@ export default class WaveUI {
     //   if (directives[id]) Vue.directive(id, directives[id])
     // }
     Vue.directive('focus', {
-      // When the bound element is inserted into the DOM...
+      // When the bound element is inserted into the DOM.
       inserted: el => el.focus()
+    })
+    Vue.directive('scroll', {
+      inserted: (el, binding) => {
+        const f = evt => {
+          if (binding.value(evt, el)) window.removeEventListener('scroll', f)
+        }
+        window.addEventListener('scroll', f)
+      }
     })
 
     // Register a-la-carte components from the given list.
