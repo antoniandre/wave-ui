@@ -29,7 +29,7 @@ ul.w-list(:class="classes")
         slot(v-else :item="cleanLi(li)" :index="i + 1" :selected="li._selected") {{ li._label }}
       //- Router link list items. (separated case cz it needs a @click.native, can't be in v-on)
       router-link.w-list__item-label(
-        v-else-if="nav && !li.disabled && li.route && hasRouter"
+        v-else-if="nav && !li.disabled && li[itemRouteKey] && hasRouter"
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)"
         @click.native="$emit('item-select', cleanLi(li))")
@@ -49,7 +49,7 @@ ul.w-list(:class="classes")
       //- Nav & simple list items.
       component.w-list__item-label(
         v-else
-        :is="nav && !li.disabled && li.route ? 'a' : 'div'"
+        :is="nav && !li.disabled && li[itemRouteKey] ? 'a' : 'div'"
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)")
         slot(
@@ -76,7 +76,7 @@ ul.w-list(:class="classes")
         @click.native="onCheckboxWrapperClick")
       //- Router link list items. (separated case cz it needs a @click.native, can't be in v-on)
       router-link.w-list__item-label(
-        v-else-if="nav && !li.disabled && li.route && hasRouter"
+        v-else-if="nav && !li.disabled && li[itemRouteKey] && hasRouter"
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)"
         @click.native="$emit('item-select', cleanLi(li))"
@@ -84,7 +84,7 @@ ul.w-list(:class="classes")
       //- Nav & simple list items.
       component.w-list__item-label(
         v-else
-        :is="nav && !li.disabled && li.route ? 'a' : 'div'"
+        :is="nav && !li.disabled && li[itemRouteKey] ? 'a' : 'div'"
         v-bind="liLabelProps(li, i, li._selected)"
         v-on="liLabelEvents(li)"
         v-html="li._label")
@@ -135,6 +135,7 @@ export default {
     itemLabelKey: { type: String, default: 'label' }, // Name of the label field.
     itemValueKey: { type: String, default: 'value' }, // Name of the value field.
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
+    itemRouteKey: { type: String, default: 'route' }, // Name of the route field for `nav` lists.
     itemClass: { type: String },
     depth: { type: Number, default: 0 }, // For recursive call.
     returnObject: { type: Boolean },
@@ -222,7 +223,7 @@ export default {
 
     liLabelClasses (item) {
       return {
-        'w-list__item-label--disabled': item.disabled || (this.nav && !item.route && !item.children),
+        'w-list__item-label--disabled': item.disabled || (this.nav && !item[this.itemRouteKey] && !item.children),
         'w-list__item-label--active': (this.isSelectable && item._selected) || null,
         'w-list__item-label--focused': item._focused,
         'w-list__item-label--hoverable': this.hover,
@@ -258,9 +259,9 @@ export default {
       // Navigation list.
       // Note: on enter key press, a click event is fired => this is default HTML behavior.
       // ------------------------------------------------------
-      else if (this.nav && !li.disabled && li.route) {
-        if (this.$router) props.to = li.route
-        else props.href = li.route
+      else if (this.nav && !li.disabled && li[this.itemRouteKey]) {
+        if (this.$router) props.to = li[this.itemRouteKey]
+        else props.href = li[this.itemRouteKey]
       }
       // ------------------------------------------------------
 
@@ -311,7 +312,7 @@ export default {
       const events = {}
 
       if (this.nav) {
-        if (!li.disabled && li.route) {
+        if (!li.disabled && li[this.itemRouteKey]) {
           events.keydown = keydown
           events.mousedown = mousedown
           if (!this.$router) events.click = click
