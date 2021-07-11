@@ -41,6 +41,7 @@ component(
         :aria-readonly="isReadonly ? 'true' : 'false'"
         :disabled="isDisabled || null"
         :required="required || null"
+        :tabindex="tabindex || null"
         v-bind="$attrs")
       template(v-if="labelPosition === 'inside' && showLabelInside")
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
@@ -103,7 +104,7 @@ export default {
     shadow: { type: Boolean },
     tile: { type: Boolean },
     loading: { type: Boolean }
-    // Props from mixin: name, disabled, readonly, required, validators.
+    // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
