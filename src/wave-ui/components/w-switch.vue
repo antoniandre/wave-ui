@@ -16,6 +16,7 @@ component(
     :readonly="isReadonly || null"
     :aria-readonly="isReadonly ? 'true' : 'false'"
     :required="required || null"
+    :tabindex="tabindex || null"
     @change="onInput() /* Edge doesn't fire input on checkbox/radio/select change */"
     @focus="$emit('focus', $event)"
     :aria-checked="isOn || 'false'"
@@ -47,7 +48,7 @@ export default {
     color: { type: String, default: 'primary' },
     thin: { type: Boolean },
     noRipple: { type: Boolean }
-    // Props from mixin: name, disabled, readonly, required, validators.
+    // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
