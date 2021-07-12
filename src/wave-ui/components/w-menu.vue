@@ -7,8 +7,8 @@
       ref="menu"
       v-show="showMenu"
       @click="hideOnMenuClick && closeMenu(true)"
-      @mouseenter="hoveringMenu = true"
-      @mouseleave="(hoveringMenu = false), closeMenu()"
+      @mouseenter="showOnHover && (hoveringMenu = true)"
+      @mouseleave="showOnHover && (hoveringMenu = false), closeMenu()"
       :class="classes"
       :style="styles")
       slot
@@ -17,8 +17,8 @@
       ref="menu"
       v-show="showMenu"
       @click.native="hideOnMenuClick && closeMenu(true)"
-      @mouseenter.native="hoveringMenu = true"
-      @mouseleave.native="(hoveringMenu = false), closeMenu()"
+      @mouseenter.native="showOnHover && (hoveringMenu = true)"
+      @mouseleave.native="showOnHover && (hoveringMenu = false), closeMenu()"
       :tile="tile"
       :title-class="titleClass"
       :content-class="contentClass"
