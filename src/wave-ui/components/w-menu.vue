@@ -1,12 +1,14 @@
 <template lang="pug">
 .w-menu-wrap(ref="wrapper")
-  slot(name="activator" :on="eventHandlers")
+  slot(name="activator" :on="activatorEventHandlers")
   transition(:name="transitionName")
     .w-menu(
       v-if="custom"
       ref="menu"
       v-show="showMenu"
-      @click="hideOnMenuClick && (showMenu = false)"
+      @click="hideOnMenuClick && closeMenu(true)"
+      @mouseenter="hoveringMenu = true"
+      @mouseleave="(hoveringMenu = false), closeMenu()"
       :class="classes"
       :style="styles")
       slot
@@ -14,7 +16,9 @@
       v-else
       ref="menu"
       v-show="showMenu"
-      @click.native="hideOnMenuClick && (showMenu = false)"
+      @click.native="hideOnMenuClick && closeMenu(true)"
+      @mouseenter.native="hoveringMenu = true"
+      @mouseleave.native="(hoveringMenu = false), closeMenu()"
       :tile="tile"
       :title-class="titleClass"
       :content-class="contentClass"
@@ -69,7 +73,7 @@ export default {
     titleClass: { type: String },
     contentClass: { type: String },
     // Position.
-    detachTo: {},
+    detachTo: { type: [String, Boolean, Object] },
     fixed: { type: Boolean },
     top: { type: Boolean },
     bottom: { type: Boolean },
@@ -90,6 +94,8 @@ export default {
 
   data: () => ({
     showMenu: false,
+    hoveringActivator: false,
+    hoveringMenu: false,
     // The menu computed top & left coordinates.
     menuCoordinates: {
       top: 0,
@@ -179,62 +185,99 @@ export default {
       }
     },
 
-    eventHandlers () {
+    activatorEventHandlers () {
       let handlers = {}
+
       if (this.showOnHover) {
         handlers = {
-          focus: this.toggle,
-          blur: this.toggle,
-          mouseenter: this.toggle,
-          mouseleave: this.toggle
+          focus: this.toggleMenu,
+          blur: this.toggleMenu,
+          mouseenter: e => {
+            this.hoveringActivator = true
+            this.openMenu(e)
+          },
+          mouseleave: e => {
+            this.hoveringActivator = false
+            // Wait 10ms, the time to get the hoveringMenu updated on mouseenter on the menu.
+            setTimeout(() => {
+              if (!this.hoveringMenu) this.closeMenu()
+            }, 10)
+          }
         }
 
-        if ('ontouchstart' in window) handlers.click = this.toggle
+        if ('ontouchstart' in window) handlers.click = this.toggleMenu
       }
-      else handlers = { click: this.toggle }
+      else handlers = { click: this.toggleMenu }
       return handlers
     }
   },
 
   methods: {
-    toggle (e) {
+    toggleMenu (e) {
       let shouldShowMenu = this.showMenu
       if ('ontouchstart' in window && this.showOnHover && e.type === 'click') {
         shouldShowMenu = !shouldShowMenu
       }
       else if (e.type === 'click' && !this.showOnHover) shouldShowMenu = !shouldShowMenu
-      else if (e.type === 'mouseenter' && this.showOnHover) shouldShowMenu = true
-      else if (e.type === 'mouseleave' && this.showOnHover) shouldShowMenu = false
+      else if (e.type === 'mouseenter' && this.showOnHover) {
+        this.hoveringActivator = true
+        shouldShowMenu = true
+      }
+      else if (e.type === 'mouseleave' && this.showOnHover) {
+        this.hoveringActivator = false
+        shouldShowMenu = false
+      }
 
       this.timeoutId = clearTimeout(this.timeoutId)
-      // Open the menu.
-      if (shouldShowMenu) {
-        if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
 
-        if (!this.noPosition) this.computeMenuPosition(e)
+      if (shouldShowMenu) this.openMenu(e)
+      else this.closeMenu()
+    },
 
-        // In `getCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
-        // if we don't postpone the Menu apparition it will start transition from a visible menu and
-        // thus will not transition.
-        this.timeoutId = setTimeout(() => {
-          this.$emit('update:modelValue', (this.showMenu = true))
-          this.$emit('input', true)
-          this.$emit('open')
-        }, 10)
+    openMenu (e) {
+      if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
 
-        if (!this.persistent) document.addEventListener('mousedown', this.onOutsideMousedown)
-        if (!this.noPosition) window.addEventListener('resize', this.onResize)
+      if (!this.noPosition) this.computeMenuPosition(e)
+
+      // In `getCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
+      // if we don't postpone the Menu apparition it will start transition from a visible menu and
+      // thus will not transition.
+      this.timeoutId = setTimeout(() => {
+        this.$emit('update:modelValue', (this.showMenu = true))
+        this.$emit('input', true)
+        this.$emit('open')
+      }, 10)
+
+      if (!this.persistent) document.addEventListener('mousedown', this.onOutsideMousedown)
+      if (!this.noPosition) window.addEventListener('resize', this.onResize)
+    },
+
+    /**
+     * Closes the menu. Can happen on:
+     * - click of activator
+     * - hover outside if showOnHover
+     * - click inside menu if hideOnMenuClick.
+     *
+     * @param {Boolean} force when showOnHover is set to true, hovering menu should keep it open.
+     *                        But if hideOnMenuClick is also set to true, this should force close
+     *                        even while hovering the menu.
+     */
+    async closeMenu (force = false) {
+      // Might be already closed.
+      // E.g. showOnHover & hideOnMenuClick: on click, force hide then mouseleave is also firing.
+      if (!this.showMenu) return
+
+      if (this.showOnHover && !force) {
+        await new Promise(resolve => setTimeout(resolve, 10))
+        if (this.showOnHover && (this.hoveringMenu || this.hoveringActivator)) return
       }
 
-      // Close the menu.
-      else {
-        this.$emit('update:modelValue', (this.showMenu = false))
-        this.$emit('input', false)
-        this.$emit('close')
-        // Remove the mousedown listener if the menu got closed without a mousedown outside of the menu.
-        document.removeEventListener('mousedown', this.onOutsideMousedown)
-        window.removeEventListener('resize', this.onResize)
-      }
+      this.$emit('update:modelValue', (this.showMenu = false))
+      this.$emit('input', false)
+      this.$emit('close')
+      // Remove the mousedown listener if the menu got closed without a mousedown outside of the menu.
+      document.removeEventListener('mousedown', this.onOutsideMousedown)
+      window.removeEventListener('resize', this.onResize)
     },
 
     onOutsideMousedown (e) {
@@ -365,7 +408,7 @@ export default {
       // Unwrap the activator element.
       wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
 
-      // Unwrap the overlay
+      // Unwrap the overlay.
       if (this.overlay) wrapper.parentNode.insertBefore(this.overlayEl, wrapper)
 
       // Move the menu elsewhere in the DOM.
@@ -384,7 +427,7 @@ export default {
     this.overlayEl = this.overlay ? this.$refs.overlay.$el : null
     this.insertMenu()
 
-    if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
+    if (this.value) this.toggleMenu({ type: 'click', target: this.activatorEl })
   },
 
   beforeDestroy () {
@@ -396,11 +439,14 @@ export default {
 
   watch: {
     value (bool) {
-      if (!!bool !== this.showMenu) this.toggle({ type: 'click', target: this.activatorEl })
+      if (!!bool !== this.showMenu) this.toggleMenu({ type: 'click', target: this.activatorEl })
     },
     detachTo () {
       this.removeMenu()
       this.insertMenu()
+    },
+    hoveringActivator (bool) {
+      this.$nextTick(() => console.log(bool, this.hoveringMenu))
     }
   }
 }
