@@ -35,7 +35,8 @@ component(
       :readonly="isReadonly || null"
       :aria-readonly="isReadonly ? 'true' : 'false'"
       :disabled="isDisabled || null"
-      :required="required || null")
+      :required="required || null"
+      :tabindex="tabindex || null")
     template(v-if="labelPosition === 'inside' && showLabelInside")
       label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
         v-if="$slots.default"
@@ -90,7 +91,7 @@ export default {
     tile: { type: Boolean },
     rows: { type: [Number, String], default: 3 },
     cols: { type: [Number, String] }
-    // Props from mixin: name, disabled, readonly, required, validators.
+    // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 

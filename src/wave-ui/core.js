@@ -47,8 +47,15 @@ export default class WaveUI {
     //   if (directives[id]) app.directive(id, directives[id])
     // }
     app.directive('focus', {
-      // When the bound element is inserted into the DOM...
-      inserted: el => el.focus()
+      mounted: el => el.focus()
+    })
+    app.directive('scroll', {
+      mounted: (el, binding) => {
+        const f = evt => {
+          if (binding.value(evt, el)) window.removeEventListener('scroll', f)
+        }
+        window.addEventListener('scroll', f)
+      }
     })
 
     // Register a-la-carte components from the given list.

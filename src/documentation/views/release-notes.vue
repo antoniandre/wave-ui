@@ -24,6 +24,29 @@ main
     //- li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.37.0
+      strong.mt2.d-block UI components
+      ul
+        li #[strong.code w-menu]: When using #[code show-on-hover], keep menu open when hovering the menu from activator and vice-versa.
+        li #[strong.code w-menu]: Support #[code hide-on-menu-click] when using #[code show-on-hover].
+        li #[strong.code w-list]: Added a new #[code item-route-key] option.
+        li.
+          #[strong Form elements:]
+          Support #[code tabindex] on form elements (#[strong.code w-input],
+          #[strong.code w-textarea], #[strong.code w-select], #[strong.code w-checkbox],
+          #[strong.code w-radio]#[strong.code w-switch]).
+
+      strong.mt2.d-block Global
+      ul
+        li Added a new #[code v-scroll] directive.
+        li Added new #[code .text-nowrap] CSS helper class.
+        li Added new #[code .text-capitalize] CSS helper class.
+
+    li.patch
+      strong.version v1.36.1
+      p Fix the notification manager on Nuxt. #[issue-link 60]
+
+    li.minor
       strong.version v1.36.0
       ul
         li #[strong.code Notification manager]: Add new #[code align] (left or right) &amp; #[code transition] options.

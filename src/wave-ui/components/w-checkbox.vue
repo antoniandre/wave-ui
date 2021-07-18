@@ -14,6 +14,7 @@ component(
     :checked="isChecked || null"
     :disabled="isDisabled || null"
     :required="required || null"
+    :tabindex="tabindex || null"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
     @change="onInput() /* Edge doesn't fire input on checkbox/radio/select change */"
@@ -55,7 +56,7 @@ export default {
     noRipple: { type: Boolean },
     indeterminate: { type: Boolean },
     round: { type: Boolean }
-    // Props from mixin: name, disabled, readonly, required, validators.
+    // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
