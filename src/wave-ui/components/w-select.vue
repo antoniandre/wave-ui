@@ -57,6 +57,7 @@ component(
           readonly
           aria-readonly="true"
           :required="required || null"
+          :tabindex="tabindex || null"
           autocomplete="off")
         //- For standard HTML form submission.
         input(
@@ -159,7 +160,7 @@ export default {
     // Allow preventing that on single selection lists only.
     noUnselect: { type: Boolean },
     menuProps: { type: Object } // Allow passing down an object of props to the w-menu component.
-    // Props from mixin: name, disabled, readonly, required, validators.
+    // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 

@@ -12,6 +12,7 @@ export default {
     disabled: { type: Boolean },
     readonly: { type: Boolean },
     required: { type: Boolean },
+    tabindex: { type: String },
     validators: { type: Array }
   },
 

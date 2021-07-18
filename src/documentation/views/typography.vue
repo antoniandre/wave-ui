@@ -17,6 +17,7 @@ main
   div.ml8
     .text-upper.mt4 Uppercase text using the #[code .text-upper] class.
     .text-lower.mt4 Lowercase text using the #[code .text-lower] class.
+    .text-capitalize.mt4 Capitalize text (first letter of each word) using the #[code .text-capitalize] class.
     .text-bold.mt4 Bold text using the #[code .text-bold] class.
     .text-light.mt4 Normal (not bold) text using the #[code .text-light] class.
     .text-italic.mt4 Italic text using the #[code .text-italic] class.

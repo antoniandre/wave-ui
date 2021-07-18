@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import Delete from 'rollup-plugin-delete'
 
-const build = process.env.BUNDLE ? {
+const bundlingConf = {
   lib: {
     entry: resolve(__dirname, '/src/wave-ui/index.js'),
     name: 'WaveUI',
@@ -22,9 +22,9 @@ const build = process.env.BUNDLE ? {
       globals: { vue: 'Vue' }
     }
   }
-} : {
-  outDir: 'docs'
 }
+
+const build = process.env.BUNDLE ? bundlingConf : { outDir: 'docs' }
 
 export default defineConfig({
   define: {
@@ -45,7 +45,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@/wave-ui/scss/variables";@import "@/documentation/scss/_variables.scss";`
+        additionalData: '@import "@/wave-ui/scss/variables";@import "@/documentation/scss/_variables.scss";'
       }
     }
   },
