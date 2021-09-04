@@ -275,14 +275,15 @@ div
     w-button.ma1(bg-color="primary" route="/getting-started")
       | Getting started
       w-icon.ml1 wi-chevron-right
-    w-button.ma1(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
+    w-button.ma1(bg-color="primary" route="https://github.com/antoniandre/wave-ui" target="_blank")
       | Github
       w-icon.ml2(sm) mdi mdi-open-in-new
     template(#html).
       &lt;w-button
         class="ma1"
         bg-color="primary"
-        route="/getting-started"&gt;
+        route="/getting-started"
+        target="_blank"&gt;
         Getting started
         &lt;w-icon class="ml1"&gt;wi-chevron-right&lt;/w-icon&gt;
       &lt;/w-button&gt;
