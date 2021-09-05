@@ -20,7 +20,7 @@ h1 {
   color: $primary;
   margin-top: 6 * $base-increment;
   margin-bottom: 2 * $base-increment;
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: 400;
 }
 .w-app h1.headline {margin-bottom: 30px;}
@@ -29,18 +29,18 @@ h2 {
   color: $primary;
   margin-top: 12 * $base-increment;
   margin-bottom: 3 * $base-increment;
-  font-size: 1.7em;
+  font-size: 1.7rem;
   font-weight: 400;
 }
 
 h3 {
   margin-top: 6 * $base-increment;
   margin-bottom: 2 * $base-increment;
-  font-size: 1.25em;
+  font-size: 1.25rem;
   font-weight: 400;
 }
 
-h4 {font-size: 1em;}
+h4 {font-size: 1rem;}
 
 .headline {
   margin-top: 10 * $base-increment;
