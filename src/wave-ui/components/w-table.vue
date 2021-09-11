@@ -7,6 +7,8 @@
           v-for="(header, i) in headers"
           :key="i"
           @click="header.sortable !== false && sortTable(header)"
+          @mousedown="onMouseDown($event, i)"
+          :width="header.width || null"
           :class="headerClasses(header)")
           w-icon.w-table__header-sort(
             v-if="header.sortable !== false && header.align === 'right'"
@@ -134,7 +136,8 @@ export default {
     uidKey: { type: String, default: 'id' },
 
     filter: { type: Function },
-    mobileBreakpoint: { type: Number, default: 0 }
+    mobileBreakpoint: { type: Number, default: 0 },
+    resizableColumn: { type: Boolean }
   },
 
   emits: ['row-select', 'row-expand', 'row-click', 'update:sort', 'update:selected-rows', 'update:expanded-rows'],
@@ -142,7 +145,12 @@ export default {
   data: () => ({
     activeSorting: [],
     selectedRowsInternal: [], // Array of uids.
-    expandedRowsInternal: [] // Array of uids.
+    expandedRowsInternal: [], // Array of uids.
+    // On mouse or tap events.
+    touch: {
+      mouseDown: false,
+      columnIndex: null
+    }
   }),
 
   computed: {
@@ -215,7 +223,8 @@ export default {
   methods: {
     headerClasses (header) {
       return {
-        'w-table__header--sortable': header.sortable !== false,
+        'w-table__header--sortable': header.sortable !== false, // Can also be falsy with `0`.
+        'w-table__header--resizing': header.resizing,
         [`text-${header.align || 'left'}`]: true
       }
     },
@@ -297,6 +306,30 @@ export default {
       }
 
       this.$emit('row-click', { item, index })
+    },
+
+    onMouseDown (e, columnIndex) {
+      // Look at https://codepen.io/crwilson311/pen/Bajbdwd
+      this.touch.mouseDown = true
+      this.touch.columnIndex = columnIndex
+      document.addEventListener('mousemove', this.onMouseMove)
+      document.addEventListener('mouseup', this.onMouseUp)
+      console.log('onMouseDown', e, columnIndex)
+      this.$set(this.headers[this.touch.columnIndex], 'resizing', true)
+    },
+
+    onMouseMove (e) {
+      console.log('onMouseMove', e, this.touch.columnIndex)
+      this.$set(this.headers[this.touch.columnIndex], 'width', '10%')
+    },
+
+    onMouseUp (e) {
+      document.removeEventListener('mousemove', this.onMouseMove)
+      document.removeEventListener('mouseup', this.onMouseUp)
+      console.log('onMouseUp', e, this.touch.columnIndex)
+      this.$set(this.headers[this.touch.columnIndex], 'resizing', false)
+      this.touch.mouseDown = false
+      this.touch.columnIndex = null
     }
   },
 
@@ -385,6 +418,11 @@ export default {
     th:hover &--inactive {opacity: 0.5;}
     th:hover &--active {opacity: 1;}
     &--active {opacity: 0.7;}
+  }
+
+  &__header--resizing {
+    border-right: $border;
+    cursor: ew-resize;
   }
 
   // Progress bar when loading.

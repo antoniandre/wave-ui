@@ -2,7 +2,7 @@
 div
   title-link(h2) Default
   example
-    w-table(:headers="table1.headers" :items="table1.items")
+    w-table(:headers="table1.headers" :items="table1.items" resizable-column)
     //- template(#pug).
       w-table(:headers="table.headers" :items="table.items")
     template(#html).
