@@ -590,6 +590,18 @@ div
         readonly&gt;
       &lt;/w-input&gt;
 
+  title-link(h2 slug="file-input")
+    | File input
+    w-tag.px1.ml1(color="red" outline) more options soon
+  example
+    w-input(type="file") file
+  title-link(h3) Preview &amp; accept attribute
+  example
+    w-input(type="file" preview label="File" accept=".jpg, .jpeg, .png, .gif, .svg")
+  title-link(h3) Multiple
+  example
+    w-input(type="file" multiple label="File" accept=".jpg, .jpeg, .png, .gif, .svg")
+
   title-link(h2) Types
   p The default type is "#[span.code text]" but the types bellow are also supported.
   p.
@@ -605,10 +617,6 @@ div
       li.mt4
         .code.mb1 type="email"
         w-input(type="email") Email address
-      li.mt4
-        .code.mb1 type="file"
-        w-tag.px1.ml1(color="red" outline) coming soon
-        //- w-input(type="file") file
       li.mt4
         .code.mb1 type="number"
         w-input(type="number" min="0" max="100") Age

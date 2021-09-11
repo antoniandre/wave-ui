@@ -8,6 +8,7 @@ component(
   :wrap="hasLabel && labelPosition !== 'inside'"
   :class="classes")
   input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
+
   template(v-else)
     //- Left label.
     template(v-if="labelPosition === 'left'")
@@ -23,6 +24,7 @@ component(
         :for="`w-input--${_uid}`"
         @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
       input.w-input__input(
+        v-if="type !== 'file'"
         v-model="inputValue"
         v-on="listeners"
         @input="onInput"
@@ -42,7 +44,23 @@ component(
         :disabled="isDisabled || null"
         :required="required || null"
         :tabindex="tabindex || null"
-        v-bind="$attrs")
+        v-bind="attrs")
+      template(v-if="type === 'file'")
+        input(
+          :id="`w-input--${_uid}`"
+          type="file"
+          :name="name || null"
+          @focus="onFocus"
+          @blur="onBlur"
+          @change="onFileChange"
+          :multiple="multiple || null"
+          v-bind="attrs")
+        label.w-input__input(:for="`w-input--${_uid}`")
+          template(v-for="(file, i) in inputFiles")
+            | {{ i ? ', ': '' }}
+            span {{ file.base }}
+            | {{ file.extension }}
+
       template(v-if="labelPosition === 'inside' && showLabelInside")
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
           v-if="$slots.default"
@@ -59,6 +77,8 @@ component(
         tag="label"
         :for="`w-input--${_uid}`"
         @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
+
+    img.w-input__file-preview(v-for="(file, i) in inputFiles" :key="i" :src="file.preview")
 
     //- Right label.
     template(v-if="labelPosition === 'right'")
@@ -103,6 +123,8 @@ export default {
     round: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
+    multiple: { type: Boolean }, // Only for file uploads.
+    preview: { type: Boolean }, // Only for file uploads.
     loading: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
@@ -116,26 +138,44 @@ export default {
       // In case of incorrect input type="number", the inputValue gets emptied,
       // and the label would come back on top of the input text.
       inputNumberError: false,
-      isFocused: false
+      isFocused: false,
+      inputFiles: [], // For input type file.
+      fileReader: null // For input type file.
     }
   },
 
   computed: {
+    attrs () {
+      // Keep the `class` attribute bound to the wrapper and not the input.
+      // eslint-disable-next-line no-unused-vars
+      const { class: classes, ...attrs } = this.$attrs
+      return attrs
+    },
+
     listeners () {
       // Remove the events that are fired separately, so they don't fire twice.
       // eslint-disable-next-line no-unused-vars
       const { input, focus, blur, ...listeners } = this.$listeners
       return listeners
     },
+
     hasValue () {
-      return this.inputValue || ['date', 'time'].includes(this.type) || (this.type === 'number' && this.inputNumberError)
+      return (
+        this.inputValue ||
+        ['date', 'time'].includes(this.type) ||
+        (this.type === 'number' && this.inputNumberError) ||
+        (this.type === 'file' && this.inputFiles.length)
+      )
     },
+
     hasLabel () {
       return this.label || this.$slots.default
     },
+
     showLabelInside () {
       return !this.staticLabel || (!this.hasValue && !this.placeholder)
     },
+
     classes () {
       return {
         'w-input': true,
@@ -151,6 +191,7 @@ export default {
         'w-input--inner-icon-right': this.innerIconRight
       }
     },
+
     inputWrapClasses () {
       return {
         [this.valid === false ? 'error' : this.color]: this.color || this.valid === false,
@@ -173,13 +214,57 @@ export default {
       this.$emit('update:modelValue', this.inputValue)
       this.$emit('input', this.inputValue)
     },
+
     onFocus (e) {
       this.isFocused = true
       this.$emit('focus', e)
     },
+
     onBlur (e) {
       this.isFocused = false
       this.$emit('blur', e)
+    },
+
+    onFileChange (e) {
+      console.log('file change', e);
+      // [...e.target.files].forEach((file, i) => {
+      //   this.$set(this.inputFiles, i, Object.assign({}, file))
+      //   this.filePreview(file)
+      // })
+
+      // this.inputFiles = [...e.target.files].map(file => {
+      //   this.filePreview(file)
+      //   return file
+      // })
+      this.$set(this, 'inputFiles', [...e.target.files].map(original => {
+        const [, base, extension] = original.name.match(/^(.*)(\..*?)$/)
+        const file = Object.assign({}, {
+          name: original.name,
+          base,
+          extension,
+          type: original.type,
+          size: original.size,
+          lastModified: original.lastModified,
+          preview: ''
+        })
+
+        this.filePreview(original, file)
+
+        return file
+      }))
+      this.$emit('update:modelValue', this.inputFiles)
+    },
+
+    filePreview (original, file) {
+      // Check if the file is an image.
+      if (original.type && !original.type.startsWith('image/')) return
+
+      const reader = new FileReader()
+      reader.addEventListener('load', e => {
+        console.log('now loaded')
+        this.$set(file, 'preview', e.target.result)
+      })
+      reader.readAsDataURL(original)
     }
   },
 
@@ -272,6 +357,8 @@ $inactive-color: #777;
     font-size: inherit;
     color: inherit;
     text-align: inherit;
+    display: inline-flex;
+    align-items: center;
     background: none;
     border: none;
     outline: none;
@@ -303,6 +390,22 @@ $inactive-color: #777;
   }
 
   &--disabled input::placeholder {color: inherit;}
+
+  // Upload field.
+  // ------------------------------------------------------
+  // Hides the built-in file input (replaced with a more stylable element).
+  input[type="file"] {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  &__file-preview {
+    margin-left: 4px;
+    max-height: 2em;
+    align-self: flex-end;
+  }
 
   // Icons inside.
   // ------------------------------------------------------
