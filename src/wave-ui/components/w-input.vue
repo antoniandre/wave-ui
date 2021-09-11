@@ -55,7 +55,7 @@ component(
           @change="onFileChange"
           :multiple="multiple || null"
           v-bind="attrs")
-        label.w-input__input(:for="`w-input--${_uid}`")
+        label.w-input__input.w-input__input--file(:for="`w-input--${_uid}`")
           template(v-for="(file, i) in inputFiles")
             | {{ i ? ', ': '' }}
             span {{ file.base }}
@@ -179,6 +179,7 @@ export default {
     classes () {
       return {
         'w-input': true,
+        'w-input--file': this.type === 'file',
         'w-input--disabled': this.isDisabled,
         'w-input--readonly': this.isReadonly,
         [`w-input--${this.hasValue ? 'filled' : 'empty'}`]: true,
@@ -196,6 +197,7 @@ export default {
       return {
         [this.valid === false ? 'error' : this.color]: this.color || this.valid === false,
         [`${this.bgColor}--bg`]: this.bgColor,
+        'w-input__input-wrap--file': this.type === 'file',
         'w-input__input-wrap--round': this.round,
         'w-input__input-wrap--tile': this.tile,
         // Box adds a padding on input. If there is a bgColor or shadow, a padding is needed.
@@ -287,6 +289,8 @@ $inactive-color: #777;
   align-items: center;
   font-size: $base-font-size;
 
+  &--file {flex-wrap: nowrap;}
+
   // Input field wrapper.
   // ------------------------------------------------------
   &__input-wrap {
@@ -301,6 +305,9 @@ $inactive-color: #777;
 
     .w-input--floating-label & {margin-top: 3 * $base-increment;}
     .w-input[class^="bdrs"] &, .w-input[class*=" bdrs"] & {border-radius: inherit;}
+
+    // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
+    &--file {min-width: 0;}
 
     &--underline {
       border-bottom-left-radius: initial;
@@ -399,6 +406,16 @@ $inactive-color: #777;
     z-index: -1;
     pointer-events: none;
     opacity: 0;
+  }
+
+  &__input--file {
+    overflow: hidden;
+
+    span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
   &__file-preview {
