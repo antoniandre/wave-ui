@@ -55,10 +55,13 @@ component(
           @change="onFileChange"
           :multiple="multiple || null"
           v-bind="attrs")
-        label.w-input__input.w-input__input--file(:for="`w-input--${_uid}`")
-          template(v-for="(file, i) in inputFiles")
+        transition-group.w-input__input.w-input__input--file(tag="label" name="fade" :for="`w-input--${_uid}`")
+          span.w-input__no-file(v-if="!inputFiles.length && isFocused" key="no-file")
+            slot(name="no-file")
+              template(v-if="$slots['no-file'] === undefined") No file
+          span(v-for="(file, i) in inputFiles" :key="i")
             | {{ i ? ', ': '' }}
-            span {{ file.base }}
+            span.filename(:key="`${i}b`") {{ file.base }}
             | {{ file.extension }}
 
       template(v-if="labelPosition === 'inside' && showLabelInside")
@@ -78,7 +81,12 @@ component(
         :for="`w-input--${_uid}`"
         @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
-    img.w-input__file-preview(v-for="(file, i) in inputFiles" :key="i" :src="file.preview")
+    //- Files preview.
+    label.d-flex(v-if="type === 'file' && inputFiles.length" :for="`w-input--${_uid}`")
+      template(v-for="(file, i) in inputFiles")
+        i.w-icon.wi-spinner.w-icon--spin.size--sm.w-input__file-preview.primary(v-if="file.progress < 100" :key="i")
+        img.w-input__file-preview(v-else-if="file.preview" :key="i" :src="file.preview" alt="")
+        i.w-icon.wi-file.w-input__file-preview.primary(v-else :key="i")
 
     //- Right label.
     template(v-if="labelPosition === 'right'")
@@ -227,17 +235,8 @@ export default {
       this.$emit('blur', e)
     },
 
+    // For file input.
     onFileChange (e) {
-      console.log('file change', e);
-      // [...e.target.files].forEach((file, i) => {
-      //   this.$set(this.inputFiles, i, Object.assign({}, file))
-      //   this.filePreview(file)
-      // })
-
-      // this.inputFiles = [...e.target.files].map(file => {
-      //   this.filePreview(file)
-      //   return file
-      // })
       this.$set(this, 'inputFiles', [...e.target.files].map(original => {
         const [, base, extension] = original.name.match(/^(.*)(\..*?)$/)
         const file = Object.assign({}, {
@@ -247,7 +246,8 @@ export default {
           type: original.type,
           size: original.size,
           lastModified: original.lastModified,
-          preview: ''
+          preview: null,
+          progress: 0
         })
 
         this.filePreview(original, file)
@@ -257,15 +257,25 @@ export default {
       this.$emit('update:modelValue', this.inputFiles)
     },
 
+    // For file input.
     filePreview (original, file) {
-      // Check if the file is an image.
-      if (original.type && !original.type.startsWith('image/')) return
-
       const reader = new FileReader()
-      reader.addEventListener('load', e => {
-        console.log('now loaded')
-        this.$set(file, 'preview', e.target.result)
+
+      // Check if the file is an image and set a preview image.
+      if (original.type && original.type.startsWith('image/')) {
+        reader.addEventListener('load', e => {
+          this.$set(file, 'preview', e.target.result)
+        })
+      }
+
+      // Used to display a spinner while the file is loading.
+      reader.addEventListener('progress', event => {
+        if (event.loaded && event.total) {
+          this.$set(file, 'progress', event.loaded * 100 / event.total)
+          console.log(`Progress: ${Math.round(file.progress)}`)
+        }
       })
+
       reader.readAsDataURL(original)
     }
   },
@@ -289,7 +299,10 @@ $inactive-color: #777;
   align-items: center;
   font-size: $base-font-size;
 
-  &--file {flex-wrap: nowrap;}
+  &--file {
+    flex-wrap: nowrap;
+    align-items: flex-end;
+  }
 
   // Input field wrapper.
   // ------------------------------------------------------
@@ -409,13 +422,29 @@ $inactive-color: #777;
   }
 
   &__input--file {
-    overflow: hidden;
-
-    span {
+    > span {
+      display: inline-flex;
       overflow: hidden;
       white-space: nowrap;
+    }
+
+    .filename {
+      margin-left: 0.2em;
+      overflow: hidden;
       text-overflow: ellipsis;
     }
+
+    > span:first-child .filename {margin-left: 0;}
+  }
+
+  &__no-file {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    color: $disabled-color;
   }
 
   &__file-preview {
@@ -483,6 +512,7 @@ $inactive-color: #777;
     .w-input--floating-label & {
       transform-origin: 0 0;
       transition: $transition-duration ease;
+      will-change: transform;
     }
 
     // move label with underline style.
