@@ -606,7 +606,7 @@ div
   p The default type is "#[span.code text]" but the types bellow are also supported.
   p.
     On desktop you will not notice the difference between the fields #[span.code email], #[span.code tel],
-    #[span.code url], and the default text type. But on touch devices, the keyboard is tailored for the
+    #[span.code url], and the default text type. But on touch devices, the keyboard is adapted to the
     type of input.
   h3 Textual inputs
   example
