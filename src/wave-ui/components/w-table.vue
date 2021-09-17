@@ -7,7 +7,6 @@
           v-for="(header, i) in headers"
           :key="i"
           @click="header.sortable !== false && sortTable(header)"
-          @mousedown="onMouseDown($event, i)"
           :width="header.width || null"
           :class="headerClasses(header)")
           w-icon.w-table__header-sort(
@@ -24,6 +23,9 @@
           w-icon.w-table__header-sort(
             v-if="header.sortable !== false && header.align !== 'right'"
             :class="headerSortClasses(header)") wi-arrow-down
+          span.w-table__col-resizer(
+            v-if="resizableColumns"
+            @mousedown="onMouseDown($event, i)")
     tbody
       tr.w-table__progress-bar(v-if="loading")
         td(:colspan="headers.length")
@@ -137,7 +139,7 @@ export default {
 
     filter: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 },
-    resizableColumn: { type: Boolean }
+    resizableColumns: { type: Boolean }
   },
 
   emits: ['row-select', 'row-expand', 'row-click', 'update:sort', 'update:selected-rows', 'update:expanded-rows'],
@@ -201,6 +203,7 @@ export default {
     classes () {
       return {
         'w-table--mobile': this.isMobile || null,
+        'w-table--resizable-cols': this.resizableColumns || null,
         'w-table--fixed-header': this.fixedHeaders
       }
     },
@@ -224,6 +227,7 @@ export default {
     headerClasses (header) {
       return {
         'w-table__header--sortable': header.sortable !== false, // Can also be falsy with `0`.
+        'w-table__header--resizable': !!this.resizableColumns,
         'w-table__header--resizing': header.resizing,
         [`text-${header.align || 'left'}`]: true
       }
@@ -420,9 +424,34 @@ export default {
     &--active {opacity: 0.7;}
   }
 
-  &__header--resizing {
-    border-right: $border;
+  // Resizable columns.
+  &__header--resizable {position: relative;}
+  &__col-resizer {
+    position: absolute;
+    right: -5px;
+    top: 0;
+    bottom: 0;
+    width: 10px;
     cursor: ew-resize;
+    z-index: 1;
+
+    &:before {
+      content: '';
+      border-right: $border;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__header--resizing &__col-resizer:before, &__col-resizer:hover:before {
+    border-right-width: 2px;
+  }
+
+  &__header--resizing &__col-resizer:before {
+    border-right-color: rgba(0, 0, 0, 0.25);
   }
 
   // Progress bar when loading.
@@ -472,6 +501,7 @@ export default {
   }
 }
 
+// Mobile layout.
 .w-table--mobile {
   thead {display: none;}
   td {display: block;}
