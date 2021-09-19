@@ -23,7 +23,7 @@ main
     //-----------------------------------------------------
     //- li Added the #[code hide-error] option on all the form elements.
 
-    li.minor
+    //- li.minor
       strong.version v1.38.0
       ul
         li #[strong.code w-input]: Support input type file.
