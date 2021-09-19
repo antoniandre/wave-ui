@@ -105,7 +105,8 @@
 /**
  * @todo: (Resizing)
  *    - Adapt when there is no header.
- *    - recalc on browser resize.
+ *    - Recalc. on browser resize.
+ *    - When dragging a col, max out the width to full width of the container so it does not behave weirdly.
  */
 import { consoleError } from '../utils/console'
 
@@ -166,7 +167,6 @@ export default {
     expandedRowsInternal: [], // Array of uids.
     // On mouse or tap events.
     colResizing: {
-      mouseDown: false,
       dragging: false,
       columnIndex: null,
       startCursorX: null,
@@ -336,7 +336,6 @@ export default {
     },
 
     onMouseDown (e, columnIndex) {
-      this.colResizing.mouseDown = true
       this.colResizing.columnIndex = columnIndex
       this.colResizing.startCursorX = e.pageX // x-axis coordinate at drag start.
       this.colResizing.columnEl = this.$el.querySelector(`th:nth-child(${columnIndex + 1})`)
@@ -350,7 +349,7 @@ export default {
     },
 
     onMouseMove (e) {
-      const { startCursorX, columnIndex, columnEl, nextColumnEl, colWidth, nextColWidth } = this.colResizing
+      const { startCursorX, columnEl, nextColumnEl, colWidth, nextColWidth } = this.colResizing
 
       this.colResizing.dragging = true
       const deltaX = e.pageX - startCursorX
@@ -374,7 +373,6 @@ export default {
       this.$set(this.headers[this.colResizing.columnIndex], 'resizing', false)
 
       // Reset all the variables (better for debugging).
-      this.colResizing.mouseDown = false
       this.colResizing.dragging = false
       this.colResizing.columnIndex = null
       this.colResizing.startCursorX = null
