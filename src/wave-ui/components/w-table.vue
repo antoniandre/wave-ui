@@ -1,6 +1,8 @@
 <template lang="pug">
 .w-table-wrap(:class="wrapClasses")
   table.w-table(:class="classes")
+    colgroup
+      col(v-for="(header, i) in headers" :key="i" :class="{ highlight: colResizing.columnIndex === i }")
     thead(v-if="!noHeaders")
       tr
         th.w-table__header(
@@ -419,6 +421,8 @@ export default {
 </script>
 
 <style lang="scss">
+$tr-border-top: 1px;
+
 .w-table-wrap {
   position: relative;
   border-radius: $border-radius;
@@ -477,11 +481,14 @@ export default {
   }
 
   // Resizable columns.
+  col {border-right: 2px solid transparent;}
+  .highlight {border-right: 2px solid $border-color;}
+
   &__header--resizable {position: relative;}
   &__col-resizer {
     position: absolute;
     right: -5px;
-    top: 0;
+    top: -$tr-border-top;
     bottom: 0;
     width: 10px;
     cursor: col-resize;
@@ -498,9 +505,9 @@ export default {
     }
   }
 
-  &__header--resizing &__col-resizer:before, &__col-resizer:hover:before {
-    border-right-width: 2px;
-  }
+  // &__header--resizing &__col-resizer:before, &__col-resizer:hover:before {
+  //   border-right-width: 2px;
+  // }
 
   &__header--resizing &__col-resizer:before {
     border-left-color: rgba(0, 0, 0, 0.25);
@@ -525,7 +532,7 @@ export default {
 
   // Table body.
   // ------------------------------------------------------
-  tbody tr {border-top: 1px solid rgba(0, 0, 0, 0.06);}
+  tbody tr {border-top: $tr-border-top solid rgba(0, 0, 0, 0.06);}
   // Don't apply built-in bg color if a bg color is already found on a tr.
   tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: $table-tr-odd-color;}
   tbody .w-table__row:hover:not(.no-data):not([class*="--bg"]) {background-color: $table-tr-hover-color;}
