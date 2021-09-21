@@ -1,8 +1,6 @@
 <template lang="pug">
 .w-table-wrap(:class="wrapClasses")
   table.w-table(:class="classes")
-    colgroup
-      col(v-for="(header, i) in headers" :key="i" :class="{ highlight: colResizing.columnIndex === i }")
     thead(v-if="!noHeaders")
       tr
         th.w-table__header(
@@ -27,16 +25,27 @@
             :class="headerSortClasses(header)") wi-arrow-down
           span.w-table__col-resizer(
             v-if="i < headers.length - 1 && resizableColumns"
-            @mousedown="onMouseDown($event, i)"
+            :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === i }"
+            @mouseenter="onResizerMouseEnter($event, j)"
+            @mouseleave="onResizerMouseLeave"
+            @mousedown="onResizerMouseDown($event, i)"
             @click.stop="/* Prevent click on header, which triggers sorting & DOM refresh. */")
     tbody
+      //- Progress bar.
       tr.w-table__progress-bar(v-if="loading")
         td(:colspan="headers.length")
           w-progress(tile)
           .w-table__loading-text
             slot(name="loading") Loading...
-      template(v-else-if="tableItems.length")
+      //- No data.
+      tr.no-data(v-if="!tableItems.length")
+        td.w-table__cell.text-center(:colspan="headers.length")
+          slot(name="no-data") No data to show.
+
+      //- Normal rows.
+      template(v-else)
         template(v-for="(item, i) in sortedItems")
+          //- Full tr slot.
           slot(
             v-if="$scopedSlots['item']"
             name="item"
@@ -54,6 +63,7 @@
               td.w-table__cell(
                 v-if="$scopedSlots[`item-cell.${header.key}`] || $scopedSlots[`item-cell.${j + 1}`] || $scopedSlots['item-cell']"
                 :key="`${j}-a`"
+                :width="(noHeaders && !j && header.width) || null"
                 :data-label="header.label"
                 :class="`text-${header.align || 'left'}`")
                 slot(
@@ -79,37 +89,45 @@
                   :index="i + 1")
                 span.w-table__col-resizer(
                   v-if="j < headers.length - 1 && resizableColumns"
-                  @mousedown="onMouseDown($event, j)")
+                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }"
+                  @mouseenter="onResizerMouseEnter($event, j)"
+                  @mouseleave="onResizerMouseLeave"
+                  @mousedown="onResizerMouseDown($event, j)")
 
               td.w-table__cell(
                 v-else
                 :key="`${j}-b`"
+                :width="(noHeaders && !j && header.width) || null"
                 :data-label="header.label"
                 :class="`text-${header.align || 'left'}`")
                 div(v-html="item[header.key] || ''")
                 span.w-table__col-resizer(
                   v-if="j < headers.length - 1 && resizableColumns"
-                  @mousedown="onMouseDown($event, j)")
+                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }"
+                  @mouseenter="onResizerMouseEnter($event, j)"
+                  @mouseleave="onResizerMouseLeave"
+                  @mousedown="onResizerMouseDown($event, j)")
+
+          //- Expanded row.
           tr.w-table__row.w-table__row--expanded(v-if="expandedRowsByUid[item._uid]")
             td.w-table__cell(:colspan="headers.length")
               div(v-if="expandedRowsByUid[item._uid]")
                 slot(name="expanded-row" :item="item" :index="i + 1")
               span.w-table__col-resizer(
                 v-if="j < headers.length - 1 && resizableColumns"
-                @mousedown="onMouseDown($event, j)")
-
-      tr.no-data(v-else)
-        td.w-table__cell.text-center(:colspan="headers.length")
-          slot(name="no-data") No data to show.
+                :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }"
+                @mouseenter="onResizerMouseEnter($event, j)"
+                @mouseleave="onResizerMouseLeave"
+                @mousedown="onResizerMouseDown($event, j)")
 </template>
 
 <script>
 /**
  * @todo: (Resizing)
- *    - Adapt when there is no header.
  *    - Recalc. on browser resize.
  *    - When dragging a col, max out the width to full width of the container so it does not behave weirdly.
  */
+
 import { consoleError } from '../utils/console'
 
 export default {
@@ -167,10 +185,11 @@ export default {
     activeSorting: [],
     selectedRowsInternal: [], // Array of uids.
     expandedRowsInternal: [], // Array of uids.
-    // On mouse or tap events.
+    // Column resizing feature.
     colResizing: {
       dragging: false,
-      columnIndex: null,
+      hover: false, // False or a column number starting from 0.
+      columnIndex: null, // Column number starting from 0.
       startCursorX: null,
       colWidth: null,
       nextColWidth: null,
@@ -253,7 +272,6 @@ export default {
       return {
         'w-table__header--sortable': header.sortable !== false, // Can also be falsy with `0`.
         'w-table__header--resizable': !!this.resizableColumns,
-        'w-table__header--resizing': header.resizing,
         [`text-${header.align || 'left'}`]: true
       }
     },
@@ -337,20 +355,31 @@ export default {
       this.$emit('row-click', { item, index })
     },
 
-    onMouseDown (e, columnIndex) {
+    onResizerMouseEnter (e, columnIndex) {
+      this.colResizing.hover = columnIndex
+    },
+
+    onResizerMouseLeave () {
+      this.colResizing.hover = false
+    },
+
+    onResizerMouseDown (e, columnIndex) {
       this.colResizing.columnIndex = columnIndex
       this.colResizing.startCursorX = e.pageX // x-axis coordinate at drag start.
-      this.colResizing.columnEl = this.$el.querySelector(`th:nth-child(${columnIndex + 1})`)
+
+      const cellToResize = this.noHeaders ? 'td' : 'th'
+      this.colResizing.columnEl = this.$el.querySelector(`${cellToResize}:nth-child(${columnIndex + 1})`)
       this.colResizing.nextColumnEl = this.colResizing.columnEl.nextSibling
       this.colResizing.colWidth = this.colResizing.columnEl.offsetWidth
       this.colResizing.nextColWidth = this.colResizing.nextColumnEl.offsetWidth
-      document.addEventListener('mousemove', this.onMouseMove)
-      document.addEventListener('mouseup', this.onMouseUp)
-      console.log('onMouseDown', e, columnIndex, this.colResizing.colWidth)
-      this.$set(this.headers[this.colResizing.columnIndex], 'resizing', true)
+
+      // Now that we've grabbed the resizer, bind the mousemove & mouseup events to the whole document.
+      document.addEventListener('mousemove', this.onResizerMouseMove)
+      document.addEventListener('mouseup', this.onResizerMouseUp)
+      console.log('onResizerMouseDown', e, columnIndex, this.colResizing.colWidth)
     },
 
-    onMouseMove (e) {
+    onResizerMouseMove (e) {
       const { startCursorX, columnEl, nextColumnEl, colWidth, nextColWidth } = this.colResizing
 
       this.colResizing.dragging = true
@@ -367,12 +396,11 @@ export default {
       nextColumnEl.style.width = nextColWidth - deltaX + 'px'
     },
 
-    onMouseUp (e) {
+    onResizerMouseUp (e) {
       // Remove listeners.
-      document.removeEventListener('mousemove', this.onMouseMove)
-      document.removeEventListener('mouseup', this.onMouseUp)
-      console.log('onMouseUp', e, this.colResizing.columnIndex)
-      this.$set(this.headers[this.colResizing.columnIndex], 'resizing', false)
+      document.removeEventListener('mousemove', this.onResizerMouseMove)
+      document.removeEventListener('mouseup', this.onResizerMouseUp)
+      console.log('onResizerMouseUp', e, this.colResizing.columnIndex)
 
       // Reset all the variables (better for debugging).
       this.colResizing.dragging = false
@@ -481,9 +509,6 @@ $tr-border-top: 1px;
   }
 
   // Resizable columns.
-  col {border-right: 2px solid transparent;}
-  .highlight {border-right: 2px solid $border-color;}
-
   &__header--resizable {position: relative;}
   &__col-resizer {
     position: absolute;
@@ -503,14 +528,7 @@ $tr-border-top: 1px;
       bottom: 0;
       transform: translateX(-50%);
     }
-  }
-
-  // &__header--resizing &__col-resizer:before, &__col-resizer:hover:before {
-  //   border-right-width: 2px;
-  // }
-
-  &__header--resizing &__col-resizer:before {
-    border-left-color: rgba(0, 0, 0, 0.25);
+    &--hover:before, &--active:before {border-right-width: 2px;}
   }
 
   // Progress bar when loading.
