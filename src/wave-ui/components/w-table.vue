@@ -31,10 +31,11 @@
           w-icon.w-table__header-sort(
             v-if="header.sortable !== false && header.align !== 'right'"
             :class="headerSortClasses(header)") wi-arrow-down
+          //- Notes: prevent click on header (`.stop`), which triggers sorting & DOM refresh.
           span.w-table__col-resizer(
             v-if="i < headers.length - 1 && resizableColumns"
             :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === i }"
-            @click.stop="/* Prevent click on header, which triggers sorting & DOM refresh. */")
+            @click.stop)
     tbody
       //- Progress bar.
       tr.w-table__progress-bar(v-if="loading")
