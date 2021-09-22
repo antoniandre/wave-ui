@@ -1,6 +1,10 @@
 <template lang="pug">
 .w-table-wrap(:class="wrapClasses")
-  table.w-table(:class="classes")
+  table.w-table(
+    :class="classes"
+    @mousedown="onMouseDown"
+    @mouseover="onMouseOver"
+    @mouseout="onMouseOut")
     colgroup
       col.w-table__col(
         v-for="(header, i) in headers"
@@ -30,9 +34,6 @@
           span.w-table__col-resizer(
             v-if="i < headers.length - 1 && resizableColumns"
             :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === i }"
-            @mouseenter="onResizerMouseEnter($event, j)"
-            @mouseleave="onResizerMouseLeave"
-            @mousedown="onResizerMouseDown($event, i)"
             @click.stop="/* Prevent click on header, which triggers sorting & DOM refresh. */")
     tbody
       //- Progress bar.
@@ -49,7 +50,7 @@
       //- Normal rows.
       template(v-else)
         template(v-for="(item, i) in sortedItems")
-          //- Full tr slot.
+          //- Fully custom tr (`item` slot).
           slot(
             v-if="$scopedSlots['item']"
             name="item"
@@ -92,10 +93,7 @@
                   :index="i + 1")
                 span.w-table__col-resizer(
                   v-if="j < headers.length - 1 && resizableColumns"
-                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }"
-                  @mouseenter="onResizerMouseEnter($event, j)"
-                  @mouseleave="onResizerMouseLeave"
-                  @mousedown="onResizerMouseDown($event, j)")
+                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
 
               td.w-table__cell(
                 v-else
@@ -105,10 +103,7 @@
                 div(v-html="item[header.key] || ''")
                 span.w-table__col-resizer(
                   v-if="j < headers.length - 1 && resizableColumns"
-                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }"
-                  @mouseenter="onResizerMouseEnter($event, j)"
-                  @mouseleave="onResizerMouseLeave"
-                  @mousedown="onResizerMouseDown($event, j)")
+                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
 
           //- Expanded row.
           tr.w-table__row.w-table__row--expanded(v-if="expandedRowsByUid[item._uid]")
@@ -117,10 +112,7 @@
                 slot(name="expanded-row" :item="item" :index="i + 1")
               span.w-table__col-resizer(
                 v-if="j < headers.length - 1 && resizableColumns"
-                :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }"
-                @mouseenter="onResizerMouseEnter($event, j)"
-                @mouseleave="onResizerMouseLeave"
-                @mousedown="onResizerMouseDown($event, j)")
+                :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
 </template>
 
 <script>
@@ -357,29 +349,37 @@ export default {
       this.$emit('row-click', { item, index })
     },
 
-    onResizerMouseEnter (e, columnIndex) {
-      this.colResizing.hover = columnIndex
+    // Attach 1 single event listener on the table rather than 1 on each resizer.
+    onMouseDown (e) {
+      if (e.target.classList.contains('w-table__col-resizer')) {
+        this.colResizing.columnIndex = +e.target.parentNode.cellIndex
+        this.colResizing.startCursorX = e.pageX // x-axis coordinate at drag start.
+
+        // Applying width on colgroup > col works with & without `no-headers`.
+        // So it's better than setting a condition to apply on first row tds in case of no-headers.
+        this.colResizing.columnEl = this.$el.querySelector(`col:nth-child(${this.colResizing.columnIndex + 1})`)
+        this.colResizing.nextColumnEl = this.colResizing.columnEl.nextSibling
+        this.colResizing.colWidth = this.colResizing.columnEl.offsetWidth
+        this.colResizing.nextColWidth = this.colResizing.nextColumnEl.offsetWidth
+
+        // Now that we've grabbed the resizer, bind the mousemove & mouseup events to the whole document.
+        document.addEventListener('mousemove', this.onResizerMouseMove)
+        document.addEventListener('mouseup', this.onResizerMouseUp)
+      }
     },
 
-    onResizerMouseLeave () {
-      this.colResizing.hover = false
+    // Attach 1 single event listener on the table rather than 1 on each resizer.
+    onMouseOver ({ target }) {
+      // On col resizer mouseover.
+      if (target.classList.contains('w-table__col-resizer')) {
+        this.colResizing.hover = +target.parentNode.cellIndex
+      }
     },
 
-    onResizerMouseDown (e, columnIndex) {
-      this.colResizing.columnIndex = columnIndex
-      this.colResizing.startCursorX = e.pageX // x-axis coordinate at drag start.
-
-      // Applying width on colgroup > col works with & without `no-headers`.
-      // So it's better than setting a condition to apply on first row tds in case of no-headers.
-      this.colResizing.columnEl = this.$el.querySelector(`col:nth-child(${columnIndex + 1})`)
-      this.colResizing.nextColumnEl = this.colResizing.columnEl.nextSibling
-      this.colResizing.colWidth = this.colResizing.columnEl.offsetWidth
-      this.colResizing.nextColWidth = this.colResizing.nextColumnEl.offsetWidth
-
-      // Now that we've grabbed the resizer, bind the mousemove & mouseup events to the whole document.
-      document.addEventListener('mousemove', this.onResizerMouseMove)
-      document.addEventListener('mouseup', this.onResizerMouseUp)
-      console.log('onResizerMouseDown', e, columnIndex, this.colResizing.colWidth)
+    // Attach 1 single event listener on the table rather than 1 on each resizer.
+    onMouseOut ({ target }) {
+      // On col resizer mouseout.
+      if (target.classList.contains('w-table__col-resizer')) this.colResizing.hover = false
     },
 
     onResizerMouseMove (e) {
@@ -403,7 +403,6 @@ export default {
       // Remove listeners.
       document.removeEventListener('mousemove', this.onResizerMouseMove)
       document.removeEventListener('mouseup', this.onResizerMouseUp)
-      console.log('onResizerMouseUp', e, this.colResizing.columnIndex)
 
       // Reset all the variables (better for debugging).
       this.colResizing.dragging = false
