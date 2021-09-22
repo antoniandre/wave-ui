@@ -29,6 +29,11 @@ main
         li #[strong.code w-input]: Support input type file.
 
     li.minor
+      strong.version v1.38.0
+      ul
+        li #[strong.code w-table]: Added a column resizing option.
+
+    li.minor
       strong.version v1.37.0
       strong.mt2.d-block UI components
       ul
