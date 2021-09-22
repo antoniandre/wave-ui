@@ -167,6 +167,36 @@ div
         }
       })
 
+  title-link(h2) Built-in column resizing
+  p You can resize the column by dragging their edge left or right.
+  example
+    w-table(:headers="table1.headers" :items="table1.items" resizable-columns)
+    //- template(#pug).
+      w-table(:headers="table.headers" :items="table.items" resizable-columns)
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        resizable-columns&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ]
+        }
+      })
+
   title-link(h2) Initial Sorting
   p.
     To make the sorting API very easy to use and remember (and avoid complex array or object structures),
