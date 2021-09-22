@@ -117,9 +117,7 @@
 
 <script>
 /**
- * @todo: (Resizing)
- *    - Recalc. on browser resize.
- *    - When dragging a col, max out the width to full width of the container so it does not behave weirdly.
+ * @todo: (Column Resizing) Recalc. on browser resize.
  */
 
 import { consoleError } from '../utils/console'
@@ -382,21 +380,45 @@ export default {
       if (target.classList.contains('w-table__col-resizer')) this.colResizing.hover = false
     },
 
+    /**
+     * Notes:
+     * Make sure there is no change of variable that would cause a DOM refresh,
+     * and glitch while dragging.
+     * this.$set(this.headers[columnIndex], 'width', colWidth + deltaX)
+
+     * If using the width attribute with variable (so data-driven) and not `style.width`,
+     * any later change of variable would cause a DOM refresh, and lose the current DOM state
+     * (losing the 2 columns width). So do a direct DOM manipulation using `.style.width`.
+     */
     onResizerMouseMove (e) {
       const { startCursorX, columnEl, nextColumnEl, colWidth, nextColWidth } = this.colResizing
 
       this.colResizing.dragging = true
       const deltaX = e.pageX - startCursorX
 
-      // Make sure there is no change of variable that would cause a DOM refresh,
-      // and glitch while dragging.
-      // this.$set(this.headers[columnIndex], 'width', colWidth + deltaX)
+      const maxWidth = colWidth + nextColWidth
+      const newColWidth = colWidth + deltaX
+      const newNextColWidth = nextColWidth - deltaX
 
-      // If using the width attribute with variable (so data-driven) and not `style.width`,
-      // any later change of variable would cause a DOM refresh, and lose the current DOM state
-      // (losing the 2 columns width). So do a direct DOM manipulation using `.style.width`.
+      // 1. Apply the change of width.
       columnEl.style.width = colWidth + deltaX + 'px'
       nextColumnEl.style.width = nextColWidth - deltaX + 'px'
+
+      // 2. Check if we went too far (the width applyed is different than the browser-computed one).
+      const minWidthReached = deltaX < 0 && columnEl.offsetWidth > newColWidth
+      const maxWidthReached = deltaX > 0 && nextColumnEl.offsetWidth > newNextColWidth
+
+      // 3. If we went too far, correct the value of both cells widths.
+      // Make sure we don't shrink enough to push other left cells.
+      if (minWidthReached) {
+        columnEl.style.width = columnEl.offsetWidth + 'px'
+        nextColumnEl.style.width = maxWidth - columnEl.offsetWidth + 'px'
+      }
+      // Make sure we don't grow enough to push other right cells.
+      else if (maxWidthReached) {
+        columnEl.style.width = maxWidth - nextColumnEl.offsetWidth + 'px'
+        nextColumnEl.style.width = nextColumnEl.offsetWidth + 'px'
+      }
     },
 
     onResizerMouseUp (e) {
