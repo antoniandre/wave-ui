@@ -1,13 +1,17 @@
 <template lang="pug">
 .w-table-wrap(:class="wrapClasses")
   table.w-table(:class="classes")
+    colgroup
+      col.w-table__col(
+        v-for="(header, i) in headers"
+        :key="i"
+        :width="header.width || null")
     thead(v-if="!noHeaders")
       tr
         th.w-table__header(
           v-for="(header, i) in headers"
           :key="i"
           @click="header.sortable !== false && sortTable(header)"
-          :width="header.width || null"
           :class="headerClasses(header)")
           w-icon.w-table__header-sort(
             v-if="header.sortable !== false && header.align === 'right'"
@@ -63,7 +67,6 @@
               td.w-table__cell(
                 v-if="$scopedSlots[`item-cell.${header.key}`] || $scopedSlots[`item-cell.${j + 1}`] || $scopedSlots['item-cell']"
                 :key="`${j}-a`"
-                :width="(noHeaders && !j && header.width) || null"
                 :data-label="header.label"
                 :class="`text-${header.align || 'left'}`")
                 slot(
@@ -97,7 +100,6 @@
               td.w-table__cell(
                 v-else
                 :key="`${j}-b`"
-                :width="(noHeaders && !j && header.width) || null"
                 :data-label="header.label"
                 :class="`text-${header.align || 'left'}`")
                 div(v-html="item[header.key] || ''")
@@ -367,8 +369,9 @@ export default {
       this.colResizing.columnIndex = columnIndex
       this.colResizing.startCursorX = e.pageX // x-axis coordinate at drag start.
 
-      const cellToResize = this.noHeaders ? 'td' : 'th'
-      this.colResizing.columnEl = this.$el.querySelector(`${cellToResize}:nth-child(${columnIndex + 1})`)
+      // Applying width on colgroup > col works with & without `no-headers`.
+      // So it's better than setting a condition to apply on first row tds in case of no-headers.
+      this.colResizing.columnEl = this.$el.querySelector(`col:nth-child(${columnIndex + 1})`)
       this.colResizing.nextColumnEl = this.colResizing.columnEl.nextSibling
       this.colResizing.colWidth = this.colResizing.columnEl.offsetWidth
       this.colResizing.nextColWidth = this.colResizing.nextColumnEl.offsetWidth
