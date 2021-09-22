@@ -29,7 +29,7 @@ div
       })
 
   title-link(h2) When there is no data
-  p When there is no data, a default text will be diplayed. You can override it via the #[code no-data] slot.
+  p When there is no data, a default text will be displayed. You can override it via the #[code no-data] slot.
   example
     w-table(:headers="table1.headers" :items="[]")
     br
@@ -200,7 +200,7 @@ div
   title-link(h2) Initial Sorting
   p.
     To make the sorting API very easy to use and remember (and avoid complex array or object structures),
-    the #[strong.code w-table]'s sorting is defined with a header key string preceded with a #[code +] for ASC,
+    the #[strong.code w-table]'s sorting is defined with a header key string preceded by a #[code +] for ASC,
     or a #[code -] for DESC. For instance, in this example: #[code '+firstName'].
   example
     w-table(:headers="table1.headers" :items="table1.items" :sort.sync="table1.sort")
@@ -406,7 +406,7 @@ div
           ],
           keyword: '',
           keywordFilter: keyword => item => {
-            // Concatenate all the columns into a single string for a more performant lookup.
+            // Concatenate all the columns into a single string for a faster lookup.
             const allTheColumns = `${item.id} ${item.firstName} ${item.lastName}`
 
             // Lookup the keyword variable in the string with case-insensitive flag.
@@ -1079,7 +1079,7 @@ div
 
   alert(tip)
     p.
-      To stay lean and performant, the minimum JavaScript behavior is added to the #[code w-table]
+      To stay lean and efficient, the minimum JavaScript behavior is added to the #[code w-table]
       component.#[br]
       One thing that is not calculated on the mobile layout is the labels column width (default: 6.5em).#[br]
       You can override it to set the width you want via:
