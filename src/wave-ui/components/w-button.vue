@@ -6,6 +6,7 @@ component.w-button(
   :class="classes"
   :disabled="!!disabled || null"
   v-on="listeners"
+  v-bind="$attrs"
   :style="styles")
   w-icon(v-if="icon") {{ icon }}
   slot(v-else)
