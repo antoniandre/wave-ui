@@ -1,6 +1,15 @@
 <template lang="pug">
 .w-table-wrap(:class="wrapClasses")
-  table.w-table(:class="classes")
+  table.w-table(
+    :class="classes"
+    @mousedown="onMouseDown"
+    @mouseover="onMouseOver"
+    @mouseout="onMouseOut")
+    colgroup
+      col.w-table__col(
+        v-for="(header, i) in headers"
+        :key="i"
+        :width="header.width || null")
     thead(v-if="!noHeaders")
       tr
         th.w-table__header(
@@ -22,14 +31,26 @@
           w-icon.w-table__header-sort(
             v-if="header.sortable !== false && header.align !== 'right'"
             :class="headerSortClasses(header)") wi-arrow-down
+          span.w-table__col-resizer(
+            v-if="i < headers.length - 1 && resizableColumns"
+            :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === i }"
+            @click.stop="/* Prevent click on header, which triggers sorting & DOM refresh. */")
     tbody
+      //- Progress bar.
       tr.w-table__progress-bar(v-if="loading")
         td(:colspan="headers.length")
           w-progress(tile)
           .w-table__loading-text
             slot(name="loading") Loading...
-      template(v-else-if="tableItems.length")
+      //- No data.
+      tr.no-data(v-if="!tableItems.length")
+        td.w-table__cell.text-center(:colspan="headers.length")
+          slot(name="no-data") No data to show.
+
+      //- Normal rows.
+      template(v-else)
         template(v-for="(item, i) in sortedItems" :key="i")
+          //- Fully custom tr (`item` slot).
           slot(
             v-if="$slots.item"
             name="item"
@@ -69,23 +90,35 @@
                   :item="item"
                   :label="item[header.key] || ''"
                   :index="i + 1")
+                span.w-table__col-resizer(
+                  v-if="j < headers.length - 1 && resizableColumns"
+                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
+
               td.w-table__cell(
                 v-else
                 :key="`${j}-b`"
                 :data-label="header.label"
-                :class="`text-${header.align || 'left'}`"
-                v-html="item[header.key] || ''")
+                :class="`text-${header.align || 'left'}`")
+                div(v-html="item[header.key] || ''")
+                span.w-table__col-resizer(
+                  v-if="j < headers.length - 1 && resizableColumns"
+                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
+
+          //- Expanded row.
           tr.w-table__row.w-table__row--expanded(v-if="expandedRowsByUid[item._uid]")
             td.w-table__cell(:colspan="headers.length")
               div(v-if="expandedRowsByUid[item._uid]")
                 slot(name="expanded-row" :item="item" :index="i + 1")
-
-      tr.no-data(v-else)
-        td.w-table__cell.text-center(:colspan="headers.length")
-          slot(name="no-data") No data to show.
+              span.w-table__col-resizer(
+                v-if="j < headers.length - 1 && resizableColumns"
+                :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
 </template>
 
 <script>
+/**
+ * @todo: (Column Resizing) Recalc. on browser resize.
+ */
+
 import { consoleError } from '../utils/console'
 
 export default {
@@ -133,7 +166,8 @@ export default {
     uidKey: { type: String, default: 'id' },
 
     filter: { type: Function },
-    mobileBreakpoint: { type: Number, default: 0 }
+    mobileBreakpoint: { type: Number, default: 0 },
+    resizableColumns: { type: Boolean }
   },
 
   emits: ['row-select', 'row-expand', 'row-click', 'update:sort', 'update:selected-rows', 'update:expanded-rows'],
@@ -141,7 +175,18 @@ export default {
   data: () => ({
     activeSorting: [],
     selectedRowsInternal: [], // Array of uids.
-    expandedRowsInternal: [] // Array of uids.
+    expandedRowsInternal: [], // Array of uids.
+    // Column resizing feature.
+    colResizing: {
+      dragging: false,
+      hover: false, // False or a column number starting from 0.
+      columnIndex: null, // Column number starting from 0.
+      startCursorX: null,
+      colWidth: null,
+      nextColWidth: null,
+      columnEl: null,
+      nextColumnEl: null
+    }
   }),
 
   computed: {
@@ -192,6 +237,8 @@ export default {
     classes () {
       return {
         'w-table--mobile': this.isMobile || null,
+        'w-table--resizable-cols': this.resizableColumns || null,
+        'w-table--resizing': this.colResizing.dragging,
         'w-table--fixed-header': this.fixedHeaders
       }
     },
@@ -214,7 +261,8 @@ export default {
   methods: {
     headerClasses (header) {
       return {
-        'w-table__header--sortable': header.sortable !== false,
+        'w-table__header--sortable': header.sortable !== false, // Can also be falsy with `0`.
+        'w-table__header--resizable': !!this.resizableColumns,
         [`text-${header.align || 'left'}`]: true
       }
     },
@@ -296,6 +344,95 @@ export default {
       }
 
       this.$emit('row-click', { item, index })
+    },
+
+    // Attach 1 single event listener on the table rather than 1 on each resizer.
+    onMouseDown (e) {
+      if (e.target.classList.contains('w-table__col-resizer')) {
+        this.colResizing.columnIndex = +e.target.parentNode.cellIndex
+        this.colResizing.startCursorX = e.pageX // x-axis coordinate at drag start.
+
+        // Applying width on colgroup > col works with & without `no-headers`.
+        // So it's better than setting a condition to apply on first row tds in case of no-headers.
+        this.colResizing.columnEl = this.$el.querySelector(`col:nth-child(${this.colResizing.columnIndex + 1})`)
+        this.colResizing.nextColumnEl = this.colResizing.columnEl.nextSibling
+        this.colResizing.colWidth = this.colResizing.columnEl.offsetWidth
+        this.colResizing.nextColWidth = this.colResizing.nextColumnEl.offsetWidth
+
+        // Now that we've grabbed the resizer, bind the mousemove & mouseup events to the whole document.
+        document.addEventListener('mousemove', this.onResizerMouseMove)
+        document.addEventListener('mouseup', this.onResizerMouseUp)
+      }
+    },
+
+    // Attach 1 single event listener on the table rather than 1 on each resizer.
+    onMouseOver ({ target }) {
+      // On col resizer mouseover.
+      if (target.classList.contains('w-table__col-resizer')) {
+        this.colResizing.hover = +target.parentNode.cellIndex
+      }
+    },
+
+    // Attach 1 single event listener on the table rather than 1 on each resizer.
+    onMouseOut ({ target }) {
+      // On col resizer mouseout.
+      if (target.classList.contains('w-table__col-resizer')) this.colResizing.hover = false
+    },
+
+    /**
+     * Notes:
+     * Make sure there is no change of variable that would cause a DOM refresh,
+     * and glitch while dragging.
+     * this.$set(this.headers[columnIndex], 'width', colWidth + deltaX)
+
+     * If using the width attribute with variable (so data-driven) and not `style.width`,
+     * any later change of variable would cause a DOM refresh, and lose the current DOM state
+     * (losing the 2 columns width). So do a direct DOM manipulation using `.style.width`.
+     */
+    onResizerMouseMove (e) {
+      const { startCursorX, columnEl, nextColumnEl, colWidth, nextColWidth } = this.colResizing
+
+      this.colResizing.dragging = true
+      const deltaX = e.pageX - startCursorX
+
+      const maxWidth = colWidth + nextColWidth
+      const newColWidth = colWidth + deltaX
+      const newNextColWidth = nextColWidth - deltaX
+
+      // 1. Apply the change of width.
+      columnEl.style.width = colWidth + deltaX + 'px'
+      nextColumnEl.style.width = nextColWidth - deltaX + 'px'
+
+      // 2. Check if we went too far (the width applyed is different than the browser-computed one).
+      const minWidthReached = deltaX < 0 && columnEl.offsetWidth > newColWidth
+      const maxWidthReached = deltaX > 0 && nextColumnEl.offsetWidth > newNextColWidth
+
+      // 3. If we went too far, correct the value of both cells widths.
+      // Make sure we don't shrink enough to push other left cells.
+      if (minWidthReached) {
+        columnEl.style.width = columnEl.offsetWidth + 'px'
+        nextColumnEl.style.width = maxWidth - columnEl.offsetWidth + 'px'
+      }
+      // Make sure we don't grow enough to push other right cells.
+      else if (maxWidthReached) {
+        columnEl.style.width = maxWidth - nextColumnEl.offsetWidth + 'px'
+        nextColumnEl.style.width = nextColumnEl.offsetWidth + 'px'
+      }
+    },
+
+    onResizerMouseUp (e) {
+      // Remove listeners.
+      document.removeEventListener('mousemove', this.onResizerMouseMove)
+      document.removeEventListener('mouseup', this.onResizerMouseUp)
+
+      // Reset all the variables (better for debugging).
+      this.colResizing.dragging = false
+      this.colResizing.columnIndex = null
+      this.colResizing.startCursorX = null
+      this.colResizing.columnEl = null
+      this.colResizing.nextColumnEl = null
+      this.colResizing.colWidth = null
+      this.colResizing.nextColWidth = null
     }
   },
 
@@ -335,6 +472,8 @@ export default {
 </script>
 
 <style lang="scss">
+$tr-border-top: 1px;
+
 .w-table-wrap {
   position: relative;
   border-radius: $border-radius;
@@ -349,6 +488,12 @@ export default {
   min-height: 100%;
   border-collapse: collapse;
   border: none;
+
+  &--resizing {
+    &, * {cursor: col-resize;}
+
+    user-select: none;
+  }
 
   // Table headers.
   // ------------------------------------------------------
@@ -386,6 +531,29 @@ export default {
     &--active {opacity: 0.7;}
   }
 
+  // Resizable columns.
+  &__header--resizable {position: relative;}
+  &__col-resizer {
+    position: absolute;
+    right: -5px;
+    top: -$tr-border-top;
+    bottom: 0;
+    width: 10px;
+    cursor: col-resize;
+    z-index: 1;
+
+    &:before {
+      content: '';
+      border-right: $border;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      transform: translateX(-50%);
+    }
+    &--hover:before, &--active:before {border-right-width: 2px;}
+  }
+
   // Progress bar when loading.
   &__progress-bar:nth-child(odd) {background: none;}
   &__progress-bar td {padding: 0;height: 1px;}
@@ -405,7 +573,7 @@ export default {
 
   // Table body.
   // ------------------------------------------------------
-  tbody tr {border-top: 1px solid rgba(0, 0, 0, 0.06);}
+  tbody tr {border-top: $tr-border-top solid rgba(0, 0, 0, 0.06);}
   // Don't apply built-in bg color if a bg color is already found on a tr.
   tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: $table-tr-odd-color;}
   tbody .w-table__row:hover:not(.no-data):not([class*="--bg"]) {background-color: $table-tr-hover-color;}
@@ -427,12 +595,15 @@ export default {
   &__header:first-child, &__cell:first-child {padding-left: 2 * $base-increment;}
   &__header:last-child, &__cell:last-child {padding-right: 2 * $base-increment;}
 
+  &--resizable-cols &__cell {position: relative;}
+
   .no-data &__cell {
     background-color: rgba(255, 255, 255, 0.2);
     padding: (2 * $base-increment) $base-increment;
   }
 }
 
+// Mobile layout.
 .w-table--mobile {
   thead {display: none;}
   td {display: block;}
