@@ -21,12 +21,20 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
-    //- li Added the #[code hide-error] option on all the form elements.
+    //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+
+    li.minor
+      strong.version v1.39.0
+      ul
+        li #[strong.code w-input]: Support input type file &amp; display images preview.
+        li.
+          #[strong CSS]: Allow disabling the CSS layout classes via the #[code $use-layout-classes]
+          SCSS variable. #[issue-link 61]
 
     li.minor
       strong.version v1.38.0
       ul
-        li #[strong.code w-input]: Support input type file.
+        li #[strong.code w-table]: Added a column resizing option.
 
     li.minor
       strong.version v1.37.0
