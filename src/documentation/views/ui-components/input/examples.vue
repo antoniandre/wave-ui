@@ -590,18 +590,46 @@ div
         readonly&gt;
       &lt;/w-input&gt;
 
-  title-link(h2 slug="file-input")
-    | File input
-    w-tag.px1.ml1(color="red" outline) more options soon
+  title-link(h2 slug="file-input") File input
+  p.
+    By default, the file input will show a preview of the image you are uploading.#[br]
+    If the file can't be previewed a file icon will show up to the right of the field instead of a preview.
+  p.
+    When uploading a larger file, a spinner will show up to the right of the field until
+    the file is completely transfered.
   example
-    w-input(type="file") file
-  title-link(h3) Preview &amp; accept attribute
+    w-input(type="file") File
+    //- template(#pug).
+      w-input(type="file") File
+    template(#html).
+      &lt;w-input type="file"&gt;File&lt;/w-input&gt;
+
+  title-link(h3) Specific file extensions
   example
-    w-input(type="file" preview label="File" accept=".jpg, .jpeg, .png, .gif, .svg")
+    w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg")
+    //- template(#pug).
+      w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg")
+    template(#html).
+      &lt;w-input
+        type="file"
+        label="File"
+        accept=".jpg, .jpeg, .png, .gif, .svg"&gt;
+      &lt;/w-input&gt;
+
   title-link(h3) Multiple
   example
-    w-input(type="file" multiple label="File" accept=".jpg, .jpeg, .png, .gif, .svg")
+    w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg" multiple)
+    //- template(#pug).
+      w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg" multiple)
+    template(#html).
+      &lt;w-input
+        type="file"
+        label="File"
+        accept=".jpg, .jpeg, .png, .gif, .svg"
+        multiple&gt;
+      &lt;/w-input&gt;
 
+  //- OTHER TYPES.
   title-link(h2) Types
   p The default type is "#[span.code text]" but the types bellow are also supported.
   p.
