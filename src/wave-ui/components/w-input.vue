@@ -59,7 +59,7 @@ component(
           span.w-input__no-file(v-if="!inputFiles.length && isFocused" key="no-file")
             slot(name="no-file")
               template(v-if="$slots['no-file'] === undefined") No file
-          span(v-for="(file, i) in inputFiles" :key="i")
+          span(v-for="(file, i) in inputFiles" :key="file.lastModified")
             | {{ i ? ', ': '' }}
             span.filename(:key="`${i}b`") {{ file.base }}
             | {{ file.extension }}
