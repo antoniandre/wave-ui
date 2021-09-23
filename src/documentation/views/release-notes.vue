@@ -27,7 +27,7 @@ main
       strong.version v1.40.0
       ul
         li.
-          #[strong.code w-tabs] Now maintain the stte of tabs contents when switching
+          #[strong.code w-tabs] Now maintain the state of tabs contents when switching
           (keep-alive). #[issue-link 65]
 
     li.minor
