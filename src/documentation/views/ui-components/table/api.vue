@@ -14,7 +14,23 @@ div
 <script>
 import WTable from '@/wave-ui/components/w-table.vue'
 
-const propsDescs = {}
+const propsDescs = {
+  items: '',
+  headers: 'An array of objects to define the columns of the table. The headers are always required, even when hidden.',
+  noHeaders: 'The table headings will be hidden. Only the table data will be visible.',
+  fixedHeaders: '',
+  loading: 'When set to true, a progress bar will be displayed. Convenient when the table data is not ready.',
+  sort: '',
+  expandableRows: '',
+  expandedRows: '',
+  selectableRows: '',
+  selectedRows: '',
+  forceSelection: '',
+  uidKey: '',
+  filter: 'An external filter function for the table.',
+  mobileBreakpoint: 'When a number is given (in pixel), any device screen width under this number will display the table in mobile layout. Leave undefined to disable.',
+  resizableColumns: 'When this option is on, the columns will be separated by borders that you can drag to resize.'
+}
 
 const slots = {
   'no-data': { description: 'Provide a custom template when there is no data.' },
