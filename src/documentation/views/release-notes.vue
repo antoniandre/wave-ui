@@ -24,6 +24,13 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.40.0
+      ul
+        li.
+          #[strong.code w-tabs] Now maintain the stte of tabs contents when switching
+          (keep-alive). #[issue-link 65]
+
+    li.minor
       strong.version v1.39.0
       ul
         li #[strong.code w-input]: Support input type file &amp; display images preview.
