@@ -62,7 +62,7 @@
     "splitpanes": "^3.0.4",
     "vite": "^2.3.3",
     "vite-plugin-pug": "^0.3.0",
-    "vue": "^3.2.13",
+    "vue": "^3.2.16",
     "vue-cal": "^4.2.0",
     "vue-router": "^4.0.8",
     "vueperslides": "^3.3.0"
