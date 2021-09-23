@@ -168,7 +168,7 @@ div
       })
 
   title-link(h2) Built-in column resizing
-  p You can resize the column by dragging their edge left or right.
+  p You can resize the columns by dragging their edges left or right.
   example
     w-table(:headers="table1.headers" :items="table1.items" resizable-columns)
     //- template(#pug).
