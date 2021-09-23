@@ -55,10 +55,13 @@ component(
           @change="onFileChange"
           :multiple="multiple || null"
           v-bind="attrs")
-        label.w-input__input(:for="`w-input--${_.uid}`")
-          template(v-for="(file, i) in inputFiles")
+        transition-group.w-input__input.w-input__input--file(tag="label" name="fade" :for="`w-input--${_.uid}`")
+          span.w-input__no-file(v-if="!inputFiles.length && isFocused" key="no-file")
+            slot(name="no-file")
+              template(v-if="$slots['no-file'] === undefined") No file
+          span(v-for="(file, i) in inputFiles" :key="file.lastModified")
             | {{ i ? ', ': '' }}
-            span {{ file.base }}
+            span.filename(:key="`${i}b`") {{ file.base }}
             | {{ file.extension }}
 
       template(v-if="labelPosition === 'inside' && showLabelInside")
@@ -78,7 +81,18 @@ component(
         :for="`w-input--${_.uid}`"
         @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
-    img.w-input__file-preview(v-for="(file, i) in inputFiles" :key="i" :src="file.preview")
+    //- Files preview.
+    label.d-flex(v-if="type === 'file' && inputFiles.length" :for="`w-input--${_.uid}`")
+      template(v-for="(file, i) in inputFiles")
+        i.w-icon.wi-spinner.w-icon--spin.size--sm.w-input__file-preview.primary(
+          v-if="file.progress < 100"
+          :key="`${i}a`")
+        img.w-input__file-preview(
+          v-else-if="file.preview"
+          :key="`${i}b`"
+          :src="file.preview"
+          alt="")
+        i.w-icon.wi-file.w-input__file-preview.primary(v-else :key="`${i}c`")
 
     //- Right label.
     template(v-if="labelPosition === 'right'")
@@ -189,6 +203,7 @@ export default {
     classes () {
       return {
         'w-input': true,
+        'w-input--file': this.type === 'file',
         'w-input--disabled': this.isDisabled,
         'w-input--readonly': this.isReadonly,
         [`w-input--${this.hasValue ? 'filled' : 'empty'}`]: true,
@@ -206,6 +221,7 @@ export default {
       return {
         [this.valid === false ? 'error' : this.color]: this.color || this.valid === false,
         [`${this.bgColor}--bg`]: this.bgColor,
+        'w-input__input-wrap--file': this.type === 'file',
         'w-input__input-wrap--round': this.round,
         'w-input__input-wrap--tile': this.tile,
         // Box adds a padding on input. If there is a bgColor or shadow, a padding is needed.
@@ -235,16 +251,8 @@ export default {
       this.$emit('blur', e)
     },
 
+    // For file input.
     onFileChange (e) {
-      // [...e.target.files].forEach((file, i) => {
-      //   this.inputFiles[i] = Object.assign({}, file)
-      //   this.filePreview(file)
-      // })
-
-      // this.inputFiles = [...e.target.files].map(file => {
-      //   this.filePreview(file)
-      //   return file
-      // })
       this.inputFiles = [...e.target.files].map(original => {
         const [, base, extension] = original.name.match(/^(.*)(\..*?)$/)
         const file = reactive({
@@ -254,7 +262,8 @@ export default {
           type: original.type,
           size: original.size,
           lastModified: original.lastModified,
-          preview: ''
+          preview: null,
+          progress: 0
         })
 
         this.filePreview(original, file)
@@ -264,14 +273,22 @@ export default {
       this.$emit('update:modelValue', this.inputFiles)
     },
 
+    // For file input.
     filePreview (original, file) {
-      // Check if the file is an image.
-      if (original.type && !original.type.startsWith('image/')) return
-
       const reader = new FileReader()
-      reader.addEventListener('load', e => {
-        file.preview = e.target.result
+
+      // Check if the file is an image and set a preview image.
+      if (original.type && original.type.startsWith('image/')) {
+        reader.addEventListener('load', e => {
+          file.preview = e.target.result
+        })
+      }
+
+      // Used to display a spinner while the file is loading.
+      reader.addEventListener('progress', e => {
+        if (e.loaded && e.total) file.progress = e.loaded * 100 / e.total
       })
+
       reader.readAsDataURL(original)
     }
   },
@@ -295,6 +312,11 @@ $inactive-color: #777;
   align-items: center;
   font-size: $base-font-size;
 
+  &--file {
+    flex-wrap: nowrap;
+    align-items: flex-end;
+  }
+
   // Input field wrapper.
   // ------------------------------------------------------
   &__input-wrap {
@@ -309,6 +331,9 @@ $inactive-color: #777;
 
     .w-input--floating-label & {margin-top: 3 * $base-increment;}
     .w-input[class^="bdrs"] &, .w-input[class*=" bdrs"] & {border-radius: inherit;}
+
+    // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
+    &--file {min-width: 0;}
 
     &--underline {
       border-bottom-left-radius: initial;
@@ -409,6 +434,32 @@ $inactive-color: #777;
     opacity: 0;
   }
 
+  &__input--file {
+    > span {
+      display: inline-flex;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .filename {
+      margin-left: 0.2em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    > span:first-child .filename {margin-left: 0;}
+  }
+
+  &__no-file {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    color: $disabled-color;
+  }
+
   &__file-preview {
     margin-left: 4px;
     max-height: 2em;
@@ -474,6 +525,7 @@ $inactive-color: #777;
     .w-input--floating-label & {
       transform-origin: 0 0;
       transition: $transition-duration ease;
+      will-change: transform;
     }
 
     // move label with underline style.

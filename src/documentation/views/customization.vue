@@ -151,6 +151,20 @@ main
   alert.mt6.py3(success).
     This means you can control all the css rules specificity and consequently their priority!
 
+  title-link(h2) Disable the CSS layout classes (not recommended)
+  p.
+    You may want to use another CSS framework (like Tailwind) instead of the Wave UI's built-in CSS
+    layout classes.#[br]
+    This is not recommended, but it's possible to disable the CSS layout classes of Wave UI so they
+    don't conflict with the external library.#[br]
+    For this, follow the above steps in #[a(href="#modify-your-config") Modify your config], then you
+    can set the #[code.pink $use-layout-classes] variable to #[code false].
+  p
+    | You can have a look at all the classes that will not be genererated in this file:
+    a.ml2(href="https://github.com/antoniandre/wave-ui/blob/master/src/wave-ui/scss/_layout.scss" target="_blank")
+      | layout.scss on Github
+      w-icon.ml1(sm) mdi mdi-open-in-new
+
   title-link(h2 slug="presets")
     | Presets
     w-tag.ml3(bg-color="red-light1" lg color="white") Coming soon
