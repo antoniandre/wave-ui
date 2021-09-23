@@ -27,26 +27,30 @@
     .w-tabs__bar-extra(v-if="$scopedSlots['tabs-bar-extra']")
       slot(name="tabs-bar-extra")
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
+
   .w-tabs__content-wrap(v-if="tabsItems.length")
     transition(:name="transitionName" :mode="transitionMode")
-      .w-tabs__content(v-if="activeTab" :key="activeTab._index" :class="contentClass")
-        slot(
-          v-if="$scopedSlots[`item-content.${activeTab.id || activeTab._index + 1}`]"
-          :name="`item-content.${activeTab.id || activeTab._index + 1}`"
-          :item="getOriginalItem(activeTab)"
-          :index="activeTab._index + 1"
-          :active="activeTab._index === activeTabIndex")
-        slot(
-          v-else
-          name="item-content"
-          :item="getOriginalItem(activeTab)"
-          :index="activeTab._index + 1"
-          :active="activeTab._index === activeTabIndex")
-          div(v-html="activeTab[itemContentKey]")
+      keep-alive
+        //- Keep-alive only works with components, not with DOM nodes.
+        tab-content(:class="contentClass" :key="activeTab._index")
+          slot(
+            v-if="$scopedSlots[`item-content.${activeTab.id || activeTab._index + 1}`]"
+            :name="`item-content.${activeTab.id || activeTab._index + 1}`"
+            :item="getOriginalItem(activeTab)"
+            :index="activeTab._index + 1"
+            :active="activeTab._index === activeTabIndex")
+          slot(
+            v-else
+            name="item-content"
+            :item="getOriginalItem(activeTab)"
+            :index="activeTab._index + 1"
+            :active="activeTab._index === activeTabIndex")
+            div(v-html="activeTab[itemContentKey]")
 </template>
 
 <script>
 import Vue from 'vue'
+import TabContent from './tab-content.vue'
 
 export default {
   name: 'w-tabs',
@@ -69,6 +73,8 @@ export default {
     right: { type: Boolean },
     card: { type: Boolean }
   },
+
+  components: { TabContent },
 
   emits: ['input', 'update:modelValue', 'focus'],
 
