@@ -27,6 +27,7 @@ component(
     label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_uid}`" v-html="label")
   .w-switch__input(
     @click="$refs.input.focus();$refs.input.click()"
+    v-on="$listeners"
     :class="inputClasses")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_uid}`")
