@@ -24,6 +24,12 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.41.1
+      ul
+        li.
+          #[strong.code w-badge] Allow external event listeners binding.
+
+    li.minor
       strong.version v1.41.0
       ul
         li.
