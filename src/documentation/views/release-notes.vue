@@ -23,6 +23,13 @@ main
     //-----------------------------------------------------
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v1.41.0
+      ul
+        li.
+          #[strong.code w-menu] Allow passing down #[strong.code w-overlay] props &amp; added option for overlay class.
+          #[strong.code w-switch] Allow external event listeners binding.
+
     li.minor
       strong.version v1.40.0
       ul
