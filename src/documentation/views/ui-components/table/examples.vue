@@ -231,7 +231,7 @@ div
         :bg-color="header.hidden ? 'grey-light4' : 'primary'"
         @click.stop="header.hidden = !header.hidden"&gt;
         &lt;w-icon class="mr2"&gt;mdi mdi-eye{{ "\{\{ header.hidden ? '-off' : ''\}\}" }}&lt;/w-icon&gt;
-        | {{ "\{\{ header.label \}\}" }}
+        {{ "\{\{ header.label \}\}" }}
       &lt;/w-tag&gt;
 
       &lt;w-table
