@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-badge-wrap
+.w-badge-wrap(v-on="$listeners")
   slot
   transition(:name="`${transition}`")
     .w-badge(
