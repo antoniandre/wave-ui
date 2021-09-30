@@ -36,6 +36,8 @@
     ref="overlay"
     :value="showMenu"
     :persistent="persistent"
+    :class="overlayClass || null"
+    v-bind="overlayProps"
     :z-index="(zIndex || 200) - 1"
     @input="showMenu = false")
 </template>
@@ -86,6 +88,8 @@ export default {
     zIndex: { type: [Number, String, Boolean] },
     minWidth: { type: [Number, String] }, // can be like: `40`, `5em`, `activator`.
     overlay: { type: Boolean },
+    overlayClass: { type: String },
+    overlayProps: { type: Object }, // Allow passing down an object of props to the w-overlay component.
     persistent: { type: Boolean },
     noPosition: { type: Boolean }
   },
