@@ -32,6 +32,7 @@ specifiers:
   vue-svg-loader: ^0.16.0
   vue-template-compiler: ^2.6.14
   vueperslides: ^2.15.2
+  vuex: ^3.6.2
 
 devDependencies:
   '@babel/core': 7.14.8
@@ -65,6 +66,7 @@ devDependencies:
   vue-svg-loader: 0.16.0_vue-template-compiler@2.6.14
   vue-template-compiler: 2.6.14
   vueperslides: 2.15.2
+  vuex: 3.6.2_vue@2.6.14
 
 packages:
 
@@ -3370,6 +3372,14 @@ packages:
 
   /vueperslides/2.15.2:
     resolution: {integrity: sha512-vUBs3s70HWbWp/aiPE1C4hSF8zLjQhSoUEDK/FGl+ChTf7B0mXdx8YcIyxYKNVvDLNJx08/kpHRY9F8h0Fs/wQ==}
+    dev: true
+
+  /vuex/3.6.2_vue@2.6.14:
+    resolution: {integrity: sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==}
+    peerDependencies:
+      vue: ^2.0.0
+    dependencies:
+      vue: 2.6.14
     dev: true
 
   /which-boxed-primitive/1.0.2:
