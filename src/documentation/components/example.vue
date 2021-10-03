@@ -25,72 +25,37 @@
             text
             color="primary")
         | Edit in Codepen
+
   w-transition-expand(y)
     .example__source(v-show="showSource")
-      ssh-pre(
-        v-if="$slots.html"
-        language="html-vue"
-        label="TEMPLATE"
-        copy-button
-        @copied="copied('TEMPLATE')"
-        :reactive="reactive")
-        template(#copy-button)
-          w-icon(color="primary") mdi mdi-content-copy
-        slot(name="html")
-      w-tooltip.d-block(v-if="$slots.pug" tooltip-class="pa3 w480" color="blue")
-        template(#activator="{ on }")
-          w-alert.text-light.ma0(v-on="on" sm info no-border tile)
-            | What is Pug?
-        | Wave UI Vue templates are coded in Pug.#[br]The examples will soon be rewritten in HTML.
-        | For now, if you are not familiar with Pug, you can edit in Codepen and view the compiled HTML.#[br]
-        | But now you are here, hold on a minute and look how concise it is! You could get to like it!
-      ssh-pre(
-        v-if="$slots.pug"
-        language="pug"
-        label="TEMPLATE (PUG)"
-        copy-button
-        @copied="copied('TEMPLATE (PUG)')"
-        :reactive="reactive")
-        template(#copy-button)
-          w-icon(color="primary") mdi mdi-content-copy
-        slot(name="pug")
-      ssh-pre(
-        v-if="$slots.js"
-        language="js"
-        label="JS"
-        copy-button
-        @copied="copied('JS')"
-        :reactive="reactive")
-        template(#copy-button)
-          w-icon(color="primary") mdi mdi-content-copy
-        slot(name="js")
-      ssh-pre(
-        v-if="$slots.css"
-        language="css"
-        label="CSS"
-        copy-button
-        @copied="copied('CSS')"
-        :reactive="reactive")
-        template(#copy-button)
-          w-icon(color="primary") mdi mdi-content-copy
-        slot(name="css")
-      ssh-pre(
-        v-if="$slots.scss"
-        language="scss"
-        label="SCSS"
-        copy-button
-        @copied="copied('SCSS')"
-        :reactive="reactive")
-        template(#copy-button)
-          w-icon(color="primary") mdi mdi-content-copy
-        slot(name="scss")
-      w-notification.mr5.mt-1(
-        :value="!!showCopied"
-        transition="slide-fade-left"
-        plain
-        absolute
-        sm
-        success) {{ showCopied }} code copied to clipboard
+      w-tabs(:items="sourceCodeTabs" content-class="pa0" no-slider)
+        template(#tabs-bar-extra)
+          w-tooltip(left menu-class="sh2" detach-to=".w-app")
+            template(#activator="{ on }")
+              w-button.mr1.pa0.text-center.justify-center.d-flex(
+                v-on="on"
+                @click="usePug = !usePug"
+                round
+                text
+                width="2.3rem"
+                height="2.3rem"
+                :color="usePug ? 'brown-light1' : 'grey-light2'")
+                svg.pug-icon(
+                  width="1.9rem"
+                  height="1.9rem"
+                  viewBox="0 0 512 512")
+                  path(d="M426 123c27 13 88 79 86 84-2 4-31 29-40 38-19 44-36 75-43 41-7 42-22 38-27 58-9 43-34 44-45 52-10 10-25 4-36 10-29 11-97 13-125 1-14-7-21 3-63-25-22-22-15-32-23-47-12-21-17-7-27-55-2 39-23 18-43-35 0 0-38-34-40-38-2-5 59-71 86-84 76-35 256-34 340 0zM296 239c41 14 80 58 74 98 0 21-2 35-5 45 35-23 19-30 33-52 13-23 16-15 23-45-4-31-8-84-13-101-4-13-25-42-38-60-65-25-193-17-226-1-13 18-34 48-39 62-4 15-8 67-12 98 3 30 25 43 29 59 3 25 15 33 31 42-4-10-6-25-6-47-7-47 39-87 76-99 10-27 65-24 73 1zm7 113c0-29-23-53-41-54l1-42c34-3 30-27-4-29-26 0-45 24-4 29v42c-18 0-41 24-41 53 3-29 25-44 46-44 21 1 39 16 43 45zM166 210c0-7-7-11-14-8a9 9 0 1 0 14 8zm-36 46a35 35 0 1 1 35-60 35 35 0 0 1-35 60zm220 0a35 35 0 1 1 36-60 35 35 0 0 1-36 60zm18-46c0-7-8-11-14-8s-6 13 0 16 14-1 14-8z")
+            | Do you prefer the examples source code in Pug?#[br]The examples will also open in Pug in Codepen.
+        template(#item-content="{ item }")
+          ssh-pre(
+            v-if="$slots[item.id] !== undefined"
+            :language="item.language"
+            copy-button
+            @copied="copied(item.language)"
+            :reactive="reactive")
+            template(#copy-button)
+              w-icon(color="primary") mdi mdi-content-copy
+            slot(:name="item.id")
 </template>
 
 <script>
@@ -100,14 +65,45 @@ export default {
     externalJs: { type: String },
     externalCss: { type: String },
     fullJs: { type: Boolean },
-    reactive: { type: Boolean },
+    reactive: { type: Boolean }, // By default the pre-ssh component is not reactive.
     // An array of languages (html, pug, css, scss, js) to keep a blank Codepen template on.
     blankCodepen: { type: Array }
   },
+
   data: () => ({
     showSource: false,
     showCopied: false
   }),
+
+  computed: {
+    usePug: {
+      get () {
+        return this.$store.state.usePug
+      },
+      set (value) {
+        this.$store.commit('setUsePug', value)
+      }
+    },
+
+    sourceCodeTabs () {
+      const tabs = {
+        html: {
+          language: this.usePug ? 'pug' : 'html-vue',
+          title: this.usePug ? '&nbsp;Pug&nbsp;' : 'HTML',
+          content: ''
+        },
+        js: { language: 'js', title: 'JS', content: '' },
+        css: { language: 'css', title: 'CSS', content: '' }
+      }
+      return Object.entries(tabs)
+        .map(([key, obj]) => ({
+          ...obj,
+          id: this.usePug && key === 'html' ? 'pug' : key,
+          content: (this.$slots[key] && this.$slots[key][0].text) || ''
+        }))
+        .filter(item => item.content)
+    }
+  },
 
   methods: {
     createCodepen (e) {
@@ -142,7 +138,7 @@ export default {
       const blanks = this.blankCodepen || []
 
       // Pug & HTML.
-      if (slots.pug) {
+      if (this.usePug && slots.pug) {
         if (blanks.includes('pug')) html = slots.pug.replace(/\n+$/, '')
         else html = 'w-app#app(block)\n  ' + slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n  ')
       }
@@ -206,6 +202,11 @@ export default {
 </script>
 
 <style lang="scss">
+.pug-icon {
+  fill: currentColor;
+  margin-top: 3px;
+}
+
 .example {
   position: relative;
   margin-top: 1em;
@@ -213,6 +214,8 @@ export default {
   border: 1px solid #eee;
   background-color: #fcfcfc;
   border-radius: 3px;
+
+  .w-tabs {border-radius: 0;border-width: 1px 0 0;}
 
   .buttons {
     border-left: 1px solid #eee;
@@ -228,6 +231,11 @@ export default {
 
   &__source {position: relative;}
 
+  &__source .w-tabs__bar-item {
+    font-size: 0.95rem;
+    padding: 2px 8px;
+  }
+
   &__source .w-alert {
     padding: 2px 4px;
     font-size: 13px !important;
@@ -242,10 +250,6 @@ export default {
     border-width: 1px 0 0;
     border-radius: 0;
     line-height: 1.3;
-
-    &[data-type="pug"] {border-width: 0;}
-    & + .ssh-pre {border-top-width: 3px;}
-    &:last-child {border-radius: 0 0 4px 4px;}
   }
 
   .ssh-pre[data-label]:before {
