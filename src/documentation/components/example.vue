@@ -51,11 +51,18 @@
             v-if="$slots[item.id] !== undefined"
             :language="item.language"
             copy-button
-            @copied="copied(item.language)"
-            :reactive="reactive")
+            @copied="copied(item.title)"
+            :reactive="reactive || ['pug', 'html'].includes(item.id)")
             template(#copy-button)
-              w-icon(color="primary") mdi mdi-content-copy
+              w-icon.ma1(color="primary") mdi mdi-content-copy
             slot(:name="item.id")
+          w-notification.mr6.mt-1(
+            :value="!!showCopied"
+            transition="slide-fade-left"
+            plain
+            absolute
+            sm
+            success) {{ showCopied }} code copied to clipboard
 </template>
 
 <script>
@@ -89,7 +96,7 @@ export default {
       const tabs = {
         html: {
           language: this.usePug ? 'pug' : 'html-vue',
-          title: this.usePug ? '&nbsp;Pug&nbsp;' : 'HTML',
+          title: this.usePug ? 'Pug' : 'HTML',
           content: ''
         },
         js: { language: 'js', title: 'JS', content: '' },
