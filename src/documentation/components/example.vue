@@ -94,20 +94,28 @@ export default {
 
     sourceCodeTabs () {
       const tabs = {
-        html: {
-          language: this.usePug ? 'pug' : 'html-vue',
-          title: this.usePug ? 'Pug' : 'HTML',
-          content: ''
-        },
+        html: { language: 'html-vue', title: 'HTML', content: '' },
         js: { language: 'js', title: 'JS', content: '' },
         css: { language: 'css', title: 'CSS', content: '' }
       }
       return Object.entries(tabs)
-        .map(([key, obj]) => ({
-          ...obj,
-          id: this.usePug && key === 'html' ? 'pug' : key,
-          content: (this.$slots[key] && this.$slots[key][0].text) || ''
-        }))
+        .map(([key, obj]) => {
+          const object = {
+            ...obj,
+            id: key,
+            content: (this.$slots[key] && this.$slots[key][0].text) || ''
+          }
+
+          // If the user prefers Pug, and there is a pug source code (otherwise show HTML).
+          if (this.usePug && key === 'html' && this.$slots.pug && this.$slots.pug[0].text) {
+            object.id = 'pug'
+            object.language = 'pug'
+            object.title = 'Pug'
+            object.content = this.$slots.pug[0].text
+          }
+
+          return object
+        })
         .filter(item => item.content)
     }
   },
@@ -134,7 +142,7 @@ export default {
 
       const slots = {
         html: (this.$slots.html && this.$slots.html[0].text) || '',
-        pug: (this.$slots.pug && this.$slots.pug[0].text) || '',
+        pug: ((this.$slots.pug && this.$slots.pug[0].text) || '').replace(/(#\w+)(?=\s|\))/g, '$1=""'),
         js: (this.$slots.js && this.$slots.js[0].text) || '',
         css: (this.$slots.css && this.$slots.css[0].text) || '',
         scss: (this.$slots.scss && this.$slots.scss[0].text) || ''
