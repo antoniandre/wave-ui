@@ -142,7 +142,7 @@ export default {
 
       const slots = {
         html: (this.$slots.html && this.$slots.html[0].text) || '',
-        pug: ((this.$slots.pug && this.$slots.pug[0].text) || '').replace(/(#[\w.-]+)(?=\s|\))/gi, '$1=""'),
+        pug: ((this.$slots.pug && this.$slots.pug[0].text) || '').replace(/(#[\w.-]+)(?=\s|\))(?!\n)/gi, '$1=""'),
         js: (this.$slots.js && this.$slots.js[0].text) || '',
         css: (this.$slots.css && this.$slots.css[0].text) || '',
         scss: (this.$slots.scss && this.$slots.scss[0].text) || ''
