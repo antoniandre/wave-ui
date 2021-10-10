@@ -368,6 +368,7 @@ div
       w-button.ma1(bg-color="primary" route="/getting-started")
         | Getting started
         w-icon.ml1 wi-chevron-right
+
       w-button.ma1(
         bg-color="primary"
         route="https://github.com/antoniandre/wave-ui"
