@@ -28,6 +28,8 @@ main
       ul
         li.
           #[strong.code w-badge] Allow external event listeners binding.
+          #[strong.code w-badge] Set a line height for better text alignment while transitioning.
+          #[strong.code CSS] Slightly slow down the default transitions speed (from 0.2s to 0.25s) and sligthly increase the twist transition angle.
 
     li.minor
       strong.version v1.41.0
