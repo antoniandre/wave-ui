@@ -22,7 +22,7 @@ specifiers:
   material-design-icons: ^3.0.1
   rollup-plugin-delete: ^2.0.0
   sass: ^1.35.2
-  simple-syntax-highlighter: ^1.4.8
+  simple-syntax-highlighter: ^1.4.10
   splitpanes: ^2.3.8
   vite: ^2.4.3
   vite-plugin-pug: ^0.3.0
@@ -56,7 +56,7 @@ devDependencies:
   material-design-icons: 3.0.1
   rollup-plugin-delete: 2.0.0
   sass: 1.35.2
-  simple-syntax-highlighter: 1.4.8
+  simple-syntax-highlighter: 1.4.10
   splitpanes: 2.3.8
   vite: 2.4.3
   vite-plugin-pug: 0.3.0_vite@2.4.3
@@ -2978,8 +2978,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /simple-syntax-highlighter/1.4.8:
-    resolution: {integrity: sha512-PML9qx3BwpcZembog7NsPpChEYS/sl2F92kTMKKI/7M36buiLzouxV3QRYSHc9Du8fHhm6QUU19x4tQkICpRsA==}
+  /simple-syntax-highlighter/1.4.10:
+    resolution: {integrity: sha512-UWAa/1wdCZH+p075wzma1PdiF4XIyEz6EvHW4sCMC3RQxTmGiINjv/mG/e1k80B1BPbS2iiqTNOF4ZdG3a5jhg==}
     dev: true
 
   /slash/3.0.0:
