@@ -1,17 +1,16 @@
 <template lang="pug">
 div
-  p.
-    Setting colors on buttons is quite straightforward:
-    a text color is set via the attribute #[code color], and a background color is set via the
-    attribute #[code bg-color].#[br]
-    This allows you to easily mix a background color with a different text color of your choice.
-
   title-link(h2) Default
-  p By default (if no color or bg-color is applied) the primary color will be applied.
+  p By default (if no #[code color] or #[code bg-color] is applied) the primary color will be applied.
   w-button.ma1 default
 
   title-link(h2) Colors
   p.
+    Setting colors on buttons is quite straightforward:
+    a text color is set via the attribute #[code color], and a background color is set via the
+    attribute #[code bg-color].#[br]
+    This allows you to easily mix a background color with a different text color of your choice.#[br]#[br]
+
     Here is an example of buttons using all types of colors as a background: status colors, primary color,
     secondary color and a color palette color shade.
   p
@@ -85,7 +84,7 @@ div
     By default the #[code primary] color is considered dark as well as the four status colors:
     #[code success], #[code error], #[code warning] &amp; #[code info].
     They will therefore have a white text by default when used as a background color.#[br]
-    For the rest you can use the #[code dark] prop.
+    For the rest you can use the #[code dark] prop or set the #[code color] prop to `white`.
   example
     w-button.ma1(bg-color="primary-light3") normal
     w-icon.mx6.grey-light3(size="2.5em") mdi mdi-arrow-right
