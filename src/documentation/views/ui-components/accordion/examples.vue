@@ -12,7 +12,7 @@ div
       | v-model:
       code.ml1 {{ accordion1 }}
     template(#pug).
-      w-accordion.white--bg(v-model="accordion" :items="items")
+      w-accordion(v-model="accordion" :items="items")
 
       div.mt3
         | v-model:
@@ -53,7 +53,7 @@ div
       | v-model:
       code.ml1 {{ accordion2 }}
     template(#pug).
-      w-accordion.white--bg(v-model="accordion" :items="items")
+      w-accordion(v-model="accordion" :items="items")
 
       div.mt3
         | v-model:
@@ -91,7 +91,7 @@ div
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(v-model="accordion3" :items="itemsDisabled")
     template(#pug).
-      w-accordion.white--bg(v-model="accordion" :items="items")
+      w-accordion(v-model="accordion" :items="items")
     template(#html).
       &lt;w-accordion v-model="accordion" :items="items" /&gt;
     template(#js).
@@ -108,7 +108,7 @@ div
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items" shadow)
     template(#pug).
-      w-accordion.white--bg(:items="items" shadow)
+      w-accordion(:items="items" shadow)
     template(#html).
       &lt;w-accordion :items="items" shadow /&gt;
     template(#js).
@@ -138,10 +138,12 @@ div
     w-accordion.white--bg(:items="items" color="amber-dark1")
     w-accordion.mt6(:items="items" bg-color="yellow-light5")
     template(#pug).
-      w-accordion.white--bg(:items="items" color="amber-dark1")
+      w-accordion(:items="items" color="amber-dark1")
+
       w-accordion.mt6(:items="items" bg-color="yellow-light5")
     template(#html).
       &lt;w-accordion :items="items" color="amber-dark1"&gt;&lt;/w-accordion&gt;
+
       &lt;w-accordion class="mt6" :items="items" bg-color="yellow-light5"&gt;&lt;/w-accordion&gt;
     template(#js).
       data: () => ({
@@ -162,10 +164,14 @@ div
       })
 
   title-link(h3) Different color per item
+  p.
+    The colors are set in the data in each item object.#[br]
+    the default mapping for the color is the #[code color] key, but you can customize it with the
+    #[code item-color-key] prop.
   example(content-class="pa4 aliceblue")
     w-accordion.white--bg(:items="items2")
     template(#pug).
-      w-accordion.white--bg(:items="items")
+      w-accordion(:items="items")
     template(#html).
       &lt;w-accordion :items="items" /&gt;
     template(#js).
@@ -184,13 +190,17 @@ div
       | v-model:
       code.ml1 {{ accordion4 }}
     template(#pug).
-      w-accordion.white--bg(v-model="accordion" :items="items" expand-single)
+      w-accordion(v-model="accordion" :items="items" expand-single)
 
       div.mt3
         | v-model:
         code.ml1 {{ '\{\{ accordion \}\}' }}
     template(#html).
-      &lt;w-accordion v-model="accordion" :items="items" expand-single /&gt;
+      &lt;w-accordion
+        v-model="accordion"
+        :items="items"
+        expand-single&gt;
+      &lt;/w-accordion&gt;
 
       &lt;div class="mt3"&gt;
         v-model:
@@ -217,17 +227,17 @@ div
 
   title-link(h2) External control
   example(content-class="pa4 aliceblue")
-    w-button.mr2(@click="accordion5 = Array(3).fill(true)" bg-color="primary" sm) Expand all
-    w-button(@click="accordion5 = Array(3).fill(false)" bg-color="primary" sm) Collapse all
+    w-button.mr2(@click="accordion5 = Array(3).fill(true)" sm) Expand all
+    w-button(@click="accordion5 = Array(3).fill(false)" sm) Collapse all
     w-accordion.mt4.white--bg(v-model="accordion5" :items="items")
     div.mt3
       | v-model:
       code.ml1 {{ accordion5 }}
     template(#pug).
-      w-button.mr2(@click="accordion = Array(3).fill(true)" bg-color="primary" sm) Expand all
-      w-button(@click="accordion = Array(3).fill(false)" bg-color="primary" sm) Collapse all
+      w-button.mr2(@click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;true&amp;#41;" sm) Expand all
+      w-button(@click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;false&amp;#41;" sm) Collapse all
 
-      w-accordion.mt4.white--bg(v-model="accordion" :items="items")
+      w-accordion.mt4(v-model="accordion" :items="items")
 
       div.mt3
         | v-model:
@@ -236,13 +246,11 @@ div
       &lt;w-button
         class="mr2"
         @click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;true&amp;#41;"
-        bg-color="primary"
         sm&gt;
         Expand all
       &lt;/w-button&gt;
       &lt;w-button
         @click="accordion = Array&amp;#40;3&amp;#41;.fill&amp;#40;false&amp;#41;"
-        bg-color="primary"
         sm&gt;
         Collapse all
       &lt;/w-button&gt;
@@ -284,7 +292,7 @@ div
       template(#item-content="{ item }")
         w-alert.my0.pb3(border-left tile :color="item.itemColor" v-html="item.content")
     template(#pug).
-      w-accordion.white--bg(:items="items" content-class="pa0")
+      w-accordion(:items="items" content-class="pa0")
         template(#item-title="{ item }")
           w-icon(lg :color="item.itemColor") {{ '\{\{ item.icon \}\}' }}
           .title3.my0.ml2(:class="item.itemColor") {{ '\{\{ item.title \}\}' }}
@@ -348,7 +356,7 @@ div
       template(#item-title.3) Item title 3
       template(#item-content.3) Item content 3
     template(#pug).
-      w-accordion.white--bg(:items="3")
+      w-accordion(:items="3")
         template(#item-title.1) Item title 1
         template(#item-content.1) Item content 1
 
@@ -401,7 +409,7 @@ div
           | Github
           w-icon.ml2(sm) mdi mdi-open-in-new
     template(#pug).
-      w-accordion.white--bg(:items="items")
+      w-accordion(:items="items")
         template(#item-title.item1)
           | This is the 1st item
           w-tag.ml2(color="red" sm outline) HOT
@@ -468,7 +476,7 @@ div
           &lt;p&gt;Do you want to check the project on Github?&lt;/p&gt;
           &lt;w-button
             class="mt1"
-            bg-color="primary"
+
             route="https://github.com/antoniandre/wave-ui"&gt;
             Github
             &lt;w-icon class="ml2" sm&gt;mdi mdi-open-in-new&lt;/w-icon&gt;
@@ -496,16 +504,16 @@ div
     w-accordion.white--bg(:items="items" expand-icon-right)
     template(#pug).
       .title4 1 custom icon (only expand)
-      w-accordion.white--bg(:items="items" expand-icon="wi-chevron-down")
+      w-accordion(:items="items" expand-icon="wi-chevron-down")
 
       .title4.mt6 2 custom icons (expand &amp; collapse)
-      w-accordion.white--bg(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
+      w-accordion(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
 
       .title4.mt6 No icon
-      w-accordion.white--bg(:items="items" :expand-icon="false" title-class="py2")
+      w-accordion(:items="items" :expand-icon="false" title-class="py2")
 
       .title4.mt6 Icon on the right
-      w-accordion.white--bg(:items="items" expand-icon-right)
+      w-accordion(:items="items" expand-icon-right)
     template(#html).
       &lt;div class="title4 mb2"&gt;
         1 custom icon (only expand)
