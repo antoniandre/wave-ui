@@ -110,7 +110,11 @@ div
     template(#pug).
       w-breadcrumbs(:items="items")
         template(#item="{ item, isLast }")
-          w-tag(:color="isLast ? 'grey' : 'green'" round outline v-html="item.label")
+          w-tag(
+            :color="isLast ? 'grey' : 'green'"
+            round
+            outline
+            v-html="item.label")
     template(#html).
       &lt;w-breadcrumbs :items="items"&gt;
         &lt;template #item="{ item, isLast }"&gt;

@@ -6,18 +6,17 @@ div(style="max-width: 1000px")
     it will show or hide according to it.#[br]
     Like in this example you can add a transition to animate its apparition.
   example(content-class="pt5")
-    w-button(@click="showAlert = !showAlert" color="primary" outline) {{ showAlert ? 'Hide' : 'Show' }} alert
+    w-button(@click="showAlert = !showAlert" outline) {{ showAlert ? 'Hide' : 'Show' }} alert
     w-transition-expand(y)
       w-alert(v-if="showAlert" color="success") The alert is now visible.
     template(#pug).
-      w-button(@click="showAlert = !showAlert" color="primary" outline) {{ showAlert ? 'Hide' : 'Show' }} alert
+      w-button(@click="showAlert = !showAlert" outline) {{ showAlert ? 'Hide' : 'Show' }} alert
 
       w-transition-expand(y)
         w-alert(v-if="showAlert" color="success") The alert is now visible.
     template(#html).
       &lt;w-button
         @click="showAlert = !showAlert"
-        color="primary"
         outline&gt;
         {{ showAlert ? 'Hide' : 'Show' }} alert
       &lt;/w-button&gt;
@@ -257,7 +256,6 @@ div(style="max-width: 1000px")
     w-alert.my2(v-model="dismissible2" dismiss error) This is a dismissible error type alert.
     w-alert.my2(v-model="dismissible3" color="amber" dismiss round) This is a dismissible round alert.
     w-button.mt2(
-      bg-color="primary"
       @click="dismissible1 = dismissible2 = dismissible3 = true"
       :disabled="dismissible1 && dismissible2 && dismissible3") Reset alerts
     template(#pug).
@@ -265,7 +263,6 @@ div(style="max-width: 1000px")
       w-alert.my2(v-model="dismissible2" dismiss error) This is a dismissible error type alert.
       w-alert.my2(v-model="dismissible3" color="amber" dismiss round) This is a dismissible round alert.
       w-button.mt2(
-        bg-color="primary"
         @click="dismissible1 = dismissible2 = dismissible3 = true"
         :disabled="dismissible1 && dismissible2 && dismissible3") Reset alerts
     template(#html).
@@ -289,7 +286,6 @@ div(style="max-width: 1000px")
         This is a dismissible round alert.
       &lt;/w-alert&gt;
       &lt;w-button
-        bg-color="primary"
         @click="dismissible1 = dismissible2 = dismissible3 = true"
         :disabled="dismissible1 &amp;&amp; dismissible2 &amp;&amp; dismissible3"&gt;
         Reset alerts
