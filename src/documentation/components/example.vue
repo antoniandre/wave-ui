@@ -68,10 +68,10 @@
 <script>
 export default {
   props: {
+    flex: { type: Boolean }, // Removes the `block` prop off the `w-app` component.
     contentClass: { type: String },
     externalJs: { type: String },
     externalCss: { type: String },
-    fullJs: { type: Boolean },
     reactive: { type: Boolean }, // By default the pre-ssh component is not reactive.
     // An array of languages (html, pug, css, scss, js) to keep a blank Codepen template on.
     blankCodepen: { type: Array }
@@ -159,12 +159,15 @@ export default {
       // Pug & HTML.
       if (this.usePug && slots.pug) {
         if (blanks.includes('pug')) html = slots.pug.replace(/\n+$/, '')
-        else html = 'w-app#app(block)\n  ' + slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n  ')
+        else {
+          html = `w-app#app${this.flex ? '' : '(block)'}\n  ` +
+                 slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n  ')
+        }
       }
       else {
         if (blanks.includes('html')) html = slots.html.replace(/\n+$/, '')
         else {
-          html = '<w-app id="app" block>\n  ' +
+          html = `<w-app id="app"${this.flex ? '' : ' block'}>\n  ` +
                  slots.html.replace(/\n+$/, '').replace(/\n/g, '\n  ') +
                  '\n</w-app>\n'
         }
