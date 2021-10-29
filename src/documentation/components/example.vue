@@ -117,6 +117,10 @@ export default {
           return object
         })
         .filter(item => item.content)
+    },
+
+    currentPage () {
+      return this.$store.state.currentPage
     }
   },
 
@@ -180,11 +184,11 @@ export default {
       }
 
       const data = {
-        title: 'Wave UI Example Pen',
+        title: `Wave UI - ${this.currentPage} example`,
         editors: openEditors.join(''),
         layout: 'top',
         html,
-        html_pre_processor: slots.pug ? 'pug' : 'none',
+        html_pre_processor: this.usePug && slots.pug ? 'pug' : 'none',
         css,
         css_pre_processor: 'scss',
         css_starter: 'normalize',
