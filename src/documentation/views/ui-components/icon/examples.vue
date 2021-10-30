@@ -13,7 +13,7 @@ div.icons-demo
           | Material Design Icons Cheat sheet
           w-icon.ml1 mdi mdi-open-in-new
 
-      ssh-pre(language="bash") npm install @mdi/font
+      ssh-pre(language="shell") npm install @mdi/font
       ssh-pre(language="js") import '@mdi/font/css/materialdesignicons.min.css'
 
       example
