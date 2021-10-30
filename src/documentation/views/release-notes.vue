@@ -23,6 +23,13 @@ main
     //-----------------------------------------------------
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v1.42.0
+      ul
+        li.
+          #[strong.code CSS] Added individual border CSS classes:
+          #[code .bdl1], #[code .bdr1], #[code .bdt1], #[code .bdb1], #[code .bdx1], #[code .bdy1].
+
     li.patch
       strong.version v1.41.1
       ul
