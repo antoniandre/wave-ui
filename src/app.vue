@@ -11,6 +11,7 @@ export default {
 
   created () {
     this.$store.commit('initUsePug')
+    this.$store.commit('initTabsView')
   }
 }
 </script>
