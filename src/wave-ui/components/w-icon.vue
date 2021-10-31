@@ -48,7 +48,7 @@ export default {
     ligature () {
       if (!config.iconsLigature) return false
 
-      const [fontName, icon] = this.icon.split(' ')
+      const [fontName, icon] = this.$slots.default()[0].children
       return fontName === config.iconsLigature && { fontName, icon }
     },
     forcedSize () {
@@ -66,7 +66,7 @@ export default {
     },
     classes () {
       return {
-        [this.icon]: true,
+        [this.$slots.default()[0].children]: true,
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
@@ -87,16 +87,6 @@ export default {
     styles () {
       return this.forcedSize && `font-size: ${this.forcedSize}`
     }
-  },
-
-  created () {
-    const { default: slotContent } = this.$slots
-    this.icon = slotContent ? (slotContent()[0].children || '').trim() : ''
-  },
-
-  beforeUpdate () {
-    const { default: slotContent } = this.$slots
-    this.icon = slotContent ? (slotContent()[0].children || '').trim() : ''
   }
 }
 </script>
