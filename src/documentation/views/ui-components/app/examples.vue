@@ -21,11 +21,11 @@ div
 
   title-link(h2) Examples of common layouts
   p.
-    You can explore the different examples source code and use as a starter kit in your app.#[br]
-    It could also be helpful to open it in a Codepen to quickly be able to tweak it for you app. :)
+    You can explore the different examples source code and use one of them as a starter kit for your app.#[br]
+    It can also be helpful to open it in a Codepen to quickly tweak it before you integrate it in your app. :)
   w-flex.common-layouts.mt6(:gap="6" wrap basis-zero)
     w-badge(bg-color="orange" color="white" overlap :value="1")
-      example.ma0.grow(content-class="pa0" :blank-codepen="['html', 'css']")
+      example.ma0.grow(content-class="pa0" :blank-codepen="['html', 'pug', 'css']")
         fieldset.app.w-flex.column
           legend w-app
           section.header Header
@@ -33,6 +33,13 @@ div
             section.nav-menu.block Nav menu
             section.content.block.grow Main content
           section.footer Footer
+        template(#pug).
+          w-app#app
+            header Header
+            w-flex(grow)
+              aside Nav menu
+              main.grow Main content
+            footer Footer
         template(#html).
           &lt;w-app id="app"&gt;
             &lt;header&gt;Header&lt;/header&gt;
@@ -44,20 +51,20 @@ div
           &lt;/w-app&gt;
         template(#css).
           /* Demo styles - can be discarded. */
-          .w-app, header, footer, aside, main {
+          .w-app {padding: 4px;background-color: #fffeed;}
+          header, footer, aside, main {
             margin: 4px;
             padding: 12px;
             text-transform: uppercase;
             color: #666;
             border: 1px solid rgba(0, 0, 0, 0.07);
           }
-          .w-app {background-color: #fffeed;}
           header, footer {background-color: #e9f8fe;min-height: 60px;}
           aside {background-color: #fef2ff;}
           main {background-color: #efffed;}
 
     w-badge(bg-color="orange" color="white" overlap :value="2")
-      example.ma0.grow(content-class="pa0" :blank-codepen="['html', 'css']")
+      example.ma0.grow(content-class="pa0" :blank-codepen="['html', 'pug', 'css']")
         fieldset.app.w-flex.column
           legend w-app
           .w-flex
@@ -66,6 +73,13 @@ div
               section.header Header
               section.content.block.grow Main content
               section.footer Footer
+        template(#pug).
+          w-app#app
+            aside Nav menu
+            w-flex(grow)
+              header Header
+              main.grow Main content
+              footer Footer
         template(#html).
           &lt;w-app id="app" class="w-flex row"&gt;
             &lt;aside&gt;Nav menu&lt;/aside&gt;
@@ -77,25 +91,30 @@ div
           &lt;/w-app&gt;
         template(#css).
           /* Demo styles - can be discarded. */
-          .w-app, header, footer, aside, main {
+          .w-app {padding: 4px;background-color: #fffeed;}
+          header, footer, aside, main {
             margin: 4px;
             padding: 12px;
             text-transform: uppercase;
             color: #666;
             border: 1px solid rgba(0, 0, 0, 0.07);
           }
-          .w-app {background-color: #fffeed;}
           header, footer {background-color: #e9f8fe;min-height: 60px;}
           aside {background-color: #fef2ff;}
           main {background-color: #efffed;}
 
     w-badge(bg-color="orange" color="white" overlap :value="3")
-      example.ma0.grow(content-class="pa0" :blank-codepen="['html', 'css']")
+      example.ma0.grow(content-class="pa0" :blank-codepen="['html', 'pug', 'css']")
         fieldset.app.w-flex.column
           legend w-app
           section.header Header
           section.content.block.grow Main content
           section.footer Footer
+        template(#pug).
+          w-app#app
+            header Header
+            main.grow Main content
+            footer Footer
         template(#html).
           &lt;w-app id="app"&gt;
             &lt;header&gt;Header&lt;/header&gt;
@@ -104,26 +123,33 @@ div
           &lt;/w-app&gt;
         template(#css).
           /* Demo styles - can be discarded. */
-          .w-app, header, footer, aside, main {
+          .w-app {padding: 4px;background-color: #fffeed;}
+          header, footer, aside, main {
             margin: 4px;
             padding: 12px;
             text-transform: uppercase;
             color: #666;
             border: 1px solid rgba(0, 0, 0, 0.07);
           }
-          .w-app {background-color: #fffeed;}
           header, footer {background-color: #e9f8fe;min-height: 60px;}
           aside {background-color: #fef2ff;}
           main {background-color: #efffed;}
 
     w-badge(bg-color="orange" color="white" overlap :value="4")
-      example.ma0.grow(content-class="pa0" :blank-codepen="['html', 'css']")
+      example.ma0.grow(content-class="pa0" :blank-codepen="['html', 'pug', 'css']")
         fieldset.app.grow
           legend w-app
           section.header Header
           .w-flex
             section.content.block.grow Main content
             section.nav-menu.block Nav menu
+        template(#pug).
+          w-app#app(block)
+            header Header
+            w-flex
+              main.grow.py12 Main content
+              aside Nav menu
+            footer Footer
         template(#html).
           &lt;w-app id="app" block&gt;
             &lt;header&gt;Header&lt;/header&gt;
@@ -135,14 +161,14 @@ div
           &lt;/w-app&gt;
         template(#css).
           /* Demo styles - can be discarded. */
-          .w-app, header, footer, aside, main {
+          .w-app {padding: 4px;background-color: #fffeed;}
+          header, footer, aside, main {
             margin: 4px;
             padding: 12px;
             text-transform: uppercase;
             color: #666;
             border: 1px solid rgba(0, 0, 0, 0.07);
           }
-          .w-app {background-color: #fffeed;}
           header, footer {background-color: #e9f8fe;min-height: 60px;}
           aside {background-color: #fef2ff;}
           main {background-color: #efffed;}

@@ -119,8 +119,8 @@ export default {
   &.size--lg {font-size: round(1.7 * $base-font-size);}
   &.size--xl {font-size: 2 * $base-font-size;}
 
-  // In w-button and w-alert.
-  // .w-button &, .w-alert & {font-size: round(1.4 * $base-font-size);}
+  // Icon's vertical alignment in button.
+  .w-button &, .w-button &:before {line-height: inherit;}
   // Always an even number to vertical align well in button.
   .w-button.size--xs & {font-size: round(0.95 * divide($base-font-size, 2)) * 2;}
   .w-alert.size--xs & {font-size: $base-font-size;}

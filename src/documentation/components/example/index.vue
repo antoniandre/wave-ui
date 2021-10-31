@@ -25,89 +25,88 @@
             text
             color="primary")
         | Edit in Codepen
+
   w-transition-expand(y)
     .example__source(v-show="showSource")
-      ssh-pre(
-        v-if="$slots.html"
-        language="html-vue"
-        label="TEMPLATE"
-        copy-button
-        @copied="copied('TEMPLATE')"
-        :reactive="reactive")
-        template(#copy-button)
-          w-icon(color="primary") mdi mdi-content-copy
-        slot(name="html")
-      w-tooltip.d-block(v-if="$slots.pug" tooltip-class="pa3 w480" color="blue")
-        template(#activator="{ on }")
-          w-alert.text-light.ma0(v-on="on" sm info no-border tile)
-            | What is Pug?
-        | Wave UI Vue templates are coded in Pug.#[br]The examples will soon be rewritten in HTML.
-        | For now, if you are not familiar with Pug, you can edit in Codepen and view the compiled HTML.#[br]
-        | But now you are here, hold on a minute and look how concise it is! You could get to like it!
-      ssh-pre(
-        v-if="$slots.pug"
-        language="pug"
-        label="TEMPLATE (PUG)"
-        copy-button
-        @copied="copied('TEMPLATE (PUG)')"
-        :reactive="reactive")
-        template(#copy-button)
-          w-icon(color="primary") mdi mdi-content-copy
-        slot(name="pug")
-      ssh-pre(
-        v-if="$slots.js"
-        language="js"
-        label="JS"
-        copy-button
-        @copied="copied('JS')"
-        :reactive="reactive")
-        template(#copy-button)
-          w-icon(color="primary") mdi mdi-content-copy
-        slot(name="js")
-      ssh-pre(
-        v-if="$slots.css"
-        language="css"
-        label="CSS"
-        copy-button
-        @copied="copied('CSS')"
-        :reactive="reactive")
-        template(#copy-button)
-          w-icon(color="primary") mdi mdi-content-copy
-        slot(name="css")
-      ssh-pre(
-        v-if="$slots.scss"
-        language="scss"
-        label="SCSS"
-        copy-button
-        @copied="copied('SCSS')"
-        :reactive="reactive")
-        template(#copy-button)
-          w-icon(color="primary") mdi mdi-content-copy
-        slot(name="scss")
-      w-notification.mr5.mt-1(
-        :value="!!showCopied"
-        transition="slide-fade-left"
-        plain
-        absolute
-        sm
-        success) {{ showCopied }} code copied to clipboard
+      w-tabs(v-if="tabsView" :items="sourceCodeTabs" content-class="pa0" no-slider)
+        template(#tabs-bar-extra)
+          preference-buttons.no-grow(:has-pug="!!$slots.pug")
+        template(#item-content="{ item }")
+          source-code(:item="item" v-bind="$props")
+            template(#[item.id])
+              slot(:name="item.id")
+      //- See all languages at once.
+      div.bdt1(v-else)
+        w-flex(justify-space-between align-center)
+          .title5.code.pl2.mb0.primary &lt;/&gt; Source code
+          preference-buttons.no-grow(:has-pug="!!$slots.pug")
+        div(v-for="(item, i) in sourceCodeTabs" :key="i")
+          source-code(:item="item" v-bind="$props")
+            template(#[item.id])
+              slot(:name="item.id")
 </template>
 
 <script>
+import PreferenceButtons from './preference-buttons.vue'
+import SourceCode from './source-code.vue'
+
 export default {
   props: {
+    flex: { type: Boolean }, // Removes the `block` prop off the `w-app` component.
     contentClass: { type: String },
     externalJs: { type: String },
     externalCss: { type: String },
-    fullJs: { type: Boolean },
-    reactive: { type: Boolean },
+    reactive: { type: Boolean }, // By default the pre-ssh component is not reactive.
     // An array of languages (html, pug, css, scss, js) to keep a blank Codepen template on.
     blankCodepen: { type: Array }
   },
+
+  components: { PreferenceButtons, SourceCode },
+
   data: () => ({
-    showSource: false,
-    showCopied: false
+    showSource: false
   }),
+
+  computed: {
+    usePug () {
+      return this.$store.state.usePug
+    },
+
+    tabsView () {
+      return this.$store.state.tabsView
+    },
+
+    sourceCodeTabs () {
+      const tabs = {
+        html: { language: 'html-vue', title: 'HTML', content: '' },
+        js: { language: 'js', title: 'JS', content: '' },
+        css: { language: 'css', title: 'CSS', content: '' }
+      }
+      return Object.entries(tabs)
+        .map(([key, obj]) => {
+          const object = {
+            ...obj,
+            id: key,
+            content: (this.$slots[key] && this.$slots[key][0].text) || ''
+          }
+
+          // If the user prefers Pug, and there is a pug source code (otherwise show HTML).
+          if (this.usePug && key === 'html' && this.$slots.pug && this.$slots.pug[0].text) {
+            object.id = 'pug'
+            object.language = 'pug'
+            object.title = 'Pug'
+            object.content = this.$slots.pug[0].text
+          }
+
+          return object
+        })
+        .filter(item => item.content)
+    },
+
+    currentPage () {
+      return this.$store.state.currentPage
+    }
+  },
 
   methods: {
     createCodepen (e) {
@@ -131,7 +130,7 @@ export default {
 
       const slots = {
         html: (this.$slots.html && this.$slots.html[0].text) || '',
-        pug: (this.$slots.pug && this.$slots.pug[0].text) || '',
+        pug: ((this.$slots.pug && this.$slots.pug[0].text) || '').replace(/(#[\w.-]+)(?=\s|\))(?!\n)/gi, '$1=""'),
         js: (this.$slots.js && this.$slots.js[0].text) || '',
         css: (this.$slots.css && this.$slots.css[0].text) || '',
         scss: (this.$slots.scss && this.$slots.scss[0].text) || ''
@@ -142,14 +141,17 @@ export default {
       const blanks = this.blankCodepen || []
 
       // Pug & HTML.
-      if (slots.pug) {
+      if (this.usePug && slots.pug) {
         if (blanks.includes('pug')) html = slots.pug.replace(/\n+$/, '')
-        else html = 'w-app#app(block)\n  ' + slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n  ')
+        else {
+          html = `w-app#app${this.flex ? '' : '(block)'}\n  ` +
+                 slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n  ')
+        }
       }
       else {
         if (blanks.includes('html')) html = slots.html.replace(/\n+$/, '')
         else {
-          html = '<w-app id="app" block>\n  ' +
+          html = `<w-app id="app"${this.flex ? '' : ' block'}>\n  ` +
                  slots.html.replace(/\n+$/, '').replace(/\n/g, '\n  ') +
                  '\n</w-app>\n'
         }
@@ -169,11 +171,11 @@ export default {
       }
 
       const data = {
-        title: 'Wave UI Example Pen',
+        title: `Wave UI - ${this.currentPage} example`,
         editors: openEditors.join(''),
         layout: 'top',
         html,
-        html_pre_processor: slots.pug ? 'pug' : 'none',
+        html_pre_processor: this.usePug && slots.pug ? 'pug' : 'none',
         css,
         css_pre_processor: 'scss',
         css_starter: 'normalize',
@@ -195,17 +197,17 @@ export default {
       const form = document.querySelector('.codepen-form')
       form.submit()
       form.parentNode.removeChild(form) // el.remove() doesn't work on IE11.
-    },
-
-    copied (source) {
-      this.showCopied = source
-      setTimeout(() => (this.showCopied = false), 3000)
     }
   }
 }
 </script>
 
 <style lang="scss">
+.pug-icon {
+  fill: currentColor;
+  margin-top: 3px;
+}
+
 .example {
   position: relative;
   margin-top: 1em;
@@ -213,6 +215,8 @@ export default {
   border: 1px solid #eee;
   background-color: #fcfcfc;
   border-radius: 3px;
+
+  .w-tabs {border-radius: 0;border-width: 1px 0 0;}
 
   .buttons {
     border-left: 1px solid #eee;
@@ -228,50 +232,9 @@ export default {
 
   &__source {position: relative;}
 
-  &__source .w-alert {
-    padding: 2px 4px;
-    font-size: 13px !important;
-    border-top: 1px solid #ddd;
-
-    &:after {background-color: #b0dcff;}
-  }
-
-  .ssh-pre {
-    margin: 0 !important;
-    border: solid rgba(0, 0, 0, 0.1);
-    border-width: 1px 0 0;
-    border-radius: 0;
-    line-height: 1.3;
-
-    &[data-type="pug"] {border-width: 0;}
-    & + .ssh-pre {border-top-width: 3px;}
-    &:last-child {border-radius: 0 0 4px 4px;}
-  }
-
-  .ssh-pre[data-label]:before {
-    font-family: 'Arial Narrow', Arial, sans-serif;
-    bottom: auto;
-    top: 5px;
-    right: 26px;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    color: #aaa;
-  }
-
-  .ssh-pre__copy {
-    border: none;
-    background: none;
-    top: 1px;
-    right: 1px;
-
-    .w-icon {
-      padding: 12px 0;
-      width: 24px; // For IE11.
-      transition: 0.25s;
-    }
-    &:hover .w-icon {background-color: rgba(35, 71, 129, 0.15);}
-    &:active .w-icon {background-color: rgba(35, 71, 129, 0.25);}
+  &__source .w-tabs__bar-item {
+    font-size: 0.95rem;
+    padding: 2px 8px;
   }
 
   .codepen-form {

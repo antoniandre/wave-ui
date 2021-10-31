@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './app.vue'
 import router from './router'
+import store from './store'
 import WaveUI from '@/wave-ui/index'
 import '@mdi/font/css/materialdesignicons.min.css'
 
@@ -21,6 +22,7 @@ const waveui = new WaveUI({
 
 new Vue({
   router,
+  store,
   waveui,
   render: h => h(App)
 }).$mount('#app')
