@@ -78,7 +78,7 @@ export default {
     &:active .w-icon {background-color: rgba(35, 71, 129, 0.25);}
   }
 
-  .w-alert {
+  &__source .w-alert {
     padding: 2px 4px;
     font-size: 13px !important;
     border-top: 1px solid #ddd;
