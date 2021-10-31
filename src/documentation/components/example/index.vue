@@ -30,7 +30,7 @@
     .example__source(v-show="showSource")
       w-tabs(v-if="tabsView" :items="sourceCodeTabs" content-class="pa0" no-slider)
         template(#tabs-bar-extra)
-          preference-buttons.no-grow
+          preference-buttons.no-grow(:has-pug="!!$slots.pug")
         template(#item-content="{ item }")
           source-code(:item="item" v-bind="$props")
             template(#[item.id])
@@ -39,7 +39,7 @@
       div.bdt1(v-else)
         w-flex(justify-space-between align-center)
           .title5.code.pl2.mb0.primary &lt;/&gt; Source code
-          preference-buttons.no-grow
+          preference-buttons.no-grow(:has-pug="!!$slots.pug")
         div(v-for="(item, i) in sourceCodeTabs" :key="i")
           source-code(:item="item" v-bind="$props")
             template(#[item.id])
