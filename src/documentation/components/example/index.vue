@@ -38,7 +38,7 @@
       //- See all languages at once.
       div.bdt1(v-else)
         w-flex(justify-space-between align-center)
-          .title5.code.pl2.mb0.primary &gt; Source code
+          .title5.code.pl2.mb0.primary &lt;/&gt; Source code
           preference-buttons.no-grow
         div(v-for="(item, i) in sourceCodeTabs" :key="i")
           source-code(:item="item" v-bind="$props")
@@ -235,48 +235,6 @@ export default {
   &__source .w-tabs__bar-item {
     font-size: 0.95rem;
     padding: 2px 8px;
-  }
-
-  &__source .w-alert {
-    padding: 2px 4px;
-    font-size: 13px !important;
-    border-top: 1px solid #ddd;
-
-    &:after {background-color: #b0dcff;}
-  }
-
-  .ssh-pre {
-    margin: 0 !important;
-    border: solid rgba(0, 0, 0, 0.1);
-    border-width: 1px 0 0;
-    border-radius: 0;
-    line-height: 1.3;
-  }
-
-  .ssh-pre[data-label]:before {
-    font-family: 'Arial Narrow', Arial, sans-serif;
-    bottom: auto;
-    top: 5px;
-    right: 26px;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    color: #aaa;
-  }
-
-  .ssh-pre__copy {
-    border: none;
-    background: none;
-    top: 1px;
-    right: 1px;
-
-    .w-icon {
-      padding: 12px 0;
-      width: 24px; // For IE11.
-      transition: 0.25s;
-    }
-    &:hover .w-icon {background-color: rgba(35, 71, 129, 0.15);}
-    &:active .w-icon {background-color: rgba(35, 71, 129, 0.25);}
   }
 
   .codepen-form {
