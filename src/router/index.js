@@ -120,6 +120,7 @@ const components = [
   { id: 'badge', label: 'Badge' },
   { id: 'card', label: 'Card' },
   { id: 'checkbox', label: 'Checkbox' },
+  { id: 'confirm', label: 'Confirm' },
   { id: 'date-picker', label: 'Date picker' },
   { id: 'dialog', label: 'Dialog' },
   { id: 'divider', label: 'Divider' },
