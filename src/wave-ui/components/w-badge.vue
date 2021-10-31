@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-badge-wrap
+.w-badge-wrap(v-on="$attrs")
   slot
   transition(:name="`${transition}`")
     .w-badge(
@@ -104,6 +104,7 @@ export default {
   border-radius: 99em;
   // Always get an even number for better text vertical align.
   height: round(1.1 * divide($base-font-size, 2)) * 2;
+  line-height: round(1.1 * divide($base-font-size, 2)) * 2;
   min-width: round(1.1 * divide($base-font-size, 2)) * 2;
   z-index: 1;
   padding: 0 $base-increment;
@@ -121,29 +122,38 @@ export default {
     $height: round(divide($base-font-size, 2)) * 2;
     font-size: round(0.67 * divide($base-font-size, 2)) * 2;
     height: $height;
+    line-height: $height;
     min-width: $height;
 
     &--round {width: $height;padding: 0 round(divide($height, 2));}
   }
   &.size--sm {
+    $height: round(1.1 * divide($base-font-size, 2)) * 2;
     font-size: round(0.75 * divide($base-font-size, 2)) * 2;
-    height: round(1.1 * divide($base-font-size, 2)) * 2;
-    min-width: round(1.1 * divide($base-font-size, 2)) * 2;
+    height: $height;
+    line-height: $height;
+    min-width: $height;
   }
   &.size--md {
+    $height: round(1.3 * divide($base-font-size, 2)) * 2;
     font-size: round(0.9 * divide($base-font-size, 2)) * 2;
-    height: round(1.3 * divide($base-font-size, 2)) * 2;
-    min-width: round(1.3 * divide($base-font-size, 2)) * 2;
+    height: $height;
+    line-height: $height;
+    min-width: $height;
   }
   &.size--lg {
+    $height: round(1.5 * divide($base-font-size, 2)) * 2;
     font-size: round(1.05 * divide($base-font-size, 2)) * 2;
-    height: round(1.5 * divide($base-font-size, 2)) * 2;
-    min-width: round(1.5 * divide($base-font-size, 2)) * 2;
+    height: $height;
+    line-height: $height;
+    min-width: $height;
   }
   &.size--xl {
+    $height: round(1.8 * divide($base-font-size, 2)) * 2;
     font-size: round(1.2 * divide($base-font-size, 2)) * 2;
-    height: round(1.8 * divide($base-font-size, 2)) * 2;
-    min-width: round(1.8 * divide($base-font-size, 2)) * 2;
+    height: $height;
+    line-height: $height;
+    min-width: $height;
   }
 
   // Position.

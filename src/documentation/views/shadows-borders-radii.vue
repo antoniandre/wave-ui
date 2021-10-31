@@ -178,7 +178,7 @@ main
           :height="100")
         span.caption.mt3.
           #[strong.code w-image] with #[code.mx1 .bd1], #[code.mx1 .bdrsr] and #[code.mx1 .sh1] classes.
-      w-switch.bdrs1.my4(:value="true")
+      w-switch.bdrs1.my4(:model-value="true")
         span.caption a #[strong.code.mx1 w-switch] with a #[code.mx1 .bdrs1] class.
     //- template(#pug).
       w-flex(align-center justify-space-around wrap)
@@ -188,7 +188,7 @@ main
             :width="100"
             :height="100")
           span.caption.mt3 w-image with #[code.mx1 .bd1], #[code.mx1 .bdrsr] and #[code.mx1 .sh1] classes.
-        w-switch.bdrs1.my4(:value="true")
+        w-switch.bdrs1.my4(:model-value="true")
           span.caption a #[strong.code.mx1 w-switch] with a #[code.mx1 .bdrs1] class.
     template(#html).
       &lt;w-flex align-center justify-space-around wrap&gt;
@@ -204,7 +204,7 @@ main
           &lt;/span&gt;
         &lt;/w-flex&gt;
 
-        &lt;w-switch :value="true" class="bdrs1 my4"&gt;
+        &lt;w-switch :model-value="true" class="bdrs1 my4"&gt;
           &lt;span class="caption"&gt;
             a w-switch with a `.bdrs1` class.
           &lt;/span&gt;

@@ -7,6 +7,11 @@ documentation(v-else)
 import Documentation from '@/documentation/index.vue'
 
 export default {
-  components: { Documentation }
+  components: { Documentation },
+
+  created () {
+    this.$store.commit('initUsePug')
+    this.$store.commit('initTabsView')
+  }
 }
 </script>

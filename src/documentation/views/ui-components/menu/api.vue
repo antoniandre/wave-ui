@@ -40,7 +40,9 @@ const propsDescs = {
   alignRight: 'Aligns the right side of the menu with the right side of the activator.',
   zIndex: 'Applies a z-index (positive or negative integer) to the menu.',
   minWidth: 'Sets a min-width on the menu.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
-  overlay: 'Displays a full screen overlay underneath the menu.',
+  overlay: 'Displays a full screen overlay underneath the menu (uses the <span class="code">w-overlay</span> component).',
+  overlayClass: 'Add custom CSS classes to the <span class="code">w-overlay</span> component.',
+  overlayProps: 'An object of props to pass down to the <span class="code">w-overlay</span> component for more control.',
   persistent: 'When set to true, clicking outside of the menu will not close the menu.'
 }
 

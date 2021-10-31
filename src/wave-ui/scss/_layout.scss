@@ -61,6 +61,12 @@
     @for $i from 1 through 6 {
       .bd#{$i} {border: $i + px solid $border-color;}
     }
+    .bdx1 {border-left: 1px solid $border-color;border-right: 1px solid $border-color;}
+    .bdy1 {border-top: 1px solid $border-color;border-bottom: 1px solid $border-color;}
+    .bdl1 {border-left: 1px solid $border-color;}
+    .bdr1 {border-right: 1px solid $border-color;}
+    .bdt1 {border-top: 1px solid $border-color;}
+    .bdb1 {border-bottom: 1px solid $border-color;}
     .bd0 {border: none;}
 
     @for $i from 1 through 6 {

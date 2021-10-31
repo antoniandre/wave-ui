@@ -14,6 +14,15 @@ div
         Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
         dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
         aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+    template(#pug).
+      w-card(title="Card title" title-class="blue-light5--bg")
+        p.
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+          quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+          odit dolor labore eveniet at vel sequi nostrum.&#35;[br]&#35;[br]
+          Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
+          dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
+          aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
     template(#html).
       &lt;w-card title="Card title" title-class="blue-light5--bg"&gt;
         &lt;p&gt;
@@ -40,6 +49,15 @@ div
         Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
         dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
         aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+    template(#pug).
+      w-card(bg-color="secondary" no-border)
+        p.
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+          quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+          odit dolor labore eveniet at vel sequi nostrum.&#35;[br]&#35;[br]
+          Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
+          dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
+          aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
     template(#html).
       &lt;w-card bg-color="secondary" no-border&gt;
         &lt;p&gt;
@@ -72,6 +90,22 @@ div
         Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
         dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
         aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+    template(#pug).
+      w-card(tile)
+        template(#title)
+          w-toolbar
+            .title3.my0 Card title
+            .spacer
+            span.ml2 Item 1
+            span.ml2 Item 2
+            span.ml2 Item 3
+        p.
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+          quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+          odit dolor labore eveniet at vel sequi nostrum.&#35;[br]&#35;[br]
+          Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
+          dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
+          aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
     template(#html).
       &lt;w-card tile&gt;
         &lt;template #title&gt;
@@ -104,6 +138,15 @@ div
         Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
         dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
         aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+    template(#pug).
+      w-card(shadow)
+        p.
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+          quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+          odit dolor labore eveniet at vel sequi nostrum.&#35;[br]&#35;[br]
+          Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
+          dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
+          aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
     template(#html).
       &lt;w-card shadow&gt;
         &lt;p&gt;
@@ -127,6 +170,15 @@ div
         .spacer
         w-button.mr2(bg-color="error") I disagree
         w-button(bg-color="success") I agree
+    template(#pug).
+      w-card(title="Terms and conditions")
+        | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+        | quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+        | odit dolor labore eveniet at vel sequi nostrum.
+        template(#actions)
+          .spacer
+          w-button.mr2(bg-color="error") I disagree
+          w-button(bg-color="success") I agree
     template(#html).
       &lt;w-card title="Terms and conditions"&gt;
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
@@ -152,6 +204,14 @@ div
       template(#actions)
         .spacer
         w-button Read more
+    template(#pug).
+      w-card(:image="`${baseUrl}images/japanese-wave.png`")
+        | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+        | quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+        | odit dolor labore eveniet at vel sequi nostrum.
+        template(#actions)
+          .spacer
+          w-button Read more
     template(#html).
       &lt;w-card :image="`${baseUrl}images/japanese-wave.png`"&gt;
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
@@ -188,6 +248,18 @@ div
       template(#actions)
         .spacer
         w-button Read more
+    template(#pug).
+      w-card(
+        :image="`${baseUrl}images/japanese-wave.png`"
+        :image-props="{ contentClass: 'align-start pa1', ratio: 1 / 4 }")
+        | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+        | quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+        | odit dolor labore eveniet at vel sequi nostrum.
+        template(#image-content)
+          .title1.pink Wave UI
+        template(#actions)
+          .spacer
+          w-button Read more
     template(#html).
       &lt;w-card :image="`${baseUrl}images/japanese-wave.png`"&gt;
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,

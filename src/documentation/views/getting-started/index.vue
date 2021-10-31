@@ -8,7 +8,7 @@ main
 
   w-accordion(
     :items="3"
-    :value="openPane"
+    :model-value="openPane"
     expand-single
     title-class="justify-space-between py4 pl6 blue-light5--bg"
     expand-icon="wi-chevron-right"

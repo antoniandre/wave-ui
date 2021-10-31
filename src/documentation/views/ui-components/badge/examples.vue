@@ -8,6 +8,12 @@ div
       w-button.primary(text)
         w-icon.mr1 mdi mdi-email
         | Emails
+    template(#pug).
+      w-badge
+        template(#badge) 3
+        w-button.primary(text)
+          w-icon.mr1 mdi mdi-email
+          | Emails
     template(#html).
       &lt;w-badge&gt;
         &lt;template #badge&gt;3&lt;/template&gt;
@@ -23,13 +29,20 @@ div
     li No v-model or value is provided but a badge slot is.
     li.
       A v-model or a value is given and is not #[code null], #[code false] or #[code 0].#[br]
-      If you want to show one of these values, you can cast it to a string and it will show up.
+      If you want to display one of these values, you can cast it to a string and it will show up
+      (e.g. #[code '0'] instead of #[code 0]).
   example(content-class="mt1")
     w-flex(align-center)
       w-button(@click="showBadge--" icon="wi-minus" bg-color="success" sm)
       w-badge.mx6(v-model="showBadge" bg-color="error" overlap)
         w-icon(color="grey-light1" size="2.4em") mdi mdi-email
       w-button(@click="showBadge++" icon="wi-plus" bg-color="success" sm)
+    template(#pug).
+      w-flex(align-center)
+        w-button(@click="showBadge--" icon="wi-minus" bg-color="success" sm)
+        w-badge.mx6(v-model="showBadge" bg-color="error" overlap)
+          w-icon(color="grey-light1" size="2.4em") mdi mdi-email
+        w-button(@click="showBadge++" icon="wi-plus" bg-color="success" sm)
     template(#html).
       &lt;w-flex align-center&gt;
         &lt;w-button
@@ -79,6 +92,22 @@ div
     w-badge(bottom right)
       template(#badge) 3
       w-icon.grey-light1(size="2.5em") mdi mdi-email
+    template(#pug).
+      .title4.mb2 Top
+      w-badge.ml4.mr10(top left)
+        template(#badge) 3
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
+      w-badge(top right)
+        template(#badge) 3
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+      .title4.mt6.mb2 Bottom
+      w-badge.ml4.mr10(bottom left)
+        template(#badge) 3
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
+      w-badge(bottom right)
+        template(#badge) 3
+        w-icon.grey-light1(size="2.5em") mdi mdi-email
     template(#html).
       &lt;div class="title4 mb2"&gt;Top&lt;/div&gt;
       &lt;w-badge class="ml4 mr10" top left&gt;
@@ -114,6 +143,16 @@ div
     w-badge(bg-color="lime-light1" color="green-dark2")
       template(#badge) 3
       w-icon(color="grey-light1" size="2.5em") mdi mdi-email
+    template(#pug).
+      w-badge.mr10(bg-color="error")
+        template(#badge) 3
+        w-icon(color="grey-light1" size="2.5em") mdi mdi-email
+      w-badge.mr10(color="yellow")
+        template(#badge) 3
+        w-icon(color="grey-light1" size="2.5em") mdi mdi-email
+      w-badge(bg-color="lime-light1" color="green-dark2")
+        template(#badge) 3
+        w-icon(color="grey-light1" size="2.5em") mdi mdi-email
     template(#html).
       &lt;w-badge class="mr10" bg-color="error"&gt;
         &lt;template #badge&gt;3&lt;/template&gt;
@@ -136,6 +175,11 @@ div
       w-icon(size="2.5em") mdi mdi-account
     w-badge(dot bottom bg-color="red")
       w-icon(size="2.5em") mdi mdi-account
+    template(#pug).
+      w-badge.mr10(dot bg-color="red")
+        w-icon(size="2.5em") mdi mdi-account
+      w-badge(dot bottom bg-color="red")
+        w-icon(size="2.5em") mdi mdi-account
     template(#html).
       &lt;w-badge class="mr10" dot bg-color="red"&gt;
         &lt;w-icon size="2.5em"&gt;mdi mdi-account&lt;/w-icon&gt;
@@ -196,6 +240,53 @@ div
       w-badge.mr10(bg-color="error" xl)
         template(#badge) 3
         w-icon(size="2.5em") mdi mdi-account
+    template(#pug).
+      .title3.mb2 Dots
+      w-flex(wrap)
+        w-badge.mr10(dot bg-color="red" xs)
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(dot bg-color="red" sm)
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(dot bg-color="red" md)
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(dot bg-color="red" lg)
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(dot bg-color="red" xl)
+          w-icon(size="2.5em") mdi mdi-account
+      .title3.mt6.mb2 Text content
+      w-flex(wrap)
+        w-badge.mr10(bg-color="error" xs)
+          template(#badge) busy
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(bg-color="error" sm)
+          template(#badge) busy
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(bg-color="error" md)
+          template(#badge) busy
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(bg-color="error" lg)
+          template(#badge) busy
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(bg-color="error" xl)
+          template(#badge) busy
+          w-icon(size="2.5em") mdi mdi-account
+      .title3.mt6.mb2 Numeric content
+      w-flex(wrap)
+        w-badge.mr10(bg-color="error" xs)
+          template(#badge) 3
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(bg-color="error" sm)
+          template(#badge) 3
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(bg-color="error" md)
+          template(#badge) 3
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(bg-color="error" lg)
+          template(#badge) 3
+          w-icon(size="2.5em") mdi mdi-account
+        w-badge.mr10(bg-color="error" xl)
+          template(#badge) 3
+          w-icon(size="2.5em") mdi mdi-account
     template(#html).
       &lt;div class="title3 mb2"&gt;Dots&lt;/div&gt;
       &lt;w-flex wrap&gt;
@@ -305,6 +396,46 @@ div
       w-badge(bottom right overlap)
         template(#badge) 3
         w-icon.grey-light1(size="2.5em") mdi mdi-email
+    template(#pug).
+      .title4.mb3 Top
+      .w-flex.wrap.align-center
+        w-badge.ml4.mr10(top left)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+        w-badge(top right)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+        w-icon.mx12.grey-light3(size="2.5em") mdi mdi-arrow-right
+
+        w-badge.mr10(top left overlap)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+        w-badge(top right overlap)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+      .title4.mt8.mb3 Bottom
+      .w-flex.wrap.align-center
+        w-badge.ml4.mr10(bottom left)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+        w-badge(bottom right)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+        w-icon.mx12.grey-light3(size="2.5em") mdi mdi-arrow-right
+
+        w-badge.mr10(bottom left overlap)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
+
+        w-badge(bottom right overlap)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
     template(#html).
       &lt;div class="title4 mb3"&gt;Top&lt;/div&gt;
       &lt;div class="w-flex wrap align-center"&gt;
@@ -416,6 +547,23 @@ div
       w-badge(overlap xl)
         template(#badge) 3
         w-icon.grey-light1(size="2.5em") mdi mdi-email
+    template(#pug).
+      w-flex(wrap align-center)
+        w-badge.mr10(overlap xs)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
+        w-badge.mr10(overlap sm)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
+        w-badge.mr10(overlap md)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
+        w-badge.mr10(overlap lg)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
+        w-badge(overlap xl)
+          template(#badge) 3
+          w-icon.grey-light1(size="2.5em") mdi mdi-email
     template(#html).
       &lt;w-flex wrap align-center&gt;
         &lt;w-badge class="mr10" overlap xs&gt;
@@ -461,6 +609,18 @@ div
       template(#badge)
         span.size--sm 11
       w-icon(size="2.5em") mdi mdi-account
+    template(#pug).
+      w-badge(bg-color="error")
+        template(#badge)
+          span.size--sm 11
+        w-icon(size="2.5em") mdi mdi-account
+
+      w-icon.ml12.mr6.grey-light3(size="2.5em") mdi mdi-arrow-right
+
+      w-badge(bg-color="error" round)
+        template(#badge)
+          span.size--sm 11
+        w-icon(size="2.5em") mdi mdi-account
     template(#html).
       &lt;w-badge bg-color="error"&gt;
         &lt;template #badge=""&gt;
@@ -496,6 +656,19 @@ div
       template(#badge)
         w-icon(color="pink-light1" md) mdi mdi-heart
       w-icon(size="2.5em") mdi mdi-account
+    template(#pug).
+      w-badge.mr10(bg-color="success" overlap round)
+        template(#badge)
+          w-icon mdi mdi-check
+        w-icon(size="2.5em") mdi mdi-account
+      w-badge.mr10(bg-color="error" overlap round)
+        template(#badge)
+          w-icon mdi mdi-close
+        w-icon(size="2.5em") mdi mdi-account
+      w-badge(bg-color="transparent" overlap round)
+        template(#badge)
+          w-icon(color="pink-light1" md) mdi mdi-heart
+        w-icon(size="2.5em") mdi mdi-account
     template(#html).
       &lt;w-badge class="mr10" bg-color="success" overlap round&gt;
         &lt;template #badge&gt;
@@ -529,6 +702,16 @@ div
     w-badge(bg-color="error" badge-class="px4")
       template(#badge) busy
       w-icon(size="2.5em") mdi mdi-account
+    template(#pug).
+      w-badge(bg-color="error" badge-class="px1")
+        template(#badge) busy
+        w-icon(size="2.5em") mdi mdi-account
+
+      w-icon.ml12.mr6.grey-light3(size="2.5em") mdi mdi-arrow-right
+
+      w-badge(bg-color="error" badge-class="px4")
+        template(#badge) busy
+        w-icon(size="2.5em") mdi mdi-account
     template(#html).
       &lt;w-badge bg-color="error" badge-class="px1"&gt;
         &lt;template #badge&gt;busy&lt;/template&gt;
@@ -567,6 +750,25 @@ div
           w-badge.ma4(v-model="showBadge2" :transition="transition" bg-color="error" overlap round)
             template(#badge) 5
             w-icon(color="grey-light1" size="2.5em") mdi mdi-email
+    template(#pug).
+      .w-flex.align-center.wrap
+        w-flex(column no-grow align-end)
+          span.mb2 Toggle with this transition effect:
+          w-button.code.ma1(@click="transition = 'fade';showBadge = !showBadge" bg-color="primary" xs) fade
+          w-button.code.ma1(@click="transition = 'bounce';showBadge = !showBadge" bg-color="primary" xs) bounce
+          w-button.code.ma1(@click="transition = 'twist';showBadge = !showBadge" bg-color="primary" xs) twist
+          w-button.code.ma1(@click="transition = 'scale';showBadge = !showBadge" bg-color="primary" xs) scale
+          w-button.code.ma1(@click="transition = 'scale-fade';showBadge = !showBadge" bg-color="primary" xs) scale-fade
+          w-button.code.ma1(@click="transition = 'slide-fade-left';showBadge = !showBadge" bg-color="primary" xs) slide-fade-left
+          w-button.code.ma1(@click="transition = 'slide-fade-right';showBadge = !showBadge" bg-color="primary" xs) slide-fade-right
+          w-button.code.ma1(@click="transition = 'slide-fade-up';showBadge = !showBadge" bg-color="primary" xs) slide-fade-up
+          w-button.code.ma1(@click="transition = 'slide-fade-down';showBadge = !showBadge" bg-color="primary" xs) slide-fade-down
+        .w-flex.grow
+          .xs2
+          .xs10
+            w-badge.ma4(v-model="showBadge" :transition="transition" bg-color="error" overlap round)
+              template(#badge) 5
+              w-icon(color="grey-light1" size="2.5em") mdi mdi-email
     template(#html).
       &lt;div class="w-flex align-center wrap"&gt;
         &lt;w-flex column no-grow align-end&gt;

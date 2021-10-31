@@ -43,9 +43,9 @@
     "*.vue"
   ],
   "devDependencies": {
-    "@babel/core": "^7.14.8",
-    "@babel/eslint-parser": "^7.14.7",
-    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
     "@mdi/font": "^5.9.55",
     "@vitejs/plugin-vue": "^1.2.2",
     "@vue/compiler-sfc": "3.1.5",
@@ -65,6 +65,7 @@
     "vue": "^3.2.16",
     "vue-cal": "^4.2.0",
     "vue-router": "^4.0.8",
-    "vueperslides": "^3.3.0"
+    "vueperslides": "^3.3.0",
+    "vuex": "^4.0.2"
   }
 }
