@@ -24,14 +24,14 @@ div
 
   title-link(h2) Value or v-model
   p.
-    Both the #[code value] and #[code v-model] will control the spinner visibility, but there is not
+    Both the #[code model-value] and #[code v-model] will control the spinner visibility, but there is not
     much point in using a #[code v-model] here as the spinner will never emit a value update.
   example(content-class="w-flex")
     w-button.mr4(@click="showSpinner = !showSpinner") Toggle spinner
-    w-spinner(:value="showSpinner")
+    w-spinner(:model-value="showSpinner")
     template(#html).
       &lt;w-button @click="showSpinner = !showSpinner"&gt;Toggle spinner&lt;/w-button&gt;
-      &lt;w-spinner :value="showSpinner" /&gt;
+      &lt;w-spinner :model-value="showSpinner" /&gt;
     template(#js).
       data: () => ({
         showSpinner: false

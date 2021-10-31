@@ -16,7 +16,7 @@ div.lists-demo
       .grow
         .title3 With icons
         w-list(:items="listItems1" icon="wi-check")
-    //- template(#pug).
+    template(#pug).
       .w-flex.wrap
         .grow
           .title3 Most basic
@@ -55,7 +55,7 @@ div.lists-demo
     w-list(:items="listItems4" color="pink" hover)
     br
     w-list(:items="listItems4" bg-color="blue-light5" color="primary" hover)
-    //- template(#pug).
+    template(#pug).
       w-list(:items="items" color="pink" hover)
       br
       w-list(:items="items" bg-color="blue-light5" color="primary" hover)
@@ -86,8 +86,8 @@ div.lists-demo
   title-link(h3) Different color per item
   example
     w-list(:items="listItems5" hover)
-    //- template(#pug).
-    //-   w-list(:items="items" hover)
+    template(#pug).
+      w-list(:items="items" hover)
     template(#html).
       &lt;w-list :items="items" hover&gt;&lt;/w-list&gt;
     template(#js).
@@ -115,7 +115,7 @@ div.lists-demo
     #[code selection-color] to a falsy value (false, null, or empty string), or another color.
   example
     w-list(:model-value="[]" :items="listItems4" selection-color="pink" multiple)
-    //- template(#pug).
+    template(#pug).
       w-list(:model-value="[]" :items="items" selection-color="pink" multiple)
     template(#html).
       &lt;w-list
@@ -145,10 +145,10 @@ div.lists-demo
         | Item {{ index }}
       template(#item.3)
         strong This is the great item #3
-    //- template(#pug).
+    template(#pug).
       w-list(:items="5" hover)
         template(#item="{ index }")
-          | Item {{ index }}
+          | Item {{ '\{\{ index \}\}' }}
         template(#item.3)
           strong This is the great item #3
     template(#html).
@@ -168,12 +168,12 @@ div.lists-demo
         .w-flex.align-center.justify-space-between
           | {{ item.label }}
           w-icon(md) {{ item.icon }}
-    //- template(#pug).
+    template(#pug).
       w-list(:items="items" hover)
         template(#item="{ item }")
           .w-flex.align-center.justify-space-between
-            | {{ item.label }}
-            w-icon(md) {{ item.icon }}
+            | {{ '\{\{ item.label \}\}' }}
+            w-icon(md) {{ '\{\{ item.icon \}\}' }}
     template(#html).
       &lt;w-list :items="items" hover&gt;
         &lt;template #item="{ item }"&gt;
@@ -214,7 +214,7 @@ div.lists-demo
       | Selected item:
       code.ml2(v-if="!multiple || Array.isArray(selection1)") {{ selection1 || 'null' }}
       code.ml2(v-else-if="multiple") {{ selection1 ? [selection1] : '[]' }}
-    //- template(#pug).
+    template(#pug).
       w-radios.mb6(v-model="multiple" :items="radios" inline)
       w-flex(wrap align-center)
         w-list.grow.mr4(
@@ -224,7 +224,7 @@ div.lists-demo
           :multiple="multiple"
           @item-click="itemClicked = $event")
         div(v-if="itemClicked")
-          .title3 clicked item (#[span.code item-click] event):
+          .title3 clicked item (#[code item-click] event):
           br
           span.code {{ itemClicked }}
       .title3.mt2
@@ -320,7 +320,7 @@ div.lists-demo
             span {{ item.label }}
             .spacer
             w-icon(md) {{ item.icon }}
-    //- template(#pug).
+    template(#pug).
       w-flex(wrap basis-zero :gap="3")
         .grow
           .title3.mb4 Default
@@ -347,9 +347,9 @@ div.lists-demo
             checklist
             color="primary")
             template(#item="{ item }")
-              span {{ item.label }}
+              span {{ '\{\{ item.label \}\}' }}
               .spacer
-              w-icon(md) {{ item.icon }}
+              w-icon(md) {{ '\{\{ item.icon \}\}' }}
         .grow
           .title3.mb4 Custom rendering &amp; styles
           w-list.custom(
@@ -358,91 +358,9 @@ div.lists-demo
             checklist
             color="primary")
             template(#item="{ item }")
-              span {{ item.label }}
+              span {{ '\{\{ item.label \}\}' }}
               .spacer
-              w-icon(md) {{ item.icon }}
-      template(#html).
-      w-flex(wrap basis-zero :gap="3")
-        .grow
-          .title3.mb4 Default
-          w-list(
-            v-model="selection3"
-            :items="listItems1"
-            checklist
-            color="green")
-        .grow
-          .title3.mb4 Round checkboxes
-          w-list(
-            v-model="selection4"
-            :items="listItems1"
-            checklist
-            round-checkboxes
-            color="green")
-
-      w-flex.mt4(wrap basis-zero :gap="3")
-        .grow
-          .title3.mb4 Custom rendering, default styles
-          w-list(
-            :items="listItems2"
-            item-value-key="id"
-            checklist
-            color="primary")
-            template(#item="{ item }")
-              span {{ item.label }}
-              .spacer
-              w-icon(md) {{ item.icon }}
-        .grow
-          .title3.mb4 Custom rendering &amp; styles
-          w-list.custom(
-            :items="listItems2"
-            item-value-key="id"
-            checklist
-            color="primary")
-            template(#item="{ item }")
-              span {{ item.label }}
-              .spacer
-              w-icon(md) {{ item.icon }}
-      template(#html).
-      w-flex(wrap basis-zero :gap="3")
-        .grow
-          .title3.mb4 Default
-          w-list(
-            v-model="selection3"
-            :items="listItems1"
-            checklist
-            color="green")
-        .grow
-          .title3.mb4 Round checkboxes
-          w-list(
-            v-model="selection4"
-            :items="listItems1"
-            checklist
-            round-checkboxes
-            color="green")
-
-      w-flex.mt4(wrap basis-zero :gap="3")
-        .grow
-          .title3.mb4 Custom rendering, default styles
-          w-list(
-            :items="listItems2"
-            item-value-key="id"
-            checklist
-            color="primary")
-            template(#item="{ item }")
-              span {{ item.label }}
-              .spacer
-              w-icon(md) {{ item.icon }}
-        .grow
-          .title3.mb4 Custom rendering &amp; styles
-          w-list.custom(
-            :items="listItems2"
-            item-value-key="id"
-            checklist
-            color="primary")
-            template(#item="{ item }")
-              span {{ item.label }}
-              .spacer
-              w-icon(md) {{ item.icon }}
+              w-icon(md) {{ '\{\{ item.icon \}\}' }}
     template(#html).
       &lt;w-flex wrap basis-zero :gap="3"&gt;
         &lt;div class="grow"&gt;
@@ -546,7 +464,7 @@ div.lists-demo
 
   example
     w-list(v-model="selection5" :items="listItems5" checklist)
-    //- template(#pug).
+    template(#pug).
       w-list(v-model="selection5" :items="items" checklist)
     template(#html).
       &lt;w-list
@@ -576,12 +494,12 @@ div.lists-demo
         span {{ item.label }}
         .spacer
         w-icon(md) {{ item.icon }}
-    //- template(#pug).
+    template(#pug).
       w-list(:items="listItems2" nav color="primary")
         template(#item="{ item }")
-          span {{ item.label }}
+          span {{ '\{\{ item.label\ \}' }}}
           .spacer
-          w-icon(md) {{ item.icon }}
+          w-icon(md) {{ '\{\{ item.icon \}\}' }}
     template(#html).
       &lt;w-list :items="items" nav color="primary"&gt;
         &lt;template #item="{ item }"&gt;

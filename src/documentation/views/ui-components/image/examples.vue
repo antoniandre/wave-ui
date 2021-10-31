@@ -21,6 +21,8 @@ div
   p With no given width, height or ratio, the image is loaded full-size.
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/favicon.png`")
+    template(#pug).
+      w-image(:src="`${baseUrl}images/favicon.png`")
     template(#html).
       &lt;w-image :src="`${baseUrl}images/favicon.png`"&gt;&lt;/w-image&gt;
     template(#js).
@@ -35,6 +37,9 @@ div
   example(content-class="text-center w-flex justify-space-around wrap")
     w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
+    template(#pug).
+      w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
     template(#html).
       &lt;w-image
         class="mr5"
@@ -63,6 +68,8 @@ div
     be set to 100%.
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="233 / 1000")
+    template(#pug).
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="233 / 1000")
     template(#html).
       &lt;w-image
         :src="`${baseUrl}images/japanese-wave.png`"
@@ -86,7 +93,7 @@ div
 
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
-    //- template(#pug).
+    template(#pug).
       w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
     template(#html).
       &lt;w-image
@@ -109,7 +116,7 @@ div
     Refresh the page if you haven't seen it!
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" width="100%" :ratio="1 / 2")
-    //- template(#pug).
+    template(#pug).
       w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" width="100%" :ratio="1 / 2")
     template(#html).
       &lt;w-image
@@ -147,8 +154,21 @@ div
             code {{ item.label }}
         w-button.mt2(@click="reload") Reload image
       w-image(:src="img.src" :width="500" :height="250" :transition="img.transition")
+    template(#pug).
+      w-flex(wrap justify-center align-center)
+        div.mr4.my2
+          .title3.mb2 Transition names
+          w-radios(
+            v-model="img.transition"
+            :items="transitions"
+            item-value-key="label")
+            template(#label="{ item }")
+              code {{ '\{\{ item.label \}\}' }}
+          w-button.mt2(@click="reload") Reload image
+
+        w-image(:src="img.src" :width="500" :height="250" :transition="img.transition")
     template(#html).
-      &lt;div class="w-flex wrap justify-center align-center"&gt;
+      &lt;w-flex wrap justify-center align-center&gt;
         &lt;div class="mr4 my2"&gt;
           &lt;div class="title3 mb2"&gt;
             Transition names
@@ -176,7 +196,7 @@ div
           :height="250"
           :transition="img.transition"&gt;
         &lt;/w-image&gt;
-      &lt;/div&gt;
+      &lt;/w-flex&gt;
     template(#js).
       data: () => ({
         img: {
@@ -226,11 +246,12 @@ div
       :fallback="`${baseUrl}images/not-found.jpg`"
       @error="showError = true")
     w-alert(v-if="showError" error) Oops. The image could not load!
-    //- template(#pug).
+    template(#pug).
       w-image(
         :src="`${baseUrl}images/broken.png`"
         :fallback="`${baseUrl}images/not-found.jpg`"
         @error="showError = true")
+
       w-alert(v-if="showError" error) Oops. The image could not load!
     template(#html).
       &lt;w-image
@@ -256,11 +277,13 @@ div
   title-link(h2) Lazy
   p.
     By using the lazy attribute, it is possible to load the image only when it is in the viewport.#[br]
-    Wave UI internally uses an IntersectionObserver and will only start loading the image when it is
-    visible.
+    Wave UI internally uses an #[span.code IntersectionObserver] and will only start loading the image
+    when it is visible.
   example
-    //- ?v1 to prevent cache from reloading the image without request.
+    //- ?v1 to prevent the image to load from cache for this example (image is used above).
     w-image(:src="`${baseUrl}images/spirit-island--alberta.png?v1`" lazy :ratio="2550 / 5098")
+    template(#pug).
+      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy :ratio="2550 / 5098")
     template(#html).
       &lt;w-image
         :src="`${baseUrl}images/spirit-island--alberta.png`"
@@ -279,10 +302,13 @@ div
   p.
     In some cases, it can be convenient to have some content on top of the image.#[br]
     By default the content will be horizontally and vertically centered, but you could easily align it
-    at the bottom left for instance, with the attribute #[code content-class="align-end justify-start pa2"].
+    at the bottom left for instance, with the #[code content-class] prop: #[code content-class="align-end justify-start pa2"].
   example
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="2550 / 5098")
       span.title1.pink Wave UI
+    template(#pug).
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="2550 / 5098")
+        span.title1.pink Wave UI
     template(#html).
       &lt;w-image
         :src="`${baseUrl}images/japanese-wave.png`"

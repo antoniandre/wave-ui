@@ -32,3 +32,12 @@ p {margin-bottom: 2 * $base-increment;}
   .w-app .content-wrap {padding-left: 16px;}
   .title-link .hash {display: none;}
 }
+
+@media screen and (max-width: 450px) {
+  .w-app .content-wrap {padding-left: 8px;padding-right: 8px;}
+  .ssh-pre__content {padding-top: 12px;}
+  .w-app .example {
+    .ssh-pre__copy {top: -2px;right: -2px;}
+    .ssh-pre[data-label]:before {top: 5px;}
+  }
+}

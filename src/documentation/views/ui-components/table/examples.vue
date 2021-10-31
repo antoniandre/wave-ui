@@ -197,6 +197,66 @@ div
         }
       })
 
+  title-link(h2) Toggling column visibility
+  p.
+    This is completely external to Wave UI, but this example shows you a way to do it in your
+    code as it is a frequent use case.
+  example
+    | Toggle columns:
+    w-tag.ma1(
+      v-for="(header, index) in table6.headers"
+      :key="index"
+      :bg-color="header.hidden ? 'grey-light4' : 'primary'"
+      @click.stop="header.hidden = !header.hidden")
+      w-icon.mr2 mdi mdi-eye{{ header.hidden ? '-off' : ''}}
+      | {{ header.label }}
+
+    w-table.mt2(:headers="table6.headers.filter(header => !header.hidden)" :items="table6.items")
+    //- template(#pug).
+      w-tag.ma1(
+        v-for="(header, index) in table.headers"
+        :key="index"
+        :bg-color="header.hidden ? 'grey-light4' : 'primary'"
+        @click.stop="header.hidden = !header.hidden")
+        w-icon.mr2 mdi mdi-eye{{ "\{\{ header.hidden ? '-off' : ''\}\}" }}
+        | {{ "\{\{ header.label \}\}" }}
+
+      w-table.mt2(:headers="table.headers.filter(header => !header.hidden)" :items="table.items")
+    template(#html).
+      Toggle columns:
+      &lt;w-tag
+        v-for="(header, index) in table.headers"
+        :key="index"
+        class="ma1"
+        :bg-color="header.hidden ? 'grey-light4' : 'primary'"
+        @click.stop="header.hidden = !header.hidden"&gt;
+        &lt;w-icon class="mr2"&gt;mdi mdi-eye{{ "\{\{ header.hidden ? '-off' : ''\}\}" }}&lt;/w-icon&gt;
+        {{ "\{\{ header.label \}\}" }}
+      &lt;/w-tag&gt;
+
+      &lt;w-table
+        :headers="table.headers.filter(header => !header.hidden)"
+        :items="table.items"
+        class="mt2"&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id', hidden: false },
+            { label: 'First name', key: 'firstName', hidden: false },
+            { label: 'Last name', key: 'lastName', hidden: false }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+          ]
+        }
+      })
+
   title-link(h2) Initial Sorting
   p.
     To make the sorting API very easy to use and remember (and avoid complex array or object structures),
@@ -1171,6 +1231,14 @@ export default {
         { id: 5, firstName: 'Virgil', lastName: 'Carman', gender: 0, weight: 74, height: 1.72 }
       ]
     },
+    table6: {
+      headers: [
+        { label: 'ID', key: 'id', hidden: false },
+        { label: 'First name', key: 'firstName', hidden: false },
+        { label: 'Last name', key: 'lastName', hidden: false }
+      ],
+      items: allItems.slice(0, 5)
+    },
     selectableRowsOptions: [
       { label: '<code class="mr2">:selectable-row="false"</code> (default)', value: false },
       { label: '<code>selectable-row</code>', value: true },
@@ -1183,6 +1251,10 @@ export default {
     reload () {
       this.table1.loading = true
       setTimeout(() => (this.table1.loading = false), 2000)
+    },
+
+    hideColumn (columnIndex) {
+      this.table6.headers[columnIndex].hidden = !this.table6.headers[columnIndex].hidden
     }
   },
 

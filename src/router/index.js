@@ -1,5 +1,6 @@
 import { reactive } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '@/store'
 import GettingStarted from '@/documentation/views/getting-started/index.vue'
 import Home from '@/documentation/views/home.vue'
 
@@ -193,6 +194,12 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-router.afterEach(() => (router.status = false))
+router.afterEach(() => {
+  router.status = false
+  setTimeout(() => {
+    // After route change, update the title of the page to pass it to Codepen from examples.
+    store.commit('setCurrentPage', document.querySelector('h1').innerText.replace(/[#\n]/g, ''))
+  }, 200)
+})
 
 export default router
