@@ -14,27 +14,49 @@ div
   example
     w-confirm(icon="wi-cross")
 
+  title-link(h2) Transitions
+  example
+    w-confirm(transition="fade") Confirm button
+
   title-link(h2) Colors
   example
-    w-confirm(bg-color="success" color="white") Test
-    w-confirm(bg-color="indigo" color="yellow") Test
+    w-confirm(bg-color="success" color="white") Confirm button
+    w-confirm(bg-color="indigo" color="yellow") Confirm button
 
   title-link(h2) Alignments
   example
-    w-confirm.my5(bg-color="red" align-right) Test
-    w-confirm.my5(bg-color="red" align-left) Test
-    w-confirm.my5(bg-color="red" top) Test
-    w-confirm.my5(bg-color="red" top align-left) Test
-    w-confirm.my5(bg-color="red" left align-bottom) Test
+    w-confirm.my5(bg-color="red" align-right) Confirm button
+    w-confirm.my5(bg-color="red" align-left) Confirm button
+    w-confirm.my5(bg-color="red" top) Confirm button
+    w-confirm.my5(bg-color="red" top align-left) Confirm button
+    w-confirm.my5(bg-color="red" left align-bottom) Confirm button
 
   title-link(h2) Persistent
   example
-    w-confirm(persistent) Test
+    w-confirm(persistent) Confirm button
 
+  title-link(h2) Cancel &amp; accept buttons
+  example
+    w-confirm
+      | Confirm button
+      template(#cancel) Dismiss
+      template(#accept) Accept
+
+  title-link(h2) Inline question
+  example
+    w-confirm(inline)
+      | Confirm button
+      template(#cancel) Dismiss
+      template(#accept) Accept
+
+  title-link(h2) Events
+  example
+    w-confirm(
+      @cancel="$waveui.notify('Canceled.', 'error')"
+      @accept="$waveui.notify('Accepted!', 'success')") Confirm button
 </template>
 
 <script>
 export default {
-
 }
 </script>
