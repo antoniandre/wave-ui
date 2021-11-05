@@ -4,12 +4,14 @@
     template(#activator="{ on }")
       w-button.w-confirm__button(v-on="on" v-bind="buttonProps")
         slot
-    .w-confirm__menu
+    w-flex.w-confirm__menu(:column="!inline" align-center)
       div
         slot(name="question") Are you sure?
-      .w-flex.justify
-        w-button(@click="showPopup = false") Cancel
-        w-button(@click="showPopup = false") Ok
+      .w-flex.justify-end(:class="inline ? 'ml2' : 'mt2'")
+        w-button.mr2(bg-color="error" @click="onCancel")
+          slot(name="cancel") Cancel
+        w-button(bg-color="success" @click="onAccept")
+          slot(name="accept") Ok
 </template>
 
 <script>
@@ -19,6 +21,9 @@ export default {
     bgColor: { type: String },
     color: { type: String },
     icon: { type: String },
+    cancelButtonColor: { type: String },
+    acceptButtonColor: { type: String },
+    inline: { type: Boolean },
 
     // W-menu props.
     top: { type: Boolean },
@@ -29,7 +34,8 @@ export default {
     alignBottom: { type: Boolean },
     alignLeft: { type: Boolean },
     alignRight: { type: Boolean },
-    persistent: { type: Boolean }
+    persistent: { type: Boolean },
+    transition: { type: String }
   },
 
   emits: [],
@@ -50,7 +56,8 @@ export default {
         alignBottom: this.alignBottom,
         alignLeft: this.alignLeft,
         alignRight: this.alignRight,
-        persistent: this.persistent
+        persistent: this.persistent,
+        transition: this.transition
       }
     },
     buttonProps () {
@@ -59,6 +66,17 @@ export default {
         color: this.color,
         icon: this.icon
       }
+    }
+  },
+
+  methods: {
+    onCancel () {
+      this.$emit('cancel')
+      this.showPopup = false
+    },
+    onAccept () {
+      this.$emit('accept')
+      this.showPopup = false
     }
   }
 }
