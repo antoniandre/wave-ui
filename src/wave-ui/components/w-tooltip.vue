@@ -1,7 +1,7 @@
 <template lang="pug">
 .w-tooltip-wrap(ref="wrapper" :class="{ 'w-tooltip-wrap--attached': !detachTo }")
   slot(name="activator" :on="eventHandlers")
-  transition(:name="transitionName")
+  transition(:name="transitionName" appear)
     .w-tooltip(ref="tooltip" v-show="showTooltip" :class="classes" :style="styles")
       //- When there is a bg color, another div wrapper is needed for the triangle
       //- to inherit the current color.

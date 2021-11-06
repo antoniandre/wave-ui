@@ -1,7 +1,7 @@
 <template lang="pug">
 .w-menu-wrap(ref="wrapper")
   slot(name="activator" :on="activatorEventHandlers")
-  transition(:name="transitionName")
+  transition(:name="transitionName" appear)
     .w-menu(
       v-if="custom"
       ref="menu"
