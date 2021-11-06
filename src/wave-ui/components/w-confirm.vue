@@ -1,6 +1,6 @@
 <template lang="pug">
 .w-confirm
-  w-menu(v-model="showPopup" v-bind="menuProps")
+  w-menu(v-model="showPopup" v-bind="wMenuProps")
     template(#activator="{ on }")
       w-button.w-confirm__button(v-on="on" v-bind="buttonProps")
         slot
@@ -8,24 +8,35 @@
       div
         slot(name="question") Are you sure?
       .w-flex.justify-end(:class="inline ? 'ml2' : 'mt2'")
-        w-button.mr2(bg-color="error" @click="onCancel")
+        w-button.mr2(v-if="!noCancel" :bg-color="cancelButton.bgColor || 'error'" @click="onCancel")
           slot(name="cancel") Cancel
-        w-button(bg-color="success" @click="onAccept")
-          slot(name="accept") Ok
+        w-button(:bg-color="confirmButton.bgColor || 'success'" @click="onConfirm")
+          slot(name="confirm") Confirm
 </template>
 
 <script>
 export default {
   name: 'w-confirm',
   props: {
+    // Main button props.
     bgColor: { type: String },
     color: { type: String },
     icon: { type: String },
+    tooltip: { type: Boolean },
+
+    // Cancel & confirm buttons props.
     cancelButtonColor: { type: String },
-    acceptButtonColor: { type: String },
-    inline: { type: Boolean },
+    confirmButtonColor: { type: String },
+    noCancel: { type: Boolean }, // Removes the cancel button.
+    cancelButton: { type: [Boolean, Object] }, // Allow passing down an object of props to the w-button component.
+    confirmButton: { type: [Boolean, Object] }, // Allow passing down an object of props to the w-button component.
+
+    // global menu props.
+    inline: { type: Boolean }, // The layout inside the menu.
 
     // W-menu props.
+    menuProps: { type: Object }, // Allow passing down an object of props to the w-menu component.
+    // All the menu props shorthands, as long as they don't conflict with the button props.
     top: { type: Boolean },
     bottom: { type: Boolean },
     left: { type: Boolean },
@@ -38,7 +49,7 @@ export default {
     transition: { type: String }
   },
 
-  emits: [],
+  emits: ['cancel', 'confirm'],
 
   data: () => ({
     showPopup: false,
@@ -46,7 +57,7 @@ export default {
   }),
 
   computed: {
-    menuProps () {
+    wMenuProps () {
       return {
         top: this.top,
         bottom: this.bottom,
@@ -57,7 +68,8 @@ export default {
         alignLeft: this.alignLeft,
         alignRight: this.alignRight,
         persistent: this.persistent,
-        transition: this.transition
+        transition: this.transition,
+        ...this.menuProps
       }
     },
     buttonProps () {
@@ -74,8 +86,8 @@ export default {
       this.$emit('cancel')
       this.showPopup = false
     },
-    onAccept () {
-      this.$emit('accept')
+    onConfirm () {
+      this.$emit('confirm')
       this.showPopup = false
     }
   }
