@@ -618,8 +618,8 @@ $tr-border-top: 1px;
 
     &, & * {
       overflow: hidden;
-      white-space: nowrap;
-      // text-overflow: ellipsis; // If you only want the content cell on a single line.
+      // white-space: nowrap; // If you only want the content cell on a single line.
+      text-overflow: ellipsis;
     }
   }
 
