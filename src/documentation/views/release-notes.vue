@@ -24,6 +24,12 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.43.0
+      ul
+        li.
+          #[strong.code w-menu] Allow defining a w-menu class as an object.
+
+    li.minor
       strong.version v1.42.0
       ul
         li.
