@@ -1248,16 +1248,16 @@ export default {
     },
     table7: {
       headers: [
-        { label: 'ID', key: 'id' },
-        { label: 'Content', key: 'content' },
+        { label: 'ID', key: 'id', width: '50' },
+        { label: 'Content', key: 'content', width: '70%' },
         { label: 'First name', key: 'firstName' },
       ],
       items: [
-        { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.Voluptate vel dolorum unde doloribus, mollitia quae blanditiis quas quos. Vitae iusto blanditiis animi assumenda repellat numquam pariatur neque repudiandae. Minima, architecto eaque tenetur a expedita ea voluptatibus aspernatur nam?', firstName: 'Floretta' },
-        { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.Voluptate vel dolorum unde doloribus, mollitia quae blanditiis quas quos. Vitae iusto blanditiis animi assumenda repellat numquam pariatur neque repudiandae. Minima, architecto eaque tenetur a expedita ea voluptatibus aspernatur nam?', firstName: 'Nellie' },
-        { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.Voluptate vel dolorum unde doloribus, mollitia quae blanditiis quas quos. Vitae iusto blanditiis animi assumenda repellat numquam pariatur neque repudiandae. Minima, architecto eaque tenetur a expedita ea voluptatibus aspernatur nam?', firstName: 'Rory' },
-        { id: 4, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.Voluptate vel dolorum unde doloribus, mollitia quae blanditiis quas quos. Vitae iusto blanditiis animi assumenda repellat numquam pariatur neque repudiandae. Minima, architecto eaque tenetur a expedita ea voluptatibus aspernatur nam?', firstName: 'Daley' },
-        { id: 5, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.Voluptate vel dolorum unde doloribus, mollitia quae blanditiis quas quos. Vitae iusto blanditiis animi assumenda repellat numquam pariatur neque repudiandae. Minima, architecto eaque tenetur a expedita ea voluptatibus aspernatur nam?', firstName: 'Virgil' }
+        { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
+        { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
+        { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' },
+        { id: 4, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Daley' },
+        { id: 5, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Virgil' }
       ]
     },
     selectableRowsOptions: [
