@@ -70,10 +70,11 @@ div
 
   title-link(h2) Inline question
   example
-    w-confirm(inline)
-      | Ask for confirm
-      template(#cancel) Dismiss
-      template(#confirm) Confirm
+    w-confirm(inline) Ask for confirm
+
+  title-link(h2) Menu border style
+  example
+    w-confirm(menu-border) Ask for confirm
 
   title-link(h2) Events
   example
