@@ -24,6 +24,12 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.43.0
+      ul
+        li.
+          #[strong.code w-table] Allow column resizing to a lower width than the cell text content.
+
+    li.minor
       strong.version v1.42.0
       ul
         li.
