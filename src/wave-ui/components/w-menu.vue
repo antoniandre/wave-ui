@@ -71,7 +71,7 @@ export default {
     round: { type: Boolean },
     noBorder: { type: Boolean },
     transition: { type: String },
-    menuClass: { type: String },
+    menuClass: { type: [String, Object] },
     titleClass: { type: String },
     contentClass: { type: String },
     // Position.
@@ -166,10 +166,14 @@ export default {
     },
 
     classes () {
+      const extraClasses = typeof this.menuClass === 'object'
+                         ? this.menuClass
+                         : { [this.menuClass]: this.menuClass }
+
       return {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
-        [this.menuClass]: this.menuClass,
+        ...extraClasses,
         [`w-menu--${this.position}`]: true,
         [`w-menu--align-${this.alignment}`]: this.alignment,
         'w-menu--tile': this.tile,
