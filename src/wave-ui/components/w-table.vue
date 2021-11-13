@@ -426,7 +426,7 @@ export default {
       }
     },
 
-    onResizerMouseUp (e) {
+    onResizerMouseUp () {
       // Remove listeners.
       document.removeEventListener('mousemove', this.onResizerMouseMove)
       document.removeEventListener('mouseup', this.onResizerMouseUp)
@@ -619,7 +619,7 @@ $tr-border-top: 1px;
     &, & * {
       overflow: hidden;
       white-space: nowrap;
-      text-overflow: ellipsis;
+      // text-overflow: ellipsis; // If you only want the content cell on a single line.
     }
   }
 
