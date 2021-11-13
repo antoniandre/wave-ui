@@ -28,6 +28,8 @@ p {margin-bottom: 2 * $base-increment;}
 .fade-page-enter-active, .fade-page-leave-active {transition: opacity 0.12s;}
 .fade-page-enter, .fade-page-leave-to {opacity: 0;}
 
+// MEDIA QUERIES.
+// --------------------------------------------------------
 @media screen and (max-width: 600px) {
   .w-app .content-wrap {padding-left: 16px;}
   .title-link .hash {display: none;}
@@ -39,5 +41,23 @@ p {margin-bottom: 2 * $base-increment;}
   .w-app .example {
     .ssh-pre__copy {top: -2px;right: -2px;}
     .ssh-pre[data-label]:before {top: 5px;}
+  }
+}
+
+// Light mode.
+// @media (prefers-color-scheme: light) {
+//   body {
+//     background-color: white;
+//     color: black;
+//   }
+// }
+
+// Dark mode.
+@media (prefers-color-scheme: dark) {
+  $dark-theme: true;
+
+  body {
+    background-color: #222326;
+    color: white;
   }
 }

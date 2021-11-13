@@ -1,5 +1,15 @@
+$dark-theme: true !default;
 $links: #09c;
 $primary: #234781;
 $secondary: #d4e9ed;
 
 $base-font-size: 13px; // Override Wave UI's default.
+
+
+// Dark theme.
+// --------------------------------------------------------
+@if $dark-theme {
+  $links: lighten($links, 30%);
+  $primary: lighten($primary, 35%);
+  $secondary: darken($secondary, 30%);
+}
