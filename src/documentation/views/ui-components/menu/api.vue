@@ -20,7 +20,7 @@ const propsDescs = {
   color: 'Applies a color to the menu\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the menu\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   shadow: 'Applies a drop shadow to the menu element.',
-  custom: 'By default, the menu layout is a <strong class="code">w-card</strong>. To have more flexibility, you can set this option to true.',
+  custom: 'By default, the menu layout is a <strong class="code">w-card</strong>. To have more flexibility, you can set this option to <code>true</code>.',
   tile: 'Removes the default border-radius and sets sharp edges on the menu.',
   round: 'Sets a maximum border-radius on the corners of the menu, giving it a round look.',
   Arrow: 'Adds a small triangle on the edge of the menu, pointing toward the activator.',
@@ -30,11 +30,12 @@ const propsDescs = {
   titleClass: 'Applies a custom CSS class to the menu\'s title when using the default card layout (when not using the <code>custom</code> prop).',
   contentClass: 'Applies a custom CSS class to the menu\'s content when using the default card layout (when not using the <code>custom</code> prop).',
   detachTo: 'Moves the menu element to another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `<span class="code">.w-app</span>` will be the target.<br>By default a wrapper is created around the activator element and the menu is appended inside it.',
+  noPosition: 'Skip the menu positioning calculation, if you prefer to set it via CSS. Setting this prop to <code>true</code> will also disable the side positioning (top, left, right, bottom) and the alignments.',
   fixed: 'Sets the CSS position of the menu to <code>fixed</code> (absolute by default).',
-  top: 'Places the menu at the top of the screen when the <code>fixed</code> prop is set to true or at the top of its container otherwise.',
-  bottom: 'Places the menu at the bottom of the screen when the <code>fixed</code> prop is set to true or at the bottom of its container otherwise.',
-  left: 'Places the menu at the left of the screen when the <code>fixed</code> prop is set to true or at the left of its container otherwise.',
-  right: 'Places the menu at the right of the screen when the <code>fixed</code> prop is set to true or at the right of its container otherwise.',
+  top: 'Places the menu at the top of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the top of its container otherwise.',
+  bottom: 'Places the menu at the bottom of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the bottom of its container otherwise.',
+  left: 'Places the menu at the left of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the left of its container otherwise.',
+  right: 'Places the menu at the right of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the right of its container otherwise.',
   alignTop: 'Aligns the top of the menu with the top of the activator.',
   alignBottom: 'Aligns the bottom of the menu with the bottom of the activator.',
   alignLeft: 'Aligns the left side of the menu with the left side of the activator.',
@@ -44,7 +45,7 @@ const propsDescs = {
   overlay: 'Displays a full screen overlay underneath the menu (uses the <span class="code">w-overlay</span> component).',
   overlayClass: 'Add custom CSS classes to the <span class="code">w-overlay</span> component.',
   overlayProps: 'An object of props to pass down to the <span class="code">w-overlay</span> component for more control.',
-  persistent: 'When set to true, clicking outside of the menu will not close the menu.'
+  persistent: 'When set to <code>true</code>, clicking outside of the menu will not close the menu.'
 }
 
 const slots = {
