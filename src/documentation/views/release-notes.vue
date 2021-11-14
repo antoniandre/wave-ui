@@ -23,6 +23,14 @@ main
     //-----------------------------------------------------
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v1.42.2
+      p #[strong.code w-menu] Completely unmount the menu from the DOM when it is not open.
+
+    li.patch
+      strong.version v1.42.1
+      p #[strong.code w-table] Allow column resizing to a lower width than the cell text content.
+
     li.minor
       strong.version v1.43.0
       ul
