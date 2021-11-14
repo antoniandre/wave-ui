@@ -45,7 +45,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "@/wave-ui/scss/variables";@import "@/documentation/scss/_variables.scss";'
+        additionalData: '@import "@/wave-ui/scss/variables";@import "@/wave-ui/scss/mixins";@import "@/documentation/scss/_variables.scss";'
       }
     }
   },
