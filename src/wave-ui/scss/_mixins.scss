@@ -1,0 +1,80 @@
+@mixin default-transition($duration: $transition-duration, $delay: 0s) {
+  transition: $duration $delay ease-in-out;
+}
+
+@mixin out-back-transition($duration: $transition-duration, $delay: 0s) {
+  transition: $duration $delay cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+@mixin triangle($color: white, $size: 7px, $selector: '') {
+  // The underneath border triangle.
+  &:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: $size solid transparent;
+  }
+
+  &#{$selector}--top:before {
+    top: 100%;
+    left: 50%;
+    border-top-color: inherit;
+    transform: translateX(-50%);
+    margin-top: 0;
+  }
+  &#{$selector}--bottom:before {
+    bottom: 100%;
+    left: 50%;
+    border-bottom-color: inherit;
+    transform: translateX(-50%);
+    margin-bottom: 0;
+  }
+  &#{$selector}--left:before {
+    left: 100%;
+    top: 50%;
+    border-left-color: inherit;
+    transform: translateY(-50%);
+    margin-left: 0;
+  }
+  &#{$selector}--right:before {
+    right: 100%;
+    top: 50%;
+    border-right-color: inherit;
+    transform: translateY(-50%);
+    margin-right: 0;
+  }
+
+  // The colored triangle on top of `:before`.
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: ($size - 1) solid transparent;
+  }
+  &#{$selector}--top:after {
+    top: 100%;
+    left: 50%;
+    border-top-color: $color;
+    transform: translateX(-50%);
+  }
+  &#{$selector}--bottom:after {
+    bottom: 100%;
+    left: 50%;
+    border-bottom-color: $color;
+    transform: translateX(-50%);
+  }
+  &#{$selector}--left:after {
+    left: 100%;
+    top: 50%;
+    border-left-color: $color;
+    transform: translateY(-50%);
+  }
+  &#{$selector}--right:after {
+    right: 100%;
+    top: 50%;
+    border-right-color: $color;
+    transform: translateY(-50%);
+  }
+}
