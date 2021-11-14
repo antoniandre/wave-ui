@@ -23,6 +23,7 @@ const propsDescs = {
   custom: 'By default, the menu layout is a <strong class="code">w-card</strong>. To have more flexibility, you can set this option to true.',
   tile: 'Removes the default border-radius and sets sharp edges on the menu.',
   round: 'Sets a maximum border-radius on the corners of the menu, giving it a round look.',
+  Arrow: 'Adds a small triangle on the edge of the menu, pointing toward the activator.',
   noBorder: 'Removes the default border from the menu element.',
   transition: 'Applies a particular transition to the menu element when showing and hiding.<br>Accepts all the transitions listed in the <a href="/transitions">transitions</a> knowledge base page. You can also disable the transition by setting this prop to an empty string.',
   menuClass: 'Applies a custom CSS class to the menu element.',
