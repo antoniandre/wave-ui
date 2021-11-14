@@ -73,6 +73,7 @@ export default {
     titleClass: { type: String },
     contentClass: { type: String },
     // Position.
+    arrow: { type: Boolean }, // The small triangle pointing toward the activator.
     detachTo: { type: [String, Boolean, Object] },
     fixed: { type: Boolean },
     top: { type: Boolean },
@@ -177,6 +178,7 @@ export default {
         'w-menu--tile': this.tile,
         'w-menu--card': !this.custom,
         'w-menu--round': this.round,
+        'w-menu--arrow': this.arrow,
         'w-menu--shadow': this.shadow,
         'w-menu--fixed': this.fixed
       }
@@ -422,6 +424,9 @@ export default {
         this.$nextTick(() => {
           this.menuEl = this.$refs.menu?.$el || this.$refs.menu
 
+          // If `arrow` is set to true, apply it the same color as the background.
+          this.menuEl.style.setProperty('--w-menu-bg-color', this.$waveui.colors[this.bgColor])
+
           // Move the menu elsewhere in the DOM.
           // wrapper.parentNode.insertBefore(this.menuEl, wrapper)
           this.detachToTarget.appendChild(this.menuEl)
@@ -488,5 +493,9 @@ export default {
   &--bottom {margin-top: 3 * $base-increment;}
   &--left {margin-left: -3 * $base-increment;}
   &--right {margin-left: 3 * $base-increment;}
+
+  &--arrow {
+    @include triangle(var(--w-menu-bg-color), 9px, '.w-menu');
+  }
 }
 </style>
