@@ -15,15 +15,15 @@ div
 import WTable from '@/wave-ui/components/w-table.vue'
 
 const propsDescs = {
-  items: '',
+  items: 'An array of objects to define the table data.',
   headers: 'An array of objects to define the columns of the table. The headers are always required, even when hidden.',
   noHeaders: 'The table headings will be hidden. Only the table data will be visible.',
-  fixedHeaders: '',
-  loading: 'When set to true, a progress bar will be displayed. Convenient when the table data is not ready.',
+  fixedHeaders: 'When set to <code>true</code>, the table headings will be sticky at the top of the table when scrolling down.',
+  loading: 'When set to <code>true</code>, a progress bar will be displayed. Convenient when the table data is not ready.',
   sort: '',
-  expandableRows: '',
+  expandableRows: 'Activate or deactivate the expandable rows feature.<br>When set to <code>true</code>, a click on a row will expand some details for this record on a next row.',
   expandedRows: '',
-  selectableRows: '',
+  selectableRows: 'Activate or deactivate the selectable rows feature.<br>When set to <code>true</code>, a click on a row will set it to activated and a CSS class will be applied as well as a highlight.',
   selectedRows: '',
   forceSelection: '',
   uidKey: '',
