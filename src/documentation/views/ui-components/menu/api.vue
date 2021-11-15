@@ -26,9 +26,9 @@ const propsDescs = {
   Arrow: 'Adds a small triangle on the edge of the menu, pointing toward the activator.',
   noBorder: 'Removes the default border from the menu element.',
   transition: 'Applies a particular transition to the menu element when showing and hiding.<br>Accepts all the transitions listed in the <a href="/transitions">transitions</a> knowledge base page. You can also disable the transition by setting this prop to an empty string.',
-  menuClass: 'Applies a custom CSS class to the menu element.',
-  titleClass: 'Applies a custom CSS class to the menu\'s title when using the default card layout (when not using the <code>custom</code> prop).',
-  contentClass: 'Applies a custom CSS class to the menu\'s content when using the default card layout (when not using the <code>custom</code> prop).',
+  menuClass: 'Provide custom CSS classes for the menu element.',
+  titleClass: 'Provide custom CSS classes for the menu\'s title when using the default card layout (when not using the <code>custom</code> prop).',
+  contentClass: 'Provide custom CSS classes for the menu\'s content when using the default card layout (when not using the <code>custom</code> prop).',
   detachTo: 'Moves the menu element to another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `<span class="code">.w-app</span>` will be the target.<br>By default a wrapper is created around the activator element and the menu is appended inside it.',
   noPosition: 'Skip the menu positioning calculation, if you prefer to set it via CSS. Setting this prop to <code>true</code> will also disable the side positioning (top, left, right, bottom) and the alignments.',
   fixed: 'Sets the CSS position of the menu to <code>fixed</code> (absolute by default).',
@@ -43,7 +43,7 @@ const propsDescs = {
   zIndex: 'Applies a z-index (positive or negative integer) to the menu.',
   minWidth: 'Sets a min-width on the menu.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
   overlay: 'Displays a full screen overlay underneath the menu (uses the <span class="code">w-overlay</span> component).',
-  overlayClass: 'Add custom CSS classes to the <span class="code">w-overlay</span> component.',
+  overlayClass: 'Provide custom CSS classes for the <span class="code">w-overlay</span> component.',
   overlayProps: 'An object of props to pass down to the <span class="code">w-overlay</span> component for more control.',
   persistent: 'When set to <code>true</code>, clicking outside of the menu will not close the menu.'
 }
