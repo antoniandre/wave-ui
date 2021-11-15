@@ -6,43 +6,53 @@
   transition: $duration $delay cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-@mixin triangle($color: white, $size: 7px, $selector: '') {
-  // The underneath border triangle.
-  &:before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border: $size solid transparent;
-  }
+/**
+ * Generates a triangle arrow on the edge of an element.
+ *
+ * @param $color: the color to apply to the triangle.
+ * @param $selector: the element selector that receives the modifiers (--top, --left, etc.).
+ * @param $size: the triangle size at the base.
+ * @param $thickness: the border thickness, 0 to remove the border.
+ */
+@mixin triangle($color: white, $selector: '', $size: 7px, $thickness: 1px) {
+  @if ($thickness > 0) {
+    // The underneath border triangle.
+    &:before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: $size solid transparent;
+    }
 
-  &#{$selector}--top:before {
-    top: 100%;
-    left: 50%;
-    border-top-color: inherit;
-    transform: translateX(-50%);
-    margin-top: 0;
-  }
-  &#{$selector}--bottom:before {
-    bottom: 100%;
-    left: 50%;
-    border-bottom-color: inherit;
-    transform: translateX(-50%);
-    margin-bottom: 0;
-  }
-  &#{$selector}--left:before {
-    left: 100%;
-    top: 50%;
-    border-left-color: inherit;
-    transform: translateY(-50%);
-    margin-left: 0;
-  }
-  &#{$selector}--right:before {
-    right: 100%;
-    top: 50%;
-    border-right-color: inherit;
-    transform: translateY(-50%);
-    margin-right: 0;
+    &#{$selector}--top:before {
+      top: 100%;
+      left: 50%;
+      border-top-color: inherit;
+      transform: translateX(-50%);
+      margin-top: 0;
+    }
+    &#{$selector}--bottom:before {
+      bottom: 100%;
+      left: 50%;
+      border-bottom-color: inherit;
+      transform: translateX(-50%);
+      margin-bottom: 0;
+    }
+    &#{$selector}--left:before {
+      left: 100%;
+      top: 50%;
+      border-left-color: inherit;
+      transform: translateY(-50%);
+      margin-left: 0;
+    }
+    &#{$selector}--right:before {
+      right: 100%;
+      top: 50%;
+      border-right-color: inherit;
+      transform: translateY(-50%);
+      margin-right: 0;
+    }
   }
 
   // The colored triangle on top of `:before`.
@@ -51,7 +61,7 @@
     position: absolute;
     width: 0;
     height: 0;
-    border: ($size - 1) solid transparent;
+    border: ($size - $thickness) solid transparent;
   }
   &#{$selector}--top:after {
     top: 100%;

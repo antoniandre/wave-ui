@@ -507,7 +507,7 @@ export default {
   &--right {margin-left: 3 * $base-increment;}
 
   &--arrow {
-    @include triangle(var(--w-menu-bg-color), 9px, '.w-menu');
+    @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
   }
 }
 </style>
