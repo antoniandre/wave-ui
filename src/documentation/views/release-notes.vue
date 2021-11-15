@@ -25,9 +25,17 @@ main
 
     li.minor
       strong.version v1.43.0
+      p #[strong.code w-card]
+      ul
+        li Allow defining title &amp; content classes as a string, array or object.
+      p #[strong.code w-tooltip]
+      ul
+        li Allow defining a tooltip class as a string, array or object via #[code tooltip-class].
       p #[strong.code w-menu]
       ul
-        li Allow defining a menu class as an object via #[code menu-class].
+        li Allow defining a menu class as a string, array or object via #[code menu-class].
+        li Allow defining the w-card title &amp; content classes as a string, array or object.
+        li Allow defining an overlay classes as a string, array or object via #[code overlay-class].
         li Added an #[code arrow] option to display a small triangle on the edge of the menu.
       p #[strong.code w-tooltip]
       ul
