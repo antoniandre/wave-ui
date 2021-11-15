@@ -228,7 +228,11 @@ export default {
     .w-button {width: 30px;height: 30px;}
   }
 
-  &__render {padding: 12px;overflow: auto;}
+  &__render {
+    position: relative;
+    padding: 12px;
+    overflow: auto;
+  }
 
   &__source {position: relative;}
 
