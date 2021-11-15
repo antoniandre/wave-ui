@@ -18,8 +18,8 @@
       @mouseenter.native="showOnHover && (hoveringMenu = true)"
       @mouseleave.native="showOnHover && ((hoveringMenu = false), closeMenu())"
       :tile="tile"
-      :title-class="titleClass"
-      :content-class="contentClass"
+      :title-class="titleClasses"
+      :content-class="contentClasses"
       :shadow="shadow"
       :no-border="noBorder"
       :class="classes"
@@ -34,7 +34,7 @@
     ref="overlay"
     :value="menuVisible"
     :persistent="persistent"
-    :class="overlayClass || null"
+    :class="overlayClasses"
     v-bind="overlayProps"
     :z-index="(zIndex || 200) - 1"
     @input="menuVisible = false")
@@ -50,6 +50,7 @@
  * and move the menu elsewhere in the DOM.
  */
 
+import { objectifyClasses } from '../utils/index'
 import { consoleWarn } from '../utils/console'
 
 // const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
@@ -69,9 +70,9 @@ export default {
     round: { type: Boolean },
     noBorder: { type: Boolean },
     transition: { type: String },
-    menuClass: { type: [String, Object] },
-    titleClass: { type: String },
-    contentClass: { type: String },
+    menuClass: { type: [String, Object, Array] },
+    titleClass: { type: [String, Object, Array] },
+    contentClass: { type: [String, Object, Array] },
     // Position.
     arrow: { type: Boolean }, // The small triangle pointing toward the activator.
     detachTo: { type: [String, Boolean, Object] },
@@ -87,7 +88,7 @@ export default {
     zIndex: { type: [Number, String, Boolean] },
     minWidth: { type: [Number, String] }, // can be like: `40`, `5em`, `activator`.
     overlay: { type: Boolean },
-    overlayClass: { type: String },
+    overlayClass: { type: [String, Object, Array] },
     overlayProps: { type: Object }, // Allow passing down an object of props to the w-overlay component.
     persistent: { type: Boolean },
     noPosition: { type: Boolean }
@@ -164,17 +165,29 @@ export default {
       )
     },
 
-    classes () {
-      const extraClasses = typeof this.menuClass === 'object'
-                         ? this.menuClass
-                         : { [this.menuClass]: this.menuClass }
+    menuClasses () {
+      return objectifyClasses(this.menuClass)
+    },
 
+    titleClasses () {
+      return objectifyClasses(this.titleClass)
+    },
+
+    contentClasses () {
+      return objectifyClasses(this.contentClass)
+    },
+
+    overlayClasses () {
+      return objectifyClasses(this.overlayClass)
+    },
+
+    classes () {
       return {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
-        ...extraClasses,
-        [`w-menu--${this.position}`]: true,
-        [`w-menu--align-${this.alignment}`]: this.alignment,
+        ...this.menuClasses,
+        [`w-menu--${this.position}`]: !this.noPosition,
+        [`w-menu--align-${this.alignment}`]: !this.noPosition && this.alignment,
         'w-menu--tile': this.tile,
         'w-menu--card': !this.custom,
         'w-menu--round': this.round,
@@ -184,12 +197,14 @@ export default {
       }
     },
 
+    // The floatting menu styles.
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || (this.overlay && !this.zIndex && 200) || null,
         top: (this.menuCoordinates.top && `${~~this.menuCoordinates.top}px`) || null,
         left: (this.menuCoordinates.left && `${~~this.menuCoordinates.left}px`) || null,
-        minWidth: (this.minWidth && this.menuMinWidth) || null
+        minWidth: (this.minWidth && this.menuMinWidth) || null,
+        '--w-menu-bg-color': this.arrow && this.$waveui.colors[this.bgColor || 'white']
       }
     },
 
@@ -423,9 +438,6 @@ export default {
       return new Promise(resolve => {
         this.$nextTick(() => {
           this.menuEl = this.$refs.menu?.$el || this.$refs.menu
-
-          // If `arrow` is set to true, apply it the same color as the background.
-          this.menuEl.style.setProperty('--w-menu-bg-color', this.$waveui.colors[this.bgColor])
 
           // Move the menu elsewhere in the DOM.
           // wrapper.parentNode.insertBefore(this.menuEl, wrapper)

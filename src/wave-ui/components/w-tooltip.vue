@@ -20,6 +20,7 @@
  * and move the tooltip elsewhere in the DOM.
  */
 
+import { objectifyClasses } from '../utils/index'
 import { consoleWarn } from '../utils/console'
 
 const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
@@ -36,8 +37,8 @@ export default {
     shadow: { type: Boolean },
     tile: { type: Boolean },
     round: { type: Boolean },
-    transition: { type: String, default: '' },
-    tooltipClass: { type: String },
+    transition: { type: String },
+    tooltipClass: { type: [String, Object, Array] },
     // Position.
     detachTo: {},
     fixed: { type: Boolean },
@@ -65,6 +66,10 @@ export default {
   }),
 
   computed: {
+    tooltipClasses () {
+      return objectifyClasses(this.tooltipClass)
+    },
+
     transitionName () {
       const direction = this.position.replace(/top|bottom/, m => ({ top: 'up', bottom: 'down' }[m]))
       return this.transition || `w-tooltip-slide-fade-${direction}`
@@ -137,7 +142,7 @@ export default {
       return {
         [this.color]: !this.bgColor,
         [`${this.bgColor} ${this.bgColor}--bg`]: this.bgColor,
-        [this.tooltipClass]: this.tooltipClass,
+        ...this.tooltipClasses,
         [`w-tooltip--${this.position}`]: true,
         'w-tooltip--tile': this.tile,
         'w-tooltip--round': this.round,
@@ -274,8 +279,7 @@ export default {
     },
 
     removeTooltip () {
-      // el.remove() doesn't work on IE11.
-      if (this.tooltipEl && this.tooltipEl.parentNode) this.tooltipEl.parentNode.removeChild(this.tooltipEl)
+      if (this.tooltipEl && this.tooltipEl.parentNode) this.tooltipEl.remove()
     }
 
   },
@@ -290,8 +294,7 @@ export default {
   beforeDestroy () {
     this.removeTooltip()
 
-    // el.remove() doesn't work on IE11.
-    if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.parentNode.removeChild(this.activatorEl)
+    if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.remove()
   },
 
   watch: {
