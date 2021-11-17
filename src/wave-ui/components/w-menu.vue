@@ -507,6 +507,11 @@ export default {
   &--right {margin-left: 3 * $base-increment;}
 
   &--arrow {
+    &.w-menu--top {margin-top: -4 * $base-increment;}
+    &.w-menu--bottom {margin-top: 4 * $base-increment;}
+    &.w-menu--left {margin-left: -4 * $base-increment;}
+    &.w-menu--right {margin-left: 4 * $base-increment;}
+
     @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
   }
 }
