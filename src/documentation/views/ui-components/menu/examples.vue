@@ -1,35 +1,57 @@
 <template lang="pug">
 div
-  title-link(h2) Show on click or on hover
+  title-link(h2) Basic
   example.example1(content-class="pt5")
     w-menu(detach-to=".example1")
       template(#activator="{ on }")
-        w-button.mb2.mr3(v-on="on" outline color="primary") Show menu on click
+        w-button(v-on="on") Show menu
       | Menu content
-
-    w-menu(detach-to=".example1" show-on-hover)
-      template(#activator="{ on }")
-        w-button.mb2(v-on="on" outline color="primary") Show menu on hover
-      | Menu content
-    //- template(#pug).
+    template(#pug).
       w-menu
         template(#activator="{ on }")
-          w-button.mb2.mr3(v-on="on" outline color="primary") Show menu on click
-        | Menu content
-
-      w-menu(show-on-hover)
-        template(#activator="{ on }")
-          w-button.mb2(v-on="on" outline color="primary") Show menu on hover
+          w-button(v-on="on") Show menu
         | Menu content
     template(#html).
       &lt;w-menu&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button
-            v-on="on"
-            outline
-            color="primary"
-            class="mr3"&gt;
+          &lt;w-button v-on="on" class="mr3"&gt;
             Show menu on click
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Menu content
+      &lt;/w-menu&gt;
+
+  title-link(h2) Show on click or on hover
+  example.example2(content-class="pt5")
+    | Show menu:
+    w-menu(detach-to=".example2")
+      template(#activator="{ on }")
+        w-button.mx3(v-on="on") On click
+      | Menu content
+
+    w-menu(detach-to=".example2" show-on-hover)
+      template(#activator="{ on }")
+        w-button(v-on="on") On hover
+      | Menu content
+    template(#pug).
+      | Show menu
+
+      w-menu
+        template(#activator="{ on }")
+          w-button.mx3(v-on="on") On click
+        | Menu content
+
+      w-menu(show-on-hover)
+        template(#activator="{ on }")
+          w-button(v-on="on") On hover
+        | Menu content
+    template(#html).
+      Show menu:
+
+      &lt;w-menu&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button v-on="on" class="mx3"&gt;
+            On click
           &lt;/w-button&gt;
         &lt;/template&gt;
         Menu content
@@ -37,8 +59,8 @@ div
 
       &lt;w-menu show-on-hover&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button v-on="on" outline color="primary"&gt;
-            Show menu on hover
+          &lt;w-button v-on="on"&gt;
+            On hover
           &lt;/w-button&gt;
         &lt;/template&gt;
         Menu content
@@ -47,25 +69,22 @@ div
   title-link(h2) Persistent menu
   p.
     A persistent menu can only be closed by clicking on the activator again, or programmatically.#[br]
-    Clicking outside the menu will not close it.
-  example.example1(content-class="pt5")
-    w-menu(detach-to=".example1" persistent)
+    Clicking outside the menu will not close it.#[br]
+    Of course you can also add a button inside the menu to close it.
+  example.example3(content-class="pt5")
+    w-menu(detach-to=".example3" persistent)
       template(#activator="{ on }")
-        w-button.mb2.mr3(v-on="on" outline color="primary") Show persistent menu
+        w-button.mb2.mr3(v-on="on") Show persistent menu
       | Click on the button again to close
-    //- template(#pug).
+    template(#pug).
       w-menu(persistent)
         template(#activator="{ on }")
-          w-button.mb2.mr3(v-on="on" outline color="primary") Show persistent menu
+          w-button.mb2.mr3(v-on="on") Show persistent menu
         | Click on the button again to close
     template(#html).
       &lt;w-menu persistent&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button
-            v-on="on"
-            outline
-            color="primary"
-            class="mr3"&gt;
+          &lt;w-button v-on="on" class="mr3"&gt;
             Show persistent menu
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -73,27 +92,21 @@ div
       &lt;/w-menu&gt;
 
   title-link(h2) Hide menu on click inside
-  p.
-    A persistent menu can only be closed by clicking on the activator again, or programmatically.#[br]
-    Clicking outside the menu will not close it.
-  example.example1(content-class="pt5")
-    w-menu(detach-to=".example1" hide-on-menu-click)
+  p A click inside the menu will close it.
+  example.example4(content-class="pt5")
+    w-menu(detach-to=".example4" hide-on-menu-click)
       template(#activator="{ on }")
-        w-button.mb2.mr3(v-on="on" outline color="primary") Show menu
+        w-button(v-on="on") Show menu
       | A click here will close the menu.
-    //- template(#pug).
+    template(#pug).
       w-menu(hide-on-menu-click)
         template(#activator="{ on }")
-          w-button.mb2.mr3(v-on="on" outline color="primary") Show menu
+          w-button(v-on="on") Show menu
         | A click here will close the menu.
     template(#html).
       &lt;w-menu hide-on-menu-click&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button
-            v-on="on"
-            outline
-            color="primary"
-            class="mr3"&gt;
+          &lt;w-button v-on="on"&gt;
             Show menu
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -101,57 +114,53 @@ div
       &lt;/w-menu&gt;
 
   title-link(h2) Position
-  example.example2(content-class="py12")
-    w-flex(:gap="3" wrap)
-      w-menu(detach-to=".example2" left)
+  example.example5(content-class="py12")
+    w-flex(:gap="3" align-center wrap)
+      | Show menu on:
+      w-menu(detach-to=".example5" left)
         template(#activator="{ on }")
-          w-button(v-on="on" outline color="primary") Show menu on left
+          w-button.mx2(v-on="on") Left
         | Menu content
-      w-menu(detach-to=".example2")
+      w-menu(detach-to=".example5" top)
         template(#activator="{ on }")
-          w-button(v-on="on" outline color="primary") Show menu on bottom
+          w-button.mx2(v-on="on") Top
         | Menu content
-      w-menu(detach-to=".example2" top)
+      w-menu(detach-to=".example5")
         template(#activator="{ on }")
-          w-button(v-on="on" outline color="primary") Show menu on top
+          w-button.mx2(v-on="on") Bottom
         | Menu content
-      w-menu(detach-to=".example2" right)
+      w-menu(detach-to=".example5" right)
         template(#activator="{ on }")
-          w-button(v-on="on" outline color="primary") Show menu on right
+          w-button(v-on="on") Right
         | Menu content
-    //- template(#pug).
-      w-flex(:gap="3" wrap)
+    template(#pug).
+      w-flex(:gap="3" align-center wrap)
+        | Show menu on:
+
         w-menu(left)
           template(#activator="{ on }")
-            w-button(v-on="on" outline color="primary") Show menu on left
-          | Menu content
-        w-menu
-          template(#activator="{ on }")
-            w-button(v-on="on" outline color="primary") Show menu on bottom
+            w-button.mx2(v-on="on") Left
           | Menu content
         w-menu(top)
           template(#activator="{ on }")
-            w-button(v-on="on" outline color="primary") Show menu on top
+            w-button.mx2(v-on="on") Top
+          | Menu content
+        w-menu
+          template(#activator="{ on }")
+            w-button.mx2(v-on="on") Bottom
           | Menu content
         w-menu(right)
           template(#activator="{ on }")
-            w-button(v-on="on" outline color="primary") Show menu on right
+            w-button(v-on="on") Right
           | Menu content
     template(#html).
-      &lt;w-flex :gap="3" wrap&gt;
+      &lt;w-flex :gap="3" align-center wrap&gt;
+        Show menu on:
+
         &lt;w-menu left&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-button v-on="on" outline color="primary"&gt;
-              Show menu on left
-            &lt;/w-button&gt;
-          &lt;/template&gt;
-          Menu content
-        &lt;/w-menu&gt;
-
-        &lt;w-menu&gt;
-          &lt;template #activator="{ on }"&gt;
-            &lt;w-button v-on="on" outline color="primary"&gt;
-              Show menu on bottom
+            &lt;w-button v-on="on" class="mx2"&gt;
+              Left
             &lt;/w-button&gt;
           &lt;/template&gt;
           Menu content
@@ -159,8 +168,17 @@ div
 
         &lt;w-menu top&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-button v-on="on" outline color="primary"&gt;
-              Show menu on top
+            &lt;w-button v-on="on" class="mx2"&gt;
+              Top
+            &lt;/w-button&gt;
+          &lt;/template&gt;
+          Menu content
+        &lt;/w-menu&gt;
+
+        &lt;w-menu&gt;
+          &lt;template #activator="{ on }"&gt;
+            &lt;w-button v-on="on" class="mx2"&gt;
+              Bottom
             &lt;/w-button&gt;
           &lt;/template&gt;
           Menu content
@@ -168,8 +186,8 @@ div
 
         &lt;w-menu right&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-button v-on="on" outline color="primary"&gt;
-              Show menu on right
+            &lt;w-button v-on="on"&gt;
+              Right
             &lt;/w-button&gt;
           &lt;/template&gt;
           Menu content
@@ -178,123 +196,123 @@ div
 
   title-link(h2) Alignments
   p In addition to positions, you can align the menu with its activator.
-  example.example2
+  example.example6
     .title4.mb2 Top position
-    w-menu(detach-to=".example2" top align-left)
+    w-menu(detach-to=".example6" top align-left)
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Align left
+        w-button.ma1(v-on="on") Align left
       | Menu content
-    w-menu(detach-to=".example2" top)
+    w-menu(detach-to=".example6" top)
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Centered
+        w-button.ma1(v-on="on") Centered
       | Menu content
-    w-menu(detach-to=".example2" top align-right)
+    w-menu(detach-to=".example6" top align-right)
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Align right
+        w-button.ma1(v-on="on") Align right
       | Menu content
 
     .title4.mt6.mb2 Bottom position
-    w-menu(detach-to=".example2" align-left)
+    w-menu(detach-to=".example6" align-left)
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Align left
+        w-button.ma1(v-on="on") Align left
       | Menu content
-    w-menu(detach-to=".example2")
+    w-menu(detach-to=".example6")
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Centered
+        w-button.ma1(v-on="on") Centered
       | Menu content
-    w-menu(detach-to=".example2" align-right)
+    w-menu(detach-to=".example6" align-right)
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Align right
+        w-button.ma1(v-on="on") Align right
       | Menu content
 
     .title4.mt6.mb2 Right position
-    w-menu(detach-to=".example2" right align-top)
+    w-menu(detach-to=".example6" right align-top)
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Align top
+        w-button.ma1(v-on="on") Align top
       | Menu content
-    w-menu(detach-to=".example2" right)
+    w-menu(detach-to=".example6" right)
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Centered
+        w-button.ma1(v-on="on") Centered
       | Menu content
-    w-menu(detach-to=".example2" right align-bottom)
+    w-menu(detach-to=".example6" right align-bottom)
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Align bottom
+        w-button.ma1(v-on="on") Align bottom
       | Menu content
 
     .title4.mt6.mb2 Left position
-    w-menu(detach-to=".example2" left align-top)
+    w-menu(detach-to=".example6" left align-top)
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Align top
+        w-button.ma1(v-on="on") Align top
       | Menu content
-    w-menu(detach-to=".example2" left)
+    w-menu(detach-to=".example6" left)
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Centered
+        w-button.ma1(v-on="on") Centered
       | Menu content
-    w-menu(detach-to=".example2" left align-bottom)
+    w-menu(detach-to=".example6" left align-bottom)
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Align bottom
+        w-button.ma1(v-on="on") Align bottom
       | Menu content
-    //- template(#pug).
+    template(#pug).
       .title4.mb2 top position
-      w-menu(detach-to=".example2" top align-left)
+      w-menu(top align-left)
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Align left
+          w-button.ma1(v-on="on") Align left
         | Menu content
-      w-menu(detach-to=".example2" top)
+      w-menu(top)
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Centered
+          w-button.ma1(v-on="on") Centered
         | Menu content
-      w-menu(detach-to=".example2" top align-right)
+      w-menu(top align-right)
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Align right
+          w-button.ma1(v-on="on") Align right
         | Menu content
 
       .title4.mt6.mb2 Bottom position
-      w-menu(detach-to=".example2" align-left)
+      w-menu(align-left)
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Align left
+          w-button.ma1(v-on="on") Align left
         | Menu content
-      w-menu(detach-to=".example2")
+      w-menu(
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Centered
+          w-button.ma1(v-on="on") Centered
         | Menu content
-      w-menu(detach-to=".example2" align-right)
+      w-menu(align-right)
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Align right
+          w-button.ma1(v-on="on") Align right
         | Menu content
 
       .title4.mt6.mb2 Right position
-      w-menu(detach-to=".example2" right align-top)
+      w-menu(right align-top)
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Align top
+          w-button.ma1(v-on="on") Align top
         | Menu content
-      w-menu(detach-to=".example2" right)
+      w-menu(right)
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Centered
+          w-button.ma1(v-on="on") Centered
         | Menu content
-      w-menu(detach-to=".example2" right align-bottom)
+      w-menu(right align-bottom)
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Align bottom
+          w-button.ma1(v-on="on") Align bottom
         | Menu content
 
       .title4.mt6.mb2 Left position
-      w-menu(detach-to=".example2" left align-top)
+      w-menu(left align-top)
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Align top
+          w-button.ma1(v-on="on") Align top
         | Menu content
-      w-menu(detach-to=".example2" left)
+      w-menu(left)
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Centered
+          w-button.ma1(v-on="on") Centered
         | Menu content
-      w-menu(detach-to=".example2" left align-bottom)
+      w-menu(left align-bottom)
         template(#activator="{ on }")
-          w-button.ma1(v-on="on" outline color="primary") Align bottom
+          w-button.ma1(v-on="on") Align bottom
         | Menu content
     template(#html).
       &lt;div class="title4 mb2"&gt;Top position&lt;/div&gt;
       &lt;w-menu top align-left&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
             Align left
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -303,7 +321,7 @@ div
 
       &lt;w-menu top&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
             Centered
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -312,7 +330,7 @@ div
 
       &lt;w-menu top align-right&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
             Align right
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -322,7 +340,7 @@ div
       &lt;div class="title4 mt6 mb2"&gt;Bottom position&lt;/div&gt;
       &lt;w-menu align-left&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
             Align left
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -331,7 +349,7 @@ div
 
       &lt;w-menu&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
             Centered
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -340,7 +358,7 @@ div
 
       &lt;w-menu align-right&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
             Align right
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -350,7 +368,7 @@ div
       &lt;div class="title4 mt6 mb2"&gt;Right position&lt;/div&gt;
       &lt;w-menu right align-top&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
             Align top
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -359,7 +377,7 @@ div
 
       &lt;w-menu right&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
             Centered
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -368,7 +386,7 @@ div
 
       &lt;w-menu right align-bottom&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;Alig
+          &lt;w-button class="ma1" v-on="on"&gt;Alig
             n bottom
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -378,7 +396,7 @@ div
       &lt;div class="title4 mt6 mb2"&gt;Left position&lt;/div&gt;
       &lt;w-menu left align-top&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;A
+          &lt;w-button class="ma1" v-on="on"&gt;A
             lign top
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -387,7 +405,7 @@ div
 
       &lt;w-menu left&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
             Centered
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -396,8 +414,48 @@ div
 
       &lt;w-menu left align-bottom&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button class="ma1" v-on="on" outline color="primary"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
             Align bottom
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Menu content
+      &lt;/w-menu&gt;
+
+  title-link(h2) No position
+  p.
+    By default, the menu is position at the bottom of the activator.
+    If you prefer to position the menu yourself via CSS, you can skip the position calculation via the
+    #[code no-position] prop.
+  example.example7(content-class="pb12")
+    w-menu(detach-to=".example7 .example__render" no-position)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Show menu
+      | Menu content
+    template(#pug).
+      w-menu(no-position)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Show menu
+        | Menu content
+    template(#html).
+    template(#css) .w-menu {top: 10px;right: 20px;}
+
+  title-link(h2) Arrow (Tooltip style)
+  p Apply a tooltip style with the #[code arrow] option.
+  example.example13(content-class="pb12")
+    w-menu(detach-to=".example13" arrow)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Show menu
+      | Menu content
+    template(#pug).
+      w-menu(arrow)
+        template(#activator="{ on }")
+          w-button(v-on="on") Show menu
+        | Menu content
+    template(#html).
+      &lt;w-menu arrow&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button v-on="on"&gt;
+            Show menu
           &lt;/w-button&gt;
         &lt;/template&gt;
         Menu content
@@ -405,20 +463,20 @@ div
 
   title-link(h2) Color &amp; background color
   p Like in most components, you can define a #[code color] and a  #[code bg-color].
-  example.example3(content-class="pb12")
-    w-menu(detach-to=".example3" color="blue-dark2" bg-color="blue-light5")
+  example.example8(content-class="pb12")
+    w-menu(detach-to=".example8" color="blue-dark2" bg-color="blue-light5")
       template(#activator="{ on }")
-        w-button.ma1(v-on="on" outline color="primary") Show a blue menu
+        w-button.ma1(v-on="on") Show a blue menu
       | Menu content
-    //- template(#pug).
+    template(#pug).
       w-menu(color="blue-dark2" bg-color="blue-light5")
         template(#activator="{ on }")
-          w-button(v-on="on" outline color="primary") Show a blue menu
+          w-button(v-on="on") Show a blue menu
         | Menu content
     template(#html).
       &lt;w-menu color="blue-dark2" bg-color="blue-light5"&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button v-on="on" outline color="primary"&gt;
+          &lt;w-button v-on="on"&gt;
             Show a blue menu
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -426,39 +484,39 @@ div
       &lt;/w-menu&gt;
 
   title-link(h2) Tile, round and shadow
-  example.example4(content-class="pb12")
+  example.example9(content-class="pb12")
     w-flex(wrap :gap="3")
-      w-menu(detach-to=".example4" tile)
+      w-menu(detach-to=".example9" tile)
         template(#activator="{ on }")
-          w-button.mt1(v-on="on" outline color="primary") Show a tile menu
+          w-button.mt1(v-on="on") Show a tile menu
         | Menu content
-      w-menu(detach-to=".example4" round)
+      w-menu(detach-to=".example9" round)
         template(#activator="{ on }")
-          w-button.mt1(v-on="on" outline color="primary") Show a round menu
+          w-button.mt1(v-on="on") Show a round menu
         | Menu content
-      w-menu(detach-to=".example4" shadow)
+      w-menu(detach-to=".example9" shadow)
         template(#activator="{ on }")
-          w-button.mt1(v-on="on" outline color="primary") Show a shadow menu
+          w-button.mt1(v-on="on") Show a shadow menu
         | Menu content
-    //- template(#pug).
+    template(#pug).
       w-flex(wrap :gap="3")
         w-menu(tile)
           template(#activator="{ on }")
-            w-button(v-on="on" outline color="primary") Show a tile menu
+            w-button(v-on="on") Show a tile menu
           | Menu content
         w-menu(round)
           template(#activator="{ on }")
-            w-button(v-on="on" outline color="primary") Show a round menu
+            w-button(v-on="on") Show a round menu
           | Menu content
         w-menu(shadow)
           template(#activator="{ on }")
-            w-button(v-on="on" outline color="primary") Show a shadow menu
+            w-button(v-on="on") Show a shadow menu
           | Menu content
     template(#html).
       &lt;w-flex wrap :gap="3"&gt;
         &lt;w-menu tile&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-button v-on="on" outline color="primary"&gt;
+            &lt;w-button v-on="on"&gt;
               Show a tile menu
             &lt;/w-button&gt;
           &lt;/template&gt;
@@ -468,7 +526,7 @@ div
 
         &lt;w-menu round&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-button v-on="on" outline color="primary"&gt;
+            &lt;w-button v-on="on"&gt;
               Show a round menu
             &lt;/w-button&gt;
           &lt;/template&gt;
@@ -478,7 +536,7 @@ div
 
         &lt;w-menu shadow&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;w-button v-on="on" outline color="primary"&gt;
+            &lt;w-button v-on="on"&gt;
               Show a shadow menu
             &lt;/w-button&gt;
           &lt;/template&gt;
@@ -489,19 +547,19 @@ div
 
   title-link(h2) Menu content: w-card
   p By default the menu is a w-card, so it accepts all the props of a w-card.
-  example.example5(content-class="mb12 pb12")
-    w-menu(detach-to=".example5" shadow v-model="showMenu")
+  example.example10(content-class="mb12 pb12")
+    w-menu(detach-to=".example10" shadow v-model="showMenu")
       template(#activator)
-        w-button.mr3.mb2(@click="showMenu = true" outline color="primary") Show a w-card menu
+        w-button.mr3.mb2(@click="showMenu = true") Show a w-card menu
       .title4 How much do you like Wave UI?
       p Pick a serious answer.
       w-flex.pl10.mt4(wrap justify-end)
         w-button.mr1(text color="green" @click="showMenu = false") Love it!
         w-button.mr1(text color="green" @click="showMenu = false") Love it!
         w-button(text color="green" @click="showMenu = false") Love it!
-    w-menu(detach-to=".example5" shadow custom)
+    w-menu(detach-to=".example10" shadow custom)
       template(#activator="{ on }")
-        w-button.mb2(v-on="on" outline color="primary") Show a list menu
+        w-button.mb2(v-on="on") Show a list menu
       w-card.white--bg(content-class="pa0")
         w-toolbar
           .title3.ma0 Menu Title
@@ -509,10 +567,10 @@ div
           span.ml1 Item 1
           span.ml1 Item 2
         .pa3 This is some content in a w-card component.
-    //- template(#pug).
+    template(#pug).
       w-menu(shadow v-model="showMenu")
-        template(#activator="")
-          w-button.mr3(@click="showMenu = true" outline color="primary") Show a w-card menu
+        template(#activator)
+          w-button.mr3(@click="showMenu = true") Show a w-card menu
         .title4 How much do you like Wave UI?
         p Pick a serious answer.
         w-flex.pl10.mt4(wrap justify-end)
@@ -521,7 +579,7 @@ div
           w-button(text color="green" @click="showMenu = false") Love it!
       w-menu(shadow custom)
         template(#activator="{ on }")
-          w-button(v-on="on" outline color="primary") Show a list menu
+          w-button(v-on="on") Show a list menu
         w-card(content-class="pa0")
           w-toolbar
             .title3.ma0 Menu Title
@@ -534,9 +592,7 @@ div
         &lt;template #activator&gt;
           &lt;w-button
             class="mr3"
-            @click="showMenu = true"
-            outline
-            color="primary"&gt;
+            @click="showMenu = true"&gt;
             Show a w-card menu
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -575,7 +631,7 @@ div
 
       &lt;w-menu shadow custom&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button v-on="on" outline color="primary"&gt;
+          &lt;w-button v-on="on"&gt;
             Show a list menu
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -605,10 +661,10 @@ div
     In this example, the menu is #[code persistent] so the user is forced to select an option from
     the menu when open. Then on click of an option, the menu will hide thanks to the option
     #[code hide-on-menu-click].
-  example.example6(content-class="mb12 pb12")
-    w-menu(detach-to=".example6" custom hide-on-menu-click persistent shadow)
+  example.example11(content-class="mb12 pb12")
+    w-menu(detach-to=".example11" custom hide-on-menu-click persistent shadow)
       template(#activator="{ on }")
-        w-button(v-on="on" outline color="primary") Show a list menu
+        w-button(v-on="on") Show a list menu
       w-list.white--bg(
         v-model="list"
         :items="[{ label: 'Item 1' }, { label: 'Item 2' }, { label: 'Item 3' }]"
@@ -616,10 +672,10 @@ div
     div.mt4
       strong Current selection:
       code.ml1 {{ list || 'none' }}
-    //- template(#pug).
+    template(#pug).
       w-menu(custom hide-on-menu-click persistent shadow)
         template(#activator="{ on }")
-          w-button(v-on="on" outline color="primary") Show a list menu
+          w-button(v-on="on") Show a list menu
         w-list.white--bg(
           v-model="listSelection"
           :items="listItems"
@@ -634,7 +690,7 @@ div
         persistent
         shadow&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button v-on="on" outline color="primary"&gt;
+          &lt;w-button v-on="on"&gt;
             Show a list menu
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -663,19 +719,19 @@ div
       })
 
   title-link(h2) Menu with overlay
-  example.example7(content-class="mb12 pb12")
-    w-menu(detach-to=".example7" v-model="showListMenu2" shadow custom overlay)
+  example.example12(content-class="mb12 pb12")
+    w-menu(detach-to=".example12" v-model="showListMenu2" shadow custom overlay)
       template(#activator="{ on }")
-        w-button(v-on="on" outline color="primary") Show a menu &amp; overlay
+        w-button(v-on="on") Show a menu &amp; overlay
       w-list.white--bg(
         nav
         :items="[{ label: 'Item 1', route: '#item1' }, { label: 'Item 2', route: '#item2' }, { label: 'Item 3', route: '#item3' }]"
         item-class="px8"
         @item-select="showListMenu2 = false")
-    //- template(#pug).
+    template(#pug).
       w-menu(v-model="showMenu" shadow custom overlay)
         template(#activator="{ on }")
-          w-button(v-on="on" outline color="primary") Show a menu &amp; overlay
+          w-button(v-on="on") Show a menu &amp; overlay
         w-list.white--bg(
           nav
           :items="listItems"
@@ -684,7 +740,7 @@ div
     template(#html).
       &lt;w-menu v-model="showMenu" shadow custom overlay&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-button v-on="on" outline color="primary"&gt;
+          &lt;w-button v-on="on"&gt;
             Show a menu &amp; overlay
           &lt;/w-button&gt;
         &lt;/template&gt;
@@ -727,4 +783,6 @@ export default {
     overflow: visible;
   }
 }
+
+.example7 .w-menu {top: 10px;right: 20px;}
 </style>
