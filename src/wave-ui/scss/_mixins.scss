@@ -54,10 +54,10 @@
       margin-right: 0;
     }
 
-    &#{$selector}--align-top:before {transform: none;top: (2 * $base-increment) - 3px;}
-    &#{$selector}--align-bottom:before {transform: none;top: auto;bottom: (2 * $base-increment) - 3px;}
-    &#{$selector}--align-left:before {transform: none;left: (2 * $base-increment) - 3px;}
-    &#{$selector}--align-right:before {transform: none;left: auto;right: (2 * $base-increment) - 3px;}
+    &#{$selector}--align-top:before {transform: none;top: (2 * $base-increment) - 1px;}
+    &#{$selector}--align-bottom:before {transform: none;top: auto;bottom: (2 * $base-increment) - 1px;}
+    &#{$selector}--align-left:before {transform: none;left: (2 * $base-increment) - 1px;}
+    &#{$selector}--align-right:before {transform: none;left: auto;right: (2 * $base-increment) - 1px;}
   }
 
   // The colored triangle on top of `:before`.
@@ -93,8 +93,8 @@
     transform: translateY(-50%);
   }
 
-  &#{$selector}--align-top:after {transform: none;top: (2 * $base-increment) - 2px;}
-  &#{$selector}--align-bottom:after {transform: none;top: auto;bottom: (2 * $base-increment) - 2px;}
-  &#{$selector}--align-left:after {transform: none;left: (2 * $base-increment) - 2px;}
-  &#{$selector}--align-right:after {transform: none;left: auto;right: (2 * $base-increment) - 2px;}
+  &#{$selector}--align-top:after {transform: none;top: 2 * $base-increment;}
+  &#{$selector}--align-bottom:after {transform: none;top: auto;bottom: 2 * $base-increment;}
+  &#{$selector}--align-left:after {transform: none;left: 2 * $base-increment;}
+  &#{$selector}--align-right:after {transform: none;left: auto;right: 2 * $base-increment;}
 }
