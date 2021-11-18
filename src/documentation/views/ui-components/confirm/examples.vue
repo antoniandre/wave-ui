@@ -59,29 +59,29 @@ div
   title-link(h2) Positions &amp; alignments
   title-link(h3) Positions
   example
-    w-confirm.my5(top menu-border) Top
-    w-confirm.my5(right menu-border) Right
-    w-confirm.my5(bottom menu-border) Bottom
-    w-confirm.my5(left menu-border) Left
+    w-confirm.my5(top) Top
+    w-confirm.my5(right) Right
+    w-confirm.my5(bottom) Bottom
+    w-confirm.my5(left) Left
     template(#pug).
-      w-confirm.my5(top menu-border) Top
-      w-confirm.my5(right menu-border) Right
-      w-confirm.my5(bottom menu-border) Bottom
-      w-confirm.my5(left menu-border) Left
+      w-confirm.my5(top) Top
+      w-confirm.my5(right) Right
+      w-confirm.my5(bottom) Bottom
+      w-confirm.my5(left) Left
     template(#html).
-      &lt;w-confirm top menu-border class="my5"&gt;
+      &lt;w-confirm top class="my5"&gt;
         Top
       &lt;/w-confirm&gt;
 
-      &lt;w-confirm right menu-border class="my5"&gt;
+      &lt;w-confirm right class="my5"&gt;
         Right
       &lt;/w-confirm&gt;
 
-      &lt;w-confirm bottom menu-border class="my5"&gt;
+      &lt;w-confirm bottom class="my5"&gt;
         Bottom
       &lt;/w-confirm&gt;
 
-      &lt;w-confirm left menu-border class="my5"&gt;
+      &lt;w-confirm left class="my5"&gt;
         Left
       &lt;/w-confirm&gt;
 
@@ -244,8 +244,8 @@ div
     template(#html).
       &lt;w-confirm&gt;
         Ask for confirm
-        &lt;template #cancel&gt;No&lt;/template&lt;
-        &lt;template #confirm&gt;Yes&lt;/template&lt;
+        &lt;template #cancel&gt;No&lt;/template&gt;
+        &lt;template #confirm&gt;Yes&lt;/template&gt;
       &lt;/w-confirm&gt;
 
   title-link(h3) No cancel button
@@ -296,7 +296,7 @@ div
     template(#pug).
       w-confirm.ma2(no-arrow :menu="{ bgColor: 'blue-light5' }") Bottom
       w-confirm.ma2(no-arrow right) Right
-      w-confirm.ma2.mb12(:menu="{ noPosition: true, detachTo: '.example--no-arrow' }") No position
+      w-confirm.ma2.mb12(:menu="{ noPosition: true }") No position
     template(#html).
       &lt;w-confirm
         no-arrow
@@ -310,10 +310,7 @@ div
       &lt;/w-confirm&gt;
 
       &lt;w-confirm
-        :menu="{
-          noPosition: true,
-          detachTo: '.example--no-arrow'
-        }"
+        :menu="{ noPosition: true }"
         class="ma2"&gt;
         No position
       &lt;/w-confirm&gt;
