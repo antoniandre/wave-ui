@@ -1,6 +1,6 @@
 <template lang="pug">
 .w-confirm
-  w-menu(v-model="showPopup" v-bind="wMenuProps" :menu-class="menuClasses")
+  w-menu(v-model="showPopup" v-bind="wMenuProps")
     template(#activator="{ on }")
       w-button.w-confirm__button(v-on="on" v-bind="buttonProps")
         slot
