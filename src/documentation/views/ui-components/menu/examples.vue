@@ -440,7 +440,7 @@ div
     template(#css) .w-menu {top: 10px;right: 20px;}
 
   title-link(h2) Arrow (Tooltip style)
-  p Apply a tooltip style with the #[code arrow] option.
+  p Applies a tooltip style with the #[code arrow] option.
   example.example13(content-class="pb12")
     w-menu(detach-to=".example13" arrow)
       template(#activator="{ on }")
@@ -460,6 +460,69 @@ div
         &lt;/template&gt;
         Menu content
       &lt;/w-menu&gt;
+  title-link(h3) Automatic arrow position
+  p.
+    The following examples illustrate how the arrow is positioned on the different sides and
+    alignments that are applied.#[br]
+    The arrow position can also be overridden via CSS.
+  title-link(h4) Horizontal
+  example
+    w-flex(justify-center)
+      w-menu(arrow top align-left)
+        template(#activator="{ on }")
+          w-button.ma2(v-on="on") Top, align left
+        | Menu content
+      w-menu(arrow top)
+        template(#activator="{ on }")
+          w-button.ma2(v-on="on") Top, align center
+        | Menu content
+      w-menu(arrow top align-right)
+        template(#activator="{ on }")
+          w-button.ma2(v-on="on") Top, align right
+        | Menu content
+    w-flex(justify-center)
+      w-menu(arrow bottom align-left)
+        template(#activator="{ on }")
+          w-button.ma2(v-on="on") Bottom, align left
+        | Menu content
+      w-menu(arrow bottom)
+        template(#activator="{ on }")
+          w-button.ma2(v-on="on") Bottom, align center
+        | Menu content
+      w-menu(arrow bottom align-right)
+        template(#activator="{ on }")
+          w-button.ma2(v-on="on") Bottom, align right
+        | Menu content
+
+  title-link(h4) Vertical
+  example
+    w-flex.text-center(justify-center)
+      w-flex.ma0(column no-grow)
+        w-menu(arrow left align-top)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Left, align top
+          | Menu content
+        w-menu(arrow left)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Left, align center
+          | Menu content
+        w-menu(arrow left align-bottom)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Left, align bottom
+          | Menu content
+      w-flex.ma0(column no-grow)
+        w-menu(arrow right align-top)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Right, align top
+          | Menu content
+        w-menu(arrow right)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Right, align center
+          | Menu content
+        w-menu(arrow right align-bottom)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Right, align bottom
+          | Menu content
 
   title-link(h2) Color &amp; background color
   p Like in most components, you can define a #[code color] and a  #[code bg-color].
