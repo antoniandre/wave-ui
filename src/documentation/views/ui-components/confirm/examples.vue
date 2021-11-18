@@ -44,15 +44,15 @@ div
       w-confirm.mb2(bg-color="info" color="yellow") Ask for confirm
       w-confirm(:menu="{ bgColor: 'indigo-light1', color: 'white' }") Ask for confirm
     template(#html).
-      &lt;w-confirm(bg-color="success" class="mb2"&gt;
+      &lt;w-confirm bg-color="success" class="mb2"&gt;
         Ask for confirm
       &lt;/w-confirm&gt;
 
-      &lt;w-confirm(bg-color="info" color="yellow" class="mb2"&gt;
+      &lt;w-confirm bg-color="info" color="yellow" class="mb2"&gt;
         Ask for confirm
       &lt;/w-confirm&gt;
 
-      &lt;w-confirm(:menu="{ bgColor: 'indigo-light1', color: 'white' }"&gt;
+      &lt;w-confirm :menu="{ bgColor: 'indigo-light1', color: 'white' }"&gt;
         Ask for confirm
       &lt;/w-confirm&gt;
 
@@ -88,7 +88,7 @@ div
   title-link(h3) Alignments
   title-link(h4) Horizontal
   example
-    w-flex(justify-center)
+    w-flex.mt12(justify-center)
       w-confirm.ma2(top align-left) Top, align left
       w-confirm.ma2(top) Top, align center
       w-confirm.ma2(top align-right) Top, align right
@@ -101,6 +101,7 @@ div
         w-confirm.ma2(top align-left) Top, align left
         w-confirm.ma2(top) Top, align center
         w-confirm.ma2(top align-right) Top, align right
+
       w-flex(justify-center)
         w-confirm.ma2(bottom align-left) Bottom, align left
         w-confirm.ma2(bottom) Bottom, align center
@@ -151,13 +152,14 @@ div
           w-confirm.ma2(left align-top) Left, align top
           w-confirm.ma2(left) Left, align center
           w-confirm.ma2(left align-bottom) Left, align bottom
+
         div
           w-confirm.ma2(right align-top) Right, align top
           w-confirm.ma2(right) Right, align center
           w-confirm.ma2(right align-bottom) Right, align bottom
     template(#html).
       &lt;w-flex justify-center class="text-center"&gt;
-        &lt;div
+        &lt;div&gt;
           &lt;w-confirm left align-top class="ma2"&gt;
             Left, align top
           &lt;/w-confirm&gt;
@@ -171,7 +173,7 @@ div
           &lt;/w-confirm&gt;
         &lt;/div&gt;
 
-        &lt;div
+        &lt;div&gt;
           &lt;w-confirm right align-top class="ma2"&gt;
             Right, align top
           &lt;/w-confirm&gt;
