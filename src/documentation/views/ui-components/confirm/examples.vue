@@ -10,7 +10,7 @@ div
         #[strong.code w-buttons] components.
 
   title-link(h2) Basic
-  example
+  example(content-class="text-center" app-props-string="align-center")
     w-confirm Delete
     template(#pug).
       w-confirm Delete
@@ -18,7 +18,7 @@ div
       &lt;w-confirm&gt;Delete&lt;/w-confirm&gt;
 
   title-link(h2) Icon button
-  example
+  example(content-class="text-center" app-props-string="align-center")
     w-confirm(icon="mdi mdi-delete")
     template(#pug).
       w-confirm(icon="mdi mdi-delete")
@@ -35,7 +35,7 @@ div
     li #[code menu] #[small.grey E.g. #[code.grey :menu="{ bgColor: 'green' }"]]
     li #[code cancel-button] #[small.grey E.g. #[code.grey :cancel-button="{ bgColor: 'green' }"]]
     li #[code confirm-button] #[small.grey E.g. #[code.grey :confirm-button="{ bgColor: 'green' }"]]
-  example(content-class="text-center" app-class="align-center" flex)
+  example(content-class="text-center" app-props-string="align-center")
     w-confirm.mb2(bg-color="success") Ask for confirm
     w-confirm.mb2(bg-color="info" color="yellow") Ask for confirm
     w-confirm(:menu="{ bgColor: 'indigo-light1', color: 'white' }") Ask for confirm
@@ -58,7 +58,7 @@ div
 
   title-link(h2) Positions &amp; alignments
   title-link(h3) Positions
-  example(content-class="text-center" app-class="align-center" flex)
+  example(content-class="text-center" app-props-string="align-center")
     w-confirm.my5(top) Top
     w-confirm.my5(right) Right
     w-confirm.my5(bottom) Bottom
@@ -190,7 +190,7 @@ div
 
   title-link(h2) Persistent
   p A click outside of the menu will not close it.
-  example(content-class="text-center" app-class="align-center" flex)
+  example(content-class="text-center" app-props-string="align-center")
     w-confirm(persistent) Ask for confirm
     template(#pug).
       w-confirm(persistent) Ask for confirm
@@ -201,7 +201,7 @@ div
 
   title-link(h2) Inline question
   p Displays the question inline with the buttons inside the menu.
-  example(content-class="text-center" app-class="align-center" flex)
+  example(content-class="text-center" app-props-string="align-center")
     w-confirm(inline) Ask for confirm
     template(#pug).
       w-confirm(inline) Ask for confirm
@@ -212,7 +212,7 @@ div
 
   title-link(h2) Custom question
   p The #[code question] slot allows you to specify your own question.
-  example(content-class="text-center" app-class="align-center" flex)
+  example(content-class="text-center" app-props-string="align-center")
     w-confirm
       strong Delete
       template(#question) Are you sure you want to delete this?
@@ -233,7 +233,7 @@ div
   p.
     You can use the #[code cancel] &amp; #[code confirm] slots to override the cancel &amp; confirm
     buttons contents.
-  example(content-class="text-center" app-class="align-center" flex)
+  example(content-class="text-center" app-props-string="align-center")
     w-confirm
       | Ask for confirm
       template(#cancel) No
@@ -251,7 +251,7 @@ div
       &lt;/w-confirm&gt;
 
   title-link(h3) No cancel button
-  example(content-class="text-center" app-class="align-center" flex)
+  example(content-class="text-center" app-props-string="align-center")
     w-confirm(no-cancel) Ask for confirm
     template(#pug).
       w-confirm(no-cancel) Ask for confirm
@@ -265,7 +265,7 @@ div
     The cancel and confirm buttons can be customized as much as a standard #[strong.code w-button]
     via the #[code cancel-button] &amp; #[code confirm-button] props which accept an object of
     #[strong.code w-button] props to pass down to the buttons.
-  example(content-class="text-center" app-class="align-center" flex)
+  example(content-class="text-center" app-props-string="align-center")
     w-confirm(
       inline
       :cancel-button="{ bgColor: 'error-dark1', color: 'white', icon: 'mdi mdi-close' }"
@@ -290,7 +290,7 @@ div
     By default, the w-confirm component displays an arrow on the edge of the menu to designate
     which action you have clicked requiring a confirmation.#[br]
     You can disable the arrow via the #[code no-arrow] option.
-  example.example--no-arrow(content-class="text-center" app-class="align-center" flex)
+  example.example--no-arrow(content-class="text-center" app-props-string="align-center")
     w-confirm.ma2(no-arrow :menu="{ bgColor: 'blue-light5' }") Bottom
     w-confirm.ma2(no-arrow right) Right
     w-confirm.ma2.mb12(:menu="{ noPosition: true, detachTo: '.example--no-arrow' }") No position
@@ -401,7 +401,7 @@ div
   p.
     You can listen to them to trigger an action.#[br]
     In this example, a notification is displayed when clicking on the cancel or confirm button.
-  example(content-class="text-center" app-class="align-center" flex)
+  example(content-class="text-center" app-props-string="align-center")
     w-confirm(
       @cancel="$waveui.notify('Canceled.', 'error')"
       @confirm="$waveui.notify('Confirmed!', 'success')") Ask for confirm
