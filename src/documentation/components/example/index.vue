@@ -52,8 +52,9 @@ import SourceCode from './source-code.vue'
 
 export default {
   props: {
-    flex: { type: Boolean }, // Removes the `block` prop off the `w-app` component.
-    appClass: { type: String },
+    // Pass props to the w-app component as a string (way simpler to pass it to Codepen).
+    appPropsString: { type: String, default: 'block' },
+
     contentClass: { type: String },
     externalJs: { type: String },
     externalCss: { type: String },
@@ -141,18 +142,20 @@ export default {
       let js = ''
       const blanks = this.blankCodepen || []
 
-      // Pug & HTML.
+      // Pug.
       if (this.usePug && slots.pug) {
         if (blanks.includes('pug')) html = slots.pug.replace(/\n+$/, '')
         else {
-          html = `w-app#app${this.appClass ? `.${this.appClass}` : ''}${this.flex ? '' : '(block)'}\n  ` +
+          html = `w-app#app${this.appPropsString ? `(${this.appPropsString})` : ''}\n  ` +
                  slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n  ')
         }
       }
+
+      // HTML.
       else {
         if (blanks.includes('html')) html = slots.html.replace(/\n+$/, '')
         else {
-          html = `<w-app id="app"${this.appClass ? ` class="${this.appClass}"` : ''}${this.flex ? '' : ' block'}>\n  ` +
+          html = `<w-app id="app"${this.appPropsString ? ` ${this.appPropsString}` : ''}>\n  ` +
                  slots.html.replace(/\n+$/, '').replace(/\n/g, '\n  ') +
                  '\n</w-app>\n'
         }
