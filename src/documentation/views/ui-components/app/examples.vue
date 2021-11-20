@@ -74,14 +74,14 @@ div
               section.content.block.grow Main content
               section.footer Footer
         template(#pug).
-          w-app#app
+          w-app#app(row)
             aside Nav menu
             w-flex(grow)
               header Header
               main.grow Main content
               footer Footer
         template(#html).
-          &lt;w-app id="app" class="w-flex row"&gt;
+          &lt;w-app id="app" row&gt;
             &lt;aside&gt;Nav menu&lt;/aside&gt;
             &lt;w-flex column&gt;
               &lt;header&gt;Header&lt;/header&gt;

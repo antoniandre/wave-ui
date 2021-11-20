@@ -35,7 +35,7 @@ div
     li #[code menu] #[small.grey E.g. #[code.grey :menu="{ bgColor: 'green' }"]]
     li #[code cancel-button] #[small.grey E.g. #[code.grey :cancel-button="{ bgColor: 'green' }"]]
     li #[code confirm-button] #[small.grey E.g. #[code.grey :confirm-button="{ bgColor: 'green' }"]]
-  example
+  example(app-class="align-center")
     w-confirm.mb2(bg-color="success") Ask for confirm
     w-confirm.mb2(bg-color="info" color="yellow") Ask for confirm
     w-confirm(:menu="{ bgColor: 'indigo-light1', color: 'white' }") Ask for confirm
