@@ -25,7 +25,6 @@ main
 
     li.minor
       strong.version v1.44.0
-      p #[strong.code w-confirm]:
       ul
         li #[strong.code w-app] added a bunch of options for CSS classes.
 
