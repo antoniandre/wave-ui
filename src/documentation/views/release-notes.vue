@@ -24,6 +24,12 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.44.0
+      p #[strong.code w-confirm]:
+      ul
+        li #[strong.code w-app] added a bunch of options for CSS classes.
+
+    li.minor
       strong.version v1.43.0
       p #[strong.code w-confirm]:
       ul
