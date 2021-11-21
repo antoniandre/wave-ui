@@ -65,6 +65,7 @@ export default {
       { label: 'Breadcrumbs', route: '/w-breadcrumbs' },
       { label: 'Button', route: '/w-button' },
       { label: 'Card', route: '/w-card' },
+      { label: 'Confirm', route: '/w-confirm', inProgress: true },
       // { label: 'Date picker', route: '/w-date-picker', disabled: true },
       { label: 'Dialog', route: '/w-dialog' },
       { label: 'Divider', route: '/w-divider' },
