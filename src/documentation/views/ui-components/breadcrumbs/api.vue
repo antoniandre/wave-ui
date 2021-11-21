@@ -14,8 +14,8 @@ div
 import WBreadcrumbs from '@/wave-ui/components/w-breadcrumbs.vue'
 
 const propsDescs = {
-  color: 'Applies a text color to the breadcrumb\'s links.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  separatorColor: 'Applies a text color (also applies to icons) to the breadcrumb\'s separators.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  color: 'Applies a text color to the breadcrumb\'s links.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  separatorColor: 'Applies a text color (also applies to icons) to the breadcrumb\'s separators.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   icon: 'Provide a custom icon for the separators.',
   items: 'An array of items to display in the breadcrumbs. Each item must be an object containing a <code>label</code> and a <code>route</code>.<br>If no route is found the item will be wrapped in a span instead of a link.',
   linkLastItem: 'When set to true, and if the last item has a provided route, the last item will be a link.',
