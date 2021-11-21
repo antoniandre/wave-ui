@@ -23,14 +23,14 @@ const propsDescs = {
   transition: 'Applies a particular transition to the tooltip element when showing and hiding.<br>Accepts all the transitions listed in the <a href="/transitions">transitions</a> knowledge base page. You can also disable the transition by setting this prop to an empty string.',
   tile: 'Removes the default border-radius and sets sharp edges on the tooltip.',
   round: 'Sets a maximum border-radius on the corners of the tooltip, giving it a round look.',
-  tooltipClass: 'Applies a custom CSS class to the tooltip element.',
+  tooltipClass: 'Provide custom CSS classes for the tooltip element.',
   // Position.
   detachTo: 'Moves the tooltip element into another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `<span class="code">.w-app</span>` will be the target.<br>By default a wrapper is created around the activator element and the tooltip is appended inside it.',
   fixed: 'Sets the CSS position of the tooltip to <code>fixed</code> (absolute by default).',
-  top: 'Places the tooltip at the top of the screen when the <code>fixed</code> prop is set to true or at the top of its container otherwise.',
-  bottom: 'Places the tooltip at the bottom of the screen when the <code>fixed</code> prop is set to true or at the bottom of its container otherwise.',
-  left: 'Places the tooltip at the left of the screen when the <code>fixed</code> prop is set to true or at the left of its container otherwise.',
-  right: 'Places the tooltip at the right of the screen when the <code>fixed</code> prop is set to true or at the right of its container otherwise.',
+  top: 'Places the tooltip at the top of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the top of its container otherwise.',
+  bottom: 'Places the tooltip at the bottom of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the bottom of its container otherwise.',
+  left: 'Places the tooltip at the left of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the left of its container otherwise.',
+  right: 'Places the tooltip at the right of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the right of its container otherwise.',
   zIndex: 'Applies a z-index (positive or negative integer) to the tooltip.'
 }
 

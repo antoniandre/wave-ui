@@ -20,8 +20,8 @@ const propsDescs = {
   noBorder: 'Removes the default border from the card container.',
   tile: 'Removes the default border-radius and sets sharp edges on the card container.',
   title: 'Provide a title for the card. Accepts HTML.',
-  titleClass: 'Provide a custom CSS class for the card\'s title.',
-  contentClass: 'Provide a custom CSS class for the card\'s content.',
+  titleClass: 'Provide custom CSS classes for the card\'s title.',
+  contentClass: 'Provide custom CSS classes for the card\'s content.',
   image: 'Provide a main image for the card.',
   imageProps: 'When using <code>image</code>, this attribute accepts an object of props to pass down to the <strong class="code">w-image</strong> component if you need to specify particular options.'
 }

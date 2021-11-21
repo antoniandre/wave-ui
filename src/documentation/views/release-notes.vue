@@ -23,6 +23,47 @@ main
     //-----------------------------------------------------
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v1.44.1
+      ul
+        li.
+          #[strong.code Notification manager]: remove the horizontal scrollbar while the
+          notifications appear or disappear.
+
+    li.minor
+      strong.version v1.44.0
+      ul
+        li #[strong.code w-app] added a bunch of options for CSS classes.
+
+    li.minor
+      strong.version v1.43.0
+      p #[strong.code w-confirm]:
+      ul
+        li New component.
+
+      p #[strong.code w-card]
+      ul
+        li Allow defining title &amp; content classes as a string, array or object.
+      p #[strong.code w-tooltip]
+      ul
+        li Allow defining a tooltip class as a string, array or object via #[code tooltip-class].
+      p #[strong.code w-menu]
+      ul
+        li Allow defining a menu class as a string, array or object via #[code menu-class].
+        li Allow defining the w-card title &amp; content classes as a string, array or object.
+        li Allow defining an overlay classes as a string, array or object via #[code overlay-class].
+        li Added an #[code arrow] option to display a small triangle on the edge of the menu.
+
+    li.patch
+      strong.version v1.42.2
+      ul
+        li #[strong.code w-menu] Completely unmount the menu from the DOM when it is not open.
+
+    li.patch
+      strong.version v1.42.1
+      ul
+        li #[strong.code w-table] Allow column resizing to a lower width than the cell text content.
+
     li.minor
       strong.version v1.42.0
       ul
@@ -86,7 +127,8 @@ main
 
     li.patch
       strong.version v1.36.1
-      p Fix the notification manager on Nuxt. #[issue-link 60]
+      ul
+        li Fix the notification manager on Nuxt. #[issue-link 60]
 
     li.minor
       strong.version v1.36.0
@@ -142,25 +184,30 @@ main
 
     li.patch
       strong.version v1.32.5
-      p #[strong.code w-tag]: Fix border radius on focused clickable round tag.
+      ul
+        li #[strong.code w-tag]: Fix border radius on focused clickable round tag.
 
     li.patch
       strong.version v1.32.4
-      p #[strong.code w-menu]: Allow closing menu on activator click.
+      ul
+        li #[strong.code w-menu]: Allow closing menu on activator click.
 
     li.patch
       strong.version v1.32.3
-      p #[strong.code w-input]: add a loading option to display while performing an async validation. #[issue-link 55]
-      p #[strong.code w-rating]: also accepts a string as the current value.
+      ul
+        li #[strong.code w-input]: add a loading option to display while performing an async validation. #[issue-link 55]
+        li #[strong.code w-rating]: also accepts a string as the current value.
 
     li.minor
       strong.version v1.32.0
-      p #[strong.code w-form]: Support async form element validators. #[issue-link 55]
-      p #[strong.code w-icon]: Added option to spin icons anticlockwise.
+      ul
+        li #[strong.code w-form]: Support async form element validators. #[issue-link 55]
+        li #[strong.code w-icon]: Added option to spin icons anticlockwise.
 
     li.minor
       strong.version v1.31.0
-      p #[strong.code w-table]: Added support for programmatic row selection. #[issue-link 50]
+      ul
+        li #[strong.code w-table]: Added support for programmatic row selection. #[issue-link 50]
 
     li.minor
       strong.version v1.30.0
@@ -199,17 +246,20 @@ main
 
     li.patch
       strong.version v1.28.1
-      p.
-        #[strong.code w-tabs]: Fix the tabs bar center and right alignment after adding the
-        #[code tabs-bar-extra] slot.
+      ul
+        li.
+          #[strong.code w-tabs]: Fix the tabs bar center and right alignment after adding the
+          #[code tabs-bar-extra] slot.
 
     li.minor
       strong.version v1.28.0
-      p Emit #[code item-expand] on #[strong.code w-accordion] item expand/collapse.
+      ul
+        li Emit #[code item-expand] on #[strong.code w-accordion] item expand/collapse.
 
     li.patch
       strong.version v1.27.3
-      p Improve the #[strong.code w-tooltip] component and emit events on tooltip open and close.
+      ul
+        li Improve the #[strong.code w-tooltip] component and emit events on tooltip open and close.
 
     li.minor
       strong.version v1.27.0
@@ -226,34 +276,41 @@ main
 
     li.patch
       strong.version v1.25.2
-      p #[strong.code w-form]: Keep the form valid after validation if the validators is an empty array. #[issue-link 46]
+      ul
+        li #[strong.code w-form]: Keep the form valid after validation if the validators is an empty array. #[issue-link 46]
 
     li.patch
       strong.version v1.25.1
-      p #[strong.code w-form]: Validate the form before emitting the #[code @submit] event. #[issue-link 40]
+      ul
+        li #[strong.code w-form]: Validate the form before emitting the #[code @submit] event. #[issue-link 40]
 
     li.minor
       strong.version v1.25.0
-      p.
-        Added a #[code tabs-bar-extra] slot to allow adding an extra element on the
-        #[strong.code w-tabs] bar.
+      ul
+        li.
+          Added a #[code tabs-bar-extra] slot to allow adding an extra element on the
+          #[strong.code w-tabs] bar.
 
     li.minor
       strong.version v1.24.0
-      p.
-        Added #[router-link(to="/shadows-borders-radii") shadows, borders &amp; border radii] CSS classes.
+      ul
+        li.
+          Added #[router-link(to="/shadows-borders-radii") shadows, borders &amp; border radii] CSS classes.
 
     li.patch
       strong.version v1.23.1
-      p Fix the #[strong.code w-tabs] initial state via #[code v-model].
+      ul
+        li Fix the #[strong.code w-tabs] initial state via #[code v-model].
 
     li.minor
       strong.version v1.23.0
-      p Complete the #[em à la carte] feature, allowing tree-shaking.
+      ul
+        li Complete the #[em à la carte] feature, allowing tree-shaking.
 
     li.patch
       strong.version v1.22.1
-      p Add a #[code dialog-class] option on the #[strong.code w-dialog] component.
+      ul
+        li Add a #[code dialog-class] option on the #[strong.code w-dialog] component.
 
     li.minor
       strong.version v1.22.0

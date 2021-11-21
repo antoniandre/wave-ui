@@ -120,6 +120,7 @@ const components = [
   { id: 'badge', label: 'Badge' },
   { id: 'card', label: 'Card' },
   { id: 'checkbox', label: 'Checkbox' },
+  { id: 'confirm', label: 'Confirm' },
   { id: 'date-picker', label: 'Date picker' },
   { id: 'dialog', label: 'Dialog' },
   { id: 'divider', label: 'Divider' },
@@ -200,7 +201,7 @@ router.afterEach(() => {
   router.status = false
   setTimeout(() => {
     // After route change, update the title of the page to pass it to Codepen from examples.
-    store.commit('setCurrentPage', document.querySelector('h1').innerText.replace(/[#\n]/g, ''))
+    store.commit('setCurrentPage', document.querySelector('h1').innerText.replace(/[#\n]|IN PROGRESS/g, ''))
   }, 200)
 })
 

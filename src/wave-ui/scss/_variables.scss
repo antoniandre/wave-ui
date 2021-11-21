@@ -28,15 +28,6 @@ $form-field-height: round(2 * $base-font-size) !default;
 // Always an even number for better vertical alignment. (Used in checkbox, radio, switch)
 $small-form-el-size: round(divide(1.3 * $base-font-size, 2)) * 2 !default;
 
-// Mixins.
-@mixin default-transition($duration: $transition-duration, $delay: 0s) {
-  transition: $duration $delay ease-in-out;
-}
-
-@mixin out-back-transition($duration: $transition-duration, $delay: 0s) {
-  transition: $duration $delay cubic-bezier(0.18, 0.89, 0.32, 1.28);
-}
-
 // COMPONENTS DEFAULTS.
 // ========================================================
 // w-drawer.

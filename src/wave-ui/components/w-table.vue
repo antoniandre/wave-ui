@@ -15,7 +15,7 @@
         th.w-table__header(
           v-for="(header, i) in headers"
           :key="i"
-          @click="header.sortable !== false && sortTable(header)"
+          @click="!colResizing.dragging && header.sortable !== false && sortTable(header)"
           :class="headerClasses(header)")
           w-icon.w-table__header-sort(
             v-if="header.sortable !== false && header.align === 'right'"
@@ -121,6 +121,9 @@
  */
 
 import { consoleError } from '../utils/console'
+
+// When column resizing is on, this is the minimum cell width that we can resize to.
+const minColumnWidth = 15
 
 export default {
   name: 'w-table',
@@ -404,15 +407,17 @@ export default {
       columnEl.style.width = colWidth + deltaX + 'px'
       nextColumnEl.style.width = nextColWidth - deltaX + 'px'
 
-      // 2. Check if we went too far (the width applyed is different than the browser-computed one).
-      const minWidthReached = deltaX < 0 && columnEl.offsetWidth > newColWidth
+      // 2. Check if we went too far (the width applied is different than the browser-computed one).
+      const minWidthReached = (deltaX < 0 && columnEl.offsetWidth > newColWidth) ||
+                              columnEl.offsetWidth <= minColumnWidth
       const maxWidthReached = deltaX > 0 && nextColumnEl.offsetWidth > newNextColWidth
 
       // 3. If we went too far, correct the value of both cells widths.
       // Make sure we don't shrink enough to push other left cells.
       if (minWidthReached) {
-        columnEl.style.width = columnEl.offsetWidth + 'px'
-        nextColumnEl.style.width = maxWidth - columnEl.offsetWidth + 'px'
+        const newWidth = Math.max(columnEl.offsetWidth, minColumnWidth)
+        columnEl.style.width = newWidth + 'px'
+        nextColumnEl.style.width = maxWidth - newWidth + 'px'
       }
       // Make sure we don't grow enough to push other right cells.
       else if (maxWidthReached) {
@@ -421,19 +426,24 @@ export default {
       }
     },
 
-    onResizerMouseUp (e) {
+    onResizerMouseUp () {
       // Remove listeners.
       document.removeEventListener('mousemove', this.onResizerMouseMove)
       document.removeEventListener('mouseup', this.onResizerMouseUp)
 
       // Reset all the variables (better for debugging).
-      this.colResizing.dragging = false
-      this.colResizing.columnIndex = null
-      this.colResizing.startCursorX = null
-      this.colResizing.columnEl = null
-      this.colResizing.nextColumnEl = null
-      this.colResizing.colWidth = null
-      this.colResizing.nextColWidth = null
+      // setTimeout 0 to make sure the sorting is not applied when releasing the mouse on a header
+      // cell after resizing.
+      // (releasing the mouse on table header triggers a click event captured by the sorting feature)
+      setTimeout(() => {
+        this.colResizing.dragging = false
+        this.colResizing.columnIndex = null
+        this.colResizing.startCursorX = null
+        this.colResizing.columnEl = null
+        this.colResizing.nextColumnEl = null
+        this.colResizing.colWidth = null
+        this.colResizing.nextColWidth = null
+      }, 0)
     }
   },
 
@@ -490,6 +500,10 @@ $tr-border-top: 1px;
   border-collapse: collapse;
   border: none;
 
+  &--resizable-cols {
+    table-layout: fixed; // Allow resizing beyond the cell minimum text width.
+  }
+
   &--resizing {
     &, * {cursor: col-resize;}
 
@@ -498,8 +512,11 @@ $tr-border-top: 1px;
 
   // Table headers.
   // ------------------------------------------------------
-  &__header {
-    padding: $base-increment;
+  &__header {padding: $base-increment;}
+  &__header--resizable {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &--fixed-header th {
@@ -596,7 +613,15 @@ $tr-border-top: 1px;
   &__header:first-child, &__cell:first-child {padding-left: 2 * $base-increment;}
   &__header:last-child, &__cell:last-child {padding-right: 2 * $base-increment;}
 
-  &--resizable-cols &__cell {position: relative;}
+  &--resizable-cols &__cell {
+    position: relative;
+
+    &, & * {
+      overflow: hidden;
+      // white-space: nowrap; // If you only want the content cell on a single line.
+      text-overflow: ellipsis;
+    }
+  }
 
   .no-data &__cell {
     background-color: rgba(255, 255, 255, 0.2);
