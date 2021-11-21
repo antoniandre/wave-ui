@@ -23,6 +23,13 @@ main
     //-----------------------------------------------------
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v1.44.1
+      ul
+        li.
+          #[strong.code Notification manager]: remove the horizontal scrollbar while the
+          notifications appear or disappear.
+
     li.minor
       strong.version v1.44.0
       ul
