@@ -50,7 +50,13 @@ div
 
   title-link(h3).mt8 3. Place a #[span.code w-app] at the root of your app
   .ml5
-    ssh-pre(language="html-vue" label="App.vue").
+    ssh-pre(v-show="$store.state.usePug" language="pug" label="App.vue").
+      w-app
+        //- All your app content goes here.
+
+        //- Also try to add a button!
+        w-button My Button
+    ssh-pre(v-show="!$store.state.usePug" language="html-vue" label="App.vue").
       &lt;w-app&gt;
         &lt;!-- All your app content goes here. --&gt;
 
