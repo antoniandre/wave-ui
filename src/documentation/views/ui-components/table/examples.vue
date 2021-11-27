@@ -168,9 +168,16 @@ div
       })
 
   title-link(h2) Built-in column resizing
-  p You can resize the columns by dragging their edges left or right.
+  p.
+    You can resize the columns by dragging their edges left or right.#[br]
+    If you want the whole cell content to be on a single line, you can apply this CSS.
+  ssh-pre(language="css").
+    .w-table__cell {
+      white-space: nowrap;
+    }
+
   example
-    w-table(:headers="table1.headers" :items="table1.items" resizable-columns)
+    w-table(:headers="table7.headers" :items="table7.items" resizable-columns)
     //- template(#pug).
       w-table(:headers="table.headers" :items="table.items" resizable-columns)
     template(#html).
@@ -1238,6 +1245,20 @@ export default {
         { label: 'Last name', key: 'lastName', hidden: false }
       ],
       items: allItems.slice(0, 5)
+    },
+    table7: {
+      headers: [
+        { label: 'ID', key: 'id', width: '50' },
+        { label: 'Content', key: 'content', width: '70%' },
+        { label: 'First name', key: 'firstName' },
+      ],
+      items: [
+        { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
+        { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
+        { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' },
+        { id: 4, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Daley' },
+        { id: 5, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Virgil' }
+      ]
     },
     selectableRowsOptions: [
       { label: '<code class="mr2">:selectable-row="false"</code> (default)', value: false },
