@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  ui-component-title(in-progress) w-confirm
+  ui-component-title w-confirm
   examples
   api
 </template>
