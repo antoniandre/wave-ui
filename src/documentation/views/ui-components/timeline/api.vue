@@ -15,7 +15,7 @@ import WTimeline from '@/wave-ui/components/w-timeline.vue'
 
 const propsDescs = {
   items: 'The items to display in the timeline. Usually an array of objects containing at least a <code>title</code>.<br>In some cases you may also provide an integer (items count) to loop through. Each item can then be defined in the template using the <code>item.x</code> slot for each iteration of this integer.',
-  color: 'Applies a color to both the item bullet or icon, and the item title, on each item.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  color: 'Applies a color to both the item bullet or icon, and the item title, on each item.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   icon: 'A global icon string to apply to all the items.',
   itemTitleKey: 'The property name (aka "key") in each item object where to find the title of the item.',
   itemContentKey: 'The property name (aka "key") in each item object where to find the content of the item.',

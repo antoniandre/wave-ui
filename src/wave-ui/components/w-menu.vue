@@ -1,11 +1,10 @@
 <template lang="pug">
-.w-menu-wrap(ref="wrapper")
+.w-menu-wrap
   slot(name="activator" :on="activatorEventHandlers")
-  transition(:name="transitionName")
+  transition(:name="transitionName" appear)
     .w-menu(
-      v-if="custom"
+      v-if="custom && menuVisible"
       ref="menu"
-      v-show="showMenu"
       @click="hideOnMenuClick && closeMenu(true)"
       @mouseenter="showOnHover && (hoveringMenu = true)"
       @mouseleave="showOnHover && ((hoveringMenu = false), closeMenu())"
@@ -13,15 +12,14 @@
       :style="styles")
       slot
     w-card.w-menu(
-      v-else
+      v-else-if="menuVisible"
       ref="menu"
-      v-show="showMenu"
       @click.native="hideOnMenuClick && closeMenu(true)"
       @mouseenter.native="showOnHover && (hoveringMenu = true)"
       @mouseleave.native="showOnHover && ((hoveringMenu = false), closeMenu())"
       :tile="tile"
-      :title-class="titleClass"
-      :content-class="contentClass"
+      :title-class="titleClasses"
+      :content-class="contentClasses"
       :shadow="shadow"
       :no-border="noBorder"
       :class="classes"
@@ -34,12 +32,12 @@
   w-overlay(
     v-if="overlay"
     ref="overlay"
-    :model-value="showMenu"
+    :model-value="menuVisible"
     :persistent="persistent"
-    :class="overlayClass || null"
+    :class="overlayClasses"
     v-bind="overlayProps"
     :z-index="(zIndex || 200) - 1"
-    @update:model-value="showMenu = false")
+    @update:model-value="menuVisible = false")
 </template>
 
 <script>
@@ -52,6 +50,7 @@
  * and move the menu elsewhere in the DOM.
  */
 
+import { objectifyClasses } from '../utils/index'
 import { consoleWarn } from '../utils/console'
 
 // const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
@@ -71,10 +70,11 @@ export default {
     round: { type: Boolean },
     noBorder: { type: Boolean },
     transition: { type: String },
-    menuClass: { type: String },
-    titleClass: { type: String },
-    contentClass: { type: String },
+    menuClass: { type: [String, Object, Array] },
+    titleClass: { type: [String, Object, Array] },
+    contentClass: { type: [String, Object, Array] },
     // Position.
+    arrow: { type: Boolean }, // The small triangle pointing toward the activator.
     detachTo: { type: [String, Boolean, Object] },
     fixed: { type: Boolean },
     top: { type: Boolean },
@@ -88,7 +88,7 @@ export default {
     zIndex: { type: [Number, String, Boolean] },
     minWidth: { type: [Number, String] }, // can be like: `40`, `5em`, `activator`.
     overlay: { type: Boolean },
-    overlayClass: { type: String },
+    overlayClass: { type: [String, Object, Array] },
     overlayProps: { type: Object }, // Allow passing down an object of props to the w-overlay component.
     persistent: { type: Boolean },
     noPosition: { type: Boolean }
@@ -97,7 +97,7 @@ export default {
   emits: ['input', 'update:modelValue', 'open', 'close'],
 
   data: () => ({
-    showMenu: false,
+    menuVisible: false,
     hoveringActivator: false,
     hoveringMenu: false,
     // The menu computed top & left coordinates.
@@ -165,27 +165,46 @@ export default {
       )
     },
 
+    menuClasses () {
+      return objectifyClasses(this.menuClass)
+    },
+
+    titleClasses () {
+      return objectifyClasses(this.titleClass)
+    },
+
+    contentClasses () {
+      return objectifyClasses(this.contentClass)
+    },
+
+    overlayClasses () {
+      return objectifyClasses(this.overlayClass)
+    },
+
     classes () {
       return {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
-        [this.menuClass]: this.menuClass,
-        [`w-menu--${this.position}`]: true,
-        [`w-menu--align-${this.alignment}`]: this.alignment,
+        ...this.menuClasses,
+        [`w-menu--${this.position}`]: !this.noPosition,
+        [`w-menu--align-${this.alignment}`]: !this.noPosition && this.alignment,
         'w-menu--tile': this.tile,
         'w-menu--card': !this.custom,
         'w-menu--round': this.round,
+        'w-menu--arrow': this.arrow,
         'w-menu--shadow': this.shadow,
         'w-menu--fixed': this.fixed
       }
     },
 
+    // The floatting menu styles.
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || (this.overlay && !this.zIndex && 200) || null,
         top: (this.menuCoordinates.top && `${~~this.menuCoordinates.top}px`) || null,
         left: (this.menuCoordinates.left && `${~~this.menuCoordinates.left}px`) || null,
-        minWidth: (this.minWidth && this.menuMinWidth) || null
+        minWidth: (this.minWidth && this.menuMinWidth) || null,
+        '--w-menu-bg-color': this.arrow && this.$waveui.colors[this.bgColor || 'white']
       }
     },
 
@@ -218,7 +237,7 @@ export default {
 
   methods: {
     toggleMenu (e) {
-      let shouldShowMenu = this.showMenu
+      let shouldShowMenu = this.menuVisible
       if ('ontouchstart' in window && this.showOnHover && e.type === 'click') {
         shouldShowMenu = !shouldShowMenu
       }
@@ -234,11 +253,20 @@ export default {
 
       this.timeoutId = clearTimeout(this.timeoutId)
 
-      if (shouldShowMenu) this.openMenu(e)
+      if (shouldShowMenu) {
+        this.$emit('update:modelValue', (this.menuVisible = true))
+        this.$emit('input', true)
+        this.$emit('open')
+
+        this.openMenu(e)
+      }
       else this.closeMenu()
     },
 
-    openMenu (e) {
+    async openMenu (e) {
+      this.menuVisible = true
+      await this.insertMenu()
+
       if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
 
       if (!this.noPosition) this.computeMenuPosition(e)
@@ -247,10 +275,10 @@ export default {
       // if we don't postpone the Menu apparition it will start transition from a visible menu and
       // thus will not transition.
       this.timeoutId = setTimeout(() => {
-        this.$emit('update:modelValue', (this.showMenu = true))
+        this.$emit('update:modelValue', true)
         this.$emit('input', true)
         this.$emit('open')
-      }, 10)
+      }, 0)
 
       if (!this.persistent) document.addEventListener('mousedown', this.onOutsideMousedown)
       if (!this.noPosition) window.addEventListener('resize', this.onResize)
@@ -269,14 +297,14 @@ export default {
     async closeMenu (force = false) {
       // Might be already closed.
       // E.g. showOnHover & hideOnMenuClick: on click, force hide then mouseleave is also firing.
-      if (!this.showMenu) return
+      if (!this.menuVisible) return
 
       if (this.showOnHover && !force) {
         await new Promise(resolve => setTimeout(resolve, 10))
         if (this.showOnHover && (this.hoveringMenu || this.hoveringActivator)) return
       }
 
-      this.$emit('update:modelValue', (this.showMenu = false))
+      this.$emit('update:modelValue', (this.menuVisible = false))
       this.$emit('input', false)
       this.$emit('close')
       // Remove the mousedown listener if the menu got closed without a mousedown outside of the menu.
@@ -286,7 +314,7 @@ export default {
 
     onOutsideMousedown (e) {
       if (!this.menuEl.contains(e.target) && !this.activatorEl.contains(e.target)) {
-        this.$emit('update:modelValue', (this.showMenu = false))
+        this.$emit('update:modelValue', (this.menuVisible = false))
         this.$emit('input', false)
         this.$emit('close')
         document.removeEventListener('mousedown', this.onOutsideMousedown)
@@ -401,49 +429,53 @@ export default {
       this.menuEl.style.visibility = null
 
       // The menu coordinates are also recalculated while resizing window with open menu: keep the menu visible.
-      if (!this.showMenu) this.menuEl.style.display = 'none'
+      if (!this.menuVisible) this.menuEl.style.display = 'none'
 
       this.menuCoordinates = { top, left }
     },
 
     insertMenu () {
-      const wrapper = this.$refs.wrapper
-      this.menuEl = this.$refs.menu.$el || this.$refs.menu
-      // Unwrap the activator element.
-      wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
+      return new Promise(resolve => {
+        this.$nextTick(() => {
+          this.menuEl = this.$refs.menu?.$el || this.$refs.menu
 
-      // Unwrap the overlay.
-      if (this.overlay) wrapper.parentNode.insertBefore(this.overlayEl, wrapper)
-
-      // Move the menu elsewhere in the DOM.
-      // wrapper.parentNode.insertBefore(this.menuEl, wrapper)
-      this.detachToTarget.appendChild(this.menuEl)
+          // Move the menu elsewhere in the DOM.
+          // wrapper.parentNode.insertBefore(this.menuEl, wrapper)
+          this.detachToTarget.appendChild(this.menuEl)
+          resolve()
+        })
+      })
     },
 
     removeMenu () {
-      // el.remove() doesn't work on IE11.
-      if (this.menuEl && this.menuEl.parentNode) this.menuEl.parentNode.removeChild(this.menuEl)
+      if (this.menuEl && this.menuEl.parentNode) this.menuEl.remove()
     }
   },
 
   mounted () {
-    this.activatorEl = this.$refs.wrapper.firstElementChild
-    this.overlayEl = this.overlay ? this.$refs.overlay.$el : null
-    this.insertMenu()
+    const wrapper = this.$el
+    this.activatorEl = wrapper.firstElementChild
+    // Unwrap the activator element.
+    wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
+
+    // Unwrap the overlay.
+    if (this.overlay) {
+      this.overlayEl = this.$refs.overlay?.$el
+      wrapper.parentNode.insertBefore(this.overlayEl, wrapper)
+    }
 
     if (this.modelValue) this.toggleMenu({ type: 'click', target: this.activatorEl })
   },
 
   beforeUnmount () {
     this.removeMenu()
-    // el.remove() doesn't work on IE11.
-    if (this.overlay && this.overlayEl.parentNode) this.overlayEl.parentNode.removeChild(this.overlayEl)
-    if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.parentNode.removeChild(this.activatorEl)
+    if (this.overlay && this.overlayEl.parentNode) this.overlayEl.remove()
+    if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.remove()
   },
 
   watch: {
     modelValue (bool) {
-      if (!!bool !== this.showMenu) this.toggleMenu({ type: 'click', target: this.activatorEl })
+      if (!!bool !== this.menuVisible) this.toggleMenu({ type: 'click', target: this.activatorEl })
     },
     detachTo () {
       this.removeMenu()
@@ -473,5 +505,14 @@ export default {
   &--bottom {margin-top: 3 * $base-increment;}
   &--left {margin-left: -3 * $base-increment;}
   &--right {margin-left: 3 * $base-increment;}
+
+  &--arrow {
+    &.w-menu--top {margin-top: -4 * $base-increment;}
+    &.w-menu--bottom {margin-top: 4 * $base-increment;}
+    &.w-menu--left {margin-left: -4 * $base-increment;}
+    &.w-menu--right {margin-left: 4 * $base-increment;}
+
+    @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
+  }
 }
 </style>

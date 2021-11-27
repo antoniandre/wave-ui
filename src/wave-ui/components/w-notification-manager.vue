@@ -62,7 +62,7 @@ export default {
   z-index: 1000;
   pointer-events: none;
   width: 280px;
-  overflow: auto;
+  overflow-x: hidden;
 
   &--left {right: auto;left: 0;}
 

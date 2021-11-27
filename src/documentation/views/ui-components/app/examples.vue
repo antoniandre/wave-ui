@@ -76,23 +76,21 @@ div
               section.content.block.grow Main content
               section.footer Footer
         template(#pug).
-          w-app#app
+          w-app#app(row)
             aside Nav menu
             w-flex(grow)
               header Header
               main.grow Main content
               footer Footer
         template(#html).
-          &lt;div id="app"&gt;
-            &lt;w-app class="w-flex row"&gt;
-              &lt;aside&gt;Nav menu&lt;/aside&gt;
-              &lt;w-flex column&gt;
-                &lt;header&gt;Header&lt;/header&gt;
-                &lt;main class="grow"&gt;Main content&lt;/main&gt;
-                &lt;footer&gt;Footer&lt;/footer&gt;
-              &lt;/w-flex&gt;
-            &lt;/w-app&gt;
-          &lt;/div&gt;
+          &lt;w-app id="app" row&gt;
+            &lt;aside&gt;Nav menu&lt;/aside&gt;
+            &lt;w-flex column&gt;
+              &lt;header&gt;Header&lt;/header&gt;
+              &lt;main class="grow"&gt;Main content&lt;/main&gt;
+              &lt;footer&gt;Footer&lt;/footer&gt;
+            &lt;/w-flex&gt;
+          &lt;/w-app&gt;
         template(#css).
           /* Demo styles - can be discarded. */
           .w-app {padding: 4px;background-color: #fffeed;}

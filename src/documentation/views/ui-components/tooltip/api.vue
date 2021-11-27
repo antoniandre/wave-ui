@@ -16,21 +16,21 @@ import WTooltip from '@/wave-ui/components/w-tooltip.vue'
 const propsDescs = {
   value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the tooltip. Any truthy value will show the tooltip whereas any falsy value will hide it.',
   showOnClick: 'Triggers the tooltip apparition on activator click instead of hover by default. Another click on the activator will hide the tooltip.',
-  color: 'Applies a color to the tooltip\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  bgColor: 'Applies a color to the tooltip\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  color: 'Applies a color to the tooltip\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Applies a color to the tooltip\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   shadow: 'Applies a drop shadow to the tooltip.',
   noBorder: 'Removes the default border from the tooltip element.',
-  transition: 'Applies a particular transition to the tooltip element when showing and hiding.<br>Accepts all the transitions listed in the <a href="/transitions">transitions</a> knowledge base page. You can also disable the transition by setting this prop to an empty string.',
+  transition: 'Applies a particular transition to the tooltip element when showing and hiding.<br>Accepts all the transitions listed in the <a href="transitions">transitions</a> knowledge base page. You can also disable the transition by setting this prop to an empty string.',
   tile: 'Removes the default border-radius and sets sharp edges on the tooltip.',
   round: 'Sets a maximum border-radius on the corners of the tooltip, giving it a round look.',
-  tooltipClass: 'Applies a custom CSS class to the tooltip element.',
+  tooltipClass: 'Provide custom CSS classes for the tooltip element.',
   // Position.
   detachTo: 'Moves the tooltip element into another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `<span class="code">.w-app</span>` will be the target.<br>By default a wrapper is created around the activator element and the tooltip is appended inside it.',
   fixed: 'Sets the CSS position of the tooltip to <code>fixed</code> (absolute by default).',
-  top: 'Places the tooltip at the top of the screen when the <code>fixed</code> prop is set to true or at the top of its container otherwise.',
-  bottom: 'Places the tooltip at the bottom of the screen when the <code>fixed</code> prop is set to true or at the bottom of its container otherwise.',
-  left: 'Places the tooltip at the left of the screen when the <code>fixed</code> prop is set to true or at the left of its container otherwise.',
-  right: 'Places the tooltip at the right of the screen when the <code>fixed</code> prop is set to true or at the right of its container otherwise.',
+  top: 'Places the tooltip at the top of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the top of its container otherwise.',
+  bottom: 'Places the tooltip at the bottom of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the bottom of its container otherwise.',
+  left: 'Places the tooltip at the left of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the left of its container otherwise.',
+  right: 'Places the tooltip at the right of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the right of its container otherwise.',
   zIndex: 'Applies a z-index (positive or negative integer) to the tooltip.'
 }
 

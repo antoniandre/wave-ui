@@ -32,6 +32,8 @@ export default {
   },
 
   computed: {
+    baseURL: () => import.meta.env.BASE_URL,
+
     sortedItems () {
       const keys = Object.keys(this.items).sort()
 
@@ -57,7 +59,7 @@ export default {
           label: key.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase(), // Convert camelCase to kebab-case.
           ...item,
           hide: item.description === false || this.descriptions[key] === false,
-          description: item.description || this.descriptions[key] || ''
+          description: (item.description || this.descriptions[key] || '').replace(/href="\//g, `href=\"${this.baseURL}`)
         }
       })
     }
