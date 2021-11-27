@@ -209,7 +209,7 @@ export default {
 <style lang="scss">
 .pug-icon {
   fill: currentColor;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .example {

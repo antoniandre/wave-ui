@@ -128,6 +128,36 @@ main
       .box
       .box
       .box
+    template(#pug).
+      p.code.mb1 .justify-start (default)
+      w-flex.pa3.blue-light5--bg(justify-start)
+        .box
+        .box
+        .box
+
+      p.code.mt4.mb1 .justify-center
+      w-flex.pa3.blue-light5--bg(justify-center)
+        .box
+        .box
+        .box
+
+      p.code.mt4.mb1 .justify-end
+      w-flex.pa3.blue-light5--bg(justify-end)
+        .box
+        .box
+        .box
+
+      p.code.mt4.mb1 .justify-space-between
+      w-flex.pa3.blue-light5--bg(justify-space-between)
+        .box
+        .box
+        .box
+
+      p.code.mt4.mb1 .justify-space-evenly
+      w-flex.pa3.blue-light5--bg(justify-space-evenly)
+        .box
+        .box
+        .box
     template(#html).
       &lt;p&gt;.justify-start (default)&lt;/p&gt;
       &lt;w-flex justify-start class="blue-light5--bg pa3"&gt;
@@ -197,6 +227,35 @@ main
           .box
           .box
           .box
+    template(#pug).
+      w-flex(basis-zero wrap)
+        .grow.mx1
+          p.code.mb1 .justify-start (default)
+          w-flex.wrapper(column align-center justify-start)
+            .box
+            .box
+            .box
+
+        .grow.mx1
+          p.code.mb1 .justify-center
+          w-flex.wrapper(column align-center justify-center)
+            .box
+            .box
+            .box
+
+        .grow.mx1
+          p.code.mb1 .justify-space-between
+          w-flex.wrapper(column align-center justify-space-between)
+            .box
+            .box
+            .box
+
+        .grow.mx1
+          p.code.mb1 .justify-end
+          w-flex.wrapper(column align-center justify-end)
+            .box
+            .box
+            .box
     template(#html).
       &lt;w-flex basis-zero wrap&gt;
         &lt;div class="grow mx1"&gt;
@@ -276,6 +335,28 @@ main
           .box.align-self-start
           .box.align-self-center
           .box.align-self-end
+    template(#pug).
+      w-flex(basis-zero wrap)
+        .grow.mx1.xs12.sm4
+          p 1. Default
+          w-flex.wrapper(justify-center)
+            .box
+            .box
+            .box
+
+        .grow.mx1.xs12.sm4
+          p 2. Align center
+          w-flex.wrapper(justify-center align-center)
+            .box
+            .box
+            .box
+
+        .grow.mx1.xs12.sm4
+          p 3. Align self start, center, end
+          w-flex.wrapper(justify-center)
+            .box.align-self-start
+            .box.align-self-center
+            .box.align-self-end
     template(#html).
       &lt;w-flex basis-zero&gt;
         &lt;div class="grow mx1"&gt;
@@ -339,6 +420,28 @@ main
           .box.align-self-start
           .box.align-self-center
           .box.align-self-end
+    template(#pug).
+      w-flex(basis-zero wrap)
+        .grow.mx1.xs12.sm4
+          p 1. Default
+          w-flex.wrapper(column justify-center)
+            .box
+            .box
+            .box
+
+        .grow.mx1.xs12.sm4
+          p 2. Align-center
+          w-flex.wrapper(column justify-center align-center)
+            .box
+            .box
+            .box
+
+        .grow.mx1.xs12.sm4
+          p 3. Align self start, center, end
+          w-flex.wrapper(column justify-center)
+            .box.align-self-start
+            .box.align-self-center
+            .box.align-self-end
     template(#html).
       &lt;w-flex basis-zero&gt;
         &lt;div class="grow mx1"&gt;
@@ -402,6 +505,21 @@ main
           .box
           .box.mxa
           .box
+    template(#pug).
+      w-flex(basis-zero)
+        .grow.mx1
+          p 1. Row direction
+          w-flex.wrapper(justify-center align-center)
+            .box.maa
+            .box.maa
+            .box.maa
+
+        .grow.mx1
+          p 2. Column direction
+          w-flex.wrapper(column justify-center)
+            .box
+            .box.mxa
+            .box
     template(#html).
       &lt;w-flex basis-zero&gt;
         &lt;div class="grow mx1"&gt;
@@ -453,6 +571,12 @@ main
         .box
         .spacer
         .box
+      template(#pug).
+        w-flex.wrapper(align-center)
+          .box
+          .box
+          .spacer
+          .box
       template(#html).
         &lt;w-flex align-center class="wrapper"&gt;
           &lt;div class="box"&gt;&lt;/div&gt;
@@ -479,6 +603,12 @@ main
         .box.shrink
         .spacer
         .box.shrink
+      template(#pug).
+        w-flex.wrapper(column)
+          .box.shrink
+          .box.shrink
+          .spacer
+          .box.shrink
       template(#html).
         &lt;w-flex column class="wrapper"&gt;
           &lt;div class="box shrink"&gt;&lt;/div&gt;

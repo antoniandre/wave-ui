@@ -34,14 +34,30 @@ main
         .primary--bg.py3 xs6
       .xs6.pa1
         .primary--bg.py3 xs6
-      .xs4.pa1(v-for="i in 3" :key="`a${i}`")
+      .xs4.pa1(v-for="i in 3" :key="i")
         .primary-light1--bg.white.py3 xs4
-      .xs3.pa1(v-for="i in 4" :key="`b${i}`")
+      .xs3.pa1(v-for="i in 4" :key="i")
         .primary-light2--bg.white.py3 xs3
-      .xs2.pa1(v-for="i in 6" :key="`c${i}`")
+      .xs2.pa1(v-for="i in 6" :key="i")
         .primary-light3--bg.py3 xs2
-      .xs1.pa1(v-for="i in 12" :key="`d${i}`")
+      .xs1.pa1(v-for="i in 12" :key="i")
         .blue-light4--bg.pa3 xs1
+    template(#pug).
+      w-flex.text-center(wrap)
+        .xs12.pa1
+          .primary-dark1--bg.py3 xs12
+        .xs6.pa1
+          .primary--bg.py3 xs6
+        .xs6.pa1
+          .primary--bg.py3 xs6
+        .xs4.pa1(v-for="i in 3" :key="i")
+          .primary-light1--bg.white.py3 xs4
+        .xs3.pa1(v-for="i in 4" :key="i")
+          .primary-light2--bg.white.py3 xs3
+        .xs2.pa1(v-for="i in 6" :key="i")
+          .primary-light3--bg.py3 xs2
+        .xs1.pa1(v-for="i in 12" :key="i")
+          .blue-light4--bg.pa3 xs1
     template(#html).
       &lt;w-flex wrap class="text-center"&gt;
         &lt;div class="xs12 pa1"&gt;
@@ -55,19 +71,19 @@ main
           &lt;div class="primary--bg py3"&gt;xs6&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 3" :key="`a${i}`" class="xs4 pa1"&gt;
+        &lt;div v-for="i in 3" :key="i" class="xs4 pa1"&gt;
           &lt;div class="primary-light1--bg white py3"&gt;xs4&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 4" :key="`b${i}`" class="xs3 pa1"&gt;
+        &lt;div v-for="i in 4" :key="i" class="xs3 pa1"&gt;
           &lt;div class="primary-light2--bg white py3"&gt;xs3&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 6" :key="`c${i}`" class="xs2 pa1"&gt;
+        &lt;div v-for="i in 6" :key="i" class="xs2 pa1"&gt;
           &lt;div class="primary-light3--bg py3"&gt;xs2&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 12" :key="`d${i}`" class="xs1 pa1"&gt;
+        &lt;div v-for="i in 12" :key="i" class="xs1 pa1"&gt;
           &lt;div class="blue-light4--bg pa3"&gt;xs1&lt;/div&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
@@ -94,6 +110,28 @@ main
         .primary-light3--bg.py3 xs5
       .xs7.pa1
         .primary-light3--bg.py3 xs7
+    template(#pug).
+      w-flex.text-center(wrap)
+        .xs1.pa1
+          .primary-dark1--bg.py3 xs1
+        .xs11.pa1
+          .primary-dark1--bg.py3 xs11
+        .xs2.pa1
+          .primary--bg.py3 xs2
+        .xs10.pa1
+          .primary--bg.py3 xs10
+        .xs3.pa1
+          .primary-light1--bg.white.py3 xs3
+        .xs9.pa1
+          .primary-light1--bg.white.py3 xs9
+        .xs4.pa1
+          .primary-light2--bg.white.py3 xs4
+        .xs8.pa1
+          .primary-light2--bg.white.py3 xs8
+        .xs5.pa1
+          .primary-light3--bg.py3 xs5
+        .xs7.pa1
+          .primary-light3--bg.py3 xs7
     template(#html).
       &lt;w-flex wrap class="text-center"&gt;
         &lt;div class="xs1 pa1"&gt;
@@ -172,6 +210,49 @@ main
           template(v-else-if="$waveui.breakpoint.md") md6
           template(v-else-if="$waveui.breakpoint.lg") lg4
           template(v-else-if="$waveui.breakpoint.xl") xl2
+    template(#pug).
+      w-flex.text-center(wrap)
+        .xs12.md6.lg4.xl2.pa1
+          .primary-light3--bg.py3
+            template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+            template(v-else-if="$waveui.breakpoint.md") md6
+            template(v-else-if="$waveui.breakpoint.lg") lg4
+            template(v-else-if="$waveui.breakpoint.xl") xl2
+
+        .xs12.md6.lg4.xl2.pa1
+          .primary-light3--bg.py3
+            template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+            template(v-else-if="$waveui.breakpoint.md") md6
+            template(v-else-if="$waveui.breakpoint.lg") lg4
+            template(v-else-if="$waveui.breakpoint.xl") xl2
+
+        .xs12.md6.lg4.xl2.pa1
+          .primary-light3--bg.py3
+            template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+            template(v-else-if="$waveui.breakpoint.md") md6
+            template(v-else-if="$waveui.breakpoint.lg") lg4
+            template(v-else-if="$waveui.breakpoint.xl") xl2
+
+        .xs12.md6.lg4.xl2.pa1
+          .primary-light3--bg.py3
+            template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+            template(v-else-if="$waveui.breakpoint.md") md6
+            template(v-else-if="$waveui.breakpoint.lg") lg4
+            template(v-else-if="$waveui.breakpoint.xl") xl2
+
+        .xs12.md6.lg4.xl2.pa1
+          .primary-light3--bg.py3
+            template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+            template(v-else-if="$waveui.breakpoint.md") md6
+            template(v-else-if="$waveui.breakpoint.lg") lg4
+            template(v-else-if="$waveui.breakpoint.xl") xl2
+
+        .xs12.md6.lg4.xl2.pa1
+          .primary-light3--bg.py3
+            template(v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm") xs12
+            template(v-else-if="$waveui.breakpoint.md") md6
+            template(v-else-if="$waveui.breakpoint.lg") lg4
+            template(v-else-if="$waveui.breakpoint.xl") xl2
     template(#html).
       &lt;w-flex wrap class="text-center"&gt;
         &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
@@ -182,6 +263,7 @@ main
             &lt;template v-else-if="$waveui.breakpoint.xl"&gt;xl2&lt;/template&gt;
           &lt;/div&gt;
         &lt;/div&gt;
+
         &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
           &lt;div class="primary-light3--bg py3"&gt;
             &lt;template v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm"&gt;xs12&lt;/template&gt;
@@ -190,6 +272,7 @@ main
             &lt;template v-else-if="$waveui.breakpoint.xl"&gt;xl2&lt;/template&gt;
           &lt;/div&gt;
         &lt;/div&gt;
+
         &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
           &lt;div class="primary-light3--bg py3"&gt;
             &lt;template v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm"&gt;xs12&lt;/template&gt;
@@ -198,6 +281,7 @@ main
             &lt;template v-else-if="$waveui.breakpoint.xl"&gt;xl2&lt;/template&gt;
           &lt;/div&gt;
         &lt;/div&gt;
+
         &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
           &lt;div class="primary-light3--bg py3"&gt;
             &lt;template v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm"&gt;xs12&lt;/template&gt;
@@ -206,6 +290,7 @@ main
             &lt;template v-else-if="$waveui.breakpoint.xl"&gt;xl2&lt;/template&gt;
           &lt;/div&gt;
         &lt;/div&gt;
+
         &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
           &lt;div class="primary-light3--bg py3"&gt;
             &lt;template v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm"&gt;xs12&lt;/template&gt;
@@ -214,6 +299,7 @@ main
             &lt;template v-else-if="$waveui.breakpoint.xl"&gt;xl2&lt;/template&gt;
           &lt;/div&gt;
         &lt;/div&gt;
+
         &lt;div class="xs12 md6 lg4 xl2 pa1"&gt;
           &lt;div class="primary-light3--bg py3"&gt;
             &lt;template v-if="$waveui.breakpoint.xs || $waveui.breakpoint.sm"&gt;xs12&lt;/template&gt;
