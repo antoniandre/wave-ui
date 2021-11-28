@@ -1,7 +1,7 @@
 <template lang="pug">
 .example
   //- .fill-height in case the example is in a flex column.
-  .w-flex.fill-height
+  .w-flex.grow
     .example__render.grow(:class="contentClass")
       slot
     .buttons
@@ -214,13 +214,18 @@ export default {
 
 .example {
   position: relative;
+  display: flex;
+  flex-direction: column;
   margin-top: 1em;
   margin-bottom: 1em;
   border: 1px solid #eee;
   background-color: #fcfcfc;
   border-radius: 3px;
 
-  .w-tabs {border-radius: 0;border-width: 1px 0 0;}
+  .w-tabs {
+    border-radius: 0;
+    border-width: 1px 0 0;
+  }
 
   .buttons {
     border-left: 1px solid #eee;

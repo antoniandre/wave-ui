@@ -129,31 +129,31 @@ main
       .box
       .box
     template(#pug).
-      p.code.mb1 .justify-start (default)
+      p.mb1 .justify-start (default)
       w-flex.pa3.blue-light5--bg(justify-start)
         .box
         .box
         .box
 
-      p.code.mt4.mb1 .justify-center
+      p.mt4.mb1 .justify-center
       w-flex.pa3.blue-light5--bg(justify-center)
         .box
         .box
         .box
 
-      p.code.mt4.mb1 .justify-end
+      p.mt4.mb1 .justify-end
       w-flex.pa3.blue-light5--bg(justify-end)
         .box
         .box
         .box
 
-      p.code.mt4.mb1 .justify-space-between
+      p.mt4.mb1 .justify-space-between
       w-flex.pa3.blue-light5--bg(justify-space-between)
         .box
         .box
         .box
 
-      p.code.mt4.mb1 .justify-space-evenly
+      p.mt4.mb1 .justify-space-evenly
       w-flex.pa3.blue-light5--bg(justify-space-evenly)
         .box
         .box
@@ -230,28 +230,28 @@ main
     template(#pug).
       w-flex(basis-zero wrap)
         .grow.mx1
-          p.code.mb1 .justify-start (default)
+          p.mb1 .justify-start (default)
           w-flex.wrapper(column align-center justify-start)
             .box
             .box
             .box
 
         .grow.mx1
-          p.code.mb1 .justify-center
+          p.mb1 .justify-center
           w-flex.wrapper(column align-center justify-center)
             .box
             .box
             .box
 
         .grow.mx1
-          p.code.mb1 .justify-space-between
+          p.mb1 .justify-space-between
           w-flex.wrapper(column align-center justify-space-between)
             .box
             .box
             .box
 
         .grow.mx1
-          p.code.mb1 .justify-end
+          p.mb1 .justify-end
           w-flex.wrapper(column align-center justify-end)
             .box
             .box
