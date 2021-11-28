@@ -139,13 +139,16 @@ main
     But you are completely free to define CSS classes in your CSS to associate a color to a class.#[br]
     For instance, you can define:
   ssh-pre(language="css").
-    .pale-green {color: #eafddd;}
-    .pale-blue--bg {background-color: #e3ffff;}
+    .mint-green {color: #acebd7;}
+    .navy-blue--bg {background-color: #345276;}
 
-  p ...and use it on a component like this:
-  ssh-pre(language="html-vue").
-    &lt;w-tag color="pale-green" bg-color="pale-blue"&gt;tag&lt;/w-tag&gt;
-
+  p.mt6 ...and use it on a component like this:
+  w-flex(gap="6")
+    ssh-pre.ml3(v-show="$store.state.usePug" language="pug" label="Pug").
+      w-tag(color="mint-green" bg-color="navy-blue" lg)
+    ssh-pre.ml3(v-show="!$store.state.usePug" language="html-vue").
+      &lt;w-tag color="mint-green" bg-color="navy-blue" lg&gt;tag&lt;/w-tag&gt;
+    w-tag.align-self-end(color="mint-green" bg-color="navy-blue" lg) Tag
 </template>
 
 <script>
@@ -236,4 +239,7 @@ export default {
     }
   }
 }
+
+.mint-green {color: #acebd7;}
+.navy-blue--bg {background-color: #345276;}
 </style>
