@@ -114,12 +114,12 @@ div.lists-demo
     In that case, if you don't want to default to the primary color, you can explicitly set
     #[code selection-color] to a falsy value (false, null, or empty string), or another color.
   example
-    w-list(:value="[]" :items="listItems4" selection-color="pink" multiple)
+    w-list(:value="['Item 2']" :items="listItems4" selection-color="pink" multiple)
     template(#pug).
-      w-list(:value="[]" :items="items" selection-color="pink" multiple)
+      w-list(:value="['Item 2']" :items="items" selection-color="pink" multiple)
     template(#html).
       &lt;w-list
-        :value="[]"
+        :value="['Item 2']"
         :items="items"
         selection-color="pink"
         multiple&gt;
