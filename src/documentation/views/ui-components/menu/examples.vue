@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   title-link(h2) Basic
-  example.example1(content-class="pt5")
+  example.example1(content-class="text-center pt5" app-props-string="align-center")
     w-menu(detach-to=".example1")
       template(#activator="{ on }")
         w-button(v-on="on") Show menu
@@ -71,7 +71,7 @@ div
     A persistent menu can only be closed by clicking on the activator again, or programmatically.#[br]
     Clicking outside the menu will not close it.#[br]
     Of course you can also add a button inside the menu to close it.
-  example.example3(content-class="pt5")
+  example.example3(content-class="text-center pt5" app-props-string="align-center")
     w-menu(detach-to=".example3" persistent)
       template(#activator="{ on }")
         w-button.mb2.mr3(v-on="on") Show persistent menu
@@ -93,7 +93,7 @@ div
 
   title-link(h2) Hide menu on click inside
   p A click inside the menu will close it.
-  example.example4(content-class="pt5")
+  example.example4(content-class="text-center pt5" app-props-string="align-center")
     w-menu(detach-to=".example4" hide-on-menu-click)
       template(#activator="{ on }")
         w-button(v-on="on") Show menu
@@ -114,8 +114,8 @@ div
       &lt;/w-menu&gt;
 
   title-link(h2) Position
-  example.example5(content-class="py12")
-    w-flex(:gap="3" align-center wrap)
+  example.example5
+    w-flex.my6(:gap="3" align-center wrap)
       | Show menu on:
       w-menu(detach-to=".example5" left)
         template(#activator="{ on }")
@@ -134,7 +134,7 @@ div
           w-button(v-on="on") Right
         | Menu content
     template(#pug).
-      w-flex(:gap="3" align-center wrap)
+      w-flex.my12(:gap="3" align-center wrap)
         | Show menu on:
 
         w-menu(left)
@@ -154,7 +154,7 @@ div
             w-button(v-on="on") Right
           | Menu content
     template(#html).
-      &lt;w-flex :gap="3" align-center wrap&gt;
+      &lt;w-flex :gap="3" align-center wrap class="my12"&gt;
         Show menu on:
 
         &lt;w-menu left&gt;
@@ -272,7 +272,7 @@ div
         template(#activator="{ on }")
           w-button.ma1(v-on="on") Align left
         | Menu content
-      w-menu(
+      w-menu
         template(#activator="{ on }")
           w-button.ma1(v-on="on") Centered
         | Menu content
@@ -441,7 +441,7 @@ div
 
   title-link(h2) Arrow (Tooltip style)
   p Applies a tooltip style with the #[code arrow] option.
-  example.example13(content-class="pb12")
+  example.example13(content-class="text-center my4" app-props-string="align-center")
     w-menu(detach-to=".example13" arrow)
       template(#activator="{ on }")
         w-button.ma1(v-on="on") Show menu
@@ -526,7 +526,7 @@ div
 
   title-link(h2) Color &amp; background color
   p Like in most components, you can define a #[code color] and a  #[code bg-color].
-  example.example8(content-class="pb12")
+  example.example8(content-class="text-center my4" app-props-string="align-center")
     w-menu(detach-to=".example8" color="blue-dark2" bg-color="blue-light5")
       template(#activator="{ on }")
         w-button.ma1(v-on="on") Show a blue menu
@@ -547,8 +547,8 @@ div
       &lt;/w-menu&gt;
 
   title-link(h2) Tile, round and shadow
-  example.example9(content-class="pb12")
-    w-flex(wrap :gap="3")
+  example.example9
+    w-flex.my6(wrap justify-center :gap="3")
       w-menu(detach-to=".example9" tile)
         template(#activator="{ on }")
           w-button.mt1(v-on="on") Show a tile menu
@@ -562,7 +562,7 @@ div
           w-button.mt1(v-on="on") Show a shadow menu
         | Menu content
     template(#pug).
-      w-flex(wrap :gap="3")
+      w-flex.my6(wrap :gap="3" justify-center)
         w-menu(tile)
           template(#activator="{ on }")
             w-button(v-on="on") Show a tile menu
@@ -576,7 +576,7 @@ div
             w-button(v-on="on") Show a shadow menu
           | Menu content
     template(#html).
-      &lt;w-flex wrap :gap="3"&gt;
+      &lt;w-flex wrap :gap="3"  justify-center class="my6"&gt;
         &lt;w-menu tile&gt;
           &lt;template #activator="{ on }"&gt;
             &lt;w-button v-on="on"&gt;
@@ -610,7 +610,7 @@ div
 
   title-link(h2) Menu content: w-card
   p By default the menu is a w-card, so it accepts all the props of a w-card.
-  example.example10(content-class="mb12 pb12")
+  example.example10(content-class="text-center my4" app-props-string="align-center")
     w-menu(detach-to=".example10" shadow v-model="showMenu")
       template(#activator)
         w-button.mr3.mb2(@click="showMenu = true") Show a w-card menu
@@ -724,7 +724,7 @@ div
     In this example, the menu is #[code persistent] so the user is forced to select an option from
     the menu when open. Then on click of an option, the menu will hide thanks to the option
     #[code hide-on-menu-click].
-  example.example11(content-class="mb12 pb12")
+  example.example11(content-class="text-center my4" app-props-string="align-center")
     w-menu(detach-to=".example11" custom hide-on-menu-click persistent shadow)
       template(#activator="{ on }")
         w-button(v-on="on") Show a list menu
@@ -782,7 +782,7 @@ div
       })
 
   title-link(h2) Menu with overlay
-  example.example12(content-class="mb12 pb12")
+  example.example12(content-class="text-center my4" app-props-string="align-center")
     w-menu(detach-to=".example12" v-model="showListMenu2" shadow custom overlay)
       template(#activator="{ on }")
         w-button(v-on="on") Show a menu &amp; overlay
