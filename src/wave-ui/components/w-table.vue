@@ -5,7 +5,7 @@
     @mousedown="onMouseDown"
     @mouseover="onMouseOver"
     @mouseout="onMouseOut")
-    colgroup
+    colgroup(ref="colgroup")
       col.w-table__col(
         v-for="(header, i) in headers"
         :key="i"
@@ -174,7 +174,7 @@ export default {
     resizableColumns: { type: Boolean }
   },
 
-  emits: ['row-select', 'row-expand', 'row-click', 'update:sort', 'update:selected-rows', 'update:expanded-rows'],
+  emits: ['row-select', 'row-expand', 'row-click', 'update:sort', 'update:selected-rows', 'update:expanded-rows', 'column-resize'],
 
   data: () => ({
     activeSorting: [],
@@ -436,6 +436,10 @@ export default {
       // cell after resizing.
       // (releasing the mouse on table header triggers a click event captured by the sorting feature)
       setTimeout(() => {
+        // On Mouse up, emit an event containing all the new widths of the columns.
+        const widths = [...this.$refs.colgroup.childNodes].map(column => column.style?.width || column.offsetWidth)
+        this.$emit('column-resize', { index: this.colResizing.columnIndex, widths })
+
         this.colResizing.dragging = false
         this.colResizing.columnIndex = null
         this.colResizing.startCursorX = null
