@@ -43,7 +43,7 @@
           .w-table__loading-text
             slot(name="loading") Loading...
       //- No data.
-      tr.no-data(v-if="!tableItems.length")
+      tr.no-data(v-else-if="!tableItems.length")
         td.w-table__cell.text-center(:colspan="headers.length")
           slot(name="no-data") No data to show.
 
