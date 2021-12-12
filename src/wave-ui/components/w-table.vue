@@ -202,8 +202,7 @@ export default {
     },
 
     filteredItems () {
-      if (typeof this.filter === 'function') return this.tableItems.filter(this.filter)
-      return this.tableItems
+      return typeof this.filter === 'function' ? this.tableItems.filter(this.filter) : this.tableItems
     },
 
     sortedItems () {
