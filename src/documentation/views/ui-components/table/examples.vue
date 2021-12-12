@@ -3,7 +3,7 @@ div
   title-link(h2) Default
   example
     w-table(:headers="table1.headers" :items="table1.items")
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items")
     template(#html).
       &lt;w-table
@@ -35,17 +35,17 @@ div
     br
     w-table(:headers="table1.headers" :items="[]")
       template(#no-data) 👌 There is no data! 👌
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="[]")
       br
       w-table(:headers="table.headers" :items="[]")
-        template(#no-data="") 👌 There is no data! 👌
+        template(#no-data) 👌 There is no data! 👌
     template(#html).
       &lt;w-table :headers="table.headers" :items="[]"&gt;&lt;/w-table&gt;
 
       &lt;br /&gt;
       &lt;w-table :headers="table.headers" :items="[]"&gt;
-        &lt;template #no-data=""&gt;
+        &lt;template #no-data&gt;
           👌 There is no data! 👌
         &lt;/template&gt;
       &lt;/w-table&gt;
@@ -68,7 +68,7 @@ div
 
   example
     w-table(:headers="table2.headers" :items="table2.items")
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items")
     template(#html).
       &lt;w-table
@@ -99,7 +99,7 @@ div
     reasons, like getting the number of columns and sorting/filtering keys.
   example
     w-table(:headers="table1.headers" :items="table1.items" no-headers)
-    //- template(#pug).
+    template(#pug).
       w-table(:items="table.items" :headers="table.headers" no-headers)
     template(#html).
       &lt;w-table
@@ -132,6 +132,12 @@ div
       :items="table3.items"
       fixed-headers
       style="height: 250px")
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        style="height: 250px")
     template(#html).
       &lt;w-table
         :headers="table.headers"
@@ -170,7 +176,8 @@ div
   title-link(h2) Built-in column resizing
   p.
     You can resize the columns by dragging their edges left or right.#[br]
-    If you want the whole cell content to be on a single line, you can apply this CSS.
+    If you want the whole cell content to be on a single line and truncated with the ellipsis
+    (#[code ...]), you can apply this CSS.
   ssh-pre(language="css").
     .w-table__cell {
       white-space: nowrap;
@@ -178,7 +185,7 @@ div
 
   example
     w-table(:headers="table7.headers" :items="table7.items" resizable-columns)
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items" resizable-columns)
     template(#html).
       &lt;w-table
@@ -190,19 +197,71 @@ div
       data: () => ({
         table: {
           headers: [
-            { label: 'ID', key: 'id' },
-            { label: 'First name', key: 'firstName' },
-            { label: 'Last name', key: 'lastName' }
+            { label: 'ID', key: 'id', width: '50' },
+            { label: 'Content', key: 'content', width: '70%' },
+            { label: 'First name', key: 'firstName' }
           ],
           items: [
-            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
-            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
-            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
-            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
-            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+            { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
+            { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
+            { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' },
           ]
         }
       })
+
+  title-link(h3) Storing the table layout in localStorage
+  p.
+    In some apps, it makes sense to save the prefered table layout of the user, and reapply it
+    every time this table is loaded. Here is a demo of how to do so.#[br]
+    To test it, first resize the columns, then refresh the page to see the same layout.
+  example
+    w-table(
+      :headers="table8.headers"
+      :items="table8.items"
+      resizable-columns
+      @column-resize="onColumnResize")
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        resizable-columns
+        @column-resize="onColumnResize")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        resizable-columns
+        @column-resize="onColumnResize"&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id', width: '50' },
+            { label: 'Content', key: 'content', width: '70%' },
+            { label: 'First name', key: 'firstName' }
+          ],
+          items: [
+            { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
+            { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
+            { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' },
+          ]
+        }
+      }),
+
+      methods: {
+        onColumnResize ({ index, widths }) {
+          widths.forEach((width, i) => (this.table.headers[i].width = width))
+
+          // Save the table layout in localStorage.
+          localStorage.tableWidths = widths
+        }
+      },
+
+      mounted () {
+        // Reapply the saved table layout.
+        localStorage.tableWidths?.split(',').forEach((width, i) => (this.table.headers[i].width = width))
+      }
 
   title-link(h2) Toggling column visibility
   p.
@@ -219,7 +278,7 @@ div
       | {{ header.label }}
 
     w-table.mt2(:headers="table6.headers.filter(header => !header.hidden)" :items="table6.items")
-    //- template(#pug).
+    template(#pug).
       w-tag.ma1(
         v-for="(header, index) in table.headers"
         :key="index"
@@ -271,7 +330,7 @@ div
     or a #[code -] for DESC. For instance, in this example: #[code '+firstName'].
   example
     w-table(:headers="table1.headers" :items="table1.items" :sort.sync="table1.sort")
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items" :sort.sync="table.sort")
     template(#html).
       &lt;w-table
@@ -324,7 +383,7 @@ div
       :headers="table3.headers"
       :items="table3.items"
       :filter="table3.filters[table3.activeFilter]")
-    //- template(#pug).
+    template(#pug).
       .w-flex.wrap.mb3
         w-button.mr2.mb1(
           @click="table.activeFilter = 0"
@@ -424,7 +483,7 @@ div
       :headers="table4.headers"
       :items="table4.items"
       :filter="table4.keywordFilter(table4.keyword)")
-    //- template(#pug).
+    template(#pug).
       w-input.mb3(
         v-model="table.keyword"
         placeholder="Search anything..."
@@ -507,7 +566,7 @@ div
       :headers="table1.headers"
       :items="table1.items"
       :loading="table1.loading")
-    //- template(#pug).
+    template(#pug).
       w-table(
         :headers="table.headers"
         :items="table.items"
@@ -545,7 +604,7 @@ div
       fixed-headers
       :loading="table1.loading"
       style="height: 200px")
-    //- template(#pug).
+    template(#pug).
       w-table(
         :headers="table.headers"
         :items="table.items"
@@ -662,7 +721,7 @@ div
 
     .mt4.title4 Selection info:
     pre {{ selectionInfo }}
-    //- template(#pug).
+    template(#pug).
       w-flex.mb4(wrap)
         w-radios.mr6(v-model="table.selectableRows" :items="selectableRowsOptions")
         w-button.my3(
@@ -754,7 +813,7 @@ div
     .mt4
       | Selected rows:
       code.ml2 {{ table1.selectedRows }}
-    //- template(#pug).
+    template(#pug).
       w-table(
         :headers="table.headers"
         :items="table.items"
@@ -794,10 +853,10 @@ div
         }
       })
   alert(info).
-    In order to keep the same row selected after sorting or filtering, rows have unique identifiers.#[br]
+    In order to keep the same row selected after sorting or filtering, each row is assigned a unique identifier.#[br]
     By default the expanded rows array will use an #[code id] key, if present in the item object,
     or will assign an internal unique ID otherwise.
-    If you want you can override the default unique ID (when internally needed) with
+    If you want, you can override the default unique ID key (when internally needed) with
     the #[code uid-key] prop, which is set to "id" by default.
 
   title-link(h2) Expandable rows
@@ -807,7 +866,7 @@ div
       template(#expanded-row="{ item }")
         w-icon.mr2(:color="['blue', 'pink'][item.gender]") mdi {{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] }}
         | {{ item.firstName }} weighs #[strong {{ item.weight }}kg] and is #[strong {{ item.height }}m] tall.
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items" expandable-rows)
         template(#expanded-row="{ item }")
           w-icon.mr2(:color="['blue', 'pink'][item.gender]") mdi {{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] }}
@@ -850,7 +909,7 @@ div
   example
     w-table(:headers="table1.headers" :items="table1.items")
       template(#header-label="{ label, index }") {{ index }}: {{ label }} 👌
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items")
         template(#header-label="{ label, index }") {{ '\{\{ index \}\}: \{\{ label \}\}' }} 👌
     template(#html).
@@ -890,7 +949,7 @@ div
         template(v-else)
           small.grey.mr2 {{ header.label }}:
           span {{ label }}
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" no-headers :items="table.items")
         template(#item-cell="{ item, label, header, index }")
           small.grey.mr2 {{ '\{\{ header.label \}\}' }}:
@@ -936,7 +995,7 @@ div
     w-table(:headers="table1.headers" :items="table1.items" no-headers)
       template(#item-cell.id="{ item, label, header, index }")
         div.px2.text-center.green-light5--bg.text-bold {{ label }}
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items" no-headers)
         template(#item-cell.id="{ item, label, header, index }")
           div.px2.text-center.green-light5--bg.text-bold {{ '\{\{ label \}\}' }}
@@ -984,7 +1043,7 @@ div
             :key="i"
             :class="`pa4 text-${header.align || 'left'}`")
             | {{ item[header.key] || '' }}
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items" selectable-rows)
         template(#item="{ item, index, select, classes }")
           tr(:class="classes" @click="select")
@@ -1043,7 +1102,7 @@ div
               li(v-for="(header, i) in table1.headers" :key="i")
                 strong.mr2 {{ header.label }}:
                 | {{ item[header.key] || '' }}
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items" no-headers selectable-rows)
         template(#item="{ item, index, select, classes }")
           tr(
@@ -1118,7 +1177,7 @@ div
 
   example
     w-table(:headers="table2.headers" :items="table2.items" :mobile-breakpoint="700")
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items" :mobile-breakpoint="700")
     template(#html).
       &lt;w-table
@@ -1250,14 +1309,24 @@ export default {
       headers: [
         { label: 'ID', key: 'id', width: '50' },
         { label: 'Content', key: 'content', width: '70%' },
-        { label: 'First name', key: 'firstName' },
+        { label: 'First name', key: 'firstName' }
       ],
       items: [
         { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
         { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
         { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' },
-        { id: 4, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Daley' },
-        { id: 5, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Virgil' }
+      ]
+    },
+    table8: {
+      headers: [
+        { label: 'ID', key: 'id', width: '50' },
+        { label: 'Content', key: 'content', width: '70%' },
+        { label: 'First name', key: 'firstName' }
+      ],
+      items: [
+        { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
+        { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
+        { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' },
       ]
     },
     selectableRowsOptions: [
@@ -1276,11 +1345,19 @@ export default {
 
     hideColumn (columnIndex) {
       this.table6.headers[columnIndex].hidden = !this.table6.headers[columnIndex].hidden
+    },
+
+    onColumnResize ({ index, widths }) {
+      widths.forEach((width, i) => (this.table8.headers[i].width = width))
+
+      localStorage.tableWidths = widths
     }
   },
 
   mounted () {
     this.reload()
+
+    localStorage.tableWidths?.split(',').forEach((width, i) => (this.table8.headers[i].width = width))
   }
 }
 </script>
