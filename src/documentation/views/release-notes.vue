@@ -23,6 +23,11 @@ main
     //-----------------------------------------------------
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v1.45.1
+      ul
+        li #[strong.code w-table]: fix &amp; improve the expandable-rows feature.
+
     li.minor
       strong.version v1.45.0
       ul
