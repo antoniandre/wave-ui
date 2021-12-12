@@ -26,8 +26,11 @@ main
     li.minor
       strong.version v1.45.0
       ul
-        li.
-          #[strong.code w-table]: emit a #[code column-resize] event on column resize.
+        li
+          strong.code w-table
+          ul
+            li Emit a #[code column-resize] event on column resize.
+            li Fix: don't display the table rows or the no-data message while loading.
 
     li.patch
       strong.version v1.44.1
