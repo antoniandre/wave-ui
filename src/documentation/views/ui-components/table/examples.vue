@@ -186,7 +186,10 @@ div
   example
     w-table(:headers="table7.headers" :items="table7.items" resizable-columns)
     template(#pug).
-      w-table(:headers="table.headers" :items="table.items" resizable-columns)
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        resizable-columns)
     template(#html).
       &lt;w-table
         :headers="table.headers"
@@ -280,14 +283,14 @@ div
     w-table.mt2(:headers="table6.headers.filter(header => !header.hidden)" :items="table6.items")
     template(#pug).
       w-tag.ma1(
-        v-for="(header, index) in table.headers"
+        v-for="&amp;#40;header, index&amp;#41; in table.headers"
         :key="index"
         :bg-color="header.hidden ? 'grey-light4' : 'primary'"
         @click.stop="header.hidden = !header.hidden")
         w-icon.mr2 mdi mdi-eye{{ "\{\{ header.hidden ? '-off' : ''\}\}" }}
         | {{ "\{\{ header.label \}\}" }}
 
-      w-table.mt2(:headers="table.headers.filter(header => !header.hidden)" :items="table.items")
+      w-table.mt2(:headers="table.headers.filter&amp;#40;header => !header.hidden&amp;#41;" :items="table.items")
     template(#html).
       Toggle columns:
       &lt;w-tag
@@ -491,7 +494,7 @@ div
       w-table(
         :headers="table.headers"
         :items="table.items"
-        :filter="table.keywordFilter(table.keyword)")
+        :filter="table.keywordFilter&amp;#40;table.keyword&amp;#41;")
     template(#html).
       &lt;w-input
         v-model="table.keyword"
@@ -570,12 +573,12 @@ div
       w-table(
         :headers="table.headers"
         :items="table.items"
-        :loading="table.loading")
+        :loading="loading")
     template(#html).
       &lt;w-table
         :headers="table.headers"
         :items="table.items"
-        :loading="table.loading"&gt;
+        :loading="loading"&gt;
       &lt;/w-table&gt;
     template(#js).
       data: () => ({
@@ -591,10 +594,14 @@ div
             { id: 3, firstName: 'Rory', lastName: 'Bristol' },
             { id: 4, firstName: 'Daley', lastName: 'Elliott' },
             { id: 5, firstName: 'Virgil', lastName: 'Carman' }
-          ],
-          loading: true // Set this to false when the data is loaded.
-        }
-      })
+          ]
+        },
+        loading: true // Set this to false when the data is loaded.
+      }),
+
+      mounted () {
+        setTimeout(() => {this.loading = false}, 3000)
+      }
 
   title-link(h3 slug="loading-with-fixed-header") Table with fixed header &amp; set height of 200px
   example
@@ -609,14 +616,14 @@ div
         :headers="table.headers"
         :items="table.items"
         fixed-headers
-        :loading="table.loading"
+        :loading="loading"
         style="height: 200px")
     template(#html).
       &lt;w-table
         :headers="table.headers"
         :items="table.items"
         fixed-headers
-        :loading="table.loading"
+        :loading="loading"
         style="height: 200px"&gt;
       &lt;/w-table&gt;
     template(#js).
@@ -643,10 +650,14 @@ div
             { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
             { id: 14, firstName: 'Maude', lastName: 'Hayley' },
             { id: 15, firstName: 'Josie', lastName: 'Richard' }
-          ],
-          loading: true // Set this to false when the data is loaded.
-        }
-      })
+          ]
+        },
+        loading: true // Set this to false when the data is loaded.
+      }),
+
+      mounted () {
+        setTimeout(() => {this.loading = false}, 3000)
+      }
 
   title-link(h2) Pagination
   example
