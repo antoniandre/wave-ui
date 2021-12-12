@@ -15,19 +15,19 @@ div
 import WTable from '@/wave-ui/components/w-table.vue'
 
 const propsDescs = {
-  items: 'An array of objects to define the table data.',
-  headers: 'An array of objects to define the columns of the table. The headers are always required, even when hidden.',
+  items: 'An array of objects that defines the table data.<br>Each item object should have all the same keys as defined in the headers.<br>If needed, you can also add any custom property.</li></ul>',
+  headers: 'An array of objects that defines the columns of the table. The headers are always required, even when hidden.<br>Each header object can have these properties:<ul><li><strong class="code">label:</strong> <span class="types teal">[String]</span> The label to display as the column header.</li><li><strong class="code">key:</strong> <span class="w-tag text-upper red size--sm w-tag--outline">required</span> <span class="types teal">[String]</span> A unique identifier that should be found in each row object, and that will be used for sorting.</li><li><strong class="code">align:</strong> <span class="types teal">[String]</span> align the text to the left, right or center for the whole column.</li><li><strong class="code">width:</strong> <span class="types teal">[String, Integer]</span> Defines the width of the column in pixel if no unit is given, or in the unit you want (E.g. <code>30</code>, <code>30px</code>, <code>2em</code>, <code>20%</code>, etc.)</li><li>If needed, you can also add any custom property.</li></ul>',
   noHeaders: 'The table headings will be hidden. Only the table data will be visible.',
   fixedHeaders: 'When set to <code>true</code>, the table headings will be sticky at the top of the table when scrolling down.',
   loading: 'When set to <code>true</code>, a progress bar will be displayed. Convenient when the table data is not ready.',
-  sort: '',
+  sort: 'Sort the rows of the array by the given key. You can prefix the key with a <code>+</code> or a <code>-</code> to apply an ascending or descending sorting. E.g. <code>+id</code>.<br>You can also use a 2-way binding to keep the <code>sort</code> variable updated in your app (outside of Wave UI): use <code>:sort.sync="sort"</code> in Vue 2,or the <code>v-model:sort="sort"</code> in Vue 3.',
   expandableRows: 'Activate or deactivate the expandable rows feature.<br>When set to <code>true</code>, a click on a row will expand some details for this record on a next row.',
-  expandedRows: '',
-  selectableRows: 'Activate or deactivate the selectable rows feature.<br>When set to <code>true</code>, a click on a row will set it to activated and a CSS class will be applied as well as a highlight.',
-  selectedRows: '',
-  forceSelection: '',
-  uidKey: '',
-  filter: 'An external filter function for the table.',
+  expandedRows: 'Expand some rows by default, on table load. You can provide the rows to expand in an array of <code>id</code>. If you prefer another key than <code>id</code>, you can use the <code>uid-key</code> prop to set another key.',
+  selectableRows: 'Activate or deactivate the selectable rows feature.<br>When set to <code>true</code>, a click on a row will set it to activated and a <code>.w-table__row--selected</code> CSS class will be applied to highlight the row. You can use the CSS class to change the highlight color or style.',
+  selectedRows: 'Select some rows by default, on table load. You can provide the rows to select in an array of <code>id</code>. If you prefer another key than <code>id</code>, you can use the <code>uid-key</code> prop to set another key.',
+  forceSelection: 'Prevent unselecting a row when only one remains selected.',
+  uidKey: 'In order to keep the same row selected after sorting or filtering, each row is assigned a unique identifier.<br>By default the expanded rows array will use an <code>id</code> key, if present in the item object, or will assign an internal unique ID otherwise.<br>If you want, you can override the default unique ID key (when internally needed) with this prop.',
+  filter: 'An external filter function that you can provide to filter the rows of the table.<br>The function receives 2 parameters:<ul><li><strong>Param 1:</strong> the <strong>item</strong> object being traversed by the filter.</li><li><strong>Param 2:</strong> the <strong>index</strong> of the item being traversed by the filter.</li></ul>',
   mobileBreakpoint: 'When a number is given (in pixel), any device screen width under this number will display the table in mobile layout. Leave undefined to disable.',
   resizableColumns: 'When this option is on, the columns will be separated by borders that you can drag to resize.'
 }
@@ -77,7 +77,7 @@ const events = {
       item: 'The associated row item object.',
       index: 'The index of the row being selected (starts at 0) in the current filtering state.',
       selected: 'A boolean representing the selected state of the clicked row.',
-      selectedRows: ''
+      selectedRows: 'An array containing all the expanded rows objects.'
     }
   },
   'row-expand': {
@@ -85,8 +85,8 @@ const events = {
     params: {
       item: 'The associated row item object.',
       index: 'The index of the row being expanded (starts at 0) in the current filtering state.',
-      selected: 'A boolean representing the selected state of the clicked row.',
-      selectedRows: ''
+      expanded: 'A boolean representing the expanded state of the clicked row.',
+      expandedRows: 'An array containing all the expanded rows objects.'
     }
   },
   'update:sort': {
@@ -96,15 +96,22 @@ const events = {
     }
   },
   'update:selected-rows': {
-    description: 'Emitted every time the selected-rows array changes. To be used with <code>:selected-rows.sync</code> on Vue 2.x or <code>v-model:selected-rows</code> on Vue 3.',
+    description: 'Emitted every time the selected-rows array changes. To be used with <code>:selected-rows.sync</code> in Vue 2 or <code>v-model:selected-rows</code> in Vue 3.',
     params: {
       '[Array]': 'The current array of selected rows.'
     }
   },
   'update:expanded-rows': {
-    description: 'Emitted every time the expanded-rows array changes. To be used with <code>:expanded-rows.sync</code> on Vue 2.x or <code>v-model:expanded-rows</code> on Vue 3.',
+    description: 'Emitted every time the expanded-rows array changes. To be used with <code>:expanded-rows.sync</code> in Vue 2 or <code>v-model:expanded-rows</code> in Vue 3.',
     params: {
       '[Array]': 'The current array of expanded rows.'
+    }
+  },
+  'column-resize': {
+    description: 'Emitted on mouseup after a column has been resized.',
+    params: {
+      index: 'The index (starting from 0) of the resizer that was moved (also the index of the column on the left of the resizer).',
+      widths: 'An array containing all the new widths of the columns after resizing.'
     }
   }
 }
