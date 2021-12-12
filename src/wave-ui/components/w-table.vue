@@ -57,13 +57,13 @@
             :item="item"
             :index="i + 1"
             :select="() => doSelectRow(item, i)"
-            :classes="{ 'w-table__row': true, 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--has-expanded': expandedRowsByUid[item._uid] !== undefined }")
+            :classes="{ 'w-table__row': true, 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined }")
 
           tr.w-table__row(
             v-else
             :key="i"
             @click="doSelectRow(item, i)"
-            :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--has-expanded': expandedRowsByUid[item._uid] !== undefined }")
+            :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined }")
             template(v-for="(header, j) in headers")
               td.w-table__cell(
                 v-if="$scopedSlots[`item-cell.${header.key}`] || $scopedSlots[`item-cell.${j + 1}`] || $scopedSlots['item-cell']"
@@ -106,13 +106,14 @@
                   :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
 
           //- Expanded row.
-          tr.w-table__row.w-table__row--expanded(v-if="expandedRowsByUid[item._uid]")
+          tr.w-table__row.w-table__row--expansion(v-if="expandedRowsByUid[item._uid]")
             td.w-table__cell(:colspan="headers.length")
-              div(v-if="expandedRowsByUid[item._uid]")
-                slot(name="expanded-row" :item="item" :index="i + 1")
-              span.w-table__col-resizer(
-                v-if="j < headers.length - 1 && resizableColumns"
-                :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
+              w-transition-expand(y)
+                div(v-if="expandedRowsByUid[item._uid]")
+                  slot(name="row-expansion" :item="item" :index="i + 1")
+                span.w-table__col-resizer(
+                  v-if="i < headers.length - 1 && resizableColumns"
+                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
 </template>
 
 <script>
