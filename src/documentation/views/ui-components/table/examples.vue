@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  title-link(h2) Default
+  title-link(h2) Basic
   example
     w-table(:headers="table1.headers" :items="table1.items")
     template(#pug).
@@ -93,7 +93,7 @@ div
         }
       })
 
-  title-link(h2) No headers
+  title-link(h2 slug="example--no-headers") No headers
   p.
     Even with the #[code no-headers] option, the #[code headers] are still required for various
     reasons, like getting the number of columns and sorting/filtering keys.
@@ -125,7 +125,7 @@ div
         }
       })
 
-  title-link(h2) Fixed headers
+  title-link(h2 slug="example--fixed-headers") Fixed headers
   example
     w-table(
       :headers="table3.headers"
@@ -212,7 +212,7 @@ div
         }
       })
 
-  title-link(h3) Storing the table layout in localStorage
+  title-link(h3) Saving the table layout in localStorage
   p.
     In some apps, it makes sense to save the prefered table layout of the user, and reapply it
     every time this table is loaded. Here is a demo of how to do so.#[br]
@@ -360,7 +360,7 @@ div
         }
       })
 
-  title-link(h2) Filter
+  title-link(h2) Filtering
   p.
     Filtering the table rows is very straightforward: you only need to provide your filtering function to the
     #[strong.code w-table] component and it will be applied to the table.#[br]
@@ -659,7 +659,9 @@ div
         setTimeout(() => {this.loading = false}, 3000)
       }
 
-  title-link(h2) Pagination
+  title-link(h2 slug="pagination")
+    | Pagination
+    w-tag.ml2.text-bold(round color="warning" outline sm) COMING SOON
   example
     | Coming soon.
     //- w-table(
@@ -691,18 +693,18 @@ div
     By default, the selection will use the #[code primary] color and apply an opacity of #[code 0.2].
     If this is not what you want, you can override it via CSS (#[code .w-table__row--selected td:before]).
 
-  title-link(h3 slug="selectable-rows") The #[span.code selectable-rows] prop
+  title-link(h3 slug="example--selectable-rows") The #[span.code selectable-rows] prop
   p.
     You can enable the rows selection by adding the #[code selectable-rows] prop, or disable it by
     removing it (by default) - and this is the same as passing a boolean - but you can also set it to #[code 1]
     to allow a single selection only.
 
-  title-link(h3 slug="force-selection") The #[span.code force-selection] prop
+  title-link(h3 slug="example--force-selection") The #[span.code force-selection] prop
   p.
     Eventually, you can use the #[code force-selection] prop to prevent unselecting a row when only
     one remain selected.
 
-  title-link(h3 slug="row-select") The #[span.code @row-select] event
+  title-link(h3 slug="example--row-select") The #[span.code @row-select] event
   p.
     This event is fired each time a row is selected #[strong or unselected] (so you don't need to listen
     to 2 different events). #[br]
@@ -870,7 +872,7 @@ div
     If you want, you can override the default unique ID key (when internally needed) with
     the #[code uid-key] prop, which is set to "id" by default.
 
-  title-link(h2) Expandable rows
+  title-link(h2 slug="example--expandable-rows") Expandable rows
   alert(warning) This feature is in progress.
   example
     w-table(:headers="table1.headers" :items="table5.items" expandable-rows)
@@ -1039,7 +1041,7 @@ div
         }
       })
 
-  title-link(h2) Fully custom row (&lt;tr&gt; element itself)
+  title-link(h2 slug="full-custom-rows") Full custom row (&lt;tr&gt; element itself)
   p.
     In this example, the full &lt;tr&gt; DOM element is customized, so you can add your own classes and
     full layout.#[br]
