@@ -875,21 +875,21 @@ div
   title-link(h2 slug="example--expandable-rows") Expandable rows
   alert(warning) This feature is in progress.
   example
-    w-table(:headers="table1.headers" :items="table5.items" expandable-rows)
-      template(#expanded-row="{ item }")
+    w-table(:headers="table5.headers" :items="table5.items" expandable-rows)
+      template(#row-expansion="{ item }")
         w-icon.mr2(:color="['blue', 'pink'][item.gender]") mdi {{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] }}
         | {{ item.firstName }} weighs #[strong {{ item.weight }}kg] and is #[strong {{ item.height }}m] tall.
     template(#pug).
       w-table(:headers="table.headers" :items="table.items" expandable-rows)
-        template(#expanded-row="{ item }")
-          w-icon.mr2(:color="['blue', 'pink'][item.gender]") mdi {{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] }}
-          | {{ item.firstName }} weighs #[strong {{ item.weight }}kg] and is #[strong {{ item.height }}m] tall.
+        template(#row-expansion="{ item }")
+          w-icon.mr2(:color="['blue', 'pink'][item.gender]") mdi {{ "\{\{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] \}\}" }}
+          | {{ "\{\{ item.firstName \}\}" }} weighs #[strong {{ "\{\{ item.weight \}\}" }}kg] and is #[strong {{ "\{\{ item.height \}\}" }}m] tall.
     template(#html).
       &lt;w-table
         :headers="table.headers"
         :items="table.items"
         expandable-rows&gt;
-        &lt;template #expanded-row="{ item }"&gt;
+        &lt;template #row-expansion="{ item }"&gt;
           &lt;w-icon class="mr2" :color="['blue', 'pink'][item.gender]"&gt;
             mdi {{ "\{\{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] \}\}" }}
           &lt;/w-icon&gt;
