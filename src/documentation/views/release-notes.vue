@@ -24,6 +24,11 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.45.2
+      ul
+        li #[strong.code CSS]: Removed the useless styles previously applied on the &lt;footer&gt; tag.
+
+    li.patch
       strong.version v1.45.1
       ul
         li #[strong.code w-table]: fix &amp; improve the expandable-rows feature.
