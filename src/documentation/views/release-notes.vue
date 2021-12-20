@@ -27,6 +27,7 @@ main
       strong.version v1.45.2
       ul
         li #[strong.code CSS]: Removed the useless styles previously applied on the &lt;footer&gt; tag.
+        li #[strong.code SCSS]: Fix error related to the new SCSS mixins file.#[br]The mixins are now imported from the variables files. #[issue-link 60]
 
     li.patch
       strong.version v1.45.1
@@ -92,7 +93,7 @@ main
         li.
           #[strong.code w-badge]: Allow external event listeners binding.
           #[strong.code w-badge]: Set a line height for better text alignment while transitioning.
-          #[strong.code CSS]: Slightly slow down the default transitions speed (from 0.2s to 0.25s) and sligthly increase the twist transition angle.
+          #[strong.code CSS]: Slightly slow down the default transitions speed (from 0.2s to 0.25s) and slightly increase the twist transition angle.
 
     li.minor
       strong.version v1.41.0
