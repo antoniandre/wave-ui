@@ -170,7 +170,8 @@ export default {
     // Updates the slider position.
     updateSlider (domLookup = true) {
       if (domLookup) {
-        this.activeTabEl = this.$refs['tabs-bar'].querySelector('.w-tabs__bar-item--active')
+        const ref = this.$refs['tabs-bar']
+        this.activeTabEl = ref && ref.querySelector('.w-tabs__bar-item--active')
       }
 
       if (!this.fillBar && this.activeTabEl) {
