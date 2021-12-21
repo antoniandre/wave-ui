@@ -219,25 +219,36 @@ div
     display: flex;
     flex-direction: column;
   }
+
   .example > .w-flex {flex: 1;}
+
   .example__render {
     overflow: visible;
     display: flex;
     flex-direction: column;
   }
-  .w-badge-wrap {flex-grow: 1;min-width: 240px;}
+
+  .w-badge-wrap {
+    flex-grow: 1;
+    align-self: flex-start;
+    min-width: 240px;
+  }
+
   fieldset, section {
     border: 1px solid rgba(0, 0, 0, 0.05);
     padding: 0.8em;
     text-transform: uppercase;
     font-size: 0.95em;
   }
+
   fieldset {
     margin-top: -6px;
     position: relative;
     border-color: rgba(0, 0, 0, 0.15);
     width: 100%;
+    min-height: 240px;
   }
+
   legend {padding: 0 0.5em;}
   section {margin: 0.4em;color: rgba(0, 0, 0, 0.6);}
   .block {min-height: 100px;}

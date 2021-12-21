@@ -24,6 +24,26 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.45.2
+      ul
+        li #[strong.code CSS]: Removed the useless styles previously applied on the &lt;footer&gt; tag.
+        li #[strong.code SCSS]: Fix error related to the new SCSS mixins file.#[br]The mixins are now imported from the variables files. #[issue-link 60]
+
+    li.patch
+      strong.version v1.45.1
+      ul
+        li #[strong.code w-table]: fix &amp; improve the expandable-rows feature.
+
+    li.minor
+      strong.version v1.45.0
+      ul
+        li
+          strong.code w-table
+          ul
+            li Emit a #[code column-resize] event on column resize.
+            li Fix: don't display the table rows or the no-data message while loading.
+
+    li.patch
       strong.version v1.44.1
       ul
         li.
@@ -33,64 +53,60 @@ main
     li.minor
       strong.version v1.44.0
       ul
-        li #[strong.code w-app] added a bunch of options for CSS classes.
+        li #[strong.code w-app]: added a bunch of options for CSS classes.
 
     li.minor
       strong.version v1.43.0
-      p #[strong.code w-confirm]:
       ul
-        li New component.
-
-      p #[strong.code w-card]
+        li #[strong.code w-confirm]: new component.
+        li #[strong.code w-card]: allow defining title &amp; content classes as a string, array or object.
+        li #[strong.code w-tooltip]: allow defining a tooltip class as a string, array or object via #[code tooltip-class].
       ul
-        li Allow defining title &amp; content classes as a string, array or object.
-      p #[strong.code w-tooltip]
-      ul
-        li Allow defining a tooltip class as a string, array or object via #[code tooltip-class].
-      p #[strong.code w-menu]
-      ul
-        li Allow defining a menu class as a string, array or object via #[code menu-class].
-        li Allow defining the w-card title &amp; content classes as a string, array or object.
-        li Allow defining an overlay classes as a string, array or object via #[code overlay-class].
-        li Added an #[code arrow] option to display a small triangle on the edge of the menu.
+        li
+          strong.code w-menu
+          ul
+            li Allow defining a menu class as a string, array or object via #[code menu-class].
+            li Allow defining the w-card title &amp; content classes as a string, array or object.
+            li Allow defining an overlay classes as a string, array or object via #[code overlay-class].
+            li Added an #[code arrow] option to display a small triangle on the edge of the menu.
 
     li.patch
       strong.version v1.42.2
       ul
-        li #[strong.code w-menu] Completely unmount the menu from the DOM when it is not open.
+        li #[strong.code w-menu]: Completely unmount the menu from the DOM when it is not open.
 
     li.patch
       strong.version v1.42.1
       ul
-        li #[strong.code w-table] Allow column resizing to a lower width than the cell text content.
+        li #[strong.code w-table]: Allow column resizing to a lower width than the cell text content.
 
     li.minor
       strong.version v1.42.0
       ul
         li.
-          #[strong.code CSS] Added individual border CSS classes:
+          #[strong.code CSS]: Added individual border CSS classes:
           #[code .bdl1], #[code .bdr1], #[code .bdt1], #[code .bdb1], #[code .bdx1], #[code .bdy1].
 
     li.patch
       strong.version v1.41.1
       ul
         li.
-          #[strong.code w-badge] Allow external event listeners binding.
-          #[strong.code w-badge] Set a line height for better text alignment while transitioning.
-          #[strong.code CSS] Slightly slow down the default transitions speed (from 0.2s to 0.25s) and sligthly increase the twist transition angle.
+          #[strong.code w-badge]: Allow external event listeners binding.
+          #[strong.code w-badge]: Set a line height for better text alignment while transitioning.
+          #[strong.code CSS]: Slightly slow down the default transitions speed (from 0.2s to 0.25s) and slightly increase the twist transition angle.
 
     li.minor
       strong.version v1.41.0
       ul
         li.
-          #[strong.code w-menu] Allow passing down #[strong.code w-overlay] props &amp; added option for overlay class.
-          #[strong.code w-switch] Allow external event listeners binding.
+          #[strong.code w-menu]: Allow passing down #[strong.code w-overlay] props &amp; added option for overlay class.
+          #[strong.code w-switch]: Allow external event listeners binding.
 
     li.minor
       strong.version v1.40.0
       ul
         li.
-          #[strong.code w-tabs] Now maintain the state of tabs contents when switching
+          #[strong.code w-tabs]: Now maintain the state of tabs contents when switching
           (keep-alive). #[issue-link 65]
 
     li.minor
@@ -621,15 +637,21 @@ main
       speak: none;
       line-height: 1;
       -webkit-font-smoothing: antialiased;
-        position: absolute;
+      position: absolute;
       top: 3px;
       left: 0;
       width: 1em;
       height: 1em;
     }
 
+    li li li:before {content: '\e007';}
+
     p {margin: 0.2em 0 0;line-height: 1.2;}
     code {padding: 0 4px;font-size: 1em;}
+    strong.code:first-child {
+      color: $primary;
+      font-size: 1.1em;
+    }
   }
 }
 </style>

@@ -25,6 +25,17 @@ main
       .green-light4--bg.mt8.pa3.
         This green container has a #[span.code mt8] class which results in a top margin of: 8 x 4 x
         base-font-size pixels.
+    template(#pug).
+      .orange-light4--bg.pa12
+        .yellow-light5--bg.pa3.
+          The orange container has a `pa12` class which results in a padding of: 12 x 4 x
+          base-font-size pixels.#[br]
+          The default base font size is 14px but it's easy to override it in your SCSS, as well as the
+          increment for `pax` and `max` classes.
+
+        .green-light4--bg.mt8.pa3.
+          This green container has a `mt8` class which results in a top margin of: 8 x 4 x
+          base-font-size pixels.
     template(#html).
       &lt;div class="orange-light4--bg pa12"&gt;
         &lt;div class="yellow-light5--bg pa3"&gt;
@@ -51,6 +62,11 @@ main
     .green-light4--bg.mt-8.mx8.pa3.
       This green container has a #[span.code mt-8] class which results in a negative top margin of: -8 x 4 x
       base-font-size pixels.
+    template(#pug).
+      .orange-light4--bg.pa8
+      .green-light4--bg.mt-8.mx8.pa3.
+        This green container has a `mt-8` class which results in a negative top margin of: -8 x 4 x
+        base-font-size pixels.
     template(#html).
       &lt;div class="orange-light4--bg pa8"&gt;
         &lt;div class="green-light4--bg mt-8 mx8 pa3"&gt;
@@ -67,6 +83,10 @@ main
     .orange-light4--bg.pa8
       .green-light4--bg.mxa.pa3(style="max-width: 240px").
         This green container has a #[span.code mxa] class which results in a margin auto on the left &amp; right.
+    template(#pug).
+      .orange-light4--bg.pa8
+        .green-light4--bg.mxa.pa3(style="max-width: 240px").
+          This green container has a `mxa` class which results in a margin auto on the left &amp; right.
     template(#html).
       &lt;div class="orange-light4--bg pa8"&gt;
         &lt;div class="green-light4--bg mxa pa3" style="max-width: 240px"&gt;
