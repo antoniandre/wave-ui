@@ -36,7 +36,12 @@ div
     li.mt8
       .title4 in #[span.code default.vue], wrap the #[code Nuxt] component in a #[code w-app]:
 
-      ssh-pre(language="html-vue").
+      ssh-pre(v-show="$store.state.usePug" language="pug" label="Pug").
+        &lt;template lang="pug"&gt;
+          w-app
+            Nuxt
+        &lt;/template&gt;
+      ssh-pre(v-show="!$store.state.usePug" language="html-vue").
         &lt;template&gt;
           &lt;w-app&gt;
             &lt;Nuxt /&gt;
@@ -45,7 +50,9 @@ div
 
       p You're all set. Try to add a #[code w-button]:
 
-      ssh-pre(language="html-vue").
+      ssh-pre(v-show="$store.state.usePug" language="pug" label="Pug").
+        w-button My button
+      ssh-pre(v-show="!$store.state.usePug" language="html-vue").
         &lt;w-button&gt;My button&lt;/w-button&gt;
 
   .w-divider.my12

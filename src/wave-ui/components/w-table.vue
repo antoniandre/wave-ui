@@ -5,7 +5,7 @@
     @mousedown="onMouseDown"
     @mouseover="onMouseOver"
     @mouseout="onMouseOut")
-    colgroup
+    colgroup(ref="colgroup")
       col.w-table__col(
         v-for="(header, i) in headers"
         :key="i"
@@ -44,7 +44,7 @@
           .w-table__loading-text
             slot(name="loading") Loading...
       //- No data.
-      tr.no-data(v-if="!tableItems.length")
+      tr.no-data(v-else-if="!tableItems.length")
         td.w-table__cell.text-center(:colspan="headers.length")
           slot(name="no-data") No data to show.
 
@@ -58,12 +58,12 @@
             :item="item"
             :index="i + 1"
             :select="() => doSelectRow(item, i)"
-            :classes="{ 'w-table__row': true, 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--has-expanded': expandedRowsByUid[item._uid] !== undefined }")
+            :classes="{ 'w-table__row': true, 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined }")
 
           tr.w-table__row(
             v-else
             @click="doSelectRow(item, i)"
-            :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--has-expanded': expandedRowsByUid[item._uid] !== undefined }")
+            :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined }")
             template(v-for="(header, j) in headers")
               td.w-table__cell(
                 v-if="$slots[`item-cell.${header.key}`] || $slots[`item-cell.${j + 1}`] || $slots['item-cell']"
@@ -106,13 +106,14 @@
                   :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
 
           //- Expanded row.
-          tr.w-table__row.w-table__row--expanded(v-if="expandedRowsByUid[item._uid]")
+          tr.w-table__row.w-table__row--expansion(v-if="expandedRowsByUid[item._uid]")
             td.w-table__cell(:colspan="headers.length")
-              div(v-if="expandedRowsByUid[item._uid]")
-                slot(name="expanded-row" :item="item" :index="i + 1")
-              span.w-table__col-resizer(
-                v-if="j < headers.length - 1 && resizableColumns"
-                :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
+              w-transition-expand(y)
+                div(v-if="expandedRowsByUid[item._uid]")
+                  slot(name="row-expansion" :item="item" :index="i + 1")
+                span.w-table__col-resizer(
+                  v-if="i < headers.length - 1 && resizableColumns"
+                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
 </template>
 
 <script>
@@ -174,7 +175,7 @@ export default {
     resizableColumns: { type: Boolean }
   },
 
-  emits: ['row-select', 'row-expand', 'row-click', 'update:sort', 'update:selected-rows', 'update:expanded-rows'],
+  emits: ['row-select', 'row-expand', 'row-click', 'update:sort', 'update:selected-rows', 'update:expanded-rows', 'column-resize'],
 
   data: () => ({
     activeSorting: [],
@@ -202,8 +203,7 @@ export default {
     },
 
     filteredItems () {
-      if (typeof this.filter === 'function') return this.tableItems.filter(this.filter)
-      return this.tableItems
+      return typeof this.filter === 'function' ? this.tableItems.filter(this.filter) : this.tableItems
     },
 
     sortedItems () {
@@ -436,6 +436,10 @@ export default {
       // cell after resizing.
       // (releasing the mouse on table header triggers a click event captured by the sorting feature)
       setTimeout(() => {
+        // On Mouse up, emit an event containing all the new widths of the columns.
+        const widths = [...this.$refs.colgroup.childNodes].map(column => column.style?.width || column.offsetWidth)
+        this.$emit('column-resize', { index: this.colResizing.columnIndex, widths })
+
         this.colResizing.dragging = false
         this.colResizing.columnIndex = null
         this.colResizing.startCursorX = null
