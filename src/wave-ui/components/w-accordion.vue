@@ -148,8 +148,8 @@ export default {
     margin-right: $base-increment;
 
     .w-accordion--rotate-icon & {@include default-transition;}
-    .w-accordion--rotate-icon .w-accordion__item--expanded & {transform: rotate(-180deg);}
-    .w-accordion--rotate-icon.w-accordion--icon-right .w-accordion__item--expanded & {transform: rotate(180deg);}
+    .w-accordion--rotate-icon > .w-accordion__item--expanded > .w-accordion__item-title & {transform: rotate(-180deg);}
+    .w-accordion--rotate-icon.w-accordion--icon-right > .w-accordion__item--expanded > .w-accordion__item-title & {transform: rotate(180deg);}
 
     .w-icon:before {font-size: 1.1em;}
   }
