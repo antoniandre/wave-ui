@@ -169,7 +169,8 @@ export default {
 
     hasValue () {
       return (
-        this.inputValue !== undefined ||
+        this.inputValue ||
+        this.inputValue === 0 ||
         ['date', 'time'].includes(this.type) ||
         (this.type === 'number' && this.inputNumberError) ||
         (this.type === 'file' && this.inputFiles.length)
