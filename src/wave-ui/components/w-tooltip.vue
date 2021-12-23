@@ -1,13 +1,9 @@
 <template lang="pug">
-.w-tooltip-wrap(ref="wrapper" :class="{ 'w-tooltip-wrap--attached': !detachTo }")
+.w-tooltip-wrap(:class="{ 'w-tooltip-wrap--attached': !detachTo }")
   slot(name="activator" :on="eventHandlers")
   transition(:name="transitionName" appear)
     .w-tooltip(ref="tooltip" v-show="showTooltip" :class="classes" :style="styles")
-      //- When there is a bg color, another div wrapper is needed for the triangle
-      //- to inherit the current color.
-      div(v-if="bgColor" :class="color")
-        slot
-      slot(v-else)
+      slot
 </template>
 
 <script>
@@ -95,7 +91,7 @@ export default {
 
     // DOM element that will receive the tooltip.
     tooltipParentEl () {
-      return this.detachTo ? this.detachToTarget : this.$refs.wrapper
+      return this.detachTo ? this.detachToTarget : this.$el
     },
 
     position () {
@@ -140,8 +136,8 @@ export default {
 
     classes () {
       return {
-        [this.color]: !this.bgColor,
-        [`${this.bgColor} ${this.bgColor}--bg`]: this.bgColor,
+        [this.color]: this.color,
+        [`${this.bgColor}--bg`]: this.bgColor,
         ...this.tooltipClasses,
         [`w-tooltip--${this.position}`]: true,
         'w-tooltip--tile': this.tile,
@@ -154,11 +150,13 @@ export default {
       }
     },
 
+    // The tooltip styles.
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || null,
-        top: `${~~this.tooltipCoordinates.top}px`,
-        left: `${~~this.tooltipCoordinates.left}px`
+        top: (this.tooltipCoordinates.top && `${~~this.tooltipCoordinates.top}px`) || null,
+        left: (this.tooltipCoordinates.left && `${~~this.tooltipCoordinates.left}px`) || null,
+        '--w-tooltip-bg-color': this.$waveui.colors[this.bgColor || 'white']
       }
     },
 
@@ -267,7 +265,7 @@ export default {
     },
 
     insertTooltip () {
-      const wrapper = this.$refs.wrapper
+      const wrapper = this.$el
       this.tooltipEl = this.$refs.tooltip.$el || this.$refs.tooltip
 
       // Unwrap the activator element.
@@ -285,7 +283,7 @@ export default {
   },
 
   mounted () {
-    this.activatorEl = this.$refs.wrapper.firstElementChild
+    this.activatorEl = this.$el.firstElementChild
     if (this.detachTo) this.insertTooltip()
 
     if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
@@ -361,93 +359,95 @@ export default {
 
   &--custom-transition {transform: none;}
 
-  &:after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-  }
-  &--top:after {
-    top: 100%;
-    left: 50%;
-    border-top-color: $tooltip-bg-color;
-    transform: translateX(-50%);
-    margin-top: 1px;
-  }
-  &--bottom:after {
-    bottom: 100%;
-    left: 50%;
-    border-bottom-color: $tooltip-bg-color;
-    transform: translateX(-50%);
-    margin-bottom: 1px;
-  }
-  &--left:after {
-    left: 100%;
-    top: 50%;
-    border-left-color: $tooltip-bg-color;
-    transform: translateY(-50%);
-    margin-left: 1px;
-  }
-  &--right:after {
-    right: 100%;
-    top: 50%;
-    border-right-color: $tooltip-bg-color;
-    transform: translateY(-50%);
-    margin-right: 1px;
-  }
+  // &:after {
+  //   content: '';
+  //   position: absolute;
+  //   width: 0;
+  //   height: 0;
+  //   border: 6px solid transparent;
+  // }
+  // &--top:after {
+  //   top: 100%;
+  //   left: 50%;
+  //   border-top-color: $tooltip-bg-color;
+  //   transform: translateX(-50%);
+  //   margin-top: 1px;
+  // }
+  // &--bottom:after {
+  //   bottom: 100%;
+  //   left: 50%;
+  //   border-bottom-color: $tooltip-bg-color;
+  //   transform: translateX(-50%);
+  //   margin-bottom: 1px;
+  // }
+  // &--left:after {
+  //   left: 100%;
+  //   top: 50%;
+  //   border-left-color: $tooltip-bg-color;
+  //   transform: translateY(-50%);
+  //   margin-left: 1px;
+  // }
+  // &--right:after {
+  //   right: 100%;
+  //   top: 50%;
+  //   border-right-color: $tooltip-bg-color;
+  //   transform: translateY(-50%);
+  //   margin-right: 1px;
+  // }
 
   // Tooltip without border.
   // --------------------------------------------------------
-  &--no-border.w-tooltip--top:after {margin-top: -1px;border-top-color: inherit;}
-  &--no-border.w-tooltip--bottom:after {margin-bottom: -1px;border-bottom-color: inherit;}
-  &--no-border.w-tooltip--left:after {margin-left: -1px;border-left-color: inherit;}
-  &--no-border.w-tooltip--right:after {margin-right: -1px;border-right-color: inherit;}
+  &--no-border {
+    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px, 0);
+  }
+  &:not(&--no-border) {
+    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px);
+  }
 
   // Tooltip with border.
   // --------------------------------------------------------
-  &:not(&--no-border).w-tooltip--top:after {margin-top: -1px;}
-  &:not(&--no-border).w-tooltip--bottom:after {margin-bottom: -1px;}
-  &:not(&--no-border).w-tooltip--left:after {margin-left: -1px;}
-  &:not(&--no-border).w-tooltip--right:after {margin-right: -1px;}
+  // &:not(&--no-border).w-tooltip--top:after {margin-top: -1px;}
+  // &:not(&--no-border).w-tooltip--bottom:after {margin-bottom: -1px;}
+  // &:not(&--no-border).w-tooltip--left:after {margin-left: -1px;}
+  // &:not(&--no-border).w-tooltip--right:after {margin-right: -1px;}
 
-  &:not(&--no-border) {
-    &:before {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 0;
-      border: 7px solid transparent;
-    }
-    &.w-tooltip--top:before {
-      top: 100%;
-      left: 50%;
-      border-top-color: inherit;
-      transform: translateX(-50%);
-      margin-top: 0;
-    }
-    &.w-tooltip--bottom:before {
-      bottom: 100%;
-      left: 50%;
-      border-bottom-color: inherit;
-      transform: translateX(-50%);
-      margin-bottom: 0;
-    }
-    &.w-tooltip--left:before {
-      left: 100%;
-      top: 50%;
-      border-left-color: inherit;
-      transform: translateY(-50%);
-      margin-left: 0;
-    }
-    &.w-tooltip--right:before {
-      right: 100%;
-      top: 50%;
-      border-right-color: inherit;
-      transform: translateY(-50%);
-      margin-right: 0;
-    }
-  }
+  // &:not(&--no-border) {
+  //   &:before {
+  //     content: '';
+  //     position: absolute;
+  //     width: 0;
+  //     height: 0;
+  //     border: 7px solid transparent;
+  //   }
+  //   &.w-tooltip--top:before {
+  //     top: 100%;
+  //     left: 50%;
+  //     border-top-color: inherit;
+  //     transform: translateX(-50%);
+  //     margin-top: 0;
+  //   }
+  //   &.w-tooltip--bottom:before {
+  //     bottom: 100%;
+  //     left: 50%;
+  //     border-bottom-color: inherit;
+  //     transform: translateX(-50%);
+  //     margin-bottom: 0;
+  //   }
+  //   &.w-tooltip--left:before {
+  //     left: 100%;
+  //     top: 50%;
+  //     border-left-color: inherit;
+  //     transform: translateY(-50%);
+  //     margin-left: 0;
+  //   }
+  //   &.w-tooltip--right:before {
+  //     right: 100%;
+  //     top: 50%;
+  //     border-right-color: inherit;
+  //     transform: translateY(-50%);
+  //     margin-right: 0;
+  //   }
+  // }
   // --------------------------------------------------------
 }
 
