@@ -197,7 +197,7 @@ export default {
       }
     },
 
-    // The floatting menu styles.
+    // The floating menu styles.
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || (this.overlay && !this.zIndex && 200) || null,
