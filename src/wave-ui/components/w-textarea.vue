@@ -116,7 +116,7 @@ export default {
       return listeners
     },
     hasValue () {
-      return this.inputValue !== undefined
+      return this.inputValue || this.inputValue === 0
     },
     hasLabel () {
       return this.label || this.$slots.default
