@@ -24,6 +24,11 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.45.4
+      ul
+        li #[strong.code w-input]: Fix floating label when value is #[code 0]. #[issue-link 77]
+
+    li.patch
       strong.version v1.45.3
       ul
         li #[strong.code w-tooltip]: Fix the tooltip #[code color] when used with a #[code bg-color] &amp; minor improvements.
