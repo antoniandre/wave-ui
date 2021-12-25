@@ -6,6 +6,6 @@
  */
 export const objectifyClasses = (classes = {}) => {
   if (typeof classes === 'string') classes = { [classes]: true }
-  else if (typeof classes === 'array') classes = { [classes.join(' ')]: true }
+  else if (Array.isArray(classes)) classes = { [classes.join(' ')]: true }
   return classes
 }
