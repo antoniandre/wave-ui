@@ -76,6 +76,7 @@ export default {
   computed: {
     accordionItems () {
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
+      // eslint-disable-next-line new-cap
       return items.map((item, _index) => new Vue.observable({
         ...item,
         _index,
