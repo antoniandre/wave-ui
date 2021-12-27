@@ -273,7 +273,6 @@ export default {
       reader.addEventListener('progress', event => {
         if (event.loaded && event.total) {
           this.$set(file, 'progress', event.loaded * 100 / event.total)
-          console.log(`Progress: ${Math.round(file.progress)}`)
         }
       })
 
