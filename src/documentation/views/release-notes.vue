@@ -24,6 +24,11 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.45.6
+      ul
+        li #[strong.code w-flex]: added the #[code justify-space-evenly] prop.
+
+    li.patch
       strong.version v1.45.5
       ul
         li #[strong.code w-input]: Fix floating label when value is #[code 0]. #[issue-link 77]
