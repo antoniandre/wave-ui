@@ -19,7 +19,8 @@
         :tabindex="-1"
         text
         @keypress.stop
-        @click.stop="!item._disabled && toggleItem(item, $event)")
+        @click.stop="!item._disabled && toggleItem(item, $event)"
+        :class="{ 'w-accordion__expand-icon--expanded': item._expanded }")
       //- Title.
       slot(
         v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
@@ -34,7 +35,8 @@
         :icon="(item._expanded && collapseIcon) || expandIcon"
         text
         @keypress.stop
-        @click.stop="!item._disabled && toggleItem(item, $event)")
+        @click.stop="!item._disabled && toggleItem(item, $event)"
+        :class="{ 'w-accordion__expand-icon--expanded': item._expanded }")
     //- Content.
     w-transition-expand(y)
       .w-accordion__item-content(v-if="item._expanded" :class="contentClass")
@@ -149,8 +151,8 @@ export default {
     margin-right: $base-increment;
 
     .w-accordion--rotate-icon & {@include default-transition;}
-    .w-accordion--rotate-icon > .w-accordion__item--expanded > .w-accordion__item-title & {transform: rotate(-180deg);}
-    .w-accordion--rotate-icon.w-accordion--icon-right > .w-accordion__item--expanded > .w-accordion__item-title & {transform: rotate(180deg);}
+    &--expanded {transform: rotate(-180deg);}
+    .w-accordion--icon-right &--expanded {transform: rotate(180deg);}
 
     .w-icon:before {font-size: 1.1em;}
   }
