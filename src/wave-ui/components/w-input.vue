@@ -287,9 +287,10 @@ export default {
 
   mounted () {
     // On page load, check if the field is autofilled by the browser.
-    this.$nextTick(() => {
+    // 20211229. Only a problem on Chrome. Firefox ok, Safari always prompts before filling up.
+    setTimeout(() => {
       if (this.$refs.input.matches(':-webkit-autofill')) this.isAutofilled = true
-    })
+    }, 400) // Can't be less than 350: time for the browser to autofill.
   },
 
   watch: {
