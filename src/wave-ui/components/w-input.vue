@@ -289,7 +289,7 @@ export default {
     // On page load, check if the field is autofilled by the browser.
     setTimeout(() => {
       if (this.$refs.input.value) this.isAutofilled = true
-    }, 250)
+    }, 350)
   },
 
   watch: {
