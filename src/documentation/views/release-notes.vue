@@ -24,6 +24,11 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.45.7
+      ul
+        li #[strong.code w-accordion]: Fix the expand arrow rotation state in nested accordion. #[issue-link 76]
+
+    li.patch
       strong.version v1.45.6
       ul
         li #[strong.code w-flex]: added the #[code justify-space-evenly] prop.
