@@ -23,8 +23,10 @@ component(
         tag="label"
         :for="`w-input--${_uid}`"
         @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
+      //- All types of input except file.
       input.w-input__input(
         v-if="type !== 'file'"
+        ref="input"
         v-model="inputValue"
         v-on="listeners"
         @input="onInput"
@@ -45,8 +47,10 @@ component(
         :required="required || null"
         :tabindex="tabindex || null"
         v-bind="attrs")
-      template(v-if="type === 'file'")
+      //- Input type file.
+      template(v-else)
         input(
+          ref="input"
           :id="`w-input--${_uid}`"
           type="file"
           :name="name || null"
@@ -148,7 +152,8 @@ export default {
       inputNumberError: false,
       isFocused: false,
       inputFiles: [], // For input type file.
-      fileReader: null // For input type file.
+      fileReader: null, // For input type file.
+      isAutofilled: false
     }
   },
 
@@ -191,7 +196,7 @@ export default {
         'w-input--file': this.type === 'file',
         'w-input--disabled': this.isDisabled,
         'w-input--readonly': this.isReadonly,
-        [`w-input--${this.hasValue ? 'filled' : 'empty'}`]: true,
+        [`w-input--${this.hasValue || this.isAutofilled ? 'filled' : 'empty'}`]: true,
         'w-input--focused': this.isFocused && !this.isReadonly,
         'w-input--dark': this.dark,
         'w-input--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
@@ -280,9 +285,16 @@ export default {
     }
   },
 
+  mounted () {
+    // On page load, check if the field is autofilled by the browser.
+    if (this.$refs.input.value) this.isAutofilled = true
+  },
+
   watch: {
     value (value) {
       this.inputValue = value
+      // When clearing the field value, also reset the isAutofilled var for the CSS class.
+      if (!value && value !== 0) this.isAutofilled = false
     }
   }
 }
