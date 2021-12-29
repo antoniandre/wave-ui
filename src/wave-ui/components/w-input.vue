@@ -287,9 +287,9 @@ export default {
 
   mounted () {
     // On page load, check if the field is autofilled by the browser.
-    this.$nextTick(() => {
+    setTimeout(() => {
       if (this.$refs.input.value) this.isAutofilled = true
-    })
+    }, 250)
   },
 
   watch: {
