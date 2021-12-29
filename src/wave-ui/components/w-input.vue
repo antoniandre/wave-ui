@@ -287,9 +287,9 @@ export default {
 
   mounted () {
     // On page load, check if the field is autofilled by the browser.
-    setTimeout(() => {
-      if (this.$refs.input.value) this.isAutofilled = true
-    }, 350)
+    this.$nextTick(() => {
+      if (this.$refs.input.matches(':-webkit-autofill')) this.isAutofilled = true
+    })
   },
 
   watch: {
