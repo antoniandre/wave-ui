@@ -23,8 +23,10 @@ component(
         tag="label"
         :for="`w-input--${_.uid}`"
         @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
+      //- All types of input except file.
       input.w-input__input(
         v-if="type !== 'file'"
+        ref="input"
         v-model="inputValue"
         v-on="listeners"
         @input="onInput"
@@ -45,8 +47,10 @@ component(
         :required="required || null"
         :tabindex="tabindex || null"
         v-bind="attrs")
-      template(v-if="type === 'file'")
+      //- Input type file.
+      template(v-else)
         input(
+          ref="input"
           :id="`w-input--${_.uid}`"
           type="file"
           :name="name || null"
@@ -160,7 +164,8 @@ export default {
       inputNumberError: false,
       isFocused: false,
       inputFiles: [], // For input type file.
-      fileReader: null // For input type file.
+      fileReader: null, // For input type file.
+      isAutofilled: false
     }
   },
 
@@ -186,6 +191,7 @@ export default {
     hasValue () {
       return (
         this.inputValue ||
+        this.inputValue === 0 ||
         ['date', 'time'].includes(this.type) ||
         (this.type === 'number' && this.inputNumberError) ||
         (this.type === 'file' && this.inputFiles.length)
@@ -206,7 +212,7 @@ export default {
         'w-input--file': this.type === 'file',
         'w-input--disabled': this.isDisabled,
         'w-input--readonly': this.isReadonly,
-        [`w-input--${this.hasValue ? 'filled' : 'empty'}`]: true,
+        [`w-input--${this.hasValue || this.isAutofilled ? 'filled' : 'empty'}`]: true,
         'w-input--focused': this.isFocused && !this.isReadonly,
         'w-input--dark': this.dark,
         'w-input--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
@@ -293,9 +299,19 @@ export default {
     }
   },
 
+  mounted () {
+    // On page load, check if the field is autofilled by the browser.
+    // 20211229. Only a problem on Chrome. Firefox ok, Safari always prompts before filling up.
+    setTimeout(() => {
+      if (this.$refs.input.matches(':-webkit-autofill')) this.isAutofilled = true
+    }, 400) // Can't be less than 350: time for the browser to autofill.
+  },
+
   watch: {
     modelValue (value) {
       this.inputValue = value
+      // When clearing the field value, also reset the isAutofilled var for the CSS class.
+      if (!value && value !== 0) this.isAutofilled = false
     }
   }
 }

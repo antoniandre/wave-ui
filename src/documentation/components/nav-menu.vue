@@ -49,7 +49,8 @@ export default {
         children: [
           { label: 'Spaces', route: '/layout--spaces' },
           { label: 'Grid system', route: '/layout--grid-system' },
-          { label: 'Flex', route: '/layout--flex' }
+          { label: 'Flex', route: '/layout--flex' },
+          { label: 'Other CSS classes', route: 'layout--other-css-classes' }
         ]
       },
       { label: 'Typography', route: '/typography' },

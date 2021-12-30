@@ -117,25 +117,29 @@ export default {
     },
 
     // DOM element to attach menu to.
+    // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
     detachToTarget () {
-      let target = this.detachTo || '.w-app'
-      if (target === true) target = '.w-app'
-      else if (target && !['object', 'string'].includes(typeof target)) target = '.w-app'
+      const defaultTarget = '.w-app'
+
+      let target = this.detachTo || defaultTarget
+      if (target === true) target = defaultTarget
+      else if (target && !['object', 'string'].includes(typeof target)) target = defaultTarget
       else if (typeof target === 'object' && !target.nodeType) {
-        target = '.w-app'
+        target = defaultTarget
         consoleWarn('Invalid node provided in w-menu `detach-to`. Falling back to .w-app.', this)
       }
       if (typeof target === 'string') target = document.querySelector(target)
 
       if (!target) {
-        consoleWarn(`Unable to locate ${this.detachTo ? `target ${this.detachTo}` : '.w-app'}`, this)
-        target = document.querySelector('.w-app')
+        consoleWarn(`Unable to locate ${this.detachTo ? `target ${this.detachTo}` : defaultTarget}`, this)
+        target = document.querySelector(defaultTarget)
       }
 
       return target
     },
 
     // DOM element that will receive the menu.
+    // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
     menuParentEl () {
       return this.detachToTarget
     },
@@ -197,7 +201,7 @@ export default {
       }
     },
 
-    // The floatting menu styles.
+    // The floating menu styles.
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || (this.overlay && !this.zIndex && 200) || null,
@@ -227,8 +231,10 @@ export default {
             }, 10)
           }
         }
-
-        if ('ontouchstart' in window) handlers.click = this.toggleMenu
+        // Check the window exists: SSR-proof.
+        if (typeof window !== 'undefined' && 'ontouchstart' in window) {
+          handlers.click = this.toggleMenu
+        }
       }
       else handlers = { click: this.toggleMenu }
       return handlers
@@ -236,6 +242,7 @@ export default {
   },
 
   methods: {
+    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     toggleMenu (e) {
       let shouldShowMenu = this.menuVisible
       if ('ontouchstart' in window && this.showOnHover && e.type === 'click') {
@@ -263,6 +270,7 @@ export default {
       else this.closeMenu()
     },
 
+    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     async openMenu (e) {
       this.menuVisible = true
       await this.insertMenu()
@@ -289,6 +297,7 @@ export default {
      * - click of activator
      * - hover outside if showOnHover
      * - click inside menu if hideOnMenuClick.
+     * / ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
      *
      * @param {Boolean} force when showOnHover is set to true, hovering menu should keep it open.
      *                        But if hideOnMenuClick is also set to true, this should force close
@@ -312,6 +321,7 @@ export default {
       window.removeEventListener('resize', this.onResize)
     },
 
+    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     onOutsideMousedown (e) {
       if (!this.menuEl.contains(e.target) && !this.activatorEl.contains(e.target)) {
         this.$emit('update:modelValue', (this.menuVisible = false))
@@ -327,6 +337,7 @@ export default {
       this.computeMenuPosition()
     },
 
+    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     getCoordinates (e) {
       // Get the activator coordinates relative to window.
       const { top, left, width, height } = (e ? e.target : this.activatorEl).getBoundingClientRect()
@@ -346,6 +357,7 @@ export default {
       return coords
     },
 
+    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     computeMenuPosition (e) {
       // Get the activator coordinates.
       let { top, left, width, height } = this.getCoordinates(e)
