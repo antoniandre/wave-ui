@@ -24,6 +24,11 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.45.14
+      ul
+        li #[strong.code w-tooltip]: Fix DOM related rendering issues on SSR. #[issue-link 78]
+
+    li.patch
       strong.version v1.45.13
       ul
         li #[strong.code w-input]: Also detect browser autofill on page load to raise the label up if any (fixes the overlapping issue previously happening on Chrome). #[issue-link 77]
