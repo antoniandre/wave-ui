@@ -261,6 +261,8 @@ export default {
         return file
       }))
       this.$emit('update:modelValue', this.inputFiles)
+      this.$emit('input', this.inputFiles)
+      this.$emit('change', this.inputFiles)
     },
 
     // For file input.
@@ -289,7 +291,7 @@ export default {
     // On page load, check if the field is autofilled by the browser.
     // 20211229. Only a problem on Chrome. Firefox ok, Safari always prompts before filling up.
     setTimeout(() => {
-      if (this.$refs.input.matches(':-webkit-autofill')) this.isAutofilled = true
+      if (this.$refs.input && this.$refs.input.matches(':-webkit-autofill')) this.isAutofilled = true
     }, 400) // Can't be less than 350: time for the browser to autofill.
   },
 
