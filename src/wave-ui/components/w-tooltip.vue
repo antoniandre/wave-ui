@@ -71,25 +71,30 @@ export default {
       return this.transition || `w-tooltip-slide-fade-${direction}`
     },
 
+    // DOM element to attach tooltip to.
+    // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
     detachToTarget () {
-      let target = this.detachTo || '.w-app'
-      if (target === true) target = '.w-app'
-      else if (target && !['object', 'string'].includes(typeof target)) target = '.w-app'
+      const defaultTarget = '.w-app'
+
+      let target = this.detachTo || defaultTarget
+      if (target === true) target = defaultTarget
+      else if (target && !['object', 'string'].includes(typeof target)) target = defaultTarget
       else if (typeof target === 'object' && !target.nodeType) {
-        target = '.w-app'
+        target = defaultTarget
         consoleWarn('Invalid node provided in w-tooltip `attach-to`. Falling back to .w-app.', this)
       }
       if (typeof target === 'string') target = document.querySelector(target)
 
       if (!target) {
-        consoleWarn(`Unable to locate ${this.detachTo ? `target ${this.detachTo}` : '.w-app'}`, this)
-        target = document.querySelector('.w-app')
+        consoleWarn(`Unable to locate ${this.detachTo ? `target ${this.detachTo}` : defaultTarget}`, this)
+        target = document.querySelector(defaultTarget)
       }
 
       return target
     },
 
     // DOM element that will receive the tooltip.
+    // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
     tooltipParentEl () {
       return this.detachTo ? this.detachToTarget : this.$el
     },
@@ -171,16 +176,18 @@ export default {
           mouseleave: this.toggle
         }
 
-        if ('ontouchstart' in window) handlers.click = this.toggle
+        // Check the window exists: SSR-proof.
+        if (typeof window !== 'undefined' && 'ontouchstart' in window) handlers.click = this.toggle
       }
       return handlers
     }
   },
 
   methods: {
+    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     toggle (e) {
       let shouldShowTooltip = this.showTooltip
-      if ('ontouchstart' in window) {
+      if (typeof window !== 'undefined' && 'ontouchstart' in window) {
         if (e.type === 'click') shouldShowTooltip = !shouldShowTooltip
       }
       else if (e.type === 'click' && this.showOnClick) shouldShowTooltip = !shouldShowTooltip
@@ -208,6 +215,7 @@ export default {
       }
     },
 
+    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     getCoordinates () {
       const { top, left, width, height } = this.activatorEl.getBoundingClientRect()
       let coords = { top, left, width, height }
