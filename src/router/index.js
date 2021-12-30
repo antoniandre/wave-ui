@@ -61,6 +61,11 @@ const routes = [
     component: () => import('@/documentation/views/layout-flex.vue')
   },
   {
+    path: '/layout--other-css-classes',
+    name: 'layout-other-css-classes',
+    component: () => import('@/documentation/views/layout-other-css-classes.vue')
+  },
+  {
     path: '/typography',
     name: 'typography',
     component: () => import('@/documentation/views/typography.vue')

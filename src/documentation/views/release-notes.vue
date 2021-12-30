@@ -24,6 +24,36 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.45.14
+      ul
+        li #[strong.code w-tooltip]: Fix DOM related rendering issues on SSR. #[issue-link 78]
+
+    li.patch
+      strong.version v1.45.13
+      ul
+        li #[strong.code w-input]: Also detect browser autofill on page load to raise the label up if any (fixes the overlapping issue previously happening on Chrome). #[issue-link 77]
+
+    li.patch
+      strong.version v1.45.7
+      ul
+        li #[strong.code w-accordion]: Fix the expand arrow rotation state in nested accordion. #[issue-link 76]
+
+    li.patch
+      strong.version v1.45.6
+      ul
+        li #[strong.code w-flex]: added the #[code justify-space-evenly] prop.
+
+    li.patch
+      strong.version v1.45.5
+      ul
+        li #[strong.code w-input]: Fix floating label when value is #[code 0]. #[issue-link 77]
+
+    li.patch
+      strong.version v1.45.3
+      ul
+        li #[strong.code w-tooltip]: Fix the tooltip #[code color] when used with a #[code bg-color] &amp; minor improvements.
+
+    li.patch
       strong.version v1.45.2
       ul
         li #[strong.code CSS]: Removed the useless styles previously applied on the &lt;footer&gt; tag.

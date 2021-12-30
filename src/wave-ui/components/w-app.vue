@@ -40,7 +40,7 @@ export default {
     classes () {
       return {
         'd-block': this.block,
-        'row': this.row,
+        row: this.row,
         'align-center': this.alignCenter,
         'align-end': this.alignEnd,
         'justify-center': this.justifyCenter,

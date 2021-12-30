@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-tooltip-wrap(ref="wrapper" :class="{ 'w-tooltip-wrap--attached': !detachTo }")
+.w-tooltip-wrap(:class="{ 'w-tooltip-wrap--attached': !detachTo }")
   slot(name="activator" :on="eventHandlers")
   transition(:name="transitionName" appear)
     //- In Vue 3, a ref in a transition doesn't stay in $refs, it must be set as a function.
@@ -9,11 +9,7 @@
       v-show="showTooltip"
       :class="classes"
       :style="styles")
-      //- When there is a bg color, another div wrapper is needed for the triangle
-      //- to inherit the current color.
-      div(v-if="bgColor" :class="color")
-        slot
-      slot(v-else)
+      slot
 </template>
 
 <script>
@@ -81,27 +77,32 @@ export default {
       return this.transition || `w-tooltip-slide-fade-${direction}`
     },
 
+    // DOM element to attach tooltip to.
+    // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
     detachToTarget () {
-      let target = this.detachTo || '.w-app'
-      if (target === true) target = '.w-app'
-      else if (target && !['object', 'string'].includes(typeof target)) target = '.w-app'
+      const defaultTarget = '.w-app'
+
+      let target = this.detachTo || defaultTarget
+      if (target === true) target = defaultTarget
+      else if (target && !['object', 'string'].includes(typeof target)) target = defaultTarget
       else if (typeof target === 'object' && !target.nodeType) {
-        target = '.w-app'
+        target = defaultTarget
         consoleWarn('Invalid node provided in w-tooltip `attach-to`. Falling back to .w-app.', this)
       }
       if (typeof target === 'string') target = document.querySelector(target)
 
       if (!target) {
-        consoleWarn(`Unable to locate ${this.detachTo ? `target ${this.detachTo}` : '.w-app'}`, this)
-        target = document.querySelector('.w-app')
+        consoleWarn(`Unable to locate ${this.detachTo ? `target ${this.detachTo}` : defaultTarget}`, this)
+        target = document.querySelector(defaultTarget)
       }
 
       return target
     },
 
     // DOM element that will receive the tooltip.
+    // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
     tooltipParentEl () {
-      return this.detachTo ? this.detachToTarget : this.$refs.wrapper
+      return this.detachTo ? this.detachToTarget : this.$el
     },
 
     position () {
@@ -146,8 +147,8 @@ export default {
 
     classes () {
       return {
-        [this.color]: !this.bgColor,
-        [`${this.bgColor} ${this.bgColor}--bg`]: this.bgColor,
+        [this.color]: this.color,
+        [`${this.bgColor}--bg`]: this.bgColor,
         ...this.tooltipClasses,
         [`w-tooltip--${this.position}`]: true,
         'w-tooltip--tile': this.tile,
@@ -160,11 +161,13 @@ export default {
       }
     },
 
+    // The tooltip styles.
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || null,
-        top: `${~~this.tooltipCoordinates.top}px`,
-        left: `${~~this.tooltipCoordinates.left}px`
+        top: (this.tooltipCoordinates.top && `${~~this.tooltipCoordinates.top}px`) || null,
+        left: (this.tooltipCoordinates.left && `${~~this.tooltipCoordinates.left}px`) || null,
+        '--w-tooltip-bg-color': this.$waveui.colors[this.bgColor || 'white']
       }
     },
 
@@ -179,16 +182,18 @@ export default {
           mouseleave: this.toggle
         }
 
-        if ('ontouchstart' in window) handlers.click = this.toggle
+        // Check the window exists: SSR-proof.
+        if (typeof window !== 'undefined' && 'ontouchstart' in window) handlers.click = this.toggle
       }
       return handlers
     }
   },
 
   methods: {
+    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     toggle (e) {
       let shouldShowTooltip = this.showTooltip
-      if ('ontouchstart' in window) {
+      if (typeof window !== 'undefined' && 'ontouchstart' in window) {
         if (e.type === 'click') shouldShowTooltip = !shouldShowTooltip
       }
       else if (e.type === 'click' && this.showOnClick) shouldShowTooltip = !shouldShowTooltip
@@ -216,6 +221,7 @@ export default {
       }
     },
 
+    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     getCoordinates () {
       const { top, left, width, height } = this.activatorEl.getBoundingClientRect()
       let coords = { top, left, width, height }
@@ -273,7 +279,7 @@ export default {
     },
 
     insertTooltip () {
-      const wrapper = this.$refs.wrapper
+      const wrapper = this.$el
 
       // Unwrap the activator element.
       wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
@@ -290,7 +296,7 @@ export default {
   },
 
   mounted () {
-    this.activatorEl = this.$refs.wrapper.firstElementChild
+    this.activatorEl = this.$el.firstElementChild
     if (this.detachTo) this.insertTooltip()
 
     if (this.modelValue) this.toggle({ type: 'click', target: this.activatorEl })
@@ -366,94 +372,17 @@ export default {
 
   &--custom-transition {transform: none;}
 
-  &:after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-  }
-  &--top:after {
-    top: 100%;
-    left: 50%;
-    border-top-color: $tooltip-bg-color;
-    transform: translateX(-50%);
-    margin-top: 1px;
-  }
-  &--bottom:after {
-    bottom: 100%;
-    left: 50%;
-    border-bottom-color: $tooltip-bg-color;
-    transform: translateX(-50%);
-    margin-bottom: 1px;
-  }
-  &--left:after {
-    left: 100%;
-    top: 50%;
-    border-left-color: $tooltip-bg-color;
-    transform: translateY(-50%);
-    margin-left: 1px;
-  }
-  &--right:after {
-    right: 100%;
-    top: 50%;
-    border-right-color: $tooltip-bg-color;
-    transform: translateY(-50%);
-    margin-right: 1px;
-  }
-
   // Tooltip without border.
   // --------------------------------------------------------
-  &--no-border.w-tooltip--top:after {margin-top: -1px;border-top-color: inherit;}
-  &--no-border.w-tooltip--bottom:after {margin-bottom: -1px;border-bottom-color: inherit;}
-  &--no-border.w-tooltip--left:after {margin-left: -1px;border-left-color: inherit;}
-  &--no-border.w-tooltip--right:after {margin-right: -1px;border-right-color: inherit;}
+  &--no-border {
+    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px, 0);
+  }
 
   // Tooltip with border.
   // --------------------------------------------------------
-  &:not(&--no-border).w-tooltip--top:after {margin-top: -1px;}
-  &:not(&--no-border).w-tooltip--bottom:after {margin-bottom: -1px;}
-  &:not(&--no-border).w-tooltip--left:after {margin-left: -1px;}
-  &:not(&--no-border).w-tooltip--right:after {margin-right: -1px;}
-
   &:not(&--no-border) {
-    &:before {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 0;
-      border: 7px solid transparent;
-    }
-    &.w-tooltip--top:before {
-      top: 100%;
-      left: 50%;
-      border-top-color: inherit;
-      transform: translateX(-50%);
-      margin-top: 0;
-    }
-    &.w-tooltip--bottom:before {
-      bottom: 100%;
-      left: 50%;
-      border-bottom-color: inherit;
-      transform: translateX(-50%);
-      margin-bottom: 0;
-    }
-    &.w-tooltip--left:before {
-      left: 100%;
-      top: 50%;
-      border-left-color: inherit;
-      transform: translateY(-50%);
-      margin-left: 0;
-    }
-    &.w-tooltip--right:before {
-      right: 100%;
-      top: 50%;
-      border-right-color: inherit;
-      transform: translateY(-50%);
-      margin-right: 0;
-    }
+    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px);
   }
-  // --------------------------------------------------------
 }
 
 // Transitions.
