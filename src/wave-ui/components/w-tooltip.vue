@@ -367,96 +367,15 @@ export default {
 
   &--custom-transition {transform: none;}
 
-  // &:after {
-  //   content: '';
-  //   position: absolute;
-  //   width: 0;
-  //   height: 0;
-  //   border: 6px solid transparent;
-  // }
-  // &--top:after {
-  //   top: 100%;
-  //   left: 50%;
-  //   border-top-color: $tooltip-bg-color;
-  //   transform: translateX(-50%);
-  //   margin-top: 1px;
-  // }
-  // &--bottom:after {
-  //   bottom: 100%;
-  //   left: 50%;
-  //   border-bottom-color: $tooltip-bg-color;
-  //   transform: translateX(-50%);
-  //   margin-bottom: 1px;
-  // }
-  // &--left:after {
-  //   left: 100%;
-  //   top: 50%;
-  //   border-left-color: $tooltip-bg-color;
-  //   transform: translateY(-50%);
-  //   margin-left: 1px;
-  // }
-  // &--right:after {
-  //   right: 100%;
-  //   top: 50%;
-  //   border-right-color: $tooltip-bg-color;
-  //   transform: translateY(-50%);
-  //   margin-right: 1px;
-  // }
-
   // Tooltip without border.
-  // --------------------------------------------------------
   &--no-border {
     @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px, 0);
   }
+
+  // Tooltip with border.
   &:not(&--no-border) {
     @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px);
   }
-
-  // Tooltip with border.
-  // --------------------------------------------------------
-  // &:not(&--no-border).w-tooltip--top:after {margin-top: -1px;}
-  // &:not(&--no-border).w-tooltip--bottom:after {margin-bottom: -1px;}
-  // &:not(&--no-border).w-tooltip--left:after {margin-left: -1px;}
-  // &:not(&--no-border).w-tooltip--right:after {margin-right: -1px;}
-
-  // &:not(&--no-border) {
-  //   &:before {
-  //     content: '';
-  //     position: absolute;
-  //     width: 0;
-  //     height: 0;
-  //     border: 7px solid transparent;
-  //   }
-  //   &.w-tooltip--top:before {
-  //     top: 100%;
-  //     left: 50%;
-  //     border-top-color: inherit;
-  //     transform: translateX(-50%);
-  //     margin-top: 0;
-  //   }
-  //   &.w-tooltip--bottom:before {
-  //     bottom: 100%;
-  //     left: 50%;
-  //     border-bottom-color: inherit;
-  //     transform: translateX(-50%);
-  //     margin-bottom: 0;
-  //   }
-  //   &.w-tooltip--left:before {
-  //     left: 100%;
-  //     top: 50%;
-  //     border-left-color: inherit;
-  //     transform: translateY(-50%);
-  //     margin-left: 0;
-  //   }
-  //   &.w-tooltip--right:before {
-  //     right: 100%;
-  //     top: 50%;
-  //     border-right-color: inherit;
-  //     transform: translateY(-50%);
-  //     margin-right: 0;
-  //   }
-  // }
-  // --------------------------------------------------------
 }
 
 // Transitions.
