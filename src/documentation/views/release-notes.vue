@@ -24,6 +24,11 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v1.45.15
+      ul
+        li #[strong.code w-input]: Emit #[code input] &amp; #[code change] events on file input.
+
+    li.patch
       strong.version v1.45.14
       ul
         li #[strong.code w-tooltip]: Fix DOM related rendering issues on SSR. #[issue-link 78]
