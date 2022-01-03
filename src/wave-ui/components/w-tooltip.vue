@@ -96,10 +96,10 @@ export default {
 
     alignment () {
       return (
-        ((this.top || this.bottom) && this.alignLeft && 'left') ||
-        ((this.top || this.bottom) && this.alignRight && 'right') ||
-        ((this.left || this.right) && this.alignTop && 'top') ||
-        ((this.left || this.right) && this.alignBottom && 'bottom') ||
+        (['top', 'bottom'].includes(this.position) && this.alignLeft && 'left') ||
+        (['top', 'bottom'].includes(this.position) && this.alignRight && 'right') ||
+        (['left', 'right'].includes(this.position) && this.alignTop && 'top') ||
+        (['left', 'right'].includes(this.position) && this.alignBottom && 'bottom') ||
         ''
       )
     },
