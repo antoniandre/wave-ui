@@ -23,6 +23,19 @@ main
     //-----------------------------------------------------
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v1.46.0
+      ul
+        li
+          strong.code w-menu:
+          ul
+            li.red.text-bold Deprecated the #[code append-to] prop and replaced with #[code append-to].
+        li
+          strong.code w-tooltip:
+          ul
+            li.red.text-bold Deprecated the #[code append-to] prop and replaced with #[code append-to].
+            li Added more options: #[code persistent], #[code no-position], #[code align-top], #[code align-bottom], #[code align-left], #[code align-right].
+
     li.patch
       strong.version v1.45.15
       ul
