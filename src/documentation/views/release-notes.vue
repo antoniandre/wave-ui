@@ -30,16 +30,22 @@ main
           strong.code w-menu
           ul
             li.red.text-bold Deprecated the #[code detach-to] prop and replaced with #[code append-to].
+            li.
+              Fix the #[code align-left] &amp; #[code align-right] alignments when using the #[code arrow]
+              prop and the default bottom position (without the prop).
         li
           strong.code w-tooltip
           ul
             li.red.text-bold Deprecated the #[code detach-to] prop and replaced with #[code append-to].
+            li
+              strong.
+                Now appended to the #[span.code.text-bold w-app] by default - this may impact the z-index in your app.
+                Use #[code append-to] to move it to another DOM element.
+            li
+              strong The tooltip is now completely removed from the DOM when hidden.
             li.
               Added more options: #[code persistent], #[code no-position], #[code align-top],
               #[code align-bottom], #[code align-left], #[code align-right].
-            li.
-              Now appended to the #[span.code.text-bold w-app] by default - this may impact the z-index in your app.
-              Use #[code append-to] to move it to another DOM element.
         li
           strong.code w-tag
           ul
@@ -130,7 +136,9 @@ main
     li.patch
       strong.version v1.42.2
       ul
-        li #[strong.code w-menu]: Completely unmount the menu from the DOM when it is not open.
+        li
+          strong.code w-menu:
+          strong Completely unmount the menu from the DOM when it is not open.
 
     li.patch
       strong.version v1.42.1

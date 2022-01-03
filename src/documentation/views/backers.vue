@@ -39,8 +39,8 @@ main
 import axios from 'axios'
 
 const githubBackers = [
-  'divriots', 'nmauersberg', 'crbast', 'CoolGoose', 'bohdaq', 'consuman', 'helenetran', 'antoniandre',
-  'bastien09'
+  'divriots', 'nmauersberg', 'crbast', 'CoolGoose', 'bohdaq', 'consuman', 'bastien09',
+  'helenetran', 'antoniandre'
 ]
 
 export default {
