@@ -109,6 +109,233 @@ div.tooltips-demo
         &lt;/w-tooltip&gt;
       &lt;/div&gt;
 
+  title-link(h2) Alignments
+  p In addition to positions, you can align the tooltip with its activator.
+  example.example6
+    .title4.mb2 Top position
+    w-tooltip(append-to=".example6" top align-left)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align left
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" top)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Centered
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" top align-right)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align right
+      | Tooltip content,#[br]on multiple lines.
+
+    .title4.mt6.mb2 Bottom position
+    w-tooltip(append-to=".example6" align-left)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align left
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6")
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Centered
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" align-right)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align right
+      | Tooltip content,#[br]on multiple lines.
+
+    .title4.mt6.mb2 Right position
+    w-tooltip(append-to=".example6" right align-top)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align top
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" right)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Centered
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" right align-bottom)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align bottom
+      | Tooltip content,#[br]on multiple lines.
+
+    .title4.mt6.mb2 Left position
+    w-tooltip(append-to=".example6" left align-top)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align top
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" left)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Centered
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" left align-bottom)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align bottom
+      | Tooltip content,#[br]on multiple lines.
+    template(#pug).
+      .title4.mb2 top position
+      w-tooltip(top align-left)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align left
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(top)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Centered
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(top align-right)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align right
+        | Tooltip content,\#[br]on multiple lines.
+
+      .title4.mt6.mb2 Bottom position
+      w-tooltip(align-left)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align left
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Centered
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(align-right)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align right
+        | Tooltip content,\#[br]on multiple lines.
+
+      .title4.mt6.mb2 Right position
+      w-tooltip(right align-top)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align top
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(right)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Centered
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(right align-bottom)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align bottom
+        | Tooltip content,\#[br]on multiple lines.
+
+      .title4.mt6.mb2 Left position
+      w-tooltip(left align-top)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align top
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(left)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Centered
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(left align-bottom)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align bottom
+        | Tooltip content,\#[br]on multiple lines.
+    template(#html).
+      &lt;div class="title4 mb2"&gt;Top position&lt;/div&gt;
+      &lt;w-tooltip top align-left&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align left
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip top&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Centered
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip top align-right&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align right
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;div class="title4 mt6 mb2"&gt;Bottom position&lt;/div&gt;
+      &lt;w-tooltip align-left&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align left
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Centered
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip align-right&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align right
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;div class="title4 mt6 mb2"&gt;Right position&lt;/div&gt;
+      &lt;w-tooltip right align-top&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align top
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip right&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Centered
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip right align-bottom&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;Alig
+            n bottom
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;div class="title4 mt6 mb2"&gt;Left position&lt;/div&gt;
+      &lt;w-tooltip left align-top&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;A
+            lign top
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip left&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Centered
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip left align-bottom&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align bottom
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
   title-link(h2) Toggle on click
   example(content-class="text-center")
     w-tooltip(show-on-click left)
