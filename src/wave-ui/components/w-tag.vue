@@ -89,7 +89,6 @@ export default {
   background-color: rgba(255, 255, 255, 0.85);
   padding-left: 2 * $base-increment;
   padding-right: 2 * $base-increment;
-  font-size: round(0.85 * $base-font-size);
   cursor: default;
   user-select: none;
 
@@ -100,23 +99,35 @@ export default {
   &--tile {border-radius: initial;}
   &--shadow {box-shadow: $box-shadow;}
 
-  &.size--xs {font-size: round(0.7 * $base-font-size);}
+  &.size--xs {
+    $font-size: round(0.7 * $base-font-size);
+    font-size: $font-size;
+    line-height: $font-size + 2px;
+  }
   &.size--sm {
-    font-size: round(0.82 * $base-font-size);
+    $font-size: round(0.82 * $base-font-size);
+    font-size: $font-size;
+    line-height: $font-size + 2px;
     padding: round(0.25 * $base-increment) $base-increment;
   }
   &.size--md {
-    font-size: round(0.95 * $base-font-size);
+    $font-size: round(0.85 * $base-font-size);
+    font-size: $font-size;
+    line-height: $font-size + 4px;
     padding-top: round(0.25 * $base-increment);
     padding-bottom: round(0.25 * $base-increment);
   }
   &.size--lg {
-    font-size: round(1.1 * $base-font-size);
+    $font-size: round(1.1 * $base-font-size);
+    font-size: $font-size;
+    line-height: $font-size + 4px;
     padding-top: round(0.5 * $base-increment);
     padding-bottom: round(0.5 * $base-increment);
   }
   &.size--xl {
-    font-size: round(1.3 * $base-font-size);
+    $font-size: round(1.3 * $base-font-size);
+    font-size: $font-size;
+    line-height: $font-size + 4px;
     padding-top: round(1 * $base-increment);
     padding-bottom: round(1 * $base-increment);
   }
