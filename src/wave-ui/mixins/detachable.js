@@ -1,3 +1,9 @@
+/**
+ * A detachable element is an element that can be appended to another DOM node
+ * (but keeping data-driven Vue DOM refreshes).
+ * This mixin is used by w-tooltip & w-menu.
+ */
+
 import { consoleWarn } from '../utils/console'
 
 export default {
