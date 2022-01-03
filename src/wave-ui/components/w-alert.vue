@@ -229,7 +229,6 @@ export default {
   &--icon-outside &__icon {
     position: absolute;
     opacity: 1;
-    // top: 2 * $base-increment - 1px; // Needed for IE 11, but dropping support.
     left: 1px;
     z-index: 1;
     transform: translateX(-50%);

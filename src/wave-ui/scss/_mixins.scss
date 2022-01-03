@@ -54,10 +54,24 @@
       margin-right: 0;
     }
 
-    &#{$selector}--align-top:before {transform: none;top: (2 * $base-increment) - 1px;}
-    &#{$selector}--align-bottom:before {transform: none;top: auto;bottom: (2 * $base-increment) - 1px;}
-    &#{$selector}--align-left:before {transform: none;left: (2 * $base-increment) - 1px;}
-    &#{$selector}--align-right:before {transform: none;left: auto;right: (2 * $base-increment) - 1px;}
+    &#{$selector}--align-top:before {
+      transform: none;
+      top: (2 * $base-increment) - 1px;
+    }
+    &#{$selector}--align-bottom:before {
+      transform: none;
+      top: auto;
+      bottom: (2 * $base-increment) - 1px;
+    }
+    &#{$selector}--align-left:before {
+      transform: none;
+      left: (2 * $base-increment) - 1px;
+    }
+    &#{$selector}--align-right:before {
+      transform: none;
+      left: auto;
+      right: (2 * $base-increment) - 1px;
+    }
   }
 
   // The colored triangle on top of `:before`.
