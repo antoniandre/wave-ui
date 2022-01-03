@@ -293,7 +293,7 @@ div
   example.example--no-arrow(content-class="text-center" app-props-string="align-center")
     w-confirm.ma2(no-arrow :menu="{ bgColor: 'blue-light5' }") Bottom
     w-confirm.ma2(no-arrow right) Right
-    w-confirm.ma2.mb12(:menu="{ noPosition: true, detachTo: '.example--no-arrow' }") No position
+    w-confirm.ma2.mb12(:menu="{ noPosition: true, appendTo: '.example--no-arrow' }") No position
 
     template(#pug).
       w-confirm.ma2(no-arrow :menu="{ bgColor: 'blue-light5' }") Bottom
