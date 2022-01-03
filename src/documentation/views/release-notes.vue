@@ -27,14 +27,23 @@ main
       strong.version v1.46.0
       ul
         li
-          strong.code w-menu:
+          strong.code w-menu
           ul
-            li.red.text-bold Deprecated the #[code append-to] prop and replaced with #[code append-to].
+            li.red.text-bold Deprecated the #[code detach-to] prop and replaced with #[code append-to].
         li
-          strong.code w-tooltip:
+          strong.code w-tooltip
           ul
-            li.red.text-bold Deprecated the #[code append-to] prop and replaced with #[code append-to].
-            li Added more options: #[code persistent], #[code no-position], #[code align-top], #[code align-bottom], #[code align-left], #[code align-right].
+            li.red.text-bold Deprecated the #[code detach-to] prop and replaced with #[code append-to].
+            li.
+              Added more options: #[code persistent], #[code no-position], #[code align-top],
+              #[code align-bottom], #[code align-left], #[code align-right].
+            li.
+              Now appended to the #[span.code.text-bold w-app] by default - this may impact the z-index in your app.
+              Use #[code append-to] to move it to another DOM element.
+        li
+          strong.code w-tag
+          ul
+            li Added a line-height for better vertical centering.
 
     li.patch
       strong.version v1.45.15
@@ -632,7 +641,7 @@ main
     margin-left: 4px;
 
     > li {padding-left: 20px;}
-    > li + li {margin-top: 20px;}
+    > li + li {margin-top: 28px;}
     li {list-style-type: none;position: relative;}
 
     // Bullet.
