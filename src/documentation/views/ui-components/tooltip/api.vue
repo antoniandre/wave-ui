@@ -36,13 +36,15 @@ const propsDescs = {
 }
 
 const slots = {
-  activator: { description: '<strong>This slot is required and must have the v-on="on" directive set on it for the tooltip to toggle correctly.</strong><br>The activator can be any visible DOM element or mounted component.' },
+  activator: { description: '<strong>This slot is required and must have the <code>v-on="on"</code> directive set on it for the tooltip to toggle correctly.</strong><br>The activator can be any visible DOM element or mounted component.' },
   default: { description: 'The tooltip content.' }
 }
 
 const eventsDescs = {
-  // input: 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 2.x only.',
-  // 'update:modelValue': 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 3 only.'
+  input: 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 2.x only.',
+  'update:modelValue': 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 3 only.',
+  close: 'Emitted on tooltip close.',
+  open: 'Emitted on tooltip open.'
 }
 
 export default {
