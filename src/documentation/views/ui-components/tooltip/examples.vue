@@ -7,7 +7,7 @@ div.tooltips-demo
     In this case you can add classes to the wrapper to style it as desired.#[br]#[br]
     But in some cases, for instance if the activator element is placed in a container that has a hidden
     overflow, the tooltip needs to be placed outside of this container to be fully visible.#[br]
-    You can use the #[code detachTo] prop to place it elsewhere in the DOM, like in the
+    You can use the #[code appendTo] prop to place it elsewhere in the DOM, like in the
     #[a(href="#appending-to-a-dom-node") Appending to a particular DOM node] example.#[br]
     In this case, the wrapper will be hidden and unstylable whereas the tooltip itself will be appended to
     the DOM node you provided.
@@ -182,7 +182,7 @@ div.tooltips-demo
     Clicking on the activator can always toggle the tooltip regardless of the #[code persistent]
     prop.
   example(content-class="text-center my4 example-persistent")
-    w-tooltip(show-on-click persistent detach-to=".example-persistent")
+    w-tooltip(show-on-click persistent append-to=".example-persistent")
       template(#activator="{ on }")
         w-icon(v-on="on" xl) wi-star
       | Star
@@ -716,7 +716,7 @@ div.tooltips-demo
   example.mb12(content-class="pa0")
     .another-container.text-center.green-light5--bg.pa6
       w-card(bg-color="yellow-light5")
-        w-tooltip(detach-to=".another-container")
+        w-tooltip(append-to=".another-container")
           template(#activator="{ on }")
             w-tag(v-on="on" lg color="pink-light1" bg-color="pink-light5")
               w-icon.mr1 mdi mdi-bomb
@@ -725,7 +725,7 @@ div.tooltips-demo
     //- template(#pug).
       .wrapper.text-center.green-light5--bg.pa6
         w-card(bg-color="yellow-light5")
-          w-tooltip(detach-to=".wrapper")
+          w-tooltip(append-to=".wrapper")
             template(#activator="{ on }")
               w-tag(v-on="on" lg color="pink-light1" bg-color="pink-light5")
                 w-icon.mr1 mdi mdi-bomb
@@ -734,7 +734,7 @@ div.tooltips-demo
     template(#html).
       &lt;div class="wrapper text-center green-light5--bg pa6"&gt;
         &lt;w-card bg-color="yellow-light5"&gt;
-          &lt;w-tooltip detach-to=".wrapper"&gt;
+          &lt;w-tooltip append-to=".wrapper"&gt;
             &lt;template #activator="{ on }"&gt;
               &lt;w-tag
                 v-on="on"

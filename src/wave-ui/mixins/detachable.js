@@ -10,21 +10,26 @@ export default {
   computed: {
     // DOM element to attach tooltip/menu to.
     // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
-    detachToTarget () {
+    appendToTarget () {
       const defaultTarget = '.w-app'
 
-      let target = this.detachTo || defaultTarget
+      // Convert deprecated prop to renamed one.
+      if (this.detachTo && !this.appendTo) {
+        consoleWarn(`The ${this.$options.name} prop \`detach-to\` is deprecated. You can replace it with \`append-to\`.`, this)
+      }
+
+      let target = this.appendTo || this.detachTo || defaultTarget
       if (target === true) target = defaultTarget
-      else if (this.detachTo === 'activator') target = this.$el.previousElementSibling
+      else if (this.appendTo === 'activator') target = this.$el.previousElementSibling
       else if (target && !['object', 'string'].includes(typeof target)) target = defaultTarget
       else if (typeof target === 'object' && !target.nodeType) {
         target = defaultTarget
-        consoleWarn(`Invalid node provided in ${this.$options.name} \`detach-to\`. Falling back to .w-app.`, this)
+        consoleWarn(`Invalid node provided in ${this.$options.name} \`append-to\`. Falling back to .w-app.`, this)
       }
       if (typeof target === 'string') target = document.querySelector(target)
 
       if (!target) {
-        consoleWarn(`Unable to locate ${this.detachTo ? `target ${this.detachTo}` : defaultTarget}`, this)
+        consoleWarn(`Unable to locate ${this.appendTo ? `target ${this.appendTo}` : defaultTarget}`, this)
         target = document.querySelector(defaultTarget)
       }
 
@@ -34,7 +39,7 @@ export default {
     // DOM element that will receive the tooltip/menu.
     // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
     detachableParentEl () {
-      return this.detachToTarget
+      return this.appendToTarget
     }
   },
 
@@ -171,7 +176,7 @@ export default {
 
           // Move the tooltip/menu elsewhere in the DOM.
           // wrapper.parentNode.insertBefore(this.detachableEl, wrapper)
-          this.detachToTarget.appendChild(this.detachableEl)
+          this.appendToTarget.appendChild(this.detachableEl)
           resolve()
         })
       })

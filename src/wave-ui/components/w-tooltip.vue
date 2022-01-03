@@ -38,6 +38,7 @@ export default {
     tooltipClass: { type: [String, Object, Array] },
     // Position.
     detachTo: { type: [String, Boolean, Object], deprecated: true },
+    appendTo: { type: [String, Boolean, Object] },
     fixed: { type: Boolean },
     top: { type: Boolean },
     bottom: { type: Boolean },
@@ -70,7 +71,7 @@ export default {
   computed: {
     /**
      * Other computed in the detachable mixin:
-     * - `detachToTarget`
+     * - `appendToTarget`
      * - `detachableParentEl`
      **/
 
@@ -258,6 +259,10 @@ export default {
       if (bool !== this.detachableVisible) this.toggle({ type: 'click', target: this.activatorEl })
     },
     detachTo () {
+      this.removeFromDOM()
+      this.insertInDOM()
+    },
+    appendTo () {
       this.removeFromDOM()
       this.insertInDOM()
     }

@@ -76,7 +76,8 @@ export default {
     contentClass: { type: [String, Object, Array] },
     // Position.
     arrow: { type: Boolean }, // The small triangle pointing toward the activator.
-    detachTo: { type: [String, Boolean, Object] },
+    detachTo: { type: [String, Boolean, Object], deprecated: true },
+    appendTo: { type: [String, Boolean, Object] },
     fixed: { type: Boolean },
     top: { type: Boolean },
     bottom: { type: Boolean },
@@ -115,7 +116,7 @@ export default {
   computed: {
     /**
      * Other computed in the detachable mixin:
-     * - `detachToTarget`
+     * - `appendToTarget`
      * - `detachableParentEl`
      **/
 
@@ -338,6 +339,10 @@ export default {
       if (!!bool !== this.detachableVisible) this.toggleMenu({ type: 'click', target: this.activatorEl })
     },
     detachTo () {
+      this.removeFromDOM()
+      this.insertInDOM()
+    },
+    appendTo () {
       this.removeFromDOM()
       this.insertInDOM()
     }
