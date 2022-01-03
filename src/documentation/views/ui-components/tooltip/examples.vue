@@ -33,7 +33,7 @@ div.tooltips-demo
       template(#activator="{ on }")
         w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
       | Home
-    //- template(#pug).
+    template(#pug).
       .text-center
         w-tooltip(left)
           template(#activator="{ on }")
@@ -203,7 +203,7 @@ div.tooltips-demo
         Star
       &lt;/w-tooltip&gt;
 
-  title-link(h2) Using v-model
+  title-link(h2) Using a v-model
   title-link(h3) Toggle with v-model
   p Click the button to toggle the tooltips.
   example(content-class="text-center my4")
@@ -215,22 +215,41 @@ div.tooltips-demo
       | {{ showTooltip ? 'Hide' : 'Show' }} tooltip
 
     div.d-iblock.my2.mx6
-      w-tooltip.ma2(:value="showTooltip" show-on-click left)
+      w-tooltip(
+        :value="showTooltip"
+        show-on-click
+        left
+        @open="tooltipVisible = true"
+        @close="onTooltipClose")
         template(#activator="{ on }")
           w-icon(v-on="on" lg) wi-star
         | Star
 
-      w-tooltip.ma2(:value="showTooltip" show-on-click top)
+      w-tooltip(
+        :value="showTooltip"
+        show-on-click
+        top
+        @open="tooltipVisible = true"
+        @close="onTooltipClose")
         template(#activator="{ on }")
           w-icon(v-on="on" lg) wi-star
         | Star
 
-      w-tooltip.ma2(:value="showTooltip" show-on-click)
+      w-tooltip(
+        :value="showTooltip"
+        show-on-click
+        @open="tooltipVisible = true"
+        @close="onTooltipClose")
         template(#activator="{ on }")
           w-icon(v-on="on" lg) wi-star
         | Star
 
-      w-tooltip.ma2(:value="showTooltip" show-on-click right)
+      w-tooltip(
+        :value="showTooltip"
+        show-on-click
+        right
+        @open="tooltipVisible = true"
+        @close="onTooltipClose")
         template(#activator="{ on }")
           w-icon(v-on="on" lg) wi-star
         | Star
@@ -245,24 +264,24 @@ div.tooltips-demo
           | {{ '\{\{ showTooltip ? \'Hide\' : \'Show\' \}\}' }} tooltip
 
         div.d-iblock.my2.mx6
-          w-tooltip.ma2(v-model="showTooltip" show-on-click left)
+          w-tooltip(v-model="showTooltip" show-on-click left)
             template(#activator="{ on }")
-              w-icon(v-on="on" lg) wi-star
+              w-icon.ma2(v-on="on" lg) wi-star
             | Star
 
-          w-tooltip.ma2(v-model="showTooltip" show-on-click top)
+          w-tooltip(v-model="showTooltip" show-on-click top)
             template(#activator="{ on }")
-              w-icon(v-on="on" lg) wi-star
+              w-icon.ma2(v-on="on" lg) wi-star
             | Star
 
-          w-tooltip.ma2(v-model="showTooltip" show-on-click)
+          w-tooltip(v-model="showTooltip" show-on-click)
             template(#activator="{ on }")
-              w-icon(v-on="on" lg) wi-star
+              w-icon.ma2(v-on="on" lg) wi-star
             | Star
 
-          w-tooltip.ma2(v-model="showTooltip" show-on-click right)
+          w-tooltip(v-model="showTooltip" show-on-click right)
             template(#activator="{ on }")
-              w-icon(v-on="on" lg) wi-star
+              w-icon.ma2(v-on="on" lg) wi-star
             | Star
     template(#html).
       &lt;div class="text-center"&gt;
@@ -277,44 +296,40 @@ div.tooltips-demo
 
         &lt;div class="d-iblock my2 mx6"&gt;
           &lt;w-tooltip
-            class="ma2"
             v-model="showTooltip"
             show-on-click
             left&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon v-on="on" lg&gt;wi-star&lt;/w-icon&gt;
+              &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
 
           &lt;w-tooltip
-            class="ma2"
             v-model="showTooltip"
             show-on-click
             top&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon v-on="on" lg&gt;wi-star&lt;/w-icon&gt;
+              &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
 
           &lt;w-tooltip
-            class="ma2"
             v-model="showTooltip"
             show-on-click&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon v-on="on" lg&gt;wi-star&lt;/w-icon&gt;
+              &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
 
           &lt;w-tooltip
-            class="ma2"
             v-model="showTooltip"
             show-on-click
             right&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon v-on="on" lg&gt;wi-star&lt;/w-icon&gt;
+              &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
@@ -384,8 +399,8 @@ div.tooltips-demo
       template(#activator="{ on }")
         w-icon.ma2(v-on="on" xl) wi-star
       | Star
-    //- template(#pug).
-      .text-center.pb8
+    template(#pug).
+      .text-center
         w-tooltip(color="white" bg-color="blue")
           template(#activator="{ on }")
             w-icon.ma2(v-on="on" xl color="blue") wi-star
@@ -406,7 +421,7 @@ div.tooltips-demo
             w-icon.ma2(v-on="on" xl) wi-star
           | Star
     template(#html).
-      &lt;div class="text-center pb8"&gt;
+      &lt;div class="text-center"&gt;
         &lt;w-tooltip color="white" bg-color="blue"&gt;
           &lt;template #activator="{ on }"&gt;
             &lt;w-icon
@@ -475,7 +490,7 @@ div.tooltips-demo
       template(#activator="{ on }")
         w-icon.ma2(v-on="on" xl color="pink-light1") mdi mdi-heart
       | Shadow
-    //- template(#pug).
+    template(#pug).
       .text-center.pb8
         w-tooltip(color="red-light2" tile)
           template(#activator="{ on }")
@@ -533,32 +548,32 @@ div.tooltips-demo
 
   title-link(h2) Different contents
   example(content-class="text-center")
-    w-tooltip.ma3(color="primary")
+    w-tooltip(color="primary")
       template(#activator="{ on }")
-        span(v-on="on") Content with icon
+        span.ma3(v-on="on") Content with icon
       w-icon.mr1 wi-star
       | Star
 
-    w-tooltip.ma3(color="primary")
+    w-tooltip(color="primary")
       template(#activator="{ on }")
-        span(v-on="on" ref="truc") Very long content
+        span.ma3(v-on="on") Very long content
       | Lorem ipsum, dolor sit amet consectetur adipisicing elit.
       br
       | Esse quo non, beatae dolore nihil quae ratione dignissimos molestiae hic, tempore blanditiis soluta, quasi officia!
       br
       br
       | Recusandae distinctio perferendis expedita pariatur fuga.
-    //- template(#pug).
+    template(#pug).
       .text-center
-        w-tooltip.ma3(color="primary")
+        w-tooltip(color="primary")
           template(#activator="{ on }")
-            span(v-on="on") Content with icon
+            span.ma3(v-on="on") Content with icon
           w-icon.mr1 wi-star
           | Star
 
-        w-tooltip.ma3(color="primary")
+        w-tooltip(color="primary")
           template(#activator="{ on }")
-            span(v-on="on" ref="truc") Very long content
+            span.ma3(v-on="on") Very long content
           | Lorem ipsum, dolor sit amet consectetur adipisicing elit.
           br
           | Esse quo non, beatae dolore nihil quae ratione dignissimos molestiae hic, tempore blanditiis soluta, quasi officia!
@@ -567,9 +582,9 @@ div.tooltips-demo
           | Recusandae distinctio perferendis expedita pariatur fuga.
     template(#html).
       &lt;div class="text-center"&gt;
-        &lt;w-tooltip class="ma3" color="primary"&gt;
+        &lt;w-tooltip color="primary"&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;span v-on="on"&gt;
+            &lt;span v-on="on" class="ma3"&gt;
               Content with icon
             &lt;/span&gt;
           &lt;/template&gt;
@@ -577,9 +592,9 @@ div.tooltips-demo
           Star
         &lt;/w-tooltip&gt;
 
-        &lt;w-tooltip class="ma3" color="primary"&gt;
+        &lt;w-tooltip color="primary"&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;span v-on="on" ref="truc"&gt;
+            &lt;span v-on="on" class="ma3"&gt;
               Very long content
             &lt;/span&gt;
           &lt;/template&gt;
@@ -612,7 +627,7 @@ div.tooltips-demo
         template(#activator="{ on }")
           w-icon.ma2(v-on="on" color="primary" xl) mdi mdi-home
         | Home
-    //- template(#pug).
+    template(#pug).
       .text-center
         w-radios.my4(inline v-model="transition" :items="transitions")
         .text-center.py6
@@ -722,7 +737,7 @@ div.tooltips-demo
               w-icon.mr1 mdi mdi-bomb
               | Hover me
           span This tooltip is appended to the #[span.green green] container!
-    //- template(#pug).
+    template(#pug).
       .wrapper.text-center.green-light5--bg.pa6
         w-card(bg-color="yellow-light5")
           w-tooltip(append-to=".wrapper")
@@ -769,8 +784,8 @@ div.tooltips-demo
         border-radius: 100%;
       }
 
-      .w-card:before {top: 0;left: 0;}
-      .w-card:after {bottom: 0;right: 0;}
+      .w-card:before {top: -3em;left: -3em;}
+      .w-card:after {bottom: -3em;right: -3em;}
 
       .w-tag {z-index: 1;}
 
@@ -793,7 +808,13 @@ export default {
       { label: 'Fade', value: 'fade' },
       { label: 'Scale-fade', value: 'scale-fade' }
     ]
-  })
+  }),
+
+  methods: {
+    onTooltipClose () {
+      setTimeout(() => (this.showTooltip = false), 100)
+    }
+  }
 }
 </script>
 
