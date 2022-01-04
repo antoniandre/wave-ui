@@ -33,8 +33,8 @@ div
     To apply colors (or other props) to the menu or the buttons inside the menu, you can do it via:
   ul
     li #[code menu] #[small.grey E.g. #[code.grey :menu="{ bgColor: 'green' }"]]
-    li #[code cancel-button] #[small.grey E.g. #[code.grey :cancel-button="{ bgColor: 'green' }"]]
-    li #[code confirm-button] #[small.grey E.g. #[code.grey :confirm-button="{ bgColor: 'green' }"]]
+    li #[code cancel] #[small.grey E.g. #[code.grey :cancel="{ bgColor: 'green' }"]]
+    li #[code confirm] #[small.grey E.g. #[code.grey :confirm="{ bgColor: 'green' }"]]
   example(content-class="text-center" app-props-string="align-center")
     w-confirm.mb2(bg-color="success") Ask for confirm
     w-confirm.mb2(bg-color="info" color="yellow") Ask for confirm
@@ -211,77 +211,113 @@ div
       &lt;/w-confirm&gt;
 
   title-link(h2) Custom question
-  p The #[code question] slot allows you to specify your own question.
+  p.
+    By default the question is "Are you sure?".#[br]
+    But both the #[code question] prop and the #[code #question] slot allow you to specify your own
+    question, but the slot is more customizable as you can add components in it.#[br]
+    If both a slot and a prop are given, the slot takes precedence.
+
+  title-link(h3 slug="using-question-prop") Using the #[code question] prop
+  example(content-class="text-center" app-props-string="align-center")
+    w-confirm(question="Are you sure you want to delete this?") Ask for confirm
+    template(#pug).
+      w-confirm(question="Are you sure you want to delete this?").
+        Ask for confirm
+    template(#html).
+      &lt;w-confirm question="Are you sure you want to delete this?"&gt;
+        Ask for confirm
+      &lt;/w-confirm&gt;
+
+  title-link(h3 slug="using-question-slot") Using the #[code #question] slot
   example(content-class="text-center" app-props-string="align-center")
     w-confirm
-      strong Delete
+      | Ask for confirm
       template(#question) Are you sure you want to delete this?
     template(#pug).
       w-confirm
-        strong Delete
+        | Ask for confirm
         template(#question) Are you sure you want to delete this?
     template(#html).
       &lt;w-confirm&gt;
-        &lt;strong&gt;Delete&lt;/strong&gt;
+        Ask for confirm
         &lt;template #question&gt;
           Are you sure you want to delete this?
         &lt;/template&gt;
       &lt;/w-confirm&gt;
 
   title-link(h2) Cancel &amp; confirm buttons
-  title-link(h3) Custom buttons contents
   p.
-    You can use the #[code cancel] &amp; #[code confirm] slots to override the cancel &amp; confirm
-    buttons contents.
+    The cancel &amp; confirm buttons can be customized through the #[code cancel] &amp;
+    #[code confirm] props. These props accept either a #[span.code String] for the button
+    label, or an #[span.code Object] in oredr to define w-button props.#[br]
+    The cancel button can also be set to #[code false] in order to remove it.
+  title-link(h3) Custom buttons labels
+  p.
+    You can use the #[code cancel] &amp; #[code confirm] #[strong props or slots] to override the
+    cancel &amp; confirm buttons labels.
   example(content-class="text-center" app-props-string="align-center")
-    w-confirm
-      | Ask for confirm
-      template(#cancel) No
-      template(#confirm) Yes
+    w-confirm(cancel="No" confirm="Yes").
+      Ask for confirm
     template(#pug).
-      w-confirm
-        | Ask for confirm
-        template(#cancel) No
-        template(#confirm) Yes
-    template(#html).
-      &lt;w-confirm&gt;
+      w-confirm(cancel="No" confirm="Yes").
         Ask for confirm
-        &lt;template #cancel&gt;No&lt;/template&gt;
-        &lt;template #confirm&gt;Yes&lt;/template&gt;
+    template(#html).
+      &lt;w-confirm cancel="No" confirm="Yes"&gt;
+        Ask for confirm
       &lt;/w-confirm&gt;
 
   title-link(h3) No cancel button
   example(content-class="text-center" app-props-string="align-center")
-    w-confirm(no-cancel) Ask for confirm
+    w-confirm(:cancel="false") Ask for confirm
     template(#pug).
-      w-confirm(no-cancel) Ask for confirm
+      w-confirm(:cancel="false") Ask for confirm
     template(#html).
-      &lt;w-confirm no-cancel&gt;
+      &lt;w-confirm :cancel="false"&gt;
         Ask for confirm
       &lt;/w-confirm&gt;
 
   title-link(h3) Full custom buttons
   p.
     The cancel and confirm buttons can be customized as much as a standard #[strong.code w-button]
-    via the #[code cancel-button] &amp; #[code confirm-button] props which accept an object of
-    #[strong.code w-button] props to pass down to the buttons.
+    via the #[code cancel] &amp; #[code confirm] props which accept an object of
+    props to pass down to the #[strong.code w-button].
   example(content-class="text-center" app-props-string="align-center")
     w-confirm(
       inline
-      :cancel-button="{ bgColor: 'error-dark1', color: 'white', icon: 'mdi mdi-close' }"
-      :confirm-button="{ bgColor: 'green-dark1', color: 'white', icon: 'mdi mdi-check' }")
+      :cancel="{ bgColor: 'error-dark1', color: 'white', icon: 'mdi mdi-close' }"
+      :confirm="{ bgColor: 'green-dark1', color: 'white', icon: 'mdi mdi-check' }")
       | Ask for confirm
     template(#pug).
       w-confirm(
         inline
-        :cancel-button="{ bgColor: 'error-dark1', color: 'white', icon: 'mdi mdi-close' }"
-        :confirm-button="{ bgColor: 'green-dark1', color: 'white', icon: 'mdi mdi-check' }")
+        :cancel="{ bgColor: 'error-dark1', color: 'white', icon: 'mdi mdi-close' }"
+        :confirm="{ bgColor: 'green-dark1', color: 'white', icon: 'mdi mdi-check' }")
         | Ask for confirm
     template(#html).
       &lt;w-confirm
         inline
-        :cancel-button="{ bgColor: 'error-dark1', color: 'white', icon: 'mdi mdi-close' }"
-        :confirm-button="{ bgColor: 'green-dark1', color: 'white', icon: 'mdi mdi-check' }"&gt;
+        :cancel="{ bgColor: 'error-dark1', color: 'white', icon: 'mdi mdi-close' }"
+        :confirm="{ bgColor: 'green-dark1', color: 'white', icon: 'mdi mdi-check' }"&gt;
+        Ask for confirm
+      &lt;/w-confirm&gt;
+  h3 Custom button label in the Object-type prop
+  example(content-class="text-center" app-props-string="align-center")
+    w-confirm(
+      inline
+      :cancel="{ bgColor: 'error-dark1', color: 'white', label: 'No' }"
+      :confirm="{ bgColor: 'green-dark1', color: 'white', label: 'Yes' }")
+      | Ask for confirm
+    template(#pug).
+      w-confirm(
+        inline
+        :cancel="{ bgColor: 'error-dark1', color: 'white', label: 'No' }"
+        :confirm="{ bgColor: 'green-dark1', color: 'white', label: 'Yes' }")
+        | Ask for confirm
+    template(#html).
+      &lt;w-confirm
+        inline
+        :cancel="{ bgColor: 'error-dark1', color: 'white', label: 'No' }"
+        :confirm="{ bgColor: 'green-dark1', color: 'white', label: 'Yes' }"&gt;
         Ask for confirm
       &lt;/w-confirm&gt;
 
