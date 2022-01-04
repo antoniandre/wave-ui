@@ -212,9 +212,9 @@ div
 
   title-link(h2) Custom question
   p.
-    By default the question is "Are you sure?".#[br]
-    But both the #[code question] prop and the #[code #question] slot allow you to specify your own
-    question, but the slot is more customizable as you can add components in it.#[br]
+    By default the question is "Are you sure?". But both the #[code question] prop and the
+    #[code #question] slot allow you to specify your own question. The slot is more
+    customizable as you can add components in it but more verbose to write.#[br]
     If both a slot and a prop are given, the slot takes precedence.
 
   title-link(h3 slug="using-question-prop") Using the #[code question] prop
@@ -249,7 +249,7 @@ div
   p.
     The cancel &amp; confirm buttons can be customized through the #[code cancel] &amp;
     #[code confirm] props. These props accept either a #[span.code String] for the button
-    label, or an #[span.code Object] in oredr to define w-button props.#[br]
+    label, or an #[span.code Object] in order to define w-button props.#[br]
     The cancel button can also be set to #[code false] in order to remove it.
   title-link(h3) Custom buttons labels
   p.
@@ -300,7 +300,13 @@ div
         :confirm="{ bgColor: 'green-dark1', color: 'white', icon: 'mdi mdi-check' }"&gt;
         Ask for confirm
       &lt;/w-confirm&gt;
-  h3 Custom button label in the Object-type prop
+
+  title-link(h3 slug="custom-label-in-object").
+    Custom button label in the #[span.code Object] form
+  p.
+    If you're using the object form, you can define a custom label in it
+    (or you could also use the #[code #cancel] &amp; #[code #confirm] slots
+    for more flexibility).
   example(content-class="text-center" app-props-string="align-center")
     w-confirm(
       inline
