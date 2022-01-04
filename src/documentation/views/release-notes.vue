@@ -24,6 +24,19 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.47.0
+      ul
+        li
+          strong.code w-confirm
+          ul
+            li.red.text-bold.
+              The #[code cancel-button] &amp; #[code confirm-button] props are renamed
+              to #[code cancel] &amp; #[code confirm] and can also accept a string as a button label.
+            li.red.text-bold.
+              The #[code no-cancel] prop is removed and can be replaced with #[code :cancel="false"].
+            li New #[code question] prop in addition to the slot.
+
+    li.minor
       strong.version v1.46.0
       ul
         li
@@ -39,7 +52,8 @@ main
             li.red.text-bold Deprecated the #[code detach-to] prop and replaced with #[code append-to].
             li
               strong.
-                Now appended to the #[span.code.text-bold w-app] by default - this may impact the z-index in your app.
+                Now appended to the #[span.code.text-bold w-app] by default - this may impact the
+                z-index in your app.
                 Use #[code append-to] to move it to another DOM element.
             li
               strong The tooltip is now completely removed from the DOM when hidden.
@@ -64,7 +78,9 @@ main
     li.patch
       strong.version v1.45.13
       ul
-        li #[strong.code w-input]: Also detect browser autofill on page load to raise the label up if any (fixes the overlapping issue previously happening on Chrome). #[issue-link 77]
+        li.
+          #[strong.code w-input]: Also detect browser autofill on page load to raise the label up
+          if any (fixes the overlapping issue previously happening on Chrome). #[issue-link 77]
 
     li.patch
       strong.version v1.45.7
@@ -84,13 +100,17 @@ main
     li.patch
       strong.version v1.45.3
       ul
-        li #[strong.code w-tooltip]: Fix the tooltip #[code color] when used with a #[code bg-color] &amp; minor improvements.
+        li.
+          #[strong.code w-tooltip]: Fix the tooltip #[code color] when used with a #[code bg-color]
+          &amp; minor improvements.
 
     li.patch
       strong.version v1.45.2
       ul
         li #[strong.code CSS]: Removed the useless styles previously applied on the &lt;footer&gt; tag.
-        li #[strong.code SCSS]: Fix error related to the new SCSS mixins file.#[br]The mixins are now imported from the variables files. #[issue-link 60]
+        li.
+          #[strong.code SCSS]: Fix error related to the new SCSS mixins file.#[br]The mixins are now
+          imported from the variables files. #[issue-link 60]
 
     li.patch
       strong.version v1.45.1
