@@ -15,7 +15,7 @@ main
         (maintaining 2 different versions of the documentation and release notes is a lot of extra
         work!).#[br]
         If you find anything missing or not working as expected please open an issue precising the Vue
-        and Wave UI versions! :)
+        and Wave UI versions. :)
       br
       br
 
