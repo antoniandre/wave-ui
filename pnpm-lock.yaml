@@ -291,6 +291,12 @@ packages:
     hasBin: true
     dev: true
 
+  /@babel/parser/7.16.7:
+    resolution: {integrity: sha512-sR4eaSrnM7BV7QPzGfEX5paG/6wrZM3I0HDzfIAK06ESvo9oy3xBuVBxE3MbQaKNhvg8g/ixjMWo2CGpzpHsDA==}
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+    dev: true
+
   /@babel/plugin-proposal-class-properties/7.16.5_@babel+core@7.16.5:
     resolution: {integrity: sha512-pJD3HjgRv83s5dv1sTnDbZOaTjghKEz8KUn1Kbh2eAIRhGuyQ1XSeI4xVXU3UlIEVA3DAyIdxqT1eRn7Wcn55A==}
     engines: {node: '>=6.9.0'}
@@ -437,7 +443,7 @@ packages:
   /@vue/compiler-core/3.2.26:
     resolution: {integrity: sha512-N5XNBobZbaASdzY9Lga2D9Lul5vdCIOXvUMd6ThcN8zgqQhPKfCV+wfAJNNJKQkSHudnYRO2gEB+lp0iN3g2Tw==}
     dependencies:
-      '@babel/parser': 7.16.6
+      '@babel/parser': 7.16.7
       '@vue/shared': 3.2.26
       estree-walker: 2.0.2
       source-map: 0.6.1
@@ -485,7 +491,7 @@ packages:
   /@vue/compiler-sfc/3.2.26:
     resolution: {integrity: sha512-ePpnfktV90UcLdsDQUh2JdiTuhV0Skv2iYXxfNMOK/F3Q+2BO0AulcVcfoksOpTJGmhhfosWfMyEaEf0UaWpIw==}
     dependencies:
-      '@babel/parser': 7.16.6
+      '@babel/parser': 7.16.7
       '@vue/compiler-core': 3.2.26
       '@vue/compiler-dom': 3.2.26
       '@vue/compiler-ssr': 3.2.26
@@ -518,7 +524,7 @@ packages:
   /@vue/reactivity-transform/3.2.26:
     resolution: {integrity: sha512-XKMyuCmzNA7nvFlYhdKwD78rcnmPb7q46uoR00zkX6yZrUmcCQ5OikiwUEVbvNhL5hBJuvbSO95jB5zkUon+eQ==}
     dependencies:
-      '@babel/parser': 7.16.6
+      '@babel/parser': 7.16.7
       '@vue/compiler-core': 3.2.26
       '@vue/shared': 3.2.26
       estree-walker: 2.0.2
