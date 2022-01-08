@@ -3,20 +3,20 @@
   slot(name="activator" :on="activatorEventHandlers")
   transition(:name="transitionName" appear)
     .w-menu(
-      v-if="custom && menuVisible"
-      ref="menu"
-      @click="hideOnMenuClick && closeMenu(true)"
+      v-if="custom && detachableVisible"
+      ref="detachable"
+      @click="hideOnMenuClick && close(true)"
       @mouseenter="showOnHover && (hoveringMenu = true)"
-      @mouseleave="showOnHover && ((hoveringMenu = false), closeMenu())"
+      @mouseleave="showOnHover && ((hoveringMenu = false), close())"
       :class="classes"
       :style="styles")
       slot
     w-card.w-menu(
-      v-else-if="menuVisible"
-      ref="menu"
-      @click.native="hideOnMenuClick && closeMenu(true)"
+      v-else-if="detachableVisible"
+      ref="detachable"
+      @click.native="hideOnMenuClick && close(true)"
       @mouseenter.native="showOnHover && (hoveringMenu = true)"
-      @mouseleave.native="showOnHover && ((hoveringMenu = false), closeMenu())"
+      @mouseleave.native="showOnHover && ((hoveringMenu = false), close())"
       :tile="tile"
       :title-class="titleClasses"
       :content-class="contentClasses"
@@ -32,12 +32,12 @@
   w-overlay(
     v-if="overlay"
     ref="overlay"
-    :model-value="menuVisible"
+    :model-value="detachableVisible"
     :persistent="persistent"
     :class="overlayClasses"
     v-bind="overlayProps"
     :z-index="(zIndex || 200) - 1"
-    @update:model-value="menuVisible = false")
+    @update:model-value="detachableVisible = false")
 </template>
 
 <script>
@@ -51,12 +51,13 @@
  */
 
 import { objectifyClasses } from '../utils/index'
-import { consoleWarn } from '../utils/console'
+import DetachableMixin from '../mixins/detachable'
 
 // const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
 
 export default {
   name: 'w-menu',
+  mixins: [DetachableMixin],
 
   props: {
     modelValue: {}, // Show or hide.
@@ -75,7 +76,8 @@ export default {
     contentClass: { type: [String, Object, Array] },
     // Position.
     arrow: { type: Boolean }, // The small triangle pointing toward the activator.
-    detachTo: { type: [String, Boolean, Object] },
+    detachTo: { type: [String, Boolean, Object], deprecated: true },
+    appendTo: { type: [String, Boolean, Object] },
     fixed: { type: Boolean },
     top: { type: Boolean },
     bottom: { type: Boolean },
@@ -97,51 +99,29 @@ export default {
   emits: ['input', 'update:modelValue', 'open', 'close'],
 
   data: () => ({
-    menuVisible: false,
+    detachableVisible: false,
     hoveringActivator: false,
     hoveringMenu: false,
     // The menu computed top & left coordinates.
-    menuCoordinates: {
+    detachableCoords: {
       top: 0,
       left: 0
     },
     activatorEl: null,
     activatorWidth: 0,
-    menuEl: null,
+    detachableEl: null,
     timeoutId: null
   }),
 
   computed: {
+    /**
+     * Other computed in the detachable mixin:
+     * - `appendToTarget`
+     * - `detachableParentEl`
+     **/
+
     transitionName () {
       return this.transition || 'scale-fade'
-    },
-
-    // DOM element to attach menu to.
-    // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
-    detachToTarget () {
-      const defaultTarget = '.w-app'
-
-      let target = this.detachTo || defaultTarget
-      if (target === true) target = defaultTarget
-      else if (target && !['object', 'string'].includes(typeof target)) target = defaultTarget
-      else if (typeof target === 'object' && !target.nodeType) {
-        target = defaultTarget
-        consoleWarn('Invalid node provided in w-menu `detach-to`. Falling back to .w-app.', this)
-      }
-      if (typeof target === 'string') target = document.querySelector(target)
-
-      if (!target) {
-        consoleWarn(`Unable to locate ${this.detachTo ? `target ${this.detachTo}` : defaultTarget}`, this)
-        target = document.querySelector(defaultTarget)
-      }
-
-      return target
-    },
-
-    // DOM element that will receive the menu.
-    // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
-    menuParentEl () {
-      return this.detachToTarget
     },
 
     position () {
@@ -154,19 +134,19 @@ export default {
       )
     },
 
+    alignment () {
+      return (
+        (['top', 'bottom'].includes(this.position) && this.alignLeft && 'left') ||
+        (['top', 'bottom'].includes(this.position) && this.alignRight && 'right') ||
+        (['left', 'right'].includes(this.position) && this.alignTop && 'top') ||
+        (['left', 'right'].includes(this.position) && this.alignBottom && 'bottom') ||
+        ''
+      )
+    },
+
     menuMinWidth () {
       if (this.minWidth === 'activator') return this.activatorWidth ? `${this.activatorWidth}px` : 0
       else return isNaN(this.minWidth) ? this.minWidth : (this.minWidth ? `${this.minWidth}px` : 0)
-    },
-
-    alignment () {
-      return (
-        ((this.top || this.bottom) && this.alignLeft && 'left') ||
-        ((this.top || this.bottom) && this.alignRight && 'right') ||
-        ((this.left || this.right) && this.alignTop && 'top') ||
-        ((this.left || this.right) && this.alignBottom && 'bottom') ||
-        ''
-      )
     },
 
     menuClasses () {
@@ -205,8 +185,8 @@ export default {
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || (this.overlay && !this.zIndex && 200) || null,
-        top: (this.menuCoordinates.top && `${~~this.menuCoordinates.top}px`) || null,
-        left: (this.menuCoordinates.left && `${~~this.menuCoordinates.left}px`) || null,
+        top: (this.detachableCoords.top && `${~~this.detachableCoords.top}px`) || null,
+        left: (this.detachableCoords.left && `${~~this.detachableCoords.left}px`) || null,
         minWidth: (this.minWidth && this.menuMinWidth) || null,
         '--w-menu-bg-color': this.arrow && this.$waveui.colors[this.bgColor || 'white']
       }
@@ -221,13 +201,13 @@ export default {
           blur: this.toggleMenu,
           mouseenter: e => {
             this.hoveringActivator = true
-            this.openMenu(e)
+            this.open(e)
           },
           mouseleave: e => {
             this.hoveringActivator = false
             // Wait 10ms, the time to get the hoveringMenu updated on mouseenter on the menu.
             setTimeout(() => {
-              if (!this.hoveringMenu) this.closeMenu()
+              if (!this.hoveringMenu) this.close()
             }, 10)
           }
         }
@@ -242,9 +222,19 @@ export default {
   },
 
   methods: {
+    /**
+     * Other methods in the `detachable` mixin:
+     * - `getActivatorCoordinates`
+     * - `computeDetachableCoords`
+     * - `onResize`
+     * - `onOutsideMousedown`
+     * - `insertInDOM`
+     * - `removeFromDOM`
+     **/
+
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     toggleMenu (e) {
-      let shouldShowMenu = this.menuVisible
+      let shouldShowMenu = this.detachableVisible
       if ('ontouchstart' in window && this.showOnHover && e.type === 'click') {
         shouldShowMenu = !shouldShowMenu
       }
@@ -261,25 +251,25 @@ export default {
       this.timeoutId = clearTimeout(this.timeoutId)
 
       if (shouldShowMenu) {
-        this.$emit('update:modelValue', (this.menuVisible = true))
+        this.$emit('update:modelValue', (this.detachableVisible = true))
         this.$emit('input', true)
         this.$emit('open')
 
-        this.openMenu(e)
+        this.open(e)
       }
-      else this.closeMenu()
+      else this.close()
     },
 
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
-    async openMenu (e) {
-      this.menuVisible = true
-      await this.insertMenu()
+    async open (e) {
+      this.detachableVisible = true
+      await this.insertInDOM()
 
       if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
 
-      if (!this.noPosition) this.computeMenuPosition(e)
+      if (!this.noPosition) this.computeDetachableCoords(e)
 
-      // In `getCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
+      // In `getActivatorCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
       // if we don't postpone the Menu apparition it will start transition from a visible menu and
       // thus will not transition.
       this.timeoutId = setTimeout(() => {
@@ -303,170 +293,29 @@ export default {
      *                        But if hideOnMenuClick is also set to true, this should force close
      *                        even while hovering the menu.
      */
-    async closeMenu (force = false) {
+    async close (force = false) {
       // Might be already closed.
       // E.g. showOnHover & hideOnMenuClick: on click, force hide then mouseleave is also firing.
-      if (!this.menuVisible) return
+      if (!this.detachableVisible) return
 
       if (this.showOnHover && !force) {
         await new Promise(resolve => setTimeout(resolve, 10))
         if (this.showOnHover && (this.hoveringMenu || this.hoveringActivator)) return
       }
 
-      this.$emit('update:modelValue', (this.menuVisible = false))
+      this.$emit('update:modelValue', (this.detachableVisible = false))
       this.$emit('input', false)
       this.$emit('close')
       // Remove the mousedown listener if the menu got closed without a mousedown outside of the menu.
       document.removeEventListener('mousedown', this.onOutsideMousedown)
       window.removeEventListener('resize', this.onResize)
-    },
-
-    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
-    onOutsideMousedown (e) {
-      if (!this.menuEl.contains(e.target) && !this.activatorEl.contains(e.target)) {
-        this.$emit('update:modelValue', (this.menuVisible = false))
-        this.$emit('input', false)
-        this.$emit('close')
-        document.removeEventListener('mousedown', this.onOutsideMousedown)
-        window.removeEventListener('resize', this.onResize)
-      }
-    },
-
-    onResize () {
-      if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
-      this.computeMenuPosition()
-    },
-
-    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
-    getCoordinates (e) {
-      // Get the activator coordinates relative to window.
-      const { top, left, width, height } = (e ? e.target : this.activatorEl).getBoundingClientRect()
-      let coords = { top, left, width, height }
-
-      // If absolute position, adjust top & left.
-      if (!this.fixed) {
-        const { top: targetTop, left: targetLeft } = this.menuParentEl.getBoundingClientRect()
-        const computedStyles = window.getComputedStyle(this.menuParentEl, null)
-        coords = {
-          ...coords,
-          top: top - targetTop + this.menuParentEl.scrollTop - parseInt(computedStyles.getPropertyValue('border-top-width')),
-          left: left - targetLeft + this.menuParentEl.scrollLeft - parseInt(computedStyles.getPropertyValue('border-left-width'))
-        }
-      }
-
-      return coords
-    },
-
-    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
-    computeMenuPosition (e) {
-      // Get the activator coordinates.
-      let { top, left, width, height } = this.getCoordinates(e)
-
-      // 1. First display the menu but hide it (So we can get its dimension).
-      // --------------------------------------------------
-      this.menuEl.style.visibility = 'hidden'
-      this.menuEl.style.display = 'flex'
-      const computedStyles = window.getComputedStyle(this.menuEl, null)
-
-      // 2. Position the menu top, left, right, bottom and apply chosen alignment.
-      // --------------------------------------------------
-      // Subtract half or full activator width or height and menu width or height according to the
-      // menu alignment.
-      // Note: the menu position relies on transform translate, the custom animation may override the
-      // css transform property so do without it i.e. no translateX(-50%), and recalculate top & left
-      // manually.
-      switch (this.position) {
-        case 'top': {
-          top -= this.menuEl.offsetHeight
-          if (this.alignRight) {
-            // left: 100% of activator.
-            left += width - this.menuEl.offsetWidth +
-                    parseInt(computedStyles.getPropertyValue('border-right-width'))
-          }
-          else if (!this.alignLeft) left += (width - this.menuEl.offsetWidth) / 2 // left: 50% of activator - half menu width.
-          break
-        }
-        case 'bottom': {
-          top += height
-          if (this.alignRight) {
-            // left: 100% of activator.
-            left += width - this.menuEl.offsetWidth +
-                    parseInt(computedStyles.getPropertyValue('border-right-width'))
-          }
-          else if (!this.alignLeft) left += (width - this.menuEl.offsetWidth) / 2 // left: 50% of activator - half menu width.
-          break
-        }
-        case 'left': {
-          left -= this.menuEl.offsetWidth
-          if (this.alignBottom) top += height - this.menuEl.offsetHeight
-          else if (!this.alignTop) top += (height - this.menuEl.offsetHeight) / 2 // top: 50% of activator - half menu height.
-          break
-        }
-        case 'right': {
-          left += width
-          if (this.alignBottom) {
-            top += height - this.menuEl.offsetHeight +
-                   parseInt(computedStyles.getPropertyValue('margin-top'))
-          }
-          else if (!this.alignTop) {
-            top += (height - this.menuEl.offsetHeight) / 2 + // top: 50% of activator - half menu height.
-                   parseInt(computedStyles.getPropertyValue('margin-top'))
-          }
-          break
-        }
-      }
-
-      // 3. Keep fully in viewport.
-      // @todo: do this.
-      // --------------------------------------------------
-      // if (this.position === 'top' && ((top - this.menuEl.offsetHeight) < 0)) {
-      //   const margin = - parseInt(computedStyles.getPropertyValue('margin-top'))
-      //   top -= top - this.menuEl.offsetHeight - margin - marginFromWindowSide
-      // }
-      // else if (this.position === 'left' && left - this.menuEl.offsetWidth < 0) {
-      //   const margin = - parseInt(computedStyles.getPropertyValue('margin-left'))
-      //   left -= left - this.menuEl.offsetWidth - margin - marginFromWindowSide
-      // }
-      // else if (this.position === 'right' && left + width + this.menuEl.offsetWidth > window.innerWidth) {
-      //   const margin = parseInt(computedStyles.getPropertyValue('margin-left'))
-      //   left -= left + width + this.menuEl.offsetWidth - window.innerWidth + margin + marginFromWindowSide
-      // }
-      // else if (this.position === 'bottom' && top + height + this.menuEl.offsetHeight > window.innerHeight) {
-      //   const margin = parseInt(computedStyles.getPropertyValue('margin-top'))
-      //   top -= top + height + this.menuEl.offsetHeight - window.innerHeight + margin + marginFromWindowSide
-      // }
-
-      // 4. Hide the menu again so the transition happens correctly.
-      // --------------------------------------------------
-      this.menuEl.style.visibility = null
-
-      // The menu coordinates are also recalculated while resizing window with open menu: keep the menu visible.
-      if (!this.menuVisible) this.menuEl.style.display = 'none'
-
-      this.menuCoordinates = { top, left }
-    },
-
-    insertMenu () {
-      return new Promise(resolve => {
-        this.$nextTick(() => {
-          this.menuEl = this.$refs.menu?.$el || this.$refs.menu
-
-          // Move the menu elsewhere in the DOM.
-          // wrapper.parentNode.insertBefore(this.menuEl, wrapper)
-          this.detachToTarget.appendChild(this.menuEl)
-          resolve()
-        })
-      })
-    },
-
-    removeMenu () {
-      if (this.menuEl && this.menuEl.parentNode) this.menuEl.remove()
     }
   },
 
   mounted () {
     const wrapper = this.$el
     this.activatorEl = wrapper.firstElementChild
+
     // Unwrap the activator element.
     wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
 
@@ -480,18 +329,22 @@ export default {
   },
 
   beforeUnmount () {
-    this.removeMenu()
+    this.removeFromDOM()
     if (this.overlay && this.overlayEl.parentNode) this.overlayEl.remove()
     if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.remove()
   },
 
   watch: {
     modelValue (bool) {
-      if (!!bool !== this.menuVisible) this.toggleMenu({ type: 'click', target: this.activatorEl })
+      if (!!bool !== this.detachableVisible) this.toggleMenu({ type: 'click', target: this.activatorEl })
     },
     detachTo () {
-      this.removeMenu()
-      this.insertMenu()
+      this.removeFromDOM()
+      this.insertInDOM()
+    },
+    appendTo () {
+      this.removeFromDOM()
+      this.insertInDOM()
     }
   }
 }

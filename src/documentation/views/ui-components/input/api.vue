@@ -48,7 +48,7 @@ const slots = {
 
 const events = {
   input: {
-    description: 'Emitted each time the input text changes.<br>Updates the v-model value in Vue 2.x only.',
+    description: 'Emitted each time the input text (or file) changes.<br>Updates the v-model value in Vue 2.x only.',
     params: {
       '[String]': 'The new textual input value.'
     }

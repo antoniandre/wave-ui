@@ -9,6 +9,12 @@
           span.types.teal="[{{ item.type.join(', ') }}]"
           | ,
           w-tag.text-upper.ml2(v-if="item.required" sm outline color="red") Required
+          w-tag.text-upper.ml2(
+            v-else-if="item.deprecated"
+            outline
+            bg-color="black"
+            color="white"
+            round) Deprecated
           span.grey.ml2(v-else)
             | Default:
             strong.default-value.code.deep-orange-light1.ml2 {{ item.default }}

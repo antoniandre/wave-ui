@@ -25,7 +25,8 @@ const propsDescs = {
   round: 'Sets a maximum border-radius on the corners of the tooltip, giving it a round look.',
   tooltipClass: 'Provide custom CSS classes for the tooltip element.',
   // Position.
-  detachTo: 'Moves the tooltip element into another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `<span class="code">.w-app</span>` will be the target.<br>By default a wrapper is created around the activator element and the tooltip is appended inside it.',
+  appendTo: 'Moves the tooltip element into another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `<span class="code">.w-app</span>` will be the target.<br>By default a wrapper is created around the activator element and the tooltip is appended inside it.',
+  detachTo: 'Deprecated. Use <code>append-to</code> instead.',
   fixed: 'Sets the CSS position of the tooltip to <code>fixed</code> (absolute by default).',
   top: 'Places the tooltip at the top of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the top of its container otherwise.',
   bottom: 'Places the tooltip at the bottom of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the bottom of its container otherwise.',
@@ -35,13 +36,15 @@ const propsDescs = {
 }
 
 const slots = {
-  activator: { description: '<strong>This slot is required and must have the v-on="on" directive set on it for the tooltip to toggle correctly.</strong><br>The activator can be any visible DOM element or mounted component.' },
+  activator: { description: '<strong>This slot is required and must have the <code>v-on="on"</code> directive set on it for the tooltip to toggle correctly.</strong><br>The activator can be any visible DOM element or mounted component.' },
   default: { description: 'The tooltip content.' }
 }
 
 const eventsDescs = {
-  // input: 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 2.x only.',
-  // 'update:modelValue': 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 3 only.'
+  input: 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 2.x only.',
+  'update:modelValue': 'Emitted each time the state of the component changes (when showing or hiding the tooltip).<br>Updates the v-model value in Vue 3 only.',
+  close: 'Emitted on tooltip close.',
+  open: 'Emitted on tooltip open.'
 }
 
 export default {

@@ -29,7 +29,8 @@ const propsDescs = {
   menuClass: 'Provide custom CSS classes for the menu element.',
   titleClass: 'Provide custom CSS classes for the menu\'s title when using the default card layout (when not using the <code>custom</code> prop).',
   contentClass: 'Provide custom CSS classes for the menu\'s content when using the default card layout (when not using the <code>custom</code> prop).',
-  detachTo: 'Moves the menu element to another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `<span class="code">.w-app</span>` will be the target.<br>By default a wrapper is created around the activator element and the menu is appended inside it.',
+  appendTo: 'Moves the menu element to another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `<span class="code">.w-app</span>` will be the target.<br>By default a wrapper is created around the activator element and the menu is appended inside it.',
+  detachTo: 'Deprecated. Use <code>append-to</code> instead.',
   noPosition: 'Skip the menu positioning calculation, if you prefer to set it via CSS. Setting this prop to <code>true</code> will also disable the side positioning (top, left, right, bottom) and the alignments.',
   fixed: 'Sets the CSS position of the menu to <code>fixed</code> (absolute by default).',
   top: 'Places the menu at the top of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the top of its container otherwise.',
@@ -49,7 +50,7 @@ const propsDescs = {
 }
 
 const slots = {
-  activator: { description: '<strong>This slot is required and must have the v-on="on" directive set on it for the menu to toggle correctly.</strong><br>The activator can be any visible DOM element or mounted component.' },
+  activator: { description: '<strong>This slot is required and must have the <code>v-on="on"</code> directive set on it for the menu to toggle correctly.</strong><br>The activator can be any visible DOM element or mounted component.' },
   title: { description: 'By default (when <code>custom</code> is set to false), the menu uses a <span class="code">w-card</span>. This slot allows a custom title for the <span class="code">w-card</span>.' },
   default: { description: 'The menu content.' },
   actions: { description: 'By default (when <code>custom</code> is set to false), the menu uses a <span class="code">w-card</span>. This slot allows setting the actions slot of the <span class="code">w-card</span>.' }
