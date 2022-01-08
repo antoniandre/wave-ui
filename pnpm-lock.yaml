@@ -4,7 +4,7 @@ specifiers:
   '@babel/core': ^7.16.0
   '@babel/eslint-parser': ^7.16.3
   '@babel/plugin-proposal-class-properties': ^7.16.0
-  '@mdi/font': ^5.9.55
+  '@mdi/font': ^6.5.95
   '@vitejs/plugin-vue': ^1.10.1
   autoprefixer: ^10.4.0
   axios: ^0.21.4
@@ -34,11 +34,13 @@ specifiers:
   vueperslides: ^2.15.2
   vuex: ^3.6.2
 
+dependencies:
+  '@mdi/font': 6.5.95
+
 devDependencies:
   '@babel/core': 7.16.0
   '@babel/eslint-parser': 7.16.3_@babel+core@7.16.0+eslint@7.32.0
   '@babel/plugin-proposal-class-properties': 7.16.0_@babel+core@7.16.0
-  '@mdi/font': 5.9.55
   '@vitejs/plugin-vue': 1.10.1_vite@2.6.14
   autoprefixer: 10.4.0
   axios: 0.21.4
@@ -435,9 +437,9 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@mdi/font/5.9.55:
-    resolution: {integrity: sha512-jswRF6q3eq8NWpWiqct6q+6Fg/I7nUhrxYJfiEM8JJpap0wVJLQdbKtyS65GdlK7S7Ytnx3TTi/bmw+tBhkGmg==}
-    dev: true
+  /@mdi/font/6.5.95:
+    resolution: {integrity: sha512-ES5rj6J39FUkHe/b3C9SJs8bqIungYhuU7rBINTBaHOv/Ce4RCb3Gw08CZVl32W33UEkgRkzyWaIedV4at+QHg==}
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
