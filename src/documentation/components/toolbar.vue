@@ -5,18 +5,18 @@ w-toolbar.main-toolbar(fixed)
     span.grey-dark1 Wave UI
   .spacer
   strong.version.grey.size--xs(v-html="`Version ${version}`")
-  w-tooltip(z-index="20")
+  w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
       div.ml1(v-on="on")
         router-link(to="/release-notes" @click.native="scrollTop(true)")
           w-icon(lg) mdi mdi-update
     | Release notes
-  w-tooltip(z-index="20")
+  w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
       a.grey-dark3.ml2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
         w-icon(lg) mdi mdi-github
     .text-center View the project#[br]on Github
-  w-tooltip(z-index="20")
+  w-tooltip(z-index="20" align-right append-to=".main-toolbar")
     template(#activator="{ on }")
       div.ml2.mr1(v-on="on")
         router-link.pink-light1(to="/backers" @click.native="scrollTop(true)")

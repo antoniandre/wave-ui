@@ -2,23 +2,23 @@
 .w-confirm
   w-menu(v-model="showPopup" v-bind="wMenuProps")
     template(#activator="{ on }")
-      w-button.w-confirm__button(v-on="on" v-bind="buttonProps")
+      w-button.w-confirm__button(v-on="{ ...$listeners, ...on }" v-bind="buttonProps")
         slot
     w-flex(:column="!inline" align-center)
       div
-        slot(name="question") Are you sure?
+        slot(name="question") {{ question }}
       .w-flex.justify-end(:class="inline ? 'ml2' : 'mt2'")
         w-button.mr2(
-          v-if="!noCancel"
-          v-bind="cancelButton"
+          v-if="cancel !== false"
+          v-bind="cancelButtonProps"
           :bg-color="(cancelButton || {}).bgColor || 'error'"
           @click="onCancel")
-          slot(name="cancel") Cancel
+          slot(name="cancel") {{ cancelButton.label }}
         w-button(
-          v-bind="confirmButton"
+          v-bind="confirmButtonProps"
           :bg-color="(confirmButton || {}).bgColor || 'success'"
           @click="onConfirm")
-          slot(name="confirm") Confirm
+          slot(name="confirm") {{ confirmButton.label }}
 </template>
 
 <script>
@@ -30,11 +30,16 @@ export default {
     color: { type: String },
     icon: { type: String },
     mainButton: { type: Object }, // Allow passing down an object of props to the w-button component.
+    question: { type: String, default: 'Are you sure?' },
 
     // Cancel & confirm buttons props.
-    noCancel: { type: Boolean }, // Removes the cancel button.
-    cancelButton: { type: [Boolean, Object] }, // Allow passing down an object of props to the w-button component.
-    confirmButton: { type: Object }, // Allow passing down an object of props to the w-button component.
+    // Allow passing down an object of props to the w-button component.
+    // If a string is given, that will be the label of the button.
+    // If false, no cancel button.
+    cancel: { type: [Boolean, Object, String], default: undefined },
+    // Allow passing down an object of props to the w-button component.
+    // If a string is given, that will be the label of the button.
+    confirm: { type: [Object, String] },
 
     // global menu props.
     inline: { type: Boolean }, // The layout inside the menu.
@@ -63,6 +68,26 @@ export default {
   }),
 
   computed: {
+    cancelButton () {
+      let button = { label: typeof this.cancel === 'string' ? this.cancel : 'Cancel' }
+      if (typeof this.cancel === 'object') button = Object.assign({}, button, this.cancel)
+      return button
+    },
+    // Props to pass down to the w-button component.
+    cancelButtonProps () {
+      const { label, ...props } = this.cancelButton // Everything except label.
+      return props
+    },
+    confirmButton () {
+      let button = { label: typeof this.confirm === 'string' ? this.confirm : 'Confirm' }
+      if (typeof this.confirm === 'object') button = Object.assign({}, button, this.confirm)
+      return button
+    },
+    // Props to pass down to the w-button component.
+    confirmButtonProps () {
+      const { label, ...props } = this.confirmButton // Everything except label.
+      return props
+    },
     wMenuProps () {
       return {
         top: this.top,

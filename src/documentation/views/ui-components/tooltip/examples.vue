@@ -7,7 +7,7 @@ div.tooltips-demo
     In this case you can add classes to the wrapper to style it as desired.#[br]#[br]
     But in some cases, for instance if the activator element is placed in a container that has a hidden
     overflow, the tooltip needs to be placed outside of this container to be fully visible.#[br]
-    You can use the #[code detachTo] prop to place it elsewhere in the DOM, like in the
+    You can use the #[code appendTo] prop to place it elsewhere in the DOM, like in the
     #[a(href="#appending-to-a-dom-node") Appending to a particular DOM node] example.#[br]
     In this case, the wrapper will be hidden and unstylable whereas the tooltip itself will be appended to
     the DOM node you provided.
@@ -33,7 +33,7 @@ div.tooltips-demo
       template(#activator="{ on }")
         w-icon.ma2(v-on="on" xl color="primary-light2") mdi mdi-home
       | Home
-    //- template(#pug).
+    template(#pug).
       .text-center
         w-tooltip(left)
           template(#activator="{ on }")
@@ -109,6 +109,233 @@ div.tooltips-demo
         &lt;/w-tooltip&gt;
       &lt;/div&gt;
 
+  title-link(h2) Alignments
+  p In addition to positions, you can align the tooltip with its activator.
+  example.example6
+    .title4.mb2 Top position
+    w-tooltip(append-to=".example6" top align-left)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align left
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" top)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Centered
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" top align-right)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align right
+      | Tooltip content,#[br]on multiple lines.
+
+    .title4.mt6.mb2 Bottom position
+    w-tooltip(append-to=".example6" align-left)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align left
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6")
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Centered
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" align-right)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align right
+      | Tooltip content,#[br]on multiple lines.
+
+    .title4.mt6.mb2 Right position
+    w-tooltip(append-to=".example6" right align-top)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align top
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" right)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Centered
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" right align-bottom)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align bottom
+      | Tooltip content,#[br]on multiple lines.
+
+    .title4.mt6.mb2 Left position
+    w-tooltip(append-to=".example6" left align-top)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align top
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" left)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Centered
+      | Tooltip content,#[br]on multiple lines.
+    w-tooltip(append-to=".example6" left align-bottom)
+      template(#activator="{ on }")
+        w-button.ma1(v-on="on") Align bottom
+      | Tooltip content,#[br]on multiple lines.
+    template(#pug).
+      .title4.mb2 top position
+      w-tooltip(top align-left)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align left
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(top)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Centered
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(top align-right)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align right
+        | Tooltip content,\#[br]on multiple lines.
+
+      .title4.mt6.mb2 Bottom position
+      w-tooltip(align-left)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align left
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Centered
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(align-right)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align right
+        | Tooltip content,\#[br]on multiple lines.
+
+      .title4.mt6.mb2 Right position
+      w-tooltip(right align-top)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align top
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(right)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Centered
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(right align-bottom)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align bottom
+        | Tooltip content,\#[br]on multiple lines.
+
+      .title4.mt6.mb2 Left position
+      w-tooltip(left align-top)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align top
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(left)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Centered
+        | Tooltip content,\#[br]on multiple lines.
+      w-tooltip(left align-bottom)
+        template(#activator="{ on }")
+          w-button.ma1(v-on="on") Align bottom
+        | Tooltip content,\#[br]on multiple lines.
+    template(#html).
+      &lt;div class="title4 mb2"&gt;Top position&lt;/div&gt;
+      &lt;w-tooltip top align-left&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align left
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip top&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Centered
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip top align-right&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align right
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;div class="title4 mt6 mb2"&gt;Bottom position&lt;/div&gt;
+      &lt;w-tooltip align-left&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align left
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Centered
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip align-right&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align right
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;div class="title4 mt6 mb2"&gt;Right position&lt;/div&gt;
+      &lt;w-tooltip right align-top&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align top
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip right&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Centered
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip right align-bottom&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;Alig
+            n bottom
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;div class="title4 mt6 mb2"&gt;Left position&lt;/div&gt;
+      &lt;w-tooltip left align-top&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;A
+            lign top
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip left&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Centered
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip left align-bottom&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Align bottom
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Tooltip content,<br>on multiple lines.
+      &lt;/w-tooltip&gt;
+
   title-link(h2) Toggle on click
   example(content-class="text-center")
     w-tooltip(show-on-click left)
@@ -124,21 +351,21 @@ div.tooltips-demo
           w-icon.mr1 wi-star
           | Star
       | Star
-    //- template(#pug).
-    //-   .text-center
-    //-     w-tooltip(show-on-click left)
-    //-       template(#activator="{ on }")
-    //-         w-button.ma2(v-on="on" bg-color="info")
-    //-           w-icon.mr1 wi-star
-    //-           | Star
-    //-       | Star
+    template(#pug).
+      .text-center
+        w-tooltip(show-on-click left)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on" bg-color="info")
+              w-icon.mr1 wi-star
+              | Star
+          | Star
 
-    //-     w-tooltip(show-on-click right)
-    //-       template(#activator="{ on }")
-    //-         w-button.ma2(v-on="on" bg-color="info-dark2" dark)
-    //-           w-icon.mr1 wi-star
-    //-           | Star
-    //-       | Star
+        w-tooltip(show-on-click right)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on" bg-color="info-dark2" dark)
+              w-icon.mr1 wi-star
+              | Star
+          | Star
     template(#html).
       &lt;div class="text-center"&gt;
         &lt;w-tooltip show-on-click left&gt;
@@ -173,7 +400,37 @@ div.tooltips-demo
         &lt;/w-tooltip&gt;
       &lt;/div&gt;
 
-  title-link(h2) Using v-model
+  title-link(h2) Persistent
+  p.
+    By default with the #[code show-on-click] option, the tooltip will hide when you click
+    anywhere once open.#[br]
+    To make it persistent, use the #[code persistent] prop, so a click will not close the open
+    tooltip.#[br]
+    Clicking on the activator can always toggle the tooltip regardless of the #[code persistent]
+    prop.
+  example(content-class="text-center my4 example-persistent")
+    w-tooltip(show-on-click persistent append-to=".example-persistent")
+      template(#activator="{ on }")
+        w-icon(v-on="on" xl) wi-star
+      | Star
+
+    template(#pug).
+      w-tooltip(show-on-click persistent)
+        template(#activator="{ on }")
+          w-icon(v-on="on" xl) wi-star
+        | Star
+
+    template(#html).
+      &lt;w-tooltip
+        show-on-click
+        persistent&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-icon v-on="on" xl&gt;wi-star&lt;/w-icon&gt;
+        &lt;/template&gt;
+        Star
+      &lt;/w-tooltip&gt;
+
+  title-link(h2) Using a v-model
   title-link(h3) Toggle with v-model
   p Click the button to toggle the tooltips.
   example(content-class="text-center my4")
@@ -185,27 +442,46 @@ div.tooltips-demo
       | {{ showTooltip ? 'Hide' : 'Show' }} tooltip
 
     div.d-iblock.my2.mx6
-      w-tooltip.ma2(:model-value="showTooltip" show-on-click left)
+      w-tooltip(
+        :model-value="showTooltip"
+        show-on-click
+        left
+        @open="tooltipVisible = true"
+        @close="onTooltipClose")
         template(#activator="{ on }")
-          w-icon(v-on="on") wi-star
+          w-icon(v-on="on" lg) wi-star
         | Star
 
-      w-tooltip.ma2(:model-value="showTooltip" show-on-click top)
+      w-tooltip(
+        :model-value="showTooltip"
+        show-on-click
+        top
+        @open="tooltipVisible = true"
+        @close="onTooltipClose")
         template(#activator="{ on }")
-          w-icon(v-on="on") wi-star
+          w-icon(v-on="on" lg) wi-star
         | Star
 
-      w-tooltip.ma2(:model-value="showTooltip" show-on-click)
+      w-tooltip(
+        :model-value="showTooltip"
+        show-on-click
+        @open="tooltipVisible = true"
+        @close="onTooltipClose")
         template(#activator="{ on }")
-          w-icon(v-on="on") wi-star
+          w-icon(v-on="on" lg) wi-star
         | Star
 
-      w-tooltip.ma2(:model-value="showTooltip" show-on-click right)
+      w-tooltip(
+        :model-value="showTooltip"
+        show-on-click
+        right
+        @open="tooltipVisible = true"
+        @close="onTooltipClose")
         template(#activator="{ on }")
-          w-icon(v-on="on") wi-star
+          w-icon(v-on="on" lg) wi-star
         | Star
 
-    //- template(#pug).
+    template(#pug).
       .text-center
         w-button.my2.mx6(
           @click="showTooltip = !showTooltip"
@@ -215,24 +491,24 @@ div.tooltips-demo
           | {{ '\{\{ showTooltip ? \'Hide\' : \'Show\' \}\}' }} tooltip
 
         div.d-iblock.my2.mx6
-          w-tooltip.ma2(v-model="showTooltip" show-on-click left)
+          w-tooltip(v-model="showTooltip" show-on-click left)
             template(#activator="{ on }")
-              w-icon(v-on="on") wi-star
+              w-icon.ma2(v-on="on" lg) wi-star
             | Star
 
-          w-tooltip.ma2(v-model="showTooltip" show-on-click top)
+          w-tooltip(v-model="showTooltip" show-on-click top)
             template(#activator="{ on }")
-              w-icon(v-on="on") wi-star
+              w-icon.ma2(v-on="on" lg) wi-star
             | Star
 
-          w-tooltip.ma2(v-model="showTooltip" show-on-click)
+          w-tooltip(v-model="showTooltip" show-on-click)
             template(#activator="{ on }")
-              w-icon(v-on="on") wi-star
+              w-icon.ma2(v-on="on" lg) wi-star
             | Star
 
-          w-tooltip.ma2(v-model="showTooltip" show-on-click right)
+          w-tooltip(v-model="showTooltip" show-on-click right)
             template(#activator="{ on }")
-              w-icon(v-on="on") wi-star
+              w-icon.ma2(v-on="on" lg) wi-star
             | Star
     template(#html).
       &lt;div class="text-center"&gt;
@@ -247,44 +523,40 @@ div.tooltips-demo
 
         &lt;div class="d-iblock my2 mx6"&gt;
           &lt;w-tooltip
-            class="ma2"
             v-model="showTooltip"
             show-on-click
             left&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon v-on="on"&gt;wi-star&lt;/w-icon&gt;
+              &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
 
           &lt;w-tooltip
-            class="ma2"
             v-model="showTooltip"
             show-on-click
             top&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon v-on="on"&gt;wi-star&lt;/w-icon&gt;
+              &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
 
           &lt;w-tooltip
-            class="ma2"
             v-model="showTooltip"
             show-on-click&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon v-on="on"&gt;wi-star&lt;/w-icon&gt;
+              &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
 
           &lt;w-tooltip
-            class="ma2"
             v-model="showTooltip"
             show-on-click
             right&gt;
             &lt;template #activator="{ on }"&gt;
-              &lt;w-icon v-on="on"&gt;wi-star&lt;/w-icon&gt;
+              &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
             Star
           &lt;/w-tooltip&gt;
@@ -300,14 +572,14 @@ div.tooltips-demo
   example(content-class="text-center my4")
     w-tooltip(v-model="showTooltip2" show-on-click right)
       template(#activator="{ on }")
-        w-icon(v-on="on") wi-star
+        w-icon(v-on="on" lg) wi-star
       | Star
     div.mt4 The tooltip is {{ showTooltip2 ? 'visible' : 'hidden' }}.
 
-    //- template(#pug).
+    template(#pug).
       w-tooltip(v-model="showTooltip" show-on-click right)
         template(#activator="{ on }")
-          w-icon(v-on="on") wi-star
+          w-icon(v-on="on" lg) wi-star
         | Star
       div.mt4 The tooltip is {{ "\{\{ showTooltip ? 'visible' : 'hidden' \}\}" }}.
 
@@ -317,7 +589,7 @@ div.tooltips-demo
         show-on-click
         right&gt;
         &lt;template #activator="{ on }"&gt;
-          &lt;w-icon v-on="on"&gt;wi-star&lt;/w-icon&gt;
+          &lt;w-icon v-on="on" lg&gt;wi-star&lt;/w-icon&gt;
         &lt;/template&gt;
         Star
       &lt;/w-tooltip&gt;
@@ -354,8 +626,8 @@ div.tooltips-demo
       template(#activator="{ on }")
         w-icon.ma2(v-on="on" xl) wi-star
       | Star
-    //- template(#pug).
-      .text-center.pb8
+    template(#pug).
+      .text-center
         w-tooltip(color="white" bg-color="blue")
           template(#activator="{ on }")
             w-icon.ma2(v-on="on" xl color="blue") wi-star
@@ -376,7 +648,7 @@ div.tooltips-demo
             w-icon.ma2(v-on="on" xl) wi-star
           | Star
     template(#html).
-      &lt;div class="text-center pb8"&gt;
+      &lt;div class="text-center"&gt;
         &lt;w-tooltip color="white" bg-color="blue"&gt;
           &lt;template #activator="{ on }"&gt;
             &lt;w-icon
@@ -445,7 +717,7 @@ div.tooltips-demo
       template(#activator="{ on }")
         w-icon.ma2(v-on="on" xl color="pink-light1") mdi mdi-heart
       | Shadow
-    //- template(#pug).
+    template(#pug).
       .text-center.pb8
         w-tooltip(color="red-light2" tile)
           template(#activator="{ on }")
@@ -503,32 +775,32 @@ div.tooltips-demo
 
   title-link(h2) Different contents
   example(content-class="text-center")
-    w-tooltip.ma3(color="primary")
+    w-tooltip(color="primary")
       template(#activator="{ on }")
-        span(v-on="on") Content with icon
+        span.ma3(v-on="on") Content with icon
       w-icon.mr1 wi-star
       | Star
 
-    w-tooltip.ma3(color="primary")
+    w-tooltip(color="primary")
       template(#activator="{ on }")
-        span(v-on="on" ref="truc") Very long content
+        span.ma3(v-on="on") Very long content
       | Lorem ipsum, dolor sit amet consectetur adipisicing elit.
       br
       | Esse quo non, beatae dolore nihil quae ratione dignissimos molestiae hic, tempore blanditiis soluta, quasi officia!
       br
       br
       | Recusandae distinctio perferendis expedita pariatur fuga.
-    //- template(#pug).
+    template(#pug).
       .text-center
-        w-tooltip.ma3(color="primary")
+        w-tooltip(color="primary")
           template(#activator="{ on }")
-            span(v-on="on") Content with icon
+            span.ma3(v-on="on") Content with icon
           w-icon.mr1 wi-star
           | Star
 
-        w-tooltip.ma3(color="primary")
+        w-tooltip(color="primary")
           template(#activator="{ on }")
-            span(v-on="on" ref="truc") Very long content
+            span.ma3(v-on="on") Very long content
           | Lorem ipsum, dolor sit amet consectetur adipisicing elit.
           br
           | Esse quo non, beatae dolore nihil quae ratione dignissimos molestiae hic, tempore blanditiis soluta, quasi officia!
@@ -537,9 +809,9 @@ div.tooltips-demo
           | Recusandae distinctio perferendis expedita pariatur fuga.
     template(#html).
       &lt;div class="text-center"&gt;
-        &lt;w-tooltip class="ma3" color="primary"&gt;
+        &lt;w-tooltip color="primary"&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;span v-on="on"&gt;
+            &lt;span v-on="on" class="ma3"&gt;
               Content with icon
             &lt;/span&gt;
           &lt;/template&gt;
@@ -547,9 +819,9 @@ div.tooltips-demo
           Star
         &lt;/w-tooltip&gt;
 
-        &lt;w-tooltip class="ma3" color="primary"&gt;
+        &lt;w-tooltip color="primary"&gt;
           &lt;template #activator="{ on }"&gt;
-            &lt;span v-on="on" ref="truc"&gt;
+            &lt;span v-on="on" class="ma3"&gt;
               Very long content
             &lt;/span&gt;
           &lt;/template&gt;
@@ -582,7 +854,7 @@ div.tooltips-demo
         template(#activator="{ on }")
           w-icon.ma2(v-on="on" color="primary" xl) mdi mdi-home
         | Home
-    //- template(#pug).
+    template(#pug).
       .text-center
         w-radios.my4(inline v-model="transition" :items="transitions")
         .text-center.py6
@@ -686,16 +958,16 @@ div.tooltips-demo
   example.mb12(content-class="pa0")
     .another-container.text-center.green-light5--bg.pa6
       w-card(bg-color="yellow-light5")
-        w-tooltip(detach-to=".another-container")
+        w-tooltip(append-to=".another-container")
           template(#activator="{ on }")
             w-tag(v-on="on" lg color="pink-light1" bg-color="pink-light5")
               w-icon.mr1 mdi mdi-bomb
               | Hover me
           span This tooltip is appended to the #[span.green green] container!
-    //- template(#pug).
+    template(#pug).
       .wrapper.text-center.green-light5--bg.pa6
         w-card(bg-color="yellow-light5")
-          w-tooltip(detach-to=".wrapper")
+          w-tooltip(append-to=".wrapper")
             template(#activator="{ on }")
               w-tag(v-on="on" lg color="pink-light1" bg-color="pink-light5")
                 w-icon.mr1 mdi mdi-bomb
@@ -704,7 +976,7 @@ div.tooltips-demo
     template(#html).
       &lt;div class="wrapper text-center green-light5--bg pa6"&gt;
         &lt;w-card bg-color="yellow-light5"&gt;
-          &lt;w-tooltip detach-to=".wrapper"&gt;
+          &lt;w-tooltip append-to=".wrapper"&gt;
             &lt;template #activator="{ on }"&gt;
               &lt;w-tag
                 v-on="on"
@@ -739,8 +1011,8 @@ div.tooltips-demo
         border-radius: 100%;
       }
 
-      .w-card:before {top: 0;left: 0;}
-      .w-card:after {bottom: 0;right: 0;}
+      .w-card:before {top: -3em;left: -3em;}
+      .w-card:after {bottom: -3em;right: -3em;}
 
       .w-tag {z-index: 1;}
 
@@ -763,7 +1035,13 @@ export default {
       { label: 'Fade', value: 'fade' },
       { label: 'Scale-fade', value: 'scale-fade' }
     ]
-  })
+  }),
+
+  methods: {
+    onTooltipClose () {
+      setTimeout(() => (this.showTooltip = false), 100)
+    }
+  }
 }
 </script>
 

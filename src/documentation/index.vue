@@ -48,7 +48,7 @@ w-app
             template(#activator="{ on }")
               w-icon.ml1(v-on="on" sm) mdi mdi-sass
             | SASS
-          w-tooltip(top)
+          w-tooltip(top align-right)
             template(#activator="{ on }")
               w-icon.ml1.heart(v-on="on" sm) mdi mdi-heart
             | Love
