@@ -7,18 +7,24 @@ div
   title-link(h2) Three dots (default)
   example(content-class="w-flex justify-center")
     w-spinner
+    template(#pug).
+      w-spinner
     template(#html).
       &lt;w-spinner /&gt;
 
   title-link(h2) Fade
   example(content-class="w-flex justify-center")
     w-spinner(fade)
+    template(#pug).
+      w-spinner(fade)
     template(#html).
       &lt;w-spinner fade /&gt;
 
   title-link(h2) Bounce
   example(content-class="w-flex justify-center")
     w-spinner(bounce)
+    template(#pug).
+      w-spinner(bounce)
     template(#html).
       &lt;w-spinner bounce /&gt;
 
@@ -29,6 +35,9 @@ div
   example(content-class="w-flex")
     w-button.mr4(@click="showSpinner = !showSpinner") Toggle spinner
     w-spinner(:value="showSpinner")
+    template(#pug).
+      w-button.mr4(@click="showSpinner = !showSpinner") Toggle spinner
+      w-spinner(:value="showSpinner")
     template(#html).
       &lt;w-button @click="showSpinner = !showSpinner"&gt;Toggle spinner&lt;/w-button&gt;
       &lt;w-spinner :value="showSpinner" /&gt;
@@ -48,13 +57,20 @@ div
     w-spinner.ma1(fade lg)
     w-spinner.ma1(fade xl)
     w-spinner.ma1(fade size="5em")
+    template(#pug).
+      w-spinner.ma1(fade xs)
+      w-spinner.ma1(fade sm)
+      w-spinner.ma1(fade md)
+      w-spinner.ma1(fade lg)
+      w-spinner.ma1(fade xl)
+      w-spinner.ma1(fade size="5em")
     template(#html).
-      &lt;w-spinner fade xs /&gt;
-      &lt;w-spinner fade sm /&gt;
-      &lt;w-spinner fade md /&gt;
-      &lt;w-spinner fade lg /&gt;
-      &lt;w-spinner fade xl /&gt;
-      &lt;w-spinner fade size="5em" /&gt;
+      &lt;w-spinner fade xs class="ma1" /&gt;
+      &lt;w-spinner fade sm class="ma1" /&gt;
+      &lt;w-spinner fade md class="ma1" /&gt;
+      &lt;w-spinner fade lg class="ma1" /&gt;
+      &lt;w-spinner fade xl class="ma1" /&gt;
+      &lt;w-spinner fade size="5em" class="ma1" /&gt;
 
   title-link(h2) Colors
   p Like in most components, you can set a #[code color] for the spinner.
@@ -64,12 +80,14 @@ div
     w-spinner.ma1(fade color="orange")
     w-spinner.ma1(fade color="error")
     w-spinner.ma1(fade color="pink")
+    template(#pug).
+      w-spinner.ma1(fade color="pink")
     template(#html).
-      &lt;w-spinner fade color="green" /&gt;
-      &lt;w-spinner fade color="amber" /&gt;
-      &lt;w-spinner fade color="orange" /&gt;
-      &lt;w-spinner fade color="error" /&gt;
-      &lt;w-spinner fade color="pink" /&gt;
+      &lt;w-spinner fade color="green" class="ma1" /&gt;
+      &lt;w-spinner fade color="amber" class="ma1" /&gt;
+      &lt;w-spinner fade color="orange" class="ma1" /&gt;
+      &lt;w-spinner fade color="error" class="ma1" /&gt;
+      &lt;w-spinner fade color="pink" class="ma1" /&gt;
 </template>
 
 <script>
