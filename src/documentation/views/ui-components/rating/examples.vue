@@ -3,7 +3,7 @@ div
   title-link(h2) Default
   example
     w-rating
-    //- template(#pug).
+    template(#pug).
       w-rating
     template(#html).
       &lt;w-rating&gt;&lt;/w-rating&gt;
@@ -18,7 +18,7 @@ div
     div.mt2
       strong.mr2 v-model:
       code {{ rating2 }}
-    //- template(#pug).
+    template(#pug).
       w-rating(v-model="rating1")
       div.mt2
         strong.mr2 v-model:
@@ -56,7 +56,7 @@ div
     br
     w-rating.my2(bg-color="light-green" color="yellow")
 
-    //- template(#pug).
+    template(#pug).
       w-rating.my2(color="green")
       br
       w-rating.my2(bg-color="light-green" color="yellow")
@@ -79,15 +79,15 @@ div
     w-rating.my2(icon="mdi mdi-heart" :value="3.4")
     br
     w-rating.my2(icon="mdi mdi-heart-outline" :value="3.4")
-    //- template(#pug).
-      w-rating.my2(icon="mdi mdi-heart" :value="3")
+    template(#pug).
+      w-rating.my2(icon="mdi mdi-heart" :value="3.4")
       br
-      w-rating.my2(icon="mdi mdi-heart-outline" :value="3")
+      w-rating.my2(icon="mdi mdi-heart-outline" :value="3.4")
     template(#html).
       &lt;w-rating
         class="my2"
         icon="mdi mdi-heart"
-        :value="3"&gt;
+        :value="3.4"&gt;
       &lt;/w-rating&gt;
 
       &lt;br /&gt;
@@ -95,7 +95,7 @@ div
       &lt;w-rating
         class="my2"
         icon="mdi mdi-heart-outline"
-        :value="3"&gt;
+        :value="3.4"&gt;
       &lt;/w-rating&gt;
 
   title-link(h2 slug="max") Max (number of buttons)
@@ -108,7 +108,7 @@ div
     w-rating.my2(:value="2" :max="3")
     br
     w-rating.my2(:value="6" :max="10")
-    //- template(#pug).
+    template(#pug).
       w-rating.my2(:value="2" :max="3")
       br
       w-rating.my2(:value="6" :max="10")
@@ -133,7 +133,7 @@ div
     br
     w-rating.my2(xl)
 
-    //- template(#pug).
+    template(#pug).
       w-rating.my2(xs)
       br
       w-rating.my2(sm)
@@ -160,7 +160,7 @@ div
     w-rating.my2(:value="3" disabled)
     br
     w-rating.my2(:value="3" readonly)
-    //- template(#pug).
+    template(#pug).
       w-rating.my2(:value="3" disabled)
       br
       w-rating.my2(:value="3" readonly)
