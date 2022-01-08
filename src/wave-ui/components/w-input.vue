@@ -86,11 +86,11 @@ component(
         @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
     //- Files preview.
-    label.d-flex(v-if="type === 'file' && inputFiles.length" :for="`w-input--${_uid}`")
+    label.d-flex(v-if="type === 'file' && preview && inputFiles.length" :for="`w-input--${_uid}`")
       template(v-for="(file, i) in inputFiles")
         i.w-icon.wi-spinner.w-icon--spin.size--sm.w-input__file-preview.primary(v-if="file.progress < 100" :key="i")
         img.w-input__file-preview(v-else-if="file.preview" :key="i" :src="file.preview" alt="")
-        i.w-icon.wi-file.w-input__file-preview.primary(v-else :key="i")
+        i.w-icon.w-input__file-preview.primary(v-else :key="i" :class="preview && typeof preview === 'string' ? preview : 'wi-file'")
 
     //- Right label.
     template(v-if="labelPosition === 'right'")
@@ -136,8 +136,11 @@ export default {
     shadow: { type: Boolean },
     tile: { type: Boolean },
     multiple: { type: Boolean }, // Only for file uploads.
-    preview: { type: Boolean }, // Only for file uploads.
-    loading: { type: Boolean }
+    preview: { type: [Boolean, String], default: true }, // Only for file uploads.
+    loading: { type: Boolean },
+    // Allow syncing the files 1 way: prefilling a file is not possible.
+    // https://stackoverflow.com/questions/16365668/pre-populate-html-form-file-input
+    files: { type: Array }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -253,28 +256,34 @@ export default {
           size: original.size,
           lastModified: original.lastModified,
           preview: null,
-          progress: 0
+          progress: 0,
+          file: original
         })
 
-        this.filePreview(original, file)
+        this.readFile(original, file)
 
         return file
       }))
       this.$emit('update:modelValue', this.inputFiles)
+      this.$emit('update:files', this.inputFiles) // Sync the files var.
       this.$emit('input', this.inputFiles)
-      this.$emit('change', this.inputFiles)
     },
 
     // For file input.
-    filePreview (original, file) {
+    readFile (original, file) {
       const reader = new FileReader()
 
+      // If the preview prop is a string, the user is setting the  preview to an icon and
+      // don't need the actual file preview.
+      const isPreviewAnIcon = typeof this.preview === 'string'
+      const isFileAnImage = original.type && original.type.startsWith('image/')
       // Check if the file is an image and set a preview image.
-      if (original.type && original.type.startsWith('image/')) {
+      if (this.preview && !isPreviewAnIcon && isFileAnImage) {
         reader.addEventListener('load', e => {
           this.$set(file, 'preview', e.target.result)
         })
       }
+      else delete file.preview
 
       // Used to display a spinner while the file is loading.
       reader.addEventListener('progress', event => {
