@@ -437,6 +437,14 @@ div
           w-button.ma1(v-on="on") Show menu
         | Menu content
     template(#html).
+      &lt;w-menu no-position&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;w-button class="ma1" v-on="on"&gt;
+            Show menu
+          &lt;/w-button&gt;
+        &lt;/template&gt;
+        Menu content
+      &lt;/w-menu&gt;
     template(#css) .w-menu {top: 10px;right: 20px;}
 
   title-link(h2) Arrow (Tooltip style)
@@ -460,11 +468,13 @@ div
         &lt;/template&gt;
         Menu content
       &lt;/w-menu&gt;
+
   title-link(h3) Automatic arrow position
   p.
     The following examples illustrate how the arrow is positioned on the different sides and
     alignments that are applied.#[br]
     The arrow position can also be overridden via CSS.
+
   title-link(h4) Horizontal
   example
     w-flex(justify-center)
@@ -481,23 +491,110 @@ div
           w-button.ma2(v-on="on") Top, align right
         | Menu content
     w-flex(justify-center)
-      w-menu(arrow bottom align-left)
+      w-menu(arrow align-left)
         template(#activator="{ on }")
           w-button.ma2(v-on="on") Bottom, align left
         | Menu content
-      w-menu(arrow bottom)
+      w-menu(arrow)
         template(#activator="{ on }")
           w-button.ma2(v-on="on") Bottom, align center
         | Menu content
-      w-menu(arrow bottom align-right)
+      w-menu(arrow align-right)
         template(#activator="{ on }")
           w-button.ma2(v-on="on") Bottom, align right
         | Menu content
+    template(#pug).
+      w-flex(justify-center)
+        w-menu(arrow top align-left)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Top, align left
+          | Menu content
+        w-menu(arrow top)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Top, align center
+          | Menu content
+        w-menu(arrow top align-right)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Top, align right
+          | Menu content
+      w-flex(justify-center)
+        w-menu(arrow align-left)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Bottom, align left
+          | Menu content
+        w-menu(arrow)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Bottom, align center
+          | Menu content
+        w-menu(arrow align-right)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on") Bottom, align right
+          | Menu content
+    template(#html).
+      &lt;w-flex justify-center&gt;
+        &lt;div class="title4 mb2"&gt;Top position&lt;/div&gt;
+        &lt;w-menu arrow top align-left&gt;
+          &lt;template #activator="{ on }"&gt;
+            &lt;w-button class="ma1" v-on="on"&gt;
+              Top, align left
+            &lt;/w-button&gt;
+          &lt;/template&gt;
+          Menu content
+        &lt;/w-menu&gt;
+
+        &lt;w-menu arrow top&gt;
+          &lt;template #activator="{ on }"&gt;
+            &lt;w-button class="ma1" v-on="on"&gt;
+              Top, align center
+            &lt;/w-button&gt;
+          &lt;/template&gt;
+          Menu content
+        &lt;/w-menu&gt;
+
+        &lt;w-menu arrow top align-right&gt;
+          &lt;template #activator="{ on }"&gt;
+            &lt;w-button class="ma1" v-on="on"&gt;
+              Top, align right
+            &lt;/w-button&gt;
+          &lt;/template&gt;
+          Menu content
+        &lt;/w-menu&gt;
+      &lt;/w-flex&gt;
+
+      &lt;w-flex justify-center&gt;
+        &lt;div class="title4 mt6 mb2"&gt;Bottom position&lt;/div&gt;
+        &lt;w-menu arrow align-left&gt;
+          &lt;template #activator="{ on }"&gt;
+            &lt;w-button class="ma1" v-on="on"&gt;
+              Bottom, align left
+            &lt;/w-button&gt;
+          &lt;/template&gt;
+          Menu content
+        &lt;/w-menu&gt;
+
+        &lt;w-menu arrow&gt;
+          &lt;template #activator="{ on }"&gt;
+            &lt;w-button class="ma1" v-on="on"&gt;
+              Bottom, align center
+            &lt;/w-button&gt;
+          &lt;/template&gt;
+          Menu content
+        &lt;/w-menu&gt;
+
+        &lt;w-menu arrow align-right&gt;
+          &lt;template #activator="{ on }"&gt;
+            &lt;w-button class="ma1" v-on="on"&gt;
+              Bottom, align right
+            &lt;/w-button&gt;
+          &lt;/template&gt;
+          Menu content
+        &lt;/w-menu&gt;
+      &lt;/w-flex&gt;
 
   title-link(h4) Vertical
   example
     w-flex.text-center(justify-center)
-      w-flex.ma0(column no-grow)
+      w-flex(column no-grow)
         w-menu(arrow left align-top)
           template(#activator="{ on }")
             w-button.ma2(v-on="on") Left, align top
@@ -510,7 +607,7 @@ div
           template(#activator="{ on }")
             w-button.ma2(v-on="on") Left, align bottom
           | Menu content
-      w-flex.ma0(column no-grow)
+      w-flex(column no-grow)
         w-menu(arrow right align-top)
           template(#activator="{ on }")
             w-button.ma2(v-on="on") Right, align top
@@ -523,6 +620,96 @@ div
           template(#activator="{ on }")
             w-button.ma2(v-on="on") Right, align bottom
           | Menu content
+    template(#pug).
+      w-flex.text-center(justify-center)
+        w-flex(column no-grow)
+          w-menu(arrow left align-top)
+            template(#activator="{ on }")
+              w-button.ma2(v-on="on") Left, align top
+            | Menu content
+          w-menu(arrow left)
+            template(#activator="{ on }")
+              w-button.ma2(v-on="on") Left, align center
+            | Menu content
+          w-menu(arrow left align-bottom)
+            template(#activator="{ on }")
+              w-button.ma2(v-on="on") Left, align bottom
+            | Menu content
+        w-flex(column no-grow)
+          w-menu(arrow right align-top)
+            template(#activator="{ on }")
+              w-button.ma2(v-on="on") Right, align top
+            | Menu content
+          w-menu(arrow right)
+            template(#activator="{ on }")
+              w-button.ma2(v-on="on") Right, align center
+            | Menu content
+          w-menu(arrow right align-bottom)
+            template(#activator="{ on }")
+              w-button.ma2(v-on="on") Right, align bottom
+            | Menu content
+    template(#html).
+      &lt;w-flex text-center justify-center&gt;
+        &lt;w-flex column no-grow&gt;
+          &lt;div class="title4 mb2"&gt;Top position&lt;/div&gt;
+          &lt;w-menu arrow left align-top&gt;
+            &lt;template #activator="{ on }"&gt;
+              &lt;w-button class="ma1" v-on="on"&gt;
+                Left, align top
+              &lt;/w-button&gt;
+            &lt;/template&gt;
+            Menu content
+          &lt;/w-menu&gt;
+
+          &lt;w-menu arrow left&gt;
+            &lt;template #activator="{ on }"&gt;
+              &lt;w-button class="ma1" v-on="on"&gt;
+                Left, align center
+              &lt;/w-button&gt;
+            &lt;/template&gt;
+            Menu content
+          &lt;/w-menu&gt;
+
+          &lt;w-menu arrow left align-bottom&gt;
+            &lt;template #activator="{ on }"&gt;
+              &lt;w-button class="ma1" v-on="on"&gt;
+                Left, align bottom
+              &lt;/w-button&gt;
+            &lt;/template&gt;
+            Menu content
+          &lt;/w-menu&gt;
+        &lt;/w-flex&gt;
+
+        &lt;w-flex column no-grow&gt;
+          &lt;div class="title4 mt6 mb2"&gt;Bottom position&lt;/div&gt;
+          &lt;w-menu arrow right align-top&gt;
+            &lt;template #activator="{ on }"&gt;
+              &lt;w-button class="ma1" v-on="on"&gt;
+                Right, align top
+              &lt;/w-button&gt;
+            &lt;/template&gt;
+            Menu content
+          &lt;/w-menu&gt;
+
+          &lt;w-menu arrow right&gt;
+            &lt;template #activator="{ on }"&gt;
+              &lt;w-button class="ma1" v-on="on"&gt;
+                Right, align center
+              &lt;/w-button&gt;
+            &lt;/template&gt;
+            Menu content
+          &lt;/w-menu&gt;
+
+          &lt;w-menu arrow right align-bottom&gt;
+            &lt;template #activator="{ on }"&gt;
+              &lt;w-button class="ma1" v-on="on"&gt;
+                Right, align bottom
+              &lt;/w-button&gt;
+            &lt;/template&gt;
+            Menu content
+          &lt;/w-menu&gt;
+        &lt;/w-flex&gt;
+      &lt;/w-flex&gt;
 
   title-link(h2) Color &amp; background color
   p Like in most components, you can define a #[code color] and a  #[code bg-color].
@@ -622,7 +809,7 @@ div
         w-button(text color="green" @click="showMenu = false") Love it!
     w-menu(append-to=".example10" shadow custom)
       template(#activator="{ on }")
-        w-button.mb2(v-on="on") Show a list menu
+        w-button.mb2(v-on="on") Show a custom menu
       w-card.white--bg(content-class="pa0")
         w-toolbar
           .title3.ma0 Menu Title
@@ -642,7 +829,7 @@ div
           w-button(text color="green" @click="showMenu = false") Love it!
       w-menu(shadow custom)
         template(#activator="{ on }")
-          w-button(v-on="on") Show a list menu
+          w-button(v-on="on") Show a custom menu
         w-card(content-class="pa0")
           w-toolbar
             .title3.ma0 Menu Title
@@ -695,7 +882,7 @@ div
       &lt;w-menu shadow custom&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button v-on="on"&gt;
-            Show a list menu
+            Show a custom menu
           &lt;/w-button&gt;
         &lt;/template&gt;
 
