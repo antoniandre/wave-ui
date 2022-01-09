@@ -66,7 +66,7 @@ component(
           span(v-for="(file, i) in inputFiles" :key="file.lastModified")
             | {{ i ? ', ': '' }}
             span.filename(:key="`${i}b`") {{ file.base }}
-            | .{{ file.extension }}
+            | {{ file.extension ? `.${file.extension}` : '' }}
 
       template(v-if="labelPosition === 'inside' && showLabelInside")
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
@@ -268,7 +268,7 @@ export default {
     // For file input.
     onFileChange (e) {
       this.$set(this, 'inputFiles', [...e.target.files].map(original => {
-        const [, base, extension] = original.name.match(/^(.*)(\..*?)$/)
+        const [, base, extension = ''] = original.name.match(/^(.*)(\..*?)?$/)
         const file = Object.assign({}, {
           name: original.name,
           base,
