@@ -591,6 +591,7 @@ div
       &lt;/w-input&gt;
 
   title-link(h2 slug="file-input") File input
+  alert(success) A #[strong.code.mx1 w-input] field only needs a #[code type="file"] to become a file input.
   p.
     By default, the file input will show a preview of the image you are uploading.#[br]
     If the file can't be previewed a file icon will show up to the right of the field instead of
@@ -719,6 +720,32 @@ div
         pre.mt3(v-html="files")
     template(#html).
       &lt;w-input type="file" v-model="files"&gt;File&lt;/w-input&gt;
+
+      &lt;pre v-html="files" class="mt3" /&gt;
+    template(#js).
+      data: () => ({
+        files: []
+      })
+
+  title-link(h3) Loading state
+  p.
+    If you try uploading a very large file, you will see the progress value of the file transfer will
+    be updated as the transfer goes on. You can use this value to show a progress bar.
+  example
+    w-input(type="file"
+      v-model="files4"
+      :loading="!!(files4[0] || {}).progress && files4[0].progress < 100") File
+    pre.mt3(v-html="files4")
+    template(#pug).
+        w-input(type="file"
+          v-model="files"
+          :loading="!!(files[0] || {}).progress &amp;&amp; files[0].progress &lt; 100") File
+
+        pre.mt3(v-html="files")
+    template(#html).
+      &lt;w-input type="file"
+        v-model="files"
+        :loading="!!(files[0] || {}).progress &amp;&amp; files[0].progress &lt; 100"&gt;File&lt;/w-input&gt;
 
       &lt;pre v-html="files" class="mt3" /&gt;
     template(#js).
@@ -923,7 +950,8 @@ export default {
     isPassword: true,
     files1: [],
     files2: [],
-    files3: []
+    files3: [],
+    files4: []
   }),
 
   computed: {
