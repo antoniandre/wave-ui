@@ -6,7 +6,7 @@ div
     above the field on focus or when the field has some content or a placeholder.#[br]
   example
     w-input Label
-    //- template(#pug).
+    template(#pug).
       w-input Label
     template(#html).
       &lt;w-input&gt;Label&lt;/w-input&gt;
@@ -14,12 +14,12 @@ div
   title-link(h2) Label and / or placeholder
   example
     w-input.mb4(label="Label")
-    w-input.mb3(placeholder="Placeholder")
-    w-input.mb3(label="Label" placeholder="Placeholder")
-    //- template(#pug).
+    w-input.mb4(placeholder="Placeholder")
+    w-input.mb4(label="Label" placeholder="Placeholder")
+    template(#pug).
       w-input.mb4(label="Label")
-      w-input.mb3(placeholder="Placeholder")
-      w-input.mb3(label="Label" placeholder="Placeholder")
+      w-input.mb4(placeholder="Placeholder")
+      w-input.mb4(label="Label" placeholder="Placeholder")
     template(#html).
       &lt;w-input
         class="mb4"
@@ -27,12 +27,12 @@ div
       &lt;/w-input&gt;
 
       &lt;w-input
-        class="mb3"
+        class="mb4"
         placeholder="Placeholder"&gt;
       &lt;/w-input&gt;
 
       &lt;w-input
-        class="mb3"
+        class="mb4"
         label="Label"
         placeholder="Placeholder"&gt;
       &lt;/w-input&gt;
@@ -47,49 +47,48 @@ div
     only the placeholder will be displayed.
 
   example
-    w-input.mb3(label="Label" static-label)
-    //- template(#pug).
-      w-input.mb3(label="Label" static-label)
+    w-input(label="Label" static-label)
+    template(#pug).
+      w-input(label="Label" static-label)
     template(#html).
       &lt;w-input
-        class="mb4"
         label="Label"
         static-label&gt;
       &lt;/w-input&gt;
 
   title-link(h2) Outline
   example
-    w-input.mb4(label="Outline" outline)
-    w-input.mb2(placeholder="Outline" outline)
-    w-input.mb2(label="Outline" color="info" outline)
-    w-input.mb2(label="Outline" bg-color="blue-light5" outline)
-    //- template(#pug).
-      w-input.mb4(label="Outline" outline)
-      w-input.mb2(placeholder="Outline" outline)
-      w-input.mb2(label="Outline" color="info" outline)
-      w-input.mb2(label="Outline" bg-color="blue-light5" outline)
+    w-input.mb6(label="Outline" outline)
+    w-input.mb3(placeholder="Outline" outline)
+    w-input.mb3(label="Outline" color="info" outline)
+    w-input.mb3(label="Outline" bg-color="blue-light5" outline)
+    template(#pug).
+      w-input.mb6(label="Outline" outline)
+      w-input.mb3(placeholder="Outline" outline)
+      w-input.mb3(label="Outline" color="info" outline)
+      w-input.mb3(label="Outline" bg-color="blue-light5" outline)
     template(#html).
       &lt;w-input
-        class="mb2"
+        class="mb6"
         label="Outline"
         outline&gt;
       &lt;/w-input&gt;
 
       &lt;w-input
-        class="mb2"
+        class="mb3"
         placeholder="Outline"
         outline&gt;
       &lt;/w-input&gt;
 
       &lt;w-input
-        class="mb2"
+        class="mb3"
         label="Outline"
         color="info"
         outline&gt;
       &lt;/w-input&gt;
 
       &lt;w-input
-        class="mb2"
+        class="mb3"
         label="Outline"
         bg-color="blue-light5"
         outline&gt;
@@ -98,10 +97,10 @@ div
   title-link(h2) Shadow
   example
     w-input.mb4(label="Shadow" shadow)
-    w-input.mb2(label="Outline with shadow" shadow outline)
-    //- template(#pug).
+    w-input(label="Outline with shadow" shadow outline)
+    template(#pug).
       w-input.mb4(label="Shadow" shadow)
-      w-input.mb2(label="Outline with shadow" shadow outline)
+      w-input(label="Outline with shadow" shadow outline)
     template(#html).
       &lt;w-input
         class="mb4"
@@ -110,7 +109,6 @@ div
       &lt;/w-input&gt;
 
       &lt;w-input
-        class="mb2"
         label="Outline
         with shadow"
         shadow
@@ -124,19 +122,20 @@ div
         .title4.mb2 Underline style (default)
         w-input.mb1(label="Round" round)
         w-input.mb1(label="Round and shadow" round shadow)
-        w-input.mb1(label="Tile" tile)
+        w-input(label="Tile" tile)
       .grow.mb4(style="min-width: 200px")
         .title4.mb2 Outline style
         w-input.mb1(label="Round" round outline)
         w-input.mb1(label="Round and shadow" round outline shadow)
         w-input.mb1(label="Tile" tile outline)
-    //- template(#pug).
+    template(#pug).
       w-flex(wrap :gap="2")
         .grow.mb4(style="min-width: 200px")
           .title4.mb2 Underline style (default)
           w-input.mb1(label="Round" round)
           w-input.mb1(label="Round and shadow" round shadow)
           w-input.mb1(label="Tile" tile)
+
         .grow.mb4(style="min-width: 200px")
           .title4.mb2 Outline style
           w-input.mb1(label="Round" round outline)
@@ -224,7 +223,7 @@ div
         w-input.mb1(bg-color="red-light5" value="Some content" outline)
         w-input.mb1(color="red-dark1" bg-color="red-light5" value="Some content" outline)
         w-input.mb1(color="orange-dark1" bg-color="orange-light5" value="Some content" outline)
-    //- template(#pug).
+    template(#pug).
       w-flex(wrap :gap="2")
         .grow.mb4(style="min-width: 200px")
           .title4.mb2 Underline style (default)
@@ -233,6 +232,7 @@ div
           w-input.mb1(bg-color="red-light5" value="Some content")
           w-input.mb1(color="red-dark1" bg-color="red-light5" value="Some content")
           w-input.mb1(color="orange-dark1" bg-color="orange-light5" value="Some content")
+
         .grow.mb4(style="min-width: 200px")
           .title4.mb2 Outline style
           w-input.mb1(value="Some content" outline)
@@ -333,30 +333,30 @@ div
     The #[span.code label] prop is here for this purpose and accepts any HTML.
 
   example
-    w-input.mb2(label="Inside" label-position="inside" outline)
-    w-input.mb2(label="Left" label-position="left" outline)
-    w-input.mb2(label="Right" label-position="right" outline)
-    //- template(#pug).
-      w-input.mb2(label="Inside" label-position="inside" outline)
-      w-input.mb2(label="Left" label-position="left" outline)
-      w-input.mb2(label="Right" label-position="right" outline)
+    w-input.mb3(label="Inside" label-position="inside" outline)
+    w-input.mb3(label="Left" label-position="left" outline)
+    w-input.mb3(label="Right" label-position="right" outline)
+    template(#pug).
+      w-input.mb3(label="Inside" label-position="inside" outline)
+      w-input.mb3(label="Left" label-position="left" outline)
+      w-input.mb3(label="Right" label-position="right" outline)
     template(#html).
       &lt;w-input
-        class="mb2"
+        class="mb3"
         label="Inside"
         label-position="inside"
         outline&gt;
       &lt;/w-input&gt;
 
       &lt;w-input
-        class="mb2"
+        class="mb3"
         label="Left"
         label-position="left"
         outline&gt;
       &lt;/w-input&gt;
 
       &lt;w-input
-        class="mb2"
+        class="mb3"
         label="Right"
         label-position="right"
         outline&gt;
@@ -370,30 +370,30 @@ div
     there is also a prop for setting the label wish will grant more freedom.
 
   example
-    w-input.mb2(label-position="inside" outline)
+    w-input.mb3(label-position="inside" outline)
       w-icon.orange mdi mdi-arrow-right
       span.purple.mx1 Inside
       w-icon.orange mdi mdi-arrow-left
-    w-input.mb2(label-position="left" outline)
+    w-input.mb3(label-position="left" outline)
       span.green.mr1 Left
       w-icon.orange mdi mdi-arrow-right
-    w-input.mb2(label-position="right" outline)
+    w-input.mb3(label-position="right" outline)
       w-icon.orange mdi mdi-arrow-left
       span.red.ml1 Right
-    //- template(#pug).
-      w-input.mb2(label-position="inside" outline)
+    template(#pug).
+      w-input.mb3(label-position="inside" outline)
         w-icon.orange mdi mdi-arrow-right
         span.purple.mx1 Inside
         w-icon.orange mdi mdi-arrow-left
-      w-input.mb2(label-position="left" outline)
+      w-input.mb3(label-position="left" outline)
         span.green.mr1 Left
         w-icon.orange mdi mdi-arrow-right
-      w-input.mb2(label-position="right" outline)
+      w-input.mb3(label-position="right" outline)
         w-icon.orange mdi mdi-arrow-left
         span.red.ml1 Right
     template(#html).
       &lt;w-input
-        class="mb2"
+        class="mb3"
         label-position="inside"
         outline&gt;
         &lt;w-icon class="orange"&gt;
@@ -410,7 +410,7 @@ div
       &lt;/w-input&gt;
 
       &lt;w-input
-        class="mb2"
+        class="mb3"
         label-position="left"
         outline&gt;
         &lt;span class="green mr1"&gt;
@@ -423,7 +423,7 @@ div
       &lt;/w-input&gt;
 
       &lt;w-input
-        class="mb2"
+        class="mb3"
         label-position="right"
         outline&gt;
         &lt;w-icon class="orange"&gt;
@@ -457,7 +457,7 @@ div
     .title4.mt6.mb2 Label inside
     w-input.mb2(label="Inside" label-position="inside" outline inner-icon-left="wi-search")
     w-input.mb2(label="Inside" label-position="inside" outline inner-icon-right="wi-search")
-    //- template(#pug).
+    template(#pug).
       .title4.mb2 Label outside
       w-input.mb2(label="Username" label-position="left" outline inner-icon-left="mdi mdi-account")
       w-input.mb2(
@@ -554,11 +554,11 @@ div
     w-input.mb3(label="Disabled & filled" value="Some content" outline disabled)
     w-input.mb3(label="Readonly & empty" outline readonly)
     w-input.mb3(label="Readonly & filled" value="Some content" outline readonly)
-    //- template(#pug).
-      w-input.mb3(label="Disabled & empty" outline disabled)
-      w-input.mb3(label="Disabled & filled" value="Some content" outline disabled)
-      w-input.mb3(label="Readonly & empty" outline readonly)
-      w-input.mb3(label="Readonly & filled" value="Some content" outline readonly)
+    template(#pug).
+      w-input.mb3(label="Disabled &amp; empty" outline disabled)
+      w-input.mb3(label="Disabled &amp; filled" value="Some content" outline disabled)
+      w-input.mb3(label="Readonly &amp; empty" outline readonly)
+      w-input.mb3(label="Readonly &amp; filled" value="Some content" outline readonly)
     template(#html).
       &lt;w-input
         class="mb3"
@@ -593,21 +593,143 @@ div
   title-link(h2 slug="file-input") File input
   p.
     By default, the file input will show a preview of the image you are uploading.#[br]
-    If the file can't be previewed a file icon will show up to the right of the field instead of a preview.
+    If the file can't be previewed a file icon will show up to the right of the field instead of
+    a preview.
   p.
     When uploading a larger file, a spinner will show up to the right of the field until
-    the file is completely transfered.
+    the file is completely transferred.
   example
     w-input(type="file") File
-    //- template(#pug).
+    template(#pug).
       w-input(type="file") File
     template(#html).
       &lt;w-input type="file"&gt;File&lt;/w-input&gt;
 
-  title-link(h3) Specific file extensions
+  title-link(h3) Disabled preview
+  p.
+    The file preview can be disabled if not needed by setting the #[code preview] prop to
+    #[code false].
+  example
+    w-input(type="file" :preview="false") File
+    template(#pug).
+      w-input(type="file" :preview="false") File
+    template(#html).
+      &lt;w-input type="file" :preview="false"&gt;File&lt;/w-input&gt;
+
+  title-link(h3) Custom preview icon
+  p.
+    By default, when the file is not an image, the preview will be a generic file icon.#[br]
+    It is possible to set a custom icon instead.
+  example
+    w-input(type="file" preview="mdi mdi-star") File
+    template(#pug).
+      w-input(type="file" preview="mdi mdi-star") File
+    template(#html).
+      &lt;w-input type="file" preview="mdi mdi-star"&gt;File&lt;/w-input&gt;
+
+  p You could even compute a variable to show a different icon per detected file type.
+  example
+    w-input(
+      type="file"
+      v-model="files3"
+      :preview="!!files3.length && filePreviewIcon") File
+    template(#pug).
+      w-input(
+        type="file"
+        v-model="files"
+        :preview="!!files.length &amp;&amp; filePreviewIcon") File
+    template(#html).
+      &lt;w-input
+        type="file"
+        v-model="files"
+        :preview="!!files.length &amp;&amp; filePreviewIcon"&gt;
+        File
+      &lt;/w-input&gt;
+    template(#js).
+      data: () => ({
+        files: []
+      }),
+
+      computed: {
+        filePreviewIcon () {
+          const { extension } = this.files[0]
+          switch (extension) {
+            case 'jpg':
+            case 'png':
+            case 'gif':
+            case 'pdf':
+              return `mdi mdi-file-${extension}-box`
+            case 'jpeg':
+              return 'mdi mdi-file-jpg-box'
+            case 'svg':
+            case 'webp':
+              return 'mdi mdi-image'
+            case 'mov':
+              return 'mdi mdi-filmstrip'
+            case 'zip':
+              return 'mdi mdi-folder-zip'
+            default:
+              return 'mdi mdi-file'
+          }
+        }
+      },
+
+  title-link(h3) Reading the files
+  p.
+    On the frontend, you can read all the file details and contents on input when the user selects
+    a file, or you can provide a files array that you keep in sync with Wave UI.
+  title-link.mt6(h4) Via @input
+  example
+    w-input(type="file" @input="onFileInput") File
+    pre.mt3(v-html="files1")
+    template(#pug).
+        w-input(type="file" @input="onFileInput") File
+
+        pre.mt3(v-html="files")
+    template(#html).
+      &lt;w-input type="file" @input="onFileInput&gt;File&lt;/w-input&gt;
+
+      &lt;pre v-html="files" class="mt3" /&gt;
+    template(#js).
+      data: () => ({
+        files: []
+      }),
+
+      methods: {
+        onFileInput (files) {
+          this.files = files
+        }
+      }
+
+  title-link.mt6.mb2(h4) Via v-model
+  p.
+    The v-model can be used to access the files added by the user.#[br]
+  alert(warning)
+    strong Important
+    br
+    | Even if a v-model is allowing a two-way binding,
+    | there is no way to prefill an input type file:
+    | that would be a security breach and is therefore not allowed in HTML.
+  example
+    w-input(type="file" v-model="files2") File
+    pre.mt3(v-html="files2")
+    template(#pug).
+        w-input(type="file" v-model="files") File
+
+        pre.mt3(v-html="files")
+    template(#html).
+      &lt;w-input type="file" v-model="files"&gt;File&lt;/w-input&gt;
+
+      &lt;pre v-html="files" class="mt3" /&gt;
+    template(#js).
+      data: () => ({
+        files: []
+      })
+
+  title-link(h3) Accepting specific file extensions
   example
     w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg")
-    //- template(#pug).
+    template(#pug).
       w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg")
     template(#html).
       &lt;w-input
@@ -616,10 +738,10 @@ div
         accept=".jpg, .jpeg, .png, .gif, .svg"&gt;
       &lt;/w-input&gt;
 
-  title-link(h3) Multiple
+  title-link(h3) Multiple files upload
   example
     w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg" multiple)
-    //- template(#pug).
+    template(#pug).
       w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg" multiple)
     template(#html).
       &lt;w-input
@@ -670,7 +792,7 @@ div
         span.code.mb1.mr2 type="hidden"
         | The hidden type is also accepted - but you don't need a #[span.code w-input] for that!
         w-input(type="hidden")
-    //- template(#pug).
+    template(#pug).
       &lt;ul.input-types&gt;
         &lt;li&gt;
           &lt;.code.mb1 type="date"&lt;
@@ -798,8 +920,41 @@ div
 <script>
 export default {
   data: () => ({
-    isPassword: true
-  })
+    isPassword: true,
+    files1: [],
+    files2: [],
+    files3: []
+  }),
+
+  computed: {
+    filePreviewIcon () {
+      const { extension } = this.files3[0]
+      switch (extension) {
+        case 'jpg':
+        case 'png':
+        case 'gif':
+        case 'pdf':
+          return `mdi mdi-file-${extension}-box`
+        case 'jpeg':
+          return 'mdi mdi-file-jpg-box'
+        case 'svg':
+        case 'webp':
+          return 'mdi mdi-image'
+        case 'mov':
+          return 'mdi mdi-filmstrip'
+        case 'zip':
+          return 'mdi mdi-folder-zip'
+        default:
+          return 'mdi mdi-file'
+      }
+    }
+  },
+
+  methods: {
+    onFileInput (files) {
+      this.files1 = files
+    }
+  }
 }
 </script>
 
