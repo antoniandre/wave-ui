@@ -729,28 +729,53 @@ div
 
   title-link(h3) Loading state
   p.
-    If you try uploading a very large file, you will see the progress value of the file transfer will
-    be updated as the transfer goes on. You can use this value to show a progress bar.
+    If you try to upload a very large file, you will see the progress value of the file transfer will
+    be updated as the transfer goes on (e.g. :loading="overallProgress").#[br]
+    You can also show a self-updated progress bar with the #[code show-progress] prop.
   example
     w-input(type="file"
       v-model="files4"
-      :loading="!!(files4[0] || {}).progress && files4[0].progress < 100") File
-    pre.mt3(v-html="files4")
-    template(#pug).
-        w-input(type="file"
-          v-model="files"
-          :loading="!!(files[0] || {}).progress &amp;&amp; files[0].progress &lt; 100") File
+      :overall-progress.sync="overallProgress"
+      show-progress
+      progress-color="green") File
 
-        pre.mt3(v-html="files")
+    .my4 Overall progress: {{ overallProgress }}
+    w-flex
+      | Files:
+      pre.ml2(v-html="files4")
+    template(#pug).
+      w-input(type="file"
+        v-model="files"
+        :overall-progress.sync="overallProgress"
+        show-progress
+        progress-color="green") File
+
+      .my4 Overall progress: {{ '\{\{ overallProgress \}\}' }}
+
+      w-flex
+        | Files:
+        pre.ml2(v-html="files")
     template(#html).
       &lt;w-input type="file"
-        v-model="files"
-        :loading="!!(files[0] || {}).progress &amp;&amp; files[0].progress &lt; 100"&gt;File&lt;/w-input&gt;
+        v-model="files4"
+        :overall-progress.sync="overallProgress"
+        show-progress
+        progress-color="green"&gt;
+        File
+      &lt;/w-input&gt;
 
-      &lt;pre v-html="files" class="mt3" /&gt;
+      &lt;div class="my4"&gt;
+        Overall progress: {{ '\{\{ overallProgress \}\}' }}
+      &lt;/div&gt;
+
+      &lt;w-flex&gt;
+        Files:
+        &lt;pre v-html="files" class="ml2" /&gt;
+      &lt;/w-flex&gt;
     template(#js).
       data: () => ({
-        files: []
+        files: [],
+        overallProgress: 0
       })
 
   title-link(h3) Accepting specific file extensions
@@ -951,7 +976,8 @@ export default {
     files1: [],
     files2: [],
     files3: [],
-    files4: []
+    files4: [],
+    overallProgress: undefined
   }),
 
   computed: {
