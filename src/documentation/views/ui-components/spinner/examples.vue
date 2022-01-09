@@ -58,19 +58,22 @@ div
     w-spinner.ma1(fade xl)
     w-spinner.ma1(fade size="5em")
     template(#pug).
-      w-spinner.ma1(fade xs)
-      w-spinner.ma1(fade sm)
-      w-spinner.ma1(fade md)
-      w-spinner.ma1(fade lg)
-      w-spinner.ma1(fade xl)
-      w-spinner.ma1(fade size="5em")
+      w-flex(align-center justify-center)
+        w-spinner.ma1(fade xs)
+        w-spinner.ma1(fade sm)
+        w-spinner.ma1(fade md)
+        w-spinner.ma1(fade lg)
+        w-spinner.ma1(fade xl)
+        w-spinner.ma1(fade size="5em")
     template(#html).
-      &lt;w-spinner fade xs class="ma1" /&gt;
-      &lt;w-spinner fade sm class="ma1" /&gt;
-      &lt;w-spinner fade md class="ma1" /&gt;
-      &lt;w-spinner fade lg class="ma1" /&gt;
-      &lt;w-spinner fade xl class="ma1" /&gt;
-      &lt;w-spinner fade size="5em" class="ma1" /&gt;
+      &lt;w-flex align-center justify-center&gt;
+        &lt;w-spinner fade xs class="ma1" /&gt;
+        &lt;w-spinner fade sm class="ma1" /&gt;
+        &lt;w-spinner fade md class="ma1" /&gt;
+        &lt;w-spinner fade lg class="ma1" /&gt;
+        &lt;w-spinner fade xl class="ma1" /&gt;
+        &lt;w-spinner fade size="5em" class="ma1" /&gt;
+      &lt;/w-flex&gt;
 
   title-link(h2) Colors
   p Like in most components, you can set a #[code color] for the spinner.
@@ -81,6 +84,10 @@ div
     w-spinner.ma1(fade color="error")
     w-spinner.ma1(fade color="pink")
     template(#pug).
+      w-spinner.ma1(fade color="green")
+      w-spinner.ma1(fade color="amber")
+      w-spinner.ma1(fade color="orange")
+      w-spinner.ma1(fade color="error")
       w-spinner.ma1(fade color="pink")
     template(#html).
       &lt;w-spinner fade color="green" class="ma1" /&gt;
