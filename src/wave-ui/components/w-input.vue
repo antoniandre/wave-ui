@@ -66,7 +66,7 @@ component(
           span(v-for="(file, i) in inputFiles" :key="file.lastModified")
             | {{ i ? ', ': '' }}
             span.filename(:key="`${i}b`") {{ file.base }}
-            | {{ file.extension }}
+            | .{{ file.extension }}
 
       template(v-if="labelPosition === 'inside' && showLabelInside")
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
@@ -88,17 +88,31 @@ component(
     //- Files preview.
     label.d-flex(v-if="type === 'file' && preview && inputFiles.length" :for="`w-input--${_uid}`")
       template(v-for="(file, i) in inputFiles")
-        i.w-icon.wi-spinner.w-icon--spin.size--sm.w-input__file-preview.primary(v-if="file.progress < 100" :key="i")
+        i.w-icon.wi-spinner.w-icon--spin.size--sm.w-input__file-preview.primary(
+          v-if="file.progress < 100"
+          :key="i")
         img.w-input__file-preview(v-else-if="file.preview" :key="i" :src="file.preview" alt="")
-        i.w-icon.w-input__file-preview.primary(v-else :key="i" :class="preview && typeof preview === 'string' ? preview : 'wi-file'")
+        i.w-icon.w-input__file-preview.primary.size--md(
+          v-else
+          :key="i"
+          :class="preview && typeof preview === 'string' ? preview : 'wi-file'")
 
     //- Right label.
     template(v-if="labelPosition === 'right'")
-      label.w-input__label.w-input__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-input--${_uid}`")
+      label.w-input__label.w-input__label--right.w-form-el-shakable(
+        v-if="$slots.default"
+        :for="`w-input--${_uid}`")
         slot
-      label.w-input__label.w-input__label--right.w-form-el-shakable(v-else-if="label" :for="`w-input--${_uid}`" v-html="label")
+      label.w-input__label.w-input__label--right.w-form-el-shakable(
+        v-else-if="label"
+        :for="`w-input--${_uid}`"
+        v-html="label")
 
-    w-progress.fill-width(v-if="loading" size="2" :color="progressColor || color")
+    w-progress.fill-width(
+      v-if="loading"
+      size="2"
+      :color="progressColor || color"
+      :value="(type === 'file' && overallFilesProgress) || undefined")
 </template>
 
 <script>
@@ -145,7 +159,7 @@ export default {
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
-  emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right', 'update:overallProgress'],
 
   data () {
     return {
@@ -191,6 +205,13 @@ export default {
 
     showLabelInside () {
       return !this.staticLabel || (!this.hasValue && !this.placeholder)
+    },
+
+    overallFilesProgress () {
+      const progress = this.inputFiles.reduce((total, file) => total + file.progress, 0)
+      this.$emit('update:overallProgress', progress)
+
+      return progress
     },
 
     classes () {
@@ -251,7 +272,7 @@ export default {
         const file = Object.assign({}, {
           name: original.name,
           base,
-          extension,
+          extension: extension.substr(1),
           type: original.type,
           size: original.size,
           lastModified: original.lastModified,
@@ -265,7 +286,6 @@ export default {
         return file
       }))
       this.$emit('update:modelValue', this.inputFiles)
-      this.$emit('update:files', this.inputFiles) // Sync the files var.
       this.$emit('input', this.inputFiles)
     },
 
@@ -477,6 +497,8 @@ $inactive-color: #777;
     margin-left: 4px;
     max-height: 2em;
     align-self: flex-end;
+
+    &.w-icon {margin-bottom: 4px;}
   }
 
   // Icons inside.
