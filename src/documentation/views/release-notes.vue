@@ -24,6 +24,17 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.48.0
+      ul
+        li
+          strong.code w-input type="file"
+          ul
+            li Support files without extensions.
+            li Add options to disable the preview, or customize the icon.
+            li Expose the overall progress for multiple files.
+            li Add option to display a progress bar indicating the actual upload progress.
+
+    li.minor
       strong.version v1.47.0
       ul
         li
