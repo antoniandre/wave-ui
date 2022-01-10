@@ -238,9 +238,10 @@ export default {
 
     overallFilesProgress () {
       const progress = this.inputFiles.reduce((total, file) => total + file.progress, 0)
-      this.$emit('update:overallProgress', this.inputFiles.length ? progress : undefined)
+      const total = progress / this.inputFiles.length
+      this.$emit('update:overallProgress', this.inputFiles.length ? total : undefined)
 
-      return progress
+      return total
     },
 
     uploadInProgress () {
