@@ -24,6 +24,11 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.49.0
+      ul
+        li #[strong.code w-notification-manager]: allow HTML tags in the notification message.
+
+    li.minor
       strong.version v1.48.0
       ul
         li
