@@ -230,7 +230,7 @@ export default {
     async open (e) {
       // A tiny delay may help positioning the detachable correctly in case of multiple activators
       // with different menu contents.
-      // if (this.delay) await new Promise(resolve => setTimeout(resolve, this.delay))
+      if (this.delay) await new Promise(resolve => setTimeout(resolve, this.delay))
 
       this.detachableVisible = true
 
