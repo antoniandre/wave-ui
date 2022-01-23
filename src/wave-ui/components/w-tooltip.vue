@@ -1,6 +1,6 @@
 <template lang="pug">
 .w-tooltip-wrap
-  slot(name="activator" :on="eventHandlers")
+  slot(name="activator" :on="activatorEventHandlers")
   transition(:name="transitionName" appear)
     .w-tooltip(v-if="detachableVisible" ref="detachable" :class="classes" :style="styles")
       slot
@@ -36,21 +36,11 @@ export default {
     round: { type: Boolean },
     transition: { type: String },
     tooltipClass: { type: [String, Object, Array] },
-    // Position.
-    detachTo: { type: [String, Boolean, Object], deprecated: true },
-    appendTo: { type: [String, Boolean, Object] },
-    fixed: { type: Boolean },
-    top: { type: Boolean },
-    bottom: { type: Boolean },
-    left: { type: Boolean },
-    right: { type: Boolean },
-    alignTop: { type: Boolean },
-    alignBottom: { type: Boolean },
-    alignLeft: { type: Boolean },
-    alignRight: { type: Boolean },
-    zIndex: { type: [Number, String, Boolean] },
     persistent: { type: Boolean },
-    noPosition: { type: Boolean }
+    delay: { type: Number }
+    // Other props in the detachable mixin:
+    // detachTo, appendTo, fixed, top, bottom, left, right, alignTop, alignBottom, alignLeft,
+    // alignRight, noPosition, zIndex, activator.
   },
 
   emits: ['input', 'update:modelValue', 'open', 'close'],
@@ -58,12 +48,11 @@ export default {
   data: () => ({
     detachableVisible: false,
     hoveringActivator: false,
-    // The activator coordinates.
+    // The tooltip computed top & left coordinates.
     detachableCoords: {
       top: 0,
       left: 0
     },
-    activatorEl: null,
     detachableEl: null,
     timeoutId: null
   }),
@@ -73,6 +62,9 @@ export default {
      * Other computed in the detachable mixin:
      * - `appendToTarget`
      * - `detachableParentEl`
+     * - `activatorEl`
+     * - `position`
+     * - `alignment`
      **/
 
     tooltipClasses () {
@@ -82,26 +74,6 @@ export default {
     transitionName () {
       const direction = this.position.replace(/top|bottom/, m => ({ top: 'up', bottom: 'down' }[m]))
       return this.transition || `w-tooltip-slide-fade-${direction}`
-    },
-
-    position () {
-      return (
-        (this.top && 'top') ||
-        (this.bottom && 'bottom') ||
-        (this.left && 'left') ||
-        (this.right && 'right') ||
-        'bottom'
-      )
-    },
-
-    alignment () {
-      return (
-        (['top', 'bottom'].includes(this.position) && this.alignLeft && 'left') ||
-        (['top', 'bottom'].includes(this.position) && this.alignRight && 'right') ||
-        (['left', 'right'].includes(this.position) && this.alignTop && 'top') ||
-        (['left', 'right'].includes(this.position) && this.alignBottom && 'bottom') ||
-        ''
-      )
     },
 
     classes () {
@@ -130,7 +102,7 @@ export default {
       }
     },
 
-    eventHandlers () {
+    activatorEventHandlers () {
       let handlers = {}
       if (this.showOnClick) handlers = { click: this.toggle }
       else {
@@ -176,19 +148,22 @@ export default {
       else if (['mouseleave', 'blur'].includes(e.type) && !this.showOnClick) shouldShowTooltip = false
 
       this.timeoutId = clearTimeout(this.timeoutId)
-      if (shouldShowTooltip) {
-        this.$emit('update:modelValue', (this.detachableVisible = true))
-        this.$emit('input', true)
-        this.$emit('open')
-
-        this.open(e)
-      }
+      if (shouldShowTooltip) this.open(e)
       else this.close()
     },
 
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     async open (e) {
+      // A tiny delay may help positioning the detachable correctly in case of multiple activators
+      // with different menu contents.
+      if (this.delay) await new Promise(resolve => setTimeout(resolve, this.delay))
+
       this.detachableVisible = true
+
+      // If the activator is external, there might be multiple,
+      // so on open, the activator will be set to the event target.
+      if (this.activator) this.activatorEl = e.target
+
       await this.insertInDOM()
 
       if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
@@ -236,37 +211,9 @@ export default {
       document.removeEventListener('mousedown', this.onOutsideMousedown)
       window.removeEventListener('resize', this.onResize)
     }
-  },
-
-  mounted () {
-    const wrapper = this.$el
-    this.activatorEl = wrapper.firstElementChild
-
-    // Unwrap the activator element.
-    wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
-
-    if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
-  },
-
-  beforeDestroy () {
-    this.removeFromDOM()
-
-    if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.remove()
-  },
-
-  watch: {
-    value (bool) {
-      if (bool !== this.detachableVisible) this.toggle({ type: 'click', target: this.activatorEl })
-    },
-    detachTo () {
-      this.removeFromDOM()
-      this.insertInDOM()
-    },
-    appendTo () {
-      this.removeFromDOM()
-      this.insertInDOM()
-    }
   }
+
+  // watch, mounted & beforeDestroy hooks are set in the detachable.js mixin.
 }
 </script>
 

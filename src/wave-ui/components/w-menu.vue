@@ -74,26 +74,16 @@ export default {
     menuClass: { type: [String, Object, Array] },
     titleClass: { type: [String, Object, Array] },
     contentClass: { type: [String, Object, Array] },
-    // Position.
     arrow: { type: Boolean }, // The small triangle pointing toward the activator.
-    detachTo: { type: [String, Boolean, Object], deprecated: true },
-    appendTo: { type: [String, Boolean, Object] },
-    fixed: { type: Boolean },
-    top: { type: Boolean },
-    bottom: { type: Boolean },
-    left: { type: Boolean },
-    right: { type: Boolean },
-    alignTop: { type: Boolean },
-    alignBottom: { type: Boolean },
-    alignLeft: { type: Boolean },
-    alignRight: { type: Boolean },
-    zIndex: { type: [Number, String, Boolean] },
     minWidth: { type: [Number, String] }, // can be like: `40`, `5em`, `activator`.
     overlay: { type: Boolean },
     overlayClass: { type: [String, Object, Array] },
     overlayProps: { type: Object }, // Allow passing down an object of props to the w-overlay component.
     persistent: { type: Boolean },
-    noPosition: { type: Boolean }
+    delay: { type: Number }
+    // Other props in the detachable mixin:
+    // detachTo, appendTo, fixed, top, bottom, left, right, alignTop, alignBottom, alignLeft,
+    // alignRight, noPosition, zIndex, activator.
   },
 
   emits: ['input', 'update:modelValue', 'open', 'close'],
@@ -107,7 +97,6 @@ export default {
       top: 0,
       left: 0
     },
-    activatorEl: null,
     activatorWidth: 0,
     detachableEl: null,
     timeoutId: null
@@ -118,30 +107,13 @@ export default {
      * Other computed in the detachable mixin:
      * - `appendToTarget`
      * - `detachableParentEl`
+     * - `activatorEl`
+     * - `position`
+     * - `alignment`
      **/
 
     transitionName () {
       return this.transition || 'scale-fade'
-    },
-
-    position () {
-      return (
-        (this.top && 'top') ||
-        (this.bottom && 'bottom') ||
-        (this.left && 'left') ||
-        (this.right && 'right') ||
-        'bottom'
-      )
-    },
-
-    alignment () {
-      return (
-        (['top', 'bottom'].includes(this.position) && this.alignLeft && 'left') ||
-        (['top', 'bottom'].includes(this.position) && this.alignRight && 'right') ||
-        (['left', 'right'].includes(this.position) && this.alignTop && 'top') ||
-        (['left', 'right'].includes(this.position) && this.alignBottom && 'bottom') ||
-        ''
-      )
     },
 
     menuMinWidth () {
@@ -197,8 +169,8 @@ export default {
 
       if (this.showOnHover) {
         handlers = {
-          focus: this.toggleMenu,
-          blur: this.toggleMenu,
+          focus: this.toggle,
+          blur: this.toggle,
           mouseenter: e => {
             this.hoveringActivator = true
             this.open(e)
@@ -213,10 +185,10 @@ export default {
         }
         // Check the window exists: SSR-proof.
         if (typeof window !== 'undefined' && 'ontouchstart' in window) {
-          handlers.click = this.toggleMenu
+          handlers.click = this.toggle
         }
       }
-      else handlers = { click: this.toggleMenu }
+      else handlers = { click: this.toggle }
       return handlers
     }
   },
@@ -233,7 +205,7 @@ export default {
      **/
 
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
-    toggleMenu (e) {
+    toggle (e) {
       let shouldShowMenu = this.detachableVisible
       if ('ontouchstart' in window && this.showOnHover && e.type === 'click') {
         shouldShowMenu = !shouldShowMenu
@@ -250,19 +222,22 @@ export default {
 
       this.timeoutId = clearTimeout(this.timeoutId)
 
-      if (shouldShowMenu) {
-        this.$emit('update:modelValue', (this.detachableVisible = true))
-        this.$emit('input', true)
-        this.$emit('open')
-
-        this.open(e)
-      }
+      if (shouldShowMenu) this.open(e)
       else this.close()
     },
 
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     async open (e) {
+      // A tiny delay may help positioning the detachable correctly in case of multiple activators
+      // with different menu contents.
+      // if (this.delay) await new Promise(resolve => setTimeout(resolve, this.delay))
+
       this.detachableVisible = true
+
+      // If the activator is external, there might be multiple,
+      // so on open, the activator will be set to the event target.
+      if (this.activator) this.activatorEl = e.target
+
       await this.insertInDOM()
 
       if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
@@ -310,43 +285,9 @@ export default {
       document.removeEventListener('mousedown', this.onOutsideMousedown)
       window.removeEventListener('resize', this.onResize)
     }
-  },
-
-  mounted () {
-    const wrapper = this.$el
-    this.activatorEl = wrapper.firstElementChild
-
-    // Unwrap the activator element.
-    wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
-
-    // Unwrap the overlay.
-    if (this.overlay) {
-      this.overlayEl = this.$refs.overlay?.$el
-      wrapper.parentNode.insertBefore(this.overlayEl, wrapper)
-    }
-
-    if (this.value) this.toggleMenu({ type: 'click', target: this.activatorEl })
-  },
-
-  beforeDestroy () {
-    this.removeFromDOM()
-    if (this.overlay && this.overlayEl.parentNode) this.overlayEl.remove()
-    if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.remove()
-  },
-
-  watch: {
-    value (bool) {
-      if (!!bool !== this.detachableVisible) this.toggleMenu({ type: 'click', target: this.activatorEl })
-    },
-    detachTo () {
-      this.removeFromDOM()
-      this.insertInDOM()
-    },
-    appendTo () {
-      this.removeFromDOM()
-      this.insertInDOM()
-    }
   }
+
+  // watch, mounted & beforeDestroy hooks are set in the detachable.js mixin.
 }
 </script>
 
