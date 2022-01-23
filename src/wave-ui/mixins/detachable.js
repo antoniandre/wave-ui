@@ -24,6 +24,16 @@ export default {
     zIndex: { type: [Number, String, Boolean] },
     activator: { type: String } // Optionally designate an external activator.
   },
+
+  data: () => ({
+    // The event listeners handlers have to be removed the exact same way they have been attached.
+    // Since the handler functions have variables that change after hot-reload, keep them exactly
+    // as is in an array so we can delete them on destroy.
+    // This only applies to the activatorEventHandlers, the other events listeners can be removed
+    // normally.
+    docAEventListenersHandlers: []
+  }),
+
   computed: {
     // DOM element to attach tooltip/menu to.
     // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
@@ -258,9 +268,14 @@ export default {
         // Convert mouseenter to mouseover & mouseleave to mouseout because we are attaching
         // event to the document, so it can accept future nodes.
         eventName = eventName.replace('mouseenter', 'mouseover').replace('mouseleave', 'mouseout')
-        document.addEventListener(eventName, e => {
+        const handlerWrap = e => {
           if (e.target?.matches && e.target.matches(this.activator)) handler(e)
-        })
+        }
+        document.addEventListener(eventName, handlerWrap)
+        // The event listeners handlers have to be removed the exact same way they have been attached.
+        // Since the handler functions have variables that change after hot-reload, keep them exactly
+        // as is in an array so we can delete them on destroy.
+        this.docAEventListenersHandlers.push({ eventName, handler: handlerWrap })
       })
     }
 
@@ -278,18 +293,16 @@ export default {
 
     this.removeFromDOM()
 
-    if (this.activator) {
-      Object.entries(this.activatorEventHandlers).forEach(([eventName, handler]) => {
-        // Convert mouseenter to mouseover & mouseleave to mouseout because we are attaching
-        // event to the document, so it can accept future nodes.
-        eventName = eventName.replace('mouseenter', 'mouseover').replace('mouseleave', 'mouseout')
-        document.removeEventListener(eventName, e => {
-          if (e.target?.matches && e.target.matches(this.activator)) handler(e)
-        })
+    // Remove the event listeners the exact same way they have been defined.
+    // Fixes issues on hot-reloading.
+    if (this.docAEventListenersHandlers.length) {
+      this.docAEventListenersHandlers.forEach(({ eventName, handler }) => {
+        document.removeEventListener(eventName, handler)
       })
     }
+
     if (this.overlay && this.overlayEl.parentNode) this.overlayEl.remove()
-    if (this.activatorEl && this.activatorEl.parentNode && this.$scopedSlots.activator) this.activatorEl.remove()
+    if (this.activatorEl?.parentNode && this.$scopedSlots.activator) this.activatorEl.remove()
   },
 
   watch: {
