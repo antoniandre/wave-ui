@@ -177,7 +177,7 @@ export default {
       const data = {
         title: `Wave UI - ${this.currentPage} example`,
         editors: openEditors.join(''),
-        layout: 'top',
+        // layout: 'top', // This now breaks the Codepen generation. :/
         html,
         html_pre_processor: this.usePug && slots.pug ? 'pug' : 'none',
         css,
