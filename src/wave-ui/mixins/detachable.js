@@ -7,6 +7,23 @@
 import { consoleWarn } from '../utils/console'
 
 export default {
+  props: {
+    // Position.
+    detachTo: { type: [String, Boolean, Object], deprecated: true },
+    appendTo: { type: [String, Boolean, Object] },
+    fixed: { type: Boolean },
+    top: { type: Boolean },
+    bottom: { type: Boolean },
+    left: { type: Boolean },
+    right: { type: Boolean },
+    alignTop: { type: Boolean },
+    alignBottom: { type: Boolean },
+    alignLeft: { type: Boolean },
+    alignRight: { type: Boolean },
+    noPosition: { type: Boolean },
+    zIndex: { type: [Number, String, Boolean] },
+    activator: { type: String } // Optionally designate an external activator.
+  },
   computed: {
     // DOM element to attach tooltip/menu to.
     // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
@@ -40,6 +57,40 @@ export default {
     // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
     detachableParentEl () {
       return this.appendToTarget
+    },
+
+    hasSeparateActivator () {
+      return !this.$scopedSlots.activator && typeof this.activator === 'string'
+    },
+
+    activatorEl: {
+      get () {
+        if (this.hasSeparateActivator) return document.querySelector(this.activator)
+        return this.$el.firstElementChild
+      },
+      set () {
+
+      }
+    },
+
+    position () {
+      return (
+        (this.top && 'top') ||
+        (this.bottom && 'bottom') ||
+        (this.left && 'left') ||
+        (this.right && 'right') ||
+        'bottom'
+      )
+    },
+
+    alignment () {
+      return (
+        (['top', 'bottom'].includes(this.position) && this.alignLeft && 'left') ||
+        (['top', 'bottom'].includes(this.position) && this.alignRight && 'right') ||
+        (['left', 'right'].includes(this.position) && this.alignTop && 'top') ||
+        (['left', 'right'].includes(this.position) && this.alignBottom && 'bottom') ||
+        ''
+      )
     }
   },
 
@@ -176,14 +227,82 @@ export default {
 
           // Move the tooltip/menu elsewhere in the DOM.
           // wrapper.parentNode.insertBefore(this.detachableEl, wrapper)
-          this.appendToTarget.appendChild(this.detachableEl)
+          if (this.detachableEl) this.appendToTarget.appendChild(this.detachableEl)
           resolve()
         })
       })
     },
 
     removeFromDOM () {
-      if (this.detachableEl && this.detachableEl.parentNode) this.detachableEl.remove()
+      document.removeEventListener('mousedown', this.onOutsideMousedown)
+      window.removeEventListener('resize', this.onResize)
+      if (this.detachableEl && this.detachableEl.parentNode) {
+        this.detachableVisible = false
+        this.detachableEl.remove()
+        this.detachableEl = null
+      }
+    }
+  },
+
+  mounted () {
+    const wrapper = this.$el
+
+    // Unwrap the activator element if the activator is in the activator slot.
+    if (this.$scopedSlots.activator) wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
+
+    // If the activator is external, add event listeners to the document and check the target is
+    // the activator when toggling.
+    // This way, the activator can be a future DOM element, that is not yet in the DOM.
+    else if (this.activator) {
+      Object.entries(this.activatorEventHandlers).forEach(([eventName, handler]) => {
+        // Convert mouseenter to mouseover & mouseleave to mouseout because we are attaching
+        // event to the document, so it can accept future nodes.
+        eventName = eventName.replace('mouseenter', 'mouseover').replace('mouseleave', 'mouseout')
+        document.addEventListener(eventName, e => {
+          if (e.target?.matches && e.target.matches(this.activator)) handler(e)
+        })
+      })
+    }
+
+    // Unwrap the overlay if any.
+    if (this.overlay) {
+      this.overlayEl = this.$refs.overlay?.$el
+      wrapper.parentNode.insertBefore(this.overlayEl, wrapper)
+    }
+
+    if (this.value) this.toggleMenu({ type: 'click', target: this.activatorEl })
+  },
+
+  beforeDestroy () {
+    this.close()
+
+    this.removeFromDOM()
+
+    if (this.activator) {
+      Object.entries(this.activatorEventHandlers).forEach(([eventName, handler]) => {
+        // Convert mouseenter to mouseover & mouseleave to mouseout because we are attaching
+        // event to the document, so it can accept future nodes.
+        eventName = eventName.replace('mouseenter', 'mouseover').replace('mouseleave', 'mouseout')
+        document.removeEventListener(eventName, e => {
+          if (e.target?.matches && e.target.matches(this.activator)) handler(e)
+        })
+      })
+    }
+    if (this.overlay && this.overlayEl.parentNode) this.overlayEl.remove()
+    if (this.activatorEl && this.activatorEl.parentNode && this.$scopedSlots.activator) this.activatorEl.remove()
+  },
+
+  watch: {
+    value (bool) {
+      if (!!bool !== this.detachableVisible) this.toggle({ type: 'click', target: this.activatorEl })
+    },
+    detachTo () {
+      this.removeFromDOM()
+      this.insertInDOM()
+    },
+    appendTo () {
+      this.removeFromDOM()
+      this.insertInDOM()
     }
   }
 }
