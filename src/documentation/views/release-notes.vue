@@ -26,7 +26,15 @@ main
     li.minor
       strong.version v1.49.0
       ul
-        li #[strong.code w-notification-manager]: allow HTML tags in the notification message.
+        li
+          strong.code w-notification-manager
+          ul
+            li Allow HTML tags in the notification message.
+        li
+          strong.code w-menu &amp; w-tooltip
+          ul
+            li Added a #[code activator] option to define a separate activator.
+            li Added a #[code delay] option to open the menu/tooltip with a delay.
 
     li.minor
       strong.version v1.48.0
