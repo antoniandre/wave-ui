@@ -24,6 +24,35 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.49.1
+      ul
+        li #[strong.code w-select]: prevent a console warning before hydration. #[issue-link 79]
+
+    li.minor
+      strong.version v1.49.0
+      ul
+        li
+          strong.code w-notification-manager
+          ul
+            li Allow HTML tags in the notification message.
+        li
+          strong.code w-menu &amp; w-tooltip
+          ul
+            li Added a #[code activator] option to define a separate activator.
+            li Added a #[code delay] option to open the menu/tooltip with a delay.
+
+    li.minor
+      strong.version v1.48.0
+      ul
+        li
+          strong.code w-input type="file"
+          ul
+            li Support files without extensions.
+            li Add options to disable the preview, or customize the icon.
+            li Expose the overall progress for multiple files.
+            li Add option to display a progress bar indicating the actual upload progress.
+
+    li.minor
       strong.version v1.47.0
       ul
         li

@@ -59,6 +59,9 @@ const events = {
       '[String]': 'The new textual input value.'
     }
   },
+  'update:overallProgress': {
+    description: 'Emitted continuously while uploading a file. When using the <code>multiple</code> option, this is the overall progress of all the files together.<br>You can use it with <code>:overall-progress.sync</code> in Vue 2, or <code>v-model:overall-progress</code> in Vue 3.',
+  },
   focus: {
     description: 'Emitted on input focus.',
     params: {

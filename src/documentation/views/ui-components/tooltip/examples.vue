@@ -1019,6 +1019,91 @@ div.tooltips-demo
   alert(warning).
     The DOM element that the tooltip is detached to must have a position (fixed, absolute or
     relative).
+
+  title-link(h2) External activator
+  p.
+    External activators offer a great flexibility in the code and the advantage of accepting
+    multiple activators for the same menu (even elements that are not yet in the DOM).#[br]
+    The downside is that the event listeners for the activator(s) will be attached to the document
+    and not the activator itself. For that reason, it is not the recommended option if you have
+    the choice.
+  title-link(h3 slug="external-activator--basic") Trigger a menu on click of an external activator
+  example.example14(content-class="text-center my4" app-props-string="text-center")
+    w-button.cat-button(icon="mdi mdi-cat" xl)
+    w-tooltip(append-to=".example14" activator=".cat-button") Meow!
+    template(#pug).
+      w-button.cat-button(icon="mdi mdi-cat" xl)
+
+      w-tooltip(activator=".cat-button") Meow!
+    template(#html).
+      &lt;w-button
+        icon="mdi mdi-cat"
+        xl
+        class="cat-button"&gt;
+      &lt;/w-button&gt;
+
+      &lt;w-tooltip activator=".cat-button"&gt;
+        Meow!
+      &lt;/w-tooltip&gt;
+
+  title-link(h3 slug="external-activator--2-activators").
+    Trigger the same menu on hover of 2 different external activators
+  p.text-italic But do you really need that? ;)
+  alert(tip).
+    Note that like in this example, a tiny delay may help positioning the detachable correctly
+    in case of multiple activators with different menu contents.
+
+  example.example16(content-class="text-center my4" app-props-string="block text-center")
+    w-button.pet-button2.cat-button3.ma4(
+      icon="mdi mdi-cat"
+      xl
+      @mouseenter="activator2 = '.cat-button3';tooltipContent = 'Meow!'"
+      @mouseleave="activator2 = '.pet-button2'")
+    w-button.pet-button2.dog-button3.ma4(
+      icon="mdi mdi-dog"
+      xl
+      @mouseenter="activator2 = '.dog-button3';tooltipContent = 'Woof!'"
+      @mouseleave="activator2 = '.pet-button2'")
+    w-tooltip(append-to=".example16" :activator="activator2" :delay="100")
+      | {{ tooltipContent }}
+    template(#pug).
+      w-button.pet-button.cat-button.ma4(
+        icon="mdi mdi-cat"
+        xl
+        @mouseenter="activator = '.cat-button';tooltipContent = 'Meow!'"
+        @mouseleave="activator = '.pet-button'")
+      w-button.pet-button.dog-button.ma4(
+        icon="mdi mdi-dog"
+        xl
+        @mouseenter="activator = '.dog-button';tooltipContent = 'Woof!'"
+        @mouseleave="activator = '.pet-button'")
+
+      w-tooltip(:activator="activator" :delay="100")
+        | {{ '\{\{ tooltipContent \}\}' }}
+    template(#html).
+      &lt;w-button
+        icon="mdi mdi-cat"
+        xl
+        class="pet-button cat-button ma4"
+        @mouseenter="activator = '.cat-button';tooltipContent = 'Meow!'"
+        @mouseleave="activator = '.pet-button'"&gt;
+      &lt;/w-button&gt;
+      &lt;w-button
+        icon="mdi mdi-dog"
+        xl
+        class="pet-button dog-button ma4"
+        @mouseenter="activator = '.dog-button';tooltipContent = 'Woof!'"
+        @mouseleave="activator = '.pet-button'"&gt;
+      &lt;/w-button&gt;
+
+      &lt;w-tooltip :activator="activator" :delay="100"&gt;
+        {{ '\{\{ tooltipContent \}\}' }}
+      &lt;/w-tooltip&gt;
+    template(#js).
+      data: () => ({
+        activator: '.pet-button',
+        tooltipContent: ''
+      })
 </template>
 
 <script>
@@ -1034,7 +1119,10 @@ export default {
       { label: 'Twist', value: 'twist' },
       { label: 'Fade', value: 'fade' },
       { label: 'Scale-fade', value: 'scale-fade' }
-    ]
+    ],
+    activator1: '.pet-button',
+    activator2: '.pet-button2',
+    tooltipContent: ''
   }),
 
   methods: {
