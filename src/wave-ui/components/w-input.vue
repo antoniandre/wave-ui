@@ -12,9 +12,16 @@ component(
   template(v-else)
     //- Left label.
     template(v-if="labelPosition === 'left'")
-      label.w-input__label.w-input__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-input--${_.uid}`")
+      label.w-input__label.w-input__label--left.w-form-el-shakable(
+        v-if="$slots.default"
+        :for="`w-input--${_.uid}`"
+        :class="validationClasses")
         slot
-      label.w-input__label.w-input__label--left.w-form-el-shakable(v-else-if="label" :for="`w-input--${_.uid}`" v-html="label")
+      label.w-input__label.w-input__label--left.w-form-el-shakable(
+        v-else-if="label"
+        :for="`w-input--${_.uid}`"
+        :class="validationClasses"
+        v-html="label")
 
     //- Input wrapper.
     .w-input__input-wrap(:class="inputWrapClasses")
@@ -58,35 +65,45 @@ component(
           @blur="onBlur"
           @change="onFileChange"
           :multiple="multiple || null"
-          v-bind="attrs")
-        transition-group.w-input__input.w-input__input--file(tag="label" name="fade" :for="`w-input--${_.uid}`")
+          v-bind="attrs"
+          :data-progress="overallFilesProgress /* Needed to emit the overallProgress. */")
+        transition-group.w-input__input.w-input__input--file(
+          tag="label"
+          name="fade"
+          :for="`w-input--${_.uid}`")
           span.w-input__no-file(v-if="!inputFiles.length && isFocused" key="no-file")
             slot(name="no-file")
               template(v-if="$slots['no-file'] === undefined") No file
           span(v-for="(file, i) in inputFiles" :key="file.lastModified")
             | {{ i ? ', ': '' }}
             span.filename(:key="`${i}b`") {{ file.base }}
-            | {{ file.extension }}
+            | {{ file.extension ? `.${file.extension}` : '' }}
 
       template(v-if="labelPosition === 'inside' && showLabelInside")
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
           v-if="$slots.default"
           :for="`w-input--${_.uid}`"
-          :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+          :class="validationClasses")
           slot
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
           v-else-if="label"
           :for="`w-input--${_.uid}`"
           v-html="label"
-          :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+          :class="validationClasses")
       w-icon.w-input__icon.w-input__icon--inner-right(
         v-if="innerIconRight"
         tag="label"
         :for="`w-input--${_.uid}`"
         @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
+      w-progress.fill-width(
+        v-if="hasLoading || (showProgress && (uploadInProgress || uploadComplete))"
+        size="2"
+        :color="progressColor || color"
+        :model-value="showProgress ? (uploadInProgress || uploadComplete) && overallFilesProgress : loadingValue")
+
     //- Files preview.
-    label.d-flex(v-if="type === 'file' && inputFiles.length" :for="`w-input--${_.uid}`")
+    label.d-flex(v-if="type === 'file' && preview && inputFiles.length" :for="`w-input--${_.uid}`")
       template(v-for="(file, i) in inputFiles")
         i.w-icon.wi-spinner.w-icon--spin.size--sm.w-input__file-preview.primary(
           v-if="file.progress < 100"
@@ -96,20 +113,23 @@ component(
           :key="`${i}b`"
           :src="file.preview"
           alt="")
-        i.w-icon.wi-file.w-input__file-preview.primary(v-else :key="`${i}c`")
+        i.w-icon.w-input__file-preview.primary.size--md(
+          v-else
+          :key="`${i}c`"
+          :class="preview && typeof preview === 'string' ? preview : 'wi-file'")
 
     //- Right label.
     template(v-if="labelPosition === 'right'")
       label.w-input__label.w-input__label--right.w-form-el-shakable(
         v-if="$slots.default"
-        :for="`w-input--${_.uid}`")
+        :for="`w-input--${_.uid}`"
+        :class="validationClasses")
         slot
       label.w-input__label.w-input__label--right.w-form-el-shakable(
         v-else-if="label"
         :for="`w-input--${_.uid}`"
+        :class="validationClasses"
         v-html="label")
-
-    w-progress.fill-width(v-if="loading" size="2" :color="progressColor || color")
 </template>
 
 <script>
@@ -148,13 +168,17 @@ export default {
     shadow: { type: Boolean },
     tile: { type: Boolean },
     multiple: { type: Boolean }, // Only for file uploads.
-    preview: { type: Boolean }, // Only for file uploads.
-    loading: { type: Boolean }
+    preview: { type: [Boolean, String], default: true }, // Only for file uploads.
+    loading: { type: [Boolean, Number], default: false }, // If a number is given, it will be the value of the progress.
+    showProgress: { type: [Boolean] }, // Only for file uploads.
+    // Allow syncing the files 1 way: prefilling a file is not possible.
+    // https://stackoverflow.com/questions/16365668/pre-populate-html-form-file-input
+    files: { type: Array }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
-  emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right', 'update:overallProgress'],
 
   data () {
     return {
@@ -183,27 +207,60 @@ export default {
       const { input, focus, blur, ...listeners } = this.$attrs
       return listeners
     },
+
     attrs () {
       // eslint-disable-next-line no-unused-vars
       const { class: Class, ...htmlAttrs } = this.$attrs
       return htmlAttrs
     },
+
     hasValue () {
-      return (
-        this.inputValue ||
-        this.inputValue === 0 ||
-        ['date', 'time'].includes(this.type) ||
-        (this.type === 'number' && this.inputNumberError) ||
-        (this.type === 'file' && this.inputFiles.length)
-      )
+      switch (this.type) {
+        case 'file': return !!this.inputFiles.length
+        case 'number': return this.inputNumberError
+        case 'date':
+        case 'time':
+          return true
+        default:
+          return this.inputValue || this.inputValue === 0
+      }
     },
 
     hasLabel () {
       return this.label || this.$slots.default
     },
 
+    hasLoading () {
+      return ![undefined, false].includes(this.loading)
+    },
+
+    loadingValue () {
+      let value
+      if (typeof this.loading === 'number') value = this.loading
+      else if (this.loading) {
+        value = this.type === 'file' && this.overallFilesProgress ? this.overallFilesProgress : undefined
+      }
+      return value
+    },
+
     showLabelInside () {
       return !this.staticLabel || (!this.hasValue && !this.placeholder)
+    },
+
+    overallFilesProgress () {
+      const progress = this.inputFiles.reduce((total, file) => total + file.progress, 0)
+      const total = progress / this.inputFiles.length
+      this.$emit('update:overallProgress', this.inputFiles.length ? total : undefined)
+
+      return total
+    },
+
+    uploadInProgress () {
+      return this.overallFilesProgress > 0 && this.overallFilesProgress < 100
+    },
+
+    uploadComplete () {
+      return this.overallFilesProgress === 100
     },
 
     classes () {
@@ -223,6 +280,12 @@ export default {
       }
     },
 
+    validationClasses () {
+      return this.isFocused && {
+        [this.valid === false ? 'error' : this.color]: this.color || this.valid === false
+      }
+    },
+
     inputWrapClasses () {
       return {
         [this.valid === false ? 'error' : this.color]: this.color || this.valid === false,
@@ -235,7 +298,8 @@ export default {
         'w-input__input-wrap--underline': !this.outline,
         'w-input__input-wrap--shadow': this.shadow,
         'w-input__input-wrap--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
-        'w-input__input-wrap--loading': this.loading
+        'w-input__input-wrap--loading': this.loading || (this.showProgress && this.uploadInProgress),
+        'w-input__input-wrap--upload-complete': this.uploadComplete
       }
     }
   },
@@ -260,37 +324,44 @@ export default {
     // For file input.
     onFileChange (e) {
       this.inputFiles = [...e.target.files].map(original => {
-        const [, base, extension] = original.name.match(/^(.*)(\..*?)$/)
+        // `full` if there is no filename but only an extension.
+        const [, base = '', extension = '', full = ''] = original.name.match(/^(.*?)\.([^.]*)$|(.*)/)
+
         const file = reactive({
           name: original.name,
-          base,
+          base: base || full,
           extension,
           type: original.type,
           size: original.size,
           lastModified: original.lastModified,
           preview: null,
-          progress: 0
+          progress: 0,
+          file: original
         })
 
-        this.filePreview(original, file)
+        this.readFile(original, file)
 
         return file
       })
       this.$emit('update:modelValue', this.inputFiles)
       this.$emit('input', this.inputFiles)
-      this.$emit('change', this.inputFiles)
     },
 
     // For file input.
-    filePreview (original, file) {
+    readFile (original, file) {
       const reader = new FileReader()
 
+      // If the preview prop is a string, the user is setting the  preview to an icon and
+      // don't need the actual file preview.
+      const isPreviewAnIcon = typeof this.preview === 'string'
+      const isFileAnImage = original.type && original.type.startsWith('image/')
       // Check if the file is an image and set a preview image.
-      if (original.type && original.type.startsWith('image/')) {
+      if (this.preview && !isPreviewAnIcon && isFileAnImage) {
         reader.addEventListener('load', e => {
           file.preview = e.target.result
         })
       }
+      else delete file.preview
 
       // Used to display a spinner while the file is loading.
       reader.addEventListener('progress', e => {
@@ -333,6 +404,8 @@ $inactive-color: #777;
   &--file {
     flex-wrap: nowrap;
     align-items: flex-end;
+
+    span.fade-leave-to {position: absolute;}
   }
 
   // Input field wrapper.
@@ -362,7 +435,10 @@ $inactive-color: #777;
     &--round {border-radius: 99em;}
     &--tile {border-radius: initial;}
     &--shadow {box-shadow: $box-shadow;}
-    &--loading {border-bottom-color: transparent;}
+    &--loading, &--upload-complete {
+      border-bottom-color: transparent;
+      flex-wrap: wrap;
+    }
     &--loading ~ .w-progress {
       height: 2px;
       position: absolute;
@@ -371,7 +447,8 @@ $inactive-color: #777;
     }
 
     .w-input--focused & {border-color: currentColor;}
-    .w-input--focused &--loading {border-bottom-color: transparent;}
+    .w-input--focused &--loading,
+    .w-input--focused &--upload-complete {border-bottom-color: transparent;}
 
     // Underline.
     &--underline:after {
@@ -482,6 +559,8 @@ $inactive-color: #777;
     margin-left: 4px;
     max-height: 2em;
     align-self: flex-end;
+
+    &.w-icon {margin-bottom: 4px;}
   }
 
   // Icons inside.

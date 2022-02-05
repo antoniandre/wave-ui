@@ -11,8 +11,8 @@ transition-group(
       :key="notif._uid"
       v-model="notif._value"
       @close="notifManager.dismiss(notif._uid)"
-      v-bind="notif")
-      | {{ notif.message }}
+      v-bind="notifProps(notif)")
+      div(v-html="notif.message")
 </template>
 
 <script>
@@ -39,6 +39,13 @@ export default {
       return this.conf.transition
         ? this.conf.transition.replace('default', `slide-${this.conf.align === 'left' ? 'right' : 'left'}`)
         : ''
+    }
+  },
+
+  methods: {
+    notifProps (notif) {
+      const { _value, _uid, message, timeout, ...props } = notif
+      return props
     }
   },
 

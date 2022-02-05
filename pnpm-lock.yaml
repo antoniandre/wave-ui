@@ -30,6 +30,9 @@ specifiers:
 dependencies:
   postcss: 8.4.6
 
+dependencies:
+  '@mdi/font': 6.5.95
+
 devDependencies:
   '@babel/core': 7.17.0
   '@babel/eslint-parser': 7.17.0_@babel+core@7.17.0+eslint@7.32.0

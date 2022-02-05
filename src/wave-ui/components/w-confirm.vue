@@ -2,7 +2,7 @@
 .w-confirm
   w-menu(v-model="showPopup" v-bind="wMenuProps")
     template(#activator="{ on }")
-      w-button.w-confirm__button(v-on="{ ...$listeners, ...on }" v-bind="buttonProps")
+      w-button.w-confirm__button(v-bind="{ ...$attrs, ...buttonProps, ...on }")
         slot
     w-flex(:column="!inline" align-center)
       div
