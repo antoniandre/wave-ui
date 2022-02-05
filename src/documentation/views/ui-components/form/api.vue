@@ -77,7 +77,7 @@ const events = {
     }
   },
   'update:errorsCount': {
-    description: 'Emitted every time the errorsCount changes. To be used with <code>:errors-count.sync</code> on Vue 2.x or <code>v-model:errors-count</code> on Vue 3.',
+    description: 'Emitted every time the errorsCount changes. To be used with <code>:errors-count.sync</code> in Vue 2 or <code>v-model:errors-count</code> in Vue 3.',
     params: {
       '[Integer]': 'The number of errors in the form.'
     }

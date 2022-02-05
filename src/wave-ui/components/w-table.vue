@@ -313,7 +313,7 @@ export default {
           }
         )
 
-        // Keep external `expanded-rows.sync` updated.
+        // Keep external `expanded-rows.sync` (Vue 2) or v-model:expanded-rows (Vue 3) updated.
         this.$emit('update:expanded-rows', this.expandedRowsInternal)
       }
 
@@ -342,7 +342,7 @@ export default {
             }
           )
 
-          // Keep external `selected-rows.sync` updated.
+          // Keep external `selected-rows.sync` (Vue 2) or v-model:selected-rows (Vue 3) updated.
           this.$emit('update:selected-rows', this.selectedRowsInternal)
         }
       }
