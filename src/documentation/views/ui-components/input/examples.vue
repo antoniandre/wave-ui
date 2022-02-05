@@ -727,6 +727,68 @@ div
         files: []
       })
 
+  title-link(h3) Uploading the file to a backend server
+  p.
+    There are different ways you can do this. The 2 most common ways would be to:
+  ul
+    li.
+      Use Axios or other AJAX library to send the file on #[strong.code w-form]
+      #[code @success] (emitted upon successful validation).
+    li.
+      Use the #[code allow-submit] option on the #[strong.code w-form] as well as
+      #[code enctype="multipart/form-data"], #[code method] and #[code action] fields
+      in order to submit the file in a full HTML built-in process (But this will reload
+      the page).
+
+  p.
+    The first option is recommended for a more modern approach. Here is an example how to
+    set this up.
+  example(:blank-codepen="['js']")
+    w-form(@success="onFormSuccess")
+      w-input(type="file" v-model="files5" :validators="[() => files5.length || 'Please add a file']") File
+      w-button.d-flex.mla.mt4(type="submit" :loading="loading") Send
+    template(#pug).
+    template(#html).
+    template(#js).
+      import axios from 'axios'
+
+      export default {
+        data: () => ({
+          files: []
+        }),
+
+        methods: {
+          onFormSuccess () {
+            const formData = new FormData()
+            formData.append('file', this.files[0].file)
+
+            axios.post(
+              '/api/your-backend-script',
+              formData,
+              { headers: { 'Content-Type': 'multipart/form-data' } }
+            ).then(
+              () => console.log('Success!'),
+              () => console.log('Failure!')
+            )
+          }
+        }
+      }
+
+    p.
+      Here is a very minimalist way to receive and display the file on server side with PHP.
+      Of course you should add more checks, and move the temporary uploaded file when the
+      checks are passed.
+    ssh-pre(language="php").
+      &lt;?php
+      // You can check the structure of the file upload.
+      // print_r($_FILES);die;
+
+      // Set the content type to the file type for output.
+      header('Content-Type: ' . $_FILES['file']['type']);
+
+      // Read and output the uploaded file.
+      die(file_get_contents($_FILES['file']['tmp_name']));
+      ?&gt;
   title-link(h3) Loading state
   p.
     If you try to upload a very large file, you will see the progress value of the file transfer will
@@ -970,6 +1032,7 @@ div
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data: () => ({
     isPassword: true,
@@ -977,6 +1040,8 @@ export default {
     files2: [],
     files3: [],
     files4: [],
+    files5: [],
+    loading: false,
     overallProgress: undefined
   }),
 
@@ -1007,6 +1072,75 @@ export default {
   methods: {
     onFileInput (files) {
       this.files1 = files
+    },
+
+    async onFormSuccess () {
+      this.loading = true
+
+      // First get today's date and the user IP.
+      let today = new Date()
+      const d = today.getDate()
+      const m = today.getMonth() + 1
+      const y = today.getFullYear()
+      today = `${y}${m.toString()}${d.toString()}`
+
+      let userIP
+      await axios.get('https://api.ipify.org').then(data => {
+        userIP = data.data.replace(/\./g, '')
+      })
+
+      // Create the user unique Filebin ID.
+      const binURL = `https://filebin.net/waveui-${userIP}${today}`
+
+      // This is the demonstration part.
+      const formData = new FormData()
+      const file = new Blob([this.files5[0].file], { type: 'image/png' })
+      formData.append('file', file)
+      // console.log(this.files5[0].type)
+
+      axios.post(
+        `${binURL}/${this.files5[0].name}`,
+        formData,
+        { headers: { 'Content-Type': 'image/png' } }
+        // { headers: { 'Content-Type': 'multipart/form-data' } }
+        // { headers: { 'Content-Type': this.files5[0].type } } // OK.
+        // {
+        //   headers: {
+        //     'content-type': 'image/png',
+        //     filename: this.files5[0].name,
+        //     bin: `waveui-${userIP}${today}`
+        //   }
+        // }
+      ).then(
+        () => {
+          this.loading = false
+          this.$waveui.notify(
+            `<div>
+             File transferred successfully.<br>Now check your
+             <a href="${binURL}" target="_blank">
+              Filebin <i class="w-icon mdi mdi-open-in-new"></i></a>.
+             </div>`,
+            'success',
+            0)
+        },
+        () => {
+          this.$waveui.notify(
+            '<div>An error occured.<br>Is Filebin down?<br>Or is there a problem with the file?</div>',
+            'error',
+            0)
+          this.loading = false
+        }
+      )
+
+      // axios.get(
+      //   // `https://filebin.net/wave-ui-${(new Date()).getTime()}/${this.files5[0].name}`,
+      //   `https://filebin.net/fna4sdfiynmodb9v`,
+      //   formData,
+      //   { headers: { 'Content-Type': 'multipart/form-data' } }
+      // ).then(
+      //   () => console.log('Success!'),
+      //   () => console.log('Failure!')
+      // )
     }
   }
 }
