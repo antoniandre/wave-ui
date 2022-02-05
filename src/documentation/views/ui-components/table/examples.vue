@@ -332,14 +332,14 @@ div
     the #[strong.code w-table]'s sorting is defined with a header key string preceded by a #[code +] for ASC,
     or a #[code -] for DESC. For instance, in this example: #[code '+firstName'].
   example
-    w-table(:headers="table1.headers" :items="table1.items" :sort.sync="table1.sort")
+    w-table(:headers="table1.headers" :items="table1.items" v-model:sort="table1.sort")
     template(#pug).
-      w-table(:headers="table.headers" :items="table.items" :sort.sync="table.sort")
+      w-table(:headers="table.headers" :items="table.items" v-model:sort="table.sort")
     template(#html).
       &lt;w-table
         :headers="table.headers"
         :items="table.items"
-        :sort.sync="table.sort"&gt;
+        v-model:sort="table.sort"&gt;
       &lt;/w-table&gt;
     template(#js).
       data: () => ({
