@@ -330,7 +330,7 @@ export default {
       setTimeout(() => {
         const itemIndex = this.inputValue.length ? this.inputValue[0].index : 0 // Real index starts at 0.
         // User visible index starts at 1.
-        this.$refs['w-list'].$el.querySelector(`#w-select-menu--${this._uid}_item-${itemIndex + 1}`).focus()
+        this.$refs['w-list'].$el.querySelector(`#w-select-menu--${this._uid}_item-${itemIndex + 1}`)?.focus()
       }, 100)
     },
 
