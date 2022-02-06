@@ -15,6 +15,21 @@ div
       w-button.ml3(icon="mdi mdi-home" text lg)
       w-button.ml3(icon="mdi mdi-chat" text lg)
       w-button.ml3(icon="mdi mdi-email" text lg)
+    template(#pug).
+      w-toolbar(shadow)
+        .title2 Title
+        .spacer
+        span.ml2 Item 1
+        span.ml2 Item 2
+        span.ml2 Item 3
+
+      w-toolbar.mt6.py1(shadow)
+        w-icon.mr3(color="light-blue-dark3" size="2.5em") wi-wave
+        .title3 Wave UI
+        .spacer
+        w-button.ml3(icon="mdi mdi-home" text lg)
+        w-button.ml3(icon="mdi mdi-chat" text lg)
+        w-button.ml3(icon="mdi mdi-email" text lg)
     template(#html).
       &lt;w-toolbar shadow&gt;
         &lt;div class="title2"&gt;Title&lt;/div&gt;
@@ -26,7 +41,7 @@ div
 
       &lt;w-toolbar shadow class="mt6 py1"&gt;
         &lt;w-icon color="light-blue-dark3" size="2.5em"&gt;wi-wave&lt;/w-icon&gt;
-        &lt;div class="title3"&gt;Wave UI&lt;/div&gt;
+        &lt;div class="title3 mr3"&gt;Wave UI&lt;/div&gt;
         &lt;div class="spacer"&gt;&lt;/div&gt;
         &lt;w-button icon="mdi mdi-home" text lg class="ml3"&gt;&lt;/w-button&gt;
         &lt;w-button icon="mdi mdi-chat" text lg class="ml3"&gt;&lt;/w-button&gt;
@@ -44,6 +59,13 @@ div
       span.ml2 Item 1
       span.ml2 Item 2
       span.ml2 Item 3
+    template(#pug).
+      w-toolbar(bg-color="blue-light5" color="blue-dark3")
+        .title2.my0 Title
+        .spacer
+        span.ml2 Item 1
+        span.ml2 Item 2
+        span.ml2 Item 3
     template(#html).
       &lt;w-toolbar bg-color="blue-light5" color="blue-dark3"&gt;
         &lt;div class="title2"&gt;Title&lt;/div&gt;
@@ -76,25 +98,25 @@ div
             span.ml2 Item 1
             span.ml2 Item 2
             span.ml2 Item 3
+    template(#pug).
+      w-flex.mt4(wrap :gap="4")
+        w-card
+          template(#title)
+            w-toolbar
+              .title2.my0 Top Bar
+              .spacer
+              span.ml2 Item 1
+              span.ml2 Item 2
+              span.ml2 Item 3
 
-    h3 With shadow
-    w-flex.mt4(wrap :gap="4")
-      w-card
-        template(#title)
-          w-toolbar(shadow)
-            .title2.my0 Top Bar
-            .spacer
-            span.ml2 Item 1
-            span.ml2 Item 2
-            span.ml2 Item 3
-      w-card
-        template(#actions)
-          w-toolbar(bottom shadow)
-            .title2.my0 Bottom Bar
-            .spacer
-            span.ml2 Item 1
-            span.ml2 Item 2
-            span.ml2 Item 3
+        w-card
+          template(#actions)
+            w-toolbar(bottom)
+              .title2.my0 Bottom Bar
+              .spacer
+              span.ml2 Item 1
+              span.ml2 Item 2
+              span.ml2 Item 3
     template(#html).
       &lt;w-flex wrap :gap="4" class="mt4"&gt;
         &lt;w-card&gt;
@@ -121,9 +143,51 @@ div
           &lt;/template&gt;
         &lt;/w-card&gt;
       &lt;/w-flex&gt;
+    template(#css).
+      .w-card {
+        flex-grow: 1;
+        max-width: 550px;
+        height: 200px;
+      }
 
-      &lt;h3&gt;With shadow&lt;/h3&gt;
-
+  title-link(h3) With shadow
+  example
+    w-flex.mt4(wrap :gap="4")
+      w-card
+        template(#title)
+          w-toolbar(shadow)
+            .title2.my0 Top Bar
+            .spacer
+            span.ml2 Item 1
+            span.ml2 Item 2
+            span.ml2 Item 3
+      w-card
+        template(#actions)
+          w-toolbar(bottom shadow)
+            .title2.my0 Bottom Bar
+            .spacer
+            span.ml2 Item 1
+            span.ml2 Item 2
+            span.ml2 Item 3
+    template(#pug).
+      w-flex.mt4(wrap :gap="4")
+        w-card
+          template(#title)
+            w-toolbar(shadow)
+              .title2.my0 Top Bar
+              .spacer
+              span.ml2 Item 1
+              span.ml2 Item 2
+              span.ml2 Item 3
+        w-card
+          template(#actions)
+            w-toolbar(bottom shadow)
+              .title2.my0 Bottom Bar
+              .spacer
+              span.ml2 Item 1
+              span.ml2 Item 2
+              span.ml2 Item 3
+    template(#html).
       &lt;w-flex wrap :gap="4" class="mt4"&gt;
         &lt;w-card&gt;
           &lt;template #title&gt;
@@ -162,7 +226,7 @@ div
     or a number of pixels (without unit).
 
   example(content-class="pa0")
-    w-toolbar.py0(bg-color="blue-light5" color="blue-dark3" height="5.4em")
+    w-toolbar.py0(bg-color="blue-light5" color="blue-dark3" height="5em")
       .title2.my0 Title
       .spacer
       span.mx1 Item 1
@@ -173,6 +237,18 @@ div
       w-divider.mx2(vertical)
       span.mx1 Item 5
       span.mx1 Item 6
+    template(#pug).
+      w-toolbar.py0(bg-color="blue-light5" color="blue-dark3" height="5em")
+        .title2.my0 Title
+        .spacer
+        span.mx1 Item 1
+        span.mx1 Item 2
+        w-divider.mx2(vertical)
+        span.mx1 Item 3
+        span.mx1 Item 4
+        w-divider.mx2(vertical)
+        span.mx1 Item 5
+        span.mx1 Item 6
     template(#html).
       &lt;w-toolbar bg-color="blue-light5" color="blue-dark3" height="5em" class="py0"&gt;
         &lt;div class="title2"&gt;Title&lt;/div&gt;
@@ -186,6 +262,51 @@ div
         &lt;span class="mx1"&gt;Item 5&lt;/span&gt;
         &lt;span class="mx1"&gt;Item 6&lt;/span&gt;
       &lt;/w-toolbar&gt;
+
+  //- @todo.
+  //- title-link(h2) Vertical toolbar with absolute position
+  //- example(content-class="py12")
+    w-toolbar(vertical absolute left)
+      w-icon(size="2.2em" color="primary") wi-wave
+      .spacer
+      w-button.pa4(icon="mdi mdi-home" text lg)
+      w-button.pa4(icon="mdi mdi-chat" text lg)
+      w-button.pa4(icon="mdi mdi-email" text lg)
+
+  title-link(h2) Vertical toolbar
+  example
+    w-card(content-class="pa0 w-flex" style="height: 200px")
+      w-toolbar(vertical)
+        w-icon(size="2.2em" color="primary") wi-wave
+        .spacer
+        w-button.pa4(icon="mdi mdi-home" text lg)
+        w-button.pa4(icon="mdi mdi-chat" text lg)
+        w-button.pa4(icon="mdi mdi-email" text lg)
+      w-flex(align-center justify-center) Some content.
+    template(#pug).
+      w-card(content-class="pa0 w-flex" style="height: 200px")
+        w-toolbar(vertical)
+          w-icon(size="2.2em" color="primary") wi-wave
+          .spacer
+          w-button.pa4(icon="mdi mdi-home" text lg)
+          w-button.pa4(icon="mdi mdi-chat" text lg)
+          w-button.pa4(icon="mdi mdi-email" text lg)
+
+        w-flex(align-center justify-center) Some content.
+    template(#html).
+      &lt;w-card content-class="pa0 w-flex" style="height: 200px"&gt;
+        &lt;w-toolbar vertical&gt;
+          &lt;w-icon color="primary" size="2.2em"&gt;wi-wave&lt;/w-icon&gt;
+          &lt;div class="spacer"&gt;&lt;/div&gt;
+          &lt;w-button icon="mdi mdi-home" text lg class="pa4"&gt;&lt;/w-button&gt;
+          &lt;w-button icon="mdi mdi-chat" text lg class="pa4"&gt;&lt;/w-button&gt;
+          &lt;w-button icon="mdi mdi-email" text lg class="pa4"&gt;&lt;/w-button&gt;
+        &lt;/w-toolbar&gt;
+
+        &lt;w-flex align-center justify-center&gt;
+          Some content.
+        &lt;/w-flex&gt;
+      &lt;/w-card&gt;
 </template>
 
 <style lang="scss">
