@@ -125,7 +125,7 @@ export default {
       if (this.externalCss) cssDeps.push(this.externalCss)
 
       const jsDeps = [
-        'https://unpkg.com/vue@latest/dist/vue.js',
+        'https://unpkg.com/vue@legacy/dist/vue.js',
         'https://unpkg.com/wave-ui@latest/dist/wave-ui.umd.js'
       ]
       if (this.externalJs) jsDeps.push(this.externalJs)
