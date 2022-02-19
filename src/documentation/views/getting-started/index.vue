@@ -34,7 +34,10 @@ main
 
   w-divider.my12
   title-link(h2) What next?
-  p Read on the knowledge base pages! It will give you an overview of all the power in your hands!
+  p.
+    #[strong You are now good to go and free to decide what you want to add in your app.]#[br]
+    But we recommend that you read on the knowledge base pages soon!
+    It will give you an overview of all the power in your hands!
   h3 Then what next?
   p
     | Now that you are more familiar with Wave UI, you can start from the
