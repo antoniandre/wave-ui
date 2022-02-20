@@ -28,7 +28,7 @@ main
 
     //- Nuxt install.
     template(#item-title.3)
-      title-link.ma0(h2 slug="installation-on-nuxt") Installation on Nuxt (Vue 2)
+      title-link.ma0(h2 slug="installation-on-nuxt") Installation on Nuxt
     template(#item-content.3)
       nuxt-install
 
