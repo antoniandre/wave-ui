@@ -3,7 +3,7 @@ div
   title-link(h2) Basic
   example
     w-tabs(:items="tabs1")
-    //- template(#pug).
+    template(#pug).
       w-tabs(:items="tabs")
     template(#html).
       &lt;w-tabs :items="tabs"&gt;&lt;/w-tabs&gt;
@@ -20,11 +20,13 @@ div
   example
     w-tabs(:items="tabs4.items" center)
     w-tabs.mt4(:items="tabs4.items" right)
-    //- template(#pug).
+    template(#pug).
       w-tabs(:items="tabs" center)
+      br
       w-tabs(:items="tabs" right)
     template(#html).
       &lt;w-tabs :items="tabs" center&gt;&lt;/w-tabs&gt;
+      &lt;br /&gt;
       &lt;w-tabs :items="tabs" right&gt;&lt;/w-tabs&gt;
     template(#js).
       data: () => ({
@@ -39,7 +41,7 @@ div
   example
     w-switch.mb3(v-model="tabs2.fillBar") Fill bar
     w-tabs(:items="tabs2.items" :fill-bar="tabs2.fillBar")
-    //- template(#pug).
+    template(#pug).
       w-switch.mb3(v-model="fillBar") Fill bar
       w-tabs(:items="tabs" :fill-bar="fillBar")
     template(#html).
@@ -69,7 +71,7 @@ div
     strong
       | v-model:
       code.ml2 {{ tabs2.active }}
-    //- template(#pug).
+    template(#pug).
       w-tabs(v-model="activeTab" :items="tabs")
       strong
         | v-model:
@@ -103,7 +105,7 @@ div
   .title3 Color &amp; bg-color
   example
     w-tabs(:items="tabs2.items" color="blue" bg-color="indigo-light5")
-    //- template(#pug).
+    template(#pug).
       w-tabs(:items="tabs" color="blue" bg-color="indigo-light5")
     template(#html).
       &lt;w-tabs
@@ -125,7 +127,7 @@ div
   .title3.mt4 Slider color
   example
     w-tabs(:items="tabs2.items" slider-color="blue-light2")
-    //- template(#pug).
+    template(#pug).
       w-tabs(:items="tabs" slider-color="blue-light2")
     template(#html).
       &lt;w-tabs
@@ -150,7 +152,7 @@ div
       color="blue"
       active-class="pink"
       slider-color="pink")
-    //- template(#pug).
+    template(#pug).
       w-tabs(
         :items="tabs"
         color="blue"
@@ -178,7 +180,7 @@ div
   example
     w-switch.mb3(v-model="tabs2.slider") Slider
     w-tabs(:items="tabs2.items" :no-slider="!tabs2.slider" active-class="pink")
-    //- template(#pug).
+    template(#pug).
       w-switch.mb3(v-model="tabsSlider") Slider
       w-tabs(:items="tabs" :no-slider="!tabsSlider" active-class="pink")
     template(#html).
@@ -208,7 +210,7 @@ div
   example
     w-radios.mb3(:items="transitions" v-model="tabs4.transition")
     w-tabs(:items="tabs4.items" :transition="tabs4.transition")
-    //- template(#pug).
+    template(#pug).
       w-radios.mb3(:items="transitions" v-model="transition")
       w-tabs(:items="tabs" :transition="transition")
     template(#html).
@@ -255,7 +257,7 @@ div
     w-tabs(:items="tabs3.tabsCount")
       template(#item-title="{ index }") Tab {{ index }}
       template(#item-content="{ index }") Content {{ index }}
-    //- template(#pug).
+    template(#pug).
       w-flex.mb3(align-center)
         | Number of tabs:
         w-button.mx2(icon="wi-minus" sm @click="tabsCount -= tabsCount &lt; 1 ? 0 : 1")
@@ -301,7 +303,7 @@ div
   title-link(h2) Card style tabs
   example
     w-tabs(:items="tabs1" card)
-    //- template(#pug).
+    template(#pug).
       w-tabs(:items="tabs" card)
     template(#html).
       &lt;w-tabs :items="tabs" card&gt;&lt;/w-tabs&gt;
@@ -332,7 +334,7 @@ div
       @click="tabs6.items = tabs6.originals.slice(0)"
       :disabled="tabs6.items.length === 3") Reset tabs
 
-    //- template(#pug).
+    template(#pug).
       w-tabs(:items="tabs" card)
         template(#item-title="{ item, index }")
           | {{ '\{\{ item.title \}\}' }}
@@ -376,7 +378,7 @@ div
       template(#item-content.1="{ item }")
         .title3 This is a custom tab content.
         div(v-html="item.content")
-    //- template(#pug).
+    template(#pug).
       w-tabs(:items="tabs" card)
         template(#item-title="{ item }")
           w-icon.mr1.green mdi mdi-star
@@ -442,7 +444,7 @@ div
         w-button.bdrsr.mr2(
           icon="wi-plus"
           @click="tabs7.tabsCount++;tabs7.currentTab = tabs7.tabsCount - 1")
-    //- template(#pug).
+    template(#pug).
       w-tabs(ref="tabs" :items="tabs.tabsCount" v-model="tabs.currentTab")
         template(#item-title="{ index }") Item title {{ index }}
         template(#item-content="{ index }") Item content {{ index }}
@@ -490,7 +492,7 @@ div
     w-tabs(ref="tabs" :items="tabs8")
       template(#item-content="{ item }")
         w-input.my6(v-model="item.title" label="Tab title" @keyup="onTitleChange")
-    //- template(#pug).
+    template(#pug).
       w-tabs(ref="tabs" :items="tabs")
         template(#item-content="{ item }")
           w-input.my6(v-model="item.title" label="Tab title" @keyup="onTitleChange")
