@@ -235,11 +235,6 @@ export default {
   background-color: #fcfcfc;
   border-radius: 3px;
 
-  .w-tabs {
-    border-radius: 0;
-    border-width: 1px 0 0;
-  }
-
   .buttons {
     border-left: 1px solid #eee;
     display: flex;
@@ -257,6 +252,11 @@ export default {
   }
 
   &__source {position: relative;}
+
+  &__source > .w-tabs {
+    border-radius: 0;
+    border-width: 1px 0 0;
+  }
 
   &__source .w-tabs__bar-item {
     font-size: 0.95rem;
