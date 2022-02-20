@@ -21,6 +21,11 @@ main
         w-icon.ml-1.mr1.grey wi-chevron-right
         | #[span.code.inherit npm i wave-ui]
 
+    li.patch
+      strong.version v2.31.1
+      ul
+        li #[strong.code w-spinner]: Fix the toggling using v-model or modelValue on Vue 3.
+
     li.major.dashed
       strong.version v2.0
       alert(warning)
@@ -31,9 +36,6 @@ main
           w-icon.ml1 mdi mdi-open-in-new
         | ,
         span.ml1.text-bold and so does Wave UI 2.0.
-
-      ul
-        li #[strong.code w-spinner]: Fix the toggling using v-model or modelValue on Vue 3.
 
       br
       br
@@ -50,12 +52,12 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
-    li.minor
+    li.patch
       strong.version v1.49.2
       ul
-        li #[strong.code w-input]: Fix a regression related to #[issue-link 79].
+        li #[strong.code w-input]: Fix a regression related to #[issue-link 77].
 
-    li.minor
+    li.patch
       strong.version v1.49.1
       ul
         li #[strong.code w-select]: prevent a console warning before hydration. #[issue-link 79]
