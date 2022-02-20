@@ -1,7 +1,10 @@
 <template lang="pug">
 .w-progress(:class="classes" :style="styles")
   //- Linear progress.
-  .w-progress__progress(v-if="!circle" :class="{ full: progressValue === 100 }" :style="`width: ${progressValue}%`")
+  .w-progress__progress(
+    v-if="!circle"
+    :class="{ full: progressValue === 100 }"
+    :style="`width: ${progressValue}%`")
 
   //- Circular progress.
   template(v-else)
