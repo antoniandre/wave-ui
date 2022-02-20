@@ -3,7 +3,7 @@ div
   title-link(h2) Basic
   example
     w-timeline(:items="items1")
-    //- template(#pug).
+    template(#pug).
       w-timeline(:items="items")
     template(#html).
       &lt;w-timeline :items="items"&gt;&lt;/w-timeline&gt;
@@ -23,7 +23,7 @@ div
     bullet or icon, and the item title, on each item.
   example
     w-timeline(:items="items1" color="green")
-    //- template(#pug).
+    template(#pug).
       w-timeline(:items="items" color="green")
     template(#html).
       &lt;w-timeline :items="items" color="green"&gt;&lt;/w-timeline&gt;
@@ -44,7 +44,7 @@ div
     The name of this attribute can be changed via the #[code item-color-key] prop.
   example
     w-timeline(:items="items2")
-    //- template(#pug).
+    template(#pug).
       w-timeline(:items="items")
     template(#html).
       &lt;w-timeline :items="items"&gt;&lt;/w-timeline&gt;
@@ -62,7 +62,7 @@ div
   p The icon provided through the #[code icon] prop will apply to all the items.
   example
     w-timeline(:items="items1" icon="wi-check" color="green")
-    //- template(#pug).
+    template(#pug).
       w-timeline(:items="items" icon="wi-check" color="green")
     template(#html).
       &lt;w-timeline :items="items" icon="wi-check" color="green"&gt;&lt;/w-timeline&gt;
@@ -83,7 +83,7 @@ div
     The name of this attribute can be changed via the #[code item-icon-key] prop.
   example
     w-timeline(:items="items3" color="primary")
-    //- template(#pug).
+    template(#pug).
       w-timeline(:items="items" color="primary")
     template(#html).
       &lt;w-timeline :items="items" color="primary"&gt;&lt;/w-timeline&gt;
@@ -104,7 +104,7 @@ div
         w-icon wi-check
         span.mx2 This is the custom item
         w-tag.white.grey-light2--bg {{ index }}
-    //- template(#pug).
+    template(#pug).
       w-timeline(:items="items")
         template(#item="{ item, index }")
           w-icon wi-check
@@ -140,9 +140,9 @@ div
       template(#item.3)
         span.pink.mr1 My favorite item: 3
         w-icon.pink mdi mdi-heart
-    //- template(#pug).
+    template(#pug).
       w-timeline(:items="items")
-        template(#item.3="")
+        template(#item.3)
           .pink My favorite item: 3
           w-icon.pink mdi mdi-heart
     template(#html).
