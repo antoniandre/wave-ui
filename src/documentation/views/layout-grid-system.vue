@@ -171,6 +171,27 @@ main
       &lt;/w-flex&gt;
 
   title-link(h2) Operating with breakpoints
+  example
+    w-card.blue-light5--bg
+      .title2.mt0 Current breakpoint: #[code {{ $waveui.breakpoint.name }}]
+      em.grey.mt1 Resizing your browser will update the current breakpoint.
+    template(#pug).
+      w-card.blue-light5--bg
+        .title2
+          | Current breakpoint:
+          code {{ '\{\{ $waveui.breakpoint.name \}\}' }}
+        em.grey.mt1 Resizing your browser will update the current breakpoint.
+    template(#html).
+      &lt;w-card class="blue-light5--bg"&gt;
+        &lt;div class="title2 mt0"&gt;
+          Current breakpoint:
+          &lt;code&gt;{{ '\{\{ $waveui.breakpoint.name \}\}' }}&lt;/code&gt;
+        &lt;/div&gt;
+        &lt;em class="grey mt1"&gt;
+          Resizing your browser will update the current breakpoint.
+        &lt;/em&gt;
+      &lt;/w-card&gt;
+
   p For this example, resize your browser and observe the different layout when crossing a breakpoint.
   example
     w-flex.text-center(wrap)
