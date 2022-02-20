@@ -15,7 +15,7 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import Wtextarea from '@/wave-ui/components/w-textarea.vue'
 
 const propsDescs = {
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>The text content of the textarea.<br>Gets updated on textarea input.',
+  modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>The text content of the textarea.<br>Gets updated on textarea input.',
   label: 'Sets a visible label for the textarea.',
   labelPosition: 'Sets the position of the label to one of the following positions: \'left\', \'right\', \'inside\'.',
   innerIconLeft: 'Adds an icon on the left inside the textarea.<br>Accepts a string: e.g. <code>mdi mdi-eye</code>.',

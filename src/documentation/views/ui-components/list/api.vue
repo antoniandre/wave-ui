@@ -15,7 +15,7 @@ import WList from '@/wave-ui/components/w-list.vue'
 
 const propsDescs = {
   items: 'Expecting an array of objects. Each object being a list item, it should include at least a <code>label</code> attribute.<br>Alternatively, you can provide an integer number (call it <em class="code">x</em>), to loop through and create <em class="code">x</em> items in the list. You can then use the individual slots <code>item-title.x</code> &amp; <code>item-content.x</code> to define each item.',
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide an array of values if <code>multiple</code> is set to true, or a single value otherwise, to dictate the selected state of the list items.<br>Also accepts full objects when <code>return-object</code> is set to true.<br>This value gets updated when using a v-model.',
+  modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide an array of values if <code>multiple</code> is set to true, or a single value otherwise, to dictate the selected state of the list items.<br>Also accepts full objects when <code>return-object</code> is set to true.<br>This value gets updated when using a v-model.',
   checklist: 'Sets the type of list to checklist: each item has a checkbox.',
   roundCheckboxes: 'When <code>checklist</code> is true, displays round checkboxes instead of square ones.',
   multiple: 'When selectable, allows multiple selections. A checklist always has multiple selections.',
