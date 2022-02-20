@@ -28,9 +28,9 @@ div
     template(#html).
       &lt;w-spinner bounce /&gt;
 
-  title-link(h2) Value or v-model
+  title-link(h2) Model-value or v-model
   p.
-    Both the #[code model-value] and #[code v-model] will control the spinner visibility, but there is not
+    Both the #[code model-value] (or #[code value] for Vue 2) and #[code v-model] will control the spinner visibility, but there is not
     much point in using a #[code v-model] here as the spinner will never emit a value update.
   example(content-class="w-flex")
     w-button.mr4(@click="showSpinner = !showSpinner") Toggle spinner
