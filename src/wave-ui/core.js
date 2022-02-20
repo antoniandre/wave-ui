@@ -79,14 +79,6 @@ export default class WaveUI {
       // Merge user options into the default config.
       mergeConfig(options)
 
-      // @todo: remove this warning in version 1.40+.
-      if (config.disableColorShades) {
-        consoleWarn(
-          'WARNING - Since version 1.30, the option `disableColorShades` is replaced with `css.colorShades`.\n' +
-          'https://antoniandre.github.io/wave-ui/release-notes'
-        )
-      }
-
       // Add color shades for each custom color given in options.
       if (config.css.colorShades) {
         config.colorShades = {}
