@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-spinner(v-if="value || value === undefined" :class="classes" :style="styles")
+.w-spinner(v-if="modelValue || modelValue === undefined" :class="classes" :style="styles")
   span(v-if="isThreeDots")
 </template>
 
@@ -7,7 +7,7 @@
 export default {
   name: 'w-spinner',
   props: {
-    value: {},
+    modelValue: {},
     color: { type: String, default: 'primary' },
     xs: { type: Boolean },
     sm: { type: Boolean },
