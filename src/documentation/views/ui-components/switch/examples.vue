@@ -6,6 +6,7 @@ div
     w-switch.ma2(:model-value="false" label="Off")
     w-switch.ma2(:model-value="true" disabled label="On disabled")
     w-switch.ma2(:model-value="false" disabled label="Off disabled")
+    template(#pug).
     template(#html).
       &lt;w-switch
         class="ma2"
@@ -39,6 +40,11 @@ div
     span.title3.mb0
       | v-model value:
       code.ml2 {{ value }}
+    template(#pug).
+      w-switch.mr6(v-model="value")
+      span.title3.mb0
+        | v-model value:
+        code.ml2 {{ value }}
     template(#html).
       &lt;w-switch class="mr6" v-model="value"&gt;&lt;/w-switch&gt;
       &lt;span class="title3 mb0"&gt;
@@ -57,6 +63,12 @@ div
     w-switch.ma2(:model-value="true" color="warning")
     w-switch.ma2(:model-value="true" color="success")
     w-switch.ma2(:model-value="true" color="info")
+    template(#pug).
+      w-switch.ma2(:model-value="true" color="pink")
+      w-switch.ma2(:model-value="true" color="error")
+      w-switch.ma2(:model-value="true" color="warning")
+      w-switch.ma2(:model-value="true" color="success")
+      w-switch.ma2(:model-value="true" color="info")
     template(#html).
       &lt;w-switch
         class="ma2"
@@ -94,6 +106,11 @@ div
     w-switch.ma2(:model-value="false" thin label="Off")
     w-switch.ma2(:model-value="true" disabled thin label="On disabled")
     w-switch.ma2(:model-value="false" disabled thin label="Off disabled")
+    template(#pug).
+      w-switch.ma2(:model-value="true" thin label="On")
+      w-switch.ma2(:model-value="false" thin label="Off")
+      w-switch.ma2(:model-value="true" disabled thin label="On disabled")
+      w-switch.ma2(:model-value="false" disabled thin label="Off disabled")
     template(#html).
       &lt;w-switch
         class="ma2"
