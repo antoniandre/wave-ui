@@ -37,7 +37,7 @@ main
   p.mt3
     strong Notes:
     ul
-      li #[span.code sass-loader 11+] only works with Webpack 5.
+      li #[span.code sass-loader 11+] is not compatible with Webpack 4 or less.
       li
         | The #[span.code sass] update is needed to handle the
         a.ml1(href="https://github.com/sass/sass/issues/2565" target="_blank")
@@ -60,11 +60,23 @@ main
       | Import your SCSS variables file globally from Vue config and re-serve the app.
       ssh-pre.mt5(language="js" label="vue.config.js").
         module.exports = {
-          transpileDependencies: ['wave-ui'], // ! \\
+          transpileDependencies: ['wave-ui'],
           css: {
             loaderOptions: {
               // `additionalData` was called `prependData` prior sass-loader 9.
               sass: { additionalData: '@import "@/scss/_variables.scss";' }
+            }
+          }
+        }
+
+      p.
+        #[strong Or if you use Vite],
+        In #[span.code vite.config.js], the import of variables is done like so:
+      ssh-pre(language="js" label="vite.config.js").
+        css: {
+          preprocessorOptions: {
+            scss: {
+              additionalData: '@import "@/scss/variables";'
             }
           }
         }
