@@ -37,8 +37,8 @@ div
 
   title-link(h2) v-model
   p.
-    The value of the textarea can be provided via the #[code value] attribute (or #[code model-value]
-    for Vue 3) or via #[code v-model] for two-way binding.#[br]
+    The value of the textarea can be provided via the #[code model-value] attribute (or #[code value]
+    for Vue 2) or via #[code v-model] for two-way binding.#[br]
     By default the textarea's height adapts to the content like in this example.
 
   example

@@ -296,7 +296,7 @@ div
 
   title-link(h2) V-model
   alert(tip).
-    By default, the #[span.code w-select] component expects the items to have a #[code value] attribute.#[br]
+    By default, the #[span.code w-select] component expects the items to have a #[code model-value] attribute.#[br]
     If this is a constraint, you can use the option #[code item-value-key] to specify the name of another
     attribute to be used instead (must have a unique value), like an id for instance.
   example
