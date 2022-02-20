@@ -156,8 +156,8 @@ export default {
       if (this.usePug && slots.pug) {
         if (blanks.includes('pug')) html = slots.pug.replace(/\n+$/, '')
         else {
-          html = `w-app#app${this.appPropsString ? `(${this.appPropsString})` : ''}\n  ` +
-                 slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n  ')
+          html = `#app\n  w-app${this.appPropsString ? `(${this.appPropsString})` : ''}\n    ` +
+                 slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n    ')
         }
       }
 
@@ -165,9 +165,11 @@ export default {
       else {
         if (blanks.includes('html')) html = slots.html.replace(/\n+$/, '')
         else {
-          html = `<w-app id="app"${this.appPropsString ? ` ${this.appPropsString}` : ''}>\n  ` +
-                 slots.html.replace(/\n+$/, '').replace(/\n/g, '\n  ') +
-                 '\n</w-app>\n'
+          html = '<div id="app">\n'
+                    `  <w-app id="app"${this.appPropsString ? ` ${this.appPropsString}` : ''}>\n    ` +
+                      slots.html.replace(/\n+$/, '').replace(/\n/g, '\n    ') +
+                    '\n  </w-app>\n'
+                 '\n</div>\n'
         }
       }
 
