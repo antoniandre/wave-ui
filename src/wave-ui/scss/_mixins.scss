@@ -6,14 +6,11 @@
   transition: $duration $delay cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-/**
- * Generates a triangle arrow on the edge of an element.
- *
- * @param $color: the color to apply to the triangle.
- * @param $selector: the element selector that receives the modifiers (--top, --left, etc.).
- * @param $size: the triangle size at the base.
- * @param $thickness: the border thickness, 0 to remove the border.
- */
+// Generates a triangle arrow on the edge of an element.
+// @param $color: the color to apply to the triangle.
+// @param $selector: the element selector that receives the modifiers (--top, --left, etc.).
+// @param $size: the triangle size at the base.
+// @param $thickness: the border thickness, 0 to remove the border.
 @mixin triangle($color: white, $selector: '', $size: 7px, $thickness: 1px) {
   @if ($thickness > 0) {
     // The underneath border triangle.
