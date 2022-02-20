@@ -148,7 +148,7 @@ main
       w-tag(color="mint-green" bg-color="navy-blue" lg)
     ssh-pre.ml3(v-show="!$store.state.usePug" language="html-vue").
       &lt;w-tag color="mint-green" bg-color="navy-blue" lg&gt;tag&lt;/w-tag&gt;
-    w-tag.align-self-end(color="mint-green" bg-color="navy-blue" lg) Tag
+    w-tag.mb4.align-self-end(color="mint-green" bg-color="navy-blue" lg) Tag
 </template>
 
 <script>
