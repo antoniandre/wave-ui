@@ -14,7 +14,7 @@ div
 import WDrawer from '@/wave-ui/components/w-drawer.vue'
 
 const propsDescs = {
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the drawer. Any truthy value will show the drawer whereas any falsy value will hide it.',
+  modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>This prop controls the visibility of the drawer. Any truthy value will show the drawer whereas any falsy value will hide it.',
   left: 'Places the drawer at the left of the screen, or at the left of its container when the <code>absolute</code> prop is set to true.',
   right: 'Places the drawer at the right of the screen, or at the right of its container when the <code>absolute</code> prop is set to true.',
   top: 'Places the drawer at the top of the screen, or at the top of its container when the <code>absolute</code> prop is set to true.',

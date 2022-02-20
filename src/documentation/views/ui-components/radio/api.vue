@@ -32,7 +32,7 @@ import WRadio from '@/wave-ui/components/w-radio.vue'
 const radios = {
   propsDescs: {
     items: 'An array of radio button items to display. Each item object should contain at least a <code>label</code> or a <code>value</code> attribute.',
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide a value (of one of the <code>items</code> objects) to dictate the selected choice.<br>This value gets updated when using a v-model.',
+    modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide a value (of one of the <code>items</code> objects) to dictate the selected choice.<br>This value gets updated when using a v-model.',
     labelOnLeft: 'Moves the label to the left of each radio button. By default the label is displayed on the right.',
     itemLabelKey: 'The property name (aka "key") in each item object where to find the label of the item (if any).',
     itemValueKey: 'The property name (aka "key") in each item object where to find the value of the item (if any).',
@@ -87,7 +87,7 @@ const radios = {
 
 const radio = {
   propsDescs: {
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide a boolean to dictate the selected state of the radio button.<br>This value gets updated when using a v-model.',
+    modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide a boolean to dictate the selected state of the radio button.<br>This value gets updated when using a v-model.',
     returnValue: 'Since the native HTML radio uses the <code>value</code> attribute to define the selected state, the <code>return-value</code> prop let you specify a value to return to the <code>v-model</code> when the radio is selected (instead of returning <code>true</code>).',
     label: 'Sets a visible label for the radio button.',
     labelOnLeft: 'Moves the label to the left of the radio button. By default the label is displayed on the right.',

@@ -14,7 +14,7 @@ div
 import WMenu from '@/wave-ui/components/w-menu.vue'
 
 const propsDescs = {
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>This prop controls the visibility of the menu. Any truthy value will show the menu whereas any falsy value will hide it.',
+  modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>This prop controls the visibility of the menu. Any truthy value will show the menu whereas any falsy value will hide it.',
   showOnHover: 'Triggers the menu apparition on activator hover instead of click by default. A mouseleave on the activator will hide the menu.',
   hideOnMenuClick: 'Hides the menu when a click is made inside the menu. For instance when selecting a list item inside a menu.',
   color: 'Applies a color to the menu\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',

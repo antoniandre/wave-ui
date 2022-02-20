@@ -16,7 +16,7 @@ import WSelect from '@/wave-ui/components/w-select.vue'
 
 const propsDescs = {
   items: 'Expecting an array of objects. Each object being a select list item, it should include at least a <code>label</code> attribute.',
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>The current selection of the select field.<br>Gets updated on selection change.',
+  modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>The current selection of the select field.<br>Gets updated on selection change.',
   multiple: 'Allows multiple selections. When set to <code>true</code>, the list of choices will stay open after selecting an item.',
   placeholder: 'Provide a placeholder for the select field. If a label is positioned inside, it will be moved above the field so it doesn\'t overlap.',
   label: 'Sets a visible label for the select field.',

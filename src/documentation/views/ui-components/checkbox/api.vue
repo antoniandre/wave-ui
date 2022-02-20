@@ -31,7 +31,7 @@ import WCheckbox from '@/wave-ui/components/w-checkbox.vue'
 const checkboxes = {
   propsDescs: {
     items: 'An array of checkbox items to display. Each item object should contain at least a <code>label</code> or a <code>value</code> attribute.',
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide an array of values to dictate the checked state of all the checkboxes.<br>This value gets updated when using a v-model.',
+    modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide an array of values to dictate the checked state of all the checkboxes.<br>This value gets updated when using a v-model.',
     labelOnLeft: 'Moves the label to the left of each checkbox.',
     itemLabelKey: 'The property name (aka "key") in each item object where to find the label of the item (if any).',
     itemValueKey: 'The property name (aka "key") in each item object where to find the value of the item (if any).',
@@ -87,7 +87,7 @@ const checkboxes = {
 
 const checkbox = {
   propsDescs: {
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide a boolean to dictate the checked state the checkbox.<br>This value gets updated when using a v-model.',
+    modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide a boolean to dictate the checked state the checkbox.<br>This value gets updated when using a v-model.',
     returnValue: 'Since the native HTML checkbox element uses the <code>value</code> attribute to define the checked state, the <code>return-value</code> prop let you specify a value to return to the <code>v-model</code> when the checkbox is checked (instead of returning <code>true</code>).',
     label: 'Sets a visible label for the checkbox.',
     labelOnLeft: 'Moves the label to the left of the checkbox. By default the label is displayed on the right.',
