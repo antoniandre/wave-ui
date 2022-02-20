@@ -8,21 +8,48 @@ main
   ul.history
     //- Vue 3.
     //-----------------------------------------------------
+
+    //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+    li.dashed
+      w-flex.mt8(align-center)
+        w-tag.pl3.pr2.text-bold(round bg-color="vue-green" color="white")
+          | VUE 3
+          w-icon.ml1(md) wi-chevron-down
+        .w-divider.grow.mr8.vue-green--bg
+
+      small.grey.mt1
+        w-icon.ml-1.mr1.grey wi-chevron-right
+        | #[span.code.inherit npm i wave-ui]
+
     li.major.dashed
-      strong.version v2.x (Vue 3 only)
-      p.
-        #[code wave-ui@next] should always be including the last version changes listed bellow
-        (maintaining 2 different versions of the documentation and release notes is a lot of extra
-        work!).#[br]
-        If you find anything missing or not working as expected please open an issue precising the Vue
-        and Wave UI versions. :)
+      strong.version v2.0
+      alert(warning)
+        | From this version onwards, Vue 3 must be installed:
+        br
+        a.ml1(href="https://blog.vuejs.org/posts/vue-3-as-the-new-default.html" target="_blank")
+          | Vue 3 is the new default
+          w-icon.ml1 mdi mdi-open-in-new
+        | ,
+        span.ml1.text-bold and so does Wave UI 2.0.
+
+      ul
+        li #[strong.code w-spinner]: Fix the toggling using v-model or modelValue on Vue 3.
+
       br
       br
+      br
+      w-flex.mt8(align-center)
+        w-tag.pl3.pr2.text-bold(round bg-color="vue-green" color="white")
+          | VUE 2
+          w-icon.ml1(md) wi-chevron-down
+        .w-divider.grow.mr8.vue-green--bg
+
+      small.grey.mt1
+        w-icon.ml-1.mr1.grey wi-chevron-right
+        | #[span.code.inherit npm i wave-ui@legacy]
 
     //- Vue 2.
     //-----------------------------------------------------
-    //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
-
     li.minor
       strong.version v1.49.2
       ul
@@ -463,7 +490,7 @@ main
         li #[strong.code w-accordion]: return original accordion item in scoped slots.
         li #[strong.code w-tabs]: return original tab item in scoped slots.
         li #[strong.code w-tabs]: when deleting a tab, activate the previous one.
-        li.text-bold.red #[strong.code w-tabs]: now only accepts a numeric #[code value]/#[code v-model] instead of an array of boolean.
+        li.text-bold.red #[strong.code w-tabs]: now only accepts a numeric #[code model-value]/#[code v-model] instead of an array of boolean.
 
     li.patch
       strong.version v1.20.6
@@ -720,6 +747,7 @@ main
       transform: translate(-50%, -50%);
       z-index: 1;
     }
+    > li:first-child:before {display: none;}
 
     // Left border.
     > li:after {
@@ -740,7 +768,6 @@ main
     > li.patch .version {color: #999;}
     > li.minor .version {color: #555;}
     > li.major .version {color: #09c;font-size: 1.4rem;}
-    > li:nth-child(2) .version:after {content: ' (Vue 2.x)';font-size: 1.2em;}
 
     ul {margin-left: -2px;}
     li li {padding-left: 20px;margin-top: 2px;}
@@ -772,5 +799,8 @@ main
       font-size: 1.1em;
     }
   }
+
+  .vue-green {color: #42b883;}
+  .vue-green--bg {background-color: #42b883;}
 }
 </style>
