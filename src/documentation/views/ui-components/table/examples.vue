@@ -877,12 +877,14 @@ div
   example
     w-table(:headers="table5.headers" :items="table5.items" expandable-rows)
       template(#row-expansion="{ item }")
-        w-icon.mr2(:color="['blue', 'pink'][item.gender]") mdi {{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] }}
+        w-icon.mr2(:color="['blue', 'pink'][item.gender]")
+          | mdi {{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] }}
         | {{ item.firstName }} weighs #[strong {{ item.weight }}kg] and is #[strong {{ item.height }}m] tall.
     template(#pug).
       w-table(:headers="table.headers" :items="table.items" expandable-rows)
         template(#row-expansion="{ item }")
-          w-icon.mr2(:color="['blue', 'pink'][item.gender]") mdi {{ "\{\{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] \}\}" }}
+          w-icon.mr2(:color="['blue', 'pink'][item.gender]")
+            | mdi {{ "\{\{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] \}\}" }}
           | {{ "\{\{ item.firstName \}\}" }} weighs #[strong {{ "\{\{ item.weight \}\}" }}kg] and is #[strong {{ "\{\{ item.height \}\}" }}m] tall.
     template(#html).
       &lt;w-table
@@ -1057,7 +1059,10 @@ div
             :class="`pa4 text-${header.align || 'left'}`")
             | {{ item[header.key] || '' }}
     template(#pug).
-      w-table(:headers="table.headers" :items="table.items" selectable-rows)
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        selectable-rows)
         template(#item="{ item, index, select, classes }")
           tr(:class="classes" @click="select")
             td(
@@ -1116,7 +1121,11 @@ div
                 strong.mr2 {{ header.label }}:
                 | {{ item[header.key] || '' }}
     template(#pug).
-      w-table(:headers="table.headers" :items="table.items" no-headers selectable-rows)
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        no-headers
+        selectable-rows)
         template(#item="{ item, index, select, classes }")
           tr(
             :class="{ ...classes, 'indigo-light5--bg': index % 2, 'blue-light5--bg': !(index % 2) }"
@@ -1191,7 +1200,10 @@ div
   example
     w-table(:headers="table2.headers" :items="table2.items" :mobile-breakpoint="700")
     template(#pug).
-      w-table(:headers="table.headers" :items="table.items" :mobile-breakpoint="700")
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        :mobile-breakpoint="700")
     template(#html).
       &lt;w-table
         :headers="table.headers"
