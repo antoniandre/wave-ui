@@ -165,11 +165,11 @@ export default {
       else {
         if (blanks.includes('html')) html = slots.html.replace(/\n+$/, '')
         else {
-          html = '<div id="app">\n'
+          html = '<div id="app">\n' +
                     `  <w-app id="app"${this.appPropsString ? ` ${this.appPropsString}` : ''}>\n    ` +
                       slots.html.replace(/\n+$/, '').replace(/\n/g, '\n    ') +
-                    '\n  </w-app>\n'
-                 '\n</div>\n'
+                    '\n  </w-app>\n' +
+                 '</div>\n'
         }
       }
 
