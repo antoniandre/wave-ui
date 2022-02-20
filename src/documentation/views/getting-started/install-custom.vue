@@ -8,16 +8,16 @@ div
     li.mt10
       .title4 Install the dependencies &amp; devDependencies:
       .w-flex.align-center
-        ssh-pre.vue-install(language="shell") npm i wave-ui # Vue 2.x.
+        ssh-pre.vue-install(language="shell") npm i wave-ui # Vue 3.
         span.mx2 or
-        ssh-pre.vue-install(language="shell") npm i wave-ui@next # Vue 3.
+        ssh-pre.vue-install(language="shell") npm i wave-ui@legacy # Vue 2.x.
       ssh-pre.mb2(language="shell") npm i -D pug pug-plain-loader sass sass-loader@10
       small.text-italic.grey.
         The dev dependencies are only needed for building the project. They will not ship to production.
       p.mt3
         strong Notes:
         ul
-          li #[span.code sass-loader 11+] only works with Webpack 5.
+          li #[span.code sass-loader 11+] is not compatible with Webpack 4 or less.
           li
             | The #[span.code sass] update is needed to handle the
             a.ml1(href="https://github.com/sass/sass/issues/2565" target="_blank")
@@ -53,10 +53,22 @@ div
           css: {
             loaderOptions: {
               // `additionalData` was called `prependData` prior sass-loader 9.
-              sass: { additionalData: '@import "@/scss/_variables.scss";' }
+              sass: { additionalData: '@import "@/scss/variables.scss";' }
             }
           }
           // ----------------------------------------------------
+        }
+
+      .title4 Or if you use Vite:
+      p.
+        In #[span.code vite.config.js], the import of variables is done like so:
+      ssh-pre(language="js" label="vite.config.js").
+        css: {
+          preprocessorOptions: {
+            scss: {
+              additionalData: '@import "@/scss/variables";'
+            }
+          }
         }
 
     li.mt8
@@ -64,8 +76,37 @@ div
       p Update the #[span.code main.js] file, adding only the Wave UI components you need.
 
       w-tabs.mt4(:items="2" content-class="pa0")
-        template(#item-title.1) Vue 2.x
+        template(#item-title.1) Vue 3
         template(#item-content.1)
+          ssh-pre.ma0(language="js").
+            // Keep these 2 imports.
+            import { createApp } from 'vue'
+            import App from './App.vue'
+
+            // 1.
+            // Import Wave UI from the src directory &amp; create the Vue app.
+            import WaveUI from 'wave-ui/src/wave-ui/core'
+
+            const app = createApp(App)
+
+            // 2.
+            // Import only the components you need. e.g.
+            import { WApp, WButton } from 'wave-ui/src/wave-ui/components'
+
+            app.use(WaveUI, {
+              components: { WApp, WButton }
+            })
+
+            // 3.
+            // Instantiate the WaveUI class and register it in the Vue instance.
+            new WaveUI(app, {
+              // Some Wave UI options.
+            })
+
+            app.mount('#app')
+
+        template(#item-title.2) Vue 2.x
+        template(#item-content.2)
           ssh-pre.ma0(language="js").
             // Keep these 2 imports.
             import Vue from 'vue'
@@ -94,34 +135,6 @@ div
               render: h => h(App)
             }).$mount('#app')
 
-        template(#item-title.2) Vue 3
-        template(#item-content.2)
-          ssh-pre.ma0(language="js").
-            // Keep these 2 imports.
-            import { createApp } from 'vue'
-            import App from './App.vue'
-
-            // 1.
-            // Import Wave UI from the src directory &amp; create the Vue app.
-            import WaveUI from 'wave-ui/src/wave-ui/core'
-
-            const app = createApp(App)
-
-            // 2.
-            // Import only the components you need. e.g.
-            import { WApp, WButton } from 'wave-ui/src/wave-ui/components'
-
-            app.use(WaveUI, {
-              components: { WApp, WButton }
-            })
-
-            // 3.
-            // Instantiate the WaveUI class and register it in the Vue instance.
-            new WaveUI(app, {
-              // Some Wave UI options.
-            })
-
-            app.mount('#app')
       alert(info)
         div.mb4.
           Some Wave UI elements use other elements under the hood. For instance #[strong.code w-dialog] uses
