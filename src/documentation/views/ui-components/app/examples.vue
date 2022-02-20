@@ -34,12 +34,13 @@ div
             section.content.block.grow Main content
           section.footer Footer
         template(#pug).
-          w-app#app
-            header Header
-            w-flex(grow)
-              aside Nav menu
-              main.grow Main content
-            footer Footer
+          #app
+            w-app
+              header Header
+              w-flex(grow)
+                aside Nav menu
+                main.grow Main content
+              footer Footer
         template(#html).
           &lt;div id="app"&gt;
             &lt;w-app&gt;
@@ -71,17 +72,18 @@ div
           legend w-app
           .w-flex
             section.nav-menu.block Nav menu
-            .w-flex.column.grow
+            .w-flex.column
               section.header Header
               section.content.block.grow Main content
               section.footer Footer
         template(#pug).
-          w-app#app(row)
-            aside Nav menu
-            w-flex(grow)
-              header Header
-              main.grow Main content
-              footer Footer
+          #app
+            w-app(row)
+              aside Nav menu
+              w-flex(column)
+                header Header
+                main.grow Main content
+                footer Footer
         template(#html).
           &lt;w-app id="app" row&gt;
             &lt;aside&gt;Nav menu&lt;/aside&gt;
@@ -113,10 +115,11 @@ div
           section.content.block.grow Main content
           section.footer Footer
         template(#pug).
-          w-app#app
-            header Header
-            main.grow Main content
-            footer Footer
+          #app
+            w-app
+              header Header
+              main.grow Main content
+              footer Footer
         template(#html).
           &lt;div id="app"&gt;
             &lt;w-app&gt;
@@ -148,12 +151,13 @@ div
             section.content.block.grow Main content
             section.nav-menu.block Nav menu
         template(#pug).
-          w-app#app(block)
-            header Header
-            w-flex
-              main.grow.py12 Main content
-              aside Nav menu
-            footer Footer
+          #app
+            w-app(block)
+              header Header
+              w-flex
+                main.grow.py12 Main content
+                aside Nav menu
+              footer Footer
         template(#html).
           &lt;div id="app"&gt;
             &lt;w-app block&gt;
