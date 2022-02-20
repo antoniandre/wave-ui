@@ -116,7 +116,11 @@ div.lists-demo
   example
     w-list(:model-value="['Item 2']" :items="listItems4" selection-color="pink" multiple)
     template(#pug).
-      w-list(:model-value="['Item 2']" :items="items" selection-color="pink" multiple)
+      w-list(
+        :model-value="['Item 2']"
+        :items="items"
+        selection-color="pink"
+        multiple)
     template(#html).
       &lt;w-list
         :model-value="['Item 2']"
