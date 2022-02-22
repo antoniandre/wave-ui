@@ -6,10 +6,6 @@ main
     a.ml1(href="https://semver.org" target="_blank") Semantic versioning specs.
 
   ul.history
-    //- Vue 3.
-    //-----------------------------------------------------
-
-    //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
     li.dashed
       w-flex.mt8(align-center)
         w-tag.pl3.pr2.text-bold(round bg-color="vue-green" color="white")
@@ -20,6 +16,16 @@ main
       small.grey.mt1
         w-icon.ml-1.mr1.grey wi-chevron-right
         | #[span.code.inherit npm i wave-ui]
+
+    //- Vue 3.
+    //-----------------------------------------------------
+
+    //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+
+    li.patch
+      strong.version v2.31.2
+      ul
+        li #[strong.code w-icon]: Fix ligature icon fonts on Vue 3.
 
     li.patch
       strong.version v2.31.1
