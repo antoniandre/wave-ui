@@ -48,7 +48,7 @@ export default {
     ligature () {
       if (!config.iconsLigature) return false
 
-      const [fontName, icon] = this.$slots.default()[0].children
+      const [fontName, icon] = this.$slots.default()[0]?.children?.split(' ')
       return fontName === config.iconsLigature && { fontName, icon }
     },
     forcedSize () {
