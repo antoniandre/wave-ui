@@ -354,7 +354,7 @@ div
         @success="onSuccess")
         w-input(required label="First name" :validators="[validators.required]")
         w-input.mt3(required label="Last name" :validators="[validators.required]")
-        w-input.mt3(disabled required label="User name" :validators="[validators.required]")
+        w-input.mt3(disabled label="User name")
 
         w-flex.mt4(wrap align-center justify-end)
           w-checkbox(required :validators="[validators.consent]") I agree to the terms &amp; conditions
@@ -380,29 +380,29 @@ div
         &lt;div class="message-box"&gt;
           &lt;w-transition-fade&gt;
             &lt;w-alert
-              class="my0 text-light"
               v-if="form.submitted"
               success
-              no-border&gt;
+              no-border
+              class="my0 text-light"&gt;
               The form is valid, ready to send it!
             &lt;/w-alert&gt;
 
             &lt;w-alert
-              class="my0 text-light"
               v-else-if="form.valid === false"
               error
-              no-border&gt;
+              no-border
+              class="my0 text-light"&gt;
               The form has {{ '\{\{ form.errorsCount \}\}' }} errors.
             &lt;/w-alert&gt;
           &lt;/w-transition-fade&gt;
         &lt;/div&gt;
 
         &lt;w-form
-          class="px8 pt2 pb12"
           v-model="form.valid"
           :errors-count.sync="form.errorsCount"
           @validate="onValidate"
-          @success="onSuccess"&gt;
+          @success="onSuccess"
+          class="px8 pt2 pb12"&gt;
 
           &lt;w-input
             required
@@ -411,21 +411,19 @@ div
           &lt;/w-input&gt;
 
           &lt;w-input
-            class="mt3"
             required
             label="Last name"
-            :validators="[validators.required]"&gt;
+            :validators="[validators.required]"
+            class="mt3"&gt;
           &lt;/w-input&gt;
 
           &lt;w-input
-            class="mt3"
             disabled
-            required
-            label="User name"
-            :validators="[validators.required]"&gt;
+            label="User name"]
+            class="mt3"&gt;
           &lt;/w-input&gt;
 
-          &lt;w-flex class="mt4" wrap align-center justify-end&gt;
+          &lt;w-flex wrap align-center justify-end class="mt4"&gt;
             &lt;w-checkbox
               required
               :validators="[validators.consent]"&gt;
@@ -435,18 +433,18 @@ div
             &lt;div class="spacer" /&gt;
 
             &lt;w-button
-              class="my1 mr2"
               bg-color="warning"
               type="reset"
-              @click="form.submitted = form.sent = false"&gt;
+              @click="form.submitted = form.sent = false"
+              class="my1 mr2"&gt;
               Reset
             &lt;/w-button&gt;
 
             &lt;w-button
-              class="my1"
               type="submit"
               :disabled="form.valid === false"
-              :loading="form.submitted &amp;&amp; !form.sent"&gt;
+              :loading="form.submitted &amp;&amp; !form.sent"
+              class="my1"&gt;
               Validate
             &lt;/w-button&gt;
           &lt;/w-flex&gt;
