@@ -251,17 +251,18 @@ export default {
     overflow: auto;
   }
 
-  &__source {position: relative;}
+  &__source {
+    position: relative;
 
-  &__source > .w-tabs {
-    border-radius: 0;
-    border-width: 1px 0 0;
+    > .w-tabs {
+      border-radius: 0;
+      border-width: 1px 0 0;
+
+      .w-tabs__bar {overflow: hidden;}
+      .w-tabs__bar-item {font-size: 0.95rem;padding: 2px 8px;}
+    }
   }
 
-  &__source .w-tabs__bar-item {
-    font-size: 0.95rem;
-    padding: 2px 8px;
-  }
 
   .codepen-form {
     position: absolute;
