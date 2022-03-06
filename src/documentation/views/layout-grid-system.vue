@@ -41,7 +41,7 @@ main
       .xs2.pa1(v-for="i in 6" :key="i")
         .primary-light3--bg.py3 xs2
       .xs1.pa1(v-for="i in 12" :key="i")
-        .blue-light4--bg.pa3 xs1
+        .blue-light4--bg.py3 xs1
     template(#pug).
       w-flex.text-center(wrap)
         .xs12.pa1
@@ -57,7 +57,7 @@ main
         .xs2.pa1(v-for="i in 6" :key="i")
           .primary-light3--bg.py3 xs2
         .xs1.pa1(v-for="i in 12" :key="i")
-          .blue-light4--bg.pa3 xs1
+          .blue-light4--bg.py3 xs1
     template(#html).
       &lt;w-flex wrap class="text-center"&gt;
         &lt;div class="xs12 pa1"&gt;
@@ -84,7 +84,7 @@ main
         &lt;/div&gt;
 
         &lt;div v-for="i in 12" :key="i" class="xs1 pa1"&gt;
-          &lt;div class="blue-light4--bg pa3"&gt;xs1&lt;/div&gt;
+          &lt;div class="blue-light4--bg py3"&gt;xs1&lt;/div&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
 
