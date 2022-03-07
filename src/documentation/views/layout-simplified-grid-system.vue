@@ -21,13 +21,13 @@ main
     from 1 to 12.
   example
     w-grid.wrapper(columns="6")
-      .box(v-for="i in 12")
+      .box(v-for="i in 12" :key="i")
     template(#pug).
       w-grid.wrapper(columns="6")
-        .box(v-for="i in 12")
+        .box(v-for="i in 12" :key="i")
     template(#html).
       &lt;w-grid columns="6" class="wrapper"&gt;
-        &lt;div v-for="i in 12" class="box"&gt;&lt;/div&gt;
+        &lt;div v-for="i in 12" :key="i" class="box"&gt;&lt;/div&gt;
       &lt;/w-grid&gt;
     template(#css).
       .wrapper {
@@ -44,13 +44,13 @@ main
   title-link(h2) Gap
   example
     w-grid.wrapper(columns="6" gap="3")
-      .box(v-for="i in 12")
+      .box(v-for="i in 12" :key="i")
     template(#pug).
       w-grid.wrapper(columns="6" gap="3")
-        .box(v-for="i in 12")
+        .box(v-for="i in 12" :key="i")
     template(#html).
       &lt;w-grid columns="6" gap="3" class="wrapper"&gt;
-        &lt;div v-for="i in 12" class="box"&gt;&lt;/div&gt;
+        &lt;div v-for="i in 12" :key="i" class="box"&gt;&lt;/div&gt;
       &lt;/w-grid&gt;
     template(#css).
       .wrapper {
@@ -70,18 +70,18 @@ main
     per breakpoint.
   example
     w-grid.wrapper(:columns="{ xs: 1, sm: 2, md: 3, lg: 4, xl: 6 }" gap="3")
-      .box(v-for="i in 12")
+      .box(v-for="i in 12" :key="i")
     template(#pug).
       w-grid.wrapper(
         :columns="{ xs: 1, sm: 2, md: 3, lg: 4, xl: 6 }"
         gap="3")
-        .box(v-for="i in 12")
+        .box(v-for="i in 12" :key="i")
     template(#html).
       &lt;w-grid
         :columns="{ xs: 1, sm: 2, md: 3, lg: 4, xl: 6 }"
         gap="3"
         class="wrapper"&gt;
-        &lt;div v-for="i in 12" class="box"&gt;&lt;/div&gt;
+        &lt;div v-for="i in 12" :key="i" class="box"&gt;&lt;/div&gt;
       &lt;/w-grid&gt;
     template(#css).
       .wrapper {

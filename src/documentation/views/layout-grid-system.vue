@@ -29,11 +29,11 @@ main
         Use the predefined classes on the children in order to divide the available width
         according to the class in use.
 
-  fieldset.w-flex.pa4.pt3.amber-light5--bg.por(style="position: relative")
+  fieldset.w-flex.pa4.pt3.amber-light5--bg(style="position: relative")
     legend.px1 #[strong.code.amber-dark3 &lt;w-flex&gt;]
-    fieldset.por.xs3.light-blue-light5--bg.pa3.code
+    fieldset.xs3.light-blue-light5--bg.pa3.code
       legend.light-blue-dark2.px1 div.xs3
-    fieldset.por.xs9.light-blue-light5--bg.pa3.code.ml1
+    fieldset.xs9.light-blue-light5--bg.pa3.code.ml1
       legend.light-blue-dark2.px1 div.xs9
   p.mt6 In this case:
   ul
@@ -56,13 +56,13 @@ main
         .primary--bg.py3 xs6
       .xs6.pa1
         .primary--bg.py3 xs6
-      .xs4.pa1(v-for="i in 3" :key="i")
+      .xs4.pa1(v-for="i in 3")
         .primary-light1--bg.white.py3 xs4
-      .xs3.pa1(v-for="i in 4" :key="i")
+      .xs3.pa1(v-for="i in 4")
         .primary-light2--bg.white.py3 xs3
-      .xs2.pa1(v-for="i in 6" :key="i")
+      .xs2.pa1(v-for="i in 6")
         .primary-light3--bg.py3 xs2
-      .xs1.pa1(v-for="i in 12" :key="i")
+      .xs1.pa1(v-for="i in 12")
         .blue-light4--bg.py3 xs1
     template(#pug).
       w-flex.text-center(wrap)
@@ -72,13 +72,13 @@ main
           .primary--bg.py3 xs6
         .xs6.pa1
           .primary--bg.py3 xs6
-        .xs4.pa1(v-for="i in 3" :key="i")
+        .xs4.pa1(v-for="i in 3")
           .primary-light1--bg.white.py3 xs4
-        .xs3.pa1(v-for="i in 4" :key="i")
+        .xs3.pa1(v-for="i in 4")
           .primary-light2--bg.white.py3 xs3
-        .xs2.pa1(v-for="i in 6" :key="i")
+        .xs2.pa1(v-for="i in 6")
           .primary-light3--bg.py3 xs2
-        .xs1.pa1(v-for="i in 12" :key="i")
+        .xs1.pa1(v-for="i in 12")
           .blue-light4--bg.py3 xs1
     template(#html).
       &lt;w-flex wrap class="text-center"&gt;
@@ -93,19 +93,19 @@ main
           &lt;div class="primary--bg py3"&gt;xs6&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 3" :key="i" class="xs4 pa1"&gt;
+        &lt;div v-for="i in 3" class="xs4 pa1"&gt;
           &lt;div class="primary-light1--bg white py3"&gt;xs4&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 4" :key="i" class="xs3 pa1"&gt;
+        &lt;div v-for="i in 4" class="xs3 pa1"&gt;
           &lt;div class="primary-light2--bg white py3"&gt;xs3&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 6" :key="i" class="xs2 pa1"&gt;
+        &lt;div v-for="i in 6" class="xs2 pa1"&gt;
           &lt;div class="primary-light3--bg py3"&gt;xs2&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 12" :key="i" class="xs1 pa1"&gt;
+        &lt;div v-for="i in 12" class="xs1 pa1"&gt;
           &lt;div class="blue-light4--bg py3"&gt;xs1&lt;/div&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
