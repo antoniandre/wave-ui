@@ -110,7 +110,6 @@ export default {
       { label: 'Slideshow', route: '/slideshow' },
       { label: 'Splitter', route: '/splitter' }
     ]
-
   }),
 
   methods: {
