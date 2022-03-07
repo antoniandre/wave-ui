@@ -56,6 +56,11 @@ const routes = [
     component: () => import('@/documentation/views/layout-grid-system.vue')
   },
   {
+    path: '/layout--simplified-grid-system',
+    name: 'layout-simplified-grid-system',
+    component: () => import('@/documentation/views/layout-simplified-grid-system.vue')
+  },
+  {
     path: '/layout--flex',
     name: 'layout-flex',
     component: () => import('@/documentation/views/layout-flex.vue')
