@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  title-link.mt4(h1) Grid system
+  title-link.mt4(h1) Grid system (flexbox)
 
   .title3 The grid system (using flexbox) is 12-cell based by default.
   p.
@@ -17,6 +17,28 @@ main
           grid: 24
         }
       })
+
+  title-link(h2) How to use
+  alert(info)
+    | For this flexbox layout, you need to:
+    ol
+      li.
+        Use the #[strong.code w-flex] component or class on the parent in order to set the
+        #[strong flex] context (#[code display: flex]).
+      li.
+        Use the predefined classes on the children in order to divide the available width
+        according to the class in use.
+
+  fieldset.w-flex.pa4.pt3.amber-light5--bg.por(style="position: relative")
+    legend.px1 #[strong.code.amber-dark3 &lt;w-flex&gt;]
+    fieldset.por.xs3.light-blue-light5--bg.pa3.code
+      legend.light-blue-dark2.px1 div.xs3
+    fieldset.por.xs9.light-blue-light5--bg.pa3.code.ml1
+      legend.light-blue-dark2.px1 div.xs9
+  p.mt6 In this case:
+  ul
+    li xs3 represents 3 units of the 12-cell-based grid, which equals to: (100% total width ÷ 12 cells) x 3 = 25%
+    li xs9 represents 9 units of the 12-cell-based grid, which equals to: (100% total width ÷ 12 cells) x 9 = 75%
 
   title-link(h2) Basic grid
   p.
@@ -330,9 +352,20 @@ main
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
+
+  title-link(h2) Using the gap option with the grid system
+  p
+    | The #[strong.code.inherit w-flex] component has a
+    router-link.ml1(to="/layout--flex#gap") #[span.code.inherit gap] option
+    | , as well as #[router-link.ml1(to="/layout--flex#caveat") a caveat] when used with flex wrap.
 </template>
 
 <style lang="scss">
-.main--layout-grid-system .xs1 {overflow: hidden;}
-.main--layout-grid-system .xs1 div {display: flex;justify-content: center;}
+.main--layout-grid-system {
+  .xs1 {overflow: hidden;}
+  .xs1 div {display: flex;justify-content: center;}
+
+  fieldset {border: 2px solid rgba(#ca4, 0.8);}
+  fieldset fieldset {border: 1px solid rgba(#6cf, 0.8);}
+}
 </style>
