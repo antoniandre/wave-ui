@@ -23,6 +23,11 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v2.32.1
+      ul
+        li #[strong.code w-icon]: Fix a reactivity issue in Vue 3. #[issue-link 81]
+
+    li.minor
       strong.version v2.32.0
       ul
         li #[strong.code w-grid]: Added a new CSS-grid-based layout component.
@@ -31,7 +36,7 @@ main
     li.patch
       strong.version v2.31.2
       ul
-        li #[strong.code w-icon]: Fix ligature icon fonts on Vue 3.
+        li #[strong.code w-icon]: Fix ligature icon fonts in Vue 3.
 
     li.patch
       strong.version v2.31.1
