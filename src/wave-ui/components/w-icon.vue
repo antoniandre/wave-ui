@@ -48,7 +48,7 @@ export default {
     ligature () {
       if (!config.iconsLigature) return false
 
-      const [fontName, icon] = this.$slots.default()[0]?.children?.split(' ')
+      const [fontName, icon] = this.icon.split(' ')
       return fontName === config.iconsLigature && { fontName, icon }
     },
     forcedSize () {
@@ -66,7 +66,7 @@ export default {
     },
     classes () {
       return {
-        [this.$slots.default()[0].children]: true,
+        [this.icon]: true,
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
@@ -87,6 +87,16 @@ export default {
     styles () {
       return this.forcedSize && `font-size: ${this.forcedSize}`
     }
+  },
+
+  created () {
+    this.icon = this.$slots.default && this.$slots.default()[0].children
+  },
+
+  // Using the slot content directly in the classes computed is not always reacting to changes.
+  // https://github.com/antoniandre/wave-ui/issues/81
+  updated () {
+    this.icon = this.$slots.default && this.$slots.default()[0].children
   }
 }
 </script>
