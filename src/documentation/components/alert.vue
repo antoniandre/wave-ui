@@ -33,7 +33,20 @@ export default {
   font-weight: normal;
 
   &:after {display: none;}
-  .w-icon {height: auto;}
+  .w-icon {
+    border: 2px solid currentColor;
+    width: 19px;
+    height: 19px;
+
+    &:before {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: inherit;
+      height: inherit;
+      transform: none;
+    }
+  }
 
   &.alert--success {
     background-color: rgba(102, 204, 0, 0.1);
@@ -54,6 +67,7 @@ export default {
 
     &:before {background-color: #ffa600;}
     > .w-icon {color: #ffa600;}
+    > .w-icon:before {font-size: 22px;}
   }
 
   &.alert--error {
@@ -68,7 +82,7 @@ export default {
 
     &:before {background-color: #fd0;}
     > .w-icon {background-color: #ffd849;border-color: #ffd849;color: #fff;}
-    > .w-icon:before {font-size: 0.9em;}
+    > .w-icon:before {font-size: 16px;}
   }
 }
 </style>
