@@ -2,7 +2,6 @@ import { reactive } from 'vue'
 import config, { mergeConfig } from './utils/config'
 import NotificationManager from './utils/notification-manager'
 import colors from './utils/colors'
-import { consoleWarn } from './utils/console'
 // import * as directives from './directives'
 
 const shadeColor = (col, amt) => {
