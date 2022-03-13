@@ -743,91 +743,66 @@ div
   p.
     The first option is recommended for a more modern approach. Here is an example how to
     set this up.
-  example()
+  example(reactive external-js="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js")
     w-form(@success="onFormSuccess")
-      w-input(type="file" v-model="files5" :validators="[() => files5.length || 'Please add a file']") File
+      w-input(
+        type="file"
+        v-model="files5"
+        :validators="[() => files5.length || 'Please add a file']") File
       w-button.d-flex.mla.mt4(type="submit" :loading="loading") Send
     template(#pug).
       w-form(@success="onFormSuccess")
-        w-input(type="file" v-model="files5" :validators="[() => files5.length || 'Please add a file']") File
+        w-input(
+          type="file"
+          v-model="files"
+          :validators="[() => files.length || 'Please add a file']") File
         w-button.d-flex.mla.mt4(type="submit" :loading="loading") Send
     template(#html).
+      &lt;w-form @success="onFormSuccess"&gt;
+        &lt;w-input
+          type="file"
+          v-model="files"
+          :validators="[() => files.length || 'Please add a file']"&gt;
+          File
+        &lt;/w-input&gt;
+
+        &lt;w-button
+          type="submit"
+          :loading="loading"
+          class="d-flex mla mt4"&gt;
+          Send
+        &lt;/w-button&gt;
+      &lt;/w-form&gt;
     template(#js).
-      async onFormSuccess () {
-        this.loading = true
+      methods: {
+        // This method uses the Axios library.
+        // import axios from 'axios' // If you use NPM.
+        async onFormSuccess () {
+          this.loading = true
 
-        // First get today's date and the user IP.
-        let today = new Date()
-        const d = today.getDate()
-        const m = today.getMonth() + 1
-        const y = today.getFullYear()
-        today = `${y}${m.toString()}${d.toString()}`
+          const binURL = 'https://filebin.net/waveui-{{ todayFormatted }}{{ userIP }}'
+          const { name: filename, file } = this.files[0]
 
-        let userIP
-        await axios.get('https://api.ipify.org').then(data => {
-          userIP = data.data.replace(/\./g, '')
-        })
-
-        // Create the user unique Filebin ID.
-        const binURL = `https://filebin.net/waveui-${userIP}${today}`
-
-        // This is the demonstration part.
-        const formData = new FormData()
-        const file = new Blob([this.files5[0].file], { type: 'image/svg+xml' })
-        formData.append('file', file)
-        // console.log(this.files5[0].type)
-
-        axios.post(
-          `${binURL}/${this.files5[0].name}`,
-          formData,
-          {
-            headers: {
-              'Content-Type': 'image/svg+xml',
-              filename: 'cocktail-book.svg',
-              size: 715,
-              'content-length': 715,
-              bin: `waveui-${userIP}${today}`
-            }
-          }
-          // { headers: { 'Content-Type': 'multipart/form-data' } }
-          // { headers: { 'Content-Type': this.files5[0].type } } // OK.
-          // {
-          //   headers: {
-          //     'content-type': 'image/png',
-          //     filename: this.files5[0].name,
-          //     bin: `waveui-${userIP}${today}`
-          //   }
-          // }
-        ).then(
-          () => {
-            this.loading = false
-            this.$waveui.notify(
-              `<div>
-              File transferred successfully.<br>Now check your
-              <a href="${binURL}" target="_blank">
-                Filebin <i class="w-icon mdi mdi-open-in-new"></i></a>.
-              </div>`,
-              'success',
-              0)
-          },
-          () => {
-            this.$waveui.notify(
-              '<div>An error occured.<br>Is Filebin down?<br>Or is there a problem with the file?</div>',
-              'error',
-              0)
-            this.loading = false
-          }
-        )
-
-        // axios.get(
-        //   // `https://filebin.net/wave-ui-${(new Date()).getTime()}/${this.files5[0].name}`,
-        //   `https://filebin.net/fna4sdfiynmodb9v`,
-        //   formData,
-        //   { headers: { 'Content-Type': 'multipart/form-data' } }
-        // ).then(
-        //   () => console.log('Success!'),
-        //   () => console.log('Failure!')
-        // )
+          axios.post(`${binURL}/${filename}`, file)
+            .then(data =&gt; {
+              this.loading = false
+              this.$waveui.notify(
+                `&lt;div&gt;
+                File transferred successfully.&lt;br&gt;Now check your
+                &lt;a href="${binURL}" target="_blank"&gt;
+                  Filebin &lt;i class="w-icon mdi mdi-open-in-new"&gt;&lt;/i&gt;&lt;/a&gt;.
+                &lt;/div&gt;`,
+                'success',
+                0)
+            })
+            .catch(() =&gt; {
+              this.$waveui.notify(
+                '&lt;div&gt;An error occurred.&lt;br&gt;Is Filebin down?&lt;br&gt;Or is there a problem with the file?&lt;/div&gt;',
+                'error',
+                0)
+              this.loading = false
+            })
+        }
       }
     //- template(#js).
       import axios from 'axios'
@@ -847,8 +822,8 @@ div
               formData,
               { headers: { 'Content-Type': 'multipart/form-data' } }
             ).then(
-              () => console.log('Success!'),
-              () => console.log('Failure!')
+              data => console.log('Success!', data),
+              error => console.log('Failure!', error)
             )
           }
         }
@@ -1124,7 +1099,9 @@ export default {
     files4: [],
     files5: [],
     loading: false,
-    overallProgress: undefined
+    overallProgress: undefined,
+    todayFormatted: '',
+    userIP: ''
   }),
 
   computed: {
@@ -1156,82 +1133,65 @@ export default {
       this.files1 = files
     },
 
+    getTodaysDate () {
+      // First get today's date and the user IP.
+      const today = new Date()
+      const d = (today.getDate()).toString().padStart(2, 0)
+      const m = (today.getMonth() + 1).toString().padStart(2, 0)
+      const y = today.getFullYear()
+      this.todayFormatted = `${y}${m}${d}`
+    },
+
+    async getUserIP () {
+      await axios.get('https://api.ipify.org').then(data => {
+        this.userIP = data.data.replace(/\./g, '')
+      })
+    },
+
     async onFormSuccess () {
       this.loading = true
 
-      // First get today's date and the user IP.
-      let today = new Date()
-      const d = today.getDate()
-      const m = today.getMonth() + 1
-      const y = today.getFullYear()
-      today = `${y}${m.toString()}${d.toString()}`
-
-      let userIP
-      await axios.get('https://api.ipify.org').then(data => {
-        userIP = data.data.replace(/\./g, '')
-      })
-
       // Create the user unique Filebin ID.
-      const binURL = `https://filebin.net/waveui-${userIP}${today}`
+      const binURL = `https://filebin.net/waveui-${this.userIP}${this.todayFormatted}`
+      const { name: filename, file } = this.files5[0]
 
-      // This is the demonstration part.
-      const formData = new FormData()
-      const file = new Blob([this.files5[0].file], { type: 'image/svg+xml' })
-      formData.append('file', file)
-      // console.log(this.files5[0].type)
-
-      axios.post(
-        `${binURL}/${this.files5[0].name}`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'image/svg+xml',
-            filename: 'cocktail-book.svg',
-            size: 715,
-            'content-length': 715,
-            bin: `waveui-${userIP}${today}`
+      axios.post(`${binURL}/${filename}`, file)
+        .then(
+          data => {
+            this.loading = false
+            this.$waveui.notify(
+              `<div>
+              File transferred successfully.<br>Now check your
+              <a href="${binURL}" target="_blank">
+                Filebin <i class="w-icon mdi mdi-open-in-new"></i></a>.
+              </div>`,
+              'success',
+              0)
+          },
+          () => {
+            this.$waveui.notify(
+              '<div>An error occurred.<br>Is Filebin down?<br>Or is there a problem with the file?</div>',
+              'error',
+              0)
+            this.loading = false
           }
-        }
-        // { headers: { 'Content-Type': 'multipart/form-data' } }
-        // { headers: { 'Content-Type': this.files5[0].type } } // OK.
-        // {
-        //   headers: {
-        //     'content-type': 'image/png',
-        //     filename: this.files5[0].name,
-        //     bin: `waveui-${userIP}${today}`
-        //   }
-        // }
-      ).then(
-        () => {
-          this.loading = false
-          this.$waveui.notify(
-            `<div>
-             File transferred successfully.<br>Now check your
-             <a href="${binURL}" target="_blank">
-              Filebin <i class="w-icon mdi mdi-open-in-new"></i></a>.
-             </div>`,
-            'success',
-            0)
-        },
-        () => {
-          this.$waveui.notify(
-            '<div>An error occured.<br>Is Filebin down?<br>Or is there a problem with the file?</div>',
-            'error',
-            0)
-          this.loading = false
-        }
-      )
-
-      // axios.get(
-      //   // `https://filebin.net/wave-ui-${(new Date()).getTime()}/${this.files5[0].name}`,
-      //   `https://filebin.net/fna4sdfiynmodb9v`,
-      //   formData,
-      //   { headers: { 'Content-Type': 'multipart/form-data' } }
-      // ).then(
-      //   () => console.log('Success!'),
-      //   () => console.log('Failure!')
-      // )
+        )
     }
+  },
+
+  created () {
+    this.getTodaysDate()
+    this.getUserIP()
+
+    // axios.get(
+    //   // `https://filebin.net/wave-ui-${(new Date()).getTime()}/${this.files5[0].name}`,
+    //   `https://filebin.net/fna4sdfiynmodb9v`,
+    //   formData,
+    //   { headers: { 'Content-Type': 'multipart/form-data' } }
+    // ).then(
+    //   () => console.log('Success!'),
+    //   () => console.log('Failure!')
+    // )
   }
 }
 </script>
