@@ -740,9 +740,15 @@ div
       in order to submit the file in a full HTML built-in process (But this will reload
       the page).
 
-  p.
-    The first option is recommended for a more modern approach. Here is an example how to
+  p.mt3.
+    The first option is recommended for a more modern approach. Here are two examples how to
     set this up.
+  title-link.mt8(h4) 1st example
+  p.
+    In this example, the file is uploaded to #[a(href="https://filebin.net" target="_blank") Filebin].
+    The file is transferred as #[code application/x-www-form-urlencoded] similar to
+    #[code application/octet-stream] with the file in the body of the request as per the
+    expectation of the Filebin API.
   example(reactive external-js="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js")
     w-form(@success="onFormSuccess")
       w-input(
@@ -804,36 +810,41 @@ div
             })
         }
       }
-    //- template(#js).
-      import axios from 'axios'
 
-      export default {
-        data: () => ({
-          files: []
-        }),
+  title-link.mt8(h4) 2nd example
+  p.
+    In this example (more common case) the file is transferred as #[code multipart/form-data] with
+    the use of #[code FormData] and using the same HTML as the previous example.
+  ssh-pre(language="js" label="JavaScript").
+    import axios from 'axios'
 
-        methods: {
-          onFormSuccess () {
-            const formData = new FormData()
-            formData.append('file', this.files[0].file)
+    export default {
+      data: () => ({
+        files: []
+      }),
 
-            axios.post(
-              '/api/your-backend-script',
-              formData,
-              { headers: { 'Content-Type': 'multipart/form-data' } }
-            ).then(
-              data => console.log('Success!', data),
-              error => console.log('Failure!', error)
-            )
-          }
+      methods: {
+        onFormSuccess () {
+          const formData = new FormData()
+          formData.append('file', this.files[0].file)
+
+          axios.post(
+            '/api/your-backend-script',
+            formData,
+            { headers: { 'Content-Type': 'multipart/form-data' } }
+          ).then(
+            data => console.log('Success!', data),
+            error => console.log('Failure!', error)
+          )
         }
       }
+    }
 
   p.
-    Here is a very minimalist way to receive and display the file on server side with PHP.
-    Of course you should add more checks, and move the temporary uploaded file when the
-    checks are passed.
-  ssh-pre(language="php").
+    Here is an example of a very minimalist way to receive and display the file on server side
+    with PHP. Of course you should add more checks, and move the temporary uploaded file when all
+    the checks are passed.
+  ssh-pre(language="php" label="PHP").
     &lt;?php
     // You can check the structure of the file upload.
     // print_r($_FILES);die;
