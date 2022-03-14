@@ -22,7 +22,7 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
-    li.patch
+    li.minor
       strong.version v2.32.0
       ul
         li #[strong.code w-grid]: Added a new CSS-grid-based layout component.
@@ -64,6 +64,17 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
+    li.patch
+      strong.version v1.50.1
+      ul
+        li #[strong.code w-dialog]: Fix an issue where a w-select would disappear on dialog close. #[issue-link 82]
+
+    li.minor
+      strong.version v1.50.0
+      ul
+        li #[strong.code w-grid]: Added a new CSS-grid-based layout component.
+        li #[strong.code w-flex]: refactored the gap option, now using the CSS #[code gap] property.
+
     li.patch
       strong.version v1.49.2
       ul
