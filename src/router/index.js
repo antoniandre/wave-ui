@@ -17,6 +17,11 @@ const routes = [
     component: Home
   },
   {
+    path: '/test',
+    name: 'test',
+    component: () => import('@/documentation/views/test.vue')
+  },
+  {
     path: '/why-wave-ui',
     name: 'why-wave-ui',
     component: () => import('@/documentation/views/why-wave-ui.vue')
