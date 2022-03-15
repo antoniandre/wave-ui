@@ -221,6 +221,9 @@ w-app.home
 <script>
 import { gsap, TimelineMax, Power1, Power4, TweenMax } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import SshPre from 'simple-syntax-highlighter'
+import 'simple-syntax-highlighter/dist/sshpre.css'
+import '@/documentation/scss/index.scss'
 
 // For Edge. https://github.com/greensock/GSAP/issues/412#issuecomment-679841254
 window.requestAnimationFrame = window.requestAnimationFrame.bind(window)
@@ -230,6 +233,7 @@ gsap.registerPlugin(TimelineMax, TweenMax, Power4, Power1, ScrollTrigger)
 const componentsCount = { curr: 0, total: 40 }
 
 export default {
+  components: { SshPre },
   data: () => ({
     count: { count: 0, alpha: 0 },
     demoListItems: [
