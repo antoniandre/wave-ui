@@ -94,18 +94,28 @@ export default {
     }
   },
 
-  beforeUnmount () {
-    window.removeEventListener('scroll', this.onScroll)
-    window.removeEventListener('resize', this.onResize)
-  },
-
   mounted () {
     this.contentWrapEl = document.querySelector('.content-wrap')
     this.navMenuTop = this.contentWrapEl.offsetTop - 12
     this.scrollingEl = document.documentElement
 
+    // Scroll to anchor point if any on page load.
+    const pageAnchor = window.location.hash.replace('#', '')
+    if (pageAnchor) {
+      setTimeout(() => {
+        const anchorEl = document.getElementById(pageAnchor)
+        // Smooth not supported on Safari & IOS, but will still jump to it.
+        anchorEl.scrollIntoView({ behavior: 'smooth' })
+      }, 200)
+    }
+
     window.addEventListener('scroll', this.onScroll)
     window.addEventListener('resize', this.onResize)
+  },
+
+  beforeUnmount () {
+    window.removeEventListener('scroll', this.onScroll)
+    window.removeEventListener('resize', this.onResize)
   }
 }
 </script>
