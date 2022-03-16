@@ -22,7 +22,8 @@ export default {
     alignRight: { type: Boolean },
     noPosition: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
-    activator: { type: String } // Optionally designate an external activator.
+    // Optionally designate an external activator.
+    activator: { type: [String, Object] } // The activator can be a DOM string selector, a ref or a DOM node.
   },
 
   data: () => ({
@@ -31,7 +32,7 @@ export default {
     // as is in an array so we can delete them on destroy.
     // This only applies to the activatorEventHandlers, the other events listeners can be removed
     // normally.
-    docAEventListenersHandlers: []
+    docEventListenersHandlers: []
   }),
 
   computed: {
@@ -70,17 +71,22 @@ export default {
     },
 
     hasSeparateActivator () {
-      return !this.$slots.activator && typeof this.activator === 'string'
+      if (this.$slots.activator) return false
+      const activatorIsString = typeof this.activator === 'string'
+      const activatorIsDomEl = (this.activator?.$el || this.activator) instanceof HTMLElement
+      return activatorIsString || activatorIsDomEl
     },
 
     activatorEl: {
       get () {
-        if (this.hasSeparateActivator) return document.querySelector(this.activator)
+        if (this.hasSeparateActivator) {
+          const activator = this.activator?.$el || this.activator
+          if (activator instanceof HTMLElement) return activator
+          return document.querySelector(this.activator)
+        }
         return this.$el.firstElementChild
       },
-      set () {
-
-      }
+      set () {}
     },
 
     position () {
@@ -251,6 +257,29 @@ export default {
         this.detachableEl.remove()
         this.detachableEl = null
       }
+    },
+
+    // If the activator is external, add event listeners to the document and check the target is
+    // the activator when toggling.
+    // This way, the activator can be a future DOM element, that is not yet in the DOM.
+    bindActivatorEvents () {
+      const activatorIsString = typeof this.activator === 'string'
+
+      Object.entries(this.activatorEventHandlers).forEach(([eventName, handler]) => {
+        // Convert mouseenter to mouseover & mouseleave to mouseout because we are attaching
+        // event to the document, so it can accept future DOM nodes.
+        eventName = eventName.replace('mouseenter', 'mouseover').replace('mouseleave', 'mouseout')
+        const handlerWrap = e => {
+          // The activator can be a DOM string selector a ref or a DOM node.
+          if (activatorIsString && e.target?.matches && e.target.matches(this.activator)) handler(e)
+          else if (e.target === this.activatorEl) handler(e)
+        }
+        document.addEventListener(eventName, handlerWrap)
+        // The event listeners handlers have to be removed the exact same way they have been attached.
+        // Since the handler functions have variables that change after hot-reload, keep them exactly
+        // as is in an array so we can delete them on destroy.
+        this.docEventListenersHandlers.push({ eventName, handler: handlerWrap })
+      })
     }
   },
 
@@ -260,22 +289,15 @@ export default {
     // Unwrap the activator element if the activator is in the activator slot.
     if (this.$slots.activator) wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
 
-    // If the activator is external, add event listeners to the document and check the target is
-    // the activator when toggling.
-    // This way, the activator can be a future DOM element, that is not yet in the DOM.
-    else if (this.activator) {
-      Object.entries(this.activatorEventHandlers).forEach(([eventName, handler]) => {
-        // Convert mouseenter to mouseover & mouseleave to mouseout because we are attaching
-        // event to the document, so it can accept future nodes.
-        eventName = eventName.replace('mouseenter', 'mouseover').replace('mouseleave', 'mouseout')
-        const handlerWrap = e => {
-          if (e.target?.matches && e.target.matches(this.activator)) handler(e)
-        }
-        document.addEventListener(eventName, handlerWrap)
-        // The event listeners handlers have to be removed the exact same way they have been attached.
-        // Since the handler functions have variables that change after hot-reload, keep them exactly
-        // as is in an array so we can delete them on destroy.
-        this.docAEventListenersHandlers.push({ eventName, handler: handlerWrap })
+    // If the activator is external.
+    else if (this.activator) this.bindActivatorEvents()
+
+    // If the activator seems to be undefined, it is probably a DOM node or Vue ref,
+    // so check it on nextTick.
+    else {
+      this.$nextTick(() => {
+        this.activator && this.bindActivatorEvents()
+        if (this.modelValue) this.toggle({ type: 'click', target: this.activatorEl })
       })
     }
 
@@ -285,7 +307,7 @@ export default {
       wrapper.parentNode.insertBefore(this.overlayEl, wrapper)
     }
 
-    if (this.modelValue) this.toggleMenu({ type: 'click', target: this.activatorEl })
+    if (this.modelValue && this.activator) this.toggle({ type: 'click', target: this.activatorEl })
   },
 
   beforeUnmount () {
@@ -295,8 +317,8 @@ export default {
 
     // Remove the event listeners the exact same way they have been defined.
     // Fixes issues on hot-reloading.
-    if (this.docAEventListenersHandlers.length) {
-      this.docAEventListenersHandlers.forEach(({ eventName, handler }) => {
+    if (this.docEventListenersHandlers.length) {
+      this.docEventListenersHandlers.forEach(({ eventName, handler }) => {
         document.removeEventListener(eventName, handler)
       })
     }
