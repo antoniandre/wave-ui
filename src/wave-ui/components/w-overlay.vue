@@ -85,6 +85,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.3);
 
   &--persistent-animate {animation: 0.15s w-overlay-pop cubic-bezier(0.6, -0.28, 0.74, 0.05);}
+  &--no-pointer-event {pointer-events: none;}
 }
 
 @keyframes w-overlay-pop {
