@@ -64,11 +64,18 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
-    li.patch
-      strong.version v1.50.1
+    //- li.patch
+      strong.version v1.51.1
       ul
         li #[strong.code w-dialog]: Fix an issue where a w-select would disappear on dialog close. #[issue-link 82]
 
+    li.minor
+      strong.version v1.51.0
+      ul
+        li #[strong.code w-menu]:
+          ul
+            li Accept external activators as DOM node selector string, or Vue ref, or DOM node.
+            li Allow simultaneous use of the #[code overlay] and #[code show-on-hover] options.
     li.minor
       strong.version v1.50.0
       ul
