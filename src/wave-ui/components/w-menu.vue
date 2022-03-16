@@ -134,7 +134,10 @@ export default {
     },
 
     overlayClasses () {
-      return objectifyClasses(this.overlayClass)
+      return {
+        ...objectifyClasses(this.overlayClass),
+        'w-overlay--no-pointer-event': this.showOnHover
+      }
     },
 
     classes () {
