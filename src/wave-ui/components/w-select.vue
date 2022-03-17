@@ -31,7 +31,6 @@ component(
     template(#activator="{ on }")
       //- Input wrapper.
       .w-select__selection-wrap(
-        ref="selection-wrap"
         @click="!isDisabled && !isReadonly && (showMenu ? closeMenu : openMenu)()"
         role="button"
         aria-haspopup="listbox"
@@ -350,10 +349,6 @@ export default {
 
   created () {
     this.inputValue = this.checkSelection(this.value)
-  },
-
-  mounted () {
-    this.selectionWrapRef = this.$refs['selection-wrap']
   },
 
   watch: {
