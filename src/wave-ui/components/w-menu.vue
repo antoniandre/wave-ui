@@ -5,6 +5,7 @@
     .w-menu(
       v-if="custom && detachableVisible"
       ref="detachable"
+      v-on="$listeners"
       @click="hideOnMenuClick && close(true)"
       @mouseenter="showOnHover && (hoveringMenu = true)"
       @mouseleave="showOnHover && ((hoveringMenu = false), close())"
@@ -14,6 +15,7 @@
     w-card.w-menu(
       v-else-if="detachableVisible"
       ref="detachable"
+      v-on="$listeners"
       @click.native="hideOnMenuClick && close(true)"
       @mouseenter.native="showOnHover && (hoveringMenu = true)"
       @mouseleave.native="showOnHover && ((hoveringMenu = false), close())"
