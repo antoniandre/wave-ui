@@ -90,11 +90,14 @@ main
     li.minor
       strong.version v1.51.0
       ul
+        li #[strong.code w-menu] &amp; #[strong.code w-tooltip]:
+        ul
+          li Always compute coordinates of the activator element and not from #[code e.target] which may be a child of the activator.
         li #[strong.code w-menu]:
           ul
             li Accept external activators as DOM node selector string, or Vue ref, or DOM node.
             li Allow simultaneous use of the #[code overlay] and #[code show-on-hover] options.
-
+            li Forward any event listener to the menu element (so user can listen to #[code mousedown] for instance).
     li.minor
       strong.version v1.50.0
       ul
