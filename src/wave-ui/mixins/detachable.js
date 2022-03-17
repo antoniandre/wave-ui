@@ -23,7 +23,7 @@ export default {
     noPosition: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
     // Optionally designate an external activator.
-    activator: { type: [String, Object] } // The activator can be a DOM string selector, a ref or a DOM node.
+    activator: { type: [String, Object, HTMLElement] } // The activator can be a DOM string selector, a ref or a DOM node.
   },
 
   data: () => ({
@@ -143,9 +143,9 @@ export default {
     },
 
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
-    getActivatorCoordinates (e) {
+    getActivatorCoordinates () {
       // Get the activator coordinates relative to window.
-      const { top, left, width, height } = (e ? e.target : this.activatorEl).getBoundingClientRect()
+      const { top, left, width, height } = (this.activatorEl).getBoundingClientRect()
       let coords = { top, left, width, height }
 
       // If absolute position, adjust top & left.
@@ -163,9 +163,9 @@ export default {
     },
 
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
-    computeDetachableCoords (e) {
+    computeDetachableCoords () {
       // Get the activator coordinates.
-      let { top, left, width, height } = this.getActivatorCoordinates(e)
+      let { top, left, width, height } = this.getActivatorCoordinates()
 
       // 1. First display the menu but hide it (So we can get its dimension).
       // --------------------------------------------------
@@ -303,7 +303,7 @@ export default {
         const handlerWrap = e => {
           // The activator can be a DOM string selector a ref or a DOM node.
           if (activatorIsString && e.target?.matches && e.target.matches(this.activator)) handler(e)
-          else if (e.target === this.activatorEl) handler(e)
+          else if (e.target === this.activatorEl || this.activatorEl.contains(e.target)) handler(e)
         }
         document.addEventListener(eventName, handlerWrap)
         // The event listeners handlers have to be removed the exact same way they have been attached.
