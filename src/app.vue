@@ -1,6 +1,6 @@
 <template lang="pug">
 router-view.grow(v-if="['home', 'test'].includes($route.name)")
-documentation(v-else)
+component(v-else :is="documentation")
 </template>
 
 <script>
