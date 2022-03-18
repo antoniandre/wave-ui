@@ -1,11 +1,13 @@
 <template lang="pug">
 router-view.grow(v-if="['home', 'test'].includes($route.name)")
-component(v-else :is="documentation")
+component(v-else is="documentation")
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue'
+
 export default {
-  components: { Documentation: () => import('@/documentation/index.vue') },
+  components: { Documentation: defineAsyncComponent(() => import('@/documentation/index.vue')) },
 
   created () {
     this.$store.commit('initUsePug')
