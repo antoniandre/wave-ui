@@ -23,6 +23,11 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v2.32.2
+      ul
+        li #[strong.code w-tabs]: Fix keeping tab contents alive in Vue 3. #[issue-link 83]
+
+    li.patch
       strong.version v2.32.1
       ul
         li #[strong.code w-icon]: Fix a reactivity issue in Vue 3. #[issue-link 81]
