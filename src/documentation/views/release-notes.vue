@@ -80,6 +80,10 @@ main
             li Accept external activators as DOM node selector string, or Vue ref, or DOM node.
             li Allow simultaneous use of the #[code overlay] and #[code show-on-hover] options.
             li Forward any event listener to the menu element (so user can listen to #[code mousedown] for instance).
+        li #[strong.code w-select]:
+        ul
+          li Fix a floating label jump on item unselect.
+
     li.minor
       strong.version v1.50.0
       ul
