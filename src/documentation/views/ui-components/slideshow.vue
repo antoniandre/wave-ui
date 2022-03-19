@@ -24,12 +24,12 @@ main
     parallax-fixed-content
     :breakpoints="{ 800: { fixedHeight: '300px' } }")
     vueper-slide(v-for="(slide, i) in slides" :key="i" :image="slide.image")
-      template(v-slot:content)
+      template(#content)
         .vueperslide__title {{ slide.title }}
         .vueperslide__content
           | Photo by
           a(:href="slide.link" target="_blank") {{ slide.content.substring(9) }}
-      template(v-slot:loader)
+      template(#loader)
         w-progress(circle indeterminate)
         .title3.mt3.primary Loading...
 
