@@ -28,7 +28,9 @@ main
         li #[strong.code w-menu]:
           ul
             li Accept external activators as DOM node selector string, or Vue ref, or DOM node.
-            li Allow simultaneous use of the #[code overlay] and #[code show-on-hover] options.
+        li #[strong.code w-select]:
+          ul
+            li Fix the floating label jump on item unselect.
 
     li.patch
       strong.version v2.32.3
