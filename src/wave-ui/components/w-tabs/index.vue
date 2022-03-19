@@ -32,20 +32,21 @@
     transition(:name="transitionName" :mode="transitionMode")
       keep-alive
         //- Keep-alive only works with components, not with DOM nodes.
-        tab-content(:key="activeTab._index" :class="contentClass")
-          slot(
-            v-if="$slots[`item-content.${activeTab.id || activeTab._index + 1}`]"
-            :name="`item-content.${activeTab.id || activeTab._index + 1}`"
-            :item="getOriginalItem(activeTab)"
-            :index="activeTab._index + 1"
-            :active="activeTab._index === activeTabIndex")
-          slot(
-            v-else
-            name="item-content"
-            :item="getOriginalItem(activeTab)"
-            :index="activeTab._index + 1"
-            :active="activeTab._index === activeTabIndex")
-            div(v-html="activeTab[itemContentKey]")
+        tab-content(:key="activeTab._index" :item="activeTab" :class="contentClass")
+          template(#default="{ item }")
+            slot(
+              v-if="$slots[`item-content.${item._index + 1}`]"
+              :name="`item-content.${item._index + 1}`"
+              :item="getOriginalItem(item)"
+              :index="item._index + 1"
+              :active="item._index === activeTab._index")
+            slot(
+              v-else
+              name="item-content"
+              :item="getOriginalItem(item)"
+              :index="item._index + 1"
+              :active="item._index === activeTab._index")
+              div(v-if="item[itemContentKey]" v-html="item[itemContentKey]")
 </template>
 
 <script>
