@@ -22,6 +22,14 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v2.33.0
+      ul
+        li #[strong.code w-menu]:
+          ul
+            li Accept external activators as DOM node selector string, or Vue ref, or DOM node.
+            li Allow simultaneous use of the #[code overlay] and #[code show-on-hover] options.
+
     li.patch
       strong.version v2.32.3
       ul
@@ -86,6 +94,7 @@ main
           ul
             li Accept external activators as DOM node selector string, or Vue ref, or DOM node.
             li Allow simultaneous use of the #[code overlay] and #[code show-on-hover] options.
+
     li.minor
       strong.version v1.50.0
       ul
