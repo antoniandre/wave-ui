@@ -341,7 +341,10 @@ export default {
     if (this.value && this.activator) this.toggle({ type: 'click', target: this.activatorEl })
   },
 
-  beforeDestroy () {
+  // Must be on destroy and not before destroy, so that when used in a dialog, we wait for the end
+  // of the animation before removing the activator element.
+  // https://github.com/antoniandre/wave-ui/issues/82
+  destroy () {
     this.close()
 
     this.removeFromDOM()
