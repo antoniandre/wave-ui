@@ -1,5 +1,5 @@
 <template lang="pug">
-transition(name="fade" mode="out-in" appear)
+transition(name="fade" appear @after-leave="$emit('closed')")
   .w-overlay(
     v-if="value"
     :style="(value && styles) || null"
@@ -24,7 +24,7 @@ export default {
     persistentNoAnimation: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue', 'click', 'close'],
+  emits: ['input', 'update:modelValue', 'click', 'close', 'closed'],
 
   data: () => ({
     persistentAnimate: false
@@ -60,7 +60,7 @@ export default {
       else if (!this.persistent) {
         this.$emit('update:modelValue', false)
         this.$emit('input', false)
-        this.$emit('close', false)
+        this.$emit('close')
       }
 
       this.$emit('click', e)

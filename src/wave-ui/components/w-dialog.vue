@@ -4,6 +4,7 @@ w-overlay.w-dialog(
   :persistent="persistent"
   :persistent-no-animation="persistentNoAnimation"
   @click="onOutsideClick"
+  @closed="$emit('closed')"
   :bg-color="overlayColor"
   :opacity="overlayOpacity"
   :class="classes")
@@ -47,7 +48,7 @@ export default {
     overlayOpacity: { type: [Number, String, Boolean] }
   },
 
-  emits: ['input', 'update:modelValue', 'close'],
+  emits: ['input', 'update:modelValue', 'close', 'closed'],
 
   data () {
     return {
@@ -87,7 +88,7 @@ export default {
       this.showWrapper = false
       this.$emit('update:modelValue', false)
       this.$emit('input', false)
-      this.$emit('close', false)
+      this.$emit('close')
     }
   },
 
@@ -98,7 +99,6 @@ export default {
       // At the end of the dialog transition the value is updated and wrapper removed from the DOM.
       if (value) this.showWrapper = value
       this.showContent = value
-      debugger
     }
   }
 }
