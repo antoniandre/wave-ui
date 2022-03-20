@@ -28,22 +28,22 @@ const slots = {
 
 const events = {
   input: {
-    description: 'Emitted on overlay hide (a click on overlay doesn\'t trigger this event if <code>persistent</code>).<br>Updates the v-model value in Vue 2.x only.',
+    description: 'Emitted on overlay close (a click on overlay doesn\'t trigger this event if <code>persistent</code>).<br>Updates the v-model value in Vue 2.x only.',
     params: {
       '[Boolean]': 'Represents the open state of the overlay: false on overlay close.'
     }
   },
   'update:modelValue': {
-    description: 'Emitted on overlay hide (a click on overlay doesn\'t trigger this event if <code>persistent</code>).<br>Updates the v-model value in Vue 3 only.',
+    description: 'Emitted on overlay close (a click on overlay doesn\'t trigger this event if <code>persistent</code>).<br>Updates the v-model value in Vue 3 only.',
     params: {
       '[Boolean]': 'Represents the open state of the overlay: false on overlay close.'
     }
   },
   close: {
-    description: 'Emitted on overlay hide (a click on overlay doesn\'t trigger this event if <code>persistent</code>).',
-    params: {
-      '[Boolean]': 'Represents the open state of the overlay: false on overlay close.'
-    }
+    description: 'Emitted on overlay close (a click on overlay doesn\'t trigger this event if <code>persistent</code>).',
+  },
+  closed: {
+    description: 'Emitted after the overlay is completely closed (after the closing animation).'
   },
   click: {
     description: 'Emitted on every overlay click. Whether the <code>persistent</code> prop is set to true or false.',
