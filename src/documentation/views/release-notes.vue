@@ -72,17 +72,27 @@ main
     li.minor
       strong.version v1.51.0
       ul
-        li #[strong.code w-menu] &amp; #[strong.code w-tooltip]:
-        ul
-          li Always compute coordinates of the activator element and not from #[code e.target] which may be a child of the activator.
-        li #[strong.code w-menu]:
+        li
+          | #[strong.code w-menu &amp; w-tooltip]:
+          ul
+            li Always compute coordinates of the activator element and not from #[code e.target] which may be a child of the activator.
+
+        li
+          strong.code w-menu:
           ul
             li Accept external activators as DOM node selector string, or Vue ref, or DOM node.
             li Allow simultaneous use of the #[code overlay] and #[code show-on-hover] options.
             li Forward any event listener to the menu element (so user can listen to #[code mousedown] for instance).
-        li #[strong.code w-select]:
-        ul
-          li Fix a floating label jump on item unselect.
+
+        li
+          | #[strong.code w-dialog &amp; w-overlay]:
+          ul
+            li Emit a #[code closed] event after the component is fully closed (after animation end).
+
+        li
+          | #[strong.code w-select]:
+          ul
+            li Fix a floating label jump on item unselect.
 
     li.minor
       strong.version v1.50.0
