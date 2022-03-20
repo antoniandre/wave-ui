@@ -1,7 +1,8 @@
 <template lang="pug">
-transition(name="fade" appear @after-leave="$emit('closed')")
+transition(name="fade" appear @after-leave="onClosed")
   .w-overlay(
-    v-if="value"
+    v-if="showOverlay"
+    v-show="value"
     :style="(value && styles) || null"
     @keydown.escape.stop="onClick"
     @click="onClick"
@@ -27,7 +28,8 @@ export default {
   emits: ['input', 'update:modelValue', 'click', 'close', 'closed'],
 
   data: () => ({
-    persistentAnimate: false
+    persistentAnimate: false,
+    showOverlay: false
   }),
 
   computed: {
@@ -64,6 +66,25 @@ export default {
       }
 
       this.$emit('click', e)
+    },
+
+    // Wait until the end of the closing transition to unmount the components it contains.
+    // This way, in case of w-select in w-dialog, the w-select will only remove its activator
+    // element from the DOM once the dialog is completely closed.
+    // https://github.com/antoniandre/wave-ui/issues/82
+    onClosed () {
+      this.showOverlay = false
+      this.$emit('closed')
+    }
+  },
+
+  created () {
+    this.showOverlay = this.value
+  },
+
+  watch: {
+    value (bool) {
+      if (bool) this.showOverlay = true
     }
   }
 }
