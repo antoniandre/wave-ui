@@ -24,6 +24,12 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.52.0
+      ul
+        li #[strong.code w-toolbar]: new #[code vertical] option.
+        li #[strong.code w-divider]: always stretch the divider, regardless of orientation (also when horizontal).
+
+    li.minor
       strong.version v1.49.1
       ul
         li #[strong.code w-select]: prevent a console warning before hydration. #[issue-link 79]
