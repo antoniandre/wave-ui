@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-card(:class="classes" :style="styles")
+.w-card(:class="classes")
   .w-card__title(
     v-if="$slots.title"
     :class="{ 'w-card__title--has-toolbar': titleHasToolbar, ...titleClasses }")
@@ -71,10 +71,6 @@ export default {
         'w-card--tile': this.tile,
         'w-card--shadow': this.shadow
       }
-    },
-
-    styles () {
-      return false
     }
   }
 }
@@ -107,6 +103,17 @@ export default {
   &__content {
     padding: 3 * $base-increment;
     flex-grow: 1;
+
+    // Only if there is no title bar.
+    &:first-child {
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+    }
+    &:last-child {
+    // Only if there is no actions bar.
+      border-bottom-left-radius: inherit;
+      border-bottom-right-radius: inherit;
+    }
   }
 
   &__actions {
