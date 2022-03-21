@@ -17,9 +17,8 @@ div
         w-progress.ma1(circle color="green")
 
         h3 Mixing colors
-
         w-progress.ma1(circle color="yellow" bg-color="cyan")
-        //- template(#pug).
+        template(#pug).
           w-progress.ma1(circle)
           w-progress.ma1(circle color="blue")
           w-progress.ma1(circle color="green")
@@ -53,7 +52,7 @@ div
         w-progress.ma1(circle value="50")
         w-progress.ma1(circle value="75")
         w-progress.ma1(circle value="100")
-        //- template(#pug).
+        template(#pug).
           w-progress.ma1(circle :value="undefined")
           w-progress.ma1.mr8(circle :value="-1")
 
@@ -77,7 +76,7 @@ div
       h3 Updated value example
       example(reactive)
         w-progress(circle :value="progress")
-        //- template(#pug).
+        template(#pug).
           w-progress(circle :value="progress")
         template(#html).
           &lt;w-progress circle :value="progress"&gt;&lt;/w-progress&gt;
@@ -102,7 +101,7 @@ div
         w-progress.ma1(circle value="38" size="6em" :stroke="2" color="blue")
         w-progress.ma1(circle value="38" size="6em" :stroke="15" color="blue")
         w-progress.ma1(circle value="38" size="6em" :stroke="40" color="blue")
-        //- template(#pug).
+        template(#pug).
           w-progress.ma1(circle value="38" color="blue")
           w-progress.ma1(circle value="38" size="4em" color="blue")
           w-progress.ma1.mr8(circle value="38" size="5em" color="blue")
@@ -169,7 +168,7 @@ div
         w-progress.ma1.mr8(circle v-model="progress1" size="5em" label)
         w-progress.ma1(circle v-model="progress1" size="5em")
           strong {{ progress1 }}%
-        //- template(#pug).
+        template(#pug).
           p Default label - Custom label
 
           w-progress.ma1.mr8(circle v-model="progress" size="5em" label)
@@ -207,7 +206,7 @@ div
           size="3em"
           label
           label-color="indigo-light4")
-        //- template(#pug).
+        template(#pug).
           w-progress.ma1(
             circle
             value="38"
@@ -228,7 +227,7 @@ div
       example(reactive)
         w-progress.ma1(circle value="38" size="6em" round-cap)
         w-progress.ma1(circle value="38" size="6em")
-        //- template(#pug).
+        template(#pug).
           w-progress.ma1(circle value="38" size="6em" round-cap)
           w-progress.ma1(circle value="38" size="6em")
         template(#html).
@@ -260,7 +259,7 @@ div
         w-progress.mt4(color="green")
         h3 Mixing colors
         w-progress.mt4(color="yellow" bg-color="cyan")
-        //- template(#pug).
+        template(#pug).
           w-progress
           w-progress.mt4(color="blue")
           w-progress.mt4(color="green")
@@ -277,7 +276,7 @@ div
       example(reactive)
         w-progress(value="38" size="1em" color="blue")
         w-progress.mt4(value="38" size="2.5em" color="blue")
-        //- template(#pug).
+        template(#pug).
           w-progress(value="38" size="1em" color="blue")
           w-progress.mt4(value="38" size="2.5em" color="blue")
         template(#html).
@@ -288,7 +287,7 @@ div
       example(reactive)
         w-progress(value="38" size="1.4em" tile color="light-blue")
         w-progress.mt4(value="38" size="1.4em" round color="light-blue")
-        //- template(#pug).
+        template(#pug).
           w-progress(value="38" size="1.4em" tile color="light-blue")
           w-progress.mt4(value="38" size="1.4em" round color="light-blue")
         template(#html).
@@ -311,7 +310,7 @@ div
       example(reactive)
         w-progress(value="38" size="1em" outline round color="light-blue")
         w-progress.mt4(value="38" size="1em" shadow color="light-blue")
-        //- template(#pug).
+        template(#pug).
           w-progress(value="38" size="1em" outline round color="light-blue")
           w-progress.mt4(value="38" size="1em" shadow color="light-blue")
         template(#html).
@@ -347,7 +346,7 @@ div
           round
           color="primary"
           stripes)
-        //- template(#pug).
+        template(#pug).
           w-progress(
             value="38"
             size="1em"
@@ -355,6 +354,7 @@ div
             round
             color="light-blue"
             stripes)
+
           w-progress.mt4(
             value="38"
             size="1.4em"
@@ -387,7 +387,7 @@ div
       example(reactive)
         w-progress(v-model="progress1" size="1.3em" round color="primary" label)
         w-progress.mt4(v-model="progress1" size="1.3em" outline round label)
-        //- template(#pug).
+        template(#pug).
           w-progress(v-model="progress" size="1.3em" round color="primary" label)
           w-progress.mt4(v-model="progress" size="1.3em" outline round label)
         template(#html).
@@ -416,7 +416,7 @@ div
       example(reactive)
         w-progress.mt3(v-model="progress1" size="1.5em" outline round)
           strong {{ progress1 }}%
-        //- template(#pug).
+        template(#pug).
           w-progress(v-model="progress" size="1.5em" outline round)
             strong {{ '\{\{ progress \}\}' }}%
         template(#html).
@@ -440,7 +440,7 @@ div
           round
           label
           label-color="indigo-light4")
-        //- template(#pug).
+        template(#pug).
           w-progress(
             value="50.3"
             size="2em"
@@ -462,7 +462,7 @@ div
       example(reactive)
         w-progress(value="38" size="2em" round round-cap)
         w-progress.mt4(value="38" size="2em" round)
-        //- template(#pug).
+        template(#pug).
           w-progress(value="38" size="2em" round round-cap)
           w-progress.mt4(value="38" size="2em" round)
         template(#html).

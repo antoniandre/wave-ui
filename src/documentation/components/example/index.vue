@@ -119,14 +119,14 @@ export default {
       ]
 
       const cssDeps = [
-        'https://unpkg.com/wave-ui@latest/dist/wave-ui.css',
+        'https://unpkg.com/wave-ui@legacy/dist/wave-ui.css',
         'https://cdn.materialdesignicons.com/5.1.45/css/materialdesignicons.min.css'
       ]
       if (this.externalCss) cssDeps.push(this.externalCss)
 
       const jsDeps = [
-        'https://unpkg.com/vue@latest/dist/vue.js',
-        'https://unpkg.com/wave-ui@latest/dist/wave-ui.umd.js'
+        'https://unpkg.com/vue@legacy/dist/vue.js',
+        'https://unpkg.com/wave-ui@legacy/dist/wave-ui.umd.js'
       ]
       if (this.externalJs) jsDeps.push(this.externalJs)
 
@@ -222,11 +222,6 @@ export default {
   background-color: #fcfcfc;
   border-radius: 3px;
 
-  .w-tabs {
-    border-radius: 0;
-    border-width: 1px 0 0;
-  }
-
   .buttons {
     border-left: 1px solid #eee;
     display: flex;
@@ -243,12 +238,18 @@ export default {
     overflow: auto;
   }
 
-  &__source {position: relative;}
+  &__source {
+    position: relative;
 
-  &__source .w-tabs__bar-item {
-    font-size: 0.95rem;
-    padding: 2px 8px;
+    > .w-tabs {
+      border-radius: 0;
+      border-width: 1px 0 0;
+
+      .w-tabs__bar {overflow: hidden;}
+      .w-tabs__bar-item {font-size: 0.95rem;padding: 2px 8px;}
+    }
   }
+
 
   .codepen-form {
     position: absolute;

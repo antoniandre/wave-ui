@@ -206,7 +206,7 @@ export default {
     hasValue () {
       switch (this.type) {
         case 'file': return !!this.inputFiles.length
-        case 'number': return this.inputNumberError
+        case 'number': return this.inputValue || this.inputValue === 0 || this.inputNumberError
         case 'date':
         case 'time':
           return true

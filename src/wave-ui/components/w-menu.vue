@@ -5,6 +5,7 @@
     .w-menu(
       v-if="custom && detachableVisible"
       ref="detachable"
+      v-on="$listeners"
       @click="hideOnMenuClick && close(true)"
       @mouseenter="showOnHover && (hoveringMenu = true)"
       @mouseleave="showOnHover && ((hoveringMenu = false), close())"
@@ -14,6 +15,7 @@
     w-card.w-menu(
       v-else-if="detachableVisible"
       ref="detachable"
+      v-on="$listeners"
       @click.native="hideOnMenuClick && close(true)"
       @mouseenter.native="showOnHover && (hoveringMenu = true)"
       @mouseleave.native="showOnHover && ((hoveringMenu = false), close())"
@@ -134,7 +136,10 @@ export default {
     },
 
     overlayClasses () {
-      return objectifyClasses(this.overlayClass)
+      return {
+        ...objectifyClasses(this.overlayClass),
+        'w-overlay--no-pointer-event': this.showOnHover
+      }
     },
 
     classes () {
@@ -196,6 +201,7 @@ export default {
   methods: {
     /**
      * Other methods in the `detachable` mixin:
+     * - `open`
      * - `getActivatorCoordinates`
      * - `computeDetachableCoords`
      * - `onResize`
@@ -207,7 +213,8 @@ export default {
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     toggle (e) {
       let shouldShowMenu = this.detachableVisible
-      if ('ontouchstart' in window && this.showOnHover && e.type === 'click') {
+      if (typeof window !== 'undefined' && 'ontouchstart' in window &&
+          this.showOnHover && e.type === 'click') {
         shouldShowMenu = !shouldShowMenu
       }
       else if (e.type === 'click' && !this.showOnHover) shouldShowMenu = !shouldShowMenu
@@ -224,37 +231,6 @@ export default {
 
       if (shouldShowMenu) this.open(e)
       else this.close()
-    },
-
-    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
-    async open (e) {
-      // A tiny delay may help positioning the detachable correctly in case of multiple activators
-      // with different menu contents.
-      if (this.delay) await new Promise(resolve => setTimeout(resolve, this.delay))
-
-      this.detachableVisible = true
-
-      // If the activator is external, there might be multiple,
-      // so on open, the activator will be set to the event target.
-      if (this.activator) this.activatorEl = e.target
-
-      await this.insertInDOM()
-
-      if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
-
-      if (!this.noPosition) this.computeDetachableCoords(e)
-
-      // In `getActivatorCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
-      // if we don't postpone the Menu apparition it will start transition from a visible menu and
-      // thus will not transition.
-      this.timeoutId = setTimeout(() => {
-        this.$emit('update:modelValue', true)
-        this.$emit('input', true)
-        this.$emit('open')
-      }, 0)
-
-      if (!this.persistent) document.addEventListener('mousedown', this.onOutsideMousedown)
-      if (!this.noPosition) window.addEventListener('resize', this.onResize)
     },
 
     /**

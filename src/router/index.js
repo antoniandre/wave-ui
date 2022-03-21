@@ -17,6 +17,11 @@ const routes = [
     component: Home
   },
   {
+    path: '/test',
+    name: 'test',
+    component: () => import('@/documentation/views/test.vue')
+  },
+  {
     path: '/why-wave-ui',
     name: 'why-wave-ui',
     component: () => import('@/documentation/views/why-wave-ui.vue')
@@ -55,6 +60,11 @@ const routes = [
     path: '/layout--grid-system',
     name: 'layout-grid-system',
     component: () => import('@/documentation/views/layout-grid-system.vue')
+  },
+  {
+    path: '/layout--simplified-grid-system',
+    name: 'layout-simplified-grid-system',
+    component: () => import('@/documentation/views/layout-simplified-grid-system.vue')
   },
   {
     path: '/layout--flex',

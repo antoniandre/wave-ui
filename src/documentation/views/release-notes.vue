@@ -6,30 +6,113 @@ main
     a.ml1(href="https://semver.org" target="_blank") Semantic versioning specs.
 
   ul.history
+    li.dashed
+      w-flex.mt8(align-center)
+        w-tag.pl3.pr2.text-bold(round bg-color="vue-green" color="white")
+          | VUE 3
+          w-icon.ml1(md) wi-chevron-down
+        .w-divider.grow.mr8.vue-green--bg
+
+      small.grey.mt1
+        w-icon.ml-1.mr1.grey wi-chevron-right
+        | #[span.code.inherit npm i wave-ui]
+
     //- Vue 3.
     //-----------------------------------------------------
-    li.major.dashed
-      strong.version v2.x (Vue 3 only)
-      p.
-        #[code wave-ui@next] should always be including the last version changes listed bellow
-        (maintaining 2 different versions of the documentation and release notes is a lot of extra
-        work!).#[br]
-        If you find anything missing or not working as expected please open an issue precising the Vue
-        and Wave UI versions. :)
-      br
-      br
 
-    //- Vue 2.
-    //-----------------------------------------------------
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
-      strong.version v1.52.0
+      strong.version v2.32.0
+      ul
+        li #[strong.code w-grid]: Added a new CSS-grid-based layout component.
+        li #[strong.code w-flex]: refactored the gap option, now using the CSS #[code gap] property.
+
+    li.patch
+      strong.version v2.31.2
+      ul
+        li #[strong.code w-icon]: Fix ligature icon fonts on Vue 3.
+
+    li.patch
+      strong.version v2.31.1
+      ul
+        li #[strong.code w-spinner]: Fix the toggling using v-model or modelValue on Vue 3.
+
+    li.major.dashed
+      strong.version v2.0
+      alert(warning)
+        | From this version onwards, Vue 3 must be installed:
+        br
+        a.ml1(href="https://blog.vuejs.org/posts/vue-3-as-the-new-default.html" target="_blank")
+          | Vue 3 is the new default
+          w-icon.ml1 mdi mdi-open-in-new
+        | ,
+        span.ml1.text-bold and so does Wave UI 2.0.
+
+      br
+      br
+      br
+      w-flex.mt8(align-center)
+        w-tag.pl3.pr2.text-bold(round bg-color="vue-green" color="white")
+          | VUE 2
+          w-icon.ml1(md) wi-chevron-down
+        .w-divider.grow.mr8.vue-green--bg
+
+      small.grey.mt1
+        w-icon.ml-1.mr1.grey wi-chevron-right
+        | #[span.code.inherit npm i wave-ui@legacy]
+
+    //- Vue 2.
+    //-----------------------------------------------------
+    //- li.patch
+      strong.version v1.51.1
+      ul
+        li #[strong.code w-dialog]: Fix an issue where a w-select would disappear on dialog close. #[issue-link 82]
+
+    li.minor
+      strong.version v1.51.0
+      ul
+        li
+          | #[strong.code w-menu &amp; w-tooltip]
+          ul
+            li Always compute coordinates of the activator element and not from #[code e.target] which may be a child of the activator.
+
+        li
+          strong.code w-menu
+          ul
+            li Accept external activators as DOM node selector string, or Vue ref, or DOM node.
+            li Allow simultaneous use of the #[code overlay] and #[code show-on-hover] options.
+            li Forward any event listener to the menu element (so user can listen to #[code mousedown] for instance).
+
+        li
+          | #[strong.code w-dialog &amp; w-overlay]
+          ul
+            li Emit a #[code closed] event after the component is fully closed (after animation end).
+
+        li
+          | #[strong.code w-select]
+          ul
+            li Fix a floating label jump on item unselect.
+            li Fix the select list disappearing too soon on dialog close when placed in a #[strong.code.black w-dialog]. #[issue-link 82]
+
+    li.minor
+      strong.version v1.51.0
       ul
         li #[strong.code w-toolbar]: new #[code vertical] option.
         li #[strong.code w-divider]: always stretch the divider, regardless of orientation (also when horizontal).
 
     li.minor
+      strong.version v1.50.0
+      ul
+        li #[strong.code w-grid]: Added a new CSS-grid-based layout component.
+        li #[strong.code w-flex]: refactored the gap option, now using the CSS #[code gap] property.
+
+    li.patch
+      strong.version v1.49.2
+      ul
+        li #[strong.code w-input]: Fix a regression related to #[issue-link 77].
+
+    li.patch
       strong.version v1.49.1
       ul
         li #[strong.code w-select]: prevent a console warning before hydration. #[issue-link 79]
@@ -464,7 +547,7 @@ main
         li #[strong.code w-accordion]: return original accordion item in scoped slots.
         li #[strong.code w-tabs]: return original tab item in scoped slots.
         li #[strong.code w-tabs]: when deleting a tab, activate the previous one.
-        li.text-bold.red #[strong.code w-tabs]: now only accepts a numeric #[code value]/#[code v-model] instead of an array of boolean.
+        li.text-bold.red #[strong.code w-tabs]: now only accepts a numeric #[code model-value]/#[code v-model] instead of an array of boolean.
 
     li.patch
       strong.version v1.20.6
@@ -721,6 +804,7 @@ main
       transform: translate(-50%, -50%);
       z-index: 1;
     }
+    > li:first-child:before {display: none;}
 
     // Left border.
     > li:after {
@@ -741,7 +825,6 @@ main
     > li.patch .version {color: #999;}
     > li.minor .version {color: #555;}
     > li.major .version {color: #09c;font-size: 1.4rem;}
-    > li:nth-child(2) .version:after {content: ' (Vue 2.x)';font-size: 1.2em;}
 
     ul {margin-left: -2px;}
     li li {padding-left: 20px;margin-top: 2px;}
@@ -773,5 +856,8 @@ main
       font-size: 1.1em;
     }
   }
+
+  .vue-green {color: #42b883;}
+  .vue-green--bg {background-color: #42b883;}
 }
 </style>

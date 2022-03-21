@@ -212,3 +212,8 @@
     // ----------------------------------------------
   }
 }
+
+@for $i from 1 through 12 {
+  .w-flex.gap#{$i}, .w-grid.gap#{$i} {gap: round($base-increment * $i);}
+}
+.w-flex.gap0, .w-grid.gap0 {gap: 0;}

@@ -150,7 +150,7 @@ const generateBreakpointSpaces = () => {
 
 const genBreakpointLayoutClasses = () => {
   let styles = ''
-  const { cssScope } = cssVars
+  const { cssScope, baseIncrement } = cssVars
   const layoutClasses = [
     'show{display:block}',
     'hide{display:none}',
@@ -185,6 +185,7 @@ const genBreakpointLayoutClasses = () => {
     'justify-space-around{justify-content:space-around}',
     'justify-space-evenly{justify-content:space-evenly}'
   ]
+  const array12 = Array(12).fill()
 
   // Define media queries for each breakpoint: xs, sm, md, lg, xl.
 
@@ -194,6 +195,10 @@ const genBreakpointLayoutClasses = () => {
       styles +=
         `@media(min-width:${min}px){` +
         layoutClasses.map(rule => `${cssScope} .${label}u-${rule}`).join('') +
+        // w-grid columns and gap.
+        array12.map((item, i) => `.w-grid.${label}u-columns${i + 1}{grid-template-columns:repeat(${i + 1},1fr);}`).join('') +
+        array12.map((item, i) => `.w-flex.${label}u-gap${i + 1},.w-grid.${label}u-gap${i + 1}{gap:${(i + 1) * baseIncrement}px;}`).join('') +
+        `.w-flex.${label}u-gap0,.w-flex.${label}u-gap0{gap:0}` +
         '}'
     }
   })
@@ -202,6 +207,10 @@ const genBreakpointLayoutClasses = () => {
     styles +=
       `@media (min-width:${min}px) and (max-width:${max}px){` +
       layoutClasses.map(rule => `${cssScope} .${label}-${rule}`).join('') +
+      // w-grid columns and gap.
+      array12.map((item, i) => `.w-grid.${label}-columns${i + 1}{grid-template-columns:repeat(${i + 1},1fr);}`).join('') +
+      array12.map((item, i) => `.w-flex.${label}-gap${i + 1},.w-grid.${label}-gap${i + 1}{gap:${(i + 1) * baseIncrement}px;}`).join('') +
+      `.w-flex.${label}-gap0,.w-flex.${label}-gap0{gap:0}` +
       '}'
   })
 
@@ -210,6 +219,10 @@ const genBreakpointLayoutClasses = () => {
       styles +=
         `@media (max-width:${max}px){` +
         layoutClasses.map(rule => `${cssScope} .${label}d-${rule}`).join('') +
+        // w-grid columns and gap.
+        array12.map((item, i) => `.w-grid.${label}d-columns${i + 1}{grid-template-columns:repeat(${i + 1},1fr);}`).join('') +
+        array12.map((item, i) => `.w-flex.${label}d-gap${i + 1},.w-grid.${label}d-gap${i + 1}{gap:${(i + 1) * baseIncrement}px;}`).join('') +
+        `.w-flex.${label}d-gap0,.w-flex.${label}d-gap0{gap:0}` +
         '}'
     }
   })

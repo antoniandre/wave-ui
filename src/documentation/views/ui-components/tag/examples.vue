@@ -4,7 +4,7 @@ div
   example(content-class="w-flex align-center")
     w-tag.mr4 tag
     w-tag(outline) tag
-    //- template(#pug).
+    template(#pug).
       w-tag.mr4 tag
       w-tag(outline) tag
     template(#html).
@@ -19,7 +19,7 @@ div
     w-tag.mr4(color="primary") tag
     w-tag.mr4(bg-color="primary") tag
     w-tag(bg-color="primary" color="yellow") tag
-    //- template(#pug).
+    template(#pug).
       w-tag.mr4(color="primary") tag
       w-tag.mr4(bg-color="primary") tag
       w-tag(bg-color="primary" color="yellow") tag
@@ -33,7 +33,7 @@ div
     w-tag.mr4(bg-color="primary" round) round
     w-tag.mr4(bg-color="primary" tile) tile
     w-tag(color="primary" shadow) shadow
-    //- template(#pug).
+    template(#pug).
       w-tag.mr4(bg-color="primary" round) round
       w-tag.mr4(bg-color="primary" tile) tile
       w-tag(color="primary" shadow) shadow
@@ -71,7 +71,7 @@ div
       w-tag.ma1(color="primary" xl) extra large
     .title3.my4 Custom width and height
     w-tag(outline color="primary" xl width="10em" height="3em") a bigger tag
-    //- template(#pug).
+    template(#pug).
       .w-flex.wrap.align-center
         w-tag.ma1(color="primary" xs) extra small
         w-tag.ma1(color="primary" sm) small
@@ -138,7 +138,7 @@ div
     w-tag(color="pink-light1" bg-color="pink-light5")
       w-icon.mr1(sm) mdi mdi-heart
       | like it
-    //- template(#pug).
+    template(#pug).
       w-tag(color="pink-light1" bg-color="pink-light5")
         w-icon.mr1(sm) mdi mdi-heart
         | like it
@@ -152,7 +152,8 @@ div
 
   title-link(h2) Toggleable state &amp; closable
   p.
-    When a tag has a #[code v-model] or #[code value], it becomes toggleable (two different states) and clickable.
+    When a tag has a #[code v-model] or #[code value], it becomes toggleable (two different states)
+    and clickable.
     When the user clicks it, its #[code v-model] boolean value is updated.
   example(content-class="w-flex align-center")
     w-tag(
@@ -163,7 +164,7 @@ div
     span.ml4
       | Value:
       code.ml1 {{ tagOn1 }}
-    //- template(#pug).
+    template(#pug).
       w-tag(
         v-model="tagOn"
         :bg-color="tagOn ? 'primary' : 'primary-light2'"
@@ -203,7 +204,7 @@ div
     span.ml4
       | Value:
       code.ml1 {{ tagOn1 }}
-    //- template(#pug).
+    template(#pug).
       w-tag(
         v-model="tagOn"
         :color="tagOn ? 'primary' : 'grey'"
@@ -239,9 +240,16 @@ div
 
   h3 Closable tag
   example(content-class="w-flex align-center")
-    w-tag(v-model="tagOn2" closable lg :outline="tagOn2" color="primary" :width="145") v-model &amp; close
-    //- template(#pug).
-      w-tag(v-model="tagOn" closable lg :outline="tagOn" color="primary" :width="145") v-model &amp; close
+    w-tag(v-model="tagOn2" closable lg :outline="tagOn2" color="primary" :width="145")
+      | v-model &amp; close
+    template(#pug).
+      w-tag(
+        v-model="tagOn"
+        closable
+        lg
+        :outline="tagOn"
+        color="primary"
+        :width="145") v-model &amp; close
     template(#html).
       &lt;w-tag
         v-model="tagOn"

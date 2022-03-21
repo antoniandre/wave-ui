@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  title-link.mt4(h1) Grid system
+  title-link.mt4(h1) Grid system (flexbox)
 
   .title3 The grid system (using flexbox) is 12-cell based by default.
   p.
@@ -18,6 +18,28 @@ main
         }
       })
 
+  title-link(h2) How to use
+  alert(info)
+    | For this flexbox layout, you need to:
+    ol
+      li.
+        Use the #[strong.code w-flex] component or class on the parent in order to set the
+        #[strong flex] context (#[code display: flex]).
+      li.
+        Use the predefined classes on the children in order to divide the available width
+        according to the class in use.
+
+  fieldset.w-flex.pa4.pt3.amber-light5--bg(style="position: relative")
+    legend.px1 #[strong.code.amber-dark3 &lt;w-flex&gt;]
+    fieldset.xs3.light-blue-light5--bg.pa3.code
+      legend.light-blue-dark2.px1 div.xs3
+    fieldset.xs9.light-blue-light5--bg.pa3.code.ml1
+      legend.light-blue-dark2.px1 div.xs9
+  p.mt6 In this case:
+  ul
+    li xs3 represents 3 units of the 12-cell-based grid, which equals to: (100% total width ÷ 12 cells) x 3 = 25%
+    li xs9 represents 9 units of the 12-cell-based grid, which equals to: (100% total width ÷ 12 cells) x 9 = 75%
+
   title-link(h2) Basic grid
   p.
     Let's start with a basic example. The following splitting is applied on the #[span.code xs]
@@ -34,14 +56,14 @@ main
         .primary--bg.py3 xs6
       .xs6.pa1
         .primary--bg.py3 xs6
-      .xs4.pa1(v-for="i in 3" :key="i")
+      .xs4.pa1(v-for="i in 3")
         .primary-light1--bg.white.py3 xs4
-      .xs3.pa1(v-for="i in 4" :key="i")
+      .xs3.pa1(v-for="i in 4")
         .primary-light2--bg.white.py3 xs3
-      .xs2.pa1(v-for="i in 6" :key="i")
+      .xs2.pa1(v-for="i in 6")
         .primary-light3--bg.py3 xs2
-      .xs1.pa1(v-for="i in 12" :key="i")
-        .blue-light4--bg.pa3 xs1
+      .xs1.pa1(v-for="i in 12")
+        .blue-light4--bg.py3 xs1
     template(#pug).
       w-flex.text-center(wrap)
         .xs12.pa1
@@ -50,14 +72,14 @@ main
           .primary--bg.py3 xs6
         .xs6.pa1
           .primary--bg.py3 xs6
-        .xs4.pa1(v-for="i in 3" :key="i")
+        .xs4.pa1(v-for="i in 3")
           .primary-light1--bg.white.py3 xs4
-        .xs3.pa1(v-for="i in 4" :key="i")
+        .xs3.pa1(v-for="i in 4")
           .primary-light2--bg.white.py3 xs3
-        .xs2.pa1(v-for="i in 6" :key="i")
+        .xs2.pa1(v-for="i in 6")
           .primary-light3--bg.py3 xs2
-        .xs1.pa1(v-for="i in 12" :key="i")
-          .blue-light4--bg.pa3 xs1
+        .xs1.pa1(v-for="i in 12")
+          .blue-light4--bg.py3 xs1
     template(#html).
       &lt;w-flex wrap class="text-center"&gt;
         &lt;div class="xs12 pa1"&gt;
@@ -71,20 +93,20 @@ main
           &lt;div class="primary--bg py3"&gt;xs6&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 3" :key="i" class="xs4 pa1"&gt;
+        &lt;div v-for="i in 3" class="xs4 pa1"&gt;
           &lt;div class="primary-light1--bg white py3"&gt;xs4&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 4" :key="i" class="xs3 pa1"&gt;
+        &lt;div v-for="i in 4" class="xs3 pa1"&gt;
           &lt;div class="primary-light2--bg white py3"&gt;xs3&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 6" :key="i" class="xs2 pa1"&gt;
+        &lt;div v-for="i in 6" class="xs2 pa1"&gt;
           &lt;div class="primary-light3--bg py3"&gt;xs2&lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div v-for="i in 12" :key="i" class="xs1 pa1"&gt;
-          &lt;div class="blue-light4--bg pa3"&gt;xs1&lt;/div&gt;
+        &lt;div v-for="i in 12" class="xs1 pa1"&gt;
+          &lt;div class="blue-light4--bg py3"&gt;xs1&lt;/div&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
 
@@ -171,6 +193,27 @@ main
       &lt;/w-flex&gt;
 
   title-link(h2) Operating with breakpoints
+  example
+    w-card.blue-light5--bg
+      .title2.mt0 Current breakpoint: #[code {{ $waveui.breakpoint.name }}]
+      em.grey.mt1 Resizing your browser will update the current breakpoint.
+    template(#pug).
+      w-card.blue-light5--bg
+        .title2
+          | Current breakpoint:
+          code {{ '\{\{ $waveui.breakpoint.name \}\}' }}
+        em.grey.mt1 Resizing your browser will update the current breakpoint.
+    template(#html).
+      &lt;w-card class="blue-light5--bg"&gt;
+        &lt;div class="title2 mt0"&gt;
+          Current breakpoint:
+          &lt;code&gt;{{ '\{\{ $waveui.breakpoint.name \}\}' }}&lt;/code&gt;
+        &lt;/div&gt;
+        &lt;em class="grey mt1"&gt;
+          Resizing your browser will update the current breakpoint.
+        &lt;/em&gt;
+      &lt;/w-card&gt;
+
   p For this example, resize your browser and observe the different layout when crossing a breakpoint.
   example
     w-flex.text-center(wrap)
@@ -309,9 +352,20 @@ main
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/w-flex&gt;
+
+  title-link(h2) Using the gap option with the grid system
+  p
+    | The #[strong.code.inherit w-flex] component has a
+    router-link.ml1(to="/layout--flex#gap") #[span.code.inherit gap] option
+    | , as well as #[router-link.ml1(to="/layout--flex#caveat") a caveat] when used with flex wrap.
 </template>
 
 <style lang="scss">
-.main--layout-grid-system .xs1 {overflow: hidden;}
-.main--layout-grid-system .xs1 div {display: flex;justify-content: center;}
+.main--layout-grid-system {
+  .xs1 {overflow: hidden;}
+  .xs1 div {display: flex;justify-content: center;}
+
+  fieldset {border: 2px solid rgba(#ca4, 0.8);}
+  fieldset fieldset {border: 1px solid rgba(#6cf, 0.8);}
+}
 </style>

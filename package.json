@@ -1,7 +1,7 @@
 {
   "name": "wave-ui",
-  "version": "1.49.1",
-  "description": "An emerging UI framework for Vue.js & Vue 3 with only the bright side. :sunny:",
+  "version": "1.51.1",
+  "description": "An emerging UI framework for Vue.js (2 & 3) with only the bright side. :sunny:",
   "author": "Antoni Andre <antoniandre.web@gmail.com>",
   "main": "./dist/wave-ui.umd.js",
   "unpkg": "dist/wave-ui.umd.js",

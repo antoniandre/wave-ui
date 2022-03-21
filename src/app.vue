@@ -1,13 +1,11 @@
 <template lang="pug">
-router-view.grow(v-if="$route.name === 'home'")
+router-view.grow(v-if="['home', 'test'].includes($route.name)")
 documentation(v-else)
 </template>
 
 <script>
-import Documentation from '@/documentation/index.vue'
-
 export default {
-  components: { Documentation },
+  components: { Documentation: () => import('@/documentation/index.vue') },
 
   created () {
     this.$store.commit('initUsePug')

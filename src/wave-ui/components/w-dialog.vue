@@ -4,12 +4,13 @@ w-overlay.w-dialog(
   :persistent="persistent"
   :persistent-no-animation="persistentNoAnimation"
   @click="onOutsideClick"
+  @closed="$emit('closed')"
   :bg-color="overlayColor"
   :opacity="overlayOpacity"
   :class="classes")
   transition(:name="transition" appear @after-leave="onClose")
     w-card.w-dialog__content(
-      v-if="showContent"
+      v-show="showContent"
       no-border
       :color="color"
       :bg-color="bgColor"
@@ -18,10 +19,10 @@ w-overlay.w-dialog(
       :content-class="contentClass"
       :title="title || undefined"
       :style="contentStyles")
-      template(v-if="$slots.title" v-slot:title)
+      template(#title v-if="$slots.title")
         slot(name="title")
       slot
-      template(v-if="$slots.actions" v-slot:actions)
+      template(#actions v-if="$slots.actions")
         slot(name="actions")
 </template>
 
@@ -47,7 +48,7 @@ export default {
     overlayOpacity: { type: [Number, String, Boolean] }
   },
 
-  emits: ['input', 'update:modelValue', 'close'],
+  emits: ['input', 'update:modelValue', 'close', 'closed'],
 
   data () {
     return {
@@ -87,7 +88,7 @@ export default {
       this.showWrapper = false
       this.$emit('update:modelValue', false)
       this.$emit('input', false)
-      this.$emit('close', false)
+      this.$emit('close')
     }
   },
 
