@@ -261,6 +261,57 @@ div
         &lt;span class="mx1"&gt;Item 5&lt;/span&gt;
         &lt;span class="mx1"&gt;Item 6&lt;/span&gt;
       &lt;/w-toolbar&gt;
+
+  //- @todo.
+  //- title-link(h2) Vertical toolbar with absolute position
+  //- example(content-class="py12")
+    w-toolbar(vertical absolute left)
+      w-icon(size="2.2em" color="primary") wi-wave
+      .spacer
+      w-button.pa4(icon="mdi mdi-home" text lg)
+      w-button.pa4(icon="mdi mdi-chat" text lg)
+      w-button.pa4(icon="mdi mdi-email" text lg)
+
+  title-link(h2) Vertical toolbar
+  example(content-class="justify-center")
+    w-card.mxa(content-class="pa0 w-flex" style="max-width: 550px;height: 200px")
+      w-toolbar(vertical)
+        w-icon(size="2.2em" color="primary") wi-wave
+        w-divider.mya
+        w-button.pa4(icon="mdi mdi-cart" text lg)
+        w-button.pa4(icon="mdi mdi-email" text lg)
+        w-button.pa4(icon="mdi mdi-chat" text lg)
+      w-flex(align-center justify-center) Some content.
+    template(#pug).
+      w-card(content-class="pa0 w-flex" style="height: 200px")
+        w-toolbar(vertical)
+          w-icon(size="2.2em" color="primary") wi-wave
+
+          //- You could also add a .spacer before &amp; after instead of the `mya` class.
+          w-divider.mya
+
+          w-button.pa4(icon="mdi mdi-cart" text lg)
+          w-button.pa4(icon="mdi mdi-email" text lg)
+          w-button.pa4(icon="mdi mdi-chat" text lg)
+
+        w-flex(align-center justify-center) Some content.
+    template(#html).
+      &lt;w-card content-class="pa0 w-flex" style="height: 200px"&gt;
+        &lt;w-toolbar vertical&gt;
+          &lt;w-icon color="primary" size="2.2em"&gt;wi-wave&lt;/w-icon&gt;
+
+          &lt;!-- You could also add a .spacer before &amp; after instead of the `mya` class. --&gt;
+          &lt;w-divider class="mya"&gt;&lt;/w-divider&gt;
+
+          &lt;w-button icon="mdi mdi-cart" text lg class="pa4"&gt;&lt;/w-button&gt;
+          &lt;w-button icon="mdi mdi-email" text lg class="pa4"&gt;&lt;/w-button&gt;
+          &lt;w-button icon="mdi mdi-chat" text lg class="pa4"&gt;&lt;/w-button&gt;
+        &lt;/w-toolbar&gt;
+
+        &lt;w-flex align-center justify-center&gt;
+          Some content.
+        &lt;/w-flex&gt;
+      &lt;/w-card&gt;
 </template>
 
 <style lang="scss">
