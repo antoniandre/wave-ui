@@ -263,19 +263,50 @@ div
         &lt;span class="mx1"&gt;Item 6&lt;/span&gt;
       &lt;/w-toolbar&gt;
 
-  //- @todo.
-  //- title-link(h2) Vertical toolbar with absolute position
-  //- example(content-class="py12")
-    w-toolbar(vertical absolute left)
-      w-icon(size="2.2em" color="primary") wi-wave
-      .spacer
-      w-button.pa4(icon="mdi mdi-home" text lg)
-      w-button.pa4(icon="mdi mdi-chat" text lg)
-      w-button.pa4(icon="mdi mdi-email" text lg)
+  title-link(h2) Vertical toolbar with absolute position
+  p.
+    You can use the absolute (or fixed) position to quickly place a toolbar to the left, top,
+    right or bottom of the container (or screen).#[br]
+    In this case, you may want to add a padding on the content container to compensate the toolbar
+    if you don't want the toolbar to overlap the content (like in this example).#[br]
+    Alternatively, you can place the toolbar and the content container in a w-flex container so
+    they will never overlap - like in the next example.
+  example(content-class="w-flex")
+    w-card.grow(content-class="pa0")
+      w-toolbar(vertical absolute left)
+        w-icon(size="2.2em" color="primary") wi-wave
+    .spacer.no-grow.mx3
+    w-card.grow(content-class="pa0")
+      w-toolbar(vertical absolute right)
+        w-icon(size="2.2em" color="primary") wi-wave
+    template(#pug).
+      w-card.grow(content-class="pa0")
+        w-toolbar(vertical absolute left)
+          w-icon(size="2.2em" color="primary") wi-wave
+
+      .spacer.no-grow.mx3
+
+      w-card.grow(content-class="pa0")
+        w-toolbar(vertical absolute right)
+          w-icon(size="2.2em" color="primary") wi-wave
+    template(#html).
+      &lt;w-card class="grow" content-class="pa0"&gt;
+        &lt;w-toolbar vertical absolute left&gt;
+          &lt;w-icon size="2.2em" color="primary"&gt;wi-wave&lt;/w-icon&gt;
+        &lt;/w-toolbar&gt;
+      &lt;/w-card&gt;
+
+      &lt;div class="spacer no-grow mx3"&gt;&lt;/div&gt;
+
+      &lt;w-card class="grow" content-class="pa0"&gt;
+        &lt;w-toolbar vertical absolute right&gt;
+          &lt;w-icon size="2.2em" color="primary"&gt;wi-wave&lt;/w-icon&gt;
+        &lt;/w-toolbar&gt;
+      &lt;/w-card&gt;
 
   title-link(h2) Vertical toolbar
   example(content-class="justify-center")
-    w-card.mxa(content-class="pa0 w-flex" style="max-width: 550px;height: 200px")
+    w-card.mxa(content-class="pa0 w-flex")
       w-toolbar(vertical)
         w-icon(size="2.2em" color="primary") wi-wave
         w-divider.mya
@@ -284,7 +315,7 @@ div
         w-button.pa4(icon="mdi mdi-chat" text lg)
       w-flex(align-center justify-center) Some content.
     template(#pug).
-      w-card(content-class="pa0 w-flex" style="height: 200px")
+      w-card(content-class="pa0 w-flex")
         w-toolbar(vertical)
           w-icon(size="2.2em" color="primary") wi-wave
 
@@ -297,7 +328,7 @@ div
 
         w-flex(align-center justify-center) Some content.
     template(#html).
-      &lt;w-card content-class="pa0 w-flex" style="height: 200px"&gt;
+      &lt;w-card content-class="pa0 w-flex"&gt;
         &lt;w-toolbar vertical&gt;
           &lt;w-icon color="primary" size="2.2em"&gt;wi-wave&lt;/w-icon&gt;
 
@@ -313,12 +344,18 @@ div
           Some content.
         &lt;/w-flex&gt;
       &lt;/w-card&gt;
+    template(#css).
+      .w-card {
+        margin: auto;
+        max-width: 550px;
+        height: 200px;
+      }
 </template>
 
 <style lang="scss">
 .main--toolbar {
   .w-card {
-    flex-grow: 1;
+    margin: auto;
     max-width: 550px;
     height: 200px;
   }
