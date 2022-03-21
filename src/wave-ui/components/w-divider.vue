@@ -18,7 +18,7 @@ export default {
     classes () {
       return {
         [`w-divider--has-color ${this.color}`]: this.color,
-        'w-divider--vertical': this.vertical,
+        [`w-divider--${this.vertical ? 'vertical' : 'horizontal'}`]: true,
         'w-divider--has-content': this.$slots.default
       }
     }
@@ -30,14 +30,18 @@ export default {
 .w-divider {
   border: 0 solid rgba(0, 0, 0, 0.15);
   border-top-width: 1px;
-  align-self: stretch; // Fill up the available height when vertical & width when horizontal.
 
   &--has-color {border-color: currentColor;}
 
   &--vertical {
+    align-self: stretch; // Fill up the available height.
     display: flex;
     border-top-width: 0;
     border-left-width: 1px;
+  }
+
+  .w-toolbar--vertical > &--horizontal {
+    align-self: stretch; // Fill up the available width.
   }
 
   // With a slot.
