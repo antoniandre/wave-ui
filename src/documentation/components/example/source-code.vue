@@ -52,6 +52,8 @@ export default {
     line-height: 1.3;
   }
 
+  .top-bar + .language .ssh-pre {border-top-color: rgba(0, 0, 0, 0.05);}
+
   .ssh-pre[data-label]:before {
     font-family: 'Arial Narrow', Arial, sans-serif;
     bottom: auto;
