@@ -125,14 +125,6 @@ export default {
         [item[this.itemColorKey]]: item[this.itemColorKey]
       }
     }
-  },
-
-  watch: {
-    modelValue (array) {
-      this.accordionItems.forEach((item, i) => {
-        item.expanded = (Array.isArray(array) && array[i]) || false
-      })
-    }
   }
 }
 </script>
