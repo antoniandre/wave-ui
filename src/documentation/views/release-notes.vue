@@ -84,7 +84,13 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
-    //- li.patch
+    li.patch
+      strong.version v1.52.0
+      ul
+        li #[strong.code w-toolbar]: new #[code vertical] option.
+        li #[strong.code w-divider]: always stretch the divider, regardless of orientation (also when horizontal).
+
+    li.patch
       strong.version v1.51.1
       ul
         li #[strong.code w-dialog]: Fix an issue where a w-select would disappear on dialog close. #[issue-link 82]
@@ -113,7 +119,6 @@ main
           | #[strong.code w-select]
           ul
             li Fix a floating label jump on item unselect.
-            li Fix the select list disappearing too soon on dialog close when placed in a #[strong.code.black w-dialog]. #[issue-link 82]
 
     li.minor
       strong.version v1.50.0
@@ -126,7 +131,7 @@ main
       ul
         li #[strong.code w-input]: Fix a regression related to #[issue-link 77].
 
-    li.patch
+    li.minor
       strong.version v1.49.1
       ul
         li #[strong.code w-select]: prevent a console warning before hydration. #[issue-link 79]
