@@ -23,6 +23,26 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v2.33.0
+      ul
+        li #[strong.code w-menu]:
+          ul
+            li Accept external activators as DOM node selector string, or Vue ref, or DOM node.
+        li #[strong.code w-select]:
+          ul
+            li Fix the floating label jump on item unselect.
+
+    li.patch
+      strong.version v2.32.3
+      ul
+        li #[strong.code w-tabs]: Fix keeping tab contents alive in Vue 3. #[issue-link 83]
+
+    li.patch
+      strong.version v2.32.1
+      ul
+        li #[strong.code w-icon]: Fix a reactivity issue in Vue 3. #[issue-link 81]
+
+    li.minor
       strong.version v2.32.0
       ul
         li #[strong.code w-grid]: Added a new CSS-grid-based layout component.
@@ -31,7 +51,7 @@ main
     li.patch
       strong.version v2.31.2
       ul
-        li #[strong.code w-icon]: Fix ligature icon fonts on Vue 3.
+        li #[strong.code w-icon]: Fix ligature icon fonts in Vue 3.
 
     li.patch
       strong.version v2.31.1
@@ -70,6 +90,12 @@ main
         li #[strong.code w-dialog]: Fix an issue where a w-select would disappear on dialog close. #[issue-link 82]
 
     li.minor
+      strong.version v1.52.0
+      ul
+        li #[strong.code w-toolbar]: new #[code vertical] option.
+        li #[strong.code w-divider]: always stretch the divider, regardless of orientation (also when horizontal).
+
+    li.minor
       strong.version v1.51.0
       ul
         li
@@ -94,12 +120,6 @@ main
           ul
             li Fix a floating label jump on item unselect.
             li Fix the select list disappearing too soon on dialog close when placed in a #[strong.code.black w-dialog]. #[issue-link 82]
-
-    li.minor
-      strong.version v1.51.0
-      ul
-        li #[strong.code w-toolbar]: new #[code vertical] option.
-        li #[strong.code w-divider]: always stretch the divider, regardless of orientation (also when horizontal).
 
     li.minor
       strong.version v1.50.0

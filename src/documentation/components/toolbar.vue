@@ -38,6 +38,8 @@ export default {
     drawerOpen: { type: Boolean, default: false }
   },
 
+  emits: ['update:drawerOpen'],
+
   computed: {
     version () {
       return process.env.VITE_APP_VERSION.replace(

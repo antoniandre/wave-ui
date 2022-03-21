@@ -57,7 +57,7 @@ main
       .color.info-dark3--bg.title3.py3.ma2.white.body.xs12 info-dark3
 
   title-link(h2 slug="primary-secondary-and-your-own-colors-and-shades")
-    | #[span.code primary], #[span.code secondary] and your own colors &amp; shades
+    | #[span.code.inherit primary], #[span.code.inherit secondary] and your own colors &amp; shades
   p.
     In addition to the built-in status colors and color palette bellow, you can define a set
     of custom colors.#[br]
@@ -90,6 +90,10 @@ main
   alert(tip).
     If you don't need it, you can add #[code css: { colorShades: false }] to the Wave UI options to disable
     the color shades computing of the status colors and your custom colors.
+
+  alert(success).
+    You can access all the colors with their hex code in your JavaScript as well via the
+    #[code $waveui.colors] object.
 
   title-link.mt12.mb4.w-flex.align-center(h2 slug="color-palette")
     | Color Palette

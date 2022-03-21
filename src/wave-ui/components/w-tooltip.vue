@@ -2,7 +2,12 @@
 .w-tooltip-wrap
   slot(name="activator" :on="activatorEventHandlers")
   transition(:name="transitionName" appear)
-    .w-tooltip(v-if="detachableVisible" ref="detachable" :class="classes" :style="styles")
+    .w-tooltip(
+      v-if="detachableVisible"
+      ref="detachable"
+      :key="_uid"
+      :class="classes"
+      :style="styles")
       slot
 </template>
 

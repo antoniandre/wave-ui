@@ -253,7 +253,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -301,7 +301,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can also use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
