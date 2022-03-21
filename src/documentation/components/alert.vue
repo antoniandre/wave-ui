@@ -33,7 +33,7 @@ export default {
   font-weight: normal;
 
   &:after {display: none;}
-  .w-icon {
+  > .w-icon {
     border: 2px solid currentColor;
     width: 19px;
     height: 19px;
