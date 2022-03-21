@@ -70,7 +70,9 @@ export default {
   z-index: 10;
 
   &--absolute, &--fixed {top: 0;left: 0;right: 0;}
-  &--absolute.w-toolbar--vertical, &--fixed.w-toolbar--vertical {top: 0;bottom: 0;left: 0;}
+  &--absolute.w-toolbar--vertical, &--fixed.w-toolbar--vertical {top: 0;bottom: 0;}
+  &--absolute.w-toolbar--left, &--fixed.w-toolbar--left {left: 0;right: auto;}
+  &--absolute.w-toolbar--right, &--fixed.w-toolbar--right {left: auto;right: 0;}
   &--absolute {position: absolute;}
   &--fixed {position: fixed;}
 
@@ -109,6 +111,14 @@ export default {
   }
   .w-card__actions & {
     border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+  .w-card__content &--left {
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+  .w-card__content &--right {
+    border-top-right-radius: inherit;
     border-bottom-right-radius: inherit;
   }
 }
