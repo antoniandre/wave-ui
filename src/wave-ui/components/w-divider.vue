@@ -30,6 +30,7 @@ export default {
 .w-divider {
   border: 0 solid rgba(0, 0, 0, 0.15);
   border-top-width: 1px;
+  align-self: stretch; // Fill up the available height when vertical & width when horizontal.
 
   &--has-color {border-color: currentColor;}
 
@@ -37,7 +38,6 @@ export default {
     display: flex;
     border-top-width: 0;
     border-left-width: 1px;
-    align-self: stretch;
   }
 
   // With a slot.
