@@ -32,16 +32,18 @@
         template(#tabs-bar-extra)
           preference-buttons.no-grow(:has-pug="!!$slots.pug")
         template(#item-content="{ item }")
-          source-code(:item="item" v-bind="$props")
+          source-code(:item="item" :reactive="reactive")
             template(#[item.id])
               slot(:name="item.id")
       //- See all languages at once.
       div.bdt1(v-else)
-        w-flex(justify-space-between align-center)
-          .title5.code.pl2.mb0.primary &lt;/&gt; Source code
+        w-flex.top-bar(justify-space-between align-center)
+          label.pl2
+            w-icon.mr2 mdi mdi-code-tags
+            | Source code
           preference-buttons.no-grow(:has-pug="!!$slots.pug")
-        div(v-for="(item, i) in sourceCodeTabs" :key="i")
-          source-code(:item="item" v-bind="$props")
+        template(v-for="(item, i) in sourceCodeTabs")
+          source-code(:item="item" :reactive="reactive" :key="i")
             template(#[item.id])
               slot(:name="item.id")
 </template>
@@ -261,8 +263,9 @@ export default {
       .w-tabs__bar {overflow: hidden;}
       .w-tabs__bar-item {font-size: 0.95rem;padding: 2px 8px;}
     }
-  }
 
+    label .w-icon {margin-bottom: 2px;}
+  }
 
   .codepen-form {
     position: absolute;
