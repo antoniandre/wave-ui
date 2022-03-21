@@ -48,7 +48,8 @@ export default {
         route: '/layout',
         children: [
           { label: 'Spaces', route: '/layout--spaces' },
-          { label: 'Grid system', route: '/layout--grid-system' },
+          { label: 'Grid system (flexbox)', route: '/layout--grid-system' },
+          { label: 'Grid system (grid)', route: '/layout--simplified-grid-system' },
           { label: 'Flex', route: '/layout--flex' },
           { label: 'Other CSS classes', route: 'layout--other-css-classes' }
         ]
@@ -109,7 +110,6 @@ export default {
       { label: 'Slideshow', route: '/slideshow' },
       { label: 'Splitter', route: '/splitter' }
     ]
-
   }),
 
   methods: {

@@ -23,7 +23,6 @@ main
       ssh-pre.mb0(v-show="$store.state.usePug" language="pug" label="Pug").
         w-transition-fade
           span(v-if="show") Hello!
-        &lt;/w-transition-fade&gt;
       ssh-pre.mb0(v-show="!$store.state.usePug" language="html-vue").
         &lt;w-transition-fade&gt;
           &lt;span v-if="show"&gt;Hello!&lt;/span&gt;

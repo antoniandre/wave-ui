@@ -727,6 +727,135 @@ div
         files: []
       })
 
+  title-link(h3) Uploading the file to a backend server
+  p.
+    There are different ways you can do this. The 2 most common ways would be to:
+  ul
+    li.
+      Use Axios or other AJAX library to send the file on #[strong.code w-form]
+      #[code @success] (emitted upon successful validation).
+    li.
+      Use the #[code allow-submit] option on the #[strong.code w-form] as well as
+      #[code enctype="multipart/form-data"], #[code method] and #[code action] fields
+      in order to submit the file in a full HTML built-in process (But this will reload
+      the page).
+
+  p.mt3.
+    The first option is recommended for a more modern approach. Here are two examples how to
+    set this up.
+  title-link.mt8(h4) 1st example
+  p.
+    In this example, the file is uploaded to #[a(href="https://filebin.net" target="_blank") Filebin].
+    The file is transferred as #[code application/x-www-form-urlencoded] similar to
+    #[code application/octet-stream] with the file in the body of the request as per the
+    expectation of the Filebin API.
+  example(reactive external-js="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js")
+    w-form(@success="onFormSuccess")
+      w-input(
+        type="file"
+        v-model="files5"
+        :validators="[() => files5.length || 'Please add a file']") File
+      w-button.d-flex.mla.mt4(type="submit" :loading="loading") Send
+    template(#pug).
+      w-form(@success="onFormSuccess")
+        w-input(
+          type="file"
+          v-model="files"
+          :validators="[() => files.length || 'Please add a file']") File
+        w-button.d-flex.mla.mt4(type="submit" :loading="loading") Send
+    template(#html).
+      &lt;w-form @success="onFormSuccess"&gt;
+        &lt;w-input
+          type="file"
+          v-model="files"
+          :validators="[() => files.length || 'Please add a file']"&gt;
+          File
+        &lt;/w-input&gt;
+
+        &lt;w-button
+          type="submit"
+          :loading="loading"
+          class="d-flex mla mt4"&gt;
+          Send
+        &lt;/w-button&gt;
+      &lt;/w-form&gt;
+    template(#js).
+      methods: {
+        // This method uses the Axios library.
+        // import axios from 'axios' // If you use NPM.
+        async onFormSuccess () {
+          this.loading = true
+
+          const binURL = 'https://filebin.net/waveui-{{ todayFormatted }}{{ userIP }}'
+          const { name: filename, file } = this.files[0]
+
+          axios.post(`${binURL}/${filename}`, file)
+            .then(data =&gt; {
+              this.loading = false
+              this.$waveui.notify(
+                `&lt;div&gt;
+                File transferred successfully.&lt;br&gt;Now check your
+                &lt;a href="${binURL}" target="_blank"&gt;
+                  Filebin &lt;i class="w-icon mdi mdi-open-in-new"&gt;&lt;/i&gt;&lt;/a&gt;.
+                &lt;/div&gt;`,
+                'success',
+                0)
+            })
+            .catch(() =&gt; {
+              this.$waveui.notify(
+                '&lt;div&gt;An error occurred.&lt;br&gt;Is Filebin down?&lt;br&gt;Or is there a problem with the file?&lt;/div&gt;',
+                'error',
+                0)
+              this.loading = false
+            })
+        }
+      }
+
+  title-link.mt8(h4) 2nd example
+  p.
+    In this example (more common case) the file is transferred as #[code multipart/form-data] with
+    the use of #[code FormData] and using the same HTML as the previous example.
+  ssh-pre(language="js" label="JavaScript").
+    import axios from 'axios'
+
+    export default {
+      data: () => ({
+        files: []
+      }),
+
+      methods: {
+        onFormSuccess () {
+          const formData = new FormData()
+          formData.append('file', this.files[0].file)
+
+          axios.post(
+            '/api/your-backend-script',
+            formData,
+            { headers: { 'Content-Type': 'multipart/form-data' } }
+          ).then(
+            data => console.log('Success!', data),
+            error => console.log('Failure!', error)
+          )
+        }
+      }
+    }
+
+  p.
+    Here is an example of a very minimalist way to receive and display the file on server side
+    with PHP. Of course you should add more checks, and move the temporary uploaded file when all
+    the checks are passed.
+  ssh-pre(language="php" label="PHP").
+    &lt;?php
+    // You can check the structure of the file upload.
+    // print_r($_FILES);die;
+
+    // Set the content type to the file type for output.
+    header('Content-Type: ' . $_FILES['file']['type']);
+
+    // Read and output the uploaded file.
+    die(file_get_contents($_FILES['file']['tmp_name']));
+    ?&gt;
+
   title-link(h3) Loading state
   p.
     If you try to upload a very large file, you will see the progress value of the file transfer will
@@ -970,6 +1099,8 @@ div
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data: () => ({
     isPassword: true,
@@ -977,7 +1108,11 @@ export default {
     files2: [],
     files3: [],
     files4: [],
-    overallProgress: undefined
+    files5: [],
+    loading: false,
+    overallProgress: undefined,
+    todayFormatted: '',
+    userIP: ''
   }),
 
   computed: {
@@ -1007,7 +1142,65 @@ export default {
   methods: {
     onFileInput (files) {
       this.files1 = files
+    },
+
+    getTodaysDate () {
+      const today = new Date()
+      const d = (today.getDate()).toString().padStart(2, 0)
+      const m = (today.getMonth() + 1).toString().padStart(2, 0)
+      const y = today.getFullYear()
+      this.todayFormatted = `${y}${m}${d}`
+    },
+
+    async getUserIP () {
+      await axios.get('https://api.ipify.org').then(data => {
+        this.userIP = data.data.replace(/\./g, '')
+      })
+    },
+
+    async onFormSuccess () {
+      this.loading = true
+
+      // Create the user unique Filebin ID.
+      const binURL = `https://filebin.net/waveui-${this.userIP}${this.todayFormatted}`
+      const { name: filename, file } = this.files5[0]
+
+      axios.post(`${binURL}/${filename}`, file)
+        .then(
+          data => {
+            this.loading = false
+            this.$waveui.notify(
+              `<div>
+              File transferred successfully.<br>Now check your
+              <a href="${binURL}" target="_blank">
+                Filebin <i class="w-icon mdi mdi-open-in-new"></i></a>.
+              </div>`,
+              'success',
+              0)
+          },
+          () => {
+            this.$waveui.notify(
+              '<div>An error occurred.<br>Is Filebin down?<br>Or is there a problem with the file?</div>',
+              'error',
+              0)
+            this.loading = false
+          }
+        )
     }
+  },
+
+  created () {
+    this.getTodaysDate()
+    this.getUserIP()
+
+    // Get the Filebin content.
+    // axios.get(
+    //   `https://filebin.net/waveui-${this.userIP}${this.todayFormatted}`,
+    //   { headers: { accept: "application/json" } }
+    // ).then(
+    //   data => console.log('Success', data),
+    //   error => console.log('Failure', error)
+    // )
   }
 }
 </script>

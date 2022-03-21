@@ -25,11 +25,12 @@ component(
     align-left
     custom
     min-width="activator"
+    @mousedown="isFocused = true, selectingItem = true"
+    @mouseup="isFocused = true, selectingItem = false"
     v-bind="menuProps || {}")
     template(#activator="{ on }")
       //- Input wrapper.
       .w-select__selection-wrap(
-        ref="selection-wrap"
         @click="!isDisabled && !isReadonly && (showMenu ? closeMenu : openMenu)()"
         role="button"
         aria-haspopup="listbox"
@@ -173,7 +174,9 @@ export default {
     inputValue: [],
     showMenu: false,
     menuMinWidth: 0,
-    isFocused: false
+    isFocused: false,
+    selectingItem: false,
+    selectionWrapRef: undefined
   }),
 
   computed: {
@@ -210,7 +213,7 @@ export default {
         'w-select--disabled': this.isDisabled,
         'w-select--readonly': this.isReadonly,
         [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
-        'w-select--focused': this.isFocused && !this.isReadonly,
+        'w-select--focused': (this.isFocused || this.selectingItem) && !this.isReadonly,
         'w-select--dark': this.dark,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
