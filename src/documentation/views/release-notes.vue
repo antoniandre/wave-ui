@@ -84,16 +84,12 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
-    //- li.patch
-      strong.version v1.51.1
-      ul
-        li #[strong.code w-dialog]: Fix an issue where a w-select would disappear on dialog close. #[issue-link 82]
-
     li.minor
       strong.version v1.52.0
       ul
         li #[strong.code w-toolbar]: new #[code vertical] option.
         li #[strong.code w-divider]: always stretch the divider, regardless of orientation (also when horizontal).
+        li #[strong.code w-dialog]: Fix an issue where a w-select would disappear on dialog close. #[issue-link 82]
 
     li.minor
       strong.version v1.51.0
