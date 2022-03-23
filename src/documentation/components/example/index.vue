@@ -42,8 +42,8 @@
             w-icon.mr2 mdi mdi-code-tags
             | Source code
           preference-buttons.no-grow(:has-pug="!!$slots.pug")
-        template(v-for="(item, i) in sourceCodeTabs")
-          source-code(:item="item" :reactive="reactive" :key="i")
+        template(v-for="(item, i) in sourceCodeTabs" :key="i")
+          source-code(:item="item" :reactive="reactive")
             template(#[item.id])
               slot(:name="item.id")
 </template>
