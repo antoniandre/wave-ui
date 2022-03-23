@@ -1195,7 +1195,7 @@ export default {
 
     // Get the Filebin content.
     // axios.get(
-    //   `https://filebin.net/waveui-${this.userIP}${this.todayFormatted}`
+    //   `https://filebin.net/waveui-${this.userIP}${this.todayFormatted}`,
     //   { headers: { accept: "application/json" } }
     // ).then(
     //   data => console.log('Success', data),
