@@ -131,7 +131,7 @@ main
       ul
         li #[strong.code w-input]: Fix a regression related to #[issue-link 77].
 
-    li.minor
+    li.patch
       strong.version v1.49.1
       ul
         li #[strong.code w-select]: prevent a console warning before hydration. #[issue-link 79]

@@ -10,7 +10,7 @@ w-overlay.w-dialog(
   :class="classes")
   transition(:name="transition" appear @after-leave="onClose")
     w-card.w-dialog__content(
-      v-if="showContent"
+      v-show="showContent"
       no-border
       :color="color"
       :bg-color="bgColor"
