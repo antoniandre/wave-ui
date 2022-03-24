@@ -23,7 +23,7 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
-      strong.version v2.33.0
+      strong.version v2.34.0
       ul
         li #[strong.code w-tabs]: New #[code pill-slider] option. #[span.new]
 
