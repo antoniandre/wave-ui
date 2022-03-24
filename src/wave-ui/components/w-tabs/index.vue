@@ -66,6 +66,7 @@ export default {
     titleClass: { type: String },
     activeClass: { type: String, default: 'primary' },
     noSlider: { type: Boolean },
+    pillSlider: { type: Boolean },
     sliderColor: { type: String, default: 'primary' },
     contentClass: { type: String },
     transition: { type: [String, Boolean], default: '' },
@@ -122,6 +123,7 @@ export default {
       return {
         'w-tabs--card': this.card,
         'w-tabs--no-slider': this.noSlider,
+        'w-tabs--pill-slider': this.pillSlider,
         'w-tabs--fill-bar': this.fillBar,
         'w-tabs--init': this.init
       }
@@ -253,11 +255,11 @@ export default {
   &__bar {
     position: relative;
     display: flex;
-    // align-items: center;
     overflow-x: auto;
 
     &--center {justify-content: center;}
     &--right {justify-content: flex-end;}
+    .w-tabs--pill-slider & {padding-left: $base-increment;}
 
     .w-tabs--card &:after {
       content: '';
@@ -311,6 +313,7 @@ export default {
     &:active:before {opacity: 0.08;}
     &--disabled:before {display: none;}
   }
+  &--pill-slider &__bar-item:before {display: none;}
 
   // Bar Extra.
   // ------------------------------------------------------
@@ -331,6 +334,13 @@ export default {
     background-color: currentColor;
     transition: $transition-duration ease-in-out;
   }
+  &--pill-slider &__slider {
+    opacity: 0.1;
+    bottom: 15%;
+    height: 70%;
+    border-radius: 99em;
+  }
+
   &--init &__slider {transition: none;}
 
   // Content.
