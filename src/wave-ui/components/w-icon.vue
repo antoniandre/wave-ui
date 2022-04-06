@@ -1,12 +1,13 @@
 <template lang="pug">
 component.w-icon(
   :is="tag || 'i'"
-  :class="classes"
   v-on="$attrs"
+  :class="classes"
   role="icon"
   aria-hidden="true"
+  :icon="$slots.default && $slots.default()[0].children"
   :style="styles")
-  template(v-if="ligature") {{ ligature.icon }}
+  template(v-if="hasLigature") {{ icon }}
 </template>
 
 <script>
@@ -40,16 +41,18 @@ export default {
 
   emits: [],
 
-  data: () => ({
-    icon: ''
-  }),
+  data () {
+    return {
+      icon: '',
+      fontName: '',
+      slot: '',
+      observer: null
+    }
+  },
 
   computed: {
-    ligature () {
-      if (!config.iconsLigature) return false
-
-      const [fontName, icon] = this.icon.split(' ')
-      return fontName === config.iconsLigature && { fontName, icon }
+    hasLigature () {
+      return config.iconsLigature === this.fontName
     },
     forcedSize () {
       return this.size && (!isNaN(this.size) ? `${this.size}px` : this.size)
@@ -66,7 +69,8 @@ export default {
     },
     classes () {
       return {
-        [this.icon]: true,
+        [this.fontName]: true,
+        [!this.hasLigature && this.icon]: !this.hasLigature && this.icon,
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
@@ -80,8 +84,7 @@ export default {
         'w-icon--rotate-90': this.rotate90a,
         'w-icon--rotate-135': this.rotate135a,
         'w-icon--flip-x': this.flipX,
-        'w-icon--flip-y': this.flipY,
-        [this.ligature && this.ligature.fontName]: this.ligature
+        'w-icon--flip-y': this.flipY
       }
     },
     styles () {
@@ -89,14 +92,36 @@ export default {
     }
   },
 
-  created () {
-    this.icon = this.$slots.default && this.$slots.default()[0].children
+  methods: {
+    readIcon () {
+      const { default: slot } = this.$slots
+      const [fontName = '', icon = ''] = typeof slot === 'function' && slot()[0].children.trim().split(' ') || []
+      this.fontName = fontName
+      this.icon = icon
+    }
   },
 
-  // Using the slot content directly in the classes computed is not always reacting to changes.
-  // https://github.com/antoniandre/wave-ui/issues/81
-  updated () {
-    this.icon = this.$slots.default && this.$slots.default()[0].children
+  created () {
+    this.readIcon()
+  },
+
+  mounted () {
+    this.readIcon()
+
+    // Using the slot content directly in the classes computed is not always reacting to changes.
+    // https://github.com/antoniandre/wave-ui/issues/81
+    // and updating the fontName & icon on `updated` hook is also missing some triggers like when using an icon
+    // in a w-switch and changing the icon based on switch value.
+    this.observer = new MutationObserver(mutationsList => {
+      const [fontName = '', icon = ''] = mutationsList[0].target.attributes.icon.value.trim().split(' ') || []
+      this.fontName = fontName
+      this.icon = icon
+    })
+    this.observer.observe(this.$el, { attributes: true, attributeFilter: ['icon'] })
+  },
+
+  beforeDestroy () {
+    this.observer.disconnect()
   }
 }
 </script>
@@ -110,6 +135,7 @@ export default {
   justify-content: center;
   vertical-align: middle;
   user-select: none;
+  speak: never;
   line-height: 1;
   font-size: 1.2em;
   width: 1em;
