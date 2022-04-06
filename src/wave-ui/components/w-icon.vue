@@ -5,8 +5,7 @@ component.w-icon(
   :class="classes"
   role="icon"
   aria-hidden="true"
-  :icon="$slots.default && $slots.default()[0].children"
-  :style="styles")
+  :style="readIcon() /* Always reacting to slot change when called from template. */ && styles")
   template(v-if="hasLigature") {{ icon }}
 </template>
 
@@ -41,14 +40,10 @@ export default {
 
   emits: [],
 
-  data () {
-    return {
-      icon: '',
-      fontName: '',
-      slot: '',
-      observer: null
-    }
-  },
+  data: () => ({
+    icon: '',
+    fontName: ''
+  }),
 
   computed: {
     hasLigature () {
@@ -99,29 +94,6 @@ export default {
       this.fontName = fontName
       this.icon = icon
     }
-  },
-
-  created () {
-    this.readIcon()
-  },
-
-  mounted () {
-    this.readIcon()
-
-    // Using the slot content directly in the classes computed is not always reacting to changes.
-    // https://github.com/antoniandre/wave-ui/issues/81
-    // and updating the fontName & icon on `updated` hook is also missing some triggers like when using an icon
-    // in a w-switch and changing the icon based on switch value.
-    this.observer = new MutationObserver(mutationsList => {
-      const [fontName = '', icon = ''] = mutationsList[0].target.attributes.icon.value.trim().split(' ') || []
-      this.fontName = fontName
-      this.icon = icon
-    })
-    this.observer.observe(this.$el, { attributes: true, attributeFilter: ['icon'] })
-  },
-
-  beforeDestroy () {
-    this.observer.disconnect()
   }
 }
 </script>
