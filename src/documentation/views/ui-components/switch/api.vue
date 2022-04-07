@@ -29,7 +29,9 @@ const propsDescs = {
 }
 
 const slots = {
-  default: { description: 'The switch label content, if the label prop is not flexible enough.' }
+  default: { description: 'The switch label content, if the label prop is not flexible enough.' },
+  track: { description: 'Optional switch track content.' },
+  thumb: { description: 'Optional switch thumb content. Useful to place an icon or small text.' }
 }
 
 const events = {

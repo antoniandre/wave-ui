@@ -140,15 +140,67 @@ div
         label="Off disabled"&gt;
       &lt;/w-switch&gt;
 
-  title-link(h2) Thumb slot
-  p You can add an icon and any content in the switch thumb via the #[code #thumb] slot.
+  title-link(h2) Track slot
+  p.
+    You can easily add some custom content in the switch track via the #[code #track] slot.#[br]
+  alert(tip)
+    | If the #[strong.code w-switch] width is too small for your custom content, it's very easy to
+    | increase its width with CSS like in this example, and the component elements will adapt:
+    ssh-pre(language="css")
+      .w-switch--custom-track .w-switch--custom-track .w-switch__input {width: 55px;}
   example(content-class="pt5")
     w-switch.ma4(v-model="value2")
-      template(#thumb)
+      template(#track)
         small {{ value2 ? 'on' : 'off' }}
-    w-switch.ma4(v-model="value2" label="Dark theme")
+
+    w-switch.w-switch--wide.ma4(v-model="value2")
+      template(#track)
+        strong {{ value2 ? 'on' : 'off' }}
+    template(#pug).
+      w-switch.ma4(v-model="value")
+        template(#track)
+          small {{ "\{\{ value ? 'on' : 'off' \}\}" }}
+
+      w-switch.w-switch--wide.ma4(v-model="value")
+        template(#track)
+          strong {{ "\{\{ value ? 'on' : 'off' \}\}" }}
+    template(#html).
+      &lt;w-switch v-model="value" class="ma4"&gt;
+        &lt;template #track&gt;
+          &lt;small&gt;{{ "\{\{ value ? 'on' : 'off' \}\}" }}&lt;/small&gt;
+        &lt;/template&gt;
+      &lt;/w-switch&gt;
+
+      &lt;w-switch v-model="value" class="ma4 w-switch--wide"&gt;
+        &lt;template #track&gt;
+          &lt;strong&gt;{{ "\{\{ value ? 'on' : 'off' \}\}" }}&lt;/strong&gt;
+        &lt;/template&gt;
+      &lt;/w-switch&gt;
+    template(#js).
+      data: () => ({
+        value: true
+      })
+    template(#css).
+      /* Adapt text color according to the background color. */
+      .w-switch__track {color: #666;}
+      .w-switch--on .w-switch__track {color: #fff;}
+
+      /* Wider switch. */
+      .w-switch--wide .w-switch__input {width: 55px;}
+      .w-switch--wide .w-switch__track {width: 35px;text-align: center;}
+
+  title-link(h2) Thumb slot
+  p.
+    It is possible to add an icon or any kind of content in the switch thumb via the #[code #thumb]
+    slot.#[br]
+    You can also fit and style the element with minimum CSS.
+  example(content-class="pt5")
+    w-switch.ma4(v-model="value3")
       template(#thumb)
-        w-icon {{ value2 ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-weather-night' }}
+        small {{ value3 ? 'on' : 'off' }}
+    w-switch.ma4(v-model="value3" label="Dark theme")
+      template(#thumb)
+        w-icon {{ value3 ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-weather-night' }}
     template(#pug).
       w-switch.ma4(v-model="value" label="On")
         template(#thumb)
@@ -158,13 +210,13 @@ div
         template(#thumb)
           w-icon {{ "\{\{ value ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-weather-night' \}\}" }}
     template(#html).
-      &lt;w-switch class="ma4" v-model="value"&gt;
+      &lt;w-switch v-model="value" class="ma4"&gt;
         &lt;template #thumb&gt;
           &lt;small&gt;{{ "\{\{ value ? 'on' : 'off' \}\}" }}&lt;/small&gt;
         &lt;/template&gt;
       &lt;/w-switch&gt;
 
-      &lt;w-switch class="ma4" v-model="value"&gt;
+      &lt;w-switch v-model="value" class="ma4"&gt;
         &lt;template #thumb&gt;
           &lt;w-icon&gt;
             {{ "\{\{ value ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-weather-night' \}\}" }}
@@ -181,7 +233,15 @@ div
 export default {
   data: () => ({
     value: true,
-    value2: true
+    value2: true,
+    value3: true
   })
 }
 </script>
+
+<style lang="scss">
+.w-switch--wide .w-switch__input {width: 55px;}
+.w-switch--wide .w-switch__track {width: 35px;text-align: center;}
+.w-switch--custom-track .w-switch__track {color: #666;}
+.w-switch--custom-track.w-switch--on .w-switch__track {color: #fff;}
+</style>
