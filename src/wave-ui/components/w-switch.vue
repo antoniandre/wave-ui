@@ -29,6 +29,8 @@ component(
     @click="$refs.input.focus();$refs.input.click()"
     v-on="$attrs"
     :class="inputClasses")
+    .w-switch__thumb(v-if="$slots.thumb")
+      slot(name="thumb")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_.uid}`")
       slot
@@ -77,6 +79,8 @@ export default {
         'w-switch--disabled': this.isDisabled,
         'w-switch--readonly': this.isReadonly,
         'w-switch--ripple': this.ripple.start,
+        'w-switch--custom-thumb': this.$slots.thumb,
+        'w-switch--custom-track': this.$slots.track,
         'w-switch--rippled': this.ripple.end
       }
     },
@@ -186,8 +190,8 @@ $disabled-color: #ddd;
     }
   }
 
-  // Thumb.
-  &__input:after {
+  // Thumb: show either the thumb slot if any, or :after otherwise.
+  &__thumb, &__input:after {
     content: '';
     position: absolute;
     left: 0;
@@ -196,21 +200,27 @@ $disabled-color: #ddd;
     height: $small-form-el-size;
     background-color: #fff;
     border-radius: 100%;
+    text-align: center;
     @include default-transition;
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
 
-    :checked ~ & {transform: translateX(100%);}
+    .w-switch--on & {transform: translateX(100%);}
 
     .w-switch--thin & {
       top: - round(0.15 * $small-form-el-size);
       transform: scale(1.1);
       box-shadow: $box-shadow;
     }
-    .w-switch--thin :checked ~ & {
+    .w-switch--thin.w-switch--on & {
       transform: translateX(100%) scale(1.1);
       background-color: currentColor;
     }
+  }
+  &--custom-thumb &__input:after {display: none;}
+  &__thumb > * {
+    width: inherit;
+    height: inherit;
   }
 
   // The focus outline & ripple on switch activation.
@@ -223,10 +233,13 @@ $disabled-color: #ddd;
     height: $small-form-el-size;
     background-color: currentColor;
     border-radius: 100%;
-    transform: translateX(100%) scale(0);
+    // transform: translateX(0) scale(0);
     opacity: 0;
     pointer-events: none;
     transition: 0.25s ease-in-out;
+
+    :checked ~ & {transform: translateX(100%) scale(0);
+  }
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
     .w-switch--thin & {top: - round(0.15 * $small-form-el-size);}
