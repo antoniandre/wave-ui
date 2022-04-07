@@ -139,12 +139,49 @@ div
         thin
         label="Off disabled"&gt;
       &lt;/w-switch&gt;
+
+  title-link(h2) Thumb slot
+  p You can add an icon and any content in the switch thumb via the #[code #thumb] slot.
+  example(content-class="pt5")
+    w-switch.ma4(v-model="value2")
+      template(#thumb)
+        small {{ value2 ? 'on' : 'off' }}
+    w-switch.ma4(v-model="value2" label="Dark theme")
+      template(#thumb)
+        w-icon {{ value2 ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-weather-night' }}
+    template(#pug).
+      w-switch.ma4(v-model="value" label="On")
+        template(#thumb)
+          small {{ "\{\{ value ? 'on' : 'off' \}\}" }}
+
+      w-switch.ma4(v-model="value" label="Dark theme")
+        template(#thumb)
+          w-icon {{ "\{\{ value ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-weather-night' \}\}" }}
+    template(#html).
+      &lt;w-switch class="ma4" v-model="value"&gt;
+        &lt;template #thumb&gt;
+          &lt;small&gt;{{ "\{\{ value ? 'on' : 'off' \}\}" }}&lt;/small&gt;
+        &lt;/template&gt;
+      &lt;/w-switch&gt;
+
+      &lt;w-switch class="ma4" v-model="value"&gt;
+        &lt;template #thumb&gt;
+          &lt;w-icon&gt;
+            {{ "\{\{ value ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-weather-night' \}\}" }}
+          &lt;/w-icon&gt;
+        &lt;/template&gt;
+      &lt;/w-switch&gt;
+    template(#js).
+      data: () => ({
+        value: true
+      })
 </template>
 
 <script>
 export default {
   data: () => ({
-    value: true
+    value: true,
+    value2: true
   })
 }
 </script>
