@@ -29,6 +29,8 @@ component(
     @click="$refs.input.focus();$refs.input.click()"
     v-on="$attrs"
     :class="inputClasses")
+    .w-switch__track(v-if="$slots.track")
+      slot(name="track")
     .w-switch__thumb(v-if="$slots.thumb")
       slot(name="thumb")
   template(v-if="hasLabel && !labelOnLeft")
@@ -190,6 +192,16 @@ $disabled-color: #ddd;
     }
   }
 
+  // Track slot, if any.
+  &__track {
+    position: absolute;
+    left: 100%;
+    padding: 0 4px;
+    transform: translateX(-100%);
+    @include default-transition;
+  }
+  .w-switch--on &__track {left: 0;transform: translateX(0);}
+
   // Thumb: show either the thumb slot if any, or :after otherwise.
   &__thumb, &__input:after {
     content: '';
@@ -205,7 +217,7 @@ $disabled-color: #ddd;
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
 
-    .w-switch--on & {transform: translateX(100%);}
+    .w-switch--on & {left: 100%;transform: translateX(-100%);}
 
     .w-switch--thin & {
       top: - round(0.15 * $small-form-el-size);
@@ -213,7 +225,7 @@ $disabled-color: #ddd;
       box-shadow: $box-shadow;
     }
     .w-switch--thin.w-switch--on & {
-      transform: translateX(100%) scale(1.1);
+      transform: translateX(-100%) scale(1.1);
       background-color: currentColor;
     }
   }
@@ -233,13 +245,11 @@ $disabled-color: #ddd;
     height: $small-form-el-size;
     background-color: currentColor;
     border-radius: 100%;
-    // transform: translateX(0) scale(0);
     opacity: 0;
     pointer-events: none;
     transition: 0.25s ease-in-out;
 
-    :checked ~ & {transform: translateX(100%) scale(0);
-  }
+    :checked ~ & {transform: translateX(-100%) scale(0);left: 100%;}
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
     .w-switch--thin & {top: - round(0.15 * $small-form-el-size);}
@@ -255,14 +265,14 @@ $disabled-color: #ddd;
     opacity: 0.2;
   }
   :focus:checked ~ &__input:before {
-    transform: translateX(100%) scale(1.8);
+    transform: translateX(-100%) scale(1.8);
   }
 
   // After ripple reset to default state, then remove the class via js and the
   // `:focus ~ &__input:before` will re-transition to normal focused outline.
   &--rippled &__input:before {
     transition: none;
-    transform: translateX(100%) scale(0);
+    transform: translateX(-100%) scale(0);
     opacity: 0;
   }
 
@@ -277,7 +287,7 @@ $disabled-color: #ddd;
 }
 
 @keyframes w-switch-ripple {
-  0% {opacity: 0.8;transform: translateX(100%) scale(1);background-color: currentColor;} // Start with visible ripple.
-  100% {opacity: 0;transform: translateX(100%) scale(2.8);} // Propagate ripple to max radius and fade out.
+  0% {opacity: 0.8;transform: translateX(-100%) scale(1);background-color: currentColor;} // Start with visible ripple.
+  100% {opacity: 0;transform: translateX(-100%) scale(2.8);} // Propagate ripple to max radius and fade out.
 }
 </style>
