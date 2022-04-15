@@ -13,15 +13,10 @@ component(
     //- Left label.
     template(v-if="labelPosition === 'left'")
       label.w-input__label.w-input__label--left.w-form-el-shakable(
-        v-if="$slots.default"
+        v-if="$slots.default || label"
         :for="`w-input--${_.uid}`"
         :class="labelClasses")
-        slot
-      label.w-input__label.w-input__label--left.w-form-el-shakable(
-        v-else-if="label"
-        :for="`w-input--${_.uid}`"
-        :class="labelClasses"
-        v-html="label")
+        slot {{ label }}
 
     //- Input wrapper.
     .w-input__input-wrap(:class="inputWrapClasses")
@@ -81,15 +76,10 @@ component(
 
       template(v-if="labelPosition === 'inside' && showLabelInside")
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
-          v-if="$slots.default"
+          v-if="$slots.default || label"
           :for="`w-input--${_.uid}`"
           :class="labelClasses")
-          slot
-        label.w-input__label.w-input__label--inside.w-form-el-shakable(
-          v-else-if="label"
-          :for="`w-input--${_.uid}`"
-          v-html="label"
-          :class="labelClasses")
+          slot {{ label }}
       w-icon.w-input__icon.w-input__icon--inner-right(
         v-if="innerIconRight"
         tag="label"
@@ -121,15 +111,10 @@ component(
     //- Right label.
     template(v-if="labelPosition === 'right'")
       label.w-input__label.w-input__label--right.w-form-el-shakable(
-        v-if="$slots.default"
+        v-if="$slots.default || label"
         :for="`w-input--${_.uid}`"
         :class="labelClasses")
-        slot
-      label.w-input__label.w-input__label--right.w-form-el-shakable(
-        v-else-if="label"
-        :for="`w-input--${_.uid}`"
-        :class="labelClasses"
-        v-html="label")
+        slot {{ label }}
 </template>
 
 <script>
@@ -151,8 +136,7 @@ export default {
     labelPosition: { type: String, default: 'inside' },
     innerIconLeft: { type: String },
     innerIconRight: { type: String },
-    // When label is inside, allows to move the label above on focus or when filled.
-    staticLabel: { type: Boolean },
+    staticLabel: { type: Boolean }, // When label is inside, fix the label above.
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
     labelColor: { type: String, default: 'primary' },
