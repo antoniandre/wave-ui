@@ -1,5 +1,9 @@
 <template lang="pug">
-form.w-form(@submit="onSubmit" @reset="reset" novalidate :class="classes")
+form.w-form(
+  @submit="onSubmit"
+  @reset="reset"
+  novalidate
+  :class="classes")
   slot
 </template>
 
@@ -16,6 +20,17 @@ const asyncSome = async (array, predicate) => {
 export default {
   name: 'w-form',
 
+  props: {
+    modelValue: {},
+    allowSubmit: { type: Boolean },
+    noKeyupValidation: { type: Boolean },
+    noBlurValidation: { type: Boolean },
+    errorPlaceholders: { type: Boolean },
+    validationColor: { type: String, default: 'error' },
+    disabled: { type: Boolean },
+    readonly: { type: Boolean }
+  },
+
   provide () {
     return {
       formRegister: this.register,
@@ -25,16 +40,6 @@ export default {
       // To keep it reactive, we need an object not a list of props (by design in Vue).
       formProps: this.$props
     }
-  },
-
-  props: {
-    modelValue: {},
-    allowSubmit: { type: Boolean },
-    noKeyupValidation: { type: Boolean },
-    noBlurValidation: { type: Boolean },
-    errorPlaceholders: { type: Boolean },
-    disabled: { type: Boolean },
-    readonly: { type: Boolean }
   },
 
   emits: [

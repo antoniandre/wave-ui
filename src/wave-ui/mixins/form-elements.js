@@ -29,6 +29,9 @@ export default {
     },
     isReadonly () {
       return this.readonly || this.formProps.readonly
+    },
+    validationColor () {
+      return this.formProps.validationColor
     }
   },
 
