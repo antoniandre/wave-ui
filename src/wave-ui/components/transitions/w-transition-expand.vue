@@ -2,7 +2,6 @@
 transition(
   name="expand"
   mode="out-in"
-  v-bind="$props"
   :css="false"
   @before-appear="beforeAppear"
   @appear="appear"
