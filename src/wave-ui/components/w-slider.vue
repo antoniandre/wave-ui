@@ -394,10 +394,10 @@ export default {
 
     // The outline when focused, but also a bigger reactive zone for fat fingers when not.
     &:after {
-      left: -8px;
-      right: -8px;
-      top: -8px;
-      bottom: -8px;
+      left: -2 * $base-increment;
+      right: -2 * $base-increment;
+      top: -2 * $base-increment;
+      bottom: -2 * $base-increment;
       opacity: 0;
       background-color: currentColor;
     }
