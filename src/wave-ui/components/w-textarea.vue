@@ -9,9 +9,10 @@ component(
   :class="classes")
   //- Left label.
   template(v-if="labelPosition === 'left'")
-    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_.uid}`")
-      slot
-    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_.uid}`" v-html="label")
+    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(
+      v-if="$slots.default || label"
+      :for="`w-textarea--${_.uid}`")
+      slot {{ label }}
 
   //- Input wrapper.
   .w-textarea__textarea-wrap(:class="inputWrapClasses")
@@ -39,15 +40,10 @@ component(
       :tabindex="tabindex || null")
     template(v-if="labelPosition === 'inside' && showLabelInside")
       label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
-        v-if="$slots.default"
+        v-if="$slots.default || label"
         :for="`w-textarea--${_.uid}`"
-        :class="isFocused && { [valid === false ? 'error' : this.color]: this.color || valid === false }")
-        slot
-      label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
-        v-else-if="label"
-        :for="`w-textarea--${_.uid}`"
-        v-html="label"
         :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+        slot {{ label }}
     w-icon.w-textarea__icon.w-textarea__icon--inner-right(
       v-if="innerIconRight"
       tag="label"
@@ -56,9 +52,10 @@ component(
 
   //- Right label.
   template(v-if="labelPosition === 'right'")
-    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_.uid}`")
-      slot
-    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_.uid}`" v-html="label")
+    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(
+      v-if="$slots.default || label"
+      :for="`w-textarea--${_.uid}`")
+      slot {{ label }}
 </template>
 
 <script>
