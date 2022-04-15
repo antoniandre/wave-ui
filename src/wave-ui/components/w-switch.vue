@@ -22,9 +22,10 @@ component(
     :aria-checked="isOn || 'false'"
     role="switch")
   template(v-if="hasLabel && labelOnLeft")
-    label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_.uid}`")
-      slot
-    label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_.uid}`" v-html="label")
+    label.w-switch__label.w-switch__label--left.w-form-el-shakable(
+      v-if="$slots.default || label"
+      :for="`w-switch--${_.uid}`")
+      slot {{ label }}
   .w-switch__input(
     @click="$refs.input.focus();$refs.input.click()"
     v-on="$attrs"
@@ -34,9 +35,10 @@ component(
     .w-switch__thumb(v-if="$slots.thumb")
       slot(name="thumb")
   template(v-if="hasLabel && !labelOnLeft")
-    label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_.uid}`")
-      slot
-    label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_.uid}`" v-html="label")
+    label.w-switch__label.w-switch__label--right.w-form-el-shakable(
+      v-if="$slots.default || label"
+      :for="`w-switch--${_.uid}`")
+      slot {{ label }}
 </template>
 
 <script>
