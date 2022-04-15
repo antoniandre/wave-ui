@@ -6,9 +6,8 @@ div(:class="classes")
   //- Error message.
   w-transition-expand(y)
     template(v-if="Validation.message")
-      .w-form-el__error.error(v-if="$slots['error-message']" class="w-form-el__error w-form-el__error")
-        slot(name="error-message" :message="Validation.message")
-      .w-form-el__error.error(v-else v-html="Validation.message" class="w-form-el__error w-form-el__error")
+      .w-form-el__error.error
+        slot(name="error-message" :message="Validation.message") {{ Validation.message }}
 </template>
 
 <script>

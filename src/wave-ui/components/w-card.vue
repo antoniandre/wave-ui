@@ -1,10 +1,9 @@
 <template lang="pug">
 .w-card(:class="classes")
   .w-card__title(
-    v-if="$slots.title"
-    :class="{ 'w-card__title--has-toolbar': titleHasToolbar, ...titleClasses }")
-    slot(name="title")
-  .w-card__title(v-else-if="title" :class="titleClasses" v-html="title")
+    v-if="$slots.title || title"
+    :class="{ 'w-card__title--has-toolbar': $slots.title && titleHasToolbar, ...titleClasses }")
+    slot(name="title") {{ title }}
   w-image.w-card__image(v-if="image" :src="image" v-bind="imgProps")
     slot(name="image-content")
   .w-card__content(:class="contentClasses")
