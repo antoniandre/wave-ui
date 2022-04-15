@@ -8,13 +8,9 @@ component(
   wrap
   :class="wrapperClasses")
   label.w-slider__label.w-slider__label--left.w-form-el-shakable(
-    v-if="$slots['label-left']"
+    v-if="$slots['label-left'] || labelLeft"
     :for="`button--${_.uid}`")
-    slot(name="label-left")
-  label.w-slider__label.w-slider__label--left.w-form-el-shakable(
-    v-else-if="labelLeft"
-    :for="`button--${_.uid}`"
-    v-html="labelLeft")
+    slot(name="label-left") {{ labelLeft }}
   .w-slider__track-wrap
     .w-slider__track(
       ref="track"
@@ -63,13 +59,9 @@ component(
         @click="onStepLabelClick(100)"
         style="left: 100%") {{ this.maxVal }}
   label.w-slider__label.w-slider__label--right.w-form-el-shakable(
-    v-if="$slots['label-right']"
+    v-if="$slots['label-right'] || labelRight"
     :for="`button--${_.uid}`")
-    slot(name="label-right")
-  label.w-slider__label.w-slider__label--right.w-form-el-shakable(
-    v-else-if="labelRight"
-    :for="`button--${_.uid}`"
-    v-html="labelRight")
+    slot(name="label-right") {{ labelRight }}
 </template>
 
 <script>
