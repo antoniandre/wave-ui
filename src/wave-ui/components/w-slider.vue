@@ -5,7 +5,7 @@ component(
   v-bind="formRegister && { validators, inputValue: rangeValueScaled, disabled: isDisabled, readonly: isReadonly }"
   v-model:valid="valid"
   @reset="rangeValuePercent = 0;updateRangeValueScaled()"
-  wrap
+  :wrap="formRegister || null"
   :class="wrapperClasses")
   label.w-slider__label.w-slider__label--left.w-form-el-shakable(
     v-if="$slots['label-left'] || labelLeft"
@@ -35,6 +35,7 @@ component(
           :disabled="isDisabled || null"
           :readonly="isReadonly || null"
           :aria-readonly="isReadonly ? 'true' : 'false'"
+          :tabindex="isDisabled || isReadonly ? -1 : null"
           @keydown.left="onKeyDown($event, -1)"
           @keydown.right="onKeyDown($event, 1)"
           @focus="$emit('focus', $event)"
@@ -370,16 +371,17 @@ export default {
     &:before, &:after {
       content: '';
       position: absolute;
+      border-radius: inherit;
+      @include default-transition;
     }
+    // Colored border on thumb when hover and active - but with a transparency.
     &:before {
       left: 0;
       right: 0;
       top: 0;
       bottom: 0;
       opacity: 0.5;
-      border-radius: inherit;
       border: 1px solid currentColor;
-      @include default-transition;
     }
     &:hover:before, &:focus:before {opacity: 0.7;}
     &:active:before, .w-slider--dragging &:before {
@@ -390,13 +392,17 @@ export default {
     .w-slider--disabled &:before,
     .w-slider--readonly &:before {box-shadow: none;opacity: 0.4;}
 
-    // For fat fingers.
+    // The outline when focused, but also a bigger reactive zone for fat fingers when not.
     &:after {
-      left: -6px;
-      right: -6px;
-      top: -6px;
-      bottom: -6px;
+      left: -8px;
+      right: -8px;
+      top: -8px;
+      bottom: -8px;
+      opacity: 0;
+      background-color: currentColor;
     }
+    &:focus:after {opacity: 0.15;}
+    .w-slider--dragging &:after, &:active:after {opacity: 0.1;transform: scale(1.2);}
   }
 
   // Thumb label.
