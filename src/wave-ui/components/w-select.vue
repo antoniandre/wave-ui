@@ -9,13 +9,9 @@ component(
   :class="classes")
   template(v-if="labelPosition === 'left'")
     label.w-select__label.w-select__label--left.w-form-el-shakable(
-      v-if="$slots.default"
+      v-if="$slots.default || label"
       :for="`w-select--${_.uid}`")
-      slot
-    label.w-select__label.w-select__label--left.w-form-el-shakable(
-      v-else-if="label"
-      :for="`w-select--${_.uid}`"
-      v-html="label")
+      slot {{ label }}
 
   w-menu(
     v-model="showMenu"
@@ -69,15 +65,10 @@ component(
           :name="inputName + (multiple ? '[]' : '')")
         template(v-if="labelPosition === 'inside' && showLabelInside")
           label.w-select__label.w-select__label--inside.w-form-el-shakable(
-            v-if="$slots.default"
+            v-if="$slots.default || label"
             :for="`w-select--${_.uid}`"
             :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
-            slot
-          label.w-select__label.w-select__label--inside.w-form-el-shakable(
-            v-else-if="label"
-            :for="`w-select--${_.uid}`"
-            v-html="label"
-            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+            slot {{ label }}
         w-icon.w-select__icon.w-select__icon--inner-right(
           v-if="innerIconRight"
           tag="label"
@@ -112,13 +103,9 @@ component(
 
   template(v-if="labelPosition === 'right'")
     label.w-select__label.w-select__label--right.w-form-el-shakable(
-      v-if="$slots.default"
+      v-if="$slots.default || label"
       :for="`w-select--${_.uid}`")
-      slot
-    label.w-select__label.w-select__label--right.w-form-el-shakable(
-      v-else-if="label"
-      :for="`w-select--${_.uid}`"
-      v-html="label")
+      slot {{ label }}
 </template>
 
 <script>
