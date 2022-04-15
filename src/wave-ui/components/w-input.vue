@@ -15,12 +15,12 @@ component(
       label.w-input__label.w-input__label--left.w-form-el-shakable(
         v-if="$slots.default"
         :for="`w-input--${_.uid}`"
-        :class="validationClasses")
+        :class="labelClasses")
         slot
       label.w-input__label.w-input__label--left.w-form-el-shakable(
         v-else-if="label"
         :for="`w-input--${_.uid}`"
-        :class="validationClasses"
+        :class="labelClasses"
         v-html="label")
 
     //- Input wrapper.
@@ -83,13 +83,13 @@ component(
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
           v-if="$slots.default"
           :for="`w-input--${_.uid}`"
-          :class="validationClasses")
+          :class="labelClasses")
           slot
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
           v-else-if="label"
           :for="`w-input--${_.uid}`"
           v-html="label"
-          :class="validationClasses")
+          :class="labelClasses")
       w-icon.w-input__icon.w-input__icon--inner-right(
         v-if="innerIconRight"
         tag="label"
@@ -123,12 +123,12 @@ component(
       label.w-input__label.w-input__label--right.w-form-el-shakable(
         v-if="$slots.default"
         :for="`w-input--${_.uid}`"
-        :class="validationClasses")
+        :class="labelClasses")
         slot
       label.w-input__label.w-input__label--right.w-form-el-shakable(
         v-else-if="label"
         :for="`w-input--${_.uid}`"
-        :class="validationClasses"
+        :class="labelClasses"
         v-html="label")
 </template>
 
@@ -155,6 +155,7 @@ export default {
     staticLabel: { type: Boolean },
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' },
     progressColor: { type: String },
     bgColor: { type: String },
     minlength: { type: [Number, String] },
@@ -248,7 +249,7 @@ export default {
     },
 
     overallFilesProgress () {
-      const progress = this.inputFiles.reduce((total, file) => total + file.progress, 0)
+      const progress = +this.inputFiles.reduce((total, file) => total + file.progress, 0)
       const total = progress / this.inputFiles.length
       this.$emit('update:overallProgress', this.inputFiles.length ? total : undefined)
 
@@ -280,9 +281,10 @@ export default {
       }
     },
 
-    validationClasses () {
-      return this.isFocused && {
-        [this.valid === false ? 'error' : this.color]: this.color || this.valid === false
+    labelClasses () {
+      return {
+        [this.labelColor]: this.labelColor && !(this.valid === false),
+        'error': this.valid === false
       }
     },
 
@@ -645,8 +647,6 @@ $inactive-color: #777;
     .w-input--filled.w-input--floating-label.w-input--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
     .w-input--floating-label.w-input--inner-icon-left .w-input__input:-webkit-autofill & {left: 0;}
-
-    .w-input--focused & {color: currentColor;}
   }
 }
 </style>
