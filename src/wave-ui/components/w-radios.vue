@@ -15,7 +15,7 @@ component(
     @update:model-value="onInput(item)"
     @focus="$emit('focus', $event)"
     :name="inputName"
-    v-bind="{ label: item.label, color: item.color, labelOnLeft, labelColor, round }"
+    v-bind="{ label: item.label, color: item.color, labelOnLeft, labelColor }"
     :disabled="isDisabled || null"
     :readonly="isReadonly || null"
     :class="{ mt1: !inline && i }")
