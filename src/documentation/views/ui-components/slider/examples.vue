@@ -2,7 +2,7 @@
 div
   title-link(h2) Default
   p By default the range will have the #[code primary] color.
-  example(content-class="mt5 px6")
+  example(content-class="pa6")
     w-slider(:model-value="50")
     template(#html).
       &lt;w-slider :model-value="50"&gt;&lt;/w-slider&gt;
