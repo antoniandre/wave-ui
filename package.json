@@ -43,32 +43,30 @@
     "*.vue"
   ],
   "devDependencies": {
-    "@babel/core": "^7.17.0",
+    "@babel/core": "^7.17.9",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@mdi/font": "^5.9.55",
     "@vitejs/plugin-vue": "^1.10.2",
     "@vue/compiler-sfc": "3.1.5",
-    "autoprefixer": "^10.4.2",
+    "autoprefixer": "^10.4.4",
     "axios": "^0.25.0",
     "eslint": "^7.32.0",
     "font-awesome": "^4.7.0",
-    "gsap": "^3.9.1",
+    "gsap": "^3.10.3",
     "ionicons": "^4.6.3",
     "material-design-icons": "^3.0.1",
+    "postcss": "^8.4.12",
     "rollup-plugin-delete": "^2.0.0",
-    "sass": "^1.49.7",
+    "sass": "^1.50.0",
     "simple-syntax-highlighter": "^2.2.0",
-    "splitpanes": "^3.0.6",
-    "vite": "^2.7.13",
-    "vite-plugin-pug": "^0.3.0",
-    "vue": "^3.2.31",
+    "splitpanes": "^3.1.1",
+    "vite": "^2.9.5",
+    "vite-plugin-pug": "^0.3.1",
+    "vue": "^3.2.33",
     "vue-cal": "^4.2.0",
-    "vue-router": "^4.0.12",
+    "vue-router": "^4.0.14",
     "vueperslides": "^3.3.2",
     "vuex": "^4.0.2"
-  },
-  "dependencies": {
-    "postcss": "^8.4.6"
   }
 }
