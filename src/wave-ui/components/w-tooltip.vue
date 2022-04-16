@@ -1,26 +1,16 @@
 <template lang="pug">
-.w-tooltip-wrap
-  slot(name="activator" :on="activatorEventHandlers")
-  transition(:name="transitionName" appear)
-    .w-tooltip(
-      v-if="detachableVisible"
-      ref="detachable"
-      :key="_.uid"
-      :class="classes"
-      :style="styles")
-      slot
+slot(name="activator" :on="activatorEventHandlers")
+transition(:name="transitionName" appear)
+  .w-tooltip(
+    v-if="detachableVisible"
+    ref="detachable"
+    :key="_.uid"
+    :class="classes"
+    :style="styles")
+    slot
 </template>
 
 <script>
-/**
- * Complexity of this component: Vue 2.x can only mount 1 single root element, but we don't
- * want to wrap the activator as it may break the layout.
- * Another simpler way would be to append the tooltip inside the activator, but some HTML tags
- * can't have children like <input>.
- * So a solution is to mount both the activator element and the tooltip in a wrapper then unwrap
- * and move the tooltip elsewhere in the DOM.
- */
-
 import { objectifyClasses } from '../utils/index'
 import DetachableMixin from '../mixins/detachable'
 
@@ -193,8 +183,6 @@ export default {
 </script>
 
 <style lang="scss">
-.w-tooltip-wrap {display: none;}
-
 .w-tooltip {
   // Fix Safari where `width: max-content` does not take padding and border into consideration.
   display: table;

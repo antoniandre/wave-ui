@@ -9,7 +9,6 @@ import { consoleWarn } from '../utils/console'
 export default {
   props: {
     // Position.
-    detachTo: { type: [String, Boolean, Object], deprecated: true },
     appendTo: { type: [String, Boolean, Object] },
     fixed: { type: Boolean },
     top: { type: Boolean },
@@ -41,12 +40,7 @@ export default {
     appendToTarget () {
       const defaultTarget = '.w-app'
 
-      // Convert deprecated prop to renamed one.
-      if (this.detachTo && !this.appendTo) {
-        consoleWarn(`The ${this.$options.name} prop \`detach-to\` is deprecated. You can replace it with \`append-to\`.`, this)
-      }
-
-      let target = this.appendTo || this.detachTo || defaultTarget
+      let target = this.appendTo || defaultTarget
       if (target === true) target = defaultTarget
       else if (this.appendTo === 'activator') target = this.$el.previousElementSibling
       else if (target && !['object', 'string'].includes(typeof target)) target = defaultTarget
@@ -84,7 +78,7 @@ export default {
           if (activator instanceof HTMLElement) return activator
           return document.querySelector(this.activator)
         }
-        return this.$el.firstElementChild
+        return this.$el.nextElementSibling
       },
       set () {}
     },
@@ -145,7 +139,7 @@ export default {
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     getActivatorCoordinates () {
       // Get the activator coordinates relative to window.
-      const { top, left, width, height } = (this.activatorEl).getBoundingClientRect()
+      const { top, left, width, height } = this.activatorEl.getBoundingClientRect()
       let coords = { top, left, width, height }
 
       // If absolute position, adjust top & left.
@@ -273,7 +267,6 @@ export default {
           this.detachableEl = this.$refs.detachable?.$el || this.$refs.detachable
 
           // Move the tooltip/menu elsewhere in the DOM.
-          // wrapper.parentNode.insertBefore(this.detachableEl, wrapper)
           if (this.detachableEl) this.appendToTarget.appendChild(this.detachableEl)
           resolve()
         })
@@ -315,33 +308,25 @@ export default {
   },
 
   mounted () {
-    const wrapper = this.$el
-
-    // Unwrap the activator element if the activator is in the activator slot.
-    if (this.$slots.activator) wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
-
     // If the activator is external.
-    else if (this.activator) this.bindActivatorEvents()
+    if (this.activator) this.bindActivatorEvents()
 
     // If the activator seems to be undefined, it is probably a DOM node or Vue ref,
     // so check it on nextTick.
     else {
       this.$nextTick(() => {
-        this.activator && this.bindActivatorEvents()
+        if (this.activator) this.bindActivatorEvents()
         if (this.modelValue) this.toggle({ type: 'click', target: this.activatorEl })
       })
     }
 
     // Unwrap the overlay if any.
-    if (this.overlay) {
-      this.overlayEl = this.$refs.overlay?.$el
-      wrapper.parentNode.insertBefore(this.overlayEl, wrapper)
-    }
+    if (this.overlay) this.overlayEl = this.$refs.overlay?.$el
 
     if (this.modelValue && this.activator) this.toggle({ type: 'click', target: this.activatorEl })
   },
 
-  beforeUnmount () {
+  unmounted () {
     this.close()
 
     this.removeFromDOM()
@@ -353,18 +338,11 @@ export default {
         document.removeEventListener(eventName, handler)
       })
     }
-
-    if (this.overlay && this.overlayEl.parentNode) this.overlayEl.remove()
-    if (this.activatorEl?.parentNode && this.$slots.activator) this.activatorEl.remove()
   },
 
   watch: {
     modelValue (bool) {
       if (!!bool !== this.detachableVisible) this.toggle({ type: 'click', target: this.activatorEl })
-    },
-    detachTo () {
-      this.removeFromDOM()
-      this.insertInDOM()
     },
     appendTo () {
       this.removeFromDOM()

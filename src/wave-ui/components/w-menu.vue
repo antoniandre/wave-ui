@@ -1,57 +1,47 @@
 <template lang="pug">
-.w-menu-wrap
-  slot(name="activator" :on="activatorEventHandlers")
-  transition(:name="transitionName" appear)
-    .w-menu(
-      v-if="custom && detachableVisible"
-      ref="detachable"
-      v-bind="$attrs"
-      @click="hideOnMenuClick && close(true)"
-      @mouseenter="showOnHover && (hoveringMenu = true)"
-      @mouseleave="showOnHover && ((hoveringMenu = false), close())"
-      :class="classes"
-      :style="styles")
-      slot
-    w-card.w-menu(
-      v-else-if="detachableVisible"
-      ref="detachable"
-      v-bind="$attrs"
-      @click.native="hideOnMenuClick && close(true)"
-      @mouseenter.native="showOnHover && (hoveringMenu = true)"
-      @mouseleave.native="showOnHover && ((hoveringMenu = false), close())"
-      :tile="tile"
-      :title-class="titleClasses"
-      :content-class="contentClasses"
-      :shadow="shadow"
-      :no-border="noBorder"
-      :class="classes"
-      :style="styles")
-      template(v-if="$slots.title" #title)
-        slot(name="title")
-      template(v-if="$slots.actions" #actions)
-        slot(name="actions")
-      slot
-  w-overlay(
-    v-if="overlay"
-    ref="overlay"
-    :model-value="detachableVisible"
-    :persistent="persistent"
-    :class="overlayClasses"
-    v-bind="overlayProps"
-    :z-index="(zIndex || 200) - 1"
-    @update:model-value="detachableVisible = false")
+slot(name="activator" :on="activatorEventHandlers")
+transition(:name="transitionName" appear)
+  .w-menu(
+    v-if="custom && detachableVisible"
+    ref="detachable"
+    v-bind="$attrs"
+    @click="hideOnMenuClick && close(true)"
+    @mouseenter="showOnHover && (hoveringMenu = true)"
+    @mouseleave="showOnHover && ((hoveringMenu = false), close())"
+    :class="classes"
+    :style="styles")
+    slot
+  w-card.w-menu(
+    v-else-if="detachableVisible"
+    ref="detachable"
+    v-bind="$attrs"
+    @click.native="hideOnMenuClick && close(true)"
+    @mouseenter.native="showOnHover && (hoveringMenu = true)"
+    @mouseleave.native="showOnHover && ((hoveringMenu = false), close())"
+    :tile="tile"
+    :title-class="titleClasses"
+    :content-class="contentClasses"
+    :shadow="shadow"
+    :no-border="noBorder"
+    :class="classes"
+    :style="styles")
+    template(v-if="$slots.title" #title)
+      slot(name="title")
+    template(v-if="$slots.actions" #actions)
+      slot(name="actions")
+    slot
+w-overlay(
+  v-if="overlay"
+  ref="overlay"
+  :model-value="detachableVisible"
+  :persistent="persistent"
+  :class="overlayClasses"
+  v-bind="overlayProps"
+  :z-index="(zIndex || 200) - 1"
+  @update:model-value="detachableVisible = false")
 </template>
 
 <script>
-/**
- * Complexity of this component: Vue 2.x can only mount 1 single root element, but we don't
- * want to wrap the activator as it may break the layout.
- * Another simpler way would be to append the menu inside the activator, but some HTML tags
- * can't have children like <input>.
- * So a solution is to mount both the activator element and the menu in a wrapper then unwrap
- * and move the menu elsewhere in the DOM.
- */
-
 import { objectifyClasses } from '../utils/index'
 import DetachableMixin from '../mixins/detachable'
 
