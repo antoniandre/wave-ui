@@ -38,20 +38,29 @@
         @click.stop="!item._disabled && toggleItem(item, $event)"
         :class="{ 'w-accordion__expand-icon--expanded': item._expanded }")
     //- Content.
-    w-transition-expand(y)
-      .w-accordion__item-content(v-if="item._expanded" :class="contentClass")
+    w-transition-expand(
+      y
+      @after-leave="onEndOfCollapse(item)"
+      :duration="duration")
+      .w-accordion__item-content(
+        v-if="item._expanded"
+        :class="contentClass")
         slot(
           v-if="$slots[`item-content.${item.id || i + 1}`]"
           :name="`item-content.${item.id || i + 1}`"
           :item="getOriginalItem(item)"
-          :expanded="item._expanded" :index="i + 1")
-        slot(v-else name="item-content" :item="getOriginalItem(item)" :expanded="item._expanded" :index="i + 1")
+          :expanded="item._expanded"
+          :index="i + 1")
+        slot(
+          v-else
+          name="item-content"
+          :item="getOriginalItem(item)"
+          :expanded="item._expanded"
+          :index="i + 1")
           div(v-html="item[itemContentKey]")
 </template>
 
 <script>
-import { reactive } from 'vue'
-
 export default {
   name: 'w-accordion',
 
@@ -70,22 +79,17 @@ export default {
     expandIconRight: { type: Boolean },
     expandSingle: { type: Boolean },
     collapseIcon: { type: String },
-    shadow: { type: Boolean }
+    shadow: { type: Boolean },
+    duration: { type: Number, default: 250 }
   },
 
-  emits: ['input', 'update:modelValue', 'focus', 'item-expand'],
+  emits: ['input', 'update:modelValue', 'focus', 'item-expand', 'item-collapsed'],
+
+  data: () => ({
+    accordionItems: []
+  }),
 
   computed: {
-    accordionItems () {
-      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
-      return items.map((item, _index) => reactive({
-        ...item,
-        _index,
-        _expanded: this.modelValue && this.modelValue[_index],
-        _disabled: !!item.disabled
-      }))
-    },
-
     accordionClasses () {
       return {
         [this.color]: this.color,
@@ -113,6 +117,9 @@ export default {
       e.target.blur()
       setTimeout(() => e.target.focus(), 300)
     },
+    onEndOfCollapse (item) {
+      this.$emit('item-collapsed', { item, expanded: item._expanded })
+    },
     // Return the original accordion item (so there is no `_index`, etc.).
     getOriginalItem (item) {
       return this.items[item._index]
@@ -124,6 +131,31 @@ export default {
         'w-accordion__item--disabled': item._disabled,
         [item[this.itemColorKey]]: item[this.itemColorKey]
       }
+    },
+    updateItems () {
+      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
+      this.accordionItems = items.map((item, _index) => ({
+        ...item,
+        _index,
+        _expanded: this.modelValue && this.modelValue[_index],
+        _disabled: !!item.disabled
+      }))
+    }
+  },
+
+  created () {
+    this.updateItems()
+  },
+
+  watch: {
+    modelValue () {
+      this.updateItems()
+    },
+    items: {
+      handler () {
+        this.updateItems()
+      },
+      deep: true
     }
   }
 }
