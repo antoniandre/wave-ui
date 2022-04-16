@@ -15,23 +15,13 @@ component(
     @update:model-value="onInput(item)"
     @focus="$emit('focus', $event)"
     :name="inputName"
-    :label="item.label"
-    :label-on-left="labelOnLeft"
-    :color="item.color"
-    :label-color="labelColor"
+    v-bind="{ label: item.label, color: item.color, labelOnLeft, labelColor, round }"
     :disabled="isDisabled || null"
     :readonly="isReadonly || null"
     :class="{ mt1: !inline && i }")
     slot(
-      v-if="$slots[`item.${i + 1}`]"
-      :name="`item.${i + 1}`"
-      :item="getOriginalItem(item)"
-      :index="i + 1"
-      :checked="item.value === modelValue"
-      v-html="item.label")
-    slot(
-      v-else-if="$slots.item"
-      name="item"
+      v-if="$slots[`item.${i + 1}`] || $slots.item"
+      :name="$slots[`item.${i + 1}`] ? `item.${i + 1}` : 'item'"
       :item="getOriginalItem(item)"
       :index="i + 1"
       :checked="item.value === modelValue"
