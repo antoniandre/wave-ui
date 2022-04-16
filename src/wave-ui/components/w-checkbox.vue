@@ -24,7 +24,8 @@ component(
   template(v-if="hasLabel && labelOnLeft")
     label.w-checkbox__label.w-form-el-shakable.pr2(
       v-if="$slots.default || label"
-      :for="`w-checkbox--${_.uid}`")
+      :for="`w-checkbox--${_.uid}`"
+      :class="labelClasses")
       slot {{ label }}
   .w-checkbox__input(@click="$refs.input.focus();$refs.input.click()" :class="this.color")
     svg(width="11px" height="9px" viewbox="0 0 12 9")
@@ -32,7 +33,8 @@ component(
   template(v-if="hasLabel && !labelOnLeft")
     label.w-checkbox__label.w-form-el-shakable.pl2(
       v-if="$slots.default || label"
-      :for="`w-checkbox--${_.uid}`")
+      :for="`w-checkbox--${_.uid}`"
+      :class="labelClasses")
       slot {{ label }}
 </template>
 
@@ -55,6 +57,7 @@ export default {
     label: { type: String },
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' },
     noRipple: { type: Boolean },
     indeterminate: { type: Boolean },
     round: { type: Boolean }

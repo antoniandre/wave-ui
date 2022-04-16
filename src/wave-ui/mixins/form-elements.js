@@ -32,6 +32,12 @@ export default {
     },
     validationColor () {
       return this.formProps.validationColor
+    },
+    labelClasses () {
+      return {
+        [this.labelColor]: this.labelColor && this.valid !== false,
+        [this.validationColor]: this.valid === false
+      }
     }
   },
 

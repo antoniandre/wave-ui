@@ -10,7 +10,8 @@ component(
   template(v-if="labelPosition === 'left'")
     label.w-select__label.w-select__label--left.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-select--${_.uid}`")
+      :for="`w-select--${_.uid}`"
+      :class="labelClasses")
       slot {{ label }}
 
   w-menu(
@@ -67,7 +68,7 @@ component(
           label.w-select__label.w-select__label--inside.w-form-el-shakable(
             v-if="$slots.default || label"
             :for="`w-select--${_.uid}`"
-            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+            :class="labelClasses")
             slot {{ label }}
         w-icon.w-select__icon.w-select__icon--inner-right(
           v-if="innerIconRight"
@@ -104,7 +105,8 @@ component(
   template(v-if="labelPosition === 'right'")
     label.w-select__label.w-select__label--right.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-select--${_.uid}`")
+      :for="`w-select--${_.uid}`"
+      :class="labelClasses")
       slot {{ label }}
 </template>
 
@@ -136,8 +138,9 @@ export default {
     itemClass: { type: String },
     menuClass: { type: String },
     color: { type: String, default: 'primary' }, // Applies to all the items.
-    selectionColor: { type: String, default: 'primary' }, // Applies to the selected items only.
     bgColor: { type: String }, // Applies to all the items.
+    labelColor: { type: String, default: 'primary' },
+    selectionColor: { type: String, default: 'primary' }, // Applies to the selected items only.
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },
@@ -565,8 +568,6 @@ export default {
     .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
     .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
-
-    .w-select--focused &, .w-select--open & {color: currentColor;}
   }
 
   // Menu.

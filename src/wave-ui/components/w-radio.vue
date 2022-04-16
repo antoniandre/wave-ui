@@ -22,7 +22,8 @@ component(
   template(v-if="hasLabel && labelOnLeft")
     label.w-radio__label.w-form-el-shakable.pr2(
       v-if="$slots.default || label"
-      :for="`w-radio--${_.uid}`")
+      :for="`w-radio--${_.uid}`"
+      :class="labelClasses")
       slot {{ label }}
   .w-radio__input(
     @click="$refs.input.focus();$refs.input.click()"
@@ -30,7 +31,8 @@ component(
   template(v-if="hasLabel && !labelOnLeft")
     label.w-radio__label.w-form-el-shakable.pl2(
       v-if="$slots.default || label"
-      :for="`w-radio--${_.uid}`")
+      :for="`w-radio--${_.uid}`"
+      :class="labelClasses")
       slot {{ label }}
 </template>
 
@@ -50,6 +52,7 @@ export default {
     label: { type: String },
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' },
     noRipple: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.

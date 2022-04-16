@@ -139,9 +139,9 @@ export default {
     staticLabel: { type: Boolean }, // When label is inside, fix the label above.
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
+    bgColor: { type: String },
     labelColor: { type: String, default: 'primary' },
     progressColor: { type: String },
-    bgColor: { type: String },
     minlength: { type: [Number, String] },
     maxlength: { type: [Number, String] },
     step: { type: [Number, String] },
@@ -265,16 +265,9 @@ export default {
       }
     },
 
-    labelClasses () {
-      return {
-        [this.labelColor]: this.labelColor && !(this.valid === false),
-        'error': this.valid === false
-      }
-    },
-
     inputWrapClasses () {
       return {
-        [this.valid === false ? 'error' : this.color]: this.color || this.valid === false,
+        [this.valid === false ? this.validationColor : this.color]: this.color || this.valid === false,
         [`${this.bgColor}--bg`]: this.bgColor,
         'w-input__input-wrap--file': this.type === 'file',
         'w-input__input-wrap--round': this.round,

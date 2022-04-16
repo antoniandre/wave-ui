@@ -24,7 +24,8 @@ component(
   template(v-if="hasLabel && labelOnLeft")
     label.w-switch__label.w-switch__label--left.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-switch--${_.uid}`")
+      :for="`w-switch--${_.uid}`"
+      :class="labelClasses")
       slot {{ label }}
   .w-switch__input(
     @click="$refs.input.focus();$refs.input.click()"
@@ -37,7 +38,8 @@ component(
   template(v-if="hasLabel && !labelOnLeft")
     label.w-switch__label.w-switch__label--right.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-switch--${_.uid}`")
+      :for="`w-switch--${_.uid}`"
+      :class="labelClasses")
       slot {{ label }}
 </template>
 
@@ -53,6 +55,7 @@ export default {
     label: { type: String, default: '' },
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' },
     thin: { type: Boolean },
     noRipple: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.

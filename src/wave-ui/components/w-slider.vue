@@ -9,7 +9,8 @@ component(
   :class="wrapperClasses")
   label.w-slider__label.w-slider__label--left.w-form-el-shakable(
     v-if="$slots['label-left'] || labelLeft"
-    :for="`button--${_.uid}`")
+    :for="`button--${_.uid}`"
+    :class="labelClasses")
     slot(name="label-left") {{ labelLeft }}
   .w-slider__track-wrap
     .w-slider__track(
@@ -61,7 +62,8 @@ component(
         style="left: 100%") {{ this.maxVal }}
   label.w-slider__label.w-slider__label--right.w-form-el-shakable(
     v-if="$slots['label-right'] || labelRight"
-    :for="`button--${_.uid}`")
+    :for="`button--${_.uid}`"
+    :class="labelClasses")
     slot(name="label-right") {{ labelRight }}
 </template>
 
@@ -76,6 +78,7 @@ export default {
     modelValue: { type: Number, default: 0 },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
+    labelColor: { type: String, default: 'primary' },
     stepLabels: { type: [Boolean, Array] },
     thumbLabel: { type: [Boolean, String] }, // One of true, false, 'droplet'.
     thumbLabelClass: { type: String },

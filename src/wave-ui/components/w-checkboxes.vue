@@ -16,6 +16,7 @@ component(
     :label="item.label"
     :label-on-left="labelOnLeft"
     :color="item.color"
+    :label-color="labelColor"
     :round="round"
     @update:model-value="toggleCheck(item, $event)"
     :disabled="isDisabled || null"
@@ -56,7 +57,8 @@ export default {
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
     round: { type: Boolean },
-    color: { type: String, default: 'primary' }
+    color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' }
     // Props from mixin: name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },

@@ -18,6 +18,7 @@ component(
     :label="item.label"
     :label-on-left="labelOnLeft"
     :color="item.color"
+    :label-color="labelColor"
     :disabled="isDisabled || null"
     :readonly="isReadonly || null"
     :class="{ mt1: !inline && i }")
@@ -53,7 +54,8 @@ export default {
     itemValueKey: { type: String, default: 'value' },
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
-    color: { type: String, default: 'primary' }
+    color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' }
     // Props from mixin: name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
