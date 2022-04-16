@@ -23,6 +23,19 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v2.36.0
+      ul
+        li #[strong.code w-form]: added a new #[code validation-color] option. #[span.new]
+        li #[strong All the form elements]: added a new #[code label-color] option. #[span.new]
+        li #[strong.code w-input]: added a new #[code label-color] option. #[span.new]
+        li #[strong.code w-transition-expand]: remove useless props binding.
+        li
+          strong.code w-slider
+          ul
+            li Outline the thumb on :focus, :active and while dragging.
+            li Prevent focus when disabled or readonly.
+
+    li.minor
       strong.version v2.35.0
       ul
         li #[strong.code w-switch]: added new #[code track] and #[code thumb] slots. #[span.new]
