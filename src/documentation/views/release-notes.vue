@@ -25,16 +25,43 @@ main
     li.minor
       strong.version v2.36.0
       ul
-        li #[strong.code w-menu &amp; w-tooltip]: removed the deprecated #[code detachTo] prop (use #[code appendTo] instead).
-        li #[strong.code w-form]: added a new #[code validation-color] option. #[span.new]
-        li #[strong All the form elements]: added a new #[code label-color] option. #[span.new]
-        li #[strong.code w-input]: added a new #[code label-color] option. #[span.new]
-        li #[strong.code w-transition-expand]: remove useless props binding.
+        li
+          strong.code w-accordion
+          ul
+            li Added a new #[code duration] option. #[span.new]
+            li Fire #[code item-collapsed] when done collapsing. #[span.new]
+        li
+          strong.code w-form
+          ul
+            li Added a new #[code validation-color] option. #[span.new]
+        li
+          strong.primary All the form elements
+          ul
+            li Added a new #[code label-color] option. #[span.new]
+        li
+          strong.code w-input
+          ul
+            li Added a new #[code label-color] option. #[span.new]
+        li
+          strong.code w-transition-expand
+          ul
+            li Remove useless props binding.
         li
           strong.code w-slider
           ul
             li Outline the thumb on :focus, :active and while dragging.
             li Prevent focus when disabled or readonly.
+        li
+          strong.code w-menu &amp; w-tooltip
+          ul
+            li
+              | Refactored components to prevent the activator from disappearing before the end of a
+              | transitioning container like #[strong.code.black w-accordion], #[strong.code w-tabs], #[strong.code w-drawer] and #[strong.code w-dialog], due to the fact
+              | that Vue fires the unmounted hook on transition before-leave.#[br]
+              a.ml1(href="https://github.com/vuejs/core/issues/994")
+                | Unmounted hooks should run with afterLeave (#994)
+                w-icon.ml1 mdi mdi-open-in-new
+            li Removed the deprecated #[code detachTo] prop (use #[code appendTo] instead).
 
     li.minor
       strong.version v2.35.0
@@ -918,7 +945,7 @@ main
 
     p {margin: 0.2em 0 0;line-height: 1.2;}
     code {padding: 0 4px;font-size: 1em;}
-    strong.code:first-child {
+    strong.code:first-child:not(.black) {
       color: $primary;
       font-size: 1.1em;
     }
