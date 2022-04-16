@@ -16,15 +16,13 @@ transition(
 </template>
 
 <script>
-// const duration = 250 // ms.
-
 export default {
   name: 'w-transition-expand',
 
   props: {
     x: { type: Boolean },
     y: { type: Boolean },
-    duration: { type: Number, default: 200 }
+    duration: { type: Number, default: 250 }
   },
 
   data: () => ({
@@ -63,56 +61,47 @@ export default {
       // Not when clicking very fast and mixing states order.
       if (this.cleanTransitionCycle) this.saveOriginalStyles(el)
       this.cleanTransitionCycle = false
-      this.$emit('before-appear')
     },
     appear (el, done) {
       this.show(el)
       setTimeout(done, this.duration)
       this.cleanTransitionCycle = false
-      this.$emit('appear')
     },
     afterAppear (el) {
       this.applyOriginalStyles(el)
       // May be transitioning with v-show, if so don't reapply display none.
       el.style.cssText = el.style.cssText.replace('display: none;', '')
       this.cleanTransitionCycle = false
-      this.$emit('after-appear')
     },
     beforeEnter (el) {
       // Only save original state once before a 'clean' transition start.
       // Not when clicking very fast and mixing states order.
       if (this.cleanTransitionCycle) this.saveOriginalStyles(el)
       this.cleanTransitionCycle = false
-      this.$emit('before-enter')
     },
     enter (el, done) {
       this.show(el)
       setTimeout(done, this.duration)
       this.cleanTransitionCycle = false
-      this.$emit('enter')
     },
     afterEnter (el) {
       this.applyOriginalStyles(el)
       // May be transitioning with v-show, if so don't reapply display none.
       el.style.cssText = el.style.cssText.replace('display: none;', '')
       this.cleanTransitionCycle = false
-      this.$emit('after-enter')
     },
     beforeLeave (el) {
       this.beforeHide(el)
       this.cleanTransitionCycle = false
-      this.$emit('before-leave')
     },
     leave (el, done) {
       this.hide(el)
       setTimeout(done, this.duration)
       this.cleanTransitionCycle = false
-      this.$emit('leave')
     },
     afterLeave (el) {
       this.applyOriginalStyles(el)
       this.cleanTransitionCycle = true
-      this.$emit('after-leave')
     },
 
     applyHideStyles (el) {
