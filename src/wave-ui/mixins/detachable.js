@@ -161,6 +161,11 @@ export default {
       // Get the activator coordinates.
       let { top, left, width, height } = this.getActivatorCoordinates()
 
+      // Prevent error in case the detachable component unmounted hook is fired but the activator
+      // is still in the DOM until the end of a transition and the user toggles it.
+      // Unmounted is called straight away from beforeLeave: https://github.com/vuejs/core/issues/994
+      if (!this.detachableEl) return
+
       // 1. First display the menu but hide it (So we can get its dimension).
       // --------------------------------------------------
       this.detachableEl.style.visibility = 'hidden'
