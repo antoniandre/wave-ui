@@ -28,7 +28,8 @@ const propsDescs = {
   expandIconRight: 'When set to true, the expand button will be placed at the right end of the item\'s title.',
   expandSingle: 'Specifies the accordion behavior, whether only one item can be expanded at a time or multiple. When set to true, expanding another item than the one already expanded is still possible, but it will collapse the other expanded item.',
   collapseIcon: 'Provide a different icon than the expand icon, to show when the accordion item is expanded. By default and when empty, there is no collapse icon: the expand icon rotates to show a closing ability.',
-  shadow: 'Applies a shadow to the whole accordion container.'
+  shadow: 'Applies a shadow to the whole accordion container.',
+  duration: 'Specify the duration in millisecond of the expand/collapse animation.'
 }
 
 const slots = {
