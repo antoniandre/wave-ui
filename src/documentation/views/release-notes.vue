@@ -25,6 +25,7 @@ main
     li.minor
       strong.version v2.36.0
       ul
+        li #[strong.code w-menu &amp; w-tooltip]: removed the deprecated #[code detachTo] prop (use #[code appendTo] instead).
         li #[strong.code w-form]: added a new #[code validation-color] option. #[span.new]
         li #[strong All the form elements]: added a new #[code label-color] option. #[span.new]
         li #[strong.code w-input]: added a new #[code label-color] option. #[span.new]
