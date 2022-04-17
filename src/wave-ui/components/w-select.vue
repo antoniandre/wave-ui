@@ -18,7 +18,7 @@ component(
     v-model="showMenu"
     :menu-class="`w-select__menu ${menuClass || ''}`"
     transition="slide-fade-down"
-    :append-to="(menuProps || {}).appendTo !== undefined ? (menuProps || {}).appendTo : '.w-app'"
+    :append-to="(menuProps || {}).appendTo !== undefined ? (menuProps || {}).appendTo : undefined"
     align-left
     custom
     min-width="activator"
