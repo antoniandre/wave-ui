@@ -52,15 +52,31 @@ main
             li Outline the thumb on :focus, :active and while dragging.
             li Prevent focus when disabled or readonly.
         li
+          strong.code w-dialog &amp; w-overlay
+          ul
+            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.new]
+        li
+          strong.code w-drawer
+          ul
+            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.new]
+            li When using #[code push-content], default to a transparent overlay that you can override.
+            li When using #[code push-content], default to a width of 200px that you can override.
+
+        li
           strong.code w-menu &amp; w-tooltip
           ul
             li
               | Refactored components to prevent the activator from disappearing before the end of a
-              | transitioning container like #[strong.code.black w-accordion], #[strong.code w-tabs], #[strong.code w-drawer] and #[strong.code w-dialog], due to the fact
-              | that Vue fires the unmounted hook on transition before-leave.#[br]
+              | transitioning container like #[strong.code.black w-accordion], #[strong.code w-tabs],
+              | #[strong.code w-drawer] and #[strong.code w-dialog], due to the fact that Vue fires
+              | the unmounted hook on transition before-leave.#[br]
               a.ml1(href="https://github.com/vuejs/core/issues/994")
                 | Unmounted hooks should run with afterLeave (#994)
                 w-icon.ml1 mdi mdi-open-in-new
+            li.
+              Default the #[code appendTo] to the open #[strong.code.black w-dialog],
+              #[strong.code w-drawer] or #[strong.code w-menu].
+
             li Removed the deprecated #[code detachTo] prop (use #[code appendTo] instead).
 
     li.minor
