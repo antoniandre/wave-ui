@@ -52,14 +52,38 @@ w-app
               span(v-on="on") I have a tooltip
             | I'm a tooltip.
 
-    w-drawer(:model-value="true")
+    w-drawer(
+      push-content
+      v-model="openDrawer"
+      @before-close="log('before-close')"
+      @close="log('close')")
+      template(#pushable)
+        p testing
+        p testing
+        p testing
+        w-button(@click="openDrawer = !openDrawer") open
+        p testing
+        p testing
+        p testing
       w-tooltip
         template(#activator="{ on }")
           w-button(v-on="on").
             Show tooltip
         | tooltip.
 
-    w-overlay(v-model="showOverlay")
+    w-drawer(
+      :model-value="true"
+      @before-close="log('before-close')"
+      @close="log('close')")
+      w-tooltip
+        template(#activator="{ on }")
+          w-button(v-on="on").
+            Show tooltip
+        | tooltip.
+
+    w-overlay(v-model="showOverlay"
+      @before-close="log('before-close')"
+      @close="log('close')")
       w-tooltip
         template(#activator="{ on }")
           w-button(v-on="on").
@@ -68,7 +92,9 @@ w-app
 
     .select-in-dialog
       w-button(@click="showDialog = true") open
-      w-dialog(v-model="showDialog")
+      w-dialog(v-model="showDialog"
+        @before-close="log('before-close')"
+        @close="log('close')")
         w-tooltip
           template(#activator="{ on }")
             w-button(v-on="on").
@@ -83,11 +109,14 @@ export default {
     formValid: null,
     showDialog: true,
     showOverlay: true,
-    ref: null,
+    openDrawer: true,
     items: [{ value: 'value 1', label: 'Item 1' }, { value: 'value 2', label: 'Item 2' }]
   }),
+
+  methods: {
+    log (...params) {console.log(...params)}
+  },
   mounted () {
-    this.ref = this.$refs['test-here']
   }
 }
 </script>
