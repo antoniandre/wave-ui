@@ -77,13 +77,12 @@ export default {
       this.$emit('click', e)
     },
 
-    // Wait until the end of the closing transition to unmount the components it contains.
-    // This way, in case of w-select in w-dialog, the w-select will only remove its activator
-    // element from the DOM once the dialog is completely closed.
-    // https://github.com/antoniandre/wave-ui/issues/82
+    // Wait until the end of the closing transition (v-show) to completely unmount (v-if).
     onClosed () {
+      // The onClosed method is called twice from the transition: once for the v-show, and once for the v-if.
+      // only emit once everything is closed.
+      if (!this.showOverlay) this.$emit('closed')
       this.showOverlay = false
-      this.$emit('closed')
     }
   },
 
