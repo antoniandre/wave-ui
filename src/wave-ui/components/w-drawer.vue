@@ -7,16 +7,19 @@
         v-if="!noOverlay"
         v-model="showDrawer"
         @click="onOutsideClick"
-        @closed="$emit('close')"
         :persistent="persistent"
         persistent-no-animation
-        :bg-color="overlayColor"
+        :bg-color="overlayColor || 'transparent'"
         :opacity="overlayOpacity")
       slot(name="pushable")
-    transition(name="fade")
-      .w-drawer(
-        v-if="!unmountDrawer"
+    transition(
+      name="fade"
+      @before-leave="onBeforeClose"
+      @after-leave="onClose")
+      component.w-drawer(
+        v-if="showDrawer"
         ref="drawer"
+        :is="tag || 'aside'"
         :class="drawerClasses"
         :style="styles")
         slot
@@ -30,7 +33,11 @@
       persistent-no-animation
       :bg-color="overlayColor"
       :opacity="overlayOpacity")
-    transition(:name="transitionName" appear @before-leave="onBeforeClose" @after-leave="onClose")
+    transition(
+      :name="transitionName"
+      appear
+      @before-leave="onBeforeClose"
+      @after-leave="onClose")
       component.w-drawer(
         v-if="showDrawer"
         ref="drawer"
@@ -131,7 +138,7 @@ export default {
     // It moves inside the overflow hidden outer wrap.
     trackStyles () {
       return this.pushContent && this.showDrawer && {
-        transform: `translateX(${this.position === 'left' ? '' : '-'}${this.size})`
+        transform: `translateX(${this.position === 'left' ? '' : '-'}${this.size || '200px'})`
       }
     },
     styles () {
@@ -162,10 +169,8 @@ export default {
     },
     onOutsideClick () {
       if (!this.persistent) {
-        // The close method is called on animation end, except with pushContent
-        // (not using the same transition).
+        // The close method is called on animation end.
         this.showDrawer = false
-        if (this.pushContent) this.close()
       }
       else if (!this.persistentNoAnimation) {
         this.persistentAnimate = true
