@@ -4,11 +4,11 @@ w-overlay.w-dialog(
   :persistent="persistent"
   :persistent-no-animation="persistentNoAnimation"
   @click="onOutsideClick"
-  @closed="onClosed"
+  @close="onClose"
   :bg-color="overlayColor"
   :opacity="overlayOpacity"
   :class="classes")
-  transition(:name="transition" appear @after-leave="onClose")
+  transition(:name="transition" appear @after-leave="onBeforeClose")
     w-card.w-dialog__content(
       v-show="showContent"
       ref="dialog"
@@ -57,7 +57,7 @@ export default {
     }
   },
 
-  emits: ['input', 'update:modelValue', 'close', 'closed'],
+  emits: ['input', 'update:modelValue', 'before-close', 'close'],
 
   data () {
     return {
@@ -90,17 +90,17 @@ export default {
         this.showContent = false
         // If fade transition close both dialog and overlay at the same time
         // (don't need to wait for the end of the dialog transition).
-        if (this.transition === 'fade') this.onClose()
+        if (this.transition === 'fade') this.onBeforeClose()
       }
     },
-    onClose () {
+    onBeforeClose () {
       this.showWrapper = false
-      this.$emit('close')
+      this.$emit('before-close')
     },
-    onClosed () {
+    onClose () {
       this.$emit('update:modelValue', false)
       this.$emit('input', false)
-      this.$emit('closed')
+      this.$emit('close')
     }
   },
 
