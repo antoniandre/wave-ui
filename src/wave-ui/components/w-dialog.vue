@@ -4,13 +4,14 @@ w-overlay.w-dialog(
   :persistent="persistent"
   :persistent-no-animation="persistentNoAnimation"
   @click="onOutsideClick"
-  @closed="$emit('closed')"
+  @closed="onClosed"
   :bg-color="overlayColor"
   :opacity="overlayOpacity"
   :class="classes")
   transition(:name="transition" appear @after-leave="onClose")
     w-card.w-dialog__content(
       v-show="showContent"
+      ref="dialog"
       no-border
       :color="color"
       :bg-color="bgColor"
@@ -46,6 +47,14 @@ export default {
     color: { type: String },
     bgColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] }
+  },
+
+  provide () {
+    return {
+      // If a detachable is used inside a w-drawer without an appendTo, default to the drawer element
+      // instead of the w-app.
+      detachableDefaultRoot: () => this.$refs.dialog.$el || null
+    }
   },
 
   emits: ['input', 'update:modelValue', 'close', 'closed'],
@@ -86,9 +95,12 @@ export default {
     },
     onClose () {
       this.showWrapper = false
+      this.$emit('close')
+    },
+    onClosed () {
       this.$emit('update:modelValue', false)
       this.$emit('input', false)
-      this.$emit('close')
+      this.$emit('closed')
     }
   },
 
@@ -97,8 +109,9 @@ export default {
       // If value is true, mount the wrapper in DOM and open the dialog.
       // If value is false, keep the wrapper in DOM and close the dialog;
       // At the end of the dialog transition the value is updated and wrapper removed from the DOM.
-      if (value) this.showWrapper = value
+      this.showWrapper = value
       this.showContent = value
+      console.log('watching', value)
     }
   }
 }
