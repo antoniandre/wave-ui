@@ -106,12 +106,8 @@ export default {
 
   watch: {
     modelValue (value) {
-      // If value is true, mount the wrapper in DOM and open the dialog.
-      // If value is false, keep the wrapper in DOM and close the dialog;
-      // At the end of the dialog transition the value is updated and wrapper removed from the DOM.
       this.showWrapper = value
       this.showContent = value
-      console.log('watching', value)
     }
   }
 }
