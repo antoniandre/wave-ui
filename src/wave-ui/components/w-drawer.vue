@@ -7,6 +7,7 @@
         v-if="!noOverlay"
         v-model="showDrawer"
         @click="onOutsideClick"
+        @closed="$emit('close')"
         :persistent="persistent"
         persistent-no-animation
         :bg-color="overlayColor"
@@ -29,7 +30,7 @@
       persistent-no-animation
       :bg-color="overlayColor"
       :opacity="overlayOpacity")
-    transition(:name="transitionName" appear @after-leave="close")
+    transition(:name="transitionName" appear @before-leave="onBeforeClose" @after-leave="onClose")
       component.w-drawer(
         v-if="showDrawer"
         ref="drawer"
@@ -79,7 +80,7 @@ export default {
     }
   },
 
-  emits: ['input', 'update:modelValue', 'close'],
+  emits: ['input', 'update:modelValue', 'before-close', 'close'],
 
   data () {
     return {
@@ -150,11 +151,14 @@ export default {
   },
 
   methods: {
-    close () {
+    onBeforeClose () {
+      this.$emit('before-close')
+    },
+    onClose () {
       this.showWrapper = false
       this.$emit('update:modelValue', false)
       this.$emit('input', false)
-      this.$emit('close', false)
+      this.$emit('close')
     },
     onOutsideClick () {
       if (!this.persistent) {
