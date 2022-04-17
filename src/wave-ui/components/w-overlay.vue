@@ -3,6 +3,7 @@ transition(name="fade" appear @after-leave="onClosed")
   .w-overlay(
     v-if="showOverlay"
     v-show="modelValue"
+    ref="overlay"
     :style="(modelValue && styles) || null"
     @keydown.escape.stop="onClick"
     @click="onClick"
@@ -23,6 +24,14 @@ export default {
     zIndex: { type: [Number, String, Boolean] },
     persistent: { type: Boolean },
     persistentNoAnimation: { type: Boolean }
+  },
+
+  provide () {
+    return {
+      // If a detachable is used inside a w-overlay without an appendTo, default to the overlay element
+      // instead of the w-app.
+      detachableDefaultRoot: () => this.$refs.overlay || null
+    }
   },
 
   emits: ['input', 'update:modelValue', 'click', 'close', 'closed'],

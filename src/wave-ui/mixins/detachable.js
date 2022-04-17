@@ -25,6 +25,10 @@ export default {
     activator: { type: [String, Object, HTMLElement] } // The activator can be a DOM string selector, a ref or a DOM node.
   },
 
+  inject: {
+    detachableDefaultRoot: { default: null }
+  },
+
   data: () => ({
     // The event listeners handlers have to be removed the exact same way they have been attached.
     // Since the handler functions have variables that change after hot-reload, keep them exactly
@@ -38,7 +42,13 @@ export default {
     // DOM element to attach tooltip/menu to.
     // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
     appendToTarget () {
-      const defaultTarget = '.w-app'
+      let defaultTarget = '.w-app'
+
+      // If used inside a w-dialog, w-drawer, or w-menu without an appendTo, default to that open
+      // element instead of the w-app.
+      if (typeof this.detachableDefaultRoot === 'function') {
+        defaultTarget = this.detachableDefaultRoot() || defaultTarget
+      }
 
       let target = this.appendTo || defaultTarget
       if (target === true) target = defaultTarget

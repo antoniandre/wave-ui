@@ -13,7 +13,11 @@
         :opacity="overlayOpacity")
       slot(name="pushable")
     transition(name="fade")
-      .w-drawer(v-if="!unmountDrawer" :class="drawerClasses" :style="styles")
+      .w-drawer(
+        v-if="!unmountDrawer"
+        ref="drawer"
+        :class="drawerClasses"
+        :style="styles")
         slot
   //- Other cases.
   template(v-else)
@@ -26,7 +30,12 @@
       :bg-color="overlayColor"
       :opacity="overlayOpacity")
     transition(:name="transitionName" appear @after-leave="close")
-      component.w-drawer(v-if="showDrawer" :is="tag || 'aside'" :class="drawerClasses" :style="styles")
+      component.w-drawer(
+        v-if="showDrawer"
+        ref="drawer"
+        :is="tag || 'aside'"
+        :class="drawerClasses"
+        :style="styles")
         slot
 </template>
 
@@ -60,6 +69,14 @@ export default {
     overlayColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] },
     tag: { type: String, default: 'aside' }
+  },
+
+  provide () {
+    return {
+      // If a detachable is used inside a w-drawer without an appendTo, default to the drawer element
+      // instead of the w-app.
+      detachableDefaultRoot: () => this.$refs.drawer || null
+    }
   },
 
   emits: ['input', 'update:modelValue', 'close'],
