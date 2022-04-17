@@ -555,7 +555,6 @@ div
       outline
       absolute
       round
-
       icon="wi-cross")
     .w-flex.align-center.justify-center.fill-height
       w-button(@click="openLeftDrawer = false;openRightDrawer = true").
