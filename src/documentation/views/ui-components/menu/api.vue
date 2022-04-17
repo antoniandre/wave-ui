@@ -29,7 +29,7 @@ const propsDescs = {
   menuClass: 'Provide custom CSS classes for the menu element.',
   titleClass: 'Provide custom CSS classes for the menu\'s title when using the default card layout (when not using the <code>custom</code> prop).',
   contentClass: 'Provide custom CSS classes for the menu\'s content when using the default card layout (when not using the <code>custom</code> prop).',
-  appendTo: 'Moves the menu element to another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `<span class="code">.w-app</span>` will be the target.<br>By default a wrapper is created around the activator element and the menu is appended inside it.',
+  appendTo: 'Moves the menu element to another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, <span class="code">.w-app</span> will be the target.<br>The default root is the <span class="code">w-app</span> or the <code>w-dialog</code> or <code>w-drawer</code> or <code>w-menu</code> or <code>w-overlay</code> it is placed in.',
   noPosition: 'Skip the menu positioning calculation, if you prefer to set it via CSS. Setting this prop to <code>true</code> will also disable the side positioning (top, left, right, bottom) and the alignments.',
   fixed: 'Sets the CSS position of the menu to <code>fixed</code> (absolute by default).',
   top: 'Places the menu at the top of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the top of its container otherwise.',

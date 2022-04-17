@@ -25,7 +25,7 @@ const propsDescs = {
   round: 'Sets a maximum border-radius on the corners of the tooltip, giving it a round look.',
   tooltipClass: 'Provide custom CSS classes for the tooltip element.',
   // Position.
-  appendTo: 'Moves the tooltip element into another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `<span class="code">.w-app</span>` will be the target.<br>By default a wrapper is created around the activator element and the tooltip is appended inside it.',
+  appendTo: 'Moves the tooltip element into another DOM element.<br>Accepts a valid query selector string. If the string is invalid, or the node is not found or if <code>true</code> is provided, `<span class="code">.w-app</span>` will be the target.<br>The default root is <span class="code">.w-app</span> or the <code>w-dialog</code> or <code>w-drawer</code> or <code>w-menu</code> or <code>w-overlay</code> it is placed in.',
   fixed: 'Sets the CSS position of the tooltip to <code>fixed</code> (absolute by default).',
   top: 'Places the tooltip at the top of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the top of its container otherwise.',
   bottom: 'Places the tooltip at the bottom of the screen when the <code>fixed</code> prop is set to <code>true</code> or at the bottom of its container otherwise.',
