@@ -1,8 +1,8 @@
 <template lang="pug">
-transition(name="fade" appear @after-leave="onClosed")
+transition(name="fade" appear @after-leave="onClose")
   .w-overlay(
-    v-if="showOverlay"
-    v-show="modelValue"
+    v-if="modelValue"
+    v-show="showOverlay"
     ref="overlay"
     :style="(modelValue && styles) || null"
     @keydown.escape.stop="onClick"
@@ -34,7 +34,7 @@ export default {
     }
   },
 
-  emits: ['input', 'update:modelValue', 'click', 'close', 'closed'],
+  emits: ['input', 'update:modelValue', 'click', 'before-close', 'close'],
 
   data: () => ({
     persistentAnimate: false,
@@ -69,20 +69,19 @@ export default {
         setTimeout(() => (this.persistentAnimate = false), 150) // Must match CSS animation duration.
       }
       else if (!this.persistent) {
-        this.$emit('update:modelValue', false)
-        this.$emit('input', false)
-        this.$emit('close')
+        this.showOverlay = false
+        this.$emit('before-close')
       }
 
       this.$emit('click', e)
     },
 
     // Wait until the end of the closing transition (v-show) to completely unmount (v-if).
-    onClosed () {
-      // The onClosed method is called twice from the transition: once for the v-show, and once for the v-if.
-      // only emit once everything is closed.
-      if (!this.showOverlay) this.$emit('closed')
-      this.showOverlay = false
+    // The onClose method is called twice from the transition: once for the v-show, and once for the v-if.
+    onClose () {
+      this.$emit('update:modelValue', false)
+      this.$emit('input', false)
+      if (!this.modelValue) this.$emit('close') // Only emit once.
     }
   },
 
