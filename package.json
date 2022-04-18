@@ -43,7 +43,7 @@
     "*.vue"
   ],
   "devDependencies": {
-    "@babel/core": "^7.17.0",
+    "@babel/core": "^7.17.9",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@vitejs/plugin-vue": "^1.10.2",
@@ -61,6 +61,7 @@
     "gsap": "^3.9.1",
     "ionicons": "^4.6.3",
     "material-design-icons": "^3.0.1",
+    "postcss": "^8.4.12",
     "rollup-plugin-delete": "^2.0.0",
     "sass": "^1.49.7",
     "simple-syntax-highlighter": "^1.5.0",

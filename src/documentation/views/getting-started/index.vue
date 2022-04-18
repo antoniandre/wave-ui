@@ -110,7 +110,6 @@ export default {
   .w-accordion__item-content {background: #f7fbff;}
   .w-button--icon.size--md {font-size: 20px;}
 
-  // .w-accordion ol {font-size: 1.3em;}
   .w-accordion .ssh-pre, .w-accordion em {font-size: 1rem;}
 
   .vue-install .comment {user-select: none;}
@@ -119,5 +118,9 @@ export default {
 
 @media screen and (max-width: 600px) {
   .main--getting-started .w-accordion {margin-left: -16px;margin-right: -16px;}
+}
+
+@media screen and (max-width: 450px) {
+  .main--getting-started .w-accordion {margin-left: -8px;margin-right: -8px;}
 }
 </style>

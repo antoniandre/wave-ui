@@ -473,10 +473,19 @@ main
   p.
     You can easily override the default transition/animation duration by setting an explicit
     CSS transition/animation duration on the element being transitioned:
-    #[span.code style="animation-duration: 3s"].
+    #[code style="animation-duration: 3s"].
   p.
-    The expand transition being fully Javascript driven, it accepts a duration parameter in milliseconds.
+    The expand transition is JavaScript driven: it accepts a #[code duration] parameter in milliseconds.
     So you don't need to override the duration from a CSS rule.
+
+  alert.mt12(warning)
+    | Be aware that when using #[code v-if], the transitions unmount components as soon as the
+    | transition starts the leave phase (#[code @before-leave] and not #[code @after-leave]).
+    | #[br]This is by design:
+    a.ml1(href="https://github.com/vuejs/core/issues/994")
+      | Unmounted hooks should run with afterLeave (#994)
+      w-icon.ml1 mdi mdi-open-in-new
+
 </template>
 
 <script>

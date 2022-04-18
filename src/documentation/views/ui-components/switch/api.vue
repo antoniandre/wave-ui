@@ -19,6 +19,7 @@ const propsDescs = {
   label: 'Sets a visible label for the switch.',
   labelOnLeft: 'Moves the label to the left of the switch. By default the label is displayed on the right.',
   color: 'Applies a color to the switch. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  labelColor: 'Applies a specific color to the switch\'s label. Note that on validation failure, the validation-color takes precedence.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   thin: 'Applies a thiner style to the switch.',
   noRipple: 'Removes the ripple animation on activation.',
   name: 'Provide a native HTML <code>name</code> attribute to the switch. If not provided, a unique name will be computed.',
@@ -29,7 +30,9 @@ const propsDescs = {
 }
 
 const slots = {
-  default: { description: 'The switch label content, if the label prop is not flexible enough.' }
+  default: { description: 'The switch label content, if the label prop is not flexible enough.' },
+  track: { description: 'Optional switch track content.' },
+  thumb: { description: 'Optional switch thumb content. Useful to place an icon or small text.' }
 }
 
 const events = {

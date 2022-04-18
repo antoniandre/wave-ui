@@ -103,62 +103,15 @@ div
         w-card
           template(#title)
             w-toolbar
-              .title2.my0 Top Bar
-              .spacer
-              span.ml2 Item 1
-              span.ml2 Item 2
-              span.ml2 Item 3
-
-    h3 With shadow
-    w-flex.mt4(wrap :gap="4")
-      w-card
-        template(#title)
-          w-toolbar(shadow)
-            .title2.my0 Top Bar
-            .spacer
-            span.ml2 Item 1
-            span.ml2 Item 2
-            span.ml2 Item 3
-      w-card
-        template(#actions)
-          w-toolbar(bottom shadow)
-            .title2.my0 Bottom Bar
-            .spacer
-            span.ml2 Item 1
-            span.ml2 Item 2
-            span.ml2 Item 3
-    template(#pug).
-      w-flex.mt4(wrap :gap="4")
-        w-card
-          template(#title)
-            w-toolbar
               .title2 Top Bar
               .spacer
               span.ml2 Item 1
               span.ml2 Item 2
               span.ml2 Item 3
+
         w-card
           template(#actions)
             w-toolbar(bottom)
-              .title2 Bottom Bar
-              .spacer
-              span.ml2 Item 1
-              span.ml2 Item 2
-              span.ml2 Item 3
-
-      h3 With shadow
-      w-flex.mt4(wrap :gap="4")
-        w-card
-          template(#title)
-            w-toolbar(shadow)
-              .title2 Top Bar
-              .spacer
-              span.ml2 Item 1
-              span.ml2 Item 2
-              span.ml2 Item 3
-        w-card
-          template(#actions)
-            w-toolbar(bottom shadow)
               .title2 Bottom Bar
               .spacer
               span.ml2 Item 1

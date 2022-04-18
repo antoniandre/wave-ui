@@ -1,6 +1,6 @@
 <template lang="pug">
 .w-flex
-  w-tooltip(left menu-class="sh2" append-to=".w-app")
+  w-tooltip(left append-to=".w-app")
     template(#activator="{ on }")
       w-button.mr1.pa0.text-center.justify-center.d-flex(
         v-on="on"
@@ -12,7 +12,7 @@
         height="2.3rem"
         :color="tabsView ? 'grey-light2' : 'primary'")
     | {{ tabsView ? 'Showing the tabs view. Prefer the list view?' : 'Showing the list view. Prefer the tabs view?' }}
-  w-tooltip(left menu-class="sh2" append-to=".w-app")
+  w-tooltip(left append-to=".w-app")
     template(#activator="{ on }")
       w-button.mr1.pa0.text-center.justify-center.d-flex(
         v-on="on"

@@ -311,8 +311,17 @@ div
         w-progress(value="38" size="1em" outline round color="light-blue")
         w-progress.mt4(value="38" size="1em" shadow color="light-blue")
         template(#pug).
-          w-progress(value="38" size="1em" outline round color="light-blue")
-          w-progress.mt4(value="38" size="1em" shadow color="light-blue")
+          w-progress(
+            value="38"
+            size="1em"
+            outline
+            round
+            color="light-blue")
+          w-progress.mt4(
+            value="38"
+            size="1em"
+            shadow
+            color="light-blue")
         template(#html).
           &lt;w-progress
             value="38"

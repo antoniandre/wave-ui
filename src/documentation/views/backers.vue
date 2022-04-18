@@ -40,7 +40,7 @@ import axios from 'axios'
 
 const githubBackers = [
   'divriots', 'nmauersberg', 'crbast', 'CoolGoose', 'bohdaq', 'consuman', 'bastien09',
-  'micksp', 'helenetran', 'antoniandre'
+  'micksp', 'orefalo', 'helenetran', 'antoniandre'
 ]
 
 export default {

@@ -176,6 +176,24 @@ div
         ]
       })
 
+  title-link(h2) Pill slider
+  example
+    w-tabs(:items="tabs2.items" pill-slider)
+    template(#pug).
+      w-tabs(:items="tabs" pill-slider)
+    template(#html).
+      &lt;w-tabs :items="tabs" pill-slider&gt;&lt;/w-tabs&gt;
+    template(#js).
+      data: () => ({
+        tabs: [
+          { title: 'Tab 1', content: 'Tab 1 content.' },
+          { title: 'Tab 2', content: 'Tab 2 content.' },
+          { title: 'Tab 3', content: 'Tab 3 content.' },
+          { title: 'Tab 4', content: 'Tab 4 content.' },
+          { title: 'Tab 5', content: 'Tab 5 content.', disabled: true }
+        ]
+      })
+
   title-link(h2) No slider
   example
     w-switch.mb3(v-model="tabs2.slider") Slider

@@ -29,6 +29,15 @@ export default {
     },
     isReadonly () {
       return this.readonly || this.formProps.readonly
+    },
+    validationColor () {
+      return this.formProps.validationColor
+    },
+    labelClasses () {
+      return {
+        [this.labelColor]: this.labelColor && this.valid !== false,
+        [this.validationColor]: this.valid === false
+      }
     }
   },
 

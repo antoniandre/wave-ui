@@ -1,5 +1,8 @@
 <template lang="pug">
-.w-divider(:class="classes")
+.w-divider(
+  :class="classes"
+  role="presentation"
+  :aria-orientation="vertical ? 'vertical' : 'horizontal'")
   slot
 </template>
 
