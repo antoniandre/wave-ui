@@ -200,7 +200,7 @@ div
         small {{ value3 ? 'on' : 'off' }}
     w-switch.ma4(v-model="value3" label="Dark theme")
       template(#thumb)
-        w-icon {{ value3 ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-weather-night' }}
+        w-icon {{ value3 ? 'mdi mdi-weather-night' : 'mdi mdi-white-balance-sunny' }}
     template(#pug).
       w-switch.ma4(v-model="value" label="On")
         template(#thumb)
@@ -208,7 +208,7 @@ div
 
       w-switch.ma4(v-model="value" label="Dark theme")
         template(#thumb)
-          w-icon {{ "\{\{ value ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-weather-night' \}\}" }}
+          w-icon {{ "\{\{ value ? 'mdi mdi-weather-night' : 'mdi mdi-white-balance-sunny' \}\}" }}
     template(#html).
       &lt;w-switch v-model="value" class="ma4"&gt;
         &lt;template #thumb&gt;
@@ -219,7 +219,7 @@ div
       &lt;w-switch v-model="value" class="ma4"&gt;
         &lt;template #thumb&gt;
           &lt;w-icon&gt;
-            {{ "\{\{ value ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-weather-night' \}\}" }}
+            {{ "\{\{ value ? 'mdi mdi-weather-night' : 'mdi mdi-white-balance-sunny' \}\}" }}
           &lt;/w-icon&gt;
         &lt;/template&gt;
       &lt;/w-switch&gt;
