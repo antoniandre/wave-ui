@@ -15,26 +15,16 @@ component(
     @focus="$emit('focus', $event)"
     :name="inputName"
     :value="item.value === value"
-    :label="item.label"
-    :label-on-left="labelOnLeft"
-    :color="item.color"
+    v-bind="{ label: item.label, color: item.color, labelOnLeft, labelColor }"
     :disabled="isDisabled || null"
     :readonly="isReadonly || null"
     :class="{ mt1: !inline && i }")
     slot(
-      v-if="$scopedSlots[`item.${i + 1}`]"
-      :name="`item.${i + 1}`"
+      v-if="$slots[`item.${i + 1}`] || $slots.item"
+      :name="$slots[`item.${i + 1}`] ? `item.${i + 1}` : 'item'"
       :item="getOriginalItem(item)"
       :index="i + 1"
-      :checked="item.value === value"
-      v-html="item.label")
-    slot(
-      v-else-if="$scopedSlots.item"
-      name="item"
-      :item="getOriginalItem(item)"
-      :index="i + 1"
-      :checked="item.value === value"
-      v-html="item.label")
+      :checked="item.value === value")
 </template>
 
 <script>
@@ -52,7 +42,8 @@ export default {
     itemValueKey: { type: String, default: 'value' },
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
-    color: { type: String, default: 'primary' }
+    color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' }
     // Props from mixin: name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },

@@ -20,16 +20,20 @@ component(
     :aria-checked="inputValue || 'false'"
     role="radio")
   template(v-if="hasLabel && labelOnLeft")
-    label.w-radio__label.w-form-el-shakable.pr2(v-if="$slots.default" :for="`w-radio--${_uid}`")
-      slot
-    label.w-radio__label.w-form-el-shakable.pr2(v-else-if="label" :for="`w-radio--${_uid}`" v-html="label")
+    label.w-radio__label.w-form-el-shakable.pr2(
+      v-if="$slots.default || label"
+      :for="`w-radio--${_uid}`"
+      :class="labelClasses")
+      slot {{ label }}
   .w-radio__input(
     @click="$refs.input.focus();$refs.input.click()"
     :class="this.color")
   template(v-if="hasLabel && !labelOnLeft")
-    label.w-radio__label.w-form-el-shakable.pl2(v-if="$slots.default" :for="`w-radio--${_uid}`")
-      slot
-    label.w-radio__label.w-form-el-shakable.pl2(v-else-if="label" :for="`w-radio--${_uid}`" v-html="label")
+    label.w-radio__label.w-form-el-shakable.pl2(
+      v-if="$slots.default || label"
+      :for="`w-radio--${_uid}`"
+      :class="labelClasses")
+      slot {{ label }}
 </template>
 
 <script>
@@ -48,6 +52,7 @@ export default {
     label: { type: String },
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' },
     noRipple: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.

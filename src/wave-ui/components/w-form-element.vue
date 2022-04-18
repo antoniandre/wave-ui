@@ -6,28 +6,19 @@ div(:class="classes")
   //- Error message.
   w-transition-expand(y)
     template(v-if="Validation.message")
-      .w-form-el__error.error(v-if="$slots['error-message']" class="w-form-el__error w-form-el__error")
+      .w-form-el__error(
+        v-if="$slots['error-message']"
+        :class="formProps.validationColor")
         slot(name="error-message" :message="Validation.message")
-      .w-form-el__error.error(v-else v-html="Validation.message" class="w-form-el__error w-form-el__error")
+      .w-form-el__error.error(
+        v-else
+        v-html="Validation.message"
+        :class="formProps.validationColor")
 </template>
 
 <script>
 export default {
   name: 'w-form-element',
-
-  inject: {
-    formRegister: { default: null },
-    formUnregister: { default: null },
-    validateElement: { default: null },
-    formProps: {
-      default: () => ({
-        noKeyupValidation: false,
-        noBlurValidation: false,
-        disabled: false,
-        readonly: false
-      })
-    }
-  },
 
   props: {
     valid: { required: true },
@@ -38,6 +29,21 @@ export default {
     isFocused: { default: false }, // Watched.
     column: { default: false }, // Flex direction of the embedded component: column or row by default.
     wrap: { default: false } // Flex-wrap if needed.
+  },
+
+  inject: {
+    formRegister: { default: null },
+    formUnregister: { default: null },
+    validateElement: { default: null },
+    formProps: {
+      default: () => ({
+        noKeyupValidation: false,
+        noBlurValidation: false,
+        validationColor: 'error',
+        disabled: false,
+        readonly: false
+      })
+    }
   },
 
   emits: ['reset', 'update:valid'],

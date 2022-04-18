@@ -9,9 +9,11 @@ component(
   :class="classes")
   //- Left label.
   template(v-if="labelPosition === 'left'")
-    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
-      slot
-    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
+    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(
+      v-if="$slots.default || label"
+      :for="`w-textarea--${_uid}`"
+      :class="labelClasses")
+      slot {{ label }}
 
   //- Input wrapper.
   .w-textarea__textarea-wrap(:class="inputWrapClasses")
@@ -39,15 +41,10 @@ component(
       :tabindex="tabindex || null")
     template(v-if="labelPosition === 'inside' && showLabelInside")
       label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
-        v-if="$slots.default"
+        v-if="$slots.default || label"
         :for="`w-textarea--${_uid}`"
-        :class="isFocused && { [valid === false ? 'error' : this.color]: this.color || valid === false }")
-        slot
-      label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
-        v-else-if="label"
-        :for="`w-textarea--${_uid}`"
-        v-html="label"
-        :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+        :class="labelClasses")
+        slot {{ label }}
     w-icon.w-textarea__icon.w-textarea__icon--inner-right(
       v-if="innerIconRight"
       tag="label"
@@ -56,9 +53,11 @@ component(
 
   //- Right label.
   template(v-if="labelPosition === 'right'")
-    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
-      slot
-    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
+    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(
+      v-if="$slots.default || label"
+      :for="`w-textarea--${_uid}`"
+      :class="labelClasses")
+      slot {{ label }}
 </template>
 
 <script>
@@ -83,6 +82,7 @@ export default {
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
+    labelColor: { type: String, default: 'primary' },
     dark: { type: Boolean },
     outline: { type: Boolean },
     shadow: { type: Boolean },
@@ -142,7 +142,7 @@ export default {
     },
     inputWrapClasses () {
       return {
-        [this.valid === false ? 'error' : this.color]: this.color || this.valid === false,
+        [this.valid === false ? this.validationColor : this.color]: this.color || this.valid === false,
         [`${this.bgColor}--bg`]: this.bgColor,
         'w-textarea__textarea-wrap--tile': this.tile,
         // Box adds a padding on input. If there is a bgColor or shadow, a padding is needed.
@@ -387,8 +387,6 @@ $inactive-color: #777;
     .w-textarea--filled.w-textarea--floating-label.w-textarea--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
     .w-textarea--floating-label.w-textarea--inner-icon-left .w-textarea__textarea:-webkit-autofill & {left: 0;}
-
-    .w-textarea--focused & {color: currentColor;}
   }
 }
 </style>

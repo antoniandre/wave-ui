@@ -11,31 +11,20 @@ component(
   w-checkbox(
     v-for="(item, i) in checkboxItems"
     :key="i"
-    :name="`${name || `w-checkboxes--${_uid}`}[]`"
-    :label="item.label"
-    :label-on-left="labelOnLeft"
     :value="item._isChecked"
-    :color="item.color"
-    :round="round"
-    :disabled="isDisabled || null"
-    :readonly="isReadonly || null"
     @input="toggleCheck(item, $event)"
     @focus="$emit('focus', $event)"
+    :name="`${inputName}[]`"
+    v-bind="{ label: item.label, color: item.color, labelOnLeft, labelColor, round }"
+    :disabled="isDisabled || null"
+    :readonly="isReadonly || null"
     :class="{ mt1: !inline && i }")
     slot(
-      v-if="$scopedSlots[`item.${i + 1}`]"
-      :name="`item.${i + 1}`"
+      v-if="$slots[`item.${i + 1}`] || $slots.item"
+      :name="$slots[`item.${i + 1}`] ? `item.${i + 1}` : 'item'"
       :item="getOriginalItem(item)"
       :checked="!!item._isChecked"
-      :index="i + 1"
-      v-html="item.label")
-    slot(
-      v-else-if="$scopedSlots.item"
-      name="item"
-      :item="getOriginalItem(item)"
-      :checked="!!item._isChecked"
-      :index="i + 1"
-      v-html="item.label")
+      :index="i + 1")
 </template>
 
 <script>
@@ -55,7 +44,8 @@ export default {
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
     round: { type: Boolean },
-    color: { type: String, default: 'primary' }
+    color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' }
     // Props from mixin: name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },

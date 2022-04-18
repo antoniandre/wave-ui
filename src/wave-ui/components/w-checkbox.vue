@@ -22,16 +22,20 @@ component(
     :aria-checked="isChecked || 'false'"
     role="checkbox")
   template(v-if="hasLabel && labelOnLeft")
-    label.w-checkbox__label.w-form-el-shakable.pr2(v-if="$slots.default" :for="`w-checkbox--${_uid}`")
-      slot
-    label.w-checkbox__label.w-form-el-shakable.pr2(v-else-if="label" :for="`w-checkbox--${_uid}`" v-html="label")
+    label.w-checkbox__label.w-form-el-shakable.pr2(
+      v-if="$slots.default || label"
+      :for="`w-checkbox--${_uid}`"
+      :class="labelClasses")
+      slot {{ label }}
   .w-checkbox__input(@click="$refs.input.focus();$refs.input.click()" :class="this.color")
     svg(width="11px" height="9px" viewbox="0 0 12 9")
       polyline(points="1 5 4 8 10 2")
   template(v-if="hasLabel && !labelOnLeft")
-    label.w-checkbox__label.w-form-el-shakable.pl2(v-if="$slots.default" :for="`w-checkbox--${_uid}`")
-      slot
-    label.w-checkbox__label.w-form-el-shakable.pl2(v-else-if="label" :for="`w-checkbox--${_uid}`" v-html="label")
+    label.w-checkbox__label.w-form-el-shakable.pl2(
+      v-if="$slots.default || label"
+      :for="`w-checkbox--${_uid}`"
+      :class="labelClasses")
+      slot {{ label }}
 </template>
 
 <script>
@@ -50,6 +54,7 @@ export default {
     label: { type: String },
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' },
     noRipple: { type: Boolean },
     indeterminate: { type: Boolean },
     round: { type: Boolean }

@@ -9,24 +9,19 @@ component(
   :class="classes")
   template(v-if="labelPosition === 'left'")
     label.w-select__label.w-select__label--left.w-form-el-shakable(
-      v-if="$slots.default"
-      :for="`w-select--${_uid}`")
-      slot
-    label.w-select__label.w-select__label--left.w-form-el-shakable(
-      v-else-if="label"
+      v-if="$slots.default || label"
       :for="`w-select--${_uid}`"
-      v-html="label")
+      :class="labelClasses")
+      slot {{ label }}
 
   w-menu(
     v-model="showMenu"
     :menu-class="`w-select__menu ${menuClass || ''}`"
     transition="slide-fade-down"
-    :append-to="(menuProps || {}).appendTo !== undefined ? (menuProps || {}).appendTo : '.w-app'"
+    :append-to="(menuProps || {}).appendTo !== undefined ? (menuProps || {}).appendTo : undefined"
     align-left
     custom
     min-width="activator"
-    @mousedown="isFocused = true, selectingItem = true"
-    @mouseup="isFocused = true, selectingItem = false"
     v-bind="menuProps || {}")
     template(#activator="{ on }")
       //- Input wrapper.
@@ -69,15 +64,10 @@ component(
           :name="inputName + (multiple ? '[]' : '')")
         template(v-if="labelPosition === 'inside' && showLabelInside")
           label.w-select__label.w-select__label--inside.w-form-el-shakable(
-            v-if="$slots.default"
+            v-if="$slots.default || label"
             :for="`w-select--${_uid}`"
-            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
-            slot
-          label.w-select__label.w-select__label--inside.w-form-el-shakable(
-            v-else-if="label"
-            :for="`w-select--${_uid}`"
-            v-html="label"
-            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+            :class="labelClasses")
+            slot {{ label }}
         w-icon.w-select__icon.w-select__icon--inner-right(
           v-if="innerIconRight"
           tag="label"
@@ -113,13 +103,10 @@ component(
 
   template(v-if="labelPosition === 'right'")
     label.w-select__label.w-select__label--right.w-form-el-shakable(
-      v-if="$slots.default"
-      :for="`w-select--${_uid}`")
-      slot
-    label.w-select__label.w-select__label--right.w-form-el-shakable(
-      v-else-if="label"
+      v-if="$slots.default || label"
       :for="`w-select--${_uid}`"
-      v-html="label")
+      :class="labelClasses")
+      slot {{ label }}
 </template>
 
 <script>
@@ -150,8 +137,9 @@ export default {
     itemClass: { type: String },
     menuClass: { type: String },
     color: { type: String, default: 'primary' }, // Applies to all the items.
-    selectionColor: { type: String, default: 'primary' }, // Applies to the selected items only.
     bgColor: { type: String }, // Applies to all the items.
+    labelColor: { type: String, default: 'primary' },
+    selectionColor: { type: String, default: 'primary' }, // Applies to the selected items only.
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },
@@ -175,7 +163,6 @@ export default {
     showMenu: false,
     menuMinWidth: 0,
     isFocused: false,
-    selectingItem: false,
     selectionWrapRef: undefined
   }),
 
@@ -213,7 +200,7 @@ export default {
         'w-select--disabled': this.isDisabled,
         'w-select--readonly': this.isReadonly,
         [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
-        'w-select--focused': (this.isFocused || this.selectingItem) && !this.isReadonly,
+        'w-select--focused': (this.isFocused || this.showMenu) && !this.isReadonly,
         'w-select--dark': this.dark,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
@@ -579,8 +566,6 @@ export default {
     .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
     .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
-
-    .w-select--focused &, .w-select--open & {color: currentColor;}
   }
 
   // Menu.

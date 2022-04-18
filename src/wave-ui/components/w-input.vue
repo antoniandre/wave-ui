@@ -13,15 +13,10 @@ component(
     //- Left label.
     template(v-if="labelPosition === 'left'")
       label.w-input__label.w-input__label--left.w-form-el-shakable(
-        v-if="$slots.default"
+        v-if="$slots.default || label"
         :for="`w-input--${_uid}`"
-        :class="validationClasses")
-        slot
-      label.w-input__label.w-input__label--left.w-form-el-shakable(
-        v-else-if="label"
-        :for="`w-input--${_uid}`"
-        :class="validationClasses"
-        v-html="label")
+        :class="labelClasses")
+        slot {{ label }}
 
     //- Input wrapper.
     .w-input__input-wrap(:class="inputWrapClasses")
@@ -81,15 +76,10 @@ component(
 
       template(v-if="labelPosition === 'inside' && showLabelInside")
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
-          v-if="$slots.default"
+          v-if="$slots.default || label"
           :for="`w-input--${_uid}`"
-          :class="validationClasses")
-          slot
-        label.w-input__label.w-input__label--inside.w-form-el-shakable(
-          v-else-if="label"
-          :for="`w-input--${_uid}`"
-          v-html="label"
-          :class="validationClasses")
+          :class="labelClasses")
+          slot {{ label }}
       w-icon.w-input__icon.w-input__icon--inner-right(
         v-if="innerIconRight"
         tag="label"
@@ -117,15 +107,10 @@ component(
     //- Right label.
     template(v-if="labelPosition === 'right'")
       label.w-input__label.w-input__label--right.w-form-el-shakable(
-        v-if="$slots.default"
+        v-if="$slots.default || label"
         :for="`w-input--${_uid}`"
-        :class="validationClasses")
-        slot
-      label.w-input__label.w-input__label--right.w-form-el-shakable(
-        v-else-if="label"
-        :for="`w-input--${_uid}`"
-        :class="validationClasses"
-        v-html="label")
+        :class="labelClasses")
+        slot {{ label }}
 </template>
 
 <script>
@@ -146,12 +131,12 @@ export default {
     labelPosition: { type: String, default: 'inside' },
     innerIconLeft: { type: String },
     innerIconRight: { type: String },
-    // When label is inside, allows to move the label above on focus or when filled.
-    staticLabel: { type: Boolean },
+    staticLabel: { type: Boolean }, // When label is inside, fix the label above.
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
-    progressColor: { type: String },
     bgColor: { type: String },
+    labelColor: { type: String, default: 'primary' },
+    progressColor: { type: String },
     minlength: { type: [Number, String] },
     maxlength: { type: [Number, String] },
     step: { type: [Number, String] },
@@ -237,7 +222,7 @@ export default {
     },
 
     overallFilesProgress () {
-      const progress = this.inputFiles.reduce((total, file) => total + file.progress, 0)
+      const progress = +this.inputFiles.reduce((total, file) => total + file.progress, 0)
       const total = progress / this.inputFiles.length
       this.$emit('update:overallProgress', this.inputFiles.length ? total : undefined)
 
@@ -269,15 +254,9 @@ export default {
       }
     },
 
-    validationClasses () {
-      return this.isFocused && {
-        [this.valid === false ? 'error' : this.color]: this.color || this.valid === false
-      }
-    },
-
     inputWrapClasses () {
       return {
-        [this.valid === false ? 'error' : this.color]: this.color || this.valid === false,
+        [this.valid === false ? this.validationColor : this.color]: this.color || this.valid === false,
         [`${this.bgColor}--bg`]: this.bgColor,
         'w-input__input-wrap--file': this.type === 'file',
         'w-input__input-wrap--round': this.round,
@@ -635,8 +614,6 @@ $inactive-color: #777;
     .w-input--filled.w-input--floating-label.w-input--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
     .w-input--floating-label.w-input--inner-icon-left .w-input__input:-webkit-autofill & {left: 0;}
-
-    .w-input--focused & {color: currentColor;}
   }
 }
 </style>
