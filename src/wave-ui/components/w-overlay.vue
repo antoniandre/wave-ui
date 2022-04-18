@@ -1,8 +1,9 @@
 <template lang="pug">
-transition(name="fade" appear @after-leave="onClosed")
+transition(name="fade" appear @after-leave="onClose")
   .w-overlay(
-    v-if="showOverlay"
-    v-show="value"
+    v-if="value"
+    v-show="showOverlay"
+    ref="overlay"
     :style="(value && styles) || null"
     @keydown.escape.stop="onClick"
     @click="onClick"
@@ -25,7 +26,15 @@ export default {
     persistentNoAnimation: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue', 'click', 'close', 'closed'],
+  provide () {
+    return {
+      // If a detachable is used inside a w-overlay without an appendTo, default to the overlay element
+      // instead of the w-app.
+      detachableDefaultRoot: () => this.$refs.overlay || null
+    }
+  },
+
+  emits: ['input', 'update:modelValue', 'click', 'before-close', 'close'],
 
   data: () => ({
     persistentAnimate: false,
@@ -60,21 +69,19 @@ export default {
         setTimeout(() => (this.persistentAnimate = false), 150) // Must match CSS animation duration.
       }
       else if (!this.persistent) {
-        this.$emit('update:modelValue', false)
-        this.$emit('input', false)
-        this.$emit('close')
+        this.showOverlay = false
+        this.$emit('before-close')
       }
 
       this.$emit('click', e)
     },
 
-    // Wait until the end of the closing transition to unmount the components it contains.
-    // This way, in case of w-select in w-dialog, the w-select will only remove its activator
-    // element from the DOM once the dialog is completely closed.
-    // https://github.com/antoniandre/wave-ui/issues/82
-    onClosed () {
-      this.showOverlay = false
-      this.$emit('closed')
+    // Wait until the end of the closing transition (v-show) to completely unmount (v-if).
+    // The onClose method is called twice from the transition: once for the v-show, and once for the v-if.
+    onClose () {
+      this.$emit('update:modelValue', false)
+      this.$emit('input', false)
+      this.$emit('close') // Only emit once.
     }
   },
 
