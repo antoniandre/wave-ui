@@ -100,7 +100,9 @@ w-app
             w-button(v-on="on").
               Show tooltip
           | tooltip.
-        w-select.mt6(:items="items" label="Select" :menu-props="{ appendTo: '.w-dialog' }")
+        w-select.mt6(:items="items" label="Select")
+
+    w-select.mt6(:items="items" label="Select" multiple)
 </template>
 
 <script>
