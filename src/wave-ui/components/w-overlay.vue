@@ -1,10 +1,9 @@
 <template lang="pug">
 transition(name="fade" appear @after-leave="onClose")
   .w-overlay(
-    v-if="value"
-    v-show="showOverlay"
+    v-if="showOverlay"
     ref="overlay"
-    :style="(value && styles) || null"
+    :style="styles || null"
     @keydown.escape.stop="onClick"
     @click="onClick"
     v-focus
@@ -91,7 +90,7 @@ export default {
 
   watch: {
     value (bool) {
-      if (bool) this.showOverlay = true
+      if (this.showOverlay !== bool) this.showOverlay = bool
     }
   }
 }
