@@ -7,13 +7,22 @@
         v-if="!noOverlay"
         v-model="showDrawer"
         @click="onOutsideClick"
+        @before-close="onBeforeClose"
         :persistent="persistent"
         persistent-no-animation
-        :bg-color="overlayColor"
+        :bg-color="overlayColor || 'transparent'"
         :opacity="overlayOpacity")
       slot(name="pushable")
-    transition(name="fade")
-      .w-drawer(v-if="!unmountDrawer" :class="drawerClasses" :style="styles")
+    transition(
+      name="fade"
+      @before-leave="noOverlay && onBeforeClose()"
+      @after-leave="onClose")
+      component.w-drawer(
+        v-if="showDrawer"
+        ref="drawer"
+        :is="tag || 'aside'"
+        :class="drawerClasses"
+        :style="styles")
         slot
   //- Other cases.
   template(v-else)
@@ -21,12 +30,22 @@
       v-if="!noOverlay"
       v-model="showDrawer"
       @click="onOutsideClick"
+      @before-close="onBeforeClose"
       :persistent="persistent"
       persistent-no-animation
       :bg-color="overlayColor"
       :opacity="overlayOpacity")
-    transition(:name="transitionName" appear @after-leave="close")
-      component.w-drawer(v-if="showDrawer" :is="tag || 'aside'" :class="drawerClasses" :style="styles")
+    transition(
+      :name="transitionName"
+      appear
+      @before-leave="noOverlay && onBeforeClose()"
+      @after-leave="onClose")
+      component.w-drawer(
+        v-if="showDrawer"
+        ref="drawer"
+        :is="tag || 'aside'"
+        :class="drawerClasses"
+        :style="styles")
         slot
 </template>
 
@@ -62,7 +81,15 @@ export default {
     tag: { type: String, default: 'aside' }
   },
 
-  emits: ['input', 'update:modelValue', 'close'],
+  provide () {
+    return {
+      // If a detachable is used inside a w-drawer without an appendTo, default to the drawer element
+      // instead of the w-app.
+      detachableDefaultRoot: () => this.$refs.drawer || null
+    }
+  },
+
+  emits: ['input', 'update:modelValue', 'before-close', 'close'],
 
   data () {
     return {
@@ -113,7 +140,7 @@ export default {
     // It moves inside the overflow hidden outer wrap.
     trackStyles () {
       return this.pushContent && this.showDrawer && {
-        transform: `translateX(${this.position === 'left' ? '' : '-'}${this.size})`
+        transform: `translateX(${this.position === 'left' ? '' : '-'}${this.size || '200px'})`
       }
     },
     styles () {
@@ -133,24 +160,22 @@ export default {
   },
 
   methods: {
-    close () {
-      this.showWrapper = false
-      this.$emit('update:modelValue', false)
-      this.$emit('input', false)
-      this.$emit('close', false)
-    },
     onOutsideClick () {
-      if (!this.persistent) {
-        // The close method is called on animation end, except with pushContent
-        // (not using the same transition).
-        this.showDrawer = false
-        if (this.pushContent) this.close()
-      }
-      else if (!this.persistentNoAnimation) {
+      if (this.persistent && !this.persistentNoAnimation) {
         this.persistentAnimate = true
         setTimeout(() => (this.persistentAnimate = false), 200) // Must match CSS animation duration.
       }
-    }
+    },
+    onBeforeClose () {
+      this.$emit('before-close')
+      this.showDrawer = false
+    },
+    onClose () {
+      this.showWrapper = false
+      this.$emit('update:modelValue', false)
+      this.$emit('input', false)
+      this.$emit('close')
+    },
   },
 
   watch: {
