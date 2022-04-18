@@ -93,6 +93,8 @@ export default {
       const [fontName = '', icon = ''] = typeof slot === 'function' && slot()[0].children.trim().split(' ') || []
       this.fontName = fontName
       this.icon = icon
+
+      return true // Always return true for styles to be applied (c.f. template styles).
     }
   }
 }
