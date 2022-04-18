@@ -78,6 +78,12 @@ main
               #[strong.code w-drawer] or #[strong.code w-menu].
 
             li Removed the deprecated #[code detachTo] prop (use #[code appendTo] instead).
+        li
+          strong.code w-select
+          ul
+            li.
+              Default the #[code appendTo] to the open #[strong.code.black w-dialog],
+              #[strong.code w-drawer] or #[strong.code w-menu].
 
     li.minor
       strong.version v2.35.0
