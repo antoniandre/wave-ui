@@ -181,6 +181,66 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
+
+    li.patch
+      strong.version v1.53.1
+      ul
+        li #[strong.code w-textarea]: fix an issue with the auto-resize after value update. #[issue-link 88]
+
+    li.minor
+      strong.version v1.53.0
+      ul
+        li
+          strong.code w-accordion
+          ul
+            li Added a new #[code duration] option. #[span.new]
+            li Fire #[code item-collapsed] when done collapsing. #[span.new]
+        li
+          strong.code w-form
+          ul
+            li Added a new #[code validation-color] option. #[span.new]
+        li
+          strong.primary All the form elements
+          ul
+            li Added a new #[code label-color] option. #[span.new]
+        li
+          strong.code w-input
+          ul
+            li Added a new #[code label-color] option. #[span.new]
+        li
+          strong.code w-transition-expand
+          ul
+            li Remove useless props binding.
+        li
+          strong.code w-slider
+          ul
+            li Outline the thumb on :focus, :active and while dragging.
+            li Prevent focus when disabled or readonly.
+        li
+          strong.code w-dialog &amp; w-overlay
+          ul
+            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.new]
+        li
+          strong.code w-drawer
+          ul
+            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.new]
+            li When using #[code push-content], default to a transparent overlay that you can override.
+            li When using #[code push-content], default to a width of 200px that you can override.
+        li
+          strong.code w-menu &amp; w-tooltip
+          ul
+            li.
+              Default the #[code appendTo] to the open #[strong.code.black w-dialog],
+              #[strong.code w-drawer] or #[strong.code w-menu].
+
+            li Removed the deprecated #[code detachTo] prop (use #[code appendTo] instead).
+        li
+          strong.code w-select
+          ul
+            li.
+              Default the #[code appendTo] to the open #[strong.code.black w-dialog],
+              #[strong.code w-drawer] or #[strong.code w-menu].
+
     li.minor
       strong.version v1.52.0
       ul
