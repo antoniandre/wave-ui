@@ -1,12 +1,12 @@
 <template lang="pug">
 component.w-icon(
   :is="tag || 'i'"
-  :class="classes"
   v-on="$listeners"
+  :class="classes"
   role="icon"
   aria-hidden="true"
-  :style="styles")
-  template(v-if="ligature") {{ ligature.icon }}
+  :style="readIcon() /* Always reacting to slot change when called from template. */ && styles")
+  template(v-if="hasLigature") {{ icon }}
 </template>
 
 <script>
@@ -41,15 +41,13 @@ export default {
   emits: [],
 
   data: () => ({
-    icon: ''
+    icon: '',
+    fontName: ''
   }),
 
   computed: {
-    ligature () {
-      if (!config.iconsLigature) return false
-
-      const [fontName, icon] = this.icon.split(' ')
-      return fontName === config.iconsLigature && { fontName, icon }
+    hasLigature () {
+      return config.iconsLigature === this.fontName
     },
     forcedSize () {
       return this.size && (!isNaN(this.size) ? `${this.size}px` : this.size)
@@ -66,7 +64,8 @@ export default {
     },
     classes () {
       return {
-        [this.icon]: true,
+        [this.fontName]: true,
+        [!this.hasLigature && this.icon]: !this.hasLigature && this.icon,
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
@@ -80,8 +79,7 @@ export default {
         'w-icon--rotate-90': this.rotate90a,
         'w-icon--rotate-135': this.rotate135a,
         'w-icon--flip-x': this.flipX,
-        'w-icon--flip-y': this.flipY,
-        [this.ligature && this.ligature.fontName]: this.ligature
+        'w-icon--flip-y': this.flipY
       }
     },
     styles () {
@@ -89,12 +87,15 @@ export default {
     }
   },
 
-  created () {
-    this.icon = this.$slots.default[0].text.trim() || ''
-  },
+  methods: {
+    readIcon () {
+      const { default: slot } = this.$slots
+      const [fontName = '', icon = ''] = slot[0].text.trim().split(' ') || []
+      this.fontName = fontName
+      this.icon = icon
 
-  beforeUpdate () {
-    this.icon = this.$slots.default[0].text.trim()
+      return true // Always return true for styles to be applied (c.f. template styles).
+    }
   }
 }
 </script>
@@ -108,6 +109,7 @@ export default {
   justify-content: center;
   vertical-align: middle;
   user-select: none;
+  speak: never;
   line-height: 1;
   font-size: 1.2em;
   width: 1em;
