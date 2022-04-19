@@ -84,7 +84,7 @@ export default {
     persistent: { type: Boolean },
     delay: { type: Number }
     // Other props in the detachable mixin:
-    // detachTo, appendTo, fixed, top, bottom, left, right, alignTop, alignBottom, alignLeft,
+    // appendTo, fixed, top, bottom, left, right, alignTop, alignBottom, alignLeft,
     // alignRight, noPosition, zIndex, activator.
   },
 
