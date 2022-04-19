@@ -10,6 +10,7 @@
   "exports": {
     "./dist/wave-ui.css": "./dist/wave-ui.css",
     "./dist/wave-ui.cjs.js": "./dist/wave-ui.cjs.js",
+    "./src/wave-ui/": "./src/wave-ui/index.js",
     ".": {
       "import": "./dist/wave-ui.es.js",
       "require": "./dist/wave-ui.umd.js"
