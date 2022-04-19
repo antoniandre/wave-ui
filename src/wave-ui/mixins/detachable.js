@@ -9,7 +9,6 @@ import { consoleWarn } from '../utils/console'
 export default {
   props: {
     // Position.
-    detachTo: { type: [String, Boolean, Object], deprecated: true },
     appendTo: { type: [String, Boolean, Object] },
     fixed: { type: Boolean },
     top: { type: Boolean },
@@ -26,6 +25,10 @@ export default {
     activator: { type: [String, Object, HTMLElement] } // The activator can be a DOM string selector, a ref or a DOM node.
   },
 
+  inject: {
+    detachableDefaultRoot: { default: null }
+  },
+
   data: () => ({
     // The event listeners handlers have to be removed the exact same way they have been attached.
     // Since the handler functions have variables that change after hot-reload, keep them exactly
@@ -39,14 +42,15 @@ export default {
     // DOM element to attach tooltip/menu to.
     // ! \ This computed uses the DOM - NO SSR (only trigger from beforeMount and later).
     appendToTarget () {
-      const defaultTarget = '.w-app'
+      let defaultTarget = '.w-app'
 
-      // Convert deprecated prop to renamed one.
-      if (this.detachTo && !this.appendTo) {
-        consoleWarn(`The ${this.$options.name} prop \`detach-to\` is deprecated. You can replace it with \`append-to\`.`, this)
+      // If used inside a w-dialog, w-drawer, or w-menu without an appendTo, default to that open
+      // element instead of the w-app.
+      if (typeof this.detachableDefaultRoot === 'function') {
+        defaultTarget = this.detachableDefaultRoot() || defaultTarget
       }
 
-      let target = this.appendTo || this.detachTo || defaultTarget
+      let target = this.appendTo || defaultTarget
       if (target === true) target = defaultTarget
       else if (this.appendTo === 'activator') target = this.$el.previousElementSibling
       else if (target && !['object', 'string'].includes(typeof target)) target = defaultTarget
@@ -145,7 +149,7 @@ export default {
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     getActivatorCoordinates () {
       // Get the activator coordinates relative to window.
-      const { top, left, width, height } = (this.activatorEl).getBoundingClientRect()
+      const { top, left, width, height } = this.activatorEl.getBoundingClientRect()
       let coords = { top, left, width, height }
 
       // If absolute position, adjust top & left.
@@ -166,6 +170,11 @@ export default {
     computeDetachableCoords () {
       // Get the activator coordinates.
       let { top, left, width, height } = this.getActivatorCoordinates()
+
+      // Prevent error in case the detachable component unmounted hook is fired but the activator
+      // is still in the DOM until the end of a transition and the user toggles it.
+      // Unmounted is called straight away from beforeLeave: https://github.com/vuejs/core/issues/994
+      if (!this.detachableEl) return
 
       // 1. First display the menu but hide it (So we can get its dimension).
       // --------------------------------------------------
@@ -273,7 +282,6 @@ export default {
           this.detachableEl = this.$refs.detachable?.$el || this.$refs.detachable
 
           // Move the tooltip/menu elsewhere in the DOM.
-          // wrapper.parentNode.insertBefore(this.detachableEl, wrapper)
           if (this.detachableEl) this.appendToTarget.appendChild(this.detachableEl)
           resolve()
         })
@@ -327,7 +335,7 @@ export default {
     // so check it on nextTick.
     else {
       this.$nextTick(() => {
-        this.activator && this.bindActivatorEvents()
+        if (this.activator) this.bindActivatorEvents()
         if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
       })
     }
@@ -361,10 +369,6 @@ export default {
   watch: {
     value (bool) {
       if (!!bool !== this.detachableVisible) this.toggle({ type: 'click', target: this.activatorEl })
-    },
-    detachTo () {
-      this.removeFromDOM()
-      this.insertInDOM()
     },
     appendTo () {
       this.removeFromDOM()
