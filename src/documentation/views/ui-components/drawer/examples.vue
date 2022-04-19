@@ -457,16 +457,16 @@ div
       persistent
       fit-content
       bottom)
-      .w-flex.pa2.align-center.wrap
+      .w-flex.pa3.align-center.wrap
         .w-flex.align-center.py1
-          w-icon.mr3(xl) wi-info-circle
+          w-icon.primary.mr2(xl) mdi mdi-cookie
           span.grey-dark3.
             Our website uses cookies to give you the best user experience.
             To continue browsing this site you must agree.
         .spacer
-        w-button(sm @click="showCookieNotice = false")
-          w-icon.mr2 mdi mdi-cookie
+        w-button(@click="showCookieNotice = false")
           | I agree
+          w-icon.ml2 mdi mdi-arrow-right
     template(#pug).
       w-button(@click="showCookieNotice = true" outline).
         Show the cookie notice
@@ -478,16 +478,16 @@ div
         persistent
         fit-content
         bottom)
-        w-flex.pa2(align-center wrap)
+        w-flex.pa3(align-center wrap)
           w-flex.py1(align-center)
-            w-icon.mr3(xl) wi-info-circle
+            w-icon.primary.mr2(xl) mdi mdi-cookie
             span.grey-dark3.
               Our website uses cookies to give you the best user experience.
               To continue browsing this site you must agree.
           .spacer
-          w-button(sm @click="showCookieNotice = false")
-            w-icon.mr2 mdi mdi-cookie
+          w-button(@click="showCookieNotice = false")
             | I agree
+            w-icon.ml2 mdi mdi-arrow-right
     template(#html).
       &lt;w-button
         @click="showCookieNotice = true"
@@ -502,20 +502,20 @@ div
         persistent
         fit-content
         bottom&gt;
-        &lt;div class="w-flex pa2 align-center wrap"&gt;
+        &lt;div class="w-flex pa3 align-center wrap"&gt;
           &lt;div class="w-flex align-center"&gt;
-            &lt;w-icon class="mr3" xl&gt;
-              wi-info-circle
+            &lt;w-icon class="mr2 primary" xl&gt;
+              mdi mdi-cookie
             &lt;/w-icon&gt;
               &lt;span class="grey-dark3"&gt;
               Our website uses cookies to give you the best user experience.
               To continue browsing this site you must agree.
             &lt;/span&gt;
           &lt;/div&gt;
-          &lt;div class="spacer" /&gt;
-          &lt;w-button sm @click="showCookieNotice = false"&gt;
-            &lt;w-icon class="mr2"&gt;mdi mdi-cookie&lt;/w-icon&gt;
+          &lt;div class="spacer"&gt;&lt;/div&gt;
+          &lt;w-button @click="showCookieNotice = false"&gt;
             I agree
+            &lt;w-icon class="ml2"&gt;mdi mdi-arrow-right&lt;/w-icon&gt;
           &lt;/w-button&gt;
         &lt;/div&gt;
       &lt;/w-drawer&gt;
