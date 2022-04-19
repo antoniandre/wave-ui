@@ -185,6 +185,7 @@ export default {
       const linesCount = (this.$refs.textarea.scrollHeight - this.paddingY) / this.lineHeight
       const height = Math.max(linesCount, this.rows) * this.lineHeight + this.paddingY
       this.$refs.textarea.style.height = height + 'px'
+      console.log('recomputing height', height)
     },
     getLineHeight () {
       const computedStyles = window.getComputedStyle(this.$refs.textarea, null)
@@ -204,7 +205,7 @@ export default {
   watch: {
     value (value) {
       this.inputValue = value
-      this.computeHeight()
+      this.$nextTick(this.computeHeight)
     },
     resizable (value) {
       if (value) this.height = null
