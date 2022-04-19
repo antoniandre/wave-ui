@@ -4,13 +4,14 @@ w-overlay.w-dialog(
   :persistent="persistent"
   :persistent-no-animation="persistentNoAnimation"
   @click="onOutsideClick"
-  @closed="$emit('closed')"
+  @close="onClose"
   :bg-color="overlayColor"
   :opacity="overlayOpacity"
   :class="classes")
-  transition(:name="transition" appear @after-leave="onClose")
+  transition(:name="transition" appear @after-leave="onBeforeClose")
     w-card.w-dialog__content(
       v-show="showContent"
+      ref="dialog"
       no-border
       :color="color"
       :bg-color="bgColor"
@@ -48,7 +49,15 @@ export default {
     overlayOpacity: { type: [Number, String, Boolean] }
   },
 
-  emits: ['input', 'update:modelValue', 'close', 'closed'],
+  provide () {
+    return {
+      // If a detachable is used inside a w-drawer without an appendTo, default to the drawer element
+      // instead of the w-app.
+      detachableDefaultRoot: () => this.$refs.dialog.$el || null
+    }
+  },
+
+  emits: ['input', 'update:modelValue', 'before-close', 'close'],
 
   data () {
     return {
@@ -81,11 +90,14 @@ export default {
         this.showContent = false
         // If fade transition close both dialog and overlay at the same time
         // (don't need to wait for the end of the dialog transition).
-        if (this.transition === 'fade') this.onClose()
+        if (this.transition === 'fade') this.onBeforeClose()
       }
     },
-    onClose () {
+    onBeforeClose () {
       this.showWrapper = false
+      this.$emit('before-close')
+    },
+    onClose () {
       this.$emit('update:modelValue', false)
       this.$emit('input', false)
       this.$emit('close')
@@ -94,10 +106,7 @@ export default {
 
   watch: {
     value (value) {
-      // If value is true, mount the wrapper in DOM and open the dialog.
-      // If value is false, keep the wrapper in DOM and close the dialog;
-      // At the end of the dialog transition the value is updated and wrapper removed from the DOM.
-      if (value) this.showWrapper = value
+      this.showWrapper = value
       this.showContent = value
     }
   }
