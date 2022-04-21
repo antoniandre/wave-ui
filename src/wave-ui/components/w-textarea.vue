@@ -204,7 +204,7 @@ export default {
   watch: {
     modelValue (value) {
       this.inputValue = value
-      this.computeHeight()
+      this.$nextTick(this.computeHeight)
     },
     resizable (value) {
       if (value) this.height = null
