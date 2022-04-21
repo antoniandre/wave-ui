@@ -22,7 +22,7 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
     li.patch
-      strong.version v1.36.1
+      strong.version v1.36.3
       ul
         li #[strong.code w-textarea]: fix an issue with the auto-resize after value update. #[issue-link 88]
 
