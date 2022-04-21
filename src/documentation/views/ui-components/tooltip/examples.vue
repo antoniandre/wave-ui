@@ -2,15 +2,11 @@
 div.tooltips-demo
   alert(tip).
     #[strong Important notes]#[br]
-    By default when you use #[code &lt;w-tooltip&gt;], it creates a wrapper around the activator
-    element and the tooltip is added inside this wrapper.#[br]
-    In this case you can add classes to the wrapper to style it as desired.#[br]#[br]
-    But in some cases, for instance if the activator element is placed in a container that has a hidden
-    overflow, the tooltip needs to be placed outside of this container to be fully visible.#[br]
+    By default the tooltip is moved into the w-app in the DOM, so it is not constrained by a hidden
+    overflow on a parent.#[br]
+    When used inside a dialog, menu or drawer, it will be by default appended to that element.#[br]
     You can use the #[code appendTo] prop to place it elsewhere in the DOM, like in the
-    #[a(href="#appending-to-a-dom-node") Appending to a particular DOM node] example.#[br]
-    In this case, the wrapper will be hidden and unstylable whereas the tooltip itself will be appended to
-    the DOM node you provided.
+    #[a(href="#appending-to-a-dom-node") Appending to a particular DOM node] example.
 
   title-link(h2) Tooltip position
   example(content-class="text-center")
