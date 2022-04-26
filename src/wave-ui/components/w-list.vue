@@ -134,7 +134,7 @@ export default {
     icon: { type: String, default: '' },
     itemLabelKey: { type: String, default: 'label' }, // Name of the label field.
     itemValueKey: { type: String, default: 'value' }, // Name of the value field.
-    itemClassKey: { type: String, default: 'value' }, // Name of the class field.
+    itemClassKey: { type: String, default: 'class' }, // Name of the class field.
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     itemRouteKey: { type: String, default: 'route' }, // Name of the route field for `nav` lists.
     itemClass: { type: String },
