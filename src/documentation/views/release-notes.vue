@@ -21,6 +21,20 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+    li.minor
+      strong.version v1.37.0
+      ul
+        li #[strong.code w-list]: Added a new #[code item-class-key] option. #[span.new]
+
+    li.patch
+      strong.version v1.36.4
+      ul
+        li #[strong layout classes]: remove the default centering on the #[code shrink] class.
+
+    li.patch
+      strong.version v1.36.3
+      ul
+        li #[strong.code w-textarea]: fix an issue with the auto-resize after value update. #[issue-link 88]
 
     li.minor
       strong.version v2.36.0
@@ -181,7 +195,6 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
-
     li.patch
       strong.version v1.53.1
       ul

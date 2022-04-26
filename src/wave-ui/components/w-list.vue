@@ -134,6 +134,7 @@ export default {
     icon: { type: String, default: '' },
     itemLabelKey: { type: String, default: 'label' }, // Name of the label field.
     itemValueKey: { type: String, default: 'value' }, // Name of the value field.
+    itemClassKey: { type: String, default: 'value' }, // Name of the class field.
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     itemRouteKey: { type: String, default: 'route' }, // Name of the route field for `nav` lists.
     itemClass: { type: String },
@@ -230,7 +231,7 @@ export default {
         'w-list__item-label--selectable': this.isSelectable,
         [item.color]: !!item.color,
         [this.SelectionColor]: item._selected && !item.color && this.SelectionColor,
-        [this.itemClass]: !!this.itemClass
+        [item[this.itemClassKey] || this.itemClass]: item[this.itemClassKey] || this.itemClass
       }
     },
 
