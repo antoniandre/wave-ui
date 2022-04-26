@@ -28,8 +28,9 @@ const propsDescs = {
   icon: 'A global icon string to apply to all the list items. E.g. <code>mdi mdi-home</code>.',
   itemLabelKey: 'The property name (aka "key") in each item object where to find the label of the item.',
   itemValueKey: 'The property name (aka "key") in each item object where to find the value of the item.',
-  itemColorKey: 'The property name (aka "key") in each item object where to find the color of the item.',
-  itemRouteKey: 'The property name (aka "key") in each item object where to find the route of the item, to be used in <code>nav</code> lists.<br>Since we usually set a <code>to</code> prop for router-links/nuxt-links, and <code>href</code> for <span class="code">&lt;a&gt;</span> tags, the <code>route</code> option unifies both.',
+  itemClassKey: 'The property name (aka "key") in each item object where to find an optional CSS class for this item.',
+  itemColorKey: 'The property name (aka "key") in each item object where to find an optional color for this item.',
+  itemRouteKey: 'The property name (aka "key") in each item object where to find an optional route for this item, to be used in <code>nav</code> lists.<br>Since we usually set a <code>to</code> prop for router-links/nuxt-links, and <code>href</code> for <span class="code">&lt;a&gt;</span> tags, the <code>route</code> option unifies both.',
   itemClass: 'Applies a custom CSS class to every list item.',
   depth: false, // Hide this prop.
   returnObject: 'The current list selection is returned via the <code>value</code> prop or <code>v-model</code> as an array of full objects or a single full object (returning the original as given) when <code>multiple</code> is set to false.',
