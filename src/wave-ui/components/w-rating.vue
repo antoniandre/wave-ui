@@ -172,6 +172,7 @@ export default {
     border: none;
     background: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     @include default-transition($fast-transition-duration);
 
     // Disabled & readonly.

@@ -135,6 +135,7 @@ export default {
   &--clickable {
     cursor: pointer;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
 
     .w-tag__closable {
       margin-left: 3px;
@@ -166,6 +167,7 @@ export default {
       border-radius: $border-radius - 1;
       transition: 0.2s;
     }
+    &.w-tag--round:before {border-radius: inherit;}
 
     // Hover state.
     &:hover:before {background-color: currentColor;opacity: 0.06;}

@@ -282,6 +282,7 @@ export default {
     transition: $transition-duration ease-in-out, flex-grow 0s, flex 0s; // `flex` for Safari.
     user-select: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 
     .w-tabs--fill-bar & {flex-grow: 1;flex-basis: 0;}
     .w-tabs--card & {
