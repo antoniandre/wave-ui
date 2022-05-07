@@ -136,11 +136,9 @@ $inactive-color: #666;
   // Contain the hidden radio button, so browser doesn't pan to it when outside of the screen.
   position: relative;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
-  &--disabled {
-    cursor: not-allowed;
-    -webkit-tap-highlight-color: transparent;
-  }
+  &--disabled {cursor: not-allowed;}
 
   // The hidden real checkbox.
   input[type="checkbox"] {
@@ -237,7 +235,8 @@ $inactive-color: #666;
     animation: w-checkbox-ripple 0.55s 0.15s ease;
   }
 
-  :focus ~ &__input:before {
+  :focus ~ &__input:before,
+  :active ~ &__input:before {
     transform: scale(1.8);
     opacity: 0.2;
   }
