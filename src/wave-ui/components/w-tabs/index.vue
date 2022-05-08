@@ -193,6 +193,15 @@ export default {
       if (typeof index === 'string') index = ~~index
       else if (isNaN(index) || index < 0) index = 0
       this.activeTabIndex = index
+
+      // Scroll the new active tab item title into view if needed.
+      this.$nextTick(() => {
+        const ref = this.$refs['tabs-bar']
+        this.activeTabEl = ref && ref.querySelector(`.w-tabs__bar-item:nth-child(${index + 1})`)
+        if (this.activeTabEl) {
+          this.activeTabEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
+        }
+      })
     },
 
     // Return the original item (so there is no `_index`, etc.).
