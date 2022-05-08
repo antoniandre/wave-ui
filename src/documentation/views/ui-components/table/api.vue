@@ -66,6 +66,12 @@ const slots = {
       item: 'The full item object of the row being rendered.',
       index: 'The index of the row being rendered. Starts at 1.'
     }
+  },
+  footer: {
+    description: 'Provide a custom template for the table footer if you want one.<br>All the cells are merged in one for convenience, but if you need all the cells, you can use the <code>footer-row</code> slot.'
+  },
+  'footer-row': {
+    description: 'Provide a custom template for the table footer if you want one.<br>This slot lets you control the whole &lt;tr&gt;. It expects to receive a &lt;tr&gt; element containing &lt;td&gt;s or &lt;th&gt;s.'
   }
 }
 
