@@ -464,8 +464,8 @@ div
           @click="tabs7.tabsCount++;tabs7.currentTab = tabs7.tabsCount - 1")
     template(#pug).
       w-tabs(ref="tabs" :items="tabs.tabsCount" v-model="tabs.currentTab")
-        template(#item-title="{ index }") Item title {{ index }}
-        template(#item-content="{ index }") Item content {{ index }}
+        template(#item-title="{ index }") Item title {{ '\{\{ index \}\}' }}
+        template(#item-content="{ index }") Item content {{ '\{\{ index \}\}' }}
         template(#tabs-bar-extra)
           w-button.bdrsr.mr2(
             icon="wi-plus"
