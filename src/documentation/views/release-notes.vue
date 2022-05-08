@@ -22,14 +22,18 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
     li.minor
-      strong.version v1.37.1
+      strong.version v1.38.0
       ul
         li
-          strong w-accordion, w-button, w-list, w-rating, w-tabs, w-tag:
+          strong.code w-table:
+          ul
+            li added a #[code footer] slot &amp; #[code fixed-footer] option. #[span.new]
+        li
+          strong.code w-accordion, w-button, w-list, w-rating, w-tabs, w-tag:
           ul
             li remove the tap highlight color on IOS.
         li
-          strong w-tabs:
+          strong.code w-tabs:
           ul
             li automatically scroll active tab into view.
 
