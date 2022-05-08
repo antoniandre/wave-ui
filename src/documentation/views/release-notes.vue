@@ -28,6 +28,10 @@ main
           strong w-accordion, w-button, w-list, w-rating, w-tabs, w-tag:
           ul
             li remove the tap highlight color on IOS.
+        li
+          strong w-tabs:
+          ul
+            li automatically scroll active tab into view.
 
     li.minor
       strong.version v1.37.0
