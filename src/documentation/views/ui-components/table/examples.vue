@@ -173,6 +173,193 @@ div
         }
       })
 
+  title-link(h2 slug="example--footer") Footer
+  title-link(h3 slug="example--footer-slot") Footer slot
+  p.
+    A table footer can be added via the #[code footer] slot. If present, the footer will span on
+    all the columns by default.
+
+  .w-flex.justify-end
+    w-button(
+      @click="table3.fixedFooter = !table3.fixedFooter"
+      :outline="!table3.fixedFooter"
+      round)
+      span.code(:class="table3.fixedFooter ? 'white' : 'primary'") fixed-footer
+  example
+    w-table(
+      ref="table"
+      :headers="table3.headers"
+      :items="table3.items"
+      :fixed-footer="table3.fixedFooter"
+      style="height: 250px")
+      template(#footer)
+        w-flex(justify-space-between)
+          w-button(round sm @click="addRow")
+            w-icon.mr1 wi-plus
+            | add person
+          div
+            strong.mr2 Total:
+            | {{ table3.items.length }} persons
+    template(#pug).
+      w-table(
+        ref="table"
+        :headers="table.headers"
+        :items="table.items"
+        :fixed-footer="table.fixedFooter"
+        style="height: 250px")
+        template(#footer)
+          w-flex(justify-space-between)
+            w-button(round sm @click="addRow")
+              w-icon.mr1 wi-plus
+              | add person
+            div
+              strong.mr2 Total:
+              | {{ '\{\{ table.items.length \}\}' }} persons
+    template(#html).
+      &lt;w-table
+        ref="table"
+        :headers="table.headers"
+        :items="table.items"
+        :fixed-footer="table.fixedFooter"
+        style="height: 250px"&gt;
+        &lt;template #footer&gt;
+          &lt;w-flex justify-space-between&gt;
+            &lt;w-button round sm @click="addRow"&gt;
+              &lt;w-icon class="mr1"&gt;wi-plus&lt;/w-icon&gt;
+              add person
+            &lt;/w-button&gt;
+
+            &lt;div&gt;
+              &lt;strong class="mr2"&gt;Total:&lt;/strong&gt;
+              {{ '\{\{ table.items.length \}\}' }} persons
+            &lt;/div&gt;
+          &lt;/w-flex&gt;
+        &lt;/template&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+            { id: 6, firstName: 'Baldwin', lastName: 'Morison' },
+            { id: 7, firstName: 'Beckah', lastName: 'Mann' },
+            { id: 8, firstName: 'Davie', lastName: 'Forester' },
+            { id: 9, firstName: 'Andi', lastName: 'Montgomery' },
+            { id: 10, firstName: 'Magnolia', lastName: 'Kirk' },
+            { id: 11, firstName: 'Hamilton', lastName: 'Mallory' },
+            { id: 12, firstName: 'Sheree', lastName: 'Castle' },
+            { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
+            { id: 14, firstName: 'Maude', lastName: 'Hayley' },
+            { id: 15, firstName: 'Josie', lastName: 'Richard' }
+          ],
+          fixedFooter: false
+        },
+      }),
+
+      methods: {
+        addRow () {
+          this.table.items.push({
+            id: this.table.items.length + 1,
+            firstName: 'John',
+            lastName: 'Doe'
+          })
+          this.$nextTick(() => {
+            this.$refs.table.$el
+              .querySelector('tbody tr:last-child')
+              .scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+          })
+        }
+      }
+
+  title-link(h3 slug="example--footer-slot") Footer-row slot
+  p The #[code footer-row] slot will give you more flexibility as it lets you define the whole table row.
+  p It can be useful if you want to keep the columns alignments in the footer.
+  example
+    w-table(
+      ref="table"
+      :headers="table3.headers"
+      no-headers
+      :items="table3.items"
+      :fixed-footer="table3.fixedFooter"
+      style="height: 250px")
+      template(#footer-row)
+        tr
+          th.py1(
+            v-for="(header, i) in table3.headers"
+            :key="i"
+            :class="`${i ? 'px1' : 'px2'} text-${header.align || 'left'}`")
+            | {{ header.label }}
+    template(#pug).
+      w-table(
+        ref="table"
+        :headers="table.headers"
+        no-headers
+        :items="table.items"
+        fixed-footer
+        style="height: 250px")
+        template(#footer-row)
+          tr
+            th.py1(
+              v-for="&amp;#40;header, i&amp;#41; in table3.headers"
+              :key="i"
+              :class="`${i ? 'px1' : 'px2'} text-${header.align || 'left'}`")
+              | {{ '\{\{ header.label \}\}' }}
+    template(#html).
+      &lt;w-table
+        ref="table"
+        :headers="table.headers"
+        no-headers
+        :items="table.items"
+        fixed-footer
+        style="height: 250px"&gt;
+        &lt;template #footer-row&gt;
+          &lt;tr&gt;
+            &lt;th
+              v-for="(header, i) in table.headers"
+              :key="i"
+              :class="`py1 ${i ? 'px1' : 'px2'} text-${header.align || 'left'}`"&gt;
+              {{ '\{\{ header.label \}\}' }}
+            &lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/template&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+            { id: 6, firstName: 'Baldwin', lastName: 'Morison' },
+            { id: 7, firstName: 'Beckah', lastName: 'Mann' },
+            { id: 8, firstName: 'Davie', lastName: 'Forester' },
+            { id: 9, firstName: 'Andi', lastName: 'Montgomery' },
+            { id: 10, firstName: 'Magnolia', lastName: 'Kirk' },
+            { id: 11, firstName: 'Hamilton', lastName: 'Mallory' },
+            { id: 12, firstName: 'Sheree', lastName: 'Castle' },
+            { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
+            { id: 14, firstName: 'Maude', lastName: 'Hayley' },
+            { id: 15, firstName: 'Josie', lastName: 'Richard' }
+          ]
+        },
+      })
+
   title-link(h2) Built-in column resizing
   p.
     You can resize the columns by dragging their edges left or right.#[br]
@@ -1045,10 +1232,10 @@ div
 
   title-link(h2 slug="full-custom-rows") Full custom row (&lt;tr&gt; element itself)
   p.
-    In this example, the full &lt;tr&gt; DOM element is customized, so you can add your own classes and
-    full layout.#[br]
-    As you notice, the #[code item] slot gives you full flexibility, but the drawback is that's also
-    harder to write (more verbose).
+    In this example, the full &lt;tr&gt; DOM element is customized, so you can add your own classes
+    and full layout.#[br]
+    As you notice, the #[code item] slot gives you full flexibility, but the drawback is that's more
+    code to write.
   example
     w-table(:headers="table1.headers" :items="table1.items" selectable-rows)
       template(#item="{ item, index, select, classes }")
@@ -1293,7 +1480,8 @@ export default {
         item => item.lastName[0] === 'M',
         item => item.id >= 10
       ],
-      activeFilter: 0
+      activeFilter: 0,
+      fixedFooter: false
     },
     table4: {
       headers: [
@@ -1376,6 +1564,13 @@ export default {
       widths.forEach((width, i) => (this.table8.headers[i].width = width))
 
       localStorage.tableWidths = widths
+    },
+
+    addRow () {
+      this.table3.items.push({ id: this.table3.items.length + 1, firstName: 'John', lastName: 'Doe' })
+      this.$nextTick(() => {
+        this.$refs.table.$el.querySelector('tbody tr:last-child').scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      })
     }
   },
 

@@ -10,6 +10,8 @@
         v-for="(header, i) in headers"
         :key="i"
         :width="header.width || null")
+
+    //- Table header.
     thead(v-if="!noHeaders")
       tr
         th.w-table__header(
@@ -35,6 +37,8 @@
             v-if="i < headers.length - 1 && resizableColumns"
             :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === i }"
             @click.stop="/* Prevent click on header, which triggers sorting & DOM refresh. */")
+
+    //- Table body.
     tbody
       //- Progress bar.
       tr.w-table__progress-bar(v-if="loading")
@@ -114,6 +118,17 @@
                 span.w-table__col-resizer(
                   v-if="i < headers.length - 1 && resizableColumns"
                   :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
+      //- Extra row.
+      .w-table__extra-row(v-if="$slots['extra-row']")
+        slot(name="extra-row")
+
+    //- Table footer.
+    tfoot.w-table__footer(v-if="$slots.footer || $slots['footer-row']")
+      slot(v-if="$slots['footer-row']" name="footer-row")
+      tr.w-table__row(v-else)
+        td.w-table__cell(:colspan="headers.length")
+          slot(name="footer")
+      //- .pagination
 </template>
 
 <script>
@@ -133,6 +148,7 @@ export default {
     headers: { type: Array, required: true },
     noHeaders: { type: Boolean },
     fixedHeaders: { type: Boolean },
+    fixedFooter: { type: Boolean },
     loading: { type: Boolean },
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
@@ -175,7 +191,15 @@ export default {
     resizableColumns: { type: Boolean }
   },
 
-  emits: ['row-select', 'row-expand', 'row-click', 'update:sort', 'update:selected-rows', 'update:expanded-rows', 'column-resize'],
+  emits: [
+    'row-select',
+    'row-expand',
+    'row-click',
+    'update:sort',
+    'update:selected-rows',
+    'update:expanded-rows',
+    'column-resize'
+  ],
 
   data: () => ({
     activeSorting: [],
@@ -243,7 +267,8 @@ export default {
         'w-table--mobile': this.isMobile || null,
         'w-table--resizable-cols': this.resizableColumns || null,
         'w-table--resizing': this.colResizing.dragging,
-        'w-table--fixed-header': this.fixedHeaders
+        'w-table--fixed-header': this.fixedHeaders,
+        'w-table--fixed-footer': this.fixedFooter
       }
     },
 
@@ -523,7 +548,7 @@ $tr-border-top: 1px;
     text-overflow: ellipsis;
   }
 
-  &--fixed-header th {
+  &--fixed-header thead {
     position: sticky;
     top: 0;
     background-color: #fff;
@@ -630,6 +655,28 @@ $tr-border-top: 1px;
   .no-data &__cell {
     background-color: rgba(255, 255, 255, 0.2);
     padding: (2 * $base-increment) $base-increment;
+  }
+
+  // Table footer.
+  // ------------------------------------------------------
+  &__footer &__cell {
+    padding-top: $base-increment;
+    padding-bottom: $base-increment;
+  }
+
+  &--fixed-footer tfoot {
+    position: sticky;
+    bottom: 0;
+    background-color: #fff;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-bottom: $border;
+    }
   }
 }
 

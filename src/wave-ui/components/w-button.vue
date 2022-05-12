@@ -166,6 +166,7 @@ $spinner-size: 40;
   // Background-color must not transition to not affect the hover & focus states
   // in :before & :after.
   transition: $transition-duration, background-color 0s, padding 0s;
+  -webkit-tap-highlight-color: transparent;
 
   // In w-flex wrapper, allow overriding the default `align-self: center`.
   .w-flex.align-start > & {align-self: flex-start;}

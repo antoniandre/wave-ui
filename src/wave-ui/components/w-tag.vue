@@ -135,6 +135,7 @@ export default {
   &--clickable {
     cursor: pointer;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
 
     .w-tag__closable {
       margin-left: 3px;

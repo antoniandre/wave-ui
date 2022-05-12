@@ -189,6 +189,7 @@ export default {
     user-select: none;
     cursor: pointer;
     border-top: $border;
+    -webkit-tap-highlight-color: transparent;
 
     .w-accordion__item--disabled & {
       cursor: not-allowed;

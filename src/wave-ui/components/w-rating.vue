@@ -173,6 +173,7 @@ export default {
     border: none;
     background: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     @include default-transition($fast-transition-duration);
 
     // Disabled & readonly.
@@ -246,13 +247,16 @@ export default {
     animation: w-rating-ripple 0.55s ease;
   }
 
-  &__button:focus:after {
+  &__button:focus:after,
+  &__button:active:after {
     transform: scale(1.8);
     opacity: 0.2;
   }
   &__button--on:focus:after {
     transform: scale(1.8);
   }
+  .w-rating--disabled &__button:after,
+  .w-rating--readonly &__button:after {opacity: 0;}
 
   // After ripple reset to default state, then remove the class via js and the
   // `:focus + &__button:after` will re-transition to normal focused outline.

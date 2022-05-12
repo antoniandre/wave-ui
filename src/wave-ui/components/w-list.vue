@@ -484,6 +484,7 @@ export default {
     padding-top: 1px;
     padding-bottom: 1px;
     display: flex;
+    -webkit-tap-highlight-color: transparent;
 
     .w-list--navigation &,
     .w-list--checklist & {

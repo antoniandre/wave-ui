@@ -218,12 +218,12 @@ $circle-size: 40;
     background-image: linear-gradient(
                         -45deg,
                         rgba(255, 255, 255, 0.2) 25%,
-                        transparent 25%,
-                        transparent 50%,
+                        rgba(255, 255, 255, 0) 25%,
+                        rgba(255, 255, 255, 0) 50%,
                         rgba(255, 255, 255, 0.2) 50%,
                         rgba(255, 255, 255, 0.2) 75%,
-                        transparent 75%,
-                        transparent
+                        rgba(255, 255, 255, 0) 75%,
+                        rgba(255, 255, 255, 0)
                       );
     background-size: 50px 50px;
     animation: w-progress-stripes 2s infinite linear;
