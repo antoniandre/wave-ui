@@ -211,6 +211,27 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
+    li.minor
+      strong.version v1.55.0
+      ul
+        li
+          strong.code w-table:
+          ul
+            li added a #[code footer] slot &amp; #[code fixed-footer] option. #[span.new]
+        li
+          strong.code w-accordion, w-button, w-list, w-rating, w-tabs, w-tag:
+          ul
+            li remove the tap highlight color on IOS.
+        li
+          strong.code w-tabs:
+          ul
+            li automatically scroll active tab into view.
+
+    li.minor
+      strong.version v1.54.0
+      ul
+        li #[strong.code w-list]: Added a new #[code item-class-key] option. #[span.new]
+
     li.patch
       strong.version v1.53.1
       ul
