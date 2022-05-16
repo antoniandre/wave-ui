@@ -22,6 +22,11 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
     li.minor
+      strong.version v1.39.0
+      ul
+        li #[strong global CSS]: Append the Wave UI styles #[strong before] all the other styles, so your styles can override Wave UI's even more easily.
+
+    li.minor
       strong.version v1.38.0
       ul
         li
