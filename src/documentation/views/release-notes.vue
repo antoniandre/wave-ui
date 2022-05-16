@@ -217,6 +217,11 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     li.minor
+      strong.version v1.56.0
+      ul
+        li #[strong global CSS]: Append the Wave UI styles #[strong before] all the other styles, so your styles can override Wave UI's even more easily.
+
+    li.minor
       strong.version v1.55.0
       ul
         li
@@ -299,8 +304,8 @@ main
     li.minor
       strong.version v1.52.0
       ul
-        li #[strong.code w-toolbar]: New #[code vertical] option. #[span.new]
-        li #[strong.code w-divider]: Always stretch the divider, regardless of orientation (also when horizontal).
+        li #[strong.code w-toolbar]: new #[code vertical] option. #[span.new]
+        li #[strong.code w-divider]: always stretch the divider, regardless of orientation (also when horizontal).
 
     li.patch
       strong.version v1.51.1
