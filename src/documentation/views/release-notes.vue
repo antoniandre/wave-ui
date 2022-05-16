@@ -217,6 +217,11 @@ main
     //- Vue 2.
     //-----------------------------------------------------
     li.minor
+      strong.version v1.56.0
+      ul
+        li #[strong global CSS]: Append the Wave UI styles #[strong before] all the other styles, so your styles can override Wave UI's even more easily.
+
+    li.minor
       strong.version v1.55.0
       ul
         li
