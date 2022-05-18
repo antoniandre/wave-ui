@@ -216,6 +216,11 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
+    li.patch
+      strong.version v1.56.1
+      ul
+        li #[strong w-notification]: only add a white background color when none is set, or for the different types when not #[code plain].
+
     li.minor
       strong.version v1.56.0
       ul
