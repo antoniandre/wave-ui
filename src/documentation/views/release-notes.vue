@@ -21,6 +21,11 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+    li.patch
+      strong.version v1.39.2
+      ul
+        li #[strong w-notification]: only add a white background color when none is set, or for the different types when not #[code plain].
+
     li.minor
       strong.version v1.39.1
       ul
