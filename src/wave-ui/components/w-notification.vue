@@ -1,8 +1,9 @@
 <template lang="pug">
 transition(:name="transitionName" appear)
   .w-notification(v-if="show" :class="classes" :style="styles")
-    w-alert.white--bg(
+    w-alert(
       v-bind="alertProps"
+      :class="alertClasses"
       @input="$emit('update:modelValue', false);$emit('input', false)")
       slot
 </template>
@@ -116,6 +117,11 @@ export default {
         'w-notification--absolute': this.absolute,
         [`w-notification--${this.position.join(' w-notification--')}`]: true
       }
+    },
+
+    alertClasses () {
+      if (this.bgColor || ((this.success || this.info || this.warning || this.error) && this.plain)) return null
+      return 'white--bg'
     },
 
     styles () {
