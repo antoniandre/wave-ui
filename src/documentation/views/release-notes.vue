@@ -23,6 +23,11 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v1.40.0
+      ul
+        li Store and expose the Wave UI global config in the $waveui object.
+
+    li.patch
       strong.version v1.39.1
       ul
         li
