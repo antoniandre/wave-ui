@@ -11,6 +11,7 @@
     "./dist/wave-ui.css": "./dist/wave-ui.css",
     "./dist/wave-ui.cjs.js": "./dist/wave-ui.cjs.js",
     "./src/wave-ui": "./src/wave-ui/index.js",
+    "./src/wave-ui/scss/_variables.scss": "./src/wave-ui/scss/_variables.scss",
     ".": {
       "import": "./dist/wave-ui.es.js",
       "require": "./dist/wave-ui.umd.js"
