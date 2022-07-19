@@ -23,17 +23,17 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
-      strong.version v1.40.1
+      strong.version v2.40.1
       ul
         li Added SCSS vars file to the list of allowed package exports. #[issue-link 90]
 
     li.minor
-      strong.version v1.40.0
+      strong.version v2.40.0
       ul
         li Store and expose the Wave UI global config in the $waveui object. #[issue-link 91]
 
     li.patch
-      strong.version v1.39.1
+      strong.version v2.39.1
       ul
         li
           strong w-notification:
@@ -45,12 +45,12 @@ main
             li make the tabs bar #[code extra] slot stick to the right.
 
     li.minor
-      strong.version v1.39.0
+      strong.version v2.39.0
       ul
         li #[strong global CSS]: Append the Wave UI styles #[strong before] all the other styles, so your styles can override Wave UI's even more easily.
 
     li.minor
-      strong.version v1.38.0
+      strong.version v2.38.0
       ul
         li
           strong.code w-table:
@@ -66,17 +66,17 @@ main
             li automatically scroll active tab into view.
 
     li.minor
-      strong.version v1.37.0
+      strong.version v2.37.0
       ul
         li #[strong.code w-list]: Added a new #[code item-class-key] option. #[span.new]
 
     li.patch
-      strong.version v1.36.4
+      strong.version v2.36.4
       ul
         li #[strong layout classes]: remove the default centering on the #[code shrink] class.
 
     li.patch
-      strong.version v1.36.3
+      strong.version v2.36.3
       ul
         li #[strong.code w-textarea]: fix an issue with the auto-resize after value update. #[issue-link 88]
 
