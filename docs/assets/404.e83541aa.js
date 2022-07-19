@@ -1,1 +1,0 @@
-import{r as o,o as t,f as n,a,w as s,b as r,e as c,_ as l}from"./index.6bc90973.js";const _=c("404 - Not found"),i=r("p",null,"The page you are looking for was not found on the server.",-1);function d(u,m){const e=o("title-link");return t(),n("main",null,[a(e,{class:"mt4",h1:""},{default:s(()=>[_]),_:1}),i])}const f={};var h=l(f,[["render",d]]);export{h as default};
