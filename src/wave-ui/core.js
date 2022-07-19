@@ -40,6 +40,8 @@ export default class WaveUI {
     return obj
   }, { ...config.colors, black: '#000', white: '#fff', transparent: 'transparent', inherit: 'inherit' })
 
+  config = {} // Store and expose the config in the $waveui object.
+
   static install (app, options = {}) {
     // Register directives.
     // for (const id in directives) {
@@ -108,6 +110,7 @@ export default class WaveUI {
         }
       }
 
+      this.config = config
       WaveUI.instance = this
       // Make waveui reactive and expose the single instance in Vue.
       app.config.globalProperties.$waveui = reactive(this)
