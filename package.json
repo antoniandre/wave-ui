@@ -3,6 +3,9 @@
   "version": "2.40.2",
   "description": "An emerging UI framework for Vue.js (2 & 3) with only the bright side. :sunny:",
   "author": "Antoni Andre <antoniandre.web@gmail.com>",
+  "license": "MIT",
+  "repository": "https://github.com/antoniandre/wave-ui",
+  "funding": "https://github.com/sponsors/antoniandre",
   "main": "./dist/wave-ui.umd.js",
   "unpkg": "dist/wave-ui.umd.js",
   "jsdelivr": "dist/wave-ui.umd.js",
@@ -30,8 +33,6 @@
     "vue framework",
     "ui"
   ],
-  "license": "MIT",
-  "repository": "https://github.com/antoniandre/wave-ui",
   "scripts": {
     "dev": "vite",
     "build": "vite build --base /wave-ui/",
