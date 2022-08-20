@@ -23,6 +23,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v2.40.2
+      ul
+        li
+          strong.code w-form
+          ul
+            li Allow resetting w-form with null v-model. #[issue-link 93]
+
+    li.patch
       strong.version v2.40.1
       ul
         li Added SCSS vars file to the list of allowed package exports. #[issue-link 90]
@@ -36,11 +44,11 @@ main
       strong.version v2.39.1
       ul
         li
-          strong w-notification:
+          strong.code w-notification:
           ul
             li only add a white background color when none is set, or for the different types when not #[code plain].
         li
-          strong w-tabs:
+          strong.code w-tabs:
           ul
             li make the tabs bar #[code extra] slot stick to the right.
 

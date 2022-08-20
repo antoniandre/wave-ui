@@ -31,6 +31,7 @@ w-app
       w-select(:items="[{ label: 'item 1' }]" label-color="grey-dark1" outline label-position="left" :validators="[v => !!v || 'required']") Label<br>yo
       w-select(:items="[{ label: 'item 1' }]" label-color="grey-dark1" outline :validators="[v => !!v || 'required']") Label<br>yo
       w-button(type="submit") ok
+      w-button(type="reset") cancel
 
     w-menu(overlay arrow)
       template(#activator="{ on }")
