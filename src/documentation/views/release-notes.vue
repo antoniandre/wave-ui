@@ -23,12 +23,20 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v2.40.4
+      ul
+        li
+          strong Notifications
+          ul
+            li Expose the #[code notify] method in #[code $waveui]. #[issue-link 95]
+
+    li.patch
       strong.version v2.40.3
       ul
         li
           strong.code w-form
           ul
-            li Allow resetting w-form with null v-model. #[issue-link 93]
+            li Allow resetting #[strong.code w-form] with null #[code v-model]. #[issue-link 93]
 
     li.patch
       strong.version v2.40.1
@@ -38,7 +46,7 @@ main
     li.minor
       strong.version v2.40.0
       ul
-        li Store and expose the Wave UI global config in the $waveui object. #[issue-link 91]
+        li Store and expose the Wave UI global config in the #[code $waveui] object. #[issue-link 91]
 
     li.patch
       strong.version v2.39.1
