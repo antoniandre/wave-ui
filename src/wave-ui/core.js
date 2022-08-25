@@ -111,7 +111,7 @@ export default class WaveUI {
       }
 
       this.config = config
-      this.notify = notificationManager.notify
+      this.notify = (...args) => notificationManager.notify(...args)
       WaveUI.instance = this
 
       // Make waveui reactive and expose the single instance in Vue.
