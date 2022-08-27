@@ -359,6 +359,7 @@ export default {
   // ------------------------------------------------------
   &__content-wrap {
     position: relative;
+    flex-grow: 1;
 
     .w-tabs--card & {
       border: $border;
