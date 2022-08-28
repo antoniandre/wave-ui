@@ -23,6 +23,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v2.40.6
+      ul
+        li
+          strong.code w-tabs
+          ul
+            li Always fill up the content height.
+
+    li.patch
       strong.version v2.40.5
       ul
         li
@@ -52,11 +60,11 @@ main
       strong.version v2.39.1
       ul
         li
-          strong.code w-notification:
+          strong.code w-notification
           ul
             li only add a white background color when none is set, or for the different types when not #[code plain].
         li
-          strong.code w-tabs:
+          strong.code w-tabs
           ul
             li make the tabs bar #[code extra] slot stick to the right.
 
@@ -69,7 +77,7 @@ main
       strong.version v2.38.0
       ul
         li
-          strong.code w-table:
+          strong.code w-table
           ul
             li added a #[code footer] slot &amp; #[code fixed-footer] option. #[span.new]
         li
@@ -77,7 +85,7 @@ main
           ul
             li remove the tap highlight color on IOS.
         li
-          strong.code w-tabs:
+          strong.code w-tabs
           ul
             li automatically scroll active tab into view.
 
