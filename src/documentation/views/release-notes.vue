@@ -22,6 +22,14 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v2.41.0
+      ul
+        li
+          strong.code w-table
+          ul
+            li Added ability to stick the columns to the left. #[issue-link 36]
+
     li.patch
       strong.version v2.40.6
       ul
