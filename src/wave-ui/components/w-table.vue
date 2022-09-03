@@ -73,7 +73,7 @@
                 v-if="$slots[`item-cell.${header.key}`] || $slots[`item-cell.${j + 1}`] || $slots['item-cell']"
                 :key="`${j}-a`"
                 :data-label="header.label"
-                :class="`text-${header.align || 'left'}`")
+                :class="{ [`text-${header.align || 'left'}`]: true, 'w-table__cell--sticky': header.sticky }")
                 slot(
                   v-if="$slots[`item-cell.${header.key}`]"
                   :name="`item-cell.${header.key}`"
@@ -103,7 +103,7 @@
                 v-else
                 :key="`${j}-b`"
                 :data-label="header.label"
-                :class="`text-${header.align || 'left'}`")
+                :class="{ [`text-${header.align || 'left'}`]: true, 'w-table__cell--sticky': header.sticky }")
                 div(v-html="item[header.key] || ''")
                 span.w-table__col-resizer(
                   v-if="j < headers.length - 1 && resizableColumns"
@@ -147,6 +147,7 @@ export default {
     items: { type: Array, required: true },
     headers: { type: Array, required: true },
     noHeaders: { type: Boolean },
+    fixedLayout: { type: Boolean },
     fixedHeaders: { type: Boolean },
     fixedFooter: { type: Boolean },
     loading: { type: Boolean },
@@ -264,16 +265,22 @@ export default {
 
     classes () {
       return {
+        'w-table--fixed-layout': this.fixedLayout || this.resizableColumns || this.hasStickyColumn,
         'w-table--mobile': this.isMobile || null,
         'w-table--resizable-cols': this.resizableColumns || null,
         'w-table--resizing': this.colResizing.dragging,
         'w-table--fixed-header': this.fixedHeaders,
-        'w-table--fixed-footer': this.fixedFooter
+        'w-table--fixed-footer': this.fixedFooter,
+        'w-table--sticky-column': this.hasStickyColumn
       }
     },
 
     isMobile () {
       return ~~this.mobileBreakpoint && this.$waveui.breakpoint.width <= ~~this.mobileBreakpoint
+    },
+
+    hasStickyColumn () {
+      return this.headers.find(header => header.sticky)
     },
 
     // Faster lookup than array.includes(uid) and also cached.
@@ -291,6 +298,7 @@ export default {
     headerClasses (header) {
       return {
         'w-table__header--sortable': header.sortable !== false, // Can also be falsy with `0`.
+        'w-table__header--sticky': header.sticky,
         'w-table__header--resizable': !!this.resizableColumns,
         [`text-${header.align || 'left'}`]: true
       }
@@ -529,7 +537,7 @@ $tr-border-top: 1px;
   border-collapse: collapse;
   border: none;
 
-  &--resizable-cols {
+  &--fixed-layout {
     table-layout: fixed; // Allow resizing beyond the cell minimum text width.
   }
 
@@ -552,6 +560,7 @@ $tr-border-top: 1px;
     position: sticky;
     top: 0;
     background-color: #fff;
+    z-index: 1; // For sticky columns to go under.
 
     &:after {
       content: '';
@@ -560,6 +569,22 @@ $tr-border-top: 1px;
       left: 0;
       right: 0;
       border-bottom: $border;
+    }
+  }
+
+  &__header--sticky {
+    position: sticky;
+    left: 0;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      background-color: #fff;
     }
   }
 
@@ -652,6 +677,24 @@ $tr-border-top: 1px;
     }
   }
 
+  &__cell--sticky {
+    position: sticky;
+    left: 0;
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+    &:before {background-color: #fff;}
+  }
+  tr:nth-child(odd) &__cell--sticky:after {background-color: $table-tr-odd-color;}
+  tr:hover &__cell--sticky:after {background-color: $table-tr-hover-color;}
+
   .no-data &__cell {
     background-color: rgba(255, 255, 255, 0.2);
     padding: (2 * $base-increment) $base-increment;
@@ -668,6 +711,7 @@ $tr-border-top: 1px;
     position: sticky;
     bottom: 0;
     background-color: #fff;
+    z-index: 1; // For sticky columns to go under.
 
     &:after {
       content: '';
