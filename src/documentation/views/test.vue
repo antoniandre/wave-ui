@@ -1,8 +1,11 @@
 <template lang="pug">
 w-app
+  w-button(@click="$waveui.notify('test too easy')") Notify too easy
+  w-button(@click="notify") Notify. oh yeah.
+
   .test.ma12.pa12.bd1.bdrs2.blue-light5--bg
     h1.mt0 Testing playground
-    w-form(v-model="formValid" validation-color="pink")
+    //- w-form(v-model="formValid" validation-color="pink")
       w-slider(label-color="grey-dark1" :validators="[v => !!v || 'required']" label-left="hey<br>yo" label-right="right")
       w-slider(label-color="grey-dark1" label-on-left :validators="[v => !!v || 'required']" label-left="hey<br>yo" label-right="right")
       w-slider(label-color="grey-dark1" label-on-right :validators="[v => !!v || 'required']" label-left="hey<br>yo" label-right="right")
@@ -53,7 +56,7 @@ w-app
               span(v-on="on") I have a tooltip
             | I'm a tooltip.
 
-    w-drawer(
+    //- w-drawer(
       push-content
       v-model="openDrawer"
       @before-close="log('before-close')"
@@ -72,7 +75,7 @@ w-app
             Show tooltip
         | tooltip.
 
-    w-drawer(
+    //- w-drawer(
       :model-value="true"
       @before-close="log('before-close')"
       @close="log('close')")
@@ -82,7 +85,7 @@ w-app
             Show tooltip
         | tooltip.
 
-    w-overlay(v-model="showOverlay"
+    //- w-overlay(v-model="showOverlay"
       @before-close="log('before-close')"
       @close="log('close')")
       w-tooltip
@@ -91,7 +94,7 @@ w-app
             Show tooltip
         | tooltip.
 
-    .select-in-dialog
+    //- .select-in-dialog
       w-button(@click="showDialog = true") open
       w-dialog(v-model="showDialog"
         @before-close="log('before-close')"
@@ -103,27 +106,40 @@ w-app
           | tooltip.
         w-select.mt6(:items="items" label="Select")
 
-    w-select.mt6(:items="items" label="Select" multiple)
+    //- w-select.mt6(:items="items" label="Select" multiple)
 </template>
 
 <script>
-export default {
-  data: () => ({
-    formValid: null,
-    showDialog: true,
-    showOverlay: true,
-    openDrawer: true,
-    items: [{ value: 'value 1', label: 'Item 1' }, { value: 'value 2', label: 'Item 2' }]
-  }),
+// export default {
+//   data: () => ({
+//     formValid: null,
+//     showDialog: true,
+//     showOverlay: true,
+//     openDrawer: true,
+//     items: [{ value: 'value 1', label: 'Item 1' }, { value: 'value 2', label: 'Item 2' }]
+//   }),
 
-  methods: {
-    log (...params) {console.log(...params)}
-  },
-  mounted () {
-  }
-}
+//   methods: {
+//     log (...params) {console.log(...params)}
+//   },
+//   mounted () {
+//   }
+// }
 </script>
 
+<script setup>
+import { onMounted } from 'vue'
+import { useWaveUI } from '@/wave-ui/index'
+
+const waveui = useWaveUI()
+
+const notify = () => {
+  waveui.notify('test!')
+}
+onMounted(() => {
+  console.log(waveui)
+})
+</script>
 <style lang="scss">
 
 </style>
