@@ -128,17 +128,17 @@ w-app
 </script>
 
 <script setup>
-import { onMounted } from 'vue'
-import { useWaveUI } from '@/wave-ui/index'
+// import { onMounted } from 'vue'
+// import { useWaveUI } from '@/wave-ui/index'
 
-const waveui = useWaveUI()
+// const waveui = useWaveUI()
 
-const notify = () => {
-  waveui.notify('test!')
-}
-onMounted(() => {
-  console.log(waveui)
-})
+// const notify = () => {
+//   waveui.notify('test!')
+// }
+// onMounted(() => {
+//   console.log(waveui)
+// })
 </script>
 <style lang="scss">
 
