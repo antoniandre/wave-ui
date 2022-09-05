@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { reactive, inject } from 'vue'
 import config, { mergeConfig } from './utils/config'
 import NotificationManager from './utils/notification-manager'
 import colors from './utils/colors'
@@ -116,6 +116,7 @@ export default class WaveUI {
 
       // Make waveui reactive and expose the single instance in Vue.
       app.config.globalProperties.$waveui = reactive(this)
+      app.provide('$waveui', WaveUI.instance)
     }
   }
 
@@ -124,4 +125,7 @@ export default class WaveUI {
   }
 }
 
-WaveUI.version = '__VERSION__'
+/**
+ * Returns the WaveUI instance. Equivalent to using `$waveui` inside templates.
+ */
+export const useWaveUI = () => inject('$waveui')
