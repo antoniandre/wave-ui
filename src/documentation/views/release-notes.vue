@@ -22,6 +22,14 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v2.41.1
+      ul
+        li
+          strong.code w-button
+          ul
+            li Consider tel &amp; mailto external address.
+
     li.minor
       strong.version v2.41.0
       ul
