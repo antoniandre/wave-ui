@@ -10,8 +10,6 @@ component.w-icon(
 </template>
 
 <script>
-import config from '../utils/config'
-
 export default {
   name: 'w-icon',
 
@@ -47,7 +45,7 @@ export default {
 
   computed: {
     hasLigature () {
-      return config.iconsLigature === this.fontName
+      return this.$waveui.config.iconsLigature === this.fontName
     },
     forcedSize () {
       return this.size && (!isNaN(this.size) ? `${this.size}px` : this.size)

@@ -3,6 +3,9 @@
   "version": "1.56.1",
   "description": "An emerging UI framework for Vue.js (2 & 3) with only the bright side. :sunny:",
   "author": "Antoni Andre <antoniandre.web@gmail.com>",
+  "license": "MIT",
+  "repository": "https://github.com/antoniandre/wave-ui",
+  "funding": "https://github.com/sponsors/antoniandre",
   "main": "./dist/wave-ui.umd.js",
   "unpkg": "dist/wave-ui.umd.js",
   "jsdelivr": "dist/wave-ui.umd.js",
@@ -11,6 +14,7 @@
     "./dist/wave-ui.css": "./dist/wave-ui.css",
     "./dist/wave-ui.cjs.js": "./dist/wave-ui.cjs.js",
     "./src/wave-ui": "./src/wave-ui/index.js",
+    "./src/wave-ui/scss/_variables.scss": "./src/wave-ui/scss/_variables.scss",
     ".": {
       "import": "./dist/wave-ui.es.js",
       "require": "./dist/wave-ui.umd.js"
@@ -29,13 +33,11 @@
     "vue framework",
     "ui"
   ],
-  "license": "MIT",
-  "repository": "https://github.com/antoniandre/wave-ui",
   "scripts": {
     "dev": "vite",
     "build": "vite build --base /wave-ui/",
     "build-bundle": "BUNDLE=true vite build && mv ./dist/style.css ./dist/wave-ui.css",
-    "serve": "vite preview --root docs --base /wave-ui/",
+    "serve": "vite preview --base /wave-ui/",
     "lint": "vite lint"
   },
   "sideEffects": [

@@ -21,16 +21,79 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+
+    li.patch
+      strong.version v2.41.2
+      ul
+        li
+          strong.code w-button
+          ul
+            li Consider tel &amp; mailto external address.
+
     li.minor
-      strong.version v1.39.0
+      strong.version v2.41.0
+      ul
+        li
+          strong.code w-table
+          ul
+            li Added ability to stick the columns to the left. #[issue-link 36]
+
+    li.patch
+      strong.version v2.40.6
+      ul
+        li
+          strong.code w-tabs
+          ul
+            li Always fill up the content height.
+
+    li.patch
+      strong.version v2.40.5
+      ul
+        li
+          strong Notifications
+          ul
+            li Expose the #[code notify] method in #[code $waveui]. #[issue-link 95]
+
+    li.patch
+      strong.version v2.40.3
+      ul
+        li
+          strong.code w-form
+          ul
+            li Allow resetting #[strong.code w-form] with null #[code v-model]. #[issue-link 93]
+
+    li.patch
+      strong.version v2.40.1
+      ul
+        li Added SCSS vars file to the list of allowed package exports. #[issue-link 90]
+
+    li.minor
+      strong.version v2.40.0
+      ul
+        li Store and expose the Wave UI global config in the #[code $waveui] object. #[issue-link 91]
+
+    li.patch
+      strong.version v2.39.1
+      ul
+        li
+          strong.code w-notification
+          ul
+            li only add a white background color when none is set, or for the different types when not #[code plain].
+        li
+          strong.code w-tabs
+          ul
+            li make the tabs bar #[code extra] slot stick to the right.
+
+    li.minor
+      strong.version v2.39.0
       ul
         li #[strong global CSS]: Append the Wave UI styles #[strong before] all the other styles, so your styles can override Wave UI's even more easily.
 
     li.minor
-      strong.version v1.38.0
+      strong.version v2.38.0
       ul
         li
-          strong.code w-table:
+          strong.code w-table
           ul
             li added a #[code footer] slot &amp; #[code fixed-footer] option. #[span.new]
         li
@@ -38,22 +101,22 @@ main
           ul
             li remove the tap highlight color on IOS.
         li
-          strong.code w-tabs:
+          strong.code w-tabs
           ul
             li automatically scroll active tab into view.
 
     li.minor
-      strong.version v1.37.0
+      strong.version v2.37.0
       ul
         li #[strong.code w-list]: Added a new #[code item-class-key] option. #[span.new]
 
     li.patch
-      strong.version v1.36.4
+      strong.version v2.36.4
       ul
         li #[strong layout classes]: remove the default centering on the #[code shrink] class.
 
     li.patch
-      strong.version v1.36.3
+      strong.version v2.36.3
       ul
         li #[strong.code w-textarea]: fix an issue with the auto-resize after value update. #[issue-link 88]
 
@@ -311,6 +374,13 @@ main
       ul
         li #[strong.code w-toolbar]: new #[code vertical] option.
         li #[strong.code w-divider]: always stretch the divider, regardless of orientation (also when horizontal).
+        li #[strong.code w-toolbar]: new #[code vertical] option. #[span.new]
+        li #[strong.code w-divider]: always stretch the divider, regardless of orientation (also when horizontal).
+
+    li.patch
+      strong.version v1.51.1
+      ul
+        li #[strong.code w-dialog]: Fix an issue where a #[strong.code w-select] would disappear on dialog close. #[issue-link 82]
 
     li.minor
       strong.version v1.51.0

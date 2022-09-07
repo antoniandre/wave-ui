@@ -144,12 +144,10 @@ export default {
       el.Validation.message = validationMessage
     },
 
+    // Reset is called from:
+    // - the form `reset` event listener
+    // - the modelValue watcher when set to `null`.
     reset (e) {
-      // Reset is called from:
-      //   - the form `reset` event listener
-      //   - the value watcher when set to `null`.
-      // Prevent resetting twice on form reset that sets the value to null.
-      if (!e) return
       this.status = null
 
       // Since the whole w-form may be disabled or readonly,

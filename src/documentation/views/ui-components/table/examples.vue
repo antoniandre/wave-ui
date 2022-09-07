@@ -513,6 +513,81 @@ div
         }
       })
 
+  title-link(h2) Sticky columns
+  p.
+    To make a column sticky, you only need to add #[code sticky: true] to the header of that
+    column.#[br]
+    The sticky mechanism is done via CSS (position: sticky). So if you set multiple sticky
+    columns, one will overlap the previous one as you scroll.
+  p.grey Scroll the table horizontally to observe the behavior.
+  example
+    .w-flex.align-center.mb2
+      | Sticky columns:
+      w-radios.ml1.mr4(
+        v-model="table9.stickyColumn"
+        :items="table9.stickyColumnOptions"
+        @change="toggleStickyColumn"
+        inline)
+      w-button(
+        @click="table9.fixedHeaders = !table9.fixedHeaders"
+        :outline="!table9.fixedHeaders"
+        round)
+        span.code(:class="table9.fixedHeaders ? 'white' : 'primary'") fixed-headers
+
+    w-table.white--bg(
+      :headers="table9.headers"
+      :items="table9.items"
+      fixed-layout
+      :fixed-headers="table9.fixedHeaders"
+      style="max-width: 500px;height: 200px")
+    template(#pug).
+      w-table(
+      :headers="table.headers"
+      :items="table.items"
+      fixed-layout
+      :fixed-headers="table.fixedHeaders"
+      style="max-width: 500px;height: 200px")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        fixed-layout
+        :fixed-headers="table.fixedHeaders"
+        style="max-width: 500px;height: 200px"&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          fixedHeaders: false,
+          headers: [
+            { label: 'ID', key: 'id', hidden: false, width: '60px', sticky: true },
+            { label: 'First name', key: 'firstName', hidden: false, width: '120px' },
+            { label: 'Last name', key: 'lastName', hidden: false, width: '120px' },
+            { label: 'Birthday', key: 'birthday', email: false, width: '150px' },
+            { label: 'Email', key: 'email', hidden: false, width: '200px' },
+            { label: 'Phone', key: 'phone', hidden: false, width: '200px' },
+            { label: 'Country', key: 'country', hidden: false, width: '200px' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson', birthday: 'Feb. 12, 1976', email: 'f.sampson@gmail.com', phone: '+21 234 567 8921', country: 'United Kingdom' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn', birthday: 'Dec. 15, 1995', email: 'n.lynn@gmail.com', phone: '+22 234 567 8922', country: 'Luxembourg' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol', birthday: 'Apr. 25, 1989', email: 'r.bristol@gmail.com', phone: '+23 234 567 8923', country: 'Montenegro' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott', birthday: 'Mar. 24, 2002', email: 'd.elliott@gmail.com', phone: '+24 234 567 8924', country: 'Germany' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman', birthday: 'Aug. 2, 1990', email: 'v.carman@gmail.com', phone: '+25 234 567 8925', country: 'Ukraine' },
+            { id: 6, firstName: 'Baldwin', lastName: 'Morison', birthday: 'Feb. 12, 2008', email: 'b.morison@gmail.com', phone: '+26 234 567 8926', country: 'Lithuania' },
+            { id: 7, firstName: 'Beckah', lastName: 'Mann', birthday: 'Nov. 6, 1991', email: 'b.mann@gmail.com', phone: '+27 234 567 8927', country: 'Finland' },
+            { id: 8, firstName: 'Davie', lastName: 'Forester', birthday: 'Dec. 6, 1982', email: 'd.forester@gmail.com', phone: '+28 234 567 8928', country: 'Portugal' },
+            { id: 9, firstName: 'Andi', lastName: 'Montgomery', birthday: 'Jan. 20, 1987', email: 'a.montgomery@gmail.com', phone: '+29 234 567 8929', country: 'Czechia' },
+            { id: 10, firstName: 'Magnolia', lastName: 'Kirk', birthday: 'Dec. 31, 1992', email: 'm.kirk@gmail.com', phone: '+30 234 567 8930', country: 'Norway' },
+            { id: 11, firstName: 'Hamilton', lastName: 'Mallory', birthday: 'Dec. 7, 1979', email: 'h.mallory@gmail.com', phone: '+31 234 567 8931', country: 'Greece' },
+            { id: 12, firstName: 'Sheree', lastName: 'Castle', birthday: 'Feb. 16, 1980', email: 's.castle@gmail.com', phone: '+32 234 567 8932', country: 'France' },
+            { id: 13, firstName: 'Rebekah', lastName: 'Eason', birthday: 'Jun. 29, 2000', email: 'r.eason@gmail.com', phone: '+33 234 567 8933', country: 'Poland' },
+            { id: 14, firstName: 'Maude', lastName: 'Hayley', birthday: 'Dec. 31, 2009', email: 'm.hayley@gmail.com', phone: '+34 234 567 8934', country: 'Hungary' },
+            { id: 15, firstName: 'Josie', lastName: 'Richard', birthday: 'Aug. 16, 2004', email: 'j.richard@gmail.com', phone: '+35 234 567 8935', country: 'Italy' }
+          ]
+        }
+      })
+
   title-link(h2) Initial Sorting
   p.
     To make the sorting API very easy to use and remember (and avoid complex array or object structures),
@@ -1542,6 +1617,42 @@ export default {
         { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' }
       ]
     },
+    table9: {
+      stickyColumn: 1,
+      fixedHeaders: false,
+      stickyColumnOptions: [
+        { value: 1, label: '#1' },
+        { value: 2, label: '#2' },
+        { value: 24, label: '#2 & #4' },
+        { value: 0, label: 'None' }
+      ],
+      headers: [
+        { label: 'ID', key: 'id', hidden: false, width: '60px', sticky: true },
+        { label: 'First name', key: 'firstName', hidden: false, width: '120px' },
+        { label: 'Last name', key: 'lastName', hidden: false, width: '120px' },
+        { label: 'Birthday', key: 'birthday', email: false, width: '150px' },
+        { label: 'Email', key: 'email', hidden: false, width: '200px' },
+        { label: 'Phone', key: 'phone', hidden: false, width: '200px' },
+        { label: 'Country', key: 'country', hidden: false, width: '200px' }
+      ],
+      items: [
+        { id: 1, firstName: 'Floretta', lastName: 'Sampson', birthday: 'Feb. 12, 1976', email: 'f.sampson@gmail.com', phone: '+21 234 567 8921', country: 'United Kingdom' },
+        { id: 2, firstName: 'Nellie', lastName: 'Lynn', birthday: 'Dec. 15, 1995', email: 'n.lynn@gmail.com', phone: '+22 234 567 8922', country: 'Luxembourg' },
+        { id: 3, firstName: 'Rory', lastName: 'Bristol', birthday: 'Apr. 25, 1989', email: 'r.bristol@gmail.com', phone: '+23 234 567 8923', country: 'Montenegro' },
+        { id: 4, firstName: 'Daley', lastName: 'Elliott', birthday: 'Mar. 24, 2002', email: 'd.elliott@gmail.com', phone: '+24 234 567 8924', country: 'Germany' },
+        { id: 5, firstName: 'Virgil', lastName: 'Carman', birthday: 'Aug. 2, 1990', email: 'v.carman@gmail.com', phone: '+25 234 567 8925', country: 'Ukraine' },
+        { id: 6, firstName: 'Baldwin', lastName: 'Morison', birthday: 'Feb. 12, 2008', email: 'b.morison@gmail.com', phone: '+26 234 567 8926', country: 'Lithuania' },
+        { id: 7, firstName: 'Beckah', lastName: 'Mann', birthday: 'Nov. 6, 1991', email: 'b.mann@gmail.com', phone: '+27 234 567 8927', country: 'Finland' },
+        { id: 8, firstName: 'Davie', lastName: 'Forester', birthday: 'Dec. 6, 1982', email: 'd.forester@gmail.com', phone: '+28 234 567 8928', country: 'Portugal' },
+        { id: 9, firstName: 'Andi', lastName: 'Montgomery', birthday: 'Jan. 20, 1987', email: 'a.montgomery@gmail.com', phone: '+29 234 567 8929', country: 'Czechia' },
+        { id: 10, firstName: 'Magnolia', lastName: 'Kirk', birthday: 'Dec. 31, 1992', email: 'm.kirk@gmail.com', phone: '+30 234 567 8930', country: 'Norway' },
+        { id: 11, firstName: 'Hamilton', lastName: 'Mallory', birthday: 'Dec. 7, 1979', email: 'h.mallory@gmail.com', phone: '+31 234 567 8931', country: 'Greece' },
+        { id: 12, firstName: 'Sheree', lastName: 'Castle', birthday: 'Feb. 16, 1980', email: 's.castle@gmail.com', phone: '+32 234 567 8932', country: 'France' },
+        { id: 13, firstName: 'Rebekah', lastName: 'Eason', birthday: 'Jun. 29, 2000', email: 'r.eason@gmail.com', phone: '+33 234 567 8933', country: 'Poland' },
+        { id: 14, firstName: 'Maude', lastName: 'Hayley', birthday: 'Dec. 31, 2009', email: 'm.hayley@gmail.com', phone: '+34 234 567 8934', country: 'Hungary' },
+        { id: 15, firstName: 'Josie', lastName: 'Richard', birthday: 'Aug. 16, 2004', email: 'j.richard@gmail.com', phone: '+35 234 567 8935', country: 'Italy' }
+      ]
+    },
     selectableRowsOptions: [
       { label: '<code class="mr2">:selectable-row="false"</code> (default)', value: false },
       { label: '<code>selectable-row</code>', value: true },
@@ -1571,6 +1682,18 @@ export default {
       this.$nextTick(() => {
         this.$refs.table.$el.querySelector('tbody tr:last-child').scrollIntoView({ behavior: 'smooth', block: 'nearest' })
       })
+    },
+
+    toggleStickyColumn () {
+      this.table9.headers.forEach(header => header.sticky = false)
+
+      switch (this.table9.stickyColumn) {
+        case 1: return this.table9.headers[0].sticky = true
+        case 2: return this.table9.headers[1].sticky = true
+        case 24:
+          this.table9.headers[1].sticky = true
+          return this.table9.headers[3].sticky = true
+      }
     }
   },
 

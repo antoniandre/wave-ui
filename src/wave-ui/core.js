@@ -34,6 +34,8 @@ export default class WaveUI {
     return obj
   }, { ...config.colors, black: '#000', white: '#fff', transparent: 'transparent', inherit: 'inherit' })
 
+  config = {} // Store and expose the config in the $waveui object.
+
   static install (Vue, options = {}) {
     // Register directives.
     // for (const id in directives) {
@@ -103,7 +105,10 @@ export default class WaveUI {
         }
       }
 
+      this.config = config
+      this.notify = (...args) => notificationManager.notify(...args)
       WaveUI.instance = this
+
       // Make waveui reactive and expose the single instance in Vue.
       WaveUI.vueInstance.prototype.$waveui = WaveUI.vueInstance.observable(this)
 
@@ -116,4 +121,7 @@ export default class WaveUI {
   }
 }
 
-WaveUI.version = '__VERSION__'
+/**
+ * Returns the WaveUI instance. Equivalent to using `$waveui` inside templates.
+ */
+export const useWaveUI = () => inject('$waveui')

@@ -329,6 +329,8 @@ export default {
   &__bar-extra {
     margin-left: auto;
     align-self: center;
+    position: sticky;
+    right: 0;
 
     .w-tabs__bar--right &,
     .w-tabs__bar--center & {margin-left: 0;}
@@ -356,6 +358,7 @@ export default {
   // ------------------------------------------------------
   &__content-wrap {
     position: relative;
+    flex-grow: 1;
 
     .w-tabs--card & {
       border: $border;

@@ -16,7 +16,6 @@ transition-group(
 </template>
 
 <script>
-import config from '../utils/config'
 import NotificationManager from '../utils/notification-manager'
 
 export default {
@@ -28,7 +27,7 @@ export default {
 
   computed: {
     conf () {
-      return config.notificationManager
+      return this.$waveui.config.notificationManager
     },
     notifications () {
       return this.notifManager?.notifications || []

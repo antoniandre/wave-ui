@@ -103,7 +103,7 @@ export default {
       ]
     },
     externalLink () {
-      return /^(https?:)?\/\//.test(this.route)
+      return /^(https?:)?\/\/|mailto:|tel:/.test(this.route)
     },
     classes () {
       return {

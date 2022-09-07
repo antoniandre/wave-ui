@@ -41,6 +41,8 @@ If you want to support the development of this library, you can buy me a beer or
 [![paypal](https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/antoniandre1)
 Thank you!
 
+If you are using this library for profit business, please consider [backing me](https://github.com/sponsors/antoniandre)!
+It ensures that the project your products rely on keep being actively maintained. :)
 ___
 
 ## Contributing

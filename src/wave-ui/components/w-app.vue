@@ -5,12 +5,11 @@
 </template>
 
 <script>
-import config from '../utils/config'
 import NotificationManager from './w-notification-manager.vue'
-import DynamicCSS from '../utils/dynamic-css'
+import dynamicCSS from '../utils/dynamic-css'
 
-const breakpointsNames = Object.keys(config.breakpoints)
-const breakpointsValues = Object.values(config.breakpoints)
+// Global var for faster results in the resize event handler.
+let breakpointsDef = { keys: [], values: [] }
 
 export default {
   name: 'w-app',
@@ -58,11 +57,11 @@ export default {
   methods: {
     getBreakpoint () {
       const width = window.innerWidth
-      const breakpoints = breakpointsValues.slice(0)
+      const breakpoints = breakpointsDef.values.slice(0)
       // Most performant lookup.
       breakpoints.push(width)
       breakpoints.sort((a, b) => a - b)
-      const breakpoint = breakpointsNames[breakpoints.indexOf(width)] || 'xl'
+      const breakpoint = breakpointsDef.keys[breakpoints.indexOf(width)] || 'xl'
 
       if (breakpoint !== this.currentBreakpoint) {
         this.currentBreakpoint = breakpoint
@@ -78,19 +77,18 @@ export default {
       }
 
       this.$waveui.breakpoint.width = width
-    },
-
-    dynamicStyles () {
-      return DynamicCSS()
     }
   },
 
   mounted () {
+    const { config } = this.$waveui
+    breakpointsDef = { keys: Object.keys(config.breakpoints), values: Object.values(config.breakpoints) }
+
     // Inject global dynamic CSS classes in document head.
     if (!document.getElementById('wave-ui-styles')) {
       const css = document.createElement('style')
       css.id = 'wave-ui-styles'
-      css.innerHTML = this.dynamicStyles()
+      css.innerHTML = dynamicCSS(config)
 
       const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
       if (firstStyle) firstStyle.before(css)
@@ -127,6 +125,5 @@ export default {
   &.justify-space-evenly {justify-content: space-evenly;}
   &.text-center {text-align: center;}
   &.text-right {text-align: right;}
-
 }
 </style>
