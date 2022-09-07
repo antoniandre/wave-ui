@@ -279,6 +279,35 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
+    li.minor
+      strong.version v1.57.0
+      ul
+        li
+          strong.code w-button
+          ul
+            li Consider tel &amp; mailto external address.
+        li
+          strong.code w-table
+          ul
+            li Added ability to stick the columns to the left. #[issue-link 36]
+        li
+          strong.code w-tabs
+          ul
+            li Always fill up the content height.
+        li
+          strong Notifications
+          ul
+            li Expose the #[code notify] method in #[code $waveui]. #[issue-link 95]
+        li
+          strong.code w-form
+          ul
+            li Allow resetting #[strong.code w-form] with null #[code v-model]. #[issue-link 93]
+        li
+          strong Core
+          ul
+            li Added SCSS vars file to the list of allowed package exports. #[issue-link 90]
+            li Store and expose the Wave UI global config in the #[code $waveui] object. #[issue-link 91]
+
     li.patch
       strong.version v1.56.1
       ul
