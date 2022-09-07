@@ -23,7 +23,7 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
-      strong.version v2.41.1
+      strong.version v2.41.2
       ul
         li
           strong.code w-button
