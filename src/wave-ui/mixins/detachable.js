@@ -22,7 +22,7 @@ export default {
     noPosition: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
     // Optionally designate an external activator.
-    activator: { type: [String, Object, HTMLElement] } // The activator can be a DOM string selector, a ref or a DOM node.
+    activator: { type: [String, Object] } // The activator can be a DOM string selector, a ref or a DOM node.
   },
 
   inject: {
