@@ -279,6 +279,17 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
+      ul
+        li
+          strong.code w-button
+          ul
+            li Consider tel &amp; mailto external address.
+
+    li.patch
+      strong.version v1.57.1
+      ul
+        li Prevent a Nuxt error related to #[code HTMLElement] being undefined.
+
     li.minor
       strong.version v1.57.0
       ul
