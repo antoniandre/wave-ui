@@ -18,7 +18,10 @@
     ".": {
       "import": "./dist/wave-ui.es.js",
       "require": "./dist/wave-ui.umd.js"
-    }
+    },
+    "./package.json": "./package.json",
+    "./dist/*": "./dist/*",
+    "./src/wave-ui/*": "./src/wave-ui/*"
   },
   "files": [
     "dist",
