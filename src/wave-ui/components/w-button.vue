@@ -8,7 +8,7 @@ component.w-button(
   v-on="listeners"
   v-bind="$attrs"
   :style="styles")
-  w-icon(v-if="icon") {{ icon }}
+  w-icon(v-if="icon" v-bind="iconProps || {}") {{ icon }}
   slot(v-else)
   transition(name="scale-fade")
     .w-button__loader(v-if="loading")
@@ -44,6 +44,7 @@ export default {
     loading: { type: Boolean },
     // If an icon is passed, no text will display.
     icon: { type: String, default: null },
+    iconProps: { type: Object, default: () => ({}) },
     // Positions.
     absolute: { type: Boolean },
     fixed: { type: Boolean },

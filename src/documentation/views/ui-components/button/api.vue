@@ -28,6 +28,7 @@ const propsDescs = {
   disabled: 'Disables the button making it unreactive to user interactions.',
   loading: 'Sets the loading state of the button. While loading, the button is unclickable and a spinner is displayed instead of the button label.',
   icon: 'Sets the button to a round icon style, containing only an icon.<br>Accepts a string: e.g. <code>mdi mdi-home</code>.',
+  iconProps: 'When using <code>icon</code>, an object of props to pass down to the <strong class="code">w-icon</strong> component for more control.<br>Example of use: <code>&lt;w-button icon="mdi mdi-heart" :icon-props="{ flipY: true }"&gt;&lt;/w-button&gt;</code>',
   absolute: 'Sets the CSS position of the button to <code>absolute</code>.',
   fixed: 'Sets the CSS position of the button to <code>fixed</code>.',
   top: 'Places the button at the top of the screen when the <code>fixed</code> prop is set to true or at the top of its container when the <code>absolute</code> prop is set to true.',

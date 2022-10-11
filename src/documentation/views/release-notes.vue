@@ -285,6 +285,11 @@ main
           ul
             li Consider tel &amp; mailto external address.
 
+    li.minor
+      strong.version v1.58.0
+      ul
+        li #[strong w-button]: added an #[code iconProps] option.#[span.new]
+
     li.patch
       strong.version v1.57.1
       ul
@@ -296,7 +301,7 @@ main
         li
           strong.code w-button
           ul
-            li Consider tel &amp; mailto external address.
+            li Consider #[code tel] &amp; #[code mailto] external address.
         li
           strong.code w-table
           ul
