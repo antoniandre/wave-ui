@@ -22,6 +22,11 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v2.43.1
+      ul
+        li #[strong w-image]: Prevent images to grow or shrink with flex context.
+
     li.minor
       strong.version v2.43.0
       ul
