@@ -175,6 +175,8 @@ export default {
 .w-image-wrap {
   position: relative;
   display: inline-flex;
+  flex-grow: 0;
+  flex-shrink: 0;
   width: 4em;
 
   &--has-ratio {width: 100%;}
