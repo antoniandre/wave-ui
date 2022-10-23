@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import Delete from 'rollup-plugin-delete'
+import autoprefixer from 'autoprefixer'
 
 const bundlingConf = {
   lib: {
@@ -49,6 +50,9 @@ export default defineConfig({
       scss: {
         additionalData: '@import "@/wave-ui/scss/variables";@import "@/documentation/scss/variables";'
       }
+    },
+    postcss: {
+      plugins: [autoprefixer]
     }
   },
   resolve: {
