@@ -20,7 +20,7 @@ const bundlingConf = {
     output: {
       // Provide global variables to use in the UMD build for externalized deps.
       globals: { vue: 'Vue' },
-      entryFileNames: 'richer.[format].js',
+      entryFileNames: 'wave-ui.[format].js',
       chunkFileNames: '[name].js'
     }
   }
