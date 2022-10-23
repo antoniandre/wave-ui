@@ -18,12 +18,12 @@ specifiers:
   pug: ^3.0.2
   rollup-plugin-delete: ^2.0.0
   sass: ^1.55.0
-  simple-syntax-highlighter: ^2.2.3
+  simple-syntax-highlighter: ^2.2.5
   splitpanes: ^3.1.1
   vite: ^3.1.8
   vue: ^3.2.41
   vue-router: ^4.1.5
-  vueperslides: ^3.5.0
+  vueperslides: ^3.5.1
   vuex: ^4.1.0
 
 devDependencies:
@@ -44,12 +44,12 @@ devDependencies:
   pug: 3.0.2
   rollup-plugin-delete: 2.0.0
   sass: 1.55.0
-  simple-syntax-highlighter: 2.2.3_vue@3.2.41
+  simple-syntax-highlighter: 2.2.5_vue@3.2.41
   splitpanes: 3.1.1
   vite: 3.1.8_sass@1.55.0
   vue: 3.2.41
   vue-router: 4.1.5_vue@3.2.41
-  vueperslides: 3.5.0
+  vueperslides: 3.5.1_vue@3.2.41
   vuex: 4.1.0_vue@3.2.41
 
 packages:
@@ -1979,8 +1979,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /simple-syntax-highlighter/2.2.3_vue@3.2.41:
-    resolution: {integrity: sha512-4rUp96B3ngtAs9fdTdTcLlyRKUDcH9sTJcoXSnu3uBgMD4TH2+a5OqJULLORyGfp2lgq+r+xCrhnBrjEAEb5MQ==}
+  /simple-syntax-highlighter/2.2.5_vue@3.2.41:
+    resolution: {integrity: sha512-UYcvN7fw3aD70/HLHTbP2/o55kEY9A3GYDkDMNkF1VXONCLRD2w0FWauRhXl+7G9LPodWNaAd/2Qx1r784YFrg==}
     peerDependencies:
       vue: ^2.6.14 || ^3.2.0
     dependencies:
@@ -2179,8 +2179,12 @@ packages:
       '@vue/shared': 3.2.41
     dev: true
 
-  /vueperslides/3.5.0:
-    resolution: {integrity: sha512-jSLbQV/StMn32wDtC4lvLwwZS0zF7wrqH4cKKEzO8f8rdIzkglBwJAnkLfIlQaTRYJWyiogCHgPx214VN2WqBg==}
+  /vueperslides/3.5.1_vue@3.2.41:
+    resolution: {integrity: sha512-g/Lauv1svlSaERzLNeys0oeLmpDFiXkIa+lxg+lJma6m6wXqJKzKKVIi8Kvc95XPnl42n7PYYJyr0+FMV6WZGw==}
+    peerDependencies:
+      vue: ^2.6.14 || ^3.2.0
+    dependencies:
+      vue: 3.2.41
     dev: true
 
   /vuex/4.1.0_vue@3.2.41:
