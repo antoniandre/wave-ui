@@ -3,13 +3,18 @@
   "version": "2.43.1",
   "description": "An emerging UI framework for Vue.js (2 & 3) with only the bright side. :sunny:",
   "author": "Antoni Andre <antoniandre.web@gmail.com>",
-  "license": "MIT",
+  "homepage": "https://antoniandre.github.io/wave-ui",
   "repository": "https://github.com/antoniandre/wave-ui",
+  "license": "MIT",
   "funding": "https://github.com/sponsors/antoniandre",
   "main": "./dist/wave-ui.umd.js",
   "unpkg": "dist/wave-ui.umd.js",
   "jsdelivr": "dist/wave-ui.umd.js",
   "module": "./dist/wave-ui.es.js",
+  "files": [
+    "dist",
+    "src/wave-ui"
+  ],
   "exports": {
     ".": {
       "import": "./dist/wave-ui.es.js",
@@ -20,9 +25,10 @@
     "./src/wave-ui": "./src/wave-ui/index.js",
     "./src/wave-ui/*": "./src/wave-ui/*"
   },
-  "files": [
-    "dist",
-    "src/wave-ui"
+  "sideEffects": [
+    "*.css",
+    "*.scss",
+    "*.vue"
   ],
   "keywords": [
     "wave ui",
@@ -40,11 +46,6 @@
     "serve": "vite preview --base /wave-ui/",
     "lint": "vite lint"
   },
-  "sideEffects": [
-    "*.css",
-    "*.scss",
-    "*.vue"
-  ],
   "devDependencies": {
     "@babel/core": "^7.19.6",
     "@babel/eslint-parser": "^7.19.1",
@@ -70,5 +71,8 @@
     "vue-router": "^4.1.5",
     "vueperslides": "^3.5.0",
     "vuex": "^4.1.0"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.14 || ^3.2.0"
   }
 }
