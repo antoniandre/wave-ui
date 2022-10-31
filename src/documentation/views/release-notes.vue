@@ -23,6 +23,11 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v2.44.0
+      ul
+        li #[strong Wave UI] now defaults to ES Module (CommonJS will still be used when using #[code require()]).
+
+    li.patch
       strong.version v2.43.1
       ul
         li #[strong w-image]: Prevent images to grow or shrink with flex context.
