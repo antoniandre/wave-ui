@@ -28,7 +28,7 @@ component(
       :class="labelClasses")
       slot {{ label }}
   .w-checkbox__input(@click="$refs.input.focus();$refs.input.click()" :class="this.color")
-    svg(width="11px" height="9px" viewbox="0 0 12 9")
+    svg(viewBox="-0.5 0 12 10")
       polyline(points="1 5 4 8 10 2")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-checkbox__label.w-form-el-shakable.pl2(
@@ -152,7 +152,7 @@ $inactive-color: #666;
   &__input {
     position: relative;
     width: $small-form-el-size;
-    height: $small-form-el-size;
+    aspect-ratio: 1;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
@@ -163,8 +163,8 @@ $inactive-color: #666;
 
   // The checkmark - visible when checked.
   &__input svg {
-    width: auto;
-    height: auto;
+    width: 70%;
+    aspect-ratio: 1;
     fill: none;
     stroke-width: 2;
     stroke: white;
@@ -175,7 +175,6 @@ $inactive-color: #666;
     transition: $transition-duration ease-out;
     opacity: 0;
     position: relative;
-    top: -0.5px; // For browser zoom levels.
     z-index: 1;
 
     :checked ~ & {
@@ -190,7 +189,7 @@ $inactive-color: #666;
     content: '';
     position: absolute;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     border: $outline-width solid $inactive-color;
     border-radius: $border-radius;
     transition: $transition-duration ease-in-out;
@@ -221,7 +220,7 @@ $inactive-color: #666;
     content: "";
     position: absolute;
     width: inherit;
-    height: inherit;
+    aspect-ratio: 1;
     background-color: currentColor;
     border-radius: 100%;
     transform: scale(0);
