@@ -112,8 +112,8 @@ export default {
   &--inline {position: static;}
 
   &--round {
-    width: round(1.1 * divide($base-font-size, 2)) * 2;
-    padding: 0 (round(1.1 * divide($base-font-size, 4)) * 2);
+    aspect-ratio: 1;
+    padding: 0;
   }
 
   // Sizes.
@@ -184,11 +184,11 @@ export default {
   }
   &--shadow {box-shadow: $box-shadow;}
 
-  &--dot.w-badge {min-width: 0;padding: 0;}
-  &--dot.size--xs {width: round(1.35 * $base-increment);height: round(1.35 * $base-increment);}
-  &--dot.size--sm {width: round(1.7 * $base-increment);height: round(1.7 * $base-increment);}
-  &--dot.size--md {width: round(2.2 * $base-increment);height: round(2.2 * $base-increment);}
-  &--dot.size--lg {width: round(2.75 * $base-increment);height: round(2.75 * $base-increment);}
-  &--dot.size--xl {width: 3 * $base-increment;height: 3 * $base-increment;}
+  &--dot.w-badge {min-width: 0;padding: 0;aspect-ratio: 1;}
+  &--dot.size--xs {height: round(1.35 * $base-increment);}
+  &--dot.size--sm {height: round(1.7 * $base-increment);}
+  &--dot.size--md {height: round(2.2 * $base-increment);}
+  &--dot.size--lg {height: round(2.75 * $base-increment);}
+  &--dot.size--xl {height: 3 * $base-increment;}
 }
 </style>

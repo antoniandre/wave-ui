@@ -154,7 +154,7 @@ $inactive-color: #666;
     position: relative;
     border-radius: 100%;
     width: $small-form-el-size;
-    height: $small-form-el-size;
+    aspect-ratio: 1;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
@@ -198,7 +198,7 @@ $inactive-color: #666;
     content: "";
     position: absolute;
     width: inherit;
-    height: inherit;
+    aspect-ratio: 1;
     background-color: currentColor;
     border-radius: 100%;
     transform: scale(0);

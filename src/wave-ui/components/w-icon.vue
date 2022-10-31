@@ -111,7 +111,7 @@ export default {
   line-height: 1;
   font-size: 1.2em;
   width: 1em;
-  height: 1em;
+  aspect-ratio: 1;
 
   &.size--xs {font-size: round(0.85 * $base-font-size);}
   &.size--sm {font-size: round(1.15 * $base-font-size);}

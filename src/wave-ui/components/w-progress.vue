@@ -256,7 +256,7 @@ $circle-size: 40;
   &--circular {
     display: inline-flex;
     width: 3em;
-    height: auto;
+    aspect-ratio: 1;
     font-size: $base-font-size;
 
     svg {display: block;width: 100%;}

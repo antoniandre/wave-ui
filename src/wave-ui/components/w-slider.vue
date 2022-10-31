@@ -295,7 +295,7 @@ export default {
       transform: translateX(-50%);
       top: 0;
       width: $base-increment;
-      height: $base-increment;
+      aspect-ratio: 1;
       background-color: rgba(0, 0, 0, 0.2);
       border-radius: 99em;
       // box-shadow: 0 0 0 1px #fff;
@@ -358,7 +358,7 @@ export default {
   &__thumb {
     position: absolute;
     width: 3 * $base-increment;
-    height: 3 * $base-increment;
+    aspect-ratio: 1;
     left: 100%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -373,7 +373,7 @@ export default {
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     border: none;
     border-radius: 99em;
     cursor: pointer;
@@ -452,7 +452,7 @@ export default {
       transform: translateX(-50%) rotate(-45deg);
       border-radius: 99em 99em 99em 0;
       width: 2.8em;
-      height: 2.8em;
+      aspect-ratio: 1;
 
       & > div {
         position: absolute;
