@@ -23,6 +23,12 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v2.44.1
+      ul
+        li #[strong Wave UI] Refine the checkbox look &amp; simplify any override.
+        li #[strong all round elements] Define #[code aspect-ratio] in UI components to facilitate overrides.
+
+    li.minor
       strong.version v2.44.0
       ul
         li #[strong Wave UI] now defaults to ES Module (CommonJS will still be used when using #[code require()]).
@@ -1164,7 +1170,7 @@ main
       border-radius: 1em;
       border: 1px solid #ddd;
       width: 1em;
-      height: 1em;
+      aspect-ratio: 1;
       transform: translate(-50%, -50%);
       z-index: 1;
     }
@@ -1208,7 +1214,7 @@ main
       top: 3px;
       left: 0;
       width: 1em;
-      height: 1em;
+      aspect-ratio: 1;
     }
 
     li li li:before {content: '\e007';}
