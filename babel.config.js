@@ -1,8 +1,7 @@
-module.exports = {
-  presets: [
-    '@vue/cli-plugin-babel/preset'
-  ],
-  plugins: [
-    '@babel/plugin-proposal-class-properties'
-  ]
-}
+export const presets = [
+  '@vue/cli-plugin-babel/preset'
+]
+
+export const plugins = [
+  '@babel/plugin-proposal-class-properties'
+]

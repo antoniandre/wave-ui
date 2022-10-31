@@ -7,7 +7,7 @@
   "repository": "https://github.com/antoniandre/wave-ui",
   "license": "MIT",
   "funding": "https://github.com/sponsors/antoniandre",
-  "main": "./dist/wave-ui.umd.js",
+  "main": "./dist/wave-ui.es.js",
   "unpkg": "dist/wave-ui.umd.js",
   "jsdelivr": "dist/wave-ui.umd.js",
   "module": "./dist/wave-ui.es.js",
@@ -25,6 +25,7 @@
     "./src/wave-ui": "./src/wave-ui/index.js",
     "./src/wave-ui/*": "./src/wave-ui/*"
   },
+  "type": "module",
   "sideEffects": [
     "*.css",
     "*.scss",
@@ -56,6 +57,7 @@
     "autoprefixer": "^10.4.13",
     "axios": "^0.25.0",
     "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^9.6.0",
     "font-awesome": "^4.7.0",
     "gsap": "^3.11.3",
     "ionicons": "^4.6.3",
@@ -66,6 +68,7 @@
     "sass": "^1.55.0",
     "simple-syntax-highlighter": "^2.2.5",
     "splitpanes": "^3.1.5",
+    "standard": "^17.0.0",
     "vite": "^3.2.1",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6",
