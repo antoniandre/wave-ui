@@ -83,7 +83,7 @@ export default {
     align-items: center;
     justify-content: center;
     width: 4em;
-    height: 4em;
+    aspect-ratio: 1;
     border-radius: 4em;
     background-color: #ddd;
     overflow: hidden;
@@ -98,7 +98,7 @@ export default {
     color: #000;
     background-color: rgba(0, 0, 0, 0.03);
     width: 11em;
-    height: 11em;
+    aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;

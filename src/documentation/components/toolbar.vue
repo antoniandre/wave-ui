@@ -32,7 +32,6 @@ w-toolbar.main-toolbar(fixed)
 </template>
 
 <script>
-
 export default {
   props: {
     drawerOpen: { type: Boolean, default: false }
@@ -79,7 +78,7 @@ div.main-toolbar {
   .github-link .w-icon, .wave-logo {color: #1670b4;}
 
   .hamburger-menu {margin-left: 8px;}
-  .hamburger-menu .w-icon {width: 26px;height: 26px;}
+  .hamburger-menu .w-icon {width: 26px;}
 }
 
 @media screen and (max-width: 410px) {

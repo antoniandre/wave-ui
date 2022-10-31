@@ -33,10 +33,10 @@ export default {
   font-weight: normal;
 
   &:after {display: none;}
+
   > .w-icon {
     border: 2px solid currentColor;
     width: 19px;
-    height: 19px;
     font-size: 19px;
 
     &:before {
@@ -44,7 +44,6 @@ export default {
       align-items: center;
       justify-content: center;
       width: 15px;
-      height: 15px;
       flex: 0;
       transform: none;
     }

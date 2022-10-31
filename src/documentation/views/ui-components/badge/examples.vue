@@ -597,7 +597,7 @@ div
     For instance, if you increase the font size of the badge like in this example, the natural behavior
     of the badge is to increase its width to adapt to its content.#[br]
     With the option #[code round] you can force it to be round.
-  example(content-class="mt1")
+  example(content-class="mt1 w-flex align-center")
     w-badge(bg-color="error")
       template(#badge)
         span.size--sm 11
