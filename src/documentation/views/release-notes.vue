@@ -22,10 +22,19 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v2.45.0
+      ul
+        li
+          strong.code w-accordion
+          ul
+            li Added the #[code expand-icon-rotate90] option as an alternative expand icon style. #[span.new]
+            li Added the #[code expand-icon-props] option to have more control on the #[strong.code w-icon]. #[span.new]
+
     li.patch
       strong.version v2.44.1
       ul
-        li #[strong Wave UI] Refine the checkbox look &amp; simplify any override.
+        li #[strong Wave UI] Refine the checkbox look &amp; facilitate any CSS override.
         li #[strong all round elements] Define #[code aspect-ratio] in UI components to facilitate overrides.
 
     li.minor
@@ -36,12 +45,18 @@ main
     li.patch
       strong.version v2.43.1
       ul
-        li #[strong w-image]: Prevent images to grow or shrink with flex context.
+        li
+          strong w-image
+          ul
+            li Prevent images to grow or shrink with flex context.
 
     li.minor
       strong.version v2.43.0
       ul
-        li #[strong w-button]: added an #[code iconProps] option.#[span.new]
+        li
+          strong w-button
+          ul
+            li Added an #[code icon-props] option. #[span.new]
 
     li.patch
       strong.version v2.42.2
@@ -49,7 +64,7 @@ main
         li
           strong.code w-button
           ul
-            li Consider tel &amp; mailto external address.
+            li Consider #[code :tel] &amp; #[code :mailto] external addresses.
 
     li.minor
       strong.version v2.41.0
