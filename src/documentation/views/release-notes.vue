@@ -30,6 +30,10 @@ main
           ul
             li Added the #[code expand-icon-rotate90] option as an alternative expand icon style. #[span.new]
             li Added the #[code expand-icon-props] option to have more control on the #[strong.code w-icon]. #[span.new]
+        li
+          strong.code w-overlay
+          ul
+            li Added an #[code absolute] option. #[span.new]
 
     li.patch
       strong.version v2.44.1

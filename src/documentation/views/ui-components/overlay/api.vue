@@ -15,6 +15,7 @@ import WOverlay from '@/wave-ui/components/w-overlay.vue'
 
 const propsDescs = {
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>This prop controls the visibility of the overlay. Any truthy value will show the overlay whereas any falsy value will hide it.',
+  absolute: 'Sets the CSS position of the overlay to <code>absolute</code>. By default it is set to <code>fixed</code>.',
   opacity: 'Sets a custom opacity on the overlay.',
   bgColor: 'Applies a color to the overlay\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   zIndex: 'Applies a z-index (positive or negative integer) to the overlay.',
