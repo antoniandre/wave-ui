@@ -26,6 +26,8 @@ const propsDescs = {
   contentClass: 'Applies a custom CSS class (or space separated classes) on every content container.',
   expandIcon: 'Specifies the name of the icon to display in the toggle button. If set to false or empty string, the button will be removed.',
   expandIconRight: 'When set to true, the expand button will be placed at the right end of the item\'s title.',
+  expandIconRotate90: 'With this option, the expand icon will initially point to the right, then point down on expand with a clockwise rotation of 90 degrees.',
+  expandIconProps: 'An object of props to pass down to the <strong class="code">w-icon</strong> component for more control on the expand icon.<br>Example of use: <code>&lt;w-accordion :items="items" :expand-icon-props="{ flipY: true }"&gt;&lt;/w-accordion&gt;</code>',
   expandSingle: 'Specifies the accordion behavior, whether only one item can be expanded at a time or multiple. When set to true, expanding another item than the one already expanded is still possible, but it will collapse the other expanded item.',
   collapseIcon: 'Provide a different icon than the expand icon, to show when the accordion item is expanded. By default and when empty, there is no collapse icon: the expand icon rotates to show a closing ability.',
   shadow: 'Applies a shadow to the whole accordion container.',
