@@ -23,19 +23,29 @@ component(
     role="checkbox")
   template(v-if="hasLabel && labelOnLeft")
     label.w-checkbox__label.w-form-el-shakable.pr2(
-      v-if="$slots.default || label"
+      v-if="$slots.default"
       :for="`w-checkbox--${_.uid}`"
       :class="labelClasses")
       slot {{ label }}
+    label.w-checkbox__label.w-form-el-shakable.pr2(
+      v-else-if="label"
+      :for="`w-checkbox--${_.uid}`"
+      :class="labelClasses"
+      v-html="label")
   .w-checkbox__input(@click="$refs.input.focus();$refs.input.click()" :class="this.color")
     svg(viewBox="-0.5 0 12 10")
       polyline(points="1 5 4 8 10 2")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-checkbox__label.w-form-el-shakable.pl2(
-      v-if="$slots.default || label"
+      v-if="$slots.default"
       :for="`w-checkbox--${_.uid}`"
       :class="labelClasses")
       slot {{ label }}
+    label.w-checkbox__label.w-form-el-shakable.pl2(
+      v-else-if="label"
+      :for="`w-checkbox--${_.uid}`"
+      :class="labelClasses"
+      v-html="label")
 </template>
 
 <script>

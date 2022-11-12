@@ -21,19 +21,29 @@ component(
     role="radio")
   template(v-if="hasLabel && labelOnLeft")
     label.w-radio__label.w-form-el-shakable.pr2(
-      v-if="$slots.default || label"
+      v-if="$slots.default"
       :for="`w-radio--${_.uid}`"
       :class="labelClasses")
       slot {{ label }}
+    label.w-radio__label.w-form-el-shakable.pr2(
+      v-else-if="label"
+      :for="`w-radio--${_.uid}`"
+      :class="labelClasses"
+      v-html="label")
   .w-radio__input(
     @click="$refs.input.focus();$refs.input.click()"
     :class="this.color")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-radio__label.w-form-el-shakable.pl2(
-      v-if="$slots.default || label"
+      v-if="$slots.default"
       :for="`w-radio--${_.uid}`"
       :class="labelClasses")
       slot {{ label }}
+    label.w-radio__label.w-form-el-shakable.pl2(
+      v-else-if="label"
+      :for="`w-radio--${_.uid}`"
+      :class="labelClasses"
+      v-html="label")
 </template>
 
 <script>
