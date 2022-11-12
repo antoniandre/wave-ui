@@ -149,6 +149,7 @@ $disabled-color: #ddd;
   vertical-align: middle;
   cursor: pointer;
 
+  &--loading {cursor: wait;}
   &--disabled, &--readonly {
     cursor: not-allowed;
     touch-action: initial;
