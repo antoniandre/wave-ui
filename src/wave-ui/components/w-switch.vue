@@ -33,9 +33,13 @@ component(
     :class="inputClasses")
     .w-switch__track(v-if="$slots.track")
       slot(name="track")
-    .w-switch__thumb(v-if="$slots.thumb || loading" )
-      w-progress(v-if="loading" circle color="inherit")
-      slot(name="thumb")
+    .w-switch__thumb(v-if="$slots.thumb || loading")
+      w-progress(
+        v-if="loading"
+        circle
+        color="inherit"
+        v-bind="typeof loading === 'number' ? { 'model-value': loading } : {}")
+      slot(v-else name="thumb")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-switch__label.w-switch__label--right.w-form-el-shakable(
       v-if="$slots.default || label"
@@ -59,7 +63,7 @@ export default {
     labelColor: { type: String, default: 'primary' },
     thin: { type: Boolean },
     noRipple: { type: Boolean },
-    loading: { type: Boolean }
+    loading: { type: [Boolean, Number], default: false }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
