@@ -37,6 +37,7 @@ export default {
   > .w-icon {
     border: 2px solid currentColor;
     width: 19px;
+    height: 19px;
     font-size: 19px;
 
     &:before {

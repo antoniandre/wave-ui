@@ -25,7 +25,7 @@ w-app
 
       footer.w-flex.justify-end.align-center.no-grow.wrap
         small.grey-light3.text-upper
-          | Copyright © {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
+          | Copyright &copy; {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
         .spacer
         router-link.pink-light1.mr4(to="/backers" @click.native="scrollTop")
           w-icon.mr1 mdi mdi-heart-multiple-outline
