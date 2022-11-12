@@ -33,7 +33,8 @@ component(
     :class="inputClasses")
     .w-switch__track(v-if="$slots.track")
       slot(name="track")
-    .w-switch__thumb(v-if="$slots.thumb")
+    .w-switch__thumb(v-if="$slots.thumb || loading" )
+      w-progress(v-if="loading" circle color="inherit")
       slot(name="thumb")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-switch__label.w-switch__label--right.w-form-el-shakable(
@@ -57,7 +58,8 @@ export default {
     color: { type: String, default: 'primary' },
     labelColor: { type: String, default: 'primary' },
     thin: { type: Boolean },
-    noRipple: { type: Boolean }
+    noRipple: { type: Boolean },
+    loading: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -88,6 +90,7 @@ export default {
         'w-switch--ripple': this.ripple.start,
         'w-switch--custom-thumb': this.$slots.thumb,
         'w-switch--custom-track': this.$slots.track,
+        'w-switch--loading': this.loading,
         'w-switch--rippled': this.ripple.end
       }
     },
@@ -214,7 +217,7 @@ $disabled-color: #ddd;
     left: 0;
     top: 0;
     width: $small-form-el-size;
-    aspect-ratio: 1;
+    height: $small-form-el-size;
     background-color: #fff;
     border-radius: 100%;
     text-align: center;
@@ -234,7 +237,9 @@ $disabled-color: #ddd;
       background-color: currentColor;
     }
   }
-  &--custom-thumb &__input:after {display: none;}
+  &--loading .w-progress {padding: 1px;}
+  &--loading.w-switch--thin.w-switch--on .w-progress {color: #fff;}
+  &--loading &__input:after, &--custom-thumb &__input:after {display: none;}
   &__thumb > * {
     width: inherit;
     height: inherit;
