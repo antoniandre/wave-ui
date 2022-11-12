@@ -34,6 +34,10 @@ main
           strong.code w-overlay
           ul
             li Added an #[code absolute] option. #[span.new]
+        li
+          strong.code w-tabs
+          ul
+            li Count any tabs bar left border width in the slider position calculation.
 
     li.patch
       strong.version v2.44.1
