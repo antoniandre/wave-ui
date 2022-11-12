@@ -213,8 +213,10 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   router.status = false
   setTimeout(() => {
+    const pageTitle = (document.querySelector('h1') || {}).innerText?.replace(/[#\n]|IN PROGRESS/g, '')
+    document.title = `${pageTitle} - Wave UI`
     // After route change, update the title of the page to pass it to Codepen from examples.
-    store.commit('setCurrentPage', (document.querySelector('h1') || {}).innerText?.replace(/[#\n]|IN PROGRESS/g, ''))
+    store.commit('setCurrentPage', pageTitle)
   }, 200)
 })
 
