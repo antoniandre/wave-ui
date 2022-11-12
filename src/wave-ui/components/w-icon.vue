@@ -112,6 +112,9 @@ export default {
   font-size: 1.2em;
   width: 1em;
   aspect-ratio: 1;
+  // The aspect ratio will not work if the content is taller than the height computed
+  // by the aspect ratio.
+  overflow: hidden;
 
   &.size--xs {font-size: round(0.85 * $base-font-size);}
   &.size--sm {font-size: round(1.15 * $base-font-size);}
