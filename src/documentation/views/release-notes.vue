@@ -46,6 +46,11 @@ main
           strong.code w-switch
           ul
             li Added a #[code loading] option. #[span.new]
+        li
+          strong.code w-confirm
+          ul
+            li Automatically set the focus on the confirm button when opening the popup.
+            li Cancel and close the popup on #[kbd escape] key pressed. #[span.new]
 
     li.patch
       strong.version v2.44.1
