@@ -42,6 +42,10 @@ main
           strong.code w-radio &amp; w-checkbox
           ul
             li Allow HTML in the #[code label] attribute (previously only allowed through the default slot).
+        li
+          strong.code w-switch
+          ul
+            li Added a #[code loading] option. #[span.new]
 
     li.patch
       strong.version v2.44.1
