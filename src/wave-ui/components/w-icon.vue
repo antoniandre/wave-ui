@@ -88,7 +88,7 @@ export default {
   methods: {
     readIcon () {
       const { default: slot } = this.$slots
-      const [fontName = '', icon = ''] = typeof slot === 'function' && slot()[0].children.trim().split(' ') || []
+      const [fontName = '', icon = ''] = (typeof slot === 'function' && slot()[0].children.trim().split(' ')) || []
       this.fontName = fontName
       this.icon = icon
 

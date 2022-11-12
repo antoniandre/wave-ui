@@ -211,8 +211,8 @@ div
         ]
       })
     template(#css).
-      .w-tabs {border: none;}
-      .w-tabs__bar {
+      .w-app .w-tabs {border: none;}
+      .w-app .w-tabs__bar {
         display: inline-flex;
         margin-bottom: 12px;
         padding: 0;
@@ -222,7 +222,7 @@ div
         z-index: 0;
         overflow: visible;
       }
-      .w-tabs__slider {
+      .w-app .w-tabs__slider {
         opacity: 1;
         background-color: #fff;
         bottom: 0;
@@ -230,13 +230,13 @@ div
         border-radius: 6px;
         box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
       }
-      .w-tabs__bar-item {
+      .w-app .w-tabs__bar-item {
         padding: 2px 10px;
         font-size: 1.1rem;
       }
-      .w-tabs__bar-item  > * {z-index: 1;}
+      .w-app .w-tabs__bar-item  > * {z-index: 1;}
 
-      .w-tabs__bar-item:before {
+      .w-app .w-tabs__bar-item:before {
         content: '';
         position: absolute;
         top: 25%;
@@ -247,7 +247,7 @@ div
         display: block;
         opacity: 1;
       }
-      .w-tabs__bar-item:first-child:before {display: none;}
+      .w-app .w-tabs__bar-item:first-child:before {display: none;}
 
   title-link(h2) No slider
   example
