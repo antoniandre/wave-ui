@@ -38,6 +38,10 @@ main
           strong.code w-tabs
           ul
             li Count any tabs bar left border width in the slider position calculation.
+        li
+          strong.code w-radio &amp; w-checkbox
+          ul
+            li Allow HTML in the #[code label] attribute (previously only allowed through the default slot).
 
     li.patch
       strong.version v2.44.1
