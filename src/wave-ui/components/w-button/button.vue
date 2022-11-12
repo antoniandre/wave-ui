@@ -6,7 +6,6 @@ component.w-button(
   :class="classes"
   :disabled="!!disabled || null"
   v-on="listeners"
-  v-bind="$attrs"
   :style="styles")
   w-icon(v-if="icon" v-bind="iconProps || {}") {{ icon }}
   slot(v-else)
@@ -24,8 +23,6 @@ component.w-button(
 
 <script>
 export default {
-  name: 'w-button',
-
   props: {
     color: { type: String },
     bgColor: { type: String },
