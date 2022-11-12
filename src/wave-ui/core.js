@@ -48,7 +48,8 @@ export default class WaveUI {
     //   if (directives[id]) app.directive(id, directives[id])
     // }
     app.directive('focus', {
-      mounted: el => el.focus()
+      // Wait for the next tick to focus the newly mounted element.
+      mounted: el => setTimeout(() => el.focus(), 0)
     })
     app.directive('scroll', {
       mounted: (el, binding) => {
