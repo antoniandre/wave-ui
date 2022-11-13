@@ -12,14 +12,14 @@
           v-if="cancel !== false"
           v-bind="cancelButtonProps"
           :bg-color="(cancelButton || {}).bgColor || 'error'"
-          @keyup.escape="onCancel"
+          @keyup.escape="!persistent && onCancel()"
           @click="onCancel")
           slot(name="cancel") {{ cancelButton.label }}
         w-button(
           v-bind="confirmButtonProps"
           :bg-color="(confirmButton || {}).bgColor || 'success'"
           v-focus
-          @keyup.escape="onCancel"
+          @keyup.escape="!persistent && onCancel()"
           @click="onConfirm")
           slot(name="confirm") {{ confirmButton.label }}
 </template>
