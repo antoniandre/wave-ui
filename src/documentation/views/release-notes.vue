@@ -22,13 +22,79 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
-    li.patch
-      strong.version v2.41.2
+    li.minor
+      strong.version v2.45.0
       ul
         li
           strong.code w-button
           ul
-            li Consider tel &amp; mailto external address.
+            li Added the #[code tooltip] and #[code tooltip-props] options in order to facilitate the tooltip use. #[span.tag.new]
+        li
+          strong.code w-accordion
+          ul
+            li Added the #[code expand-icon-rotate90] option as an alternative expand icon style. #[span.tag.new]
+            li Added the #[code expand-icon-props] option to have more control on the #[strong.code w-icon]. #[span.tag.new]
+        li
+          strong.code w-overlay
+          ul
+            li Added an #[code absolute] option. #[span.tag.new]
+        li
+          strong.code w-tabs
+          ul
+            li Count any tabs bar left border width in the slider position calculation.
+        li
+          strong.code w-radio &amp; w-checkbox
+          ul
+            li Allow HTML in the #[code label] attribute (previously only allowed through the default slot).
+        li
+          strong.code w-switch
+          ul
+            li Added a #[code loading] option. #[span.tag.new]
+        li
+          strong.code w-input
+          ul
+            li Added a wait cursor while loading.
+        li
+          strong.code w-confirm
+          ul
+            li Automatically set the focus on the confirm button when opening the popup.
+            li Cancel and close the popup on #[kbd escape] key pressed (if not persistent). #[span.tag.new]
+            li Added the #[code tooltip] options in order to facilitate the tooltip use. #[span.tag.new]
+
+    li.patch
+      strong.version v2.44.1
+      ul
+        li #[strong Wave UI] Refine the checkbox look &amp; facilitate any CSS override.
+        li #[strong round elements] Define #[code aspect-ratio] in UI components whne possible to facilitate overrides.
+
+    li.minor
+      strong.version v2.44.0
+      ul
+        li #[strong Wave UI] now defaults to ES Module (CommonJS will still be used when using #[code require()]).
+
+    li.patch
+      strong.version v2.43.1
+      ul
+        li
+          strong w-image
+          ul
+            li Prevent images to grow or shrink with flex context.
+
+    li.minor
+      strong.version v2.43.0
+      ul
+        li
+          strong w-button
+          ul
+            li Added an #[code icon-props] option. #[span.tag.new]
+
+    li.patch
+      strong.version v2.42.2
+      ul
+        li
+          strong.code w-button
+          ul
+            li Consider #[code :tel] &amp; #[code :mailto] external addresses.
 
     li.minor
       strong.version v2.41.0
@@ -95,7 +161,7 @@ main
         li
           strong.code w-table
           ul
-            li added a #[code footer] slot &amp; #[code fixed-footer] option. #[span.new]
+            li added a #[code footer] slot &amp; #[code fixed-footer] option. #[span.tag.new]
         li
           strong.code w-accordion, w-button, w-list, w-rating, w-tabs, w-tag:
           ul
@@ -108,7 +174,7 @@ main
     li.minor
       strong.version v2.37.0
       ul
-        li #[strong.code w-list]: Added a new #[code item-class-key] option. #[span.new]
+        li #[strong.code w-list]: Added a new #[code item-class-key] option. #[span.tag.new]
 
     li.patch
       strong.version v2.36.4
@@ -126,20 +192,20 @@ main
         li
           strong.code w-accordion
           ul
-            li Added a new #[code duration] option. #[span.new]
-            li Fire #[code item-collapsed] when done collapsing. #[span.new]
+            li Added a new #[code duration] option. #[span.tag.new]
+            li Fire #[code item-collapsed] when done collapsing. #[span.tag.new]
         li
           strong.code w-form
           ul
-            li Added a new #[code validation-color] option. #[span.new]
+            li Added a new #[code validation-color] option. #[span.tag.new]
         li
           strong.primary All the form elements
           ul
-            li Added a new #[code label-color] option. #[span.new]
+            li Added a new #[code label-color] option. #[span.tag.new]
         li
           strong.code w-input
           ul
-            li Added a new #[code label-color] option. #[span.new]
+            li Added a new #[code label-color] option. #[span.tag.new]
         li
           strong.code w-transition-expand
           ul
@@ -152,11 +218,11 @@ main
         li
           strong.code w-dialog &amp; w-overlay
           ul
-            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.new]
+            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.tag.new]
         li
           strong.code w-drawer
           ul
-            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.new]
+            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.tag.new]
             li When using #[code push-content], default to a transparent overlay that you can override.
             li When using #[code push-content], default to a width of 200px that you can override.
 
@@ -175,7 +241,7 @@ main
               Default the #[code appendTo] to the open #[strong.code.black w-dialog],
               #[strong.code w-drawer] or #[strong.code w-menu].
 
-            li Removed the deprecated #[code detachTo] prop (use #[code appendTo] instead).
+            li Removed the deprecated #[code detachTo] prop (use #[code appendTo] instead). #[span.tag.removed]
         li
           strong.code w-select
           ul
@@ -186,12 +252,12 @@ main
     li.minor
       strong.version v2.35.0
       ul
-        li #[strong.code w-switch]: added new #[code track] and #[code thumb] slots. #[span.new]
+        li #[strong.code w-switch]: added new #[code track] and #[code thumb] slots. #[span.tag.new]
 
     li.minor
       strong.version v2.34.0
       ul
-        li #[strong.code w-tabs]: added a new #[code pill-slider] option. #[span.new]
+        li #[strong.code w-tabs]: added a new #[code pill-slider] option. #[span.tag.new]
 
     li.minor
       strong.version v2.33.0
@@ -209,7 +275,7 @@ main
         li
           strong.code w-toolbar
           ul
-            li New #[code vertical] option. #[span.new]
+            li New #[code vertical] option. #[span.tag.new]
         li
           strong.code w-divider
           ul
@@ -240,7 +306,7 @@ main
     li.minor
       strong.version v2.32.0
       ul
-        li #[strong.code w-grid]: Added a new CSS-grid-based layout component. #[span.new]
+        li #[strong.code w-grid]: Added a new CSS-grid-based layout component. #[span.tag.new]
         li #[strong.code w-flex]: Refactored the gap option, now using the CSS #[code gap] property.
 
     li.patch
@@ -288,7 +354,7 @@ main
     li.minor
       strong.version v1.58.0
       ul
-        li #[strong w-button]: added an #[code iconProps] option.#[span.new]
+        li #[strong w-button]: added an #[code iconProps] option.#[span.tag.new]
 
     li.patch
       strong.version v1.57.1
@@ -340,7 +406,7 @@ main
         li
           strong.code w-table:
           ul
-            li added a #[code footer] slot &amp; #[code fixed-footer] option. #[span.new]
+            li added a #[code footer] slot &amp; #[code fixed-footer] option. #[span.tag.new]
         li
           strong.code w-accordion, w-button, w-list, w-rating, w-tabs, w-tag:
           ul
@@ -353,7 +419,7 @@ main
     li.minor
       strong.version v1.54.0
       ul
-        li #[strong.code w-list]: Added a new #[code item-class-key] option. #[span.new]
+        li #[strong.code w-list]: Added a new #[code item-class-key] option. #[span.tag.new]
 
     li.patch
       strong.version v1.53.1
@@ -366,20 +432,20 @@ main
         li
           strong.code w-accordion
           ul
-            li Added a new #[code duration] option. #[span.new]
-            li Fire #[code item-collapsed] when done collapsing. #[span.new]
+            li Added a new #[code duration] option. #[span.tag.new]
+            li Fire #[code item-collapsed] when done collapsing. #[span.tag.new]
         li
           strong.code w-form
           ul
-            li Added a new #[code validation-color] option. #[span.new]
+            li Added a new #[code validation-color] option. #[span.tag.new]
         li
           strong.primary All the form elements
           ul
-            li Added a new #[code label-color] option. #[span.new]
+            li Added a new #[code label-color] option. #[span.tag.new]
         li
           strong.code w-input
           ul
-            li Added a new #[code label-color] option. #[span.new]
+            li Added a new #[code label-color] option. #[span.tag.new]
         li
           strong.code w-transition-expand
           ul
@@ -392,11 +458,11 @@ main
         li
           strong.code w-dialog &amp; w-overlay
           ul
-            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.new]
+            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.tag.new]
         li
           strong.code w-drawer
           ul
-            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.new]
+            li Emit a #[code @before-close] event before closing (and keep #[code @before-close] when done closing). #[span.tag.new]
             li When using #[code push-content], default to a transparent overlay that you can override.
             li When using #[code push-content], default to a width of 200px that you can override.
         li
@@ -406,7 +472,7 @@ main
               Default the #[code appendTo] to the open #[strong.code.black w-dialog],
               #[strong.code w-drawer] or #[strong.code w-menu].
 
-            li Removed the deprecated #[code detachTo] prop (use #[code appendTo] instead).
+            li Removed the deprecated #[code detachTo] prop (use #[code appendTo] instead). #[span.tag.removed]
         li
           strong.code w-select
           ul
@@ -417,9 +483,7 @@ main
     li.minor
       strong.version v1.52.0
       ul
-        li #[strong.code w-toolbar]: new #[code vertical] option.
-        li #[strong.code w-divider]: always stretch the divider, regardless of orientation (also when horizontal).
-        li #[strong.code w-toolbar]: new #[code vertical] option. #[span.new]
+        li #[strong.code w-toolbar]: new #[code vertical] option. #[span.tag.new]
         li #[strong.code w-divider]: always stretch the divider, regardless of orientation (also when horizontal).
 
     li.patch
@@ -456,7 +520,7 @@ main
     li.minor
       strong.version v1.50.0
       ul
-        li #[strong.code w-grid]: Added a new CSS-grid-based layout component. #[span.new]
+        li #[strong.code w-grid]: Added a new CSS-grid-based layout component. #[span.tag.new]
         li #[strong.code w-flex]: Refactored the gap option, now using the CSS #[code gap] property.
 
     li.patch
@@ -479,8 +543,8 @@ main
         li
           strong.code w-menu &amp; w-tooltip
           ul
-            li Added a #[code activator] option to define a separate activator. #[span.new]
-            li Added a #[code delay] option to open the menu/tooltip with a delay. #[span.new]
+            li Added a #[code activator] option to define a separate activator. #[span.tag.new]
+            li Added a #[code delay] option to open the menu/tooltip with a delay. #[span.tag.new]
 
     li.minor
       strong.version v1.48.0
@@ -489,9 +553,9 @@ main
           strong.code w-input type="file"
           ul
             li Support files without extensions.
-            li Add options to disable the preview, or customize the icon. #[span.new]
+            li Add options to disable the preview, or customize the icon. #[span.tag.new]
             li Expose the overall progress for multiple files.
-            li Add option to display a progress bar indicating the actual upload progress. #[span.new]
+            li Add option to display a progress bar indicating the actual upload progress. #[span.tag.new]
 
     li.minor
       strong.version v1.47.0
@@ -503,8 +567,8 @@ main
               The #[code cancel-button] &amp; #[code confirm-button] props are renamed
               to #[code cancel] &amp; #[code confirm] and can also accept a string as a button label.
             li.red.text-bold.
-              The #[code no-cancel] prop is removed and can be replaced with #[code :cancel="false"].
-            li New #[code question] prop in addition to the slot. #[span.new]
+              The #[code no-cancel] prop is removed and can be replaced with #[code :cancel="false"]. #[span.tag.removed]
+            li New #[code question] prop in addition to the slot. #[span.tag.new]
 
     li.minor
       strong.version v1.46.0
@@ -512,14 +576,14 @@ main
         li
           strong.code w-menu
           ul
-            li.red.text-bold Deprecated the #[code detach-to] prop and replaced with #[code append-to].
+            li Deprecated the #[code detach-to] prop and replaced with #[code append-to]. #[span.tag.deprecated]
             li.
               Fix the #[code align-left] &amp; #[code align-right] alignments when using the #[code arrow]
               prop and the default bottom position (without the prop).
         li
           strong.code w-tooltip
           ul
-            li.red.text-bold Deprecated the #[code detach-to] prop and replaced with #[code append-to].
+            li Deprecated the #[code detach-to] prop and replaced with #[code append-to]. #[span.tag.deprecated]
             li
               strong.
                 Now appended to the #[span.code.text-bold w-app] by default - this may impact the
@@ -529,7 +593,7 @@ main
               strong The tooltip is now completely removed from the DOM when hidden.
             li.
               Added more options: #[code persistent], #[code no-position], #[code align-top],
-              #[code align-bottom], #[code align-left], #[code align-right]. #[span.new]
+              #[code align-bottom], #[code align-left], #[code align-right]. #[span.tag.new]
         li
           strong.code w-tag
           ul
@@ -560,7 +624,7 @@ main
     li.patch
       strong.version v1.45.6
       ul
-        li #[strong.code w-flex]: Added the #[code justify-space-evenly] prop. #[span.new]
+        li #[strong.code w-flex]: Added the #[code justify-space-evenly] prop. #[span.tag.new]
 
     li.patch
       strong.version v1.45.5
@@ -606,12 +670,12 @@ main
     li.minor
       strong.version v1.44.0
       ul
-        li #[strong.code w-app]: Added a bunch of options for CSS classes. #[span.new]
+        li #[strong.code w-app]: Added a bunch of options for CSS classes. #[span.tag.new]
 
     li.minor
       strong.version v1.43.0
       ul
-        li #[strong.code w-confirm]: New component. #[span.new]
+        li #[strong.code w-confirm]: New component. #[span.tag.new]
         li #[strong.code w-card]: Allow defining title &amp; content classes as a string, array or object.
         li #[strong.code w-tooltip]: Allow defining a tooltip class as a string, array or object via #[code tooltip-class].
       ul
@@ -621,7 +685,7 @@ main
             li Allow defining a menu class as a string, array or object via #[code menu-class].
             li Allow defining the #[strong.code w-card] title &amp; content classes as a string, array or object.
             li Allow defining an overlay classes as a string, array or object via #[code overlay-class].
-            li Added an #[code arrow] option to display a small triangle on the edge of the menu. #[span.new]
+            li Added an #[code arrow] option to display a small triangle on the edge of the menu. #[span.tag.new]
 
     li.patch
       strong.version v1.42.2
@@ -640,7 +704,7 @@ main
       ul
         li.
           #[strong.code CSS]: Added individual border CSS classes:
-          #[code .bdl1], #[code .bdr1], #[code .bdt1], #[code .bdb1], #[code .bdx1], #[code .bdy1]. #[span.new]
+          #[code .bdl1], #[code .bdr1], #[code .bdt1], #[code .bdb1], #[code .bdx1], #[code .bdy1]. #[span.tag.new]
 
     li.patch
       strong.version v1.41.1
@@ -654,7 +718,7 @@ main
       strong.version v1.41.0
       ul
         li.
-          #[strong.code w-menu]: Allow passing down #[strong.code w-overlay] props &amp; added option for overlay class. #[span.new]
+          #[strong.code w-menu]: Allow passing down #[strong.code w-overlay] props &amp; added option for overlay class. #[span.tag.new]
           #[strong.code w-switch]: Allow external event listeners binding.
 
     li.minor
@@ -667,15 +731,15 @@ main
     li.minor
       strong.version v1.39.0
       ul
-        li #[strong.code w-input]: Support input type file &amp; display images preview. #[span.new]
+        li #[strong.code w-input]: Support input type file &amp; display images preview. #[span.tag.new]
         li.
           #[strong CSS]: Allow disabling the CSS layout classes via the #[code $use-layout-classes]
-          SCSS variable. #[issue-link 61] #[span.new]
+          SCSS variable. #[issue-link 61] #[span.tag.new]
 
     li.minor
       strong.version v1.38.0
       ul
-        li #[strong.code w-table]: Added a column resizing option. #[span.new]
+        li #[strong.code w-table]: Added a column resizing option. #[span.tag.new]
 
     li.minor
       strong.version v1.37.0
@@ -683,7 +747,7 @@ main
       ul
         li #[strong.code w-menu]: When using #[code show-on-hover], keep menu open when hovering the menu from activator and vice-versa.
         li #[strong.code w-menu]: Support #[code hide-on-menu-click] when using #[code show-on-hover].
-        li #[strong.code w-list]: Added a new #[code item-route-key] option. #[span.new]
+        li #[strong.code w-list]: Added a new #[code item-route-key] option. #[span.tag.new]
         li.
           #[strong Form elements:]
           Support #[code tabindex] on form elements (#[strong.code w-input],
@@ -692,9 +756,9 @@ main
 
       strong.mt2.d-block Global
       ul
-        li Added a new #[code v-scroll] directive. #[span.new]
-        li Added new #[code .text-nowrap] CSS helper class. #[span.new]
-        li Added new #[code .text-capitalize] CSS helper class. #[span.new]
+        li Added a new #[code v-scroll] directive. #[span.tag.new]
+        li Added new #[code .text-nowrap] CSS helper class. #[span.tag.new]
+        li Added new #[code .text-capitalize] CSS helper class. #[span.tag.new]
 
     li.patch
       strong.version v1.36.1
@@ -704,13 +768,13 @@ main
     li.minor
       strong.version v1.36.0
       ul
-        li #[strong.code Notification manager]: Add new #[code align] (left or right) &amp; #[code transition] options. #[span.new]
+        li #[strong.code Notification manager]: Add new #[code align] (left or right) &amp; #[code transition] options. #[span.tag.new]
         li Made the global config reactive.
 
     li.minor
       strong.version v1.35.0
       ul
-        li #[strong.code Notification manager]: New #[strong.code $waveui.notify()] method to trigger a notification. #[span.new]
+        li #[strong.code Notification manager]: New #[strong.code $waveui.notify()] method to trigger a notification. #[span.tag.new]
         li.
           #[strong.code w-select]: Fix a selection bug when clicking the select to open and navigating with keyboard arrows.
         li.
@@ -728,13 +792,13 @@ main
     li.minor
       strong.version v1.34.0
       ul
-        li #[strong.code w-select]: Add a new #[code="item.[x]"] slot to allow specific item override. #[span.new]
+        li #[strong.code w-select]: Add a new #[code="item.[x]"] slot to allow specific item override. #[span.tag.new]
 
     li.minor
       strong.version v1.33.0
       ul
         li
-          p #[strong.code w-select]: Added the #[code item-color-key] option. #[span.new]
+          p #[strong.code w-select]: Added the #[code item-color-key] option. #[span.tag.new]
         li
           p #[strong.code w-menu]: Fixed the #[code hide-on-menu-click] option.
         li
@@ -743,7 +807,7 @@ main
             li.
               Improve the #[code item] scoped slots: now returns the #[strong original] #[code item],
               the #[code index], and a #[code checked] boolean.
-            li Add a new #[code="item.[x]"] scoped slot to override 1 particular item only. #[span.new]
+            li Add a new #[code="item.[x]"] scoped slot to override 1 particular item only. #[span.tag.new]
 
     li.patch
       strong.version v1.32.7
@@ -766,25 +830,25 @@ main
     li.patch
       strong.version v1.32.3
       ul
-        li #[strong.code w-input]: add a #[code loading] option to display while performing an async validation. #[issue-link 55] #[span.new]
+        li #[strong.code w-input]: add a #[code loading] option to display while performing an async validation. #[issue-link 55] #[span.tag.new]
         li #[strong.code w-rating]: also accepts a string as the current value.
 
     li.minor
       strong.version v1.32.0
       ul
-        li #[strong.code w-form]: Support async form element validators. #[issue-link 55] #[span.new]
-        li #[strong.code w-icon]: Added option to spin icons anticlockwise. #[span.new]
+        li #[strong.code w-form]: Support async form element validators. #[issue-link 55] #[span.tag.new]
+        li #[strong.code w-icon]: Added option to spin icons anticlockwise. #[span.tag.new]
 
     li.minor
       strong.version v1.31.0
       ul
-        li #[strong.code w-table]: Added support for programmatic row selection. #[issue-link 50] #[span.new]
+        li #[strong.code w-table]: Added support for programmatic row selection. #[issue-link 50] #[span.tag.new]
 
     li.minor
       strong.version v1.30.0
       ul
         li
-          | Added a new #[code css] object in the Wave UI configuration: #[span.new]
+          | Added a new #[code css] object in the Wave UI configuration: #[span.tag.new]
           ul
             li
               | Control the generated CSS to add/remove breakpoint-specific css layout classes.
@@ -798,12 +862,12 @@ main
               | .
             li.red
               strong Custom color shades: disableColorShades is now replaced with css.colorShades
-        li Added the #[code show] &amp; #[code hide] CSS layout classes #[span.new]
+        li Added the #[code show] &amp; #[code hide] CSS layout classes #[span.tag.new]
         li
           | Added #[code="lh[x]"] classes to control the text line-height
           | Read more in
           router-link.ml1(to="/typography") Typography
-          | . #[span.new]
+          | . #[span.tag.new]
 
     li.minor
       strong.version v1.29.0
@@ -842,7 +906,7 @@ main
     li.minor
       strong.version v1.26.0
       ul
-        li Add the #[code disabled] &amp; #[code readonly] options on #[strong.code w-form]. #[issue-link 38] #[span.new]
+        li Add the #[code disabled] &amp; #[code readonly] options on #[strong.code w-form]. #[issue-link 38] #[span.tag.new]
         li Improve the #[strong.code w-form] component (props reactivity, UI consistency in form elements).
 
     li.patch
@@ -860,13 +924,13 @@ main
       ul
         li.
           Added a #[code tabs-bar-extra] slot to allow adding an extra element on the
-          #[strong.code w-tabs] bar. #[span.new]
+          #[strong.code w-tabs] bar. #[span.tag.new]
 
     li.minor
       strong.version v1.24.0
       ul
         li.
-          Added #[router-link(to="/shadows-borders-radii") shadows, borders &amp; border radii] CSS classes. #[span.new]
+          Added #[router-link(to="/shadows-borders-radii") shadows, borders &amp; border radii] CSS classes. #[span.tag.new]
 
     li.patch
       strong.version v1.23.1
@@ -876,25 +940,25 @@ main
     li.minor
       strong.version v1.23.0
       ul
-        li Complete the #[em à la carte] feature, allowing tree-shaking. #[span.new]
+        li Complete the #[em à la carte] feature, allowing tree-shaking. #[span.tag.new]
 
     li.patch
       strong.version v1.22.1
       ul
-        li #[strong.code w-dialog]: Added a #[code dialog-class] option on the component. #[span.new]
+        li #[strong.code w-dialog]: Added a #[code dialog-class] option on the component. #[span.tag.new]
 
     li.minor
       strong.version v1.22.0
       ul
         li Removed the useless full height on html &amp; body.
-        li Added an #[code .align-self-stretch] helper class. #[span.new]
-        li Added the #[code color] &amp; #[code bg-color] options on the #[strong.code w-dialog] component. #[span.new]
+        li Added an #[code .align-self-stretch] helper class. #[span.tag.new]
+        li Added the #[code color] &amp; #[code bg-color] options on the #[strong.code w-dialog] component. #[span.tag.new]
         li Trim the #[strong.code w-icon] icon name to work with ligatures.
 
     li.minor
       strong.version v1.21.0
       ul
-        li Added the #[code item-title-key] &amp; #[code item-content-key] options on #[strong.code w-tabs] component and remove internal #[code _active] prop. #[span.new]
+        li Added the #[code item-title-key] &amp; #[code item-content-key] options on #[strong.code w-tabs] component and remove internal #[code _active] prop. #[span.tag.new]
         li #[strong.code w-select]: Allow selecting items using the keyboard arrows when the select list is closed. #[issue-link 25]
         li #[strong.code w-accordion]: Return original accordion item in scoped slots.
         li #[strong.code w-tabs]: Return original tab item in scoped slots.
@@ -908,7 +972,7 @@ main
     li.patch
       strong.version v1.20.5
       ul
-        li Added a #[code row] class on #[strong.code w-flex] to reset the flex direction to row. #[span.new]
+        li Added a #[code row] class on #[strong.code w-flex] to reset the flex direction to row. #[span.tag.new]
         li Improve pushable-content #[strong.code w-drawer] default styles.
         li Fix: #[strong.code w-dialog] accepts a width as a string. #[issue-link 22]
 
@@ -921,36 +985,36 @@ main
 
     li.minor
       strong.version v1.19.0
-      p Added the row selection feature to the #[strong.code w-table]. #[span.new]
+      p Added the row selection feature to the #[strong.code w-table]. #[span.tag.new]
 
     li.minor
       strong.version v1.18.0
-      p Added an image option to the #[strong.code w-card] component. #[span.new]
+      p Added an image option to the #[strong.code w-card] component. #[span.tag.new]
 
     li.minor
       strong.version v1.17.0
       ul
-        li Allow adding content on top of #[strong.code w-image]. #[span.new]
+        li Allow adding content on top of #[strong.code w-image]. #[span.tag.new]
         li Fix #[strong.code w-image] #[code tag] option not accepting a #[code div] tag.
 
     li.minor
       strong.version v1.16.0
       ul
-        li Support Nuxt. #[span.new]
-        li Added more slots in #[strong.code w-table] component. #[span.new]
+        li Support Nuxt. #[span.tag.new]
+        li Added more slots in #[strong.code w-table] component. #[span.tag.new]
 
     li.patch
       strong.version v1.15.0
       p #[strong.code w-table]
       ul
-        li Added the filter feature #[span.new]
-        li Handle mobile layout with customizable breakpoint per table #[span.new]
-        li Removed the deprecated #[code align] attribute on #[span.code &lt;th&gt;] and #[span.code &lt;td&gt;]
+        li Added the filter feature. #[span.tag.new]
+        li Handle mobile layout with customizable breakpoint per table. #[span.tag.new]
+        li Removed the deprecated #[code align] attribute on #[span.code &lt;th&gt;] and #[span.code &lt;td&gt;]. #[span.tag.removed]
 
     li.patch
       strong.version v1.14.7
       ul
-        li Allow #[code bg-color] on #[strong.code w-notification]. #[issue-link 15] #[span.new]
+        li Allow #[code bg-color] on #[strong.code w-notification]. #[issue-link 15] #[span.tag.new]
         li Fix hiding the #[strong.code w-notification] on timeout when initially showing. #[issue-link 15]
 
     li.patch
@@ -963,16 +1027,16 @@ main
       ul
         li Refactored the sorting feature
         li Added Natural sorting on numbers
-        li Added the #[code fixed-headers] option #[span.new]
+        li Added the #[code fixed-headers] option #[span.tag.new]
 
     li.minor
       strong.version v1.14.0
-      p Created a new #[strong.code w-table] component with basic functionalities. #[span.new]
+      p Created a new #[strong.code w-table] component with basic functionalities. #[span.tag.new]
 
     li.patch
       strong.version v1.13.4
       ul
-        li Improved and completed the #[strong.code w-image] component. #[span.new]
+        li Improved and completed the #[strong.code w-image] component. #[span.tag.new]
         li Allow a click handler on a #[strong.code w-button] that has a route.
 
     li.patch
@@ -985,7 +1049,7 @@ main
 
     li.minor
       strong.version v1.13.0
-      p Added a new #[strong.code w-image] component. #[span.new]
+      p Added a new #[strong.code w-image] component. #[span.tag.new]
 
     li.patch
       strong.version v1.12.1
@@ -995,13 +1059,13 @@ main
 
     li.minor
       strong.version v1.12.0
-      p Added an optional #[code default] slot to the #[strong.code w-divider] component to display content in the middle of the divider. #[span.new]
+      p Added an optional #[code default] slot to the #[strong.code w-divider] component to display content in the middle of the divider. #[span.tag.new]
 
     li.minor
       strong.version v1.11.0
       ul
-        li Improved and finished the #[strong.code w-rating] component. Now validatable in #[strong.code w-form]. #[span.new]
-        li Added a #[code tag] prop to the #[strong.code w-drawer] component and default to #[code &lt;aside&gt;]. #[span.new]
+        li Improved and finished the #[strong.code w-rating] component. Now validatable in #[strong.code w-form]. #[span.tag.new]
+        li Added a #[code tag] prop to the #[strong.code w-drawer] component and default to #[code &lt;aside&gt;]. #[span.tag.new]
 
     li.minor
       strong.version v1.10.0
@@ -1011,7 +1075,7 @@ main
         li Emit an #[code item-select] event on #[strong.code w-list] item select (via click or keyboard #[kbd enter] key press).
         li Emit both #[code item-select] and #[code item-click] events from #[strong.code w-select]'s menu on item select (via click or keyboard #[kbd enter] key press) or item click.
         li Keep a #[strong.code w-select]'s menu open when #[code menuProps.hideOnMenuClick] is explicitly set to false.
-        li Added a #[code no-position] prop to skip computing a #[strong.code w-menu] position (top &amp; left). #[span.new]
+        li Added a #[code no-position] prop to skip computing a #[strong.code w-menu] position (top &amp; left). #[span.tag.new]
         li Re-mount a #[strong.code w-menu] &amp; #[strong.code w-tooltip] in DOM when the #[code detach-to] prop changes.
         li Use vertical padding instead of line height in the #[strong.code w-tag] component.
 
@@ -1039,7 +1103,7 @@ main
     li.minor
       strong.version v1.9.0
       ul
-        li Added a new #[strong.code w-breadcrumbs] component. #[span.new]
+        li Added a new #[strong.code w-breadcrumbs] component. #[span.tag.new]
         li Renamed the #[strong.code w-button]'s #[code to] prop to #[code route].
 
     li.patch
@@ -1050,13 +1114,13 @@ main
 
     li.minor
       strong.version v1.8.0
-      p Added a new #[strong.code w-rating] component. #[span.new]
+      p Added a new #[strong.code w-rating] component. #[span.tag.new]
 
     li.minor
       strong.version v1.7.0
       ul
-        li Added a #[code push-content] prop to the #[strong.code w-drawer] component. #[span.new]
-        li Added an #[code absolute] prop to the #[strong.code w-drawer] component. #[span.new]
+        li Added a #[code push-content] prop to the #[strong.code w-drawer] component. #[span.tag.new]
+        li Added an #[code absolute] prop to the #[strong.code w-drawer] component. #[span.tag.new]
         li.
           Renamed the #[code content-class] prop of the #[strong.code w-drawer] component
           to #[code drawer-class].
@@ -1068,7 +1132,7 @@ main
     li.minor
       strong.version v1.6.0
       ul
-        li Added a #[code no-border] prop on the #[strong.code w-tag] component. #[span.new]
+        li Added a #[code no-border] prop on the #[strong.code w-tag] component. #[span.tag.new]
         li Improved the #[strong.code w-timeline] component.
         li.
           Renamed the #[strong.code w-icon]'s #[code rotate225], #[code rotate270], #[code rotate315]
@@ -1085,7 +1149,7 @@ main
     li.minor
       strong.version v1.5.0
       ul
-        li Added a new #[strong.code w-timeline] component. #[span.new]
+        li Added a new #[strong.code w-timeline] component. #[span.tag.new]
         li Fixed checkbox &amp; radio not emitting #[code input] event on Edge (known Edge bug).
         li.
           Fixed #[strong.code w-input], #[strong.code w-textarea] &amp; #[strong.code w-select]
@@ -1097,15 +1161,15 @@ main
 
     li.minor
       strong.version v1.4.0
-      p Added a new #[strong.code w-spinner] component. #[span.new]
+      p Added a new #[strong.code w-spinner] component. #[span.tag.new]
 
     li.minor
       strong.version v1.3.0
       ul
         li Allow dynamic breakpoints customization.
-        li Added the #[code no-unselect] option on #[strong.code w-select] &amp; #[strong.code w-list] components. #[span.new]
-        li Added the #[code selection-color] option on #[strong.code w-select] &amp; #[strong.code w-list] components. #[span.new]
-        li Layout improvement on #[strong.code w-select] component &amp; added the #[code menu-props] option. #[span.new]
+        li Added the #[code no-unselect] option on #[strong.code w-select] &amp; #[strong.code w-list] components. #[span.tag.new]
+        li Added the #[code selection-color] option on #[strong.code w-select] &amp; #[strong.code w-list] components. #[span.tag.new]
+        li Layout improvement on #[strong.code w-select] component &amp; added the #[code menu-props] option. #[span.tag.new]
         li Fixed unmounting #[strong.code w-menu] &amp; #[strong.code w-tabs].
 
     li.patch
@@ -1117,8 +1181,8 @@ main
       ul
         li Emit a #[code close] event on #[strong.code w-alert] dismiss/hide.
         li Emit a #[code focus] event on #[strong.code w-accordion] item focus.
-        li Added #[code item-title] &amp; #[code item-content] props on #[strong.code w-accordion]. #[span.new]
-        li Added #[code disabled] &amp; #[code readonly] props on #[strong.code w-checkboxes] &amp; #[strong.code w-radios]. #[span.new]
+        li Added #[code item-title] &amp; #[code item-content] props on #[strong.code w-accordion]. #[span.tag.new]
+        li Added #[code disabled] &amp; #[code readonly] props on #[strong.code w-checkboxes] &amp; #[strong.code w-radios]. #[span.tag.new]
 
     li.minor
       strong.version v1.2.0
@@ -1126,7 +1190,7 @@ main
         li.
           Removed all the #[code change] emitted events on all the UI components as redundant.
           You can use #[code input] instead.
-        li Added an #[code inline] option on #[strong.code w-badge]. #[span.new]
+        li Added an #[code inline] option on #[strong.code w-badge]. #[span.tag.new]
 
     li.major
       strong.version v1.0.0
@@ -1152,7 +1216,7 @@ main
       border-radius: 1em;
       border: 1px solid #ddd;
       width: 1em;
-      height: 1em;
+      aspect-ratio: 1;
       transform: translate(-50%, -50%);
       z-index: 1;
     }
@@ -1196,7 +1260,7 @@ main
       top: 3px;
       left: 0;
       width: 1em;
-      height: 1em;
+      aspect-ratio: 1;
     }
 
     li li li:before {content: '\e007';}
@@ -1212,17 +1276,20 @@ main
   .vue-green {color: #42b883;}
   .vue-green--bg {background-color: #42b883;}
 
-  span.new {
+  span.tag {
     border-radius: 99em;
     padding: 2px 5px;
-    background-color: #3698e5;
     color: #fff;
     font-weight: bold;
     font-size: 9px;
     position: relative;
     top: -1px;
-
-    &:before {content: 'NEW';}
   }
+  span.new {background-color: #3698e5;}
+  span.new:before {content: 'NEW';}
+  span.deprecated {background-color: #000;}
+  span.deprecated:before {content: 'DEPRECATED';}
+  span.removed {background-color: #f02c2c;}
+  span.removed:before {content: 'REMOVED';}
 }
 </style>

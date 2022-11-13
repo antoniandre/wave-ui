@@ -210,6 +210,29 @@ div
       data: () => ({
         value: true
       })
+
+  title-link(h2) Loading
+  p.
+    If a number is given it will be the value of the progress. If true is given, the progress will
+    be indefinitely spinning.
+  example(content-class="pt4")
+    w-switch.ma2(:value="true" :loading="43")
+    w-switch.ma2(:value="true" loading)
+    template(#pug).
+      w-switch.ma2(:value="true" :loading="43")
+      w-switch.ma2(:value="true" loading)
+    template(#html).
+      &lt;w-switch
+        class="ma2"
+        :value="true"
+        :loading="43"&gt;
+      &lt;/w-switch&gt;
+
+      &lt;w-switch
+        class="ma2"
+        :value="true"
+        loading&gt;
+      &lt;/w-switch&gt;
 </template>
 
 <script>

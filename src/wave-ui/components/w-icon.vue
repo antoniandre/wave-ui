@@ -111,6 +111,7 @@ export default {
   line-height: 1;
   font-size: 1.2em;
   width: 1em;
+  // The aspect ratio will not work if the content is the content overflows.
   height: 1em;
 
   &.size--xs {font-size: round(0.85 * $base-font-size);}

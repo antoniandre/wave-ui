@@ -481,7 +481,7 @@ main
   alert.mt12(warning)
     | Be aware that when using #[code v-if], the transitions unmount components as soon as the
     | transition starts the leave phase (#[code @before-leave] and not #[code @after-leave]).
-    | #[br]This is by design:
+    | #[br]This is by design in Vue:
     a.ml1(href="https://github.com/vuejs/core/issues/994")
       | Unmounted hooks should run with afterLeave (#994)
       w-icon.ml1 mdi mdi-open-in-new

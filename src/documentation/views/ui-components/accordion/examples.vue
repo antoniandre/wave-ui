@@ -493,10 +493,52 @@ div
       })
 
   title-link(h2) Toggle icon options
+  title-link(h3) Alternative style
+  p.
+    With the option #[code icon-rotate90], the icon will initially point to the left and will
+    rotate 90 degrees clockwise when expanding.
   example(content-class="pa4 aliceblue")
-    .title4 1 custom icon (only expand)
+    .title4 Icon on the left
+    w-accordion.white--bg(:items="items" expand-icon-rotate90)
+    .title4.mt6 Icon on the right
+    w-accordion.white--bg(:items="items" expand-icon-rotate90 expand-icon-right)
+    template(#pug).
+      .title4 Icon on the left
+      w-accordion(:items="items" icon-rotate90)
+
+      .title4.mt6 Icon on the right
+      w-accordion(:items="items" icon-rotate90 expand-icon-right)
+    template(#html).
+      &lt;div class="title4"&gt;
+        Icon on the left
+      &lt;/div&gt;
+      &lt;w-accordion
+        :items="items"
+        icon-rotate90&gt;
+      &lt;/w-accordion&gt;
+
+      &lt;div class="title4 mt8"&gt;
+        Icon on the right
+      &lt;/div&gt;
+      &lt;w-accordion
+        :items="items"
+        icon-rotate90
+        expand-icon-right&gt;
+      &lt;/w-accordion&gt;
+    template(#js).
+      data: () => ({
+        items: [
+          { title: 'Item 1', content: 'Content 1' },
+          { title: 'Item 2', content: 'Content 2' },
+          { title: 'Item 3', content: 'Content 3' }
+        ]
+      })
+
+  title-link(h3) More options
+  example(content-class="pa4 aliceblue")
+    .title4 One custom icon (only expand)
     w-accordion.white--bg(:items="items" expand-icon="wi-chevron-down")
-    .title4.mt6 2 custom icons (expand &amp; collapse)
+    .title4.mt6 Two custom icons (expand &amp; collapse)
     w-accordion.white--bg(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
     .title4.mt6 No icon
     w-accordion.white--bg(:items="items" :expand-icon="false" title-class="py2")

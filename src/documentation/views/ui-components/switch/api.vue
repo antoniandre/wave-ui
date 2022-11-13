@@ -20,13 +20,14 @@ const propsDescs = {
   labelOnLeft: 'Moves the label to the left of the switch. By default the label is displayed on the right.',
   color: 'Applies a color to the switch. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   labelColor: 'Applies a specific color to the switch\'s label. Note that on validation failure, the validation-color takes precedence.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  thin: 'Applies a thiner style to the switch.',
+  thin: 'Applies a thinner style to the switch.',
   noRipple: 'Removes the ripple animation on activation.',
   name: 'Provide a native HTML <code>name</code> attribute to the switch. If not provided, a unique name will be computed.',
   disabled: 'Disables the switch making it unreactive to user interactions.',
   readonly: 'The switch will still look like an interactive switch except that it is read-only: its current state cannot be changed by user interaction.',
   required: 'Applies the native HTML <code>required</code> attribute to the switch.',
-  validators: '<span class="deep-orange">Only for validation, when the switch is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the switch. Each function will be executed on switch   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the switch.'
+  validators: '<span class="deep-orange">Only for validation, when the switch is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the switch. Each function will be executed on switch   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the switch.',
+  loading: 'When set to <code>true</code>, displays an indefinite-value progress circle inside the switch thumb. If a number is given, it will be the value of the progress.'
 }
 
 const slots = {

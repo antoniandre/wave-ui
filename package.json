@@ -3,29 +3,33 @@
   "version": "1.58.0",
   "description": "An emerging UI framework for Vue.js (2 & 3) with only the bright side. :sunny:",
   "author": "Antoni Andre <antoniandre.web@gmail.com>",
-  "license": "MIT",
+  "homepage": "https://antoniandre.github.io/wave-ui",
   "repository": "https://github.com/antoniandre/wave-ui",
+  "license": "MIT",
   "funding": "https://github.com/sponsors/antoniandre",
-  "main": "./dist/wave-ui.umd.js",
+  "main": "./dist/wave-ui.es.js",
   "unpkg": "dist/wave-ui.umd.js",
   "jsdelivr": "dist/wave-ui.umd.js",
   "module": "./dist/wave-ui.es.js",
+  "files": [
+    "dist",
+    "src/wave-ui"
+  ],
   "exports": {
-    "./dist/wave-ui.css": "./dist/wave-ui.css",
-    "./dist/wave-ui.cjs.js": "./dist/wave-ui.cjs.js",
-    "./src/wave-ui": "./src/wave-ui/index.js",
-    "./src/wave-ui/scss/_variables.scss": "./src/wave-ui/scss/_variables.scss",
     ".": {
       "import": "./dist/wave-ui.es.js",
       "require": "./dist/wave-ui.umd.js"
     },
     "./package.json": "./package.json",
     "./dist/*": "./dist/*",
+    "./src/wave-ui": "./src/wave-ui/index.js",
     "./src/wave-ui/*": "./src/wave-ui/*"
   },
-  "files": [
-    "dist",
-    "src/wave-ui"
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "*.scss",
+    "*.vue"
   ],
   "keywords": [
     "wave ui",
@@ -43,15 +47,11 @@
     "serve": "vite preview --base /wave-ui/",
     "lint": "vite lint"
   },
-  "sideEffects": [
-    "*.css",
-    "*.scss",
-    "*.vue"
-  ],
   "devDependencies": {
     "@babel/core": "^7.20.2",
     "@babel/eslint-parser": "^7.19.1",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@mdi/font": "^6.9.96",
     "@vitejs/plugin-vue": "^1.10.2",
     "autoprefixer": "^10.4.13",
     "axios": "^0.21.4",
@@ -81,8 +81,5 @@
     "vue-template-compiler": "^2.7.14",
     "vueperslides": "^2.16.0",
     "vuex": "^3.6.2"
-  },
-  "dependencies": {
-    "@mdi/font": "^6.9.96"
   }
 }

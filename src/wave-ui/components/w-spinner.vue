@@ -61,7 +61,7 @@ export default {
   align-self: center;
   font-size: 2rem;
   width: 1em;
-  height: 1em;
+  aspect-ratio: 1;
 
   &.size--xs {font-size: round(0.9 * divide($base-font-size, 2)) * 2;}
   &.size--sm {font-size: round(1.5 * $base-font-size);}
@@ -73,7 +73,7 @@ export default {
     content: '';
     position: absolute;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     top: 0;
     left: 0;
     background-color: currentColor;

@@ -178,8 +178,10 @@ export default {
 
       if (!this.fillBar && this.activeTabEl) {
         const { left, width } = this.activeTabEl.getBoundingClientRect()
-        const { left: parentLeft } = this.activeTabEl.parentNode.getBoundingClientRect()
-        this.slider.left = `${left - parentLeft + this.activeTabEl.parentNode.scrollLeft}px`
+        const tabsBar = this.activeTabEl.parentNode
+        const { left: parentLeft } = tabsBar.getBoundingClientRect()
+        const { borderLeftWidth } = getComputedStyle(tabsBar)
+        this.slider.left = `${left - parentLeft - parseInt(borderLeftWidth) + tabsBar.scrollLeft}px`
         this.slider.width = `${width}px`
       }
       else {

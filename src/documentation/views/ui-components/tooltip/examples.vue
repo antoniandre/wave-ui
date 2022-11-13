@@ -1147,7 +1147,7 @@ export default {
       position: absolute;
       background-color: #ffea62;
       width: 6em;
-      height: 6em;
+      aspect-ratio: 1;
       border-radius: 100%;
     }
 

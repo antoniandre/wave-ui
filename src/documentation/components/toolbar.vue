@@ -4,7 +4,7 @@ w-toolbar.main-toolbar(fixed)
     w-icon.wave-logo.mr3(size="3em") wi-wave
     span.grey-dark1 Wave UI
   .spacer
-  strong.version.grey.size--xs(v-html="`Version ${version}`")
+  strong.version.size--xs(v-html="`Version <code>${version}</code>`")
   w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
       div.ml1(v-on="on")
@@ -32,7 +32,6 @@ w-toolbar.main-toolbar(fixed)
 </template>
 
 <script>
-
 export default {
   props: {
     drawerOpen: { type: Boolean, default: false }
@@ -76,10 +75,21 @@ div.main-toolbar {
     span {font: 22px 'title font', helvetica, arial;}
   }
 
+  .version {
+    color: #aaa;
+
+    code {
+      letter-spacing: -0.5px;
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
+    }
+  }
   .github-link .w-icon, .wave-logo {color: #1670b4;}
 
   .hamburger-menu {margin-left: 8px;}
-  .hamburger-menu .w-icon {width: 26px;height: 26px;}
+  .hamburger-menu .w-icon {width: 26px;}
 }
 
 @media screen and (max-width: 410px) {

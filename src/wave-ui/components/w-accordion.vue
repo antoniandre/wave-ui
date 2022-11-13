@@ -15,12 +15,13 @@
       w-button.w-accordion__expand-icon(
         v-if="expandIcon && !expandIconRight"
         :icon="(item._expanded && collapseIcon) || expandIcon"
+        :icon-props="expandIconProps"
         :disabled="item._disabled || null"
         :tabindex="-1"
         text
         @keypress.stop
         @click.stop="!item._disabled && toggleItem(item, $event)"
-        :class="{ 'w-accordion__expand-icon--expanded': item._expanded }")
+        :class="{ 'w-accordion__expand-icon--expanded': item._expanded, 'w-accordion__expand-icon--rotate90': expandIconRotate90 }")
       //- Title.
       slot(
         v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
@@ -36,7 +37,7 @@
         text
         @keypress.stop
         @click.stop="!item._disabled && toggleItem(item, $event)"
-        :class="{ 'w-accordion__expand-icon--expanded': item._expanded }")
+        :class="{ 'w-accordion__expand-icon--expanded': item._expanded, 'w-accordion__expand-icon--rotate90': expandIconRotate90 }")
     //- Content.
     w-transition-expand(
       y
@@ -77,6 +78,8 @@ export default {
     contentClass: { type: String },
     expandIcon: { type: [String, Boolean], default: 'wi-triangle-down' },
     expandIconRight: { type: Boolean },
+    expandIconRotate90: { type: Boolean },
+    expandIconProps: { type: Object, default: () => ({}) },
     expandSingle: { type: Boolean },
     collapseIcon: { type: String },
     shadow: { type: Boolean },
@@ -174,8 +177,9 @@ export default {
     margin-right: $base-increment;
 
     .w-accordion--rotate-icon & {@include default-transition;}
+    &--rotate90 {transform: rotate(-90deg);}
     &--expanded {transform: rotate(-180deg);}
-    .w-accordion--icon-right &--expanded {transform: rotate(180deg);}
+    &--expanded.w-accordion__expand-icon--rotate90 {transform: rotate(0deg);}
 
     .w-icon:before {font-size: 1.1em;}
   }

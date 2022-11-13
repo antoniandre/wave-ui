@@ -12,11 +12,14 @@
           v-if="cancel !== false"
           v-bind="cancelButtonProps"
           :bg-color="(cancelButton || {}).bgColor || 'error'"
+          @keyup.escape="!persistent && onCancel()"
           @click="onCancel")
           slot(name="cancel") {{ cancelButton.label }}
         w-button(
           v-bind="confirmButtonProps"
           :bg-color="(confirmButton || {}).bgColor || 'success'"
+          v-focus
+          @keyup.escape="!persistent && onCancel()"
           @click="onConfirm")
           slot(name="confirm") {{ confirmButton.label }}
 </template>
@@ -45,7 +48,11 @@ export default {
     inline: { type: Boolean }, // The layout inside the menu.
 
     // W-menu props.
-    menu: { type: Object }, // Allow passing down an object of props to the w-menu component.
+    // Allow passing down an object of props to the w-menu component.
+    menu: { type: Object, default: () => ({}) },
+    // Allow passing down an object of props to the w-tooltip component.
+    // If a string is given, that will be the label of the tooltip.
+    tooltip: { type: [Boolean, Object, String] },
     // All the menu props shorthands, as long as they don't conflict with the button props.
     noArrow: { type: Boolean }, // Adds a directional triangle to the edge of the menu, like a tooltip.
     top: { type: Boolean },
@@ -104,11 +111,20 @@ export default {
         ...this.menu
       }
     },
+    tooltipObject () {
+      let tooltip = { label: typeof this.tooltip === 'string' ? this.tooltip : '' }
+      if (typeof this.tooltip === 'object') tooltip = Object.assign({}, tooltip, this.tooltip)
+      return tooltip
+    },
     buttonProps () {
+      const { label, ...tooltipProps } = this.tooltipObject
+
       return {
         bgColor: this.bgColor,
         color: this.color,
         icon: this.icon,
+        tooltip: label,
+        tooltipProps,
         ...this.mainButton
       }
     }

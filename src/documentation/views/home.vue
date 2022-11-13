@@ -496,6 +496,7 @@ export default {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10em;
     font-size: 50px;
+    aspect-ratio: 1;
   }
   // @for $j from 1 through 2 {
   //   @for $i from 1 through 5 {
@@ -516,7 +517,6 @@ export default {
 
   .bubbles__plan--1 .bubble--1 {
     width: 0.833em;
-    height: 0.833em;
     left: 90%;
     top: 44%;
     filter: blur(6px);
@@ -524,7 +524,6 @@ export default {
   }
   .bubbles__plan--1 .bubble--2 {
     width: 1.11em;
-    height: 1.11em;
     left: 95%;
     top: 28%;
     filter: blur(6px);
@@ -533,7 +532,6 @@ export default {
 
   .bubbles__plan--2 .bubble--1 {
     width: 0.95em;
-    height: 0.95em;
     left: 83%;
     top: 41%;
     filter: blur(4px);
@@ -541,7 +539,6 @@ export default {
   }
   .bubbles__plan--2 .bubble--2 {
     width: 0.81em;
-    height: 0.81em;
     left: 91%;
     top: 53%;
     filter: blur(4px);
@@ -549,7 +546,6 @@ export default {
   }
   .bubbles__plan--2 .bubble--3 {
     width: 0.34em;
-    height: 0.34em;
     left: 90%;
     top: 62%;
     filter: blur(7px);
@@ -557,7 +553,6 @@ export default {
   }
   .bubbles__plan--2 .bubble--4 {
     width: 0.76em;
-    height: 0.76em;
     left: 4%;
     top: 66%;
     filter: blur(6px);

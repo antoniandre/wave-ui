@@ -177,8 +177,8 @@ export default {
     attrs () {
       // Keep the `class` attribute bound to the wrapper and not the input.
       // eslint-disable-next-line no-unused-vars
-      const { class: classes, ...attrs } = this.$attrs
-      return attrs
+      const { class: classes, ...htmlAttrs } = this.$attrs
+      return htmlAttrs
     },
 
     listeners () {
@@ -376,6 +376,8 @@ $inactive-color: #777;
 
     span.fade-leave-to {position: absolute;}
   }
+
+  &--loading {cursor: wait;}
 
   // Input field wrapper.
   // ------------------------------------------------------

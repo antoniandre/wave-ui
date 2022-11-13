@@ -31,21 +31,22 @@ main
     h2.gold Gold Sponsors 🔥
     .gold-sponsors
       a(href="https://divriots.com/" target="_blank")
-        strong &lt;div&gt;riots
-
+        img(:src="DivRiotsLogo")
 </template>
 
 <script>
 import axios from 'axios'
+import DivRiotsLogo from '@/assets/divriots.svg'
 
 const githubBackers = [
-  'divriots', 'nmauersberg', 'crbast', 'CoolGoose', 'bohdaq', 'consuman', 'bastien09',
+  'divriots', 'nmauersberg', 'KleinSamuel', 'crbast', 'CoolGoose', 'bohdaq', 'consuman', 'bastien09',
   'micksp', 'orefalo', 'helenetran', 'antoniandre'
 ]
 
 export default {
   data: () => ({
-    backers: []
+    backers: [],
+    DivRiotsLogo
   }),
 
   created () {
@@ -83,7 +84,7 @@ export default {
     align-items: center;
     justify-content: center;
     width: 4em;
-    height: 4em;
+    aspect-ratio: 1;
     border-radius: 4em;
     background-color: #ddd;
     overflow: hidden;
@@ -95,18 +96,9 @@ export default {
   justify-content: center;
 
   a {
-    color: #000;
-    background-color: rgba(0, 0, 0, 0.03);
-    width: 11em;
-    height: 11em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    width: 11rem;
 
-  strong {
-    font-size: 2em;
-    font-weight: 400;
+    img {display: block;}
   }
 }
 </style>

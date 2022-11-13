@@ -1,7 +1,6 @@
 import config, { mergeConfig } from './utils/config'
 import NotificationManager from './utils/notification-manager'
 import colors from './utils/colors'
-import { consoleWarn } from './utils/console'
 // import * as directives from './directives'
 
 const shadeColor = (col, amt) => {
@@ -42,8 +41,8 @@ export default class WaveUI {
     //   if (directives[id]) Vue.directive(id, directives[id])
     // }
     Vue.directive('focus', {
-      // When the bound element is inserted into the DOM.
-      inserted: el => el.focus()
+      // Wait for the next tick to focus the newly mounted element.
+      inserted: el => setTimeout(() => el.focus(), 0)
     })
     Vue.directive('scroll', {
       inserted: (el, binding) => {

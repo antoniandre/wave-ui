@@ -60,6 +60,7 @@ import DetachableMixin from '../mixins/detachable'
 export default {
   name: 'w-menu',
   mixins: [DetachableMixin],
+  inheritAttrs: false, // The attrs are only bound to the button-partial, not the root.
 
   props: {
     value: {}, // Show or hide.

@@ -20,6 +20,7 @@ export default {
     value: {},
     opacity: { type: [Number, String, Boolean] },
     bgColor: { type: String },
+    absolute: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
     persistent: { type: Boolean },
     persistentNoAnimation: { type: Boolean }
@@ -46,7 +47,8 @@ export default {
     },
     classes () {
       return {
-        'w-overlay--persistent-animate': this.persistentAnimate
+        'w-overlay--persistent-animate': this.persistentAnimate,
+        'w-overlay--absolute': this.absolute
       }
     },
     styles () {
@@ -111,6 +113,7 @@ export default {
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.3);
 
+  &--absolute {position: absolute;}
   &--persistent-animate {animation: 0.15s w-overlay-pop cubic-bezier(0.6, -0.28, 0.74, 0.05);}
   &--no-pointer-event {pointer-events: none;}
 }

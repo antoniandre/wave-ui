@@ -193,6 +193,61 @@ div
           { title: 'Tab 5', content: 'Tab 5 content.', disabled: true }
         ]
       })
+  title-link(h3) Example of a different style, involving some external CSS
+  example
+    w-tabs.macos-tabs(:items="tabs2.items" pill-slider)
+    template(#pug).
+      w-tabs(:items="tabs" pill-slider)
+    template(#html).
+      &lt;w-tabs :items="tabs" pill-slider&gt;&lt;/w-tabs&gt;
+    template(#js).
+      data: () => ({
+        tabs: [
+          { title: 'Tab 1', content: 'Tab 1 content.' },
+          { title: 'Tab 2', content: 'Tab 2 content.' },
+          { title: 'Tab 3', content: 'Tab 3 content.' },
+          { title: 'Tab 4', content: 'Tab 4 content.' },
+          { title: 'Tab 5', content: 'Tab 5 content.', disabled: true }
+        ]
+      })
+    template(#css).
+      .w-app .w-tabs {border: none;}
+      .w-app .w-tabs__bar {
+        display: inline-flex;
+        margin-bottom: 12px;
+        padding: 0;
+        background: #eee;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        z-index: 0;
+        overflow: visible;
+      }
+      .w-app .w-tabs__slider {
+        opacity: 1;
+        background-color: #fff;
+        bottom: 0;
+        height: 100%;
+        border-radius: 6px;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+      }
+      .w-app .w-tabs__bar-item {
+        padding: 2px 10px;
+        font-size: 1.1rem;
+      }
+      .w-app .w-tabs__bar-item  > * {z-index: 1;}
+
+      .w-app .w-tabs__bar-item:before {
+        content: '';
+        position: absolute;
+        top: 25%;
+        bottom: 25%;
+        right: 100%;
+        transform: translateX(-50%);
+        border-left: 1px solid #d2d2d2;
+        display: block;
+        opacity: 1;
+      }
+      .w-app .w-tabs__bar-item:first-child:before {display: none;}
 
   title-link(h2) No slider
   example
@@ -623,5 +678,47 @@ export default {
   overflow: hidden;
   margin-left: -20px;
   padding-left: 20px;
+
+  .macos-tabs {
+    border: none;
+
+    .w-tabs__bar {
+      display: inline-flex;
+      margin-bottom: 12px;
+      padding: 0;
+      background: #eee;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      z-index: 0;
+      overflow: visible;
+    }
+    .w-tabs__slider {
+      opacity: 1;
+      background-color: #fff;
+      bottom: 0;
+      height: 100%;
+      border-radius: 6px;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+    }
+    .w-tabs__bar-item {
+      padding: 2px 10px;
+      font-size: 1.1rem;
+
+      > * {z-index: 1;}
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 25%;
+        bottom: 25%;
+        right: 100%;
+        transform: translateX(-50%);
+        border-left: 1px solid #d2d2d2;
+        display: block;
+        opacity: 1;
+      }
+      &:first-child:before {display: none;}
+    }
+  }
 }
 </style>

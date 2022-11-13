@@ -21,19 +21,29 @@ component(
     role="radio")
   template(v-if="hasLabel && labelOnLeft")
     label.w-radio__label.w-form-el-shakable.pr2(
-      v-if="$slots.default || label"
+      v-if="$slots.default"
       :for="`w-radio--${_uid}`"
       :class="labelClasses")
       slot {{ label }}
+    label.w-radio__label.w-form-el-shakable.pr2(
+      v-else-if="label"
+      :for="`w-radio--${_uid}`"
+      :class="labelClasses"
+      v-html="label")
   .w-radio__input(
     @click="$refs.input.focus();$refs.input.click()"
     :class="this.color")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-radio__label.w-form-el-shakable.pl2(
-      v-if="$slots.default || label"
+      v-if="$slots.default"
       :for="`w-radio--${_uid}`"
       :class="labelClasses")
       slot {{ label }}
+    label.w-radio__label.w-form-el-shakable.pl2(
+      v-else-if="label"
+      :for="`w-radio--${_uid}`"
+      :class="labelClasses"
+      v-html="label")
 </template>
 
 <script>
@@ -154,7 +164,7 @@ $inactive-color: #666;
     position: relative;
     border-radius: 100%;
     width: $small-form-el-size;
-    height: $small-form-el-size;
+    aspect-ratio: 1;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
@@ -198,7 +208,7 @@ $inactive-color: #666;
     content: "";
     position: absolute;
     width: inherit;
-    height: inherit;
+    aspect-ratio: 1;
     background-color: currentColor;
     border-radius: 100%;
     transform: scale(0);

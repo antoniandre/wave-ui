@@ -166,7 +166,7 @@ export default {
   &__button {
     position: relative;
     width: 1.1em;
-    height: 1.1em;
+    aspect-ratio: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -216,6 +216,7 @@ export default {
     position: absolute;
     left: 0;
     width: 100%;
+    height: 100%;
     font-size: 1em;
     justify-content: flex-start;
     overflow: hidden;
