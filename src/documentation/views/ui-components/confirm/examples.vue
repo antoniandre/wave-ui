@@ -6,8 +6,40 @@ div
         The purpose of the #[strong.code w-confirm] component is to quickly set up a
         confirmation prompt to confirm a critical action.
       li.
-        The #[strong.code w-confirm] component uses #[strong.code w-menu], and
-        #[strong.code w-buttons] components.
+        The #[strong.code w-confirm] component uses the #[strong.code w-menu] and
+        #[strong.code w-button] components.
+
+  title-link(h2) Integrated tooltip
+  p.
+    We often need a tooltip on a button. Especially on the ones that only have an icons.#[br]
+    That's why from version 2.45.0, the #[strong.code w-button] &amp; #[strong.code w-confirm]
+    components ship with an integrated w-tooltip, if you need it.
+
+  example(content-class="text-center" app-props-string="align-center")
+    .w-flex.wrap
+      w-confirm.ma4(tooltip="Delete this?") Delete
+      w-confirm.ma4(
+        :tooltip="{ label: 'Delete this?', bgColor: 'error', top: true, transition: 'twist' }")
+        | Delete
+    template(#pug).
+      w-flex(wrap)
+        w-confirm.ma4(tooltip="Delete this?") Delete
+
+        w-confirm.ma4(
+          :tooltip="{ label: 'Delete this?', bgColor: 'error', top: true, transition: 'twist' }")
+          | Delete
+    template(#html).
+      &lt;w-flex wrap&gt;
+        &lt;w-confirm class="ma4" tooltip="Delete this?"&gt;
+          Delete
+        &lt;/w-confirm&gt;
+
+        &lt;w-confirm
+          class="ma4"
+          :tooltip="{ label: 'Delete this?', bgColor: 'error', top: true, transition: 'twist' }"&gt;
+          Delete
+        &lt;/w-confirm&gt;
+      &lt;/w-flex&gt;
 
   title-link(h2) Basic
   example(content-class="text-center" app-props-string="align-center")
