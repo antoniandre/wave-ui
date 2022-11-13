@@ -352,9 +352,65 @@ main
             li Consider tel &amp; mailto external address.
 
     li.minor
+      strong.version v1.59.0
+      ul
+        li
+          strong.code w-button
+          ul
+            li Added the #[code tooltip] and #[code tooltip-props] options in order to facilitate the tooltip use. #[span.tag.new]
+        li
+          strong.code w-accordion
+          ul
+            li Added the #[code expand-icon-rotate90] option as an alternative expand icon style. #[span.tag.new]
+            li Added the #[code expand-icon-props] option to have more control on the #[strong.code w-icon]. #[span.tag.new]
+        li
+          strong.code w-overlay
+          ul
+            li Added an #[code absolute] option. #[span.tag.new]
+        li
+          strong.code w-tabs
+          ul
+            li Count any tabs bar left border width in the slider position calculation.
+        li
+          strong.code w-radio &amp; w-checkbox
+          ul
+            li Allow HTML in the #[code label] attribute (previously only allowed through the default slot).
+        li
+          strong.code w-switch
+          ul
+            li Added a #[code loading] option. #[span.tag.new]
+        li
+          strong.code w-input
+          ul
+            li Added a wait cursor while loading.
+        li
+          strong.code w-confirm
+          ul
+            li Automatically set the focus on the confirm button when opening the popup.
+            li Cancel and close the popup on #[kbd escape] key pressed (if not persistent). #[span.tag.new]
+            li Added the #[code tooltip] options in order to facilitate the tooltip use. #[span.tag.new]
+            ul
+        li
+          strong.code w-checkbox
+          ul
+            li Refine the checkbox look &amp; facilitate any CSS override.
+        li
+          strong.code w-image
+          ul
+            li Prevent images to grow or shrink with flex context.
+        li
+          strong Round elements
+          ul
+            li Define #[code aspect-ratio] in UI components when possible to facilitate overrides.
+        li
+          strong.code Wave UI
+          ul
+            li Now defaults to ES Module.
+
+    li.minor
       strong.version v1.58.0
       ul
-        li #[strong w-button]: added an #[code iconProps] option.#[span.tag.new]
+        li #[strong.code w-button]: added an #[code iconProps] option.#[span.tag.new]
 
     li.patch
       strong.version v1.57.1
