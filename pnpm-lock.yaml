@@ -21,12 +21,12 @@ specifiers:
   ionicons: ^4.6.3
   material-design-icons: ^3.0.1
   postcss: ^8.4.19
+  pug: ^3.0.2
   rollup-plugin-delete: ^2.0.0
   sass: ^1.56.1
   simple-syntax-highlighter: ^1.5.1
   splitpanes: ^2.4.1
   vite: ^2.9.15
-  vite-plugin-pug: ^0.3.2
   vite-plugin-vue2: ^1.9.3
   vue: ^2.7.14
   vue-router: ^3.6.5
@@ -58,13 +58,13 @@ devDependencies:
   ionicons: 4.6.3
   material-design-icons: 3.0.1
   postcss: 8.4.19
+  pug: 3.0.2
   rollup-plugin-delete: 2.0.0
   sass: 1.56.1
   simple-syntax-highlighter: 1.5.1
   splitpanes: 2.4.1
   vite: 2.9.15_sass@1.56.1
-  vite-plugin-pug: 0.3.2
-  vite-plugin-vue2: 1.9.3_ntlzklfpitopf6dzohkoty73um
+  vite-plugin-vue2: 1.9.3_js42y76rf6ipi432ouwyuhqeja
   vue: 2.7.14
   vue-router: 3.6.5
   vue-svg-loader: 0.16.0_s72bufat24j4xi363kb5czieqe
@@ -683,10 +683,10 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /@vue/component-compiler-utils/3.3.0:
+  /@vue/component-compiler-utils/3.3.0_pug@3.0.2:
     resolution: {integrity: sha512-97sfH2mYNU+2PzGrmK2haqffDpVASuib9/w2/noxiFi31Z54hW+q3izKQXXQZSNhtiUpAI36uSuYepeBe4wpHQ==}
     dependencies:
-      consolidate: 0.15.1
+      consolidate: 0.15.1_pug@3.0.2
       hash-sum: 1.0.2
       lru-cache: 4.1.5
       merge-source-map: 1.1.0
@@ -1060,7 +1060,7 @@ packages:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
-  /consolidate/0.15.1:
+  /consolidate/0.15.1_pug@3.0.2:
     resolution: {integrity: sha512-DW46nrsMJgy9kqAbPt5rKaCr7uFtpo4mSUvLHIUbJEjm0vo+aY5QLwBUq3FK4tRnJr/X0Psc0C4jf/h+HtXSMw==}
     engines: {node: '>= 0.10.0'}
     peerDependencies:
@@ -1226,9 +1226,10 @@ packages:
         optional: true
     dependencies:
       bluebird: 3.7.2
+      pug: 3.0.2
     dev: true
 
-  /consolidate/0.16.0:
+  /consolidate/0.16.0_pug@3.0.2:
     resolution: {integrity: sha512-Nhl1wzCslqXYTJVDyJCu3ODohy9OfBMB5uD2BiBTzd7w+QY0lBzafkR8y8755yMYHAaMD4NuzbAw03/xzfw+eQ==}
     engines: {node: '>= 0.10.0'}
     peerDependencies:
@@ -1394,6 +1395,7 @@ packages:
         optional: true
     dependencies:
       bluebird: 3.7.2
+      pug: 3.0.2
     dev: true
 
   /constantinople/4.0.1:
@@ -3445,14 +3447,7 @@ packages:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
     dev: true
 
-  /vite-plugin-pug/0.3.2:
-    resolution: {integrity: sha512-Wqqdd8v7Hk+p+pJyVX+RzhRv6PN6yps17zNjx0Wx6P2/sd4KemWLIHAclNxq0sTKjlzxERWXaQn2E7kY71zeSg==}
-    dependencies:
-      picocolors: 1.0.0
-      pug: 3.0.2
-    dev: true
-
-  /vite-plugin-vue2/1.9.3_ntlzklfpitopf6dzohkoty73um:
+  /vite-plugin-vue2/1.9.3_js42y76rf6ipi432ouwyuhqeja:
     resolution: {integrity: sha512-0KhHSEeht0VHJtt4Z2cJ9bWBq4dP3HoXpapqAHV+f+cUa6KywYdOd+z6sSGLpuGjN8F9YinrFIo8dfVmMOpc8Q==}
     peerDependencies:
       vite: ^2.0.0-beta.23
@@ -3466,8 +3461,8 @@ packages:
       '@rollup/pluginutils': 4.2.1
       '@vue/babel-helper-vue-jsx-merge-props': 1.4.0
       '@vue/babel-preset-jsx': 1.4.0_74p3xsmzt4b7t5vt5j5jo2gxoa
-      '@vue/component-compiler-utils': 3.3.0
-      consolidate: 0.16.0
+      '@vue/component-compiler-utils': 3.3.0_pug@3.0.2
+      consolidate: 0.16.0_pug@3.0.2
       debug: 4.3.4
       fs-extra: 9.1.0
       hash-sum: 2.0.0
