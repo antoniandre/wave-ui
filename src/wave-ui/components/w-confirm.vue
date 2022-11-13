@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { consoleWarn } from '../utils/console'
+
 export default {
   name: 'w-confirm',
   props: {
@@ -48,7 +50,12 @@ export default {
     inline: { type: Boolean }, // The layout inside the menu.
 
     // W-menu props.
-    menu: { type: Object }, // Allow passing down an object of props to the w-menu component.
+    // Deprecated since version 2.45.0: replaced with `menuProps`.
+    menu: { type: Object, default: () => ({}), deprecated: true },
+    // Allow passing down an object of props to the w-menu component.
+    menuProps: { type: Object, default: () => ({}) },
+    tooltip: { type: String },
+    tooltipProps: { type: Object, default: () => ({}) },
     // All the menu props shorthands, as long as they don't conflict with the button props.
     noArrow: { type: Boolean }, // Adds a directional triangle to the edge of the menu, like a tooltip.
     top: { type: Boolean },
@@ -104,7 +111,8 @@ export default {
         alignRight: this.alignRight,
         persistent: this.persistent,
         transition: this.transition,
-        ...this.menu
+        ...this.menu, // Deprecated since version 2.45.0.
+        ...this.menuProps
       }
     },
     buttonProps () {
@@ -112,6 +120,8 @@ export default {
         bgColor: this.bgColor,
         color: this.color,
         icon: this.icon,
+        tooltip: this.tooltip,
+        tooltipProps: this.tooltipProps,
         ...this.mainButton
       }
     }
@@ -126,6 +136,10 @@ export default {
       this.$emit('confirm')
       this.showPopup = false
     }
+  },
+
+  created () {
+    if (this.menu) consoleWarn('The `menu` prop (w-confirm component) is deprecated: use `menuProps` instead.')
   }
 }
 </script>
