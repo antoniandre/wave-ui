@@ -13,6 +13,7 @@ import ButtonPartial from './button.vue'
 
 export default {
   name: 'w-button',
+  inheritAttrs: false, // The attrs are only bound to the button-partial, not the root.
 
   props: {
     color: { type: String },

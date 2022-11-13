@@ -51,7 +51,7 @@ export default {
 
     // W-menu props.
     // Deprecated since version 2.45.0: replaced with `menuProps`.
-    menu: { type: Object, default: () => ({}), deprecated: true },
+    menu: { type: Object, deprecated: true },
     // Allow passing down an object of props to the w-menu component.
     menuProps: { type: Object, default: () => ({}) },
     tooltip: { type: String },
