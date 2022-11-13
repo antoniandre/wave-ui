@@ -73,7 +73,7 @@ export default {
     content: '';
     position: absolute;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     top: 0;
     left: 0;
     background-color: currentColor;
