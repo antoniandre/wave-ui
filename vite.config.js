@@ -1,12 +1,16 @@
 import { defineConfig } from 'vite'
-import { resolve } from 'path'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
 import Delete from 'rollup-plugin-delete'
 import { createVuePlugin } from 'vite-plugin-vue2'
 import autoprefixer from 'autoprefixer'
 
+const _filename = fileURLToPath(import.meta.url)
+const _dirname = dirname(_filename)
+
 const bundlingConf = {
   lib: {
-    entry: resolve(__dirname, '/src/wave-ui/index.js'),
+    entry: resolve(_dirname, '/src/wave-ui/index.js'),
     name: 'WaveUI',
     formats: ['es', 'umd', 'cjs']
   },
@@ -57,7 +61,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, '/src')
+      '@': resolve(_dirname, '/src')
     }
   },
   build
