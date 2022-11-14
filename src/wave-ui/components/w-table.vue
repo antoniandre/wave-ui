@@ -38,11 +38,16 @@
             v-if="i < headers.length - 1 && resizableColumns"
             :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === i }"
             @click.stop)
+      //- Progress bar only.
+      w-transition-fade
+        tr.w-table__progress-bar(v-if="loading === 'header'")
+          td(:colspan="headers.length")
+            w-progress(tile)
 
     //- Table body.
     tbody
-      //- Progress bar.
-      tr.w-table__progress-bar(v-if="loading")
+      //- Progress bar & loading text.
+      tr.w-table__progress-bar(v-if="loading === true")
         td(:colspan="headers.length")
           w-progress(tile)
           .w-table__loading-text
@@ -53,7 +58,7 @@
           slot(name="no-data") No data to show.
 
       //- Normal rows.
-      template(v-else)
+      template(v-if="tableItems.length && loading !== true")
         template(v-for="(item, i) in sortedItems" :key="i")
           //- Fully custom tr (`item` slot).
           slot(
@@ -150,7 +155,7 @@ export default {
     fixedLayout: { type: Boolean },
     fixedHeaders: { type: Boolean },
     fixedFooter: { type: Boolean },
-    loading: { type: Boolean },
+    loading: { type: [Boolean, String] }, // Bool or 'header' to only display the bar in the header.
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
 
@@ -188,6 +193,7 @@ export default {
     uidKey: { type: String, default: 'id' },
 
     filter: { type: Function },
+    sortFunction: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 },
     resizableColumns: { type: Boolean }
   },
@@ -232,7 +238,7 @@ export default {
     },
 
     sortedItems () {
-      if (!this.activeSorting.length) return this.filteredItems
+      if (!this.activeSorting.length || this.sortFunction) return this.filteredItems
 
       // Only sort with 1 key for now, may handle more later.
       const sortKey1 = this.activeSorting[0].replace(/^[+-]/, '')
@@ -313,15 +319,18 @@ export default {
       ]
     },
 
-    sortTable (header) {
+    async sortTable (header) {
       const alreadySortingThis = this.activeSortingKeys[header.key]
       if (alreadySortingThis && this.activeSortingKeys[header.key] === '-') {
         this.activeSorting = []
-        return this.$emit('update:sort')
       }
       else this.activeSorting[0] = (alreadySortingThis ? '-' : '+') + header.key
 
       this.$emit('update:sort', this.activeSorting)
+
+      if (typeof this.sortFunction === 'function') {
+        await this.sortFunction(this.activeSorting)
+      }
     },
 
     doSelectRow (item, index) {
@@ -549,6 +558,8 @@ $tr-border-top: 1px;
 
   // Table headers.
   // ------------------------------------------------------
+  thead {position: relative;}
+
   &__header {padding: $base-increment;}
   &__header--resizable {
     overflow: hidden;
@@ -628,6 +639,12 @@ $tr-border-top: 1px;
 
   // Progress bar when loading.
   &__progress-bar:nth-child(odd) {background: none;}
+  thead .w-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
   &__progress-bar td {padding: 0;height: 1px;}
   @-moz-document url-prefix() {
     &__progress-bar td {height: 100%;}
@@ -754,6 +771,7 @@ $tr-border-top: 1px;
 
   .w-table__progress-bar {
     display: table-row;
+
     td {display: table-cell;}
     td:before {display: none;}
   }
