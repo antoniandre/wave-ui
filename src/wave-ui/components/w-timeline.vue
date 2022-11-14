@@ -5,7 +5,7 @@ ul.w-timeline
       :is="item[itemIconKey] || icon ? 'w-icon' : 'div'"
       :class="{ [item[itemColorKey] || color]: item[itemColorKey] || color }")
       | {{ item[itemIconKey] || icon }}
-    slot(name="item" v-if="!$slots[`item.${i + 1}`]" :item="item" :index="i + 1")
+    slot(name="item" v-if="!$scopedSlots[`item.${i + 1}`]" :item="item" :index="i + 1")
       .w-timeline-item__title(
         :class="{ [item[itemColorKey] || color]: item[itemColorKey] || color }"
         v-html="item[itemTitleKey]")

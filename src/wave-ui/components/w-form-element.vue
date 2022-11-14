@@ -7,7 +7,7 @@ div(:class="classes")
   w-transition-expand(y)
     template(v-if="Validation.message")
       .w-form-el__error(
-        v-if="$slots['error-message']"
+        v-if="$scopedSlots['error-message']"
         :class="formProps.validationColor")
         slot(name="error-message" :message="Validation.message")
       .w-form-el__error.error(

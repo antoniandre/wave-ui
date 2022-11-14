@@ -20,8 +20,8 @@ component(
     :readonly="isReadonly || null"
     :class="{ mt1: !inline && i }")
     slot(
-      v-if="$slots[`item.${i + 1}`] || $slots.item"
-      :name="$slots[`item.${i + 1}`] ? `item.${i + 1}` : 'item'"
+      v-if="$scopedSlots[`item.${i + 1}`] || $scopedSlots.item"
+      :name="$scopedSlots[`item.${i + 1}`] ? `item.${i + 1}` : 'item'"
       :item="getOriginalItem(item)"
       :index="i + 1"
       :checked="item.value === value")
