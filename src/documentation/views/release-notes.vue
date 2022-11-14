@@ -366,6 +366,11 @@ main
           strong.code w-table
           ul
             li Added the #[code sort-function] option for server side sorting. #[span.tag.new]
+          strong Scoped slots fixes
+          ul
+            li.
+              Fixed a few scoped slots on components: w-checkboxes, w-radios, w-timeline,
+              w-form-element (only impacted Vue 2).
 
     li.minor
       strong.version v1.59.0
