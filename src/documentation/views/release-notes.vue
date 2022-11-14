@@ -360,6 +360,14 @@ main
             li Consider tel &amp; mailto external address.
 
     li.minor
+      strong.version v1.60.0
+      ul
+        li
+          strong.code w-table
+          ul
+            li Added the #[code sort-function] option for server side sorting. #[span.tag.new]
+
+    li.minor
       strong.version v1.59.0
       ul
         li
