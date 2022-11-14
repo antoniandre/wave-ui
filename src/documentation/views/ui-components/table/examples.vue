@@ -588,15 +588,20 @@ div
         }
       })
 
-  title-link(h2) Initial Sorting
+  title-link(h2) Sorting
   p.
     To make the sorting API very easy to use and remember (and avoid complex array or object structures),
     the #[strong.code w-table]'s sorting is defined with a header key string preceded by a #[code +] for ASC,
     or a #[code -] for DESC. For instance, in this example: #[code '+firstName'].
+
+  title-link(h3) Initial Sorting
   example
     w-table(:headers="table1.headers" :items="table1.items" v-model:sort="table1.sort")
     template(#pug).
-      w-table(:headers="table.headers" :items="table.items" v-model:sort="table.sort")
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        v-model:sort="table.sort")
     template(#html).
       &lt;w-table
         :headers="table.headers"
@@ -621,6 +626,131 @@ div
           sort: '+firstName'
         }
       })
+
+  title-link(h3) Asynchronous Sorting
+  p.
+    When dealing with a lot of table entries, you will most likely need the sorting to be done
+    in the backend.#[br]
+    For this you can use the asynchronous sorting and update the table rows from outside Wave UI.
+  example(:blank-codepen="['js']")
+    w-table.my6(
+      :headers="table10.headers"
+      :items="table10.items"
+      :sort-function="sortFunction"
+      :loading="table10.loading"
+      style="height: 140px")
+      template(#pug).
+        w-table.my6(
+        :headers="table.headers"
+        :items="table.items"
+        :sort-function="sortFunction"
+        :loading="table.loading"
+        style="height: 140px")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        :sort-function="sortFunction"
+        :loading="table.loading"
+        style="height: 140px"&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      // This object is simulating content coming from the server.
+      const tableItemsInAPI = {
+        null: [
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+        ],
+        '+id': [
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+        ],
+        '-id': [
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' }
+        ],
+        '+firstName': [
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+        ],
+        '-firstName': [
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' }
+        ],
+        '+lastName': [
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' }
+        ],
+        '-lastName': [
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' }
+        ]
+      }
+
+      const app = Vue.createApp({
+        data: () => ({
+          table: {
+            headers: [
+              { label: 'ID', key: 'id' },
+              { label: 'First name', key: 'firstName' },
+              { label: 'Last name', key: 'lastName' }
+            ],
+            items: [
+              { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+              { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+              { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+              { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+              { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+            ],
+            loading: false
+          }
+        }),
+
+        methods: {
+          // For consistency, the received sortKeys parameter is always an array
+          // (for multi-column sorting), whether the sorting is done on one or more columns.
+          // Notice the async &amp; await keywords.
+          async sortFunction (sortKeys) {
+            // Before the fetch set the loading flag, and display the progress bar in
+            // the header only, so the current rows stay visible while loading.
+            this.table.loading = 'header'
+
+            // Simulating an AJAX call with 1 second latency.
+            // Replace this in your app with a `fetch` or Axios call.
+            const apiResponse = new Promise(resolve => setTimeout(() => resolve(tableItemsInAPI[sortKeys[0] || null]), 1000))
+
+            // Fill up the array with rows from the API.
+            this.table.items = await apiResponse
+
+            this.table.loading = false
+          }
+        }
+      })
+
+      new WaveUI(app, {})
+
+      app.mount('#app')
 
   title-link(h2) Filtering
   p.
@@ -821,7 +951,7 @@ div
   p.
     When the table content is not ready straight away, you can use the #[code loading] prop to display
     a progress bar while loading.
-  w-button.mb2(:disabled="table1.loading" @click="reload")
+  w-button.mb2(:disabled="!!table1.loading" @click="reload")
     w-icon.mr1 mdi mdi-sync
     | reload
 
@@ -1520,6 +1650,58 @@ const allItems = [
   { id: 15, firstName: 'Josie', lastName: 'Richard' }
 ]
 
+const tableItemsInAPI = {
+  null: [
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+  ],
+  '+id': [
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+  ],
+  '-id': [
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' }
+  ],
+  '+firstName': [
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+  ],
+  '-firstName': [
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' }
+  ],
+  '+lastName': [
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' }
+  ],
+  '-lastName': [
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' }
+  ]
+}
+
 export default {
   data: () => ({
     table1: {
@@ -1653,6 +1835,15 @@ export default {
         { id: 15, firstName: 'Josie', lastName: 'Richard', birthday: 'Aug. 16, 2004', email: 'j.richard@gmail.com', phone: '+35 234 567 8935', country: 'Italy' }
       ]
     },
+    table10: {
+      headers: [
+        { label: 'ID', key: 'id' },
+        { label: 'First name', key: 'firstName' },
+        { label: 'Last name', key: 'lastName' }
+      ],
+      items: allItems.slice(0, 5),
+      loading: false
+    },
     selectableRowsOptions: [
       { label: '<code class="mr2">:selectable-row="false"</code> (default)', value: false },
       { label: '<code>selectable-row</code>', value: true },
@@ -1685,15 +1876,22 @@ export default {
     },
 
     toggleStickyColumn () {
-      this.table9.headers.forEach(header => header.sticky = false)
+      this.table9.headers.forEach(header => (header.sticky = false))
 
       switch (this.table9.stickyColumn) {
-        case 1: return this.table9.headers[0].sticky = true
-        case 2: return this.table9.headers[1].sticky = true
+        case 1: return (this.table9.headers[0].sticky = true)
+        case 2: return (this.table9.headers[1].sticky = true)
         case 24:
           this.table9.headers[1].sticky = true
-          return this.table9.headers[3].sticky = true
+          return (this.table9.headers[3].sticky = true)
       }
+    },
+
+    async sortFunction (sortKeys) {
+      this.table10.loading = 'header'
+      const apiResponse = new Promise(resolve => setTimeout(() => resolve(tableItemsInAPI[sortKeys[0] || null]), 1000))
+      this.table10.items = await apiResponse
+      this.table10.loading = false
     }
   },
 
