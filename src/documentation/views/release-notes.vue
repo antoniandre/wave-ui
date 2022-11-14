@@ -23,6 +23,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v2.46.0
+      ul
+        li
+          strong.code w-table
+          ul
+            li Added the #[code sort-function] option for server side sorting. #[span.tag.new]
+
+    li.minor
       strong.version v2.45.0
       ul
         li
@@ -65,7 +73,7 @@ main
       strong.version v2.44.1
       ul
         li #[strong Wave UI] Refine the checkbox look &amp; facilitate any CSS override.
-        li #[strong round elements] Define #[code aspect-ratio] in UI components whne possible to facilitate overrides.
+        li #[strong Round elements] Define #[code aspect-ratio] in UI components when possible to facilitate overrides.
 
     li.minor
       strong.version v2.44.0
@@ -76,7 +84,7 @@ main
       strong.version v2.43.1
       ul
         li
-          strong w-image
+          strong.code w-image
           ul
             li Prevent images to grow or shrink with flex context.
 
@@ -84,7 +92,7 @@ main
       strong.version v2.43.0
       ul
         li
-          strong w-button
+          strong.code w-button
           ul
             li Added an #[code icon-props] option. #[span.tag.new]
 
