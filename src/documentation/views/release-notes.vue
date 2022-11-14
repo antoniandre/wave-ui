@@ -23,6 +23,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v2.46.0
+      ul
+        li
+          strong.code w-table
+          ul
+            li Added the #[code sort-function] option for server side sorting. #[span.tag.new]
+
+    li.minor
       strong.version v2.45.0
       ul
         li
