@@ -225,8 +225,11 @@ $spinner-size: 40;
   &.size--xl {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
   &--round.size--xs {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
   &--round.size--xl {padding-left: round(4.5 * $base-increment);padding-right: round(4.5 * $base-increment);}
-  &--icon.size--xs {padding-left: 0;padding-right: 0;}
-  &--icon.size--xl {padding-left: 0;padding-right: 0;}
+  &--icon.size--xs {width: round(1.25 * divide($base-font-size, 2)) * 2;padding-left: 0;padding-right: 0;}
+  &--icon.size--sm {width: round(1.55 * divide($base-font-size, 2)) * 2;}
+  &--icon.size--md {width: round(1.85 * divide($base-font-size, 2)) * 2;}
+  &--icon.size--lg {width: round(2.2 * divide($base-font-size, 2)) * 2;}
+  &--icon.size--xl {width: round(2.5 * divide($base-font-size, 2)) * 2;padding-left: 0;padding-right: 0;}
 
   // Overlay to mark the focus, hover and active state.
   &:before {
