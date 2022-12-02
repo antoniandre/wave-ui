@@ -76,6 +76,7 @@ export default {
     absolute: { type: Boolean },
     overlayColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] },
+    drawerClass: { type: String },
     tag: { type: String, default: 'aside' }
   },
 
@@ -125,6 +126,7 @@ export default {
     },
     drawerClasses () {
       return {
+        [this.drawerClass]: true,
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         'w-drawer--open': !!this.showDrawer,
