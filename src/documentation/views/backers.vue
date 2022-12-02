@@ -39,8 +39,8 @@ import axios from 'axios'
 import DivRiotsLogo from '@/assets/divriots.svg'
 
 const githubBackers = [
-  'divriots', 'nmauersberg', 'KleinSamuel', 'crbast', 'CoolGoose', 'bohdaq', 'consuman', 'bastien09',
-  'micksp', 'orefalo', 'helenetran', 'antoniandre'
+  'divriots', 'nmauersberg', 'KleinSamuel', 'chris-deep', 'crbast', 'CoolGoose', 'bohdaq',
+  'consuman', 'bastien09', 'micksp', 'orefalo', 'helenetran', 'antoniandre'
 ]
 
 export default {
