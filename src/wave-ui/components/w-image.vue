@@ -22,9 +22,10 @@ component.w-image-wrap(:is="wrapperTag" :class="wrapperClasses" :style="wrapperS
  * - adaptive size: given ratio + width 100% (use bg)
  * - adaptive size: given ratio + height 100% (use bg)
  * - adaptive & locked size: given width or height and using <img>
+ *
+ * @todo handle figure, captions, srcset, webp.
  **/
 
-// @todo handle figure, captions, srcset, webp.
 import { consoleWarn } from '../utils/console'
 
 export default {
