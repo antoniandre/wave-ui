@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { UIComponents } from '@/router'
+
 export default {
   props: {
     drawerOpen: { type: Boolean, default: false }
@@ -59,8 +61,9 @@ export default {
       { label: 'Shadows, borders &amp; radii', route: '/shadows-borders-radii' },
       { label: 'Transitions', route: '/transitions' }
     ],
-    components: [
-      { label: 'Accordion', route: '/w-accordion' },
+    components:  [
+      ...UIComponents.filter(item => !item.formElement).map(item => ({ ...item, route: `/w-${item.id}` })),
+      /* { label: 'Accordion', route: '/w-accordion' },
       { label: 'Alert', route: '/w-alert' },
       { label: 'App', route: '/w-app' },
       { label: 'Badge', route: '/w-badge' },
@@ -88,12 +91,14 @@ export default {
       { label: 'Timeline', route: '/w-timeline' },
       { label: 'Toolbar', route: '/w-toolbar' },
       { label: 'Tooltip', route: '/w-tooltip' },
+      { label: 'Tree', route: '/w-tree', inProgress: true }, */
       {
         label: 'Form elements',
         route: '/form',
         children: [
+          ...UIComponents.filter(item => item.formElement).map(item => ({ ...item, route: `/w-${item.id}` })),
           // { label: 'Autocomplete', route: '/w-autocomplete', inProgress: true },
-          { label: 'Checkbox', route: '/w-checkbox' },
+          /* { label: 'Checkbox', route: '/w-checkbox' },
           { label: 'Input', route: '/w-input' },
           { label: 'Form', route: '/w-form' },
           { label: 'Radio', route: '/w-radio' },
@@ -101,7 +106,7 @@ export default {
           { label: 'Slider', route: '/w-slider' },
           { label: 'Switch', route: '/w-switch' },
           { label: 'Steps', route: '/w-steps', disabled: true },
-          { label: 'Textarea', route: '/w-textarea' }
+          { label: 'Textarea', route: '/w-textarea' } */
         ]
       }
     ],
