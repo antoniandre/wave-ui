@@ -23,6 +23,18 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v2.47.0
+      ul
+        li
+          strong.code w-tree
+          ul
+            li Added a new component to present data in a tree view. #[span.tag.new]
+        li
+          strong.code w-icon
+          ul
+            li Added a default transform transition on w-icon:before.
+
+    li.minor
       strong.version v2.46.0
       ul
         li
