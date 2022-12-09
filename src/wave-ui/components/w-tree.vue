@@ -16,8 +16,8 @@ ul.w-tree(:class="classes")
     component(
       :is="noTransition ? 'div' : 'w-transition-expand'"
       :y="!noTransition"
-      @after-enter="$emit('open', { item, depth })"
-      @after-leave="$emit('close', { item, depth })")
+      @after-enter="$emit('open', { item: item.originalItem, open: item.open, depth })"
+      @after-leave="$emit('close', { item: item.originalItem, open: item.open, depth })")
       w-tree(
         v-if="item.children && item.open"
         v-bind="$props"
@@ -41,7 +41,9 @@ export default {
     branchIcon: { type: String },
     leafIcon: { type: String },
     expandIcon: { type: [Boolean, String], default: 'wi-triangle-down' },
-    noTransition: { type: Boolean }
+    expandAll: { type: Boolean },
+    noTransition: { type: Boolean },
+    selectable: { type: Boolean }
   },
 
   emits: ['before-open', 'open', 'before-close', 'close', 'click'],
@@ -65,6 +67,7 @@ export default {
       items.forEach((item, i) => {
         this.currentDepthItems.push({
           ...item,
+          originalItem: item,
           _uid: this.depth.toString() + (i + 1),
           depth: this.depth,
           open: false
@@ -74,11 +77,14 @@ export default {
 
     expandDepth (item) {
       item.open = !item.open
-      this.$emit(item.open ? 'before-open' : 'before-close', { item, depth: this.depth })
+      this.$emit(
+        item.open ? 'before-open' : 'before-close',
+        { item: item.originalItem, open: item.open, depth: this.depth }
+      )
     },
 
     onLabelClick (item, e) {
-      this.$emit('click', { item, depth: this.depth, e })
+      this.$emit('click', { item: item.originalItem, depth: this.depth, e })
       if (item.children) this.expandDepth(item)
     }
   },
