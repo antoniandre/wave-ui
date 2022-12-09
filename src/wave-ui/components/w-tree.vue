@@ -6,12 +6,16 @@ ul.w-tree(:class="classes")
     :class="item.children ? 'w-tree__item--branch' : 'w-tree__item--leaf'")
     .w-tree__item-label(@click="onLabelClick(item, $event)")
       w-button(
-        v-if="item.children && expandIcon"
+        v-if="item.children && ((expandIconOpen && item.open) || expandIcon)"
         color="inherit"
-        icon="wi-triangle-down"
+        :icon="(item.open && expandIconOpen) || expandIcon"
         :icon-props="{ rotate90a: !item.open }"
         text
         sm)
+      w-icon(
+        v-if="(item.children && (branchIcon || (branchIconOpen && item.open))) || (!item.children && leafIcon)"
+        class="w-tree__item-icon").
+        {{ item.children && (branchIcon || (branchIconOpen && item.open)) ? (branchIconOpen && item.open ? branchIconOpen : branchIcon) : leafIcon }}
       span {{ item.label }}
     component(
       :is="noTransition ? 'div' : 'w-transition-expand'"
@@ -39,8 +43,10 @@ export default {
     branchClass: { type: String },
     leafClass: { type: String },
     branchIcon: { type: String },
+    branchIconOpen: { type: String },
     leafIcon: { type: String },
     expandIcon: { type: [Boolean, String], default: 'wi-triangle-down' },
+    expandIconOpen: { type: [Boolean, String] },
     expandAll: { type: Boolean },
     noTransition: { type: Boolean },
     selectable: { type: Boolean }
@@ -107,13 +113,9 @@ export default {
 
   // Tree items.
   // ------------------------------------------------------
-  &__item {
-    list-style-type: none;
-  }
+  &__item {list-style-type: none;}
   &__item--branch {}
-  &__item--leaf {
-    padding-left: $base-increment * 5;
-  }
+  &__item--leaf {padding-left: $base-increment * 5;}
 
   // Tree item label.
   // ------------------------------------------------------
@@ -121,9 +123,10 @@ export default {
     display: inline-flex;
     align-items: center;
   }
-  &__item--branch > &__item-label {
-    cursor: pointer;
-  }
+
+  &__item-icon {margin-right: $base-increment;}
+
+  &__item--branch > &__item-label {cursor: pointer;}
 
   // Recursive children.
   // ------------------------------------------------------
