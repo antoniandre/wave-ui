@@ -33,6 +33,10 @@ main
           strong.code w-icon
           ul
             li Added a default transform transition on w-icon:before.
+        li
+          strong Color palette
+          ul
+            li The color palette have 2 new color shades per color and more homogenous light distribution.
 
     li.minor
       strong.version v2.46.0
