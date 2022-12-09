@@ -4,7 +4,7 @@ ul.w-tree(:class="classes")
     v-for="(item, i) in currentDepthItems"
     :key="i"
     :class="item.children ? 'w-tree__item--branch' : 'w-tree__item--leaf'")
-    .w-tree__item-label(@click="expandDepth(item)")
+    .w-tree__item-label(@click="onLabelClick(item, $event)")
       w-button(
         v-if="item.children && expandIcon"
         color="inherit"
@@ -13,12 +13,21 @@ ul.w-tree(:class="classes")
         text
         sm)
       span {{ item.label }}
-    component(:is="noTransition ? 'div' : 'w-transition-expand'" :y="!noTransition")
+    component(
+      :is="noTransition ? 'div' : 'w-transition-expand'"
+      :y="!noTransition"
+      @after-enter="$emit('open', { item, depth })"
+      @after-leave="$emit('close', { item, depth })")
       w-tree(
         v-if="item.children && item.open"
         v-bind="$props"
         :depth="depth + 1"
-        :data="item.children")
+        :data="item.children"
+        @before-open="$emit('before-open', $event)"
+        @open="$emit('open', $event)"
+        @before-close="$emit('before-close', $event)"
+        @close="$emit('close', $event)"
+        @click="$emit('click', $event)")
 </template>
 
 <script>
@@ -35,7 +44,7 @@ export default {
     noTransition: { type: Boolean }
   },
 
-  emits: [],
+  emits: ['before-open', 'open', 'before-close', 'close', 'click'],
 
   data: () => ({
     currentDepthItems: []
@@ -56,7 +65,8 @@ export default {
       items.forEach((item, i) => {
         this.currentDepthItems.push({
           ...item,
-          _uid: i + 1,
+          _uid: this.depth.toString() + (i + 1),
+          depth: this.depth,
           open: false
         })
       })
@@ -64,6 +74,12 @@ export default {
 
     expandDepth (item) {
       item.open = !item.open
+      this.$emit(item.open ? 'before-open' : 'before-close', { item, depth: this.depth })
+    },
+
+    onLabelClick (item, e) {
+      this.$emit('click', { item, depth: this.depth, e })
+      if (item.children) this.expandDepth(item)
     }
   },
 
