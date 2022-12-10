@@ -61,9 +61,9 @@ export default {
     expandIcon: { type: [Boolean, String], default: 'wi-triangle-down' },
     expandIconOpen: { type: [Boolean, String] },
     expandAll: { type: Boolean },
-    disabled: { type: Boolean, default: true },
+    disabled: { type: Boolean },
     noTransition: { type: Boolean },
-    selectable: { type: Boolean }
+    selectable: { type: Boolean, default: true }
   },
 
   emits: ['before-open', 'open', 'before-close', 'close', 'click'],
@@ -201,10 +201,20 @@ export default {
   // Tree item label.
   // ------------------------------------------------------
   &__item-label {
+    position: relative;
     display: inline-flex;
     align-items: center;
 
-    &:focus {background-color: rgba($primary, 0.1);}
+    &:before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      bottom: -1px;
+      left: - $base-increment;
+      right: - $base-increment;
+      border-radius: $border-radius;
+    }
+    &:focus:before {background-color: rgba($primary, 0.1);}
   }
 
   &__item-icon {margin-right: $base-increment;}
