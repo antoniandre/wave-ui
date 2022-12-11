@@ -3,35 +3,34 @@ ul.w-tree(:class="classes")
   li.w-tree__item(
     v-for="(item, i) in currentDepthItems"
     :key="i"
-    :class="item.children ? 'w-tree__item--branch' : 'w-tree__item--leaf'")
+    :class="itemClasses(item)")
     .w-tree__item-label(
       @click="!disabled && onLabelClick(item, $event)"
       @keydown="!disabled && onLabelKeydown(item, $event)"
-      :tabindex="!disabled && (item.children || selectable) ? 0 : null")
-      w-button(
-        v-if="item.children && ((expandIconOpen && item.open) || expandIcon)"
+      :tabindex="!disabled && (item.children || item.branch || selectable) && !(unexpandableEmpty && !item.children) ? 0 : null")
+      w-button.w-tree__item-expand(
+        v-if="(item.children || item.branch) && ((expandOpenIcon && item.open) || expandIcon) && !(unexpandableEmpty && !item.children)"
         color="inherit"
-        :icon="(item.open && expandIconOpen) || expandIcon"
+        :icon="(item.open && expandOpenIcon) || expandIcon"
         :icon-props="{ rotate90a: !item.open }"
         :tabindex="-1"
         :disabled="disabled"
         text
         sm)
-      w-icon(
-        v-if="(item.children && (branchIcon || (branchIconOpen && item.open))) || (!item.children && leafIcon)"
-        class="w-tree__item-icon").
-        {{ item.children && (branchIcon || (branchIconOpen && item.open)) ? (branchIconOpen && item.open ? branchIconOpen : branchIcon) : leafIcon }}
+      w-icon(v-if="itemIcon(item)" class="w-tree__item-icon") {{ itemIcon(item) }}
       span {{ item.label }}
+      span.ml1(v-if="counts && (item.children || item.branch)").
+        ({{ item.originalItem.children?.length || 0 }})
     component(
       :is="noTransition ? 'div' : 'w-transition-expand'"
-      :y="!noTransition"
+      :y="!noTransition || null"
       @after-enter="$emit('open', { item: item.originalItem, open: item.open, depth })"
       @after-leave="$emit('close', { item: item.originalItem, open: item.open, depth })")
       w-tree(
         v-if="item.children && item.open"
         v-bind="$props"
         :depth="depth + 1"
-        :data="item.children"
+        :data="item.originalItem.children"
         @before-open="$emit('before-open', $event)"
         @open="$emit('open', $event)"
         @before-close="$emit('before-close', $event)"
@@ -56,20 +55,22 @@ export default {
     branchClass: { type: String },
     leafClass: { type: String },
     branchIcon: { type: String },
-    branchIconOpen: { type: String },
+    branchOpenIcon: { type: String },
     leafIcon: { type: String },
     expandIcon: { type: [Boolean, String], default: 'wi-triangle-down' },
-    expandIconOpen: { type: [Boolean, String] },
+    expandOpenIcon: { type: [Boolean, String] },
     expandAll: { type: Boolean },
+    unexpandableEmpty: { type: Boolean },
     disabled: { type: Boolean },
     noTransition: { type: Boolean },
-    selectable: { type: Boolean, default: true }
+    selectable: { type: Boolean },
+    counts: { type: Boolean }
   },
 
   emits: ['before-open', 'open', 'before-close', 'close', 'click'],
 
   data: () => ({
-    currentDepthItems: []
+    currentDepthItems: [] // A clone of the data prop with additional info per item.
   }),
 
   computed: {
@@ -85,11 +86,14 @@ export default {
   methods: {
     updateCurrentDepthTree (items) {
       this.currentDepthItems = []
+
       items.forEach((item, i) => {
         this.currentDepthItems.push({
-          ...item,
-          originalItem: item,
+          originalItem: item, // Store the original item to return it on event emits.
           _uid: this.depth.toString() + (i + 1),
+          label: item.label,
+          children: !!item.children, // The children tree remains available in originalItem.
+          branch: item.branch,
           depth: this.depth,
           open: false
         })
@@ -116,13 +120,13 @@ export default {
 
     onLabelClick (item, e) {
       this.$emit('click', { item: item.originalItem, depth: this.depth, e })
-      if (item.children) this.expandDepth(item)
+      if (item.children || item.branch) this.expandDepth(item)
     },
 
     onLabelKeydown (item, e) {
       // Keys: 13 enter, 32 space, 37 arrow left, 38 arrow up, 39 arrow right, 40 arrow down.
       if (!(e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) && [13, 32, 37, 38, 39, 40].includes(e.which)) {
-        if (item.children) {
+        if (item.children || item.branch) {
           if ([13, 32].includes(e.which)) this.expandDepth(item) && e.preventDefault()
           else if (e.which === 37) this.expandDepth(item, false) && e.preventDefault()
           else if (e.which === 39) this.expandDepth(item, true) && e.preventDefault()
@@ -173,6 +177,22 @@ export default {
 
     focusTreeItem (liNode) {
       liNode && liNode.querySelector('.w-tree__item-label').focus()
+    },
+
+    itemIcon (item) {
+      return (
+        item.originalItem.icon ||
+        (!item.children && !item.branch && this.leafIcon) ||
+        ((item.children || item.branch) && ((item.open && this.branchOpenIcon) || this.branchIcon))
+      )
+    },
+
+    itemClasses (item) {
+      return {
+        [item.children || item.branch ? 'w-tree__item--branch' : 'w-tree__item--leaf']: true,
+        'w-tree__item--empty': item.branch && !item.children,
+        'w-tree__item--unexpandable': item.branch && !item.children && this.unexpandableEmpty
+      }
     }
   },
 
@@ -182,13 +202,15 @@ export default {
 
   watch: {
     data (items) {
-      updateCurrentDepthTree(items)
+      this.updateCurrentDepthTree(items)
     }
   }
 }
 </script>
 
 <style lang="scss">
+$expand-icon-size: 20px;
+
 .w-tree {
   margin: 0;
 
@@ -196,7 +218,7 @@ export default {
   // ------------------------------------------------------
   &__item {list-style-type: none;}
   &__item--branch {}
-  &__item--leaf {padding-left: $base-increment * 5;}
+  &__item--leaf {margin-left: $base-increment * 5 + 2px;}
 
   // Tree item label.
   // ------------------------------------------------------
@@ -210,21 +232,31 @@ export default {
       position: absolute;
       top: -1px;
       bottom: -1px;
-      left: - $base-increment;
-      right: - $base-increment;
+      left: - $base-increment + 2px;
+      right: - $base-increment - 2px;
       border-radius: $border-radius;
     }
     &:focus:before {background-color: rgba($primary, 0.1);}
   }
+  &__item--leaf &__item-label:before {
+    left: - $base-increment;
+    right: - $base-increment;
+  }
 
-  &__item-icon {margin-right: $base-increment;}
+  &__item-expand {margin-right: 2px;}
 
   &__item--branch > &__item-label {cursor: pointer;}
+  &__item--unexpandable > &__item-label {
+    margin-left: $expand-icon-size + 2px;
+    cursor: auto;
+  }
   &--disabled &__item-label {cursor: auto;}
   &--disabled &__item--branch > &__item-label {opacity: 0.5;}
 
+  &__item-icon {margin-right: $base-increment;}
+
   // Recursive children.
   // ------------------------------------------------------
-  .w-tree {margin-left: $base-increment * 4;}
+  .w-tree {margin-left: $base-increment * 5;}
 }
 </style>
