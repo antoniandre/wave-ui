@@ -141,6 +141,30 @@ div
         ]
       })
 
+  title-link(h2) Counts
+  example
+    w-tree(:data="tree1" counts)
+    template(#pug).
+      w-tree(:data="tree" counts)
+    template(#html).
+      &lt;w-tree:data="tree" counts&gt;&lt;/w-tree&gt;
+    template(#js).
+      data: () => ({
+        tree: [
+          {
+            label: 'Branch 1',
+            children: [
+              { label: 'Leaf 1' },
+              { label: 'Leaf 2' },
+              { label: 'Leaf 3' }
+            ]
+          },
+          { label: 'Branch 2', branch: true },
+          { label: 'Leaf 1' },
+          { label: 'Leaf 2' }
+        ]
+      })
+
   title-link(h2) No transition
   example
     w-tree(:data="tree1" no-transition)
@@ -166,34 +190,16 @@ div
         ]
       })
 
-  title-link(h2) Counts
-  example
-    w-tree(:data="tree1" counts)
-    template(#pug).
-      w-tree(:data="tree" counts)
-    template(#html).
-      &lt;w-tree:data="tree" counts&gt;&lt;/w-tree&gt;
-    template(#js).
-      data: () => ({
-        tree: [
-          {
-            label: 'Branch 1',
-            children: [
-              { label: 'Leaf 1' },
-              { label: 'Leaf 2' },
-              { label: 'Leaf 3' }
-            ]
-          },
-          { label: 'Branch 2', branch: true },
-          { label: 'Leaf 1' },
-          { label: 'Leaf 2' }
-        ]
-      })
-
   title-link(h2) Unexpandable empty branches
   example
-    w-flex
-      w-tree(:data="tree1" unexpandable-empty)
+    .w-flex.wrap.align-center
+      div
+        .title3 Normal
+        w-tree(:data="tree1")
+      w-icon.grey-light3.mx12(rotate90a xl) wi-arrow-down
+      div
+        .title3 unexpandable-empty
+        w-tree(:data="tree1" unexpandable-empty)
     template(#pug).
       w-tree(:data="tree" unexpandable-empty)
     template(#html).

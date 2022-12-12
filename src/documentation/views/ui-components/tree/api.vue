@@ -14,7 +14,23 @@ div
 <script>
 import WTree from '@/wave-ui/components/w-tree.vue'
 
-const propsDescs = {}
+const propsDescs = {
+  data: '',
+  depth: false, // Hide.
+  branchClass: '',
+  leafClass: '',
+  branchIcon: '',
+  branchOpenIcon: '',
+  leafIcon: '',
+  expandIcon: '',
+  expandOpenIcon: '',
+  expandAll: '',
+  unexpandableEmpty: '',
+  disabled: '',
+  noTransition: '',
+  selectable: '',
+  counts: ''
+}
 
 const slots = {}
 
