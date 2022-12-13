@@ -35,7 +35,9 @@ ul.w-tree(:class="classes")
         @open="$emit('open', $event)"
         @before-close="$emit('before-close', $event)"
         @close="$emit('close', $event)"
-        @click="$emit('click', $event)")
+        @click="$emit('click', $event)"
+        @select="$emit('select', $event)"
+        @update:model-value="$emit('update:model-value', $event)")
 </template>
 
 <script>
@@ -50,6 +52,7 @@ ul.w-tree(:class="classes")
 export default {
   name: 'w-tree',
   props: {
+    modelValue: { type: [Object, Array] },
     data: { type: [Object, Array], required: true },
     depth: { type: Number, default: 0 },
     branchClass: { type: String },
@@ -67,7 +70,7 @@ export default {
     counts: { type: Boolean }
   },
 
-  emits: ['before-open', 'open', 'before-close', 'close', 'click'],
+  emits: ['update:model-value', 'before-open', 'open', 'before-close', 'close', 'click', 'select'],
 
   data: () => ({
     currentDepthItems: [] // A clone of the data prop with additional info per item.
@@ -110,17 +113,29 @@ export default {
       if (typeof open === 'boolean') item.open = open
       else item.open = !item.open
 
-      this.$emit(
-        item.open ? 'before-open' : 'before-close',
-        { item: item.originalItem, open: item.open, depth: this.depth }
-      )
+      const emitParams = { item: item.originalItem, open: item.open, depth: this.depth }
+
+      this.$emit(item.open ? 'before-open' : 'before-close', emitParams)
+
+      if (!this.unexpandableEmpty && !item.children) {
+        this.$emit(item.open ? 'open' : 'close', emitParams)
+      }
 
       return true // Just to chain instructions.
     },
 
     onLabelClick (item, e) {
       this.$emit('click', { item: item.originalItem, depth: this.depth, e })
-      if (item.children || item.branch) this.expandDepth(item)
+      if (item.children || (item.branch && !this.unexpandableEmpty)) this.expandDepth(item)
+
+      if (this.selectable) {
+        const emitParams = { item: item.originalItem, depth: this.depth }
+        if (item.children || (item.branch && !this.unexpandableEmpty)) {
+          emitParams.open = item.open
+        }
+        this.$emit('update:model-value', emitParams)
+        this.$emit('select', emitParams)
+      }
     },
 
     onLabelKeydown (item, e) {
