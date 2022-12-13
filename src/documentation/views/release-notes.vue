@@ -37,6 +37,10 @@ main
           strong Color palette
           ul
             li The color palette have 2 new color shades per color and more homogenous light distribution.
+        li
+          strong w-dialog
+          ul
+            li Fix the dialog height when nested in a fullscreen dialog.
 
     li.minor
       strong.version v2.46.0
