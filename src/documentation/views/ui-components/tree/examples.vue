@@ -6,7 +6,7 @@ div
     template(#pug).
       w-tree(:data="tree")
     template(#html).
-      &lt;w-tree:data="tree"&gt;&lt;/w-tree&gt;
+      &lt;w-tree :data="tree"&gt;&lt;/w-tree&gt;
     template(#js).
       data: () => ({
         tree: [
@@ -122,7 +122,7 @@ div
     template(#pug).
       w-tree(:data="tree" selectable)
     template(#html).
-      &lt;w-tree:data="tree" selectable&gt;&lt;/w-tree&gt;
+      &lt;w-tree :data="tree" selectable&gt;&lt;/w-tree&gt;
     template(#js).
       data: () => ({
         data: () => ({
@@ -147,7 +147,7 @@ div
     template(#pug).
       w-tree(:data="tree" counts)
     template(#html).
-      &lt;w-tree:data="tree" counts&gt;&lt;/w-tree&gt;
+      &lt;w-tree :data="tree" counts&gt;&lt;/w-tree&gt;
     template(#js).
       data: () => ({
         tree: [
@@ -171,7 +171,7 @@ div
     template(#pug).
       w-tree(:data="tree" no-transition)
     template(#html).
-      &lt;w-tree:data="tree" no-transition&gt;&lt;/w-tree&gt;
+      &lt;w-tree :data="tree" no-transition&gt;&lt;/w-tree&gt;
     template(#js).
       data: () => ({
         data: () => ({
@@ -203,7 +203,34 @@ div
     template(#pug).
       w-tree(:data="tree" unexpandable-empty)
     template(#html).
-      &lt;w-tree:data="tree" unexpandable-empty&gt;&lt;/w-tree&gt;
+      &lt;w-tree :data="tree" unexpandable-empty&gt;&lt;/w-tree&gt;
+    template(#js).
+      data: () => ({
+        tree: [
+          {
+            label: 'Branch 1',
+            children: [
+              { label: 'Leaf 1' },
+              { label: 'Leaf 2' },
+              { label: 'Leaf 3' }
+            ]
+          },
+          { label: 'Branch 2', branch: true },
+          { label: 'Leaf 1' },
+          { label: 'Leaf 2' }
+        ]
+      })
+
+  title-link(h2) V-model
+  example
+    w-tree(v-model="selection" :data="tree1" selectable)
+    .w-flex.mt6
+      strong Selection:
+      pre {{ selection }}
+    template(#pug).
+      w-tree(v-model="selection" :data="tree" selectable)
+    template(#html).
+      &lt;w-tree v-model="selection" :data="tree" selectable&gt;&lt;/w-tree&gt;
     template(#js).
       data: () => ({
         tree: [
@@ -348,6 +375,7 @@ export default {
       { label: 'README.md' },
       { label: 'vite.config.js' }
     ],
+    selection: null,
     logs: []
   }),
 
