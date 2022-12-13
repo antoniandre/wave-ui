@@ -123,7 +123,7 @@ export default {
     overflow: auto;
     background-color: #fff;
 
-    .w-dialog--fullscreen & {
+    .w-dialog--fullscreen > & {
       flex: 1 1 auto;
       height: 100%;
       max-width: none;
