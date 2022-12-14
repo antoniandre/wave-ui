@@ -67,13 +67,16 @@ export default {
     disabled: { type: Boolean },
     noTransition: { type: Boolean },
     selectable: { type: Boolean },
+    // By default it only reacts to items count change (added or deleted items) not property of items change.
+    depthReactivity: { type: Boolean },
     counts: { type: Boolean }
   },
 
   emits: ['update:model-value', 'before-open', 'open', 'before-close', 'close', 'click', 'select'],
 
   data: () => ({
-    currentDepthItems: [] // A clone of the data prop with additional info per item.
+    currentDepthItems: [], // A clone of the data prop with additional info per item.
+    dataPropUnwatch: null // Holds the unwatch handler of the data prop.
   }),
 
   computed: {
@@ -87,7 +90,8 @@ export default {
   },
 
   methods: {
-    updateCurrentDepthTree (items) {
+    //  From data watcher, retain the oldItems open state.
+    updateCurrentDepthTree (items, oldItems = []) {
       this.currentDepthItems = []
 
       items.forEach((item, i) => {
@@ -98,7 +102,7 @@ export default {
           children: !!item.children, // The children tree remains available in originalItem.
           branch: item.branch,
           depth: this.depth,
-          open: false
+          open: oldItems[i]?.open || false
         })
       })
     },
@@ -213,12 +217,17 @@ export default {
 
   created () {
     this.updateCurrentDepthTree(this.data)
+    this.dataPropUnwatch = this.$watch(
+      'data',
+      // The open property of each item has to be retained from this.currentDepthItems in order to stay
+      // in the same state after DOM repaint.
+      items => this.updateCurrentDepthTree(items, this.currentDepthItems),
+      { deep: !!this.depthReactivity } // Deep watching is more resource consuming. Only enable on user demand.
+    )
   },
 
-  watch: {
-    data (items) {
-      this.updateCurrentDepthTree(items)
-    }
+  unmounted () {
+    this.dataPropUnwatch()
   }
 }
 </script>
