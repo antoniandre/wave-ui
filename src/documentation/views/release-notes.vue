@@ -32,15 +32,23 @@ main
         li
           strong.code w-icon
           ul
-            li Added a default transform transition on w-icon:before.
+            li Added a default transform transition on #[code w-icon:before].
         li
           strong Color palette
           ul
-            li The color palette have 2 new color shades per color and more homogenous light distribution.
+            li The color palette have 2 new color shades per color and more homogenous light distribution. #[span.tag.new]
         li
           strong w-dialog
           ul
             li Fix the dialog height when nested in a fullscreen dialog.
+        li
+          strong w-input
+          ul
+            li The CSS font family, style, and weight of the input field is now inherited from the parent.
+        li
+          strong w-image
+          ul
+            li Added a new #[code spinner-color] option. #[span.tag.new]
 
     li.minor
       strong.version v2.46.0
