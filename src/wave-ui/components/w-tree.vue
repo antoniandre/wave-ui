@@ -17,10 +17,11 @@ ul.w-tree(:class="classes")
         :disabled="disabled"
         text
         sm)
-      w-icon(v-if="itemIcon(item)" class="w-tree__item-icon") {{ itemIcon(item) }}
-      span {{ item.label }}
-      span.ml1(v-if="counts && (item.children || item.branch)").
-        ({{ item.originalItem.children?.length || 0 }})
+      slot(name="item-label" :item="item.originalItem" :depth="depth" :open="item.open")
+        w-icon(v-if="itemIcon(item)" class="w-tree__item-icon") {{ itemIcon(item) }}
+        span {{ item.label }}
+        span.ml1(v-if="counts && (item.children || item.branch)").
+          ({{ item.originalItem.children?.length || 0 }})
     component(
       :is="noTransition ? 'div' : 'w-transition-expand'"
       :y="!noTransition || null"
@@ -38,6 +39,8 @@ ul.w-tree(:class="classes")
         @click="$emit('click', $event)"
         @select="$emit('select', $event)"
         @update:model-value="$emit('update:model-value', $event)")
+        template(#item-label="{ item, depth, open }")
+          slot(name="item-label" :item="item" :depth="depth" :open="open")
 </template>
 
 <script>
@@ -45,7 +48,6 @@ ul.w-tree(:class="classes")
  * @todo things to support:
  * - items routes
  * - icon per item
- * - empty branch (by default it's a leaf)
  * - left border?
  **/
 
@@ -84,7 +86,8 @@ export default {
       return {
         [`w-tree--depth${this.depth}`]: true,
         'w-tree--expand-icon': this.expandIcon && !this.depth,
-        'w-tree--disabled': this.disabled && !this.depth
+        'w-tree--disabled': this.disabled && !this.depth,
+        'w-tree--no-expand-button': !this.expandIcon
       }
     }
   },
@@ -132,14 +135,16 @@ export default {
       this.$emit('click', { item: item.originalItem, depth: this.depth, e })
       if (item.children || (item.branch && !this.unexpandableEmpty)) this.expandDepth(item)
 
-      if (this.selectable) {
-        const emitParams = { item: item.originalItem, depth: this.depth }
-        if (item.children || (item.branch && !this.unexpandableEmpty)) {
-          emitParams.open = item.open
-        }
-        this.$emit('update:model-value', emitParams)
-        this.$emit('select', emitParams)
+      if (this.selectable) this.emitItemSelection(item, e)
+    },
+
+    emitItemSelection (item, e) {
+      const emitParams = { item: item.originalItem, depth: this.depth, e }
+      if (item.children || (item.branch && !this.unexpandableEmpty)) {
+        emitParams.open = item.open
       }
+      this.$emit('update:model-value', emitParams)
+      this.$emit('select', emitParams)
     },
 
     onLabelKeydown (item, e) {
@@ -166,6 +171,8 @@ export default {
           })
         }
       }
+
+      if (this.selectable) this.emitItemSelection(item, e)
     },
 
     /**
@@ -243,6 +250,7 @@ $expand-icon-size: 20px;
   &__item {list-style-type: none;}
   &__item--branch {}
   &__item--leaf {margin-left: $base-increment * 5 + 2px;}
+  &--no-expand-button &__item--leaf {margin-left: 0;}
 
   // Tree item label.
   // ------------------------------------------------------
