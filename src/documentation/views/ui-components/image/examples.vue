@@ -302,7 +302,8 @@ div
   p.
     In some cases, it can be convenient to have some content on top of the image.#[br]
     By default the content will be horizontally and vertically centered, but you could easily align it
-    at the bottom left for instance, with the #[code content-class] prop: #[code content-class="align-end justify-start pa2"].
+    at the bottom left for instance, with the #[code content-class] prop:
+    #[code content-class="align-end justify-start pa2"].
   example
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="2550 / 5098")
       span.title1.pink Wave UI
