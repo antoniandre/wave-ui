@@ -23,6 +23,34 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v2.47.0
+      ul
+        li
+          strong.code w-tree
+          ul
+            li Added a new component to present data in a tree view. #[span.tag.new]
+        li
+          strong.code w-icon
+          ul
+            li Added a default transform transition on #[code w-icon:before].
+        li
+          strong Color palette
+          ul
+            li The color palette have 2 new color shades per color and more homogenous light distribution. #[span.tag.new]
+        li
+          strong w-dialog
+          ul
+            li Fix the dialog height when nested in a fullscreen dialog.
+        li
+          strong w-input
+          ul
+            li The CSS font family, style, and weight of the input field is now inherited from the parent.
+        li
+          strong w-image
+          ul
+            li Added a new #[code spinner-color] option. #[span.tag.new]
+
+    li.minor
       strong.version v2.46.0
       ul
         li
@@ -358,6 +386,34 @@ main
           strong.code w-button
           ul
             li Consider tel &amp; mailto external address.
+
+    li.minor
+      strong.version v1.61.0
+      ul
+        li
+          strong.code w-tree
+          ul
+            li Added a new component to present data in a tree view. #[span.tag.new]
+        li
+          strong.code w-icon
+          ul
+            li Added a default transform transition on #[code w-icon:before].
+        li
+          strong Color palette
+          ul
+            li The color palette have 2 new color shades per color and more homogenous light distribution. #[span.tag.new]
+        li
+          strong w-dialog
+          ul
+            li Fix the dialog height when nested in a fullscreen dialog.
+        li
+          strong w-input
+          ul
+            li The CSS font family, style, and weight of the input field is now inherited from the parent.
+        li
+          strong w-image
+          ul
+            li Added a new #[code spinner-color] option. #[span.tag.new]
 
     li.minor
       strong.version v1.60.0

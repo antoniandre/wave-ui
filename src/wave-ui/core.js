@@ -3,9 +3,9 @@ import NotificationManager from './utils/notification-manager'
 import colors from './utils/colors'
 // import * as directives from './directives'
 
-const shadeColor = (col, amt) => {
-  return '#' + col.slice(1).match(/../g)
-    .map(x => (x =+ `0x${x}` + amt, x < 0 ? 0 : ( x > 255 ? 255 : x)).toString(16).padStart(2, 0))
+const shadeColor = (color, amount) => {
+  return '#' + color.slice(1).match(/../g)
+    .map(x => (x =+ `0x${x}` + amount, x < 0 ? 0 : ( x > 255 ? 255 : x)).toString(16).padStart(2, 0))
     .join('')
 }
 

@@ -24,6 +24,7 @@ const propsDescs = {
   fixed: 'Sets the CSS position of the image to <code>fixed</code>.',
   contain: 'By default the <strong class="code">w-image</strong> component uses a background to display the image, and it sets the <span class="code">background-size</span> to "<span class="code">cover</span>". This option will set the <span class="code">background-size</span> to "<span class="code">contain</span>".',
   noSpinner: 'Removes the default spinner while the image is loading.',
+  spinnerColor: 'Define a specific color for the spinner while the image is loading. By default the spinner color is the primary color.',
   fallback: 'Provides a fallback image, to display when the given image source is not found. Refer to the <a href="#fallback">Fallback</a> example.',
   transition: 'Applies a particular transition to display the image when it is fully loaded.<br>Check all the transitions that apply to the notification in the <a href="#transitions">Transitions</a> example. Refer to the <a href="#transitions">transitions</a> example.',
   contentClass: 'Applies the given classes to the content wrapper when using the <code>default</code> slot.'

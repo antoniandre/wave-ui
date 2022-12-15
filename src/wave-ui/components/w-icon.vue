@@ -128,6 +128,7 @@ export default {
   .w-button.size--lg &, .w-alert.size--lg & {font-size: round(1.7 * $base-font-size);}
   .w-button.size--xl &, .w-alert.size--xl & {font-size: 2 * $base-font-size;}
 
+  &:before {transition: transform $transition-duration;}
   &--spin:before {animation: w-icon--spin 2s infinite linear;}
   &--spin-a:before {animation: w-icon--spin-a 2s infinite linear;}
   &--rotate45:before {transform: rotate(45deg);}

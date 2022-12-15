@@ -453,7 +453,7 @@ $inactive-color: #777;
   &__input {
     width: 100%;
     height: 100%;
-    font-size: inherit;
+    font: inherit;
     color: inherit;
     text-align: inherit;
     display: inline-flex;

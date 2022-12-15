@@ -567,7 +567,6 @@ div
       outline
       absolute
       round
-
       icon="wi-cross")
 
   w-drawer(v-model="openTopDrawer" top :no-overlay="noOverlay" :overlay-color="overlayColor")
@@ -577,7 +576,6 @@ div
       outline
       absolute
       round
-
       icon="wi-cross")
 
   w-drawer(

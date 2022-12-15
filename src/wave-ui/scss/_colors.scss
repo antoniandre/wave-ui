@@ -41,28 +41,79 @@
     .#{$label}--bg {background-color: $color;}
     .#{$label} {color: $color;}
 
-    @for $i from 1 through 5 {
-      $light-increment: 8;
+    @for $i from 1 through 6 {
+      $light-increment: 7.5;
+      $light-offset: 0;
+      $dark-increment: 6.2;
       // Some color shades need bigger or smaller increments to end up with the same scale.
       @if $label == 'deep-orange' {
-        $light-increment: 7;
+        $light-increment: 6.4;
       }
-      @if $label == 'green' or $label == 'amber' {
-        $light-increment: 8.3;
+      @if $label == 'orange' {
       }
-      @if $label == 'pink' or $label == 'orange' {
-        $light-increment: 8.5;
+      @else if $label == 'green' {
+        $light-increment: 7.6;
+        $dark-increment: 5.7;
       }
-      @if $label == 'cyan' or $label == 'purple' or $label == 'deep-purple' or $label == 'indigo' or $label == 'light-blue' {
-        $light-increment: 9;
+      @else if $label == 'amber' {
       }
-      @if $label == 'teal' or $label == 'brown' {
-        $light-increment: 10;
+      @else if $label == 'pink' {
+        $light-increment: 6.7;
+        $light-offset: -4;
       }
-      .#{$label}-light#{$i}--bg {background-color: lighten($color, $light-increment * $i);}
-      .#{$label}-light#{$i} {color: lighten($color, $light-increment * $i);}
-      .#{$label}-dark#{$i}--bg {background-color: darken($color, 6 * $i);}
-      .#{$label}-dark#{$i} {color: darken($color, 6 * $i);}
+      @else if $label == 'red' {
+        $light-increment: 6.5;
+        $light-offset: -1;
+      }
+      @else if $label == 'indigo' {
+        $light-increment: 8;
+        $dark-increment: 5.7;
+      }
+      @else if $label == 'deep-purple' {
+        $light-increment: 8;
+        $dark-increment: 5.7;
+      }
+      @else if $label == 'light-blue' {
+        $light-increment: 7.8;
+      }
+      @else if $label == 'light-green' {
+        $light-increment: 6;
+        $light-offset: -5;
+      }
+      @else if $label == 'lime' {
+        $light-increment: 6.2;
+        $light-offset: -6;
+      }
+      @else if $label == 'yellow' {
+        $light-increment: 5.5;
+        $light-offset: -8;
+      }
+      @else if $label == 'purple' {
+        $light-increment: 6.5;
+        $light-offset: -8.5;
+      }
+      @else if $label == 'cyan' {
+        $light-increment: 9.4;
+        $light-offset: 6.5;
+        $dark-increment: 5.7;
+      }
+      @else if $label == 'teal' {
+        $light-increment: 9.6;
+        $light-offset: 5;
+        $dark-increment: 5.4;
+      }
+      @else if $label == 'blue' {
+        $light-increment: 6.8;
+        $dark-increment: 6.8;
+      }
+      @else if $label == 'brown' {
+        $light-increment: 8.8;
+        $dark-increment: 5;
+      }
+      .#{$label}-light#{$i}--bg {background-color: lighten($color, $light-increment * $i - $light-offset);}
+      .#{$label}-light#{$i} {color: lighten($color, $light-increment * $i - $light-offset);}
+      .#{$label}-dark#{$i}--bg {background-color: darken($color, $dark-increment * $i);}
+      .#{$label}-dark#{$i} {color: darken($color, $dark-increment * $i);}
     }
   }
 }

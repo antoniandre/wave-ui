@@ -1,4 +1,3 @@
-// Keep all the `.vue` extensions for Vite & Rollup.
 export { default as WAccordion } from './w-accordion.vue'
 export { default as WAlert } from './w-alert.vue'
 export { default as WApp } from './w-app.vue'
@@ -49,3 +48,4 @@ export { default as WTransitionScaleFade } from './transitions/w-transition-scal
 export { default as WTransitionSlide } from './transitions/w-transition-slide.vue'
 export { default as WTransitionSlideFade } from './transitions/w-transition-slide-fade.vue'
 export { default as WTransitionTwist } from './transitions/w-transition-twist.vue'
+export { default as WTree } from './w-tree.vue'

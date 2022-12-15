@@ -150,7 +150,7 @@ const genBreakpointLayoutClasses = breakpoints => {
     'text-left{text-align:left}',
     'text-center{text-align:center}',
     'text-right{text-align:right}',
-    'text-nowrap{whitespace:nowrap}',
+    'text-nowrap{white-space:nowrap}',
     'row{flex-direction:row}',
     'column{flex-direction:column}',
     'grow{flex-grow:1;flex-basis:auto}',
