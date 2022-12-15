@@ -67,15 +67,78 @@ div
     template(#pug).
       w-tree(
         :data="tree"
+        expand-icon="mdi mdi-plus"
+        expand-open-icon="mdi mdi-minus"
         branch-icon="mdi mdi-folder-outline"
         branch-open-icon="mdi mdi-folder-open-outline"
         leaf-icon="mdi mdi-file-outline")
     template(#html).
       &lt;w-tree
-      :data="tree"
-      branch-icon="mdi mdi-folder-outline"
-      branch-open-icon="mdi mdi-folder-open-outline"
-      leaf-icon="mdi mdi-file-outline"&gt;&lt;/w-tree&gt;
+        :data="tree"
+        expand-icon="mdi mdi-plus"
+        expand-open-icon="mdi mdi-minus"
+        branch-icon="mdi mdi-folder-outline"
+        branch-open-icon="mdi mdi-folder-open-outline"
+        leaf-icon="mdi mdi-file-outline"&gt;&lt;/w-tree&gt;
+    template(#js).
+      data: () => ({
+        tree: [
+          {
+            label: 'src',
+            children: [
+              {
+                label: 'assets',
+                children: [
+                  { label: 'wave.svg' },
+                ]
+              },
+              { label: 'views', branch: true },
+              { label: 'index.vue' },
+              { label: 'router.vue' },
+              { label: 'main.js' },
+              {
+                label: 'scss',
+                children: [
+                  { label: 'index.scss' },
+                  { label: '_variables.scss' },
+                  { label: '_base.scss' }
+                ]
+              },
+              { label: 'store.js' },
+            ]
+          },
+          { label: '.editorconfig' },
+          { label: '.gitignore' },
+          { label: 'index.html' },
+          { label: 'jsconfig.json' },
+          { label: 'LICENSE' },
+          { label: 'package.json' },
+          { label: 'pnpm-lock.yaml' },
+          { label: 'postcss.config.js' },
+          { label: 'README.md' },
+          { label: 'vite.config.js' }
+        ]
+      })
+
+  title-link(h3) No expand button
+  example
+    w-tree(:data="tree2" :expand-icon="false")
+    template(#pug).
+      w-tree(
+        :data="tree"
+        expand-icon="mdi mdi-plus"
+        expand-open-icon="mdi mdi-minus"
+        branch-icon="mdi mdi-folder-outline"
+        branch-open-icon="mdi mdi-folder-open-outline"
+        leaf-icon="mdi mdi-file-outline")
+    template(#html).
+      &lt;w-tree
+        :data="tree"
+        expand-icon="mdi mdi-plus"
+        expand-open-icon="mdi mdi-minus"
+        branch-icon="mdi mdi-folder-outline"
+        branch-open-icon="mdi mdi-folder-open-outline"
+        leaf-icon="mdi mdi-file-outline"&gt;&lt;/w-tree&gt;
     template(#js).
       data: () => ({
         tree: [
@@ -222,11 +285,13 @@ div
       })
 
   title-link(h2) V-model
+  p When the tree is #[code selectable], you can use the #[code v-model] to get the selected item.
+  p Click on a tree item to select it.
   example
     w-tree(v-model="selection" :data="tree1" selectable)
     .w-flex.mt6
-      strong Selection:
-      pre {{ selection }}
+      strong.mr3 Selection:
+      pre.orange-light6--bg.pa2 {{ selection }}
     template(#pug).
       w-tree(v-model="selection" :data="tree" selectable)
     template(#html).
@@ -249,6 +314,15 @@ div
       })
 
   title-link(h2) Events
+  p Multiple events are fired from the #[strong.code w-tree] component:
+  ul.lh0
+    li #[code before-open]: fired as soon as the user clicks a tree item that is expandable and before the subitems are revealed.
+    li.mt1 #[code open]: fired after a user clicks a tree item that is expandable, and after the expand animation.
+    li.mt1 #[code before-close]: fired as soon as the user clicks a tree item to close its subtree.
+    li.mt1 #[code close]: fired after a user clicks a tree item to close its subtree, and after the collapse animation.
+    li.mt1 #[code click]: fired when the user clicks any tree item.
+    li.mt1 #[code select]: fired when the user selects any selectable tree item. The #[code selectable] option must be set to true.
+    li.mt1 #[code update:model-value]: (or #[code input] in Vue 2.x) fired when the user selects any selectable tree item. The #[code selectable] option must be set to true.
   example
     w-flex(gap="12")
       w-tree(
@@ -257,7 +331,9 @@ div
         @open="log('@open', $event)"
         @before-close="log('@before-close', $event)"
         @close="log('@close', $event)"
-        @click="log('@click', $event)")
+        @click="log('@click', $event)"
+        @select="log('@select', $event)"
+        selectable)
       w-card(bg-color="amber-light6" title="Event log" title-class="amber-light5--bg")
         pre(v-html="logs")
     template(#pug).
@@ -267,7 +343,9 @@ div
         @open="log('@open', $event)"
         @before-close="log('@before-close', $event)"
         @close="log('@close', $event)"
-        @click="log('@click', $event)")
+        @click="log('@click', $event)"
+        @select="log('@select', $event)"
+        selectable)
     template(#html).
       &lt;w-tree
         :data="tree"
@@ -275,7 +353,9 @@ div
         @open="log('@open', $event)"
         @before-close="log('@before-close', $event)"
         @close="log('@close', $event)"
-        @click="log('@click', $event)"&gt;
+        @click="log('@click', $event
+        @select="log('@select', $event)"
+        selectable)"&gt;
       &lt;/w-tree&gt;
     template(#js).
       data: () => ({
@@ -321,6 +401,77 @@ div
         log: (...args) => console.log(...args)
       }
 
+  title-link(h3) Real-case scenario: Renaming a leaf item on click
+  example
+    w-tree(:data="tree3" @click="renameLeafItem" depth-reactivity)
+    template(#pug).
+      w-tree(:data="tree3" @click="renameLeafItem" depth-reactivity)
+    template(#html).
+      &lt;w-tree
+        :data="tree"
+        @click="renameLeafItem"
+        depth-reactivity&gt;
+      &lt;/w-tree&gt;
+    template(#js).
+      data: () => ({
+        tree: [
+          {
+            label: 'Item 1',
+            children: [
+              { label: 'Sub item 1' },
+              { label: 'Sub item 2' }
+            ]
+          },
+          { label: 'Item 2' }
+        ]
+      }),
+
+      methods: {
+        renameLeafItem ({ item }) {
+          if (!item.children) item.label = 'Hello!'
+        },
+      }
+
+  title-link(h2) Custom item label
+  p If you need to customize the layout of the item label, you can use the #[code #item-label] slot.
+  example
+    w-tree.lh5(:data="tree4" @click="renameLeafItem")
+      template(#item-label="{ item, open }")
+        span {{ item.label }}
+        w-icon.ml1(v-if="item.status === 'error'" bg-color="error" xs) mdi mdi-close
+        w-icon.ml1(v-else-if="item.status === 'success'" bg-color="success" xs) mdi mdi-check
+        w-icon.ml1(v-else-if="item.status === 'syncing'" bg-color="warning" xs) mdi mdi-clock-outline
+    template(#pug).
+      w-tree.lh5(:data="tree4" @click="renameLeafItem")
+        template(#item-label="{ item, open }")
+          span {{ '\{\{ item.label \}\}' }}
+          w-icon.ml1(v-if="item.status === 'error'" bg-color="error" xs) mdi mdi-close
+          w-icon.ml1(v-else-if="item.status === 'success'" bg-color="success" xs) mdi mdi-check
+          w-icon.ml1(v-else-if="item.status === 'syncing'" bg-color="warning" xs) mdi mdi-clock-outline
+    template(#html).
+      &lt;w-tree
+        :data="tree"
+        @click="renameLeafItem"&gt;
+      &lt;/w-tree&gt;
+    template(#js).
+      data: () => ({
+        tree: [
+          {
+            label: 'Item 1',
+            children: [
+              { label: 'Sub item 1' },
+              { label: 'Sub item 2' }
+            ]
+          },
+          { label: 'Item 2' }
+        ]
+      }),
+
+      methods: {
+        renameLeafItem ({ item }) {
+          if (!item.children) item.label = 'Hello!'
+        },
+      }
 </template>
 
 <script>
@@ -375,11 +526,34 @@ export default {
       { label: 'README.md' },
       { label: 'vite.config.js' }
     ],
+    tree3: [
+      {
+        label: 'Item 1',
+        children: [
+          { label: 'Sub item 1' },
+          { label: 'Sub item 2' }
+        ]
+      },
+      { label: 'Item 2' }
+    ],
+    tree4: [
+      {
+        label: 'Item 1',
+        children: [
+          { label: 'Sub item 1', status: 'success' },
+          { label: 'Sub item 2', status: 'error' }
+        ]
+      },
+      { label: 'Item 2', status: 'syncing' }
+    ],
     selection: null,
     logs: []
   }),
 
   methods: {
+    renameLeafItem ({ item }) {
+      if (!item.children) item.label = 'Hello!'
+    },
     log (...args) {
       console.log(...args)
       const [eventName, details] = args
