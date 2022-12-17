@@ -387,6 +387,48 @@ main
           ul
             li Consider tel &amp; mailto external address.
 
+            li.minor
+    li.minor
+      strong.version v1.61.0
+      ul
+        li
+          strong.code w-tree
+          ul
+            li Added a new component to present data in a tree view. #[span.tag.new]
+        li
+          strong.code w-icon
+          ul
+            li Added a default transform transition on #[code w-icon:before].
+        li
+          strong Color palette
+          ul
+            li The color palette have 2 new color shades per color and more homogenous light distribution. #[span.tag.new]
+        li
+          strong w-dialog
+          ul
+            li Fix the dialog height when nested in a fullscreen dialog.
+        li
+          strong w-input
+          ul
+            li The CSS font family, style, and weight of the input field is now inherited from the parent.
+        li
+          strong w-image
+          ul
+            li Added a new #[code spinner-color] option. #[span.tag.new]
+
+    li.minor
+      strong.version v1.60.0
+      ul
+        li
+          strong.code w-table
+          ul
+            li Added the #[code sort-function] option for server side sorting. #[span.tag.new]
+          strong Scoped slots fixes
+          ul
+            li.
+              Fixed a few scoped slots on components: w-checkboxes, w-radios, w-timeline,
+              w-form-element (only impacted Vue 2).
+
     li.minor
       strong.version v1.59.0
       ul
