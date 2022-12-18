@@ -194,7 +194,7 @@ export default {
         // eslint-disable-next-line vue/custom-event-name-casing
         else if (e.keyCode === 27) this.$emit('keydown:escape')
         // On arrow keys press, navigate to prev/next item.
-        else if (this.arrowsNavigation) {
+        else if (this.arrowsNavigation && [38, 40].includes(e.keyCode)) {
           e.preventDefault()
           if (e.keyCode === 38) this.focusPrevNextItem(li._index, false)
           if (e.keyCode === 40) this.focusPrevNextItem(li._index, true)

@@ -423,8 +423,10 @@ export default {
   &__selection {
     width: 100%;
     height: 100%;
-    font-size: inherit;
+    min-height: inherit;
+    font: inherit;
     color: inherit;
+    text-align: inherit;
     background: none;
     border: none;
     outline: none;
