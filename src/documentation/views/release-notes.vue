@@ -22,6 +22,20 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v2.47.1
+      ul
+        li
+          strong.code w-list &amp; w-select
+          ul
+            li.
+              Use the default browser behavior on keypress with #[code arrows-navigation] is on
+              (case of the #[strong.code w-select] component).
+        li
+          strong.code w-select
+          ul
+            li The input field inherits the min-height, font and text-align CSS rules.
+
     li.minor
       strong.version v2.47.0
       ul
