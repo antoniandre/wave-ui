@@ -2,7 +2,7 @@
 .w-confirm
   w-menu(v-model="showPopup" v-bind="wMenuProps")
     template(#activator="{ on }")
-      w-button.w-confirm__button(v-bind="{ ...$attrs, ...buttonProps, ...on }")
+      w-button.w-confirm__button(v-bind="{ ...$attrs, ...buttonProps, ...(disablePrompt ? {} : on) }")
         slot
     w-flex(:column="!inline" align-center)
       div
@@ -32,6 +32,7 @@ export default {
     bgColor: { type: String },
     color: { type: String },
     icon: { type: String },
+    disablePrompt: { type: Boolean }, // If true, the confirm button acts like a simple w-button.
     mainButton: { type: Object }, // Allow passing down an object of props to the w-button component.
     question: { type: String, default: 'Are you sure?' },
 
