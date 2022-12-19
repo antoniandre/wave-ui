@@ -23,7 +23,12 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
-      strong.version v2.47.1
+      strong.version v2.48.0
+      ul
+        li
+          strong.code w-confirm
+          ul
+            li Added a #[code disable-prompt] option to disable the prompt based on a condition. #[span.tag.new]
       ul
         li
           strong.code w-list &amp; w-select
@@ -47,7 +52,7 @@ main
         li
           strong.code w-icon
           ul
-            li Added a default transform transition on #[code w-icon:before].
+            li Added a default CSS transform transition on #[code w-icon:before].
         li
           strong Color palette
           ul
