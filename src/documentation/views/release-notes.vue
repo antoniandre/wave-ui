@@ -35,6 +35,7 @@ main
           strong.code w-select
           ul
             li The input field inherits the min-height, font and text-align CSS rules.
+            li Allow options to have a #[code 0] value.
 
     li.minor
       strong.version v2.47.0
