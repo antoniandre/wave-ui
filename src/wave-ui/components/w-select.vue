@@ -60,7 +60,7 @@ component(
           v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
           :key="i"
           type="hidden"
-          :value="val.value || ''"
+          :value="val.value === undefined ? '' : val.value.toString()"
           :name="inputName + (multiple ? '[]' : '')")
         template(v-if="labelPosition === 'inside' && showLabelInside")
           label.w-select__label.w-select__label--inside.w-form-el-shakable(
@@ -298,7 +298,8 @@ export default {
     // Also accept objects if returnObject is true.
     // In any case, always end up with an array.
     checkSelection (items) {
-      items = Array.isArray(items) ? items : (items ? [items] : [])
+      console.log(items)
+      items = Array.isArray(items) ? items : (items !== undefined ? [items] : [])
       // `selectItems` items always have a value.
       const allValues = this.selectItems.map(item => item.value)
 
