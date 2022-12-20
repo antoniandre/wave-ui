@@ -11,7 +11,7 @@ component.title-link(:is="tag" :class="classes")
 
 <script>
 const getSlotText = function (slot) {
-  return (slot || []).reduce((array, node) => {
+  return (slot || [])?.reduce?.((array, node) => {
     const hasString = typeof node === 'string' || typeof node.children === 'string'
     array.push(hasString ? (node?.children || node).trim() : getSlotText(node.children))
     return array
