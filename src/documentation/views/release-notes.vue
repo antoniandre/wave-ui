@@ -415,7 +415,38 @@ main
           ul
             li Consider tel &amp; mailto external address.
 
-            li.minor
+    li.minor
+      strong.version v1.62.0
+      ul
+        li
+          strong.code w-confirm
+          ul
+            li Added a #[code disable-prompt] option to disable the prompt based on a condition. #[span.tag.new]
+      ul
+        li
+          strong.code w-list &amp; w-select
+          ul
+            li.
+              Use the default browser behavior on keypress with #[code arrows-navigation] is on
+              (case of the #[strong.code w-select] component).
+        li
+          strong.code w-select
+          ul
+            li The input field inherits the min-height, font and text-align CSS rules.
+            li Allow options to have a #[code 0] value.
+        li
+          strong.code w-transition-expand
+          ul
+            li Handle cases where the DOM element starts expanded.
+        li
+          strong.code w-tree
+          ul
+            li Improve the component and add new options.
+        li
+          strong.code w-switch
+          ul
+            li Fix the #[code loading] prop with fixed value.
+
     li.minor
       strong.version v1.61.0
       ul
