@@ -18,7 +18,7 @@ ul.w-tree(:class="classes")
         text
         sm)
       slot(name="item-label" :item="item.originalItem" :depth="depth" :open="item.open")
-        w-icon(v-if="itemIcon(item)" class="w-tree__item-icon") {{ itemIcon(item) }}
+        w-icon(v-if="itemIcon(item)" class="w-tree__item-icon" :color="item.originalItem[itemIconColorKey] || iconColor") {{ itemIcon(item) }}
         span {{ item.label }}
         span.ml1(v-if="counts && (item.children || item.branch)").
           ({{ item.originalItem.children?.length || 0 }})
@@ -71,7 +71,10 @@ export default {
     selectable: { type: Boolean },
     // By default it only reacts to items count change (added or deleted items) not property of items change.
     deepReactivity: { type: Boolean },
-    counts: { type: Boolean }
+    counts: { type: Boolean },
+    itemIconKey: { type: String, default: 'icon' }, // Support a different icon per item.
+    iconColor: { type: String }, // Applies a color on all the label item icons.
+    itemIconColorKey: { type: String, default: 'iconColor' } // Applies a specific color on each label item icons.
   },
 
   emits: ['update:model-value', 'before-open', 'open', 'before-close', 'close', 'click', 'select'],
@@ -210,7 +213,7 @@ export default {
 
     itemIcon (item) {
       return (
-        item.originalItem.icon ||
+        item.originalItem[this.itemIconKey] ||
         (!item.children && !item.branch && this.leafIcon) ||
         ((item.children || item.branch) && ((item.open && this.branchOpenIcon) || this.branchIcon))
       )
