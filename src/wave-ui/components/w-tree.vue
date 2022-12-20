@@ -70,7 +70,7 @@ export default {
     noTransition: { type: Boolean },
     selectable: { type: Boolean },
     // By default it only reacts to items count change (added or deleted items) not property of items change.
-    depthReactivity: { type: Boolean },
+    deepReactivity: { type: Boolean },
     counts: { type: Boolean }
   },
 
@@ -105,7 +105,7 @@ export default {
           children: !!item.children, // The children tree remains available in originalItem.
           branch: item.branch,
           depth: this.depth,
-          open: oldItems[i]?.open || false
+          open: !!(oldItems[i]?.open || this.expandAll)
         })
       })
     },
@@ -168,6 +168,7 @@ export default {
               treeTabbableItems[i + indexModifier] && treeTabbableItems[i + indexModifier].focus()
               return true // Break the loop.
             }
+            return false
           })
         }
       }
@@ -182,6 +183,7 @@ export default {
      * @param {String} selector any valid DOM selector to match the siblings.
      */
     getPreviousSibling (node, selector) {
+      // eslint-disable-next-line no-unmodified-loop-condition
       while (selector && (node = node.previousElementSibling)) {
         if (node.matches(selector)) return node
       }
@@ -195,6 +197,7 @@ export default {
      * @param {String} selector any valid DOM selector to match the siblings.
      */
     getNextSibling (node, selector) {
+      // eslint-disable-next-line no-unmodified-loop-condition
       while (selector && (node = node.nextElementSibling)) {
         if (node.matches(selector)) return node
       }
@@ -229,7 +232,7 @@ export default {
       // The open property of each item has to be retained from this.currentDepthItems in order to stay
       // in the same state after DOM repaint.
       items => this.updateCurrentDepthTree(items, this.currentDepthItems),
-      { deep: !!this.depthReactivity } // Deep watching is more resource consuming. Only enable on user demand.
+      { deep: !!this.deepReactivity } // Deep watching is more resource consuming. Only enable on user demand.
     )
   },
 
