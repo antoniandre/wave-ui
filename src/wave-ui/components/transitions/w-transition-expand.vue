@@ -27,6 +27,7 @@ export default {
 
   data: () => ({
     el: {
+      savedState: false,
       originalStyles: '',
       width: 0,
       height: 0,
@@ -59,7 +60,7 @@ export default {
     beforeAppear (el) {
       // Only save original state once before a 'clean' transition start.
       // Not when clicking very fast and mixing states order.
-      if (this.cleanTransitionCycle) this.saveOriginalStyles(el)
+      if (this.cleanTransitionCycle) this.saveOriginalInlineStyles(el)
       this.cleanTransitionCycle = false
     },
     appear (el, done) {
@@ -76,7 +77,7 @@ export default {
     beforeEnter (el) {
       // Only save original state once before a 'clean' transition start.
       // Not when clicking very fast and mixing states order.
-      if (this.cleanTransitionCycle) this.saveOriginalStyles(el)
+      if (this.cleanTransitionCycle) this.saveOriginalInlineStyles(el)
       this.cleanTransitionCycle = false
     },
     enter (el, done) {
@@ -91,6 +92,9 @@ export default {
       this.cleanTransitionCycle = false
     },
     beforeLeave (el) {
+      // When starting with an open item.
+      if (!this.el.savedState) this.saveComputedStyles(el)
+
       this.beforeHide(el)
       this.cleanTransitionCycle = false
     },
@@ -102,6 +106,9 @@ export default {
     afterLeave (el) {
       this.applyOriginalStyles(el)
       this.cleanTransitionCycle = true
+      // Reset for recomputing the next time we start the transition from an open state.
+      // In case there might be some changed styles from last closing.
+      this.el.savedState = false
     },
 
     applyHideStyles (el) {
@@ -151,11 +158,25 @@ export default {
     applyOriginalStyles (el) {
       el.style.cssText = this.el.originalStyles
     },
-    saveOriginalStyles (el) {
-      // Keep the original styles to restore them after transition.
+    saveOriginalInlineStyles (el) {
+      // Keep any original inline styles to restore them after transition.
       this.el.originalStyles = el.style.cssText
     },
     show (el, done) {
+      this.saveComputedStyles(el)
+      this.applyHideStyles(el)
+
+      setTimeout(() => this.applyShowStyles(el), 20)
+      setTimeout(done, this.duration)
+    },
+    beforeHide (el) {
+      this.applyShowStyles(el)
+    },
+    hide (el, done) {
+      setTimeout(() => this.applyHideStyles(el), 20)
+      setTimeout(done, this.duration)
+    },
+    saveComputedStyles (el) {
       const computedStyles = window.getComputedStyle(el, null)
 
       // Save the width & height then set them to 0 as the animation starting point.
@@ -177,17 +198,7 @@ export default {
         this.el.borderTopWidth = computedStyles.getPropertyValue('borderTopWidth')
         this.el.borderBottomWidth = computedStyles.getPropertyValue('borderBottomWidth')
       }
-      this.applyHideStyles(el)
-
-      setTimeout(() => this.applyShowStyles(el), 20)
-      setTimeout(done, this.duration)
-    },
-    beforeHide (el) {
-      this.applyShowStyles(el)
-    },
-    hide (el, done) {
-      setTimeout(() => this.applyHideStyles(el), 20)
-      setTimeout(done, this.duration)
+      this.el.savedState = true
     }
   }
 }
