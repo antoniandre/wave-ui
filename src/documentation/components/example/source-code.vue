@@ -73,6 +73,7 @@ export default {
 
     .w-icon {
       width: 24px;
+      height: 24px;
       transition: 0.25s;
     }
     &:hover .w-icon {background-color: rgba(35, 71, 129, 0.15);}
