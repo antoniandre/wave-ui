@@ -489,13 +489,128 @@ div
         @confirm="$waveui.notify('Confirmed!', 'success')"&gt;
         Ask for confirm
       &lt;/w-confirm&gt;
+
+  title-link(h2) Disable prompt
+  p.
+    Sometimes it is convenient to disable the prompt according to a condition. For instance,
+    you only want to ask for confirmation if the user has edited some fields and not if the
+    values stay untouched. For that, you can use the #[code disable-prompt] option.
+  example(content-class="w-flex justify-center" app-props-string="justify-center align-center")
+    w-card(title="My user details" style="max-width: 300px")
+      .w-flex.align-center.my4
+        w-icon.pa6.bd1(xl bg-color="grey-light6" color="blue-dark1") wi-wave
+        w-input.ml4(v-model="newUsername") Username
+      .w-flex.justify-end.align-center
+        w-transition-slide-fade(left)
+          strong.mr3(v-if="saved" :class="hasEdits ? 'green' : 'grey'") {{ hasEdits ? 'Saved!' : 'No changes.' }}
+        w-confirm(
+          :main-button="{ width: '5.5rem', bgColor: hasEdits ? 'success' : 'primary' }"
+          :disable-prompt="!hasEdits"
+          @click="!hasEdits && saveDetails()"
+          @confirm="saveDetails"
+          @cancel="newUsername = username")
+          w-icon.mr1 wi-check
+          | {{ hasEdits ? 'Save' : 'OK' }}
+    template(#pug).
+      w-card(title="My user details" style="max-width: 300px")
+        .w-flex.align-center.my4
+          w-icon.pa6.bd1(xl bg-color="grey-light6" color="blue-dark1") wi-wave
+          w-input.ml4(v-model="newUsername") Username
+        .w-flex.justify-end.align-center
+          w-transition-slide-fade(left)
+            strong.mr3(v-if="saved" :class="hasEdits ? 'green' : 'grey'") {{ "\{\{ hasEdits ? 'Saved!' : 'No changes.' \}\}" }}
+          w-confirm(
+            :main-button="{ width: '5.5rem', bgColor: hasEdits ? 'success' : 'primary' }"
+            :disable-prompt="!hasEdits"
+            @click="!hasEdits &amp;&amp; saveDetails&amp;#40;&amp;#41;"
+            @confirm="saveDetails"
+            @cancel="newUsername = username")
+            w-icon.mr1 wi-check
+            | {{ "\{\{ hasEdits ? 'Save' : 'OK' \}\}" }}
+    template(#html).
+      &lt;w-card title="My user details" style="max-width: 300px"&gt;
+        &lt;div class="w-flex align-center my4"&gt;
+          &lt;w-icon
+            xl
+            bg-color="grey-light6"
+            color="blue-dark1"
+            class="pa6 bd1"&gt;
+            wi-wave
+          &lt;/w-icon&gt;
+          &lt;w-input
+            v-model="newUsername"
+            class="ml4"&gt;
+            Username
+          &lt;/w-input&gt;
+        &lt;/div&gt;
+        &lt;div class="w-flex justify-end align-center"&gt;
+          &lt;w-transition-slide-fade left&gt;
+            &lt;strong
+              v-if="saved"
+              class="mr3"
+              :class="hasEdits ? 'green' : 'grey'"&gt;
+              {{ "\{\{ hasEdits ? 'Saved!' : 'No changes.' \}\}" }}
+            &lt;/strong&gt;
+          &lt;/w-transition-slide-fade&gt;
+          &lt;w-confirm
+            :main-button="{ width: '5.5rem', bgColor: hasEdits ? 'success' : 'primary' }"
+            :disable-prompt="!hasEdits"
+            @click="!hasEdits &amp;&amp; saveDetails()"
+            @confirm="saveDetails"
+            @cancel="newUsername = username"&gt;
+            &lt;w-icon class="mr1"&gt;wi-check&lt;/w-icon&gt;
+            {{ "\{\{ hasEdits ? 'Save' : 'OK' \}\}" }}
+          &lt;/w-confirm&gt;
+        &lt;/div&gt;
+      &lt;/w-card&gt;
+    template(#js).
+      data: () => ({
+        disablePrompt: true,
+        username: 'waveui',
+        newUsername: 'waveui',
+        saved: false
+      }),
+
+      computed: {
+        hasEdits () {
+          return this.newUsername !== this.username
+        }
+      },
+
+      methods: {
+        async saveDetails () {
+          this.saved = true
+          await new Promise(resolve => setTimeout(resolve, 2000))
+          this.username = this.newUsername
+          this.saved = false
+        }
+      },
 </template>
 
 <script>
 export default {
   data: () => ({
-    bgColor: 'green'
+    bgColor: 'green',
+    disablePrompt: true,
+    username: 'waveui',
+    newUsername: 'waveui',
+    saved: false
   }),
+
+  computed: {
+    hasEdits () {
+      return this.newUsername !== this.username
+    }
+  },
+
+  methods: {
+    async saveDetails () {
+      this.saved = true
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      this.username = this.newUsername
+      this.saved = false
+    }
+  },
 
   mounted () {
     setTimeout(() => {

@@ -18,7 +18,7 @@ ul.w-tree(:class="classes")
         text
         sm)
       slot(name="item-label" :item="item.originalItem" :depth="depth" :open="item.open")
-        w-icon(v-if="itemIcon(item)" class="w-tree__item-icon") {{ itemIcon(item) }}
+        w-icon(v-if="itemIcon(item)" class="w-tree__item-icon" :color="item.originalItem[itemIconColorKey] || iconColor") {{ itemIcon(item) }}
         span {{ item.label }}
         span.ml1(v-if="counts && (item.children || item.branch)").
           ({{ item.originalItem.children ? item.originalItem.children.length : 0 }})
@@ -70,8 +70,11 @@ export default {
     noTransition: { type: Boolean },
     selectable: { type: Boolean },
     // By default it only reacts to items count change (added or deleted items) not property of items change.
-    depthReactivity: { type: Boolean },
-    counts: { type: Boolean }
+    deepReactivity: { type: Boolean },
+    counts: { type: Boolean },
+    itemIconKey: { type: String, default: 'icon' }, // Support a different icon per item.
+    iconColor: { type: String }, // Applies a color on all the label item icons.
+    itemIconColorKey: { type: String, default: 'iconColor' } // Applies a specific color on each label item icons.
   },
 
   emits: ['input', 'before-open', 'open', 'before-close', 'close', 'click', 'select'],
@@ -105,7 +108,7 @@ export default {
           children: !!item.children, // The children tree remains available in originalItem.
           branch: item.branch,
           depth: this.depth,
-          open: oldItems[i]?.open || false
+          open: !!(oldItems[i]?.open || this.expandAll)
         })
       })
     },
@@ -183,6 +186,7 @@ export default {
      * @param {String} selector any valid DOM selector to match the siblings.
      */
     getPreviousSibling (node, selector) {
+      // eslint-disable-next-line no-unmodified-loop-condition
       while (selector && (node = node.previousElementSibling)) {
         if (node.matches(selector)) return node
       }
@@ -196,6 +200,7 @@ export default {
      * @param {String} selector any valid DOM selector to match the siblings.
      */
     getNextSibling (node, selector) {
+      // eslint-disable-next-line no-unmodified-loop-condition
       while (selector && (node = node.nextElementSibling)) {
         if (node.matches(selector)) return node
       }
@@ -208,7 +213,7 @@ export default {
 
     itemIcon (item) {
       return (
-        item.originalItem.icon ||
+        item.originalItem[this.itemIconKey] ||
         (!item.children && !item.branch && this.leafIcon) ||
         ((item.children || item.branch) && ((item.open && this.branchOpenIcon) || this.branchIcon))
       )
@@ -230,7 +235,7 @@ export default {
       // The open property of each item has to be retained from this.currentDepthItems in order to stay
       // in the same state after DOM repaint.
       items => this.updateCurrentDepthTree(items, this.currentDepthItems),
-      { deep: !!this.depthReactivity } // Deep watching is more resource consuming. Only enable on user demand.
+      { deep: !!this.deepReactivity } // Deep watching is more resource consuming. Only enable on user demand.
     )
   },
 

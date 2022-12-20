@@ -60,7 +60,7 @@ component(
           v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
           :key="i"
           type="hidden"
-          :value="val.value || ''"
+          :value="val.value === undefined ? '' : val.value.toString()"
           :name="inputName + (multiple ? '[]' : '')")
         template(v-if="labelPosition === 'inside' && showLabelInside")
           label.w-select__label.w-select__label--inside.w-form-el-shakable(
@@ -299,7 +299,7 @@ export default {
     // Also accept objects if returnObject is true.
     // In any case, always end up with an array.
     checkSelection (items) {
-      items = Array.isArray(items) ? items : (items ? [items] : [])
+      items = Array.isArray(items) ? items : (items !== undefined ? [items] : [])
       // `selectItems` items always have a value.
       const allValues = this.selectItems.map(item => item.value)
 
@@ -424,8 +424,10 @@ export default {
   &__selection {
     width: 100%;
     height: 100%;
-    font-size: inherit;
+    min-height: inherit;
+    font: inherit;
     color: inherit;
+    text-align: inherit;
     background: none;
     border: none;
     outline: none;
@@ -522,11 +524,14 @@ export default {
     position: absolute;
     top: 50%;
     left: 0;
+    right: 0;
     // Use margin instead of padding as the scale transformation bellow decreases the real padding
     // size and misaligns the label.
     margin-left: 2 * $base-increment;
     transform: translateY(-50%);
     pointer-events: none;
+
+    .w-select--inner-icon-right & {padding-right: 22px;}
 
     .w-select--no-padding & {
       left: 0;

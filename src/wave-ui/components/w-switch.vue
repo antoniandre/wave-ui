@@ -38,7 +38,7 @@ component(
         v-if="loading"
         circle
         color="inherit"
-        v-bind="typeof loading === 'number' ? { 'model-value': loading } : {}")
+        v-bind="typeof loading === 'number' ? { value: loading } : {}")
       slot(v-else name="thumb")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-switch__label.w-switch__label--right.w-form-el-shakable(

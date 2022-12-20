@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  ui-component-title(slug="w-table") w-table
+  ui-component-title w-table
   examples
   api
 </template>

@@ -128,12 +128,34 @@
         slot(name="extra-row")
 
     //- Table footer.
-    tfoot.w-table__footer(v-if="$slots.footer || $slots['footer-row']")
+    tfoot.w-table__footer(v-if="$slots.footer || $slots['footer-row'] || pagination")
       slot(v-if="$slots['footer-row']" name="footer-row")
-      tr.w-table__row(v-else)
+      tr.w-table__row(v-else-if="$slots.footer")
         td.w-table__cell(:colspan="headers.length")
           slot(name="footer")
-      //- .pagination
+      tr.w-table__row.w-table__pagination-wrap(v-if="pagination && paginationConfig")
+        td.w-table__cell(:colspan="headers.length")
+          .w-table__pagination
+            w-select.pagination-number.pagination-number--items-per-page(
+              v-if="paginationConfig.itemsPerPageOptions"
+              v-model="paginationConfig.itemsPerPage"
+              :items="paginationConfig.itemsPerPageOptions"
+              label-position="left"
+              label="Items per page"
+              label-color="inherit")
+            span.pagination-number.pagination-number--results.
+              {{ paginationConfig.start }}-{{ paginationConfig.end }} of {{ paginationConfig.total }}
+            .pagination-arrows
+              w-button.pagination-arrow.pagination-arrow--prev(
+                @click="paginationConfig.page--"
+                icon="wi-chevron-left"
+                text
+                lg)
+              w-button.pagination-arrow.pagination-arrow--next(
+                @click="paginationConfig.page++"
+                icon="wi-chevron-right"
+                text
+                lg)
 </template>
 
 <script>
@@ -189,13 +211,28 @@ export default {
 
     forceSelection: { type: Boolean },
 
-    // Useful to select or expand a row, and even after a filter, the same row will stay selected or exanded.
+    // Useful to select or expand a row, and even after a filter, the same row will stay selected or expanded.
     uidKey: { type: String, default: 'id' },
 
     filter: { type: Function },
     sortFunction: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 },
-    resizableColumns: { type: Boolean }
+    resizableColumns: { type: Boolean },
+
+    pagination: {
+      type: [Boolean, Object, String],
+      validator: object => {
+        if (!object) return true // Accept any falsy value.
+        else if (typeof object === 'object' && (!object.itemsPerPage || (object.page && isNaN(object.page)))) {
+          consoleError(
+            'Wrong pagination config received in the w-table\'s `pagination` prop (received: `' + JSON.stringify(object) + '`). ' +
+            '\nExpected object: { itemsPerPage: Integer, page: Integer } or { itemsPerPage: Integer, start: Integer }.'
+          )
+          return false
+        }
+        return true
+      }
+    }
   },
 
   emits: [
@@ -222,7 +259,8 @@ export default {
       nextColWidth: null,
       columnEl: null,
       nextColumnEl: null
-    }
+    },
+    paginationConfig: {}
   }),
 
   computed: {
@@ -490,6 +528,20 @@ export default {
         this.colResizing.colWidth = null
         this.colResizing.nextColWidth = null
       }, 0)
+    },
+
+    updatePaginationConfig () {
+      const itemsPerPage = this.pagination?.itemsPerPage || 10
+      const total = this.pagination?.total || this.items.length
+      const page = this.pagination?.page || 1
+      this.paginationConfig = {
+        itemsPerPage,
+        itemsPerPageOptions: this.pagination?.itemsPerPageOptions || [{ label: '10', value: 10 }, { label: '100', value: 100 }, { label: 'All', value: 0 }],
+        page,
+        start: this.pagination?.start || 1,
+        end: total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page)),
+        total
+      }
     }
   },
 
@@ -499,6 +551,8 @@ export default {
 
     if ((this.expandedRows || []).length) this.expandedRowsInternal = this.expandedRows
     if ((this.selectedRows || []).length) this.selectedRowsInternal = this.selectedRows
+
+    if (this.pagination) this.updatePaginationConfig()
   },
 
   watch: {
@@ -737,6 +791,29 @@ $tr-border-top: 1px;
       left: 0;
       right: 0;
       border-bottom: $border;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: $base-increment;
+    padding-bottom: $base-increment;
+
+    .pagination-number--items-per-page {
+      margin-right: 6 * $base-increment;
+      flex-grow: 0;
+      text-align: right;
+    }
+    .pagination-number--of {
+      margin-left: $base-increment;
+      margin-right: $base-increment;
+    }
+    .w-select__selection {max-width: 60px;}
+
+    .pagination-arrows {
+      margin-left: 6 * $base-increment;
     }
   }
 }
