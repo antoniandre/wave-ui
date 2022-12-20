@@ -20,8 +20,8 @@ div
                 ]
               },
               { label: 'views', branch: true },
-              { label: 'index.vue' },
-              { label: 'router.vue' },
+              { label: 'app.vue' },
+              { label: 'router.js' },
               { label: 'main.js' },
               {
                 label: 'scss',
@@ -57,7 +57,7 @@ div
     li #[code branch-open-icon]: if the item has children and it is open.
     li #[code leaf-icon]: for items which don't contain anything.
   example
-    w-tree(
+    w-tree.size--md(
       :data="tree2"
       expand-icon="mdi mdi-plus"
       expand-open-icon="mdi mdi-minus"
@@ -65,7 +65,7 @@ div
       branch-open-icon="mdi mdi-folder-open-outline"
       leaf-icon="mdi mdi-file-outline")
     template(#pug).
-      w-tree(
+      w-tree.size--md(
         :data="tree"
         expand-icon="mdi mdi-plus"
         expand-open-icon="mdi mdi-minus"
@@ -79,7 +79,9 @@ div
         expand-open-icon="mdi mdi-minus"
         branch-icon="mdi mdi-folder-outline"
         branch-open-icon="mdi mdi-folder-open-outline"
-        leaf-icon="mdi mdi-file-outline"&gt;&lt;/w-tree&gt;
+        leaf-icon="mdi mdi-file-outline"
+        class="size--md"&gt;
+      &lt;/w-tree&gt;
     template(#js).
       data: () => ({
         tree: [
@@ -93,8 +95,8 @@ div
                 ]
               },
               { label: 'views', branch: true },
-              { label: 'index.vue' },
-              { label: 'router.vue' },
+              { label: 'app.vue' },
+              { label: 'router.js' },
               { label: 'main.js' },
               {
                 label: 'scss',
@@ -120,11 +122,19 @@ div
         ]
       })
 
-  title-link(h3) No expand button
+  title-link(h3) Different icon per item
+  p.
+    It is possible to set a specific icon in any/each item of the tree.#[br]
+    By default, the #[strong.code w-tree] component will look for any icon in the #[code icon] key,
+    but you can override that with the #[code item-icon-key] prop.
+  p.
+    It is also possible to set a specific color for the icon of any/each item of the tree.#[br]
+    By default, the #[strong.code w-tree] component will look for any icon color in the #[code iconColor] key,
+    but you can override that with the #[code item-icon-color-key] prop.
   example
-    w-tree(:data="tree2" :expand-icon="false")
+    w-tree.size--md(:data="tree6" icon-color="blue-dark1")
     template(#pug).
-      w-tree(
+      w-tree.size--md(
         :data="tree"
         expand-icon="mdi mdi-plus"
         expand-open-icon="mdi mdi-minus"
@@ -138,7 +148,62 @@ div
         expand-open-icon="mdi mdi-minus"
         branch-icon="mdi mdi-folder-outline"
         branch-open-icon="mdi mdi-folder-open-outline"
-        leaf-icon="mdi mdi-file-outline"&gt;&lt;/w-tree&gt;
+        leaf-icon="mdi mdi-file-outline"
+        class="size--md"&gt;&lt;/w-tree&gt;
+    template(#js).
+      data: () => ({
+        tree: [
+          {
+            label: 'src',
+            icon: 'mdi mdi-code-not-equal-variant',
+            iconColor: 'green',
+            children: [
+              {
+                label: 'assets',
+                icon: 'mdi mdi-star',
+                iconColor: 'yellow-dark1',
+                children: [
+                  { label: 'wave.svg', icon: 'mdi mdi-svg', iconColor: 'yellow-dark1' }
+                ]
+              },
+              { label: 'views', branch: true, icon: 'mdi mdi-code-greater-than', iconColor: 'orange' },
+              { label: 'app.vue', icon: 'mdi mdi-vuejs', iconColor: 'green' },
+              { label: 'router.js', icon: 'mdi mdi-routes', iconColor: 'green' },
+              { label: 'main.js', icon: 'mdi mdi-language-javascript', iconColor: 'yellow-dark1' },
+              {
+                label: 'scss',
+                icon: 'mdi mdi-sass',
+                iconColor: 'pink',
+                children: [
+                  { label: 'index.scss', icon: 'mdi mdi-sass', iconColor: 'pink' },
+                  { label: '_variables.scss', icon: 'mdi mdi-sass', iconColor: 'pink' },
+                  { label: '_base.scss', icon: 'mdi mdi-sass', iconColor: 'pink' }
+                ]
+              },
+              { label: 'store.js', icon: 'mdi mdi-language-javascript', iconColor: 'yellow-dark1' }
+            ]
+          },
+          { label: '.editorconfig', icon: 'mdi mdi-cog', iconColor: 'grey' },
+          { label: '.gitignore', icon: 'mdi mdi-git', iconColor: 'red' },
+          { label: '.npmrc', icon: 'mdi mdi-npm', iconColor: 'red' },
+          { label: 'index.html', icon: 'mdi mdi-language-html5', iconColor: 'red' },
+          { label: 'jsconfig.json', icon: 'mdi mdi-code-json', iconColor: 'yellow-dark1' },
+          { label: 'LICENSE', icon: 'mdi mdi-license', iconColor: 'red' },
+          { label: 'package.json', icon: 'mdi mdi-nodejs', iconColor: 'lime-dark1' },
+          { label: 'pnpm-lock.yaml', icon: 'mdi mdi-code-json', iconColor: 'yellow-dark1' },
+          { label: 'postcss.config.js', icon: 'mdi mdi-cog', iconColor: 'red' },
+          { label: 'README.md', icon: 'mdi mdi-information-outline', iconColor: 'blue' },
+          { label: 'vite.config.js', icon: 'mdi mdi-flash', iconColor: 'amber' }
+        ]
+      })
+
+  title-link(h3) No expand button
+  example
+    w-tree(:data="tree2" :expand-icon="false")
+    template(#pug).
+      w-tree(:data="tree" :expand-icon="false")
+    template(#html).
+      &lt;w-tree :data="tree" :expand-icon="false"&gt;&lt;/w-tree&gt;
     template(#js).
       data: () => ({
         tree: [
@@ -152,8 +217,8 @@ div
                 ]
               },
               { label: 'views', branch: true },
-              { label: 'index.vue' },
-              { label: 'router.vue' },
+              { label: 'app.vue' },
+              { label: 'router.js' },
               { label: 'main.js' },
               {
                 label: 'scss',
@@ -355,7 +420,7 @@ div
         @close="log('@close', $event)"
         @click="log('@click', $event
         @select="log('@select', $event)"
-        selectable)"&gt;
+        selectable&gt;
       &lt;/w-tree&gt;
     template(#js).
       data: () => ({
@@ -370,8 +435,8 @@ div
                 ]
               },
               { label: 'views', branch: true },
-              { label: 'index.vue' },
-              { label: 'router.vue' },
+              { label: 'app.vue' },
+              { label: 'router.js' },
               { label: 'main.js' },
               {
                 label: 'scss',
@@ -560,8 +625,8 @@ export default {
             ]
           },
           { label: 'views', branch: true },
-          { label: 'index.vue' },
-          { label: 'router.vue' },
+          { label: 'app.vue' },
+          { label: 'router.js' },
           { label: 'main.js' },
           {
             label: 'scss',
@@ -576,6 +641,7 @@ export default {
       },
       { label: '.editorconfig' },
       { label: '.gitignore' },
+      { label: '.npmrc' },
       { label: 'index.html' },
       { label: 'jsconfig.json' },
       { label: 'LICENSE' },
@@ -621,6 +687,49 @@ export default {
         ]
       },
       { label: 'Item 2' }
+    ],
+    tree6: [
+      {
+        label: 'src',
+        icon: 'mdi mdi-code-not-equal-variant',
+        iconColor: 'green',
+        children: [
+          {
+            label: 'assets',
+            icon: 'mdi mdi-star',
+            iconColor: 'yellow-dark1',
+            children: [
+              { label: 'wave.svg', icon: 'mdi mdi-svg', iconColor: 'yellow-dark1' }
+            ]
+          },
+          { label: 'views', branch: true, icon: 'mdi mdi-code-greater-than', iconColor: 'orange' },
+          { label: 'app.vue', icon: 'mdi mdi-vuejs', iconColor: 'green' },
+          { label: 'router.js', icon: 'mdi mdi-routes', iconColor: 'green' },
+          { label: 'main.js', icon: 'mdi mdi-language-javascript', iconColor: 'yellow-dark1' },
+          {
+            label: 'scss',
+            icon: 'mdi mdi-sass',
+            iconColor: 'pink',
+            children: [
+              { label: 'index.scss', icon: 'mdi mdi-sass', iconColor: 'pink' },
+              { label: '_variables.scss', icon: 'mdi mdi-sass', iconColor: 'pink' },
+              { label: '_base.scss', icon: 'mdi mdi-sass', iconColor: 'pink' }
+            ]
+          },
+          { label: 'store.js', icon: 'mdi mdi-language-javascript', iconColor: 'yellow-dark1' }
+        ]
+      },
+      { label: '.editorconfig', icon: 'mdi mdi-cog', iconColor: 'grey' },
+      { label: '.gitignore', icon: 'mdi mdi-git', iconColor: 'red' },
+      { label: '.npmrc', icon: 'mdi mdi-npm', iconColor: 'red' },
+      { label: 'index.html', icon: 'mdi mdi-language-html5', iconColor: 'red' },
+      { label: 'jsconfig.json', icon: 'mdi mdi-code-json', iconColor: 'yellow-dark1' },
+      { label: 'LICENSE', icon: 'mdi mdi-license', iconColor: 'red' },
+      { label: 'package.json', icon: 'mdi mdi-nodejs', iconColor: 'lime-dark1' },
+      { label: 'pnpm-lock.yaml', icon: 'mdi mdi-code-json', iconColor: 'yellow-dark1' },
+      { label: 'postcss.config.js', icon: 'mdi mdi-cog', iconColor: 'red' },
+      { label: 'README.md', icon: 'mdi mdi-information-outline', iconColor: 'blue' },
+      { label: 'vite.config.js', icon: 'mdi mdi-flash', iconColor: 'amber' }
     ],
     selection: null,
     logs: []

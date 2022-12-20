@@ -15,6 +15,7 @@ div
 import WTree from '@/wave-ui/components/w-tree.vue'
 
 const propsDescs = {
+  modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>This value gets updated with the tree selected item when using a <code>v-model</code> and when <code>selectable</code> is set to <code>true</code>.',
   data: 'The object or array to display in a tree view. Any item must be an object which contain at least a <code>label</code> attribute. Any children of an item must be placed in an array in the <code>children</code> attribute. E.g.<br><pre>[\n  {\n    label: \'Item 1\',\n    children: [\n      { label: \'Child 1\' },\n      { label: \'Child 2\' }\n    ]\n  },\n  { label: \'Item 2\' }\n]</pre>',
   depth: false, // Hide.
   branchClass: 'Adds the specified CSS class to all the branch-type items.<br>Any item that has children is a branch, and any item marked with the <code>branch</code> boolean attribute in its object.',
@@ -30,7 +31,10 @@ const propsDescs = {
   disabled: 'When set to <code>true</code>, disables the tree interactivity (expand, collapse selection, click, tab).',
   noTransition: 'When set to <code>true</code>, disables the expand/collapse transition.',
   selectable: 'Make any item of the tree selectable, via click or via the keyboard arrow keys and <kbd>tab</kbd> key.',
-  counts: 'Display the branch children counts on each branch item.'
+  counts: 'Display the branch children counts on each branch item.',
+  iconColor: 'Define a color for all the items icons.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  itemIconKey: 'Specifies the name of the attribute in each item object where to find the item\'s icon.',
+  itemIconColorKey: 'Specifies the name of the attribute in each item object where to find the item\'s icon color.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.'
 }
 
 const slots = {
