@@ -31,7 +31,8 @@ const propsDescs = {
   uidKey: 'In order to keep the same row selected after sorting or filtering, each row is assigned a unique identifier.<br>By default the expanded rows array will use an <code>id</code> key, if present in the item object, or will assign an internal unique ID otherwise.<br>If you want, you can override the default unique ID key (when internally needed) with this prop.',
   filter: 'An external filter function that you can provide to filter the rows of the table.<br>The function receives 2 parameters:<ul><li><strong>Param 1:</strong> the <strong>item</strong> object being traversed by the filter.</li><li><strong>Param 2:</strong> the <strong>index</strong> of the item being traversed by the filter.</li></ul>',
   mobileBreakpoint: 'When a number is given (in pixel), any device screen width under this number will display the table in mobile layout. Leave undefined to disable.',
-  resizableColumns: 'When this option is on, the columns will be separated by borders that you can drag to resize.'
+  resizableColumns: 'When this option is on, the columns will be separated by borders that you can drag to resize.',
+  pagination: false
 }
 
 const slots = {
