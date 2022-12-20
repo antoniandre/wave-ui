@@ -41,6 +41,14 @@ main
           ul
             li The input field inherits the min-height, font and text-align CSS rules.
             li Allow options to have a #[code 0] value.
+        li
+          strong.code w-transition-expand
+          ul
+            li Handle cases where the DOM element starts expanded.
+        li
+          strong.code w-tree
+          ul
+            li Improve the component and add new options.
 
     li.minor
       strong.version v2.47.0

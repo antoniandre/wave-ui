@@ -403,14 +403,14 @@ div
 
   title-link(h3) Real-case scenario: Renaming a leaf item on click
   example
-    w-tree(:data="tree3" @click="renameLeafItem" depth-reactivity)
+    w-tree(:data="tree3" @click="renameLeafItem" deep-reactivity)
     template(#pug).
-      w-tree(:data="tree3" @click="renameLeafItem" depth-reactivity)
+      w-tree(:data="tree3" @click="renameLeafItem" deep-reactivity)
     template(#html).
       &lt;w-tree
         :data="tree"
         @click="renameLeafItem"
-        depth-reactivity&gt;
+        deep-reactivity&gt;
       &lt;/w-tree&gt;
     template(#js).
       data: () => ({
@@ -431,27 +431,58 @@ div
           if (!item.children) item.label = 'Hello!'
         },
       }
+  alert(tip)
+    strong.black Note on reactivity
+    p.black.mt2
+      | By default the tree items key-value pairs will not be watched as this is a more expensive
+      | operation. This means that if you want to have reactivity when you modify a key or value,
+      | like the label, you will need to add the #[code deep-reactivity] option.
+      br
+      a(href="https://vuejs.org/guide/essentials/watchers.html#deep-watchers" target="_blank")
+        | Read on deep watchers on the Vue.js official documentation
+        w-icon.ml1 mdi mdi-open-in-new
 
   title-link(h2) Custom item label
   p If you need to customize the layout of the item label, you can use the #[code #item-label] slot.
   example
-    w-tree.lh5(:data="tree4" @click="renameLeafItem")
+    w-tree.lh5(:data="tree4")
       template(#item-label="{ item, open }")
         span {{ item.label }}
         w-icon.ml1(v-if="item.status === 'error'" bg-color="error" xs) mdi mdi-close
         w-icon.ml1(v-else-if="item.status === 'success'" bg-color="success" xs) mdi mdi-check
         w-icon.ml1(v-else-if="item.status === 'syncing'" bg-color="warning" xs) mdi mdi-clock-outline
     template(#pug).
-      w-tree.lh5(:data="tree4" @click="renameLeafItem")
+      w-tree.lh5(:data="tree")
         template(#item-label="{ item, open }")
           span {{ '\{\{ item.label \}\}' }}
           w-icon.ml1(v-if="item.status === 'error'" bg-color="error" xs) mdi mdi-close
           w-icon.ml1(v-else-if="item.status === 'success'" bg-color="success" xs) mdi mdi-check
           w-icon.ml1(v-else-if="item.status === 'syncing'" bg-color="warning" xs) mdi mdi-clock-outline
     template(#html).
-      &lt;w-tree
-        :data="tree"
-        @click="renameLeafItem"&gt;
+      &lt;w-tree :data="tree"&gt;
+        &lt;template #item-label="{ item, open }"&gt;
+            &lt;span&gt;{{ '\{\{ item.label \}\}' }}&lt;/span&gt;
+            &lt;w-icon
+              v-if="item.status === 'error'"
+              bg-color="error"
+              xs
+              class="ml1"&gt;
+              mdi mdi-close
+            &lt;/w-icon&gt;
+            &lt;w-icon
+              v-else-if="item.status === 'success'"
+              bg-color="success"
+              xs
+              class="ml1"&gt;
+              mdi mdi-check
+            &lt;/w-icon&gt;
+            &lt;w-icon
+              v-else-if="item.status === 'syncing'"
+              bg-color="warning"
+              xs
+              class="ml1"&gt;
+              mdi mdi-clock-outline
+            &lt;/w-icon&gt;
       &lt;/w-tree&gt;
     template(#js).
       data: () => ({
@@ -459,11 +490,11 @@ div
           {
             label: 'Item 1',
             children: [
-              { label: 'Sub item 1' },
-              { label: 'Sub item 2' }
+              { label: 'Sub item 1', status: 'success' },
+              { label: 'Sub item 2', status: 'error' }
             ]
           },
-          { label: 'Item 2' }
+          { label: 'Item 2', status: 'syncing' }
         ]
       }),
 
@@ -472,6 +503,34 @@ div
           if (!item.children) item.label = 'Hello!'
         },
       }
+
+  title-link(h2) Expand all, by default
+  example
+    w-tree(:data="tree5" expand-all)
+    template(#pug).
+      w-tree(:data="tree" expand-all)
+    template(#html).
+      &lt;w-tree :data="tree" expand-all&gt;&lt;/w-tree&gt;
+    template(#js).
+      data: () => ({
+        tree: [
+            {
+              label: 'Item 1',
+              children: [
+                { label: 'Sub item 1' },
+                {
+                  label: 'Sub Item 1',
+                  children: [
+                    { label: 'Sub Sub item 1' },
+                    { label: 'Sub Sub item 2' }
+                  ]
+                },
+                { label: 'Sub item 2' }
+              ]
+            },
+            { label: 'Item 2' }
+        ]
+      })
 </template>
 
 <script>
@@ -497,7 +556,7 @@ export default {
           {
             label: 'assets',
             children: [
-              { label: 'wave.svg' },
+              { label: 'wave.svg' }
             ]
           },
           { label: 'views', branch: true },
@@ -512,7 +571,7 @@ export default {
               { label: '_base.scss' }
             ]
           },
-          { label: 'store.js' },
+          { label: 'store.js' }
         ]
       },
       { label: '.editorconfig' },
@@ -545,6 +604,23 @@ export default {
         ]
       },
       { label: 'Item 2', status: 'syncing' }
+    ],
+    tree5: [
+      {
+        label: 'Item 1',
+        children: [
+          { label: 'Sub item 1' },
+          {
+            label: 'Sub Item 1',
+            children: [
+              { label: 'Sub Sub item 1' },
+              { label: 'Sub Sub item 2' }
+            ]
+          },
+          { label: 'Sub item 2' }
+        ]
+      },
+      { label: 'Item 2' }
     ],
     selection: null,
     logs: []
