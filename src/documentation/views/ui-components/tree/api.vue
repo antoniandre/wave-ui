@@ -24,7 +24,8 @@ const propsDescs = {
   leafIcon: 'Provide an icon for all the leaf items.',
   expandIcon: 'Provide a custom icon for the expand button. Set to <code>false</code> to remove the expand button (keeping the expand ability on the label itself).',
   expandOpenIcon: 'Provide a custom icon for all the expand button when it is open - if it should be different than the <code>expandIcon</code>.',
-  expandAll: '',
+  expandAll: 'Expand all the expandable branches of the tree by default, including sub-items.',
+  deepReactivity: 'By default the tree items key-value pairs will not be watched as this is a more expensive operation. This means that if you want to have reactivity when you modify a key or value, like the label, you will need to add the <code>deep-reactivity</code> option.<br><a href="https://vuejs.org/guide/essentials/watchers.html#deep-watchers" target="_blank">Read on deep watchers on the Vue.js official documentation<i class="ml1 w-icon mdi mdi-open-in-new"></i></a>',
   unexpandableEmpty: 'When set to <code>true</code>, this will remove the expand button and ability off any branch item label that is empty (has no children).',
   disabled: 'When set to <code>true</code>, disables the tree interactivity (expand, collapse selection, click, tab).',
   noTransition: 'When set to <code>true</code>, disables the expand/collapse transition.',
@@ -32,7 +33,16 @@ const propsDescs = {
   counts: 'Display the branch children counts on each branch item.'
 }
 
-const slots = {}
+const slots = {
+  'item-label': {
+    description: 'Provide a custom template for all the item labels.',
+    params: {
+      item: 'The current tree item object.',
+      depth: 'The item depth in the tree. Starts at 0 for the root.',
+      open: 'A boolean representing the open state of the tree item.'
+    }
+  }
+}
 
 const events = {}
 
