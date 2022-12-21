@@ -57,9 +57,9 @@ main
     w-card.blue-light5--bg
       .title2.mt0 Current breakpoint: #[code {{ $waveui.breakpoint.name }}]
       em.grey.mt1 Resizing your browser will update the current breakpoint.
-    //- template(#pug).
+    template(#pug).
       w-card.blue-light5--bg
-        .title2.mt0
+        .title2
           | Current breakpoint:
           code {{ '\{\{ $waveui.breakpoint.name \}\}' }}
         em.grey.mt1 Resizing your browser will update the current breakpoint.
@@ -131,7 +131,7 @@ main
     .text-left.smd-text-center Some text on the left.
     .text-center.smd-hide Some text in the center.
     .text-right.smd-text-center Some text on the right.
-    //- template(#pug).
+    template(#pug).
       .text-left.smd-text-center Some text on the left.
       .text-center.smd-hide Some text in the center.
       .text-right.smd-text-center Some text on the right.
@@ -144,7 +144,7 @@ main
       span Some text on the left.
       span Some text in the center.
       span Some text on the right.
-    //- template(#pug).
+    template(#pug).
       .w-flex.justify-space-between.smd-column
         span Some text on the left.
         span Some text in the center.
@@ -158,7 +158,7 @@ main
 
   alert(tip)
     | If you'd rather not have these CSS layout classes, you can disable them via the
-    | #[code breakpointLayoutClasses] config.
+    | #[code breakpointLayoutClasses] option in the global configuration.
     ssh-pre(language="js").mb0.
       const waveui = new WaveUI({
         css: {

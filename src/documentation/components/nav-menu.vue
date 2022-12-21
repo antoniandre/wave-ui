@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { UIComponents } from '@/router'
+
 export default {
   props: {
     drawerOpen: { type: Boolean, default: false }
@@ -48,8 +50,10 @@ export default {
         route: '/layout',
         children: [
           { label: 'Spaces', route: '/layout--spaces' },
-          { label: 'Grid system', route: '/layout--grid-system' },
-          { label: 'Flex', route: '/layout--flex' }
+          { label: 'Grid system (flexbox)', route: '/layout--grid-system' },
+          { label: 'Grid system (grid)', route: '/layout--simplified-grid-system' },
+          { label: 'Flex', route: '/layout--flex' },
+          { label: 'Other CSS classes', route: 'layout--other-css-classes' }
         ]
       },
       { label: 'Typography', route: '/typography' },
@@ -57,49 +61,13 @@ export default {
       { label: 'Shadows, borders &amp; radii', route: '/shadows-borders-radii' },
       { label: 'Transitions', route: '/transitions' }
     ],
-    components: [
-      { label: 'Accordion', route: '/w-accordion' },
-      { label: 'Alert', route: '/w-alert' },
-      { label: 'App', route: '/w-app' },
-      { label: 'Badge', route: '/w-badge' },
-      { label: 'Breadcrumbs', route: '/w-breadcrumbs' },
-      { label: 'Button', route: '/w-button' },
-      { label: 'Card', route: '/w-card' },
-      { label: 'Confirm', route: '/w-confirm', inProgress: true },
-      // { label: 'Date picker', route: '/w-date-picker', disabled: true },
-      { label: 'Dialog', route: '/w-dialog' },
-      { label: 'Divider', route: '/w-divider' },
-      { label: 'Drawer', route: '/w-drawer' },
-      { label: 'Icon', route: '/w-icon' },
-      { label: 'Image', route: '/w-image' },
-      { label: 'List', route: '/w-list' },
-      { label: 'Menu', route: '/w-menu' },
-      { label: 'Notification', route: '/w-notification' },
-      { label: 'Overlay', route: '/w-overlay' },
-      // { label: 'Parallax', route: '/w-parallax', disabled: true },
-      { label: 'Progress', route: '/w-progress' },
-      { label: 'Rating', route: '/w-rating' },
-      { label: 'Spinner', route: '/w-spinner' },
-      { label: 'Tabs', route: '/w-tabs' },
-      { label: 'Table', route: '/w-table', inProgress: true },
-      { label: 'Tag', route: '/w-tag' },
-      { label: 'Timeline', route: '/w-timeline' },
-      { label: 'Toolbar', route: '/w-toolbar' },
-      { label: 'Tooltip', route: '/w-tooltip' },
+    components:  [
+      ...UIComponents.filter(item => !item.formElement).map(item => ({ ...item, route: `/w-${item.id}` })),
       {
         label: 'Form elements',
         route: '/form',
         children: [
-          // { label: 'Autocomplete', route: '/w-autocomplete', inProgress: true },
-          { label: 'Checkbox', route: '/w-checkbox' },
-          { label: 'Input', route: '/w-input' },
-          { label: 'Form', route: '/w-form' },
-          { label: 'Radio', route: '/w-radio' },
-          { label: 'Select', route: '/w-select' },
-          { label: 'Slider', route: '/w-slider' },
-          { label: 'Switch', route: '/w-switch' },
-          { label: 'Steps', route: '/w-steps', disabled: true },
-          { label: 'Textarea', route: '/w-textarea' }
+          ...UIComponents.filter(item => item.formElement).map(item => ({ ...item, route: `/w-${item.id}` })),
         ]
       }
     ],
@@ -108,7 +76,6 @@ export default {
       { label: 'Slideshow', route: '/slideshow' },
       { label: 'Splitter', route: '/splitter' }
     ]
-
   }),
 
   methods: {

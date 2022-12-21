@@ -1,9 +1,9 @@
 <template lang="pug">
 div
-  title-link(h2) Default
+  title-link(h2) Basic
   example
     w-table(:headers="table1.headers" :items="table1.items")
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items")
     template(#html).
       &lt;w-table
@@ -35,17 +35,17 @@ div
     br
     w-table(:headers="table1.headers" :items="[]")
       template(#no-data) 👌 There is no data! 👌
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="[]")
       br
       w-table(:headers="table.headers" :items="[]")
-        template(#no-data="") 👌 There is no data! 👌
+        template(#no-data) 👌 There is no data! 👌
     template(#html).
       &lt;w-table :headers="table.headers" :items="[]"&gt;&lt;/w-table&gt;
 
       &lt;br /&gt;
       &lt;w-table :headers="table.headers" :items="[]"&gt;
-        &lt;template #no-data=""&gt;
+        &lt;template #no-data&gt;
           👌 There is no data! 👌
         &lt;/template&gt;
       &lt;/w-table&gt;
@@ -68,7 +68,7 @@ div
 
   example
     w-table(:headers="table2.headers" :items="table2.items")
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items")
     template(#html).
       &lt;w-table
@@ -93,13 +93,13 @@ div
         }
       })
 
-  title-link(h2) No headers
+  title-link(h2 slug="example--no-headers") No headers
   p.
     Even with the #[code no-headers] option, the #[code headers] are still required for various
     reasons, like getting the number of columns and sorting/filtering keys.
   example
     w-table(:headers="table1.headers" :items="table1.items" no-headers)
-    //- template(#pug).
+    template(#pug).
       w-table(:items="table.items" :headers="table.headers" no-headers)
     template(#html).
       &lt;w-table
@@ -125,13 +125,19 @@ div
         }
       })
 
-  title-link(h2) Fixed headers
+  title-link(h2 slug="example--fixed-headers") Fixed headers
   example
     w-table(
       :headers="table3.headers"
       :items="table3.items"
       fixed-headers
       style="height: 250px")
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        style="height: 250px")
     template(#html).
       &lt;w-table
         :headers="table.headers"
@@ -167,17 +173,68 @@ div
         }
       })
 
-  title-link(h2) Built-in column resizing
-  p You can resize the columns by dragging their edges left or right.
+  title-link(h2 slug="example--footer") Footer
+  title-link(h3 slug="example--footer-slot") Footer slot
+  p.
+    A table footer can be added via the #[code footer] slot. If present, the footer will span on
+    all the columns by default.
+
+  .w-flex.justify-end
+    w-button(
+      @click="table3.fixedFooter = !table3.fixedFooter"
+      :outline="!table3.fixedFooter"
+      round)
+      span.code(:class="table3.fixedFooter ? 'white' : 'primary'") fixed-footer
   example
-    w-table(:headers="table1.headers" :items="table1.items" resizable-columns)
-    //- template(#pug).
-      w-table(:headers="table.headers" :items="table.items" resizable-columns)
-    template(#html).
-      &lt;w-table
+    w-table(
+      ref="table"
+      :headers="table3.headers"
+      :items="table3.items"
+      :fixed-footer="table3.fixedFooter"
+      style="height: 250px")
+      template(#footer)
+        w-flex(justify-space-between)
+          w-button(round sm @click="addRow")
+            w-icon.mr1 wi-plus
+            | add person
+          div
+            strong.mr2 Total:
+            | {{ table3.items.length }} persons
+    template(#pug).
+      w-table(
+        ref="table"
         :headers="table.headers"
         :items="table.items"
-        resizable-columns&gt;
+        :fixed-footer="table.fixedFooter"
+        style="height: 250px")
+        template(#footer)
+          w-flex(justify-space-between)
+            w-button(round sm @click="addRow")
+              w-icon.mr1 wi-plus
+              | add person
+            div
+              strong.mr2 Total:
+              | {{ '\{\{ table.items.length \}\}' }} persons
+    template(#html).
+      &lt;w-table
+        ref="table"
+        :headers="table.headers"
+        :items="table.items"
+        :fixed-footer="table.fixedFooter"
+        style="height: 250px"&gt;
+        &lt;template #footer&gt;
+          &lt;w-flex justify-space-between&gt;
+            &lt;w-button round sm @click="addRow"&gt;
+              &lt;w-icon class="mr1"&gt;wi-plus&lt;/w-icon&gt;
+              add person
+            &lt;/w-button&gt;
+
+            &lt;div&gt;
+              &lt;strong class="mr2"&gt;Total:&lt;/strong&gt;
+              {{ '\{\{ table.items.length \}\}' }} persons
+            &lt;/div&gt;
+          &lt;/w-flex&gt;
+        &lt;/template&gt;
       &lt;/w-table&gt;
     template(#js).
       data: () => ({
@@ -192,10 +249,209 @@ div
             { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
             { id: 3, firstName: 'Rory', lastName: 'Bristol' },
             { id: 4, firstName: 'Daley', lastName: 'Elliott' },
-            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+            { id: 6, firstName: 'Baldwin', lastName: 'Morison' },
+            { id: 7, firstName: 'Beckah', lastName: 'Mann' },
+            { id: 8, firstName: 'Davie', lastName: 'Forester' },
+            { id: 9, firstName: 'Andi', lastName: 'Montgomery' },
+            { id: 10, firstName: 'Magnolia', lastName: 'Kirk' },
+            { id: 11, firstName: 'Hamilton', lastName: 'Mallory' },
+            { id: 12, firstName: 'Sheree', lastName: 'Castle' },
+            { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
+            { id: 14, firstName: 'Maude', lastName: 'Hayley' },
+            { id: 15, firstName: 'Josie', lastName: 'Richard' }
+          ],
+          fixedFooter: false
+        },
+      }),
+
+      methods: {
+        addRow () {
+          this.table.items.push({
+            id: this.table.items.length + 1,
+            firstName: 'John',
+            lastName: 'Doe'
+          })
+          this.$nextTick(() => {
+            this.$refs.table.$el
+              .querySelector('tbody tr:last-child')
+              .scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+          })
+        }
+      }
+
+  title-link(h3 slug="example--footer-slot") Footer-row slot
+  p The #[code footer-row] slot will give you more flexibility as it lets you define the whole table row.
+  p It can be useful if you want to keep the columns alignments in the footer.
+  example
+    w-table(
+      ref="table"
+      :headers="table3.headers"
+      no-headers
+      :items="table3.items"
+      :fixed-footer="table3.fixedFooter"
+      style="height: 250px")
+      template(#footer-row)
+        tr
+          th.py1(
+            v-for="(header, i) in table3.headers"
+            :key="i"
+            :class="`${i ? 'px1' : 'px2'} text-${header.align || 'left'}`")
+            | {{ header.label }}
+    template(#pug).
+      w-table(
+        ref="table"
+        :headers="table.headers"
+        no-headers
+        :items="table.items"
+        fixed-footer
+        style="height: 250px")
+        template(#footer-row)
+          tr
+            th.py1(
+              v-for="&amp;#40;header, i&amp;#41; in table3.headers"
+              :key="i"
+              :class="`${i ? 'px1' : 'px2'} text-${header.align || 'left'}`")
+              | {{ '\{\{ header.label \}\}' }}
+    template(#html).
+      &lt;w-table
+        ref="table"
+        :headers="table.headers"
+        no-headers
+        :items="table.items"
+        fixed-footer
+        style="height: 250px"&gt;
+        &lt;template #footer-row&gt;
+          &lt;tr&gt;
+            &lt;th
+              v-for="(header, i) in table.headers"
+              :key="i"
+              :class="`py1 ${i ? 'px1' : 'px2'} text-${header.align || 'left'}`"&gt;
+              {{ '\{\{ header.label \}\}' }}
+            &lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/template&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id' },
+            { label: 'First name', key: 'firstName' },
+            { label: 'Last name', key: 'lastName' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+            { id: 6, firstName: 'Baldwin', lastName: 'Morison' },
+            { id: 7, firstName: 'Beckah', lastName: 'Mann' },
+            { id: 8, firstName: 'Davie', lastName: 'Forester' },
+            { id: 9, firstName: 'Andi', lastName: 'Montgomery' },
+            { id: 10, firstName: 'Magnolia', lastName: 'Kirk' },
+            { id: 11, firstName: 'Hamilton', lastName: 'Mallory' },
+            { id: 12, firstName: 'Sheree', lastName: 'Castle' },
+            { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
+            { id: 14, firstName: 'Maude', lastName: 'Hayley' },
+            { id: 15, firstName: 'Josie', lastName: 'Richard' }
+          ]
+        },
+      })
+
+  title-link(h2) Built-in column resizing
+  p.
+    You can resize the columns by dragging their edges left or right.#[br]
+    If you want the whole cell content to be on a single line and truncated with the ellipsis
+    (#[code ...]), you can apply this CSS.
+  ssh-pre(language="css").
+    .w-table__cell {
+      white-space: nowrap;
+    }
+
+  example
+    w-table(:headers="table7.headers" :items="table7.items" resizable-columns)
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        resizable-columns)
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        resizable-columns&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id', width: '50' },
+            { label: 'Content', key: 'content', width: '70%' },
+            { label: 'First name', key: 'firstName' }
+          ],
+          items: [
+            { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
+            { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
+            { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' },
           ]
         }
       })
+
+  title-link(h3) Saving the table layout in localStorage
+  p.
+    In some apps, it makes sense to save the prefered table layout of the user, and reapply it
+    every time this table is loaded. Here is a demo of how to do so.#[br]
+    To test it, first resize the columns, then refresh the page to see the same layout.
+  example
+    w-table(
+      :headers="table8.headers"
+      :items="table8.items"
+      resizable-columns
+      @column-resize="onColumnResize")
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        resizable-columns
+        @column-resize="onColumnResize")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        resizable-columns
+        @column-resize="onColumnResize"&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          headers: [
+            { label: 'ID', key: 'id', width: '50' },
+            { label: 'Content', key: 'content', width: '70%' },
+            { label: 'First name', key: 'firstName' }
+          ],
+          items: [
+            { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
+            { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
+            { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' },
+          ]
+        }
+      }),
+
+      methods: {
+        onColumnResize ({ index, widths }) {
+          widths.forEach((width, i) => (this.table.headers[i].width = width))
+
+          // Save the table layout in localStorage.
+          localStorage.tableWidths = widths
+        }
+      },
+
+      mounted () {
+        // Reapply the saved table layout.
+        localStorage.tableWidths?.split(',').forEach((width, i) => (this.table.headers[i].width = width))
+      }
 
   title-link(h2) Toggling column visibility
   p.
@@ -212,16 +468,16 @@ div
       | {{ header.label }}
 
     w-table.mt2(:headers="table6.headers.filter(header => !header.hidden)" :items="table6.items")
-    //- template(#pug).
+    template(#pug).
       w-tag.ma1(
-        v-for="(header, index) in table.headers"
+        v-for="&amp;#40;header, index&amp;#41; in table.headers"
         :key="index"
         :bg-color="header.hidden ? 'grey-light4' : 'primary'"
         @click.stop="header.hidden = !header.hidden")
         w-icon.mr2 mdi mdi-eye{{ "\{\{ header.hidden ? '-off' : ''\}\}" }}
         | {{ "\{\{ header.label \}\}" }}
 
-      w-table.mt2(:headers="table.headers.filter(header => !header.hidden)" :items="table.items")
+      w-table.mt2(:headers="table.headers.filter&amp;#40;header => !header.hidden&amp;#41;" :items="table.items")
     template(#html).
       Toggle columns:
       &lt;w-tag
@@ -257,20 +513,100 @@ div
         }
       })
 
-  title-link(h2) Initial Sorting
+  title-link(h2) Sticky columns
   p.
-    To make the sorting API very easy to use and remember (and avoid complex array or object structures),
-    the #[strong.code w-table]'s sorting is defined with a header key string preceded by a #[code +] for ASC,
-    or a #[code -] for DESC. For instance, in this example: #[code '+firstName'].
+    To make a column sticky, you only need to add #[code sticky: true] to the header of that
+    column.#[br]
+    The sticky mechanism is done via CSS (position: sticky). So if you set multiple sticky
+    columns, one will overlap the previous one as you scroll.
+  p.grey Scroll the table horizontally to observe the behavior.
   example
-    w-table(:headers="table1.headers" :items="table1.items" :sort.sync="table1.sort")
-    //- template(#pug).
-      w-table(:headers="table.headers" :items="table.items" :sort.sync="table.sort")
+    .w-flex.align-center.mb2
+      | Sticky columns:
+      w-radios.ml1.mr4(
+        v-model="table9.stickyColumn"
+        :items="table9.stickyColumnOptions"
+        @change="toggleStickyColumn"
+        inline)
+      w-button(
+        @click="table9.fixedHeaders = !table9.fixedHeaders"
+        :outline="!table9.fixedHeaders"
+        round)
+        span.code(:class="table9.fixedHeaders ? 'white' : 'primary'") fixed-headers
+
+    w-table.white--bg(
+      :headers="table9.headers"
+      :items="table9.items"
+      fixed-layout
+      :fixed-headers="table9.fixedHeaders"
+      style="max-width: 500px;height: 200px")
+    template(#pug).
+      w-table(
+      :headers="table.headers"
+      :items="table.items"
+      fixed-layout
+      :fixed-headers="table.fixedHeaders"
+      style="max-width: 500px;height: 200px")
     template(#html).
       &lt;w-table
         :headers="table.headers"
         :items="table.items"
-        :sort.sync="table.sort"&gt;
+        fixed-layout
+        :fixed-headers="table.fixedHeaders"
+        style="max-width: 500px;height: 200px"&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      data: () => ({
+        table: {
+          fixedHeaders: false,
+          headers: [
+            { label: 'ID', key: 'id', hidden: false, width: '60px', sticky: true },
+            { label: 'First name', key: 'firstName', hidden: false, width: '120px' },
+            { label: 'Last name', key: 'lastName', hidden: false, width: '120px' },
+            { label: 'Birthday', key: 'birthday', email: false, width: '150px' },
+            { label: 'Email', key: 'email', hidden: false, width: '200px' },
+            { label: 'Phone', key: 'phone', hidden: false, width: '200px' },
+            { label: 'Country', key: 'country', hidden: false, width: '200px' }
+          ],
+          items: [
+            { id: 1, firstName: 'Floretta', lastName: 'Sampson', birthday: 'Feb. 12, 1976', email: 'f.sampson@gmail.com', phone: '+21 234 567 8921', country: 'United Kingdom' },
+            { id: 2, firstName: 'Nellie', lastName: 'Lynn', birthday: 'Dec. 15, 1995', email: 'n.lynn@gmail.com', phone: '+22 234 567 8922', country: 'Luxembourg' },
+            { id: 3, firstName: 'Rory', lastName: 'Bristol', birthday: 'Apr. 25, 1989', email: 'r.bristol@gmail.com', phone: '+23 234 567 8923', country: 'Montenegro' },
+            { id: 4, firstName: 'Daley', lastName: 'Elliott', birthday: 'Mar. 24, 2002', email: 'd.elliott@gmail.com', phone: '+24 234 567 8924', country: 'Germany' },
+            { id: 5, firstName: 'Virgil', lastName: 'Carman', birthday: 'Aug. 2, 1990', email: 'v.carman@gmail.com', phone: '+25 234 567 8925', country: 'Ukraine' },
+            { id: 6, firstName: 'Baldwin', lastName: 'Morison', birthday: 'Feb. 12, 2008', email: 'b.morison@gmail.com', phone: '+26 234 567 8926', country: 'Lithuania' },
+            { id: 7, firstName: 'Beckah', lastName: 'Mann', birthday: 'Nov. 6, 1991', email: 'b.mann@gmail.com', phone: '+27 234 567 8927', country: 'Finland' },
+            { id: 8, firstName: 'Davie', lastName: 'Forester', birthday: 'Dec. 6, 1982', email: 'd.forester@gmail.com', phone: '+28 234 567 8928', country: 'Portugal' },
+            { id: 9, firstName: 'Andi', lastName: 'Montgomery', birthday: 'Jan. 20, 1987', email: 'a.montgomery@gmail.com', phone: '+29 234 567 8929', country: 'Czechia' },
+            { id: 10, firstName: 'Magnolia', lastName: 'Kirk', birthday: 'Dec. 31, 1992', email: 'm.kirk@gmail.com', phone: '+30 234 567 8930', country: 'Norway' },
+            { id: 11, firstName: 'Hamilton', lastName: 'Mallory', birthday: 'Dec. 7, 1979', email: 'h.mallory@gmail.com', phone: '+31 234 567 8931', country: 'Greece' },
+            { id: 12, firstName: 'Sheree', lastName: 'Castle', birthday: 'Feb. 16, 1980', email: 's.castle@gmail.com', phone: '+32 234 567 8932', country: 'France' },
+            { id: 13, firstName: 'Rebekah', lastName: 'Eason', birthday: 'Jun. 29, 2000', email: 'r.eason@gmail.com', phone: '+33 234 567 8933', country: 'Poland' },
+            { id: 14, firstName: 'Maude', lastName: 'Hayley', birthday: 'Dec. 31, 2009', email: 'm.hayley@gmail.com', phone: '+34 234 567 8934', country: 'Hungary' },
+            { id: 15, firstName: 'Josie', lastName: 'Richard', birthday: 'Aug. 16, 2004', email: 'j.richard@gmail.com', phone: '+35 234 567 8935', country: 'Italy' }
+          ]
+        }
+      })
+
+  title-link(h2) Sorting
+  p.
+    To make the sorting API very easy to use and remember (and avoid complex array or object structures),
+    the #[strong.code w-table]'s sorting is defined with a header key string preceded by a #[code +] for ASC,
+    or a #[code -] for DESC. For instance, in this example: #[code '+firstName'].
+
+  title-link(h3) Initial Sorting
+  example
+    w-table(:headers="table1.headers" :items="table1.items" v-model:sort="table1.sort")
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        v-model:sort="table.sort")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        v-model:sort="table.sort"&gt;
       &lt;/w-table&gt;
     template(#js).
       data: () => ({
@@ -291,7 +627,132 @@ div
         }
       })
 
-  title-link(h2) Filter
+  title-link(h3) Asynchronous Sorting
+  p.
+    When dealing with a lot of table entries, you will most likely need the sorting to be done
+    in the backend.#[br]
+    For this you can use the asynchronous sorting and update the table rows from outside Wave UI.
+  example(:blank-codepen="['js']")
+    w-table.my6(
+      :headers="table10.headers"
+      :items="table10.items"
+      :sort-function="sortFunction"
+      :loading="table10.loading"
+      style="height: 140px")
+      template(#pug).
+        w-table.my6(
+        :headers="table.headers"
+        :items="table.items"
+        :sort-function="sortFunction"
+        :loading="table.loading"
+        style="height: 140px")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        :sort-function="sortFunction"
+        :loading="table.loading"
+        style="height: 140px"&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      // This object is simulating content coming from the server.
+      const tableItemsInAPI = {
+        null: [
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+        ],
+        '+id': [
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+        ],
+        '-id': [
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' }
+        ],
+        '+firstName': [
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+        ],
+        '-firstName': [
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' }
+        ],
+        '+lastName': [
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' }
+        ],
+        '-lastName': [
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol' }
+        ]
+      }
+
+      const app = Vue.createApp({
+        data: () => ({
+          table: {
+            headers: [
+              { label: 'ID', key: 'id' },
+              { label: 'First name', key: 'firstName' },
+              { label: 'Last name', key: 'lastName' }
+            ],
+            items: [
+              { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+              { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+              { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+              { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+              { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+            ],
+            loading: false
+          }
+        }),
+
+        methods: {
+          // For consistency, the received sortKeys parameter is always an array
+          // (for multi-column sorting), whether the sorting is done on one or more columns.
+          // Notice the async &amp; await keywords.
+          async sortFunction (sortKeys) {
+            // Before the fetch set the loading flag, and display the progress bar in
+            // the header only, so the current rows stay visible while loading.
+            this.table.loading = 'header'
+
+            // Simulating an AJAX call with 1 second latency.
+            // Replace this in your app with a `fetch` or Axios call.
+            const apiResponse = new Promise(resolve => setTimeout(() => resolve(tableItemsInAPI[sortKeys[0] || null]), 1000))
+
+            // Fill up the array with rows from the API.
+            this.table.items = await apiResponse
+
+            this.table.loading = false
+          }
+        }
+      })
+
+      new WaveUI(app, {})
+
+      app.mount('#app')
+
+  title-link(h2) Filtering
   p.
     Filtering the table rows is very straightforward: you only need to provide your filtering function to the
     #[strong.code w-table] component and it will be applied to the table.#[br]
@@ -317,7 +778,7 @@ div
       :headers="table3.headers"
       :items="table3.items"
       :filter="table3.filters[table3.activeFilter]")
-    //- template(#pug).
+    template(#pug).
       .w-flex.wrap.mb3
         w-button.mr2.mb1(
           @click="table.activeFilter = 0"
@@ -417,7 +878,7 @@ div
       :headers="table4.headers"
       :items="table4.items"
       :filter="table4.keywordFilter(table4.keyword)")
-    //- template(#pug).
+    template(#pug).
       w-input.mb3(
         v-model="table.keyword"
         placeholder="Search anything..."
@@ -425,7 +886,7 @@ div
       w-table(
         :headers="table.headers"
         :items="table.items"
-        :filter="table.keywordFilter(table.keyword)")
+        :filter="table.keywordFilter&amp;#40;table.keyword&amp;#41;")
     template(#html).
       &lt;w-input
         v-model="table.keyword"
@@ -490,7 +951,7 @@ div
   p.
     When the table content is not ready straight away, you can use the #[code loading] prop to display
     a progress bar while loading.
-  w-button.mb2(:disabled="table1.loading" @click="reload")
+  w-button.mb2(:disabled="!!table1.loading" @click="reload")
     w-icon.mr1 mdi mdi-sync
     | reload
 
@@ -500,16 +961,16 @@ div
       :headers="table1.headers"
       :items="table1.items"
       :loading="table1.loading")
-    //- template(#pug).
+    template(#pug).
       w-table(
         :headers="table.headers"
         :items="table.items"
-        :loading="table.loading")
+        :loading="loading")
     template(#html).
       &lt;w-table
         :headers="table.headers"
         :items="table.items"
-        :loading="table.loading"&gt;
+        :loading="loading"&gt;
       &lt;/w-table&gt;
     template(#js).
       data: () => ({
@@ -525,10 +986,14 @@ div
             { id: 3, firstName: 'Rory', lastName: 'Bristol' },
             { id: 4, firstName: 'Daley', lastName: 'Elliott' },
             { id: 5, firstName: 'Virgil', lastName: 'Carman' }
-          ],
-          loading: true // Set this to false when the data is loaded.
-        }
-      })
+          ]
+        },
+        loading: true // Set this to false when the data is loaded.
+      }),
+
+      mounted () {
+        setTimeout(() => {this.loading = false}, 3000)
+      }
 
   title-link(h3 slug="loading-with-fixed-header") Table with fixed header &amp; set height of 200px
   example
@@ -538,19 +1003,19 @@ div
       fixed-headers
       :loading="table1.loading"
       style="height: 200px")
-    //- template(#pug).
+    template(#pug).
       w-table(
         :headers="table.headers"
         :items="table.items"
         fixed-headers
-        :loading="table.loading"
+        :loading="loading"
         style="height: 200px")
     template(#html).
       &lt;w-table
         :headers="table.headers"
         :items="table.items"
         fixed-headers
-        :loading="table.loading"
+        :loading="loading"
         style="height: 200px"&gt;
       &lt;/w-table&gt;
     template(#js).
@@ -577,12 +1042,18 @@ div
             { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
             { id: 14, firstName: 'Maude', lastName: 'Hayley' },
             { id: 15, firstName: 'Josie', lastName: 'Richard' }
-          ],
-          loading: true // Set this to false when the data is loaded.
-        }
-      })
+          ]
+        },
+        loading: true // Set this to false when the data is loaded.
+      }),
 
-  title-link(h2) Pagination
+      mounted () {
+        setTimeout(() => {this.loading = false}, 3000)
+      }
+
+  title-link(h2 slug="pagination")
+    | Pagination
+    w-tag.ml2.text-bold(round color="warning" outline sm) COMING SOON
   example
     | Coming soon.
     //- w-table(
@@ -614,18 +1085,18 @@ div
     By default, the selection will use the #[code primary] color and apply an opacity of #[code 0.2].
     If this is not what you want, you can override it via CSS (#[code .w-table__row--selected td:before]).
 
-  title-link(h3 slug="selectable-rows") The #[span.code selectable-rows] prop
+  title-link(h3 slug="example--selectable-rows") The #[span.code selectable-rows] prop
   p.
     You can enable the rows selection by adding the #[code selectable-rows] prop, or disable it by
     removing it (by default) - and this is the same as passing a boolean - but you can also set it to #[code 1]
     to allow a single selection only.
 
-  title-link(h3 slug="force-selection") The #[span.code force-selection] prop
+  title-link(h3 slug="example--force-selection") The #[span.code force-selection] prop
   p.
     Eventually, you can use the #[code force-selection] prop to prevent unselecting a row when only
     one remain selected.
 
-  title-link(h3 slug="row-select") The #[span.code @row-select] event
+  title-link(h3 slug="example--row-select") The #[span.code @row-select] event
   p.
     This event is fired each time a row is selected #[strong or unselected] (so you don't need to listen
     to 2 different events). #[br]
@@ -655,7 +1126,7 @@ div
 
     .mt4.title4 Selection info:
     pre {{ selectionInfo }}
-    //- template(#pug).
+    template(#pug).
       w-flex.mb4(wrap)
         w-radios.mr6(v-model="table.selectableRows" :items="selectableRowsOptions")
         w-button.my3(
@@ -743,16 +1214,16 @@ div
       :headers="table1.headers"
       :items="table1.items"
       selectable-rows
-      :selected-rows.sync="table1.selectedRows")
+      v-model:selected-rows="table1.selectedRows")
     .mt4
       | Selected rows:
       code.ml2 {{ table1.selectedRows }}
-    //- template(#pug).
+    template(#pug).
       w-table(
         :headers="table.headers"
         :items="table.items"
         selectable-rows
-        :selected-rows.sync="table.selectedRows")
+        v-model:selected-rows="table.selectedRows")
       .mt4
         | Selected rows:
         code.ml2 {{ '\{\{ table.selectedRows \}\}' }}
@@ -761,7 +1232,7 @@ div
         :headers="table.headers"
         :items="table.items"
         selectable-rows
-        :selected-rows.sync="table.selectedRows"&gt;
+        v-model:selected-rows="table.selectedRows"&gt;
       &lt;/w-table&gt;
 
       &lt;div class="mt4"&gt;
@@ -787,30 +1258,32 @@ div
         }
       })
   alert(info).
-    In order to keep the same row selected after sorting or filtering, rows have unique identifiers.#[br]
+    In order to keep the same row selected after sorting or filtering, each row is assigned a unique identifier.#[br]
     By default the expanded rows array will use an #[code id] key, if present in the item object,
     or will assign an internal unique ID otherwise.
-    If you want you can override the default unique ID (when internally needed) with
+    If you want, you can override the default unique ID key (when internally needed) with
     the #[code uid-key] prop, which is set to "id" by default.
 
-  title-link(h2) Expandable rows
+  title-link(h2 slug="example--expandable-rows") Expandable rows
   alert(warning) This feature is in progress.
   example
-    w-table(:headers="table1.headers" :items="table5.items" expandable-rows)
-      template(#expanded-row="{ item }")
-        w-icon.mr2(:color="['blue', 'pink'][item.gender]") mdi {{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] }}
+    w-table(:headers="table5.headers" :items="table5.items" expandable-rows)
+      template(#row-expansion="{ item }")
+        w-icon.mr2(:color="['blue', 'pink'][item.gender]")
+          | mdi {{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] }}
         | {{ item.firstName }} weighs #[strong {{ item.weight }}kg] and is #[strong {{ item.height }}m] tall.
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items" expandable-rows)
-        template(#expanded-row="{ item }")
-          w-icon.mr2(:color="['blue', 'pink'][item.gender]") mdi {{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] }}
-          | {{ item.firstName }} weighs #[strong {{ item.weight }}kg] and is #[strong {{ item.height }}m] tall.
+        template(#row-expansion="{ item }")
+          w-icon.mr2(:color="['blue', 'pink'][item.gender]")
+            | mdi {{ "\{\{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] \}\}" }}
+          | {{ "\{\{ item.firstName \}\}" }} weighs #[strong {{ "\{\{ item.weight \}\}" }}kg] and is #[strong {{ "\{\{ item.height \}\}" }}m] tall.
     template(#html).
       &lt;w-table
         :headers="table.headers"
         :items="table.items"
         expandable-rows&gt;
-        &lt;template #expanded-row="{ item }"&gt;
+        &lt;template #row-expansion="{ item }"&gt;
           &lt;w-icon class="mr2" :color="['blue', 'pink'][item.gender]"&gt;
             mdi {{ "\{\{ ['mdi-gender-male', 'mdi-gender-female'][item.gender] \}\}" }}
           &lt;/w-icon&gt;
@@ -843,7 +1316,7 @@ div
   example
     w-table(:headers="table1.headers" :items="table1.items")
       template(#header-label="{ label, index }") {{ index }}: {{ label }} 👌
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items")
         template(#header-label="{ label, index }") {{ '\{\{ index \}\}: \{\{ label \}\}' }} 👌
     template(#html).
@@ -883,7 +1356,7 @@ div
         template(v-else)
           small.grey.mr2 {{ header.label }}:
           span {{ label }}
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" no-headers :items="table.items")
         template(#item-cell="{ item, label, header, index }")
           small.grey.mr2 {{ '\{\{ header.label \}\}' }}:
@@ -929,7 +1402,7 @@ div
     w-table(:headers="table1.headers" :items="table1.items" no-headers)
       template(#item-cell.id="{ item, label, header, index }")
         div.px2.text-center.green-light5--bg.text-bold {{ label }}
-    //- template(#pug).
+    template(#pug).
       w-table(:headers="table.headers" :items="table.items" no-headers)
         template(#item-cell.id="{ item, label, header, index }")
           div.px2.text-center.green-light5--bg.text-bold {{ '\{\{ label \}\}' }}
@@ -962,12 +1435,12 @@ div
         }
       })
 
-  title-link(h2) Fully custom row (&lt;tr&gt; element itself)
+  title-link(h2 slug="full-custom-rows") Full custom row (&lt;tr&gt; element itself)
   p.
-    In this example, the full &lt;tr&gt; DOM element is customized, so you can add your own classes and
-    full layout.#[br]
-    As you notice, the #[code item] slot gives you full flexibility, but the drawback is that's also
-    harder to write (more verbose).
+    In this example, the full &lt;tr&gt; DOM element is customized, so you can add your own classes
+    and full layout.#[br]
+    As you notice, the #[code item] slot gives you full flexibility, but the drawback is that's more
+    code to write.
   example
     w-table(:headers="table1.headers" :items="table1.items" selectable-rows)
       template(#item="{ item, index, select, classes }")
@@ -977,8 +1450,11 @@ div
             :key="i"
             :class="`pa4 text-${header.align || 'left'}`")
             | {{ item[header.key] || '' }}
-    //- template(#pug).
-      w-table(:headers="table.headers" :items="table.items" selectable-rows)
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        selectable-rows)
         template(#item="{ item, index, select, classes }")
           tr(:class="classes" @click="select")
             td(
@@ -1036,8 +1512,12 @@ div
               li(v-for="(header, i) in table1.headers" :key="i")
                 strong.mr2 {{ header.label }}:
                 | {{ item[header.key] || '' }}
-    //- template(#pug).
-      w-table(:headers="table.headers" :items="table.items" no-headers selectable-rows)
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        no-headers
+        selectable-rows)
         template(#item="{ item, index, select, classes }")
           tr(
             :class="{ ...classes, 'indigo-light5--bg': index % 2, 'blue-light5--bg': !(index % 2) }"
@@ -1111,8 +1591,11 @@ div
 
   example
     w-table(:headers="table2.headers" :items="table2.items" :mobile-breakpoint="700")
-    //- template(#pug).
-      w-table(:headers="table.headers" :items="table.items" :mobile-breakpoint="700")
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        :mobile-breakpoint="700")
     template(#html).
       &lt;w-table
         :headers="table.headers"
@@ -1167,6 +1650,58 @@ const allItems = [
   { id: 15, firstName: 'Josie', lastName: 'Richard' }
 ]
 
+const tableItemsInAPI = {
+  null: [
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+  ],
+  '+id': [
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+  ],
+  '-id': [
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' }
+  ],
+  '+firstName': [
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+  ],
+  '-firstName': [
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' }
+  ],
+  '+lastName': [
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' },
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' }
+  ],
+  '-lastName': [
+    { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
+    { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
+    { id: 4, firstName: 'Daley', lastName: 'Elliott' },
+    { id: 5, firstName: 'Virgil', lastName: 'Carman' },
+    { id: 3, firstName: 'Rory', lastName: 'Bristol' }
+  ]
+}
+
 export default {
   data: () => ({
     table1: {
@@ -1202,7 +1737,8 @@ export default {
         item => item.lastName[0] === 'M',
         item => item.id >= 10
       ],
-      activeFilter: 0
+      activeFilter: 0,
+      fixedFooter: false
     },
     table4: {
       headers: [
@@ -1239,6 +1775,75 @@ export default {
       ],
       items: allItems.slice(0, 5)
     },
+    table7: {
+      headers: [
+        { label: 'ID', key: 'id', width: '50' },
+        { label: 'Content', key: 'content', width: '70%' },
+        { label: 'First name', key: 'firstName' }
+      ],
+      items: [
+        { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
+        { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
+        { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' }
+      ]
+    },
+    table8: {
+      headers: [
+        { label: 'ID', key: 'id', width: '50' },
+        { label: 'Content', key: 'content', width: '70%' },
+        { label: 'First name', key: 'firstName' }
+      ],
+      items: [
+        { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
+        { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
+        { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' }
+      ]
+    },
+    table9: {
+      stickyColumn: 1,
+      fixedHeaders: false,
+      stickyColumnOptions: [
+        { value: 1, label: '#1' },
+        { value: 2, label: '#2' },
+        { value: 24, label: '#2 & #4' },
+        { value: 0, label: 'None' }
+      ],
+      headers: [
+        { label: 'ID', key: 'id', hidden: false, width: '60px', sticky: true },
+        { label: 'First name', key: 'firstName', hidden: false, width: '120px' },
+        { label: 'Last name', key: 'lastName', hidden: false, width: '120px' },
+        { label: 'Birthday', key: 'birthday', email: false, width: '150px' },
+        { label: 'Email', key: 'email', hidden: false, width: '200px' },
+        { label: 'Phone', key: 'phone', hidden: false, width: '200px' },
+        { label: 'Country', key: 'country', hidden: false, width: '200px' }
+      ],
+      items: [
+        { id: 1, firstName: 'Floretta', lastName: 'Sampson', birthday: 'Feb. 12, 1976', email: 'f.sampson@gmail.com', phone: '+21 234 567 8921', country: 'United Kingdom' },
+        { id: 2, firstName: 'Nellie', lastName: 'Lynn', birthday: 'Dec. 15, 1995', email: 'n.lynn@gmail.com', phone: '+22 234 567 8922', country: 'Luxembourg' },
+        { id: 3, firstName: 'Rory', lastName: 'Bristol', birthday: 'Apr. 25, 1989', email: 'r.bristol@gmail.com', phone: '+23 234 567 8923', country: 'Montenegro' },
+        { id: 4, firstName: 'Daley', lastName: 'Elliott', birthday: 'Mar. 24, 2002', email: 'd.elliott@gmail.com', phone: '+24 234 567 8924', country: 'Germany' },
+        { id: 5, firstName: 'Virgil', lastName: 'Carman', birthday: 'Aug. 2, 1990', email: 'v.carman@gmail.com', phone: '+25 234 567 8925', country: 'Ukraine' },
+        { id: 6, firstName: 'Baldwin', lastName: 'Morison', birthday: 'Feb. 12, 2008', email: 'b.morison@gmail.com', phone: '+26 234 567 8926', country: 'Lithuania' },
+        { id: 7, firstName: 'Beckah', lastName: 'Mann', birthday: 'Nov. 6, 1991', email: 'b.mann@gmail.com', phone: '+27 234 567 8927', country: 'Finland' },
+        { id: 8, firstName: 'Davie', lastName: 'Forester', birthday: 'Dec. 6, 1982', email: 'd.forester@gmail.com', phone: '+28 234 567 8928', country: 'Portugal' },
+        { id: 9, firstName: 'Andi', lastName: 'Montgomery', birthday: 'Jan. 20, 1987', email: 'a.montgomery@gmail.com', phone: '+29 234 567 8929', country: 'Czechia' },
+        { id: 10, firstName: 'Magnolia', lastName: 'Kirk', birthday: 'Dec. 31, 1992', email: 'm.kirk@gmail.com', phone: '+30 234 567 8930', country: 'Norway' },
+        { id: 11, firstName: 'Hamilton', lastName: 'Mallory', birthday: 'Dec. 7, 1979', email: 'h.mallory@gmail.com', phone: '+31 234 567 8931', country: 'Greece' },
+        { id: 12, firstName: 'Sheree', lastName: 'Castle', birthday: 'Feb. 16, 1980', email: 's.castle@gmail.com', phone: '+32 234 567 8932', country: 'France' },
+        { id: 13, firstName: 'Rebekah', lastName: 'Eason', birthday: 'Jun. 29, 2000', email: 'r.eason@gmail.com', phone: '+33 234 567 8933', country: 'Poland' },
+        { id: 14, firstName: 'Maude', lastName: 'Hayley', birthday: 'Dec. 31, 2009', email: 'm.hayley@gmail.com', phone: '+34 234 567 8934', country: 'Hungary' },
+        { id: 15, firstName: 'Josie', lastName: 'Richard', birthday: 'Aug. 16, 2004', email: 'j.richard@gmail.com', phone: '+35 234 567 8935', country: 'Italy' }
+      ]
+    },
+    table10: {
+      headers: [
+        { label: 'ID', key: 'id' },
+        { label: 'First name', key: 'firstName' },
+        { label: 'Last name', key: 'lastName' }
+      ],
+      items: allItems.slice(0, 5),
+      loading: false
+    },
     selectableRowsOptions: [
       { label: '<code class="mr2">:selectable-row="false"</code> (default)', value: false },
       { label: '<code>selectable-row</code>', value: true },
@@ -1255,11 +1860,45 @@ export default {
 
     hideColumn (columnIndex) {
       this.table6.headers[columnIndex].hidden = !this.table6.headers[columnIndex].hidden
+    },
+
+    onColumnResize ({ index, widths }) {
+      widths.forEach((width, i) => (this.table8.headers[i].width = width))
+
+      localStorage.tableWidths = widths
+    },
+
+    addRow () {
+      this.table3.items.push({ id: this.table3.items.length + 1, firstName: 'John', lastName: 'Doe' })
+      this.$nextTick(() => {
+        this.$refs.table.$el.querySelector('tbody tr:last-child').scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      })
+    },
+
+    toggleStickyColumn () {
+      this.table9.headers.forEach(header => (header.sticky = false))
+
+      switch (this.table9.stickyColumn) {
+        case 1: return (this.table9.headers[0].sticky = true)
+        case 2: return (this.table9.headers[1].sticky = true)
+        case 24:
+          this.table9.headers[1].sticky = true
+          return (this.table9.headers[3].sticky = true)
+      }
+    },
+
+    async sortFunction (sortKeys) {
+      this.table10.loading = 'header'
+      const apiResponse = new Promise(resolve => setTimeout(() => resolve(tableItemsInAPI[sortKeys[0] || null]), 1000))
+      this.table10.items = await apiResponse
+      this.table10.loading = false
     }
   },
 
   mounted () {
     this.reload()
+
+    localStorage.tableWidths?.split(',').forEach((width, i) => (this.table8.headers[i].width = width))
   }
 }
 </script>

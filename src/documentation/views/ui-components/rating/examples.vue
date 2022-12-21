@@ -3,7 +3,7 @@ div
   title-link(h2) Default
   example
     w-rating
-    //- template(#pug).
+    template(#pug).
       w-rating
     template(#html).
       &lt;w-rating&gt;&lt;/w-rating&gt;
@@ -18,7 +18,7 @@ div
     div.mt2
       strong.mr2 v-model:
       code {{ rating2 }}
-    //- template(#pug).
+    template(#pug).
       w-rating(v-model="rating1")
       div.mt2
         strong.mr2 v-model:
@@ -56,7 +56,7 @@ div
     br
     w-rating.my2(bg-color="light-green" color="yellow")
 
-    //- template(#pug).
+    template(#pug).
       w-rating.my2(color="green")
       br
       w-rating.my2(bg-color="light-green" color="yellow")
@@ -76,18 +76,18 @@ div
 
   title-link(h2) Custom Icons
   example
-    w-rating.my2(icon="mdi mdi-heart" :value="3.4")
+    w-rating.my2(icon="mdi mdi-heart" :model-value="3")
     br
-    w-rating.my2(icon="mdi mdi-heart-outline" :value="3.4")
-    //- template(#pug).
-      w-rating.my2(icon="mdi mdi-heart" :value="3")
+    w-rating.my2(icon="mdi mdi-heart-outline" :model-value="3.4")
+    template(#pug).
+      w-rating.my2(icon="mdi mdi-heart" :model-value="3.4")
       br
-      w-rating.my2(icon="mdi mdi-heart-outline" :value="3")
+      w-rating.my2(icon="mdi mdi-heart-outline" :model-value="3.4")
     template(#html).
       &lt;w-rating
         class="my2"
         icon="mdi mdi-heart"
-        :value="3"&gt;
+        :model-value="3.4"&gt;
       &lt;/w-rating&gt;
 
       &lt;br /&gt;
@@ -95,7 +95,7 @@ div
       &lt;w-rating
         class="my2"
         icon="mdi mdi-heart-outline"
-        :value="3"&gt;
+        :model-value="3.4"&gt;
       &lt;/w-rating&gt;
 
   title-link(h2 slug="max") Max (number of buttons)
@@ -105,17 +105,25 @@ div
     #[span.code w-rating] component.#[br]
     When setting a rating, the component will always return an integer between 1 and #[code max] included.
   example
-    w-rating.my2(:value="2" :max="3")
+    w-rating.my2(:model-value="2" :max="3")
     br
-    w-rating.my2(:value="6" :max="10")
-    //- template(#pug).
-      w-rating.my2(:value="2" :max="3")
+    w-rating.my2(:model-value="6" :max="10")
+    template(#pug).
+      w-rating.my2(:model-value="2" :max="3")
       br
-      w-rating.my2(:value="6" :max="10")
+      w-rating.my2(:model-value="6" :max="10")
     template(#html).
-      &lt;w-rating class="my2" :value="2" :max="3"&gt;&lt;/w-rating&gt;
+      &lt;w-rating
+        :model-value="2"
+        class="my2"
+        :max="3"&gt;
+      &lt;/w-rating&gt;
       &lt;br /&gt;
-      &lt;w-rating class="my2" :value="6" :max="10"&gt;&lt;/w-rating&gt;
+      &lt;w-rating
+        :model-value="6"
+        class="my2"
+        :max="10"&gt;
+      &lt;/w-rating&gt;
 
   title-link(h2) Sizes
   p.
@@ -133,7 +141,7 @@ div
     br
     w-rating.my2(xl)
 
-    //- template(#pug).
+    template(#pug).
       w-rating.my2(xs)
       br
       w-rating.my2(sm)
@@ -157,17 +165,17 @@ div
   title-link(h2) Disabled &amp; readonly
   p Use the disabled or readonly options to display a rating but prevent user votes.
   example
-    w-rating.my2(:value="3" disabled)
+    w-rating.my2(:model-value="3" disabled)
     br
-    w-rating.my2(:value="3" readonly)
-    //- template(#pug).
-      w-rating.my2(:value="3" disabled)
+    w-rating.my2(:model-value="3" readonly)
+    template(#pug).
+      w-rating.my2(:model-value="3" disabled)
       br
-      w-rating.my2(:value="3" readonly)
+      w-rating.my2(:model-value="3" readonly)
     template(#html).
-      &lt;w-rating class="my2" :value="3" disabled&gt;&lt;/w-rating&gt;
+      &lt;w-rating class="my2" :model-value="3" disabled&gt;&lt;/w-rating&gt;
       &lt;br /&gt;
-      &lt;w-rating class="my2" :value="3" readonly&gt;&lt;/w-rating&gt;
+      &lt;w-rating class="my2" :model-value="3" readonly&gt;&lt;/w-rating&gt;
 </template>
 
 <script>

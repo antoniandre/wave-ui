@@ -24,14 +24,37 @@ p {margin-bottom: 2 * $base-increment;}
   &[data-label]:before {font-weight: bold;}
 }
 
+.nav-menu ~ .main-content {padding-left: 4em;}
+
+footer {
+  margin-top: 5em;
+
+  .nav-drawer ~ & {padding-left: 12px;}
+
+  .heart:hover {animation: heartbeat 1s infinite;}
+  small {font-size: 10px;}
+  .caption {padding-top: 1px;}
+}
+
+@keyframes heartbeat {
+  0%, 30%, 60%, 100% {transform: scale(1);}
+  15%, 45% {transform: scale(1.2);}
+}
+
 // Vue Transitions.
-.fade-page-enter-active, .fade-page-leave-active {transition: opacity 0.12s;}
-.fade-page-enter, .fade-page-leave-to {opacity: 0;}
+// --------------------------------------------------------
+.fade-page-enter-active, .fade-page-leave-from-active {transition: opacity 0.12s;}
+.fade-page-enter-from, .fade-page-leave-to {opacity: 0;}
+
+// Media queries.
+// --------------------------------------------------------
+@media screen and (max-width: 560px) {
+  button.go-top {display: none;}
+}
 
 // MEDIA QUERIES.
 // --------------------------------------------------------
 @media screen and (max-width: 600px) {
-  .w-app .content-wrap {padding-left: 16px;}
   .title-link .hash {display: none;}
 }
 

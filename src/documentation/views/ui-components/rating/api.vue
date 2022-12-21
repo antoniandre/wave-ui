@@ -15,11 +15,11 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WRating from '@/wave-ui/components/w-rating.vue'
 
 const propsDescs = {
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Dictates the current rating value. When the user rates, the <code>v-model</code> value will be updated.',
+  modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Dictates the current rating value. When the user rates, the <code>v-model</code> value will be updated.',
   max: 'The total count of buttons (usually stars) to display in the rating component.',
   icon: 'Sets the icon (star by default) of each button of the rating component.<br>Accepts a string: e.g. <code>mdi mdi-home</code>.',
-  color: 'Sets the color of the rating active icons (when hovering or when showing the current rating).<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  bgColor: 'Sets color of the background icons (grey by default).<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  color: 'Sets the color of the rating active icons (when hovering or when showing the current rating).<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Sets color of the background icons (grey by default).<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   xs: 'Sets the size of the rating component (font-size).',
   sm: 'Sets the size of the rating component (font-size).',
   md: 'Sets the size of the rating component (font-size).',

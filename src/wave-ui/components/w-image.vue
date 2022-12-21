@@ -9,7 +9,7 @@ component.w-image-wrap(:is="wrapperTag" :class="wrapperClasses" :style="wrapperS
       :src="tag === 'img' ? imgSrc : null")
   .w-image__loader(v-if="!noSpinner && loading")
     slot(v-if="$slots.loading" name="loading")
-    w-progress(v-else circle indeterminate)
+    w-progress(v-else circle indeterminate v-bind="spinnerColor ? { color: spinnerColor } : {}")
   component.w-image__content(v-if="$slots.default" :is="wrapperTag" :class="contentClass")
     slot
 </template>
@@ -22,9 +22,10 @@ component.w-image-wrap(:is="wrapperTag" :class="wrapperClasses" :style="wrapperS
  * - adaptive size: given ratio + width 100% (use bg)
  * - adaptive size: given ratio + height 100% (use bg)
  * - adaptive & locked size: given width or height and using <img>
+ *
+ * @todo handle figure, captions, srcset, webp.
  **/
 
-// @todo handle figure, captions, srcset, webp.
 import { consoleWarn } from '../utils/console'
 
 export default {
@@ -40,6 +41,7 @@ export default {
     fixed: { type: Boolean },
     contain: { type: Boolean },
     noSpinner: { type: Boolean },
+    spinnerColor: { type: String },
     fallback: { type: String },
     transition: { type: String, default: 'fade' },
     contentClass: { type: [String, Array, Object] }
@@ -175,6 +177,8 @@ export default {
 .w-image-wrap {
   position: relative;
   display: inline-flex;
+  flex-grow: 0;
+  flex-shrink: 0;
   width: 4em;
 
   &--has-ratio {width: 100%;}

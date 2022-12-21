@@ -76,6 +76,14 @@ div
         strong v-model:
         code.ml2.mr4 {{ form1.valid === false ? 'false' : form1.valid || 'null' }}
         w-button(type="submit" :disabled="form1.valid === false") Validate
+    template(#pug).
+      w-form(v-model="valid")
+        w-input(label="First name" :validators="[validators.required, validators.alphabetical]")
+        w-input.mt3(label="Last name" :validators="[validators.required]")
+        .text-right.mt6
+          strong v-model:
+          code.ml2.mr4 {{ "\{\{ valid === false ? 'false' : valid || 'null' \}\}" }}
+          w-button(type="submit" :disabled="valid === false") Validate
     template(#html).
       &lt;w-form v-model="valid"&gt;
         &lt;w-input
@@ -137,6 +145,12 @@ div
       w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
         w-button(type="submit") Validate
+    template(#pug).
+      w-form(action="test.php" method="post" target="_blank" allow-submit)
+        w-input(label="First name" :validators="[validators.required]")
+        w-input.mt3(label="Last name" :validators="[validators.required]")
+        .text-right.mt6
+          w-button(type="submit") Validate
     template(#html).
       &lt;w-form
         action="test.php"
@@ -181,6 +195,12 @@ div
       w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
         w-button(type="submit") Validate
+    template(#pug).
+      w-form(no-keyup-validation no-blur-validation)
+        w-input(label="First name" :validators="[validators.required]")
+        w-input.mt3(label="Last name" :validators="[validators.required]")
+        .text-right.mt6
+          w-button(type="submit") Validate
     template(#html).
       &lt;w-form no-keyup-validation no-blur-validation&gt;
         &lt;w-input
@@ -217,6 +237,13 @@ div
       .text-right.mt6
         w-button.my1.mr2(bg-color="warning" type="reset") Reset
         w-button.my1(type="submit") Validate
+    template(#pug).
+      w-form(v-model="valid")
+        w-input(label="First name" :validators="[validators.required]")
+        w-input.mt3(label="Last name" :validators="[validators.required]")
+        .text-right.mt6
+          w-button.my1.mr2(bg-color="warning" type="reset") Reset
+          w-button.my1(type="submit") Validate
     template(#html).
       &lt;w-form v-model="valid"&gt;
         &lt;w-input
@@ -285,6 +312,23 @@ div
       w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
         w-button(type="submit") Validate
+    template(#pug).
+      w-alert(
+        :success="success"
+        :error="error"
+        :info="!success &amp;&amp; !error").
+        {{ "\{\{ !success && !error ? 'The form is still pristine' : (success ? 'Success' : 'Error') \}\}" }}
+      p The form has been validated {{ '\{\{ validated \}\}' }} time(s).
+
+      w-form(
+        @validate="validated++;success = error = false"
+        @success="success = true"
+        @error="error = true")
+        w-input(label="First name" :validators="[validators.required]")
+        w-input.mt3(label="Last name" :validators="[validators.required]")
+
+        .text-right.mt6
+          w-button(type="submit") Validate
     template(#html).
       &lt;w-alert
         :success="success"
@@ -349,12 +393,12 @@ div
             | The form has {{ form6.errorsCount }} errors.
       w-form.px8.pt2.pb12(
         v-model="form6.valid"
-        :errors-count.sync="form6.errorsCount"
+        v-model:errors-count="form6.errorsCount"
         @validate="onValidate"
         @success="onSuccess")
         w-input(required label="First name" :validators="[validators.required]")
         w-input.mt3(required label="Last name" :validators="[validators.required]")
-        w-input.mt3(disabled required label="User name" :validators="[validators.required]")
+        w-input.mt3(disabled label="User name")
 
         w-flex.mt4(wrap align-center justify-end)
           w-checkbox(required :validators="[validators.consent]") I agree to the terms &amp; conditions
@@ -375,34 +419,70 @@ div
         plain
         round
         bottom) The form was sent successfully!
+    template(#pug).
+      w-card.white--bg(content-class="pa0")
+        .message-box
+          w-transition-fade
+            w-alert.my0.text-light(v-if="form.submitted" success no-border)
+              | The form is valid, ready to send it!
+            w-alert.my0.text-light(v-else-if="form.valid === false" error no-border)
+              | The form has {{ '\{\{ form.errorsCount \}\}' }} errors.
+        w-form.px8.pt2.pb12(
+          v-model="form.valid"
+          v-model:errors-count="form.errorsCount"
+          @validate="onValidate"
+          @success="onSuccess")
+          w-input(required label="First name" :validators="[validators.required]")
+          w-input.mt3(required label="Last name" :validators="[validators.required]")
+          w-input.mt3(disabled label="User name")
+
+          w-flex.mt4(wrap align-center justify-end)
+            w-checkbox(required :validators="[validators.consent]") I agree to the terms &amp; conditions
+            .spacer
+            w-button.my1.mr2(
+              bg-color="warning"
+              type="reset"
+              @click="form.submitted = form.sent = false") Reset
+            w-button.my1(
+              type="submit"
+              :disabled="form.valid === false"
+              :loading="form.submitted &amp;&amp; !form.sent") Validate
+        w-notification(
+          v-model="form.sent"
+          success
+          transition="bounce"
+          absolute
+          plain
+          round
+          bottom) The form was sent successfully!
     template(#html).
       &lt;w-card class="white--bg" content-class="pa0"&gt;
         &lt;div class="message-box"&gt;
           &lt;w-transition-fade&gt;
             &lt;w-alert
-              class="my0 text-light"
               v-if="form.submitted"
               success
-              no-border&gt;
+              no-border
+              class="my0 text-light"&gt;
               The form is valid, ready to send it!
             &lt;/w-alert&gt;
 
             &lt;w-alert
-              class="my0 text-light"
               v-else-if="form.valid === false"
               error
-              no-border&gt;
+              no-border
+              class="my0 text-light"&gt;
               The form has {{ '\{\{ form.errorsCount \}\}' }} errors.
             &lt;/w-alert&gt;
           &lt;/w-transition-fade&gt;
         &lt;/div&gt;
 
         &lt;w-form
-          class="px8 pt2 pb12"
           v-model="form.valid"
-          :errors-count.sync="form.errorsCount"
+          v-model:errors-count="form.errorsCount"
           @validate="onValidate"
-          @success="onSuccess"&gt;
+          @success="onSuccess"
+          class="px8 pt2 pb12"&gt;
 
           &lt;w-input
             required
@@ -411,21 +491,19 @@ div
           &lt;/w-input&gt;
 
           &lt;w-input
-            class="mt3"
             required
             label="Last name"
-            :validators="[validators.required]"&gt;
+            :validators="[validators.required]"
+            class="mt3"&gt;
           &lt;/w-input&gt;
 
           &lt;w-input
-            class="mt3"
             disabled
-            required
-            label="User name"
-            :validators="[validators.required]"&gt;
+            label="User name"]
+            class="mt3"&gt;
           &lt;/w-input&gt;
 
-          &lt;w-flex class="mt4" wrap align-center justify-end&gt;
+          &lt;w-flex wrap align-center justify-end class="mt4"&gt;
             &lt;w-checkbox
               required
               :validators="[validators.consent]"&gt;
@@ -435,18 +513,18 @@ div
             &lt;div class="spacer" /&gt;
 
             &lt;w-button
-              class="my1 mr2"
               bg-color="warning"
               type="reset"
-              @click="form.submitted = form.sent = false"&gt;
+              @click="form.submitted = form.sent = false"
+              class="my1 mr2"&gt;
               Reset
             &lt;/w-button&gt;
 
             &lt;w-button
-              class="my1"
               type="submit"
               :disabled="form.valid === false"
-              :loading="form.submitted &amp;&amp; !form.sent"&gt;
+              :loading="form.submitted &amp;&amp; !form.sent"
+              class="my1"&gt;
               Validate
             &lt;/w-button&gt;
           &lt;/w-flex&gt;
@@ -513,7 +591,7 @@ div
       w-flex.mt4(justify-end)
         w-button(type="reset" bg-color="warning") Reset
         w-button.ml2(type="submit" :disabled="form7.valid === false") Validate
-    //- template(#pug).
+    template(#pug).
       w-button(
         :outline="!form.disabled"
         @click="form.readonly = false;form.disabled = !form.disabled") Form disabled
@@ -603,21 +681,21 @@ div
         :inner-icon-right="form1.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
         :loading="form1.loading"
         autocomplete="off")
-    //- template(#pug).
+    template(#pug).
       w-form(error-placeholders)
         w-input(
           label="Username"
           :validators="[validators.required, validators.username]"
-          :inner-icon-right="form.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
-          :loading="form1.loading"
+          :inner-icon-right="loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
+          :loading="loading"
           autocomplete="off")
     template(#html).
       &lt;w-form error-placeholders&gt;
         &lt;w-input
           label="Username"
           :validators="[validators.required, validators.username]"
-          :inner-icon-right="form.loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
-          :loading="form.loading"
+          :inner-icon-right="loading ? 'mdi mdi-autorenew w-icon--spin' : ''"
+          :loading="loading"
           autocomplete="off"&gt;
         &lt;/w-input&gt;
       &lt;/w-form&gt;

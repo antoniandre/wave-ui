@@ -16,7 +16,7 @@
 
     .grow {flex-grow: 1;flex-basis: auto;}
     .no-grow {flex-grow: 0;}
-    .shrink {flex-shrink: 1;margin-left: auto;margin-right: auto;}
+    .shrink {flex-shrink: 1;}
     .no-shrink {flex-shrink: 0;}
     .fill-width {width: 100%;}
     .fill-height {height: 100%;}
@@ -212,3 +212,8 @@
     // ----------------------------------------------
   }
 }
+
+@for $i from 1 through 12 {
+  .w-flex.gap#{$i}, .w-grid.gap#{$i} {gap: round($base-increment * $i);}
+}
+.w-flex.gap0, .w-grid.gap0 {gap: 0;}

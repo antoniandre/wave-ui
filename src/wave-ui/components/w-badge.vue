@@ -1,16 +1,16 @@
 <template lang="pug">
-.w-badge-wrap(v-on="$listeners")
+.w-badge-wrap(v-on="$attrs")
   slot
   transition(:name="`${transition}`")
     .w-badge(
-      v-if="value"
+      v-if="modelValue"
       :class="classes"
       :style="styles"
       aria-atomic="true"
       aria-label="Badge"
       aria-live="polite"
       role="status")
-      slot(v-if="!dot" name="badge") {{ value === true ? '' : (value || '') }}
+      slot(v-if="!dot" name="badge") {{ modelValue === true ? '' : (modelValue || '') }}
 </template>
 
 <script>
@@ -18,7 +18,7 @@ export default {
   name: 'w-badge',
 
   props: {
-    value: { default: true },
+    modelValue: { default: true },
     xs: { type: Boolean },
     sm: { type: Boolean },
     md: { type: Boolean },
@@ -65,13 +65,13 @@ export default {
       ]
     },
     classes () {
-      const slotText = this.$slots.badge && this.$slots.badge.map(item => item.text).join('')
+      const slotText = this.$slots.badge && this.$slots.badge().map(item => item.children).join('')
 
       return {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         [this.badgeClass]: this.badgeClass || null,
-        'w-badge--round': this.round || (slotText || this.value + '' || '').length < 2,
+        'w-badge--round': this.round || (slotText || this.modelValue + '' || '').length < 2,
         'w-badge--dark': this.dark && !this.outline,
         'w-badge--outline': this.outline,
         'w-badge--inline': this.inline,
@@ -112,8 +112,8 @@ export default {
   &--inline {position: static;}
 
   &--round {
-    width: round(1.1 * divide($base-font-size, 2)) * 2;
-    padding: 0 (round(1.1 * divide($base-font-size, 4)) * 2);
+    aspect-ratio: 1;
+    padding: 0;
   }
 
   // Sizes.
@@ -184,11 +184,11 @@ export default {
   }
   &--shadow {box-shadow: $box-shadow;}
 
-  &--dot.w-badge {min-width: 0;padding: 0;}
-  &--dot.size--xs {width: round(1.35 * $base-increment);height: round(1.35 * $base-increment);}
-  &--dot.size--sm {width: round(1.7 * $base-increment);height: round(1.7 * $base-increment);}
-  &--dot.size--md {width: round(2.2 * $base-increment);height: round(2.2 * $base-increment);}
-  &--dot.size--lg {width: round(2.75 * $base-increment);height: round(2.75 * $base-increment);}
-  &--dot.size--xl {width: 3 * $base-increment;height: 3 * $base-increment;}
+  &--dot.w-badge {min-width: 0;padding: 0;aspect-ratio: 1;}
+  &--dot.size--xs {height: round(1.35 * $base-increment);}
+  &--dot.size--sm {height: round(1.7 * $base-increment);}
+  &--dot.size--md {height: round(2.2 * $base-increment);}
+  &--dot.size--lg {height: round(2.75 * $base-increment);}
+  &--dot.size--xl {height: 3 * $base-increment;}
 }
 </style>

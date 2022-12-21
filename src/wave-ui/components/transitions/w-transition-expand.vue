@@ -2,7 +2,6 @@
 transition(
   name="expand"
   mode="out-in"
-  v-bind="$props"
   :css="false"
   @before-appear="beforeAppear"
   @appear="appear"
@@ -17,19 +16,18 @@ transition(
 </template>
 
 <script>
-// const duration = 250 // ms.
-
 export default {
   name: 'w-transition-expand',
 
   props: {
     x: { type: Boolean },
     y: { type: Boolean },
-    duration: { type: Number, default: 200 }
+    duration: { type: Number, default: 250 }
   },
 
   data: () => ({
     el: {
+      savedState: false,
       originalStyles: '',
       width: 0,
       height: 0,
@@ -62,58 +60,55 @@ export default {
     beforeAppear (el) {
       // Only save original state once before a 'clean' transition start.
       // Not when clicking very fast and mixing states order.
-      if (this.cleanTransitionCycle) this.saveOriginalStyles(el)
+      if (this.cleanTransitionCycle) this.saveOriginalInlineStyles(el)
       this.cleanTransitionCycle = false
-      this.$emit('before-appear')
     },
     appear (el, done) {
       this.show(el)
       setTimeout(done, this.duration)
       this.cleanTransitionCycle = false
-      this.$emit('appear')
     },
     afterAppear (el) {
       this.applyOriginalStyles(el)
       // May be transitioning with v-show, if so don't reapply display none.
       el.style.cssText = el.style.cssText.replace('display: none;', '')
       this.cleanTransitionCycle = false
-      this.$emit('after-appear')
     },
     beforeEnter (el) {
       // Only save original state once before a 'clean' transition start.
       // Not when clicking very fast and mixing states order.
-      if (this.cleanTransitionCycle) this.saveOriginalStyles(el)
+      if (this.cleanTransitionCycle) this.saveOriginalInlineStyles(el)
       this.cleanTransitionCycle = false
-      this.$emit('before-enter')
     },
     enter (el, done) {
       this.show(el)
       setTimeout(done, this.duration)
       this.cleanTransitionCycle = false
-      this.$emit('enter')
     },
     afterEnter (el) {
       this.applyOriginalStyles(el)
       // May be transitioning with v-show, if so don't reapply display none.
       el.style.cssText = el.style.cssText.replace('display: none;', '')
       this.cleanTransitionCycle = false
-      this.$emit('after-enter')
     },
     beforeLeave (el) {
+      // When starting with an open item.
+      if (!this.el.savedState) this.saveComputedStyles(el)
+
       this.beforeHide(el)
       this.cleanTransitionCycle = false
-      this.$emit('before-leave')
     },
     leave (el, done) {
       this.hide(el)
       setTimeout(done, this.duration)
       this.cleanTransitionCycle = false
-      this.$emit('leave')
     },
     afterLeave (el) {
       this.applyOriginalStyles(el)
       this.cleanTransitionCycle = true
-      this.$emit('after-leave')
+      // Reset for recomputing the next time we start the transition from an open state.
+      // In case there might be some changed styles from last closing.
+      this.el.savedState = false
     },
 
     applyHideStyles (el) {
@@ -163,11 +158,25 @@ export default {
     applyOriginalStyles (el) {
       el.style.cssText = this.el.originalStyles
     },
-    saveOriginalStyles (el) {
-      // Keep the original styles to restore them after transition.
+    saveOriginalInlineStyles (el) {
+      // Keep any original inline styles to restore them after transition.
       this.el.originalStyles = el.style.cssText
     },
     show (el, done) {
+      this.saveComputedStyles(el)
+      this.applyHideStyles(el)
+
+      setTimeout(() => this.applyShowStyles(el), 20)
+      setTimeout(done, this.duration)
+    },
+    beforeHide (el) {
+      this.applyShowStyles(el)
+    },
+    hide (el, done) {
+      setTimeout(() => this.applyHideStyles(el), 20)
+      setTimeout(done, this.duration)
+    },
+    saveComputedStyles (el) {
       const computedStyles = window.getComputedStyle(el, null)
 
       // Save the width & height then set them to 0 as the animation starting point.
@@ -189,17 +198,7 @@ export default {
         this.el.borderTopWidth = computedStyles.getPropertyValue('borderTopWidth')
         this.el.borderBottomWidth = computedStyles.getPropertyValue('borderBottomWidth')
       }
-      this.applyHideStyles(el)
-
-      setTimeout(() => this.applyShowStyles(el), 20)
-      setTimeout(done, this.duration)
-    },
-    beforeHide (el) {
-      this.applyShowStyles(el)
-    },
-    hide (el, done) {
-      setTimeout(() => this.applyHideStyles(el), 20)
-      setTimeout(done, this.duration)
+      this.el.savedState = true
     }
   }
 }

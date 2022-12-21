@@ -8,7 +8,7 @@ main
 
   w-accordion(
     :items="3"
-    :value="openPane"
+    :model-value="openPane"
     expand-single
     title-class="justify-space-between py4 pl6 blue-light5--bg"
     expand-icon="wi-chevron-right"
@@ -28,20 +28,30 @@ main
 
     //- Nuxt install.
     template(#item-title.3)
-      title-link.ma0(h2 slug="installation-on-nuxt") Installation on Nuxt (Vue 2)
+      title-link.ma0(h2 slug="installation-on-nuxt") Installation on Nuxt
     template(#item-content.3)
       nuxt-install
 
   w-divider.my12
   title-link(h2) What next?
-  p Read on the knowledge base pages! It will give you an overview of all the power in your hands!
-  h3 Then what next?
-  p Now that you are more familiar with Wave UI, check out a UI component of your choice and explore its examples.
-  p You can open each example in Codepen, that will help you learn faster by trying it yourself.
-
-  title-link(h3).mt8 Icons font
   p.
-    An icon font is probably the next thing you need at this point.#[br]
+    #[strong You are now good to go and free to decide what you want to add in your app.]#[br]
+    But we recommend that you read on the knowledge base pages soon!
+    It will give you an overview of all the power in your hands!
+  h3 Then what next?
+  p
+    | Now that you are more familiar with Wave UI, you can start from the
+    router-link.ml1(to="/w-app#examples-of-common-layouts" @click.native="scrollToExamples").
+      #[strong.code.inherit w-app] common layouts
+    | , and add the UI components of your choice. The examples will help you understand and
+    | get code syntaxes.
+  p.
+    By the way, you can open every example in Codepen, that will help you learn faster by trying it
+    yourself.
+
+  title-link(h3).mt8 And then?
+  p.
+    #[strong Icons font.] An icon font is probably the next thing you need at this point.#[br]
     You are free to use the one of your choice, but if you don't know where to start, we have
     picked and tested a handful of them for you:
     check out the #[router-link(to="w-icon") w-icon] page to know more.
@@ -75,6 +85,16 @@ export default {
     openPane: [true, false, false]
   }),
 
+  methods: {
+    scrollToExamples () {
+      setTimeout(() => {
+        const examples = document.getElementById('examples-of-common-layouts')
+        const top = examples.getBoundingClientRect().top + window.scrollY - 15
+        document.documentElement.scrollTo({ top, behavior: 'smooth' })
+      }, 300)
+    }
+  },
+
   mounted () {
     const hash = document.location.hash || ''
     if (hash.includes('a-la-carte')) this.openPane = [false, true, false]
@@ -90,7 +110,6 @@ export default {
   .w-accordion__item-content {background: #f7fbff;}
   .w-button--icon.size--md {font-size: 20px;}
 
-  // .w-accordion ol {font-size: 1.3em;}
   .w-accordion .ssh-pre, .w-accordion em {font-size: 1rem;}
 
   .vue-install .comment {user-select: none;}
@@ -99,5 +118,9 @@ export default {
 
 @media screen and (max-width: 600px) {
   .main--getting-started .w-accordion {margin-left: -16px;margin-right: -16px;}
+}
+
+@media screen and (max-width: 450px) {
+  .main--getting-started .w-accordion {margin-left: -8px;margin-right: -8px;}
 }
 </style>

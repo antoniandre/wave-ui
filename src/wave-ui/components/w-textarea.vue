@@ -3,22 +3,24 @@ component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled: isDisabled, readonly: isReadonly, isFocused }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   :wrap="hasLabel && labelPosition !== 'inside'"
   @reset="$emit('update:modelValue', inputValue = '');$emit('input', '')"
   :class="classes")
   //- Left label.
   template(v-if="labelPosition === 'left'")
-    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
-      slot
-    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
+    label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(
+      v-if="$slots.default || label"
+      :for="`w-textarea--${_.uid}`"
+      :class="labelClasses")
+      slot {{ label }}
 
   //- Input wrapper.
   .w-textarea__textarea-wrap(:class="inputWrapClasses")
     w-icon.w-textarea__icon.w-textarea__icon--inner-left(
       v-if="innerIconLeft"
       tag="label"
-      :for="`w-textarea--${_uid}`"
+      :for="`w-textarea--${_.uid}`"
       @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
     textarea.w-textarea__textarea(
       ref="textarea"
@@ -27,7 +29,7 @@ component(
       @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
-      :id="`w-textarea--${_uid}`"
+      :id="`w-textarea--${_.uid}`"
       :name="inputName"
       :placeholder="placeholder || null"
       :rows="rows || null"
@@ -39,26 +41,23 @@ component(
       :tabindex="tabindex || null")
     template(v-if="labelPosition === 'inside' && showLabelInside")
       label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
-        v-if="$slots.default"
-        :for="`w-textarea--${_uid}`"
-        :class="isFocused && { [valid === false ? 'error' : this.color]: this.color || valid === false }")
-        slot
-      label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
-        v-else-if="label"
-        :for="`w-textarea--${_uid}`"
-        v-html="label"
-        :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+        v-if="$slots.default || label"
+        :for="`w-textarea--${_.uid}`"
+        :class="labelClasses")
+        slot {{ label }}
     w-icon.w-textarea__icon.w-textarea__icon--inner-right(
       v-if="innerIconRight"
       tag="label"
-      :for="`w-textarea--${_uid}`"
+      :for="`w-textarea--${_.uid}`"
       @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
   //- Right label.
   template(v-if="labelPosition === 'right'")
-    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-if="$slots.default" :for="`w-textarea--${_uid}`")
-      slot
-    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(v-else-if="label" :for="`w-textarea--${_uid}`" v-html="label")
+    label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(
+      v-if="$slots.default || label"
+      :for="`w-textarea--${_.uid}`"
+      :class="labelClasses")
+      slot {{ label }}
 </template>
 
 <script>
@@ -73,7 +72,7 @@ export default {
   mixins: [FormElementMixin],
 
   props: {
-    value: { default: '' },
+    modelValue: { default: '' },
     label: { type: String },
     labelPosition: { type: String, default: 'inside' },
     innerIconLeft: { type: String },
@@ -83,6 +82,7 @@ export default {
     placeholder: { type: String },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
+    labelColor: { type: String, default: 'primary' },
     dark: { type: Boolean },
     outline: { type: Boolean },
     shadow: { type: Boolean },
@@ -99,7 +99,7 @@ export default {
 
   data () {
     return {
-      inputValue: this.value,
+      inputValue: this.modelValue,
       isFocused: false,
       // When autogrow, calculate the height from the number of carriage return & font size.
       height: null,
@@ -112,11 +112,11 @@ export default {
     listeners () {
       // Remove the events that are fired separately, so they don't fire twice.
       // eslint-disable-next-line no-unused-vars
-      const { input, focus, blur, ...listeners } = this.$listeners
+      const { input, focus, blur, ...listeners } = this.$attrs
       return listeners
     },
     hasValue () {
-      return this.inputValue
+      return this.inputValue || this.inputValue === 0
     },
     hasLabel () {
       return this.label || this.$slots.default
@@ -142,7 +142,7 @@ export default {
     },
     inputWrapClasses () {
       return {
-        [this.valid === false ? 'error' : this.color]: this.color || this.valid === false,
+        [this.valid === false ? this.validationColor : this.color]: this.color || this.valid === false,
         [`${this.bgColor}--bg`]: this.bgColor,
         'w-textarea__textarea-wrap--tile': this.tile,
         // Box adds a padding on input. If there is a bgColor or shadow, a padding is needed.
@@ -202,9 +202,9 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       this.inputValue = value
-      this.computeHeight()
+      this.$nextTick(this.computeHeight)
     },
     resizable (value) {
       if (value) this.height = null
@@ -387,8 +387,6 @@ $inactive-color: #777;
     .w-textarea--filled.w-textarea--floating-label.w-textarea--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
     .w-textarea--floating-label.w-textarea--inner-icon-left .w-textarea__textarea:-webkit-autofill & {left: 0;}
-
-    .w-textarea--focused & {color: currentColor;}
   }
 }
 </style>

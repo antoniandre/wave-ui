@@ -1,14 +1,11 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
-  state: {
+export default createStore({
+  state: () => ({
     currentPage: '', // The title of the page, to pass to Codepen from examples.
     usePug: false,
     tabsView: true
-  },
+  }),
 
   mutations: {
     setCurrentPage (state, pageTitle) {

@@ -1,8 +1,10 @@
 <template lang="pug">
-transition(name="fade" mode="out-in" appear)
+transition(name="fade" appear @after-leave="onClose")
   .w-overlay(
-    v-if="value"
-    :style="(value && styles) || null"
+    v-if="modelValue"
+    v-show="showOverlay"
+    ref="overlay"
+    :style="(modelValue && styles) || null"
     @keydown.escape.stop="onClick"
     @click="onClick"
     v-focus
@@ -16,18 +18,28 @@ export default {
   name: 'w-overlay',
 
   props: {
-    value: {},
+    modelValue: {},
     opacity: { type: [Number, String, Boolean] },
     bgColor: { type: String },
+    absolute: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
     persistent: { type: Boolean },
     persistentNoAnimation: { type: Boolean }
   },
 
-  emits: ['input', 'update:modelValue', 'click', 'close'],
+  provide () {
+    return {
+      // If a detachable is used inside a w-overlay without an appendTo, default to the overlay element
+      // instead of the w-app.
+      detachableDefaultRoot: () => this.$refs.overlay || null
+    }
+  },
+
+  emits: ['input', 'update:modelValue', 'click', 'before-close', 'close'],
 
   data: () => ({
-    persistentAnimate: false
+    persistentAnimate: false,
+    showOverlay: false
   }),
 
   computed: {
@@ -36,7 +48,8 @@ export default {
     },
     classes () {
       return {
-        'w-overlay--persistent-animate': this.persistentAnimate
+        'w-overlay--persistent-animate': this.persistentAnimate,
+        'w-overlay--absolute': this.absolute
       }
     },
     styles () {
@@ -58,12 +71,29 @@ export default {
         setTimeout(() => (this.persistentAnimate = false), 150) // Must match CSS animation duration.
       }
       else if (!this.persistent) {
-        this.$emit('update:modelValue', false)
-        this.$emit('input', false)
-        this.$emit('close', false)
+        this.showOverlay = false
+        this.$emit('before-close')
       }
 
       this.$emit('click', e)
+    },
+
+    // Wait until the end of the closing transition (v-show) to completely unmount (v-if).
+    // The onClose method is called twice from the transition: once for the v-show, and once for the v-if.
+    onClose () {
+      this.$emit('update:modelValue', false)
+      this.$emit('input', false)
+      if (!this.modelValue) this.$emit('close') // Only emit once.
+    }
+  },
+
+  created () {
+    this.showOverlay = this.modelValue
+  },
+
+  watch: {
+    modelValue (bool) {
+      if (bool) this.showOverlay = true
     }
   }
 }
@@ -84,7 +114,9 @@ export default {
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.3);
 
+  &--absolute {position: absolute;}
   &--persistent-animate {animation: 0.15s w-overlay-pop cubic-bezier(0.6, -0.28, 0.74, 0.05);}
+  &--no-pointer-event {pointer-events: none;}
 }
 
 @keyframes w-overlay-pop {

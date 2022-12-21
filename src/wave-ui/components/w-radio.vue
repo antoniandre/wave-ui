@@ -3,12 +3,12 @@ component(
   ref="formEl"
   :is="formRegister && !wRadios ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue, disabled: isDisabled }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="$emit('update:modelValue', inputValue = null);$emit('input', null)"
   :class="classes")
   input(
     ref="input"
-    :id="`w-radio--${_uid}`"
+    :id="`w-radio--${_.uid}`"
     type="radio"
     :name="inputName"
     :checked="inputValue || null"
@@ -20,16 +20,30 @@ component(
     :aria-checked="inputValue || 'false'"
     role="radio")
   template(v-if="hasLabel && labelOnLeft")
-    label.w-radio__label.w-form-el-shakable.pr2(v-if="$slots.default" :for="`w-radio--${_uid}`")
-      slot
-    label.w-radio__label.w-form-el-shakable.pr2(v-else-if="label" :for="`w-radio--${_uid}`" v-html="label")
+    label.w-radio__label.w-form-el-shakable.pr2(
+      v-if="$slots.default"
+      :for="`w-radio--${_.uid}`"
+      :class="labelClasses")
+      slot {{ label }}
+    label.w-radio__label.w-form-el-shakable.pr2(
+      v-else-if="label"
+      :for="`w-radio--${_.uid}`"
+      :class="labelClasses"
+      v-html="label")
   .w-radio__input(
     @click="$refs.input.focus();$refs.input.click()"
     :class="this.color")
   template(v-if="hasLabel && !labelOnLeft")
-    label.w-radio__label.w-form-el-shakable.pl2(v-if="$slots.default" :for="`w-radio--${_uid}`")
-      slot
-    label.w-radio__label.w-form-el-shakable.pl2(v-else-if="label" :for="`w-radio--${_uid}`" v-html="label")
+    label.w-radio__label.w-form-el-shakable.pl2(
+      v-if="$slots.default"
+      :for="`w-radio--${_.uid}`"
+      :class="labelClasses")
+      slot {{ label }}
+    label.w-radio__label.w-form-el-shakable.pl2(
+      v-else-if="label"
+      :for="`w-radio--${_.uid}`"
+      :class="labelClasses"
+      v-html="label")
 </template>
 
 <script>
@@ -41,13 +55,14 @@ export default {
   inject: { wRadios: { default: null } },
 
   props: {
-    value: { default: false }, // v-model to check or uncheck.
+    modelValue: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-radio are plugged on
     // the same v-model, this allows returning a custom value to the v-model.
     returnValue: {},
     label: { type: String },
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' },
     noRipple: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
@@ -66,7 +81,7 @@ export default {
 
   computed: {
     hasLabel () {
-      return (this.$slots.default && this.$slots.default.length) || this.label
+      return this.label || this.$slots.default
     },
     classes () {
       return {
@@ -80,7 +95,7 @@ export default {
 
   methods: {
     toggleFromOutside () {
-      this.inputValue = this.returnValue !== undefined ? (this.returnValue === this.value) : this.value
+      this.inputValue = this.returnValue !== undefined ? (this.returnValue === this.modelValue) : this.modelValue
     },
 
     onInput (e) {
@@ -107,11 +122,11 @@ export default {
   },
 
   created () {
-    if (this.value !== undefined) this.toggleFromOutside()
+    if (this.modelValue !== undefined) this.toggleFromOutside()
   },
 
   watch: {
-    value () {
+    modelValue () {
       this.toggleFromOutside()
     }
   }
@@ -129,6 +144,7 @@ $inactive-color: #666;
   // Contain the hidden radio button, so browser doesn't pan to it when outside of the screen.
   position: relative;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   &--disabled {
     cursor: not-allowed;
@@ -148,7 +164,7 @@ $inactive-color: #666;
     position: relative;
     border-radius: 100%;
     width: $small-form-el-size;
-    height: $small-form-el-size;
+    aspect-ratio: 1;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
@@ -192,7 +208,7 @@ $inactive-color: #666;
     content: "";
     position: absolute;
     width: inherit;
-    height: inherit;
+    aspect-ratio: 1;
     background-color: currentColor;
     border-radius: 100%;
     transform: scale(0);
@@ -206,7 +222,8 @@ $inactive-color: #666;
     animation: w-radio-ripple 0.55s 0.15s ease;
   }
 
-  :focus + &__input:before {
+  :focus ~ &__input:before,
+  :active ~ &__input:before {
     transform: scale(1.8);
     opacity: 0.2;
   }

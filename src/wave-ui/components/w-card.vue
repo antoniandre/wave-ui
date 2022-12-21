@@ -1,13 +1,12 @@
 <template lang="pug">
-.w-card(:class="classes" :style="styles")
+.w-card(:class="classes")
   .w-card__title(
-    v-if="$slots.title"
-    :class="{ 'w-card__title--has-toolbar': titleHasToolbar, [titleClass]: titleClass || false }")
-    slot(name="title")
-  .w-card__title(v-else-if="title" :class="titleClass || false" v-html="title")
+    v-if="$slots.title || title"
+    :class="{ 'w-card__title--has-toolbar': $slots.title && titleHasToolbar, ...titleClasses }")
+    slot(name="title") {{ title }}
   w-image.w-card__image(v-if="image" :src="image" v-bind="imgProps")
     slot(name="image-content")
-  .w-card__content(:class="contentClass || false")
+  .w-card__content(:class="contentClasses")
     slot
   .w-card__actions(
     v-if="$slots.actions"
@@ -16,6 +15,8 @@
 </template>
 
 <script>
+import { objectifyClasses } from '../utils/index'
+
 export default {
   name: 'w-card',
 
@@ -28,21 +29,31 @@ export default {
     title: { type: String },
     image: { type: String },
     imageProps: { type: Object },
-    titleClass: { type: String },
-    contentClass: { type: String }
+    titleClass: { type: [String, Object, Array] },
+    contentClass: { type: [String, Object, Array] }
   },
 
   emits: [],
 
   computed: {
+    titleClasses () {
+      return objectifyClasses(this.titleClass)
+    },
+
+    contentClasses () {
+      return objectifyClasses(this.contentClass)
+    },
+
     titleHasToolbar () {
       const { title } = this.$slots
-      return title && title.map(vnode => vnode.tag).join('').includes('w-toolbar')
+      return title && title().map(vnode => vnode.type.name).join('').includes('w-toolbar')
     },
+
     actionsHasToolbar () {
       const { actions } = this.$slots
-      return actions && actions.map(vnode => vnode.tag).join('').includes('w-toolbar')
+      return actions && actions().map(vnode => vnode.type.name).join('').includes('w-toolbar')
     },
+
     imgProps () {
       return {
         tag: 'div',
@@ -50,6 +61,7 @@ export default {
         ...this.imageProps
       }
     },
+
     classes () {
       return {
         [this.color]: this.color,
@@ -58,9 +70,6 @@ export default {
         'w-card--tile': this.tile,
         'w-card--shadow': this.shadow
       }
-    },
-    styles () {
-      return false
     }
   }
 }
@@ -93,6 +102,17 @@ export default {
   &__content {
     padding: 3 * $base-increment;
     flex-grow: 1;
+
+    // Only if there is no title bar.
+    &:first-child {
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+    }
+    &:last-child {
+    // Only if there is no actions bar.
+      border-bottom-left-radius: inherit;
+      border-bottom-right-radius: inherit;
+    }
   }
 
   &__actions {

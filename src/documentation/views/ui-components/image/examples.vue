@@ -28,7 +28,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can also use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -55,7 +55,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can also use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -78,7 +78,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can also use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -105,7 +105,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can also use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -127,7 +127,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can also use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -268,7 +268,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can also use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/',
         showError: false
@@ -293,7 +293,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can also use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -302,7 +302,8 @@ div
   p.
     In some cases, it can be convenient to have some content on top of the image.#[br]
     By default the content will be horizontally and vertically centered, but you could easily align it
-    at the bottom left for instance, with the #[code content-class] prop: #[code content-class="align-end justify-start pa2"].
+    at the bottom left for instance, with the #[code content-class] prop:
+    #[code content-class="align-end justify-start pa2"].
   example
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="2550 / 5098")
       span.title1.pink Wave UI
@@ -318,7 +319,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can also use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })

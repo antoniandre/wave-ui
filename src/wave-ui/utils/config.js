@@ -1,7 +1,6 @@
-import Vue from 'vue'
+import { reactive } from 'vue'
 
-// observable to react to a change of config.
-const config = Vue.observable({
+const config = reactive({
   breakpoints: {
     xs: 600,
     sm: 900,

@@ -1,5 +1,9 @@
 <template lang="pug">
-form.w-form(@submit="onSubmit" @reset="reset" novalidate :class="classes")
+form.w-form(
+  @submit="onSubmit"
+  @reset="reset"
+  novalidate
+  :class="classes")
   slot
 </template>
 
@@ -16,6 +20,17 @@ const asyncSome = async (array, predicate) => {
 export default {
   name: 'w-form',
 
+  props: {
+    modelValue: {},
+    allowSubmit: { type: Boolean },
+    noKeyupValidation: { type: Boolean },
+    noBlurValidation: { type: Boolean },
+    errorPlaceholders: { type: Boolean },
+    validationColor: { type: String, default: 'error' },
+    disabled: { type: Boolean },
+    readonly: { type: Boolean }
+  },
+
   provide () {
     return {
       formRegister: this.register,
@@ -25,16 +40,6 @@ export default {
       // To keep it reactive, we need an object not a list of props (by design in Vue).
       formProps: this.$props
     }
-  },
-
-  props: {
-    value: {},
-    allowSubmit: { type: Boolean },
-    noKeyupValidation: { type: Boolean },
-    noBlurValidation: { type: Boolean },
-    errorPlaceholders: { type: Boolean },
-    disabled: { type: Boolean },
-    readonly: { type: Boolean }
   },
 
   emits: [
@@ -72,7 +77,7 @@ export default {
     },
 
     unregister (formElement) {
-      this.formElements = this.formElements.filter(item => item._uid !== formElement._uid)
+      this.formElements = this.formElements.filter(item => item._.uid !== formElement._.uid)
     },
 
     /**
@@ -139,12 +144,10 @@ export default {
       el.Validation.message = validationMessage
     },
 
+    // Reset is called from:
+    // - the form `reset` event listener
+    // - the modelValue watcher when set to `null`.
     reset (e) {
-      // Reset is called from:
-      //   - the form `reset` event listener
-      //   - the value watcher when set to `null`.
-      // Prevent resetting twice on form reset that sets the value to null.
-      if (!e) return
       this.status = null
 
       // Since the whole w-form may be disabled or readonly,
@@ -173,11 +176,11 @@ export default {
   },
 
   created () {
-    this.status = this.value || null
+    this.status = this.modelValue || null
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       // When user clicks the reset button, reset the errors in each form element.
       if ((this.status === false && value) || (value === null && this.status !== null)) this.reset()
       this.status = value

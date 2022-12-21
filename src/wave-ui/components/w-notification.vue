@@ -1,7 +1,10 @@
 <template lang="pug">
 transition(:name="transitionName" appear)
   .w-notification(v-if="show" :class="classes" :style="styles")
-    w-alert.white--bg(v-bind="alertProps" @input="$emit('update:modelValue', false);$emit('input', false)")
+    w-alert(
+      v-bind="alertProps"
+      :class="alertClasses"
+      @update:model-value="$emit('update:modelValue', false);$emit('input', false)")
       slot
 </template>
 
@@ -11,7 +14,7 @@ export default {
 
   props: {
     // Notification props.
-    value: { default: true }, // Show or hide.
+    modelValue: { default: true }, // Show or hide.
     transition: { type: [String, Boolean], default: '' },
     timeout: { type: [Number, String], default: 0 },
     absolute: { type: Boolean },
@@ -49,7 +52,7 @@ export default {
 
   data () {
     return {
-      show: this.value,
+      show: this.modelValue,
       timeoutId: null
     }
   },
@@ -83,7 +86,7 @@ export default {
 
     alertProps () {
       return {
-        value: this.show,
+        modelValue: this.show,
         success: this.success,
         info: this.info,
         warning: this.warning,
@@ -116,6 +119,11 @@ export default {
       }
     },
 
+    alertClasses () {
+      if (this.bgColor || ((this.success || this.info || this.warning || this.error) && this.plain)) return null
+      return 'white--bg'
+    },
+
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || null
@@ -138,11 +146,11 @@ export default {
   },
 
   created () {
-    if (this.value && this.timeoutVal) this.countdown()
+    if (this.modelValue && this.timeoutVal) this.countdown()
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       clearTimeout(this.timeoutId)
       this.show = value
 

@@ -13,6 +13,10 @@ export default {
     absolute: { type: Boolean },
     fixed: { type: Boolean },
     bottom: { type: Boolean },
+    vertical: { type: Boolean },
+    left: { type: Boolean },
+    right: { type: Boolean },
+    width: { type: [Number, String], default: null },
     height: { type: [Number, String], default: null },
     noBorder: { type: Boolean },
     shadow: { type: Boolean }
@@ -21,11 +25,17 @@ export default {
   emits: [],
 
   computed: {
-    // Return the width or height value if defined, or false otherwise.
+    // Return the height value if defined, or false otherwise.
     toolbarHeight () {
       const h = this.height
       // If a number is passed without units, append `px`.
       return h && parseInt(h) == h ? h + 'px' : h
+    },
+    // Return the width value if defined, or false otherwise.
+    toolbarWidth () {
+      const w = this.width
+      // If a number is passed without units, append `px`.
+      return w && parseInt(w) == w ? w + 'px' : w
     },
     classes () {
       return {
@@ -33,13 +43,17 @@ export default {
         [`${this.bgColor}--bg`]: !!this.bgColor,
         'w-toolbar--absolute': !!this.absolute,
         'w-toolbar--fixed': !!this.fixed,
-        [`w-toolbar--${this.bottom ? 'bottom' : 'top'}`]: true,
+        [`w-toolbar--${this.bottom ? 'bottom' : 'top'}`]: !this.vertical,
+        [`w-toolbar--vertical w-toolbar--${this.right ? 'right' : 'left'}`]: this.vertical,
         'w-toolbar--no-border': this.noBorder,
         'w-toolbar--shadow': !!this.shadow
       }
     },
     styles () {
-      return this.height ? `height: ${this.toolbarHeight}` : false
+      return {
+        height: this.height && !this.vertical ? this.toolbarHeight : null,
+        width: this.width && this.vertical ? this.toolbarWidth : null
+      }
     }
   }
 }
@@ -58,16 +72,34 @@ export default {
   &--absolute, &--fixed {top: 0;left: 0;right: 0;}
   &--absolute {position: absolute;}
   &--fixed {position: fixed;}
+  &--absolute.w-toolbar--vertical, &--fixed.w-toolbar--vertical {top: 0;bottom: 0;}
+  &--absolute.w-toolbar--left, &--fixed.w-toolbar--left {left: 0;right: auto;}
+  &--absolute.w-toolbar--right, &--fixed.w-toolbar--right {left: auto;right: 0;}
+
+  // Horizontal.
   &--top {border-bottom: $border;}
   &--bottom {
     bottom: 0;
     top: auto;
     border-top: $border;
   }
-  &--no-border, &--shadow {
-    border-top-width: 0;
-    border-bottom-width: 0;
+
+  // Vertical.
+  &--vertical {
+    padding: (2 * $base-increment);
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
   }
+
+  &--left {border-right: $border;}
+  &--right {
+    right: 0;
+    left: auto;
+    border-left: $border;
+  }
+
+  &--no-border, &--shadow {border-width: 0;}
   &--shadow {box-shadow: $box-shadow;}
 
   .w-app > & {z-index: 200;}
@@ -79,6 +111,14 @@ export default {
   }
   .w-card__actions & {
     border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+  .w-card__content &--left {
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+  .w-card__content &--right {
+    border-top-right-radius: inherit;
     border-bottom-right-radius: inherit;
   }
 }

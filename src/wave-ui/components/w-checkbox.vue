@@ -3,12 +3,12 @@ component(
   ref="formEl"
   :is="formRegister && !wCheckboxes ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: isChecked, disabled: isDisabled }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="$emit('update:modelValue', isChecked = null);$emit('input', null)"
   :class="classes")
   input(
     ref="input"
-    :id="`w-checkbox--${_uid}`"
+    :id="`w-checkbox--${_.uid}`"
     type="checkbox"
     :name="inputName"
     :checked="isChecked || null"
@@ -22,16 +22,30 @@ component(
     :aria-checked="isChecked || 'false'"
     role="checkbox")
   template(v-if="hasLabel && labelOnLeft")
-    label.w-checkbox__label.w-form-el-shakable.pr2(v-if="$slots.default" :for="`w-checkbox--${_uid}`")
-      slot
-    label.w-checkbox__label.w-form-el-shakable.pr2(v-else-if="label" :for="`w-checkbox--${_uid}`" v-html="label")
+    label.w-checkbox__label.w-form-el-shakable.pr2(
+      v-if="$slots.default"
+      :for="`w-checkbox--${_.uid}`"
+      :class="labelClasses")
+      slot {{ label }}
+    label.w-checkbox__label.w-form-el-shakable.pr2(
+      v-else-if="label"
+      :for="`w-checkbox--${_.uid}`"
+      :class="labelClasses"
+      v-html="label")
   .w-checkbox__input(@click="$refs.input.focus();$refs.input.click()" :class="this.color")
-    svg(width="11px" height="9px" viewbox="0 0 12 9")
+    svg(viewBox="-0.5 0 12 10")
       polyline(points="1 5 4 8 10 2")
   template(v-if="hasLabel && !labelOnLeft")
-    label.w-checkbox__label.w-form-el-shakable.pl2(v-if="$slots.default" :for="`w-checkbox--${_uid}`")
-      slot
-    label.w-checkbox__label.w-form-el-shakable.pl2(v-else-if="label" :for="`w-checkbox--${_uid}`" v-html="label")
+    label.w-checkbox__label.w-form-el-shakable.pl2(
+      v-if="$slots.default"
+      :for="`w-checkbox--${_.uid}`"
+      :class="labelClasses")
+      slot {{ label }}
+    label.w-checkbox__label.w-form-el-shakable.pl2(
+      v-else-if="label"
+      :for="`w-checkbox--${_.uid}`"
+      :class="labelClasses"
+      v-html="label")
 </template>
 
 <script>
@@ -40,16 +54,20 @@ import FormElementMixin from '../mixins/form-elements'
 export default {
   name: 'w-checkbox',
   mixins: [FormElementMixin],
-  inject: { wCheckboxes: { default: null } },
+
+  inject: {
+    wCheckboxes: { default: null }
+  },
 
   props: {
-    value: { default: false }, // v-model to check or uncheck.
+    modelValue: { default: false }, // v-model to check or uncheck.
     // When `value` is taken by a v-model and multiple w-checkbox are plugged on
     // the same v-model, this allow returning to the v-model a custom value.
     returnValue: {},
     label: { type: String },
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' },
     noRipple: { type: Boolean },
     indeterminate: { type: Boolean },
     round: { type: Boolean }
@@ -61,7 +79,7 @@ export default {
 
   data () {
     return {
-      isChecked: this.value,
+      isChecked: this.modelValue,
       ripple: {
         start: false,
         end: false,
@@ -72,7 +90,7 @@ export default {
 
   computed: {
     hasLabel () {
-      return (this.$slots.default && this.$slots.default.length) || this.label
+      return this.label || this.$slots.default
     },
     classes () {
       return {
@@ -110,7 +128,7 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       this.isChecked = value
     }
   }
@@ -128,11 +146,9 @@ $inactive-color: #666;
   // Contain the hidden radio button, so browser doesn't pan to it when outside of the screen.
   position: relative;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
-  &--disabled {
-    cursor: not-allowed;
-    -webkit-tap-highlight-color: transparent;
-  }
+  &--disabled {cursor: not-allowed;}
 
   // The hidden real checkbox.
   input[type="checkbox"] {
@@ -146,7 +162,7 @@ $inactive-color: #666;
   &__input {
     position: relative;
     width: $small-form-el-size;
-    height: $small-form-el-size;
+    aspect-ratio: 1;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
@@ -157,8 +173,8 @@ $inactive-color: #666;
 
   // The checkmark - visible when checked.
   &__input svg {
-    width: auto;
-    height: auto;
+    width: 70%;
+    aspect-ratio: 1;
     fill: none;
     stroke-width: 2;
     stroke: white;
@@ -169,7 +185,6 @@ $inactive-color: #666;
     transition: $transition-duration ease-out;
     opacity: 0;
     position: relative;
-    top: -0.5px; // For browser zoom levels.
     z-index: 1;
 
     :checked ~ & {
@@ -184,7 +199,7 @@ $inactive-color: #666;
     content: '';
     position: absolute;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     border: $outline-width solid $inactive-color;
     border-radius: $border-radius;
     transition: $transition-duration ease-in-out;
@@ -215,7 +230,7 @@ $inactive-color: #666;
     content: "";
     position: absolute;
     width: inherit;
-    height: inherit;
+    aspect-ratio: 1;
     background-color: currentColor;
     border-radius: 100%;
     transform: scale(0);
@@ -229,7 +244,8 @@ $inactive-color: #666;
     animation: w-checkbox-ripple 0.55s 0.15s ease;
   }
 
-  :focus ~ &__input:before {
+  :focus ~ &__input:before,
+  :active ~ &__input:before {
     transform: scale(1.8);
     opacity: 0.2;
   }

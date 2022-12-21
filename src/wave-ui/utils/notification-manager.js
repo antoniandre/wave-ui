@@ -1,11 +1,13 @@
-import Vue from 'vue'
+// @todo: find a way to use private fields with Vue 3 proxies.
+// https://github.com/tc39/proposal-class-fields/issues/106
+// https://github.com/tc39/proposal-class-fields/issues/227
 
 export default class NotificationManager {
   static instance
   notifications
-  // Private fields.
-  #uid // A unique ID for each notification.
-  #notificationDefaults
+   // Private fields.
+  _uid // A unique ID for each notification.
+  _notificationDefaults
 
   constructor () {
     // Singleton pattern.
@@ -13,8 +15,8 @@ export default class NotificationManager {
 
     NotificationManager.instance = this
     this.notifications = []
-    this.#uid = 0
-    this.#notificationDefaults = {
+    this._uid = 0
+    this._notificationDefaults = {
       _uid: 0,
       _value: true,
       message: '',
@@ -24,7 +26,7 @@ export default class NotificationManager {
   }
 
   notify (...args) {
-    let notification = { ...this.#notificationDefaults, _uid: this.#uid++ }
+    let notification = { ...this._notificationDefaults, _uid: this._uid++ }
 
     if (typeof args[0] === 'object') notification = { ...notification, ...args[0] }
     else {
@@ -36,7 +38,7 @@ export default class NotificationManager {
         timeout: timeout || timeout === 0 ? parseFloat(timeout) : 4000
       }
     }
-    Vue.set(this.notifications, this.notifications.length, notification)
+    this.notifications.push(notification)
     if (~~notification.timeout !== 0) setTimeout(() => this.dismiss(notification._uid), notification.timeout)
   }
 

@@ -1,15 +1,17 @@
 <template lang="pug">
 w-overlay.w-dialog(
-  :value="showWrapper"
+  :model-value="showWrapper"
   :persistent="persistent"
   :persistent-no-animation="persistentNoAnimation"
   @click="onOutsideClick"
+  @close="onClose"
   :bg-color="overlayColor"
   :opacity="overlayOpacity"
   :class="classes")
-  transition(:name="transition" appear @after-leave="onClose")
+  transition(:name="transition" appear @after-leave="onBeforeClose")
     w-card.w-dialog__content(
-      v-if="showContent"
+      v-show="showContent"
+      ref="dialog"
       no-border
       :color="color"
       :bg-color="bgColor"
@@ -18,10 +20,10 @@ w-overlay.w-dialog(
       :content-class="contentClass"
       :title="title || undefined"
       :style="contentStyles")
-      template(v-if="$slots.title" v-slot:title)
+      template(#title v-if="$slots.title")
         slot(name="title")
       slot
-      template(v-if="$slots.actions" v-slot:actions)
+      template(#actions v-if="$slots.actions")
         slot(name="actions")
 </template>
 
@@ -30,7 +32,7 @@ export default {
   name: 'w-dialog',
 
   props: {
-    value: { default: true },
+    modelValue: { default: true },
     width: { type: [Number, String], default: 0 },
     fullscreen: { type: Boolean },
     persistent: { type: Boolean },
@@ -47,12 +49,20 @@ export default {
     overlayOpacity: { type: [Number, String, Boolean] }
   },
 
-  emits: ['input', 'update:modelValue', 'close'],
+  provide () {
+    return {
+      // If a detachable is used inside a w-drawer without an appendTo, default to the drawer element
+      // instead of the w-app.
+      detachableDefaultRoot: () => this.$refs.dialog.$el || null
+    }
+  },
+
+  emits: ['input', 'update:modelValue', 'before-close', 'close'],
 
   data () {
     return {
-      showWrapper: this.value,
-      showContent: this.value
+      showWrapper: this.modelValue,
+      showContent: this.modelValue
     }
   },
 
@@ -80,23 +90,23 @@ export default {
         this.showContent = false
         // If fade transition close both dialog and overlay at the same time
         // (don't need to wait for the end of the dialog transition).
-        if (this.transition === 'fade') this.onClose()
+        if (this.transition === 'fade') this.onBeforeClose()
       }
     },
-    onClose () {
+    onBeforeClose () {
       this.showWrapper = false
+      this.$emit('before-close')
+    },
+    onClose () {
       this.$emit('update:modelValue', false)
       this.$emit('input', false)
-      this.$emit('close', false)
+      this.$emit('close')
     }
   },
 
   watch: {
-    value (value) {
-      // If value is true, mount the wrapper in DOM and open the dialog.
-      // If value is false, keep the wrapper in DOM and close the dialog;
-      // At the end of the dialog transition the value is updated and wrapper removed from the DOM.
-      if (value) this.showWrapper = value
+    modelValue (value) {
+      this.showWrapper = value
       this.showContent = value
     }
   }
@@ -113,7 +123,7 @@ export default {
     overflow: auto;
     background-color: #fff;
 
-    .w-dialog--fullscreen & {
+    .w-dialog--fullscreen > & {
       flex: 1 1 auto;
       height: 100%;
       max-width: none;

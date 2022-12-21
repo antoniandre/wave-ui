@@ -15,7 +15,7 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import Wtextarea from '@/wave-ui/components/w-textarea.vue'
 
 const propsDescs = {
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>The text content of the textarea.<br>Gets updated on textarea input.',
+  modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>The text content of the textarea.<br>Gets updated on textarea input.',
   label: 'Sets a visible label for the textarea.',
   labelPosition: 'Sets the position of the label to one of the following positions: \'left\', \'right\', \'inside\'.',
   innerIconLeft: 'Adds an icon on the left inside the textarea.<br>Accepts a string: e.g. <code>mdi mdi-eye</code>.',
@@ -23,8 +23,9 @@ const propsDescs = {
   // When label is inside, allows to move the label above on focus or when filled.
   staticLabel: 'Prevents moving the label above the textarea when the <code>labelPosition</code> is equal to <code>inside</code>. If a placeholder is present, it will be hidden and the label will be displayed instead.<br>When a value is set the static label is replaced by the textual value.',
   placeholder: 'Provide a placeholder for the textarea. If a label is positioned inside, it will be moved above the textarea so it doesn\'t overlap.',
-  color: 'Applies a color to the textarea\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  bgColor: 'Applies a color to the textarea\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  color: 'Applies a color to the textarea\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  labelColor: 'Applies a specific color to the textarea\'s label. Note that on validation failure, the validation-color takes precedence.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Applies a color to the textarea\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   dark: false, // Hide the prop. 'When set to true, the text color will be set to white.',
   outline: 'The outline style applies the provided <code>color</code> (by default the <code>primary</code> color is used) to the text and border and no background color is set.',
   shadow: 'Applies a drop shadow to the textarea.',

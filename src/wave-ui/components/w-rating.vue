@@ -3,14 +3,13 @@ component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: rating, disabled: isDisabled, readonly: isReadonly }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="$emit('update:modelValue', rating = null);$emit('input', null)"
   :class="classes")
   input(:id="inputName" :name="inputName" type="hidden" :value="rating")
-  template(v-for="i in max")
-    slot(v-if="$scopedSlots.item" name="item" :index="i + 1")
+  template(v-for="i in max" :key="i")
+    slot(v-if="$slots.item" name="item" :index="i + 1")
     button.w-rating__button(
-      :key="i"
       :disabled="isDisabled || isReadonly"
       @mouseenter="hover = i"
       @mouseleave="hover = 0"
@@ -37,7 +36,7 @@ export default {
   mixins: [FormElementMixin],
 
   props: {
-    value: {},
+    modelValue: {},
     max: { type: [Number, String], default: 5 },
     color: { type: String, default: 'primary' },
     bgColor: { type: String, default: 'grey-light4' },
@@ -56,7 +55,7 @@ export default {
 
   data () {
     return {
-      rating: parseFloat(this.value || 0),
+      rating: parseFloat(this.modelValue || 0),
       hover: 0, // The index (starts at 1) of the currently hovered button.
       hasFocus: 0, // The index (starts at 1) of the currently focused button.
       ripple: {
@@ -166,13 +165,14 @@ export default {
   &__button {
     position: relative;
     width: 1.1em;
-    height: 1.1em;
+    aspect-ratio: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border: none;
     background: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     @include default-transition($fast-transition-duration);
 
     // Disabled & readonly.
@@ -215,6 +215,7 @@ export default {
     position: absolute;
     left: 0;
     width: 100%;
+    height: 100%;
     font-size: 1em;
     justify-content: flex-start;
     overflow: hidden;
@@ -246,13 +247,16 @@ export default {
     animation: w-rating-ripple 0.55s ease;
   }
 
-  &__button:focus:after {
+  &__button:focus:after,
+  &__button:active:after {
     transform: scale(1.8);
     opacity: 0.2;
   }
   &__button--on:focus:after {
     transform: scale(1.8);
   }
+  .w-rating--disabled &__button:after,
+  .w-rating--readonly &__button:after {opacity: 0;}
 
   // After ripple reset to default state, then remove the class via js and the
   // `:focus + &__button:after` will re-transition to normal focused outline.

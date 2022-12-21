@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-spinner(v-if="value || value === undefined" :class="classes" :style="styles")
+.w-spinner(v-if="modelValue || modelValue === undefined" :class="classes" :style="styles")
   span(v-if="isThreeDots")
 </template>
 
@@ -7,7 +7,7 @@
 export default {
   name: 'w-spinner',
   props: {
-    value: {},
+    modelValue: {},
     color: { type: String, default: 'primary' },
     xs: { type: Boolean },
     sm: { type: Boolean },
@@ -61,7 +61,7 @@ export default {
   align-self: center;
   font-size: 2rem;
   width: 1em;
-  height: 1em;
+  aspect-ratio: 1;
 
   &.size--xs {font-size: round(0.9 * divide($base-font-size, 2)) * 2;}
   &.size--sm {font-size: round(1.5 * $base-font-size);}
@@ -73,7 +73,7 @@ export default {
     content: '';
     position: absolute;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     top: 0;
     left: 0;
     background-color: currentColor;

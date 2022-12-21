@@ -26,9 +26,9 @@ div
   title-link(h2) V-model
   p The badge appears if one of these conditions is fulfilled:
   ul
-    li No v-model or value is provided but a badge slot is.
+    li No #[code v-model] or #[code model-value] is provided but a badge slot is.
     li.
-      A v-model or a value is given and is not #[code null], #[code false] or #[code 0].#[br]
+      A #[code v-model] or a #[code model-value] is given and is not #[code null], #[code false] or #[code 0].#[br]
       If you want to display one of these values, you can cast it to a string and it will show up
       (e.g. #[code '0'] instead of #[code 0]).
   example(content-class="mt1")
@@ -597,7 +597,7 @@ div
     For instance, if you increase the font size of the badge like in this example, the natural behavior
     of the badge is to increase its width to adapt to its content.#[br]
     With the option #[code round] you can force it to be round.
-  example(content-class="mt1")
+  example(content-class="mt1 w-flex align-center")
     w-badge(bg-color="error")
       template(#badge)
         span.size--sm 11

@@ -1,11 +1,14 @@
 <template lang="pug">
 .w-progress(:class="classes" :style="styles")
   //- Linear progress.
-  .w-progress__progress(v-if="!circle" :class="{ full: progressValue === 100 }" :style="`width: ${progressValue}%`")
+  .w-progress__progress(
+    v-if="!circle"
+    :class="{ full: progressValue === 100 }"
+    :style="`width: ${progressValue}%`")
 
   //- Circular progress.
-  template(v-else)
-    svg(:viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`")
+  svg(v-else :viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`")
+      //- Background first, in SVG there is no z-index.
       circle.bg(
         v-if="bgColor || this.progressValue > -1"
         :class="bgColor"
@@ -15,30 +18,21 @@
         fill="transparent"
         :stroke-dasharray="circleCircumference"
         :stroke-width="stroke")
-    svg.w-progress__progress(
-      :viewBox="`${circleCenter / 2} ${circleCenter / 2} ${circleCenter} ${circleCenter}`"
-      :style="`stroke-dashoffset: ${(1 - (progressValue / 100)) * circleCircumference}`")
-      circle(
+      circle.w-progress__progress(
         :cx="circleCenter"
         :cy="circleCenter"
         :r="circleRadius"
         fill="transparent"
         :stroke-width="stroke"
         :stroke-linecap="roundCap && 'round'"
-        :stroke-dasharray="circleCircumference")
+        :stroke-dasharray="circleCircumference"
+        :style="`stroke-dashoffset: ${(1 - (progressValue / 100)) * circleCircumference}`")
 
   .w-progress__label(v-if="label || $slots.default" :class="labelColor || false")
     slot {{ Math.round(progressValue) }}{{ circle ? '' : '%' }}
 </template>
 
 <script>
-/**
- * This component (circular) is hacked to work on Edge as it does not support transform on svg elements.
- * https://caniuse.com/#feat=mdn-css_properties_transform-origin_support_in_svg
- * It is meant to be 2 circles in 1 svg, with animation on the circle, now instead, there are 2 svgs,
- * and the animation is on the second svg itself.
- */
-
 // For circular progress.
 const circleSize = 40
 const circleRadius = circleSize / 2
@@ -48,7 +42,7 @@ export default {
   name: 'w-progress',
 
   props: {
-    value: { type: [Number, String, Boolean], default: -1 },
+    modelValue: { type: [Number, String, Boolean], default: -1 },
     label: { type: Boolean },
     roundCap: { type: Boolean },
     color: { type: String, default: 'primary' },
@@ -83,7 +77,7 @@ export default {
 
   computed: {
     progressValue () {
-      return parseFloat(this.value)
+      return parseFloat(this.modelValue)
     },
 
     circleCenter () {
@@ -106,7 +100,7 @@ export default {
         [`${this.bgColor}--bg`]: this.bgColor && !this.circle,
         [`w-progress--${this.position}`]: !this.circle && (this.absolute || this.fixed),
         'w-progress--default-bg': !this.bgColor,
-        'w-progress--indeterminate': this.value === -1,
+        'w-progress--indeterminate': this.modelValue === -1,
         'w-progress--outline': !this.circle && this.outline,
         'w-progress--tile': !this.circle && this.tile,
         'w-progress--stripes': !this.circle && this.stripes,
@@ -215,12 +209,12 @@ $circle-size: 40;
     background-image: linear-gradient(
                         -45deg,
                         rgba(255, 255, 255, 0.2) 25%,
-                        transparent 25%,
-                        transparent 50%,
+                        rgba(255, 255, 255, 0) 25%,
+                        rgba(255, 255, 255, 0) 50%,
                         rgba(255, 255, 255, 0.2) 50%,
                         rgba(255, 255, 255, 0.2) 75%,
-                        transparent 75%,
-                        transparent
+                        rgba(255, 255, 255, 0) 75%,
+                        rgba(255, 255, 255, 0)
                       );
     background-size: 50px 50px;
     animation: w-progress-stripes 2s infinite linear;
@@ -253,7 +247,7 @@ $circle-size: 40;
   &--circular {
     display: inline-flex;
     width: 3em;
-    height: auto;
+    aspect-ratio: 1;
     font-size: $base-font-size;
 
     svg {display: block;width: 100%;}
@@ -261,19 +255,10 @@ $circle-size: 40;
     &.w-progress--default-bg circle.bg {stroke: rgba(0, 0, 0, 0.1);}
 
     .w-progress__progress {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-
-      circle {
-        stroke: currentColor;
-        stroke-dashoffset: inherit;
-        will-change: stroke-dashoffset;
-      }
+      transform-origin: 100% 100%;
       transform: rotate(-90deg);
-      will-change: transform;
+      stroke: currentColor;
+      will-change: stroke-dashoffset;
       @include default-transition;
     }
     &.w-progress--round-cap .w-progress__progress {stroke-linecap: round;}

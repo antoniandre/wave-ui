@@ -3,17 +3,19 @@ component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: rangeValueScaled, disabled: isDisabled, readonly: isReadonly }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="rangeValuePercent = 0;updateRangeValueScaled()"
-  wrap
+  :wrap="formRegister || null"
   :class="wrapperClasses")
   label.w-slider__label.w-slider__label--left.w-form-el-shakable(
     v-if="$slots['label-left']"
-    :for="`button--${_uid}`")
+    :for="`button--${_.uid}`"
+    :class="labelClasses")
     slot(name="label-left")
   label.w-slider__label.w-slider__label--left.w-form-el-shakable(
     v-else-if="labelLeft"
-    :for="`button--${_uid}`"
+    :for="`button--${_.uid}`"
+    :class="labelClasses"
     v-html="labelLeft")
   .w-slider__track-wrap
     .w-slider__track(
@@ -32,20 +34,21 @@ component(
       .w-slider__thumb(:style="thumbStyles")
         button.w-slider__thumb-button(
           ref="thumb"
-          :id="`button--${_uid}`"
+          :id="`button--${_.uid}`"
           :class="[color]"
           :name="inputName"
-          :value="rangeValueScaled"
+          :model-value="rangeValueScaled"
           :disabled="isDisabled || null"
           :readonly="isReadonly || null"
           :aria-readonly="isReadonly ? 'true' : 'false'"
+          :tabindex="isDisabled || isReadonly ? -1 : null"
           @keydown.left="onKeyDown($event, -1)"
           @keydown.right="onKeyDown($event, 1)"
           @focus="$emit('focus', $event)"
           @click.prevent)
         label.w-slider__thumb-label(
           v-if="thumbLabel"
-          :for="`button--${_uid}`"
+          :for="`button--${_.uid}`"
           :class="thumbClasses")
           div(v-if="thumbLabel === 'droplet'")
             slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
@@ -64,11 +67,13 @@ component(
         style="left: 100%") {{ this.maxVal }}
   label.w-slider__label.w-slider__label--right.w-form-el-shakable(
     v-if="$slots['label-right']"
-    :for="`button--${_uid}`")
+    :for="`button--${_.uid}`"
+    :class="labelClasses")
     slot(name="label-right")
   label.w-slider__label.w-slider__label--right.w-form-el-shakable(
     v-else-if="labelRight"
-    :for="`button--${_uid}`"
+    :for="`button--${_.uid}`"
+    :class="labelClasses"
     v-html="labelRight")
 </template>
 
@@ -80,9 +85,10 @@ export default {
   mixins: [FormElementMixin],
 
   props: {
-    value: { type: Number, default: 0 },
+    modelValue: { type: Number, default: 0 },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
+    labelColor: { type: String, default: 'primary' },
     stepLabels: { type: [Boolean, Array] },
     thumbLabel: { type: [Boolean, String] }, // One of true, false, 'droplet'.
     thumbLabelClass: { type: String },
@@ -235,13 +241,13 @@ export default {
   beforeMount () {
     this.$nextTick(() => {
       this.track.el = this.$refs.track
-      this.rangeValueScaled = this.value
-      this.rangeValuePercent = this.scaledToPercent(this.value)
+      this.rangeValueScaled = this.modelValue
+      this.rangeValuePercent = this.scaledToPercent(this.modelValue)
     })
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       if (this.rangeValueScaled !== value) {
         this.rangeValueScaled = value
         this.rangeValuePercent = this.scaledToPercent(value)
@@ -289,7 +295,7 @@ export default {
       transform: translateX(-50%);
       top: 0;
       width: $base-increment;
-      height: $base-increment;
+      aspect-ratio: 1;
       background-color: rgba(0, 0, 0, 0.2);
       border-radius: 99em;
       // box-shadow: 0 0 0 1px #fff;
@@ -352,7 +358,7 @@ export default {
   &__thumb {
     position: absolute;
     width: 3 * $base-increment;
-    height: 3 * $base-increment;
+    aspect-ratio: 1;
     left: 100%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -367,7 +373,7 @@ export default {
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     border: none;
     border-radius: 99em;
     cursor: pointer;
@@ -378,16 +384,17 @@ export default {
     &:before, &:after {
       content: '';
       position: absolute;
+      border-radius: inherit;
+      @include default-transition;
     }
+    // Colored border on thumb when hover and active - but with a transparency.
     &:before {
       left: 0;
       right: 0;
       top: 0;
       bottom: 0;
       opacity: 0.5;
-      border-radius: inherit;
       border: 1px solid currentColor;
-      @include default-transition;
     }
     &:hover:before, &:focus:before {opacity: 0.7;}
     &:active:before, .w-slider--dragging &:before {
@@ -398,13 +405,17 @@ export default {
     .w-slider--disabled &:before,
     .w-slider--readonly &:before {box-shadow: none;opacity: 0.4;}
 
-    // For fat fingers.
+    // The outline when focused, but also a bigger reactive zone for fat fingers when not.
     &:after {
-      left: -6px;
-      right: -6px;
-      top: -6px;
-      bottom: -6px;
+      left: -2 * $base-increment;
+      right: -2 * $base-increment;
+      top: -2 * $base-increment;
+      bottom: -2 * $base-increment;
+      opacity: 0;
+      background-color: currentColor;
     }
+    &:focus:after {opacity: 0.15;}
+    .w-slider--dragging &:after, &:active:after {opacity: 0.1;transform: scale(1.2);}
   }
 
   // Thumb label.
@@ -441,7 +452,7 @@ export default {
       transform: translateX(-50%) rotate(-45deg);
       border-radius: 99em 99em 99em 0;
       width: 2.8em;
-      height: 2.8em;
+      aspect-ratio: 1;
 
       & > div {
         position: absolute;

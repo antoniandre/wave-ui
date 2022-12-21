@@ -204,7 +204,7 @@ div
     To use the push-content layout, an explicit drawer #[code width] is required (don't only set a
     width via CSS). Any valid CSS width will work.#[br]
     The pushable content should be provided via the #[code pushable] slot.
-  example(content-class="relative pa0" flex :blank-codepen="['css']")
+  example(content-class="relative pa0" app-props-string="" :blank-codepen="['css']")
     w-drawer(
       v-model="openPushContentRightDrawer"
       push-content
@@ -252,7 +252,7 @@ div
         openDrawer: false
       })
 
-  example(content-class="relative pa0" flex :blank-codepen="['css']")
+  example(content-class="relative pa0" app-props-string="" :blank-codepen="['css']")
     w-drawer(
       v-model="openPushContentLeftDrawer"
       push-content
@@ -555,7 +555,6 @@ div
       outline
       absolute
       round
-
       icon="wi-cross")
     .w-flex.align-center.justify-center.fill-height
       w-button(@click="openLeftDrawer = false;openRightDrawer = true").
@@ -568,7 +567,6 @@ div
       outline
       absolute
       round
-
       icon="wi-cross")
 
   w-drawer(v-model="openTopDrawer" top :no-overlay="noOverlay" :overlay-color="overlayColor")
@@ -578,7 +576,6 @@ div
       outline
       absolute
       round
-
       icon="wi-cross")
 
   w-drawer(

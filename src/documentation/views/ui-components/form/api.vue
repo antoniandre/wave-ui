@@ -14,13 +14,14 @@ div
 import WForm from '@/wave-ui/components/w-form.vue'
 
 const propsDescs = {
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Contains the status of the form validity at all times. Three values are possible: <code>null</code> when pristine (untouched), <code>false</code> when invalid, <code>true</code> when valid.<br>This value gets updated every time a validation is triggered on a single field or on all the fields at once on form submit.<br>Setting this value to <code>null</code> will reset the form.',
+  modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Contains the status of the form validity at all times. Three values are possible: <code>null</code> when pristine (untouched), <code>false</code> when invalid, <code>true</code> when valid.<br>This value gets updated every time a validation is triggered on a single field or on all the fields at once on form submit.<br>Setting this value to <code>null</code> will reset the form.',
   allowSubmit: 'Native HTML submits the form to the server when all the form elements are valid.<br>Usually and by default, the form submission is prevented and an AJAX call is made from the front end. This is completely up to the developer.',
   noKeyupValidation: 'Prevents the form element validation on keyup (happening by default).',
   noBlurValidation: 'Prevents the form element validation on blur (happening by default).',
   errorPlaceholders: 'Reserves a space under all the form elements so that triggering an error and showing the error message will not change the height of the form.',
   disabled: 'Disables all the form fields all at once, making them unreactive to user interactions.',
-  readonly: 'Set all the form fields to readonly all at once. The fields will still look interactive but their value will not be editable by user interaction.'
+  readonly: 'Set all the form fields to readonly all at once. The fields will still look interactive but their value will not be editable by user interaction.',
+  validationColor: 'Applies a specific color to any input field failing the validation.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.'
 }
 
 const slots = {
@@ -77,7 +78,7 @@ const events = {
     }
   },
   'update:errorsCount': {
-    description: 'Emitted every time the errorsCount changes. To be used with <code>:errors-count.sync</code> on Vue 2.x or <code>v-model:errors-count</code> on Vue 3.',
+    description: 'Emitted every time the errorsCount changes. To be used with <code>:errors-count.sync</code> in Vue 2 or <code>v-model:errors-count</code> in Vue 3.',
     params: {
       '[Integer]': 'The number of errors in the form.'
     }

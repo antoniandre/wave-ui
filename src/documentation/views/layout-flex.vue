@@ -128,6 +128,36 @@ main
       .box
       .box
       .box
+    template(#pug).
+      p.mb1 .justify-start (default)
+      w-flex.pa3.blue-light5--bg(justify-start)
+        .box
+        .box
+        .box
+
+      p.mt4.mb1 .justify-center
+      w-flex.pa3.blue-light5--bg(justify-center)
+        .box
+        .box
+        .box
+
+      p.mt4.mb1 .justify-end
+      w-flex.pa3.blue-light5--bg(justify-end)
+        .box
+        .box
+        .box
+
+      p.mt4.mb1 .justify-space-between
+      w-flex.pa3.blue-light5--bg(justify-space-between)
+        .box
+        .box
+        .box
+
+      p.mt4.mb1 .justify-space-evenly
+      w-flex.pa3.blue-light5--bg(justify-space-evenly)
+        .box
+        .box
+        .box
     template(#html).
       &lt;p&gt;.justify-start (default)&lt;/p&gt;
       &lt;w-flex justify-start class="blue-light5--bg pa3"&gt;
@@ -197,6 +227,35 @@ main
           .box
           .box
           .box
+    template(#pug).
+      w-flex(basis-zero wrap)
+        .grow.mx1
+          p.mb1 .justify-start (default)
+          w-flex.wrapper(column align-center justify-start)
+            .box
+            .box
+            .box
+
+        .grow.mx1
+          p.mb1 .justify-center
+          w-flex.wrapper(column align-center justify-center)
+            .box
+            .box
+            .box
+
+        .grow.mx1
+          p.mb1 .justify-space-between
+          w-flex.wrapper(column align-center justify-space-between)
+            .box
+            .box
+            .box
+
+        .grow.mx1
+          p.mb1 .justify-end
+          w-flex.wrapper(column align-center justify-end)
+            .box
+            .box
+            .box
     template(#html).
       &lt;w-flex basis-zero wrap&gt;
         &lt;div class="grow mx1"&gt;
@@ -276,6 +335,28 @@ main
           .box.align-self-start
           .box.align-self-center
           .box.align-self-end
+    template(#pug).
+      w-flex(basis-zero wrap)
+        .grow.mx1.xs12.sm4
+          p 1. Default
+          w-flex.wrapper(justify-center)
+            .box
+            .box
+            .box
+
+        .grow.mx1.xs12.sm4
+          p 2. Align center
+          w-flex.wrapper(justify-center align-center)
+            .box
+            .box
+            .box
+
+        .grow.mx1.xs12.sm4
+          p 3. Align self start, center, end
+          w-flex.wrapper(justify-center)
+            .box.align-self-start
+            .box.align-self-center
+            .box.align-self-end
     template(#html).
       &lt;w-flex basis-zero&gt;
         &lt;div class="grow mx1"&gt;
@@ -339,6 +420,28 @@ main
           .box.align-self-start
           .box.align-self-center
           .box.align-self-end
+    template(#pug).
+      w-flex(basis-zero wrap)
+        .grow.mx1.xs12.sm4
+          p 1. Default
+          w-flex.wrapper(column justify-center)
+            .box
+            .box
+            .box
+
+        .grow.mx1.xs12.sm4
+          p 2. Align-center
+          w-flex.wrapper(column justify-center align-center)
+            .box
+            .box
+            .box
+
+        .grow.mx1.xs12.sm4
+          p 3. Align self start, center, end
+          w-flex.wrapper(column justify-center)
+            .box.align-self-start
+            .box.align-self-center
+            .box.align-self-end
     template(#html).
       &lt;w-flex basis-zero&gt;
         &lt;div class="grow mx1"&gt;
@@ -402,6 +505,21 @@ main
           .box
           .box.mxa
           .box
+    template(#pug).
+      w-flex(basis-zero)
+        .grow.mx1
+          p 1. Row direction
+          w-flex.wrapper(justify-center align-center)
+            .box.maa
+            .box.maa
+            .box.maa
+
+        .grow.mx1
+          p 2. Column direction
+          w-flex.wrapper(column justify-center)
+            .box
+            .box.mxa
+            .box
     template(#html).
       &lt;w-flex basis-zero&gt;
         &lt;div class="grow mx1"&gt;
@@ -453,6 +571,12 @@ main
         .box
         .spacer
         .box
+      template(#pug).
+        w-flex.wrapper(align-center)
+          .box
+          .box
+          .spacer
+          .box
       template(#html).
         &lt;w-flex align-center class="wrapper"&gt;
           &lt;div class="box"&gt;&lt;/div&gt;
@@ -479,6 +603,12 @@ main
         .box.shrink
         .spacer
         .box.shrink
+      template(#pug).
+        w-flex.wrapper(column)
+          .box.shrink
+          .box.shrink
+          .spacer
+          .box.shrink
       template(#html).
         &lt;w-flex column class="wrapper"&gt;
           &lt;div class="box shrink"&gt;&lt;/div&gt;
@@ -498,6 +628,177 @@ main
           padding: 12px;
           height: 140px;
         }
+
+  title-link(h2) Gap
+  p.
+    The #[strong.code w-flex] component accepts a #[code gap] option to equally space out the children
+    inside the flex container.
+  example
+    w-flex(gap="6")
+      .box.grow(v-for="i in 4")
+
+    w-flex.mt12(gap="2")
+      .box.grow(v-for="i in 6")
+
+    template(#pug).
+      w-flex(gap="6")
+        .box.grow(v-for="i in 4")
+
+      w-flex.mt12(gap="2")
+        .box.grow(v-for="i in 6")
+    template(#html).
+      &lt;w-flex gap="3"&gt;
+        &lt;div v-for="i in 4" class="box grow"&gt;&lt;/div&gt;
+      &lt;/w-flex&gt;
+
+      &lt;w-flex gap="6" class="mt12"&gt;
+        &lt;div v-for="i in 6" class="box grow"&gt;&lt;/div&gt;
+      &lt;/w-flex&gt;
+    template(#css).
+      .box {
+        background-color: #9bbff9;
+        border: 1px solid #55f;
+        padding: 12px;
+      }
+  alert(success)
+    | You can also use the #[code gap] option with the breakpoint-based grid classes
+    | (E.g. #[code .xs6], etc.) when the boxes stay on a single line.
+    example.lighter
+      w-flex(gap="3")
+        .box.xs3.code .xs3
+        .box.xs3.code .xs3
+        .box.xs6.code .xs6
+      template(#pug).
+        w-flex(gap="3")
+          .box.xs3 .xs3
+          .box.xs3 .xs3
+          .box.xs6 .xs6
+      template(#html).
+          &lt;w-flex gap="3"&gt;
+            &lt;div class="box xs3"&gt;&lt;/div&gt;
+            &lt;div class="box xs3"&gt;&lt;/div&gt;
+            &lt;div class="box xs6"&gt;&lt;/div&gt;
+          &lt;/w-flex&gt;
+      template(#css).
+        .box {
+          background-color: #e2ecfc;
+          border: 1px solid #b2c2f0;
+          padding: 12px 0;
+          text-align: center;
+        }
+  title-link(h3) Caveat
+  alert(warning).
+    The #[code gap] option will not work with both wrap (#[code flex-wrap: wrap]) and the
+    breakpoint-based grid system. The gap would overflow from the 100% total width distributed
+    among the children of the #[strong.code w-flex], like illustrated in the following examples.
+  w-flex.smd-column(wrap)
+    .grow
+      | Without gap
+      example.lighter.mt2.grow
+        .yellow-light5--bg.bd1
+          w-flex(wrap)
+            .box.xs6.code(v-for="i in 4") .xs6
+        template(#pug).
+          .yellow-light5--bg.bd1
+            w-flex(wrap)
+              .box.xs6(v-for="i in 4") .xs6
+        template(#html).
+          &lt;div class="yellow-light5--bg bd1"&gt;
+            &lt;w-flex wrap&gt;
+              &lt;div v-for="i in 4" class="box xs6"&gt;.xs6&lt;/div&gt;
+            &lt;/w-flex&gt;
+          &lt;/div&gt;
+        template(#css).
+          .box {
+            background-color: #e2ecfc;
+            border: 1px solid #b2c2f0;
+            padding: 12px 0;
+            text-align: center;
+          }
+
+    .mx2
+    .grow
+      | With gap
+      example.lighter.mt2.grow
+        .yellow-light5--bg.bd1
+          w-flex(wrap gap="4")
+            .box.xs6.code(v-for="i in 4") .xs6
+        template(#pug).
+          .yellow-light5--bg.bd1
+            w-flex(wrap gap="4")
+              .box.xs6.code(v-for="i in 4") .xs6
+        template(#html).
+          &lt;div class="yellow-light5--bg bd1"&gt;
+            &lt;w-flex wrap gap="4"&gt;
+              &lt;div v-for="i in 4" class="box xs6"&gt;.xs6&lt;/div&gt;
+            &lt;/w-flex&gt;
+          &lt;/div&gt;
+        template(#css).
+          .box {
+            background-color: #e2ecfc;
+            border: 1px solid #b2c2f0;
+            padding: 12px 0;
+            text-align: center;
+          }
+
+  p.mt4 #[strong Solution:] there are a couple of ways to bypass this limitation.
+  h4 1. Wrap children in padded boxes &amp; apply equivalent negative margin on parent
+  example.lighter
+    .yellow-light5--bg.bd1
+      w-flex.ma-2(wrap)
+        .xs6.pa2(v-for="i in 4")
+          .box.d-flex.justify-center.code .xs6
+    template(#pug).
+      .yellow-light5--bg.bd1
+        w-flex.ma-2(wrap)
+          .xs6.pa2(v-for="i in 4")
+            .box .xs6
+    template(#html).
+      &lt;div class="yellow-light5--bg bd1"&gt;
+        &lt;w-flex wrap class="ma-2"&gt;
+          &lt;div v-for="i in 4" class="xs6 pa2"&gt;
+            &lt;div class="box"&gt;.xs6&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/w-flex&gt;
+      &lt;/div&gt;
+    template(#css).
+      .box {
+        background-color: #e2ecfc;
+        border: 1px solid #b2c2f0;
+        padding: 12px 0;
+        text-align: center;
+      }
+
+  h4 2. Use the #[strong.code w-grid] component instead
+  example.lighter
+    .yellow-light5--bg.bd1
+      w-grid(columns="2" gap="4")
+        .box.code &lt;div&gt;
+        .box.code &lt;div&gt;
+        .box.code &lt;div&gt;
+        .box.code &lt;div&gt;
+    template(#pug).
+      .yellow-light5--bg.bd1
+        w-grid(columns="2" gap="4")
+          .box &lt;div&gt;
+          .box &lt;div&gt;
+          .box &lt;div&gt;
+          .box &lt;div&gt;
+    template(#html).
+      &lt;div class="yellow-light5--bg bd1"&gt;
+        &lt;w-grid columns="2" gap="4"&gt;
+          &lt;div v-for="i in 4" class="box"&gt;
+            &amp;amp;lt;div&amp;amp;gt;
+          &lt;/div&gt;
+        &lt;/w-grid&gt;
+      &lt;/div&gt;
+    template(#css).
+      .box {
+        background-color: #e2ecfc;
+        border: 1px solid #b2c2f0;
+        padding: 12px 0;
+        text-align: center;
+      }
 </template>
 
 <style lang="scss">
@@ -506,6 +807,13 @@ main
     background-color: #9bbff9;
     border: 1px solid #55f;
     padding: 12px;
+  }
+
+  .lighter .box {
+    background-color: #e2ecfc;
+    border: 1px solid #b2c2f0;
+    padding: 12px 0;
+    text-align: center;
   }
 
   .wrapper, .wrapper2 {

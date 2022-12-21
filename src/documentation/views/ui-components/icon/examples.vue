@@ -738,7 +738,7 @@ export default {
     // Add ligature on the icons page for the demo.
     config.iconsLigature = 'material-icons'
   },
-  beforeDestroy () {
+  beforeUnmount () {
     config.iconsLigature = false
   }
 }

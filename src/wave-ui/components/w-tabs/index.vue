@@ -12,7 +12,7 @@
       :aria-selected="item._index === activeTabIndex ? 'true' : 'false'"
       role="tab")
         slot(
-          v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
+          v-if="$slots[`item-title.${item.id || i + 1}`]"
           :name="`item-title.${item.id || i + 1}`"
           :item="getOriginalItem(item)"
           :index="i + 1"
@@ -24,7 +24,7 @@
           :index="i + 1"
           :active="item._index === activeTabIndex")
           div(v-html="item[itemTitleKey]")
-    .w-tabs__bar-extra(v-if="$scopedSlots['tabs-bar-extra']")
+    .w-tabs__bar-extra(v-if="$slots['tabs-bar-extra']")
       slot(name="tabs-bar-extra")
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
 
@@ -32,31 +32,32 @@
     transition(:name="transitionName" :mode="transitionMode")
       keep-alive
         //- Keep-alive only works with components, not with DOM nodes.
-        tab-content(:class="contentClass" :key="activeTab._index")
-          slot(
-            v-if="$scopedSlots[`item-content.${activeTab.id || activeTab._index + 1}`]"
-            :name="`item-content.${activeTab.id || activeTab._index + 1}`"
-            :item="getOriginalItem(activeTab)"
-            :index="activeTab._index + 1"
-            :active="activeTab._index === activeTabIndex")
-          slot(
-            v-else
-            name="item-content"
-            :item="getOriginalItem(activeTab)"
-            :index="activeTab._index + 1"
-            :active="activeTab._index === activeTabIndex")
-            div(v-html="activeTab[itemContentKey]")
+        tab-content(:key="activeTab._index" :item="activeTab" :class="contentClass")
+          template(#default="{ item }")
+            slot(
+              v-if="$slots[`item-content.${item._index + 1}`]"
+              :name="`item-content.${item._index + 1}`"
+              :item="getOriginalItem(item)"
+              :index="item._index + 1"
+              :active="item._index === activeTab._index")
+            slot(
+              v-else
+              name="item-content"
+              :item="getOriginalItem(item)"
+              :index="item._index + 1"
+              :active="item._index === activeTab._index")
+              div(v-if="item[itemContentKey]" v-html="item[itemContentKey]")
 </template>
 
 <script>
-import Vue from 'vue'
+import { reactive } from 'vue'
 import TabContent from './tab-content.vue'
 
 export default {
   name: 'w-tabs',
 
   props: {
-    value: { type: [Number, String] },
+    modelValue: { type: [Number, String] },
     color: { type: String },
     bgColor: { type: String },
     items: { type: [Array, Number] },
@@ -65,6 +66,7 @@ export default {
     titleClass: { type: String },
     activeClass: { type: String, default: 'primary' },
     noSlider: { type: Boolean },
+    pillSlider: { type: Boolean },
     sliderColor: { type: String, default: 'primary' },
     contentClass: { type: String },
     transition: { type: [String, Boolean], default: '' },
@@ -106,7 +108,7 @@ export default {
     tabsItems () {
       const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items
 
-      return items.map((item, _index) => new Vue.observable({
+      return items.map((item, _index) => reactive({
         ...item,
         _index,
         _disabled: !!item.disabled
@@ -121,6 +123,7 @@ export default {
       return {
         'w-tabs--card': this.card,
         'w-tabs--no-slider': this.noSlider,
+        'w-tabs--pill-slider': this.pillSlider,
         'w-tabs--fill-bar': this.fillBar,
         'w-tabs--init': this.init
       }
@@ -170,13 +173,16 @@ export default {
     // Updates the slider position.
     updateSlider (domLookup = true) {
       if (domLookup) {
-        this.activeTabEl = this.$refs['tabs-bar'].querySelector('.w-tabs__bar-item--active')
+        const ref = this.$refs['tabs-bar']
+        this.activeTabEl = ref && ref.querySelector('.w-tabs__bar-item--active')
       }
 
       if (!this.fillBar && this.activeTabEl) {
         const { left, width } = this.activeTabEl.getBoundingClientRect()
-        const { left: parentLeft } = this.activeTabEl.parentNode.getBoundingClientRect()
-        this.slider.left = `${left - parentLeft + this.activeTabEl.parentNode.scrollLeft}px`
+        const tabsBar = this.activeTabEl.parentNode
+        const { left: parentLeft } = tabsBar.getBoundingClientRect()
+        const { borderLeftWidth } = getComputedStyle(tabsBar)
+        this.slider.left = `${left - parentLeft - parseInt(borderLeftWidth) + tabsBar.scrollLeft}px`
         this.slider.width = `${width}px`
       }
       else {
@@ -189,6 +195,15 @@ export default {
       if (typeof index === 'string') index = ~~index
       else if (isNaN(index) || index < 0) index = 0
       this.activeTabIndex = index
+
+      // Scroll the new active tab item title into view if needed.
+      this.$nextTick(() => {
+        const ref = this.$refs['tabs-bar']
+        this.activeTabEl = ref && ref.querySelector(`.w-tabs__bar-item:nth-child(${index + 1})`)
+        if (this.activeTabEl) {
+          this.activeTabEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
+        }
+      })
     },
 
     // Return the original item (so there is no `_index`, etc.).
@@ -198,7 +213,7 @@ export default {
   },
 
   beforeMount () {
-    this.updateActiveTab(this.value)
+    this.updateActiveTab(this.modelValue)
 
     this.$nextTick(() => {
       this.updateSlider()
@@ -209,12 +224,12 @@ export default {
     if (!this.noSlider) window.addEventListener('resize', this.onResize)
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('resize', this.onResize)
   },
 
   watch: {
-    value (index) {
+    modelValue (index) {
       this.updateActiveTab(index)
     },
     items () {
@@ -251,11 +266,11 @@ export default {
   &__bar {
     position: relative;
     display: flex;
-    // align-items: center;
     overflow-x: auto;
 
     &--center {justify-content: center;}
     &--right {justify-content: flex-end;}
+    .w-tabs--pill-slider & {padding-left: $base-increment;}
 
     .w-tabs--card &:after {
       content: '';
@@ -278,6 +293,7 @@ export default {
     transition: $transition-duration ease-in-out, flex-grow 0s, flex 0s; // `flex` for Safari.
     user-select: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 
     .w-tabs--fill-bar & {flex-grow: 1;flex-basis: 0;}
     .w-tabs--card & {
@@ -309,12 +325,15 @@ export default {
     &:active:before {opacity: 0.08;}
     &--disabled:before {display: none;}
   }
+  &--pill-slider &__bar-item:before {display: none;}
 
   // Bar Extra.
   // ------------------------------------------------------
   &__bar-extra {
     margin-left: auto;
     align-self: center;
+    position: sticky;
+    right: 0;
 
     .w-tabs__bar--right &,
     .w-tabs__bar--center & {margin-left: 0;}
@@ -329,12 +348,20 @@ export default {
     background-color: currentColor;
     transition: $transition-duration ease-in-out;
   }
+  &--pill-slider &__slider {
+    opacity: 0.1;
+    bottom: 15%;
+    height: 70%;
+    border-radius: 99em;
+  }
+
   &--init &__slider {transition: none;}
 
   // Content.
   // ------------------------------------------------------
   &__content-wrap {
     position: relative;
+    flex-grow: 1;
 
     .w-tabs--card & {
       border: $border;

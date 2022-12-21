@@ -37,16 +37,16 @@ div
 
   title-link(h2) v-model
   p.
-    The value of the textarea can be provided via the #[code value] attribute (or #[code model-value]
-    for Vue 3) or via #[code v-model] for two-way binding.#[br]
+    The value of the textarea can be provided via the #[code model-value] attribute (or #[code value]
+    for Vue 2) or via #[code v-model] for two-way binding.#[br]
     By default the textarea's height adapts to the content like in this example.
 
   example
-    w-textarea(value="Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n\nDoloribus eligendi nobis quos sit, reiciendis molestias voluptates quas tenetur temporibus nihil eius ipsa.\nSaepe dolor voluptatem, quam eaque sed maxime numquam? Veniam, quibusdam.\n\nExpedita nostrum sapiente enim dolorem tempore, vero dicta odit nemo facere sed hic exercitationem impedit consequuntur tempora modi.\nExercitationem, ipsa autem deleniti consequatur doloribus dicta incidunt placeat laborum?Soluta similique exercitationem, officiis in dolorum aspernatur voluptatum laudantium neque officia maiores eum voluptate quasi nulla libero repellendus earum quis ullam ratione est at nisi modi maxime commodi.\n\n\nDucimus, quam? Dignissimos minima architecto doloremque voluptate maxime dicta laborum facere sapiente quas, tempore iste quos?\nObcaecati ea id nobis, ab neque porro iure.\nVoluptates temporibus aliquid, neque id sit commodi consequatur.Totam assumenda, illo fugiat itaque enim dignissimos pariatur aut placeat neque accusantium nemo dicta incidunt unde at esse harum vitae eligendi in maiores dolorum delectus quis dolorem qui beatae! Tenetur?")
+    w-textarea(model-value="Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n\nDoloribus eligendi nobis quos sit, reiciendis molestias voluptates quas tenetur temporibus nihil eius ipsa.\nSaepe dolor voluptatem, quam eaque sed maxime numquam? Veniam, quibusdam.\n\nExpedita nostrum sapiente enim dolorem tempore, vero dicta odit nemo facere sed hic exercitationem impedit consequuntur tempora modi.\nExercitationem, ipsa autem deleniti consequatur doloribus dicta incidunt placeat laborum?Soluta similique exercitationem, officiis in dolorum aspernatur voluptatum laudantium neque officia maiores eum voluptate quasi nulla libero repellendus earum quis ullam ratione est at nisi modi maxime commodi.\n\n\nDucimus, quam? Dignissimos minima architecto doloremque voluptate maxime dicta laborum facere sapiente quas, tempore iste quos?\nObcaecati ea id nobis, ab neque porro iure.\nVoluptates temporibus aliquid, neque id sit commodi consequatur.Totam assumenda, illo fugiat itaque enim dignissimos pariatur aut placeat neque accusantium nemo dicta incidunt unde at esse harum vitae eligendi in maiores dolorum delectus quis dolorem qui beatae! Tenetur?")
     //- template(#pug).
-      w-textarea(value="Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n\nDoloribus eligendi nobis quos sit, reiciendis molestias voluptates quas tenetur temporibus nihil eius ipsa.\nSaepe dolor voluptatem, quam eaque sed maxime numquam? Veniam, quibusdam.\n\nExpedita nostrum sapiente enim dolorem tempore, vero dicta odit nemo facere sed hic exercitationem impedit consequuntur tempora modi.\nExercitationem, ipsa autem deleniti consequatur doloribus dicta incidunt placeat laborum?Soluta similique exercitationem, officiis in dolorum aspernatur voluptatum laudantium neque officia maiores eum voluptate quasi nulla libero repellendus earum quis ullam ratione est at nisi modi maxime commodi.\n\n\nDucimus, quam? Dignissimos minima architecto doloremque voluptate maxime dicta laborum facere sapiente quas, tempore iste quos?\nObcaecati ea id nobis, ab neque porro iure.\nVoluptates temporibus aliquid, neque id sit commodi consequatur.Totam assumenda, illo fugiat itaque enim dignissimos pariatur aut placeat neque accusantium nemo dicta incidunt unde at esse harum vitae eligendi in maiores dolorum delectus quis dolorem qui beatae! Tenetur?")
+      w-textarea(model-value="Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n\nDoloribus eligendi nobis quos sit, reiciendis molestias voluptates quas tenetur temporibus nihil eius ipsa.\nSaepe dolor voluptatem, quam eaque sed maxime numquam? Veniam, quibusdam.\n\nExpedita nostrum sapiente enim dolorem tempore, vero dicta odit nemo facere sed hic exercitationem impedit consequuntur tempora modi.\nExercitationem, ipsa autem deleniti consequatur doloribus dicta incidunt placeat laborum?Soluta similique exercitationem, officiis in dolorum aspernatur voluptatum laudantium neque officia maiores eum voluptate quasi nulla libero repellendus earum quis ullam ratione est at nisi modi maxime commodi.\n\n\nDucimus, quam? Dignissimos minima architecto doloremque voluptate maxime dicta laborum facere sapiente quas, tempore iste quos?\nObcaecati ea id nobis, ab neque porro iure.\nVoluptates temporibus aliquid, neque id sit commodi consequatur.Totam assumenda, illo fugiat itaque enim dignissimos pariatur aut placeat neque accusantium nemo dicta incidunt unde at esse harum vitae eligendi in maiores dolorum delectus quis dolorem qui beatae! Tenetur?")
     template(#html).
-      &lt;w-textarea value="Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n\nDoloribus eligendi nobis quos sit, reiciendis molestias voluptates quas tenetur temporibus nihil eius ipsa.\nSaepe dolor voluptatem, quam eaque sed maxime numquam? Veniam, quibusdam.\n\nExpedita nostrum sapiente enim dolorem tempore, vero dicta odit nemo facere sed hic exercitationem impedit consequuntur tempora modi.\nExercitationem, ipsa autem deleniti consequatur doloribus dicta incidunt placeat laborum?Soluta similique exercitationem, officiis in dolorum aspernatur voluptatum laudantium neque officia maiores eum voluptate quasi nulla libero repellendus earum quis ullam ratione est at nisi modi maxime commodi.\n\n\nDucimus, quam? Dignissimos minima architecto doloremque voluptate maxime dicta laborum facere sapiente quas, tempore iste quos?\nObcaecati ea id nobis, ab neque porro iure.\nVoluptates temporibus aliquid, neque id sit commodi consequatur.Totam assumenda, illo fugiat itaque enim dignissimos pariatur aut placeat neque accusantium nemo dicta incidunt unde at esse harum vitae eligendi in maiores dolorum delectus quis dolorem qui beatae! Tenetur?"&gt;&lt;/w-textarea&gt;
+      &lt;w-textarea model-value="Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n\nDoloribus eligendi nobis quos sit, reiciendis molestias voluptates quas tenetur temporibus nihil eius ipsa.\nSaepe dolor voluptatem, quam eaque sed maxime numquam? Veniam, quibusdam.\n\nExpedita nostrum sapiente enim dolorem tempore, vero dicta odit nemo facere sed hic exercitationem impedit consequuntur tempora modi.\nExercitationem, ipsa autem deleniti consequatur doloribus dicta incidunt placeat laborum?Soluta similique exercitationem, officiis in dolorum aspernatur voluptatum laudantium neque officia maiores eum voluptate quasi nulla libero repellendus earum quis ullam ratione est at nisi modi maxime commodi.\n\n\nDucimus, quam? Dignissimos minima architecto doloremque voluptate maxime dicta laborum facere sapiente quas, tempore iste quos?\nObcaecati ea id nobis, ab neque porro iure.\nVoluptates temporibus aliquid, neque id sit commodi consequatur.Totam assumenda, illo fugiat itaque enim dignissimos pariatur aut placeat neque accusantium nemo dicta incidunt unde at esse harum vitae eligendi in maiores dolorum delectus quis dolorem qui beatae! Tenetur?"&gt;&lt;/w-textarea&gt;
 
   title-link(h2) No autogrow &amp; resizable
   example
@@ -277,7 +277,7 @@ div
       outline
       disabled)
     w-textarea.mb4(
-      value="Some content"
+      model-value="Some content"
       label="Disabled & filled"
       outline
       disabled)
@@ -286,7 +286,7 @@ div
       outline
       readonly)
     w-textarea(
-      value="Some content"
+      model-value="Some content"
       label="Readonly & filled"
       outline
       readonly)
@@ -319,7 +319,7 @@ div
 
       &lt;w-textarea
         class="mb4"
-        value="Some content"
+        model-value="Some content"
         label="Disabled &amp; filled"
         outline
         disabled&gt;
@@ -333,7 +333,7 @@ div
       &lt;/w-textarea&gt;
 
       &lt;w-textarea
-        value="Some content"
+        model-value="Some content"
         label="Readonly &amp; filled"
         outline
         readonly&gt;

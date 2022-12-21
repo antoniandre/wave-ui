@@ -3,25 +3,22 @@ component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: selectionString, disabled: isDisabled, readonly: isReadonly }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="onReset"
   :wrap="hasLabel && labelPosition !== 'inside'"
   :class="classes")
   template(v-if="labelPosition === 'left'")
     label.w-select__label.w-select__label--left.w-form-el-shakable(
-      v-if="$slots.default"
-      :for="`w-select--${_uid}`")
-      slot
-    label.w-select__label.w-select__label--left.w-form-el-shakable(
-      v-else-if="label"
-      :for="`w-select--${_uid}`"
-      v-html="label")
+      v-if="$slots.default || label"
+      :for="`w-select--${_.uid}`"
+      :class="labelClasses")
+      slot {{ label }}
 
   w-menu(
     v-model="showMenu"
     :menu-class="`w-select__menu ${menuClass || ''}`"
     transition="slide-fade-down"
-    :detach-to="(menuProps || {}).detachTo !== undefined ? (menuProps || {}).detachTo : '.w-app'"
+    :append-to="(menuProps || {}).appendTo !== undefined ? (menuProps || {}).appendTo : undefined"
     align-left
     custom
     min-width="activator"
@@ -29,30 +26,29 @@ component(
     template(#activator="{ on }")
       //- Input wrapper.
       .w-select__selection-wrap(
-        ref="selection-wrap"
         @click="!isDisabled && !isReadonly && (showMenu ? closeMenu : openMenu)()"
         role="button"
         aria-haspopup="listbox"
         :aria-expanded="showMenu ? 'true' : 'false'"
-        :aria-owns="`w-select-menu--${_uid}`"
-        :aria-activedescendant="`w-select-menu--${_uid}_item-1`"
+        :aria-owns="`w-select-menu--${_.uid}`"
+        :aria-activedescendant="`w-select-menu--${_.uid}_item-1`"
         :class="inputWrapClasses")
         w-icon.w-select__icon.w-select__icon--inner-left(
           v-if="innerIconLeft"
           tag="label"
           @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
-        .w-select__selection-slot(v-if="$scopedSlots.selection")
+        .w-select__selection-slot(v-if="$slots.selection")
           //- inputValue is always an array.
           slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
         input.w-select__selection(
           ref="selection-input"
           type="text"
-          :value="$scopedSlots.selection ? '' : selectionString"
+          :value="$slots.selection ? '' : selectionString"
           @focus="!isDisabled && !isReadonly && onFocus($event)"
           @blur="onBlur"
           @keydown="!isDisabled && !isReadonly && onKeydown($event)"
-          :id="`w-select--${_uid}`"
-          :placeholder="(!$scopedSlots.selection && placeholder) || null"
+          :id="`w-select--${_.uid}`"
+          :placeholder="(!$slots.selection && placeholder) || null"
           :disabled="isDisabled || null"
           readonly
           aria-readonly="true"
@@ -64,61 +60,52 @@ component(
           v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
           :key="i"
           type="hidden"
-          :value="val.value || ''"
+          :value="val.value === undefined ? '' : val.value.toString()"
           :name="inputName + (multiple ? '[]' : '')")
         template(v-if="labelPosition === 'inside' && showLabelInside")
           label.w-select__label.w-select__label--inside.w-form-el-shakable(
-            v-if="$slots.default"
-            :for="`w-select--${_uid}`"
-            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
-            slot
-          label.w-select__label.w-select__label--inside.w-form-el-shakable(
-            v-else-if="label"
-            :for="`w-select--${_uid}`"
-            v-html="label"
-            :class="isFocused && { [valid === false ? 'error' : color]: color || valid === false }")
+            v-if="$slots.default || label"
+            :for="`w-select--${_.uid}`"
+            :class="labelClasses")
+            slot {{ label }}
         w-icon.w-select__icon.w-select__icon--inner-right(
           v-if="innerIconRight"
           tag="label"
           @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
     w-list(
       ref="w-list"
-      @input="onInput"
+      :model-value="inputValue"
+      @update:model-value="onInput"
       @item-click="$emit('item-click', $event)"
       @item-select="onListItemSelect"
       @keydown:enter="noUnselect && !multiple && closeMenu()"
       @keydown:escape="closeMenu"
-      :value="inputValue"
       :items="selectItems"
       :multiple="multiple"
       arrows-navigation
       return-object
+      :add-ids="`w-select-menu--${_.uid}`"
       :no-unselect="noUnselect"
       :selection-color="selectionColor"
-      :add-ids="`w-select-menu--${_uid}`"
       :item-color-key="itemColorKey"
       role="listbox"
       tabindex="-1")
-      template(v-for="i in items.length" #[`item.${i}`]="{ item, selected, index }")
+      template(v-for="i in items.length" v-slot:[`item.${i}`]="{ item, selected, index }")
         slot(
-          v-if="$scopedSlots[`item.${i}`]"
+          v-if="$slots[`item.${i}`] && $slots[`item.${i}`](item, selected, index)"
           :name="`item.${i}`"
           :item="item"
           :selected="selected"
           :index="index")
           | {{ item[itemLabelKey] }}
-      template(#item="{ item, selected, index }")
-        slot(name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabelKey] }}
+        slot(v-else name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabelKey] }}
 
   template(v-if="labelPosition === 'right'")
     label.w-select__label.w-select__label--right.w-form-el-shakable(
-      v-if="$slots.default"
-      :for="`w-select--${_uid}`")
-      slot
-    label.w-select__label.w-select__label--right.w-form-el-shakable(
-      v-else-if="label"
-      :for="`w-select--${_uid}`"
-      v-html="label")
+      v-if="$slots.default || label"
+      :for="`w-select--${_.uid}`"
+      :class="labelClasses")
+      slot {{ label }}
 </template>
 
 <script>
@@ -134,7 +121,7 @@ export default {
 
   props: {
     items: { type: Array, required: true },
-    value: {}, // v-model on selected item if any.
+    modelValue: {}, // v-model on selected item if any.
     multiple: { type: Boolean },
     placeholder: { type: String },
     label: { type: String },
@@ -149,8 +136,9 @@ export default {
     itemClass: { type: String },
     menuClass: { type: String },
     color: { type: String, default: 'primary' }, // Applies to all the items.
-    selectionColor: { type: String, default: 'primary' }, // Applies to the selected items only.
     bgColor: { type: String }, // Applies to all the items.
+    labelColor: { type: String, default: 'primary' },
+    selectionColor: { type: String, default: 'primary' }, // Applies to the selected items only.
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },
@@ -173,7 +161,8 @@ export default {
     inputValue: [],
     showMenu: false,
     menuMinWidth: 0,
-    isFocused: false
+    isFocused: false,
+    selectionWrapRef: undefined
   }),
 
   computed: {
@@ -210,7 +199,7 @@ export default {
         'w-select--disabled': this.isDisabled,
         'w-select--readonly': this.isReadonly,
         [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
-        'w-select--focused': this.isFocused && !this.isReadonly,
+        'w-select--focused': (this.isFocused || this.showMenu) && !this.isReadonly,
         'w-select--dark': this.dark,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
@@ -309,7 +298,8 @@ export default {
     // Also accept objects if returnObject is true.
     // In any case, always end up with an array.
     checkSelection (items) {
-      items = Array.isArray(items) ? items : (items ? [items] : [])
+      console.log(items)
+      items = Array.isArray(items) ? items : (items !== undefined ? [items] : [])
       // `selectItems` items always have a value.
       const allValues = this.selectItems.map(item => item.value)
 
@@ -330,7 +320,7 @@ export default {
       setTimeout(() => {
         const itemIndex = this.inputValue.length ? this.inputValue[0].index : 0 // Real index starts at 0.
         // User visible index starts at 1.
-        this.$refs['w-list'].$el.querySelector(`#w-select-menu--${this._uid}_item-${itemIndex + 1}`).focus()
+        this.$refs['w-list'].$el.querySelector(`#w-select-menu--${this._.uid}_item-${itemIndex + 1}`)?.focus()
       }, 100)
     },
 
@@ -345,15 +335,15 @@ export default {
   },
 
   created () {
-    this.inputValue = this.checkSelection(this.value)
+    this.inputValue = this.checkSelection(this.modelValue)
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       if (value !== this.inputValue) this.inputValue = this.checkSelection(value)
     },
     items () {
-      this.inputValue = this.checkSelection(this.value)
+      this.inputValue = this.checkSelection(this.modelValue)
     }
   }
 }
@@ -434,8 +424,10 @@ export default {
   &__selection {
     width: 100%;
     height: 100%;
-    font-size: inherit;
+    min-height: inherit;
+    font: inherit;
     color: inherit;
+    text-align: inherit;
     background: none;
     border: none;
     outline: none;
@@ -532,11 +524,14 @@ export default {
     position: absolute;
     top: 50%;
     left: 0;
+    right: 0;
     // Use margin instead of padding as the scale transformation bellow decreases the real padding
     // size and misaligns the label.
     margin-left: 2 * $base-increment;
     transform: translateY(-50%);
     pointer-events: none;
+
+    .w-select--inner-icon-right & {padding-right: 22px;}
 
     .w-select--no-padding & {
       left: 0;
@@ -576,8 +571,6 @@ export default {
     .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
     .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
-
-    .w-select--focused &, .w-select--open & {color: currentColor;}
   }
 
   // Menu.

@@ -9,11 +9,19 @@
         @click="onOutsideClick"
         :persistent="persistent"
         persistent-no-animation
-        :bg-color="overlayColor"
+        :bg-color="overlayColor || 'transparent'"
         :opacity="overlayOpacity")
       slot(name="pushable")
-    transition(name="fade")
-      .w-drawer(v-if="!unmountDrawer" :class="drawerClasses" :style="styles")
+    transition(
+      name="fade"
+      @before-leave="onBeforeClose"
+      @after-leave="onClose")
+      component.w-drawer(
+        v-if="showDrawer"
+        ref="drawer"
+        :is="tag || 'aside'"
+        :class="drawerClasses"
+        :style="styles")
         slot
   //- Other cases.
   template(v-else)
@@ -25,15 +33,24 @@
       persistent-no-animation
       :bg-color="overlayColor"
       :opacity="overlayOpacity")
-    transition(:name="transitionName" appear @after-leave="close")
-      component.w-drawer(v-if="showDrawer" :is="tag || 'aside'" :class="drawerClasses" :style="styles")
+    transition(
+      :name="transitionName"
+      appear
+      @before-leave="onBeforeClose"
+      @after-leave="onClose")
+      component.w-drawer(
+        v-if="showDrawer"
+        ref="drawer"
+        :is="tag || 'aside'"
+        :class="drawerClasses"
+        :style="styles")
         slot
 </template>
 
 <script>
 // The complexity in this component is on close:
 // we must keep the wrapper in the DOM until the drawer transition is finished.
-// Then emit the value update that will trigger the removal of the wrapper from the DOM.
+// Then emit the modelValue update that will trigger the removal of the wrapper from the DOM.
 
 const oppositeSides = { left: 'right', right: 'left', top: 'down', bottom: 'up' }
 
@@ -41,7 +58,7 @@ export default {
   name: 'w-drawer',
 
   props: {
-    value: { default: true },
+    modelValue: { default: true },
     left: { type: Boolean },
     right: { type: Boolean },
     top: { type: Boolean },
@@ -59,15 +76,24 @@ export default {
     absolute: { type: Boolean },
     overlayColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] },
+    drawerClass: { type: String },
     tag: { type: String, default: 'aside' }
   },
 
-  emits: ['input', 'update:modelValue', 'close'],
+  provide () {
+    return {
+      // If a detachable is used inside a w-drawer without an appendTo, default to the drawer element
+      // instead of the w-app.
+      detachableDefaultRoot: () => this.$refs.drawer || null
+    }
+  },
+
+  emits: ['input', 'update:modelValue', 'before-close', 'close'],
 
   data () {
     return {
-      showWrapper: this.value,
-      showDrawer: this.value,
+      showWrapper: this.modelValue,
+      showDrawer: this.modelValue,
       persistentAnimate: false
     }
   },
@@ -100,6 +126,7 @@ export default {
     },
     drawerClasses () {
       return {
+        [this.drawerClass]: true,
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         'w-drawer--open': !!this.showDrawer,
@@ -113,7 +140,7 @@ export default {
     // It moves inside the overflow hidden outer wrap.
     trackStyles () {
       return this.pushContent && this.showDrawer && {
-        transform: `translateX(${this.position === 'left' ? '' : '-'}${this.size})`
+        transform: `translateX(${this.position === 'left' ? '' : '-'}${this.size || '200px'})`
       }
     },
     styles () {
@@ -133,18 +160,19 @@ export default {
   },
 
   methods: {
-    close () {
+    onBeforeClose () {
+      this.$emit('before-close')
+    },
+    onClose () {
       this.showWrapper = false
       this.$emit('update:modelValue', false)
       this.$emit('input', false)
-      this.$emit('close', false)
+      this.$emit('close')
     },
     onOutsideClick () {
       if (!this.persistent) {
-        // The close method is called on animation end, except with pushContent
-        // (not using the same transition).
+        // The close method is called on animation end.
         this.showDrawer = false
-        if (this.pushContent) this.close()
       }
       else if (!this.persistentNoAnimation) {
         this.persistentAnimate = true
@@ -154,7 +182,7 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       // If value is true, mount the wrapper in DOM and open the drawer.
       // If value is false, keep the wrapper in DOM and close the drawer;
       // At the end of the drawer transition the value is updated and wrapper

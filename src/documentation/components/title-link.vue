@@ -6,12 +6,19 @@ component.title-link(:is="tag" :class="classes")
   a(v-else :href="`#${Slug}`")
     span.hash #
     slot
-  a(:id="Slug" :name="Slug")
+  a(:id="Slug")
 </template>
 
 <script>
+const getSlotText = function (slot) {
+  return (slot || [])?.reduce?.((array, node) => {
+    const hasString = typeof node === 'string' || typeof node.children === 'string'
+    array.push(hasString ? (node?.children || node).trim() : getSlotText(node.children))
+    return array
+  }, []).join(' ')
+}
+
 export default {
-  name: 'title-link',
   props: {
     h1: Boolean,
     h2: Boolean,
@@ -36,11 +43,12 @@ export default {
 
     Slug () {
       if (this.slug) return this.slug
+      else if (!this.$slots.default) return ''
 
-      const source = this.label || (this.$slots.default || []).map(item => item.text).join(' ')
+      const source = this.label || getSlotText(this.$slots.default())
       return (
         source.toLowerCase()
-          .replace(/ /g, '-')
+          .replace(/ +/g, '-')
           .replace(/&/g, 'and')
           .replace(/[^\w\d-_]/g, '')
       )
@@ -70,6 +78,7 @@ export default {
 
   a {color: inherit;}
   a:focus {text-decoration: underline;}
+  a:focus .w-tag {display: inline-block;} // This removes the text-decoration: underline.
 
   a[name] {
     position: relative;

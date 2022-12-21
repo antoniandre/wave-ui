@@ -5,24 +5,26 @@
     @mousedown="onMouseDown"
     @mouseover="onMouseOver"
     @mouseout="onMouseOut")
-    colgroup
+    colgroup(ref="colgroup")
       col.w-table__col(
         v-for="(header, i) in headers"
         :key="i"
         :width="header.width || null")
+
+    //- Table header.
     thead(v-if="!noHeaders")
       tr
         th.w-table__header(
           v-for="(header, i) in headers"
           :key="i"
-          @click="header.sortable !== false && sortTable(header)"
+          @click="!colResizing.dragging && header.sortable !== false && sortTable(header)"
           :class="headerClasses(header)")
           w-icon.w-table__header-sort(
             v-if="header.sortable !== false && header.align === 'right'"
             :class="headerSortClasses(header)") wi-arrow-down
           template(v-if="header.label")
             slot(
-              v-if="$scopedSlots['header-label']"
+              v-if="$slots['header-label']"
               name="header-label"
               :header="header"
               :label="header.label"
@@ -31,61 +33,68 @@
           w-icon.w-table__header-sort(
             v-if="header.sortable !== false && header.align !== 'right'"
             :class="headerSortClasses(header)") wi-arrow-down
+          //- Notes: prevent click on header (`.stop`), which triggers sorting & DOM refresh.
           span.w-table__col-resizer(
             v-if="i < headers.length - 1 && resizableColumns"
             :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === i }"
-            @click.stop="/* Prevent click on header, which triggers sorting & DOM refresh. */")
+            @click.stop)
+      //- Progress bar only.
+      w-transition-fade
+        tr.w-table__progress-bar(v-if="loading === 'header'")
+          td(:colspan="headers.length")
+            w-progress(tile)
+
+    //- Table body.
     tbody
-      //- Progress bar.
-      tr.w-table__progress-bar(v-if="loading")
+      //- Progress bar & loading text.
+      tr.w-table__progress-bar(v-if="loading === true")
         td(:colspan="headers.length")
           w-progress(tile)
           .w-table__loading-text
             slot(name="loading") Loading...
       //- No data.
-      tr.no-data(v-if="!tableItems.length")
+      tr.no-data(v-else-if="!tableItems.length")
         td.w-table__cell.text-center(:colspan="headers.length")
           slot(name="no-data") No data to show.
 
       //- Normal rows.
-      template(v-else)
-        template(v-for="(item, i) in sortedItems")
+      template(v-if="tableItems.length && loading !== true")
+        template(v-for="(item, i) in sortedItems" :key="i")
           //- Fully custom tr (`item` slot).
           slot(
-            v-if="$scopedSlots['item']"
+            v-if="$slots.item"
             name="item"
             :item="item"
             :index="i + 1"
             :select="() => doSelectRow(item, i)"
-            :classes="{ 'w-table__row': true, 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--has-expanded': expandedRowsByUid[item._uid] !== undefined }")
+            :classes="{ 'w-table__row': true, 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined }")
 
           tr.w-table__row(
             v-else
-            :key="i"
             @click="doSelectRow(item, i)"
-            :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--has-expanded': expandedRowsByUid[item._uid] !== undefined }")
+            :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined }")
             template(v-for="(header, j) in headers")
               td.w-table__cell(
-                v-if="$scopedSlots[`item-cell.${header.key}`] || $scopedSlots[`item-cell.${j + 1}`] || $scopedSlots['item-cell']"
+                v-if="$slots[`item-cell.${header.key}`] || $slots[`item-cell.${j + 1}`] || $slots['item-cell']"
                 :key="`${j}-a`"
                 :data-label="header.label"
-                :class="`text-${header.align || 'left'}`")
+                :class="{ [`text-${header.align || 'left'}`]: true, 'w-table__cell--sticky': header.sticky }")
                 slot(
-                  v-if="$scopedSlots[`item-cell.${header.key}`]"
+                  v-if="$slots[`item-cell.${header.key}`]"
                   :name="`item-cell.${header.key}`"
                   :header="header"
                   :item="item"
                   :label="item[header.key] || ''"
                   :index="i + 1")
                 slot(
-                  v-else-if="$scopedSlots[`item-cell.${j + 1}`]"
+                  v-else-if="$slots[`item-cell.${j + 1}`]"
                   :name="`item-cell.${j + 1}`"
                   :header="header"
                   :item="item"
                   :label="item[header.key] || ''"
                   :index="i + 1")
                 slot(
-                  v-else-if="$scopedSlots['item-cell']"
+                  v-else-if="$slots['item-cell']"
                   name="item-cell"
                   :header="header"
                   :item="item"
@@ -99,20 +108,54 @@
                 v-else
                 :key="`${j}-b`"
                 :data-label="header.label"
-                :class="`text-${header.align || 'left'}`")
+                :class="{ [`text-${header.align || 'left'}`]: true, 'w-table__cell--sticky': header.sticky }")
                 div(v-html="item[header.key] || ''")
                 span.w-table__col-resizer(
                   v-if="j < headers.length - 1 && resizableColumns"
                   :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
 
           //- Expanded row.
-          tr.w-table__row.w-table__row--expanded(v-if="expandedRowsByUid[item._uid]")
+          tr.w-table__row.w-table__row--expansion(v-if="expandedRowsByUid[item._uid]")
             td.w-table__cell(:colspan="headers.length")
-              div(v-if="expandedRowsByUid[item._uid]")
-                slot(name="expanded-row" :item="item" :index="i + 1")
-              span.w-table__col-resizer(
-                v-if="j < headers.length - 1 && resizableColumns"
-                :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
+              w-transition-expand(y)
+                div(v-if="expandedRowsByUid[item._uid]")
+                  slot(name="row-expansion" :item="item" :index="i + 1")
+                span.w-table__col-resizer(
+                  v-if="i < headers.length - 1 && resizableColumns"
+                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
+      //- Extra row.
+      .w-table__extra-row(v-if="$slots['extra-row']")
+        slot(name="extra-row")
+
+    //- Table footer.
+    tfoot.w-table__footer(v-if="$slots.footer || $slots['footer-row'] || pagination")
+      slot(v-if="$slots['footer-row']" name="footer-row")
+      tr.w-table__row(v-else-if="$slots.footer")
+        td.w-table__cell(:colspan="headers.length")
+          slot(name="footer")
+      tr.w-table__row.w-table__pagination-wrap(v-if="pagination && paginationConfig")
+        td.w-table__cell(:colspan="headers.length")
+          .w-table__pagination
+            w-select.pagination-number.pagination-number--items-per-page(
+              v-if="paginationConfig.itemsPerPageOptions"
+              v-model="paginationConfig.itemsPerPage"
+              :items="paginationConfig.itemsPerPageOptions"
+              label-position="left"
+              label="Items per page"
+              label-color="inherit")
+            span.pagination-number.pagination-number--results.
+              {{ paginationConfig.start }}-{{ paginationConfig.end }} of {{ paginationConfig.total }}
+            .pagination-arrows
+              w-button.pagination-arrow.pagination-arrow--prev(
+                @click="paginationConfig.page--"
+                icon="wi-chevron-left"
+                text
+                lg)
+              w-button.pagination-arrow.pagination-arrow--next(
+                @click="paginationConfig.page++"
+                icon="wi-chevron-right"
+                text
+                lg)
 </template>
 
 <script>
@@ -122,14 +165,19 @@
 
 import { consoleError } from '../utils/console'
 
+// When column resizing is on, this is the minimum cell width that we can resize to.
+const minColumnWidth = 15
+
 export default {
   name: 'w-table',
   props: {
     items: { type: Array, required: true },
     headers: { type: Array, required: true },
     noHeaders: { type: Boolean },
+    fixedLayout: { type: Boolean },
     fixedHeaders: { type: Boolean },
-    loading: { type: Boolean },
+    fixedFooter: { type: Boolean },
+    loading: { type: [Boolean, String] }, // Bool or 'header' to only display the bar in the header.
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
 
@@ -163,15 +211,39 @@ export default {
 
     forceSelection: { type: Boolean },
 
-    // Useful to select or expand a row, and even after a filter, the same row will stay selected or exanded.
+    // Useful to select or expand a row, and even after a filter, the same row will stay selected or expanded.
     uidKey: { type: String, default: 'id' },
 
     filter: { type: Function },
+    sortFunction: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 },
-    resizableColumns: { type: Boolean }
+    resizableColumns: { type: Boolean },
+
+    pagination: {
+      type: [Boolean, Object, String],
+      validator: object => {
+        if (!object) return true // Accept any falsy value.
+        else if (typeof object === 'object' && (!object.itemsPerPage || (object.page && isNaN(object.page)))) {
+          consoleError(
+            'Wrong pagination config received in the w-table\'s `pagination` prop (received: `' + JSON.stringify(object) + '`). ' +
+            '\nExpected object: { itemsPerPage: Integer, page: Integer } or { itemsPerPage: Integer, start: Integer }.'
+          )
+          return false
+        }
+        return true
+      }
+    }
   },
 
-  emits: ['row-select', 'row-expand', 'row-click', 'update:sort', 'update:selected-rows', 'update:expanded-rows'],
+  emits: [
+    'row-select',
+    'row-expand',
+    'row-click',
+    'update:sort',
+    'update:selected-rows',
+    'update:expanded-rows',
+    'column-resize'
+  ],
 
   data: () => ({
     activeSorting: [],
@@ -187,7 +259,8 @@ export default {
       nextColWidth: null,
       columnEl: null,
       nextColumnEl: null
-    }
+    },
+    paginationConfig: {}
   }),
 
   computed: {
@@ -199,12 +272,11 @@ export default {
     },
 
     filteredItems () {
-      if (typeof this.filter === 'function') return this.tableItems.filter(this.filter)
-      return this.tableItems
+      return typeof this.filter === 'function' ? this.tableItems.filter(this.filter) : this.tableItems
     },
 
     sortedItems () {
-      if (!this.activeSorting.length) return this.filteredItems
+      if (!this.activeSorting.length || this.sortFunction) return this.filteredItems
 
       // Only sort with 1 key for now, may handle more later.
       const sortKey1 = this.activeSorting[0].replace(/^[+-]/, '')
@@ -237,15 +309,22 @@ export default {
 
     classes () {
       return {
+        'w-table--fixed-layout': this.fixedLayout || this.resizableColumns || this.hasStickyColumn,
         'w-table--mobile': this.isMobile || null,
         'w-table--resizable-cols': this.resizableColumns || null,
         'w-table--resizing': this.colResizing.dragging,
-        'w-table--fixed-header': this.fixedHeaders
+        'w-table--fixed-header': this.fixedHeaders,
+        'w-table--fixed-footer': this.fixedFooter,
+        'w-table--sticky-column': this.hasStickyColumn
       }
     },
 
     isMobile () {
       return ~~this.mobileBreakpoint && this.$waveui.breakpoint.width <= ~~this.mobileBreakpoint
+    },
+
+    hasStickyColumn () {
+      return this.headers.find(header => header.sticky)
     },
 
     // Faster lookup than array.includes(uid) and also cached.
@@ -263,6 +342,7 @@ export default {
     headerClasses (header) {
       return {
         'w-table__header--sortable': header.sortable !== false, // Can also be falsy with `0`.
+        'w-table__header--sticky': header.sticky,
         'w-table__header--resizable': !!this.resizableColumns,
         [`text-${header.align || 'left'}`]: true
       }
@@ -277,15 +357,18 @@ export default {
       ]
     },
 
-    sortTable (header) {
+    async sortTable (header) {
       const alreadySortingThis = this.activeSortingKeys[header.key]
       if (alreadySortingThis && this.activeSortingKeys[header.key] === '-') {
         this.activeSorting = []
-        return this.$emit('update:sort')
       }
-      else this.$set(this.activeSorting, 0, (alreadySortingThis ? '-' : '+') + header.key)
+      else this.activeSorting[0] = (alreadySortingThis ? '-' : '+') + header.key
 
       this.$emit('update:sort', this.activeSorting)
+
+      if (typeof this.sortFunction === 'function') {
+        await this.sortFunction(this.activeSorting)
+      }
     },
 
     doSelectRow (item, index) {
@@ -310,7 +393,7 @@ export default {
           }
         )
 
-        // Keep external `expanded-rows.sync` updated.
+        // Keep external `expanded-rows.sync` (Vue 2) or v-model:expanded-rows (Vue 3) updated.
         this.$emit('update:expanded-rows', this.expandedRowsInternal)
       }
 
@@ -339,7 +422,7 @@ export default {
             }
           )
 
-          // Keep external `selected-rows.sync` updated.
+          // Keep external `selected-rows.sync` (Vue 2) or v-model:selected-rows (Vue 3) updated.
           this.$emit('update:selected-rows', this.selectedRowsInternal)
         }
       }
@@ -404,15 +487,17 @@ export default {
       columnEl.style.width = colWidth + deltaX + 'px'
       nextColumnEl.style.width = nextColWidth - deltaX + 'px'
 
-      // 2. Check if we went too far (the width applyed is different than the browser-computed one).
-      const minWidthReached = deltaX < 0 && columnEl.offsetWidth > newColWidth
+      // 2. Check if we went too far (the width applied is different than the browser-computed one).
+      const minWidthReached = (deltaX < 0 && columnEl.offsetWidth > newColWidth) ||
+                              columnEl.offsetWidth <= minColumnWidth
       const maxWidthReached = deltaX > 0 && nextColumnEl.offsetWidth > newNextColWidth
 
       // 3. If we went too far, correct the value of both cells widths.
       // Make sure we don't shrink enough to push other left cells.
       if (minWidthReached) {
-        columnEl.style.width = columnEl.offsetWidth + 'px'
-        nextColumnEl.style.width = maxWidth - columnEl.offsetWidth + 'px'
+        const newWidth = Math.max(columnEl.offsetWidth, minColumnWidth)
+        columnEl.style.width = newWidth + 'px'
+        nextColumnEl.style.width = maxWidth - newWidth + 'px'
       }
       // Make sure we don't grow enough to push other right cells.
       else if (maxWidthReached) {
@@ -421,19 +506,42 @@ export default {
       }
     },
 
-    onResizerMouseUp (e) {
+    onResizerMouseUp () {
       // Remove listeners.
       document.removeEventListener('mousemove', this.onResizerMouseMove)
       document.removeEventListener('mouseup', this.onResizerMouseUp)
 
       // Reset all the variables (better for debugging).
-      this.colResizing.dragging = false
-      this.colResizing.columnIndex = null
-      this.colResizing.startCursorX = null
-      this.colResizing.columnEl = null
-      this.colResizing.nextColumnEl = null
-      this.colResizing.colWidth = null
-      this.colResizing.nextColWidth = null
+      // setTimeout 0 to make sure the sorting is not applied when releasing the mouse on a header
+      // cell after resizing.
+      // (releasing the mouse on table header triggers a click event captured by the sorting feature)
+      setTimeout(() => {
+        // On Mouse up, emit an event containing all the new widths of the columns.
+        const widths = [...this.$refs.colgroup.childNodes].map(column => column.style?.width || column.offsetWidth)
+        this.$emit('column-resize', { index: this.colResizing.columnIndex, widths })
+
+        this.colResizing.dragging = false
+        this.colResizing.columnIndex = null
+        this.colResizing.startCursorX = null
+        this.colResizing.columnEl = null
+        this.colResizing.nextColumnEl = null
+        this.colResizing.colWidth = null
+        this.colResizing.nextColWidth = null
+      }, 0)
+    },
+
+    updatePaginationConfig () {
+      const itemsPerPage = this.pagination?.itemsPerPage || 10
+      const total = this.pagination?.total || this.items.length
+      const page = this.pagination?.page || 1
+      this.paginationConfig = {
+        itemsPerPage,
+        itemsPerPageOptions: this.pagination?.itemsPerPageOptions || [{ label: '10', value: 10 }, { label: '100', value: 100 }, { label: 'All', value: 0 }],
+        page,
+        start: this.pagination?.start || 1,
+        end: total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page)),
+        total
+      }
     }
   },
 
@@ -443,6 +551,8 @@ export default {
 
     if ((this.expandedRows || []).length) this.expandedRowsInternal = this.expandedRows
     if ((this.selectedRows || []).length) this.selectedRowsInternal = this.selectedRows
+
+    if (this.pagination) this.updatePaginationConfig()
   },
 
   watch: {
@@ -490,6 +600,10 @@ $tr-border-top: 1px;
   border-collapse: collapse;
   border: none;
 
+  &--fixed-layout {
+    table-layout: fixed; // Allow resizing beyond the cell minimum text width.
+  }
+
   &--resizing {
     &, * {cursor: col-resize;}
 
@@ -498,14 +612,20 @@ $tr-border-top: 1px;
 
   // Table headers.
   // ------------------------------------------------------
-  &__header {
-    padding: $base-increment;
+  thead {position: relative;}
+
+  &__header {padding: $base-increment;}
+  &__header--resizable {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
-  &--fixed-header th {
+  &--fixed-header thead {
     position: sticky;
     top: 0;
     background-color: #fff;
+    z-index: 1; // For sticky columns to go under.
 
     &:after {
       content: '';
@@ -514,6 +634,22 @@ $tr-border-top: 1px;
       left: 0;
       right: 0;
       border-bottom: $border;
+    }
+  }
+
+  &__header--sticky {
+    position: sticky;
+    left: 0;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      background-color: #fff;
     }
   }
 
@@ -557,6 +693,12 @@ $tr-border-top: 1px;
 
   // Progress bar when loading.
   &__progress-bar:nth-child(odd) {background: none;}
+  thead .w-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
   &__progress-bar td {padding: 0;height: 1px;}
   @-moz-document url-prefix() {
     &__progress-bar td {height: 100%;}
@@ -596,11 +738,83 @@ $tr-border-top: 1px;
   &__header:first-child, &__cell:first-child {padding-left: 2 * $base-increment;}
   &__header:last-child, &__cell:last-child {padding-right: 2 * $base-increment;}
 
-  &--resizable-cols &__cell {position: relative;}
+  &--resizable-cols &__cell {
+    position: relative;
+
+    &, & * {
+      overflow: hidden;
+      // white-space: nowrap; // If you only want the content cell on a single line.
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__cell--sticky {
+    position: sticky;
+    left: 0;
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+    &:before {background-color: #fff;}
+  }
+  tr:nth-child(odd) &__cell--sticky:after {background-color: $table-tr-odd-color;}
+  tr:hover &__cell--sticky:after {background-color: $table-tr-hover-color;}
 
   .no-data &__cell {
     background-color: rgba(255, 255, 255, 0.2);
     padding: (2 * $base-increment) $base-increment;
+  }
+
+  // Table footer.
+  // ------------------------------------------------------
+  &__footer &__cell {
+    padding-top: $base-increment;
+    padding-bottom: $base-increment;
+  }
+
+  &--fixed-footer tfoot {
+    position: sticky;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 1; // For sticky columns to go under.
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-bottom: $border;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: $base-increment;
+    padding-bottom: $base-increment;
+
+    .pagination-number--items-per-page {
+      margin-right: 6 * $base-increment;
+      flex-grow: 0;
+      text-align: right;
+    }
+    .pagination-number--of {
+      margin-left: $base-increment;
+      margin-right: $base-increment;
+    }
+    .w-select__selection {max-width: 60px;}
+
+    .pagination-arrows {
+      margin-left: 6 * $base-increment;
+    }
   }
 }
 
@@ -634,6 +848,7 @@ $tr-border-top: 1px;
 
   .w-table__progress-bar {
     display: table-row;
+
     td {display: table-cell;}
     td:before {display: none;}
   }

@@ -1,8 +1,5 @@
 <template lang="pug">
-component.w-flex-wrap(v-if="gap" :is="tag")
-  .w-flex(:class="classes")
-    slot
-component.w-flex(v-else :class="classes" :is="tag")
+component.w-flex(:class="classes" :is="tag")
   slot
 </template>
 
@@ -26,8 +23,9 @@ export default {
     justifyEnd: { type: Boolean },
     justifySpaceBetween: { type: Boolean },
     justifySpaceAround: { type: Boolean },
+    justifySpaceEvenly: { type: Boolean },
     basisZero: { type: Boolean },
-    gap: { type: Number, default: 0 }
+    gap: { type: [Number, String], default: 0 }
   },
 
   computed: {
@@ -48,8 +46,9 @@ export default {
         'justify-end': this.justifyEnd,
         'justify-space-between': this.justifySpaceBetween,
         'justify-space-around': this.justifySpaceAround,
+        'justify-space-evenly': this.justifySpaceEvenly,
         'basis-zero': this.basisZero,
-        [`w-flex--gap${this.gap}`]: this.gap
+        [`gap${this.gap}`]: ~~this.gap
       }
     }
   }
@@ -66,12 +65,5 @@ export default {
   &.wrap {flex-wrap: wrap;}
   &.basis-zero > * {flex-basis: 0;flex-grow: 1;}
   &.basis-zero > .no-grow, &.basis-zero > .shrink {flex-grow: 0;}
-
-  @for $i from 1 through 12 {
-    // Divide by 2 as there are 2 elements having this space.
-    $space: round($base-increment * divide($i, 2));
-    &--gap#{$i} {margin: -$space;}
-    &--gap#{$i} > * {margin: $space;}
-  }
 }
 </style>

@@ -1,5 +1,32 @@
 <template lang="pug">
 div
+  title-link(h2) Basic
+  example
+    w-card.
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+      quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+      odit dolor labore eveniet at vel sequi nostrum.#[br]#[br]
+      Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
+      dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
+      aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+    template(#pug).
+      w-card.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+        quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+        odit dolor labore eveniet at vel sequi nostrum.#[br]#[br]
+        Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
+        dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
+        aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+    template(#html).
+      &lt;w-card&gt;
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
+        quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
+        odit dolor labore eveniet at vel sequi nostrum.&lt;br&gt;&lt;br&gt;
+        Voluptates, aut distinctio esse quia doloribus commodi minima inventore neque sequi
+        dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
+        aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
+      &lt;/w-card&gt;
+
   title-link(h2) Simple card with a title
   p.
     When the title is simple you can pass it directly as a prop like in this example.#[br]
@@ -226,7 +253,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
@@ -274,7 +301,7 @@ div
     template(#js).
       data: () => ({
         // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, you can also use `{{ 'import' }}.meta.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })

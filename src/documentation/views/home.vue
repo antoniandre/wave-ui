@@ -76,11 +76,11 @@ w-app.home
         w-flex.mt8.ui-demo(basis-zero wrap justify-center :gap="8")
           .left-col.grow
             w-card.white--bg.card--1(content-class="w-flex column" title="Form Elements" title-class="py1 title4")
-              w-checkbox.mt3(:value="true" color="pink") Checkbox
-              w-radio.mt3(:value="true" color="red") Radio
-              w-switch.mt3(:value="true" color="deep-orange") Switch
+              w-checkbox.mt3(:model-value="true" color="pink") Checkbox
+              w-radio.mt3(:model-value="true" color="red") Radio
+              w-switch.mt3(:model-value="true" color="deep-orange") Switch
               w-slider.mt12.mb4.size--sm(
-                :value="75"
+               :model-value="75"
                 thumb-label-class="orange--bg white"
                 thumb-label="droplet"
                 color="amber")
@@ -88,14 +88,14 @@ w-app.home
               .w-flex.align-center.justify-space-around.mt1
                 w-icon.success(xl) mdi mdi-check
                 w-icon.error(xl) mdi mdi-close
-                w-badge(bg-color="green" dot bottom sm overlap value="1")
+                w-badge(bg-color="green" dot bottom sm overlap model-value="1")
                   w-icon.pr2.grey(xl) mdi mdi-account
-                w-badge(bg-color="error" overlap value="1")
+                w-badge(bg-color="error" overlap model-value="1")
                   w-icon.grey(xl) mdi mdi-email
               w-alert.mt4.mb0.text-light(success round dismiss) All good!
 
             w-card.yellow-grad.card--3(content-class="pa0")
-              w-accordion(:value="[true, false, false]" expand-single :items="accordionItems")
+              w-accordion(:model-value="[true, false, false]" expand-single :items="accordionItems")
 
             w-card.white--bg.card--4(content-class="pa0" title="Form validation" title-class="py1 title4 mb0")
               .message-box
@@ -106,7 +106,7 @@ w-app.home
                     | The form has {{ form6.errorsCount }} errors.
               w-form.pa4.pt2.grey(
                 v-model="form6.valid"
-                :errors-count.sync="form6.errorsCount"
+                v-model:errors-count="form6.errorsCount"
                 @validate="onValidate"
                 @success="onSuccess")
                 w-input(required label="First name" :validators="[validators.required]")
@@ -221,6 +221,9 @@ w-app.home
 <script>
 import { gsap, TimelineMax, Power1, Power4, TweenMax } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import SshPre from 'simple-syntax-highlighter'
+import 'simple-syntax-highlighter/dist/sshpre.css'
+import '@/documentation/scss/index.scss'
 
 // For Edge. https://github.com/greensock/GSAP/issues/412#issuecomment-679841254
 window.requestAnimationFrame = window.requestAnimationFrame.bind(window)
@@ -230,6 +233,7 @@ gsap.registerPlugin(TimelineMax, TweenMax, Power4, Power1, ScrollTrigger)
 const componentsCount = { curr: 0, total: 40 }
 
 export default {
+  components: { SshPre },
   data: () => ({
     count: { count: 0, alpha: 0 },
     demoListItems: [
@@ -431,7 +435,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     this.onCountComplete = null
     ScrollTrigger.removeEventListener('refreshInit', () => gsap.set('.feature', { y: 0 }))
     ScrollTrigger.getAll().forEach(trigger => trigger.kill())
@@ -492,6 +496,7 @@ export default {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10em;
     font-size: 50px;
+    aspect-ratio: 1;
   }
   // @for $j from 1 through 2 {
   //   @for $i from 1 through 5 {
@@ -512,7 +517,6 @@ export default {
 
   .bubbles__plan--1 .bubble--1 {
     width: 0.833em;
-    height: 0.833em;
     left: 90%;
     top: 44%;
     filter: blur(6px);
@@ -520,7 +524,6 @@ export default {
   }
   .bubbles__plan--1 .bubble--2 {
     width: 1.11em;
-    height: 1.11em;
     left: 95%;
     top: 28%;
     filter: blur(6px);
@@ -529,7 +532,6 @@ export default {
 
   .bubbles__plan--2 .bubble--1 {
     width: 0.95em;
-    height: 0.95em;
     left: 83%;
     top: 41%;
     filter: blur(4px);
@@ -537,7 +539,6 @@ export default {
   }
   .bubbles__plan--2 .bubble--2 {
     width: 0.81em;
-    height: 0.81em;
     left: 91%;
     top: 53%;
     filter: blur(4px);
@@ -545,7 +546,6 @@ export default {
   }
   .bubbles__plan--2 .bubble--3 {
     width: 0.34em;
-    height: 0.34em;
     left: 90%;
     top: 62%;
     filter: blur(7px);
@@ -553,7 +553,6 @@ export default {
   }
   .bubbles__plan--2 .bubble--4 {
     width: 0.76em;
-    height: 0.76em;
     left: 4%;
     top: 66%;
     filter: blur(6px);

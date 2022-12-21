@@ -10,24 +10,3 @@ a {text-decoration: none;}
   padding-left: 3 * $base-increment;
   padding-right: 3 * $base-increment;
 }
-
-.nav-menu ~ .main-content {padding-left: 4em;}
-
-footer {
-  margin-top: 5em;
-
-  .nav-drawer ~ & {padding-left: 12px;}
-
-  .heart:hover {animation: heartbeat 1s infinite;}
-  small {font-size: 10px;}
-  .caption {padding-top: 1px;}
-}
-
-@keyframes heartbeat {
-  0%, 30%, 60%, 100% {transform: scale(1);}
-  15%, 45% {transform: scale(1.2);}
-}
-
-@media screen and (max-width: 560px) {
-  button.go-top {display: none;}
-}

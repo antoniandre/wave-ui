@@ -15,8 +15,8 @@ import WIcon from '@/wave-ui/components/w-icon.vue'
 
 const propsDescs = {
   tag: 'The HTML tag to render the icon into. <code>&lt;i&gt;</code> by default.',
-  color: 'Applies a color to the icon\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  bgColor: 'Applies a color to the icon\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  color: 'Applies a color to the icon\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Applies a color to the icon\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   xs: 'Sets the size of the icon (font-size).',
   sm: 'Sets the size of the icon (font-size).',
   md: 'Sets the size of the icon (font-size).',

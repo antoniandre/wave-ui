@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/dt/wave-ui.svg)](https://www.npmjs.com/package/wave-ui)
 <!-- [![npm](https://img.shields.io/npm/dw/wave-ui.svg)](https://www.npmjs.com/package/wave-ui) -->
 
-> An emerging UI framework for Vue.js & Vue 3 with only the bright side. :sunny:
+> An emerging UI framework for Vue.js (2 & 3) with only the bright side. :sunny:
 
 ___
 
@@ -19,10 +19,10 @@ ___
 npm i wave-ui
 ```
 
-**Vue 3**
+**Vue 2 (legacy)**
 
 ```
-npm i wave-ui@next
+npm i wave-ui@legacy
 ```
 
 ___
@@ -41,6 +41,8 @@ If you want to support the development of this library, you can buy me a beer or
 [![paypal](https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/antoniandre1)
 Thank you!
 
+If you are using this library for profit business, please consider [backing me](https://github.com/sponsors/antoniandre)!
+It ensures that the project your products rely on keep being actively maintained. :)
 ___
 
 ## Contributing

@@ -1,20 +1,67 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { reactive } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router'
 import store from '@/store'
 import GettingStarted from '@/documentation/views/getting-started/index.vue'
 import Home from '@/documentation/views/home.vue'
 
-Vue.use(VueRouter)
+// Used in the documentation main menu.
+export const UIComponents = [
+  { id: 'accordion', label: 'Accordion' },
+  { id: 'alert', label: 'Alert' },
+  // { id: 'autocomplete', label: 'Autocomplete', inProgress: true },
+  { id: 'app', label: 'App' },
+  { id: 'breadcrumbs', label: 'Breadcrumbs' },
+  { id: 'button', label: 'Button' },
+  { id: 'badge', label: 'Badge' },
+  { id: 'card', label: 'Card' },
+  { id: 'checkbox', label: 'Checkbox', formElement: true },
+  { id: 'confirm', label: 'Confirm' },
+  // { id: 'date-picker', label: 'Date picker', disabled: true },
+  { id: 'dialog', label: 'Dialog' },
+  { id: 'divider', label: 'Divider' },
+  { id: 'drawer', label: 'Drawer' },
+  { id: 'form', label: 'Form', formElement: true },
+  { id: 'icon', label: 'Icon' },
+  { id: 'image', label: 'Image' },
+  { id: 'input', label: 'Input', formElement: true },
+  { id: 'list', label: 'List' },
+  { id: 'menu', label: 'Menu' },
+  { id: 'notification', label: 'Notification' },
+  { id: 'overlay', label: 'Overlay' },
+  // { id: 'parallax', label: 'Parallax', disabled: true },
+  { id: 'progress', label: 'Progress' },
+  { id: 'radio', label: 'Radio', formElement: true },
+  { id: 'rating', label: 'Rating' },
+  { id: 'select', label: 'Select', formElement: true },
+  { id: 'slider', label: 'Slider' },
+  { id: 'spinner', label: 'Spinner' },
+  { id: 'steps', label: 'Steps', disabled: true },
+  { id: 'switch', label: 'Switch', formElement: true },
+  { id: 'tabs', label: 'Tabs' },
+  { id: 'table', label: 'Table' },
+  { id: 'tag', label: 'Tag' },
+  { id: 'textarea', label: 'Textarea', formElement: true },
+  { id: 'timeline', label: 'Timeline' },
+  { id: 'toolbar', label: 'Toolbar' },
+  { id: 'tooltip', label: 'Tooltip' },
+  { id: 'tree', label: 'Tree', inProgress: true }
+]
+
 // The loading state of Vue Router is appended to $router, so a
 // spinner can be shown while loading. This status needs to be reactive, it is
 // set to true on beforeRoute and false on afterRoute.
-const status = Vue.observable({ loading: true })
+const status = reactive({ loading: true })
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: Home
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: () => import('@/documentation/views/test.vue')
   },
   {
     path: '/why-wave-ui',
@@ -57,9 +104,19 @@ const routes = [
     component: () => import('@/documentation/views/layout-grid-system.vue')
   },
   {
+    path: '/layout--simplified-grid-system',
+    name: 'layout-simplified-grid-system',
+    component: () => import('@/documentation/views/layout-simplified-grid-system.vue')
+  },
+  {
     path: '/layout--flex',
     name: 'layout-flex',
     component: () => import('@/documentation/views/layout-flex.vue')
+  },
+  {
+    path: '/layout--other-css-classes',
+    name: 'layout-other-css-classes',
+    component: () => import('@/documentation/views/layout-other-css-classes.vue')
   },
   {
     path: '/typography',
@@ -111,47 +168,7 @@ const routes = [
   }
 ]
 
-const components = [
-  { id: 'accordion', label: 'Accordion' },
-  { id: 'alert', label: 'Alert' },
-  { id: 'app', label: 'App' },
-  { id: 'breadcrumbs', label: 'Breadcrumbs' },
-  { id: 'button', label: 'Button' },
-  { id: 'badge', label: 'Badge' },
-  { id: 'card', label: 'Card' },
-  { id: 'checkbox', label: 'Checkbox' },
-  { id: 'confirm', label: 'Confirm' },
-  { id: 'date-picker', label: 'Date picker' },
-  { id: 'dialog', label: 'Dialog' },
-  { id: 'divider', label: 'Divider' },
-  { id: 'drawer', label: 'Drawer' },
-  { id: 'form', label: 'Form' },
-  { id: 'icon', label: 'Icon' },
-  { id: 'image', label: 'Image' },
-  { id: 'input', label: 'Input' },
-  { id: 'list', label: 'List' },
-  { id: 'menu', label: 'Menu' },
-  { id: 'notification', label: 'Notification' },
-  { id: 'overlay', label: 'Overlay' },
-  { id: 'parallax', label: 'Parallax' },
-  { id: 'progress', label: 'Progress' },
-  { id: 'rating', label: 'Rating' },
-  { id: 'select', label: 'Select' },
-  { id: 'slider', label: 'Slider' },
-  { id: 'spinner', label: 'Spinner' },
-  { id: 'steps', label: 'Steps' },
-  { id: 'timeline', label: 'Timeline' },
-  { id: 'switch', label: 'Switch' },
-  { id: 'radio', label: 'Radio' },
-  { id: 'tabs', label: 'Tabs' },
-  { id: 'table', label: 'Table' },
-  { id: 'tag', label: 'Tag' },
-  { id: 'textarea', label: 'Textarea' },
-  { id: 'toolbar', label: 'Toolbar' },
-  { id: 'tooltip', label: 'Tooltip' }
-]
-
-components.forEach(item => {
+UIComponents.forEach(item => {
   routes.push({
     path: item.path || `/w-${item.id}`,
     name: item.id,
@@ -175,14 +192,13 @@ externalComponents.forEach(item => {
 
 // Keep this route last!
 routes.push({
-  path: '/*',
+  path: '/:pathMatch(.*)',
   name: 'not-found',
   component: () => import('@/documentation/views/404.vue')
 })
 
-const router = new VueRouter({
-  mode: 'history',
-  base: import.meta.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
 
@@ -200,8 +216,10 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   router.status = false
   setTimeout(() => {
+    const pageTitle = (document.querySelector('h1') || {}).innerText?.replace(/[#\n]|IN PROGRESS/g, '')
+    document.title = `${pageTitle} - Wave UI`
     // After route change, update the title of the page to pass it to Codepen from examples.
-    store.commit('setCurrentPage', document.querySelector('h1').innerText.replace(/[#\n]/g, ''))
+    store.commit('setCurrentPage', pageTitle)
   }, 200)
 })
 

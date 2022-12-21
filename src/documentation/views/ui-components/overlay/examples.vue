@@ -47,7 +47,7 @@ div
       w-button(bg-color="primary" lg dark @click="showOverlay = false")
         w-icon.mr2 wi-cross
         | Hide overlay
-    //- template(#pug).
+    template(#pug).
       w-flex(wrap)
         w-button(bg-color="primary" dark @click="showOverlay = true") Show overlay
 
@@ -60,14 +60,14 @@ div
             @click="persistent = !persistent"
             sm
             dark)
-            .code.white :persistent="{{ persistent }}"
+            .code.white :persistent="{{ '\{\{ persistent \}\}' }}"
           w-button(
             bg-color="primary-light1"
             @click="persistentNoAnimation = !persistentNoAnimation"
             :disabled="!persistent"
             sm
             dark)
-            .code.white :persistent-no-animation="{{ persistentNoAnimation }}"
+            .code.white :persistent-no-animation="{{ '\{\{ persistentNoAnimation \}\}' }}"
           w-input.mt2.d-block(
             v-model="opacity"
             outline
@@ -106,7 +106,7 @@ div
             @click="persistent = !persistent"
             sm
             dark&gt;
-            :persistent="{{ persistent }}"
+            :persistent="{{ '\{\{ persistent \}\}' }}"
           &lt;/w-button&gt;
 
           &lt;w-button
@@ -115,7 +115,7 @@ div
             :disabled="!persistent"
             sm
             dark&gt;
-            :persistent-no-animation="{{ persistentNoAnimation }}"
+            :persistent-no-animation="{{ '\{\{ persistentNoAnimation \}\}' }}"
           &lt;/w-button&gt;
 
           &lt;w-input
@@ -162,7 +162,7 @@ div
       w-button(bg-color="primary" lg dark @click="showBlueOverlay = false")
         w-icon.mr2 wi-cross
         | Hide overlay
-    //- template(#pug).
+    template(#pug).
       w-button(bg-color="primary" dark @click="showOverlay = true") Show a blue overlay
 
       w-overlay(v-model="showOverlay" bg-color="rgba(35, 71, 129, 0.4)")

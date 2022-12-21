@@ -1,19 +1,25 @@
+import { reactive, inject } from 'vue'
 import config, { mergeConfig } from './utils/config'
 import NotificationManager from './utils/notification-manager'
 import colors from './utils/colors'
-import { consoleWarn } from './utils/console'
 // import * as directives from './directives'
 
-const shadeColor = (col, amt) => {
-  return '#' + col.slice(1).match(/../g)
-    .map(x => (x =+ `0x${x}` + amt, x < 0 ? 0 : ( x > 255 ? 255 : x)).toString(16).padStart(2, 0))
+const shadeColor = (color, amount) => {
+  return '#' + color.slice(1).match(/../g)
+    .map(x => (x =+ `0x${x}` + amount, x < 0 ? 0 : ( x > 255 ? 255 : x)).toString(16).padStart(2, 0))
     .join('')
 }
+
+// Keep the notification manager private.
+// @todo: find a way to use private fields with Vue 3 proxies.
+// https://github.com/tc39/proposal-class-fields/issues/106
+// https://github.com/tc39/proposal-class-fields/issues/227
+let notificationManager = null
 
 export default class WaveUI {
   static instance = null
   static vueInstance = null // Needed until constructor is called.
-  #notificationManager
+  // #notificationManager
 
   // Public breakpoint object. Accessible from this.$waveui.breakpoint.
   breakpoint = {
@@ -34,17 +40,19 @@ export default class WaveUI {
     return obj
   }, { ...config.colors, black: '#000', white: '#fff', transparent: 'transparent', inherit: 'inherit' })
 
-  static install (Vue, options = {}) {
+  config = {} // Store and expose the config in the $waveui object.
+
+  static install (app, options = {}) {
     // Register directives.
     // for (const id in directives) {
-    //   if (directives[id]) Vue.directive(id, directives[id])
+    //   if (directives[id]) app.directive(id, directives[id])
     // }
-    Vue.directive('focus', {
-      // When the bound element is inserted into the DOM.
-      inserted: el => el.focus()
+    app.directive('focus', {
+      // Wait for the next tick to focus the newly mounted element.
+      mounted: el => setTimeout(() => el.focus(), 0)
     })
-    Vue.directive('scroll', {
-      inserted: (el, binding) => {
+    app.directive('scroll', {
+      mounted: (el, binding) => {
         const f = evt => {
           if (binding.value(evt, el)) window.removeEventListener('scroll', f)
         }
@@ -56,36 +64,28 @@ export default class WaveUI {
     const { components = {} } = options || {}
     for (let id in components) {
       const component = components[id]
-      Vue.component(component.name, component)
+      app.component(component.name, component)
     }
 
     // Register mixins.
-    // Vue.mixin({
+    // app.mixin({
     //   mounted () {
     //   }
     // })
 
-    // Save the Vue instance for use in the constructor.
-    WaveUI.vueInstance = Vue
+    WaveUI.registered = true
   }
 
   // Singleton.
-  constructor (options = {}) {
+  constructor (app, options = {}) {
     if (WaveUI.instance) return WaveUI.instance
 
     else {
-      this.#notificationManager = new NotificationManager()
+      if (!WaveUI.registered) app.use(WaveUI)
+      notificationManager = reactive(new NotificationManager())
 
       // Merge user options into the default config.
       mergeConfig(options)
-
-      // @todo: remove this warning in version 1.40+.
-      if (config.disableColorShades) {
-        consoleWarn(
-          'WARNING - Since version 1.30, the option `disableColorShades` is replaced with `css.colorShades`.\n' +
-          'https://antoniandre.github.io/wave-ui/release-notes'
-        )
-      }
 
       // Add color shades for each custom color given in options.
       if (config.css.colorShades) {
@@ -111,17 +111,22 @@ export default class WaveUI {
         }
       }
 
+      this.config = config
+      this.notify = (...args) => notificationManager.notify(...args)
       WaveUI.instance = this
-      // Make waveui reactive and expose the single instance in Vue.
-      WaveUI.vueInstance.prototype.$waveui = WaveUI.vueInstance.observable(this)
 
-      delete WaveUI.vueInstance // Get rid of the Vue instance that we don't need anymore.
+      // Make waveui reactive and expose the single instance in Vue.
+      app.config.globalProperties.$waveui = reactive(this)
+      app.provide('$waveui', WaveUI.instance)
     }
   }
 
   notify (...args) {
-    this.#notificationManager.notify(...args)
+    notificationManager.notify(...args)
   }
 }
 
-WaveUI.version = '__VERSION__'
+/**
+ * Returns the WaveUI instance. Equivalent to using `$waveui` inside templates.
+ */
+export const useWaveUI = () => inject('$waveui')

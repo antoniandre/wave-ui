@@ -3,12 +3,12 @@ component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: isOn, disabled: isDisabled, readonly: isReadonly }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="$emit('update:modelValue', isOn = null);$emit('input', null)"
   :class="classes")
   input(
     ref="input"
-    :id="`w-switch--${_uid}`"
+    :id="`w-switch--${_.uid}`"
     type="checkbox"
     :name="inputName"
     :checked="isOn"
@@ -22,17 +22,30 @@ component(
     :aria-checked="isOn || 'false'"
     role="switch")
   template(v-if="hasLabel && labelOnLeft")
-    label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_uid}`")
-      slot
-    label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_uid}`" v-html="label")
+    label.w-switch__label.w-switch__label--left.w-form-el-shakable(
+      v-if="$slots.default || label"
+      :for="`w-switch--${_.uid}`"
+      :class="labelClasses")
+      slot {{ label }}
   .w-switch__input(
     @click="$refs.input.focus();$refs.input.click()"
-    v-on="$listeners"
+    v-on="$attrs"
     :class="inputClasses")
+    .w-switch__track(v-if="$slots.track")
+      slot(name="track")
+    .w-switch__thumb(v-if="$slots.thumb || loading")
+      w-progress(
+        v-if="loading"
+        circle
+        color="inherit"
+        v-bind="typeof loading === 'number' ? { 'model-value': loading } : {}")
+      slot(v-else name="thumb")
   template(v-if="hasLabel && !labelOnLeft")
-    label.w-switch__label.w-form-el-shakable(v-if="$slots.default" :for="`w-switch--${_uid}`")
-      slot
-    label.w-switch__label.w-form-el-shakable(v-else-if="label" :for="`w-switch--${_uid}`" v-html="label")
+    label.w-switch__label.w-switch__label--right.w-form-el-shakable(
+      v-if="$slots.default || label"
+      :for="`w-switch--${_.uid}`"
+      :class="labelClasses")
+      slot {{ label }}
 </template>
 
 <script>
@@ -43,12 +56,14 @@ export default {
   mixins: [FormElementMixin],
 
   props: {
-    value: { default: false }, // v-model.
+    modelValue: { default: false }, // v-model.
     label: { type: String, default: '' },
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' },
     thin: { type: Boolean },
-    noRipple: { type: Boolean }
+    noRipple: { type: Boolean },
+    loading: { type: [Boolean, Number], default: false }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -57,7 +72,7 @@ export default {
 
   data () {
     return {
-      isOn: this.value,
+      isOn: this.modelValue,
       ripple: {
         start: false,
         end: false,
@@ -68,7 +83,7 @@ export default {
 
   computed: {
     hasLabel () {
-      return (this.$slots.default && this.$slots.default.length) || this.label
+      return this.label || this.$slots.default
     },
     classes () {
       return {
@@ -77,13 +92,16 @@ export default {
         'w-switch--disabled': this.isDisabled,
         'w-switch--readonly': this.isReadonly,
         'w-switch--ripple': this.ripple.start,
+        'w-switch--custom-thumb': this.$slots.thumb,
+        'w-switch--custom-track': this.$slots.track,
+        'w-switch--loading': this.loading,
         'w-switch--rippled': this.ripple.end
       }
     },
     inputClasses () {
       const side = this.hasLabel && this.labelOnLeft ? 'l' : 'r'
       return [
-        [this.color],
+        this.color,
         this.hasLabel ? (this.thin ? `m${side}3` : `m${side}2`) : ''
       ]
     }
@@ -113,7 +131,7 @@ export default {
   },
 
   watch: {
-    value (value) {
+    modelValue (value) {
       this.isOn = value
     }
   }
@@ -131,6 +149,7 @@ $disabled-color: #ddd;
   vertical-align: middle;
   cursor: pointer;
 
+  &--loading {cursor: wait;}
   &--disabled, &--readonly {
     cursor: not-allowed;
     touch-action: initial;
@@ -186,8 +205,18 @@ $disabled-color: #ddd;
     }
   }
 
-  // Thumb.
-  &__input:after {
+  // Track slot, if any.
+  &__track {
+    position: absolute;
+    left: 100%;
+    padding: 0 4px;
+    transform: translateX(-100%);
+    @include default-transition;
+  }
+  .w-switch--on &__track {left: 0;transform: translateX(0);}
+
+  // Thumb: show either the thumb slot if any, or :after otherwise.
+  &__thumb, &__input:after {
     content: '';
     position: absolute;
     left: 0;
@@ -196,21 +225,29 @@ $disabled-color: #ddd;
     height: $small-form-el-size;
     background-color: #fff;
     border-radius: 100%;
+    text-align: center;
     @include default-transition;
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
 
-    :checked ~ & {transform: translateX(100%);}
+    .w-switch--on & {left: 100%;transform: translateX(-100%);}
 
     .w-switch--thin & {
       top: - round(0.15 * $small-form-el-size);
       transform: scale(1.1);
       box-shadow: $box-shadow;
     }
-    .w-switch--thin :checked ~ & {
-      transform: translateX(100%) scale(1.1);
+    .w-switch--thin.w-switch--on & {
+      transform: translateX(-100%) scale(1.1);
       background-color: currentColor;
     }
+  }
+  &--loading .w-progress {padding: 1px;}
+  &--loading.w-switch--thin.w-switch--on .w-progress {color: #fff;}
+  &--loading &__input:after, &--custom-thumb &__input:after {display: none;}
+  &__thumb > * {
+    width: inherit;
+    height: inherit;
   }
 
   // The focus outline & ripple on switch activation.
@@ -220,13 +257,14 @@ $disabled-color: #ddd;
     left: 0;
     top: 0;
     width: $small-form-el-size;
-    height: $small-form-el-size;
+    aspect-ratio: 1;
     background-color: currentColor;
     border-radius: 100%;
-    transform: translateX(100%) scale(0);
     opacity: 0;
     pointer-events: none;
     transition: 0.25s ease-in-out;
+
+    :checked ~ & {transform: translateX(-100%) scale(0);left: 100%;}
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
     .w-switch--thin & {top: - round(0.15 * $small-form-el-size);}
@@ -242,14 +280,14 @@ $disabled-color: #ddd;
     opacity: 0.2;
   }
   :focus:checked ~ &__input:before {
-    transform: translateX(100%) scale(1.8);
+    transform: translateX(-100%) scale(1.8);
   }
 
   // After ripple reset to default state, then remove the class via js and the
   // `:focus ~ &__input:before` will re-transition to normal focused outline.
   &--rippled &__input:before {
     transition: none;
-    transform: translateX(100%) scale(0);
+    transform: translateX(-100%) scale(0);
     opacity: 0;
   }
 
@@ -264,7 +302,7 @@ $disabled-color: #ddd;
 }
 
 @keyframes w-switch-ripple {
-  0% {opacity: 0.8;transform: translateX(100%) scale(1);background-color: currentColor;} // Start with visible ripple.
-  100% {opacity: 0;transform: translateX(100%) scale(2.8);} // Propagate ripple to max radius and fade out.
+  0% {opacity: 0.8;transform: translateX(-100%) scale(1);background-color: currentColor;} // Start with visible ripple.
+  100% {opacity: 0;transform: translateX(-100%) scale(2.8);} // Propagate ripple to max radius and fade out.
 }
 </style>

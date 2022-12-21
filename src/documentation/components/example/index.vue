@@ -1,7 +1,7 @@
 <template lang="pug">
 .example
   //- .fill-height in case the example is in a flex column.
-  .w-flex.fill-height
+  .w-flex.grow
     .example__render.grow(:class="contentClass")
       slot
     .buttons
@@ -32,16 +32,18 @@
         template(#tabs-bar-extra)
           preference-buttons.no-grow(:has-pug="!!$slots.pug")
         template(#item-content="{ item }")
-          source-code(:item="item" v-bind="$props")
+          source-code(:item="item" :reactive="reactive")
             template(#[item.id])
               slot(:name="item.id")
       //- See all languages at once.
       div.bdt1(v-else)
-        w-flex(justify-space-between align-center)
-          .title5.code.pl2.mb0.primary &lt;/&gt; Source code
+        w-flex.top-bar(justify-space-between align-center)
+          label.pl2
+            w-icon.mr2 mdi mdi-code-tags
+            | Source code
           preference-buttons.no-grow(:has-pug="!!$slots.pug")
-        div(v-for="(item, i) in sourceCodeTabs" :key="i")
-          source-code(:item="item" v-bind="$props")
+        template(v-for="(item, i) in sourceCodeTabs" :key="i")
+          source-code(:item="item" :reactive="reactive")
             template(#[item.id])
               slot(:name="item.id")
 </template>
@@ -52,7 +54,9 @@ import SourceCode from './source-code.vue'
 
 export default {
   props: {
-    flex: { type: Boolean }, // Removes the `block` prop off the `w-app` component.
+    // Pass props to the w-app component as a string (way simpler to pass it to Codepen).
+    appPropsString: { type: String, default: 'block' },
+
     contentClass: { type: String },
     externalJs: { type: String },
     externalCss: { type: String },
@@ -87,15 +91,16 @@ export default {
           const object = {
             ...obj,
             id: key,
-            content: (this.$slots[key] && this.$slots[key][0].text) || ''
+            content: (this.$slots[key] && this.getSlotChildrenText(this.$slots[key]())) || ''
           }
 
+          const pugSlotContent = this.$slots.pug && this.getSlotChildrenText(this.$slots.pug())
           // If the user prefers Pug, and there is a pug source code (otherwise show HTML).
-          if (this.usePug && key === 'html' && this.$slots.pug && this.$slots.pug[0].text) {
+          if (this.usePug && key === 'html' && pugSlotContent) {
             object.id = 'pug'
             object.language = 'pug'
             object.title = 'Pug'
-            object.content = this.$slots.pug[0].text
+            object.content = pugSlotContent
           }
 
           return object
@@ -109,6 +114,14 @@ export default {
   },
 
   methods: {
+    getSlotChildrenText (children) {
+      return children.map(node => {
+        if (!node.children || typeof node.children === 'string') return node.children || ''
+        else if (Array.isArray(node.children)) return this.getSlotChildrenText(node.children)
+        else if (node.children.default) return this.getSlotChildrenText(node.children.default())
+      }).join('')
+    },
+
     createCodepen (e) {
       const openEditors = [
         (!!this.$slots.html || !!this.$slots.pug) * 1,
@@ -117,43 +130,48 @@ export default {
       ]
 
       const cssDeps = [
-        'https://unpkg.com/wave-ui@latest/dist/wave-ui.css',
+        'https://unpkg.com/wave-ui/dist/wave-ui.css',
         'https://cdn.materialdesignicons.com/5.1.45/css/materialdesignicons.min.css'
       ]
       if (this.externalCss) cssDeps.push(this.externalCss)
 
       const jsDeps = [
-        'https://unpkg.com/vue@latest/dist/vue.js',
-        'https://unpkg.com/wave-ui@latest/dist/wave-ui.umd.js'
+        'https://unpkg.com/vue',
+        'https://unpkg.com/wave-ui/dist/wave-ui.umd.js'
       ]
       if (this.externalJs) jsDeps.push(this.externalJs)
 
+      const { html: htmlSlot, pug, js: jsSlot, css: cssSlot, scss } = this.$slots
       const slots = {
-        html: (this.$slots.html && this.$slots.html[0].text) || '',
-        pug: ((this.$slots.pug && this.$slots.pug[0].text) || '').replace(/(#[\w.-]+)(?=\s|\))(?!\n)/gi, '$1=""'),
-        js: (this.$slots.js && this.$slots.js[0].text) || '',
-        css: (this.$slots.css && this.$slots.css[0].text) || '',
-        scss: (this.$slots.scss && this.$slots.scss[0].text) || ''
+        html: (htmlSlot && htmlSlot()[0].children) || '',
+        pug: ((pug && pug()[0].children) || '').replace(/(#[\w.-]+)(?=\s|\))(?!\n)/gi, '$1=""'),
+        js: (jsSlot && jsSlot()[0].children) || '',
+        css: (cssSlot && cssSlot()[0].children) || '',
+        scss: (scss && scss()[0].children) || ''
       }
       let html = ''
       let css = ''
       let js = ''
       const blanks = this.blankCodepen || []
 
-      // Pug & HTML.
+      // Pug.
       if (this.usePug && slots.pug) {
         if (blanks.includes('pug')) html = slots.pug.replace(/\n+$/, '')
         else {
-          html = `w-app#app${this.flex ? '' : '(block)'}\n  ` +
-                 slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n  ')
+          html = `#app\n  w-app${this.appPropsString ? `(${this.appPropsString})` : ''}\n    ` +
+                 slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n    ')
         }
       }
+
+      // HTML.
       else {
         if (blanks.includes('html')) html = slots.html.replace(/\n+$/, '')
         else {
-          html = `<w-app id="app"${this.flex ? '' : ' block'}>\n  ` +
-                 slots.html.replace(/\n+$/, '').replace(/\n/g, '\n  ') +
-                 '\n</w-app>\n'
+          html = '<div id="app">\n' +
+                    `  <w-app id="app"${this.appPropsString ? ` ${this.appPropsString}` : ''}>\n    ` +
+                      slots.html.replace(/\n+$/, '').replace(/\n/g, '\n    ') +
+                    '\n  </w-app>\n' +
+                 '</div>\n'
         }
       }
 
@@ -164,16 +182,17 @@ export default {
       // JS.
       if (blanks.includes('js')) js = slots.js
       else {
-        js = 'new Vue({' +
-                '\n  waveui: new WaveUI()' + (slots.js ? ',\n  ' : '') +
-                slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') +
-                '\n}).$mount(\'#app\')'
+        js = 'const app = Vue.createApp({\n' +
+                '  ' + slots.js.replace(/\n+$/, '').replace(/\n/g, '\n  ') + '\n' +
+                '})\n\n' +
+                'new WaveUI(app, {})\n\n' +
+                'app.mount(\'#app\')'
       }
 
       const data = {
         title: `Wave UI - ${this.currentPage} example`,
         editors: openEditors.join(''),
-        layout: 'top',
+        // layout: 'top', // This now breaks the Codepen generation. :/
         html,
         html_pre_processor: this.usePug && slots.pug ? 'pug' : 'none',
         css,
@@ -205,18 +224,18 @@ export default {
 <style lang="scss">
 .pug-icon {
   fill: currentColor;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .example {
   position: relative;
+  display: flex;
+  flex-direction: column;
   margin-top: 1em;
   margin-bottom: 1em;
   border: 1px solid #eee;
   background-color: #fcfcfc;
   border-radius: 3px;
-
-  .w-tabs {border-radius: 0;border-width: 1px 0 0;}
 
   .buttons {
     border-left: 1px solid #eee;
@@ -228,13 +247,24 @@ export default {
     .w-button {width: 30px;height: 30px;}
   }
 
-  &__render {padding: 12px;overflow: auto;}
+  &__render {
+    position: relative;
+    padding: 12px;
+    overflow: auto;
+  }
 
-  &__source {position: relative;}
+  &__source {
+    position: relative;
 
-  &__source .w-tabs__bar-item {
-    font-size: 0.95rem;
-    padding: 2px 8px;
+    > .w-tabs {
+      border-radius: 0;
+      border-width: 1px 0 0;
+
+      .w-tabs__bar {overflow: hidden;}
+      .w-tabs__bar-item {font-size: 0.95rem;padding: 2px 8px;}
+    }
+
+    label .w-icon {margin-bottom: 2px;}
   }
 
   .codepen-form {

@@ -11,7 +11,7 @@
       w-icon.ma1(color="primary") mdi mdi-content-copy
     slot(:name="item.id")
   w-notification.mr6.mt-1(
-    :value="!!showCopied"
+    :model-value="!!showCopied"
     transition="slide-fade-left"
     plain
     absolute
@@ -52,6 +52,8 @@ export default {
     line-height: 1.3;
   }
 
+  .top-bar + .language .ssh-pre {border-top-color: rgba(0, 0, 0, 0.05);}
+
   .ssh-pre[data-label]:before {
     font-family: 'Arial Narrow', Arial, sans-serif;
     bottom: auto;
@@ -70,8 +72,8 @@ export default {
     right: 1px;
 
     .w-icon {
-      padding: 12px 0;
-      width: 24px; // For IE11.
+      width: 24px;
+      height: 24px;
       transition: 0.25s;
     }
     &:hover .w-icon {background-color: rgba(35, 71, 129, 0.15);}

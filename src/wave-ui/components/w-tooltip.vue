@@ -1,34 +1,27 @@
 <template lang="pug">
-.w-tooltip-wrap(ref="wrapper" :class="{ 'w-tooltip-wrap--attached': !detachTo }")
-  slot(name="activator" :on="eventHandlers")
-  transition(:name="transitionName" appear)
-    .w-tooltip(ref="tooltip" v-show="showTooltip" :class="classes" :style="styles")
-      //- When there is a bg color, another div wrapper is needed for the triangle
-      //- to inherit the current color.
-      div(v-if="bgColor" :class="color")
-        slot
-      slot(v-else)
+slot(name="activator" :on="activatorEventHandlers")
+transition(:name="transitionName" appear)
+  .w-tooltip(
+    v-if="detachableVisible"
+    ref="detachable"
+    :key="_.uid"
+    :class="classes"
+    :style="styles")
+    slot
 </template>
 
 <script>
-/**
- * Complexity of this component: Vue 2.x can only mount 1 single root element, but we don't
- * want to wrap the activator as it may break the layout.
- * Another simpler way would be to append the tooltip inside the activator, but some HTML tags
- * can't have children like <input>.
- * So a solution is to mount both the activator element and the tooltip in a wrapper then unwrap
- * and move the tooltip elsewhere in the DOM.
- */
+import { objectifyClasses } from '../utils/index'
+import DetachableMixin from '../mixins/detachable'
 
-import { consoleWarn } from '../utils/console'
-
-const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
+// const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
 
 export default {
   name: 'w-tooltip',
+  mixins: [DetachableMixin],
 
   props: {
-    value: {},
+    modelValue: {},
     showOnClick: { type: Boolean },
     color: { type: String },
     bgColor: { type: String },
@@ -36,148 +29,114 @@ export default {
     shadow: { type: Boolean },
     tile: { type: Boolean },
     round: { type: Boolean },
-    transition: { type: String, default: '' },
-    tooltipClass: { type: String },
-    // Position.
-    detachTo: {},
-    fixed: { type: Boolean },
-    top: { type: Boolean },
-    bottom: { type: Boolean },
-    left: { type: Boolean },
-    right: { type: Boolean },
-    zIndex: { type: [Number, String, Boolean] }
+    transition: { type: String },
+    tooltipClass: { type: [String, Object, Array] },
+    persistent: { type: Boolean },
+    delay: { type: Number }
+    // Other props in the detachable mixin:
+    // detachTo, appendTo, fixed, top, bottom, left, right, alignTop, alignBottom, alignLeft,
+    // alignRight, noPosition, zIndex, activator.
   },
 
   emits: ['input', 'update:modelValue', 'open', 'close'],
 
   data: () => ({
-    showTooltip: false,
-    // The activator coordinates.
-    coordinates: {
+    detachableVisible: false,
+    hoveringActivator: false,
+    // The tooltip computed top & left coordinates.
+    detachableCoords: {
       top: 0,
-      left: 0,
-      width: 0,
-      height: 0
+      left: 0
     },
-    activatorEl: null,
-    tooltipEl: null,
+    detachableEl: null,
     timeoutId: null
   }),
 
   computed: {
+    /**
+     * Other computed in the detachable mixin:
+     * - `appendToTarget`
+     * - `detachableParentEl`
+     * - `activatorEl`
+     * - `position`
+     * - `alignment`
+     **/
+
+    tooltipClasses () {
+      return objectifyClasses(this.tooltipClass)
+    },
+
     transitionName () {
       const direction = this.position.replace(/top|bottom/, m => ({ top: 'up', bottom: 'down' }[m]))
       return this.transition || `w-tooltip-slide-fade-${direction}`
     },
 
-    detachToTarget () {
-      let target = this.detachTo || '.w-app'
-      if (target === true) target = '.w-app'
-      else if (target && !['object', 'string'].includes(typeof target)) target = '.w-app'
-      else if (typeof target === 'object' && !target.nodeType) {
-        target = '.w-app'
-        consoleWarn('Invalid node provided in w-tooltip `attach-to`. Falling back to .w-app.', this)
-      }
-      if (typeof target === 'string') target = document.querySelector(target)
-
-      if (!target) {
-        consoleWarn(`Unable to locate ${this.detachTo ? `target ${this.detachTo}` : '.w-app'}`, this)
-        target = document.querySelector('.w-app')
-      }
-
-      return target
-    },
-
-    // DOM element that will receive the tooltip.
-    tooltipParentEl () {
-      return this.detachTo ? this.detachToTarget : this.$refs.wrapper
-    },
-
-    position () {
-      return (
-        (this.top && 'top') ||
-        (this.bottom && 'bottom') ||
-        (this.left && 'left') ||
-        (this.right && 'right') ||
-        'bottom'
-      )
-    },
-
-    tooltipCoordinates () {
-      const coords = {}
-      const { top, left, width, height } = this.coordinates
-
-      switch (this.position) {
-        case 'top': {
-          coords.top = top
-          coords.left = left + width / 2 // left: 50%.
-          break
-        }
-        case 'bottom': {
-          coords.top = top + height
-          coords.left = left + width / 2 // left: 50%.
-          break
-        }
-        case 'left': {
-          coords.top = top + height / 2 // top: 50%.
-          coords.left = left
-          break
-        }
-        case 'right': {
-          coords.top = top + height / 2 // top: 50%.
-          coords.left = left + width
-          break
-        }
-      }
-
-      return coords
-    },
-
     classes () {
       return {
-        [this.color]: !this.bgColor,
-        [`${this.bgColor} ${this.bgColor}--bg`]: this.bgColor,
-        [this.tooltipClass]: this.tooltipClass,
-        [`w-tooltip--${this.position}`]: true,
+        [this.color]: this.color,
+        [`${this.bgColor}--bg`]: this.bgColor,
+        ...this.tooltipClasses,
+        [`w-tooltip--${this.position}`]: !this.noPosition,
+        [`w-tooltip--align-${this.alignment}`]: !this.noPosition && this.alignment,
         'w-tooltip--tile': this.tile,
         'w-tooltip--round': this.round,
         'w-tooltip--shadow': this.shadow,
         'w-tooltip--fixed': this.fixed,
-        'w-tooltip--active': this.showTooltip,
         'w-tooltip--no-border': this.noBorder || this.bgColor,
         'w-tooltip--custom-transition': this.transition
       }
     },
 
+    // The tooltip styles.
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || null,
-        top: `${~~this.tooltipCoordinates.top}px`,
-        left: `${~~this.tooltipCoordinates.left}px`
+        top: (this.detachableCoords.top && `${~~this.detachableCoords.top}px`) || null,
+        left: (this.detachableCoords.left && `${~~this.detachableCoords.left}px`) || null,
+        '--w-tooltip-bg-color': this.$waveui.colors[this.bgColor || 'white']
       }
     },
 
-    eventHandlers () {
+    activatorEventHandlers () {
       let handlers = {}
       if (this.showOnClick) handlers = { click: this.toggle }
       else {
         handlers = {
           focus: this.toggle,
           blur: this.toggle,
-          mouseenter: this.toggle,
-          mouseleave: this.toggle
+          mouseenter: e => {
+            this.hoveringActivator = true
+            this.open(e)
+          },
+          mouseleave: e => {
+            this.hoveringActivator = false
+            this.close()
+          }
         }
 
-        if ('ontouchstart' in window) handlers.click = this.toggle
+        // Check the window exists: SSR-proof.
+        if (typeof window !== 'undefined' && 'ontouchstart' in window) handlers.click = this.toggle
       }
       return handlers
     }
   },
 
   methods: {
+    /**
+     * Other methods in the `detachable` mixin:
+     * - `open`
+     * - `getActivatorCoordinates`
+     * - `computeDetachableCoords`
+     * - `onResize`
+     * - `onOutsideMousedown`
+     * - `insertInDOM`
+     * - `removeFromDOM`
+     **/
+
+    // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     toggle (e) {
-      let shouldShowTooltip = this.showTooltip
-      if ('ontouchstart' in window) {
+      let shouldShowTooltip = this.detachableVisible
+      if (typeof window !== 'undefined' && 'ontouchstart' in window) {
         if (e.type === 'click') shouldShowTooltip = !shouldShowTooltip
       }
       else if (e.type === 'click' && this.showOnClick) shouldShowTooltip = !shouldShowTooltip
@@ -185,134 +144,45 @@ export default {
       else if (['mouseleave', 'blur'].includes(e.type) && !this.showOnClick) shouldShowTooltip = false
 
       this.timeoutId = clearTimeout(this.timeoutId)
-      if (shouldShowTooltip) {
-        this.coordinates = this.getCoordinates(e)
-        // In `getCoordinates` accessing the tooltip computed styles takes a few ms (less than 10ms),
-        // if we don't postpone the tooltip apparition it will start transition from a visible tooltip and
-        // thus will not transition.
-        this.timeoutId = setTimeout(() => {
-          this.showTooltip = true
-          this.$emit('update:modelValue', true)
-          this.$emit('input', true)
-          this.$emit('open')
-        }, 10)
-      }
-      else {
-        this.showTooltip = false
-        this.$emit('update:modelValue', false)
-        this.$emit('input', false)
-        this.$emit('close')
-      }
+      if (shouldShowTooltip) this.open(e)
+      else this.close()
     },
 
-    getCoordinates () {
-      const { top, left, width, height } = this.activatorEl.getBoundingClientRect()
-      let coords = { top, left, width, height }
+    /**
+     * Closes the tooltip. Can happen on:
+     * - click of activator
+     * - hover outside if showOnHover
+     * - click inside tooltip if hideOnTooltipClick.
+     * / ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
+     *
+     * @param {Boolean} force when showOnHover is set to true, hovering tooltip should keep it open.
+     *                        But if hideOnTooltipClick is also set to true, this should force close
+     *                        even while hovering the tooltip.
+     */
+    async close (force = false) {
+      // Might be already closed.
+      // E.g. showOnHover & hideOnTooltipClick: on click, force hide then mouseleave is also firing.
+      if (!this.detachableVisible) return
 
-      if (!this.fixed) {
-        const { top: targetTop, left: targetLeft } = this.tooltipParentEl.getBoundingClientRect()
-        coords = { ...coords, top: top - targetTop, left: left - targetLeft }
+      if (this.showOnHover && !force) {
+        await new Promise(resolve => setTimeout(resolve, 10))
+        if (this.showOnHover && this.hoveringActivator) return
       }
 
-      const tooltipEl = this.$refs.tooltip
-
-      // 1. First display the tooltip but hide it (So we can get its dimension).
-      tooltipEl.style.visibility = 'hidden'
-      tooltipEl.style.display = 'table'
-      const computedStyles = window.getComputedStyle(tooltipEl, null)
-
-      // Keep fully in viewport.
-      // --------------------------------------------------
-      if (this.position === 'top' && ((top - tooltipEl.offsetHeight) < 0)) {
-        const margin = -parseInt(computedStyles.getPropertyValue('margin-top'))
-        coords.top -= top - tooltipEl.offsetHeight - margin - marginFromWindowSide
-      }
-      else if (this.position === 'left' && left - tooltipEl.offsetWidth < 0) {
-        const margin = -parseInt(computedStyles.getPropertyValue('margin-left'))
-        coords.left -= left - tooltipEl.offsetWidth - margin - marginFromWindowSide
-      }
-      else if (this.position === 'right' && left + width + tooltipEl.offsetWidth > window.innerWidth) {
-        const margin = parseInt(computedStyles.getPropertyValue('margin-left'))
-        coords.left -= left + width + tooltipEl.offsetWidth - window.innerWidth + margin + marginFromWindowSide
-      }
-      else if (this.position === 'bottom' && top + height + tooltipEl.offsetHeight > window.innerHeight) {
-        const margin = parseInt(computedStyles.getPropertyValue('margin-top'))
-        coords.top -= top + height + tooltipEl.offsetHeight - window.innerHeight + margin + marginFromWindowSide
-      }
-      // --------------------------------------------------
-
-      // 2. Update left & top if there is a custom transition.
-      // Tooltip position relies on transform translate, the custom animation may override the transform
-      // property so do without it and subtract half width or height manually.
-      if (this.transition) {
-        // If tooltip is on top or bottom.
-        if (['top', 'bottom'].includes(this.position)) coords.left -= tooltipEl.offsetWidth / 2
-        // If tooltip is on left or right.
-        if (['left', 'right'].includes(this.position)) coords.top -= tooltipEl.offsetHeight / 2
-
-        if (this.position === 'left') coords.left -= tooltipEl.offsetWidth
-        if (this.position === 'top') coords.top -= tooltipEl.offsetHeight
-      }
-
-      // 3. Hide the tooltip again so the transition happens correctly.
-      tooltipEl.style.visibility = null
-      tooltipEl.style.display = 'none'
-
-      return coords
-    },
-
-    insertTooltip () {
-      const wrapper = this.$refs.wrapper
-      this.tooltipEl = this.$refs.tooltip.$el || this.$refs.tooltip
-
-      // Unwrap the activator element.
-      wrapper.parentNode.insertBefore(this.activatorEl, wrapper)
-
-      // Move the tooltip elsewhere in the DOM.
-      // wrapper.parentNode.insertBefore(this.$refs.tooltip, wrapper)
-      this.detachToTarget.appendChild(this.$refs.tooltip)
-    },
-
-    removeTooltip () {
-      // el.remove() doesn't work on IE11.
-      if (this.tooltipEl && this.tooltipEl.parentNode) this.tooltipEl.parentNode.removeChild(this.tooltipEl)
-    }
-
-  },
-
-  mounted () {
-    this.activatorEl = this.$refs.wrapper.firstElementChild
-    if (this.detachTo) this.insertTooltip()
-
-    if (this.value) this.toggle({ type: 'click', target: this.activatorEl })
-  },
-
-  beforeDestroy () {
-    this.removeTooltip()
-
-    // el.remove() doesn't work on IE11.
-    if (this.activatorEl && this.activatorEl.parentNode) this.activatorEl.parentNode.removeChild(this.activatorEl)
-  },
-
-  watch: {
-    value (bool) {
-      if (bool !== this.showTooltip) this.toggle({ type: 'click', target: this.activatorEl })
-    },
-    detachTo () {
-      this.removeTooltip()
-      this.insertTooltip()
+      this.$emit('update:modelValue', (this.detachableVisible = false))
+      this.$emit('input', false)
+      this.$emit('close')
+      // Remove the mousedown listener if the tooltip got closed without a mousedown outside of the tooltip.
+      document.removeEventListener('mousedown', this.onOutsideMousedown)
+      window.removeEventListener('resize', this.onResize)
     }
   }
+
+  // watch, mounted & beforeDestroy hooks are set in the detachable.js mixin.
 }
 </script>
 
 <style lang="scss">
-.w-tooltip-wrap {
-  display: none;
-
-  &--attached {display: inline-block;position: relative;}
-}
-
 .w-tooltip {
   // Fix Safari where `width: max-content` does not take padding and border into consideration.
   display: table;
@@ -339,113 +209,22 @@ export default {
   &--shadow {box-shadow: $box-shadow;}
   &--no-border {border: none;}
 
-  &--top {
-    transform: translate(-50%, -100%);
-    margin-top: -3 * $base-increment;
-  }
-  &--bottom {
-    transform: translateX(-50%);
-    margin-top: 3 * $base-increment;
-  }
-  &--left {
-    transform: translate(-100%, -50%);
-    margin-left: -3 * $base-increment;
-  }
-  &--right {
-    transform: translateY(-50%);
-    margin-left: 3 * $base-increment;
-  }
+  &--top {margin-top: -3 * $base-increment;}
+  &--bottom {margin-top: 3 * $base-increment;}
+  &--left {margin-left: -3 * $base-increment;}
+  &--right {margin-left: 3 * $base-increment;}
 
   &--custom-transition {transform: none;}
 
-  &:after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-  }
-  &--top:after {
-    top: 100%;
-    left: 50%;
-    border-top-color: $tooltip-bg-color;
-    transform: translateX(-50%);
-    margin-top: 1px;
-  }
-  &--bottom:after {
-    bottom: 100%;
-    left: 50%;
-    border-bottom-color: $tooltip-bg-color;
-    transform: translateX(-50%);
-    margin-bottom: 1px;
-  }
-  &--left:after {
-    left: 100%;
-    top: 50%;
-    border-left-color: $tooltip-bg-color;
-    transform: translateY(-50%);
-    margin-left: 1px;
-  }
-  &--right:after {
-    right: 100%;
-    top: 50%;
-    border-right-color: $tooltip-bg-color;
-    transform: translateY(-50%);
-    margin-right: 1px;
-  }
-
   // Tooltip without border.
-  // --------------------------------------------------------
-  &--no-border.w-tooltip--top:after {margin-top: -1px;border-top-color: inherit;}
-  &--no-border.w-tooltip--bottom:after {margin-bottom: -1px;border-bottom-color: inherit;}
-  &--no-border.w-tooltip--left:after {margin-left: -1px;border-left-color: inherit;}
-  &--no-border.w-tooltip--right:after {margin-right: -1px;border-right-color: inherit;}
+  &--no-border {
+    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px, 0);
+  }
 
   // Tooltip with border.
-  // --------------------------------------------------------
-  &:not(&--no-border).w-tooltip--top:after {margin-top: -1px;}
-  &:not(&--no-border).w-tooltip--bottom:after {margin-bottom: -1px;}
-  &:not(&--no-border).w-tooltip--left:after {margin-left: -1px;}
-  &:not(&--no-border).w-tooltip--right:after {margin-right: -1px;}
-
   &:not(&--no-border) {
-    &:before {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 0;
-      border: 7px solid transparent;
-    }
-    &.w-tooltip--top:before {
-      top: 100%;
-      left: 50%;
-      border-top-color: inherit;
-      transform: translateX(-50%);
-      margin-top: 0;
-    }
-    &.w-tooltip--bottom:before {
-      bottom: 100%;
-      left: 50%;
-      border-bottom-color: inherit;
-      transform: translateX(-50%);
-      margin-bottom: 0;
-    }
-    &.w-tooltip--left:before {
-      left: 100%;
-      top: 50%;
-      border-left-color: inherit;
-      transform: translateY(-50%);
-      margin-left: 0;
-    }
-    &.w-tooltip--right:before {
-      right: 100%;
-      top: 50%;
-      border-right-color: inherit;
-      transform: translateY(-50%);
-      margin-right: 0;
-    }
+    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px);
   }
-  // --------------------------------------------------------
 }
 
 // Transitions.
@@ -458,25 +237,25 @@ export default {
 }
 
 // slide-fade-up.
-.w-tooltip-slide-fade-up-enter, .w-tooltip-slide-fade-up-leave-to {
+.w-tooltip-slide-fade-up-enter-from, .w-tooltip-slide-fade-up-leave-to {
   margin-top: -2 * $base-increment;
   opacity: 0;
 }
 
 // slide-fade-down.
-.w-tooltip-slide-fade-down-enter, .w-tooltip-slide-fade-down-leave-to {
+.w-tooltip-slide-fade-down-enter-from, .w-tooltip-slide-fade-down-leave-to {
   margin-top: 2 * $base-increment;
   opacity: 0;
 }
 
 // Slide-fade-left.
-.w-tooltip-slide-fade-left-enter, .w-tooltip-slide-fade-left-leave-to {
+.w-tooltip-slide-fade-left-enter-from, .w-tooltip-slide-fade-left-leave-to {
   margin-left: -2 * $base-increment;
   opacity: 0;
 }
 
 // Slide-fade-right.
-.w-tooltip-slide-fade-right-enter, .w-tooltip-slide-fade-right-leave-to {
+.w-tooltip-slide-fade-right-enter-from, .w-tooltip-slide-fade-right-leave-to {
   margin-left: 2 * $base-increment;
   opacity: 0;
 }

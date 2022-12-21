@@ -9,7 +9,8 @@ div
     Setting colors on buttons is quite straightforward:
     a text color is set via the attribute #[code color], and a background color is set via the
     attribute #[code bg-color].#[br]
-    This allows you to easily mix a background color with a different text color of your choice.#[br]#[br]
+    This allows you to easily mix a background color with a different text color of your choice.#[br]
+    If no #[code color] or #[code bg-color] is set, the #[code bg-color] will be set to primary by default.#[br]#[br]
 
     Here is an example of buttons using all types of colors as a background: status colors, primary color,
     secondary color and a color palette color shade.
@@ -22,7 +23,7 @@ div
       w-button.ma1(bg-color="error") error
       w-button.ma1(bg-color="warning") warning
       w-button.ma1(bg-color="info") info
-      w-button.ma1(bg-color="primary") primary
+      w-button.ma1 primary
       w-button.ma1(bg-color="secondary") secondary
       w-button.ma1(bg-color="purple-light4") purple-light4
     template(#pug).
@@ -31,7 +32,7 @@ div
         w-button.ma1(bg-color="error") error
         w-button.ma1(bg-color="warning") warning
         w-button.ma1(bg-color="info") info
-        w-button.ma1(bg-color="primary") primary
+        w-button.ma1 primary
         w-button.ma1(bg-color="secondary") secondary
         w-button.ma1(bg-color="purple-light4") purple-light4
     template(#html).
@@ -40,7 +41,7 @@ div
         &lt;w-button class="ma1" bg-color="error"&gt;error&lt;/w-button&gt;
         &lt;w-button class="ma1" bg-color="warning"&gt;warning&lt;/w-button&gt;
         &lt;w-button class="ma1" bg-color="info"&gt;info&lt;/w-button&gt;
-        &lt;w-button class="ma1" bg-color="primary"&gt;primary&lt;/w-button&gt;
+        &lt;w-button class="ma1"&gt;primary&lt;/w-button&gt;
         &lt;w-button class="ma1" bg-color="secondary"&gt;secondary&lt;/w-button&gt;
         &lt;w-button class="ma1" bg-color="purple-light4"&gt;purple-light4&lt;/w-button&gt;
       &lt;/w-flex&gt;
@@ -227,19 +228,19 @@ div
 
   title-link(h2) Round &amp; tile
   example(content-class="w-flex")
-    w-button.ma1(bg-color="primary" round) round
+    w-button.ma1(round) round
     w-button.ma1.mr6(bg-color="secondary" round) round
-    w-button.ma1(bg-color="primary" tile) tile
+    w-button.ma1(tile) tile
     w-button.ma1(bg-color="secondary" tile) tile
     template(#pug).
-      w-button.ma1(bg-color="primary" round) round
+      w-button.ma1(round) round
       w-button.ma1.mr6(bg-color="secondary" round) round
-      w-button.ma1(bg-color="primary" tile) tile
+      w-button.ma1(tile) tile
       w-button.ma1(bg-color="secondary" tile) tile
     template(#html).
-      &lt;w-button class="ma1" bg-color="primary" round&gt;round&lt;/w-button&gt;
+      &lt;w-button class="ma1" round&gt;round&lt;/w-button&gt;
       &lt;w-button class="ma1 mr6" bg-color="secondary" round&gt;round&lt;/w-button&gt;
-      &lt;w-button class="ma1" bg-color="primary" tile&gt;tile&lt;/w-button&gt;
+      &lt;w-button class="ma1" tile&gt;tile&lt;/w-button&gt;
       &lt;w-button class="ma1" bg-color="secondary" tile&gt;tile&lt;/w-button&gt;
 
   title-link(h2) Shadow
@@ -293,25 +294,34 @@ div
         Save
       &lt;/w-button&gt;
 
+  title-link(h3 slug="more-control-on-icons") More control on icons using the #[code icon-props]
+  example(content-class="w-flex")
+    w-button(icon="wi-star" :icon-props="{ spin: true }") default
+    template(#pug).
+      w-button(icon="wi-star" :icon-props="{ spin: true }") default
+    template(#html).
+      &lt;w-button
+        icon="wi-star"
+        :icon-props="{ spin: true }"&gt;
+      &lt;/w-button&gt;
+
   title-link(h2) Loading spinner &amp; custom loader
   example(content-class="w-flex")
-    w-button.ma1(bg-color="primary" :loading="button1loading" @click="buttonDoLoading(1)")
+    w-button.ma1(:loading="button1loading" @click="buttonDoLoading(1)")
       w-icon.mr1 wi-check
       | Save
-    w-button.ma1.px4(bg-color="primary" :loading="button2loading" @click="buttonDoLoading(2)")
+    w-button.ma1.px4(:loading="button2loading" @click="buttonDoLoading(2)")
       w-icon.mr1 wi-check
       | Save
       template(#loading) Loading...
     template(#pug).
       w-button.ma1(
-        bg-color="primary"
         :loading="button1loading"
         @click="buttonDoLoading(1)")
         w-icon.mr1 wi-check
         | Save
 
       w-button.ma1.px4(
-        bg-color="primary"
         :loading="button2loading"
         @click="buttonDoLoading(2)")
         w-icon.mr1 wi-check
@@ -320,7 +330,6 @@ div
     template(#html).
       &lt;w-button
         class="ma1"
-        bg-color="primary"
         :loading="button1loading"
         @click="buttonDoLoading(1)"&gt;
         &lt;w-icon class="mr1" &gt;wi-check&lt;/w-icon&gt;
@@ -329,7 +338,6 @@ div
 
       &lt;w-button
         class="ma1 px4"
-        bg-color="primary"
         :loading="button2loading"
         @click="buttonDoLoading(2)"&gt;
         &lt;w-icon class="mr1" &gt;wi-check&lt;/w-icon&gt;
@@ -357,19 +365,18 @@ div
     prop to force a normal link.
 
   example(content-class="w-flex")
-    w-button.ma1(bg-color="primary" route="/getting-started")
+    w-button.ma1(route="/getting-started")
       | Getting started
       w-icon.ml1 wi-chevron-right
-    w-button.ma1(bg-color="primary" route="https://github.com/antoniandre/wave-ui" target="_blank")
+    w-button.ma1(route="https://github.com/antoniandre/wave-ui" target="_blank")
       | Github
       w-icon.ml2(sm) mdi mdi-open-in-new
     template(#pug).
-      w-button.ma1(bg-color="primary" route="/getting-started")
+      w-button.ma1(route="/getting-started")
         | Getting started
         w-icon.ml1 wi-chevron-right
 
       w-button.ma1(
-        bg-color="primary"
         route="https://github.com/antoniandre/wave-ui"
         target="_blank")
         | Github
@@ -377,7 +384,6 @@ div
     template(#html).
       &lt;w-button
         class="ma1"
-        bg-color="primary"
         route="/getting-started"
         target="_blank"&gt;
         Getting started
@@ -386,10 +392,41 @@ div
 
       &lt;w-button
         class="ma1"
-        bg-color="primary"
         route="https://github.com/antoniandre/wave-ui"&gt;
         Github
         &lt;w-icon class="ml2" sm&gt;mdi mdi-open-in-new&lt;/w-icon&gt;
+      &lt;/w-button&gt;
+
+  title-link(h2) Integrated tooltip
+  p.
+    We often need a tooltip on a button. Especially on the ones that only have an icons.#[br]
+    That's why from version 2.45.0, the w-button component ships with an integrated w-tooltip,
+    if you need it.
+  example(content-class="w-flex wrap")
+    w-button.ma6(tooltip="Thank you!") Hover me please
+
+    w-button.ma6(
+      tooltip="Woohoo!"
+      :tooltip-props="{ top: true, transition: 'twist', bgColor: 'success' }").
+      Hover me too please
+    template(#pug).
+      w-button.ma6(tooltip="Thank you!") Hover me please
+      w-button.ma6(
+        tooltip="Woohoo!"
+        :tooltip-props="{ top: true, transition: 'twist', bgColor: 'success' }").
+        Hover me too please
+    template(#html).
+      &lt;w-button
+        class="ma6"
+        tooltip="Thank you!"&gt;
+        Hover me please
+      &lt;/w-button&gt;
+
+      &lt;w-button
+        class="ma6"
+        tooltip="Woohoo!"
+        :tooltip-props="{ top: true, transition: 'twist', bgColor: 'success' }"&gt;
+        Hover me too please
       &lt;/w-button&gt;
 </template>
 

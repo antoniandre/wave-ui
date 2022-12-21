@@ -1,17 +1,13 @@
 <template lang="pug">
 div
   p.mt4
-    em.grey
-      | Nuxt doesn't support Vue 3 yet.
-      a.ml1(href="https://github.com/nuxt/nuxt.js/issues/5708" target="_blank")
-        | Issue #5708
-        w-icon.ml1 mdi mdi-open-in-new
-      | .
+    em.
+      This installation guide is for Nuxt 2 (with Vue 2). Wave UI hasn't been tested on Nuxt 3 yet.
 
   p.mt4
     w-icon.mr2 wi-chevron-right
     strong
-      | Nuxt + Wave UI demo repo:
+      | Nuxt 2 + Wave UI demo repo:
       a.ml1(href="https://github.com/antoniandre/nuxt-waveui" target="_blank")
         | github.com/antoniandre/nuxt-waveui
         w-icon.ml1 mdi mdi-open-in-new
@@ -36,7 +32,12 @@ div
     li.mt8
       .title4 in #[span.code default.vue], wrap the #[code Nuxt] component in a #[code w-app]:
 
-      ssh-pre(language="html-vue").
+      ssh-pre(v-show="$store.state.usePug" language="pug" label="Pug").
+        &lt;template lang="pug"&gt;
+          w-app
+            Nuxt
+        &lt;/template&gt;
+      ssh-pre(v-show="!$store.state.usePug" language="html-vue").
         &lt;template&gt;
           &lt;w-app&gt;
             &lt;Nuxt /&gt;
@@ -45,7 +46,9 @@ div
 
       p You're all set. Try to add a #[code w-button]:
 
-      ssh-pre(language="html-vue").
+      ssh-pre(v-show="$store.state.usePug" language="pug" label="Pug").
+        w-button My button
+      ssh-pre(v-show="!$store.state.usePug" language="html-vue").
         &lt;w-button&gt;My button&lt;/w-button&gt;
 
   .w-divider.my12
@@ -62,7 +65,7 @@ div
   p.mt3
     strong Notes:
     ul
-      li #[span.code sass-loader 11+] only works with Webpack 5.
+      li #[span.code sass-loader 11+] only works with Webpack 5+, so not in Nuxt 2.
       li
         | The #[span.code sass] update is needed to handle the
         a.ml1(href="https://github.com/sass/sass/issues/2565" target="_blank")

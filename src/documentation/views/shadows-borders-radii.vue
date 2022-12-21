@@ -21,7 +21,7 @@ main
         :key="i"
         :class="`sh${i - 7}`")
         span.code .sh{{ i - 7 }}
-    //- template(#pug).
+    template(#pug).
       .w-flex.wrap
         .box.sh-6 .sh-6
         .box.sh-5 .sh-5
@@ -74,7 +74,7 @@ main
         :key="i"
         :class="`bd${i - 1}`")
         span.code .bd{{ i - 1 }}
-    //- template(#pug).
+    template(#pug).
       .w-flex.wrap
         .box.bd0 .bd0
         .box.bd1 .bd1
@@ -111,7 +111,7 @@ main
     #[code .bdrs0] will remove any border radius, #[code .bdrsr] will produce a #[strong round] border
     radius, #[code .bdrsm] will produce a #[strong max] border radius (#[span.code 100%]).
   alert(tip)
-    | Here is difference between #[code .bdrsr] and #[code .bdrsm] (only visible on non-square elements):
+    | Here is the difference between #[code .bdrsr] and #[code .bdrsm] (only visible on non-square elements):
     .w-flex
       .box.box--rect.blue-light5--bg.ma4.d-flex.align-center.justify-center.bdrsr
         span.code .bdrsr
@@ -128,7 +128,7 @@ main
         span.code .bdrsr
       .box.blue-light5--bg.ma4.d-flex.align-center.justify-center.bdrsm
         span.code .bdrsm
-    //- template(#pug).
+    template(#pug).
       .w-flex.wrap
         .box.bdrs0 .bdrs0
         .box.bdrs1 .bdrs1
@@ -178,18 +178,17 @@ main
           :height="100")
         span.caption.mt3.
           #[strong.code w-image] with #[code.mx1 .bd1], #[code.mx1 .bdrsr] and #[code.mx1 .sh1] classes.
-      w-switch.bdrs1.my4(:value="true")
-        span.caption a #[strong.code.mx1 w-switch] with a #[code.mx1 .bdrs1] class.
-    //- template(#pug).
+      w-switch.bdrs1.my4.caption(:model-value="true")
+        | a #[strong.code.mx1 w-switch] with a #[code.mx1 .bdrs1] class.
+    template(#pug).
       w-flex(align-center justify-space-around wrap)
         w-flex.no-grow(column align-center justify-center)
           w-image.bd1.sh1.bdrsr.d-block(
             :src="`${baseUrl}images/japanese-wave.png`"
             :width="100"
             :height="100")
-          span.caption.mt3 w-image with #[code.mx1 .bd1], #[code.mx1 .bdrsr] and #[code.mx1 .sh1] classes.
-        w-switch.bdrs1.my4(:value="true")
-          span.caption a #[strong.code.mx1 w-switch] with a #[code.mx1 .bdrs1] class.
+          span.mt3 w-image with `.bd1`, `.bdrsr` and `.sh1` classes.
+        w-switch.bdrs1.my4(:model-value="true") a w-switch with a `.bdrs1` class.
     template(#html).
       &lt;w-flex align-center justify-space-around wrap&gt;
         &lt;w-flex column align-center justify-center class="no-grow"&gt;
@@ -199,15 +198,13 @@ main
             :width="100"
             :height="100"&gt;
           &lt;/w-image&gt;
-          &lt;span class="caption mt3"&gt;
+          &lt;span class="mt3"&gt;
             w-image with `.bd1`, `.bdrsr` and `.sh1` classes.
           &lt;/span&gt;
         &lt;/w-flex&gt;
 
-        &lt;w-switch :value="true" class="bdrs1 my4"&gt;
-          &lt;span class="caption"&gt;
-            a w-switch with a `.bdrs1` class.
-          &lt;/span&gt;
+        &lt;w-switch :model-value="true" class="bdrs1 my4"&gt;
+          a w-switch with a `.bdrs1` class.
         &lt;/w-switch&gt;
       &lt;/w-flex&gt;
     template(#js).
@@ -224,7 +221,7 @@ main
         .title5.mb0 Accordion with #[code.mx1 .bd1] and #[code.mx1 .bdrs2] classes.
       template(#item-title.2="{ index }") Item {{ index }}
       template(#item-content="{ index }") Content {{ index }}
-    //- template(#pug).
+    template(#pug).
       w-card.bdrs4.bd0.sh2(bg-color="orange-light5")
         .caption a #[strong.code.mx1 w-card] with #[code.mx1 .bd0], #[code.mx1 .bdrs4] and #[code.mx1 .sh2] classes.
 

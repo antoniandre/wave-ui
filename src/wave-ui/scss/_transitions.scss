@@ -17,7 +17,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: transform, left, margin-left;
   transform: translateX(0%);
 }
-.slide-right-enter, .slide-right-leave-to {
+.slide-right-enter-from, .slide-right-leave-to {
   transform: translateX(-100%);
   left: 0 !important;
   margin-left: 0 !important;
@@ -31,7 +31,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: transform, right, margin-right;
   transform: translateX(0%);
 }
-.slide-left-enter, .slide-left-leave-to {
+.slide-left-enter-from, .slide-left-leave-to {
   transform: translateX(100%);
   right: 0 !important;
   margin-right: 0 !important;
@@ -45,7 +45,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: transform, top, margin-top;
   transform: translateY(0%);
 }
-.slide-down-enter, .slide-down-leave-to {
+.slide-down-enter-from, .slide-down-leave-to {
   transform: translateY(-100%);
   top: 0 !important;
   margin-top: 0 !important;
@@ -59,7 +59,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: transform, bottom, margin-bottom;
   transform: translateY(0%);
 }
-.slide-up-enter, .slide-up-leave-to {
+.slide-up-enter-from, .slide-up-leave-to {
   transform: translateY(100%);
   bottom: 0 !important;
   margin-bottom: 0 !important;
@@ -71,7 +71,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 .slide-fade-left-enter-active, .slide-fade-left-leave-active {
   transition: all $transition-duration $fast-out-slow-in;
 }
-.slide-fade-left-enter, .slide-fade-left-leave-to {
+.slide-fade-left-enter-from, .slide-fade-left-leave-to {
   transform: translateX(12px);
   opacity: 0;
 }
@@ -81,7 +81,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 .slide-fade-right-enter-active, .slide-fade-right-leave-active {
   transition: all $transition-duration $fast-out-slow-in;
 }
-.slide-fade-right-enter, .slide-fade-right-leave-to {
+.slide-fade-right-enter-from, .slide-fade-right-leave-to {
   transform: translateX(-12px);
   opacity: 0;
 }
@@ -92,7 +92,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 .slide-fade-up-enter-active, .slide-fade-up-leave-active {
   transition: all $transition-duration $fast-out-slow-in;
 }
-.slide-fade-up-enter, .slide-fade-up-leave-to {
+.slide-fade-up-enter-from, .slide-fade-up-leave-to {
   transform: translateY(12px);
   opacity: 0;
 }
@@ -103,7 +103,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 .slide-fade-down-enter-active, .slide-fade-down-leave-active {
   transition: all $transition-duration $fast-out-slow-in;
 }
-.slide-fade-down-enter, .slide-fade-down-leave-to {
+.slide-fade-down-enter-from, .slide-fade-down-leave-to {
   transform: translateY(-12px);
   opacity: 0;
 }

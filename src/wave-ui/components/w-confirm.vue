@@ -2,16 +2,26 @@
 .w-confirm
   w-menu(v-model="showPopup" v-bind="wMenuProps")
     template(#activator="{ on }")
-      w-button.w-confirm__button(v-on="on" v-bind="buttonProps")
+      w-button.w-confirm__button(v-bind="{ ...$attrs, ...buttonProps, ...(disablePrompt ? {} : on) }")
         slot
-    w-flex.w-confirm__menu(:column="!inline" align-center)
+    w-flex(:column="!inline" align-center)
       div
-        slot(name="question") Are you sure?
+        slot(name="question") {{ question }}
       .w-flex.justify-end(:class="inline ? 'ml2' : 'mt2'")
-        w-button.mr2(v-if="!noCancel" :bg-color="cancelButton.bgColor || 'error'" @click="onCancel")
-          slot(name="cancel") Cancel
-        w-button(:bg-color="confirmButton.bgColor || 'success'" @click="onConfirm")
-          slot(name="confirm") Confirm
+        w-button.mr2(
+          v-if="cancel !== false"
+          v-bind="cancelButtonProps"
+          :bg-color="(cancelButton || {}).bgColor || 'error'"
+          @keyup.escape="!persistent && onCancel()"
+          @click="onCancel")
+          slot(name="cancel") {{ cancelButton.label }}
+        w-button(
+          v-bind="confirmButtonProps"
+          :bg-color="(confirmButton || {}).bgColor || 'success'"
+          v-focus
+          @keyup.escape="!persistent && onCancel()"
+          @click="onConfirm")
+          slot(name="confirm") {{ confirmButton.label }}
 </template>
 
 <script>
@@ -22,21 +32,30 @@ export default {
     bgColor: { type: String },
     color: { type: String },
     icon: { type: String },
-    tooltip: { type: Boolean },
+    disablePrompt: { type: Boolean }, // If true, the confirm button acts like a simple w-button.
+    mainButton: { type: Object }, // Allow passing down an object of props to the w-button component.
+    question: { type: String, default: 'Are you sure?' },
 
     // Cancel & confirm buttons props.
-    cancelButtonColor: { type: String },
-    confirmButtonColor: { type: String },
-    noCancel: { type: Boolean }, // Removes the cancel button.
-    cancelButton: { type: [Boolean, Object] }, // Allow passing down an object of props to the w-button component.
-    confirmButton: { type: [Boolean, Object] }, // Allow passing down an object of props to the w-button component.
+    // Allow passing down an object of props to the w-button component.
+    // If a string is given, that will be the label of the button.
+    // If false, no cancel button.
+    cancel: { type: [Boolean, Object, String], default: undefined },
+    // Allow passing down an object of props to the w-button component.
+    // If a string is given, that will be the label of the button.
+    confirm: { type: [Object, String] },
 
     // global menu props.
     inline: { type: Boolean }, // The layout inside the menu.
 
     // W-menu props.
-    menuProps: { type: Object }, // Allow passing down an object of props to the w-menu component.
+    // Allow passing down an object of props to the w-menu component.
+    menu: { type: Object, default: () => ({}) },
+    // Allow passing down an object of props to the w-tooltip component.
+    // If a string is given, that will be the label of the tooltip.
+    tooltip: { type: [Boolean, Object, String] },
     // All the menu props shorthands, as long as they don't conflict with the button props.
+    noArrow: { type: Boolean }, // Adds a directional triangle to the edge of the menu, like a tooltip.
     top: { type: Boolean },
     bottom: { type: Boolean },
     left: { type: Boolean },
@@ -57,26 +76,57 @@ export default {
   }),
 
   computed: {
+    cancelButton () {
+      let button = { label: typeof this.cancel === 'string' ? this.cancel : 'Cancel' }
+      if (typeof this.cancel === 'object') button = Object.assign({}, button, this.cancel)
+      return button
+    },
+    // Props to pass down to the w-button component.
+    cancelButtonProps () {
+      const { label, ...props } = this.cancelButton // Everything except label.
+      return props
+    },
+    confirmButton () {
+      let button = { label: typeof this.confirm === 'string' ? this.confirm : 'Confirm' }
+      if (typeof this.confirm === 'object') button = Object.assign({}, button, this.confirm)
+      return button
+    },
+    // Props to pass down to the w-button component.
+    confirmButtonProps () {
+      const { label, ...props } = this.confirmButton // Everything except label.
+      return props
+    },
     wMenuProps () {
       return {
         top: this.top,
         bottom: this.bottom,
         left: this.left,
         right: this.right,
+        arrow: !this.noArrow,
         alignTop: this.alignTop,
         alignBottom: this.alignBottom,
         alignLeft: this.alignLeft,
         alignRight: this.alignRight,
         persistent: this.persistent,
         transition: this.transition,
-        ...this.menuProps
+        ...this.menu
       }
     },
+    tooltipObject () {
+      let tooltip = { label: typeof this.tooltip === 'string' ? this.tooltip : '' }
+      if (typeof this.tooltip === 'object') tooltip = Object.assign({}, tooltip, this.tooltip)
+      return tooltip
+    },
     buttonProps () {
+      const { label, ...tooltipProps } = this.tooltipObject
+
       return {
         bgColor: this.bgColor,
         color: this.color,
-        icon: this.icon
+        icon: this.icon,
+        tooltip: label,
+        tooltipProps,
+        ...this.mainButton
       }
     }
   },
@@ -93,9 +143,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.w-confirm {
-
-}
-</style>

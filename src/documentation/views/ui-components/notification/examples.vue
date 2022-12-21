@@ -26,11 +26,11 @@ div
         w-button.ma1(@click="$waveui.notify('Success!', 'success')" bg-color="success") Notify success
         w-button.ma1(@click="$waveui.notify('Warning!', 'warning')" bg-color="warning") Notify warning
         w-button.ma1(@click="$waveui.notify('Error :(', 'error', 0)" bg-color="error") Permanent error
-        //- template(#pug).
-          w-button.ma1(@click="$waveui.notify('Information.')" bg-color="info") Notify info
-          w-button.ma1(@click="$waveui.notify('Success!', 'success')" bg-color="success") Notify success
-          w-button.ma1(@click="$waveui.notify('Warning!', 'warning')" bg-color="warning") Notify warning
-          w-button.ma1(@click="$waveui.notify('Error :(', 'error', 0)" bg-color="error") Permanent error
+        template(#pug).
+          w-button.ma1(@click="$waveui.notify&amp;#40;'Information.'&amp;#41;" bg-color="info") Notify info
+          w-button.ma1(@click="$waveui.notify&amp;#40;'Success!', 'success'&amp;#41;" bg-color="success") Notify success
+          w-button.ma1(@click="$waveui.notify&amp;#40;'Warning!', 'warning'&amp;#41;" bg-color="warning") Notify warning
+          w-button.ma1(@click="$waveui.notify&amp;#40;'Error :(', 'error', 0&amp;#41;" bg-color="error") Permanent error
         template(#html).
           &lt;w-button @click="$waveui.notify('Information.')" bg-color="info"&gt;
             Notify info
@@ -65,7 +65,7 @@ div
 
       example
         w-button(@click="notify" bg-color="info") Notify custom
-        //- template(#pug).
+        template(#pug).
           w-button(@click="notify" bg-color="info") Notify custom
         template(#html).
           &lt;w-button @click="notify" bg-color="info"&gt;
@@ -185,7 +185,7 @@ div
           transition="bounce"
           v-bind="{ [notification.position[0]]: true, [notification.position[1]]: true }")
           | The alert is fixed on {{ notification.position[0] }} {{ notification.position[1] }}.
-        //- template(#pug).
+        template(#pug).
           w-button.mr6(
             @click="notification.show = !notification.show"
             color="primary"
@@ -285,7 +285,7 @@ div
           absolute)
           | This alert is
           | {{ ~~notification2.timeout ? `auto-hiding after ${notification2.timeout} ms` : 'not auto-hiding' }}.
-        //- template(#pug).
+        template(#pug).
           w-button.mr6(
             @click="showNotification = !showNotification"
             color="primary"
@@ -384,7 +384,7 @@ div
           :transition="transition"
           v-bind="{ [notification3.position[0]]: true, [notification3.position[1]]: true }")
           | The alert is fixed on {{ notification3.position[0] }} {{ notification3.position[1] }}.
-        //- template(#pug).
+        template(#pug).
           w-flex(wrap align-center)
             w-button.mr3(
               @click="notification.show = !notification.show"
@@ -539,12 +539,11 @@ export default {
 
   methods: {
     switchNotificationManagerSide () {
-      let { align } = config.notificationManager
+      const { align } = config.notificationManager
       config.notificationManager.align = align === 'left' ? 'right' : 'left'
       this.$nextTick(() => this.$waveui.notify('Information.'))
     },
     switchNotifMgrTransition () {
-      let { transition } = config.notificationManager
       config.notificationManager.transition = this.notifManagerTransition
       this.$nextTick(() => this.$waveui.notify('Information.'))
     },

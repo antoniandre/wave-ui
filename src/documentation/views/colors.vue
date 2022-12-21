@@ -57,7 +57,7 @@ main
       .color.info-dark3--bg.title3.py3.ma2.white.body.xs12 info-dark3
 
   title-link(h2 slug="primary-secondary-and-your-own-colors-and-shades")
-    | #[span.code primary], #[span.code secondary] and your own colors &amp; shades
+    | #[span.code.inherit primary], #[span.code.inherit secondary] and your own colors &amp; shades
   p.
     In addition to the built-in status colors and color palette bellow, you can define a set
     of custom colors.#[br]
@@ -88,8 +88,12 @@ main
     })
 
   alert(tip).
-    If you don't need it, you can add #[code disableColorShades: true] to the Wave UI options to disable
+    If you don't need it, you can add #[code css: { colorShades: false }] to the Wave UI options to disable
     the color shades computing of the status colors and your custom colors.
+
+  alert(success).
+    You can access all the colors with their hex code in your JavaScript as well via the
+    #[code $waveui.colors] object.
 
   title-link.mt12.mb4.w-flex.align-center(h2 slug="color-palette")
     | Color Palette
@@ -107,15 +111,14 @@ main
       .color-palette.ma2(
         v-for="({ color, label, shades }, j) in colors"
         :key="j")
-        template(v-for="(shade, i) in shades")
+        template(v-for="(shade, i) in shades" :key="i")
           //- top color.
-          .color.color--top(v-if="i === 5" :class="`${label}--bg`")
+          .color.color--top(v-if="i === 6" :class="`${label}--bg`")
             span {{ label }}
             small {{ color }}
           //- shades colors.
           .color.color--shade(
-            :key="i"
-            :class="[`${shade.label}--bg`, i >= 5 ? 'color--darker' : '']")
+            :class="[`${shade.label}--bg`, i >= 6 ? 'color--darker' : '']")
             span {{ shade.label }}
             small {{ shade.color }}
       .color-palette.ma2
@@ -139,13 +142,16 @@ main
     But you are completely free to define CSS classes in your CSS to associate a color to a class.#[br]
     For instance, you can define:
   ssh-pre(language="css").
-    .pale-green {color: #eafddd;}
-    .pale-blue--bg {background-color: #e3ffff;}
+    .mint-green {color: #acebd7;}
+    .navy-blue--bg {background-color: #345276;}
 
-  p ...and use it on a component like this:
-  ssh-pre(language="html-vue").
-    &lt;w-tag color="pale-green" bg-color="pale-blue"&gt;tag&lt;/w-tag&gt;
-
+  p.mt6 ...and use it on a component like this:
+  w-flex(gap="6")
+    ssh-pre.ml3(v-show="$store.state.usePug" language="pug" label="Pug").
+      w-tag(color="mint-green" bg-color="navy-blue" lg)
+    ssh-pre.ml3(v-show="!$store.state.usePug" language="html-vue").
+      &lt;w-tag color="mint-green" bg-color="navy-blue" lg&gt;tag&lt;/w-tag&gt;
+    w-tag.mb4.align-self-end(color="mint-green" bg-color="navy-blue" lg) Tag
 </template>
 
 <script>
@@ -236,4 +242,7 @@ export default {
     }
   }
 }
+
+.mint-green {color: #acebd7;}
+.navy-blue--bg {background-color: #345276;}
 </style>

@@ -22,13 +22,22 @@ export default {
 
   computed: {
     inputName () {
-      return this.name || `${this.$options.name}--${this._uid}`
+      return this.name || `${this.$options.name}--${this._.uid}`
     },
     isDisabled () {
       return this.disabled || this.formProps.disabled
     },
     isReadonly () {
       return this.readonly || this.formProps.readonly
+    },
+    validationColor () {
+      return this.formProps.validationColor
+    },
+    labelClasses () {
+      return {
+        [this.labelColor]: this.labelColor && this.valid !== false,
+        [this.validationColor]: this.valid === false
+      }
     }
   },
 

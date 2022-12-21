@@ -2,10 +2,10 @@
 div
   title-link(h2) Default
   p By default the range will have the #[code primary] color.
-  example(content-class="mt5 px6")
-    w-slider(:value="50")
+  example(content-class="pa6")
+    w-slider(:model-value="50")
     template(#html).
-      &lt;w-slider :value="50"&gt;&lt;/w-slider&gt;
+      &lt;w-slider :model-value="50"&gt;&lt;/w-slider&gt;
 
   title-link(h2) V-model &amp; external controls
   example(content-class="px6")
@@ -92,18 +92,18 @@ div
 
   title-link(h2) Disabled &amp; readonly
   example(content-class="px6")
-    w-slider.mt2(:value="50" disabled)
-    w-slider.mt8(:value="50" readonly)
+    w-slider.mt2(:model-value="50" disabled)
+    w-slider.mt8(:model-value="50" readonly)
     template(#html).
-      &lt;w-slider class="mt2" :value="50" disabled&gt;&lt;/w-slider&gt;
-      &lt;w-slider class="mt8" :value="50" readonly&gt;&lt;/w-slider&gt;
+      &lt;w-slider class="mt2" :model-value="50" disabled&gt;&lt;/w-slider&gt;
+      &lt;w-slider class="mt8" :model-value="50" readonly&gt;&lt;/w-slider&gt;
 
   title-link(h2) Labels on the left &amp; right
   example(content-class="px6")
-    w-slider.mt2(:value="50" label-left="0" label-right="100")
-    w-slider.mt6(:value="50" label-left="Left")
-    w-slider.mt6(:value="50" label-right="Right")
-    w-slider.mt12(:value="50")
+    w-slider.mt2(:model-value="50" label-left="0" label-right="100")
+    w-slider.mt6(:model-value="50" label-left="Left")
+    w-slider.mt6(:model-value="50" label-right="Right")
+    w-slider.mt12(:model-value="50")
       template(#label-left)
         span Weight
         w-icon.ml2.green mdi mdi-feather
@@ -113,26 +113,26 @@ div
     template(#html).
       &lt;w-slider
         class="mt2"
-        :value="50"
+        :model-value="50"
         label-left="0"
         label-right="100"&gt;
       &lt;/w-slider&gt;
 
       &lt;w-slider
         class="mt6"
-        :value="50"
+        :model-value="50"
         label-left="Left"&gt;
       &lt;/w-slider&gt;
 
       &lt;w-slider
         class="mt6"
-        :value="50"
+        :model-value="50"
         label-right="Right"&gt;
       &lt;/w-slider&gt;
 
       &lt;w-slider
         class="mt12"
-        :value="50"&gt;
+        :model-value="50"&gt;
         &lt;template #label-left&gt;
           &lt;span&gt;Weight&lt;/span&gt;
           &lt;w-icon class="ml2 green"&gt;mdi mdi-feather&lt;/w-icon&gt;
@@ -145,23 +145,23 @@ div
 
   title-link(h2) Thumb label
   example(content-class="pt12 px8")
-    w-slider.mb4(:value="24" thumb-label color="primary-light3")
+    w-slider.mb4(:model-value="24" thumb-label color="primary-light3")
     template(#html).
       &lt;w-slider
         class="mt12"
-        :value="24"
+        :model-value="24"
         thumb-label
         color="primary-light3"&gt;
       &lt;/w-slider&gt;
 
   title-link(h3 slug="custom-label-with-label-slot") Customize the label with the #[span.code label] slot
   example(content-class="pt12 pb8 px8")
-    w-slider(:value="46.3" thumb-label color="primary-light3")
+    w-slider(:model-value="46.3" thumb-label color="primary-light3")
       template(#label="{ value }") {{ ~~(value * 10) / 10 }}%
     template(#html).
       &lt;w-slider
         class="ma12"
-        :value="46.3"
+        :model-value="46.3"
         thumb-label
         color="primary-light3"&gt;
         &lt;template #label="{ value }"&gt;
@@ -182,18 +182,18 @@ div
     It is also possible to add classes to the thumb label through the #[code thumb-label-class] option
     to add a color for instance.
   example(content-class="pt12 pl10 pr12")
-    w-slider.mt2.mb12(:value="30" thumb-label="droplet")
-    w-slider.big-label.mt12.mb4(:value="60" thumb-label="droplet" thumb-label-class="info--bg")
+    w-slider.mt2.mb12(:model-value="30" thumb-label="droplet")
+    w-slider.big-label.mt12.mb4(:model-value="60" thumb-label="droplet" thumb-label-class="info--bg")
     template(#html).
       &lt;w-slider
         class="ma12"
-        :value="30"
+        :model-value="30"
         thumb-label="droplet"&gt;
       &lt;/w-slider&gt;
 
       &lt;w-slider
         class="big-label.ma12"
-        :value="60"
+        :model-value="60"
         thumb-label="droplet"
         thumb-label-class="info--bg"&gt;
       &lt;/w-slider&gt;

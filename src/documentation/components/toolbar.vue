@@ -4,19 +4,19 @@ w-toolbar.main-toolbar(fixed)
     w-icon.wave-logo.mr3(size="3em") wi-wave
     span.grey-dark1 Wave UI
   .spacer
-  strong.version.grey.size--xs(v-html="`Version ${version}`")
-  w-tooltip(z-index="20")
+  strong.version.size--xs(v-html="`Version <code>${version}</code>`")
+  w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
       div.ml1(v-on="on")
         router-link(to="/release-notes" @click.native="scrollTop(true)")
           w-icon(lg) mdi mdi-update
     | Release notes
-  w-tooltip(z-index="20")
+  w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
       a.grey-dark3.ml2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
         w-icon(lg) mdi mdi-github
     .text-center View the project#[br]on Github
-  w-tooltip(z-index="20")
+  w-tooltip(z-index="20" align-right append-to=".main-toolbar")
     template(#activator="{ on }")
       div.ml2.mr1(v-on="on")
         router-link.pink-light1(to="/backers" @click.native="scrollTop(true)")
@@ -32,11 +32,12 @@ w-toolbar.main-toolbar(fixed)
 </template>
 
 <script>
-
 export default {
   props: {
     drawerOpen: { type: Boolean, default: false }
   },
+
+  emits: ['update:drawerOpen'],
 
   computed: {
     version () {
@@ -74,10 +75,21 @@ div.main-toolbar {
     span {font: 22px 'title font', helvetica, arial;}
   }
 
+  .version {
+    color: #aaa;
+
+    code {
+      letter-spacing: -0.5px;
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
+    }
+  }
   .github-link .w-icon, .wave-logo {color: #1670b4;}
 
   .hamburger-menu {margin-left: 8px;}
-  .hamburger-menu .w-icon {width: 26px;height: 26px;}
+  .hamburger-menu .w-icon {width: 26px;}
 }
 
 @media screen and (max-width: 410px) {

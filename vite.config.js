@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import Delete from 'rollup-plugin-delete'
-import { createVuePlugin } from 'vite-plugin-vue2'
+import autoprefixer from 'autoprefixer'
 
 const bundlingConf = {
   lib: {
@@ -19,7 +20,9 @@ const bundlingConf = {
     external: ['vue'],
     output: {
       // Provide global variables to use in the UMD build for externalized deps.
-      globals: { vue: 'Vue' }
+      globals: { vue: 'Vue' },
+      entryFileNames: 'wave-ui.[format].js',
+      chunkFileNames: '[name].js'
     }
   }
 }
@@ -34,8 +37,8 @@ export default defineConfig({
     }
   },
   plugins: [
-    createVuePlugin({
-      vueTemplateOptions: {
+    vue({
+      template: {
         compilerOptions: {
           whitespace: 'preserve'
         }
@@ -45,8 +48,11 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "@/wave-ui/scss/variables";@import "@/documentation/scss/_variables.scss";'
+        additionalData: '@import "@/wave-ui/scss/variables";@import "@/documentation/scss/variables";'
       }
+    },
+    postcss: {
+      plugins: [autoprefixer]
     }
   },
   resolve: {

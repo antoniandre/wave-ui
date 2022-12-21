@@ -3,7 +3,7 @@ component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: checkboxItems.some(item => item._isChecked), disabled: isDisabled }"
-  :valid.sync="valid"
+  v-model:valid="valid"
   @reset="reset"
   :column="!inline"
   :wrap="inline"
@@ -11,35 +11,26 @@ component(
   w-checkbox(
     v-for="(item, i) in checkboxItems"
     :key="i"
-    :name="`${name || `w-checkboxes--${_uid}`}[]`"
-    :label="item.label"
-    :label-on-left="labelOnLeft"
-    :value="item._isChecked"
-    :color="item.color"
-    :round="round"
+    :model-value="item._isChecked"
+    @update:model-value="toggleCheck(item, $event)"
+    @focus="$emit('focus', $event)"
+    :name="`${inputName}[]`"
+    v-bind="{ label: item.label, color: item.color, labelOnLeft, labelColor, round }"
     :disabled="isDisabled || null"
     :readonly="isReadonly || null"
-    @input="toggleCheck(item, $event)"
-    @focus="$emit('focus', $event)"
     :class="{ mt1: !inline && i }")
     slot(
-      v-if="$scopedSlots[`item.${i + 1}`]"
-      :name="`item.${i + 1}`"
+      v-if="$slots[`item.${i + 1}`] || $slots.item"
+      :name="$slots[`item.${i + 1}`] ? `item.${i + 1}` : 'item'"
       :item="getOriginalItem(item)"
       :checked="!!item._isChecked"
       :index="i + 1"
       v-html="item.label")
-    slot(
-      v-else-if="$scopedSlots.item"
-      name="item"
-      :item="getOriginalItem(item)"
-      :checked="!!item._isChecked"
-      :index="i + 1"
-      v-html="item.label")
+    div(v-else-if="item.label" v-html="item.label")
 </template>
 
 <script>
-import Vue from 'vue'
+import { reactive } from 'vue'
 import FormElementMixin from '../mixins/form-elements'
 
 export default {
@@ -48,14 +39,15 @@ export default {
 
   props: {
     items: { type: Array, required: true }, // All the possible options.
-    value: { type: Array }, // v-model on selected option.
+    modelValue: { type: Array }, // v-model on selected option.
     labelOnLeft: { type: Boolean },
     itemLabelKey: { type: String, default: 'label' },
     itemValueKey: { type: String, default: 'value' },
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
     round: { type: Boolean },
-    color: { type: String, default: 'primary' }
+    color: { type: String, default: 'primary' },
+    labelColor: { type: String, default: 'primary' }
     // Props from mixin: name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -74,13 +66,13 @@ export default {
       return (this.items || []).map((item, i) => {
         const itemValue = item[this.itemValueKey] === undefined ? (item[this.itemLabelKey] || i) : item[this.itemValueKey]
 
-        return Vue.observable({
+        return reactive({
           ...item,
           label: item[this.itemLabelKey],
           _index: i,
           value: itemValue, // If no value is set then add one to prevent error.
           color: item[this.itemColorKey] || this.color,
-          _isChecked: this.value && this.value.includes(itemValue)
+          _isChecked: this.modelValue && this.modelValue.includes(itemValue)
         })
       })
     },

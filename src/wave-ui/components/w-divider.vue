@@ -1,5 +1,8 @@
 <template lang="pug">
-.w-divider(:class="classes")
+.w-divider(
+  :class="classes"
+  :role="$slots.default ? null : 'presentation'"
+  :aria-orientation="vertical ? 'vertical' : 'horizontal'")
   slot
 </template>
 
@@ -18,7 +21,7 @@ export default {
     classes () {
       return {
         [`w-divider--has-color ${this.color}`]: this.color,
-        'w-divider--vertical': this.vertical,
+        [`w-divider--${this.vertical ? 'vertical' : 'horizontal'}`]: true,
         'w-divider--has-content': this.$slots.default
       }
     }
@@ -34,10 +37,14 @@ export default {
   &--has-color {border-color: currentColor;}
 
   &--vertical {
+    align-self: stretch; // Fill up the available height.
     display: flex;
     border-top-width: 0;
     border-left-width: 1px;
-    align-self: stretch;
+  }
+
+  .w-toolbar--vertical > &--horizontal {
+    align-self: stretch; // Fill up the available width.
   }
 
   // With a slot.

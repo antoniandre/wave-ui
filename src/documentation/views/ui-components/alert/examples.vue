@@ -2,7 +2,7 @@
 div(style="max-width: 1000px")
   title-link(h2 slug="show-and-hide-with-v-model") Show / hide with v-model
   p.
-    By default alerts are visible, but if a value or v-model is provided,
+    By default alerts are visible, but if a #[code model-value] or #[code v-model] is provided,
     it will show or hide according to it.#[br]
     Like in this example you can add a transition to animate its apparition.
   example(content-class="pt5")

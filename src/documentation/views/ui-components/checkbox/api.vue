@@ -31,14 +31,15 @@ import WCheckbox from '@/wave-ui/components/w-checkbox.vue'
 const checkboxes = {
   propsDescs: {
     items: 'An array of checkbox items to display. Each item object should contain at least a <code>label</code> or a <code>value</code> attribute.',
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide an array of values to dictate the checked state of all the checkboxes.<br>This value gets updated when using a v-model.',
+    modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide an array of values to dictate the checked state of all the checkboxes.<br>This value gets updated when using a v-model.',
     labelOnLeft: 'Moves the label to the left of each checkbox.',
     itemLabelKey: 'The property name (aka "key") in each item object where to find the label of the item (if any).',
     itemValueKey: 'The property name (aka "key") in each item object where to find the value of the item (if any).',
     itemColorKey: 'The property name (aka "key") in each item object where to find the color of the item (if any).',
     inline: 'Displays all the checkboxes inline instead of in column.',
     round: 'Displays round checkboxes instead of square ones.',
-    color: 'Applies a color to the active checkbox. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+    color: 'Applies a color to the active checkbox. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+    labelColor: 'Applies a specific color to the checkboxes labels. Note that on validation failure, the validation-color takes precedence.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
     name: 'Provide a native HTML <code>name</code> attribute to the checkbox. If not provided, a unique common name will be computed and applied to all the checkboxes.',
     disabled: 'Disables all the checkboxes making them unreactive to user interactions.',
     readonly: 'The checkbox will still look like an interactive checkbox except that it is read-only: its current value cannot be changed by user interaction.',
@@ -87,11 +88,12 @@ const checkboxes = {
 
 const checkbox = {
   propsDescs: {
-    value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide a boolean to dictate the checked state the checkbox.<br>This value gets updated when using a v-model.',
+    modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide a boolean to dictate the checked state the checkbox.<br>This value gets updated when using a v-model.',
     returnValue: 'Since the native HTML checkbox element uses the <code>value</code> attribute to define the checked state, the <code>return-value</code> prop let you specify a value to return to the <code>v-model</code> when the checkbox is checked (instead of returning <code>true</code>).',
     label: 'Sets a visible label for the checkbox.',
     labelOnLeft: 'Moves the label to the left of the checkbox. By default the label is displayed on the right.',
-    color: 'Applies a color to the checkbox when active. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+    color: 'Applies a color to the checkbox when active. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+    labelColor: 'Applies a specific color to the checkbox\'s label. Note that on validation failure, the validation-color takes precedence.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
     noRipple: 'Removes the ripple animation on check.',
     indeterminate: 'Applies an indeterminate state on the checkbox. E.g. when it represents the selected state of a collection of elements where some are checked and some not.',
     round: 'Displays a round checkbox instead of a square one.',

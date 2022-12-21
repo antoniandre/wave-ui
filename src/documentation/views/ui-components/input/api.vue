@@ -15,7 +15,7 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WInput from '@/wave-ui/components/w-input.vue'
 
 const propsDescs = {
-  value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>The text content of the input field.<br>Gets updated on text input.',
+  modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>The text content of the input field.<br>Gets updated on text input.',
   type: 'Applies a native HTML <code>type</code> attribute.',
   label: 'Sets a visible label for the input field.',
   labelPosition: 'Sets the position of the label to one of the following positions: \'left\', \'right\', \'inside\'.',
@@ -23,13 +23,14 @@ const propsDescs = {
   innerIconRight: 'Adds an icon on the right inside the input field.<br>Accepts a string: e.g. <code>mdi mdi-eye</code>.',
   staticLabel: 'Prevents moving the label above the input field when the <code>labelPosition</code> is equal to <code>inside</code>. If a placeholder is present, it will be hidden and the label will be displayed instead.<br>When a value is set the static label is replaced by the textual value.',
   placeholder: 'Provide a placeholder for the input field. If a label is positioned inside, it will be moved above the field so it doesn\'t overlap.',
-  color: 'Applies a color to the input field\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  bgColor: 'Applies a color to the input field\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="/colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  color: 'Applies a color to the input field\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  labelColor: 'Applies a specific color to the input field\'s label. Note that on validation failure, the validation-color takes precedence.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  bgColor: 'Applies a color to the input field\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   minlength: 'Applies the native HTML <code>minlength</code> attribute.',
-  maxlength: 'Applies the native HTML <code>maxlength</code> attribute (prevents typing more than this amount of characters).',
-  step: 'Applies the native HTML <code>step</code> attribute used for the <code>type="number"</code> inputs (sets an incremental/decremental integer or floating step number, e.g. <code>0.3</code>).',
-  min: 'Applies the native HTML <code>min</code> attribute used for the <code>type="number"</code> inputs (sets an integer or floating minimum number).',
-  max: 'Applies the native HTML <code>max</code> attribute used for the <code>type="number"</code> inputs (sets an integer or floating maximum number).',
+  maxlength: 'Applies the native HTML <code>maxlength</code> attribute which prevents typing more than this amount of characters.',
+  step: 'For <code>type="number"</code> inputs.<br>Applies the native HTML <code>step</code> attribute which sets an incremental/decremental integer or floating step number, e.g. <code>0.3</code>.',
+  min: 'For <code>type="number"</code> inputs.<br>Applies the native HTML <code>min</code> attribute which sets an integer or floating minimum number.',
+  max: 'For <code>type="number"</code> inputs.<br>Applies the native HTML <code>max</code> attribute which sets an integer or floating maximum number.',
   dark: false, // Hide the prop. 'When set to true, the text color will be set to white.',
   outline: 'The outline style applies the provided <code>color</code> (by default the <code>primary</code> color is used) to the text and border and no background color is set.',
   round: 'Sets a maximum border-radius on the corners of the input field, giving it a round look.',
@@ -39,7 +40,8 @@ const propsDescs = {
   disabled: 'Disables the input field making it unreactive to user interactions.',
   readonly: 'The input field will still look like an interactive input field except that it is read-only: its current value cannot be changed by user interaction.',
   required: 'Applies the native HTML <code>required</code> attribute to the input field.',
-  validators: '<span class="deep-orange">Only for validation, when the input field is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the input field. Each function will be executed on input field   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the input field.'
+  validators: '<span class="deep-orange">Only for validation, when the input field is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the input field. Each function will be executed on input field   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the input field.',
+  loading: 'When set to <code>true</code>, displays an indefinite-value progress bar below the input field. If a number is given, it will be the value of the progress.'
 }
 
 const slots = {
@@ -48,7 +50,7 @@ const slots = {
 
 const events = {
   input: {
-    description: 'Emitted each time the input text changes.<br>Updates the v-model value in Vue 2.x only.',
+    description: 'Emitted each time the input text (or file) changes.<br>Updates the v-model value in Vue 2.x only.',
     params: {
       '[String]': 'The new textual input value.'
     }
@@ -58,6 +60,9 @@ const events = {
     params: {
       '[String]': 'The new textual input value.'
     }
+  },
+  'update:overallProgress': {
+    description: 'Emitted continuously while uploading a file. When using the <code>multiple</code> option, this is the overall progress of all the files together.<br>You can use it with <code>:overall-progress.sync</code> in Vue 2, or <code>v-model:overall-progress</code> in Vue 3.',
   },
   focus: {
     description: 'Emitted on input focus.',

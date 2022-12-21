@@ -1,17 +1,15 @@
 <template lang="pug">
 component.w-icon(
   :is="tag || 'i'"
+  v-on="$attrs"
   :class="classes"
-  v-on="$listeners"
   role="icon"
   aria-hidden="true"
-  :style="styles")
-  template(v-if="ligature") {{ ligature.icon }}
+  :style="readIcon() /* Always reacting to slot change when called from template. */ && styles")
+  template(v-if="hasLigature") {{ icon }}
 </template>
 
 <script>
-import config from '../utils/config'
-
 export default {
   name: 'w-icon',
 
@@ -41,15 +39,13 @@ export default {
   emits: [],
 
   data: () => ({
-    icon: ''
+    icon: '',
+    fontName: ''
   }),
 
   computed: {
-    ligature () {
-      if (!config.iconsLigature) return false
-
-      const [fontName, icon] = this.icon.split(' ')
-      return fontName === config.iconsLigature && { fontName, icon }
+    hasLigature () {
+      return this.$waveui.config.iconsLigature === this.fontName
     },
     forcedSize () {
       return this.size && (!isNaN(this.size) ? `${this.size}px` : this.size)
@@ -66,7 +62,8 @@ export default {
     },
     classes () {
       return {
-        [this.icon]: true,
+        [this.fontName]: true,
+        [!this.hasLigature && this.icon]: !this.hasLigature && this.icon,
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         [`size--${this.presetSize}`]: this.presetSize && !this.forcedSize,
@@ -80,8 +77,7 @@ export default {
         'w-icon--rotate-90': this.rotate90a,
         'w-icon--rotate-135': this.rotate135a,
         'w-icon--flip-x': this.flipX,
-        'w-icon--flip-y': this.flipY,
-        [this.ligature && this.ligature.fontName]: this.ligature
+        'w-icon--flip-y': this.flipY
       }
     },
     styles () {
@@ -89,12 +85,15 @@ export default {
     }
   },
 
-  created () {
-    this.icon = this.$slots.default[0].text.trim() || ''
-  },
+  methods: {
+    readIcon () {
+      const { default: slot } = this.$slots
+      const [fontName = '', icon = ''] = (typeof slot === 'function' && slot()[0].children.trim().split(' ')) || []
+      this.fontName = fontName
+      this.icon = icon
 
-  beforeUpdate () {
-    this.icon = this.$slots.default[0].text.trim()
+      return true // Always return true for styles to be applied (c.f. template styles).
+    }
   }
 }
 </script>
@@ -108,9 +107,11 @@ export default {
   justify-content: center;
   vertical-align: middle;
   user-select: none;
+  speak: never;
   line-height: 1;
   font-size: 1.2em;
   width: 1em;
+  // The aspect ratio will not work if the content is the content overflows.
   height: 1em;
 
   &.size--xs {font-size: round(0.85 * $base-font-size);}
@@ -119,9 +120,7 @@ export default {
   &.size--lg {font-size: round(1.7 * $base-font-size);}
   &.size--xl {font-size: 2 * $base-font-size;}
 
-  // Icon's vertical alignment in button.
-  .w-button &, .w-button &:before {line-height: inherit;}
-  // Always an even number to vertical align well in button.
+  // Always an even number to align well vertically in a button.
   .w-button.size--xs & {font-size: round(0.95 * divide($base-font-size, 2)) * 2;}
   .w-alert.size--xs & {font-size: $base-font-size;}
   .w-button.size--sm &, .w-alert.size--sm & {font-size: round(1.15 * $base-font-size);}
@@ -129,6 +128,7 @@ export default {
   .w-button.size--lg &, .w-alert.size--lg & {font-size: round(1.7 * $base-font-size);}
   .w-button.size--xl &, .w-alert.size--xl & {font-size: 2 * $base-font-size;}
 
+  &:before {transition: transform $transition-duration;}
   &--spin:before {animation: w-icon--spin 2s infinite linear;}
   &--spin-a:before {animation: w-icon--spin-a 2s infinite linear;}
   &--rotate45:before {transform: rotate(45deg);}

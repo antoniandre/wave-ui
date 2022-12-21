@@ -33,7 +33,22 @@ export default {
   font-weight: normal;
 
   &:after {display: none;}
-  .w-icon {height: auto;}
+
+  > .w-icon {
+    border: 2px solid currentColor;
+    width: 19px;
+    height: 19px;
+    font-size: 19px;
+
+    &:before {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 15px;
+      flex: 0;
+      transform: none;
+    }
+  }
 
   &.alert--success {
     background-color: rgba(102, 204, 0, 0.1);
@@ -46,14 +61,14 @@ export default {
     background-color: rgba(0, 183, 255, 0.1);
 
     &:before {background-color: #09c;}
-    > .w-icon {color: #09c;}
+    > .w-icon {color: #09c;font-size: 21px;}
   }
 
   &.alert--warning {
     background-color: rgba(255, 143, 0, 0.15);
 
     &:before {background-color: #ffa600;}
-    > .w-icon {color: #ffa600;}
+    > .w-icon {color: #ffa600;font-size: 22px;}
   }
 
   &.alert--error {
@@ -68,7 +83,7 @@ export default {
 
     &:before {background-color: #fd0;}
     > .w-icon {background-color: #ffd849;border-color: #ffd849;color: #fff;}
-    > .w-icon:before {font-size: 0.9em;}
+    > .w-icon:before {font-size: 16px;}
   }
 }
 </style>
