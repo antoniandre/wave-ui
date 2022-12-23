@@ -19,7 +19,7 @@ const app = createApp(App).use(router).use(store)
 // eslint-disable-next-line no-new
 new WaveUI(app, {
   colors: {
-    primary: '#234781',
+    primary: '#7fb0cf',
     secondary: '#d3ebff'
   },
   presets: {

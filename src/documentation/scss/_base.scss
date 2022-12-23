@@ -66,21 +66,3 @@ footer {
     .ssh-pre[data-label]:before {top: 5px;}
   }
 }
-
-// Light mode.
-// @media (prefers-color-scheme: light) {
-//   body {
-//     background-color: white;
-//     color: black;
-//   }
-// }
-
-// Dark mode.
-@media (prefers-color-scheme: dark) {
-  $dark-theme: true;
-
-  body {
-    background-color: #222326;
-    color: white;
-  }
-}
