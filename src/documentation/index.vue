@@ -1,5 +1,5 @@
 <template lang="pug">
-w-app
+w-app(:dark="darkMode")
   w-drawer.nav-drawer(v-if="isMobile" v-model="drawerOpen" right :width="330")
     nav-menu(v-model:drawer-open="drawerOpen")
   header.no-shrink
@@ -62,6 +62,7 @@ import '@/documentation/scss/index.scss'
 export default {
   components: { Toolbar, NavMenu },
   data: () => ({
+    darkMode: false,
     drawerOpen: false,
     fixNavMenu: false,
     navMenuTop: 0,
@@ -95,6 +96,10 @@ export default {
   },
 
   mounted () {
+    // Detect the dark mode preference.
+    this.darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    document.documentElement.classList.add('w-theme--dark')
+
     this.contentWrapEl = document.querySelector('.content-wrap')
     this.navMenuTop = this.contentWrapEl.offsetTop - 12
     this.scrollingEl = document.documentElement
