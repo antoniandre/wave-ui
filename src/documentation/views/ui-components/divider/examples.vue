@@ -22,8 +22,14 @@ div
       rovident iste possimus explicabo saepe laborum. Beatae perspiciatis at enim eaque?
 
     w-divider.my6.mx-3
-    ssh-pre.mb4(v-show="$store.state.usePug" language="pug") w-divider.my6.mx-3
-    ssh-pre.mb4(v-show="!$store.state.usePug" language="html-vue") &lt;w-divider class="my6 mx-3"&gt;&lt;/w-divider&gt;
+    ssh-pre.mb4(
+      v-show="$store.state.usePug"
+      language="pug"
+      :dark="$store.state.darkMode") w-divider.my6.mx-3
+    ssh-pre.mb4(
+      v-show="!$store.state.usePug"
+      language="html-vue"
+      :dark="$store.state.darkMode") &lt;w-divider class="my6 mx-3"&gt;&lt;/w-divider&gt;
 
     p.
       Et possimus corporis ducimus rem tenetur. Deleniti, culpa magni repellendus adipisci
@@ -31,8 +37,14 @@ div
       Quia rem ut ab nesciunt dignissimos natus. Eum corporis officiis natus velit illum.
 
     w-divider.ma6(color="amber")
-    ssh-pre.mb4(v-show="$store.state.usePug" language="pug") w-divider.ma6(color="amber")
-    ssh-pre.mb4(v-show="!$store.state.usePug" language="html-vue") &lt;w-divider color="amber" class="ma6"&gt;&lt;/w-divider&gt;
+    ssh-pre.mb4(
+      v-show="$store.state.usePug"
+      language="pug"
+      :dark="$store.state.darkMode") w-divider.ma6(color="amber")
+    ssh-pre.mb4(
+      v-show="!$store.state.usePug"
+      language="html-vue"
+      :dark="$store.state.darkMode") &lt;w-divider color="amber" class="ma6"&gt;&lt;/w-divider&gt;
 
     p.
       Quisquam soluta distinctio qui vel alias molestiae, doloremque totam eius sequi delectus
@@ -42,7 +54,7 @@ div
   title-link(h2) Vertical
   h3 Divider in a #[code w-toolbar]
   example
-    w-toolbar.py0(bg-color="grey-light5")
+    w-toolbar.py0(:bg-color="$store.state.darkMode ? 'grey-dark5' : 'grey-light5'")
       .title2.my2 Toolbar
       .spacer
       span.mx1 Item 1

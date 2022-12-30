@@ -1,12 +1,13 @@
 <template lang="pug">
 .language
   ssh-pre(
-    :label="$store.state.tabsView ? '' : item.title"
     v-if="$slots[item.id] !== undefined"
+    :label="$store.state.tabsView ? '' : item.title"
     :language="item.language"
     copy-button
     @copied="onCopied(item.title)"
-    :reactive="reactive || ['pug', 'html'].includes(item.id)")
+    :reactive="reactive || ['pug', 'html'].includes(item.id)"
+    :dark="$store.state.darkMode")
     template(#copy-button)
       w-icon.ma1(color="primary") mdi mdi-content-copy
     slot(:name="item.id")

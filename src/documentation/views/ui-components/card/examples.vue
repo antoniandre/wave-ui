@@ -33,7 +33,7 @@ div
     You can also use the #[code title] slot to pass more complex data and benefit from the Vue template
     compilation.
   example
-    w-card(title="Card title" title-class="blue-light5--bg")
+    w-card(title="Card title" title-class="blue-light5--bg black")
       p.
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
         quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
@@ -42,7 +42,7 @@ div
         dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
         aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
     template(#pug).
-      w-card(title="Card title" title-class="blue-light5--bg")
+      w-card(title="Card title" title-class="blue-light5--bg black")
         p.
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
           quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
@@ -51,7 +51,7 @@ div
           dolores perspiciatis fugiat. Fuga, reprehenderit sequi veritatis iure magnam excepturi
           aliquid dolore quo amet deserunt asperiores placeat maxime perferendis.
     template(#html).
-      &lt;w-card title="Card title" title-class="blue-light5--bg"&gt;
+      &lt;w-card title="Card title" title-class="blue-light5--bg black"&gt;
         &lt;p&gt;
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
           quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
@@ -314,7 +314,3 @@ export default {
   })
 }
 </script>
-
-<style lang="scss">
-
-</style>

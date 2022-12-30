@@ -1,13 +1,13 @@
 <template lang="pug">
 div
   title-link(h2) Basic
-  w-accordion.white--bg(:items="items")
+  w-accordion(:items="items")
   p.grey-light2.my4.
     Now that you've seen the default accordion in real context, all the examples of this page will have a
     light blue background and accordions a white background to help visualize where they end.
 
-  example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(v-model="accordion1" :items="items")
+  example(content-class="pa4")
+    w-accordion.discrete--bg(v-model="accordion1" :items="items")
     div.mt3
       | v-model:
       code.ml1 {{ accordion1 }}
@@ -47,8 +47,8 @@ div
   p.
     You can expand one or multiple panes by default by providing a v-model array of booleans:
     #[span.code true] to expand, #[span.code false] to collapse the item.
-  example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(v-model="accordion2" :items="items")
+  example(content-class="pa4")
+    w-accordion.discrete--bg(v-model="accordion2" :items="items")
     div.mt3
       | v-model:
       code.ml1 {{ accordion2 }}
@@ -88,8 +88,8 @@ div
   p.
     Specify which pane should be disabled - expanded or collapsed - by adding the #[span.code disabled] property
     directly in the object.
-  example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(v-model="accordion3" :items="itemsDisabled")
+  example(content-class="pa4")
+    w-accordion.discrete--bg(v-model="accordion3" :items="itemsDisabled")
     template(#pug).
       w-accordion(v-model="accordion" :items="items")
     template(#html).
@@ -105,8 +105,8 @@ div
       })
 
   title-link(h2) Shadow
-  example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(:items="items" shadow)
+  example(content-class="pa4")
+    w-accordion.discrete--bg(:items="items" shadow)
     template(#pug).
       w-accordion(:items="items" shadow)
     template(#html).
@@ -134,8 +134,8 @@ div
     Like in most components, you can set a #[code color] for the text and a #[code bg-color] for the
     background.#[br]
     No background color is set by default and the text color is inherited.
-  example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(:items="items" color="amber-dark1")
+  example(content-class="pa4")
+    w-accordion.discrete--bg(:items="items" color="amber-dark1")
     w-accordion.mt6(:items="items" bg-color="yellow-light5")
     template(#pug).
       w-accordion(:items="items" color="amber-dark1")
@@ -168,8 +168,8 @@ div
     The colors are set in the data in each item object.#[br]
     the default mapping for the color is the #[code color] key, but you can customize it with the
     #[code item-color-key] prop.
-  example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(:items="items2")
+  example(content-class="pa4")
+    w-accordion.discrete--bg(:items="items2")
     template(#pug).
       w-accordion(:items="items")
     template(#html).
@@ -184,8 +184,8 @@ div
       })
 
   title-link(h2) Expand a single item at a time
-  example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(v-model="accordion4" :items="items" expand-single)
+  example(content-class="pa4")
+    w-accordion.discrete--bg(v-model="accordion4" :items="items" expand-single)
     div.mt3
       | v-model:
       code.ml1 {{ accordion4 }}
@@ -226,10 +226,10 @@ div
       })
 
   title-link(h2) External control
-  example(content-class="pa4 aliceblue")
+  example(content-class="pa4")
     w-button.mr2(@click="accordion5 = Array(3).fill(true)" sm) Expand all
     w-button(@click="accordion5 = Array(3).fill(false)" sm) Collapse all
-    w-accordion.mt4.white--bg(v-model="accordion5" :items="items")
+    w-accordion.mt4.discrete--bg(v-model="accordion5" :items="items")
     div.mt3
       | v-model:
       code.ml1 {{ accordion5 }}
@@ -284,8 +284,8 @@ div
   p.
     Customize all the tab items titles and/or content via the single slot #[code item-title], and/or
     all the tab items content via the single slot #[code item-content].
-  example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(:items="items" content-class="pa0")
+  example(content-class="pa4")
+    w-accordion.discrete--bg(:items="items" content-class="pa0")
       template(#item-title="{ item }")
         w-icon(lg :color="item.itemColor") {{ item.icon }}
         .title3.my0.ml2(:class="item.itemColor") {{ item.title }}
@@ -345,8 +345,8 @@ div
     No problem, Wave UI's got you covered.#[br]
     If you don't need data objects at all, you can simply define a number of items: #[code :items="3"].
 
-  example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(:items="3")
+  example(content-class="pa4")
+    w-accordion.discrete--bg(:items="3")
       template(#item-title.1) Item title 1
       template(#item-content.1) Item content 1
 
@@ -381,8 +381,8 @@ div
     Here is an example of 3 totally diferent pane titles and contents using more lines of code.#[br]
     This time, an array of object is defined to show you can also do a mix of contents coming from the
     the component's data or directly in the template.
-  example(content-class="pa4 aliceblue")
-    w-accordion.white--bg(:items="itemsCustom")
+  example(content-class="pa4")
+    w-accordion.discrete--bg(:items="itemsCustom")
       template(#item-title.item1)
         | This is the 1st item
         w-tag.ml2(color="red" sm outline) HOT
@@ -497,11 +497,11 @@ div
   p.
     With the option #[code icon-rotate90], the icon will initially point to the left and will
     rotate 90 degrees clockwise when expanding.
-  example(content-class="pa4 aliceblue")
+  example(content-class="pa4")
     .title4 Icon on the left
-    w-accordion.white--bg(:items="items" expand-icon-rotate90)
+    w-accordion.discrete--bg(:items="items" expand-icon-rotate90)
     .title4.mt6 Icon on the right
-    w-accordion.white--bg(:items="items" expand-icon-rotate90 expand-icon-right)
+    w-accordion.discrete--bg(:items="items" expand-icon-rotate90 expand-icon-right)
     template(#pug).
       .title4 Icon on the left
       w-accordion(:items="items" icon-rotate90)
@@ -535,15 +535,15 @@ div
       })
 
   title-link(h3) More options
-  example(content-class="pa4 aliceblue")
+  example(content-class="pa4")
     .title4 One custom icon (only expand)
-    w-accordion.white--bg(:items="items" expand-icon="wi-chevron-down")
+    w-accordion.discrete--bg(:items="items" expand-icon="wi-chevron-down")
     .title4.mt6 Two custom icons (expand &amp; collapse)
-    w-accordion.white--bg(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
+    w-accordion.discrete--bg(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
     .title4.mt6 No icon
-    w-accordion.white--bg(:items="items" :expand-icon="false" title-class="py2")
+    w-accordion.discrete--bg(:items="items" :expand-icon="false" title-class="py2")
     .title4.mt6 Icon on the right
-    w-accordion.white--bg(:items="items" expand-icon-right)
+    w-accordion.discrete--bg(:items="items" expand-icon-right)
     template(#pug).
       .title4 1 custom icon (only expand)
       w-accordion(:items="items" expand-icon="wi-chevron-down")
@@ -669,5 +669,5 @@ export default {
 </script>
 
 <style lang="scss">
-.aliceblue {background-color: #f6fbff;}
+.discrete--bg {background-color: rgba(var(--w-contrast-bg-color-rgb), 0.1);}
 </style>
