@@ -1,10 +1,3 @@
-// The CSS variables are used in the dynamic-css.js file in order to reuse the same SCSS
-// variable presets.
-:root {
-  --base-increment: #{$base-increment};
-  --css-scope: #{$css-scope};
-}
-
 // All these CSS classes will not be generated if the $use-layout-classes is set to false.
 @if $use-layout-classes {
   #{$css-scope} {
@@ -186,25 +179,25 @@
     // (https://www.w3.org/TR/css-variables-1/#using-variables),
     // the grid system is done dynamically in dynamic-css.js.
 
-    // @media screen and (min-width: var(--breakpoint-xs)) {
+    // @media screen and (min-width: var(--w-breakpoint-xs)) {
     //   @for $i from 0 through $grid-base {
     //     .sm#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
     //   }
     // }
 
-    // @media screen and (min-width: var(--breakpoint-sm)) {
+    // @media screen and (min-width: var(--w-breakpoint-sm)) {
     //   @for $i from 0 through $grid-base {
     //     .md#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
     //   }
     // }
 
-    // @media screen and (min-width: var(--breakpoint-md)) {
+    // @media screen and (min-width: var(--w-breakpoint-md)) {
     //   @for $i from 0 through $grid-base {
     //     .lg#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
     //   }
     // }
 
-    // @media screen and (min-width: var(--breakpoint-lg)) {
+    // @media screen and (min-width: var(--w-breakpoint-lg)) {
     //   @for $i from 0 through $grid-base {
     //     .xl#{$grid-base - $i} {width: ($grid-base - $i) * 100% / $grid-base;}
     //   }

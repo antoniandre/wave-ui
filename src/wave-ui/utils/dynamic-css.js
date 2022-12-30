@@ -38,7 +38,7 @@ const generateColors = config => {
 
   // Add the primary color to the CSS variables for reuse in components.
   const cssVariables = []
-  cssVariables.push(`--primary: ${config.colors.primary}`)
+  cssVariables.push(`--w-primary: ${config.colors.primary}`)
   styles += `:root {${cssVariables.join(';')}}`
 
   return styles
@@ -227,8 +227,8 @@ export default config => {
   })
 
   const computedStyles = getComputedStyle(document.documentElement)
-  cssVars.cssScope = computedStyles.getPropertyValue('--css-scope')
-  cssVars.baseIncrement = parseInt(computedStyles.getPropertyValue('--base-increment'))
+  cssVars.cssScope = computedStyles.getPropertyValue('--w-css-scope')
+  cssVars.baseIncrement = parseInt(computedStyles.getPropertyValue('--w-base-increment'))
 
   let styles = ''
   styles += generateColors(config)

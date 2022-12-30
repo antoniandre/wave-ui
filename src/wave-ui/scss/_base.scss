@@ -1,4 +1,17 @@
-* {outline: none;margin: 0;padding: 0;}
+@use "sass:map";
+
+// The CSS variables are used in the dynamic-css.js file in order to reuse the same SCSS
+// variable presets.
+:root {
+  --w-base-increment: #{$base-increment};
+  --w-css-scope: #{$css-scope};
+}
+
+* {
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
 
 body {overflow-x: hidden;}
 
