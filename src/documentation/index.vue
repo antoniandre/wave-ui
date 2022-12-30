@@ -20,7 +20,7 @@ w-app(:dark="darkMode")
           bottom
           right
           xl
-          bg-color="grey-light5"
+          :bg-color="$store.state.darkMode ? 'grey-dark4' : 'grey-light5'"
           @click="scrollTop")
 
       footer.w-flex.justify-end.align-center.no-grow.wrap
@@ -98,7 +98,8 @@ export default {
   mounted () {
     // Detect the dark mode preference.
     this.darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-    document.documentElement.classList.add('w-theme--dark')
+    this.$store.commit('setDarkMode', true)
+    document.documentElement.setAttribute('data-theme', 'dark')
 
     this.contentWrapEl = document.querySelector('.content-wrap')
     this.navMenuTop = this.contentWrapEl.offsetTop - 12

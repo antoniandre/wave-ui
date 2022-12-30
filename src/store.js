@@ -4,10 +4,14 @@ export default createStore({
   state: () => ({
     currentPage: '', // The title of the page, to pass to Codepen from examples.
     usePug: false,
-    tabsView: true
+    tabsView: true,
+    darkMode: false
   }),
 
   mutations: {
+    setDarkMode (state, bool) {
+      state.darkMode = bool
+    },
     setCurrentPage (state, pageTitle) {
       state.currentPage = pageTitle
     },
