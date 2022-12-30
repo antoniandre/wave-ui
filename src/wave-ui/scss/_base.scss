@@ -5,6 +5,19 @@
 :root {
   --w-base-increment: #{$base-increment};
   --w-css-scope: #{$css-scope};
+  --w-base-bg-color-rgb: #{map.get($theme-light, 'base-bg-color-rgb')};
+  --w-base-color-rgb: #{map.get($theme-light, 'base-color-rgb')};
+  --w-contrast-bg-color-rgb: #{map.get($theme-light, 'contrast-bg-color-rgb')};
+  --w-contrast-color-rgb: #{map.get($theme-light, 'contrast-color-rgb')};
+
+  background-color: rgb(var(--w-base-bg-color-rgb));
+  color: rgb(var(--w-base-color-rgb));
+}
+:root[data-theme="dark"] {
+  --w-base-bg-color-rgb: #{map.get($theme-dark, 'base-bg-color-rgb')};
+  --w-base-color-rgb: #{map.get($theme-dark, 'base-color-rgb')};
+  --w-contrast-bg-color-rgb: #{map.get($theme-dark, 'contrast-bg-color-rgb')};
+  --w-contrast-color-rgb: #{map.get($theme-dark, 'contrast-color-rgb')};
 }
 
 * {

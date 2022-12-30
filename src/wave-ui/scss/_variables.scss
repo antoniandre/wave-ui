@@ -1,9 +1,26 @@
 @use "sass:math";
+@use "sass:map";
 
 @function divide($a, $b) {
   @return math.div($a, $b); // Must use `sass` & not `node-sass`.
   // @return $a / $b;
 }
+
+// THEME COLORS.
+// ========================================================
+// if you don't need themes, you can leave this as is and override the global defaults.
+$theme-light: (
+  base-bg-color-rgb: (255, 255, 255), // #fff.
+  base-color-rgb: (0, 0, 0), // #000.
+  contrast-bg-color-rgb: (0, 0, 0), // #000.
+  contrast-color-rgb: (255, 255, 255) // #fff.
+) !default;
+$theme-dark: (
+  base-bg-color-rgb: (34, 34, 34), // #222.
+  base-color-rgb: (255, 255, 255), // #fff.
+  contrast-bg-color-rgb: (255, 255, 255), // #fff.
+  contrast-color-rgb: (0, 0, 0) // #000.
+) !default;
 
 // GLOBAL DEFAULTS.
 // ========================================================
@@ -15,7 +32,7 @@ $base-font-size: 14px !default; // Must be a px unit.
 $base-increment: round(divide($base-font-size, 4)) !default;
 $layout-padding: $base-increment * 4 !default; // Applied on the .content-wrap tag.
 $border-radius: 3px !default;
-$border-color: rgba(0, 0, 0, 0.15);
+$border-color: rgba(var(--w-contrast-bg-color-rgb), 0.15) !default;
 $border: 1px solid $border-color !default;
 $transition-duration: 0.25s !default;
 $fast-transition-duration: 0.15s !default;
@@ -28,10 +45,22 @@ $form-field-height: round(2 * $base-font-size) !default;
 // Always an even number for better vertical alignment. (Used in checkbox, radio, switch)
 $small-form-el-size: round(divide(1.3 * $base-font-size, 2)) * 2 !default;
 
+// Detachable elements are: w-tooltip, w-menu, w-confirm.
+$detachable-bg-color: #fff !default;
+$detachable-color: rgba(0, 0, 0, 0.7) !default;
+
 // COMPONENTS DEFAULTS.
 // ========================================================
+// w-toolbar.
+// --------------------------------------------------------
+$toolbar-max-size: 380px !default;
+$toolbar-bg-color: #fff !default;
+// --------------------------------------------------------
+
 // w-drawer.
+// --------------------------------------------------------
 $drawer-max-size: 380px !default;
+$drawer-bg-color: #fff !default;
 // --------------------------------------------------------
 
 // w-slider.
@@ -42,20 +71,32 @@ $slider-track-color: #ddd;
 
 // w-table.
 // --------------------------------------------------------
-$table-tr-odd-color: rgba(0, 0, 0, 0.02);
-$table-tr-hover-color: rgba(0, 0, 0, 0.05);
-$table-color: rgba(0, 0, 0, 0.7);
+$table-tr-odd-color: rgba(0, 0, 0, 0.02) !default;
+$table-tr-hover-color: rgba(0, 0, 0, 0.05) !default;
+$table-color: rgba(0, 0, 0, 0.7) !default;
 // --------------------------------------------------------
 
 // w-textarea.
 // --------------------------------------------------------
-$textarea-line-height: 1.2;
+$textarea-line-height: 1.2 !default;
 // --------------------------------------------------------
 
 // w-tooltip.
 // --------------------------------------------------------
-$tooltip-bg-color: #fff;
-$tooltip-color: rgba(0, 0, 0, 0.7);
+$tooltip-bg-color: $detachable-bg-color !default;
+$tooltip-color: $detachable-color !default;
+// --------------------------------------------------------
+
+// w-menu.
+// --------------------------------------------------------
+$menu-bg-color: $detachable-bg-color !default;
+$menu-color: $detachable-color !default;
+// --------------------------------------------------------
+
+// w-confirm.
+// --------------------------------------------------------
+$confirm-bg-color: $detachable-bg-color !default;
+$confirm-color: $detachable-color !default;
 // --------------------------------------------------------
 
 // Mixins.
