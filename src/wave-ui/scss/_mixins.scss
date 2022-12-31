@@ -1,3 +1,21 @@
+@use "sass:map";
+
+// This allows each UI component to be used in dark or light theme regardless of the global theme.
+@mixin themeable {
+  // Will force the light style on this component.
+  &--light {
+    --w-base-bg-color-rgb: #{map.get($theme-light, 'base-bg-color-rgb')};
+    --w-base-color-rgb: #{map.get($theme-light, 'base-color-rgb')};
+    color: rgba(var(--w-base-color-rgb), 0.7);
+  }
+  // Will force the dark style on this component.
+  &--dark {
+    --w-base-bg-color-rgb: #{map.get($theme-dark, 'base-bg-color-rgb')};
+    --w-base-color-rgb: #{map.get($theme-dark, 'base-color-rgb')};
+    color: rgba(var(--w-base-color-rgb), 0.7);
+  }
+}
+
 @mixin default-transition($duration: $transition-duration, $delay: 0s) {
   transition: $duration $delay ease-in-out;
 }
