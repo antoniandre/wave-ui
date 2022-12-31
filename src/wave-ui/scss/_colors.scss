@@ -1,12 +1,7 @@
 #{$css-scope} {
-  .primary--bg,
-  .primary-dark1--bg,
-  .primary-dark2--bg,
-  .primary-dark3--bg {color: #fff;}
+  .primary--bg {color: rgb(var(--w-base-bg-color-rgb));}
   .white--bg {background-color: #fff;}
   .white {color: #fff;}
-  .grey--bg {background-color: #888;}
-  .grey {color: #888;}
   .black--bg {background-color: #000;}
   .black {color: #000;}
   .transparent--bg {background-color: transparent;}
@@ -14,6 +9,11 @@
   .inherit--bg {background-color: inherit;}
   .inherit {color: inherit;}
   .success--bg, .error--bg, .warning--bg, .info--bg {color: #fff;}
+
+  .base-color {color: rgba(var(--w-base-color-rgb), 0.7);}
+  .base-color--bg {background-color: rgb(var(--w-base-bg-color-rgb));}
+  .contrast-color {color: rgba(var(--w-contrast-color-rgb), 0.7);}
+  .contrast-color--bg {background-color: rgb(var(--w-contrast-bg-color-rgb));}
 
   $colors:(
     'pink': #e91e63,
