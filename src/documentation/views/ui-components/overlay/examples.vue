@@ -196,10 +196,10 @@ div
 
   title-link(h2) CSS backdrop filter
   p.
-    The backdrop filter is
-    #[a(href="https://caniuse.com/css-backdrop-filter" target="_blank") not supported on all the browsers]
-    yet but very nice.
-  ssh-pre(language="css").
+    The backdrop filter is very recently
+    #[a(href="https://caniuse.com/css-backdrop-filter" target="_blank") supported on all the major browsers]
+    and very nice.
+  ssh-pre(language="css" :dark="$store.state.darkMode").
     .w-overlay {backdrop-filter: blur(10px);}
   w-button(bg-color="primary" dark @click="showBlurBackdropOverlay = true") Show a blur backdrop
 

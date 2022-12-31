@@ -10,7 +10,7 @@ main
   p.mt8.
     Wave UI components rely on SCSS variables that you can easily override from your SCSS file,
     just like this:
-  pre.ssh-pre(data-label="SCSS")
+  pre.ssh-pre(data-label="SCSS" :dark="$store.state.darkMode")
     span.purple.text-bold @import&nbsp;
     span.red-light2 'wave-ui/src/wave-ui/scss/_variables'
     span.blue-grey ;
@@ -31,7 +31,8 @@ main
 
   title-link(h2) Modify your config
   .title4.mt4 1. Install the devDependencies
-  ssh-pre.mb2(language="shell") npm i -D pug pug-plain-loader sass sass-loader@10
+  ssh-pre.mb2(language="shell" :dark="$store.state.darkMode")
+    | npm i -D pug pug-plain-loader sass sass-loader@10
   small.text-italic.grey.
     The dev dependencies are only needed for building the project. They will not ship to production.
   p.mt3
@@ -47,8 +48,8 @@ main
 
   .title4.mt8 2. Update #[span.code main.js]
   p In main.js, replace the 2 Wave UI imports with:
-  ssh-pre.mt5(language="js" label="main.js").
-    import WaveUI from 'wave-ui/src/wave-ui'
+  ssh-pre.mt5(language="js" label="main.js" :dark="$store.state.darkMode")
+    | import WaveUI from 'wave-ui/src/wave-ui'
 
   .title4.mt8 3. Create an SCSS file &amp; import it globally
   ul
@@ -58,7 +59,7 @@ main
 
     li.mt2
       | Import your SCSS variables file globally from Vue config and re-serve the app.
-      ssh-pre.mt5(language="js" label="vue.config.js").
+      ssh-pre.mt5(language="js" label="vue.config.js" :dark="$store.state.darkMode").
         module.exports = {
           transpileDependencies: ['wave-ui'],
           css: {
@@ -72,7 +73,7 @@ main
       p.
         #[strong Or if you use Vite],
         In #[span.code vite.config.js], the import of variables is done like so:
-      ssh-pre(language="js" label="vite.config.js").
+      ssh-pre(language="js" label="vite.config.js" :dark="$store.state.darkMode").
         css: {
           preprocessorOptions: {
             scss: {
@@ -89,7 +90,7 @@ main
 
   .w-divider.my12
   title-link(h2) Basic SCSS overrides
-  pre.ssh-pre(data-label="@/scss/_variables.scss")
+  pre.ssh-pre(data-label="@/scss/_variables.scss" :dark="$store.state.darkMode")
     span.grey-light1.text-italic // First import the Wave UI variables, then override what you want.
     br
     span.purple.text-bold @import&nbsp;
@@ -151,7 +152,7 @@ main
 
   title-link(h2) Give Wave UI CSS more priority
   p It is also possible to control Wave UI's CSS rules priorities by overriding the CSS base scope:
-  pre.ssh-pre(data-label="SCSS")
+  pre.ssh-pre(data-label="SCSS" :dark="$store.state.darkMode")
     span.pink $css-scope
     span.blue-grey.mr1 :
     span.red-light2 '.w-app'
@@ -180,7 +181,7 @@ main
   title-link(h2 slug="presets")
     | Presets
     w-tag.ml3(bg-color="red-light1" lg color="white") Coming soon
-  ssh-pre(language="js" label="Javascript").
+  ssh-pre(language="js" label="Javascript" :dark="$store.state.darkMode").
     // Buttons example.
     {
       'w-button': { sm: true, outlined: true, round: true }

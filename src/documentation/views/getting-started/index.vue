@@ -10,7 +10,7 @@ main
     :items="3"
     :model-value="openPane"
     expand-single
-    title-class="justify-space-between py4 pl6 blue-light5--bg"
+    :title-class="`justify-space-between py4 pl6 ${$store.state.darkMode ? 'grey-dark5--bg' : 'blue-light5--bg'}`"
     expand-icon="wi-chevron-right"
     collapse-icon="wi-chevron-up"
     expand-icon-right)
@@ -107,7 +107,11 @@ export default {
 .main--getting-started {
   .w-accordion__item {margin-bottom: 12px;}
   .w-accordion__item-title {border-top: none;}
-  .w-accordion__item-content {background: #f7fbff;}
+  .w-accordion__item-content {
+    background: #f7fbff;
+
+    [data-theme="dark"] & {background: #262626;}
+  }
   .w-button--icon.size--md {font-size: 20px;}
 
   .w-accordion .ssh-pre, .w-accordion em {font-size: 1rem;}

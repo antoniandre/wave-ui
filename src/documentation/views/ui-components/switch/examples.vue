@@ -146,7 +146,7 @@ div
   alert(tip)
     | If the #[strong.code w-switch] width is too small for your custom content, it's very easy to
     | increase its width with CSS like in this example, and the component elements will adapt:
-    ssh-pre(language="css")
+    ssh-pre(language="css" :dark="$store.state.darkMode")
       .w-switch--custom-track .w-switch--custom-track .w-switch__input {width: 55px;}
   example(content-class="pt5")
     w-switch.ma4(v-model="value2")

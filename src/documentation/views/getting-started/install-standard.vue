@@ -2,16 +2,22 @@
 div
   title-link(h3) 1. Download from NPM
   .ml5
-    ssh-pre.vue-install.mb0(language="shell") npm i wave-ui # Vue 3.
+    ssh-pre.vue-install.mb0(language="shell" :dark="$store.state.darkMode")
+      | npm i wave-ui # Vue 3.
     .w-flex.align-center
       | or
-      ssh-pre.vue-install.grow.ml2(language="shell") npm i wave-ui@legacy # Vue 2.x.
+      ssh-pre.vue-install.grow.ml2(language="shell" :dark="$store.state.darkMode")
+        | npm i wave-ui@legacy # Vue 2.x.
 
   title-link(h3) 2. Import in your project
   .ml5
     p Import Wave UI library at the root of your app - usually #[span.code main.js].
     w-flex(basis-zero wrap :gap="4")
-      ssh-pre.grow.ma2.mt8(language="js" label="VUE 3 - main.js" style="min-width: 290px").
+      ssh-pre.grow.ma2.mt8(
+        language="js"
+        label="VUE 3 - main.js"
+        :dark="$store.state.darkMode"
+        style="min-width: 290px").
         // VUE 3.
         import { createApp } from 'vue'
         import App from './App.vue'
@@ -26,7 +32,11 @@ div
 
         app.mount('#app')
 
-      ssh-pre.grow.ma2.mt8(language="js" label="VUE 2.x - main.js" style="min-width: 290px").
+      ssh-pre.grow.ma2.mt8(
+        language="js"
+        label="VUE 2.x - main.js"
+        :dark="$store.state.darkMode"
+        style="min-width: 290px").
         // VUE 2.x.
         import Vue from 'vue'
         import App from './App.vue'
@@ -58,13 +68,21 @@ div
 
   title-link(h3).mt8 3. Place a #[span.code w-app] at the root of your app
   .ml5
-    ssh-pre(v-show="$store.state.usePug" language="pug" label="App.vue").
+    ssh-pre(
+      v-show="$store.state.usePug"
+      :dark="$store.state.darkMode"
+      language="pug"
+      label="App.vue").
       w-app
         //- All your app content goes here.
 
         //- Also try to add a button!
         w-button My Button
-    ssh-pre(v-show="!$store.state.usePug" language="html-vue" label="App.vue").
+    ssh-pre(
+      v-show="!$store.state.usePug"
+      :dark="$store.state.darkMode"
+      language="html-vue"
+      label="App.vue").
       &lt;w-app&gt;
         &lt;!-- All your app content goes here. --&gt;
 

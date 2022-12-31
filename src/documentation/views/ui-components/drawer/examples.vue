@@ -527,7 +527,11 @@ div
   p.
     You can then store the result of the acceptation in the localStorage when the user clicks
     the button.
-  ssh-pre(v-show="!$store.state.usePug" language="html-vue" label="Template").
+  ssh-pre(
+    v-show="!$store.state.usePug"
+    :dark="$store.state.darkMode"
+    language="html-vue"
+    label="Template").
     &lt;w-button
       class="ml-auto"
       @click="acceptCookies"
@@ -537,12 +541,16 @@ div
       I agree
     &lt;/w-button&gt;
 
-  ssh-pre(v-show="$store.state.usePug" language="pug" label="Template").
+  ssh-pre(
+    v-show="$store.state.usePug"
+    :dark="$store.state.darkMode"
+    language="pug"
+    label="Template").
     w-button.ml-auto(@click="acceptCookies" sm absolute)
       w-icon.mr2 wi-check
       | I agree
 
-  ssh-pre(language="js" label="Javascript").
+  ssh-pre(language="js" label="Javascript" :dark="$store.state.darkMode").
     acceptCookies () {
       localStorage.acceptCookies = 'yes'
       this.showCookieNotice = false

@@ -28,33 +28,33 @@ main
   h3 Status colors shades
   .w-flex.wrap.mb12.ma-2.text-center.basis-zero
     .w-flex.wrap
-      .color.success-light3--bg.title3.py3.ma2.body.xs12 success-light3
-      .color.success-light2--bg.title3.py3.ma2.body.xs12 success-light2
-      .color.success-light1--bg.title3.py3.ma2.body.xs12 success-light1
-      .color.success-dark1--bg.title3.py3.ma2.white.body.xs12 success-dark1
-      .color.success-dark2--bg.title3.py3.ma2.white.body.xs12 success-dark2
-      .color.success-dark3--bg.title3.py3.ma2.white.body.xs12 success-dark3
+      .color.success-light3--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") success-light3
+      .color.success-light2--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") success-light2
+      .color.success-light1--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") success-light1
+      .color.success-dark1--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark1
+      .color.success-dark2--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark2
+      .color.success-dark3--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark3
     .w-flex.wrap
-      .color.error-light3--bg.title3.py3.ma2.body.xs12 error-light3
-      .color.error-light2--bg.title3.py3.ma2.body.xs12 error-light2
-      .color.error-light1--bg.title3.py3.ma2.body.xs12 error-light1
-      .color.error-dark1--bg.title3.py3.ma2.white.body.xs12 error-dark1
-      .color.error-dark2--bg.title3.py3.ma2.white.body.xs12 error-dark2
-      .color.error-dark3--bg.title3.py3.ma2.white.body.xs12 error-dark3
+      .color.error-light3--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") error-light3
+      .color.error-light2--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") error-light2
+      .color.error-light1--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") error-light1
+      .color.error-dark1--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark1
+      .color.error-dark2--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark2
+      .color.error-dark3--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark3
     .w-flex.wrap
-      .color.warning-light3--bg.title3.py3.ma2.body.xs12 warning-light3
-      .color.warning-light2--bg.title3.py3.ma2.body.xs12 warning-light2
-      .color.warning-light1--bg.title3.py3.ma2.body.xs12 warning-light1
-      .color.warning-dark1--bg.title3.py3.ma2.white.body.xs12 warning-dark1
-      .color.warning-dark2--bg.title3.py3.ma2.white.body.xs12 warning-dark2
-      .color.warning-dark3--bg.title3.py3.ma2.white.body.xs12 warning-dark3
+      .color.warning-light3--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") warning-light3
+      .color.warning-light2--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") warning-light2
+      .color.warning-light1--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") warning-light1
+      .color.warning-dark1--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark1
+      .color.warning-dark2--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark2
+      .color.warning-dark3--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark3
     .w-flex.wrap
-      .color.info-light3--bg.title3.py3.ma2.body.xs12 info-light3
-      .color.info-light2--bg.title3.py3.ma2.body.xs12 info-light2
-      .color.info-light1--bg.title3.py3.ma2.body.xs12 info-light1
-      .color.info-dark1--bg.title3.py3.ma2.white.body.xs12 info-dark1
-      .color.info-dark2--bg.title3.py3.ma2.white.body.xs12 info-dark2
-      .color.info-dark3--bg.title3.py3.ma2.white.body.xs12 info-dark3
+      .color.info-light3--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") info-light3
+      .color.info-light2--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") info-light2
+      .color.info-light1--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") info-light1
+      .color.info-dark1--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark1
+      .color.info-dark2--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark2
+      .color.info-dark3--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark3
 
   title-link(h2 slug="primary-secondary-and-your-own-colors-and-shades")
     | #[span.code.inherit primary], #[span.code.inherit secondary] and your own colors &amp; shades
@@ -66,20 +66,20 @@ main
     More shades would most likely be redundant with the color palette.
 
   w-flex.text-center(wrap :gap="4")
-    .color.primary-light3--bg.title3.grow.basis-zero.py3.white.body primary-light3
-    .color.primary-light2--bg.title3.grow.basis-zero.py3.white.body primary-light2
-    .color.primary-light1--bg.title3.grow.basis-zero.py3.white.body primary-light1
-    .color.primary--bg.title3.grow.basis-zero.py3.white primary
-    .color.primary-dark1--bg.title3.grow.basis-zero.py3.white.body primary-dark1
-    .color.primary-dark2--bg.title3.grow.basis-zero.py3.white.body primary-dark2
-    .color.primary-dark3--bg.title3.grow.basis-zero.py3.white.body primary-dark3
+    .color.primary-light3--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light3
+    .color.primary-light2--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light2
+    .color.primary-light1--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light1
+    .color.primary--bg.title3.grow.basis-zero.py3(:class="{ white: !$store.state.darkMode }") primary
+    .color.primary-dark1--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark1
+    .color.primary-dark2--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark2
+    .color.primary-dark3--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark3
 
   alert(warning).
     The primary color is considered dark by default, and will render,
     as well as its 3 darker shades, with a white text when used as a background color.
 
   p.mt6.title3 To start defining your own colors add them to the WaveUI options:
-  ssh-pre(language="js").
+  ssh-pre(language="js" :dark="$store.state.darkMode").
     const waveui = new WaveUI({
       colors: {
         primary: '#9ac332',
@@ -129,10 +129,10 @@ main
           .color.color--top.ma2.white--bg.black
             span white
             small #fff
-          .color.color--top.ma2.transparent--bg.black
+          .color.color--top.ma2.transparent--bg.base-color
             span transparent
             small transparent
-          .color.color--top.ma2.inherit--bg.black
+          .color.color--top.ma2.inherit--bg.base-color
             span inherit
             small inherit
 
@@ -141,15 +141,22 @@ main
     All the presented colors above are here to make you go faster when you need a color.#[br]
     But you are completely free to define CSS classes in your CSS to associate a color to a class.#[br]
     For instance, you can define:
-  ssh-pre(language="css").
+  ssh-pre(language="css" :dark="$store.state.darkMode").
     .mint-green {color: #acebd7;}
     .navy-blue--bg {background-color: #345276;}
 
   p.mt6 ...and use it on a component like this:
   w-flex(gap="6")
-    ssh-pre.ml3(v-show="$store.state.usePug" language="pug" label="Pug").
+    ssh-pre.ml3(
+      v-show="$store.state.usePug"
+      :dark="$store.state.darkMode"
+      language="pug"
+      label="Pug").
       w-tag(color="mint-green" bg-color="navy-blue" lg)
-    ssh-pre.ml3(v-show="!$store.state.usePug" language="html-vue").
+    ssh-pre.ml3(
+      v-show="!$store.state.usePug"
+      :dark="$store.state.darkMode"
+      language="html-vue").
       &lt;w-tag color="mint-green" bg-color="navy-blue" lg&gt;tag&lt;/w-tag&gt;
     w-tag.mb4.align-self-end(color="mint-green" bg-color="navy-blue" lg) Tag
 </template>

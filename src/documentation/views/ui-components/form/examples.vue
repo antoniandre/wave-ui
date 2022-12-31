@@ -14,9 +14,9 @@ div
   ol
     li.title4
       | Add one or more validator functions on the field you want validated
-      ssh-pre.body(language="html-vue" label="Vue template").
+      ssh-pre.body(language="html-vue" label="Vue template" :dark="$store.state.darkMode").
         &lt;w-input label="First name" :validators="[validators.required]"&gt;&lt;/w-input&gt;
-      ssh-pre.body(language="js" label="Javascript").
+      ssh-pre.body(language="js" label="Javascript" :dark="$store.state.darkMode").
         data: () => ({
           validators: {
             required: value => !!value || 'This field is required'
@@ -24,7 +24,7 @@ div
         })
     li.mt6.title4
       | Wrap the field in a #[span.code w-form] and add a submit button
-      ssh-pre.body(language="html-vue" label="Vue template").
+      ssh-pre.body(language="html-vue" label="Vue template" :dark="$store.state.darkMode").
         &lt;w-form&gt;
           &lt;w-input label="First name" :validators="[validators.required]"&gt;&lt;/w-input&gt;
 
@@ -53,7 +53,7 @@ div
     In the following snippet, the value is converted to boolean (#[code !!]), and if falsy
     (e.g. empty string) the JavaScript engine will continue through the #[code ||] and will return
     a string to Wave UI, meaning the field is invalid.
-  ssh-pre(language="js" label="Javascript").
+  ssh-pre(language="js" label="Javascript" :dark="$store.state.darkMode").
     data: () => ({
       validators: {
         required: value => !!value || 'This field is required'

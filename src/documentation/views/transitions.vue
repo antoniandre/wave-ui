@@ -20,10 +20,17 @@ main
     br
     | Simple example (with #[code show] a boolean variable):
     .w-flex
-      ssh-pre.mb0(v-show="$store.state.usePug" language="pug" label="Pug").
+      ssh-pre.mb0(
+        v-show="$store.state.usePug"
+        :dark="$store.state.darkMode"
+        language="pug"
+        label="Pug" ).
         w-transition-fade
           span(v-if="show") Hello!
-      ssh-pre.mb0(v-show="!$store.state.usePug" language="html-vue").
+      ssh-pre.mb0(
+        v-show="!$store.state.usePug"
+        :dark="$store.state.darkMode"
+        language="html-vue" ).
         &lt;w-transition-fade&gt;
           &lt;span v-if="show"&gt;Hello!&lt;/span&gt;
         &lt;/w-transition-fade&gt;
@@ -444,7 +451,7 @@ main
     div(style="height: 90px;overflow: hidden;padding: 4px")
       w-button.mb2(@click="showCard = !showCard") {{ showCard ? 'Hide' : 'Show' }} Card
       w-transition-slide(left)
-        w-card.primary-light3--bg.white(v-if="showCard")
+        w-card.primary-light3--bg.white.sliding-card(v-if="showCard")
           .title3.mb0 A sliding card.
     template(#pug).
       div(style="height: 90px;overflow: hidden;padding: 4px")

@@ -815,7 +815,7 @@ div
   p.
     In this example (more common case) the file is transferred as #[code multipart/form-data] with
     the use of #[code FormData] and using the same HTML as the previous example.
-  ssh-pre(language="js" label="JavaScript").
+  ssh-pre(language="js" label="JavaScript" :dark="$store.state.darkMode").
     import axios from 'axios'
 
     export default {
@@ -844,7 +844,7 @@ div
     Here is an example of a very minimalist way to receive and display the file on server side
     with PHP. Of course you should add more checks, and move the temporary uploaded file when all
     the checks are passed.
-  ssh-pre(language="php" label="PHP").
+  ssh-pre(language="php" label="PHP" :dark="$store.state.darkMode").
     &lt;?php
     // You can check the structure of the file upload.
     // print_r($_FILES);die;

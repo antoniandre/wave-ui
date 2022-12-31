@@ -15,7 +15,7 @@ main
     a.my2(href="https://www.npmjs.com/package/vueperslides" target="_blank")
       img.mb-1(src="https://img.shields.io/npm/dw/vueperslides.svg")
 
-  ssh-pre.mt6(language="shell") npm i vueper-slides
+  ssh-pre.mt6(language="shell" :dark="$store.state.darkMode") npm i vueper-slides
 
   vueper-slides.hero.mt6(
     lazy

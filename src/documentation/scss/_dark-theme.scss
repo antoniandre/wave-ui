@@ -20,8 +20,8 @@
   .w-alert--docs.alert--info {background-color: rgba(0, 183, 255, 0.15);}
   .w-alert--docs.alert--tip {background-color: rgba(135, 128, 65, 0.4);}
   .w-alert--docs.alert--error {background-color: rgba(177, 64, 64, 0.4);}
-  .w-alert--docs.alert--warning {background-color: rgba(201, 115, 0, 0.3);}
-  .w-alert--docs.alert--success {background-color: rgba(102, 204, 0, 0.25);}
+  .w-alert--docs.alert--warning {background-color: rgba(201, 115, 0, 0.25);}
+  .w-alert--docs.alert--success {background-color: rgba(102, 204, 0, 0.2);}
 
   // Code.
   // ------------------------------------------------------
@@ -68,6 +68,43 @@
   .transition-box {
     background-color: rgba(0, 0, 0, 0.15);
     border-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .main--layout-grid-system {
+    legend.round {
+      border: 1px solid rgba(#ca4, 0.9);
+      border-width: 1px 0 0;
+      background-color: #fff1c6;
+      border-radius: 99em;
+      padding: 0 6px;
+      display: flex;
+
+      .code {color: #444;}
+    }
+  }
+
+  .hue-on-dark .example__render {
+    filter: sepia(1) hue-rotate(100deg);
+    * {color: #444;}
+  }
+
+  .w-alert__content .black {color: #fff;}
+  .example .yellow-light5--bg,
+  .example .blue-light5--bg,
+  .main--layout-flex .lighter .box,
+  .main--layout-flex .wrapper,
+  .main--layout-flex .wrapper2,
+  .main--layout-simplified-grid-system .wrapper,
+  .sliding-card {
+    background-color: #394046;
+    border-color: #535c65;
+  }
+
+  .main--layout-flex .lighter .box,
+  .main--layout-simplified-grid-system .box,
+  .main-content--shadows-borders-radii .box {
+    background-color: #344f79;
+    border: 1px solid #6683b0;
   }
   // ======================================================
   // END OF MAIN.

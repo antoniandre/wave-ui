@@ -15,13 +15,13 @@ div
   ol
     li.mt8
       .title4 Install the dependencies:
-      ssh-pre(language="shell") npm i wave-ui
-      ssh-pre(language="shell") npm i -D @wave-ui/nuxt
+      ssh-pre(language="shell" :dark="$store.state.darkMode") npm i wave-ui
+      ssh-pre(language="shell" :dark="$store.state.darkMode") npm i -D @wave-ui/nuxt
 
     li.mt8
       .title4 In #[span.code nuxt.config.js], add Wave UI to the #[code buildModules]:
 
-      ssh-pre(language="js").
+      ssh-pre(language="js" :dark="$store.state.darkMode").
         buildModules: [
           '@wave-ui/nuxt' // Simple config.
 
@@ -32,12 +32,12 @@ div
     li.mt8
       .title4 in #[span.code default.vue], wrap the #[code Nuxt] component in a #[code w-app]:
 
-      ssh-pre(v-show="$store.state.usePug" language="pug" label="Pug").
+      ssh-pre(v-show="$store.state.usePug" language="pug" label="Pug" :dark="$store.state.darkMode").
         &lt;template lang="pug"&gt;
           w-app
             Nuxt
         &lt;/template&gt;
-      ssh-pre(v-show="!$store.state.usePug" language="html-vue").
+      ssh-pre(v-show="!$store.state.usePug" language="html-vue" :dark="$store.state.darkMode").
         &lt;template&gt;
           &lt;w-app&gt;
             &lt;Nuxt /&gt;
@@ -46,9 +46,9 @@ div
 
       p You're all set. Try to add a #[code w-button]:
 
-      ssh-pre(v-show="$store.state.usePug" language="pug" label="Pug").
+      ssh-pre(v-show="$store.state.usePug" language="pug" label="Pug" :dark="$store.state.darkMode").
         w-button My button
-      ssh-pre(v-show="!$store.state.usePug" language="html-vue").
+      ssh-pre(v-show="!$store.state.usePug" language="html-vue" :dark="$store.state.darkMode").
         &lt;w-button&gt;My button&lt;/w-button&gt;
 
   .w-divider.my12
@@ -59,7 +59,8 @@ div
     | With this setup, you can override the Wave UI SCSS variables.
 
   p.mt6 Also install these dev dependencies:
-  ssh-pre.mb1(language="shell") npm i -D pug pug-plain-loader sass sass-loader@10
+  ssh-pre.mb1(language="shell" :dark="$store.state.darkMode")
+    | npm i -D pug pug-plain-loader sass sass-loader@10
   small.text-italic.grey.
     The dev dependencies are only needed for building the project. They will not ship to production.
   p.mt3
@@ -74,7 +75,7 @@ div
         | .
 
   p.mt6 Then update the #[span.code buildModules] &amp; #[span.code build] blocks in #[span.code nuxt.config.js]:
-  ssh-pre(language="js").
+  ssh-pre(language="js" :dark="$store.state.darkMode").
     buildModules: [
       [
         '@wave-ui/nuxt',

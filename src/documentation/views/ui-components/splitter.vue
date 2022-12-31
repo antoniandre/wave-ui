@@ -15,7 +15,7 @@ main
     a.my2(href="https://www.npmjs.com/package/splitpanes" target="_blank")
       img.mb-1(src="https://img.shields.io/npm/dw/splitpanes.svg")
 
-  ssh-pre.mt6(language="shell") npm i splitpanes
+  ssh-pre.mt6(language="shell" :dark="$store.state.darkMode") npm i splitpanes
 
   splitpanes.default-theme.mt8
     pane(min-size="20")

@@ -13,8 +13,9 @@ div.icons-demo
           | Material Design Icons Cheat sheet
           w-icon.ml1 mdi mdi-open-in-new
 
-      ssh-pre(language="shell") npm install @mdi/font
-      ssh-pre(language="js") import '@mdi/font/css/materialdesignicons.min.css'
+      ssh-pre(language="shell" :dark="$store.state.darkMode") npm install @mdi/font
+      ssh-pre(language="js" :dark="$store.state.darkMode")
+        | import '@mdi/font/css/materialdesignicons.min.css'
 
       example
         w-icon.mr1(xs color="primary") mdi mdi-star
@@ -87,8 +88,9 @@ div.icons-demo
           | Material Design Icons Cheat sheet
           w-icon.ml1 mdi mdi-open-in-new
 
-      ssh-pre(language="bash") npm install material-design-icons
-      ssh-pre(language="js") import 'material-design-icons/iconfont/material-icons.css'
+      ssh-pre(language="bash" :dark="$store.state.darkMode") npm install material-design-icons
+      ssh-pre(language="js" :dark="$store.state.darkMode")
+        | import 'material-design-icons/iconfont/material-icons.css'
 
       example(
         external-css="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -164,8 +166,9 @@ div.icons-demo
           | Ionicons V4 Cheat sheet
           w-icon.ml1 mdi mdi-open-in-new
 
-      ssh-pre(language="bash") npm install ionicons
-      ssh-pre(language="js") import 'ionicons/dist/css/ionicons.min.css'
+      ssh-pre(language="bash" :dark="$store.state.darkMode") npm install ionicons
+      ssh-pre(language="js" :dark="$store.state.darkMode")
+        | import 'ionicons/dist/css/ionicons.min.css'
 
       example(external-css="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.6.3/css/ionicons.min.css")
         .w-flex
@@ -309,8 +312,9 @@ div.icons-demo
           | Font Awesome V4 Cheat sheet
           w-icon.ml1 mdi mdi-open-in-new
 
-      ssh-pre(language="bash") npm install font-awesome
-      ssh-pre(language="js") import 'font-awesome/css/font-awesome.min.css'
+      ssh-pre(language="bash" :dark="$store.state.darkMode") npm install font-awesome
+      ssh-pre(language="js" :dark="$store.state.darkMode")
+        | import 'font-awesome/css/font-awesome.min.css'
 
       example(external-css="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
         w-icon.mr1(xs color="primary") fa fa-star

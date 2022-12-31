@@ -365,7 +365,7 @@ div
     You can resize the columns by dragging their edges left or right.#[br]
     If you want the whole cell content to be on a single line and truncated with the ellipsis
     (#[code ...]), you can apply this CSS.
-  ssh-pre(language="css").
+  ssh-pre(language="css" :dark="$store.state.darkMode").
     .w-table__cell {
       white-space: nowrap;
     }
@@ -1627,7 +1627,7 @@ div
       One thing that is not calculated on the mobile layout is the labels column width (default: 6.5em).#[br]
       You can override it to set the width you want via:
 
-    ssh-pre.mt5.mb0(language="css" label="CSS").
+    ssh-pre.mt5.mb0(language="css" label="CSS" :dark="$store.state.darkMode").
       .w-table--mobile .w-table__cell:before {width: 8em;}
 </template>
 

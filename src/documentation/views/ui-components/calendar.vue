@@ -16,7 +16,7 @@ main
       a(href="https://www.npmjs.com/package/vue-cal" target="_blank")
         img.mb-1(src="https://img.shields.io/npm/dw/vue-cal.svg")
 
-  ssh-pre.mt6(language="shell") npm i vue-cal
+  ssh-pre.mt6(language="shell" :dark="$store.state.darkMode") npm i vue-cal
 
   img.mt6(src="@/assets/vue-cal.jpg" alt="Vue Cal")
 </template>

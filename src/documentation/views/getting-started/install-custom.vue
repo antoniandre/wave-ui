@@ -8,10 +8,13 @@ div
     li.mt10
       .title4 Install the dependencies &amp; devDependencies:
       .w-flex.align-center
-        ssh-pre.vue-install(language="shell") npm i wave-ui # Vue 3.
+        ssh-pre.vue-install(language="shell" :dark="$store.state.darkMode")
+          | npm i wave-ui # Vue 3.
         span.mx2 or
-        ssh-pre.vue-install(language="shell") npm i wave-ui@legacy # Vue 2.x.
-      ssh-pre.mb2(language="shell") npm i -D pug pug-plain-loader sass sass-loader@10
+        ssh-pre.vue-install(language="shell" :dark="$store.state.darkMode")
+          | npm i wave-ui@legacy # Vue 2.x.
+      ssh-pre.mb2(language="shell" :dark="$store.state.darkMode")
+        | npm i -D pug pug-plain-loader sass sass-loader@10
       small.text-italic.grey.
         The dev dependencies are only needed for building the project. They will not ship to production.
       p.mt3
@@ -34,7 +37,7 @@ div
         In your project #[span.code src] folder, create a #[span.code _variables.scss] file in a
         #[span.code scss/] folder, and import Wave UI's variables:
 
-      ssh-pre(language="css" label="scss/_variables.scss").
+      ssh-pre(language="css" label="scss/_variables.scss" :dark="$store.state.darkMode").
         @import 'wave-ui/src/wave-ui/scss/_variables';
 
         /* You can add SCSS variables overrides here. */
@@ -44,7 +47,7 @@ div
       p.
         In #[span.code vue.config.js], transpile #[span.code wave-ui] and import your variables file
         globally. Then re-serve the app.
-      ssh-pre(language="js" label="vue.config.js").
+      ssh-pre(language="js" label="vue.config.js" :dark="$store.state.darkMode").
         module.exports = {
           transpileDependencies: ['wave-ui'], // ! \\
 
@@ -62,7 +65,7 @@ div
       .title4 Or if you use Vite:
       p.
         In #[span.code vite.config.js], the import of variables is done like so:
-      ssh-pre(language="js" label="vite.config.js").
+      ssh-pre(language="js" label="vite.config.js" :dark="$store.state.darkMode").
         css: {
           preprocessorOptions: {
             scss: {
@@ -78,7 +81,7 @@ div
       w-tabs.mt4(:items="2" content-class="pa0")
         template(#item-title.1) Vue 3
         template(#item-content.1)
-          ssh-pre.ma0(language="js").
+          ssh-pre.ma0(language="js" :dark="$store.state.darkMode").
             // Keep these 2 imports.
             import { createApp } from 'vue'
             import App from './App.vue'
@@ -107,7 +110,7 @@ div
 
         template(#item-title.2) Vue 2.x
         template(#item-content.2)
-          ssh-pre.ma0(language="js").
+          ssh-pre.ma0(language="js" :dark="$store.state.darkMode").
             // Keep these 2 imports.
             import Vue from 'vue'
             import App from './App.vue'

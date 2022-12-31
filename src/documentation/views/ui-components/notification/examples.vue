@@ -16,7 +16,7 @@ div
 
       title-link(h2) Simple use of the notify method
       p The notify method takes up to 3 parameters, here is the syntax:
-      ssh-pre(language="js").
+      ssh-pre(language="js" :dark="$store.state.darkMode").
         this.$waveui.notify({String} message, {String} type?, {Number} timeout?)
       p.
         The default type is #[code info] and the default timeout is #[code 4000].#[br]
@@ -53,7 +53,7 @@ div
         The #[code notify] method also accepts a single Object parameter which will accept all the options
         of the #[strong.code w-alert] component, plus the #[code message] and #[code timeout] options.#[br]
         E.g.
-      ssh-pre(language="js").
+      ssh-pre(language="js" :dark="$store.state.darkMode").
         this.$waveui.notify({
           message: 'Message.',
           timeout: 3000, // ms.
@@ -102,7 +102,7 @@ div
       p.
         The global configuration allows you to override the default side and transition of the
         notification manager.
-      ssh-pre(language="js").
+      ssh-pre(language="js" :dark="$store.state.darkMode").
         new WaveUI({
           notificationManager: {
             align: 'right', // Or 'left'.
@@ -147,7 +147,7 @@ div
       p.
         By default, the notification manager is 280px-wide and all the notifications will inherit this width.#[br]
         You can override this via CSS. For instance:
-      ssh-pre(language="css").
+      ssh-pre(language="css" :dark="$store.state.darkMode").
         .w-notification-manager {width: 100%;max-width: 500px;}
 
     //- w-notification.

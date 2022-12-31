@@ -6,7 +6,7 @@ div
   .caption.grey-light1.
     There should only be one &lt;w-app&gt; in your whole app.
 
-  ssh-pre(language="html-vue").
+  ssh-pre(language="html-vue" :dark="$store.state.darkMode").
     &lt;w-app&gt;
       &lt;!-- All your app's content goes here. --&gt;
     &lt;/w-app&gt;

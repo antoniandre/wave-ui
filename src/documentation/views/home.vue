@@ -75,7 +75,7 @@ w-app.home
 
         w-flex.mt8.ui-demo(basis-zero wrap justify-center :gap="8")
           .left-col.grow
-            w-card.white--bg.card--1(content-class="w-flex column" title="Form Elements" title-class="py1 title4")
+            w-card.card--1.base-color--bg(content-class="w-flex column" title="Form Elements" title-class="py1 title4")
               w-checkbox.mt3(:model-value="true" color="pink") Checkbox
               w-radio.mt3(:model-value="true" color="red") Radio
               w-switch.mt3(:model-value="true" color="deep-orange") Switch
@@ -84,7 +84,7 @@ w-app.home
                 thumb-label-class="orange--bg white"
                 thumb-label="droplet"
                 color="amber")
-            w-card.white--bg.card--2(title="Icons, badges, Alerts..." title-class="py1 title4")
+            w-card.card--2.base-color--bg(title="Icons, badges, Alerts..." title-class="py1 title4")
               .w-flex.align-center.justify-space-around.mt1
                 w-icon.success(xl) mdi mdi-check
                 w-icon.error(xl) mdi mdi-close
@@ -97,7 +97,7 @@ w-app.home
             w-card.yellow-grad.card--3(content-class="pa0")
               w-accordion(:model-value="[true, false, false]" expand-single :items="accordionItems")
 
-            w-card.white--bg.card--4(content-class="pa0" title="Form validation" title-class="py1 title4 mb0")
+            w-card.card--4.base-color--bg(content-class="pa0" title="Form validation" title-class="py1 title4 mb0")
               .message-box
                 w-transition-fade
                   w-alert.my0.text-light(v-if="form6.submitted" success no-border)
@@ -135,7 +135,7 @@ w-app.home
 
           .right-col.checklist
             .title4 See how easy it is to build a checklist.
-            ssh-pre(language="html-vue").
+            ssh-pre(language="html-vue" :dark="$store.state.darkMode").
               &lt;w-list
                 v-model="selection"
                 :items="items"
@@ -143,7 +143,7 @@ w-app.home
                 round-checkboxes
                 color="blue-light1"&gt;
               &lt;/w-list&gt;
-            ssh-pre(language="js").
+            ssh-pre(language="js" :dark="$store.state.darkMode").
               data: () => ({
                 items: [
                   { label: 'Item 1' },
@@ -169,7 +169,7 @@ w-app.home
           Practically Wave UI gives you more flexibility and more control over the CSS.
         p.my4.
           If you use Sass, you can even control Wave UI's CSS rules priorities by overriding the CSS base scope like so.
-        pre.example.ssh-pre.pa2
+        pre.ssh-pre.pa2(:class="{ 'ssh-pre--dark': $store.state.darkMode }")
           span.pink $css-scope
           span.blue-grey.mr1 :
           span.red-light2 '.w-app'
@@ -474,7 +474,7 @@ export default {
     bottom: 0;
     width: 100%;
     height: 50%;
-    fill: #fff;
+    fill: rgb(var(--w-base-bg-color-rgb));
     pointer-events: none;
 
     path:nth-child(1) {opacity: 0.1;}
@@ -616,7 +616,7 @@ export default {
   // Section 1.
   // ------------------------------------------------------
   .section--1 {
-    background-color: #fff;
+    background-color: rgb(var(--w-base-bg-color-rgb));
     // margin-top: 5em;
     padding-bottom: 11em;
 
@@ -727,7 +727,7 @@ export default {
 
     .section__content {overflow: hidden;}
 
-    > svg {top: 0;fill: #fff;}
+    > svg {top: 0;fill: rgb(var(--w-base-bg-color-rgb));}
 
     .w-button {
       font-family: "title font";

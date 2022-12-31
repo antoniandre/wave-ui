@@ -54,7 +54,7 @@ main
       code xl
 
   example
-    w-card.blue-light5--bg
+    w-card(:class="{ 'blue-light5--bg': !$store.state.darkMode }")
       .title2.mt0 Current breakpoint: #[code {{ $waveui.breakpoint.name }}]
       em.grey.mt1 Resizing your browser will update the current breakpoint.
     template(#pug).
@@ -76,7 +76,7 @@ main
 
   title-link(h2) breakpoint-specific layout classes
   p All the following CSS classes can be used complementarily on the same DOM node for different breakpoints.
-  ssh-pre(language="css").
+  ssh-pre(language="css" :dark="$store.state.darkMode").
     .show {display: block;}
     .hide {display: none;}
 
@@ -159,7 +159,7 @@ main
   alert(tip)
     | If you'd rather not have these CSS layout classes, you can disable them via the
     | #[code breakpointLayoutClasses] option in the global configuration.
-    ssh-pre(language="js").mb0.
+    ssh-pre(language="js" :dark="$store.state.darkMode").mb0.
       const waveui = new WaveUI({
         css: {
           breakpointLayoutClasses: false
@@ -168,7 +168,7 @@ main
 
   title-link(h2) Setting custom breakpoints
   p.mt4 You can override the default breakpoints values with:
-  ssh-pre(language="js").
+  ssh-pre(language="js" :dark="$store.state.darkMode").
     const waveui = new WaveUI({
       breakpoints: {
         xs: 600,

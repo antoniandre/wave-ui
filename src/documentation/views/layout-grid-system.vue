@@ -11,7 +11,7 @@ main
   alert(info)
     | The grid is 12-cell based by default, but you can override it to make it a 24-cell grid,
     | or whatever you want via the global Wave UI options:
-    ssh-pre(language="js").mb0.
+    ssh-pre(language="js" :dark="$store.state.darkMode").mb0.
       new WaveUI({
         css: {
           grid: 24
@@ -30,7 +30,7 @@ main
         according to the class in use.
 
   fieldset.w-flex.pa4.pt3.amber-light5--bg(style="position: relative")
-    legend.px1 #[strong.code.amber-dark3 &lt;w-flex&gt;]
+    legend.px1.round #[strong.code.amber-dark3 &lt;w-flex&gt;]
     fieldset.xs3.light-blue-light5--bg.pa3.code
       legend.light-blue-dark2.px1 div.xs3
     fieldset.xs9.light-blue-light5--bg.pa3.code.ml1
@@ -48,7 +48,7 @@ main
     The grid cells must be in a flex context to display inline, you can wrap them in a
     #[strong.code w-flex] component or #[code .w-flex] CSS class.
 
-  example
+  example.hue-on-dark
     w-flex.text-center(wrap)
       .xs12.pa1
         .primary-dark1--bg.py3 xs12
@@ -110,7 +110,7 @@ main
         &lt;/div&gt;
       &lt;/w-flex&gt;
 
-  example.mt8
+  example.mt8.hue-on-dark
     w-flex.text-center(wrap)
       .xs1.pa1
         .primary-dark1--bg.py3 xs1
@@ -215,7 +215,7 @@ main
       &lt;/w-card&gt;
 
   p For this example, resize your browser and observe the different layout when crossing a breakpoint.
-  example
+  example.hue-on-dark
     w-flex.text-center(wrap)
       .xs12.md6.lg4.xl2.pa1
         .primary-light3--bg.py3

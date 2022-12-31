@@ -14,7 +14,7 @@ main
     #[code="mx[number]"], #[code="px[number]"]. And #[code a] is for all the sides.
 
   example
-    .orange-light4--bg.pa12
+    .orange-light4--bg.pa12.grey-dark5
       .yellow-light5--bg.pa3.
         The orange container has a #[span.code pa12] class which results in a padding of: 12 x 4 x
         base-font-size pixels.#[br]
@@ -59,7 +59,7 @@ main
     orange container.
   example
     .orange-light4--bg.pa8
-    .green-light4--bg.mt-8.mx8.pa3.
+    .green-light4--bg.mt-8.mx8.pa3.grey-dark5.
       This green container has a #[span.code mt-8] class which results in a negative top margin of: -8 x 4 x
       base-font-size pixels.
     template(#pug).
@@ -80,7 +80,7 @@ main
     Last but not least, margin: auto is also possible with the #[code a] modifier.#[br]
     The syntax for it is #[code="m[side]a"]
   example
-    .orange-light4--bg.pa8
+    .orange-light4--bg.pa8.grey-dark5
       .green-light4--bg.mxa.pa3(style="max-width: 240px").
         This green container has a #[span.code mxa] class which results in a margin auto on the left &amp; right.
     template(#pug).
@@ -94,3 +94,9 @@ main
         &lt;/div&gt;
       &lt;/div&gt;
 </template>
+
+<style lang="scss">
+.main-content--layout-spaces {
+  .example__render .code {color: inherit;}
+}
+</style>
