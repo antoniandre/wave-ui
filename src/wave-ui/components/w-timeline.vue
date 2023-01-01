@@ -48,7 +48,7 @@ export default {
     position: absolute;
     top: 2px;
     left: 0;
-    background-color: #fff;
+    background-color: $timeline-bullet-color;
     border-radius: 1em;
     border: 1px solid currentColor;
     width: $base-font-size;
@@ -66,7 +66,7 @@ export default {
     top: 2px;
     bottom: -2px;
     left: -1px;
-    border-left: 2px solid #ddd;
+    border-left: 2px solid $timeline-bg-color;
   }
 }
 </style>

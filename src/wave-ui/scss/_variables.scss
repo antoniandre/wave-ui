@@ -104,6 +104,12 @@ $table-color: rgba(0, 0, 0, 0.7) !default;
 $textarea-line-height: 1.2 !default;
 // --------------------------------------------------------
 
+// w-timeline.
+// --------------------------------------------------------
+$timeline-bullet-color: $base-bg-color !default;
+$timeline-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.25) !default;
+// --------------------------------------------------------
+
 // w-toolbar.
 // --------------------------------------------------------
 $toolbar-max-size: 380px !default;
