@@ -247,7 +247,7 @@ export default {
   position: inherit;
   display: flex;
   z-index: 1;
-  background: #fff;
+  background: $drawer-bg-color;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
 
   &--left, &--right {

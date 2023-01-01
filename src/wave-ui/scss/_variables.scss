@@ -58,16 +58,32 @@ $detachable-color: rgba(0, 0, 0, 0.7) !default;
 
 // COMPONENTS DEFAULTS.
 // ========================================================
-// w-toolbar.
+// w-confirm.
 // --------------------------------------------------------
-$toolbar-max-size: 380px !default;
-$toolbar-bg-color: $base-bg-color !default;
+$confirm-bg-color: $detachable-bg-color !default;
+$confirm-color: $detachable-color !default;
+// --------------------------------------------------------
+
+// w-dialog.
+// --------------------------------------------------------
+$dialog-bg-color: $base-bg-color !default;
+// --------------------------------------------------------
+
+// w-divider.
+// --------------------------------------------------------
+$divider-color: $border-color !default;
 // --------------------------------------------------------
 
 // w-drawer.
 // --------------------------------------------------------
 $drawer-max-size: 380px !default;
 $drawer-bg-color: $base-bg-color !default;
+// --------------------------------------------------------
+
+// w-menu.
+// --------------------------------------------------------
+$menu-bg-color: $detachable-bg-color !default;
+$menu-color: $detachable-color !default;
 // --------------------------------------------------------
 
 // w-slider.
@@ -88,22 +104,16 @@ $table-color: rgba(0, 0, 0, 0.7) !default;
 $textarea-line-height: 1.2 !default;
 // --------------------------------------------------------
 
+// w-toolbar.
+// --------------------------------------------------------
+$toolbar-max-size: 380px !default;
+$toolbar-bg-color: $base-bg-color !default;
+// --------------------------------------------------------
+
 // w-tooltip.
 // --------------------------------------------------------
 $tooltip-bg-color: $detachable-bg-color !default;
 $tooltip-color: $detachable-color !default;
-// --------------------------------------------------------
-
-// w-menu.
-// --------------------------------------------------------
-$menu-bg-color: $detachable-bg-color !default;
-$menu-color: $detachable-color !default;
-// --------------------------------------------------------
-
-// w-confirm.
-// --------------------------------------------------------
-$confirm-bg-color: $detachable-bg-color !default;
-$confirm-color: $detachable-color !default;
 // --------------------------------------------------------
 
 // Mixins.

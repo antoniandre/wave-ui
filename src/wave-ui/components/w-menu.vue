@@ -274,7 +274,7 @@ export default {
   z-index: 100;
 
   &--fixed {position: fixed;z-index: 1000;}
-  &--card {background-color: #fff;}
+  &--card {background-color: $menu-bg-color;}
   &--tile {border-radius: 0;}
   &--round {
     border-radius: 99em;

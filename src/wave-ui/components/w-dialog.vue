@@ -121,7 +121,7 @@ export default {
     flex-grow: 1;
     max-width: 95%;
     overflow: auto;
-    background-color: #fff;
+    background-color: $dialog-bg-color;
 
     .w-dialog--fullscreen > & {
       flex: 1 1 auto;

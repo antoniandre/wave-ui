@@ -66,7 +66,7 @@ export default {
   flex: 1 1 auto;
   align-items: center;
   padding: (2 * $base-increment) (3 * $base-increment);
-  background-color: #fff;
+  background-color: $toolbar-bg-color;
   z-index: 10;
 
   &--absolute, &--fixed {top: 0;left: 0;right: 0;}

@@ -31,7 +31,7 @@ export default {
 
 <style lang="scss">
 .w-divider {
-  border: 0 solid rgba(0, 0, 0, 0.15);
+  border: 0 solid $divider-color;
   border-top-width: 1px;
 
   &--has-color {border-color: currentColor;}
