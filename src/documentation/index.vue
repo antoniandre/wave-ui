@@ -21,6 +21,7 @@ w-app(:dark="darkMode")
           right
           xl
           :bg-color="$store.state.darkMode ? 'grey-dark4' : 'grey-light5'"
+          color="base-color"
           @click="scrollTop")
 
       footer.w-flex.justify-end.align-center.no-grow.wrap

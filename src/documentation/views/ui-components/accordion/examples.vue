@@ -136,15 +136,17 @@ div
     No background color is set by default and the text color is inherited.
   example(content-class="pa4")
     w-accordion.discrete--bg(:items="items" color="amber-dark1")
-    w-accordion.mt6(:items="items" bg-color="yellow-light5")
+    w-accordion.mt6(
+      :items="items"
+      :bg-color="$store.state.darkMode ? 'indigo-dark6' : 'yellow-light5'")
     template(#pug).
       w-accordion(:items="items" color="amber-dark1")
 
-      w-accordion.mt6(:items="items" bg-color="yellow-light5")
+      w-accordion.mt6(:items="items" bg-color="{{ $store.state.darkMode ? 'indigo-dark6' : 'yellow-light5' }}")
     template(#html).
       &lt;w-accordion :items="items" color="amber-dark1"&gt;&lt;/w-accordion&gt;
 
-      &lt;w-accordion class="mt6" :items="items" bg-color="yellow-light5"&gt;&lt;/w-accordion&gt;
+      &lt;w-accordion class="mt6" :items="items" bg-color="{{ $store.state.darkMode ? 'indigo-dark6' : 'yellow-light5' }}"&gt;&lt;/w-accordion&gt;
     template(#js).
       data: () => ({
         items: [

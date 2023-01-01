@@ -68,6 +68,8 @@
   .transition-box {
     background-color: rgba(0, 0, 0, 0.15);
     border-color: rgba(0, 0, 0, 0.4);
+
+    .yellow-light5--bg {background-color: transparent;}
   }
 
   .main--layout-grid-system {
@@ -89,8 +91,9 @@
   }
 
   .w-alert__content .black {color: #fff;}
-  .example .yellow-light5--bg,
   .example .blue-light5--bg,
+  .main--shadows-borders-radii .example .orange-light5--bg,
+  .main--layout-flex .example .yellow-light5--bg,
   .main--layout-flex .lighter .box,
   .main--layout-flex .wrapper,
   .main--layout-flex .wrapper2,
@@ -102,7 +105,7 @@
 
   .main--layout-flex .lighter .box,
   .main--layout-simplified-grid-system .box,
-  .main-content--shadows-borders-radii .box {
+  .main--shadows-borders-radii .box {
     background-color: #344f79;
     border: 1px solid #6683b0;
   }
