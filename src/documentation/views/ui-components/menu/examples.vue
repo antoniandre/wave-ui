@@ -845,17 +845,20 @@ div
   title-link(h2) Color &amp; background color
   p Like in most components, you can define a #[code color] and a  #[code bg-color].
   example.example8(content-class="text-center my4" app-props-string="align-center")
-    w-menu(append-to=".example8" color="blue-dark2" bg-color="blue-light5")
+    w-menu(
+      append-to=".example8"
+      :color="$store.state.darkMode ? 'blue-light4' : 'blue-dark2'"
+      :bg-color="$store.state.darkMode ? 'indigo-dark6' : 'blue-light5'")
       template(#activator="{ on }")
         w-button.ma1(v-on="on") Show a blue menu
       | Menu content
     template(#pug).
-      w-menu(color="blue-dark2" bg-color="blue-light5")
+      w-menu(color="{{ $store.state.darkMode ? 'blue-light4' : 'blue-dark2' }}" bg-color="{{ $store.state.darkMode ? 'indigo-dark6' : 'blue-light5' }}")
         template(#activator="{ on }")
           w-button(v-on="on") Show a blue menu
         | Menu content
     template(#html).
-      &lt;w-menu color="blue-dark2" bg-color="blue-light5"&gt;
+      &lt;w-menu color="{{ $store.state.darkMode ? 'blue-light4' : 'blue-dark2' }}" bg-color="{{ $store.state.darkMode ? 'indigo-dark6' : 'blue-light5' }}"&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;w-button v-on="on"&gt;
             Show a blue menu
@@ -941,7 +944,7 @@ div
     w-menu(append-to=".example10" shadow custom)
       template(#activator="{ on }")
         w-button.mb2(v-on="on") Show a custom menu
-      w-card.white--bg(content-class="pa0")
+      w-card.base-color--bg(content-class="pa0")
         w-toolbar
           .title3.ma0 Menu Title
           .spacer
