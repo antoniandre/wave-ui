@@ -356,7 +356,7 @@ div
     w-tree(v-model="selection" :data="tree1" selectable)
     .w-flex.mt6
       strong.mr3 Selection:
-      pre.orange-light6--bg.pa2 {{ selection }}
+      pre.pa2(:class="$store.state.darkMode ? 'grey-dark6--bg' : 'orange-light6--bg'") {{ selection }}
     template(#pug).
       w-tree(v-model="selection" :data="tree" selectable)
     template(#html).
@@ -399,7 +399,10 @@ div
         @click="log('@click', $event)"
         @select="log('@select', $event)"
         selectable)
-      w-card(bg-color="amber-light6" title="Event log" title-class="amber-light5--bg")
+      w-card(
+        :bg-color="$store.state.darkMode ? 'grey-dark6' : 'amber-light6'"
+        title="Event log"
+        :title-class="$store.state.darkMode ? 'grey-dark5--bg' : 'amber-light5--bg'")
         pre(v-html="logs")
     template(#pug).
       w-tree(

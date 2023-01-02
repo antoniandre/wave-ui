@@ -18,18 +18,20 @@ div
         .title4 Options
         w-button.d-block.mr2(
           bg-color="primary-light1"
+          color="contrast-color"
           :class="persistent ? 'pr4' : ''"
           @click="persistent = !persistent"
           sm
           dark)
-          .code.white :persistent="{{ persistent }}"
+          .code.inherit :persistent="{{ persistent }}"
         w-button.d-block.mt2(
           bg-color="primary-light1"
+          color="contrast-color"
           @click="persistentNoAnimation = !persistentNoAnimation"
           :disabled="!persistent"
           sm
           dark)
-          .code.white :persistent-no-animation="{{ persistentNoAnimation }}"
+          .code.inherit :persistent-no-animation="{{ persistentNoAnimation }}"
         w-input.mt2.d-block(
           v-model="opacity"
           outline
@@ -56,18 +58,20 @@ div
           .title4 Options
           w-button.mr2(
             bg-color="primary-light1"
+            color="contrast-color"
             :class="persistent ? 'pr4' : ''"
             @click="persistent = !persistent"
             sm
             dark)
-            .code.white :persistent="{{ '\{\{ persistent \}\}' }}"
+            .code.inherit :persistent="{{ '\{\{ persistent \}\}' }}"
           w-button(
             bg-color="primary-light1"
+            color="contrast-color"
             @click="persistentNoAnimation = !persistentNoAnimation"
             :disabled="!persistent"
             sm
             dark)
-            .code.white :persistent-no-animation="{{ '\{\{ persistentNoAnimation \}\}' }}"
+            .code.inherit :persistent-no-animation="{{ '\{\{ persistentNoAnimation \}\}' }}"
           w-input.mt2.d-block(
             v-model="opacity"
             outline
@@ -102,6 +106,7 @@ div
           &lt;w-button
             class="mr2"
             bg-color="primary-light1"
+            color="contrast-color"
             :class="persistent ? 'pr4' : ''"
             @click="persistent = !persistent"
             sm
@@ -111,6 +116,7 @@ div
 
           &lt;w-button
             bg-color="primary-light1"
+            color="contrast-color"
             @click="persistentNoAnimation = !persistentNoAnimation"
             :disabled="!persistent"
             sm
