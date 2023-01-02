@@ -22,6 +22,21 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.major
+      strong.version v3.0.0
+      ul
+        li
+          strong.code Theming (light &amp; dark)
+          ul
+            li Every component is now completely themeable, all at once, or individually.
+            li Added a lot more color variables in the SCSS variables file for more granular control.
+            li All the default colors are now dynamically computed with the user theme preference using CSS3 variables.
+      ul
+        li
+          strong.code w-card
+          ul
+            li allow HTML in card title.
+
     li.patch
       strong.version v2.48.0
       ul
