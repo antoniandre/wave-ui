@@ -1,5 +1,5 @@
 <template lang="pug">
-w-app.home
+w-app.home(:dark="$store.state.darkMode")
   .home__header
     .header__content
       h1
@@ -281,6 +281,7 @@ export default {
   },
 
   mounted () {
+    this.$store.dispatch('detectDarkMode')
     setTimeout(this.initScrollAnimation, 200)
   },
 
