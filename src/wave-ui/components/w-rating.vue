@@ -39,7 +39,7 @@ export default {
     modelValue: {},
     max: { type: [Number, String], default: 5 },
     color: { type: String, default: 'primary' },
-    bgColor: { type: String, default: 'grey-light4' },
+    bgColor: { type: String },
     icon: { type: String, default: 'wi-star' },
     xs: { type: Boolean },
     sm: { type: Boolean },
@@ -144,7 +144,8 @@ export default {
         'w-rating__button--half': isHalf,
         [this.icon]: true,
         [`size--${this.size}`]: true,
-        [isOn ? this.color : this.bgColor]: true
+        [this.color]: isOn,
+        [this.bgColor]: this.bgColor && !this.isOn
       }
     }
   },
@@ -171,6 +172,7 @@ export default {
     justify-content: center;
     border: none;
     background: none;
+    color: $rating-bg-color;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     @include default-transition($fast-transition-duration);

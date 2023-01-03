@@ -190,7 +190,7 @@ export default {
   position: absolute;
   padding: $base-increment round(1.5 * $base-increment);
   border-radius: $border-radius;
-  border: 1px solid #ddd;
+  border: 1px solid $tooltip-border-color;
   background-color: $tooltip-bg-color;
   pointer-events: none;
   color: $tooltip-color;
@@ -218,12 +218,12 @@ export default {
 
   // Tooltip without border.
   &--no-border {
-    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px, 0);
+    @include triangle($tooltip-bg-color, '.w-tooltip', 7px, 0);
   }
 
   // Tooltip with border.
   &:not(&--no-border) {
-    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px);
+    @include triangle($tooltip-bg-color, '.w-tooltip', 7px);
   }
 }
 

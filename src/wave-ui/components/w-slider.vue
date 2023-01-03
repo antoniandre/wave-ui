@@ -284,7 +284,7 @@ export default {
     transform: translateX(-50%);
     font-size: 0.8em;
     padding-top: 2 * $base-increment;
-    color:rgba(0, 0, 0, 0.5);
+    color: $slider-step-label-color;
     z-index: 1;
     cursor: pointer;
 
@@ -296,7 +296,7 @@ export default {
       top: 0;
       width: $base-increment;
       aspect-ratio: 1;
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: $slider-step-label-bg-color;
       border-radius: 99em;
       // box-shadow: 0 0 0 1px #fff;
       box-sizing: border-box;
@@ -377,7 +377,7 @@ export default {
     border: none;
     border-radius: 99em;
     cursor: pointer;
-    background-color: #fff;
+    background-color: $slider-thumb-button-bg-color;
 
     .w-slider--disabled &, .w-slider--readonly & {cursor: auto;}
 
@@ -427,12 +427,12 @@ export default {
     margin-bottom: round(3 * $base-increment);
     transform: translateX(-50%);
     padding: round(0.75 * $base-increment) (2 * $base-increment);
-    background-color: #fff;
+    background-color: $slider-thumb-label-bg-color;
     border-radius: $border-radius;
     border: $border;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
     font-size: 0.85em;
-    color:rgba(0, 0, 0, 0.7);
+    color: $slider-thumb-label-color;
 
     &:before, &:after {
       content: '';
@@ -446,7 +446,7 @@ export default {
     }
 
     &:before {border-width: 7px;border-top-color: inherit;}
-    &:after {border-width: 6px;border-top-color: #fff;}
+    &:after {border-width: 6px;border-top-color: $slider-thumb-label-bg-color;}
 
     &--droplet {
       transform: translateX(-50%) rotate(-45deg);

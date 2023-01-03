@@ -272,6 +272,7 @@ export default {
 .w-menu {
   position: absolute;
   z-index: 100;
+  color: $menu-color;
 
   &--fixed {position: fixed;z-index: 1000;}
   &--card {background-color: $menu-bg-color;}
@@ -293,7 +294,7 @@ export default {
     &.w-menu--left {margin-left: -4 * $base-increment;}
     &.w-menu--right {margin-left: 4 * $base-increment;}
 
-    @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
+    @include triangle($menu-bg-color, '.w-menu', 9px);
   }
 }
 </style>

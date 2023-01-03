@@ -232,8 +232,8 @@ export default {
     left: 1px;
     z-index: 1;
     transform: translateX(-50%);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    background-color: #fff;
+    border: 1px solid rgba(var(--w-base-bg-color-rgb), 0.7);
+    background-color: $base-bg-color;
   }
   &--icon-outside &__icon:before {transform: scale(1.05);}
 

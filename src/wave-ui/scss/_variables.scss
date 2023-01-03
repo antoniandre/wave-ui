@@ -3,12 +3,12 @@
 
 @function divide($a, $b) {
   @return math.div($a, $b); // Must use `sass` & not `node-sass`.
-  // @return $a / $b;
 }
 
 // THEME COLORS.
 // ========================================================
-// if you don't need themes, you can leave this as is and override the global defaults.
+// These colors are defined by a list of RBG channels only, so you can later apply any alpha channel.
+// If you don't need themes, you can leave this as is and override the global defaults.
 $theme-light: (
   base-bg-color-rgb: (255, 255, 255), // #fff.
   base-color-rgb: (0, 0, 0), // #000.
@@ -27,7 +27,6 @@ $base-bg-color: rgb(var(--w-base-bg-color-rgb));
 $base-color: rgb(var(--w-base-color-rgb));
 $contrast-bg-color: rgb(var(--w-contrast-bg-color-rgb));
 $contrast-color: rgb(var(--w-contrast-color-rgb));
-
 
 // GLOBAL DEFAULTS.
 // ========================================================
@@ -54,7 +53,7 @@ $small-form-el-size: round(divide(1.3 * $base-font-size, 2)) * 2 !default;
 
 // Detachable elements are: w-tooltip, w-menu, w-confirm.
 $detachable-bg-color: $base-bg-color !default;
-$detachable-color: rgba(0, 0, 0, 0.7) !default;
+$detachable-color: $base-color !default;
 
 // COMPONENTS DEFAULTS.
 // ========================================================
@@ -86,17 +85,32 @@ $menu-bg-color: $detachable-bg-color !default;
 $menu-color: $detachable-color !default;
 // --------------------------------------------------------
 
+// w-progress.
+// --------------------------------------------------------
+$progress-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.15) !default;
+// --------------------------------------------------------
+
+// w-rating.
+// --------------------------------------------------------
+$rating-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.25) !default;
+// --------------------------------------------------------
+
 // w-slider.
 // --------------------------------------------------------
 $slider-height: $base-increment !default;
-$slider-track-color: #ddd;
+$slider-track-color: rgba(var(--w-contrast-bg-color-rgb), 0.15) !default;
+$slider-thumb-button-bg-color: $base-bg-color !default;
+$slider-thumb-label-bg-color: $base-bg-color !default;
+$slider-thumb-label-color: rgba(var(--w-base-color-rgb), 0.75) !default;
+$slider-step-label-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.2) !default;
+$slider-step-label-color: rgba(var(--w-base-color-rgb), 0.5) !default;
 // --------------------------------------------------------
 
 // w-table.
 // --------------------------------------------------------
 $table-tr-odd-color: rgba(0, 0, 0, 0.02) !default;
 $table-tr-hover-color: rgba(0, 0, 0, 0.05) !default;
-$table-color: rgba(0, 0, 0, 0.7) !default;
+$table-color: rgba(var(--w-contrast-color-rgb), 0.7) !default;
 // --------------------------------------------------------
 
 // w-textarea.
@@ -120,6 +134,7 @@ $toolbar-bg-color: $base-bg-color !default;
 // --------------------------------------------------------
 $tooltip-bg-color: $detachable-bg-color !default;
 $tooltip-color: $detachable-color !default;
+$tooltip-border-color: $border-color !default;
 // --------------------------------------------------------
 
 // Mixins.

@@ -11,7 +11,7 @@
       //- Background first, in SVG there is no z-index.
       circle.bg(
         v-if="bgColor || this.progressValue > -1"
-        :class="bgColor"
+        :class="bgColor || null"
         :cx="circleCenter"
         :cy="circleCenter"
         :r="circleRadius"
@@ -252,7 +252,7 @@ $circle-size: 40;
 
     svg {display: block;width: 100%;}
     circle.bg {stroke: currentColor;}
-    &.w-progress--default-bg circle.bg {stroke: rgba(0, 0, 0, 0.1);}
+    &.w-progress--default-bg circle.bg {stroke: $progress-bg-color;}
 
     .w-progress__progress {
       transform-origin: 100% 100%;

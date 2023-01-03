@@ -172,7 +172,7 @@ export default {
 
   &__item {position: relative;}
 
-  button.w-accordion__expand-icon {color: #999;}
+  button.w-accordion__expand-icon {color: rgba(var(--w-base-color-rgb), 0.4);}
   &__expand-icon {
     margin-right: $base-increment;
 
