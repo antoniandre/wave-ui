@@ -32,7 +32,9 @@ export default {
     transition: { type: String },
     tooltipClass: { type: [String, Object, Array] },
     persistent: { type: Boolean },
-    delay: { type: Number }
+    delay: { type: Number },
+    dark: { type: Boolean },
+    light: { type: Boolean }
     // Other props in the detachable mixin:
     // detachTo, appendTo, fixed, top, bottom, left, right, alignTop, alignBottom, alignLeft,
     // alignRight, noPosition, zIndex, activator.
@@ -78,6 +80,8 @@ export default {
         ...this.tooltipClasses,
         [`w-tooltip--${this.position}`]: !this.noPosition,
         [`w-tooltip--align-${this.alignment}`]: !this.noPosition && this.alignment,
+        'w-tooltip--dark': this.dark,
+        'w-tooltip--light': this.light,
         'w-tooltip--tile': this.tile,
         'w-tooltip--round': this.round,
         'w-tooltip--shadow': this.shadow,
@@ -198,6 +202,8 @@ export default {
   max-width: 300px;
   width: max-content; // Not supported in IE11. :/
   z-index: 100;
+
+  @include themeable;
 
   &--fixed {position: fixed;z-index: 1000;}
 

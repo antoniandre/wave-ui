@@ -45,7 +45,9 @@ export default {
     sm: { type: Boolean },
     md: { type: Boolean },
     lg: { type: Boolean },
-    xl: { type: Boolean }
+    xl: { type: Boolean },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   emits: ['input', 'update:modelValue', 'close'],
@@ -114,6 +116,8 @@ export default {
 
     classes () {
       return {
+        'w-notification--dark': this.dark,
+        'w-notification--light': this.light,
         'w-notification--absolute': this.absolute,
         [`w-notification--${this.position.join(' w-notification--')}`]: true
       }
@@ -169,6 +173,8 @@ export default {
   position: fixed;
   z-index: 300;
   pointer-events: none;
+
+  @include themeable;
 
   // Position.
   &--absolute {position: absolute;z-index: 400;}

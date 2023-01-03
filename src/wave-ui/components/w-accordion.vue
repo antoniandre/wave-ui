@@ -83,7 +83,9 @@ export default {
     expandSingle: { type: Boolean },
     collapseIcon: { type: String },
     shadow: { type: Boolean },
-    duration: { type: Number, default: 250 }
+    duration: { type: Number, default: 250 },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'item-expand', 'item-collapsed'],
@@ -97,6 +99,8 @@ export default {
       return {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
+        'w-accordion--dark': this.dark,
+        'w-accordion--light': this.light,
         'w-accordion--shadow': this.shadow,
         'w-accordion--no-icon': !this.expandIcon && !this.collapseIcon,
         'w-accordion--icon-right': this.expandIcon && this.expandIconRight,
@@ -167,6 +171,8 @@ export default {
 <style lang="scss">
 .w-accordion {
   z-index: 1;
+
+  @include themeable;
 
   &--shadow {box-shadow: $box-shadow;}
 

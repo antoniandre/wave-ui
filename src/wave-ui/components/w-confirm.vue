@@ -65,7 +65,9 @@ export default {
     alignLeft: { type: Boolean },
     alignRight: { type: Boolean },
     persistent: { type: Boolean },
-    transition: { type: String }
+    transition: { type: String },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   emits: ['cancel', 'confirm'],
@@ -124,6 +126,8 @@ export default {
         bgColor: this.bgColor,
         color: this.color,
         icon: this.icon,
+        dark: this.dark,
+        light: this.light,
         tooltip: label,
         tooltipProps,
         ...this.mainButton

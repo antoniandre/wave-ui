@@ -73,7 +73,9 @@ export default {
     fillBar: { type: Boolean },
     center: { type: Boolean },
     right: { type: Boolean },
-    card: { type: Boolean }
+    card: { type: Boolean },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   components: { TabContent },
@@ -125,7 +127,9 @@ export default {
         'w-tabs--no-slider': this.noSlider,
         'w-tabs--pill-slider': this.pillSlider,
         'w-tabs--fill-bar': this.fillBar,
-        'w-tabs--init': this.init
+        'w-tabs--init': this.init,
+        'w-tabs--dark': this.dark,
+        'w-tabs--light': this.light
       }
     },
 
@@ -258,6 +262,8 @@ export default {
   border-radius: $border-radius;
   border: $border;
   overflow: hidden;
+
+  @include themeable;
 
   &--tile {border-radius: 0;}
   &--card {border: none;}

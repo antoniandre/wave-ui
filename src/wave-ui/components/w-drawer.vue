@@ -77,7 +77,9 @@ export default {
     overlayColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] },
     drawerClass: { type: String },
-    tag: { type: String, default: 'aside' }
+    tag: { type: String, default: 'aside' },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   provide () {
@@ -133,7 +135,9 @@ export default {
         [`w-drawer--${this.position}`]: true,
         'w-drawer--fit-content': this.fitContent,
         'w-drawer--persistent': this.persistent,
-        'w-drawer--persistent-animate': this.persistent && this.persistentAnimate
+        'w-drawer--persistent-animate': this.persistent && this.persistentAnimate,
+        'w-drawer--dark': this.dark,
+        'w-drawer--light': this.light
       }
     },
     // The track is a wrapper around the pushable content and drawer.
@@ -249,6 +253,8 @@ export default {
   z-index: 1;
   background: $drawer-bg-color;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+
+  @include themeable;
 
   &--left, &--right {
     top: 0;

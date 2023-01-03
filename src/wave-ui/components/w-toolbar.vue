@@ -19,7 +19,9 @@ export default {
     width: { type: [Number, String], default: null },
     height: { type: [Number, String], default: null },
     noBorder: { type: Boolean },
-    shadow: { type: Boolean }
+    shadow: { type: Boolean },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   emits: [],
@@ -41,6 +43,8 @@ export default {
       return {
         [this.color]: !!this.color,
         [`${this.bgColor}--bg`]: !!this.bgColor,
+        'w-toolbar--dark': this.dark,
+        'w-toolbar--light': this.light,
         'w-toolbar--absolute': !!this.absolute,
         'w-toolbar--fixed': !!this.fixed,
         [`w-toolbar--${this.bottom ? 'bottom' : 'top'}`]: !this.vertical,
@@ -68,6 +72,8 @@ export default {
   padding: (2 * $base-increment) (3 * $base-increment);
   background-color: $toolbar-bg-color;
   z-index: 10;
+
+  @include themeable;
 
   &--absolute, &--fixed {top: 0;left: 0;right: 0;}
   &--absolute {position: absolute;}

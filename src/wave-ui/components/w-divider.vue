@@ -12,7 +12,9 @@ export default {
 
   props: {
     vertical: { type: Boolean },
-    color: { type: String }
+    color: { type: String },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   emits: [],
@@ -22,7 +24,9 @@ export default {
       return {
         [`w-divider--has-color ${this.color}`]: this.color,
         [`w-divider--${this.vertical ? 'vertical' : 'horizontal'}`]: true,
-        'w-divider--has-content': this.$slots.default
+        'w-divider--has-content': this.$slots.default,
+        'w-divider--dark': this.dark,
+        'w-divider--light': this.light
       }
     }
   }
@@ -33,6 +37,8 @@ export default {
 .w-divider {
   border: 0 solid $divider-color;
   border-top-width: 1px;
+
+  @include themeable;
 
   &--has-color {border-color: currentColor;}
 

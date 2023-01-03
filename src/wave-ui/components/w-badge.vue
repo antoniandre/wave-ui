@@ -33,13 +33,14 @@ export default {
     color: { type: String },
     size: { type: [Number, String] },
     bgColor: { type: String, default: 'primary' },
-    dark: { type: Boolean },
     badgeClass: { type: String },
     outline: { type: Boolean },
     shadow: { type: Boolean },
     dot: { type: Boolean },
     round: { type: Boolean },
-    transition: { type: String, default: 'fade' }
+    transition: { type: String, default: 'fade' },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   emits: [],
@@ -72,7 +73,8 @@ export default {
         [`${this.bgColor}--bg`]: this.bgColor,
         [this.badgeClass]: this.badgeClass || null,
         'w-badge--round': this.round || (slotText || this.modelValue + '' || '').length < 2,
-        'w-badge--dark': this.dark && !this.outline,
+        'w-badge--dark': this.dark,
+        'w-badge--light': this.light,
         'w-badge--outline': this.outline,
         'w-badge--inline': this.inline,
         'w-badge--shadow': this.shadow,
@@ -108,6 +110,8 @@ export default {
   min-width: round(1.1 * divide($base-font-size, 2)) * 2;
   z-index: 1;
   padding: 0 $base-increment;
+
+  @include themeable;
 
   &--inline {position: static;}
 

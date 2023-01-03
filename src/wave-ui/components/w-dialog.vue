@@ -46,7 +46,9 @@ export default {
     overlayColor: { type: String },
     color: { type: String },
     bgColor: { type: String },
-    overlayOpacity: { type: [Number, String, Boolean] }
+    overlayOpacity: { type: [Number, String, Boolean] },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   provide () {
@@ -74,7 +76,9 @@ export default {
     },
     classes () {
       return {
-        'w-dialog--fullscreen': this.fullscreen
+        'w-dialog--fullscreen': this.fullscreen,
+        'w-dialog--dark': this.dark,
+        'w-dialog--light': this.light
       }
     },
     contentStyles () {
@@ -122,6 +126,8 @@ export default {
     max-width: 95%;
     overflow: auto;
     background-color: $dialog-bg-color;
+
+    @include themeable;
 
     .w-dialog--fullscreen > & {
       flex: 1 1 auto;

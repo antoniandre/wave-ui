@@ -143,12 +143,13 @@ export default {
     round: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
-    dark: { type: Boolean },
     returnObject: { type: Boolean },
     // By default you can unselect a list item by re-selecting it.
     // Allow preventing that on single selection lists only.
     noUnselect: { type: Boolean },
-    menuProps: { type: Object } // Allow passing down an object of props to the w-menu component.
+    menuProps: { type: Object }, // Allow passing down an object of props to the w-menu component.
+    dark: { type: Boolean },
+    light: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -196,11 +197,12 @@ export default {
     classes () {
       return {
         'w-select': true,
+        'w-select--dark': this.dark,
+        'w-select--light': this.light,
         'w-select--disabled': this.isDisabled,
         'w-select--readonly': this.isReadonly,
         [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
         'w-select--focused': (this.isFocused || this.showMenu) && !this.isReadonly,
-        'w-select--dark': this.dark,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-select--has-placeholder': this.placeholder,
@@ -357,6 +359,8 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   font-size: $base-font-size;
+
+  @include themeable;
 
   &--disabled {
     color: $disabled-color;
@@ -579,7 +583,7 @@ export default {
     margin: 0;
     max-height: 300px;
     overflow: auto;
-    background-color: #fff;
+    background-color: $base-bg-color;
     border: $border;
     border-radius: $border-radius;
 

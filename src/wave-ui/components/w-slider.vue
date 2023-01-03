@@ -98,7 +98,9 @@ export default {
     max: { type: [Number, String], default: 100 },
     step: { type: [Number, String] },
     labelLeft: { type: String },
-    labelRight: { type: String }
+    labelRight: { type: String },
+    dark: { type: Boolean },
+    light: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -165,6 +167,8 @@ export default {
     wrapperClasses () {
       return {
         'w-slider': true,
+        'w-slider--dark': this.dark,
+        'w-slider--light': this.light,
         'w-slider--dragging': this.dragging,
         'w-slider--disabled': this.isDisabled,
         'w-slider--readonly': this.isReadonly,
@@ -263,6 +267,8 @@ export default {
   display: flex;
   align-items: center;
   user-select: none;
+
+  @include themeable;
 
   // Slider label, left & right.
   // ------------------------------------------------------

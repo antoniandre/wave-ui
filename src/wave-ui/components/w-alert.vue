@@ -48,7 +48,9 @@ export default {
     borderRight: { type: Boolean },
     borderTop: { type: Boolean },
     borderBottom: { type: Boolean },
-    outline: { type: Boolean }
+    outline: { type: Boolean },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   emits: ['input', 'update:modelValue', 'close'],
@@ -113,7 +115,9 @@ export default {
         'w-alert--border-right': !this.noBorder && this.borderRight,
         'w-alert--border-top': !this.noBorder && this.borderTop,
         'w-alert--border-bottom': !this.noBorder && this.borderBottom,
-        'w-alert--shadow': this.shadow
+        'w-alert--shadow': this.shadow,
+        'w-alert--dark': this.dark,
+        'w-alert--light': this.light
       }
     }
   },
@@ -136,6 +140,8 @@ export default {
   font-weight: 700;
   border-radius: $border-radius;
   border: 1px solid currentColor;
+
+  @include themeable;
 
   &--has-icon {
     display: flex;

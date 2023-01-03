@@ -147,7 +147,6 @@ export default {
     step: { type: [Number, String] },
     min: { type: [Number, String] },
     max: { type: [Number, String] },
-    dark: { type: Boolean },
     outline: { type: Boolean },
     round: { type: Boolean },
     shadow: { type: Boolean },
@@ -158,7 +157,9 @@ export default {
     showProgress: { type: [Boolean] }, // Only for file uploads.
     // Allow syncing the files 1 way: prefilling a file is not possible.
     // https://stackoverflow.com/questions/16365668/pre-populate-html-form-file-input
-    files: { type: Array }
+    files: { type: Array },
+    dark: { type: Boolean },
+    light: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -251,6 +252,7 @@ export default {
         [`w-input--${this.hasValue || this.isAutofilled ? 'filled' : 'empty'}`]: true,
         'w-input--focused': this.isFocused && !this.isReadonly,
         'w-input--dark': this.dark,
+        'w-input--light': this.light,
         'w-input--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-input--has-placeholder': this.placeholder,

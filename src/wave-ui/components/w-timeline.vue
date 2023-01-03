@@ -1,5 +1,5 @@
 <template lang="pug">
-ul.w-timeline
+ul.w-timeline(:class="classes")
   li.w-timeline-item(v-for="(item, i) in items" :key="i")
     component.w-timeline-item__bullet(
       :is="item[itemIconKey] || icon ? 'w-icon' : 'div'"
@@ -23,16 +23,29 @@ export default {
     itemTitleKey: { type: String, default: 'title' },
     itemContentKey: { type: String, default: 'content' },
     itemIconKey: { type: String, default: 'icon' },
-    itemColorKey: { type: String, default: 'color' }
+    itemColorKey: { type: String, default: 'color' },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
-  emits: []
+  emits: [],
+
+  computed: {
+    classes () {
+      return {
+        'w-timeline--dark': this.dark,
+        'w-timeline--light': this.light
+      }
+    }
+  }
 }
 </script>
 
 <style lang="scss">
 .w-timeline {
   margin-left: $base-increment;
+
+  @include themeable;
 }
 
 .w-timeline-item {

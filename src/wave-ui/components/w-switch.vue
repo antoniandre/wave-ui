@@ -38,7 +38,7 @@ component(
         v-if="loading"
         circle
         color="inherit"
-        v-bind="typeof loading === 'number' ? { 'model-value': loading } : {}")
+        v-bind="typeof loading === 'number' && { 'model-value': loading }")
       slot(v-else name="thumb")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-switch__label.w-switch__label--right.w-form-el-shakable(
@@ -63,7 +63,9 @@ export default {
     labelColor: { type: String, default: 'primary' },
     thin: { type: Boolean },
     noRipple: { type: Boolean },
-    loading: { type: [Boolean, Number], default: false }
+    loading: { type: [Boolean, Number], default: false },
+    dark: { type: Boolean },
+    light: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -95,7 +97,9 @@ export default {
         'w-switch--custom-thumb': this.$slots.thumb,
         'w-switch--custom-track': this.$slots.track,
         'w-switch--loading': this.loading,
-        'w-switch--rippled': this.ripple.end
+        'w-switch--rippled': this.ripple.end,
+        'w-switch--dark': this.dark,
+        'w-switch--light': this.light
       }
     },
     inputClasses () {
@@ -148,6 +152,8 @@ $disabled-color: #ddd;
   align-items: center;
   vertical-align: middle;
   cursor: pointer;
+
+  @include themeable;
 
   &--loading {cursor: wait;}
   &--disabled, &--readonly {

@@ -25,7 +25,6 @@ export default {
     modelValue: { type: [Boolean, Number], default: -1 },
     color: { type: String },
     bgColor: { type: String },
-    dark: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
     round: { type: Boolean },
@@ -38,7 +37,9 @@ export default {
     lg: { type: Boolean },
     xl: { type: Boolean },
     width: { type: [Number, String] },
-    height: { type: [Number, String] }
+    height: { type: [Number, String] },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   emits: ['input', 'update:modelValue'],
@@ -58,7 +59,8 @@ export default {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         [`size--${this.presetSize}`]: true,
-        'w-tag--dark': this.dark && !this.outline,
+        'w-tag--dark': this.dark,
+        'w-tag--light': this.light,
         'w-tag--clickable': this.modelValue !== -1,
         'w-tag--outline': this.outline,
         'w-tag--no-border': this.noBorder || this.shadow,
@@ -91,6 +93,8 @@ export default {
   padding-right: 2 * $base-increment;
   cursor: default;
   user-select: none;
+
+  @include themeable;
 
   &--dark {color: rgba(255, 255, 255, 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}

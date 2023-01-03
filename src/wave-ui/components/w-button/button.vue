@@ -27,6 +27,7 @@ export default {
     color: { type: String },
     bgColor: { type: String },
     dark: { type: Boolean },
+    light: { type: Boolean },
     outline: { type: Boolean },
     text: { type: Boolean },
     round: { type: Boolean },
@@ -106,12 +107,13 @@ export default {
     classes () {
       return {
         // If no color / bg color is set, set a primary color by default.
-        'primary--bg': !this.bgColor && !this.color && !this.dark && !(this.outline || this.text),
+        'primary--bg': !this.bgColor && !this.color && !(this.outline || this.text),
         primary: !this.bgColor && !this.color && !this.dark && (this.outline || this.text),
 
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
-        'w-button--dark': this.dark && !this.outline,
+        'w-button--dark': this.dark,
+        'w-button--light': this.light,
         'w-button--outline': this.outline,
         'w-button--text': this.text,
         'w-button--round': this.round,
@@ -165,6 +167,8 @@ $spinner-size: 40;
   // in :before & :after.
   transition: $transition-duration, background-color 0s, padding 0s;
   -webkit-tap-highlight-color: transparent;
+
+  @include themeable;
 
   // In w-flex wrapper, allow overriding the default `align-self: center`.
   .w-flex.align-start > & {align-self: flex-start;}

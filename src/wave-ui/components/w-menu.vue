@@ -73,7 +73,9 @@ export default {
     overlayClass: { type: [String, Object, Array] },
     overlayProps: { type: Object }, // Allow passing down an object of props to the w-overlay component.
     persistent: { type: Boolean },
-    delay: { type: Number }
+    delay: { type: Number },
+    dark: { type: Boolean },
+    light: { type: Boolean }
     // Other props in the detachable mixin:
     // detachTo, appendTo, fixed, top, bottom, left, right, alignTop, alignBottom, alignLeft,
     // alignRight, noPosition, zIndex, activator.
@@ -153,7 +155,9 @@ export default {
         'w-menu--round': this.round,
         'w-menu--arrow': this.arrow,
         'w-menu--shadow': this.shadow,
-        'w-menu--fixed': this.fixed
+        'w-menu--fixed': this.fixed,
+        'w-menu--dark': this.dark,
+        'w-menu--light': this.light
       }
     },
 
@@ -273,6 +277,8 @@ export default {
   position: absolute;
   z-index: 100;
   color: $menu-color;
+
+  @include themeable;
 
   &--fixed {position: fixed;z-index: 1000;}
   &--card {background-color: $menu-bg-color;}

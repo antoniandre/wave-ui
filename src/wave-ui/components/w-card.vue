@@ -34,7 +34,9 @@ export default {
     image: { type: String },
     imageProps: { type: Object },
     titleClass: { type: [String, Object, Array] },
-    contentClass: { type: [String, Object, Array] }
+    contentClass: { type: [String, Object, Array] },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   emits: [],
@@ -72,7 +74,9 @@ export default {
         [`${this.bgColor}--bg`]: this.bgColor,
         'w-card--no-border': this.noBorder,
         'w-card--tile': this.tile,
-        'w-card--shadow': this.shadow
+        'w-card--shadow': this.shadow,
+        'w-card--dark': this.dark,
+        'w-card--light': this.light
       }
     }
   }
@@ -86,6 +90,8 @@ export default {
   flex-direction: column;
   border-radius: $border-radius;
   border: $border;
+
+  @include themeable;
 
   &--tile {border-radius: 0;}
   &--shadow {box-shadow: $box-shadow;}

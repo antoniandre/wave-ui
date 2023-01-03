@@ -83,14 +83,15 @@ export default {
     color: { type: String, default: 'primary' },
     bgColor: { type: String },
     labelColor: { type: String, default: 'primary' },
-    dark: { type: Boolean },
     outline: { type: Boolean },
     shadow: { type: Boolean },
     noAutogrow: { type: Boolean },
     resizable: { type: Boolean }, // Toggle the HTML built-in bottom right corner resize handle.
     tile: { type: Boolean },
     rows: { type: [Number, String], default: 3 },
-    cols: { type: [Number, String] }
+    cols: { type: [Number, String] },
+    dark: { type: Boolean },
+    light: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -132,6 +133,7 @@ export default {
         [`w-textarea--${this.hasValue ? 'filled' : 'empty'}`]: true,
         'w-textarea--focused': this.isFocused && !this.isReadonly,
         'w-textarea--dark': this.dark,
+        'w-textarea--light': this.light,
         'w-textarea--resizable': this.resizable,
         'w-textarea--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-textarea--no-padding': !this.outline && !this.bgColor && !this.shadow,
@@ -227,6 +229,8 @@ $inactive-color: #777;
   flex-grow: 1;
   flex-wrap: wrap;
   font-size: $base-font-size;
+
+  @include themeable;
 
   // textarea wrapper.
   // ------------------------------------------------------

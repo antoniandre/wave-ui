@@ -7,6 +7,8 @@
 export default {
   name: 'w-date-picker',
   props: {
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   emits: [],
@@ -14,6 +16,8 @@ export default {
   computed: {
     classes () {
       return {
+        'w-date-picker--dark': this.dark,
+        'w-date-picker--light': this.light
       }
     },
     styles () {
@@ -25,5 +29,7 @@ export default {
 
 <style lang="scss">
 .w-date-picker {
+
+  @include themeable;
 }
 </style>

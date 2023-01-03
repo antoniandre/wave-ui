@@ -232,7 +232,9 @@ export default {
         }
         return true
       }
-    }
+    },
+    dark: { type: Boolean },
+    light: { type: Boolean }
   },
 
   emits: [
@@ -315,7 +317,9 @@ export default {
         'w-table--resizing': this.colResizing.dragging,
         'w-table--fixed-header': this.fixedHeaders,
         'w-table--fixed-footer': this.fixedFooter,
-        'w-table--sticky-column': this.hasStickyColumn
+        'w-table--sticky-column': this.hasStickyColumn,
+        'w-table--dark': this.dark,
+        'w-table--light': this.light
       }
     },
 
@@ -600,6 +604,8 @@ $tr-border-top: 1px;
   border-collapse: collapse;
   border: none;
 
+  @include themeable;
+
   &--fixed-layout {
     table-layout: fixed; // Allow resizing beyond the cell minimum text width.
   }
@@ -729,7 +735,7 @@ $tr-border-top: 1px;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--primary);
+    background-color: var(--w-primary);
     opacity: 0.2;
     pointer-events: none;
   }

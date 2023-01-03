@@ -46,7 +46,9 @@ export default {
     md: { type: Boolean },
     lg: { type: Boolean },
     xl: { type: Boolean },
-    noRipple: { type: Boolean }
+    noRipple: { type: Boolean },
+    dark: { type: Boolean },
+    light: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -79,6 +81,8 @@ export default {
     classes () {
       return {
         'w-rating': true,
+        'w-rating--dark': this.dark,
+        'w-rating--light': this.light,
         'w-rating--focus': this.hasFocus,
         'w-rating--hover': this.hover,
         'w-rating--disabled': this.isDisabled,
@@ -162,6 +166,8 @@ export default {
 .w-rating {
   display: inline-flex;
   align-items: center;
+
+  @include themeable;
 
   &__button {
     position: relative;
