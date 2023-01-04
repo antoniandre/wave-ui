@@ -694,7 +694,10 @@ export default {
       width: 50%;
       margin-top: -3%;
       margin-left: 7%;
-      background-image: linear-gradient(-205deg, #ffe688, #ffac62);
+
+      .w-accordion__item {
+        background-image: linear-gradient(-205deg, #ffe688, #ffac62);
+      }
     }
     .card--4 {
       position: absolute;
