@@ -70,7 +70,9 @@ export default {
     labelColor: { type: String, default: 'primary' },
     noRipple: { type: Boolean },
     indeterminate: { type: Boolean },
-    round: { type: Boolean }
+    round: { type: Boolean },
+    dark: { type: Boolean },
+    light: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -99,7 +101,9 @@ export default {
         'w-checkbox--indeterminate': this.indeterminate,
         'w-checkbox--ripple': this.ripple.start,
         'w-checkbox--rippled': this.ripple.end,
-        'w-checkbox--round': this.round
+        'w-checkbox--round': this.round,
+        'w-checkbox--dark': this.dark,
+        'w-checkbox--light': this.light
       }
     }
   },
@@ -148,6 +152,8 @@ $inactive-color: #666;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 
+  @include themeable;
+
   &--disabled {cursor: not-allowed;}
 
   // The hidden real checkbox.
@@ -177,7 +183,7 @@ $inactive-color: #666;
     aspect-ratio: 1;
     fill: none;
     stroke-width: 2;
-    stroke: white;
+    stroke: $contrast-color;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-dasharray: 16px;
@@ -194,6 +200,7 @@ $inactive-color: #666;
     }
 
     .w-checkbox--indeterminate & {opacity: 0;}
+    .w-checkbox--disabled & {stroke: $disabled-color;}
   }
   &__input:after {
     content: '';
@@ -205,7 +212,7 @@ $inactive-color: #666;
     transition: $transition-duration ease-in-out;
 
     .w-checkbox--round & {border-radius: 100%;}
-    .w-checkbox--disabled & {border-color: $disabled-color;}
+    .w-checkbox--disabled & {border-color: $disabled-bg-color;}
 
     // Checked state.
     :checked ~ & {
@@ -214,14 +221,14 @@ $inactive-color: #666;
       // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: currentColor;
     }
-    .w-checkbox--disabled :checked ~ & {
-      border-color: $disabled-color;
-      // Prevents a tiny hole while animating and in some browser zoom levels.
-      background-color: $disabled-color;
-    }
     .w-checkbox--indeterminate :checked ~ & {
       border-width: ((divide($small-form-el-size, 2)) - 1px) 3px;
-      background-color: white;
+      background-color: $contrast-color;
+    }
+    .w-checkbox--disabled :checked ~ & {
+      border-color: $disabled-bg-color;
+      // Prevents a tiny hole while animating and in some browser zoom levels.
+      background-color: $disabled-color;
     }
   }
 

@@ -63,7 +63,9 @@ export default {
     labelOnLeft: { type: Boolean },
     color: { type: String, default: 'primary' },
     labelColor: { type: String, default: 'primary' },
-    noRipple: { type: Boolean }
+    noRipple: { type: Boolean },
+    dark: { type: Boolean },
+    light: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -88,7 +90,9 @@ export default {
         [`w-radio w-radio--${this.inputValue ? 'checked' : 'unchecked'}`]: true,
         'w-radio--disabled': this.isDisabled,
         'w-radio--ripple': this.ripple.start,
-        'w-radio--rippled': this.ripple.end
+        'w-radio--rippled': this.ripple.end,
+        'w-radio--dark': this.ripple.dark,
+        'w-radio--light': this.ripple.light
       }
     }
   },
@@ -146,6 +150,8 @@ $inactive-color: #666;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 
+  @include themeable;
+
   &--disabled {
     cursor: not-allowed;
     -webkit-tap-highlight-color: transparent;
@@ -173,11 +179,11 @@ $inactive-color: #666;
     transition: 0.3s ease-in-out;
     cursor: inherit;
 
-    .w-radio--disabled & {border-color: $disabled-color;}
+    .w-radio--disabled & {border-color: $disabled-bg-color;}
 
     // Checked state.
     :checked ~ & {border-color: currentColor;}
-    .w-radio--disabled :checked ~ & {border-color: $disabled-color;}
+    .w-radio--disabled :checked ~ & {border-color: $disabled-bg-color;}
   }
 
   // The inner bullet - visible when checked.
@@ -197,9 +203,9 @@ $inactive-color: #666;
       background-color: currentColor;
     }
     .w-radio--disabled & {
-      border-color: $disabled-color;
+      border-color: $disabled-bg-color;
       // Prevents a tiny hole while animating and in some browser zoom levels.
-      background-color: $disabled-color;
+      background-color: $disabled-bg-color;
     }
   }
 

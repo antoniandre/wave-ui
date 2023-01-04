@@ -6,12 +6,20 @@
   &--light {
     --w-base-bg-color-rgb: #{map.get($theme-light, 'base-bg-color-rgb')};
     --w-base-color-rgb: #{map.get($theme-light, 'base-color-rgb')};
+    --w-contrast-bg-color-rgb: #{map.get($theme-light, 'contrast-bg-color-rgb')};
+    --w-contrast-color-rgb: #{map.get($theme-light, 'contrast-color-rgb')};
+    --w-disabled-bg-color-rgb: #{map.get($theme-light, 'disabled-bg-color-rgb')};
+    --w-disabled-color-rgb: #{map.get($theme-light, 'disabled-color-rgb')};
     color: rgba(var(--w-base-color-rgb), 0.7);
   }
   // Will force the dark style on this component.
   &--dark {
     --w-base-bg-color-rgb: #{map.get($theme-dark, 'base-bg-color-rgb')};
     --w-base-color-rgb: #{map.get($theme-dark, 'base-color-rgb')};
+    --w-contrast-bg-color-rgb: #{map.get($theme-dark, 'contrast-bg-color-rgb')};
+    --w-contrast-color-rgb: #{map.get($theme-dark, 'contrast-color-rgb')};
+    --w-disabled-bg-color-rgb: #{map.get($theme-dark, 'disabled-bg-color-rgb')};
+    --w-disabled-color-rgb: #{map.get($theme-dark, 'disabled-color-rgb')};
     color: rgba(var(--w-base-color-rgb), 0.7);
   }
 }

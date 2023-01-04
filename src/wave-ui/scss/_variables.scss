@@ -13,20 +13,29 @@ $theme-light: (
   base-bg-color-rgb: (255, 255, 255), // #fff.
   base-color-rgb: (0, 0, 0), // #000.
   contrast-bg-color-rgb: (0, 0, 0), // #000.
-  contrast-color-rgb: (255, 255, 255) // #fff.
+  contrast-color-rgb: (255, 255, 255), // #fff.
+  disabled-bg-color-rgb: (204, 204, 204), // #ccc.
+  disabled-color-rgb: (240, 240, 240), // #f0f0f0.
+
 ) !default;
 $theme-dark: (
   base-bg-color-rgb: (34, 34, 34), // #222.
   base-color-rgb: (255, 255, 255), // #fff.
   contrast-bg-color-rgb: (255, 255, 255), // #fff.
-  contrast-color-rgb: (0, 0, 0) // #000.
+  contrast-color-rgb: (0, 0, 0), // #000.
+  disabled-bg-color-rgb: (74, 74, 74), // #4a4a4a.
+  disabled-color-rgb: (45, 45, 45), // #2d2d2d.
+
 ) !default;
 
-// These variables are filled up with the correct theme colors for you to use.
+// These variables are filled up with the current theme colors for you to use.
 $base-bg-color: rgb(var(--w-base-bg-color-rgb));
 $base-color: rgb(var(--w-base-color-rgb));
 $contrast-bg-color: rgb(var(--w-contrast-bg-color-rgb));
 $contrast-color: rgb(var(--w-contrast-color-rgb));
+// When a form element is disabled (checkbox, radio, input, select list).
+$disabled-bg-color: rgb(var(--w-disabled-bg-color-rgb));
+$disabled-color: rgb(var(--w-disabled-color-rgb));
 
 // GLOBAL DEFAULTS.
 // ========================================================
@@ -45,8 +54,6 @@ $fast-transition-duration: 0.15s !default;
 $box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
              0 2px 2px 0 rgba(0, 0, 0, 0.15),
              0 1px 5px 0 rgba(0, 0, 0, 0.15) !default;
-// When a form element is disabled (checkbox, radio, input, select list).
-$disabled-color: #ccc;
 $form-field-height: round(2 * $base-font-size) !default;
 // Always an even number for better vertical alignment. (Used in checkbox, radio, switch)
 $small-form-el-size: round(divide(1.3 * $base-font-size, 2)) * 2 !default;
