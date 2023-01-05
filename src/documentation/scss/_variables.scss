@@ -1,15 +1,28 @@
-$dark-theme: true !default;
 $links: #09c;
-$primary: #234781;
-$secondary: #d4e9ed;
+$primary: #89b6d2;
+$secondary: #375b6a;
 
-$base-font-size: 13px; // Override Wave UI's default.
+// Override Wave UI's SCSS defaults.
+$base-font-size: 13px;
 
+// $box-shadow: 0 3px 1px -2px rgba(#000, 0.5),
+//              0 2px 2px 0 rgba(#000, 0.5),
+//              0 1px 5px 0 rgba(#000, 0.5);
+// // When a form element is disabled (checkbox, radio, input, select list).
+// $disabled-color: #333;
+// // w-drawer.
+// // --------------------------------------------------------
+// $drawer-bg-color: #111;
+// // --------------------------------------------------------
 
-// Dark theme.
-// --------------------------------------------------------
-@if $dark-theme {
-  $links: lighten($links, 30%);
-  $primary: lighten($primary, 35%);
-  $secondary: darken($secondary, 30%);
-}
+// // w-slider.
+// // --------------------------------------------------------
+// $slider-track-color: #444;
+// // --------------------------------------------------------
+
+// // w-table.
+// // --------------------------------------------------------
+// $table-tr-odd-color: rgba(#fff, 0.02);
+// $table-tr-hover-color: rgba(#fff, 0.05);
+// $table-color: rgba(#fff, 0.7);
+// // --------------------------------------------------------

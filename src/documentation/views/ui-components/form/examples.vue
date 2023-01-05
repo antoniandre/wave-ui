@@ -384,7 +384,7 @@ div
       When the form is valid and submitted, it simulates a form sending to a backend and displays
       a notification.
   example
-    w-card.white--bg(content-class="pa0")
+    w-card(content-class="pa0" :class="$store.state.darkMode ? 'grey-dark6--bg' : 'white--bg'")
       .message-box
         w-transition-fade
           w-alert.my0.text-light(v-if="form6.submitted" success no-border)
@@ -420,7 +420,7 @@ div
         round
         bottom) The form was sent successfully!
     template(#pug).
-      w-card.white--bg(content-class="pa0")
+      w-card(content-class="pa0")
         .message-box
           w-transition-fade
             w-alert.my0.text-light(v-if="form.submitted" success no-border)
@@ -456,7 +456,7 @@ div
           round
           bottom) The form was sent successfully!
     template(#html).
-      &lt;w-card class="white--bg" content-class="pa0"&gt;
+      &lt;w-card content-class="pa0"&gt;
         &lt;div class="message-box"&gt;
           &lt;w-transition-fade&gt;
             &lt;w-alert

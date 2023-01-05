@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  w-card(bg-color="blue-light5")
+  w-card(:bg-color="$store.state.darkMode ? 'grey-dark5' : 'blue-light5'")
     p.mb3 What it looks like:
     w-radios(v-model="selection1" :items="radios1" inline)
 
