@@ -158,7 +158,7 @@ export default {
       if (this.usePug && slots.pug) {
         if (blanks.includes('pug')) html = slots.pug.replace(/\n+$/, '')
         else {
-          html = `#app\n  w-app${this.appPropsString ? `(${this.appPropsString})` : ''}\n    ` +
+          html = `#app\n  w-app${this.$store.state.darkMode ? ' dark' : ''}${this.appPropsString ? `(${this.appPropsString})` : ''}\n    ` +
                  slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n    ')
         }
       }
@@ -168,7 +168,7 @@ export default {
         if (blanks.includes('html')) html = slots.html.replace(/\n+$/, '')
         else {
           html = '<div id="app">\n' +
-                    `  <w-app id="app"${this.appPropsString ? ` ${this.appPropsString}` : ''}>\n    ` +
+                    `  <w-app id="app"${this.$store.state.darkMode ? ' dark' : ''}${this.appPropsString ? ` ${this.appPropsString}` : ''}>\n    ` +
                       slots.html.replace(/\n+$/, '').replace(/\n/g, '\n    ') +
                     '\n  </w-app>\n' +
                  '</div>\n'
@@ -176,16 +176,18 @@ export default {
       }
 
       // CSS / SCSS.
+      const darkThemeStyles = '  background-color: rgb(var(--w-base-bg-color-rgb));\n  color: rgb(var(--w-base-color-rgb));\n'
       if (blanks.includes('css') || blanks.includes('scss')) css = slots.css || slots.scss
-      else css = '.w-app {font: 14px sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
+      else css = `:root {\n  font: 14px sans-serif;\n  padding: 24px;${this.$store.state.darkMode ? darkThemeStyles : ''}\n}\n\n` + (slots.css || slots.scss)
 
       // JS.
       if (blanks.includes('js')) js = slots.js
       else {
+        const darkThemeColors = "\n  colors: {\n    primary: '#89b6d2',\n    secondary: '375b6a'\n  }\n"
         js = 'const app = Vue.createApp({\n' +
                 '  ' + slots.js.replace(/\n+$/, '').replace(/\n/g, '\n  ') + '\n' +
                 '})\n\n' +
-                'new WaveUI(app, {})\n\n' +
+                `new WaveUI(app, {${this.$store.state.darkMode ? darkThemeColors : ''}})\n\n` +
                 'app.mount(\'#app\')'
       }
 
