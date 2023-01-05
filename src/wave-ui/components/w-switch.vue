@@ -144,8 +144,6 @@ export default {
 
 <style lang="scss">
 $outline-width: 2px;
-$inactive-color: #ccc;
-$disabled-color: #ddd;
 
 .w-switch {
   display: inline-flex;
@@ -179,9 +177,9 @@ $disabled-color: #ddd;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
     justify-content: center;
-    border: $outline-width solid $inactive-color;
+    border: $outline-width solid transparent;
     border-radius: 3em;
-    background-color: $inactive-color;
+    background-color: $switch-inactive-color;
     cursor: inherit;
     @include default-transition;
 
@@ -200,15 +198,11 @@ $disabled-color: #ddd;
       width: 2 * $small-form-el-size;
       height: round(0.7 * $small-form-el-size);
     }
-    .w-switch--thin :checked ~ & {
-      background-color: $inactive-color;
-    }
+    .w-switch--thin :checked ~ & {background-color: $switch-inactive-color;}
 
     // Disabled.
     .w-switch--disabled & {color: $disabled-color;}
-    .w-switch--disabled :checked ~ & {
-      opacity: 0.5;
-    }
+    .w-switch--disabled :checked ~ & {opacity: 0.5;}
   }
 
   // Track slot, if any.
@@ -229,7 +223,7 @@ $disabled-color: #ddd;
     top: 0;
     width: $small-form-el-size;
     height: $small-form-el-size;
-    background-color: #fff;
+    background-color: $switch-thumb-color;
     border-radius: 100%;
     text-align: center;
     @include default-transition;

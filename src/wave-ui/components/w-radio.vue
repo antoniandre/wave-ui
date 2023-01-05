@@ -179,11 +179,11 @@ $inactive-color: #666;
     transition: 0.3s ease-in-out;
     cursor: inherit;
 
-    .w-radio--disabled & {border-color: $disabled-bg-color;}
+    .w-radio--disabled & {border-color: $disabled-color;}
 
     // Checked state.
     :checked ~ & {border-color: currentColor;}
-    .w-radio--disabled :checked ~ & {border-color: $disabled-bg-color;}
+    .w-radio--disabled :checked ~ & {border-color: $disabled-color;}
   }
 
   // The inner bullet - visible when checked.
@@ -203,9 +203,9 @@ $inactive-color: #666;
       background-color: currentColor;
     }
     .w-radio--disabled & {
-      border-color: $disabled-bg-color;
+      border-color: $disabled-color;
       // Prevents a tiny hole while animating and in some browser zoom levels.
-      background-color: $disabled-bg-color;
+      background-color: $disabled-color;
     }
   }
 

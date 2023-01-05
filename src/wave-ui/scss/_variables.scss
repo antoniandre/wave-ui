@@ -14,8 +14,7 @@ $theme-light: (
   base-color-rgb: (0, 0, 0), // #000.
   contrast-bg-color-rgb: (0, 0, 0), // #000.
   contrast-color-rgb: (255, 255, 255), // #fff.
-  disabled-bg-color-rgb: (204, 204, 204), // #ccc.
-  disabled-color-rgb: (240, 240, 240), // #f0f0f0.
+  disabled-color-rgb: (204, 204, 204), // #ccc.
 
 ) !default;
 $theme-dark: (
@@ -23,8 +22,7 @@ $theme-dark: (
   base-color-rgb: (255, 255, 255), // #fff.
   contrast-bg-color-rgb: (255, 255, 255), // #fff.
   contrast-color-rgb: (0, 0, 0), // #000.
-  disabled-bg-color-rgb: (74, 74, 74), // #4a4a4a.
-  disabled-color-rgb: (45, 45, 45), // #2d2d2d.
+  disabled-color-rgb: (74, 74, 74), // #4a4a4a.
 
 ) !default;
 
@@ -34,7 +32,6 @@ $base-color: rgb(var(--w-base-color-rgb));
 $contrast-bg-color: rgb(var(--w-contrast-bg-color-rgb));
 $contrast-color: rgb(var(--w-contrast-color-rgb));
 // When a form element is disabled (checkbox, radio, input, select list).
-$disabled-bg-color: rgb(var(--w-disabled-bg-color-rgb));
 $disabled-color: rgb(var(--w-disabled-color-rgb));
 
 // GLOBAL DEFAULTS.
@@ -111,6 +108,11 @@ $slider-thumb-label-bg-color: $base-bg-color !default;
 $slider-thumb-label-color: rgba(var(--w-base-color-rgb), 0.75) !default;
 $slider-step-label-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.2) !default;
 $slider-step-label-color: rgba(var(--w-base-color-rgb), 0.5) !default;
+
+// w-switch.
+// --------------------------------------------------------
+$switch-inactive-color: rgba(var(--w-contrast-bg-color-rgb), 0.25) !default;
+$switch-thumb-color: #fff !default;
 // --------------------------------------------------------
 
 // w-table.

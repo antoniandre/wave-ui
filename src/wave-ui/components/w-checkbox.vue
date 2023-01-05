@@ -200,7 +200,7 @@ $inactive-color: #666;
     }
 
     .w-checkbox--indeterminate & {opacity: 0;}
-    .w-checkbox--disabled & {stroke: $disabled-color;}
+    .w-checkbox--disabled & {stroke: rgba(var(--w-contrast-color-rgb), 0.4);}
   }
   &__input:after {
     content: '';
@@ -212,7 +212,7 @@ $inactive-color: #666;
     transition: $transition-duration ease-in-out;
 
     .w-checkbox--round & {border-radius: 100%;}
-    .w-checkbox--disabled & {border-color: $disabled-bg-color;}
+    .w-checkbox--disabled & {border-color: $disabled-color;}
 
     // Checked state.
     :checked ~ & {
@@ -226,9 +226,9 @@ $inactive-color: #666;
       background-color: $contrast-color;
     }
     .w-checkbox--disabled :checked ~ & {
-      border-color: $disabled-bg-color;
+      border-color: $disabled-color;
       // Prevents a tiny hole while animating and in some browser zoom levels.
-      background-color: $disabled-color;
+      background-color: rgba(var(--w-contrast-color-rgb), 0.4);
     }
   }
 
