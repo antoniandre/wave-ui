@@ -184,7 +184,7 @@ div
       @click="table3.fixedFooter = !table3.fixedFooter"
       :outline="!table3.fixedFooter"
       round)
-      span.code(:class="table3.fixedFooter ? 'white' : 'primary'") fixed-footer
+      span.code(:class="table3.fixedFooter ? 'contrast-color' : 'primary'") fixed-footer
   example
     w-table(
       ref="table"
@@ -273,9 +273,8 @@ div
             lastName: 'Doe'
           })
           this.$nextTick(() => {
-            this.$refs.table.$el
-              .querySelector('tbody tr:last-child')
-              .scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+            const table = this.$refs.table.$el
+            table.scrollTo({ top: table.scrollHeight, behavior: 'smooth' })
           })
         }
       }
@@ -285,7 +284,6 @@ div
   p It can be useful if you want to keep the columns alignments in the footer.
   example
     w-table(
-      ref="table"
       :headers="table3.headers"
       no-headers
       :items="table3.items"
@@ -300,7 +298,6 @@ div
             | {{ header.label }}
     template(#pug).
       w-table(
-        ref="table"
         :headers="table.headers"
         no-headers
         :items="table.items"
@@ -315,7 +312,6 @@ div
               | {{ '\{\{ header.label \}\}' }}
     template(#html).
       &lt;w-table
-        ref="table"
         :headers="table.headers"
         no-headers
         :items="table.items"
@@ -462,7 +458,7 @@ div
     w-tag.ma1(
       v-for="(header, index) in table6.headers"
       :key="index"
-      :bg-color="header.hidden ? 'grey-light4' : 'primary'"
+      :bg-color="header.hidden ? ($store.state.darkMode ? 'grey-dark4' : 'grey-light4') : 'primary'"
       @click.stop="header.hidden = !header.hidden")
       w-icon.mr2 mdi mdi-eye{{ header.hidden ? '-off' : ''}}
       | {{ header.label }}
@@ -472,7 +468,7 @@ div
       w-tag.ma1(
         v-for="&amp;#40;header, index&amp;#41; in table.headers"
         :key="index"
-        :bg-color="header.hidden ? 'grey-light4' : 'primary'"
+        :bg-color="header.hidden ? {{ $store.state.darkMode ? 'grey-dark4' : 'grey-light4' }} : 'primary'"
         @click.stop="header.hidden = !header.hidden")
         w-icon.mr2 mdi mdi-eye{{ "\{\{ header.hidden ? '-off' : ''\}\}" }}
         | {{ "\{\{ header.label \}\}" }}
@@ -532,9 +528,9 @@ div
         @click="table9.fixedHeaders = !table9.fixedHeaders"
         :outline="!table9.fixedHeaders"
         round)
-        span.code(:class="table9.fixedHeaders ? 'white' : 'primary'") fixed-headers
+        span.code(:class="table9.fixedHeaders ? 'contrast-color' : 'primary'") fixed-headers
 
-    w-table.white--bg(
+    w-table.base-color--bg(
       :headers="table9.headers"
       :items="table9.items"
       fixed-layout
@@ -1401,18 +1397,18 @@ div
   example
     w-table(:headers="table1.headers" :items="table1.items" no-headers)
       template(#item-cell.id="{ item, label, header, index }")
-        div.px2.text-center.green-light5--bg.text-bold {{ label }}
+        div.px2.text-center.text-bold(:class="$store.state.darkMode ? 'green-dark5--bg' : 'green-light5--bg'") {{ label }}
     template(#pug).
       w-table(:headers="table.headers" :items="table.items" no-headers)
         template(#item-cell.id="{ item, label, header, index }")
-          div.px2.text-center.green-light5--bg.text-bold {{ '\{\{ label \}\}' }}
+          div.px2.text-center.{{ $store.state.darkMode ? 'green-dark5--bg' : 'green-light5--bg' }}.text-bold {{ '\{\{ label \}\}' }}
     template(#html).
       &lt;w-table
         :headers="table.headers"
         :items="table.items"
         no-headers&gt;
         &lt;template #item-cell.id="{ item, label, header, index }"&gt;
-          &lt;div class="px2 text-center green-light5--bg text-bold"&gt;
+          &lt;div class="px2 text-center {{ $store.state.darkMode ? 'green-dark5--bg' : 'green-light5--bg' }} text-bold"&gt;
             {{ '\{\{ label \}\}' }}
           &lt;/div&gt;
         &lt;/template&gt;
@@ -1504,7 +1500,7 @@ div
     w-table(:headers="table1.headers" :items="table1.items" no-headers selectable-rows)
       template(#item="{ item, index, select, classes }")
         tr(
-          :class="{ ...classes, 'indigo-light5--bg': index % 2, 'blue-light5--bg': !(index % 2) }"
+          :class="{ ...classes, [`indigo-${$store.state.darkMode ? 'dark' : 'light'}5--bg`]: index % 2, [`blue-${$store.state.darkMode ? 'dark' : 'light'}5--bg`]: !(index % 2) }"
           @click="select")
           td.pa2(:colspan="table1.headers.length")
             .title3 Row \#{{ index }}
@@ -1520,7 +1516,7 @@ div
         selectable-rows)
         template(#item="{ item, index, select, classes }")
           tr(
-            :class="{ ...classes, 'indigo-light5--bg': index % 2, 'blue-light5--bg': !(index % 2) }"
+            :class="{ ...classes, 'indigo-{{ $store.state.darkMode ? 'dark' : 'light' }}5--bg': index % 2, 'blue-{{ $store.state.darkMode ? 'dark' : 'light' }}5--bg': !(index % 2) }"
             @click="select")
             td.pa2(:colspan="table.headers.length")
               .title3 Row \#{{ '\{\{ index \}\}' }}
@@ -1538,8 +1534,8 @@ div
           &lt;tr
             :class="{
               ...classes,
-              'indigo-light5--bg': index % 2,
-              'blue-light5--bg': !(index % 2)
+              'indigo-{{ $store.state.darkMode ? 'dark' : 'light' }}5--bg': index % 2,
+              'blue-{{ $store.state.darkMode ? 'dark' : 'light' }}5--bg': !(index % 2)
             }"
             @click="select"&gt;
             &lt;td :class="pa2" :colspan="table.headers.length"&gt;
@@ -1871,7 +1867,8 @@ export default {
     addRow () {
       this.table3.items.push({ id: this.table3.items.length + 1, firstName: 'John', lastName: 'Doe' })
       this.$nextTick(() => {
-        this.$refs.table.$el.querySelector('tbody tr:last-child').scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+        const table = this.$refs.table.$el
+        table.scrollTo({ top: table.scrollHeight, behavior: 'smooth' })
       })
     },
 

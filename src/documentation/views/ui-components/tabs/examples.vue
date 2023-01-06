@@ -104,14 +104,14 @@ div
 
   .title3 Color &amp; bg-color
   example
-    w-tabs(:items="tabs2.items" color="blue" bg-color="indigo-light5")
+    w-tabs(:items="tabs2.items" color="blue" :bg-color="$store.state.darkMode ? 'indigo-dark6' : 'indigo-light5'")
     template(#pug).
-      w-tabs(:items="tabs" color="blue" bg-color="indigo-light5")
+      w-tabs(:items="tabs" color="blue" bg-color="{{ $store.state.darkMode ? 'indigo-dark6' : 'indigo-light5' }}")
     template(#html).
       &lt;w-tabs
         :items="tabs"
         color="blue"
-        bg-color="indigo-light5"&gt;
+        bg-color="{{ $store.state.darkMode ? 'indigo-dark6' : 'indigo-light5' }}"&gt;
       &lt;/w-tabs&gt;
     template(#js).
       data: () => ({
@@ -194,7 +194,7 @@ div
         ]
       })
   title-link(h3) Example of a different style, involving some external CSS
-  example
+  example(reactive)
     w-tabs.macos-tabs(:items="tabs2.items" pill-slider)
     template(#pug).
       w-tabs(:items="tabs" pill-slider)
@@ -216,15 +216,15 @@ div
         display: inline-flex;
         margin-bottom: 12px;
         padding: 0;
-        background: #eee;
+        background: {{ $store.state.darkMode ? '#181818' : '#eee' }};
         border-radius: 6px;
-        border: 1px solid #ddd;
+        border: 1px solid {{ $store.state.darkMode ? '#222' : '#ddd' }};
         z-index: 0;
         overflow: visible;
       }
       .w-app .w-tabs__slider {
         opacity: 1;
-        background-color: #fff;
+        background-color: {{ $store.state.darkMode ? '#2c2c2c' : '#fff' }};
         bottom: 0;
         height: 100%;
         border-radius: 6px;
@@ -243,7 +243,7 @@ div
         bottom: 25%;
         right: 100%;
         transform: translateX(-50%);
-        border-left: 1px solid #d2d2d2;
+        border-left: 1px solid {{ $store.state.darkMode ? '#262626' : '#d2d2d2' }};
         display: block;
         opacity: 1;
       }
@@ -694,7 +694,7 @@ export default {
     }
     .w-tabs__slider {
       opacity: 1;
-      background-color: #fff;
+      background-color: $base-bg-color;
       bottom: 0;
       height: 100%;
       border-radius: 6px;
@@ -718,6 +718,15 @@ export default {
         opacity: 1;
       }
       &:first-child:before {display: none;}
+    }
+
+    [data-theme="dark"] & {
+      .w-tabs__bar {
+        border-color: #181818;
+        background-color: #222;
+      }
+      .w-tabs__slider {background-color: #2c2c2c;}
+      .w-tabs__bar-item:before {border-left-color: #262626;}
     }
   }
 }
