@@ -4,6 +4,37 @@ w-toolbar.main-toolbar(fixed)
     w-icon.wave-logo.mr3(size="3em") wi-wave
     span.grey-dark1 Wave UI
   .spacer
+  w-menu(
+    align-right
+    arrow
+    shadow
+    transition="slide-fade-down"
+    menu-class="dark-theme-preview bdrs2 ml1"
+    content-class="pa0"
+    bg-color="grey-dark6"
+    color="grey-light6"
+    append-to=".main-toolbar")
+    template(#activator="{ on }")
+      w-button.mr2(
+        v-on="on"
+        icon="mdi mdi-weather-night"
+        color="white"
+        bg-color="blue-dark5"
+        shadow)
+    .title2.px6.pb1 Wave UI Dark is around the corner!
+    .img-wrap
+      img(src="@/assets/wave-ui--dark-theme.png")
+    .px6.py4
+      w-flex.title3.align-center
+        | Announcing Wave UI
+        w-tag.ml1.code.text-bold(round bg-color="blue-dark4" color="white") 3.0
+        | , planed for #[span.amber-dark5--bg.bdrs1.px1.mx1 release this month]!
+      p.
+        In Wave UI 3.0, you can work with 2 themes. The UI components will adapt automatically.
+      w-list(:items="3" icon="wi-check")
+        template(#item.1) Redefined components color defaults, now using CSS3 variables.
+        template(#item.2) More granular control on all the components default colors via SCSS variables.
+        template(#item.3) More great improvements shipping in, stay tuned.
   strong.version.size--xs(v-html="`Version <code>${version}</code>`")
   w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
@@ -90,6 +121,22 @@ div.main-toolbar {
 
   .hamburger-menu {margin-left: 8px;}
   .hamburger-menu .w-icon {width: 26px;}
+}
+
+.dark-theme-preview {
+  width: 100%;
+  max-width: 600px;
+
+  .img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 2.4;
+  }
+  img {
+    transform-origin: 20% 10%;
+    transform: rotate(-2deg) scale(1.1);
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 410px) {
