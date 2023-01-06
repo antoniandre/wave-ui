@@ -87,8 +87,8 @@ export default {
   justify-content: center;
   vertical-align: middle;
   border-radius: $border-radius;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.08);
+  background-color: rgba(var(--w-base-bg-color-rgb), 0.85);
   padding-left: 2 * $base-increment;
   padding-right: 2 * $base-increment;
   cursor: default;
@@ -96,7 +96,7 @@ export default {
 
   @include themeable;
 
-  &--dark {color: rgba(255, 255, 255, 0.95);}
+  &--dark {color: rgba(var(--w-base-bg-color-rgb), 0.95);}
   &--outline {background-color: transparent;border-color: currentColor;}
   &--no-border {border-color: transparent;}
   &--round {border-radius: 99em;}
@@ -107,6 +107,7 @@ export default {
     $font-size: round(0.7 * $base-font-size);
     font-size: $font-size;
     line-height: $font-size + 2px;
+    padding: round(0.25 * $base-increment) $base-increment;
   }
   &.size--sm {
     $font-size: round(0.82 * $base-font-size);
@@ -154,7 +155,7 @@ export default {
     }
 
     &:hover {
-      .w-tag__closable {background-color: rgba(0, 0, 0, 0.1);}
+      .w-tag__closable {background-color: rgba(var(--w-contrast-bg-color-rgb), 0.1);}
     }
 
     // Overlay to mark the focus and active state.
@@ -175,19 +176,19 @@ export default {
 
     // Hover state.
     &:hover:before {background-color: currentColor;opacity: 0.06;}
-    &--dark:hover:before {background-color: rgba(255, 255, 255, 0.12);opacity: 1;}
+    &--dark:hover:before {background-color: rgba(var(--w-base-bg-color-rgb), 0.12);opacity: 1;}
     &--outline:hover:before,
     &--text:hover:before {background-color: currentColor;opacity: 0.12;}
 
     // Focus state.
     &:focus:before {background-color: currentColor;opacity: 0.2;}
-    &--dark:focus:before {background-color: rgba(255, 255, 255, 0.12);}
+    &--dark:focus:before {background-color: rgba(var(--w-base-bg-color-rgb), 0.12);}
     &--outline:focus:before,
     &--text:focus:before {background-color: currentColor;opacity: 0.12;}
 
     // Active state.
     &:active:before {background-color: currentColor;opacity: 0.2;}
-    &--dark:active:before {background-color: rgba(255, 255, 255, 0.2);}
+    &--dark:active:before {background-color: rgba(var(--w-base-bg-color-rgb), 0.2);}
     &--outline:active:before,
     &--text:active:before {background-color: currentColor;opacity: 0.2;}
   }

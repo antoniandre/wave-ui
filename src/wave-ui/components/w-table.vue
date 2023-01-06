@@ -630,7 +630,7 @@ $tr-border-top: 1px;
   &--fixed-header thead {
     position: sticky;
     top: 0;
-    background-color: #fff;
+    background-color: $base-bg-color;
     z-index: 1; // For sticky columns to go under.
 
     &:after {
@@ -655,14 +655,14 @@ $tr-border-top: 1px;
       right: 0;
       bottom: 0;
       z-index: -1;
-      background-color: #fff;
+      background-color: $base-bg-color;
     }
   }
 
   // Sorting arrow.
   &__header--sortable {cursor: pointer;}
   &__header-sort {
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(var(--w-base-color-rgb), 0.8);
     vertical-align: text-bottom;
     @include default-transition;
 
@@ -722,7 +722,7 @@ $tr-border-top: 1px;
 
   // Table body.
   // ------------------------------------------------------
-  tbody tr {border-top: $tr-border-top solid rgba(0, 0, 0, 0.06);}
+  tbody tr {border-top: $tr-border-top solid rgba(var(--w-base-color-rgb), 0.06);}
   // Don't apply built-in bg color if a bg color is already found on a tr.
   tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: $table-tr-odd-color;}
   tbody .w-table__row:hover:not(.no-data):not([class*="--bg"]) {background-color: $table-tr-hover-color;}
@@ -767,7 +767,7 @@ $tr-border-top: 1px;
       bottom: 0;
       z-index: -1;
     }
-    &:before {background-color: #fff;}
+    &:before {background-color: $base-bg-color;}
   }
   tr:nth-child(odd) &__cell--sticky:after {background-color: $table-tr-odd-color;}
   tr:hover &__cell--sticky:after {background-color: $table-tr-hover-color;}
@@ -787,7 +787,7 @@ $tr-border-top: 1px;
   &--fixed-footer tfoot {
     position: sticky;
     bottom: 0;
-    background-color: #fff;
+    background-color: $base-bg-color;
     z-index: 1; // For sticky columns to go under.
 
     &:after {

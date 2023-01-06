@@ -149,7 +149,7 @@ export default {
         [this.icon]: true,
         [`size--${this.size}`]: true,
         [this.color]: isOn,
-        [this.bgColor]: this.bgColor && !this.isOn
+        [this.bgColor]: this.bgColor && !isOn
       }
     }
   },
