@@ -12,7 +12,8 @@ main
         w-tooltip
           template(#activator="{ on }")
             a(:href="backer.url" target="_blank" v-on="on")
-              img.avatar(:src="backer.avatar" alt="")
+              img.avatar(alt="" :src="backer.avatar" @error="$event.target.src = emptyGif")
+              w-icon.octocat(xl) mdi mdi-github
           | {{ backer.username }}
       w-tooltip
         template(#activator="{ on }")
@@ -31,12 +32,13 @@ main
     h2.gold Gold Sponsors 🔥
     .gold-sponsors
       a(href="https://divriots.com/" target="_blank")
-        img(:src="DivRiotsLogo")
+        img(:src="$store.state.darkMode ? DivRiotsLogoGrey : DivRiotsLogo")
 </template>
 
 <script>
 import axios from 'axios'
 import DivRiotsLogo from '@/assets/divriots.svg'
+import DivRiotsLogoGrey from '@/assets/divriots-grey.svg'
 
 const githubBackers = [
   'divriots', 'nmauersberg', 'KleinSamuel', 'chris-deep', 'crbast', 'CoolGoose', 'bohdaq',
@@ -45,8 +47,10 @@ const githubBackers = [
 
 export default {
   data: () => ({
+    emptyGif: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     backers: [],
-    DivRiotsLogo
+    DivRiotsLogo,
+    DivRiotsLogoGrey
   }),
 
   created () {
@@ -79,6 +83,11 @@ export default {
 }
 
 .backers {
+  a {
+    position: relative;
+    display: flex;
+  }
+
   .avatar, .plus {
     display: inline-flex;
     align-items: center;
@@ -86,8 +95,17 @@ export default {
     width: 4em;
     aspect-ratio: 1;
     border-radius: 4em;
-    background-color: #ddd;
+    background-color: rgba(var(--w-contrast-bg-color-rgb), 0.1);
     overflow: hidden;
+  }
+
+  .octocat {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(var(--w-contrast-bg-color-rgb), 0.05);
+    font-size: 4.5em;
   }
 }
 

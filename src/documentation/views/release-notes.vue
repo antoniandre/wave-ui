@@ -1419,7 +1419,7 @@ main
       position: absolute;
       top: 11px;
       left: 0;
-      background-color: #fff;
+      background-color: $base-bg-color;
       border-radius: 1em;
       border: 1px solid #ddd;
       width: 1em;

@@ -134,6 +134,10 @@
   .main--shadows-borders-radii .box {
     background-color: #344f79;
   }
+
+  .main--release-notes .history {
+    > li:after {border-color: #333;}
+  }
   // ======================================================
   // END OF DOCUMENTATION.
 
