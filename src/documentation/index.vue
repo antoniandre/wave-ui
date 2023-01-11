@@ -1,8 +1,9 @@
 <template lang="pug">
-w-app(:dark="$store.state.darkMode")
+w-app
   w-drawer.nav-drawer(v-if="isMobile" v-model="drawerOpen" right :width="330")
     nav-menu(v-model:drawer-open="drawerOpen")
   header.no-shrink
+    wave-pattern.fill-width.fill-height
     toolbar(v-model:drawer-open="drawerOpen")
   .content-wrap.w-flex.no-shrink
     transition(name="fade")
@@ -58,10 +59,11 @@ w-app(:dark="$store.state.darkMode")
 <script>
 import Toolbar from '@/documentation/components/toolbar.vue'
 import NavMenu from '@/documentation/components/nav-menu.vue'
+import WavePattern from '@/assets/wave-pattern.svg?component'
 import '@/documentation/scss/index.scss'
 
 export default {
-  components: { Toolbar, NavMenu },
+  components: { Toolbar, NavMenu, WavePattern },
   data: () => ({
     drawerOpen: false,
     fixNavMenu: false,
@@ -96,7 +98,8 @@ export default {
   },
 
   mounted () {
-    this.$store.dispatch('detectDarkMode')
+    const darkMode = this.$store.dispatch('detectDarkMode')
+    this.$waveui.switchTheme(darkMode ? 'dark' : 'light')
 
     this.contentWrapEl = document.querySelector('.content-wrap')
     this.navMenuTop = this.contentWrapEl.offsetTop - 12

@@ -2,9 +2,6 @@ header {
   margin-top: 42px;
   position: relative;
   overflow: hidden;
-  // box-shadow: inset 5em 0 3em #000;
-  background: url('@/assets/wave-pattern.svg') fixed left;
-  background-size: 300px;
 
   &:before {
     content: '';
@@ -14,6 +11,7 @@ header {
     left: 0;
     right: 0;
     background: url('@/assets/japanese-wave.png') repeat-x 0 5px;
+    z-index: 1;
   }
 
   &:after {
@@ -24,6 +22,12 @@ header {
     left: 0;
     right: 0;
     box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.4);
+  }
+
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
 

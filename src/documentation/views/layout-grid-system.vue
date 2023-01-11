@@ -194,7 +194,7 @@ main
 
   title-link(h2) Operating with breakpoints
   example
-    w-card.blue-light5--bg
+    w-card(:class="$store.state.darkMode ? 'grey-dark4--bg' : 'blue-light5--bg'")
       .title2.mt0 Current breakpoint: #[code {{ $waveui.breakpoint.name }}]
       em.grey.mt1 Resizing your browser will update the current breakpoint.
     template(#pug).

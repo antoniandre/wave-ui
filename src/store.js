@@ -39,7 +39,6 @@ export default createStore({
     detectDarkMode ({ commit }) {
       // Detect the dark mode preference.
       const darkMode = window?.matchMedia?.('(prefers-color-scheme: dark)')?.matches
-      document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light')
 
       commit('setDarkMode', darkMode)
       return darkMode

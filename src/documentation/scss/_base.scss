@@ -1,5 +1,9 @@
 html, body {height: 100%;}
 
+:root {
+  --header-waves-pattern: rgba(73, 123, 162, 0.2);
+}
+
 a {color: $links;}
 
 ul, ol {margin-left: 4 * $base-increment + 2px;}

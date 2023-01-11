@@ -1,6 +1,13 @@
 $links: #09c;
-$primary: #89b6d2;
-$secondary: #375b6a;
+$theme-switch-transition: 1.5s ease-in-out;
+
+@mixin theme-switch-transition() {
+  transition: color $theme-switch-transition,
+              background-color $theme-switch-transition,
+              border-color $theme-switch-transition,
+              stroke $theme-switch-transition,
+              fill $theme-switch-transition;
+}
 
 // Override Wave UI's SCSS defaults.
 $base-font-size: 13px;
