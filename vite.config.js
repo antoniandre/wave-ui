@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import Delete from 'rollup-plugin-delete'
 import autoprefixer from 'autoprefixer'
+import svgLoader from 'vite-svg-loader'
 
 const bundlingConf = {
   lib: {
@@ -43,7 +44,8 @@ export default defineConfig({
           whitespace: 'preserve'
         }
       }
-    })
+    }),
+    svgLoader()
   ], // https://vitejs.dev/config/
   css: {
     preprocessorOptions: {
