@@ -4,7 +4,10 @@ w-toolbar.main-toolbar(fixed)
     w-icon.wave-logo.mr3(size="3em") wi-wave
     span.grey-dark1 Wave UI
   .spacer
-  w-menu(
+  w-switch.mr2(:model-value="$store.state.darkMode" @update:model-value="$store.commit('setDarkMode', $event), $waveui.switchTheme($event ? 'dark' : 'light')" bg-color="blue-dark5")
+    template(#thumb)
+      w-icon mdi {{ $store.state.darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}
+  //- w-menu(
     align-right
     arrow
     shadow
