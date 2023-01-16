@@ -24,13 +24,27 @@ const config = reactive({
     grid: 12
   },
   colors: {
-    primary: '#234781',
-    secondary: '#d3ebff',
-    success: '#54b946',
-    error: '#f65555',
-    warning: '#f80',
-    info: '#3d9ff5'
+    // Default colors of Wave UI. Can be overridden from the Wave UI user config on init.
+    light: {
+      primary: '#234781',
+      secondary: '#d3ebff',
+      success: '#54b946',
+      error: '#f65555',
+      warning: '#f80',
+      info: '#3d9ff5'
+    },
+    dark: {
+      primary: '#89b6d2',
+      secondary: '#375b6a',
+      success: '#54b946',
+      error: '#f65555',
+      warning: '#f80',
+      info: '#3d9ff5'
+    }
   },
+  // The initial theme to use.
+  // To switch theme while running, call the $waveui.switchTheme('light'|'dark') method.
+  theme: 'light', // One of 'light' or 'dark'.
   icons: [],
   iconsLigature: false,
   notificationManager: {
