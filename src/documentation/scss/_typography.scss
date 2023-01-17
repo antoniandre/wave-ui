@@ -1,9 +1,7 @@
 @font-face {
   font-family: 'title font';
-  src: url('@/assets/fonts/syncopate.woff2') format('woff2'), /* chrome, firefox */
-       url('@/assets/fonts/syncopate.woff') format('woff'), /* chrome, firefox */
-       url('@/assets/fonts/syncopate.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-       url('@/assets/fonts/syncopate.svg') format('svg');
+  src: url('@/assets/fonts/syncopate.woff2') format('woff2'),
+       url('@/assets/fonts/syncopate.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
