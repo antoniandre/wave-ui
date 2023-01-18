@@ -10,7 +10,6 @@ import NotificationManager from './w-notification-manager.vue'
 export default {
   name: 'w-app',
   props: {
-    dark: { type: Boolean },
     block: { type: Boolean },
     row: { type: Boolean },
     alignCenter: { type: Boolean },
@@ -43,8 +42,7 @@ export default {
         'justify-space-around': this.justifySpaceAround,
         'justify-space-evenly': this.justifySpaceEvenly,
         'text-center': this.textCenter,
-        'text-right': this.textRight,
-        'theme--dark': this.dark
+        'text-right': this.textRight
       }
     }
   }

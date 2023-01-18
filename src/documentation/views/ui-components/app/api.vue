@@ -24,8 +24,7 @@ const propsDescs = {
   justifySpaceAround: 'Applies the CSS property: <code>justify-content: space-around;</code>.',
   justifySpaceEvenly: 'Applies the CSS property: <code>justify-content: space-evenly;</code>.',
   textCenter: 'Applies the CSS property: <code>text-align: center;</code>.',
-  textRight: 'Applies the CSS property: <code>text-align: right;</code>.',
-  dark: false // Hide the prop.
+  textRight: 'Applies the CSS property: <code>text-align: right;</code>.'
 }
 
 const slots = {

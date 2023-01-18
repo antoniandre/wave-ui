@@ -35,14 +35,18 @@ kbd,
 .main--layout-simplified-grid-system .box,
 .main--shadows-borders-radii .box,
 .main--release-notes .history,
-caption {
+caption,
+.primary--bg,
+.primary {
   @include theme-switch-transition;
 }
 
 .nav-menu-wrap {transition: border-color $theme-switch-transition;}
 .hue-on-dark .example__render {transition: filter $theme-switch-transition;}
+// ======================================================
 
-
+// Dark theme.
+// ======================================================
 [data-theme="dark"] {
   :root {
     --header-waves-pattern: rgba(73, 123, 162, 0.2);

@@ -5,7 +5,7 @@ main
   title-link(h2) What is this for?
   p.
     If you are not familiar with breakpoints, you should first read about it.#[br]
-    The breakpoints are usaully useful when you want to change the layout for a particular viewport width.#[br]
+    The breakpoints are usually useful when you want to change the layout for a particular viewport width.#[br]
     In Wave UI, you can use them in different ways:
   ul
     li Access the current breakpoint in JavaScript
