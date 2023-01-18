@@ -2,7 +2,7 @@ import { reactive, inject } from 'vue'
 import config, { mergeConfig } from './utils/config'
 import NotificationManager from './utils/notification-manager'
 import { colorPalette, generateColorShades, flattenColors } from './utils/colors'
-import { addColorsStylesheetToDOM } from './utils/dynamic-css'
+import { addColorsStylesheetToDOM, injectCSSInDOM } from './utils/dynamic-css'
 // import * as directives from './directives'
 
 // Keep the notification manager private.
@@ -10,6 +10,7 @@ import { addColorsStylesheetToDOM } from './utils/dynamic-css'
 // https://github.com/tc39/proposal-class-fields/issues/106
 // https://github.com/tc39/proposal-class-fields/issues/227
 let notificationManager = null
+let mounted = false
 
 export default class WaveUI {
   static instance = null
@@ -54,10 +55,17 @@ export default class WaveUI {
     }
 
     // Register mixins.
-    // app.mixin({
-    //   mounted () {
-    //   }
-    // })
+    app.mixin({
+      // Add a mixin to capture the first mounted hook, trigger the Wave UI init then unregister the mixin straight away.
+      mounted () {
+        if (!mounted) {
+          mounted = true
+          addColorsStylesheetToDOM(WaveUI.instance.config)
+          injectCSSInDOM(WaveUI.instance)
+          app._context.mixins.find(mixin => mixin.mounted && delete mixin.mounted) // So this mixin has never existed.
+        }
+      }
+    })
 
     WaveUI.registered = true
   }
