@@ -1,4 +1,61 @@
-export default [
+export const shadeColor = (color, amount) => {
+  return '#' + color.slice(1).match(/../g)
+    .map(x => {
+      x = +`0x${x}` + amount
+      return (x < 0 ? 0 : (x > 255 ? 255 : x)).toString(16).padStart(2, 0)
+    })
+    .join('')
+}
+
+/**
+ * Generates the color shades for each custom color and status colors for the current theme (only),
+ * and save it in the config object.
+ *
+ * @param {Object} config
+ */
+export const generateColorShades = config => {
+  // Add color shades for each custom color and status color of the current theme.
+  if (config.css.colorShades) {
+    ['light', 'dark'].forEach(theme => {
+      const themeOfColors = config.colors[theme]
+      themeOfColors.shades = {}
+
+      for (let color in themeOfColors) {
+        if (color === 'shades') continue // Skip if item is the `shades` container.
+        color = { label: color, color: themeOfColors[color].replace('#', '') }
+        const col = color.color
+        if (col.length === 3) color.color = col[0] + '' + col[0] + col[1] + col[1] + col[2] + col[2]
+
+        for (let i = 1; i <= 3; i++) {
+          const lighterColor = shadeColor(`#${color.color}`, i * 40)
+          const darkerColor = shadeColor(`#${color.color}`, -i * 40)
+          // Adding the shades to the config object to generate the CSS from w-app.
+          themeOfColors.shades[`${color.label}-light${i}`] = lighterColor
+          themeOfColors.shades[`${color.label}-dark${i}`] = darkerColor
+        }
+      }
+    })
+  }
+}
+
+export const flattenColors = (config, colorPalette) => {
+  const themeColors = config.colors[config.theme]
+  const colors = {
+    ...colorPalette.reduce((obj, color) => {
+      obj[color.label] = color.color
+      const shades = (color.shades || []).reduce((obj, color) => {
+        obj[color.label] = color.color
+        return obj
+      }, {})
+      return { ...obj, ...shades }
+    }, { ...themeColors, ...themeColors.shades })
+  }
+  delete colors.shades
+
+  return colors
+}
+
+export const colorPalette = [
   {
     label: 'pink',
     color: '#e91e63',
@@ -15,7 +72,6 @@ export default [
       { label: 'pink-dark4', color: '#7c0c32' },
       { label: 'pink-dark5', color: '#600927' },
       { label: 'pink-dark6', color: '#43071b' }
-
     ]
   },
   {
@@ -342,5 +398,9 @@ export default [
       { label: 'grey-dark5', color: '#353535' },
       { label: 'grey-dark6', color: '#252525' }
     ]
-  }
+  },
+  { label: 'black', color: '#000' },
+  { label: 'white', color: '#fff' },
+  { label: 'transparent', color: 'transparent' },
+  { label: 'inherit', color: 'inherit' }
 ]
