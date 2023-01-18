@@ -1,21 +1,7 @@
 #{$css-scope} {
-  .primary--bg {color: rgb(var(--w-base-bg-color-rgb));}
-  .white--bg {background-color: #fff;}
-  .white {color: #fff;}
-  .black--bg {background-color: #000;}
-  .black {color: #000;}
-  .transparent--bg {background-color: transparent;}
-  .transparent {color: transparent;}
-  .inherit--bg {background-color: inherit;}
-  .inherit {color: inherit;}
-  .success--bg, .error--bg, .warning--bg, .info--bg {color: #fff;}
-
-  .base-color {color: rgba(var(--w-base-color-rgb), 0.7);}
-  .base-color--bg {background-color: rgb(var(--w-base-bg-color-rgb));}
-  .contrast-color {color: rgba(var(--w-contrast-color-rgb), 0.7);}
-  .contrast-color--bg {background-color: rgb(var(--w-contrast-bg-color-rgb));}
-
-  $colors:(
+  // Color palette (immutable).
+  // ------------------------------------------------------
+  $colors: (
     'pink': #e91e63,
     'purple': #a741b9,
     'deep-purple': #673ab7,
@@ -37,6 +23,8 @@
     'grey': #848484
   );
 
+  // For each color, create a [color] and a [color]--bg associated classes,
+  // + 6 shades lighter and 6 shades darker.
   @each $label, $color in $colors {
     .#{$label}--bg {background-color: $color;}
     .#{$label} {color: $color;}
@@ -116,4 +104,40 @@
       .#{$label}-dark#{$i} {color: darken($color, $dark-increment * $i);}
     }
   }
+
+  .primary--bg {color: rgb(var(--w-base-bg-color-rgb));}
+  .white--bg {background-color: #fff;}
+  .white {color: #fff;}
+  .black--bg {background-color: #000;}
+  .black {color: #000;}
+  .transparent--bg {background-color: transparent;}
+  .transparent {color: transparent;}
+  .inherit--bg {background-color: inherit;}
+  .inherit {color: inherit;}
+  // ------------------------------------------------------
+
+  // Theming colors.
+  // These classes carry colors which change automatically when switching theme.
+  // ------------------------------------------------------
+  .base-color {color: rgba(var(--w-base-color-rgb), 0.7);}
+  .base-color--bg {background-color: rgb(var(--w-base-bg-color-rgb));}
+  .contrast-color {color: rgba(var(--w-contrast-color-rgb), 0.7);}
+  .contrast-color--bg {background-color: rgb(var(--w-contrast-bg-color-rgb));}
+  // ------------------------------------------------------
+
+  // Status colors - must stay last and have highest priority.
+  // ------------------------------------------------------
+  .info {color: var(--w-info-color);}
+  .info--bg {background-color: var(--w-info-color);color: #fff;}
+  .warning {color: var(--w-warning-color);}
+  .warning--bg {background-color: var(--w-warning-color);color: #fff;}
+  .success {color: var(--w-success-color);}
+  .success--bg {background-color: var(--w-success-color);color: #fff;}
+  .error {color: var(--w-error-color);}
+  .error--bg {background-color: var(--w-error-color);color: #fff;}
+  // ------------------------------------------------------
+
+  // The only colors remaining to define are user custom colors and shades.
+  // The associated CSS will be generated from dynamic-css.js, and injected as a first stylesheet,
+  // before this one (so the rules in this file have more priority).
 }
