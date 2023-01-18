@@ -1,13 +1,52 @@
+// Global theming rules.
+// ======================================================
+:root,
+.home .section--2,
+.home .section--2 > svg,
+.home .section--2 .w-accordion__item,
+.home .section--3,
+.main-toolbar,
+header svg,
+h1, h2,
+code,
+.code,
+.ssh-pre,
+kbd,
+.title-link,
+.title-link .hash,
+.w-alert--docs,
+.example,
+.example .buttons,
+.common-layouts legend,
+.transition-box,
+.transition-box .amber-light4--bg,
+.main--layout-grid-system legend.round,
+.hue-on-dark .example__render *,
+.w-alert__content .black,
+.main--w-list-item .blue-light5--bg,
+.main--shadows-borders-radii .example .orange-light5--bg,
+.main--layout-flex .example .yellow-light5--bg,
+.main--layout-flex .lighter .box,
+.main--layout-flex .wrapper,
+.main--layout-flex .wrapper2,
+.main--layout-simplified-grid-system .wrapper,
+.sliding-card,
+.main--layout-flex .lighter .box,
+.main--layout-simplified-grid-system .box,
+.main--shadows-borders-radii .box,
+.main--release-notes .history,
+caption {
+  @include theme-switch-transition;
+}
+
+.nav-menu-wrap {transition: border-color $theme-switch-transition;}
+.hue-on-dark .example__render {transition: filter $theme-switch-transition;}
+
+
 [data-theme="dark"] {
   :root {
     --header-waves-pattern: rgba(73, 123, 162, 0.2);
   }
-}
-
-.w-app.theme--dark {
-  // Colors.
-  // ------------------------------------------------------
-  $primary: #8fd4ff;
 
   // Main menu.
   // ------------------------------------------------------
@@ -62,7 +101,6 @@
 
   // Alerts.
   // ------------------------------------------------------
-  // .w-alert.w-alert--docs {color: rgba(var(--w-base-color-rgb), 0.8) !important;}
   .w-alert--docs.alert--info {background-color: rgba(0, 183, 255, 0.15);}
   .w-alert--docs.alert--tip {background-color: rgba(135, 128, 65, 0.4);}
   .w-alert--docs.alert--error {background-color: rgba(177, 64, 64, 0.4);}

@@ -1,5 +1,5 @@
 $links: #09c;
-$theme-switch-transition: 1.5s ease-in-out;
+$theme-switch-transition: 0.4s ease-in-out;
 
 @mixin theme-switch-transition() {
   transition: color $theme-switch-transition,
