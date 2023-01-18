@@ -3,7 +3,7 @@ div.icons-demo
   title-link(h2) Different icon fonts supported
   p.
     Wave UI works with your favorite icon font or even your own custom one.#[br]
-    Bellow are some examples using a few popular and free icons fonts.
+    Below are some examples using a few popular and free icons fonts.
 
   ul
     li

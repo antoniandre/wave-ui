@@ -168,7 +168,7 @@ main
 
   title-link(h2) Examples of use on UI components
   p.
-    Bellow are a few examples of components which accept the presented classes.
+    Below are a few examples of components which accept the presented classes.
   example
     w-flex(align-center justify-space-around wrap)
       w-flex.no-grow(column align-center justify-center)

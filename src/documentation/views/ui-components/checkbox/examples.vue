@@ -18,7 +18,7 @@ div
     The later is a group of checkboxes for convenience.
 
   p.
-    In most cases what you need is the #[span.code w-checkboxes] component bellow, but let's start with the
+    In most cases what you need is the #[span.code w-checkboxes] component below, but let's start with the
     basic component as it might be useful in single checkboxes and edge cases.
 
   //- W-checkbox.
