@@ -2,6 +2,7 @@ import { reactive, inject } from 'vue'
 import config, { mergeConfig } from './utils/config'
 import NotificationManager from './utils/notification-manager'
 import { colorPalette, generateColorShades, flattenColors } from './utils/colors'
+import { addColorsStylesheetToDOM } from './utils/dynamic-css'
 // import * as directives from './directives'
 
 // Keep the notification manager private.
@@ -69,6 +70,15 @@ export default class WaveUI {
       if (!WaveUI.registered) app.use(WaveUI)
       notificationManager = reactive(new NotificationManager())
 
+      if (!options.theme) options.theme = 'light'
+      // Move colors inside a theme if there are option.colors without theme.
+      // E.g. colors: { primary, ... } & not colors: { light { primary, ... }, dark: { primary, ... } })
+      const colors = { ...options.colors }
+      if (!options?.colors?.light) options.colors.light = colors
+      if (!options?.colors?.dark) options.colors.dark = colors
+      // Cleanup anything else than themes in config.colors.
+      options.colors = { light: options.colors.light, dark: options.colors.dark }
+
       // Merge user options into the default config.
       this.config = mergeConfig(options)
 
@@ -87,6 +97,13 @@ export default class WaveUI {
 
   notify (...args) {
     notificationManager.notify(...args)
+  }
+
+  switchTheme (theme) {
+    this.config.theme = theme
+    document.documentElement.setAttribute('data-theme', theme)
+    document.head.querySelector('#wave-ui-colors')?.remove?.()
+    addColorsStylesheetToDOM(this.config)
   }
 }
 

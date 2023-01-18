@@ -5,43 +5,53 @@ const cssVars = {
   baseIncrement: 4
 }
 
+// Global var for faster results in the resize event handler.
+let breakpointsDef = { keys: [], values: [] }
+let currentBreakpoint = null
+
+// Generates the CSS for all the dynamic colors and shades. E.g.
+// :root {[color1-variable], [color2-variable]}
+// .color1--bg {background-color: [color1-variable]}
+// .color1 {color: [color1-variable]}
 const generateColors = config => {
   let styles = ''
+  const cssVariables = {}
+
+  // config.colors does not include the color palette.
+  // It contains status and custom colors in themes:
+  // { light: { color1, ... }, dark: { color1, ... } }
+  const themeOfColors = config.colors[config.theme]
+  // Extract status colors and place them after the other colors.
+  const { info, warning, success, error, shades, ...colors } = themeOfColors
   const { cssScope } = cssVars
 
-  // Extract status colors and place them after the other colors.
-  const { info, warning, success, error, ...colors } = config.colors
-
-  for (const color in colors) {
+  // User custom colors.
+  // ------------------------------------------------------
+  for (const colorName in colors) {
     styles +=
-      `${cssScope} .${color}--bg{background-color:${config.colors[color]}}` +
-      `${cssScope} .${color}{color:${config.colors[color]}}`
+      `${cssScope} .${colorName}--bg{background-color:var(--w-${colorName}-color)}` +
+      `${cssScope} .${colorName}{color:var(--w-${colorName}-color)}`
+  }
+  // The shades don't need css vars.
+  for (const colorName in shades) {
+    styles +=
+      `${cssScope} .${colorName}--bg{background-color:${shades[colorName]}}` +
+      `${cssScope} .${colorName}{color:${shades[colorName]}}`
   }
 
-  // Color shades are generated in core.js, if the option is on.
-  if (config.css.colorShades && config.colorShades) {
-    Object.entries(config.colorShades).forEach(([label, color]) => {
-      styles +=
-        `${cssScope} .${label}--bg{background-color:${color}}` +
-        `${cssScope} .${label}{color:${color}}`
-    })
-  }
-
+  // Creating CSS3 variables.
+  // ------------------------------------------------------
+  // Create a CSS variable for each color for theming and reuse in components.
   // Status colors must remain after the other colors so they have priority in form validations.
   // That only makes sense when there are 2 colors on the same element: e.g. `span.primary.error`.
-  const statusColors = { info, warning, success, error } // This order is also important for priorities.
-  for (const color in statusColors) {
-    styles +=
-      `${cssScope} .${color}--bg{background-color:${config.colors[color]}}` +
-      `${cssScope} .${color}{color:${config.colors[color]}}`
-  }
+  const allColors = { ...colors, info, warning, success, error }
+  for (const colorName in allColors) cssVariables[colorName] = allColors[colorName]
+  let cssVariablesString = ''
+  Object.entries(cssVariables).forEach(([colorName, colorHex]) => {
+    cssVariablesString += `--w-${colorName}-color: ${colorHex};`
+  })
 
-  // Add the primary color to the CSS variables for reuse in components.
-  const cssVariables = []
-  cssVariables.push(`--w-primary: ${config.colors.primary}`)
-  styles += `:root {${cssVariables.join(';')}}`
-
-  return styles
+  return `:root{${cssVariablesString}}${styles}`
 }
 
 // Generate the layout grid. E.g. xs1, xs2, ..., xl12.
@@ -218,7 +228,62 @@ const genBreakpointLayoutClasses = breakpoints => {
   return styles
 }
 
-export default config => {
+const getBreakpoint = $waveui => {
+  const width = window.innerWidth
+  const breakpoints = breakpointsDef.values.slice(0)
+  // Most performant lookup.
+  breakpoints.push(width)
+  breakpoints.sort((a, b) => a - b)
+  const breakpoint = breakpointsDef.keys[breakpoints.indexOf(width)] || 'xl'
+
+  if (breakpoint !== currentBreakpoint) {
+    currentBreakpoint = breakpoint
+    $waveui.breakpoint = {
+      name: breakpoint,
+      xs: breakpoint === 'xs',
+      sm: breakpoint === 'sm',
+      md: breakpoint === 'md',
+      lg: breakpoint === 'lg',
+      xl: breakpoint === 'xl',
+      width
+    }
+  }
+}
+
+// Should run on first mounted hook.
+export const injectCSSInDOM = WaveUI => {
+  const { config } = WaveUI
+  breakpointsDef = { keys: Object.keys(config.breakpoints), values: Object.values(config.breakpoints) }
+
+  // Inject global dynamic CSS classes in document head.
+  if (!document.getElementById('wave-ui-styles')) {
+    const css = document.createElement('style')
+    css.id = 'wave-ui-styles'
+    css.innerHTML = doDynamicCSS(config)
+
+    const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
+    if (firstStyle) firstStyle.before(css)
+    else document.head.appendChild(css)
+  }
+
+  getBreakpoint(WaveUI)
+  window.addEventListener('resize', () => getBreakpoint(WaveUI))
+}
+
+export const addColorsStylesheetToDOM = config => {
+  // Inject global dynamic CSS classes in document head.
+  if (!document.getElementById('wave-ui-colors')) {
+    const css = document.createElement('style')
+    css.id = 'wave-ui-colors'
+    css.innerHTML = generateColors(config)
+
+    const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
+    if (firstStyle) firstStyle.before(css)
+    else document.head.appendChild(css)
+  }
+}
+
+const doDynamicCSS = config => {
   const entries = Object.entries(config.breakpoints)
   const breakpointsDef = entries.map(([label, max], i) => {
     // Construct the breakpoint objects.
@@ -231,7 +296,6 @@ export default config => {
   cssVars.baseIncrement = parseInt(computedStyles.getPropertyValue('--w-base-increment'))
 
   let styles = ''
-  styles += generateColors(config)
   styles += generateBreakpoints(breakpointsDef, config.css.grid)
   if (config.css.breakpointLayoutClasses) styles += genBreakpointLayoutClasses(breakpointsDef)
   // if (config.css.breakpointSpaces) styles += generateBreakpointSpaces(breakpointsDef)
