@@ -441,29 +441,31 @@ div.icons-demo
     | instead. If not, just set a #[code bg-color].
 
   example(content-class="w-flex align-center")
-    w-icon.mr1.pa5(xl bg-color="primary-dark1") mdi mdi-home
-    w-icon.mr1.pa5(xl bg-color="primary") mdi mdi-home
-    w-icon.mr1.pa5(xl bg-color="primary-light1" color="white") mdi mdi-home
-    w-icon.mr1.pa5(xl bg-color="primary-light2" color="white") mdi mdi-home
-    w-icon.pa5(xl bg-color="primary-light3" color="white") mdi mdi-home
+    w-icon.mr1.pa5(xl bg-color="primary-dark1" color="contrast-color") mdi mdi-home
+    w-icon.mr1.pa5(xl bg-color="primary" color="contrast-color") mdi mdi-home
+    w-icon.mr1.pa5(xl bg-color="primary-light1" color="contrast-color") mdi mdi-home
+    w-icon.mr1.pa5(xl bg-color="primary-light2" color="contrast-color") mdi mdi-home
+    w-icon.pa5(xl bg-color="primary-light3" color="contrast-color") mdi mdi-home
     template(#pug).
-      w-icon.mr1.pa5(xl bg-color="primary-dark1") mdi mdi-home
-      w-icon.mr1.pa5(xl bg-color="primary") mdi mdi-home
-      w-icon.mr1.pa5(xl bg-color="primary-light1" color="white") mdi mdi-home
-      w-icon.mr1.pa5(xl bg-color="primary-light2" color="white") mdi mdi-home
-      w-icon.pa5(xl bg-color="primary-light3" color="white") mdi mdi-home
+      w-icon.mr1.pa5(xl bg-color="primary-dark1" color="contrast-color") mdi mdi-home
+      w-icon.mr1.pa5(xl bg-color="primary" color="contrast-color") mdi mdi-home
+      w-icon.mr1.pa5(xl bg-color="primary-light1" color="contrast-color") mdi mdi-home
+      w-icon.mr1.pa5(xl bg-color="primary-light2" color="contrast-color") mdi mdi-home
+      w-icon.pa5(xl bg-color="primary-light3" color="contrast-color") mdi mdi-home
     template(#html).
       &lt;w-icon
         class="mr1 pa5"
         xl
-        bg-color="primary-dark1"&gt;
+        bg-color="primary-dark1"
+        color="contrast-color"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
       &lt;w-icon
         class="mr1 pa5"
         xl
-        bg-color="primary"&gt;
+        bg-color="primary"
+        color="contrast-color"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
@@ -471,7 +473,7 @@ div.icons-demo
         class="mr1 pa5"
         xl
         bg-color="primary-light1"
-        color="white"&gt;
+        color="contrast-color"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
@@ -479,7 +481,7 @@ div.icons-demo
         class="mr1 pa5"
         xl
         bg-color="primary-light2"
-        color="white"&gt;
+        color="contrast-color"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
@@ -487,10 +489,14 @@ div.icons-demo
         class="pa5"
         xl
         bg-color="primary-light3"
-        color="white"&gt;
+        color="contrast-color"&gt;
         mdi mdi-home
       &lt;/w-icon&gt;
 
+  alert(tip)
+    strong.d-block Note on the above source code:
+    | the use of the #[code contrast-color] is to have a contrasted color from the background
+    | regardless of the active theme.
   title-link(h2) Sizes
   p.
     By default the icons inherit their font-size from their parent DOM element.

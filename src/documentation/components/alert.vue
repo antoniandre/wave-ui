@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss">
 .w-alert.w-alert--docs {
-  color: rgba(0, 0, 0, 0.6) !important;
+  color: rgba(var(--w-base-color-rgb), 0.8) !important;
   font-weight: normal;
 
   &:after {display: none;}
@@ -82,7 +82,11 @@ export default {
     background-color: rgba(255, 255, 0, 0.15);
 
     &:before {background-color: #fd0;}
-    > .w-icon {background-color: #ffd849;border-color: #ffd849;color: #fff;}
+    > .w-icon {
+      background-color: #ffd849;
+      border-color: #ffd849;
+      color: $base-bg-color;
+    }
     > .w-icon:before {font-size: 16px;}
   }
 }

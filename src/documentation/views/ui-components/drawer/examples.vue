@@ -118,18 +118,18 @@ div
     The #[strong.code w-drawer] component can be placed in a deeper structure than the root of
     the site.
   example(content-class="relative justify-center d-flex")
-    w-card.ma6.grow.text-center(bg-color="amber-light5" title="w-card")
+    w-card.ma6.grow.text-center(:bg-color="$store.state.darkMode ? 'grey-dark6' : 'amber-light5'" title="w-card")
       w-button.my12(@click="openAbsoluteDrawer = true" text) Open drawer
       w-drawer(v-model="openAbsoluteDrawer" absolute width="160px")
     template(#pug).
-      w-card.ma6.grow.text-center(bg-color="amber-light5" title="w-card")
+      w-card.ma6.grow.text-center(bg-color="{{ $store.state.darkMode ? 'grey-dark6' : 'amber-light5' }}" title="w-card")
         w-button.my12(@click="openDrawer = true" text) Open drawer
 
         w-drawer(v-model="openDrawer" absolute width="160px")
     template(#html).
       &lt;w-card
         class="ma6 grow text-center"
-        bg-color="amber-light5"
+        bg-color="{{ $store.state.darkMode ? 'grey-dark6' : 'amber-light5' }}"
         title="w-card"&gt;
         &lt;w-button class="my12" @click="openDrawer = true" text&gt;
           Open drawer
@@ -434,7 +434,7 @@ div
           icon="wi-cross"&gt;
         &lt;/w-button&gt;
 
-        &lt;div class="w-flex fill-height align-center justify-center"&gt;
+        &lt;div class="w-flex fill-height align-center justify-center black"&gt;
           You can customize the background color as well.
         &lt;/div&gt;
       &lt;/w-drawer&gt;
@@ -459,13 +459,13 @@ div
       bottom)
       .w-flex.pa2.align-center.wrap
         .w-flex.align-center.py1
-          w-icon.mr3(xl) wi-info-circle
-          span.grey-dark3.
+          w-icon.mr3(xl) mdi mdi-cookie
+          span(:class="$store.state.darkMode ? 'grey-light4' : 'grey-dark3'").
             Our website uses cookies to give you the best user experience.
             To continue browsing this site you must agree.
         .spacer
         w-button(sm @click="showCookieNotice = false")
-          w-icon.mr2 mdi mdi-cookie
+          w-icon.mr2 mdi mdi-check
           | I agree
     template(#pug).
       w-button(@click="showCookieNotice = true" outline).
@@ -480,13 +480,13 @@ div
         bottom)
         w-flex.pa2(align-center wrap)
           w-flex.py1(align-center)
-            w-icon.mr3(xl) wi-info-circle
-            span.grey-dark3.
+            w-icon.mr3(xl) mdi mdi-cookie
+            span.{{ $store.state.darkMode ? 'grey-light4' : 'grey-dark3' }}.
               Our website uses cookies to give you the best user experience.
               To continue browsing this site you must agree.
           .spacer
           w-button(sm @click="showCookieNotice = false")
-            w-icon.mr2 mdi mdi-cookie
+            w-icon.mr2 mdi mdi-check
             | I agree
     template(#html).
       &lt;w-button
@@ -505,16 +505,16 @@ div
         &lt;div class="w-flex pa2 align-center wrap"&gt;
           &lt;div class="w-flex align-center"&gt;
             &lt;w-icon class="mr3" xl&gt;
-              wi-info-circle
+              mdi mdi-cookie
             &lt;/w-icon&gt;
-              &lt;span class="grey-dark3"&gt;
+              &lt;span class="{{ $store.state.darkMode ? 'grey-light4' : 'grey-dark3' }}"&gt;
               Our website uses cookies to give you the best user experience.
               To continue browsing this site you must agree.
             &lt;/span&gt;
           &lt;/div&gt;
           &lt;div class="spacer" /&gt;
           &lt;w-button sm @click="showCookieNotice = false"&gt;
-            &lt;w-icon class="mr2"&gt;mdi mdi-cookie&lt;/w-icon&gt;
+            &lt;w-icon class="mr2"&gt;mdi mdi-check&lt;/w-icon&gt;
             I agree
           &lt;/w-button&gt;
         &lt;/div&gt;
@@ -600,7 +600,7 @@ div
       absolute
       round
       icon="wi-cross")
-    .w-flex.fill-height.align-center.justify-center You can customize the background color as well.
+    .w-flex.fill-height.align-center.justify-center.black You can customize the background color as well.
 </template>
 
 <script>

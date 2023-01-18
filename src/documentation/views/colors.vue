@@ -98,9 +98,7 @@ main
   title-link.mt12.mb4.w-flex.align-center(h2 slug="color-palette")
     | Color Palette
     w-button.ml6(
-      bg-color="primary"
       sm
-      dark
       @click.prevent="horizontal = !horizontal")
       | {{ horizontal ? 'Vertical' : 'Horizontal' }} display
   p.

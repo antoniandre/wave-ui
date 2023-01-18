@@ -1,11 +1,13 @@
+[data-theme="dark"] {
+  :root {
+    --header-waves-pattern: rgba(73, 123, 162, 0.2);
+  }
+}
+
 .w-app.theme--dark {
   // Colors.
   // ------------------------------------------------------
   $primary: #8fd4ff;
-
-  // Header & Toolbar.
-  // ------------------------------------------------------
-  header {background-image: url('@/assets/wave-pattern-dark.svg');}
 
   // Main menu.
   // ------------------------------------------------------
@@ -36,7 +38,7 @@
     background-color: rgba(130, 130, 130, 0.2);
     color: #ff6363;
   }
-  .code:not(.inherit):not(.primary):not(.contrast-color) {color: rgb(var(--w-base-color-rgb));}
+  .code:not(.inherit):not(.primary):not(.contrast-color):not(.amber-dark3) {color: rgb(var(--w-base-color-rgb));}
   .ssh-pre {
     border-color: rgba(var(--w-base-color-rgb), 0.06);
     background-color: rgba(#000, 0.3);
@@ -60,7 +62,7 @@
 
   // Alerts.
   // ------------------------------------------------------
-  .w-alert--docs {color: rgba(var(--w-base-color-rgb), 0.8) !important;}
+  // .w-alert.w-alert--docs {color: rgba(var(--w-base-color-rgb), 0.8) !important;}
   .w-alert--docs.alert--info {background-color: rgba(0, 183, 255, 0.15);}
   .w-alert--docs.alert--tip {background-color: rgba(135, 128, 65, 0.4);}
   .w-alert--docs.alert--error {background-color: rgba(177, 64, 64, 0.4);}
@@ -102,8 +104,6 @@
       border-radius: 99em;
       padding: 0 6px;
       display: flex;
-
-      .code {color: #444;}
     }
   }
 
