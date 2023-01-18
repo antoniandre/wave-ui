@@ -934,7 +934,7 @@ div
 
   //- OTHER TYPES.
   title-link(h2) Types
-  p The default type is "#[span.code text]" but the types bellow are also supported.
+  p The default type is "#[span.code text]" but the types below are also supported.
   p.
     On desktop you will not notice the difference between the fields #[span.code email], #[span.code tel],
     #[span.code url], and the default text type. But on touch devices, the keyboard is adapted to the
@@ -1061,7 +1061,7 @@ div
         &lt;/li&gt;
 
   h3 Other types of inputs
-  p For all the other types of input listed bellow, a specific Wave UI component should be used instead:
+  p For all the other types of input listed below, a specific Wave UI component should be used instead:
   ul.other-input-types
     li.mt1
       span.code.mr2 type="button"

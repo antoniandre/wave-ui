@@ -3,7 +3,7 @@ main
   title-link.mt4(h1) Colors
   p.
     Wave UI colors work in a very simple way: for instance the class
-    #[code pink] (or any color listed bellow) can be applied to any
+    #[code pink] (or any color listed below) can be applied to any
     element's text, and the class #[code pink--bg] can be applied to
     any element's background.
 
@@ -59,7 +59,7 @@ main
   title-link(h2 slug="primary-secondary-and-your-own-colors-and-shades")
     | #[span.code.inherit primary], #[span.code.inherit secondary] and your own colors &amp; shades
   p.
-    In addition to the built-in status colors and color palette bellow, you can define a set
+    In addition to the built-in status colors and color palette below, you can define a set
     of custom colors.#[br]
     The primary color, and whichever color you add, will also be computed to 6 different shades:
     3 lighter ones and 3 darker ones.#[br]

@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   title-link(h2) Horizontal
-  p This horizontal line bellow is a divider.
+  p This horizontal line below is a divider.
 
   w-divider.mt3.mb8
 

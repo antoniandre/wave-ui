@@ -34,7 +34,7 @@ div
       | That's enough
       p.body.
         you can let the #[span.code w-form] component do the rest!#[br]
-        But you might want more options, discover them in the examples bellow.
+        But you might want more options, discover them in the examples below.
 
   alert(tip)
     strong As of version 1.14.4
