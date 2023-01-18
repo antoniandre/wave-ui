@@ -6,14 +6,14 @@ main
     You can use these classes on any component and any DOM element, even if the element is not part of
     Wave UI.#[br]
   alert(tip).
-    The following offered classes are targetting the common use cases: there isn't a CSS class for
+    The following offered classes are targeting the common use cases: there isn't a CSS class for
     anything you want to accomplish. It's of course a trade-off to keep the library lean.#[br]
     That being said, it's very easy to add your own classes based on the same principle in your CSS!
 
   title-link(h2) Shadows
   p.
     Element shadows range from #[code -6] to #[code 6]. Negative values will produce an inset shadow,
-    whereas positive values will produce an outter drop shodow. #[code .sh0] will remove any shadow.
+    whereas positive values will produce an outer drop shadow. #[code .sh0] will remove any shadow.
   example
     .w-flex.wrap
       .box.blue-light5--bg.ma4.d-flex.align-center.justify-center(
