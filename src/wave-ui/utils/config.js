@@ -11,7 +11,7 @@ const config = Vue.observable({
   },
   css: {
     // Generate shades for custom colors and status colors.
-    // Palette color shades are always generated with palette.
+    // Note: the color palette shades are always generated separately from SCSS.
     colorShades: true,
 
     // Generate palette colors and palette color shades.
@@ -27,10 +27,10 @@ const config = Vue.observable({
   colors: {
     primary: '#234781',
     secondary: '#d3ebff',
-    success: '#54b946',
-    error: '#f65555',
+    info: '#3d9ff5',
     warning: '#f80',
-    info: '#3d9ff5'
+    success: '#54b946',
+    error: '#f65555'
   },
   icons: [],
   iconsLigature: false,
@@ -49,4 +49,5 @@ export const mergeConfig = (options, conf = config) => {
     if (typeof option === 'object') mergeConfig(options[key], conf[key])
     else conf[key] = option
   }
+  return conf
 }

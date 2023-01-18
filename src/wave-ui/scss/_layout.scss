@@ -170,7 +170,7 @@
 
     // Sizes.
     // ----------------------------------------------
-    // In all the sizes bellow, round(x / 2) * 2 to always have even numbers.
+    // In all the sizes below, round(x / 2) * 2 to always have even numbers.
     // Different heights with a mix of odd and even numbers will misalign
     // when vertically centering (vertical-align or align-items center).
     .size--xs {font-size: round(0.85 * $base-font-size);}

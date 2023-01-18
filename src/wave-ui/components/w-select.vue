@@ -525,7 +525,7 @@ export default {
     top: 50%;
     left: 0;
     right: 0;
-    // Use margin instead of padding as the scale transformation bellow decreases the real padding
+    // Use margin instead of padding as the scale transformation below decreases the real padding
     // size and misaligns the label.
     margin-left: 2 * $base-increment;
     transform: translateY(-50%);
