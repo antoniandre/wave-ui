@@ -15,18 +15,19 @@ $theme-light: (
   contrast-bg-color-rgb: (0, 0, 0), // #000.
   contrast-color-rgb: (255, 255, 255), // #fff.
   disabled-color-rgb: (204, 204, 204), // #ccc.
-
 ) !default;
+
 $theme-dark: (
   base-bg-color-rgb: (34, 34, 34), // #222.
   base-color-rgb: (255, 255, 255), // #fff.
   contrast-bg-color-rgb: (255, 255, 255), // #fff.
   contrast-color-rgb: (0, 0, 0), // #000.
   disabled-color-rgb: (74, 74, 74), // #4a4a4a.
-
 ) !default;
 
 // These variables are filled up with the current theme colors for you to use.
+$primary: var(--w-primary-color);
+$secondary: var(--w-secondary-color);
 $base-bg-color: rgb(var(--w-base-bg-color-rgb));
 $base-color: rgb(var(--w-base-color-rgb));
 $contrast-bg-color: rgb(var(--w-contrast-bg-color-rgb));

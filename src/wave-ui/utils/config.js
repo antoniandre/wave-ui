@@ -10,7 +10,7 @@ const config = reactive({
   },
   css: {
     // Generate shades for custom colors and status colors.
-    // Palette color shades are always generated with palette.
+    // Note: the color palette shades are always generated separately from SCSS.
     colorShades: true,
 
     // Generate palette colors and palette color shades.
@@ -28,18 +28,18 @@ const config = reactive({
     light: {
       primary: '#234781',
       secondary: '#d3ebff',
-      success: '#54b946',
-      error: '#f65555',
+      info: '#3d9ff5',
       warning: '#f80',
-      info: '#3d9ff5'
+      success: '#54b946',
+      error: '#f65555'
     },
     dark: {
       primary: '#89b6d2',
       secondary: '#375b6a',
-      success: '#54b946',
-      error: '#f65555',
+      info: '#3d9ff5',
       warning: '#f80',
-      info: '#3d9ff5'
+      success: '#54b946',
+      error: '#f65555'
     }
   },
   // The initial theme to use.
@@ -62,4 +62,5 @@ export const mergeConfig = (options, conf = config) => {
     if (typeof option === 'object') mergeConfig(options[key], conf[key])
     else conf[key] = option
   }
+  return conf
 }
