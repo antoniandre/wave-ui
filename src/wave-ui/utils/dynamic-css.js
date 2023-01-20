@@ -248,11 +248,13 @@ const getBreakpoint = $waveui => {
       width
     }
   }
+
+  $waveui.breakpoint.width = window.innerWidth
 }
 
 // Should run on first mounted hook.
-export const injectCSSInDOM = WaveUI => {
-  const { config } = WaveUI
+export const injectCSSInDOM = $waveui => {
+  const { config } = $waveui
   breakpointsDef = { keys: Object.keys(config.breakpoints), values: Object.values(config.breakpoints) }
 
   // Inject global dynamic CSS classes in document head.
@@ -266,8 +268,8 @@ export const injectCSSInDOM = WaveUI => {
     else document.head.appendChild(css)
   }
 
-  getBreakpoint(WaveUI)
-  window.addEventListener('resize', () => getBreakpoint(WaveUI))
+  getBreakpoint($waveui)
+  window.addEventListener('resize', () => getBreakpoint($waveui))
 }
 
 export const addColorsStylesheetToDOM = config => {
