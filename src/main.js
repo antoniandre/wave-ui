@@ -14,26 +14,27 @@ import Example from '@/documentation/components/example/index.vue'
 import Alert from '@/documentation/components/alert.vue'
 import Api from '@/documentation/components/api.vue'
 
-const app = createApp(App).use(router).use(store)
-
-// eslint-disable-next-line no-new
-new WaveUI(app, {
-  colors: {
-    light: {
-      primary: '#234781',
-      secondary: '#d3ebff'
+const app = createApp(App)
+app
+  .use(router)
+  .use(store)
+  .use(WaveUI, {
+    colors: {
+      light: {
+        primary: '#234781',
+        secondary: '#d3ebff'
+      },
+      dark: {
+        primary: '#7fb0cf',
+        secondary: '#d3ebff'
+      }
     },
-    dark: {
-      primary: '#7fb0cf',
-      secondary: '#d3ebff'
+    theme: 'dark',
+    presets: {
+      // @todo.
+      // 'w-button': {}
     }
-  },
-  theme: 'dark',
-  presets: {
-    // @todo.
-    // 'w-button': {}
-  }
-})
+  })
 
 app.component('ssh-pre', SshPre)
 app.component('title-link', TitleLink)
