@@ -1,5 +1,5 @@
 import { reactive, inject } from 'vue'
-import config, { mergeConfig } from './utils/config'
+import { mergeConfig } from './utils/config'
 import NotificationManager from './utils/notification-manager'
 import { colorPalette, generateColorShades, flattenColors } from './utils/colors'
 import { addColorsStylesheetToDOM, injectCSSInDOM } from './utils/dynamic-css'
@@ -13,8 +13,7 @@ let notificationManager = null
 let mounted = false
 
 export default class WaveUI {
-  static instance = null
-  static vueInstance = null // Needed until constructor is called.
+  static #registered = false
   // #notificationManager
 
   // Public breakpoint object. Accessible from this.$waveui.breakpoint.
@@ -24,7 +23,8 @@ export default class WaveUI {
     sm: false,
     md: false,
     lg: false,
-    xl: false
+    xl: false,
+    width: null
   }
 
   // Store and expose the config and colors in the $waveui object.
@@ -60,47 +60,48 @@ export default class WaveUI {
       mounted () {
         if (!mounted) {
           mounted = true
-          addColorsStylesheetToDOM(WaveUI.instance.config)
-          injectCSSInDOM(WaveUI.instance)
+          const $waveui = inject('$waveui')
+          addColorsStylesheetToDOM($waveui.config)
+          injectCSSInDOM($waveui)
           app._context.mixins.find(mixin => mixin.mounted && delete mixin.mounted) // So this mixin has never existed.
         }
       }
     })
 
-    WaveUI.registered = true
+    new WaveUI(app, options)
+    WaveUI.#registered = true
   }
 
-  // Singleton.
   constructor (app, options = {}) {
-    if (WaveUI.instance) return WaveUI.instance
-
-    else {
-      if (!WaveUI.registered) app.use(WaveUI)
-      notificationManager = reactive(new NotificationManager())
-
-      if (!options.theme) options.theme = 'light'
-      // Move colors inside a theme if there are option.colors without theme.
-      // E.g. colors: { primary, ... } & not colors: { light { primary, ... }, dark: { primary, ... } })
-      const colors = { ...options.colors }
-      if (!options?.colors?.light) options.colors.light = colors
-      if (!options?.colors?.dark) options.colors.dark = colors
-      // Cleanup anything else than themes in config.colors.
-      options.colors = { light: options.colors.light, dark: options.colors.dark }
-
-      // Merge user options into the default config.
-      this.config = mergeConfig(options)
-
-      // Generates color shades for each color of each theme and store in the config.colors object.
-      generateColorShades(this.config)
-      this.colors = flattenColors(this.config, colorPalette)
-
-      this.notify = (...args) => notificationManager.notify(...args)
-      WaveUI.instance = this
-
-      // Make waveui reactive and expose the single instance in Vue.
-      app.config.globalProperties.$waveui = reactive(this)
-      app.provide('$waveui', WaveUI.instance)
+    if (WaveUI.#registered) {
+      console.warn('Wave UI is already instantiated.')
+      return
     }
+
+    notificationManager = reactive(new NotificationManager())
+
+    if (!options.theme) options.theme = 'light'
+    // Move colors inside a theme if there are option.colors without theme.
+    // E.g. colors: { primary, ... } & not colors: { light { primary, ... }, dark: { primary, ... } })
+    const colors = { ...options.colors }
+    if (!options?.colors?.light) options.colors.light = colors
+    if (!options?.colors?.dark) options.colors.dark = colors
+    // Cleanup anything else than themes in config.colors.
+    options.colors = { light: options.colors.light, dark: options.colors.dark }
+
+    // Merge user options into the default config.
+    const { components, ...config } = options
+    this.config = mergeConfig(config)
+
+    // Generates color shades for each color of each theme and store in the config.colors object.
+    generateColorShades(this.config)
+    this.colors = flattenColors(this.config, colorPalette)
+
+    this.notify = (...args) => notificationManager.notify(...args)
+
+    // Make Wave UI reactive and expose the single instance in the app.
+    app.config.globalProperties.$waveui = reactive(this)
+    app.provide('$waveui', app.config.globalProperties.$waveui)
   }
 
   notify (...args) {
