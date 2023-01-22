@@ -64,6 +64,7 @@ export default {
     background-color: transparent;
     border: none;
     color: #aaa;
+    z-index: 1;
   }
 
   .ssh-pre__copy {
@@ -71,6 +72,17 @@ export default {
     background: none;
     top: 1px;
     right: 1px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      right: -1px;
+      bottom: 6px;
+      width: 4.2em;
+      backdrop-filter: blur(3px);
+      border-radius: 99em;
+    }
 
     .w-icon {
       width: 24px;
