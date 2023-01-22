@@ -14,6 +14,7 @@
   background-color: rgb(var(--w-base-bg-color-rgb));
   color: rgb(var(--w-base-color-rgb));
 }
+
 :root[data-theme="dark"] {
   --w-base-bg-color-rgb: #{map.get($theme-dark, 'base-bg-color-rgb')};
   --w-base-color-rgb: #{map.get($theme-dark, 'base-color-rgb')};
