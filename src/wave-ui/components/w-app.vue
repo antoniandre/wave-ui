@@ -25,10 +25,6 @@ export default {
 
   components: { NotificationManager },
 
-  data: () => ({
-    notifManager: null
-  }),
-
   computed: {
     classes () {
       return {

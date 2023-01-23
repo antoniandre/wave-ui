@@ -3,18 +3,12 @@ import { mergeConfig } from './utils/config'
 import NotificationManager from './utils/notification-manager'
 import { colorPalette, generateColorShades, flattenColors } from './utils/colors'
 import { addColorsStylesheetToDOM, injectCSSInDOM } from './utils/dynamic-css'
-// import * as directives from './directives'
 
-// Keep the notification manager private.
-// @todo: find a way to use private fields with Vue 3 proxies.
-// https://github.com/tc39/proposal-class-fields/issues/106
-// https://github.com/tc39/proposal-class-fields/issues/227
-let notificationManager = null
 let mounted = false
 
 export default class WaveUI {
   static #registered = false
-  // #notificationManager
+  _notificationManager = null
 
   // Public breakpoint object. Accessible from this.$waveui.breakpoint.
   breakpoint = {
@@ -78,14 +72,14 @@ export default class WaveUI {
       return
     }
 
-    notificationManager = reactive(new NotificationManager())
+    this._notificationManager = new NotificationManager()
 
     if (!options.theme) options.theme = 'light'
     // Move colors inside a theme if there are option.colors without theme.
     // E.g. colors: { primary, ... } & not colors: { light { primary, ... }, dark: { primary, ... } })
     const colors = { ...options.colors }
-    if (!options?.colors?.light) options.colors.light = colors
-    if (!options?.colors?.dark) options.colors.dark = colors
+    if (!options.colors?.light) options.colors.light = colors
+    if (!options.colors?.dark) options.colors.dark = colors
     // Cleanup anything else than themes in config.colors.
     options.colors = { light: options.colors.light, dark: options.colors.dark }
 
@@ -97,17 +91,17 @@ export default class WaveUI {
     generateColorShades(this.config)
     this.colors = flattenColors(this.config, colorPalette)
 
-    this.notify = (...args) => notificationManager.notify(...args)
-
     // Make Wave UI reactive and expose the single instance in the app.
     app.config.globalProperties.$waveui = reactive(this)
     app.provide('$waveui', app.config.globalProperties.$waveui)
   }
 
+  // Callable from this.$waveui.
   notify (...args) {
-    notificationManager.notify(...args)
+    this._notificationManager.notify(...args)
   }
 
+  // Callable from this.$waveui.
   switchTheme (theme) {
     this.config.theme = theme
     document.documentElement.setAttribute('data-theme', theme)

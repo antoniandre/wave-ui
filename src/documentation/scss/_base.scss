@@ -8,6 +8,7 @@ a {color: $links;}
 
 ul, ol {margin-left: 4 * $base-increment + 2px;}
 .w-list--icon .w-list__item-bullet {color: green;}
+.w-list--icon .w-list__item-bullet.wi-minus {color: rgb(213, 117, 0);}
 
 p {margin-bottom: 2 * $base-increment;}
 

@@ -1,4 +1,4 @@
-export const shadeColor = (color, amount) => {
+const shadeColor = (color, amount) => {
   return '#' + color.slice(1).match(/../g)
     .map(x => {
       x = +`0x${x}` + amount
