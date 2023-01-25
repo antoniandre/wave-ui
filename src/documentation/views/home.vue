@@ -1,5 +1,5 @@
 <template lang="pug">
-w-app.home(:dark="$store.state.darkMode")
+.home
   .home__header
     .header__content
       h1
@@ -281,7 +281,8 @@ export default {
   },
 
   mounted () {
-    this.$store.dispatch('detectDarkMode')
+    const darkMode = this.$store.dispatch('detectDarkMode')
+    this.$waveui.switchTheme(darkMode ? 'dark' : 'light')
     setTimeout(this.initScrollAnimation, 200)
   },
 
