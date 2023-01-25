@@ -58,13 +58,13 @@ caption,
 
   // HOME.
   // ======================================================
-  &.home {
+  .home {
     .section--2 {
       background: linear-gradient(to bottom, rgba(#000, 0.18) 0%, rgba(#fff, 0) 100%);
 
       > svg {fill: rgba(#000, 0.18);}
 
-      .w-accordion__item {
+      .card--3 .w-accordion__item {
         background-image: linear-gradient(-205deg, #364049, #101518);
       }
     }
