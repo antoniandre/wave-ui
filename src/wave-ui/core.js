@@ -1,6 +1,6 @@
 import { reactive, inject } from 'vue'
 import { mergeConfig } from './utils/config'
-import NotificationManager from './utils/notification-manager'
+import { injectNotifManagerInDOM, NotificationManager } from './utils/notification-manager'
 import { colorPalette, generateColorShades, flattenColors } from './utils/colors'
 import { injectColorsCSSInDOM, injectCSSInDOM } from './utils/dynamic-css'
 import './scss/index.scss'
@@ -63,6 +63,7 @@ export default class WaveUI {
 
           injectColorsCSSInDOM($waveui.config)
           injectCSSInDOM($waveui)
+          injectNotifManagerInDOM(wApp, components, $waveui)
 
           // This mixin must only run once, we can delete it.
           app._context.mixins.find(mixin => mixin.mounted && delete mixin.mounted)

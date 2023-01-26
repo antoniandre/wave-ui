@@ -1,36 +1,31 @@
 <template lang="pug">
-transition-group(
-  tag="div"
-  class="w-notification-manager"
-  :class="{ 'w-notification-manager--left': conf.align === 'left' }"
-  :name="transition"
-  appear)
-  template(v-for="notif in notifications")
-    w-alert.white--bg(
-      v-if="notif._value"
-      :key="notif._uid"
-      v-model="notif._value"
-      @close="notifManager.dismiss(notif._uid)"
-      v-bind="notifProps(notif)")
-      div(v-html="notif.message")
+teleport(to=".w-app")
+  transition-group(
+    tag="div"
+    class="w-notification-manager"
+    :class="{ 'w-notification-manager--left': conf.align === 'left' }"
+    :name="transition"
+    appear)
+    template(v-for="notif in notifications")
+      w-alert.white--bg(
+        v-if="notif._value"
+        :key="notif._uid"
+        v-model="notif._value"
+        @close="notif.dismiss"
+        v-bind="notifProps(notif)")
+        div(v-html="notif.message")
 </template>
 
 <script>
-import NotificationManager from '../utils/notification-manager'
-
 export default {
   name: 'w-notification-manager',
-
-  data: () => ({
-    notifManager: null
-  }),
 
   computed: {
     conf () {
       return this.$waveui.config.notificationManager
     },
     notifications () {
-      return this.notifManager?.notifications || []
+      return this.$waveui._notificationManager?.notifications
     },
     // Possible transitions: slide-fade-down, slide-fade-left, slide-fade-right,
     // slide-left, slide-right, bounce, twist, fade, scale, scale-fade.
@@ -44,17 +39,10 @@ export default {
   methods: {
     notifProps (notif) {
       const { _value, _uid, message, timeout, ...props } = notif
+      // Replace the dismiss function with bool as expected from the w-alert component.
+      if (props.dismiss) props.dismiss = true
       return props
     }
-  },
-
-  created () {
-    this.notifManager = new NotificationManager()
-  },
-
-  beforeUnmount () {
-    this.notifManager.notifications = []
-    delete this.notifManager
   }
 }
 </script>

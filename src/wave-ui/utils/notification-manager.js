@@ -1,8 +1,11 @@
+import { createApp, defineComponent } from 'vue'
+import WNotificationManager from '../components/w-notification-manager.vue'
+
 // @todo: find a way to use private fields with Vue 3 proxies.
 // https://github.com/tc39/proposal-class-fields/issues/106
 // https://github.com/tc39/proposal-class-fields/issues/227
 
-export default class NotificationManager {
+export class NotificationManager {
   static instance
   notifications
    // Private fields.
@@ -26,7 +29,10 @@ export default class NotificationManager {
   }
 
   notify (...args) {
-    let notification = { ...this._notificationDefaults, _uid: this._uid++ }
+    let notification = {
+      ...this._notificationDefaults,
+      _uid: this._uid++
+    }
 
     if (typeof args[0] === 'object') notification = { ...notification, ...args[0] }
     else {
@@ -38,6 +44,10 @@ export default class NotificationManager {
         timeout: timeout || timeout === 0 ? parseFloat(timeout) : 4000
       }
     }
+
+    // Allow calling notification.dismiss().
+    if (notification.dismiss) notification.dismiss = () => this.dismiss(notification._uid)
+
     this.notifications.push(notification)
     if (~~notification.timeout !== 0) setTimeout(() => this.dismiss(notification._uid), notification.timeout)
   }
@@ -45,4 +55,29 @@ export default class NotificationManager {
   dismiss (uid) {
     this.notifications = this.notifications.filter(item => item._uid !== uid)
   }
+}
+
+/**
+ * Injects the w-notification-manager in the DOM programmatically so the user does not have to do it.
+ *
+ * @param {Object} wApp The DOM element where to mount the w-notification-manager.
+ * @param {Object} components All the Wave UI components to provide to the w-notification-manager,
+ *                            so it can also use them.
+ * @param {Object} $waveui the injected reactive instance of the WaveUI class.
+ */
+export const injectNotifManagerInDOM = (wApp, components, $waveui) => {
+  const div = document.createElement('div')
+  wApp.appendChild(div)
+
+  const WNotifManager = createApp(defineComponent({
+    ...WNotificationManager,
+    inject: ['$waveui']
+  })).provide('$waveui', $waveui)
+
+  for (const id in components) {
+    const component = components[id]
+    WNotifManager.component(component.name, { ...component, inject: ['$waveui'] })
+  }
+  WNotifManager.mount(div)
+  div.remove() // The WNotificationManager contains a teleport to .w-app.
 }
