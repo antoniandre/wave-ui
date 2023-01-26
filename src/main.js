@@ -19,6 +19,7 @@ app
   .use(router)
   .use(store)
   .use(WaveUI, {
+    on: '#app',
     colors: {
       light: {
         primary: '#234781',

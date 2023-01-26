@@ -1,6 +1,7 @@
 import { reactive } from 'vue'
 
 const config = reactive({
+  on: '#app',
   breakpoints: {
     xs: 600,
     sm: 900,
