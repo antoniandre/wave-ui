@@ -26,16 +26,34 @@ main
       strong.version v3.0.0
       ul
         li
+          strong.code New core
+          ul
+            li.text-bold New way to use Wave UI, more straightforward, more Vue 3 way, facilitating the use in composition API.
+            li New useWaveUI method for composition API.
+            li $waveui.breakpoint.width always up to date
+      ul
+        li
           strong.code Theming (light &amp; dark)
           ul
             li Every component is now completely themeable, all at once, or individually.
             li Added a lot more color variables in the SCSS variables file for more granular control.
             li All the default colors are now dynamically computed with the user theme preference using CSS3 variables.
+            li New easy method to switch theme #[code="this.$waveui.switchTheme(['dark'|'light'])"]
       ul
         li
           strong.code w-card
           ul
             li allow HTML in card title.
+      ul
+        li
+          strong.code w-alert
+          ul
+            li Emitted event #[code @close] is renamed #[code @dismiss].
+      ul
+        li
+          strong.code Dropping the #[strong.code w-app] component
+          ul
+            li The #[strong.code w-app] component is no longer needed! Wave UI will do all the work for you.
 
     li.patch
       strong.version v2.48.0
