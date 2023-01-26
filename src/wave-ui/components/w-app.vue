@@ -1,12 +1,9 @@
 <template lang="pug">
-.w-app(:class="classes")
+.w-app
   slot
-  notification-manager
 </template>
 
 <script>
-import NotificationManager from './w-notification-manager.vue'
-
 export default {
   name: 'w-app',
   props: {
@@ -21,26 +18,6 @@ export default {
     justifySpaceEvenly: { type: Boolean },
     textCenter: { type: Boolean },
     textRight: { type: Boolean }
-  },
-
-  components: { NotificationManager },
-
-  computed: {
-    classes () {
-      return {
-        'd-block': this.block,
-        row: this.row,
-        'align-center': this.alignCenter,
-        'align-end': this.alignEnd,
-        'justify-center': this.justifyCenter,
-        'justify-end': this.justifyEnd,
-        'justify-space-between': this.justifySpaceBetween,
-        'justify-space-around': this.justifySpaceAround,
-        'justify-space-evenly': this.justifySpaceEvenly,
-        'text-center': this.textCenter,
-        'text-right': this.textRight
-      }
-    }
   }
 }
 </script>

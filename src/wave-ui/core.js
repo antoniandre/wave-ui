@@ -2,7 +2,8 @@ import { reactive, inject } from 'vue'
 import { mergeConfig } from './utils/config'
 import NotificationManager from './utils/notification-manager'
 import { colorPalette, generateColorShades, flattenColors } from './utils/colors'
-import { addColorsStylesheetToDOM, injectCSSInDOM } from './utils/dynamic-css'
+import { injectColorsCSSInDOM, injectCSSInDOM } from './utils/dynamic-css'
+import './scss/index.scss'
 
 let mounted = false
 
@@ -55,9 +56,16 @@ export default class WaveUI {
         if (!mounted) {
           mounted = true
           const $waveui = inject('$waveui')
-          addColorsStylesheetToDOM($waveui.config)
+
+          // Add the .w-app class where defined by user or at the root.
+          const wApp = document.querySelector($waveui.config.on) || document.documentElement
+          wApp.classList.add('w-app')
+
+          injectColorsCSSInDOM($waveui.config)
           injectCSSInDOM($waveui)
-          app._context.mixins.find(mixin => mixin.mounted && delete mixin.mounted) // So this mixin has never existed.
+
+          // This mixin must only run once, we can delete it.
+          app._context.mixins.find(mixin => mixin.mounted && delete mixin.mounted)
         }
       }
     })
@@ -106,7 +114,7 @@ export default class WaveUI {
     this.config.theme = theme
     document.documentElement.setAttribute('data-theme', theme)
     document.head.querySelector('#wave-ui-colors')?.remove?.()
-    addColorsStylesheetToDOM(this.config)
+    injectColorsCSSInDOM(this.config)
   }
 }
 

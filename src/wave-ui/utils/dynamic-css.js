@@ -272,7 +272,7 @@ export const injectCSSInDOM = $waveui => {
   window.addEventListener('resize', () => getBreakpoint($waveui))
 }
 
-export const addColorsStylesheetToDOM = config => {
+export const injectColorsCSSInDOM = config => {
   // Inject global dynamic CSS classes in document head.
   if (!document.getElementById('wave-ui-colors')) {
     const css = document.createElement('style')
