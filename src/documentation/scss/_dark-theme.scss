@@ -1,44 +1,48 @@
 // Global theming rules.
 // ======================================================
-:root,
-.home .section--2,
-.home .section--2 > svg,
-.home .section--2 .w-accordion__item,
-.home .section--3,
-.main-toolbar,
-header svg,
-h1, h2,
-code,
-.code,
-.ssh-pre,
-kbd,
-.title-link,
-.title-link .hash,
-.w-alert--docs,
-.example,
-.example .buttons,
-.common-layouts legend,
-.transition-box,
-.transition-box .amber-light4--bg,
-.main--layout-grid-system legend.round,
-.hue-on-dark .example__render *,
-.w-alert__content .black,
-.main--w-list-item .blue-light5--bg,
-.main--shadows-borders-radii .example .orange-light5--bg,
-.main--layout-flex .example .yellow-light5--bg,
-.main--layout-flex .lighter .box,
-.main--layout-flex .wrapper,
-.main--layout-flex .wrapper2,
-.main--layout-simplified-grid-system .wrapper,
-.sliding-card,
-.main--layout-flex .lighter .box,
-.main--layout-simplified-grid-system .box,
-.main--shadows-borders-radii .box,
-.main--release-notes .history,
-caption,
-.primary--bg,
-.primary {
-  @include theme-switch-transition;
+[data-theme] {
+  &:root,
+  .home .section--2,
+  .home .section--2 > svg,
+  .home .section--2 .w-accordion__item,
+  .home .section--3,
+  .main-toolbar,
+  header svg,
+  h1, h2,
+  code,
+  .code,
+  .ssh-pre,
+  kbd,
+  .title-link,
+  .title-link .hash,
+  .w-alert--docs,
+  .example,
+  .example .buttons,
+  .common-layouts legend,
+  .transition-box,
+  .transition-box .amber-light4--bg,
+  .main--layout-grid-system legend.round,
+  .hue-on-dark .example__render *,
+  .w-alert__content .black,
+  .main--w-list-item .blue-light5--bg,
+  .main--shadows-borders-radii .example .orange-light5--bg,
+  .main--layout-flex .example .yellow-light5--bg,
+  .main--layout-flex .lighter .box,
+  .main--layout-flex .wrapper,
+  .main--layout-flex .wrapper2,
+  .main--layout-simplified-grid-system .wrapper,
+  .sliding-card,
+  .main--layout-flex .lighter .box,
+  .main--layout-simplified-grid-system .box,
+  .main--shadows-borders-radii .box,
+  .main--release-notes .history,
+  .main--getting-started .w-accordion__item-content,
+  .main--getting-started .w-accordion__item-title,
+  caption,
+  .primary--bg,
+  .primary {
+    @include theme-switch-transition;
+  }
 }
 
 .nav-menu-wrap {transition: border-color $theme-switch-transition;}
@@ -47,11 +51,19 @@ caption,
 
 // Dark theme.
 // ======================================================
-[data-theme="dark"] {
+// Dark mode detection.
+// --------------------------------------------------------
+// In dark theme, prevent the first above transition from white bg to dark by originally setting
+// the bg to dark from this media query.
+@media (prefers-color-scheme: dark) {
   :root {
-    --header-waves-pattern: rgba(73, 123, 162, 0.2);
+    --w-base-color-rgb: #fff;
+    --w-base-bg-color-rgb: 34, 34, 34;
   }
+}
+// --------------------------------------------------------
 
+[data-theme="dark"] {
   // Main menu.
   // ------------------------------------------------------
   .nav-menu-wrap {border-right-color: rgba(var(--w-base-color-rgb), 0.08);}
@@ -94,8 +106,8 @@ caption,
   kbd {
     background-color: rgba(130, 130, 130, 0.4);
     border: none;
-    color: rgba(255,255,255, 0.85);
-    box-shadow: inset -1px -1px 1px rgb(0 0 0 / 10%), inset 1px 1px 2px rgb(255 255 255 / 30%);
+    color: rgba(#fff, 0.85);
+    box-shadow: inset -1px -1px 1px rgb(0 0 0 / 10%), inset 1px 1px 2px rgba(#fff, 0.3);
   }
 
   // Title.
@@ -179,6 +191,10 @@ caption,
 
   .main--release-notes .history {
     > li:after {border-color: #333;}
+  }
+
+  .main--getting-started .w-accordion__item-content {
+    background: #262626;
   }
   // ======================================================
   // END OF DOCUMENTATION.

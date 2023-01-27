@@ -96,8 +96,8 @@ export default {
     }
   },
 
-  mounted () {
-    const darkMode = this.$store.dispatch('detectDarkMode')
+  async mounted () {
+    const darkMode = await this.$store.dispatch('detectDarkMode')
     this.$waveui.switchTheme(darkMode ? 'dark' : 'light')
 
     this.contentWrapEl = document.querySelector('.content-wrap')

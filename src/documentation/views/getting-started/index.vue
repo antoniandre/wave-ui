@@ -107,11 +107,7 @@ export default {
 .main--getting-started {
   .w-accordion__item {margin-bottom: 12px;}
   .w-accordion__item-title {border-top: none;}
-  .w-accordion__item-content {
-    background: #f7fbff;
-
-    [data-theme="dark"] & {background: #262626;}
-  }
+  .w-accordion__item-content {background: #f7fbff;}
   .w-button--icon.size--md {font-size: 20px;}
 
   .w-accordion .ssh-pre, .w-accordion em {font-size: 1rem;}
