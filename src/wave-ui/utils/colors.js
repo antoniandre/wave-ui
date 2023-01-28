@@ -14,32 +14,29 @@ const shadeColor = (color, amount) => {
  * @param {Object} config
  */
 export const generateColorShades = config => {
-  // Add color shades for each custom color and status color of the current theme.
-  if (config.css.colorShades) {
-    ['light', 'dark'].forEach(theme => {
-      const themeOfColors = config.colors[theme]
-      themeOfColors.shades = {}
+  // Add color shades for each custom color and status color of each theme.
+  ['light', 'dark'].forEach(theme => {
+    const themeOfColors = config.colors[theme]
+    themeOfColors.shades = {}
 
-      for (let color in themeOfColors) {
-        if (color === 'shades') continue // Skip if item is the `shades` container.
-        color = { label: color, color: themeOfColors[color].replace('#', '') }
-        const col = color.color
-        if (col.length === 3) color.color = col[0] + '' + col[0] + col[1] + col[1] + col[2] + col[2]
+    for (let color in themeOfColors) {
+      if (color === 'shades') continue // Skip if item is the `shades` container.
+      color = { label: color, color: themeOfColors[color].replace('#', '') }
+      const col = color.color
+      if (col.length === 3) color.color = col[0] + '' + col[0] + col[1] + col[1] + col[2] + col[2]
 
-        for (let i = 1; i <= 3; i++) {
-          const lighterColor = shadeColor(`#${color.color}`, i * 40)
-          const darkerColor = shadeColor(`#${color.color}`, -i * 40)
-          // Adding the shades to the config object to generate the CSS from w-app.
-          themeOfColors.shades[`${color.label}-light${i}`] = lighterColor
-          themeOfColors.shades[`${color.label}-dark${i}`] = darkerColor
-        }
+      for (let i = 1; i <= 3; i++) {
+        const lighterColor = shadeColor(`#${color.color}`, i * 40)
+        const darkerColor = shadeColor(`#${color.color}`, -i * 40)
+        // Adding the shades to the config object to generate the CSS from w-app.
+        themeOfColors.shades[`${color.label}-light${i}`] = lighterColor
+        themeOfColors.shades[`${color.label}-dark${i}`] = darkerColor
       }
-    })
-  }
+    }
+  })
 }
 
-export const flattenColors = (config, colorPalette) => {
-  const themeColors = config.colors[config.theme]
+export const flattenColors = (themeColors, colorPalette) => {
   const colors = {
     ...colorPalette.reduce((obj, color) => {
       obj[color.label] = color.color

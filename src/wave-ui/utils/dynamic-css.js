@@ -13,16 +13,12 @@ let currentBreakpoint = null
 // :root {[color1-variable], [color2-variable]}
 // .color1--bg {background-color: [color1-variable]}
 // .color1 {color: [color1-variable]}
-const generateColors = config => {
+const generateColors = themeColors => {
   let styles = ''
   const cssVariables = {}
 
-  // config.colors does not include the color palette.
-  // It contains status and custom colors in themes:
-  // { light: { color1, ... }, dark: { color1, ... } }
-  const themeOfColors = config.colors[config.theme]
   // Extract status colors and place them after the other colors.
-  const { info, warning, success, error, shades, ...colors } = themeOfColors
+  const { info, warning, success, error, shades, ...colors } = themeColors
   const { cssScope } = cssVars
 
   // User custom colors.
@@ -272,12 +268,12 @@ export const injectCSSInDOM = $waveui => {
   window.addEventListener('resize', () => getBreakpoint($waveui))
 }
 
-export const injectColorsCSSInDOM = config => {
+export const injectColorsCSSInDOM = themeColors => {
   // Inject global dynamic CSS classes in document head.
   if (!document.getElementById('wave-ui-colors')) {
     const css = document.createElement('style')
     css.id = 'wave-ui-colors'
-    css.innerHTML = generateColors(config)
+    css.innerHTML = generateColors(themeColors)
 
     const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
     if (firstStyle) firstStyle.before(css)

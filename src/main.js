@@ -30,7 +30,7 @@ app
         secondary: '#d3ebff'
       }
     },
-    theme: 'dark',
+    theme: 'auto',
     presets: {
       // @todo.
       // 'w-button': {}

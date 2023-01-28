@@ -6,26 +6,48 @@ import { injectColorsCSSInDOM, injectCSSInDOM } from './utils/dynamic-css'
 import './scss/index.scss'
 
 let mounted = false
+const detectOSDarkMode = $waveui => {
+  const matchMedia = window.matchMedia('(prefers-color-scheme: dark)')
+  $waveui.preferredTheme = matchMedia.matches ? 'dark' : 'light'
+
+  matchMedia.addEventListener('change', event => {
+    $waveui.preferredTheme = event.matches ? 'dark' : 'light'
+  })
+}
 
 export default class WaveUI {
   static #registered = false
   _notificationManager = null
 
-  // Public breakpoint object. Accessible from this.$waveui.breakpoint.
-  breakpoint = {
-    name: '',
-    xs: false,
-    sm: false,
-    md: false,
-    lg: false,
-    xl: false,
-    width: null
-  }
+  // Exposed as a global object and also `app.provide`d.
+  // Accessible from this.$waveui, or inject('$waveui').
+  $waveui = {
+    breakpoint: {
+      name: '',
+      xs: false,
+      sm: false,
+      md: false,
+      lg: false,
+      xl: false,
+      width: null
+    },
+    config: {},
+    colors: {}, // Object of pairs of color-name => color hex.
+    preferredTheme: null, // The user OS preferred theme (light or dark).
 
-  // Store and expose the config and colors in the $waveui object.
-  // Accessible from anywhere via `this.$waveui.config`.
-  config = {}
-  colors = {} // Object of pairs of color-name => color hex.
+    // Callable from this.$waveui.
+    notify: (...args) => {
+      this._notificationManager.notify(...args)
+    },
+
+    // Callable from this.$waveui.
+    switchTheme (theme) {
+      this.config.theme = theme
+      document.documentElement.setAttribute('data-theme', theme)
+      document.head.querySelector('#wave-ui-colors')?.remove?.()
+      injectColorsCSSInDOM(this.config.colors[this.config.theme])
+    }
+  }
 
   static install (app, options = {}) {
     // Register directives.
@@ -56,12 +78,19 @@ export default class WaveUI {
         if (!mounted) {
           mounted = true
           const $waveui = inject('$waveui')
+          const { config } = $waveui
 
           // Add the .w-app class where defined by user or at the root.
-          const wApp = document.querySelector($waveui.config.on) || document.documentElement
+          const wApp = document.querySelector(config.on) || document.documentElement
           wApp.classList.add('w-app')
 
-          injectColorsCSSInDOM($waveui.config)
+          let themeColors = config.colors[config.theme]
+          if (config.theme === 'auto') {
+            detectOSDarkMode($waveui)
+            themeColors = config.colors[$waveui.preferredTheme]
+            this.colors = flattenColors(themeColors, colorPalette)
+          }
+          injectColorsCSSInDOM(themeColors)
           injectCSSInDOM($waveui)
           injectNotifManagerInDOM(wApp, components, $waveui)
 
@@ -93,29 +122,20 @@ export default class WaveUI {
     options.colors = { light: options.colors.light, dark: options.colors.dark }
 
     // Merge user options into the default config.
-    const { components, ...config } = options
-    this.config = mergeConfig(config)
+    let { components, ...config } = options
+    config = this.$waveui.config = mergeConfig(config)
 
     // Generates color shades for each color of each theme and store in the config.colors object.
-    generateColorShades(this.config)
-    this.colors = flattenColors(this.config, colorPalette)
+    if (config.css.colorShades) generateColorShades(config)
 
     // Make Wave UI reactive and expose the single instance in the app.
-    app.config.globalProperties.$waveui = reactive(this)
-    app.provide('$waveui', app.config.globalProperties.$waveui)
-  }
+    const $waveui = reactive(this.$waveui)
+    app.config.globalProperties.$waveui = $waveui
+    app.provide('$waveui', $waveui)
 
-  // Callable from this.$waveui.
-  notify (...args) {
-    this._notificationManager.notify(...args)
-  }
-
-  // Callable from this.$waveui.
-  switchTheme (theme) {
-    this.config.theme = theme
-    document.documentElement.setAttribute('data-theme', theme)
-    document.head.querySelector('#wave-ui-colors')?.remove?.()
-    injectColorsCSSInDOM(this.config)
+    if (config.theme !== 'auto') {
+      this.$waveui.colors = flattenColors(config.colors[config.theme], colorPalette)
+    }
   }
 }
 
