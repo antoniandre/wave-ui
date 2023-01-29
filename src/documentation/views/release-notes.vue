@@ -39,6 +39,7 @@ main
             li Added a lot more color variables in the SCSS variables file for more granular control.
             li All the default colors are now dynamically computed with the user theme preference using CSS3 variables.
             li New easy method to switch theme #[code="this.$waveui.switchTheme(['dark'|'light'])"]
+            li Auto detection of the user preferred theme.
       ul
         li
           strong.code w-card
