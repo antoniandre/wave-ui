@@ -59,13 +59,23 @@ main
   w-divider.my12
   title-link(h2) Wave UI Options
   p Wave UI accepts these options:
-  w-list(:items="waveUiOptions" icon="wi-check")
-    template(#item="{ item }")
-      span {{ item.label }}
-      template(v-if="item.route")
-        span.ml1 - read on in the
-        router-link.mx1(:to="item.route") {{ item.label }}
-        | knowledge base page.
+  ul.ml3
+    li.mb4(v-for="(item, i) in waveUiOptions" :key="i")
+      code {{ item.label }}
+      | :
+      div(v-if="item.route")
+        | Read on in the
+        router-link.mx1(:to="item.route") {{ item.route.startsWith('w-') ?  item.route : item.label }}
+        | {{ item.route.startsWith('w-') ?  'component' : 'knowledge base page' }}.
+      div(v-else-if="item.definition") {{ item.definition }}
+
+  .mt6
+    w-icon.ml-1.mr1 wi-chevron-right
+    | View the
+    a.mx1(href="https://github.com/antoniandre/wave-ui/blob/main/src/wave-ui/utils/config.js" target="_blank")
+      | full list of options directly in the codebase
+      w-icon.ml2(md) mdi mdi-open-in-new
+    | .
 </template>
 
 <script>
@@ -78,9 +88,15 @@ export default {
 
   data: () => ({
     waveUiOptions: [
-      { label: 'colors', route: 'colors' },
+      { label: 'on', definition: 'Sets the Wave UI root on a custom node (expects a valid CSS selector). Default: `#app`, if not found, `body`.' },
       { label: 'breakpoints', route: 'breakpoints' },
-      { label: 'presets', route: 'customization#presets' }
+      { label: 'colors', route: 'colors' },
+      { label: 'css', definition: 'A set of CSS-related options.' },
+      { label: 'icons', route: 'w-icon' },
+      { label: 'iconsLigature', route: 'w-icon' },
+      { label: 'notificationManager', route: 'w-notification' },
+      { label: 'presets', route: 'customization#presets' },
+      { label: 'theme', definition: 'Choose which theme to use: `light` or `dark`. You can also set `auto` to let Wave UI read the preferred theme from the user OS.' }
     ],
     openPane: [true, false, false]
   }),
