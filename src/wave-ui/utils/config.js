@@ -1,7 +1,7 @@
 import { reactive } from 'vue'
 
 const config = reactive({
-  on: '#app',
+  on: '#app', // Sets the Wave UI root node. If not found, will default to `body`.
   breakpoints: {
     xs: 600,
     sm: 900,

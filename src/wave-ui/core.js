@@ -83,7 +83,7 @@ export default class WaveUI {
           const { config } = $waveui
 
           // Add the .w-app class where defined by user or at the root.
-          const wApp = document.querySelector(config.on) || document.documentElement
+          const wApp = document.querySelector(config.on) || document.body
           wApp.classList.add('w-app')
 
           let themeColors = config.colors[config.theme]
