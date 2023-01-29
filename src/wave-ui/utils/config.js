@@ -45,7 +45,7 @@ const config = reactive({
   },
   // The initial theme to use.
   // To switch theme while running, call the $waveui.switchTheme('light'|'dark') method.
-  theme: 'light', // One of 'light' or 'dark'.
+  theme: 'light', // One of 'light', 'dark', 'auto'.
   icons: [],
   iconsLigature: false,
   notificationManager: {
