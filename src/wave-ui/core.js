@@ -19,7 +19,6 @@ const detectOSDarkMode = $waveui => {
 
 export default class WaveUI {
   static #registered = false
-  _notificationManager = null
 
   // Exposed as a global object and also `app.provide`d.
   // Accessible from this.$waveui, or inject('$waveui').
@@ -36,9 +35,10 @@ export default class WaveUI {
     config: {},
     colors: {}, // Object of pairs of color-name => color hex.
     preferredTheme: null, // The user OS preferred theme (light or dark).
+    _notificationManager: null,
 
     // Callable from this.$waveui.
-    notify: (...args) => {
+    notify (...args) {
       this._notificationManager.notify(...args)
     },
 
@@ -112,7 +112,7 @@ export default class WaveUI {
       return
     }
 
-    this._notificationManager = new NotificationManager()
+    this.$waveui._notificationManager = new NotificationManager()
 
     if (!options.theme) options.theme = 'light'
     // Move colors inside a theme if there are option.colors without theme.
