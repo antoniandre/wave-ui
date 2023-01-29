@@ -1,12 +1,8 @@
 import { createApp, defineComponent } from 'vue'
 import WNotificationManager from '../components/w-notification-manager.vue'
 
-// @todo: find a way to use private fields with Vue 3 proxies.
-// https://github.com/tc39/proposal-class-fields/issues/106
-// https://github.com/tc39/proposal-class-fields/issues/227
-
 export class NotificationManager {
-  static instance
+  static #instance
   notifications
    // Private fields.
   _uid // A unique ID for each notification.
@@ -14,9 +10,8 @@ export class NotificationManager {
 
   constructor () {
     // Singleton pattern.
-    if (NotificationManager.instance) return NotificationManager.instance
+    if (NotificationManager.#instance) return NotificationManager.#instance
 
-    NotificationManager.instance = this
     this.notifications = []
     this._uid = 0
     this._notificationDefaults = {
@@ -26,6 +21,7 @@ export class NotificationManager {
       timeout: 4000,
       dismiss: true
     }
+    NotificationManager.#instance = this
   }
 
   notify (...args) {
