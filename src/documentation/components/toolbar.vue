@@ -15,26 +15,33 @@ w-toolbar.main-toolbar(fixed)
     color="grey-light6"
     append-to=".main-toolbar")
     template(#activator="{ on }")
-      w-button.mr2(
+      w-button.w-icon.mr2(
         v-on="on"
-        icon="mdi mdi-weather-night"
-        color="white"
-        bg-color="blue-dark5"
-        shadow)
-    .title2.px6.pb1 Wave UI Dark is around the corner!
+        bg-color="white"
+        color="warning"
+        outline
+        width="2.2rem"
+        height="2.2rem") 🔥
+    .title2.px6.pb1 Wave UI 3.0 is around the corner!
     .img-wrap
       img(src="@/assets/wave-ui--dark-theme.png")
-    .px6.py4
+    .px6.py6
       w-flex.title3.align-center
         | Announcing Wave UI
         w-tag.ml1.code.text-bold(round bg-color="blue-dark4" color="white") 3.0
-        | , planed for #[span.amber-dark5--bg.bdrs1.px1.mx1 release this month]!
-      p.
-        In Wave UI 3.0, you can work with 2 themes. The UI components will adapt automatically.
-      w-list(:items="3" icon="wi-check")
-        template(#item.1) Redefined components color defaults, now using CSS3 variables.
-        template(#item.2) More granular control on all the components default colors via SCSS variables.
-        template(#item.3) More great improvements shipping in, stay tuned.
+        | , planed for #[span.amber-dark5--bg.bdrs1.px1.mx1 release in a few more days]!
+      p.my4.text-bold.
+        We are working super-hard to pack amazing features in this new release!
+        If you love Wave UI, you can #[a(href="https://github.com/sponsors/antoniandre") sponsor it]!
+      p In Wave UI 3.0 release:
+      w-list(:items="7" icon="wi-check")
+        template(#item.1) New sexy dark theme for all the components.
+        template(#item.2) Automatic detection of the user preferred theme.
+        template(#item.3) New Vue 3 more intuitive installation method.
+        template(#item.4) No more #[strong.code.inherit.mx1 w-app] component required.
+        template(#item.5) Redefined components color defaults, now using CSS3 variables.
+        template(#item.6) More granular control on all the components default colors via SCSS variables.
+        template(#item.7) And more great improvements shipping in.
   strong.version.size--xs(v-html="`Version <code>${version}</code>`")
   w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
@@ -130,12 +137,16 @@ div.main-toolbar {
   .img-wrap {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 2.4;
+    aspect-ratio: 3.8;
   }
   img {
-    transform-origin: 20% 10%;
-    transform: rotate(-2deg) scale(1.1);
+    transform-origin: 20% 70%;
+    transform: scale(1.1);
     width: 100%;
+  }
+  .w-tag {
+    font-size: 0.9em;
+    padding: 1px 5px;
   }
 }
 
