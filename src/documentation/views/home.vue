@@ -280,9 +280,14 @@ export default {
     }
   },
 
+  watch: {
+    '$waveui.preferredTheme' (theme) {
+      this.$store.commit('setDarkMode', theme === 'dark')
+    }
+  },
+
   mounted () {
-    const darkMode = this.$store.dispatch('detectDarkMode')
-    this.$waveui.switchTheme(darkMode ? 'dark' : 'light')
+    this.$store.commit('setDarkMode', this.$waveui.preferredTheme === 'dark')
     setTimeout(this.initScrollAnimation, 200)
   },
 

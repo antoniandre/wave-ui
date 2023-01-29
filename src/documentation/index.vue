@@ -102,7 +102,7 @@ export default {
     }
   },
 
-  async mounted () {
+  mounted () {
     this.$store.commit('setDarkMode', this.$waveui.preferredTheme === 'dark')
 
     this.contentWrapEl = document.querySelector('.content-wrap')
