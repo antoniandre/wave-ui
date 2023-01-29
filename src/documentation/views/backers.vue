@@ -42,7 +42,7 @@ import DivRiotsLogoGrey from '@/assets/divriots-grey.svg'
 
 const githubBackers = [
   'divriots', 'nmauersberg', 'KleinSamuel', 'chris-deep', 'crbast', 'CoolGoose', 'bohdaq',
-  'consuman', 'bastien09', 'micksp', 'orefalo', 'helenetran', 'antoniandre'
+  'cordova-jauregui', 'consuman', 'bastien09', 'micksp', 'orefalo', 'helenetran', 'antoniandre'
 ]
 
 export default {

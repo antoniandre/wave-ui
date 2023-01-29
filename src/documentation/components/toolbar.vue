@@ -104,22 +104,6 @@ div.main-toolbar {
   .hamburger-menu .w-icon {width: 26px;}
 }
 
-.dark-theme-preview {
-  width: 100%;
-  max-width: 600px;
-
-  .img-wrap {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 2.4;
-  }
-  img {
-    transform-origin: 20% 10%;
-    transform: rotate(-2deg) scale(1.1);
-    width: 100%;
-  }
-}
-
 @media screen and (max-width: 410px) {
   div.main-toolbar {
     .version {display: none;}
