@@ -7,12 +7,12 @@ div
   ol
     li.mt10
       .title4 Install the dependencies &amp; devDependencies:
-      .w-flex.align-center
+      .w-flex.align-center.wrap
         ssh-pre.vue-install(language="shell" :dark="$store.state.darkMode")
           | npm i wave-ui # Vue 3.
         span.mx2 or
         ssh-pre.vue-install(language="shell" :dark="$store.state.darkMode")
-          | npm i wave-ui@legacy # Vue 2.x.
+          | npm i wave-ui@legacy # Vue 2.
       ssh-pre.mb2(language="shell" :dark="$store.state.darkMode")
         | npm i -D pug pug-plain-loader sass sass-loader@10
       small.text-italic.grey.
@@ -94,21 +94,27 @@ div
 
             // 2.
             // Import only the components you need. e.g.
-            import { WApp, WButton } from 'wave-ui/src/wave-ui/components'
+            import { WButton } from 'wave-ui/src/wave-ui/components'
 
             app.use(WaveUI, {
-              components: { WApp, WButton }
-            })
-
-            // 3.
-            // Instantiate the WaveUI class and register it in the Vue instance.
-            new WaveUI(app, {
-              // Some Wave UI options.
+              components: { WButton }
+              // You can add some Wave UI options here.
             })
 
             app.mount('#app')
 
-        template(#item-title.2) Vue 2.x
+          alert.mx3(warning)
+            | #[strong In Wave UI] #[strong.code 2.x], you also need to import the #[strong.code w-app] component,
+            | and before you mount the app, you need to instantiate Wave UI.
+
+            ssh-pre.ma0(language="js" :dark="$store.state.darkMode").
+              // 3.
+              // Instantiate the WaveUI class and register it in the Vue instance.
+              new WaveUI(app, {
+                // Some Wave UI options.
+              })
+
+        template(#item-title.2) Vue 2
         template(#item-content.2)
           ssh-pre.ma0(language="js" :dark="$store.state.darkMode").
             // Keep these 2 imports.
