@@ -9,9 +9,11 @@ let mounted = false
 const detectOSDarkMode = $waveui => {
   const matchMedia = window.matchMedia('(prefers-color-scheme: dark)')
   $waveui.preferredTheme = matchMedia.matches ? 'dark' : 'light'
+  $waveui.switchTheme($waveui.preferredTheme)
 
   matchMedia.addEventListener('change', event => {
     $waveui.preferredTheme = event.matches ? 'dark' : 'light'
+    $waveui.switchTheme($waveui.preferredTheme)
   })
 }
 
