@@ -40,7 +40,7 @@ import DivRiotsLogo from '@/assets/divriots.svg'
 
 const githubBackers = [
   'divriots', 'nmauersberg', 'KleinSamuel', 'chris-deep', 'crbast', 'CoolGoose', 'bohdaq',
-  'consuman', 'bastien09', 'micksp', 'orefalo', 'helenetran', 'antoniandre'
+  'cordova-jauregui', 'consuman', 'bastien09', 'micksp', 'orefalo', 'helenetran', 'antoniandre'
 ]
 
 export default {
