@@ -11,9 +11,14 @@
       icon="wi-cross")
 
     .title2.mt0 Knowledge base
-    w-list(:items="sections" nav color="primary" @item-select="onItemClick")
+    w-tree.mt3(
+      :data="sections"
+      selectable
+      @click="onItemClick"
+      branch-icon="wi-check"
+      leaf-icon="wi-check")
 
-    .title2.mt4 UI components
+    .title2.mt6 UI components
     w-list(:items="components" nav color="primary" @item-select="onItemClick")
       template(#item="{ item }")
         span(v-html="item.label")
@@ -40,26 +45,27 @@ export default {
 
   data: () => ({
     sections: [
-      { label: 'Why Wave UI?', route: '/why-wave-ui' },
-      { label: 'Getting started', route: '/getting-started' },
-      { label: 'Browser support', route: '/browser-support' },
-      { label: 'Customization', route: '/customization' },
-      { label: 'Breakpoints', route: '/breakpoints' },
+      { label: 'Why Wave UI?', route: '/why-wave-ui', icon: 'mdi mdi-help-circle-outline' },
+      { label: 'Getting started', route: '/getting-started', icon: 'mdi mdi-play-circle-outline' },
+      { label: 'Browser support', route: '/browser-support', icon: 'mdi mdi-check-circle-outline' },
+      { label: 'Customization', route: '/customization', icon: 'mdi mdi-tune' },
+      { label: 'Breakpoints', route: '/breakpoints', icon: 'mdi mdi-format-horizontal-align-center' },
       {
         label: 'Layout',
         route: '/layout',
+        icon: 'mdi mdi-format-list-text',
         children: [
-          { label: 'Spaces', route: '/layout--spaces' },
-          { label: 'Grid system (flexbox)', route: '/layout--grid-system' },
-          { label: 'Grid system (grid)', route: '/layout--simplified-grid-system' },
-          { label: 'Flex', route: '/layout--flex' },
-          { label: 'Other CSS classes', route: 'layout--other-css-classes' }
+          { label: 'Spaces', route: '/layout--spaces', icon: 'mdi mdi-keyboard-space' },
+          { label: 'Grid system (flexbox)', route: '/layout--grid-system', icon: 'mdi mdi-view-grid-outline' },
+          { label: 'Grid system (grid)', route: '/layout--simplified-grid-system', icon: 'mdi mdi-view-grid-outline' },
+          { label: 'Flex', route: '/layout--flex', icon: 'mdi mdi-star' },
+          { label: 'Other CSS classes', route: 'layout--other-css-classes', icon: 'mdi mdi-toolbox-outline' }
         ]
       },
-      { label: 'Typography', route: '/typography' },
-      { label: 'Colors', route: '/colors' },
-      { label: 'Shadows, borders &amp; radii', route: '/shadows-borders-radii' },
-      { label: 'Transitions', route: '/transitions' }
+      { label: 'Typography', route: '/typography', icon: 'mdi mdi-format-font' },
+      { label: 'Colors', route: '/colors', icon: 'mdi mdi-palette' },
+      { label: 'Shadows, borders & radii', route: '/shadows-borders-radii', icon: 'mdi mdi-tools' },
+      { label: 'Transitions', route: '/transitions', icon: 'mdi mdi-star-shooting-outline' }
     ],
     components: [
       ...UIComponents.filter(item => !item.formElement).map(item => ({ ...item, route: `/w-${item.id}` })),
@@ -91,36 +97,73 @@ export default {
 
 <style lang="scss">
 .nav-menu-wrap {
+  position: relative;
   width: 100%;
   min-width: 180px;
   max-width: 260px;
-  border-right: 1px solid #ddd;
+  margin-left: -12px;
+  padding-left: 30px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border-right: 2px solid #eee;
+    z-index: -1;
+  }
 }
 
 div.nav-menu {
   height: 90vh;
   overflow: auto;
 
-  .w-list__item-label {
-    padding: 6px;
-    padding-left: 4 * $base-increment;
-    @include default-transition;
-    font-size: 1em;
+  .title2 {margin-left: 8px;}
+
+  .w-tree__item {margin-left: 0;}
+  .w-tree__item-label {
+    display: flex;
+    padding: 5px 6px 5px 16px;
+    font-size: 1.02rem;
     font-weight: normal;
-    border-left: 2px solid transparent;
-    &:before {display: none;}
-    &:not(.w-list__item-label--disabled):focus:before,
-    &:not(.w-list__item-label--disabled):hover:before {display: block;}
+    border-right: 0 solid $primary;
+    color: $primary;
+    transition: $transition-duration ease-in-out, border-width none;
+
+    &:before {
+      content: '';
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: currentColor;
+      opacity: 0.06;
+      border-radius: 99em 0 0 99em;
+    }
+    &:not(.w-tree__item-label--disabled):focus:before,
+    &:not(.w-tree__item-label--disabled):hover:before {display: block;}
 
     &.router-link-active {
-      border-left-color: $primary;
+      border-right-width: 3px;
       font-weight: 700;
-      &:before {display: block;opacity: 0.15;}
+
+      &:before {
+        display: block;
+        opacity: 0.12;
+      }
     }
-    &:before {left: -2px;}
+
+    .w-tree__item-icon {
+      color: rgba(20, 105, 184, 0.5);
+      font-size: 1.5em;
+      margin-right: 6px;
+    }
   }
 
-  .w-list__item--parent > .w-list__item-label {text-transform: uppercase;font-weight: bold;}
+  .w-tree__item--branch > .w-tree__item-label {text-transform: uppercase;font-weight: bold;}
 
   .w-tag {padding: 2px 4px 1px;}
 }
@@ -150,6 +193,6 @@ div.nav-menu {
 }
 
 @media screen and (max-width: 800px) {
-  .nav-menu-wrap {max-width: 220px;}
+  .nav-menu-wrap {max-width: 220px;padding-left: 0;}
 }
 </style>
