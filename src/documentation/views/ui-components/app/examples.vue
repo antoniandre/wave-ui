@@ -1,6 +1,7 @@
 <template lang="pug">
 div
-  p.
+  .title2.red Required in Wave UI #[w-tag.error--bg(round) &lt; 3.0], removed in #[w-tag.error--bg(round) 3.0].
+  p.mt6.
     This tag is required in your app for Wave UI proper functioning.#[br]
     You should place it #[strong at the root of your app].
   .caption.grey-light1.
