@@ -4,12 +4,16 @@ ul.w-tree(:class="classes")
     v-for="(item, i) in currentDepthItems"
     :key="i"
     :class="itemClasses(item)")
-    .w-tree__item-label(
+    component.w-tree__item-label(
+      :is="item[itemRouteKey] ? (!$router || hasExternalLink(item) ? 'a' : 'router-link') : 'div'"
+      v-bind="item[itemRouteKey] && { [!$router || hasExternalLink(item) ? 'href' : 'to']: item[itemRouteKey] }"
       @click="!disabled && onLabelClick(item, $event)"
       @keydown="!disabled && onLabelKeydown(item, $event)"
       :tabindex="!disabled && (item.children || item.branch || selectable) && !(unexpandableEmpty && !item.children) ? 0 : null")
+      //- @click.stop to not follow link if item is a link.
       w-button.w-tree__item-expand(
         v-if="(item.children || item.branch) && ((expandOpenIcon && item.open) || expandIcon) && !(unexpandableEmpty && !item.children)"
+        @click.stop="!disabled && onLabelClick(item, $event)"
         color="inherit"
         :icon="(item.open && expandOpenIcon) || expandIcon"
         :icon-props="{ rotate90a: !item.open }"
@@ -74,7 +78,8 @@ export default {
     counts: { type: Boolean },
     itemIconKey: { type: String, default: 'icon' }, // Support a different icon per item.
     iconColor: { type: String }, // Applies a color on all the label item icons.
-    itemIconColorKey: { type: String, default: 'iconColor' } // Applies a specific color on each label item icons.
+    itemIconColorKey: { type: String, default: 'iconColor' }, // Applies a specific color on each label item icons.
+    itemRouteKey: { type: String, default: 'route' } // Uses a router link if the item has the `route` key.
   },
 
   emits: ['input', 'before-open', 'open', 'before-close', 'close', 'click', 'select'],
@@ -107,6 +112,7 @@ export default {
           label: item.label,
           children: !!item.children, // The children tree remains available in originalItem.
           branch: item.branch,
+          route: item[this.itemRouteKey],
           depth: this.depth,
           open: !!(oldItems[i]?.open || this.expandAll)
         })
@@ -135,6 +141,9 @@ export default {
     },
 
     onLabelClick (item, e) {
+      const route = item[this.itemRouteKey]
+      if (route && this.$router && !this.hasExternalLink(item)) e.preventDefault()
+
       this.$emit('click', { item: item.originalItem, depth: this.depth, e })
       if (item.children || (item.branch && !this.unexpandableEmpty)) this.expandDepth(item)
 
@@ -219,6 +228,11 @@ export default {
       )
     },
 
+    hasExternalLink (item) {
+      console.log(item[this.itemRouteKey], /^(https?:)?\/\/|mailto:|tel:/.test(item[this.itemRouteKey]))
+      return /^(https?:)?\/\/|mailto:|tel:/.test(item[this.itemRouteKey])
+    },
+
     itemClasses (item) {
       return {
         [item.children || item.branch ? 'w-tree__item--branch' : 'w-tree__item--leaf']: true,
@@ -274,6 +288,7 @@ $expand-icon-size: 20px;
       right: - $base-increment - 2px;
       border-radius: $border-radius;
     }
+    &:hover:before {background-color: rgba($primary, 0.05);}
     &:focus:before {background-color: rgba($primary, 0.1);}
   }
   &__item--leaf &__item-label:before {
