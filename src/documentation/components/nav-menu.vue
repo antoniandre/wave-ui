@@ -19,14 +19,14 @@
       leaf-icon="wi-check")
 
     .title2.mt6 UI components
-    w-list(:items="components" nav color="primary" @item-select="onItemClick")
+    w-tree(:data="components" selectable @click="onItemClick")
       template(#item="{ item }")
         span(v-html="item.label")
         w-tag.ml2.text-upper(v-if="item.disabled" round xs color="red" outline) Coming soon
         w-tag.ml2.text-upper(v-if="item.inProgress" round xs color="orange" outline) In progress
     .title3.mt4 External UI components
     p By the same author
-    w-list(:items="externalComponents" nav color="primary" @item-select="onItemClick")
+    w-tree(:data="externalComponents" selectable @click="onItemClick")
 
     router-link.mt3.d-iblock(v-if="$waveui.breakpoint.xs" to="/release-notes" @click.native="onItemClick")
       w-icon.mr2 mdi mdi-update
@@ -80,7 +80,7 @@ export default {
     externalComponents: [
       { label: 'Calendar', route: '/calendar' },
       { label: 'Slideshow', route: '/slideshow' },
-      { label: 'Splitter', route: '/splitter' }
+      { label: 'Splitter', route: 'http://google.com/splitter' }
     ]
   }),
 
@@ -110,7 +110,7 @@ export default {
     top: 0;
     bottom: 0;
     right: 0;
-    border-right: 2px solid #eee;
+    border-right: 2px solid #f2f2f2;
     z-index: -1;
   }
 }
@@ -155,12 +155,12 @@ div.nav-menu {
         opacity: 0.12;
       }
     }
+  }
 
-    .w-tree__item-icon {
-      color: rgba(20, 105, 184, 0.5);
-      font-size: 1.5em;
-      margin-right: 6px;
-    }
+  .w-tree__item-icon {
+    color: rgba(20, 105, 184, 0.5);
+    font-size: 1.5em;
+    margin-right: 6px;
   }
 
   .w-tree__item--branch > .w-tree__item-label {text-transform: uppercase;font-weight: bold;}
