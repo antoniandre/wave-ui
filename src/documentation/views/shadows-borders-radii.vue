@@ -258,12 +258,8 @@ main
 </template>
 
 <script>
-import colors from '@/wave-ui/utils/colors'
-
 export default {
   data: () => ({
-    colors,
-    horizontal: false,
     baseUrl: import.meta.env.BASE_URL
   })
 }
