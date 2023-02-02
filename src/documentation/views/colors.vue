@@ -104,6 +104,7 @@ main
   p.
     This built-in color palette will complete your collection of available colors for fast and easy designs.
 
+  p {{ colorPalette }}
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
     .w-flex.wrap.ma-2.basis-zero
       .color-palette.ma2(
@@ -164,7 +165,7 @@ import { colorPalette } from '@/wave-ui/utils/colors'
 
 export default {
   data: () => ({
-    colorPalette,
+    colorPalette: colorPalette.filter(color => !['black', 'white', 'inherit', 'transparent'].includes(color.label)),
     horizontal: false
   })
 }
