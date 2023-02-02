@@ -64,6 +64,7 @@ export default {
       },
       { label: 'Typography', route: '/typography', icon: 'mdi mdi-format-font' },
       { label: 'Colors', route: '/colors', icon: 'mdi mdi-palette' },
+      { label: 'Themes', route: '/themes', icon: 'mdi mdi-weather-night' },
       { label: 'Shadows, borders & radii', route: '/shadows-borders-radii', icon: 'mdi mdi-tools' },
       { label: 'Transitions', route: '/transitions', icon: 'mdi mdi-star-shooting-outline' }
     ],
@@ -80,7 +81,7 @@ export default {
     externalComponents: [
       { label: 'Calendar', route: '/calendar' },
       { label: 'Slideshow', route: '/slideshow' },
-      { label: 'Splitter', route: 'http://google.com/splitter' }
+      { label: 'Splitter', route: '/splitter' }
     ]
   }),
 

@@ -129,6 +129,11 @@ const routes = [
     component: () => import('@/documentation/views/colors.vue')
   },
   {
+    path: '/themes',
+    name: 'themes',
+    component: () => import('@/documentation/views/themes.vue')
+  },
+  {
     path: '/shadows-borders-radii',
     name: 'shadows-borders-radii',
     component: () => import('@/documentation/views/shadows-borders-radii.vue')
