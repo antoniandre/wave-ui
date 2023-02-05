@@ -229,7 +229,6 @@ export default {
     },
 
     hasExternalLink (item) {
-      console.log(item[this.itemRouteKey], /^(https?:)?\/\/|mailto:|tel:/.test(item[this.itemRouteKey]))
       return /^(https?:)?\/\/|mailto:|tel:/.test(item[this.itemRouteKey])
     },
 

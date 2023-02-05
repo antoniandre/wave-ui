@@ -74,7 +74,7 @@ export default {
         label: 'Form elements',
         route: '/form',
         children: [
-          ...UIComponents.filter(item => item.formElement).map(item => ({ ...item, route: `/w-${item.id}` })),
+          ...UIComponents.filter(item => item.formElement).map(item => ({ ...item, route: `/w-${item.id}` }))
         ]
       }
     ],
