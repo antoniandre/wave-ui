@@ -35,6 +35,7 @@ export default class WaveUI {
     config: {},
     colors: {}, // Object of pairs of color-name => color hex.
     preferredTheme: null, // The user OS preferred theme (light or dark).
+    theme: null, // The current theme (light or dark).
     _notificationManager: null,
 
     // Callable from this.$waveui.
@@ -44,10 +45,10 @@ export default class WaveUI {
 
     // Callable from this.$waveui.
     switchTheme (theme) {
-      this.config.theme = theme
+      this.theme = theme
       document.documentElement.setAttribute('data-theme', theme)
       document.head.querySelector('#wave-ui-colors')?.remove?.()
-      injectColorsCSSInDOM(this.config.colors[this.config.theme])
+      injectColorsCSSInDOM(this.config.colors[this.theme])
     }
   }
 
@@ -76,7 +77,7 @@ export default class WaveUI {
     // Register mixins.
     app.mixin({
       // Add a mixin to capture the first mounted hook, trigger the Wave UI init then unregister the mixin straight away.
-      mounted () {
+      async beforeMount () {
         if (!mounted) {
           mounted = true
           const $waveui = inject('$waveui')
