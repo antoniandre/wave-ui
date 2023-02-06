@@ -16,6 +16,7 @@
   .title-link,
   .title-link .hash,
   .w-alert--docs,
+  .w-alert--docs .w-icon,
   .example,
   .example .buttons,
   .common-layouts legend,
@@ -36,17 +37,22 @@
   .main--layout-simplified-grid-system .box,
   .main--shadows-borders-radii .box,
   .main--release-notes .history,
-  .main--getting-started .w-accordion__item-content,
   .main--getting-started .w-accordion__item-title,
+  .go-top,
   caption,
   .primary--bg,
   .primary,
   .nav-menu-wrap:after,
-  div.nav-menu .w-tree__item-icon {
+  div.nav-menu .w-tree__item-icon,
+  div.nav-menu .w-tree__item-label,
+  div.nav-menu .w-tree__item-label:before {
     @include theme-switch-transition;
   }
 }
 
+.content-wrap {transition: background-color $theme-switch-transition;}
+.w-tabs__bar-item {transition: 0.25s ease-in-out, flex-grow 0s, flex 0s, color $theme-switch-transition;}
+.main--getting-started .w-accordion__item-content {transition: background-color $theme-switch-transition;}
 .nav-menu-wrap {transition: border-color $theme-switch-transition;}
 .hue-on-dark .example__render {transition: filter $theme-switch-transition;}
 // ======================================================
@@ -59,7 +65,7 @@
 // the bg to dark from this media query.
 @media (prefers-color-scheme: dark) {
   :root {
-    --w-base-color-rgb: #fff;
+    --w-base-color-rgb: 255, 255, 255;
     --w-base-bg-color-rgb: 34, 34, 34;
   }
 }
@@ -68,10 +74,12 @@
 [data-theme="dark"] {
   color: #444;
 
+  .content-wrap {background-color: rgb(var(--w-base-bg-color-rgb));}
+
   // Main menu.
   // ------------------------------------------------------
   .nav-menu-wrap {
-    &, &:after {border-right-color: rgba(var(--w-base-color-rgb), 0.08);}
+    &:after {border-right-color: rgba(var(--w-base-color-rgb), 0.08);}
     div.nav-menu .w-tree__item-label:before {background-color: #fff;}
   }
 

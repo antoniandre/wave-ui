@@ -111,14 +111,14 @@ export default {
     top: 0;
     bottom: 0;
     right: 0;
-    border-right: 2px solid #f2f2f2;
-    z-index: -1;
+    border-right: 2px solid rgba(#000 , 0.05);
   }
 }
 
-div.nav-menu {
+.nav-menu {
   height: 90vh;
   overflow: auto;
+  z-index: 1;
 
   .title2 {margin-left: 8px;}
 
