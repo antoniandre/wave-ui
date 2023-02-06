@@ -130,7 +130,7 @@ div.nav-menu {
     font-weight: normal;
     border-right: 0 solid $primary;
     color: $primary;
-    transition: $transition-duration ease-in-out, border-width none;
+    transition: $transition-duration ease-in-out, border-width 0s;
 
     &:before {
       content: '';

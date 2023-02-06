@@ -36,12 +36,13 @@ body {overflow-x: hidden;}
 
 a {text-decoration: none;}
 
-.w-app, .w-app *, .w-app :before, .w-app :after {box-sizing: border-box;}
 .w-app {
   position: relative; // Make the .w-app a referential for tooltips / menus.
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  &, *, :before, :after {box-sizing: border-box;}
 
   &.row {flex-direction: row;}
   &.d-block {display: block;}
