@@ -21,7 +21,7 @@ ul.w-tree(:class="classes")
         :disabled="disabled"
         text
         sm)
-      slot(name="item-label" :item="item.originalItem" :depth="depth" :open="item.open")
+      slot(name="item" :item="item.originalItem" :depth="depth" :open="item.open")
         w-icon(v-if="itemIcon(item)" class="w-tree__item-icon" :color="item.originalItem[itemIconColorKey] || iconColor") {{ itemIcon(item) }}
         span {{ item.label }}
         span.ml1(v-if="counts && (item.children || item.branch)").
@@ -43,8 +43,8 @@ ul.w-tree(:class="classes")
         @click="$emit('click', $event)"
         @select="$emit('select', $event)"
         @update:model-value="$emit('update:model-value', $event)")
-        template(#item-label="{ item, depth, open }")
-          slot(name="item-label" :item="item" :depth="depth" :open="open")
+        template(#item="{ item, depth, open }")
+          slot(name="item" :item="item" :depth="depth" :open="open")
 </template>
 
 <script>

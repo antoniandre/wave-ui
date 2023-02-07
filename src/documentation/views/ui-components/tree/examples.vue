@@ -510,25 +510,25 @@ div
         | Read on deep watchers on the Vue.js official documentation
         w-icon.ml1 mdi mdi-open-in-new
 
-  title-link(h2) Custom item label
-  p If you need to customize the layout of the item label, you can use the #[code #item-label] slot.
+  title-link(h2) Custom item (icon + label)
+  p If you need to customize the layout of the item label and/or icon, you can use the #[code #item] slot.
   example
     w-tree.lh5(:data="tree4")
-      template(#item-label="{ item, open }")
+      template(#item="{ item, open }")
         span {{ item.label }}
         w-icon.ml1(v-if="item.status === 'error'" bg-color="error" xs) mdi mdi-close
         w-icon.ml1(v-else-if="item.status === 'success'" bg-color="success" xs) mdi mdi-check
         w-icon.ml1(v-else-if="item.status === 'syncing'" bg-color="warning" xs) mdi mdi-clock-outline
     template(#pug).
       w-tree.lh5(:data="tree")
-        template(#item-label="{ item, open }")
+        template(#item="{ item, open }")
           span {{ '\{\{ item.label \}\}' }}
           w-icon.ml1(v-if="item.status === 'error'" bg-color="error" xs) mdi mdi-close
           w-icon.ml1(v-else-if="item.status === 'success'" bg-color="success" xs) mdi mdi-check
           w-icon.ml1(v-else-if="item.status === 'syncing'" bg-color="warning" xs) mdi mdi-clock-outline
     template(#html).
       &lt;w-tree :data="tree"&gt;
-        &lt;template #item-label="{ item, open }"&gt;
+        &lt;template #item="{ item, open }"&gt;
             &lt;span&gt;{{ '\{\{ item.label \}\}' }}&lt;/span&gt;
             &lt;w-icon
               v-if="item.status === 'error'"
