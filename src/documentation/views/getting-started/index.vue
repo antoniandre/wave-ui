@@ -34,38 +34,27 @@ main
 
   w-divider.my12
   title-link(h2) What next?
-  p.
-    #[strong You are now good to go and free to decide what you want to add in your app.]#[br]
-    But we recommend that you read on the knowledge base pages soon!
-    It will give you an overview of all the power in your hands!
-  h3 Then what next?
-  p
-    | Now that you are more familiar with Wave UI, you can start from the
-    router-link.ml1(to="/w-app#examples-of-common-layouts" @click.native="scrollToExamples").
-      #[strong.code.inherit w-app] common layouts
-    | , and add the UI components of your choice. The examples will help you understand and
-    | get code syntaxes.
-  p.
-    By the way, you can open every example in Codepen, that will help you learn faster by trying it
-    yourself.
-
-  title-link(h3).mt8 And then?
-  p.
-    #[strong Icons font.] An icon font is probably the next thing you need at this point.#[br]
-    You are free to use the one of your choice, but if you don't know where to start, we have
-    picked and tested a handful of them for you:
-    check out the #[router-link(to="w-icon") w-icon] page to know more.
-
-  w-divider.my12
-  title-link(h2) Wave UI Options
-  p Wave UI accepts these options:
-  w-list(:items="waveUiOptions" icon="wi-check")
-    template(#item="{ item }")
-      span {{ item.label }}
-      template(v-if="item.route")
-        span.ml1 - read on in the
-        router-link.mx1(:to="item.route") {{ item.label }}
-        | knowledge base page.
+  p.text-bold You are now up and running. Go test some some components in your app!
+  .title3.mt4 But if you would appreciate a little more guidance, we recommend to:
+  w-list(checklist :items="6" :model-value="[0]")
+    template(#item.1) Install Wave UI from one of the above method
+    template(#item.2).
+      Read on the knowledge base pages to get an overview of all the power in your hands!
+    template(#item.3)
+      | Pick a
+      router-link.ml1(to="/w-app#examples-of-common-layouts" @click.native="scrollToExamples")
+        | common layout
+      | .
+    template(#item.4).
+      Add some UI components of your choice: get help from the examples and don't
+      hesitate to open them on Codepen.
+    template(#item.5).
+      You probably want to add an #[router-link.mx1(to="/w-icon" @click.native="scrollToTop") icon font]
+      as well.
+    template(#item.6).
+      After mastering the components, you may want to use
+      #[router-link.mx1(to="options-and-presets" @click.native="scrollToTop") presets]
+      to alight your Vue templates.
 </template>
 
 <script>
@@ -77,15 +66,17 @@ export default {
   components: { StandardInstall, CustomInstall, NuxtInstall },
 
   data: () => ({
-    waveUiOptions: [
-      { label: 'colors', route: 'colors' },
-      { label: 'breakpoints', route: 'breakpoints' },
-      { label: 'presets', route: 'customization#presets' }
-    ],
     openPane: [true, false, false]
   }),
 
   methods: {
+    scrollToTop () {
+      setTimeout(() => {
+        const page = document.querySelector('.main-content')
+        const top = page.getBoundingClientRect().top + window.scrollY - 15
+        document.documentElement.scrollTo({ top, behavior: 'smooth' })
+      }, 300)
+    },
     scrollToExamples () {
       setTimeout(() => {
         const examples = document.getElementById('examples-of-common-layouts')
