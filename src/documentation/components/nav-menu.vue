@@ -144,8 +144,8 @@ export default {
       opacity: 0.06;
       border-radius: 99em 0 0 99em;
     }
-    &:not(.w-tree__item-label--disabled):focus:before,
-    &:not(.w-tree__item-label--disabled):hover:before {display: block;}
+    &:focus:before,
+    &:hover:before {display: block;}
 
     &.router-link-active {
       border-right-width: 3px;
@@ -157,6 +157,7 @@ export default {
       }
     }
   }
+  .w-tree__item--disabled .w-tree__item-label:before {display: none;}
 
   .w-tree__item-icon {
     color: rgba(20, 105, 184, 0.5);
