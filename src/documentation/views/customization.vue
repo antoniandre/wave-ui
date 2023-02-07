@@ -173,19 +173,10 @@ main
     For this, follow the above steps in #[a(href="#modify-your-config") Modify your config], then you
     can set the #[code.pink $use-layout-classes] variable to #[code false].
   p
-    | You can have a look at all the classes that will not be genererated in this file:
+    | You can have a look at all the classes that will not be generated in this file:
     a.ml2(href="https://github.com/antoniandre/wave-ui/blob/master/src/wave-ui/scss/_layout.scss" target="_blank")
       | layout.scss on Github
       w-icon.ml1(sm) mdi mdi-open-in-new
-
-  title-link(h2 slug="presets")
-    | Presets
-    w-tag.ml3(bg-color="red-light1" lg color="white") Coming soon
-  ssh-pre(language="js" label="Javascript" :dark="$store.state.darkMode").
-    // Buttons example.
-    {
-      'w-button': { sm: true, outlined: true, round: true }
-    }
 </template>
 
 <style lang="scss">
