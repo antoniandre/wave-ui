@@ -49,6 +49,9 @@ main
         li
           strong.code w-tree
           ul
+            li Support navigation menus with links on items. #[span.tag.new]
+            li Allow disabling a particular item.
+            li Added the #[code item-disabled-key] prop. #[span.tag.new]
             li Renamed the #[item-label] slot to #[item].
       ul
         li
