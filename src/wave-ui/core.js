@@ -17,6 +17,18 @@ const detectOSDarkMode = $waveui => {
   })
 }
 
+/**
+ * Inject presets into a Vue component props defaults before its registration into the app.
+ *
+ * @param {Object} component the Vue component to inject presets into.
+ * @param {Object} presets the presets to inject. E.g. `{ bgColor: 'green' }`.
+ */
+const injectPresets = (component, presets) => {
+  for (const preset in presets) {
+    component.props[preset].default = presets[preset]
+  }
+}
+
 export default class WaveUI {
   static #registered = false
 
@@ -71,6 +83,8 @@ export default class WaveUI {
     const { components = {} } = options || {}
     for (const id in components) {
       const component = components[id]
+      // If presets are defined for this component inject them into the props defaults.
+      if (options.presets[component.name]) injectPresets(component, options.presets[component.name])
       app.component(component.name, component)
     }
 

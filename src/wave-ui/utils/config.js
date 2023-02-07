@@ -58,10 +58,18 @@ const config = reactive({
 export { config as default }
 
 export const mergeConfig = (options, conf = config) => {
-  for (const key in options) {
-    const option = options[key]
-    if (typeof option === 'object') mergeConfig(options[key], conf[key])
-    else conf[key] = option
+  // If the conf object is empty, populate with options (case of presets).
+  if (!Object.keys(conf).length) conf = Object.assign(conf, options)
+
+  else {
+    for (const key in options) {
+      const option = options[key]
+      if (typeof option === 'object') {
+        mergeConfig(options[key], conf[key])
+      }
+      else conf[key] = option
+    }
   }
+
   return conf
 }
