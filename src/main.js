@@ -32,8 +32,9 @@ app
     },
     theme: 'auto',
     presets: {
-      // @todo.
-      // 'w-button': {}
+      'w-button': { color: 'green', bgColor: 'red' },
+      'w-accordion': { expandIconRotate90: true },
+      'w-overlay': { bgColor: 'pink', opacity: 0.3 }
     }
   })
 
