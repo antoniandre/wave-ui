@@ -47,9 +47,9 @@ main
             li allow HTML in card title.
       ul
         li
-          strong.code w-alert
+          strong.code w-tree
           ul
-            li Emitted event #[code @close] is renamed #[code @dismiss].
+            li Renamed the #[item-label] slot to #[item].
       ul
         li
           strong.code Dropping the #[strong.code w-app] component
