@@ -26,25 +26,30 @@ main
       strong.version v3.0.0
       ul
         li
-          strong.code New core
-          ul
-            li.text-bold New way to use Wave UI, more straightforward, more Vue 3 way, facilitating the use in composition API.
-            li New useWaveUI method for composition API.
-            li $waveui.breakpoint.width always up to date
-      ul
-        li
           strong.code Theming (light &amp; dark)
           ul
-            li Every component is now completely themeable, all at once, or individually.
+            li Every component is now completely themeable, all at once, or individually. #[span.tag.new]
             li Added a lot more color variables in the SCSS variables file for more granular control.
             li All the default colors are now dynamically computed with the user theme preference using CSS3 variables.
-            li New easy method to switch theme #[code="this.$waveui.switchTheme(['dark'|'light'])"]
-            li Auto detection of the user preferred theme.
+            li Easy method to switch theme #[code="this.$waveui.switchTheme(['dark'|'light'])"] #[span.tag.new]
+            li Auto detection of the user preferred theme. #[span.tag.new]
       ul
         li
-          strong.code w-card
+          strong.code Components presets
           ul
-            li allow HTML in card title.
+            li.text-bold Presets are now supported for each UI component. #[span.tag.new]
+      ul
+        li
+          strong.code Dropping the #[strong.code w-app] component
+          ul
+            li The #[strong.code w-app] component is no longer needed! Wave UI will do all the work for you. #[span.tag.new]
+      ul
+        li
+          strong.code New core
+          ul
+            li.text-bold New way to use Wave UI, more straightforward, more Vue 3 approach, facilitating the use in composition API. #[span.tag.new]
+            li New useWaveUI method for composition API.
+            li #[code $waveui.breakpoint.width] always up to date
       ul
         li
           strong.code w-tree
@@ -55,9 +60,9 @@ main
             li Renamed the #[item-label] slot to #[item].
       ul
         li
-          strong.code Dropping the #[strong.code w-app] component
+          strong.code w-card
           ul
-            li The #[strong.code w-app] component is no longer needed! Wave UI will do all the work for you.
+            li allow HTML in card title.
 
     li.patch
       strong.version v2.48.0
