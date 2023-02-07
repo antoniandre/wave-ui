@@ -33,13 +33,15 @@ const propsDescs = {
   selectable: 'Make any item of the tree selectable, via click or via the keyboard arrow keys and <kbd>tab</kbd> key.',
   counts: 'Display the branch children counts on each branch item.',
   iconColor: 'Define a color for all the items icons.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-  itemIconKey: 'Specifies the name of the attribute in each item object where to find the item\'s icon.',
-  itemIconColorKey: 'Specifies the name of the attribute in each item object where to find the item\'s icon color.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.'
+  itemIconKey: 'Specifies the name of the optional attribute in each item object where to find the item\'s icon.',
+  itemIconColorKey: 'Specifies the name of the optional attribute in each item object where to find the item\'s icon color.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  itemRouteKey: 'Specifies the name of the optional attribute in each item object where to find the item\'s route. It can be an internal or external link.<br>If the link is internal and Vue Router is detected, it will use a &lt;router-link&gt; tag.',
+  itemDisabledKey: 'Specifies the name of the optional attribute in each item object, that will disable the interactivity of this item (expand, collapse selection, click, tab).'
 }
 
 const slots = {
-  'item-label': {
-    description: 'Provide a custom template for all the item labels.',
+  item: {
+    description: 'Provide a custom template for all the items (includes the item icon if any, label, and count if active).',
     params: {
       item: 'The current tree item object.',
       depth: 'The item depth in the tree. Starts at 0 for the root.',
