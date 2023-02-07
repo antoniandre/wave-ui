@@ -4,21 +4,22 @@ ul.w-tree(:class="classes")
     v-for="(item, i) in currentDepthItems"
     :key="i"
     :class="itemClasses(item)")
+    //- The keys `route` & `disabled` are always present in any currentDepthItems.
     component.w-tree__item-label(
-      :is="item[itemRouteKey] ? (!$router || hasExternalLink(item) ? 'a' : 'router-link') : 'div'"
-      v-bind="item[itemRouteKey] && { [!$router || hasExternalLink(item) ? 'href' : 'to']: item[itemRouteKey] }"
-      @click="!disabled && onLabelClick(item, $event)"
-      @keydown="!disabled && onLabelKeydown(item, $event)"
-      :tabindex="!disabled && (item.children || item.branch || selectable) && !(unexpandableEmpty && !item.children) ? 0 : null")
+      :is="!disabled && !item.disabled && item.route ? (!$router || hasExternalLink(item) ? 'a' : 'router-link') : 'div'"
+      v-bind="item.route && { [!$router || hasExternalLink(item) ? 'href' : 'to']: item.route }"
+      @click="!disabled && !item.disabled && onLabelClick(item, $event)"
+      @keydown="!disabled && !item.disabled && onLabelKeydown(item, $event)"
+      :tabindex="!disabled && !item.disabled && (item.children || item.branch || selectable) && !(unexpandableEmpty && !item.children) ? 0 : null")
       //- @click.stop to not follow link if item is a link.
       w-button.w-tree__item-expand(
         v-if="(item.children || item.branch) && ((expandOpenIcon && item.open) || expandIcon) && !(unexpandableEmpty && !item.children)"
-        @click.stop="!disabled && onLabelClick(item, $event)"
+        @click.stop="!disabled && !item.disabled && onLabelClick(item, $event)"
         color="inherit"
         :icon="(item.open && expandOpenIcon) || expandIcon"
         :icon-props="{ rotate90a: !item.open }"
         :tabindex="-1"
-        :disabled="disabled"
+        :disabled="disabled || item.disabled"
         text
         sm)
       slot(name="item" :item="item.originalItem" :depth="depth" :open="item.open")
@@ -79,7 +80,8 @@ export default {
     itemIconKey: { type: String, default: 'icon' }, // Support a different icon per item.
     iconColor: { type: String }, // Applies a color on all the label item icons.
     itemIconColorKey: { type: String, default: 'iconColor' }, // Applies a specific color on each label item icons.
-    itemRouteKey: { type: String, default: 'route' } // Uses a router link if the item has the `route` key.
+    itemRouteKey: { type: String, default: 'route' }, // Uses a router link if the item has the `route` key.
+    itemDisabledKey: { type: String, default: 'disabled' } // Disables the item click and selection.
   },
 
   emits: ['update:model-value', 'before-open', 'open', 'before-close', 'close', 'click', 'select'],
@@ -113,6 +115,7 @@ export default {
           children: !!item.children, // The children tree remains available in originalItem.
           branch: item.branch,
           route: item[this.itemRouteKey],
+          disabled: item[this.itemDisabledKey],
           depth: this.depth,
           open: !!(oldItems[i]?.open || this.expandAll)
         })
@@ -235,6 +238,7 @@ export default {
     itemClasses (item) {
       return {
         [item.children || item.branch ? 'w-tree__item--branch' : 'w-tree__item--leaf']: true,
+        'w-tree__item--disabled': item[this.itemDisabledKey],
         'w-tree__item--empty': item.branch && !item.children,
         'w-tree__item--unexpandable': item.branch && !item.children && this.unexpandableEmpty
       }
@@ -277,6 +281,7 @@ $expand-icon-size: 20px;
     position: relative;
     display: inline-flex;
     align-items: center;
+    user-select: none;
 
     &:before {
       content: '';
@@ -294,10 +299,17 @@ $expand-icon-size: 20px;
     left: - $base-increment;
     right: - $base-increment;
   }
+  &__item--disabled &__item-label {opacity: 0.5;}
+  &__item--disabled &__item-label:before {display: none;}
 
   &__item-expand {margin-right: 2px;}
 
   &__item--branch > &__item-label {cursor: pointer;}
+  &__item--disabled > &__item-label {
+    color: $disabled-color;
+    cursor: not-allowed;
+    -webkit-tap-highlight-color: transparent;
+  }
   &__item--unexpandable > &__item-label {
     margin-left: $expand-icon-size + 2px;
     cursor: auto;
