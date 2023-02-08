@@ -24,7 +24,7 @@ ul.w-tree(:class="classes")
         sm)
       slot(name="item" :item="item.originalItem" :depth="depth" :open="item.open")
         w-icon(v-if="itemIcon(item)" class="w-tree__item-icon" :color="item.originalItem[itemIconColorKey] || iconColor") {{ itemIcon(item) }}
-        span {{ item.label }}
+        span(v-html="item.label")
         span.ml1(v-if="counts && (item.children || item.branch)").
           ({{ item.originalItem.children?.length || 0 }})
     component(
