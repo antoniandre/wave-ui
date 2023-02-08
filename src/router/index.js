@@ -79,9 +79,9 @@ const routes = [
     component: () => import('@/documentation/views/browser-support.vue')
   },
   {
-    path: '/options-and-presets',
-    name: 'options-and-presets',
-    component: () => import('@/documentation/views/options-and-presets.vue')
+    path: '/options-presets-and-waveui',
+    name: 'options-presets-and-waveui',
+    component: () => import('@/documentation/views/options-presets-and-waveui.vue')
   },
   {
     path: '/customization',

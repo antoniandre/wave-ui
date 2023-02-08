@@ -48,7 +48,7 @@ export default {
       { label: 'Why Wave UI?', route: '/why-wave-ui', icon: 'mdi mdi-help-circle-outline' },
       { label: 'Getting started', route: '/getting-started', icon: 'mdi mdi-play-circle-outline' },
       { label: 'Browser support', route: '/browser-support', icon: 'mdi mdi-check-circle-outline' },
-      { label: 'Options, <code>$waveui</code> & presets', route: '/options-$waveui-and-presets', icon: 'mdi mdi-auto-fix' },
+      { label: 'Options, presets &amp; <code>$waveui</code>', route: '/options-presets-and-waveui', icon: 'mdi mdi-auto-fix' },
       { label: 'Customization', route: '/customization', icon: 'mdi mdi-tune' },
       { label: 'Breakpoints', route: '/breakpoints', icon: 'mdi mdi-format-horizontal-align-center' },
       {
