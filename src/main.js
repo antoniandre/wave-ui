@@ -30,12 +30,7 @@ app
         secondary: '#d3ebff'
       }
     },
-    theme: 'auto',
-    presets: {
-      'w-button': { color: 'light-blue-light4', bgColor: 'deep-purple-light2', tile: true, outline: true },
-      'w-accordion': { expandIconRotate90: true },
-      'w-overlay': { bgColor: 'pink', opacity: 0.3 }
-    }
+    theme: 'auto'
   })
 
 app.component('ssh-pre', SshPre)
