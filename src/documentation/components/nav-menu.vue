@@ -48,7 +48,7 @@ export default {
       { label: 'Why Wave UI?', route: '/why-wave-ui', icon: 'mdi mdi-help-circle-outline' },
       { label: 'Getting started', route: '/getting-started', icon: 'mdi mdi-play-circle-outline' },
       { label: 'Browser support', route: '/browser-support', icon: 'mdi mdi-check-circle-outline' },
-      { label: 'Options & presets', route: '/options-and-presets', icon: 'mdi mdi-auto-fix' },
+      { label: 'Options, <code>$waveui</code> & presets', route: '/options-$waveui-and-presets', icon: 'mdi mdi-auto-fix' },
       { label: 'Customization', route: '/customization', icon: 'mdi mdi-tune' },
       { label: 'Breakpoints', route: '/breakpoints', icon: 'mdi mdi-format-horizontal-align-center' },
       {
@@ -102,7 +102,7 @@ export default {
   position: relative;
   width: 100%;
   min-width: 180px;
-  max-width: 260px;
+  max-width: 270px;
   margin-left: -12px;
   padding-left: 30px;
 
@@ -126,7 +126,7 @@ export default {
   .w-tree__item {margin-left: 0;}
   .w-tree__item-label {
     display: flex;
-    padding: 5px 6px 5px 16px;
+    padding: 5px 2px 5px 16px;
     font-size: 1.02rem;
     font-weight: normal;
     border-right: 0 solid $primary;
@@ -169,6 +169,7 @@ export default {
   .w-tree__item--branch > .w-tree__item-label {text-transform: uppercase;font-weight: bold;}
 
   .w-tag {padding: 2px 4px 1px;}
+  code {padding: 0 1px 1px;margin: 0 -1px;}
 }
 
 // Desktop left-side menu.
@@ -196,6 +197,6 @@ export default {
 }
 
 @media screen and (max-width: 800px) {
-  .nav-menu-wrap {max-width: 220px;padding-left: 0;}
+  .nav-menu-wrap {max-width: 230px;padding-left: 0;}
 }
 </style>
