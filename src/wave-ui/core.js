@@ -84,7 +84,7 @@ export default class WaveUI {
     for (const id in components) {
       const component = components[id]
       // If presets are defined for this component inject them into the props defaults.
-      if (options.presets[component.name]) injectPresets(component, options.presets[component.name])
+      if (options.presets?.[component.name]) injectPresets(component, options.presets[component.name])
       app.component(component.name, component)
     }
 
