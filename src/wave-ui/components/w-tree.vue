@@ -49,6 +49,7 @@ ul.w-tree(:class="classes")
 </template>
 
 <script>
+import { consoleWarn } from '../utils/console'
 /**
  * @todo things to support:
  * - items routes
@@ -106,6 +107,12 @@ export default {
     //  From data watcher, retain the oldItems open state.
     updateCurrentDepthTree (items, oldItems = []) {
       this.currentDepthItems = []
+
+      if (!Array.isArray(items) && typeof items !== 'object') {
+        return consoleWarn(`[w-tree] the tree items must be of type array or object, ${typeof items} received.`, items)
+      }
+
+      if (!Array.isArray(items)) items = [items]
 
       items.forEach((item, i) => {
         this.currentDepthItems.push({
