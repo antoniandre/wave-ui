@@ -60,7 +60,9 @@ export default class WaveUI {
       this.theme = theme
       document.documentElement.setAttribute('data-theme', theme)
       document.head.querySelector('#wave-ui-colors')?.remove?.()
-      injectColorsCSSInDOM(this.config.colors[this.theme])
+      const themeColors = this.config.colors[this.theme]
+      injectColorsCSSInDOM(themeColors)
+      this.colors = flattenColors(themeColors, colorPalette)
     }
   }
 
@@ -91,7 +93,7 @@ export default class WaveUI {
     // Register mixins.
     app.mixin({
       // Add a mixin to capture the first mounted hook, trigger the Wave UI init then unregister the mixin straight away.
-      async beforeMount () {
+      beforeMount () {
         if (!mounted) {
           mounted = true
           const $waveui = inject('$waveui')
@@ -105,7 +107,7 @@ export default class WaveUI {
           if (config.theme === 'auto') {
             detectOSDarkMode($waveui)
             themeColors = config.colors[$waveui.preferredTheme]
-            this.colors = flattenColors(themeColors, colorPalette)
+            $waveui.colors = flattenColors(themeColors, colorPalette)
           }
           injectColorsCSSInDOM(themeColors)
           injectCSSInDOM($waveui)
