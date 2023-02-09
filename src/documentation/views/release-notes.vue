@@ -59,6 +59,7 @@ main
             li Added the #[code item-disabled-key] prop. #[span.tag.new]
             li Accept HTML in the tree item label.
             li Renamed the #[item-label] slot to #[item].
+            li Support a single object as the root.
       ul
         li
           strong.code w-card
