@@ -100,26 +100,42 @@ main
     template(#item-title.3)
       title-link.ml2.my3(h2 @click.prevent) The #[code $waveui] helper
     template(#item-content.3)
-      p The #[code $waveui] object is a Swiss Army Knife and is available to help you in many ways.
-      pre {{ $waveui }}
-
+      p.
+        The #[code $waveui] object is a Swiss Army Knife at your disposal. It can help you in many
+        ways, and it is completely reactive.#[br]
+        Here is the list of what you can find in this object:
+      w-accordion(:items="waveuiObject" title-class="code" content-class="ml5")
+        template(#item-content="{ item }")
+          p.text-bold {{ item.desc }}
+          pre {{ $waveui[item.title] }}
 </template>
 
 <script>
 export default {
-  data: () => ({
-    waveUiOptions: [
-      { label: 'on', definition: 'Sets the Wave UI root on a custom node (expects a valid CSS selector). Default: `#app`, if not found, `body`.' },
-      { label: 'breakpoints', route: 'breakpoints' },
-      { label: 'colors', route: 'colors' },
-      { label: 'css', definition: 'A set of CSS-related options.' },
-      { label: 'icons', route: 'w-icon' },
-      { label: 'iconsLigature', route: 'w-icon' },
-      { label: 'notificationManager', route: 'w-notification' },
-      { label: 'presets', route: 'options-presets-and-waveui#presets' },
-      { label: 'theme', definition: 'Choose which theme to use: `light` or `dark`. You can also set `auto` to let Wave UI read the preferred theme from the user OS.' }
-    ]
-  })
+  data () {
+    return {
+      waveUiOptions: [
+        { label: 'on', definition: 'Sets the Wave UI root on a custom node (expects a valid CSS selector). Default: `#app`, if not found, `body`.' },
+        { label: 'breakpoints', route: 'breakpoints' },
+        { label: 'colors', route: 'colors' },
+        { label: 'css', definition: 'A set of CSS-related options.' },
+        { label: 'icons', route: 'w-icon' },
+        { label: 'iconsLigature', route: 'w-icon' },
+        { label: 'notificationManager', route: 'w-notification' },
+        { label: 'presets', route: 'options-presets-and-waveui#presets' },
+        { label: 'theme', definition: 'Choose which theme to use: `light` or `dark`. You can also set `auto` to let Wave UI read the preferred theme from the user OS.' }
+      ],
+      waveuiObject: [
+        { title: 'breakpoint', desc: 'Gives information about the current breakpoint and screen width.' },
+        { title: 'colors', desc: 'Contains the full list of colors available in the app with their hex values. It includes the colors from the color palette, the four status colors (info, warning, error, success), the primary and secondary color, all your custom colors, and all the color shades (light1-6, dark 1-6).' },
+        { title: 'config', desc: 'Contains the computed list of configuration that Wave UI is using. This includes the global configuration you may have defined as well as all the defaults.' },
+        { title: 'preferredTheme', desc: 'When the theme is set to `auto`, Wave UI will detect the user preferred theme and will store this value in this variable. If the user preferred theme changes, from the operating system, this value will be updated.' },
+        { title: 'theme', desc: 'The current theme that Wave UI is using.' },
+        { title: 'notify', desc: 'A function to notify.' },
+        { title: 'switchTheme', desc: 'A function to switch theme.' }
+      ]
+    }
+  }
 }
 </script>
 
