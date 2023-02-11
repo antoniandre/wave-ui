@@ -2,30 +2,54 @@
 main
   title-link.mt4(h1) Colors
   p.
-    Wave UI colors work in a very simple way: for instance the class
-    #[code pink] (or any color listed below) can be applied to any
-    element's text, and the class #[code pink--bg] can be applied to
-    any element's background.
+    Wave UI colors work in a very simple way: for instance the class #[code pink]
+    (or any color listed below) can be applied to any element's text, and the class
+    #[code pink--bg] can be applied to any element's background.
 
   p.
-    All the components that accept colors, will accept the #[code color]
-    prop for the text color, and #[code bg-color] for the background when applicable.
+    All the components that accept colors, will accept the #[code color] prop for
+    the text color, and #[code bg-color] for the background (when applicable).
 
-  p.
-    This way, it is possible to mix a background color with a different
-    text color of your choice.
+  p This way, it is possible to mix a background color with a different text color of your choice.
 
   title-link(h2) Status colors
+  p The status colors are useful to express the result of an action or for calls to action.
   .w-flex.wrap.ma-2.text-center.basis-zero
     .color.success--bg.title3.grow.py3.ma2 success
     .color.error--bg.title3.grow.py3.ma2 error
     .color.warning--bg.title3.grow.py3.ma2 warning
     .color.info--bg.title3.grow.py3.ma2 info
-  alert(warning).mb12.
-    The four status colors are considered dark and will therefore have a white text by default when used as a background color.
-    You can override this via CSS.
+
+  w-flex.wrap.align-center.mt4
+    p.my0 Example of use:
+    ssh-pre.my0.mx2(
+      v-show="$store.state.usePug"
+      language="pug"
+      :dark="$store.state.darkMode").
+      w-button(bg-color="success") OK
+    ssh-pre.my0.mx2(
+      language="html-vue"
+      v-show="!$store.state.usePug"
+      :dark="$store.state.darkMode").
+      &lt;w-button bg-color="success"&gt;OK&lt;w-button&gt;
+    w-button(bg-color="success") OK
+
+  alert(info).mb8
+    ul
+      li.
+        It is possible to redefine these four status colors in the
+        #[router-link(to="/options-presets-and-waveui") Wave UI global options].
+      li.
+        The four status colors always have a #[strong white text color by default] when they are used
+        as a background color. You can easily override the text color via CSS.
+      li
+        | By default the status colors always have priority over other Wave UI defined colors.#[br]
+        p.error.purple For instance this sentence has the classes #[code purple] and #[code error].
 
   h3 Status colors shades
+  p.
+    You may want a different shade of the status color, for interactive elements' hover effect for
+    instance, for different levels of the same status, or just because it works better in your app.
   .w-flex.wrap.mb12.ma-2.text-center.basis-zero
     .w-flex.wrap
       .color.success-light3--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") success-light3
@@ -56,45 +80,6 @@ main
       .color.info-dark2--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark2
       .color.info-dark3--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark3
 
-  title-link(h2 slug="primary-secondary-and-your-own-colors-and-shades")
-    | #[span.code.inherit primary], #[span.code.inherit secondary] and your own colors &amp; shades
-  p.
-    In addition to the built-in status colors and color palette below, you can define a set
-    of custom colors.#[br]
-    The primary color, and whichever color you add, will also be computed to 6 different shades:
-    3 lighter ones and 3 darker ones.#[br]
-    More shades would most likely be redundant with the color palette.
-
-  w-flex.text-center(wrap :gap="4")
-    .color.primary-light3--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light3
-    .color.primary-light2--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light2
-    .color.primary-light1--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light1
-    .color.primary--bg.title3.grow.basis-zero.py3(:class="{ white: !$store.state.darkMode }") primary
-    .color.primary-dark1--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark1
-    .color.primary-dark2--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark2
-    .color.primary-dark3--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark3
-
-  alert(warning).
-    The primary color is considered dark by default, and will render,
-    as well as its 3 darker shades, with a white text when used as a background color.
-
-  p.mt6.title3 To start defining your own colors add them to the WaveUI options:
-  ssh-pre(language="js" :dark="$store.state.darkMode").
-    const waveui = new WaveUI({
-      colors: {
-        primary: '#9ac332',
-        secondary: '#5d9a26'
-      }
-    })
-
-  alert(tip).
-    If you don't need it, you can add #[code css: { colorShades: false }] to the Wave UI options to disable
-    the color shades computing of the status colors and your custom colors.
-
-  alert(success).
-    You can access all the colors with their hex code in your JavaScript as well via the
-    #[code $waveui.colors] object.
-
   title-link.mt12.mb4.w-flex.align-center(h2 slug="color-palette")
     | Color Palette
     w-button.ml6(
@@ -104,7 +89,6 @@ main
   p.
     This built-in color palette will complete your collection of available colors for fast and easy designs.
 
-  p {{ colorPalette }}
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
     .w-flex.wrap.ma-2.basis-zero
       .color-palette.ma2(
@@ -135,10 +119,51 @@ main
             span inherit
             small inherit
 
-  title-link(h2) Your own CSS color classes
+  title-link(h2 slug="primary-secondary-and-your-own-colors-and-shades")
+    | #[span.code.inherit primary], #[span.code.inherit secondary] and your own colors &amp; shades
   p.
-    All the presented colors above are here to make you go faster when you need a color.#[br]
-    But you are completely free to define CSS classes in your CSS to associate a color to a class.#[br]
+    In addition to the built-in status colors and the color palette, you can define your own set
+    of custom colors.#[br]
+    If you do it from the Wave UI global configuration, 6 shades will also be automatically generated
+    for each color you add (as well as the primary and secondary color): 3 lighter and 3 darker
+    ones.#[br]
+    #[small More shades would most likely be redundant with the color palette.]
+
+  w-flex.text-center(wrap :gap="4")
+    .color.primary-light3--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light3
+    .color.primary-light2--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light2
+    .color.primary-light1--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light1
+    .color.primary--bg.title3.grow.basis-zero.py3(:class="{ white: !$store.state.darkMode }") primary
+    .color.primary-dark1--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark1
+    .color.primary-dark2--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark2
+    .color.primary-dark3--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark3
+
+  alert(warning).
+    The primary color is considered dark by default, and will render,
+    as well as its 3 darker shades, with a white text when used as a background color.
+
+  title-link(h3) Defining your own CSS colors in the Wave UI configuration
+  ssh-pre(language="js" :dark="$store.state.darkMode").
+    colors: {
+      primary: '#9ac332',
+      secondary: '#5d9a26',
+      // Custom color names should be kebab-case.
+      'mint-green': '#bff8db'
+    }
+
+  alert(success).
+    You can access all the colors with their hex code in your JavaScript via the
+    #[code $waveui.colors] object.#[br]
+    Read more about the #[code $waveui] object in the #[router-link(to="/options-presets-and-waveui") Options, presets &amp; $waveui] page.
+
+  alert(tip).
+    If you don't need the 6 shades per color, you can disable them by adding
+    #[code css: { colorShades: false }] to the Wave UI configuration.
+
+  title-link(h3) Defining your own CSS colors in your CSS
+  p.
+    The predefined colors will make you go faster, but you also can define CSS classes in your
+    CSS to associate a color to a class.#[br]
     For instance, you can define:
   ssh-pre(language="css" :dark="$store.state.darkMode").
     .mint-green {color: #acebd7;}
