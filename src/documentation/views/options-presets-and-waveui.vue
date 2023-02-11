@@ -2,7 +2,11 @@
 main
   title-link.mt4(h1) Options, presets &amp; #[code $waveui]
 
-  w-accordion.mt6(:items="3" content-class="pl11 mb12" expand-icon-rotate90 :model-value="[true, true, true]")
+  w-accordion.mt6(
+    :items="3"
+    content-class="pl11 pb6 mb12"
+    expand-icon-rotate90
+    :model-value="[true, true, true]")
     template(#item-title.1)
       title-link.ml2.my3(h2 @click.prevent) Wave UI global options
     template(#item-content.1)
@@ -102,12 +106,22 @@ main
     template(#item-content.3)
       p.
         The #[code $waveui] object is a Swiss Army Knife at your disposal. It can help you in many
-        ways, and it is completely reactive.#[br]
-        Here is the list of what you can find in this object:
-      w-accordion(:items="waveuiObject" title-class="code" content-class="ml5")
+        ways, it is completely reactive, and accessible from anywhere in your app via:#[br]
+      ul
+        li #[code this.$waveui] in a vue component
+        li #[code inject('$waveui')] when using the Vue composition API
+      p.mt6 Here is the list of what you can find in this object, along with the current values in this app as an illustration:
+      w-accordion(
+        :items="waveuiObject"
+        title-class="code"
+        content-class="ml5"
+        expand-single
+        expand-icon-rotate90)
         template(#item-content="{ item }")
-          p.text-bold {{ item.desc }}
-          pre {{ $waveui[item.title] }}
+          p.text-bold(v-html="item.desc")
+          template(v-if="!item.title.includes('()')")
+            .title4.text-bold.mt6 Current value(s) in this app and context:
+            pre.primary-light1 {{ $waveui[item.title] }}
 </template>
 
 <script>
@@ -126,13 +140,13 @@ export default {
         { label: 'theme', definition: 'Choose which theme to use: `light` or `dark`. You can also set `auto` to let Wave UI read the preferred theme from the user OS.' }
       ],
       waveuiObject: [
-        { title: 'breakpoint', desc: 'Gives information about the current breakpoint and screen width.' },
-        { title: 'colors', desc: 'Contains the full list of colors available in the app with their hex values. It includes the colors from the color palette, the four status colors (info, warning, error, success), the primary and secondary color, all your custom colors, and all the color shades (light1-6, dark 1-6).' },
-        { title: 'config', desc: 'Contains the computed list of configuration that Wave UI is using. This includes the global configuration you may have defined as well as all the defaults.' },
-        { title: 'preferredTheme', desc: 'When the theme is set to `auto`, Wave UI will detect the user preferred theme and will store this value in this variable. If the user preferred theme changes, from the operating system, this value will be updated.' },
-        { title: 'theme', desc: 'The current theme that Wave UI is using.' },
-        { title: 'notify', desc: 'A function to notify.' },
-        { title: 'switchTheme', desc: 'A function to switch theme.' }
+        { title: 'breakpoint', desc: 'Gives information about the current breakpoint and screen width.<br>Read more about it in the <a href="/breakpoints">breakpoints knowledge base</a> page.' },
+        { title: 'colors', desc: 'Contains the full list of colors available in the app with their hex values. It includes the colors from the color palette, the four status colors (info, warning, error, success), the primary and secondary color, all your custom colors, and all the color shades (light1-6, dark 1-6).<br>Read more about colors in the <a href="/colors">colors knowledge base</a> page.' },
+        { title: 'config', desc: 'Contains the computed list of configuration that Wave UI is using. This includes the global configuration you may have defined, as well as all the defaults.<br>Read more about it in the <a href="#wave-ui-global-options">Wave UI global options</a> above section.' },
+        { title: 'preferredTheme', desc: 'When the theme is set to `auto`, Wave UI will detect the user preferred theme and will store this value in this variable. If the user preferred theme changes, from the operating system, this value will be updated.<br>Read more about themes in the <a href="/themes">themes knowledge base</a> page.' },
+        { title: 'theme', desc: 'The current theme that Wave UI is using.<br>Read more about themes in the <a href="/themes">themes knowledge base</a> page.' },
+        { title: 'notify()', desc: 'A function to notify.<br>Read more about the notification manager in the <a href="/w-notification">notification component</a>.' },
+        { title: 'switchTheme()', desc: 'A function to switch theme.<br>Read more about themes in the <a href="/themes">themes knowledge base</a> page.' }
       ]
     }
   }

@@ -1,5 +1,6 @@
 <template lang="pug">
 div
+  .title3.my6 You have the choice to use one or the other, or both.
   w-tabs.mt4(:items="2" content-class="pl4")
     //- Buit-in notification manager.
     template(#item-title.1) Notification manager
