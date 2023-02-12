@@ -77,6 +77,31 @@ main
         // Trigger an action.
       }
     }
+
+  title-link(h2) Adding themes in your Wave UI app that never had themes
+  p.
+    If you never had 2 styles, you most likely have added colors in your CSS that will not work
+    with the other theme. You're gonna have to locate the elements that look ugly and replace their
+    color with one that works.#[br]
+    This list should guide you a little.
+    using the dev tools and replace their
+    | CSS colors with one of these four CSS3 variables as a good start:
+  ol
+    li Add #[code theme: 'auto'] to the Wave UI configuration.
+    li.
+      Switch your operating system preference to dark theme or light if you were in dark.
+      That should already change the background color from the Wave UI defaults.
+    li
+      | Locate the ugly elements using the dev tools and replace their color/background-color with
+      | colors that work for both themes, or with one of the following Wave UI defaults:
+      ul
+        li color: #[code.text-bold rgb(var(--w-base-color-rgb))];
+        li background-color: #[code.text-bold rgb(var(--w-base-bg-color-rgb))];
+        li color: #[code.text-bold rgb(var(--w-contrast-color-rgb))];
+        li background-color: #[code.text-bold rgb(var(--w-contrast-bg-color-rgb))];
+      p.
+        Read more about their signification in the
+        #[a(href="/colors#colors-and-themes") Colors and themes section of the colors page].
 </template>
 
 <script>

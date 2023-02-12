@@ -210,7 +210,9 @@ main
     template(#item-cell="{ label, header }")
       p(v-if="header.key === 'desc'") {{ label }}
       code(v-else) {{ label }}
-  p If you define theme-specific colors in the Wave UI config,
+  p.
+    If you define theme-specific colors in the Wave UI config, they will also generate a CSS3
+    variable that you can use anywhere.
 
 </template>
 
