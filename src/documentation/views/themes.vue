@@ -43,9 +43,9 @@ main
     When the theme is automatic, you can access the current detected theme name in
     #[code $waveui.preferredTheme].
   example
-    .title2 Preferred theme: #[strong {{ $waveui.preferredTheme }}].
+    .title2 Preferred theme: #[strong {{ $waveui.preferredTheme }}]
     template(#pug).
-      div Preferred theme: #[strong {{ '\{\{ $waveui.preferredTheme \}\}' }}].
+      div Preferred theme: #[strong {{ '\{\{ $waveui.preferredTheme \}\}' }}]
   p.mt6.
     It is also possible to start with the automatic theme, and offer the user the option to switch
     theme like in this documentation.#[br]
@@ -55,54 +55,28 @@ main
   example
     .title2
       code $waveui.preferredTheme
-      | : {{ $waveui.preferredTheme }}.
+      | : {{ $waveui.preferredTheme }}
     .title2
       code $waveui.theme
-      | : {{ $waveui.theme }}.
+      | : {{ $waveui.theme }}
 
-  alert(tip) If you are using 2 themes, you should use CSS variables for all of your styling.
-//-
-  - SCSS variables cannot be used for colors: need to use css3 vars
-  - showcase the available css3 variables
-  - you can write colors with $store.state.darkMode ? 'green-dark5--bg' : 'green-light5--bg', or create a color class that has a css3 var value.
-
-  - recommended to do:
-  :root {
-    background-color: rgb(var(--w-base-bg-color-rgb));
-    color: rgb(var(--w-base-color-rgb));
-  }
-
-
-  this.$waveui.switchTheme(darkMode ? 'dark' : 'light')
-
-  you can watch preferredTheme and trigger an action, or use $waveui.preferredTheme directly everywhere.
-  watch: {
-    '$waveui.preferredTheme' (theme) {
-      this.$store.commit('setDarkMode', theme === 'dark')
+  alert(tip).
+    If you are using 2 themes, you should use CSS3 variables for all of your styling and not SCSS
+    variables.
+  title-link(h3) Triggering an action on theme change
+  p.
+    triggering an action when the user changes the theme is easy because they will do it from one
+    of the components in your app. But if you want to trigger an action when Wave UI detects a change
+    of preferred theme, this is also easy!
+  p.
+    You can watch the value of #[code $waveui.preferredTheme], but since it's reactive you may also
+    just use it in your template with #[code v-if].
+  ssh-pre(language="js" :dark="$store.state.darkMode").
+    watch: {
+      '$waveui.preferredTheme' (theme) {
+        // Trigger an action.
+      }
     }
-  }
-
-  mounted () {
-    this.$store.commit('setDarkMode', this.$waveui.preferredTheme === 'dark')
-    setTimeout(this.initScrollAnimation, 200)
-  },
-
-  Colors are defined this way:
-  - User custom colors and shades
-  - Color palette (immutable)
-  - Status colors
-
-  valid custom color names should be kebab-case. E.g. 'mint-green'
-
-  ----------------
-
-  Using the $waveui object
-  <script setup>
-  import { inject } from 'vue'
-  const waveui = inject('$waveui')
-
-  // import { useWaveUI } from '@/wave-ui/index'
-  // const waveui = useWaveUI()
 </template>
 
 <script>

@@ -143,13 +143,28 @@ main
     as well as its 3 darker shades, with a white text when used as a background color.
 
   title-link(h3) Defining your own CSS colors in the Wave UI configuration
-  ssh-pre(language="js" :dark="$store.state.darkMode").
-    colors: {
-      primary: '#9ac332',
-      secondary: '#5d9a26',
-      // Custom color names should be kebab-case.
-      'mint-green': '#bff8db'
-    }
+  w-flex
+    div
+      .title4 Theme-specific (light or dark) colors.
+      ssh-pre(language="js" :dark="$store.state.darkMode").
+        colors: {
+          light: {
+            primary: '#9ac332',
+            secondary: '#5d9a26',
+            // Custom color names should be kebab-case.
+            'mint-green': '#bff8db'
+          }
+        }
+    w-divider.ma4(vertical) Or
+    div
+      .title4 If you don't care about themes.
+      ssh-pre(language="js" :dark="$store.state.darkMode").
+        colors: {
+          primary: '#9ac332',
+          secondary: '#5d9a26',
+          // Custom color names should be kebab-case.
+          'mint-green': '#bff8db'
+        }
 
   alert(success).
     You can access all the colors with their hex code in your JavaScript via the
@@ -174,8 +189,7 @@ main
     ssh-pre.ml3(
       v-show="$store.state.usePug"
       :dark="$store.state.darkMode"
-      language="pug"
-      label="Pug").
+      language="pug").
       w-tag(color="mint-green" bg-color="navy-blue" lg)
     ssh-pre.ml3(
       v-show="!$store.state.usePug"
@@ -183,6 +197,21 @@ main
       language="html-vue").
       &lt;w-tag color="mint-green" bg-color="navy-blue" lg&gt;tag&lt;/w-tag&gt;
     w-tag.mb4.align-self-end(color="mint-green" bg-color="navy-blue" lg) Tag
+
+  title-link(h2) Colors and themes
+  p.
+    If you use both dark and light themes, you should always use colors that are adapted to the
+    app background color.#[br]
+    Since it is not easy to find a color that will work for both themes, we recommend that you use
+    a light and dark version of the same color.#[br]
+    Wave UI provides these 5 CSS classes which carry colors that will automatically change when
+    switching theme.
+  w-table(:headers="tableHeaders" :items="tableItems" :mobile-breakpoint="700")
+    template(#item-cell="{ label, header }")
+      p(v-if="header.key === 'desc'") {{ label }}
+      code(v-else) {{ label }}
+  p If you define theme-specific colors in the Wave UI config,
+
 </template>
 
 <script>
@@ -191,7 +220,21 @@ import { colorPalette } from '@/wave-ui/utils/colors'
 export default {
   data: () => ({
     colorPalette: colorPalette.filter(color => !['black', 'white', 'inherit', 'transparent'].includes(color.label)),
-    horizontal: false
+    horizontal: false,
+    tableHeaders: [
+      { label: 'CSS class', key: 'cssClass' },
+      { label: 'CSS3 variable', key: 'css3Var' },
+      { label: 'Light theme default', key: 'lightDefault', width: '10%' },
+      { label: 'Dark theme default', key: 'darkDefault', width: '10%' },
+      { label: 'Description', key: 'desc', width: '40%' }
+    ],
+    tableItems: [
+      { cssClass: '.base-color', css3Var: '--w-base-color-rgb', lightDefault: '#000', darkDefault: '#fff', desc: 'Base color for texts. For light theme this color should be dark and vice-versa.' },
+      { cssClass: '.base-bg-color', css3Var: '--w-base-bg-color-rgb', lightDefault: '#fff', darkDefault: '#222', desc: 'Base background color. For light theme this color should be light and vice-versa.' },
+      { cssClass: '.contrast-color', css3Var: '--w-contrast-color-rgb', lightDefault: '#fff', darkDefault: '#000', desc: 'A high contrast color from the current background of the app.' },
+      { cssClass: '.contrast-bg-color', css3Var: '--w-contrast-bg-color-rgb', lightDefault: '#000', darkDefault: '#fff', desc: 'A high contrast background color from the current background of the app.' },
+      { cssClass: '.disabled-color', css3Var: '--w-disabled-color-rgb', lightDefault: '#ccc', darkDefault: '#4a4a4a', desc: 'When a form element is disabled.' }
+    ]
   })
 }
 </script>
