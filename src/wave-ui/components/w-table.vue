@@ -820,10 +820,18 @@ $tr-border-top: 1px;
 
 // Mobile layout.
 .w-table--mobile {
+  display: flex;
+
   thead {display: none;}
-  td {display: block;}
+  tbody {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
   tr {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     padding-top: $base-increment;
     padding-bottom: $base-increment;
   }
