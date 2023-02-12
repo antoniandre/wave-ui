@@ -62,9 +62,14 @@ main
             li Support a single object as the root.
       ul
         li
+          strong.code w-table
+          ul
+            li Improve the mobile layout.
+      ul
+        li
           strong.code w-card
           ul
-            li allow HTML in card title.
+            li Allow HTML in card title.
 
     li.patch
       strong.version v2.48.0
