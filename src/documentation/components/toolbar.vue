@@ -73,11 +73,13 @@ export default {
 
 <style lang="scss">
 div.main-toolbar {
-  background-color: rgba(var(--w-base-bg-color-rgb), 0.9);
   height: 42px;
   padding-top: 0;
   padding-bottom: 0;
+  background-color: rgba(var(--w-base-bg-color-rgb), 0.85);
+  backdrop-filter: blur(4px);
   z-index: 190;
+  border-bottom-color: rgba(var(--w-contrast-bg-color-rgb), 0.05);
 
   .home-link {
     @include default-transition;
