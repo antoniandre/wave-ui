@@ -78,7 +78,7 @@ main
       }
     }
 
-  title-link(h2) Adding themes in your Wave UI app that never had themes
+  title-link(h2 slug="adding-themes-in-your-wave-ui-app") Adding themes in your Wave UI app that never had themes
   p.
     If you never had 2 styles, you most likely have added colors in your CSS that will not work
     with the other theme. You're gonna have to locate the elements that look ugly and replace their
@@ -88,9 +88,57 @@ main
     | CSS colors with one of these four CSS3 variables as a good start:
   ol
     li Add #[code theme: 'auto'] to the Wave UI configuration.
+    li
+      | If you have defined colors in the Wave UI configuration, define their best equivalent for the other theme:
+      .w-flex
+        ssh-pre(language="css" :dark="$store.state.darkMode").
+          colors: {
+            primary: '#0e9d39' // A dark green.
+          }
+        w-icon.ma2 i-arrow-right
+        ssh-pre(language="css" :dark="$store.state.darkMode").
+          colors: {
+            light: {
+              primary: '#0e9d39' // A dark green.
+            },
+            dark: {
+              primary: '#82c295' // A lighter green.
+            }
+          }
+    li
+      | If you were using SCSS variables for colors, just use the CSS3 variables that Wave UI
+      | generates so it will be updated when switching theme.
+      .w-flex
+        ssh-pre(language="css" :dark="$store.state.darkMode").
+          $primary: #1b4;
+          $secondary: #666;
+        w-icon.ma2 i-arrow-right
+        ssh-pre(language="css" :dark="$store.state.darkMode").
+          $primary: var(--w-primary-color);
+          $secondary: var(--w-secondary-color);
     li.
       Switch your operating system preference to dark theme or light if you were in dark.
       That should already change the background color from the Wave UI defaults.
+    li
+      | Optionally, you can override these Wave UI defaults if you don't like it.#[br]
+      | Note that each of these variables don't contain a color but only its RGB channels.
+      | This is allowing us to apply an alpha channel on that color if we need! ;)
+      ssh-pre(language="css" :dark="$store.state.darkMode").
+        :root[data-theme=light] {
+          --w-base-bg-color-rgb: 255, 255, 255; /* white */
+          --w-base-color-rgb: 0, 0, 0; /* black */
+          --w-contrast-bg-color-rgb: 0, 0, 0; /* black */
+          --w-contrast-color-rgb: 255, 255, 255; /* white */
+          --w-disabled-color-rgb: 204, 204, 204; /* #ccc */
+        }
+
+        :root[data-theme=dark] {
+          --w-base-bg-color-rgb: 34, 34, 34; /* #222 */
+          --w-base-color-rgb: 255, 255, 255; /* white */
+          --w-contrast-bg-color-rgb: 255, 255, 255; /* white */
+          --w-contrast-color-rgb: 0, 0, 0; /* black */
+          --w-disabled-color-rgb: 74, 74, 74; /* #4a4a4a */
+        }
     li
       | Locate the ugly elements using the dev tools and replace their color/background-color with
       | colors that work for both themes, or with one of the following Wave UI defaults:
@@ -102,6 +150,29 @@ main
       p.
         Read more about their signification in the
         #[a(href="/colors#colors-and-themes") Colors and themes section of the colors page].
+    li
+      | You may want to add a button to let the user switch theme:
+      ssh-pre(
+        v-show="$store.state.usePug"
+        language="pug"
+        :dark="$store.state.darkMode").
+        w-button(
+          fixed
+          top
+          right
+          :icon="`material-icons ${$waveui.theme === 'dark' ? 'light_mode' : 'dark_mode'}`"
+          @click="$waveui.switchTheme($waveui.theme === 'light' ? 'dark' : 'light')")
+      ssh-pre(
+        v-show="!$store.state.usePug"
+        language="vue-html"
+        :dark="$store.state.darkMode").
+        &lt;w-button
+          fixed
+          top
+          right
+          :icon="`material-icons ${$waveui.theme === 'dark' ? 'light_mode' : 'dark_mode'}`"
+          @click="$waveui.switchTheme($waveui.theme === 'light' ? 'dark' : 'light')"&gt;
+        &lt;/w-button&gt;
 </template>
 
 <script>

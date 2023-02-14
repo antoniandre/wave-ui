@@ -159,6 +159,11 @@ const routes = [
     component: () => import('@/documentation/views/backers.vue')
   },
   {
+    path: '/migration-from-v2-to-v3',
+    name: 'migration-from-v2-to-v3',
+    component: () => import('@/documentation/views/migration-from-v2-to-v3.vue')
+  },
+  {
     path: '/form',
     name: 'form-elements',
     redirect: '/w-form'
