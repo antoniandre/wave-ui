@@ -134,11 +134,13 @@ export default class WaveUI {
     if (!options.theme) options.theme = 'light'
     // Move colors inside a theme if there are option.colors without theme.
     // E.g. colors: { primary, ... } & not colors: { light { primary, ... }, dark: { primary, ... } })
-    const colors = { ...options.colors }
-    if (!options.colors?.light) options.colors.light = colors
-    if (!options.colors?.dark) options.colors.dark = colors
-    // Cleanup anything else than themes in config.colors.
-    options.colors = { light: options.colors.light, dark: options.colors.dark }
+    if (options.colors) {
+      const colors = { ...options.colors }
+      if (!options.colors.light) options.colors.light = colors
+      if (!options.colors.dark) options.colors.dark = colors
+      // Cleanup anything else than themes in config.colors.
+      options.colors = { light: options.colors.light, dark: options.colors.dark }
+    }
 
     // Merge user options into the default config.
     let { components, ...config } = options
