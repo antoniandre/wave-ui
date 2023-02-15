@@ -80,49 +80,21 @@ main
 
   title-link(h2 slug="adding-themes-in-your-wave-ui-app") Adding themes in your Wave UI app that never had themes
   p.
-    If you never had 2 styles, you most likely have added colors in your CSS that will not work
+    If you never had 2 styles, you most likely have added colors in your CSS that will not look nice
     with the other theme. You're gonna have to locate the elements that look ugly and replace their
-    color with one that works.#[br]
+    colors with ones that look better.#[br]
     This list should guide you a little.
-    using the dev tools and replace their
-    | CSS colors with one of these four CSS3 variables as a good start:
   ol
-    li Add #[code theme: 'auto'] to the Wave UI configuration.
-    li
-      | If you have defined colors in the Wave UI configuration, define their best equivalent for the other theme:
-      .w-flex
-        ssh-pre(language="css" :dark="$store.state.darkMode").
-          colors: {
-            primary: '#0e9d39' // A dark green.
-          }
-        w-icon.ma2 i-arrow-right
-        ssh-pre(language="css" :dark="$store.state.darkMode").
-          colors: {
-            light: {
-              primary: '#0e9d39' // A dark green.
-            },
-            dark: {
-              primary: '#82c295' // A lighter green.
-            }
-          }
-    li
-      | If you were using SCSS variables for colors, just use the CSS3 variables that Wave UI
-      | generates so it will be updated when switching theme.
-      .w-flex
-        ssh-pre(language="css" :dark="$store.state.darkMode").
-          $primary: #1b4;
-          $secondary: #666;
-        w-icon.ma2 i-arrow-right
-        ssh-pre(language="css" :dark="$store.state.darkMode").
-          $primary: var(--w-primary-color);
-          $secondary: var(--w-secondary-color);
-    li.
-      Switch your operating system preference to dark theme or light if you were in dark.
-      That should already change the background color from the Wave UI defaults.
-    li
-      | Optionally, you can override these Wave UI defaults if you don't like it.#[br]
-      | Note that each of these variables don't contain a color but only its RGB channels.
-      | This is allowing us to apply an alpha channel on that color if we need! ;)
+    li.mt6 Add #[code theme: 'auto'] to the Wave UI configuration.
+    li.mt6.
+      Switch your operating system preference to dark theme, or light if you were in dark.
+      That should already change the background color from the Wave UI defaults.#[br]
+      If it doesn't, you probably have a style that applies a background with a higher priority.
+    li.mt6
+      | Optionally, you can override these Wave UI defaults if you don't like them.#[br]
+      | Note that each of these variables is not containing a color but only its RGB channels.
+      | This allows us to apply an alpha channel on that color if we need
+      | (e.g. #[code rgba(var(--w-base-bg-color-rgb), 0.3)])! 😉#[br]
       ssh-pre(language="css" :dark="$store.state.darkMode").
         :root[data-theme=light] {
           --w-base-bg-color-rgb: 255, 255, 255; /* white */
@@ -139,7 +111,35 @@ main
           --w-contrast-color-rgb: 0, 0, 0; /* black */
           --w-disabled-color-rgb: 74, 74, 74; /* #4a4a4a */
         }
-    li
+    li.mt6
+      | If you have defined colors in the Wave UI configuration, define their best equivalent for the other theme:
+      .w-flex.align-center
+        ssh-pre(language="js" label="before" :dark="$store.state.darkMode").
+          colors: {
+            primary: '#0e9d39' // A dark green.
+          }
+        w-icon.grey.ma2(xl) mdi mdi-arrow-right
+        ssh-pre(language="js" label="after" :dark="$store.state.darkMode").
+          colors: {
+            light: {
+              primary: '#0e9d39' // A dark green.
+            },
+            dark: {
+              primary: '#82c295' // A lighter green.
+            }
+          }
+    li.mt6
+      | If you were using SCSS variables for colors, just use the CSS3 variables that Wave UI
+      | generates so it will be updated when switching theme.
+      .w-flex.align-center
+        ssh-pre(language="css" label="before" :dark="$store.state.darkMode").
+          $primary: #1b4;
+          $secondary: #666;
+        w-icon.grey.ma2(xl) mdi mdi-arrow-right
+        ssh-pre(language="css" label="after" :dark="$store.state.darkMode").
+          $primary: var(--w-primary-color);
+          $secondary: var(--w-secondary-color);
+    li.mt6
       | Locate the ugly elements using the dev tools and replace their color/background-color with
       | colors that work for both themes, or with one of the following Wave UI defaults:
       ul
@@ -150,7 +150,7 @@ main
       p.
         Read more about their signification in the
         #[a(href="/colors#colors-and-themes") Colors and themes section of the colors page].
-    li
+    li.mt6
       | You may want to add a button to let the user switch theme:
       ssh-pre(
         v-show="$store.state.usePug"
