@@ -155,9 +155,11 @@ div.icons-demo
           &lt;/w-icon&gt;
 
         template(#js).
-          new Vue({
-            waveui: new WaveUI({ iconsLigature: 'material-icons' })
-          }).$mount('#app')
+          const app = Vue.createApp()
+
+          app.use(WaveUI, { iconsLigature: 'material-icons' })
+
+          app.mount('#app')
 
     li
       h3.title3 Ionicons 4: iOS &amp; Material Design

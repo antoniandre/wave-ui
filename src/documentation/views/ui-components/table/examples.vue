@@ -744,7 +744,7 @@ div
         }
       })
 
-      new WaveUI(app, {})
+      app.use(WaveUI, {})
 
       app.mount('#app')
 

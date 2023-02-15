@@ -55,7 +55,7 @@ import SourceCode from './source-code.vue'
 export default {
   props: {
     // Pass props to the w-app component as a string (way simpler to pass it to Codepen).
-    appPropsString: { type: String, default: 'block' },
+    appClassesString: { type: String, default: 'block' },
 
     contentClass: { type: String },
     externalJs: { type: String },
@@ -159,7 +159,7 @@ export default {
       if (this.usePug && slots.pug) {
         if (blanks.includes('pug')) html = slots.pug.replace(/\n+$/, '')
         else {
-          html = `#app${this.appPropsString ? `(${this.appPropsString})` : ''}\n  ` +
+          html = `#app${this.appClassesString ? `.${this.appClassesString.replaceAll(' ', '.')}` : ''}\n  ` +
                  slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n  ')
         }
       }
@@ -168,7 +168,7 @@ export default {
       else {
         if (blanks.includes('html')) html = slots.html.replace(/\n+$/, '')
         else {
-          html = `<div id="app"${this.appPropsString ? ` ${this.appPropsString}` : ''}>\n  ` +
+          html = `<div id="app"${this.appClassesString ? ` class="${this.appClassesString}"` : ''}>\n  ` +
                     slots.html.replace(/\n+$/, '').replace(/\n/g, '\n  ') + '\n' +
                  '</div>\n'
         }

@@ -1024,7 +1024,7 @@ div.tooltips-demo
     and not the activator itself. For that reason, it is not the recommended option if you have
     the choice.
   title-link(h3 slug="external-activator--basic") Trigger a menu on click of an external activator
-  example.example14(content-class="text-center my4" app-props-string="text-center")
+  example.example14(content-class="text-center my4" app-classes-string="text-center")
     w-button.cat-button(icon="mdi mdi-cat" xl)
     w-tooltip(append-to=".example14" activator=".cat-button") Meow!
     template(#pug).
@@ -1049,7 +1049,7 @@ div.tooltips-demo
     Note that like in this example, a tiny delay may help positioning the detachable correctly
     in case of multiple activators with different menu contents.
 
-  example.example16(content-class="text-center my4" app-props-string="block text-center")
+  example.example16(content-class="text-center my4" app-classes-string="d-block text-center")
     w-button.pet-button2.cat-button3.ma4(
       icon="mdi mdi-cat"
       xl

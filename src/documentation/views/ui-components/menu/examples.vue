@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   title-link(h2) Basic
-  example.example1(content-class="text-center pt5" app-props-string="align-center")
+  example.example1(content-class="text-center pt5" app-classes-string="align-center")
     w-menu(append-to=".example1")
       template(#activator="{ on }")
         w-button(v-on="on") Show menu
@@ -71,7 +71,7 @@ div
     A persistent menu can only be closed by clicking on the activator again, or programmatically.#[br]
     Clicking outside the menu will not close it.#[br]
     Of course you can also add a button inside the menu to close it.
-  example.example3(content-class="text-center pt5" app-props-string="align-center")
+  example.example3(content-class="text-center pt5" app-classes-string="align-center")
     w-menu(append-to=".example3" persistent)
       template(#activator="{ on }")
         w-button.mb2.mr3(v-on="on") Show persistent menu
@@ -93,7 +93,7 @@ div
 
   title-link(h2) Hide menu on click inside
   p A click inside the menu will close it.
-  example.example4(content-class="text-center pt5" app-props-string="align-center")
+  example.example4(content-class="text-center pt5" app-classes-string="align-center")
     w-menu(append-to=".example4" hide-on-menu-click)
       template(#activator="{ on }")
         w-button(v-on="on") Show menu
@@ -455,7 +455,7 @@ div
     and not the activator itself. For that reason, it is not the recommended option if you have
     the choice.
   title-link(h3 slug="external-activator--basic") Trigger a menu on click of an external activator
-  example.example14(content-class="text-center my4" app-props-string="text-center")
+  example.example14(content-class="text-center my4" app-classes-string="text-center")
     w-button.cat-button(icon="mdi mdi-cat" xl)
     w-menu(append-to=".example14" activator=".cat-button" arrow) Meow!
     template(#pug).
@@ -476,7 +476,7 @@ div
   title-link(h3 slug="external-activator--2-activators").
     Trigger the same menu from 2 different external activators
   p.text-italic But do you really need that? ;)
-  example.example15(content-class="text-center my4" app-props-string="block text-center")
+  example.example15(content-class="text-center my4" app-classes-string="d-block text-center")
     w-button.pet-button.cat-button2.ma4(icon="mdi mdi-cat" xl @click="activator1 = '.cat-button2'")
     w-button.pet-button.dog-button2.ma4(icon="mdi mdi-dog" xl @click="activator1 = '.dog-button2'")
     w-menu(append-to=".example15" :activator="activator1" arrow)
@@ -522,7 +522,7 @@ div
     Note that like in this example, a tiny delay may help positioning the detachable correctly
     in case of multiple activators with different menu contents.
 
-  example.example16(content-class="text-center my4" app-props-string="block text-center")
+  example.example16(content-class="text-center my4" app-classes-string="d-block text-center")
     w-button.pet-button2.cat-button3.ma4(
       icon="mdi mdi-cat"
       xl
@@ -580,7 +580,7 @@ div
 
   title-link(h2) Arrow (Tooltip style)
   p Applies a tooltip style with the #[code arrow] option.
-  example.example13(content-class="text-center my4" app-props-string="align-center")
+  example.example13(content-class="text-center my4" app-classes-string="align-center")
     w-menu(append-to=".example13" arrow)
       template(#activator="{ on }")
         w-button.ma1(v-on="on") Show menu
@@ -844,7 +844,7 @@ div
 
   title-link(h2) Color &amp; background color
   p Like in most components, you can define a #[code color] and a  #[code bg-color].
-  example.example8(content-class="text-center my4" app-props-string="align-center")
+  example.example8(content-class="text-center my4" app-classes-string="align-center")
     w-menu(
       append-to=".example8"
       :color="$store.state.darkMode ? 'blue-light4' : 'blue-dark2'"
@@ -931,7 +931,7 @@ div
 
   title-link(h2) Menu content: w-card
   p By default the menu is a w-card, so it accepts all the props of a w-card.
-  example.example10(content-class="text-center my4" app-props-string="align-center")
+  example.example10(content-class="text-center my4" app-classes-string="align-center")
     w-menu(append-to=".example10" shadow v-model="showMenu")
       template(#activator)
         w-button.mr3.mb2(@click="showMenu = true") Show a w-card menu
@@ -1045,7 +1045,7 @@ div
     In this example, the menu is #[code persistent] so the user is forced to select an option from
     the menu when open. Then on click of an option, the menu will hide thanks to the option
     #[code hide-on-menu-click].
-  example.example11(content-class="text-center my4" app-props-string="align-center")
+  example.example11(content-class="text-center my4" app-classes-string="align-center")
     w-menu(append-to=".example11" custom hide-on-menu-click persistent shadow)
       template(#activator="{ on }")
         w-button(v-on="on") Show a list menu
@@ -1103,7 +1103,7 @@ div
       })
 
   title-link(h2) Menu with overlay
-  example.example12(content-class="text-center my4" app-props-string="align-center")
+  example.example12(content-class="text-center my4" app-classes-string="align-center")
     w-menu(append-to=".example12" v-model="showListMenu2" shadow custom overlay)
       template(#activator="{ on }")
         w-button(v-on="on") Show a menu &amp; overlay

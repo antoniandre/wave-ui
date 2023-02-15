@@ -36,22 +36,19 @@ div
           section.footer Footer
         template(#pug).
           #app
-            w-app
-              header Header
-              w-flex(grow)
-                aside Nav menu
-                main.grow Main content
-              footer Footer
+            header Header
+            w-flex(grow)
+              aside Nav menu
+              main.grow Main content
+            footer Footer
         template(#html).
           &lt;div id="app"&gt;
-            &lt;w-app&gt;
-              &lt;header&gt;Header&lt;/header&gt;
-              &lt;w-flex grow&gt;
-                &lt;aside&gt;Nav menu&lt;/aside&gt;
-                &lt;main class="grow"&gt;Main content&lt;/main&gt;
-              &lt;/w-flex&gt;
-              &lt;footer&gt;Footer&lt;/footer&gt;
-            &lt;/w-app&gt;
+            &lt;header&gt;Header&lt;/header&gt;
+            &lt;w-flex grow&gt;
+              &lt;aside&gt;Nav menu&lt;/aside&gt;
+              &lt;main class="grow"&gt;Main content&lt;/main&gt;
+            &lt;/w-flex&gt;
+            &lt;footer&gt;Footer&lt;/footer&gt;
           &lt;/div&gt;
         template(#css).
           /* Demo styles - can be discarded. */
@@ -78,22 +75,21 @@ div
               section.content.block.grow Main content
               section.footer Footer
         template(#pug).
-          #app
-            w-app(row)
-              aside Nav menu
-              w-flex(column)
-                header Header
-                main.grow Main content
-                footer Footer
+          #app.row
+            aside Nav menu
+            w-flex(column)
+              header Header
+              main.grow Main content
+              footer Footer
         template(#html).
-          &lt;w-app id="app" row&gt;
+          &lt;div id="app" class="row"&gt;
             &lt;aside&gt;Nav menu&lt;/aside&gt;
             &lt;w-flex column&gt;
               &lt;header&gt;Header&lt;/header&gt;
               &lt;main class="grow"&gt;Main content&lt;/main&gt;
               &lt;footer&gt;Footer&lt;/footer&gt;
             &lt;/w-flex&gt;
-          &lt;/w-app&gt;
+          &lt;/div&gt;
         template(#css).
           /* Demo styles - can be discarded. */
           .w-app {padding: 4px;background-color: #fffeed;}
@@ -117,17 +113,14 @@ div
           section.footer Footer
         template(#pug).
           #app
-            w-app
-              header Header
-              main.grow Main content
-              footer Footer
+            header Header
+            main.grow Main content
+            footer Footer
         template(#html).
           &lt;div id="app"&gt;
-            &lt;w-app&gt;
-              &lt;header&gt;Header&lt;/header&gt;
-              &lt;main class="grow"&gt;Main content&lt;/main&gt;
-              &lt;footer&gt;Footer&lt;/footer&gt;
-            &lt;/w-app&gt;
+            &lt;header&gt;Header&lt;/header&gt;
+            &lt;main class="grow"&gt;Main content&lt;/main&gt;
+            &lt;footer&gt;Footer&lt;/footer&gt;
           &lt;/div&gt;
         template(#css).
           /* Demo styles - can be discarded. */
@@ -152,23 +145,20 @@ div
             section.content.block.grow Main content
             section.nav-menu.block Nav menu
         template(#pug).
-          #app
-            w-app(block)
-              header Header
-              w-flex
-                main.grow.py12 Main content
-                aside Nav menu
-              footer Footer
+          #app.d-block
+            header Header
+            w-flex
+              main.grow.py12 Main content
+              aside Nav menu
+            footer Footer
         template(#html).
-          &lt;div id="app"&gt;
-            &lt;w-app block&gt;
-              &lt;header&gt;Header&lt;/header&gt;
-              &lt;w-flex&gt;
-                &lt;main class="grow py12"&gt;Main content&lt;/main&gt;
-                &lt;aside&gt;Nav menu&lt;/aside&gt;
-              &lt;/w-flex&gt;
-              &lt;footer&gt;Footer&lt;/footer&gt;
-            &lt;/w-app&gt;
+          &lt;div id="app" class="d-block"&gt;
+            &lt;header&gt;Header&lt;/header&gt;
+            &lt;w-flex&gt;
+              &lt;main class="grow py12"&gt;Main content&lt;/main&gt;
+              &lt;aside&gt;Nav menu&lt;/aside&gt;
+            &lt;/w-flex&gt;
+            &lt;footer&gt;Footer&lt;/footer&gt;
           &lt;/div&gt;
         template(#css).
           /* Demo styles - can be discarded. */
