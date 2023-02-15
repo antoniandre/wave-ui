@@ -7,7 +7,7 @@ main
     | Pick 1 of the 3 following installation methods.
 
   w-accordion(
-    :items="3"
+    :items="4"
     :value="openPane"
     expand-single
     title-class="justify-space-between py4 pl6 blue-light5--bg"
@@ -20,16 +20,22 @@ main
     template(#item-content.1)
       standard-install
 
-    //- Custom install.
+    //- Using CDN.
     template(#item-title.2)
-      title-link.ma0(h2 slug="a-la-carte") À la carte (tree shaking)
+      title-link.ma0(h2 slug="using-a-cdn") Using a CDN
     template(#item-content.2)
+      cdn-install
+
+    //- Custom install.
+    template(#item-title.3)
+      title-link.ma0(h2 slug="a-la-carte") À la carte (tree shaking)
+    template(#item-content.3)
       custom-install
 
     //- Nuxt install.
-    template(#item-title.3)
+    template(#item-title.4)
       title-link.ma0(h2 slug="installation-on-nuxt") Installation on Nuxt
-    template(#item-content.3)
+    template(#item-content.4)
       nuxt-install
 
   w-divider.my12
@@ -59,14 +65,15 @@ main
 
 <script>
 import StandardInstall from './install-standard.vue'
+import CdnInstall from './install-cdn.vue'
 import CustomInstall from './install-custom.vue'
 import NuxtInstall from './install-nuxt.vue'
 
 export default {
-  components: { StandardInstall, CustomInstall, NuxtInstall },
+  components: { StandardInstall, CdnInstall, CustomInstall, NuxtInstall },
 
   data: () => ({
-    openPane: [true, false, false]
+    openPane: [true, false, false, false]
   }),
 
   methods: {
@@ -88,8 +95,9 @@ export default {
 
   mounted () {
     const hash = document.location.hash || ''
-    if (hash.includes('a-la-carte')) this.openPane = [false, true, false]
-    else if (hash.includes('nuxt')) this.openPane = [false, false, true]
+    if (hash.includes('using-a-cdn')) this.openPane = [false, true, false, false]
+    if (hash.includes('a-la-carte')) this.openPane = [false, false, true, false]
+    else if (hash.includes('nuxt')) this.openPane = [false, false, false, true]
   }
 }
 </script>
