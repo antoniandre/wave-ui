@@ -56,7 +56,7 @@ export default class WaveUI {
     },
 
     // Callable from this.$waveui.
-    switchTheme (theme) {
+    switchTheme (theme, skipFlatten = false) {
       this.theme = theme
       document.documentElement.setAttribute('data-theme', theme)
       document.head.querySelector('#wave-ui-colors')?.remove?.()
@@ -104,12 +104,9 @@ export default class WaveUI {
           wApp.classList.add('w-app')
 
           let themeColors = config.colors[config.theme]
-          if (config.theme === 'auto') {
-            detectOSDarkMode($waveui)
-            themeColors = config.colors[$waveui.preferredTheme]
-            $waveui.colors = flattenColors(themeColors, colorPalette)
-          }
-          injectColorsCSSInDOM(themeColors)
+          if (config.theme === 'auto') detectOSDarkMode($waveui) // Also switches the theme.
+          else switchTheme(config.theme, true)
+
           injectCSSInDOM($waveui)
           injectNotifManagerInDOM(wApp, components, $waveui)
 
