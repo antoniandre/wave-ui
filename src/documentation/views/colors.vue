@@ -137,7 +137,63 @@ main
             span inherit
             small inherit
 
-  title-link(h2) Your own CSS color classes
+  title-link(h2 slug="primary-secondary-and-your-own-colors-and-shades")
+    | #[span.code.inherit primary], #[span.code.inherit secondary] and your own colors &amp; shades
+  p.
+    In addition to the built-in status colors and the color palette, you can define your own set
+    of custom colors.#[br]
+    If you do it from the Wave UI global configuration, 6 shades will also be automatically generated
+    for each color you add (as well as the primary and secondary color): 3 lighter and 3 darker
+    ones.#[br]
+    #[small More shades would most likely be redundant with the color palette.]
+
+  w-flex.text-center(wrap :gap="4")
+    .color.primary-light3--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light3
+    .color.primary-light2--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light2
+    .color.primary-light1--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light1
+    .color.primary--bg.title3.grow.basis-zero.py3(:class="{ white: !$store.state.darkMode }") primary
+    .color.primary-dark1--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark1
+    .color.primary-dark2--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark2
+    .color.primary-dark3--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark3
+
+  alert(warning).
+    The primary color is considered dark by default, and will render,
+    as well as its 3 darker shades, with a white text when used as a background color.
+
+  title-link(h3) Defining your own CSS colors in the Wave UI configuration
+  w-flex
+    div
+      .title4 Theme-specific (light or dark) colors.
+      ssh-pre(language="js" :dark="$store.state.darkMode").
+        colors: {
+          light: {
+            primary: '#9ac332',
+            secondary: '#5d9a26',
+            // Custom color names should be kebab-case.
+            'mint-green': '#bff8db'
+          }
+        }
+    w-divider.ma4(vertical) Or
+    div
+      .title4 If you don't care about themes.
+      ssh-pre(language="js" :dark="$store.state.darkMode").
+        colors: {
+          primary: '#9ac332',
+          secondary: '#5d9a26',
+          // Custom color names should be kebab-case.
+          'mint-green': '#bff8db'
+        }
+
+  alert(success).
+    You can access all the colors with their hex code in your JavaScript via the
+    #[code $waveui.colors] object.#[br]
+    Read more about the #[code $waveui] object in the #[router-link(to="/options-presets-and-waveui#the-waveui-helper") Options, presets &amp; $waveui] page.
+
+  alert(tip).
+    If you don't need the 6 shades per color, you can disable them by adding
+    #[code css: { colorShades: false }] to the Wave UI configuration.
+
+  title-link(h3) Defining your own CSS colors in your CSS
   p.
     All the presented colors above are here to make you go faster when you need a color.#[br]
     But you are completely free to define CSS classes in your CSS to associate a color to a class.#[br]

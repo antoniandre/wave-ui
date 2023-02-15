@@ -53,7 +53,7 @@ main
       as well.
     template(#item.6).
       After mastering the components, you may want to use
-      #[router-link.mx1(to="options-and-presets" @click.native="scrollToTop") presets]
+      #[router-link(to="/options-presets-and-waveui#presets" @click.native="scrollToTop") presets]
       to alight your Vue templates.
 </template>
 
