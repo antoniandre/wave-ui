@@ -159,8 +159,8 @@ export default {
       if (this.usePug && slots.pug) {
         if (blanks.includes('pug')) html = slots.pug.replace(/\n+$/, '')
         else {
-          html = `#app\n  w-app${this.appPropsString ? `(${this.appPropsString})` : ''}\n    ` +
-                 slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n    ')
+          html = `#app${this.appPropsString ? `(${this.appPropsString})` : ''}\n  ` +
+                 slots.pug.replace(/\n+$/, '').replace(/\n/g, '\n  ')
         }
       }
 
@@ -168,10 +168,8 @@ export default {
       else {
         if (blanks.includes('html')) html = slots.html.replace(/\n+$/, '')
         else {
-          html = '<div id="app">\n' +
-                 `  <w-app${this.appPropsString ? ` ${this.appPropsString}` : ''}>\n    ` +
-                      slots.html.replace(/\n+$/, '').replace(/\n/g, '\n    ') +
-                 '\n  </w-app>\n' +
+          html = `<div id="app"${this.appPropsString ? ` ${this.appPropsString}` : ''}>\n  ` +
+                    slots.html.replace(/\n+$/, '').replace(/\n/g, '\n  ') + '\n' +
                  '</div>\n'
         }
       }
@@ -194,15 +192,14 @@ export default {
         const darkThemeColors = "\n  colors: {\n    primary: '#89b6d2',\n    secondary: '375b6a'\n  },\n  theme: 'dark'\n"
         js = 'const app = Vue.createApp({\n' +
                 '  ' + slots.js.replace(/\n+$/, '').replace(/\n/g, '\n  ') + '\n' +
-                '})\n\n' +
-                `new WaveUI(app, {${this.$store.state.darkMode ? darkThemeColors : ''}})\n\n` +
-                'app.mount(\'#app\')'
+              '})\n\n' +
+              `app.use(WaveUI, {${this.$store.state.darkMode ? darkThemeColors : ''}})\n\n` +
+              'app.mount(\'#app\')'
       }
 
       const data = {
         title: `Wave UI - ${this.currentPage} example`,
         editors: openEditors.join(''),
-        // layout: 'top', // This now breaks the Codepen generation. :/
         html,
         html_pre_processor: this.usePug && slots.pug ? 'pug' : 'none',
         css,
