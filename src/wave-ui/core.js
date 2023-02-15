@@ -157,8 +157,3 @@ export default class WaveUI {
     }
   }
 }
-
-/**
- * Returns the WaveUI instance. Equivalent to using `$waveui` inside templates.
- */
-export const useWaveUI = () => inject('$waveui')
