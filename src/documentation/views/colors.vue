@@ -169,7 +169,7 @@ main
   alert(success).
     You can access all the colors with their hex code in your JavaScript via the
     #[code $waveui.colors] object.#[br]
-    Read more about the #[code $waveui] object in the #[router-link(to="/options-presets-and-waveui") Options, presets &amp; $waveui] page.
+    Read more about the #[code $waveui] object in the #[router-link(to="/options-presets-and-waveui#the-waveui-helper") Options, presets &amp; $waveui] page.
 
   alert(tip).
     If you don't need the 6 shades per color, you can disable them by adding
