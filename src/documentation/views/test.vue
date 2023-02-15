@@ -129,14 +129,12 @@ w-app
 
 <script setup>
 import { onMounted, inject } from 'vue'
-// import { useWaveUI } from '@/wave-ui/index'
 
 const waveui = inject('$waveui')
-// const waveui = useWaveUI()
-
 const notify = () => {
   waveui.notify('test!')
 }
+
 onMounted(() => {
   notify()
   console.log(waveui)
