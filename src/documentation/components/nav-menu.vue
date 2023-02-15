@@ -55,6 +55,7 @@ export default {
         label: 'Layout',
         route: '/layout',
         icon: 'mdi mdi-format-list-text',
+        open: true,
         children: [
           { label: 'Spaces', route: '/layout--spaces', icon: 'mdi mdi-keyboard-space' },
           { label: 'Grid system (flexbox)', route: '/layout--grid-system', icon: 'mdi mdi-view-grid-outline' },
@@ -74,6 +75,7 @@ export default {
       {
         label: 'Form elements',
         route: '/form',
+        open: true,
         children: [
           ...UIComponents.filter(item => item.formElement).map(item => ({ ...item, route: `/w-${item.id}` }))
         ]
