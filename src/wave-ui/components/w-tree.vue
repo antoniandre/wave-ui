@@ -82,7 +82,8 @@ export default {
     iconColor: { type: String }, // Applies a color on all the label item icons.
     itemIconColorKey: { type: String, default: 'iconColor' }, // Applies a specific color on each label item icons.
     itemRouteKey: { type: String, default: 'route' }, // Uses a router link if the item has the `route` key.
-    itemDisabledKey: { type: String, default: 'disabled' } // Disables the item click and selection.
+    itemDisabledKey: { type: String, default: 'disabled' }, // Disables the item click and selection.
+    itemOpenKey: { type: String, default: 'open' } // Open the item by default.
   },
 
   emits: ['input', 'before-open', 'open', 'before-close', 'close', 'click', 'select'],
@@ -124,7 +125,7 @@ export default {
           route: item[this.itemRouteKey],
           disabled: item[this.itemDisabledKey],
           depth: this.depth,
-          open: !!(oldItems[i]?.open || this.expandAll)
+          open: !!(oldItems[i]?.open || this.expandAll || item[this.itemOpenKey])
         })
       })
     },
