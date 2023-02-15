@@ -117,9 +117,12 @@ export default {
 }
 
 .nav-menu {
-  height: 90vh;
-  overflow: auto;
-  z-index: 1;
+  // Don't apply to the w-app examples.
+  .nav-menu-wrap & {
+    height: 90vh;
+    overflow: auto;
+    z-index: 1;
+  }
 
   .title2 {margin-left: 8px;}
 

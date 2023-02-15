@@ -2,6 +2,7 @@ html, body {height: 100%;}
 
 :root {
   --header-waves-pattern: rgba(73, 123, 162, 0.2);
+  scroll-behavior: smooth;
 }
 
 a {color: $links;}

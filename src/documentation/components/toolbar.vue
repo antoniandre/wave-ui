@@ -5,6 +5,13 @@ w-toolbar.main-toolbar(fixed)
     span.grey-dark1 Wave UI
   .spacer
 
+  w-tooltip(z-index="20" append-to=".main-toolbar")
+    template(#activator="{ on }")
+      router-link.v3-is-out.w-tag.w-tag--round.mr4.xs-hide(
+        v-on="on"
+        to="/release-notes"
+        @click.native="scrollTop(true)") WAVE UI 3.0 IS OUT!
+    | Go to the release notes!
   w-switch.mr2(
     :model-value="$store.state.darkMode"
     @update:model-value="$store.commit('setDarkMode', $event), $waveui.switchTheme($event ? 'dark' : 'light')"
@@ -12,7 +19,7 @@ w-toolbar.main-toolbar(fixed)
     template(#thumb)
       w-icon mdi {{ $store.state.darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}
 
-  strong.version.size--xs(v-html="`Version <code>${version}</code>`")
+  strong.version.size--xs(v-html="`v<code>${version}</code>`")
 
   w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
@@ -89,8 +96,31 @@ div.main-toolbar {
     span {font: 22px 'title font', helvetica, arial;}
   }
 
+  .v3-is-out {
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 2px 8px;
+    background: linear-gradient(110deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    mix-blend-mode: difference;
+    overflow: hidden;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: -120%;
+      right: -150%;
+      width: 50%;
+      height: 300%;
+      transform: rotate(30deg);
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.13), rgba(255, 246, 198, 0.8), rgba(255, 255, 255, 0));
+    }
+    &:hover:before {animation: shine 2s infinite;}
+  }
+
   .version {
-    color: rgba(129, 129, 129, 0.6);
+    color: rgba(var(--w-base-color-rgb), 0.35);
 
     code {
       letter-spacing: -0.5px;
@@ -104,6 +134,10 @@ div.main-toolbar {
 
   .hamburger-menu {margin-left: 8px;}
   .hamburger-menu .w-icon {width: 26px;}
+}
+
+@keyframes shine {
+  to {right: 300%;}
 }
 
 @media screen and (max-width: 410px) {

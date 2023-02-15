@@ -23,7 +23,8 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.major
-      strong.version v3.0.0
+      title-link.ma0(h2 slug="v3.0")
+        strong.version v3.0.0
       .title3.mt4.mb2
         | If you come from version 2.x, read the
         router-link.ml1(to="/migration-from-v2-to-v3") Migration guide from version 2.x to 3.x
@@ -437,7 +438,8 @@ main
         li #[strong.code w-spinner]: Fix the toggling using v-model or modelValue on Vue 3.
 
     li.major.dashed
-      strong.version v2.0
+      title-link.ma0(h2 slug="v2.0")
+        strong.version v2.0
       alert(warning)
         | From this version onwards, Vue 3 must be installed:
         br
@@ -1482,7 +1484,7 @@ main
     > li.minor:before {font-size: 11px;}
     > li.major:before {font-size: 14px;}
 
-    .version {font: bold 1.2rem monospace;}
+    .version {font: bold 1.2rem monospace;display: block;}
     > li.patch:before, > li.patch .version {color: rgba(var(--w-base-color-rgb), 0.3);}
     > li.minor:before, > li.minor .version {color: rgba(var(--w-base-color-rgb), 0.6);}
     > li.major:before, > li.major .version {color: #09c;font-size: 1.4rem;}

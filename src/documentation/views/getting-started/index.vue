@@ -49,11 +49,11 @@ main
       Add some UI components of your choice: get help from the examples and don't
       hesitate to open them on Codepen).
     template(#item.5).
-      You probably want to add an #[router-link.mx1(to="/w-icon" @click.native="scrollToTop") icon font]
+      You probably want to add an #[router-link(to="/w-icon" @click.native="scrollToTop") icon font]
       as well.
     template(#item.6).
       After mastering the components, you may want to use
-      #[router-link.mx1(to="options-and-presets" @click.native="scrollToTop") presets]
+      #[router-link(to="options-and-presets" @click.native="scrollToTop") presets]
       to alight your Vue templates.
 </template>
 
@@ -105,6 +105,8 @@ export default {
 
   .vue-install .comment {user-select: none;}
   .ssh-pre[data-label]:before {font-size: 12px;}
+
+  .w-checkbox__label {display: inline-block;}
 }
 
 @media screen and (max-width: 600px) {
