@@ -51,10 +51,8 @@ ul.w-tree(:class="classes")
 <script>
 import { consoleWarn } from '../utils/console'
 /**
- * @todo things to support:
- * - items routes
- * - icon per item
- * - left border?
+ * @todo:
+ * - option to add a left border.
  **/
 
 export default {
