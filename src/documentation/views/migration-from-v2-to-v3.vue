@@ -29,7 +29,7 @@ main
 
     li.mt4
       .title3 Remove the &lt;w-app&gt; component, it's no longer needed!#[br]
-      | Note: there is also an #[router-link(to="/options-presets-and-waveui") option to define the Wave UI root] (Default: `#app`, if not found, `body`).
+      | Note: there is also an #[router-link(to="/options-presets-and-waveui") option to define the Wave UI root] (Default: #[code.code #app], if not found, #[code.code body]).
       .w-flex.align-center
         ssh-pre(
           language="html-vue"
