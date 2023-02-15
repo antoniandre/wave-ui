@@ -254,8 +254,14 @@ div
     min-height: 240px;
   }
 
-  legend {padding: 0 0.5em;}
-  section {margin: 0.4em;color: rgba(0, 0, 0, 0.6);}
+  legend {
+    padding: 0 0.5em;
+    border-radius: 99em;
+  }
+  section {
+    margin: 0.4em;
+    color: rgba(0, 0, 0, 0.6);
+  }
   .block {min-height: 100px;}
   .app {background-color: #fffeed;}
   .header, .footer {background-color: #e9f8fe;}

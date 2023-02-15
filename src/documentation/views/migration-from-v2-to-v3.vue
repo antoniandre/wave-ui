@@ -3,8 +3,8 @@ main
   title-link.mt4(h1) Migration strategy from version 2.x to version 3.x
 
   p.
-    The migration from Wave UI 2.x is quite simple, but if you want to use the new themes feature
-    in your app, there are a few more steps.
+    The migration from Wave UI 2.x is extremely simple. You'll be done in two steps, two minutes!#[br]
+    But if you want to offer two themes in your app, there's a bit more work.
   ol.mt6
     li.mt4
       .title3 Update the initialization of Wave UI.
