@@ -57,8 +57,9 @@ main
             li Support navigation menus with links on items. #[span.tag.new]
             li Allow disabling a particular item.
             li Added the #[code item-disabled-key] prop. #[span.tag.new]
+            li Added the #[code item-open-key] prop. #[span.tag.new]
             li Accept HTML in the tree item label.
-            li Renamed the #[item-label] slot to #[item].
+            li Renamed the #[code item-label] slot to #[code item].
             li Support a single object as the root.
       ul
         li
