@@ -24,6 +24,9 @@ main
 
     li.major
       strong.version v3.0.0
+      p.title3
+        | If you come from version 2.x, read the
+        router-link.ml1(to="/migration-from-v2-to-v3") Migration guide from version 2.x to 3.x
       ul
         li
           strong.code Theming (light &amp; dark)
@@ -31,7 +34,7 @@ main
             li Every component is now completely themeable, all at once, or individually. #[span.tag.new]
             li Added a lot more color variables in the SCSS variables file for more granular control.
             li All the default colors are now dynamically computed with the user theme preference using CSS3 variables.
-            li Easy method to switch theme #[code="this.$waveui.switchTheme(['dark'|'light'])"] #[span.tag.new]
+            li Easy method to switch theme #[code="this.$waveui.switchTheme('dark')"] #[span.tag.new]
             li Auto detection of the user preferred theme. #[span.tag.new]
       ul
         li
@@ -71,7 +74,7 @@ main
           ul
             li Allow HTML in card title.
 
-    li.patch
+    li.minor
       strong.version v2.48.0
       ul
         li
@@ -1455,7 +1458,7 @@ main
       left: 0;
       background-color: $base-bg-color;
       border-radius: 1em;
-      border: 1px solid #ddd;
+      border: 1px solid currentColor;
       width: 1em;
       aspect-ratio: 1;
       transform: translate(-50%, -50%);
@@ -1468,20 +1471,20 @@ main
       content: '';
       position: absolute;
       top: 11px;
-      bottom: -31px; // 11px top + 20px margin between each li.
+      bottom: -39px; // 11px top + 28px margin between each li.
       left: -0.5px;
       border-left: 1px solid #ddd;
     }
     > li:last-child:after {display: none;}
     > li.dashed:after {border-left-style: dashed;}
-    > li.patch:before {font-size: 7px;border-color: #ccc;}
-    > li.minor:before {font-size: 11px;border-color: #999;}
-    > li.major:before {font-size: 14px;border-color: #09c;}
+    > li.patch:before {font-size: 7px;}
+    > li.minor:before {font-size: 11px;}
+    > li.major:before {font-size: 14px;}
 
     .version {font: bold 1.2rem monospace;}
-    > li.patch .version {color: #999;}
-    > li.minor .version {color: #555;}
-    > li.major .version {color: #09c;font-size: 1.4rem;}
+    > li.patch:before, > li.patch .version {color: rgba(var(--w-base-color-rgb), 0.3);}
+    > li.minor:before, > li.minor .version {color: rgba(var(--w-base-color-rgb), 0.6);}
+    > li.major:before, > li.major .version {color: #09c;font-size: 1.4rem;}
 
     ul {margin-left: -2px;}
     li li {padding-left: 20px;margin-top: 2px;}
