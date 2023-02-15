@@ -80,9 +80,9 @@ export default {
   a:focus {text-decoration: underline;}
   a:focus .w-tag {display: inline-block;} // This removes the text-decoration: underline.
 
-  a[name] {
+  a[id] {
     position: relative;
-    top: -3em;
+    top: -4em;
     display: block;
   }
 
