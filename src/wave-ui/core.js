@@ -105,7 +105,7 @@ export default class WaveUI {
 
           let themeColors = config.colors[config.theme]
           if (config.theme === 'auto') detectOSDarkMode($waveui) // Also switches the theme.
-          else switchTheme(config.theme, true)
+          else this.switchTheme(config.theme, true)
 
           injectCSSInDOM($waveui)
           injectNotifManagerInDOM(wApp, components, $waveui)
