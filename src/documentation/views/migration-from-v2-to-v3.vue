@@ -49,7 +49,7 @@ main
 
     li.mt4
       .title3 Optionally, if you want to use two themes.
-      p follow the steps in the #[a(href="/themes#adding-themes-in-your-wave-ui-app") themes] page.
+      p Follow the steps in the #[a(href="/themes#adding-themes-in-your-wave-ui-app") themes] page.
 
 </template>
 

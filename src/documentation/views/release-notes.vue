@@ -24,9 +24,10 @@ main
 
     li.major
       strong.version v3.0.0
-      p.title3
+      .title3.mt4.mb2
         | If you come from version 2.x, read the
         router-link.ml1(to="/migration-from-v2-to-v3") Migration guide from version 2.x to 3.x
+        | .
       ul
         li
           strong.code Theming (light &amp; dark)
