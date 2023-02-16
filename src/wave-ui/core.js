@@ -103,7 +103,6 @@ export default class WaveUI {
           const wApp = document.querySelector(config.on) || document.body
           wApp.classList.add('w-app')
 
-          let themeColors = config.colors[config.theme]
           if (config.theme === 'auto') detectOSDarkMode($waveui) // Also switches the theme.
           else $waveui.switchTheme(config.theme, true)
 
