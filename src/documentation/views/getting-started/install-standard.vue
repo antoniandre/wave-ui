@@ -10,70 +10,106 @@ div
   title-link(h3) 2. Import in your project
   .ml5
     p Import Wave UI library at the root of your app - usually #[span.code main.js].
-    w-flex(basis-zero wrap :gap="4")
-      ssh-pre.grow.ma2.mt8(language="js" label="VUE 3 - main.js" style="min-width: 290px").
-        // VUE 3.
-        import { createApp } from 'vue'
-        import App from './App.vue'
-        import WaveUI from 'wave-ui'
-        import 'wave-ui/dist/wave-ui.css'
+    w-tabs.mt4(:items="2" content-class="pa0")
+      template(#item-title.1) Vue 3
+      template(#item-content.1)
+        ssh-pre.my0(
+          language="js"
+          :dark="$store.state.darkMode"
+          style="min-width: 290px").
+          // main.js
+          import { createApp } from 'vue'
+          import App from './App.vue'
+          import WaveUI from 'wave-ui'
+          import 'wave-ui/dist/wave-ui.css'
 
-        const app = createApp(App)
+          const app = createApp(App)
 
-        new WaveUI(app, {
-          // Some Wave UI options.
-        })
+          app.use(WaveUI, { /* Some Wave UI options */ })
+          // Or in Wave UI 2.x:
+          // new WaveUI(app, { /* Some Wave UI options */ })
 
-        app.mount('#app')
+          app.mount('#app')
 
-      ssh-pre.grow.ma2.mt8(language="js" label="VUE 2.x - main.js" style="min-width: 290px").
-        // VUE 2.x.
-        import Vue from 'vue'
-        import App from './App.vue'
-        import WaveUI from 'wave-ui'
-        import 'wave-ui/dist/wave-ui.css'
+        p.my3.ml2.grey-light1
+          w-icon.mr1 wi-chevron-right
+          | Edit a
+          a.ml1(href="https://codepen.io/antoniandre/pen/RwaXMLd?editors=1010" target="_blank")
+            | #[strong Vue 3] Wave UI demo on Codepen
+            w-icon.ml1 mdi mdi-open-in-new
+          | .
+        p.my3.ml2.grey-light1
+          w-icon.mr1 wi-chevron-right
+          | Or edit a
+          a.ml1(href="https://stackblitz.com/edit/waveui-3" target="_blank")
+            | #[strong Vue 3] Wave UI demo with Vite on StackBlitz
+            w-icon.ml1 mdi mdi-open-in-new
+          | .
 
-        Vue.use(WaveUI)
+      template(#item-title.2) Vue 2
+      template(#item-content.2)
+        ssh-pre.my0(
+          language="js"
+          :dark="$store.state.darkMode"
+          style="min-width: 290px").
+          // main.js
+          import Vue from 'vue'
+          import App from './App.vue'
+          import WaveUI from 'wave-ui'
+          import 'wave-ui/dist/wave-ui.css'
 
-        const waveui = new WaveUI({
-          // Some Wave UI options.
-        })
+          Vue.use(WaveUI)
 
-        new Vue({
-          waveui,
-          render: h => h(App)
-        }).$mount('#app')
+          const waveui = new WaveUI({
+            // Some Wave UI options.
+          })
 
-    p.mt2.grey-light1
-      w-icon.mr1 wi-chevron-right
-      | Edit a
-      a.mx1(href="https://codepen.io/antoniandre/pen/RwaXMLd?editors=1010" target="_blank")
-        | #[strong Vue 3] Wave UI demo on Codepen
-        w-icon.ml1 mdi mdi-open-in-new
-      | or a
-      a.ml1(href="https://codepen.io/antoniandre/pen/KKyoKrZ?editors=1010" target="_blank")
-        | #[strong Vue 2] Wave UI demo on Codepen
-        w-icon.ml1 mdi mdi-open-in-new
-      | .
+          new Vue({
+            waveui,
+            render: h => h(App)
+          }).$mount('#app')
 
-  title-link(h3).mt8 3. Place a #[span.code w-app] at the root of your app
-  .ml5
-    ssh-pre(v-show="$store.state.usePug" language="pug" label="App.vue").
-      w-app
-        //- All your app content goes here.
+        p.my3.ml2.grey-light1
+          w-icon.mr1 wi-chevron-right
+          | Edit a
+          a.ml1(href="https://codepen.io/antoniandre/pen/KKyoKrZ?editors=1010" target="_blank")
+            | #[strong Vue 2] Wave UI demo on Codepen
+            w-icon.ml1 mdi mdi-open-in-new
+          | .
 
-        //- Also try to add a button!
-        w-button My Button
-    ssh-pre(v-show="!$store.state.usePug" language="html-vue" label="App.vue").
-      &lt;w-app&gt;
-        &lt;!-- All your app content goes here. --&gt;
+  .mt8.op05
+    w-accordion(:items="1" title-class="ml-1 pl0 py3" expand-icon-rotate-90)
+      template(#item-title.1)
+        title-link.ma0(@click.prevent h3 slug="place-a--w-app")
+          | 3.
+          w-tag.ml2.warning--bg(round) ONLY FOR WAVE UI 2.x
+          | , place a #[span.code w-app] at the root of your app
+      template(#item-content.1)
+        .ml5
+          ssh-pre.mt2(
+            v-show="$store.state.usePug"
+            :dark="$store.state.darkMode"
+            language="pug"
+            label="App.vue").
+            w-app
+              //- All your app content goes here.
 
-        &lt;!-- Also try to add a button! --&gt;
-        &lt;w-button&gt;My Button&lt;/w-button&gt;
-      &lt;/w-app&gt;
-    .caption.grey-light1.pb6
-      | The &lt;w-app&gt; is required for Wave UI base styles and for a few components needing to be moved in the DOM.#[br]
-      | There should only be one &lt;w-app&gt; in your whole app.
+              //- Also try to add a button!
+              w-button My Button
+          ssh-pre(
+            v-show="!$store.state.usePug"
+            :dark="$store.state.darkMode"
+            language="html-vue"
+            label="App.vue").
+            &lt;w-app&gt;
+              &lt;!-- All your app content goes here. --&gt;
 
-    p Now check your app in the browser!
+              &lt;!-- Also try to add a button! --&gt;
+              &lt;w-button&gt;My Button&lt;/w-button&gt;
+            &lt;/w-app&gt;
+          .caption.grey-light1.pb6
+            | The &lt;w-app&gt; is required for Wave UI base styles and for a few components needing to be moved in the DOM.#[br]
+            | There should only be one &lt;w-app&gt; in your whole app.
+
+          p Now check your app in the browser!
 </template>
