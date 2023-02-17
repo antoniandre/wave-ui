@@ -40,6 +40,13 @@ div
             | #[strong Vue 3] Wave UI demo on Codepen
             w-icon.ml1 mdi mdi-open-in-new
           | .
+        p.my3.ml2.grey-light1
+          w-icon.mr1 wi-chevron-right
+          | Or edit a
+          a.ml1(href="https://stackblitz.com/edit/waveui-3" target="_blank")
+            | #[strong Vue 3] Wave UI demo with Vite on StackBlitz
+            w-icon.ml1 mdi mdi-open-in-new
+          | .
 
       template(#item-title.2) Vue 2
       template(#item-content.2)
