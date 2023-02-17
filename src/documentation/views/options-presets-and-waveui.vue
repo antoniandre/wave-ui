@@ -106,9 +106,10 @@ main
       p.
         The #[code $waveui] object is a Swiss Army Knife at your disposal. It can help you in many
         ways, it is completely reactive, and accessible from anywhere in your app via:#[br]
-      ul
-        li #[code this.$waveui] in a vue component
-        li #[code inject('$waveui')] when using the Vue composition API
+      w-list(:items="3" icon="wi-check")
+        template(#item.1) #[code.py0.mr1 this.$waveui] in a Vue component
+        template(#item.2) #[code.py0.mr1 $waveui] in any Vue template
+        template(#item.3) #[code.py0.mr1 inject('$waveui')] when using the Vue composition API
       p.mt6 Here is the list of what you can find in this object, along with the current values in this app as an illustration:
       w-accordion(
         :items="waveuiObject"
