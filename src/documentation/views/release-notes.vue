@@ -53,7 +53,7 @@ main
           strong.code New core
           ul
             li.text-bold New way to use Wave UI, more straightforward, more Vue 3 approach, facilitating the use in composition API. #[span.tag.new]
-            li Injectable #[code $waveui] for composition API. #[span.tag.new]
+            li Injectable #[code $waveui] for composition API (removed the #[code useWaveUI] method in favor of #[code inject('$waveui')]. #[span.tag.new]
             li #[code $waveui.breakpoint.width] always up to date
       ul
         li

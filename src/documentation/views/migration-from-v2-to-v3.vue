@@ -48,6 +48,10 @@ main
           &lt;w-button&gt;My button&lt;/w-button&gt;
 
     li.mt4
+      .title3 If you were using #[code useWaveUI] in composition API
+      p just replace it with #[code inject('$waveui')].
+
+    li.mt4
       .title3 Optionally, if you want to use two themes.
       p Follow the steps in the #[a(href="/themes#adding-themes-in-your-wave-ui-app") themes] page.
 
