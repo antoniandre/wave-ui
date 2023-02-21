@@ -14,6 +14,7 @@ $theme-light: (
   base-color-rgb: (0, 0, 0), // #000.
   contrast-bg-color-rgb: (0, 0, 0), // #000.
   contrast-color-rgb: (255, 255, 255), // #fff.
+  caption-color-rgb: (80, 80, 80, 0.7), // #505050.
   disabled-color-rgb: (204, 204, 204), // #ccc.
 ) !default;
 
@@ -22,6 +23,7 @@ $theme-dark: (
   base-color-rgb: (255, 255, 255), // #fff.
   contrast-bg-color-rgb: (255, 255, 255), // #fff.
   contrast-color-rgb: (0, 0, 0), // #000.
+  caption-color-rgb: (175, 175, 175, 0.7), // #afafaf.
   disabled-color-rgb: (74, 74, 74), // #4a4a4a.
 ) !default;
 
@@ -32,6 +34,7 @@ $base-bg-color: rgb(var(--w-base-bg-color-rgb));
 $base-color: rgb(var(--w-base-color-rgb));
 $contrast-bg-color: rgb(var(--w-contrast-bg-color-rgb));
 $contrast-color: rgb(var(--w-contrast-color-rgb));
+$caption-color: rgb(var(--w-caption-color-rgb));
 // When a form element is disabled (checkbox, radio, input, select list).
 $disabled-color: rgb(var(--w-disabled-color-rgb));
 

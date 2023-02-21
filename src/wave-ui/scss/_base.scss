@@ -15,6 +15,7 @@
   --w-base-color-rgb: #{map.get($theme-light, 'base-color-rgb')};
   --w-contrast-bg-color-rgb: #{map.get($theme-light, 'contrast-bg-color-rgb')};
   --w-contrast-color-rgb: #{map.get($theme-light, 'contrast-color-rgb')};
+  --w-caption-color-rgb: #{map.get($theme-light, 'caption-color-rgb')};
   --w-disabled-color-rgb: #{map.get($theme-light, 'disabled-color-rgb')};
 }
 
@@ -23,6 +24,7 @@
   --w-base-color-rgb: #{map.get($theme-dark, 'base-color-rgb')};
   --w-contrast-bg-color-rgb: #{map.get($theme-dark, 'contrast-bg-color-rgb')};
   --w-contrast-color-rgb: #{map.get($theme-dark, 'contrast-color-rgb')};
+  --w-caption-color-rgb: #{map.get($theme-dark, 'caption-color-rgb')};
   --w-disabled-color-rgb: #{map.get($theme-dark, 'disabled-color-rgb')};
 }
 

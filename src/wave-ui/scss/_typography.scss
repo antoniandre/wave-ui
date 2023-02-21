@@ -33,7 +33,7 @@
   .caption {
     font-size: round(0.85 * $base-font-size);
     font-style: italic;
-    color: rgba(80, 80, 80, 0.7);
+    color: $caption-color;
   }
 
   .text-upper {text-transform: uppercase;}
