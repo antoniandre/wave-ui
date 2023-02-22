@@ -19,8 +19,8 @@ const generateColors = config => {
   }
 
   // Color shades are generated in core.js, if the option is on.
-  if (config.css.colorShades && config.colorShades) {
-    Object.entries(config.colorShades).forEach(([label, color]) => {
+  if (config.css.colorShades && config.shades) {
+    Object.entries(config.shades).forEach(([label, color]) => {
       styles +=
         `${cssScope} .${label}--bg{background-color:${color}}` +
         `${cssScope} .${label}{color:${color}}`

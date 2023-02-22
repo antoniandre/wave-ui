@@ -1,39 +1,32 @@
-import config, { mergeConfig } from './utils/config'
+import { mergeConfig } from './utils/config'
 import NotificationManager from './utils/notification-manager'
-import colors from './utils/colors'
+import { colorPalette, generateColorShades, flattenColors } from './utils/colors'
 // import * as directives from './directives'
-
-const shadeColor = (color, amount) => {
-  return '#' + color.slice(1).match(/../g)
-    .map(x => (x =+ `0x${x}` + amount, x < 0 ? 0 : ( x > 255 ? 255 : x)).toString(16).padStart(2, 0))
-    .join('')
-}
 
 export default class WaveUI {
   static instance = null
   static vueInstance = null // Needed until constructor is called.
-  #notificationManager
 
-  // Public breakpoint object. Accessible from this.$waveui.breakpoint.
-  breakpoint = {
-    name: '',
-    xs: false,
-    sm: false,
-    md: false,
-    lg: false,
-    xl: false
+  // Exposed as a global object and also `app.provide`d.
+  // Accessible from this.$waveui, or inject('$waveui').
+  $waveui = {
+    breakpoint: {
+      name: '',
+      xs: false,
+      sm: false,
+      md: false,
+      lg: false,
+      xl: false
+    },
+    config: {},
+    colors: {}, // Object of pairs of color-name => color hex.
+    _notificationManager: null,
+
+    // Callable from this.$waveui.
+    notify (...args) {
+      this._notificationManager.notify(...args)
+    }
   }
-
-  // A public object containing pairs of color-name => color hex.
-  // Accessible from anywhere via `this.$waveui.colors`.
-  // These colors generate the CSS in `w-app` on mounted.
-  colors = colors.reduce((obj, color) => {
-    obj[color.label] = color.color
-    color.shades.forEach(shade => (obj[shade.label] = shade.color))
-    return obj
-  }, { ...config.colors, black: '#000', white: '#fff', transparent: 'transparent', inherit: 'inherit' })
-
-  config = {} // Store and expose the config in the $waveui object.
 
   static install (Vue, options = {}) {
     // Register directives.
@@ -74,53 +67,22 @@ export default class WaveUI {
   constructor (options = {}) {
     if (WaveUI.instance) return WaveUI.instance
 
-    else {
-      this.#notificationManager = new NotificationManager()
+    this.$waveui._notificationManager = new NotificationManager()
 
-      // Merge user options into the default config.
-      mergeConfig(options)
+    // Merge user options into the default config.
+    this.$waveui.config = mergeConfig(options)
+    const config = this.$waveui.config
 
-      // Add color shades for each custom color given in options.
-      if (config.css.colorShades) {
-        config.colorShades = {}
+    // Generates color shades for each color of each theme and store in the config.colors object.
+    if (config.css.colorShades) generateColorShades(config)
+    this.$waveui.colors = flattenColors(config.colors, colorPalette)
 
-        for (let color in config.colors) {
-          color = { label: color, color: config.colors[color].replace('#', '') }
-          const col = color.color
-          if (col.length === 3) color.color = col[0] + '' + col[0] + col[1] + col[1] + col[2] + col[2]
+    WaveUI.instance = this
 
-          this.colors[color.label] = `#${color.color}`
+    // Make Wave UI reactive and expose the single instance in the app.
+    const $waveui = WaveUI.vueInstance.observable(this.$waveui)
+    WaveUI.vueInstance.prototype.$waveui = $waveui
 
-          for (let i = 1; i <= 3; i++) {
-            const lighterColor = shadeColor(`#${color.color}`, i * 40)
-            const darkerColor = shadeColor(`#${color.color}`, -i * 40)
-            this.colors[`${color.label}-light${i}`] = lighterColor
-            this.colors[`${color.label}-dark${i}`] = darkerColor
-
-            // Adding the shades to the config object to generate the CSS from w-app.
-            config.colorShades[`${color.label}-light${i}`] = lighterColor
-            config.colorShades[`${color.label}-dark${i}`] = darkerColor
-          }
-        }
-      }
-
-      this.config = config
-      this.notify = (...args) => notificationManager.notify(...args)
-      WaveUI.instance = this
-
-      // Make waveui reactive and expose the single instance in Vue.
-      WaveUI.vueInstance.prototype.$waveui = WaveUI.vueInstance.observable(this)
-
-      delete WaveUI.vueInstance // Get rid of the Vue instance that we don't need anymore.
-    }
-  }
-
-  notify (...args) {
-    this.#notificationManager.notify(...args)
+    delete WaveUI.vueInstance // Get rid of the Vue instance that we don't need anymore.
   }
 }
-
-/**
- * Returns the WaveUI instance. Equivalent to using `$waveui` inside templates.
- */
-export const useWaveUI = () => inject('$waveui')
