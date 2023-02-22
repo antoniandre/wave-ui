@@ -63,12 +63,12 @@ export default {
 .w-notification-manager {
   position: fixed;
   top: 0;
-  bottom: 0;
+  max-height: 100%;
   right: 0;
   z-index: 1000;
-  pointer-events: none;
   width: 280px;
   overflow-x: hidden;
+  overflow-y: auto;
 
   &--left {right: auto;left: 0;}
 
@@ -79,7 +79,6 @@ export default {
     right: 0;
     margin: 8px;
     flex-grow: 1;
-    pointer-events: all;
   }
 }
 </style>
