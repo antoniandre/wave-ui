@@ -464,11 +464,6 @@ main
       strong.version v1.63.0
       ul
         li
-          strong.code w-button
-          ul
-            li Consider tel &amp; mailto external address.
-      ul
-        li
           strong.code w-tree
           ul
             li Support navigation menus with links on items. #[span.tag.new]
@@ -478,6 +473,16 @@ main
             li Accept HTML in the tree item label.
             li Renamed the #[code item-label] slot to #[code item].
             li Support a single object as the root.
+      ul
+        li
+          strong.code $waveui.notify()
+          ul
+            li Fix an error where the notificationManager would not be found.
+      ul
+        li
+          strong.code w-button
+          ul
+            li Consider tel &amp; mailto external address.
       ul
         li
           strong.code w-table
