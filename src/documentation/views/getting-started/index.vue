@@ -53,7 +53,7 @@ main
       | .
     template(#item.4).
       Add some UI components of your choice: get help from the examples and don't
-      hesitate to open them on Codepen).
+      hesitate to open them on Codepen.
     template(#item.5).
       You probably want to add an #[router-link(to="/w-icon" @click.native="scrollToTop") icon font]
       as well.
