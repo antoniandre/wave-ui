@@ -459,11 +459,30 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
+
+    li.minor
+      strong.version v1.63.0
       ul
         li
           strong.code w-button
           ul
             li Consider tel &amp; mailto external address.
+      ul
+        li
+          strong.code w-tree
+          ul
+            li Support navigation menus with links on items. #[span.tag.new]
+            li Allow disabling a particular item. #[span.tag.new]
+            li Added the #[code item-disabled-key] prop. #[span.tag.new]
+            li Added the #[code item-open-key] prop. #[span.tag.new]
+            li Accept HTML in the tree item label.
+            li Renamed the #[code item-label] slot to #[code item].
+            li Support a single object as the root.
+      ul
+        li
+          strong.code w-table
+          ul
+            li Improve the mobile layout.
 
     li.minor
       strong.version v1.62.0
