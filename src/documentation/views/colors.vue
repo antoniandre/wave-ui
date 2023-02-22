@@ -109,7 +109,7 @@ main
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
     .w-flex.wrap.ma-2.basis-zero
       .color-palette.ma2(
-        v-for="({ color, label, shades }, j) in colors"
+        v-for="({ color, label, shades }, j) in colorPalette"
         :key="j")
         template(v-for="(shade, i) in shades")
           //- top color.
@@ -156,11 +156,11 @@ main
 </template>
 
 <script>
-import colors from '@/wave-ui/utils/colors'
+import { colorPalette } from '@/wave-ui/utils/colors'
 
 export default {
   data: () => ({
-    colors,
+    colorPalette: colorPalette.filter(color => !['black', 'white', 'inherit', 'transparent'].includes(color.label)),
     horizontal: false
   })
 }
