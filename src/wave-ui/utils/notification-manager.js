@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 export default class NotificationManager {
-  static instance
+  static #instance
   notifications
   // Private fields.
   #uid // A unique ID for each notification.
@@ -9,9 +9,9 @@ export default class NotificationManager {
 
   constructor () {
     // Singleton pattern.
-    if (NotificationManager.instance) return NotificationManager.instance
+    if (NotificationManager.#instance) return NotificationManager.#instance
 
-    NotificationManager.instance = this
+    NotificationManager.#instance = this
     this.notifications = []
     this.#uid = 0
     this.#notificationDefaults = {
