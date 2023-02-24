@@ -1,7 +1,7 @@
 <template lang="pug">
-component.w-image-wrap(:is="wrapperTag" :class="wrapperClasses" :style="wrapperStyles")
+component.w-image(:is="wrapperTag" :class="wrapperClasses" :style="wrapperStyles")
   transition(:name="transition" appear)
-    component.w-image(
+    component.w-image__image(
       v-if="loaded"
       :is="tag"
       :class="imageClasses"
@@ -35,6 +35,8 @@ export default {
     src: { type: String },
     width: { type: [Number, String] },
     height: { type: [Number, String] },
+    maxWidth: { type: [Number, String] },
+    maxHeight: { type: [Number, String] },
     ratio: { type: [Number, String] },
     lazy: { type: Boolean },
     absolute: { type: Boolean },
@@ -61,6 +63,7 @@ export default {
   },
 
   computed: {
+    // Given ratio via prop as opposed to imgComputedRatio in data.
     imgGivenRatio () {
       return parseFloat(this.ratio)
     },
@@ -71,25 +74,35 @@ export default {
 
     wrapperClasses () {
       return {
-        'w-image-wrap--absolute': this.absolute,
-        'w-image-wrap--fixed': this.fixed,
-        'w-image-wrap--has-ratio': this.imgGivenRatio
+        'w-image--absolute': this.absolute,
+        'w-image--fixed': this.fixed,
+        'w-image--has-ratio': this.imgGivenRatio
       }
     },
 
     wrapperStyles () {
+      let width = (!isNaN(this.width) ? `${this.width}px` : this.width) || null
+      const height = (!isNaN(this.height) ? `${this.height}px` : this.height) || null
+      if (this.imgGivenRatio && !width && !height) width = '100%'
+      else if (this.imgGivenRatio && !width && !height) width = '100%'
+
+      const maxWidth = (!isNaN(this.maxWidth) ? `${this.maxWidth}px` : this.maxWidth) || null
+      const maxHeight = (!isNaN(this.maxHeight) ? `${this.maxHeight}px` : this.maxHeight) || null
+
       return {
-        width: this.imgGivenRatio ? null : ((!isNaN(this.imgWidth) ? `${this.imgWidth}px` : this.imgWidth) || null),
-        height: this.imgGivenRatio || this.tag === 'img' ? null : ((!isNaN(this.imgHeight) ? `${this.imgHeight}px` : this.imgHeight) || null),
-        'padding-bottom': this.imgGivenRatio && `${this.imgGivenRatio * 100}%`
+        width,
+        height,
+        maxWidth,
+        maxHeight,
+        aspectRatio: this.imgGivenRatio
       }
     },
 
     imageClasses () {
       return {
-        'w-image--loading': this.loading,
-        'w-image--loaded': this.loaded,
-        'w-image--contain': this.contain
+        'w-image__image--loading': this.loading,
+        'w-image__image--loaded': this.loaded,
+        'w-image__image--contain': this.contain
       }
     },
 
@@ -174,7 +187,7 @@ export default {
 </script>
 
 <style lang="scss">
-.w-image-wrap {
+.w-image {
   position: relative;
   display: inline-flex;
   flex-grow: 0;
@@ -182,7 +195,7 @@ export default {
   width: 4em;
 
   &--has-ratio {width: 100%;}
-  &[class^="bdrs"], &[class*=" bdrs"] {overflow: hidden;}
+  &--has-ratio, &[class^="bdrs"], &[class*=" bdrs"] {overflow: hidden;}
 
   img {
     width: 100%;
@@ -191,7 +204,7 @@ export default {
   }
 }
 
-.w-image {
+.w-image__image {
   background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1x1 blank gif.
   background-repeat: no-repeat;
   background-size: cover;
