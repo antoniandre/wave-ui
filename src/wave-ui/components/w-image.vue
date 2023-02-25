@@ -6,7 +6,7 @@ component.w-image(:is="wrapperTag" :class="wrapperClasses" :style="wrapperStyles
       :is="tag"
       :class="imageClasses"
       :style="imageStyles"
-      :src="tag === 'img' ? imgSrc : null")
+      :src="tag === 'img' ? computedImg.src : null")
   .w-image__loader(v-if="!noSpinner && loading")
     slot(v-if="$slots.loading" name="loading")
     w-progress(v-else circle indeterminate v-bind="spinnerColor ? { color: spinnerColor } : {}")
@@ -55,17 +55,26 @@ export default {
     return {
       loading: false,
       loaded: false,
-      imgSrc: '',
-      imgWidth: this.width || 0,
-      imgHeight: this.height || 0,
-      imgComputedRatio: 0
+      // The computed image source, and real image dimensions.
+      computedImg: {
+        src: '',
+        width: 0,
+        height: 0,
+        ratio: 0
+      }
     }
   },
 
   computed: {
-    // Given ratio via prop as opposed to imgComputedRatio in data.
-    imgGivenRatio () {
-      return parseFloat(this.ratio)
+    // Normalized props.
+    normalized () {
+      return {
+        width: (!isNaN(this.width) ? `${this.width}px` : this.width) || null,
+        height: (!isNaN(this.height) ? `${this.height}px` : this.height) || null,
+        maxWidth: (!isNaN(this.maxWidth) ? `${this.maxWidth}px` : this.maxWidth) || null,
+        maxHeight: (!isNaN(this.maxHeight) ? `${this.maxHeight}px` : this.maxHeight) || null,
+        ratio: parseFloat(this.ratio) || undefined
+      }
     },
 
     wrapperTag () {
@@ -76,25 +85,26 @@ export default {
       return {
         'w-image--absolute': this.absolute,
         'w-image--fixed': this.fixed,
-        'w-image--has-ratio': this.imgGivenRatio
+        'w-image--has-ratio': this.normalized.ratio
       }
     },
 
     wrapperStyles () {
-      let width = (!isNaN(this.width) ? `${this.width}px` : this.width) || null
-      const height = (!isNaN(this.height) ? `${this.height}px` : this.height) || null
-      if (this.imgGivenRatio && !width && !height) width = '100%'
-      else if (this.imgGivenRatio && !width && !height) width = '100%'
-
-      const maxWidth = (!isNaN(this.maxWidth) ? `${this.maxWidth}px` : this.maxWidth) || null
-      const maxHeight = (!isNaN(this.maxHeight) ? `${this.maxHeight}px` : this.maxHeight) || null
+      let width = this.normalized.width
+      let height = this.normalized.height
+      if (this.normalized.ratio && !width && !height) width = '100%'
+      else if (this.normalized.ratio && !width && !height) width = '100%'
+      if (!width && !height) {
+        width = `${this.computedImg.width}px`
+        height = `${this.computedImg.height}px`
+      }
 
       return {
         width,
         height,
-        maxWidth,
-        maxHeight,
-        aspectRatio: this.imgGivenRatio
+        maxWidth: this.normalized.maxWidth,
+        maxHeight: this.normalized.maxHeight,
+        aspectRatio: this.normalized.ratio
       }
     },
 
@@ -108,7 +118,7 @@ export default {
 
     imageStyles () {
       return {
-        'background-image': this.tag !== 'img' && this.loaded ? `url('${this.imgSrc}')` : null
+        'background-image': this.tag !== 'img' && this.loaded ? `url('${this.computedImg.src}')` : null
       }
     }
   },
@@ -126,15 +136,15 @@ export default {
         const img = new Image()
         img.onload = e => {
           if (!this.width && !this.height && !this.imgGivenRatio) {
-            this.imgWidth = e.target.width
-            this.imgHeight = e.target.height
+            this.computedImg.width = e.target.width
+            this.computedImg.height = e.target.height
           }
-          this.imgComputedRatio = e.target.height / e.target.width
+          this.computedImg.ratio = e.target.height / e.target.width
 
           this.loading = false
           this.loaded = true
-          this.imgSrc = loadFallback ? this.fallback : this.src
-          this.$emit('loaded', this.imgSrc)
+          this.computedImg.src = loadFallback ? this.fallback : this.src
+          this.$emit('loaded', this.computedImg.src)
 
           return resolve(img)
         }
@@ -175,12 +185,6 @@ export default {
   watch: {
     src () {
       this.loadImage()
-    },
-    width (value) {
-      this.imgWidth = value
-    },
-    height (value) {
-      this.imgHeight = value
     }
   }
 }
