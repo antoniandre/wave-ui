@@ -12,6 +12,9 @@ component.w-image(:is="wrapperTag" :class="wrapperClasses" :style="wrapperStyles
     w-progress(v-else circle indeterminate v-bind="spinnerColor ? { color: spinnerColor } : {}")
   component.w-image__content(v-if="$slots.default" :is="wrapperTag" :class="contentClass")
     slot
+  figcaption.w-image__caption.caption(v-if="$slots.caption" :class="captionClass")
+    slot
+  figcaption.w-image__caption.caption(v-else-if="caption" :class="captionClass" v-html="caption")
 </template>
 
 <script>
@@ -31,7 +34,7 @@ import { consoleWarn } from '../utils/console'
 export default {
   name: 'w-image',
   props: {
-    tag: { type: String, default: 'span' },
+    tag: { type: String, default: 'span' }, // span, div, figure, img.
     src: { type: String },
     width: { type: [Number, String] },
     height: { type: [Number, String] },
@@ -46,7 +49,9 @@ export default {
     spinnerColor: { type: String },
     fallback: { type: String },
     transition: { type: String, default: 'fade' },
-    contentClass: { type: [String, Array, Object] }
+    contentClass: { type: [String, Array, Object] },
+    caption: { type: String },
+    captionClass: { type: String }
   },
 
   emits: ['loading', 'loaded', 'error'],
@@ -78,6 +83,7 @@ export default {
     },
 
     wrapperTag () {
+      if (this.caption) return 'figure'
       return ['span', 'div'].includes(this.tag) ? this.tag : 'span'
     },
 
@@ -91,20 +97,23 @@ export default {
 
     wrapperStyles () {
       let width = this.normalized.width
-      let height = this.normalized.height
-      if (this.normalized.ratio && !width && !height) width = '100%'
-      else if (this.normalized.ratio && !width && !height) width = '100%'
-      if (!width && !height) {
-        width = `${this.computedImg.width}px`
-        height = `${this.computedImg.height}px`
+      const height = this.normalized.height
+      let maxWidth = this.normalized.maxWidth
+      let aspectRatio = this.normalized.ratio
+
+      if (aspectRatio && !width && !height) width = '100%'
+      else if (!width && !height) {
+        width = '100%'
+        maxWidth = `${this.normalized.maxWidth || this.computedImg.width}px`
+        aspectRatio = aspectRatio || (this.computedImg.width / this.computedImg.height)
       }
 
       return {
         width,
         height,
-        maxWidth: this.normalized.maxWidth,
+        maxWidth,
         maxHeight: this.normalized.maxHeight,
-        aspectRatio: this.normalized.ratio
+        aspectRatio
       }
     },
 
@@ -196,7 +205,6 @@ export default {
   display: inline-flex;
   flex-grow: 0;
   flex-shrink: 0;
-  width: 4em;
 
   &--has-ratio {width: 100%;}
   &--has-ratio, &[class^="bdrs"], &[class*=" bdrs"] {overflow: hidden;}
@@ -212,11 +220,8 @@ export default {
   background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1x1 blank gif.
   background-repeat: no-repeat;
   background-size: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
 
   &--contain {background-size: contain;}
 
