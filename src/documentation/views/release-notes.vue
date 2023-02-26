@@ -22,6 +22,15 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v3.1.0
+      ul
+        li
+          strong.code w-image
+          ul
+            li The image is now responsive by default until its real size is reached.
+            li Support caption and support figure tag. #[span.tag.new]
+
     li.major
       title-link.ma0(h2 slug="v3.0")
         strong.version v3.0.0
@@ -60,7 +69,7 @@ main
           strong.code w-tree
           ul
             li Support navigation menus with links on items. #[span.tag.new]
-            li Allow disabling a particular item.
+            li Allow disabling a particular item. #[span.tag.new]
             li Added the #[code item-disabled-key] prop. #[span.tag.new]
             li Added the #[code item-open-key] prop. #[span.tag.new]
             li Accept HTML in the tree item label.
