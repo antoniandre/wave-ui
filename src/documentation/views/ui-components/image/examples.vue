@@ -18,9 +18,13 @@ div
     image itself. So that, nothing looks broken.
 
   title-link(h2) Default
-  p With no given width, height or ratio, the image is loaded full-size.
+  p.
+    With no given width, height or ratio, the image will be responsive up to its full-size.#[br]
+    This means a width of 100% is added, as well as the image computed ratio (to preserve it when
+    scaling down), and a max width equal to the real image width.
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/favicon.png`")
+    .caption.text-center Real size: 200x200.
     template(#pug).
       w-image(:src="`${baseUrl}images/favicon.png`")
     template(#html).
@@ -35,8 +39,12 @@ div
 
   title-link(h2) Given dimensions
   example(content-class="text-center w-flex justify-space-around wrap")
-    w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
-    w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
+    div
+      w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
+      .caption.text-center Real size: 1900x443.
+    div
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
+      .caption.text-center Real size: 1900x443.
     template(#pug).
       w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
       w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
@@ -62,18 +70,121 @@ div
 
   title-link(h2) Image ratio
   p.
-    You may want to have a responsive image. By setting an image ratio (height / width) and a width
-    to 100% the image will always keep the ratio while resizing.#[br]
-    If no #[code width] or #[code height] is set but a #[code ratio] is given, the #[code width] will
-    be set to 100%.
+    Similar to the default behavior (when no width, no height and no ratio are given), the image
+    will be scaling with its container preserving its aspect ratio. The only difference is that
+    it will also scale up beyond its real size.
+  //- p.
+    You may want to have a responsive image. By setting an image ratio (#[.code height / width])
+    and a width of 100% the image will always keep the ratio while resizing.#[br]
+    If no #[code width] or #[code height] is set but a #[code ratio] is given, the #[code width]
+    will be set to 100%.
+  p Let's see a few cases:
+
+  title-link(h3) Image ratio equal to the exact width and height of the image
+  p Most common case. The image is visible in full, and scales with its container with preserved ratio.
   example(content-class="text-center")
-    w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="233 / 1000")
+    w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1900 / 443")
+    .caption.text-center Real size: 1900x443.
     template(#pug).
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="233 / 1000")
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1900 / 443")
     template(#html).
       &lt;w-image
         :src="`${baseUrl}images/japanese-wave.png`"
-        :ratio="233 / 1000"&gt;
+        :ratio="1900 / 443"&gt;
+      &lt;/w-image&gt;
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
+
+  title-link(h3) Setting a different ratio than the actual image one
+  p.mb0.
+    In this case the image will be cropped on purpose, but still scaling with its container with
+    preserved ratio.
+  .caption The border around the images are added to vizualize the edges of the images.
+  example(content-class="text-center")
+    div
+      w-image.bd1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1000 / 443")
+      .caption.text-center Real size: 1900x443.
+    div
+      w-image.bd1.mt6(:src="`${baseUrl}images/japanese-wave.png`" :ratio="3000 / 443")
+      .caption.text-center Real size: 1900x443.
+    template(#pug).
+      w-image.bd1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1000 / 443")
+      w-image.bd1.mt6(:src="`${baseUrl}images/japanese-wave.png`" :ratio="3000 / 443")
+    template(#html).
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        :ratio="1000 / 443"
+        class="bd1"&gt;
+      &lt;/w-image&gt;
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        :ratio="3000 / 443"
+        class="bd1 mt6"&gt;
+      &lt;/w-image&gt;
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
+
+  title-link(h3) Ratio with a set width and/or height
+  example(content-class="text-center")
+    w-flex(align-center wrap gap="4")
+      .grow
+        p Set width
+        w-image.bd1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100")
+        .caption.text-center Real size: 200x200.
+      .grow
+        p Set height
+        w-image.bd1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" height="100")
+        .caption.text-center Real size: 200x200.
+      .grow
+        p Set width and height (pointless)
+        w-image.bd1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100" height="100")
+        .caption.text-center Real size: 200x200.
+    template(#pug).
+      p Set width
+      w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100")
+      p Set height
+      w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" height="100")
+      p p Set width and height (pointless)
+      w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100" height="100")
+    template(#html).
+      &lt;w-image
+        :src="`${baseUrl}images/favicon.png`"
+        :ratio="200 / 200"
+        width="100"&gt;
+      &lt;/w-image&gt;
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
+  title-link(h3) Ratio with a set height
+  title-link(h3) Ratio with a set width and height -> pointless
+  w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100" height="100")
+  title-link(h3) Ratio with a set max width
+  w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" max-width="400")
+  title-link(h3) Ratio with a set max height
+  w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" max-height="100")
+  p In this case the image will be cropped
+  example(content-class="text-center")
+    w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200")
+    template(#pug).
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1000 / 443")
+    template(#html).
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        :ratio="1000 / 443"&gt;
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
@@ -93,6 +204,32 @@ div
 
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
+    template(#pug).
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
+    template(#html).
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        width="100%"
+        tag="img"
+        style="max-width: 700px"&gt;
+      &lt;/w-image&gt;
+    template(#js).
+      data: () => ({
+        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
+        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
+        // if the image is in the public/ folder.
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
+
+  title-link(h2) Figure with or without caption
+  p.
+    If you provide a caption, the w-image tag will be using a native HTML #[span.code &lt;figure&gt;]
+    tag along with #[span.code &lt;figcaption&gt;].
+  example(content-class="text-center")
+    w-image(
+      :src="`${baseUrl}images/japanese-wave.png`"
+      max-width="700"
+      caption="The Great Wave Off - by Kanagawa")
     template(#pug).
       w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
     template(#html).
