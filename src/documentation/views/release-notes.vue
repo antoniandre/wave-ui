@@ -472,7 +472,11 @@ main
         li
           strong.code w-tree
           ul
-            li W-tree: Added the #[code item-label-key] prop. #[span.tag.new]
+            li Added the #[code item-label-key] prop. #[span.tag.new]
+        li
+          strong.code w-button
+          ul
+            li Support button CSS classes with tooltip option (Vue 2 specific).
 
     li.minor
       strong.version v1.63.0
