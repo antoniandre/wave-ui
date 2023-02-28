@@ -461,6 +461,14 @@ main
     //-----------------------------------------------------
 
     li.minor
+      strong.version v1.63.1
+      ul
+        li
+          strong.code w-tree
+          ul
+            li W-tree: Added the #[code item-label-key] prop. #[span.tag.new]
+
+    li.minor
       strong.version v1.63.0
       ul
         li
