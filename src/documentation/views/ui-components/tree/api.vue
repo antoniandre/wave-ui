@@ -37,7 +37,8 @@ const propsDescs = {
   itemIconColorKey: 'Specifies the name of the optional attribute in each item object where to find the item\'s icon color.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   itemRouteKey: 'Specifies the name of the optional attribute in each item object where to find the item\'s route. It can be an internal or external link.<br>If the link is internal and Vue Router is detected, it will use a &lt;router-link&gt; tag.',
   itemDisabledKey: 'Specifies the name of the optional attribute in each item object, that will disable the interactivity of this item (expand, collapse selection, click, tab).',
-  itemOpenKey: 'Specifies the name of the optional attribute in each item object, that will make this item open by default.'
+  itemOpenKey: 'Specifies the name of the optional attribute in each item object, that will make this item open by default.',
+  itemLabelKey: 'Specifies the name of the label attribute in each item object. <code>label</code> by default.'
 }
 
 const slots = {
