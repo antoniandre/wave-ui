@@ -39,12 +39,12 @@ div
 
   title-link(h2) Given dimensions
   example(content-class="text-center w-flex justify-space-around wrap")
-    div
-      w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
-      .caption.text-center Real size: 1900x443.
+    div.mr5
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
+      .caption.text-center Real size: 1900x443. Given size: 150x150.
     div
       w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
-      .caption.text-center Real size: 1900x443.
+      .caption.text-center Real size: 1900x443. Given size: 500x150.
     template(#pug).
       w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
       w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
@@ -73,18 +73,13 @@ div
     Similar to the default behavior (when no width, no height and no ratio are given), the image
     will be scaling with its container preserving its aspect ratio. The only difference is that
     it will also scale up beyond its real size.
-  //- p.
-    You may want to have a responsive image. By setting an image ratio (#[.code height / width])
-    and a width of 100% the image will always keep the ratio while resizing.#[br]
-    If no #[code width] or #[code height] is set but a #[code ratio] is given, the #[code width]
-    will be set to 100%.
   p Let's see a few cases:
 
   title-link(h3) Image ratio equal to the exact width and height of the image
   p Most common case. The image is visible in full, and scales with its container with preserved ratio.
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1900 / 443")
-    .caption.text-center Real size: 1900x443.
+    .caption.text-center Real size: 1900x443. Given ratio: 1900 / 443.
     template(#pug).
       w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1900 / 443")
     template(#html).
@@ -108,10 +103,10 @@ div
   example(content-class="text-center")
     div
       w-image.bd1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1000 / 443")
-      .caption.text-center Real size: 1900x443.
+      .caption.text-center Real size: 1900x443. Given ratio: 1000 / 443.
     div
       w-image.bd1.mt6(:src="`${baseUrl}images/japanese-wave.png`" :ratio="3000 / 443")
-      .caption.text-center Real size: 1900x443.
+      .caption.text-center Real size: 1900x443. Given ratio: 3000 / 443.
     template(#pug).
       w-image.bd1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1000 / 443")
       w-image.bd1.mt6(:src="`${baseUrl}images/japanese-wave.png`" :ratio="3000 / 443")
@@ -140,15 +135,15 @@ div
       .grow
         p Set width
         w-image.bd1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100")
-        .caption.text-center Real size: 200x200.
+        .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given width: 100.
       .grow
         p Set height
         w-image.bd1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" height="100")
-        .caption.text-center Real size: 200x200.
+        .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given height: 100.
       .grow
         p Set width and height (pointless)
         w-image.bd1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100" height="100")
-        .caption.text-center Real size: 200x200.
+        .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given size: 100x100.
     template(#pug).
       p Set width
       w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100")
@@ -169,11 +164,9 @@ div
         // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
-  title-link(h3) Ratio with a set height
-  title-link(h3) Ratio with a set width and height -> pointless
-  w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100" height="100")
+
   title-link(h3) Ratio with a set max width
-  w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" max-width="400")
+  w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" max-width="300")
   title-link(h3) Ratio with a set max height
   w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" max-height="100")
   p In this case the image will be cropped
