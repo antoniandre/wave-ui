@@ -222,7 +222,8 @@ div
     w-image(
       :src="`${baseUrl}images/japanese-wave.png`"
       max-width="700"
-      caption="The Great Wave Off - by Kanagawa")
+      caption="The Great Wave Off Kanagawa - Hokusai")
+    .caption Real size: 1900x443. Given max-width: 700.
     template(#pug).
       w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
     template(#html).
@@ -245,14 +246,14 @@ div
     This image is very big, so that you have time to see the spinner while loading.
     Refresh the page if you haven't seen it!
   example(content-class="text-center")
-    w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" width="100%" :ratio="1 / 2")
+    w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :ratio="5098 / 2550")
+    .caption Real size: 5098x2550. Given ratio: 5098 / 2550.
     template(#pug).
-      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" width="100%" :ratio="1 / 2")
+      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :ratio="5098 / 2550")
     template(#html).
       &lt;w-image
         :src="`${baseUrl}images/spirit-island--alberta.png`"
-        width="100%"
-        :ratio="1 / 2"&gt;
+        :ratio="5098 / 2550"&gt;
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
@@ -283,7 +284,9 @@ div
           template(#label="{ item }")
             code {{ item.label }}
         w-button.mt2(@click="reload") Reload image
-      w-image(:src="img.src" :width="500" :height="250" :transition="img.transition")
+      div
+        w-image(:src="img.src" :width="500" :height="250" :transition="img.transition")
+        .caption Real size: 5098x2550. Given size: 500x250.
     template(#pug).
       w-flex(wrap justify-center align-center)
         div.mr4.my2
@@ -412,6 +415,7 @@ div
   example
     //- ?v1 to prevent the image to load from cache for this example (image is used above).
     w-image(:src="`${baseUrl}images/spirit-island--alberta.png?v1`" lazy :ratio="2550 / 5098")
+    .caption Real size: 5098x2550.
     template(#pug).
       w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy :ratio="2550 / 5098")
     template(#html).
