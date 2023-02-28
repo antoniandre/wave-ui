@@ -78,6 +78,7 @@ export default {
     counts: { type: Boolean },
     itemIconKey: { type: String, default: 'icon' }, // Support a different icon per item.
     iconColor: { type: String }, // Applies a color on all the label item icons.
+    itemLabelKey: { type: String, default: 'label' }, // Specify a different key for the item label.
     itemIconColorKey: { type: String, default: 'iconColor' }, // Applies a specific color on each label item icons.
     itemRouteKey: { type: String, default: 'route' }, // Uses a router link if the item has the `route` key.
     itemDisabledKey: { type: String, default: 'disabled' }, // Disables the item click and selection.
@@ -117,7 +118,7 @@ export default {
         this.currentDepthItems.push({
           originalItem: item, // Store the original item to return it on event emits.
           _uid: this.depth.toString() + (i + 1),
-          label: item.label,
+          label: item[this.itemLabelKey],
           children: !!item.children, // The children tree remains available in originalItem.
           branch: item.branch,
           route: item[this.itemRouteKey],

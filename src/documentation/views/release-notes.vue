@@ -476,6 +476,18 @@ main
     //-----------------------------------------------------
 
     li.minor
+      strong.version v1.63.1
+      ul
+        li
+          strong.code w-tree
+          ul
+            li Added the #[code item-label-key] prop. #[span.tag.new]
+        li
+          strong.code w-button
+          ul
+            li Support button CSS classes with tooltip option (Vue 2 specific).
+
+    li.minor
       strong.version v1.63.0
       ul
         li
