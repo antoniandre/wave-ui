@@ -61,7 +61,15 @@ export default {
   computed: {
     buttonProps () {
       const { tooltip, tooltipProps, ...props } = this.$props
-      return { ...props, ...this.$attrs }
+      return {
+        ...props,
+        ...this.$attrs,
+        // Vue 2 specific:
+        // The classes and styles are not in $attrs. Add them from $vnode.data.staticClass, so
+        // the button gets these classes wen used with tooltip.
+        // https://v2.vuejs.org/v2/guide/components-props.html#Disabling-Attribute-Inheritance
+        class: this.tooltip && this.$vnode.data.staticClass
+      }
     }
   }
 }
