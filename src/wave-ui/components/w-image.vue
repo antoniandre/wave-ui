@@ -203,6 +203,7 @@ export default {
 .w-image {
   position: relative;
   display: inline-flex;
+  flex-direction: column;
   flex-grow: 0;
   flex-shrink: 0;
 
