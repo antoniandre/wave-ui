@@ -300,7 +300,6 @@ export default {
     // Also accept objects if returnObject is true.
     // In any case, always end up with an array.
     checkSelection (items) {
-      console.log(items)
       items = Array.isArray(items) ? items : (items !== undefined ? [items] : [])
       // `selectItems` items always have a value.
       const allValues = this.selectItems.map(item => item.value)
