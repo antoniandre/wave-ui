@@ -23,6 +23,7 @@
     "./package.json": "./package.json",
     "./dist/*": "./dist/*",
     "./src/wave-ui": "./src/wave-ui/index.js",
+    "./src/wave-ui/components": "./src/wave-ui/components/index.js",
     "./src/wave-ui/*": "./src/wave-ui/*"
   },
   "type": "module",
