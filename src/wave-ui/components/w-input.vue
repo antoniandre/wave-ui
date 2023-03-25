@@ -115,7 +115,9 @@ component(
 
 <script>
 /**
- * @todo Share the common parts between w-input, w-textarea & w-select.
+ * @todo
+ * - Share the common parts between w-input, w-textarea & w-select.
+ * - option to fit to the content using contenteditable div
  **/
 
 import FormElementMixin from '../mixins/form-elements'
@@ -575,6 +577,7 @@ $inactive-color: #777;
     top: 50%;
     left: 0;
     padding-left: 2 * $base-increment;
+    white-space: nowrap;
     transform: translateY(-50%);
     pointer-events: none;
 

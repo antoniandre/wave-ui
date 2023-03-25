@@ -351,6 +351,7 @@ $inactive-color: #777;
     top: $base-increment;
     left: 0;
     padding-left: 2 * $base-increment;
+    white-space: nowrap;
     transform: translateY(0%);
     pointer-events: none;
 
