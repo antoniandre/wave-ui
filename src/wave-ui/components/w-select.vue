@@ -40,21 +40,19 @@ component(
         .w-select__selection-slot(v-if="$scopedSlots.selection")
           //- inputValue is always an array.
           slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
-        input.w-select__selection(
+        .w-select__selection(
           ref="selection-input"
-          type="text"
-          :value="$scopedSlots.selection ? '' : selectionString"
+          :contenteditable="isDisabled || isReadonly ? 'false' : 'true'"
           @focus="!isDisabled && !isReadonly && onFocus($event)"
           @blur="onBlur"
           @keydown="!isDisabled && !isReadonly && onKeydown($event)"
           :id="`w-select--${_uid}`"
-          :placeholder="(!$scopedSlots.selection && placeholder) || null"
+          :class="{ 'w-select__selection--placeholder': !$scopedSlots.selection && !selectionString && placeholder }"
           :disabled="isDisabled || null"
           readonly
           aria-readonly="true"
-          :required="required || null"
           :tabindex="tabindex || null"
-          autocomplete="off")
+          v-html="($scopedSlots.selection ? '' : selectionString) || placeholder")
         //- For standard HTML form submission.
         input(
           v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
@@ -149,7 +147,8 @@ export default {
     // By default you can unselect a list item by re-selecting it.
     // Allow preventing that on single selection lists only.
     noUnselect: { type: Boolean },
-    menuProps: { type: Object } // Allow passing down an object of props to the w-menu component.
+    menuProps: { type: Object }, // Allow passing down an object of props to the w-menu component.
+    fitToContent: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -198,6 +197,7 @@ export default {
       return {
         'w-select': true,
         'w-select--disabled': this.isDisabled,
+        'w-select--fit-to-content': this.fitToContent,
         'w-select--readonly': this.isReadonly,
         [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
         'w-select--focused': (this.isFocused || this.showMenu) && !this.isReadonly,
@@ -229,6 +229,7 @@ export default {
     onFocus (e) {
       this.isFocused = true
       this.$emit('focus', e)
+      return false
     },
 
     onBlur (e) {
@@ -237,6 +238,11 @@ export default {
     },
 
     onKeydown (e) {
+      // Forbid typing in contenteditable element.
+      // Note: using contenteditable rather than input in order to be able to fit the select list
+      // to its content with CSS. Only contenteditable divs/non-interactive elements can react to focus/blur ).
+      e.preventDefault()
+
       if ([13, 27, 38, 40].includes(e.keyCode)) e.preventDefault()
 
       if (e.keyCode === 27) this.closeMenu() // Escape.
@@ -364,6 +370,11 @@ export default {
     -webkit-tap-highlight-color: transparent;
   }
 
+  &--fit-to-content {
+    display: inline-flex;
+    flex-grow: 0;
+  }
+
   // Selection wrapper.
   // ------------------------------------------------------
   &__selection-wrap {
@@ -419,21 +430,21 @@ export default {
     }
   }
 
-  // selection (input) field.
+  // Selection (contenteditable) field.
+  // Using contenteditable instead of readonly input in order to be able to fit to content.
+  // Then disable typing and hide caret.
   // ------------------------------------------------------
   &__selection {
     width: 100%;
     height: 100%;
     min-height: inherit;
-    font: inherit;
-    color: inherit;
-    text-align: inherit;
-    background: none;
-    border: none;
     outline: none;
     padding-left: 2 * $base-increment;
     padding-right: 2 * $base-increment;
+    display: flex;
+    align-items: center;
     cursor: pointer;
+    caret-color: transparent;
 
     .w-select__selection-slot + & {
       position: absolute;
@@ -459,9 +470,9 @@ export default {
       -webkit-tap-highlight-color: transparent;
     }
 
-    .w-select--disabled input::placeholder {color: inherit;}
-
     .w-select--readonly & {cursor: auto;}
+
+    &--placeholder {color: #888;}
   }
 
   &__selection-slot {
