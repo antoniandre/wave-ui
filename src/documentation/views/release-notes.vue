@@ -28,6 +28,9 @@ main
           strong.code w-select
           ul
             li Added a #[code fit-to-content] option. #[span.tag.new]
+          strong.code w-select, w-input, w-textarea
+          ul
+            li Keep floating labels on a single line
 
     li.major
       strong.version v3.0.0
