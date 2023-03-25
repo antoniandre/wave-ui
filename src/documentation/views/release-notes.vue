@@ -21,6 +21,13 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+    li.minor
+      strong.version v3.1.0
+      ul
+        li
+          strong.code w-select
+          ul
+            li Added a #[code fit-to-content] option. #[span.tag.new]
 
     li.major
       title-link.ma0(h2 slug="v3.0")
