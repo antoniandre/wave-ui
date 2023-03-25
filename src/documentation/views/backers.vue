@@ -37,8 +37,8 @@ main
 
 <script>
 import axios from 'axios'
-import DivRiotsLogo from '@/assets/divriots.svg'
-import DivRiotsLogoGrey from '@/assets/divriots-grey.svg'
+import DivRiotsLogo from '@/assets/divriots.svg?url'
+import DivRiotsLogoGrey from '@/assets/divriots-grey.svg?url'
 
 const githubBackers = [
   'divriots', 'nmauersberg', 'KleinSamuel', 'chris-deep', 'crbast', 'CoolGoose', 'bohdaq',
