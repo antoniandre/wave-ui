@@ -539,6 +539,7 @@ export default {
     top: 50%;
     left: 0;
     right: 0;
+    white-space: nowrap;
     // Use margin instead of padding as the scale transformation below decreases the real padding
     // size and misaligns the label.
     margin-left: 2 * $base-increment;
