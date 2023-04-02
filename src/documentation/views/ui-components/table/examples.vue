@@ -1049,13 +1049,12 @@ div
 
   title-link(h2 slug="pagination")
     | Pagination
-    w-tag.ml2.text-bold(round color="warning" outline sm) COMING SOON
+    w-tag.ml2.text-bold(round color="warning" outline sm) IN PROGRESS
   example
-    | Coming soon.
-    //- w-table(
-      :headers="table1.headers"
-      :items="table1.items"
-      :pagination="table1.pagination")
+    w-table(
+      :headers="table11.headers"
+      :items="table11.items"
+      :pagination="table11.pagination")
     template(#pug).
     template(#js).
       data: () => ({
@@ -1628,6 +1627,8 @@ div
 </template>
 
 <script>
+import { faker } from '@faker-js/faker'
+
 const allItems = [
   { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
   { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
@@ -1839,6 +1840,24 @@ export default {
       ],
       items: allItems.slice(0, 5),
       loading: false
+    },
+    table11: {
+      headers: [
+        { label: 'ID', key: 'id' },
+        { label: 'First name', key: 'firstName' },
+        { label: 'Last name', key: 'lastName' },
+        { label: 'Birthdate', key: 'birthdate' },
+      ],
+      items: Array(500).fill('').map((item, i) => ({
+        id: i + 1,
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
+      })),
+      pagination: {
+        itemsPerPage: 50,
+        total: 500
+      }
     },
     selectableRowsOptions: [
       { label: '<code class="mr2">:selectable-row="false"</code> (default)', value: false },
