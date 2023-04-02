@@ -136,26 +136,30 @@
       tr.w-table__row.w-table__pagination-wrap(v-if="pagination && paginationConfig")
         td.w-table__cell(:colspan="headers.length")
           .w-table__pagination
-            w-select.pagination-number.pagination-number--items-per-page(
-              v-if="paginationConfig.itemsPerPageOptions"
-              v-model="paginationConfig.itemsPerPage"
-              :items="paginationConfig.itemsPerPageOptions"
-              label-position="left"
-              label="Items per page"
-              label-color="inherit")
-            span.pagination-number.pagination-number--results.
-              {{ paginationConfig.start }}-{{ paginationConfig.end }} of {{ paginationConfig.total }}
-            .pagination-arrows
-              w-button.pagination-arrow.pagination-arrow--prev(
-                @click="paginationConfig.page--"
-                icon="wi-chevron-left"
-                text
-                lg)
-              w-button.pagination-arrow.pagination-arrow--next(
-                @click="paginationConfig.page++"
-                icon="wi-chevron-right"
-                text
-                lg)
+            slot(
+              name="pagination"
+              :range="`${paginationConfig.start}-${paginationConfig.end} of ${paginationConfig.total}`"
+              :total="paginationConfig.total")
+              w-select.pagination-number.pagination-number--items-per-page(
+                v-if="paginationConfig.itemsPerPageOptions"
+                v-model="paginationConfig.itemsPerPage"
+                :items="paginationConfig.itemsPerPageOptions"
+                label-position="left"
+                label="Items per page"
+                label-color="inherit")
+              .pagination-arrows
+                w-button.pagination-arrow.pagination-arrow--prev(
+                  @click="paginationConfig.page--"
+                  icon="wi-chevron-left"
+                  text
+                  lg)
+                w-button.pagination-arrow.pagination-arrow--next(
+                  @click="paginationConfig.page++"
+                  icon="wi-chevron-right"
+                  text
+                  lg)
+              span.pagination-number.pagination-number--results.
+                {{ paginationConfig.start }}-{{ paginationConfig.end }} of {{ paginationConfig.total }}
 </template>
 
 <script>
@@ -535,12 +539,13 @@ export default {
     },
 
     updatePaginationConfig () {
-      const itemsPerPage = this.pagination?.itemsPerPage || 10
+      const itemsPerPage = this.pagination?.itemsPerPage || 20
+      const itemsPerPageOptions = this.pagination?.itemsPerPageOptions || [{ value: 20 }, { value: 100 }, { label: 'All', value: 0 }]
       const total = this.pagination?.total || this.items.length
       const page = this.pagination?.page || 1
       this.paginationConfig = {
         itemsPerPage,
-        itemsPerPageOptions: this.pagination?.itemsPerPageOptions || [{ label: '10', value: 10 }, { label: '100', value: 100 }, { label: 'All', value: 0 }],
+        itemsPerPageOptions: itemsPerPageOptions.map(item => ({ ...item, label: item.label || item.value })),
         page,
         start: this.pagination?.start || 1,
         end: total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page)),
@@ -581,6 +586,11 @@ export default {
 
     selectedRows (array) {
       this.selectedRowsInternal = Array.isArray(array) && array.length ? this.selectedRows : []
+    },
+
+    pagination: {
+      handler () { this.updatePaginationConfig() },
+      deep: true
     }
   }
 }
@@ -800,27 +810,31 @@ $tr-border-top: 1px;
     }
   }
 
+  // Pagination.
+  // ------------------------------------------------------
+  &__pagination-wrap {
+    border-top: $border;
+  }
   &__pagination {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-top: $base-increment;
-    padding-bottom: $base-increment;
 
     .pagination-number--items-per-page {
-      margin-right: 6 * $base-increment;
       flex-grow: 0;
       text-align: right;
     }
+
+    .pagination-arrows {
+      margin-left: 3 * $base-increment;
+      margin-right: 3 * $base-increment;
+    }
+
     .pagination-number--of {
       margin-left: $base-increment;
       margin-right: $base-increment;
     }
     .w-select__selection {max-width: 60px;}
-
-    .pagination-arrows {
-      margin-left: 6 * $base-increment;
-    }
   }
 }
 
