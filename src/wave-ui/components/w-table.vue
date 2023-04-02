@@ -59,7 +59,7 @@
 
       //- Normal rows.
       template(v-if="tableItems.length && loading !== true")
-        template(v-for="(item, i) in sortedItems" :key="i")
+        template(v-for="(item, i) in paginatedItems" :key="i")
           //- Fully custom tr (`item` slot).
           slot(
             v-if="$slots.item"
@@ -136,6 +136,7 @@
       tr.w-table__row.w-table__pagination-wrap(v-if="pagination && paginationConfig")
         td.w-table__cell(:colspan="headers.length")
           .w-table__pagination
+            | {{ paginationConfig }}
             slot(
               name="pagination"
               :range="`${paginationConfig.start}-${paginationConfig.end} of ${paginationConfig.total}`"
@@ -149,12 +150,12 @@
                 label-color="inherit")
               .pagination-arrows
                 w-button.pagination-arrow.pagination-arrow--prev(
-                  @click="paginationConfig.page--"
+                  @click="goToPage('-1')"
                   icon="wi-chevron-left"
                   text
                   lg)
                 w-button.pagination-arrow.pagination-arrow--next(
-                  @click="paginationConfig.page++"
+                  @click="goToPage('+1')"
                   icon="wi-chevron-right"
                   text
                   lg)
@@ -343,6 +344,10 @@ export default {
     // Faster lookup than array.includes(uid) and also cached.
     expandedRowsByUid () {
       return this.expandedRowsInternal.reduce((obj, uid) => (obj[uid] = true) && obj, {})
+    },
+
+    paginatedItems () {
+      return this.sortedItems.slice(this.paginationConfig.start, this.paginationConfig.end)
     }
   },
 
@@ -551,6 +556,14 @@ export default {
         end: total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page)),
         total
       }
+    },
+
+    goToPage (page) {
+      if (['-1', '+1'].includes(page)) this.paginationConfig.page += +page
+      const { itemsPerPage } = this.paginationConfig
+      this.paginationConfig.page = Math.max(1, this.paginationConfig.page)
+      this.paginationConfig.start = itemsPerPage * (this.paginationConfig.page - 1)
+      this.paginationConfig.end = this.paginationConfig.start + itemsPerPage
     }
   },
 
