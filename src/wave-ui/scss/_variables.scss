@@ -48,7 +48,7 @@ $base-font-size: 14px !default; // Must be a px unit.
 $base-increment: round(divide($base-font-size, 4)) !default;
 $layout-padding: $base-increment * 4 !default; // Applied on the .content-wrap tag.
 $border-radius: 3px !default;
-$border-color: rgba(var(--w-contrast-bg-color-rgb), 0.15) !default;
+$border-color: rgba(var(--w-contrast-bg-color-rgb), 0.12) !default;
 $border: 1px solid $border-color !default;
 $transition-duration: 0.25s !default;
 $fast-transition-duration: 0.15s !default;
