@@ -144,6 +144,7 @@
               w-select.pagination-number.pagination-number--items-per-page(
                 v-if="paginationConfig.itemsPerPageOptions"
                 v-model="paginationConfig.itemsPerPage"
+                @input="updatePaginationConfig"
                 :items="paginationConfig.itemsPerPageOptions"
                 label-position="left"
                 label="Items per page"
@@ -151,11 +152,20 @@
               .pagination-arrows
                 w-button.pagination-arrow.pagination-arrow--prev(
                   @click="goToPage('-1')"
+                  :disabled="paginationConfig.page <= 1"
                   icon="wi-chevron-left"
                   text
                   lg)
+                w-button.pagination-arrow.pagination-arrow--prev(
+                  v-for="i in paginationConfig.pagesCount"
+                  :key="i"
+                  @click="goToPage(i)"
+                  round
+                  text
+                  lg) {{ i }}
                 w-button.pagination-arrow.pagination-arrow--next(
                   @click="goToPage('+1')"
+                  :disabled="paginationConfig.page >= paginationConfig.pagesCount"
                   icon="wi-chevron-right"
                   text
                   lg)
@@ -545,25 +555,31 @@ export default {
 
     updatePaginationConfig () {
       const itemsPerPage = this.pagination?.itemsPerPage || 20
-      const itemsPerPageOptions = this.pagination?.itemsPerPageOptions || [{ value: 20 }, { value: 100 }, { label: 'All', value: 0 }]
+      const itemsPerPageOptions = this.pagination?.itemsPerPageOptions || [20, 100, { label: 'All', value: 0 }]
       const total = this.pagination?.total || this.items.length
+      const itemsPerPageOrTotal = itemsPerPage || total
       const page = this.pagination?.page || 1
       this.paginationConfig = {
         itemsPerPage,
-        itemsPerPageOptions: itemsPerPageOptions.map(item => ({ ...item, label: item.label || item.value })),
+        itemsPerPageOptions: itemsPerPageOptions.map(item => ({
+          label: ['string', 'number'].includes(typeof item) ? item.toString() : (item.label || item.value),
+          value: ['string', 'number'].includes(typeof item) ? ~~item : (item.value ?? item.label)
+        })),
         page,
         start: this.pagination?.start || 1,
-        end: total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page)),
-        total
+        end: total >= (itemsPerPageOrTotal * page) ? (itemsPerPageOrTotal * page) : (total % (itemsPerPageOrTotal * page)),
+        total,
+        pagesCount: Math.ceil(total / itemsPerPageOrTotal)
       }
     },
 
     goToPage (page) {
       if (['-1', '+1'].includes(page)) this.paginationConfig.page += +page
+      else this.paginationConfig.page = page
       const { itemsPerPage } = this.paginationConfig
       this.paginationConfig.page = Math.max(1, this.paginationConfig.page)
-      this.paginationConfig.start = itemsPerPage * (this.paginationConfig.page - 1)
-      this.paginationConfig.end = this.paginationConfig.start + itemsPerPage
+      this.paginationConfig.start = (itemsPerPage * (this.paginationConfig.page - 1)) + 1
+      this.paginationConfig.end = (this.paginationConfig.start - 1) + itemsPerPage
     }
   },
 
