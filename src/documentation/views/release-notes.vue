@@ -470,6 +470,14 @@ main
 
     //- Vue 2.
     //-----------------------------------------------------
+    li.patch
+      strong.version v1.63.1
+      ul
+        li
+          strong.code w-button
+          ul
+            li Support button CSS #[strong dynamic] classes with tooltip option (Vue 2 specific).
+
     li.minor
       strong.version v1.64.0
       ul
@@ -491,7 +499,7 @@ main
         li
           strong.code w-button
           ul
-            li Support button CSS classes with tooltip option (Vue 2 specific).
+            li Support button static CSS classes with tooltip option (Vue 2 specific).
 
     li.minor
       strong.version v1.63.0
