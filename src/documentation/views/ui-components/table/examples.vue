@@ -1855,7 +1855,7 @@ export default {
         birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
       })),
       pagination: {
-        itemsPerPage: 50,
+        itemsPerPage: 25,
         total: 500
       }
     },
