@@ -1049,8 +1049,8 @@ div
 
   title-link(h2 slug="pagination")
     | Pagination
-    w-tag.ml2.text-bold(round color="warning" outline sm) IN PROGRESS
-  example
+    w-tag.ml2.text-bold(round color="warning" outline sm) COMING SOON
+  //- example
     w-table(
       :headers="table11.headers"
       :items="table11.items"
