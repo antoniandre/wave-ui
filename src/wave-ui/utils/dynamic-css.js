@@ -275,10 +275,8 @@ export const injectColorsCSSInDOM = themeColors => {
     css.id = 'wave-ui-colors'
     css.innerHTML = generateColors(themeColors)
 
-    // Keep the injected colors at the end of other styles.
-    // This should have priority over the user rules that have the same specificity.
-    const styles = document.head.querySelectorAll('style,link[rel="stylesheet"]')
-    if (styles.length) styles[styles.length - 1].after(css)
+    const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
+    if (firstStyle) firstStyle.before(css)
     else document.head.appendChild(css)
   }
 }
