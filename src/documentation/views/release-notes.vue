@@ -21,13 +21,6 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
-    li.patch
-      strong.version v3.1.1
-      ul
-        li
-          strong Colors
-          ul
-            li Load the Wave UI color definitions after the other styles in the head.
 
     li.minor
       strong.version v3.1.0
