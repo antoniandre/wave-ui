@@ -478,10 +478,22 @@ main
         w-icon.ml-1.mr1.grey wi-chevron-right
         | #[span.code.inherit npm i wave-ui@legacy]
 
+    //-----------------------------------------------------
     //- Vue 2.
     //-----------------------------------------------------
+
     li.patch
-      strong.version v1.63.1
+      strong.version v1.65.1
+      ul
+        li
+          strong.code w-confirm
+          ul
+            li The component is unwrapped from its div and is now behaving like an inline tag. #[issue-link 106]
+            li The final button mounted in the DOM will have the class #[code w-confirm].
+            li Any CSS class added on the #[code w-confirm] component will act only on the activator button (and not the w-menu as well like it did before this patch).
+
+    li.minor
+      strong.version v1.65.0
       ul
         li
           strong.code w-button
@@ -499,7 +511,7 @@ main
           ul
             li Keep floating labels on a single line.
 
-    li.minor
+    li.patch
       strong.version v1.63.1
       ul
         li
