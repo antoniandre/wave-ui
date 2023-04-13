@@ -29,6 +29,7 @@
 <script>
 export default {
   name: 'w-confirm',
+  inheritAttrs: false, // The attrs are only bound to the button, not the w-menu.
   props: {
     // Main button props.
     bgColor: { type: String },
