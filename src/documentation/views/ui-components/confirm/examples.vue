@@ -68,52 +68,52 @@ div
     li #[code cancel] #[small.grey E.g. #[code.grey :cancel="{ bgColor: 'green' }"]]
     li #[code confirm] #[small.grey E.g. #[code.grey :confirm="{ bgColor: 'green' }"]]
   example(content-class="text-center" app-classes-string="align-center")
-    w-confirm.mb2(bg-color="success") Ask for confirm
-    w-confirm.mb2(bg-color="info" color="yellow") Ask for confirm
-    w-confirm(:menu="{ bgColor: 'indigo-light1', color: 'white' }") Ask for confirm
+    w-confirm.ma2(bg-color="success") Ask for confirm
+    w-confirm.ma2(bg-color="info" color="yellow") Ask for confirm
+    w-confirm.ma2(:menu="{ bgColor: 'indigo-light1', color: 'white' }") Ask for confirm
     template(#pug).
-      w-confirm.mb2(bg-color="success") Ask for confirm
-      w-confirm.mb2(bg-color="info" color="yellow") Ask for confirm
-      w-confirm(:menu="{ bgColor: 'indigo-light1', color: 'white' }") Ask for confirm
+      w-confirm.ma2(bg-color="success") Ask for confirm
+      w-confirm.ma2(bg-color="info" color="yellow") Ask for confirm
+      w-confirm.ma2(:menu="{ bgColor: 'indigo-light1', color: 'white' }") Ask for confirm
     template(#html).
-      &lt;w-confirm bg-color="success" class="mb2"&gt;
+      &lt;w-confirm bg-color="success" class="ma2"&gt;
         Ask for confirm
       &lt;/w-confirm&gt;
 
-      &lt;w-confirm bg-color="info" color="yellow" class="mb2"&gt;
+      &lt;w-confirm bg-color="info" color="yellow" class="ma2"&gt;
         Ask for confirm
       &lt;/w-confirm&gt;
 
-      &lt;w-confirm :menu="{ bgColor: 'indigo-light1', color: 'white' }"&gt;
+      &lt;w-confirm :menu="{ bgColor: 'indigo-light1', color: 'white' }" class="ma2"&gt;
         Ask for confirm
       &lt;/w-confirm&gt;
 
   title-link(h2) Positions &amp; alignments
   title-link(h3) Positions
   example(content-class="text-center" app-classes-string="align-center")
-    w-confirm.my5(top) Top
-    w-confirm.my5(right) Right
-    w-confirm.my5(bottom) Bottom
-    w-confirm.my5(left) Left
+    w-confirm.ma5(top) Top
+    w-confirm.ma5(right) Right
+    w-confirm.ma5(bottom) Bottom
+    w-confirm.ma5(left) Left
     template(#pug).
-      w-confirm.my5(top) Top
-      w-confirm.my5(right) Right
-      w-confirm.my5(bottom) Bottom
-      w-confirm.my5(left) Left
+      w-confirm.ma5(top) Top
+      w-confirm.ma5(right) Right
+      w-confirm.ma5(bottom) Bottom
+      w-confirm.ma5(left) Left
     template(#html).
-      &lt;w-confirm top class="my5"&gt;
+      &lt;w-confirm top class="ma5"&gt;
         Top
       &lt;/w-confirm&gt;
 
-      &lt;w-confirm right class="my5"&gt;
+      &lt;w-confirm right class="ma5"&gt;
         Right
       &lt;/w-confirm&gt;
 
-      &lt;w-confirm bottom class="my5"&gt;
+      &lt;w-confirm bottom class="ma5"&gt;
         Bottom
       &lt;/w-confirm&gt;
 
-      &lt;w-confirm left class="my5"&gt;
+      &lt;w-confirm left class="ma5"&gt;
         Left
       &lt;/w-confirm&gt;
 
@@ -169,29 +169,29 @@ div
 
   title-link(h4) Vertical
   example
-    w-flex.text-center(justify-center)
-      div
+    w-flex(justify-center)
+      w-flex.no-grow(column)
         w-confirm.ma2(left align-top) Left, align top
         w-confirm.ma2(left) Left, align center
         w-confirm.ma2(left align-bottom) Left, align bottom
-      div
+      w-flex.no-grow(column)
         w-confirm.ma2(right align-top) Right, align top
         w-confirm.ma2(right) Right, align center
         w-confirm.ma2(right align-bottom) Right, align bottom
     template(#pug).
-      w-flex.text-center(justify-center)
-        div
+      w-flex(justify-center)
+        w-flex.no-grow(column)
           w-confirm.ma2(left align-top) Left, align top
           w-confirm.ma2(left) Left, align center
           w-confirm.ma2(left align-bottom) Left, align bottom
 
-        div
+        w-flex.no-grow(column)
           w-confirm.ma2(right align-top) Right, align top
           w-confirm.ma2(right) Right, align center
           w-confirm.ma2(right align-bottom) Right, align bottom
     template(#html).
       &lt;w-flex justify-center class="text-center"&gt;
-        &lt;div&gt;
+        &lt;w-flex column class="no-grow"&gt;
           &lt;w-confirm left align-top class="ma2"&gt;
             Left, align top
           &lt;/w-confirm&gt;
@@ -203,9 +203,9 @@ div
           &lt;w-confirm left align-bottom class="ma2"&gt;
             Left, align bottom
           &lt;/w-confirm&gt;
-        &lt;/div&gt;
+        &lt;/w-flex&gt;
 
-        &lt;div&gt;
+        &lt;w-flex column class="no-grow"&gt;
           &lt;w-confirm right align-top class="ma2"&gt;
             Right, align top
           &lt;/w-confirm&gt;
@@ -217,7 +217,7 @@ div
           &lt;w-confirm right align-bottom class="ma2"&gt;
             Right, align bottom
           &lt;/w-confirm&gt;
-        &lt;/div&gt;
+        &lt;/w-flex&gt;
       &lt;/w-flex&gt;
 
   title-link(h2) Persistent
@@ -365,31 +365,35 @@ div
     which action you have clicked requiring a confirmation.#[br]
     You can disable the arrow via the #[code no-arrow] option.
   example.example--no-arrow(content-class="text-center" app-classes-string="align-center")
-    w-confirm.ma2(no-arrow :menu="{ bgColor: 'blue-light5' }") Bottom
-    w-confirm.ma2(no-arrow right) Right
-    w-confirm.ma2.mb12(:menu="{ noPosition: true, appendTo: '.example--no-arrow' }") No position
-
-    template(#pug).
+    w-flex.mb12(column align-center)
       w-confirm.ma2(no-arrow :menu="{ bgColor: 'blue-light5' }") Bottom
       w-confirm.ma2(no-arrow right) Right
-      w-confirm.ma2.mb12(:menu="{ noPosition: true }") No position
+      w-confirm.ma2(:menu="{ noPosition: true, appendTo: '.example--no-arrow' }") No position
+
+    template(#pug).
+      w-flex(column align-center)
+        w-confirm.ma2(no-arrow :menu="{ bgColor: 'blue-light5' }") Bottom
+        w-confirm.ma2(no-arrow right) Right
+        w-confirm.ma2(:menu="{ noPosition: true }") No position
     template(#html).
-      &lt;w-confirm
-        no-arrow
-        :menu="{ bgColor: 'blue-light5' }"
-        class="ma2"&gt;
-        Bottom
-      &lt;/w-confirm&gt;
+      &lt;w-flex column align-center&gt;
+        &lt;w-confirm
+          no-arrow
+          :menu="{ bgColor: 'blue-light5' }"
+          class="ma2"&gt;
+          Bottom
+        &lt;/w-confirm&gt;
 
-      &lt;w-confirm no-arrow right class="ma2"&gt;
-        Right
-      &lt;/w-confirm&gt;
+        &lt;w-confirm no-arrow right class="ma2"&gt;
+          Right
+        &lt;/w-confirm&gt;
 
-      &lt;w-confirm
-        :menu="{ noPosition: true }"
-        class="ma2"&gt;
-        No position
-      &lt;/w-confirm&gt;
+        &lt;w-confirm
+          :menu="{ noPosition: true }"
+          class="ma2"&gt;
+          No position
+        &lt;/w-confirm&gt;
+      &lt;/w-flex&gt;
 
   title-link(h2) Transitions
   example
