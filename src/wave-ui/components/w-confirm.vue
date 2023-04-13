@@ -1,29 +1,28 @@
 <template lang="pug">
-.w-confirm
-  w-menu(v-model="showPopup" v-bind="wMenuProps")
-    template(#activator="{ on }")
-      w-button.w-confirm__button(
-        v-on="{ ...$listeners, ...(disablePrompt ? {} : on) }"
-        v-bind="buttonProps")
-        slot
-    w-flex(:column="!inline" align-center)
-      div
-        slot(name="question") {{ question }}
-      .w-flex.justify-end(:class="inline ? 'ml2' : 'mt2'")
-        w-button.mr2(
-          v-if="cancel !== false"
-          v-bind="cancelButtonProps"
-          :bg-color="(cancelButton || {}).bgColor || 'error'"
-          @keyup.escape="!persistent && onCancel()"
-          @click="onCancel")
-          slot(name="cancel") {{ cancelButton.label }}
-        w-button(
-          v-bind="confirmButtonProps"
-          :bg-color="(confirmButton || {}).bgColor || 'success'"
-          v-focus
-          @keyup.escape="!persistent && onCancel()"
-          @click="onConfirm")
-          slot(name="confirm") {{ confirmButton.label }}
+w-menu(v-model="showPopup" v-bind="wMenuProps")
+  template(#activator="{ on }")
+    w-button.w-confirm(
+      v-on="{ ...$listeners, ...(disablePrompt ? {} : on) }"
+      v-bind="buttonProps")
+      slot
+  w-flex(:column="!inline" align-center)
+    div
+      slot(name="question") {{ question }}
+    .w-flex.justify-end(:class="inline ? 'ml2' : 'mt2'")
+      w-button.mr2(
+        v-if="cancel !== false"
+        v-bind="cancelButtonProps"
+        :bg-color="(cancelButton || {}).bgColor || 'error'"
+        @keyup.escape="!persistent && onCancel()"
+        @click="onCancel")
+        slot(name="cancel") {{ cancelButton.label }}
+      w-button(
+        v-bind="confirmButtonProps"
+        :bg-color="(confirmButton || {}).bgColor || 'success'"
+        v-focus
+        @keyup.escape="!persistent && onCancel()"
+        @click="onConfirm")
+        slot(name="confirm") {{ confirmButton.label }}
 </template>
 
 <script>
