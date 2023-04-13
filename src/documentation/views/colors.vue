@@ -273,7 +273,8 @@ export default {
 
   .color--top {
     font-size: 2.4em;
-    color: #fff;
+
+    &:not(.white--bg):not(.transparent--bg):not(.inherit--bg) {color: #fff;}
 
     .vertical & {
       height: 90px;
