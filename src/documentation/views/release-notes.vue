@@ -23,6 +23,16 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v3.1.3
+      ul
+        li
+          strong.code w-confirm
+          ul
+            li The component is unwrapped from its div and is now behaving like an inline tag. #[issue-link 106]
+            li The final button mounted in the DOM will have the class #[code w-confirm].
+            li Any CSS class added on the #[code w-confirm] component will act only on the activator button (and not the w-menu as well like it did before this patch).
+
+    li.minor
       strong.version v3.1.0
       ul
         li
