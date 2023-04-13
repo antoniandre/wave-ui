@@ -135,13 +135,13 @@
           slot(name="footer")
       tr.w-table__row.w-table__pagination-wrap(v-if="pagination && paginationConfig")
         td.w-table__cell(:colspan="headers.length")
-          .w-table__pagination
-            | {{ paginationConfig }}
+          | {{ paginationConfig }}
+          .w-table__pagination.w-pagination
             slot(
               name="pagination"
-              :range="`${paginationConfig.start}-${paginationConfig.end} of ${paginationConfig.total}`"
+              :range="`${paginationConfig.start}-${paginationConfig.end}`"
               :total="paginationConfig.total")
-              w-select.pagination-number.pagination-number--items-per-page(
+              w-select.w-pagination__items-per-page(
                 v-if="paginationConfig.itemsPerPageOptions"
                 v-model="paginationConfig.itemsPerPage"
                 @input="updatePaginationConfig"
@@ -149,27 +149,27 @@
                 label-position="left"
                 label="Items per page"
                 label-color="inherit")
-              .pagination-arrows
-                w-button.pagination-arrow.pagination-arrow--prev(
+              .pages-wrap
+                w-button.w-pagination__arrow.w-pagination__arrow--prev(
                   @click="goToPage('-1')"
                   :disabled="paginationConfig.page <= 1"
                   icon="wi-chevron-left"
                   text
                   lg)
-                w-button.pagination-arrow.pagination-arrow--prev(
+                w-button.w-pagination__page(
                   v-for="i in paginationConfig.pagesCount"
                   :key="i"
                   @click="goToPage(i)"
+                  :class="{ 'w-pagination__page--active': i === paginationConfig.page }"
                   round
-                  text
                   lg) {{ i }}
-                w-button.pagination-arrow.pagination-arrow--next(
+                w-button.w-pagination__arrow.w-pagination__arrow--next(
                   @click="goToPage('+1')"
                   :disabled="paginationConfig.page >= paginationConfig.pagesCount"
                   icon="wi-chevron-right"
                   text
                   lg)
-              span.pagination-number.pagination-number--results.
+              span.w-pagination__results.
                 {{ paginationConfig.start }}-{{ paginationConfig.end }} of {{ paginationConfig.total }}
 </template>
 
@@ -849,21 +849,48 @@ $tr-border-top: 1px;
     align-items: center;
     justify-content: flex-end;
 
-    .pagination-number--items-per-page {
+    .w-pagination__items-per-page {
       flex-grow: 0;
       text-align: right;
     }
+    // .w-select__selection {max-width: 60px;}
 
-    .pagination-arrows {
+    .pages-wrap {
       margin-left: 3 * $base-increment;
       margin-right: 3 * $base-increment;
     }
 
-    .pagination-number--of {
+    .w-pagination__page {
+      margin: 0.5 * $base-increment;
+      font-size: 0.9em;
+      aspect-ratio: 1;
+      overflow: hidden;
+      color: rgba(var(--w-base-color-rgb), 0.65);
+      background-color: rgba(var(--w-base-bg-color-rgb), 0.4);
+
+      &:hover:before {
+        background-color: $primary;
+        opacity: 0.1;
+      }
+      &:active:before {
+        background-color: $primary;
+        opacity: 0.2;
+      }
+
+      &--active {
+        font-weight: bold;
+        color: $primary;
+        &:before {
+          background-color: $primary;
+          opacity: 0.1;
+        }
+      }
+    }
+
+    .w-pagination__results {
       margin-left: $base-increment;
       margin-right: $base-increment;
     }
-    .w-select__selection {max-width: 60px;}
   }
 }
 
