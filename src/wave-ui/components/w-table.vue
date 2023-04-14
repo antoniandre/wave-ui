@@ -632,9 +632,14 @@ export default {
       this.selectedRowsInternal = Array.isArray(array) && array.length ? this.selectedRows : []
     },
 
-    pagination: {
-      handler () { this.updatePaginationConfig() },
-      deep: true
+    'pagination.page' (page) {
+      this.updatePaginationConfig({ page })
+    },
+    'pagination.itemsPerPage' (itemsPerPage) {
+      this.updatePaginationConfig({ itemsPerPage })
+    },
+    'pagination.total' (total) {
+      this.updatePaginationConfig({ total })
     }
   }
 }
