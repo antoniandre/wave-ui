@@ -190,7 +190,7 @@ export default {
     },
     selectionString () {
       return this.inputValue && this.inputValue.map(
-        item => item[this.itemValueKey] !== undefined ? item[this.itemLabelKey] : (item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item)
+        item => item[this.itemValueKey] !== undefined ? item[this.itemLabelKey] : (item[this.itemLabelKey] ?? item)
       ).join(', ')
     },
     classes () {
