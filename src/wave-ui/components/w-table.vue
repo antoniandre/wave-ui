@@ -158,7 +158,7 @@
                 w-button.w-pagination__page(
                   v-for="i in paginationConfig.pagesCount"
                   :key="i"
-                  @click="goToPage(i)"
+                  @click="i !== paginationConfig.page && goToPage(i)"
                   :class="{ 'w-pagination__page--active': i === paginationConfig.page }"
                   round
                   lg) {{ i }}
