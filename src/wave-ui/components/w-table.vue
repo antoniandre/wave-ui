@@ -135,7 +135,6 @@
           slot(name="footer")
       tr.w-table__row.w-table__pagination-wrap(v-if="pagination && paginationConfig")
         td.w-table__cell(:colspan="headers.length")
-          | {{ paginationConfig }}
           .w-table__pagination.w-pagination
             slot(
               name="pagination"
@@ -144,7 +143,7 @@
               w-select.w-pagination__items-per-page(
                 v-if="paginationConfig.itemsPerPageOptions"
                 v-model="paginationConfig.itemsPerPage"
-                @input="updatePaginationConfig"
+                @input="updatePaginationConfig({ itemsPerPage: paginationConfig.itemsPerPage })"
                 :items="paginationConfig.itemsPerPageOptions"
                 label-position="left"
                 label="Items per page"
@@ -357,7 +356,7 @@ export default {
     },
 
     paginatedItems () {
-      return this.sortedItems.slice(this.paginationConfig.start, this.paginationConfig.end)
+      return this.sortedItems.slice(this.paginationConfig.start - 1, this.paginationConfig.end)
     }
   },
 
@@ -553,12 +552,13 @@ export default {
       }, 0)
     },
 
-    updatePaginationConfig () {
+    initPaginationConfig () {
       const itemsPerPage = this.pagination?.itemsPerPage || 20
       const itemsPerPageOptions = this.pagination?.itemsPerPageOptions || [20, 100, { label: 'All', value: 0 }]
       const total = this.pagination?.total || this.items.length
-      const itemsPerPageOrTotal = itemsPerPage || total
+      const itemsPerPageOrTotal = itemsPerPage || total // If `0`, take all the results.
       const page = this.pagination?.page || 1
+
       this.paginationConfig = {
         itemsPerPage,
         itemsPerPageOptions: itemsPerPageOptions.map(item => ({
@@ -571,6 +571,21 @@ export default {
         total,
         pagesCount: Math.ceil(total / itemsPerPageOrTotal)
       }
+    },
+
+    updatePaginationConfig ({ itemsPerPage, page, total }) {
+      if (total) this.paginationConfig.total = total
+      if (itemsPerPage !== undefined) {
+        this.paginationConfig.itemsPerPage = itemsPerPage
+        itemsPerPage = itemsPerPage || this.paginationConfig.total // If `0`, take all the results.
+        this.paginationConfig.page = 1
+        const { page } = this.paginationConfig // Shorthand var for next lines.
+        total = this.paginationConfig.total // Shorthand var for next lines.
+        this.paginationConfig.start = 1
+        this.paginationConfig.end = total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page)),
+        this.paginationConfig.pagesCount = Math.ceil(total / itemsPerPage)
+      }
+      if (page) this.goToPage(page)
     },
 
     goToPage (page) {
@@ -590,7 +605,7 @@ export default {
     if ((this.expandedRows || []).length) this.expandedRowsInternal = this.expandedRows
     if ((this.selectedRows || []).length) this.selectedRowsInternal = this.selectedRows
 
-    if (this.pagination) this.updatePaginationConfig()
+    if (this.pagination) this.initPaginationConfig()
   },
 
   watch: {
@@ -890,6 +905,7 @@ $tr-border-top: 1px;
     .w-pagination__results {
       margin-left: $base-increment;
       margin-right: $base-increment;
+      white-space: nowrap;
     }
   }
 }
