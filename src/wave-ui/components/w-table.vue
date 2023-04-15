@@ -552,25 +552,28 @@ export default {
       }, 0)
     },
 
-    initPaginationConfig () {
+    initPagination () {
       const itemsPerPage = this.pagination?.itemsPerPage || 20
-      const itemsPerPageOptions = this.pagination?.itemsPerPageOptions || [20, 100, { label: 'All', value: 0 }]
-      const total = this.pagination?.total || this.items.length
-      const itemsPerPageOrTotal = itemsPerPage || total // If `0`, take all the results.
-      const page = this.pagination?.page || 1
 
-      this.paginationConfig = {
-        itemsPerPage,
-        itemsPerPageOptions: itemsPerPageOptions.map(item => ({
-          label: ['string', 'number'].includes(typeof item) ? item.toString() : (item.label || item.value),
-          value: ['string', 'number'].includes(typeof item) ? ~~item : (item.value ?? item.label)
-        })),
-        page,
-        start: this.pagination?.start || 1,
-        end: total >= (itemsPerPageOrTotal * page) ? (itemsPerPageOrTotal * page) : (total % (itemsPerPageOrTotal * page)),
-        total,
-        pagesCount: Math.ceil(total / itemsPerPageOrTotal)
+      const itemsPerPageOptions = this.pagination?.itemsPerPageOptions || [20, 100, { label: 'All', value: 0 }]
+      // If the given itemsPerPage is not in the itemsPerPageOptions, add it.
+      if (!itemsPerPageOptions.find(item => (item?.value ?? item) === +itemsPerPage)) {
+        itemsPerPageOptions.push(itemsPerPage)
       }
+      this.paginationConfig.itemsPerPageOptions = itemsPerPageOptions.map(item => ({
+        label: ['string', 'number'].includes(typeof item) ? item.toString() : (item.label || item.value),
+        value: ['string', 'number'].includes(typeof item) ? ~~item : (item.value ?? item.label)
+      }))
+      // Sort the options in an ascending order.
+      this.paginationConfig.itemsPerPageOptions.sort((a, b) => a.value < b.value ? -1 : 1)
+      const optionAll = this.paginationConfig.itemsPerPageOptions.shift()
+      this.paginationConfig.itemsPerPageOptions.push(optionAll)
+
+      this.updatePaginationConfig({
+        itemsPerPage,
+        page: this.pagination?.page || 1,
+        total: this.pagination?.total || this.items.length
+      })
     },
 
     updatePaginationConfig ({ itemsPerPage, page, total }) {
@@ -605,7 +608,7 @@ export default {
     if ((this.expandedRows || []).length) this.expandedRowsInternal = this.expandedRows
     if ((this.selectedRows || []).length) this.selectedRowsInternal = this.selectedRows
 
-    if (this.pagination) this.initPaginationConfig()
+    if (this.pagination) this.initPagination()
   },
 
   watch: {
