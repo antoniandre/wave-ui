@@ -23,6 +23,15 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v3.2.0
+      ul
+        li
+          strong.code w-table
+          ul
+            li Added the pagination feature. #[span.tag.new]
+            li Highlight a table column when it is being sorted.
+
+    li.patch
       strong.version v3.1.3
       ul
         li
