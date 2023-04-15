@@ -9,7 +9,8 @@
       col.w-table__col(
         v-for="(header, i) in headers"
         :key="i"
-        :width="header.width || null")
+        :width="header.width || null"
+        :class="colClasses[i]")
 
     //- Table header.
     thead(v-if="!noHeaders")
@@ -233,6 +234,13 @@ export default {
     mobileBreakpoint: { type: Number, default: 0 },
     resizableColumns: { type: Boolean },
 
+    // An object containing:
+    // - itemsPerPage
+    // - itemsPerPageOptions
+    // - start
+    // - end
+    // - page
+    // - total
     pagination: {
       type: [Boolean, Object, String],
       validator: object => {
@@ -321,6 +329,12 @@ export default {
       return {
         'w-table-wrap--loading': this.loading
       }
+    },
+
+    colClasses () {
+      return this.headers.map(header => {
+        return { 'w-table__col--highlight': this.activeSortingKeys[header.key] }
+      })
     },
 
     classes () {
@@ -676,6 +690,12 @@ $tr-border-top: 1px;
     &, * {cursor: col-resize;}
 
     user-select: none;
+  }
+
+  // Table columns.
+  // ------------------------------------------------------
+  &__col--highlight {
+    background-color: rgba(var(--w-contrast-bg-color-rgb), 0.04);
   }
 
   // Table headers.
