@@ -622,6 +622,10 @@ div
           sort: '+firstName'
         }
       })
+  alert(tip).
+    By default any column being sorted is highlighted. You can modify the style of the whole column
+    with the class #[code .w-table__col--highlighted].#[br]
+    Also, if you try to target it in the devtools and can't find it, it's in #[code table &gt; colgroup].
 
   title-link(h3) Asynchronous Sorting
   p.
@@ -1050,11 +1054,14 @@ div
   title-link(h2 slug="pagination")
     | Pagination
     w-tag.ml2.text-bold(round color="warning" outline sm) COMING SOON
-  //- example
+  example
     w-table(
       :headers="table11.headers"
       :items="table11.items"
-      :pagination="table11.pagination")
+      fixed-headers
+      fixed-footer
+      :pagination="table11.pagination"
+      style="max-height: 500px")
     template(#pug).
     template(#js).
       data: () => ({
