@@ -333,8 +333,8 @@ export default {
 
     colClasses () {
       return this.headers.map(header => {
-        return { 'w-table__col--highlight': this.activeSortingKeys[header.key] }
-      })
+        return { 'w-table__col--highlighted': this.activeSortingKeys[header.key] }
+      }) || []
     },
 
     classes () {
@@ -694,7 +694,7 @@ $tr-border-top: 1px;
 
   // Table columns.
   // ------------------------------------------------------
-  &__col--highlight {
+  &__col--highlighted {
     background-color: rgba(var(--w-contrast-bg-color-rgb), 0.04);
   }
 
