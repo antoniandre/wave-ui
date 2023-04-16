@@ -605,6 +605,11 @@ export default {
       if (page) this.goToPage(page)
     },
 
+    /**
+     * Goes to a given page or to the next or previous page.
+     *
+     * @param {Number|String} page a number to go to a specific page or `-1`, `+1` for prev & next page.
+     */
     goToPage (page) {
       if (['-1', '+1'].includes(page)) this.paginationConfig.page += +page
       else this.paginationConfig.page = page
