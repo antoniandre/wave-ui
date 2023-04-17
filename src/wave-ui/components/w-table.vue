@@ -290,7 +290,7 @@ export default {
   computed: {
     tableItems () {
       return this.items.map((item, i) => {
-        item._uid = item[this.uidKey] !== undefined ? item[this.uidKey] : i
+        item._uid = item[this.uidKey] ?? i
         return item
       })
     },
@@ -585,8 +585,8 @@ export default {
 
       this.updatePaginationConfig({
         itemsPerPage,
-        page: this.pagination?.page || 1,
-        total: this.pagination?.total || this.items.length
+        page: this.pagination.page || 1,
+        total: this.pagination.total || this.items.length,
       })
     },
 
@@ -595,8 +595,8 @@ export default {
       if (itemsPerPage !== undefined) {
         this.paginationConfig.itemsPerPage = itemsPerPage
         itemsPerPage = itemsPerPage || this.paginationConfig.total // If `0`, take all the results.
-        this.paginationConfig.page = 1
-        const { page } = this.paginationConfig // Shorthand var for next lines.
+        this.paginationConfig.page = 1;
+        ({ page } = this.paginationConfig) // Shorthand var for next lines.
         total = this.paginationConfig.total // Shorthand var for next lines.
         this.paginationConfig.start = 1
         this.paginationConfig.end = total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page)),
@@ -792,7 +792,7 @@ $tr-border-top: 1px;
     left: 0;
     right: 0;
   }
-  &__progress-bar td {padding: 0;height: 1px;}
+  &__progress-bar td {padding: 0;height: 0;}
   @-moz-document url-prefix() {
     &__progress-bar td {height: 100%;}
   }
@@ -801,7 +801,7 @@ $tr-border-top: 1px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height:100%;
+    height: 100%;
     width: 100%;
     padding-top: 2 * $base-increment;
     padding-bottom: 2 * $base-increment;
@@ -928,6 +928,7 @@ $tr-border-top: 1px;
       &--active {
         font-weight: bold;
         color: $primary;
+
         &:before {
           background-color: $primary;
           opacity: 0.1;
