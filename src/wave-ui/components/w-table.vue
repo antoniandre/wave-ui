@@ -903,7 +903,7 @@ $tr-border-top: 1px;
     justify-content: flex-end;
 
     .w-pagination__items-per-page {
-      flex-grow: 0;
+      flex: 0 0 auto;
       text-align: right;
     }
     // .w-select__selection {max-width: 60px;}
