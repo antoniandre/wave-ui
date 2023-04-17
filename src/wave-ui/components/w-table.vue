@@ -339,6 +339,8 @@ export default {
 
     classes () {
       return {
+        'w-table--loading': this.loading,
+        'w-table--loading-in-header': this.loading === 'header',
         'w-table--fixed-layout': this.fixedLayout || this.resizableColumns || this.hasStickyColumn,
         'w-table--mobile': this.isMobile || null,
         'w-table--resizable-cols': this.resizableColumns || null,
@@ -809,6 +811,9 @@ $tr-border-top: 1px;
 
   // Table body.
   // ------------------------------------------------------
+  tbody {transition: opacity $transition-duration;}
+  &--loading-in-header tbody {opacity: 0.6;}
+
   tbody tr {border-top: $tr-border-top solid rgba(var(--w-base-color-rgb), 0.06);}
   // Don't apply built-in bg color if a bg color is already found on a tr.
   tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: $table-tr-odd-color;}
