@@ -195,6 +195,8 @@ export default {
     loading: { type: [Boolean, String] }, // Bool or 'header' to only display the bar in the header.
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
+    sortFunction: { type: Function },
+    filter: { type: Function },
 
     expandableRows: {
       validator: value => {
@@ -229,8 +231,6 @@ export default {
     // Useful to select or expand a row, and even after a filter, the same row will stay selected or expanded.
     uidKey: { type: String, default: 'id' },
 
-    filter: { type: Function },
-    sortFunction: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 },
     resizableColumns: { type: Boolean },
 
@@ -569,7 +569,7 @@ export default {
     },
 
     initPagination () {
-      const itemsPerPage = this.pagination?.itemsPerPage || 20
+      const itemsPerPage = this.pagination?.itemsPerPage ?? 20 // Can also be `0` for all.
 
       const itemsPerPageOptions = this.pagination?.itemsPerPageOptions || [20, 100, { label: 'All', value: 0 }]
       // If the given itemsPerPage is not in the itemsPerPageOptions, add it.
@@ -906,7 +906,6 @@ $tr-border-top: 1px;
       flex: 0 0 auto;
       text-align: right;
     }
-    // .w-select__selection {max-width: 60px;}
 
     .pages-wrap {
       margin-left: 3 * $base-increment;
