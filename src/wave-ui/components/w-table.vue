@@ -170,7 +170,7 @@
                   text
                   lg)
               span.w-pagination__results.
-                {{ paginationConfig.start }}-{{ paginationConfig.end }} of {{ paginationConfig.total }}
+                {{ paginationConfig.start }}-{{ paginationConfig.end || paginationConfig.total }} of {{ paginationConfig.total }}
 </template>
 
 <script>
@@ -197,6 +197,7 @@ export default {
     sort: { type: [String, Array] },
     sortFunction: { type: Function },
     filter: { type: Function },
+    fetch: { type: Function },
 
     expandableRows: {
       validator: value => {
@@ -300,7 +301,7 @@ export default {
     },
 
     sortedItems () {
-      if (!this.activeSorting.length || this.sortFunction) return this.filteredItems
+      if (!this.activeSorting.length || this.sortFunction || this.fetch) return this.filteredItems
 
       // Only sort with 1 key for now, may handle more later.
       const sortKey1 = this.activeSorting[0].replace(/^[+-]/, '')
@@ -372,7 +373,7 @@ export default {
     },
 
     paginatedItems () {
-      return this.sortedItems.slice(this.paginationConfig.start - 1, this.paginationConfig.end)
+      return typeof this.fetch === 'function' ? this.sortedItems : this.sortedItems.slice(this.paginationConfig.start - 1, this.paginationConfig.end)
     }
   },
 
@@ -404,9 +405,8 @@ export default {
 
       this.$emit('update:sort', this.activeSorting)
 
-      if (typeof this.sortFunction === 'function') {
-        await this.sortFunction(this.activeSorting)
-      }
+      if (typeof this.sortFunction === 'function') await this.sortFunction(this.activeSorting)
+      else if (typeof this.fetch === 'function') await this.callApiFetch()
     },
 
     doSelectRow (item, index) {
@@ -612,13 +612,31 @@ export default {
      *
      * @param {Number|String} page a number to go to a specific page or `-1`, `+1` for prev & next page.
      */
-    goToPage (page) {
+    async goToPage (page) {
       if (['-1', '+1'].includes(page)) this.paginationConfig.page += +page
       else this.paginationConfig.page = page
       const { itemsPerPage } = this.paginationConfig
       this.paginationConfig.page = Math.max(1, this.paginationConfig.page)
       this.paginationConfig.start = (itemsPerPage * (this.paginationConfig.page - 1)) + 1
       this.paginationConfig.end = (this.paginationConfig.start - 1) + itemsPerPage
+
+      if (typeof this.fetch === 'function') await this.callApiFetch()
+    },
+
+    /**
+     * Call a user provided fetch function in order to fetch table items from an API.
+     * While waiting for the call to resolve, nothing in the table will change.
+     */
+    async callApiFetch () {
+      const { page, start, end, total, itemsPerPage } = this.paginationConfig
+      return await this.fetch({
+        page,
+        start,
+        end: end || total,
+        total,
+        itemsPerPage: itemsPerPage || total,
+        activeSorting: this.activeSorting
+      })
     }
   },
 
