@@ -928,6 +928,8 @@ $tr-border-top: 1px;
     .pages-wrap {
       margin-left: 3 * $base-increment;
       margin-right: 3 * $base-increment;
+      overflow: auto;
+      max-height: 4.5em;
     }
 
     .w-pagination__page {
