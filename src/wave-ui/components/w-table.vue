@@ -889,32 +889,29 @@ $tr-border-top: 1px;
 
   // Table footer.
   // ------------------------------------------------------
-  &__footer &__cell {
-    padding-top: $base-increment;
-    padding-bottom: $base-increment;
-  }
-
   &--fixed-footer tfoot {
     position: sticky;
-    bottom: 0;
+    bottom: -1px;
     background-color: $base-bg-color;
     z-index: 1; // For sticky columns to go under.
 
     &:after {
       content: '';
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
       right: 0;
-      border-bottom: $border;
+      border-top: $border;
     }
+  }
+
+  &__footer &__cell {
+    padding-top: $base-increment;
+    padding-bottom: $base-increment;
   }
 
   // Pagination.
   // ------------------------------------------------------
-  &__pagination-wrap {
-    border-top: $border;
-  }
   &__pagination {
     display: flex;
     align-items: center;
