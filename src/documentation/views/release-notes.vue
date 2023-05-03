@@ -30,6 +30,10 @@ main
           ul
             li Added the pagination feature. #[span.tag.new]
             li Highlight a table column when it is being sorted.
+        li
+          strong.code w-button
+          ul
+            li Inherit the border-radius on the loader if any.
 
     li.patch
       strong.version v3.1.3
@@ -496,6 +500,9 @@ main
     //-----------------------------------------------------
     //- Vue 2.
     //-----------------------------------------------------
+
+    //- li.minor
+      strong.version v1.66.0
 
     li.patch
       strong.version v1.65.1
