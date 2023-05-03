@@ -304,6 +304,7 @@ $spinner-size: 40;
     align-items: center;
     justify-content: center;
     background: inherit;
+    border-radius: inherit;
 
     svg {height: 75%;}
     circle {
