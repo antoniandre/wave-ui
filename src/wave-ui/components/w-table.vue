@@ -318,6 +318,10 @@ export default {
       })
     },
 
+    paginatedItems () {
+      return typeof this.fetch === 'function' ? this.sortedItems : this.sortedItems.slice(this.paginationConfig.start - 1, this.paginationConfig.end)
+    },
+
     // Returns an object containing { key1: '+', key2: '-' }. With + or - for ASC/DESC.
     activeSortingKeys () {
       return this.activeSorting.reduce((obj, item) => {
@@ -370,10 +374,6 @@ export default {
     // Faster lookup than array.includes(uid) and also cached.
     expandedRowsByUid () {
       return this.expandedRowsInternal.reduce((obj, uid) => (obj[uid] = true) && obj, {})
-    },
-
-    paginatedItems () {
-      return typeof this.fetch === 'function' ? this.sortedItems : this.sortedItems.slice(this.paginationConfig.start - 1, this.paginationConfig.end)
     }
   },
 
@@ -588,7 +588,7 @@ export default {
       this.updatePaginationConfig({
         itemsPerPage,
         page: this.pagination.page || 1,
-        total: this.pagination.total || this.items.length,
+        total: this.pagination.total || this.items.length
       })
     },
 
@@ -601,7 +601,7 @@ export default {
         ({ page } = this.paginationConfig) // Shorthand var for next lines.
         total = this.paginationConfig.total // Shorthand var for next lines.
         this.paginationConfig.start = 1
-        this.paginationConfig.end = total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page)),
+        this.paginationConfig.end = total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page))
         this.paginationConfig.pagesCount = Math.ceil(total / itemsPerPage)
       }
       if (page) this.goToPage(page)
@@ -615,10 +615,10 @@ export default {
     async goToPage (page) {
       if (['-1', '+1'].includes(page)) this.paginationConfig.page += +page
       else this.paginationConfig.page = page
-      const { itemsPerPage } = this.paginationConfig
+      const { itemsPerPage, total } = this.paginationConfig
       this.paginationConfig.page = Math.max(1, this.paginationConfig.page)
       this.paginationConfig.start = (itemsPerPage * (this.paginationConfig.page - 1)) + 1
-      this.paginationConfig.end = (this.paginationConfig.start - 1) + itemsPerPage
+      this.paginationConfig.end = (this.paginationConfig.start - 1) + (itemsPerPage || total)
 
       if (typeof this.fetch === 'function') await this.callApiFetch()
     },
