@@ -635,7 +635,7 @@ export default {
         end: end || total,
         total,
         itemsPerPage: itemsPerPage || total,
-        activeSorting: this.activeSorting
+        sorting: this.activeSorting
       })
     }
   },
