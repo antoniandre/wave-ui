@@ -34,6 +34,9 @@ main
           strong.code w-button
           ul
             li Inherit the border-radius on the loader if any.
+            li.
+              Updated the look and feel of the button in the #[code :active] state,
+              and use #[code :focus-visible] state instead of #[code :focus].
 
     li.patch
       strong.version v3.1.3
