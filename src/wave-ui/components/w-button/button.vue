@@ -165,7 +165,7 @@ $spinner-size: 40;
   z-index: 1;
   // Background-color must not transition to not affect the hover & focus states
   // in :before & :after.
-  transition: $transition-duration, background-color 0s, padding 0s;
+  transition: all $transition-duration, background-color 0s, padding 0s;
   -webkit-tap-highlight-color: transparent;
 
   @include themeable;
@@ -253,10 +253,10 @@ $spinner-size: 40;
   // Button states.
   // ------------------------------------------------------
   // Hover & focus states - inside button.
-  &:hover:before, &:focus:before {opacity: 0.08;}
-  &--dark:hover:before, &--dark:focus:before {opacity: 0.2;}
-  &--outline:hover:before, &--outline:focus:before,
-  &--text:hover:before, &--text:focus:before {opacity: 0.12;}
+  &:hover:before, &:focus-visible:before {opacity: 0.2;}
+  &--dark:hover:before, &--dark:focus-visible:before {opacity: 0.4;}
+  &--outline:hover:before, &--outline:focus-visible:before,
+  &--text:hover:before, &--text:focus-visible:before {opacity: 0.12;}
 
   // Focus state - outside button.
   &:after {
@@ -273,20 +273,21 @@ $spinner-size: 40;
     transition: opacity 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-in;
     transform: scale(0.85, 0.7);
   }
-  &:focus:after {
+  &:focus-visible:after {
     opacity: 0.4;
     transform: scale(1);
     transition: opacity 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-out;
   }
-  &--dark:focus:after {opacity: 0.2;}
+  &--dark:focus-visible:after {opacity: 0.2;}
 
   // Active state.
-  &:active:before {opacity: 0.2;}
-  &--dark:active:before, &.primary--bg:active:before {opacity: 0.25;}
+  &:active {transform: scale(1.02);}
+  &:active:before {opacity: 0.3;}
+  &--dark:active:before, &.primary--bg:active:before {opacity: 0.35;}
 
   // Disable visual feedback on loading and disabled buttons.
   &--loading:hover:before,
-  &--loading:focus:before,
+  &--loading:focus-visible:before,
   &--loading:active:before,
   &[disabled]:before {opacity: 0;}
   // ------------------------------------------------------
