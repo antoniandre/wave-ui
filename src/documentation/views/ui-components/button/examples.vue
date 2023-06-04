@@ -161,16 +161,25 @@ div
       &lt;w-button class="ma1" bg-color="primary" disabled&gt;disabled&lt;/w-button&gt;
 
   h3 Stretch to the available space
+  ul
+    li In a flex content, you can add the #[code grow] class.
+    li In a block context, you can add the #[code fill-width] class.
   example
     w-flex
-      w-button.ma1.grow(bg-color="primary") primary
+      w-button.grow Block Button
+    br
+    w-button.fill-width Block Button
     template(#pug).
       w-flex
-        w-button.ma1.grow(bg-color="primary") primary
+        w-button.grow Block Button
+      br
+      w-button.fill-width Block Button
     template(#html).
       &lt;w-flex&gt;
-        &lt;w-button class="ma1 grow" bg-color="primary"&gt;primary&lt;/w-button&gt;
+        &lt;w-button class="grow"&gt;primary&lt;/w-button&gt;
       &lt;/w-flex&gt;
+      &lt;br/&gt;
+      &lt;w-button class="fill-width"&gt;primary&lt;/w-button&gt;
 
   h3 Custom width and height
   p.
