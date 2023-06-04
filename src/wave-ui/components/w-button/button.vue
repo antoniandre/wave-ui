@@ -290,6 +290,8 @@ $spinner-size: 40;
   &--loading:focus-visible:before,
   &--loading:active:before,
   &[disabled]:before {opacity: 0;}
+  &--loading:active,
+  &[disabled] {transform: none;}
   // ------------------------------------------------------
 
   // Disable events binding on nested content.
