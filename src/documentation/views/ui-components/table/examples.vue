@@ -1111,6 +1111,7 @@ div
     You are free to use #[code start] &amp; #[code end] or #[code page] and #[code itemsPerPage]
     options at your convenience when triggering a pagination.
 
+  title-link(h3) Client-side pagination
   example(:blank-codepen="['js']")
     w-table(
       :headers="table11.headers"
@@ -1162,7 +1163,8 @@ div
         })
       }
 
-  title-link(h3) Async pagination with backend fetching
+  title-link(h3) Server-side pagination
+  p This iexample showcases an asynchronous pagination with backend fetching of the table items.
   example
     w-table(
       :headers="table12.headers"
