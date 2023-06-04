@@ -1164,7 +1164,7 @@ div
       }
 
   title-link(h3) Server-side pagination
-  p This iexample showcases an asynchronous pagination with backend fetching of the table items.
+  p This example showcases an asynchronous pagination with backend fetching of the table items.
   example
     w-table(
       :headers="table12.headers"
