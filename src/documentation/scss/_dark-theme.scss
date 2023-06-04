@@ -108,7 +108,7 @@
     background-color: rgba(130, 130, 130, 0.2);
     color: #ff6363;
   }
-  .code:not(.inherit):not(.primary):not(.contrast-color):not(.amber-dark3) {color: rgb(var(--w-base-color-rgb));}
+  .code:not(.inherit):not(.primary):not(.teal):not(.contrast-color):not(.amber-dark3) {color: rgb(var(--w-base-color-rgb));}
   .ssh-pre {
     border-color: rgba(var(--w-base-color-rgb), 0.06);
     background-color: rgba(#000, 0.3);

@@ -1054,6 +1054,63 @@ div
   title-link(h2 slug="pagination")
     | Pagination
     w-tag.ml2.text-bold(round color="warning" outline sm) IN PROGRESS
+  p The pagination can be provided as an object:
+  ul
+    li
+      span.teal.code {Integer}
+      code.title4.mx1.mt3.mb1 itemsPerPage:
+      p the number of rows to display in one page. #[code 0] for "all" results in 1 page.
+    li
+      span.teal.code {Array}
+      code.title4.mx1.mt3.mb1 itemsPerPageOptions:
+      p.
+        The #[code itemsPerPage] options to offer to the user. Each object of the array should have
+        at least a #[code value] property, and a #[code label] property if different of the #[code value].
+    li
+      span.teal.code {Number}
+      code.title4.mx1.mt3.mb1 start:
+      p.
+        #[code start] &amp; #[code end] are integers defining the range of results to load.
+        E.g. #[code 51 - 100].#[br]#[code start] is the first result number to load [itemsPerPage]
+        results from.#[br]
+        #[code start] &amp; #[code end] can be used instead of #[code page] if you find it more convenient.
+      p.bold-text.
+        Warning: when the pagination is done server-side, you should subtract #[code 1]
+        to the start and end in order to query the database. E.g: start = 51, end = 100,
+        you should query the database rows 50 to 99 (in order to display ranges starting
+        from 1 and not zero to the end user).
+    li
+      span.teal.code {Number}
+      code.title4.mx1.mt3.mb1 end:
+      p.
+        #[code start] &amp; #[code end] are integers defining the range of results to load.
+        E.g. #[code 51 - 100].#[br]#[code end] is the last result number to load.#[br]
+        #[code start] &amp; #[code end] can be used instead of #[code page] if you find it more convenient.
+      p.bold-text.
+        Warning: when the pagination is done server-side, you should subtract #[code 1]
+        to the start and end in order to query the database. E.g: start = 51, end = 100,
+        you should query the database rows 50 to 99 (in order to display ranges starting
+        from 1 and not zero to the end user).
+    li
+      span.teal.code {Number}
+      code.title4.mx1.mt3.mb1 page:
+      p.
+        An integer - to be used in conjunction with the #[code itemsPerPage] option - to
+        define the range of results to load. E.g. page = 2 and itemsPerPage = 50, will load
+        the results range [51-100].#[br]
+        This can be used instead of #[code start] and #[code end] if you find it more convenient.
+    li
+      span.teal.code {Number}
+      code.title4.mx1.mt3.mb1 total:
+      p An integer defining the total number of items available in this match.
+
+  p.
+    The pagination is a two-way binding object: if you modify any property inside it, the table
+    will re-paginate and update.
+  p.
+    You are free to use #[code start] &amp; #[code end] or #[code page] and #[code itemsPerPage]
+    options at your convenience when triggering a pagination.
+
   example(:blank-codepen="['js']")
     w-table(
       :headers="table11.headers"
