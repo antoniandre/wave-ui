@@ -358,8 +358,8 @@ $expand-icon-size: 20px;
       right: - $base-increment - 2px;
       border-radius: $border-radius;
     }
-    &:hover:before {background-color: rgba($primary, 0.05);}
-    &:focus:before {background-color: rgba($primary, 0.1);}
+    &:hover:before {background-color: $primary;opacity: 0.1;}
+    &:focus:before {background-color: $primary;opacity: 0.2;}
   }
   &__item--leaf &__item-label:before {
     left: - $base-increment;
