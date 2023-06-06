@@ -35,8 +35,8 @@ ul.w-tree(:class="classes")
     component(
       :is="noTransition ? 'div' : 'w-transition-expand'"
       :y="!noTransition || null"
-      @after-enter="$emit('open', { item: item.originalItem, open: item.open, depth, path: getTreeItemPath(item) })"
-      @after-leave="$emit('close', { item: item.originalItem, open: item.open, depth, path: getTreeItemPath(item) })")
+      @after-enter="$emit('open', { item: item.originalItem, open: item.open, depth, path: getTreeItemPathForOutput(item) })"
+      @after-leave="$emit('close', { item: item.originalItem, open: item.open, depth, path: getTreeItemPathForOutput(item) })")
       w-tree(
         v-if="item.children && item.open"
         v-bind="$props"
@@ -122,7 +122,7 @@ export default {
       if (!Array.isArray(items)) items = [items]
 
       items.forEach((item, i) => {
-        this.currentDepthItems.push({
+        const itemWrapper = {
           originalItem: item, // Store the original item to return it on event emits.
           _uid: this.depth.toString() + (i + 1),
           label: item[this.itemLabelKey],
@@ -133,8 +133,10 @@ export default {
           depth: this.depth,
           open: !!(oldItems[i]?.open || this.expandAll || item[this.itemOpenKey]),
           parent: this.parent || null,
-          path: this.getTreeItemPath(item)
-        })
+          path: [] // Ancestors path from root to leaf including self.
+        }
+        itemWrapper.path = this.getTreeItemPath(itemWrapper)
+        this.currentDepthItems.push(itemWrapper)
       })
     },
 
@@ -146,16 +148,29 @@ export default {
       return !this.disabled && !item.disabled && (item.children || item.branch || this.selectable) && !(this.unexpandableEmpty && !item.children) ? 0 : null
     },
 
+    /**
+     * Get the tree path of the given item.
+     * The full ancestors items are stored in the array and not only their `originalItem`s in case
+     * it is mutated before we return it to the user through slots and emitted events.
+     * Before it is returned to the user, this array is mapped to only give the `originalItem`s.
+     *
+     * @param {Object} item the tree item to get the ancestors path for.
+     * @return an array of item objects from the root to the leaf (including the item itself).
+     */
     getTreeItemPath (item) {
-      const ancestorsPath = [item.originalItem]
+      const ancestorsPath = [item]
 
       let ancestor = item.parent
       while (ancestor) {
-        ancestorsPath.push(ancestor.originalItem)
+        ancestorsPath.push(ancestor)
         ancestor = ancestor.parent
       }
       ancestorsPath.reverse()
       return ancestorsPath
+    },
+
+    getTreeItemPathForOutput (item) {
+      return item.path.map(item => item.originalItem)
     },
 
     /**
@@ -168,7 +183,12 @@ export default {
       if (typeof open === 'boolean') item.open = open
       else item.open = !item.open
 
-      const emitParams = { item: item.originalItem, open: item.open, depth: this.depth, path: this.getTreeItemPath(item) }
+      const emitParams = {
+        item: item.originalItem,
+        open: item.open,
+        depth: this.depth,
+        path: this.getTreeItemPathForOutput(item)
+      }
 
       this.$emit(item.open ? 'before-open' : 'before-close', emitParams)
 
@@ -186,7 +206,7 @@ export default {
       this.$emit('click', {
         item: item.originalItem,
         depth: this.depth,
-        path: this.getTreeItemPath(item),
+        path: this.getTreeItemPathForOutput(item),
         e
       })
       if (item.children || (item.branch && !this.unexpandableEmpty)) this.expandDepth(item)
@@ -198,7 +218,7 @@ export default {
       const emitParams = {
         item: item.originalItem,
         depth: this.depth,
-        path: this.getTreeItemPath(item),
+        path: this.getTreeItemPathForOutput(item),
         e
       }
       if (item.children || (item.branch && !this.unexpandableEmpty)) {
