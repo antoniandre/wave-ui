@@ -6,11 +6,11 @@ ul.w-tree(:class="classes")
     :class="itemClasses(item)")
     //- The keys `route` & `disabled` are always present in any currentDepthItems.
     component.w-tree__item-label(
-      :is="!disabled && !item.disabled && item.route ? (!$router || hasExternalLink(item) ? 'a' : 'router-link') : 'div'"
+      :is="getTreeItemComponent(item)"
       v-bind="item.route && { [!$router || hasExternalLink(item) ? 'href' : 'to']: item.route }"
       @click="!disabled && !item.disabled && onLabelClick(item, $event)"
       @keydown="!disabled && !item.disabled && onLabelKeydown(item, $event)"
-      :tabindex="!disabled && !item.disabled && (item.children || item.branch || selectable) && !(unexpandableEmpty && !item.children) ? 0 : null")
+      :tabindex="getTreeItemTabindex(item)")
       //- @click.stop to not follow link if item is a link.
       w-button.w-tree__item-expand(
         v-if="(item.children || item.branch) && ((expandOpenIcon && item.open) || expandIcon) && !(unexpandableEmpty && !item.children)"
@@ -22,7 +22,12 @@ ul.w-tree(:class="classes")
         :disabled="disabled || item.disabled"
         text
         sm)
-      slot(name="item" :item="item.originalItem" :depth="depth" :open="item.open")
+      slot(
+        name="item"
+        :item="item.originalItem"
+        :depth="depth"
+        :path="item.path"
+        :open="item.open")
         w-icon(v-if="itemIcon(item)" class="w-tree__item-icon" :color="item.originalItem[itemIconColorKey] || iconColor") {{ itemIcon(item) }}
         span(v-html="item.label")
         span.ml1(v-if="counts && (item.children || item.branch)").
@@ -30,13 +35,14 @@ ul.w-tree(:class="classes")
     component(
       :is="noTransition ? 'div' : 'w-transition-expand'"
       :y="!noTransition || null"
-      @after-enter="$emit('open', { item: item.originalItem, open: item.open, depth })"
-      @after-leave="$emit('close', { item: item.originalItem, open: item.open, depth })")
+      @after-enter="$emit('open', { item: item.originalItem, open: item.open, depth, path: getTreeItemPath(item) })"
+      @after-leave="$emit('close', { item: item.originalItem, open: item.open, depth, path: getTreeItemPath(item) })")
       w-tree(
         v-if="item.children && item.open"
         v-bind="$props"
         :depth="depth + 1"
         :data="item.originalItem.children"
+        :parent="item"
         @before-open="$emit('before-open', $event)"
         @open="$emit('open', $event)"
         @before-close="$emit('before-close', $event)"
@@ -44,8 +50,8 @@ ul.w-tree(:class="classes")
         @click="$emit('click', $event)"
         @select="$emit('select', $event)"
         @update:model-value="$emit('update:model-value', $event)")
-        template(#item="{ item, depth, open }")
-          slot(name="item" :item="item" :depth="depth" :open="open")
+        template(#item="{ item, depth, path, open }")
+          slot(name="item" :item="item" :depth="depth" :path="path" :open="open")
 </template>
 
 <script>
@@ -60,7 +66,8 @@ export default {
   props: {
     modelValue: { type: [Object, Array] },
     data: { type: [Object, Array], required: true },
-    depth: { type: Number, default: 0 },
+    depth: { type: Number, default: 0 }, // To get the context from nested items.
+    parent: { type: Object, default: null }, // To get the context from nested items.
     branchClass: { type: String },
     leafClass: { type: String },
     branchIcon: { type: String },
@@ -124,9 +131,31 @@ export default {
           route: item[this.itemRouteKey],
           disabled: item[this.itemDisabledKey],
           depth: this.depth,
-          open: !!(oldItems[i]?.open || this.expandAll || item[this.itemOpenKey])
+          open: !!(oldItems[i]?.open || this.expandAll || item[this.itemOpenKey]),
+          parent: this.parent || null,
+          path: this.getTreeItemPath(item)
         })
       })
+    },
+
+    getTreeItemComponent (item) {
+      return !this.disabled && !item.disabled && item.route ? (!this.$router || this.hasExternalLink(item) ? 'a' : 'router-link') : 'div'
+    },
+
+    getTreeItemTabindex (item) {
+      return !this.disabled && !item.disabled && (item.children || item.branch || this.selectable) && !(this.unexpandableEmpty && !item.children) ? 0 : null
+    },
+
+    getTreeItemPath (item) {
+      const ancestorsPath = [item.originalItem]
+
+      let ancestor = item.parent
+      while (ancestor) {
+        ancestorsPath.push(ancestor.originalItem)
+        ancestor = ancestor.parent
+      }
+      ancestorsPath.reverse()
+      return ancestorsPath
     },
 
     /**
@@ -139,7 +168,7 @@ export default {
       if (typeof open === 'boolean') item.open = open
       else item.open = !item.open
 
-      const emitParams = { item: item.originalItem, open: item.open, depth: this.depth }
+      const emitParams = { item: item.originalItem, open: item.open, depth: this.depth, path: this.getTreeItemPath(item) }
 
       this.$emit(item.open ? 'before-open' : 'before-close', emitParams)
 
@@ -154,14 +183,24 @@ export default {
       const route = item[this.itemRouteKey]
       if (route && this.$router && !this.hasExternalLink(item)) e.preventDefault()
 
-      this.$emit('click', { item: item.originalItem, depth: this.depth, e })
+      this.$emit('click', {
+        item: item.originalItem,
+        depth: this.depth,
+        path: this.getTreeItemPath(item),
+        e
+      })
       if (item.children || (item.branch && !this.unexpandableEmpty)) this.expandDepth(item)
 
       if (this.selectable) this.emitItemSelection(item, e)
     },
 
     emitItemSelection (item, e) {
-      const emitParams = { item: item.originalItem, depth: this.depth, e }
+      const emitParams = {
+        item: item.originalItem,
+        depth: this.depth,
+        path: this.getTreeItemPath(item),
+        e
+      }
       if (item.children || (item.branch && !this.unexpandableEmpty)) {
         emitParams.open = item.open
       }
