@@ -23,6 +23,15 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v3.3.0
+      ul
+        li
+          strong.code w-tree
+          ul
+            li Fix the selected tree item style. #[issue-link 94], #[issue-link 108]
+            li Add a #[code path] property in each item for use from emitted events and slots.
+
+    li.minor
       strong.version v3.2.0
       ul
         li
