@@ -1163,7 +1163,7 @@ div
         :items="table.items"
         fixed-headers
         fixed-footer
-        :fetch="table.fetch"
+        :fetch="fetch"
         :pagination="table.pagination"
         :loading="table.loading"
         style="max-height: 500px"&gt;
@@ -1196,30 +1196,30 @@ div
               itemsPerPage: 50,
               total: 200
             }
-          },
-
-          methods: {
-            // All these parameters are available from Wave UI.
-            fetch: ({ page, start, end, total, itemsPerPage, sorting }) => {
-              this.table.loading = 'header' // Display the loading bar.
-
-              // Simulating a call to the backend with a delay of 1 second.
-              // once you receive the rows from the backend
-              setTimeout(() => {
-                const itemsFromApi = tableItemsInApi.slice(0) // Clone the array before sorting.
-                if (sorting.length) {
-                  const sortKey = sorting[0].substring(1)
-                  itemsFromApi.sort((a, b) => {
-                    if (sorting[0][0] === '+') return a[sortKey] &lt; b[sortKey] ? -1 : 1
-                    else return a[sortKey] > b[sortKey] ? -1 : 1
-                  })
-                }
-                this.table.items = itemsFromApi.slice(start - 1, end)
-                this.table.loading = false
-              }, 1000)
-            }
           }
-        })
+        }),
+
+        methods: {
+          // All these parameters are available from Wave UI.
+          fetch ({ page, start, end, total, itemsPerPage, sorting }) {
+            this.table.loading = 'header' // Display the loading bar.
+
+            // Simulating a call to the backend with a delay of 1 second.
+            // Once you receive the rows from the backend assign them to the table.items var.
+            setTimeout(() => {
+              const itemsFromApi = tableItemsInApi.slice(0) // Clone the array before sorting.
+              if (sorting.length) {
+                const sortKey = sorting[0].substring(1)
+                itemsFromApi.sort((a, b) => {
+                  if (sorting[0][0] === '+') return a[sortKey] &lt; b[sortKey] ? -1 : 1
+                  else return a[sortKey] > b[sortKey] ? -1 : 1
+                })
+              }
+              this.table.items = itemsFromApi.slice(start - 1, end)
+              this.table.loading = false
+            }, 1000)
+          }
+        }
       })
 
       app.use(WaveUI, {
@@ -2012,7 +2012,7 @@ export default {
           { label: 'ID', key: 'id' },
           { label: 'First name', key: 'firstName' },
           { label: 'Last name', key: 'lastName' },
-          { label: 'Birthdate', key: 'birthdate' },
+          { label: 'Birthdate', key: 'birthdate' }
         ],
         items: Array(200).fill('').map((item, i) => ({
           id: i + 1,
