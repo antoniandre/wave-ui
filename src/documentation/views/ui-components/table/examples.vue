@@ -1055,55 +1055,16 @@ div
     | Pagination
     w-tag.ml2.text-bold(round color="warning" outline sm) IN PROGRESS
   p The pagination can be provided as an object:
-  ul
-    li
-      span.teal.code {Integer}
-      code.title4.mx1.mt3.mb1 itemsPerPage:
-      p the number of rows to display in one page. #[code 0] for "all" results in 1 page.
-    li
-      span.teal.code {Array}
-      code.title4.mx1.mt3.mb1 itemsPerPageOptions:
-      p.
-        The #[code itemsPerPage] options to offer to the user. Each object of the array should have
-        at least a #[code value] property, and a #[code label] property if different of the #[code value].
-    li
-      span.teal.code {Number}
-      code.title4.mx1.mt3.mb1 start:
-      p.
-        #[code start] &amp; #[code end] are integers defining the range of results to load.
-        E.g. #[code 51 - 100].#[br]#[code start] is the first result number to load [itemsPerPage]
-        results from.#[br]
-        #[code start] &amp; #[code end] can be used instead of #[code page] if you find it more convenient.
-      p.bold-text.
-        Warning: when the pagination is done server-side, you should subtract #[code 1]
-        to the start and end in order to query the database. E.g: start = 51, end = 100,
-        you should query the database rows 50 to 99 (in order to display ranges starting
-        from 1 and not zero to the end user).
-    li
-      span.teal.code {Number}
-      code.title4.mx1.mt3.mb1 end:
-      p.
-        #[code start] &amp; #[code end] are integers defining the range of results to load.
-        E.g. #[code 51 - 100].#[br]#[code end] is the last result number to load.#[br]
-        #[code start] &amp; #[code end] can be used instead of #[code page] if you find it more convenient.
-      p.bold-text.
-        Warning: when the pagination is done server-side, you should subtract #[code 1]
-        to the start and end in order to query the database. E.g: start = 51, end = 100,
-        you should query the database rows 50 to 99 (in order to display ranges starting
-        from 1 and not zero to the end user).
-    li
-      span.teal.code {Number}
-      code.title4.mx1.mt3.mb1 page:
-      p.
-        An integer - to be used in conjunction with the #[code itemsPerPage] option - to
-        define the range of results to load. E.g. page = 2 and itemsPerPage = 50, will load
-        the results range [51-100].#[br]
-        This can be used instead of #[code start] and #[code end] if you find it more convenient.
-    li
-      span.teal.code {Number}
-      code.title4.mx1.mt3.mb1 total:
-      p An integer defining the total number of items available in this match.
-
+  ssh-pre(language="js").
+    {
+      itemsPerPage: Integer, // Number of rows to show per page.
+      itemsPerPageOptions: Array, // Items per page options for the user.
+      start: Integer, // The start of the results range.
+      end: Integer, // The end of the results range.
+      page: Integer, // The current page to display [itemsPerPage] number of rows.
+      total: Integer // The total number of items available in the table.
+    }
+  p More details in the #[a(href="#pagination") API section].
   p.
     The pagination is a two-way binding object: if you modify any property inside it, the table
     will re-paginate and update.
@@ -1138,9 +1099,10 @@ div
         style="max-height: 500px"&gt;
       &lt;/w-table&gt;
     template(#js).
-      import { faker } from '@faker-js/faker'
+      // import { faker } from '@faker-js/faker' // With npm.
+      import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'
 
-      export default {
+      const app = Vue.createApp({
         data: () => ({
           table: {
             headers: [
@@ -1151,8 +1113,8 @@ div
             ],
             items: Array(200).fill('').map((item, i) => ({
               id: i + 1,
-              firstName: faker.name.firstName(),
-              lastName: faker.name.lastName(),
+              firstName: faker.person.firstName(),
+              lastName: faker.person.lastName(),
               birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
             })),
             pagination: {
@@ -1161,11 +1123,21 @@ div
             }
           }
         })
-      }
+      })
+
+      app.use(WaveUI, {
+        colors: {
+          primary: '#89b6d2',
+          secondary: '375b6a'
+        },
+        theme: 'dark'
+      })
+
+      app.mount('#app')
 
   title-link(h3) Server-side pagination
   p This example showcases an asynchronous pagination with backend fetching of the table items.
-  example
+  example(:blank-codepen="['js']")
     w-table(
       :headers="table12.headers"
       :items="table12.items"
@@ -1197,18 +1169,19 @@ div
         style="max-height: 500px"&gt;
       &lt;/w-table&gt;
     template(#js).
-      import { faker } from '@faker-js/faker'
+      // import { faker } from '@faker-js/faker' // With npm.
+      import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'
 
       // Generate a server-side array of objects of 2000 random persons
       // that we assume will be returned paginated from our backend.
       const tableItemsInApi = Array(2000).fill('').map((item, i) => ({
         id: i + 1,
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
         birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
       }))
 
-      export default {
+      const app = Vue.createApp({
         data: () => ({
           table: {
             headers: [
@@ -1247,7 +1220,17 @@ div
             }
           }
         })
-      }
+      })
+
+      app.use(WaveUI, {
+        colors: {
+          primary: '#89b6d2',
+          secondary: '375b6a'
+        },
+        theme: 'dark'
+      })
+
+      app.mount('#app')
 
   title-link(h2) Rows selection
   p Click a row to see it highlighted and get information about the selected item.
