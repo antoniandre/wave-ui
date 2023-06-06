@@ -45,7 +45,7 @@ export const UIComponents = [
   { id: 'timeline', label: 'Timeline' },
   { id: 'toolbar', label: 'Toolbar' },
   { id: 'tooltip', label: 'Tooltip' },
-  { id: 'tree', label: 'Tree', inProgress: true }
+  { id: 'tree', label: 'Tree' }
 ]
 
 // The loading state of Vue Router is appended to $router, so a
