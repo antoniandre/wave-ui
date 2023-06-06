@@ -4,7 +4,7 @@
   ul(v-if="sortedItems.length")
     template(v-for="item in sortedItems" :key="item.label")
       li.api__item(v-if="!item.hide")
-        title-link(h4 :slug="item.label") {{ item.label }}
+        title-link(h4 :slug="`${item.label}-${category}`") {{ item.label }}
         template(v-if="title === 'Props'")
           span.types.teal="[{{ item.type.join(', ') }}]"
           | ,
@@ -68,6 +68,10 @@ export default {
           description: (item.description || this.descriptions[key] || '').replace(/href="\//g, `href=\"${this.baseURL}`)
         }
       })
+    },
+
+    category () {
+      return this.title.toLowerCase().replace(/s$/, '')
     }
   }
 }
