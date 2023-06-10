@@ -72,7 +72,7 @@ main
 
       p.
         #[strong Or if you use Vite],
-        In #[span.code vite.config.js], the import of variables is done like so:
+        In #[span.code vite.config.js], the import of variables is done like so, and you don't need to transpile:
       ssh-pre(language="js" label="vite.config.js" :dark="$store.state.darkMode").
         css: {
           preprocessorOptions: {
@@ -83,7 +83,8 @@ main
         }
 
       alert(info).
-        Note from the above code that since you import Wave UI source code, you need to transpile it.
+        Note from the above code that since you import Wave UI source code, you need to transpile
+        it if you don't use ESM.<br>Vite uses ESM.
 
   .title4.mt8 Voilà !
   p You're all set, you can now override the SCSS variables.
