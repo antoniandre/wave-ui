@@ -10,27 +10,21 @@ transition-group(
       v-if="notif._value"
       :key="notif._uid"
       v-model="notif._value"
-      @close="notifManager.dismiss(notif._uid)"
+      @close="$waveui._notificationManager.dismiss(notif._uid)"
       v-bind="notifProps(notif)")
       div(v-html="notif.message")
 </template>
 
 <script>
-import NotificationManager from '../utils/notification-manager'
-
 export default {
   name: 'w-notification-manager',
-
-  data: () => ({
-    notifManager: null
-  }),
 
   computed: {
     conf () {
       return this.$waveui.config.notificationManager
     },
     notifications () {
-      return this.notifManager?.notifications || []
+      return this.$waveui._notificationManager.notifications || []
     },
     // Possible transitions: slide-fade-down, slide-fade-left, slide-fade-right,
     // slide-left, slide-right, bounce, twist, fade, scale, scale-fade.
@@ -46,15 +40,6 @@ export default {
       const { _value, _uid, message, timeout, ...props } = notif
       return props
     }
-  },
-
-  created () {
-    this.notifManager = new NotificationManager()
-  },
-
-  beforeUnmount () {
-    this.notifManager.notifications = []
-    delete this.notifManager
   }
 }
 </script>
