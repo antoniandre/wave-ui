@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  ui-component-title(slug="w-scrollbar" in-progress) w-scrollbar
+  ui-component-title(slug="w-scrollable" in-progress) w-scrollable
   examples
   api
 </template>
