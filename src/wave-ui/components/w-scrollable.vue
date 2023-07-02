@@ -22,7 +22,8 @@ export default {
     scrollable: {
       top: null,
       left: null
-    }
+    },
+    scrollValuePercent: 0
   }),
 
   computed: {
@@ -71,10 +72,7 @@ export default {
 
     onDrag (e) {
       const xOrY = this.isHorizontal ? 'clientX' : 'clientY'
-      const topOrLeft = this.isHorizontal ? 'left' : 'top'
-      const scrollTopOrLeft = this.isHorizontal ? 'scrollLeft' : 'scrollTop'
-      const { top, left } = this.$refs.scrollable.getBoundingClientRect()
-      this.scroll((e.type === 'touchmove' ? e.touches[0][xOrY] : e[xOrY]) - this.scrollable[topOrLeft] - document.scrollingElement[scrollTopOrLeft])
+      this.scroll((e.type === 'touchmove' ? e.touches[0][xOrY] : e[xOrY]))
     },
 
     onMouseUp (e) {
@@ -83,11 +81,15 @@ export default {
       if (this.$refs.thumb) this.$refs.thumb.focus()
     },
 
-    scroll (amount) {
-      console.log('scrolling ', amount)
-      const topOrLeft = this.isHorizontal ? 'left' : 'top'
+    scroll (cursorPositionXorY) {
+      const { top, left, width, height } = this.$refs.scrollable.getBoundingClientRect()
+      const topOrLeft = this.isHorizontal ? left : top
+      const widthOrHeight = this.isHorizontal ? width : height
+      this.scrollValuePercent = Math.max(0, Math.min(((cursorPositionXorY - topOrLeft) / widthOrHeight) * 100, 100))
+
       const scrollTopOrLeft = this.isHorizontal ? 'scrollLeft' : 'scrollTop'
-      this.$refs.scrollable[scrollTopOrLeft] = amount
+      const scrollWidthOrHeight = this.isHorizontal ? 'scrollWidth' : 'scrollHeight'
+      this.$refs.scrollable[scrollTopOrLeft] = this.scrollValuePercent * this.$refs.scrollable?.[scrollWidthOrHeight] / 100
     },
 
     refreshScrollbar () {
