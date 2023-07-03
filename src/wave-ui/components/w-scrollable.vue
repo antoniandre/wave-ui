@@ -40,8 +40,12 @@ export default {
 
     thumbStyles () {
       const widthOrHeight = this.isHorizontal ? 'width' : 'height'
+      const topOrLeft = this.isHorizontal ? 'left' : 'top'
+      let topOrLeftValue = this.scrollValuePercent
+      topOrLeftValue = Math.max(0, Math.min(topOrLeftValue, 100 - (this.thumbSizePercent || 0)))
       return {
-        [widthOrHeight]: `${this.thumbSizePercent || 0}%`
+        [widthOrHeight]: `${this.thumbSizePercent || 0}%`,
+        [topOrLeft]: `${topOrLeftValue}%`
       }
     }
   },
@@ -90,19 +94,19 @@ export default {
       const scrollTopOrLeft = this.isHorizontal ? 'scrollLeft' : 'scrollTop'
       const scrollWidthOrHeight = this.isHorizontal ? 'scrollWidth' : 'scrollHeight'
       this.$refs.scrollable[scrollTopOrLeft] = this.scrollValuePercent * this.$refs.scrollable?.[scrollWidthOrHeight] / 100
+      this.updateThumbPosition()
     },
 
-    refreshScrollbar () {
+    updateThumbPosition () {
+      this.$refs.thumb.style.top = this.scrollValuePercent
     }
   },
 
   mounted () {
     this.mounted = true
-    console.log('😗', this.$refs.scrollable)
     const { top, left } = this.$refs.scrollable.getBoundingClientRect()
     this.scrollable.top = top
     this.scrollable.left = left
-    this.refreshScrollbar()
   }
 }
 </script>
