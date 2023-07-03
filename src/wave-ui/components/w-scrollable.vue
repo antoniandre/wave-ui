@@ -1,5 +1,9 @@
 <template lang="pug">
-.w-scrollable(ref="scrollable")
+.w-scrollable(
+  ref="scrollable"
+  @mouseenter="onMouseEnter"
+  @mouseleave="onMouseLeave"
+  @mousewheel="onMouseWheel")
   slot
 .w-scrollbar(ref="track" @mousedown="onTrackMouseDown")
   .w-scrollbar__thumb(ref="thumb" :style="thumbStyles")
@@ -21,7 +25,8 @@ export default {
     mounted: false,
     scrollable: {
       top: null,
-      left: null
+      left: null,
+      hovered: false
     },
     scrollValuePercent: 0
   }),
@@ -35,14 +40,14 @@ export default {
       if (!this.mounted) return 0
       const widthOrHeight = this.isHorizontal ? 'width' : 'height'
       const scrollWidthOrHeight = this.isHorizontal ? 'scrollWidth' : 'scrollHeight'
-      return this[widthOrHeight] * 100 / this.$refs.scrollable?.[scrollWidthOrHeight]
+      return (this[widthOrHeight] * 100 / this.$refs.scrollable?.[scrollWidthOrHeight]) || 0
     },
 
     thumbStyles () {
       const widthOrHeight = this.isHorizontal ? 'width' : 'height'
       const topOrLeft = this.isHorizontal ? 'left' : 'top'
       let topOrLeftValue = this.scrollValuePercent
-      topOrLeftValue = Math.max(0, Math.min(topOrLeftValue, 100 - (this.thumbSizePercent || 0)))
+      topOrLeftValue = Math.max(0, Math.min(topOrLeftValue, 100 - this.thumbSizePercent))
       return {
         [widthOrHeight]: `${this.thumbSizePercent || 0}%`,
         [topOrLeft]: `${topOrLeftValue}%`
@@ -68,7 +73,8 @@ export default {
       this.dragging = true
 
       const xOrY = this.isHorizontal ? 'clientX' : 'clientY'
-      this.scroll(e.type === 'touchstart' ? e.touches[0][xOrY] : e[xOrY])
+      this.computeScroll(e.type === 'touchstart' ? e.touches[0][xOrY] : e[xOrY])
+      this.scroll()
 
       document.addEventListener(e.type === 'touchstart' ? 'touchmove' : 'mousemove', this.onDrag)
       document.addEventListener(e.type === 'touchstart' ? 'touchend' : 'mouseup', this.onMouseUp, { once: true })
@@ -76,7 +82,8 @@ export default {
 
     onDrag (e) {
       const xOrY = this.isHorizontal ? 'clientX' : 'clientY'
-      this.scroll((e.type === 'touchmove' ? e.touches[0][xOrY] : e[xOrY]))
+      this.computeScroll((e.type === 'touchmove' ? e.touches[0][xOrY] : e[xOrY]))
+      this.scroll()
     },
 
     onMouseUp (e) {
@@ -85,12 +92,38 @@ export default {
       if (this.$refs.thumb) this.$refs.thumb.focus()
     },
 
-    scroll (cursorPositionXorY) {
+    onMouseEnter () {
+      this.scrollable.hovered = true
+    },
+
+    onMouseLeave () {
+      this.scrollable.hovered = false
+    },
+
+    onMouseWheel (e) {
+      if (!this.scrollable.hovered) return // Only scroll a w-scrollable element that is being hovered.
+
+      const deltaXorY = this.isHorizontal ? 'deltaX' : 'deltaY'
+
+      // When scrolling beyond limits, release the mousewheel and scroll the parent.
+      if (this.scrollValuePercent <= 0 && e[deltaXorY] < 0) return
+      else if (this.scrollValuePercent >= 100 - this.thumbSizePercent && e[deltaXorY] > 0) return
+
+      e.preventDefault() // Hold the scroll in the hovered w-scrollable element.
+
+      this.scrollValuePercent += e[deltaXorY] * 0.05
+      this.scrollValuePercent = Math.max(0, Math.min(this.scrollValuePercent, 100))
+      this.scroll()
+    },
+
+    computeScroll (cursorPositionXorY) {
       const { top, left, width, height } = this.$refs.scrollable.getBoundingClientRect()
       const topOrLeft = this.isHorizontal ? left : top
       const widthOrHeight = this.isHorizontal ? width : height
       this.scrollValuePercent = Math.max(0, Math.min(((cursorPositionXorY - topOrLeft) / widthOrHeight) * 100, 100))
+    },
 
+    scroll () {
       const scrollTopOrLeft = this.isHorizontal ? 'scrollLeft' : 'scrollTop'
       const scrollWidthOrHeight = this.isHorizontal ? 'scrollWidth' : 'scrollHeight'
       this.$refs.scrollable[scrollTopOrLeft] = this.scrollValuePercent * this.$refs.scrollable?.[scrollWidthOrHeight] / 100
