@@ -3,9 +3,10 @@
   ref="scrollable"
   @mouseenter="onMouseEnter"
   @mouseleave="onMouseLeave"
-  @mousewheel="onMouseWheel")
+  @mousewheel="onMouseWheel"
+  :class="scrollableClasses")
   slot
-.w-scrollbar(ref="track" @mousedown="onTrackMouseDown")
+.w-scrollbar(ref="track" @mousedown="onTrackMouseDown" :class="scrollbarClasses")
   .w-scrollbar__thumb(ref="thumb" :style="thumbStyles")
 </template>
 
@@ -34,6 +35,18 @@ export default {
   computed: {
     isHorizontal () {
       return this.width && !this.height
+    },
+
+    scrollableClasses () {
+      return {
+        [`w-scrollable--${this.isHorizontal ? 'horizontal' : 'vertical'}`]: true
+      }
+    },
+
+    scrollbarClasses () {
+      return {
+        [`w-scrollbar--${this.isHorizontal ? 'horizontal' : 'vertical'}`]: true
+      }
     },
 
     thumbSizePercent () {
@@ -153,21 +166,44 @@ export default {
 
 .w-scrollbar {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 8px;
   background: #000;
   user-select: none;
 
-  &__thumb {
-    position: absolute;
+  &--horizontal {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 8px;
+  }
+  &--vertical {
     top: 0;
     bottom: 0;
-    right: 1px;
-    width: 6px;
+    right: 0;
+    width: 8px;
+  }
+
+  &__thumb {
+    position: absolute;
     background: #333;
+    border-radius: $border-radius;
     z-index: 1;
+    transition: $fast-transition-duration ease-in-out;
+
+    &:hover {background: #444;}
+  }
+  &--horizontal &__thumb {
+    height: 6px;
+    left: 0;
+    right: 0;
+    margin-top: 1px;
+    margin-bottom: 1px;
+  }
+  &--vertical &__thumb {
+    width: 6px;
+    top: 0;
+    bottom: 0;
+    margin-left: 1px;
+    margin-right: 1px;
   }
 }
 </style>
