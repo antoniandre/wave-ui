@@ -4,13 +4,40 @@
   @mouseenter="onMouseEnter"
   @mouseleave="onMouseLeave"
   @mousewheel="onMouseWheel"
-  :class="scrollableClasses")
+  :class="scrollableClasses"
+  v-bind="$attrs"
+  :style="scrollableStyles")
   slot
 .w-scrollbar(ref="track" @mousedown="onTrackMouseDown" :class="scrollbarClasses")
   .w-scrollbar__thumb(ref="thumb" :style="thumbStyles")
 </template>
 
 <script>
+const domProps = {
+  h: {
+    horizOrVert: 'horizontal',
+    topOrLeft: 'left',
+    widthOrHeight: 'width',
+    offsetWidthOrHeight: 'offsetWidth',
+    maxWidthOrHeight: 'max-width',
+    scrollWidthOrHeight: 'scrollWidth',
+    clientXorY: 'clientX',
+    deltaXorY: 'deltaX',
+    scrollTopOrLeft: 'scrollLeft'
+  },
+  v: {
+    horizOrVert: 'vertical',
+    topOrLeft: 'top',
+    widthOrHeight: 'height',
+    offsetWidthOrHeight: 'offsetHeight',
+    maxWidthOrHeight: 'max-height',
+    scrollWidthOrHeight: 'scrollHeight',
+    clientXorY: 'clientY',
+    deltaXorY: 'deltaY',
+    scrollTopOrLeft: 'scrollTop'
+  }
+}
+
 export default {
   name: 'w-scrollable',
   props: {
@@ -34,36 +61,47 @@ export default {
 
   computed: {
     isHorizontal () {
-      return this.width && !this.height
+      if (!this.mounted) return false
+      console.log('💂‍♂️', this.$refs.scrollable?.scrollWidth, this.$refs.scrollable?.offsetWidth)
+      return (this.width && !this.height) || (this.$refs.scrollable?.scrollWidth > this.$refs.scrollable?.offsetWidth)
+    },
+
+    m () { // m = shorthand for map of DOM properties.
+      return domProps[this.isHorizontal ? 'h' : 'v']
     },
 
     scrollableClasses () {
       return {
-        [`w-scrollable--${this.isHorizontal ? 'horizontal' : 'vertical'}`]: true
+        [`w-scrollable--${this.m.horizOrVert}`]: true
       }
     },
 
     scrollbarClasses () {
       return {
-        [`w-scrollbar--${this.isHorizontal ? 'horizontal' : 'vertical'}`]: true
+        [`w-scrollbar--${this.m.horizOrVert}`]: true
       }
     },
 
     thumbSizePercent () {
       if (!this.mounted) return 0
-      const widthOrHeight = this.isHorizontal ? 'width' : 'height'
-      const scrollWidthOrHeight = this.isHorizontal ? 'scrollWidth' : 'scrollHeight'
-      return (this[widthOrHeight] * 100 / this.$refs.scrollable?.[scrollWidthOrHeight]) || 0
+      console.log('😒', this[this.m.widthOrHeight], this.$refs.scrollable[[this.m.offsetWidthOrHeight]])
+      const widthOrHeight = this[this.m.widthOrHeight] ?? this.$refs.scrollable[[this.m.offsetWidthOrHeight]]
+      // if (widthOrHeight === undefined) widthOrHeight = this.$refs.scrollable.offsetWidthOrHeight
+      return (widthOrHeight * 100 / this.$refs.scrollable?.[this.m.scrollWidthOrHeight]) || 0
+    },
+
+    scrollableStyles () {
+      return {
+        [this.m.maxWidthOrHeight]: `${this[this.m.widthOrHeight]}px`
+      }
     },
 
     thumbStyles () {
-      const widthOrHeight = this.isHorizontal ? 'width' : 'height'
-      const topOrLeft = this.isHorizontal ? 'left' : 'top'
       let topOrLeftValue = this.scrollValuePercent
       topOrLeftValue = Math.max(0, Math.min(topOrLeftValue, 100 - this.thumbSizePercent))
       return {
-        [widthOrHeight]: `${this.thumbSizePercent || 0}%`,
-        [topOrLeft]: `${topOrLeftValue}%`
+        [this.m.widthOrHeight]: `${this.thumbSizePercent}%`,
+        [this.m.topOrLeft]: `${topOrLeftValue}%`
       }
     }
   },
@@ -85,8 +123,7 @@ export default {
       }
       this.dragging = true
 
-      const xOrY = this.isHorizontal ? 'clientX' : 'clientY'
-      this.computeScroll(e.type === 'touchstart' ? e.touches[0][xOrY] : e[xOrY])
+      this.computeScroll(e.type === 'touchstart' ? e.touches[0][this.m.clientXorY] : e[this.m.clientXorY])
       this.scroll()
 
       document.addEventListener(e.type === 'touchstart' ? 'touchmove' : 'mousemove', this.onDrag)
@@ -94,8 +131,7 @@ export default {
     },
 
     onDrag (e) {
-      const xOrY = this.isHorizontal ? 'clientX' : 'clientY'
-      this.computeScroll((e.type === 'touchmove' ? e.touches[0][xOrY] : e[xOrY]))
+      this.computeScroll((e.type === 'touchmove' ? e.touches[0][this.m.clientXorY] : e[this.m.clientXorY]))
       this.scroll()
     },
 
@@ -116,15 +152,13 @@ export default {
     onMouseWheel (e) {
       if (!this.scrollable.hovered) return // Only scroll a w-scrollable element that is being hovered.
 
-      const deltaXorY = this.isHorizontal ? 'deltaX' : 'deltaY'
-
       // When scrolling beyond limits, release the mousewheel and scroll the parent.
-      if (this.scrollValuePercent <= 0 && e[deltaXorY] < 0) return
-      else if (this.scrollValuePercent >= 100 - this.thumbSizePercent && e[deltaXorY] > 0) return
+      if (this.scrollValuePercent <= 0 && e[this.m.deltaXorY] < 0) return
+      else if (this.scrollValuePercent >= 100 - this.thumbSizePercent && e[this.m.deltaXorY] > 0) return
 
       e.preventDefault() // Hold the scroll in the hovered w-scrollable element.
 
-      this.scrollValuePercent += e[deltaXorY] * 0.05
+      this.scrollValuePercent += e[this.m.deltaXorY] * 0.05
       this.scrollValuePercent = Math.max(0, Math.min(this.scrollValuePercent, 100))
       this.scroll()
     },
@@ -137,14 +171,12 @@ export default {
     },
 
     scroll () {
-      const scrollTopOrLeft = this.isHorizontal ? 'scrollLeft' : 'scrollTop'
-      const scrollWidthOrHeight = this.isHorizontal ? 'scrollWidth' : 'scrollHeight'
-      this.$refs.scrollable[scrollTopOrLeft] = this.scrollValuePercent * this.$refs.scrollable?.[scrollWidthOrHeight] / 100
+      this.$refs.scrollable[this.m.scrollTopOrLeft] = this.scrollValuePercent * this.$refs.scrollable?.[this.m.scrollWidthOrHeight] / 100
       this.updateThumbPosition()
     },
 
     updateThumbPosition () {
-      this.$refs.thumb.style.top = this.scrollValuePercent
+      this.$refs.thumb.style[this.m.topOrLeft] = this.scrollValuePercent
     }
   },
 
@@ -153,6 +185,9 @@ export default {
     const { top, left } = this.$refs.scrollable.getBoundingClientRect()
     this.scrollable.top = top
     this.scrollable.left = left
+
+    this.$el.parentNode.style.position = 'relative'
+    this.$el.parentNode.style[this.m.maxWidthOrHeight] = `${this[this.m.widthOrHeight]}px`
   }
 }
 </script>
@@ -161,7 +196,6 @@ export default {
 .w-scrollable {
   position: relative;
   overflow: hidden;
-  max-height: 200px;
 }
 
 .w-scrollbar {
@@ -187,7 +221,7 @@ export default {
     background: #333;
     border-radius: $border-radius;
     z-index: 1;
-    transition: $fast-transition-duration ease-in-out;
+    will-change: top left;
 
     &:hover {background: #444;}
   }
