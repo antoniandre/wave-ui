@@ -29,7 +29,7 @@
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
 
   .w-tabs__content-wrap(v-if="tabsItems.length")
-    transition(:name="transitionName" :mode="transitionMode")
+    transition(v-if="keepAlive" :name="transitionName" :mode="transitionMode")
       keep-alive
         //- Keep-alive only works with components, not with DOM nodes.
         tab-content(:key="activeTab._index" :item="activeTab" :class="contentClass")
@@ -47,6 +47,26 @@
               :index="item._index + 1"
               :active="item._index === activeTab._index")
               div(v-if="item[itemContentKey]" v-html="item[itemContentKey]")
+    template(v-else-if="keepInDom")
+      transition-group(:name="transitionName")
+        div(
+          v-for="(tab, i) in tabs"
+          :key="i"
+          v-show="tab._uid === activeTab._uid")
+          pre {{ tab }}
+          slot(
+            v-if="$slots[`item-content.${tab._index + 1}`]"
+            :name="`item-content.${tab._index + 1}`"
+            :item="getOriginalItem(tab)"
+            :index="tab._index + 1"
+            :active="tab._index === activeTab._index")
+          slot(
+            v-else
+            name="item-content"
+            :item="getOriginalItem(tab)"
+            :index="tab._index + 1"
+            :active="tab._index === activeTab._index")
+            div(v-if="tab[itemContentKey]" v-html="tab[itemContentKey]")
 </template>
 
 <script>
@@ -75,7 +95,9 @@ export default {
     right: { type: Boolean },
     card: { type: Boolean },
     dark: { type: Boolean },
-    light: { type: Boolean }
+    light: { type: Boolean },
+    keepAlive: { type: Boolean, default: true },
+    keepInDom: { type: Boolean, default: false }
   },
 
   components: { TabContent },
@@ -381,8 +403,10 @@ export default {
 .w-tabs-slide-left-leave-active,
 .w-tabs-slide-right-leave-active {
   position: absolute;
+  top: 0;
   left: 0;
   right: 0;
+  overflow: hidden;
 }
 
 .w-tabs-slide-left-enter-active {animation: w-tabs-slide-left-enter $transition-duration + 0.15s;}
