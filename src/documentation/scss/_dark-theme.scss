@@ -41,7 +41,7 @@
   .go-top,
   caption,
   .primary--bg,
-  .primary,
+  .primary:not(.w-tabs__slider),
   .nav-menu-wrap:after,
   div.nav-menu .w-tree__item-icon,
   div.nav-menu .w-tree__item-label,
