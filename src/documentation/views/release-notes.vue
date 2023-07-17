@@ -23,6 +23,15 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v3.4.0
+      ul
+        li
+          strong.code w-tabs
+          ul
+            li Added a #[code keep-in-dom] option to keep tabs in the DOM (Useful for iframes which must not reload).
+            li Also introduce an internal unique IDs system to more accurately recognize a kept-alive tab in some specific cases.
+
+    li.minor
       strong.version v3.3.0
       ul
         li
