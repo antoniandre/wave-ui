@@ -5,6 +5,7 @@
 
 <script>
 // Keep-alive only works with components, not with DOM nodes.
+
 export default {
   props: { item: Object }
 }

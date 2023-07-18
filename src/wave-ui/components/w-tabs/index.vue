@@ -29,32 +29,13 @@
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
 
   .w-tabs__content-wrap(v-if="tabs.length")
-    transition(v-if="keepAlive" :name="transitionName" :mode="transitionMode")
-      keep-alive
-        //- Keep-alive only works with components, not with DOM nodes.
-        tab-content(:key="activeTabUid" :item="activeTab" :class="contentClass")
-          template(#default="{ item }")
-            template(v-if="item")
-              pre {{ item }}
-              slot(
-                v-if="$slots[`item-content.${item._index + 1}`]"
-                :name="`item-content.${item._index + 1}`"
-                :item="getOriginalItem(item)"
-                :index="item._index + 1"
-                :active="item._uid === activeTabUid")
-              slot(
-                v-else
-                name="item-content"
-                :item="getOriginalItem(item)"
-                :index="item._index + 1"
-                :active="item._uid === activeTabUid")
-                div(v-if="item[itemContentKey]" v-html="item[itemContentKey]")
-    transition-group(v-else-if="keepInDom" :name="transitionName")
-      div(
+    transition-group(v-if="keepInDom" :name="transitionName")
+      tab-content(
         v-for="(tab, i) in tabs"
-        :key="i"
-        v-show="tab._uid === activeTab._uid")
-        pre {{ tab }}
+        :key="tab._uid"
+        :item="tab"
+        v-show="tab._uid === activeTab._uid"
+        :class="contentClass")
         slot(
           v-if="$slots[`item-content.${tab._index + 1}`]"
           :name="`item-content.${tab._index + 1}`"
@@ -68,6 +49,25 @@
           :index="tab._index + 1"
           :active="tab._index === activeTab._index")
           div(v-if="tab[itemContentKey]" v-html="tab[itemContentKey]")
+    transition(v-else-if="keepAlive" :name="transitionName" :mode="transitionMode")
+      keep-alive
+        //- Keep-alive only works with components, not with DOM nodes.
+        tab-content(:key="activeTabUid" :item="activeTab" :class="contentClass")
+          template(#default="{ item }")
+            template(v-if="item")
+              slot(
+                v-if="$slots[`item-content.${item._index + 1}`]"
+                :name="`item-content.${item._index + 1}`"
+                :item="getOriginalItem(item)"
+                :index="item._index + 1"
+                :active="item._uid === activeTabUid")
+              slot(
+                v-else
+                name="item-content"
+                :item="getOriginalItem(item)"
+                :index="item._index + 1"
+                :active="item._uid === activeTabUid")
+                div(v-if="item[itemContentKey]" v-html="item[itemContentKey]")
 </template>
 
 <script>
