@@ -108,7 +108,7 @@ export default {
   emits: ['input', 'update:modelValue', 'focus'],
 
   data: () => ({
-    tabs: [], // All the tabs that are created, and removed (in order to keep alive).
+    tabs: [],
     activeTabEl: null,
     activeTabUid: null,
     activeTabIndex: 0,
@@ -177,13 +177,13 @@ export default {
         _uid: item[this.itemIdKey] ?? item._uid ?? +`${this._.uid}${++uid}${new Date().getTime()}`,
         _index: this.tabs.length,
         ...item,
-        _disabled: !!item.disabled,
-        _visible: true // Becomes invisible after deletion.
+        _disabled: !!item.disabled
       })
     },
 
     refreshTabs () {
-      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items
+      let items = this.items
+      if (typeof items === 'number') items = Array(items).fill().map((_, i) => this.tabs[i] || {})
 
       this.tabs = items.map((item, _index) => {
         return {
@@ -284,8 +284,8 @@ export default {
 
   beforeMount () {
     this.tabs = [] // Reset for hot-reloading.
-    const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items
-    items.forEach(tab => this.addTab(tab))
+    const items = typeof this.items === 'number' ? Array(this.items).fill().map(Object) : this.items
+    items.forEach(this.addTab)
 
     this.updateActiveTab(this.modelValue)
 
