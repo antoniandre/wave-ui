@@ -11,19 +11,19 @@
       @keypress.enter="!tab._disabled && openTab(tab._uid)"
       :aria-selected="tab._uid === activeTabUid ? 'true' : 'false'"
       role="tab")
-        slot(
-          v-if="$scopedSlots[`item-title.${tab.id || i + 1}`]"
-          :name="`item-title.${tab.id || i + 1}`"
-          :item="getOriginalItem(tab)"
-          :index="i + 1"
-          :active="tab._uid === activeTabUid")
-        slot(
-          v-else
-          name="item-title"
-          :item="getOriginalItem(tab)"
-          :index="i + 1"
-          :active="tab._uid === activeTabUid")
-          div(v-html="tab[itemTitleKey]")
+      slot(
+        v-if="$scopedSlots[`item-title.${tab.id || i + 1}`]"
+        :name="`item-title.${tab.id || i + 1}`"
+        :item="getOriginalItem(tab)"
+        :index="i + 1"
+        :active="tab._uid === activeTabUid")
+      slot(
+        v-else
+        name="item-title"
+        :item="getOriginalItem(tab)"
+        :index="i + 1"
+        :active="tab._uid === activeTabUid")
+        div(v-html="tab[itemTitleKey]")
     .w-tabs__bar-extra(v-if="$scopedSlots['tabs-bar-extra']")
       slot(name="tabs-bar-extra")
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
