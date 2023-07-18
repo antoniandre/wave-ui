@@ -272,16 +272,19 @@ export default {
       if (typeof index === 'string') index = ~~index
       else if (isNaN(index) || index < 0) index = 0
 
-      this.openTab(this.tabs[index]._uid)
+      // Only open the tab if it is found.
+      if (this.tabs[index]?._uid) {
+        this.openTab(this.tabs[index]?._uid)
 
-      // Scroll the new active tab item title into view if needed.
-      this.$nextTick(() => {
-        const ref = this.$refs['tabs-bar']
-        this.activeTabEl = ref && ref.querySelector(`.w-tabs__bar-item:nth-child(${index + 1})`)
-        if (this.activeTabEl) {
-          this.activeTabEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
-        }
-      })
+        // Scroll the new active tab item title into view if needed.
+        this.$nextTick(() => {
+          const ref = this.$refs['tabs-bar']
+          this.activeTabEl = ref && ref.querySelector(`.w-tabs__bar-item:nth-child(${index + 1})`)
+          if (this.activeTabEl) {
+            this.activeTabEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
+          }
+        })
+      }
     },
 
     // Return the original item (so there is no `_index`, etc.).
@@ -295,7 +298,7 @@ export default {
     const items = typeof this.items === 'number' ? Array(this.items).fill().map(Object) : this.items
     items.forEach(this.addTab)
 
-    this.updateActiveTab(this.modelValue)
+    if (this.modelValue ?? false) this.updateActiveTab(this.modelValue)
 
     this.$nextTick(() => {
       this.updateSlider()
