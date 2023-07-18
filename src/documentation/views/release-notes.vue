@@ -21,8 +21,42 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+    li.minor
+      strong.version v3.4.0
+      ul
+        li
+          strong.code w-tabs
+          ul
+            li Added a #[code keep-in-dom] option to keep tabs in the DOM (Useful for iframes which must not reload).
+            li Added a #[code keep-alive] option to keep tabs alive (by default, as before) or not (when set to false).
+            li Introduced an internal unique IDs system to more accurately recognize tabs after tab injection or replacement.
 
     li.minor
+      strong.version v3.3.0
+      ul
+        li
+          strong.code w-tree
+          ul
+            li Fix the selected tree item style. #[issue-link 94], #[issue-link 108]
+            li Add a #[code path] property in each item for use from emitted events and slots.
+
+    li.minor
+      strong.version v3.2.0
+      ul
+        li
+          strong.code w-table
+          ul
+            li Added the pagination feature. #[span.tag.new]
+            li Highlight a table column when it is being sorted.
+        li
+          strong.code w-button
+          ul
+            li Inherit the border-radius on the loader if any.
+            li.
+              Updated the look and feel of the button in the #[code :active] state,
+              and use #[code :focus-visible] state instead of #[code :focus].
+
+    li.patch
       strong.version v3.1.3
       ul
         li
@@ -481,6 +515,16 @@ main
     //-----------------------------------------------------
     //- Vue 2.
     //-----------------------------------------------------
+
+    li.minor
+      strong.version v1.66.0
+      ul
+        li
+          strong.code w-tabs
+          ul
+            li Added a #[code keep-in-dom] option to keep tabs in the DOM (Useful for iframes which must not reload).
+            li Added a #[code keep-alive] option to keep tabs alive (by default, as before) or not (when set to false).
+            li Introduced an internal unique IDs system to more accurately recognize tabs after tab injection or replacement.
 
     li.patch
       strong.version v1.65.1
