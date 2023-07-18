@@ -1,130 +1,69 @@
 <template lang="pug">
 w-app
-  .test.ma12.pa12.bd1.bdrs2.blue-light5--bg
-    h1.mt0 Testing playground
-    w-form(v-model="formValid" validation-color="pink")
-      w-slider(label-color="grey-dark1" :validators="[v => !!v || 'required']" label-left="hey<br>yo" label-right="right")
-      w-slider(label-color="grey-dark1" label-on-left :validators="[v => !!v || 'required']" label-left="hey<br>yo" label-right="right")
-      w-slider(label-color="grey-dark1" label-on-right :validators="[v => !!v || 'required']" label-left="hey<br>yo" label-right="right")
-      br
-      w-radios(:items="[{ label: 'item 1<br>hey' }, { label: 'item 2' }]" label-color="grey-dark1" :validators="[v => !!v || 'required']")
-      w-radios(:items="[{ label: 'item 1<br>hey' }, { label: 'item 2' }]" label-color="grey-dark1" label-on-left :validators="[v => !!v || 'required']")
-      w-radios(:items="[{ label: 'item 1<br>hey' }, { label: 'item 2' }]" label-color="grey-dark1" label-on-right :validators="[v => !!v || 'required']")
-      br
-      w-radio(label-color="grey-dark1" :validators="[v => !!v || 'required']") Label<br>yo
-      w-radio(label-color="grey-dark1" label-on-left :validators="[v => !!v || 'required']") Label<br>yo
-      w-radio(label-color="grey-dark1" label-on-right :validators="[v => !!v || 'required']") Label<br>yo
-      w-checkbox(label-color="grey-dark1" :validators="[v => !!v || 'required']") Label
-      w-checkbox(label-color="grey-dark1" label-on-left :validators="[v => !!v || 'required']") Label<br>yo
-      w-checkbox(label-color="grey-dark1" label-on-right :validators="[v => !!v || 'required']") Label<br>yo
-      w-switch(label-color="grey-dark1" :validators="[v => !!v || 'required']") Label<br>yo
-      w-switch(label-color="grey-dark1" label-on-left :validators="[v => !!v || 'required']") Label<br>yo
-      w-switch(label-color="grey-dark1" label-on-right :validators="[v => !!v || 'required']") Label<br>yo
-      w-input(label-color="grey-dark1" :validators="[v => !!v || 'required']") Label<br>yo
-      w-input(label-color="grey-dark1" label-position="left" :validators="[v => !!v || 'required']") Label<br>yo
-      w-input(label-color="grey-dark1" label-position="right" :validators="[v => !!v || 'required']") Label<br>yo
-      w-input(label-color="grey-dark1" outline label-position="left" :validators="[v => !!v || 'required']") Label<br>yo
-      w-input(label-color="grey-dark1" outline :validators="[v => !!v || 'required']") Label<br>yo
-      w-textarea(label-color="grey-dark1" :validators="[v => !!v || 'required']" label="Label<br>yo")
-      w-textarea(label-color="grey-dark1" label-position="left" :validators="[v => !!v || 'required']" label="Label<br>yo")
-      w-textarea(label-color="grey-dark1" label-position="right" :validators="[v => !!v || 'required']" label="Label<br>yo")
-      w-textarea(label-color="grey-dark1" outline label-position="left" :validators="[v => !!v || 'required']" label="Label<br>yo")
-      w-textarea(label-color="grey-dark1" outline :validators="[v => !!v || 'required']" label="Label<br>yo")
-      w-select(:items="[{ label: 'item 1' }]" label-color="grey-dark1" :validators="[v => !!v || 'required']") Label<br>yo
-      w-select(:items="[{ label: 'item 1' }]" label-color="grey-dark1" label-position="left" :validators="[v => !!v || 'required']") Label<br>yo
-      w-select(:items="[{ label: 'item 1' }]" label-color="grey-dark1" label-position="right" :validators="[v => !!v || 'required']") Label<br>yo
-      w-select(:items="[{ label: 'item 1' }]" label-color="grey-dark1" outline label-position="left" :validators="[v => !!v || 'required']") Label<br>yo
-      w-select(:items="[{ label: 'item 1' }]" label-color="grey-dark1" outline :validators="[v => !!v || 'required']") Label<br>yo
-      w-button(type="submit") ok
-
-    w-menu(overlay arrow)
-      template(#activator="{ on }")
-        w-button(v-on="on") test tooltip in menu
-      p content
-      w-tooltip
-        template(#activator="{ on }")
-          span(v-on="on") I have a tooltip
-        | I'm a tooltip.
-
-    w-accordion.white--bg(:items="3" :duration="2000")
-      template(#item-title) item title
-      template(#item-content="{ item, index }")
-        | The item {{ index }}
-      template(#item-content.2="{ item }")
-        .ma4
-          w-tooltip
-            template(#activator="{ on }")
-              span(v-on="on") I have a tooltip
-            | I'm a tooltip.
-
-    w-drawer(
-      push-content
-      v-model="openDrawer"
-      @before-close="log('before-close')"
-      @close="log('close')")
-      template(#pushable)
-        p testing
-        p testing
-        p testing
-        w-button(@click="openDrawer = !openDrawer") open
-        p testing
-        p testing
-        p testing
-      w-tooltip
-        template(#activator="{ on }")
-          w-button(v-on="on").
-            Show tooltip
-        | tooltip.
-
-    w-drawer(
-      :model-value="true"
-      @before-close="log('before-close')"
-      @close="log('close')")
-      w-tooltip
-        template(#activator="{ on }")
-          w-button(v-on="on").
-            Show tooltip
-        | tooltip.
-
-    w-overlay(
-      v-model="showOverlay"
-      @before-close="log('before-close')"
-      @close="log('close')")
-      w-tooltip
-        template(#activator="{ on }")
-          w-button(v-on="on").
-            Show tooltip
-        | tooltip.
-
-    .select-in-dialog
-      w-button(@click="showDialog = true") open
-      w-dialog(v-model="showDialog"
-        @before-close="log('before-close')"
-        @close="log('close')")
-        w-tooltip
-          template(#activator="{ on }")
-            w-button(v-on="on").
-              Show tooltip
-          | tooltip.
-        w-select.mt6(:items="items" label="Select")
-
-    w-select.mt6(:items="items" label="Select" multiple)
+  .test.ma12.pa12.bd1.bdrs2
+    h1.mt0.mb8 Testing playground
+    p tabs count: {{ tabs.length }}, currTab: {{ currTab }}
+    w-button.ma2(@click="deleteTab") Delete tab
+    w-button.ma2(@click="addTab(1)") inject tab #2
+    w-button.ma2(@click="addTab()") Append tab
+    w-button.ma2(@click="restoreTab()") Restore last deleted tab
+    w-button.ma2(@click="replaceTab(1)") Replace tab #1
+    w-tabs(v-model="currTab" :items="tabs" keep-in-dom)
+      template(#item-content="{ item }")
+        pre {{ item }}
+        w-checkbox(v-if="item.id2 === 3")
+        iframe(
+          v-if="item.id2 === 2"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/gzmA1kkk660"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen)
+    //- w-tabs.mt12(v-model="currTab" :items="tabs" keep-in-dom)
+      template(#item-content="{ item }")
+        pre {{}}
+        iframe(
+          v-if="item.id === 2"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/gzmA1kkk660"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen)
+    w-divider.my6
+    p Open tabs
+    pre {{ tabs }}
+    w-divider.my6
+    p Deleted tabs
+    pre {{ deletedTabs }}
 </template>
 
 <script>
 export default {
   data: () => ({
-    formValid: null,
-    showDialog: true,
-    showOverlay: true,
-    openDrawer: true,
-    items: [{ value: 'value 1', label: 'Item 1' }, { value: 'value 2', label: 'Item 2' }]
+    currTab: 2,
+    tabs: [
+      { id2: 1, title: 'Tab 1', content: 'Tab 1 content.' },
+      { id2: 2, title: 'Tab 2', content: 'Tab 2 content.' },
+      { id2: 3, title: 'Tab 3 has a long title', content: 'Tab 3 content.' }
+    ],
+    deletedTabs: []
   }),
 
   methods: {
-    log (...params) {console.log(...params)}
-  },
-  mounted () {
+    deleteTab () {
+      this.deletedTabs.push(...this.tabs.splice(this.currTab, 1))
+    },
+    restoreTab () {
+      this.tabs.push(this.deletedTabs[0])
+    },
+    addTab (index) {
+      this.tabs.splice(index ?? this.tabs.length, 0, { title: `injected tab ${this.tabs.length}`, content: `injected Tab ${this.tabs.length} content.` })
+    },
+    replaceTab (index) {
+      this.tabs.splice(index, 1, { title: `Replaced tab ${this.tabs.length}`, content: `Replaced Tab ${this.tabs.length} content.` })
+    }
   }
 }
 </script>
