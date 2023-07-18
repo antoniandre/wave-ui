@@ -28,28 +28,28 @@
       slot(name="tabs-bar-extra")
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
 
-  .w-tabs__content-wrap(v-if="tabs.length")
-    transition-group(v-if="keepInDom" :name="transitionName")
-      tab-content(
-        v-for="(tab, i) in tabs"
-        :key="tab._uid"
-        :item="tab"
-        v-show="tab._uid === activeTab._uid"
-        :class="contentClass")
-        slot(
-          v-if="$scopedSlots[`item-content.${tab._index + 1}`]"
-          :name="`item-content.${tab._index + 1}`"
-          :item="getOriginalItem(tab)"
-          :index="tab._index + 1"
-          :active="tab._index === activeTab._index")
-        slot(
-          v-else
-          name="item-content"
-          :item="getOriginalItem(tab)"
-          :index="tab._index + 1"
-          :active="tab._index === activeTab._index")
-          div(v-if="tab[itemContentKey]" v-html="tab[itemContentKey]")
-    transition(v-else :name="transitionName" :mode="transitionMode")
+  transition-group.w-tabs__content-wrap(v-if="keepInDom" :name="transitionName" tag="div")
+    tab-content(
+      v-for="(tab, i) in tabs"
+      :key="tab._uid"
+      :item="tab"
+      v-show="tab._uid === activeTab._uid"
+      :class="contentClass")
+      slot(
+        v-if="$scopedSlots[`item-content.${tab._index + 1}`]"
+        :name="`item-content.${tab._index + 1}`"
+        :item="getOriginalItem(tab)"
+        :index="tab._index + 1"
+        :active="tab._index === activeTab._index")
+      slot(
+        v-else
+        name="item-content"
+        :item="getOriginalItem(tab)"
+        :index="tab._index + 1"
+        :active="tab._index === activeTab._index")
+        div(v-if="tab[itemContentKey]" v-html="tab[itemContentKey]")
+  .w-tabs__content-wrap(v-else)
+    transition(:name="transitionName" :mode="transitionMode")
       keep-alive(:exclude="keepAlive ? '' : 'tab-content'")
         //- Keep-alive only works with components, not with DOM nodes.
         tab-content(:key="activeTabUid" :item="activeTab" :class="contentClass")
@@ -268,16 +268,19 @@ export default {
       if (typeof index === 'string') index = ~~index
       else if (isNaN(index) || index < 0) index = 0
 
-      this.openTab(this.tabs[index]._uid)
+      // Only open the tab if it is found.
+      if (this.tabs[index]?._uid) {
+        this.openTab(this.tabs[index]?._uid)
 
-      // Scroll the new active tab item title into view if needed.
-      this.$nextTick(() => {
-        const ref = this.$refs['tabs-bar']
-        this.activeTabEl = ref && ref.querySelector(`.w-tabs__bar-item:nth-child(${index + 1})`)
-        if (this.activeTabEl) {
-          this.activeTabEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
-        }
-      })
+        // Scroll the new active tab item title into view if needed.
+        this.$nextTick(() => {
+          const ref = this.$refs['tabs-bar']
+          this.activeTabEl = ref && ref.querySelector(`.w-tabs__bar-item:nth-child(${index + 1})`)
+          if (this.activeTabEl) {
+            this.activeTabEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
+          }
+        })
+      }
     },
 
     // Return the original item (so there is no `_index`, etc.).
@@ -291,7 +294,7 @@ export default {
     const items = typeof this.items === 'number' ? Array(this.items).fill().map(Object) : this.items
     items.forEach(this.addTab)
 
-    this.updateActiveTab(this.value)
+    if (this.value ?? false) this.updateActiveTab(this.value)
 
     this.$nextTick(() => {
       this.updateSlider()
