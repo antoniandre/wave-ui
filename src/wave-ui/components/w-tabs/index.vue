@@ -2,55 +2,78 @@
 .w-tabs(:class="tabsClasses")
   .w-tabs__bar(ref="tabs-bar" :class="tabsBarClasses")
     .w-tabs__bar-item(
-      v-for="(item, i) in tabsItems"
+      v-for="(tab, i) in tabs"
       :key="i"
-      :class="barItemClasses(item)"
-      @click="!item._disabled && openTab(item)"
-      @focus="$emit('focus', getOriginalItem(item))"
-      :tabindex="!item._disabled && 0"
-      @keypress.enter="!item._disabled && openTab(item)"
-      :aria-selected="item._index === activeTabIndex ? 'true' : 'false'"
+      :class="barItemClasses(tab)"
+      @click="!tab._disabled && tab._uid !== activeTabUid && openTab(tab._uid)"
+      @focus="$emit('focus', getOriginalItem(tab))"
+      :tabindex="!tab._disabled && 0"
+      @keypress.enter="!tab._disabled && openTab(tab._uid)"
+      :aria-selected="tab._uid === activeTabUid ? 'true' : 'false'"
       role="tab")
         slot(
-          v-if="$scopedSlots[`item-title.${item.id || i + 1}`]"
-          :name="`item-title.${item.id || i + 1}`"
-          :item="getOriginalItem(item)"
+          v-if="$scopedSlots[`item-title.${tab.id || i + 1}`]"
+          :name="`item-title.${tab.id || i + 1}`"
+          :item="getOriginalItem(tab)"
           :index="i + 1"
-          :active="item._index === activeTabIndex")
+          :active="tab._uid === activeTabUid")
         slot(
           v-else
           name="item-title"
-          :item="getOriginalItem(item)"
+          :item="getOriginalItem(tab)"
           :index="i + 1"
-          :active="item._index === activeTabIndex")
-          div(v-html="item[itemTitleKey]")
+          :active="tab._uid === activeTabUid")
+          div(v-html="tab[itemTitleKey]")
     .w-tabs__bar-extra(v-if="$scopedSlots['tabs-bar-extra']")
       slot(name="tabs-bar-extra")
     .w-tabs__slider(v-if="!noSlider && !card" :class="sliderColor" :style="sliderStyles")
 
-  .w-tabs__content-wrap(v-if="tabsItems.length")
-    transition(:name="transitionName" :mode="transitionMode")
-      keep-alive
+  .w-tabs__content-wrap(v-if="tabs.length")
+    transition-group(v-if="keepInDom" :name="transitionName")
+      tab-content(
+        v-for="(tab, i) in tabs"
+        :key="tab._uid"
+        :item="tab"
+        v-show="tab._uid === activeTab._uid"
+        :class="contentClass")
+        slot(
+          v-if="$scopedSlots[`item-content.${tab._index + 1}`]"
+          :name="`item-content.${tab._index + 1}`"
+          :item="getOriginalItem(tab)"
+          :index="tab._index + 1"
+          :active="tab._index === activeTab._index")
+        slot(
+          v-else
+          name="item-content"
+          :item="getOriginalItem(tab)"
+          :index="tab._index + 1"
+          :active="tab._index === activeTab._index")
+          div(v-if="tab[itemContentKey]" v-html="tab[itemContentKey]")
+    transition(v-else :name="transitionName" :mode="transitionMode")
+      keep-alive(:exclude="keepAlive ? '' : 'tab-content'")
         //- Keep-alive only works with components, not with DOM nodes.
-        tab-content(:class="contentClass" :key="activeTab._index")
-          slot(
-            v-if="$scopedSlots[`item-content.${activeTab.id || activeTab._index + 1}`]"
-            :name="`item-content.${activeTab.id || activeTab._index + 1}`"
-            :item="getOriginalItem(activeTab)"
-            :index="activeTab._index + 1"
-            :active="activeTab._index === activeTabIndex")
-          slot(
-            v-else
-            name="item-content"
-            :item="getOriginalItem(activeTab)"
-            :index="activeTab._index + 1"
-            :active="activeTab._index === activeTabIndex")
-            div(v-html="activeTab[itemContentKey]")
+        tab-content(:key="activeTabUid" :item="activeTab" :class="contentClass")
+          template(#default="{ item }")
+            template(v-if="item")
+              slot(
+                v-if="$scopedSlots[`item-content.${item._index + 1}`]"
+                :name="`item-content.${item._index + 1}`"
+                :item="getOriginalItem(item)"
+                :index="item._index + 1"
+                :active="item._uid === activeTabUid")
+              slot(
+                v-else
+                name="item-content"
+                :item="getOriginalItem(item)"
+                :index="item._index + 1"
+                :active="item._uid === activeTabUid")
+                div(v-if="item[itemContentKey]" v-html="item[itemContentKey]")
 </template>
 
 <script>
-import Vue from 'vue'
 import TabContent from './tab-content.vue'
+
+let uid = 0
 
 export default {
   name: 'w-tabs',
@@ -60,6 +83,7 @@ export default {
     color: { type: String },
     bgColor: { type: String },
     items: { type: [Array, Number] },
+    itemIdKey: { type: String, default: 'id' },
     itemTitleKey: { type: String, default: 'title' },
     itemContentKey: { type: String, default: 'content' },
     titleClass: { type: String },
@@ -72,7 +96,9 @@ export default {
     fillBar: { type: Boolean },
     center: { type: Boolean },
     right: { type: Boolean },
-    card: { type: Boolean }
+    card: { type: Boolean },
+    keepAlive: { type: Boolean, default: true },
+    keepInDom: { type: Boolean, default: false }
   },
 
   components: { TabContent },
@@ -80,7 +106,9 @@ export default {
   emits: ['input', 'update:modelValue', 'focus'],
 
   data: () => ({
+    tabs: [],
     activeTabEl: null,
+    activeTabUid: null,
     activeTabIndex: 0,
     prevTabIndex: -1, // To detect transition direction.
     slider: {
@@ -104,19 +132,13 @@ export default {
       return this.activeTab._index < this.prevTabIndex ? 'right' : 'left'
     },
 
-    tabsItems () {
-      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items
-
-      // eslint-disable-next-line new-cap
-      return items.map((item, _index) => new Vue.observable({
-        ...item,
-        _index,
-        _disabled: !!item.disabled
-      }))
+    activeTab () {
+      return this.tabsByUid[this.activeTabUid] || this.tabs[0] || {}
     },
 
-    activeTab () {
-      return this.tabsItems[this.activeTabIndex] || this.tabsItems[0] || {}
+    // An object indexing the tabs by their uid.
+    tabsByUid () {
+      return this.tabs.reduce((obj, tab) => ((obj[tab._uid] = tab) && obj), {})
     },
 
     tabsClasses () {
@@ -145,6 +167,54 @@ export default {
   },
 
   methods: {
+    // Adding a tab in the list.
+    addTab (item) {
+      // If there is no unique ID provided, inject one in each tab.
+      // This will cause a single other update from watching the tabs items and stop there.
+      if (!(item[this.itemIdKey] ?? item._uid ?? false)) item._uid = +`${this._uid}${++uid}`
+
+      this.tabs.push({
+        _uid: item[this.itemIdKey] ?? item._uid,
+        _index: this.tabs.length,
+        ...item,
+        _disabled: !!item.disabled
+      })
+    },
+
+    refreshTabs () {
+      let items = this.items
+      if (typeof items === 'number') items = Array(items).fill().map((_, i) => this.tabs[i] || {})
+
+      this.tabs = items.map((item, _index) => {
+        // If there is no unique ID provided, inject one in each tab.
+        // This will cause a single other update from watching the tabs items and stop there.
+        if (!(item[this.itemIdKey] ?? item._uid ?? false)) item._uid = +`${this._uid}${++uid}`
+
+        return {
+          ...item,
+          _uid: item[this.itemIdKey] ?? item._uid,
+          _index,
+          _disabled: !!item.disabled
+        }
+      })
+    },
+
+    reopenTheActiveTab () {
+      // If there is only 1 tab left open it.
+      if (this.tabs.length === 1) return this.openTab(this.tabs[0]._uid)
+
+      // First try to find the same uid in remaining tabs.
+      let uid = this.tabsByUid[this.activeTabUid]?._uid
+
+      // If not found, try to open the tab with the same index.
+      if (!uid) uid = this.tabs[this.activeTabIndex]?._uid
+
+      // If not found (no  tab to the right), try to open the next tab to the left.
+      if (!uid) uid = this.tabs[Math.max(this.activeTabIndex - 1, this.tabs.length - 1)]?._uid
+
+      if (uid) this.openTab(uid)
+    },
+
     onResize () {
       this.updateSlider(false)
     },
@@ -161,11 +231,14 @@ export default {
       }
     },
 
-    openTab (item) {
+    // Switching tabs.
+    openTab (uid) {
       this.prevTabIndex = this.activeTabIndex // To resolve the transition direction.
-      this.activeTabIndex = item._index
-      this.$emit('update:modelValue', item._index)
-      this.$emit('input', item._index)
+      const tab = this.tabsByUid[uid]
+      this.activeTabIndex = tab._index
+      this.activeTabUid = tab._uid
+      this.$emit('update:modelValue', tab._index)
+      this.$emit('input', tab._index)
 
       if (!this.noSlider) this.$nextTick(this.updateSlider)
     },
@@ -173,7 +246,8 @@ export default {
     // Updates the slider position.
     updateSlider (domLookup = true) {
       if (domLookup) {
-        this.activeTabEl = this.$refs['tabs-bar'].querySelector('.w-tabs__bar-item--active')
+        const ref = this.$refs['tabs-bar']
+        this.activeTabEl = ref && ref.querySelector('.w-tabs__bar-item--active')
       }
 
       if (!this.fillBar && this.activeTabEl) {
@@ -185,15 +259,16 @@ export default {
         this.slider.width = `${width}px`
       }
       else {
-        this.slider.left = `${this.activeTab._index * 100 / this.tabsItems.length}%`
-        this.slider.width = `${100 / this.tabsItems.length}%`
+        this.slider.left = `${this.activeTab._index * 100 / this.tabs.length}%`
+        this.slider.width = `${100 / this.tabs.length}%`
       }
     },
 
     updateActiveTab (index) {
       if (typeof index === 'string') index = ~~index
       else if (isNaN(index) || index < 0) index = 0
-      this.activeTabIndex = index
+
+      this.openTab(this.tabs[index]._uid)
 
       // Scroll the new active tab item title into view if needed.
       this.$nextTick(() => {
@@ -207,11 +282,15 @@ export default {
 
     // Return the original item (so there is no `_index`, etc.).
     getOriginalItem (item) {
-      return this.items[item._index]
+      return this.items[item._index] || {}
     }
   },
 
   beforeMount () {
+    this.tabs = [] // Reset for hot-reloading.
+    const items = typeof this.items === 'number' ? Array(this.items).fill().map(Object) : this.items
+    items.forEach(this.addTab)
+
     this.updateActiveTab(this.value)
 
     this.$nextTick(() => {
@@ -229,13 +308,17 @@ export default {
 
   watch: {
     value (index) {
-      this.updateActiveTab(index)
+      if (index !== this.activeTabIndex) this.updateActiveTab(index)
     },
-    items () {
-      // When deleting a tab, activate the previous one.
-      while (this.activeTabIndex > 0 && !this.tabsItems[this.activeTabIndex]) this.activeTabIndex--
+    items: {
+      handler () {
+        this.refreshTabs()
 
-      if (!this.noSlider) this.$nextTick(this.updateSlider)
+        if (this.tabs.length) this.reopenTheActiveTab()
+
+        if (!this.noSlider) this.$nextTick(this.updateSlider)
+      },
+      deep: true
     },
     fillBar () {
       if (!this.noSlider) this.$nextTick(this.updateSlider)
@@ -374,8 +457,10 @@ export default {
 .w-tabs-slide-left-leave-active,
 .w-tabs-slide-right-leave-active {
   position: absolute;
+  top: 0;
   left: 0;
   right: 0;
+  overflow: hidden;
 }
 
 .w-tabs-slide-left-enter-active {animation: w-tabs-slide-left-enter $transition-duration + 0.15s;}
