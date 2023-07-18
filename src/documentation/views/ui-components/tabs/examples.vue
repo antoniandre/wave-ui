@@ -508,26 +508,26 @@ div
 
   title-link(h2) Adding a tabs bar extra element
   p.
-    You can add extra elements at the right of the tabs title bar via the #[code tabs-bar-extra] slot.
+    You can add extra elements at the right of the tabs title bar via the #[code tabs-bar-extra] slot.#[br]
+    Once the tabs are updated (in the next Vue tick), you can open the newly added tab.
   example
-    w-tabs(ref="tabs" :items="tabs7.tabsCount" v-model="tabs7.currentTab")
+    w-tabs(:items="tabs7.tabsCount" v-model="tabs7.currentTab")
       template(#item-title="{ index }") Item title {{ index }}
       template(#item-content="{ index }") Item content {{ index }}
       template(#tabs-bar-extra)
         w-button.bdrsr.mr2(
           icon="wi-plus"
-          @click="tabs7.tabsCount++;tabs7.currentTab = tabs7.tabsCount - 1")
+          @click="tabs7.tabsCount++;$nextTick(() => tabs7.currentTab = tabs7.tabsCount - 1)")
     template(#pug).
-      w-tabs(ref="tabs" :items="tabs.tabsCount" v-model="tabs.currentTab")
+      w-tabs(:items="tabs.tabsCount" v-model="tabs.currentTab")
         template(#item-title="{ index }") Item title {{ '\{\{ index \}\}' }}
         template(#item-content="{ index }") Item content {{ '\{\{ index \}\}' }}
         template(#tabs-bar-extra)
           w-button.bdrsr.mr2(
             icon="wi-plus"
-            @click="tabs.tabsCount++;tabs.currentTab = tabs.tabsCount - 1")
+            @click="tabs.tabsCount++;$nextTick(() => tabs.currentTab = tabs.tabsCount - 1)")
     template(#html).
       &lt;w-tabs
-        ref="tabs"
         :items="tabs.tabsCount"
         v-model="tabs.currentTab"&gt;
         &lt;template #item-title="{ index }"&gt;
@@ -541,7 +541,7 @@ div
         &lt;template #tabs-bar-extra&gt;
           &lt;w-button
             icon="wi-plus"
-            @click="tabs.tabsCount++;tabs.currentTab = tabs.tabsCount - 1"
+            @click="tabs.tabsCount++;$nextTick(() => tabs.currentTab = tabs.tabsCount - 1)"
             class="bdrsr mr2"&gt;
           &lt;/w-button&gt;
         &lt;/template&gt;
