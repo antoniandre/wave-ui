@@ -7,6 +7,12 @@
 // Keep-alive only works with components, not with DOM nodes.
 
 export default {
-  props: { item: Object }
+  name: 'tab-content', // Keep-alive include/exclude mechanism is component-name-based.
+
+  props: { item: Object },
+
+  mounted () {
+    console.log('mounted!', this.item._uid)
+  }
 }
 </script>

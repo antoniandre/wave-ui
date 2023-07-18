@@ -49,8 +49,8 @@
           :index="tab._index + 1"
           :active="tab._index === activeTab._index")
           div(v-if="tab[itemContentKey]" v-html="tab[itemContentKey]")
-    transition(v-else-if="keepAlive" :name="transitionName" :mode="transitionMode")
-      keep-alive
+    transition(v-else :name="transitionName" :mode="transitionMode")
+      keep-alive(:exclude="keepAlive ? '' : 'tab-content'")
         //- Keep-alive only works with components, not with DOM nodes.
         tab-content(:key="activeTabUid" :item="activeTab" :class="contentClass")
           template(#default="{ item }")
