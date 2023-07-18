@@ -30,7 +30,7 @@ main
           ul
             li Added a #[code keep-in-dom] option to keep tabs in the DOM (Useful for iframes which must not reload).
             li Added a #[code keep-alive] option to keep tabs alive (by default, as before) or not (when set to false).
-            li Introduced an internal unique IDs system to more accurately recognize a kept-alive tab in some specific cases.
+            li Introduced an internal unique IDs system to more accurately recognize tabs after tab injection or replacement.
 
     li.minor
       strong.version v3.3.0
