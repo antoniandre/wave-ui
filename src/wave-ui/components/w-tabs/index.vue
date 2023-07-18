@@ -173,8 +173,12 @@ export default {
   methods: {
     // Adding a tab in the list.
     addTab (item) {
+      // If there is no unique ID provided, inject one in each tab.
+      // This will cause a single other update from watching the tabs items and stop there.
+      if (!(item[this.itemIdKey] ?? item._uid ?? false)) item._uid = +`${this._.uid}${++uid}`
+
       this.tabs.push({
-        _uid: item[this.itemIdKey] ?? item._uid ?? +`${this._.uid}${++uid}${new Date().getTime()}`,
+        _uid: item[this.itemIdKey] ?? item._uid,
         _index: this.tabs.length,
         ...item,
         _disabled: !!item.disabled
@@ -186,9 +190,13 @@ export default {
       if (typeof items === 'number') items = Array(items).fill().map((_, i) => this.tabs[i] || {})
 
       this.tabs = items.map((item, _index) => {
+        // If there is no unique ID provided, inject one in each tab.
+        // This will cause a single other update from watching the tabs items and stop there.
+        if (!(item[this.itemIdKey] ?? item._uid ?? false)) item._uid = +`${this._.uid}${++uid}`
+
         return {
           ...item,
-          _uid: item[this.itemIdKey] ?? item._uid ?? +`${this._.uid}${++uid}${new Date().getTime()}`,
+          _uid: item[this.itemIdKey] ?? item._uid,
           _index,
           _disabled: !!item.disabled
         }
