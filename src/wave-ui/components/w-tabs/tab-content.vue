@@ -9,10 +9,6 @@
 export default {
   name: 'tab-content', // Keep-alive include/exclude mechanism is component-name-based.
 
-  props: { item: Object },
-
-  mounted () {
-    console.log('mounted!', this.item._uid)
-  }
+  props: { item: Object }
 }
 </script>
