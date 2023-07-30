@@ -23,6 +23,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v3.4.3
+      ul
+        li
+          strong.code w-card
+          ul
+            li Apply the card border-radius to the card image (if any) if there is no title.
+
+    li.minor
       strong.version v3.4.0
       ul
         li
