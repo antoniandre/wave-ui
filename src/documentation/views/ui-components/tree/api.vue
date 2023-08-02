@@ -47,7 +47,7 @@ const slots = {
     params: {
       item: 'The current tree item object.',
       depth: 'An integer representing the item\'s depth in the tree. Starts at 0 for the root.',
-      open: 'A boolean representing the open state of the tree item.',
+      open: 'When applicable, a boolean representing the open state of the tree branch item.',
       path: 'An array containing the item\'s ancestors path, from the root to the leaf, including itself at the last position.<br>All items of the array are the original tree items as they have been provided to the <strong class="code">w-tree</strong> component.'
     }
   }
@@ -59,7 +59,7 @@ const events = {
     params: {
       item: 'The current tree item object.',
       depth: 'An integer representing the item\'s depth in the tree. Starts at 0 for the root.',
-      open: 'A boolean representing the open state of the tree item.',
+      open: 'When applicable, a boolean representing the open state of the tree branch item.',
       path: 'An array containing the item\'s ancestors path, from the root to the leaf, including itself at the last position.<br>All items of the array are the original tree items as they have been provided to the <strong class="code">w-tree</strong> component.'
     }
   },
@@ -68,7 +68,7 @@ const events = {
     params: {
       item: 'The current tree item object.',
       depth: 'An integer representing the item\'s depth in the tree. Starts at 0 for the root.',
-      open: 'A boolean representing the open state of the tree item.',
+      open: 'When applicable, a boolean representing the open state of the tree branch item.',
       path: 'An array containing the item\'s ancestors path, from the root to the leaf, including itself at the last position.<br>All items of the array are the original tree items as they have been provided to the <strong class="code">w-tree</strong> component.'
     }
   },
@@ -77,7 +77,7 @@ const events = {
     params: {
       item: 'The current tree item object.',
       depth: 'An integer representing the item\'s depth in the tree. Starts at 0 for the root.',
-      open: 'A boolean representing the open state of the tree item.',
+      open: 'When applicable, a boolean representing the open state of the tree branch item.',
       path: 'An array containing the item\'s ancestors path, from the root to the leaf, including itself at the last position.<br>All items of the array are the original tree items as they have been provided to the <strong class="code">w-tree</strong> component.',
       e: 'The associated native click event.'
     }
@@ -87,7 +87,7 @@ const events = {
     params: {
       item: 'The current tree item object.',
       depth: 'An integer representing the item\'s depth in the tree. Starts at 0 for the root.',
-      open: 'A boolean representing the open state of the tree item.',
+      open: 'When applicable, a boolean representing the open state of the tree branch item.',
       path: 'An array containing the item\'s ancestors path, from the root to the leaf, including itself at the last position.<br>All items of the array are the original tree items as they have been provided to the <strong class="code">w-tree</strong> component.'
     }
   },
@@ -96,7 +96,7 @@ const events = {
     params: {
       item: 'The current tree item object.',
       depth: 'An integer representing the item\'s depth in the tree. Starts at 0 for the root.',
-      open: 'A boolean representing the open state of the tree item.',
+      open: 'When applicable, a boolean representing the open state of the tree branch item.',
       path: 'An array containing the item\'s ancestors path, from the root to the leaf, including itself at the last position.<br>All items of the array are the original tree items as they have been provided to the <strong class="code">w-tree</strong> component.'
     }
   },
@@ -105,7 +105,8 @@ const events = {
     params: {
       item: 'The current tree item object.',
       depth: 'An integer representing the item\'s depth in the tree. Starts at 0 for the root.',
-      open: 'A boolean representing the open state of the tree item.',
+      open: 'When applicable, a boolean representing the open state of the tree branch item.',
+      selected: 'A boolean representing the selected state of the tree item.',
       path: 'An array containing the item\'s ancestors path, from the root to the leaf, including itself at the last position.<br>All items of the array are the original tree items as they have been provided to the <strong class="code">w-tree</strong> component.'
     }
   },
@@ -114,7 +115,7 @@ const events = {
     params: {
       item: 'The current tree item object.',
       depth: 'An integer representing the item\'s depth in the tree. Starts at 0 for the root.',
-      open: 'A boolean representing the open state of the tree item.',
+      open: 'When applicable, a boolean representing the open state of the tree branch item.',
       path: 'An array containing the item\'s ancestors path, from the root to the leaf, including itself at the last position.<br>All items of the array are the original tree items as they have been provided to the <strong class="code">w-tree</strong> component.'
     }
   }
