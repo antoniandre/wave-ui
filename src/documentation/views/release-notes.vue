@@ -29,6 +29,10 @@ main
           strong.code w-card
           ul
             li Apply the card border-radius to the card image (if any) if there is no title.
+        li
+          strong.code w-tree
+          ul
+            li Handle selectable items, and maintain their selected state after clicking elsewhere (previously it was only acting like a focusable element).
 
     li.minor
       strong.version v3.4.0
