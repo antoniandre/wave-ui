@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: selectionString, disabled: isDisabled, readonly: isReadonly }"
+  v-bind="formRegister && { validators, inputValue: selectionString, disabled: isDisabled, readonly: isReadonly, isFocused }"
   v-model:valid="valid"
   @reset="onReset"
   :wrap="hasLabel && labelPosition !== 'inside'"
@@ -336,6 +336,13 @@ export default {
       if ((this.menuProps || {}).hideOnMenuClick === false) return
 
       this.showMenu = false
+
+      // Swap the focus value to trigger re-validation when the menu closes with a "blur" type validation
+      this.$nextTick(() => {
+        this.isFocused = true
+        this.$nextTick(() => this.isFocused = false)
+      });
+
       // Set the focus back on the main w-select input.
       setTimeout(() => this.$refs['selection-input'].focus(), 50)
     }
