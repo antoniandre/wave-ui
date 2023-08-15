@@ -47,7 +47,7 @@
     "build-bundle": "BUNDLE=true vite build && mv ./dist/style.css ./dist/wave-ui.css",
     "serve": "vite preview --base /wave-ui/",
     "lint": "vite lint",
-    "publish": "npm run build && npm run build-bundle && git add && git commit -m 'Publish documentation on Github.' && git push && git push tags && npm publish --tag latest"
+    "publish": "npm run build && npm run build-bundle && git add . && git commit -m 'Publish documentation on Github.' && git push && git push tags && npm publish --tag latest"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",
