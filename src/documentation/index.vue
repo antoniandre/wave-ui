@@ -12,46 +12,46 @@ w-app
       transition(name="fade-page" mode="out-in")
         router-view.grow(:class="`main--${$route.name}`")
 
-    w-transition-bounce(v-if="goToTop" appear)
-      w-button.go-top.mb8.mr2(
-        icon="wi-chevron-up"
-        fixed
-        bottom
-        right
-        xl
-        :bg-color="$store.state.darkMode ? 'grey-dark4' : 'grey-light5'"
-        color="base-color"
-        @click="scrollTop")
+      w-transition-bounce(v-if="goToTop" appear)
+        w-button.go-top.mb8.mr2(
+          icon="wi-chevron-up"
+          fixed
+          bottom
+          right
+          xl
+          :bg-color="$store.state.darkMode ? 'grey-dark4' : 'grey-light5'"
+          color="base-color"
+          @click="scrollTop")
 
-    footer.w-flex.justify-end.align-center.no-grow.wrap
-      small.grey-light3.text-upper
-        | Copyright &copy; {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
-      .spacer
-      router-link.pink-light1.mr4(to="/backers" @click.native="scrollTop")
-        w-icon.mr1 mdi mdi-heart-multiple-outline
-        | Backers
-      .caption
-        | Made with
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-vuejs
-          | Vue.js
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-language-css3
-          | CSS 3
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-language-html5
-          span.text-nowrap Html 5 &amp; Pug
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-sass
-          | SASS
-        w-tooltip(top align-right)
-          template(#activator="{ on }")
-            w-icon.ml1.heart(v-on="on" sm) mdi mdi-heart
-          | Love
+      footer.w-flex.justify-end.align-center.no-grow.wrap
+        small.grey-light3.text-upper
+          | Copyright &copy; {{ new Date().getFullYear() }} Antoni Andre, all rights reserved.
+        .spacer
+        router-link.pink-light1.mr4(to="/backers" @click.native="scrollTop")
+          w-icon.mr1 mdi mdi-heart-multiple-outline
+          | Backers
+        .caption
+          | Made with
+          w-tooltip(top)
+            template(#activator="{ on }")
+              w-icon.ml1(v-on="on" sm) mdi mdi-vuejs
+            | Vue.js
+          w-tooltip(top)
+            template(#activator="{ on }")
+              w-icon.ml1(v-on="on" sm) mdi mdi-language-css3
+            | CSS 3
+          w-tooltip(top)
+            template(#activator="{ on }")
+              w-icon.ml1(v-on="on" sm) mdi mdi-language-html5
+            span.text-nowrap Html 5 &amp; Pug
+          w-tooltip(top)
+            template(#activator="{ on }")
+              w-icon.ml1(v-on="on" sm) mdi mdi-sass
+            | SASS
+          w-tooltip(top align-right)
+            template(#activator="{ on }")
+              w-icon.ml1.heart(v-on="on" sm) mdi mdi-heart
+            | Love
 </template>
 
 <script>

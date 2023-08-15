@@ -346,8 +346,6 @@ export default {
   border: $border;
   overflow: hidden;
 
-  @include themeable;
-
   &--tile {border-radius: 0;}
   &--card {border: none;}
   &--no-border, &--shadow {border: none;}

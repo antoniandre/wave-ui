@@ -8,8 +8,8 @@
   v-bind="$attrs"
   :style="scrollableStyles")
   slot
-.w-scrollbar(ref="track" @mousedown="onTrackMouseDown" :class="scrollbarClasses")
-  .w-scrollbar__thumb(ref="thumb" :style="thumbStyles")
+  .w-scrollbar(ref="track" @mousedown="onTrackMouseDown" :class="scrollbarClasses")
+    .w-scrollbar__thumb(ref="thumb" :style="thumbStyles")
 </template>
 
 <script>

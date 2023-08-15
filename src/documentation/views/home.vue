@@ -1,5 +1,5 @@
 <template lang="pug">
-.home
+w-app.home
   .home__header
     .header__content
       h1
@@ -135,7 +135,7 @@
 
           .right-col.checklist
             .title4 See how easy it is to build a checklist.
-            ssh-pre(language="html-vue" :dark="$store.state.darkMode").
+            ssh-pre(language="html-vue").
               &lt;w-list
                 v-model="selection"
                 :items="items"
@@ -143,7 +143,7 @@
                 round-checkboxes
                 color="blue-light1"&gt;
               &lt;/w-list&gt;
-            ssh-pre(language="js" :dark="$store.state.darkMode").
+            ssh-pre(language="js").
               data: () => ({
                 items: [
                   { label: 'Item 1' },
@@ -169,7 +169,7 @@
           Practically Wave UI gives you more flexibility and more control over the CSS.
         p.my4.
           If you use Sass, you can even control Wave UI's CSS rules priorities by overriding the CSS base scope like so.
-        pre.ssh-pre.pa2(:class="{ 'ssh-pre--dark': $store.state.darkMode }")
+        pre.ssh-pre.pa2
           span.pink $css-scope
           span.blue-grey.mr1 :
           span.red-light2 '.w-app'
@@ -280,14 +280,7 @@ export default {
     }
   },
 
-  watch: {
-    '$waveui.preferredTheme' (theme) {
-      this.$store.commit('setDarkMode', theme === 'dark')
-    }
-  },
-
   mounted () {
-    this.$store.commit('setDarkMode', this.$waveui.preferredTheme === 'dark')
     setTimeout(this.initScrollAnimation, 200)
   },
 
@@ -481,7 +474,7 @@ export default {
     bottom: 0;
     width: 100%;
     height: 50%;
-    fill: rgb(var(--w-base-bg-color-rgb));
+    fill: #fff;
     pointer-events: none;
 
     path:nth-child(1) {opacity: 0.1;}
@@ -623,7 +616,7 @@ export default {
   // Section 1.
   // ------------------------------------------------------
   .section--1 {
-    background-color: rgb(var(--w-base-bg-color-rgb));
+    background-color: #fff;
     // margin-top: 5em;
     padding-bottom: 11em;
 
@@ -695,6 +688,7 @@ export default {
       top: 3%;
       left: 30%;
       min-width: 200px;
+      background-color: #fff;
     }
     .card--3 {
       width: 50%;
@@ -711,6 +705,7 @@ export default {
       width: 58%;
       right: 0;
       z-index: 2;
+      background-color: #fff;
     }
     .checklist {min-width: 240px;}
   }
@@ -737,7 +732,7 @@ export default {
 
     .section__content {overflow: hidden;}
 
-    > svg {top: 0;fill: rgb(var(--w-base-bg-color-rgb));}
+    > svg {top: 0;fill: #fff;}
 
     .w-button {
       font-family: "title font";
