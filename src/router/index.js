@@ -33,7 +33,7 @@ export const UIComponents = [
   { id: 'progress', label: 'Progress' },
   { id: 'radio', label: 'Radio', formElement: true },
   { id: 'rating', label: 'Rating' },
-  { id: 'scrollable', label: 'Scrollable', inProgress: true },
+  // { id: 'scrollable', label: 'Scrollable', inProgress: true },
   { id: 'select', label: 'Select', formElement: true },
   { id: 'slider', label: 'Slider' },
   { id: 'spinner', label: 'Spinner' },
