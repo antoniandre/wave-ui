@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 devDependencies:
   '@babel/core':
     specifier: ^7.21.3
@@ -18,7 +22,7 @@ devDependencies:
     version: 5.9.55
   '@vitejs/plugin-vue':
     specifier: ^3.2.0
-    version: 3.2.0(vite@3.2.5)(vue@3.2.47)
+    version: 3.2.0(vite@3.2.7)(vue@3.2.47)
   '@vue/compiler-sfc':
     specifier: 3.2.45
     version: 3.2.45
@@ -69,7 +73,7 @@ devDependencies:
     version: 17.0.0
   vite:
     specifier: ^3.2.5
-    version: 3.2.5(sass@1.60.0)
+    version: 3.2.7(sass@1.60.0)
   vite-svg-loader:
     specifier: ^4.0.0
     version: 4.0.0
@@ -557,14 +561,14 @@ packages:
     resolution: {integrity: sha512-dUxhiNzBLr6IqlZXz6e/rN2YQXlFgOei/Dxy+e3cyXTJ4txSUbGT2/fmnD6zd/75jDMeW5bDee+YXxlFKHoV0A==}
     dev: true
 
-  /@vitejs/plugin-vue@3.2.0(vite@3.2.5)(vue@3.2.47):
+  /@vitejs/plugin-vue@3.2.0(vite@3.2.7)(vue@3.2.47):
     resolution: {integrity: sha512-E0tnaL4fr+qkdCNxJ+Xd0yM31UwMkQje76fsDVBBUCoGOUPexu2VDUYHL8P4CwV+zMvWw6nlRw19OnRKmYAJpw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.5(sass@1.60.0)
+      vite: 3.2.7(sass@1.60.0)
       vue: 3.2.47
     dev: true
 
@@ -3205,8 +3209,8 @@ packages:
       svgo: 3.0.2
     dev: true
 
-  /vite@3.2.5(sass@1.60.0):
-    resolution: {integrity: sha512-4mVEpXpSOgrssFZAOmGIr85wPHKvaDAcXqxVxVRZhljkJOMZi1ibLibzjLHzJvcok8BMguLc7g1W6W/GqZbLdQ==}
+  /vite@3.2.7(sass@1.60.0):
+    resolution: {integrity: sha512-29pdXjk49xAP0QBr0xXqu2s5jiQIXNvE/xwd0vUizYT2Hzqe4BksNNoWllFVXJf4eLZ+UlVQmXfB4lWrc+t18g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
