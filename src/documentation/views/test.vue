@@ -1,67 +1,28 @@
 <template lang="pug">
 .test.ma12.pa12.bd1.bdrs2
   h1.mt0.mb8 Testing playground
-  p tabs count: {{ tabs.length }}, currTab: {{ currTab }}
-  w-button.ma2(@click="deleteTab") Delete tab
-  w-button.ma2(@click="addTab(1)") inject tab #2
-  w-button.ma2(@click="addTab()") Append tab
-  w-button.ma2(@click="restoreTab()") Restore last deleted tab
-  w-button.ma2(@click="replaceTab(1)") Replace tab #1
-  w-tabs(v-model="currTab" :items="tabs" :keep-alive="false")
-    template(#item-content="{ item }")
-      w-checkbox(v-if="item.id2 === 1")
-      iframe(
-        v-if="item.id2 === 2"
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/gzmA1kkk660"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen)
-  //- w-tabs.mt12(v-model="currTab" :items="tabs" keep-in-dom)
-    template(#item-content="{ item }")
-      iframe(
-        v-if="item.id === 2"
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/gzmA1kkk660"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen)
-  w-divider.my6
-  p Open tabs
-  pre {{ tabs }}
-  w-divider.my6
-  p Deleted tabs
-  pre {{ deletedTabs }}
+  w-form(v-model="valid" :no-keyup-validation="true")
+    w-select(
+      class="mt3"
+      label="Last name"
+      :items="items"
+      :validators="[validators.required]")
+    code {{ valid === false ? 'false' : valid || 'null' }}
+    w-button(type="submit" :disabled="valid === false") Validate
 </template>
 
 <script>
 export default {
   data: () => ({
-    currTab: 2,
-    tabs: [
-      { id2: 1, title: 'Tab 1', content: 'Tab 1 content.' },
-      { id2: 2, title: 'Tab 2', content: 'Tab 2 content.' },
-      { id2: 3, title: 'Tab 3 has a long title', content: 'Tab 3 content.' }
-    ],
-    deletedTabs: []
-  }),
-
-  methods: {
-    deleteTab () {
-      this.deletedTabs.push(...this.tabs.splice(this.currTab, 1))
+    valid: null,
+    validators: {
+      required: value => !!value || 'This field is required'
     },
-    restoreTab () {
-      this.tabs.push(this.deletedTabs[0])
-    },
-    addTab (index) {
-      this.tabs.splice(index ?? this.tabs.length, 0, { title: `injected tab ${this.tabs.length}`, content: `injected Tab ${this.tabs.length} content.` })
-    },
-    replaceTab (index) {
-      this.tabs.splice(index, 1, { title: `Replaced tab ${this.tabs.length}`, content: `Replaced Tab ${this.tabs.length} content.` })
-    }
-  }
+    items: [
+      { label: 'Item 1', value: 1 },
+      { label: 'Item 2', value: 2 }
+    ]
+  })
 }
 </script>
 
