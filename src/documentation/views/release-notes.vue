@@ -22,7 +22,16 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
-    li.minor
+    li.patch
+      strong.version v3.4.4
+      ul
+        li
+          strong.code w-select
+          ul
+            li Keep select list focused when the selection menu is open. #[issue-link 115]
+            li Allow #[kbd tab] keypress and #[kbd ctrl] or #[kbd command] key combinations.
+
+    li.patch
       strong.version v3.4.3
       ul
         li
