@@ -60,7 +60,7 @@ export default class WaveUI {
 
     // Register a-la-carte components from the given list.
     const { components = {} } = options || {}
-    for (let id in components) {
+    for (const id in components) {
       const component = components[id]
       // If presets are defined for this component inject them into the props defaults.
       if (options.presets?.[component.name]) injectPresets(component, options.presets[component.name])

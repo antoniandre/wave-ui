@@ -6,11 +6,11 @@ ul.w-tree(:class="classes")
     :class="itemClasses(item)")
     //- The keys `route` & `disabled` are always present in any currentDepthItems.
     component.w-tree__item-label(
-      :is="!disabled && !item.disabled && item.route ? (!$router || hasExternalLink(item) ? 'a' : 'router-link') : 'div'"
+      :is="getTreeItemComponent(item)"
       v-bind="item.route && { [!$router || hasExternalLink(item) ? 'href' : 'to']: item.route }"
       @click="!disabled && !item.disabled && onLabelClick(item, $event)"
       @keydown="!disabled && !item.disabled && onLabelKeydown(item, $event)"
-      :tabindex="!disabled && !item.disabled && (item.children || item.branch || selectable) && !(unexpandableEmpty && !item.children) ? 0 : null")
+      :tabindex="getTreeItemTabindex(item)")
       //- @click.stop to not follow link if item is a link.
       w-button.w-tree__item-expand(
         v-if="(item.children || item.branch) && ((expandOpenIcon && item.open) || expandIcon) && !(unexpandableEmpty && !item.children)"
@@ -22,21 +22,31 @@ ul.w-tree(:class="classes")
         :disabled="disabled || item.disabled"
         text
         sm)
-      slot(name="item" :item="item.originalItem" :depth="depth" :open="item.open")
-        w-icon(v-if="itemIcon(item)" class="w-tree__item-icon" :color="item.originalItem[itemIconColorKey] || iconColor") {{ itemIcon(item) }}
+      slot(
+        name="item"
+        :item="item.originalItem"
+        :depth="depth"
+        :path="item.path"
+        :open="item.open")
+        w-icon(
+          v-if="itemIcon(item)"
+          class="w-tree__item-icon"
+          :color="item.originalItem[itemIconColorKey] || iconColor").
+          {{ itemIcon(item) }}
         span(v-html="item.label")
         span.ml1(v-if="counts && (item.children || item.branch)").
           ({{ item.originalItem.children ? item.originalItem.children.length : 0 }})
     component(
       :is="noTransition ? 'div' : 'w-transition-expand'"
       :y="!noTransition || null"
-      @after-enter="$emit('open', { item: item.originalItem, open: item.open, depth })"
-      @after-leave="$emit('close', { item: item.originalItem, open: item.open, depth })")
+      @after-enter="$emit('open', emitPayload(item))"
+      @after-leave="$emit('close', emitPayload(item))")
       w-tree(
         v-if="item.children && item.open"
         v-bind="$props"
         :depth="depth + 1"
         :data="item.originalItem.children"
+        :parent="item"
         @before-open="$emit('before-open', $event)"
         @open="$emit('open', $event)"
         @before-close="$emit('before-close', $event)"
@@ -44,8 +54,8 @@ ul.w-tree(:class="classes")
         @click="$emit('click', $event)"
         @select="$emit('select', $event)"
         @input="$emit('input', $event)")
-        template(#item="{ item, depth, open }")
-          slot(name="item" :item="item" :depth="depth" :open="open")
+        template(#item="{ item, depth, path, open }")
+          slot(name="item" :item="item" :depth="depth" :path="path" :open="open")
 </template>
 
 <script>
@@ -60,7 +70,8 @@ export default {
   props: {
     value: { type: [Object, Array] },
     data: { type: [Object, Array], required: true },
-    depth: { type: Number, default: 0 },
+    depth: { type: Number, default: 0 }, // To get the context from nested items.
+    parent: { type: Object, default: null }, // To get the context from nested items.
     branchClass: { type: String },
     leafClass: { type: String },
     branchIcon: { type: String },
@@ -97,6 +108,7 @@ export default {
       return {
         [`w-tree--depth${this.depth}`]: true,
         'w-tree--expand-icon': this.expandIcon && !this.depth,
+        'w-tree--selectable': this.selectable,
         'w-tree--disabled': this.disabled && !this.depth,
         'w-tree--no-expand-button': !this.expandIcon
       }
@@ -115,7 +127,7 @@ export default {
       if (!Array.isArray(items)) items = [items]
 
       items.forEach((item, i) => {
-        this.currentDepthItems.push({
+        const itemWrapper = {
           originalItem: item, // Store the original item to return it on event emits.
           _uid: this.depth.toString() + (i + 1),
           label: item[this.itemLabelKey],
@@ -123,10 +135,48 @@ export default {
           branch: item.branch,
           route: item[this.itemRouteKey],
           disabled: item[this.itemDisabledKey],
+          selected: oldItems[i]?.selected || false,
           depth: this.depth,
-          open: !!(oldItems[i]?.open || this.expandAll || item[this.itemOpenKey])
-        })
+          open: !!(oldItems[i]?.open || this.expandAll || item[this.itemOpenKey]),
+          parent: this.parent || null,
+          path: [] // Ancestors path from root to leaf including self.
+        }
+        itemWrapper.path = this.getTreeItemPath(itemWrapper)
+        this.currentDepthItems.push(itemWrapper)
       })
+    },
+
+    getTreeItemComponent (item) {
+      return !this.disabled && !item.disabled && item.route ? (!this.$router || this.hasExternalLink(item) ? 'a' : 'router-link') : 'div'
+    },
+
+    getTreeItemTabindex (item) {
+      return !this.disabled && !item.disabled && (item.children || item.branch || this.selectable) && !(this.unexpandableEmpty && !item.children) ? 0 : null
+    },
+
+    /**
+     * Get the tree path of the given item.
+     * The full ancestors items are stored in the array and not only their `originalItem`s in case
+     * it is mutated before we return it to the user through slots and emitted events.
+     * Before it is returned to the user, this array is mapped to only give the `originalItem`s.
+     *
+     * @param {Object} item the tree item to get the ancestors path for.
+     * @return an array of item objects from the root to the leaf (including the item itself).
+     */
+    getTreeItemPath (item) {
+      const ancestorsPath = [item]
+
+      let ancestor = item.parent
+      while (ancestor) {
+        ancestorsPath.push(ancestor)
+        ancestor = ancestor.parent
+      }
+      ancestorsPath.reverse()
+      return ancestorsPath
+    },
+
+    getTreeItemPathForOutput (item) {
+      return item.path.map(item => item.originalItem)
     },
 
     /**
@@ -139,12 +189,12 @@ export default {
       if (typeof open === 'boolean') item.open = open
       else item.open = !item.open
 
-      const emitParams = { item: item.originalItem, open: item.open, depth: this.depth }
+      const emitPayload = this.emitPayload(item)
 
-      this.$emit(item.open ? 'before-open' : 'before-close', emitParams)
+      this.$emit(item.open ? 'before-open' : 'before-close', emitPayload)
 
       if (!this.unexpandableEmpty && !item.children) {
-        this.$emit(item.open ? 'open' : 'close', emitParams)
+        this.$emit(item.open ? 'open' : 'close', emitPayload)
       }
 
       return true // Just to chain instructions.
@@ -154,19 +204,12 @@ export default {
       const route = item[this.itemRouteKey]
       if (route && this.$router && !this.hasExternalLink(item)) e.preventDefault()
 
-      this.$emit('click', { item: item.originalItem, depth: this.depth, e })
       if (item.children || (item.branch && !this.unexpandableEmpty)) this.expandDepth(item)
+      if (this.selectable) item.selected = !item.selected
 
-      if (this.selectable) this.emitItemSelection(item, e)
-    },
-
-    emitItemSelection (item, e) {
-      const emitParams = { item: item.originalItem, depth: this.depth, e }
-      if (item.children || (item.branch && !this.unexpandableEmpty)) {
-        emitParams.open = item.open
-      }
-      this.$emit('input', emitParams)
-      this.$emit('select', emitParams)
+      const emitPayload = this.emitPayload(item, e)
+      this.$emit('click', emitPayload)
+      this.emitItemSelection(item, e) // Always emitting on click, but different event for selection.
     },
 
     onLabelKeydown (item, e) {
@@ -195,7 +238,32 @@ export default {
         }
       }
 
-      if (this.selectable) this.emitItemSelection(item, e)
+      if (e.which === 13) {
+        if (this.selectable) item.selected = !item.selected
+        // Always emitting on enter keydown, but different event for selection.
+        this.emitItemSelection(item, e)
+      }
+    },
+
+    emitItemSelection (item, e) {
+      const emitPayload = this.emitPayload(item, e)
+
+      this.$emit('update:model-value', emitPayload)
+      if (this.selectable) this.$emit('select', emitPayload)
+    },
+
+    emitPayload (item, e) {
+      const emitPayload = {
+        item: item.originalItem,
+        depth: this.depth,
+        path: this.getTreeItemPathForOutput(item)
+      }
+
+      if (e) emitPayload.e = e
+      if (item.children || (item.branch && !this.unexpandableEmpty)) emitPayload.open = item.open
+      if (this.selectable) emitPayload.selected = item.selected
+
+      return emitPayload
     },
 
     /**
@@ -246,6 +314,7 @@ export default {
       return {
         [item.children || item.branch ? 'w-tree__item--branch' : 'w-tree__item--leaf']: true,
         'w-tree__item--disabled': item[this.itemDisabledKey],
+        'w-tree__item--selected': item.selected,
         'w-tree__item--empty': item.branch && !item.children,
         'w-tree__item--unexpandable': item.branch && !item.children && this.unexpandableEmpty
       }
@@ -299,12 +368,18 @@ $expand-icon-size: 20px;
       right: - $base-increment - 2px;
       border-radius: $border-radius;
     }
-    &:hover:before {background-color: rgba($primary, 0.05);}
-    &:focus:before {background-color: rgba($primary, 0.1);}
+    &:hover:before {background-color: $primary;opacity: 0.1;}
+    &:focus-visible:before {background-color: $primary;opacity: 0.15;}
   }
+  &.w-tree--selectable &__item-label {cursor: pointer;}
+  &.w-tree--selectable &__item--disabled &__item-label {cursor: auto;}
   &__item--leaf &__item-label:before {
     left: - $base-increment;
     right: - $base-increment;
+  }
+  &__item--selected > &__item-label:before {
+    background-color: $primary;
+    opacity: 0.25;
   }
   &__item--disabled &__item-label {opacity: 0.5;}
   &__item--disabled &__item-label:before {display: none;}

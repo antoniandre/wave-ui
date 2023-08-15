@@ -1,12 +1,13 @@
 <template lang="pug">
 div
-  p.
+  .title2.red Required in Wave UI #[w-tag.error--bg(round) &lt; 3.0], removed in #[w-tag.error--bg(round) 3.0].
+  p.mt6.
     This tag is required in your app for Wave UI proper functioning.#[br]
     You should place it #[strong at the root of your app].
   .caption.grey-light1.
     There should only be one &lt;w-app&gt; in your whole app.
 
-  ssh-pre(language="html-vue").
+  ssh-pre(language="html-vue" :dark="$store.state.darkMode").
     &lt;w-app&gt;
       &lt;!-- All your app's content goes here. --&gt;
     &lt;/w-app&gt;
@@ -81,14 +82,14 @@ div
               main.grow Main content
               footer Footer
         template(#html).
-          &lt;w-app id="app" row&gt;
+          &lt;div id="app" class="row"&gt;
             &lt;aside&gt;Nav menu&lt;/aside&gt;
             &lt;w-flex column&gt;
               &lt;header&gt;Header&lt;/header&gt;
               &lt;main class="grow"&gt;Main content&lt;/main&gt;
               &lt;footer&gt;Footer&lt;/footer&gt;
             &lt;/w-flex&gt;
-          &lt;/w-app&gt;
+          &lt;/div&gt;
         template(#css).
           /* Demo styles - can be discarded. */
           .w-app {padding: 4px;background-color: #fffeed;}
@@ -243,8 +244,14 @@ div
     min-height: 240px;
   }
 
-  legend {padding: 0 0.5em;}
-  section {margin: 0.4em;color: rgba(0, 0, 0, 0.6);}
+  legend {
+    padding: 0 0.5em;
+    border-radius: 99em;
+  }
+  section {
+    margin: 0.4em;
+    color: rgba(0, 0, 0, 0.6);
+  }
   .block {min-height: 100px;}
   .app {background-color: #fffeed;}
   .header, .footer {background-color: #e9f8fe;}

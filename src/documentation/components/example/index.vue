@@ -55,7 +55,7 @@ import SourceCode from './source-code.vue'
 export default {
   props: {
     // Pass props to the w-app component as a string (way simpler to pass it to Codepen).
-    appPropsString: { type: String, default: 'block' },
+    appClassesString: { type: String, default: 'block' },
 
     contentClass: { type: String },
     externalJs: { type: String },
@@ -165,7 +165,15 @@ export default {
 
       // CSS / SCSS.
       if (blanks.includes('css') || blanks.includes('scss')) css = slots.css || slots.scss
-      else css = '.w-app {font: 14px sans-serif;padding: 24px;}\n\n' + (slots.css || slots.scss)
+      else {
+        css = ':root {\n' +
+              '  background-color: rgb(var(--w-base-bg-color-rgb));\n' +
+              '  color: rgb(var(--w-base-color-rgb));\n' +
+              '  font: 14px sans-serif;\n' +
+              '  padding: 24px;\n' +
+              '}\n\n' +
+              (slots.css || slots.scss)
+      }
 
       // JS.
       if (blanks.includes('js')) js = slots.js
@@ -179,7 +187,6 @@ export default {
       const data = {
         title: `Wave UI - ${this.currentPage} example`,
         editors: openEditors.join(''),
-        // layout: 'top', // This now breaks the Codepen generation. :/
         html,
         html_pre_processor: this.usePug && slots.pug ? 'pug' : 'none',
         css,

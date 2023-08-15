@@ -9,7 +9,8 @@
       col.w-table__col(
         v-for="(header, i) in headers"
         :key="i"
-        :width="header.width || null")
+        :width="header.width || null"
+        :class="colClasses[i]")
 
     //- Table header.
     thead(v-if="!noHeaders")
@@ -58,7 +59,7 @@
 
       //- Normal rows.
       template(v-if="tableItems.length && loading !== true")
-        template(v-for="(item, i) in sortedItems")
+        template(v-for="(item, i) in paginatedItems")
           //- Fully custom tr (`item` slot).
           slot(
             v-if="$scopedSlots['item']"
@@ -135,27 +136,41 @@
           slot(name="footer")
       tr.w-table__row.w-table__pagination-wrap(v-if="pagination && paginationConfig")
         td.w-table__cell(:colspan="headers.length")
-          .w-table__pagination
-            w-select.pagination-number.pagination-number--items-per-page(
-              v-if="paginationConfig.itemsPerPageOptions"
-              v-model="paginationConfig.itemsPerPage"
-              :items="paginationConfig.itemsPerPageOptions"
-              label-position="left"
-              label="Items per page"
-              label-color="inherit")
-            span.pagination-number.pagination-number--results.
-              {{ paginationConfig.start }}-{{ paginationConfig.end }} of {{ paginationConfig.total }}
-            .pagination-arrows
-              w-button.pagination-arrow.pagination-arrow--prev(
-                @click="paginationConfig.page--"
-                icon="wi-chevron-left"
-                text
-                lg)
-              w-button.pagination-arrow.pagination-arrow--next(
-                @click="paginationConfig.page++"
-                icon="wi-chevron-right"
-                text
-                lg)
+          .w-table__pagination.w-pagination
+            slot(
+              name="pagination"
+              :range="`${paginationConfig.start}-${paginationConfig.end}`"
+              :total="paginationConfig.total")
+              w-select.w-pagination__items-per-page(
+                v-if="paginationConfig.itemsPerPageOptions"
+                v-model="paginationConfig.itemsPerPage"
+                @input="updatePaginationConfig({ itemsPerPage: paginationConfig.itemsPerPage })"
+                :items="paginationConfig.itemsPerPageOptions"
+                label-position="left"
+                label="Items per page"
+                label-color="inherit")
+              .pages-wrap
+                w-button.w-pagination__arrow.w-pagination__arrow--prev(
+                  @click="goToPage('-1')"
+                  :disabled="paginationConfig.page <= 1"
+                  icon="wi-chevron-left"
+                  text
+                  lg)
+                w-button.w-pagination__page(
+                  v-for="i in paginationConfig.pagesCount"
+                  :key="i"
+                  @click="i !== paginationConfig.page && goToPage(i)"
+                  :class="{ 'w-pagination__page--active': i === paginationConfig.page }"
+                  round
+                  lg) {{ i }}
+                w-button.w-pagination__arrow.w-pagination__arrow--next(
+                  @click="goToPage('+1')"
+                  :disabled="paginationConfig.page >= paginationConfig.pagesCount"
+                  icon="wi-chevron-right"
+                  text
+                  lg)
+              span.w-pagination__results.
+                {{ paginationConfig.start }}-{{ paginationConfig.end || paginationConfig.total }} of {{ paginationConfig.total }}
 </template>
 
 <script>
@@ -180,6 +195,9 @@ export default {
     loading: { type: [Boolean, String] }, // Bool or 'header' to only display the bar in the header.
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
     sort: { type: [String, Array] },
+    sortFunction: { type: Function },
+    filter: { type: Function },
+    fetch: { type: Function },
 
     expandableRows: {
       validator: value => {
@@ -214,11 +232,16 @@ export default {
     // Useful to select or expand a row, and even after a filter, the same row will stay selected or expanded.
     uidKey: { type: String, default: 'id' },
 
-    filter: { type: Function },
-    sortFunction: { type: Function },
     mobileBreakpoint: { type: Number, default: 0 },
     resizableColumns: { type: Boolean },
 
+    // An object containing:
+    // - itemsPerPage
+    // - itemsPerPageOptions
+    // - start
+    // - end
+    // - page
+    // - total
     pagination: {
       type: [Boolean, Object, String],
       validator: object => {
@@ -266,7 +289,7 @@ export default {
   computed: {
     tableItems () {
       return this.items.map((item, i) => {
-        item._uid = item[this.uidKey] !== undefined ? item[this.uidKey] : i
+        item._uid = item[this.uidKey] ?? i
         return item
       })
     },
@@ -276,7 +299,7 @@ export default {
     },
 
     sortedItems () {
-      if (!this.activeSorting.length || this.sortFunction) return this.filteredItems
+      if (!this.activeSorting.length || this.sortFunction || this.fetch) return this.filteredItems
 
       // Only sort with 1 key for now, may handle more later.
       const sortKey1 = this.activeSorting[0].replace(/^[+-]/, '')
@@ -293,6 +316,10 @@ export default {
       })
     },
 
+    paginatedItems () {
+      return typeof this.fetch === 'function' ? this.sortedItems : this.sortedItems.slice(this.paginationConfig.start - 1, this.paginationConfig.end)
+    },
+
     // Returns an object containing { key1: '+', key2: '-' }. With + or - for ASC/DESC.
     activeSortingKeys () {
       return this.activeSorting.reduce((obj, item) => {
@@ -307,8 +334,16 @@ export default {
       }
     },
 
+    colClasses () {
+      return this.headers.map(header => {
+        return { 'w-table__col--highlighted': this.activeSortingKeys[header.key] }
+      }) || []
+    },
+
     classes () {
       return {
+        'w-table--loading': this.loading,
+        'w-table--loading-in-header': this.loading === 'header',
         'w-table--fixed-layout': this.fixedLayout || this.resizableColumns || this.hasStickyColumn,
         'w-table--mobile': this.isMobile || null,
         'w-table--resizable-cols': this.resizableColumns || null,
@@ -366,9 +401,8 @@ export default {
 
       this.$emit('update:sort', this.activeSorting)
 
-      if (typeof this.sortFunction === 'function') {
-        await this.sortFunction(this.activeSorting)
-      }
+      if (typeof this.sortFunction === 'function') await this.sortFunction(this.activeSorting)
+      else if (typeof this.fetch === 'function') await this.callApiFetch()
     },
 
     doSelectRow (item, index) {
@@ -530,18 +564,75 @@ export default {
       }, 0)
     },
 
-    updatePaginationConfig () {
-      const itemsPerPage = this.pagination?.itemsPerPage || 10
-      const total = this.pagination?.total || this.items.length
-      const page = this.pagination?.page || 1
-      this.paginationConfig = {
-        itemsPerPage,
-        itemsPerPageOptions: this.pagination?.itemsPerPageOptions || [{ label: '10', value: 10 }, { label: '100', value: 100 }, { label: 'All', value: 0 }],
-        page,
-        start: this.pagination?.start || 1,
-        end: total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page)),
-        total
+    initPagination () {
+      const itemsPerPage = this.pagination?.itemsPerPage ?? 20 // Can also be `0` for all.
+
+      const itemsPerPageOptions = this.pagination?.itemsPerPageOptions || [20, 100, { label: 'All', value: 0 }]
+      // If the given itemsPerPage is not in the itemsPerPageOptions, add it.
+      if (!itemsPerPageOptions.find(item => (item?.value ?? item) === +itemsPerPage)) {
+        itemsPerPageOptions.push(itemsPerPage)
       }
+      this.paginationConfig.itemsPerPageOptions = itemsPerPageOptions.map(item => ({
+        label: ['string', 'number'].includes(typeof item) ? item.toString() : (item.label || item.value),
+        value: ['string', 'number'].includes(typeof item) ? ~~item : (item.value ?? item.label)
+      }))
+      // Sort the options in an ascending order.
+      this.paginationConfig.itemsPerPageOptions.sort((a, b) => a.value < b.value ? -1 : 1)
+      const optionAll = this.paginationConfig.itemsPerPageOptions.shift()
+      this.paginationConfig.itemsPerPageOptions.push(optionAll)
+
+      this.updatePaginationConfig({
+        itemsPerPage,
+        page: this.pagination.page || 1,
+        total: this.pagination.total || this.items.length
+      })
+    },
+
+    updatePaginationConfig ({ itemsPerPage, page, total }) {
+      if (total) this.paginationConfig.total = total
+      if (itemsPerPage !== undefined) {
+        this.paginationConfig.itemsPerPage = itemsPerPage
+        itemsPerPage = itemsPerPage || this.paginationConfig.total // If `0`, take all the results.
+        this.paginationConfig.page = 1;
+        ({ page } = this.paginationConfig) // Shorthand var for next lines.
+        total = this.paginationConfig.total // Shorthand var for next lines.
+        this.paginationConfig.start = 1
+        this.paginationConfig.end = total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page))
+        this.paginationConfig.pagesCount = Math.ceil(total / itemsPerPage)
+      }
+      if (page) this.goToPage(page)
+    },
+
+    /**
+     * Goes to a given page or to the next or previous page.
+     *
+     * @param {Number|String} page a number to go to a specific page or `-1`, `+1` for prev & next page.
+     */
+    async goToPage (page) {
+      if (['-1', '+1'].includes(page)) this.paginationConfig.page += +page
+      else this.paginationConfig.page = page
+      const { itemsPerPage, total } = this.paginationConfig
+      this.paginationConfig.page = Math.max(1, this.paginationConfig.page)
+      this.paginationConfig.start = (itemsPerPage * (this.paginationConfig.page - 1)) + 1
+      this.paginationConfig.end = (this.paginationConfig.start - 1) + (itemsPerPage || total)
+
+      if (typeof this.fetch === 'function') await this.callApiFetch()
+    },
+
+    /**
+     * Call a user provided fetch function in order to fetch table items from an API.
+     * While waiting for the call to resolve, nothing in the table will change.
+     */
+    async callApiFetch () {
+      const { page, start, end, total, itemsPerPage } = this.paginationConfig
+      return await this.fetch({
+        page,
+        start,
+        end: end || total,
+        total,
+        itemsPerPage: itemsPerPage || total,
+        sorting: this.activeSorting
+      })
     }
   },
 
@@ -552,7 +643,7 @@ export default {
     if ((this.expandedRows || []).length) this.expandedRowsInternal = this.expandedRows
     if ((this.selectedRows || []).length) this.selectedRowsInternal = this.selectedRows
 
-    if (this.pagination) this.updatePaginationConfig()
+    if (this.pagination) this.initPagination()
   },
 
   watch: {
@@ -577,6 +668,16 @@ export default {
 
     selectedRows (array) {
       this.selectedRowsInternal = Array.isArray(array) && array.length ? this.selectedRows : []
+    },
+
+    'pagination.page' (page) {
+      this.updatePaginationConfig({ page })
+    },
+    'pagination.itemsPerPage' (itemsPerPage) {
+      this.updatePaginationConfig({ itemsPerPage })
+    },
+    'pagination.total' (total) {
+      this.updatePaginationConfig({ total })
     }
   }
 }
@@ -609,6 +710,10 @@ $tr-border-top: 1px;
 
     user-select: none;
   }
+
+  // Table columns.
+  // ------------------------------------------------------
+  &__col--highlighted {background-color: rgba(#000, 0.04);}
 
   // Table headers.
   // ------------------------------------------------------
@@ -699,7 +804,7 @@ $tr-border-top: 1px;
     left: 0;
     right: 0;
   }
-  &__progress-bar td {padding: 0;height: 1px;}
+  &__progress-bar td {padding: 0;height: 0;}
   @-moz-document url-prefix() {
     &__progress-bar td {height: 100%;}
   }
@@ -708,7 +813,7 @@ $tr-border-top: 1px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height:100%;
+    height: 100%;
     width: 100%;
     padding-top: 2 * $base-increment;
     padding-bottom: 2 * $base-increment;
@@ -716,7 +821,10 @@ $tr-border-top: 1px;
 
   // Table body.
   // ------------------------------------------------------
-  tbody tr {border-top: $tr-border-top solid rgba(0, 0, 0, 0.06);}
+  tbody {transition: opacity $transition-duration;}
+  &--loading-in-header tbody {opacity: 0.6;}
+
+  tbody tr {border-top: $tr-border-top solid rgba(#000, 0.06);}
   // Don't apply built-in bg color if a bg color is already found on a tr.
   tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: $table-tr-odd-color;}
   tbody .w-table__row:hover:not(.no-data):not([class*="--bg"]) {background-color: $table-tr-hover-color;}
@@ -773,47 +881,78 @@ $tr-border-top: 1px;
 
   // Table footer.
   // ------------------------------------------------------
-  &__footer &__cell {
-    padding-top: $base-increment;
-    padding-bottom: $base-increment;
-  }
-
   &--fixed-footer tfoot {
     position: sticky;
-    bottom: 0;
+    bottom: -1px;
     background-color: #fff;
     z-index: 1; // For sticky columns to go under.
 
     &:after {
       content: '';
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
       right: 0;
-      border-bottom: $border;
+      border-top: $border;
     }
   }
 
+  &__footer &__cell {
+    padding-top: $base-increment;
+    padding-bottom: $base-increment;
+  }
+
+  // Pagination.
+  // ------------------------------------------------------
   &__pagination {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-top: $base-increment;
-    padding-bottom: $base-increment;
 
-    .pagination-number--items-per-page {
-      margin-right: 6 * $base-increment;
-      flex-grow: 0;
+    .w-pagination__items-per-page {
+      flex: 0 0 auto;
       text-align: right;
     }
-    .pagination-number--of {
+
+    .pages-wrap {
+      margin-left: 3 * $base-increment;
+      margin-right: 3 * $base-increment;
+      overflow: auto;
+      max-height: 4.5em;
+    }
+
+    .w-pagination__page {
+      margin: 0.5 * $base-increment;
+      font-size: 0.9em;
+      aspect-ratio: 1;
+      overflow: hidden;
+      color: rgba(#000, 0.65);
+      background-color: rgba(#fff, 0.4);
+
+      &:hover:before {
+        background-color: $primary;
+        opacity: 0.1;
+      }
+      &:active:before {
+        background-color: $primary;
+        opacity: 0.2;
+      }
+
+      &--active {
+        font-weight: bold;
+        color: $primary;
+
+        &:before {
+          background-color: $primary;
+          opacity: 0.1;
+        }
+      }
+    }
+
+    .w-pagination__results {
       margin-left: $base-increment;
       margin-right: $base-increment;
-    }
-    .w-select__selection {max-width: 60px;}
-
-    .pagination-arrows {
-      margin-left: 6 * $base-increment;
+      white-space: nowrap;
     }
   }
 }

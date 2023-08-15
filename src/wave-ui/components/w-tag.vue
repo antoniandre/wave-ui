@@ -103,6 +103,7 @@ export default {
     $font-size: round(0.7 * $base-font-size);
     font-size: $font-size;
     line-height: $font-size + 2px;
+    padding: round(0.25 * $base-increment) $base-increment;
   }
   &.size--sm {
     $font-size: round(0.82 * $base-font-size);

@@ -62,6 +62,10 @@ export default {
           description: (item.description || this.descriptions[key] || '').replace(/href="\//g, `href=\"${this.baseURL}`)
         }
       })
+    },
+
+    category () {
+      return this.title.toLowerCase().replace(/s$/, '')
     }
   }
 }

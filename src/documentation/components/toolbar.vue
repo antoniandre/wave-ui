@@ -4,24 +4,43 @@ w-toolbar.main-toolbar(fixed)
     w-icon.wave-logo.mr3(size="3em") wi-wave
     span.grey-dark1 Wave UI
   .spacer
-  strong.version.size--xs(v-html="`Version <code>${version}</code>`")
+
+  w-tooltip(z-index="20" append-to=".main-toolbar")
+    template(#activator="{ on }")
+      router-link.v3-is-out.w-tag.w-tag--round.mr4.xs-hide(
+        v-on="on"
+        to="/release-notes"
+        @click.native="scrollTop(true)") WAVE UI 3.0 IS OUT!
+    | Go to the release notes!
+  w-switch.mr2(
+    :model-value="$store.state.darkMode"
+    @update:model-value="$store.commit('setDarkMode', $event), $waveui.switchTheme($event ? 'dark' : 'light')"
+    bg-color="blue-dark5")
+    template(#thumb)
+      w-icon mdi {{ $store.state.darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}
+
+  strong.version.size--xs(v-html="`v<code>${version}</code>`")
+
   w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
       div.ml1(v-on="on")
         router-link(to="/release-notes" @click.native="scrollTop(true)")
           w-icon(lg) mdi mdi-update
     | Release notes
+
   w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
       a.grey-dark3.ml2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
         w-icon(lg) mdi mdi-github
     .text-center View the project#[br]on Github
+
   w-tooltip(z-index="20" align-right append-to=".main-toolbar")
     template(#activator="{ on }")
       div.ml2.mr1(v-on="on")
         router-link.pink-light1(to="/backers" @click.native="scrollTop(true)")
           w-icon(lg) mdi mdi-heart-multiple-outline
     | Backers
+
   w-button.mr-1.hamburger-menu(
     v-if="$waveui.breakpoint.xs"
     @click="$emit('update:drawerOpen', !drawerOpen)"
@@ -61,11 +80,13 @@ export default {
 
 <style lang="scss">
 div.main-toolbar {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.85);
   height: 42px;
   padding-top: 0;
   padding-bottom: 0;
+  backdrop-filter: blur(4px);
   z-index: 190;
+  border-bottom-color: rgba(255, 255, 255, 0.05);
 
   .home-link {
     @include default-transition;
@@ -73,6 +94,29 @@ div.main-toolbar {
     &:focus {transform: scale(1.1);}
 
     span {font: 22px 'title font', helvetica, arial;}
+  }
+
+  .v3-is-out {
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 2px 8px;
+    background: linear-gradient(110deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    mix-blend-mode: difference;
+    overflow: hidden;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: -120%;
+      right: -150%;
+      width: 50%;
+      height: 300%;
+      transform: rotate(30deg);
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.13), rgba(255, 246, 198, 0.8), rgba(255, 255, 255, 0));
+    }
+    &:hover:before {animation: shine 2s infinite;}
   }
 
   .version {
@@ -90,6 +134,10 @@ div.main-toolbar {
 
   .hamburger-menu {margin-left: 8px;}
   .hamburger-menu .w-icon {width: 26px;}
+}
+
+@keyframes shine {
+  to {right: 300%;}
 }
 
 @media screen and (max-width: 410px) {

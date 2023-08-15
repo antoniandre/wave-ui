@@ -2,7 +2,8 @@
 div
   p.mt4
     em.
-      This installation guide is for Nuxt 2 (with Vue 2). Wave UI hasn't been tested on Nuxt 3 yet.
+      This installation guide is for Nuxt 2 (with Vue 2 and Wave UI 1.x). Wave UI hasn't been tested on Nuxt 3 yet,
+      but demos and documentation update PRs are welcome!
 
   p.mt4
     w-icon.mr2 wi-chevron-right
@@ -15,8 +16,9 @@ div
   ol
     li.mt8
       .title4 Install the dependencies:
-      ssh-pre(language="shell") npm i wave-ui
-      ssh-pre(language="shell") npm i -D @wave-ui/nuxt
+      ssh-pre(language="shell").
+        npm i wave-ui
+        npm i -D @wave-ui/nuxt
 
     li.mt8
       .title4 In #[span.code nuxt.config.js], add Wave UI to the #[code buildModules]:

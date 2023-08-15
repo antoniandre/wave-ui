@@ -72,11 +72,13 @@ export default {
     right: 100%;
     font-size: 0.8em;
     padding: 0.2em 0.35em;
-    line-height: 1;
     color: #e2e2e2;
   }
 
-  a {color: inherit;}
+  a {
+    display: block;
+    color: inherit;
+  }
   a:focus {text-decoration: underline;}
   a:focus .w-tag {display: inline-block;} // This removes the text-decoration: underline.
 
@@ -89,9 +91,5 @@ export default {
   .code {margin-top: -3px;}
 }
 
-h1.title-link {
-  color: #000;
-
-  .hash {line-height: 1.3;}
-}
+h1.title-link {color: #000;}
 </style>

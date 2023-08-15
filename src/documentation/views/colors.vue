@@ -2,52 +2,76 @@
 main
   title-link.mt4(h1) Colors
   p.
-    Wave UI colors work in a very simple way: for instance the class
-    #[code pink] (or any color listed below) can be applied to any
-    element's text, and the class #[code pink--bg] can be applied to
-    any element's background.
+    Wave UI colors work in a very simple way: for instance the class #[code pink]
+    (or any color listed below) can be applied to any element's text, and the class
+    #[code pink--bg] can be applied to any element's background.
 
   p.
-    All the components that accept colors, will accept the #[code color]
-    prop for the text color, and #[code bg-color] for the background when applicable.
+    All the components that accept colors, will accept the #[code color] prop for
+    the text color, and #[code bg-color] for the background (when applicable).
 
-  p.
-    This way, it is possible to mix a background color with a different
-    text color of your choice.
+  p This way, it is possible to mix a background color with a different text color of your choice.
 
   title-link(h2) Status colors
+  p The status colors are useful to express the result of an action or for calls to action.
   .w-flex.wrap.ma-2.text-center.basis-zero
     .color.success--bg.title3.grow.py3.ma2 success
     .color.error--bg.title3.grow.py3.ma2 error
     .color.warning--bg.title3.grow.py3.ma2 warning
     .color.info--bg.title3.grow.py3.ma2 info
-  alert(warning).mb12.
-    The four status colors are considered dark and will therefore have a white text by default when used as a background color.
-    You can override this via CSS.
+
+  w-flex.wrap.align-center.mt4
+    p.my0 Example of use:
+    ssh-pre.my0.mx2(
+      v-show="$store.state.usePug"
+      language="pug"
+      :dark="$store.state.darkMode").
+      w-button(bg-color="success") OK
+    ssh-pre.my0.mx2(
+      language="html-vue"
+      v-show="!$store.state.usePug"
+      :dark="$store.state.darkMode").
+      &lt;w-button bg-color="success"&gt;OK&lt;w-button&gt;
+    w-button(bg-color="success") OK
+
+  alert(info).mb8
+    ul
+      li.
+        It is possible to redefine these four status colors in the
+        #[router-link(to="/options-presets-and-waveui") Wave UI global options].
+      li.
+        The four status colors always have a #[strong white text color by default] when they are used
+        as a background color. You can easily override the text color via CSS.
+      li
+        | By default the status colors always have priority over other Wave UI defined colors.#[br]
+        p.error.purple For instance this sentence has the classes #[code purple] and #[code error].
 
   h3 Status colors shades
+  p.
+    You may want a different shade of the status color, for interactive elements' hover effect for
+    instance, for different levels of the same status, or just because it works better in your app.
   .w-flex.wrap.mb12.ma-2.text-center.basis-zero
     .w-flex.wrap
-      .color.success-light3--bg.title3.py3.ma2.body.xs12 success-light3
-      .color.success-light2--bg.title3.py3.ma2.body.xs12 success-light2
-      .color.success-light1--bg.title3.py3.ma2.body.xs12 success-light1
-      .color.success-dark1--bg.title3.py3.ma2.white.body.xs12 success-dark1
-      .color.success-dark2--bg.title3.py3.ma2.white.body.xs12 success-dark2
-      .color.success-dark3--bg.title3.py3.ma2.white.body.xs12 success-dark3
+      .color.success-light3--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") success-light3
+      .color.success-light2--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") success-light2
+      .color.success-light1--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") success-light1
+      .color.success-dark1--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark1
+      .color.success-dark2--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark2
+      .color.success-dark3--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark3
     .w-flex.wrap
-      .color.error-light3--bg.title3.py3.ma2.body.xs12 error-light3
-      .color.error-light2--bg.title3.py3.ma2.body.xs12 error-light2
-      .color.error-light1--bg.title3.py3.ma2.body.xs12 error-light1
-      .color.error-dark1--bg.title3.py3.ma2.white.body.xs12 error-dark1
-      .color.error-dark2--bg.title3.py3.ma2.white.body.xs12 error-dark2
-      .color.error-dark3--bg.title3.py3.ma2.white.body.xs12 error-dark3
+      .color.error-light3--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") error-light3
+      .color.error-light2--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") error-light2
+      .color.error-light1--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") error-light1
+      .color.error-dark1--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark1
+      .color.error-dark2--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark2
+      .color.error-dark3--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark3
     .w-flex.wrap
-      .color.warning-light3--bg.title3.py3.ma2.body.xs12 warning-light3
-      .color.warning-light2--bg.title3.py3.ma2.body.xs12 warning-light2
-      .color.warning-light1--bg.title3.py3.ma2.body.xs12 warning-light1
-      .color.warning-dark1--bg.title3.py3.ma2.white.body.xs12 warning-dark1
-      .color.warning-dark2--bg.title3.py3.ma2.white.body.xs12 warning-dark2
-      .color.warning-dark3--bg.title3.py3.ma2.white.body.xs12 warning-dark3
+      .color.warning-light3--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") warning-light3
+      .color.warning-light2--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") warning-light2
+      .color.warning-light1--bg.title3.py3.ma2.body.xs12(:class="{ black: $store.state.darkMode }") warning-light1
+      .color.warning-dark1--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark1
+      .color.warning-dark2--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark2
+      .color.warning-dark3--bg.title3.py3.ma2.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark3
     .w-flex.wrap
       .color.info-light3--bg.title3.py3.ma2.body.xs12 info-light3
       .color.info-light2--bg.title3.py3.ma2.body.xs12 info-light2
@@ -98,9 +122,7 @@ main
   title-link.mt12.mb4.w-flex.align-center(h2 slug="color-palette")
     | Color Palette
     w-button.ml6(
-      bg-color="primary"
       sm
-      dark
       @click.prevent="horizontal = !horizontal")
       | {{ horizontal ? 'Vertical' : 'Horizontal' }} display
   p.
@@ -130,10 +152,10 @@ main
           .color.color--top.ma2.white--bg.black
             span white
             small #fff
-          .color.color--top.ma2.transparent--bg.black
+          .color.color--top.ma2.transparent--bg.base-color
             span transparent
             small transparent
-          .color.color--top.ma2.inherit--bg.black
+          .color.color--top.ma2.inherit--bg.base-color
             span inherit
             small inherit
 
@@ -195,20 +217,43 @@ main
 
   title-link(h3) Defining your own CSS colors in your CSS
   p.
-    All the presented colors above are here to make you go faster when you need a color.#[br]
-    But you are completely free to define CSS classes in your CSS to associate a color to a class.#[br]
+    The predefined colors will make you go faster, but you also can define CSS classes in your
+    CSS to associate a color to a class.#[br]
     For instance, you can define:
-  ssh-pre(language="css").
+  ssh-pre(language="css" :dark="$store.state.darkMode").
     .mint-green {color: #acebd7;}
     .navy-blue--bg {background-color: #345276;}
 
   p.mt6 ...and use it on a component like this:
   w-flex(gap="6")
-    ssh-pre.ml3(v-show="$store.state.usePug" language="pug" label="Pug").
+    ssh-pre.ml3(
+      v-show="$store.state.usePug"
+      :dark="$store.state.darkMode"
+      language="pug").
       w-tag(color="mint-green" bg-color="navy-blue" lg)
-    ssh-pre.ml3(v-show="!$store.state.usePug" language="html-vue").
+    ssh-pre.ml3(
+      v-show="!$store.state.usePug"
+      :dark="$store.state.darkMode"
+      language="html-vue").
       &lt;w-tag color="mint-green" bg-color="navy-blue" lg&gt;tag&lt;/w-tag&gt;
     w-tag.mb4.align-self-end(color="mint-green" bg-color="navy-blue" lg) Tag
+
+  title-link(h2) Colors and themes
+  p.
+    If you use both dark and light themes, you should always use colors that are adapted to the
+    app background color.#[br]
+    Since it is not easy to find a color that will work for both themes, we recommend that you use
+    a light and dark version of the same color.#[br]
+    Wave UI provides these 5 CSS classes which carry colors that will automatically change when
+    switching theme.
+  w-table(:headers="tableHeaders" :items="tableItems" :mobile-breakpoint="700")
+    template(#item-cell="{ label, header }")
+      p(v-if="header.key === 'desc'") {{ label }}
+      code(v-else) {{ label }}
+  p.
+    If you define theme-specific colors in the Wave UI config, they will also generate a CSS3
+    variable that you can use anywhere.
+
 </template>
 
 <script>
@@ -254,7 +299,8 @@ export default {
 
   .color--top {
     font-size: 2.4em;
-    color: #fff;
+
+    &:not(.white--bg):not(.transparent--bg):not(.inherit--bg) {color: #fff;}
 
     .vertical & {
       height: 90px;

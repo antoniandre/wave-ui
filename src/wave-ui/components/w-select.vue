@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: selectionString, disabled: isDisabled, readonly: isReadonly }"
+  v-bind="formRegister && { validators, inputValue: selectionString, disabled: isDisabled, readonly: isReadonly, isFocused }"
   :valid.sync="valid"
   @reset="onReset"
   :wrap="hasLabel && labelPosition !== 'inside'"
@@ -16,6 +16,7 @@ component(
 
   w-menu(
     v-model="showMenu"
+    @close="!$event && closeMenu()"
     :menu-class="`w-select__menu ${menuClass || ''}`"
     transition="slide-fade-down"
     :append-to="(menuProps || {}).appendTo !== undefined ? (menuProps || {}).appendTo : undefined"
@@ -26,7 +27,7 @@ component(
     template(#activator="{ on }")
       //- Input wrapper.
       .w-select__selection-wrap(
-        @click="!isDisabled && !isReadonly && (showMenu ? closeMenu : openMenu)()"
+        @click="!isDisabled && !isReadonly && onInputFieldClick()"
         role="button"
         aria-haspopup="listbox"
         :aria-expanded="showMenu ? 'true' : 'false'"
@@ -76,7 +77,7 @@ component(
       @item-click="$emit('item-click', $event)"
       @item-select="onListItemSelect"
       @keydown:enter="noUnselect && !multiple && closeMenu()"
-      @keydown:escape="closeMenu"
+      @keydown:escape="showMenu && (this.showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
       :value="inputValue"
       :items="selectItems"
       :multiple="multiple"
@@ -190,7 +191,7 @@ export default {
     },
     selectionString () {
       return this.inputValue && this.inputValue.map(
-        item => item[this.itemValueKey] !== undefined ? item[this.itemLabelKey] : (item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item)
+        item => item[this.itemValueKey] !== undefined ? item[this.itemLabelKey] : (item[this.itemLabelKey] ?? item)
       ).join(', ')
     },
     classes () {
@@ -227,12 +228,18 @@ export default {
 
   methods: {
     onFocus (e) {
+      if (this.isFocused) return
+
       this.isFocused = true
       this.$emit('focus', e)
       return false
     },
 
     onBlur (e) {
+      // As long as the menu is open the focus is still on.
+      // When closing the menu, the focus is given back to the input (not blur yet).
+      if (this.showMenu) return
+
       this.isFocused = false
       this.$emit('blur', e)
     },
@@ -241,11 +248,10 @@ export default {
       // Forbid typing in contenteditable element.
       // Note: using contenteditable rather than input in order to be able to fit the select list
       // to its content with CSS. Only contenteditable divs/non-interactive elements can react to focus/blur ).
-      e.preventDefault()
+      // still allow meta key & ctrl key combinations and the tab key (9).
+      if (!e.metaKey && !e.ctrlKey && e.keyCode !== 9) e.preventDefault()
 
-      if ([13, 27, 38, 40].includes(e.keyCode)) e.preventDefault()
-
-      if (e.keyCode === 27) this.closeMenu() // Escape.
+      if (e.keyCode === 27 && this.showMenu) this.closeMenu() // Escape.
       else if (e.keyCode === 13) this.openMenu() // Enter.
 
       // Up & down arrows.
@@ -284,12 +290,16 @@ export default {
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
     },
+    onInputFieldClick () {
+      if (this.showMenu) this.showMenu = false // Will call `closeMenu()` from w-menu(@close).
+      else this.openMenu()
+    },
 
     // Called on item selection: on click & `enter` keydown.
     onListItemSelect (e) {
       this.$emit('item-select', e)
       // Close menu after selection on single select, but keep open if multiple.
-      if (!this.multiple) this.closeMenu()
+      if (!this.multiple) this.showMenu = false // Will call `closeMenu()` from w-menu(@close).
     },
 
     onReset () {
@@ -332,7 +342,7 @@ export default {
 
     // Close the dropdown selection list.
     closeMenu () {
-      if ((this.menuProps || {}).hideOnMenuClick === false) return
+      if (this.menuProps?.hideOnMenuClick === false) return
 
       this.showMenu = false
       // Set the focus back on the main w-select input.

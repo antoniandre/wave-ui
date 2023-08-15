@@ -30,7 +30,7 @@ main
         according to the class in use.
 
   fieldset.w-flex.pa4.pt3.amber-light5--bg(style="position: relative")
-    legend.px1 #[strong.code.amber-dark3 &lt;w-flex&gt;]
+    legend.px1.round #[strong.code.amber-dark3 &lt;w-flex&gt;]
     fieldset.xs3.light-blue-light5--bg.pa3.code
       legend.light-blue-dark2.px1 div.xs3
     fieldset.xs9.light-blue-light5--bg.pa3.code.ml1

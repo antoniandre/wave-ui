@@ -2,10 +2,12 @@
 div
   title-link(h3) 1. Download from NPM
   .ml5
-    ssh-pre.vue-install.mb0(language="shell") npm i wave-ui # Vue 3.
-    .w-flex.align-center
-      | or
-      ssh-pre.vue-install.grow.ml2(language="shell") npm i wave-ui@legacy # Vue 2.x.
+  .w-flex.align-center.wrap
+    ssh-pre.vue-install(language="shell")
+      | npm i wave-ui # Vue 3.
+    span.mx2 or
+    ssh-pre.vue-install(language="shell")
+      | npm i wave-ui@legacy # Vue 2.
 
   title-link(h3) 2. Import in your project
   .ml5
@@ -15,7 +17,6 @@ div
       template(#item-content.1)
         ssh-pre.my0(
           language="js"
-          :dark="$store.state.darkMode"
           style="min-width: 290px").
           // main.js
           import { createApp } from 'vue'
@@ -50,7 +51,6 @@ div
       template(#item-content.2)
         ssh-pre.my0(
           language="js"
-          :dark="$store.state.darkMode"
           style="min-width: 290px").
           // main.js
           import Vue from 'vue'
@@ -88,7 +88,6 @@ div
         .ml5
           ssh-pre.mt2(
             v-show="$store.state.usePug"
-            :dark="$store.state.darkMode"
             language="pug"
             label="App.vue").
             w-app
@@ -98,7 +97,6 @@ div
               w-button My Button
           ssh-pre(
             v-show="!$store.state.usePug"
-            :dark="$store.state.darkMode"
             language="html-vue"
             label="App.vue").
             &lt;w-app&gt;
@@ -113,3 +111,12 @@ div
 
           p Now check your app in the browser!
 </template>
+
+<style lang="scss">
+.op05 {
+  opacity: 0.5;
+  transition: 0.4s;
+
+  &:hover {opacity: 1;}
+}
+</style>

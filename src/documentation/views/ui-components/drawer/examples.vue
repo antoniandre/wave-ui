@@ -118,18 +118,18 @@ div
     The #[strong.code w-drawer] component can be placed in a deeper structure than the root of
     the site.
   example(content-class="relative justify-center d-flex")
-    w-card.ma6.grow.text-center(bg-color="amber-light5" title="w-card")
+    w-card.ma6.grow.text-center(:bg-color="$store.state.darkMode ? 'grey-dark6' : 'amber-light5'" title="w-card")
       w-button.my12(@click="openAbsoluteDrawer = true" text) Open drawer
       w-drawer(v-model="openAbsoluteDrawer" absolute width="160px")
     template(#pug).
-      w-card.ma6.grow.text-center(bg-color="amber-light5" title="w-card")
+      w-card.ma6.grow.text-center(bg-color="{{ $store.state.darkMode ? 'grey-dark6' : 'amber-light5' }}" title="w-card")
         w-button.my12(@click="openDrawer = true" text) Open drawer
 
         w-drawer(v-model="openDrawer" absolute width="160px")
     template(#html).
       &lt;w-card
         class="ma6 grow text-center"
-        bg-color="amber-light5"
+        bg-color="{{ $store.state.darkMode ? 'grey-dark6' : 'amber-light5' }}"
         title="w-card"&gt;
         &lt;w-button class="my12" @click="openDrawer = true" text&gt;
           Open drawer
@@ -204,7 +204,7 @@ div
     To use the push-content layout, an explicit drawer #[code width] is required (don't only set a
     width via CSS). Any valid CSS width will work.#[br]
     The pushable content should be provided via the #[code pushable] slot.
-  example(content-class="relative pa0" app-props-string="" :blank-codepen="['css']")
+  example(content-class="relative pa0" :blank-codepen="['css']")
     w-drawer(
       v-model="openPushContentRightDrawer"
       push-content
@@ -252,7 +252,7 @@ div
         openDrawer: false
       })
 
-  example(content-class="relative pa0" app-props-string="" :blank-codepen="['css']")
+  example(content-class="relative pa0" :blank-codepen="['css']")
     w-drawer(
       v-model="openPushContentLeftDrawer"
       push-content
@@ -434,7 +434,7 @@ div
           icon="wi-cross"&gt;
         &lt;/w-button&gt;
 
-        &lt;div class="w-flex fill-height align-center justify-center"&gt;
+        &lt;div class="w-flex fill-height align-center justify-center black"&gt;
           You can customize the background color as well.
         &lt;/div&gt;
       &lt;/w-drawer&gt;
@@ -507,13 +507,14 @@ div
             &lt;w-icon class="mr2 primary" xl&gt;
               mdi mdi-cookie
             &lt;/w-icon&gt;
-              &lt;span class="grey-dark3"&gt;
+              &lt;span class="{{ $store.state.darkMode ? 'grey-light4' : 'grey-dark3' }}"&gt;
               Our website uses cookies to give you the best user experience.
               To continue browsing this site you must agree.
             &lt;/span&gt;
           &lt;/div&gt;
-          &lt;div class="spacer"&gt;&lt;/div&gt;
-          &lt;w-button @click="showCookieNotice = false"&gt;
+          &lt;div class="spacer" /&gt;
+          &lt;w-button sm @click="showCookieNotice = false"&gt;
+            &lt;w-icon class="mr2"&gt;mdi mdi-check&lt;/w-icon&gt;
             I agree
             &lt;w-icon class="ml2"&gt;mdi mdi-arrow-right&lt;/w-icon&gt;
           &lt;/w-button&gt;
@@ -527,7 +528,11 @@ div
   p.
     You can then store the result of the acceptation in the localStorage when the user clicks
     the button.
-  ssh-pre(v-show="!$store.state.usePug" language="html-vue" label="Template").
+  ssh-pre(
+    v-show="!$store.state.usePug"
+    :dark="$store.state.darkMode"
+    language="html-vue"
+    label="Template").
     &lt;w-button
       class="ml-auto"
       @click="acceptCookies"
@@ -537,12 +542,16 @@ div
       I agree
     &lt;/w-button&gt;
 
-  ssh-pre(v-show="$store.state.usePug" language="pug" label="Template").
+  ssh-pre(
+    v-show="$store.state.usePug"
+    :dark="$store.state.darkMode"
+    language="pug"
+    label="Template").
     w-button.ml-auto(@click="acceptCookies" sm absolute)
       w-icon.mr2 wi-check
       | I agree
 
-  ssh-pre(language="js" label="Javascript").
+  ssh-pre(language="js" label="Javascript" :dark="$store.state.darkMode").
     acceptCookies () {
       localStorage.acceptCookies = 'yes'
       this.showCookieNotice = false
@@ -592,7 +601,7 @@ div
       absolute
       round
       icon="wi-cross")
-    .w-flex.fill-height.align-center.justify-center You can customize the background color as well.
+    .w-flex.fill-height.align-center.justify-center.black You can customize the background color as well.
 </template>
 
 <script>

@@ -29,11 +29,11 @@ export const UIComponents = [
   { id: 'menu', label: 'Menu' },
   { id: 'notification', label: 'Notification' },
   { id: 'overlay', label: 'Overlay' },
-  // { id: 'parallax', label: 'Parallax', disabled: true },
+  // { id: 'parallax', label: 'Parallax', inProgress: true },
   { id: 'progress', label: 'Progress' },
   { id: 'radio', label: 'Radio', formElement: true },
   { id: 'rating', label: 'Rating' },
-  // { id: 'scrollbar', label: 'Scrollbar', disabled: true },
+  { id: 'scrollable', label: 'Scrollable', inProgress: true },
   { id: 'select', label: 'Select', formElement: true },
   { id: 'slider', label: 'Slider' },
   { id: 'spinner', label: 'Spinner' },
@@ -46,7 +46,7 @@ export const UIComponents = [
   { id: 'timeline', label: 'Timeline' },
   { id: 'toolbar', label: 'Toolbar' },
   { id: 'tooltip', label: 'Tooltip' },
-  { id: 'tree', label: 'Tree', inProgress: true }
+  { id: 'tree', label: 'Tree' }
 ]
 
 // The loading state of Vue Router is appended to $router, so a
@@ -136,6 +136,11 @@ const routes = [
     component: () => import('@/documentation/views/colors.vue')
   },
   {
+    path: '/themes',
+    name: 'themes',
+    component: () => import('@/documentation/views/themes.vue')
+  },
+  {
     path: '/shadows-borders-radii',
     name: 'shadows-borders-radii',
     component: () => import('@/documentation/views/shadows-borders-radii.vue')
@@ -154,6 +159,11 @@ const routes = [
     path: '/backers',
     name: 'backers',
     component: () => import('@/documentation/views/backers.vue')
+  },
+  {
+    path: '/migration-from-v2-to-v3',
+    name: 'migration-from-v2-to-v3',
+    component: () => import('@/documentation/views/migration-from-v2-to-v3.vue')
   },
   {
     path: '/form',

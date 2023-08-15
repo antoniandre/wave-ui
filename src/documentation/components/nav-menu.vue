@@ -66,6 +66,7 @@ export default {
       },
       { label: 'Typography', route: '/typography', icon: 'mdi mdi-format-font' },
       { label: 'Colors', route: '/colors', icon: 'mdi mdi-palette' },
+      { label: 'Themes', route: '/themes', icon: 'mdi mdi-weather-night' },
       { label: 'Shadows, borders & radii', route: '/shadows-borders-radii', icon: 'mdi mdi-tools' },
       { label: 'Transitions', route: '/transitions', icon: 'mdi mdi-star-shooting-outline' }
     ],
@@ -113,14 +114,17 @@ export default {
     top: 0;
     bottom: 0;
     right: 0;
-    border-right: 2px solid #f2f2f2;
-    z-index: -1;
+    border-right: 2px solid rgba(#000 , 0.05);
   }
 }
 
-div.nav-menu {
-  height: 90vh;
-  overflow: auto;
+.nav-menu {
+  // Don't apply to the w-app examples.
+  .nav-menu-wrap & {
+    height: 90vh;
+    overflow: auto;
+    z-index: 1;
+  }
 
   .title2 {margin-left: 8px;}
 
@@ -132,7 +136,7 @@ div.nav-menu {
     font-weight: normal;
     border-right: 0 solid $primary;
     color: $primary;
-    transition: $transition-duration ease-in-out, border-width none;
+    transition: $transition-duration ease-in-out, border-width 0s;
 
     &:before {
       content: '';

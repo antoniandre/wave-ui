@@ -46,11 +46,12 @@
     "build": "vite build --base /wave-ui/",
     "build-bundle": "BUNDLE=true vite build && mv ./dist/style.css ./dist/wave-ui.css",
     "serve": "vite preview --base /wave-ui/",
-    "lint": "vite lint"
+    "lint": "vite lint",
+    "publish": "npm run build && npm run build-bundle && git add . && git commit -m 'Publish documentation on Github.' && git push && git push --tag && npm publish --tag latest"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.5",
-    "@babel/eslint-parser": "^7.19.1",
+    "@babel/core": "^7.22.10",
+    "@babel/eslint-parser": "^7.22.10",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@mdi/font": "^6.9.96",
     "@vitejs/plugin-vue": "^1.10.2",
@@ -68,7 +69,7 @@
     "gsap": "^3.11.3",
     "ionicons": "^4.6.3",
     "material-design-icons": "^3.0.1",
-    "postcss": "^8.4.19",
+    "postcss": "^8.4.27",
     "pug": "^3.0.2",
     "rollup-plugin-delete": "^2.0.0",
     "sass": "^1.56.1",

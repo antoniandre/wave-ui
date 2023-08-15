@@ -1,9 +1,15 @@
 html, body {height: 100%;}
 
+:root {
+  --header-waves-pattern: rgba(73, 123, 162, 0.2);
+  scroll-behavior: smooth;
+}
+
 a {color: $links;}
 
 ul, ol {margin-left: 4 * $base-increment + 2px;}
 .w-list--icon .w-list__item-bullet {color: green;}
+.w-list--icon .w-list__item-bullet.wi-minus {color: rgb(213, 117, 0);}
 
 p {margin-bottom: 2 * $base-increment;}
 
@@ -52,6 +58,8 @@ footer {
   button.go-top {display: none;}
 }
 
+// MEDIA QUERIES.
+// --------------------------------------------------------
 @media screen and (max-width: 600px) {
   .title-link .hash {display: none;}
 }

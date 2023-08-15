@@ -2,9 +2,12 @@
 .w-card(:class="classes")
   .w-card__title(
     v-if="$slots.title"
-    :class="{ 'w-card__title--has-toolbar': titleHasToolbar, ...titleClasses }")
+    :class="{ 'w-card__title--has-toolbar': $slots.title && titleHasToolbar, ...titleClasses }")
     slot(name="title")
-  .w-card__title(v-else-if="title" :class="titleClasses" v-html="title")
+  .w-card__title(
+    v-else-if="title"
+    v-html="title"
+    :class="{ 'w-card__title--has-toolbar': title && titleHasToolbar, ...titleClasses }")
   w-image.w-card__image(v-if="image" :src="image" v-bind="imgProps")
     slot(name="image-content")
   .w-card__content(:class="contentClasses")
@@ -94,10 +97,15 @@ export default {
     padding: (2 * $base-increment) (3 * $base-increment);
     font-size: 1.3em;
     border-bottom: $border;
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
 
     &--has-toolbar {padding: 0;border-bottom: none;}
+  }
+
+  // When there is no title apply the border radius to the image.
+  &__image:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    overflow: hidden;
   }
 
   &__content {

@@ -21,6 +21,27 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+    li.patch
+      strong.version v3.4.4
+      ul
+        li
+          strong.code w-select
+          ul
+            li Keep select list focused when the selection menu is open. #[issue-link 115]
+            li Allow #[kbd tab] keypress and #[kbd ctrl] or #[kbd command] key combinations.
+
+    li.patch
+      strong.version v3.4.3
+      ul
+        li
+          strong.code w-card
+          ul
+            li Apply the card border-radius to the card image (if any) if there is no title.
+        li
+          strong.code w-tree
+          ul
+            li Handle selectable items, and maintain their selected state after clicking elsewhere (previously it was only acting like a focusable element).
+
     li.minor
       strong.version v3.4.0
       ul
@@ -127,7 +148,7 @@ main
           ul
             li Allow HTML in card title.
 
-    li.patch
+    li.minor
       strong.version v2.48.0
       ul
         li
@@ -489,7 +510,8 @@ main
         li #[strong.code w-spinner]: Fix the toggling using v-model or modelValue on Vue 3.
 
     li.major.dashed
-      strong.version v2.0
+      title-link.ma0(h2 slug="v2.0")
+        strong.version v2.0
       alert(warning)
         | From this version onwards, Vue 3 must be installed:
         br
@@ -627,47 +649,6 @@ main
           strong.code w-switch
           ul
             li Fix the #[code loading] prop with fixed value.
-
-    li.minor
-      strong.version v1.61.0
-      ul
-        li
-          strong.code w-tree
-          ul
-            li Added a new component to present data in a tree view. #[span.tag.new]
-        li
-          strong.code w-icon
-          ul
-            li Added a default transform transition on #[code w-icon:before].
-        li
-          strong Color palette
-          ul
-            li The color palette have 2 new color shades per color and more homogenous light distribution. #[span.tag.new]
-        li
-          strong w-dialog
-          ul
-            li Fix the dialog height when nested in a fullscreen dialog.
-        li
-          strong w-input
-          ul
-            li The CSS font family, style, and weight of the input field is now inherited from the parent.
-        li
-          strong w-image
-          ul
-            li Added a new #[code spinner-color] option. #[span.tag.new]
-
-    li.minor
-      strong.version v1.60.0
-      ul
-        li
-          strong.code w-table
-          ul
-            li Added the #[code sort-function] option for server side sorting. #[span.tag.new]
-          strong Scoped slots fixes
-          ul
-            li.
-              Fixed a few scoped slots on components: w-checkboxes, w-radios, w-timeline,
-              w-form-element (only impacted Vue 2).
 
     li.minor
       strong.version v1.61.0
@@ -1627,9 +1608,9 @@ main
       position: absolute;
       top: 11px;
       left: 0;
-      background-color: #fff;
+      background-color: $base-bg-color;
       border-radius: 1em;
-      border: 1px solid #ddd;
+      border: 1px solid currentColor;
       width: 1em;
       aspect-ratio: 1;
       transform: translate(-50%, -50%);
@@ -1642,20 +1623,20 @@ main
       content: '';
       position: absolute;
       top: 11px;
-      bottom: -31px; // 11px top + 20px margin between each li.
+      bottom: -39px; // 11px top + 28px margin between each li.
       left: -0.5px;
       border-left: 1px solid #ddd;
     }
     > li:last-child:after {display: none;}
     > li.dashed:after {border-left-style: dashed;}
-    > li.patch:before {font-size: 7px;border-color: #ccc;}
-    > li.minor:before {font-size: 11px;border-color: #999;}
-    > li.major:before {font-size: 14px;border-color: #09c;}
+    > li.patch:before {font-size: 7px;}
+    > li.minor:before {font-size: 11px;}
+    > li.major:before {font-size: 14px;}
 
-    .version {font: bold 1.2rem monospace;}
-    > li.patch .version {color: #999;}
-    > li.minor .version {color: #555;}
-    > li.major .version {color: #09c;font-size: 1.4rem;}
+    .version {font: bold 1.2rem monospace;display: block;}
+    > li.patch:before, > li.patch .version {color: rgba(var(--w-base-color-rgb), 0.3);}
+    > li.minor:before, > li.minor .version {color: rgba(var(--w-base-color-rgb), 0.6);}
+    > li.major:before, > li.major .version {color: #09c;font-size: 1.4rem;}
 
     ul {margin-left: -2px;}
     li li {padding-left: 20px;margin-top: 2px;}

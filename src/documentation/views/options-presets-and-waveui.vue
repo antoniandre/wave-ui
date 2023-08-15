@@ -12,13 +12,13 @@ main
       p Wave UI accepts these configuration options:
       ul.mt4
         li.mb4(v-for="(item, i) in waveUiOptions" :key="i")
-          code {{ item.label }}
+          code.title3 {{ item.label }}
           | :
           div(v-if="item.route")
             | Read on in the
             router-link.mx1(:to="item.route") {{ item.route.startsWith('w-') ?  item.route : item.label }}
             | {{ item.route.startsWith('w-') ?  'component' : 'knowledge base page' }}.
-          div(v-else-if="item.definition") {{ item.definition }}
+          div(v-else-if="item.definition" v-html="item.definition")
 
       .mt6
         w-icon.ml-1.mr1 wi-chevron-right

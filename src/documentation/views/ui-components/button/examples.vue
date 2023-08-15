@@ -16,7 +16,13 @@ div
     secondary color and a color palette color shade.
   p
     strong.mr1 Note:
-    | The 4 status colors as well as the primary color have a white text by default.
+    ul
+      li The 4 status colors have a white text by default on both light and dark themes.
+      li.
+        The primary color is usually standing out from the background by a higher contrast difference.
+        So when used as a background in a light theme the primary color is considered dark and has a white
+        text by default, while in the dark theme, it will have a black text by default.
+        You can override this color with #[code .w-app .primary--bg {color: #000;}].
   example
     w-flex.wrap
       w-button.ma1(bg-color="success") success
@@ -80,7 +86,7 @@ div
         warning
       &lt;/w-button&gt;
 
-  h3 Dark
+  h3 Dark / Light
   p.
     By default the #[code primary] color is considered dark as well as the four status colors:
     #[code success], #[code error], #[code warning] &amp; #[code info].
@@ -114,12 +120,12 @@ div
     w-button.ma1(bg-color="secondary" disabled) disabled
     br
     br
-    w-button.ma1(bg-color="primary" color="white" xs) extra small
-    w-button.ma1(bg-color="primary" color="white" sm) small
-    w-button.ma1(bg-color="primary" color="white" md) medium
-    w-button.ma1(bg-color="primary" color="white" lg) large
-    w-button.ma1(bg-color="primary" color="white" xl) extra large
-    w-button.ma1(bg-color="primary" color="white" disabled) disabled
+    w-button.ma1(bg-color="primary" xs) extra small
+    w-button.ma1(bg-color="primary" sm) small
+    w-button.ma1(bg-color="primary" md) medium
+    w-button.ma1(bg-color="primary" lg) large
+    w-button.ma1(bg-color="primary" xl) extra large
+    w-button.ma1(bg-color="primary" disabled) disabled
     template(#pug).
       w-button.ma1(bg-color="secondary" xs) extra small
       w-button.ma1(bg-color="secondary" sm) small
@@ -129,12 +135,12 @@ div
       w-button.ma1(bg-color="secondary" disabled) disabled
       br
       br
-      w-button.ma1(bg-color="primary" color="white" xs) extra small
-      w-button.ma1(bg-color="primary" color="white" sm) small
-      w-button.ma1(bg-color="primary" color="white" md) medium
-      w-button.ma1(bg-color="primary" color="white" lg) large
-      w-button.ma1(bg-color="primary" color="white" xl) extra large
-      w-button.ma1(bg-color="primary" color="white" disabled) disabled
+      w-button.ma1(bg-color="primary" xs) extra small
+      w-button.ma1(bg-color="primary" sm) small
+      w-button.ma1(bg-color="primary" md) medium
+      w-button.ma1(bg-color="primary" lg) large
+      w-button.ma1(bg-color="primary" xl) extra large
+      w-button.ma1(bg-color="primary" disabled) disabled
     template(#html).
       &lt;w-button class="ma1" bg-color="secondary" xs&gt;extra small&lt;/w-button&gt;
       &lt;w-button class="ma1" bg-color="secondary" sm&gt;small&lt;/w-button&gt;
@@ -144,24 +150,33 @@ div
       &lt;w-button class="ma1" bg-color="secondary" disabled&gt;disabled&lt;/w-button&gt;
       &lt;br&gt;
       &lt;br&gt;
-      &lt;w-button class="ma1" bg-color="primary" color="white" xs&gt;extra small&lt;/w-button&gt;
-      &lt;w-button class="ma1" bg-color="primary" color="white" sm&gt;small&lt;/w-button&gt;
-      &lt;w-button class="ma1" bg-color="primary" color="white" md&gt;medium&lt;/w-button&gt;
-      &lt;w-button class="ma1" bg-color="primary" color="white" lg&gt;large&lt;/w-button&gt;
-      &lt;w-button class="ma1" bg-color="primary" color="white" xl&gt;extra large&lt;/w-button&gt;
-      &lt;w-button class="ma1" bg-color="primary" color="white" disabled&gt;disabled&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" xs&gt;extra small&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" sm&gt;small&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" md&gt;medium&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" lg&gt;large&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" xl&gt;extra large&lt;/w-button&gt;
+      &lt;w-button class="ma1" bg-color="primary" disabled&gt;disabled&lt;/w-button&gt;
 
   h3 Stretch to the available space
+  ul
+    li In a flex content, you can add the #[code grow] class.
+    li In a block context, you can add the #[code fill-width] class.
   example
     w-flex
-      w-button.ma1.grow(bg-color="primary") primary
+      w-button.grow Block Button
+    br
+    w-button.fill-width Block Button
     template(#pug).
       w-flex
-        w-button.ma1.grow(bg-color="primary") primary
+        w-button.grow Block Button
+      br
+      w-button.fill-width Block Button
     template(#html).
       &lt;w-flex&gt;
-        &lt;w-button class="ma1 grow" bg-color="primary"&gt;primary&lt;/w-button&gt;
+        &lt;w-button class="grow"&gt;primary&lt;/w-button&gt;
       &lt;/w-flex&gt;
+      &lt;br/&gt;
+      &lt;w-button class="fill-width"&gt;primary&lt;/w-button&gt;
 
   h3 Custom width and height
   p.

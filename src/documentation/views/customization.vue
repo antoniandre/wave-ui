@@ -82,7 +82,8 @@ main
         }
 
       alert(info).
-        Note from the above code that since you import Wave UI source code, you need to transpile it.
+        Note from the above code that since you import Wave UI source code, you need to transpile
+        it if you don't use ESM.<br>Vite uses ESM.
 
   .title4.mt8 Voilà !
   p You're all set, you can now override the SCSS variables.

@@ -145,7 +145,8 @@ export default {
         'w-rating__button--half': isHalf,
         [this.icon]: true,
         [`size--${this.size}`]: true,
-        [isOn ? this.color : this.bgColor]: true
+        [this.color]: isOn,
+        [this.bgColor]: this.bgColor && !isOn
       }
     }
   },

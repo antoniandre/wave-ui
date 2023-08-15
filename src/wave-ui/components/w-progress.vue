@@ -11,7 +11,7 @@
       //- Background first, in SVG there is no z-index.
       circle.bg(
         v-if="bgColor || this.progressValue > -1"
-        :class="bgColor"
+        :class="bgColor || null"
         :cx="circleCenter"
         :cy="circleCenter"
         :r="circleRadius"

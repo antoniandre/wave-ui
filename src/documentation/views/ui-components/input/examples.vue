@@ -748,7 +748,8 @@ div
     In this example, the file is uploaded to #[a(href="https://filebin.net" target="_blank") Filebin].
     The file is transferred as #[code application/x-www-form-urlencoded] similar to
     #[code application/octet-stream] with the file in the body of the request as per the
-    expectation of the Filebin API.
+    expectation of the Filebin API.#[br]
+    Note: you need to disable any ad blocker and refresh the page before trying this example.
   example(reactive external-js="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js")
     w-form(@success="onFormSuccess")
       w-input(

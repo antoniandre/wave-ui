@@ -273,9 +273,8 @@ div
             lastName: 'Doe'
           })
           this.$nextTick(() => {
-            this.$refs.table.$el
-              .querySelector('tbody tr:last-child')
-              .scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+            const table = this.$refs.table.$el
+            table.scrollTo({ top: table.scrollHeight, behavior: 'smooth' })
           })
         }
       }
@@ -285,7 +284,6 @@ div
   p It can be useful if you want to keep the columns alignments in the footer.
   example
     w-table(
-      ref="table"
       :headers="table3.headers"
       no-headers
       :items="table3.items"
@@ -300,7 +298,6 @@ div
             | {{ header.label }}
     template(#pug).
       w-table(
-        ref="table"
         :headers="table.headers"
         no-headers
         :items="table.items"
@@ -315,7 +312,6 @@ div
               | {{ '\{\{ header.label \}\}' }}
     template(#html).
       &lt;w-table
-        ref="table"
         :headers="table.headers"
         no-headers
         :items="table.items"
@@ -626,6 +622,10 @@ div
           sort: '+firstName'
         }
       })
+  alert(tip).
+    By default any column being sorted is highlighted. You can modify the style of the whole column
+    with the class #[code .w-table__col--highlighted].#[br]
+    Also, if you try to target it in the devtools and can't find it, it's in #[code table &gt; colgroup].
 
   title-link(h3) Asynchronous Sorting
   p.
@@ -1053,31 +1053,184 @@ div
 
   title-link(h2 slug="pagination")
     | Pagination
-    w-tag.ml2.text-bold(round color="warning" outline sm) COMING SOON
-  example
-    | Coming soon.
-    //- w-table(
-      :headers="table1.headers"
-      :items="table1.items"
-      :pagination="table1.pagination")
+    w-tag.ml2.text-bold(round color="warning" outline sm) IN PROGRESS
+  p The pagination can be provided as an object:
+  ssh-pre(language="js").
+    {
+      itemsPerPage: Integer, // Number of rows to show per page.
+      itemsPerPageOptions: Array, // Items per page options for the user.
+      start: Integer, // The start of the results range.
+      end: Integer, // The end of the results range.
+      page: Integer, // The current page to display [itemsPerPage] number of rows.
+      total: Integer // The total number of items available in the table.
+    }
+  p More details in the #[a(href="#pagination") API section].
+  p.
+    The pagination is a two-way binding object: if you modify any property inside it, the table
+    will re-paginate and update.
+  p.
+    You are free to use #[code start] &amp; #[code end] or #[code page] and #[code itemsPerPage]
+    options at your convenience when triggering a pagination.
+
+  title-link(h3) Client-side pagination
+  example(:blank-codepen="['js']")
+    w-table(
+      :headers="table11.headers"
+      :items="table11.items"
+      fixed-headers
+      fixed-footer
+      :pagination="table11.pagination"
+      style="max-height: 500px")
     template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :pagination="table.pagination"
+        style="max-height: 500px")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :pagination="table.pagination"
+        style="max-height: 500px"&gt;
+      &lt;/w-table&gt;
     template(#js).
-      data: () => ({
-        table: {
-          headers: [
-            { label: 'ID', key: 'id' },
-            { label: 'First name', key: 'firstName' },
-            { label: 'Last name', key: 'lastName' }
-          ],
-          items: [
-            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
-            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
-            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
-            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
-            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
-          ]
+      // import { faker } from '@faker-js/faker' // With npm.
+      import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'
+
+      const app = Vue.createApp({
+        data: () => ({
+          table: {
+            headers: [
+              { label: 'ID', key: 'id' },
+              { label: 'First name', key: 'firstName' },
+              { label: 'Last name', key: 'lastName' },
+              { label: 'Birthdate', key: 'birthdate' },
+            ],
+            items: Array(200).fill('').map((item, i) => ({
+              id: i + 1,
+              firstName: faker.person.firstName(),
+              lastName: faker.person.lastName(),
+              birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
+            })),
+            pagination: {
+              itemsPerPage: 50,
+              total: 200
+            }
+          }
+        })
+      })
+
+      app.use(WaveUI, {
+        colors: {
+          primary: '#89b6d2',
+          secondary: '375b6a'
+        },
+        theme: 'dark'
+      })
+
+      app.mount('#app')
+
+  title-link(h3) Server-side pagination
+  p This example showcases an asynchronous pagination with backend fetching of the table items.
+  example(:blank-codepen="['js']")
+    w-table(
+      :headers="table12.headers"
+      :items="table12.items"
+      fixed-headers
+      fixed-footer
+      :fetch="table12.fetch"
+      :pagination="table12.pagination"
+      :loading="table12.loading"
+      style="max-height: 500px")
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :fetch="table.fetch"
+        :pagination="table.pagination"
+        :loading="table.loading"
+        style="max-height: 500px")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :fetch="fetch"
+        :pagination="table.pagination"
+        :loading="table.loading"
+        style="max-height: 500px"&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      // import { faker } from '@faker-js/faker' // With npm.
+      import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'
+
+      // Generate a server-side array of objects of 2000 random persons
+      // that we assume will be returned paginated from our backend.
+      const tableItemsInApi = Array(2000).fill('').map((item, i) => ({
+        id: i + 1,
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
+      }))
+
+      const app = Vue.createApp({
+        data: () => ({
+          table: {
+            headers: [
+              { label: 'ID', key: 'id' },
+              { label: 'First name', key: 'firstName' },
+              { label: 'Last name', key: 'lastName' },
+              { label: 'Birthdate', key: 'birthdate' },
+            ],
+            items: [], // The frontend has no data by default.
+            loading: false,
+            pagination: {
+              itemsPerPage: 50,
+              total: 200
+            }
+          }
+        }),
+
+        methods: {
+          // All these parameters are available from Wave UI.
+          fetch ({ page, start, end, total, itemsPerPage, sorting }) {
+            this.table.loading = 'header' // Display the loading bar.
+
+            // Simulating a call to the backend with a delay of 1 second.
+            // Once you receive the rows from the backend assign them to the table.items var.
+            setTimeout(() => {
+              const itemsFromApi = tableItemsInApi.slice(0) // Clone the array before sorting.
+              if (sorting.length) {
+                const sortKey = sorting[0].substring(1)
+                itemsFromApi.sort((a, b) => {
+                  if (sorting[0][0] === '+') return a[sortKey] &lt; b[sortKey] ? -1 : 1
+                  else return a[sortKey] > b[sortKey] ? -1 : 1
+                })
+              }
+              this.table.items = itemsFromApi.slice(start - 1, end)
+              this.table.loading = false
+            }, 1000)
+          }
         }
       })
+
+      app.use(WaveUI, {
+        colors: {
+          primary: '#89b6d2',
+          secondary: '375b6a'
+        },
+        theme: 'dark'
+      })
+
+      app.mount('#app')
 
   title-link(h2) Rows selection
   p Click a row to see it highlighted and get information about the selected item.
@@ -1627,11 +1780,13 @@ div
       One thing that is not calculated on the mobile layout is the labels column width (default: 6.5em).#[br]
       You can override it to set the width you want via:
 
-    ssh-pre.mt5.mb0(language="css" label="CSS").
+    ssh-pre.mt5.mb0(language="css" label="CSS" :dark="$store.state.darkMode").
       .w-table--mobile .w-table__cell:before {width: 8em;}
 </template>
 
 <script>
+import { faker } from '@faker-js/faker'
+
 const allItems = [
   { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
   { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
@@ -1702,155 +1857,211 @@ const tableItemsInAPI = {
   ]
 }
 
+const table12ItemsInApi = Array(2000).fill('').map((item, i) => ({
+  id: i + 1,
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
+}))
+
 export default {
-  data: () => ({
-    table1: {
-      headers: [
-        { label: 'ID', key: 'id' },
-        { label: 'First name', key: 'firstName' },
-        { label: 'Last name', key: 'lastName' }
+  data () {
+    return {
+      table1: {
+        headers: [
+          { label: 'ID', key: 'id' },
+          { label: 'First name', key: 'firstName' },
+          { label: 'Last name', key: 'lastName' }
+        ],
+        items: allItems.slice(0, 5),
+        sort: '+firstName',
+        loading: true,
+        selectableRows: true,
+        selectedRows: [2, 4],
+        forceSelection: false
+      },
+      table2: {
+        headers: [
+          { label: 'ID', key: 'id' },
+          { label: 'First name', key: 'firstName', align: 'center' },
+          { label: 'Last name', key: 'lastName', align: 'right' }
+        ],
+        items: allItems.slice(0, 5)
+      },
+      table3: {
+        headers: [
+          { label: 'ID', key: 'id' },
+          { label: 'First name', key: 'firstName' },
+          { label: 'Last name', key: 'lastName' }
+        ],
+        items: allItems,
+        filters: [
+          null,
+          item => item.lastName[0] === 'M',
+          item => item.id >= 10
+        ],
+        activeFilter: 0,
+        fixedFooter: false
+      },
+      table4: {
+        headers: [
+          { label: 'ID', key: 'id' },
+          { label: 'First name', key: 'firstName' },
+          { label: 'Last name', key: 'lastName' }
+        ],
+        items: allItems,
+        keyword: '',
+        keywordFilter: keyword => item => {
+          const allTheColumns = `${item.id} ${item.firstName} ${item.lastName}`
+          return new RegExp(keyword, 'i').test(allTheColumns)
+        }
+      },
+      table5: {
+        headers: [
+          { label: 'ID', key: 'id' },
+          { label: 'First name', key: 'firstName' },
+          { label: 'Last name', key: 'lastName' }
+        ],
+        items: [
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson', gender: 1, weight: 56, height: 1.69 },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn', gender: 1, weight: 62, height: 1.77 },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol', gender: 0, weight: 71, height: 1.75 },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott', gender: 0, weight: 84, height: 1.83 },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman', gender: 0, weight: 74, height: 1.72 }
+        ]
+      },
+      table6: {
+        headers: [
+          { label: 'ID', key: 'id', hidden: false },
+          { label: 'First name', key: 'firstName', hidden: false },
+          { label: 'Last name', key: 'lastName', hidden: false }
+        ],
+        items: allItems.slice(0, 5)
+      },
+      table7: {
+        headers: [
+          { label: 'ID', key: 'id', width: '50' },
+          { label: 'Content', key: 'content', width: '70%' },
+          { label: 'First name', key: 'firstName' }
+        ],
+        items: [
+          { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
+          { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
+          { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' }
+        ]
+      },
+      table8: {
+        headers: [
+          { label: 'ID', key: 'id', width: '50' },
+          { label: 'Content', key: 'content', width: '70%' },
+          { label: 'First name', key: 'firstName' }
+        ],
+        items: [
+          { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
+          { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
+          { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' }
+        ]
+      },
+      table9: {
+        stickyColumn: 1,
+        fixedHeaders: false,
+        stickyColumnOptions: [
+          { value: 1, label: '#1' },
+          { value: 2, label: '#2' },
+          { value: 24, label: '#2 & #4' },
+          { value: 0, label: 'None' }
+        ],
+        headers: [
+          { label: 'ID', key: 'id', hidden: false, width: '60px', sticky: true },
+          { label: 'First name', key: 'firstName', hidden: false, width: '120px' },
+          { label: 'Last name', key: 'lastName', hidden: false, width: '120px' },
+          { label: 'Birthday', key: 'birthday', email: false, width: '150px' },
+          { label: 'Email', key: 'email', hidden: false, width: '200px' },
+          { label: 'Phone', key: 'phone', hidden: false, width: '200px' },
+          { label: 'Country', key: 'country', hidden: false, width: '200px' }
+        ],
+        items: [
+          { id: 1, firstName: 'Floretta', lastName: 'Sampson', birthday: 'Feb. 12, 1976', email: 'f.sampson@gmail.com', phone: '+21 234 567 8921', country: 'United Kingdom' },
+          { id: 2, firstName: 'Nellie', lastName: 'Lynn', birthday: 'Dec. 15, 1995', email: 'n.lynn@gmail.com', phone: '+22 234 567 8922', country: 'Luxembourg' },
+          { id: 3, firstName: 'Rory', lastName: 'Bristol', birthday: 'Apr. 25, 1989', email: 'r.bristol@gmail.com', phone: '+23 234 567 8923', country: 'Montenegro' },
+          { id: 4, firstName: 'Daley', lastName: 'Elliott', birthday: 'Mar. 24, 2002', email: 'd.elliott@gmail.com', phone: '+24 234 567 8924', country: 'Germany' },
+          { id: 5, firstName: 'Virgil', lastName: 'Carman', birthday: 'Aug. 2, 1990', email: 'v.carman@gmail.com', phone: '+25 234 567 8925', country: 'Ukraine' },
+          { id: 6, firstName: 'Baldwin', lastName: 'Morison', birthday: 'Feb. 12, 2008', email: 'b.morison@gmail.com', phone: '+26 234 567 8926', country: 'Lithuania' },
+          { id: 7, firstName: 'Beckah', lastName: 'Mann', birthday: 'Nov. 6, 1991', email: 'b.mann@gmail.com', phone: '+27 234 567 8927', country: 'Finland' },
+          { id: 8, firstName: 'Davie', lastName: 'Forester', birthday: 'Dec. 6, 1982', email: 'd.forester@gmail.com', phone: '+28 234 567 8928', country: 'Portugal' },
+          { id: 9, firstName: 'Andi', lastName: 'Montgomery', birthday: 'Jan. 20, 1987', email: 'a.montgomery@gmail.com', phone: '+29 234 567 8929', country: 'Czechia' },
+          { id: 10, firstName: 'Magnolia', lastName: 'Kirk', birthday: 'Dec. 31, 1992', email: 'm.kirk@gmail.com', phone: '+30 234 567 8930', country: 'Norway' },
+          { id: 11, firstName: 'Hamilton', lastName: 'Mallory', birthday: 'Dec. 7, 1979', email: 'h.mallory@gmail.com', phone: '+31 234 567 8931', country: 'Greece' },
+          { id: 12, firstName: 'Sheree', lastName: 'Castle', birthday: 'Feb. 16, 1980', email: 's.castle@gmail.com', phone: '+32 234 567 8932', country: 'France' },
+          { id: 13, firstName: 'Rebekah', lastName: 'Eason', birthday: 'Jun. 29, 2000', email: 'r.eason@gmail.com', phone: '+33 234 567 8933', country: 'Poland' },
+          { id: 14, firstName: 'Maude', lastName: 'Hayley', birthday: 'Dec. 31, 2009', email: 'm.hayley@gmail.com', phone: '+34 234 567 8934', country: 'Hungary' },
+          { id: 15, firstName: 'Josie', lastName: 'Richard', birthday: 'Aug. 16, 2004', email: 'j.richard@gmail.com', phone: '+35 234 567 8935', country: 'Italy' }
+        ]
+      },
+      table10: {
+        headers: [
+          { label: 'ID', key: 'id' },
+          { label: 'First name', key: 'firstName' },
+          { label: 'Last name', key: 'lastName' }
+        ],
+        items: allItems.slice(0, 5),
+        loading: false
+      },
+      table11: {
+        headers: [
+          { label: 'ID', key: 'id' },
+          { label: 'First name', key: 'firstName' },
+          { label: 'Last name', key: 'lastName' },
+          { label: 'Birthdate', key: 'birthdate' }
+        ],
+        items: Array(200).fill('').map((item, i) => ({
+          id: i + 1,
+          firstName: faker.name.firstName(),
+          lastName: faker.name.lastName(),
+          birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
+        })),
+        pagination: {
+          itemsPerPage: 50,
+          total: 200
+        }
+      },
+      table12: {
+        headers: [
+          { label: 'ID', key: 'id' },
+          { label: 'First name', key: 'firstName' },
+          { label: 'Last name', key: 'lastName' },
+          { label: 'Birthdate', key: 'birthdate' }
+        ],
+        items: [],
+        loading: false,
+        pagination: {
+          itemsPerPage: 50,
+          total: 2000
+        },
+        fetch: ({ page, start, end, total, itemsPerPage, sorting }) => {
+          this.table12.loading = 'header'
+          setTimeout(() => {
+            const itemsFromApi = table12ItemsInApi.slice(0) // Clone the array before sorting.
+            if (sorting.length) {
+              const sortKey = sorting[0].substring(1)
+              itemsFromApi.sort((a, b) => {
+                if (sorting[0][0] === '+') return a[sortKey] < b[sortKey] ? -1 : 1
+                else return a[sortKey] > b[sortKey] ? -1 : 1
+              })
+            }
+            this.table12.items = itemsFromApi.slice(start - 1, end)
+            this.table12.loading = false
+          }, 1000)
+        }
+      },
+      selectableRowsOptions: [
+        { label: '<code class="mr2">:selectable-row="false"</code> (default)', value: false },
+        { label: '<code>selectable-row</code>', value: true },
+        { label: '<code>:selectable-row="1"</code>', value: 1 }
       ],
-      items: allItems.slice(0, 5),
-      sort: '+firstName',
-      loading: true,
-      selectableRows: true,
-      selectedRows: [2, 4],
-      forceSelection: false
-    },
-    table2: {
-      headers: [
-        { label: 'ID', key: 'id' },
-        { label: 'First name', key: 'firstName', align: 'center' },
-        { label: 'Last name', key: 'lastName', align: 'right' }
-      ],
-      items: allItems.slice(0, 5)
-    },
-    table3: {
-      headers: [
-        { label: 'ID', key: 'id' },
-        { label: 'First name', key: 'firstName' },
-        { label: 'Last name', key: 'lastName' }
-      ],
-      items: allItems,
-      filters: [
-        null,
-        item => item.lastName[0] === 'M',
-        item => item.id >= 10
-      ],
-      activeFilter: 0,
-      fixedFooter: false
-    },
-    table4: {
-      headers: [
-        { label: 'ID', key: 'id' },
-        { label: 'First name', key: 'firstName' },
-        { label: 'Last name', key: 'lastName' }
-      ],
-      items: allItems,
-      keyword: '',
-      keywordFilter: keyword => item => {
-        const allTheColumns = `${item.id} ${item.firstName} ${item.lastName}`
-        return new RegExp(keyword, 'i').test(allTheColumns)
-      }
-    },
-    table5: {
-      headers: [
-        { label: 'ID', key: 'id' },
-        { label: 'First name', key: 'firstName' },
-        { label: 'Last name', key: 'lastName' }
-      ],
-      items: [
-        { id: 1, firstName: 'Floretta', lastName: 'Sampson', gender: 1, weight: 56, height: 1.69 },
-        { id: 2, firstName: 'Nellie', lastName: 'Lynn', gender: 1, weight: 62, height: 1.77 },
-        { id: 3, firstName: 'Rory', lastName: 'Bristol', gender: 0, weight: 71, height: 1.75 },
-        { id: 4, firstName: 'Daley', lastName: 'Elliott', gender: 0, weight: 84, height: 1.83 },
-        { id: 5, firstName: 'Virgil', lastName: 'Carman', gender: 0, weight: 74, height: 1.72 }
-      ]
-    },
-    table6: {
-      headers: [
-        { label: 'ID', key: 'id', hidden: false },
-        { label: 'First name', key: 'firstName', hidden: false },
-        { label: 'Last name', key: 'lastName', hidden: false }
-      ],
-      items: allItems.slice(0, 5)
-    },
-    table7: {
-      headers: [
-        { label: 'ID', key: 'id', width: '50' },
-        { label: 'Content', key: 'content', width: '70%' },
-        { label: 'First name', key: 'firstName' }
-      ],
-      items: [
-        { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
-        { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
-        { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' }
-      ]
-    },
-    table8: {
-      headers: [
-        { label: 'ID', key: 'id', width: '50' },
-        { label: 'Content', key: 'content', width: '70%' },
-        { label: 'First name', key: 'firstName' }
-      ],
-      items: [
-        { id: 1, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Floretta' },
-        { id: 2, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Nellie' },
-        { id: 3, content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, eaque tempore! Ipsum vitae deleniti recusandae, aliquam sequi asperiores, explicabo obcaecati aperiam ratione voluptates possimus assumenda commodi eum quia facere reprehenderit.', firstName: 'Rory' }
-      ]
-    },
-    table9: {
-      stickyColumn: 1,
-      fixedHeaders: false,
-      stickyColumnOptions: [
-        { value: 1, label: '#1' },
-        { value: 2, label: '#2' },
-        { value: 24, label: '#2 & #4' },
-        { value: 0, label: 'None' }
-      ],
-      headers: [
-        { label: 'ID', key: 'id', hidden: false, width: '60px', sticky: true },
-        { label: 'First name', key: 'firstName', hidden: false, width: '120px' },
-        { label: 'Last name', key: 'lastName', hidden: false, width: '120px' },
-        { label: 'Birthday', key: 'birthday', email: false, width: '150px' },
-        { label: 'Email', key: 'email', hidden: false, width: '200px' },
-        { label: 'Phone', key: 'phone', hidden: false, width: '200px' },
-        { label: 'Country', key: 'country', hidden: false, width: '200px' }
-      ],
-      items: [
-        { id: 1, firstName: 'Floretta', lastName: 'Sampson', birthday: 'Feb. 12, 1976', email: 'f.sampson@gmail.com', phone: '+21 234 567 8921', country: 'United Kingdom' },
-        { id: 2, firstName: 'Nellie', lastName: 'Lynn', birthday: 'Dec. 15, 1995', email: 'n.lynn@gmail.com', phone: '+22 234 567 8922', country: 'Luxembourg' },
-        { id: 3, firstName: 'Rory', lastName: 'Bristol', birthday: 'Apr. 25, 1989', email: 'r.bristol@gmail.com', phone: '+23 234 567 8923', country: 'Montenegro' },
-        { id: 4, firstName: 'Daley', lastName: 'Elliott', birthday: 'Mar. 24, 2002', email: 'd.elliott@gmail.com', phone: '+24 234 567 8924', country: 'Germany' },
-        { id: 5, firstName: 'Virgil', lastName: 'Carman', birthday: 'Aug. 2, 1990', email: 'v.carman@gmail.com', phone: '+25 234 567 8925', country: 'Ukraine' },
-        { id: 6, firstName: 'Baldwin', lastName: 'Morison', birthday: 'Feb. 12, 2008', email: 'b.morison@gmail.com', phone: '+26 234 567 8926', country: 'Lithuania' },
-        { id: 7, firstName: 'Beckah', lastName: 'Mann', birthday: 'Nov. 6, 1991', email: 'b.mann@gmail.com', phone: '+27 234 567 8927', country: 'Finland' },
-        { id: 8, firstName: 'Davie', lastName: 'Forester', birthday: 'Dec. 6, 1982', email: 'd.forester@gmail.com', phone: '+28 234 567 8928', country: 'Portugal' },
-        { id: 9, firstName: 'Andi', lastName: 'Montgomery', birthday: 'Jan. 20, 1987', email: 'a.montgomery@gmail.com', phone: '+29 234 567 8929', country: 'Czechia' },
-        { id: 10, firstName: 'Magnolia', lastName: 'Kirk', birthday: 'Dec. 31, 1992', email: 'm.kirk@gmail.com', phone: '+30 234 567 8930', country: 'Norway' },
-        { id: 11, firstName: 'Hamilton', lastName: 'Mallory', birthday: 'Dec. 7, 1979', email: 'h.mallory@gmail.com', phone: '+31 234 567 8931', country: 'Greece' },
-        { id: 12, firstName: 'Sheree', lastName: 'Castle', birthday: 'Feb. 16, 1980', email: 's.castle@gmail.com', phone: '+32 234 567 8932', country: 'France' },
-        { id: 13, firstName: 'Rebekah', lastName: 'Eason', birthday: 'Jun. 29, 2000', email: 'r.eason@gmail.com', phone: '+33 234 567 8933', country: 'Poland' },
-        { id: 14, firstName: 'Maude', lastName: 'Hayley', birthday: 'Dec. 31, 2009', email: 'm.hayley@gmail.com', phone: '+34 234 567 8934', country: 'Hungary' },
-        { id: 15, firstName: 'Josie', lastName: 'Richard', birthday: 'Aug. 16, 2004', email: 'j.richard@gmail.com', phone: '+35 234 567 8935', country: 'Italy' }
-      ]
-    },
-    table10: {
-      headers: [
-        { label: 'ID', key: 'id' },
-        { label: 'First name', key: 'firstName' },
-        { label: 'Last name', key: 'lastName' }
-      ],
-      items: allItems.slice(0, 5),
-      loading: false
-    },
-    selectableRowsOptions: [
-      { label: '<code class="mr2">:selectable-row="false"</code> (default)', value: false },
-      { label: '<code>selectable-row</code>', value: true },
-      { label: '<code>:selectable-row="1"</code>', value: 1 }
-    ],
-    selectionInfo: {}
-  }),
+      selectionInfo: {}
+    }
+  },
 
   methods: {
     reload () {
@@ -1871,7 +2082,8 @@ export default {
     addRow () {
       this.table3.items.push({ id: this.table3.items.length + 1, firstName: 'John', lastName: 'Doe' })
       this.$nextTick(() => {
-        this.$refs.table.$el.querySelector('tbody tr:last-child').scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+        const table = this.$refs.table.$el
+        table.scrollTo({ top: table.scrollHeight, behavior: 'smooth' })
       })
     },
 

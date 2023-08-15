@@ -11,6 +11,9 @@ export default new Vuex.Store({
   },
 
   mutations: {
+    setDarkMode (state, bool) {
+      state.darkMode = bool
+    },
     setCurrentPage (state, pageTitle) {
       state.currentPage = pageTitle
     },
@@ -31,6 +34,16 @@ export default new Vuex.Store({
         state.tabsView = tabsView
         localStorage.setItem('tabsView', +tabsView)
       }
+    }
+  },
+
+  actions: {
+    detectDarkMode ({ commit }) {
+      // Detect the dark mode preference.
+      const darkMode = window?.matchMedia?.('(prefers-color-scheme: dark)')?.matches
+
+      commit('setDarkMode', darkMode)
+      return darkMode
     }
   }
 })
