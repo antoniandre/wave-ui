@@ -539,6 +539,39 @@ main
     //-----------------------------------------------------
 
     li.minor
+      strong.version v1.67.0
+      ul
+        li
+          strong.code w-confirm
+          ul
+            li Support classes and styles on activator button
+        li
+          strong.code w-select
+          ul
+            li Keep select list focused when the selection menu is open. #[issue-link 115]
+            li Allow #[kbd tab] keypress and #[kbd ctrl] or #[kbd command] key combinations.
+        li
+          strong.code w-card
+          ul
+            li Apply the card border-radius to the card image (if any) if there is no title.
+        li
+          strong.code w-tree
+          ul
+            li Handle selectable items, and maintain their selected state after clicking elsewhere (previously it was only acting like a focusable element).
+
+          strong.code w-table
+          ul
+            li Added the pagination feature. #[span.tag.new]
+            li Highlight a table column when it is being sorted.
+        li
+          strong.code w-button
+          ul
+            li Inherit the border-radius on the loader if any.
+            li.
+              Updated the look and feel of the button in the #[code :active] state,
+              and use #[code :focus-visible] state instead of #[code :focus].
+
+    li.minor
       strong.version v1.66.0
       ul
         li
