@@ -1641,7 +1641,7 @@ main
       position: absolute;
       top: 11px;
       left: 0;
-      background-color: $base-bg-color;
+      background-color: #fff;
       border-radius: 1em;
       border: 1px solid currentColor;
       width: 1em;
