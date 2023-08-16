@@ -285,7 +285,14 @@ export default {
       columnEl: null,
       nextColumnEl: null
     },
-    paginationConfig: {}
+    paginationConfig: {
+      itemsPerPage: 0,
+      itemsPerPageOptions: {},
+      start: 0,
+      end: 0,
+      page: 1,
+      total: 0
+    }
   }),
 
   computed: {
@@ -925,6 +932,8 @@ $tr-border-top: 1px;
     .pages-wrap {
       margin-left: 3 * $base-increment;
       margin-right: 3 * $base-increment;
+      padding-left: 1px; // Prevent overflow causing scrollbar.
+      padding-right: 1px;
       overflow: auto;
       max-height: 4.5em;
     }
@@ -961,6 +970,8 @@ $tr-border-top: 1px;
       margin-left: $base-increment;
       margin-right: $base-increment;
       white-space: nowrap;
+      min-width: 90px;
+      text-align: right;
     }
   }
 }
