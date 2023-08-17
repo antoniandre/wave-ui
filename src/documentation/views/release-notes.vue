@@ -546,6 +546,14 @@ main
     //- Vue 2.
     //-----------------------------------------------------
 
+    li.patch
+      strong.version v1.67.2
+      ul
+        li
+          strong.code w-input
+          ul
+            li Allow resetting an input type file by setting its value to null.
+
     li.minor
       strong.version v1.67.0
       ul
