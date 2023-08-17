@@ -22,6 +22,14 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
     li.patch
+      strong.version v3.4.6
+      ul
+        li
+          strong.code w-input
+          ul
+            li Allow resetting an input type file by setting its value to null.
+
+    li.patch
       strong.version v3.4.4
       ul
         li

@@ -933,6 +933,9 @@ div
         multiple&gt;
       &lt;/w-input&gt;
 
+  title-link(h3) Clearing the field
+  p Resetting the #[code input type="file"] is as easy as setting its value to null (native HTML way).
+
   //- OTHER TYPES.
   title-link(h2) Types
   p The default type is "#[span.code text]" but the types below are also supported.

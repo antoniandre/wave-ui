@@ -286,8 +286,8 @@ export default {
     paginationConfig: {
       itemsPerPage: 0,
       itemsPerPageOptions: {},
-      start: 0,
-      end: 0,
+      start: undefined,
+      end: undefined,
       page: 1,
       total: 0
     }

@@ -180,6 +180,8 @@ export default {
       // Keep the `class` attribute bound to the wrapper and not the input.
       // eslint-disable-next-line no-unused-vars
       const { class: classes, ...htmlAttrs } = this.$attrs
+      // Resets the input[type=file] the native HTML way.
+      if (this.type === 'file' && !this.inputFiles.length) htmlAttrs.value = null
       return htmlAttrs
     },
 
@@ -355,7 +357,10 @@ export default {
     value (value) {
       this.inputValue = value
       // When clearing the field value, also reset the isAutofilled var for the CSS class.
-      if (!value && value !== 0) this.isAutofilled = false
+      if (!value && value !== 0) {
+        this.isAutofilled = false
+        this.inputFiles = []
+      }
     }
   }
 }
