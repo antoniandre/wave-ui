@@ -552,8 +552,64 @@ main
     //- Vue 2.
     //-----------------------------------------------------
 
-    //- li.minor
+    li.patch
+      strong.version v1.67.3
+      ul
+        li
+          strong.code w-input
+          ul
+            li.red.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
+
+    li.patch
+      strong.version v1.67.2
+      ul
+        li
+          strong.code w-input
+          ul
+            li Allow resetting a #[code w-input type="file"] by setting its value to #[code null].
+
+    li.minor
+      strong.version v1.67.0
+      ul
+        li
+          strong.code w-confirm
+          ul
+            li Support classes and styles on activator button
+        li
+          strong.code w-select
+          ul
+            li Keep select list focused when the selection menu is open. #[issue-link 115]
+            li Allow #[kbd tab] keypress and #[kbd ctrl] or #[kbd command] key combinations.
+        li
+          strong.code w-card
+          ul
+            li Apply the card border-radius to the card image (if any) if there is no title.
+        li
+          strong.code w-tree
+          ul
+            li Handle selectable items, and maintain their selected state after clicking elsewhere (previously it was only acting like a focusable element).
+
+          strong.code w-table
+          ul
+            li Added the pagination feature. #[span.tag.new]
+            li Highlight a table column when it is being sorted.
+        li
+          strong.code w-button
+          ul
+            li Inherit the border-radius on the loader if any.
+            li.
+              Updated the look and feel of the button in the #[code :active] state,
+              and use #[code :focus-visible] state instead of #[code :focus].
+
+    li.minor
       strong.version v1.66.0
+      ul
+        li
+          strong.code w-tabs
+          ul
+            li Added a #[code keep-in-dom] option to keep tabs in the DOM (Useful for iframes which must not reload).
+            li Added a #[code keep-alive] option to keep tabs alive (by default, as before) or not (when set to false).
+            li Introduced an internal unique IDs system to more accurately recognize tabs after tab injection or replacement.
 
     li.patch
       strong.version v1.65.1
@@ -565,8 +621,13 @@ main
             li The final button mounted in the DOM will have the class #[code w-confirm].
             li Any CSS class added on the #[code w-confirm] component will act only on the activator button (and not the w-menu as well like it did before this patch).
 
-    //- li.minor
+    li.minor
       strong.version v1.65.0
+      ul
+        li
+          strong.code w-button
+          ul
+            li Support button CSS #[strong dynamic] classes with tooltip option (Vue 2 specific).
 
     li.patch
       strong.version v1.64.1
