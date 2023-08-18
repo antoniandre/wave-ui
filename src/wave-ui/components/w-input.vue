@@ -314,8 +314,10 @@ export default {
 
         return file
       }))
-      this.$emit('update:modelValue', this.inputFiles)
-      this.$emit('input', this.inputFiles)
+
+      const filesPayload = this.multiple ? this.inputFiles : this.inputFiles[0]
+      this.$emit('update:modelValue', filesPayload)
+      this.$emit('input', filesPayload)
     },
 
     // For file input.
