@@ -547,12 +547,20 @@ main
     //-----------------------------------------------------
 
     li.patch
+      strong.version v1.67.3
+      ul
+        li
+          strong.code w-input
+          ul
+            li.red.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
+
+    li.patch
       strong.version v1.67.2
       ul
         li
           strong.code w-input
           ul
-            li Allow resetting an input type file by setting its value to null.
+            li Allow resetting a #[code w-input type="file"] by setting its value to #[code null].
 
     li.minor
       strong.version v1.67.0
