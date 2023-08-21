@@ -442,7 +442,7 @@ div
     w-input.mb2(
       label="Password"
       :type="isPassword ? 'password' : 'text'"
-      :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+      :inner-icon-left="'mdi mdi-lock'"
       :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
       @click:inner-icon-right="isPassword = !isPassword")
     w-input.mb2(
@@ -463,7 +463,7 @@ div
       w-input.mb2(
         label="Password"
         :type="isPassword ? 'password' : 'text'"
-        :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+        :inner-icon-left="'mdi mdi-lock'"
         :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
         @click:inner-icon-right="isPassword = !isPassword")
       w-input.mb2(
@@ -494,7 +494,7 @@ div
       &lt;w-input class="mb2"
         label="Password"
         :type="isPassword ? 'password' : 'text'"
-        :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+        :inner-icon-left="'mdi mdi-lock'"
         :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
         @click:inner-icon-right="isPassword = !isPassword"&gt;
       &lt;/w-input&gt;
