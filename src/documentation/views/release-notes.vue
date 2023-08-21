@@ -569,8 +569,15 @@ main
         li
           strong.code w-input
           ul
-            li.red.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
             li Show the #[code w-input type="file"] bottom border even after upload completion.
+
+    li.patch
+      strong.version v1.67.3
+      ul
+        li
+          strong.code w-input
+          ul
+            li.red.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
 
     li.patch
       strong.version v1.67.2
