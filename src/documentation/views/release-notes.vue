@@ -21,6 +21,7 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+
     li.patch
       strong.version v3.4.8
       ul
@@ -563,12 +564,13 @@ main
     //-----------------------------------------------------
 
     li.patch
-      strong.version v1.67.3
+      strong.version v1.67.4
       ul
         li
           strong.code w-input
           ul
             li.red.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
+            li Show the #[code w-input type="file"] bottom border even after upload completion.
 
     li.patch
       strong.version v1.67.2
