@@ -22,7 +22,14 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
-    li.patch
+    li.minor
+      strong.version v3.5.1
+        li
+          strong.code w-select
+          ul
+            li Prevent an error when the v-model is set to #[code null].
+
+    li.minor
       strong.version v3.5.0
         li
           strong.code w-checkbox &amp; w-radio
@@ -567,6 +574,13 @@ main
     //- Vue 2.
     //-----------------------------------------------------
 
+    li.minor
+      strong.version v1.68.0
+        li
+          strong.code w-checkbox &amp; w-radio
+          ul
+            li Added readonly option. #[span.tag.new]
+
     li.patch
       strong.version v1.67.3
       ul
@@ -574,6 +588,7 @@ main
           strong.code w-input
           ul
             li.red.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
+            li Show the #[code w-input type="file"] bottom border even after upload completion.
 
     li.patch
       strong.version v1.67.2
