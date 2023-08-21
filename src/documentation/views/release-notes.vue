@@ -22,6 +22,14 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
     li.patch
+      strong.version v3.4.8
+      ul
+        li
+          strong.code w-input
+          ul
+            li Show the upload field bottom border even after upload completion.
+
+    li.patch
       strong.version v3.4.7
       ul
         li
