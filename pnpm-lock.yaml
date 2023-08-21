@@ -14,8 +14,8 @@ devDependencies:
     specifier: ^7.6.0
     version: 7.6.0
   '@mdi/font':
-    specifier: ^5.9.55
-    version: 5.9.55
+    specifier: ^6.9.96
+    version: 6.9.96
   '@vitejs/plugin-vue':
     specifier: ^3.2.0
     version: 3.2.0(vite@3.2.7)(vue@3.3.4)
@@ -490,8 +490,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@mdi/font@5.9.55:
-    resolution: {integrity: sha512-jswRF6q3eq8NWpWiqct6q+6Fg/I7nUhrxYJfiEM8JJpap0wVJLQdbKtyS65GdlK7S7Ytnx3TTi/bmw+tBhkGmg==}
+  /@mdi/font@6.9.96:
+    resolution: {integrity: sha512-z3QVZStyHVwkDsFR7A7F2PIvZJPWgdSFw4BEEy2Gc9HUN5NfK9mGbjgaYClRcbMWiYEV45srmiYtczmBtCqR8w==}
     dev: true
 
   /@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1:
