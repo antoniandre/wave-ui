@@ -415,10 +415,7 @@ $inactive-color: #777;
     &--round {border-radius: 99em;}
     &--tile {border-radius: initial;}
     &--shadow {box-shadow: $box-shadow;}
-    &--loading, &--upload-complete {
-      border-bottom-color: transparent;
-      flex-wrap: wrap;
-    }
+    &--loading, &--upload-complete {flex-wrap: wrap;}
     &--loading ~ .w-progress {
       height: 2px;
       position: absolute;
@@ -427,8 +424,7 @@ $inactive-color: #777;
     }
 
     .w-input--focused & {border-color: currentColor;}
-    .w-input--focused &--loading,
-    .w-input--focused &--upload-complete {border-bottom-color: transparent;}
+    .w-input--focused &--loading {border-bottom-color: transparent;}
 
     // Underline.
     &--underline:after {
@@ -443,8 +439,6 @@ $inactive-color: #777;
       transform: scaleX(0);
       pointer-events: none;
     }
-
-    &--loading:after {border-bottom-color: transparent;}
 
     .w-input--focused &--underline:after {transform: scaleX(1);}
     &--round.w-input__input-wrap--underline:after {
