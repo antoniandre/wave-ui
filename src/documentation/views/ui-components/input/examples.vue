@@ -632,28 +632,28 @@ div
   example
     w-input(
       type="file"
-      v-model="files3"
-      :preview="!!files3.length && filePreviewIcon") File
+      v-model="file3"
+      :preview="file3 && filePreviewIcon") File
     template(#pug).
       w-input(
         type="file"
-        v-model="files"
-        :preview="!!files.length &amp;&amp; filePreviewIcon") File
+        v-model="file"
+        :preview="file &amp;&amp; filePreviewIcon") File
     template(#html).
       &lt;w-input
         type="file"
-        v-model="files"
-        :preview="!!files.length &amp;&amp; filePreviewIcon"&gt;
+        v-model="file"
+        :preview="file &amp;&amp; filePreviewIcon"&gt;
         File
       &lt;/w-input&gt;
     template(#js).
       data: () => ({
-        files: []
+        file: null
       }),
 
       computed: {
         filePreviewIcon () {
-          const { extension } = this.files[0]
+          const { extension } = this.file
           switch (extension) {
             case 'jpg':
             case 'png':
@@ -678,27 +678,27 @@ div
   title-link(h3) Reading the files
   p.
     On the frontend, you can read all the file details and contents on input when the user selects
-    a file, or you can provide a files array that you keep in sync with Wave UI.
+    a file, or you can provide a v-model that Wave UI will fill up with a single file or array if #[code multiple] is set to #[code true].
   title-link.mt6(h4) Via @input
   example
     w-input(type="file" @input="onFileInput") File
-    pre.mt3(v-html="files1")
+    pre.mt3(v-html="file1")
     template(#pug).
         w-input(type="file" @input="onFileInput") File
 
-        pre.mt3(v-html="files")
+        pre.mt3(v-html="file")
     template(#html).
       &lt;w-input type="file" @input="onFileInput&gt;File&lt;/w-input&gt;
 
       &lt;pre v-html="files" class="mt3" /&gt;
     template(#js).
       data: () => ({
-        files: []
+        file: null
       }),
 
       methods: {
-        onFileInput (files) {
-          this.files = files
+        onFileInput (file) {
+          this.file = file
         }
       }
 
@@ -711,20 +711,22 @@ div
     | Even if a v-model is allowing a two-way binding,
     | there is no way to prefill an input type file:
     | that would be a security breach and is therefore not allowed in HTML.
+    br
+    | However you can still set the v-model to #[code null] to reset the field.
   example
-    w-input(type="file" v-model="files2") File
-    pre.mt3(v-html="files2")
+    w-input(type="file" v-model="file2") File
+    pre.mt3(v-html="file2")
     template(#pug).
-        w-input(type="file" v-model="files") File
+        w-input(type="file" v-model="file") File
 
-        pre.mt3(v-html="files")
+        pre.mt3(v-html="file")
     template(#html).
-      &lt;w-input type="file" v-model="files"&gt;File&lt;/w-input&gt;
+      &lt;w-input type="file" v-model="file"&gt;File&lt;/w-input&gt;
 
-      &lt;pre v-html="files" class="mt3" /&gt;
+      &lt;pre v-html="file" class="mt3" /&gt;
     template(#js).
       data: () => ({
-        files: []
+        file: null
       })
 
   title-link(h3) Uploading the file to a backend server
@@ -754,22 +756,22 @@ div
     w-form(@success="onFormSuccess")
       w-input(
         type="file"
-        v-model="files5"
-        :validators="[() => files5.length || 'Please add a file']") File
+        v-model="file5"
+        :validators="[() => file5 || 'Please add a file']") File
       w-button.d-flex.mla.mt4(type="submit" :loading="loading") Send
     template(#pug).
       w-form(@success="onFormSuccess")
         w-input(
           type="file"
-          v-model="files"
-          :validators="[() => files.length || 'Please add a file']") File
+          v-model="file"
+          :validators="[() => file || 'Please add a file']") File
         w-button.d-flex.mla.mt4(type="submit" :loading="loading") Send
     template(#html).
       &lt;w-form @success="onFormSuccess"&gt;
         &lt;w-input
           type="file"
-          v-model="files"
-          :validators="[() => files.length || 'Please add a file']"&gt;
+          v-model="file"
+          :validators="[() => file || 'Please add a file']"&gt;
           File
         &lt;/w-input&gt;
 
@@ -788,7 +790,7 @@ div
           this.loading = true
 
           const binURL = 'https://filebin.net/waveui-{{ todayFormatted }}{{ userIP }}'
-          const { name: filename, file } = this.files[0]
+          const { name: filename, file } = this.file
 
           axios.post(`${binURL}/${filename}`, file)
             .then(data =&gt; {
@@ -821,13 +823,13 @@ div
 
     export default {
       data: () => ({
-        files: []
+        file: null
       }),
 
       methods: {
         onFormSuccess () {
           const formData = new FormData()
-          formData.append('file', this.files[0].file)
+          formData.append('file', this.file.file)
 
           axios.post(
             '/api/your-backend-script',
@@ -857,15 +859,44 @@ div
     die(file_get_contents($_FILES['file']['tmp_name']));
     ?&gt;
 
+  title-link(h3) Accepting specific file extensions
+  example
+    w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg, .webp")
+    template(#pug).
+      w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg, .webp")
+    template(#html).
+      &lt;w-input
+        type="file"
+        label="File"
+        accept=".jpg, .jpeg, .png, .gif, .svg, .webp"&gt;
+      &lt;/w-input&gt;
+
+  title-link(h3) Multiple files upload
+  p When multiple files are allowed, the v-model will contain an array even if there is a single file.
+  example
+    w-input(type="file" label="File" multiple)
+    template(#pug).
+      w-input(type="file" label="File" multiple)
+    template(#html).
+      &lt;w-input
+        type="file"
+        label="File"
+        multiple&gt;
+      &lt;/w-input&gt;
+
   title-link(h3) Loading state
   p.
     If you try to upload a very large file, you will see the progress value of the file transfer will
     be updated as the transfer goes on (e.g. :loading="overallProgress").#[br]
-    You can also show a self-updated progress bar with the #[code show-progress] prop.
+    You can also show a self-updated progress bar with the #[code show-progress] prop.#[br]
+    Using a #[code v-model:overall-progress], you will also receive the total percentage of completion
+    of all the files being uploaded.
+
   example
     w-input(type="file"
       v-model="files4"
       :overall-progress.sync="overallProgress"
+      multiple
       show-progress
       progress-color="green") File
 
@@ -907,31 +938,6 @@ div
         files: [],
         overallProgress: 0
       })
-
-  title-link(h3) Accepting specific file extensions
-  example
-    w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg")
-    template(#pug).
-      w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg")
-    template(#html).
-      &lt;w-input
-        type="file"
-        label="File"
-        accept=".jpg, .jpeg, .png, .gif, .svg"&gt;
-      &lt;/w-input&gt;
-
-  title-link(h3) Multiple files upload
-  example
-    w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg" multiple)
-    template(#pug).
-      w-input(type="file" label="File" accept=".jpg, .jpeg, .png, .gif, .svg" multiple)
-    template(#html).
-      &lt;w-input
-        type="file"
-        label="File"
-        accept=".jpg, .jpeg, .png, .gif, .svg"
-        multiple&gt;
-      &lt;/w-input&gt;
 
   title-link(h3) Clearing the field
   p Resetting the #[code input type="file"] is as easy as setting its value to null (native HTML way).
@@ -1108,11 +1114,11 @@ import axios from 'axios'
 export default {
   data: () => ({
     isPassword: true,
-    files1: [],
-    files2: [],
-    files3: [],
+    file1: null,
+    file2: null,
+    file3: null,
     files4: [],
-    files5: [],
+    file5: null,
     loading: false,
     overallProgress: undefined,
     todayFormatted: '',
@@ -1121,7 +1127,7 @@ export default {
 
   computed: {
     filePreviewIcon () {
-      const { extension } = this.files3[0]
+      const { extension } = this.file3
       switch (extension) {
         case 'jpg':
         case 'png':
@@ -1144,8 +1150,8 @@ export default {
   },
 
   methods: {
-    onFileInput (files) {
-      this.files1 = files
+    onFileInput (file) {
+      this.file1 = file
     },
 
     getTodaysDate () {
@@ -1167,7 +1173,7 @@ export default {
 
       // Create the user unique Filebin ID.
       const binURL = `https://filebin.net/waveui-${this.userIP}${this.todayFormatted}`
-      const { name: filename, file } = this.files5[0]
+      const { name: filename, file } = this.file5
 
       axios.post(`${binURL}/${filename}`, file)
         .then(
