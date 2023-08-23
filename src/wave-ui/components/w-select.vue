@@ -253,7 +253,7 @@ export default {
       if (!e.metaKey && !e.ctrlKey && e.keyCode !== 9) e.preventDefault()
 
       if (e.keyCode === 27 && this.showMenu) this.closeMenu('la5') // Escape.
-      else if (e.keyCode === 13) this.openMenu() // Enter.
+      else if (e.keyCode === 13 || e.keyCode === 32) this.openMenu() // Enter or Space.
 
       // Up & down arrows.
       else if ([38, 40].includes(e.keyCode)) {
