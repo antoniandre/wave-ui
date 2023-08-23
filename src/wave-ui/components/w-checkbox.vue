@@ -149,12 +149,9 @@ $inactive-color: #666;
   vertical-align: middle;
   // Contain the hidden radio button, so browser doesn't pan to it when outside of the screen.
   position: relative;
-  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 
   @include themeable;
-
-  &--disabled {cursor: not-allowed;}
 
   // The hidden real checkbox.
   input[type="checkbox"] {
@@ -173,8 +170,10 @@ $inactive-color: #666;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
     justify-content: center;
-    cursor: inherit;
+    cursor: pointer;
     z-index: 0;
+
+    .w-checkbox--disabled & {cursor: not-allowed;}
   }
 
   // The checkmark - visible when checked.
@@ -268,10 +267,13 @@ $inactive-color: #666;
   &__label {
     display: flex;
     align-items: center;
-    cursor: inherit;
+    cursor: pointer;
     user-select: none;
 
-    .w-checkbox--disabled & {opacity: 0.7;}
+    .w-checkbox--disabled & {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
   }
 }
 
