@@ -25,6 +25,18 @@ const detectOSDarkMode = $waveui => {
  */
 const injectPresets = (component, presets) => {
   for (const preset in presets) {
+    // Check to see if the prop exists on a mixin when it doesn't exist on the component
+    if (component.props.hasOwnProperty(preset) === false && Array.isArray(component.mixins) && component.mixins.length > 0)
+      for (const mixin of component.mixins)
+        if (mixin.props && mixin.props.hasOwnProperty(preset))
+          component.props[preset] = mixin.props[preset]
+
+    // If we don't have the prop output a warning and continue
+    if (component.props.hasOwnProperty(preset) === false) {
+      console.warn(`Attempting to set preset on a prop that doesn't exist! Component: ${component.name} Preset: ${preset}`)
+      continue
+    }
+
     component.props[preset].default = presets[preset]
   }
 }
