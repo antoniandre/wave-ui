@@ -111,7 +111,6 @@ export default {
 
   methods: {
     onInput () {
-      if (this.isReadonly) return
       this.isChecked = !this.isChecked
       this.$emit('update:modelValue', this.isChecked)
       this.$emit('input', this.isChecked)
