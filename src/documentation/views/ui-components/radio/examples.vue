@@ -5,11 +5,15 @@ div
     w-radios(v-model="selection1" :items="radios1" inline)
 
     .title4.mt4 States
-    .w-flex.wrap
-      w-radio.mr3.mb1(:value="true" label="Checked")
-      w-radio.mr3.mb1(:value="false" label="Unchecked")
-      w-radio.mr3.mb1(:value="true" disabled label="Checked &amp; disabled")
-      w-radio.mr3.mb1(:value="false" disabled label="Unchecked &amp; disabled")
+    div
+      .w-flex.wrap.my1
+        w-radio.mr3.mb1(:value="true" label="Checked")
+        w-radio.mr3.mb1(:value="true" disabled label="Checked &amp; disabled")
+        w-radio.mr3.mb1(:value="true" readonly label="Checked &amp; readonly")
+      .w-flex.wrap.my1
+        w-radio.mr3.mb1(:value="false" label="Unchecked")
+        w-radio.mr3.mb1(:value="false" disabled label="Unchecked &amp; disabled")
+        w-radio.mr3.mb1(:value="false" readonly label="Unchecked &amp; readonly")
 
   p.mt12.
     There are 2 components: #[span.code w-radio] &amp; #[span.code w-radios].

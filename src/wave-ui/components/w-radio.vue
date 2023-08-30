@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister && !wRadios ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue, disabled: isDisabled }"
+  v-bind="formRegister && { validators, inputValue, disabled: isDisabled, readonly: isReadonly }"
   :valid.sync="valid"
   @reset="$emit('update:modelValue', inputValue = null);$emit('input', null)"
   :class="classes")
@@ -12,11 +12,11 @@ component(
     type="radio"
     :name="inputName"
     :checked="inputValue || null"
-    :disabled="isDisabled || null"
+    :disabled="isDisabled || isReadonly || null"
     :required="required || null"
     :tabindex="tabindex || null"
     @focus="$emit('focus', $event)"
-    @change="onInput($event) /* Edge doesn't fire input on checkbox/radio/select change */"
+    @change="onInput($event) /* Edge doesn't emit an `input` event on checkbox/radio/select change */"
     :aria-checked="inputValue || 'false'"
     role="radio")
   template(v-if="hasLabel && labelOnLeft")
@@ -87,6 +87,7 @@ export default {
       return {
         [`w-radio w-radio--${this.inputValue ? 'checked' : 'unchecked'}`]: true,
         'w-radio--disabled': this.isDisabled,
+        'w-radio--readonly': this.isReadonly,
         'w-radio--ripple': this.ripple.start,
         'w-radio--rippled': this.ripple.end
       }

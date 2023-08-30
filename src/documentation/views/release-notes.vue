@@ -22,6 +22,13 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v3.5.0
+        li
+          strong.code w-checkbox &amp; w-radio
+          ul
+            li Added readonly option. #[span.tag.new]
+
     li.patch
       strong.version v3.4.8
       ul
@@ -562,6 +569,13 @@ main
     //-----------------------------------------------------
     //- Vue 2.
     //-----------------------------------------------------
+
+    li.minor
+      strong.version v1.68.0
+        li
+          strong.code w-checkbox &amp; w-radio
+          ul
+            li Added readonly option. #[span.tag.new]
 
     li.patch
       strong.version v1.67.4
