@@ -5,13 +5,19 @@ div
     w-checkboxes(:items="checkboxes1" inline)
 
     .title4.mt4 States
-    .w-flex.wrap
-      w-checkbox.mr3.mb1(:model-value="true" label="Checked")
-      w-checkbox.mr3.mb1(:model-value="false" label="Unchecked")
-      w-checkbox.mr3.mb1(:model-value="true" indeterminate label="Indeterminate")
-      w-checkbox.mr3.mb1(:model-value="true" disabled label="Checked &amp; disabled")
-      w-checkbox.mr3.mb1(:model-value="false" disabled label="Unchecked &amp; disabled")
-      w-checkbox.mr3.mb1(:model-value="true" disabled indeterminate label="Indeterminate &amp; disabled")
+    div
+      .w-flex.wrap.my1
+        w-checkbox.mr3.mb1(:model-value="true" label="Checked")
+        w-checkbox.mr3.mb1(:model-value="true" disabled label="Checked &amp; disabled")
+        w-checkbox.mr3.mb1(:model-value="true" readonly label="Checked &amp; readonly")
+      .w-flex.wrap.my1
+        w-checkbox.mr3.mb1(:model-value="false" label="Unchecked")
+        w-checkbox.mr3.mb1(:model-value="false" disabled label="Unchecked &amp; disabled")
+        w-checkbox.mr3.mb1(:model-value="false" readonly label="Unchecked &amp; readonly")
+      .w-flex.wrap.my1
+        w-checkbox.mr3.mb1(:model-value="true" indeterminate label="Indeterminate")
+        w-checkbox.mr3.mb1(:model-value="true" disabled indeterminate label="Indeterminate &amp; disabled")
+        w-checkbox.mr3.mb1(:model-value="true" readonly indeterminate label="Indeterminate &amp; readonly")
 
   p.mt12.
     There are 2 components: #[span.code w-checkbox] &amp; #[span.code w-checkboxes].
