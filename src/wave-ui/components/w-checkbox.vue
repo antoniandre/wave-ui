@@ -227,16 +227,11 @@ $inactive-color: #666;
       border-width: ((divide($small-form-el-size, 2)) - 1px) 3px;
       background-color: $contrast-color;
     }
-    .w-checkbox--indeterminate.w-checkbox--readonly :checked ~ & {
-      border-width: ((divide($small-form-el-size, 2)) - 1px) 3px;
-      background-color: $contrast-color;
-    }
     .w-checkbox--disabled :checked ~ & {
       border-color: $disabled-color;
       // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: rgba(var(--w-contrast-color-rgb), 0.4);
     }
-    .w-checkbox--readonly :checked ~ & {background-color: currentColor;}
   }
 
   // The focus outline & ripple on check action.
