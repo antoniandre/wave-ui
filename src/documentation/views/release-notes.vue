@@ -23,6 +23,13 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v3.5.0
+        li
+          strong.code w-checkbox &amp; w-radio
+          ul
+            li Added readonly option. #[span.tag.new]
+
+    li.patch
       strong.version v3.4.7
       ul
         li
