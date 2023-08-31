@@ -77,7 +77,7 @@ component(
       @update:model-value="onInput"
       @item-click="$emit('item-click', $event)"
       @item-select="onListItemSelect"
-      @keydown:enter="noUnselect && !multiple && closeMenu('la3')"
+      @keydown:enter="noUnselect && !multiple && closeMenu()"
       @keydown:escape="showMenu && (this.showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
       :items="selectItems"
       :multiple="multiple"
@@ -252,8 +252,8 @@ export default {
       // still allow meta key & ctrl key combinations and the tab key (9).
       if (!e.metaKey && !e.ctrlKey && e.keyCode !== 9) e.preventDefault()
 
-      if (e.keyCode === 27 && this.showMenu) this.closeMenu('la5') // Escape.
-      else if (e.keyCode === 13 || e.keyCode === 32) this.openMenu() // Enter or Space.
+      if (e.keyCode === 27 && this.showMenu) this.closeMenu() // Escape.
+      else if ([13, 32].includes(e.keyCode)) this.openMenu() // Enter or Space.
 
       // Up & down arrows.
       else if ([38, 40].includes(e.keyCode)) {
