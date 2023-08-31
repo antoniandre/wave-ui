@@ -322,7 +322,7 @@ export default {
 
       return items.map(item => {
         let value = item
-        if (typeof item === 'object') {
+        if (item && typeof item === 'object') { // `null` is also an object!
           value = item[this.itemValueKey] !== undefined ? item[this.itemValueKey] : (item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item)
         }
 
