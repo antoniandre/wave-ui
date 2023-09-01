@@ -1,0 +1,9 @@
+{
+  "include": ["src/wave-ui/**/*"],
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": true
+  }
+}

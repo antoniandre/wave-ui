@@ -72,6 +72,7 @@
     "simple-syntax-highlighter": "^2.2.5",
     "splitpanes": "^3.1.5",
     "standard": "^17.1.0",
+    "typescript": "^5.2.2",
     "vite": "^3.2.7",
     "vite-svg-loader": "^4.0.0",
     "vue": "^3.3.4",
