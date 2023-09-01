@@ -60,6 +60,7 @@
     "autoprefixer": "^10.4.15",
     "axios": "^1.4.0",
     "eslint": "^8.47.0",
+    "eslint-plugin-jsdoc": "^46.5.1",
     "eslint-plugin-vue": "^9.17.0",
     "font-awesome": "^4.7.0",
     "gsap": "^3.12.2",
