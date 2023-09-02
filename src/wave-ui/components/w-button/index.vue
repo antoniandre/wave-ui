@@ -6,6 +6,8 @@ component(v-if="tooltip" is="w-tooltip" v-bind="tooltipProps || {}")
   div(v-html="tooltip")
 button-partial(v-else v-bind="buttonProps" v-on="$listeners")
   slot
+  template(#loading)
+    slot(name="loading")
 </template>
 
 <script>

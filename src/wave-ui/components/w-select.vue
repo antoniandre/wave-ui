@@ -252,7 +252,7 @@ export default {
       if (!e.metaKey && !e.ctrlKey && e.keyCode !== 9) e.preventDefault()
 
       if (e.keyCode === 27 && this.showMenu) this.closeMenu() // Escape.
-      else if (e.keyCode === 13) this.openMenu() // Enter.
+      else if ([13, 32].includes(e.keyCode)) this.openMenu() // Enter or Space.
 
       // Up & down arrows.
       else if ([38, 40].includes(e.keyCode)) {
@@ -321,7 +321,7 @@ export default {
 
       return items.map(item => {
         let value = item
-        if (typeof item === 'object') {
+        if (item && typeof item === 'object') { // `null` is also an object!
           value = item[this.itemValueKey] !== undefined ? item[this.itemValueKey] : (item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item)
         }
 
