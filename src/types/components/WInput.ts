@@ -439,7 +439,7 @@ export type WInput = DefineComponent<
   WaveInputEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveInputProps, WaveInputEmits & EmitsOptions>,
+  ResolveProps<WaveInputProps & WaveInputEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveInputProps>,
   WaveInputSlots
 >

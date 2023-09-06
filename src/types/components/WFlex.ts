@@ -205,7 +205,7 @@ export type WFlex = DefineComponent<
   WaveFlexEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveFlexProps, WaveFlexEmits & EmitsOptions>,
+  ResolveProps<WaveFlexProps & WaveFlexEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveFlexProps>,
   WaveFlexSlots
 >

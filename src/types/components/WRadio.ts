@@ -186,7 +186,7 @@ export type WRadio = DefineComponent<
   WaveRadioEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveRadioProps, WaveRadioEmits & EmitsOptions>,
+  ResolveProps<WaveRadioProps & WaveRadioEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveRadioProps>,
   WaveRadioSlots
 >

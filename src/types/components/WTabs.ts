@@ -385,7 +385,7 @@ export type WTabs = DefineComponent<
   WaveTabsEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveTabsProps, WaveTabsEmits & EmitsOptions>,
+  ResolveProps<WaveTabsProps & WaveTabsEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveTabsProps>,
   WaveTabsSlots
 >

@@ -241,7 +241,7 @@ export type WTooltip = DefineComponent<
   WaveTooltipEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveTooltipProps, WaveTooltipEmits & EmitsOptions>,
+  ResolveProps<WaveTooltipProps & WaveTooltipEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveTooltipProps>,
   WaveTooltipSlots
 >

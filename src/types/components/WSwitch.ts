@@ -199,7 +199,7 @@ export type WSwitch = DefineComponent<
   WaveSwitchEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveSwitchProps, WaveSwitchEmits & EmitsOptions>,
+  ResolveProps<WaveSwitchProps & WaveSwitchEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveSwitchProps>,
   WaveSwitchSlots
 >

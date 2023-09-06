@@ -102,7 +102,7 @@ export type WDivider = DefineComponent<
   WaveDividerEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveDividerProps, WaveDividerEmits & EmitsOptions>,
+  ResolveProps<WaveDividerProps & WaveDividerEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveDividerProps>,
   WaveDividerSlots
 >

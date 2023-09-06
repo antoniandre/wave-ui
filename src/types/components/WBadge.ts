@@ -271,7 +271,7 @@ export type WBadge = DefineComponent<
   WaveBadgeEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveBadgeProps, WaveBadgeEmits & EmitsOptions>,
+  ResolveProps<WaveBadgeProps & WaveBadgeEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveBadgeProps>,
   WaveBadgeSlots
 >

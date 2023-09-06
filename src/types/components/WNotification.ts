@@ -376,7 +376,7 @@ export type WNotification = DefineComponent<
   WaveNotificationEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveNotificationProps, WaveNotificationEmits & EmitsOptions>,
+  ResolveProps<WaveNotificationProps & WaveNotificationEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveNotificationProps>,
   WaveNotificationSlots
 >

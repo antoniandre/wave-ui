@@ -335,7 +335,7 @@ export type WMenu = DefineComponent<
   WaveMenuEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveMenuProps, WaveMenuEmits & EmitsOptions>,
+  ResolveProps<WaveMenuProps & WaveMenuEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveMenuProps>,
   WaveMenuSlots
 >

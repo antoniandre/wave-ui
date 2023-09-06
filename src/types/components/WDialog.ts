@@ -265,7 +265,7 @@ export type WDialog = DefineComponent<
   WaveDialogEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveDialogProps, WaveDialogEmits & EmitsOptions>,
+  ResolveProps<WaveDialogProps & WaveDialogEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveDialogProps>,
   WaveDialogSlots
 >

@@ -200,7 +200,7 @@ export type WToolbar = DefineComponent<
   WaveToolbarEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveToolbarProps, WaveToolbarEmits & EmitsOptions>,
+  ResolveProps<WaveToolbarProps & WaveToolbarEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveToolbarProps>,
   WaveToolbarSlots
 >

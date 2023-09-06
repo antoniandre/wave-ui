@@ -105,7 +105,7 @@ export type WGrid = DefineComponent<
   WaveGridEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveGridProps, WaveGridEmits & EmitsOptions>,
+  ResolveProps<WaveGridProps & WaveGridEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveGridProps>,
   WaveGridSlots
 >

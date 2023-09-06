@@ -452,7 +452,7 @@ export type WTree = DefineComponent<
   WaveTreeEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveTreeProps, WaveTreeEmits & EmitsOptions>,
+  ResolveProps<WaveTreeProps & WaveTreeEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveTreeProps>,
   WaveTreeSlots
 >

@@ -206,7 +206,7 @@ export type WCheckboxes = DefineComponent<
   WaveCheckboxesEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveCheckboxesProps, WaveCheckboxesEmits & EmitsOptions>,
+  ResolveProps<WaveCheckboxesProps & WaveCheckboxesEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveCheckboxesProps>,
   WaveCheckboxesSlots
 >

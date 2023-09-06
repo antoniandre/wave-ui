@@ -298,7 +298,7 @@ export type WAccordion = DefineComponent<
   WaveAccordionEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveAccordionProps, WaveAccordionEmits & EmitsOptions>,
+  ResolveProps<WaveAccordionProps & WaveAccordionEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveAccordionProps>,
   WaveAccordionSlots
 >

@@ -488,7 +488,7 @@ export type WTable = DefineComponent<
   WaveTableEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveTableProps, WaveTableEmits & EmitsOptions>,
+  ResolveProps<WaveTableProps & WaveTableEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveTableProps>,
   WaveTableSlots
 >

@@ -328,7 +328,7 @@ export type WTextarea = DefineComponent<
   WaveTextareaEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveTextareaProps, WaveTextareaEmits & EmitsOptions>,
+  ResolveProps<WaveTextareaProps & WaveTextareaEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveTextareaProps>,
   WaveTextareaSlots
 >

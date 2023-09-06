@@ -164,7 +164,7 @@ export type WSpinner = DefineComponent<
   WaveSpinnerEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveSpinnerProps, WaveSpinnerEmits & EmitsOptions>,
+  ResolveProps<WaveSpinnerProps & WaveSpinnerEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveSpinnerProps>,
   WaveSpinnerSlots
 >

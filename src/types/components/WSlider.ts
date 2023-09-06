@@ -350,7 +350,7 @@ export type WSlider = DefineComponent<
   WaveSliderEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveSliderProps, WaveSliderEmits & EmitsOptions>,
+  ResolveProps<WaveSliderProps & WaveSliderEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveSliderProps>,
   WaveSliderSlots
 >

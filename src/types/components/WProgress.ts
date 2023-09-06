@@ -250,7 +250,7 @@ export type WProgress = DefineComponent<
   WaveProgressEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveProgressProps, WaveProgressEmits & EmitsOptions>,
+  ResolveProps<WaveProgressProps & WaveProgressEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveProgressProps>,
   WaveProgressSlots
 >

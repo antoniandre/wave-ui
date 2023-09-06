@@ -336,7 +336,7 @@ export type WConfirm = DefineComponent<
   WaveConfirmEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveConfirmProps, WaveConfirmEmits & EmitsOptions>,
+  ResolveProps<WaveConfirmProps & WaveConfirmEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveConfirmProps>,
   WaveConfirmSlots
 >

@@ -186,7 +186,7 @@ export type WBreadcrumbs = DefineComponent<
   WaveBreadcrumbsEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveBreadcrumbsProps, WaveBreadcrumbsEmits & EmitsOptions>,
+  ResolveProps<WaveBreadcrumbsProps & WaveBreadcrumbsEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveBreadcrumbsProps>,
   WaveBreadcrumbsSlots
 >

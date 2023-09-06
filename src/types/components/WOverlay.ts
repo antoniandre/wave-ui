@@ -183,7 +183,7 @@ export type WOverlay = DefineComponent<
   WaveOverlayEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveOverlayProps, WaveOverlayEmits & EmitsOptions>,
+  ResolveProps<WaveOverlayProps & WaveOverlayEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveOverlayProps>,
   WaveOverlaySlots
 >

@@ -241,7 +241,7 @@ export type WIcon = DefineComponent<
   WaveIconEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveIconProps, WaveIconEmits & EmitsOptions>,
+  ResolveProps<WaveIconProps & WaveIconEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveIconProps>,
   WaveIconSlots
 >

@@ -424,7 +424,7 @@ export type WList = DefineComponent<
   WaveListEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveListProps, WaveListEmits & EmitsOptions>,
+  ResolveProps<WaveListProps & WaveListEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveListProps>,
   WaveListSlots
 >

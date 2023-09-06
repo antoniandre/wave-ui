@@ -308,7 +308,7 @@ export type WAlert = DefineComponent<
   WaveAlertEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveAlertProps, WaveAlertEmits & EmitsOptions>,
+  ResolveProps<WaveAlertProps & WaveAlertEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveAlertProps>,
   WaveAlertSlots
 >

@@ -143,7 +143,7 @@ export type WApp = DefineComponent<
   WaveAppEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveAppProps, WaveAppEmits & EmitsOptions>,
+  ResolveProps<WaveAppProps & WaveAppEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveAppProps>,
   WaveAppSlots
 >

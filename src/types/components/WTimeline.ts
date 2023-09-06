@@ -159,7 +159,7 @@ export type WTimeline = DefineComponent<
   WaveTimelineEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveTimelineProps, WaveTimelineEmits & EmitsOptions>,
+  ResolveProps<WaveTimelineProps & WaveTimelineEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveTimelineProps>,
   WaveTimelineSlots
 >

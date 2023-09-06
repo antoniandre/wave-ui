@@ -209,7 +209,7 @@ export type WCard = DefineComponent<
   WaveCardEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveCardProps, WaveCardEmits & EmitsOptions>,
+  ResolveProps<WaveCardProps & WaveCardEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveCardProps>,
   WaveCardSlots
 >

@@ -298,7 +298,7 @@ export type WButton = DefineComponent<
   WaveButtonEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveButtonProps, WaveButtonEmits & EmitsOptions>,
+  ResolveProps<WaveButtonProps & WaveButtonEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveButtonProps>,
   WaveButtonSlots
 >

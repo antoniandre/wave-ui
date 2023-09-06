@@ -80,7 +80,7 @@ export type WSteps = DefineComponent<
   WaveStepsEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveStepsProps, WaveStepsEmits & EmitsOptions>,
+  ResolveProps<WaveStepsProps & WaveStepsEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveStepsProps>,
   WaveStepsSlots
 >

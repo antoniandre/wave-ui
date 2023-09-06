@@ -236,7 +236,7 @@ export type WForm = DefineComponent<
   WaveFormEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveFormProps, WaveFormEmits & EmitsOptions>,
+  ResolveProps<WaveFormProps & WaveFormEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveFormProps>,
   WaveFormSlots
 >

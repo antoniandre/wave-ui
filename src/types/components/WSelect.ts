@@ -469,7 +469,7 @@ export type WSelect = DefineComponent<
   WaveSelectEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveSelectProps, WaveSelectEmits & EmitsOptions>,
+  ResolveProps<WaveSelectProps & WaveSelectEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveSelectProps>,
   WaveSelectSlots
 >

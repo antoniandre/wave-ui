@@ -247,7 +247,7 @@ export type WRating = DefineComponent<
   WaveRatingEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveRatingProps, WaveRatingEmits & EmitsOptions>,
+  ResolveProps<WaveRatingProps & WaveRatingEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveRatingProps>,
   WaveRatingSlots
 >

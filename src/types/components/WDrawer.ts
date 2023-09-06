@@ -336,7 +336,7 @@ export type WDrawer = DefineComponent<
   WaveDrawerEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveDrawerProps, WaveDrawerEmits & EmitsOptions>,
+  ResolveProps<WaveDrawerProps & WaveDrawerEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveDrawerProps>,
   WaveDrawerSlots
 >

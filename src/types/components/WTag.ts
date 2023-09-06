@@ -231,7 +231,7 @@ export type WTag = DefineComponent<
   WaveTagEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveTagProps, WaveTagEmits & EmitsOptions>,
+  ResolveProps<WaveTagProps & WaveTagEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveTagProps>,
   WaveTagSlots
 >

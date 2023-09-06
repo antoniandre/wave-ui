@@ -22,7 +22,6 @@ import {
 export interface WaveImageProps {
   /**
    * Tells which tag to use for the `w-image`'s image. It can be any valid HTML tag, like <span> or &lt;div&gt;. The wrapper of the image will use a &lt;span&gt; tag unless you use set the `tag` to div.
-   * 
    * If you use the `img` tag, the image itself will use the &lt;img&gt; tag and the wrapper will use a &lt;span&gt; tag. The image will have a particular behavior as explained in the `Using the &lt;img&gt; tag` example.
    * @property {string} tag - Default: 'span'
    * @see https://antoniandre.github.io/wave-ui/w-image
@@ -246,7 +245,7 @@ export type WImage = DefineComponent<
   WaveImageEmits & EmitsOptions,
   string,
   PublicProps,
-  ResolveProps<WaveImageProps, WaveImageEmits & EmitsOptions>,
+  ResolveProps<WaveImageProps & WaveImageEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveImageProps>,
   WaveImageSlots
 >
