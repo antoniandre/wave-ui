@@ -22,6 +22,31 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v3.5.1
+      ul
+        li
+          strong.code w-select
+          ul
+            li Prevent an error when the v-model is set to #[code null].
+            li Ability to open the menu from the #[kbd space] key. #[issue-link 119]
+        li
+          strong.code w-checkbox
+          ul
+            li In a form, adjust the cursor pointer to the interactive elements only. #[issue-link 118]
+        li
+          strong.code w-button
+          ul
+            li Fix the #[code #loading] slot. #[issue-link 117]
+
+    li.minor
+      strong.version v3.5.0
+      ul
+        li
+          strong.code w-checkbox &amp; w-radio
+          ul
+            li Added readonly option. #[span.tag.new]
+
     li.patch
       strong.version v3.4.7
       ul
@@ -560,6 +585,13 @@ main
     //- Vue 2.
     //-----------------------------------------------------
 
+    li.minor
+      strong.version v1.68.0
+        li
+          strong.code w-checkbox &amp; w-radio
+          ul
+            li Added readonly option. #[span.tag.new]
+
     li.patch
       strong.version v1.67.3
       ul
@@ -567,6 +599,7 @@ main
           strong.code w-input
           ul
             li.red.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
+            li Show the #[code w-input type="file"] bottom border even after upload completion.
 
     li.patch
       strong.version v1.67.2

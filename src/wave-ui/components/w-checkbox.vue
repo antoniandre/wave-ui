@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister && !wCheckboxes ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: isChecked, disabled: isDisabled }"
+  v-bind="formRegister && { validators, inputValue: isChecked, disabled: isDisabled, readonly: isReadonly }"
   v-model:valid="valid"
   @reset="$emit('update:modelValue', isChecked = null);$emit('input', null)"
   :class="classes")
@@ -12,12 +12,12 @@ component(
     type="checkbox"
     :name="inputName"
     :checked="isChecked || null"
-    :disabled="isDisabled || null"
+    :disabled="isDisabled || isReadonly || null"
     :required="required || null"
     :tabindex="tabindex || null"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
-    @change="onInput() /* Edge doesn't fire input on checkbox/radio/select change */"
+    @change="onInput() /* Edge doesn't emit an `input` event on checkbox/radio/select change */"
     @keypress.enter="onInput"
     :aria-checked="isChecked || 'false'"
     role="checkbox")
@@ -98,6 +98,7 @@ export default {
       return {
         [`w-checkbox w-checkbox--${this.isChecked ? 'checked' : 'unchecked'}`]: true,
         'w-checkbox--disabled': this.isDisabled,
+        'w-checkbox--readonly': this.isReadonly,
         'w-checkbox--indeterminate': this.indeterminate,
         'w-checkbox--ripple': this.ripple.start,
         'w-checkbox--rippled': this.ripple.end,
@@ -149,12 +150,9 @@ $inactive-color: #666;
   vertical-align: middle;
   // Contain the hidden radio button, so browser doesn't pan to it when outside of the screen.
   position: relative;
-  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 
   @include themeable;
-
-  &--disabled {cursor: not-allowed;}
 
   // The hidden real checkbox.
   input[type="checkbox"] {
@@ -173,8 +171,10 @@ $inactive-color: #666;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
     justify-content: center;
-    cursor: inherit;
+    cursor: pointer;
     z-index: 0;
+
+    .w-checkbox--disabled & {cursor: not-allowed;}
   }
 
   // The checkmark - visible when checked.
@@ -202,6 +202,7 @@ $inactive-color: #666;
     .w-checkbox--indeterminate & {opacity: 0;}
     .w-checkbox--disabled & {stroke: rgba(var(--w-contrast-color-rgb), 0.4);}
   }
+
   &__input:after {
     content: '';
     position: absolute;
@@ -252,7 +253,7 @@ $inactive-color: #666;
   }
 
   :focus ~ &__input:before,
-  :active ~ &__input:before {
+  &:not(.w-checkbox--disabled) :active ~ &__input:before {
     transform: scale(1.8);
     opacity: 0.2;
   }
@@ -268,10 +269,13 @@ $inactive-color: #666;
   &__label {
     display: flex;
     align-items: center;
-    cursor: inherit;
+    cursor: pointer;
     user-select: none;
 
-    .w-checkbox--disabled & {opacity: 0.7;}
+    .w-checkbox--disabled & {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
   }
 }
 
