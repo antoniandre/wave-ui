@@ -330,7 +330,7 @@ export type WDrawer = DefineComponent<
   {},
   {},
   WaveDrawerComputeds,
-  {},
+  WaveDrawerMethods,
   {},
   {},
   WaveDrawerEmits & EmitsOptions,

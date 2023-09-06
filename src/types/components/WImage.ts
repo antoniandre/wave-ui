@@ -239,7 +239,7 @@ export type WImage = DefineComponent<
   {},
   {},
   WaveImageComputeds,
-  {},
+  WaveImageMethods,
   {},
   {},
   WaveImageEmits & EmitsOptions,

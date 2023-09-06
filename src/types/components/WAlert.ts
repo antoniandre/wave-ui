@@ -302,7 +302,7 @@ export type WAlert = DefineComponent<
   {},
   {},
   WaveAlertComputeds,
-  {},
+  WaveAlertMethods,
   {},
   {},
   WaveAlertEmits & EmitsOptions,

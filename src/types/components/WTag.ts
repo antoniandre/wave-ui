@@ -225,7 +225,7 @@ export type WTag = DefineComponent<
   {},
   {},
   WaveTagComputeds,
-  {},
+  WaveTagMethods,
   {},
   {},
   WaveTagEmits & EmitsOptions,

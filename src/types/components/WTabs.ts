@@ -379,7 +379,7 @@ export type WTabs = DefineComponent<
   {},
   {},
   WaveTabsComputeds,
-  {},
+  WaveTabsMethods,
   {},
   {},
   WaveTabsEmits & EmitsOptions,

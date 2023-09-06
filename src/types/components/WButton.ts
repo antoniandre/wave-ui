@@ -292,7 +292,7 @@ export type WButton = DefineComponent<
   {},
   {},
   WaveButtonComputeds,
-  {},
+  WaveButtonMethods,
   {},
   {},
   WaveButtonEmits & EmitsOptions,

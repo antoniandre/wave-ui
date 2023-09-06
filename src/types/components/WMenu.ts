@@ -329,7 +329,7 @@ export type WMenu = DefineComponent<
   {},
   {},
   WaveMenuComputeds,
-  {},
+  WaveMenuMethods,
   {},
   {},
   WaveMenuEmits & EmitsOptions,

@@ -370,7 +370,7 @@ export type WNotification = DefineComponent<
   {},
   {},
   WaveNotificationComputeds,
-  {},
+  WaveNotificationMethods,
   {},
   {},
   WaveNotificationEmits & EmitsOptions,

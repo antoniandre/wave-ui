@@ -244,7 +244,7 @@ export type WProgress = DefineComponent<
   {},
   {},
   WaveProgressComputeds,
-  {},
+  WaveProgressMethods,
   {},
   {},
   WaveProgressEmits & EmitsOptions,

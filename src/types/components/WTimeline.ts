@@ -153,7 +153,7 @@ export type WTimeline = DefineComponent<
   {},
   {},
   WaveTimelineComputeds,
-  {},
+  WaveTimelineMethods,
   {},
   {},
   WaveTimelineEmits & EmitsOptions,

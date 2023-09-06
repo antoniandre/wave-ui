@@ -158,7 +158,7 @@ export type WSpinner = DefineComponent<
   {},
   {},
   WaveSpinnerComputeds,
-  {},
+  WaveSpinnerMethods,
   {},
   {},
   WaveSpinnerEmits & EmitsOptions,

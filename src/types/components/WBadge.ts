@@ -265,7 +265,7 @@ export type WBadge = DefineComponent<
   {},
   {},
   WaveBadgeComputeds,
-  {},
+  WaveBadgeMethods,
   {},
   {},
   WaveBadgeEmits & EmitsOptions,

@@ -322,7 +322,7 @@ export type WTextarea = DefineComponent<
   {},
   {},
   WaveTextareaComputeds,
-  {},
+  WaveTextareaMethods,
   {},
   {},
   WaveTextareaEmits & EmitsOptions,

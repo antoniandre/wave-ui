@@ -180,7 +180,7 @@ export type WBreadcrumbs = DefineComponent<
   {},
   {},
   WaveBreadcrumbsComputeds,
-  {},
+  WaveBreadcrumbsMethods,
   {},
   {},
   WaveBreadcrumbsEmits & EmitsOptions,

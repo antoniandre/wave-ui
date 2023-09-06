@@ -292,7 +292,7 @@ export type WAccordion = DefineComponent<
   {},
   {},
   WaveAccordionComputeds,
-  {},
+  WaveAccordionMethods,
   {},
   {},
   WaveAccordionEmits & EmitsOptions,

@@ -194,7 +194,7 @@ export type WToolbar = DefineComponent<
   {},
   {},
   WaveToolbarComputeds,
-  {},
+  WaveToolbarMethods,
   {},
   {},
   WaveToolbarEmits & EmitsOptions,

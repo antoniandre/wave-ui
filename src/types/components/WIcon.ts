@@ -235,7 +235,7 @@ export type WIcon = DefineComponent<
   {},
   {},
   WaveIconComputeds,
-  {},
+  WaveIconMethods,
   {},
   {},
   WaveIconEmits & EmitsOptions,

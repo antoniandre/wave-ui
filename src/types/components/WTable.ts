@@ -482,7 +482,7 @@ export type WTable = DefineComponent<
   {},
   {},
   WaveTableComputeds,
-  {},
+  WaveTableMethods,
   {},
   {},
   WaveTableEmits & EmitsOptions,

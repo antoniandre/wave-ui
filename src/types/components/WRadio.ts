@@ -180,7 +180,7 @@ export type WRadio = DefineComponent<
   {},
   {},
   WaveRadioComputeds,
-  {},
+  WaveRadioMethods,
   {},
   {},
   WaveRadioEmits & EmitsOptions,

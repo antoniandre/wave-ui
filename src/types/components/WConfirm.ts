@@ -330,7 +330,7 @@ export type WConfirm = DefineComponent<
   {},
   {},
   WaveConfirmComputeds,
-  {},
+  WaveConfirmMethods,
   {},
   {},
   WaveConfirmEmits & EmitsOptions,

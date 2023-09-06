@@ -99,7 +99,7 @@ export type WGrid = DefineComponent<
   {},
   {},
   WaveGridComputeds,
-  {},
+  WaveGridMethods,
   {},
   {},
   WaveGridEmits & EmitsOptions,

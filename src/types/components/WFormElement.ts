@@ -168,7 +168,7 @@ export type WFormElement = DefineComponent<
   {},
   {},
   WaveFormElementComputeds,
-  {},
+  WaveFormElementMethods,
   {},
   {},
   WaveFormElementEmits & EmitsOptions,

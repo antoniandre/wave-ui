@@ -193,7 +193,7 @@ export type WSwitch = DefineComponent<
   {},
   {},
   WaveSwitchComputeds,
-  {},
+  WaveSwitchMethods,
   {},
   {},
   WaveSwitchEmits & EmitsOptions,

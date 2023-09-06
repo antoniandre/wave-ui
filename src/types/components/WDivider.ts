@@ -96,7 +96,7 @@ export type WDivider = DefineComponent<
   {},
   {},
   WaveDividerComputeds,
-  {},
+  WaveDividerMethods,
   {},
   {},
   WaveDividerEmits & EmitsOptions,

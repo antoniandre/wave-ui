@@ -186,7 +186,7 @@ export type WRadios = DefineComponent<
   {},
   {},
   WaveRadiosComputeds,
-  {},
+  WaveRadiosMethods,
   {},
   {},
   WaveRadiosEmits & EmitsOptions,

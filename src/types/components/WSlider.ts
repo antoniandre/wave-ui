@@ -344,7 +344,7 @@ export type WSlider = DefineComponent<
   {},
   {},
   WaveSliderComputeds,
-  {},
+  WaveSliderMethods,
   {},
   {},
   WaveSliderEmits & EmitsOptions,

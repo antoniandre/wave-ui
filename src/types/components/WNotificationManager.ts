@@ -79,7 +79,7 @@ export type WNotificationManager = DefineComponent<
   {},
   {},
   WaveNotificationManagerComputeds,
-  {},
+  WaveNotificationManagerMethods,
   {},
   {},
   WaveNotificationManagerEmits & EmitsOptions,

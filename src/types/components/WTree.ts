@@ -446,7 +446,7 @@ export type WTree = DefineComponent<
   {},
   {},
   WaveTreeComputeds,
-  {},
+  WaveTreeMethods,
   {},
   {},
   WaveTreeEmits & EmitsOptions,

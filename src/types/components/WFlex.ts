@@ -199,7 +199,7 @@ export type WFlex = DefineComponent<
   {},
   {},
   WaveFlexComputeds,
-  {},
+  WaveFlexMethods,
   {},
   {},
   WaveFlexEmits & EmitsOptions,

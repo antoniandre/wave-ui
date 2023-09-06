@@ -74,7 +74,7 @@ export type WSteps = DefineComponent<
   {},
   {},
   WaveStepsComputeds,
-  {},
+  WaveStepsMethods,
   {},
   {},
   WaveStepsEmits & EmitsOptions,

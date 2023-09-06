@@ -177,7 +177,7 @@ export type WOverlay = DefineComponent<
   {},
   {},
   WaveOverlayComputeds,
-  {},
+  WaveOverlayMethods,
   {},
   {},
   WaveOverlayEmits & EmitsOptions,

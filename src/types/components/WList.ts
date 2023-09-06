@@ -418,7 +418,7 @@ export type WList = DefineComponent<
   {},
   {},
   WaveListComputeds,
-  {},
+  WaveListMethods,
   {},
   {},
   WaveListEmits & EmitsOptions,

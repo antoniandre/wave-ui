@@ -433,7 +433,7 @@ export type WInput = DefineComponent<
   {},
   {},
   WaveInputComputeds,
-  {},
+  WaveInputMethods,
   {},
   {},
   WaveInputEmits & EmitsOptions,

@@ -230,7 +230,7 @@ export type WForm = DefineComponent<
   {},
   {},
   WaveFormComputeds,
-  {},
+  WaveFormMethods,
   {},
   {},
   WaveFormEmits & EmitsOptions,

@@ -241,7 +241,7 @@ export type WRating = DefineComponent<
   {},
   {},
   WaveRatingComputeds,
-  {},
+  WaveRatingMethods,
   {},
   {},
   WaveRatingEmits & EmitsOptions,

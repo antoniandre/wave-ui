@@ -463,7 +463,7 @@ export type WSelect = DefineComponent<
   {},
   {},
   WaveSelectComputeds,
-  {},
+  WaveSelectMethods,
   {},
   {},
   WaveSelectEmits & EmitsOptions,

@@ -137,7 +137,7 @@ export type WApp = DefineComponent<
   {},
   {},
   WaveAppComputeds,
-  {},
+  WaveAppMethods,
   {},
   {},
   WaveAppEmits & EmitsOptions,

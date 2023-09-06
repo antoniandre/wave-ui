@@ -200,7 +200,7 @@ export type WCheckboxes = DefineComponent<
   {},
   {},
   WaveCheckboxesComputeds,
-  {},
+  WaveCheckboxesMethods,
   {},
   {},
   WaveCheckboxesEmits & EmitsOptions,

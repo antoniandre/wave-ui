@@ -203,7 +203,7 @@ export type WCard = DefineComponent<
   {},
   {},
   WaveCardComputeds,
-  {},
+  WaveCardMethods,
   {},
   {},
   WaveCardEmits & EmitsOptions,

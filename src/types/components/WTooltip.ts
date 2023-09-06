@@ -235,7 +235,7 @@ export type WTooltip = DefineComponent<
   {},
   {},
   WaveTooltipComputeds,
-  {},
+  WaveTooltipMethods,
   {},
   {},
   WaveTooltipEmits & EmitsOptions,

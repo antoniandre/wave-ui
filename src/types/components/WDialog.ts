@@ -259,7 +259,7 @@ export type WDialog = DefineComponent<
   {},
   {},
   WaveDialogComputeds,
-  {},
+  WaveDialogMethods,
   {},
   {},
   WaveDialogEmits & EmitsOptions,
