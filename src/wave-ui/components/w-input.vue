@@ -61,6 +61,7 @@ component(
           @change="onFileChange"
           :multiple="multiple || null"
           v-bind="attrs"
+          :disabled="isDisabled || null"
           :data-progress="overallFilesProgress /* Needed to emit the overallProgress. */")
         transition-group.w-input__input.w-input__input--file(
           tag="label"
