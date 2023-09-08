@@ -22,7 +22,15 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
-    li.minor
+    li.patch
+      strong.version v3.5.2
+      ul
+        li
+          strong.code w-toolbar
+          ul
+            li Removed the CSS auto-grow.
+
+    li.patch
       strong.version v3.5.1
       ul
         li
