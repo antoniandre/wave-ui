@@ -29,6 +29,14 @@ main
           strong.code w-toolbar
           ul
             li Removed the CSS auto-grow.
+        li
+          strong.code w-input
+          ul
+            li Support the #[code disabled] prop on #[code &lt;input type=file&gt;].
+        li
+          strong Core
+          ul
+            li Support presets targeting props defined in a component mixin. #[issue-link 121]
 
     li.patch
       strong.version v3.5.1
