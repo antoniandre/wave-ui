@@ -571,6 +571,7 @@ $inactive-color: #777;
   &__label {
     transition: color $transition-duration;
     cursor: pointer;
+    user-select: none;
 
     &--left {margin-right: 2 * $base-increment;}
     &--right {margin-left: 2 * $base-increment;}
