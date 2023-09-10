@@ -23,6 +23,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v3.5.3
+      ul
+        li
+          strong.code w-input, w-select, w-textarea
+          ul
+            li Prevent user selection on form fields labels.
+
+    li.patch
       strong.version v3.5.2
       ul
         li
