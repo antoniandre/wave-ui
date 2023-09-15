@@ -432,8 +432,6 @@ div.tooltips-demo
   example(content-class="text-center my4")
     w-button.my2.mx6(
       @click="showTooltip = !showTooltip"
-      bg-color="primary"
-      dark
       width="6em")
       | {{ showTooltip ? 'Hide' : 'Show' }} tooltip
 
@@ -441,6 +439,7 @@ div.tooltips-demo
       w-tooltip(
         :model-value="showTooltip"
         show-on-click
+        persistent
         left
         @open="tooltipVisible = true"
         @close="onTooltipClose")
@@ -451,6 +450,7 @@ div.tooltips-demo
       w-tooltip(
         :model-value="showTooltip"
         show-on-click
+        persistent
         top
         @open="tooltipVisible = true"
         @close="onTooltipClose")
@@ -461,6 +461,7 @@ div.tooltips-demo
       w-tooltip(
         :model-value="showTooltip"
         show-on-click
+        persistent
         @open="tooltipVisible = true"
         @close="onTooltipClose")
         template(#activator="{ on }")
@@ -470,6 +471,7 @@ div.tooltips-demo
       w-tooltip(
         :model-value="showTooltip"
         show-on-click
+        persistent
         right
         @open="tooltipVisible = true"
         @close="onTooltipClose")
@@ -481,28 +483,27 @@ div.tooltips-demo
       .text-center
         w-button.my2.mx6(
           @click="showTooltip = !showTooltip"
-          bg-color="primary"
           dark
           width="6em")
           | {{ '\{\{ showTooltip ? \'Hide\' : \'Show\' \}\}' }} tooltip
 
         div.d-iblock.my2.mx6
-          w-tooltip(v-model="showTooltip" show-on-click left)
+          w-tooltip(v-model="showTooltip" show-on-click persistent left)
             template(#activator="{ on }")
               w-icon.ma2(v-on="on" lg) wi-star
             | Star
 
-          w-tooltip(v-model="showTooltip" show-on-click top)
+          w-tooltip(v-model="showTooltip" show-on-click persistent top)
             template(#activator="{ on }")
               w-icon.ma2(v-on="on" lg) wi-star
             | Star
 
-          w-tooltip(v-model="showTooltip" show-on-click)
+          w-tooltip(v-model="showTooltip" show-on-click persistent)
             template(#activator="{ on }")
               w-icon.ma2(v-on="on" lg) wi-star
             | Star
 
-          w-tooltip(v-model="showTooltip" show-on-click right)
+          w-tooltip(v-model="showTooltip" show-on-click persistent right)
             template(#activator="{ on }")
               w-icon.ma2(v-on="on" lg) wi-star
             | Star
@@ -511,7 +512,6 @@ div.tooltips-demo
         &lt;w-button
           @click="showTooltip = !showTooltip"
           class="my2 mx6"
-          bg-color="primary"
           dark
           width="6em"&gt;
           {{ '\{\{ showTooltip ? \'Hide\' : \'Show\' \}\}' }} tooltip
@@ -521,6 +521,7 @@ div.tooltips-demo
           &lt;w-tooltip
             v-model="showTooltip"
             show-on-click
+            persistent
             left&gt;
             &lt;template #activator="{ on }"&gt;
               &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
@@ -531,6 +532,7 @@ div.tooltips-demo
           &lt;w-tooltip
             v-model="showTooltip"
             show-on-click
+            persistent
             top&gt;
             &lt;template #activator="{ on }"&gt;
               &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
@@ -540,7 +542,8 @@ div.tooltips-demo
 
           &lt;w-tooltip
             v-model="showTooltip"
-            show-on-click&gt;
+            show-on-click
+            persistent&gt;
             &lt;template #activator="{ on }"&gt;
               &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
             &lt;/template&gt;
@@ -550,6 +553,7 @@ div.tooltips-demo
           &lt;w-tooltip
             v-model="showTooltip"
             show-on-click
+            persistent
             right&gt;
             &lt;template #activator="{ on }"&gt;
               &lt;w-icon v-on="on" class="ma2" lg&gt;wi-star&lt;/w-icon&gt;
@@ -830,6 +834,105 @@ div.tooltips-demo
         &lt;/w-tooltip&gt;
       &lt;/div&gt;
 
+  title-link(h2) Different sizes and caption style
+  example(content-class="text-center example-sizes wrap w-flex align-center justify-center")
+    w-tooltip(xs show-on-click persistent :model-value="true" append-to=".example-sizes")
+      template(#activator="{ on }")
+        span.ma6(v-on="on") xs
+      | Extra small
+    w-tooltip(sm show-on-click persistent :model-value="true" append-to=".example-sizes")
+      template(#activator="{ on }")
+        span.ma6(v-on="on") sm
+      | Small
+    w-tooltip(md show-on-click persistent :model-value="true" append-to=".example-sizes")
+      template(#activator="{ on }")
+        span.ma6(v-on="on") md
+      | Medium
+    w-tooltip(lg show-on-click persistent :model-value="true" append-to=".example-sizes")
+      template(#activator="{ on }")
+        span.ma7(v-on="on") lg
+      | Large
+    w-tooltip(xl show-on-click persistent :model-value="true" append-to=".example-sizes")
+      template(#activator="{ on }")
+        span.ma10(v-on="on") xl
+      | Extra large
+    w-tooltip(caption show-on-click persistent :model-value="true" append-to=".example-sizes")
+      template(#activator="{ on }")
+        span.ma10(v-on="on") Caption
+      | Caption style.
+    template(#pug).
+      w-tooltip(xs show-on-click persistent :model-value="true")
+        template(#activator="{ on }")
+          span.ma6(v-on="on") xs
+        | Extra small
+
+      w-tooltip(sm show-on-click persistent :model-value="true")
+        template(#activator="{ on }")
+          span.ma6(v-on="on") sm
+        | Small
+
+      w-tooltip(md show-on-click persistent :model-value="true")
+        template(#activator="{ on }")
+          span.ma6(v-on="on") md
+        | Medium
+
+      w-tooltip(lg show-on-click persistent :model-value="true")
+        template(#activator="{ on }")
+          span.ma7(v-on="on") lg
+        | Large
+
+      w-tooltip(xl show-on-click persistent :model-value="true")
+        template(#activator="{ on }")
+          span.ma10(v-on="on") xl
+        | Extra large
+
+      w-tooltip(caption show-on-click persistent :model-value="true")
+        template(#activator="{ on }")
+          span.ma10(v-on="on") Caption
+        | Caption style.
+    template(#html).
+      &lt;w-tooltip xs show-on-click persistent :model-value="true"&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;span v-on="on" class="ma3"&gt;xs&lt;/span&gt;
+        &lt;/template&gt;
+        Extra small
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip sm show-on-click persistent :model-value="true"&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;span v-on="on" class="ma3"&gt;sm&lt;/span&gt;
+        &lt;/template&gt;
+        Small
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip md show-on-click persistent :model-value="true"&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;span v-on="on" class="ma3"&gt;md&lt;/span&gt;
+        &lt;/template&gt;
+        Medium
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip lg show-on-click persistent :model-value="true"&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;span v-on="on" class="ma3"&gt;lg&lt;/span&gt;
+        &lt;/template&gt;
+        Large
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip xl show-on-click persistent :model-value="true"&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;span v-on="on" class="ma3"&gt;xl&lt;/span&gt;
+        &lt;/template&gt;
+        Extra large
+      &lt;/w-tooltip&gt;
+
+      &lt;w-tooltip caption show-on-click persistent :model-value="true"&gt;
+        &lt;template #activator="{ on }"&gt;
+          &lt;span v-on="on" class="ma3"&gt;Caption&lt;/span&gt;
+        &lt;/template&gt;
+        Caption style.
+      &lt;/w-tooltip&gt;
+
   title-link(h2) Transitions
   example(content-class="text-center")
     w-radios.my4(inline v-model="transition" :items="transitions")
@@ -1023,24 +1126,42 @@ div.tooltips-demo
     The downside is that the event listeners for the activator(s) will be attached to the document
     and not the activator itself. For that reason, it is not the recommended option if you have
     the choice.
-  title-link(h3 slug="external-activator--basic") Trigger a menu on click of an external activator
-  example.example14(content-class="text-center my4" app-classes-string="text-center")
-    w-button.cat-button(icon="mdi mdi-cat" xl)
-    w-tooltip(append-to=".example14" activator=".cat-button") Meow!
-    template(#pug).
-      w-button.cat-button(icon="mdi mdi-cat" xl)
+  title-link(h3 slug="external-activator--basic") Trigger a menu on hover (left) or click (right) of an external activator
+  .w-flex.wrap.align-start.gap6
+    example.example14a.grow(content-class="text-center my4" app-classes-string="text-center")
+      w-button.cat-button-1(icon="mdi mdi-cat" xl)
+      w-tooltip(append-to=".example14a" activator=".cat-button-1") Meow!
+      template(#pug).
+        w-button.cat-button(icon="mdi mdi-cat" xl)
 
-      w-tooltip(activator=".cat-button") Meow!
-    template(#html).
-      &lt;w-button
-        icon="mdi mdi-cat"
-        xl
-        class="cat-button"&gt;
-      &lt;/w-button&gt;
+        w-tooltip(activator=".cat-button") Meow!
+      template(#html).
+        &lt;w-button
+          icon="mdi mdi-cat"
+          xl
+          class="cat-button"&gt;
+        &lt;/w-button&gt;
 
-      &lt;w-tooltip activator=".cat-button"&gt;
-        Meow!
-      &lt;/w-tooltip&gt;
+        &lt;w-tooltip activator=".cat-button"&gt;
+          Meow!
+        &lt;/w-tooltip&gt;
+    example.example14b.grow(content-class="text-center my4" app-classes-string="text-center")
+      w-button.cat-button-2(icon="mdi mdi-cat" xl)
+      w-tooltip(append-to=".example14b" activator=".cat-button-2" show-on-click) Meow!
+      template(#pug).
+        w-button.cat-button(icon="mdi mdi-cat" xl)
+
+        w-tooltip(activator=".cat-button" show-on-click) Meow!
+      template(#html).
+        &lt;w-button
+          icon="mdi mdi-cat"
+          xl
+          class="cat-button"&gt;
+        &lt;/w-button&gt;
+
+        &lt;w-tooltip activator=".cat-button" show-on-click&gt;
+          Meow!
+        &lt;/w-tooltip&gt;
 
   title-link(h3 slug="external-activator--2-activators").
     Trigger the same menu on hover of 2 different external activators
