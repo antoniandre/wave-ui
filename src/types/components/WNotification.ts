@@ -257,7 +257,6 @@ export interface WaveNotificationProps {
    * @see https://antoniandre.github.io/wave-ui/w-notification
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -281,7 +280,6 @@ export interface WaveNotificationEmits {
    * @see https://antoniandre.github.io/wave-ui/w-notification
    */
   'onClose'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -335,7 +333,6 @@ export interface WaveNotificationComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-notification
    */
   timeoutVal: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -347,7 +344,6 @@ export interface WaveNotificationMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-notification
    */
   countdown(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -359,7 +355,6 @@ export type WaveNotificationSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-notification
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

@@ -189,7 +189,6 @@ export interface WaveMenuProps {
    * @see https://antoniandre.github.io/wave-ui/w-menu
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -219,7 +218,6 @@ export interface WaveMenuEmits {
    * @see https://antoniandre.github.io/wave-ui/w-menu
    */
   'onClose'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -279,7 +277,6 @@ export interface WaveMenuComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-menu
    */
   activatorEventHandlers: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -292,7 +289,6 @@ export interface WaveMenuMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-menu
    */
   toggle(e: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -318,7 +314,6 @@ export type WaveMenuSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-menu
    */
   'title': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

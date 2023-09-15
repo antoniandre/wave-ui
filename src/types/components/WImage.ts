@@ -128,7 +128,6 @@ export interface WaveImageProps {
    * @see https://antoniandre.github.io/wave-ui/w-image
    */
   contentClass?: string|Array<any>|{}
-
 }
 
 // ----------------------------------------------------------------------------
@@ -155,7 +154,6 @@ export interface WaveImageEmits {
    * @see https://antoniandre.github.io/wave-ui/w-image
    */
   'onError'?: (renameMe1: any) => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -197,7 +195,6 @@ export interface WaveImageComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-image
    */
   imageStyles: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -210,7 +207,6 @@ export interface WaveImageMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-image
    */
   loadImage(loadFallback?: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -228,7 +224,6 @@ export type WaveImageSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-image
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

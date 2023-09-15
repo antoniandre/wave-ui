@@ -95,7 +95,6 @@ export interface WaveSwitchProps {
    * @see https://antoniandre.github.io/wave-ui/w-switch
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -122,7 +121,6 @@ export interface WaveSwitchEmits {
    * @see https://antoniandre.github.io/wave-ui/w-switch
    */
   'onFocus'?: (renameMe1: any) => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -146,7 +144,6 @@ export interface WaveSwitchComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-switch
    */
   inputClasses: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -158,7 +155,6 @@ export interface WaveSwitchMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-switch
    */
   onInput(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -182,7 +178,6 @@ export type WaveSwitchSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-switch
    */
   'thumb': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

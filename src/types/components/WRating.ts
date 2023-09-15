@@ -118,7 +118,6 @@ export interface WaveRatingProps {
    * @see https://antoniandre.github.io/wave-ui/w-rating
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -152,7 +151,6 @@ export interface WaveRatingEmits {
    * @see https://antoniandre.github.io/wave-ui/w-rating
    */
   'onBlur'?: (renameMe1: any) => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -176,7 +174,6 @@ export interface WaveRatingComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-rating
    */
   halfStarStyle: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -217,7 +214,6 @@ export interface WaveRatingMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-rating
    */
   buttonClasses(i: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -230,7 +226,6 @@ export type WaveRatingSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-rating
    */
   'item': (_: { index: any }) => any
-
 }>
 
 // ----------------------------------------------------------------------------

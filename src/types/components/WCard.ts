@@ -107,7 +107,6 @@ export interface WaveCardProps {
    * @see https://antoniandre.github.io/wave-ui/w-card
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -155,7 +154,6 @@ export interface WaveCardComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-card
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -192,7 +190,6 @@ export type WaveCardSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-card
    */
   'actions': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

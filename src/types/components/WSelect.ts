@@ -222,7 +222,6 @@ export interface WaveSelectProps {
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
   fitToContent?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -284,7 +283,6 @@ export interface WaveSelectEmits {
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
   'onClick:innerIconRight'?: (renameMe1: any) => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -332,7 +330,6 @@ export interface WaveSelectComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
   inputWrapClasses: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -404,7 +401,6 @@ export interface WaveSelectMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
   closeMenu(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -442,7 +438,6 @@ export type WaveSelectSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
   'item': (_: { item: any, selected: any, index: any }) => any
-
 } & {
   /**
    * `x` is an integer starting at `1`.

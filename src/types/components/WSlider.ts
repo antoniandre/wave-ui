@@ -140,7 +140,6 @@ export interface WaveSliderProps {
    * @see https://antoniandre.github.io/wave-ui/w-slider
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -167,7 +166,6 @@ export interface WaveSliderEmits {
    * @see https://antoniandre.github.io/wave-ui/w-slider
    */
   'onFocus'?: (renameMe1: any) => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -239,7 +237,6 @@ export interface WaveSliderComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-slider
    */
   wrapperClasses: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -308,7 +305,6 @@ export interface WaveSliderMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-slider
    */
   updateRangeValueScaled(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -333,7 +329,6 @@ export type WaveSliderSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-slider
    */
   'label-right': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

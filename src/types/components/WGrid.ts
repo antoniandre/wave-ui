@@ -40,7 +40,6 @@ export interface WaveGridProps {
    * @see https://antoniandre.github.io/wave-ui/w-grid
    */
   gap?: number|{}|string
-
 }
 
 // ----------------------------------------------------------------------------
@@ -70,7 +69,6 @@ export interface WaveGridComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-grid
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -88,7 +86,6 @@ export type WaveGridSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-grid
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

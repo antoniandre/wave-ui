@@ -152,7 +152,6 @@ export interface WaveTagProps {
    * @see https://antoniandre.github.io/wave-ui/w-tag
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -172,7 +171,6 @@ export interface WaveTagEmits {
    * @see https://antoniandre.github.io/wave-ui/w-tag
    */
   'onUpdate:modelValue'?: (renameMe1: any) => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -196,7 +194,6 @@ export interface WaveTagComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-tag
    */
   styles: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -214,7 +211,6 @@ export type WaveTagSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-tag
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

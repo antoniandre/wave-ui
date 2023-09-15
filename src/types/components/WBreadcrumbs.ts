@@ -110,7 +110,6 @@ export interface WaveBreadcrumbsProps {
    * @see https://antoniandre.github.io/wave-ui/w-breadcrumbs
    */
   xl?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -140,7 +139,6 @@ export interface WaveBreadcrumbsComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-breadcrumbs
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -169,7 +167,6 @@ export type WaveBreadcrumbsSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-breadcrumbs
    */
   'item': (_: { item: any, index: any, isLast: any, key: any }) => any
-
 }>
 
 // ----------------------------------------------------------------------------

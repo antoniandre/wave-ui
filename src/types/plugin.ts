@@ -8,6 +8,7 @@ export interface BreakpointConfig {
   sm?: number
   md?: number
   lg?: number
+  xl?: number
 }
 
 export interface ConstructorOptions {

@@ -230,7 +230,6 @@ export interface WaveInputProps {
    * @see https://antoniandre.github.io/wave-ui/w-input
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -284,7 +283,6 @@ export interface WaveInputEmits {
    * @see https://antoniandre.github.io/wave-ui/w-input
    */
   'onUpdate:overallProgress'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -362,7 +360,6 @@ export interface WaveInputComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-input
    */
   inputWrapClasses: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -404,7 +401,6 @@ export interface WaveInputMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-input
    */
   readFile(original: any, file: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -422,7 +418,6 @@ export type WaveInputSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-input
    */
   'no-file': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

@@ -187,7 +187,6 @@ export interface WaveDrawerProps {
    * @see https://antoniandre.github.io/wave-ui/w-drawer
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -217,7 +216,6 @@ export interface WaveDrawerEmits {
    * @see https://antoniandre.github.io/wave-ui/w-drawer
    */
   'onClose'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -277,7 +275,6 @@ export interface WaveDrawerComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-drawer
    */
   transitionName: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -301,7 +298,6 @@ export interface WaveDrawerMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-drawer
    */
   onOutsideClick(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -319,7 +315,6 @@ export type WaveDrawerSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-drawer
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

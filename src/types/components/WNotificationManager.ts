@@ -49,7 +49,6 @@ export interface WaveNotificationManagerComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-notification-manager
    */
   transition: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -62,7 +61,6 @@ export interface WaveNotificationManagerMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-notification-manager
    */
   notifProps(notif: any): void
-
 }
 
 // ----------------------------------------------------------------------------

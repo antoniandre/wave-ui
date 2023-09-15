@@ -69,7 +69,6 @@ const slots = {
       active: 'A boolean representing the active state of the tab.'
     }
   }
-
 }
 
 const events = {

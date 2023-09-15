@@ -152,7 +152,6 @@ export interface WaveDialogProps {
    * @see https://antoniandre.github.io/wave-ui/w-dialog
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -182,7 +181,6 @@ export interface WaveDialogEmits {
    * @see https://antoniandre.github.io/wave-ui/w-dialog
    */
   'onClose'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -206,7 +204,6 @@ export interface WaveDialogComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-dialog
    */
   contentStyles: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -230,7 +227,6 @@ export interface WaveDialogMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-dialog
    */
   onClose(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -248,7 +244,6 @@ export type WaveDialogSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-dialog
    */
   'actions': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

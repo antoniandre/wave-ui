@@ -96,7 +96,6 @@ export interface WaveFormElementProps {
    * @see https://antoniandre.github.io/wave-ui/w-form-element
    */
   validateElement?: any
-
 }
 
 // ----------------------------------------------------------------------------
@@ -114,7 +113,6 @@ export interface WaveFormElementEmits {
    * @see https://antoniandre.github.io/wave-ui/w-form-element
    */
   'onUpdate:valid'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -126,7 +124,6 @@ export interface WaveFormElementComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-form-element
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -138,7 +135,6 @@ export interface WaveFormElementMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-form-element
    */
   reset(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -157,7 +153,6 @@ export type WaveFormElementSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-form-element
    */
   'error-message': (_: { message: any }) => any
-
 }>
 
 // ----------------------------------------------------------------------------

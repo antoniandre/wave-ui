@@ -185,7 +185,6 @@ export interface WaveListProps {
    * @see https://antoniandre.github.io/wave-ui/w-list
    */
   arrowsNavigation?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -231,7 +230,6 @@ export interface WaveListEmits {
    * @see https://antoniandre.github.io/wave-ui/w-list
    */
   'onKeydown:enter'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -285,7 +283,6 @@ export interface WaveListComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-list
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -363,7 +360,6 @@ export interface WaveListMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-list
    */
   applySelectionOnItems(selection: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -397,7 +393,6 @@ export type WaveListSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-list
    */
   'item': (_: { item: any, index: any, selected: any }) => any
-
 } & {
   /**
    * `x` is an integer starting at `1`.

@@ -96,7 +96,6 @@ export interface WaveCheckboxesProps {
    * @see https://antoniandre.github.io/wave-ui/colors
    */
   labelColor?: string
-
 }
 
 // ----------------------------------------------------------------------------
@@ -120,7 +119,6 @@ export interface WaveCheckboxesEmits {
    * @see https://antoniandre.github.io/wave-ui/w-checkboxes
    */
   'onFocus'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -138,7 +136,6 @@ export interface WaveCheckboxesComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-checkboxes
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -165,7 +162,6 @@ export interface WaveCheckboxesMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-checkboxes
    */
   getOriginalItem(item: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -180,7 +176,6 @@ export type WaveCheckboxesSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-checkboxes
    */
   'item.x': (_: { item: any, checked: any, index: any }) => any
-
 } & {
   /**
    * TODO: Add Description

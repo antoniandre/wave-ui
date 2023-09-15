@@ -49,7 +49,6 @@ export interface WaveDividerProps {
    * @see https://antoniandre.github.io/wave-ui/w-divider
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -67,7 +66,6 @@ export interface WaveDividerComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-divider
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -85,7 +83,6 @@ export type WaveDividerSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-divider
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

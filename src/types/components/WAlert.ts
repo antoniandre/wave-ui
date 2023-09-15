@@ -213,7 +213,6 @@ export interface WaveAlertProps {
    * @see https://antoniandre.github.io/wave-ui/w-alert
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -237,7 +236,6 @@ export interface WaveAlertEmits {
    * @see https://antoniandre.github.io/wave-ui/w-alert
    */
   'onClose'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -273,7 +271,6 @@ export interface WaveAlertComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-alert
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -291,7 +288,6 @@ export type WaveAlertSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-alert
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

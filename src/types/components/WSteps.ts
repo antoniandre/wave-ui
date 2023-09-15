@@ -33,7 +33,6 @@ export interface WaveStepsProps {
    * @see https://antoniandre.github.io/wave-ui/w-steps
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -51,7 +50,6 @@ export interface WaveStepsComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-steps
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------

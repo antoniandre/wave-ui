@@ -1,4 +1,4 @@
-export type WaveStatusColors = 'primary' | 'success' | 'error' | 'warning' | 'info';
+export type WaveStatusColors = 'primary' | 'success' | 'error' | 'warning' | 'info'
 
 export type WaveColorShades =
   'black' |

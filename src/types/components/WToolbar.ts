@@ -129,7 +129,6 @@ export interface WaveToolbarProps {
    * @see https://antoniandre.github.io/wave-ui/w-toolbar
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -165,7 +164,6 @@ export interface WaveToolbarComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-toolbar
    */
   styles: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -183,7 +181,6 @@ export type WaveToolbarSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-toolbar
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

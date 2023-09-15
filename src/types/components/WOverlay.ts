@@ -72,7 +72,6 @@ export interface WaveOverlayProps {
    * @see https://antoniandre.github.io/wave-ui/w-overlay
    */
   persistentNoAnimation?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -111,7 +110,6 @@ export interface WaveOverlayEmits {
    * @see https://antoniandre.github.io/wave-ui/w-overlay
    */
   'onClose'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -135,7 +133,6 @@ export interface WaveOverlayComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-overlay
    */
   styles: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -154,7 +151,6 @@ export interface WaveOverlayMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-overlay
    */
   onClose(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -166,7 +162,6 @@ export type WaveOverlaySlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-overlay
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

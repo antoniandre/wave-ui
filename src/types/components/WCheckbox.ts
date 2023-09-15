@@ -110,7 +110,6 @@ export interface WaveCheckboxProps {
    * @see https://antoniandre.github.io/wave-ui/w-checkbox
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -140,7 +139,6 @@ export interface WaveCheckboxEmits {
    * @see https://antoniandre.github.io/wave-ui/w-checkbox
    */
   'onBlur'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -158,7 +156,6 @@ export interface WaveCheckboxComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-checkbox
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -170,7 +167,6 @@ export interface WaveCheckboxMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-checkbox
    */
   onInput(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -182,7 +178,6 @@ export type WaveCheckboxSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-checkbox
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

@@ -170,7 +170,6 @@ export interface WaveTableProps {
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
   itemsPerPageOptions?: any
-
 }
 
 // ----------------------------------------------------------------------------
@@ -233,7 +232,6 @@ export interface WaveTableEmits {
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
   'onColumnResize'?: (renameMe1: any, renameMe2: any) => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -311,7 +309,6 @@ export interface WaveTableComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
   expandedRowsByUid: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -388,7 +385,6 @@ export interface WaveTableMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
   updatePaginationConfig(config: { itemsPerPage: any, page: any, total: number }): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -471,7 +467,6 @@ export type WaveTableSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
   'pagination': (_: { range: any, total: any }) => any
-
 }>
 
 // ----------------------------------------------------------------------------

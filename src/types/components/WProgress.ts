@@ -167,7 +167,6 @@ export interface WaveProgressProps {
    * @see https://antoniandre.github.io/wave-ui/w-progress
    */
   zIndex?: number|string|boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -215,7 +214,6 @@ export interface WaveProgressComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-progress
    */
   styles: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -233,7 +231,6 @@ export type WaveProgressSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-progress
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

@@ -245,7 +245,6 @@ export interface WaveButtonProps {
    * @see https://antoniandre.github.io/wave-ui/w-button
    */
   xl?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -263,7 +262,6 @@ export interface WaveButtonComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-button
    */
   buttonProps: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -281,7 +279,6 @@ export type WaveButtonSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-button
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

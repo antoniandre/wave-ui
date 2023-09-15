@@ -188,7 +188,6 @@ export interface WaveBadgeProps {
    * @see https://antoniandre.github.io/wave-ui/w-badge
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -230,7 +229,6 @@ export interface WaveBadgeComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-badge
    */
   styles: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -254,7 +252,6 @@ export type WaveBadgeSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-badge
    */
   'badge': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

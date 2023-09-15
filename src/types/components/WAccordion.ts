@@ -21,7 +21,7 @@ import {
 // ----------------------------------------------------------------------------
 export interface WaveAccordionProps {
   /**
-   * ``value` in Vue 2.`
+   * `value` in Vue 2.
    * Provide an array of booleans to dictate the state (expanded and collapsed) of all the accordion items. This value gets updated by the accordion when using a v-model.
    * @property {Array<any>} modelValue
    * @see https://antoniandre.github.io/wave-ui/w-accordion
@@ -165,7 +165,6 @@ export interface WaveAccordionProps {
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -204,7 +203,6 @@ export interface WaveAccordionEmits {
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
   'onItemCollapsed'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -216,7 +214,6 @@ export interface WaveAccordionComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
   accordionClasses: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -257,7 +254,6 @@ export interface WaveAccordionMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
   updateItems(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -281,7 +277,6 @@ export type WaveAccordionSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
   'item-content': (_: { item: any, index: any, expanded: any }) => any
-
 }>
 
 // ----------------------------------------------------------------------------

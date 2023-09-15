@@ -191,7 +191,6 @@ export interface WaveTabsProps {
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
   keepInDom?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -218,7 +217,6 @@ export interface WaveTabsEmits {
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
   'onFocus'?: (renameMe1: any) => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -272,7 +270,6 @@ export interface WaveTabsComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
   sliderStyles: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -338,7 +335,6 @@ export interface WaveTabsMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
   getOriginalItem(item: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -368,7 +364,6 @@ export type WaveTabsSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
   'item-content': (_: { item: any, index: any, active: any }) => any
-
 }>
 
 // ----------------------------------------------------------------------------

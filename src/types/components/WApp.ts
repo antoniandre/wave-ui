@@ -96,7 +96,6 @@ export interface WaveAppProps {
    * @see https://antoniandre.github.io/wave-ui/w-app
    */
   textRight?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -126,7 +125,6 @@ export type WaveAppSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-app
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

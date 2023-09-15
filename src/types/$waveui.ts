@@ -2,7 +2,6 @@
 import { WaveAlertProps } from './components/WAlert'
 
 export type WaveNotificationType = 'info' | 'success' | 'warning' | 'error';
-
 export interface $waveui {
   breakpoint: {
     name: string,
@@ -24,8 +23,8 @@ export interface $waveui {
    * @param {NotificationType} type Defaults to 'info'
    * @param {number} timeout Time to live. Defaults to 4000. 0 is permanently.
    */
-  notify(message: string, type?: WaveNotificationType, timeout?: number): void;
+  notify(message: string, type?: WaveNotificationType, timeout?: number): void
 
-  notify(options: {message: string, timeout: number} & WaveAlertProps): void;
-  switchTheme (theme: string, skipFlatten: boolean): void;
+  notify(options: {message: string, timeout: number} & WaveAlertProps): void
+  switchTheme (theme: string, skipFlatten: boolean): void
 }

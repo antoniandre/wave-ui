@@ -164,7 +164,6 @@ export interface WaveIconProps {
    * @see https://antoniandre.github.io/wave-ui/w-icon
    */
   size?: number|string
-
 }
 
 // ----------------------------------------------------------------------------
@@ -206,7 +205,6 @@ export interface WaveIconComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-icon
    */
   styles: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -218,7 +216,6 @@ export interface WaveIconMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-icon
    */
   readIcon(): void
-
 }
 
 // ----------------------------------------------------------------------------

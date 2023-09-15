@@ -89,7 +89,6 @@ export interface WaveRadiosProps {
    * @see https://antoniandre.github.io/wave-ui/colors
    */
   labelColor?: string
-
 }
 
 // ----------------------------------------------------------------------------
@@ -113,7 +112,6 @@ export interface WaveRadiosEmits {
    * @see https://antoniandre.github.io/wave-ui/w-radios
    */
   'onFocus'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -131,7 +129,6 @@ export interface WaveRadiosComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-radios
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -151,7 +148,6 @@ export interface WaveRadiosMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-radios
    */
   getOriginalItem(item: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -166,7 +162,6 @@ export type WaveRadiosSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-radios
    */
   'item.x': (_: { item: any, index: any, checked: any }) => any
-
 } & {
   /**
    * TODO: Add Description

@@ -621,6 +621,5 @@ export default {
       this.bgColor = 'amber'
     }, 5000)
   }
-
 }
 </script>

@@ -125,7 +125,6 @@ export interface WaveTooltipProps {
    * @see https://antoniandre.github.io/wave-ui/w-tooltip
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -155,7 +154,6 @@ export interface WaveTooltipEmits {
    * @see https://antoniandre.github.io/wave-ui/w-tooltip
    */
   'onClose'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -191,7 +189,6 @@ export interface WaveTooltipComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-tooltip
    */
   activatorEventHandlers: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -204,7 +201,6 @@ export interface WaveTooltipMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-tooltip
    */
   toggle(e: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -224,7 +220,6 @@ export type WaveTooltipSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-tooltip
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

@@ -96,7 +96,6 @@ export interface WaveRadioProps {
    * @see https://antoniandre.github.io/wave-ui/w-radio
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -120,7 +119,6 @@ export interface WaveRadioEmits {
    * @see https://antoniandre.github.io/wave-ui/w-radio
    */
   'onFocus'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -138,7 +136,6 @@ export interface WaveRadioComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-radio
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -157,7 +154,6 @@ export interface WaveRadioMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-radio
    */
   onInput(e: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -169,7 +165,6 @@ export type WaveRadioSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-radio
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

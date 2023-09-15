@@ -82,7 +82,6 @@ export interface WaveFormProps {
    * @see https://antoniandre.github.io/wave-ui/w-form
    */
   readonly?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -153,7 +152,6 @@ export interface WaveFormEmits {
    * @see https://antoniandre.github.io/wave-ui/w-form
    */
   'onUpdate:errorsCount'?: (renameMe1: any) => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -165,7 +163,6 @@ export interface WaveFormComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-form
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -207,7 +204,6 @@ export interface WaveFormMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-form
    */
   onSubmit(e: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -219,7 +215,6 @@ export type WaveFormSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-form
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

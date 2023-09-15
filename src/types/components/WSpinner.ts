@@ -93,7 +93,6 @@ export interface WaveSpinnerProps {
    * @see https://antoniandre.github.io/wave-ui/w-spinner
    */
   fade?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -135,7 +134,6 @@ export interface WaveSpinnerComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-spinner
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------

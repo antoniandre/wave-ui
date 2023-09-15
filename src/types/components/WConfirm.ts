@@ -205,7 +205,6 @@ export interface WaveConfirmProps {
    * @see https://antoniandre.github.io/wave-ui/w-confirm
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -223,7 +222,6 @@ export interface WaveConfirmEmits {
    * @see https://antoniandre.github.io/wave-ui/w-confirm
    */
   'onConfirm'?: () => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -271,7 +269,6 @@ export interface WaveConfirmComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-confirm
    */
   buttonProps: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -289,7 +286,6 @@ export interface WaveConfirmMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-confirm
    */
   onConfirm(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -319,7 +315,6 @@ export type WaveConfirmSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-confirm
    */
   'confirm': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

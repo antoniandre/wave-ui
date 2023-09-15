@@ -195,7 +195,6 @@ export interface WaveTreeProps {
    * @see https://antoniandre.github.io/wave-ui/w-tree
    */
   itemOpenKey?: string
-
 }
 
 // ----------------------------------------------------------------------------
@@ -273,7 +272,6 @@ export interface WaveTreeEmits {
    * @see https://antoniandre.github.io/wave-ui/w-tree
    */
   'onSelect'?: (renameMe1: any, renameMe2: any, renameMe3: any, renameMe4: any, renameMe5: any) => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -285,7 +283,6 @@ export interface WaveTreeComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-tree
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -418,7 +415,6 @@ export interface WaveTreeMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-tree
    */
   itemClasses(item: any): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -435,7 +431,6 @@ export type WaveTreeSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-tree
    */
   'item': (_: { item: any, depth: any, open: any, path: any }) => any
-
 }>
 
 // ----------------------------------------------------------------------------

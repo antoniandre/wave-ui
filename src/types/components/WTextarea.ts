@@ -165,7 +165,6 @@ export interface WaveTextareaProps {
    * @see https://antoniandre.github.io/wave-ui/w-textarea
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -213,7 +212,6 @@ export interface WaveTextareaEmits {
    * @see https://antoniandre.github.io/wave-ui/w-textarea
    */
   'onClick:innerIconRight'?: (renameMe1: any) => void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -261,7 +259,6 @@ export interface WaveTextareaComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-textarea
    */
   textareaStyles: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -299,7 +296,6 @@ export interface WaveTextareaMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-textarea
    */
   getLineHeight(): void
-
 }
 
 // ----------------------------------------------------------------------------
@@ -311,7 +307,6 @@ export type WaveTextareaSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-textarea
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

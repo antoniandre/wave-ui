@@ -152,7 +152,6 @@ export interface WaveFlexProps {
    * @see https://antoniandre.github.io/wave-ui/w-flex
    */
   gap?: number|string
-
 }
 
 // ----------------------------------------------------------------------------
@@ -170,7 +169,6 @@ export interface WaveFlexComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-flex
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -188,7 +186,6 @@ export type WaveFlexSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-flex
    */
   'default': () => any
-
 }>
 
 // ----------------------------------------------------------------------------

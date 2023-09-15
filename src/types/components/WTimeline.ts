@@ -86,7 +86,6 @@ export interface WaveTimelineProps {
    * @see https://antoniandre.github.io/wave-ui/w-timeline
    */
   light?: boolean
-
 }
 
 // ----------------------------------------------------------------------------
@@ -104,7 +103,6 @@ export interface WaveTimelineComputeds extends ComputedOptions {
    * @see https://antoniandre.github.io/wave-ui/w-timeline
    */
   classes: ComputedGetter<any>
-
 }
 
 // ----------------------------------------------------------------------------
@@ -133,7 +131,6 @@ export type WaveTimelineSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-timeline
    */
   'item.x': (_: { item: any, index: any }) => any
-
 } & {
   /**
    * `x` is an integer starting at `1`.
