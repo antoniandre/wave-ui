@@ -16,6 +16,7 @@ import WTooltip from '@/wave-ui/components/w-tooltip.vue'
 const propsDescs = {
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>This prop controls the visibility of the tooltip. Any truthy value will show the tooltip whereas any falsy value will hide it.',
   showOnClick: 'Triggers the tooltip apparition on activator click instead of hover by default. Another click on the activator will hide the tooltip.',
+  enableTouch: 'Enables the hover-activating tooltips on touch devices:<br>Since you can\'t hover on touch device (you can only tap which is counted as a click), the hover-activating tooltips are not behaving similar on mobile as they need a tap to be closed. That\'s why this option is disabled by default.',
   color: 'Applies a color to the tooltip\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the tooltip\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   shadow: 'Applies a drop shadow to the tooltip.',
