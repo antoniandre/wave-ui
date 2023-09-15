@@ -22,8 +22,8 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
-    li.patch
-      strong.version v3.5.3
+    li.minor
+      strong.version v3.6.0
       ul
         li
           strong.code w-input, w-select, w-textarea
@@ -32,7 +32,8 @@ main
         li
           strong.code w-tooltip
           ul
-            li Added #[code xs], #[code sm], #[code md], #[code lg] &amp; #[code xl] props for different tooltip sizes.
+            li Added #[code xs], #[code sm], #[code md], #[code lg] &amp; #[code xl] props for different tooltip sizes. #[span.tag.new]
+            li Added the #[code caption] prop to apply the caption look and fill (smaller, grey, italic). #[span.tag.new]
 
     li.patch
       strong.version v3.5.2
