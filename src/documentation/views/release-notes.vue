@@ -30,6 +30,10 @@ main
           ul
             li Prevent user selection on form fields labels.
         li
+          strong.code w-button
+          ul
+            li Increase the feedback speed on button :activate state.
+        li
           strong.code w-tooltip
           ul
             li Added #[code xs], #[code sm], #[code md], #[code lg] &amp; #[code xl] props for different tooltip sizes. #[span.tag.new]
