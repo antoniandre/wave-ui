@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "dist/types/",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [ "src/*" ]
+    }
+  },
+  "include": [
+    "./src/**/*",
+    "./src/**/*.ts",
+    "./src/*.d.ts",
+    "./src/**/*.d.ts"
+  ],
+  "exclude": [
+    "./dist/",
+    "./node_modules/"
+  ]
+}
