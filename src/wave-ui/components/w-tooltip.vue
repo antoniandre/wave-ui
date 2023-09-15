@@ -41,7 +41,7 @@ export default {
     md: { type: Boolean },
     lg: { type: Boolean },
     xl: { type: Boolean },
-    enableTouch: { type: Boolean, default: true }
+    enableTouch: { type: Boolean }
     // Other props in the detachable mixin:
     // detachTo, appendTo, fixed, top, bottom, left, right, alignTop, alignBottom, alignLeft,
     // alignRight, noPosition, zIndex, activator.
