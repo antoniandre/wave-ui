@@ -38,6 +38,7 @@ main
           ul
             li Added #[code xs], #[code sm], #[code md], #[code lg] &amp; #[code xl] props for different tooltip sizes. #[span.tag.new]
             li Added the #[code caption] prop to apply the caption look and fill (smaller, grey, italic). #[span.tag.new]
+            li Added the #[code enable-touch] prop to enable hover-activating tooltips on touch devices (disabled by default). #[span.tag.new]
 
     li.patch
       strong.version v3.5.2
