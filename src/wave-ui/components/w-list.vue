@@ -347,11 +347,11 @@ export default {
       // Reset the selections when single selection allowed for w-select.
       if (!this.isMultipleSelect) this.listItems.forEach(item => (item._selected = false))
 
-      this.checkSelection(selection) // Create an array with the selected values.
-        .forEach(val => {
-          const foundItem = this.listItems.find(item => item._value === val)
-          if (foundItem) foundItem._selected = true
-        })
+      const selectedItems = this.checkSelection(selection) // Create an array with the selected values.
+      // Update which items are selected or not
+      this.listItems.forEach(item => {
+         item._selected = selectedItems.find(val => item._value === val) !== undefined
+      });
     }
   },
 
