@@ -1126,7 +1126,7 @@ div.tooltips-demo
     The downside is that the event listeners for the activator(s) will be attached to the document
     and not the activator itself. For that reason, it is not the recommended option if you have
     the choice.
-  title-link(h3 slug="external-activator--basic") Trigger a menu on hover (left) or click (right) of an external activator
+  title-link(h3 slug="external-activator--basic") Trigger a menu on hover (left-side) or on click (right-side) of an external activator
   .w-flex.wrap.align-start.gap6
     example.example14a.grow(content-class="text-center my4" app-classes-string="text-center")
       w-button.cat-button-1(icon="mdi mdi-cat" xl)
@@ -1145,6 +1145,7 @@ div.tooltips-demo
         &lt;w-tooltip activator=".cat-button"&gt;
           Meow!
         &lt;/w-tooltip&gt;
+
     example.example14b.grow(content-class="text-center my4" app-classes-string="text-center")
       w-button.cat-button-2(icon="mdi mdi-cat" xl)
       w-tooltip(append-to=".example14b" activator=".cat-button-2" show-on-click) Meow!

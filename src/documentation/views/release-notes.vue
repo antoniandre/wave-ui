@@ -34,6 +34,10 @@ main
           ul
             li Increase the feedback speed on button :activate state.
         li
+          strong.code w-tooltip &amp; w-menu
+          ul
+            li Fixed the arrow color when used with a #[code bg-color].
+        li
           strong.code w-tooltip
           ul
             li Added #[code xs], #[code sm], #[code md], #[code lg] &amp; #[code xl] props for different tooltip sizes. #[span.tag.new]
