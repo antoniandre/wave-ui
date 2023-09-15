@@ -35,6 +35,7 @@ export default {
     delay: { type: Number },
     dark: { type: Boolean },
     light: { type: Boolean },
+    caption: { type: Boolean }, // Apply the caption class and style (grey, italic, small).
     xs: { type: Boolean },
     sm: { type: Boolean },
     md: { type: Boolean },
@@ -82,9 +83,10 @@ export default {
       return (
         (this.xs && 'xs') ||
         (this.sm && 'sm') ||
+        (this.sm && 'md') ||
         (this.lg && 'lg') ||
         (this.xl && 'xl') ||
-        'md'
+        (this.caption ? 'sm' : 'md') // if no size is set put md by default, or sm if caption is on.
       )
     },
 
@@ -99,6 +101,7 @@ export default {
         'w-tooltip--light': this.light,
         'w-tooltip--tile': this.tile,
         'w-tooltip--round': this.round,
+        caption: this.caption,
         [`size--${this.size}`]: true,
         'w-tooltip--shadow': this.shadow,
         'w-tooltip--fixed': this.fixed,
@@ -235,6 +238,12 @@ export default {
   &--bottom {margin-top: 3 * $base-increment;}
   &--left {margin-left: -3 * $base-increment;}
   &--right {margin-left: 3 * $base-increment;}
+
+  &.size--xs {font-size: 0.75rem;}
+  &.size--sm {font-size: 0.83rem;}
+  &.size--md {font-size: 0.9rem;}
+  &.size--lg {font-size: 1rem;}
+  &.size--xl {font-size: 1.1rem;}
 
   &--custom-transition {transform: none;}
 
