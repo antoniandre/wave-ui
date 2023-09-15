@@ -117,7 +117,7 @@ export default {
         zIndex: this.zIndex || this.zIndex === 0 || null,
         top: (this.detachableCoords.top && `${~~this.detachableCoords.top}px`) || null,
         left: (this.detachableCoords.left && `${~~this.detachableCoords.left}px`) || null,
-        '--w-tooltip-bg-color': this.$waveui.colors[this.bgColor || 'white']
+        '--w-tooltip-bg-color': this.$waveui.colors[this.bgColor] || 'rgb(var(--w-base-bg-color-rgb))'
       }
     },
 
@@ -258,12 +258,12 @@ export default {
 
   // Tooltip without border.
   &--no-border {
-    @include triangle($tooltip-bg-color, '.w-tooltip', 7px, 0);
+    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px, 0);
   }
 
   // Tooltip with border.
   &:not(&--no-border) {
-    @include triangle($tooltip-bg-color, '.w-tooltip', 7px);
+    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px);
   }
 }
 

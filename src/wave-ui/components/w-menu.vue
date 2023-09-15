@@ -168,7 +168,7 @@ export default {
         top: (this.detachableCoords.top && `${~~this.detachableCoords.top}px`) || null,
         left: (this.detachableCoords.left && `${~~this.detachableCoords.left}px`) || null,
         minWidth: (this.minWidth && this.menuMinWidth) || null,
-        '--w-menu-bg-color': this.arrow && this.$waveui.colors[this.bgColor || 'white']
+        '--w-menu-bg-color': this.arrow && (this.$waveui.colors[this.bgColor] || 'rgb(var(--w-base-bg-color-rgb))')
       }
     },
 
@@ -300,7 +300,7 @@ export default {
     &.w-menu--left {margin-left: -4 * $base-increment;}
     &.w-menu--right {margin-left: 4 * $base-increment;}
 
-    @include triangle($menu-bg-color, '.w-menu', 9px);
+    @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
   }
 }
 </style>
