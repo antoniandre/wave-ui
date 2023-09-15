@@ -348,10 +348,10 @@ export default {
       if (!this.isMultipleSelect) this.listItems.forEach(item => (item._selected = false))
 
       const selectedItems = this.checkSelection(selection) // Create an array with the selected values.
-      // Update which items are selected or not
+      // Update which items are selected or not.
       this.listItems.forEach(item => {
-         item._selected = selectedItems.find(val => item._value === val) !== undefined
-      });
+        item._selected = selectedItems.find(val => item._value === val) !== undefined
+      })
     }
   },
 
