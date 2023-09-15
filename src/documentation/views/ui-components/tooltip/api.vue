@@ -34,7 +34,13 @@ const propsDescs = {
   zIndex: 'Applies a z-index (positive or negative integer) to the tooltip.',
   persistent: 'When set to <code>true</code>, clicking outside of the tooltip will not close the tooltip.',
   activator: 'Allows you to define one or multiple external activators for the tooltip through a DOM selector string.<br>This way, you don\'t need to use the <code>activator</code> slot, and you can activate the tooltip from different activators.',
-  delay: 'A delay - in milliseconds - before opening the tooltip.<br>A small delay may help the tooltip position computing if the tooltip content changes at the moment the activator is activated. For instance, when defining multiple activators opening the same tooltip with different content.'
+  delay: 'A delay - in milliseconds - before opening the tooltip.<br>A small delay may help the tooltip position computing if the tooltip content changes at the moment the activator is activated. For instance, when defining multiple activators opening the same tooltip with different content.',
+  caption: 'Apply the <code>.caption</code> style on the tooltip content (small, grey, italic).',
+  xs: 'Sets the size of the tooltip to extra small.',
+  sm: 'Sets the size of the tooltip to small.',
+  md: 'Sets the size of the tooltip to medium.',
+  lg: 'Sets the size of the tooltip to large.',
+  xl: 'Sets the size of the tooltip to extra large.'
 }
 
 const slots = {
