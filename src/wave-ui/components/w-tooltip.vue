@@ -40,7 +40,8 @@ export default {
     sm: { type: Boolean },
     md: { type: Boolean },
     lg: { type: Boolean },
-    xl: { type: Boolean }
+    xl: { type: Boolean },
+    enableTouch: { type: Boolean, default: true }
     // Other props in the detachable mixin:
     // detachTo, appendTo, fixed, top, bottom, left, right, alignTop, alignBottom, alignLeft,
     // alignRight, noPosition, zIndex, activator.
@@ -122,11 +123,15 @@ export default {
 
     activatorEventHandlers () {
       let handlers = {}
-      if (this.showOnClick) handlers = { click: this.toggle }
-      else {
+
+      // Check the window exists: SSR-proof.
+      const isTouchDevice = typeof window !== 'undefined' && 'ontouchstart' in window
+
+      // Toggling tooltip on mouseenter/mouseout (by default), and also show on focus, hide on blur.
+      if (!this.showOnClick && !isTouchDevice) {
         handlers = {
-          focus: this.toggle,
-          blur: this.toggle,
+          focus: this.open,
+          blur: this.close,
           mouseenter: e => {
             this.hoveringActivator = true
             this.open(e)
@@ -136,10 +141,10 @@ export default {
             this.close()
           }
         }
-
-        // Check the window exists: SSR-proof.
-        if (typeof window !== 'undefined' && 'ontouchstart' in window) handlers.click = this.toggle
       }
+      // Only bind a click event on mobile, or if showOnClick is set.
+      else if (this.enableTouch || this.showOnClick) handlers = { click: this.toggle }
+
       return handlers
     }
   },
@@ -159,8 +164,12 @@ export default {
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     toggle (e) {
       let shouldShowTooltip = this.detachableVisible
+
+      // For touch devices.
       if (typeof window !== 'undefined' && 'ontouchstart' in window) {
-        if (e.type === 'click') shouldShowTooltip = !shouldShowTooltip
+        // disable tooltip opening for mouseenter activation.
+        if (!this.enableTouch && !this.showOnClick) shouldShowTooltip = false
+        else shouldShowTooltip = !shouldShowTooltip
       }
       else if (e.type === 'click' && this.showOnClick) shouldShowTooltip = !shouldShowTooltip
       else if (['mouseenter', 'focus'].includes(e.type) && !this.showOnClick) shouldShowTooltip = true
