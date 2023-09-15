@@ -29,6 +29,10 @@ main
           strong.code w-input, w-select, w-textarea
           ul
             li Prevent user selection on form fields labels.
+        li
+          strong.code w-tooltip
+          ul
+            li Added #[code xs], #[code sm], #[code md], #[code lg] &amp; #[code xl] props for different tooltip sizes.
 
     li.patch
       strong.version v3.5.2
