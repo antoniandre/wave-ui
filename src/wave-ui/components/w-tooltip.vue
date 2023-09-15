@@ -34,7 +34,12 @@ export default {
     persistent: { type: Boolean },
     delay: { type: Number },
     dark: { type: Boolean },
-    light: { type: Boolean }
+    light: { type: Boolean },
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean }
     // Other props in the detachable mixin:
     // detachTo, appendTo, fixed, top, bottom, left, right, alignTop, alignBottom, alignLeft,
     // alignRight, noPosition, zIndex, activator.
@@ -73,6 +78,16 @@ export default {
       return this.transition || `w-tooltip-slide-fade-${direction}`
     },
 
+    size () {
+      return (
+        (this.xs && 'xs') ||
+        (this.sm && 'sm') ||
+        (this.lg && 'lg') ||
+        (this.xl && 'xl') ||
+        'md'
+      )
+    },
+
     classes () {
       return {
         [this.color]: this.color,
@@ -84,6 +99,7 @@ export default {
         'w-tooltip--light': this.light,
         'w-tooltip--tile': this.tile,
         'w-tooltip--round': this.round,
+        [`size--${this.size}`]: true,
         'w-tooltip--shadow': this.shadow,
         'w-tooltip--fixed': this.fixed,
         'w-tooltip--no-border': this.noBorder || this.bgColor,
