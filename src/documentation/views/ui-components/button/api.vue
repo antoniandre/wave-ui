@@ -40,11 +40,11 @@ const propsDescs = {
   zIndex: 'Applies a z-index (positive or negative integer) to the button.',
   width: 'Sets a width on the button.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
   height: 'Sets a height on the button.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
-  xs: 'Sets the size of the button.',
-  sm: 'Sets the size of the button.',
-  md: 'Sets the size of the button.',
-  lg: 'Sets the size of the button.',
-  xl: 'Sets the size of the button.'
+  xs: 'Sets the size of the button to extra small.',
+  sm: 'Sets the size of the button to small.',
+  md: 'Sets the size of the button to medium.',
+  lg: 'Sets the size of the button to large.',
+  xl: 'Sets the size of the button to extra large.'
 }
 
 const slots = {

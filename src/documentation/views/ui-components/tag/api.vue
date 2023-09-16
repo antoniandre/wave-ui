@@ -24,11 +24,11 @@ const propsDescs = {
   closable: 'Adds a close button in the tag. On click of that button, the <code>v-model</code> boolean value is updated. You can then decide to hide the tag with a v-if or v-show based on the <code>v-model</code> value.',
   outline: 'The outline style applies the provided <code>color</code> (by default the color is inherited) to the text and border and no background color is set.',
   noBorder: 'Removes the default border from the tag element.',
-  xs: 'Sets the size of the tag.',
-  sm: 'Sets the size of the tag.',
-  md: 'Sets the size of the tag.',
-  lg: 'Sets the size of the tag.',
-  xl: 'Sets the size of the tag.',
+  xs: 'Sets the size of the tag to extra small.',
+  sm: 'Sets the size of the tag to small.',
+  md: 'Sets the size of the tag to medium.',
+  lg: 'Sets the size of the tag to large.',
+  xl: 'Sets the size of the tag to extra large.',
   width: 'Sets a width on the tag.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
   height: 'Sets a height on the tag.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.'
 }

@@ -16,6 +16,7 @@ import WTooltip from '@/wave-ui/components/w-tooltip.vue'
 const propsDescs = {
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>This prop controls the visibility of the tooltip. Any truthy value will show the tooltip whereas any falsy value will hide it.',
   showOnClick: 'Triggers the tooltip apparition on activator click instead of hover by default. Another click on the activator will hide the tooltip.',
+  enableTouch: 'Enables the hover-activating tooltips on touch devices:<br>Since you can\'t hover on touch device (you can only tap which is counted as a click), the hover-activating tooltips are not behaving similar on mobile as they need a tap to be closed. That\'s why this option is disabled by default.',
   color: 'Applies a color to the tooltip\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the tooltip\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   shadow: 'Applies a drop shadow to the tooltip.',
@@ -34,7 +35,13 @@ const propsDescs = {
   zIndex: 'Applies a z-index (positive or negative integer) to the tooltip.',
   persistent: 'When set to <code>true</code>, clicking outside of the tooltip will not close the tooltip.',
   activator: 'Allows you to define one or multiple external activators for the tooltip through a DOM selector string.<br>This way, you don\'t need to use the <code>activator</code> slot, and you can activate the tooltip from different activators.',
-  delay: 'A delay - in milliseconds - before opening the tooltip.<br>A small delay may help the tooltip position computing if the tooltip content changes at the moment the activator is activated. For instance, when defining multiple activators opening the same tooltip with different content.'
+  delay: 'A delay - in milliseconds - before opening the tooltip.<br>A small delay may help the tooltip position computing if the tooltip content changes at the moment the activator is activated. For instance, when defining multiple activators opening the same tooltip with different content.',
+  caption: 'Apply the <code>.caption</code> style on the tooltip content (small, grey, italic).',
+  xs: 'Sets the size of the tooltip to extra small.',
+  sm: 'Sets the size of the tooltip to small.',
+  md: 'Sets the size of the tooltip to medium.',
+  lg: 'Sets the size of the tooltip to large.',
+  xl: 'Sets the size of the tooltip to extra large.'
 }
 
 const slots = {

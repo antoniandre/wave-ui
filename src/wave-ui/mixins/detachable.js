@@ -331,14 +331,17 @@ export default {
     else {
       this.$nextTick(() => {
         if (this.activator) this.bindActivatorEvents()
-        if (this.modelValue) this.toggle({ type: 'click', target: this.activatorEl })
+        if (this.modelValue) this.open({ target: this.activatorEl })
       })
     }
 
     // Unwrap the overlay if any.
     if (this.overlay) this.overlayEl = this.$refs.overlay?.$el
 
-    if (this.modelValue && this.activator) this.toggle({ type: 'click', target: this.activatorEl })
+    if (this.modelValue && this.activator) {
+      this.toggle({ type: this.showOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
+    }
+    else if (this.modelValue) this.open({ target: this.activatorEl })
   },
 
   unmounted () {
@@ -357,7 +360,7 @@ export default {
 
   watch: {
     modelValue (bool) {
-      if (!!bool !== this.detachableVisible) this.toggle({ type: 'click', target: this.activatorEl })
+      if (!!bool !== this.detachableVisible) this.toggle({ type: this.showOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
     },
     appendTo () {
       this.removeFromDOM()

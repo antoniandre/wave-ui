@@ -282,7 +282,10 @@ $spinner-size: 40;
 
   // Active state.
   &:active {transform: scale(1.02);}
-  &:active:before {opacity: 0.3;}
+  &:active:before {
+    opacity: 0.3;
+    @include default-transition($fast-transition-duration);
+  }
   &--dark:active:before, &.primary--bg:active:before {opacity: 0.35;}
 
   // Disable visual feedback on loading and disabled buttons.

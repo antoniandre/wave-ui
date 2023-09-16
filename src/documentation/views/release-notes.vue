@@ -23,12 +23,50 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v3.6.1
+      ul
+        li
+          strong.code w-list
+          ul
+            li Allow de-selecting items by updating the model value. #[issue-link 123]
+
+    li.minor
+      strong.version v3.6.0
+      ul
+        li
+          strong.code w-input, w-select, w-textarea
+          ul
+            li Prevent user selection on form fields labels.
+        li
+          strong.code w-button
+          ul
+            li Increase the feedback speed on button :activate state.
+        li
+          strong.code w-tooltip &amp; w-menu
+          ul
+            li Fixed the arrow color when used with a #[code bg-color].
+        li
+          strong.code w-tooltip
+          ul
+            li Added #[code xs], #[code sm], #[code md], #[code lg] &amp; #[code xl] props for different tooltip sizes. #[span.tag.new]
+            li Added the #[code caption] prop to apply the caption look and fill (smaller, grey, italic). #[span.tag.new]
+            li Added the #[code enable-touch] prop to enable hover-activating tooltips on touch devices (disabled by default). #[span.tag.new]
+
+    li.patch
       strong.version v3.5.2
       ul
         li
           strong.code w-toolbar
           ul
             li Removed the CSS auto-grow.
+        li
+          strong.code w-input
+          ul
+            li Support the #[code disabled] prop on #[code &lt;input type=file&gt;].
+        li
+          strong Core
+          ul
+            li Support presets targeting props defined in a component mixin. #[issue-link 121]
 
     li.patch
       strong.version v3.5.1

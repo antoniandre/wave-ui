@@ -39,11 +39,11 @@ const propsDescs = {
   borderTop: 'Adds a top border on the notification. Only one side-border can be applied at the same time.',
   borderBottom: 'Adds a bottom border on the notification. Only one side-border can be applied at the same time.',
   outline: 'The outline style applies the provided <code>color</code> (by default the color is inherited) to the text and border and no background color is set.',
-  xs: 'Sets the size of the notification.',
-  sm: 'Sets the size of the notification.',
-  md: 'Sets the size of the notification.',
-  lg: 'Sets the size of the notification.',
-  xl: 'Sets the size of the notification.'
+  xs: 'Sets the size of the notification to extra small.',
+  sm: 'Sets the size of the notification to small.',
+  md: 'Sets the size of the notification to medium.',
+  lg: 'Sets the size of the notification to large.',
+  xl: 'Sets the size of the notification to extra large.'
 }
 
 const slots = {
