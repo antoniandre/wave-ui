@@ -173,59 +173,65 @@
                 {{ paginationConfig.start }}-{{ paginationConfig.end || paginationConfig.total }} of {{ paginationConfig.total }}
 </template>
 
-<script>
+<script lang="ts">
 /**
  * @todo: (Column Resizing) Recalc. on browser resize.
  */
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+// import { consoleError } from '../utils/console'
 
-import { consoleError } from '../utils/console'
+interface Pagination {
+  itemsPerPage: number,
+  page: number
+}
 
 // When column resizing is on, this is the minimum cell width that we can resize to.
 const minColumnWidth = 15
 
-export default {
+export default defineComponent({
   name: 'w-table',
   props: {
-    items: { type: Array, required: true },
-    headers: { type: Array, required: true },
+    items: { type: Array<any>, required: true },
+    headers: { type: Array<any>, required: true },
     noHeaders: { type: Boolean },
     fixedLayout: { type: Boolean },
     fixedHeaders: { type: Boolean },
     fixedFooter: { type: Boolean },
     loading: { type: [Boolean, String] }, // Bool or 'header' to only display the bar in the header.
     // Allow single sort: `+id`, or multiple in an array like: ['+id', '-firstName'].
-    sort: { type: [String, Array] },
+    sort: { type: [String, Array<any>] },
     sortFunction: { type: Function },
     filter: { type: Function },
     fetch: { type: Function },
 
     expandableRows: {
-      validator: value => {
+      validator: (value: string|boolean|number) => {
         if (![undefined, true, false, 1, '1', ''].includes(value)) {
-          consoleError(
-            'Wrong value for the w-table\'s `expandableRows` prop. ' +
-            `Given: "${value}", expected one of: [undefined, true, false, 1, '1', ''].`
-          )
+          // consoleError(
+          //   'Wrong value for the w-table\'s `expandableRows` prop. ' +
+          //   `Given: "${value}", expected one of: [undefined, true, false, 1, '1', ''].`
+          // )
         }
         return true
       }
     },
     // Allow providing the expanded rows and keeping it in sync via .sync in Vue 2 or v-model:expandedRows in Vue 3.
-    expandedRows: { type: Array },
+    expandedRows: { type: Array<any> },
 
     selectableRows: {
-      validator: value => {
+      validator: (value: string|boolean|number) => {
         if (![undefined, true, false, 1, '1', ''].includes(value)) {
-          consoleError(
-            'Wrong value for the w-table\'s `selectableRows` prop. ' +
-            `Given: "${value}", expected one of: [undefined, true, false, 1, '1', ''].`
-          )
+          // consoleError(
+          //   'Wrong value for the w-table\'s `selectableRows` prop. ' +
+          //   `Given: "${value}", expected one of: [undefined, true, false, 1, '1', ''].`
+          // )
         }
         return true
       }
     },
     // Allow providing the selected rows and keeping it in sync via .sync in Vue 2 or v-model:selectedRows in Vue 3.
-    selectedRows: { type: Array },
+    selectedRows: { type: Array<any> },
 
     forceSelection: { type: Boolean },
 
@@ -244,13 +250,13 @@ export default {
     // - total
     pagination: {
       type: [Boolean, Object, String],
-      validator: object => {
+      validator: (object: Pagination) => {
         if (!object) return true // Accept any falsy value.
         else if (typeof object === 'object' && (!object.itemsPerPage || (object.page && isNaN(object.page)))) {
-          consoleError(
-            'Wrong pagination config received in the w-table\'s `pagination` prop (received: `' + JSON.stringify(object) + '`). ' +
-            '\nExpected object: { itemsPerPage: Integer, page: Integer } or { itemsPerPage: Integer, start: Integer }.'
-          )
+          // consoleError(
+          //   'Wrong pagination config received in the w-table\'s `pagination` prop (received: `' + JSON.stringify(object) + '`). ' +
+          //   '\nExpected object: { itemsPerPage: Integer, page: Integer } or { itemsPerPage: Integer, start: Integer }.'
+          // )
           return false
         }
         return true
@@ -271,25 +277,25 @@ export default {
   ],
 
   data: () => ({
-    activeSorting: [],
-    selectedRowsInternal: [], // Array of uids.
-    expandedRowsInternal: [], // Array of uids.
+    activeSorting: [] as Array<any>,
+    selectedRowsInternal: [] as Array<number>, // Array of uids.
+    expandedRowsInternal: [] as Array<number>, // Array of uids.
     // Column resizing feature.
     colResizing: {
       dragging: false,
       hover: false, // False or a column number starting from 0.
-      columnIndex: null, // Column number starting from 0.
-      startCursorX: null,
-      colWidth: null,
-      nextColWidth: null,
-      columnEl: null,
-      nextColumnEl: null
+      columnIndex: 0 as number, // Column number starting from.
+      startCursorX: 0 as number,
+      colWidth: 0 as number,
+      nextColWidth: 0 as number,
+      columnEl: null as any|null,
+      nextColumnEl: null as any|null
     },
     paginationConfig: {
       itemsPerPage: 0,
       itemsPerPageOptions: {},
-      start: undefined,
-      end: undefined,
+      start: undefined as number|undefined|null,
+      end: undefined as number|undefined|null,
       page: 1,
       total: 0
     }
@@ -297,7 +303,7 @@ export default {
 
   computed: {
     tableItems () {
-      return this.items.map((item, i) => {
+      return this.items.map((item: any, i) => {
         item._uid = item[this.uidKey] ?? i
         return item
       })
@@ -307,14 +313,14 @@ export default {
       return typeof this.filter === 'function' ? this.tableItems.filter(this.filter) : this.tableItems
     },
 
-    sortedItems () {
+    sortedItems (): Array<any> {
       if (!this.activeSorting.length || this.sortFunction || this.fetch) return this.filteredItems
 
       // Only sort with 1 key for now, may handle more later.
       const sortKey1 = this.activeSorting[0].replace(/^[+-]/, '')
       const sortDesc1 = this.activeSorting[0][0] === '-'
 
-      return [...this.filteredItems].sort((a, b) => {
+      return [...this.filteredItems].sort((a: any, b: any) => {
         a = a[sortKey1]
         b = b[sortKey1]
         if (!isNaN(a) && !isNaN(b)) {
@@ -330,8 +336,8 @@ export default {
     },
 
     // Returns an object containing { key1: '+', key2: '-' }. With + or - for ASC/DESC.
-    activeSortingKeys () {
-      return this.activeSorting.reduce((obj, item) => {
+    activeSortingKeys (): any {
+      return this.activeSorting.reduce((obj: any, item: any) => {
         obj[item.replace(/^[+-]/, '')] = item[0]
         return obj
       }, {})
@@ -365,27 +371,27 @@ export default {
       }
     },
 
-    isMobile () {
-      return ~~this.mobileBreakpoint && this.$waveui.breakpoint.width <= ~~this.mobileBreakpoint
+    isMobile (): boolean {
+      return !!(~~this.mobileBreakpoint && this.$waveui.breakpoint.width <= ~~this.mobileBreakpoint)
     },
 
-    hasStickyColumn () {
-      return this.headers.find(header => header.sticky)
+    hasStickyColumn (): Array<any> {
+      return this.headers.find((header: any) => header.sticky)
     },
 
     // Faster lookup than array.includes(uid) and also cached.
-    selectedRowsByUid () {
+    selectedRowsByUid (): Object {
       return this.selectedRowsInternal.reduce((obj, uid) => (obj[uid] = true) && obj, {})
     },
 
     // Faster lookup than array.includes(uid) and also cached.
-    expandedRowsByUid () {
+    expandedRowsByUid (): Object {
       return this.expandedRowsInternal.reduce((obj, uid) => (obj[uid] = true) && obj, {})
     }
   },
 
   methods: {
-    headerClasses (header) {
+    headerClasses (header: any) {
       return {
         'w-table__header--sortable': header.sortable !== false, // Can also be falsy with `0`.
         'w-table__header--sticky': header.sticky,
@@ -394,7 +400,7 @@ export default {
       }
     },
 
-    headerSortClasses (header) {
+    headerSortClasses (header: any) {
       const headerSorting = this.activeSortingKeys[header.key]
       return [
         `w-table__header-sort--${headerSorting ? 'active' : 'inactive'}`,
@@ -403,7 +409,7 @@ export default {
       ]
     },
 
-    async sortTable (header) {
+    async sortTable (header: any) {
       const alreadySortingThis = this.activeSortingKeys[header.key]
       if (alreadySortingThis && this.activeSortingKeys[header.key] === '-') {
         this.activeSorting = []
@@ -416,7 +422,7 @@ export default {
       else if (typeof this.fetch === 'function') await this.callApiFetch()
     },
 
-    doSelectRow (item, index) {
+    doSelectRow (item: any, index: number) {
       const expandable = this.expandableRows === '' ? true : this.expandableRows
       const selectable = this.selectableRows === '' ? true : this.selectableRows
 
@@ -476,7 +482,7 @@ export default {
     },
 
     // Attach 1 single event listener on the table rather than 1 on each resizer.
-    onMouseDown (e) {
+    onMouseDown (e: any) {
       if (e.target.classList.contains('w-table__col-resizer')) {
         this.colResizing.columnIndex = +e.target.parentNode.cellIndex
         this.colResizing.startCursorX = e.pageX // x-axis coordinate at drag start.
@@ -518,7 +524,7 @@ export default {
      * any later change of variable would cause a DOM refresh, and lose the current DOM state
      * (losing the 2 columns width). So do a direct DOM manipulation using `.style.width`.
      */
-    onResizerMouseMove (e) {
+    onResizerMouseMove (e: any) {
       const { startCursorX, columnEl, nextColumnEl, colWidth, nextColWidth } = this.colResizing
 
       this.colResizing.dragging = true
@@ -668,7 +674,7 @@ export default {
       else if (value.toString() === '1') this.expandedRowsInternal = this.expandedRowsInternal.slice(0, 1)
     },
 
-    expandedRows (array) {
+    expandedRows (array: Array<any>) {
       this.expandedRowsInternal = Array.isArray(array) && array.length ? this.expandedRows : []
     },
 
@@ -691,7 +697,7 @@ export default {
       this.updatePaginationConfig({ total })
     }
   }
-}
+})
 </script>
 
 <style lang="scss">
