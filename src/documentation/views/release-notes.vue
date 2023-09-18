@@ -23,6 +23,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v3.6.2
+      ul
+        li
+          strong CSS
+          ul
+            li Added the #[code column-reverse] helper class along with all breakpoints definitions (e.g. #[code smd-column-reverse]).
+
+    li.patch
       strong.version v3.6.1
       ul
         li
