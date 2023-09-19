@@ -111,6 +111,13 @@ export default {
         (['left', 'right'].includes(this.position) && this.alignBottom && 'bottom') ||
         ''
       )
+    },
+
+    shouldShowOnClick () {
+      // For props simplicity, the w-tooltip component has the `showOnHover` prop,
+      // whereas the w-menu has `showOnClick`.
+      return (this.$options.props.showOnHover && !this.showOnHover) ||
+        (this.$options.props.showOnClick && this.showOnClick)
     }
   },
 
@@ -339,7 +346,7 @@ export default {
     if (this.overlay) this.overlayEl = this.$refs.overlay?.$el
 
     if (this.modelValue && this.activator) {
-      this.toggle({ type: this.showOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
+      this.toggle({ type: this.shouldShowOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
     }
     else if (this.modelValue) this.open({ target: this.activatorEl })
   },
@@ -360,7 +367,10 @@ export default {
 
   watch: {
     modelValue (bool) {
-      if (!!bool !== this.detachableVisible) this.toggle({ type: this.showOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
+      if (!!bool !== this.detachableVisible) {
+        if (bool) this.open({ target: this.activatorEl })
+        else this.close()
+      }
     },
     appendTo () {
       this.removeFromDOM()
