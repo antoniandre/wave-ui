@@ -248,6 +248,10 @@ export default {
      *                        even while hovering the menu.
      */
     async close (force = false) {
+      // The user may open and close the detachable so fast (like when toggling on hover) that it
+      // should not show up at all. This cancels the opening timer (if there is a set delay prop).
+      this.openTimeout = clearTimeout(this.openTimeout)
+
       // Might be already closed.
       // E.g. showOnHover & hideOnMenuClick: on click, force hide then mouseleave is also firing.
       if (!this.detachableVisible) return
