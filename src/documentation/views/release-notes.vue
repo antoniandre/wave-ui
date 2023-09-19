@@ -26,6 +26,10 @@ main
       strong.version v3.6.2
       ul
         li
+          strong.code w-select
+          ul
+            li Fix the select list not opening (bug introduced in version 3.6.0). #[issue-link 125]
+        li
           strong CSS
           ul
             li Added the #[code column-reverse] helper class along with all breakpoints definitions (e.g. #[code smd-column-reverse]).
