@@ -69,6 +69,7 @@ export default {
     contentClass: { type: [String, Object, Array] },
     arrow: { type: Boolean }, // The small triangle pointing toward the activator.
     minWidth: { type: [Number, String] }, // can be like: `40`, `5em`, `activator`.
+    maxWidth: { type: [Number, String] }, // can be like: `40`, `5em`, `activator`.
     overlay: { type: Boolean },
     overlayClass: { type: [String, Object, Array] },
     overlayProps: { type: Object }, // Allow passing down an object of props to the w-overlay component.
@@ -124,6 +125,11 @@ export default {
       else return isNaN(this.minWidth) ? this.minWidth : (this.minWidth ? `${this.minWidth}px` : 0)
     },
 
+    menuMaxWidth () {
+      if (this.maxWidth === 'activator') return this.activatorWidth ? `${this.activatorWidth}px` : 0
+      else return isNaN(this.maxWidth) ? this.maxWidth : (this.maxWidth ? `${this.maxWidth}px` : 0)
+    },
+
     menuClasses () {
       return objectifyClasses(this.menuClass)
     },
@@ -168,6 +174,7 @@ export default {
         top: (this.detachableCoords.top && `${~~this.detachableCoords.top}px`) || null,
         left: (this.detachableCoords.left && `${~~this.detachableCoords.left}px`) || null,
         minWidth: (this.minWidth && this.menuMinWidth) || null,
+        maxWidth: (this.maxWidth && this.menuMaxWidth) || null,
         '--w-menu-bg-color': this.arrow && this.$waveui.colors[this.bgColor || 'white']
       }
     },
