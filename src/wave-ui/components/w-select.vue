@@ -16,7 +16,7 @@ component(
 
   w-menu(
     v-model="showMenu"
-    @close="!$event && closeMenu()"
+    @close="closeMenu"
     :menu-class="`w-select__menu ${menuClass || ''}`"
     transition="slide-fade-down"
     :append-to="(menuProps || {}).appendTo !== undefined ? (menuProps || {}).appendTo : undefined"
@@ -27,6 +27,7 @@ component(
     template(#activator="{ on }")
       //- Input wrapper.
       .w-select__selection-wrap(
+        v-on="on"
         @click="!isDisabled && !isReadonly && onInputFieldClick()"
         role="button"
         aria-haspopup="listbox"
@@ -529,6 +530,7 @@ export default {
     align-items: center;
     transition: color $transition-duration;
     cursor: pointer;
+    user-select: none;
 
     &--left {margin-right: 2 * $base-increment;}
     &--right {margin-left: 2 * $base-increment;}

@@ -52,6 +52,16 @@
 
 .content-wrap {transition: background-color $theme-switch-transition;}
 .w-tabs__bar-item {transition: 0.25s ease-in-out, flex-grow 0s, flex 0s, color $theme-switch-transition;}
+[data-theme] .w-app .w-input__label--inside,
+[data-theme] .w-app .w-textarea__label--inside,
+[data-theme] .w-app .w-select__label--inside {
+  transition: 0.25s ease,
+    color $theme-switch-transition,
+    background-color $theme-switch-transition,
+    border-color $theme-switch-transition,
+    stroke $theme-switch-transition,
+    fill $theme-switch-transition;
+}
 .main--getting-started .w-accordion__item-content {transition: background-color $theme-switch-transition;}
 .nav-menu-wrap {transition: border-color $theme-switch-transition;}
 .hue-on-dark .example__render {transition: filter $theme-switch-transition;}

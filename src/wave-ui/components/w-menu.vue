@@ -168,7 +168,7 @@ export default {
         top: (this.detachableCoords.top && `${~~this.detachableCoords.top}px`) || null,
         left: (this.detachableCoords.left && `${~~this.detachableCoords.left}px`) || null,
         minWidth: (this.minWidth && this.menuMinWidth) || null,
-        '--w-menu-bg-color': this.arrow && this.$waveui.colors[this.bgColor || 'white']
+        '--w-menu-bg-color': this.arrow && (this.$waveui.colors[this.bgColor] || 'rgb(var(--w-base-bg-color-rgb))')
       }
     },
 
@@ -248,6 +248,10 @@ export default {
      *                        even while hovering the menu.
      */
     async close (force = false) {
+      // The user may open and close the detachable so fast (like when toggling on hover) that it
+      // should not show up at all. This cancels the opening timer (if there is a set delay prop).
+      this.openTimeout = clearTimeout(this.openTimeout)
+
       // Might be already closed.
       // E.g. showOnHover & hideOnMenuClick: on click, force hide then mouseleave is also firing.
       if (!this.detachableVisible) return
@@ -300,7 +304,7 @@ export default {
     &.w-menu--left {margin-left: -4 * $base-increment;}
     &.w-menu--right {margin-left: 4 * $base-increment;}
 
-    @include triangle($menu-bg-color, '.w-menu', 9px);
+    @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
   }
 }
 </style>

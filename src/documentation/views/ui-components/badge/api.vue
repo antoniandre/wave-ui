@@ -15,11 +15,11 @@ import WBadge from '@/wave-ui/components/w-badge.vue'
 
 const propsDescs = {
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>This prop controls the visibility of the badge. Any truthy value will show the badge whereas any falsy value will hide it.',
-  xs: 'Sets the size of the badge (font-size).',
-  sm: 'Sets the size of the badge (font-size).',
-  md: 'Sets the size of the badge (font-size).',
-  lg: 'Sets the size of the badge (font-size).',
-  xl: 'Sets the size of the badge (font-size).',
+  xs: 'Sets the size (font-size) of the badge to extra small.',
+  sm: 'Sets the size (font-size) of the badge to small.',
+  md: 'Sets the size (font-size) of the badge to medium.',
+  lg: 'Sets the size (font-size) of the badge to large.',
+  xl: 'Sets the size (font-size) of the badge to extra large.',
   top: 'Places the badge at the top of its activator, either on the left or right (right by default).',
   left: 'Places the badge at the left of its activator, either at the top or bottom (top by default).',
   right: 'Places the badge at the right of its activator, either at the top or bottom (top by default).',
