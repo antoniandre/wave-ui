@@ -112,8 +112,9 @@ export default {
   methods: {
     onInput () {
       this.isChecked = !this.isChecked
-      this.$emit('update:modelValue', this.isChecked)
-      this.$emit('input', this.isChecked)
+      const returnValue = this.isChecked && this.returnValue !== undefined ? this.returnValue : this.isChecked
+      this.$emit('update:modelValue', returnValue)
+      this.$emit('input', returnValue)
 
       if (!this.noRipple) {
         if (this.isChecked) {
