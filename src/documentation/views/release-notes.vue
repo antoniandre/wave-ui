@@ -22,6 +22,22 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v3.7.0
+      ul
+        li
+          strong.code w-menu
+          ul
+            li Added a #[code max-width] option to set a max width on the #[strong.code w-menu]. #[issue-link 126] #[span.tag.new]
+        li
+          strong.code w-checkbox
+          ul
+            li Fix the use of the #[code return-value] option. #[issue-link 128]
+        li
+          strong.code w-checkboxes
+          ul
+            li Added a #[code return-values] option to return checkboxes values. #[span.tag.new]
+
     li.patch
       strong.version v3.6.2
       ul
