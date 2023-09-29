@@ -22,6 +22,14 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v3.7.1
+      ul
+        li
+          strong.code w-table
+          ul
+            li Fixed the default row selection color.
+
     li.minor
       strong.version v3.7.0
       ul
