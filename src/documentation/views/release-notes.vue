@@ -23,6 +23,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v3.7.2
+      ul
+        li
+          strong.code w-select
+          ul
+            li Fixed the #[code item-color-key] prop not used for default w-list (and w-select).
+
+    li.patch
       strong.version v3.7.1
       ul
         li
