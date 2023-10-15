@@ -27,8 +27,7 @@ component(
     template(#activator="{ on }")
       //- Input wrapper.
       .w-select__selection-wrap(
-        v-on="on"
-        @click="!isDisabled && !isReadonly && onInputFieldClick()"
+        @click="on.click"
         role="button"
         aria-haspopup="listbox"
         :aria-expanded="showMenu ? 'true' : 'false'"
@@ -43,18 +42,23 @@ component(
           //- inputValue is always an array.
           slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
         .w-select__selection(
+          v-if="autocomplete"
           ref="selection-input"
-          :contenteditable="isDisabled || isReadonly ? 'false' : 'true'"
-          @focus="!isDisabled && !isReadonly && onFocus($event)"
-          @blur="onBlur"
-          @keydown="!isDisabled && !isReadonly && onKeydown($event)"
-          :id="`w-select--${_.uid}`"
-          :class="{ 'w-select__selection--placeholder': !$slots.selection && !selectionString && placeholder }"
-          :disabled="isDisabled || null"
-          readonly
-          aria-readonly="true"
-          :tabindex="tabindex || null"
-          v-html="$slots.selection ? '' : selectionString || placeholder")
+          v-on="selectionEventHandlers"
+          v-bind="selectionAttributes")
+          span(v-if="!this.inputValue.length && this.placeholder" v-html="this.placeholder")
+          template(v-else-if="this.inputValue.length" v-for="(selectedItem, i) in inputValue" :key="i")
+            span.w-tag.pr0(
+              contenteditable="false"
+              @click.stop="removeItemFromSelection(selectedItem)")
+              span(v-html="selectedItem.label")
+              w-button(icon="wi-cross" text sm)
+        .w-select__selection(
+          v-else
+          ref="selection-input"
+          v-bind="selectionAttributes"
+          v-on="selectionEventHandlers"
+          v-html="selectionHtml")
         //- For standard HTML form submission.
         input(
           v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
@@ -150,7 +154,8 @@ export default {
     menuProps: { type: Object }, // Allow passing down an object of props to the w-menu component.
     dark: { type: Boolean },
     light: { type: Boolean },
-    fitToContent: { type: Boolean }
+    fitToContent: { type: Boolean },
+    autocomplete: { type: Boolean }
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -181,19 +186,39 @@ export default {
         return obj
       })
     },
-    hasValue () {
-      return Array.isArray(this.inputValue) ? this.inputValue.length : (this.inputValue !== null)
-    },
     hasLabel () {
       return this.label || this.$slots.default
     },
     showLabelInside () {
-      return !this.staticLabel || (!this.hasValue && !this.placeholder)
+      return !this.staticLabel || (!this.inputValue.length && !this.placeholder)
+    },
+    selectionEventHandlers () {
+      return {
+        focus: e => !this.isDisabled && !this.isReadonly && this.onFocus(e),
+        blur: this.onBlur,
+        keydown: e => !this.isDisabled && !this.isReadonly && this.onKeydown(e)
+      }
+    },
+    selectionAttributes () {
+      return {
+        id: `w-select--${this._.uid}`,
+        class: { 'w-select__selection--placeholder': !this.$slots.selection && !this.selectionString && this.placeholder },
+        disabled: this.isDisabled || null,
+        readonly: true,
+        ariareadonly: 'true',
+        tabindex: this.tabindex || null,
+        contenteditable: this.isDisabled || this.isReadonly ? 'false' : 'true'
+      }
     },
     selectionString () {
-      return this.inputValue && this.inputValue.map(
+      return this.inputValue.map(
         item => item[this.itemValueKey] !== undefined ? item[this.itemLabelKey] : (item[this.itemLabelKey] ?? item)
       ).join(', ')
+    },
+    selectionHtml () {
+      if (!this.inputValue.length) return this.placeholder
+      if (this.$slots.selection) return ''
+      return this.selectionString
     },
     classes () {
       return {
@@ -202,8 +227,9 @@ export default {
         'w-select--light': this.light,
         'w-select--disabled': this.isDisabled,
         'w-select--fit-to-content': this.fitToContent,
+        'w-select--autocomplete': this.autocomplete,
         'w-select--readonly': this.isReadonly,
-        [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
+        [`w-select--${this.inputValue.length ? 'filled' : 'empty'}`]: true,
         'w-select--focused': (this.isFocused || this.showMenu) && !this.isReadonly,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
@@ -251,7 +277,7 @@ export default {
       // Note: using contenteditable rather than input in order to be able to fit the select list
       // to its content with CSS. Only contenteditable divs/non-interactive elements can react to focus/blur ).
       // still allow meta key & ctrl key combinations and the tab key (9).
-      if (!e.metaKey && !e.ctrlKey && e.keyCode !== 9) e.preventDefault()
+      if (!this.autocomplete && !e.metaKey && !e.ctrlKey && e.keyCode !== 9) e.preventDefault()
 
       if (e.keyCode === 27 && this.showMenu) this.closeMenu() // Escape.
       else if ([13, 32].includes(e.keyCode)) this.openMenu() // Enter or Space.
@@ -282,9 +308,13 @@ export default {
     // The items are given by the w-list component.
     onInput (items) {
       this.inputValue = items === null ? [] : (this.multiple ? items : [items])
+      this.emitSelection()
+    },
+
+    emitSelection () {
       // Return the original items when returnObject is true (no `value` if there wasn't),
-      // or the the item value otherwise.
-      items = this.inputValue.map(item => this.returnObject ? this.items[item.index] : item.value)
+      // or the item value otherwise.
+      const items = this.inputValue.map(item => this.returnObject ? this.items[item.index] : item.value)
 
       // Emit the selection to the v-model.
       // Note: this.inputValue is always an array of objects that have a `value`.
@@ -292,7 +322,9 @@ export default {
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
     },
+
     onInputFieldClick () {
+      if (this.autocomplete) this.doAutocomplete(e)
       if (this.showMenu) this.showMenu = false // Will call `closeMenu()` from w-menu(@close).
       else this.openMenu()
     },
@@ -324,7 +356,7 @@ export default {
       return items.map(item => {
         let value = item
         if (item && typeof item === 'object') { // `null` is also an object!
-          value = item[this.itemValueKey] !== undefined ? item[this.itemValueKey] : (item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item)
+          value = item[this.itemValueKey] ?? item[this.itemLabelKey] ?? item
         }
 
         return this.selectItems[allValues.indexOf(value)]
@@ -349,6 +381,13 @@ export default {
       this.showMenu = false
       // Set the focus back on the main w-select input.
       setTimeout(() => this.$refs['selection-input'].focus(), 50)
+    removeItemFromSelection (item) {
+      this.inputValue = this.inputValue.filter(item2 => item2.value !== item.value)
+      this.emitSelection()
+    },
+
+    doAutocomplete (e) {
+      const keyword = this.$refs['selection-input'].innerHTML
     }
   },
 
@@ -451,6 +490,7 @@ export default {
   &__selection {
     width: 100%;
     height: 100%;
+    line-height: $form-field-height;
     min-height: inherit;
     outline: none;
     padding-left: 2 * $base-increment;
@@ -459,6 +499,8 @@ export default {
     align-items: center;
     cursor: pointer;
     caret-color: transparent;
+
+    &--placeholder {color: #888;}
 
     .w-select__selection-slot + & {
       position: absolute;
@@ -486,8 +528,9 @@ export default {
 
     .w-select--readonly & {cursor: auto;}
 
-    &--placeholder {color: #888;}
+    .w-tag {line-height: 1.2;}
   }
+  &--autocomplete &__selection {caret-color: currentColor;}
 
   &__selection-slot {
     z-index: 1;
@@ -548,14 +591,12 @@ export default {
 
   &__label--inside {
     position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
+    inset: 0 0 auto;
+    min-height: inherit;
     white-space: nowrap;
     // Use margin instead of padding as the scale transformation below decreases the real padding
     // size and misaligns the label.
     margin-left: 2 * $base-increment;
-    transform: translateY(-50%);
     pointer-events: none;
 
     .w-select--inner-icon-right & {padding-right: 22px;}
