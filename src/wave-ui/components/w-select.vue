@@ -381,6 +381,8 @@ export default {
       this.showMenu = false
       // Set the focus back on the main w-select input.
       setTimeout(() => this.$refs['selection-input'].focus(), 50)
+    },
+
     removeItemFromSelection (item) {
       this.inputValue = this.inputValue.filter(item2 => item2.value !== item.value)
       this.emitSelection()
