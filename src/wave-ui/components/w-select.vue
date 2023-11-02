@@ -573,8 +573,7 @@ export default {
       transition: $transition-duration ease;
     }
 
-    // move label with underline style.
-    .w-select--focused.w-select--floating-label &,
+    // Move label with underline style.
     .w-select--open.w-select--floating-label &,
     .w-select--filled.w-select--floating-label &,
     .w-select--has-placeholder.w-select--floating-label & {
@@ -585,13 +584,11 @@ export default {
       transform: translateY(-160%) scale(0.85);
     }
     // Move label with outline style or with shadow.
-    .w-select--focused.w-select--floating-label .w-select__selection-wrap--box &,
     .w-select--open.w-select--floating-label .w-select__selection-wrap--box &,
     .w-select--filled.w-select--floating-label .w-select__selection-wrap--box &,
     .w-select--has-placeholder.w-select--floating-label .w-select__selection-wrap--box & {
       transform: translateY(-180%) scale(0.85);
     }
-    .w-select--focused.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--open.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
