@@ -512,8 +512,8 @@ export default {
       -webkit-tap-highlight-color: transparent;
     }
 
-    &--inner-left {left: 6px;}
-    &--inner-right {right: 6px;}
+    &--inner-left {left: $base-increment;}
+    &--inner-right {right: $base-increment;}
     .w-select--no-padding &--inner-left {left: 1px;}
     .w-select--no-padding &--inner-right {right: 1px;}
 
@@ -558,7 +558,7 @@ export default {
     transform: translateY(-50%);
     pointer-events: none;
 
-    .w-select--inner-icon-right & {padding-right: 22px;}
+    .w-select--inner-icon-right & {padding-right: 26px;}
 
     .w-select--no-padding & {
       left: 0;
