@@ -27,7 +27,6 @@ component(
     template(#activator="{ on }")
       //- Input wrapper.
       .w-select__selection-wrap(
-        v-on="on"
         @click="!isDisabled && !isReadonly && onInputFieldClick()"
         role="button"
         aria-haspopup="listbox"
