@@ -33,6 +33,7 @@ main
             li Fixed preventing the dropdown to open from clicking a disabled #[strong.code w-select].
             li Increase paddings between inner icons &amp; the select list displayed selection.
             li Don't move the floating label on focus, but only on dropdown open, for a smoother user experience.
+            li Always skip any disabled item while using arrow keys.
 
     li.patch
       strong.version v3.7.1
