@@ -28,8 +28,11 @@ main
         li
           strong.code w-select
           ul
-            li Fixed the #[code item-color-key] prop not used for default w-list (and w-select).
+            li Fixed the #[code item-color-key] prop not being used for default w-list (and w-select).
+            li Fixed opening the dropdown from a click on the left or right side label.
+            li Fixed preventing the dropdown to open from clicking a disabled #[strong.code w-select].
             li Increase paddings between inner icons &amp; the select list displayed selection.
+            li Don't move the floating label on focus, but only on dropdown open, for a smoother user experience.
 
     li.patch
       strong.version v3.7.1
