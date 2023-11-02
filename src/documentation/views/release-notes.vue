@@ -29,6 +29,7 @@ main
           strong.code w-select
           ul
             li Fixed the #[code item-color-key] prop not used for default w-list (and w-select).
+            li Increase paddings between inner icons &amp; the select list displayed selection.
 
     li.patch
       strong.version v3.7.1
