@@ -271,7 +271,25 @@ export default {
             index = (index + items.length + direction) % items.length
           }
 
-          this.onInput(items[index])
+          // If the current item is disabled, find the next one enabled (forward or backward).
+          let allItemsAreDisabled = false
+          if (items[index].disabled) {
+            const direction = e.keyCode === 38 ? -1 : 1 // Prev or next.
+
+            // Modulo to prevent out of range; + items.length to also work with negative values.
+            let newIndex = (index + direction + items.length) % items.length
+            const itemsCount = items.length
+            let loop = 0 // While-safety: will always end at least after 1 full array cycle.
+            while (loop < itemsCount && items[newIndex].disabled) {
+              // Circle through the array of items forward or backward, and reloop when out of range.
+              newIndex = (newIndex + items.length + direction) % items.length
+              loop++
+            }
+            if (loop >= itemsCount) allItemsAreDisabled = true
+            index = newIndex
+          }
+
+          if (!allItemsAreDisabled) this.onInput(items[index])
         }
       }
     },
