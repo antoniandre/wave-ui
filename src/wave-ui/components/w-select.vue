@@ -10,7 +10,7 @@ component(
   template(v-if="labelPosition === 'left'")
     label.w-select__label.w-select__label--left.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-select--${_.uid}`"
+      @click="$refs['selection-input'].click()"
       :class="labelClasses")
       slot {{ label }}
 
@@ -48,7 +48,6 @@ component(
           @focus="!isDisabled && !isReadonly && onFocus($event)"
           @blur="onBlur"
           @keydown="!isDisabled && !isReadonly && onKeydown($event)"
-          :id="`w-select--${_.uid}`"
           :class="{ 'w-select__selection--placeholder': !$slots.selection && !selectionString && placeholder }"
           :disabled="isDisabled || null"
           readonly
@@ -65,7 +64,6 @@ component(
         template(v-if="labelPosition === 'inside' && showLabelInside")
           label.w-select__label.w-select__label--inside.w-form-el-shakable(
             v-if="$slots.default || label"
-            :for="`w-select--${_.uid}`"
             :class="labelClasses")
             slot {{ label }}
         w-icon.w-select__icon.w-select__icon--inner-right(
@@ -103,7 +101,7 @@ component(
   template(v-if="labelPosition === 'right'")
     label.w-select__label.w-select__label--right.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-select--${_.uid}`"
+      @click="$refs['selection-input'].click()"
       :class="labelClasses")
       slot {{ label }}
 </template>
