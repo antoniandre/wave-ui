@@ -844,7 +844,7 @@ $tr-border-top: 1px;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--primary);
+    background-color: var(--w-primary-color);
     opacity: 0.2;
     pointer-events: none;
   }

@@ -1,0 +1,241 @@
+// Global theming rules.
+// ======================================================
+[data-theme] {
+  &:root,
+  .home .section--2,
+  .home .section--2 > svg,
+  .home .section--2 .w-accordion__item,
+  .home .section--3,
+  .main-toolbar,
+  header svg,
+  h1, h2,
+  code,
+  .code,
+  .ssh-pre,
+  kbd,
+  .title-link,
+  .title-link .hash,
+  .w-alert--docs,
+  .w-alert--docs .w-icon,
+  .example,
+  .example .buttons,
+  .common-layouts legend,
+  .transition-box,
+  .transition-box .amber-light4--bg,
+  .main--layout-grid-system legend.round,
+  .hue-on-dark .example__render *,
+  .w-alert__content .black,
+  .main--w-list-item .blue-light5--bg,
+  .main--shadows-borders-radii .example .orange-light5--bg,
+  .main--layout-flex .example .yellow-light5--bg,
+  .main--layout-flex .lighter .box,
+  .main--layout-flex .wrapper,
+  .main--layout-flex .wrapper2,
+  .main--layout-simplified-grid-system .wrapper,
+  .sliding-card,
+  .main--layout-flex .lighter .box,
+  .main--layout-simplified-grid-system .box,
+  .main--shadows-borders-radii .box,
+  .main--release-notes .history,
+  .main--getting-started .w-accordion__item-title,
+  .go-top,
+  caption,
+  .primary--bg,
+  .primary:not(.w-tabs__slider),
+  .nav-menu-wrap:after,
+  div.nav-menu .w-tree__item-icon,
+  div.nav-menu .w-tree__item-label,
+  div.nav-menu .w-tree__item-label:before {
+    @include theme-switch-transition;
+  }
+}
+
+.content-wrap {transition: background-color $theme-switch-transition;}
+.w-tabs__bar-item {transition: 0.25s ease-in-out, flex-grow 0s, flex 0s, color $theme-switch-transition;}
+[data-theme] .w-app .w-input__label--inside,
+[data-theme] .w-app .w-textarea__label--inside,
+[data-theme] .w-app .w-select__label--inside {
+  transition: 0.25s ease,
+    color $theme-switch-transition,
+    background-color $theme-switch-transition,
+    border-color $theme-switch-transition,
+    stroke $theme-switch-transition,
+    fill $theme-switch-transition;
+}
+.main--getting-started .w-accordion__item-content {transition: background-color $theme-switch-transition;}
+.nav-menu-wrap {transition: border-color $theme-switch-transition;}
+.hue-on-dark .example__render {transition: filter $theme-switch-transition;}
+// ======================================================
+
+// Dark theme.
+// ======================================================
+// Dark mode detection.
+// --------------------------------------------------------
+// In dark theme, prevent the first above transition from white bg to dark by originally setting
+// the bg to dark from this media query.
+@media (prefers-color-scheme: dark) {
+  :root {
+    --w-base-color-rgb: 255, 255, 255;
+    --w-base-bg-color-rgb: 34, 34, 34;
+  }
+}
+// --------------------------------------------------------
+
+[data-theme="dark"] {
+  color: #444;
+
+  .content-wrap {background-color: rgb(var(--w-base-bg-color-rgb));}
+
+  // Main menu.
+  // ------------------------------------------------------
+  .nav-menu-wrap {
+    &:after {border-right-color: rgba(var(--w-base-color-rgb), 0.08);}
+    div.nav-menu .w-tree__item-label:before {background-color: #fff;}
+  }
+
+  // HOME.
+  // ======================================================
+  .home {
+    .section--2 {
+      background: linear-gradient(to bottom, rgba(#000, 0.3) 0%, rgba(#fff, 0) 100%);
+
+      > svg {fill: rgba(#000, 0.3);}
+
+      .card--3 .w-accordion__item {
+        background-image: linear-gradient(-205deg, #364049, #101518);
+      }
+    }
+    .section--3 {background: linear-gradient(15deg, #153147, #0b1319);}
+  }
+  // ======================================================
+  // END OF HOME.
+
+  // DOCUMENTATION.
+  // ======================================================
+  // Code.
+  // ------------------------------------------------------
+  code {
+    background-color: rgba(130, 130, 130, 0.2);
+    color: #ff6363;
+  }
+  .code:not(.inherit):not(.primary):not(.teal):not(.contrast-color):not(.amber-dark3) {color: rgb(var(--w-base-color-rgb));}
+  .ssh-pre {
+    border-color: rgba(var(--w-base-color-rgb), 0.06);
+    background-color: rgba(#000, 0.3);
+
+    &[data-label]:before {
+      border-color: inherit;
+      border-bottom-color: #282a2d;
+    }
+  }
+  kbd {
+    background-color: rgba(130, 130, 130, 0.4);
+    border: none;
+    color: rgba(#fff, 0.85);
+    box-shadow: inset -1px -1px 1px rgb(0 0 0 / 10%), inset 1px 1px 2px rgba(#fff, 0.3);
+  }
+
+  // Navigation.
+  // ------------------------------------------------------
+  div.nav-menu .w-tree__item-icon {color: rgba(255, 255, 255, 0.25);}
+  .title-link .hash {color: rgba(var(--w-base-color-rgb), 0.08);}
+
+  // Title.
+  // ------------------------------------------------------
+  .title-link {color: rgba(var(--w-base-color-rgb), 0.9);}
+  .title-link .hash {color: rgba(var(--w-base-color-rgb), 0.08);}
+
+  // Alerts.
+  // ------------------------------------------------------
+  .w-alert--docs.alert--info {background-color: rgba(0, 183, 255, 0.15);}
+  .w-alert--docs.alert--tip {background-color: rgba(135, 128, 65, 0.4);}
+  .w-alert--docs.alert--error {background-color: rgba(177, 64, 64, 0.4);}
+  .w-alert--docs.alert--warning {background-color: rgba(201, 115, 0, 0.25);}
+  .w-alert--docs.alert--success {background-color: rgba(102, 204, 0, 0.2);}
+
+  // Examples.
+  // ------------------------------------------------------
+  .example {
+    background-color: rgb(var(--w-base-color-rgb), 0.05);
+    border-color: rgba(var(--w-base-color-rgb), 0.08);
+
+    .buttons {
+      background-color: rgb(var(--w-base-color-rgb), 0.05);
+      border-left-color: rgba(var(--w-base-color-rgb), 0.08);
+    }
+  }
+
+  .common-layouts legend {
+    background: #fffeed;
+    padding: 0 8px;
+    color: #222;
+    font-size: 0.9em;
+  }
+
+  .transition-box {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 0, 0, 0.4);
+
+    .amber-light4--bg {background-color: transparent;}
+  }
+
+  .main--layout-grid-system {
+    legend.round {
+      border: 1px solid rgba(#ca4, 0.9);
+      border-width: 1px 0 0;
+      background-color: #fff1c6;
+      border-radius: 99em;
+      padding: 0 6px;
+      display: flex;
+    }
+  }
+
+  .hue-on-dark .example__render {
+    filter: sepia(1) hue-rotate(100deg);
+    * {color: #444;}
+  }
+
+  .w-alert__content .black {color: #fff;}
+  .main--w-list-item .blue-light5--bg,
+  .main--shadows-borders-radii .example .orange-light5--bg,
+  .main--layout-flex .example .yellow-light5--bg,
+  .main--layout-flex .lighter .box,
+  .main--layout-flex .wrapper,
+  .main--layout-flex .wrapper2,
+  .main--layout-simplified-grid-system .wrapper,
+  .sliding-card {
+    background-color: #394046;
+    border-color: #535c65;
+  }
+
+  .main--layout-flex .lighter .box,
+  .main--layout-simplified-grid-system .box {
+    background-color: #344f79;
+    border-color: #6683b0;
+  }
+
+  .main--shadows-borders-radii .box {
+    background-color: #344f79;
+  }
+
+  .main--release-notes .history {
+    > li:after {border-color: #333;}
+  }
+
+  .main--getting-started .w-accordion__item-content {
+    background: #262626;
+  }
+  // ======================================================
+  // END OF DOCUMENTATION.
+
+  // UI COMPONENTS.
+  // ======================================================
+  // ======================================================
+  //END OF UI COMPONENTS.
+
+
+  // Footer.
+  // ------------------------------------------------------
+  .caption {color: rgba(162, 162, 162, 0.7);}
+}
+

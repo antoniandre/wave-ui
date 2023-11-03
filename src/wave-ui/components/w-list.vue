@@ -229,8 +229,8 @@ export default {
         'w-list__item-label--focused': item._focused,
         'w-list__item-label--hoverable': this.hover,
         'w-list__item-label--selectable': this.isSelectable,
-        [item.color]: !!item.color,
-        [this.SelectionColor]: item._selected && !item.color && this.SelectionColor,
+        [item[this.itemColorKey]]: !!item[this.itemColorKey],
+        [this.SelectionColor]: item._selected && !item[this.itemColorKey] && this.SelectionColor,
         [item[this.itemClassKey] || this.itemClass]: item[this.itemClassKey] || this.itemClass
       }
     },
@@ -406,11 +406,11 @@ export default {
       // Reset the selections when single selection allowed for w-select.
       if (!this.isMultipleSelect) this.listItems.forEach(item => (item._selected = false))
 
-      this.checkSelection(selection) // Create an array with the selected values.
-        .forEach(val => {
-          const foundItem = this.listItems.find(item => item._value === val)
-          if (foundItem) foundItem._selected = true
-        })
+      const selectedItems = this.checkSelection(selection) // Create an array with the selected values.
+      // Update which items are selected or not.
+      this.listItems.forEach(item => {
+        item._selected = selectedItems.find(val => item._value === val) !== undefined
+      })
     }
   },
 

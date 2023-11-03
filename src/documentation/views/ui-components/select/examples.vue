@@ -329,7 +329,7 @@ div
     w-flex.align-center.mt4
       span v-model:
       code.ml2 {{ vModelSelect1 }}
-    //- template(#pug).
+    template(#pug).
       w-select(v-model="selection" :items="items" multiple)
       w-flex.align-center.mt4
         span v-model:
@@ -485,7 +485,7 @@ div
     w-select.mt4(:items="items1" label-position="right" outline)
       w-icon.orange mdi mdi-arrow-left
       span.red.ml1 Right
-    //- template(#pug).
+    template(#pug).
       w-select(:items="items" label-position="inside" outline)
         w-icon.orange mdi mdi-arrow-right
         span.purple.mx1 Inside
@@ -543,7 +543,7 @@ div
       template(#selection="{ item }")
         w-tag.mr2(v-for="(item, i) in item" :key="i" bg-color="grey-light4")
           | {{ item.label }}
-    //- template(#pug).
+    template(#pug).
       w-select(:items="items" v-model="selection" multiple)
         template(#selection="{ item }")
           w-tag.mr2(v-for="(item, i) in item" :key="i" bg-color="grey-light4")
@@ -578,7 +578,7 @@ div
         span.px2(v-else)
         span.ml1 {{ item.label }}
         w-tag.ml2(bg-color="grey-light4" xs) {{ item.value }}
-    //- template(#pug).
+    template(#pug).
       w-select(:items="items")
         template(#item="{ item, selected }")
           w-icon.primary(v-if="selected") wi-check
@@ -616,10 +616,10 @@ div
     .title4.mt6.mb2 Label inside
     w-select(:items="items1" label="Select" label-position="inside" outline inner-icon-left="mdi mdi-star")
     w-select.mt4(:items="items1" label="Select" label-position="inside" outline inner-icon-right="mdi mdi-arrow-down")
-    //- template(#pug).
+    template(#pug).
       .title4.mb2 Label outside
-      w-select(:items="items" label="Left" label-position="left" outline inner-icon-left="mdi mdi-star")
-      w-select.mt4(:items="items" label="Right" label-position="right" outline inner-icon-right="mdi mdi-arrow-down")
+      w-select(:items="items" label="Select" label-position="left" outline inner-icon-left="mdi mdi-star")
+      w-select.mt4(:items="items" label="Select" label-position="right" outline inner-icon-right="mdi mdi-arrow-down")
 
       .title4.mt6.mb2 Label inside
       w-select(:items="items" label="Select" label-position="inside" outline inner-icon-left="mdi mdi-star")
@@ -631,7 +631,7 @@ div
 
       &lt;w-select
         :items="items"
-        label="Left"
+        label="Select"
         label-position="left"
         outline
         inner-icon-left="mdi mdi-star"&gt;
@@ -640,7 +640,7 @@ div
       &lt;w-select
         class="mt4"
         :items="items"
-        label="Right"
+        label="Select"
         label-position="right"
         outline
         inner-icon-right="mdi mdi-arrow-down"&gt;
@@ -699,7 +699,7 @@ div
       label="Readonly & filled"
       outline
       readonly)
-    //- template(#pug).
+    template(#pug).
       w-select.mb4(
         :items="items"
         label="Disabled &amp; empty"
@@ -764,6 +764,14 @@ div
           { label: 'Item 3' }
         ]
       })
+  p
+    strong.mr1 Note:
+    | You can also disable any specific list item by adding a #[code disabled: true] property in it:
+    w-select.ml2(
+      placeholder="select an item"
+      fit-to-content
+      :items="[{ label: 'Item 1' }, { label: 'Disabled item 2', disabled: true }, { label: 'Item 3' }]")
+
 </template>
 
 <script>

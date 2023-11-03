@@ -38,6 +38,9 @@ export default {
   props: {
     items: { type: Array, required: true }, // All the possible options.
     value: { type: Array }, // v-model on selected option.
+    // If true, the returnValue set on each w-checkboxes item will be returned once the checkbox is
+    // checked. If false & by default, the return value of the w-checkboxes is an array of booleans.
+    returnValues: { type: Boolean },
     labelOnLeft: { type: Boolean },
     itemLabelKey: { type: String, default: 'label' },
     itemValueKey: { type: String, default: 'value' },
@@ -92,7 +95,7 @@ export default {
 
     toggleCheck (checkbox, isChecked) {
       checkbox._isChecked = isChecked
-      const selection = this.checkboxItems.filter(item => item._isChecked).map(item => item.value)
+      const selection = this.checkboxItems.filter(item => item._isChecked).map(item => this.returnValues ? item.returnValue : item.value)
 
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)

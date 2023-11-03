@@ -42,7 +42,14 @@ export default {
     transition: { type: String },
     tooltipClass: { type: [String, Object, Array] },
     persistent: { type: Boolean },
-    delay: { type: Number }
+    delay: { type: Number },
+    caption: { type: Boolean }, // Apply the caption class and style (grey, italic, small).
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean },
+    enableTouch: { type: Boolean }
     // Other props in the detachable mixin:
     // appendTo, fixed, top, bottom, left, right, alignTop, alignBottom, alignLeft,
     // alignRight, noPosition, zIndex, activator.
@@ -81,6 +88,17 @@ export default {
       return this.transition || `w-tooltip-slide-fade-${direction}`
     },
 
+    size () {
+      return (
+        (this.xs && 'xs') ||
+        (this.sm && 'sm') ||
+        (this.sm && 'md') ||
+        (this.lg && 'lg') ||
+        (this.xl && 'xl') ||
+        (this.caption ? 'sm' : 'md') // if no size is set put md by default, or sm if caption is on.
+      )
+    },
+
     classes () {
       return {
         [this.color]: this.color,
@@ -90,6 +108,8 @@ export default {
         [`w-tooltip--align-${this.alignment}`]: !this.noPosition && this.alignment,
         'w-tooltip--tile': this.tile,
         'w-tooltip--round': this.round,
+        caption: this.caption,
+        [`size--${this.size}`]: true,
         'w-tooltip--shadow': this.shadow,
         'w-tooltip--fixed': this.fixed,
         'w-tooltip--no-border': this.noBorder || this.bgColor,
@@ -103,17 +123,21 @@ export default {
         zIndex: this.zIndex || this.zIndex === 0 || null,
         top: (this.detachableCoords.top && `${~~this.detachableCoords.top}px`) || null,
         left: (this.detachableCoords.left && `${~~this.detachableCoords.left}px`) || null,
-        '--w-tooltip-bg-color': this.$waveui.colors[this.bgColor || 'white']
+        '--w-tooltip-bg-color': this.$waveui.colors[this.bgColor] || 'rgb(var(--w-base-bg-color-rgb))'
       }
     },
 
     activatorEventHandlers () {
       let handlers = {}
-      if (this.showOnClick) handlers = { click: this.toggle }
-      else {
+
+      // Check the window exists: SSR-proof.
+      const isTouchDevice = typeof window !== 'undefined' && 'ontouchstart' in window
+
+      // Toggling tooltip on mouseenter/mouseout (by default), and also show on focus, hide on blur.
+      if (!this.showOnClick && !isTouchDevice) {
         handlers = {
-          focus: this.toggle,
-          blur: this.toggle,
+          focus: this.open,
+          blur: this.close,
           mouseenter: e => {
             this.hoveringActivator = true
             this.open(e)
@@ -123,10 +147,10 @@ export default {
             this.close()
           }
         }
-
-        // Check the window exists: SSR-proof.
-        if (typeof window !== 'undefined' && 'ontouchstart' in window) handlers.click = this.toggle
       }
+      // Only bind a click event on mobile, or if showOnClick is set.
+      else if (this.enableTouch || this.showOnClick) handlers = { click: this.toggle }
+
       return handlers
     }
   },
@@ -146,8 +170,12 @@ export default {
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     toggle (e) {
       let shouldShowTooltip = this.detachableVisible
+
+      // For touch devices.
       if (typeof window !== 'undefined' && 'ontouchstart' in window) {
-        if (e.type === 'click') shouldShowTooltip = !shouldShowTooltip
+        // disable tooltip opening for mouseenter activation.
+        if (!this.enableTouch && !this.showOnClick) shouldShowTooltip = false
+        else shouldShowTooltip = !shouldShowTooltip
       }
       else if (e.type === 'click' && this.showOnClick) shouldShowTooltip = !shouldShowTooltip
       else if (['mouseenter', 'focus'].includes(e.type) && !this.showOnClick) shouldShowTooltip = true
@@ -225,6 +253,12 @@ export default {
   &--bottom {margin-top: 3 * $base-increment;}
   &--left {margin-left: -3 * $base-increment;}
   &--right {margin-left: 3 * $base-increment;}
+
+  &.size--xs {font-size: 0.75rem;}
+  &.size--sm {font-size: 0.83rem;}
+  &.size--md {font-size: 0.9rem;}
+  &.size--lg {font-size: 1rem;}
+  &.size--xl {font-size: 1.1rem;}
 
   &--custom-transition {transform: none;}
 

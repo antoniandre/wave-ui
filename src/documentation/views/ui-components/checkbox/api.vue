@@ -32,6 +32,8 @@ const checkboxes = {
   propsDescs: {
     items: 'An array of checkbox items to display. Each item object should contain at least a <code>label</code> or a <code>value</code> attribute.',
     value: '<strong class="error"><code>model-value</code> in Vue 3.</strong><br>Provide an array of values to dictate the checked state of all the checkboxes.<br>This value gets updated when using a v-model.',
+    modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide an array of values to dictate the checked state of all the checkboxes.<br>This value gets updated when using a v-model.',
+    returnValues: 'When set to <code>true</code>, the return value of the w-checkboxes component will be an array of <code>returnValue</code>s of each item that is checked. If set to false and by default, the return value will be an array of booleans.',
     labelOnLeft: 'Moves the label to the left of each checkbox.',
     itemLabelKey: 'The property name (aka "key") in each item object where to find the label of the item (if any).',
     itemValueKey: 'The property name (aka "key") in each item object where to find the value of the item (if any).',

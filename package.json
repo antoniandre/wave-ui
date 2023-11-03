@@ -70,7 +70,7 @@
     "gsap": "^3.11.3",
     "ionicons": "^4.6.3",
     "material-design-icons": "^3.0.1",
-    "postcss": "^8.4.27",
+    "postcss": "^8.4.31",
     "pug": "^3.0.2",
     "rollup-plugin-delete": "^2.0.0",
     "sass": "^1.56.1",

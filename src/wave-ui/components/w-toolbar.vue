@@ -63,7 +63,7 @@ export default {
 .w-toolbar {
   position: relative;
   display: flex;
-  flex: 1 1 auto;
+  flex: 0 1 auto; // No grow, so it doesn't stretch vertically in flex column.
   align-items: center;
   padding: (2 * $base-increment) (3 * $base-increment);
   background-color: #fff;
@@ -88,7 +88,6 @@ export default {
   &--vertical {
     padding: (2 * $base-increment);
     flex-direction: column;
-    flex-grow: 0;
     flex-shrink: 0;
   }
 

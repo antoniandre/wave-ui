@@ -61,6 +61,7 @@ component(
           @change="onFileChange"
           :multiple="multiple || null"
           v-bind="attrs"
+          :disabled="isDisabled || null"
           :data-progress="overallFilesProgress /* Needed to emit the overallProgress. */")
         transition-group.w-input__input.w-input__input--file(
           tag="label"
@@ -558,6 +559,7 @@ $inactive-color: #777;
   &__label {
     transition: color $transition-duration;
     cursor: pointer;
+    user-select: none;
 
     &--left {margin-right: 2 * $base-increment;}
     &--right {margin-left: 2 * $base-increment;}

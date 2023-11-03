@@ -326,6 +326,7 @@ $inactive-color: #777;
     transition: color $transition-duration;
     cursor: pointer;
     align-self: flex-start;
+    user-select: none;
 
     &--left {
       margin-top: $base-increment;

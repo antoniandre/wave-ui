@@ -5,13 +5,12 @@ w-toolbar.main-toolbar(fixed)
     span.grey-dark1 Wave UI
   .spacer
 
-  w-tooltip(z-index="20" append-to=".main-toolbar")
-    template(#activator="{ on }")
-      router-link.v3-is-out.w-tag.w-tag--round.mr4.xs-hide(
-        v-on="on"
-        to="/release-notes"
-        @click.native="scrollTop(true)") WAVE UI 3.0 IS OUT!
-    | Go to the release notes!
+  //- w-switch.mr2(
+    :model-value="$store.state.darkMode"
+    @update:model-value="$store.commit('setDarkMode', $event), $waveui.switchTheme($event ? 'dark' : 'light')"
+    bg-color="blue-dark5")
+    template(#thumb)
+      w-icon mdi {{ $store.state.darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}
 
   strong.version.size--xs(v-html="`v<code>${version}</code>`")
 

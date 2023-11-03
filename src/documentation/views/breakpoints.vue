@@ -91,6 +91,7 @@ main
 
     .row {flex-direction: row;}
     .column {flex-direction: column;}
+    .column-reverse {flex-direction: column-reverse;}
     .grow {flex-grow: 1;flex-basis: auto;}
     .no-grow {flex-grow: 0;}
     .shrink {flex-shrink: 1;margin-left: auto;margin-right: auto;}

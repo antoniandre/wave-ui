@@ -22,7 +22,107 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v3.7.2
+      ul
+        li
+          strong.code w-select
+          ul
+            li Fixed the #[code item-color-key] prop not being used for default w-list (and w-select).
+            li Fixed opening the dropdown from a click on the left or right side label.
+            li Fixed preventing the dropdown to open from clicking a disabled #[strong.code w-select].
+            li Increase paddings between inner icons &amp; the select list displayed selection.
+            li Don't move the floating label on focus, but only on dropdown open, for a smoother user experience.
+            li Always skip any disabled item while using arrow keys.
+
+    li.patch
+      strong.version v3.7.1
+      ul
+        li
+          strong.code w-table
+          ul
+            li Fixed the default row selection color.
+
     li.minor
+      strong.version v3.7.0
+      ul
+        li
+          strong.code w-menu
+          ul
+            li Added a #[code max-width] option to set a max width on the #[strong.code w-menu]. #[issue-link 126] #[span.tag.new]
+        li
+          strong.code w-checkbox
+          ul
+            li Fix the use of the #[code return-value] option. #[issue-link 128]
+        li
+          strong.code w-checkboxes
+          ul
+            li Added a #[code return-values] option to return checkboxes values. #[span.tag.new]
+
+    li.patch
+      strong.version v3.6.2
+      ul
+        li
+          strong.code w-tooltip &amp; w-menu
+          ul
+            li Cancel any opening when already closing (if the user goes fast enough and there is a set #[code delay]).
+      ul
+        li
+          strong.code w-select
+          ul
+            li Fix the select list not opening (bug introduced in version 3.6.0). #[issue-link 125]
+        li
+          strong CSS
+          ul
+            li Added the #[code column-reverse] helper class along with all breakpoints definitions (e.g. #[code smd-column-reverse]).
+
+    li.patch
+      strong.version v3.6.1
+      ul
+        li
+          strong.code w-list
+          ul
+            li Allow de-selecting items by updating the model value. #[issue-link 123]
+
+    li.minor
+      strong.version v3.6.0
+      ul
+        li
+          strong.code w-input, w-select, w-textarea
+          ul
+            li Prevent user selection on form fields labels.
+        li
+          strong.code w-button
+          ul
+            li Increase the feedback speed on button :activate state.
+        li
+          strong.code w-tooltip &amp; w-menu
+          ul
+            li Fixed the arrow color when used with a #[code bg-color].
+        li
+          strong.code w-tooltip
+          ul
+            li Added #[code xs], #[code sm], #[code md], #[code lg] &amp; #[code xl] props for different tooltip sizes. #[span.tag.new]
+            li Added the #[code caption] prop to apply the caption look and fill (smaller, grey, italic). #[span.tag.new]
+            li Added the #[code enable-touch] prop to enable hover-activating tooltips on touch devices (disabled by default). #[span.tag.new]
+
+    li.patch
+      strong.version v3.5.2
+      ul
+        li
+          strong.code w-toolbar
+          ul
+            li Removed the CSS auto-grow.
+        li
+          strong.code w-input
+          ul
+            li Support the #[code disabled] prop on #[code &lt;input type=file&gt;].
+        li
+          strong Core
+          ul
+            li Support presets targeting props defined in a component mixin. #[issue-link 121]
+
+    li.patch
       strong.version v3.5.1
       ul
         li

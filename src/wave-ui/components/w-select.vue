@@ -10,13 +10,13 @@ component(
   template(v-if="labelPosition === 'left'")
     label.w-select__label.w-select__label--left.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-select--${_uid}`"
+      @click="$refs['selection-input'].click()"
       :class="labelClasses")
       slot {{ label }}
 
   w-menu(
     v-model="showMenu"
-    @close="!$event && closeMenu()"
+    @close="closeMenu"
     :menu-class="`w-select__menu ${menuClass || ''}`"
     transition="slide-fade-down"
     :append-to="(menuProps || {}).appendTo !== undefined ? (menuProps || {}).appendTo : undefined"
@@ -47,7 +47,6 @@ component(
           @focus="!isDisabled && !isReadonly && onFocus($event)"
           @blur="onBlur"
           @keydown="!isDisabled && !isReadonly && onKeydown($event)"
-          :id="`w-select--${_uid}`"
           :class="{ 'w-select__selection--placeholder': !$scopedSlots.selection && !selectionString && placeholder }"
           :disabled="isDisabled || null"
           readonly
@@ -64,7 +63,6 @@ component(
         template(v-if="labelPosition === 'inside' && showLabelInside")
           label.w-select__label.w-select__label--inside.w-form-el-shakable(
             v-if="$slots.default || label"
-            :for="`w-select--${_uid}`"
             :class="labelClasses")
             slot {{ label }}
         w-icon.w-select__icon.w-select__icon--inner-right(
@@ -103,7 +101,7 @@ component(
   template(v-if="labelPosition === 'right'")
     label.w-select__label.w-select__label--right.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-select--${_uid}`"
+      @click="$refs['selection-input'].click()"
       :class="labelClasses")
       slot {{ label }}
 </template>
@@ -272,7 +270,25 @@ export default {
             index = (index + items.length + direction) % items.length
           }
 
-          this.onInput(items[index])
+          // If the current item is disabled, find the next one enabled (forward or backward).
+          let allItemsAreDisabled = false
+          if (items[index].disabled) {
+            const direction = e.keyCode === 38 ? -1 : 1 // Prev or next.
+
+            // Modulo to prevent out of range; + items.length to also work with negative values.
+            let newIndex = (index + direction + items.length) % items.length
+            const itemsCount = items.length
+            let loop = 0 // While-safety: will always end at least after 1 full array cycle.
+            while (loop < itemsCount && items[newIndex].disabled) {
+              // Circle through the array of items forward or backward, and reloop when out of range.
+              newIndex = (newIndex + items.length + direction) % items.length
+              loop++
+            }
+            if (loop >= itemsCount) allItemsAreDisabled = true
+            index = newIndex
+          }
+
+          if (!allItemsAreDisabled) this.onInput(items[index])
         }
       }
     },
@@ -508,8 +524,8 @@ export default {
       -webkit-tap-highlight-color: transparent;
     }
 
-    &--inner-left {left: 6px;}
-    &--inner-right {right: 6px;}
+    &--inner-left {left: $base-increment;}
+    &--inner-right {right: $base-increment;}
     .w-select--no-padding &--inner-left {left: 1px;}
     .w-select--no-padding &--inner-right {right: 1px;}
 
@@ -526,6 +542,7 @@ export default {
     align-items: center;
     transition: color $transition-duration;
     cursor: pointer;
+    user-select: none;
 
     &--left {margin-right: 2 * $base-increment;}
     &--right {margin-left: 2 * $base-increment;}
@@ -553,7 +570,7 @@ export default {
     transform: translateY(-50%);
     pointer-events: none;
 
-    .w-select--inner-icon-right & {padding-right: 22px;}
+    .w-select--inner-icon-right & {padding-right: 26px;}
 
     .w-select--no-padding & {
       left: 0;
@@ -570,8 +587,7 @@ export default {
       transition: $transition-duration ease;
     }
 
-    // move label with underline style.
-    .w-select--focused.w-select--floating-label &,
+    // Move label with underline style.
     .w-select--open.w-select--floating-label &,
     .w-select--filled.w-select--floating-label &,
     .w-select--has-placeholder.w-select--floating-label & {
@@ -582,13 +598,11 @@ export default {
       transform: translateY(-160%) scale(0.85);
     }
     // Move label with outline style or with shadow.
-    .w-select--focused.w-select--floating-label .w-select__selection-wrap--box &,
     .w-select--open.w-select--floating-label .w-select__selection-wrap--box &,
     .w-select--filled.w-select--floating-label .w-select__selection-wrap--box &,
     .w-select--has-placeholder.w-select--floating-label .w-select__selection-wrap--box & {
       transform: translateY(-180%) scale(0.85);
     }
-    .w-select--focused.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--open.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
