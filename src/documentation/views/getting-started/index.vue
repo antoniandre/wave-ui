@@ -42,7 +42,7 @@ main
   title-link(h2) What next?
   p.text-bold You are now up and running. Go test some some components in your app!
   .title3.mt4 But if you would appreciate a little more guidance, we recommend to:
-  w-list(checklist :items="6" :model-value="[0]")
+  w-list(checklist :items="6" :value="[0]")
     template(#item.1) Install Wave UI from one of the above method
     template(#item.2).
       Read on the knowledge base pages to get an overview of all the power in your hands!

@@ -6,8 +6,8 @@ w-toolbar.main-toolbar(fixed)
   .spacer
 
   //- w-switch.mr2(
-    :model-value="$store.state.darkMode"
-    @update:model-value="$store.commit('setDarkMode', $event), $waveui.switchTheme($event ? 'dark' : 'light')"
+    :value="$store.state.darkMode"
+    @input="$store.commit('setDarkMode', $event), $waveui.switchTheme($event ? 'dark' : 'light')"
     bg-color="blue-dark5")
     template(#thumb)
       w-icon mdi {{ $store.state.darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}

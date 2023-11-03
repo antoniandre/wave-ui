@@ -836,97 +836,97 @@ div.tooltips-demo
 
   title-link(h2) Different sizes and caption style
   example(content-class="text-center example-sizes wrap w-flex align-center justify-center")
-    w-tooltip(xs show-on-click persistent :model-value="true" append-to=".example-sizes")
+    w-tooltip(xs show-on-click persistent :value="true" append-to=".example-sizes")
       template(#activator="{ on }")
         span.ma6(v-on="on") xs
       | Extra small
-    w-tooltip(sm show-on-click persistent :model-value="true" append-to=".example-sizes")
+    w-tooltip(sm show-on-click persistent :value="true" append-to=".example-sizes")
       template(#activator="{ on }")
         span.ma6(v-on="on") sm
       | Small
-    w-tooltip(md show-on-click persistent :model-value="true" append-to=".example-sizes")
+    w-tooltip(md show-on-click persistent :value="true" append-to=".example-sizes")
       template(#activator="{ on }")
         span.ma6(v-on="on") md
       | Medium
-    w-tooltip(lg show-on-click persistent :model-value="true" append-to=".example-sizes")
+    w-tooltip(lg show-on-click persistent :value="true" append-to=".example-sizes")
       template(#activator="{ on }")
         span.ma7(v-on="on") lg
       | Large
-    w-tooltip(xl show-on-click persistent :model-value="true" append-to=".example-sizes")
+    w-tooltip(xl show-on-click persistent :value="true" append-to=".example-sizes")
       template(#activator="{ on }")
         span.ma10(v-on="on") xl
       | Extra large
-    w-tooltip(caption show-on-click persistent :model-value="true" append-to=".example-sizes")
+    w-tooltip(caption show-on-click persistent :value="true" append-to=".example-sizes")
       template(#activator="{ on }")
         span.ma10(v-on="on") Caption
       | Caption style.
     template(#pug).
-      w-tooltip(xs show-on-click persistent :model-value="true")
+      w-tooltip(xs show-on-click persistent :value="true")
         template(#activator="{ on }")
           span.ma6(v-on="on") xs
         | Extra small
 
-      w-tooltip(sm show-on-click persistent :model-value="true")
+      w-tooltip(sm show-on-click persistent :value="true")
         template(#activator="{ on }")
           span.ma6(v-on="on") sm
         | Small
 
-      w-tooltip(md show-on-click persistent :model-value="true")
+      w-tooltip(md show-on-click persistent :value="true")
         template(#activator="{ on }")
           span.ma6(v-on="on") md
         | Medium
 
-      w-tooltip(lg show-on-click persistent :model-value="true")
+      w-tooltip(lg show-on-click persistent :value="true")
         template(#activator="{ on }")
           span.ma7(v-on="on") lg
         | Large
 
-      w-tooltip(xl show-on-click persistent :model-value="true")
+      w-tooltip(xl show-on-click persistent :value="true")
         template(#activator="{ on }")
           span.ma10(v-on="on") xl
         | Extra large
 
-      w-tooltip(caption show-on-click persistent :model-value="true")
+      w-tooltip(caption show-on-click persistent :value="true")
         template(#activator="{ on }")
           span.ma10(v-on="on") Caption
         | Caption style.
     template(#html).
-      &lt;w-tooltip xs show-on-click persistent :model-value="true"&gt;
+      &lt;w-tooltip xs show-on-click persistent :value="true"&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;span v-on="on" class="ma3"&gt;xs&lt;/span&gt;
         &lt;/template&gt;
         Extra small
       &lt;/w-tooltip&gt;
 
-      &lt;w-tooltip sm show-on-click persistent :model-value="true"&gt;
+      &lt;w-tooltip sm show-on-click persistent :value="true"&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;span v-on="on" class="ma3"&gt;sm&lt;/span&gt;
         &lt;/template&gt;
         Small
       &lt;/w-tooltip&gt;
 
-      &lt;w-tooltip md show-on-click persistent :model-value="true"&gt;
+      &lt;w-tooltip md show-on-click persistent :value="true"&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;span v-on="on" class="ma3"&gt;md&lt;/span&gt;
         &lt;/template&gt;
         Medium
       &lt;/w-tooltip&gt;
 
-      &lt;w-tooltip lg show-on-click persistent :model-value="true"&gt;
+      &lt;w-tooltip lg show-on-click persistent :value="true"&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;span v-on="on" class="ma3"&gt;lg&lt;/span&gt;
         &lt;/template&gt;
         Large
       &lt;/w-tooltip&gt;
 
-      &lt;w-tooltip xl show-on-click persistent :model-value="true"&gt;
+      &lt;w-tooltip xl show-on-click persistent :value="true"&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;span v-on="on" class="ma3"&gt;xl&lt;/span&gt;
         &lt;/template&gt;
         Extra large
       &lt;/w-tooltip&gt;
 
-      &lt;w-tooltip caption show-on-click persistent :model-value="true"&gt;
+      &lt;w-tooltip caption show-on-click persistent :value="true"&gt;
         &lt;template #activator="{ on }"&gt;
           &lt;span v-on="on" class="ma3"&gt;Caption&lt;/span&gt;
         &lt;/template&gt;
