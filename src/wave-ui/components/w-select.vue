@@ -76,7 +76,7 @@ component(
       @item-click="$emit('item-click', $event)"
       @item-select="onListItemSelect"
       @keydown:enter="noUnselect && !multiple && closeMenu()"
-      @keydown:escape="showMenu && (this.showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
+      @keydown:escape="showMenu && (showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
       :items="selectItems"
       :multiple="multiple"
       arrows-navigation
