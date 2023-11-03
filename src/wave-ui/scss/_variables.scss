@@ -5,6 +5,39 @@
   // @return $a / $b;
 }
 
+// THEME COLORS.
+// ========================================================
+// These colors are defined by a list of RBG channels only, so you can later apply any alpha channel.
+// If you don't need themes, you can leave this as is and override the global defaults.
+$theme-light: (
+  base-bg-color-rgb: (255, 255, 255), // #fff.
+  base-color-rgb: (0, 0, 0), // #000.
+  contrast-bg-color-rgb: (0, 0, 0), // #000.
+  contrast-color-rgb: (255, 255, 255), // #fff.
+  caption-color-rgb: (80, 80, 80, 0.7), // #505050.
+  disabled-color-rgb: (204, 204, 204), // #ccc.
+) !default;
+
+$theme-dark: (
+  base-bg-color-rgb: (34, 34, 34), // #222.
+  base-color-rgb: (255, 255, 255), // #fff.
+  contrast-bg-color-rgb: (255, 255, 255), // #fff.
+  contrast-color-rgb: (0, 0, 0), // #000.
+  caption-color-rgb: (175, 175, 175, 0.7), // #afafaf.
+  disabled-color-rgb: (74, 74, 74), // #4a4a4a.
+) !default;
+
+// These variables are filled up with the current theme colors for you to use.
+$primary: var(--w-primary-color);
+$secondary: var(--w-secondary-color);
+$base-bg-color: rgb(var(--w-base-bg-color-rgb));
+$base-color: rgb(var(--w-base-color-rgb));
+$contrast-bg-color: rgb(var(--w-contrast-bg-color-rgb));
+$contrast-color: rgb(var(--w-contrast-color-rgb));
+$caption-color: rgb(var(--w-caption-color-rgb));
+// When a form element is disabled (checkbox, radio, input, select list).
+$disabled-color: rgb(var(--w-disabled-color-rgb));
+
 // GLOBAL DEFAULTS.
 // ========================================================
 $css-scope: '.w-app' !default; // Allows control on CSS rules priority.
@@ -15,7 +48,7 @@ $base-font-size: 14px !default; // Must be a px unit.
 $base-increment: round(divide($base-font-size, 4)) !default;
 $layout-padding: $base-increment * 4 !default; // Applied on the .content-wrap tag.
 $border-radius: 3px !default;
-$border-color: rgba(0, 0, 0, 0.15);
+$border-color: rgba(var(--w-contrast-bg-color-rgb), 0.12) !default;
 $border: 1px solid $border-color !default;
 $transition-duration: 0.25s !default;
 $fast-transition-duration: 0.15s !default;
@@ -28,34 +61,95 @@ $form-field-height: round(2 * $base-font-size) !default;
 // Always an even number for better vertical alignment. (Used in checkbox, radio, switch)
 $small-form-el-size: round(divide(1.3 * $base-font-size, 2)) * 2 !default;
 
+// Detachable elements are: w-tooltip, w-menu, w-confirm.
+$detachable-bg-color: $base-bg-color !default;
+$detachable-color: $base-color !default;
+
 // COMPONENTS DEFAULTS.
 // ========================================================
+// w-confirm.
+// --------------------------------------------------------
+$confirm-bg-color: $detachable-bg-color !default;
+$confirm-color: $detachable-color !default;
+// --------------------------------------------------------
+
+// w-dialog.
+// --------------------------------------------------------
+$dialog-bg-color: $base-bg-color !default;
+// --------------------------------------------------------
+
+// w-divider.
+// --------------------------------------------------------
+$divider-color: $border-color !default;
+// --------------------------------------------------------
+
 // w-drawer.
+// --------------------------------------------------------
 $drawer-max-size: 380px !default;
+$drawer-bg-color: $base-bg-color !default;
+// --------------------------------------------------------
+
+// w-menu.
+// --------------------------------------------------------
+$menu-bg-color: $detachable-bg-color !default;
+$menu-color: $detachable-color !default;
+// --------------------------------------------------------
+
+// w-progress.
+// --------------------------------------------------------
+$progress-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.15) !default;
+// --------------------------------------------------------
+
+// w-rating.
+// --------------------------------------------------------
+$rating-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.25) !default;
 // --------------------------------------------------------
 
 // w-slider.
 // --------------------------------------------------------
 $slider-height: $base-increment !default;
-$slider-track-color: #ddd;
+$slider-track-color: rgba(var(--w-contrast-bg-color-rgb), 0.15) !default;
+$slider-thumb-button-bg-color: $base-bg-color !default;
+$slider-thumb-label-bg-color: $base-bg-color !default;
+$slider-thumb-label-color: rgba(var(--w-base-color-rgb), 0.75) !default;
+$slider-step-label-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.2) !default;
+$slider-step-label-color: rgba(var(--w-base-color-rgb), 0.5) !default;
+
+// w-switch.
+// --------------------------------------------------------
+$switch-inactive-color: rgba(var(--w-contrast-bg-color-rgb), 0.25) !default;
+$switch-thumb-color: #fff !default;
 // --------------------------------------------------------
 
 // w-table.
 // --------------------------------------------------------
-$table-tr-odd-color: rgba(0, 0, 0, 0.02);
-$table-tr-hover-color: rgba(0, 0, 0, 0.05);
-$table-color: rgba(0, 0, 0, 0.7);
+$table-tr-odd-color: rgba(0, 0, 0, 0.02) !default;
+$table-tr-hover-color: rgba(0, 0, 0, 0.05) !default;
+$table-color: rgba(var(--w-contrast-color-rgb), 0.7) !default;
 // --------------------------------------------------------
 
 // w-textarea.
 // --------------------------------------------------------
-$textarea-line-height: 1.2;
+$textarea-line-height: 1.2 !default;
+// --------------------------------------------------------
+
+// w-timeline.
+// --------------------------------------------------------
+$timeline-bullet-color: $base-bg-color !default;
+$timeline-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.25) !default;
+// --------------------------------------------------------
+
+// w-toolbar.
+// --------------------------------------------------------
+$toolbar-max-size: 380px !default;
+$toolbar-bg-color: $base-bg-color !default;
 // --------------------------------------------------------
 
 // w-tooltip.
 // --------------------------------------------------------
-$tooltip-bg-color: #fff;
-$tooltip-color: rgba(0, 0, 0, 0.7);
+$tooltip-bg-color: $detachable-bg-color !default;
+$tooltip-color: $detachable-color !default;
+$tooltip-border-color: $border-color !default;
 // --------------------------------------------------------
 
 // Mixins.
