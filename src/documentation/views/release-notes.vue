@@ -1,10 +1,20 @@
 <template lang="pug">
 main
   title-link.mt4(h1) Release notes
-  p.mt-6.mb10.grey-light2.text-italic
+  p.mt-6.mb5.grey-light2.text-italic
     | Follows the
     a.ml1(href="https://semver.org" target="_blank") Semantic versioning specs.
 
+  .w-flex.justify-end
+    w-button(
+      @click="$refs.legacy.scrollIntoView()"
+      round
+      bg-color="vue-green"
+      color="white"
+      dark
+      sm)
+      | Jump to #[strong.ml1 Vue 2]
+      w-icon.ml2 wi-arrow-down
   ul.history
     li.dashed
       w-flex.mt8(align-center)
@@ -671,7 +681,8 @@ main
       br
       br
       br
-      w-flex.mt8(align-center)
+      a#legacy(ref="legacy")
+      w-flex.mt12(align-center)
         w-tag.pl3.pr2.text-bold(round bg-color="vue-green" color="white")
           | VUE 2
           w-icon.ml1(md) wi-chevron-down
