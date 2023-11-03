@@ -7,15 +7,18 @@ const cssVars = {
 
 const generateColors = config => {
   let styles = ''
+  const cssVariables = {}
   const { cssScope } = cssVars
 
   // Extract status colors and place them after the other colors.
   const { info, warning, success, error, ...colors } = config.colors
 
-  for (const color in colors) {
+  // User custom colors.
+  // ------------------------------------------------------
+  for (const colorName in colors) {
     styles +=
-      `${cssScope} .${color}--bg{background-color:${config.colors[color]}}` +
-      `${cssScope} .${color}{color:${config.colors[color]}}`
+      `${cssScope} .${colorName}--bg{background-color:${config.colors[colorName]}}` +
+      `${cssScope} .${colorName}{color:${config.colors[colorName]}}`
   }
 
   // Color shades are generated in core.js, if the option is on.
@@ -36,12 +39,19 @@ const generateColors = config => {
       `${cssScope} .${color}{color:${config.colors[color]}}`
   }
 
-  // Add the primary color to the CSS variables for reuse in components.
-  const cssVariables = []
-  cssVariables.push(`--primary: ${config.colors.primary}`)
-  styles += `:root {${cssVariables.join(';')}}`
+  // Creating CSS3 variables.
+  // ------------------------------------------------------
+  // Create a CSS variable for each color for theming and reuse in components.
+  // Status colors must remain after the other colors so they have priority in form validations.
+  // That only makes sense when there are 2 colors on the same element: e.g. `span.primary.error`.
+  const allColors = { ...colors, info, warning, success, error }
+  for (const colorName in allColors) cssVariables[colorName] = allColors[colorName]
+  let cssVariablesString = ''
+  Object.entries(cssVariables).forEach(([colorName, colorHex]) => {
+    cssVariablesString += `--w-${colorName}-color: ${colorHex};`
+  })
 
-  return styles
+  return `:root{${cssVariablesString}}${styles}`
 }
 
 // Generate the layout grid. E.g. xs1, xs2, ..., xl12.
