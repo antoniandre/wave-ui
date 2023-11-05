@@ -10,7 +10,7 @@ component(
   template(v-if="labelPosition === 'left'")
     label.w-select__label.w-select__label--left.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-select--${_.uid}`"
+      @click="$refs['selection-input'].click()"
       :class="labelClasses")
       slot {{ label }}
 
@@ -24,10 +24,10 @@ component(
     custom
     min-width="activator"
     v-bind="menuProps || {}")
-    template(#activator="{ on }")
+    template(#activator)
       //- Input wrapper.
       .w-select__selection-wrap(
-        @click="on.click"
+        @click="!isDisabled && !isReadonly && onInputFieldClick()"
         role="button"
         aria-haspopup="listbox"
         :aria-expanded="showMenu ? 'true' : 'false'"
@@ -56,8 +56,8 @@ component(
         .w-select__selection(
           v-else
           ref="selection-input"
-          v-bind="selectionAttributes"
           v-on="selectionEventHandlers"
+          v-bind="selectionAttributes"
           v-html="selectionHtml")
         //- For standard HTML form submission.
         input(
@@ -69,7 +69,6 @@ component(
         template(v-if="labelPosition === 'inside' && showLabelInside")
           label.w-select__label.w-select__label--inside.w-form-el-shakable(
             v-if="$slots.default || label"
-            :for="`w-select--${_.uid}`"
             :class="labelClasses")
             slot {{ label }}
         w-icon.w-select__icon.w-select__icon--inner-right(
@@ -83,7 +82,7 @@ component(
       @item-click="$emit('item-click', $event)"
       @item-select="onListItemSelect"
       @keydown:enter="noUnselect && !multiple && closeMenu()"
-      @keydown:escape="showMenu && (this.showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
+      @keydown:escape="showMenu && (showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
       :items="selectItems"
       :multiple="multiple"
       arrows-navigation
@@ -107,7 +106,7 @@ component(
   template(v-if="labelPosition === 'right'")
     label.w-select__label.w-select__label--right.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-select--${_.uid}`"
+      @click="$refs['selection-input'].click()"
       :class="labelClasses")
       slot {{ label }}
 </template>
@@ -201,7 +200,6 @@ export default {
     },
     selectionAttributes () {
       return {
-        id: `w-select--${this._.uid}`,
         class: { 'w-select__selection--placeholder': !this.$slots.selection && !this.selectionString && this.placeholder },
         disabled: this.isDisabled || null,
         readonly: true,
@@ -300,7 +298,25 @@ export default {
             index = (index + items.length + direction) % items.length
           }
 
-          this.onInput(items[index])
+          // If the current item is disabled, find the next one enabled (forward or backward).
+          let allItemsAreDisabled = false
+          if (items[index].disabled) {
+            const direction = e.keyCode === 38 ? -1 : 1 // Prev or next.
+
+            // Modulo to prevent out of range; + items.length to also work with negative values.
+            let newIndex = (index + direction + items.length) % items.length
+            const itemsCount = items.length
+            let loop = 0 // While-safety: will always end at least after 1 full array cycle.
+            while (loop < itemsCount && items[newIndex].disabled) {
+              // Circle through the array of items forward or backward, and reloop when out of range.
+              newIndex = (newIndex + items.length + direction) % items.length
+              loop++
+            }
+            if (loop >= itemsCount) allItemsAreDisabled = true
+            index = newIndex
+          }
+
+          if (!allItemsAreDisabled) this.onInput(items[index])
         }
       }
     },
@@ -324,7 +340,7 @@ export default {
     },
 
     onInputFieldClick () {
-      if (this.autocomplete) this.doAutocomplete(e)
+      if (this.autocomplete) this.doAutocomplete()
       if (this.showMenu) this.showMenu = false // Will call `closeMenu()` from w-menu(@close).
       else this.openMenu()
     },
@@ -388,7 +404,7 @@ export default {
       this.emitSelection()
     },
 
-    doAutocomplete (e) {
+    doAutocomplete () {
       const keyword = this.$refs['selection-input'].innerHTML
     }
   },
@@ -557,8 +573,8 @@ export default {
       -webkit-tap-highlight-color: transparent;
     }
 
-    &--inner-left {left: 6px;}
-    &--inner-right {right: 6px;}
+    &--inner-left {left: $base-increment;}
+    &--inner-right {right: $base-increment;}
     .w-select--no-padding &--inner-left {left: 1px;}
     .w-select--no-padding &--inner-right {right: 1px;}
 
@@ -601,7 +617,7 @@ export default {
     margin-left: 2 * $base-increment;
     pointer-events: none;
 
-    .w-select--inner-icon-right & {padding-right: 22px;}
+    .w-select--inner-icon-right & {padding-right: 26px;}
 
     .w-select--no-padding & {
       left: 0;
@@ -618,8 +634,7 @@ export default {
       transition: $transition-duration ease;
     }
 
-    // move label with underline style.
-    .w-select--focused.w-select--floating-label &,
+    // Move label with underline style.
     .w-select--open.w-select--floating-label &,
     .w-select--filled.w-select--floating-label &,
     .w-select--has-placeholder.w-select--floating-label & {
@@ -630,13 +645,11 @@ export default {
       transform: translateY(-160%) scale(0.85);
     }
     // Move label with outline style or with shadow.
-    .w-select--focused.w-select--floating-label .w-select__selection-wrap--box &,
     .w-select--open.w-select--floating-label .w-select__selection-wrap--box &,
     .w-select--filled.w-select--floating-label .w-select__selection-wrap--box &,
     .w-select--has-placeholder.w-select--floating-label .w-select__selection-wrap--box & {
       transform: translateY(-180%) scale(0.85);
     }
-    .w-select--focused.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--open.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.

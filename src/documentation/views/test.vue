@@ -3,7 +3,7 @@
   h1.mt0.mb8 Testing playground
   p {{ file }}
   w-form(v-model="valid" :no-keyup-validation="true")
-    //- w-select(
+    w-select(
       class="mt3"
       label="Last name"
       :items="items"
@@ -24,8 +24,14 @@ export default {
       required: value => !!value || 'This field is required'
     },
     items: [
-      { label: 'Item 1', value: 1 },
-      { label: 'Item 2', value: 2 }
+      { label: 'Item 1', value: 1, disabled: true },
+      { label: 'Item 2', value: 2 },
+      { label: 'Item 3', value: 3 },
+      { label: 'Item 4', value: 4, disabled: true },
+      { label: 'Item 5', value: 5, disabled: true },
+      { label: 'Item 6', value: 6, disabled: true },
+      { label: 'Item 7', value: 7 },
+      { label: 'Item 8', value: 8 }
     ]
   })
 }
