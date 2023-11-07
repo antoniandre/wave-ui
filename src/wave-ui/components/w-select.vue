@@ -53,6 +53,7 @@ component(
               @click.stop="removeItemFromSelection(selectedItem)")
               span(v-html="selectedItem.label")
               w-button(icon="wi-cross" text sm)
+          .placeholder.grow
         .w-select__selection(
           v-else
           ref="selection-input"
@@ -202,8 +203,8 @@ export default {
       return {
         class: { 'w-select__selection--placeholder': !this.$slots.selection && !this.selectionString && this.placeholder },
         disabled: this.isDisabled || null,
-        readonly: true,
-        ariareadonly: 'true',
+        readonly: !this.autocomplete || null,
+        ariareadonly: this.autocomplete ? null : 'true',
         tabindex: this.tabindex || null,
         contenteditable: this.isDisabled || this.isReadonly ? 'false' : 'true'
       }
@@ -318,6 +319,24 @@ export default {
 
           if (!allItemsAreDisabled) this.onInput(items[index])
         }
+      }
+
+      else if (this.autocomplete) {
+        const s = window.getSelection()
+
+        if ([8, 46].includes(e.keyCode)) { // Delete and backspace keys (delete forward).
+          // Prevent deleting beyond the first or last character (prevents JS errors when deleting boundary nodes).
+          const isDeletingBefore1stChar = e.keyCode === 8 && !s.focusOffset // 8 = delete key.
+          // const isDeletingAfterLastChar = e.keyCode === 46 && s.focusOffset >= s.focusNode.textContent.length // 46 = backspace key.
+          if (isDeletingBefore1stChar) {
+            this.inputValue.pop()
+            this.emitSelection()
+
+            e.preventDefault()
+          }
+        }
+
+        // this.doAutocomplete(e)
       }
     },
 
@@ -519,6 +538,7 @@ export default {
     caret-color: transparent;
 
     &--placeholder {color: #888;}
+    .placeholder {align-self: stretch;}
 
     .w-select__selection-slot + & {
       position: absolute;
