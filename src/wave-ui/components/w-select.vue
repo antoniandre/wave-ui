@@ -43,7 +43,6 @@ component(
           slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
         .w-select__selection(
           v-if="autocomplete"
-          ref="selection-input"
           v-on="selectionEventHandlers"
           v-bind="selectionAttributes")
           span(v-if="!this.inputValue.length && this.placeholder" v-html="this.placeholder")
@@ -53,7 +52,7 @@ component(
               @click.stop="removeItemFromSelection(selectedItem)")
               span(v-html="selectedItem.label")
               w-button(icon="wi-cross" text sm)
-          .placeholder.grow
+          .placeholder.grow(ref="selection-input")
         .w-select__selection(
           v-else
           ref="selection-input"
@@ -84,7 +83,7 @@ component(
       @item-select="onListItemSelect"
       @keydown:enter="noUnselect && !multiple && closeMenu()"
       @keydown:escape="showMenu && (showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
-      :items="selectItems"
+      :items="filteredSelectItems"
       :multiple="multiple"
       arrows-navigation
       return-object
@@ -169,7 +168,9 @@ export default {
     showMenu: false,
     menuMinWidth: 0,
     isFocused: false,
-    selectionWrapRef: undefined
+    selectionWrapRef: undefined,
+    keyword: '', // Autocomplete user inputted keyword before an item is matched.
+    filteredSelectItems: []
   }),
 
   computed: {
@@ -196,7 +197,8 @@ export default {
       return {
         focus: e => !this.isDisabled && !this.isReadonly && this.onFocus(e),
         blur: this.onBlur,
-        keydown: e => !this.isDisabled && !this.isReadonly && this.onKeydown(e)
+        keydown: e => !this.isDisabled && !this.isReadonly && this.onKeydown(e),
+        keyup: e => !this.isDisabled && !this.isReadonly && this.autocomplete && this.onKeyup(e)
       }
     },
     selectionAttributes () {
@@ -228,7 +230,7 @@ export default {
         'w-select--fit-to-content': this.fitToContent,
         'w-select--autocomplete': this.autocomplete,
         'w-select--readonly': this.isReadonly,
-        [`w-select--${this.inputValue.length ? 'filled' : 'empty'}`]: true,
+        [`w-select--${this.inputValue.length || this.keyword.length ? 'filled' : 'empty'}`]: true,
         'w-select--focused': (this.isFocused || this.showMenu) && !this.isReadonly,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
@@ -335,8 +337,13 @@ export default {
             e.preventDefault()
           }
         }
+      }
+    },
 
-        // this.doAutocomplete(e)
+    onKeyup (e) {
+      if (this.autocomplete) {
+        this.keyword = this.$refs['selection-input'].innerHTML.toLowerCase().replace(/&nbsp;|<br>/g, ' ').trim()
+        this.doAutocomplete(e)
       }
     },
 
@@ -359,7 +366,6 @@ export default {
     },
 
     onInputFieldClick () {
-      if (this.autocomplete) this.doAutocomplete()
       if (this.showMenu) this.showMenu = false // Will call `closeMenu()` from w-menu(@close).
       else this.openMenu()
     },
@@ -424,7 +430,7 @@ export default {
     },
 
     doAutocomplete () {
-      const keyword = this.$refs['selection-input'].innerHTML
+      this.filteredSelectItems = this.selectItems.filter(item => item.label.toLowerCase().includes(this.keyword))
     }
   },
 
