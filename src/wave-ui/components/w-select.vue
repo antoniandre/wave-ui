@@ -375,6 +375,9 @@ export default {
       this.$emit('item-select', e)
       // Close menu after selection on single select, but keep open if multiple.
       if (!this.multiple) this.showMenu = false // Will call `closeMenu()` from w-menu(@close).
+      if (this.keyword) {
+        this.keyword = this.$refs['selection-input'].innerHTML = ''
+      }
     },
 
     onReset () {
@@ -664,18 +667,18 @@ export default {
     .w-select--open.w-select--floating-label &,
     .w-select--filled.w-select--floating-label &,
     .w-select--has-placeholder.w-select--floating-label & {
-      transform: translateY(-160%) scale(0.85);
+      transform: translateY(-80%) scale(0.85);
     }
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
     .w-select--floating-label .w-select__select:-webkit-autofill & {
-      transform: translateY(-160%) scale(0.85);
+      transform: translateY(-80%) scale(0.85);
     }
     // Move label with outline style or with shadow.
-    .w-select--open.w-select--floating-label .w-select__selection-wrap--box &,
-    .w-select--filled.w-select--floating-label .w-select__selection-wrap--box &,
-    .w-select--has-placeholder.w-select--floating-label .w-select__selection-wrap--box & {
-      transform: translateY(-180%) scale(0.85);
-    }
+    // .w-select--open.w-select--floating-label .w-select__selection-wrap--box &,
+    // .w-select--filled.w-select--floating-label .w-select__selection-wrap--box &,
+    // .w-select--has-placeholder.w-select--floating-label .w-select__selection-wrap--box & {
+    //   transform: translateY(-80%) scale(0.85);
+    // }
     .w-select--open.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
