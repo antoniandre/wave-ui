@@ -93,7 +93,7 @@ component(
       :item-color-key="itemColorKey"
       role="listbox"
       tabindex="-1")
-      template(v-for="i in items.length" v-slot:[`item.${i}`]="{ item, selected, index }")
+      template(v-for="i in items.length" #[`item.${i}`]="{ item, selected, index }")
         slot(
           v-if="$slots[`item.${i}`] && $slots[`item.${i}`](item, selected, index)"
           :name="`item.${i}`"
@@ -170,6 +170,7 @@ export default {
     isFocused: false,
     selectionWrapRef: undefined,
     keyword: '', // Autocomplete user inputted keyword before an item is matched.
+    // For the autocomplete feature, filter out the items not matching the user keyword.
     filteredSelectItems: []
   }),
 
@@ -324,7 +325,8 @@ export default {
       }
 
       else if (this.autocomplete) {
-        if (this.keyword && !this.showMenu && e.keyCode !== 13) this.openMenu()
+        if (!this.multiple && this.inputValue.length) e.preventDefault()
+        else if (this.keyword && !this.showMenu && e.keyCode !== 13) this.openMenu()
         if ([8, 46].includes(e.keyCode)) { // Delete and backspace keys (delete forward).
           const s = window.getSelection()
           // Prevent deleting beyond the first or last character (prevents JS errors when deleting boundary nodes).
