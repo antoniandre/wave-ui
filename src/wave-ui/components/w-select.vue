@@ -281,7 +281,7 @@ export default {
       if (!this.autocomplete && !e.metaKey && !e.ctrlKey && e.keyCode !== 9) e.preventDefault()
 
       if (e.keyCode === 27 && this.showMenu) this.closeMenu() // Escape.
-      else if ([13, 32].includes(e.keyCode)) this.openMenu() // Enter or Space.
+      else if ([13, 32].includes(e.keyCode) && !this.autocomplete) this.openMenu() // Enter or Space.
 
       // Up & down arrows.
       else if ([38, 40].includes(e.keyCode)) {
@@ -324,11 +324,11 @@ export default {
       }
 
       else if (this.autocomplete) {
-        const s = window.getSelection()
-
+        if (this.keyword && !this.showMenu && e.keyCode !== 13) this.openMenu()
         if ([8, 46].includes(e.keyCode)) { // Delete and backspace keys (delete forward).
+          const s = window.getSelection()
           // Prevent deleting beyond the first or last character (prevents JS errors when deleting boundary nodes).
-          const isDeletingBefore1stChar = e.keyCode === 8 && !s.focusOffset // 8 = delete key.
+          const isDeletingBefore1stChar = e.keyCode === 8 && (!s.focusOffset && !s.anchorOffset) // 8 = delete key.
           // const isDeletingAfterLastChar = e.keyCode === 46 && s.focusOffset >= s.focusNode.textContent.length // 46 = backspace key.
           if (isDeletingBefore1stChar) {
             this.inputValue.pop()
@@ -336,6 +336,11 @@ export default {
 
             e.preventDefault()
           }
+        }
+
+        else if (e.keyCode === 13) {
+          e.preventDefault()
+          this.openMenu()
         }
       }
     },
