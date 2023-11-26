@@ -1,23 +1,25 @@
 <template lang="pug">
 .autocomplete(:class="classes")
-  div.selection(v-if="selection" v-html="selection.name")
-  input(
+  .autocomplete__selection(v-if="selection" v-html="selection.name")
+  input.autocomplete__input(
     ref="input"
     v-model="keywords"
     @keydown="onKeydown")
-  ul.menu(ref="menu")
-    li(
-      v-for="(item, i) in filteredItems"
-      :key="i"
-      @click="selectItem(item)"
-      :class="{ 'highlighted': highlightedItem === item.uid }")
-      span(v-html="item.name")
+  w-transition-slide-fade(y)
+    ul.autocomplete__menu(v-if="menuOpen" ref="menu")
+      li(
+        v-for="(item, i) in filteredItems"
+        :key="i"
+        @click="selectItem(item)"
+        :class="{ 'highlighted': highlightedItem === item.uid }")
+        span(v-html="item.name")
 </template>
 
 <script>
 export default {
   props: {
-    items: { type: Array, required: true }
+    items: { type: Array, required: true },
+    value: { type: [String, Number] }
   },
 
   data: () => ({
@@ -54,7 +56,7 @@ export default {
     },
 
     highlightedItemIndex () {
-      if (this.highlightedItem === null) return null
+      if (this.highlightedItem === null) return -1
       return this.filteredItems.findIndex(item => item.uid === this.highlightedItem)
     },
 
@@ -79,35 +81,53 @@ export default {
 
     onKeydown (e) {
       const items = this.optimizedItemsForSearch
-      const itemsCount = items.length
-      if (!this.menuOpen) this.menuOpen = true
+      const itemsCount = this.filteredItems.length
+      if (!this.menuOpen) this.openMenu()
 
-      if (e.which === 8 && !this.keywords) this.selection = '' // Delete key.
-      else if (e.which === 13) { // Enter key.
+      // Delete key.
+      if (e.which === 8 && !this.keywords) this.selection = ''
+      // Enter key.
+      else if (e.which === 13) {
         e.preventDefault() // Prevent form submissions.
-        if (this.highlightedItemIndex !== null) this.selectItem(items[this.highlightedItemIndex])
+        if (this.highlightedItemIndex >= 0) this.selectItem(this.filteredItems[this.highlightedItemIndex])
       }
-      else if (e.which === 38 || e.which === 40) { // Up & down arrow keys.
+      // Up & down arrow keys.
+      else if (e.which === 38 || e.which === 40) {
         let index = this.highlightedItemIndex
-        if (index === null) index = e.which === 38 ? itemsCount - 1 : 0
+        if (index === -1) index = e.which === 38 ? itemsCount - 1 : 0
         else index = (index + (e.which === 38 ? -1 : 1) + itemsCount) % itemsCount // Never out of range.
 
-        this.highlightedItem = items[index].uid
+        this.highlightedItem = this.filteredItems[index].uid
 
         // Scroll the container if highlighted item is not in view.
         const menuEl = this.$refs.menu
-        const highlightedItemEl = menuEl.childNodes[index]
-        if (menuEl.scrollTop + menuEl.offsetHeight - highlightedItemEl.offsetHeight < highlightedItemEl.offsetTop) {
-          menuEl.scrollTop = highlightedItemEl.offsetTop - menuEl.offsetHeight + highlightedItemEl.offsetHeight
-        }
-        else if (menuEl.scrollTop > highlightedItemEl.offsetTop) {
-          menuEl.scrollTop = highlightedItemEl.offsetTop
+        if (menuEl) {
+          const { offsetHeight: itemElHeight, offsetTop: itemElTop } = menuEl.childNodes[index] || {}
+          if (menuEl.scrollTop + menuEl.offsetHeight - itemElHeight < itemElTop) {
+            menuEl.scrollTop = itemElTop - menuEl.offsetHeight + itemElHeight
+          }
+          else if (menuEl.scrollTop > itemElTop) menuEl.scrollTop = itemElTop
         }
       }
     },
 
+    openMenu () {
+      this.menuOpen = true
+      document.addEventListener('click', this.onDocumentClick)
+    },
+
     closeMenu () {
+      this.menuOpen = false
+      document.removeEventListener('click', this.onDocumentClick)
+    },
+
+    onDocumentClick (e) {
+      if (!this.$refs.menu.contains(e.target) && !this.$refs.input.contains(e.target)) this.closeMenu()
     }
+  },
+
+  created () {
+    if (this.value) this.selection = this.optimizedItemsForSearch.find(item => item.id === this.value)
   }
 }
 </script>
@@ -119,20 +139,32 @@ export default {
   position: relative;
   border-radius: 4px;
   border: 1px solid rgba(#000, 0.2);
-  padding: 4px 4px;
+  padding: 2px 4px;
 
-  .selection {
+  &--open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &__selection {
+    display: flex;
+    align-items: center;
     background: rgba(#000, 0.035);
     border: 1px solid rgba(#000, 0.05);
     border-radius: 4px;
-    padding: 1px 4px;
-  }
-  input {
-    width: 100%;
-    border: none;
+    padding: 0 2px 0 4px;
+    flex-shrink: 0;
   }
 
-  .menu {
+  &__input {
+    width: 100%;
+    color: inherit;
+    border: none;
+    background-color: transparent;
+    line-height: 18px;
+  }
+
+  &__menu {
     position: absolute;
     inset: 100% -1px auto;
     max-height: clamp(20px, 400px, 80vh);
