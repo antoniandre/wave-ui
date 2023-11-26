@@ -54,7 +54,7 @@ export default {
     },
 
     highlightedItemIndex () {
-      if (this.highlightedItem === null)  return null
+      if (this.highlightedItem === null) return null
       return this.filteredItems.findIndex(item => item.uid === this.highlightedItem)
     },
 
@@ -67,7 +67,7 @@ export default {
 
   methods: {
     normalize (string) {
-      return string.toLowerCase().normalize("NFKD").replace(/\p{Diacritic}/gu, '').replace(/œ/g, 'oe')
+      return string.toLowerCase().normalize('NFKD').replace(/\p{Diacritic}/gu, '').replace(/œ/g, 'oe')
     },
 
     // Selection can be made from click or enter key.
@@ -77,7 +77,34 @@ export default {
       this.$refs.input.focus()
     },
 
-    onKeydown () {},
+    onKeydown (e) {
+      const items = this.optimizedItemsForSearch
+      const itemsCount = items.length
+      if (!this.menuOpen) this.menuOpen = true
+
+      if (e.which === 8 && !this.keywords) this.selection = '' // Delete key.
+      else if (e.which === 13) { // Enter key.
+        e.preventDefault() // Prevent form submissions.
+        if (this.highlightedItemIndex !== null) this.selectItem(items[this.highlightedItemIndex])
+      }
+      else if (e.which === 38 || e.which === 40) { // Up & down arrow keys.
+        let index = this.highlightedItemIndex
+        if (index === null) index = e.which === 38 ? itemsCount - 1 : 0
+        else index = (index + (e.which === 38 ? -1 : 1) + itemsCount) % itemsCount // Never out of range.
+
+        this.highlightedItem = items[index].uid
+
+        // Scroll the container if highlighted item is not in view.
+        const menuEl = this.$refs.menu
+        const highlightedItemEl = menuEl.childNodes[index]
+        if (menuEl.scrollTop + menuEl.offsetHeight - highlightedItemEl.offsetHeight < highlightedItemEl.offsetTop) {
+          menuEl.scrollTop = highlightedItemEl.offsetTop - menuEl.offsetHeight + highlightedItemEl.offsetHeight
+        }
+        else if (menuEl.scrollTop > highlightedItemEl.offsetTop) {
+          menuEl.scrollTop = highlightedItemEl.offsetTop
+        }
+      }
+    },
 
     closeMenu () {
     }
