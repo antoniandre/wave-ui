@@ -1,17 +1,21 @@
 <template lang="pug">
 .autocomplete(:class="classes")
-  .autocomplete__selection(v-if="selection" v-html="selection.name")
+  .autocomplete__selection(v-if="selection")
+    span(v-html="selection.name")
+    w-button(@click="unselectItem" icon="i-cross" xs text color="currentColor")
+  .autocomplete__placeholder(v-if="!selection && !keywords && placeholder" v-html="placeholder")
   input.autocomplete__input(
     ref="input"
     v-model="keywords"
-    @keydown="onKeydown")
+    @keydown="onKeydown"
+    v-on="$listeners")
   w-transition-slide-fade(y)
     ul.autocomplete__menu(v-if="menuOpen" ref="menu")
       li(
         v-for="(item, i) in filteredItems"
         :key="i"
         @click="selectItem(item)"
-        :class="{ 'highlighted': highlightedItem === item.uid }")
+        :class="{ highlighted: highlightedItem === item.uid }")
         span(v-html="item.name")
 </template>
 
@@ -19,7 +23,8 @@
 export default {
   props: {
     items: { type: Array, required: true },
-    value: { type: [String, Number] }
+    value: { type: [String, Number] },
+    placeholder: { type: String }
   },
 
   data: () => ({
@@ -76,6 +81,16 @@ export default {
     selectItem (item) {
       this.selection = item
       this.highlightedItem = item.uid
+      this.keywords = ''
+      this.closeMenu()
+      this.$emit('input', item.id)
+      this.$refs.input.focus()
+    },
+
+    unselectItem () {
+      this.selection = null
+      this.highlightedItem = null
+      this.$emit('input', null)
       this.$refs.input.focus()
     },
 
@@ -128,6 +143,10 @@ export default {
 
   created () {
     if (this.value) this.selection = this.optimizedItemsForSearch.find(item => item.id === this.value)
+  },
+
+  beforeUnmount () {
+    document.removeEventListener('click', this.onDocumentClick)
   }
 }
 </script>
@@ -154,6 +173,9 @@ export default {
     border-radius: 4px;
     padding: 0 2px 0 4px;
     flex-shrink: 0;
+
+    span {margin-top: -1px;line-height: 1;}
+    .w-button .w-icon:before {font-size: 0.8em;line-height: 0;}
   }
 
   &__input {
@@ -161,6 +183,13 @@ export default {
     color: inherit;
     border: none;
     background-color: transparent;
+    line-height: 18px;
+  }
+
+  &__placeholder {
+    position: absolute;
+    color: #ccc;
+    pointer-events: none;
     line-height: 18px;
   }
 
