@@ -154,6 +154,7 @@ export default {
       if (!this.multiple && this.selection.length) e.preventDefault()
     },
 
+    // When starting a sequence of keys that produces a character.
     onCompositionStart (e) {
       // e.preventDefault() does not work. https://stackoverflow.com/a/77556830/2012407
       if (!this.multiple && this.selection.length) e.target.setAttribute('readonly', true)
