@@ -21,6 +21,9 @@
         @click.stop="selectItem(item)"
         :class="{ highlighted: highlightedItem === item.uid }")
         span(v-html="item.name")
+      li.autocomplete__no-match(v-if="!filteredItems.length" :class="{ 'autocomplete__no-match--default': !$slots.noMatch }")
+        slot(name="no-match")
+          .caption(v-html="noMatch ?? 'No match.'")
 </template>
 
 <script>
@@ -30,7 +33,8 @@ export default {
     value: { type: [String, Number] },
     placeholder: { type: String },
     openOnFocus: { type: Boolean },
-    multiple: { type: Boolean }
+    multiple: { type: Boolean },
+    noMatch: { type: String }
   },
 
   data: () => ({
@@ -251,9 +255,7 @@ export default {
       padding: 4px 8px;
       border-left: 2px solid transparent;
 
-      &:hover {
-        background-color: rgba($primary, 0.1);
-      }
+      &:hover {background-color: rgba($primary, 0.1);}
 
       &.highlighted {
         background-color: rgba($primary, 0.15);
@@ -262,4 +264,6 @@ export default {
     }
   }
 }
+
+li.autocomplete__no-match--default:hover {background-color: transparent;}
 </style>
