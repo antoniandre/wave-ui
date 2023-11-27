@@ -9,6 +9,9 @@
     v-model="keywords"
     @focus="onFocus"
     @keydown="onKeydown"
+    @drop="onDrop"
+    @compositionstart="onCompositionStart"
+    @compositionupdate="onCompositionUpdate"
     v-on="$listeners")
   w-transition-slide-fade(y)
     ul.autocomplete__menu(v-if="menuOpen" ref="menu")
@@ -26,7 +29,8 @@ export default {
     items: { type: Array, required: true },
     value: { type: [String, Number] },
     placeholder: { type: String },
-    openOnFocus: { type: Boolean }
+    openOnFocus: { type: Boolean },
+    multiple: { type: Boolean }
   },
 
   data: () => ({
@@ -54,12 +58,18 @@ export default {
     },
 
     filteredItems () {
-      if (!this.normalizedKeywords) return this.optimizedItemsForSearch
-      return this.optimizedItemsForSearch.filter(item => {
-        const containsSelection = this.selection && item.searchable.includes(this.normalizedSelection)
-        const containsKeywords = this.keywords && item.searchable.includes(this.normalizedKeywords)
-        return containsSelection || containsKeywords
-      })
+      if (this.multiple) {
+        // @todo.
+        return null
+      }
+      else {
+        if (!this.normalizedKeywords) return this.optimizedItemsForSearch
+        return this.optimizedItemsForSearch.filter(item => {
+          const containsSelection = this.selection && item.searchable.includes(this.normalizedSelection)
+          const containsKeywords = this.keywords && item.searchable.includes(this.normalizedKeywords)
+          return containsSelection || containsKeywords
+        })
+      }
     },
 
     highlightedItemIndex () {
@@ -101,7 +111,6 @@ export default {
     },
 
     onKeydown (e) {
-      const items = this.optimizedItemsForSearch
       const itemsCount = this.filteredItems.length
       if (!this.menuOpen) this.openMenu()
 
@@ -135,6 +144,22 @@ export default {
           else if (menuEl.scrollTop > itemElTop) menuEl.scrollTop = itemElTop
         }
       }
+
+      // `e.key.length === 1`: allow all control keys but no character creation.
+      else if (!this.multiple && this.selection && (e.key.length === 1)) e.preventDefault()
+    },
+
+    // On drag & drop of a text in the input field, don't paste if single selection and already selected.
+    onDrop (e) {
+      if (!this.multiple && this.selection) e.preventDefault()
+    },
+
+    onCompositionStart (e) {
+      // e.preventDefault() does not work. https://stackoverflow.com/a/77556830/2012407
+      if (!this.multiple && this.selection) e.target.setAttribute('readonly', true)
+    },
+    onCompositionUpdate (e) {
+      if (!this.multiple && this.selection) setTimeout(() => e.target.removeAttribute('readonly'), 200)
     },
 
     openMenu () {
