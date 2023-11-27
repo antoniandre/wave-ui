@@ -1,9 +1,10 @@
 <template lang="pug">
 .autocomplete(:class="classes")
-  .autocomplete__selection(v-if="selection" @click="$refs.input.focus()")
-    span(v-html="selection.name")
-    w-button(@click.stop="unselectItem" icon="i-cross" xs text color="currentColor")
-  .autocomplete__placeholder(v-if="!selection && !keywords && placeholder" v-html="placeholder")
+  template(v-if="selection.length")
+    .autocomplete__selection(v-for="(item, i) in selection" @click="$refs.input.focus()")
+      span(v-html="item.name")
+      w-button(@click.stop="unselectItem(i)" icon="i-cross" xs text color="currentColor")
+  .autocomplete__placeholder(v-if="!selection.length && !keywords && placeholder" v-html="placeholder")
   input.autocomplete__input(
     ref="input"
     v-model="keywords"
@@ -30,7 +31,7 @@
 export default {
   props: {
     items: { type: Array, required: true },
-    value: { type: [String, Number] },
+    value: { type: [String, Number, Array] }, // String or Number if single selections, Array if multiple.
     placeholder: { type: String },
     openOnFocus: { type: Boolean },
     multiple: { type: Boolean },
@@ -39,7 +40,7 @@ export default {
 
   data: () => ({
     keywords: '',
-    selection: '',
+    selection: [],
     menuOpen: false,
     highlightedItem: null
   }),
@@ -50,7 +51,7 @@ export default {
     },
 
     normalizedSelection () {
-      return this.normalize(this.selection?.searchable)
+      return this.selection.forEach(item => this.normalize(item?.searchable))
     },
 
     optimizedItemsForSearch () {
@@ -62,18 +63,12 @@ export default {
     },
 
     filteredItems () {
-      if (this.multiple) {
-        // @todo.
-        return null
-      }
-      else {
-        if (!this.normalizedKeywords) return this.optimizedItemsForSearch
-        return this.optimizedItemsForSearch.filter(item => {
-          const containsSelection = this.selection && item.searchable.includes(this.normalizedSelection)
-          const containsKeywords = this.keywords && item.searchable.includes(this.normalizedKeywords)
-          return containsSelection || containsKeywords
-        })
-      }
+      if (!this.normalizedKeywords) return this.optimizedItemsForSearch
+
+      return this.optimizedItemsForSearch.filter(item => {
+        const containsKeywords = this.keywords && item.searchable.includes(this.normalizedKeywords)
+        return containsKeywords
+      })
     },
 
     highlightedItemIndex () {
@@ -95,16 +90,17 @@ export default {
 
     // Selection can be made from click or enter key.
     selectItem (item) {
-      this.selection = item
+      if (!this.multiple) this.selection = []
+      this.selection.push(item)
       this.highlightedItem = item.uid
       this.keywords = ''
-      this.$emit('input', item.id)
+      this.$emit('input', this.multiple ? this.selection.map(item => item.id) : item.id)
       this.$refs.input.focus()
-      this.closeMenu()
+      if (!this.multiple) this.closeMenu()
     },
 
-    unselectItem () {
-      this.selection = null
+    unselectItem (i) {
+      this.selection.splice(i ?? this.selection.length - 1, 1)
       this.highlightedItem = null
       this.$emit('input', null)
       this.$refs.input.focus()
@@ -150,20 +146,20 @@ export default {
       }
 
       // `e.key.length === 1`: allow all control keys but no character creation.
-      else if (!this.multiple && this.selection && (e.key.length === 1)) e.preventDefault()
+      else if (!this.multiple && this.selection.length && (e.key.length === 1)) e.preventDefault()
     },
 
     // On drag & drop of a text in the input field, don't paste if single selection and already selected.
     onDrop (e) {
-      if (!this.multiple && this.selection) e.preventDefault()
+      if (!this.multiple && this.selection.length) e.preventDefault()
     },
 
     onCompositionStart (e) {
       // e.preventDefault() does not work. https://stackoverflow.com/a/77556830/2012407
-      if (!this.multiple && this.selection) e.target.setAttribute('readonly', true)
+      if (!this.multiple && this.selection.length) e.target.setAttribute('readonly', true)
     },
     onCompositionUpdate (e) {
-      if (!this.multiple && this.selection) setTimeout(() => e.target.removeAttribute('readonly'), 200)
+      if (!this.multiple && this.selection.length) setTimeout(() => e.target.removeAttribute('readonly'), 200)
     },
 
     openMenu () {
@@ -183,7 +179,12 @@ export default {
   },
 
   created () {
-    if (this.value) this.selection = this.optimizedItemsForSearch.find(item => item.id === this.value)
+    if (this.value) {
+      const arrayOfValues = Array.isArray(this.value) ? this.value : [this.value]
+      arrayOfValues.forEach(value => {
+        this.selection.push(this.optimizedItemsForSearch.find(item => item.id === +value))
+      })
+    }
   },
 
   beforeUnmount () {
@@ -195,6 +196,7 @@ export default {
 <style lang="scss">
 .autocomplete {
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
   position: relative;
   border-radius: 4px;
@@ -221,7 +223,8 @@ export default {
   }
 
   &__input {
-    width: 100%;
+    min-width: 0;
+    flex: 1 1 0;
     color: inherit;
     border: none;
     background-color: transparent;
