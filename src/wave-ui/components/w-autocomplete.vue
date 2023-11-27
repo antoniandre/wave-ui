@@ -1,12 +1,13 @@
 <template lang="pug">
 .autocomplete(:class="classes")
-  .autocomplete__selection(v-if="selection")
+  .autocomplete__selection(v-if="selection" @click="$refs.input.focus()")
     span(v-html="selection.name")
-    w-button(@click="unselectItem" icon="i-cross" xs text color="currentColor")
+    w-button(@click.stop="unselectItem" icon="i-cross" xs text color="currentColor")
   .autocomplete__placeholder(v-if="!selection && !keywords && placeholder" v-html="placeholder")
   input.autocomplete__input(
     ref="input"
     v-model="keywords"
+    @focus="onFocus"
     @keydown="onKeydown"
     v-on="$listeners")
   w-transition-slide-fade(y)
@@ -14,7 +15,7 @@
       li(
         v-for="(item, i) in filteredItems"
         :key="i"
-        @click="selectItem(item)"
+        @click.stop="selectItem(item)"
         :class="{ highlighted: highlightedItem === item.uid }")
         span(v-html="item.name")
 </template>
@@ -24,7 +25,8 @@ export default {
   props: {
     items: { type: Array, required: true },
     value: { type: [String, Number] },
-    placeholder: { type: String }
+    placeholder: { type: String },
+    openOnFocus: { type: Boolean }
   },
 
   data: () => ({
@@ -52,7 +54,7 @@ export default {
     },
 
     filteredItems () {
-      if (!this.selection && !this.normalizedKeywords) return this.optimizedItemsForSearch
+      if (!this.normalizedKeywords) return this.optimizedItemsForSearch
       return this.optimizedItemsForSearch.filter(item => {
         const containsSelection = this.selection && item.searchable.includes(this.normalizedSelection)
         const containsKeywords = this.keywords && item.searchable.includes(this.normalizedKeywords)
@@ -82,9 +84,9 @@ export default {
       this.selection = item
       this.highlightedItem = item.uid
       this.keywords = ''
-      this.closeMenu()
       this.$emit('input', item.id)
       this.$refs.input.focus()
+      this.closeMenu()
     },
 
     unselectItem () {
@@ -94,25 +96,34 @@ export default {
       this.$refs.input.focus()
     },
 
+    onFocus () {
+      if (this.openOnFocus) this.openMenu()
+    },
+
     onKeydown (e) {
       const items = this.optimizedItemsForSearch
       const itemsCount = this.filteredItems.length
       if (!this.menuOpen) this.openMenu()
 
       // Delete key.
-      if (e.which === 8 && !this.keywords) this.selection = ''
+      if (e.keyCode === 8 && (!this.keywords || (!e.target.selectionStart && !e.target.selectionEnd))) {
+        this.unselectItem()
+      }
+
       // Enter key.
-      else if (e.which === 13) {
+      else if (e.keyCode === 13) {
         e.preventDefault() // Prevent form submissions.
         if (this.highlightedItemIndex >= 0) this.selectItem(this.filteredItems[this.highlightedItemIndex])
       }
-      // Up & down arrow keys.
-      else if (e.which === 38 || e.which === 40) {
-        let index = this.highlightedItemIndex
-        if (index === -1) index = e.which === 38 ? itemsCount - 1 : 0
-        else index = (index + (e.which === 38 ? -1 : 1) + itemsCount) % itemsCount // Never out of range.
 
-        this.highlightedItem = this.filteredItems[index].uid
+      // Up & down arrow keys.
+      else if ([38, 40].includes(e.keyCode)) {
+        e.preventDefault() // Prevent moving the cursor to the left of the text while selecting item.
+        let index = this.highlightedItemIndex
+        if (index === -1) index = e.keyCode === 38 ? itemsCount - 1 : 0
+        else index = (index + (e.keyCode === 38 ? -1 : 1) + itemsCount) % itemsCount // Never out of range.
+
+        this.highlightedItem = this.filteredItems[index]?.uid || 0
 
         // Scroll the container if highlighted item is not in view.
         const menuEl = this.$refs.menu
@@ -127,6 +138,7 @@ export default {
     },
 
     openMenu () {
+      if (this.menuOpen) return
       this.menuOpen = true
       document.addEventListener('click', this.onDocumentClick)
     },
@@ -137,7 +149,7 @@ export default {
     },
 
     onDocumentClick (e) {
-      if (!this.$refs.menu.contains(e.target) && !this.$refs.input.contains(e.target)) this.closeMenu()
+      if (!this.$el.contains(e.target)) this.closeMenu()
     }
   },
 
@@ -159,6 +171,7 @@ export default {
   border-radius: 4px;
   border: 1px solid rgba(#000, 0.2);
   padding: 2px 4px;
+  user-select: none;
 
   &--open {
     border-bottom-left-radius: 0;
