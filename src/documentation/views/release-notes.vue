@@ -33,6 +33,22 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v3.8.0
+      ul
+        li
+          strong.code w-autocomplete
+          ul
+            li New component #[span.tag.new]
+        li
+          strong.code w-select
+          ul
+            li Updated the floating label CSS translation logic (no visual impact).
+        li
+          strong.code w-card
+          ul
+            li The card title now inherits the top left and right border radius.
+
+    li.patch
       strong.version v3.7.2
       ul
         li
