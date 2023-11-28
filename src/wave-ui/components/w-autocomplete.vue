@@ -132,7 +132,8 @@ export default {
 
     onKeydown (e) {
       const itemsCount = this.filteredItems.length
-      if (this.keywords && !this.menuOpen) this.openMenu()
+      // `e.key.length === 1`: is all the keyboard keys that generate a character.
+      if (!this.openOnKeydown || ((this.keywords || e.key.length === 1) && !this.menuOpen)) this.openMenu()
 
       // Delete key.
       if (e.keyCode === 8 && (!this.keywords || (!e.target.selectionStart && !e.target.selectionEnd))) {
