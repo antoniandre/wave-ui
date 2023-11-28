@@ -1,5 +1,5 @@
 <template lang="pug">
-.autocomplete(:class="classes" @click="$refs.input.focus()")
+.autocomplete(:class="classes" @click="onClick")
   template(v-if="selection.length")
     .autocomplete__selection(v-for="(item, i) in selection")
       span(v-html="item.name")
@@ -33,7 +33,7 @@ export default {
     items: { type: Array, required: true },
     value: { type: [String, Number, Array] }, // String or Number if single selections, Array if multiple.
     placeholder: { type: String },
-    openOnFocus: { type: Boolean },
+    openOnKeydown: { type: Boolean }, // By default the menu is always open for selection.
     multiple: { type: Boolean },
     // When multiple is on, prevents duplicate items selections by default, unless this is set to true.
     allowDuplicates: { type: Boolean },
@@ -121,8 +121,13 @@ export default {
       this.$refs.input.focus()
     },
 
+    onClick () {
+      if (!this.openOnKeydown) this.openMenu()
+      this.$refs.input.focus()
+    },
+
     onFocus () {
-      if (this.openOnFocus) this.openMenu()
+      if (!this.openOnKeydown) this.openMenu()
     },
 
     onKeydown (e) {
