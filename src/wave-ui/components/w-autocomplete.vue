@@ -2,7 +2,7 @@
 .autocomplete(:class="classes" @click="onClick")
   template(v-if="selection.length")
     .autocomplete__selection(v-for="(item, i) in selection")
-      span(v-html="item.name")
+      span(v-html="item[itemLabelKey]")
       w-button(@click.stop="unselectItem(i)" icon="i-cross" xs text color="currentColor")
   .autocomplete__placeholder(v-if="!selection.length && !keywords && placeholder" v-html="placeholder")
   input.autocomplete__input(
@@ -21,8 +21,10 @@
         :key="i"
         @click.stop="selectItem(item)"
         :class="{ highlighted: highlightedItem === item.uid }")
-        span(v-html="item.name")
-      li.autocomplete__no-match(v-if="!filteredItems.length" :class="{ 'autocomplete__no-match--default': !$slots.noMatch }")
+        span(v-html="item[itemLabelKey]")
+      li.autocomplete__no-match(
+        v-if="!filteredItems.length"
+        :class="{ 'autocomplete__no-match--default': !$slots.noMatch }")
         slot(name="no-match")
           .caption(v-html="noMatch ?? 'No match.'")
 </template>
@@ -37,7 +39,15 @@ export default {
     multiple: { type: Boolean },
     // When multiple is on, prevents duplicate items selections by default, unless this is set to true.
     allowDuplicates: { type: Boolean },
-    noMatch: { type: String }
+    noMatch: { type: String },
+    // Contains the unique selection value for each item.
+    // Can be a numeric ID, a slug, etc. (outside of Wave UI)
+    itemValueKey: { type: String, default: 'value' },
+    // Contains the string to display for each item.
+    itemLabelKey: { type: String, default: 'label' },
+    // Contains the string to search keywords into for each item.
+    // This can for instance be an aggregation of multiple fields (outside of Wave UI).
+    itemSearchableKey: { type: String, default: 'searchable' }
   },
 
   data: () => ({
@@ -54,6 +64,7 @@ export default {
     },
 
     // Keep the autocomplete matching as fast as possible by caching optimized search strings.
+    // An array of optimized strings.
     normalizedSelection () {
       return this.selection.map(item => this.normalize(item?.searchable))
     },
@@ -63,7 +74,7 @@ export default {
       return this.items.map((item, i) => ({
         ...item,
         uid: i,
-        searchable: `${this.normalize(item.name || '')},${item.keywords || ''}`
+        searchable: this.normalize(item[this.itemSearchableKey] || '')
       }))
     },
 
@@ -109,7 +120,7 @@ export default {
       this.selection.push(item)
       this.highlightedItem = item.uid
       this.keywords = ''
-      this.$emit('input', this.multiple ? this.selection.map(item => item.id) : item.id)
+      this.$emit('input', this.multiple ? this.selection.map(item => item[this.itemValueKey]) : item[this.itemValueKey])
       this.$refs.input.focus()
       if (!this.multiple) this.closeMenu()
     },
@@ -204,7 +215,7 @@ export default {
     if (this.value) {
       const arrayOfValues = Array.isArray(this.value) ? this.value : [this.value]
       arrayOfValues.forEach(value => {
-        this.selection.push(this.optimizedItemsForSearch.find(item => item.id === +value))
+        this.selection.push(this.optimizedItemsForSearch.find(item => item[this.itemValueKey] === +value))
       })
     }
   },
