@@ -1,7 +1,7 @@
 <template lang="pug">
-.autocomplete(:class="classes")
+.autocomplete(:class="classes" @click="$refs.input.focus()")
   template(v-if="selection.length")
-    .autocomplete__selection(v-for="(item, i) in selection" @click="$refs.input.focus()")
+    .autocomplete__selection(v-for="(item, i) in selection")
       span(v-html="item.name")
       w-button(@click.stop="unselectItem(i)" icon="i-cross" xs text color="currentColor")
   .autocomplete__placeholder(v-if="!selection.length && !keywords && placeholder" v-html="placeholder")
@@ -35,6 +35,8 @@ export default {
     placeholder: { type: String },
     openOnFocus: { type: Boolean },
     multiple: { type: Boolean },
+    // When multiple is on, prevents duplicate items selections by default, unless this is set to true.
+    allowDuplicates: { type: Boolean },
     noMatch: { type: String }
   },
 
@@ -46,14 +48,17 @@ export default {
   }),
 
   computed: {
+    // Keep the autocomplete matching as fast as possible by caching optimized search strings.
     normalizedKeywords () {
       return this.normalize(this.keywords)
     },
 
+    // Keep the autocomplete matching as fast as possible by caching optimized search strings.
     normalizedSelection () {
-      return this.selection.forEach(item => this.normalize(item?.searchable))
+      return this.selection.map(item => this.normalize(item?.searchable))
     },
 
+    // Keep the autocomplete matching as fast as possible by caching optimized search strings.
     optimizedItemsForSearch () {
       return this.items.map((item, i) => ({
         ...item,
@@ -63,12 +68,21 @@ export default {
     },
 
     filteredItems () {
-      if (!this.normalizedKeywords) return this.optimizedItemsForSearch
+      let items = this.optimizedItemsForSearch // Array of objects.
+      const selection = this.normalizedSelection.join(',') // Optimized string of coma separated words.
+      const isItemNotSelected = item => !selection.includes(item.searchable)
 
-      return this.optimizedItemsForSearch.filter(item => {
-        const containsKeywords = this.keywords && item.searchable.includes(this.normalizedKeywords)
-        return containsKeywords
-      })
+      if (this.keywords) {
+        items = items.filter(item => {
+          if (!item.searchable.includes(this.normalizedKeywords)) return false
+          else if (this.multiple && !this.allowDuplicates) return isItemNotSelected(item)
+          else return true
+        })
+      }
+
+      else if (this.multiple && !this.allowDuplicates) items = items.filter(isItemNotSelected)
+
+      return items
     },
 
     highlightedItemIndex () {
@@ -84,6 +98,7 @@ export default {
   },
 
   methods: {
+    // Replace all the accents and non-latin characters with equivalent letters. E.g. é -> e.
     normalize (string) {
       return string.toLowerCase().normalize('NFKD').replace(/\p{Diacritic}/gu, '').replace(/œ/g, 'oe')
     },
@@ -175,7 +190,7 @@ export default {
     },
 
     onDocumentClick (e) {
-      if (!this.$el.contains(e.target)) this.closeMenu()
+      if (!this.$el.contains(e.target) && !this.$el.isSameNode(e.target)) this.closeMenu()
     }
   },
 
