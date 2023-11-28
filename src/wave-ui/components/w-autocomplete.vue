@@ -1,11 +1,11 @@
 <template lang="pug">
-.autocomplete(:class="classes" @click="onClick")
+.w-autocomplete(:class="classes" @click="onClick")
   template(v-if="selection.length")
-    .autocomplete__selection(v-for="(item, i) in selection")
+    .w-autocomplete__selection(v-for="(item, i) in selection")
       span(v-html="item[itemLabelKey]")
       w-button(@click.stop="unselectItem(i)" icon="i-cross" xs text color="currentColor")
-  .autocomplete__placeholder(v-if="!selection.length && !keywords && placeholder" v-html="placeholder")
-  input.autocomplete__input(
+  .w-autocomplete__placeholder(v-if="!selection.length && !keywords && placeholder" v-html="placeholder")
+  input.w-autocomplete__input(
     ref="input"
     v-model="keywords"
     @focus="onFocus"
@@ -15,25 +15,27 @@
     @compositionupdate="onCompositionUpdate"
     v-on="$listeners")
   w-transition-slide-fade(y)
-    ul.autocomplete__menu(v-if="menuOpen" ref="menu")
+    ul.w-autocomplete__menu(v-if="menuOpen" ref="menu")
       li(
         v-for="(item, i) in filteredItems"
         :key="i"
         @click.stop="selectItem(item)"
         :class="{ highlighted: highlightedItem === item.uid }")
         span(v-html="item[itemLabelKey]")
-      li.autocomplete__no-match(
+      li.w-autocomplete__no-match(
         v-if="!filteredItems.length"
-        :class="{ 'autocomplete__no-match--default': !$slots.noMatch }")
+        :class="{ 'w-autocomplete__no-match--default': !$slots.noMatch }")
         slot(name="no-match")
           .caption(v-html="noMatch ?? 'No match.'")
 </template>
 
 <script>
 export default {
+  name: 'w-autocomplete',
+
   props: {
     items: { type: Array, required: true },
-    value: { type: [String, Number, Array] }, // String or Number if single selections, Array if multiple.
+    modelValue: { type: [String, Number, Array] }, // String or Number if single selections, Array if multiple.
     placeholder: { type: String },
     openOnKeydown: { type: Boolean }, // By default the menu is always open for selection.
     multiple: { type: Boolean },
@@ -49,6 +51,8 @@ export default {
     // This can for instance be an aggregation of multiple fields (outside of Wave UI).
     itemSearchableKey: { type: String, default: 'searchable' }
   },
+
+  emits: ['input'],
 
   data: () => ({
     keywords: '',
@@ -103,7 +107,7 @@ export default {
 
     classes () {
       return {
-        'autocomplete--open': this.menuOpen
+        'w-autocomplete--open': this.menuOpen
       }
     }
   },
@@ -212,8 +216,8 @@ export default {
   },
 
   created () {
-    if (this.value) {
-      const arrayOfValues = Array.isArray(this.value) ? this.value : [this.value]
+    if (this.modelValue) {
+      const arrayOfValues = Array.isArray(this.modelValue) ? this.modelValue : [this.modelValue]
       arrayOfValues.forEach(value => {
         this.selection.push(this.optimizedItemsForSearch.find(item => item[this.itemValueKey] === +value))
       })
@@ -227,7 +231,7 @@ export default {
 </script>
 
 <style lang="scss">
-.autocomplete {
+.w-autocomplete {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
@@ -301,5 +305,5 @@ export default {
   }
 }
 
-li.autocomplete__no-match--default:hover {background-color: transparent;}
+li.w-autocomplete__no-match--default:hover {background-color: transparent;}
 </style>
