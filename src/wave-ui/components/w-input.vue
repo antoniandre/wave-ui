@@ -79,7 +79,6 @@ component(
       template(v-if="labelPosition === 'inside' && showLabelInside")
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
           v-if="$slots.default || label"
-          :for="`w-input--${_.uid}`"
           :class="labelClasses")
           slot {{ label }}
 
