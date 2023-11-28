@@ -24,7 +24,7 @@ component(
     custom
     min-width="activator"
     v-bind="menuProps || {}")
-    template(#activator="{ on }")
+    template(#activator)
       //- Input wrapper.
       .w-select__selection-wrap(
         @click="!isDisabled && !isReadonly && onInputFieldClick()"
@@ -43,16 +43,11 @@ component(
           slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
         .w-select__selection(
           ref="selection-input"
-          :contenteditable="isDisabled || isReadonly ? 'false' : 'true'"
           @focus="!isDisabled && !isReadonly && onFocus($event)"
           @blur="onBlur"
           @keydown="!isDisabled && !isReadonly && onKeydown($event)"
-          :class="{ 'w-select__selection--placeholder': !$slots.selection && !selectionString && placeholder }"
-          :disabled="isDisabled || null"
-          readonly
-          aria-readonly="true"
-          :tabindex="tabindex || null"
-          v-html="$slots.selection ? '' : selectionString || placeholder")
+          v-bind="selectionAttributes"
+          v-html="selectionHtml")
         //- For standard HTML form submission.
         input(
           v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
@@ -87,7 +82,7 @@ component(
       :item-color-key="itemColorKey"
       role="listbox"
       tabindex="-1")
-      template(v-for="i in items.length" v-slot:[`item.${i}`]="{ item, selected, index }")
+      template(v-for="i in items.length" #[`item.${i}`]="{ item, selected, index }")
         slot(
           v-if="$slots[`item.${i}`] && $slots[`item.${i}`](item, selected, index)"
           :name="`item.${i}`"
@@ -178,19 +173,31 @@ export default {
         return obj
       })
     },
-    hasValue () {
-      return Array.isArray(this.inputValue) ? this.inputValue.length : (this.inputValue !== null)
-    },
     hasLabel () {
       return this.label || this.$slots.default
     },
     showLabelInside () {
-      return !this.staticLabel || (!this.hasValue && !this.placeholder)
+      return !this.staticLabel || (!this.inputValue.length && !this.placeholder)
+    },
+    selectionAttributes () {
+      return {
+        class: { 'w-select__selection--placeholder': !this.$slots.selection && !this.selectionString && this.placeholder },
+        disabled: this.isDisabled || null,
+        readonly: true,
+        ariareadonly: 'true',
+        tabindex: this.tabindex ?? null,
+        contenteditable: this.isDisabled || this.isReadonly ? 'false' : 'true'
+      }
     },
     selectionString () {
-      return this.inputValue && this.inputValue.map(
+      return this.inputValue.map(
         item => item[this.itemValueKey] !== undefined ? item[this.itemLabelKey] : (item[this.itemLabelKey] ?? item)
       ).join(', ')
+    },
+    selectionHtml () {
+      if (!this.inputValue.length) return this.placeholder || ''
+      if (this.$slots.selection) return ''
+      return this.selectionString
     },
     classes () {
       return {
@@ -200,7 +207,7 @@ export default {
         'w-select--disabled': this.isDisabled,
         'w-select--fit-to-content': this.fitToContent,
         'w-select--readonly': this.isReadonly,
-        [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
+        [`w-select--${this.inputValue.length ? 'filled' : 'empty'}`]: true,
         'w-select--focused': (this.isFocused || this.showMenu) && !this.isReadonly,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
@@ -298,7 +305,7 @@ export default {
     onInput (items) {
       this.inputValue = items === null ? [] : (this.multiple ? items : [items])
       // Return the original items when returnObject is true (no `value` if there wasn't),
-      // or the the item value otherwise.
+      // or the item value otherwise.
       items = this.inputValue.map(item => this.returnObject ? this.items[item.index] : item.value)
 
       // Emit the selection to the v-model.
@@ -307,6 +314,7 @@ export default {
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
     },
+
     onInputFieldClick () {
       if (this.showMenu) this.showMenu = false // Will call `closeMenu()` from w-menu(@close).
       else this.openMenu()
@@ -339,7 +347,7 @@ export default {
       return items.map(item => {
         let value = item
         if (item && typeof item === 'object') { // `null` is also an object!
-          value = item[this.itemValueKey] !== undefined ? item[this.itemValueKey] : (item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item)
+          value = item[this.itemValueKey] ?? item[this.itemLabelKey] ?? item
         }
 
         return this.selectItems[allValues.indexOf(value)]
@@ -475,6 +483,8 @@ export default {
     cursor: pointer;
     caret-color: transparent;
 
+    &--placeholder {color: #888;}
+
     .w-select__selection-slot + & {
       position: absolute;
       top: 0;
@@ -500,8 +510,6 @@ export default {
     }
 
     .w-select--readonly & {cursor: auto;}
-
-    &--placeholder {color: #888;}
   }
 
   &__selection-slot {
