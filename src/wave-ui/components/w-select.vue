@@ -482,6 +482,7 @@ export default {
     align-items: center;
     cursor: pointer;
     caret-color: transparent;
+    border-radius: inherit;
 
     &--placeholder {color: #888;}
 
@@ -571,14 +572,12 @@ export default {
 
   &__label--inside {
     position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
+    inset: 0 0 auto;
+    min-height: inherit;
     white-space: nowrap;
     // Use margin instead of padding as the scale transformation below decreases the real padding
     // size and misaligns the label.
     margin-left: 2 * $base-increment;
-    transform: translateY(-50%);
     pointer-events: none;
 
     .w-select--inner-icon-right & {padding-right: 26px;}
@@ -602,21 +601,15 @@ export default {
     .w-select--open.w-select--floating-label &,
     .w-select--filled.w-select--floating-label &,
     .w-select--has-placeholder.w-select--floating-label & {
-      transform: translateY(-160%) scale(0.85);
+      transform: translateY(-80%) scale(0.85);
     }
-    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+    // Chrome & Safari - Must stay a separated rule or Firefox discards the whole rule seeing -webkit-.
     .w-select--floating-label .w-select__select:-webkit-autofill & {
-      transform: translateY(-160%) scale(0.85);
-    }
-    // Move label with outline style or with shadow.
-    .w-select--open.w-select--floating-label .w-select__selection-wrap--box &,
-    .w-select--filled.w-select--floating-label .w-select__selection-wrap--box &,
-    .w-select--has-placeholder.w-select--floating-label .w-select__selection-wrap--box & {
-      transform: translateY(-180%) scale(0.85);
+      transform: translateY(-80%) scale(0.85);
     }
     .w-select--open.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
-    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+    // Chrome & Safari - Must stay a separated rule or Firefox discards the whole rule seeing -webkit-.
     .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
   }
 
