@@ -32,13 +32,17 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
-    li.patch
+    li.minor
       strong.version v3.8.0
       ul
         li
           strong.code w-autocomplete
           ul
             li New component #[span.tag.new]
+        li
+          strong.code w-input
+          ul
+            li Added #[code icon-left] and #[code icon-right] slots. #[span.tag.new]
         li
           strong.code w-select
           ul
