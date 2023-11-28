@@ -20,11 +20,12 @@ component(
 
     //- Input wrapper.
     .w-input__input-wrap(:class="inputWrapClasses")
-      w-icon.w-input__icon.w-input__icon--inner-left(
-        v-if="innerIconLeft"
-        tag="label"
-        :for="`w-input--${_.uid}`"
-        @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
+      slot(name="icon-left" :input-id="`w-input--${_.uid}`")
+        w-icon.w-input__icon.w-input__icon--inner-left(
+          v-if="innerIconLeft"
+          tag="label"
+          :for="`w-input--${_.uid}`"
+          @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
       //- All types of input except file.
       input.w-input__input(
         v-if="type !== 'file'"
@@ -81,11 +82,13 @@ component(
           :for="`w-input--${_.uid}`"
           :class="labelClasses")
           slot {{ label }}
-      w-icon.w-input__icon.w-input__icon--inner-right(
-        v-if="innerIconRight"
-        tag="label"
-        :for="`w-input--${_.uid}`"
-        @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
+
+      slot(name="icon-right" :input-id="`w-input--${_.uid}`")
+        w-icon.w-input__icon.w-input__icon--inner-right(
+          v-if="innerIconRight"
+          tag="label"
+          :for="`w-input--${_.uid}`"
+          @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
       w-progress.fill-width(
         v-if="hasLoading || (showProgress && (uploadInProgress || uploadComplete))"
