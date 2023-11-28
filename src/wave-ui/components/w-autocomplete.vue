@@ -132,7 +132,7 @@ export default {
 
     onKeydown (e) {
       const itemsCount = this.filteredItems.length
-      if (!this.menuOpen) this.openMenu()
+      if (this.keywords && !this.menuOpen) this.openMenu()
 
       // Delete key.
       if (e.keyCode === 8 && (!this.keywords || (!e.target.selectionStart && !e.target.selectionEnd))) {
