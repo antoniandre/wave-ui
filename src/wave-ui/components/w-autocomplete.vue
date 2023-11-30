@@ -7,13 +7,8 @@
   .w-autocomplete__placeholder(v-if="!selection.length && !keywords && placeholder" v-html="placeholder")
   input.w-autocomplete__input(
     ref="input"
-    v-model="keywords"
-    @focus="onFocus"
-    @keydown="onKeydown"
-    @drop="onDrop"
-    @compositionstart="onCompositionStart"
-    @compositionupdate="onCompositionUpdate"
-    v-on="$listeners")
+    :model-value="keywords"
+    v-on="inputEventListeners")
   w-transition-slide-fade(y)
     ul.w-autocomplete__menu(v-if="menuOpen" ref="menu")
       li(
@@ -103,6 +98,21 @@ export default {
     highlightedItemIndex () {
       if (this.highlightedItem === null) return -1
       return this.filteredItems.findIndex(item => item.uid === this.highlightedItem)
+    },
+
+    inputEventListeners () {
+      return {
+        ...this.$attrs,
+        input: e => {
+          this.keywords = e.target.value
+          if (typeof this.$attrs.input === 'function') this.$attrs.input(this.keywords)
+        },
+        focus: this.onFocus,
+        keydown: this.onKeydown,
+        drop: this.onDrop,
+        compositionstart: this.onCompositionStart,
+        compositionupdate: this.onCompositionUpdate
+      }
     },
 
     classes () {
