@@ -117,7 +117,10 @@ export default {
 
     classes () {
       return {
-        'w-autocomplete--open': this.menuOpen
+        'w-autocomplete--open': this.menuOpen,
+        'w-autocomplete--filled': this.selection.length,
+        'w-autocomplete--has-keywords': this.keywords,
+        'w-autocomplete--empty': !this.selection.length && !this.keywords
       }
     }
   },
@@ -155,13 +158,23 @@ export default {
       if (!this.openOnKeydown) this.openMenu()
     },
 
+    // Can be triggered by a click outside the autocomplete, or by a tab key.
+    // It should not be simply triggered by input blur, because when we click a menu item it will
+    // blur the input for a few ms before we refocus it.
+    // onBlur () {
+    //   this.closeMenu()
+    // },
+
     onKeydown (e) {
       const itemsCount = this.filteredItems.length
       // `e.key.length === 1`: is all the keyboard keys that generate a character.
       if (!this.openOnKeydown || ((this.keywords || e.key.length === 1) && !this.menuOpen)) this.openMenu()
 
+      // Tab key.
+      if (e.keyCode === 9) this.closeMenu()
+
       // Delete key.
-      if (e.keyCode === 8 && (!this.keywords || (!e.target.selectionStart && !e.target.selectionEnd))) {
+      else if (e.keyCode === 8 && (!this.keywords || (!e.target.selectionStart && !e.target.selectionEnd))) {
         this.unselectItem()
       }
 
@@ -279,7 +292,6 @@ export default {
   }
 
   &__placeholder {
-    position: absolute;
     color: #ccc;
     pointer-events: none;
     line-height: 18px;
