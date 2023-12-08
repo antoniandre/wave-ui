@@ -1019,5 +1019,19 @@ $tr-border-top: 1px;
     td {display: table-cell;}
     td:before {display: none;}
   }
+
+  .w-table__footer {
+    .w-table__pagination-wrap {
+      .w-table__cell:before {display: none;}
+      .w-table__cell {
+        justify-content: center;
+
+        .w-table__pagination {
+          flex-direction: column;
+          gap: 0.5 * $base-increment;
+        }
+      }
+    }
+  }
 }
 </style>
