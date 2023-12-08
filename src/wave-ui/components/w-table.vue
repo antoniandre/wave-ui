@@ -979,6 +979,7 @@ $tr-border-top: 1px;
 // Mobile layout.
 .w-table--mobile {
   display: flex;
+  flex-direction: column;
 
   thead {display: none;}
   tbody {
