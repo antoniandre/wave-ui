@@ -29,6 +29,11 @@ div
   example(content-class="py12")
     w-autocomplete.mb12(:items="chemicalElement")
     template(#pug).
+
+  title-link(h2) Placeholder
+  example(content-class="py12")
+    w-autocomplete.mb12(:items="chemicalElement" placeholder="select an element")
+    template(#pug).
 </template>
 
 <script>
