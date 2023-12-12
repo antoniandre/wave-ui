@@ -3,7 +3,7 @@
   template(v-if="selection.length")
     .w-autocomplete__selection(v-for="(item, i) in selection")
       span(v-html="item[itemLabelKey]")
-      w-button(@click.stop="unselectItem(i)" icon="i-cross" xs text color="currentColor")
+      w-button(@click.stop="unselectItem(i)" icon="wi-cross" xs text)
   .w-autocomplete__placeholder(v-if="!selection.length && !keywords && placeholder" v-html="placeholder")
   input.w-autocomplete__input(
     ref="input"
@@ -260,7 +260,7 @@ export default {
   gap: 4px;
   position: relative;
   border-radius: 4px;
-  border: 1px solid rgba(#000, 0.2);
+  border: $border;
   padding: 2px 4px;
   user-select: none;
 
@@ -272,8 +272,8 @@ export default {
   &__selection {
     display: flex;
     align-items: center;
-    background: rgba(#000, 0.035);
-    border: 1px solid rgba(#000, 0.05);
+    background: rgba(var(--w-contrast-bg-color-rgb), 0.035);
+    border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.05);
     border-radius: 4px;
     padding: 0 2px 0 4px;
     flex-shrink: 0;
@@ -292,7 +292,7 @@ export default {
   }
 
   &__placeholder {
-    color: #ccc;
+    color: rgba(var(--w-base-color-rgb), 0.5);
     pointer-events: none;
     line-height: 18px;
   }
@@ -303,8 +303,8 @@ export default {
     max-height: clamp(20px, 400px, 80vh);
     margin-top: -1px;
     margin-left: 0;
-    background-color: #fff;
-    border: 1px solid rgba(#000, 0.2);
+    background-color: $base-bg-color;
+    border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.2);
     border-top: none;
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
@@ -312,16 +312,28 @@ export default {
     z-index: 10;
 
     li {
+      position: relative;
       list-style-type: none;
       margin: 0;
       padding: 4px 8px;
-      border-left: 2px solid transparent;
 
       &:hover {background-color: rgba($primary, 0.1);}
 
-      &.highlighted {
-        background-color: rgba($primary, 0.15);
-        border-left-color: rgba($primary, 0.75);
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+      }
+
+      &.highlighted:before {
+        border-left: 2px solid transparent;
+        border-left-color: $primary;
+        opacity: 0.3;
+      }
+
+      &.highlighted:after {
+        background-color: $primary;
+        opacity: 0.1;
       }
     }
   }
