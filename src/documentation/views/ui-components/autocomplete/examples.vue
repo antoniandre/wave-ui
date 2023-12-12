@@ -26,14 +26,59 @@ div
         .number.code 24
       .primary.mt1 Chromium
 
-  example(content-class="py12")
+  example(content-class="py12" :blank-codepen="['js']")
     w-autocomplete.mb12(:items="chemicalElement")
     template(#pug).
+      w-autocomplete.mb12(:items="chemicalElement")
+    template(#html).
+      &lt;w-autocomplete :items="chemicalElement" class="mb12"&gt;
+      &lt;/w-autocomplete&gt;
+    template(#js).
+      import { faker } from '@faker-js/faker'
+
+      const app = Vue.createApp({
+        data: () => ({
+          chemicalElement: faker.definitions.science.chemicalElement.map(element => {
+            return {
+              value: element.symbol,
+              label: element.name,
+              searchable: `${element.symbol}, ${element.name}, ${element.atomicNumber}`
+            }
+          })
+        })
+      })
+
+      app.use(WaveUI)
+      app.mount('#app')
 
   title-link(h2) Placeholder
-  example(content-class="py12")
+  example(content-class="py12" :blank-codepen="['js']")
     w-autocomplete.mb12(:items="chemicalElement" placeholder="select an element")
     template(#pug).
+      w-autocomplete.mb12(:items="chemicalElement" placeholder="select an element")
+    template(#html).
+      &lt;w-autocomplete
+        :items="chemicalElement"
+        placeholder="select an element"
+        class="mb12"&gt;
+      &lt;/w-autocomplete&gt;
+    template(#js).
+      import { faker } from '@faker-js/faker'
+
+      const app = Vue.createApp({
+        data: () => ({
+          chemicalElement: faker.definitions.science.chemicalElement.map(element => {
+            return {
+              value: element.symbol,
+              label: element.name,
+              searchable: `${element.symbol}, ${element.name}, ${element.atomicNumber}`
+            }
+          })
+        })
+      })
+
+      app.use(WaveUI)
+      app.mount('#app')
 </template>
 
 <script>
@@ -42,7 +87,6 @@ import { faker } from '@faker-js/faker'
 export default {
   data: () => ({
     chemicalElement: faker.definitions.science.chemicalElement.map(element => {
-      console.log(element)
       return {
         value: element.symbol,
         label: element.name,
