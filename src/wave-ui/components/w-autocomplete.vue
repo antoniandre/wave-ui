@@ -5,10 +5,12 @@
       slot(name="selection" :item="item" :unselect="i => unselectItem(i)")
         span(v-html="item[itemLabelKey]")
         w-button(@click.stop="unselectItem(i)" icon="wi-cross" xs text color="currentColor")
-  .w-autocomplete__placeholder(v-if="!selection.length && !keywords && placeholder" v-html="placeholder")
+  .w-autocomplete__placeholder(
+    v-if="!selection.length && !keywords && placeholder"
+    v-html="placeholder")
   input.w-autocomplete__input(
     ref="input"
-    :model-value="keywords"
+    :value="keywords"
     v-on="inputEventListeners")
   w-transition-slide-fade
     ul.w-autocomplete__menu(
