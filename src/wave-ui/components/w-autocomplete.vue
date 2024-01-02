@@ -168,7 +168,7 @@ export default {
       this.keywords = ''
       const emitPayload = this.multiple ? this.selection.map(item => item[this.itemValueKey]) : item[this.itemValueKey]
       // Unlike input, item-select is only emitted when selecting (not unselecting).
-      this.$emit('item-select', item[this.itemValueKey])
+      this.$emit('item-select', item)
       this.$emit('update:modelValue', emitPayload)
       this.$emit('input', emitPayload)
       this.$refs.input.focus()

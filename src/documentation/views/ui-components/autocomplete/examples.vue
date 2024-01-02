@@ -1,5 +1,12 @@
 <template lang="pug">
 div
+  alert(info)
+    .title3 Caveat:
+    p.
+      The #[strong.code w-autocomplete] component is mounted in place in the DOM. At the moment
+      there is no option to teleport it elsewhere, so if the parent has hidden overflow, the
+      autocomplete selection menu may be cut. If you need this feature, please open an issue.
+
   title-link(h2) Default
   p In this example we can look for a chemical element in the list and select it.
   p.
