@@ -30,6 +30,11 @@
         :class="{ 'w-autocomplete__no-match--default': !$slots.noMatch }")
         slot(name="no-match")
           .caption(v-html="noMatch ?? 'No match.'")
+      li.w-autocomplete__extra-item(
+        v-if="$slots['extra-item']"
+        @click="selectExtraItem"
+        :class="{ highlighted: highlightedItem === 'extra-item' }")
+        slot(name="extra-item")
 </template>
 
 <script>
@@ -109,6 +114,7 @@ export default {
 
     highlightedItemIndex () {
       if (this.highlightedItem === null) return -1
+      else if (this.highlightedItem === 'extra-item') return this.filteredItems.length
       return this.filteredItems.findIndex(item => item.uid === this.highlightedItem)
     },
 
@@ -177,6 +183,12 @@ export default {
       this.$refs.input.focus()
     },
 
+    selectExtraItem () {
+      this.keywords = ''
+      this.$emit('extra-item-select')
+      this.closeMenu()
+    },
+
     setEndOfMenuClick () {
       setTimeout(() => (this.menuIsBeingClicked = false), 100)
     },
@@ -198,7 +210,7 @@ export default {
     // },
 
     onKeydown (e) {
-      const itemsCount = this.filteredItems.length
+      const itemsCount = this.filteredItems.length + (this.$slots['extra-item'] ? 1 : 0)
       // `e.key.length === 1`: is all the keyboard keys that generate a character.
       if (!this.openOnKeydown || ((this.keywords || e.key.length === 1) && !this.menuOpen)) this.openMenu()
 
@@ -213,7 +225,8 @@ export default {
       // Enter key.
       else if (e.keyCode === 13) {
         e.preventDefault() // Prevent form submissions.
-        if (this.highlightedItemIndex >= 0) this.selectItem(this.filteredItems[this.highlightedItemIndex])
+        if (this.highlightedItem === 'extra-item') this.selectExtraItem()
+        else if (this.highlightedItemIndex >= 0) this.selectItem(this.filteredItems[this.highlightedItemIndex])
       }
 
       // Up & down arrow keys.
@@ -223,16 +236,20 @@ export default {
         if (index === -1) index = e.keyCode === 38 ? itemsCount - 1 : 0
         else index = (index + (e.keyCode === 38 ? -1 : 1) + itemsCount) % itemsCount // Never out of range.
 
-        this.highlightedItem = this.filteredItems[index]?.uid || 0
+        if (this.$slots['extra-item'] && index === itemsCount - 1) this.highlightedItem = 'extra-item'
+        else this.highlightedItem = this.filteredItems[index]?.uid || 0
 
         // Scroll the container if highlighted item is not in view.
         const menuEl = this.$refs.menu
         if (menuEl) {
-          const { offsetHeight: itemElHeight, offsetTop: itemElTop } = menuEl.childNodes[index] || {}
-          if (menuEl.scrollTop + menuEl.offsetHeight - itemElHeight < itemElTop) {
-            menuEl.scrollTop = itemElTop - menuEl.offsetHeight + itemElHeight
+          if (this.$slots['extra-item'] && index === itemsCount - 1) menuEl.scrollTop = menuEl.scrollHeight
+          else {
+            const { offsetHeight: itemElHeight, offsetTop: itemElTop } = menuEl.childNodes[index] || {}
+            if (menuEl.scrollTop + menuEl.offsetHeight - itemElHeight < itemElTop) {
+              menuEl.scrollTop = itemElTop - menuEl.offsetHeight + itemElHeight
+            }
+            else if (menuEl.scrollTop > itemElTop) menuEl.scrollTop = itemElTop
           }
-          else if (menuEl.scrollTop > itemElTop) menuEl.scrollTop = itemElTop
         }
       }
 
@@ -303,7 +320,7 @@ export default {
   flex-wrap: wrap;
   gap: 4px;
   position: relative;
-  border-radius: 4px;
+  border-radius: $border-radius;
   border: $border;
   padding: 2px 4px;
   user-select: none;
@@ -318,7 +335,7 @@ export default {
     align-items: center;
     background: rgba(var(--w-contrast-bg-color-rgb), 0.035);
     border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.05);
-    border-radius: 4px;
+    border-radius: $border-radius;
     padding: 0 2px 0 4px;
     flex-shrink: 0;
 
@@ -350,8 +367,8 @@ export default {
     background-color: $base-bg-color;
     border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.2);
     border-top: none;
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
     overflow: auto;
     z-index: 10;
 
