@@ -2,8 +2,9 @@
 .w-autocomplete(:class="classes" @click="onClick")
   template(v-if="selection.length")
     .w-autocomplete__selection(v-for="(item, i) in selection")
-      span(v-html="item[itemLabelKey]")
-      w-button(@click.stop="unselectItem(i)" icon="wi-cross" xs text)
+      slot(name="selection" :item="item" :unselect="i => unselectItem(i)")
+        span(v-html="item[itemLabelKey]")
+        w-button(@click.stop="unselectItem(i)" icon="wi-cross" xs text color="currentColor")
   .w-autocomplete__placeholder(v-if="!selection.length && !keywords && placeholder" v-html="placeholder")
   input.w-autocomplete__input(
     ref="input"
@@ -16,7 +17,8 @@
         :key="i"
         @click.stop="selectItem(item)"
         :class="{ highlighted: highlightedItem === item.uid }")
-        span(v-html="item[itemLabelKey]")
+        slot(name="item" :item="item" :highlighted="highlightedItem === item.uid")
+          span(v-html="item[itemLabelKey]")
       li.w-autocomplete__no-match(
         v-if="!filteredItems.length"
         :class="{ 'w-autocomplete__no-match--default': !$slots.noMatch }")
