@@ -33,7 +33,7 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
-      strong.version v3.8.2
+      strong.version v3.9.0
       ul
         li
           strong.code w-autocomplete
