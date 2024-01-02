@@ -10,13 +10,13 @@ component(
   template(v-if="labelPosition === 'left'")
     label.w-select__label.w-select__label--left.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-select--${_.uid}`"
+      @click="$refs['selection-input'].click()"
       :class="labelClasses")
       slot {{ label }}
 
   w-menu(
     v-model="showMenu"
-    @close="!$event && closeMenu()"
+    @close="closeMenu"
     :menu-class="`w-select__menu ${menuClass || ''}`"
     transition="slide-fade-down"
     :append-to="(menuProps || {}).appendTo !== undefined ? (menuProps || {}).appendTo : undefined"
@@ -24,7 +24,7 @@ component(
     custom
     min-width="activator"
     v-bind="menuProps || {}")
-    template(#activator="{ on }")
+    template(#activator)
       //- Input wrapper.
       .w-select__selection-wrap(
         @click="!isDisabled && !isReadonly && onInputFieldClick()"
@@ -43,17 +43,11 @@ component(
           slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
         .w-select__selection(
           ref="selection-input"
-          :contenteditable="isDisabled || isReadonly ? 'false' : 'true'"
           @focus="!isDisabled && !isReadonly && onFocus($event)"
           @blur="onBlur"
           @keydown="!isDisabled && !isReadonly && onKeydown($event)"
-          :id="`w-select--${_.uid}`"
-          :class="{ 'w-select__selection--placeholder': !$slots.selection && !selectionString && placeholder }"
-          :disabled="isDisabled || null"
-          readonly
-          aria-readonly="true"
-          :tabindex="tabindex || null"
-          v-html="$slots.selection ? '' : selectionString || placeholder")
+          v-bind="selectionAttributes"
+          v-html="selectionHtml")
         //- For standard HTML form submission.
         input(
           v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
@@ -64,7 +58,6 @@ component(
         template(v-if="labelPosition === 'inside' && showLabelInside")
           label.w-select__label.w-select__label--inside.w-form-el-shakable(
             v-if="$slots.default || label"
-            :for="`w-select--${_.uid}`"
             :class="labelClasses")
             slot {{ label }}
         w-icon.w-select__icon.w-select__icon--inner-right(
@@ -78,7 +71,7 @@ component(
       @item-click="$emit('item-click', $event)"
       @item-select="onListItemSelect"
       @keydown:enter="noUnselect && !multiple && closeMenu()"
-      @keydown:escape="showMenu && (this.showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
+      @keydown:escape="showMenu && (showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
       :items="selectItems"
       :multiple="multiple"
       arrows-navigation
@@ -89,7 +82,7 @@ component(
       :item-color-key="itemColorKey"
       role="listbox"
       tabindex="-1")
-      template(v-for="i in items.length" v-slot:[`item.${i}`]="{ item, selected, index }")
+      template(v-for="i in items.length" #[`item.${i}`]="{ item, selected, index }")
         slot(
           v-if="$slots[`item.${i}`] && $slots[`item.${i}`](item, selected, index)"
           :name="`item.${i}`"
@@ -102,7 +95,7 @@ component(
   template(v-if="labelPosition === 'right'")
     label.w-select__label.w-select__label--right.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-select--${_.uid}`"
+      @click="$refs['selection-input'].click()"
       :class="labelClasses")
       slot {{ label }}
 </template>
@@ -180,19 +173,31 @@ export default {
         return obj
       })
     },
-    hasValue () {
-      return Array.isArray(this.inputValue) ? this.inputValue.length : (this.inputValue !== null)
-    },
     hasLabel () {
       return this.label || this.$slots.default
     },
     showLabelInside () {
-      return !this.staticLabel || (!this.hasValue && !this.placeholder)
+      return !this.staticLabel || (!this.inputValue.length && !this.placeholder)
+    },
+    selectionAttributes () {
+      return {
+        class: { 'w-select__selection--placeholder': !this.$slots.selection && !this.selectionString && this.placeholder },
+        disabled: this.isDisabled || null,
+        readonly: true,
+        ariareadonly: 'true',
+        tabindex: this.tabindex ?? null,
+        contenteditable: this.isDisabled || this.isReadonly ? 'false' : 'true'
+      }
     },
     selectionString () {
-      return this.inputValue && this.inputValue.map(
+      return this.inputValue.map(
         item => item[this.itemValueKey] !== undefined ? item[this.itemLabelKey] : (item[this.itemLabelKey] ?? item)
       ).join(', ')
+    },
+    selectionHtml () {
+      if (!this.inputValue.length) return this.placeholder || ''
+      if (this.$slots.selection) return ''
+      return this.selectionString
     },
     classes () {
       return {
@@ -202,7 +207,7 @@ export default {
         'w-select--disabled': this.isDisabled,
         'w-select--fit-to-content': this.fitToContent,
         'w-select--readonly': this.isReadonly,
-        [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
+        [`w-select--${this.inputValue.length ? 'filled' : 'empty'}`]: true,
         'w-select--focused': (this.isFocused || this.showMenu) && !this.isReadonly,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
         'w-select--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
@@ -273,7 +278,25 @@ export default {
             index = (index + items.length + direction) % items.length
           }
 
-          this.onInput(items[index])
+          // If the current item is disabled, find the next one enabled (forward or backward).
+          let allItemsAreDisabled = false
+          if (items[index].disabled) {
+            const direction = e.keyCode === 38 ? -1 : 1 // Prev or next.
+
+            // Modulo to prevent out of range; + items.length to also work with negative values.
+            let newIndex = (index + direction + items.length) % items.length
+            const itemsCount = items.length
+            let loop = 0 // While-safety: will always end at least after 1 full array cycle.
+            while (loop < itemsCount && items[newIndex].disabled) {
+              // Circle through the array of items forward or backward, and reloop when out of range.
+              newIndex = (newIndex + items.length + direction) % items.length
+              loop++
+            }
+            if (loop >= itemsCount) allItemsAreDisabled = true
+            index = newIndex
+          }
+
+          if (!allItemsAreDisabled) this.onInput(items[index])
         }
       }
     },
@@ -282,7 +305,7 @@ export default {
     onInput (items) {
       this.inputValue = items === null ? [] : (this.multiple ? items : [items])
       // Return the original items when returnObject is true (no `value` if there wasn't),
-      // or the the item value otherwise.
+      // or the item value otherwise.
       items = this.inputValue.map(item => this.returnObject ? this.items[item.index] : item.value)
 
       // Emit the selection to the v-model.
@@ -291,6 +314,7 @@ export default {
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
     },
+
     onInputFieldClick () {
       if (this.showMenu) this.showMenu = false // Will call `closeMenu()` from w-menu(@close).
       else this.openMenu()
@@ -323,7 +347,7 @@ export default {
       return items.map(item => {
         let value = item
         if (item && typeof item === 'object') { // `null` is also an object!
-          value = item[this.itemValueKey] !== undefined ? item[this.itemValueKey] : (item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item)
+          value = item[this.itemValueKey] ?? item[this.itemLabelKey] ?? item
         }
 
         return this.selectItems[allValues.indexOf(value)]
@@ -458,6 +482,9 @@ export default {
     align-items: center;
     cursor: pointer;
     caret-color: transparent;
+    border-radius: inherit;
+
+    &--placeholder {color: #888;}
 
     .w-select__selection-slot + & {
       position: absolute;
@@ -484,8 +511,6 @@ export default {
     }
 
     .w-select--readonly & {cursor: auto;}
-
-    &--placeholder {color: #888;}
   }
 
   &__selection-slot {
@@ -511,8 +536,8 @@ export default {
       -webkit-tap-highlight-color: transparent;
     }
 
-    &--inner-left {left: 6px;}
-    &--inner-right {right: 6px;}
+    &--inner-left {left: $base-increment;}
+    &--inner-right {right: $base-increment;}
     .w-select--no-padding &--inner-left {left: 1px;}
     .w-select--no-padding &--inner-right {right: 1px;}
 
@@ -547,17 +572,15 @@ export default {
 
   &__label--inside {
     position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
+    inset: 0 0 auto;
+    min-height: inherit;
     white-space: nowrap;
     // Use margin instead of padding as the scale transformation below decreases the real padding
     // size and misaligns the label.
     margin-left: 2 * $base-increment;
-    transform: translateY(-50%);
     pointer-events: none;
 
-    .w-select--inner-icon-right & {padding-right: 22px;}
+    .w-select--inner-icon-right & {padding-right: 26px;}
 
     .w-select--no-padding & {
       left: 0;
@@ -574,28 +597,19 @@ export default {
       transition: $transition-duration ease;
     }
 
-    // move label with underline style.
-    .w-select--focused.w-select--floating-label &,
+    // Move label with underline style.
     .w-select--open.w-select--floating-label &,
     .w-select--filled.w-select--floating-label &,
     .w-select--has-placeholder.w-select--floating-label & {
-      transform: translateY(-160%) scale(0.85);
+      transform: translateY(-80%) scale(0.85);
     }
-    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+    // Chrome & Safari - Must stay a separated rule or Firefox discards the whole rule seeing -webkit-.
     .w-select--floating-label .w-select__select:-webkit-autofill & {
-      transform: translateY(-160%) scale(0.85);
+      transform: translateY(-80%) scale(0.85);
     }
-    // Move label with outline style or with shadow.
-    .w-select--focused.w-select--floating-label .w-select__selection-wrap--box &,
-    .w-select--open.w-select--floating-label .w-select__selection-wrap--box &,
-    .w-select--filled.w-select--floating-label .w-select__selection-wrap--box &,
-    .w-select--has-placeholder.w-select--floating-label .w-select__selection-wrap--box & {
-      transform: translateY(-180%) scale(0.85);
-    }
-    .w-select--focused.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--open.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
-    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+    // Chrome & Safari - Must stay a separated rule or Firefox discards the whole rule seeing -webkit-.
     .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
   }
 

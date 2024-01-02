@@ -160,8 +160,8 @@ export default {
         'w-list__item-label--focused': item._focused,
         'w-list__item-label--hoverable': this.hover,
         'w-list__item-label--selectable': this.isSelectable,
-        [item.color]: !!item.color,
-        [this.SelectionColor]: item._selected && !item.color && this.SelectionColor,
+        [item[this.itemColorKey]]: !!item[this.itemColorKey],
+        [this.SelectionColor]: item._selected && !item[this.itemColorKey] && this.SelectionColor,
         [item[this.itemClassKey] || this.itemClass]: item[this.itemClassKey] || this.itemClass
       }
     },
@@ -449,10 +449,7 @@ export default {
       &:before {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
+        inset: 0;
         background-color: currentColor;
         opacity: 0;
         transition: 0.2s;

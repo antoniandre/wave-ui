@@ -42,7 +42,7 @@ a {text-decoration: none;}
   position: relative; // Make the .w-app a referential for tooltips / menus.
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100dvh;
 
   &, *, :before, :after {box-sizing: border-box;}
 

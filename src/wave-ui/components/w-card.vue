@@ -103,6 +103,8 @@ export default {
     padding: (2 * $base-increment) (3 * $base-increment);
     font-size: 1.3em;
     border-bottom: $border;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
 
     &--has-toolbar {padding: 0;border-bottom: none;}
   }

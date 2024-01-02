@@ -22,7 +22,8 @@ export default {
     noPosition: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
     // Optionally designate an external activator.
-    activator: { type: [String, Object] } // The activator can be a DOM string selector, a ref or a DOM node.
+    // The activator can be a DOM string selector, a ref or a DOM node.
+    activator: { type: [String, Object] }
   },
 
   inject: {
@@ -35,7 +36,11 @@ export default {
     // as is in an array so we can delete them on destroy.
     // This only applies to the activatorEventHandlers, the other events listeners can be removed
     // normally.
-    docEventListenersHandlers: []
+    docEventListenersHandlers: [],
+    // The user may open and close the detachable so fast (like when toggling on hover) that it
+    // should not show up at all. Keep the ability to cancel the opening timer (if there is a set
+    // delay prop).
+    openTimeout: null
   }),
 
   computed: {
@@ -111,6 +116,13 @@ export default {
         (['left', 'right'].includes(this.position) && this.alignBottom && 'bottom') ||
         ''
       )
+    },
+
+    shouldShowOnClick () {
+      // For props simplicity, the w-tooltip component has the `showOnHover` prop,
+      // whereas the w-menu has `showOnClick`.
+      return (this.$options.props.showOnHover && !this.showOnHover) ||
+        (this.$options.props.showOnClick && this.showOnClick)
     }
   },
 
@@ -119,7 +131,10 @@ export default {
     async open (e) {
       // A tiny delay may help positioning the detachable correctly in case of multiple activators
       // with different menu contents.
-      if (this.delay) await new Promise(resolve => setTimeout(resolve, this.delay))
+      if (this.delay) await new Promise(resolve => (this.openTimeout = setTimeout(resolve, this.delay)))
+
+      // Cancel opening if the timeout has been cancelled by blur event (when going fast).
+      if (this.delay && !this.openTimeout) return
 
       this.detachableVisible = true
 
@@ -339,7 +354,7 @@ export default {
     if (this.overlay) this.overlayEl = this.$refs.overlay?.$el
 
     if (this.modelValue && this.activator) {
-      this.toggle({ type: this.showOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
+      this.toggle({ type: this.shouldShowOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
     }
     else if (this.modelValue) this.open({ target: this.activatorEl })
   },
@@ -360,7 +375,10 @@ export default {
 
   watch: {
     modelValue (bool) {
-      if (!!bool !== this.detachableVisible) this.toggle({ type: this.showOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
+      if (!!bool !== this.detachableVisible) {
+        if (bool) this.open({ target: this.activatorEl })
+        else this.close()
+      }
     },
     appendTo () {
       this.removeFromDOM()

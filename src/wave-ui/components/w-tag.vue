@@ -162,10 +162,7 @@ export default {
     &:before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       opacity: 0;
       background-color: transparent;
       // As this overlay is a smaller rectangle, the radius must be smaller to cover perfectly.

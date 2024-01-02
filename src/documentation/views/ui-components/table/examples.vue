@@ -1859,8 +1859,8 @@ const tableItemsInAPI = {
 
 const table12ItemsInApi = Array(2000).fill('').map((item, i) => ({
   id: i + 1,
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
 }))
 
@@ -2016,8 +2016,8 @@ export default {
         ],
         items: Array(200).fill('').map((item, i) => ({
           id: i + 1,
-          firstName: faker.name.firstName(),
-          lastName: faker.name.lastName(),
+          firstName: faker.person.firstName(),
+          lastName: faker.person.lastName(),
           birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
         })),
         pagination: {

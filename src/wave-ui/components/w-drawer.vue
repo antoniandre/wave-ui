@@ -204,10 +204,7 @@ export default {
 
   &--absolute {
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    inset: 0;
     overflow: hidden;
   }
 
@@ -223,10 +220,7 @@ export default {
 
     .w-overlay {
       position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      inset: 0;
       z-index: 2;
     }
     .w-drawer {position: absolute;}

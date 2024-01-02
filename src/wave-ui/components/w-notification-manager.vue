@@ -50,9 +50,7 @@ export default {
 <style lang="scss">
 .w-notification-manager {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
+  inset: 0 0 0 auto;
   z-index: 1000;
   pointer-events: none;
   width: 280px;
