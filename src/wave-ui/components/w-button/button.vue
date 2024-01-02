@@ -236,10 +236,7 @@ $spinner-size: 40;
   &:before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     opacity: 0;
     background-color: #000;
     border-radius: inherit;
@@ -302,10 +299,7 @@ $spinner-size: 40;
 
   &__loader {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;

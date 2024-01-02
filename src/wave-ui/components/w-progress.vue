@@ -154,10 +154,7 @@ $circle-size: 40;
     &.w-progress--default-bg:after {
       content: '';
       position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      inset: 0;
       border-radius: inherit;
       background-color: currentColor;
       opacity: 0.15;
@@ -188,10 +185,7 @@ $circle-size: 40;
       &:before, &:after {
         content: '';
         position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: -5%;
+        inset: 0 -5% 0 0;
         background: currentColor;
         z-index: 1;
         will-change: transform;

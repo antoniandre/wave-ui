@@ -395,10 +395,7 @@ export default {
     }
     // Colored border on thumb when hover and active - but with a transparency.
     &:before {
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
+      inset: 0;
       opacity: 0.5;
       border: 1px solid currentColor;
     }

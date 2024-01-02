@@ -162,10 +162,7 @@ export default {
   // ------------------------------------------------------
   &:before, &:after {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     background-color: currentColor;
     pointer-events: none;
   }

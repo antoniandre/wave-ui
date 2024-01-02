@@ -490,10 +490,7 @@ export default {
 
   .bubbles__plan {
     position: absolute;
-    top: 0;
-    bottom: -36%; // Taller than the container to create a parallax effect.
-    left: 0;
-    right: 0;
+    inset: 0 0 -36%; // Taller than the container to create a parallax effect.
     z-index: 0;
     pointer-events: none;
   }

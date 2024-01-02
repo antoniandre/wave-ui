@@ -196,19 +196,13 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
 
   &--contain {background-size: contain;}
 
   &__loader, &__content {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     display: flex;
     justify-content: center;
     align-items: center;
