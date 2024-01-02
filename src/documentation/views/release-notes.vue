@@ -33,6 +33,18 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v3.8.2
+      ul
+        li
+          strong.code w-autocomplete
+          ul
+            li New slots, options and emitted events. #[span.tag.new]
+        li
+          strong.code CSS
+          ul
+            li Increase the global default border radius from 3px to 4px.
+
+    li.minor
       strong.version v3.8.0
       ul
         li
