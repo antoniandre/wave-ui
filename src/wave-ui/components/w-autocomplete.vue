@@ -125,8 +125,6 @@ export default {
         ...this.$attrs,
         input: e => {
           this.keywords = e.target.value
-          this.$emit('update:modelValue', this.keywords)
-          this.$emit('input', this.keywords)
         },
         focus: e => {
           if (this.menuIsBeingClicked) return
