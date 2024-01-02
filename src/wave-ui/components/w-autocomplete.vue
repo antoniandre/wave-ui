@@ -10,12 +10,18 @@
     ref="input"
     :model-value="keywords"
     v-on="inputEventListeners")
-  w-transition-slide-fade(y)
-    ul.w-autocomplete__menu(v-if="menuOpen" ref="menu")
+  w-transition-slide-fade
+    ul.w-autocomplete__menu(
+      v-if="menuOpen"
+      ref="menu"
+      @mousedown="menuIsBeingClicked = true"
+      @mouseup="setEndOfMenuClick"
+      @touchstart="menuIsBeingClicked = true"
+      @touchend="setEndOfMenuClick")
       li(
         v-for="(item, i) in filteredItems"
         :key="i"
-        @click.stop="selectItem(item)"
+        @click.stop="selectItem(item), $emit('item-click', item)"
         :class="{ highlighted: highlightedItem === item.uid }")
         slot(name="item" :item="item" :highlighted="highlightedItem === item.uid")
           span(v-html="item[itemLabelKey]")
@@ -49,13 +55,17 @@ export default {
     itemSearchableKey: { type: String, default: 'searchable' }
   },
 
-  emits: ['input'],
+  // item-select is also from keyboard, 'item-click' may be useful for mouseenter mouseleave events.
+  emits: ['update:modelValue', 'input', 'focus', 'blur', 'keydown', 'item-click', 'item-select', 'extra-item-select'],
 
   data: () => ({
     keywords: '',
     selection: [],
     menuOpen: false,
-    highlightedItem: null
+    highlightedItem: null,
+    // The focus-blur events occur more times than it should emit to the outside due to the menu
+    // item clicking. So keep the focus on as long as the user is interacting with the autocomplete.
+    menuIsBeingClicked: false
   }),
 
   computed: {
@@ -107,10 +117,21 @@ export default {
         ...this.$attrs,
         input: e => {
           this.keywords = e.target.value
-          if (typeof this.$attrs.input === 'function') this.$attrs.input(this.keywords)
+          this.$emit('update:modelValue', this.keywords)
+          this.$emit('input', this.keywords)
         },
-        focus: this.onFocus,
-        keydown: this.onKeydown,
+        focus: e => {
+          if (this.menuIsBeingClicked) return
+          this.onFocus(e)
+          this.$emit('focus', e)
+        },
+        blur: e => {
+          if (!this.menuIsBeingClicked) this.$emit('blur', e)
+        },
+        keydown: e => {
+          this.onKeydown(e)
+          this.$emit('keydown', e)
+        },
         drop: this.onDrop,
         compositionstart: this.onCompositionStart,
         compositionupdate: this.onCompositionUpdate
@@ -139,7 +160,11 @@ export default {
       this.selection.push(item)
       this.highlightedItem = item.uid
       this.keywords = ''
-      this.$emit('input', this.multiple ? this.selection.map(item => item[this.itemValueKey]) : item[this.itemValueKey])
+      const emitPayload = this.multiple ? this.selection.map(item => item[this.itemValueKey]) : item[this.itemValueKey]
+      // Unlike input, item-select is only emitted when selecting (not unselecting).
+      this.$emit('item-select', item[this.itemValueKey])
+      this.$emit('update:modelValue', emitPayload)
+      this.$emit('input', emitPayload)
       this.$refs.input.focus()
       if (!this.multiple) this.closeMenu()
     },
@@ -147,8 +172,13 @@ export default {
     unselectItem (i) {
       this.selection.splice(i ?? this.selection.length - 1, 1)
       this.highlightedItem = null
+      this.$emit('update:modelValue', null)
       this.$emit('input', null)
       this.$refs.input.focus()
+    },
+
+    setEndOfMenuClick () {
+      setTimeout(() => (this.menuIsBeingClicked = false), 100)
     },
 
     onClick () {
@@ -251,6 +281,18 @@ export default {
 
   beforeUnmount () {
     document.removeEventListener('click', this.onDocumentClick)
+  },
+
+  watch: {
+    modelValue (value) {
+      this.selection = []
+      if (value) {
+        const arrayOfValues = Array.isArray(value) ? value : [value]
+        arrayOfValues.forEach(value => {
+          this.selection.push(this.optimizedItemsForSearch.find(item => item[this.itemValueKey] === +value))
+        })
+      }
+    }
   }
 }
 </script>
