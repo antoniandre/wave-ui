@@ -204,15 +204,11 @@ export default {
   user-select: none;
 
   &--horizontal {
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: auto 0 0;
     height: 8px;
   }
   &--vertical {
-    top: 0;
-    bottom: 0;
-    right: 0;
+    inset: 0 0 0 auto;
     width: 8px;
   }
 
