@@ -936,6 +936,7 @@ $tr-border-top: 1px;
       margin: 0.5 * $base-increment;
       font-size: 0.9em;
       aspect-ratio: 1;
+      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
       overflow: hidden;
       color: rgba(var(--w-base-color-rgb), 0.65);
       background-color: rgba(var(--w-base-bg-color-rgb), 0.4);

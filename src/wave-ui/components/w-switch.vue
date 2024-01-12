@@ -252,7 +252,7 @@ $outline-width: 2px;
 
   // The focus outline & ripple on switch activation.
   &__input:before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     top: 0;
