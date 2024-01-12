@@ -32,6 +32,14 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v3.9.1
+      ul
+        li
+          strong.code Minor CSS improvements
+          ul
+            li Fix the aspect-ratio of 1 in Safari in case the element has padding overrides (impacts w-button with icon prop and a few Wave UI sub-elements).
+
     li.minor
       strong.version v3.9.0
       ul
