@@ -140,7 +140,10 @@
             slot(
               name="pagination"
               :range="`${paginationConfig.start}-${paginationConfig.end}`"
-              :total="paginationConfig.total")
+              :total="paginationConfig.total"
+              :pages-count="paginationConfig.pagesCount"
+              :page="paginationConfig.page"
+              :goToPage="goToPage")
               w-select.w-pagination__items-per-page(
                 v-if="paginationConfig.itemsPerPageOptions"
                 v-model="paginationConfig.itemsPerPage"
