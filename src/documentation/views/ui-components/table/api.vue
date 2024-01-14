@@ -72,10 +72,20 @@ const slots = {
     }
   },
   footer: {
-    description: 'Provide a custom template for the table footer if you want one.<br>All the cells are merged in one for convenience, but if you need all the cells, you can use the <code>footer-row</code> slot.'
+    description: 'If you need, you can provide a custom template for the table footer.<br>All the cells are merged in one for convenience, but if you need all the cells, you can use the <code>footer-row</code> slot.'
   },
   'footer-row': {
-    description: 'Provide a custom template for the table footer if you want one.<br>This slot lets you control the whole &lt;tr&gt;. It expects to receive a &lt;tr&gt; element containing &lt;td&gt;s or &lt;th&gt;s.'
+    description: 'If you need, you can provide a custom template for the table footer.<br>This slot lets you control the whole &lt;tr&gt;. It expects to receive a &lt;tr&gt; element containing &lt;td&gt;s or &lt;th&gt;s.'
+  },
+  pagination: {
+    description: 'If you need, you can provide a custom template for the table pagination in the table footer.<br>This slot lets you override the whole pagination, and a few variable are available to facilitate a fully custom pagination without to much work.',
+    params: {
+      range: 'A string representing the current range of the visible rows. E.g. <code>75-100</code>',
+      page: 'An integer representing the current table page. E.g. <code>3</code>',
+      pagesCount: 'An integer representing the total number of pages in the array.',
+      total: 'An integer representing the total of items in the array, visible or not.',
+      goToPage: 'A function that you you can use to navigate through the pages. It accepts one parameter that can be an integer for an existing page, or exactly <code>+1</code> or <code>-1</code> as a string to increase or decrease the page number.'
+    }
   }
 }
 
