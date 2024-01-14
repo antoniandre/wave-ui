@@ -638,7 +638,7 @@ div
       :items="table10.items"
       :sort-function="sortFunction"
       :loading="table10.loading"
-      style="height: 140px")
+      style="height: 145px")
       template(#pug).
         w-table.my6(
         :headers="table.headers"
@@ -956,7 +956,7 @@ div
     | reload
 
   title-link(h3) Simple table - no set height
-  example
+  example(style="height: 170px")
     w-table(
       :headers="table1.headers"
       :items="table1.items"
@@ -1220,6 +1220,140 @@ div
             }, 1000)
           }
         }
+      })
+
+      app.use(WaveUI, {
+        colors: {
+          primary: '#89b6d2',
+          secondary: '375b6a'
+        },
+        theme: 'dark'
+      })
+
+      app.mount('#app')
+
+  title-link(h3) Custom pagination layout
+  example(:blank-codepen="['js']")
+    w-table(
+      :headers="table11.headers"
+      :items="table11.items"
+      fixed-headers
+      fixed-footer
+      :pagination="table11.pagination"
+      style="max-height: 500px")
+      template(#pagination="{ range, total, page, pagesCount, goToPage }")
+        .w-flex.align-center.gap2.pa1
+          .w-flex.gap2.no-grow
+            w-button(
+              @click="goToPage('-1')"
+              :disabled="page === 1"
+              icon="wi-chevron-left"
+              xs)
+            w-button(
+              v-for="i in pagesCount"
+              :key="i"
+              @click="i !== page && goToPage(i)"
+              :outline="page === i"
+              round
+              xs) {{ i }}
+            w-button(
+              @click="goToPage('+1')"
+              :disabled="page === pagesCount"
+              icon="wi-chevron-right"
+              xs)
+          p.mb0 {{ range }} of {{ total }}.
+
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :pagination="table.pagination"
+        style="max-height: 500px")
+        template(#pagination="{ range, total, page, pagesCount, goToPage }")
+          .w-flex.align-center.gap2.pa1
+            .w-flex.gap2.no-grow
+              w-button(
+                @click="goToPage('-1')"
+                :disabled="page === 1"
+                icon="wi-chevron-left"
+                xs)
+              w-button(
+                v-for="i in pagesCount"
+                :key="i"
+                @click="i !== page &amp;&amp; goToPage(i)"
+                :outline="page === i"
+                round
+                xs) {{ '\{\{ i \}\}' }}
+              w-button(
+                @click="goToPage('+1')"
+                :disabled="page === pagesCount"
+                icon="wi-chevron-right"
+                xs)
+            p {{ '\{\{ range \}\}' }} of {{ '\{\{ total \}\}' }}.
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :pagination="table.pagination"
+        style="max-height: 500px"&gt;
+        &lt;template #pagination&gt;
+          &lt;div class="w-flex align-center gap2 pa1"&gt;
+            &lt;div class="w-flex align-center gap2 pa1"&gt;
+              &lt;w-button
+                @click="goToPage('-1')"
+                :disabled="page === 1"
+                icon="wi-chevron-left"
+                xs&gt;
+              &lt;/w-button&gt;
+              &lt;w-button
+                v-for="i in pagesCount"
+                :key="i"
+                @click="i !== page &amp;&amp; goToPage(i)"
+                :outline="page === i"
+                round
+                xs&gt;
+                {{ '\{\{ i \}\}' }}
+              &lt;/w-button&gt;
+              &lt;w-button
+                @click="goToPage('+1')"
+                :disabled="page === pagesCount"
+                icon="wi-chevron-right"
+                xs&gt;
+              &lt;/w-button&gt;
+            &lt;/div&gt;
+            &lt;p&gt; {{ '\{\{ range \}\}' }} of {{ '\{\{ total \}\}' }}.&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/template&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      // import { faker } from '@faker-js/faker' // With npm.
+      import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'
+
+      const app = Vue.createApp({
+        data: () => ({
+          table: {
+            headers: [
+              { label: 'ID', key: 'id' },
+              { label: 'First name', key: 'firstName' },
+              { label: 'Last name', key: 'lastName' },
+              { label: 'Birthdate', key: 'birthdate' },
+            ],
+            items: Array(200).fill('').map((item, i) => ({
+              id: i + 1,
+              firstName: faker.person.firstName(),
+              lastName: faker.person.lastName(),
+              birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
+            })),
+            pagination: {
+              itemsPerPage: 50,
+              total: 200
+            }
+          }
+        })
       })
 
       app.use(WaveUI, {
