@@ -1125,13 +1125,7 @@ div
         })
       })
 
-      app.use(WaveUI, {
-        colors: {
-          primary: '#89b6d2',
-          secondary: '375b6a'
-        },
-        theme: 'dark'
-      })
+      app.use(WaveUI, { theme: 'auto' })
 
       app.mount('#app')
 
@@ -1194,7 +1188,7 @@ div
             loading: false,
             pagination: {
               itemsPerPage: 50,
-              total: 200
+              total: 2000
             }
           }
         }),
@@ -1222,13 +1216,7 @@ div
         }
       })
 
-      app.use(WaveUI, {
-        colors: {
-          primary: '#89b6d2',
-          secondary: '375b6a'
-        },
-        theme: 'dark'
-      })
+      app.use(WaveUI, { theme: 'auto' })
 
       app.mount('#app')
 
@@ -1262,7 +1250,6 @@ div
               icon="wi-chevron-right"
               xs)
           p.mb0 {{ range }} of {{ total }}.
-
     template(#pug).
       w-table(
         :headers="table.headers"
@@ -1275,19 +1262,19 @@ div
           .w-flex.align-center.gap2.pa1
             .w-flex.gap2.no-grow
               w-button(
-                @click="goToPage('-1')"
+                @click="goToPage&#40;'-1'&#41;"
                 :disabled="page === 1"
                 icon="wi-chevron-left"
                 xs)
               w-button(
                 v-for="i in pagesCount"
                 :key="i"
-                @click="i !== page &amp;&amp; goToPage(i)"
+                @click="i !== page &amp;&amp; goToPage&#40;i&#41;"
                 :outline="page === i"
                 round
                 xs) {{ '\{\{ i \}\}' }}
               w-button(
-                @click="goToPage('+1')"
+                @click="goToPage&#40;1&#41;"
                 :disabled="page === pagesCount"
                 icon="wi-chevron-right"
                 xs)
@@ -1300,7 +1287,7 @@ div
         fixed-footer
         :pagination="table.pagination"
         style="max-height: 500px"&gt;
-        &lt;template #pagination&gt;
+        &lt;template #pagination="{ range, total, page, pagesCount, goToPage }"&gt;
           &lt;div class="w-flex align-center gap2 pa1"&gt;
             &lt;div class="w-flex align-center gap2 pa1"&gt;
               &lt;w-button
@@ -1356,13 +1343,98 @@ div
         })
       })
 
-      app.use(WaveUI, {
-        colors: {
-          primary: '#89b6d2',
-          secondary: '375b6a'
-        },
-        theme: 'dark'
+      app.use(WaveUI, { theme: 'auto' })
+
+      app.mount('#app')
+
+  title-link(h3) Initing the pagination with a certain state
+  example(:blank-codepen="['js']")
+    w-table(
+      :headers="table13.headers"
+      :items="table13.items"
+      fixed-headers
+      fixed-footer
+      :fetch="table13.fetch"
+      :pagination="table13.pagination"
+      :loading="table13.loading"
+      style="max-height: 500px")
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :fetch="table.fetch"
+        :pagination="table.pagination"
+        :loading="table.loading"
+        style="max-height: 500px")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :fetch="table.fetch"
+        :pagination="table.pagination"
+        :loading="table.loading"
+        style="max-height: 500px"&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      // import { faker } from '@faker-js/faker' // With npm.
+      import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'
+
+      // Generate a server-side array of objects of 2000 random persons
+      // that we assume will be returned paginated from our backend.
+      const tableItemsInApi = Array(2000).fill('').map((item, i) => ({
+        id: i + 1,
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
+      }))
+
+      const app = Vue.createApp({
+        data: () => ({
+          table: {
+            headers: [
+              { label: 'ID', key: 'id' },
+              { label: 'First name', key: 'firstName' },
+              { label: 'Last name', key: 'lastName' },
+              { label: 'Birthdate', key: 'birthdate' },
+            ],
+            items: [], // The frontend has no data by default.
+            loading: false,
+            pagination: {
+              page: 17,
+              itemsPerPage: 50,
+              total: 2000
+            }
+          }
+        }),
+
+        methods: {
+          // All these parameters are available from Wave UI.
+          fetch ({ page, start, end, total, itemsPerPage, sorting }) {
+            this.table.loading = 'header' // Display the loading bar.
+
+            // Simulating a call to the backend with a delay of 1 second.
+            // Once you receive the rows from the backend assign them to the table.items var.
+            setTimeout(() => {
+              const itemsFromApi = tableItemsInApi.slice(0) // Clone the array before sorting.
+              if (sorting.length) {
+                const sortKey = sorting[0].substring(1)
+                itemsFromApi.sort((a, b) => {
+                  if (sorting[0][0] === '+') return a[sortKey] &lt; b[sortKey] ? -1 : 1
+                  else return a[sortKey] > b[sortKey] ? -1 : 1
+                })
+              }
+              this.table.items = itemsFromApi.slice(start - 1, end)
+              this.table.loading = false
+            }, 1000)
+          }
+        }
       })
+
+      app.use(WaveUI, { theme: 'auto' })
 
       app.mount('#app')
 
@@ -2185,6 +2257,37 @@ export default {
             }
             this.table12.items = itemsFromApi.slice(start - 1, end)
             this.table12.loading = false
+          }, 1000)
+        }
+      },
+      table13: {
+        headers: [
+          { label: 'ID', key: 'id' },
+          { label: 'First name', key: 'firstName' },
+          { label: 'Last name', key: 'lastName' },
+          { label: 'Birthdate', key: 'birthdate' }
+        ],
+        items: [],
+        loading: false,
+        pagination: {
+          page: 17,
+          itemsPerPage: 50,
+          total: 2000
+        },
+        fetch: ({ page, start, end, total, itemsPerPage, sorting }) => {
+          console.log({ page, start, end, total, itemsPerPage, sorting })
+          this.table13.loading = 'header'
+          setTimeout(() => {
+            const itemsFromApi = table12ItemsInApi.slice(0) // Clone the array before sorting.
+            if (sorting.length) {
+              const sortKey = sorting[0].substring(1)
+              itemsFromApi.sort((a, b) => {
+                if (sorting[0][0] === '+') return a[sortKey] < b[sortKey] ? -1 : 1
+                else return a[sortKey] > b[sortKey] ? -1 : 1
+              })
+            }
+            this.table13.items = itemsFromApi.slice(start - 1, end)
+            this.table13.loading = false
           }, 1000)
         }
       },
