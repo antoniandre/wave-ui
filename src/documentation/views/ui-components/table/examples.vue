@@ -2275,7 +2275,6 @@ export default {
           total: 2000
         },
         fetch: ({ page, start, end, total, itemsPerPage, sorting }) => {
-          console.log({ page, start, end, total, itemsPerPage, sorting })
           this.table13.loading = 'header'
           setTimeout(() => {
             const itemsFromApi = table12ItemsInApi.slice(0) // Clone the array before sorting.
