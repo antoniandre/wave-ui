@@ -36,6 +36,17 @@ main
       strong.version v3.9.1
       ul
         li
+          strong.code W-table &amp; pagination
+          ul
+            li Improved the pagination layout: now hides some pages when there are too many and displays up to 7 page buttons.
+            li Improved the pagination slot
+            li
+              | Moved the pagination outside of the table due to HTML/CSS restrictions.
+              .red.
+                Impacted the CSS classes of the #[strong.code w-table] component: the wrapper now
+                has the #[code .w-table] and the table now has the #[code .w-table__table] class.
+                YOu may need to review your external CSS overrides.
+        li
           strong.code Minor CSS improvements
           ul
             li Fix the aspect-ratio of 1 in Safari in case the element has padding overrides (impacts w-button with icon prop and a few Wave UI sub-elements).
