@@ -79,7 +79,7 @@ export default {
       top: 4px;
       right: -1px;
       bottom: 6px;
-      width: 4.2em;
+      width: 2.3em;
       backdrop-filter: blur(3px);
       border-radius: 99em;
     }

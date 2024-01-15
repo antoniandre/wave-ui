@@ -516,7 +516,7 @@ div
     The sticky mechanism is done via CSS (position: sticky). So if you set multiple sticky
     columns, one will overlap the previous one as you scroll.
   p.grey Scroll the table horizontally to observe the behavior.
-  example
+  example.example--sticky-columns
     .w-flex.align-center.mb2
       | Sticky columns:
       w-radios.ml1.mr4(
@@ -583,6 +583,10 @@ div
           ]
         }
       })
+    template(#css).
+      /* This CSS is not needed. It's only to increase the scroll in the sticky columns demo. */
+      .w-table {white-space: nowrap;}
+      .w-table__header, .w-table__cell {padding-left: 20px;padding-right: 20px;}
 
   title-link(h2) Sorting
   p.
@@ -1051,9 +1055,7 @@ div
         setTimeout(() => {this.loading = false}, 3000)
       }
 
-  title-link(h2 slug="pagination")
-    | Pagination
-    w-tag.ml2.text-bold(round color="warning" outline sm) IN PROGRESS
+  title-link(h2) Pagination
   p The pagination can be provided as an object:
   ssh-pre(language="js").
     {
@@ -1064,7 +1066,7 @@ div
       page: Integer, // The current page to display [itemsPerPage] number of rows.
       total: Integer // The total number of items available in the table.
     }
-  p More details in the #[a(href="#pagination") API section].
+  p More details in the #[a(href="#pagination-prop") API section].
   p.
     The pagination is a two-way binding object: if you modify any property inside it, the table
     will re-paginate and update.
@@ -1221,6 +1223,7 @@ div
       app.mount('#app')
 
   title-link(h3) Custom pagination layout
+  p More details about the pagination slot in the #[a(href="#pagination-slot") API section].
   example(:blank-codepen="['js']")
     w-table(
       :headers="table11.headers"
@@ -2350,3 +2353,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.example--sticky-columns {
+  .w-table {white-space: nowrap;}
+  .w-table__header, .w-table__cell {padding-left: 20px;padding-right: 20px;}
+}
+</style>

@@ -572,7 +572,7 @@ export default {
       // (releasing the mouse on table header triggers a click event captured by the sorting feature)
       setTimeout(() => {
         // On Mouse up, emit an event containing all the new widths of the columns.
-        const widths = [...this.$refs.colgroup.childNodes].map(column => column.style?.width || column.offsetWidth)
+        const widths = [...this.$refs.colgroup.children].map(column => column.style?.width || column.offsetWidth)
         this.$emit('column-resize', { index: this.colResizing.columnIndex, widths })
 
         this.colResizing.dragging = false
