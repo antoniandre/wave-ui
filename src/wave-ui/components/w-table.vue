@@ -129,7 +129,7 @@
           slot(name="extra-row")
 
       //- Table footer.
-      tfoot.w-table__footer(v-if="$slots.footer || $slots['footer-row'] || pagination")
+      tfoot.w-table__footer(v-if="$slots.footer || $slots['footer-row']")
         slot(v-if="$slots['footer-row']" name="footer-row")
         tr.w-table__row(v-else-if="$slots.footer")
           td.w-table__cell(:colspan="headers.length")
@@ -614,8 +614,8 @@ export default {
       if (itemsPerPage !== undefined) {
         this.paginationConfig.itemsPerPage = itemsPerPage
         itemsPerPage = itemsPerPage || this.paginationConfig.total // If `0`, take all the results.
-        this.paginationConfig.page = 1;
-        ({ page } = this.paginationConfig) // Shorthand var for next lines.
+        this.paginationConfig.page = page || this.paginationConfig.page || 1
+        page = this.paginationConfig.page // Shorthand var for next lines.
         total = this.paginationConfig.total // Shorthand var for next lines.
         this.paginationConfig.start = 1
         this.paginationConfig.end = total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page))
