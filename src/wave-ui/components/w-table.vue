@@ -157,13 +157,28 @@
           icon="wi-chevron-left"
           text
           lg)
-        w-button.w-pagination__page(
-          v-for="i in paginationConfig.pagesCount"
-          :key="i"
-          @click="i !== paginationConfig.page && goToPage(i)"
-          :class="{ 'w-pagination__page--active': i === paginationConfig.page }"
-          round
-          lg) {{ i }}
+        template(v-if="paginationConfig.pagesCount > 7")
+          template(v-for="i in paginationConfig.pagesCount" :key="i")
+            w-button.w-pagination__page(
+              v-if="[1, paginationConfig.pagesCount, paginationConfig.page - 1, paginationConfig.page, paginationConfig.page + 1].includes(i)"
+              @click="i !== paginationConfig.page && goToPage(i)"
+              :class="{ 'w-pagination__page--active': i === paginationConfig.page }"
+              round
+              lg) {{ i }}
+            w-button.w-pagination__page(
+              v-else-if="[1, paginationConfig.pagesCount, paginationConfig.page - 1, paginationConfig.page, paginationConfig.page + 1].includes(i - 1)"
+              @click="i !== paginationConfig.page && goToPage(i)"
+              :class="{ 'w-pagination__page--active': i === paginationConfig.page }"
+              round
+              lg) ...
+        template(v-else)
+          w-button.w-pagination__page(
+            v-for="i in paginationConfig.pagesCount"
+            :key="i"
+            @click="i !== paginationConfig.page && goToPage(i)"
+            :class="{ 'w-pagination__page--active': i === paginationConfig.page }"
+            round
+            lg) {{ i }}
         w-button.w-pagination__arrow.w-pagination__arrow--next(
           @click="goToPage('+1')"
           :disabled="paginationConfig.page >= paginationConfig.pagesCount"
@@ -928,7 +943,6 @@ $tr-border-top: 1px;
       display: flex;
       padding-left: 1px; // Prevent overflow causing scrollbar.
       padding-right: 1px;
-      overflow: auto;
       max-height: 4.5em;
       gap: 0.5 * $base-increment;
       overflow-y: hidden;
