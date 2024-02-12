@@ -214,19 +214,19 @@ export default {
 
     onLabelKeydown (item, e) {
       // Keys: 13 enter, 32 space, 37 arrow left, 38 arrow up, 39 arrow right, 40 arrow down.
-      if (!(e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) && [13, 32, 37, 38, 39, 40].includes(e.which)) {
+      if (!(e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) && [13, 32, 37, 38, 39, 40].includes(e.keyCode)) {
         if (item.children || item.branch) {
-          if ([13, 32].includes(e.which)) this.expandDepth(item) && e.preventDefault()
-          else if (e.which === 37) this.expandDepth(item, false) && e.preventDefault()
-          else if (e.which === 39) this.expandDepth(item, true) && e.preventDefault()
+          if ([13, 32].includes(e.keyCode)) this.expandDepth(item) && e.preventDefault()
+          else if (e.keyCode === 37) this.expandDepth(item, false) && e.preventDefault()
+          else if (e.keyCode === 39) this.expandDepth(item, true) && e.preventDefault()
         }
 
         // On arrow up or down, focus the prev or next item.
-        if ([38, 40].includes(e.which)) {
+        if ([38, 40].includes(e.keyCode)) {
           const treeRoot = this.$el.closest('.w-tree--depth0')
           const treeTabbableItems = treeRoot.querySelectorAll('.w-tree__item-label[tabindex="0"]')
           const currLabel = e.target.closest('.w-tree__item-label')
-          const indexModifier = e.which === 38 ? -1 : 1;
+          const indexModifier = e.keyCode === 38 ? -1 : 1;
 
           ([...treeTabbableItems]).some((item, i) => {
             if (item.isSameNode(currLabel)) {
@@ -238,7 +238,7 @@ export default {
         }
       }
 
-      if (e.which === 13) {
+      if (e.keyCode === 13) {
         if (this.selectable) item.selected = !item.selected
         // Always emitting on enter keydown, but different event for selection.
         this.emitItemSelection(item, e)
