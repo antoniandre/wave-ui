@@ -32,11 +32,19 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v3.10.0
+      ul
+        li
+          strong.code w-select
+          ul
+            li Added ability to lookup and focus a select list item by typing its first characters. #[issue-link 139]
+
     li.patch
       strong.version v3.9.1
       ul
         li
-          strong.code W-table &amp; pagination
+          strong.code w-table &amp; pagination
           ul
             li Improved the pagination layout: now hides some pages when there are too many and displays up to 7 page buttons.
             li Improved the pagination slot
