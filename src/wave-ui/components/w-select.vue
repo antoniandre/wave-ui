@@ -70,6 +70,7 @@ component(
       @update:model-value="onInput"
       @item-click="$emit('item-click', $event)"
       @item-select="onListItemSelect"
+      @keydown="onWListKeydown"
       @keydown:enter="noUnselect && !multiple && closeMenu()"
       @keydown:escape="showMenu && (showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
       :items="selectItems"
@@ -156,7 +157,10 @@ export default {
     showMenu: false,
     menuMinWidth: 0,
     isFocused: false,
-    selectionWrapRef: undefined
+    selectionWrapRef: undefined,
+    // Lookup a select list item from typing the first characters.
+    // If typing is too slow (> 1s), the lookup string is cleared.
+    quickLookup: { string: '', timeout: null }
   }),
 
   computed: {
@@ -299,6 +303,33 @@ export default {
           if (!allItemsAreDisabled) this.onInput(items[index])
         }
       }
+
+      // `e.key.length === 1`: only the keys that output a character.
+      else if (e.key.length === 1) this.focusItemOnQuickLookup(e)
+    },
+
+    onWListKeydown (e) {
+      // `e.key.length === 1`: only the keys that output a character.
+      if (e.key.length === 1) this.focusItemOnQuickLookup(e)
+    },
+
+    focusItemOnQuickLookup (e) {
+      // Reset the timer every time a new valid key is pressed so we concat the string of chars.
+      if (this.quickLookup.timeout) clearTimeout(this.quickLookup.timeout)
+      // On each keypress, wait for 1s and clear the lookup string unless a key is pressed again.
+      this.quickLookup.timeout = setTimeout(() => this.quickLookup.string = '', 1000)
+
+      // Form a lookup string that is tested (starting from the first char) on each list item until
+      // a match is found.
+      this.quickLookup.string += e.key
+      const re = new RegExp(`^${this.quickLookup.string}`, 'i')
+      const itemIndexToFocus = this.selectItems.findIndex(
+        item => !item.disabled && item[this.itemLabelKey].match(re)
+      ) + 1 // 0 if not found, more if found.
+      if (itemIndexToFocus) {
+        const selector = `.w-list__item:nth-child(${itemIndexToFocus}) .w-list__item-label`
+        this.$refs['w-list']?.$el?.querySelector(selector)?.focus()
+      }
     },
 
     // The items are given by the w-list component.
@@ -371,7 +402,7 @@ export default {
 
       this.showMenu = false
       // Set the focus back on the main w-select input.
-      setTimeout(() => this.$refs['selection-input'].focus(), 50)
+      setTimeout(() => this.$refs['selection-input']?.focus(), 50)
     }
   },
 
