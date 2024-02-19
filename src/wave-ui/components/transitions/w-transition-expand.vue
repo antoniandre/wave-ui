@@ -162,19 +162,17 @@ export default {
       // Keep any original inline styles to restore them after transition.
       this.el.originalStyles = el.style.cssText
     },
-    show (el, done) {
+    show (el) {
       this.saveComputedStyles(el)
       this.applyHideStyles(el)
 
       setTimeout(() => this.applyShowStyles(el), 20)
-      setTimeout(done, this.duration)
     },
     beforeHide (el) {
       this.applyShowStyles(el)
     },
-    hide (el, done) {
+    hide (el) {
       setTimeout(() => this.applyHideStyles(el), 20)
-      setTimeout(done, this.duration)
     },
     saveComputedStyles (el) {
       const computedStyles = window.getComputedStyle(el, null)
