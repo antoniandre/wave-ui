@@ -252,7 +252,7 @@ $disabled-color: #ddd;
 
   // The focus outline & ripple on switch activation.
   &__input:before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     top: 0;

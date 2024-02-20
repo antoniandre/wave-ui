@@ -42,7 +42,6 @@ component(
     template(v-if="labelPosition === 'inside' && showLabelInside")
       label.w-textarea__label.w-textarea__label--inside.w-form-el-shakable(
         v-if="$slots.default || label"
-        :for="`w-textarea--${_uid}`"
         :class="labelClasses")
         slot {{ label }}
     w-icon.w-textarea__icon.w-textarea__icon--inner-right(

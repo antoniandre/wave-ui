@@ -53,6 +53,7 @@ export default {
     border: 1px solid currentColor;
     width: $base-font-size;
     aspect-ratio: 1;
+    min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
     transform: translateX(-50%);
     z-index: 1;
   }

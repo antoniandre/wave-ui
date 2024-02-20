@@ -47,9 +47,7 @@ export default {
 <style lang="scss">
 .w-notification-manager {
   position: fixed;
-  top: 0;
-  max-height: 100%;
-  right: 0;
+  inset: 0 0 0 auto;
   z-index: 1000;
   width: 280px;
   overflow-x: hidden;
