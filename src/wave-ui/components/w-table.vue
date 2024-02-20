@@ -361,6 +361,12 @@ export default {
       }
     },
 
+    colClasses () {
+      return this.headers.map(header => {
+        return { 'w-table__col--highlighted': this.activeSortingKeys[header.key] }
+      }) || []
+    },
+
     isMobile () {
       return ~~this.mobileBreakpoint && this.$waveui.breakpoint.width <= ~~this.mobileBreakpoint
     },
@@ -558,7 +564,7 @@ export default {
       // (releasing the mouse on table header triggers a click event captured by the sorting feature)
       setTimeout(() => {
         // On Mouse up, emit an event containing all the new widths of the columns.
-        const widths = [...this.$refs.colgroup.childNodes].map(column => column.style?.width || column.offsetWidth)
+        const widths = [...this.$refs.colgroup.children].map(column => column.style?.width || column.offsetWidth)
         this.$emit('column-resize', { index: this.colResizing.columnIndex, widths })
 
         this.colResizing.dragging = false
@@ -600,8 +606,8 @@ export default {
       if (itemsPerPage !== undefined) {
         this.paginationConfig.itemsPerPage = itemsPerPage
         itemsPerPage = itemsPerPage || this.paginationConfig.total // If `0`, take all the results.
-        this.paginationConfig.page = 1;
-        ({ page } = this.paginationConfig) // Shorthand var for next lines.
+        this.paginationConfig.page = page || this.paginationConfig.page || 1
+        page = this.paginationConfig.page // Shorthand var for next lines.
         total = this.paginationConfig.total // Shorthand var for next lines.
         this.paginationConfig.start = 1
         this.paginationConfig.end = total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page))
@@ -931,9 +937,9 @@ $tr-border-top: 1px;
     }
 
     .w-pagination__page {
-      margin: 0.5 * $base-increment;
       font-size: 0.9em;
       aspect-ratio: 1;
+      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
       overflow: hidden;
       color: rgba(#000, 0.65);
       background-color: rgba(#fff, 0.4);
@@ -959,10 +965,7 @@ $tr-border-top: 1px;
     }
 
     .w-pagination__results {
-      margin-left: $base-increment;
-      margin-right: $base-increment;
       white-space: nowrap;
-      min-width: 90px;
       text-align: right;
     }
   }
