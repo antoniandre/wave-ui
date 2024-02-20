@@ -522,7 +522,7 @@ div
       w-radios.ml1.mr4(
         v-model="table9.stickyColumn"
         :items="table9.stickyColumnOptions"
-        @change="toggleStickyColumn"
+        @input="toggleStickyColumn"
         inline)
       w-button(
         @click="table9.fixedHeaders = !table9.fixedHeaders"
@@ -2327,14 +2327,15 @@ export default {
     },
 
     toggleStickyColumn () {
-      this.table9.headers.forEach(header => (header.sticky = false))
+      this.table9.headers.forEach(header => this.$set(header, 'sticky', false))
 
       switch (this.table9.stickyColumn) {
         case 1: return (this.table9.headers[0].sticky = true)
         case 2: return (this.table9.headers[1].sticky = true)
         case 24:
           this.table9.headers[1].sticky = true
-          return (this.table9.headers[3].sticky = true)
+          this.table9.headers[3].sticky = true
+          return
       }
     },
 

@@ -49,6 +49,7 @@ export default {
   position: fixed;
   inset: 0 0 0 auto;
   z-index: 1000;
+  pointer-events: none;
   width: 280px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -62,6 +63,7 @@ export default {
     right: 0;
     margin: 8px;
     flex-grow: 1;
+    pointer-events: all;
   }
 }
 </style>

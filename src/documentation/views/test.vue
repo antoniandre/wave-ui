@@ -1,16 +1,17 @@
 <template lang="pug">
-.test.ma12.pa12.bd1.bdrs2
-  h1.mt0.mb8 Testing playground
-  w-select.mt3(
-    :items="items"
-    label="Select an item"
-    autocomplete)
-  p.my12.mb4 multiple
-  w-select.mt3(
-    :items="items"
-    label="Select an item"
-    autocomplete
-    multiple)
+w-app
+  .test.ma12.pa12.bd1.bdrs2
+    h1.mt0.mb8 Testing playground
+    w-select.mt3(
+      :items="items"
+      label="Select an item"
+      autocomplete)
+    p.my12.mb4 multiple
+    w-select.mt3(
+      :items="items"
+      label="Select an item"
+      autocomplete
+      multiple)
 </template>
 
 <script>

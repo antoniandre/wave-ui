@@ -31,7 +31,7 @@
         v-if="!filteredItems.length"
         :class="{ 'w-autocomplete__no-match--default': !$slots.noMatch }")
         slot(name="no-match")
-          .caption(v-html="noMatch ?? 'No match.'")
+          .caption(v-html="noMatch !== undefined ? noMatch : 'No match.'")
       li.w-autocomplete__extra-item(
         v-if="$slots['extra-item']"
         @click="selectExtraItem"

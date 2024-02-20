@@ -24,7 +24,7 @@ component(
     custom
     min-width="activator"
     v-bind="menuProps || {}")
-    template(#activator="{ on }")
+    template(#activator)
       //- Input wrapper.
       .w-select__selection-wrap(
         @click="!isDisabled && !isReadonly && onInputFieldClick()"
@@ -43,16 +43,11 @@ component(
           slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
         .w-select__selection(
           ref="selection-input"
-          :contenteditable="isDisabled || isReadonly ? 'false' : 'true'"
           @focus="!isDisabled && !isReadonly && onFocus($event)"
           @blur="onBlur"
           @keydown="!isDisabled && !isReadonly && onKeydown($event)"
-          :class="{ 'w-select__selection--placeholder': !$scopedSlots.selection && !selectionString && placeholder }"
-          :disabled="isDisabled || null"
-          readonly
-          aria-readonly="true"
-          :tabindex="tabindex || null"
-          v-html="($scopedSlots.selection ? '' : selectionString) || placeholder")
+          v-bind="selectionAttributes"
+          v-html="selectionHtml")
         //- For standard HTML form submission.
         input(
           v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
@@ -74,6 +69,7 @@ component(
       @input="onInput"
       @item-click="$emit('item-click', $event)"
       @item-select="onListItemSelect"
+      @keydown.native="onWListKeydown"
       @keydown:enter="noUnselect && !multiple && closeMenu()"
       @keydown:escape="showMenu && (showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
       :value="inputValue"
@@ -161,7 +157,10 @@ export default {
     showMenu: false,
     menuMinWidth: 0,
     isFocused: false,
-    selectionWrapRef: undefined
+    selectionWrapRef: undefined,
+    // Lookup a select list item from typing the first characters.
+    // If typing is too slow (> 1s), the lookup string is cleared.
+    quickLookup: { string: '', timeout: null }
   }),
 
   computed: {
@@ -178,19 +177,31 @@ export default {
         return obj
       })
     },
-    hasValue () {
-      return Array.isArray(this.inputValue) ? this.inputValue.length : (this.inputValue !== null)
-    },
     hasLabel () {
       return this.label || this.$slots.default
     },
     showLabelInside () {
-      return !this.staticLabel || (!this.hasValue && !this.placeholder)
+      return !this.staticLabel || (!this.inputValue.length && !this.placeholder)
+    },
+    selectionAttributes () {
+      return {
+        class: { 'w-select__selection--placeholder': !this.$scopedSlots.selection && !this.selectionString && this.placeholder },
+        disabled: this.isDisabled || null,
+        readonly: true,
+        ariareadonly: 'true',
+        tabindex: this.tabindex ?? null,
+        contenteditable: this.isDisabled || this.isReadonly ? 'false' : 'true'
+      }
     },
     selectionString () {
-      return this.inputValue && this.inputValue.map(
+      return this.inputValue.map(
         item => item[this.itemValueKey] !== undefined ? item[this.itemLabelKey] : (item[this.itemLabelKey] ?? item)
       ).join(', ')
+    },
+    selectionHtml () {
+      if (!this.inputValue.length) return this.placeholder || ''
+      if (this.$scopedSlots.selection) return ''
+      return this.selectionString
     },
     classes () {
       return {
@@ -198,7 +209,7 @@ export default {
         'w-select--disabled': this.isDisabled,
         'w-select--fit-to-content': this.fitToContent,
         'w-select--readonly': this.isReadonly,
-        [`w-select--${this.hasValue ? 'filled' : 'empty'}`]: true,
+        [`w-select--${this.inputValue.length ? 'filled' : 'empty'}`]: true,
         'w-select--focused': (this.isFocused || this.showMenu) && !this.isReadonly,
         'w-select--dark': this.dark,
         'w-select--floating-label': this.hasLabel && this.labelPosition === 'inside' && !this.staticLabel,
@@ -291,13 +302,40 @@ export default {
           if (!allItemsAreDisabled) this.onInput(items[index])
         }
       }
+
+      // `e.key.length === 1`: only the keys that output a character.
+      else if (e.key.length === 1) this.focusItemOnQuickLookup(e)
+    },
+
+    onWListKeydown (e) {
+      // `e.key.length === 1`: only the keys that output a character.
+      if (e.key.length === 1) this.focusItemOnQuickLookup(e)
+    },
+
+    focusItemOnQuickLookup (e) {
+      // Reset the timer every time a new valid key is pressed so we concat the string of chars.
+      if (this.quickLookup.timeout) clearTimeout(this.quickLookup.timeout)
+      // On each keypress, wait for 1s and clear the lookup string unless a key is pressed again.
+      this.quickLookup.timeout = setTimeout(() => this.quickLookup.string = '', 1000)
+
+      // Form a lookup string that is tested (starting from the first char) on each list item until
+      // a match is found.
+      this.quickLookup.string += e.key
+      const re = new RegExp(`^${this.quickLookup.string}`, 'i')
+      const itemIndexToFocus = this.selectItems.findIndex(
+        item => !item.disabled && item[this.itemLabelKey].match(re)
+      ) + 1 // 0 if not found, more if found.
+      if (itemIndexToFocus) {
+        const selector = `.w-list__item:nth-child(${itemIndexToFocus}) .w-list__item-label`
+        this.$refs['w-list']?.$el?.querySelector(selector)?.focus()
+      }
     },
 
     // The items are given by the w-list component.
     onInput (items) {
       this.inputValue = items === null ? [] : (this.multiple ? items : [items])
       // Return the original items when returnObject is true (no `value` if there wasn't),
-      // or the the item value otherwise.
+      // or the item value otherwise.
       items = this.inputValue.map(item => this.returnObject ? this.items[item.index] : item.value)
 
       // Emit the selection to the v-model.
@@ -306,6 +344,7 @@ export default {
       this.$emit('update:modelValue', selection)
       this.$emit('input', selection)
     },
+
     onInputFieldClick () {
       if (this.showMenu) this.showMenu = false // Will call `closeMenu()` from w-menu(@close).
       else this.openMenu()
@@ -338,7 +377,7 @@ export default {
       return items.map(item => {
         let value = item
         if (item && typeof item === 'object') { // `null` is also an object!
-          value = item[this.itemValueKey] !== undefined ? item[this.itemValueKey] : (item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item)
+          value = item[this.itemValueKey] ?? item[this.itemLabelKey] ?? item
         }
 
         return this.selectItems[allValues.indexOf(value)]
@@ -362,7 +401,7 @@ export default {
 
       this.showMenu = false
       // Set the focus back on the main w-select input.
-      setTimeout(() => this.$refs['selection-input'].focus(), 50)
+      setTimeout(() => this.$refs['selection-input']?.focus(), 50)
     }
   },
 
@@ -471,6 +510,9 @@ export default {
     align-items: center;
     cursor: pointer;
     caret-color: transparent;
+    border-radius: inherit;
+
+    &--placeholder {color: #888;}
 
     .w-select__selection-slot + & {
       position: absolute;
@@ -497,8 +539,6 @@ export default {
     }
 
     .w-select--readonly & {cursor: auto;}
-
-    &--placeholder {color: #888;}
   }
 
   &__selection-slot {
@@ -560,14 +600,12 @@ export default {
 
   &__label--inside {
     position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
+    inset: 0 0 auto;
+    min-height: inherit;
     white-space: nowrap;
     // Use margin instead of padding as the scale transformation below decreases the real padding
     // size and misaligns the label.
     margin-left: 2 * $base-increment;
-    transform: translateY(-50%);
     pointer-events: none;
 
     .w-select--inner-icon-right & {padding-right: 26px;}
@@ -591,21 +629,15 @@ export default {
     .w-select--open.w-select--floating-label &,
     .w-select--filled.w-select--floating-label &,
     .w-select--has-placeholder.w-select--floating-label & {
-      transform: translateY(-160%) scale(0.85);
+      transform: translateY(-80%) scale(0.85);
     }
-    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+    // Chrome & Safari - Must stay a separated rule or Firefox discards the whole rule seeing -webkit-.
     .w-select--floating-label .w-select__select:-webkit-autofill & {
-      transform: translateY(-160%) scale(0.85);
-    }
-    // Move label with outline style or with shadow.
-    .w-select--open.w-select--floating-label .w-select__selection-wrap--box &,
-    .w-select--filled.w-select--floating-label .w-select__selection-wrap--box &,
-    .w-select--has-placeholder.w-select--floating-label .w-select__selection-wrap--box & {
-      transform: translateY(-180%) scale(0.85);
+      transform: translateY(-80%) scale(0.85);
     }
     .w-select--open.w-select--floating-label.w-select--inner-icon-left &,
     .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
-    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+    // Chrome & Safari - Must stay a separated rule or Firefox discards the whole rule seeing -webkit-.
     .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
   }
 
