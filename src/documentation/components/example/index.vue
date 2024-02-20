@@ -180,7 +180,7 @@ export default {
       else {
         js = 'new Vue({' +
                 '\n  waveui: new WaveUI()' + (slots.js ? ',\n  ' : '') +
-                slots.js.replace(/\n$/, '').replace(/\n/g, '\n  ') +
+                slots.js.replace(/\n+$/, '').replace(/\n/g, '\n  ') +
                 '\n}).$mount(\'#app\')'
       }
 

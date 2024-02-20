@@ -1,5 +1,6 @@
 export { default as WAccordion } from './w-accordion.vue'
 export { default as WAlert } from './w-alert.vue'
+export { default as WAutocomplete } from './w-autocomplete.vue'
 export { default as WApp } from './w-app.vue'
 export { default as WBadge } from './w-badge.vue'
 export { default as WBreadcrumbs } from './w-breadcrumbs.vue'

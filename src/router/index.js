@@ -9,7 +9,7 @@ Vue.use(VueRouter)
 export const UIComponents = [
   { id: 'accordion', label: 'Accordion' },
   { id: 'alert', label: 'Alert' },
-  // { id: 'autocomplete', label: 'Autocomplete', inProgress: true },
+  { id: 'autocomplete', label: 'Autocomplete', inProgress: true },
   { id: 'app', label: 'App' },
   { id: 'breadcrumbs', label: 'Breadcrumbs' },
   { id: 'button', label: 'Button' },

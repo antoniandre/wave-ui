@@ -164,7 +164,7 @@ main
           @click="$waveui.switchTheme($waveui.theme === 'light' ? 'dark' : 'light')")
       ssh-pre(
         v-show="!$store.state.usePug"
-        language="vue-html"
+        language="html-vue"
         :dark="$store.state.darkMode").
         &lt;w-button
           fixed

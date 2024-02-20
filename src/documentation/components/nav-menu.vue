@@ -104,7 +104,7 @@ export default {
   position: relative;
   width: 100%;
   min-width: 180px;
-  max-width: 270px;
+  max-width: 300px;
   margin-left: -12px;
   padding-left: 30px;
 

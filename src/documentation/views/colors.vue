@@ -262,7 +262,21 @@ import { colorPalette } from '@/wave-ui/utils/colors'
 export default {
   data: () => ({
     colorPalette: colorPalette.filter(color => !['black', 'white', 'inherit', 'transparent'].includes(color.label)),
-    horizontal: false
+    horizontal: false,
+    tableHeaders: [
+      { label: 'CSS class', key: 'cssClass' },
+      { label: 'CSS3 variable', key: 'css3Var' },
+      { label: 'Light theme default', key: 'lightDefault', width: '10%' },
+      { label: 'Dark theme default', key: 'darkDefault', width: '10%' },
+      { label: 'Description', key: 'desc', width: '40%' }
+    ],
+    tableItems: [
+      { cssClass: '.base-color', css3Var: '--w-base-color-rgb', lightDefault: '#000', darkDefault: '#fff', desc: 'Base color for texts. For light theme this color should be dark and vice-versa.' },
+      { cssClass: '.base-color--bg', css3Var: '--w-base-bg-color-rgb', lightDefault: '#fff', darkDefault: '#222', desc: 'Base background color. For light theme this color should be light and vice-versa.' },
+      { cssClass: '.contrast-color', css3Var: '--w-contrast-color-rgb', lightDefault: '#fff', darkDefault: '#000', desc: 'A high contrast color from the current background of the app.' },
+      { cssClass: '.contrast-color--bg', css3Var: '--w-contrast-bg-color-rgb', lightDefault: '#000', darkDefault: '#fff', desc: 'A high contrast background color from the current background of the app.' },
+      { cssClass: '.disabled-color', css3Var: '--w-disabled-color-rgb', lightDefault: '#ccc', darkDefault: '#4a4a4a', desc: 'When a form element is disabled.' }
+    ]
   })
 }
 </script>
