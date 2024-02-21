@@ -33,6 +33,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v3.11.0
+      ul
+        li
+          strong.code TypeScript
+          ul
+            li Added TypeScript definitions. More fine-grain definitions will be added gradually (you can create a PR if you want to contribute). #[issue-link 26]
+
+    li.minor
       strong.version v3.10.0
       ul
         li
