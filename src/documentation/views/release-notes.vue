@@ -53,7 +53,7 @@ main
               .red.
                 Impacted the CSS classes of the #[strong.code w-table] component: the wrapper now
                 has the #[code .w-table] and the table now has the #[code .w-table__table] class.
-                YOu may need to review your external CSS overrides.
+                You may need to review your external CSS overrides.
         li
           strong.code Minor CSS improvements
           ul
