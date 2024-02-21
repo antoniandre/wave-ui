@@ -302,6 +302,7 @@ export default {
       top: 0;
       width: $base-increment;
       aspect-ratio: 1;
+      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
       background-color: $slider-step-label-bg-color;
       border-radius: 99em;
       // box-shadow: 0 0 0 1px #fff;
@@ -365,6 +366,7 @@ export default {
     position: absolute;
     width: 3 * $base-increment;
     aspect-ratio: 1;
+    min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
     left: 100%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -380,6 +382,7 @@ export default {
     top: 0;
     width: 100%;
     aspect-ratio: 1;
+    min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
     border: none;
     border-radius: 99em;
     cursor: pointer;
@@ -456,6 +459,7 @@ export default {
       border-radius: 99em 99em 99em 0;
       width: 2.8em;
       aspect-ratio: 1;
+      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
 
       & > div {
         position: absolute;

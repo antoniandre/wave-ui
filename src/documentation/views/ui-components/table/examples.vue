@@ -516,7 +516,7 @@ div
     The sticky mechanism is done via CSS (position: sticky). So if you set multiple sticky
     columns, one will overlap the previous one as you scroll.
   p.grey Scroll the table horizontally to observe the behavior.
-  example
+  example.example--sticky-columns
     .w-flex.align-center.mb2
       | Sticky columns:
       w-radios.ml1.mr4(
@@ -583,6 +583,10 @@ div
           ]
         }
       })
+    template(#css).
+      /* This CSS is not needed. It's only to increase the scroll in the sticky columns demo. */
+      .w-table {white-space: nowrap;}
+      .w-table__header, .w-table__cell {padding-left: 20px;padding-right: 20px;}
 
   title-link(h2) Sorting
   p.
@@ -638,7 +642,7 @@ div
       :items="table10.items"
       :sort-function="sortFunction"
       :loading="table10.loading"
-      style="height: 140px")
+      style="height: 145px")
       template(#pug).
         w-table.my6(
         :headers="table.headers"
@@ -956,7 +960,7 @@ div
     | reload
 
   title-link(h3) Simple table - no set height
-  example
+  example(style="height: 170px")
     w-table(
       :headers="table1.headers"
       :items="table1.items"
@@ -1051,9 +1055,7 @@ div
         setTimeout(() => {this.loading = false}, 3000)
       }
 
-  title-link(h2 slug="pagination")
-    | Pagination
-    w-tag.ml2.text-bold(round color="warning" outline sm) IN PROGRESS
+  title-link(h2) Pagination
   p The pagination can be provided as an object:
   ssh-pre(language="js").
     {
@@ -1064,7 +1066,7 @@ div
       page: Integer, // The current page to display [itemsPerPage] number of rows.
       total: Integer // The total number of items available in the table.
     }
-  p More details in the #[a(href="#pagination") API section].
+  p More details in the #[a(href="#pagination-prop") API section].
   p.
     The pagination is a two-way binding object: if you modify any property inside it, the table
     will re-paginate and update.
@@ -1125,13 +1127,7 @@ div
         })
       })
 
-      app.use(WaveUI, {
-        colors: {
-          primary: '#89b6d2',
-          secondary: '375b6a'
-        },
-        theme: 'dark'
-      })
+      app.use(WaveUI, { theme: 'auto' })
 
       app.mount('#app')
 
@@ -1194,7 +1190,7 @@ div
             loading: false,
             pagination: {
               itemsPerPage: 50,
-              total: 200
+              total: 2000
             }
           }
         }),
@@ -1222,13 +1218,226 @@ div
         }
       })
 
-      app.use(WaveUI, {
-        colors: {
-          primary: '#89b6d2',
-          secondary: '375b6a'
-        },
-        theme: 'dark'
+      app.use(WaveUI, { theme: 'auto' })
+
+      app.mount('#app')
+
+  title-link(h3) Custom pagination layout
+  p More details about the pagination slot in the #[a(href="#pagination-slot") API section].
+  example(:blank-codepen="['js']")
+    w-table(
+      :headers="table11.headers"
+      :items="table11.items"
+      fixed-headers
+      fixed-footer
+      :pagination="table11.pagination"
+      style="max-height: 500px")
+      template(#pagination="{ range, total, page, pagesCount, goToPage }")
+        .w-flex.align-center.gap2.pa1
+          .w-flex.gap2.no-grow
+            w-button(
+              @click="goToPage('-1')"
+              :disabled="page === 1"
+              icon="wi-chevron-left"
+              xs)
+            w-button(
+              v-for="i in pagesCount"
+              :key="i"
+              @click="i !== page && goToPage(i)"
+              :outline="page === i"
+              round
+              xs) {{ i }}
+            w-button(
+              @click="goToPage('+1')"
+              :disabled="page === pagesCount"
+              icon="wi-chevron-right"
+              xs)
+          p.mb0 {{ range }} of {{ total }}.
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :pagination="table.pagination"
+        style="max-height: 500px")
+        template(#pagination="{ range, total, page, pagesCount, goToPage }")
+          .w-flex.align-center.gap2.pa1
+            .w-flex.gap2.no-grow
+              w-button(
+                @click="goToPage&#40;'-1'&#41;"
+                :disabled="page === 1"
+                icon="wi-chevron-left"
+                xs)
+              w-button(
+                v-for="i in pagesCount"
+                :key="i"
+                @click="i !== page &amp;&amp; goToPage&#40;i&#41;"
+                :outline="page === i"
+                round
+                xs) {{ '\{\{ i \}\}' }}
+              w-button(
+                @click="goToPage&#40;1&#41;"
+                :disabled="page === pagesCount"
+                icon="wi-chevron-right"
+                xs)
+            p {{ '\{\{ range \}\}' }} of {{ '\{\{ total \}\}' }}.
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :pagination="table.pagination"
+        style="max-height: 500px"&gt;
+        &lt;template #pagination="{ range, total, page, pagesCount, goToPage }"&gt;
+          &lt;div class="w-flex align-center gap2 pa1"&gt;
+            &lt;div class="w-flex align-center gap2 pa1"&gt;
+              &lt;w-button
+                @click="goToPage('-1')"
+                :disabled="page === 1"
+                icon="wi-chevron-left"
+                xs&gt;
+              &lt;/w-button&gt;
+              &lt;w-button
+                v-for="i in pagesCount"
+                :key="i"
+                @click="i !== page &amp;&amp; goToPage(i)"
+                :outline="page === i"
+                round
+                xs&gt;
+                {{ '\{\{ i \}\}' }}
+              &lt;/w-button&gt;
+              &lt;w-button
+                @click="goToPage('+1')"
+                :disabled="page === pagesCount"
+                icon="wi-chevron-right"
+                xs&gt;
+              &lt;/w-button&gt;
+            &lt;/div&gt;
+            &lt;p&gt; {{ '\{\{ range \}\}' }} of {{ '\{\{ total \}\}' }}.&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/template&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      // import { faker } from '@faker-js/faker' // With npm.
+      import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'
+
+      const app = Vue.createApp({
+        data: () => ({
+          table: {
+            headers: [
+              { label: 'ID', key: 'id' },
+              { label: 'First name', key: 'firstName' },
+              { label: 'Last name', key: 'lastName' },
+              { label: 'Birthdate', key: 'birthdate' },
+            ],
+            items: Array(200).fill('').map((item, i) => ({
+              id: i + 1,
+              firstName: faker.person.firstName(),
+              lastName: faker.person.lastName(),
+              birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
+            })),
+            pagination: {
+              itemsPerPage: 50,
+              total: 200
+            }
+          }
+        })
       })
+
+      app.use(WaveUI, { theme: 'auto' })
+
+      app.mount('#app')
+
+  title-link(h3) Initing the pagination with a certain state
+  example(:blank-codepen="['js']")
+    w-table(
+      :headers="table13.headers"
+      :items="table13.items"
+      fixed-headers
+      fixed-footer
+      :fetch="table13.fetch"
+      :pagination="table13.pagination"
+      :loading="table13.loading"
+      style="max-height: 500px")
+    template(#pug).
+      w-table(
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :fetch="table.fetch"
+        :pagination="table.pagination"
+        :loading="table.loading"
+        style="max-height: 500px")
+    template(#html).
+      &lt;w-table
+        :headers="table.headers"
+        :items="table.items"
+        fixed-headers
+        fixed-footer
+        :fetch="table.fetch"
+        :pagination="table.pagination"
+        :loading="table.loading"
+        style="max-height: 500px"&gt;
+      &lt;/w-table&gt;
+    template(#js).
+      // import { faker } from '@faker-js/faker' // With npm.
+      import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'
+
+      // Generate a server-side array of objects of 2000 random persons
+      // that we assume will be returned paginated from our backend.
+      const tableItemsInApi = Array(2000).fill('').map((item, i) => ({
+        id: i + 1,
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        birthdate: (faker.date.birthdate()).toISOString().substring(0, 10)
+      }))
+
+      const app = Vue.createApp({
+        data: () => ({
+          table: {
+            headers: [
+              { label: 'ID', key: 'id' },
+              { label: 'First name', key: 'firstName' },
+              { label: 'Last name', key: 'lastName' },
+              { label: 'Birthdate', key: 'birthdate' },
+            ],
+            items: [], // The frontend has no data by default.
+            loading: false,
+            pagination: {
+              page: 17,
+              itemsPerPage: 50,
+              total: 2000
+            }
+          }
+        }),
+
+        methods: {
+          // All these parameters are available from Wave UI.
+          fetch ({ page, start, end, total, itemsPerPage, sorting }) {
+            this.table.loading = 'header' // Display the loading bar.
+
+            // Simulating a call to the backend with a delay of 1 second.
+            // Once you receive the rows from the backend assign them to the table.items var.
+            setTimeout(() => {
+              const itemsFromApi = tableItemsInApi.slice(0) // Clone the array before sorting.
+              if (sorting.length) {
+                const sortKey = sorting[0].substring(1)
+                itemsFromApi.sort((a, b) => {
+                  if (sorting[0][0] === '+') return a[sortKey] &lt; b[sortKey] ? -1 : 1
+                  else return a[sortKey] > b[sortKey] ? -1 : 1
+                })
+              }
+              this.table.items = itemsFromApi.slice(start - 1, end)
+              this.table.loading = false
+            }, 1000)
+          }
+        }
+      })
+
+      app.use(WaveUI, { theme: 'auto' })
 
       app.mount('#app')
 
@@ -2054,6 +2263,36 @@ export default {
           }, 1000)
         }
       },
+      table13: {
+        headers: [
+          { label: 'ID', key: 'id' },
+          { label: 'First name', key: 'firstName' },
+          { label: 'Last name', key: 'lastName' },
+          { label: 'Birthdate', key: 'birthdate' }
+        ],
+        items: [],
+        loading: false,
+        pagination: {
+          page: 17,
+          itemsPerPage: 50,
+          total: 2000
+        },
+        fetch: ({ page, start, end, total, itemsPerPage, sorting }) => {
+          this.table13.loading = 'header'
+          setTimeout(() => {
+            const itemsFromApi = table12ItemsInApi.slice(0) // Clone the array before sorting.
+            if (sorting.length) {
+              const sortKey = sorting[0].substring(1)
+              itemsFromApi.sort((a, b) => {
+                if (sorting[0][0] === '+') return a[sortKey] < b[sortKey] ? -1 : 1
+                else return a[sortKey] > b[sortKey] ? -1 : 1
+              })
+            }
+            this.table13.items = itemsFromApi.slice(start - 1, end)
+            this.table13.loading = false
+          }, 1000)
+        }
+      },
       selectableRowsOptions: [
         { label: '<code class="mr2">:selectable-row="false"</code> (default)', value: false },
         { label: '<code>selectable-row</code>', value: true },
@@ -2114,3 +2353,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.example--sticky-columns {
+  .w-table {white-space: nowrap;}
+  .w-table__header, .w-table__cell {padding-left: 20px;padding-right: 20px;}
+}
+</style>

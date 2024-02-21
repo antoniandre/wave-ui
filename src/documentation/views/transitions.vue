@@ -378,7 +378,7 @@ main
         .transition-box.pa6.ma10.yellow-light5--bg(
           v-if="toggleExpandXY2"
           style="width: auto")
-          .amber-light4--bg.pa2(style="overflow: hidden;white-space: nowrap;width: 200px")
+          .amber-light4--bg.black.pa2(style="overflow: hidden;white-space: nowrap;width: 200px")
             | X &amp; Y expanding transition
     template(#pug).
       w-flex(align-center)
@@ -391,7 +391,7 @@ main
           .transition-box.pa6.ma10.yellow-light5--bg(
             v-if="toggleExpandXY2"
             style="width: auto")
-            .amber-light4--bg.pa2(style="overflow: hidden;white-space: nowrap;width: 200px")
+            .amber-light4--bg.black.pa2(style="overflow: hidden;white-space: nowrap;width: 200px")
               | X &amp; Y expanding transition
     template(#html).
       &lt;w-flex align-center&gt;

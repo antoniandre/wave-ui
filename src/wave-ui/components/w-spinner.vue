@@ -62,6 +62,7 @@ export default {
   font-size: 2rem;
   width: 1em;
   aspect-ratio: 1;
+  min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
 
   &.size--xs {font-size: round(0.9 * divide($base-font-size, 2)) * 2;}
   &.size--sm {font-size: round(1.5 * $base-font-size);}
@@ -74,6 +75,7 @@ export default {
     position: absolute;
     width: 100%;
     aspect-ratio: 1;
+    min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
     top: 0;
     left: 0;
     background-color: currentColor;

@@ -1,176 +1,192 @@
 <template lang="pug">
-.w-table-wrap(:class="wrapClasses")
-  table.w-table(
-    :class="classes"
-    @mousedown="onMouseDown"
-    @mouseover="onMouseOver"
-    @mouseout="onMouseOut")
-    colgroup(ref="colgroup")
-      col.w-table__col(
-        v-for="(header, i) in headers"
-        :key="i"
-        :width="header.width || null"
-        :class="colClasses[i]")
-
-    //- Table header.
-    thead(v-if="!noHeaders")
-      tr
-        th.w-table__header(
+.w-table.w-table--wrap(:class="classes")
+  .w-table__scroll-wrap
+    table.w-table__table(
+      @mousedown="onMouseDown"
+      @mouseover="onMouseOver"
+      @mouseout="onMouseOut")
+      colgroup(ref="colgroup")
+        col.w-table__col(
           v-for="(header, i) in headers"
           :key="i"
-          @click="!colResizing.dragging && header.sortable !== false && sortTable(header)"
-          :class="headerClasses(header)")
-          w-icon.w-table__header-sort(
-            v-if="header.sortable !== false && header.align === 'right'"
-            :class="headerSortClasses(header)") wi-arrow-down
-          template(v-if="header.label")
-            slot(
-              v-if="$slots['header-label']"
-              name="header-label"
-              :header="header"
-              :label="header.label"
-              :index="i + 1") {{ header.label || '' }}
-            span(v-else v-html="header.label || ''")
-          w-icon.w-table__header-sort(
-            v-if="header.sortable !== false && header.align !== 'right'"
-            :class="headerSortClasses(header)") wi-arrow-down
-          //- Notes: prevent click on header (`.stop`), which triggers sorting & DOM refresh.
-          span.w-table__col-resizer(
-            v-if="i < headers.length - 1 && resizableColumns"
-            :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === i }"
-            @click.stop)
-      //- Progress bar only.
-      w-transition-fade
-        tr.w-table__progress-bar(v-if="loading === 'header'")
+          :width="header.width || null"
+          :class="colClasses[i]")
+
+      //- Table header.
+      thead(v-if="!noHeaders")
+        tr
+          th.w-table__header(
+            v-for="(header, i) in headers"
+            :key="i"
+            @click="!colResizing.dragging && header.sortable !== false && sortTable(header)"
+            :class="headerClasses(header)")
+            w-icon.w-table__header-sort(
+              v-if="header.sortable !== false && header.align === 'right'"
+              :class="headerSortClasses(header)") wi-arrow-down
+            template(v-if="header.label")
+              slot(
+                v-if="$slots['header-label']"
+                name="header-label"
+                :header="header"
+                :label="header.label"
+                :index="i + 1") {{ header.label || '' }}
+              span(v-else v-html="header.label || ''")
+            w-icon.w-table__header-sort(
+              v-if="header.sortable !== false && header.align !== 'right'"
+              :class="headerSortClasses(header)") wi-arrow-down
+            //- Notes: prevent click on header (`.stop`), which triggers sorting & DOM refresh.
+            span.w-table__col-resizer(
+              v-if="i < headers.length - 1 && resizableColumns"
+              :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === i }"
+              @click.stop)
+        //- Progress bar only.
+        w-transition-fade
+          tr.w-table__progress-bar(v-if="loading === 'header'")
+            td(:colspan="headers.length")
+              w-progress(tile)
+
+      //- Table body.
+      tbody
+        //- Progress bar & loading text.
+        tr.w-table__progress-bar(v-if="loading === true")
           td(:colspan="headers.length")
             w-progress(tile)
+            .w-table__loading-text
+              slot(name="loading") Loading...
+        //- No data.
+        tr.no-data(v-else-if="!tableItems.length")
+          td.w-table__cell.text-center(:colspan="headers.length")
+            slot(name="no-data") No data to show.
 
-    //- Table body.
-    tbody
-      //- Progress bar & loading text.
-      tr.w-table__progress-bar(v-if="loading === true")
-        td(:colspan="headers.length")
-          w-progress(tile)
-          .w-table__loading-text
-            slot(name="loading") Loading...
-      //- No data.
-      tr.no-data(v-else-if="!tableItems.length")
-        td.w-table__cell.text-center(:colspan="headers.length")
-          slot(name="no-data") No data to show.
-
-      //- Normal rows.
-      template(v-if="tableItems.length && loading !== true")
-        template(v-for="(item, i) in paginatedItems" :key="i")
-          //- Fully custom tr (`item` slot).
-          slot(
-            v-if="$slots.item"
-            name="item"
-            :item="item"
-            :index="i + 1"
-            :select="() => doSelectRow(item, i)"
-            :classes="{ 'w-table__row': true, 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined }")
-
-          tr.w-table__row(
-            v-else
-            @click="doSelectRow(item, i)"
-            :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined }")
-            template(v-for="(header, j) in headers")
-              td.w-table__cell(
-                v-if="$slots[`item-cell.${header.key}`] || $slots[`item-cell.${j + 1}`] || $slots['item-cell']"
-                :key="`${j}-a`"
-                :data-label="header.label"
-                :class="{ [`text-${header.align || 'left'}`]: true, 'w-table__cell--sticky': header.sticky }")
-                slot(
-                  v-if="$slots[`item-cell.${header.key}`]"
-                  :name="`item-cell.${header.key}`"
-                  :header="header"
-                  :item="item"
-                  :label="item[header.key] || ''"
-                  :index="i + 1")
-                slot(
-                  v-else-if="$slots[`item-cell.${j + 1}`]"
-                  :name="`item-cell.${j + 1}`"
-                  :header="header"
-                  :item="item"
-                  :label="item[header.key] || ''"
-                  :index="i + 1")
-                slot(
-                  v-else-if="$slots['item-cell']"
-                  name="item-cell"
-                  :header="header"
-                  :item="item"
-                  :label="item[header.key] || ''"
-                  :index="i + 1")
-                span.w-table__col-resizer(
-                  v-if="j < headers.length - 1 && resizableColumns"
-                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
-
-              td.w-table__cell(
-                v-else
-                :key="`${j}-b`"
-                :data-label="header.label"
-                :class="{ [`text-${header.align || 'left'}`]: true, 'w-table__cell--sticky': header.sticky }")
-                div(v-html="item[header.key] || ''")
-                span.w-table__col-resizer(
-                  v-if="j < headers.length - 1 && resizableColumns"
-                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
-
-          //- Expanded row.
-          tr.w-table__row.w-table__row--expansion(v-if="expandedRowsByUid[item._uid]")
-            td.w-table__cell(:colspan="headers.length")
-              w-transition-expand(y)
-                div(v-if="expandedRowsByUid[item._uid]")
-                  slot(name="row-expansion" :item="item" :index="i + 1")
-                span.w-table__col-resizer(
-                  v-if="i < headers.length - 1 && resizableColumns"
-                  :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
-      //- Extra row.
-      .w-table__extra-row(v-if="$slots['extra-row']")
-        slot(name="extra-row")
-
-    //- Table footer.
-    tfoot.w-table__footer(v-if="$slots.footer || $slots['footer-row'] || pagination")
-      slot(v-if="$slots['footer-row']" name="footer-row")
-      tr.w-table__row(v-else-if="$slots.footer")
-        td.w-table__cell(:colspan="headers.length")
-          slot(name="footer")
-      tr.w-table__row.w-table__pagination-wrap(v-if="pagination && paginationConfig")
-        td.w-table__cell(:colspan="headers.length")
-          .w-table__pagination.w-pagination
+        //- Normal rows.
+        template(v-if="tableItems.length && loading !== true")
+          template(v-for="(item, i) in paginatedItems" :key="i")
+            //- Fully custom tr (`item` slot).
             slot(
-              name="pagination"
-              :range="`${paginationConfig.start}-${paginationConfig.end}`"
-              :total="paginationConfig.total")
-              w-select.w-pagination__items-per-page(
-                v-if="paginationConfig.itemsPerPageOptions"
-                v-model="paginationConfig.itemsPerPage"
-                @input="updatePaginationConfig({ itemsPerPage: paginationConfig.itemsPerPage })"
-                :items="paginationConfig.itemsPerPageOptions"
-                label-position="left"
-                label="Items per page"
-                label-color="inherit")
-              .pages-wrap
-                w-button.w-pagination__arrow.w-pagination__arrow--prev(
-                  @click="goToPage('-1')"
-                  :disabled="paginationConfig.page <= 1"
-                  icon="wi-chevron-left"
-                  text
-                  lg)
-                w-button.w-pagination__page(
-                  v-for="i in paginationConfig.pagesCount"
-                  :key="i"
-                  @click="i !== paginationConfig.page && goToPage(i)"
-                  :class="{ 'w-pagination__page--active': i === paginationConfig.page }"
-                  round
-                  lg) {{ i }}
-                w-button.w-pagination__arrow.w-pagination__arrow--next(
-                  @click="goToPage('+1')"
-                  :disabled="paginationConfig.page >= paginationConfig.pagesCount"
-                  icon="wi-chevron-right"
-                  text
-                  lg)
-              span.w-pagination__results.
-                {{ paginationConfig.start }}-{{ paginationConfig.end || paginationConfig.total }} of {{ paginationConfig.total }}
+              v-if="$slots.item"
+              name="item"
+              :item="item"
+              :index="i + 1"
+              :select="() => doSelectRow(item, i)"
+              :classes="{ 'w-table__row': true, 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined }")
+
+            tr.w-table__row(
+              v-else
+              @click="doSelectRow(item, i)"
+              :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined }")
+              template(v-for="(header, j) in headers")
+                td.w-table__cell(
+                  v-if="$slots[`item-cell.${header.key}`] || $slots[`item-cell.${j + 1}`] || $slots['item-cell']"
+                  :key="`${j}-a`"
+                  :data-label="header.label"
+                  :class="{ [`text-${header.align || 'left'}`]: true, 'w-table__cell--sticky': header.sticky }")
+                  slot(
+                    v-if="$slots[`item-cell.${header.key}`]"
+                    :name="`item-cell.${header.key}`"
+                    :header="header"
+                    :item="item"
+                    :label="item[header.key] || ''"
+                    :index="i + 1")
+                  slot(
+                    v-else-if="$slots[`item-cell.${j + 1}`]"
+                    :name="`item-cell.${j + 1}`"
+                    :header="header"
+                    :item="item"
+                    :label="item[header.key] || ''"
+                    :index="i + 1")
+                  slot(
+                    v-else-if="$slots['item-cell']"
+                    name="item-cell"
+                    :header="header"
+                    :item="item"
+                    :label="item[header.key] || ''"
+                    :index="i + 1")
+                  span.w-table__col-resizer(
+                    v-if="j < headers.length - 1 && resizableColumns"
+                    :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
+
+                td.w-table__cell(
+                  v-else
+                  :key="`${j}-b`"
+                  :data-label="header.label"
+                  :class="{ [`text-${header.align || 'left'}`]: true, 'w-table__cell--sticky': header.sticky }")
+                  div(v-html="item[header.key] || ''")
+                  span.w-table__col-resizer(
+                    v-if="j < headers.length - 1 && resizableColumns"
+                    :class="{ 'w-table__col-resizer--hover': colResizing.hover === j, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
+
+            //- Expanded row.
+            tr.w-table__row.w-table__row--expansion(v-if="expandedRowsByUid[item._uid]")
+              td.w-table__cell(:colspan="headers.length")
+                w-transition-expand(y)
+                  div(v-if="expandedRowsByUid[item._uid]")
+                    slot(name="row-expansion" :item="item" :index="i + 1")
+                  span.w-table__col-resizer(
+                    v-if="i < headers.length - 1 && resizableColumns"
+                    :class="{ 'w-table__col-resizer--hover': colResizing.hover === i, 'w-table__col-resizer--active': colResizing.columnIndex === j }")
+        //- Extra row.
+        .w-table__extra-row(v-if="$slots['extra-row']")
+          slot(name="extra-row")
+
+      //- Table footer.
+      tfoot.w-table__footer(v-if="$slots.footer || $slots['footer-row']")
+        slot(v-if="$slots['footer-row']" name="footer-row")
+        tr.w-table__row(v-else-if="$slots.footer")
+          td.w-table__cell(:colspan="headers.length")
+            slot(name="footer")
+  .w-table__pagination.w-pagination(v-if="pagination && paginationConfig")
+    slot(
+      name="pagination"
+      :range="`${paginationConfig.start}-${paginationConfig.end}`"
+      :total="paginationConfig.total"
+      :pages-count="paginationConfig.pagesCount"
+      :page="paginationConfig.page"
+      :goToPage="goToPage")
+      w-select.w-pagination__items-per-page(
+        v-if="paginationConfig.itemsPerPageOptions"
+        v-model="paginationConfig.itemsPerPage"
+        @input="updatePaginationConfig({ itemsPerPage: paginationConfig.itemsPerPage })"
+        :items="paginationConfig.itemsPerPageOptions"
+        label-position="left"
+        label="Items per page"
+        label-color="inherit")
+      .pages-wrap
+        w-button.w-pagination__arrow.w-pagination__arrow--prev(
+          @click="goToPage('-1')"
+          :disabled="paginationConfig.page <= 1"
+          icon="wi-chevron-left"
+          text
+          lg)
+        template(v-if="paginationConfig.pagesCount > 7")
+          template(v-for="i in paginationConfig.pagesCount" :key="i")
+            w-button.w-pagination__page(
+              v-if="[1, paginationConfig.pagesCount, paginationConfig.page - 1, paginationConfig.page, paginationConfig.page + 1].includes(i)"
+              @click="i !== paginationConfig.page && goToPage(i)"
+              :class="{ 'w-pagination__page--active': i === paginationConfig.page }"
+              round
+              lg) {{ i }}
+            w-button.w-pagination__page(
+              v-else-if="[1, paginationConfig.pagesCount, paginationConfig.page - 1, paginationConfig.page, paginationConfig.page + 1].includes(i - 1)"
+              @click="i !== paginationConfig.page && goToPage(i)"
+              :class="{ 'w-pagination__page--active': i === paginationConfig.page }"
+              round
+              lg) ...
+        template(v-else)
+          w-button.w-pagination__page(
+            v-for="i in paginationConfig.pagesCount"
+            :key="i"
+            @click="i !== paginationConfig.page && goToPage(i)"
+            :class="{ 'w-pagination__page--active': i === paginationConfig.page }"
+            round
+            lg) {{ i }}
+        w-button.w-pagination__arrow.w-pagination__arrow--next(
+          @click="goToPage('+1')"
+          :disabled="paginationConfig.page >= paginationConfig.pagesCount"
+          icon="wi-chevron-right"
+          text
+          lg)
+      span.w-pagination__results.
+        {{ paginationConfig.start }}-{{ paginationConfig.end || paginationConfig.total }} of {{ paginationConfig.total }}
 </template>
 
 <script>
@@ -337,18 +353,6 @@ export default {
       }, {})
     },
 
-    wrapClasses () {
-      return {
-        'w-table-wrap--loading': this.loading
-      }
-    },
-
-    colClasses () {
-      return this.headers.map(header => {
-        return { 'w-table__col--highlighted': this.activeSortingKeys[header.key] }
-      }) || []
-    },
-
     classes () {
       return {
         'w-table--loading': this.loading,
@@ -363,6 +367,12 @@ export default {
         'w-table--dark': this.dark,
         'w-table--light': this.light
       }
+    },
+
+    colClasses () {
+      return this.headers.map(header => {
+        return { 'w-table__col--highlighted': this.activeSortingKeys[header.key] }
+      }) || []
     },
 
     isMobile () {
@@ -562,7 +572,7 @@ export default {
       // (releasing the mouse on table header triggers a click event captured by the sorting feature)
       setTimeout(() => {
         // On Mouse up, emit an event containing all the new widths of the columns.
-        const widths = [...this.$refs.colgroup.childNodes].map(column => column.style?.width || column.offsetWidth)
+        const widths = [...this.$refs.colgroup.children].map(column => column.style?.width || column.offsetWidth)
         this.$emit('column-resize', { index: this.colResizing.columnIndex, widths })
 
         this.colResizing.dragging = false
@@ -604,8 +614,8 @@ export default {
       if (itemsPerPage !== undefined) {
         this.paginationConfig.itemsPerPage = itemsPerPage
         itemsPerPage = itemsPerPage || this.paginationConfig.total // If `0`, take all the results.
-        this.paginationConfig.page = 1;
-        ({ page } = this.paginationConfig) // Shorthand var for next lines.
+        this.paginationConfig.page = page || this.paginationConfig.page || 1
+        page = this.paginationConfig.page // Shorthand var for next lines.
         total = this.paginationConfig.total // Shorthand var for next lines.
         this.paginationConfig.start = 1
         this.paginationConfig.end = total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page))
@@ -697,31 +707,35 @@ export default {
 <style lang="scss">
 $tr-border-top: 1px;
 
-.w-table-wrap {
+.w-table {
   position: relative;
+  display: flex;
+  flex-direction: column;
   border-radius: $border-radius;
   border: $border;
-  overflow: auto;
 
   &--loading {overflow: hidden;}
-}
-
-.w-table {
-  width: 100%;
-  min-height: 100%;
-  border-collapse: collapse;
-  border: none;
-
-  @include themeable;
-
-  &--fixed-layout {
-    table-layout: fixed; // Allow resizing beyond the cell minimum text width.
-  }
 
   &--resizing {
-    &, * {cursor: col-resize;}
-
     user-select: none;
+
+    &, * {cursor: col-resize;}
+  }
+
+  &__scroll-wrap {
+    overflow: auto;
+    min-height: 100%;
+  }
+
+  &__table {
+    width: 100%;
+    min-height: 100%;
+    border-collapse: collapse;
+    border: none;
+
+    @include themeable;
+
+    &--fixed-layout & {table-layout: fixed;} // Allow resizing beyond the cell minimum text width.
   }
 
   // Table columns.
@@ -917,6 +931,8 @@ $tr-border-top: 1px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 2 * $base-increment;
+    padding: $base-increment 2 * $base-increment;
 
     .w-pagination__items-per-page {
       flex: 0 0 auto;
@@ -924,18 +940,18 @@ $tr-border-top: 1px;
     }
 
     .pages-wrap {
-      margin-left: 3 * $base-increment;
-      margin-right: 3 * $base-increment;
+      display: flex;
       padding-left: 1px; // Prevent overflow causing scrollbar.
       padding-right: 1px;
-      overflow: auto;
       max-height: 4.5em;
+      gap: 0.5 * $base-increment;
+      overflow-y: hidden;
     }
 
     .w-pagination__page {
-      margin: 0.5 * $base-increment;
       font-size: 0.9em;
       aspect-ratio: 1;
+      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
       overflow: hidden;
       color: rgba(var(--w-base-color-rgb), 0.65);
       background-color: rgba(var(--w-base-bg-color-rgb), 0.4);
@@ -961,10 +977,7 @@ $tr-border-top: 1px;
     }
 
     .w-pagination__results {
-      margin-left: $base-increment;
-      margin-right: $base-increment;
       white-space: nowrap;
-      min-width: 90px;
       text-align: right;
     }
   }

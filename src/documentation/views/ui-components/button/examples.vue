@@ -380,7 +380,9 @@ div
     unless they start with #[code http] or #[code https].#[br]
     In some cases, you may want to use a normal link instead of a #[strong.code router-link], for
     instance when using anchor links (starting with #[code #]), you can use the #[code force-link]
-    prop to force a normal link.
+    prop to force a normal link.#[br]
+    Note that you are also free to add a #[code target="_blank"] attribute if you want to open the
+    link in a new tab.
 
   example(content-class="w-flex")
     w-button.ma1(route="/getting-started")

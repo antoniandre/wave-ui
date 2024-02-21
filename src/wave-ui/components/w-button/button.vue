@@ -203,6 +203,7 @@ $spinner-size: 40;
     aspect-ratio: 1;
     border-radius: 99em;
     padding: 0;
+    min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
   }
   &--tile {border-radius: initial;}
   &--shadow {box-shadow: $box-shadow;}

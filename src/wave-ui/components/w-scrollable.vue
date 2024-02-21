@@ -15,23 +15,23 @@
 <script>
 const domProps = {
   h: {
-    horizOrVert: 'horizontal',
+    direction: 'horizontal',
     topOrLeft: 'left',
-    widthOrHeight: 'width',
-    offsetWidthOrHeight: 'offsetWidth',
-    maxWidthOrHeight: 'max-width',
-    scrollWidthOrHeight: 'scrollWidth',
+    size: 'width',
+    offsetSize: 'offsetWidth',
+    maxSize: 'max-width',
+    scrollSize: 'scrollWidth',
     clientXorY: 'clientX',
     deltaXorY: 'deltaX',
     scrollTopOrLeft: 'scrollLeft'
   },
   v: {
-    horizOrVert: 'vertical',
+    direction: 'vertical',
     topOrLeft: 'top',
-    widthOrHeight: 'height',
-    offsetWidthOrHeight: 'offsetHeight',
-    maxWidthOrHeight: 'max-height',
-    scrollWidthOrHeight: 'scrollHeight',
+    size: 'height',
+    offsetSize: 'offsetHeight',
+    maxSize: 'max-height',
+    scrollSize: 'scrollHeight',
     clientXorY: 'clientY',
     deltaXorY: 'deltaY',
     scrollTopOrLeft: 'scrollTop'
@@ -72,27 +72,26 @@ export default {
 
     scrollableClasses () {
       return {
-        [`w-scrollable--${this.m.horizOrVert}`]: true
+        [`w-scrollable--${this.m.direction}`]: true
       }
     },
 
     scrollbarClasses () {
       return {
-        [`w-scrollbar--${this.m.horizOrVert}`]: true
+        [`w-scrollbar--${this.m.direction}`]: true
       }
     },
 
     thumbSizePercent () {
       if (!this.mounted) return 0
-      console.log('😒', this[this.m.widthOrHeight], this.$refs.scrollable[[this.m.offsetWidthOrHeight]])
-      const widthOrHeight = this[this.m.widthOrHeight] ?? this.$refs.scrollable[[this.m.offsetWidthOrHeight]]
-      // if (widthOrHeight === undefined) widthOrHeight = this.$refs.scrollable.offsetWidthOrHeight
-      return (widthOrHeight * 100 / this.$refs.scrollable?.[this.m.scrollWidthOrHeight]) || 0
+      const size = this[this.m.size] ?? this.$refs.scrollable[[this.m.offsetSize]]
+      // if (size === undefined) size = this.$refs.scrollable.offsetSize
+      return (size * 100 / this.$refs.scrollable?.[this.m.scrollSize]) || 0
     },
 
     scrollableStyles () {
       return {
-        [this.m.maxWidthOrHeight]: `${this[this.m.widthOrHeight]}px`
+        [this.m.maxSize]: `${this[this.m.size]}px`
       }
     },
 
@@ -100,7 +99,7 @@ export default {
       let topOrLeftValue = this.scrollValuePercent
       topOrLeftValue = Math.max(0, Math.min(topOrLeftValue, 100 - this.thumbSizePercent))
       return {
-        [this.m.widthOrHeight]: `${this.thumbSizePercent}%`,
+        [this.m.size]: `${this.thumbSizePercent}%`,
         [this.m.topOrLeft]: `${topOrLeftValue}%`
       }
     }
@@ -149,6 +148,9 @@ export default {
       this.scrollable.hovered = false
     },
 
+    onResize (e) {
+    },
+
     onMouseWheel (e) {
       if (!this.scrollable.hovered) return // Only scroll a w-scrollable element that is being hovered.
 
@@ -166,12 +168,12 @@ export default {
     computeScroll (cursorPositionXorY) {
       const { top, left, width, height } = this.$refs.scrollable.getBoundingClientRect()
       const topOrLeft = this.isHorizontal ? left : top
-      const widthOrHeight = this.isHorizontal ? width : height
-      this.scrollValuePercent = Math.max(0, Math.min(((cursorPositionXorY - topOrLeft) / widthOrHeight) * 100, 100))
+      const size = this.isHorizontal ? width : height
+      this.scrollValuePercent = Math.max(0, Math.min(((cursorPositionXorY - topOrLeft) / size) * 100, 100))
     },
 
     scroll () {
-      this.$refs.scrollable[this.m.scrollTopOrLeft] = this.scrollValuePercent * this.$refs.scrollable?.[this.m.scrollWidthOrHeight] / 100
+      this.$refs.scrollable[this.m.scrollTopOrLeft] = this.scrollValuePercent * this.$refs.scrollable?.[this.m.scrollSize] / 100
       this.updateThumbPosition()
     },
 
@@ -187,7 +189,9 @@ export default {
     this.scrollable.left = left
 
     this.$el.parentNode.style.position = 'relative'
-    this.$el.parentNode.style[this.m.maxWidthOrHeight] = `${this[this.m.widthOrHeight]}px`
+    this.$el.parentNode.style.padding = 0
+
+    window.addEventListener('resize', this.onResize)
   }
 }
 </script>
@@ -204,15 +208,11 @@ export default {
   user-select: none;
 
   &--horizontal {
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: auto 0 0;
     height: 8px;
   }
   &--vertical {
-    top: 0;
-    bottom: 0;
-    right: 0;
+    inset: 0 0 0 auto;
     width: 8px;
   }
 

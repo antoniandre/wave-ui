@@ -33,6 +33,33 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v3.10.0
+      ul
+        li
+          strong.code w-select
+          ul
+            li Added ability to lookup and focus a select list item by typing its first characters. #[issue-link 139]
+
+    li.patch
+      strong.version v3.9.1
+      ul
+        li
+          strong.code w-table &amp; pagination
+          ul
+            li Improved the pagination layout: now hides some pages when there are too many and displays up to 7 page buttons.
+            li Improved the pagination slot
+            li
+              | Moved the pagination outside of the table due to HTML/CSS restrictions.
+              .red.
+                Impacted the CSS classes of the #[strong.code w-table] component: the wrapper now
+                has the #[code .w-table] and the table now has the #[code .w-table__table] class.
+                You may need to review your external CSS overrides.
+        li
+          strong.code Minor CSS improvements
+          ul
+            li Fix the aspect-ratio of 1 in Safari in case the element has padding overrides (impacts w-button with icon prop and a few Wave UI sub-elements).
+
+    li.minor
       strong.version v3.9.0
       ul
         li
@@ -727,6 +754,43 @@ main
     //-----------------------------------------------------
     //- Vue 2.
     //-----------------------------------------------------
+
+    li.minor
+      strong.version v1.70.0
+      ul
+        li
+          strong.code w-select
+          ul
+            li Added ability to lookup and focus a select list item by typing its first characters. #[issue-link 139]
+            li Updated the floating label CSS translation logic (no visual impact).
+        li
+          strong.code w-table &amp; pagination
+          ul
+            li Improved the pagination layout: now hides some pages when there are too many and displays up to 7 page buttons.
+            li Improved the pagination slot
+            li
+              | Moved the pagination outside of the table due to HTML/CSS restrictions.
+              .red.
+                Impacted the CSS classes of the #[strong.code w-table] component: the wrapper now
+                has the #[code .w-table] and the table now has the #[code .w-table__table] class.
+                You may need to review your external CSS overrides.
+        li
+          strong.code w-autocomplete
+          ul
+            li New component #[span.tag.new]
+        li
+          strong.code w-input
+          ul
+            li Added #[code icon-left] and #[code icon-right] slots. #[span.tag.new]
+        li
+          strong.code w-card
+          ul
+            li The card title now inherits the top left and right border radius.
+        li
+          strong.code Minor CSS improvements and changes
+          ul
+            li Fix the aspect-ratio of 1 in Safari in case the element has padding overrides (impacts w-button with icon prop and a few Wave UI sub-elements).
+            li Increase the global default border radius from 3px to 4px.
 
     li.minor
       strong.version v1.69.0

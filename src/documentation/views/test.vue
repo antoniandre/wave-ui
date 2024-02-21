@@ -17,6 +17,12 @@
 export default {
   data: () => ({
     items: [
+      { label: 'hey', value: -5 },
+      { label: '/', value: -4 },
+      { label: '\'', value: -3 },
+      { label: '.3', value: -2 },
+      { label: '-1', value: -1 },
+      { label: '0', value: 0 },
       { label: 'Super Item 1', value: 1, disabled: true },
       { label: 'Another Item 2', value: 2 },
       { label: 'Item 3 is the third', value: 3 },
@@ -24,7 +30,8 @@ export default {
       { label: 'Item 5', value: 5, disabled: true },
       { label: 'Item 6', value: 6, disabled: true },
       { label: 'Item 7', value: 7 },
-      { label: 'Item 8', value: 8 }
+      { label: 'Item 8', value: 8 },
+      { label: 'Item-9', value: 9 }
     ]
   })
 }
