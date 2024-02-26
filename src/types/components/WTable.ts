@@ -433,6 +433,16 @@ export type WaveTableSlots = SlotsType<{
   'item-cell': (_: { item: any, header: any, label: any, index: any }) => any
 
   /**
+   * Provide a custom item cell template for a given index or table header (each <td> of each item row).
+   * @param {any} item The full item object of the row being rendered.
+   * @param {any} header The related header object of the current column of the cell being rendered.
+   * @param {any} label The content of the cell being rendered.
+   * @param {any} index The index of the cell in the row being rendered. Starts at 1.
+   * @see https://antoniandre.github.io/wave-ui/w-table
+   */
+  [key: `item-cell.${string|number}`]: (_: { item: any, header: any, label: any, index: any }) => any
+
+  /**
    * Provide a custom template for the row expansions (to display in an expanded row).
    * @param {any} item The full item object of the row being rendered.
    * @param {any} index The index of the row being rendered. Starts at 1.
