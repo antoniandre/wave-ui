@@ -82,12 +82,6 @@ export default {
     },
 
     // Keep the autocomplete matching as fast as possible by caching optimized search strings.
-    // An array of optimized strings.
-    normalizedSelection () {
-      return this.selection.map(item => this.normalize(item?.searchable))
-    },
-
-    // Keep the autocomplete matching as fast as possible by caching optimized search strings.
     optimizedItemsForSearch () {
       return this.items.map((item, i) => ({
         ...item,
@@ -98,8 +92,7 @@ export default {
 
     filteredItems () {
       let items = this.optimizedItemsForSearch // Array of objects.
-      const selection = this.normalizedSelection.join(',') // Optimized string of coma separated words.
-      const isItemNotSelected = item => !selection.includes(item.searchable)
+      const isItemNotSelected = item => !this.selection.find(i => i.uid === item.uid)
 
       if (this.keywords) {
         items = items.filter(item => {
