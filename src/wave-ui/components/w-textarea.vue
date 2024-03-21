@@ -17,11 +17,12 @@ component(
 
   //- Input wrapper.
   .w-textarea__textarea-wrap(:class="inputWrapClasses")
-    w-icon.w-textarea__icon.w-textarea__icon--inner-left(
-      v-if="innerIconLeft"
-      tag="label"
-      :for="`w-textarea--${_.uid}`"
-      @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
+    slot(name="icon-left" :input-id="`w-textarea--${_.uid}`")
+      w-icon.w-textarea__icon.w-textarea__icon--inner-left(
+        v-if="innerIconLeft"
+        tag="label"
+        :for="`w-textarea--${_.uid}`"
+        @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
     textarea.w-textarea__textarea(
       ref="textarea"
       v-model="inputValue"
@@ -44,11 +45,12 @@ component(
         v-if="$slots.default || label"
         :class="labelClasses")
         slot {{ label }}
-    w-icon.w-textarea__icon.w-textarea__icon--inner-right(
-      v-if="innerIconRight"
-      tag="label"
-      :for="`w-textarea--${_.uid}`"
-      @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
+    slot(name="icon-right" :input-id="`w-textarea--${_.uid}`")
+      w-icon.w-textarea__icon.w-textarea__icon--inner-right(
+        v-if="innerIconRight"
+        tag="label"
+        :for="`w-textarea--${_.uid}`"
+        @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
   //- Right label.
   template(v-if="labelPosition === 'right'")

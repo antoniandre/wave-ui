@@ -72,7 +72,9 @@ const slots = {
       selected: 'A Boolean representing the selected state of the list item.',
       index: 'The index of the list item.'
     }
-  }
+  },
+  'icon-left': { description: 'The left icon, if the <code>innerIconLeft</code> prop is not flexible enough.<br/>' },
+  'icon-right': { description: 'The right icon, if the <code>innerIconRight</code> prop is not flexible enough.' }
 }
 
 const events = {
