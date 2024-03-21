@@ -45,6 +45,13 @@ export interface WaveSelectDropdownItem {
   value?: string
 
   /**
+   * Whether or not this list item is disabled.
+   * @property {boolean} disabled
+   * @see https://antoniandre.github.io/wave-ui/w-select#disabled-and-readonly
+   */
+  disabled?: boolean
+
+  /**
    * You can also have any additional data attached to the item.
    * It will not affect the default behavior of the select component.
    * @see https://antoniandre.github.io/wave-ui/w-select#items-prop
