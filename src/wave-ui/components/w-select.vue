@@ -34,10 +34,11 @@ component(
         :aria-owns="`w-select-menu--${_.uid}`"
         :aria-activedescendant="`w-select-menu--${_.uid}_item-1`"
         :class="inputWrapClasses")
-        w-icon.w-select__icon.w-select__icon--inner-left(
-          v-if="innerIconLeft"
-          tag="label"
-          @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
+        slot(name="icon-left")
+          w-icon.w-select__icon.w-select__icon--inner-left(
+            v-if="innerIconLeft"
+            tag="label"
+            @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
         .w-select__selection-slot(v-if="$slots.selection")
           //- inputValue is always an array.
           slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
@@ -60,10 +61,11 @@ component(
             v-if="$slots.default || label"
             :class="labelClasses")
             slot {{ label }}
-        w-icon.w-select__icon.w-select__icon--inner-right(
-          v-if="innerIconRight"
-          tag="label"
-          @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
+        slot(name="icon-right")
+          w-icon.w-select__icon.w-select__icon--inner-right(
+            v-if="innerIconRight"
+            tag="label"
+            @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
     w-list(
       ref="w-list"
       :model-value="inputValue"

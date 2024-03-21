@@ -438,6 +438,18 @@ export type WaveSelectSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
   'item': (_: { item: any, selected: any, index: any }) => any
+
+  /**
+   * The left icon, if the `innerIconLeft` prop is not flexible enough.
+   * @see https://antoniandre.github.io/wave-ui/w-input
+   */
+  'icon-left': () => any
+
+  /**
+   * The right icon, if the `innerIconRight` prop is not flexible enough.
+   * @see https://antoniandre.github.io/wave-ui/w-input
+   */
+  'icon-right': () => any
 } & {
   /**
    * `x` is an integer starting at `1`.

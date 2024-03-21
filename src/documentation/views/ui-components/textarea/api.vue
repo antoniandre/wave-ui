@@ -42,7 +42,19 @@ const propsDescs = {
 }
 
 const slots = {
-  default: { description: 'The label content, if the <code>label</code> prop is not flexible enough.' }
+  default: { description: 'The label content, if the <code>label</code> prop is not flexible enough.' },
+  'icon-left': {
+    description: 'The left icon, if the <code>innerIconLeft</code> prop is not flexible enough.<br/>',
+    params: {
+      inputId: 'The <code>id</code> of the associated input. If your slot uses a label you can have it activate the input like so: <code>&lt;label :for="inputId"&gt;</code>'
+    }
+  },
+  'icon-right': {
+    description: 'The right icon, if the <code>innerIconRight</code> prop is not flexible enough.',
+    params: {
+      inputId: 'The <code>id</code> of the associated input. If your slot uses a label you can have it activate the input like so: <code>&lt;label :for="inputId"&gt;</code>'
+    }
+  }
 }
 
 const events = {
