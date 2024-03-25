@@ -17,11 +17,35 @@ import {
 } from '../extra-vue-types'
 
 // ----------------------------------------------------------------------------
+// Additional Types
+// ----------------------------------------------------------------------------
+export interface WaveTabsItem {
+  /**
+   * The title of the tab. It will use `v-html` to display it.
+   * NOTE: This key can be overridden by the `itemTitleKey` prop.
+   * @property {string} [title]
+   */
+  title?: string;
+
+  /**
+   * The content of the tab. It will use `v-html` to display it.
+   * NOTE: This key can be overridden by the `itemContentKey` prop.
+   * @property {string} [content]
+   */
+  content?: string;
+
+  /**
+   * Any additional content you'd like to pass to the tab, or for custom keys.
+   */
+  [key: string]: any;
+}
+
+// ----------------------------------------------------------------------------
 // Props
 // ----------------------------------------------------------------------------
 export interface WaveTabsProps {
   /**
-   * ``value` in Vue 2.`
+   * `value` in Vue 2.
    * Provide a tab index (a number starting from 0) to open it. This value gets updated when using a v-model.
    * @property {number|string} modelValue
    * @see https://antoniandre.github.io/wave-ui/w-tabs
@@ -49,10 +73,10 @@ export interface WaveTabsProps {
   /**
    * Expecting an array of objects. Each object being an tab item, it should include a `title` and `content` attributes.
    * Alternatively, you can provide an integer number (call it `x`), to loop through and create `x` tabs. You can then use the individual slots `item-title.x` & `item-content.x` to define each item title and content.
-   * @property {Array<any>|number} items
+   * @property {Array<WaveTabsItem>|number} items
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
-  items?: Array<any>|number
+  items?: Array<WaveTabsItem>|number
 
   /**
    * Specifies the name of the attribute in each item object where to find the item's unique ID.
@@ -199,24 +223,24 @@ export interface WaveTabsProps {
 export interface WaveTabsEmits {
   /**
    * Emitted each time the current tab changes.<br>Updates the v-model value in Vue 2.x only.
-   * @param {any} renameMe1 - An array of booleans representing the active state of each tab.
+   * @param {Array<boolean>} tabsOpened - An array of booleans representing the active state of each tab.
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
-  'onInput'?: (renameMe1: any) => void
+  'onInput'?: (tabsOpened: Array<boolean>) => void
 
   /**
    * Emitted each time the current tab changes.<br>Updates the v-model value in Vue 3 only.
-   * @param {any} renameMe1 - An array of booleans representing the active state of each tab.
+   * @param {Array<boolean>} tabsOpened - An array of booleans representing the active state of each tab.
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
-  'onUpdate:modelValue'?: (renameMe1: any) => void
+  'onUpdate:modelValue'?: (tabsOpened: Array<boolean>) => void
 
   /**
    * Emitted on each tab title focus.
-   * @param {any} renameMe1 - The focused tab item object.
+   * @param {WaveTabsItem} tab - The focused tab item object.
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
-  'onFocus'?: (renameMe1: any) => void
+  'onFocus'?: (tab: WaveTabsItem) => void
 }
 
 // ----------------------------------------------------------------------------
@@ -343,27 +367,45 @@ export interface WaveTabsMethods extends MethodOptions {
 export type WaveTabsSlots = SlotsType<{
   /**
    * Provide a custom title for every tab. Applies to all the tabs, but can be overridden by the `item-title.x` slot.
-   * @param {any} item The current tab object.
-   * @param {any} index The tab index in the array of tabs. Starts at 1 to be consistent with the `item.x` slot.
-   * @param {any} active A boolean representing the active state of the tab.
+   * @param {WaveTabsItem} item The current tab object.
+   * @param {number} index The tab index in the array of tabs. Starts at 1 to be consistent with the `item.x` slot.
+   * @param {boolean} active A boolean representing the active state of the tab.
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
-  'item-title': (_: { item: any, index: any, active: any }) => any
+  'item-title': (_: { item: WaveTabsItem, index: number, active: boolean }) => any
 
   /**
-   * TODO: Add Description
+   * Any addition content to be appended to the end of the tabs bar
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
   'tabs-bar-extra': () => any
 
   /**
    * Provide a custom content for every tab. Applies to all the tabs, but can be overridden by the `item-content.x` slot.
-   * @param {any} item The current tab object.
-   * @param {any} index The tab index in the array of tabs. Starts at 1 to be consistent with the `item.x` slot.
-   * @param {any} active A boolean representing the active state of the tab.
+   * @param {WaveTabsItem} item The current tab object.
+   * @param {number} index The tab index in the array of tabs. Starts at 1 to be consistent with the `item.x` slot.
+   * @param {boolean} active A boolean representing the active state of the tab.
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
-  'item-content': (_: { item: any, index: any, active: any }) => any
+  'item-content': (_: { item: WaveTabsItem, index: number, active: boolean }) => any
+
+  /**
+   * Provide a custom title for every tab. Applies to all the tabs, but can be overridden by the `item-title.x` slot.
+   * @param {WaveTabsItem} item The current tab object.
+   * @param {number} index The tab index in the array of tabs. Starts at 1 to be consistent with the `item.x` slot.
+   * @param {boolean} active A boolean representing the active state of the tab.
+   * @see https://antoniandre.github.io/wave-ui/w-tabs
+   */
+  [key: `item-title.${number}`]: (_: { item: WaveTabsItem, index: number, active: boolean }) => any
+
+  /**
+   * Provide a custom content for every tab. Applies to all the tabs, but can be overridden by the `item-content.x` slot.
+   * @param {WaveTabsItem} item The current tab object.
+   * @param {number} index The tab index in the array of tabs. Starts at 1 to be consistent with the `item.x` slot.
+   * @param {boolean} active A boolean representing the active state of the tab.
+   * @see https://antoniandre.github.io/wave-ui/w-tabs
+   */
+  [key: `item-content.${number}`]: (_: { item: WaveTabsItem, index: number, active: boolean }) => any
 }>
 
 // ----------------------------------------------------------------------------
