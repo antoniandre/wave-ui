@@ -315,90 +315,92 @@ export default {
 </script>
 
 <style lang="scss">
-.w-autocomplete {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  position: relative;
-  border-radius: $border-radius;
-  border: $border;
-  padding: 2px 4px;
-  user-select: none;
-
-  &--open {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  &__selection {
+#{$css-scope} {
+  .w-autocomplete {
     display: flex;
-    align-items: center;
-    background: rgba(var(--w-contrast-bg-color-rgb), 0.035);
-    border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.05);
+    flex-wrap: wrap;
+    gap: 4px;
+    position: relative;
     border-radius: $border-radius;
-    padding: 0 2px 0 4px;
-    flex-shrink: 0;
+    border: $border;
+    padding: 2px 4px;
+    user-select: none;
 
-    span {margin-top: -1px;line-height: 1;}
-    .w-button .w-icon:before {font-size: 0.8em;line-height: 0;}
-  }
+    &--open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
 
-  &__input {
-    min-width: 0;
-    flex: 1 1 0;
-    color: inherit;
-    border: none;
-    background-color: transparent;
-    line-height: 18px;
-  }
+    &__selection {
+      display: flex;
+      align-items: center;
+      background: rgba(var(--w-contrast-bg-color-rgb), 0.035);
+      border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.05);
+      border-radius: $border-radius;
+      padding: 0 2px 0 4px;
+      flex-shrink: 0;
 
-  &__placeholder {
-    color: rgba(var(--w-base-color-rgb), 0.5);
-    pointer-events: none;
-    line-height: 18px;
-  }
+      span {margin-top: -1px;line-height: 1;}
+      .w-button .w-icon:before {font-size: 0.8em;line-height: 0;}
+    }
 
-  &__menu {
-    position: absolute;
-    inset: 100% -1px auto;
-    max-height: clamp(20px, 400px, 80vh);
-    margin-top: -1px;
-    margin-left: 0;
-    background-color: $base-bg-color;
-    border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.2);
-    border-top: none;
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-    overflow: auto;
-    z-index: 10;
+    &__input {
+      min-width: 0;
+      flex: 1 1 0;
+      color: inherit;
+      border: none;
+      background-color: transparent;
+      line-height: 18px;
+    }
 
-    li {
-      position: relative;
-      list-style-type: none;
-      margin: 0;
-      padding: 4px 8px;
+    &__placeholder {
+      color: rgba(var(--w-base-color-rgb), 0.5);
+      pointer-events: none;
+      line-height: 18px;
+    }
 
-      &:hover {background-color: rgba($primary, 0.1);}
+    &__menu {
+      position: absolute;
+      inset: 100% -1px auto;
+      max-height: clamp(20px, 400px, 80vh);
+      margin-top: -1px;
+      margin-left: 0;
+      background-color: $base-bg-color;
+      border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.2);
+      border-top: none;
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+      overflow: auto;
+      z-index: 10;
 
-      &:before, &:after {
-        content: '';
-        position: absolute;
-        inset: 0;
-      }
+      li {
+        position: relative;
+        list-style-type: none;
+        margin: 0;
+        padding: 4px 8px;
 
-      &.highlighted:before {
-        border-left: 2px solid transparent;
-        border-left-color: $primary;
-        opacity: 0.3;
-      }
+        &:hover {background-color: rgba($primary, 0.1);}
 
-      &.highlighted:after {
-        background-color: $primary;
-        opacity: 0.1;
+        &:before, &:after {
+          content: '';
+          position: absolute;
+          inset: 0;
+        }
+
+        &.highlighted:before {
+          border-left: 2px solid transparent;
+          border-left-color: $primary;
+          opacity: 0.3;
+        }
+
+        &.highlighted:after {
+          background-color: $primary;
+          opacity: 0.1;
+        }
       }
     }
   }
-}
 
-li.w-autocomplete__no-match--default:hover {background-color: transparent;}
+  li.w-autocomplete__no-match--default:hover {background-color: transparent;}
+}
 </style>

@@ -118,21 +118,23 @@ export default {
 </script>
 
 <style lang="scss">
-.w-dialog {
-  &__content {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    max-width: 95%;
-    overflow: auto;
-    background-color: $dialog-bg-color;
+#{$css-scope} {
+  .w-dialog {
+    &__content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      max-width: 95%;
+      overflow: auto;
+      background-color: $dialog-bg-color;
 
-    @include themeable;
+      @include themeable;
 
-    .w-dialog--fullscreen > & {
-      flex: 1 1 auto;
-      height: 100%;
-      max-width: none;
+      .w-dialog--fullscreen > & {
+        flex: 1 1 auto;
+        height: 100%;
+        max-width: none;
+      }
     }
   }
 }
