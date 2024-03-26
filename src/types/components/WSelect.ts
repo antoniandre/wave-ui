@@ -19,7 +19,7 @@ import {
 // ----------------------------------------------------------------------------
 // Additional Types
 // ----------------------------------------------------------------------------
-export interface WaveSelectDropdownItem {
+export interface WSelectDropdownItem {
   /**
    * The *default* key to access the label of the item.
    * This can be overriden using the `item-label-key` property.
@@ -65,10 +65,10 @@ export interface WaveSelectDropdownItem {
 export interface WaveSelectProps {
   /**
    * Expecting an array of objects. Each object being a select list item, it should include at least a `label` attribute.
-   * @property {Array<WaveSelectDropdownItem} [items]
+   * @property {Array<WSelectDropdownItem} [items]
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  items: Array<WaveSelectDropdownItem>
+  items: Array<WSelectDropdownItem>
 
   /**
    * ``value` in Vue 2.`
@@ -301,17 +301,17 @@ export interface WaveSelectEmits {
 
   /**
    * Emitted on select list item click.
-   * @param {WaveSelectDropdownItem} item - The clicked item object.
+   * @param {WSelectDropdownItem} item - The clicked item object.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'onItemClick'?: (item: WaveSelectDropdownItem) => void
+  'onItemClick'?: (item: WSelectDropdownItem) => void
 
   /**
    * Emitted on list item select (click or <kbd>enter</kbd> keydown).
-   * @param {WaveSelectDropdownItem} item - The selected item object.
+   * @param {WSelectDropdownItem} item - The selected item object.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'onItemSelect'?: (item: WaveSelectDropdownItem) => void
+  'onItemSelect'?: (item: WSelectDropdownItem) => void
 
   /**
    * Emitted on click of the left inner icon, if any.
@@ -458,39 +458,39 @@ export type WaveSelectSlots = SlotsType<{
 
   /**
    * Provide a custom template for the selection string.
-   * @param {WaveSelectDropdownItem} item The selected item(s) object(s). May be an array if `multiple` is `true`, or a single object otherwise.
+   * @param {WSelectDropdownItem} item The selected item(s) object(s). May be an array if `multiple` is `true`, or a single object otherwise.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'selection': (_: { item: WaveSelectDropdownItem }) => any
+  'selection': (_: { item: WSelectDropdownItem }) => any
 
   /**
    * `x` is an integer starting at `1`.
    * Provide a custom content for a single select list item: the item at the index `x`.
-   * @param {WaveSelectDropdownItem} item The current item object.
+   * @param {WSelectDropdownItem} item The current item object.
    * @param {boolean} selected A Boolean representing the selected state of the list item.
    * @param {number} index The index of the list item.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'item.x': (_: { item: WaveSelectDropdownItem, selected: boolean, index: number }) => any
+  'item.x': (_: { item: WSelectDropdownItem, selected: boolean, index: number }) => any
 
   /**
    * Provide a common custom template for all the select list items.
-   * @param {WaveSelectDropdownItem} item The current item object.
+   * @param {WSelectDropdownItem} item The current item object.
    * @param {boolean} selected A Boolean representing the selected state of the list item.
    * @param {number} index The index of the list item.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'item': (_: { item: WaveSelectDropdownItem, selected: boolean, index: number }) => any
+  'item': (_: { item: WSelectDropdownItem, selected: boolean, index: number }) => any
 } & {
   /**
    * `x` is an integer starting at `1`.
    * Provide a custom content for a single select list item: the item at the index `x`.
-   * @param {WaveSelectDropdownItem} item The current item object.
+   * @param {WSelectDropdownItem} item The current item object.
    * @param {boolean} selected A Boolean representing the selected state of the list item.
    * @param {number} index The index of the list item.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  [k in `item${number}`]: (_: { item: WaveSelectDropdownItem, selected: boolean, index: number }) => any
+  [k in `item${number}`]: (_: { item: WSelectDropdownItem, selected: boolean, index: number }) => any
 }>
 
 // ----------------------------------------------------------------------------
