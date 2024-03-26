@@ -54,6 +54,44 @@ export interface WTableHeader {
   [key: string]: any
 }
 
+export interface WTablePagination {
+  /**
+   * Number of rows to show per page
+   * @property {number} [itemsPerPage] - Default: 20
+   */
+  itemsPerPage?: number
+
+  /**
+   * An array of the options to list in the items per page select.
+   * @property {Array<number | { value: number, label: string }>} [itemsPerPageOptions] - Default: [20, 100, { label: 'All', value: 0 }]
+   */
+  itemsPerPageOptions?: Array<number | { value: number, label: string }>
+
+  /**
+   * The start of the results range
+   * @property {number} [start] - Default: 1
+   */
+  start?: number
+
+  /**
+   * The end of the results range
+   * @property {number} [end] - Default: start - 1 + total
+   */
+  end?: number
+
+  /**
+   * The current page to display [itemsPerPage] number of rows
+   * @property {number} [page]
+   */
+  page?: number
+
+  /**
+   * The total number of items available in the table
+   * @property {number} [total]
+   */
+  total?: number
+}
+
 // ----------------------------------------------------------------------------
 // Props
 // ----------------------------------------------------------------------------
@@ -138,11 +176,13 @@ export interface WaveTableProps {
   filter?: (item: any, index: number) => void
 
   /**
-   * TODO: Add Description
+   * Called to fetch data from the server for pagination
+   * The function receives 1 parameters:
+   *  `Param 1:` the `iinfo` object for the current page, start, end, total, itemsPerPage, sorting.
    * @property {} fetch
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
-  fetch?: () => void
+  fetch?: (info: { page: number, start: number, end: number, total: number, itemsPerPage: number, sorting: Array<string> }) => void
 
   /**
    * Expand some rows by default, on table load. You can provide the rows to expand in an array of `id`.
@@ -212,6 +252,14 @@ export interface WaveTableProps {
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
   itemsPerPageOptions?: any
+
+  /**
+   * Pagination options and configuration
+   * @property {WTablePagination} itemsPerPageOptions
+   * @see https://antoniandre.github.io/wave-ui/w-table
+   * @see https://antoniandre.github.io/wave-ui/w-table#pagination-prop
+   */
+  pagination?: WTablePagination
 }
 
 // ----------------------------------------------------------------------------
