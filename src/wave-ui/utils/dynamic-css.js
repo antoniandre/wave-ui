@@ -13,7 +13,7 @@ let currentBreakpoint = null
 // :root {[color1-variable], [color2-variable]}
 // .color1--bg {background-color: [color1-variable]}
 // .color1 {color: [color1-variable]}
-const generateColors = themeColors => {
+const generateColors = (themeColors, generateShadeCssVariables) => {
   let styles = ''
   const cssVariables = {}
 
@@ -42,6 +42,9 @@ const generateColors = themeColors => {
   // That only makes sense when there are 2 colors on the same element: e.g. `span.primary.error`.
   const allColors = { ...colors, info, warning, success, error }
   for (const colorName in allColors) cssVariables[colorName] = allColors[colorName]
+  if (generateShadeCssVariables) {
+    for (const colorName in shades) cssVariables[colorName] = shades[colorName]
+  }
   let cssVariablesString = ''
   Object.entries(cssVariables).forEach(([colorName, colorHex]) => {
     cssVariablesString += `--w-${colorName}-color: ${colorHex};`
@@ -269,12 +272,12 @@ export const injectCSSInDOM = $waveui => {
   window.addEventListener('resize', () => getBreakpoint($waveui))
 }
 
-export const injectColorsCSSInDOM = themeColors => {
+export const injectColorsCSSInDOM = (themeColors, generateShadeCssVariables) => {
   // Inject global dynamic CSS classes in document head.
   if (!document.getElementById('wave-ui-colors')) {
     const css = document.createElement('style')
     css.id = 'wave-ui-colors'
-    css.innerHTML = generateColors(themeColors)
+    css.innerHTML = generateColors(themeColors, generateShadeCssVariables)
 
     const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
     if (firstStyle) firstStyle.before(css)
