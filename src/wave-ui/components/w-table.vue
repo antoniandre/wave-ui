@@ -615,11 +615,11 @@ export default {
         this.paginationConfig.itemsPerPage = itemsPerPage
         itemsPerPage = itemsPerPage || this.paginationConfig.total // If `0`, take all the results.
         this.paginationConfig.page = page || this.paginationConfig.page || 1
-        page = this.paginationConfig.page // Shorthand var for next lines.
-        total = this.paginationConfig.total // Shorthand var for next lines.
+        let p = this.paginationConfig.page // Shorthand var for next lines.
+        let t = this.paginationConfig.total // Shorthand var for next lines.
         this.paginationConfig.start = 1
-        this.paginationConfig.end = total >= (itemsPerPage * page) ? (itemsPerPage * page) : (total % (itemsPerPage * page))
-        this.paginationConfig.pagesCount = Math.ceil(total / itemsPerPage)
+        this.paginationConfig.end = t>= (itemsPerPage * p) ? (itemsPerPage * p) : (t % (itemsPerPage * p))
+        this.paginationConfig.pagesCount = Math.ceil(t/ itemsPerPage)
       }
       if (page) this.goToPage(page)
     },
