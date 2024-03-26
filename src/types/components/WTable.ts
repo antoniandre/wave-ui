@@ -19,7 +19,7 @@ import {
 // ----------------------------------------------------------------------------
 // Additional Types
 // ----------------------------------------------------------------------------
-export interface WaveTableHeader {
+export interface WTableHeader {
   /**
    * The label to display as the column header.
    * @property {string} [label] - Default: ''
@@ -73,7 +73,7 @@ export interface WaveTableProps {
    * @property {Array<any>} [headers]
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
-  headers: Array<WaveTableHeader>
+  headers: Array<WTableHeader>
 
   /**
    * The table headings will be hidden. Only the table data will be visible.
