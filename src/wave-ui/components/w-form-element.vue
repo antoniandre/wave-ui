@@ -106,38 +106,40 @@ export default {
 </script>
 
 <style lang="scss">
-div.w-form-el {
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-}
-
-.w-form-el {
-  > .w-flex {position: relative;}
-  .w-form--error-placeholders & {
-    position: relative;
-    padding-bottom: 1.2rem;
+#{$css-scope} {
+  div.w-form-el {
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
   }
-  &--has-error input::placeholder {color: inherit;}
 
-  &-shakable {position: relative;}
-  &--error &-shakable {animation: w-form-el-shake 0.3s $transition-duration ease-in-out;}
+  .w-form-el {
+    > .w-flex {position: relative;}
+    .w-form--error-placeholders & {
+      position: relative;
+      padding-bottom: 1.2rem;
+    }
+    &--has-error input::placeholder {color: inherit;}
 
-  // Error message.
-  // ------------------------------------------------------
-  &__error {
-    width: 100%;
-    flex-grow: 1;
-    font-size: 0.775rem;
-    margin-top: $base-increment;
+    &-shakable {position: relative;}
+    &--error &-shakable {animation: w-form-el-shake 0.3s $transition-duration ease-in-out;}
 
-    .w-form--error-placeholders & {position: absolute;bottom: 0;}
+    // Error message.
+    // ------------------------------------------------------
+    &__error {
+      width: 100%;
+      flex-grow: 1;
+      font-size: 0.775rem;
+      margin-top: $base-increment;
+
+      .w-form--error-placeholders & {position: absolute;bottom: 0;}
+    }
   }
-}
 
-@keyframes w-form-el-shake {
-  0% {left: 0;}
-  20%, 60% {left: 2px;}
-  40%, 80% {left: -2px;}
+  @keyframes w-form-el-shake {
+    0% {left: 0;}
+    20%, 60% {left: 2px;}
+    40%, 80% {left: -2px;}
+  }
 }
 </style>

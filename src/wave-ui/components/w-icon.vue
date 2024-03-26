@@ -99,56 +99,58 @@ export default {
 </script>
 
 <style lang="scss">
-.w-icon {
-  position: relative;
-  display: inline-flex;
-  border-radius: 100%;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  user-select: none;
-  speak: never;
-  line-height: 1;
-  font-size: 1.2em;
-  width: 1em;
-  // The aspect ratio will not work if the content overflows (needs overflow hidden, but we don't want that in the library).
-  height: 1em;
+#{$css-scope} {
+  .w-icon {
+    position: relative;
+    display: inline-flex;
+    border-radius: 100%;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    user-select: none;
+    speak: never;
+    line-height: 1;
+    font-size: 1.2em;
+    width: 1em;
+    // The aspect ratio will not work if the content overflows (needs overflow hidden, but we don't want that in the library).
+    height: 1em;
 
-  &.size--xs {font-size: round(0.85 * $base-font-size);}
-  &.size--sm {font-size: round(1.15 * $base-font-size);}
-  &.size--md {font-size: round(1.4 * $base-font-size);}
-  &.size--lg {font-size: round(1.7 * $base-font-size);}
-  &.size--xl {font-size: 2 * $base-font-size;}
+    &.size--xs {font-size: round(0.85 * $base-font-size);}
+    &.size--sm {font-size: round(1.15 * $base-font-size);}
+    &.size--md {font-size: round(1.4 * $base-font-size);}
+    &.size--lg {font-size: round(1.7 * $base-font-size);}
+    &.size--xl {font-size: 2 * $base-font-size;}
 
-  // Always an even number to align well vertically in a button.
-  .w-button.size--xs & {font-size: round(0.95 * divide($base-font-size, 2)) * 2;}
-  .w-alert.size--xs & {font-size: $base-font-size;}
-  .w-button.size--sm &, .w-alert.size--sm & {font-size: round(1.15 * $base-font-size);}
-  // .w-button.size--md &, .w-alert.size--md & {font-size: round(1.4 * $base-font-size);}
-  .w-button.size--lg &, .w-alert.size--lg & {font-size: round(1.7 * $base-font-size);}
-  .w-button.size--xl &, .w-alert.size--xl & {font-size: 2 * $base-font-size;}
+    // Always an even number to align well vertically in a button.
+    .w-button.size--xs & {font-size: round(0.95 * divide($base-font-size, 2)) * 2;}
+    .w-alert.size--xs & {font-size: $base-font-size;}
+    .w-button.size--sm &, .w-alert.size--sm & {font-size: round(1.15 * $base-font-size);}
+    // .w-button.size--md &, .w-alert.size--md & {font-size: round(1.4 * $base-font-size);}
+    .w-button.size--lg &, .w-alert.size--lg & {font-size: round(1.7 * $base-font-size);}
+    .w-button.size--xl &, .w-alert.size--xl & {font-size: 2 * $base-font-size;}
 
-  &:before {transition: transform $transition-duration;}
-  &--spin:before {animation: w-icon--spin 2s infinite linear;}
-  &--spin-a:before {animation: w-icon--spin-a 2s infinite linear;}
-  &--rotate45:before {transform: rotate(45deg);}
-  &--rotate90:before {transform: rotate(90deg);}
-  &--rotate135:before {transform: rotate(135deg);}
-  &--rotate180:before {transform: rotate(180deg);}
-  &--rotate-45:before {transform: rotate(-45deg);}
-  &--rotate-90:before {transform: rotate(-90deg);}
-  &--rotate-135:before {transform: rotate(-135deg);}
-  &--flip-x:before {transform: scaleX(-1);}
-  &--flip-y:before {transform: scaleY(-1);}
-}
+    &:before {transition: transform $transition-duration;}
+    &--spin:before {animation: w-icon--spin 2s infinite linear;}
+    &--spin-a:before {animation: w-icon--spin-a 2s infinite linear;}
+    &--rotate45:before {transform: rotate(45deg);}
+    &--rotate90:before {transform: rotate(90deg);}
+    &--rotate135:before {transform: rotate(135deg);}
+    &--rotate180:before {transform: rotate(180deg);}
+    &--rotate-45:before {transform: rotate(-45deg);}
+    &--rotate-90:before {transform: rotate(-90deg);}
+    &--rotate-135:before {transform: rotate(-135deg);}
+    &--flip-x:before {transform: scaleX(-1);}
+    &--flip-y:before {transform: scaleY(-1);}
+  }
 
-@keyframes w-icon--spin {
-  0% {transform: rotate(0deg);}
-  to {transform: rotate(359deg);}
-}
+  @keyframes w-icon--spin {
+    0% {transform: rotate(0deg);}
+    to {transform: rotate(359deg);}
+  }
 
-@keyframes w-icon--spin-a {
-  0% {transform: rotate(0deg);}
-  to {transform: rotate(-359deg);}
+  @keyframes w-icon--spin-a {
+    0% {transform: rotate(0deg);}
+    to {transform: rotate(-359deg);}
+  }
 }
 </style>

@@ -163,119 +163,121 @@ export default {
 </script>
 
 <style lang="scss">
-.w-rating {
-  display: inline-flex;
-  align-items: center;
-
-  @include themeable;
-
-  &__button {
-    position: relative;
-    width: 1.1em;
-    aspect-ratio: 1;
+#{$css-scope} {
+  .w-rating {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    border: none;
-    background: none;
-    color: $rating-bg-color;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    @include default-transition($fast-transition-duration);
+
+    @include themeable;
+
+    &__button {
+      position: relative;
+      width: 1.1em;
+      aspect-ratio: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: none;
+      color: $rating-bg-color;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      @include default-transition($fast-transition-duration);
+
+      // Disabled & readonly.
+      .w-rating--disabled & {opacity: 0.6;cursor: not-allowed;}
+      .w-rating--readonly & {cursor: auto;}
+
+      // Sizes.
+      &.size--xs {font-size: round(0.85 * $base-font-size);}
+      &.size--sm {font-size: round(1.15 * $base-font-size);}
+      &.size--md {font-size: round(1.4 * $base-font-size);}
+      &.size--lg {font-size: round(1.7 * $base-font-size);}
+      &.size--xl {font-size: 2 * $base-font-size;margin-left: 0;}
+
+      &:before {font-size: 1.1em;}
+      &:before, .w-icon:before {
+        width: 100%;
+        height: 1em;
+        display: inline-flex;
+        transition: 0.15s transform;
+      }
+    }
+
+    &--hover &__button--on:before,
+    &--hover &__button--on .w-icon:before,
+    &--focus &__button--on:before,
+    &--focus &__button--on .w-icon:before {transform: scale(1.12);}
 
     // Disabled & readonly.
-    .w-rating--disabled & {opacity: 0.6;cursor: not-allowed;}
-    .w-rating--readonly & {cursor: auto;}
+    &--readonly &__button--on:before,
+    &--readonly.w-rating--hover &__button--on:before,
+    &--readonly &__button--on .w-icon:before,
+    &--readonly.w-rating--hover &__button--on .w-icon:before,
+    &--disabled &__button--on:before,
+    &--disabled.w-rating--hover &__button--on:before,
+    &--disabled &__button--on .w-icon:before,
+    &--disabled.w-rating--hover &__button--on .w-icon:before {transform: none;}
 
-    // Sizes.
-    &.size--xs {font-size: round(0.85 * $base-font-size);}
-    &.size--sm {font-size: round(1.15 * $base-font-size);}
-    &.size--md {font-size: round(1.4 * $base-font-size);}
-    &.size--lg {font-size: round(1.7 * $base-font-size);}
-    &.size--xl {font-size: 2 * $base-font-size;margin-left: 0;}
-
-    &:before {font-size: 1.1em;}
-    &:before, .w-icon:before {
+    // Half star.
+    &__button .w-icon {
+      position: absolute;
+      left: 0;
       width: 100%;
-      height: 1em;
+      height: 100%;
+      font-size: 1em;
+      justify-content: flex-start;
+      overflow: hidden;
       display: inline-flex;
-      transition: 0.15s transform;
+      border-radius: 0;
+
+      &:before {padding-left: 0.05em;padding-right: 0.05em;}
     }
+    .w-rating--hover &__button .w-icon {display: none;}
+
+    // The focus outline & ripple on button click.
+    &__button:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: currentColor;
+      border-radius: 100%;
+      transform: translateX(100%) scale(0);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s ease-in-out;
+    }
+
+    &--ripple &__button:focus:after {
+      background-color: transparent;
+      animation: w-rating-ripple 0.55s ease;
+    }
+
+    &__button:focus:after,
+    &__button:active:after {
+      transform: scale(1.8);
+      opacity: 0.2;
+    }
+    &__button--on:focus:after {
+      transform: scale(1.8);
+    }
+    .w-rating--disabled &__button:after,
+    .w-rating--readonly &__button:after {opacity: 0;}
+
+    // After ripple reset to default state, then remove the class via js and the
+    // `:focus + &__button:after` will re-transition to normal focused outline.
+    &--rippled &__button:focus:after {
+      transition: none;
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    &__button * {pointer-events: none;}
   }
 
-  &--hover &__button--on:before,
-  &--hover &__button--on .w-icon:before,
-  &--focus &__button--on:before,
-  &--focus &__button--on .w-icon:before {transform: scale(1.12);}
-
-  // Disabled & readonly.
-  &--readonly &__button--on:before,
-  &--readonly.w-rating--hover &__button--on:before,
-  &--readonly &__button--on .w-icon:before,
-  &--readonly.w-rating--hover &__button--on .w-icon:before,
-  &--disabled &__button--on:before,
-  &--disabled.w-rating--hover &__button--on:before,
-  &--disabled &__button--on .w-icon:before,
-  &--disabled.w-rating--hover &__button--on .w-icon:before {transform: none;}
-
-  // Half star.
-  &__button .w-icon {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 1em;
-    justify-content: flex-start;
-    overflow: hidden;
-    display: inline-flex;
-    border-radius: 0;
-
-    &:before {padding-left: 0.05em;padding-right: 0.05em;}
+  @keyframes w-rating-ripple {
+    0% {opacity: 0.8;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
+    100% {opacity: 0;transform: scale(2.8);} // Propagate ripple to max radius and fade out.
   }
-  .w-rating--hover &__button .w-icon {display: none;}
-
-  // The focus outline & ripple on button click.
-  &__button:after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: currentColor;
-    border-radius: 100%;
-    transform: translateX(100%) scale(0);
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.25s ease-in-out;
-  }
-
-  &--ripple &__button:focus:after {
-    background-color: transparent;
-    animation: w-rating-ripple 0.55s ease;
-  }
-
-  &__button:focus:after,
-  &__button:active:after {
-    transform: scale(1.8);
-    opacity: 0.2;
-  }
-  &__button--on:focus:after {
-    transform: scale(1.8);
-  }
-  .w-rating--disabled &__button:after,
-  .w-rating--readonly &__button:after {opacity: 0;}
-
-  // After ripple reset to default state, then remove the class via js and the
-  // `:focus + &__button:after` will re-transition to normal focused outline.
-  &--rippled &__button:focus:after {
-    transition: none;
-    transform: scale(0);
-    opacity: 0;
-  }
-
-  &__button * {pointer-events: none;}
-}
-
-@keyframes w-rating-ripple {
-  0% {opacity: 0.8;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
-  100% {opacity: 0;transform: scale(2.8);} // Propagate ripple to max radius and fade out.
 }
 </style>

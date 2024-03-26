@@ -174,39 +174,41 @@ export default {
 </script>
 
 <style lang="scss">
-.w-image-wrap {
-  position: relative;
-  display: inline-flex;
-  flex-grow: 0;
-  flex-shrink: 0;
-  width: 4em;
+#{$css-scope} {
+  .w-image-wrap {
+    position: relative;
+    display: inline-flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 4em;
 
-  &--has-ratio {width: 100%;}
-  &[class^="bdrs"], &[class*=" bdrs"] {overflow: hidden;}
+    &--has-ratio {width: 100%;}
+    &[class^="bdrs"], &[class*=" bdrs"] {overflow: hidden;}
 
-  img {
-    width: 100%;
-    height: auto;
-    position: static;
+    img {
+      width: 100%;
+      height: auto;
+      position: static;
+    }
   }
-}
 
-.w-image {
-  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1x1 blank gif.
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
-  inset: 0;
-
-  &--contain {background-size: contain;}
-
-  &__loader, &__content {
+  .w-image {
+    background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1x1 blank gif.
+    background-repeat: no-repeat;
+    background-size: cover;
     position: absolute;
     inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
+
+    &--contain {background-size: contain;}
+
+    &__loader, &__content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
   }
 }
 </style>

@@ -222,176 +222,178 @@ export default {
 <style lang="scss">
 $inactive-color: #777;
 
-.w-textarea {
-  position: relative;
-  display: flex;
-  flex-grow: 1;
-  flex-wrap: wrap;
-  font-size: $base-font-size;
-
-  @include themeable;
-
-  // textarea wrapper.
-  // ------------------------------------------------------
-  &__textarea-wrap {
+#{$css-scope} {
+  .w-textarea {
     position: relative;
-    display: inline-flex;
-    flex: 1 1 auto;
-    min-height: $form-field-height;
-    border-radius: $border-radius;
-    border: $border;
-    transition: border $transition-duration;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    font-size: $base-font-size;
 
-    .w-textarea[class^="bdrs"] &, .w-textarea[class*=" bdrs"] & {border-radius: inherit;}
-  }
+    @include themeable;
 
-  &--floating-label &__textarea-wrap {margin-top: 4 * $base-increment;}
+    // textarea wrapper.
+    // ------------------------------------------------------
+    &__textarea-wrap {
+      position: relative;
+      display: inline-flex;
+      flex: 1 1 auto;
+      min-height: $form-field-height;
+      border-radius: $border-radius;
+      border: $border;
+      transition: border $transition-duration;
 
-  &__textarea-wrap--underline {
-    border-bottom-left-radius: initial;
-    border-bottom-right-radius: initial;
-    border-width: 0 0 1px;
-  }
-
-  &__textarea-wrap--tile {border-radius: initial;}
-  &__textarea-wrap--shadow {box-shadow: $box-shadow;}
-
-  &--focused &__textarea-wrap {border-color: currentColor;}
-
-  // Underline.
-  &__textarea-wrap--underline:after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 0;
-    border-bottom: 2px solid currentColor;
-    transition: $transition-duration;
-    transform: scaleX(0);
-    pointer-events: none;
-  }
-
-  &--focused &__textarea-wrap--underline:after {transform: scaleX(1);}
-
-  // Textarea field.
-  // ------------------------------------------------------
-  &__textarea {
-    width: 100%;
-    height: 100%;
-    font: inherit;
-    line-height: $textarea-line-height;
-    color: inherit;
-    background: none;
-    border: none;
-    outline: none;
-    padding: $base-increment (2 * $base-increment);
-    resize: none;
-
-    .w-textarea--resizable & {resize: vertical;}
-
-    .w-textarea--no-padding & {
-      padding-left: 0;
-      padding-right: 0;
+      .w-textarea[class^="bdrs"] &, .w-textarea[class*=" bdrs"] & {border-radius: inherit;}
     }
 
-    .w-textarea--inner-icon-left & {padding-left: 27px;}
-    .w-textarea--inner-icon-right & {padding-right: 27px;}
+    &--floating-label &__textarea-wrap {margin-top: 4 * $base-increment;}
 
-    .w-textarea--disabled & {
-      color: $disabled-color;
-      cursor: not-allowed;
-      -webkit-tap-highlight-color: transparent;
+    &__textarea-wrap--underline {
+      border-bottom-left-radius: initial;
+      border-bottom-right-radius: initial;
+      border-width: 0 0 1px;
     }
-  }
 
-  &--disabled input::placeholder {color: inherit;}
+    &__textarea-wrap--tile {border-radius: initial;}
+    &__textarea-wrap--shadow {box-shadow: $box-shadow;}
 
-  // Icons inside.
-  // ------------------------------------------------------
-  &__icon {position: absolute;margin-top: $base-increment;}
-  &__icon--inner-left {left: 6px;}
-  &__icon--inner-right {right: 6px;}
-  &--no-padding &__icon--inner-left {left: 1px;}
-  &--no-padding &__icon--inner-right {right: 1px;}
+    &--focused &__textarea-wrap {border-color: currentColor;}
 
-  .w-textarea--focused &__icon {color: currentColor;}
-
-  &--disabled &__icon {
-    color: $disabled-color;
-    cursor: not-allowed;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  // Label.
-  // ------------------------------------------------------
-  &__label {
-    transition: color $transition-duration;
-    cursor: pointer;
-    align-self: flex-start;
-    user-select: none;
-
-    &--left {
-      margin-top: $base-increment;
-      margin-right: 2 * $base-increment;
-    }
-    &--right {
-      margin-top: $base-increment;
-      margin-left: 2 * $base-increment;
-    }
-    .w-textarea--disabled & {
-      color: $disabled-color;
-      cursor: not-allowed;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .w-textarea--readonly.w-textarea--empty & {
-      opacity: 0.5;
-      cursor: auto;
-    }
-  }
-
-  &__label--inside {
-    position: absolute;
-    top: $base-increment;
-    left: 0;
-    padding-left: 2 * $base-increment;
-    white-space: nowrap;
-    transform: translateY(0%);
-    pointer-events: none;
-
-    .w-textarea--no-padding & {
+    // Underline.
+    &__textarea-wrap--underline:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
       left: 0;
-      padding-left: 0;
-      padding-right: 0;
-    }
-    .w-textarea--inner-icon-left & {left: 18px;}
-    .w-textarea--no-padding.w-textarea--inner-icon-left & {left: 26px;}
-
-    .w-textarea--floating-label & {
-      transform-origin: 0 0;
-      transition: $transition-duration ease;
+      width: 100%;
+      height: 0;
+      border-bottom: 2px solid currentColor;
+      transition: $transition-duration;
+      transform: scaleX(0);
+      pointer-events: none;
     }
 
-    // move label with underline style.
-    .w-textarea--focused.w-textarea--floating-label &,
-    .w-textarea--filled.w-textarea--floating-label &,
-    .w-textarea--has-placeholder.w-textarea--floating-label & {
-      transform: translateY(-110%) scale(0.85);
+    &--focused &__textarea-wrap--underline:after {transform: scaleX(1);}
+
+    // Textarea field.
+    // ------------------------------------------------------
+    &__textarea {
+      width: 100%;
+      height: 100%;
+      font: inherit;
+      line-height: $textarea-line-height;
+      color: inherit;
+      background: none;
+      border: none;
+      outline: none;
+      padding: $base-increment (2 * $base-increment);
+      resize: none;
+
+      .w-textarea--resizable & {resize: vertical;}
+
+      .w-textarea--no-padding & {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .w-textarea--inner-icon-left & {padding-left: 27px;}
+      .w-textarea--inner-icon-right & {padding-right: 27px;}
+
+      .w-textarea--disabled & {
+        color: $disabled-color;
+        cursor: not-allowed;
+        -webkit-tap-highlight-color: transparent;
+      }
     }
-    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
-    .w-textarea--floating-label .w-textarea__textarea:-webkit-autofill & {
-      transform: translateY(-110%) scale(0.85);
+
+    &--disabled input::placeholder {color: inherit;}
+
+    // Icons inside.
+    // ------------------------------------------------------
+    &__icon {position: absolute;margin-top: $base-increment;}
+    &__icon--inner-left {left: 6px;}
+    &__icon--inner-right {right: 6px;}
+    &--no-padding &__icon--inner-left {left: 1px;}
+    &--no-padding &__icon--inner-right {right: 1px;}
+
+    .w-textarea--focused &__icon {color: currentColor;}
+
+    &--disabled &__icon {
+      color: $disabled-color;
+      cursor: not-allowed;
+      -webkit-tap-highlight-color: transparent;
     }
-    // Move label with outline style or with shadow.
-    .w-textarea--focused.w-textarea--floating-label .w-textarea__textarea-wrap--box &,
-    .w-textarea--filled.w-textarea--floating-label .w-textarea__textarea-wrap--box &,
-    .w-textarea--has-placeholder.w-textarea--floating-label .w-textarea__textarea-wrap--box & {
-      transform: translateY(-130%) scale(0.85);
+
+    // Label.
+    // ------------------------------------------------------
+    &__label {
+      transition: color $transition-duration;
+      cursor: pointer;
+      align-self: flex-start;
+      user-select: none;
+
+      &--left {
+        margin-top: $base-increment;
+        margin-right: 2 * $base-increment;
+      }
+      &--right {
+        margin-top: $base-increment;
+        margin-left: 2 * $base-increment;
+      }
+      .w-textarea--disabled & {
+        color: $disabled-color;
+        cursor: not-allowed;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .w-textarea--readonly.w-textarea--empty & {
+        opacity: 0.5;
+        cursor: auto;
+      }
     }
-    .w-textarea--focused.w-textarea--floating-label.w-textarea--inner-icon-left &,
-    .w-textarea--filled.w-textarea--floating-label.w-textarea--inner-icon-left & {left: 0;}
-    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
-    .w-textarea--floating-label.w-textarea--inner-icon-left .w-textarea__textarea:-webkit-autofill & {left: 0;}
+
+    &__label--inside {
+      position: absolute;
+      top: $base-increment;
+      left: 0;
+      padding-left: 2 * $base-increment;
+      white-space: nowrap;
+      transform: translateY(0%);
+      pointer-events: none;
+
+      .w-textarea--no-padding & {
+        left: 0;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .w-textarea--inner-icon-left & {left: 18px;}
+      .w-textarea--no-padding.w-textarea--inner-icon-left & {left: 26px;}
+
+      .w-textarea--floating-label & {
+        transform-origin: 0 0;
+        transition: $transition-duration ease;
+      }
+
+      // move label with underline style.
+      .w-textarea--focused.w-textarea--floating-label &,
+      .w-textarea--filled.w-textarea--floating-label &,
+      .w-textarea--has-placeholder.w-textarea--floating-label & {
+        transform: translateY(-110%) scale(0.85);
+      }
+      // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+      .w-textarea--floating-label .w-textarea__textarea:-webkit-autofill & {
+        transform: translateY(-110%) scale(0.85);
+      }
+      // Move label with outline style or with shadow.
+      .w-textarea--focused.w-textarea--floating-label .w-textarea__textarea-wrap--box &,
+      .w-textarea--filled.w-textarea--floating-label .w-textarea__textarea-wrap--box &,
+      .w-textarea--has-placeholder.w-textarea--floating-label .w-textarea__textarea-wrap--box & {
+        transform: translateY(-130%) scale(0.85);
+      }
+      .w-textarea--focused.w-textarea--floating-label.w-textarea--inner-icon-left &,
+      .w-textarea--filled.w-textarea--floating-label.w-textarea--inner-icon-left & {left: 0;}
+      // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+      .w-textarea--floating-label.w-textarea--inner-icon-left .w-textarea__textarea:-webkit-autofill & {left: 0;}
+    }
   }
 }
 </style>

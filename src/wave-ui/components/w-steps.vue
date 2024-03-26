@@ -28,7 +28,9 @@ export default {
 </script>
 
 <style lang="scss">
-.w-steps {
-  @include themeable;
+#{$css-scope} {
+  .w-steps {
+    @include themeable;
+  }
 }
 </style>

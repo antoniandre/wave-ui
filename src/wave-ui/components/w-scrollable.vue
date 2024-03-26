@@ -197,47 +197,49 @@ export default {
 </script>
 
 <style lang="scss">
-.w-scrollable {
-  position: relative;
-  overflow: hidden;
-}
-
-.w-scrollbar {
-  position: absolute;
-  background: #000;
-  user-select: none;
-
-  &--horizontal {
-    inset: auto 0 0;
-    height: 8px;
-  }
-  &--vertical {
-    inset: 0 0 0 auto;
-    width: 8px;
+#{$css-scope} {
+  .w-scrollable {
+    position: relative;
+    overflow: hidden;
   }
 
-  &__thumb {
+  .w-scrollbar {
     position: absolute;
-    background: #333;
-    border-radius: $border-radius;
-    z-index: 1;
-    will-change: top left;
+    background: #000;
+    user-select: none;
 
-    &:hover {background: #444;}
-  }
-  &--horizontal &__thumb {
-    height: 6px;
-    left: 0;
-    right: 0;
-    margin-top: 1px;
-    margin-bottom: 1px;
-  }
-  &--vertical &__thumb {
-    width: 6px;
-    top: 0;
-    bottom: 0;
-    margin-left: 1px;
-    margin-right: 1px;
+    &--horizontal {
+      inset: auto 0 0;
+      height: 8px;
+    }
+    &--vertical {
+      inset: 0 0 0 auto;
+      width: 8px;
+    }
+
+    &__thumb {
+      position: absolute;
+      background: #333;
+      border-radius: $border-radius;
+      z-index: 1;
+      will-change: top left;
+
+      &:hover {background: #444;}
+    }
+    &--horizontal &__thumb {
+      height: 6px;
+      left: 0;
+      right: 0;
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+    &--vertical &__thumb {
+      width: 6px;
+      top: 0;
+      bottom: 0;
+      margin-left: 1px;
+      margin-right: 1px;
+    }
   }
 }
 </style>

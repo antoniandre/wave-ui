@@ -112,20 +112,22 @@ export default {
 </script>
 
 <style lang="scss">
-.w-checkboxes {
-  &--column {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+#{$css-scope} {
+  .w-checkboxes {
+    &--column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
 
-  &--inline {
-    display: inline-flex;
-    flex-wrap: wrap;
-    vertical-align: middle;
+    &--inline {
+      display: inline-flex;
+      flex-wrap: wrap;
+      vertical-align: middle;
 
-    .w-checkbox {margin-right: 3 * $base-increment;}
-    .w-checkbox:last-child {margin-right: 0;}
+      .w-checkbox {margin-right: 3 * $base-increment;}
+      .w-checkbox:last-child {margin-right: 0;}
+    }
   }
 }
 </style>

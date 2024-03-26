@@ -215,89 +215,90 @@ export default {
 </script>
 
 <style lang="scss">
-.w-tooltip {
-  // Fix Safari where `width: max-content` does not take padding and border into consideration.
-  display: table;
+#{$css-scope} {
+  .w-tooltip {
+    // Fix Safari where `width: max-content` does not take padding and border into consideration.
+    display: table;
 
-  position: absolute;
-  padding: $base-increment round(1.5 * $base-increment);
-  border-radius: $border-radius;
-  border: 1px solid $tooltip-border-color;
-  background-color: $tooltip-bg-color;
-  pointer-events: none;
-  color: $tooltip-color;
-  align-items: center;
-  max-width: 300px;
-  width: max-content; // Not supported in IE11. :/
-  z-index: 100;
+    position: absolute;
+    padding: $base-increment round(1.5 * $base-increment);
+    border-radius: $border-radius;
+    border: 1px solid $tooltip-border-color;
+    background-color: $tooltip-bg-color;
+    pointer-events: none;
+    color: $tooltip-color;
+    align-items: center;
+    max-width: 300px;
+    width: max-content; // Not supported in IE11. :/
+    z-index: 100;
 
-  @include themeable;
+    @include themeable;
 
-  &--fixed {position: fixed;z-index: 1000;}
+    &--fixed {position: fixed;z-index: 1000;}
 
-  &--tile {border-radius: 0;}
-  &--round {
-    border-radius: 99em;
-    padding: $base-increment round(2.5 * $base-increment);
+    &--tile {border-radius: 0;}
+    &--round {
+      border-radius: 99em;
+      padding: $base-increment round(2.5 * $base-increment);
+    }
+    &--shadow {box-shadow: $box-shadow;}
+    &--no-border {border: none;}
+
+    &--top {margin-top: -3 * $base-increment;}
+    &--bottom {margin-top: 3 * $base-increment;}
+    &--left {margin-left: -3 * $base-increment;}
+    &--right {margin-left: 3 * $base-increment;}
+
+    &.size--xs {font-size: 0.75rem;}
+    &.size--sm {font-size: 0.83rem;}
+    &.size--md {font-size: 0.9rem;}
+    &.size--lg {font-size: 1rem;}
+    &.size--xl {font-size: 1.1rem;}
+
+    &--custom-transition {transform: none;}
+
+    // Tooltip without border.
+    &--no-border {
+      @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px, 0);
+    }
+
+    // Tooltip with border.
+    &:not(&--no-border) {
+      @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px);
+    }
   }
-  &--shadow {box-shadow: $box-shadow;}
-  &--no-border {border: none;}
 
-  &--top {margin-top: -3 * $base-increment;}
-  &--bottom {margin-top: 3 * $base-increment;}
-  &--left {margin-left: -3 * $base-increment;}
-  &--right {margin-left: 3 * $base-increment;}
-
-  &.size--xs {font-size: 0.75rem;}
-  &.size--sm {font-size: 0.83rem;}
-  &.size--md {font-size: 0.9rem;}
-  &.size--lg {font-size: 1rem;}
-  &.size--xl {font-size: 1.1rem;}
-
-  &--custom-transition {transform: none;}
-
-  // Tooltip without border.
-  &--no-border {
-    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px, 0);
+  // Transitions.
+  // --------------------------------------------------------
+  .w-tooltip-slide-fade-up-enter-active, .w-tooltip-slide-fade-up-leave-active,
+  .w-tooltip-slide-fade-down-enter-active, .w-tooltip-slide-fade-down-leave-active,
+  .w-tooltip-slide-fade-left-enter-active, .w-tooltip-slide-fade-left-leave-active,
+  .w-tooltip-slide-fade-right-enter-active, .w-tooltip-slide-fade-right-leave-active {
+    transition: margin $transition-duration ease-in-out, opacity $transition-duration ease-in-out;
   }
 
-  // Tooltip with border.
-  &:not(&--no-border) {
-    @include triangle(var(--w-tooltip-bg-color), '.w-tooltip', 7px);
+  // slide-fade-up.
+  .w-tooltip-slide-fade-up-enter-from, .w-tooltip-slide-fade-up-leave-to {
+    margin-top: -2 * $base-increment;
+    opacity: 0;
+  }
+
+  // slide-fade-down.
+  .w-tooltip-slide-fade-down-enter-from, .w-tooltip-slide-fade-down-leave-to {
+    margin-top: 2 * $base-increment;
+    opacity: 0;
+  }
+
+  // Slide-fade-left.
+  .w-tooltip-slide-fade-left-enter-from, .w-tooltip-slide-fade-left-leave-to {
+    margin-left: -2 * $base-increment;
+    opacity: 0;
+  }
+
+  // Slide-fade-right.
+  .w-tooltip-slide-fade-right-enter-from, .w-tooltip-slide-fade-right-leave-to {
+    margin-left: 2 * $base-increment;
+    opacity: 0;
   }
 }
-
-// Transitions.
-// --------------------------------------------------------
-.w-tooltip-slide-fade-up-enter-active, .w-tooltip-slide-fade-up-leave-active,
-.w-tooltip-slide-fade-down-enter-active, .w-tooltip-slide-fade-down-leave-active,
-.w-tooltip-slide-fade-left-enter-active, .w-tooltip-slide-fade-left-leave-active,
-.w-tooltip-slide-fade-right-enter-active, .w-tooltip-slide-fade-right-leave-active {
-  transition: margin $transition-duration ease-in-out, opacity $transition-duration ease-in-out;
-}
-
-// slide-fade-up.
-.w-tooltip-slide-fade-up-enter-from, .w-tooltip-slide-fade-up-leave-to {
-  margin-top: -2 * $base-increment;
-  opacity: 0;
-}
-
-// slide-fade-down.
-.w-tooltip-slide-fade-down-enter-from, .w-tooltip-slide-fade-down-leave-to {
-  margin-top: 2 * $base-increment;
-  opacity: 0;
-}
-
-// Slide-fade-left.
-.w-tooltip-slide-fade-left-enter-from, .w-tooltip-slide-fade-left-leave-to {
-  margin-left: -2 * $base-increment;
-  opacity: 0;
-}
-
-// Slide-fade-right.
-.w-tooltip-slide-fade-right-enter-from, .w-tooltip-slide-fade-right-leave-to {
-  margin-left: 2 * $base-increment;
-  opacity: 0;
-}
-// --------------------------------------------------------
 </style>
