@@ -479,6 +479,7 @@ $inactive-color: #777;
       align-items: center;
       background: none;
       border: none;
+      border-radius: inherit; // Mostly for the browser-autofilled appearance.
       outline: none;
       padding-left: 2 * $base-increment;
       padding-right: 2 * $base-increment;
