@@ -75,6 +75,7 @@ component(
       @keydown:escape="showMenu && (showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
       :items="selectItems"
       :multiple="multiple"
+      :checklist="checklist"
       arrows-navigation
       return-object
       :add-ids="`w-select-menu--${_.uid}`"
@@ -116,6 +117,7 @@ export default {
     items: { type: Array, required: true },
     modelValue: {}, // v-model on selected item if any.
     multiple: { type: Boolean },
+    checklist: { type: Boolean }, // the prop from w-list for checkboxes
     placeholder: { type: String },
     label: { type: String },
     labelPosition: { type: String, default: 'inside' },

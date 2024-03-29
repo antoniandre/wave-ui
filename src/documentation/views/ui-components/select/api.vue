@@ -18,6 +18,7 @@ const propsDescs = {
   items: 'Expecting an array of objects. Each object being a select list item, it should include at least a <code>label</code> attribute.',
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>The current selection of the select field.<br>Gets updated on selection change.',
   multiple: 'Allows multiple selections. When set to <code>true</code>, the list of choices will stay open after selecting an item.',
+  checklist: 'Exposes the <code>w-list</code> property <code>checklist</code>. See the <a href="w-list#checklist-prop">w-list checklist property</a> for more information.<br>When enabled a checkbox will display next to each list item, this can be particularly useful when the <code>multiple</code> property is set to <code>true</code>',
   placeholder: 'Provide a placeholder for the select field. If a label is positioned inside, it will be moved above the field so it doesn\'t overlap.',
   label: 'Sets a visible label for the select field.',
   labelPosition: 'Sets the position of the label to one of the following positions: \'left\', \'right\', \'inside\'.',
