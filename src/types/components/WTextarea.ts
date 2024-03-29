@@ -307,6 +307,18 @@ export type WaveTextareaSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-textarea
    */
   'default': () => any
+
+  /**
+   * The left icon, if the `innerIconLeft` prop is not flexible enough.
+   * @see https://antoniandre.github.io/wave-ui/w-input
+   */
+  'icon-left': (_: { inputId: string }) => any
+
+  /**
+   * The right icon, if the `innerIconRight` prop is not flexible enough.
+   * @see https://antoniandre.github.io/wave-ui/w-input
+   */
+  'icon-right': (_: { inputId: string }) => any
 }>
 
 // ----------------------------------------------------------------------------
