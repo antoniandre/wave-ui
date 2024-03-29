@@ -17,6 +17,82 @@ import {
 } from '../extra-vue-types'
 
 // ----------------------------------------------------------------------------
+// Additional Types
+// ----------------------------------------------------------------------------
+export interface WTableHeader {
+  /**
+   * The label to display as the column header.
+   * @property {string} [label] - Default: ''
+   */
+  label?: string
+
+  /**
+   * A unique identifier that should be found in each row object, and that will be used for sorting.
+   * @property {string} key
+   */
+  key: string
+
+  /**
+   * Whether this column is sortable or not.
+   * @property {boolean} [sortable] - Default: true
+   */
+  sortable?: boolean
+
+  /**
+   * Defines the width of the column in pixel if no unit is given, or in the unit you want (E.g. 30, 30px, 2em, 20%, etc.)
+   * @property {number | string} [width] - Default: ''
+   */
+  width?: number | string
+
+  /**
+   * A unique identifier that should be found in each row object, and that will be used for sorting.
+   * @property {string} [align] - Default: left
+   */
+  align?: 'left' | 'center' | 'right'
+
+  /** If needed, you can also add any custom property. */
+  [key: string]: any
+}
+
+export interface WTablePagination {
+  /**
+   * Number of rows to show per page
+   * @property {number} [itemsPerPage] - Default: 20
+   */
+  itemsPerPage?: number
+
+  /**
+   * An array of the options to list in the items per page select.
+   * @property {Array<number | { value: number, label: string }>} [itemsPerPageOptions] - Default: [20, 100, { label: 'All', value: 0 }]
+   */
+  itemsPerPageOptions?: Array<number | { value: number, label: string }>
+
+  /**
+   * The start of the results range
+   * @property {number} [start] - Default: 1
+   */
+  start?: number
+
+  /**
+   * The end of the results range
+   * @property {number} [end] - Default: start - 1 + total
+   */
+  end?: number
+
+  /**
+   * The current page to display [itemsPerPage] number of rows
+   * @property {number} [page]
+   */
+  page?: number
+
+  /**
+   * The total number of items available in the table
+   * @property {number} [total]
+   */
+  total?: number
+}
+
+// ----------------------------------------------------------------------------
 // Props
 // ----------------------------------------------------------------------------
 export interface WaveTableProps {
@@ -35,7 +111,7 @@ export interface WaveTableProps {
    * @property {Array<any>} [headers]
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
-  headers: Array<any>
+  headers: Array<WTableHeader>
 
   /**
    * The table headings will be hidden. Only the table data will be visible.
@@ -100,21 +176,25 @@ export interface WaveTableProps {
   filter?: (item: any, index: number) => void
 
   /**
-   * TODO: Add Description
+   * Called to fetch data from the server for pagination
+   * The function receives 1 parameters:
+   *  `Param 1:` the `iinfo` object for the current page, start, end, total, itemsPerPage, sorting.
    * @property {} fetch
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
-  fetch?: () => void
+  fetch?: (info: { page: number, start: number, end: number, total: number, itemsPerPage: number, sorting: Array<string> }) => void
 
   /**
-   * Expand some rows by default, on table load. You can provide the rows to expand in an array of `id`. If you prefer another key than `id`, you can use the `uid-key` prop to set another key.
+   * Expand some rows by default, on table load. You can provide the rows to expand in an array of `id`.
+   * If you prefer another key than `id`, you can use the `uid-key` prop to set another key.
    * @property {Array<any>} expandedRows
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
   expandedRows?: Array<any>
 
   /**
-   * Select some rows by default, on table load. You can provide the rows to select in an array of `id`. If you prefer another key than `id`, you can use the `uid-key` prop to set another key.
+   * Select some rows by default, on table load. You can provide the rows to select in an array of `id`.
+   * If you prefer another key than `id`, you can use the `uid-key` prop to set another key.
    * @property {Array<any>} selectedRows
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
@@ -129,7 +209,8 @@ export interface WaveTableProps {
 
   /**
    * In order to keep the same row selected after sorting or filtering, each row is assigned a unique identifier.
-   * By default the expanded rows array will use an `id` key, if present in the item object, or will assign an internal unique ID otherwise.
+   * By default the expanded rows array will use an `id` key, if present in the item object, or will assign an
+   * internal unique ID otherwise.
    * If you want, you can override the default unique ID key (when internally needed) with this prop.
    * @property {string} uidKey - Default: 'id'
    * @see https://antoniandre.github.io/wave-ui/w-table
@@ -137,7 +218,8 @@ export interface WaveTableProps {
   uidKey?: string
 
   /**
-   * When a number is given (in pixel), any device screen width under this number will display the table in mobile layout. Leave undefined to disable.
+   * When a number is given (in pixel), any device screen width under this number will display the table in mobile layout.
+   * Leave undefined to disable.
    * @property {number} mobileBreakpoint - Default: 0
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
@@ -170,6 +252,14 @@ export interface WaveTableProps {
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
   itemsPerPageOptions?: any
+
+  /**
+   * Pagination options and configuration
+   * @property {WTablePagination} itemsPerPageOptions
+   * @see https://antoniandre.github.io/wave-ui/w-table
+   * @see https://antoniandre.github.io/wave-ui/w-table#pagination-prop
+   */
+  pagination?: WTablePagination
 }
 
 // ----------------------------------------------------------------------------
@@ -177,61 +267,61 @@ export interface WaveTableProps {
 // ----------------------------------------------------------------------------
 export interface WaveTableEmits {
   /**
-   * <strong>This event fires on both selecting and unselecting a row</strong> (so you need only one listener for both), and a boolean is returned to know the selected state.
-   * @param {any} renameMe1 - The associated row item object.
-   * @param {any} renameMe2 - The index of the row being selected (starts at 0) in the current filtering state.
-   * @param {any} renameMe3 - A boolean representing the selected state of the clicked row.
-   * @param {any} renameMe4 - An array containing all the expanded rows objects.
+   * This event fires on both selecting and unselecting a row (so you need only one listener for both), and a boolean is returned to know the selected state.
+   * @param {any} item - The associated row item object.
+   * @param {number} index - The index of the row being selected (starts at 0) in the current filtering state.
+   * @param {boolean} selected - A boolean representing the selected state of the clicked row.
+   * @param {Array} selectedRows - An array containing all the expanded rows objects.
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
-  'onRowSelect'?: (renameMe1: any, renameMe2: any, renameMe3: any, renameMe4: any) => void
+  'onRowSelect'?: (item: any, index: number, selected: boolean, selectedRows: Array<any>) => void
 
   /**
-   * <strong>This event fires on both expanding and collapsing a row</strong> (so you need only one listener for both), and a boolean is returned to know the expanded state.
-   * @param {any} renameMe1 - The associated row item object.
-   * @param {any} renameMe2 - The index of the row being expanded (starts at 0) in the current filtering state.
-   * @param {any} renameMe3 - A boolean representing the expanded state of the clicked row.
-   * @param {any} renameMe4 - An array containing all the expanded rows objects.
+   * This event fires on both expanding and collapsing a row (so you need only one listener for both), and a boolean is returned to know the expanded state.
+   * @param {any} item - The associated row item object.
+   * @param {number} index - The index of the row being expanded (starts at 0) in the current filtering state.
+   * @param {boolean} expanded - A boolean representing the expanded state of the clicked row.
+   * @param {Array} expandedRows - An array containing all the expanded rows objects.
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
-  'onRowExpand'?: (renameMe1: any, renameMe2: any, renameMe3: any, renameMe4: any) => void
+  'onRowExpand'?: (item: any, index: number, expanded: boolean, expandedRows: Array<any>) => void
 
   /**
-   * TODO: Add Description
-   * @param {any} renameMe1 - The associated row item object.
-   * @param {any} renameMe2 - The index of the row being clicked (starts at 0) in the current filtering state.
+   * This event fires when a row is clicked.
+   * @param {any} item - The associated row item object.
+   * @param {number} index - The index of the row being clicked (starts at 0) in the current filtering state.
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
-  'onRowClick'?: (renameMe1: any, renameMe2: any) => void
+  'onRowClick'?: (item: any, index: number) => void
 
   /**
    * Emitted every time the sorting string is updated by a user interaction.
-   * @param {any} renameMe1 - The currently applied sorting on the table rows. E.g. <code>+firstName</code>
+   * @param {string} sortingString - The currently applied sorting on the table rows. E.g. <code>+firstName</code>
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
-  'onUpdate:sort'?: (renameMe1: any) => void
+  'onUpdate:sort'?: (sortingString: string) => void
 
   /**
    * Emitted every time the selected-rows array changes. To be used with <code>:selected-rows.sync</code> in Vue 2 or <code>v-model:selected-rows</code> in Vue 3.
-   * @param {any} renameMe1 - The current array of selected rows.
+   * @param {Array} selectedRows - The current array of selected rows.
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
-  'onUpdate:selectedRows'?: (renameMe1: any) => void
+  'onUpdate:selectedRows'?: (selectedRows: Array<any>) => void
 
   /**
    * Emitted every time the expanded-rows array changes. To be used with <code>:expanded-rows.sync</code> in Vue 2 or <code>v-model:expanded-rows</code> in Vue 3.
-   * @param {any} renameMe1 - The current array of expanded rows.
+   * @param {Array} expandedRows - The current array of expanded rows.
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
-  'onUpdate:expandedRows'?: (renameMe1: any) => void
+  'onUpdate:expandedRows'?: (expandedRows: Array<any>) => void
 
   /**
    * Emitted on mouseup after a column has been resized.
-   * @param {any} renameMe1 - The index (starting from 0) of the resizer that was moved (also the index of the column on the left of the resizer).
-   * @param {any} renameMe2 - An array containing all the new widths of the columns after resizing.
+   * @param {number} index - The index (starting from 0) of the resizer that was moved (also the index of the column on the left of the resizer).
+   * @param {Array} widths - An array containing all the new widths of the columns after resizing.
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
-  'onColumnResize'?: (renameMe1: any, renameMe2: any) => void
+  'onColumnResize'?: (index: number, widths: Array<any>) => void
 }
 
 // ----------------------------------------------------------------------------
@@ -431,6 +521,16 @@ export type WaveTableSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-table
    */
   'item-cell': (_: { item: any, header: any, label: any, index: any }) => any
+
+  /**
+   * Provide a custom item cell template for a given index or table header (each <td> of each item row).
+   * @param {any} item The full item object of the row being rendered.
+   * @param {any} header The related header object of the current column of the cell being rendered.
+   * @param {any} label The content of the cell being rendered.
+   * @param {any} index The index of the cell in the row being rendered. Starts at 1.
+   * @see https://antoniandre.github.io/wave-ui/w-table
+   */
+  [key: `item-cell.${string|number}`]: (_: { item: any, header: any, label: any, index: any }) => any
 
   /**
    * Provide a custom template for the row expansions (to display in an expanded row).

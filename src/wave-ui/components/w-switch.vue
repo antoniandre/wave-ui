@@ -150,6 +150,7 @@ $outline-width: 2px;
   align-items: center;
   vertical-align: middle;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   @include themeable;
 
@@ -157,7 +158,6 @@ $outline-width: 2px;
   &--disabled, &--readonly {
     cursor: not-allowed;
     touch-action: initial;
-    -webkit-tap-highlight-color: transparent;
   }
 
   // Hidden checkbox.

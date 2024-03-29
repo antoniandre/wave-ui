@@ -17,15 +17,58 @@ import {
 } from '../extra-vue-types'
 
 // ----------------------------------------------------------------------------
+// Additional Types
+// ----------------------------------------------------------------------------
+export interface WSelectDropdownItem {
+  /**
+   * The *default* key to access the label of the item.
+   * This can be overriden using the `item-label-key` property.
+   * @property {string} label
+   * @see https://antoniandre.github.io/wave-ui/w-select#item-label-key-prop
+   */
+  label?: string
+
+  /**
+   * The *default* key to access the color of the item.
+   * This can be overriden using the `item-color-key` property.
+   * @property {string} color
+   * @see https://antoniandre.github.io/wave-ui/w-select#item-color-key-prop
+   */
+  color?: string
+
+  /**
+   * The *default* key to access the vlue of the item.
+   * This can be overriden using the `item-value-key` property.
+   * @property {string} value
+   * @see https://antoniandre.github.io/wave-ui/w-select#item-value-key-prop
+   */
+  value?: string
+
+  /**
+   * Whether or not this list item is disabled.
+   * @property {boolean} disabled
+   * @see https://antoniandre.github.io/wave-ui/w-select#disabled-and-readonly
+   */
+  disabled?: boolean
+
+  /**
+   * You can also have any additional data attached to the item.
+   * It will not affect the default behavior of the select component.
+   * @see https://antoniandre.github.io/wave-ui/w-select#items-prop
+   */
+  [key: string]: any
+}
+
+// ----------------------------------------------------------------------------
 // Props
 // ----------------------------------------------------------------------------
 export interface WaveSelectProps {
   /**
    * Expecting an array of objects. Each object being a select list item, it should include at least a `label` attribute.
-   * @property {Array<any>} [items]
+   * @property {Array<WSelectDropdownItem} [items]
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  items: Array<any>
+  items: Array<WSelectDropdownItem>
 
   /**
    * ``value` in Vue 2.`
@@ -42,6 +85,15 @@ export interface WaveSelectProps {
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
   multiple?: boolean
+
+  /**
+   * Exposes the w-list property `checklist` to the select list items.
+   * When enabled a checkbox will display next to each list item, this can
+   * be particularly useful when the `multiple` prop is set to `true`.
+   * @property {boolean} checklist
+   * @see https://antoniandre.github.io/wave-ui/w-select
+   */
+  checklist?: boolean
 
   /**
    * Provide a placeholder for the select field. If a label is positioned inside, it will be moved above the field so it doesn't overlap.
@@ -230,59 +282,59 @@ export interface WaveSelectProps {
 export interface WaveSelectEmits {
   /**
    * Emitted each time the selected item(s) changes.<br>Updates the v-model value in Vue 2.x only.
-   * @param {any} renameMe1 - The new selected value(s). Array if <code>multiple</code> is set to <code>true</code>, single value otherwise.
+   * @param {any} selectedValues - The new selected value(s). Array if <code>multiple</code> is set to <code>true</code>, single value otherwise.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'onInput'?: (renameMe1: any) => void
+  'onInput'?: (selectedValues: any) => void
 
   /**
    * Emitted each time the selected item(s) changes.<br>Updates the v-model value in Vue 3 only.
-   * @param {any} renameMe1 - The new selected value(s). Array if <code>multiple</code> is set to <code>true</code>, single value otherwise.
+   * @param {any} selectedValues - The new selected value(s). Array if <code>multiple</code> is set to <code>true</code>, single value otherwise.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'onUpdate:modelValue'?: (renameMe1: any) => void
+  'onUpdate:modelValue'?: (selectedValues: any) => void
 
   /**
    * Emitted on select focus.
-   * @param {any} renameMe1 - The associated focus DOM event.
+   * @param {Event} e - The associated focus DOM event.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'onFocus'?: (renameMe1: any) => void
+  'onFocus'?: (e: Event) => void
 
   /**
    * Emitted on select blur.
-   * @param {any} renameMe1 - The associated blur DOM event.
+   * @param {Event} e - The associated blur DOM event.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'onBlur'?: (renameMe1: any) => void
+  'onBlur'?: (e: Event) => void
 
   /**
    * Emitted on select list item click.
-   * @param {any} renameMe1 - The clicked item object.
+   * @param {WSelectDropdownItem} item - The clicked item object.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'onItemClick'?: (renameMe1: any) => void
+  'onItemClick'?: (item: WSelectDropdownItem) => void
 
   /**
    * Emitted on list item select (click or <kbd>enter</kbd> keydown).
-   * @param {any} renameMe1 - The selected item object.
+   * @param {WSelectDropdownItem} item - The selected item object.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'onItemSelect'?: (renameMe1: any) => void
+  'onItemSelect'?: (item: WSelectDropdownItem) => void
 
   /**
    * Emitted on click of the left inner icon, if any.
-   * @param {any} renameMe1 - The associated click DOM event.
+   * @param {Event} e - The associated click DOM event.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'onClick:innerIconLeft'?: (renameMe1: any) => void
+  'onClick:innerIconLeft'?: (e: Event) => void
 
   /**
    * Emitted on click of the right inner icon, if any.
-   * @param {any} renameMe1 - The associated click DOM event.
+   * @param {Event} e - The associated click DOM event.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'onClick:innerIconRight'?: (renameMe1: any) => void
+  'onClick:innerIconRight'?: (e: Event) => void
 }
 
 // ----------------------------------------------------------------------------
@@ -415,30 +467,30 @@ export type WaveSelectSlots = SlotsType<{
 
   /**
    * Provide a custom template for the selection string.
-   * @param {any} item The selected item(s) object(s). May be an array if `multiple` is `true`, or a single object otherwise.
+   * @param {WSelectDropdownItem} item The selected item(s) object(s). May be an array if `multiple` is `true`, or a single object otherwise.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'selection': (_: { item: any }) => any
+  'selection': (_: { item: WSelectDropdownItem }) => any
 
   /**
    * `x` is an integer starting at `1`.
    * Provide a custom content for a single select list item: the item at the index `x`.
-   * @param {any} item The current item object.
-   * @param {any} selected A Boolean representing the selected state of the list item.
-   * @param {any} index The index of the list item.
+   * @param {WSelectDropdownItem} item The current item object.
+   * @param {boolean} selected A Boolean representing the selected state of the list item.
+   * @param {number} index The index of the list item.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'item.x': (_: { item: any, selected: any, index: any }) => any
+  'item.x': (_: { item: WSelectDropdownItem, selected: boolean, index: number }) => any
 
   /**
    * Provide a common custom template for all the select list items.
-   * @param {any} item The current item object.
-   * @param {any} selected A Boolean representing the selected state of the list item.
-   * @param {any} index The index of the list item.
+   * @param {WSelectDropdownItem} item The current item object.
+   * @param {boolean} selected A Boolean representing the selected state of the list item.
+   * @param {number} index The index of the list item.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  'item': (_: { item: any, selected: any, index: any }) => any
-
+  'item': (_: { item: WSelectDropdownItem, selected: boolean, index: number }) => any
+  
   /**
    * The left icon, if the `innerIconLeft` prop is not flexible enough.
    * @see https://antoniandre.github.io/wave-ui/w-input
@@ -454,12 +506,12 @@ export type WaveSelectSlots = SlotsType<{
   /**
    * `x` is an integer starting at `1`.
    * Provide a custom content for a single select list item: the item at the index `x`.
-   * @param {any} item The current item object.
-   * @param {any} selected A Boolean representing the selected state of the list item.
-   * @param {any} index The index of the list item.
+   * @param {WSelectDropdownItem} item The current item object.
+   * @param {boolean} selected A Boolean representing the selected state of the list item.
+   * @param {number} index The index of the list item.
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  [k in `item${number}`]: (_: { item: any, selected: any, index: any }) => any
+  [k in `item${number}`]: (_: { item: WSelectDropdownItem, selected: boolean, index: number }) => any
 }>
 
 // ----------------------------------------------------------------------------
