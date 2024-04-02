@@ -609,17 +609,34 @@ export default {
       })
     },
 
+    /**
+     * Updates the pagination object and fills up missing variables to always maintain the paginationConfig
+     * object accurate for external use (read and write).
+     * The following vars will always be up to date and if one changes from outside the rest of them
+     * will update accordingly: itemsPerPage, itemsPerPageOptions, start, end, page, total.
+     *
+     * @param {Object} config The config object defining the pagination.
+     *  This object can have at most itemsPerPage, page, total, and it will define the start, end and
+     *  pagesCount from the given or current itemsPerPage, page and total.
+     *  - If a total is given for update, trust it blindly (could come from a backend), and recompute
+     *    the rest as long as itemsPerPage is defined.
+     *  - If a page is given for update, it will navigate to that page.
+     *  - If an itemsPerPage is given for update, it will navigate to that page.
+     */
     updatePaginationConfig ({ itemsPerPage, page, total }) {
       if (total) this.paginationConfig.total = total
       if (itemsPerPage !== undefined) {
         this.paginationConfig.itemsPerPage = itemsPerPage
         itemsPerPage = itemsPerPage || this.paginationConfig.total // If `0`, take all the results.
         this.paginationConfig.page = page || this.paginationConfig.page || 1
-        let p = this.paginationConfig.page // Shorthand var for next lines.
-        let t = this.paginationConfig.total // Shorthand var for next lines.
+
+        page = this.paginationConfig.page // Shorthand var for next lines.
+        total = this.paginationConfig.total // Shorthand var for next lines.
+        const itemsInAllPages = itemsPerPage * page
         this.paginationConfig.start = 1
-        this.paginationConfig.end = t>= (itemsPerPage * p) ? (itemsPerPage * p) : (t % (itemsPerPage * p))
-        this.paginationConfig.pagesCount = Math.ceil(t/ itemsPerPage)
+        this.paginationConfig.end = total >= itemsInAllPages ? itemsInAllPages : (total % itemsInAllPages)
+
+        this.paginationConfig.pagesCount = Math.ceil(total / itemsPerPage)
       }
       if (page) this.goToPage(page)
     },
