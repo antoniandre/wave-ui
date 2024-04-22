@@ -84,6 +84,7 @@ export default {
       this.$emit('update:modelValue', false)
       this.$emit('input', false)
       if (!this.modelValue) this.$emit('close') // Only emit once.
+      document.body.classList.remove('w-no-scroll')
     }
   },
 
@@ -93,13 +94,22 @@ export default {
 
   watch: {
     modelValue (bool) {
-      if (bool) this.showOverlay = true
+      if (bool) {
+        this.showOverlay = true
+        document.body.classList.add('w-no-scroll')
+      } else {
+        document.body.classList.remove('w-no-scroll')
+      }
     }
   }
 }
 </script>
 
 <style lang="scss">
+.w-no-scroll {
+  overflow: hidden;
+}
+
 .w-overlay {
   z-index: 500;
   position: fixed;
