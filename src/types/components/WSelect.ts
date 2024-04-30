@@ -87,15 +87,6 @@ export interface WaveSelectProps {
   multiple?: boolean
 
   /**
-   * Exposes the w-list property `checklist` to the select list items.
-   * When enabled a checkbox will display next to each list item, this can
-   * be particularly useful when the `multiple` prop is set to `true`.
-   * @property {boolean} checklist
-   * @see https://antoniandre.github.io/wave-ui/w-select
-   */
-  checklist?: boolean
-
-  /**
    * Provide a placeholder for the select field. If a label is positioned inside, it will be moved above the field so it doesn't overlap.
    * @property {string} placeholder
    * @see https://antoniandre.github.io/wave-ui/w-select
