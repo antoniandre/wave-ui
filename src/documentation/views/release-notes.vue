@@ -33,6 +33,34 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v3.12.0
+      ul
+        li
+          strong.code w-input
+          ul
+            li The input inherits the border radii.
+        li
+          strong.code w-switch
+          ul
+            li Removed the tap highlight color.
+        li
+          strong.code w-select
+          ul
+            li Added the #[code icon-left] and #[code icon-right] slots. #[issue-link 148]
+        li
+          strong.code w-textarea
+          ul
+            li Added the #[code icon-left] and #[code icon-right] slots. #[issue-link 148]
+        li
+          strong.code w-autocomplete
+          ul
+            li Fix a multiple selection bug where one selected item would remove another one starting with same letters. #[issue-link 146]
+        li
+          strong.code TypeScript
+          ul
+            li Added and refined TypeScript definitions.
+
+    li.minor
       strong.version v3.11.0
       ul
         li
