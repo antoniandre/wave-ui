@@ -165,27 +165,29 @@ export default {
 </script>
 
 <style lang="scss">
-.w-notification {
-  display: flex;
-  justify-content: center;
-  left: 2 * $base-increment;
-  right: 2 * $base-increment;
-  position: fixed;
-  z-index: 300;
-  pointer-events: none;
+#{$css-scope} {
+  .w-notification {
+    display: flex;
+    justify-content: center;
+    left: 2 * $base-increment;
+    right: 2 * $base-increment;
+    position: fixed;
+    z-index: 300;
+    pointer-events: none;
 
-  @include themeable;
+    @include themeable;
 
-  // Position.
-  &--absolute {position: absolute;z-index: 400;}
-  &--top {top: 0;padding-top: 2 * $base-increment;}
-  &--bottom {bottom: 0;padding-bottom: 2 * $base-increment;}
-  &--left {justify-content: flex-start;right: auto;}
-  &--right {justify-content: flex-end;left: auto;}
+    // Position.
+    &--absolute {position: absolute;z-index: 400;}
+    &--top {top: 0;padding-top: 2 * $base-increment;}
+    &--bottom {bottom: 0;padding-bottom: 2 * $base-increment;}
+    &--left {justify-content: flex-start;right: auto;}
+    &--right {justify-content: flex-end;left: auto;}
 
-  .w-alert {
-    margin: 0;
-    pointer-events: all;
+    .w-alert {
+      margin: 0;
+      pointer-events: all;
+    }
   }
 }
 </style>

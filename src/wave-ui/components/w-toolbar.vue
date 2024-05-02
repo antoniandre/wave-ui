@@ -64,67 +64,69 @@ export default {
 </script>
 
 <style lang="scss">
-.w-toolbar {
-  position: relative;
-  display: flex;
-  flex: 0 1 auto; // No grow, so it doesn't stretch vertically in flex column.
-  align-items: center;
-  padding: (2 * $base-increment) (3 * $base-increment);
-  background-color: $toolbar-bg-color;
-  z-index: 10;
+#{$css-scope} {
+  .w-toolbar {
+    position: relative;
+    display: flex;
+    flex: 0 1 auto; // No grow, so it doesn't stretch vertically in flex column.
+    align-items: center;
+    padding: (2 * $base-increment) (3 * $base-increment);
+    background-color: $toolbar-bg-color;
+    z-index: 10;
 
-  @include themeable;
+    @include themeable;
 
-  &--absolute, &--fixed {top: 0;left: 0;right: 0;}
-  &--absolute {position: absolute;}
-  &--fixed {position: fixed;}
-  &--absolute.w-toolbar--vertical, &--fixed.w-toolbar--vertical {top: 0;bottom: 0;}
-  &--absolute.w-toolbar--left, &--fixed.w-toolbar--left {left: 0;right: auto;}
-  &--absolute.w-toolbar--right, &--fixed.w-toolbar--right {left: auto;right: 0;}
+    &--absolute, &--fixed {top: 0;left: 0;right: 0;}
+    &--absolute {position: absolute;}
+    &--fixed {position: fixed;}
+    &--absolute.w-toolbar--vertical, &--fixed.w-toolbar--vertical {top: 0;bottom: 0;}
+    &--absolute.w-toolbar--left, &--fixed.w-toolbar--left {left: 0;right: auto;}
+    &--absolute.w-toolbar--right, &--fixed.w-toolbar--right {left: auto;right: 0;}
 
-  // Horizontal.
-  &--top {border-bottom: $border;}
-  &--bottom {
-    bottom: 0;
-    top: auto;
-    border-top: $border;
-  }
+    // Horizontal.
+    &--top {border-bottom: $border;}
+    &--bottom {
+      bottom: 0;
+      top: auto;
+      border-top: $border;
+    }
 
-  // Vertical.
-  &--vertical {
-    padding: (2 * $base-increment);
-    flex-direction: column;
-    flex-shrink: 0;
-  }
+    // Vertical.
+    &--vertical {
+      padding: (2 * $base-increment);
+      flex-direction: column;
+      flex-shrink: 0;
+    }
 
-  &--left {border-right: $border;}
-  &--right {
-    right: 0;
-    left: auto;
-    border-left: $border;
-  }
+    &--left {border-right: $border;}
+    &--right {
+      right: 0;
+      left: auto;
+      border-left: $border;
+    }
 
-  &--no-border, &--shadow {border-width: 0;}
-  &--shadow {box-shadow: $box-shadow;}
+    &--no-border, &--shadow {border-width: 0;}
+    &--shadow {box-shadow: $box-shadow;}
 
-  .w-app > & {z-index: 200;}
+    .w-app > & {z-index: 200;}
 
-  // In w-card.
-  .w-card__title & {
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-  }
-  .w-card__actions & {
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
-  }
-  .w-card__content &--left {
-    border-top-left-radius: inherit;
-    border-bottom-left-radius: inherit;
-  }
-  .w-card__content &--right {
-    border-top-right-radius: inherit;
-    border-bottom-right-radius: inherit;
+    // In w-card.
+    .w-card__title & {
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+    }
+    .w-card__actions & {
+      border-bottom-left-radius: inherit;
+      border-bottom-right-radius: inherit;
+    }
+    .w-card__content &--left {
+      border-top-left-radius: inherit;
+      border-bottom-left-radius: inherit;
+    }
+    .w-card__content &--right {
+      border-top-right-radius: inherit;
+      border-bottom-right-radius: inherit;
+    }
   }
 }
 </style>

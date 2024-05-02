@@ -84,61 +84,63 @@ export default {
 </script>
 
 <style lang="scss">
-.w-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-radius: $border-radius;
-  border: $border;
-
-  @include themeable;
-
-  &--tile {border-radius: 0;}
-  &--shadow {box-shadow: $box-shadow;}
-  &--no-border, &--shadow {border: none;}
-
-  &__title {
+#{$css-scope} {
+  .w-card {
+    position: relative;
     display: flex;
-    align-items: center;
-    padding: (2 * $base-increment) (3 * $base-increment);
-    font-size: 1.3em;
-    border-bottom: $border;
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
+    flex-direction: column;
+    border-radius: $border-radius;
+    border: $border;
 
-    &--has-toolbar {padding: 0;border-bottom: none;}
-  }
+    @include themeable;
 
-  // When there is no title apply the border radius to the image.
-  &__image:first-child {
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-    overflow: hidden;
-  }
+    &--tile {border-radius: 0;}
+    &--shadow {box-shadow: $box-shadow;}
+    &--no-border, &--shadow {border: none;}
 
-  &__content {
-    padding: 3 * $base-increment;
-    flex-grow: 1;
-
-    // Only if there is no title bar.
-    &:first-child {
+    &__title {
+      display: flex;
+      align-items: center;
+      padding: (2 * $base-increment) (3 * $base-increment);
+      font-size: 1.3em;
+      border-bottom: $border;
       border-top-left-radius: inherit;
       border-top-right-radius: inherit;
+
+      &--has-toolbar {padding: 0;border-bottom: none;}
     }
-    &:last-child {
-    // Only if there is no actions bar.
+
+    // When there is no title apply the border radius to the image.
+    &__image:first-child {
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+      overflow: hidden;
+    }
+
+    &__content {
+      padding: 3 * $base-increment;
+      flex-grow: 1;
+
+      // Only if there is no title bar.
+      &:first-child {
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+      }
+      &:last-child {
+      // Only if there is no actions bar.
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      padding: (2 * $base-increment) (3 * $base-increment) (3 * $base-increment);
       border-bottom-left-radius: inherit;
       border-bottom-right-radius: inherit;
+
+      &--has-toolbar {padding: 0;}
     }
-  }
-
-  &__actions {
-    display: flex;
-    padding: (2 * $base-increment) (3 * $base-increment) (3 * $base-increment);
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
-
-    &--has-toolbar {padding: 0;}
   }
 }
 </style>

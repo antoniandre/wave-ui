@@ -141,184 +141,186 @@ export default {
 <style lang="scss">
 $spinner-size: 40;
 
-.w-button {
-  position: relative;
-  display: inline-flex;
-  flex-shrink: 0;
-  outline: none;
-  border-radius: $border-radius;
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  padding-left: 2 * $base-increment;
-  padding-right: 2 * $base-increment;
-  box-shadow: 0 0 0 transparent;
-  vertical-align: middle;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  user-select: none;
-  cursor: pointer;
-  color: inherit; // Override the default color in Safari.
-  font-family: inherit;
-  z-index: 1;
-  // Background-color must not transition to not affect the hover & focus states
-  // in :before & :after.
-  transition: all $transition-duration, background-color 0s, padding 0s;
-  -webkit-tap-highlight-color: transparent;
-
-  @include themeable;
-
-  // In w-flex wrapper, allow overriding the default `align-self: center`.
-  .w-flex.align-start > & {align-self: flex-start;}
-  .w-flex.align-end > & {align-self: flex-end;}
-
-  // Position.
-  &--absolute {position: absolute;}
-  &--fixed {position: fixed;}
-  &--top {top: 2 * $base-increment;}
-  &--bottom {bottom: 2 * $base-increment;}
-  &--left {left: 2 * $base-increment;}
-  &--right {right: 2 * $base-increment;}
-
-  &--dark {
-    color: rgba(255, 255, 255, 0.95);
-    background-color: rgba(255, 255, 255, 0.15);
-  }
-  &--outline {
-    background-color: transparent;
-    border-color: currentColor;
-  }
-  &--text {
-    background-color: transparent;
-    border-color: transparent;
-  }
-  &--round {
-    border-radius: 99em;
-    padding-left: 3 * $base-increment;
-    padding-right: 3 * $base-increment;
-  }
-  &--icon {
-    aspect-ratio: 1;
-    border-radius: 99em;
-    padding: 0;
-    min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
-  }
-  &--tile {border-radius: initial;}
-  &--shadow {box-shadow: $box-shadow;}
-  &--loading {cursor: wait;opacity: 0.8;}
-  &[disabled] {
-    cursor: not-allowed;
-    box-shadow: none;
-    opacity: 0.4;
-    -webkit-tap-highlight-color: transparent;
-  }
-  &--dark[disabled] {
-    background-color: rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.3);
-  }
-
-  // Sizes adjustments (always an even number for easier vertical alignments).
-  &.size--xs {height: round(1.25 * divide($base-font-size, 2)) * 2;}
-  &.size--sm {height: round(1.55 * divide($base-font-size, 2)) * 2;}
-  &.size--md {height: round(1.85 * divide($base-font-size, 2)) * 2;}
-  &.size--lg {height: round(2.2 * divide($base-font-size, 2)) * 2;}
-  &.size--xl {height: round(2.5 * divide($base-font-size, 2)) * 2;}
-
-  &.size--xs {padding-left: $base-increment;padding-right: $base-increment;}
-  &.size--xl {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
-  &--round.size--xs {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
-  &--round.size--xl {padding-left: round(4.5 * $base-increment);padding-right: round(4.5 * $base-increment);}
-  &--icon.size--xs {padding-left: 0;padding-right: 0;}
-  &--icon.size--xl {padding-left: 0;padding-right: 0;}
-
-  // Overlay to mark the focus, hover and active state.
-  &:before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    background-color: #000;
-    border-radius: inherit;
-    @include default-transition;
-  }
-
-  &--dark:before, &.primary--bg:before,
-  &.success--bg:before, &.error--bg:before, &.warning--bg:before, &.info--bg:before {background-color: #fff;}
-  &--outline:before, &--text:before {background-color: currentColor;}
-
-  // Button states.
-  // ------------------------------------------------------
-  // Hover & focus states - inside button.
-  &:hover:before, &:focus-visible:before {opacity: 0.2;}
-  &--dark:hover:before, &--dark:focus-visible:before {opacity: 0.4;}
-  &--outline:hover:before, &--outline:focus-visible:before,
-  &--text:hover:before, &--text:focus-visible:before {opacity: 0.12;}
-
-  // Focus state - outside button.
-  &:after {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    background-color: inherit;
-    opacity: 0;
-    border-radius: inherit;
-    z-index: -1;
-    transition: opacity 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-in;
-    transform: scale(0.85, 0.7);
-  }
-  &:focus-visible:after {
-    opacity: 0.4;
-    transform: scale(1);
-    transition: opacity 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-out;
-  }
-  &--dark:focus-visible:after {opacity: 0.2;}
-
-  // Active state.
-  &:active {transform: scale(1.02);}
-  &:active:before {
-    opacity: 0.3;
-    @include default-transition($fast-transition-duration);
-  }
-  &--dark:active:before, &.primary--bg:active:before {opacity: 0.35;}
-
-  // Disable visual feedback on loading and disabled buttons.
-  &--loading:hover:before,
-  &--loading:focus-visible:before,
-  &--loading:active:before,
-  &[disabled]:before {opacity: 0;}
-  &--loading:active,
-  &[disabled] {transform: none;}
-  // ------------------------------------------------------
-
-  // Disable events binding on nested content.
-  & * {pointer-events: none;}
-
-  &__loader {
-    position: absolute;
-    inset: 0;
-    display: flex;
+#{$css-scope} {
+  .w-button {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    outline: none;
+    border-radius: $border-radius;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    padding-left: 2 * $base-increment;
+    padding-right: 2 * $base-increment;
+    box-shadow: 0 0 0 transparent;
+    vertical-align: middle;
+    align-self: center;
     align-items: center;
     justify-content: center;
-    background: inherit;
-    border-radius: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    user-select: none;
+    cursor: pointer;
+    color: inherit; // Override the default color in Safari.
+    font-family: inherit;
+    z-index: 1;
+    // Background-color must not transition to not affect the hover & focus states
+    // in :before & :after.
+    transition: all $transition-duration, background-color 0s, padding 0s;
+    -webkit-tap-highlight-color: transparent;
 
-    svg {height: 75%;}
-    circle {
-      stroke-dasharray: (3.14 * $spinner-size);
-      transform-origin: 50%;
-      animation: spinner 2s linear infinite;
+    @include themeable;
+
+    // In w-flex wrapper, allow overriding the default `align-self: center`.
+    .w-flex.align-start > & {align-self: flex-start;}
+    .w-flex.align-end > & {align-self: flex-end;}
+
+    // Position.
+    &--absolute {position: absolute;}
+    &--fixed {position: fixed;}
+    &--top {top: 2 * $base-increment;}
+    &--bottom {bottom: 2 * $base-increment;}
+    &--left {left: 2 * $base-increment;}
+    &--right {right: 2 * $base-increment;}
+
+    &--dark {
+      color: rgba(255, 255, 255, 0.95);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+    &--outline {
+      background-color: transparent;
+      border-color: currentColor;
+    }
+    &--text {
+      background-color: transparent;
+      border-color: transparent;
+    }
+    &--round {
+      border-radius: 99em;
+      padding-left: 3 * $base-increment;
+      padding-right: 3 * $base-increment;
+    }
+    &--icon {
+      aspect-ratio: 1;
+      border-radius: 99em;
+      padding: 0;
+      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
+    }
+    &--tile {border-radius: initial;}
+    &--shadow {box-shadow: $box-shadow;}
+    &--loading {cursor: wait;opacity: 0.8;}
+    &[disabled] {
+      cursor: not-allowed;
+      box-shadow: none;
+      opacity: 0.4;
+      -webkit-tap-highlight-color: transparent;
+    }
+    &--dark[disabled] {
+      background-color: rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    // Sizes adjustments (always an even number for easier vertical alignments).
+    &.size--xs {height: round(1.25 * divide($base-font-size, 2)) * 2;}
+    &.size--sm {height: round(1.55 * divide($base-font-size, 2)) * 2;}
+    &.size--md {height: round(1.85 * divide($base-font-size, 2)) * 2;}
+    &.size--lg {height: round(2.2 * divide($base-font-size, 2)) * 2;}
+    &.size--xl {height: round(2.5 * divide($base-font-size, 2)) * 2;}
+
+    &.size--xs {padding-left: $base-increment;padding-right: $base-increment;}
+    &.size--xl {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
+    &--round.size--xs {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
+    &--round.size--xl {padding-left: round(4.5 * $base-increment);padding-right: round(4.5 * $base-increment);}
+    &--icon.size--xs {padding-left: 0;padding-right: 0;}
+    &--icon.size--xl {padding-left: 0;padding-right: 0;}
+
+    // Overlay to mark the focus, hover and active state.
+    &:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background-color: #000;
+      border-radius: inherit;
+      @include default-transition;
+    }
+
+    &--dark:before, &.primary--bg:before,
+    &.success--bg:before, &.error--bg:before, &.warning--bg:before, &.info--bg:before {background-color: #fff;}
+    &--outline:before, &--text:before {background-color: currentColor;}
+
+    // Button states.
+    // ------------------------------------------------------
+    // Hover & focus states - inside button.
+    &:hover:before, &:focus-visible:before {opacity: 0.2;}
+    &--dark:hover:before, &--dark:focus-visible:before {opacity: 0.4;}
+    &--outline:hover:before, &--outline:focus-visible:before,
+    &--text:hover:before, &--text:focus-visible:before {opacity: 0.12;}
+
+    // Focus state - outside button.
+    &:after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      background-color: inherit;
+      opacity: 0;
+      border-radius: inherit;
+      z-index: -1;
+      transition: opacity 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-in;
+      transform: scale(0.85, 0.7);
+    }
+    &:focus-visible:after {
+      opacity: 0.4;
+      transform: scale(1);
+      transition: opacity 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-out;
+    }
+    &--dark:focus-visible:after {opacity: 0.2;}
+
+    // Active state.
+    &:active {transform: scale(1.02);}
+    &:active:before {
+      opacity: 0.3;
+      @include default-transition($fast-transition-duration);
+    }
+    &--dark:active:before, &.primary--bg:active:before {opacity: 0.35;}
+
+    // Disable visual feedback on loading and disabled buttons.
+    &--loading:hover:before,
+    &--loading:focus-visible:before,
+    &--loading:active:before,
+    &[disabled]:before {opacity: 0;}
+    &--loading:active,
+    &[disabled] {transform: none;}
+    // ------------------------------------------------------
+
+    // Disable events binding on nested content.
+    & * {pointer-events: none;}
+
+    &__loader {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: inherit;
+      border-radius: inherit;
+
+      svg {height: 75%;}
+      circle {
+        stroke-dasharray: (3.14 * $spinner-size);
+        transform-origin: 50%;
+        animation: spinner 2s linear infinite;
+      }
     }
   }
-}
 
-@keyframes spinner {
-  0% {transform: rotate(0deg);stroke-dashoffset: (0.66 * $spinner-size);}
-  50% {transform: rotate(720deg);stroke-dashoffset: (3.14 * $spinner-size);}
-  100% {transform: rotate(1080deg);stroke-dashoffset: (0.66 * $spinner-size);}
+  @keyframes spinner {
+    0% {transform: rotate(0deg);stroke-dashoffset: (0.66 * $spinner-size);}
+    50% {transform: rotate(720deg);stroke-dashoffset: (3.14 * $spinner-size);}
+    100% {transform: rotate(1080deg);stroke-dashoffset: (0.66 * $spinner-size);}
+  }
 }
 </style>

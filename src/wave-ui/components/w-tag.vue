@@ -80,114 +80,116 @@ export default {
 </script>
 
 <style lang="scss">
-.w-tag {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  border-radius: $border-radius;
-  border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.08);
-  background-color: rgba(var(--w-base-bg-color-rgb), 0.85);
-  padding-left: 2 * $base-increment;
-  padding-right: 2 * $base-increment;
-  cursor: default;
-  user-select: none;
-
-  @include themeable;
-
-  &--dark {color: rgba(var(--w-base-bg-color-rgb), 0.95);}
-  &--outline {background-color: transparent;border-color: currentColor;}
-  &--no-border {border-color: transparent;}
-  &--round {border-radius: 99em;}
-  &--tile {border-radius: initial;}
-  &--shadow {box-shadow: $box-shadow;}
-
-  &.size--xs {
-    $font-size: round(0.7 * $base-font-size);
-    font-size: $font-size;
-    line-height: $font-size + 2px;
-    padding: round(0.25 * $base-increment) $base-increment;
-  }
-  &.size--sm {
-    $font-size: round(0.82 * $base-font-size);
-    font-size: $font-size;
-    line-height: $font-size + 2px;
-    padding: round(0.25 * $base-increment) $base-increment;
-  }
-  &.size--md {
-    $font-size: round(0.85 * $base-font-size);
-    font-size: $font-size;
-    line-height: $font-size + 4px;
-    padding-top: round(0.25 * $base-increment);
-    padding-bottom: round(0.25 * $base-increment);
-  }
-  &.size--lg {
-    $font-size: round(1.1 * $base-font-size);
-    font-size: $font-size;
-    line-height: $font-size + 4px;
-    padding-top: round(0.5 * $base-increment);
-    padding-bottom: round(0.5 * $base-increment);
-  }
-  &.size--xl {
-    $font-size: round(1.3 * $base-font-size);
-    font-size: $font-size;
-    line-height: $font-size + 4px;
-    padding-top: round(1 * $base-increment);
-    padding-bottom: round(1 * $base-increment);
-  }
-
-  &--clickable {
-    cursor: pointer;
+#{$css-scope} {
+  .w-tag {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    border-radius: $border-radius;
+    border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.08);
+    background-color: rgba(var(--w-base-bg-color-rgb), 0.85);
+    padding-left: 2 * $base-increment;
+    padding-right: 2 * $base-increment;
+    cursor: default;
     user-select: none;
-    -webkit-tap-highlight-color: transparent;
 
-    .w-tag__closable {
-      margin-left: 3px;
-      margin-right: -3px;
-      padding: 1px;
-      transition: $transition-duration;
+    @include themeable;
+
+    &--dark {color: rgba(var(--w-base-bg-color-rgb), 0.95);}
+    &--outline {background-color: transparent;border-color: currentColor;}
+    &--no-border {border-color: transparent;}
+    &--round {border-radius: 99em;}
+    &--tile {border-radius: initial;}
+    &--shadow {box-shadow: $box-shadow;}
+
+    &.size--xs {
+      $font-size: round(0.7 * $base-font-size);
+      font-size: $font-size;
+      line-height: $font-size + 2px;
+      padding: round(0.25 * $base-increment) $base-increment;
     }
-    &.size--lg .w-tag__closable,
-    &.size--xl .w-tag__closable {
-      margin-right: -2px;
-      padding: 2px;
+    &.size--sm {
+      $font-size: round(0.82 * $base-font-size);
+      font-size: $font-size;
+      line-height: $font-size + 2px;
+      padding: round(0.25 * $base-increment) $base-increment;
+    }
+    &.size--md {
+      $font-size: round(0.85 * $base-font-size);
+      font-size: $font-size;
+      line-height: $font-size + 4px;
+      padding-top: round(0.25 * $base-increment);
+      padding-bottom: round(0.25 * $base-increment);
+    }
+    &.size--lg {
+      $font-size: round(1.1 * $base-font-size);
+      font-size: $font-size;
+      line-height: $font-size + 4px;
+      padding-top: round(0.5 * $base-increment);
+      padding-bottom: round(0.5 * $base-increment);
+    }
+    &.size--xl {
+      $font-size: round(1.3 * $base-font-size);
+      font-size: $font-size;
+      line-height: $font-size + 4px;
+      padding-top: round(1 * $base-increment);
+      padding-bottom: round(1 * $base-increment);
     }
 
-    &:hover {
-      .w-tag__closable {background-color: rgba(var(--w-contrast-bg-color-rgb), 0.1);}
+    &--clickable {
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+
+      .w-tag__closable {
+        margin-left: 3px;
+        margin-right: -3px;
+        padding: 1px;
+        transition: $transition-duration;
+      }
+      &.size--lg .w-tag__closable,
+      &.size--xl .w-tag__closable {
+        margin-right: -2px;
+        padding: 2px;
+      }
+
+      &:hover {
+        .w-tag__closable {background-color: rgba(var(--w-contrast-bg-color-rgb), 0.1);}
+      }
+
+      // Overlay to mark the focus and active state.
+      &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        background-color: transparent;
+        // As this overlay is a smaller rectangle, the radius must be smaller to cover perfectly.
+        border-radius: $border-radius - 1;
+        transition: 0.2s;
+      }
+      &.w-tag--round:before {border-radius: inherit;}
+
+      // Hover state.
+      &:hover:before {background-color: currentColor;opacity: 0.06;}
+      &--dark:hover:before {background-color: rgba(var(--w-base-bg-color-rgb), 0.12);opacity: 1;}
+      &--outline:hover:before,
+      &--text:hover:before {background-color: currentColor;opacity: 0.12;}
+
+      // Focus state.
+      &:focus:before {background-color: currentColor;opacity: 0.2;}
+      &--dark:focus:before {background-color: rgba(var(--w-base-bg-color-rgb), 0.12);}
+      &--outline:focus:before,
+      &--text:focus:before {background-color: currentColor;opacity: 0.12;}
+
+      // Active state.
+      &:active:before {background-color: currentColor;opacity: 0.2;}
+      &--dark:active:before {background-color: rgba(var(--w-base-bg-color-rgb), 0.2);}
+      &--outline:active:before,
+      &--text:active:before {background-color: currentColor;opacity: 0.2;}
     }
-
-    // Overlay to mark the focus and active state.
-    &:before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      background-color: transparent;
-      // As this overlay is a smaller rectangle, the radius must be smaller to cover perfectly.
-      border-radius: $border-radius - 1;
-      transition: 0.2s;
-    }
-    &.w-tag--round:before {border-radius: inherit;}
-
-    // Hover state.
-    &:hover:before {background-color: currentColor;opacity: 0.06;}
-    &--dark:hover:before {background-color: rgba(var(--w-base-bg-color-rgb), 0.12);opacity: 1;}
-    &--outline:hover:before,
-    &--text:hover:before {background-color: currentColor;opacity: 0.12;}
-
-    // Focus state.
-    &:focus:before {background-color: currentColor;opacity: 0.2;}
-    &--dark:focus:before {background-color: rgba(var(--w-base-bg-color-rgb), 0.12);}
-    &--outline:focus:before,
-    &--text:focus:before {background-color: currentColor;opacity: 0.12;}
-
-    // Active state.
-    &:active:before {background-color: currentColor;opacity: 0.2;}
-    &--dark:active:before {background-color: rgba(var(--w-base-bg-color-rgb), 0.2);}
-    &--outline:active:before,
-    &--text:active:before {background-color: currentColor;opacity: 0.2;}
   }
 }
 </style>

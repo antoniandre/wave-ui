@@ -169,63 +169,65 @@ export default {
 </script>
 
 <style lang="scss">
-.w-accordion {
-  z-index: 1;
+#{$css-scope} {
+  .w-accordion {
+    z-index: 1;
 
-  @include themeable;
+    @include themeable;
 
-  &--shadow {box-shadow: $box-shadow;}
+    &--shadow {box-shadow: $box-shadow;}
 
-  &__item {position: relative;}
+    &__item {position: relative;}
 
-  button.w-accordion__expand-icon {color: rgba(var(--w-base-color-rgb), 0.4);}
-  &__expand-icon {
-    margin-right: $base-increment;
+    button.w-accordion__expand-icon {color: rgba(var(--w-base-color-rgb), 0.4);}
+    &__expand-icon {
+      margin-right: $base-increment;
 
-    .w-accordion--rotate-icon & {@include default-transition;}
-    &--rotate90 {transform: rotate(-90deg);}
-    &--expanded {transform: rotate(-180deg);}
-    &--expanded.w-accordion__expand-icon--rotate90 {transform: rotate(0deg);}
+      .w-accordion--rotate-icon & {@include default-transition;}
+      &--rotate90 {transform: rotate(-90deg);}
+      &--expanded {transform: rotate(-180deg);}
+      &--expanded.w-accordion__expand-icon--rotate90 {transform: rotate(0deg);}
 
-    .w-icon:before {font-size: 1.1em;}
-  }
+      .w-icon:before {font-size: 1.1em;}
+    }
 
-  &__item-title {
-    position: relative;
-    display: flex;
-    align-items: center;
-    font-size: round(1.2 * $base-font-size);
-    padding: 1 * $base-increment;
-    user-select: none;
-    cursor: pointer;
-    border-top: $border;
-    -webkit-tap-highlight-color: transparent;
-
-    .w-accordion__item--disabled & {
-      cursor: not-allowed;
-      opacity: 0.6;
+    &__item-title {
+      position: relative;
+      display: flex;
+      align-items: center;
+      font-size: round(1.2 * $base-font-size);
+      padding: 1 * $base-increment;
+      user-select: none;
+      cursor: pointer;
+      border-top: $border;
       -webkit-tap-highlight-color: transparent;
+
+      .w-accordion__item--disabled & {
+        cursor: not-allowed;
+        opacity: 0.6;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .w-accordion--no-icon &, .w-accordion--icon-right & {padding-left: 3 * $base-increment;}
+
+      .w-accordion__item:first-child & {border-top-color: transparent;}
+
+      &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: currentColor;
+        opacity: 0;
+        transition: $fast-transition-duration;
+      }
+
+      &:focus:before, &:hover:before {opacity: 0.03;}
+      &:active:before {opacity: 0.05;}
+      .w-accordion__item--disabled &:before {display: none;}
     }
-    .w-accordion--no-icon &, .w-accordion--icon-right & {padding-left: 3 * $base-increment;}
 
-    .w-accordion__item:first-child & {border-top-color: transparent;}
-
-    &:before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: currentColor;
-      opacity: 0;
-      transition: $fast-transition-duration;
+    &__item-content {
+      padding: (2 * $base-increment) (3 * $base-increment);
     }
-
-    &:focus:before, &:hover:before {opacity: 0.03;}
-    &:active:before {opacity: 0.05;}
-    .w-accordion__item--disabled &:before {display: none;}
-  }
-
-  &__item-content {
-    padding: (2 * $base-increment) (3 * $base-increment);
   }
 }
 </style>
