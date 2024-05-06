@@ -48,26 +48,24 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-notification-manager {
-    position: fixed;
-    inset: 0 0 0 auto;
-    z-index: 1000;
-    pointer-events: none;
-    width: 280px;
-    overflow-x: hidden;
+.w-notification-manager {
+  position: fixed;
+  inset: 0 0 0 auto;
+  z-index: 1000;
+  pointer-events: none;
+  width: 280px;
+  overflow-x: hidden;
 
-    &--left {right: auto;left: 0;}
+  &--left {right: auto;left: 0;}
 
-    .w-alert {
-      position: relative;
-      z-index: 400;
-      left: 0;
-      right: 0;
-      margin: 8px;
-      flex-grow: 1;
-      pointer-events: all;
-    }
+  .w-alert {
+    position: relative;
+    z-index: 400;
+    left: 0;
+    right: 0;
+    margin: 8px;
+    flex-grow: 1;
+    pointer-events: all;
   }
 }
 </style>

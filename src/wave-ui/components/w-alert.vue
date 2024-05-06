@@ -131,125 +131,123 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-alert {
-    position: relative;
-    margin-top: 4 * $base-increment;
-    margin-bottom: 4 * $base-increment;
-    padding: 2 * $base-increment;
-    font-size: round(1.1 * $base-font-size);
-    font-weight: 700;
-    border-radius: $border-radius;
-    border: 1px solid currentColor;
+.w-alert {
+  position: relative;
+  margin-top: 4 * $base-increment;
+  margin-bottom: 4 * $base-increment;
+  padding: 2 * $base-increment;
+  font-size: round(1.1 * $base-font-size);
+  font-weight: 700;
+  border-radius: $border-radius;
+  border: 1px solid currentColor;
 
-    @include themeable;
+  @include themeable;
 
-    &--has-icon {
-      display: flex;
-      align-items: center;
-    }
-
-    &--outline {border-color: currentColor;}
-    &--tile {border-radius: 0;}
-    &--round {
-      border-radius: 99em;
-      padding-left: 3 * $base-increment;
-      padding-right: 3 * $base-increment;
-    }
-    &--shadow {box-shadow: $box-shadow;}
-    &--no-border, &--one-border, &--plain {border: transparent;}
-
-    // Before for the border, after for the background color.
-    // ------------------------------------------------------
-    &:before, &:after {
-      position: absolute;
-      inset: 0;
-      background-color: currentColor;
-      pointer-events: none;
-    }
-
-    // Single side border.
-    // ------------------------------------------------------
-    &--border-left {padding-left: 3 * $base-increment;}
-    &--border-right {padding-right: 3 * $base-increment;}
-    &--border-top {padding-top: 3 * $base-increment;}
-    &--border-bottom {padding-bottom: 3 * $base-increment;}
-
-    &--one-border:before {content: '';opacity: 0.3;}
-    &--border-left:before {
-      right: auto;
-      width: $base-increment;
-      border-top-left-radius: inherit;
-      border-bottom-left-radius: inherit;
-    }
-    &--border-right:before {
-      left: auto;
-      width: $base-increment;
-      border-top-right-radius: inherit;
-      border-bottom-right-radius: inherit;
-    }
-    &--border-top:before {
-      bottom: auto;
-      height: $base-increment;
-      border-top-left-radius: inherit;
-      border-top-right-radius: inherit;
-    }
-    &--border-bottom:before {
-      top: auto;
-      height: $base-increment;
-      border-bottom-left-radius: inherit;
-      border-bottom-right-radius: inherit;
-    }
-    &--one-border.w-alert--icon-outside:before {
-      content: '';
-      opacity: 0.7;
-      width: 3px;
-    }
-
-    &:after {opacity: 0.12;content: '';border-radius: inherit;}
-    &--outline:after {display: none;}
-    &--bg:after {background-color: #fff;opacity: 0.1;}
-
-    // Left icon and dismiss button.
-    // ------------------------------------------------------
-    &__dismiss.w-button {
-      align-self: flex-start;
-      margin-left: 2 * $base-increment;
-      margin-top: round(-0.5 * $base-increment);
-      margin-right: round(-0.5 * $base-increment);
-    }
-
-    & &__icon {
-      opacity: 0.9;
-      align-self: flex-start;
-      margin-right: 2 * $base-increment;
-      font-size: 1.3em;
-    }
-    &--has-icon &__content {flex-grow: 1;align-self: flex-start;}
-    @-moz-document url-prefix() {
-      &--has-icon &__content {margin-top: 0.18em;}
-    }
-
-    &--icon-outside &__icon {
-      position: absolute;
-      opacity: 1;
-      left: 1px;
-      z-index: 1;
-      transform: translateX(-50%);
-      border: 1px solid rgba(var(--w-base-bg-color-rgb), 0.7);
-      background-color: $base-bg-color;
-    }
-    &--icon-outside &__icon:before {transform: scale(1.05);}
-
-    &--icon-outside &__content {padding-left: 3 * $base-increment;}
-
-    // Sizes.
-    // ------------------------------------------------------
-    &.size--xs {padding-top: $base-increment;padding-bottom: $base-increment;}
-    &.size--sm {padding-top: $base-increment;padding-bottom: $base-increment;}
-    &.size--md {padding-top: round(2 * $base-increment);padding-bottom: round(2 * $base-increment);}
-    &.size--lg {padding-top: round(3 * $base-increment);padding-bottom: round(2.5 * $base-increment);}
-    &.size--xl {padding-top: round(3 * $base-increment);padding-bottom: round(3 * $base-increment);}
+  &--has-icon {
+    display: flex;
+    align-items: center;
   }
+
+  &--outline {border-color: currentColor;}
+  &--tile {border-radius: 0;}
+  &--round {
+    border-radius: 99em;
+    padding-left: 3 * $base-increment;
+    padding-right: 3 * $base-increment;
+  }
+  &--shadow {box-shadow: $box-shadow;}
+  &--no-border, &--one-border, &--plain {border: transparent;}
+
+  // Before for the border, after for the background color.
+  // ------------------------------------------------------
+  &:before, &:after {
+    position: absolute;
+    inset: 0;
+    background-color: currentColor;
+    pointer-events: none;
+  }
+
+  // Single side border.
+  // ------------------------------------------------------
+  &--border-left {padding-left: 3 * $base-increment;}
+  &--border-right {padding-right: 3 * $base-increment;}
+  &--border-top {padding-top: 3 * $base-increment;}
+  &--border-bottom {padding-bottom: 3 * $base-increment;}
+
+  &--one-border:before {content: '';opacity: 0.3;}
+  &--border-left:before {
+    right: auto;
+    width: $base-increment;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+  &--border-right:before {
+    left: auto;
+    width: $base-increment;
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+  &--border-top:before {
+    bottom: auto;
+    height: $base-increment;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+  &--border-bottom:before {
+    top: auto;
+    height: $base-increment;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+  &--one-border.w-alert--icon-outside:before {
+    content: '';
+    opacity: 0.7;
+    width: 3px;
+  }
+
+  &:after {opacity: 0.12;content: '';border-radius: inherit;}
+  &--outline:after {display: none;}
+  &--bg:after {background-color: #fff;opacity: 0.1;}
+
+  // Left icon and dismiss button.
+  // ------------------------------------------------------
+  &__dismiss.w-button {
+    align-self: flex-start;
+    margin-left: 2 * $base-increment;
+    margin-top: round(-0.5 * $base-increment);
+    margin-right: round(-0.5 * $base-increment);
+  }
+
+  & &__icon {
+    opacity: 0.9;
+    align-self: flex-start;
+    margin-right: 2 * $base-increment;
+    font-size: 1.3em;
+  }
+  &--has-icon &__content {flex-grow: 1;align-self: flex-start;}
+  @-moz-document url-prefix() {
+    &--has-icon &__content {margin-top: 0.18em;}
+  }
+
+  &--icon-outside &__icon {
+    position: absolute;
+    opacity: 1;
+    left: 1px;
+    z-index: 1;
+    transform: translateX(-50%);
+    border: 1px solid rgba(var(--w-base-bg-color-rgb), 0.7);
+    background-color: $base-bg-color;
+  }
+  &--icon-outside &__icon:before {transform: scale(1.05);}
+
+  &--icon-outside &__content {padding-left: 3 * $base-increment;}
+
+  // Sizes.
+  // ------------------------------------------------------
+  &.size--xs {padding-top: $base-increment;padding-bottom: $base-increment;}
+  &.size--sm {padding-top: $base-increment;padding-bottom: $base-increment;}
+  &.size--md {padding-top: round(2 * $base-increment);padding-bottom: round(2 * $base-increment);}
+  &.size--lg {padding-top: round(3 * $base-increment);padding-bottom: round(2.5 * $base-increment);}
+  &.size--xl {padding-top: round(3 * $base-increment);padding-bottom: round(3 * $base-increment);}
 }
 </style>

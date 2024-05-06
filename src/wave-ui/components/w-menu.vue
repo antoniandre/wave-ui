@@ -282,38 +282,36 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-menu-wrap {display: none;}
+.w-menu-wrap {display: none;}
 
-  .w-menu {
-    position: absolute;
-    z-index: 100;
-    color: $menu-color;
+.w-menu {
+  position: absolute;
+  z-index: 100;
+  color: $menu-color;
 
-    @include themeable;
+  @include themeable;
 
-    &--fixed {position: fixed;z-index: 1000;}
-    &--card {background-color: $menu-bg-color;}
-    &--tile {border-radius: 0;}
-    &--round {
-      border-radius: 99em;
-      padding: $base-increment round(2.5 * $base-increment);
-    }
-    &--shadow {box-shadow: $box-shadow;}
+  &--fixed {position: fixed;z-index: 1000;}
+  &--card {background-color: $menu-bg-color;}
+  &--tile {border-radius: 0;}
+  &--round {
+    border-radius: 99em;
+    padding: $base-increment round(2.5 * $base-increment);
+  }
+  &--shadow {box-shadow: $box-shadow;}
 
-    &--top {margin-top: -3 * $base-increment;}
-    &--bottom {margin-top: 3 * $base-increment;}
-    &--left {margin-left: -3 * $base-increment;}
-    &--right {margin-left: 3 * $base-increment;}
+  &--top {margin-top: -3 * $base-increment;}
+  &--bottom {margin-top: 3 * $base-increment;}
+  &--left {margin-left: -3 * $base-increment;}
+  &--right {margin-left: 3 * $base-increment;}
 
-    &--arrow {
-      &.w-menu--top {margin-top: -4 * $base-increment;}
-      &.w-menu--bottom {margin-top: 4 * $base-increment;}
-      &.w-menu--left {margin-left: -4 * $base-increment;}
-      &.w-menu--right {margin-left: 4 * $base-increment;}
+  &--arrow {
+    &.w-menu--top {margin-top: -4 * $base-increment;}
+    &.w-menu--bottom {margin-top: 4 * $base-increment;}
+    &.w-menu--left {margin-left: -4 * $base-increment;}
+    &.w-menu--right {margin-left: 4 * $base-increment;}
 
-      @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
-    }
+    @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
   }
 }
 </style>

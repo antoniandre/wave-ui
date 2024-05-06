@@ -424,241 +424,239 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-select {
+.w-select {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: $base-font-size;
+
+  @include themeable;
+
+  &--disabled {
+    color: $disabled-color;
+    cursor: not-allowed;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  &--fit-to-content {
+    display: inline-flex;
+    flex-grow: 0;
+  }
+
+  // Selection wrapper.
+  // ------------------------------------------------------
+  &__selection-wrap {
     position: relative;
-    display: flex;
-    flex-grow: 1;
-    flex-wrap: wrap;
+    display: inline-flex;
+    flex: 1 1 auto;
     align-items: center;
-    font-size: $base-font-size;
+    min-height: $form-field-height; // Min-height to allow multiple lines.
+    border-radius: $border-radius;
+    border: $border;
+    transition: border $transition-duration;
 
-    @include themeable;
+    &--tile {border-radius: initial;}
+    &--shadow {box-shadow: $box-shadow;}
+    .w-select[class^="bdrs"] &, .w-select[class*=" bdrs"] & {border-radius: inherit;}
 
-    &--disabled {
+    .w-select--floating-label & {margin-top: 3 * $base-increment;}
+
+    &--underline {
+      border-bottom-left-radius: initial;
+      border-bottom-right-radius: initial;
+      border-width: 0 0 1px;
+    }
+
+    &--round {border-radius: 99em;}
+
+    .w-select--focused &, .w-select--open & {border-color: currentColor;}
+
+    // Underline.
+    &--underline:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 0;
+      border-bottom: 2px solid currentColor;
+      transition: $transition-duration;
+      transform: scaleX(0);
+      pointer-events: none;
+    }
+
+    .w-select--focused &--underline:after,
+    .w-select--open &--underline:after {transform: scaleX(1);}
+    &--round.w-select__selection-wrap--underline:after {
+      border-radius: 99em;
+      transition: $transition-duration, height 0.035s;
+    }
+    .w-select--focused &--round.w-select__selection-wrap--underline:after,
+    .w-select--open &--round.w-select__selection-wrap--underline:after {
+      height: 100%;
+      transition: $transition-duration, height 0s ($transition-duration - 0.035s);
+    }
+  }
+
+  // Selection (contenteditable) field.
+  // Using contenteditable instead of readonly input in order to be able to fit to content.
+  // Then disable typing and hide caret.
+  // ------------------------------------------------------
+  &__selection {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    outline: none;
+    padding-left: 2 * $base-increment;
+    padding-right: 2 * $base-increment;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    caret-color: transparent;
+    border-radius: inherit;
+
+    &--placeholder {color: #888;}
+
+    .w-select__selection-slot + & {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .w-select--no-padding & {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .w-select__selection-wrap--round & {
+      padding-left: 3 * $base-increment;
+      padding-right: 3 * $base-increment;
+    }
+
+    .w-select--inner-icon-left & {padding-left: 27px;}
+    &-slot, .w-select--inner-icon-right & {padding-right: 22px;}
+
+    .w-select--disabled & {
       color: $disabled-color;
       cursor: not-allowed;
       -webkit-tap-highlight-color: transparent;
     }
 
-    &--fit-to-content {
-      display: inline-flex;
-      flex-grow: 0;
+    .w-select--readonly & {cursor: auto;}
+  }
+
+  &__selection-slot {
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  // Icons inside.
+  // ------------------------------------------------------
+  &__icon {
+    position: absolute;
+    font-size: 1.4em;
+    cursor: pointer;
+    border-radius: 5em;
+    @include default-transition;
+
+    .w-select--focused &, .w-select--open & {color: currentColor;}
+
+    .w-select--disabled &,
+    .w-select--readonly & {
+      color: $disabled-color;
+      cursor: not-allowed;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    // Selection wrapper.
-    // ------------------------------------------------------
-    &__selection-wrap {
-      position: relative;
-      display: inline-flex;
-      flex: 1 1 auto;
-      align-items: center;
-      min-height: $form-field-height; // Min-height to allow multiple lines.
-      border-radius: $border-radius;
-      border: $border;
-      transition: border $transition-duration;
+    &--inner-left {left: $base-increment;}
+    &--inner-right {right: $base-increment;}
+    .w-select--no-padding &--inner-left {left: 1px;}
+    .w-select--no-padding &--inner-right {right: 1px;}
 
-      &--tile {border-radius: initial;}
-      &--shadow {box-shadow: $box-shadow;}
-      .w-select[class^="bdrs"] &, .w-select[class*=" bdrs"] & {border-radius: inherit;}
+    .w-select--open &--inner-right {transform: rotate(180deg);}
 
-      .w-select--floating-label & {margin-top: 3 * $base-increment;}
+    &:hover {background: rgba(0, 0, 0, 0.05);}
+    .w-select--disabled &:hover, .w-select--readonly &:hover {background-color: transparent;}
+  }
 
-      &--underline {
-        border-bottom-left-radius: initial;
-        border-bottom-right-radius: initial;
-        border-width: 0 0 1px;
-      }
+  // Label.
+  // ------------------------------------------------------
+  &__label {
+    display: flex;
+    align-items: center;
+    transition: color $transition-duration;
+    cursor: pointer;
+    user-select: none;
 
-      &--round {border-radius: 99em;}
+    &--left {margin-right: 2 * $base-increment;}
+    &--right {margin-left: 2 * $base-increment;}
 
-      .w-select--focused &, .w-select--open & {border-color: currentColor;}
+    .w-select--disabled & {
+      color: $disabled-color;
+      cursor: not-allowed;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .w-select--readonly.w-select--empty & {
+      opacity: 0.5;
+      cursor: auto;
+    }
+  }
 
-      // Underline.
-      &--underline:after {
-        content: '';
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        width: 100%;
-        height: 0;
-        border-bottom: 2px solid currentColor;
-        transition: $transition-duration;
-        transform: scaleX(0);
-        pointer-events: none;
-      }
+  &__label--inside {
+    position: absolute;
+    inset: 0 0 auto;
+    min-height: inherit;
+    white-space: nowrap;
+    // Use margin instead of padding as the scale transformation below decreases the real padding
+    // size and misaligns the label.
+    margin-left: 2 * $base-increment;
+    pointer-events: none;
 
-      .w-select--focused &--underline:after,
-      .w-select--open &--underline:after {transform: scaleX(1);}
-      &--round.w-select__selection-wrap--underline:after {
-        border-radius: 99em;
-        transition: $transition-duration, height 0.035s;
-      }
-      .w-select--focused &--round.w-select__selection-wrap--underline:after,
-      .w-select--open &--round.w-select__selection-wrap--underline:after {
-        height: 100%;
-        transition: $transition-duration, height 0s ($transition-duration - 0.035s);
-      }
+    .w-select--inner-icon-right & {padding-right: 26px;}
+
+    .w-select--no-padding & {
+      left: 0;
+      margin-left: 0;
+    }
+    .w-select__selection-wrap--round & {
+      margin-left: round(3 * $base-increment);
+    }
+    .w-select--inner-icon-left & {left: 18px;}
+    .w-select--no-padding.w-select--inner-icon-left & {left: 26px;}
+
+    .w-select--floating-label & {
+      transform-origin: 0 0;
+      transition: $transition-duration ease;
     }
 
-    // Selection (contenteditable) field.
-    // Using contenteditable instead of readonly input in order to be able to fit to content.
-    // Then disable typing and hide caret.
-    // ------------------------------------------------------
-    &__selection {
-      width: 100%;
-      height: 100%;
-      min-height: inherit;
-      outline: none;
-      padding-left: 2 * $base-increment;
-      padding-right: 2 * $base-increment;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      caret-color: transparent;
-      border-radius: inherit;
-
-      &--placeholder {color: #888;}
-
-      .w-select__selection-slot + & {
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-      .w-select--no-padding & {
-        padding-left: 0;
-        padding-right: 0;
-      }
-
-      .w-select__selection-wrap--round & {
-        padding-left: 3 * $base-increment;
-        padding-right: 3 * $base-increment;
-      }
-
-      .w-select--inner-icon-left & {padding-left: 27px;}
-      &-slot, .w-select--inner-icon-right & {padding-right: 22px;}
-
-      .w-select--disabled & {
-        color: $disabled-color;
-        cursor: not-allowed;
-        -webkit-tap-highlight-color: transparent;
-      }
-
-      .w-select--readonly & {cursor: auto;}
+    // Move label with underline style.
+    .w-select--open.w-select--floating-label &,
+    .w-select--filled.w-select--floating-label &,
+    .w-select--has-placeholder.w-select--floating-label & {
+      transform: translateY(-80%) scale(0.85);
     }
-
-    &__selection-slot {
-      z-index: 1;
-      pointer-events: none;
+    // Chrome & Safari - Must stay a separated rule or Firefox discards the whole rule seeing -webkit-.
+    .w-select--floating-label .w-select__select:-webkit-autofill & {
+      transform: translateY(-80%) scale(0.85);
     }
+    .w-select--open.w-select--floating-label.w-select--inner-icon-left &,
+    .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
+    // Chrome & Safari - Must stay a separated rule or Firefox discards the whole rule seeing -webkit-.
+    .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
+  }
 
-    // Icons inside.
-    // ------------------------------------------------------
-    &__icon {
-      position: absolute;
-      font-size: 1.4em;
-      cursor: pointer;
-      border-radius: 5em;
-      @include default-transition;
+  // Menu.
+  // ------------------------------------------------------
+  &__menu {
+    margin: 0;
+    max-height: 300px;
+    overflow: auto;
+    background-color: $base-bg-color;
+    border: $border;
+    border-radius: $border-radius;
 
-      .w-select--focused &, .w-select--open & {color: currentColor;}
-
-      .w-select--disabled &,
-      .w-select--readonly & {
-        color: $disabled-color;
-        cursor: not-allowed;
-        -webkit-tap-highlight-color: transparent;
-      }
-
-      &--inner-left {left: $base-increment;}
-      &--inner-right {right: $base-increment;}
-      .w-select--no-padding &--inner-left {left: 1px;}
-      .w-select--no-padding &--inner-right {right: 1px;}
-
-      .w-select--open &--inner-right {transform: rotate(180deg);}
-
-      &:hover {background: rgba(0, 0, 0, 0.05);}
-      .w-select--disabled &:hover, .w-select--readonly &:hover {background-color: transparent;}
-    }
-
-    // Label.
-    // ------------------------------------------------------
-    &__label {
-      display: flex;
-      align-items: center;
-      transition: color $transition-duration;
-      cursor: pointer;
-      user-select: none;
-
-      &--left {margin-right: 2 * $base-increment;}
-      &--right {margin-left: 2 * $base-increment;}
-
-      .w-select--disabled & {
-        color: $disabled-color;
-        cursor: not-allowed;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .w-select--readonly.w-select--empty & {
-        opacity: 0.5;
-        cursor: auto;
-      }
-    }
-
-    &__label--inside {
-      position: absolute;
-      inset: 0 0 auto;
-      min-height: inherit;
-      white-space: nowrap;
-      // Use margin instead of padding as the scale transformation below decreases the real padding
-      // size and misaligns the label.
-      margin-left: 2 * $base-increment;
-      pointer-events: none;
-
-      .w-select--inner-icon-right & {padding-right: 26px;}
-
-      .w-select--no-padding & {
-        left: 0;
-        margin-left: 0;
-      }
-      .w-select__selection-wrap--round & {
-        margin-left: round(3 * $base-increment);
-      }
-      .w-select--inner-icon-left & {left: 18px;}
-      .w-select--no-padding.w-select--inner-icon-left & {left: 26px;}
-
-      .w-select--floating-label & {
-        transform-origin: 0 0;
-        transition: $transition-duration ease;
-      }
-
-      // Move label with underline style.
-      .w-select--open.w-select--floating-label &,
-      .w-select--filled.w-select--floating-label &,
-      .w-select--has-placeholder.w-select--floating-label & {
-        transform: translateY(-80%) scale(0.85);
-      }
-      // Chrome & Safari - Must stay a separated rule or Firefox discards the whole rule seeing -webkit-.
-      .w-select--floating-label .w-select__select:-webkit-autofill & {
-        transform: translateY(-80%) scale(0.85);
-      }
-      .w-select--open.w-select--floating-label.w-select--inner-icon-left &,
-      .w-select--filled.w-select--floating-label.w-select--inner-icon-left & {left: 0;}
-      // Chrome & Safari - Must stay a separated rule or Firefox discards the whole rule seeing -webkit-.
-      .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
-    }
-
-    // Menu.
-    // ------------------------------------------------------
-    &__menu {
-      margin: 0;
-      max-height: 300px;
-      overflow: auto;
-      background-color: $base-bg-color;
-      border: $border;
-      border-radius: $border-radius;
-
-      .w-list {width: 100%;}
-    }
+    .w-list {width: 100%;}
   }
 }
 </style>

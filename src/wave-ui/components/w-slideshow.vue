@@ -22,8 +22,6 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-slideshow {
-  }
+.w-slideshow {
 }
 </style>

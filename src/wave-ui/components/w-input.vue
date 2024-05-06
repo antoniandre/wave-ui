@@ -380,265 +380,263 @@ export default {
 <style lang="scss">
 $inactive-color: #777;
 
-#{$css-scope} {
-  .w-input {
+.w-input {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: $base-font-size;
+
+  &--file {
+    flex-wrap: nowrap;
+    align-items: flex-end;
+
+    span.fade-leave-to {position: absolute;}
+  }
+
+  &--loading {cursor: wait;}
+
+  // Input field wrapper.
+  // ------------------------------------------------------
+  &__input-wrap {
     position: relative;
-    display: flex;
-    flex-grow: 1;
-    flex-wrap: wrap;
+    display: inline-flex;
+    flex: 1 1 auto;
     align-items: center;
-    font-size: $base-font-size;
+    height: $form-field-height;
+    border-radius: $border-radius;
+    border: $border;
+    transition: border $transition-duration;
 
-    &--file {
-      flex-wrap: nowrap;
-      align-items: flex-end;
+    .w-input--floating-label & {margin-top: 3 * $base-increment;}
+    .w-input[class^="bdrs"] &, .w-input[class*=" bdrs"] & {border-radius: inherit;}
 
-      span.fade-leave-to {position: absolute;}
+    // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
+    &--file {min-width: 0;}
+
+    &--underline {
+      border-bottom-left-radius: initial;
+      border-bottom-right-radius: initial;
+      border-width: 0 0 1px;
     }
 
-    &--loading {cursor: wait;}
-
-    // Input field wrapper.
-    // ------------------------------------------------------
-    &__input-wrap {
-      position: relative;
-      display: inline-flex;
-      flex: 1 1 auto;
-      align-items: center;
-      height: $form-field-height;
-      border-radius: $border-radius;
-      border: $border;
-      transition: border $transition-duration;
-
-      .w-input--floating-label & {margin-top: 3 * $base-increment;}
-      .w-input[class^="bdrs"] &, .w-input[class*=" bdrs"] & {border-radius: inherit;}
-
-      // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
-      &--file {min-width: 0;}
-
-      &--underline {
-        border-bottom-left-radius: initial;
-        border-bottom-right-radius: initial;
-        border-width: 0 0 1px;
-      }
-
-      &--round {border-radius: 99em;}
-      &--tile {border-radius: initial;}
-      &--shadow {box-shadow: $box-shadow;}
-      &--loading, &--upload-complete {
-        border-bottom-color: transparent;
-        flex-wrap: wrap;
-      }
-      &--loading ~ .w-progress {
-        height: 2px;
-        position: absolute;
-        top: 100%;
-        margin-top: -2px;
-      }
-
-      .w-input--focused & {border-color: currentColor;}
-      .w-input--focused &--loading,
-      .w-input--focused &--upload-complete {border-bottom-color: transparent;}
-
-      // Underline.
-      &--underline:after {
-        content: '';
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        width: 100%;
-        height: 0;
-        border-bottom: 2px solid currentColor;
-        transition: $transition-duration;
-        transform: scaleX(0);
-        pointer-events: none;
-      }
-
-      &--loading:after {border-bottom-color: transparent;}
-
-      .w-input--focused &--underline:after {transform: scaleX(1);}
-      &--round.w-input__input-wrap--underline:after {
-        border-radius: 99em;
-        transition: $transition-duration, height 0.035s;
-      }
-      .w-input--focused &--round.w-input__input-wrap--underline:after {
-        height: 100%;
-        transition: $transition-duration, height 0s ($transition-duration - 0.035s);
-      }
+    &--round {border-radius: 99em;}
+    &--tile {border-radius: initial;}
+    &--shadow {box-shadow: $box-shadow;}
+    &--loading, &--upload-complete {
+      border-bottom-color: transparent;
+      flex-wrap: wrap;
+    }
+    &--loading ~ .w-progress {
+      height: 2px;
+      position: absolute;
+      top: 100%;
+      margin-top: -2px;
     }
 
-    // Input field.
-    // ------------------------------------------------------
-    &__input {
+    .w-input--focused & {border-color: currentColor;}
+    .w-input--focused &--loading,
+    .w-input--focused &--upload-complete {border-bottom-color: transparent;}
+
+    // Underline.
+    &--underline:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
       width: 100%;
-      height: 100%;
-      font: inherit;
-      color: inherit;
-      text-align: inherit;
-      display: inline-flex;
-      align-items: center;
-      background: none;
-      border: none;
-      border-radius: inherit; // Mostly for the browser-autofilled appearance.
-      outline: none;
-      padding-left: 2 * $base-increment;
-      padding-right: 2 * $base-increment;
-
-      // For type="search" on Safari.
-      -webkit-appearance: none;
-      &::-webkit-search-decoration {-webkit-appearance: none;}
+      height: 0;
+      border-bottom: 2px solid currentColor;
+      transition: $transition-duration;
+      transform: scaleX(0);
+      pointer-events: none;
     }
 
-    &--no-padding &__input {
+    &--loading:after {border-bottom-color: transparent;}
+
+    .w-input--focused &--underline:after {transform: scaleX(1);}
+    &--round.w-input__input-wrap--underline:after {
+      border-radius: 99em;
+      transition: $transition-duration, height 0.035s;
+    }
+    .w-input--focused &--round.w-input__input-wrap--underline:after {
+      height: 100%;
+      transition: $transition-duration, height 0s ($transition-duration - 0.035s);
+    }
+  }
+
+  // Input field.
+  // ------------------------------------------------------
+  &__input {
+    width: 100%;
+    height: 100%;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    border: none;
+    border-radius: inherit; // Mostly for the browser-autofilled appearance.
+    outline: none;
+    padding-left: 2 * $base-increment;
+    padding-right: 2 * $base-increment;
+
+    // For type="search" on Safari.
+    -webkit-appearance: none;
+    &::-webkit-search-decoration {-webkit-appearance: none;}
+  }
+
+  &--no-padding &__input {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &__input-wrap--round &__input {
+    padding-left: 3 * $base-increment;
+    padding-right: 3 * $base-increment;
+  }
+
+  &--inner-icon-left &__input {padding-left: 27px;}
+  &--inner-icon-right &__input {padding-right: 27px;}
+
+  &--disabled &__input {
+    color: $disabled-color;
+    cursor: not-allowed;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  &--disabled input::placeholder {color: inherit;}
+
+  // Upload field.
+  // ------------------------------------------------------
+  // Hides the built-in file input (replaced with a more stylable element).
+  input[type="file"] {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  &__input--file {
+    > span {
+      display: inline-flex;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .filename {
+      margin-left: 0.2em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    > span:first-child .filename {margin-left: 0;}
+  }
+
+  &__no-file {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    color: $disabled-color;
+  }
+
+  &__file-preview {
+    margin-left: 4px;
+    max-height: 2em;
+    align-self: flex-end;
+
+    &.w-icon {margin-bottom: 4px;}
+  }
+
+  // Icons inside.
+  // ------------------------------------------------------
+  &__icon {position: absolute;}
+  &__icon--inner-left {left: 6px;}
+  &__icon--inner-right {right: 6px;}
+  &--no-padding &__icon--inner-left {left: 1px;}
+  &--no-padding &__icon--inner-right {right: 1px;}
+
+  .w-input--focused &__icon {color: currentColor;}
+
+  &--disabled &__icon {
+    color: $disabled-color;
+    cursor: not-allowed;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  // Label.
+  // ------------------------------------------------------
+  &__label {
+    transition: color $transition-duration;
+    cursor: pointer;
+    user-select: none;
+
+    &--left {margin-right: 2 * $base-increment;}
+    &--right {margin-left: 2 * $base-increment;}
+
+    .w-input--disabled & {
+      color: $disabled-color;
+      cursor: not-allowed;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .w-input--readonly.w-input--empty & {
+      opacity: 0.5;
+      cursor: auto;
+    }
+  }
+
+  &__label--inside {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    padding-left: 2 * $base-increment;
+    white-space: nowrap;
+    transform: translateY(-50%);
+    pointer-events: none;
+
+    .w-input--no-padding & {
+      left: 0;
       padding-left: 0;
       padding-right: 0;
     }
+    .w-input__input-wrap--round & {
+      padding-left: round(3 * $base-increment);
+      padding-right: round(3 * $base-increment);
+    }
+    .w-input--inner-icon-left & {left: 18px;}
+    .w-input--no-padding.w-input--inner-icon-left & {left: 26px;}
 
-    &__input-wrap--round &__input {
-      padding-left: 3 * $base-increment;
-      padding-right: 3 * $base-increment;
+    .w-input--floating-label & {
+      transform-origin: 0 0;
+      transition: $transition-duration ease;
+      will-change: transform;
     }
 
-    &--inner-icon-left &__input {padding-left: 27px;}
-    &--inner-icon-right &__input {padding-right: 27px;}
-
-    &--disabled &__input {
-      color: $disabled-color;
-      cursor: not-allowed;
-      -webkit-tap-highlight-color: transparent;
+    // move label with underline style.
+    .w-input--focused.w-input--floating-label &,
+    .w-input--filled.w-input--floating-label &,
+    .w-input--has-placeholder.w-input--floating-label & {
+      transform: translateY(-160%) scale(0.85);
     }
-
-    &--disabled input::placeholder {color: inherit;}
-
-    // Upload field.
-    // ------------------------------------------------------
-    // Hides the built-in file input (replaced with a more stylable element).
-    input[type="file"] {
-      position: absolute;
-      z-index: -1;
-      pointer-events: none;
-      opacity: 0;
+    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+    .w-input--floating-label .w-input__input:-webkit-autofill & {
+      transform: translateY(-160%) scale(0.85);
     }
-
-    &__input--file {
-      > span {
-        display: inline-flex;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-
-      .filename {
-        margin-left: 0.2em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      > span:first-child .filename {margin-left: 0;}
+    // Move label with outline style or with shadow.
+    .w-input--focused.w-input--floating-label .w-input__input-wrap--box &,
+    .w-input--filled.w-input--floating-label .w-input__input-wrap--box &,
+    .w-input--has-placeholder.w-input--floating-label .w-input__input-wrap--box & {
+      transform: translateY(-180%) scale(0.85);
     }
-
-    &__no-file {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      display: flex;
-      align-items: center;
-      color: $disabled-color;
-    }
-
-    &__file-preview {
-      margin-left: 4px;
-      max-height: 2em;
-      align-self: flex-end;
-
-      &.w-icon {margin-bottom: 4px;}
-    }
-
-    // Icons inside.
-    // ------------------------------------------------------
-    &__icon {position: absolute;}
-    &__icon--inner-left {left: 6px;}
-    &__icon--inner-right {right: 6px;}
-    &--no-padding &__icon--inner-left {left: 1px;}
-    &--no-padding &__icon--inner-right {right: 1px;}
-
-    .w-input--focused &__icon {color: currentColor;}
-
-    &--disabled &__icon {
-      color: $disabled-color;
-      cursor: not-allowed;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    // Label.
-    // ------------------------------------------------------
-    &__label {
-      transition: color $transition-duration;
-      cursor: pointer;
-      user-select: none;
-
-      &--left {margin-right: 2 * $base-increment;}
-      &--right {margin-left: 2 * $base-increment;}
-
-      .w-input--disabled & {
-        color: $disabled-color;
-        cursor: not-allowed;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .w-input--readonly.w-input--empty & {
-        opacity: 0.5;
-        cursor: auto;
-      }
-    }
-
-    &__label--inside {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      padding-left: 2 * $base-increment;
-      white-space: nowrap;
-      transform: translateY(-50%);
-      pointer-events: none;
-
-      .w-input--no-padding & {
-        left: 0;
-        padding-left: 0;
-        padding-right: 0;
-      }
-      .w-input__input-wrap--round & {
-        padding-left: round(3 * $base-increment);
-        padding-right: round(3 * $base-increment);
-      }
-      .w-input--inner-icon-left & {left: 18px;}
-      .w-input--no-padding.w-input--inner-icon-left & {left: 26px;}
-
-      .w-input--floating-label & {
-        transform-origin: 0 0;
-        transition: $transition-duration ease;
-        will-change: transform;
-      }
-
-      // move label with underline style.
-      .w-input--focused.w-input--floating-label &,
-      .w-input--filled.w-input--floating-label &,
-      .w-input--has-placeholder.w-input--floating-label & {
-        transform: translateY(-160%) scale(0.85);
-      }
-      // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
-      .w-input--floating-label .w-input__input:-webkit-autofill & {
-        transform: translateY(-160%) scale(0.85);
-      }
-      // Move label with outline style or with shadow.
-      .w-input--focused.w-input--floating-label .w-input__input-wrap--box &,
-      .w-input--filled.w-input--floating-label .w-input__input-wrap--box &,
-      .w-input--has-placeholder.w-input--floating-label .w-input__input-wrap--box & {
-        transform: translateY(-180%) scale(0.85);
-      }
-      .w-input--focused.w-input--floating-label.w-input--inner-icon-left &,
-      .w-input--filled.w-input--floating-label.w-input--inner-icon-left & {left: 0;}
-      // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
-      .w-input--floating-label.w-input--inner-icon-left .w-input__input:-webkit-autofill & {left: 0;}
-    }
+    .w-input--focused.w-input--floating-label.w-input--inner-icon-left &,
+    .w-input--filled.w-input--floating-label.w-input--inner-icon-left & {left: 0;}
+    // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
+    .w-input--floating-label.w-input--inner-icon-left .w-input__input:-webkit-autofill & {left: 0;}
   }
 }
 </style>

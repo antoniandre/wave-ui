@@ -342,154 +342,152 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-tabs {
-    z-index: 1;
-    border-radius: $border-radius;
-    border: $border;
-    overflow: hidden;
+.w-tabs {
+  z-index: 1;
+  border-radius: $border-radius;
+  border: $border;
+  overflow: hidden;
 
-    @include themeable;
+  @include themeable;
 
-    &--tile {border-radius: 0;}
-    &--card {border: none;}
-    &--no-border, &--shadow {border: none;}
+  &--tile {border-radius: 0;}
+  &--card {border: none;}
+  &--no-border, &--shadow {border: none;}
 
-    &__bar {
-      position: relative;
+  &__bar {
+    position: relative;
+    display: flex;
+    overflow-x: auto;
+
+    &--center {justify-content: center;}
+    &--right {justify-content: flex-end;}
+    .w-tabs--pill-slider & {padding-left: $base-increment;}
+
+    .w-tabs--card &:after {
+      content: '';
       display: flex;
-      overflow-x: auto;
-
-      &--center {justify-content: center;}
-      &--right {justify-content: flex-end;}
-      .w-tabs--pill-slider & {padding-left: $base-increment;}
-
-      .w-tabs--card &:after {
-        content: '';
-        display: flex;
-        flex-grow: 1;
-        border-bottom: $border;
-        align-self: flex-end;
-      }
-    }
-
-    // Bar item.
-    // ------------------------------------------------------
-    &__bar-item {
-      position: relative;
-      display: flex;
-      align-items: center;
-      padding: (2 * $base-increment) (3 * $base-increment);
-      justify-content: center;
-      font-size: round(1.2 * $base-font-size);
-      transition: $transition-duration ease-in-out, flex-grow 0s, flex 0s; // `flex` for Safari.
-      user-select: none;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-
-      .w-tabs--fill-bar & {flex-grow: 1;flex-basis: 0;}
-      .w-tabs--card & {
-        border: $border;
-        border-radius: $border-radius $border-radius 0 0;
-        margin-right: -1px;
-      }
-      .w-tabs--card &--active {border-bottom-color: transparent;}
-
-      &--disabled {
-        cursor: not-allowed;
-        opacity: 0.6;
-        -webkit-tap-highlight-color: transparent;
-      }
-
-      &:before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-color: currentColor;
-        opacity: 0;
-        transition: $fast-transition-duration;
-      }
-
-      &--active:before, &:focus:before, &:hover:before {opacity: 0.05;}
-      &:active:before {opacity: 0.08;}
-      &--disabled:before {display: none;}
-    }
-    &--pill-slider &__bar-item:before {display: none;}
-
-    // Bar Extra.
-    // ------------------------------------------------------
-    &__bar-extra {
-      margin-left: auto;
-      align-self: center;
-      position: sticky;
-      right: 0;
-
-      .w-tabs__bar--right &,
-      .w-tabs__bar--center & {margin-left: 0;}
-    }
-
-    // Slider.
-    // ------------------------------------------------------
-    &__slider {
-      position: absolute;
-      bottom: 0;
-      height: 2px;
-      background-color: currentColor;
-      transition: $transition-duration ease-in-out;
-    }
-    &--pill-slider &__slider {
-      opacity: 0.1;
-      bottom: 15%;
-      height: 70%;
-      border-radius: 99em;
-    }
-
-    &--init &__slider {transition: none;}
-
-    // Content.
-    // ------------------------------------------------------
-    &__content-wrap {
-      position: relative;
       flex-grow: 1;
-
-      .w-tabs--card & {
-        border: $border;
-        border-top: none;
-        border-radius: 0 0 $border-radius $border-radius;
-      }
+      border-bottom: $border;
+      align-self: flex-end;
     }
-    &__content {padding: 3 * $base-increment;}
   }
 
-  .w-tabs-slide-left-leave-active,
-  .w-tabs-slide-right-leave-active {
-    position: absolute;
-    top: 0;
-    left: 0;
+  // Bar item.
+  // ------------------------------------------------------
+  &__bar-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: (2 * $base-increment) (3 * $base-increment);
+    justify-content: center;
+    font-size: round(1.2 * $base-font-size);
+    transition: $transition-duration ease-in-out, flex-grow 0s, flex 0s; // `flex` for Safari.
+    user-select: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    .w-tabs--fill-bar & {flex-grow: 1;flex-basis: 0;}
+    .w-tabs--card & {
+      border: $border;
+      border-radius: $border-radius $border-radius 0 0;
+      margin-right: -1px;
+    }
+    .w-tabs--card &--active {border-bottom-color: transparent;}
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: currentColor;
+      opacity: 0;
+      transition: $fast-transition-duration;
+    }
+
+    &--active:before, &:focus:before, &:hover:before {opacity: 0.05;}
+    &:active:before {opacity: 0.08;}
+    &--disabled:before {display: none;}
+  }
+  &--pill-slider &__bar-item:before {display: none;}
+
+  // Bar Extra.
+  // ------------------------------------------------------
+  &__bar-extra {
+    margin-left: auto;
+    align-self: center;
+    position: sticky;
     right: 0;
-    overflow: hidden;
+
+    .w-tabs__bar--right &,
+    .w-tabs__bar--center & {margin-left: 0;}
   }
 
-  .w-tabs-slide-left-enter-active {animation: w-tabs-slide-left-enter $transition-duration + 0.15s;}
-  .w-tabs-slide-left-leave-active {animation: w-tabs-slide-left-leave $transition-duration + 0.15s;}
-  @keyframes w-tabs-slide-left-enter {
-    0% {transform: translateX(100%);}
-    100% {transform: translateX(0);}
+  // Slider.
+  // ------------------------------------------------------
+  &__slider {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: $transition-duration ease-in-out;
   }
-  @keyframes w-tabs-slide-left-leave {
-    0% {transform: translateX(0);}
-    100% {transform: translateX(-100%);}
+  &--pill-slider &__slider {
+    opacity: 0.1;
+    bottom: 15%;
+    height: 70%;
+    border-radius: 99em;
   }
 
-  .w-tabs-slide-right-enter-active {animation: w-tabs-slide-right-enter $transition-duration + 0.15s;}
-  .w-tabs-slide-right-leave-active {animation: w-tabs-slide-right-leave $transition-duration + 0.15s;}
-  @keyframes w-tabs-slide-right-enter {
-    0% {transform: translateX(-100%);}
-    100% {transform: translateX(0);}
+  &--init &__slider {transition: none;}
+
+  // Content.
+  // ------------------------------------------------------
+  &__content-wrap {
+    position: relative;
+    flex-grow: 1;
+
+    .w-tabs--card & {
+      border: $border;
+      border-top: none;
+      border-radius: 0 0 $border-radius $border-radius;
+    }
   }
-  @keyframes w-tabs-slide-right-leave {
-    0% {transform: translateX(0);}
-    100% {transform: translateX(100%);}
-  }
+  &__content {padding: 3 * $base-increment;}
+}
+
+.w-tabs-slide-left-leave-active,
+.w-tabs-slide-right-leave-active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.w-tabs-slide-left-enter-active {animation: w-tabs-slide-left-enter $transition-duration + 0.15s;}
+.w-tabs-slide-left-leave-active {animation: w-tabs-slide-left-leave $transition-duration + 0.15s;}
+@keyframes w-tabs-slide-left-enter {
+  0% {transform: translateX(100%);}
+  100% {transform: translateX(0);}
+}
+@keyframes w-tabs-slide-left-leave {
+  0% {transform: translateX(0);}
+  100% {transform: translateX(-100%);}
+}
+
+.w-tabs-slide-right-enter-active {animation: w-tabs-slide-right-enter $transition-duration + 0.15s;}
+.w-tabs-slide-right-leave-active {animation: w-tabs-slide-right-leave $transition-duration + 0.15s;}
+@keyframes w-tabs-slide-right-enter {
+  0% {transform: translateX(-100%);}
+  100% {transform: translateX(0);}
+}
+@keyframes w-tabs-slide-right-leave {
+  0% {transform: translateX(0);}
+  100% {transform: translateX(100%);}
 }
 </style>

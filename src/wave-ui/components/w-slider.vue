@@ -262,221 +262,219 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-slider {
-    position: relative;
+.w-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  user-select: none;
+
+  @include themeable;
+
+  // Slider label, left & right.
+  // ------------------------------------------------------
+  &__label--left {margin-right: 3 * $base-increment;}
+  &__label--right {margin-left: 3 * $base-increment;}
+
+  // Steps labels.
+  // ------------------------------------------------------
+  &--has-step-labels {padding-bottom: 4 * $base-increment;}
+  &__step-labels {
+    position: absolute;
+    top: 0;
     display: flex;
-    align-items: center;
-    user-select: none;
+    width: 100%;
+  }
 
-    @include themeable;
+  &__step-label {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    padding-top: 2 * $base-increment;
+    color: $slider-step-label-color;
+    z-index: 1;
+    cursor: pointer;
 
-    // Slider label, left & right.
-    // ------------------------------------------------------
-    &__label--left {margin-right: 3 * $base-increment;}
-    &__label--right {margin-left: 3 * $base-increment;}
-
-    // Steps labels.
-    // ------------------------------------------------------
-    &--has-step-labels {padding-bottom: 4 * $base-increment;}
-    &__step-labels {
+    &:before {
+      content: '';
       position: absolute;
-      top: 0;
-      display: flex;
-      width: 100%;
-    }
-
-    &__step-label {
-      position: absolute;
+      left: 50%;
       transform: translateX(-50%);
-      font-size: 0.8em;
-      padding-top: 2 * $base-increment;
-      color: $slider-step-label-color;
-      z-index: 1;
-      cursor: pointer;
+      top: 0;
+      width: $base-increment;
+      aspect-ratio: 1;
+      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
+      background-color: $slider-step-label-bg-color;
+      border-radius: 99em;
+      // box-shadow: 0 0 0 1px #fff;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+    &:first-child:before, &:last-child:before {display: none;}
+  }
 
-      &:before {
-        content: '';
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 0;
-        width: $base-increment;
-        aspect-ratio: 1;
-        min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
-        background-color: $slider-step-label-bg-color;
-        border-radius: 99em;
-        // box-shadow: 0 0 0 1px #fff;
-        box-sizing: border-box;
-        pointer-events: none;
-      }
-      &:first-child:before, &:last-child:before {display: none;}
+  // Track.
+  // ------------------------------------------------------
+  &__track-wrap {
+    position: relative;
+    flex-grow: 1;
+  }
+
+  &__track {
+    position: relative;
+    flex-grow: 1;
+    height: $slider-height;
+    background-color: $slider-track-color;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: $border-radius;
+    touch-action: none;
+    cursor: pointer;
+
+    .w-slider--disabled &, .w-slider--readonly & {
+      cursor: not-allowed;
+      touch-action: initial;
     }
 
-    // Track.
-    // ------------------------------------------------------
-    &__track-wrap {
-      position: relative;
-      flex-grow: 1;
-    }
-
-    &__track {
-      position: relative;
-      flex-grow: 1;
-      height: $slider-height;
-      background-color: $slider-track-color;
-      -webkit-tap-highlight-color: transparent;
-      border-radius: $border-radius;
-      touch-action: none;
-      cursor: pointer;
-
-      .w-slider--disabled &, .w-slider--readonly & {
-        cursor: not-allowed;
-        touch-action: initial;
-      }
-
-      &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        // For fat fingers.
-        top: -8px;
-        bottom: -8px;
-      }
-    }
-
-    // Range.
-    // ------------------------------------------------------
-    &__range {
+    &:before {
+      content: '';
       position: absolute;
       left: 0;
       right: 0;
-      height: 100%;
-      z-index: 1;
-      transition: $transition-duration;
+      // For fat fingers.
+      top: -8px;
+      bottom: -8px;
+    }
+  }
+
+  // Range.
+  // ------------------------------------------------------
+  &__range {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 1;
+    transition: $transition-duration;
+    border-radius: inherit;
+
+    .w-slider--dragging & {transition: none;}
+    .w-slider--disabled & {opacity: 0.35;}
+  }
+
+  // Thumb.
+  // ------------------------------------------------------
+  &__thumb {
+    position: absolute;
+    width: 3 * $base-increment;
+    aspect-ratio: 1;
+    min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
+    left: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    transition: $transition-duration;
+
+    .w-slider--dragging & {transition: none;}
+  }
+
+  &__thumb-button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    aspect-ratio: 1;
+    min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
+    border: none;
+    border-radius: 99em;
+    cursor: pointer;
+    background-color: $slider-thumb-button-bg-color;
+
+    .w-slider--disabled &, .w-slider--readonly & {cursor: auto;}
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
       border-radius: inherit;
-
-      .w-slider--dragging & {transition: none;}
-      .w-slider--disabled & {opacity: 0.35;}
+      @include default-transition;
     }
-
-    // Thumb.
-    // ------------------------------------------------------
-    &__thumb {
-      position: absolute;
-      width: 3 * $base-increment;
-      aspect-ratio: 1;
-      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
-      left: 100%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      transition: $transition-duration;
-
-      .w-slider--dragging & {transition: none;}
+    // Colored border on thumb when hover and active - but with a transparency.
+    &:before {
+      inset: 0;
+      opacity: 0.5;
+      border: 1px solid currentColor;
     }
-
-    &__thumb-button {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      aspect-ratio: 1;
-      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
-      border: none;
-      border-radius: 99em;
-      cursor: pointer;
-      background-color: $slider-thumb-button-bg-color;
-
-      .w-slider--disabled &, .w-slider--readonly & {cursor: auto;}
-
-      &:before, &:after {
-        content: '';
-        position: absolute;
-        border-radius: inherit;
-        @include default-transition;
-      }
-      // Colored border on thumb when hover and active - but with a transparency.
-      &:before {
-        inset: 0;
-        opacity: 0.5;
-        border: 1px solid currentColor;
-      }
-      &:hover:before, &:focus:before {opacity: 0.7;}
-      &:active:before, .w-slider--dragging &:before {
-        opacity: 1;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-        transition-duration: $fast-transition-duration;
-      }
-      .w-slider--disabled &:before,
-      .w-slider--readonly &:before {box-shadow: none;opacity: 0.4;}
-
-      // The outline when focused, but also a bigger reactive zone for fat fingers when not.
-      &:after {
-        left: -2 * $base-increment;
-        right: -2 * $base-increment;
-        top: -2 * $base-increment;
-        bottom: -2 * $base-increment;
-        opacity: 0;
-        background-color: currentColor;
-      }
-      &:focus:after {opacity: 0.15;}
-      .w-slider--dragging &:after, &:active:after {opacity: 0.1;transform: scale(1.2);}
+    &:hover:before, &:focus:before {opacity: 0.7;}
+    &:active:before, .w-slider--dragging &:before {
+      opacity: 1;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+      transition-duration: $fast-transition-duration;
     }
+    .w-slider--disabled &:before,
+    .w-slider--readonly &:before {box-shadow: none;opacity: 0.4;}
 
-    // Thumb label.
-    // ------------------------------------------------------
-    &__thumb-label {
+    // The outline when focused, but also a bigger reactive zone for fat fingers when not.
+    &:after {
+      left: -2 * $base-increment;
+      right: -2 * $base-increment;
+      top: -2 * $base-increment;
+      bottom: -2 * $base-increment;
+      opacity: 0;
+      background-color: currentColor;
+    }
+    &:focus:after {opacity: 0.15;}
+    .w-slider--dragging &:after, &:active:after {opacity: 0.1;transform: scale(1.2);}
+  }
+
+  // Thumb label.
+  // ------------------------------------------------------
+  &__thumb-label {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    margin-bottom: round(3 * $base-increment);
+    transform: translateX(-50%);
+    padding: round(0.75 * $base-increment) (2 * $base-increment);
+    background-color: $slider-thumb-label-bg-color;
+    border-radius: $border-radius;
+    border: $border;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    font-size: 0.85em;
+    color: $slider-thumb-label-color;
+
+    &:before, &:after {
+      content: '';
       position: absolute;
+      top: 100%;
       left: 50%;
-      bottom: 100%;
-      margin-bottom: round(3 * $base-increment);
       transform: translateX(-50%);
-      padding: round(0.75 * $base-increment) (2 * $base-increment);
-      background-color: $slider-thumb-label-bg-color;
-      border-radius: $border-radius;
-      border: $border;
-      box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-      font-size: 0.85em;
-      color: $slider-thumb-label-color;
+      width: 0;
+      height: 0;
+      border: solid transparent;
+    }
 
-      &:before, &:after {
-        content: '';
+    &:before {border-width: 7px;border-top-color: inherit;}
+    &:after {border-width: 6px;border-top-color: $slider-thumb-label-bg-color;}
+
+    &--droplet {
+      transform: translateX(-50%) rotate(-45deg);
+      border-radius: 99em 99em 99em 0;
+      width: 2.8em;
+      aspect-ratio: 1;
+      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
+
+      & > div {
         position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border: solid transparent;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        transform: rotate(45deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1em;
       }
 
-      &:before {border-width: 7px;border-top-color: inherit;}
-      &:after {border-width: 6px;border-top-color: $slider-thumb-label-bg-color;}
-
-      &--droplet {
-        transform: translateX(-50%) rotate(-45deg);
-        border-radius: 99em 99em 99em 0;
-        width: 2.8em;
-        aspect-ratio: 1;
-        min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
-
-        & > div {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          left: 0;
-          top: 0;
-          transform: rotate(45deg);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1em;
-        }
-
-        &:before, &:after {display: none;}
-      }
+      &:before, &:after {display: none;}
     }
   }
 }

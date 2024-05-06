@@ -97,22 +97,20 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-radios {
-    &--column {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
+.w-radios {
+  &--column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    &--inline {
-      display: inline-flex;
-      flex-wrap: wrap;
-      vertical-align: middle;
+  &--inline {
+    display: inline-flex;
+    flex-wrap: wrap;
+    vertical-align: middle;
 
-      .w-radio {margin-right: 3 * $base-increment;}
-      .w-radio:last-child {margin-right: 0;}
-    }
+    .w-radio {margin-right: 3 * $base-increment;}
+    .w-radio:last-child {margin-right: 0;}
   }
 }
 </style>

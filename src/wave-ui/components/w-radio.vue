@@ -142,121 +142,119 @@ export default {
 $outline-width: 2px;
 $inactive-color: #666;
 
-#{$css-scope} {
-  .w-radio {
-    display: inline-flex;
-    align-items: center;
-    vertical-align: middle;
-    // Contain the hidden radio button, so browser doesn't pan to it when outside of the screen.
-    position: relative;
-    cursor: pointer;
+.w-radio {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  // Contain the hidden radio button, so browser doesn't pan to it when outside of the screen.
+  position: relative;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  @include themeable;
+
+  &--disabled {
+    cursor: not-allowed;
     -webkit-tap-highlight-color: transparent;
+  }
 
-    @include themeable;
+  // The hidden real radio button.
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    z-index: -100;
+    outline: none;
+  }
 
-    &--disabled {
-      cursor: not-allowed;
-      -webkit-tap-highlight-color: transparent;
-    }
+  // The fake radio button to substitute.
+  &__input {
+    position: relative;
+    border-radius: 100%;
+    width: $small-form-el-size;
+    aspect-ratio: 1;
+    display: flex;
+    flex: 0 0 auto; // Prevent stretching width or height.
+    align-items: center;
+    justify-content: center;
+    border: $outline-width solid $inactive-color;
+    transition: 0.3s ease-in-out;
+    cursor: inherit;
 
-    // The hidden real radio button.
-    input[type="radio"] {
-      position: absolute;
-      opacity: 0;
-      z-index: -100;
-      outline: none;
-    }
+    .w-radio--disabled & {border-color: $disabled-color;}
 
-    // The fake radio button to substitute.
-    &__input {
-      position: relative;
-      border-radius: 100%;
-      width: $small-form-el-size;
-      aspect-ratio: 1;
-      display: flex;
-      flex: 0 0 auto; // Prevent stretching width or height.
-      align-items: center;
-      justify-content: center;
-      border: $outline-width solid $inactive-color;
-      transition: 0.3s ease-in-out;
-      cursor: inherit;
+    // Checked state.
+    :checked ~ & {border-color: currentColor;}
+    .w-radio--disabled :checked ~ & {border-color: $disabled-color;}
+  }
 
-      .w-radio--disabled & {border-color: $disabled-color;}
+  // The inner bullet - visible when checked.
+  &__input:after {
+    content: '';
+    position: absolute;
+    border-radius: 100%;
+    border: 0 solid $inactive-color;
+    // Prevents a tiny hole while animating and in some browser zoom levels.
+    background-color: $inactive-color;
+    transition: $transition-duration;
 
-      // Checked state.
-      :checked ~ & {border-color: currentColor;}
-      .w-radio--disabled :checked ~ & {border-color: $disabled-color;}
-    }
-
-    // The inner bullet - visible when checked.
-    &__input:after {
-      content: '';
-      position: absolute;
-      border-radius: 100%;
-      border: 0 solid $inactive-color;
+    :checked ~ & {
+      border-width: 4px;
+      border-color: currentColor;
       // Prevents a tiny hole while animating and in some browser zoom levels.
-      background-color: $inactive-color;
-      transition: $transition-duration;
-
-      :checked ~ & {
-        border-width: 4px;
-        border-color: currentColor;
-        // Prevents a tiny hole while animating and in some browser zoom levels.
-        background-color: currentColor;
-      }
-      .w-radio--disabled & {
-        border-color: $disabled-color;
-        // Prevents a tiny hole while animating and in some browser zoom levels.
-        background-color: $disabled-color;
-      }
-    }
-
-    // The focus outline & ripple on check action.
-    &__input:before {
-      content: "";
-      position: absolute;
-      width: inherit;
-      aspect-ratio: 1;
       background-color: currentColor;
-      border-radius: 100%;
-      transform: scale(0);
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.25s ease-in-out;
     }
-
-    &--ripple &__input:before {
-      background-color: transparent;
-      animation: w-radio-ripple 0.55s 0.15s ease;
-    }
-
-    :focus ~ &__input:before,
-    :active ~ &__input:before {
-      transform: scale(1.8);
-      opacity: 0.2;
-    }
-
-    // After ripple reset to default state, then remove the class via js and the
-    // `:focus + &__input:before` will re-transition to normal focused outline.
-    &--rippled &__input:before {
-      transition: none;
-      transform: scale(0);
-      opacity: 0;
-    }
-
-    &__label {
-      display: flex;
-      align-items: center;
-      cursor: inherit;
-      user-select: none;
-
-      .w-radio--disabled & {opacity: 0.7;}
+    .w-radio--disabled & {
+      border-color: $disabled-color;
+      // Prevents a tiny hole while animating and in some browser zoom levels.
+      background-color: $disabled-color;
     }
   }
 
-  @keyframes w-radio-ripple {
-    0% {opacity: 1;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
-    100% {opacity: 0;transform: scale(2.8);} // Propagate ripple to max radius and fade out.
+  // The focus outline & ripple on check action.
+  &__input:before {
+    content: "";
+    position: absolute;
+    width: inherit;
+    aspect-ratio: 1;
+    background-color: currentColor;
+    border-radius: 100%;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.25s ease-in-out;
   }
+
+  &--ripple &__input:before {
+    background-color: transparent;
+    animation: w-radio-ripple 0.55s 0.15s ease;
+  }
+
+  :focus ~ &__input:before,
+  :active ~ &__input:before {
+    transform: scale(1.8);
+    opacity: 0.2;
+  }
+
+  // After ripple reset to default state, then remove the class via js and the
+  // `:focus + &__input:before` will re-transition to normal focused outline.
+  &--rippled &__input:before {
+    transition: none;
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    cursor: inherit;
+    user-select: none;
+
+    .w-radio--disabled & {opacity: 0.7;}
+  }
+}
+
+@keyframes w-radio-ripple {
+  0% {opacity: 1;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
+  100% {opacity: 0;transform: scale(2.8);} // Propagate ripple to max radius and fade out.
 }
 </style>

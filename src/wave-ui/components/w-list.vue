@@ -387,109 +387,107 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-list {
-    list-style-type: none;
-    margin-left: 0;
-    font-size: $base-font-size;
+.w-list {
+  list-style-type: none;
+  margin-left: 0;
+  font-size: $base-font-size;
 
-    &--child {margin-left: 6 * $base-increment;}
-    &--icon {padding-left: 8 * $base-increment;}
+  &--child {margin-left: 6 * $base-increment;}
+  &--icon {padding-left: 8 * $base-increment;}
 
-    &__item {margin-top: 1px;}
-    &__item:first-child {margin-top: 0;}
-    &--icon &__item {position: relative;}
+  &__item {margin-top: 1px;}
+  &__item:first-child {margin-top: 0;}
+  &--icon &__item {position: relative;}
 
-    &__item--parent {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    // List item bullet, if any.
-    // --------------------------------------------
-    &__item-bullet {
-      position: absolute;
-      right: 100%;
-      margin-right: 3 * $base-increment;
-      top: 0.1em;
-
-      @-moz-document url-prefix() {
-        & {top: -0.06em;}
-      }
-
-      .w-list--hoverable &,
-      .w-list--selectable &,
-      .w-list--checklist & {margin-top: 3 * $base-increment;}
-    }
-
-    // List item Label.
-    // --------------------------------------------
-    &__item-label {
-      position: relative;
-      padding-top: 1px;
-      padding-bottom: 1px;
-      display: flex;
-      -webkit-tap-highlight-color: transparent;
-
-      .w-list--navigation &,
-      .w-list--checklist & {
-        display: flex;
-        align-items: center;
-      }
-      &--selectable {cursor: pointer;}
-      &--disabled {
-        cursor: default;
-        opacity: 0.3;
-        user-select: none;
-      }
-
-      &--hoverable,
-      &--selectable {
-        padding: 2 * $base-increment;
-
-        &:before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-color: currentColor;
-          opacity: 0;
-          transition: 0.2s;
-          pointer-events: none;
-        }
-      }
-
-      // Hover & focus states.
-      &--hoverable:hover:before,
-      &--selectable:focus:before,
-      &--focused:before,
-      &--selectable:hover:before {opacity: 0.08;}
-
-      // Active class (when item is selected).
-      &--active:before, &--active:focus:before, &--active:hover:before,
-      .w-list--navigation &.router-link-exact-active:before {opacity: 0.15;}
-
-      // Active state (while pressing key or mouse).
-      &--active.w-list__item-label--hoverable:hover:before,
-      &--active.w-list__item-label--selectable:focus:before,
-      &--active.w-list__item-label--selectable:hover:before,
-      &--selectable:active:before {opacity: 0.2;}
-
-      // Disabled.
-      &--disabled:before {display: none;}
-    }
-    // --------------------------------------------
-
-    // Checklist.
-    // --------------------------------------------
-    &--checklist .w-checkbox__label {flex-grow: 1;}
-    // &--checklist .w-checkbox * {pointer-events: none;}
-    // --------------------------------------------
-
-    // Navigation link.
-    // --------------------------------------------
-    &--navigation a {color: inherit;}
-    &--navigation .router-link-exact-active {font-weight: bold;}
-    // --------------------------------------------
+  &__item--parent {
+    flex-direction: column;
+    align-items: stretch;
   }
+
+  // List item bullet, if any.
+  // --------------------------------------------
+  &__item-bullet {
+    position: absolute;
+    right: 100%;
+    margin-right: 3 * $base-increment;
+    top: 0.1em;
+
+    @-moz-document url-prefix() {
+      & {top: -0.06em;}
+    }
+
+    .w-list--hoverable &,
+    .w-list--selectable &,
+    .w-list--checklist & {margin-top: 3 * $base-increment;}
+  }
+
+  // List item Label.
+  // --------------------------------------------
+  &__item-label {
+    position: relative;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    display: flex;
+    -webkit-tap-highlight-color: transparent;
+
+    .w-list--navigation &,
+    .w-list--checklist & {
+      display: flex;
+      align-items: center;
+    }
+    &--selectable {cursor: pointer;}
+    &--disabled {
+      cursor: default;
+      opacity: 0.3;
+      user-select: none;
+    }
+
+    &--hoverable,
+    &--selectable {
+      padding: 2 * $base-increment;
+
+      &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: currentColor;
+        opacity: 0;
+        transition: 0.2s;
+        pointer-events: none;
+      }
+    }
+
+    // Hover & focus states.
+    &--hoverable:hover:before,
+    &--selectable:focus:before,
+    &--focused:before,
+    &--selectable:hover:before {opacity: 0.08;}
+
+    // Active class (when item is selected).
+    &--active:before, &--active:focus:before, &--active:hover:before,
+    .w-list--navigation &.router-link-exact-active:before {opacity: 0.15;}
+
+    // Active state (while pressing key or mouse).
+    &--active.w-list__item-label--hoverable:hover:before,
+    &--active.w-list__item-label--selectable:focus:before,
+    &--active.w-list__item-label--selectable:hover:before,
+    &--selectable:active:before {opacity: 0.2;}
+
+    // Disabled.
+    &--disabled:before {display: none;}
+  }
+  // --------------------------------------------
+
+  // Checklist.
+  // --------------------------------------------
+  &--checklist .w-checkbox__label {flex-grow: 1;}
+  // &--checklist .w-checkbox * {pointer-events: none;}
+  // --------------------------------------------
+
+  // Navigation link.
+  // --------------------------------------------
+  &--navigation a {color: inherit;}
+  &--navigation .router-link-exact-active {font-weight: bold;}
+  // --------------------------------------------
 }
 </style>

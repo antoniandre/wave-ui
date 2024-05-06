@@ -341,70 +341,68 @@ export default {
 <style lang="scss">
 $expand-icon-size: 20px;
 
-#{$css-scope} {
-  .w-tree {
-    margin: 0;
+.w-tree {
+  margin: 0;
 
-    // Tree items.
-    // ------------------------------------------------------
-    &__item {list-style-type: none;}
-    &__item--branch {}
-    &__item--leaf {margin-left: $base-increment * 5 + 2px;}
-    &--no-expand-button &__item--leaf {margin-left: 0;}
+  // Tree items.
+  // ------------------------------------------------------
+  &__item {list-style-type: none;}
+  &__item--branch {}
+  &__item--leaf {margin-left: $base-increment * 5 + 2px;}
+  &--no-expand-button &__item--leaf {margin-left: 0;}
 
-    // Tree item label.
-    // ------------------------------------------------------
-    &__item-label {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      user-select: none;
+  // Tree item label.
+  // ------------------------------------------------------
+  &__item-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
 
-      &:before {
-        content: '';
-        position: absolute;
-        top: -1px;
-        bottom: -1px;
-        left: - $base-increment + 2px;
-        right: - $base-increment - 2px;
-        border-radius: $border-radius;
-      }
-      &:hover:before {background-color: $primary;opacity: 0.1;}
-      &:focus-visible:before {background-color: $primary;opacity: 0.15;}
+    &:before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      bottom: -1px;
+      left: - $base-increment + 2px;
+      right: - $base-increment - 2px;
+      border-radius: $border-radius;
     }
-    &.w-tree--selectable &__item-label {cursor: pointer;}
-    &.w-tree--selectable &__item--disabled &__item-label {cursor: auto;}
-    &__item--leaf &__item-label:before {
-      left: - $base-increment;
-      right: - $base-increment;
-    }
-    &__item--selected > &__item-label:before {
-      background-color: $primary;
-      opacity: 0.25;
-    }
-    &__item--disabled &__item-label {opacity: 0.5;}
-    &__item--disabled &__item-label:before {display: none;}
-
-    &__item-expand {margin-right: 2px;}
-
-    &__item--branch > &__item-label {cursor: pointer;}
-    &__item--disabled > &__item-label {
-      color: $disabled-color;
-      cursor: not-allowed;
-      -webkit-tap-highlight-color: transparent;
-    }
-    &__item--unexpandable > &__item-label {
-      margin-left: $expand-icon-size + 2px;
-      cursor: auto;
-    }
-    &--disabled &__item-label {cursor: auto;}
-    &--disabled &__item--branch > &__item-label {opacity: 0.5;}
-
-    &__item-icon {margin-right: $base-increment;}
-
-    // Recursive children.
-    // ------------------------------------------------------
-    .w-tree {margin-left: $base-increment * 5;}
+    &:hover:before {background-color: $primary;opacity: 0.1;}
+    &:focus-visible:before {background-color: $primary;opacity: 0.15;}
   }
+  &.w-tree--selectable &__item-label {cursor: pointer;}
+  &.w-tree--selectable &__item--disabled &__item-label {cursor: auto;}
+  &__item--leaf &__item-label:before {
+    left: - $base-increment;
+    right: - $base-increment;
+  }
+  &__item--selected > &__item-label:before {
+    background-color: $primary;
+    opacity: 0.25;
+  }
+  &__item--disabled &__item-label {opacity: 0.5;}
+  &__item--disabled &__item-label:before {display: none;}
+
+  &__item-expand {margin-right: 2px;}
+
+  &__item--branch > &__item-label {cursor: pointer;}
+  &__item--disabled > &__item-label {
+    color: $disabled-color;
+    cursor: not-allowed;
+    -webkit-tap-highlight-color: transparent;
+  }
+  &__item--unexpandable > &__item-label {
+    margin-left: $expand-icon-size + 2px;
+    cursor: auto;
+  }
+  &--disabled &__item-label {cursor: auto;}
+  &--disabled &__item--branch > &__item-label {opacity: 0.5;}
+
+  &__item-icon {margin-right: $base-increment;}
+
+  // Recursive children.
+  // ------------------------------------------------------
+  .w-tree {margin-left: $base-increment * 5;}
 }
 </style>

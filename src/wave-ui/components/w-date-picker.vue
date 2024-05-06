@@ -28,10 +28,8 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-date-picker {
+.w-date-picker {
 
-    @include themeable;
-  }
+  @include themeable;
 }
 </style>

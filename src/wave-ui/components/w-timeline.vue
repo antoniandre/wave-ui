@@ -42,47 +42,45 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-timeline {
-    margin-left: $base-increment;
+.w-timeline {
+  margin-left: $base-increment;
 
-    @include themeable;
+  @include themeable;
+}
+
+.w-timeline-item {
+  padding-left: 5 * $base-increment;
+  padding-bottom: 3 * $base-increment;
+  list-style-type: none;
+  position: relative;
+
+  &:last-child {padding-bottom: 0;}
+
+  // Bullet.
+  &__bullet {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    background-color: $timeline-bullet-color;
+    border-radius: 1em;
+    border: 1px solid currentColor;
+    width: $base-font-size;
+    aspect-ratio: 1;
+    min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
+    transform: translateX(-50%);
+    z-index: 1;
   }
+  &__bullet.w-icon {border: none;}
 
-  .w-timeline-item {
-    padding-left: 5 * $base-increment;
-    padding-bottom: 3 * $base-increment;
-    list-style-type: none;
-    position: relative;
-
-    &:last-child {padding-bottom: 0;}
-
-    // Bullet.
-    &__bullet {
-      position: absolute;
-      top: 2px;
-      left: 0;
-      background-color: $timeline-bullet-color;
-      border-radius: 1em;
-      border: 1px solid currentColor;
-      width: $base-font-size;
-      aspect-ratio: 1;
-      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
-      transform: translateX(-50%);
-      z-index: 1;
-    }
-    &__bullet.w-icon {border: none;}
-
-    &:last-child:after {display: none;}
-    // Left border.
-    &:after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      bottom: -2px;
-      left: -1px;
-      border-left: 2px solid $timeline-bg-color;
-    }
+  &:last-child:after {display: none;}
+  // Left border.
+  &:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    bottom: -2px;
+    left: -1px;
+    border-left: 2px solid $timeline-bg-color;
   }
 }
 </style>

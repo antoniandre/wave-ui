@@ -56,16 +56,14 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-flex {
-    display: flex;
-    flex: 1 1 auto;
+.w-flex {
+  display: flex;
+  flex: 1 1 auto;
 
-    &.row {flex-direction: row;}
-    &.column {flex-direction: column;}
-    &.wrap {flex-wrap: wrap;}
-    &.basis-zero > * {flex-basis: 0;flex-grow: 1;}
-    &.basis-zero > .no-grow, &.basis-zero > .shrink {flex-grow: 0;}
-  }
+  &.row {flex-direction: row;}
+  &.column {flex-direction: column;}
+  &.wrap {flex-wrap: wrap;}
+  &.basis-zero > * {flex-basis: 0;flex-grow: 1;}
+  &.basis-zero > .no-grow, &.basis-zero > .shrink {flex-grow: 0;}
 }
 </style>

@@ -18,8 +18,6 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-parallax {
-  }
+.w-parallax {
 }
 </style>

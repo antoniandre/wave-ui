@@ -72,13 +72,11 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-grid {
-    display: grid;
+.w-grid {
+  display: grid;
 
-    @for $i from 1 through 12 {
-      &.columns#{$i} {grid-template-columns: repeat($i, 1fr);}
-    }
+  @for $i from 1 through 12 {
+    &.columns#{$i} {grid-template-columns: repeat($i, 1fr);}
   }
 }
 </style>

@@ -145,145 +145,143 @@ export default {
 $outline-width: 2px;
 $inactive-color: #666;
 
-#{$css-scope} {
-  .w-checkbox {
-    display: inline-flex;
-    align-items: center;
-    vertical-align: middle;
-    // Contain the hidden radio button, so browser doesn't pan to it when outside of the screen.
+.w-checkbox {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  // Contain the hidden radio button, so browser doesn't pan to it when outside of the screen.
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+
+  @include themeable;
+
+  // The hidden real checkbox.
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    z-index: -100;
+    outline: none;
+  }
+
+  // The fake checkbox to substitute.
+  &__input {
     position: relative;
-    -webkit-tap-highlight-color: transparent;
+    width: $small-form-el-size;
+    aspect-ratio: 1;
+    display: flex;
+    flex: 0 0 auto; // Prevent stretching width or height.
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 0;
 
-    @include themeable;
+    .w-checkbox--disabled & {cursor: not-allowed;}
+  }
 
-    // The hidden real checkbox.
-    input[type="checkbox"] {
-      position: absolute;
-      opacity: 0;
-      z-index: -100;
-      outline: none;
+  // The checkmark - visible when checked.
+  &__input svg {
+    width: 70%;
+    aspect-ratio: 1;
+    fill: none;
+    stroke-width: 2;
+    stroke: $contrast-color;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 16px;
+    stroke-dashoffset: 16px;
+    transition: $transition-duration ease-out;
+    opacity: 0;
+    position: relative;
+    z-index: 1;
+
+    :checked ~ & {
+      opacity: 1;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 0.5s 0.1s, opacity 0s;
     }
 
-    // The fake checkbox to substitute.
-    &__input {
-      position: relative;
-      width: $small-form-el-size;
-      aspect-ratio: 1;
-      display: flex;
-      flex: 0 0 auto; // Prevent stretching width or height.
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 0;
+    .w-checkbox--indeterminate & {opacity: 0;}
+    .w-checkbox--disabled & {stroke: rgba(var(--w-contrast-color-rgb), 0.4);}
+  }
 
-      .w-checkbox--disabled & {cursor: not-allowed;}
-    }
+  &__input:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    aspect-ratio: 1;
+    border: $outline-width solid $inactive-color;
+    border-radius: $border-radius;
+    transition: $transition-duration ease-in-out;
 
-    // The checkmark - visible when checked.
-    &__input svg {
-      width: 70%;
-      aspect-ratio: 1;
-      fill: none;
-      stroke-width: 2;
-      stroke: $contrast-color;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-dasharray: 16px;
-      stroke-dashoffset: 16px;
-      transition: $transition-duration ease-out;
-      opacity: 0;
-      position: relative;
-      z-index: 1;
+    .w-checkbox--round & {border-radius: 100%;}
+    .w-checkbox--disabled & {border-color: $disabled-color;}
 
-      :checked ~ & {
-        opacity: 1;
-        stroke-dashoffset: 0;
-        transition: stroke-dashoffset 0.5s 0.1s, opacity 0s;
-      }
-
-      .w-checkbox--indeterminate & {opacity: 0;}
-      .w-checkbox--disabled & {stroke: rgba(var(--w-contrast-color-rgb), 0.4);}
-    }
-
-    &__input:after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      aspect-ratio: 1;
-      border: $outline-width solid $inactive-color;
-      border-radius: $border-radius;
-      transition: $transition-duration ease-in-out;
-
-      .w-checkbox--round & {border-radius: 100%;}
-      .w-checkbox--disabled & {border-color: $disabled-color;}
-
-      // Checked state.
-      :checked ~ & {
-        border-width: divide($small-form-el-size, 2);
-        border-color: currentColor;
-        // Prevents a tiny hole while animating and in some browser zoom levels.
-        background-color: currentColor;
-      }
-      .w-checkbox--indeterminate :checked ~ & {
-        border-width: ((divide($small-form-el-size, 2)) - 1px) 3px;
-        background-color: $contrast-color;
-      }
-      .w-checkbox--disabled :checked ~ & {
-        border-color: $disabled-color;
-        // Prevents a tiny hole while animating and in some browser zoom levels.
-        background-color: rgba(var(--w-contrast-color-rgb), 0.4);
-      }
-    }
-
-    // The focus outline & ripple on check action.
-    &__input:before {
-      content: "";
-      position: absolute;
-      width: inherit;
-      aspect-ratio: 1;
+    // Checked state.
+    :checked ~ & {
+      border-width: divide($small-form-el-size, 2);
+      border-color: currentColor;
+      // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: currentColor;
-      border-radius: 100%;
-      transform: scale(0);
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.25s ease-in-out;
     }
-
-    &--ripple &__input:before {
-      background-color: transparent;
-      animation: w-checkbox-ripple 0.55s 0.15s ease;
+    .w-checkbox--indeterminate :checked ~ & {
+      border-width: ((divide($small-form-el-size, 2)) - 1px) 3px;
+      background-color: $contrast-color;
     }
-
-    :focus ~ &__input:before,
-    &:not(.w-checkbox--disabled) :active ~ &__input:before {
-      transform: scale(1.8);
-      opacity: 0.2;
-    }
-
-    // After ripple reset to default state, then remove the class via js and the
-    // `:focus + &__input:before` will re-transition to normal focused outline.
-    &--rippled &__input:before {
-      transition: none;
-      transform: scale(0);
-      opacity: 0;
-    }
-
-    &__label {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      user-select: none;
-
-      .w-checkbox--disabled & {
-        cursor: not-allowed;
-        opacity: 0.7;
-      }
+    .w-checkbox--disabled :checked ~ & {
+      border-color: $disabled-color;
+      // Prevents a tiny hole while animating and in some browser zoom levels.
+      background-color: rgba(var(--w-contrast-color-rgb), 0.4);
     }
   }
 
-  @keyframes w-checkbox-ripple {
-    0% {opacity: 0.8;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
-    100% {opacity: 0;transform: scale(2.8);} // Propagate ripple to max radius and fade out.
+  // The focus outline & ripple on check action.
+  &__input:before {
+    content: "";
+    position: absolute;
+    width: inherit;
+    aspect-ratio: 1;
+    background-color: currentColor;
+    border-radius: 100%;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.25s ease-in-out;
   }
+
+  &--ripple &__input:before {
+    background-color: transparent;
+    animation: w-checkbox-ripple 0.55s 0.15s ease;
+  }
+
+  :focus ~ &__input:before,
+  &:not(.w-checkbox--disabled) :active ~ &__input:before {
+    transform: scale(1.8);
+    opacity: 0.2;
+  }
+
+  // After ripple reset to default state, then remove the class via js and the
+  // `:focus + &__input:before` will re-transition to normal focused outline.
+  &--rippled &__input:before {
+    transition: none;
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    .w-checkbox--disabled & {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+  }
+}
+
+@keyframes w-checkbox-ripple {
+  0% {opacity: 0.8;transform: scale(1);background-color: currentColor;} // Start with visible ripple.
+  100% {opacity: 0;transform: scale(2.8);} // Propagate ripple to max radius and fade out.
 }
 </style>

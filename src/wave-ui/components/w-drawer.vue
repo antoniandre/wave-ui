@@ -199,83 +199,81 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-drawer-wrap {
-    &--fixed {position: fixed;z-index: 500;}
+.w-drawer-wrap {
+  &--fixed {position: fixed;z-index: 500;}
 
-    &--absolute {
+  &--absolute {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .w-overlay {z-index: 1;position: inherit;}
+
+  &--push-content {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .w-overlay {
       position: absolute;
       inset: 0;
-      overflow: hidden;
+      z-index: 2;
     }
-
-    .w-overlay {z-index: 1;position: inherit;}
-
-    &--push-content {
-      position: relative;
-      overflow: hidden;
-      height: 100%;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-
-      .w-overlay {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-      }
-      .w-drawer {position: absolute;}
-      .w-drawer--left {right: 100%;left: auto !important;}
-      .w-drawer--right {left: 100%;}
-    }
-
-    &__track {
-      display: flex;
-      flex: 1;
-      height: 100%;
-      @include default-transition;
-    }
-
-    &__pushable {
-      position: relative;
-      flex-grow: 1;
-    }
+    .w-drawer {position: absolute;}
+    .w-drawer--left {right: 100%;left: auto !important;}
+    .w-drawer--right {left: 100%;}
   }
 
-  .w-drawer {
-    position: inherit;
+  &__track {
     display: flex;
-    z-index: 1;
-    background: $drawer-bg-color;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
-
-    @include themeable;
-
-    &--left, &--right {
-      top: 0;
-      bottom: 0;
-      width: 100%;
-      max-width: $drawer-max-size;
-    }
-    &--top, &--bottom {
-      left: 0;
-      right: 0;
-      height: 100%;
-      max-height: $drawer-max-size;
-    }
-    &--fit-content {width: auto;height: auto;}
-
-    &--left {left: 0;}
-    &--right {right: 0;}
-    &--top {top: 0;}
-    &--bottom {bottom: 0;}
-
-    &--persistent-animate {animation: 0.2s w-drawer-pop cubic-bezier(0.6, -0.28, 0.74, 0.05);}
+    flex: 1;
+    height: 100%;
+    @include default-transition;
   }
 
-  @keyframes w-drawer-pop {
-    0%, 100% {transform: scale(1);}
-    50% {transform: scale(1.05);}
+  &__pushable {
+    position: relative;
+    flex-grow: 1;
   }
+}
+
+.w-drawer {
+  position: inherit;
+  display: flex;
+  z-index: 1;
+  background: $drawer-bg-color;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+
+  @include themeable;
+
+  &--left, &--right {
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: $drawer-max-size;
+  }
+  &--top, &--bottom {
+    left: 0;
+    right: 0;
+    height: 100%;
+    max-height: $drawer-max-size;
+  }
+  &--fit-content {width: auto;height: auto;}
+
+  &--left {left: 0;}
+  &--right {right: 0;}
+  &--top {top: 0;}
+  &--bottom {bottom: 0;}
+
+  &--persistent-animate {animation: 0.2s w-drawer-pop cubic-bezier(0.6, -0.28, 0.74, 0.05);}
+}
+
+@keyframes w-drawer-pop {
+  0%, 100% {transform: scale(1);}
+  50% {transform: scale(1.05);}
 }
 </style>

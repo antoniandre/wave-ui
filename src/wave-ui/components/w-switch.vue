@@ -145,166 +145,164 @@ export default {
 <style lang="scss">
 $outline-width: 2px;
 
-#{$css-scope} {
-  .w-switch {
-    display: inline-flex;
+.w-switch {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  @include themeable;
+
+  &--loading {cursor: wait;}
+  &--disabled, &--readonly {
+    cursor: not-allowed;
+    touch-action: initial;
+  }
+
+  // Hidden checkbox.
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    z-index: -100;
+    outline: none;
+  }
+
+  // Switch.
+  &__input {
+    position: relative;
+    width: 2 * ($small-form-el-size + $outline-width);
+    height: $small-form-el-size + (2 * $outline-width);
+    display: flex;
+    flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+    justify-content: center;
+    border: $outline-width solid transparent;
+    border-radius: 3em;
+    background-color: $switch-inactive-color;
+    cursor: inherit;
+    @include default-transition;
 
-    @include themeable;
+    .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
 
-    &--loading {cursor: wait;}
-    &--disabled, &--readonly {
-      cursor: not-allowed;
-      touch-action: initial;
-    }
-
-    // Hidden checkbox.
-    input[type="checkbox"] {
-      position: absolute;
-      opacity: 0;
-      z-index: -100;
-      outline: none;
-    }
-
-    // Switch.
-    &__input {
-      position: relative;
-      width: 2 * ($small-form-el-size + $outline-width);
-      height: $small-form-el-size + (2 * $outline-width);
-      display: flex;
-      flex: 0 0 auto; // Prevent stretching width or height.
-      align-items: center;
-      justify-content: center;
-      border: $outline-width solid transparent;
-      border-radius: 3em;
-      background-color: $switch-inactive-color;
-      cursor: inherit;
-      @include default-transition;
-
-      .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
-
-      // Checked state.
-      :checked ~ & {
-        border-color: currentColor;
-        background-color: currentColor;
-      }
-
-      // Thin.
-      .w-switch--thin & {
-        box-sizing: border-box;
-        border: none;
-        width: 2 * $small-form-el-size;
-        height: round(0.7 * $small-form-el-size);
-      }
-      .w-switch--thin :checked ~ & {background-color: $switch-inactive-color;}
-
-      // Disabled.
-      .w-switch--disabled & {color: $disabled-color;}
-      .w-switch--disabled :checked ~ & {opacity: 0.5;}
-    }
-
-    // Track slot, if any.
-    &__track {
-      position: absolute;
-      left: 100%;
-      padding: 0 4px;
-      transform: translateX(-100%);
-      @include default-transition;
-    }
-    .w-switch--on &__track {left: 0;transform: translateX(0);}
-
-    // Thumb: show either the thumb slot if any, or :after otherwise.
-    &__thumb, &__input:after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: $small-form-el-size;
-      height: $small-form-el-size;
-      background-color: $switch-thumb-color;
-      border-radius: 100%;
-      text-align: center;
-      @include default-transition;
-
-      .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
-
-      .w-switch--on & {left: 100%;transform: translateX(-100%);}
-
-      .w-switch--thin & {
-        top: - round(0.15 * $small-form-el-size);
-        transform: scale(1.1);
-        box-shadow: $box-shadow;
-      }
-      .w-switch--thin.w-switch--on & {
-        transform: translateX(-100%) scale(1.1);
-        background-color: currentColor;
-      }
-    }
-    &--loading .w-progress {padding: 1px;}
-    &--loading.w-switch--thin.w-switch--on .w-progress {color: #fff;}
-    &--loading &__input:after, &--custom-thumb &__input:after {display: none;}
-    &__thumb > * {
-      width: inherit;
-      height: inherit;
-    }
-
-    // The focus outline & ripple on switch activation.
-    &__input:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: $small-form-el-size;
-      aspect-ratio: 1;
+    // Checked state.
+    :checked ~ & {
+      border-color: currentColor;
       background-color: currentColor;
-      border-radius: 100%;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.25s ease-in-out;
-
-      :checked ~ & {transform: translateX(-100%) scale(0);left: 100%;}
-
-      .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
-      .w-switch--thin & {top: - round(0.15 * $small-form-el-size);}
     }
 
-    &--ripple &__input:before {
-      background-color: transparent;
-      animation: w-switch-ripple 0.55s 0.15s ease;
+    // Thin.
+    .w-switch--thin & {
+      box-sizing: border-box;
+      border: none;
+      width: 2 * $small-form-el-size;
+      height: round(0.7 * $small-form-el-size);
     }
+    .w-switch--thin :checked ~ & {background-color: $switch-inactive-color;}
 
-    :focus ~ &__input:before {
-      transform: translateX(0) scale(1.8);
-      opacity: 0.2;
-    }
-    :focus:checked ~ &__input:before {
-      transform: translateX(-100%) scale(1.8);
-    }
-
-    // After ripple reset to default state, then remove the class via js and the
-    // `:focus ~ &__input:before` will re-transition to normal focused outline.
-    &--rippled &__input:before {
-      transition: none;
-      transform: translateX(-100%) scale(0);
-      opacity: 0;
-    }
-
-    &__label {
-      display: flex;
-      align-items: center;
-      cursor: inherit;
-      user-select: none;
-
-      .w-switch--disabled & {opacity: 0.5;}
-    }
+    // Disabled.
+    .w-switch--disabled & {color: $disabled-color;}
+    .w-switch--disabled :checked ~ & {opacity: 0.5;}
   }
 
-  @keyframes w-switch-ripple {
-    0% {opacity: 0.8;transform: translateX(-100%) scale(1);background-color: currentColor;} // Start with visible ripple.
-    100% {opacity: 0;transform: translateX(-100%) scale(2.8);} // Propagate ripple to max radius and fade out.
+  // Track slot, if any.
+  &__track {
+    position: absolute;
+    left: 100%;
+    padding: 0 4px;
+    transform: translateX(-100%);
+    @include default-transition;
   }
+  .w-switch--on &__track {left: 0;transform: translateX(0);}
+
+  // Thumb: show either the thumb slot if any, or :after otherwise.
+  &__thumb, &__input:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: $small-form-el-size;
+    height: $small-form-el-size;
+    background-color: $switch-thumb-color;
+    border-radius: 100%;
+    text-align: center;
+    @include default-transition;
+
+    .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
+
+    .w-switch--on & {left: 100%;transform: translateX(-100%);}
+
+    .w-switch--thin & {
+      top: - round(0.15 * $small-form-el-size);
+      transform: scale(1.1);
+      box-shadow: $box-shadow;
+    }
+    .w-switch--thin.w-switch--on & {
+      transform: translateX(-100%) scale(1.1);
+      background-color: currentColor;
+    }
+  }
+  &--loading .w-progress {padding: 1px;}
+  &--loading.w-switch--thin.w-switch--on .w-progress {color: #fff;}
+  &--loading &__input:after, &--custom-thumb &__input:after {display: none;}
+  &__thumb > * {
+    width: inherit;
+    height: inherit;
+  }
+
+  // The focus outline & ripple on switch activation.
+  &__input:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: $small-form-el-size;
+    aspect-ratio: 1;
+    background-color: currentColor;
+    border-radius: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.25s ease-in-out;
+
+    :checked ~ & {transform: translateX(-100%) scale(0);left: 100%;}
+
+    .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
+    .w-switch--thin & {top: - round(0.15 * $small-form-el-size);}
+  }
+
+  &--ripple &__input:before {
+    background-color: transparent;
+    animation: w-switch-ripple 0.55s 0.15s ease;
+  }
+
+  :focus ~ &__input:before {
+    transform: translateX(0) scale(1.8);
+    opacity: 0.2;
+  }
+  :focus:checked ~ &__input:before {
+    transform: translateX(-100%) scale(1.8);
+  }
+
+  // After ripple reset to default state, then remove the class via js and the
+  // `:focus ~ &__input:before` will re-transition to normal focused outline.
+  &--rippled &__input:before {
+    transition: none;
+    transform: translateX(-100%) scale(0);
+    opacity: 0;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    cursor: inherit;
+    user-select: none;
+
+    .w-switch--disabled & {opacity: 0.5;}
+  }
+}
+
+@keyframes w-switch-ripple {
+  0% {opacity: 0.8;transform: translateX(-100%) scale(1);background-color: currentColor;} // Start with visible ripple.
+  100% {opacity: 0;transform: translateX(-100%) scale(2.8);} // Propagate ripple to max radius and fade out.
 }
 </style>

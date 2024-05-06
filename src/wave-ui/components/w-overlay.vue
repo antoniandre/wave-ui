@@ -100,29 +100,27 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-overlay {
-    z-index: 500;
-    position: fixed;
-    // -10px for the `persistent-animate` ease out back animation.
-    top: -10px;
-    left: -10px;
-    bottom: -10px;
-    right: -10px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.3);
+.w-overlay {
+  z-index: 500;
+  position: fixed;
+  // -10px for the `persistent-animate` ease out back animation.
+  top: -10px;
+  left: -10px;
+  bottom: -10px;
+  right: -10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
 
-    &--absolute {position: absolute;}
-    &--persistent-animate {animation: 0.15s w-overlay-pop cubic-bezier(0.6, -0.28, 0.74, 0.05);}
-    &--no-pointer-event {pointer-events: none;}
-  }
+  &--absolute {position: absolute;}
+  &--persistent-animate {animation: 0.15s w-overlay-pop cubic-bezier(0.6, -0.28, 0.74, 0.05);}
+  &--no-pointer-event {pointer-events: none;}
+}
 
-  @keyframes w-overlay-pop {
-    0%, 100% {transform: scale(1);}
-    50% {transform: scale(1.04);}
-  }
+@keyframes w-overlay-pop {
+  0%, 100% {transform: scale(1);}
+  50% {transform: scale(1.04);}
 }
 </style>

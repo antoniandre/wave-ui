@@ -92,110 +92,108 @@ export default {
 </script>
 
 <style lang="scss">
-#{$css-scope} {
-  .w-badge-wrap {
-    position: relative;
-    display: inline-flex;
+.w-badge-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.w-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  border-radius: 99em;
+  // Always get an even number for better text vertical align.
+  height: round(1.1 * divide($base-font-size, 2)) * 2;
+  line-height: round(1.1 * divide($base-font-size, 2)) * 2;
+  min-width: round(1.1 * divide($base-font-size, 2)) * 2;
+  z-index: 1;
+  padding: 0 $base-increment;
+
+  @include themeable;
+
+  &--inline {position: static;}
+
+  &--round {
+    aspect-ratio: 1;
+    min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
+    padding: 0;
   }
 
-  .w-badge {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    border-radius: 99em;
-    // Always get an even number for better text vertical align.
-    height: round(1.1 * divide($base-font-size, 2)) * 2;
-    line-height: round(1.1 * divide($base-font-size, 2)) * 2;
-    min-width: round(1.1 * divide($base-font-size, 2)) * 2;
-    z-index: 1;
-    padding: 0 $base-increment;
+  // Sizes.
+  &.size--xs {
+    // Always get an even number for better text vertical alignment.
+    $height: round(divide($base-font-size, 2)) * 2;
+    font-size: round(0.67 * divide($base-font-size, 2)) * 2;
+    height: $height;
+    line-height: $height;
+    min-width: $height;
 
-    @include themeable;
-
-    &--inline {position: static;}
-
-    &--round {
-      aspect-ratio: 1;
-      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
-      padding: 0;
-    }
-
-    // Sizes.
-    &.size--xs {
-      // Always get an even number for better text vertical alignment.
-      $height: round(divide($base-font-size, 2)) * 2;
-      font-size: round(0.67 * divide($base-font-size, 2)) * 2;
-      height: $height;
-      line-height: $height;
-      min-width: $height;
-
-      &--round {width: $height;padding: 0 round(divide($height, 2));}
-    }
-    &.size--sm {
-      $height: round(1.1 * divide($base-font-size, 2)) * 2;
-      font-size: round(0.75 * divide($base-font-size, 2)) * 2;
-      height: $height;
-      line-height: $height;
-      min-width: $height;
-    }
-    &.size--md {
-      $height: round(1.3 * divide($base-font-size, 2)) * 2;
-      font-size: round(0.9 * divide($base-font-size, 2)) * 2;
-      height: $height;
-      line-height: $height;
-      min-width: $height;
-    }
-    &.size--lg {
-      $height: round(1.5 * divide($base-font-size, 2)) * 2;
-      font-size: round(1.05 * divide($base-font-size, 2)) * 2;
-      height: $height;
-      line-height: $height;
-      min-width: $height;
-    }
-    &.size--xl {
-      $height: round(1.8 * divide($base-font-size, 2)) * 2;
-      font-size: round(1.2 * divide($base-font-size, 2)) * 2;
-      height: $height;
-      line-height: $height;
-      min-width: $height;
-    }
-
-    // Position.
-    &--top {top: 0;}
-    &--bottom {bottom: 0;}
-    &--left {right: 100%;}
-    &--right {left: 100%;}
-    &--overlap {
-      &.w-badge--top {margin-top: -1 * $base-increment;}
-      &.w-badge--bottom {margin-bottom: -1 * $base-increment;}
-      &.w-badge--left {margin-right: -3 * $base-increment;}
-      &.w-badge--right {margin-left: -3 * $base-increment;}
-      &.w-badge--top.size--xs {margin-top: round(-0.5 * $base-increment);}
-      &.w-badge--bottom.size--xs {margin-bottom: round(-0.5 * $base-increment);}
-      &.w-badge--top.size--sm {margin-top: round(-0.75 * $base-increment);}
-      &.w-badge--bottom.size--sm {margin-bottom: round(-0.75 * $base-increment);}
-      &.w-badge--top.size--lg {margin-top: round(-1.5 * $base-increment);}
-      &.w-badge--bottom.size--lg {margin-bottom: round(-1.5 * $base-increment);}
-      &.w-badge--top.size--xl {margin-top: -2 * $base-increment;}
-      &.w-badge--bottom.size--xl {margin-bottom: -2 * $base-increment;}
-    }
-
-    // Look modifiers.
-    &--dark {color: rgba(255, 255, 255, 0.95);}
-    &--outline {
-      background-color: transparent;
-      border-color: currentColor;
-    }
-    &--shadow {box-shadow: $box-shadow;}
-
-    &--dot.w-badge {min-width: 0;padding: 0;aspect-ratio: 1;}
-    &--dot.size--xs {height: round(1.35 * $base-increment);}
-    &--dot.size--sm {height: round(1.7 * $base-increment);}
-    &--dot.size--md {height: round(2.2 * $base-increment);}
-    &--dot.size--lg {height: round(2.75 * $base-increment);}
-    &--dot.size--xl {height: 3 * $base-increment;}
+    &--round {width: $height;padding: 0 round(divide($height, 2));}
   }
+  &.size--sm {
+    $height: round(1.1 * divide($base-font-size, 2)) * 2;
+    font-size: round(0.75 * divide($base-font-size, 2)) * 2;
+    height: $height;
+    line-height: $height;
+    min-width: $height;
+  }
+  &.size--md {
+    $height: round(1.3 * divide($base-font-size, 2)) * 2;
+    font-size: round(0.9 * divide($base-font-size, 2)) * 2;
+    height: $height;
+    line-height: $height;
+    min-width: $height;
+  }
+  &.size--lg {
+    $height: round(1.5 * divide($base-font-size, 2)) * 2;
+    font-size: round(1.05 * divide($base-font-size, 2)) * 2;
+    height: $height;
+    line-height: $height;
+    min-width: $height;
+  }
+  &.size--xl {
+    $height: round(1.8 * divide($base-font-size, 2)) * 2;
+    font-size: round(1.2 * divide($base-font-size, 2)) * 2;
+    height: $height;
+    line-height: $height;
+    min-width: $height;
+  }
+
+  // Position.
+  &--top {top: 0;}
+  &--bottom {bottom: 0;}
+  &--left {right: 100%;}
+  &--right {left: 100%;}
+  &--overlap {
+    &.w-badge--top {margin-top: -1 * $base-increment;}
+    &.w-badge--bottom {margin-bottom: -1 * $base-increment;}
+    &.w-badge--left {margin-right: -3 * $base-increment;}
+    &.w-badge--right {margin-left: -3 * $base-increment;}
+    &.w-badge--top.size--xs {margin-top: round(-0.5 * $base-increment);}
+    &.w-badge--bottom.size--xs {margin-bottom: round(-0.5 * $base-increment);}
+    &.w-badge--top.size--sm {margin-top: round(-0.75 * $base-increment);}
+    &.w-badge--bottom.size--sm {margin-bottom: round(-0.75 * $base-increment);}
+    &.w-badge--top.size--lg {margin-top: round(-1.5 * $base-increment);}
+    &.w-badge--bottom.size--lg {margin-bottom: round(-1.5 * $base-increment);}
+    &.w-badge--top.size--xl {margin-top: -2 * $base-increment;}
+    &.w-badge--bottom.size--xl {margin-bottom: -2 * $base-increment;}
+  }
+
+  // Look modifiers.
+  &--dark {color: rgba(255, 255, 255, 0.95);}
+  &--outline {
+    background-color: transparent;
+    border-color: currentColor;
+  }
+  &--shadow {box-shadow: $box-shadow;}
+
+  &--dot.w-badge {min-width: 0;padding: 0;aspect-ratio: 1;}
+  &--dot.size--xs {height: round(1.35 * $base-increment);}
+  &--dot.size--sm {height: round(1.7 * $base-increment);}
+  &--dot.size--md {height: round(2.2 * $base-increment);}
+  &--dot.size--lg {height: round(2.75 * $base-increment);}
+  &--dot.size--xl {height: 3 * $base-increment;}
 }
 </style>

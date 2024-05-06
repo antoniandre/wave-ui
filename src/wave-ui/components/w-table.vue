@@ -724,325 +724,323 @@ export default {
 <style lang="scss">
 $tr-border-top: 1px;
 
-#{$css-scope} {
-  .w-table {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border-radius: $border-radius;
-    border: $border;
+.w-table {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: $border-radius;
+  border: $border;
 
-    &--loading {overflow: hidden;}
+  &--loading {overflow: hidden;}
 
-    &--resizing {
-      user-select: none;
+  &--resizing {
+    user-select: none;
 
-      &, * {cursor: col-resize;}
-    }
+    &, * {cursor: col-resize;}
+  }
 
-    &__scroll-wrap {
-      overflow: auto;
-      min-height: 100%;
-    }
+  &__scroll-wrap {
+    overflow: auto;
+    min-height: 100%;
+  }
 
-    &__table {
-      width: 100%;
-      min-height: 100%;
-      border-collapse: collapse;
-      border: none;
+  &__table {
+    width: 100%;
+    min-height: 100%;
+    border-collapse: collapse;
+    border: none;
 
-      @include themeable;
+    @include themeable;
 
-      &--fixed-layout & {table-layout: fixed;} // Allow resizing beyond the cell minimum text width.
-    }
+    &--fixed-layout & {table-layout: fixed;} // Allow resizing beyond the cell minimum text width.
+  }
 
-    // Table columns.
-    // ------------------------------------------------------
-    &__col--highlighted {
-      background-color: rgba(var(--w-contrast-bg-color-rgb), 0.04);
-    }
+  // Table columns.
+  // ------------------------------------------------------
+  &__col--highlighted {
+    background-color: rgba(var(--w-contrast-bg-color-rgb), 0.04);
+  }
 
-    // Table headers.
-    // ------------------------------------------------------
-    thead {position: relative;}
+  // Table headers.
+  // ------------------------------------------------------
+  thead {position: relative;}
 
-    &__header {padding: $base-increment;}
-    &__header--resizable {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
+  &__header {padding: $base-increment;}
+  &__header--resizable {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 
-    &--fixed-header thead {
-      position: sticky;
-      top: 0;
-      background-color: $base-bg-color;
-      z-index: 1; // For sticky columns to go under.
+  &--fixed-header thead {
+    position: sticky;
+    top: 0;
+    background-color: $base-bg-color;
+    z-index: 1; // For sticky columns to go under.
 
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        border-bottom: $border;
-      }
-    }
-
-    &__header--sticky {
-      position: sticky;
-      left: 0;
-
-      &:before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        background-color: $base-bg-color;
-      }
-    }
-
-    // Sorting arrow.
-    &__header--sortable {cursor: pointer;}
-    &__header-sort {
-      color: rgba(var(--w-base-color-rgb), 0.8);
-      vertical-align: text-bottom;
-      @include default-transition;
-
-      &--asc {transform: rotate(180deg);}
-      &--desc {transform: rotate(0deg);}
-      &--inactive {opacity: 0;}
-      th:hover &--inactive {opacity: 0.5;}
-      th:hover &--active {opacity: 1;}
-      &--active {opacity: 0.7;}
-    }
-
-    // Resizable columns.
-    &__header--resizable {position: relative;}
-    &__col-resizer {
-      position: absolute;
-      right: -5px;
-      top: -$tr-border-top;
-      bottom: 0;
-      width: 10px;
-      cursor: col-resize;
-      z-index: 1;
-
-      &:before {
-        content: '';
-        border-right: $border;
-        position: absolute;
-        left: 50%;
-        top: 0;
-        bottom: 0;
-        transform: translateX(-50%);
-      }
-      &--hover:before, &--active:before {border-right-width: 2px;}
-    }
-
-    // Progress bar when loading.
-    &__progress-bar:nth-child(odd) {background: none;}
-    thead .w-progress {
+    &:after {
+      content: '';
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-    }
-    &__progress-bar td {padding: 0;height: 0;}
-    @-moz-document url-prefix() {
-      &__progress-bar td {height: 100%;}
-    }
-
-    &__loading-text {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      width: 100%;
-      padding-top: 2 * $base-increment;
-      padding-bottom: 2 * $base-increment;
-    }
-
-    // Table body.
-    // ------------------------------------------------------
-    tbody {transition: opacity $transition-duration;}
-    &--loading-in-header tbody {opacity: 0.6;}
-
-    tbody tr {border-top: $tr-border-top solid rgba(var(--w-base-color-rgb), 0.06);}
-    // Don't apply built-in bg color if a bg color is already found on a tr.
-    tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: $table-tr-odd-color;}
-    tbody .w-table__row:hover:not(.no-data):not([class*="--bg"]) {background-color: $table-tr-hover-color;}
-
-    &__row--selected td {position: relative;}
-    &__row--selected td:before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: var(--w-primary-color);
-      opacity: 0.2;
-      pointer-events: none;
-    }
-
-    &__cell {padding: round(divide($base-increment, 2)) $base-increment;}
-    &__header:first-child, &__cell:first-child {padding-left: 2 * $base-increment;}
-    &__header:last-child, &__cell:last-child {padding-right: 2 * $base-increment;}
-
-    &--resizable-cols &__cell {
-      position: relative;
-
-      &, & * {
-        overflow: hidden;
-        // white-space: nowrap; // If you only want the content cell on a single line.
-        text-overflow: ellipsis;
-      }
-    }
-
-    &__cell--sticky {
-      position: sticky;
-      left: 0;
-
-      &:before, &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: -1;
-      }
-      &:before {background-color: $base-bg-color;}
-    }
-    tr:nth-child(odd) &__cell--sticky:after {background-color: $table-tr-odd-color;}
-    tr:hover &__cell--sticky:after {background-color: $table-tr-hover-color;}
-
-    .no-data &__cell {
-      background-color: rgba(255, 255, 255, 0.2);
-      padding: (2 * $base-increment) $base-increment;
-    }
-
-    // Table footer.
-    // ------------------------------------------------------
-    &--fixed-footer tfoot {
-      position: sticky;
-      bottom: -1px;
-      background-color: $base-bg-color;
-      z-index: 1; // For sticky columns to go under.
-
-      &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        border-top: $border;
-      }
-    }
-
-    &__footer &__cell {
-      padding-top: $base-increment;
-      padding-bottom: $base-increment;
-    }
-
-    // Pagination.
-    // ------------------------------------------------------
-    &__pagination {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 2 * $base-increment;
-      padding: $base-increment 2 * $base-increment;
-
-      .w-pagination__items-per-page {
-        flex: 0 0 auto;
-        text-align: right;
-      }
-
-      .pages-wrap {
-        display: flex;
-        padding-left: 1px; // Prevent overflow causing scrollbar.
-        padding-right: 1px;
-        max-height: 4.5em;
-        gap: 0.5 * $base-increment;
-        overflow-y: hidden;
-      }
-
-      .w-pagination__page {
-        font-size: 0.9em;
-        aspect-ratio: 1;
-        min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
-        overflow: hidden;
-        color: rgba(var(--w-base-color-rgb), 0.65);
-        background-color: rgba(var(--w-base-bg-color-rgb), 0.4);
-
-        &:hover:before {
-          background-color: $primary;
-          opacity: 0.1;
-        }
-        &:active:before {
-          background-color: $primary;
-          opacity: 0.2;
-        }
-
-        &--active {
-          font-weight: bold;
-          color: $primary;
-
-          &:before {
-            background-color: $primary;
-            opacity: 0.1;
-          }
-        }
-      }
-
-      .w-pagination__results {
-        white-space: nowrap;
-        text-align: right;
-      }
+      border-bottom: $border;
     }
   }
 
-  // Mobile layout.
-  .w-table--mobile {
+  &__header--sticky {
+    position: sticky;
+    left: 0;
+
+    &:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-color: $base-bg-color;
+    }
+  }
+
+  // Sorting arrow.
+  &__header--sortable {cursor: pointer;}
+  &__header-sort {
+    color: rgba(var(--w-base-color-rgb), 0.8);
+    vertical-align: text-bottom;
+    @include default-transition;
+
+    &--asc {transform: rotate(180deg);}
+    &--desc {transform: rotate(0deg);}
+    &--inactive {opacity: 0;}
+    th:hover &--inactive {opacity: 0.5;}
+    th:hover &--active {opacity: 1;}
+    &--active {opacity: 0.7;}
+  }
+
+  // Resizable columns.
+  &__header--resizable {position: relative;}
+  &__col-resizer {
+    position: absolute;
+    right: -5px;
+    top: -$tr-border-top;
+    bottom: 0;
+    width: 10px;
+    cursor: col-resize;
+    z-index: 1;
+
+    &:before {
+      content: '';
+      border-right: $border;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      transform: translateX(-50%);
+    }
+    &--hover:before, &--active:before {border-right-width: 2px;}
+  }
+
+  // Progress bar when loading.
+  &__progress-bar:nth-child(odd) {background: none;}
+  thead .w-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  &__progress-bar td {padding: 0;height: 0;}
+  @-moz-document url-prefix() {
+    &__progress-bar td {height: 100%;}
+  }
+
+  &__loading-text {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding-top: 2 * $base-increment;
+    padding-bottom: 2 * $base-increment;
+  }
 
-    thead {display: none;}
-    tbody {
+  // Table body.
+  // ------------------------------------------------------
+  tbody {transition: opacity $transition-duration;}
+  &--loading-in-header tbody {opacity: 0.6;}
+
+  tbody tr {border-top: $tr-border-top solid rgba(var(--w-base-color-rgb), 0.06);}
+  // Don't apply built-in bg color if a bg color is already found on a tr.
+  tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: $table-tr-odd-color;}
+  tbody .w-table__row:hover:not(.no-data):not([class*="--bg"]) {background-color: $table-tr-hover-color;}
+
+  &__row--selected td {position: relative;}
+  &__row--selected td:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--w-primary-color);
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  &__cell {padding: round(divide($base-increment, 2)) $base-increment;}
+  &__header:first-child, &__cell:first-child {padding-left: 2 * $base-increment;}
+  &__header:last-child, &__cell:last-child {padding-right: 2 * $base-increment;}
+
+  &--resizable-cols &__cell {
+    position: relative;
+
+    &, & * {
+      overflow: hidden;
+      // white-space: nowrap; // If you only want the content cell on a single line.
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__cell--sticky {
+    position: sticky;
+    left: 0;
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+    &:before {background-color: $base-bg-color;}
+  }
+  tr:nth-child(odd) &__cell--sticky:after {background-color: $table-tr-odd-color;}
+  tr:hover &__cell--sticky:after {background-color: $table-tr-hover-color;}
+
+  .no-data &__cell {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: (2 * $base-increment) $base-increment;
+  }
+
+  // Table footer.
+  // ------------------------------------------------------
+  &--fixed-footer tfoot {
+    position: sticky;
+    bottom: -1px;
+    background-color: $base-bg-color;
+    z-index: 1; // For sticky columns to go under.
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-top: $border;
+    }
+  }
+
+  &__footer &__cell {
+    padding-top: $base-increment;
+    padding-bottom: $base-increment;
+  }
+
+  // Pagination.
+  // ------------------------------------------------------
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2 * $base-increment;
+    padding: $base-increment 2 * $base-increment;
+
+    .w-pagination__items-per-page {
+      flex: 0 0 auto;
+      text-align: right;
+    }
+
+    .pages-wrap {
       display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-    tr {
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      padding-top: $base-increment;
-      padding-bottom: $base-increment;
+      padding-left: 1px; // Prevent overflow causing scrollbar.
+      padding-right: 1px;
+      max-height: 4.5em;
+      gap: 0.5 * $base-increment;
+      overflow-y: hidden;
     }
 
-    .w-table__cell {
-      display: flex;
-      padding-left: 2 * $base-increment;
-      padding-right: 2 * $base-increment;
+    .w-pagination__page {
+      font-size: 0.9em;
+      aspect-ratio: 1;
+      min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
+      overflow: hidden;
+      color: rgba(var(--w-base-color-rgb), 0.65);
+      background-color: rgba(var(--w-base-bg-color-rgb), 0.4);
+
+      &:hover:before {
+        background-color: $primary;
+        opacity: 0.1;
+      }
+      &:active:before {
+        background-color: $primary;
+        opacity: 0.2;
+      }
+
+      &--active {
+        font-weight: bold;
+        color: $primary;
+
+        &:before {
+          background-color: $primary;
+          opacity: 0.1;
+        }
+      }
     }
 
-    tr:not(.no-data) .text-center,
-    tr:not(.no-data) .text-right {text-align: left;}
-
-    .w-table__cell:before {
-      content: attr(data-label);
-      font-weight: bold;
-      width: 6.5em;
-      padding-right: 0.5em;
-      display: inline-flex;
+    .w-pagination__results {
+      white-space: nowrap;
+      text-align: right;
     }
-    .no-data .w-table__cell:before {display: none;}
+  }
+}
 
-    .w-table__progress-bar {
-      display: table-row;
+// Mobile layout.
+.w-table--mobile {
+  display: flex;
 
-      td {display: table-cell;}
-      td:before {display: none;}
-    }
+  thead {display: none;}
+  tbody {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  tr {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-top: $base-increment;
+    padding-bottom: $base-increment;
+  }
+
+  .w-table__cell {
+    display: flex;
+    padding-left: 2 * $base-increment;
+    padding-right: 2 * $base-increment;
+  }
+
+  tr:not(.no-data) .text-center,
+  tr:not(.no-data) .text-right {text-align: left;}
+
+  .w-table__cell:before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 6.5em;
+    padding-right: 0.5em;
+    display: inline-flex;
+  }
+  .no-data .w-table__cell:before {display: none;}
+
+  .w-table__progress-bar {
+    display: table-row;
+
+    td {display: table-cell;}
+    td:before {display: none;}
   }
 }
 </style>
