@@ -192,7 +192,7 @@ export default {
         js = 'const app = Vue.createApp({\n' +
                 '  ' + slots.js.replace(/\n+$/, '').replace(/\n/g, '\n  ') + '\n' +
               '})\n\n' +
-              'app.use(WaveUI, { theme: \'auto\' }})\n\n' +
+              'app.use(WaveUI, { theme: \'auto\' })\n\n' +
               'app.mount(\'#app\')'
       }
 
