@@ -66,6 +66,13 @@ export interface $waveui {
       colorShades: boolean,
 
       /**
+       * Generate CSS variables for color shades.
+       * NOTE: the `colorShades` must be enabled for this to work.
+       * @property {boolean} colorShadeCssVariables - Default: false
+       */
+      colorShadeCssVariables: boolean,
+
+      /**
        * Generate margin and padding utility classes for each breakpoint. E.g. `sm-ma2`
        * @property {boolean} breakpointSpaces - Default: false
        */

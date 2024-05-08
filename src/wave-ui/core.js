@@ -85,7 +85,7 @@ export default class WaveUI {
       document.documentElement.setAttribute('data-theme', theme)
       document.head.querySelector('#wave-ui-colors')?.remove?.()
       const themeColors = this.config.colors[this.theme]
-      injectColorsCSSInDOM(themeColors)
+      injectColorsCSSInDOM(themeColors, this.config.css.colorShadeCssVariables)
       this.colors = flattenColors(themeColors, colorPalette)
     }
   }
