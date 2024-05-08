@@ -133,6 +133,8 @@ export default {
       { label: 'breakpoints', route: 'breakpoints' },
       { label: 'colors', route: 'colors' },
       { label: 'css', definition: 'A set of CSS-related options.' },
+      // { label: 'css.colorShades', definition: 'With this option set to true, all the color shades will be generated.' },
+      // { label: 'css.colorShadeCssVariables', definition: 'With this option set to true, all the color shades will have their own CSS variable generated.' },
       { label: 'icons', route: 'w-icon' },
       { label: 'iconsLigature', route: 'w-icon' },
       { label: 'notificationManager', route: 'w-notification' },

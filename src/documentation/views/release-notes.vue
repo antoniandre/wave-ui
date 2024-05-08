@@ -33,6 +33,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.minor
+      strong.version v3.13.0
+      ul
+        li
+          strong.code CSS
+          ul
+            li Added the `css.colorShadeCssVariables` option to generate all the color shades CSS variables. #[issue-link 149]
+
+    li.minor
       strong.version v3.12.0
       ul
         li
