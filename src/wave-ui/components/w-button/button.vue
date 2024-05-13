@@ -71,20 +71,24 @@ export default {
       return this.hasRouter ? this.$router.resolve(this.route).href : this.route
     },
     listeners () {
+      // Extract the potential class & style from v-on listeners. It will still be added from the
+      // built-in attributes fallthrough (implicit v-bind="$attrs" when single root node).
+      const { class: classes, style, ...attrs } = this.$attrs
+
       // If the button is a router-link, we can't apply events on it since vue-router needs the .native
       // modifier but it's not available with the v-on directive.
       // So do a manual router.push if $router is present.
       // eslint-disable-next-line multiline-ternary
       return this.route && this.hasRouter && !this.forceLink && !this.externalLink ? {
-        ...this.$attrs,
+        ...attrs,
         click: e => {
-          if (this.$attrs.click) this.$attrs.click(e)
+          if (attrs.click) attrs.click(e)
 
-          this.$router.push(this.route)
+          router.push(this.route)
           e.stopPropagation() // If going to a route, no need to bubble up the event.
           e.preventDefault()
         }
-      } : this.$attrs
+      } : attrs
     },
     size () {
       return (
