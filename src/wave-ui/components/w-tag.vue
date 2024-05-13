@@ -1,6 +1,5 @@
 <template lang="pug">
 span.w-tag(
-  v-on="$attrs"
   @click="$emit('update:modelValue', !modelValue);$emit('input', !modelValue)"
   @keypress.enter="$emit('update:modelValue', !modelValue);$emit('input', !modelValue)"
   :class="classes"

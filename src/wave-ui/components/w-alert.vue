@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-alert(v-if="show" v-on="$attrs" :class="classes")
+.w-alert(v-if="show" :class="classes")
   //- Add a wrapper around the content when needed.
   template(v-if="type || icon || dismiss")
     w-icon.w-alert__icon.mr2(v-if="type || icon") {{ type ? typeIcon : icon }}

@@ -1,7 +1,6 @@
 <template lang="pug">
 component.w-icon(
   :is="tag || 'i'"
-  v-on="$attrs"
   :class="classes"
   role="icon"
   aria-hidden="true"

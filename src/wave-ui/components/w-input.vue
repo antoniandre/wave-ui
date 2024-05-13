@@ -196,8 +196,9 @@ export default {
 
     listeners () {
       // Remove the events that are fired separately, so they don't fire twice.
+      // Also remove class and style which are meant to stay on the wrapper.
       // eslint-disable-next-line no-unused-vars
-      const { input, focus, blur, ...listeners } = this.$attrs
+      const { input, focus, blur, class: classes, style, ...listeners } = this.$attrs
       return listeners
     },
 

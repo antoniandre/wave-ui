@@ -29,7 +29,7 @@ component(
       slot {{ label }}
   .w-switch__input(
     @click="$refs.input.focus();$refs.input.click()"
-    v-on="$attrs"
+    v-on="listeners"
     :class="inputClasses")
     .w-switch__track(v-if="$slots.track")
       slot(name="track")
@@ -84,6 +84,13 @@ export default {
   },
 
   computed: {
+    listeners () {
+      // Remove the events that are fired separately, so they don't fire twice.
+      // Also remove class and style which are meant to stay on the wrapper.
+      // eslint-disable-next-line no-unused-vars
+      const { click, class: classes, style, ...listeners } = this.$attrs
+      return listeners
+    },
     hasLabel () {
       return this.label || this.$slots.default
     },
