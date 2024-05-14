@@ -84,7 +84,7 @@ export default {
         click: e => {
           if (attrs.click) attrs.click(e)
 
-          router.push(this.route)
+          this.$router.push(this.route)
           e.stopPropagation() // If going to a route, no need to bubble up the event.
           e.preventDefault()
         }
