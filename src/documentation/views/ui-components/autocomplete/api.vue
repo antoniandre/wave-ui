@@ -2,7 +2,6 @@
 div
   .w-divider.my12
   title-link.title1(h2) API
-  alert.mb6(info) The missing props descriptions will be added shortly (all the props are already listed).
 
   component-api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
