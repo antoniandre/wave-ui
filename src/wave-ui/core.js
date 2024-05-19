@@ -144,10 +144,7 @@ export default class WaveUI {
   }
 
   constructor (app, options = {}) {
-    if (WaveUI.#registered) {
-      console.warn('Wave UI is already instantiated.')
-      return
-    }
+    if (WaveUI.#registered) return // May happen with SSR.
 
     this.$waveui._notificationManager = new NotificationManager()
 
