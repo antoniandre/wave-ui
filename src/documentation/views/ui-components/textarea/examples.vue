@@ -1,10 +1,22 @@
 <template lang="pug">
 div
+  w-alert(info)
+    .title4 Good to know
+    p.body.
+      Any HTML attribute or JavaScript event listeners attached to the component will be applied to the
+      native textarea element inside the #[strong.code.inherit w-textarea] component, except the style
+      and class attributes which will stay on the wrapper (for convenience and to respect the internal
+      design of the component).#[br]
+      This will allow you to add common HTML attributes (like #[code tabindex], #[code name], etc.) and
+      attach event listeners (like #[code @focus], #[code @keypress], etc.) directly to the form field
+      itself (textarea).
+
   title-link(h2) Default
   p.
     By default the #[span.code w-textarea] component has a label inside the textarea that moves up above
     the textarea on focus or when the textarea is filled by some content or a placeholder.#[br]
     The default number of rows is 3, and when adding lines the textarea will adjust its size.
+
   example
     w-textarea Label
     template(#pug).
