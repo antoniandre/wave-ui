@@ -222,7 +222,7 @@ export interface WaveTextareaComputeds extends ComputedOptions {
    * TODO: Add Description
    * @see https://antoniandre.github.io/wave-ui/w-textarea
    */
-  listeners: ComputedGetter<any>
+  attrs: ComputedGetter<any>
 
   /**
    * TODO: Add Description

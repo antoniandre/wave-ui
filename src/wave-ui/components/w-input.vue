@@ -6,7 +6,8 @@ component(
   v-model:valid="valid"
   @reset="$emit('update:modelValue', inputValue = '');$emit('input', '')"
   :wrap="hasLabel && labelPosition !== 'inside'"
-  :class="classes")
+  :class="classes"
+  :style="$attrs.style")
   input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
 
   template(v-else)
@@ -31,7 +32,6 @@ component(
         v-if="type !== 'file'"
         ref="input"
         v-model="inputValue"
-        v-on="listeners"
         @input="onInput"
         @focus="onFocus"
         @blur="onBlur"
@@ -133,6 +133,7 @@ import { reactive } from 'vue'
 export default {
   name: 'w-input',
   mixins: [FormElementMixin],
+  inheritAttrs: false, // The attrs should only be added to the input not the wrapper.
 
   props: {
     modelValue: { default: '' },
@@ -186,20 +187,13 @@ export default {
 
   computed: {
     attrs () {
-      // Keep the `class` attribute bound to the wrapper and not the input.
+      // Remove class and style which are meant to stay on the wrapper.
+      // Note: in Vue 3 $attrs may contain both HTML attributes AND JS events (onClick, onFocus, etc.).
       // eslint-disable-next-line no-unused-vars
-      const { class: classes, ...htmlAttrs } = this.$attrs
+      const { class: classes, style, ...attrs } = this.$attrs
       // Resets the input[type=file] the native HTML way.
-      if (this.type === 'file' && !this.inputFiles.length) htmlAttrs.value = null
-      return htmlAttrs
-    },
-
-    listeners () {
-      // Remove the events that are fired separately, so they don't fire twice.
-      // Also remove class and style which are meant to stay on the wrapper.
-      // eslint-disable-next-line no-unused-vars
-      const { input, focus, blur, class: classes, style, ...listeners } = this.$attrs
-      return listeners
+      if (this.type === 'file' && !this.inputFiles.length) attrs.value = null
+      return attrs
     },
 
     hasValue () {
@@ -265,7 +259,9 @@ export default {
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-input--has-placeholder': this.placeholder,
         'w-input--inner-icon-left': this.innerIconLeft,
-        'w-input--inner-icon-right': this.innerIconRight
+        'w-input--inner-icon-right': this.innerIconRight,
+        // With the inheritAttrs set to false any class on the component would be lost, so add it back.
+        [this.$attrs.class]: !!this.$attrs.class
       }
     },
 

@@ -6,7 +6,8 @@ component(
   v-model:valid="valid"
   :wrap="hasLabel && labelPosition !== 'inside'"
   @reset="$emit('update:modelValue', inputValue = '');$emit('input', '')"
-  :class="classes")
+  :class="classes"
+  :style="$attrs.style")
   //- Left label.
   template(v-if="labelPosition === 'left'")
     label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(
@@ -26,7 +27,7 @@ component(
     textarea.w-textarea__textarea(
       ref="textarea"
       v-model="inputValue"
-      v-on="listeners"
+      v-bind="attrs"
       @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
@@ -71,6 +72,7 @@ import FormElementMixin from '../mixins/form-elements'
 export default {
   name: 'w-textarea',
   mixins: [FormElementMixin],
+  inheritAttrs: false, // The attrs should only be added to the textarea not the wrapper.
 
   props: {
     modelValue: { default: '' },
@@ -111,12 +113,12 @@ export default {
   },
 
   computed: {
-    listeners () {
-      // Remove the events that are fired separately, so they don't fire twice.
-      // Also remove class and style which are meant to stay on the wrapper.
+    attrs () {
+      // Remove class and style which are meant to stay on the wrapper.
+      // Note: in Vue 3 $attrs may contain both HTML attributes AND JS events (onClick, onFocus, etc.).
       // eslint-disable-next-line no-unused-vars
-      const { input, focus, blur, class: classes, style, ...listeners } = this.$attrs
-      return listeners
+      const { class: classes, style, ...attrs } = this.$attrs
+      return attrs
     },
     hasValue () {
       return this.inputValue || this.inputValue === 0
@@ -141,7 +143,9 @@ export default {
         'w-textarea--no-padding': !this.outline && !this.bgColor && !this.shadow,
         'w-textarea--has-placeholder': this.placeholder,
         'w-textarea--inner-icon-left': this.innerIconLeft,
-        'w-textarea--inner-icon-right': this.innerIconRight
+        'w-textarea--inner-icon-right': this.innerIconRight,
+        // With the inheritAttrs set to false any class on the component would be lost, so add it back.
+        [this.$attrs.class]: !!this.$attrs.class
       }
     },
     inputWrapClasses () {

@@ -299,12 +299,6 @@ export interface WaveInputComputeds extends ComputedOptions {
    * TODO: Add Description
    * @see https://antoniandre.github.io/wave-ui/w-input
    */
-  listeners: ComputedGetter<any>
-
-  /**
-   * TODO: Add Description
-   * @see https://antoniandre.github.io/wave-ui/w-input
-   */
   hasValue: ComputedGetter<any>
 
   /**

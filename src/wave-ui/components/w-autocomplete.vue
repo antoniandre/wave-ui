@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-autocomplete(:class="classes" @click="onClick")
+.w-autocomplete(:class="classes" @click="onClick" :style="$attrs.style")
   template(v-if="selection.length")
     .w-autocomplete__selection(v-for="(item, i) in selection")
       slot(name="selection" :item="item" :unselect="i => unselectItem(i)")
@@ -11,7 +11,8 @@
   input.w-autocomplete__input(
     ref="input"
     :value="keywords"
-    v-on="inputEventListeners")
+    v-on="inputEventListeners"
+    v-bind="inputAttrs")
   w-transition-slide-fade
     ul.w-autocomplete__menu(
       v-if="menuOpen"
@@ -42,6 +43,7 @@
 <script>
 export default {
   name: 'w-autocomplete',
+  inheritAttrs: false, // The attrs should only be added to the input not the wrapper.
 
   props: {
     items: { type: Array, required: true },
@@ -110,12 +112,25 @@ export default {
     highlightedItemIndex () {
       if (this.highlightedItem === null) return -1
       else if (this.highlightedItem === 'extra-item') return this.filteredItems.length
+
       return this.filteredItems.findIndex(item => item.uid === this.highlightedItem)
+    },
+
+    wrapperAttrs () {
+      const { style, class: classes } = this.$attrs
+      return { style, class: classes }
+    },
+
+    inputAttrs () {
+      // Remove class and style which are meant to stay on the wrapper.
+      // eslint-disable-next-line no-unused-vars
+      const { style, class: classes, ...attrs } = this.$attrs
+
+      return attrs
     },
 
     inputEventListeners () {
       return {
-        ...this.$attrs,
         input: e => {
           this.keywords = e.target.value
         },
@@ -142,7 +157,9 @@ export default {
         'w-autocomplete--open': this.menuOpen,
         'w-autocomplete--filled': this.selection.length,
         'w-autocomplete--has-keywords': this.keywords,
-        'w-autocomplete--empty': !this.selection.length && !this.keywords
+        'w-autocomplete--empty': !this.selection.length && !this.keywords,
+        // With the inheritAttrs set to false any class on the component would be lost, so add it back.
+        [this.$attrs.class]: !!this.$attrs.class
       }
     }
   },
