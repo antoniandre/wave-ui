@@ -33,6 +33,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v3.13.4
+      ul
+        li
+          strong.code w-button, w-input, w-switch, w-autocomplete &amp; w-textarea.
+          ul
+            li Fix a Vue warning ([Vue warn]: Wrong type passed as event handler to onXxx) when adding extra HTML attrs on the Wave UI component.
+
+    li.patch
       strong.version v3.13.2
       ul
         li
