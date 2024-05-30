@@ -1,7 +1,7 @@
 <template lang="pug">
 w-menu(v-model="showPopup" v-bind="wMenuProps")
   template(#activator="{ on }")
-    w-button.w-confirm(v-bind="{ ...$attrs, ...buttonProps, ...(disablePrompt ? {} : on) }")
+    w-button.w-confirm(v-bind="{ ...$attrs, ...buttonProps }" v-on="disablePrompt ? {} : { ...on }")
       slot
   w-flex(:column="!inline" align-center)
     div
