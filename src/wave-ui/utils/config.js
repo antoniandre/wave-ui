@@ -31,7 +31,12 @@ const config = reactive({
   colors: {
     // Default colors of Wave UI. Can be overridden from the Wave UI user config on init.
     light: {
-      primary: '#234781',
+      primary: {
+        color: '#234781',
+        lightOffset: -8,
+        lightIncrement: 13.4,
+        darkIncrement: 1
+      },
       secondary: '#d3ebff',
       info: '#3d9ff5',
       warning: '#f80',
@@ -45,6 +50,87 @@ const config = reactive({
       warning: '#f80',
       success: '#54b946',
       error: '#f65555'
+    },
+    palette: {
+      pink: {
+        color: '#e91e63',
+        lightOffset: -8,
+        lightIncrement: 13.4
+      },
+      purple: {
+        color: '#a741b9',
+        lightOffset: -17,
+        lightIncrement: 13
+      },
+      'deep-purple': {
+        color: '#673ab7',
+        lightIncrement: 16,
+        darkIncrement: 11.4
+      },
+      indigo: {
+        color: '#3f51b5',
+        lightIncrement: 16,
+        darkIncrement: 11.4
+      },
+      blue: {
+        color: '#2196f3',
+        lightIncrement: 13.6,
+        darkIncrement: 13.6
+      },
+      'light-blue': {
+        color: '#03a9f4',
+        lightIncrement: 15.6
+      },
+      cyan: {
+        color: '#04cbe5',
+        lightOffset: 5,
+        lightIncrement: 19.2,
+        darkIncrement: 10.8
+      },
+      teal: {
+        color: '#1db3a8',
+        lightOffset: 6.5,
+        lightIncrement: 18.8,
+        darkIncrement: 11.4
+      },
+      green: {
+        color: '#4caf50',
+        lightIncrement: 15.2,
+        darkIncrement: 11.4
+      },
+      'light-green': {
+        color: '#90d73f',
+        lightOffset: -5,
+        lightIncrement: 12
+      },
+      lime: {
+        color: '#cee029',
+        lightOffset: -6,
+        lightIncrement: 12.4
+      },
+      yellow: {
+        color: '#ffe70f',
+        lightOffset: -8,
+        lightIncrement: 11
+      },
+      amber: '#ffc107',
+      orange: '#ff9800',
+      'deep-orange': {
+        color: '#ff6825',
+        lightIncrement: 12.8
+      },
+      red: {
+        color: '#fa3317',
+        lightOffset: -1,
+        lightIncrement: 13
+      },
+      brown: {
+        color: '#845848',
+        lightIncrement: 17.6,
+        darkIncrement: 5
+      },
+      'blue-grey': '#6c8693',
+      grey: '#848484'
     }
   },
   // The initial theme to use.

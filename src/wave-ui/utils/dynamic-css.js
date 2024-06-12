@@ -13,7 +13,7 @@ let currentBreakpoint = null
 // :root {[color1-variable], [color2-variable]}
 // .color1--bg {background-color: [color1-variable]}
 // .color1 {color: [color1-variable]}
-const generateColors = (themeColors, generateShadeCssVariables) => {
+const generateColors = (themeColors, colorPalette, generateShadeCssVariables) => {
   let styles = ''
   const cssVariables = {}
 
@@ -35,15 +35,31 @@ const generateColors = (themeColors, generateShadeCssVariables) => {
       `${cssScope} .${colorName}{color:${shades[colorName]}}`
   }
 
+  // colorPalette colors
+  for (const color of colorPalette) {
+    styles +=
+      `${cssScope} .${color.label}--bg{background-color:${color.color}}` +
+      `${cssScope} .${color.label}{color:${color.color}}`
+
+    for (const shade of color.shades) {
+      styles +=
+        `${cssScope} .${shade.label}--bg{background-color:${shade.color}}` +
+        `${cssScope} .${shade.label}{color:${shade.color}}`
+    }
+  }
+
   // Creating CSS3 variables.
   // ------------------------------------------------------
   // Create a CSS variable for each color for theming and reuse in components.
   // Status colors must remain after the other colors so they have priority in form validations.
   // That only makes sense when there are 2 colors on the same element: e.g. `span.primary.error`.
   const allColors = { ...colors, info, warning, success, error }
-  for (const colorName in allColors) cssVariables[colorName] = allColors[colorName]
+  for (const colorName in allColors) cssVariables[colorName] = allColors[colorName]?.color ?? allColors[colorName]
   if (generateShadeCssVariables) {
     for (const colorName in shades) cssVariables[colorName] = shades[colorName]
+    for (const color of colorPalette) {
+      for (const shade of color.shades) cssVariables[shade.label] = shade.color
+    }
   }
   let cssVariablesString = ''
   Object.entries(cssVariables).forEach(([colorName, colorHex]) => {
@@ -272,12 +288,12 @@ export const injectCSSInDOM = $waveui => {
   window.addEventListener('resize', () => getBreakpoint($waveui))
 }
 
-export const injectColorsCSSInDOM = (themeColors, generateShadeCssVariables) => {
+export const injectColorsCSSInDOM = (themeColors, colorPalette, generateShadeCssVariables) => {
   // Inject global dynamic CSS classes in document head.
   if (!document.getElementById('wave-ui-colors')) {
     const css = document.createElement('style')
     css.id = 'wave-ui-colors'
-    css.innerHTML = generateColors(themeColors, generateShadeCssVariables)
+    css.innerHTML = generateColors(themeColors, colorPalette, generateShadeCssVariables)
 
     const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
     if (firstStyle) firstStyle.before(css)

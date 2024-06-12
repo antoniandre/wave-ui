@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { WaveColor } from './colors'
+import { ColorShadeInfo, WaveColor } from './colors'
 import { WaveAlertProps } from './components/WAlert'
 
 export type WaveNotificationType = 'info' | 'success' | 'warning' | 'error';
@@ -106,41 +106,41 @@ export interface $waveui {
        */
       light: {
         /**
-         * @property {string} primary - Default: '#234781'
+         * @property {string | ColorShadeInfo} primary - Default: '#234781'
          */
-        primary: string,
+        primary: string | ColorShadeInfo,
 
         /**
-         * @property {string} secondary - Default: '#d3ebff'
+         * @property {string | ColorShadeInfo} secondary - Default: '#d3ebff'
          */
-        secondary: string,
+        secondary: string | ColorShadeInfo,
 
         /**
-         * @property {string} info - Default: '#3d9ff5'
+         * @property {string | ColorShadeInfo} info - Default: '#3d9ff5'
          */
-        info: string,
+        info: string | ColorShadeInfo,
 
         /**
-         * @property {string} warning - Default: '#ff8800'
+         * @property {string | ColorShadeInfo} warning - Default: '#ff8800'
          */
-        warning: string,
+        warning: string | ColorShadeInfo,
 
         /**
-         * @property {string} success - Default: '#54b946'
+         * @property {string | ColorShadeInfo} success - Default: '#54b946'
          */
-        success: string,
+        success: string | ColorShadeInfo,
 
         /**
-         * @property {string} error - Default: '#f65555'
+         * @property {string | ColorShadeInfo} error - Default: '#f65555'
          */
-        error: string,
+        error: string | ColorShadeInfo,
 
         /**
          * Here any additional colors can be defined by the user.
-         * @property {string} {string}
+         * @property {string} {string | ColorShadeInfo}
          * @see https://antoniandre.github.io/wave-ui/colors#defining-your-own-css-colors-in-the-wave-ui-configuration
          */
-        [key: string]: string
+        [key: string]: string | ColorShadeInfo
       },
 
       /**
@@ -149,42 +149,50 @@ export interface $waveui {
        */
       dark: {
         /**
-         * @property {string} primary - Default: '#89b6d2'
+         * @property {string | ColorShadeInfo} primary - Default: '#89b6d2'
          */
-        primary: string,
+        primary: string | ColorShadeInfo,
 
         /**
-         * @property {string} secondary - Default: '#375b6a'
+         * @property {string | ColorShadeInfo} secondary - Default: '#375b6a'
          */
-        secondary: string,
+        secondary: string | ColorShadeInfo,
 
         /**
-         * @property {string} info - Default: '#3d9ff5'
+         * @property {string | ColorShadeInfo} info - Default: '#3d9ff5'
          */
-        info: string,
+        info: string | ColorShadeInfo,
 
         /**
-         * @property {string} warning - Default: '#ff8800'
+         * @property {string | ColorShadeInfo} warning - Default: '#ff8800'
          */
-        warning: string,
+        warning: string | ColorShadeInfo,
 
         /**
-         * @property {string} success - Default: '#54b946'
+         * @property {string | ColorShadeInfo} success - Default: '#54b946'
          */
-        success: string,
+        success: string | ColorShadeInfo,
 
         /**
-         * @property {string} error - Default: '#f65555'
+         * @property {string | ColorShadeInfo} error - Default: '#f65555'
          */
-        error: string,
+        error: string | ColorShadeInfo,
 
         /**
          * Here any additional colors can be defined by the user.
-         * @property {string} {string}
+         * @property {string} {string | ColorShadeInfo}
          * @see https://antoniandre.github.io/wave-ui/colors#defining-your-own-css-colors-in-the-wave-ui-configuration
          */
-        [key: string]: string
+        [key: string]: string | ColorShadeInfo
       },
+
+      /**
+       * The color palette. Default: see the wave standard color palette
+       *
+       * @property {Record<string, string | ColorShadeInfo>} standard
+       * @see https://antoniandre.github.io/wave-ui/colors
+       */
+      palette: Record<string, string | ColorShadeInfo>,
     },
 
     /**
