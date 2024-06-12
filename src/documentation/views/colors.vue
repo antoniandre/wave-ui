@@ -174,7 +174,7 @@ main
 
   alert(warning).
     The primary color is considered dark by default, and will render,
-    as well as its 3 darker shades, with a white text when used as a background color.
+    as well as its 6 darker shades, with a white text when used as a background color.
 
   title-link(h3) Defining your own CSS colors in the Wave UI configuration
   w-flex
