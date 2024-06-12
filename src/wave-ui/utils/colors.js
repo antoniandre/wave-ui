@@ -1,12 +1,3 @@
-const shadeColor = (color, amount) => {
-  return '#' + color.slice(1).match(/../g)
-    .map(x => {
-      x = +`0x${x}` + amount
-      return (x < 0 ? 0 : (x > 255 ? 255 : x)).toString(16).padStart(2, 0)
-    })
-    .join('')
-}
-
 /**
  * Generates the color shades for each custom color and status colors for the current theme (only),
  * and save it in the config object.
