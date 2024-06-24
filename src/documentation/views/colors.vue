@@ -216,44 +216,6 @@ main
           'mint-green': '#bff8db'
         }
 
-  title-link(h3) Adjusting Palette Colors
-  w-flex
-    div
-      .title4 Simple style with just a hex color
-      ssh-pre(language="js" :dark="$store.state.darkMode").
-        colors: {
-          palette: {
-            // Defaults increments/offsets used:
-            // lightIncrement: 15
-            // lightOffset: 0
-            // darkIncrement: 12.4
-            // darkOffset: 0
-            green: '#9ac332',
-          }
-        }
-
-    w-divider.ma4(vertical) Or
-    div
-      .title4 If you want more fine grained control.
-      ssh-pre(language="js" :dark="$store.state.darkMode").
-        colors: {
-          palette: {
-            green: {
-              color: '#9ac332',
-              lightIncrement: 11,
-              lightOffset: 0,
-              darkIncrement: 8,
-              darkOffset: 0,
-            },
-            // You can override just the fields you want
-            // and the defaults will be used for the rest
-            'deep-purple':
-              color: '#673ab7',
-              lightIncrement: 20,
-            },
-          }
-        }
-
   alert(success).
     You can access all the colors with their hex code in your JavaScript via the
     #[code $waveui.colors] object.#[br]
