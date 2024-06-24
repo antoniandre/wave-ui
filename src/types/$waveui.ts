@@ -184,15 +184,7 @@ export interface $waveui {
          * @see https://antoniandre.github.io/wave-ui/colors#defining-your-own-css-colors-in-the-wave-ui-configuration
          */
         [key: string]: string | ColorShadeInfo
-      },
-
-      /**
-       * The color palette. Default: see the wave standard color palette
-       *
-       * @property {Record<string, string | ColorShadeInfo>} standard
-       * @see https://antoniandre.github.io/wave-ui/colors
-       */
-      palette: Record<string, string | ColorShadeInfo>,
+      }
     },
 
     /**

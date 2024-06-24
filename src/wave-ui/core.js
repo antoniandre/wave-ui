@@ -1,7 +1,7 @@
 import { reactive, inject } from 'vue'
 import { mergeConfig } from './utils/config'
 import { consoleWarn } from './utils/console'
-import { generateColorShades, generateColorPalette, flattenColors, specialPaletteColors } from './utils/colors'
+import { colorPalette, generateColorShades, flattenColors } from './utils/colors'
 import { injectColorsCSSInDOM, injectCSSInDOM } from './utils/dynamic-css'
 import { injectNotifManagerInDOM, NotificationManager } from './utils/notification-manager'
 import './scss/index.scss'
@@ -85,9 +85,8 @@ export default class WaveUI {
       document.documentElement.setAttribute('data-theme', theme)
       document.head.querySelector('#wave-ui-colors')?.remove?.()
       const themeColors = this.config.colors[this.theme]
-      const colorPalette = generateColorPalette(this.config.colors.palette)
-      injectColorsCSSInDOM(themeColors, colorPalette, this.config.css.colorShadeCssVariables)
-      this.colors = flattenColors(themeColors, [colorPalette, ...specialPaletteColors])
+      injectColorsCSSInDOM(themeColors, this.config.css.colorShadeCssVariables)
+      this.colors = flattenColors(themeColors, colorPalette)
     }
   }
 
@@ -173,8 +172,7 @@ export default class WaveUI {
     app.provide('$waveui', $waveui)
 
     if (config.theme !== 'auto') {
-      const colorPalette = generateColorPalette(this.config.colors.palette)
-      this.$waveui.colors = flattenColors(config.colors[config.theme], [colorPalette, ...specialPaletteColors])
+      this.$waveui.colors = flattenColors(config.colors[config.theme], colorPalette)
     }
   }
 }

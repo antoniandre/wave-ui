@@ -13,7 +13,7 @@ let currentBreakpoint = null
 // :root {[color1-variable], [color2-variable]}
 // .color1--bg {background-color: [color1-variable]}
 // .color1 {color: [color1-variable]}
-const generateColors = (themeColors, colorPalette, generateShadeCssVariables) => {
+const generateColors = (themeColors, generateShadeCssVariables) => {
   let styles = ''
   const cssVariables = {}
 
@@ -35,19 +35,6 @@ const generateColors = (themeColors, colorPalette, generateShadeCssVariables) =>
       `${cssScope} .${colorName}{color:${shades[colorName]}}`
   }
 
-  // colorPalette colors
-  for (const color of colorPalette) {
-    styles +=
-      `${cssScope} .${color.label}--bg{background-color:${color.color}}` +
-      `${cssScope} .${color.label}{color:${color.color}}`
-
-    for (const shade of color.shades) {
-      styles +=
-        `${cssScope} .${shade.label}--bg{background-color:${shade.color}}` +
-        `${cssScope} .${shade.label}{color:${shade.color}}`
-    }
-  }
-
   // Creating CSS3 variables.
   // ------------------------------------------------------
   // Create a CSS variable for each color for theming and reuse in components.
@@ -57,9 +44,6 @@ const generateColors = (themeColors, colorPalette, generateShadeCssVariables) =>
   for (const colorName in allColors) cssVariables[colorName] = allColors[colorName]?.color ?? allColors[colorName]
   if (generateShadeCssVariables) {
     for (const colorName in shades) cssVariables[colorName] = shades[colorName]
-    for (const color of colorPalette) {
-      for (const shade of color.shades) cssVariables[shade.label] = shade.color
-    }
   }
   let cssVariablesString = ''
   Object.entries(cssVariables).forEach(([colorName, colorHex]) => {

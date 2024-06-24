@@ -120,7 +120,7 @@ main
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
     .w-flex.wrap.ma-2.basis-zero
       .color-palette.ma2(
-        v-for="({ color, label, shades }, j) in colorPalette"
+        v-for="({label, color, shades}, j) in colorPalette"
         :key="j")
         template(v-for="(shade, i) in shades" :key="i")
           //- top color.
@@ -305,11 +305,11 @@ main
 </template>
 
 <script>
-import { generateColorPalette } from '@/wave-ui/utils/colors'
+import { colorPalette } from '../../wave-ui/utils/colors.js'
 
 export default {
   data: () => ({
-    colorPalette: [],
+    colorPalette: colorPalette.filter(color => !['black', 'white', 'inherit', 'transparent'].includes(color.label)),
     horizontal: false,
     tableHeaders: [
       { label: 'CSS class', key: 'cssClass' },
@@ -325,10 +325,7 @@ export default {
       { cssClass: '.contrast-color--bg', css3Var: '--w-contrast-bg-color-rgb', lightDefault: '#000', darkDefault: '#fff', desc: 'A high contrast background color from the current background of the app.' },
       { cssClass: '.disabled-color', css3Var: '--w-disabled-color-rgb', lightDefault: '#ccc', darkDefault: '#4a4a4a', desc: 'When a form element is disabled.' }
     ]
-  }),
-  beforeMount() {
-    this.colorPalette = generateColorPalette(this.$waveui.config.colors.palette)
-  }
+  })
 }
 </script>
 
