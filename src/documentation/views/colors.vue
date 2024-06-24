@@ -267,7 +267,7 @@ main
 </template>
 
 <script>
-import { colorPalette } from '../../wave-ui/utils/colors.js'
+import { colorPalette } from '@/wave-ui/utils/colors.js'
 
 export default {
   data: () => ({

@@ -20,7 +20,6 @@ app
   .use(store)
   .use(WaveUI, {
     on: '#app',
-    css: { colorShadeCssVariables: true },
     colors: {
       light: {
         primary: {
