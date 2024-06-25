@@ -58,15 +58,16 @@ div
       app.use(WaveUI)
       app.mount('#app')
 
-  title-link(h2) Placeholder
+  title-link(h2) Groups / Multiselect
   example(content-class="py12" :blank-codepen="['js']")
-    w-autocomplete.mb12(:items="chemicalElement" placeholder="select an element")
+    w-autocomplete.mb12(:groups="animalGroups" :items="animals" multiple placeholder="select an animal")
     template(#pug).
-      w-autocomplete.mb12(:items="chemicalElement" placeholder="select an element")
+      w-autocomplete.mb12(:groups="animalGroups" :items="animals" multiple placeholder="select an animal")
     template(#html).
       &lt;w-autocomplete
-        :items="chemicalElement"
-        placeholder="select an element"
+        :groups="animalGroups"
+        :items="animals"
+        placeholder="select an animal"
         class="mb12"&gt;
       &lt;/w-autocomplete&gt;
     template(#js).
@@ -74,13 +75,19 @@ div
 
       const app = Vue.createApp({
         data: () => ({
-          chemicalElement: faker.definitions.science.chemicalElement.map(element => {
+          animals: [ 'dog', 'cat', 'bear' ].map(animal => faker.definitions.animal[animal].map(name => {
             return {
-              value: element.symbol,
-              label: element.name,
-              searchable: `${element.symbol}, ${element.name}, ${element.atomicNumber}`
+              value: name,
+              label: name,
+              searchable: name,
+              group: animal,
             }
-          })
+          })).flat(),
+          animalGroups: [
+            { group: 'dog', label: 'Dog' },
+            { group: 'cat', label: 'Cat' },
+            { group: 'bear', label: 'Bear' },
+          ]
         })
       })
 
@@ -97,9 +104,23 @@ export default {
       return {
         value: element.symbol,
         label: element.name,
-        searchable: `${element.symbol}, ${element.name}, ${element.atomicNumber}`
+        searchable: `${element.symbol}, ${element.name}, ${element.atomicNumber}`,
+        group: `row-${element.atomicNumber}`
       }
-    })
+    }),
+    animals: [ 'dog', 'cat', 'bear' ].map(animal => faker.definitions.animal[animal].map(name => {
+      return {
+        value: name,
+        label: name,
+        searchable: name,
+        group: animal,
+      }
+    })).flat(),
+    animalGroups: [
+      { group: 'dog', label: 'Dog' },
+      { group: 'cat', label: 'Cat' },
+      { group: 'bear', label: 'Bear' },
+    ]
   })
 }
 </script>
