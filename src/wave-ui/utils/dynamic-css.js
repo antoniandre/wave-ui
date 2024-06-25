@@ -41,7 +41,7 @@ const generateColors = (themeColors, generateShadeCssVariables) => {
   // Status colors must remain after the other colors so they have priority in form validations.
   // That only makes sense when there are 2 colors on the same element: e.g. `span.primary.error`.
   const allColors = { ...colors, info, warning, success, error }
-  for (const colorName in allColors) cssVariables[colorName] = allColors[colorName]
+  for (const colorName in allColors) cssVariables[colorName] = allColors[colorName]?.color ?? allColors[colorName]
   if (generateShadeCssVariables) {
     for (const colorName in shades) cssVariables[colorName] = shades[colorName]
   }
@@ -272,12 +272,12 @@ export const injectCSSInDOM = $waveui => {
   window.addEventListener('resize', () => getBreakpoint($waveui))
 }
 
-export const injectColorsCSSInDOM = (themeColors, generateShadeCssVariables) => {
+export const injectColorsCSSInDOM = (themeColors, colorPalette, generateShadeCssVariables) => {
   // Inject global dynamic CSS classes in document head.
   if (!document.getElementById('wave-ui-colors')) {
     const css = document.createElement('style')
     css.id = 'wave-ui-colors'
-    css.innerHTML = generateColors(themeColors, generateShadeCssVariables)
+    css.innerHTML = generateColors(themeColors, colorPalette, generateShadeCssVariables)
 
     const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
     if (firstStyle) firstStyle.before(css)

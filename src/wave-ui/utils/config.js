@@ -31,7 +31,12 @@ const config = reactive({
   colors: {
     // Default colors of Wave UI. Can be overridden from the Wave UI user config on init.
     light: {
-      primary: '#234781',
+      primary: {
+        color: '#234781',
+        lightOffset: -8,
+        lightIncrement: 13.4,
+        darkIncrement: 1
+      },
       secondary: '#d3ebff',
       info: '#3d9ff5',
       warning: '#f80',

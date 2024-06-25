@@ -22,9 +22,16 @@ app
     on: '#app',
     colors: {
       light: {
-        primary: '#234781',
+        primary: {
+          color: '#234781',
+          lightOffset: -8,
+          lightIncrement: 13.4,
+          darkOffset: 0,
+          darkIncrement: 10
+        },
         secondary: '#d3ebff'
       },
+
       dark: {
         primary: '#7fb0cf',
         secondary: '#d3ebff'
