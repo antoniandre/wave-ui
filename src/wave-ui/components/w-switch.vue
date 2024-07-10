@@ -231,7 +231,6 @@ $outline-width: 2px;
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
     width: $small-form-el-size;
     height: $small-form-el-size;
     background-color: $switch-thumb-color;
