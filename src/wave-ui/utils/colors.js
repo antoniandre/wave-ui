@@ -1,3 +1,5 @@
+import { consoleError } from './console'
+
 /**
  * Generates the color shades for each custom color and status colors for the current theme (only),
  * and save it in the config object.
@@ -71,7 +73,7 @@ export function toHexString (value) {
   return (
     (trimmedValue.length === 1 && `0${trimmedValue}`) ||
     (trimmedValue.length === 2 && trimmedValue) ||
-    console.error(`expected value from 0~255, got: ${value}`) ||
+    consoleError(`expected value from 0~255, got: ${value}`) ||
     ''
   )
 }
@@ -79,28 +81,36 @@ export function toHexString (value) {
 /**
  * Determines if a string is a valid hex color
  *
+ * Valid long hex colors formats:
+ *  - #ffffff,
+ *  - #00000033
+ *
  * @param {string} str - The string to test
  * @returns {boolean} - Whether the string is a valid hex color
  */
 export function isValidHex (str) {
-  return /^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$/.test(str)
+  return /^#[0-9a-f]{6}([0-9a-f]{2})?$/i.test(str)
 }
 
 /**
  * Determines if a string is a short hex color
  *
+ * Valid short hex colors formats:
+ *  - #fff,
+ *  - #0003
+ *
  * @param {string} str - The string to test
  * @returns {boolean} - Whether the string is a short hex color
  */
 export function isShortHex (str) {
-  return /^#[0-9A-Fa-f]{3}([0-9A-Fa-f])?$/.test(str)
+  return /^#[0-9a-f]{3}([0-9a-f])?$/i.test(str)
 }
 
 /**
  * Expands a short hex color to a full hex color
  *
- * @param {string} str - The short hex color to expand
- * @returns {string} - The expanded hex color
+ * @param {string} str - The short hex color to expand such as '#fff' or '#0003' with an alpha value
+ * @returns {string} - The expanded hex color such as '#ffffff' or '#00000033' with an alpha value
  */
 export function expandShortHex (str) {
   return `#${str.substring(1).split('').map(char => `${char}${char}`).join('')}`
@@ -109,12 +119,13 @@ export function expandShortHex (str) {
 /**
  * Parse a color string into a full length hex string
  *
- * @param {string} str - The color string to parse
+ * @param {string} str - The color string to parse, either a full hex color or short hex color e.g. '#fff' or '#001122'.
+ *                       This can also include an alpha value e.g. '#00112233' or '#0003'.
  * @throws {Error} - If the string is not a valid color
- * @returns {string} - The parsed hex color
+ * @returns {string} - The full parsed hex color for example, with alpha: '#00112233'
  */
 function getColorFullHex (str) {
-  return (isValidHex(str) && str) || (isShortHex(str) && expandShortHex(str)) || console.error(`expected color hex string, got '${str}'`) || ''
+  return (isValidHex(str) && str) || (isShortHex(str) && expandShortHex(str)) || consoleError(`expected color hex string, got '${str}'`) || ''
 }
 
 /**
@@ -130,6 +141,7 @@ function getColorComponents (color) {
   const green = parseInt(hex.substring(3, 5), 16)
   const blue = parseInt(hex.substring(5, 7), 16)
 
+  // Compare against length 9 because the full hex string will have the `#` at the beginning of it
   const alpha = hex.length === 9
     ? parseInt(hex.substring(7, 9), 16) / 255
     : 1.0
@@ -150,7 +162,7 @@ function getColorComponents (color) {
  * @param {number} g - green
  * @param {number} b - blue
  * @param {number} [a] - alpha
- * @returns {string} - The hex color string
+ * @returns {string} - The hex color string for example: '#001122' or with alpha: '#00112233'
  */
 export function hexFromRGB (r, g, b, a) {
   return `#${toHexString(r)}${toHexString(g)}${toHexString(b)}${a ? toHexString(Math.floor(a * 255)) : ''}`
@@ -159,10 +171,16 @@ export function hexFromRGB (r, g, b, a) {
 /**
  * Mix two colors together. The same way that SCSS does it
  *
+ * Valid hex colors formats:
+ * - #fff
+ * - #0003
+ * - #ffffff
+ * - #00000033
+ *
  * @param {string} color1 - Color 1 as a hex
  * @param {string} color2 - Color 2 as a hex
  * @param {number} [weight] - The percentage to mix them at. Default: 50
- * @returns {string} - The new mixed color as a hex
+ * @returns {string} - The new mixed color as a hex for example: '#001122' or with alpha: '#00112233'
  *
  * @see https://gist.github.com/ktnyt/2573047b5b4c7c775f2be22326ebf6a8 for the original Typescript implementation
  */
@@ -197,9 +215,17 @@ export function mixColors (color1, color2, weight = 50) {
 /**
  * Lighten a color by a percentage
  *
+ * Valid hex colors formats:
+ * - #fff
+ * - #0003
+ * - #ffffff
+ * - #00000033
+ *
  * @param {string} color - The hex color to lighten
- * @param {number} [weight] - The amount to lighten by
- * @returns {string} - The new lightened color
+ * @param {number} [weight] - The amount to lighten by.
+ *                            Default: `15` to match the SCSS `light-increment` value of `7.5`
+ *                            the way the math is handled here we double the weight to match the SCSS result
+ * @returns {string} - The new lightened color as a full hex string, potentially with alpha
  */
 export function lighten (color, weight = 15) {
   return mixColors('#ffffff', color, weight)
@@ -208,9 +234,17 @@ export function lighten (color, weight = 15) {
 /**
  * Darken a color by a percentage
  *
+ * Valid hex colors formats:
+ * - #fff
+ * - #0003
+ * - #ffffff
+ * - #00000033
+ *
  * @param {string} color - The hex color to darken
- * @param {number} [weight] - The amount to darken by
- * @returns {string} - The new darkened color
+ * @param {number} [weight] - The amount to darken by.
+ *                            Default: `12.4` to match the SCSS `dark-increment` value of `6.2`
+ *                            the way the math is handled here we double the weight to match the SCSS result
+ * @returns {string} - The new darkened color as a full hex string, potentially with alpha
  */
 export function darken (color, weight = 12.4) {
   return mixColors('#000000', color, weight)
