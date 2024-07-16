@@ -120,7 +120,7 @@ main
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
     .w-flex.wrap.ma-2.basis-zero
       .color-palette.ma2(
-        v-for="({label, color, shades}, j) in colorPalette"
+        v-for="({ label, color, shades }, j) in colorPalette"
         :key="j")
         template(v-for="(shade, i) in shades" :key="i")
           //- top color.
