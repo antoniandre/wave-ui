@@ -75,20 +75,22 @@ export default {
       return this.hasRouter ? this.$router.resolve(this.route).href : this.route
     },
     attrs () {
+      const isValidRouterLink = this.route && this.hasRouter && !this.forceLink && !this.externalLink
       // If the button is a router-link, we can't apply events on it since vue-router needs the .native
       // modifier but it's not available with the v-on directive.
       // So do a manual router.push if $router is present.
-      const attrsForRouterLink = {
-        ...this.$attrs,
-        onClick: e => {
-          if (this.$attrs.onClick) this.$attrs.onClick(e)
+      const onRouterLinkClick = e => {
+        if (this.$attrs.onClick) this.$attrs.onClick(e)
 
-          this.$router.push(this.route)
-          e.stopPropagation() // If going to a route, no need to bubble up the event.
-          e.preventDefault()
-        }
+        this.$router.push(this.route)
+        e.stopPropagation() // If going to a route, no need to bubble up the event.
+        e.preventDefault()
       }
-      return this.route && this.hasRouter && !this.forceLink && !this.externalLink ? attrsForRouterLink : this.$attrs
+
+      return {
+        ...this.$attrs,
+        onClick: !this.disabled && (isValidRouterLink ? onRouterLinkClick : this.$attrs.onClick)
+      }
     },
     size () {
       return (
