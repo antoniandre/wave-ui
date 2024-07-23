@@ -1,8 +1,8 @@
 <template lang="pug">
 component.w-button(
-  :is="route ? 'a' : 'button'"
+  :is="!disabled && route ? 'a' : 'button'"
   :type="!route && type"
-  :href="(route && (externalLink ? route : resolvedRoute)) || null"
+  :href="(!disabled && route && (externalLink ? route : resolvedRoute)) || null"
   :class="classes"
   :disabled="!!disabled || null"
   v-bind="attrs"
