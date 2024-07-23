@@ -41,6 +41,14 @@ main
             li Prevent clicking button links when disabled.
 
     li.patch
+      strong.version v3.13.6
+      ul
+        li
+          strong.code w-switch
+          ul
+            li Update the switch thumb alignment. #[issue-link 158]
+
+    li.patch
       strong.version v3.13.5
       ul
         li
