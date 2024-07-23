@@ -38,7 +38,7 @@ main
         li
           strong.code w-button
           ul
-            li Prevent clicking button links when disabled.
+            li Completely disable button click actions and link navigation when the button is disabled.
 
     li.patch
       strong.version v3.13.6
