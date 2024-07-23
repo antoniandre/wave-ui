@@ -33,6 +33,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v3.13.7
+      ul
+        li
+          strong.code w-button
+          ul
+            li Prevent clicking button links when disabled.
+
+    li.patch
       strong.version v3.13.5
       ul
         li
