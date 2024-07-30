@@ -33,6 +33,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v3.14.1
+      ul
+        li
+          strong.code w-switch
+          ul
+            li Center any content provided via slots in the thumb and track.
+
+    li.minor
       strong.version v3.14.0
       ul
         li
