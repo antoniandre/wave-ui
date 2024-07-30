@@ -220,6 +220,9 @@ $outline-width: 2px;
   &__track {
     position: absolute;
     left: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; // Center any content that could be put via slots.
     padding: 0 4px;
     transform: translateX(-100%);
     @include default-transition;
@@ -233,9 +236,11 @@ $outline-width: 2px;
     left: 0;
     width: $small-form-el-size;
     height: $small-form-el-size;
+    display: flex;
+    align-items: center;
+    justify-content: center; // Center any content that could be put via slots.
     background-color: $switch-thumb-color;
     border-radius: 100%;
-    text-align: center;
     @include default-transition;
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
@@ -255,10 +260,6 @@ $outline-width: 2px;
   &--loading .w-progress {padding: 1px;}
   &--loading.w-switch--thin.w-switch--on .w-progress {color: #fff;}
   &--loading &__input:after, &--custom-thumb &__input:after {display: none;}
-  &__thumb > * {
-    width: inherit;
-    height: inherit;
-  }
 
   // The focus outline & ripple on switch activation.
   &__input:before {
