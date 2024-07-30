@@ -33,7 +33,16 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
-      strong.version v3.13.7
+      strong.version v3.14.0
+      ul
+        li
+          strong Colors and Shades
+          ul
+            li.
+              Reworked how the shades are generated with a more relevant algorithm.
+              This change only impacts the shades generated for the status colors (success, info,
+              warning, error) and for the custom colors provided through your Wave UI config.#[br]
+              It does not impact the color palette. #[issue-link 157]
       ul
         li
           strong.code w-button
