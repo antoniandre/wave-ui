@@ -1,7 +1,7 @@
 {
   "name": "wave-ui",
   "version": "3.14.0",
-  "description": "An emerging UI framework for Vue.js (2 & 3) with only the bright side. :sunny:",
+  "description": "An emerging UI framework for Vue.js 3 (and 2) with only the bright side. :sunny:",
   "author": "Antoni Andre <antoniandre.web@gmail.com>",
   "homepage": "https://antoniandre.github.io/wave-ui",
   "repository": "https://github.com/antoniandre/wave-ui",
