@@ -1,4 +1,14 @@
+export interface ColorShadeInfo {
+  color: string,
+  lightOffset?: number,
+  lightIncrement?: number,
+  darkOffset?: number,
+  darkIncrement?: number
+}
+
 export type WaveStatusColors = 'primary' | 'success' | 'error' | 'warning' | 'info'
+
+export type PaletteColors = 'pink' | 'purple' | 'deep-purple' | 'indigo' | 'blue' | 'light-blue' | 'cyan' | 'teal' | 'green' | 'light-green' | 'lime' | 'yellow' | 'amber' | 'orange' | 'deep-orange' | 'red' | 'brown' | 'blue-grey' | 'grey';
 
 export type WaveColorShades =
   'black' |

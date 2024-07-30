@@ -68,7 +68,7 @@ export const mergeConfig = (options, conf = config) => {
   else {
     for (const key in options) {
       const option = options[key]
-      if (typeof option === 'object') {
+      if (typeof option === 'object' && typeof conf[key] === 'object') {
         mergeConfig(options[key], conf[key])
       }
       else conf[key] = option

@@ -1,11 +1,4 @@
-const shadeColor = (color, amount) => {
-  return '#' + color.slice(1).match(/../g)
-    .map(x => {
-      x = +`0x${x}` + amount
-      return (x < 0 ? 0 : (x > 255 ? 255 : x)).toString(16).padStart(2, 0)
-    })
-    .join('')
-}
+import { consoleError } from './console'
 
 /**
  * Generates the color shades for each custom color and status colors for the current theme (only),
@@ -19,15 +12,18 @@ export const generateColorShades = config => {
     const themeOfColors = config.colors[theme]
     themeOfColors.shades = {}
 
-    for (let color in themeOfColors) {
-      if (color === 'shades') continue // Skip if item is the `shades` container.
-      color = { label: color, color: themeOfColors[color].replace('#', '') }
+    for (const label in themeOfColors) {
+      if (label === 'shades') continue // Skip if item is the `shades` container.
+
+      // Account for string colors and the fine tuned shaded colors
+      const colorInfo = themeOfColors[label]
+      const color = { label, color: (themeOfColors[label]?.color ?? themeOfColors[label]).replace('#', '') }
       const col = color.color
       if (col.length === 3) color.color = col[0] + '' + col[0] + col[1] + col[1] + col[2] + col[2]
 
-      for (let i = 1; i <= 3; i++) {
-        const lighterColor = shadeColor(`#${color.color}`, i * 40)
-        const darkerColor = shadeColor(`#${color.color}`, -i * 40)
+      for (let i = 1; i <= 6; i++) {
+        const lighterColor = lighten(`#${color.color}`, i * (colorInfo?.lightIncrement ?? 16) + (colorInfo?.lightOffset ?? 0))
+        const darkerColor = darken(`#${color.color}`, i * (colorInfo?.darkIncrement ?? 12.4) + (colorInfo?.darkOffset ?? 0))
         // Adding the shades to the config object to generate the CSS from w-app.
         themeOfColors.shades[`${color.label}-light${i}`] = lighterColor
         themeOfColors.shades[`${color.label}-dark${i}`] = darkerColor
@@ -50,6 +46,230 @@ export const flattenColors = (themeColors, colorPalette) => {
   delete colors.shades
 
   return colors
+}
+
+/**
+ * Clamp a value between a minimum and maximum value.
+ *
+ * @param {number} value - Value to clamp
+ * @param {number} min - Minimum possible value
+ * @param {number} max - Maximum possible value
+ * @returns {number} The clamped value
+ */
+export function clamp (value, min, max) {
+  return Math.min(Math.max(value, min), max)
+}
+
+/**
+ * Convert a number to a hexadecimal string.
+ *
+ * @param {number} value - The number to convert
+ * @throws {Error} - If the value is not in the range 0~255
+ * @returns {string} The hexadecimal string
+ */
+export function toHexString (value) {
+  const trimmedValue = value.toString(16)
+
+  return (
+    (trimmedValue.length === 1 && `0${trimmedValue}`) ||
+    (trimmedValue.length === 2 && trimmedValue) ||
+    consoleError(`expected value from 0~255, got: ${value}`) ||
+    ''
+  )
+}
+
+/**
+ * Determines if a string is a valid hex color
+ *
+ * Valid long hex colors formats:
+ *  - #ffffff,
+ *  - #00000033
+ *
+ * @param {string} str - The string to test
+ * @returns {boolean} - Whether the string is a valid hex color
+ */
+export function isValidHex (str) {
+  return /^#[0-9a-f]{6}([0-9a-f]{2})?$/i.test(str)
+}
+
+/**
+ * Determines if a string is a short hex color
+ *
+ * Valid short hex colors formats:
+ *  - #fff,
+ *  - #0003
+ *
+ * @param {string} str - The string to test
+ * @returns {boolean} - Whether the string is a short hex color
+ */
+export function isShortHex (str) {
+  return /^#[0-9a-f]{3}([0-9a-f])?$/i.test(str)
+}
+
+/**
+ * Expands a short hex color to a full hex color
+ *
+ * @param {string} str - The short hex color to expand such as '#fff' or '#0003' with an alpha value
+ * @returns {string} - The expanded hex color such as '#ffffff' or '#00000033' with an alpha value
+ */
+export function expandShortHex (str) {
+  return `#${str.substring(1).split('').map(char => `${char}${char}`).join('')}`
+}
+
+/**
+ * Parse a color string into a full length hex string
+ *
+ * @param {string} str - The color string to parse, either a full hex color or short hex color e.g. '#fff' or '#001122'.
+ *                       This can also include an alpha value e.g. '#00112233' or '#0003'.
+ * @throws {Error} - If the string is not a valid color
+ * @returns {string} - The full parsed hex color for example, with alpha: '#00112233'
+ */
+function getColorFullHex (str) {
+  return (isValidHex(str) && str) || (isShortHex(str) && expandShortHex(str)) || consoleError(`expected color hex string, got '${str}'`) || ''
+}
+
+/**
+ * Break a hex color string into it's components
+ *
+ * @param {string} color - The color string to parse
+ * @returns {{ red, green, blue, alpha, hasAlpha: boolean }} - The color components
+ */
+function getColorComponents (color) {
+  const hex = getColorFullHex(color)
+
+  const red = parseInt(hex.substring(1, 3), 16)
+  const green = parseInt(hex.substring(3, 5), 16)
+  const blue = parseInt(hex.substring(5, 7), 16)
+
+  // Compare against length 9 because the full hex string will have the `#` at the beginning of it
+  const alpha = hex.length === 9
+    ? parseInt(hex.substring(7, 9), 16) / 255
+    : 1.0
+
+  return {
+    red,
+    green,
+    blue,
+    alpha,
+    hasAlpha: hex.length === 9
+  }
+}
+
+/**
+ * Convert RGB components to a hex color string
+ *
+ * @param {number} r - red
+ * @param {number} g - green
+ * @param {number} b - blue
+ * @param {number} [a] - alpha
+ * @returns {string} - The hex color string for example: '#001122' or with alpha: '#00112233'
+ */
+export function hexFromRGB (r, g, b, a) {
+  return `#${toHexString(r)}${toHexString(g)}${toHexString(b)}${a ? toHexString(Math.floor(a * 255)) : ''}`
+}
+
+/**
+ * Mix two colors together. The same way that SCSS does it
+ *
+ * Valid hex colors formats:
+ * - #fff
+ * - #0003
+ * - #ffffff
+ * - #00000033
+ *
+ * @param {string} color1 - Color 1 as a hex
+ * @param {string} color2 - Color 2 as a hex
+ * @param {number} [weight] - The percentage to mix them at. Default: 50
+ * @returns {string} - The new mixed color as a hex for example: '#001122' or with alpha: '#00112233'
+ *
+ * @see https://gist.github.com/ktnyt/2573047b5b4c7c775f2be22326ebf6a8 for the original Typescript implementation
+ */
+export function mixColors (color1, color2, weight = 50) {
+  const c1 = getColorComponents(color1)
+  const c2 = getColorComponents(color2)
+
+  const percentage = clamp(weight, 0, 100) / 100
+  const alphaWeight = 2 * percentage - 1
+
+  const alphaDiff = c1.alpha - c2.alpha
+  const c1Weight = (
+    (
+      alphaWeight * alphaDiff === -1
+        ? alphaWeight
+        : (alphaWeight + alphaDiff) / (1 + alphaWeight * alphaDiff)
+    ) + 1
+  ) / 2
+  const c2Weight = 1 - c1Weight
+
+  const red = clamp(Math.round(c1.red * c1Weight + c2.red * c2Weight), 0, 255)
+  const green = clamp(Math.round(c1.green * c1Weight + c2.green * c2Weight), 0, 255)
+  const blue = clamp(Math.round(c1.blue * c1Weight + c2.blue * c2Weight), 0, 255)
+
+  const alpha = c1.alpha * percentage + c2.alpha * (1 - percentage)
+
+  return c1.hasAlpha || c2.hasAlpha || alpha !== 1
+    ? hexFromRGB(red, green, blue, alpha)
+    : hexFromRGB(red, green, blue)
+}
+
+/**
+ * Lighten a color by a percentage
+ *
+ * Valid hex colors formats:
+ * - #fff
+ * - #0003
+ * - #ffffff
+ * - #00000033
+ *
+ * @param {string} color - The hex color to lighten
+ * @param {number} [weight] - The amount to lighten by.
+ *                            Default: `15` to match the SCSS `light-increment` value of `7.5`
+ *                            the way the math is handled here we double the weight to match the SCSS result
+ * @returns {string} - The new lightened color as a full hex string, potentially with alpha
+ */
+export function lighten (color, weight = 15) {
+  return mixColors('#ffffff', color, weight)
+}
+
+/**
+ * Darken a color by a percentage
+ *
+ * Valid hex colors formats:
+ * - #fff
+ * - #0003
+ * - #ffffff
+ * - #00000033
+ *
+ * @param {string} color - The hex color to darken
+ * @param {number} [weight] - The amount to darken by.
+ *                            Default: `12.4` to match the SCSS `dark-increment` value of `6.2`
+ *                            the way the math is handled here we double the weight to match the SCSS result
+ * @returns {string} - The new darkened color as a full hex string, potentially with alpha
+ */
+export function darken (color, weight = 12.4) {
+  return mixColors('#000000', color, weight)
+}
+
+/**
+ * Generate a color palette from a color info object
+ *
+ * @param {Record<string,{color: string, lightOffset: number, lightIncrement: number, darkOffset: number, darkIncrement: number}>} colorInfo - Colors to generate the palette from
+ * @returns {Array<{label: string, color: string, shades: Array<{label: string, color: string}>}>} - The color palette
+ */
+export function generateColorPalette (colorInfo) {
+  return Object.keys(colorInfo).map(label => {
+    const color = colorInfo[label]?.color ?? colorInfo[label]
+    return {
+      label,
+      color,
+      shades: [6, 5, 4, 3, 2, 1, -1, -2, -3, -4, -5, -6].map(i => ({
+        label: `${label}-${i > 0 ? 'light' : 'dark'}${Math.abs(i)}`,
+        color: i > 0
+          ? lighten(color, (i * (colorInfo[label]?.lightIncrement ?? 15)) - (colorInfo[label]?.lightOffset ?? 0))
+          : darken(color, (-i * (colorInfo[label]?.darkIncrement ?? 12.4)) - (colorInfo[label]?.darkOffset ?? 0))
+      }))
+    }
+  })
 }
 
 export const colorPalette = [
@@ -323,7 +543,6 @@ export const colorPalette = [
       { label: 'deep-orange-dark6', color: '#661f00' }
     ]
   },
-
   {
     label: 'red',
     color: '#fa3317',
