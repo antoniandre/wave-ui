@@ -2,7 +2,7 @@
 @use "sass:map";
 
 @function divide($a, $b) {
-  @return math.div($a, $b); // Must use `sass` & not `node-sass`.
+  @return math.div($a, $b);
 }
 
 // THEME COLORS.
