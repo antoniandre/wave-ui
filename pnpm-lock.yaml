@@ -72,8 +72,8 @@ importers:
         specifier: ^1.77.6
         version: 1.77.6
       simple-syntax-highlighter:
-        specifier: ^3.0.2
-        version: 3.0.2(vue@3.4.30(typescript@5.5.2))
+        specifier: ^3.0.3
+        version: 3.0.3(vue@3.4.30(typescript@5.5.2))
       splitpanes:
         specifier: ^3.1.5
         version: 3.1.5
@@ -1884,8 +1884,8 @@ packages:
     resolution: {integrity: sha512-fDW/EZ6Q9RiO8eFG8Hj+7u/oW+XrPTIChwCOM2+th2A6OblDtYYIpve9m+KvI9Z4C9qSEXlaGR6bTEYHReuglA==}
     engines: {node: '>= 0.4'}
 
-  simple-syntax-highlighter@3.0.2:
-    resolution: {integrity: sha512-coy8q/HyFctX6URs4VkPdsDVrd8RJd+EVvxELt6PCq8NZFiDBuTWCKFyLibKguJtnMiVZwrndXuqyVpAB/qGMw==}
+  simple-syntax-highlighter@3.0.3:
+    resolution: {integrity: sha512-RCFAb0fayb/jfDeTGEwaH3ViJMo9Lf2vS75ahg6JMhG77LW7G/dLp37aumpagfLHo67aBywhz8jNlg6VClaasw==}
     peerDependencies:
       vue: ^2.6.14 || ^3.2.0
 
@@ -4164,7 +4164,7 @@ snapshots:
       get-intrinsic: 1.2.4
       object-inspect: 1.13.2
 
-  simple-syntax-highlighter@3.0.2(vue@3.4.30(typescript@5.5.2)):
+  simple-syntax-highlighter@3.0.3(vue@3.4.30(typescript@5.5.2)):
     dependencies:
       vue: 3.4.30(typescript@5.5.2)
 
