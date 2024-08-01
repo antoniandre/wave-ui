@@ -161,7 +161,7 @@ main
     | If you'd rather not have these CSS layout classes, you can disable them via the
     | #[code breakpointLayoutClasses] option in the global configuration.
     ssh-pre(language="js" :dark="$store.state.darkMode").mb0.
-      const waveui = new WaveUI({
+      app.use(WaveUI, {
         css: {
           breakpointLayoutClasses: false
         }
@@ -170,7 +170,7 @@ main
   title-link(h2) Setting custom breakpoints
   p.mt4 You can override the default breakpoints values with:
   ssh-pre(language="js" :dark="$store.state.darkMode").
-    const waveui = new WaveUI({
+    app.use(WaveUI, {
       breakpoints: {
         xs: 600,
         sm: 900,
