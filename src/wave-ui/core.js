@@ -139,6 +139,7 @@ export default class WaveUI {
       }
     })
 
+    // eslint-disable-next-line no-new
     new WaveUI(app, options)
     WaveUI.#registered = true
   }

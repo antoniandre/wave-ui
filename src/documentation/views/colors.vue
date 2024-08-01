@@ -157,29 +157,29 @@ main
     ones.#[br]
     #[small More shades would most likely be redundant with the color palette.]
 
-  w-flex.text-center(wrap)
-    .color.primary-light6--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light6
-    .color.primary-light5--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light5
-    .color.primary-light4--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light4
-    .color.primary-light3--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light3
-    .color.primary-light2--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light2
-    .color.primary-light1--bg.title3.grow.basis-zero.py3.body(:class="{ black: $store.state.darkMode }") primary-light1
-    .color.primary--bg.title3.grow.basis-zero.py3(:class="{ white: !$store.state.darkMode }") primary
-    .color.primary-dark1--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark1
-    .color.primary-dark2--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark2
-    .color.primary-dark3--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark3
-    .color.primary-dark4--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark4
-    .color.primary-dark5--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark5
-    .color.primary-dark6--bg.title3.grow.basis-zero.py3.body(:class="{ white: !$store.state.darkMode }") primary-dark6
+  .w-flex.text-center.smd-column
+    .color.primary-light6--bg.grow.basis-zero.py3.size--xs(:class="{ black: $store.state.darkMode }") primary-light6
+    .color.primary-light5--bg.grow.basis-zero.py3.size--xs(:class="{ black: $store.state.darkMode }") primary-light5
+    .color.primary-light4--bg.grow.basis-zero.py3.size--xs(:class="{ black: $store.state.darkMode }") primary-light4
+    .color.primary-light3--bg.grow.basis-zero.py3.size--xs(:class="{ black: $store.state.darkMode }") primary-light3
+    .color.primary-light2--bg.grow.basis-zero.py3.size--xs(:class="{ black: $store.state.darkMode }") primary-light2
+    .color.primary-light1--bg.grow.basis-zero.py3.size--xs(:class="{ black: $store.state.darkMode }") primary-light1
+    .color.primary--bg.title3.my0.grow.basis-zero.py3(:class="{ white: !$store.state.darkMode }") primary
+    .color.primary-dark1--bg.grow.basis-zero.py3.size--xs(:class="{ white: !$store.state.darkMode }") primary-dark1
+    .color.primary-dark2--bg.grow.basis-zero.py3.size--xs(:class="{ white: !$store.state.darkMode }") primary-dark2
+    .color.primary-dark3--bg.grow.basis-zero.py3.size--xs(:class="{ white: !$store.state.darkMode }") primary-dark3
+    .color.primary-dark4--bg.grow.basis-zero.py3.size--xs(:class="{ white: !$store.state.darkMode }") primary-dark4
+    .color.primary-dark5--bg.grow.basis-zero.py3.size--xs(:class="{ white: !$store.state.darkMode }") primary-dark5
+    .color.primary-dark6--bg.grow.basis-zero.py3.size--xs(:class="{ white: !$store.state.darkMode }") primary-dark6
 
   alert(warning).
     The primary color is considered dark by default, and will render,
     as well as its 6 darker shades, with a white text when used as a background color.
 
   title-link(h3) Defining your own CSS colors in the Wave UI configuration
-  w-flex
+  .w-flex.smd-column.gap4
     div
-      .title4 Theme-specific (light or dark) colors.
+      strong Theme-specific (light or dark) colors.
       ssh-pre(language="js" :dark="$store.state.darkMode").
         colors: {
           light: {
@@ -189,9 +189,9 @@ main
             'mint-green': '#bff8db'
           }
         }
-    w-divider.ma4(vertical) Or
+    w-divider(:vertical="!$waveui.breakpoint.sm && !$waveui.breakpoint.xs") Or
     div
-      .title4 If you don't care about themes.
+      strong If you don't care about themes.
       ssh-pre(language="js" :dark="$store.state.darkMode").
         colors: {
           primary: '#9ac332',
@@ -199,9 +199,9 @@ main
           // Custom color names should be kebab-case.
           'mint-green': '#bff8db'
         }
-    w-divider.ma4(vertical) Or
+    w-divider(:vertical="!$waveui.breakpoint.sm && !$waveui.breakpoint.xs") Or
     div
-      .title4 If you want more fine grained control.
+      strong If you want more fine grained control.
       ssh-pre(language="js" :dark="$store.state.darkMode").
         colors: {
           primary: {

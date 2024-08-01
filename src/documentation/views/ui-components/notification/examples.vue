@@ -5,7 +5,10 @@ div
     //- Buit-in notification manager.
     template(#item-title.1) Notification manager
     template(#item-content.1)
-      p The built-in notification manager can be used via #[code this.$waveui.notify()] from any component.
+      p.
+        The built-in notification manager can be used via #[code $waveui.notify()] from any component.#[br]
+      alert(tip).
+        Note that you can access the #[code $waveui] object with #[code const $waveui = inject('$waveui')] in composition API, or from #[code this] if not using the composition API.
       .title3 Pros
       w-list(icon="wi-check" :items="2")
         template(#item.1) Very convenient and fast to use
@@ -18,7 +21,11 @@ div
       title-link(h2) Simple use of the notify method
       p The notify method takes up to 3 parameters, here is the syntax:
       ssh-pre(language="js" :dark="$store.state.darkMode").
-        this.$waveui.notify({String} message, {String} type?, {Number} timeout?)
+        $waveui.notify({String} message, {String} type?, {Number} timeout?)
+      p Access #[code $waveui] in composition API, or from #[code this] if not using the composition API.
+      ssh-pre(language="js" :dark="$store.state.darkMode").
+        import { inject } from 'vue'
+        const $waveui = inject('$waveui')
       p.
         The default type is #[code info] and the default timeout is #[code 4000].#[br]
         A timeout of #[code 0] will keep the notification visible permanently (until dismissed).
@@ -55,7 +62,7 @@ div
         of the #[strong.code w-alert] component, plus the #[code message] and #[code timeout] options.#[br]
         E.g.
       ssh-pre(language="js" :dark="$store.state.darkMode").
-        this.$waveui.notify({
+        $waveui.notify({
           message: 'Message.',
           timeout: 3000, // ms.
           ... // Other options from w-alert.
@@ -75,7 +82,7 @@ div
         template(#js).
           methods: {
             notify () {
-              this.$waveui.notify({
+              $waveui.notify({
                 message: 'Warning',
                 timeout: 6000,
                 bgColor: 'orange-light5',
@@ -542,14 +549,14 @@ export default {
     switchNotificationManagerSide () {
       const { align } = config.notificationManager
       config.notificationManager.align = align === 'left' ? 'right' : 'left'
-      this.$nextTick(() => this.$waveui.notify('Information.'))
+      this.$nextTick(() => $waveui.notify('Information.'))
     },
     switchNotifMgrTransition () {
       config.notificationManager.transition = this.notifManagerTransition
-      this.$nextTick(() => this.$waveui.notify('Information.'))
+      this.$nextTick(() => $waveui.notify('Information.'))
     },
     notify () {
-      this.$waveui.notify({
+      $waveui.notify({
         message: 'Warning',
         timeout: 6000,
         bgColor: 'orange-light5',

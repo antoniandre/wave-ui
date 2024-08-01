@@ -39,8 +39,8 @@ main
   title-link(h2 slug="the-wave-ui-breakpoint-object") The #[code $waveui.breakpoint] object
   p.mt4.
     You can access the current breakpoint from anywhere using
-    #[code this.$waveui.breakpoint.name], or one of these quick booleans from
-    the same #[code this.$waveui.breakpoint] object:
+    #[code $waveui.breakpoint.name], or one of these quick booleans from
+    the same #[code $waveui.breakpoint] object:
   ul
     li.mb1
       code xs
