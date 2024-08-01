@@ -103,7 +103,9 @@ export default {
   },
 
   mounted () {
-    this.$store.commit('setDarkMode', this.$waveui.preferredTheme === 'dark')
+    const darkMode = localStorage.darkMode === 'true' || (localStorage.darkMode === undefined && this.$waveui.preferredTheme === 'dark')
+    this.$store.commit('setDarkMode', darkMode)
+    this.$waveui.switchTheme(darkMode ? 'dark' : 'light')
 
     this.contentWrapEl = document.querySelector('.content-wrap')
     this.navMenuTop = this.contentWrapEl.offsetTop - 12
