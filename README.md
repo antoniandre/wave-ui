@@ -4,6 +4,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
 [![npm](https://img.shields.io/npm/dt/wave-ui.svg)](https://www.npmjs.com/package/wave-ui)
 <!-- [![npm](https://img.shields.io/npm/dw/wave-ui.svg)](https://www.npmjs.com/package/wave-ui) -->
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 > An emerging UI framework for Vue.js (2 & 3) with only the bright side. :sunny:
 
