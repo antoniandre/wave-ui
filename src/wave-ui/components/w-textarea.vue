@@ -116,7 +116,6 @@ export default {
     attrs () {
       // Remove class and style which are meant to stay on the wrapper.
       // Note: in Vue 3 $attrs may contain both HTML attributes AND JS events (onClick, onFocus, etc.).
-      // eslint-disable-next-line no-unused-vars
       const { class: classes, style, ...attrs } = this.$attrs
       return attrs
     },
