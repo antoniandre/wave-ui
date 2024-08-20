@@ -33,6 +33,14 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v3.14.2
+      ul
+        li
+          strong.code CSS
+          ul
+            li Removed the alpha chanel from the default caption color. Making it possible to easily adjust the alpha of the CSS variable from outside Wave UI.
+
+    li.patch
       strong.version v3.14.1
       ul
         li
