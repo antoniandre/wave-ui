@@ -14,7 +14,7 @@ $theme-light: (
   base-color-rgb: (0, 0, 0), // #000.
   contrast-bg-color-rgb: (0, 0, 0), // #000.
   contrast-color-rgb: (255, 255, 255), // #fff.
-  caption-color-rgb: (80, 80, 80, 0.7), // #505050.
+  caption-color-rgb: (160, 160, 160), // #a0a0a0.
   disabled-color-rgb: (204, 204, 204), // #ccc.
 ) !default;
 
@@ -23,7 +23,7 @@ $theme-dark: (
   base-color-rgb: (255, 255, 255), // #fff.
   contrast-bg-color-rgb: (255, 255, 255), // #fff.
   contrast-color-rgb: (0, 0, 0), // #000.
-  caption-color-rgb: (175, 175, 175, 0.7), // #afafaf.
+  caption-color-rgb: (110, 110, 110), // #6e6e6e.
   disabled-color-rgb: (74, 74, 74), // #4a4a4a.
 ) !default;
 
