@@ -15,10 +15,11 @@ export const generateColorShades = config => {
     for (const label in themeOfColors) {
       if (label === 'shades') continue // Skip if item is the `shades` container.
 
-      // Account for string colors and the fine tuned shaded colors
+      // Account for string colors and the fine tuned shaded colors.
       const colorInfo = themeOfColors[label]
-      const color = { label, color: (themeOfColors[label]?.color ?? themeOfColors[label]).replace('#', '') }
+      const color = { label, color: (themeOfColors[label]?.color ?? themeOfColors[label])?.replace?.('#', '') }
       const col = color.color
+      if (!col) continue // Don't break if a color is only set for one of the themes.
       if (col.length === 3) color.color = col[0] + '' + col[0] + col[1] + col[1] + col[2] + col[2]
 
       for (let i = 1; i <= 6; i++) {
