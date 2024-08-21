@@ -918,7 +918,7 @@ div
     w-menu(append-to=".example11" custom hide-on-menu-click persistent shadow)
       template(#activator="{ on }")
         w-button(v-on="on") Show a list menu
-      w-list.white--bg(
+      w-list.base-color--bg(
         v-model="list"
         :items="[{ label: 'Item 1' }, { label: 'Item 2' }, { label: 'Item 3' }]"
         item-class="px8")
@@ -929,7 +929,7 @@ div
       w-menu(custom hide-on-menu-click persistent shadow)
         template(#activator="{ on }")
           w-button(v-on="on") Show a list menu
-        w-list.white--bg(
+        w-list.base-color--bg(
           v-model="listSelection"
           :items="listItems"
           item-class="px8")
@@ -949,7 +949,7 @@ div
         &lt;/template&gt;
 
         &lt;w-list
-          class="white--bg"
+          class="base-color--bg"
           v-model="listSelection"
           :items="listItems"
           item-class="px8"&gt;
@@ -976,7 +976,7 @@ div
     w-menu(append-to=".example12" v-model="showListMenu2" shadow custom overlay)
       template(#activator="{ on }")
         w-button(v-on="on") Show a menu &amp; overlay
-      w-list.white--bg(
+      w-list.base-color--bg(
         nav
         :items="[{ label: 'Item 1', route: '#item1' }, { label: 'Item 2', route: '#item2' }, { label: 'Item 3', route: '#item3' }]"
         item-class="px8"
@@ -985,7 +985,7 @@ div
       w-menu(v-model="showMenu" shadow custom overlay)
         template(#activator="{ on }")
           w-button(v-on="on") Show a menu &amp; overlay
-        w-list.white--bg(
+        w-list.base-color--bg(
           nav
           :items="listItems"
           item-class="px8"
@@ -999,7 +999,7 @@ div
         &lt;/template&gt;
 
         &lt;w-list
-          class="white--bg"
+          class="base-color--bg"
           nav
           :items="listItems"
           item-class="px8"
