@@ -11,26 +11,18 @@ div
   p When persistent is set to false and by default, the escape key will also close the overlay.
   example
     w-flex(wrap)
-      w-button.my2(bg-color="primary" dark @click="showOverlay = true") Show overlay
+      w-button.my2(@click="showOverlay = true") Show overlay
 
-      w-divider.mx6(vertical color="grey-light4")
+      w-divider.mx6(vertical)
       div
         .title4 Options
-        w-button.d-block.mr2(
-          bg-color="primary-light1"
-          color="contrast-color"
+        w-switch.d-flex.mr2(
           :class="persistent ? 'pr4' : ''"
-          @click="persistent = !persistent"
-          sm
-          dark)
+          @click="persistent = !persistent")
           .code.inherit :persistent="{{ persistent }}"
-        w-button.d-block.mt2(
-          bg-color="primary-light1"
-          color="contrast-color"
+        w-switch.d-flex.mt2(
           @click="persistentNoAnimation = !persistentNoAnimation"
-          :disabled="!persistent"
-          sm
-          dark)
+          :disabled="!persistent")
           .code.inherit :persistent-no-animation="{{ persistentNoAnimation }}"
         w-input.mt2.d-block(
           v-model="opacity"
@@ -53,24 +45,16 @@ div
       w-flex(wrap)
         w-button(bg-color="primary" dark @click="showOverlay = true") Show overlay
 
-        w-divider.mx6(vertical color="grey-light4")
+        w-divider.mx6(vertical)
         div
           .title4 Options
-          w-button.mr2(
-            bg-color="primary-light1"
-            color="contrast-color"
+          w-switch.d-flex.mr2(
             :class="persistent ? 'pr4' : ''"
-            @click="persistent = !persistent"
-            sm
-            dark)
+            @click="persistent = !persistent")
             .code.inherit :persistent="{{ '\{\{ persistent \}\}' }}"
-          w-button(
-            bg-color="primary-light1"
-            color="contrast-color"
+          w-switch.d-flex(
             @click="persistentNoAnimation = !persistentNoAnimation"
-            :disabled="!persistent"
-            sm
-            dark)
+            :disabled="!persistent")
             .code.inherit :persistent-no-animation="{{ '\{\{ persistentNoAnimation \}\}' }}"
           w-input.mt2.d-block(
             v-model="opacity"
@@ -97,32 +81,25 @@ div
 
         &lt;w-divider
           class="mx6"
-          vertical
-          color="grey-light4"&gt;
+          vertical&gt;
         &lt;/w-divider&gt;
 
         &lt;div&gt;
           &lt;div class="title4"&gt;Options&lt;/div&gt;
-          &lt;w-button
+          &lt;w-switch
             class="mr2"
-            bg-color="primary-light1"
-            color="contrast-color"
             :class="persistent ? 'pr4' : ''"
             @click="persistent = !persistent"
-            sm
-            dark&gt;
+            sm&gt;
             :persistent="{{ '\{\{ persistent \}\}' }}"
-          &lt;/w-button&gt;
+          &lt;/w-switch&gt;
 
-          &lt;w-button
-            bg-color="primary-light1"
-            color="contrast-color"
+          &lt;w-switch
             @click="persistentNoAnimation = !persistentNoAnimation"
             :disabled="!persistent"
-            sm
-            dark&gt;
+            sm&gt;
             :persistent-no-animation="{{ '\{\{ persistentNoAnimation \}\}' }}"
-          &lt;/w-button&gt;
+          &lt;/w-switch&gt;
 
           &lt;w-input
             class="mt2 d-block"
@@ -146,7 +123,6 @@ div
         &lt;w-button
           bg-color="primary"
           lg
-          dark
           @click="showOverlay = false"&gt;
           &lt;w-icon class="mr2"&gt;wi-cross&lt;/w-icon&gt;
           Hide overlay
@@ -189,7 +165,6 @@ div
         &lt;w-button
           bg-color="primary"
           lg
-          dark
           @click="showOverlay = false"&gt;
           &lt;w-icon class="mr2"&gt;wi-cross&lt;/w-icon&gt;
           Hide overlay
