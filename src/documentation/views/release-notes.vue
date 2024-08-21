@@ -33,10 +33,18 @@ main
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
     li.patch
+      strong.version v3.14.3
+      ul
+        li
+          strong.code w-switch
+          ul
+            li Update the default background color of the thumb to be consistent with the base background color.
+
+    li.patch
       strong.version v3.14.2
       ul
         li
-          strong.code CSS
+          strong CSS
           ul
             li Removed the alpha chanel from the default caption color. Making it possible to easily adjust the alpha of the CSS variable from outside Wave UI.
 
@@ -93,7 +101,7 @@ main
       strong.version v3.13.2
       ul
         li
-          strong.code w-button.
+          strong.code w-button
           ul
             li Fix a Vue warning happening on router link button click, before navigation.
 
@@ -109,7 +117,7 @@ main
       strong.version v3.13.0
       ul
         li
-          strong.code CSS
+          strong CSS
           ul
             li Added the `css.colorShadeCssVariables` option to generate all the color shades CSS variables. #[issue-link 149]
 
@@ -172,7 +180,7 @@ main
                 has the #[code .w-table] and the table now has the #[code .w-table__table] class.
                 You may need to review your external CSS overrides.
         li
-          strong.code Minor CSS improvements
+          strong Minor CSS improvements
           ul
             li Fix the aspect-ratio of 1 in Safari in case the element has padding overrides (impacts w-button with icon prop and a few Wave UI sub-elements).
 
