@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   .title3.my6 You have the choice to use one or the other, or both.
-  w-tabs.mt4(:items="2" content-class="pl4")
+  w-tabs.mt4(:items="2" content-class="pl4" model-value="0")
     //- Buit-in notification manager.
     template(#item-title.1) Notification manager
     template(#item-content.1)
@@ -273,7 +273,7 @@ div
           outline
           width="8.5em")
           | {{ notification2.show ? 'Hide' : 'Show' }} notification
-        w-input.d-iflex(
+        w-input.d-iflex.no-wrap(
           v-model="notification2.timeout"
           type="number"
           step="500"
@@ -549,14 +549,14 @@ export default {
     switchNotificationManagerSide () {
       const { align } = config.notificationManager
       config.notificationManager.align = align === 'left' ? 'right' : 'left'
-      this.$nextTick(() => $waveui.notify('Information.'))
+      this.$nextTick(() => this.$waveui.notify('Information.'))
     },
     switchNotifMgrTransition () {
       config.notificationManager.transition = this.notifManagerTransition
-      this.$nextTick(() => $waveui.notify('Information.'))
+      this.$nextTick(() => this.$waveui.notify('Information.'))
     },
     notify () {
-      $waveui.notify({
+      this.$waveui.notify({
         message: 'Warning',
         timeout: 6000,
         bgColor: 'orange-light5',

@@ -258,6 +258,7 @@ export default {
     padding: 12px;
     overflow: auto;
   }
+  &__render.ovh {overflow: hidden;}
 
   &__source {
     position: relative;
