@@ -116,7 +116,7 @@ $slider-step-label-color: rgba(var(--w-base-color-rgb), 0.5) !default;
 // w-switch.
 // --------------------------------------------------------
 $switch-inactive-color: rgba(var(--w-contrast-bg-color-rgb), 0.25) !default;
-$switch-thumb-color: #fff !default;
+$switch-thumb-color: $base-bg-color !default;
 // --------------------------------------------------------
 
 // w-table.
