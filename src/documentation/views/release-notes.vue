@@ -39,6 +39,10 @@ main
           strong.code w-switch
           ul
             li Update the default background color of the thumb to be consistent with the base background color.
+        li
+          strong.code CSS
+          ul
+            li Added #[code wrap] and #[code no-wrap] CSS helper classes.
 
     li.patch
       strong.version v3.14.2
