@@ -9,6 +9,24 @@ div
         The #[strong.code w-confirm] component uses the #[strong.code w-menu] and
         #[strong.code w-button] components.
 
+  title-link(h2) Basic
+  example(content-class="text-center" app-classes-string="align-center")
+    w-confirm Delete
+    template(#pug).
+      w-confirm Delete
+    template(#html).
+      &lt;w-confirm&gt;Delete&lt;/w-confirm&gt;
+
+  title-link(h2) Icon button
+  example(content-class="text-center" app-classes-string="align-center")
+    w-confirm(icon="mdi mdi-delete")
+    template(#pug).
+      w-confirm(icon="mdi mdi-delete")
+    template(#html).
+      &lt;w-confirm icon="mdi mdi-delete"&gt;
+        Delete
+      &lt;/w-confirm&gt;
+
   title-link(h2) Integrated tooltip
   p.
     We often need a tooltip on a button. Especially on the ones that only have an icons.#[br]
@@ -40,24 +58,6 @@ div
           Delete
         &lt;/w-confirm&gt;
       &lt;/w-flex&gt;
-
-  title-link(h2) Basic
-  example(content-class="text-center" app-classes-string="align-center")
-    w-confirm Delete
-    template(#pug).
-      w-confirm Delete
-    template(#html).
-      &lt;w-confirm&gt;Delete&lt;/w-confirm&gt;
-
-  title-link(h2) Icon button
-  example(content-class="text-center" app-classes-string="align-center")
-    w-confirm(icon="mdi mdi-delete")
-    template(#pug).
-      w-confirm(icon="mdi mdi-delete")
-    template(#html).
-      &lt;w-confirm icon="mdi mdi-delete"&gt;
-        Delete
-      &lt;/w-confirm&gt;
 
   title-link(h2) Colors
   p.
