@@ -5,7 +5,14 @@
       template(v-if="inProgress")
         .code
           slot
-        w-tag.ml2.text-bold.text-upper(color="orange" outline round) In progress
+        w-tag.ml2(color="orange" outline round) IN PROGRESS
+      template(v-else-if="deprecated")
+        .code
+          slot
+        w-tag.bd2.ml2(
+          :bg-color="$waveui.theme === 'dark' ? 'base-color' : 'grey-dark4'"
+          :color="$waveui.theme === 'dark' ? 'base-color' : 'white'"
+          round) DEPRECATED
       slot(v-else)
     w-button.mla.mb3(outline force-link @click="scrollToApi")
       w-icon.ml-1.mr1.chevron-down(lg) wi-chevron-down
@@ -21,6 +28,7 @@ export default {
   props: {
     code: { type: Boolean, default: true },
     inProgress: { type: Boolean },
+    deprecated: { type: Boolean },
     slug: String
   },
 

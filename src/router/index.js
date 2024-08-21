@@ -9,7 +9,7 @@ export const UIComponents = [
   { id: 'accordion', label: 'Accordion' },
   { id: 'alert', label: 'Alert' },
   { id: 'autocomplete', label: 'Autocomplete', inProgress: true },
-  { id: 'app', label: 'App' },
+  { id: 'app', label: 'App', deprecated: true },
   { id: 'breadcrumbs', label: 'Breadcrumbs' },
   { id: 'button', label: 'Button' },
   { id: 'badge', label: 'Badge' },

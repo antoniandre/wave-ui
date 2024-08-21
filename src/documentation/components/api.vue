@@ -8,13 +8,12 @@
         template(v-if="title === 'Props'")
           span.types.teal="[{{ item.type.join(', ') }}]"
           | ,
-          w-tag.text-upper.ml2(v-if="item.required" sm outline color="red") Required
-          w-tag.text-upper.ml2(
+          w-tag.ml2(v-if="item.required" sm outline color="red") REQUIRED
+          w-tag.bd2.ml2(
             v-else-if="item.deprecated"
-            outline
-            bg-color="black"
-            color="white"
-            round) Deprecated
+            :bg-color="$waveui.theme === 'dark' ? 'base-color' : 'grey-dark4'"
+            :color="$waveui.theme === 'dark' ? 'base-color' : 'white'"
+            sm) DEPRECATED
           span.grey.ml2(v-else)
             | Default:
             strong.default-value.code.deep-orange-light1.ml2 {{ item.default }}

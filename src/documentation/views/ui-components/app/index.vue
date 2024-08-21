@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  ui-component-title w-app
+  ui-component-title(slug="w-app" deprecated) w-app
   examples
   api
 </template>

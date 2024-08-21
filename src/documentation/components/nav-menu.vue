@@ -22,8 +22,14 @@
     w-tree(:data="components" selectable @click="onItemClick")
       template(#item="{ item }")
         span(v-html="item.label")
-        w-tag.ml2.text-upper(v-if="item.disabled" round xs color="red" outline) Coming soon
-        w-tag.ml2.text-upper(v-if="item.inProgress" round xs color="orange" outline) In progress
+        w-tag.ml2(v-if="item.disabled" round xs color="red" outline) COMING SOON
+        w-tag.ml2(v-else-if="item.inProgress" round xs color="orange" outline) IN PROGRESS
+        w-tag.bd2.ml2(
+          v-else-if="item.deprecated"
+          :bg-color="$waveui.theme === 'dark' ? 'base-color' : 'grey-dark4'"
+          :color="$waveui.theme === 'dark' ? 'base-color' : 'white'"
+          round
+          xs) DEPRECATED
     .title3.mt4 External UI components
     p By the same author
     w-tree(:data="externalComponents" selectable @click="onItemClick")

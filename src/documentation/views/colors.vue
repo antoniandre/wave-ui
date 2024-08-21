@@ -248,14 +248,32 @@ main
       &lt;w-tag color="mint-green" bg-color="navy-blue" lg&gt;tag&lt;/w-tag&gt;
     w-tag.mb4.align-self-end(color="mint-green" bg-color="navy-blue" lg) Tag
 
-  title-link(h2) Colors and themes
+  title-link(h2) Colors and theming
   p.
-    If you use both dark and light themes, you should always use colors that are adapted to the
-    app background color.#[br]
+    If you offer your users both dark and light themes, you should always use colors that are adapted
+    to the app background color.#[br]
     Since it is not easy to find a color that will work for both themes, we recommend that you use
-    a light and dark version of the same color.#[br]
+    a light and dark version of the same color (using CSS3 variables).#[br]
     Wave UI provides these 5 CSS classes which carry colors that will automatically change when
-    switching theme.
+    switching theme (powered by CSS3 variables).
+  alert(tip)
+    strong Important Note
+    p.
+      each of the following CSS3 variable is not containing a color but only its RGB channels.
+      This allows us to apply an alpha channel on that color if we need
+      (e.g. #[code rgba(var(--w-base-bg-color-rgb), 0.3)])! 😉#[br]
+    .body.
+      You can investigate what these variables contain directly from the dev tools of your browser,
+      in the styles panel:
+    ssh-pre.mt1.size--xs.d-iblock(language="css").
+      :root[data-theme=dark] {
+        --w-base-bg-color-rgb: 34, 34, 34;
+        --w-base-color-rgb: 255, 255, 255;
+        --w-contrast-bg-color-rgb: 255, 255, 255;
+        --w-contrast-color-rgb: 0, 0, 0;
+        --w-caption-color-rgb: 110, 110, 110;
+        --w-disabled-color-rgb: 74, 74, 74;
+      }
   w-table(:headers="tableHeaders" :items="tableItems" :mobile-breakpoint="700")
     template(#item-cell="{ label, header }")
       p(v-if="header.key === 'desc'") {{ label }}
@@ -263,7 +281,6 @@ main
   p.
     If you define theme-specific colors in the Wave UI config, they will also generate a CSS3
     variable that you can use anywhere.
-
 </template>
 
 <script>
