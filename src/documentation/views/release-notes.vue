@@ -3,7 +3,9 @@ main
   title-link.mt4(h1) Release notes
   p.mt-6.mb5.grey-light2.text-italic
     | Follows the
-    a.ml1(href="https://semver.org" target="_blank") Semantic versioning specs.
+    a.ml1(href="https://semver.org" target="_blank")
+      | Semantic versioning specs.
+      w-icon.ml1 mdi mdi-open-in-new
 
   .w-flex.justify-end
     w-button(
@@ -42,7 +44,7 @@ main
         li
           strong.code CSS
           ul
-            li Added #[code wrap] and #[code no-wrap] CSS helper classes.
+            li Added #[code wrap] and #[code no-wrap] CSS helper classes. #[span.tag.new]
 
     li.patch
       strong.version v3.14.2
@@ -123,7 +125,7 @@ main
         li
           strong CSS
           ul
-            li Added the `css.colorShadeCssVariables` option to generate all the color shades CSS variables. #[issue-link 149]
+            li Added the #[code css.colorShadeCssVariables] option to generate all the color shades CSS variables. #[issue-link 149] #[span.tag.new]
 
     li.minor
       strong.version v3.12.0
@@ -139,11 +141,11 @@ main
         li
           strong.code w-select
           ul
-            li Added the #[code icon-left] and #[code icon-right] slots. #[issue-link 148]
+            li Added the #[code icon-left] and #[code icon-right] slots. #[issue-link 148] #[span.tag.new]
         li
           strong.code w-textarea
           ul
-            li Added the #[code icon-left] and #[code icon-right] slots. #[issue-link 148]
+            li Added the #[code icon-left] and #[code icon-right] slots. #[issue-link 148] #[span.tag.new]
         li
           strong.code w-autocomplete
           ul
@@ -167,7 +169,7 @@ main
         li
           strong.code w-select
           ul
-            li Added ability to lookup and focus a select list item by typing its first characters. #[issue-link 139]
+            li Added ability to lookup and focus a select list item by typing its first characters. #[issue-link 139] #[span.tag.new]
 
     li.patch
       strong.version v3.9.1
