@@ -120,7 +120,6 @@ div
     w-button.ma1(bg-color="secondary" md) medium
     w-button.ma1(bg-color="secondary" lg) large
     w-button.ma1(bg-color="secondary" xl) extra large
-    w-button.ma1(bg-color="secondary" disabled) disabled
     br
     br
     w-button.ma1(bg-color="primary" xs) extra small
@@ -128,14 +127,12 @@ div
     w-button.ma1(bg-color="primary" md) medium
     w-button.ma1(bg-color="primary" lg) large
     w-button.ma1(bg-color="primary" xl) extra large
-    w-button.ma1(bg-color="primary" disabled) disabled
     template(#pug).
       w-button.ma1(bg-color="secondary" xs) extra small
       w-button.ma1(bg-color="secondary" sm) small
       w-button.ma1(bg-color="secondary" md) medium
       w-button.ma1(bg-color="secondary" lg) large
       w-button.ma1(bg-color="secondary" xl) extra large
-      w-button.ma1(bg-color="secondary" disabled) disabled
       br
       br
       w-button.ma1(bg-color="primary" xs) extra small
@@ -143,14 +140,12 @@ div
       w-button.ma1(bg-color="primary" md) medium
       w-button.ma1(bg-color="primary" lg) large
       w-button.ma1(bg-color="primary" xl) extra large
-      w-button.ma1(bg-color="primary" disabled) disabled
     template(#html).
       &lt;w-button class="ma1" bg-color="secondary" xs&gt;extra small&lt;/w-button&gt;
       &lt;w-button class="ma1" bg-color="secondary" sm&gt;small&lt;/w-button&gt;
       &lt;w-button class="ma1" bg-color="secondary" md&gt;medium&lt;/w-button&gt;
       &lt;w-button class="ma1" bg-color="secondary" lg&gt;large&lt;/w-button&gt;
       &lt;w-button class="ma1" bg-color="secondary" xl&gt;extra large&lt;/w-button&gt;
-      &lt;w-button class="ma1" bg-color="secondary" disabled&gt;disabled&lt;/w-button&gt;
       &lt;br&gt;
       &lt;br&gt;
       &lt;w-button class="ma1" bg-color="primary" xs&gt;extra small&lt;/w-button&gt;
@@ -158,7 +153,6 @@ div
       &lt;w-button class="ma1" bg-color="primary" md&gt;medium&lt;/w-button&gt;
       &lt;w-button class="ma1" bg-color="primary" lg&gt;large&lt;/w-button&gt;
       &lt;w-button class="ma1" bg-color="primary" xl&gt;extra large&lt;/w-button&gt;
-      &lt;w-button class="ma1" bg-color="primary" disabled&gt;disabled&lt;/w-button&gt;
 
   h3 Stretch to the available space
   ul
@@ -314,12 +308,12 @@ div
 
   title-link(h3 slug="more-control-on-icons") More control on icons using the #[code icon-props]
   example(content-class="w-flex")
-    w-button(icon="wi-star" :icon-props="{ spin: true }") default
+    w-button(icon="wi-spinner" :icon-props="{ spin: true }") default
     template(#pug).
-      w-button(icon="wi-star" :icon-props="{ spin: true }") default
+      w-button(icon="wi-spinner" :icon-props="{ spin: true }") default
     template(#html).
       &lt;w-button
-        icon="wi-star"
+        icon="wi-spinner"
         :icon-props="{ spin: true }"&gt;
       &lt;/w-button&gt;
 
@@ -391,6 +385,9 @@ div
     w-button.ma1(route="https://github.com/antoniandre/wave-ui" target="_blank")
       | Github
       w-icon.ml2(sm) mdi mdi-open-in-new
+    w-button.ma1(route="https://github.com/antoniandre/wave-ui" target="_blank" disabled)
+      | Disabled button with link
+      w-icon.ml2(sm) mdi mdi-open-in-new
     template(#pug).
       w-button.ma1(route="/getting-started")
         | Getting started
@@ -401,19 +398,33 @@ div
         target="_blank")
         | Github
         w-icon.ml2(sm) mdi mdi-open-in-new
+
+      w-button.ma1(route="https://github.com/antoniandre/wave-ui" target="_blank" disabled)
+        | Disabled button with link
+        w-icon.ml2(sm) mdi mdi-open-in-new
     template(#html).
       &lt;w-button
         class="ma1"
-        route="/getting-started"
-        target="_blank"&gt;
+        route="/getting-started"&gt;
         Getting started
         &lt;w-icon class="ml1"&gt;wi-chevron-right&lt;/w-icon&gt;
       &lt;/w-button&gt;
 
       &lt;w-button
         class="ma1"
-        route="https://github.com/antoniandre/wave-ui"&gt;
+        route="https://github.com/antoniandre/wave-ui"
+        target="_blank"
+        disabled&gt;
         Github
+        &lt;w-icon class="ml2" sm&gt;mdi mdi-open-in-new&lt;/w-icon&gt;
+      &lt;/w-button&gt;
+
+      &lt;w-button
+        class="ma1"
+        route="https://github.com/antoniandre/wave-ui"
+        target="_blank"
+        disabled&gt;
+        Disabled button with link
         &lt;w-icon class="ml2" sm&gt;mdi mdi-open-in-new&lt;/w-icon&gt;
       &lt;/w-button&gt;
 
