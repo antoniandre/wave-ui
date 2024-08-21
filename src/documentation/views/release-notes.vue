@@ -38,6 +38,10 @@ main
       strong.version v3.14.3
       ul
         li
+          strong.code w-toolbar
+          ul
+            li Make the horizontal toolbars grow by default.
+        li
           strong.code w-switch
           ul
             li Update the default background color of the thumb to be consistent with the base background color.
