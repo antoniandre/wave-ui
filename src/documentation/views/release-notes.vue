@@ -42,7 +42,11 @@ main
           ul
             li Update the default background color of the thumb to be consistent with the base background color.
         li
-          strong.code CSS
+          strong Global
+          ul
+            li Make the colors config more flexible: will not break if there is only the light or dark theme object or if a color is only define in one of the 2 themes.
+        li
+          strong CSS
           ul
             li Added #[code wrap] and #[code no-wrap] CSS helper classes. #[span.tag.new]
 
