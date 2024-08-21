@@ -167,6 +167,8 @@ const genBreakpointLayoutClasses = breakpoints => {
     'no-grow{flex-grow:0}',
     'shrink{flex-shrink:1;margin-left:auto;margin-right:auto}',
     'no-shrink{flex-shrink:0}',
+    'wrap{flex-wrap: wrap}',
+    'no-wrap{flex-wrap: nowrap}',
     'fill-width{width:100%}',
     'fill-height{height:100%}',
     'basis-zero{flex-basis:0}',
