@@ -51,7 +51,7 @@ div
         li.mt8
           .title4 in the #[span.code default.vue] layout, wrap the #[code Nuxt] component in a #[code w-app]:
 
-          ssh-pre(v-show="$store.state.usePug" language="pug" label="Pug" :dark="$store.state.darkMode").
+          ssh-pre(v-show="$store.state.usePug" language="html-vue" label="Pug" :dark="$store.state.darkMode").
             &lt;template lang="pug"&gt;
               w-app
                 Nuxt
