@@ -4,17 +4,16 @@
   ul(v-if="sortedItems.length")
     template(v-for="item in sortedItems" :key="item.label")
       li.api__item(v-if="!item.hide")
-        title-link(h4 :slug="item.label") {{ item.label }}
+        title-link(h4 :slug="`${item.label}-${category}`") {{ item.label }}
         template(v-if="title === 'Props'")
           span.types.teal="[{{ item.type.join(', ') }}]"
           | ,
-          w-tag.text-upper.ml2(v-if="item.required" sm outline color="red") Required
-          w-tag.text-upper.ml2(
+          w-tag.ml2(v-if="item.required" sm outline color="red") REQUIRED
+          w-tag.bd2.ml2(
             v-else-if="item.deprecated"
-            outline
-            bg-color="black"
-            color="white"
-            round) Deprecated
+            :bg-color="$waveui.theme === 'dark' ? 'base-color' : 'grey-dark4'"
+            :color="$waveui.theme === 'dark' ? 'base-color' : 'white'"
+            sm) DEPRECATED
           span.grey.ml2(v-else)
             | Default:
             strong.default-value.code.deep-orange-light1.ml2 {{ item.default }}
@@ -68,6 +67,10 @@ export default {
           description: (item.description || this.descriptions[key] || '').replace(/href="\//g, `href=\"${this.baseURL}`)
         }
       })
+    },
+
+    category () {
+      return this.title.toLowerCase().replace(/s$/, '')
     }
   }
 }

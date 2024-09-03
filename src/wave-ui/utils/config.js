@@ -14,6 +14,10 @@ const config = reactive({
     // Note: the color palette shades are always generated separately from SCSS.
     colorShades: true,
 
+    // Generate CSS variables for color shades.
+    // Note: colorShades must be enabled for this to work.
+    colorShadeCssVariables: false,
+
     // Generate palette colors and palette color shades.
     // Can't have this option: color palette is generated via SCSS in colors.scss.
     // colorPalette: true,
@@ -64,7 +68,7 @@ export const mergeConfig = (options, conf = config) => {
   else {
     for (const key in options) {
       const option = options[key]
-      if (typeof option === 'object') {
+      if (typeof option === 'object' && typeof conf[key] === 'object') {
         mergeConfig(options[key], conf[key])
       }
       else conf[key] = option

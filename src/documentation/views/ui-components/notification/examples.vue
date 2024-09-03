@@ -1,11 +1,14 @@
 <template lang="pug">
 div
   .title3.my6 You have the choice to use one or the other, or both.
-  w-tabs.mt4(:items="2" content-class="pl4")
+  w-tabs.mt4(:items="2" content-class="pl4" model-value="0")
     //- Buit-in notification manager.
     template(#item-title.1) Notification manager
     template(#item-content.1)
-      p The built-in notification manager can be used via #[code this.$waveui.notify()] from any component.
+      p.
+        The built-in notification manager can be used via #[code $waveui.notify()] from any component.#[br]
+      alert(tip).
+        Note that you can access the #[code $waveui] object with #[code const $waveui = inject('$waveui')] in composition API, or from #[code this] if not using the composition API.
       .title3 Pros
       w-list(icon="wi-check" :items="2")
         template(#item.1) Very convenient and fast to use
@@ -18,7 +21,11 @@ div
       title-link(h2) Simple use of the notify method
       p The notify method takes up to 3 parameters, here is the syntax:
       ssh-pre(language="js" :dark="$store.state.darkMode").
-        this.$waveui.notify({String} message, {String} type?, {Number} timeout?)
+        $waveui.notify({String} message, {String} type?, {Number} timeout?)
+      p Access #[code $waveui] in composition API, or from #[code this] if not using the composition API.
+      ssh-pre(language="js" :dark="$store.state.darkMode").
+        import { inject } from 'vue'
+        const $waveui = inject('$waveui')
       p.
         The default type is #[code info] and the default timeout is #[code 4000].#[br]
         A timeout of #[code 0] will keep the notification visible permanently (until dismissed).
@@ -55,7 +62,7 @@ div
         of the #[strong.code w-alert] component, plus the #[code message] and #[code timeout] options.#[br]
         E.g.
       ssh-pre(language="js" :dark="$store.state.darkMode").
-        this.$waveui.notify({
+        $waveui.notify({
           message: 'Message.',
           timeout: 3000, // ms.
           ... // Other options from w-alert.
@@ -75,7 +82,7 @@ div
         template(#js).
           methods: {
             notify () {
-              this.$waveui.notify({
+              $waveui.notify({
                 message: 'Warning',
                 timeout: 6000,
                 bgColor: 'orange-light5',
@@ -266,7 +273,7 @@ div
           outline
           width="8.5em")
           | {{ notification2.show ? 'Hide' : 'Show' }} notification
-        w-input.d-iflex(
+        w-input.d-iflex.no-wrap(
           v-model="notification2.timeout"
           type="number"
           step="500"

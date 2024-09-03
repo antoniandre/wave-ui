@@ -18,8 +18,9 @@ const propsDescs = {
   color: 'Applies a color to the each tab title\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the each tab title\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   items: 'Expecting an array of objects. Each object being an tab item, it should include a <code>title</code> and <code>content</code> attributes.<br>Alternatively, you can provide an integer number (call it <em class="code">x</em>), to loop through and create <em class="code">x</em> tabs. You can then use the individual slots <code>item-title.x</code> &amp; <code>item-content.x</code> to define each item title and content.',
-  itemTitleKey: 'Specifies the name of the attribute in each item object where to find the item\'s title string.',
-  itemContentKey: 'Specifies the name of the attribute in each item object where to find the item\'s content string.',
+  itemIdKey: 'Specifies the name of the property in each item object where to find the item\'s unique ID.<br>Having a unique ID is important when injecting and replacing tabs. If no unique id is provided, Wave UI will generate one and <strong>inject it in each item</strong>.',
+  itemTitleKey: 'Specifies the name of the property in each item object where to find the item\'s title string.',
+  itemContentKey: 'Specifies the name of the property in each item object where to find the item\'s content string.',
   titleClass: 'Applies a custom CSS class to the tab title.',
   activeClass: 'Applies a custom CSS class to the active tab title.',
   noSlider: 'When set to <code>true</code>, removes the slider under the active tab title.',
@@ -30,7 +31,9 @@ const propsDescs = {
   fillBar: 'When set to <code>true</code>, the tabs titles will occupy the full available width.',
   center: 'Centers the tabs titles.',
   right: 'Aligns the tabs titles to the right.',
-  card: 'Applies the card style on all the tabs titles.'
+  card: 'Applies the card style on all the tabs titles.',
+  keepInDom: '<span class="grey text-italic">Will deactivate the <code>keep-alive</code> prop.</span> When set to <code>true</code>, the tabs will always stay in the DOM (even when not the active tab), unless they are deleted in the tabs array.<br>Note that the <code>mounted</code> hook will be run once per tab, as soon as they are appended to the DOM.<br>The default behavior is to keep the tabs alive, but unmount any inactive tab from the DOM.',
+  keepAlive: 'When set to <code>true</code> and by default, the tabs will be kept alive. Which means that the state of the components in each tab will be maintained when switching tabs and the <code>mounted</code> hook will only be run the first time it is open.<br>When explicitly set to <code>false</code>, the tab state will be reset upon each reopening, and the <code>mounted</code> hook will be run again.<br>The default behavior is to keep the tabs alive, but unmount any inactive tab from the DOM.<br>You can read more about the keep-alive behavior in the <a href="https://vuejs.org/guide/built-ins/keep-alive.html" target="_blank">Vue official documentation for keep-alive <i class="w-icon mdi mdi-open-in-new"></i></a>.'
 }
 
 const slots = {
@@ -66,7 +69,6 @@ const slots = {
       active: 'A boolean representing the active state of the tab.'
     }
   }
-
 }
 
 const events = {

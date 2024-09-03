@@ -13,7 +13,7 @@ let currentBreakpoint = null
 // :root {[color1-variable], [color2-variable]}
 // .color1--bg {background-color: [color1-variable]}
 // .color1 {color: [color1-variable]}
-const generateColors = themeColors => {
+const generateColors = (themeColors, generateShadeCssVariables) => {
   let styles = ''
   const cssVariables = {}
 
@@ -41,7 +41,10 @@ const generateColors = themeColors => {
   // Status colors must remain after the other colors so they have priority in form validations.
   // That only makes sense when there are 2 colors on the same element: e.g. `span.primary.error`.
   const allColors = { ...colors, info, warning, success, error }
-  for (const colorName in allColors) cssVariables[colorName] = allColors[colorName]
+  for (const colorName in allColors) cssVariables[colorName] = allColors[colorName]?.color ?? allColors[colorName]
+  if (generateShadeCssVariables) {
+    for (const colorName in shades) cssVariables[colorName] = shades[colorName]
+  }
   let cssVariablesString = ''
   Object.entries(cssVariables).forEach(([colorName, colorHex]) => {
     cssVariablesString += `--w-${colorName}-color: ${colorHex};`
@@ -159,10 +162,13 @@ const genBreakpointLayoutClasses = breakpoints => {
     'text-nowrap{white-space:nowrap}',
     'row{flex-direction:row}',
     'column{flex-direction:column}',
+    'column-reverse{flex-direction:column-reverse}',
     'grow{flex-grow:1;flex-basis:auto}',
     'no-grow{flex-grow:0}',
     'shrink{flex-shrink:1;margin-left:auto;margin-right:auto}',
     'no-shrink{flex-shrink:0}',
+    'wrap{flex-wrap: wrap}',
+    'no-wrap{flex-wrap: nowrap}',
     'fill-width{width:100%}',
     'fill-height{height:100%}',
     'basis-zero{flex-basis:0}',
@@ -268,12 +274,12 @@ export const injectCSSInDOM = $waveui => {
   window.addEventListener('resize', () => getBreakpoint($waveui))
 }
 
-export const injectColorsCSSInDOM = themeColors => {
+export const injectColorsCSSInDOM = (themeColors, colorPalette, generateShadeCssVariables) => {
   // Inject global dynamic CSS classes in document head.
   if (!document.getElementById('wave-ui-colors')) {
     const css = document.createElement('style')
     css.id = 'wave-ui-colors'
-    css.innerHTML = generateColors(themeColors)
+    css.innerHTML = generateColors(themeColors, colorPalette, generateShadeCssVariables)
 
     const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
     if (firstStyle) firstStyle.before(css)

@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  ui-component-title(slug="w-tree" in-progress) w-tree
+  ui-component-title(slug="w-tree") w-tree
   examples
   api
 </template>

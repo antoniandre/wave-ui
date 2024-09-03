@@ -1,11 +1,13 @@
 <template lang="pug">
-component(v-if="tooltip" is="w-tooltip" v-bind="tooltipProps || {}")
+component(v-if="tooltip" is="w-tooltip" v-bind="tooltipProps")
   template(#activator="{ on }")
     button-partial(v-bind="buttonProps" v-on="on")
       slot
   div(v-html="tooltip")
 button-partial(v-else v-bind="buttonProps")
   slot
+  template(#loading)
+    slot(name="loading")
 </template>
 
 <script>
@@ -60,7 +62,7 @@ export default {
 
   computed: {
     buttonProps () {
-      const { tooltip, tooltipProps, ...props } = this.$props
+      const { tooltip, tooltipProps = {}, ...props } = this.$props
       return { ...props, ...this.$attrs }
     }
   }

@@ -447,137 +447,6 @@ div
       &lt;/w-menu&gt;
     template(#css) .w-menu {top: 10px;right: 20px;}
 
-  title-link(h2) External activator
-  p.
-    External activators offer a great flexibility in the code and the advantage of accepting
-    multiple activators for the same menu (even elements that are not yet in the DOM).#[br]
-    The downside is that the event listeners for the activator(s) will be attached to the document
-    and not the activator itself. For that reason, it is not the recommended option if you have
-    the choice.
-  title-link(h3 slug="external-activator--basic") Trigger a menu on click of an external activator
-  example.example14(content-class="text-center my4" app-classes-string="text-center")
-    w-button.cat-button(icon="mdi mdi-cat" xl)
-    w-menu(append-to=".example14" activator=".cat-button" arrow) Meow!
-    template(#pug).
-      w-button.cat-button(icon="mdi mdi-cat" xl)
-
-      w-menu(activator=".cat-button" arrow) Meow!
-    template(#html).
-      &lt;w-button
-        icon="mdi mdi-cat"
-        xl
-        class="cat-button"&gt;
-      &lt;/w-button&gt;
-
-      &lt;w-menu activator=".cat-button" arrow&gt;
-        Meow!
-      &lt;/w-menu&gt;
-
-  title-link(h3 slug="external-activator--2-activators").
-    Trigger the same menu from 2 different external activators
-  p.text-italic But do you really need that? ;)
-  example.example15(content-class="text-center my4" app-classes-string="d-block text-center")
-    w-button.pet-button.cat-button2.ma4(icon="mdi mdi-cat" xl @click="activator1 = '.cat-button2'")
-    w-button.pet-button.dog-button2.ma4(icon="mdi mdi-dog" xl @click="activator1 = '.dog-button2'")
-    w-menu(append-to=".example15" :activator="activator1" arrow)
-      | {{ activator1.includes('dog') ? 'Woof!' : 'Meow!' }}
-    template(#pug).
-      w-button.pet-button.cat-button.ma4(
-        icon="mdi mdi-cat"
-        xl
-        @click="activator = '.cat-button'")
-      w-button.pet-button.dog-button.ma4(
-        icon="mdi mdi-dog"
-        xl
-        @click="activator = '.dog-button'")
-
-      w-menu(:activator="activator" arrow)
-        | {{ "\{\{ activator.includes('dog') ? 'Woof!' : 'Meow!' \}\}" }}
-    template(#html).
-      &lt;w-button
-        icon="mdi mdi-cat"
-        xl
-        class="pet-button cat-button ma4"
-        @click="activator = '.cat-button'"&gt;
-      &lt;/w-button&gt;
-      &lt;w-button
-        icon="mdi mdi-dog"
-        xl
-        class="pet-button dog-button ma4"
-        @click="activator = '.dog-button'"&gt;
-      &lt;/w-button&gt;
-
-      &lt;w-menu :activator="activator" arrow&gt;
-        {{ "\{\{ activator.includes('dog') ? 'Woof!' : 'Meow!' \}\}" }}
-      &lt;/w-menu&gt;
-    template(#js).
-      data: () => ({
-        activator: '.pet-button'
-      })
-
-  title-link(h3 slug="external-activator--2-activators-on-hover").
-    Trigger the same menu on hover of 2 different external activators
-  p.text-italic But do you really need that too? ;)
-  alert(tip).
-    Note that like in this example, a tiny delay may help positioning the detachable correctly
-    in case of multiple activators with different menu contents.
-
-  example.example16(content-class="text-center my4" app-classes-string="d-block text-center")
-    w-button.pet-button2.cat-button3.ma4(
-      icon="mdi mdi-cat"
-      xl
-      @mouseenter="activator2 = '.cat-button3';menuContent = 'Meow!'"
-      @mouseleave="activator2 = '.pet-button2'")
-    w-button.pet-button2.dog-button3.ma4(
-      icon="mdi mdi-dog"
-      xl
-      @mouseenter="activator2 = '.dog-button3';menuContent = 'Woof!'"
-      @mouseleave="activator2 = '.pet-button2'")
-    w-menu(append-to=".example16" :activator="activator2" arrow show-on-hover :delay="100")
-      | {{ menuContent }}
-    template(#pug).
-      w-button.pet-button.cat-button.ma4(
-        icon="mdi mdi-cat"
-        xl
-        @mouseenter="activator = '.cat-button';menuContent = 'Meow!'"
-        @mouseleave="activator = '.pet-button'")
-      w-button.pet-button.dog-button.ma4(
-        icon="mdi mdi-dog"
-        xl
-        @mouseenter="activator = '.dog-button';menuContent = 'Woof!'"
-        @mouseleave="activator = '.pet-button'")
-
-      w-menu(:activator="activator" arrow show-on-hover :delay="100")
-        | {{ '\{\{ menuContent \}\}' }}
-    template(#html).
-      &lt;w-button
-        icon="mdi mdi-cat"
-        xl
-        class="pet-button cat-button ma4"
-        @mouseenter="activator = '.cat-button';menuContent = 'Meow!'"
-        @mouseleave="activator = '.pet-button'"&gt;
-      &lt;/w-button&gt;
-      &lt;w-button
-        icon="mdi mdi-dog"
-        xl
-        class="pet-button dog-button ma4"
-        @mouseenter="activator = '.dog-button';menuContent = 'Woof!'"
-        @mouseleave="activator = '.pet-button'"&gt;
-      &lt;/w-button&gt;
-
-      &lt;w-menu
-        :activator="activator"
-        arrow
-        show-on-hover
-        :delay="100"&gt;
-        {{ '\{\{ menuContent \}\}' }}
-      &lt;/w-menu&gt;
-    template(#js).
-      data: () => ({
-        activator: '.pet-button',
-        menuContent: ''
-      })
-
   title-link(h2) Arrow (Tooltip style)
   p Applies a tooltip style with the #[code arrow] option.
   example.example13(content-class="text-center my4" app-classes-string="align-center")
@@ -1049,7 +918,7 @@ div
     w-menu(append-to=".example11" custom hide-on-menu-click persistent shadow)
       template(#activator="{ on }")
         w-button(v-on="on") Show a list menu
-      w-list.white--bg(
+      w-list.base-color--bg(
         v-model="list"
         :items="[{ label: 'Item 1' }, { label: 'Item 2' }, { label: 'Item 3' }]"
         item-class="px8")
@@ -1060,7 +929,7 @@ div
       w-menu(custom hide-on-menu-click persistent shadow)
         template(#activator="{ on }")
           w-button(v-on="on") Show a list menu
-        w-list.white--bg(
+        w-list.base-color--bg(
           v-model="listSelection"
           :items="listItems"
           item-class="px8")
@@ -1080,7 +949,7 @@ div
         &lt;/template&gt;
 
         &lt;w-list
-          class="white--bg"
+          class="base-color--bg"
           v-model="listSelection"
           :items="listItems"
           item-class="px8"&gt;
@@ -1107,7 +976,7 @@ div
     w-menu(append-to=".example12" v-model="showListMenu2" shadow custom overlay)
       template(#activator="{ on }")
         w-button(v-on="on") Show a menu &amp; overlay
-      w-list.white--bg(
+      w-list.base-color--bg(
         nav
         :items="[{ label: 'Item 1', route: '#item1' }, { label: 'Item 2', route: '#item2' }, { label: 'Item 3', route: '#item3' }]"
         item-class="px8"
@@ -1116,7 +985,7 @@ div
       w-menu(v-model="showMenu" shadow custom overlay)
         template(#activator="{ on }")
           w-button(v-on="on") Show a menu &amp; overlay
-        w-list.white--bg(
+        w-list.base-color--bg(
           nav
           :items="listItems"
           item-class="px8"
@@ -1130,7 +999,7 @@ div
         &lt;/template&gt;
 
         &lt;w-list
-          class="white--bg"
+          class="base-color--bg"
           nav
           :items="listItems"
           item-class="px8"
@@ -1145,6 +1014,137 @@ div
           { label: 'Item 2', route: '#item2' },
           { label: 'Item 3', route: '#item3' }
         ]
+      })
+
+  title-link(h2) External activator
+  p.
+    External activators offer a great flexibility in the code and the advantage of accepting
+    multiple activators for the same menu (even elements that are not yet in the DOM).#[br]
+    The downside is that the event listeners for the activator(s) will be attached to the document
+    and not the activator itself. For that reason, it is not the recommended option if you have
+    the choice.
+  title-link(h3 slug="external-activator--basic") Trigger a menu on click of an external activator
+  example.example14(content-class="text-center my4" app-classes-string="text-center")
+    w-button.cat-button(icon="mdi mdi-cat" xl)
+    w-menu(append-to=".example14" activator=".cat-button" arrow) Meow!
+    template(#pug).
+      w-button.cat-button(icon="mdi mdi-cat" xl)
+
+      w-menu(activator=".cat-button" arrow) Meow!
+    template(#html).
+      &lt;w-button
+        icon="mdi mdi-cat"
+        xl
+        class="cat-button"&gt;
+      &lt;/w-button&gt;
+
+      &lt;w-menu activator=".cat-button" arrow&gt;
+        Meow!
+      &lt;/w-menu&gt;
+
+  title-link(h3 slug="external-activator--2-activators").
+    Trigger the same menu from 2 different external activators
+  p.text-italic But do you really need that? ;)
+  example.example15(content-class="text-center my4" app-classes-string="d-block text-center")
+    w-button.pet-button.cat-button2.ma4(icon="mdi mdi-cat" xl @click="activator1 = '.cat-button2'")
+    w-button.pet-button.dog-button2.ma4(icon="mdi mdi-dog" xl @click="activator1 = '.dog-button2'")
+    w-menu(append-to=".example15" :activator="activator1" arrow)
+      | {{ activator1.includes('dog') ? 'Woof!' : 'Meow!' }}
+    template(#pug).
+      w-button.pet-button.cat-button.ma4(
+        icon="mdi mdi-cat"
+        xl
+        @click="activator = '.cat-button'")
+      w-button.pet-button.dog-button.ma4(
+        icon="mdi mdi-dog"
+        xl
+        @click="activator = '.dog-button'")
+
+      w-menu(:activator="activator" arrow)
+        | {{ "\{\{ activator.includes('dog') ? 'Woof!' : 'Meow!' \}\}" }}
+    template(#html).
+      &lt;w-button
+        icon="mdi mdi-cat"
+        xl
+        class="pet-button cat-button ma4"
+        @click="activator = '.cat-button'"&gt;
+      &lt;/w-button&gt;
+      &lt;w-button
+        icon="mdi mdi-dog"
+        xl
+        class="pet-button dog-button ma4"
+        @click="activator = '.dog-button'"&gt;
+      &lt;/w-button&gt;
+
+      &lt;w-menu :activator="activator" arrow&gt;
+        {{ "\{\{ activator.includes('dog') ? 'Woof!' : 'Meow!' \}\}" }}
+      &lt;/w-menu&gt;
+    template(#js).
+      data: () => ({
+        activator: '.pet-button'
+      })
+
+  title-link(h3 slug="external-activator--2-activators-on-hover").
+    Trigger the same menu on hover of 2 different external activators
+  p.text-italic But do you really need that too? ;)
+  alert(tip).
+    Note that like in this example, a tiny delay may help positioning the detachable correctly
+    in case of multiple activators with different menu contents.
+
+  example.example16(content-class="text-center my4" app-classes-string="d-block text-center")
+    w-button.pet-button2.cat-button3.ma4(
+      icon="mdi mdi-cat"
+      xl
+      @mouseenter="activator2 = '.cat-button3';menuContent = 'Meow!'"
+      @mouseleave="activator2 = '.pet-button2'")
+    w-button.pet-button2.dog-button3.ma4(
+      icon="mdi mdi-dog"
+      xl
+      @mouseenter="activator2 = '.dog-button3';menuContent = 'Woof!'"
+      @mouseleave="activator2 = '.pet-button2'")
+    w-menu(append-to=".example16" :activator="activator2" arrow show-on-hover :delay="100")
+      | {{ menuContent }}
+    template(#pug).
+      w-button.pet-button.cat-button.ma4(
+        icon="mdi mdi-cat"
+        xl
+        @mouseenter="activator = '.cat-button';menuContent = 'Meow!'"
+        @mouseleave="activator = '.pet-button'")
+      w-button.pet-button.dog-button.ma4(
+        icon="mdi mdi-dog"
+        xl
+        @mouseenter="activator = '.dog-button';menuContent = 'Woof!'"
+        @mouseleave="activator = '.pet-button'")
+
+      w-menu(:activator="activator" arrow show-on-hover :delay="100")
+        | {{ '\{\{ menuContent \}\}' }}
+    template(#html).
+      &lt;w-button
+        icon="mdi mdi-cat"
+        xl
+        class="pet-button cat-button ma4"
+        @mouseenter="activator = '.cat-button';menuContent = 'Meow!'"
+        @mouseleave="activator = '.pet-button'"&gt;
+      &lt;/w-button&gt;
+      &lt;w-button
+        icon="mdi mdi-dog"
+        xl
+        class="pet-button dog-button ma4"
+        @mouseenter="activator = '.dog-button';menuContent = 'Woof!'"
+        @mouseleave="activator = '.pet-button'"&gt;
+      &lt;/w-button&gt;
+
+      &lt;w-menu
+        :activator="activator"
+        arrow
+        show-on-hover
+        :delay="100"&gt;
+        {{ '\{\{ menuContent \}\}' }}
+      &lt;/w-menu&gt;
+    template(#js).
+      data: () => ({
+        activator: '.pet-button',
+        menuContent: ''
       })
 </template>
 

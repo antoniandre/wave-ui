@@ -1,8 +1,9 @@
 import { reactive, inject } from 'vue'
 import { mergeConfig } from './utils/config'
-import { injectNotifManagerInDOM, NotificationManager } from './utils/notification-manager'
+import { consoleWarn } from './utils/console'
 import { colorPalette, generateColorShades, flattenColors } from './utils/colors'
 import { injectColorsCSSInDOM, injectCSSInDOM } from './utils/dynamic-css'
+import { injectNotifManagerInDOM, NotificationManager } from './utils/notification-manager'
 import './scss/index.scss'
 
 let mounted = false
@@ -19,13 +20,36 @@ const detectOSDarkMode = $waveui => {
 
 /**
  * Inject presets into a Vue component props defaults before its registration into the app.
+ * If a preset is not found in the given component props, try to find it in its mixins, if any.
  *
+ * @todo remove mixins-related code when stopping support for Vue 2.
  * @param {Object} component the Vue component to inject presets into.
  * @param {Object} presets the presets to inject. E.g. `{ bgColor: 'green' }`.
  */
 const injectPresets = (component, presets) => {
   for (const preset in presets) {
-    component.props[preset].default = presets[preset]
+    // If we don't have the prop output a warning and continue.
+    if (!component.props?.[preset]) {
+      let foundProp = false
+      // Check to see if the prop exists on a mixin when it doesn't exist on the component.
+      // @todo: remove this check when there is no more Vue 2 and mixins: mixins are now deprecated.
+      if (Array.isArray(component.mixins) && component.mixins.length) {
+        // Loop through the array of mixin, and if we find the prop in one, update its default value.
+        for (const mixin of component.mixins) {
+          if (mixin?.props?.[preset]) {
+            mixin.props[preset].default = presets[preset]
+            foundProp = true
+            break
+          }
+        }
+
+        // If the given prop (= preset) is still not found in the mixins props raise warning.
+        if (!foundProp) consoleWarn(`Attempting to set a preset on a prop that doesn't exist: \`${component.name}.${preset}\`.`)
+        continue // Continue to the next preset.
+      }
+    }
+
+    else component.props[preset].default = presets[preset]
   }
 }
 
@@ -61,7 +85,7 @@ export default class WaveUI {
       document.documentElement.setAttribute('data-theme', theme)
       document.head.querySelector('#wave-ui-colors')?.remove?.()
       const themeColors = this.config.colors[this.theme]
-      injectColorsCSSInDOM(themeColors)
+      injectColorsCSSInDOM(themeColors, this.config.css.colorShadeCssVariables)
       this.colors = flattenColors(themeColors, colorPalette)
     }
   }
@@ -115,15 +139,13 @@ export default class WaveUI {
       }
     })
 
+    // eslint-disable-next-line no-new
     new WaveUI(app, options)
     WaveUI.#registered = true
   }
 
   constructor (app, options = {}) {
-    if (WaveUI.#registered) {
-      console.warn('Wave UI is already instantiated.')
-      return
-    }
+    if (WaveUI.#registered) return // May happen with SSR.
 
     this.$waveui._notificationManager = new NotificationManager()
 

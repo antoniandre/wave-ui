@@ -19,6 +19,5 @@ export default {
 
 <style lang="scss">
 .w-parallax {
-
 }
 </style>

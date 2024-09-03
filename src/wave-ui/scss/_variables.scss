@@ -2,7 +2,7 @@
 @use "sass:map";
 
 @function divide($a, $b) {
-  @return math.div($a, $b); // Must use `sass` & not `node-sass`.
+  @return math.div($a, $b);
 }
 
 // THEME COLORS.
@@ -14,7 +14,7 @@ $theme-light: (
   base-color-rgb: (0, 0, 0), // #000.
   contrast-bg-color-rgb: (0, 0, 0), // #000.
   contrast-color-rgb: (255, 255, 255), // #fff.
-  caption-color-rgb: (80, 80, 80, 0.7), // #505050.
+  caption-color-rgb: (160, 160, 160), // #a0a0a0.
   disabled-color-rgb: (204, 204, 204), // #ccc.
 ) !default;
 
@@ -23,7 +23,7 @@ $theme-dark: (
   base-color-rgb: (255, 255, 255), // #fff.
   contrast-bg-color-rgb: (255, 255, 255), // #fff.
   contrast-color-rgb: (0, 0, 0), // #000.
-  caption-color-rgb: (175, 175, 175, 0.7), // #afafaf.
+  caption-color-rgb: (110, 110, 110), // #6e6e6e.
   disabled-color-rgb: (74, 74, 74), // #4a4a4a.
 ) !default;
 
@@ -47,8 +47,8 @@ $use-layout-classes: true !default;
 $base-font-size: 14px !default; // Must be a px unit.
 $base-increment: round(divide($base-font-size, 4)) !default;
 $layout-padding: $base-increment * 4 !default; // Applied on the .content-wrap tag.
-$border-radius: 3px !default;
-$border-color: rgba(var(--w-contrast-bg-color-rgb), 0.15) !default;
+$border-radius: 4px !default;
+$border-color: rgba(var(--w-contrast-bg-color-rgb), 0.12) !default;
 $border: 1px solid $border-color !default;
 $transition-duration: 0.25s !default;
 $fast-transition-duration: 0.15s !default;
@@ -116,7 +116,7 @@ $slider-step-label-color: rgba(var(--w-base-color-rgb), 0.5) !default;
 // w-switch.
 // --------------------------------------------------------
 $switch-inactive-color: rgba(var(--w-contrast-bg-color-rgb), 0.25) !default;
-$switch-thumb-color: #fff !default;
+$switch-thumb-color: $base-bg-color !default;
 // --------------------------------------------------------
 
 // w-table.

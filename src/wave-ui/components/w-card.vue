@@ -109,6 +109,13 @@ export default {
     &--has-toolbar {padding: 0;border-bottom: none;}
   }
 
+  // When there is no title apply the border radius to the image.
+  &__image:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    overflow: hidden;
+  }
+
   &__content {
     padding: 3 * $base-increment;
     flex-grow: 1;

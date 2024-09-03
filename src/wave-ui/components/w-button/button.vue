@@ -1,11 +1,11 @@
 <template lang="pug">
 component.w-button(
-  :is="route ? 'a' : 'button'"
+  :is="!disabled && route ? 'a' : 'button'"
   :type="!route && type"
-  :href="(route && (externalLink ? route : resolvedRoute)) || null"
+  :href="(!disabled && route && (externalLink ? route : resolvedRoute)) || null"
   :class="classes"
   :disabled="!!disabled || null"
-  v-on="listeners"
+  v-bind="attrs"
   :style="styles")
   w-icon(v-if="icon" v-bind="iconProps || {}") {{ icon }}
   slot(v-else)
@@ -23,6 +23,10 @@ component.w-button(
 
 <script>
 export default {
+  // Fully handle the attrs and listeners manually for the case of a router link that has both a
+  // route and onClick.
+  inheritAttrs: false,
+
   props: {
     color: { type: String },
     bgColor: { type: String },
@@ -70,21 +74,23 @@ export default {
     resolvedRoute () {
       return this.hasRouter ? this.$router.resolve(this.route).href : this.route
     },
-    listeners () {
+    attrs () {
+      const isValidRouterLink = this.route && this.hasRouter && !this.forceLink && !this.externalLink
       // If the button is a router-link, we can't apply events on it since vue-router needs the .native
       // modifier but it's not available with the v-on directive.
       // So do a manual router.push if $router is present.
-      // eslint-disable-next-line multiline-ternary
-      return this.route && this.hasRouter && !this.forceLink && !this.externalLink ? {
-        ...this.$attrs,
-        click: e => {
-          if (this.$attrs.click) this.$attrs.click(e)
+      const onRouterLinkClick = e => {
+        if (this.$attrs.onClick) this.$attrs.onClick(e)
 
-          this.$router.push(this.route)
-          e.stopPropagation() // If going to a route, no need to bubble up the event.
-          e.preventDefault()
-        }
-      } : this.$attrs
+        this.$router.push(this.route)
+        e.stopPropagation() // If going to a route, no need to bubble up the event.
+        e.preventDefault()
+      }
+
+      return {
+        ...this.$attrs,
+        onClick: !this.disabled && (isValidRouterLink ? onRouterLinkClick : this.$attrs.onClick)
+      }
     },
     size () {
       return (
@@ -165,7 +171,7 @@ $spinner-size: 40;
   z-index: 1;
   // Background-color must not transition to not affect the hover & focus states
   // in :before & :after.
-  transition: $transition-duration, background-color 0s, padding 0s;
+  transition: all $transition-duration, background-color 0s, padding 0s;
   -webkit-tap-highlight-color: transparent;
 
   @include themeable;
@@ -203,6 +209,7 @@ $spinner-size: 40;
     aspect-ratio: 1;
     border-radius: 99em;
     padding: 0;
+    min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
   }
   &--tile {border-radius: initial;}
   &--shadow {box-shadow: $box-shadow;}
@@ -236,10 +243,7 @@ $spinner-size: 40;
   &:before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     opacity: 0;
     background-color: #000;
     border-radius: inherit;
@@ -253,10 +257,10 @@ $spinner-size: 40;
   // Button states.
   // ------------------------------------------------------
   // Hover & focus states - inside button.
-  &:hover:before, &:focus:before {opacity: 0.08;}
-  &--dark:hover:before, &--dark:focus:before {opacity: 0.2;}
-  &--outline:hover:before, &--outline:focus:before,
-  &--text:hover:before, &--text:focus:before {opacity: 0.12;}
+  &:hover:before, &:focus-visible:before {opacity: 0.2;}
+  &--dark:hover:before, &--dark:focus-visible:before {opacity: 0.4;}
+  &--outline:hover:before, &--outline:focus-visible:before,
+  &--text:hover:before, &--text:focus-visible:before {opacity: 0.12;}
 
   // Focus state - outside button.
   &:after {
@@ -273,22 +277,28 @@ $spinner-size: 40;
     transition: opacity 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-in;
     transform: scale(0.85, 0.7);
   }
-  &:focus:after {
+  &:focus-visible:after {
     opacity: 0.4;
     transform: scale(1);
     transition: opacity 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.25s ease-out;
   }
-  &--dark:focus:after {opacity: 0.2;}
+  &--dark:focus-visible:after {opacity: 0.2;}
 
   // Active state.
-  &:active:before {opacity: 0.2;}
-  &--dark:active:before, &.primary--bg:active:before {opacity: 0.25;}
+  &:active {transform: scale(1.02);}
+  &:active:before {
+    opacity: 0.3;
+    @include default-transition($fast-transition-duration);
+  }
+  &--dark:active:before, &.primary--bg:active:before {opacity: 0.35;}
 
   // Disable visual feedback on loading and disabled buttons.
   &--loading:hover:before,
-  &--loading:focus:before,
+  &--loading:focus-visible:before,
   &--loading:active:before,
   &[disabled]:before {opacity: 0;}
+  &--loading:active,
+  &[disabled] {transform: none;}
   // ------------------------------------------------------
 
   // Disable events binding on nested content.
@@ -296,14 +306,12 @@ $spinner-size: 40;
 
   &__loader {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     background: inherit;
+    border-radius: inherit;
 
     svg {height: 75%;}
     circle {

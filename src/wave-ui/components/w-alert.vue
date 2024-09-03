@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-alert(v-if="show" v-on="$attrs" :class="classes")
+.w-alert(v-if="show" :class="classes")
   //- Add a wrapper around the content when needed.
   template(v-if="type || icon || dismiss")
     w-icon.w-alert__icon.mr2(v-if="type || icon") {{ type ? typeIcon : icon }}
@@ -162,10 +162,7 @@ export default {
   // ------------------------------------------------------
   &:before, &:after {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     background-color: currentColor;
     pointer-events: none;
   }

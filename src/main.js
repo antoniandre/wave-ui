@@ -21,13 +21,8 @@ app
   .use(WaveUI, {
     on: '#app',
     colors: {
-      light: {
-        primary: '#234781',
-        secondary: '#d3ebff'
-      },
       dark: {
-        primary: '#7fb0cf',
-        secondary: '#d3ebff'
+        primary: '#7fb0cf'
       }
     },
     theme: 'auto'

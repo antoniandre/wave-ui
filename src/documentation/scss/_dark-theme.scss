@@ -1,3 +1,5 @@
+$fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
+
 // Global theming rules.
 // ======================================================
 [data-theme] {
@@ -41,17 +43,34 @@
   .go-top,
   caption,
   .primary--bg,
-  .primary,
   .nav-menu-wrap:after,
   div.nav-menu .w-tree__item-icon,
   div.nav-menu .w-tree__item-label,
   div.nav-menu .w-tree__item-label:before {
     @include theme-switch-transition;
   }
+  .w-app div[class$="-leave-active"],
+  .w-app div[class$="-leave-from"],
+  .w-app div[class$="-leave-to"],
+  .w-app div[class$="-enter-active"],
+  .w-app div[class$="-enter-from"],
+  .w-app div[class$="-enter-to"] {
+    transition: all $transition-duration $fast-out-slow-in !important;
+  }
 }
 
 .content-wrap {transition: background-color $theme-switch-transition;}
 .w-tabs__bar-item {transition: 0.25s ease-in-out, flex-grow 0s, flex 0s, color $theme-switch-transition;}
+[data-theme] .w-app .w-input__label--inside,
+[data-theme] .w-app .w-textarea__label--inside,
+[data-theme] .w-app .w-select__label--inside {
+  transition: 0.25s ease,
+    color $theme-switch-transition,
+    background-color $theme-switch-transition,
+    border-color $theme-switch-transition,
+    stroke $theme-switch-transition,
+    fill $theme-switch-transition;
+}
 .main--getting-started .w-accordion__item-content {transition: background-color $theme-switch-transition;}
 .nav-menu-wrap {transition: border-color $theme-switch-transition;}
 .hue-on-dark .example__render {transition: filter $theme-switch-transition;}
@@ -108,7 +127,7 @@
     background-color: rgba(130, 130, 130, 0.2);
     color: #ff6363;
   }
-  .code:not(.inherit):not(.primary):not(.contrast-color):not(.amber-dark3) {color: rgb(var(--w-base-color-rgb));}
+  .code:not(.inherit):not(.primary):not(.teal):not(.contrast-color):not(.amber-dark3) {color: rgb(var(--w-base-color-rgb));}
   .ssh-pre {
     border-color: rgba(var(--w-base-color-rgb), 0.06);
     background-color: rgba(#000, 0.3);
@@ -165,8 +184,6 @@
   .transition-box {
     background-color: rgba(0, 0, 0, 0.15);
     border-color: rgba(0, 0, 0, 0.4);
-
-    .amber-light4--bg {background-color: transparent;}
   }
 
   .main--layout-grid-system {

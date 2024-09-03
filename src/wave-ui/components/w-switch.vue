@@ -5,7 +5,8 @@ component(
   v-bind="formRegister && { validators, inputValue: isOn, disabled: isDisabled, readonly: isReadonly }"
   v-model:valid="valid"
   @reset="$emit('update:modelValue', isOn = null);$emit('input', null)"
-  :class="classes")
+  :class="classes"
+  :style="$attrs.style")
   input(
     ref="input"
     :id="`w-switch--${_.uid}`"
@@ -17,6 +18,7 @@ component(
     :aria-readonly="isReadonly ? 'true' : 'false'"
     :required="required || null"
     :tabindex="tabindex || null"
+    v-bind="attrs"
     @change="onInput() /* Edge doesn't fire input on checkbox/radio/select change */"
     @focus="$emit('focus', $event)"
     :aria-checked="isOn || 'false'"
@@ -29,7 +31,6 @@ component(
       slot {{ label }}
   .w-switch__input(
     @click="$refs.input.focus();$refs.input.click()"
-    v-on="$attrs"
     :class="inputClasses")
     .w-switch__track(v-if="$slots.track")
       slot(name="track")
@@ -54,6 +55,7 @@ import FormElementMixin from '../mixins/form-elements'
 export default {
   name: 'w-switch',
   mixins: [FormElementMixin],
+  inheritAttrs: false, // The attrs should only be added to the input not the wrapper.
 
   props: {
     modelValue: { default: false }, // v-model.
@@ -84,6 +86,13 @@ export default {
   },
 
   computed: {
+    attrs () {
+      // Remove class and style which are meant to stay on the wrapper.
+      // Note: in Vue 3 $attrs may contain both HTML attributes AND JS events (onClick, onFocus, etc.).
+      // eslint-disable-next-line no-unused-vars
+      const { class: classes, style, ...attrs } = this.$attrs
+      return attrs
+    },
     hasLabel () {
       return this.label || this.$slots.default
     },
@@ -99,7 +108,9 @@ export default {
         'w-switch--loading': this.loading,
         'w-switch--rippled': this.ripple.end,
         'w-switch--dark': this.dark,
-        'w-switch--light': this.light
+        'w-switch--light': this.light,
+        // With the inheritAttrs set to false any class on the component would be lost, so add it back.
+        [this.$attrs.class]: !!this.$attrs.class
       }
     },
     inputClasses () {
@@ -150,6 +161,7 @@ $outline-width: 2px;
   align-items: center;
   vertical-align: middle;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   @include themeable;
 
@@ -157,7 +169,6 @@ $outline-width: 2px;
   &--disabled, &--readonly {
     cursor: not-allowed;
     touch-action: initial;
-    -webkit-tap-highlight-color: transparent;
   }
 
   // Hidden checkbox.
@@ -209,6 +220,9 @@ $outline-width: 2px;
   &__track {
     position: absolute;
     left: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; // Center any content that could be put via slots.
     padding: 0 4px;
     transform: translateX(-100%);
     @include default-transition;
@@ -220,12 +234,13 @@ $outline-width: 2px;
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
     width: $small-form-el-size;
     height: $small-form-el-size;
+    display: flex;
+    align-items: center;
+    justify-content: center; // Center any content that could be put via slots.
     background-color: $switch-thumb-color;
     border-radius: 100%;
-    text-align: center;
     @include default-transition;
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
@@ -245,14 +260,10 @@ $outline-width: 2px;
   &--loading .w-progress {padding: 1px;}
   &--loading.w-switch--thin.w-switch--on .w-progress {color: #fff;}
   &--loading &__input:after, &--custom-thumb &__input:after {display: none;}
-  &__thumb > * {
-    width: inherit;
-    height: inherit;
-  }
 
   // The focus outline & ripple on switch activation.
   &__input:before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     top: 0;

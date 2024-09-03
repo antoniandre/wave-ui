@@ -1,32 +1,32 @@
 <template lang="pug">
-.w-confirm
-  w-menu(v-model="showPopup" v-bind="wMenuProps")
-    template(#activator="{ on }")
-      w-button.w-confirm__button(v-bind="{ ...$attrs, ...buttonProps, ...(disablePrompt ? {} : on) }")
-        slot
-    w-flex(:column="!inline" align-center)
-      div
-        slot(name="question") {{ question }}
-      .w-flex.justify-end(:class="inline ? 'ml2' : 'mt2'")
-        w-button.mr2(
-          v-if="cancel !== false"
-          v-bind="cancelButtonProps"
-          :bg-color="(cancelButton || {}).bgColor || 'error'"
-          @keyup.escape="!persistent && onCancel()"
-          @click="onCancel")
-          slot(name="cancel") {{ cancelButton.label }}
-        w-button(
-          v-bind="confirmButtonProps"
-          :bg-color="(confirmButton || {}).bgColor || 'success'"
-          v-focus
-          @keyup.escape="!persistent && onCancel()"
-          @click="onConfirm")
-          slot(name="confirm") {{ confirmButton.label }}
+w-menu(v-model="showPopup" v-bind="wMenuProps")
+  template(#activator="{ on }")
+    w-button.w-confirm(v-bind="{ ...$attrs, ...buttonProps }" v-on="disablePrompt ? {} : { ...on }")
+      slot
+  w-flex(:column="!inline" align-center)
+    div
+      slot(name="question") {{ question }}
+    .w-flex.justify-end(:class="inline ? 'ml2' : 'mt2'")
+      w-button.mr2(
+        v-if="cancel !== false"
+        v-bind="cancelButtonProps"
+        :bg-color="(cancelButton || {}).bgColor || 'error'"
+        @keyup.escape="!persistent && onCancel()"
+        @click="onCancel")
+        slot(name="cancel") {{ cancelButton.label }}
+      w-button(
+        v-bind="confirmButtonProps"
+        :bg-color="(confirmButton || {}).bgColor || 'success'"
+        v-focus
+        @keyup.escape="!persistent && onCancel()"
+        @click="onConfirm")
+        slot(name="confirm") {{ confirmButton.label }}
 </template>
 
 <script>
 export default {
   name: 'w-confirm',
+  inheritAttrs: false, // The attrs are only bound to the button, not the w-menu.
   props: {
     // Main button props.
     bgColor: { type: String },

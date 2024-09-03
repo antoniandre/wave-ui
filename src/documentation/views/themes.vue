@@ -22,10 +22,10 @@ main
   title-link(h2) Switching theme
   p While running, you can still switch the theme very easily with: #[code $waveui.switchTheme('dark')].
   example
-    w-button.ma1(@click="$waveui.switchTheme('light')")
+    w-button.ma1(@click="$waveui.switchTheme('light'), $store.commit('setDarkMode', false)")
       w-icon.mr1(color="yellow") mdi mdi-white-balance-sunny
       | Light theme
-    w-button.ma1(@click="$waveui.switchTheme('dark')")
+    w-button.ma1(@click="$waveui.switchTheme('dark'), $store.commit('setDarkMode', true)")
       w-icon.mr1(color="yellow") mdi mdi-weather-night
       | Dark theme
     template(#pug).
@@ -164,7 +164,7 @@ main
           @click="$waveui.switchTheme($waveui.theme === 'light' ? 'dark' : 'light')")
       ssh-pre(
         v-show="!$store.state.usePug"
-        language="vue-html"
+        language="html-vue"
         :dark="$store.state.darkMode").
         &lt;w-button
           fixed

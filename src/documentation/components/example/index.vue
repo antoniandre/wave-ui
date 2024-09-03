@@ -189,11 +189,10 @@ export default {
       // JS.
       if (blanks.includes('js')) js = slots.js
       else {
-        const darkThemeColors = "\n  colors: {\n    primary: '#89b6d2',\n    secondary: '375b6a'\n  },\n  theme: 'dark'\n"
         js = 'const app = Vue.createApp({\n' +
                 '  ' + slots.js.replace(/\n+$/, '').replace(/\n/g, '\n  ') + '\n' +
               '})\n\n' +
-              `app.use(WaveUI, {${this.$store.state.darkMode ? darkThemeColors : ''}})\n\n` +
+              'app.use(WaveUI, { theme: \'auto\' })\n\n' +
               'app.mount(\'#app\')'
       }
 
@@ -259,6 +258,7 @@ export default {
     padding: 12px;
     overflow: auto;
   }
+  &__render.ovh {overflow: hidden;}
 
   &__source {
     position: relative;

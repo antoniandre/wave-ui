@@ -6,7 +6,8 @@ component(
   v-model:valid="valid"
   @reset="$emit('update:modelValue', inputValue = '');$emit('input', '')"
   :wrap="hasLabel && labelPosition !== 'inside'"
-  :class="classes")
+  :class="classes"
+  :style="$attrs.style")
   input(v-if="type === 'hidden'" type="hidden" :name="name || null" v-model="inputValue")
 
   template(v-else)
@@ -20,17 +21,17 @@ component(
 
     //- Input wrapper.
     .w-input__input-wrap(:class="inputWrapClasses")
-      w-icon.w-input__icon.w-input__icon--inner-left(
-        v-if="innerIconLeft"
-        tag="label"
-        :for="`w-input--${_.uid}`"
-        @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
+      slot(name="icon-left" :input-id="`w-input--${_.uid}`")
+        w-icon.w-input__icon.w-input__icon--inner-left(
+          v-if="innerIconLeft"
+          tag="label"
+          :for="`w-input--${_.uid}`"
+          @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
       //- All types of input except file.
       input.w-input__input(
         v-if="type !== 'file'"
         ref="input"
         v-model="inputValue"
-        v-on="listeners"
         @input="onInput"
         @focus="onFocus"
         @blur="onBlur"
@@ -61,6 +62,7 @@ component(
           @change="onFileChange"
           :multiple="multiple || null"
           v-bind="attrs"
+          :disabled="isDisabled || null"
           :data-progress="overallFilesProgress /* Needed to emit the overallProgress. */")
         transition-group.w-input__input.w-input__input--file(
           tag="label"
@@ -77,14 +79,15 @@ component(
       template(v-if="labelPosition === 'inside' && showLabelInside")
         label.w-input__label.w-input__label--inside.w-form-el-shakable(
           v-if="$slots.default || label"
-          :for="`w-input--${_.uid}`"
           :class="labelClasses")
           slot {{ label }}
-      w-icon.w-input__icon.w-input__icon--inner-right(
-        v-if="innerIconRight"
-        tag="label"
-        :for="`w-input--${_.uid}`"
-        @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
+
+      slot(name="icon-right" :input-id="`w-input--${_.uid}`")
+        w-icon.w-input__icon.w-input__icon--inner-right(
+          v-if="innerIconRight"
+          tag="label"
+          :for="`w-input--${_.uid}`"
+          @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
       w-progress.fill-width(
         v-if="hasLoading || (showProgress && (uploadInProgress || uploadComplete))"
@@ -119,7 +122,9 @@ component(
 
 <script>
 /**
- * @todo Share the common parts between w-input, w-textarea & w-select.
+ * @todo
+ * - Share the common parts between w-input, w-textarea & w-select.
+ * - option to fit to the content using contenteditable div
  **/
 
 import FormElementMixin from '../mixins/form-elements'
@@ -128,6 +133,7 @@ import { reactive } from 'vue'
 export default {
   name: 'w-input',
   mixins: [FormElementMixin],
+  inheritAttrs: false, // The attrs should only be added to the input not the wrapper.
 
   props: {
     modelValue: { default: '' },
@@ -181,17 +187,13 @@ export default {
 
   computed: {
     attrs () {
-      // Keep the `class` attribute bound to the wrapper and not the input.
+      // Remove class and style which are meant to stay on the wrapper.
+      // Note: in Vue 3 $attrs may contain both HTML attributes AND JS events (onClick, onFocus, etc.).
       // eslint-disable-next-line no-unused-vars
-      const { class: classes, ...htmlAttrs } = this.$attrs
-      return htmlAttrs
-    },
-
-    listeners () {
-      // Remove the events that are fired separately, so they don't fire twice.
-      // eslint-disable-next-line no-unused-vars
-      const { input, focus, blur, ...listeners } = this.$attrs
-      return listeners
+      const { class: classes, style, ...attrs } = this.$attrs
+      // Resets the input[type=file] the native HTML way.
+      if (this.type === 'file' && !this.inputFiles.length) attrs.value = null
+      return attrs
     },
 
     hasValue () {
@@ -230,7 +232,7 @@ export default {
     overallFilesProgress () {
       const progress = +this.inputFiles.reduce((total, file) => total + file.progress, 0)
       const total = progress / this.inputFiles.length
-      this.$emit('update:overallProgress', this.inputFiles.length ? total : undefined)
+      this.$emit('update:overallProgress', this.inputFiles.length ? total : 0)
 
       return total
     },
@@ -257,7 +259,9 @@ export default {
         'w-input--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
         'w-input--has-placeholder': this.placeholder,
         'w-input--inner-icon-left': this.innerIconLeft,
-        'w-input--inner-icon-right': this.innerIconRight
+        'w-input--inner-icon-right': this.innerIconRight,
+        // With the inheritAttrs set to false any class on the component would be lost, so add it back.
+        [this.$attrs.class]: !!this.$attrs.class
       }
     },
 
@@ -318,8 +322,10 @@ export default {
 
         return file
       })
-      this.$emit('update:modelValue', this.inputFiles)
-      this.$emit('input', this.inputFiles)
+
+      const filesPayload = this.multiple ? this.inputFiles : this.inputFiles[0]
+      this.$emit('update:modelValue', filesPayload)
+      this.$emit('input', filesPayload)
     },
 
     // For file input.
@@ -359,7 +365,10 @@ export default {
     modelValue (value) {
       this.inputValue = value
       // When clearing the field value, also reset the isAutofilled var for the CSS class.
-      if (!value && value !== 0) this.isAutofilled = false
+      if (!value && value !== 0) {
+        this.isAutofilled = false
+        this.inputFiles = []
+      }
     }
   }
 }
@@ -466,6 +475,7 @@ $inactive-color: #777;
     align-items: center;
     background: none;
     border: none;
+    border-radius: inherit; // Mostly for the browser-autofilled appearance.
     outline: none;
     padding-left: 2 * $base-increment;
     padding-right: 2 * $base-increment;
@@ -561,6 +571,7 @@ $inactive-color: #777;
   &__label {
     transition: color $transition-duration;
     cursor: pointer;
+    user-select: none;
 
     &--left {margin-right: 2 * $base-increment;}
     &--right {margin-left: 2 * $base-increment;}
@@ -581,6 +592,7 @@ $inactive-color: #777;
     top: 50%;
     left: 0;
     padding-left: 2 * $base-increment;
+    white-space: nowrap;
     transform: translateY(-50%);
     pointer-events: none;
 

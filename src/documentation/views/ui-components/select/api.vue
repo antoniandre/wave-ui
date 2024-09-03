@@ -39,6 +39,7 @@ const propsDescs = {
   round: 'Sets a maximum border-radius on the corners of the select field, giving it a round look.',
   shadow: 'Applies a drop shadow to the select field.',
   tile: 'Removes the default border-radius and sets sharp edges on the select field.',
+  fitToContent: 'Fits the select list width to its selected content.',
   dark: false, // Hide the prop. 'When set to true, the text color will be set to white.',
   returnObject: 'The current selection is returned via the <code>value</code> prop or <code>v-model</code> as an array of full objects or a single full object (returning the original as given) when <code>multiple</code> is set to false.',
   name: 'Provide a native HTML <code>name</code> attribute to the select field. If not provided, a unique name will be computed.',
@@ -71,7 +72,9 @@ const slots = {
       selected: 'A Boolean representing the selected state of the list item.',
       index: 'The index of the list item.'
     }
-  }
+  },
+  'icon-left': { description: 'The left icon, if the <code>innerIconLeft</code> prop is not flexible enough.<br/>' },
+  'icon-right': { description: 'The right icon, if the <code>innerIconRight</code> prop is not flexible enough.' }
 }
 
 const events = {

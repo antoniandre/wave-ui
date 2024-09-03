@@ -11,6 +11,7 @@ export default createStore({
   mutations: {
     setDarkMode (state, bool) {
       state.darkMode = bool
+      localStorage.darkMode = bool
     },
     setCurrentPage (state, pageTitle) {
       state.currentPage = pageTitle

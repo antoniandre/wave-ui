@@ -9,7 +9,9 @@ main
     template(#item-title.1)
       title-link.ml2.my3(h2 @click.prevent) Wave UI global options
     template(#item-content.1)
-      p Wave UI accepts these configuration options:
+      p
+        | Wave UI accepts these configuration options
+        span.caption.ml1 (in the #[code app.use(WaveUI, { /* Config */ })]):
       ul.mt4
         li.mb4(v-for="(item, i) in waveUiOptions" :key="i")
           code.title3 {{ item.label }}
@@ -107,9 +109,9 @@ main
         The #[code $waveui] object is a Swiss Army Knife at your disposal. It can help you in many
         ways, it is completely reactive, and accessible from anywhere in your app via:#[br]
       w-list(:items="3" icon="wi-check")
-        template(#item.1) #[code.py0.mr1 this.$waveui] in a Vue component
+        template(#item.1) #[code.py0.mr1 inject('$waveui')] when using Vue's Composition API
         template(#item.2) #[code.py0.mr1 $waveui] in any Vue template
-        template(#item.3) #[code.py0.mr1 inject('$waveui')] when using the Vue composition API
+        template(#item.3) #[code.py0.mr1 this.$waveui] in a Vue component when not using the Composition API
       p.mt6 Here is the list of what you can find in this object, along with the current values in this app as an illustration:
       w-accordion(
         :items="waveuiObject"
@@ -121,6 +123,7 @@ main
           p.text-bold(v-html="item.desc")
           template(v-if="!item.title.includes('()')")
             .title4.text-bold.mt6 Current value(s) in this app and context:
+            p.caption(v-if="item.title === 'breakpoint'") This object is reactive, try to resize your browser width!
             pre.primary-light1 {{ $waveui[item.title] }}
 </template>
 
@@ -133,6 +136,8 @@ export default {
       { label: 'breakpoints', route: 'breakpoints' },
       { label: 'colors', route: 'colors' },
       { label: 'css', definition: 'A set of CSS-related options.' },
+      // { label: 'css.colorShades', definition: 'With this option set to true, all the color shades will be generated.' },
+      // { label: 'css.colorShadeCssVariables', definition: 'With this option set to true, all the color shades will have their own CSS variable generated.' },
       { label: 'icons', route: 'w-icon' },
       { label: 'iconsLigature', route: 'w-icon' },
       { label: 'notificationManager', route: 'w-notification' },

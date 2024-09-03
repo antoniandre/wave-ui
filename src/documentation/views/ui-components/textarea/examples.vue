@@ -1,13 +1,25 @@
 <template lang="pug">
 div
+  w-alert(info)
+    .title4 Good to know
+    p.body.
+      Any HTML attribute or JavaScript event listeners attached to the component will be applied to the
+      native textarea element inside the #[strong.code.inherit w-textarea] component, except the style
+      and class attributes which will stay on the wrapper (for convenience and to respect the internal
+      design of the component).#[br]
+      This will allow you to add common HTML attributes (like #[code tabindex], #[code name], etc.) and
+      attach event listeners (like #[code @focus], #[code @keypress], etc.) directly to the form field
+      itself (textarea).
+
   title-link(h2) Default
   p.
     By default the #[span.code w-textarea] component has a label inside the textarea that moves up above
     the textarea on focus or when the textarea is filled by some content or a placeholder.#[br]
     The default number of rows is 3, and when adding lines the textarea will adjust its size.
+
   example
     w-textarea Label
-    //- template(#pug).
+    template(#pug).
       w-textarea Label
     template(#html).
       &lt;w-textarea&gt;Label&lt;/w-textarea&gt;
@@ -17,7 +29,7 @@ div
     w-textarea Label
     w-textarea.mt4(placeholder="Placeholder")
     w-textarea.mt4(label="Label" placeholder="Placeholder")
-    //- template(#pug).
+    template(#pug).
       w-textarea Label
       w-textarea.mt4(placeholder="Placeholder")
       w-textarea.mt4(label="Label" placeholder="Placeholder")
@@ -43,7 +55,7 @@ div
 
   example
     w-textarea(model-value="Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n\nDoloribus eligendi nobis quos sit, reiciendis molestias voluptates quas tenetur temporibus nihil eius ipsa.\nSaepe dolor voluptatem, quam eaque sed maxime numquam? Veniam, quibusdam.\n\nExpedita nostrum sapiente enim dolorem tempore, vero dicta odit nemo facere sed hic exercitationem impedit consequuntur tempora modi.\nExercitationem, ipsa autem deleniti consequatur doloribus dicta incidunt placeat laborum?Soluta similique exercitationem, officiis in dolorum aspernatur voluptatum laudantium neque officia maiores eum voluptate quasi nulla libero repellendus earum quis ullam ratione est at nisi modi maxime commodi.\n\n\nDucimus, quam? Dignissimos minima architecto doloremque voluptate maxime dicta laborum facere sapiente quas, tempore iste quos?\nObcaecati ea id nobis, ab neque porro iure.\nVoluptates temporibus aliquid, neque id sit commodi consequatur.Totam assumenda, illo fugiat itaque enim dignissimos pariatur aut placeat neque accusantium nemo dicta incidunt unde at esse harum vitae eligendi in maiores dolorum delectus quis dolorem qui beatae! Tenetur?")
-    //- template(#pug).
+    template(#pug).
       w-textarea(model-value="Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n\nDoloribus eligendi nobis quos sit, reiciendis molestias voluptates quas tenetur temporibus nihil eius ipsa.\nSaepe dolor voluptatem, quam eaque sed maxime numquam? Veniam, quibusdam.\n\nExpedita nostrum sapiente enim dolorem tempore, vero dicta odit nemo facere sed hic exercitationem impedit consequuntur tempora modi.\nExercitationem, ipsa autem deleniti consequatur doloribus dicta incidunt placeat laborum?Soluta similique exercitationem, officiis in dolorum aspernatur voluptatum laudantium neque officia maiores eum voluptate quasi nulla libero repellendus earum quis ullam ratione est at nisi modi maxime commodi.\n\n\nDucimus, quam? Dignissimos minima architecto doloremque voluptate maxime dicta laborum facere sapiente quas, tempore iste quos?\nObcaecati ea id nobis, ab neque porro iure.\nVoluptates temporibus aliquid, neque id sit commodi consequatur.Totam assumenda, illo fugiat itaque enim dignissimos pariatur aut placeat neque accusantium nemo dicta incidunt unde at esse harum vitae eligendi in maiores dolorum delectus quis dolorem qui beatae! Tenetur?")
     template(#html).
       &lt;w-textarea model-value="Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n\nDoloribus eligendi nobis quos sit, reiciendis molestias voluptates quas tenetur temporibus nihil eius ipsa.\nSaepe dolor voluptatem, quam eaque sed maxime numquam? Veniam, quibusdam.\n\nExpedita nostrum sapiente enim dolorem tempore, vero dicta odit nemo facere sed hic exercitationem impedit consequuntur tempora modi.\nExercitationem, ipsa autem deleniti consequatur doloribus dicta incidunt placeat laborum?Soluta similique exercitationem, officiis in dolorum aspernatur voluptatum laudantium neque officia maiores eum voluptate quasi nulla libero repellendus earum quis ullam ratione est at nisi modi maxime commodi.\n\n\nDucimus, quam? Dignissimos minima architecto doloremque voluptate maxime dicta laborum facere sapiente quas, tempore iste quos?\nObcaecati ea id nobis, ab neque porro iure.\nVoluptates temporibus aliquid, neque id sit commodi consequatur.Totam assumenda, illo fugiat itaque enim dignissimos pariatur aut placeat neque accusantium nemo dicta incidunt unde at esse harum vitae eligendi in maiores dolorum delectus quis dolorem qui beatae! Tenetur?"&gt;&lt;/w-textarea&gt;
@@ -52,7 +64,7 @@ div
   example
     w-textarea(no-autogrow rows="6") Textarea label
     w-textarea.mt4(no-autogrow resizable rows="6") Textarea label
-    //- template(#pug).
+    template(#pug).
       w-textarea(no-autogrow rows="6") Textarea label
       w-textarea.mt4(no-autogrow resizable rows="6") Textarea label
     template(#html).
@@ -73,7 +85,7 @@ div
   title-link(h2) Outline
   example
     w-textarea(outline) Textarea label
-    //- template(#pug).
+    template(#pug).
       w-textarea(outline) Textarea label
     template(#html).
       &lt;w-textarea outline&gt;Textarea label&lt;/w-textarea&gt;
@@ -82,7 +94,7 @@ div
   example
     w-textarea(shadow) Textarea label
     w-textarea.mt4(outline shadow) Textarea label
-    //- template(#pug).
+    template(#pug).
       w-textarea(shadow) Textarea label
       w-textarea.mt4(outline shadow) Textarea label
     template(#html).
@@ -98,7 +110,7 @@ div
   example
     w-textarea(tile) Textarea label
     w-textarea.mt4(outline tile) Textarea label
-    //- template(#pug).
+    template(#pug).
       w-textarea(tile) Textarea label
       w-textarea.mt4(outline tile) Textarea label
     template(#html).
@@ -120,7 +132,7 @@ div
     w-textarea.mt4(outline color="blue") Textarea label
     w-textarea.mt4(bg-color="blue-light5" color="blue-dark3") Textarea label
     w-textarea.mt4(outline bg-color="blue-light5" color="blue-dark3") Textarea label
-    //- template(#pug).
+    template(#pug).
       w-textarea(color="blue") Textarea label
       w-textarea.mt4(outline color="blue") Textarea label
       w-textarea.mt4(bg-color="blue-light5" color="blue-dark3") Textarea label
@@ -157,7 +169,7 @@ div
     w-textarea(outline) Label inside
     w-textarea.mt4(outline label-position="left") Label left
     w-textarea.mt4(outline label-position="right") Label right
-    //- template(#pug).
+    template(#pug).
       w-textarea(outline) Label inside
       w-textarea.mt4(outline label-position="left") Label left
       w-textarea.mt4(outline label-position="right") Label right
@@ -196,7 +208,7 @@ div
     w-textarea.mt4(label-position="right" outline)
       w-icon.orange mdi mdi-arrow-left
       span.red.ml1 Right
-    //- template(#pug).
+    template(#pug).
       w-textarea(label-position="inside" outline)
         w-icon.orange mdi mdi-arrow-right
         span.purple.mx1 Inside
@@ -232,10 +244,11 @@ div
     .title4.mt6.mb2 Label inside
     w-textarea(label="Message" label-position="inside" outline inner-icon-left="mdi mdi-email")
     w-textarea.mt4(label="Message" label-position="inside" outline inner-icon-right="mdi mdi-email")
-    //- template(#pug).
+    template(#pug).
       .title4.mb2 Label outside
       w-textarea(label="Message" label-position="left" outline inner-icon-left="mdi mdi-email")
       w-textarea.mt4(label="Message" label-position="right" outline inner-icon-right="mdi mdi-email")
+
       .title4.mt6.mb2 Label inside
       w-textarea(label="Message" label-position="inside" outline inner-icon-left="mdi mdi-email")
       w-textarea.mt4(label="Message" label-position="inside" outline inner-icon-right="mdi mdi-email")
@@ -290,23 +303,23 @@ div
       label="Readonly & filled"
       outline
       readonly)
-    //- template(#pug).
+    template(#pug).
       w-textarea.mb4(
-        label="Disabled & empty"
+        label="Disabled &amp; empty"
         outline
         disabled)
       w-textarea.mb4(
         value="Some content"
-        label="Disabled & filled"
+        label="Disabled &amp; filled"
         outline
         disabled)
       w-textarea.mb4(
-        label="Readonly & empty"
+        label="Readonly &amp; empty"
         outline
         readonly)
       w-textarea(
         value="Some content"
-        label="Readonly & filled"
+        label="Readonly &amp; filled"
         outline
         readonly)
     template(#html).

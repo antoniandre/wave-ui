@@ -14,6 +14,8 @@
     .fill-width {width: 100%;}
     .fill-height {height: 100%;}
     .basis-zero {flex-basis: 0;}
+    .wrap {flex-wrap: wrap;}
+    .no-wrap {flex-wrap: nowrap;}
 
     .align-start {align-items: flex-start;}
     .align-center {align-items: center;}
@@ -175,7 +177,7 @@
 
     // Grid system.
     // ----------------------------------------------
-    // CSS variables are not supported in media queries yet
+    // CSS variables are not supported in media queries definition yet
     // (https://www.w3.org/TR/css-variables-1/#using-variables),
     // the grid system is done dynamically in dynamic-css.js.
 

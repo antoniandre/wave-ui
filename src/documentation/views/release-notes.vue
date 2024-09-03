@@ -1,10 +1,22 @@
 <template lang="pug">
 main
   title-link.mt4(h1) Release notes
-  p.mt-6.mb10.grey-light2.text-italic
+  p.mt-6.mb5.grey-light2.text-italic
     | Follows the
-    a.ml1(href="https://semver.org" target="_blank") Semantic versioning specs.
+    a.ml1(href="https://semver.org" target="_blank")
+      | Semantic versioning specs.
+      w-icon.ml1 mdi mdi-open-in-new
 
+  .w-flex.justify-end
+    w-button(
+      @click="$refs.legacy.scrollIntoView()"
+      round
+      bg-color="vue-green"
+      color="white"
+      dark
+      sm)
+      | Jump to #[strong.ml1 Vue 2]
+      w-icon.ml2 wi-arrow-down
   ul.history
     li.dashed
       w-flex.mt8(align-center)
@@ -21,15 +33,428 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
-
-    li.minor
-      strong.version v3.1.0
+    li.patch
+      strong.version v3.15.0
       ul
         li
           strong.code w-image
           ul
             li The image is now responsive by default until its real size is reached.
             li Support caption and support figure tag. #[span.tag.new]
+
+    li.patch
+      strong.version v3.14.3
+      ul
+        li
+          strong.code w-toolbar
+          ul
+            li Make the horizontal toolbars grow by default.
+        li
+          strong.code w-switch
+          ul
+            li Update the default background color of the thumb to be consistent with the base background color.
+        li
+          strong Global
+          ul
+            li Make the colors config more flexible: will not break if there is only the light or dark theme object or if a color is only define in one of the 2 themes.
+        li
+          strong CSS
+          ul
+            li Added #[code wrap] and #[code no-wrap] CSS helper classes. #[span.tag.new]
+
+    li.patch
+      strong.version v3.14.2
+      ul
+        li
+          strong CSS
+          ul
+            li Removed the alpha chanel from the default caption color. Making it possible to easily adjust the alpha of the CSS variable from outside Wave UI.
+
+    li.patch
+      strong.version v3.14.1
+      ul
+        li
+          strong.code w-switch
+          ul
+            li Center any content provided via slots in the thumb and track.
+
+    li.minor
+      strong.version v3.14.0
+      ul
+        li
+          strong Colors and Shades
+          ul
+            li.
+              Reworked how the shades are generated with a more relevant algorithm.
+              This change only impacts the shades generated for the status colors (success, info,
+              warning, error) and for the custom colors provided through your Wave UI config.#[br]
+              It does not impact the color palette. #[issue-link 157]
+      ul
+        li
+          strong.code w-button
+          ul
+            li Completely disable button click actions and link navigation when the button is disabled.
+
+    li.patch
+      strong.version v3.13.6
+      ul
+        li
+          strong.code w-switch
+          ul
+            li Update the switch thumb alignment. #[issue-link 158]
+
+    li.patch
+      strong.version v3.13.5
+      ul
+        li
+          strong.code w-confirm
+          ul
+            li Fix opening the menu from the main button click. #[issue-link 156]
+
+    li.patch
+      strong.version v3.13.4
+      ul
+        li
+          strong.code w-button, w-input, w-switch, w-autocomplete &amp; w-textarea.
+          ul
+            li Fix a Vue warning ([Vue warn]: Wrong type passed as event handler to onXxx) when adding extra HTML attrs on the Wave UI component.
+
+    li.patch
+      strong.version v3.13.2
+      ul
+        li
+          strong.code w-button
+          ul
+            li Fix a Vue warning happening on router link button click, before navigation.
+
+    li.patch
+      strong.version v3.13.1
+      ul
+        li
+          strong.code w-alert, w-badge, w-button, w-icon, w-input, w-switch, w-tag &amp; w-textarea.
+          ul
+            li Fix a Vue warning ([Vue warn]: Wrong type passed as event handler to onClass) when adding CSS classes on the Wave UI component.
+
+    li.minor
+      strong.version v3.13.0
+      ul
+        li
+          strong CSS
+          ul
+            li Added the #[code css.colorShadeCssVariables] option to generate all the color shades CSS variables. #[issue-link 149] #[span.tag.new]
+
+    li.minor
+      strong.version v3.12.0
+      ul
+        li
+          strong.code w-input
+          ul
+            li The input inherits the border radii.
+        li
+          strong.code w-switch
+          ul
+            li Removed the tap highlight color.
+        li
+          strong.code w-select
+          ul
+            li Added the #[code icon-left] and #[code icon-right] slots. #[issue-link 148] #[span.tag.new]
+        li
+          strong.code w-textarea
+          ul
+            li Added the #[code icon-left] and #[code icon-right] slots. #[issue-link 148] #[span.tag.new]
+        li
+          strong.code w-autocomplete
+          ul
+            li Fix a multiple selection bug where one selected item would remove another one starting with same letters. #[issue-link 146]
+        li
+          strong.code TypeScript
+          ul
+            li Added and refined TypeScript definitions.
+
+    li.minor
+      strong.version v3.11.0
+      ul
+        li
+          strong.code TypeScript
+          ul
+            li Added TypeScript definitions. More fine-grain definitions will be added gradually (you can create a PR if you want to contribute). #[issue-link 26]
+
+    li.minor
+      strong.version v3.10.0
+      ul
+        li
+          strong.code w-select
+          ul
+            li Added ability to lookup and focus a select list item by typing its first characters. #[issue-link 139] #[span.tag.new]
+
+    li.patch
+      strong.version v3.9.1
+      ul
+        li
+          strong.code w-table &amp; pagination
+          ul
+            li Improved the pagination layout: now hides some pages when there are too many and displays up to 7 page buttons.
+            li Improved the pagination slot
+            li
+              | Moved the pagination outside of the table due to HTML/CSS restrictions.
+              .red.
+                Impacted the CSS classes of the #[strong.code w-table] component: the wrapper now
+                has the #[code .w-table] and the table now has the #[code .w-table__table] class.
+                You may need to review your external CSS overrides.
+        li
+          strong Minor CSS improvements
+          ul
+            li Fix the aspect-ratio of 1 in Safari in case the element has padding overrides (impacts w-button with icon prop and a few Wave UI sub-elements).
+
+    li.minor
+      strong.version v3.9.0
+      ul
+        li
+          strong.code w-autocomplete
+          ul
+            li New slots, options and emitted events. #[span.tag.new]
+        li
+          strong.code CSS
+          ul
+            li Increase the global default border radius from 3px to 4px.
+
+    li.minor
+      strong.version v3.8.0
+      ul
+        li
+          strong.code w-autocomplete
+          ul
+            li New component #[span.tag.new]
+        li
+          strong.code w-input
+          ul
+            li Added #[code icon-left] and #[code icon-right] slots. #[span.tag.new]
+        li
+          strong.code w-select
+          ul
+            li Updated the floating label CSS translation logic (no visual impact).
+        li
+          strong.code w-card
+          ul
+            li The card title now inherits the top left and right border radius.
+
+    li.patch
+      strong.version v3.7.2
+      ul
+        li
+          strong.code w-select
+          ul
+            li Fixed the #[code item-color-key] prop not being used for default w-list (and w-select).
+            li Fixed opening the dropdown from a click on the left or right side label.
+            li Fixed preventing the dropdown to open from clicking a disabled #[strong.code w-select].
+            li Increase paddings between inner icons &amp; the select list displayed selection.
+            li Don't move the floating label on focus, but only on dropdown open, for a smoother user experience.
+            li Always skip any disabled item while using arrow keys.
+
+    li.patch
+      strong.version v3.7.1
+      ul
+        li
+          strong.code w-table
+          ul
+            li Fixed the default row selection color.
+
+    li.minor
+      strong.version v3.7.0
+      ul
+        li
+          strong.code w-menu
+          ul
+            li Added a #[code max-width] option to set a max width on the #[strong.code w-menu]. #[issue-link 126] #[span.tag.new]
+        li
+          strong.code w-checkbox
+          ul
+            li Fix the use of the #[code return-value] option. #[issue-link 128]
+        li
+          strong.code w-checkboxes
+          ul
+            li Added a #[code return-values] option to return checkboxes values. #[span.tag.new]
+
+    li.patch
+      strong.version v3.6.2
+      ul
+        li
+          strong.code w-tooltip &amp; w-menu
+          ul
+            li Cancel any opening when already closing (if the user goes fast enough and there is a set #[code delay]).
+      ul
+        li
+          strong.code w-select
+          ul
+            li Fix the select list not opening (bug introduced in version 3.6.0). #[issue-link 125]
+        li
+          strong CSS
+          ul
+            li Added the #[code column-reverse] helper class along with all breakpoints definitions (e.g. #[code smd-column-reverse]).
+
+    li.patch
+      strong.version v3.6.1
+      ul
+        li
+          strong.code w-list
+          ul
+            li Allow de-selecting items by updating the model value. #[issue-link 123]
+
+    li.minor
+      strong.version v3.6.0
+      ul
+        li
+          strong.code w-input, w-select, w-textarea
+          ul
+            li Prevent user selection on form fields labels.
+        li
+          strong.code w-button
+          ul
+            li Increase the feedback speed on button :activate state.
+        li
+          strong.code w-tooltip &amp; w-menu
+          ul
+            li Fixed the arrow color when used with a #[code bg-color].
+        li
+          strong.code w-tooltip
+          ul
+            li Added #[code xs], #[code sm], #[code md], #[code lg] &amp; #[code xl] props for different tooltip sizes. #[span.tag.new]
+            li Added the #[code caption] prop to apply the caption look and fill (smaller, grey, italic). #[span.tag.new]
+            li Added the #[code enable-touch] prop to enable hover-activating tooltips on touch devices (disabled by default). #[span.tag.new]
+
+    li.patch
+      strong.version v3.5.2
+      ul
+        li
+          strong.code w-toolbar
+          ul
+            li Removed the CSS auto-grow.
+        li
+          strong.code w-input
+          ul
+            li Support the #[code disabled] prop on #[code &lt;input type=file&gt;].
+        li
+          strong Core
+          ul
+            li Support presets targeting props defined in a component mixin. #[issue-link 121]
+
+    li.patch
+      strong.version v3.5.1
+      ul
+        li
+          strong.code w-select
+          ul
+            li Prevent an error when the v-model is set to #[code null].
+            li Ability to open the menu from the #[kbd space] key. #[issue-link 119]
+        li
+          strong.code w-checkbox
+          ul
+            li In a form, adjust the cursor pointer to the interactive elements only. #[issue-link 118]
+        li
+          strong.code w-button
+          ul
+            li Fix the #[code #loading] slot. #[issue-link 117]
+
+    li.minor
+      strong.version v3.5.0
+      ul
+        li
+          strong.code w-checkbox &amp; w-radio
+          ul
+            li Added readonly option. #[span.tag.new]
+
+    li.patch
+      strong.version v3.4.7
+      ul
+        li
+          strong.code w-input
+          ul
+            li.red.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
+
+    li.patch
+      strong.version v3.4.6
+      ul
+        li
+          strong.code w-input
+          ul
+            li Allow resetting an input type file by setting its value to null.
+
+    li.patch
+      strong.version v3.4.4
+      ul
+        li
+          strong.code w-select
+          ul
+            li Keep select list focused when the selection menu is open. #[issue-link 115]
+            li Allow #[kbd tab] keypress and #[kbd ctrl] or #[kbd command] key combinations.
+
+    li.patch
+      strong.version v3.4.3
+      ul
+        li
+          strong.code w-card
+          ul
+            li Apply the card border-radius to the card image (if any) if there is no title.
+        li
+          strong.code w-tree
+          ul
+            li Handle selectable items, and maintain their selected state after clicking elsewhere (previously it was only acting like a focusable element).
+
+    li.minor
+      strong.version v3.4.0
+      ul
+        li
+          strong.code w-tabs
+          ul
+            li Added a #[code keep-in-dom] option to keep tabs in the DOM (Useful for iframes which must not reload).
+            li Added a #[code keep-alive] option to keep tabs alive (by default, as before) or not (when set to false).
+            li Introduced an internal unique IDs system to more accurately recognize tabs after tab injection or replacement.
+
+    li.minor
+      strong.version v3.3.0
+      ul
+        li
+          strong.code w-tree
+          ul
+            li Fix the selected tree item style. #[issue-link 94], #[issue-link 108]
+            li Add a #[code path] property in each item for use from emitted events and slots.
+
+    li.minor
+      strong.version v3.2.0
+      ul
+        li
+          strong.code w-table
+          ul
+            li Added the pagination feature. #[span.tag.new]
+            li Highlight a table column when it is being sorted.
+        li
+          strong.code w-button
+          ul
+            li Inherit the border-radius on the loader if any.
+            li.
+              Updated the look and feel of the button in the #[code :active] state,
+              and use #[code :focus-visible] state instead of #[code :focus].
+
+    li.patch
+      strong.version v3.1.3
+      ul
+        li
+          strong.code w-confirm
+          ul
+            li The component is unwrapped from its div and is now behaving like an inline tag. #[issue-link 106]
+            li The final button mounted in the DOM will have the class #[code w-confirm].
+            li Any CSS class added on the #[code w-confirm] component will act only on the activator button (and not the w-menu as well like it did before this patch).
+
+    li.minor
+      strong.version v3.1.0
+      ul
+        li
+          strong.code w-select
+          ul
+            li Added a #[code fit-to-content] option. #[span.tag.new]
+          strong.code w-select, w-input, w-textarea
+          ul
+            li Keep floating labels on a single line
 
     li.major
       title-link.ma0(h2 slug="v3.0")
@@ -45,7 +470,7 @@ main
             li Every component is now completely themeable, all at once, or individually. #[span.tag.new]
             li Added a lot more color variables in the SCSS variables file for more granular control.
             li All the default colors are now dynamically computed with the user theme preference using CSS3 variables.
-            li Easy method to switch theme #[code="this.$waveui.switchTheme('dark')"] #[span.tag.new]
+            li Easy method to switch theme #[code="$waveui.switchTheme('dark')"] #[span.tag.new]
             li Auto detection of the user preferred theme. #[span.tag.new]
       ul
         li
@@ -62,7 +487,7 @@ main
           strong.code New core
           ul
             li.text-bold New way to use Wave UI, more straightforward, more Vue 3 approach, facilitating the use in composition API. #[span.tag.new]
-            li Injectable #[code $waveui] for composition API (removed the #[code useWaveUI] method in favor of #[code inject('$waveui')]. #[span.tag.new]
+            li Injectable #[code $waveui] for composition API (removed the #[code useWaveUI] method in favor of #[code inject('$waveui')]). #[span.tag.new]
             li #[code $waveui.breakpoint.width] always up to date
       ul
         li
@@ -462,7 +887,8 @@ main
       br
       br
       br
-      w-flex.mt8(align-center)
+      a#legacy(ref="legacy")
+      w-flex.mt12(align-center)
         w-tag.pl3.pr2.text-bold(round bg-color="vue-green" color="white")
           | VUE 2
           w-icon.ml1(md) wi-chevron-down
@@ -472,10 +898,237 @@ main
         w-icon.ml-1.mr1.grey wi-chevron-right
         | #[span.code.inherit npm i wave-ui@legacy]
 
+    //-----------------------------------------------------
     //- Vue 2.
     //-----------------------------------------------------
 
     li.minor
+      strong.version v1.70.0
+      ul
+        li
+          strong.code w-select
+          ul
+            li Added ability to lookup and focus a select list item by typing its first characters. #[issue-link 139]
+            li Updated the floating label CSS translation logic (no visual impact).
+        li
+          strong.code w-table &amp; pagination
+          ul
+            li Improved the pagination layout: now hides some pages when there are too many and displays up to 7 page buttons.
+            li Improved the pagination slot
+            li
+              | Moved the pagination outside of the table due to HTML/CSS restrictions.
+              .red.
+                Impacted the CSS classes of the #[strong.code w-table] component: the wrapper now
+                has the #[code .w-table] and the table now has the #[code .w-table__table] class.
+                You may need to review your external CSS overrides.
+        li
+          strong.code w-autocomplete
+          ul
+            li New component #[span.tag.new]
+        li
+          strong.code w-input
+          ul
+            li Added #[code icon-left] and #[code icon-right] slots. #[span.tag.new]
+        li
+          strong.code w-card
+          ul
+            li The card title now inherits the top left and right border radius.
+        li
+          strong.code Minor CSS improvements and changes
+          ul
+            li Fix the aspect-ratio of 1 in Safari in case the element has padding overrides (impacts w-button with icon prop and a few Wave UI sub-elements).
+            li Increase the global default border radius from 3px to 4px.
+
+    li.minor
+      strong.version v1.69.0
+      ul
+        li
+          strong.code w-button
+          ul
+            li Increase the feedback speed on button :activate state.
+        li
+          strong.code w-checkbox
+          ul
+            li Fix the use of the #[code return-value] option. #[issue-link 128]
+        li
+          strong.code w-checkboxes
+          ul
+            li Added a #[code return-values] option to return checkboxes values. #[span.tag.new]
+        li
+          strong.code w-list
+          ul
+            li Allow de-selecting items by updating the model value. #[issue-link 123]
+        li
+          strong.code w-input, w-select, w-textarea
+          ul
+            li Prevent user selection on form fields labels.
+        li
+          strong.code w-input
+          ul
+            li Support the #[code disabled] prop on #[code &lt;input type=file&gt;].
+        li
+          strong.code w-select
+          ul
+            li Fixed the #[code item-color-key] prop not being used for default w-list (and w-select).
+            li Fixed opening the dropdown from a click on the left or right side label.
+            li Fixed preventing the dropdown to open from clicking a disabled #[strong.code w-select].
+            li Increase paddings between inner icons &amp; the select list displayed selection.
+            li Don't move the floating label on focus, but only on dropdown open, for a smoother user experience.
+            li Always skip any disabled item while using arrow keys.
+        li
+          strong.code w-table
+          ul
+            li Fixed the default row selection color.
+        li
+          strong.code w-tooltip &amp; w-menu
+          ul
+            li Cancel any opening when already closing (if the user goes fast enough and there is a set #[code delay]).
+        li
+          strong.code w-menu
+          ul
+            li Added a #[code max-width] option to set a max width on the #[strong.code w-menu]. #[issue-link 126] #[span.tag.new]
+        li
+          strong.code w-tooltip
+          ul
+            li Added #[code xs], #[code sm], #[code md], #[code lg] &amp; #[code xl] props for different tooltip sizes. #[span.tag.new]
+            li Added the #[code caption] prop to apply the caption look and fill (smaller, grey, italic). #[span.tag.new]
+            li Added the #[code enable-touch] prop to enable hover-activating tooltips on touch devices (disabled by default). #[span.tag.new]
+        li
+          strong.code w-toolbar
+          ul
+            li Removed the CSS auto-grow.
+        li
+          strong Core
+          ul
+            li Support presets targeting props defined in a component mixin. #[issue-link 121]
+        li
+          strong CSS
+          ul
+            li Added the #[code column-reverse] helper class along with all breakpoints definitions (e.g. #[code smd-column-reverse]).
+
+    li.patch
+      strong.version v1.68.1
+      ul
+        li
+          strong.code w-select
+          ul
+            li Prevent an error when the v-model is set to #[code null].
+            li Ability to open the menu from the #[kbd space] key. #[issue-link 119]
+        li
+          strong.code w-checkbox
+          ul
+            li In a form, adjust the cursor pointer to the interactive elements only. #[issue-link 118]
+        li
+          strong.code w-button
+          ul
+            li Fix the #[code #loading] slot. #[issue-link 117]
+
+    li.minor
+      strong.version v1.68.0
+      ul
+        li
+          strong.code w-checkbox &amp; w-radio
+          ul
+            li Added readonly option. #[span.tag.new]
+
+    li.patch
+      strong.version v1.67.3
+      ul
+        li
+          strong.code w-input
+          ul
+            li.red.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
+            li Show the #[code w-input type="file"] bottom border even after upload completion.
+
+    li.patch
+      strong.version v1.67.2
+      ul
+        li
+          strong.code w-input
+          ul
+            li Allow resetting a #[code w-input type="file"] by setting its value to #[code null].
+
+    li.minor
+      strong.version v1.67.0
+      ul
+        li
+          strong.code w-confirm
+          ul
+            li Support classes and styles on activator button
+        li
+          strong.code w-select
+          ul
+            li Keep select list focused when the selection menu is open. #[issue-link 115]
+            li Allow #[kbd tab] keypress and #[kbd ctrl] or #[kbd command] key combinations.
+        li
+          strong.code w-card
+          ul
+            li Apply the card border-radius to the card image (if any) if there is no title.
+        li
+          strong.code w-tree
+          ul
+            li Handle selectable items, and maintain their selected state after clicking elsewhere (previously it was only acting like a focusable element).
+
+          strong.code w-table
+          ul
+            li Added the pagination feature. #[span.tag.new]
+            li Highlight a table column when it is being sorted.
+        li
+          strong.code w-button
+          ul
+            li Inherit the border-radius on the loader if any.
+            li.
+              Updated the look and feel of the button in the #[code :active] state,
+              and use #[code :focus-visible] state instead of #[code :focus].
+
+    li.minor
+      strong.version v1.66.0
+      ul
+        li
+          strong.code w-tabs
+          ul
+            li Added a #[code keep-in-dom] option to keep tabs in the DOM (Useful for iframes which must not reload).
+            li Added a #[code keep-alive] option to keep tabs alive (by default, as before) or not (when set to false).
+            li Introduced an internal unique IDs system to more accurately recognize tabs after tab injection or replacement.
+
+    li.patch
+      strong.version v1.65.1
+      ul
+        li
+          strong.code w-confirm
+          ul
+            li The component is unwrapped from its div and is now behaving like an inline tag. #[issue-link 106]
+            li The final button mounted in the DOM will have the class #[code w-confirm].
+            li Any CSS class added on the #[code w-confirm] component will act only on the activator button (and not the w-menu as well like it did before this patch).
+
+    li.minor
+      strong.version v1.65.0
+      ul
+        li
+          strong.code w-button
+          ul
+            li Support button CSS #[strong dynamic] classes with tooltip option (Vue 2 specific).
+
+    li.patch
+      strong.version v1.64.1
+      ul
+        li
+          strong.code w-button
+          ul
+            li Support button CSS #[strong dynamic] classes with tooltip option (Vue 2 specific).
+
+    li.minor
+      strong.version v1.64.0
+      ul
+        li
+          strong.code w-select
+          ul
+            li Added a #[code fit-to-content] option. #[span.tag.new]
+          strong.code w-select, w-input, w-textarea
+          ul
+            li Keep floating labels on a single line.
+
+    li.patch
       strong.version v1.63.1
       ul
         li
@@ -485,7 +1138,7 @@ main
         li
           strong.code w-button
           ul
-            li Support button CSS classes with tooltip option (Vue 2 specific).
+            li Support button static CSS classes with tooltip option (Vue 2 specific).
 
     li.minor
       strong.version v1.63.0
