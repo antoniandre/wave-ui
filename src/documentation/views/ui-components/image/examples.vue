@@ -1,21 +1,26 @@
 <template lang="pug">
 div
   title-link(h2) Why using w-image and not a simple &lt;img&gt;
-  .title3 A simple &lt;img&gt;
-  p.
-    will display when loaded, and will take the dimensions of the actual image.#[br]
-    When the image has a large file size, it will be loaded in chunks, and the image will be displayed
-    truncated until completely loaded.#[br]#[br]
-    If ever it fails to load a broken image icon will display instead (different on every browser).#[br]
-  .title3 The w-image
-  p.
-    can show a spinner while the image is loading, and display the image all at once with a nice
-    animation (like fade-in) when the iamge is ready.#[br]
-    It also allows you to set a fallback image in case the provided image might be unfound (convenient with
-    dynamic sources).#[br]
-    If ever no image is found, #[strong.code w-image] will handle the error gracefully and will emit a
-    #[code @error] event containing the error. A blank transparent image will be displayed in place of the
-    image itself. So that, nothing looks broken.
+  .w-card.w-flex.mdu-row.basis-zero.pa4.gap4
+    div
+      .title3 A simple &lt;img&gt;
+      p.
+        will display when loaded, and will take the dimensions of the actual image.#[br]
+        When the image has a large file size, it will be loaded in chunks, and the image will be displayed
+        truncated until completely loaded.#[br]#[br]
+        If ever it fails to load, a broken image icon will display instead (different on every browser).#[br]
+    w-divider.no-grow.primary(:vertical="!$waveui.breakpoint.xs && !$waveui.breakpoint.sm") VS
+    div
+      .title3 The w-image
+      p.
+        can show a spinner while the image is loading, and display the image all at once with a nice
+        animation (like fade-in) when the image is ready.#[br]#[br]
+
+        If ever it fails to load, #[strong.code w-image] will handle the error gracefully, will emit a
+        #[code @error] event containing the error, and a blank transparent image will be displayed in place of the
+        image itself, so nothing looks broken.#[br]
+        Or, you can also provide a fallback image for cases when the main image has a chance not to be found (like with
+        dynamic src).#[br]
 
   title-link(h2) Default
   p.
