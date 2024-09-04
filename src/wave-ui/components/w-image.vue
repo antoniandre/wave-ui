@@ -13,7 +13,7 @@ component.w-image(:is="wrapperTag" :class="wrapperClasses" :style="wrapperStyles
   component.w-image__content(v-if="$slots.default" :is="wrapperTag" :class="contentClass")
     slot
   figcaption.w-image__caption.caption(v-if="$slots.caption" :class="captionClass")
-    slot
+    slot(name="caption")
   figcaption.w-image__caption.caption(v-else-if="caption" :class="captionClass" v-html="caption")
 </template>
 
@@ -213,6 +213,7 @@ export default {
   img {
     width: 100%;
     height: auto;
+    overflow: hidden; // Should be contained in the parent.
     position: static;
   }
 }

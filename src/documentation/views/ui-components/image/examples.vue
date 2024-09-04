@@ -8,23 +8,25 @@ div
         will display when loaded, and will take the dimensions of the actual image.#[br]
         When the image has a large file size, it will be loaded in chunks, and the image will be displayed
         truncated until completely loaded.#[br]#[br]
-        If ever it fails to load, a broken image icon will display instead (different on every browser).#[br]
+        If ever it fails to load, a broken image icon will display instead (different on every browser).#[br]#[br]
+        Setting both a width and height could stretch the image and loose the aspect ratio.
+        Which is IMHO, in most cases crappy except for repeated patterns.
     w-divider.no-grow.primary(:vertical="!$waveui.breakpoint.xs && !$waveui.breakpoint.sm") VS
     div
       .title3 The w-image
       p.
         can show a spinner while the image is loading, and display the image all at once with a nice
         animation (like fade-in) when the image is ready.#[br]#[br]
-
         If ever it fails to load, #[strong.code w-image] will handle the error gracefully, will emit a
         #[code @error] event containing the error, and a blank transparent image will be displayed in place of the
         image itself, so nothing looks broken.#[br]
         Or, you can also provide a fallback image for cases when the main image has a chance not to be found (like with
-        dynamic src).#[br]
+        dynamic src).#[br]#[br]
+        Setting both a width and height will never loose the aspect ratio: it will auto-crop if needed.
 
   title-link(h2) Default
   p.
-    With no given width, height or ratio, the image will be responsive up to its full-size.#[br]
+    With no given width, height or ratio, the image will be responsive, up to its full-size.#[br]
     This means a width of 100% is added, as well as the image computed ratio (to preserve it when
     scaling down), and a max width equal to the real image width.
   example(content-class="text-center")
@@ -36,13 +38,23 @@ div
       &lt;w-image :src="`${baseUrl}images/favicon.png`"&gt;&lt;/w-image&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
+  alert(info)
+    p.
+      In the #[code src] attribute, it's a good idea to use the #[code BASE_URL] environment variable to point to the
+      public root path of your app if your image is in the #[code public/] folder.#[br]
+      For instance, this documentation public root path is #[code https://antoniandre.github.io/wave-ui/], which is different
+      from just #[code /] which would point to #[code https://antoniandre.github.io/].#[br]
+    ul
+      li With Vite, you can use #[code {{ 'import' }}.meta.env.BASE_URL] to refer to your public app root URL.
+      li With Vue CLI or Webpack, you can also use #[code {{ 'process' }}.env.BASE_URL].
 
   title-link(h2) Given dimensions
+  p.
+    You can set a width, a height, or both.#[br]
+    If the image is bigger than the given width or height, it will be cropped.#[br]
+    But if you prefer it to be resized maintaining the ratio, then you can set a ratio.
   example(content-class="text-center w-flex justify-space-around wrap")
     div.mr5
       w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
@@ -67,21 +79,20 @@ div
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 
   title-link(h2) Image ratio
+  p.grey The ratio prop purpose is to maintain the image ratio while resizing.
   p.
     Similar to the default behavior (when no width, no height and no ratio are given), the image
     will be scaling with its container preserving its aspect ratio. The only difference is that
     it will also scale up beyond its real size.
   p Let's see a few cases:
 
-  title-link(h3) Image ratio equal to the exact width and height of the image
-  p Most common case. The image is visible in full, and scales with its container with preserved ratio.
+  title-link(h3) Real image ratio
+  p.grey Image ratio equal to the exact width and height of the image (width / height).
+  p This is the most common case: the image is visible in full, and scales with its container with preserved ratio.
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1900 / 443")
     .caption.text-center Real size: 1900x443. Given ratio: 1900 / 443.
@@ -94,79 +105,109 @@ div
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 
-  title-link(h3) Setting a different ratio than the actual image one
+  title-link(h3) Custom ratio
+  p.grey Setting a different ratio than the actual image one.
   p.mb0.
-    In this case the image will be cropped on purpose, but still scaling with its container with
-    preserved ratio.
-  .caption The border around the images are added to vizualize the edges of the images.
+    In this case, the image will be cropped on purpose, but still scaling with its container with
+    preserved ratio. 👍
+  .caption A drop shadow is added around the images to help visualizing the edges of the image.
   example(content-class="text-center")
     div
-      w-image.bd1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1000 / 443")
+      w-image.sh1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1000 / 443")
       .caption.text-center Real size: 1900x443. Given ratio: 1000 / 443.
     div
-      w-image.bd1.mt6(:src="`${baseUrl}images/japanese-wave.png`" :ratio="3000 / 443")
+      w-image.sh1.mt6(:src="`${baseUrl}images/japanese-wave.png`" :ratio="3000 / 443")
       .caption.text-center Real size: 1900x443. Given ratio: 3000 / 443.
     template(#pug).
-      w-image.bd1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1000 / 443")
-      w-image.bd1.mt6(:src="`${baseUrl}images/japanese-wave.png`" :ratio="3000 / 443")
+      w-image.sh1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1000 / 443")
+      w-image.sh1.mt6(:src="`${baseUrl}images/japanese-wave.png`" :ratio="3000 / 443")
     template(#html).
       &lt;w-image
         :src="`${baseUrl}images/japanese-wave.png`"
         :ratio="1000 / 443"
-        class="bd1"&gt;
+        class="sh1"&gt;
       &lt;/w-image&gt;
+
       &lt;w-image
         :src="`${baseUrl}images/japanese-wave.png`"
         :ratio="3000 / 443"
-        class="bd1 mt6"&gt;
+        class="sh1 mt6"&gt;
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 
-  title-link(h3) Ratio with a set width and/or height
+  title-link(h3) Ratio combined with a set width and/or height
+  p.
+    For instance, it happens frequently that an image should fill up the container space
+    (width or height) while maintaining a ratio.
+
+  title-link.mt4(h4) Ratio combined with a set width
+  p.
+    Setting a small width with a unit that is not scaling (no percentage, no viewport unit) will have no
+    specific benefit. It will be the same as setting both a width and height.
   example(content-class="text-center")
     w-flex(align-center wrap gap="4")
       .grow
         p Set width
-        w-image.bd1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100")
+        w-image.sh1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100")
         .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given width: 100.
       .grow
+        p Set width
+        p.
+          Note: if you set 100% that's the same as the default behavior, adding a 100% when no width
+          and no height are added.
+        w-image.sh1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200")
+        .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given width: 100%.
+      //- .grow
         p Set height
-        w-image.bd1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" height="100")
+        w-image.sh1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" height="100%")
+        .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given width: 100.
+      //- .grow
+        p Set height
+        w-image.sh1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" height="100")
         .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given height: 100.
-      .grow
+      //- .grow
         p Set width and height (pointless)
-        w-image.bd1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100" height="100")
+        w-image.sh1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100" height="100")
         .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given size: 100x100.
     template(#pug).
       p Set width
       w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100")
+
       p Set height
       w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" height="100")
-      p p Set width and height (pointless)
+
+      p Set width and height (pointless)
       w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100" height="100")
     template(#html).
+      &lt;p&gt;Set width&lt;/p&gt;
       &lt;w-image
         :src="`${baseUrl}images/favicon.png`"
         :ratio="200 / 200"
         width="100"&gt;
       &lt;/w-image&gt;
+
+      &lt;p&gt;Set height&lt;/p&gt;
+      &lt;w-image
+        :src="`${baseUrl}images/favicon.png`"
+        :ratio="200 / 200"
+        height="100"&gt;
+      &lt;/w-image&gt;
+
+      &lt;p&gt;Set width and height (pointless)&lt;/p&gt;
+      &lt;w-image
+        :src="`${baseUrl}images/favicon.png`"
+        :ratio="200 / 200"
+        width="100"
+        height="100"&gt;
+      &lt;/w-image&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 
@@ -186,19 +227,24 @@ div
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 
   title-link(h2 slug="using-the-img-tag") Using the &lt;img&gt; tag
   p.
     You can choose which tag the #[strong.code w-image] should use.#[br]
-    If you use an #[code img] tag, the image will behave exactly like a standard image.
-    The biggest benefit of that, is that you can set a #[code width] or #[code height] only, keep a ratio,
+    If you use an #[code img] tag, the image will behave exactly like a standard &lt;img&gt; image.
+    The biggest benefit of that, is that you can set a single #[code width] or #[code height] by itself,
+    and it will keep the natural image ratio while scaling without the need to specify the aspect ratio.
+  //- p.
     and apply a #[code max-width] or #[code max-height] on top of that so if the image would be bigger
     than the container it would still apply the ratio on the constrained image.
+  alert(info)
+    p.
+      Note that by design, setting both a width and height with the &lt;img&gt; tag, will still allow you
+      to achieve image stretching, loosing the aspect ratio. This may be a desired effect or not.
+    example(content-class="text-center w-flex justify-space-around wrap")
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" height="100px" tag="img")
 
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
@@ -213,9 +259,6 @@ div
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 
@@ -240,9 +283,6 @@ div
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 
@@ -262,9 +302,6 @@ div
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
   alert(tip).
@@ -405,9 +442,6 @@ div
       &lt;/w-alert&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/',
         showError: false
       })
@@ -431,9 +465,6 @@ div
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 
@@ -457,9 +488,6 @@ div
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
-        // With Webpack or Vue CLI, you can also use `{{ 'process' }}.env.BASE_URL`,
-        // or with Vite, `{{ 'import' }}.meta.env.BASE_URL`,
-        // if the image is in the public/ folder.
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 </template>
