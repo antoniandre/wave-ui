@@ -107,6 +107,9 @@ export default {
         maxWidth = `${this.normalized.maxWidth || this.computedImg.width}px`
         aspectRatio = aspectRatio || (this.computedImg.width / this.computedImg.height)
       }
+      else if ((width && !height) || (height && !width)) {
+        aspectRatio = aspectRatio || (this.computedImg.width / this.computedImg.height)
+      }
 
       return {
         width,
@@ -144,10 +147,8 @@ export default {
       return new Promise(resolve => {
         const img = new Image()
         img.onload = e => {
-          if (!this.width && !this.height && !this.imgGivenRatio) {
-            this.computedImg.width = e.target.width
-            this.computedImg.height = e.target.height
-          }
+          this.computedImg.width = e.target.width
+          this.computedImg.height = e.target.height
           this.computedImg.ratio = e.target.height / e.target.width
 
           this.loading = false
