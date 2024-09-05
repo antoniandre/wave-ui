@@ -7,7 +7,7 @@ component.w-image(:is="wrapperTag" :class="wrapperClasses" :style="wrapperStyles
       :class="imageClasses"
       :style="imageStyles"
       :src="tag === 'img' ? computedImg.src : null")
-  .w-image__loader(v-if="!noSpinner && loading")
+  span.w-image__loader(v-if="!noSpinner && loading")
     slot(v-if="$slots.loading" name="loading")
     w-progress(v-else circle indeterminate v-bind="spinnerColor ? { color: spinnerColor } : {}")
   component.w-image__content(v-if="$slots.default" :is="wrapperTag" :class="contentClass")
@@ -217,16 +217,6 @@ export default {
     overflow: hidden; // Should be contained in the parent.
     position: static;
   }
-}
-
-.w-image__image {
-  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1x1 blank gif.
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
-  inset: 0;
-
-  &--contain {background-size: contain;}
 
   &__loader, &__content {
     position: absolute;
@@ -237,4 +227,15 @@ export default {
     z-index: 1;
   }
 }
+
+.w-image__image {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1x1 blank gif.
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  inset: 0;
+
+  &--contain {background-size: contain;}
+}
+
 </style>
