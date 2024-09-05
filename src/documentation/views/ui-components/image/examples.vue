@@ -24,6 +24,17 @@ div
         dynamic src).#[br]#[br]
         Setting both a width and height will never loose the aspect ratio: it will auto-crop if needed.
 
+  alert(tip)
+    .title2.mt0.lh1 The #[strong.code w-image] in a nutshell
+    ul
+      li You can set a width or a height or both. That's all you need.
+      li The width and height may be fixed (e.g. in pixel) or adaptive (e.g. in percentage).
+      li The ratio is not needed, but can be provided to override the intrinsic ratio and crop the image (keeping it responsive if it was).
+      li You can choose a tag to use for the image, but don't need to. It can be a &lt;span&gt; (default) or &lt;img&gt;.
+      li Providing a caption, will use the native HTML figure and figcaption tags.
+
+  p Now here comes a ton of concrete examples.
+
   title-link(h2) Default
   p.
     With no given width, height or ratio, the image will be responsive, up to its full-size.#[br]
@@ -51,10 +62,18 @@ div
       li With Vue CLI or Webpack, you can also use #[code {{ 'process' }}.env.BASE_URL].
 
   title-link(h2) Given dimensions
+  p
+    strong You can set a width, a height, or both.#[br]
+    | If the actual image is bigger than the given width or height, it will be cropped.#[br]
+    | But if you prefer it to be resized maintaining the ratio, then you can set a ratio.
+
+  title-link(h3) Given both fixed width and height
   p.
-    You can set a width, a height, or both.#[br]
-    If the image is bigger than the given width or height, it will be cropped.#[br]
-    But if you prefer it to be resized maintaining the ratio, then you can set a ratio.
+    In both examples the image will always have the same fixed size regardless of the viewport or
+    constraints.#[br]
+    The first example forces the width and height to 150x150, which is smaller than the actual picture
+    size so it is cropping it (you can inspect with the dev tools).#[br]
+    The second example sets a width and height of 500x150, which is also cropping it.
   example(content-class="text-center w-flex justify-space-around wrap")
     div.mr5
       w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
@@ -64,6 +83,7 @@ div
       .caption.text-center Real size: 1900x443. Given size: 500x150.
     template(#pug).
       w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="150" :height="150")
+
       w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="500" :height="150")
     template(#html).
       &lt;w-image
@@ -72,10 +92,128 @@ div
         :width="150"
         :height="150"&gt;
       &lt;/w-image&gt;
+
       &lt;w-image
         :src="`${baseUrl}images/japanese-wave.png`"
         :width="500"
         :height="150"&gt;
+      &lt;/w-image&gt;
+    template(#js).
+      data: () => ({
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
+
+  title-link(h3) Given fixed width only
+  p.
+    If the width is all you provide, the real ratio of the image will be computed and used.
+    In result, the image will have the given fixed width and will display in full: it will not be cropped
+    and will not grow or shrink with constraints.
+  example(content-class="text-center w-flex column")
+    div
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="200")
+      .caption.text-center Real size: 1900x443. Given size: width=200.
+    div
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="400")
+      .caption.text-center Real size: 1900x443. Given size: width=400.
+    template(#pug).
+      w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :width="200")
+
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :width="400")
+    template(#html).
+      &lt;w-image
+        class="mr5"
+        :src="`${baseUrl}images/japanese-wave.png`"
+        :width="200"&gt;
+      &lt;/w-image&gt;
+
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        :width="400"&gt;
+      &lt;/w-image&gt;
+    template(#js).
+      data: () => ({
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
+
+  title-link(h3) Given fixed height only
+  p.
+    If the height is all you provide, the real ratio of the image will be computed and used.
+    In result, the image will have the given fixed height and will display in full: it will not be cropped
+    and will not grow or shrink with constraints.
+  example(content-class="text-center w-flex column")
+    div
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :height="70")
+      .caption.text-center Real size: 1900x443. Given size: height=70.
+    div
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :height="120")
+      .caption.text-center Real size: 1900x443. Given size: height=120.
+    template(#pug).
+      w-image.mr5(:src="`${baseUrl}images/japanese-wave.png`" :height="70")
+
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :height="120")
+    template(#html).
+      &lt;w-image
+        class="mr5"
+        :src="`${baseUrl}images/japanese-wave.png`"
+        :height="70"&gt;
+      &lt;/w-image&gt;
+
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        :height="120"&gt;
+      &lt;/w-image&gt;
+    template(#js).
+      data: () => ({
+        baseUrl: 'https://antoniandre.github.io/wave-ui/'
+      })
+
+  title-link(h3) Relative width and/or height
+  p.grey.mb0 When the width and/or height is adaptive to its container.
+  div
+    | The only thing needed is width or a height, and #[strong Wave UI] will compute the ratio so it
+    | can grow or shrink with the container.
+    ul
+      li The first case is setting a width of 100% of the example container, so it will adapt. Very classic.
+      li The second case is setting a height of 100% in a #[strong.code w-card] that is fixed to 100px height.
+      li.
+        The third case is setting a width of 30vw and a height of 10vh which will constrain the image
+        in many possible ways which will likely crop horizontally or vertically when needed. Try
+        resizing your browser width and height to observe the rendering!
+  example(content-class="text-center w-flex column gap5")
+    div
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%")
+      .caption.text-center Real size: 1900x443. Given size: width=100%.
+
+    div
+      w-card(content-class="pa0" style="height: 100px")
+        w-image(:src="`${baseUrl}images/japanese-wave.png`" height="100%")
+      .caption.text-center Real size: 1900x443. Given size: height=100%.
+
+    div
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" width="30vw" height="10vh")
+      .caption.text-center Real size: 1900x443. Given size: width=30vw, height=10vh.
+    template(#pug).
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%")
+
+      w-card(content-class="pa0" style="height: 100px")
+        w-image(:src="`${baseUrl}images/japanese-wave.png`" height="100%")
+    template(#html).
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        width="100%"&gt;
+      &lt;/w-image&gt;
+
+      &lt;w-card content-class="pa0" style="height: 100px"&gt;
+        &lt;w-image
+          :src="`${baseUrl}images/japanese-wave.png`"
+          height="100%"&gt;
+        &lt;/w-image&gt;
+      &lt;/w-card&gt;
+
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        width="30vw"
+        height="10vh"&gt;
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
