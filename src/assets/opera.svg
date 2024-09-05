@@ -1,0 +1,15 @@
+<svg viewBox="0 0 75.6 75.6" xmlns="http://www.w3.org/2000/svg">
+  <linearGradient id="a" gradientTransform="scale(54.944) rotate(-90 1 .5)" gradientUnits="userSpaceOnUse" x2="1">
+    <stop offset="0" stop-color="#ff1b2d"/>
+    <stop offset=".3" stop-color="#ff1b2d"/>
+    <stop offset=".6" stop-color="#ff1b2d"/>
+    <stop offset="1" stop-color="#a70014"/>
+  </linearGradient>
+  <linearGradient id="b" gradientTransform="matrix(0 -48.595 -48.595 0 37.9 76.2)" gradientUnits="userSpaceOnUse" x2="1">
+    <stop offset="0" stop-color="#9c0000"/>
+    <stop offset=".7" stop-color="#ff4b4b"/>
+    <stop offset="1" stop-color="#ff4b4b"/>
+  </linearGradient>
+  <path d="M28.3 80.4a28.3 28.3 0 1 1 19-49.5 20.5 20.5 0 0 0-11.4-3.5C29 27.4 23 30.8 19 36.1a24.7 24.7 0 0 0-5.3 15.3v1.3C14 59 16 64.3 19 68a20.4 20.4 0 0 0 28.2 5.2c-5 4.4-11.5 7.2-18.7 7.2h-.2z" fill="url(#a)" transform="matrix(1.3333 0 0 -1.3333 0 107.2)"/>
+  <path d="M19 68c2.6 3.1 6 5 9.6 5 8.3 0 15-9.4 15-21s-6.7-20.8-15-20.8c-3.6 0-7 1.8-9.6 4.9a20.5 20.5 0 0 1 28.2-5.2 28.3 28.3 0 0 1 0 42.3A20.4 20.4 0 0 1 36 76.7C29 76.7 23 73.3 19 68" fill="url(#b)" transform="matrix(1.3333 0 0 -1.3333 0 107.2)"/>
+</svg>

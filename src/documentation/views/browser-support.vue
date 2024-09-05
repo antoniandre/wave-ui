@@ -4,6 +4,9 @@ main
   title-link(h2) All major browsers supported
   p Wave UI supports:
   w-list.ml-1(:items="listItems" icon="wi-check")
+    template(#item="{ item: { label } }")
+      img(:src="getImageUrl(label)")
+      span {{ label }}
 
   title-link(h2) Dropping support for IE11
   a.title3(href="https://gs.statcounter.com/browser-market-share" target="_blank")
@@ -36,12 +39,25 @@ export default {
       { label: 'Edge' },
       { label: 'Opera' }
     ]
-  })
+  }),
+
+  methods: {
+    getImageUrl (label) {
+      return new URL(`../../assets/${label.toLowerCase()}.svg`, import.meta.url).href
+    }
+  }
 }
 </script>
 
 <style lang="scss">
 .main--browser-support {
   p {margin-top: 1.5em;}
+
+  .w-list__item-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .w-list img {width: 16px;}
 }
 </style>
