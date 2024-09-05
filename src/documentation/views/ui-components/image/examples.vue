@@ -591,15 +591,15 @@ div
     when it is visible.
   example
     //- ?v1 to prevent the image to load from cache for this example (image is used above).
-    w-image(:src="`${baseUrl}images/spirit-island--alberta.png?v1`" lazy :ratio="2550 / 5098")
+    w-image(:src="`${baseUrl}images/spirit-island--alberta.png?v1`" lazy :ratio="5098 / 2550")
     .caption Real size: 5098x2550.
     template(#pug).
-      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy :ratio="2550 / 5098")
+      w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" lazy :ratio="5098 / 2550")
     template(#html).
       &lt;w-image
         :src="`${baseUrl}images/spirit-island--alberta.png`"
         lazy
-        :ratio="2550 / 5098"&gt;
+        :ratio="5098 / 2550"&gt;
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
@@ -613,15 +613,15 @@ div
     at the bottom left for instance, with the #[code content-class] prop:
     #[code content-class="align-end justify-start pa2"].
   example
-    w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="2550 / 5098")
+    w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="5098 / 2550")
       span.title1.pink Wave UI
     template(#pug).
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="2550 / 5098")
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="5098 / 2550")
         span.title1.pink Wave UI
     template(#html).
       &lt;w-image
         :src="`${baseUrl}images/japanese-wave.png`"
-        :ratio="2550 / 5098"&gt;
+        :ratio="5098 / 2550"&gt;
         &lt;span class="title1 pink"&gt;Wave UI&lt;/span&gt;
       &lt;/w-image&gt;
     template(#js).
