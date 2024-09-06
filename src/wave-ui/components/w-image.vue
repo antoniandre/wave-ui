@@ -3,10 +3,10 @@ component.w-image(:is="wrapperTag" :class="wrapperClasses" :style="wrapperStyles
   transition(:name="transition" appear)
     component.w-image__image(
       v-if="loaded"
-      :is="tag"
+      :is="normalized.tag"
       :class="imageClasses"
       :style="imageStyles"
-      :src="tag === 'img' ? computedImg.src : null")
+      :src="normalized.tag === 'img' ? computedImg.src : null")
   span.w-image__loader(v-if="!noSpinner && loading")
     slot(v-if="$slots.loading" name="loading")
     w-progress(v-else circle indeterminate v-bind="spinnerColor ? { color: spinnerColor } : {}")
@@ -78,7 +78,8 @@ export default {
         height: (!isNaN(this.height) ? `${this.height}px` : this.height) || null,
         maxWidth: (!isNaN(this.maxWidth) ? `${this.maxWidth}px` : this.maxWidth) || null,
         maxHeight: (!isNaN(this.maxHeight) ? `${this.maxHeight}px` : this.maxHeight) || null,
-        ratio: parseFloat(this.ratio) || undefined
+        ratio: parseFloat(this.ratio) || undefined,
+        tag: this.tag === 'img' || this.caption ? 'img' : 'span'
       }
     },
 
@@ -104,7 +105,7 @@ export default {
       if (aspectRatio && !width && !height) width = '100%'
       else if (!width && !height) {
         width = '100%'
-        maxWidth = `${this.normalized.maxWidth || this.computedImg.width}px`
+        maxWidth = this.normalized.maxWidth || `${this.computedImg.width}px`
         aspectRatio = aspectRatio || (this.computedImg.width / this.computedImg.height)
       }
       else if ((width && !height) || (height && !width)) {
@@ -130,7 +131,7 @@ export default {
 
     imageStyles () {
       return {
-        'background-image': this.tag !== 'img' && this.loaded ? `url('${this.computedImg.src}')` : null
+        'background-image': this.normalized.tag !== 'img' && this.loaded ? `url('${this.computedImg.src}')` : null
       }
     }
   },
