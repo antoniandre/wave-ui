@@ -226,16 +226,20 @@ export default {
     align-items: center;
     z-index: 1;
   }
+
+  &__image {
+    background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1x1 blank gif.
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    inset: 0;
+
+    &--contain {background-size: contain;}
+  }
+
+  &__caption {
+    padding-top: $base-increment;
+    text-align: right;
+  }
 }
-
-.w-image__image {
-  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); // 1x1 blank gif.
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
-  inset: 0;
-
-  &--contain {background-size: contain;}
-}
-
 </style>
