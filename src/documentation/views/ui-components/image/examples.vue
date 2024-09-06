@@ -383,17 +383,37 @@ div
   example(content-class="text-center")
     w-image(
       :src="`${baseUrl}images/japanese-wave.png`"
-      max-width="700"
-      caption="The Great Wave Off Kanagawa - Hokusai")
-    .caption Real size: 1900x443. Given max-width: 700.
+      caption="The Great Wave Off Kanagawa - Hokusai"
+      max-width="700")
+
+    p.mt4 With some quick styles adding these classes: #[code .pa2.sh2.base-color--bg]:
+    w-image.pa2.sh2.base-color--bg(
+      :src="`${baseUrl}images/japanese-wave.png`"
+      caption="The Great Wave Off Kanagawa - Hokusai"
+      max-width="700")
+    .caption.mt3 Real size: 1900x443. Given max-width: 700.
     template(#pug).
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
+      w-image(
+        :src="`${baseUrl}images/japanese-wave.png`"
+        caption="The Great Wave Off Kanagawa - Hokusai"
+        max-width="700")
+
+      w-image.pa2.sh2.base-color--bg(
+        :src="`${baseUrl}images/japanese-wave.png`"
+        caption="The Great Wave Off Kanagawa - Hokusai"
+        max-width="700")
     template(#html).
       &lt;w-image
         :src="`${baseUrl}images/japanese-wave.png`"
-        width="100%"
-        tag="img"
-        style="max-width: 700px"&gt;
+        caption="The Great Wave Off Kanagawa - Hokusai"
+        max-width="700"&gt;
+      &lt;/w-image&gt;
+
+      &lt;w-image
+        class="sh2 base-color--bg pa2"
+        :src="`${baseUrl}images/japanese-wave.png`"
+        caption="The Great Wave Off Kanagawa - Hokusai"
+        max-width="700"&gt;
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
