@@ -377,22 +377,38 @@ div
       })
 
   title-link(h2) Figure with or without caption
-  p.
-    If you provide a caption, the w-image tag will be using a native HTML #[span.code &lt;figure&gt;]
-    tag along with #[span.code &lt;figcaption&gt;].
+  ul
+    li.
+      You can tell the w-image component to use the native HTML #[span.code &lt;figure&gt;] tag. In
+      that case, the image inside will use an #[span.code &lt;img&gt;] tag.
+    li.
+      If you provide a caption (with or without requesting a figure tag), the w-image tag will be
+      using the #[span.code &lt;figure&gt;] tag along with #[span.code &lt;figcaption&gt;].
   example(content-class="text-center")
+    p Figure without caption.
+    w-image(
+      :src="`${baseUrl}images/japanese-wave.png`"
+      tag="figure"
+      max-width="700")
+
+    p.mt8 Figure with caption.
     w-image(
       :src="`${baseUrl}images/japanese-wave.png`"
       caption="The Great Wave Off Kanagawa - Hokusai"
       max-width="700")
 
-    p.mt4 With some quick styles adding these classes: #[code .pa2.sh2.base-color--bg]:
+    p.mt8 With some quick styles adding these classes: #[code .pa2.sh2.base-color--bg]:
     w-image.pa2.sh2.base-color--bg(
       :src="`${baseUrl}images/japanese-wave.png`"
       caption="The Great Wave Off Kanagawa - Hokusai"
       max-width="700")
     .caption.mt3 Real size: 1900x443. Given max-width: 700.
     template(#pug).
+      w-image(
+        :src="`${baseUrl}images/japanese-wave.png`"
+        tag="figure"
+        max-width="700")
+
       w-image(
         :src="`${baseUrl}images/japanese-wave.png`"
         caption="The Great Wave Off Kanagawa - Hokusai"
@@ -403,6 +419,12 @@ div
         caption="The Great Wave Off Kanagawa - Hokusai"
         max-width="700")
     template(#html).
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        tag="figure"
+        max-width="700"&gt;
+      &lt;/w-image&gt;
+
       &lt;w-image
         :src="`${baseUrl}images/japanese-wave.png`"
         caption="The Great Wave Off Kanagawa - Hokusai"
