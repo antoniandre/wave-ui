@@ -26,7 +26,7 @@ component.w-image(:is="wrapperTag" :class="wrapperClasses" :style="wrapperStyles
  * - adaptive size: given ratio + height 100% (use bg)
  * - adaptive & locked size: given width or height and using <img>
  *
- * @todo handle figure, captions, srcset, webp.
+ * @todo handle srcset.
  **/
 
 import { consoleWarn } from '../utils/console'
@@ -79,12 +79,12 @@ export default {
         maxWidth: (!isNaN(this.maxWidth) ? `${this.maxWidth}px` : this.maxWidth) || null,
         maxHeight: (!isNaN(this.maxHeight) ? `${this.maxHeight}px` : this.maxHeight) || null,
         ratio: parseFloat(this.ratio) || undefined,
-        tag: this.tag === 'img' || this.caption ? 'img' : 'span'
+        tag: this.tag === 'img' || this.tag === 'figure' || this.caption ? 'img' : 'span'
       }
     },
 
     wrapperTag () {
-      if (this.caption) return 'figure'
+      if (this.caption || this.tag === 'figure') return 'figure'
       return ['span', 'div'].includes(this.tag) ? this.tag : 'span'
     },
 
