@@ -31,9 +31,10 @@ div
       li The width and height may be fixed (e.g. in pixel) or adaptive (e.g. in percentage).
       li The ratio is not needed, but can be provided to override the intrinsic ratio and crop the image (keeping it responsive if it was).
       li You can choose a tag to use for the image, but don't need to. It can be a &lt;span&gt; (default) or &lt;img&gt;.
-      li Providing a caption, will use the native HTML figure and figcaption tags.
+      li Providing a caption, will use the native HTML &lt;figure&gt; and &lt;figcaption&gt; tags.
 
-  p Now here comes a ton of concrete examples.
+  w-divider.ma12
+  p.size--lg Now here comes a ton of concrete examples.
 
   title-link(h2) Default
   p.
@@ -221,16 +222,19 @@ div
       })
 
   title-link(h2) Image ratio
-  p.grey The ratio prop purpose is to maintain the image ratio while resizing.
+  p.grey The ratio prop purpose is to maintain a specific image ratio while resizing with constraints.
   p.
-    Similar to the default behavior (when no width, no height and no ratio are given), the image
-    will be scaling with its container preserving its aspect ratio. The only difference is that
-    it will also scale up beyond its real size.
-  p Let's see a few cases:
+    Usually you don't need to set a ratio since Wave UI computes the original image ratio and already
+    applies it to the image.#[br]
+    But you may want to apply a different ratio than the image natural ratio, like in the second example.
 
-  title-link(h3) Real image ratio
+  title-link(h3) Intrinsic image ratio
   p.grey Image ratio equal to the exact width and height of the image (width / height).
-  p This is the most common case: the image is visible in full, and scales with its container with preserved ratio.
+  p.
+    This is the most common case: the image is visible in full, and scales with its container with
+    preserved ratio.#[br]
+    Note that Wave UI will add a width of 100% if neither of width and height are provided.
+  alert.mt2(tip) In this case, you can obtain the same result by just setting a width of 100%.
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1900 / 443")
     .caption.text-center Real size: 1900x443. Given ratio: 1900 / 443.
@@ -261,6 +265,7 @@ div
       .caption.text-center Real size: 1900x443. Given ratio: 3000 / 443.
     template(#pug).
       w-image.sh1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1000 / 443")
+
       w-image.sh1.mt6(:src="`${baseUrl}images/japanese-wave.png`" :ratio="3000 / 443")
     template(#html).
       &lt;w-image
@@ -279,89 +284,54 @@ div
         baseUrl: 'https://antoniandre.github.io/wave-ui/'
       })
 
-  title-link(h3) Ratio combined with a set width and/or height
+  title-link(h3) Ratio combined with a set width or height
   p.
-    For instance, it happens frequently that an image should fill up the container space
-    (width or height) while maintaining a ratio.
-
-  title-link.mt4(h4) Ratio combined with a set width
-  p.
-    Setting a small width with a unit that is not scaling (no percentage, no viewport unit) will have no
-    specific benefit. It will be the same as setting both a width and height.
+    If the ratio is the original, setting it is not necessary. But if you provide a different one
+    the image will be cropped.#[br]
+    Setting both a width and a height in addition to a ratio, would be pointless: it would be the same
+    outcome with just a width + height, or just a ratio + width, or ratio + height.
   example(content-class="text-center")
-    w-flex(align-center wrap gap="4")
-      .grow
-        p Set width
-        w-image.sh1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100")
-        .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given width: 100.
-      .grow
-        p Set width
-        p.
-          Note: if you set 100% that's the same as the default behavior, adding a 100% when no width
-          and no height are added.
-        w-image.sh1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200")
-        .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given width: 100%.
-      //- .grow
-        p Set height
-        w-image.sh1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" height="100%")
-        .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given width: 100.
-      //- .grow
-        p Set height
-        w-image.sh1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" height="100")
-        .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given height: 100.
-      //- .grow
-        p Set width and height (pointless)
-        w-image.sh1(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100" height="100")
-        .caption.text-center Real size: 200x200.#[br]Given ratio: 200 / 200, given size: 100x100.
+    p Ratio + width
+    w-image.sh1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1" width="50%")
+    .caption.text-center Real size: 1900x443. Given ratio: 1, given width: 50%.
+
+    p.mt4 Ratio + height
+    w-image.sh1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1900 / 443" height="100")
+    .caption.text-center Real size: 1900x443. Given ratio: 1900 / 443, given height: 100.
+
+    p.mt4 Ratio + width + height (pointless)
+    w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1" width="400" height="100")
+    .caption.text-center Real size: 1900x443. Given ratio: 1, given width: 400, given height: 100.
     template(#pug).
-      p Set width
-      w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100")
+      p Ratio + width
+      w-image.sh1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1" width="50%")
 
-      p Set height
-      w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" height="100")
+      p.mt4 Ratio + height
+      w-image.sh1(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1900 / 443" height="100")
 
-      p Set width and height (pointless)
-      w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" width="100" height="100")
+      p.mt4 Ratio + width + height (pointless)
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1" width="400" height="100")
     template(#html).
-      &lt;p&gt;Set width&lt;/p&gt;
-      &lt;w-image
-        :src="`${baseUrl}images/favicon.png`"
-        :ratio="200 / 200"
-        width="100"&gt;
-      &lt;/w-image&gt;
-
-      &lt;p&gt;Set height&lt;/p&gt;
-      &lt;w-image
-        :src="`${baseUrl}images/favicon.png`"
-        :ratio="200 / 200"
-        height="100"&gt;
-      &lt;/w-image&gt;
-
-      &lt;p&gt;Set width and height (pointless)&lt;/p&gt;
-      &lt;w-image
-        :src="`${baseUrl}images/favicon.png`"
-        :ratio="200 / 200"
-        width="100"
-        height="100"&gt;
-      &lt;/w-image&gt;
-    template(#js).
-      data: () => ({
-        baseUrl: 'https://antoniandre.github.io/wave-ui/'
-      })
-
-  title-link(h3) Ratio with a set max width
-  w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" max-width="300")
-  title-link(h3) Ratio with a set max height
-  w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200" max-height="100")
-  p In this case the image will be cropped
-  example(content-class="text-center")
-    w-image(:src="`${baseUrl}images/favicon.png`" :ratio="200 / 200")
-    template(#pug).
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" :ratio="1000 / 443")
-    template(#html).
+      &lt;p&gt;Ratio + width&lt;/p&gt;
       &lt;w-image
         :src="`${baseUrl}images/japanese-wave.png`"
-        :ratio="1000 / 443"&gt;
+        :ratio="1"
+        width="50%"&gt;
+      &lt;/w-image&gt;
+
+      &lt;p class="mt4"&gt;Ratio + height&lt;/p&gt;
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        :ratio="1900 / 443"
+        height="100"&gt;
+      &lt;/w-image&gt;
+
+      &lt;p class="mt4"&gt;Ratio + width + height (pointless)&lt;/p&gt;
+      &lt;w-image
+        :src="`${baseUrl}images/japanese-wave.png`"
+        :ratio="1"
+        width="400"
+        height="100"&gt;
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
@@ -370,30 +340,36 @@ div
 
   title-link(h2 slug="using-the-img-tag") Using the &lt;img&gt; tag
   p.
-    You can choose which tag the #[strong.code w-image] should use.#[br]
-    If you use an #[code img] tag, the image will behave exactly like a standard &lt;img&gt; image.
-    The biggest benefit of that, is that you can set a single #[code width] or #[code height] by itself,
-    and it will keep the natural image ratio while scaling without the need to specify the aspect ratio.
-  //- p.
-    and apply a #[code max-width] or #[code max-height] on top of that so if the image would be bigger
-    than the container it would still apply the ratio on the constrained image.
+    You can choose whether the #[strong.code w-image] component should use the default &lt;span&gt;
+    tag or an &lt;img&gt;.#[br]
+  ul
+    li The default &lt;span&gt; tag will allow cropping in particular which is very advantageous.
+    li.
+      The &lt;img&gt; tag will allow stretching the image, (not usually what we want, but you know, sometimes).
+      Or it could also be used for more semantics.
+    li.
+      Also note that when sending to the printer, the &lt;img&gt; images will show up by default whereas
+      the background graphics will only show up if you choose this option. You can make the decision
+      according to the need.
+
   alert(info)
     p.
       Note that by design, setting both a width and height with the &lt;img&gt; tag, will still allow you
       to achieve image stretching, loosing the aspect ratio. This may be a desired effect or not.
     example(content-class="text-center w-flex justify-space-around wrap")
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" height="100px" tag="img")
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" tag="img" width="100%" height="100px")
+      .caption.text-center Real size: 1900x443, given width: 100%, given height: 100px.
 
   example(content-class="text-center")
-    w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
+    w-image(:src="`${baseUrl}images/japanese-wave.png`" tag="img" width="100%" max-width="700px")
     template(#pug).
-      w-image(:src="`${baseUrl}images/japanese-wave.png`" width="100%" tag="img" style="max-width: 700px")
+      w-image(:src="`${baseUrl}images/japanese-wave.png`" tag="img" width="100%" max-width="700px")
     template(#html).
       &lt;w-image
         :src="`${baseUrl}images/japanese-wave.png`"
-        width="100%"
         tag="img"
-        style="max-width: 700px"&gt;
+        width="100%"
+        max-width="700px"&gt;
       &lt;/w-image&gt;
     template(#js).
       data: () => ({
@@ -427,7 +403,7 @@ div
   title-link(h2) Loading spinner
   p.
     This image is very big, so that you have time to see the spinner while loading.
-    Refresh the page if you haven't seen it!
+    Refresh the page if you haven't seen it (or enable dev tools throttling if your connection is too fast)!
   example(content-class="text-center")
     w-image(:src="`${baseUrl}images/spirit-island--alberta.png`" :ratio="5098 / 2550")
     .caption Real size: 5098x2550. Given ratio: 5098 / 2550.
@@ -543,16 +519,38 @@ div
     if you disable the cache. On big images, you would then see a truncated image until completely
     loaded, just like a standard &lt;img&gt;.
 
-  title-link(h2) Fallback
-  p.
-    The default fallback is a blank 1x1 transparent gif. So if the image can't load, a transparent
-    background will be there instead preventing the browser's broken image logo.#[br]
-    You can also provide a custom fallback image to display if the image cannot load.#[br]
-    For instance, in a e-boutique you may try to load the image of an item without knowing if this item
-    has an available image or not.#[br]#[br]
-    Thanks to the #[code error] emitted event, you can trigger a specific action, such as displaying an
-    error message like in this example. But this is optional, and without the custom alert nothing would
-    look broken when you provide a valid fallback image!
+  title-link(h2) Error handling &amp; Fallback
+  .w-flex.gap6
+    example.mt0.no-grow(content-class="text-center px6")
+      w-image.bd1(src="/images/broken.png" width="100" height="100")
+      .caption Given size: 100x100.#[br]Border added for visualization.
+      template(#pug).
+        w-image.bd1(src="/images/broken.png" width="100" height="100")
+      template(#html).
+        &lt;w-image
+          class="bd1"
+          src="/images/broken.png"
+          width="100"
+          height="100"&gt;
+        &lt;/w-image&gt;
+    p.
+      If for some reason the image would not load, the default fallback is a blank 1x1 transparent gif
+      (invisible, ultra light), like so.#[br]#[br]
+      So if the image can't load, a transparent background will be there instead preventing the
+      browser's broken image icon.#[br]#[br]
+      But you can of course provide a custom fallback image to display if the image cannot load.
+
+  title-link(h3) Fallback &amp; Error handling
+  ul
+    li.
+      For instance, in a e-boutique you may try to load the image of an item without knowing if this item
+      has an available image or not. In that case you can plan to have a fallback image, in case, like
+      following.
+    li.
+      Thanks to the #[code error] emitted event, you can also trigger a specific action, such as displaying an
+      error message like in this example. But this is optional, and without the custom alert nothing would
+      look broken when you provide a valid fallback image!
+
   example(content-class="text-center")
     w-image(
       :src="`${baseUrl}images/broken.png`"
