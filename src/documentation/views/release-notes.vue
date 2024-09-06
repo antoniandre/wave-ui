@@ -33,14 +33,17 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
-    li.patch
+    li.minor
       strong.version v3.15.0
       ul
         li
-          strong.code w-image
+          strong.code w-image 2.0
+          span.tag.new.ml2
           ul
+            li Completely reworked the #[span.code w-image] component to make it more intuitive and easier to use.
             li The image is now responsive by default until its real size is reached.
-            li Support caption and support figure tag. #[span.tag.new]
+            li The ratio is not needed but can be provided to override the normal behavior.
+            li Support figure and figcaption tags.
 
     li.patch
       strong.version v3.14.3
