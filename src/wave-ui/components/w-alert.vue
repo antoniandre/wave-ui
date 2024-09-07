@@ -136,7 +136,7 @@ export default {
   margin-top: 4 * $base-increment;
   margin-bottom: 4 * $base-increment;
   padding: 2 * $base-increment;
-  font-size: round(1.1 * $base-font-size);
+  font-size: $base-font-size;
   font-weight: 700;
   border-radius: $border-radius;
   border: 1px solid currentColor;
