@@ -33,6 +33,13 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+    li.patch
+      strong.version v3.15.1
+      ul
+        li
+          strong.code w-alert
+          ul
+            li Decreased the default font-size from 1.1 * $base-font-size to 1 * $base-font-size.
     li.minor
       strong.version v3.15.0
       ul
