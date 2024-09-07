@@ -61,11 +61,12 @@ code, .code, kbd {
 }
 
 code {
-  padding: 1px 5px 2px;
+  padding: 1px 4px;
   background-color: rgba(130, 130, 130, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: $border-radius;
-  color: #c33;
+  color: #2a4459;
+  font-size: 0.9em;
 }
 
 .code {color: #000;}
