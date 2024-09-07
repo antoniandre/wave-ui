@@ -25,6 +25,7 @@ p {margin-bottom: 2 * $base-increment;}
 .ssh-pre {
   margin: 1em 0;
   line-height: 1.3;
+  font-size: 0.9rem;
 
   &[data-label] {margin: 2em 0 1em;}
   &[data-label]:before {font-weight: bold;}

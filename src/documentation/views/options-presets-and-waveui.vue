@@ -14,7 +14,7 @@ main
         span.caption.ml1 (in the #[code app.use(WaveUI, { /* Config */ })]):
       ul.mt4
         li.mb4(v-for="(item, i) in waveUiOptions" :key="i")
-          code.title3 {{ item.label }}
+          code.title4 {{ item.label }}
           | :
           div(v-if="item.route")
             | Read on in the
