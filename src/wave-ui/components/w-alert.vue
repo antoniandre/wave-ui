@@ -31,6 +31,7 @@ export default {
     iconOutside: { type: Boolean },
     plain: { type: Boolean },
     dismiss: { type: Boolean },
+    bold: { type: Boolean },
     // Types (with icon).
     success: { type: Boolean },
     info: { type: Boolean },
@@ -43,14 +44,12 @@ export default {
     lg: { type: Boolean },
     xl: { type: Boolean },
     // Borders.
-    noBorder: { type: Boolean },
+    border: { type: Boolean },
     borderLeft: { type: Boolean },
     borderRight: { type: Boolean },
     borderTop: { type: Boolean },
     borderBottom: { type: Boolean },
-    outline: { type: Boolean },
-    dark: { type: Boolean },
-    light: { type: Boolean }
+    outline: { type: Boolean }
   },
 
   emits: ['input', 'update:modelValue', 'close'],
@@ -93,14 +92,16 @@ export default {
     },
 
     hasSingleBorder () {
-      return this.borderLeft || this.borderRight ||
-        this.borderTop || this.borderBottom
+      return this.borderLeft || this.borderRight || this.borderTop || this.borderBottom
     },
 
     classes () {
+      const bgColor = this.bgColor || (this.plain && this.type)
+      const color = this.color || (!this.plain && this.type) || (!bgColor && 'primary')
+
       return {
-        [`${this.bgColor || (this.plain && this.type)}--bg w-alert--bg`]: this.bgColor || (this.plain && this.type),
-        [this.color || (!this.plain && this.type)]: this.color || (!this.plain && this.type),
+        [`${bgColor}--bg w-alert--bg`]: bgColor,
+        [color]: color,
         [`size--${this.presetSize}`]: this.presetSize,
         [`w-alert--${this.type}`]: this.type,
         'w-alert--has-icon': this.type || this.icon || this.dismiss,
@@ -109,15 +110,14 @@ export default {
         'w-alert--outline': this.outline,
         'w-alert--tile': this.tile,
         'w-alert--round': this.round,
-        'w-alert--no-border': this.noBorder || (this.plain && this.type),
         'w-alert--one-border': this.hasSingleBorder || this.iconOutside,
         'w-alert--border-left': (!this.noBorder && this.borderLeft) || this.iconOutside,
         'w-alert--border-right': !this.noBorder && this.borderRight,
         'w-alert--border-top': !this.noBorder && this.borderTop,
         'w-alert--border-bottom': !this.noBorder && this.borderBottom,
+        'w-alert--border': this.border && !this.hasSingleBorder,
         'w-alert--shadow': this.shadow,
-        'w-alert--dark': this.dark,
-        'w-alert--light': this.light
+        'w-alert--bold': this.bold
       }
     }
   },
@@ -137,18 +137,18 @@ export default {
   margin-bottom: 4 * $base-increment;
   padding: 2 * $base-increment;
   font-size: $base-font-size;
-  font-weight: 700;
   border-radius: $border-radius;
-  border: 1px solid currentColor;
+  border: 0 solid currentColor;
 
   @include themeable;
 
+  &--bold {font-weight: 700;}
   &--has-icon {
     display: flex;
     align-items: center;
   }
 
-  &--outline {border-color: currentColor;}
+  &--border, &--outline {border-width: 1px;}
   &--tile {border-radius: 0;}
   &--round {
     border-radius: 99em;
@@ -156,7 +156,7 @@ export default {
     padding-right: 3 * $base-increment;
   }
   &--shadow {box-shadow: $box-shadow;}
-  &--no-border, &--one-border, &--plain {border: transparent;}
+  &--one-border, &--plain {border: transparent;}
 
   // Before for the border, after for the background color.
   // ------------------------------------------------------
