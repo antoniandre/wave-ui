@@ -15,7 +15,7 @@ import WAlert from '@/wave-ui/components/w-alert.vue'
 
 const propsDescs = {
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>This prop controls the visibility of the alert. Any truthy value will show the alert whereas any falsy value will hide it.',
-  color: 'Applies a color to the alert\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
+  color: 'Applies a color to the alert\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.<br>The default color is `primary`, if no <code>bg-color</code> and no type (<code>success</code>, <code>info</code>, <code>warning</code>, <code>error</code>) is provided.',
   bgColor: 'Applies a color to the alert\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   shadow: 'Applies a drop shadow to the alert container.',
   tile: 'Removes the default border-radius and sets sharp edges on the alert container.',
@@ -33,7 +33,8 @@ const propsDescs = {
   md: 'Sets the size of the alert to medium.',
   lg: 'Sets the size of the alert to large.',
   xl: 'Sets the size of the alert to extra large.',
-  noBorder: 'Removes the default border from the alert container.',
+  bold: 'Sets the alert text to bold. Note that you could also use the <code>.text-bold</code> class.',
+  border: 'Adds borders all around the alert container.',
   borderLeft: 'Adds a left border on the alert. Only one side-border can be applied at the same time.',
   borderRight: 'Adds a right border on the alert. Only one side-border can be applied at the same time.',
   borderTop: 'Adds a top border on the alert. Only one side-border can be applied at the same time.',
@@ -42,7 +43,7 @@ const propsDescs = {
 }
 
 const slots = {
-  content: { description: 'The alert content.' }
+  default: { description: 'The alert content.' }
 }
 
 const eventsDescs = {
