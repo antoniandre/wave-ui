@@ -14,11 +14,11 @@ div
 import WImage from '@/wave-ui/components/w-image.vue'
 
 const propsDescs = {
-  tag: 'Tells which tag to use for the <strong class="code">w-image</strong>\'s image. It can be any valid HTML tag, like &lt;span&gt; or &lt;div&gt;. The wrapper of the image will use a &lt;span&gt; tag unless you use set the <code>tag</code> to div.<br><br>If you use the <code>img</code> tag, the image itself will use the &lt;img&gt; tag and the wrapper will use a &lt;span&gt; tag. The image will have a particular behavior as explained in the <a href="#using-the-img-tag">Using the &lt;img&gt; tag</a> example.',
+  tag: 'Tells which tag to use for the <strong class="code">w-image</strong>\'s image. It can be one of &lt;span&gt;, &lt;div&gt;, &lt;figure&gt; or &lt;img&gt;.',
   src: 'The source of the image to display.',
   width: 'Sets the width of the image.<br>Accepts a string made of a value and a unit (e.g. <code>10em</code>) or a number (e.g. <code>450</code>) that will be a pixel value.',
   height: 'Sets the height of the image.<br>Accepts a string made of a value and a unit (e.g. <code>10em</code>) or a number (e.g. <code>450</code>) that will be a pixel value.',
-  ratio: 'Sets the ratio of the image, allowing to only define a width or a height and preserve the image aspect ratio while resizing. Refer to the <a href="#ratio">Ratio</a> example.',
+  ratio: 'Sets or overrides the ratio of the image, allowing to only define a width or a height and preserve the image aspect ratio while resizing. By default the intrinsic image ratio is used.<br>Refer to the <a href="#ratio">Ratio</a> example.',
   lazy: 'When set to true, the image will only load when it starts being visible in the viewport.<br>Refer to the <a href="#lazy">Lazy</a> example.',
   absolute: 'Sets the CSS position of the image to <code>absolute</code>.',
   fixed: 'Sets the CSS position of the image to <code>fixed</code>.',
@@ -27,7 +27,9 @@ const propsDescs = {
   spinnerColor: 'Define a specific color for the spinner while the image is loading. By default the spinner color is the primary color.',
   fallback: 'Provides a fallback image, to display when the given image source is not found. Refer to the <a href="#fallback">Fallback</a> example.',
   transition: 'Applies a particular transition to display the image when it is fully loaded.<br>Check all the transitions that apply to the notification in the <a href="#transitions">Transitions</a> example. Refer to the <a href="#transitions">transitions</a> example.',
-  contentClass: 'Applies the given classes to the content wrapper when using the <code>default</code> slot.'
+  contentClass: 'Applies the given classes to the content wrapper when using the <code>default</code> slot.',
+  caption: 'Adds a caption text to the bottom of the image. If used, the wrapper will be using the &lt;figure&gt; native HTML tag and the caption will use the &lt;figcaption&gt; tag.',
+  captionClass: 'Applies the given classes to the caption element.'
 }
 
 const slots = {
