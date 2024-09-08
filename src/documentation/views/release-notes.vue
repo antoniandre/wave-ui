@@ -33,13 +33,27 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
-    li.patch
-      strong.version v3.15.1
+    li.minor
+      strong.version v3.16.0
       ul
         li
           strong.code w-alert
           ul
-            li Decreased the default font-size from 1.1 * $base-font-size to 1 * $base-font-size.
+            li Removed the default bold font-weight and added a bold prop for easy toggle.
+            li Decreased the default font-size from 1.1rem to 1rem (1 * $base-font-size).
+            li Adjusted the status icon vertical alignment.
+            li Made the alert use the primary color if no color and no background color is provided.
+            li Removed the default border, added a #[code border] prop, removed the #[code no-border] prop.
+
+        li
+          strong CSS
+          ul
+            li Removed the letter spacing on the #[code .headline], #[code .title1] classes.
+            li.
+              Decreased all the font-size of the size control helper classes #[code .size--xs],
+              #[code .size--sm], #[code .size--md], #[code .size--lg], #[code .size--xl].
+              The #[code .size--sm] is now exactly the root font-size.
+
     li.minor
       strong.version v3.15.0
       ul
@@ -2158,12 +2172,21 @@ main
   .history {
     margin-left: 4px;
 
-    > li {padding-left: 20px;}
-    > li + li {margin-top: 28px;}
-    li {list-style-type: none;position: relative;}
+    >li {
+      padding-left: 20px;
+    }
+
+    >li+li {
+      margin-top: 28px;
+    }
+
+    li {
+      list-style-type: none;
+      position: relative;
+    }
 
     // Bullet.
-    > li:before {
+    >li:before {
       content: '';
       position: absolute;
       top: 11px;
@@ -2176,10 +2199,13 @@ main
       transform: translate(-50%, -50%);
       z-index: 1;
     }
-    > li:first-child:before {display: none;}
+
+    >li:first-child:before {
+      display: none;
+    }
 
     // Left border.
-    > li:after {
+    >li:after {
       content: '';
       position: absolute;
       top: 11px;
@@ -2187,19 +2213,56 @@ main
       left: -0.5px;
       border-left: 1px solid #ddd;
     }
-    > li:last-child:after {display: none;}
-    > li.dashed:after {border-left-style: dashed;}
-    > li.patch:before {font-size: 7px;}
-    > li.minor:before {font-size: 11px;}
-    > li.major:before {font-size: 14px;}
 
-    .version {font: bold 1.2rem monospace;display: block;}
-    > li.patch:before, > li.patch .version {color: rgba(var(--w-base-color-rgb), 0.3);}
-    > li.minor:before, > li.minor .version {color: rgba(var(--w-base-color-rgb), 0.6);}
-    > li.major:before, > li.major .version {color: #09c;font-size: 1.4rem;}
+    >li:last-child:after {
+      display: none;
+    }
 
-    ul {margin-left: -2px;}
-    li li {padding-left: 20px;margin-top: 2px;}
+    >li.dashed:after {
+      border-left-style: dashed;
+    }
+
+    >li.patch:before {
+      font-size: 7px;
+    }
+
+    >li.minor:before {
+      font-size: 11px;
+    }
+
+    >li.major:before {
+      font-size: 14px;
+    }
+
+    .version {
+      font: bold 1.2rem monospace;
+      display: block;
+    }
+
+    >li.patch:before,
+    >li.patch .version {
+      color: rgba(var(--w-base-color-rgb), 0.3);
+    }
+
+    >li.minor:before,
+    >li.minor .version {
+      color: rgba(var(--w-base-color-rgb), 0.6);
+    }
+
+    >li.major:before,
+    >li.major .version {
+      color: #09c;
+      font-size: 1.4rem;
+    }
+
+    ul {
+      margin-left: -2px;
+    }
+
+    li li {
+      padding-left: 20px;
+      margin-top: 2px;
+    }
 
     // Bullet.
     li li:before {
@@ -2219,18 +2282,33 @@ main
       aspect-ratio: 1;
     }
 
-    li li li:before {content: '\e007';}
+    li li li:before {
+      content: '\e007';
+    }
 
-    p {margin: 0.2em 0 0;line-height: 1.2;}
-    code {padding: 0 4px;font-size: 1em;}
+    p {
+      margin: 0.2em 0 0;
+      line-height: 1.2;
+    }
+
+    code {
+      padding: 0 4px;
+      font-size: 1em;
+    }
+
     strong.code:first-child:not(.black) {
       color: $primary;
       font-size: 1.1em;
     }
   }
 
-  .vue-green {color: #42b883;}
-  .vue-green--bg {background-color: #42b883;}
+  .vue-green {
+    color: #42b883;
+  }
+
+  .vue-green--bg {
+    background-color: #42b883;
+  }
 
   span.tag {
     border-radius: 99em;
@@ -2241,11 +2319,29 @@ main
     position: relative;
     top: -1px;
   }
-  span.new {background-color: #3698e5;}
-  span.new:before {content: 'NEW';}
-  span.deprecated {background-color: #000;}
-  span.deprecated:before {content: 'DEPRECATED';}
-  span.removed {background-color: #f02c2c;}
-  span.removed:before {content: 'REMOVED';}
+
+  span.new {
+    background-color: #3698e5;
+  }
+
+  span.new:before {
+    content: 'NEW';
+  }
+
+  span.deprecated {
+    background-color: #000;
+  }
+
+  span.deprecated:before {
+    content: 'DEPRECATED';
+  }
+
+  span.removed {
+    background-color: #f02c2c;
+  }
+
+  span.removed:before {
+    content: 'REMOVED';
+  }
 }
 </style>
