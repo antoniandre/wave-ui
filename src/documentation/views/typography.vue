@@ -13,6 +13,14 @@ main
     .body.mt4 Body text using the #[code .body] class.
     .caption.mt4 Caption text using the #[code .caption] class.
 
+  title-link(h2) Other text sizes
+  p.caption The following size classes can be applied to text as well as most of Wave UI elements.
+  .size--xs This text is using the #[code .size--xs] class.
+  .size--sm This text is using the #[code .size--sm] class.
+  .size--md This text is using the #[code .size--md] class.
+  .size--lg This text is using the #[code .size--lg] class.
+  .size--xl This text is using the #[code .size--xl] class.
+
   title-link(h2) Text style
   div.ml8
     .text-upper.mt4 Uppercase text using the #[code .text-upper] class.
