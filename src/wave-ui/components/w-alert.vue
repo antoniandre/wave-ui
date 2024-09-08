@@ -2,7 +2,7 @@
 .w-alert(v-if="show" :class="classes")
   //- Add a wrapper around the content when needed.
   template(v-if="type || icon || dismiss")
-    w-icon.w-alert__icon.mr2(v-if="type || icon") {{ type ? typeIcon : icon }}
+    w-icon.w-alert__icon(v-if="type || icon") {{ type ? typeIcon : icon }}
     .w-alert__content
       slot
     w-button.w-alert__dismiss(
@@ -224,7 +224,7 @@ export default {
     margin-right: 2 * $base-increment;
     font-size: 1.3em;
   }
-  &--has-icon &__content {flex-grow: 1;align-self: flex-start;}
+  &--has-icon &__content {flex-grow: 1;}
   @-moz-document url-prefix() {
     &--has-icon &__content {margin-top: 0.18em;}
   }
