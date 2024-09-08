@@ -9,17 +9,17 @@ main
       span {{ label }}
 
   title-link(h2) Dropping support for IE11
-  a.title3(href="https://gs.statcounter.com/browser-market-share" target="_blank")
+  a.title4(href="https://gs.statcounter.com/browser-market-share" target="_blank")
     span IE's current market share is less than 0.43% worldwide (gs.statcounter.com)
     w-icon.ml2(md) mdi mdi-open-in-new
 
-  p.title5.
+  p.size--md.
     Many popular websites have officially drop support for IE including Youtube, GitHub, Meetup, Slack, Zendesk,
     Trello, Atlassian, Discord, Spotify, Behance, Wix, Huddle, WhatsApp, Google Earth and Yahoo.
     Even some of Microsoft’s own product’s, like Teams, have severely reduced support for IE.
 
   .title4.mt8 The distance between Internet Explorer 11 (year 2015) and every other major browser is huge.
-  p.
+  p.mt0.
     Adding support for this technologically obsolete browser considerably increases the development time
     and #[strong adding IE11 hacks and workarounds penalizes all the other browser users (more than 99.57%)].
 

@@ -3,8 +3,8 @@ div
   title-link(h2) Basic
   w-accordion(:items="items")
   p.grey-light2.my4.
-    Now that you've seen the default accordion in real context, all the examples of this page will have a
-    light blue background and accordions a white background to help visualize where they end.
+    Now that you've seen the default accordion in real context, all the accordions of this page will have a
+    light blue background in order to help visualize their edges.
 
   example(content-class="pa4")
     w-accordion.discrete--bg(v-model="accordion1" :items="items")
@@ -671,5 +671,5 @@ export default {
 </script>
 
 <style lang="scss">
-.discrete--bg {background-color: rgba(var(--w-contrast-bg-color-rgb), 0.1);}
+.discrete--bg {background-color: rgba(88, 170, 249, 0.1);}
 </style>

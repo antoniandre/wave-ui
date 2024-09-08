@@ -2,7 +2,7 @@
 main
   title-link.mt4(h1) Getting started
 
-  .title3.mb10
+  .title4.mb10
     w-icon.ml-2.mr2 wi-chevron-right
     | Pick 1 of the 3 following installation methods.
 
@@ -41,7 +41,7 @@ main
   w-divider.my12
   title-link(h2) What next?
   p.text-bold You are now up and running. Go test some components in your app!
-  .title3.mt4 But if you would appreciate a little more guidance, we recommend to:
+  .title4.mt4 But if you would appreciate a little more guidance, we recommend to:
   w-list(checklist :items="6" :model-value="[0]")
     template(#item.1) Install Wave UI from one of the above method
     template(#item.2).
@@ -108,8 +108,6 @@ export default {
   .w-accordion__item-title {border-top: none;}
   .w-accordion__item-content {background: #f7fbff;}
   .w-button--icon.size--md {font-size: 20px;}
-
-  .w-accordion .ssh-pre, .w-accordion em {font-size: 1rem;}
 
   .vue-install .comment {user-select: none;}
   .ssh-pre[data-label]:before {font-size: 12px;}

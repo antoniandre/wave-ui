@@ -44,7 +44,7 @@ main
       ssh-pre.mt4(language="js" label="Javascript" :dark="$store.state.darkMode").
         // In the global Wave UI config object.
         presets: {
-          'w-button': { color: 'light-blue-light4', bgColor: 'deep-purple-light2', tile: true, outline: true, lg: true },
+          'w-button': { color: 'green-dark1', bgColor: 'green-light6', tile: true, lg: true },
           'w-accordion': { expandIconRotate90: true },
           'w-overlay': { bgColor: 'pink', opacity: 0.3 }
         }
@@ -56,18 +56,17 @@ main
       ssh-pre.mt4(language="js" label="Javascript" :dark="$store.state.darkMode").
         presets: {
           'w-button': {
-            color: 'light-blue-light4',
-            bgColor: 'deep-purple-light2',
+            color: 'green-dark1',
+            bgColor: 'green-light6',
             tile: true,
-            outline: true,
             lg: true
           }
         }
 
       example
-        w-button.ma2(v-for="i in 10" v-bind="{ color: 'light-blue-light4', bgColor: 'deep-purple-light2', tile: true, outline: true, lg: true }") button {{ i }}
+        w-button.ma2(v-for="i in 10" v-bind="{ color: 'green-dark1', bgColor: 'green-light6', tile: true, lg: true }") button {{ i }}
         br
-        w-button.ma2(bg-color="success" v-bind="{ tile: true, outline: true, lg: true }") green button
+        w-button.ma2(bg-color="success" v-bind="{ tile: true, lg: true }") green button
         w-button.ma2(bg-color="success" :tile="false" :outline="false" :lg="false") another green button
         template(#pug).
           w-button.ma2(v-for="i in 10") button {{ '\{\{ i \}\}' }}
@@ -89,10 +88,9 @@ main
         template(#js).
           presets: {
             'w-button': {
-              color: 'light-blue-light4',
-              bgColor: 'deep-purple-light2',
-              tile: true,
-              outline: true
+              color: 'green-dark1',
+              bgColor: 'green-light6',
+              tile: true
             }
           }
 

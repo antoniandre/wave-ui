@@ -85,7 +85,7 @@ export default {
     list-style-type: none;
 
     .title-link {
-      font: bold 1.3rem monospace;
+      font: bold 1.15rem monospace;
       color: $primary;
       display: inline-block;
       margin-right: 6px;

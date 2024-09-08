@@ -15,22 +15,22 @@ main
       | designs.
 
   title-link(h2) What is Wave UI?
-  .title3.mt6 Like other UI frameworks, Wave UI is:
-  w-list.title4(:items="features1" icon="wi-check")
+  .title4.mt6 Like other UI frameworks, Wave UI is:
+  w-list.size--md(:items="features1" icon="wi-check")
 
-  .title3.mt6 But it is also:
-  w-list.title4(:items="features2" icon="wi-check")
+  .title4.mt6 But it is also:
+  w-list.size--md(:items="features2" icon="wi-check")
 
   title-link(h2) CSS-wise...
-  .title3 Wave UI is developed with a particular care about CSS.
-  p.title3.
+  .size--md Wave UI is developed with a particular care about CSS.
+  p.size--md.
     Practically Wave UI gives you more flexibility and more control over the CSS.
   alert.my5(tip).
     Because inline styles and #[code !important] are a nightmare to override,
     Wave UI has chosen to use not-too-specific selectors and promote the CSS styling
     rather than Javascript dynamic styling.
 
-  .title3.mt6.
+  .title4.mt6.
     In the Wave UI framework, all the styles are scoped to the framework UI elements
   p.
     You will not see any style applied to DOM elements.#[br]
@@ -41,7 +41,7 @@ main
     to this #[w-button.mx1 great button], Wave UI will not be on your way with tons of default styles.#[br]
     If you don't use a Wave UI element at some point, it's your choice and we respect that!
 
-  .title3.mt6.
+  .title4.mt6.
     We also encourage you
   p.
     to use Wave UI CSS classes when you can, and sometimes choose to

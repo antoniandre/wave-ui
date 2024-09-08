@@ -2,7 +2,7 @@
 div
   alert(info)
     ul
-      li.title4.
+      li.
         The purpose of the #[strong.code w-confirm] component is to quickly set up a
         confirmation prompt to confirm a critical action.
       li.

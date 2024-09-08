@@ -59,9 +59,8 @@ main
       em.grey.mt1 Resizing your browser will update the current breakpoint.
     template(#pug).
       w-card.blue-light5--bg
-        .title2
-          | Current breakpoint:
-          code {{ '\{\{ $waveui.breakpoint.name \}\}' }}
+        div.title2
+          code.a ccc
         em.grey.mt1 Resizing your browser will update the current breakpoint.
     template(#html).
       &lt;w-card class="blue-light5--bg"&gt;
@@ -133,9 +132,9 @@ main
     .text-center.smd-hide Some text in the center.
     .text-right.smd-text-center Some text on the right.
     template(#pug).
-      .text-left.smd-text-center Some text on the left.
-      .text-center.smd-hide Some text in the center.
-      .text-right.smd-text-center Some text on the right.
+      div.text-left.smd-text-center Some text on the left.
+      div.text-center.smd-hide Some text in the center.
+      div.text-right.smd-text-center Some text on the right.
     template(#html).
       &lt;div class="text-left smd-text-center"&gt;Some text on the left.&lt;/div&gt;
       &lt;div class="text-center smd-hide"&gt;Some text in the center.&lt;/div&gt;
