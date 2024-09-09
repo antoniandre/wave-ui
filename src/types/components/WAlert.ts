@@ -159,11 +159,18 @@ export interface WaveAlertProps {
   xl?: boolean
 
   /**
-   * Removes the default border from the alert container.
-   * @property {boolean} noBorder
+   * Sets a bold font-weight on the text content.
+   * @property {boolean} bold
    * @see https://antoniandre.github.io/wave-ui/w-alert
    */
-  noBorder?: boolean
+  bold?: boolean
+
+  /**
+   * Adds a border around the alert container.
+   * @property {boolean} border
+   * @see https://antoniandre.github.io/wave-ui/w-alert
+   */
+  border?: boolean
 
   /**
    * Adds a left border on the alert. Only one side-border can be applied at the same time.
