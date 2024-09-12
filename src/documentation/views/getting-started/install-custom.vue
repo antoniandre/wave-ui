@@ -17,7 +17,7 @@ div
         | npm i -D pug pug-plain-loader sass sass-loader@10
       small.text-italic.grey.
         The dev dependencies are only needed for building the project. They will not ship to production.
-      p.mt3
+      .mt3
         strong Notes:
         ul
           li #[span.code sass-loader 11+] is not compatible with Webpack 4 or less.
