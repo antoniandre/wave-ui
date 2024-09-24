@@ -28,6 +28,8 @@ w-overlay.w-dialog(
 </template>
 
 <script>
+import { objectifyClasses } from '../utils/index'
+
 export default {
   name: 'w-dialog',
 
@@ -40,9 +42,9 @@ export default {
     tile: { type: Boolean },
     title: { type: String },
     transition: { type: String, default: 'fade' }, // @todo: validator.
-    titleClass: { type: String },
-    contentClass: { type: String },
-    dialogClass: { type: String },
+    titleClass: { type: [String, Object, Array] },
+    contentClass: { type: [String, Object, Array] },
+    dialogClass: { type: [String, Object, Array] },
     overlayColor: { type: String },
     color: { type: String },
     bgColor: { type: String },
@@ -69,9 +71,21 @@ export default {
   },
 
   computed: {
+    titleClasses () {
+      return objectifyClasses(this.titleClass)
+    },
+
+    contentClasses () {
+      return objectifyClasses(this.contentClass)
+    },
+
+    dialogClasses () {
+      return objectifyClasses(this.dialogClass)
+    },
+
     maxWidth () {
       let width = this.width
-      if (width && parseInt(width) == width) width += 'px'
+      if (width && parseInt(width) === +width) width += 'px'
       return width
     },
     classes () {
