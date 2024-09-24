@@ -1,0 +1,1083 @@
+/* grid 12 or 24 */
+.w-app .xs12 {width: 100%;}
+.w-app .xs11 {width: 91.6667%;}
+.w-app .xs10 {width: 83.3333%;}
+.w-app .xs9 {width: 75%;}
+.w-app .xs8 {width: 66.6667%;}
+.w-app .xs7 {width: 58.3333%;}
+.w-app .xs6 {width: 50%;}
+.w-app .xs5 {width: 41.6667%;}
+.w-app .xs4 {width: 33.3333%;}
+.w-app .xs3 {width: 25%;}
+.w-app .xs2 {width: 16.6667%;}
+.w-app .xs1 {width: 8.3333%;}
+
+@media(min-width:601px) {
+  .w-app .sm12 {width: 100%;}
+  .w-app .sm11 {width: 91.6667%;}
+  .w-app .sm10 {width: 83.3333%;}
+  .w-app .sm9 {width: 75%;}
+  .w-app .sm8 {width: 66.6667%;}
+  .w-app .sm7 {width: 58.3333%;}
+  .w-app .sm6 {width: 50%;}
+  .w-app .sm5 {width: 41.6667%;}
+  .w-app .sm4 {width: 33.3333%;}
+  .w-app .sm3 {width: 25%;}
+  .w-app .sm2 {width: 16.6667%;}
+  .w-app .sm1 {width: 8.3333%;}
+}
+
+@media(min-width:901px) {
+  .w-app .md12 {width: 100%;}
+  .w-app .md11 {width: 91.6667%;}
+  .w-app .md10 {width: 83.3333%;}
+  .w-app .md9 {width: 75%;}
+  .w-app .md8 {width: 66.6667%;}
+  .w-app .md7 {width: 58.3333%;}
+  .w-app .md6 {width: 50%;}
+  .w-app .md5 {width: 41.6667%;}
+  .w-app .md4 {width: 33.3333%;}
+  .w-app .md3 {width: 25%;}
+  .w-app .md2 {width: 16.6667%;}
+  .w-app .md1 {width: 8.3333%;}
+}
+
+@media(min-width:1201px) {
+  .w-app .lg12 {width: 100%;}
+  .w-app .lg11 {width: 91.6667%;}
+  .w-app .lg10 {width: 83.3333%;}
+  .w-app .lg9 {width: 75%;}
+  .w-app .lg8 {width: 66.6667%;}
+  .w-app .lg7 {width: 58.3333%;}
+  .w-app .lg6 {width: 50%;}
+  .w-app .lg5 {width: 41.6667%;}
+  .w-app .lg4 {width: 33.3333%;}
+  .w-app .lg3 {width: 25%;}
+  .w-app .lg2 {width: 16.6667%;}
+  .w-app .lg1 {width: 8.3333%;}
+}
+
+@media(min-width:1701px) {
+  .w-app .xl12 {width: 100%;}
+  .w-app .xl11 {width: 91.6667%;}
+  .w-app .xl10 {width: 83.3333%;}
+  .w-app .xl9 {width: 75%;}
+  .w-app .xl8 {width: 66.6667%;}
+  .w-app .xl7 {width: 58.3333%;}
+  .w-app .xl6 {width: 50%;}
+  .w-app .xl5 {width: 41.6667%;}
+  .w-app .xl4 {width: 33.3333%;}
+  .w-app .xl3 {width: 25%;}
+  .w-app .xl2 {width: 16.6667%;}
+  .w-app .xl1 {width: 8.3333%;}
+}
+
+@media(min-width:601px) {
+  .w-app .smu-show {display: block}
+  .w-app .smu-hide {display: none}
+  .w-app .smu-d-flex {display: flex}
+  .w-app .smu-d-iflex {display: inline-flex}
+  .w-app .smu-d-block {display: block}
+  .w-app .smu-d-iblock {display: inline-block}
+  .w-app .smu-text-left {text-align: left}
+  .w-app .smu-text-center {text-align: center}
+  .w-app .smu-text-right {text-align: right}
+  .w-app .smu-text-nowrap {white-space: nowrap}
+  .w-app .smu-row {flex-direction: row}
+  .w-app .smu-column {flex-direction: column}
+  .w-app .smu-column-reverse {flex-direction: column-reverse}
+  .w-app .smu-grow {flex-grow: 1;flex-basis: auto}
+  .w-app .smu-no-grow {flex-grow: 0}
+  .w-app .smu-shrink {flex-shrink: 1;margin-left: auto;margin-right: auto}
+  .w-app .smu-no-shrink {flex-shrink: 0}
+  .w-app .smu-wrap {flex-wrap: wrap}
+  .w-app .smu-no-wrap {flex-wrap: nowrap}
+  .w-app .smu-fill-width {width: 100%}
+  .w-app .smu-fill-height {height: 100%}
+  .w-app .smu-basis-zero {flex-basis: 0}
+  .w-app .smu-align-start {align-items: flex-start}
+  .w-app .smu-align-center {align-items: center}
+  .w-app .smu-align-end {align-items: flex-end}
+  .w-app .smu-align-self-start {align-self: flex-start}
+  .w-app .smu-align-self-center {align-self: center}
+  .w-app .smu-align-self-end {align-self: flex-end}
+  .w-app .smu-align-self-stretch {align-self: stretch}
+  .w-app .smu-justify-start {justify-content: flex-start}
+  .w-app .smu-justify-center {justify-content: center}
+  .w-app .smu-justify-end {justify-content: flex-end}
+  .w-app .smu-justify-space-between {justify-content: space-between}
+  .w-app .smu-justify-space-around {justify-content: space-around}
+  .w-app .smu-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.smu-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.smu-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.smu-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.smu-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.smu-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.smu-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.smu-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.smu-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.smu-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.smu-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.smu-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.smu-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.smu-gap1,
+  .w-grid.smu-gap1 {gap: 4px;}
+  .w-flex.smu-gap2,
+  .w-grid.smu-gap2 {gap: 8px;}
+  .w-flex.smu-gap3,
+  .w-grid.smu-gap3 {gap: 12px;}
+  .w-flex.smu-gap4,
+  .w-grid.smu-gap4 {gap: 16px;}
+  .w-flex.smu-gap5,
+  .w-grid.smu-gap5 {gap: 20px;}
+  .w-flex.smu-gap6,
+  .w-grid.smu-gap6 {gap: 24px;}
+  .w-flex.smu-gap7,
+  .w-grid.smu-gap7 {gap: 28px;}
+  .w-flex.smu-gap8,
+  .w-grid.smu-gap8 {gap: 32px;}
+  .w-flex.smu-gap9,
+  .w-grid.smu-gap9 {gap: 36px;}
+  .w-flex.smu-gap10,
+  .w-grid.smu-gap10 {gap: 40px;}
+  .w-flex.smu-gap11,
+  .w-grid.smu-gap11 {gap: 44px;}
+  .w-flex.smu-gap12,
+  .w-grid.smu-gap12 {gap: 48px;}
+  .w-flex.smu-gap0,
+  .w-flex.smu-gap0 {gap: 0}
+}
+
+@media(min-width:901px) {
+  .w-app .mdu-show {display: block}
+  .w-app .mdu-hide {display: none}
+  .w-app .mdu-d-flex {display: flex}
+  .w-app .mdu-d-iflex {display: inline-flex}
+  .w-app .mdu-d-block {display: block}
+  .w-app .mdu-d-iblock {display: inline-block}
+  .w-app .mdu-text-left {text-align: left}
+  .w-app .mdu-text-center {text-align: center}
+  .w-app .mdu-text-right {text-align: right}
+  .w-app .mdu-text-nowrap {white-space: nowrap}
+  .w-app .mdu-row {flex-direction: row}
+  .w-app .mdu-column {flex-direction: column}
+  .w-app .mdu-column-reverse {flex-direction: column-reverse}
+  .w-app .mdu-grow {flex-grow: 1;flex-basis: auto}
+  .w-app .mdu-no-grow {flex-grow: 0}
+  .w-app .mdu-shrink {flex-shrink: 1;margin-left: auto;margin-right: auto}
+  .w-app .mdu-no-shrink {flex-shrink: 0}
+  .w-app .mdu-wrap {flex-wrap: wrap}
+  .w-app .mdu-no-wrap {flex-wrap: nowrap}
+  .w-app .mdu-fill-width {width: 100%}
+  .w-app .mdu-fill-height {height: 100%}
+  .w-app .mdu-basis-zero {flex-basis: 0}
+  .w-app .mdu-align-start {align-items: flex-start}
+  .w-app .mdu-align-center {align-items: center}
+  .w-app .mdu-align-end {align-items: flex-end}
+  .w-app .mdu-align-self-start {align-self: flex-start}
+  .w-app .mdu-align-self-center {align-self: center}
+  .w-app .mdu-align-self-end {align-self: flex-end}
+  .w-app .mdu-align-self-stretch {align-self: stretch}
+  .w-app .mdu-justify-start {justify-content: flex-start}
+  .w-app .mdu-justify-center {justify-content: center}
+  .w-app .mdu-justify-end {justify-content: flex-end}
+  .w-app .mdu-justify-space-between {justify-content: space-between}
+  .w-app .mdu-justify-space-around {justify-content: space-around}
+  .w-app .mdu-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.mdu-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.mdu-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.mdu-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.mdu-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.mdu-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.mdu-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.mdu-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.mdu-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.mdu-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.mdu-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.mdu-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.mdu-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.mdu-gap1,
+  .w-grid.mdu-gap1 {gap: 4px;}
+  .w-flex.mdu-gap2,
+  .w-grid.mdu-gap2 {gap: 8px;}
+  .w-flex.mdu-gap3,
+  .w-grid.mdu-gap3 {gap: 12px;}
+  .w-flex.mdu-gap4,
+  .w-grid.mdu-gap4 {gap: 16px;}
+  .w-flex.mdu-gap5,
+  .w-grid.mdu-gap5 {gap: 20px;}
+  .w-flex.mdu-gap6,
+  .w-grid.mdu-gap6 {gap: 24px;}
+  .w-flex.mdu-gap7,
+  .w-grid.mdu-gap7 {gap: 28px;}
+  .w-flex.mdu-gap8,
+  .w-grid.mdu-gap8 {gap: 32px;}
+  .w-flex.mdu-gap9,
+  .w-grid.mdu-gap9 {gap: 36px;}
+  .w-flex.mdu-gap10,
+  .w-grid.mdu-gap10 {gap: 40px;}
+  .w-flex.mdu-gap11,
+  .w-grid.mdu-gap11 {gap: 44px;}
+  .w-flex.mdu-gap12,
+  .w-grid.mdu-gap12 {gap: 48px;}
+  .w-flex.mdu-gap0,
+  .w-flex.mdu-gap0 {gap: 0}
+}
+
+@media(min-width:1201px) {
+  .w-app .lgu-show {display: block}
+  .w-app .lgu-hide {display: none}
+  .w-app .lgu-d-flex {display: flex}
+  .w-app .lgu-d-iflex {display: inline-flex}
+  .w-app .lgu-d-block {display: block}
+  .w-app .lgu-d-iblock {display: inline-block}
+  .w-app .lgu-text-left {text-align: left}
+  .w-app .lgu-text-center {text-align: center}
+  .w-app .lgu-text-right {text-align: right}
+  .w-app .lgu-text-nowrap {white-space: nowrap}
+  .w-app .lgu-row {flex-direction: row}
+  .w-app .lgu-column {flex-direction: column}
+  .w-app .lgu-column-reverse {flex-direction: column-reverse}
+  .w-app .lgu-grow {flex-grow: 1;flex-basis: auto
+  }
+  .w-app .lgu-no-grow {flex-grow: 0}
+  .w-app .lgu-shrink {flex-shrink: 1;margin-left: auto;
+    margin-right: auto
+  }
+  .w-app .lgu-no-shrink {flex-shrink: 0}
+  .w-app .lgu-wrap {flex-wrap: wrap}
+  .w-app .lgu-no-wrap {flex-wrap: nowrap}
+  .w-app .lgu-fill-width {width: 100%}
+  .w-app .lgu-fill-height {height: 100%}
+  .w-app .lgu-basis-zero {flex-basis: 0}
+  .w-app .lgu-align-start {align-items: flex-start}
+  .w-app .lgu-align-center {align-items: center}
+  .w-app .lgu-align-end {align-items: flex-end}
+  .w-app .lgu-align-self-start {align-self: flex-start}
+  .w-app .lgu-align-self-center {align-self: center}
+  .w-app .lgu-align-self-end {align-self: flex-end}
+  .w-app .lgu-align-self-stretch {align-self: stretch}
+  .w-app .lgu-justify-start {justify-content: flex-start}
+  .w-app .lgu-justify-center {justify-content: center}
+  .w-app .lgu-justify-end {justify-content: flex-end}
+  .w-app .lgu-justify-space-between {justify-content: space-between}
+  .w-app .lgu-justify-space-around {justify-content: space-around}
+  .w-app .lgu-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.lgu-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.lgu-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.lgu-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.lgu-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.lgu-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.lgu-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.lgu-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.lgu-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.lgu-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.lgu-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.lgu-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.lgu-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.lgu-gap1,
+  .w-grid.lgu-gap1 {gap: 4px;}
+  .w-flex.lgu-gap2,
+  .w-grid.lgu-gap2 {gap: 8px;}
+  .w-flex.lgu-gap3,
+  .w-grid.lgu-gap3 {gap: 12px;}
+  .w-flex.lgu-gap4,
+  .w-grid.lgu-gap4 {gap: 16px;}
+  .w-flex.lgu-gap5,
+  .w-grid.lgu-gap5 {gap: 20px;}
+  .w-flex.lgu-gap6,
+  .w-grid.lgu-gap6 {gap: 24px;}
+  .w-flex.lgu-gap7,
+  .w-grid.lgu-gap7 {gap: 28px;}
+  .w-flex.lgu-gap8,
+  .w-grid.lgu-gap8 {gap: 32px;}
+  .w-flex.lgu-gap9,
+  .w-grid.lgu-gap9 {gap: 36px;}
+  .w-flex.lgu-gap10,
+  .w-grid.lgu-gap10 {gap: 40px;}
+  .w-flex.lgu-gap11,
+  .w-grid.lgu-gap11 {gap: 44px;}
+  .w-flex.lgu-gap12,
+  .w-grid.lgu-gap12 {gap: 48px;}
+  .w-flex.lgu-gap0,
+  .w-flex.lgu-gap0 {gap: 0}
+}
+@media(min-width:1701px) {
+  .w-app .xlu-show {display: block}
+.w-app .xlu-hide {display: none}
+  .w-app .xlu-d-flex {display: flex}
+  .w-app .xlu-d-iflex {display: inline-flex}
+  .w-app .xlu-d-block {display: block}
+  .w-app .xlu-d-iblock {display: inline-block}
+  .w-app .xlu-text-left {text-align: left}
+  .w-app .xlu-text-center {text-align: center}
+  .w-app .xlu-text-right {text-align: right}
+  .w-app .xlu-text-nowrap {white-space: nowrap}
+  .w-app .xlu-row {flex-direction: row}
+  .w-app .xlu-column {flex-direction: column}
+  .w-app .xlu-column-reverse {flex-direction: column-reverse}
+  .w-app .xlu-grow {flex-grow: 1;flex-basis: auto
+  }
+  .w-app .xlu-no-grow {flex-grow: 0}
+  .w-app .xlu-shrink {flex-shrink: 1;margin-left: auto;
+    margin-right: auto
+  }
+  .w-app .xlu-no-shrink {flex-shrink: 0}
+  .w-app .xlu-wrap {flex-wrap: wrap}
+  .w-app .xlu-no-wrap {flex-wrap: nowrap}
+  .w-app .xlu-fill-width {width: 100%}
+  .w-app .xlu-fill-height {height: 100%}
+  .w-app .xlu-basis-zero {flex-basis: 0}
+  .w-app .xlu-align-start {align-items: flex-start}
+  .w-app .xlu-align-center {align-items: center}
+  .w-app .xlu-align-end {align-items: flex-end}
+  .w-app .xlu-align-self-start {align-self: flex-start}
+  .w-app .xlu-align-self-center {align-self: center}
+  .w-app .xlu-align-self-end {align-self: flex-end}
+  .w-app .xlu-align-self-stretch {align-self: stretch}
+  .w-app .xlu-justify-start {justify-content: flex-start}
+  .w-app .xlu-justify-center {justify-content: center}
+  .w-app .xlu-justify-end {justify-content: flex-end}
+  .w-app .xlu-justify-space-between {justify-content: space-between}
+  .w-app .xlu-justify-space-around {justify-content: space-around}
+  .w-app .xlu-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.xlu-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.xlu-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.xlu-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.xlu-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.xlu-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.xlu-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.xlu-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.xlu-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.xlu-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.xlu-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.xlu-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.xlu-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.xlu-gap1,
+  .w-grid.xlu-gap1 {gap: 4px;}
+  .w-flex.xlu-gap2,
+  .w-grid.xlu-gap2 {gap: 8px;}
+  .w-flex.xlu-gap3,
+  .w-grid.xlu-gap3 {gap: 12px;}
+  .w-flex.xlu-gap4,
+  .w-grid.xlu-gap4 {gap: 16px;}
+  .w-flex.xlu-gap5,
+  .w-grid.xlu-gap5 {gap: 20px;}
+  .w-flex.xlu-gap6,
+  .w-grid.xlu-gap6 {gap: 24px;}
+  .w-flex.xlu-gap7,
+  .w-grid.xlu-gap7 {gap: 28px;}
+  .w-flex.xlu-gap8,
+  .w-grid.xlu-gap8 {gap: 32px;}
+  .w-flex.xlu-gap9,
+  .w-grid.xlu-gap9 {gap: 36px;}
+  .w-flex.xlu-gap10,
+  .w-grid.xlu-gap10 {gap: 40px;}
+  .w-flex.xlu-gap11,
+  .w-grid.xlu-gap11 {gap: 44px;}
+  .w-flex.xlu-gap12,
+  .w-grid.xlu-gap12 {gap: 48px;}
+  .w-flex.xlu-gap0,
+  .w-flex.xlu-gap0 {gap: 0}
+}
+@media (min-width:0px) and (max-width:600px) {
+  .w-app .xs-show {display: block}
+.w-app .xs-hide {display: none}
+  .w-app .xs-d-flex {display: flex}
+  .w-app .xs-d-iflex {display: inline-flex}
+  .w-app .xs-d-block {display: block}
+  .w-app .xs-d-iblock {display: inline-block}
+  .w-app .xs-text-left {text-align: left}
+  .w-app .xs-text-center {text-align: center}
+  .w-app .xs-text-right {text-align: right}
+  .w-app .xs-text-nowrap {white-space: nowrap}
+  .w-app .xs-row {flex-direction: row}
+  .w-app .xs-column {flex-direction: column}
+  .w-app .xs-column-reverse {flex-direction: column-reverse}
+  .w-app .xs-grow {flex-grow: 1;flex-basis: auto
+  }
+  .w-app .xs-no-grow {flex-grow: 0}
+  .w-app .xs-shrink {flex-shrink: 1;margin-left: auto;
+    margin-right: auto
+  }
+  .w-app .xs-no-shrink {flex-shrink: 0}
+  .w-app .xs-wrap {flex-wrap: wrap}
+  .w-app .xs-no-wrap {flex-wrap: nowrap}
+  .w-app .xs-fill-width {width: 100%}
+  .w-app .xs-fill-height {height: 100%}
+  .w-app .xs-basis-zero {flex-basis: 0}
+  .w-app .xs-align-start {align-items: flex-start}
+  .w-app .xs-align-center {align-items: center}
+  .w-app .xs-align-end {align-items: flex-end}
+  .w-app .xs-align-self-start {align-self: flex-start}
+  .w-app .xs-align-self-center {align-self: center}
+  .w-app .xs-align-self-end {align-self: flex-end}
+  .w-app .xs-align-self-stretch {align-self: stretch}
+  .w-app .xs-justify-start {justify-content: flex-start}
+  .w-app .xs-justify-center {justify-content: center}
+  .w-app .xs-justify-end {justify-content: flex-end}
+  .w-app .xs-justify-space-between {justify-content: space-between}
+  .w-app .xs-justify-space-around {justify-content: space-around}
+  .w-app .xs-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.xs-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.xs-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.xs-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.xs-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.xs-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.xs-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.xs-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.xs-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.xs-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.xs-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.xs-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.xs-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.xs-gap1,
+  .w-grid.xs-gap1 {gap: 4px;}
+  .w-flex.xs-gap2,
+  .w-grid.xs-gap2 {gap: 8px;}
+  .w-flex.xs-gap3,
+  .w-grid.xs-gap3 {gap: 12px;}
+  .w-flex.xs-gap4,
+  .w-grid.xs-gap4 {gap: 16px;}
+  .w-flex.xs-gap5,
+  .w-grid.xs-gap5 {gap: 20px;}
+  .w-flex.xs-gap6,
+  .w-grid.xs-gap6 {gap: 24px;}
+  .w-flex.xs-gap7,
+  .w-grid.xs-gap7 {gap: 28px;}
+  .w-flex.xs-gap8,
+  .w-grid.xs-gap8 {gap: 32px;}
+  .w-flex.xs-gap9,
+  .w-grid.xs-gap9 {gap: 36px;}
+  .w-flex.xs-gap10,
+  .w-grid.xs-gap10 {gap: 40px;}
+  .w-flex.xs-gap11,
+  .w-grid.xs-gap11 {gap: 44px;}
+  .w-flex.xs-gap12,
+  .w-grid.xs-gap12 {gap: 48px;}
+  .w-flex.xs-gap0,
+  .w-flex.xs-gap0 {gap: 0}
+}
+@media (min-width:601px) and (max-width:900px) {
+  .w-app .sm-show {display: block}
+.w-app .sm-hide {display: none}
+  .w-app .sm-d-flex {display: flex}
+  .w-app .sm-d-iflex {display: inline-flex}
+  .w-app .sm-d-block {display: block}
+  .w-app .sm-d-iblock {display: inline-block}
+  .w-app .sm-text-left {text-align: left}
+  .w-app .sm-text-center {text-align: center}
+  .w-app .sm-text-right {text-align: right}
+  .w-app .sm-text-nowrap {white-space: nowrap}
+  .w-app .sm-row {flex-direction: row}
+  .w-app .sm-column {flex-direction: column}
+  .w-app .sm-column-reverse {flex-direction: column-reverse}
+  .w-app .sm-grow {flex-grow: 1;flex-basis: auto
+  }
+  .w-app .sm-no-grow {flex-grow: 0}
+  .w-app .sm-shrink {flex-shrink: 1;margin-left: auto;
+    margin-right: auto
+  }
+  .w-app .sm-no-shrink {flex-shrink: 0}
+  .w-app .sm-wrap {flex-wrap: wrap}
+  .w-app .sm-no-wrap {flex-wrap: nowrap}
+  .w-app .sm-fill-width {width: 100%}
+  .w-app .sm-fill-height {height: 100%}
+  .w-app .sm-basis-zero {flex-basis: 0}
+  .w-app .sm-align-start {align-items: flex-start}
+  .w-app .sm-align-center {align-items: center}
+  .w-app .sm-align-end {align-items: flex-end}
+  .w-app .sm-align-self-start {align-self: flex-start}
+  .w-app .sm-align-self-center {align-self: center}
+  .w-app .sm-align-self-end {align-self: flex-end}
+  .w-app .sm-align-self-stretch {align-self: stretch}
+  .w-app .sm-justify-start {justify-content: flex-start}
+  .w-app .sm-justify-center {justify-content: center}
+  .w-app .sm-justify-end {justify-content: flex-end}
+  .w-app .sm-justify-space-between {justify-content: space-between}
+  .w-app .sm-justify-space-around {justify-content: space-around}
+  .w-app .sm-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.sm-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.sm-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.sm-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.sm-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.sm-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.sm-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.sm-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.sm-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.sm-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.sm-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.sm-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.sm-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.sm-gap1,
+  .w-grid.sm-gap1 {gap: 4px;}
+  .w-flex.sm-gap2,
+  .w-grid.sm-gap2 {gap: 8px;}
+  .w-flex.sm-gap3,
+  .w-grid.sm-gap3 {gap: 12px;}
+  .w-flex.sm-gap4,
+  .w-grid.sm-gap4 {gap: 16px;}
+  .w-flex.sm-gap5,
+  .w-grid.sm-gap5 {gap: 20px;}
+  .w-flex.sm-gap6,
+  .w-grid.sm-gap6 {gap: 24px;}
+  .w-flex.sm-gap7,
+  .w-grid.sm-gap7 {gap: 28px;}
+  .w-flex.sm-gap8,
+  .w-grid.sm-gap8 {gap: 32px;}
+  .w-flex.sm-gap9,
+  .w-grid.sm-gap9 {gap: 36px;}
+  .w-flex.sm-gap10,
+  .w-grid.sm-gap10 {gap: 40px;}
+  .w-flex.sm-gap11,
+  .w-grid.sm-gap11 {gap: 44px;}
+  .w-flex.sm-gap12,
+  .w-grid.sm-gap12 {gap: 48px;}
+  .w-flex.sm-gap0,
+  .w-flex.sm-gap0 {gap: 0}
+}
+@media (min-width:901px) and (max-width:1200px) {
+  .w-app .md-show {display: block}
+.w-app .md-hide {display: none}
+  .w-app .md-d-flex {display: flex}
+  .w-app .md-d-iflex {display: inline-flex}
+  .w-app .md-d-block {display: block}
+  .w-app .md-d-iblock {display: inline-block}
+  .w-app .md-text-left {text-align: left}
+  .w-app .md-text-center {text-align: center}
+  .w-app .md-text-right {text-align: right}
+  .w-app .md-text-nowrap {white-space: nowrap}
+  .w-app .md-row {flex-direction: row}
+  .w-app .md-column {flex-direction: column}
+  .w-app .md-column-reverse {flex-direction: column-reverse}
+  .w-app .md-grow {flex-grow: 1;flex-basis: auto
+  }
+  .w-app .md-no-grow {flex-grow: 0}
+  .w-app .md-shrink {flex-shrink: 1;margin-left: auto;
+    margin-right: auto
+  }
+  .w-app .md-no-shrink {flex-shrink: 0}
+  .w-app .md-wrap {flex-wrap: wrap}
+  .w-app .md-no-wrap {flex-wrap: nowrap}
+  .w-app .md-fill-width {width: 100%}
+  .w-app .md-fill-height {height: 100%}
+  .w-app .md-basis-zero {flex-basis: 0}
+  .w-app .md-align-start {align-items: flex-start}
+  .w-app .md-align-center {align-items: center}
+  .w-app .md-align-end {align-items: flex-end}
+  .w-app .md-align-self-start {align-self: flex-start}
+  .w-app .md-align-self-center {align-self: center}
+  .w-app .md-align-self-end {align-self: flex-end}
+  .w-app .md-align-self-stretch {align-self: stretch}
+  .w-app .md-justify-start {justify-content: flex-start}
+  .w-app .md-justify-center {justify-content: center}
+  .w-app .md-justify-end {justify-content: flex-end}
+  .w-app .md-justify-space-between {justify-content: space-between}
+  .w-app .md-justify-space-around {justify-content: space-around}
+  .w-app .md-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.md-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.md-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.md-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.md-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.md-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.md-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.md-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.md-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.md-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.md-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.md-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.md-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.md-gap1,
+  .w-grid.md-gap1 {gap: 4px;}
+  .w-flex.md-gap2,
+  .w-grid.md-gap2 {gap: 8px;}
+  .w-flex.md-gap3,
+  .w-grid.md-gap3 {gap: 12px;}
+  .w-flex.md-gap4,
+  .w-grid.md-gap4 {gap: 16px;}
+  .w-flex.md-gap5,
+  .w-grid.md-gap5 {gap: 20px;}
+  .w-flex.md-gap6,
+  .w-grid.md-gap6 {gap: 24px;}
+  .w-flex.md-gap7,
+  .w-grid.md-gap7 {gap: 28px;}
+  .w-flex.md-gap8,
+  .w-grid.md-gap8 {gap: 32px;}
+  .w-flex.md-gap9,
+  .w-grid.md-gap9 {gap: 36px;}
+  .w-flex.md-gap10,
+  .w-grid.md-gap10 {gap: 40px;}
+  .w-flex.md-gap11,
+  .w-grid.md-gap11 {gap: 44px;}
+  .w-flex.md-gap12,
+  .w-grid.md-gap12 {gap: 48px;}
+  .w-flex.md-gap0,
+  .w-flex.md-gap0 {gap: 0}
+}
+@media (min-width:1201px) and (max-width:1700px) {
+  .w-app .lg-show {display: block}
+.w-app .lg-hide {display: none}
+  .w-app .lg-d-flex {display: flex}
+  .w-app .lg-d-iflex {display: inline-flex}
+  .w-app .lg-d-block {display: block}
+  .w-app .lg-d-iblock {display: inline-block}
+  .w-app .lg-text-left {text-align: left}
+  .w-app .lg-text-center {text-align: center}
+  .w-app .lg-text-right {text-align: right}
+  .w-app .lg-text-nowrap {white-space: nowrap}
+  .w-app .lg-row {flex-direction: row}
+  .w-app .lg-column {flex-direction: column}
+  .w-app .lg-column-reverse {flex-direction: column-reverse}
+  .w-app .lg-grow {flex-grow: 1;flex-basis: auto
+  }
+  .w-app .lg-no-grow {flex-grow: 0}
+  .w-app .lg-shrink {flex-shrink: 1;margin-left: auto;
+    margin-right: auto
+  }
+  .w-app .lg-no-shrink {flex-shrink: 0}
+  .w-app .lg-wrap {flex-wrap: wrap}
+  .w-app .lg-no-wrap {flex-wrap: nowrap}
+  .w-app .lg-fill-width {width: 100%}
+  .w-app .lg-fill-height {height: 100%}
+  .w-app .lg-basis-zero {flex-basis: 0}
+  .w-app .lg-align-start {align-items: flex-start}
+  .w-app .lg-align-center {align-items: center}
+  .w-app .lg-align-end {align-items: flex-end}
+  .w-app .lg-align-self-start {align-self: flex-start}
+  .w-app .lg-align-self-center {align-self: center}
+  .w-app .lg-align-self-end {align-self: flex-end}
+  .w-app .lg-align-self-stretch {align-self: stretch}
+  .w-app .lg-justify-start {justify-content: flex-start}
+  .w-app .lg-justify-center {justify-content: center}
+  .w-app .lg-justify-end {justify-content: flex-end}
+  .w-app .lg-justify-space-between {justify-content: space-between}
+  .w-app .lg-justify-space-around {justify-content: space-around}
+  .w-app .lg-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.lg-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.lg-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.lg-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.lg-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.lg-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.lg-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.lg-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.lg-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.lg-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.lg-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.lg-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.lg-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.lg-gap1,
+  .w-grid.lg-gap1 {gap: 4px;}
+  .w-flex.lg-gap2,
+  .w-grid.lg-gap2 {gap: 8px;}
+  .w-flex.lg-gap3,
+  .w-grid.lg-gap3 {gap: 12px;}
+  .w-flex.lg-gap4,
+  .w-grid.lg-gap4 {gap: 16px;}
+  .w-flex.lg-gap5,
+  .w-grid.lg-gap5 {gap: 20px;}
+  .w-flex.lg-gap6,
+  .w-grid.lg-gap6 {gap: 24px;}
+  .w-flex.lg-gap7,
+  .w-grid.lg-gap7 {gap: 28px;}
+  .w-flex.lg-gap8,
+  .w-grid.lg-gap8 {gap: 32px;}
+  .w-flex.lg-gap9,
+  .w-grid.lg-gap9 {gap: 36px;}
+  .w-flex.lg-gap10,
+  .w-grid.lg-gap10 {gap: 40px;}
+  .w-flex.lg-gap11,
+  .w-grid.lg-gap11 {gap: 44px;}
+  .w-flex.lg-gap12,
+  .w-grid.lg-gap12 {gap: 48px;}
+  .w-flex.lg-gap0,
+  .w-flex.lg-gap0 {gap: 0}
+}
+@media (min-width:1701px) and (max-width:9999px) {
+  .w-app .xl-show {display: block}
+.w-app .xl-hide {display: none}
+  .w-app .xl-d-flex {display: flex}
+  .w-app .xl-d-iflex {display: inline-flex}
+  .w-app .xl-d-block {display: block}
+  .w-app .xl-d-iblock {display: inline-block}
+  .w-app .xl-text-left {text-align: left}
+  .w-app .xl-text-center {text-align: center}
+  .w-app .xl-text-right {text-align: right}
+  .w-app .xl-text-nowrap {white-space: nowrap}
+  .w-app .xl-row {flex-direction: row}
+  .w-app .xl-column {flex-direction: column}
+  .w-app .xl-column-reverse {flex-direction: column-reverse}
+  .w-app .xl-grow {flex-grow: 1;flex-basis: auto
+  }
+  .w-app .xl-no-grow {flex-grow: 0}
+  .w-app .xl-shrink {flex-shrink: 1;margin-left: auto;
+    margin-right: auto
+  }
+  .w-app .xl-no-shrink {flex-shrink: 0}
+  .w-app .xl-wrap {flex-wrap: wrap}
+  .w-app .xl-no-wrap {flex-wrap: nowrap}
+  .w-app .xl-fill-width {width: 100%}
+  .w-app .xl-fill-height {height: 100%}
+  .w-app .xl-basis-zero {flex-basis: 0}
+  .w-app .xl-align-start {align-items: flex-start}
+  .w-app .xl-align-center {align-items: center}
+  .w-app .xl-align-end {align-items: flex-end}
+  .w-app .xl-align-self-start {align-self: flex-start}
+  .w-app .xl-align-self-center {align-self: center}
+  .w-app .xl-align-self-end {align-self: flex-end}
+  .w-app .xl-align-self-stretch {align-self: stretch}
+  .w-app .xl-justify-start {justify-content: flex-start}
+  .w-app .xl-justify-center {justify-content: center}
+  .w-app .xl-justify-end {justify-content: flex-end}
+  .w-app .xl-justify-space-between {justify-content: space-between}
+  .w-app .xl-justify-space-around {justify-content: space-around}
+  .w-app .xl-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.xl-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.xl-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.xl-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.xl-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.xl-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.xl-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.xl-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.xl-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.xl-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.xl-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.xl-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.xl-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.xl-gap1,
+  .w-grid.xl-gap1 {gap: 4px;}
+  .w-flex.xl-gap2,
+  .w-grid.xl-gap2 {gap: 8px;}
+  .w-flex.xl-gap3,
+  .w-grid.xl-gap3 {gap: 12px;}
+  .w-flex.xl-gap4,
+  .w-grid.xl-gap4 {gap: 16px;}
+  .w-flex.xl-gap5,
+  .w-grid.xl-gap5 {gap: 20px;}
+  .w-flex.xl-gap6,
+  .w-grid.xl-gap6 {gap: 24px;}
+  .w-flex.xl-gap7,
+  .w-grid.xl-gap7 {gap: 28px;}
+  .w-flex.xl-gap8,
+  .w-grid.xl-gap8 {gap: 32px;}
+  .w-flex.xl-gap9,
+  .w-grid.xl-gap9 {gap: 36px;}
+  .w-flex.xl-gap10,
+  .w-grid.xl-gap10 {gap: 40px;}
+  .w-flex.xl-gap11,
+  .w-grid.xl-gap11 {gap: 44px;}
+  .w-flex.xl-gap12,
+  .w-grid.xl-gap12 {gap: 48px;}
+  .w-flex.xl-gap0,
+  .w-flex.xl-gap0 {gap: 0}
+}
+@media (max-width:600px) {
+  .w-app .xsd-show {display: block}
+.w-app .xsd-hide {display: none}
+  .w-app .xsd-d-flex {display: flex}
+  .w-app .xsd-d-iflex {display: inline-flex}
+  .w-app .xsd-d-block {display: block}
+  .w-app .xsd-d-iblock {display: inline-block}
+  .w-app .xsd-text-left {text-align: left}
+  .w-app .xsd-text-center {text-align: center}
+  .w-app .xsd-text-right {text-align: right}
+  .w-app .xsd-text-nowrap {white-space: nowrap}
+  .w-app .xsd-row {flex-direction: row}
+  .w-app .xsd-column {flex-direction: column}
+  .w-app .xsd-column-reverse {flex-direction: column-reverse}
+  .w-app .xsd-grow {flex-grow: 1;flex-basis: auto
+  }
+  .w-app .xsd-no-grow {flex-grow: 0}
+  .w-app .xsd-shrink {flex-shrink: 1;margin-left: auto;
+    margin-right: auto
+  }
+  .w-app .xsd-no-shrink {flex-shrink: 0}
+  .w-app .xsd-wrap {flex-wrap: wrap}
+  .w-app .xsd-no-wrap {flex-wrap: nowrap}
+  .w-app .xsd-fill-width {width: 100%}
+  .w-app .xsd-fill-height {height: 100%}
+  .w-app .xsd-basis-zero {flex-basis: 0}
+  .w-app .xsd-align-start {align-items: flex-start}
+  .w-app .xsd-align-center {align-items: center}
+  .w-app .xsd-align-end {align-items: flex-end}
+  .w-app .xsd-align-self-start {align-self: flex-start}
+  .w-app .xsd-align-self-center {align-self: center}
+  .w-app .xsd-align-self-end {align-self: flex-end}
+  .w-app .xsd-align-self-stretch {align-self: stretch}
+  .w-app .xsd-justify-start {justify-content: flex-start}
+  .w-app .xsd-justify-center {justify-content: center}
+  .w-app .xsd-justify-end {justify-content: flex-end}
+  .w-app .xsd-justify-space-between {justify-content: space-between}
+  .w-app .xsd-justify-space-around {justify-content: space-around}
+  .w-app .xsd-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.xsd-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.xsd-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.xsd-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.xsd-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.xsd-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.xsd-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.xsd-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.xsd-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.xsd-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.xsd-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.xsd-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.xsd-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.xsd-gap1,
+  .w-grid.xsd-gap1 {gap: 4px;}
+  .w-flex.xsd-gap2,
+  .w-grid.xsd-gap2 {gap: 8px;}
+  .w-flex.xsd-gap3,
+  .w-grid.xsd-gap3 {gap: 12px;}
+  .w-flex.xsd-gap4,
+  .w-grid.xsd-gap4 {gap: 16px;}
+  .w-flex.xsd-gap5,
+  .w-grid.xsd-gap5 {gap: 20px;}
+  .w-flex.xsd-gap6,
+  .w-grid.xsd-gap6 {gap: 24px;}
+  .w-flex.xsd-gap7,
+  .w-grid.xsd-gap7 {gap: 28px;}
+  .w-flex.xsd-gap8,
+  .w-grid.xsd-gap8 {gap: 32px;}
+  .w-flex.xsd-gap9,
+  .w-grid.xsd-gap9 {gap: 36px;}
+  .w-flex.xsd-gap10,
+  .w-grid.xsd-gap10 {gap: 40px;}
+  .w-flex.xsd-gap11,
+  .w-grid.xsd-gap11 {gap: 44px;}
+  .w-flex.xsd-gap12,
+  .w-grid.xsd-gap12 {gap: 48px;}
+  .w-flex.xsd-gap0,
+  .w-flex.xsd-gap0 {gap: 0}
+}
+@media (max-width:900px) {
+  .w-app .smd-show {display: block}
+.w-app .smd-hide {display: none}
+  .w-app .smd-d-flex {display: flex}
+  .w-app .smd-d-iflex {display: inline-flex}
+  .w-app .smd-d-block {display: block}
+  .w-app .smd-d-iblock {display: inline-block}
+  .w-app .smd-text-left {text-align: left}
+  .w-app .smd-text-center {text-align: center}
+  .w-app .smd-text-right {text-align: right}
+  .w-app .smd-text-nowrap {white-space: nowrap}
+  .w-app .smd-row {flex-direction: row}
+  .w-app .smd-column {flex-direction: column}
+  .w-app .smd-column-reverse {flex-direction: column-reverse}
+  .w-app .smd-grow {flex-grow: 1;flex-basis: auto
+  }
+  .w-app .smd-no-grow {flex-grow: 0}
+  .w-app .smd-shrink {flex-shrink: 1;margin-left: auto;
+    margin-right: auto
+  }
+  .w-app .smd-no-shrink {flex-shrink: 0}
+  .w-app .smd-wrap {flex-wrap: wrap}
+  .w-app .smd-no-wrap {flex-wrap: nowrap}
+  .w-app .smd-fill-width {width: 100%}
+  .w-app .smd-fill-height {height: 100%}
+  .w-app .smd-basis-zero {flex-basis: 0}
+  .w-app .smd-align-start {align-items: flex-start}
+  .w-app .smd-align-center {align-items: center}
+  .w-app .smd-align-end {align-items: flex-end}
+  .w-app .smd-align-self-start {align-self: flex-start}
+  .w-app .smd-align-self-center {align-self: center}
+  .w-app .smd-align-self-end {align-self: flex-end}
+  .w-app .smd-align-self-stretch {align-self: stretch}
+  .w-app .smd-justify-start {justify-content: flex-start}
+  .w-app .smd-justify-center {justify-content: center}
+  .w-app .smd-justify-end {justify-content: flex-end}
+  .w-app .smd-justify-space-between {justify-content: space-between}
+  .w-app .smd-justify-space-around {justify-content: space-around}
+  .w-app .smd-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.smd-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.smd-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.smd-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.smd-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.smd-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.smd-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.smd-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.smd-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.smd-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.smd-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.smd-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.smd-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.smd-gap1,
+  .w-grid.smd-gap1 {gap: 4px;}
+  .w-flex.smd-gap2,
+  .w-grid.smd-gap2 {gap: 8px;}
+  .w-flex.smd-gap3,
+  .w-grid.smd-gap3 {gap: 12px;}
+  .w-flex.smd-gap4,
+  .w-grid.smd-gap4 {gap: 16px;}
+  .w-flex.smd-gap5,
+  .w-grid.smd-gap5 {gap: 20px;}
+  .w-flex.smd-gap6,
+  .w-grid.smd-gap6 {gap: 24px;}
+  .w-flex.smd-gap7,
+  .w-grid.smd-gap7 {gap: 28px;}
+  .w-flex.smd-gap8,
+  .w-grid.smd-gap8 {gap: 32px;}
+  .w-flex.smd-gap9,
+  .w-grid.smd-gap9 {gap: 36px;}
+  .w-flex.smd-gap10,
+  .w-grid.smd-gap10 {gap: 40px;}
+  .w-flex.smd-gap11,
+  .w-grid.smd-gap11 {gap: 44px;}
+  .w-flex.smd-gap12,
+  .w-grid.smd-gap12 {gap: 48px;}
+  .w-flex.smd-gap0,
+  .w-flex.smd-gap0 {gap: 0}
+}
+@media (max-width:1200px) {
+  .w-app .mdd-show {display: block}
+.w-app .mdd-hide {display: none}
+  .w-app .mdd-d-flex {display: flex}
+  .w-app .mdd-d-iflex {display: inline-flex}
+  .w-app .mdd-d-block {display: block}
+  .w-app .mdd-d-iblock {display: inline-block}
+  .w-app .mdd-text-left {text-align: left}
+  .w-app .mdd-text-center {text-align: center}
+  .w-app .mdd-text-right {text-align: right}
+  .w-app .mdd-text-nowrap {white-space: nowrap}
+  .w-app .mdd-row {flex-direction: row}
+  .w-app .mdd-column {flex-direction: column}
+  .w-app .mdd-column-reverse {flex-direction: column-reverse}
+  .w-app .mdd-grow {flex-grow: 1;flex-basis: auto
+  }
+  .w-app .mdd-no-grow {flex-grow: 0}
+  .w-app .mdd-shrink {flex-shrink: 1;margin-left: auto;
+    margin-right: auto
+  }
+  .w-app .mdd-no-shrink {flex-shrink: 0}
+  .w-app .mdd-wrap {flex-wrap: wrap}
+  .w-app .mdd-no-wrap {flex-wrap: nowrap}
+  .w-app .mdd-fill-width {width: 100%}
+  .w-app .mdd-fill-height {height: 100%}
+  .w-app .mdd-basis-zero {flex-basis: 0}
+  .w-app .mdd-align-start {align-items: flex-start}
+  .w-app .mdd-align-center {align-items: center}
+  .w-app .mdd-align-end {align-items: flex-end}
+  .w-app .mdd-align-self-start {align-self: flex-start}
+  .w-app .mdd-align-self-center {align-self: center}
+  .w-app .mdd-align-self-end {align-self: flex-end}
+  .w-app .mdd-align-self-stretch {align-self: stretch}
+  .w-app .mdd-justify-start {justify-content: flex-start}
+  .w-app .mdd-justify-center {justify-content: center}
+  .w-app .mdd-justify-end {justify-content: flex-end}
+  .w-app .mdd-justify-space-between {justify-content: space-between}
+  .w-app .mdd-justify-space-around {justify-content: space-around}
+  .w-app .mdd-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.mdd-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.mdd-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.mdd-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.mdd-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.mdd-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.mdd-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.mdd-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.mdd-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.mdd-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.mdd-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.mdd-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.mdd-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.mdd-gap1,
+  .w-grid.mdd-gap1 {gap: 4px;}
+  .w-flex.mdd-gap2,
+  .w-grid.mdd-gap2 {gap: 8px;}
+  .w-flex.mdd-gap3,
+  .w-grid.mdd-gap3 {gap: 12px;}
+  .w-flex.mdd-gap4,
+  .w-grid.mdd-gap4 {gap: 16px;}
+  .w-flex.mdd-gap5,
+  .w-grid.mdd-gap5 {gap: 20px;}
+  .w-flex.mdd-gap6,
+  .w-grid.mdd-gap6 {gap: 24px;}
+  .w-flex.mdd-gap7,
+  .w-grid.mdd-gap7 {gap: 28px;}
+  .w-flex.mdd-gap8,
+  .w-grid.mdd-gap8 {gap: 32px;}
+  .w-flex.mdd-gap9,
+  .w-grid.mdd-gap9 {gap: 36px;}
+  .w-flex.mdd-gap10,
+  .w-grid.mdd-gap10 {gap: 40px;}
+  .w-flex.mdd-gap11,
+  .w-grid.mdd-gap11 {gap: 44px;}
+  .w-flex.mdd-gap12,
+  .w-grid.mdd-gap12 {gap: 48px;}
+  .w-flex.mdd-gap0,
+  .w-flex.mdd-gap0 {gap: 0}
+}
+@media (max-width:1700px) {
+  .w-app .lgd-show {display: block}
+.w-app .lgd-hide {display: none}
+  .w-app .lgd-d-flex {display: flex}
+  .w-app .lgd-d-iflex {display: inline-flex}
+  .w-app .lgd-d-block {display: block}
+  .w-app .lgd-d-iblock {display: inline-block}
+  .w-app .lgd-text-left {text-align: left}
+  .w-app .lgd-text-center {text-align: center}
+  .w-app .lgd-text-right {text-align: right}
+  .w-app .lgd-text-nowrap {white-space: nowrap}
+  .w-app .lgd-row {flex-direction: row}
+  .w-app .lgd-column {flex-direction: column}
+  .w-app .lgd-column-reverse {flex-direction: column-reverse}
+  .w-app .lgd-grow {flex-grow: 1;flex-basis: auto
+  }
+  .w-app .lgd-no-grow {flex-grow: 0}
+  .w-app .lgd-shrink {flex-shrink: 1;margin-left: auto;
+    margin-right: auto
+  }
+  .w-app .lgd-no-shrink {flex-shrink: 0}
+  .w-app .lgd-wrap {flex-wrap: wrap}
+  .w-app .lgd-no-wrap {flex-wrap: nowrap}
+  .w-app .lgd-fill-width {width: 100%}
+  .w-app .lgd-fill-height {height: 100%}
+  .w-app .lgd-basis-zero {flex-basis: 0}
+  .w-app .lgd-align-start {align-items: flex-start}
+  .w-app .lgd-align-center {align-items: center}
+  .w-app .lgd-align-end {align-items: flex-end}
+  .w-app .lgd-align-self-start {align-self: flex-start}
+  .w-app .lgd-align-self-center {align-self: center}
+  .w-app .lgd-align-self-end {align-self: flex-end}
+  .w-app .lgd-align-self-stretch {align-self: stretch}
+  .w-app .lgd-justify-start {justify-content: flex-start}
+  .w-app .lgd-justify-center {justify-content: center}
+  .w-app .lgd-justify-end {justify-content: flex-end}
+  .w-app .lgd-justify-space-between {justify-content: space-between}
+  .w-app .lgd-justify-space-around {justify-content: space-around}
+  .w-app .lgd-justify-space-evenly {justify-content: space-evenly}
+  .w-grid.lgd-columns1 {grid-template-columns: repeat(1, 1fr);}
+  .w-grid.lgd-columns2 {grid-template-columns: repeat(2, 1fr);}
+  .w-grid.lgd-columns3 {grid-template-columns: repeat(3, 1fr);}
+  .w-grid.lgd-columns4 {grid-template-columns: repeat(4, 1fr);}
+  .w-grid.lgd-columns5 {grid-template-columns: repeat(5, 1fr);}
+  .w-grid.lgd-columns6 {grid-template-columns: repeat(6, 1fr);}
+  .w-grid.lgd-columns7 {grid-template-columns: repeat(7, 1fr);}
+  .w-grid.lgd-columns8 {grid-template-columns: repeat(8, 1fr);}
+  .w-grid.lgd-columns9 {grid-template-columns: repeat(9, 1fr);}
+  .w-grid.lgd-columns10 {grid-template-columns: repeat(10, 1fr);}
+  .w-grid.lgd-columns11 {grid-template-columns: repeat(11, 1fr);}
+  .w-grid.lgd-columns12 {grid-template-columns: repeat(12, 1fr);}
+  .w-flex.lgd-gap1,
+  .w-grid.lgd-gap1 {gap: 4px;}
+  .w-flex.lgd-gap2,
+  .w-grid.lgd-gap2 {gap: 8px;}
+  .w-flex.lgd-gap3,
+  .w-grid.lgd-gap3 {gap: 12px;}
+  .w-flex.lgd-gap4,
+  .w-grid.lgd-gap4 {gap: 16px;}
+  .w-flex.lgd-gap5,
+  .w-grid.lgd-gap5 {gap: 20px;}
+  .w-flex.lgd-gap6,
+  .w-grid.lgd-gap6 {gap: 24px;}
+  .w-flex.lgd-gap7,
+  .w-grid.lgd-gap7 {gap: 28px;}
+  .w-flex.lgd-gap8,
+  .w-grid.lgd-gap8 {gap: 32px;}
+  .w-flex.lgd-gap9,
+  .w-grid.lgd-gap9 {gap: 36px;}
+  .w-flex.lgd-gap10,
+  .w-grid.lgd-gap10 {gap: 40px;}
+  .w-flex.lgd-gap11,
+  .w-grid.lgd-gap11 {gap: 44px;}
+  .w-flex.lgd-gap12,
+  .w-grid.lgd-gap12 {gap: 48px;}
+  .w-flex.lgd-gap0,
+  .w-flex.lgd-gap0 {gap: 0}}
