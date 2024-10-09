@@ -33,6 +33,15 @@ main
     //-----------------------------------------------------
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
+
+    li.patch
+      strong.version v3.16.3
+      ul
+        li
+          strong w-accordion &amp; w-tabs
+          ul
+            li Allow title and content classes to be given as object or array as well as string.
+
     li.patch
       strong.version v3.16.2
       ul
