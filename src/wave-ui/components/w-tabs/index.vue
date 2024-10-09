@@ -35,7 +35,7 @@
         :key="tab._uid"
         :item="tab"
         v-show="tab._uid === activeTab._uid"
-        :class="contentClass")
+        :class="contentClasses")
         slot(
           v-if="$slots[`item-content.${tab._index + 1}`]"
           :name="`item-content.${tab._index + 1}`"
@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import { objectifyClasses } from '../../utils/index'
 import TabContent from './tab-content.vue'
 
 let uid = 0
@@ -86,12 +87,12 @@ export default {
     itemIdKey: { type: String, default: 'id' },
     itemTitleKey: { type: String, default: 'title' },
     itemContentKey: { type: String, default: 'content' },
-    titleClass: { type: String },
-    activeClass: { type: String, default: 'primary' },
+    titleClass: { type: [String, Array, Object] },
+    activeClass: { type: [String, Array, Object], default: 'primary' },
     noSlider: { type: Boolean },
     pillSlider: { type: Boolean },
     sliderColor: { type: String, default: 'primary' },
-    contentClass: { type: String },
+    contentClass: { type: [String, Array, Object] },
     transition: { type: [String, Boolean], default: '' },
     fillBar: { type: Boolean },
     center: { type: Boolean },
@@ -121,6 +122,10 @@ export default {
   }),
 
   computed: {
+    contentClasses () {
+      return objectifyClasses(this.contentClass)
+    },
+
     transitionName () {
       if (this.transition === false) return ''
       return this.transition || `w-tabs-slide-${this.direction}`
@@ -229,9 +234,10 @@ export default {
       return {
         [`${this.bgColor}--bg`]: this.bgColor,
         [this.color]: this.color && !item._disabled && !(this.activeClass && isActive),
-        [`w-tabs__bar-item--active ${this.activeClass}`]: isActive,
+        'w-tabs__bar-item--active': isActive,
         'w-tabs__bar-item--disabled': item._disabled,
-        [this.titleClass]: this.titleClass
+        ...objectifyClasses(this.titleClass),
+        ...(isActive ? objectifyClasses(this.activeClass) : {})
       }
     },
 
