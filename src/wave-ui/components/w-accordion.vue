@@ -10,7 +10,7 @@
       @focus="$emit('focus', getOriginalItem(item))"
       @keypress.enter="!item._disabled && toggleItem(item, $event)"
       :tabindex="!item._disabled && 0"
-      :class="titleClass")
+      :class="titleClasses")
       //- Expand icon on left.
       w-button.w-accordion__expand-icon(
         v-if="expandIcon && !expandIconRight"
@@ -45,7 +45,7 @@
       :duration="duration")
       .w-accordion__item-content(
         v-if="item._expanded"
-        :class="contentClass")
+        :class="contentClasses")
         slot(
           v-if="$slots[`item-content.${item.id || i + 1}`]"
           :name="`item-content.${item.id || i + 1}`"
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import { objectifyClasses } from '../utils/index'
+
 export default {
   name: 'w-accordion',
 
@@ -73,9 +75,9 @@ export default {
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     itemTitleKey: { type: String, default: 'title' },
     itemContentKey: { type: String, default: 'content' },
-    itemClass: { type: String },
-    titleClass: { type: String },
-    contentClass: { type: String },
+    itemClass: { type: [String, Array, Object] },
+    titleClass: { type: [String, Array, Object] },
+    contentClass: { type: [String, Array, Object] },
     expandIcon: { type: [String, Boolean], default: 'wi-triangle-down' },
     expandIconRight: { type: Boolean },
     expandIconRotate90: { type: Boolean },
@@ -106,6 +108,14 @@ export default {
         'w-accordion--icon-right': this.expandIcon && this.expandIconRight,
         'w-accordion--rotate-icon': this.expandIcon && !this.collapseIcon
       }
+    },
+
+    titleClasses () {
+      return objectifyClasses(this.titleClass)
+    },
+
+    contentClasses () {
+      return objectifyClasses(this.contentClass)
     }
   },
 
@@ -133,10 +143,10 @@ export default {
     },
     itemClasses (item) {
       return {
-        [this.itemClass]: this.itemClass || null,
         'w-accordion__item--expanded': item._expanded,
         'w-accordion__item--disabled': item._disabled,
-        [item[this.itemColorKey]]: item[this.itemColorKey]
+        [item[this.itemColorKey]]: item[this.itemColorKey],
+        ...objectifyClasses(this.itemClass)
       }
     },
     updateItems () {
