@@ -1,4 +1,5 @@
-export { default as WAccordion } from './w-accordion.vue'
+export { default as WAccordion } from './w-accordion/index.vue'
+export { default as WAccordionItem } from './w-accordion/item.vue'
 export { default as WAlert } from './w-alert.vue'
 export { default as WAutocomplete } from './w-autocomplete.vue'
 export { default as WApp } from './w-app.vue'

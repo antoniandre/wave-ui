@@ -11,7 +11,7 @@ div
 </template>
 
 <script>
-import WAccordion from '@/wave-ui/components/w-accordion.vue'
+import WAccordion from '@/wave-ui/components/w-accordion/index.vue'
 
 const propsDescs = {
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide an array of booleans to dictate the state (expanded and collapsed) of all the accordion items. This value gets updated by the accordion when using a v-model.',
