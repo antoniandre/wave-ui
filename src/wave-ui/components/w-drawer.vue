@@ -82,6 +82,8 @@ export default {
     light: { type: Boolean }
   },
 
+  emits: ['input', 'update:modelValue', 'before-close', 'close'],
+
   provide () {
     return {
       // If a detachable is used inside a w-drawer without an appendTo, default to the drawer element
@@ -89,8 +91,6 @@ export default {
       detachableDefaultRoot: () => this.$refs.drawer || null
     }
   },
-
-  emits: ['input', 'update:modelValue', 'before-close', 'close'],
 
   data () {
     return {

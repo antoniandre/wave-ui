@@ -27,6 +27,8 @@ export default {
     persistentNoAnimation: { type: Boolean }
   },
 
+  emits: ['input', 'update:modelValue', 'click', 'before-close', 'close'],
+
   provide () {
     return {
       // If a detachable is used inside a w-overlay without an appendTo, default to the overlay element
@@ -34,8 +36,6 @@ export default {
       detachableDefaultRoot: () => this.$refs.overlay || null
     }
   },
-
-  emits: ['input', 'update:modelValue', 'click', 'before-close', 'close'],
 
   data: () => ({
     persistentAnimate: false,

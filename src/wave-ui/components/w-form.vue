@@ -31,17 +31,6 @@ export default {
     readonly: { type: Boolean }
   },
 
-  provide () {
-    return {
-      formRegister: this.register,
-      formUnregister: this.unregister,
-      validateElement: this.validateElement,
-      // Give access to the form params (like disabled) to all the form components.
-      // To keep it reactive, we need an object not a list of props (by design in Vue).
-      formProps: this.$props
-    }
-  },
-
   emits: [
     'submit',
     'before-validate',
@@ -53,6 +42,17 @@ export default {
     'update:modelValue',
     'update:errorsCount'
   ],
+
+  provide () {
+    return {
+      formRegister: this.register,
+      formUnregister: this.unregister,
+      validateElement: this.validateElement,
+      // Give access to the form params (like disabled) to all the form components.
+      // To keep it reactive, we need an object not a list of props (by design in Vue).
+      formProps: this.$props
+    }
+  },
 
   data: () => ({
     formElements: [],

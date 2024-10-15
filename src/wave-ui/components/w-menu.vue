@@ -82,6 +82,8 @@ export default {
     // alignRight, noPosition, zIndex, activator.
   },
 
+  emits: ['input', 'update:modelValue', 'open', 'close'],
+
   provide () {
     return {
       // If a detachable is used inside a w-menu without an appendTo, default to the menu element
@@ -89,8 +91,6 @@ export default {
       detachableDefaultRoot: () => this.$refs.detachable?.$el || this.$refs.detachable || null
     }
   },
-
-  emits: ['input', 'update:modelValue', 'open', 'close'],
 
   data: () => ({
     detachableVisible: false,
