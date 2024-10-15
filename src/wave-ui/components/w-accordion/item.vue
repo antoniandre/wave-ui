@@ -1,60 +1,46 @@
 <template lang="pug">
-.w-accordion__item(:class="itemClasses" :aria-expanded="item._expanded ? 'true' : 'false'")
+.w-accordion__item(:class="itemClasses" :aria-expanded="accordionItem._expanded ? 'true' : 'false'")
   .w-accordion__item-title(
-    @click="!item._disabled && toggleItem(item, $event)"
-    @focus="$emit('focus', getOriginalItem(item))"
-    @keypress.enter="!item._disabled && toggleItem(item, $event)"
-    :tabindex="!item._disabled && 0"
+    @click="!accordionItem._disabled && toggleItem(accordionItem, $event)"
+    @focus="$emit('focus', getOriginalItem(accordionItem))"
+    @keypress.enter="!accordionItem._disabled && toggleItem(accordionItem, $event)"
+    :tabindex="!accordionItem._disabled && 0"
     :class="titleClasses")
     //- Expand icon on left.
     w-button.w-accordion__expand-icon(
       v-if="options.expandIcon && !options.expandIconRight"
-      :icon="(item._expanded && options.collapseIcon) || options.expandIcon"
+      :icon="(accordionItem._expanded && options.collapseIcon) || options.expandIcon"
       :icon-props="options.expandIconProps"
-      :disabled="item._disabled || null"
+      :disabled="accordionItem._disabled || null"
       :tabindex="-1"
       text
       @keypress.stop
-      @click.stop="!item._disabled && toggleItem(item, $event)"
-      :class="{ 'w-accordion__expand-icon--expanded': item._expanded, 'w-accordion__expand-icon--rotate90': options.expandIconRotate90 }")
+      @click.stop="!accordionItem._disabled && toggleItem(accordionItem, $event)"
+      :class="{ 'w-accordion__expand-icon--expanded': accordionItem._expanded, 'w-accordion__expand-icon--rotate90': options.expandIconRotate90 }")
     //- Title.
     slot(
-      v-if="$slots[`item-title.${item.id || item._index + 1}`]"
-      :name="`item-title.${item.id || item._index + 1}`"
-      :item="getOriginalItem(item)"
-      :expanded="item._expanded"
-      :index="item._index + 1")
-    slot(
-      v-else
-      name="item-title"
-      :item="getOriginalItem(item)"
-      :expanded="item._expanded"
-      :index="item._index + 1")
-      div.grow(v-html="item[options.itemTitleKey]")
+      name="title"
+      :item="getOriginalItem(accordionItem)"
+      :expanded="accordionItem._expanded"
+      :index="accordionItem._index + 1")
+      .grow(v-html="accordionItem[options.itemTitleKey]")
     //- Expand icon on right.
     w-button.w-accordion__expand-icon(
       v-if="options.expandIcon && options.expandIconRight"
-      :icon="(item._expanded && options.collapseIcon) || options.expandIcon"
+      :icon="(accordionItem._expanded && options.collapseIcon) || options.expandIcon"
       text
       @keypress.stop
-      @click.stop="!item._disabled && toggleItem(item, $event)"
-      :class="{ 'w-accordion__expand-icon--expanded': item._expanded, 'w-accordion__expand-icon--rotate90': options.expandIconRotate90 }")
+      @click.stop="!accordionItem._disabled && toggleItem(accordionItem, $event)"
+      :class="{ 'w-accordion__expand-icon--expanded': accordionItem._expanded, 'w-accordion__expand-icon--rotate90': options.expandIconRotate90 }")
   //- Content.
-  w-transition-expand(y @after-leave="onEndOfCollapse(item)" :duration="options.duration")
-    .w-accordion__item-content(v-if="item._expanded" :class="contentClasses")
+  w-transition-expand(y @after-leave="onEndOfCollapse(accordionItem)" :duration="options.duration")
+    .w-accordion__item-content(v-if="accordionItem._expanded" :class="contentClasses")
       slot(
-        v-if="$slots[`item-content.${item.id || item._index + 1}`]"
-        :name="`item-content.${item.id || item._index + 1}`"
-        :item="getOriginalItem(item)"
-        :expanded="item._expanded"
-        :index="item._index + 1")
-      slot(
-        v-else
-        name="item-content"
-        :item="getOriginalItem(item)"
-        :expanded="item._expanded"
-        :index="item._index + 1")
-        div(v-html="item[options.itemContentKey]")
+        name="content"
+        :item="getOriginalItem(accordionItem)"
+        :expanded="accordionItem._expanded"
+        :index="accordionItem._index + 1")
+        div(v-html="accordionItem[options.itemContentKey]")
 </template>
 
 <script>
@@ -72,20 +58,37 @@ export default {
     'contentClasses',
     'toggleItem',
     'onEndOfCollapse',
-    'getOriginalItem'
+    'getOriginalItem',
+    'registerItem'
   ],
 
   emits: ['focus'],
 
+  data () {
+    return {
+      accordionItem: {
+        ...(this.item || {}),
+        _index: this.item?._index ?? 0,
+        _expanded: this.item?._expanded || false,
+        _disabled: this.item?._disabled || false
+      }
+    }
+  },
+
   computed: {
     itemClass () {
       return {
-        'w-accordion__item--expanded': this.item._expanded,
-        'w-accordion__item--disabled': this.item._disabled,
-        [this.item[this.options.itemColorKey]]: this.item[this.options.itemColorKey],
-        ...this.itemClasses
+        'w-accordion__item--expanded': this.accordionItem._expanded,
+        'w-accordion__item--disabled': this.accordionItem._disabled,
+        [this.accordionItem[this.options.itemColorKey]]: this.accordionItem[this.options.itemColorKey],
+        ...this.accordionItemClasses
       }
     }
+  },
+
+  created () {
+    // Register this item to the w-accordion component.
+    this.registerItem(this.accordionItem)
   }
 }
 </script>

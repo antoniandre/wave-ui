@@ -1,43 +1,44 @@
 <template lang="pug">
 .w-accordion(:class="accordionClasses")
-  w-accordion-item(
-    v-for="(item, i) in accordionItems"
-    :key="i"
-    :class="itemClass"
-    :item="item"
-    @focus="$emit('focus', $event)")
-    //- Title.
-    template(
-      v-if="$slots[itemsSlot[i]['title']]"
-      #[itemsSlot[i]['title']]="{ item, expanded, index }")
-      slot(
-        :name="itemsSlot[i]['title']"
-        :item="item"
-        :expanded="expanded"
-        :index="index")
-    template(v-else #item-title="{ item, expanded, index }")
-      slot(
-        name="item-title"
-        :item="item"
-        :expanded="expanded"
-        :index="index")
-        div.grow(v-html="item[itemTitleKey]")
-    //- Content.
-    template(
-      v-if="$slots[itemsSlot[i]['content']]"
-      #[itemsSlot[i]['content']]="{ item, expanded, index }")
-      slot(
-        :name="itemsSlot[i]['content']"
-        :item="item"
-        :expanded="expanded"
-        :index="index")
-    template(v-else #item-content="{ item, expanded, index }")
-      slot(
-        name="item-content"
-        :item="item"
-        :expanded="expanded"
-        :index="index")
-        div(v-html="item[itemContentKey]")
+  //- When externally using the WAccordionItem component.
+  slot(v-if="accordionItemsProvided")
+
+  //- Else, when providing the items array or number through the items prop.
+  template(v-else-if="!isNaN(items) || (items || []).length")
+    w-accordion-item(
+      v-for="(accordionItem, i) in accordionItems"
+      :key="i"
+      :class="itemClass"
+      :item="accordionItem"
+      @focus="$emit('focus', $event)")
+      //- Title.
+      template(#title="{ item, expanded, index }")
+        slot(
+          v-if="$slots[`item-title.${accordionItem.id || (accordionItem._index + 1)}`]"
+          :name="`item-title.${accordionItem.id || (accordionItem._index + 1)}`"
+          :item="item"
+          :expanded="expanded"
+          :index="index")
+        slot(
+          v-else
+          name="item-title"
+          :item="item"
+          :expanded="expanded"
+          :index="index")
+      //- Content.
+      template(#content="{ item, expanded, index }")
+        slot(
+          v-if="$slots[`item-content.${accordionItem.id || (accordionItem._index + 1)}`]"
+          :name="`item-content.${accordionItem.id || (accordionItem._index + 1)}`"
+          :item="item"
+          :expanded="expanded"
+          :index="index")
+        slot(
+          v-else
+          name="item-content"
+          :item="item"
+          :expanded="expanded"
+          :index="index")
 </template>
 
 <script>
@@ -51,7 +52,7 @@ export default {
     modelValue: { type: Array },
     color: { type: String },
     bgColor: { type: String },
-    items: { type: [Array, Number], required: true },
+    items: { type: [Array, Number] }, // Required unless externally using WAccordionItem.
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     itemTitleKey: { type: String, default: 'title' },
     itemContentKey: { type: String, default: 'content' },
@@ -74,6 +75,7 @@ export default {
 
   emits: ['input', 'update:modelValue', 'focus', 'item-expand', 'item-collapsed'],
 
+  // All provided to the WAccordionItem, not passed as prop since it could be used externally.
   provide () {
     return {
       itemClasses: objectifyClasses(this.itemClasses),
@@ -82,15 +84,22 @@ export default {
       toggleItem: this.toggleItem,
       onEndOfCollapse: this.onEndOfCollapse,
       getOriginalItem: this.getOriginalItem,
-      options: this.$props
+      options: this.$props,
+      registerItem: this.registerItem
     }
   },
 
   data: () => ({
-    accordionItems: []
+    accordionItems: [],
+    registeredAccordionItems: [] // When using w-accordion-item component and not items prop.
   }),
 
   computed: {
+    // Detect if the accordion items are directly provided through slot using WAccordionItem.
+    accordionItemsProvided () {
+      return this.$slots.default?.()?.some(item => item?.type?.name)
+    },
+
     accordionClasses () {
       return {
         [this.color]: this.color,
@@ -114,22 +123,16 @@ export default {
 
     contentClasses () {
       return objectifyClasses(this.contentClass)
-    },
-
-    // Bypass Vue’s template limitations when handling dynamic expressions inside named v-slot templates.
-    itemsSlot () {
-      return this.accordionItems.map(item => ({
-        title: `item-title.${item.id || (item._index + 1)}`,
-        content: `item-content.${item.id || (item._index + 1)}`
-      }))
     }
   },
 
   methods: {
     toggleItem (item, e) {
       item._expanded = !item._expanded
-      if (this.expandSingle) this.accordionItems.forEach(obj => obj._index !== item._index && (obj._expanded = false))
-      const expandedItems = this.accordionItems.map(item => item._expanded || false)
+
+      const items = this.registeredAccordionItems.length ? this.registeredAccordionItems : this.accordionItems
+      if (this.expandSingle) items.forEach(obj => obj._index !== item._index && (obj._expanded = false))
+      const expandedItems = items.map(item => item._expanded || false)
       this.$emit('update:modelValue', expandedItems)
       this.$emit('input', expandedItems)
       this.$emit('item-expand', { item, expanded: item._expanded })
@@ -140,21 +143,39 @@ export default {
       e.target.blur()
       setTimeout(() => e.target.focus(), 300)
     },
+
     onEndOfCollapse (item) {
       this.$emit('item-collapsed', { item, expanded: item._expanded })
     },
+
     // Return the original accordion item (so there is no `_index`, etc.).
     getOriginalItem (item) {
-      return this.items[item._index]
+      return (this.registeredAccordionItems.length ? this.registeredAccordionItems : this.items)[item._index]
     },
+
     updateItems () {
-      const items = typeof this.items === 'number' ? Array(this.items).fill({}) : this.items || []
+      let items = []
+      if (this.registeredAccordionItems.length) items = this.registeredAccordionItems
+      else items = (typeof this.items === 'number' ? Array(this.items).fill({}) : this.items) || []
+
       this.accordionItems = items.map((item, _index) => ({
         ...item,
         _index,
         _expanded: this.modelValue && this.modelValue[_index],
         _disabled: !!item.disabled
       }))
+    },
+
+    // Provide-injected in and used from w-accordion-item.
+    // Only when w-accordion-item is directly used outside of Wave UI.
+    registerItem (item) {
+      if (!this.items) {
+        item._index = this.registeredAccordionItems.length
+        item._expanded = this.modelValue?.[item._index] || false
+
+        this.registeredAccordionItems.push(item)
+        this.updateItems()
+      }
     }
   },
 
@@ -166,11 +187,8 @@ export default {
     modelValue () {
       this.updateItems()
     },
-    items: {
-      handler () {
-        this.updateItems()
-      },
-      deep: true
+    items () {
+      this.updateItems()
     }
   }
 }
