@@ -1,16 +1,51 @@
 <template lang="pug">
 .test.ma12.pa12.bd1.bdrs2
   h1.mt0.mb8 Testing playground
-  w-select.mt3(
+  //- w-select.mt3(
     :items="items"
     label="Select an item"
     autocomplete)
-  p.my12.mb4 multiple
-  w-select.mt3(
+  //- p.my12.mb4 multiple
+  //- w-select.mt3(
     :items="items"
     label="Select an item"
     autocomplete
     multiple)
+
+  .title2.mt12 Accordion 1
+  w-accordion(:model-value="[true, true, true]")
+    w-accordion-item.primary-dark4--bg(:item="{ title: 'item 1', content: 'content 1' }")
+    w-accordion-item.primary-dark5--bg(:item="{ title: 'item 2', content: 'content 2' }")
+      template(#title="{ item }") --{{ item.title }}--
+      template(#content="{ item }") --{{ item.content }}--
+    w-accordion-item.primary-dark6--bg
+      template(#title) Item 3 title!
+      template(#content) Item 3 content!
+
+  .title2.mt12 Accordion 2
+  w-accordion(
+    :model-value="[true, true]"
+    :items="accordionItems")
+
+  .title2.mt12 Accordion 3
+  w-accordion(
+    :model-value="[true, true]"
+    :items="accordionItems")
+    template(#item-title="{ item, expanded, index }") {{ item.title }}!
+    template(#item-title.2="{ item, expanded, index }") {{ item.title }}, yeah!
+    template(#item-content="{ item }")
+      .primary {{ item.content }}: {{ item.list }}.
+    template(#item-content.2="{ item }")
+      .success {{ item.content }}.
+
+  .title2.mt12 Accordion 4
+  w-accordion(
+    :model-value="[true, true]"
+    :items="3")
+    template(#item-title="{ index }") Item {{ index }}
+    template(#item-content="{ index }") Some content {{ index }}.
+    template(#item-title.1="{ index }") Item {{ index }}
+    template(#item-content.1="{ index }") Some content {{ index }}.
 </template>
 
 <script>
@@ -32,8 +67,26 @@ export default {
       { label: 'Item 7', value: 7 },
       { label: 'Item 8', value: 8 },
       { label: 'Item-9', value: 9 }
+    ],
+
+    accordionItems: [
+      { title: 'item 1', content: 'content 1', list: [1, 2, 3, { label: 'subitem4' }] },
+      { title: 'item 2', content: 'content 2', list: [1, 2, 3, 4] }
     ]
-  })
+  }),
+
+  mounted () {
+    // Test w-accordion depth reactivity.
+    setTimeout(() => {
+      this.accordionItems[0].title = 'New item 1 title'
+    }, 2000)
+    setTimeout(() => {
+      this.accordionItems[1].content = 'New item 2 content'
+    }, 3000)
+    setTimeout(() => {
+      this.accordionItems[0].list[3].label = 'shiny new label'
+    }, 4000)
+  }
 }
 </script>
 
