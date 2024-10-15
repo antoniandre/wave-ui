@@ -34,6 +34,14 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v3.17.0
+      ul
+        li
+          strong w-accordion
+          ul
+            li Added a new w-accordion-item component for external use within #[strong.code w-accordion].
+
     li.patch
       strong.version v3.16.3
       ul
