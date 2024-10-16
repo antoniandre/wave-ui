@@ -12,24 +12,29 @@
     autocomplete
     multiple)
 
+  p V-models:
+  p {{accordion1ModelValue}}
+  p {{accordion2ModelValue}}
+  p {{accordion3ModelValue}}
+  p {{accordion4ModelValue}}
   .title2.mt12 Accordion 1
-  w-accordion(:model-value="[true, true, true]")
-    w-accordion-item.primary-dark4--bg(:item="{ title: 'item 1', content: 'content 1' }")
+  w-accordion(v-model="accordion1ModelValue")
+    w-accordion-item.primary-dark4--bg(:item="accordion1Item1")
     w-accordion-item.primary-dark5--bg(:item="{ title: 'item 2', content: 'content 2' }")
       template(#title="{ item }") --{{ item.title }}--
       template(#content="{ item }") --{{ item.content }}--
     w-accordion-item.primary-dark6--bg
-      template(#title) Item 3 title!
+      template(#title) Item 3 title. Reactive counter {{ count }}
       template(#content) Item 3 content!
 
   .title2.mt12 Accordion 2
   w-accordion(
-    :model-value="[true, true]"
+    v-model="accordion2ModelValue"
     :items="accordionItems")
 
   .title2.mt12 Accordion 3
   w-accordion(
-    :model-value="[true, true]"
+    v-model="accordion3ModelValue"
     :items="accordionItems")
     template(#item-title="{ item, expanded, index }") {{ item.title }}!
     template(#item-title.2="{ item, expanded, index }") {{ item.title }}, yeah!
@@ -40,7 +45,7 @@
 
   .title2.mt12 Accordion 4
   w-accordion(
-    :model-value="[true, true]"
+    v-model="accordion4ModelValue"
     :items="3")
     template(#item-title="{ index }") Item {{ index }}
     template(#item-content="{ index }") Some content {{ index }}.
@@ -72,18 +77,32 @@ export default {
     accordionItems: [
       { title: 'item 1', content: 'content 1', list: [1, 2, 3, { label: 'subitem4' }] },
       { title: 'item 2', content: 'content 2', list: [1, 2, 3, 4] }
-    ]
+    ],
+    accordion1ModelValue: [true, true, true],
+    accordion2ModelValue: [true, true, true],
+    accordion3ModelValue: [true, true, true],
+    accordion4ModelValue: [true, true, true],
+    accordion1Item1: { title: 'item 1', content: 'content 1' },
+    count: 0
   }),
 
   mounted () {
     // Test w-accordion depth reactivity.
     setTimeout(() => {
+      this.count++
+      this.accordion1ModelValue = [false, false, true]
+      this.accordion2ModelValue = [false, false, true]
+      this.accordion3ModelValue = [false, false, true]
+      this.accordion4ModelValue = [false, false, true]
       this.accordionItems[0].title = 'New item 1 title'
     }, 2000)
     setTimeout(() => {
+      this.count++
+      this.accordion1Item1.title = 'super nice item 1!'
       this.accordionItems[1].content = 'New item 2 content'
     }, 3000)
     setTimeout(() => {
+      this.count++
       this.accordionItems[0].list[3].label = 'shiny new label'
     }, 4000)
   }
