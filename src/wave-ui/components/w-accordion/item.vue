@@ -2,7 +2,7 @@
 .w-accordion__item(:class="itemClasses" :aria-expanded="accordionItem._expanded ? 'true' : 'false'")
   .w-accordion__item-title(
     @click="!accordionItem._disabled && toggleItem(accordionItem, $event)"
-    @focus="$emit('focus', getOriginalItem(accordionItem))"
+    @focus="$emit('focus', (accordionItem))"
     @keypress.enter="!accordionItem._disabled && toggleItem(accordionItem, $event)"
     :tabindex="!accordionItem._disabled && 0"
     :class="titleClasses")
@@ -20,7 +20,7 @@
     //- Title.
     slot(
       name="title"
-      :item="getOriginalItem(accordionItem)"
+      :item="(accordionItem)"
       :expanded="accordionItem._expanded"
       :index="accordionItem._index + 1")
       .grow(v-html="accordionItem[options.itemTitleKey]")
@@ -37,7 +37,7 @@
     .w-accordion__item-content(v-if="accordionItem._expanded" :class="contentClasses")
       slot(
         name="content"
-        :item="getOriginalItem(accordionItem)"
+        :item="(accordionItem)"
         :expanded="accordionItem._expanded"
         :index="accordionItem._index + 1")
         div(v-html="accordionItem[options.itemContentKey]")
@@ -56,26 +56,30 @@ export default {
     'itemClasses',
     'titleClasses',
     'contentClasses',
-    'toggleItem',
+    'onItemToggle',
     'onEndOfCollapse',
     'getOriginalItem',
-    'registerItem'
+    'registerItem',
+    'state'
   ],
 
   emits: ['focus'],
 
   data () {
     return {
-      accordionItem: {
-        ...(this.item || {}),
-        _index: this.item?._index ?? 0,
-        _expanded: this.item?._expanded ?? false,
-        _disabled: this.item?._disabled ?? false
-      }
+      accordionItemIndex: this.item?._index
     }
   },
 
   computed: {
+    accordionItem: {
+      get () {
+        return this.state.accordionItems[this.accordionItemIndex] || {}
+      },
+      set () {
+
+      }
+    },
     itemClass () {
       return {
         'w-accordion__item--expanded': this.accordionItem._expanded,
@@ -86,27 +90,46 @@ export default {
     }
   },
 
+  methods: {
+    toggleItem (item, e) {
+      item._expanded = !item._expanded
+
+      this.onItemToggle(item)
+
+      // When a focused item moves in the page, the scrollTop is naturally updated by the browser.
+      // So if expandSingle is set to true, clicking on the next title of an open pane would shift the
+      // scrollTop unless unfocused while transitioning. Issue #3.
+      e.target.blur()
+      setTimeout(() => e.target.focus(), 300)
+    }
+  },
+
   created () {
     // Register this item to the w-accordion component.
-    this.registerItem(this.accordionItem)
+    this.accordionItemIndex = this.registerItem({
+      _index: 0,
+      _expanded: false,
+      _disabled: false,
+      ...(this.item || {})
+    })
   }
 }
 </script>
 
 <style lang="scss">
-  .w-accordion__item {position: relative;}
+.w-accordion__item {position: relative;}
 
-  button.w-accordion__expand-icon {color: rgba(var(--w-base-color-rgb), 0.4);}
-  .w-accordion__expand-icon {
-    margin-right: $base-increment;
+button.w-accordion__expand-icon {color: rgba(var(--w-base-color-rgb), 0.4);}
+.w-accordion__expand-icon {
+  margin-right: $base-increment;
 
-    .w-accordion--rotate-icon & {@include default-transition;}
-    &--rotate90 {transform: rotate(-90deg);}
-    &--expanded {transform: rotate(-180deg);}
-    &--expanded.w-accordion__expand-icon--rotate90 {transform: rotate(0deg);}
+  .w-accordion--rotate-icon & {@include default-transition;}
+  &--rotate90 {transform: rotate(-90deg);}
+  &--expanded {transform: rotate(-180deg);}
+  &--expanded.w-accordion__expand-icon--rotate90 {transform: rotate(0deg);}
 
-    .w-icon:before {font-size: 1.1em;}
-  }
+  .w-icon:before {font-size: 1.1em;}
+}
 
 .w-accordion__item-title {
   position: relative;
@@ -145,5 +168,4 @@ export default {
 .w-accordion__item-content {
   padding: (2 * $base-increment) (3 * $base-increment);
 }
-
 </style>

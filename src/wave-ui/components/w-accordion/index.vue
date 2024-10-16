@@ -6,7 +6,7 @@
   //- Else, when providing the items array or number through the items prop.
   template(v-else-if="!isNaN(items) || (items || []).length")
     w-accordion-item(
-      v-for="(accordionItem, i) in accordionItems"
+      v-for="(accordionItem, i) in state.accordionItems"
       :key="i"
       :class="itemClass"
       :item="accordionItem"
@@ -81,17 +81,19 @@ export default {
       itemClasses: objectifyClasses(this.itemClasses),
       titleClasses: this.titleClasses,
       contentClasses: this.contentClasses,
-      toggleItem: this.toggleItem,
+      onItemToggle: this.onItemToggle,
       onEndOfCollapse: this.onEndOfCollapse,
       getOriginalItem: this.getOriginalItem,
       options: this.$props,
-      registerItem: this.registerItem
+      registerItem: this.registerItem,
+      state: this.state
     }
   },
 
   data: () => ({
-    accordionItems: [],
-    registeredAccordionItems: [] // When using w-accordion-item component and not items prop.
+    state: {
+      accordionItems: []
+    }
   }),
 
   computed: {
@@ -127,21 +129,13 @@ export default {
   },
 
   methods: {
-    toggleItem (item, e) {
-      item._expanded = !item._expanded
-
-      const items = this.registeredAccordionItems.length ? this.registeredAccordionItems : this.accordionItems
-      if (this.expandSingle) items.forEach(obj => obj._index !== item._index && (obj._expanded = false))
-      const expandedItems = items.map(item => item._expanded || false)
+    onItemToggle (item) {
+      if (this.expandSingle) this.state.accordionItems.forEach(obj => obj._index !== item._index && (obj._expanded = false))
+      const expandedItems = this.state.accordionItems.map(item => item._expanded || false)
+      console.log('toggling item', expandedItems)
       this.$emit('update:modelValue', expandedItems)
       this.$emit('input', expandedItems)
       this.$emit('item-expand', { item, expanded: item._expanded })
-
-      // When a focused item moves in the page, the scrollTop is naturally updated by the browser.
-      // So if expandSingle is set to true, clicking on the next title of an open pane would shift the
-      // scrollTop unless unfocused while transitioning. #3.
-      e.target.blur()
-      setTimeout(() => e.target.focus(), 300)
     },
 
     onEndOfCollapse (item) {
@@ -150,18 +144,19 @@ export default {
 
     // Return the original accordion item (so there is no `_index`, etc.).
     getOriginalItem (item) {
-      return (this.registeredAccordionItems.length ? this.registeredAccordionItems : this.items)[item._index]
+      return this.items[item._index]
     },
 
     updateItems () {
-      let items = []
-      if (this.registeredAccordionItems.length) items = this.registeredAccordionItems
-      else items = (typeof this.items === 'number' ? Array(this.items).fill({}) : this.items) || []
+      let items = this.state.accordionItems
+      if (!this.accordionItemsProvided && this.items) {
+        items = (typeof this.items === 'number' ? Array(this.items).fill({}) : this.items) || []
+      }
 
-      this.accordionItems = items.map((item, _index) => ({
+      this.state.accordionItems = items.map((item, _index) => ({
         ...item,
         _index,
-        _expanded: this.modelValue && this.modelValue[_index],
+        _expanded: this.modelValue?.[_index] ?? false,
         _disabled: !!item.disabled
       }))
     },
@@ -169,18 +164,20 @@ export default {
     // Provide-injected in and used from w-accordion-item.
     // Only when w-accordion-item is directly used outside of Wave UI.
     registerItem (item) {
-      if (!this.items) {
-        item._index = this.registeredAccordionItems.length
-        item._expanded = this.modelValue?.[item._index] || false
+      if (this.accordionItemsProvided) {
+        item._index = this.state.accordionItems.length
+        item._expanded = this.modelValue?.[item._index] ?? false
+        item._disabled = !!item.disabled
 
-        this.registeredAccordionItems.push(item)
-        this.updateItems()
+        this.state.accordionItems.push(item)
       }
+
+      return item._index
     }
   },
 
   created () {
-    this.updateItems()
+    if (!this.accordionItemsProvided && this.items) this.updateItems()
   },
 
   watch: {
@@ -188,7 +185,7 @@ export default {
       this.updateItems()
     },
     items () {
-      this.updateItems()
+      // this.updateItems()
     }
   }
 }
