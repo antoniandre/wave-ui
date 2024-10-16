@@ -69,8 +69,8 @@ export default {
       accordionItem: {
         ...(this.item || {}),
         _index: this.item?._index ?? 0,
-        _expanded: this.item?._expanded || false,
-        _disabled: this.item?._disabled || false
+        _expanded: this.item?._expanded ?? false,
+        _disabled: this.item?._disabled ?? false
       }
     }
   },
