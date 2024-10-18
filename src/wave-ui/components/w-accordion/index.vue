@@ -132,7 +132,6 @@ export default {
     onItemToggle (item) {
       if (this.expandSingle) this.state.accordionItems.forEach(obj => obj._index !== item._index && (obj._expanded = false))
       const expandedItems = this.state.accordionItems.map(item => item._expanded || false)
-      console.log('toggling item', expandedItems)
       this.$emit('update:modelValue', expandedItems)
       this.$emit('input', expandedItems)
       this.$emit('item-expand', { item, expanded: item._expanded })
