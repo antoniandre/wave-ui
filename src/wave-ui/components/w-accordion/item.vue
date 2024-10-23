@@ -48,44 +48,38 @@ export default {
   name: 'w-accordion-item',
 
   props: {
-    item: { type: Object }
+    title: { type: String },
+    content: { type: String },
+    expanded: { type: Boolean },
+    disabled: { type: Boolean }
   },
 
   inject: [
     'options',
-    'itemClasses',
     'titleClasses',
     'contentClasses',
     'onItemToggle',
     'onEndOfCollapse',
     'getOriginalItem',
+    'getAccordionItem',
     'registerItem',
-    'state'
+    'unregisterItem'
   ],
 
   emits: ['focus'],
 
-  data () {
-    return {
-      accordionItemIndex: this.item?._index
-    }
-  },
-
   computed: {
     accordionItem: {
       get () {
-        return this.state.accordionItems[this.accordionItemIndex] || {}
+        return this.getAccordionItem(this._.uid)
       },
-      set () {
-
-      }
+      set () {}
     },
-    itemClass () {
+    itemClasses () {
       return {
         'w-accordion__item--expanded': this.accordionItem._expanded,
         'w-accordion__item--disabled': this.accordionItem._disabled,
-        [this.accordionItem[this.options.itemColorKey]]: this.accordionItem[this.options.itemColorKey],
-        ...this.accordionItemClasses
+        [this.accordionItem[this.options.itemColorKey]]: this.accordionItem[this.options.itemColorKey]
       }
     }
   },
@@ -106,12 +100,18 @@ export default {
 
   created () {
     // Register this item to the w-accordion component.
-    this.accordionItemIndex = this.registerItem({
+    this.registerItem({
+      _cuid: this._.uid,
       _index: 0,
-      _expanded: false,
-      _disabled: false,
-      ...(this.item || {})
+      _expanded: this.expanded,
+      _disabled: this.disabled,
+      title: this.title,
+      content: this.content
     })
+  },
+
+  beforeUnmount () {
+    this.unregisterItem(this._.uid)
   }
 }
 </script>

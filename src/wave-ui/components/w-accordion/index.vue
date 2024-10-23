@@ -4,12 +4,15 @@
   slot(v-if="accordionItemsProvided")
 
   //- Else, when providing the items array or number through the items prop.
-  template(v-else-if="!isNaN(items) || (items || []).length")
+  template(v-else-if="(items || []).length")
     w-accordion-item(
-      v-for="(accordionItem, i) in state.accordionItems"
+      v-for="(accordionItem, i) in accordionItems"
       :key="i"
-      :class="itemClass"
-      :item="accordionItem"
+      :class="itemClasses"
+      :title="accordionItem.title"
+      :content="accordionItem.content"
+      :expanded="accordionItem._expanded"
+      :disabled="accordionItem._disabled"
       @focus="$emit('focus', $event)")
       //- Title.
       template(#title="{ item, expanded, index }")
@@ -43,6 +46,7 @@
 
 <script>
 import { objectifyClasses } from '../../utils/index'
+import { consoleError } from '../../utils/console'
 import WAccordionItem from './item.vue'
 
 export default {
@@ -52,7 +56,9 @@ export default {
     modelValue: { type: Array },
     color: { type: String },
     bgColor: { type: String },
-    items: { type: [Array, Number] }, // Required unless externally using WAccordionItem.
+    // Required unless externally using WAccordionItem.
+    // Number deprecated: use WAccordionItem.
+    items: { type: [Array, Number] },
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     itemTitleKey: { type: String, default: 'title' },
     itemContentKey: { type: String, default: 'content' },
@@ -78,7 +84,6 @@ export default {
   // All provided to the WAccordionItem, not passed as prop since it could be used externally.
   provide () {
     return {
-      itemClasses: objectifyClasses(this.itemClasses),
       titleClasses: this.titleClasses,
       contentClasses: this.contentClasses,
       onItemToggle: this.onItemToggle,
@@ -86,17 +91,23 @@ export default {
       getOriginalItem: this.getOriginalItem,
       options: this.$props,
       registerItem: this.registerItem,
-      state: this.state
+      unregisterItem: this.unregisterItem,
+      getAccordionItem: this.getAccordionItem
     }
   },
 
   data: () => ({
-    state: {
-      accordionItems: []
-    }
+    accordionItems: []
   }),
 
   computed: {
+    accordionItemsById () {
+      return this.accordionItems.reduce((obj, item) => {
+        obj[item._cuid] = item
+        return obj
+      }, {})
+    },
+
     // Detect if the accordion items are directly provided through slot using WAccordionItem.
     accordionItemsProvided () {
       return this.$slots.default?.()?.some(item => item?.type?.name)
@@ -129,9 +140,13 @@ export default {
   },
 
   methods: {
+    getAccordionItem (cuid) {
+      return this.accordionItemsById[cuid]
+    },
+
     onItemToggle (item) {
-      if (this.expandSingle) this.state.accordionItems.forEach(obj => obj._index !== item._index && (obj._expanded = false))
-      const expandedItems = this.state.accordionItems.map(item => item._expanded || false)
+      if (this.expandSingle) this.accordionItems.forEach(obj => obj._index !== item._index && (obj._expanded = false))
+      const expandedItems = this.accordionItems.map(item => item._expanded || false)
       this.$emit('update:modelValue', expandedItems)
       this.$emit('input', expandedItems)
       this.$emit('item-expand', { item, expanded: item._expanded })
@@ -146,45 +161,48 @@ export default {
       return this.items[item._index]
     },
 
-    updateItems () {
-      let items = this.state.accordionItems
-      if (!this.accordionItemsProvided && this.items) {
-        items = (typeof this.items === 'number' ? Array(this.items).fill({}) : this.items) || []
-      }
-
-      this.state.accordionItems = items.map((item, _index) => ({
-        ...item,
-        _index,
-        _expanded: this.modelValue?.[_index] ?? false,
-        _disabled: !!item.disabled
-      }))
-    },
-
-    // Provide-injected in and used from w-accordion-item.
+    // Provide-injected and used from w-accordion-item.
     // Only when w-accordion-item is directly used outside of Wave UI.
     registerItem (item) {
       if (this.accordionItemsProvided) {
-        item._index = this.state.accordionItems.length
+        item._index = this.accordionItems.length
         item._expanded = this.modelValue?.[item._index] ?? false
         item._disabled = !!item.disabled
 
-        this.state.accordionItems.push(item)
+        this.accordionItems.push(item)
       }
 
       return item._index
+    },
+
+    // Provide-injected and used from w-accordion-item.
+    unregisterItem (cuid) {
+      const index = this.getAccordionItem(cuid)?._index
+      if (index !== undefined) this.accordionItems.splice(index, 1)
     }
   },
 
   created () {
-    if (!this.accordionItemsProvided && this.items) this.updateItems()
+    if (!this.accordionItemsProvided && !isNaN(this.items)) {
+      consoleError(
+        `Since version 3.17.3, the w-accordion \`items\` prop can no longer be a Number.
+        Please use the new w-accordion-item component instead for advanced custom rendering.
+        https://antoniandre.github.io/wave-ui/w-accordion#w-accordion-item`
+      )
+    }
+  },
+
+  unmounted () {
+    this.accordionItems = []
   },
 
   watch: {
-    modelValue () {
-      this.updateItems()
-    },
-    items () {
-      // this.updateItems()
+    modelValue (array) {
+      if (this.expandSingle) {
+        const firstExpandedIndex = array.findIndex(bool => !!bool)
+        if (firstExpandedIndex > -1) array = array.fill(false, firstExpandedIndex + 1)
+      }
+      array.forEach((bool, i) => ((this.accordionItems[i] || {})._expanded = bool))
     }
   }
 }
