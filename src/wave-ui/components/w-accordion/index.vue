@@ -6,19 +6,19 @@
   //- Else, when providing the items array or number through the items prop.
   template(v-else-if="(items || []).length")
     w-accordion-item(
-      v-for="(accordionItem, i) in accordionItems"
+      v-for="(item, i) in (items.length ? items : accordionItems)"
       :key="i"
       :class="itemClasses"
-      :title="accordionItem.title"
-      :content="accordionItem.content"
-      :expanded="accordionItem._expanded"
-      :disabled="accordionItem._disabled"
+      :title="item.title"
+      :content="item.content"
+      :expanded="item._expanded"
+      :disabled="item._disabled"
       @focus="$emit('focus', $event)")
       //- Title.
       template(#title="{ item, expanded, index }")
         slot(
-          v-if="$slots[`item-title.${accordionItem.id || (accordionItem._index + 1)}`]"
-          :name="`item-title.${accordionItem.id || (accordionItem._index + 1)}`"
+          v-if="$slots[`item-title.${item.id || index}`]"
+          :name="`item-title.${item.id || index}`"
           :item="item"
           :expanded="expanded"
           :index="index")
@@ -31,8 +31,8 @@
       //- Content.
       template(#content="{ item, expanded, index }")
         slot(
-          v-if="$slots[`item-content.${accordionItem.id || (accordionItem._index + 1)}`]"
-          :name="`item-content.${accordionItem.id || (accordionItem._index + 1)}`"
+          v-if="$slots[`item-content.${item.id || index}`]"
+          :name="`item-content.${item.id || index}`"
           :item="item"
           :expanded="expanded"
           :index="index")
@@ -161,18 +161,24 @@ export default {
       return this.items[item._index]
     },
 
+    updateItems () {
+      this.accordionItems = this.items.map((item, _index) => ({
+        ...item,
+        _cuid: _index,
+        _index,
+        _expanded: this.modelValue?.[_index] ?? false,
+        _disabled: !!item.disabled
+      }))
+    },
+
     // Provide-injected and used from w-accordion-item.
     // Only when w-accordion-item is directly used outside of Wave UI.
     registerItem (item) {
-      if (this.accordionItemsProvided) {
-        item._index = this.accordionItems.length
-        item._expanded = this.modelValue?.[item._index] ?? false
-        item._disabled = !!item.disabled
+      item._index = this.accordionItems.length
+      item._expanded = this.modelValue?.[item._index] ?? false
+      item._disabled = !!item.disabled
 
-        this.accordionItems.push(item)
-      }
-
-      return item._index
+      this.accordionItems.push(item)
     },
 
     // Provide-injected and used from w-accordion-item.
@@ -183,7 +189,7 @@ export default {
   },
 
   created () {
-    if (!this.accordionItemsProvided && !isNaN(this.items)) {
+    if (!isNaN(this.items)) {
       consoleError(
         `Since version 3.17.3, the w-accordion \`items\` prop can no longer be a Number.
         Please use the new w-accordion-item component instead for advanced custom rendering.
