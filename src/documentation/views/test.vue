@@ -19,10 +19,12 @@
   p {{ accordion4ModelValue }}
   .title2.mt12 Accordion 1
   w-accordion(v-model="accordion1ModelValue")
-    w-accordion-item.primary-dark4--bg(:item="accordion1Item1")
-    w-accordion-item.primary-dark5--bg(:item="{ title: 'item 2', content: 'content 2' }")
-      template(#title="{ item }") --{{ item.title }}--
-      template(#content="{ item }") --{{ item.content }}--
+    w-accordion-item.primary-dark4--bg
+      template(#title) item 1
+      template(#content) content 1
+    w-accordion-item.primary-dark5--bg
+      template(#title) item 2
+      template(#content) content 2
     w-accordion-item.primary-dark6--bg
       template(#title) Item 3 title. Reactive counter {{ count }}
       template(#content) Item 3 content!
