@@ -20,7 +20,7 @@
     //- Title.
     slot(
       name="title"
-      :item="(accordionItem)"
+      :item="getOriginalItem(accordionItem)"
       :expanded="accordionItem._expanded"
       :index="accordionItem._index + 1")
       .grow(v-html="accordionItem[options.itemTitleKey]")
@@ -37,7 +37,7 @@
     .w-accordion__item-content(v-if="accordionItem._expanded" :class="contentClasses")
       slot(
         name="content"
-        :item="(accordionItem)"
+        :item="getOriginalItem(accordionItem)"
         :expanded="accordionItem._expanded"
         :index="accordionItem._index + 1")
         div(v-html="accordionItem[options.itemContentKey]")

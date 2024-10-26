@@ -158,7 +158,7 @@ export default {
 
     // Return the original accordion item (so there is no `_index`, etc.).
     getOriginalItem (item) {
-      return this.items[item._index]
+      return this.items?.[item._index] || item
     },
 
     updateItems () {
