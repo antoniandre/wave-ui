@@ -11,8 +11,8 @@
       :class="itemClasses"
       :title="item.title"
       :content="item.content"
-      :expanded="item._expanded"
-      :disabled="item._disabled"
+      :expanded="item.expanded || item._expanded"
+      :disabled="item.disabled || item._disabled"
       @focus="$emit('focus', $event)")
       //- Title.
       template(#title="{ item, expanded, index }")
@@ -161,22 +161,13 @@ export default {
       return this.items?.[item._index] || item
     },
 
-    updateItems () {
-      this.accordionItems = this.items.map((item, _index) => ({
-        ...item,
-        _cuid: _index,
-        _index,
-        _expanded: this.modelValue?.[_index] ?? false,
-        _disabled: !!item.disabled
-      }))
-    },
-
     // Provide-injected and used from w-accordion-item.
     // Only when w-accordion-item is directly used outside of Wave UI.
     registerItem (item) {
+      item = Object.assign(item, this.items?.[item._index])
       item._index = this.accordionItems.length
       item._expanded = this.modelValue?.[item._index] ?? false
-      item._disabled = !!item.disabled
+      item._disabled = !!item._disabled
 
       this.accordionItems.push(item)
     },

@@ -248,12 +248,6 @@ export interface WaveAccordionMethods extends MethodOptions {
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
   itemClasses(item: any): void
-
-  /**
-   * TODO: Add Description
-   * @see https://antoniandre.github.io/wave-ui/w-accordion
-   */
-  updateItems(): void
 }
 
 // ----------------------------------------------------------------------------
