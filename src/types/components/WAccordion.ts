@@ -47,8 +47,9 @@ export interface WaveAccordionProps {
   bgColor?: string
 
   /**
+   * Required when not using the `w-accordion-item` component, but redundant otherwise.
    * Expecting an array of objects. Each object being an accordion item, it should include a `title` and `content` attributes.
-   * Alternatively, you can provide an integer number (call it `x`), to loop through and create `x` items in the accordion. You can then use the individual slots `item-title.x` & `item-content.x` to define each item title and content.
+   * Deprecated: you can provide an integer number (call it `x`), to loop through and create `x` items in the accordion. You can then use the individual slots `item-title.x` & `item-content.x` to define each item title and content.
    * @property {Array<any>|number} [items]
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */

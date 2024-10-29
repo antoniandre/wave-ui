@@ -1,5 +1,12 @@
 <template lang="pug">
 div
+  alert(info)
+    p Two components are available:
+    ul
+      li #[strong.code w-accordion]: The root accordion component.
+      li.mt2.
+        #[strong.code w-accordion-item]: An optional component if you don't need / prefer not to use
+        the #[code items] prop.
   title-link(h2) Basic
   w-accordion(:items="items")
   p.grey-light2.my4.
