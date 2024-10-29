@@ -164,8 +164,8 @@ export default {
     // Provide-injected and used from w-accordion-item.
     // Only when w-accordion-item is directly used outside of Wave UI.
     registerItem (item) {
-      item = Object.assign(item, this.items?.[item._index])
       item._index = this.accordionItems.length
+      item = Object.assign(item, this.items?.[item._index])
       item._expanded = this.modelValue?.[item._index] ?? false
       item._disabled = !!item._disabled
 
@@ -183,7 +183,7 @@ export default {
     if (!isNaN(this.items)) {
       consoleError(
         `Since version 3.17.3, the w-accordion \`items\` prop can no longer be a Number.
-        Please use the new w-accordion-item component instead for advanced custom rendering.
+        Please use the w-accordion-item component instead for advanced custom rendering.
         https://antoniandre.github.io/wave-ui/w-accordion#w-accordion-item`
       )
     }
