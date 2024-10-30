@@ -34,6 +34,14 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.patch
+      strong.version v3.17.4
+      ul
+        li
+          strong w-button
+          ul
+            li Prevent the button action to be called while the button is in the loading state.
+
     li.minor
       strong.version v3.17.0
       ul
