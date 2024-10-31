@@ -49,6 +49,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        api: 'modern-compiler',
         additionalData: '@import "@/wave-ui/scss/variables";@import "@/documentation/scss/variables";'
       }
     },

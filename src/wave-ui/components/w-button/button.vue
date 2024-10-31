@@ -89,7 +89,7 @@ export default {
 
       return {
         ...this.$attrs,
-        onClick: !this.disabled && (isValidRouterLink ? onRouterLinkClick : this.$attrs.onClick)
+        onClick: !this.disabled && !this.loading && (isValidRouterLink ? onRouterLinkClick : this.$attrs.onClick)
       }
     },
     size () {

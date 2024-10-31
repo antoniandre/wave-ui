@@ -13,16 +13,18 @@
     multiple)
 
   p V-models:
-  p {{accordion1ModelValue}}
-  p {{accordion2ModelValue}}
-  p {{accordion3ModelValue}}
-  p {{accordion4ModelValue}}
+  p {{ accordion1ModelValue }}
+  p {{ accordion2ModelValue }}
+  p {{ accordion3ModelValue }}
+  p {{ accordion4ModelValue }}
   .title2.mt12 Accordion 1
   w-accordion(v-model="accordion1ModelValue")
-    w-accordion-item.primary-dark4--bg(:item="accordion1Item1")
-    w-accordion-item.primary-dark5--bg(:item="{ title: 'item 2', content: 'content 2' }")
-      template(#title="{ item }") --{{ item.title }}--
-      template(#content="{ item }") --{{ item.content }}--
+    w-accordion-item.primary-dark4--bg
+      template(#title) item 1
+      template(#content) content 1
+    w-accordion-item.primary-dark5--bg
+      template(#title) item 2
+      template(#content) content 2
     w-accordion-item.primary-dark6--bg
       template(#title) Item 3 title. Reactive counter {{ count }}
       template(#content) Item 3 content!
@@ -44,13 +46,14 @@
       .success {{ item.content }}.
 
   .title2.mt12 Accordion 4
-  w-accordion(
-    v-model="accordion4ModelValue"
-    :items="3")
-    template(#item-title="{ index }") Item {{ index }}
-    template(#item-content="{ index }") Some content {{ index }}.
-    template(#item-title.1="{ index }") Item {{ index }}
-    template(#item-content.1="{ index }") Some content {{ index }}.
+  w-accordion(v-model="accordion4ModelValue")
+    //- w-accordion-item(:title="Title") Content.
+    w-accordion-item
+      template(#title="{ index }") Item {{ index }}
+      template(#content="{ index }") Some content {{ index }}.
+    w-accordion-item
+      template(#title="{ index }") Item {{ index }}
+      template(#content="{ index }") Some content {{ index }}.
 </template>
 
 <script>

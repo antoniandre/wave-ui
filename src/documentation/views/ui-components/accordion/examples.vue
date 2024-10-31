@@ -1,5 +1,12 @@
 <template lang="pug">
 div
+  alert(info)
+    p Two components are available:
+    ul
+      li #[strong.code w-accordion]: The root accordion component.
+      li.mt2.
+        #[strong.code w-accordion-item]: An optional component if you don't need / prefer not to use
+        the #[code items] prop.
   title-link(h2) Basic
   w-accordion(:items="items")
   p.grey-light2.my4.
@@ -282,7 +289,7 @@ div
         accordion: []
       })
 
-  title-link(h2 slug="custom-rendering") Custom rendering (via slots)
+  title-link(h2) Custom rendering via slots
   p.
     Customize all the tab items titles and/or content via the single slot #[code item-title], and/or
     all the tab items content via the single slot #[code item-content].
@@ -342,45 +349,9 @@ div
         ]
       })
 
-  title-link(h2) Do you (really) need even more flexibility?
+  title-link(h3 slug="slots--different-title-and-content") Different title and content layouts per item
   p.
-    No problem, Wave UI's got you covered.#[br]
-    If you don't need data objects at all, you can simply define a number of items: #[code :items="3"].
-
-  example(content-class="pa4")
-    w-accordion.discrete--bg(:items="3")
-      template(#item-title.1) Item title 1
-      template(#item-content.1) Item content 1
-
-      template(#item-title.2) Item title 2
-      template(#item-content.2) Item content 2
-
-      template(#item-title.3) Item title 3
-      template(#item-content.3) Item content 3
-    template(#pug).
-      w-accordion(:items="3")
-        template(#item-title.1) Item title 1
-        template(#item-content.1) Item content 1
-
-        template(#item-title.2) Item title 2
-        template(#item-content.2) Item content 2
-
-        template(#item-title.3) Item title 3
-        template(#item-content.3) Item content 3
-    template(#html).
-      &lt;w-accordion :items="3"&gt;
-        &lt;template #item-title.1&gt;Item title 1&lt;/template&gt;
-        &lt;template #item-content.1&gt;Item content 1&lt;/template&gt;
-
-        &lt;template #item-title.2&gt;Item title 2&lt;/template&gt;
-        &lt;template #item-content.2&gt;Item content 2&lt;/template&gt;
-
-        &lt;template #item-title.3&gt;Item title 3&lt;/template&gt;
-        &lt;template #item-content.3&gt;Item content 3&lt;/template&gt;
-      &lt;/w-accordion&gt;
-
-  p.
-    Here is an example of 3 totally diferent pane titles and contents using more lines of code.#[br]
+    Here is a more complex example using slots to render 3 totally diferent pane titles and contents.#[br]
     This time, an array of object is defined to show you can also do a mix of contents coming from the
     the component's data or directly in the template.
   example(content-class="pa4")
@@ -468,7 +439,7 @@ div
           &lt;/p&gt;
         &lt;/template&gt;
 
-        &lt;template #item-title.item3=""&gt;
+        &lt;template #item-title.item3&gt;
           &lt;strong&gt; This is the 3rd item&lt;/strong&gt;
           &lt;w-icon class="ml1" md color="pink"&gt;
             mdi mdi-emoticon-kiss-outline
@@ -478,7 +449,6 @@ div
           &lt;p&gt;Do you want to check the project on Github?&lt;/p&gt;
           &lt;w-button
             class="mt1"
-
             route="https://github.com/antoniandre/wave-ui"&gt;
             Github
             &lt;w-icon class="ml2" sm&gt;mdi mdi-open-in-new&lt;/w-icon&gt;
@@ -493,6 +463,161 @@ div
           { id: 'item3' }
         ]
       })
+
+  title-link(h2 slug="w-accordion-item") Custom rendering via #[span.code w-accordion-item]
+  p.
+    If you don't need data objects at all and all the items layouts will be different,
+    using the #[strong.code w-accordion-item] component is a more flexible and straightforward approach.
+
+  example(content-class="pa4")
+    w-accordion.discrete--bg
+      w-accordion-item
+        template(#title) Item title 1
+        template(#content) Item content 1
+
+      w-accordion-item
+        template(#title) Item title 2
+        template(#content) Item content 2
+
+      w-accordion-item
+        template(#title) Item title 3
+        template(#content) Item content 3
+    template(#pug).
+      w-accordion
+        w-accordion-item
+          template(#title) Item title 1
+          template(#content) Item content 1
+
+        w-accordion-item
+          template(#title) Item title 2
+          template(#content) Item content 2
+
+        w-accordion-item
+          template(#title) Item title 3
+          template(#content) Item content 3
+    template(#html).
+      &lt;w-accordion&gt;
+        &lt;w-accordion-item&gt;
+          &lt;template #title&gt;Item title 1&lt;/template&gt;
+          &lt;template #content&gt;Item content 1&lt;/template&gt;
+        &lt;/w-accordion-item&gt;
+
+        &lt;w-accordion-item&gt;
+          &lt;template #title&gt;Item title 2&lt;/template&gt;
+          &lt;template #content&gt;Item content 2&lt;/template&gt;
+        &lt;/w-accordion-item&gt;
+
+        &lt;w-accordion-item&gt;
+          &lt;template #title&gt;Item title 3&lt;/template&gt;
+          &lt;template #content&gt;Item content 3&lt;/template&gt;
+        &lt;/w-accordion-item&gt;
+      &lt;/w-accordion&gt;
+
+  title-link(h3 slug="w-accordion-item--different-title-and-content") Different title and content layouts per item
+  p Same example as #[a(href="#slots--different-title-and-content") above] but using the #[strong.code w-accordion-item] component.
+  example(content-class="pa4")
+    w-accordion.discrete--bg
+      w-accordion-item
+        template(#title)
+          | This is the 1st item
+          w-tag.ml2(color="red" sm outline) HOT
+        template(#content)
+          p This content has a checklist.
+          .title4 To do
+          w-list(checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]")
+
+      w-accordion-item
+        template(#title)
+          w-icon.mr1(md color="amber") mdi mdi-emoticon-excited-outline
+          em This is the 2nd item
+        template(#content)
+          p The full content here is custom and completely distinct and independent from the other items.
+
+      w-accordion-item
+        template(#title)
+          strong This is the 3rd item
+          w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
+        template(#content)
+          p Do you want to check the project on Github?
+          w-button.mt1(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
+            | Github
+            w-icon.ml2(sm) mdi mdi-open-in-new
+    template(#pug).
+      w-accordion(:items="items")
+        w-accordion-item
+          template(#title)
+            | This is the 1st item
+            w-tag.ml2(color="red" sm outline) HOT
+          template(#content)
+            p This content has a checklist.
+            .title4 To do
+            w-list(checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]")
+
+        w-accordion-item
+          template(#title)
+            w-icon.mr1(md color="amber") mdi mdi-emoticon-excited-outline
+            em This is the 2nd item
+          template(#content)
+            p The full content here is custom and completely distinct and independent from the other items.
+
+        w-accordion-item
+          template(#title)
+            strong This is the 3rd item
+            w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
+          template(#content)
+            p Do you want to check the project on Github?
+            w-button.mt1(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
+              | Github
+              w-icon.ml2(sm) mdi mdi-open-in-new
+    template(#html).
+      &lt;w-accordion&gt;
+        &lt;w-accordion-item&gt;
+          &lt;template #title&gt;
+            This is the 1st item
+            &lt;w-tag class="ml2" color="red" sm outline&gt;HOT&lt;/w-tag&gt;
+          &lt;/template&gt;
+          &lt;template #content&gt;
+            &lt;p&gt;This content has a checklist.&lt;/p&gt;
+            &lt;div class="title4 my3"&gt;To do&lt;/div&gt;
+            &lt;w-list
+              checklist
+              color="primary"
+              :items="[{ label: 'do this' }, { label: 'do that next' }]" /&gt;
+          &lt;/template&gt;
+        &lt;/w-accordion-item&gt;
+
+        &lt;w-accordion-item&gt;
+          &lt;template #title&gt;
+            &lt;w-icon class="mr1" md color="amber"&gt;
+              mdi mdi-emoticon-excited-outline
+            &lt;/w-icon&gt;
+            &lt;em&gt;This is the 2nd item&lt;/em&gt;
+          &lt;/template&gt;
+          &lt;template #content&gt;
+            &lt;p&gt;
+              The full content here is custom and completely distinct and independent from the other items.
+            &lt;/p&gt;
+          &lt;/template&gt;
+        &lt;/w-accordion-item&gt;
+
+        &lt;w-accordion-item&gt;
+          &lt;template #title&gt;
+            &lt;strong&gt; This is the 3rd item&lt;/strong&gt;
+            &lt;w-icon class="ml1" md color="pink"&gt;
+              mdi mdi-emoticon-kiss-outline
+            &lt;/w-icon&gt;
+          &lt;/template&gt;
+          &lt;template #content&gt;
+            &lt;p&gt;Do you want to check the project on Github?&lt;/p&gt;
+            &lt;w-button
+              class="mt1"
+              route="https://github.com/antoniandre/wave-ui"&gt;
+              Github
+              &lt;w-icon class="ml2" sm&gt;mdi mdi-open-in-new&lt;/w-icon&gt;
+            &lt;/w-button&gt;
+          &lt;/template&gt;
+        &lt;/w-accordion-item&gt;
+      &lt;/w-accordion&gt;
 
   title-link(h2) Toggle icon options
   title-link(h3) Alternative style
