@@ -12,7 +12,7 @@ export interface BreakpointConfig {
 }
 
 export interface ConstructorOptions {
-  colors?: Record<string, string>
+  colors?: Record<string, string|Record<string, string>>;
   breakpoints?: BreakpointConfig
 }
 
