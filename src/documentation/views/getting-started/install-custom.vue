@@ -38,7 +38,7 @@ div
         #[span.code scss/] folder, and import Wave UI's variables:
 
       ssh-pre(language="css" label="scss/_variables.scss" :dark="$store.state.darkMode").
-        @import 'wave-ui/src/wave-ui/scss/_variables';
+        @import 'wave-ui/src/wave-ui/scss/variables';
 
         /* You can add SCSS variables overrides here. */
 
@@ -56,7 +56,7 @@ div
           css: {
             loaderOptions: {
               // `additionalData` was called `prependData` prior sass-loader 9.
-              sass: { additionalData: '@import "@/scss/variables.scss";' }
+              sass: { additionalData: '@use "@/scss/variables" as *;' }
             }
           }
           // ----------------------------------------------------
@@ -69,7 +69,7 @@ div
         css: {
           preprocessorOptions: {
             scss: {
-              additionalData: '@import "@/scss/variables";'
+              additionalData: '@use "@/scss/variables" as *;'
             }
           }
         }

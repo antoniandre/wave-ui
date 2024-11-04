@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "variables" as *;
 
 // This allows each UI component to be used in dark or light theme regardless of the global theme.
 @mixin themeable {

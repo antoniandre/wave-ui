@@ -1,7 +1,6 @@
-@import './base';
-@import './typography';
-@import './layout';
-@import './colors';
-@import './icons';
-@import './transitions';
-
+@forward 'base';
+@forward 'typography';
+@forward 'layout';
+@forward 'colors';
+@forward 'icons';
+@forward 'transitions';

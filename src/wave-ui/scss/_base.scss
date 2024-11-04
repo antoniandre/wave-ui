@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "variables" as *;
 
 // The CSS variables are used in the dynamic-css.js file in order to reuse the same SCSS
 // variable presets.

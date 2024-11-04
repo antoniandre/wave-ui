@@ -1,5 +1,4 @@
-@import './variables';
-@import './base';
-@import './dark-theme'; // Can't import conditionally.
-@import './typography';
-@import './header';
+@forward './base';
+@forward './dark-theme'; // Can't import conditionally.
+@forward './typography';
+@forward './header';

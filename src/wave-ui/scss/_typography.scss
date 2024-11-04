@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 #{$css-scope} {
   .headline, .title1 {
     font-size: round(2.2 * $base-font-size);

@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 // All these CSS classes will not be generated if the $use-layout-classes is set to false.
 @if $use-layout-classes {
   #{$css-scope} {

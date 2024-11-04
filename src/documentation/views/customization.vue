@@ -71,7 +71,7 @@ main
         css: {
           preprocessorOptions: {
             scss: {
-              additionalData: '@import "@/scss/variables";'
+              additionalData: '@use "@/scss/variables" as *;'
             }
           }
         }
@@ -86,7 +86,7 @@ main
                 css: {
                   loaderOptions: {
                     // `additionalData` was called `prependData` prior sass-loader 9.
-                    sass: { additionalData: '@import "@/scss/_variables.scss";' }
+                    sass: { additionalData: '@use "@/scss/_variables.scss" as *;' }
                   }
                 }
               }

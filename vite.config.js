@@ -50,7 +50,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         api: 'modern-compiler',
-        additionalData: '@import "@/wave-ui/scss/variables";@import "@/documentation/scss/variables";'
+        additionalData: '@use "@/wave-ui/scss/variables" as *;@use "@/documentation/scss/variables" as *;'
       }
     },
     postcss: {
