@@ -258,26 +258,56 @@ main
     switching theme (powered by CSS3 variables).
   alert(tip)
     strong Important Note
-    p.
-      each of the following CSS3 variable is not containing a color but only its RGB channels.
-      This allows us to apply an alpha channel on that color if we need
-      (e.g. #[code rgba(var(--w-base-bg-color-rgb), 0.3)])! 😉#[br]
-    .body.
+    p
+      | In
+      w-tag.error--bg.mx2(round sm) Wave UI 3
+      | each of the following CSS3 variable was not containing a color but only its RGB channels.
+      | This allowed us to apply an alpha channel on that color if we needed
+      | (e.g. #[code rgba(var(--w-base-bg-color-rgb), 0.3)]).
+    p
+      | In
+      w-tag.success--bg.mx2(round sm) Wave UI 4
+      | all the color variables have been simplified and renamed now that all major browsers support the color-mix() CSS3 function.
+      | You now can use the variables as normal colors, and if you want to add an alpha channel, you can use this syntax: #[code color-mix(in srgb, var(--w-base-bg-color) 30%, transparent)])! 😉
+    .body.mt4.
       You can investigate what these variables contain directly from the dev tools of your browser,
       in the styles panel:
-    ssh-pre.mt1.size--xs.d-iblock(language="css").
-      :root[data-theme=dark] {
-        --w-base-bg-color-rgb: 34, 34, 34;
-        --w-base-color-rgb: 255, 255, 255;
-        --w-contrast-bg-color-rgb: 255, 255, 255;
-        --w-contrast-color-rgb: 0, 0, 0;
-        --w-caption-color-rgb: 110, 110, 110;
-        --w-disabled-color-rgb: 74, 74, 74;
-      }
+    .w-flex.wrap.gap2
+      div
+        div
+          w-tag.success--bg.mx2(round sm) Wave UI 4
+        ssh-pre.mt1.size--xs.d-iblock.mb0(language="css" :dark="$store.state.darkMode").
+          :root[data-theme=dark] {
+            --w-base-bg-color: #222;
+            --w-base-color: #fff;
+            --w-contrast-bg-color: #fff;
+            --w-contrast-color: #000;
+            --w-caption-color: #6e6e6e;
+            --w-disabled-color: #4a4a4a;
+          }
+      div
+        div
+          w-tag.error--bg.mx2(round sm) Wave UI 3
+        ssh-pre.mt1.size--xs.d-iblock.lh2.mb0(language="css" :dark="$store.state.darkMode").
+          :root[data-theme=dark] {
+            --w-base-bg-color-rgb: 34, 34, 34;
+            --w-base-color-rgb: 255, 255, 255;
+            --w-contrast-bg-color-rgb: 255, 255, 255;
+            --w-contrast-color-rgb: 0, 0, 0;
+            --w-caption-color-rgb: 110, 110, 110;
+            --w-disabled-color-rgb: 74, 74, 74;
+          }
+
   w-table(:headers="tableHeaders" :items="tableItems" :mobile-breakpoint="700")
     template(#item-cell="{ label, header }")
       p(v-if="header.key === 'desc'") {{ label }}
       code(v-else) {{ label }}
+    template(#item-cell.css3Var="{ label, header }")
+      code {{ label }}
+      .size--xs.error
+        | Or
+        code.error {{ label }}-rgb
+        | in Wave UI 3
   p.
     If you define theme-specific colors in the Wave UI config, they will also generate a CSS3
     variable that you can use anywhere.
@@ -298,11 +328,12 @@ export default {
       { label: 'Description', key: 'desc', width: '40%' }
     ],
     tableItems: [
-      { cssClass: '.base-color', css3Var: '--w-base-color-rgb', lightDefault: '#000', darkDefault: '#fff', desc: 'Base color for texts. For light theme this color should be dark and vice-versa.' },
-      { cssClass: '.base-color--bg', css3Var: '--w-base-bg-color-rgb', lightDefault: '#fff', darkDefault: '#222', desc: 'Base background color. For light theme this color should be light and vice-versa.' },
-      { cssClass: '.contrast-color', css3Var: '--w-contrast-color-rgb', lightDefault: '#fff', darkDefault: '#000', desc: 'A high contrast color from the current background of the app.' },
-      { cssClass: '.contrast-color--bg', css3Var: '--w-contrast-bg-color-rgb', lightDefault: '#000', darkDefault: '#fff', desc: 'A high contrast background color from the current background of the app.' },
-      { cssClass: '.disabled-color', css3Var: '--w-disabled-color-rgb', lightDefault: '#ccc', darkDefault: '#4a4a4a', desc: 'When a form element is disabled.' }
+      { cssClass: '.base-color', css3Var: '--w-base-color', lightDefault: '#000', darkDefault: '#fff', desc: 'Base color for texts. For light theme this color should be dark and vice-versa.' },
+      { cssClass: '.base-color--bg', css3Var: '--w-base-bg-color', lightDefault: '#fff', darkDefault: '#222', desc: 'Base background color. For light theme this color should be light and vice-versa.' },
+      { cssClass: '.contrast-color', css3Var: '--w-contrast-color', lightDefault: '#fff', darkDefault: '#000', desc: 'A high contrast color from the current background of the app.' },
+      { cssClass: '.contrast-color--bg', css3Var: '--w-contrast-bg-color', lightDefault: '#000', darkDefault: '#fff', desc: 'A high contrast background color from the current background of the app.' },
+      { cssClass: '.caption-color', css3Var: '--w-caption-color', lightDefault: '#a0a0a0', darkDefault: '#6e6e6e', desc: 'A subtle grey for all the captions and hints.' },
+      { cssClass: '.disabled-color', css3Var: '--w-disabled-color', lightDefault: '#ccc', darkDefault: '#4a4a4a', desc: 'When a form element is disabled.' }
     ]
   })
 }
