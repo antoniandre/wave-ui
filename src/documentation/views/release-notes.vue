@@ -34,6 +34,44 @@ main
 
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
 
+    li.minor
+      strong.version v3.18.0
+      w-alert.mt2.error.pl4(border-left no-icon)
+        strong CSS3 variables renaming
+        p.
+          Due to the recent support of the #[code color-mix] CSS3 function in all the major browsers,
+          The following CSS3 variables have been renamed and simplified, resulting in a breaking change
+          if you used the old CSS3 variable names through SCSS variables, or resulting in a wrong color
+          without explanation if you used the CSS3 variables directly.#[br]
+        ul.mb4
+          li
+            code --w-base-bg-color-rgb: 34, 34, 34;
+            w-icon.mx2.grey mdi mdi-arrow-right
+            code --w-base-bg-color: #222;
+          li
+            code --w-base-color-rgb: 255, 255, 255;
+            w-icon.mx2.grey mdi mdi-arrow-right
+            code --w-base-color: #fff;
+          li
+            code --w-contrast-bg-color-rgb: 255, 255, 255;
+            w-icon.mx2.grey mdi mdi-arrow-right
+            code --w-contrast-bg-color: #fff;
+          li
+            code --w-contrast-color-rgb: 0, 0, 0;
+            w-icon.mx2.grey mdi mdi-arrow-right
+            code --w-contrast-color: #000;
+          li
+            code --w-caption-color-rgb: 110, 110, 110;
+            w-icon.mx2.grey mdi mdi-arrow-right
+            code --w-caption-color: #6e6e6e;
+          li
+            code --w-disabled-color-rgb: 74, 74, 74;
+            w-icon.mx2.grey mdi mdi-arrow-right
+            code --w-disabled-color: #4a4a4a;
+        p.
+          Note that if you want to apply transparency on these variables, like rgba(), you can now use the
+          #[code color-mix()] native CSS3 function. E.g. #[code color-mix(in srgb, var(--w-base-color) 80%, transparent) ]
+
     li.patch
       strong.version v3.17.4
       ul
@@ -254,7 +292,7 @@ main
             li Improved the pagination slot
             li
               | Moved the pagination outside of the table due to HTML/CSS restrictions.
-              .red.
+              .error.
                 Impacted the CSS classes of the #[strong.code w-table] component: the wrapper now
                 has the #[code .w-table] and the table now has the #[code .w-table__table] class.
                 You may need to review your external CSS overrides.
@@ -426,7 +464,7 @@ main
         li
           strong.code w-input
           ul
-            li.red.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
+            li.error.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
 
     li.patch
       strong.version v3.4.6
@@ -974,7 +1012,7 @@ main
             li Improved the pagination slot
             li
               | Moved the pagination outside of the table due to HTML/CSS restrictions.
-              .red.
+              .error.
                 Impacted the CSS classes of the #[strong.code w-table] component: the wrapper now
                 has the #[code .w-table] and the table now has the #[code .w-table__table] class.
                 You may need to review your external CSS overrides.
@@ -1094,7 +1132,7 @@ main
         li
           strong.code w-input
           ul
-            li.red.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
+            li.error.text-bold If a #[code w-input type="file"] accepts only a single file (by default), the v-model will contain only the object of that file and not an array.
             li Show the #[code w-input type="file"] bottom border even after upload completion.
 
     li.patch
@@ -1566,10 +1604,10 @@ main
         li
           strong.code w-confirm
           ul
-            li.red.text-bold.
+            li.error.text-bold.
               The #[code cancel-button] &amp; #[code confirm-button] props are renamed
               to #[code cancel] &amp; #[code confirm] and can also accept a string as a button label.
-            li.red.text-bold.
+            li.error.text-bold.
               The #[code no-cancel] prop is removed and can be replaced with #[code :cancel="false"]. #[span.tag.removed]
             li New #[code question] prop in addition to the slot. #[span.tag.new]
 
@@ -1863,7 +1901,7 @@ main
               | Read more in
               router-link.ml1(to="/layout--grid") Layout &gt; grid
               | .
-            li.red
+            li.error
               strong Custom color shades: disableColorShades is now replaced with css.colorShades
         li Added the #[code show] &amp; #[code hide] CSS layout classes #[span.tag.new]
         li
@@ -1876,7 +1914,7 @@ main
       strong.version v1.29.0
       p #[strong.code w-table]
       ul
-        li.red
+        li.error
           strong The #[code item] slot now designates the &lt;tr&gt; and #[code item-cell] each table cell.
         li Allow full customization of the &lt;tr&gt; using the #[code item] slot.
         li Allow &lt;tr&gt; bg-color overrides.
@@ -1966,7 +2004,7 @@ main
         li #[strong.code w-accordion]: Return original accordion item in scoped slots.
         li #[strong.code w-tabs]: Return original tab item in scoped slots.
         li #[strong.code w-tabs]: When deleting a tab, activate the previous one.
-        li.text-bold.red #[strong.code w-tabs]: Now only accepts a numeric #[code model-value]/#[code v-model] instead of an array of boolean.
+        li.text-bold.error #[strong.code w-tabs]: Now only accepts a numeric #[code model-value]/#[code v-model] instead of an array of boolean.
 
     li.patch
       strong.version v1.20.6
