@@ -223,7 +223,6 @@ import { gsap, TimelineMax, Power1, Power4, TweenMax } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SshPre from 'simple-syntax-highlighter'
 import 'simple-syntax-highlighter/dist/sshpre.css'
-import '@/documentation/scss/index.scss'
 
 // For Edge. https://github.com/greensock/GSAP/issues/412#issuecomment-679841254
 window.requestAnimationFrame = window.requestAnimationFrame.bind(window)

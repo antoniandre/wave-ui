@@ -112,7 +112,7 @@ main
         p.mt6 Here is the list of what you can find in this object, along with the current values in this app as an illustration:
         w-accordion(
           :items="waveuiObject"
-          title-class="code"
+          title-class="code d-flex"
           content-class="ml5"
           expand-single
           expand-icon-rotate90)
