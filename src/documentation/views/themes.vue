@@ -80,36 +80,39 @@ main
 
   title-link(h2 slug="adding-themes-in-your-wave-ui-app") Adding themes in your Wave UI app that never had themes
   p.
-    If you never had 2 styles, you most likely have added colors in your CSS that will not look nice
+    If you never had 2 themes, you most likely have added colors in your CSS that will not look nice
     with the other theme. You're gonna have to locate the elements that look ugly and replace their
     colors with ones that look better.#[br]
-    This list should guide you a little.
+    This checklist should guide you a little.
   ol
     li.mt6 Add #[code theme: 'auto'] to the Wave UI configuration.
     li.mt6.
       Switch your operating system preference to dark theme, or light if you were in dark.
       That should already change the background color from the Wave UI defaults.#[br]
-      If it doesn't, you probably have a style that applies a background with a higher priority.
+      If it doesn't, you probably have an overriding style that applies a background with a higher CSS
+      priority.
     li.mt6
       | Optionally, you can override these Wave UI defaults if you don't like them.#[br]
-      | Note that each of these variables is not containing a color but only its RGB channels.
-      | This allows us to apply an alpha channel on that color if we need
-      | (e.g. #[code rgba(var(--w-base-bg-color-rgb), 0.3)])! 😉#[br]
+      | Note that you can apply a transparency on these CSS3 color variables thanks to the CSS3
+      | color-mix function.
+      | (e.g. #[code color-mix(in srgb, var(--w-base-bg-color) 30%, transparent)])! 😉#[br]
       ssh-pre(language="css" :dark="$store.state.darkMode").
         :root[data-theme=light] {
-          --w-base-bg-color-rgb: 255, 255, 255; /* white */
-          --w-base-color-rgb: 0, 0, 0; /* black */
-          --w-contrast-bg-color-rgb: 0, 0, 0; /* black */
-          --w-contrast-color-rgb: 255, 255, 255; /* white */
-          --w-disabled-color-rgb: 204, 204, 204; /* #ccc */
+          --w-base-bg-color: #fff;
+          --w-base-color: #000;
+          --w-contrast-bg-color: #000;
+          --w-contrast-color: #fff;
+          --w-caption-color: #a0a0a0;
+          --w-disabled-color: #ccc;
         }
 
         :root[data-theme=dark] {
-          --w-base-bg-color-rgb: 34, 34, 34; /* #222 */
-          --w-base-color-rgb: 255, 255, 255; /* white */
-          --w-contrast-bg-color-rgb: 255, 255, 255; /* white */
-          --w-contrast-color-rgb: 0, 0, 0; /* black */
-          --w-disabled-color-rgb: 74, 74, 74; /* #4a4a4a */
+          --w-base-bg-color: #222;
+          --w-base-color: #fff;
+          --w-contrast-bg-color: #fff;
+          --w-contrast-color: #000;
+          --w-caption-color: #6e6e6e;
+          --w-disabled-color: #4a4a4a;
         }
     li.mt6
       | If you have defined colors in the Wave UI configuration, define their best equivalent for the other theme:
@@ -143,10 +146,10 @@ main
       | Locate the ugly elements using the dev tools and replace their color/background-color with
       | colors that work for both themes, or with one of the following Wave UI defaults:
       ul
-        li color: #[code.text-bold rgb(var(--w-base-color-rgb))];
-        li background-color: #[code.text-bold rgb(var(--w-base-bg-color-rgb))];
-        li color: #[code.text-bold rgb(var(--w-contrast-color-rgb))];
-        li background-color: #[code.text-bold rgb(var(--w-contrast-bg-color-rgb))];
+        li color: #[code.text-bold var(--w-base-color)];
+        li background-color: #[code.text-bold var(--w-base-bg-color)];
+        li color: #[code.text-bold var(--w-contrast-color)];
+        li background-color: #[code.text-bold var(--w-contrast-bg-color)];
       p.
         Read more about their signification in the
         #[a(href="/colors#colors-and-themes") Colors and themes section of the colors page].

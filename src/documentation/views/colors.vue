@@ -259,14 +259,14 @@ main
   alert(tip)
     strong Important Note
     p
-      | In
-      w-tag.error--bg.mx2(round sm) Wave UI 3
+      | Before
+      w-tag.error--bg.mx2(round sm) Wave UI 3.18
       | each of the following CSS3 variable was not containing a color but only its RGB channels.
       | This allowed us to apply an alpha channel on that color if we needed
       | (e.g. #[code rgba(var(--w-base-bg-color-rgb), 0.3)]).
     p
-      | In
-      w-tag.success--bg.mx2(round sm) Wave UI 4
+      | From
+      w-tag.success--bg.mx2(round sm) Wave UI 3.18
       | all the color variables have been simplified and renamed now that all major browsers support the color-mix() CSS3 function.
       | You now can use the variables as normal colors, and if you want to add an alpha channel, you can use this syntax: #[code color-mix(in srgb, var(--w-base-bg-color) 30%, transparent)])! 😉
     .body.mt4.
@@ -275,7 +275,8 @@ main
     .w-flex.wrap.gap2
       div
         div
-          w-tag.success--bg.mx2(round sm) Wave UI 4
+          | From
+          w-tag.success--bg.mx2(round sm) Wave UI 3.18
         ssh-pre.mt1.size--xs.d-iblock.mb0(language="css" :dark="$store.state.darkMode").
           :root[data-theme=dark] {
             --w-base-bg-color: #222;
@@ -287,7 +288,8 @@ main
           }
       div
         div
-          w-tag.error--bg.mx2(round sm) Wave UI 3
+          | Before
+          w-tag.error--bg.mx2(round sm) Wave UI 3.18
         ssh-pre.mt1.size--xs.d-iblock.lh2.mb0(language="css" :dark="$store.state.darkMode").
           :root[data-theme=dark] {
             --w-base-bg-color-rgb: 34, 34, 34;
@@ -307,7 +309,7 @@ main
       .size--xs.error
         | Or
         code.error {{ label }}-rgb
-        | in Wave UI 3
+        | prior wave-ui@3.18
   p.
     If you define theme-specific colors in the Wave UI config, they will also generate a CSS3
     variable that you can use anywhere.
