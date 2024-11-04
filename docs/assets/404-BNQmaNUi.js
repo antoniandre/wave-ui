@@ -1,1 +1,0 @@
-import{r as t,o as n,g as a,a as r,w as s,d as l,b as d,_ as i}from"./index-CM5cc9pa.js";function c(u,e){const o=t("title-link");return n(),a("main",null,[r(o,{class:"mt4",h1:""},{default:s(()=>e[0]||(e[0]=[d("404 - Not found")])),_:1}),e[1]||(e[1]=l("p",null,"The page you are looking for was not found on the server.",-1))])}const f={},p=i(f,[["render",c]]);export{p as default};
