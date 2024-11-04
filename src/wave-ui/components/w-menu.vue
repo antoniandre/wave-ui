@@ -175,7 +175,7 @@ export default {
         left: (this.detachableCoords.left && `${~~this.detachableCoords.left}px`) || null,
         minWidth: (this.minWidth && this.menuMinWidth) || null,
         maxWidth: (this.maxWidth && this.menuMaxWidth) || null,
-        '--w-menu-bg-color': this.arrow && (this.$waveui.colors[this.bgColor] || 'rgb(var(--w-base-bg-color-rgb))')
+        '--w-menu-bg-color': this.arrow && (this.$waveui.colors[this.bgColor] || 'var(--w-base-bg-color)')
       }
     },
 

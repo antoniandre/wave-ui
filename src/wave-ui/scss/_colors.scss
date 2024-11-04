@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 #{$css-scope} {
   // Color palette (immutable).
   // ------------------------------------------------------
@@ -98,14 +100,14 @@
         $light-increment: 8.8;
         $dark-increment: 5;
       }
-      .#{$label}-light#{$i}--bg {background-color: lighten($color, $light-increment * $i - $light-offset);}
-      .#{$label}-light#{$i} {color: lighten($color, $light-increment * $i - $light-offset);}
-      .#{$label}-dark#{$i}--bg {background-color: darken($color, $dark-increment * $i);}
-      .#{$label}-dark#{$i} {color: darken($color, $dark-increment * $i);}
+      .#{$label}-light#{$i}--bg {background-color: color.adjust($color, $lightness: $light-increment * $i * 1% - $light-offset);}
+      .#{$label}-light#{$i} {color: color.adjust($color, $lightness: $light-increment * $i * 1% - $light-offset);}
+      .#{$label}-dark#{$i}--bg {background-color: color.adjust($color, $lightness: - $dark-increment * $i * 1%);}
+      .#{$label}-dark#{$i} {color: color.adjust($color, $lightness: - $dark-increment * $i * 1%);}
     }
   }
 
-  .primary--bg {color: rgb(var(--w-base-bg-color-rgb));}
+  .primary--bg {color: var(--w-base-bg-color);}
   .white--bg {background-color: #fff;}
   .white {color: #fff;}
   .black--bg {background-color: #000;}
@@ -119,10 +121,10 @@
   // Theming colors.
   // These classes carry colors which change automatically when switching theme.
   // ------------------------------------------------------
-  .base-color {color: rgba(var(--w-base-color-rgb), 0.7);}
-  .base-color--bg {background-color: rgb(var(--w-base-bg-color-rgb));}
-  .contrast-color {color: rgba(var(--w-contrast-color-rgb), 0.7);}
-  .contrast-color--bg {background-color: rgb(var(--w-contrast-bg-color-rgb));}
+  .base-color {color: color-mix(in srgb, var(--w-base-color) 75%, transparent);}
+  .base-color--bg {background-color: var(--w-base-bg-color);}
+  .contrast-color {color: color-mix(in srgb, var(--w-contrast-color) 75%, transparent);}
+  .contrast-color--bg {background-color: var(--w-contrast-bg-color);}
   // ------------------------------------------------------
 
   // Status colors - must stay last and have highest priority.

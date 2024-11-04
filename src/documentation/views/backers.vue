@@ -95,7 +95,7 @@ export default {
     width: 4em;
     aspect-ratio: 1;
     border-radius: 4em;
-    background-color: rgba(var(--w-contrast-bg-color-rgb), 0.1);
+    background-color: color-mix(in srgb, var(--w-contrast-bg-color) 10%, transparent);
     overflow: hidden;
   }
 
@@ -104,7 +104,7 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: rgba(var(--w-contrast-bg-color-rgb), 0.05);
+    color: color-mix(in srgb, var(--w-contrast-bg-color) 5%, transparent);
     font-size: 4.5em;
   }
 }

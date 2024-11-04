@@ -758,7 +758,7 @@ $tr-border-top: 1px;
   // Table columns.
   // ------------------------------------------------------
   &__col--highlighted {
-    background-color: rgba(var(--w-contrast-bg-color-rgb), 0.04);
+    background-color: color-mix(in srgb, var(--w-contrast-bg-color) 4%, transparent);
   }
 
   // Table headers.
@@ -804,7 +804,7 @@ $tr-border-top: 1px;
   // Sorting arrow.
   &__header--sortable {cursor: pointer;}
   &__header-sort {
-    color: rgba(var(--w-base-color-rgb), 0.8);
+    color: color-mix(in srgb, var(--w-base-color) 8%, transparent);
     vertical-align: text-bottom;
     @include default-transition;
 
@@ -867,7 +867,7 @@ $tr-border-top: 1px;
   tbody {transition: opacity $transition-duration;}
   &--loading-in-header tbody {opacity: 0.6;}
 
-  tbody tr {border-top: $tr-border-top solid rgba(var(--w-base-color-rgb), 0.06);}
+  tbody tr {border-top: $tr-border-top solid color-mix(in srgb, var(--w-base-color) 6%, transparent);}
   // Don't apply built-in bg color if a bg color is already found on a tr.
   tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: $table-tr-odd-color;}
   tbody .w-table__row:hover:not(.no-data):not([class*="--bg"]) {background-color: $table-tr-hover-color;}
@@ -970,8 +970,8 @@ $tr-border-top: 1px;
       aspect-ratio: 1;
       min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
       overflow: hidden;
-      color: rgba(var(--w-base-color-rgb), 0.65);
-      background-color: rgba(var(--w-base-bg-color-rgb), 0.4);
+      color: color-mix(in srgb, var(--w-base-color) 65%, transparent);
+      background-color: color-mix(in srgb, var(--w-base-bg-color) 40%, transparent);
 
       &:hover:before {
         background-color: $primary;

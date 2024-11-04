@@ -82,21 +82,19 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 // the bg to dark from this media query.
 @media (prefers-color-scheme: dark) {
   :root {
-    --w-base-color-rgb: 255, 255, 255;
-    --w-base-bg-color-rgb: 34, 34, 34;
+    --w-base-color: #fff;
+    --w-base-bg-color: #222;
   }
 }
 // --------------------------------------------------------
 
 [data-theme="dark"] {
-  color: #444;
-
-  .content-wrap {background-color: rgb(var(--w-base-bg-color-rgb));}
+  .content-wrap {background-color: var(--w-base-bg-color);}
 
   // Main menu.
   // ------------------------------------------------------
   .nav-menu-wrap {
-    &:after {border-right-color: rgba(var(--w-base-color-rgb), 0.08);}
+    &:after {border-right-color: color-mix(in srgb, var(--w-base-color) 8%, transparent);}
     div.nav-menu .w-tree__item-label:before {background-color: #fff;}
   }
 
@@ -125,9 +123,9 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
     background-color: rgba(130, 130, 130, 0.2);
     color: #f9d2ac;
   }
-  .code:not(.inherit):not(.primary):not(.teal):not(.contrast-color):not(.amber-dark3) {color: rgb(var(--w-base-color-rgb));}
+  .code:not(.inherit):not(.primary):not(.teal):not(.contrast-color):not(.amber-dark3) {color: var(--w-base-color);}
   .ssh-pre {
-    border-color: rgba(var(--w-base-color-rgb), 0.06);
+    border-color: color-mix(in srgb, var(--w-base-color) 6%, transparent);
     background-color: rgba(#000, 0.3);
 
     &[data-label]:before {
@@ -145,12 +143,12 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
   // Navigation.
   // ------------------------------------------------------
   div.nav-menu .w-tree__item-icon {color: rgba(255, 255, 255, 0.25);}
-  .title-link .hash {color: rgba(var(--w-base-color-rgb), 0.08);}
+  .title-link .hash {color: color-mix(in srgb, var(--w-base-color) 8%, transparent);}
 
   // Title.
   // ------------------------------------------------------
-  .title-link {color: rgba(var(--w-base-color-rgb), 0.9);}
-  .title-link .hash {color: rgba(var(--w-base-color-rgb), 0.08);}
+  .title-link {color: color-mix(in srgb, var(--w-base-color) 90%, transparent);}
+  .title-link .hash {color: color-mix(in srgb, var(--w-base-color) 8%, transparent);}
 
   // Alerts.
   // ------------------------------------------------------
@@ -163,12 +161,12 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
   // Examples.
   // ------------------------------------------------------
   .example {
-    background-color: rgb(var(--w-base-color-rgb), 0.05);
-    border-color: rgba(var(--w-base-color-rgb), 0.08);
+    background-color: color-mix(in srgb, var(--w-base-color) 5%, transparent);
+    border-color: color-mix(in srgb, var(--w-base-color) 8%, transparent);
 
     .buttons {
-      background-color: rgb(var(--w-base-color-rgb), 0.05);
-      border-left-color: rgba(var(--w-base-color-rgb), 0.08);
+      background-color: color-mix(in srgb, var(--w-base-color) 5%, transparent);
+      border-left-color: color-mix(in srgb, var(--w-base-color) 8%, transparent);
     }
   }
 
@@ -180,8 +178,8 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .transition-box {
-    background-color: rgba(0, 0, 0, 0.15);
-    border-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(#000, 0.15);
+    border-color: rgba(#000, 0.4);
   }
 
   .main--layout-grid-system {

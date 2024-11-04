@@ -117,7 +117,7 @@ export default {
         zIndex: this.zIndex || this.zIndex === 0 || null,
         top: (this.detachableCoords.top && `${~~this.detachableCoords.top}px`) || null,
         left: (this.detachableCoords.left && `${~~this.detachableCoords.left}px`) || null,
-        '--w-tooltip-bg-color': this.$waveui.colors[this.bgColor] || 'rgb(var(--w-base-bg-color-rgb))'
+        '--w-tooltip-bg-color': this.$waveui.colors[this.bgColor] || 'var(--w-base-bg-color)'
       }
     },
 

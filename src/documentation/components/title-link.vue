@@ -92,6 +92,6 @@ export default {
 }
 
 h1.title-link {
-  color: rgba(var(--w-base-color-rgb), 0.9);
+  color: color-mix(in srgb, var(--w-base-color) 90%, transparent);
 }
 </style>

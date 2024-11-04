@@ -201,7 +201,7 @@ $inactive-color: #666;
     }
 
     .w-checkbox--indeterminate & {opacity: 0;}
-    .w-checkbox--disabled & {stroke: rgba(var(--w-contrast-color-rgb), 0.4);}
+    .w-checkbox--disabled & {stroke: color-mix(in srgb, var(--w-contrast-color) 40%, transparent);}
   }
 
   &__input:after {
@@ -230,7 +230,7 @@ $inactive-color: #666;
     .w-checkbox--disabled :checked ~ & {
       border-color: $disabled-color;
       // Prevents a tiny hole while animating and in some browser zoom levels.
-      background-color: rgba(var(--w-contrast-color-rgb), 0.4);
+      background-color: color-mix(in srgb, var(--w-contrast-color) 40%, transparent);
     }
   }
 

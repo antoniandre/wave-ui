@@ -343,8 +343,8 @@ export default {
   &__selection {
     display: flex;
     align-items: center;
-    background: rgba(var(--w-contrast-bg-color-rgb), 0.035);
-    border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.05);
+    background: color-mix(in srgb, var(--w-contrast-bg-color) 3.5%, transparent);
+    border: 1px solid color-mix(in srgb, var(--w-contrast-bg-color) 5%, transparent);
     border-radius: $border-radius;
     padding: 0 2px 0 4px;
     flex-shrink: 0;
@@ -363,7 +363,7 @@ export default {
   }
 
   &__placeholder {
-    color: rgba(var(--w-base-color-rgb), 0.5);
+    color: color-mix(in srgb, var(--w-base-color) 50%, transparent);
     pointer-events: none;
     line-height: 18px;
   }
@@ -375,7 +375,7 @@ export default {
     margin-top: -1px;
     margin-left: 0;
     background-color: $base-bg-color;
-    border: 1px solid rgba(var(--w-contrast-bg-color-rgb), 0.2);
+    border: 1px solid color-mix(in srgb, var(--w-contrast-bg-color) 20%, transparent);
     border-top: none;
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;

@@ -76,10 +76,10 @@ div.main-toolbar {
   height: 42px;
   padding-top: 0;
   padding-bottom: 0;
-  background-color: rgba(var(--w-base-bg-color-rgb), 0.85);
+  background-color: color-mix(in srgb, var(--w-base-bg-color) 85%, transparent);
   backdrop-filter: blur(4px);
   z-index: 190;
-  border-bottom-color: rgba(var(--w-contrast-bg-color-rgb), 0.05);
+  border-bottom-color: color-mix(in srgb, var(--w-contrast-bg-color) 5%, transparent);
 
   .home-link {
     @include default-transition;
@@ -113,7 +113,7 @@ div.main-toolbar {
   }
 
   .version {
-    color: rgba(var(--w-base-color-rgb), 0.35);
+    color: color-mix(in srgb, var(--w-base-color) 35%, transparent);
 
     code {
       letter-spacing: -0.5px;

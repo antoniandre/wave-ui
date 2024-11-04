@@ -265,6 +265,6 @@ export default {
 <style lang="scss">
 .w-switch--wide .w-switch__input {width: 55px;}
 .w-switch--wide .w-switch__track {width: 35px;text-align: center;}
-.w-switch--custom-track .w-switch__track {color: rgba(var(--w-base-color-rgb), 0.5);}
+.w-switch--custom-track .w-switch__track {color: color-mix(in srgb, var(--w-base-color) 50%, transparent);}
 .w-switch--custom-track.w-switch--on .w-switch__track {color: #fff;}
 </style>

@@ -7,36 +7,35 @@
 
 // THEME COLORS.
 // ========================================================
-// These colors are defined by a list of RBG channels only, so you can later apply any alpha channel.
 // If you don't need themes, you can leave this as is and override the global defaults.
 $theme-light: (
-  base-bg-color-rgb: (255, 255, 255), // #fff.
-  base-color-rgb: (0, 0, 0), // #000.
-  contrast-bg-color-rgb: (0, 0, 0), // #000.
-  contrast-color-rgb: (255, 255, 255), // #fff.
-  caption-color-rgb: (160, 160, 160), // #a0a0a0.
-  disabled-color-rgb: (204, 204, 204), // #ccc.
+  base-bg-color: #fff,
+  base-color: #000,
+  contrast-bg-color: #000,
+  contrast-color: #fff,
+  caption-color: #a0a0a0,
+  disabled-color: #ccc
 ) !default;
 
 $theme-dark: (
-  base-bg-color-rgb: (34, 34, 34), // #222.
-  base-color-rgb: (255, 255, 255), // #fff.
-  contrast-bg-color-rgb: (255, 255, 255), // #fff.
-  contrast-color-rgb: (0, 0, 0), // #000.
-  caption-color-rgb: (110, 110, 110), // #6e6e6e.
-  disabled-color-rgb: (74, 74, 74), // #4a4a4a.
+  base-bg-color: #222,
+  base-color: #fff,
+  contrast-bg-color: #fff,
+  contrast-color: #000,
+  caption-color: #6e6e6e,
+  disabled-color: #4a4a4a
 ) !default;
 
 // These variables are filled up with the current theme colors for you to use.
 $primary: var(--w-primary-color);
 $secondary: var(--w-secondary-color);
-$base-bg-color: rgb(var(--w-base-bg-color-rgb));
-$base-color: rgb(var(--w-base-color-rgb));
-$contrast-bg-color: rgb(var(--w-contrast-bg-color-rgb));
-$contrast-color: rgb(var(--w-contrast-color-rgb));
-$caption-color: rgb(var(--w-caption-color-rgb));
+$base-bg-color: var(--w-base-bg-color);
+$base-color: var(--w-base-color);
+$contrast-bg-color: var(--w-contrast-bg-color);
+$contrast-color: var(--w-contrast-color);
+$caption-color: var(--w-caption-color);
 // When a form element is disabled (checkbox, radio, input, select list).
-$disabled-color: rgb(var(--w-disabled-color-rgb));
+$disabled-color: var(--w-disabled-color);
 
 // GLOBAL DEFAULTS.
 // ========================================================
@@ -48,7 +47,7 @@ $base-font-size: 14px !default; // Must be a px unit.
 $base-increment: round(divide($base-font-size, 4)) !default;
 $layout-padding: $base-increment * 4 !default; // Applied on the .content-wrap tag.
 $border-radius: 4px !default;
-$border-color: rgba(var(--w-contrast-bg-color-rgb), 0.12) !default;
+$border-color: color-mix(in srgb, var(--w-contrast-bg-color) 12%, transparent) !default;
 $border: 1px solid $border-color !default;
 $transition-duration: 0.25s !default;
 $fast-transition-duration: 0.15s !default;
@@ -95,35 +94,35 @@ $menu-color: $detachable-color !default;
 
 // w-progress.
 // --------------------------------------------------------
-$progress-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.15) !default;
+$progress-bg-color: color-mix(in srgb, var(--w-contrast-bg-color) 15%, transparent) !default;
 // --------------------------------------------------------
 
 // w-rating.
 // --------------------------------------------------------
-$rating-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.25) !default;
+$rating-bg-color: color-mix(in srgb, var(--w-contrast-bg-color) 25%, transparent) !default;
 // --------------------------------------------------------
 
 // w-slider.
 // --------------------------------------------------------
 $slider-height: $base-increment !default;
-$slider-track-color: rgba(var(--w-contrast-bg-color-rgb), 0.15) !default;
+$slider-track-color: color-mix(in srgb, var(--w-contrast-bg-color) 15%, transparent) !default;
 $slider-thumb-button-bg-color: $base-bg-color !default;
 $slider-thumb-label-bg-color: $base-bg-color !default;
-$slider-thumb-label-color: rgba(var(--w-base-color-rgb), 0.75) !default;
-$slider-step-label-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.2) !default;
-$slider-step-label-color: rgba(var(--w-base-color-rgb), 0.5) !default;
+$slider-thumb-label-color: color-mix(in srgb, var(--w-base-color) 75%, transparent) !default;
+$slider-step-label-bg-color: color-mix(in srgb, var(--w-contrast-bg-color) 20%, transparent) !default;
+$slider-step-label-color: color-mix(in srgb, var(--w-base-color) 50%, transparent) !default;
 
 // w-switch.
 // --------------------------------------------------------
-$switch-inactive-color: rgba(var(--w-contrast-bg-color-rgb), 0.25) !default;
+$switch-inactive-color: color-mix(in srgb, var(--w-contrast-bg-color) 25%, transparent) !default;
 $switch-thumb-color: $base-bg-color !default;
 // --------------------------------------------------------
 
 // w-table.
 // --------------------------------------------------------
-$table-tr-odd-color: rgba(0, 0, 0, 0.02) !default;
-$table-tr-hover-color: rgba(0, 0, 0, 0.05) !default;
-$table-color: rgba(var(--w-contrast-color-rgb), 0.7) !default;
+$table-tr-odd-color: color-mix(in srgb, var(--w-contrast-bg-color) 2%, transparent) !default;
+$table-tr-hover-color: color-mix(in srgb, var(--w-contrast-bg-color) 5%, transparent) !default;
+$table-color: color-mix(in srgb, var(--w-contrast-color) 70%, transparent) !default;
 // --------------------------------------------------------
 
 // w-textarea.
@@ -134,7 +133,7 @@ $textarea-line-height: 1.2 !default;
 // w-timeline.
 // --------------------------------------------------------
 $timeline-bullet-color: $base-bg-color !default;
-$timeline-bg-color: rgba(var(--w-contrast-bg-color-rgb), 0.25) !default;
+$timeline-bg-color: color-mix(in srgb, var(--w-contrast-bg-color) 25%, transparent) !default;
 // --------------------------------------------------------
 
 // w-toolbar.

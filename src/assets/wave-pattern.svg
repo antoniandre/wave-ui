@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="rgb(var(--w-base-bg-color-rgb))" stroke="var(--header-waves-pattern)">
+<svg xmlns="http://www.w3.org/2000/svg" fill="var(--w-base-bg-color)" stroke="var(--header-waves-pattern)">
   <defs>
     <pattern id="waves" width="300" height="150" patternUnits="userSpaceOnUse" patternTransform="scale(0.2)" stroke-width="5">
       <circle cx="150" cy="0" r="147.5"></circle>

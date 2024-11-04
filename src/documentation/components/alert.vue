@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss">
 .w-alert.w-alert--docs {
-  color: rgba(var(--w-base-color-rgb), 0.8) !important;
+  color: color-mix(in srgb, var(--w-base-color) 80%, transparent) !important;
   font-weight: normal;
 
   &:after {display: none;}

@@ -2274,12 +2274,12 @@ main
 
     >li.patch:before,
     >li.patch .version {
-      color: rgba(var(--w-base-color-rgb), 0.3);
+      color: color-mix(in srgb, var(--w-base-color) 30%, transparent);
     }
 
     >li.minor:before,
     >li.minor .version {
-      color: rgba(var(--w-base-color-rgb), 0.6);
+      color: color-mix(in srgb, var(--w-base-color) 60%, transparent);
     }
 
     >li.major:before,

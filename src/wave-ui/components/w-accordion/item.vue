@@ -119,7 +119,7 @@ export default {
 <style lang="scss">
 .w-accordion__item {position: relative;}
 
-button.w-accordion__expand-icon {color: rgba(var(--w-base-color-rgb), 0.4);}
+button.w-accordion__expand-icon {color: color-mix(in srgb, var(--w-base-color) 40%, transparent);}
 .w-accordion__expand-icon {
   margin-right: $base-increment;
 

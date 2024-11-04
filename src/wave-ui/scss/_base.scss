@@ -6,26 +6,26 @@
   --w-base-increment: #{$base-increment};
   --w-css-scope: #{$css-scope};
 
-  background-color: rgb(var(--w-base-bg-color-rgb));
-  color: rgb(var(--w-base-color-rgb));
+  background-color: var(--w-base-bg-color);
+  color: var(--w-base-color);
 }
 
 :root[data-theme="light"] {
-  --w-base-bg-color-rgb: #{map.get($theme-light, 'base-bg-color-rgb')};
-  --w-base-color-rgb: #{map.get($theme-light, 'base-color-rgb')};
-  --w-contrast-bg-color-rgb: #{map.get($theme-light, 'contrast-bg-color-rgb')};
-  --w-contrast-color-rgb: #{map.get($theme-light, 'contrast-color-rgb')};
-  --w-caption-color-rgb: #{map.get($theme-light, 'caption-color-rgb')};
-  --w-disabled-color-rgb: #{map.get($theme-light, 'disabled-color-rgb')};
+  --w-base-bg-color: #{map.get($theme-light, 'base-bg-color')};
+  --w-base-color: #{map.get($theme-light, 'base-color')};
+  --w-contrast-bg-color: #{map.get($theme-light, 'contrast-bg-color')};
+  --w-contrast-color: #{map.get($theme-light, 'contrast-color')};
+  --w-caption-color: #{map.get($theme-light, 'caption-color')};
+  --w-disabled-color: #{map.get($theme-light, 'disabled-color')};
 }
 
 :root[data-theme="dark"] {
-  --w-base-bg-color-rgb: #{map.get($theme-dark, 'base-bg-color-rgb')};
-  --w-base-color-rgb: #{map.get($theme-dark, 'base-color-rgb')};
-  --w-contrast-bg-color-rgb: #{map.get($theme-dark, 'contrast-bg-color-rgb')};
-  --w-contrast-color-rgb: #{map.get($theme-dark, 'contrast-color-rgb')};
-  --w-caption-color-rgb: #{map.get($theme-dark, 'caption-color-rgb')};
-  --w-disabled-color-rgb: #{map.get($theme-dark, 'disabled-color-rgb')};
+  --w-base-bg-color: #{map.get($theme-dark, 'base-bg-color')};
+  --w-base-color: #{map.get($theme-dark, 'base-color')};
+  --w-contrast-bg-color: #{map.get($theme-dark, 'contrast-bg-color')};
+  --w-contrast-color: #{map.get($theme-dark, 'contrast-color')};
+  --w-caption-color: #{map.get($theme-dark, 'caption-color')};
+  --w-disabled-color: #{map.get($theme-dark, 'disabled-color')};
 }
 
 * {
@@ -62,4 +62,11 @@ a {text-decoration: none;}
 .w-main {
   padding-left: 3 * $base-increment;
   padding-right: 3 * $base-increment;
+}
+
+// Structure classes.
+// ----------------------------------------------
+.content-wrap {
+  position: relative;
+  padding: $layout-padding;
 }

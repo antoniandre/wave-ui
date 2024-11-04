@@ -481,7 +481,7 @@ export default {
     bottom: 0;
     width: 100%;
     height: 50%;
-    fill: rgb(var(--w-base-bg-color-rgb));
+    fill: var(--w-base-bg-color);
     pointer-events: none;
 
     path:nth-child(1) {opacity: 0.1;}
@@ -620,7 +620,7 @@ export default {
   // Section 1.
   // ------------------------------------------------------
   .section--1 {
-    background-color: rgb(var(--w-base-bg-color-rgb));
+    background-color: var(--w-base-bg-color);
     // margin-top: 5em;
     padding-bottom: 11em;
 
@@ -734,7 +734,7 @@ export default {
 
     .section__content {overflow: hidden;}
 
-    > svg {top: 0;fill: rgb(var(--w-base-bg-color-rgb));}
+    > svg {top: 0;fill: var(--w-base-bg-color);}
 
     .w-button {
       font-family: "title font";

@@ -47,13 +47,13 @@ export default {
 
   .ssh-pre {
     margin: 0 !important;
-    border: solid rgba(var(--w-base-color-rgb), 0.1);
+    border: solid color-mix(in srgb, var(--w-base-color) 10%, transparent);
     border-width: 1px 0 0;
     border-radius: 0;
     line-height: 1.3;
   }
 
-  .top-bar + .language .ssh-pre {border-top-color: rgba(var(--w-base-color-rgb), 0.05);}
+  .top-bar + .language .ssh-pre {border-top-color: color-mix(in srgb, var(--w-base-color) 5%, transparent);}
 
   .ssh-pre[data-label]:before {
     font-family: 'Arial Narrow', Arial, sans-serif;

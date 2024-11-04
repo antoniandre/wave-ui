@@ -178,8 +178,8 @@ export default {
       if (blanks.includes('css') || blanks.includes('scss')) css = slots.css || slots.scss
       else {
         css = ':root {\n' +
-              '  background-color: rgb(var(--w-base-bg-color-rgb));\n' +
-              '  color: rgb(var(--w-base-color-rgb));\n' +
+              '  background-color: var(--w-base-bg-color);\n' +
+              '  color: var(--w-base-color);\n' +
               '  font: 14px sans-serif;\n' +
               '  padding: 24px;\n' +
               '}\n\n' +
