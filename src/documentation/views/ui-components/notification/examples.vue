@@ -147,7 +147,7 @@ div
         to #[code {{ notifManagerTransition ? `'${notifManagerTransition}'` : notifManagerTransition }}].
       alert(tip)
         | You could even
-        a.ml1(href="https://vuejs.org/v2/guide/transitions.html")
+        a.ml1(href="https://vuejs.org/guide/built-ins/transition.html")
           | create your own transition
           w-icon.ml1(md) mdi mdi-open-in-new
         | .

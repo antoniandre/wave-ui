@@ -15,7 +15,7 @@ main
 
   alert(info)
     | The transitions (based on
-    | #[a(href="https://vuejs.org/v2/guide/transitions.html" target="_blank") Vue native transitions])
+    | #[a(href="https://vuejs.org/guide/built-ins/transition.html" target="_blank") Vue native transitions])
     | work with element toggling using #[code v-if] or #[code v-show].
     br
     | Simple example (with #[code show] a boolean variable):
@@ -23,8 +23,7 @@ main
       ssh-pre.mb0(
         v-show="$store.state.usePug"
         :dark="$store.state.darkMode"
-        language="pug"
-        label="Pug" ).
+        language="pug").
         w-transition-fade
           span(v-if="show") Hello!
       ssh-pre.mb0(
