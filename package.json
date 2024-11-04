@@ -1,6 +1,6 @@
 {
   "name": "wave-ui",
-  "version": "3.17.4",
+  "version": "3.17.5",
   "description": "A UI framework for Vue.js 3 (and 2) with only the bright side. :sunny:",
   "author": "Antoni Andre <antoniandre.web@gmail.com>",
   "homepage": "https://antoniandre.github.io/wave-ui",
@@ -22,7 +22,6 @@
         "default": "./dist/wave-ui.es.js",
         "types": "./dist/types/index.d.ts"
       },
-
       "require": {
         "default": "./dist/wave-ui.umd.js",
         "types": "./dist/types/index.d.ts"
