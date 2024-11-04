@@ -741,7 +741,7 @@ main
             text-align: center;
           }
 
-  p.mt4 #[strong Solution:] there are a couple of ways to bypass this limitation.
+  p.mt4 #[strong Solution:] Here are two ways to bypass this limitation.
   h4 1. Wrap children in padded boxes &amp; apply equivalent negative margin on parent
   example.lighter
     .yellow-light5--bg.bd1

@@ -25,7 +25,6 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
   .transition-box,
   .transition-box .amber-light4--bg,
   .main--layout-grid-system legend.round,
-  .hue-on-dark .example__render *,
   .w-alert__content .black,
   .main--w-list-item .blue-light5--bg,
   .main--shadows-borders-radii .example .orange-light5--bg,
@@ -73,7 +72,6 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .main--getting-started .w-accordion__item-content {transition: background-color $theme-switch-transition;}
 .nav-menu-wrap {transition: border-color $theme-switch-transition;}
-.hue-on-dark .example__render {transition: filter $theme-switch-transition;}
 // ======================================================
 
 // Dark theme.
@@ -195,11 +193,6 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
       padding: 0 6px;
       display: flex;
     }
-  }
-
-  .hue-on-dark .example__render {
-    filter: sepia(1) hue-rotate(100deg);
-    * {color: #444;}
   }
 
   .w-alert__content .black {color: #fff;}
