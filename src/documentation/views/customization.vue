@@ -35,23 +35,24 @@ main
     npm i -D pug sass
   p.caption.
     The dev dependencies are only needed for building the project. They will not ship to production.
-  w-accordion.mt3(:items="1" expand-icon-rotate-90)
-    template(#item-title)
-      .body Notes if you use Vue 2 and Vue CLI:
-    template(#item-content)
-      .ml4.mt2
-        p You may need to install other dependencies:
-        ssh-pre.mb2.mt0.d-iblock(language="shell" :dark="$store.state.darkMode").
-          npm i -D pug pug-plain-loader sass sass-loader@10
+  w-accordion.mt3(expand-icon-rotate-90)
+    w-accordion-item
+      template(#title)
+        .body Notes if you use Vue 2 and Vue CLI:
+      template(#content)
+        .ml4.mt2
+          p You may need to install other dependencies:
+          ssh-pre.mb2.mt0.d-iblock(language="shell" :dark="$store.state.darkMode").
+            npm i -D pug pug-plain-loader sass sass-loader@10
 
-        ul
-          li #[span.code sass-loader 11+] is not compatible with Webpack 4 or less.
-          li
-            | The #[span.code sass] update is needed to handle the
-            a.ml1(href="https://github.com/sass/sass/issues/2565" target="_blank")
-              | new Sass division
-              w-icon.ml1 mdi mdi-open-in-new
-            | .
+          ul
+            li #[span.code sass-loader 11+] is not compatible with Webpack 4 or less.
+            li
+              | The #[span.code sass] update is needed to handle the
+              a.ml1(href="https://github.com/sass/sass/issues/2565" target="_blank")
+                | new Sass division
+                w-icon.ml1 mdi mdi-open-in-new
+              | .
 
   .title4.mt8 2. Update #[span.code main.js]
   p In main.js, replace the 2 Wave UI imports with:
@@ -74,24 +75,25 @@ main
             }
           }
         }
-      w-accordion.mt3(:items="1" expand-icon-rotate-90)
-        template(#item-title)
-          .body Or if you use Vue CLI
-        template(#item-content)
-          ssh-pre.mt5(language="js" label="vue.config.js" :dark="$store.state.darkMode").
-            module.exports = {
-              transpileDependencies: ['wave-ui'],
-              css: {
-                loaderOptions: {
-                  // `additionalData` was called `prependData` prior sass-loader 9.
-                  sass: { additionalData: '@import "@/scss/_variables.scss";' }
+      w-accordion.mt3(expand-icon-rotate-90)
+        w-accordion-item
+          template(#title)
+            .body Or if you use Vue CLI
+          template(#content)
+            ssh-pre.mt5(language="js" label="vue.config.js" :dark="$store.state.darkMode").
+              module.exports = {
+                transpileDependencies: ['wave-ui'],
+                css: {
+                  loaderOptions: {
+                    // `additionalData` was called `prependData` prior sass-loader 9.
+                    sass: { additionalData: '@import "@/scss/_variables.scss";' }
+                  }
                 }
               }
-            }
 
-          alert(info).
-            Note from the above code that since you import Wave UI source code, you need to transpile
-            it if you don't use ESM.<br>Vite uses ESM.
+            alert(info).
+              Note from the above code that since you import Wave UI source code, you need to transpile
+              it if you don't use ESM.<br>Vite uses ESM.
 
   .title4.mt8 Voilà !
   p You're all set, you can now override the SCSS variables.

@@ -80,13 +80,13 @@ div
           | .
 
   .mt8.op05
-    w-accordion(:items="1" title-class="ml-1 pl0 py3" expand-icon-rotate-90)
-      template(#item-title.1)
+    w-accordion(title-class="ml-1 pl0 py3" expand-icon-rotate-90)
+      template(#title)
         title-link.ma0(@click.prevent h3 slug="place-a--w-app")
           | 3.
           w-tag.ml2.warning--bg(round) ONLY FOR WAVE UI 2.x
           | , place a #[span.code w-app] at the root of your app
-      template(#item-content.1)
+      template(#content)
         .ml5
           ssh-pre.mt2(
             v-show="$store.state.usePug"

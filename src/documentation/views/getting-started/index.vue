@@ -7,7 +7,6 @@ main
     | Pick 1 of the 3 following installation methods.
 
   w-accordion(
-    :items="4"
     :model-value="openPane"
     expand-single
     :title-class="`justify-space-between py4 pl6 ${$store.state.darkMode ? 'grey-dark5--bg' : 'blue-light5--bg'}`"
@@ -15,28 +14,32 @@ main
     collapse-icon="wi-chevron-up"
     expand-icon-right)
     //- Standard install.
-    template(#item-title.1)
-      title-link.ma0(h2 slug="standard-installation") Standard Installation
-    template(#item-content.1)
-      standard-install
+    w-accordion-item
+      template(#title)
+        title-link.ma0(h2 slug="standard-installation") Standard Installation
+      template(#content)
+        standard-install
 
     //- Using CDN.
-    template(#item-title.2)
-      title-link.ma0(h2 slug="using-a-cdn") Using a CDN
-    template(#item-content.2)
-      cdn-install
+    w-accordion-item
+      template(#title)
+        title-link.ma0(h2 slug="using-a-cdn") Using a CDN
+      template(#content)
+        cdn-install
 
     //- Custom install.
-    template(#item-title.3)
-      title-link.ma0(h2 slug="a-la-carte") À la carte (tree shaking)
-    template(#item-content.3)
-      custom-install
+    w-accordion-item
+      template(#title)
+        title-link.ma0(h2 slug="a-la-carte") À la carte (tree shaking)
+      template(#content)
+        custom-install
 
     //- Nuxt install.
-    template(#item-title.4)
-      title-link.ma0(h2 slug="installation-on-nuxt") Installation on Nuxt
-    template(#item-content.4)
-      nuxt-install
+    w-accordion-item
+      template(#title)
+        title-link.ma0(h2 slug="installation-on-nuxt") Installation on Nuxt
+      template(#content)
+        nuxt-install
 
   w-divider.my12
   title-link(h2) What next?

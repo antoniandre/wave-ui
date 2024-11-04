@@ -216,20 +216,26 @@ main
     w-card.bdrs4.bd0.sh2(bg-color="orange-light5")
       .caption a #[strong.code.mx1 w-card] with #[code.mx1 .bd0], #[code.mx1 .bdrs4] and #[code.mx1 .sh2] classes.
 
-    w-accordion.mt8.bdrs2.bd1(:items="2")
-      template(#item-title="{ index }")
-        .title5.mb0 Accordion with #[code.mx1 .bd1] and #[code.mx1 .bdrs2] classes.
-      template(#item-title.2="{ index }") Item {{ index }}
-      template(#item-content="{ index }") Content {{ index }}
+    w-accordion.mt8.bdrs2.bd1
+      w-accordion-item
+        template(#title)
+          .title5.mb0 Accordion with #[code.mx1 .bd1] and #[code.mx1 .bdrs2] classes.
+        template(#content) Content 1
+      w-accordion-item
+        template(#title) Item 2
+        template(#content) Content 2
     template(#pug).
       w-card.bdrs4.bd0.sh2(bg-color="orange-light5")
         .caption a #[strong.code.mx1 w-card] with #[code.mx1 .bd0], #[code.mx1 .bdrs4] and #[code.mx1 .sh2] classes.
 
-      w-accordion.mt8.bdrs2.bd1(:items="2")
-        template(#item-title="{ index }")
-          .title5 Accordion with #[code.mx1 .bd1] and #[code.mx1 .bdrs2] classes.
-        template(#item-title.2="{ index }") Item {{ '\{\{ index \}\}' }}
-        template(#item-content="{ index }") Content {{ '\{\{ index \}\}' }}
+      w-accordion.mt8.bdrs2.bd1
+        w-accordion-item
+          template(#title)
+            .title5.mb0 Accordion with #[code.mx1 .bd1] and #[code.mx1 .bdrs2] classes.
+          template(#content) Content 1
+        w-accordion-item
+          template(#title) Item 2
+          template(#content) Content 2
     template(#html).
       &lt;w-card bg-color="orange-light5" class="bdrs4 bd0 sh2"&gt;
         &lt;div class="caption"&gt;
@@ -237,19 +243,26 @@ main
         &lt;/div&gt;
       &lt;/w-card&gt;
 
-      &lt;w-accordion :items="2" class="mt8 bdrs2 bd1"&gt;
-        &lt;template #item-title="{ index }"&gt;
-          &lt;div class="title5"&gt;
-            Accordion with `.bd1` and `.bdrs2` classes.
-          &lt;/div&gt;
-        &lt;/template&gt;
+      &lt;w-accordion class="mt8 bdrs2 bd1"&gt;
+        &lt;w-accordion-item&gt;
+          &lt;template #title&gt;
+            &lt;div class="title5"&gt;
+              Accordion with `.bd1` and `.bdrs2` classes.
+            &lt;/div&gt;
+          &lt;/template&gt;
+          &lt;template #content&gt;
+            Content 1
+          &lt;/template&gt;
+        &lt;/w-accordion-item&gt;
 
-        &lt;template #item-title.2="{ index }"&gt;
-          Item {{ '\{\{ index \}\}' }}
-        &lt;/template&gt;
-        &lt;template #item-content="{ index }"&gt;
-          Content {{ '\{\{ index \}\}' }}
-        &lt;/template&gt;
+        &lt;w-accordion-item&gt;
+          &lt;template #title.2&gt;
+            Item 2
+          &lt;/template&gt;
+          &lt;template #content&gt;
+            Content 2
+          &lt;/template&gt;
+        &lt;/w-accordion-item&gt;
       &lt;/w-accordion&gt;
 
   alert(info).
