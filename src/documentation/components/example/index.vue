@@ -55,7 +55,7 @@ import SourceCode from './source-code.vue'
 export default {
   props: {
     // Pass props to the w-app component as a string (way simpler to pass it to Codepen).
-    appClassesString: { type: String, default: 'block' },
+    appClassesString: { type: String, default: 'd-block' },
 
     contentClass: { type: String },
     externalJs: { type: String },
