@@ -71,6 +71,7 @@ main
         p.
           Note that if you want to apply transparency on these variables, like rgba(), you can now use the
           #[code color-mix()] native CSS3 function. E.g. #[code color-mix(in srgb, var(--w-base-color) 80%, transparent) ]
+        p Here's a simple regex to help locating all the occurrences of these color variabless in your codebase: #[code --w-.+?-color-rgb].
 
     li.patch
       strong.version v3.17.4
