@@ -158,6 +158,7 @@ button.w-accordion__expand-icon {color: color-mix(in srgb, var(--w-base-color) 4
     background-color: currentColor;
     opacity: 0;
     transition: $fast-transition-duration;
+    pointer-events: none;
   }
 
   &:focus:before, &:hover:before {opacity: 0.03;}
