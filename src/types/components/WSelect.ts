@@ -39,10 +39,10 @@ export interface WSelectDropdownItem {
   /**
    * The *default* key to access the vlue of the item.
    * This can be overriden using the `item-value-key` property.
-   * @property {string} value
+   * @property {string|number|boolean} value
    * @see https://antoniandre.github.io/wave-ui/w-select#item-value-key-prop
    */
-  value?: string
+  value?: string|number|boolean
 
   /**
    * Whether or not this list item is disabled.
