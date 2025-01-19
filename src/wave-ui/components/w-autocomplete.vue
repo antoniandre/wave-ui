@@ -21,7 +21,21 @@
       @mouseup="setEndOfMenuClick"
       @touchstart="menuIsBeingClicked = true"
       @touchend="setEndOfMenuClick")
+      template(v-if="groups" v-for="(group, g) in groups" :key="g")
+        slot(name="group" :group="group")
+          li.w-autocomplete__group.title5 {{ group[groupLabelKey] }}
+        template(v-for="(item, i) in filteredItems" :key="i")
+          li.w-autocomplete__group-item.ml2(
+            v-if="item.group === group[groupKey]"
+            @click.stop="selectItem(item), $emit('item-click', item)"
+            :class="{ highlighted: highlightedItem === item.uid }")
+            slot(
+              name="item"
+              :item="item"
+              :highlighted="highlightedItem === item.uid")
+              span(v-html="item[itemLabelKey]")
       li(
+        v-else
         v-for="(item, i) in filteredItems"
         :key="i"
         @click.stop="selectItem(item), $emit('item-click', item)"
@@ -47,6 +61,7 @@ export default {
 
   props: {
     items: { type: Array, required: true },
+    groups: { type: Array },
     modelValue: { type: [String, Number, Array] }, // String or Number if single selections, Array if multiple.
     placeholder: { type: String },
     openOnKeydown: { type: Boolean }, // By default the menu is always open for selection.
@@ -61,7 +76,12 @@ export default {
     itemLabelKey: { type: String, default: 'label' },
     // Contains the string to search keywords into for each item.
     // This can for instance be an aggregation of multiple fields (outside of Wave UI).
-    itemSearchableKey: { type: String, default: 'searchable' }
+    itemSearchableKey: { type: String, default: 'searchable' },
+    // Contains the key for the group on each item.
+    // Also is the key within groups for the group label.
+    groupKey: { type: String, default: 'group' },
+    // The label within the groups for the group name.
+    groupLabelKey: { type: String, default: 'label' }
   },
 
   // item-select is also from keyboard, 'item-click' may be useful for mouseenter mouseleave events.
