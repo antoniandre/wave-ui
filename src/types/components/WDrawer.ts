@@ -23,10 +23,10 @@ export interface WaveDrawerProps {
   /**
    * ``value` in Vue 2.`
    * This prop controls the visibility of the drawer. Any truthy value will show the drawer whereas any falsy value will hide it.
-   * @property {any} modelValue - Default: true
+   * @property {boolean} modelValue - Default: true
    * @see https://antoniandre.github.io/wave-ui/w-drawer
    */
-  modelValue?: any
+  modelValue?: boolean
 
   /**
    * Places the drawer at the left of the screen, or at the left of its container when the `absolute` prop is set to true.
@@ -203,7 +203,7 @@ export interface WaveDrawerEmits {
    * TODO: Add Description
    * @see https://antoniandre.github.io/wave-ui/w-drawer
    */
-  'onUpdate:modelValue'?: () => void
+  'onUpdate:modelValue'?: (boolean) => void
 
   /**
    * TODO: Add Description
