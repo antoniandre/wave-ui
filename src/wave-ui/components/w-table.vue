@@ -18,7 +18,7 @@
           th.w-table__header(
             v-for="(header, i) in headers"
             :key="i"
-            @click="!colResizing.dragging && header.sortable !== false && sortTable(header)"
+            @click="!colResizing.dragging && header.sortable !== false && sortTable(header, $event)"
             :class="headerClasses(header)")
             w-icon.w-table__header-sort(
               v-if="header.sortable !== false && header.align === 'right'"
@@ -326,19 +326,24 @@ export default {
     sortedItems () {
       if (!this.activeSorting.length || this.sortFunction || this.fetch) return this.filteredItems
 
-      // Only sort with 1 key for now, may handle more later.
-      const sortKey1 = this.activeSorting[0].replace(/^[+-]/, '')
-      const sortDesc1 = this.activeSorting[0][0] === '-'
-
-      return [...this.filteredItems].sort((a, b) => {
-        a = a[sortKey1]
-        b = b[sortKey1]
+      function compareFn (item0, item1, pos) {
+        if (pos === this.activeSorting.length) {
+          return 0
+        }
+        const sortKey = this.activeSorting[pos].replace(/^[+-]/, '')
+        let a = item0[sortKey]
+        let b = item1[sortKey]
         if (!isNaN(a) && !isNaN(b)) {
           a = parseFloat(a)
           b = parseFloat(b)
         }
-        return (a > b ? 1 : -1) * (sortDesc1 ? -1 : 1)
-      })
+        const dirn = (this.activeSorting[pos][0] === '-') ? -1 : 1
+        return (a > b) ?  dirn
+             : (a < b) ? -dirn
+             : compare(item0, item1, pos + 1)
+      }
+      const compare = compareFn.bind(this)
+      return [...this.filteredItems].sort((a, b) => compare(a, b, 0))
     },
 
     paginatedItems () {
@@ -413,12 +418,27 @@ export default {
       ]
     },
 
-    async sortTable (header) {
+    async sortTable (header, event) {
       const alreadySortingThis = this.activeSortingKeys[header.key]
-      if (alreadySortingThis && this.activeSortingKeys[header.key] === '-') {
-        this.activeSorting = []
+
+      if (event.shiftKey) {
+        if (alreadySortingThis) {
+          const keyIndex = this.activeSorting.indexOf(alreadySortingThis + header.key)
+          if (alreadySortingThis === '-') {
+            this.activeSorting.splice(keyIndex, 1)
+          } else {
+            this.activeSorting[keyIndex] = '-' + header.key
+          }
+        } else {
+          this.activeSorting.push('+' + header.key)
+        }
+      } else {
+        if (alreadySortingThis === '-') {
+          this.activeSorting = []
+        } else {
+          this.activeSorting = [(alreadySortingThis ? '-' : '+') + header.key]
+        }
       }
-      else this.activeSorting[0] = (alreadySortingThis ? '-' : '+') + header.key
 
       this.$emit('update:sort', this.activeSorting)
 
