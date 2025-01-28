@@ -16,12 +16,14 @@ import {
   ResolveProps
 } from '../extra-vue-types'
 
+import { DetachableProps } from '../mixins/detachable'
+
 // ----------------------------------------------------------------------------
 // Props
 // ----------------------------------------------------------------------------
-export interface WaveMenuProps {
+export interface WaveMenuProps extends DetachableProps {
   /**
-   * ``value` in Vue 2.`
+   * `value` in Vue 2.
    * This prop controls the visibility of the menu. Any truthy value will show the menu whereas any falsy value will hide it.
    * @property {any} modelValue
    * @see https://antoniandre.github.io/wave-ui/w-menu

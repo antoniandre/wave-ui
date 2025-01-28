@@ -21,6 +21,7 @@ export default {
     alignRight: { type: Boolean },
     noPosition: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
+    allowFlip: { type: Boolean, default: true },
     // Optionally designate an external activator.
     // The activator can be a DOM string selector, a ref or a DOM node.
     activator: { type: [String, Object] }
@@ -40,7 +41,9 @@ export default {
     // The user may open and close the detachable so fast (like when toggling on hover) that it
     // should not show up at all. Keep the ability to cancel the opening timer (if there is a set
     // delay prop).
-    openTimeout: null
+    openTimeout: null,
+    originalPosition: null,
+    resizeScrollTimeout: null
   }),
 
   computed: {
@@ -129,6 +132,9 @@ export default {
   methods: {
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     async open (e) {
+      // Store original position when opening
+      this.originalPosition = this.position
+
       // A tiny delay may help positioning the detachable correctly in case of multiple activators
       // with different menu contents.
       if (this.delay) await new Promise(resolve => (this.openTimeout = setTimeout(resolve, this.delay)))
@@ -146,7 +152,9 @@ export default {
 
       if (this.minWidth === 'activator') this.activatorWidth = this.activatorEl.offsetWidth
 
-      if (!this.noPosition) this.computeDetachableCoords()
+      if (!this.noPosition) {
+        this.computeDetachableCoords()
+      }
 
       // In `getActivatorCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
       // if we don't postpone the Menu apparition it will start transition from a visible menu and
@@ -246,33 +254,48 @@ export default {
       }
 
       // 3. Keep fully in viewport.
-      // @todo: do this.
       // --------------------------------------------------
-      // if (this.position === 'top' && ((top - this.detachableEl.offsetHeight) < 0)) {
-      //   const margin = - parseInt(computedStyles.getPropertyValue('margin-top'))
-      //   top -= top - this.detachableEl.offsetHeight - margin - marginFromWindowSide
-      // }
-      // else if (this.position === 'left' && left - this.detachableEl.offsetWidth < 0) {
-      //   const margin = - parseInt(computedStyles.getPropertyValue('margin-left'))
-      //   left -= left - this.detachableEl.offsetWidth - margin - marginFromWindowSide
-      // }
-      // else if (this.position === 'right' && left + width + this.detachableEl.offsetWidth > window.innerWidth) {
-      //   const margin = parseInt(computedStyles.getPropertyValue('margin-left'))
-      //   left -= left + width + this.detachableEl.offsetWidth - window.innerWidth + margin + marginFromWindowSide
-      // }
-      // else if (this.position === 'bottom' && top + height + this.detachableEl.offsetHeight > window.innerHeight) {
-      //   const margin = parseInt(computedStyles.getPropertyValue('margin-top'))
-      //   top -= top + height + this.detachableEl.offsetHeight - window.innerHeight + margin + marginFromWindowSide
-      // }
+      if (this.allowFlip) {
+        const menuWidth = this.detachableEl.offsetWidth
+        const menuHeight = this.detachableEl.offsetHeight
+        const viewportWidth = window.innerWidth
+        const viewportHeight = window.innerHeight
 
-      // 4. Hide the menu again so the transition happens correctly.
-      // --------------------------------------------------
+        // Get the activator coordinates
+        const activatorRect = this.activatorEl.getBoundingClientRect()
+
+        // Calculate potential positions based on activator
+        const potentialPositions = {
+          bottom: activatorRect.bottom + menuHeight,
+          top: activatorRect.top - menuHeight,
+          right: activatorRect.right + menuWidth,
+          left: activatorRect.left - menuWidth
+        }
+
+        // Only flip if the menu would be partially outside viewport
+        if (this.originalPosition === 'bottom' && potentialPositions.bottom > viewportHeight) top = top - menuHeight - height
+        else if (this.originalPosition === 'top' && potentialPositions.top < 0) top = top + height
+        else if (this.originalPosition === 'right' && potentialPositions.right > viewportWidth) left = left - menuWidth - width
+        else if (this.originalPosition === 'left' && potentialPositions.left < 0) left = left + width
+      }
+
+      // After all calculations, restore visibility
       this.detachableEl.style.visibility = null
 
       // The menu coordinates are also recalculated while resizing window with open menu: keep the menu visible.
       if (!this.detachableVisible) this.detachableEl.style.display = 'none'
 
       this.detachableCoords = { top, left }
+    },
+
+    handleWindowEvents () {
+      // Clear any existing timeout
+      if (this.resizeScrollTimeout) clearTimeout(this.resizeScrollTimeout)
+
+      // Debounce the recompute
+      this.resizeScrollTimeout = setTimeout(() => {
+        if (this.detachableVisible && this.detachableEl) this.computeDetachableCoords()
+      }, 100)
     },
 
     onResize () {
@@ -334,6 +357,15 @@ export default {
         // as is in an array so we can delete them on destroy.
         this.docEventListenersHandlers.push({ eventName, handler: handlerWrap })
       })
+    },
+
+    close () {
+      if (this.detachableVisible) {
+        this.$emit('update:modelValue', (this.detachableVisible = false))
+        this.$emit('input', false)
+        this.$emit('close')
+        this.removeFromDOM()
+      }
     }
   },
 
@@ -357,6 +389,12 @@ export default {
       this.toggle({ type: this.shouldShowOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
     }
     else if (this.modelValue) this.open({ target: this.activatorEl })
+
+    // Add scroll and resize listeners with passive option
+    if (!this.noPosition) {
+      window.addEventListener('scroll', this.handleWindowEvents, { passive: true, capture: true })
+      window.addEventListener('resize', this.handleWindowEvents, { passive: true })
+    }
   },
 
   unmounted () {
@@ -371,6 +409,12 @@ export default {
         document.removeEventListener(eventName, handler)
       })
     }
+
+    // Remove scroll and resize listeners
+    window.removeEventListener('scroll', this.handleWindowEvents)
+    window.removeEventListener('resize', this.handleWindowEvents)
+
+    if (this.resizeScrollTimeout) clearTimeout(this.resizeScrollTimeout)
   },
 
   watch: {

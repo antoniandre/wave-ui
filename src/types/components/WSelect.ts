@@ -16,13 +16,15 @@ import {
   ResolveProps
 } from '../extra-vue-types'
 
+import { WaveMenuProps } from './WMenu'
+
 // ----------------------------------------------------------------------------
 // Additional Types
 // ----------------------------------------------------------------------------
 export interface WSelectDropdownItem {
   /**
    * The *default* key to access the label of the item.
-   * This can be overriden using the `item-label-key` property.
+   * This can be overridden using the `item-label-key` property.
    * @property {string} label
    * @see https://antoniandre.github.io/wave-ui/w-select#item-label-key-prop
    */
@@ -30,15 +32,15 @@ export interface WSelectDropdownItem {
 
   /**
    * The *default* key to access the color of the item.
-   * This can be overriden using the `item-color-key` property.
+   * This can be overridden using the `item-color-key` property.
    * @property {string} color
    * @see https://antoniandre.github.io/wave-ui/w-select#item-color-key-prop
    */
   color?: string
 
   /**
-   * The *default* key to access the vlue of the item.
-   * This can be overriden using the `item-value-key` property.
+   * The *default* key to access the value of the item.
+   * This can be overridden using the `item-value-key` property.
    * @property {string} value
    * @see https://antoniandre.github.io/wave-ui/w-select#item-value-key-prop
    */
@@ -71,7 +73,7 @@ export interface WaveSelectProps {
   items: Array<WSelectDropdownItem>
 
   /**
-   * ``value` in Vue 2.`
+   * `value` in Vue 2.
    * The current selection of the select field.
    * Gets updated on selection change.
    * @property {any} modelValue
@@ -240,10 +242,10 @@ export interface WaveSelectProps {
 
   /**
    * TODO: Add Description
-   * @property {{}} menuProps
+   * @property {WaveMenuProps} menuProps
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
-  menuProps?: {}
+  menuProps?: WaveMenuProps
 
   /**
    * TODO: Add Description
@@ -481,7 +483,7 @@ export type WaveSelectSlots = SlotsType<{
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
   'item': (_: { item: WSelectDropdownItem, selected: boolean, index: number }) => any
-  
+
   /**
    * The left icon, if the `innerIconLeft` prop is not flexible enough.
    * @see https://antoniandre.github.io/wave-ui/w-input
