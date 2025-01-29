@@ -21,7 +21,9 @@ export default {
     alignRight: { type: Boolean },
     noPosition: { type: Boolean },
     zIndex: { type: [Number, String, Boolean] },
-    allowFlip: { type: Boolean, default: true },
+    useFlipMiddleware: { type: Boolean, default: true },
+    useShiftMiddleware: { type: Boolean, default: true },
+    viewportPadding: { type: Number, default: 0 },
     // Optionally designate an external activator.
     // The activator can be a DOM string selector, a ref or a DOM node.
     activator: { type: [String, Object] }
@@ -171,121 +173,305 @@ export default {
 
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     getActivatorCoordinates () {
-      // Get the activator coordinates relative to window.
-      const { top, left, width, height } = this.activatorEl.getBoundingClientRect()
-      let coords = { top, left, width, height }
+      if (!this.activatorEl) return { top: 0, left: 0, width: 0, height: 0 }
+      
+      const rect = this.activatorEl.getBoundingClientRect()
+      
+      // If we're appending to a different element, calculate relative position
+      if (this.appendTo) {
+        const appendToEl = typeof this.appendTo === 'string' 
+          ? document.querySelector(this.appendTo)
+          : this.appendTo
 
-      // If absolute position, adjust top & left.
-      if (!this.fixed) {
-        const { top: targetTop, left: targetLeft } = this.detachableParentEl.getBoundingClientRect()
-        const computedStyles = window.getComputedStyle(this.detachableParentEl, null)
-        coords = {
-          ...coords,
-          top: top - targetTop + this.detachableParentEl.scrollTop - parseInt(computedStyles.getPropertyValue('border-top-width')),
-          left: left - targetLeft + this.detachableParentEl.scrollLeft - parseInt(computedStyles.getPropertyValue('border-left-width'))
+        if (appendToEl) {
+          const appendToRect = appendToEl.getBoundingClientRect()
+          return {
+            top: rect.top - appendToRect.top,
+            left: rect.left - appendToRect.left,
+            width: rect.width,
+            height: rect.height,
+            isAppendTo: true
+          }
         }
       }
 
-      return coords
+      // For tooltips and other absolute/fixed positioned elements
+      const useDocumentCoords = this.fixed || 
+        ['absolute', 'fixed'].includes(getComputedStyle(this.detachableEl).position)
+
+      if (useDocumentCoords) {
+        const scrollX = window.pageXOffset || document.documentElement.scrollLeft
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop
+        return {
+          top: rect.top + scrollY,
+          left: rect.left + scrollX,
+          width: rect.width,
+          height: rect.height,
+          isDocument: true
+        }
+      }
+      
+      // For elements in normal flow
+      return {
+        top: this.activatorEl.offsetTop,
+        left: this.activatorEl.offsetLeft,
+        width: this.activatorEl.offsetWidth,
+        height: this.activatorEl.offsetHeight,
+        isDocument: false
+      }
     },
 
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
-    computeDetachableCoords () {
-      // Get the activator coordinates.
-      let { top, left, width, height } = this.getActivatorCoordinates()
+    computeDetachableCoords() {
+      const activatorCoords = this.getActivatorCoordinates()
+      let { top, left, width, height, isDocument, isAppendTo } = activatorCoords
+      
+      console.log('Grid element check:', {
+        activatorCoords,
+        isDocument,
+        isAppendTo,
+        position: this.position,
+        alignment: {
+          top: this.alignTop,
+          bottom: this.alignBottom,
+          left: this.alignLeft,
+          right: this.alignRight
+        },
+        fixed: this.fixed,
+        useShiftMiddleware: this.useShiftMiddleware,
+        detachableEl: this.detachableEl?.getBoundingClientRect()
+      })
 
-      // Prevent error in case the detachable component unmounted hook is fired but the activator
-      // is still in the DOM until the end of a transition and the user toggles it.
-      // Unmounted is called straight away from beforeLeave: https://github.com/vuejs/core/issues/994
       if (!this.detachableEl) return
 
-      // 1. First display the menu but hide it (So we can get its dimension).
-      // --------------------------------------------------
       this.detachableEl.style.visibility = 'hidden'
       this.detachableEl.style.display = 'flex'
-      const computedStyles = window.getComputedStyle(this.detachableEl, null)
 
-      // 2. Position the menu top, left, right, bottom and apply chosen alignment.
-      // --------------------------------------------------
-      // Subtract half or full activator width or height and menu width or height according to the
-      // menu alignment.
-      // Note: the menu position relies on transform translate, the custom animation may override the
-      // css transform property so do without it i.e. no translateX(-50%), and recalculate top & left
-      // manually.
-      switch (this.position) {
-        case 'top': {
-          top -= this.detachableEl.offsetHeight
-          if (this.alignRight) {
-            // left: 100% of activator.
-            left += width - this.detachableEl.offsetWidth +
-                    parseInt(computedStyles.getPropertyValue('border-right-width'))
-          }
-          else if (!this.alignLeft) left += (width - this.detachableEl.offsetWidth) / 2 // left: 50% of activator - half menu width.
-          break
+      const menuWidth = this.detachableEl.offsetWidth
+      const menuHeight = this.detachableEl.offsetHeight
+      let currentPosition = this.position || 'bottom'
+
+      console.log('Menu dimensions:', { menuWidth, menuHeight })
+
+      const positionMenu = (position) => {
+        const originalTop = top
+        const originalLeft = left
+
+        console.log('Before positioning:', {
+          position,
+          top: originalTop,
+          left: originalLeft,
+          width,
+          height
+        })
+
+        switch (position) {
+          case 'top':
+            top = originalTop - menuHeight
+            if (this.alignLeft) left = originalLeft
+            else if (this.alignRight) left = originalLeft + width - menuWidth
+            else left = originalLeft + (width - menuWidth) / 2
+            break
+          case 'bottom':
+            top = originalTop + height
+            if (this.alignLeft) left = originalLeft
+            else if (this.alignRight) left = originalLeft + width - menuWidth
+            else left = originalLeft + (width - menuWidth) / 2
+            break
+          case 'left':
+            left = originalLeft - menuWidth
+            if (this.alignTop) top = originalTop
+            else if (this.alignBottom) top = originalTop + height - menuHeight
+            else top = originalTop + (height - menuHeight) / 2
+            break
+          case 'right':
+            left = originalLeft + width
+            if (this.alignTop) top = originalTop
+            else if (this.alignBottom) top = originalTop + height - menuHeight
+            else top = originalTop + (height - menuHeight) / 2
+            break
         }
-        case 'bottom': {
-          top += height
-          if (this.alignRight) {
-            // left: 100% of activator.
-            left += width - this.detachableEl.offsetWidth +
-                    parseInt(computedStyles.getPropertyValue('border-right-width'))
+
+        // Ensure menu stays within viewport for left/right positions with align-top
+        if (['left', 'right'].includes(position) && this.alignTop) {
+          const viewportRect = this.detachableEl.getBoundingClientRect()
+          const viewportHeight = window.innerHeight
+          const padding = this.viewportPadding || 5
+
+          if (viewportRect.bottom > viewportHeight - padding) {
+            top = originalTop - (viewportRect.bottom - (viewportHeight - padding))
           }
-          else if (!this.alignLeft) left += (width - this.detachableEl.offsetWidth) / 2 // left: 50% of activator - half menu width.
-          break
         }
-        case 'left': {
-          left -= this.detachableEl.offsetWidth
-          if (this.alignBottom) top += height - this.detachableEl.offsetHeight
-          else if (!this.alignTop) top += (height - this.detachableEl.offsetHeight) / 2 // top: 50% of activator - half menu height.
-          break
-        }
-        case 'right': {
-          left += width
-          if (this.alignBottom) {
-            top += height - this.detachableEl.offsetHeight +
-                   parseInt(computedStyles.getPropertyValue('margin-top'))
-          }
-          else if (!this.alignTop) {
-            top += (height - this.detachableEl.offsetHeight) / 2 + // top: 50% of activator - half menu height.
-                   parseInt(computedStyles.getPropertyValue('margin-top'))
-          }
-          break
-        }
+
+        console.log('After positioning:', { position, top, left })
       }
 
-      // 3. Keep fully in viewport.
-      // --------------------------------------------------
-      if (this.allowFlip) {
-        const menuWidth = this.detachableEl.offsetWidth
-        const menuHeight = this.detachableEl.offsetHeight
-        const viewportWidth = window.innerWidth
+      positionMenu(currentPosition)
+
+      // Add flip check before shift
+      if (this.useFlipMiddleware) {
+        const menuRect = this.detachableEl.getBoundingClientRect()
         const viewportHeight = window.innerHeight
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop
+        const padding = this.viewportPadding || 5
 
-        // Get the activator coordinates
-        const activatorRect = this.activatorEl.getBoundingClientRect()
+        console.log('Flip check:', {
+          menuRect,
+          viewportHeight,
+          scrollY,
+          position: this.position
+        })
 
-        // Calculate potential positions based on activator
-        const potentialPositions = {
-          bottom: activatorRect.bottom + menuHeight,
-          top: activatorRect.top - menuHeight,
-          right: activatorRect.right + menuWidth,
-          left: activatorRect.left - menuWidth
+        // If menu is above viewport and position is 'top', flip to bottom
+        if (menuRect.top < padding && this.position === 'top') {
+          console.log('Flipping from top to bottom')
+          // Position at bottom of activator
+          top = activatorCoords.top + height
+          // Recenter horizontally
+          left = activatorCoords.left + (width - this.detachableEl.offsetWidth) / 2
         }
-
-        // Only flip if the menu would be partially outside viewport
-        if (this.originalPosition === 'bottom' && potentialPositions.bottom > viewportHeight) top = top - menuHeight - height
-        else if (this.originalPosition === 'top' && potentialPositions.top < 0) top = top + height
-        else if (this.originalPosition === 'right' && potentialPositions.right > viewportWidth) left = left - menuWidth - width
-        else if (this.originalPosition === 'left' && potentialPositions.left < 0) left = left + width
+        // If menu is below viewport and position is 'bottom', flip to top
+        else if (menuRect.bottom > viewportHeight - padding && this.position === 'bottom') {
+          console.log('Flipping from bottom to top')
+          // Position at top of activator
+          top = activatorCoords.top - this.detachableEl.offsetHeight
+          // Recenter horizontally
+          left = activatorCoords.left + (width - this.detachableEl.offsetWidth) / 2
+        }
       }
 
-      // After all calculations, restore visibility
-      this.detachableEl.style.visibility = null
+      // Then apply shift middleware if needed
+      if (this.useShiftMiddleware) {
+        console.log('Shift middleware params:', {
+          position: this.position,
+          fixed: this.fixed,
+          isDocument,
+          isAppendTo,
+          viewportDimensions: {
+            width: window.innerWidth,
+            height: window.innerHeight
+          },
+          elementDimensions: this.detachableEl?.getBoundingClientRect()
+        })
+        const result = this.shiftMiddleware(top, left, height, width)
+        console.log('Shift middleware result:', result)
+        top = result.top
+        left = result.left
+      }
 
-      // The menu coordinates are also recalculated while resizing window with open menu: keep the menu visible.
-      if (!this.detachableVisible) this.detachableEl.style.display = 'none'
+      console.log('Final coordinates:', { top, left })
 
       this.detachableCoords = { top, left }
+
+      this.detachableEl.style.visibility = null
+      if (!this.detachableVisible) this.detachableEl.style.display = 'none'
+    },
+
+    getMiddlewareDependencies() {
+      // Get viewport-relative coordinates
+      const activatorRect = this.activatorEl.getBoundingClientRect()
+      
+      console.log('Middleware dependencies:', {
+        activatorViewport: activatorRect,
+        activatorOffset: {
+          top: this.activatorEl.offsetTop,
+          left: this.activatorEl.offsetLeft
+        },
+        scroll: {
+          x: window.pageXOffset || document.documentElement.scrollLeft,
+          y: window.pageYOffset || document.documentElement.scrollTop
+        }
+      })
+
+      return {
+        activatorRect, // Keep viewport-relative coordinates
+        menuWidth: this.detachableEl.offsetWidth,
+        menuHeight: this.detachableEl.offsetHeight,
+        viewportWidth: window.innerWidth - (this.viewportPadding * 2),
+        viewportHeight: window.innerHeight - (this.viewportPadding * 2),
+      }
+    },
+
+    flipMiddleware(top, left, height, width) {
+      const { activatorRect, menuWidth, menuHeight, viewportWidth, viewportHeight } = this.getMiddlewareDependencies()
+
+      console.log('Flip middleware:', {
+        position: this.originalPosition,
+        proposed: { top, left },
+        activator: activatorRect,
+        menu: { width: menuWidth, height: menuHeight },
+        viewport: { width: viewportWidth, height: viewportHeight }
+      })
+
+      // All coordinates are viewport-relative at this point
+      if (this.originalPosition === 'top' && top < this.viewportPadding) {
+        // Flip to bottom - align menu's top with activator's bottom
+        return {
+          top: activatorRect.bottom,
+          left: this.alignLeft ? activatorRect.left :
+                this.alignRight ? (activatorRect.right - menuWidth) :
+                (activatorRect.left + (activatorRect.width - menuWidth) / 2)
+        }
+      }
+
+      // Keep original position
+      return { top, left }
+    },
+
+    shiftMiddleware(top, left, height, width) {
+      const viewportHeight = window.innerHeight
+      const padding = this.viewportPadding || 5
+      const menuHeight = this.detachableEl.offsetHeight
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop
+      
+      // Get activator position
+      const activatorRect = this.activatorEl.getBoundingClientRect()
+      
+      // Calculate menu position relative to activator
+      const menuPosition = {
+        top: activatorRect.top, // Viewport-relative
+        height: menuHeight
+      }
+
+      console.log('Shift calculation:', {
+        activator: {
+          rect: activatorRect,
+          viewportTop: activatorRect.top,
+          viewportBottom: activatorRect.bottom
+        },
+        menu: {
+          height: menuHeight,
+          proposedTop: menuPosition.top,
+          proposedBottom: menuPosition.top + menuHeight
+        },
+        viewport: {
+          height: viewportHeight,
+          padding
+        },
+        scroll: scrollY
+      })
+
+      let newTop = top
+
+      // Check if menu extends beyond viewport
+      if (menuPosition.top + menuHeight > viewportHeight - padding) {
+        const overflow = (menuPosition.top + menuHeight) - (viewportHeight - padding)
+        newTop = top - overflow
+
+        console.log('Shifting up:', {
+          overflow,
+          before: {
+            viewportTop: menuPosition.top,
+            viewportBottom: menuPosition.top + menuHeight
+          },
+          after: {
+            viewportTop: menuPosition.top - overflow,
+            viewportBottom: menuPosition.top + menuHeight - overflow
+          }
+        })
+      }
+
+      return { top: newTop, left }
     },
 
     handleWindowEvents () {
