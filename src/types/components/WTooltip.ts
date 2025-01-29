@@ -16,10 +16,12 @@ import {
   ResolveProps
 } from '../extra-vue-types'
 
+import { DetachableProps } from '../mixins/detachable'
+
 // ----------------------------------------------------------------------------
 // Props
 // ----------------------------------------------------------------------------
-export interface WaveTooltipProps {
+export interface WaveTooltipProps extends DetachableProps {
   /**
    * ``value` in Vue 2.`
    * This prop controls the visibility of the tooltip. Any truthy value will show the tooltip whereas any falsy value will hide it.

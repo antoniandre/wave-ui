@@ -15,6 +15,7 @@ import {
   PublicProps,
   ResolveProps
 } from '../extra-vue-types'
+import { WaveMenuProps } from './WMenu'
 
 // ----------------------------------------------------------------------------
 // Props
@@ -98,10 +99,10 @@ export interface WaveConfirmProps {
 
   /**
    * For more customization, this prop accepts an object of props to pass down to the menu (all the options that the `w-menu` component can handle).
-   * @property {{}} menu - Default: () => ({})
+   * @property {WaveMenuProps} menu - Default: () => ({})
    * @see https://antoniandre.github.io/wave-ui/w-confirm
    */
-  menu?: {}
+  menu?: WaveMenuProps
 
   /**
    * Accept either `false` for no tooltip (by default), a `String` to display as a tooltip on the main button, or an `Object` in order to define `w-tooltip` props to further customize the tooltip (all the options that the `w-tooltip` component can handle).
