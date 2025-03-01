@@ -117,6 +117,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-accordion__item {position: relative;}
 
 button.w-accordion__expand-icon {color: color-mix(in srgb, var(--w-base-color) 40%, transparent);}
@@ -135,7 +137,7 @@ button.w-accordion__expand-icon {color: color-mix(in srgb, var(--w-base-color) 4
   position: relative;
   display: flex;
   align-items: center;
-  font-size: round(1.2 * $base-font-size);
+  font-size: math.round(1.2 * $base-font-size);
   padding: 1 * $base-increment;
   user-select: none;
   cursor: pointer;

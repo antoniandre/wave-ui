@@ -424,6 +424,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-select {
   position: relative;
   display: flex;
@@ -620,7 +622,7 @@ export default {
       margin-left: 0;
     }
     .w-select__selection-wrap--round & {
-      margin-left: round(3 * $base-increment);
+      margin-left: math.round(3 * $base-increment);
     }
     .w-select--inner-icon-left & {left: 18px;}
     .w-select--no-padding.w-select--inner-icon-left & {left: 26px;}

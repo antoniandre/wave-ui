@@ -375,6 +375,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 $inactive-color: #777;
 
 .w-input {
@@ -602,8 +604,8 @@ $inactive-color: #777;
       padding-right: 0;
     }
     .w-input__input-wrap--round & {
-      padding-left: round(3 * $base-increment);
-      padding-right: round(3 * $base-increment);
+      padding-left: math.round(3 * $base-increment);
+      padding-right: math.round(3 * $base-increment);
     }
     .w-input--inner-icon-left & {left: 18px;}
     .w-input--no-padding.w-input--inner-icon-left & {left: 26px;}

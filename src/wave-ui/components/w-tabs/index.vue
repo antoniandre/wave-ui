@@ -348,6 +348,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-tabs {
   z-index: 1;
   border-radius: $border-radius;
@@ -386,7 +388,7 @@ export default {
     align-items: center;
     padding: (2 * $base-increment) (3 * $base-increment);
     justify-content: center;
-    font-size: round(1.2 * $base-font-size);
+    font-size: math.round(1.2 * $base-font-size);
     transition: $transition-duration ease-in-out, flex-grow 0s, flex 0s; // `flex` for Safari.
     user-select: none;
     cursor: pointer;

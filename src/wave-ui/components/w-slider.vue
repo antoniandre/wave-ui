@@ -262,6 +262,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-slider {
   position: relative;
   display: flex;
@@ -430,9 +432,9 @@ export default {
     position: absolute;
     left: 50%;
     bottom: 100%;
-    margin-bottom: round(3 * $base-increment);
+    margin-bottom: math.round(3 * $base-increment);
     transform: translateX(-50%);
-    padding: round(0.75 * $base-increment) (2 * $base-increment);
+    padding: math.round(0.75 * $base-increment) (2 * $base-increment);
     background-color: $slider-thumb-label-bg-color;
     border-radius: $border-radius;
     border: $border;

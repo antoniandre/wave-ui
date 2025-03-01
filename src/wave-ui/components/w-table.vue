@@ -722,6 +722,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 $tr-border-top: 1px;
 
 .w-table {
@@ -882,7 +884,7 @@ $tr-border-top: 1px;
     pointer-events: none;
   }
 
-  &__cell {padding: round(divide($base-increment, 2)) $base-increment;}
+  &__cell {padding: math.round(divide($base-increment, 2)) $base-increment;}
   &__header:first-child, &__cell:first-child {padding-left: 2 * $base-increment;}
   &__header:last-child, &__cell:last-child {padding-right: 2 * $base-increment;}
 

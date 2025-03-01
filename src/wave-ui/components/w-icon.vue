@@ -98,6 +98,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-icon {
   position: relative;
   display: inline-flex;
@@ -113,18 +115,18 @@ export default {
   // The aspect ratio will not work if the content overflows (needs overflow hidden, but we don't want that in the library).
   height: 1em;
 
-  &.size--xs {font-size: round(0.85 * $base-font-size);}
-  &.size--sm {font-size: round(1.15 * $base-font-size);}
-  &.size--md {font-size: round(1.4 * $base-font-size);}
-  &.size--lg {font-size: round(1.7 * $base-font-size);}
+  &.size--xs {font-size: math.round(0.85 * $base-font-size);}
+  &.size--sm {font-size: math.round(1.15 * $base-font-size);}
+  &.size--md {font-size: math.round(1.4 * $base-font-size);}
+  &.size--lg {font-size: math.round(1.7 * $base-font-size);}
   &.size--xl {font-size: 2 * $base-font-size;}
 
   // Always an even number to align well vertically in a button.
-  .w-button.size--xs & {font-size: round(0.95 * divide($base-font-size, 2)) * 2;}
+  .w-button.size--xs & {font-size: math.round(0.95 * divide($base-font-size, 2)) * 2;}
   .w-alert.size--xs & {font-size: $base-font-size;}
-  .w-button.size--sm &, .w-alert.size--sm & {font-size: round(1.15 * $base-font-size);}
-  // .w-button.size--md &, .w-alert.size--md & {font-size: round(1.4 * $base-font-size);}
-  .w-button.size--lg &, .w-alert.size--lg & {font-size: round(1.7 * $base-font-size);}
+  .w-button.size--sm &, .w-alert.size--sm & {font-size: math.round(1.15 * $base-font-size);}
+  // .w-button.size--md &, .w-alert.size--md & {font-size: math.round(1.4 * $base-font-size);}
+  .w-button.size--lg &, .w-alert.size--lg & {font-size: math.round(1.7 * $base-font-size);}
   .w-button.size--xl &, .w-alert.size--xl & {font-size: 2 * $base-font-size;}
 
   &:before {transition: transform $transition-duration;}

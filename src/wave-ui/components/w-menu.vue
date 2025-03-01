@@ -282,6 +282,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-menu-wrap {display: none;}
 
 .w-menu {
@@ -296,7 +298,7 @@ export default {
   &--tile {border-radius: 0;}
   &--round {
     border-radius: 99em;
-    padding: $base-increment round(2.5 * $base-increment);
+    padding: $base-increment math.round(2.5 * $base-increment);
   }
   &--shadow {box-shadow: $box-shadow;}
 
