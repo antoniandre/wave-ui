@@ -45,7 +45,7 @@ div
 
       const app = Vue.createApp({
         data: () => ({
-          chemicalElement: faker.definitions.science.chemicalElement.map(element => {
+          chemicalElement: faker.definitions.science.chemical_element.map(element => {
             return {
               value: element.symbol,
               label: element.name,
@@ -74,7 +74,7 @@ div
 
       const app = Vue.createApp({
         data: () => ({
-          chemicalElement: faker.definitions.science.chemicalElement.map(element => {
+          chemicalElement: faker.definitions.science.chemical_element.map(element => {
             return {
               value: element.symbol,
               label: element.name,
@@ -93,7 +93,7 @@ import { faker } from '@faker-js/faker'
 
 export default {
   data: () => ({
-    chemicalElement: faker.definitions.science.chemicalElement.map(element => {
+    chemicalElement: faker.definitions.science.chemical_element.map(element => {
       return {
         value: element.symbol,
         label: element.name,
