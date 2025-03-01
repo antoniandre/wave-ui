@@ -42,6 +42,14 @@ main
     //-   multiple: { type: Boolean }, multiple selection
     //-   unselectableBranches: { type: Boolean },
 
+    li.patch
+      strong.version v3.18.1
+      ul
+        li
+          strong w-accordion
+          ul
+            li Allow clicking through the title :before.
+
     li.minor
       strong.version v3.18.0
       w-alert.mt2.error.pl4(border-left no-icon)
