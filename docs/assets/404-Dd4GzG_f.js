@@ -1,1 +1,0 @@
-import{g as t,a as n,w as a,d as r,r as s,o as l,b as d,_ as i}from"./index-CSsuy43z.js";function c(u,e){const o=s("title-link");return l(),t("main",null,[n(o,{class:"mt4",h1:""},{default:a(()=>e[0]||(e[0]=[d("404 - Not found")])),_:1}),e[1]||(e[1]=r("p",null,"The page you are looking for was not found on the server.",-1))])}const f={},p=i(f,[["render",c]]);export{p as default};

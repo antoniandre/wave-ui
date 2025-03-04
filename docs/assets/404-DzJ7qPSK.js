@@ -1,0 +1,1 @@
+import{r as t,g as n,o as a,a as r,b as s,w as l,e as i,_ as c}from"./index-eD21R81v.js";function d(u,e){const o=t("title-link");return a(),n("main",null,[r(o,{class:"mt4",h1:""},{default:l(()=>e[0]||(e[0]=[i("404 - Not found")])),_:1}),e[1]||(e[1]=s("p",null,"The page you are looking for was not found on the server.",-1))])}const f={},p=c(f,[["render",d]]);export{p as default};

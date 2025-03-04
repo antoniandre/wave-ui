@@ -46,7 +46,7 @@
     "dev": "vite",
     "build": "vite build --base /wave-ui/",
     "build-types": "tsc -p ./tsconfig.json",
-    "build-bundle": "BUNDLE=true vite build && npm run build-types && mv ./dist/style.css ./dist/wave-ui.css",
+    "build-bundle": "BUNDLE=true vite build && npm run build-types",
     "preview": "vite preview --base /wave-ui/",
     "lint": "vite lint",
     "publish-doc": "npm run build && npm run build-bundle && git add . && git commit -m 'Publish documentation on Github.' && git push && git push --tag"
