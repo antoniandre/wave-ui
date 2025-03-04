@@ -49,6 +49,10 @@ main
           strong w-accordion
           ul
             li Allow clicking through the title :before.
+        li
+          strong SCSS
+          ul
+            li Fix deprecation warning on the #[code round] function.
 
     li.minor
       strong.version v3.18.0
