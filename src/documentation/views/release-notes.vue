@@ -42,6 +42,14 @@ main
     //-   multiple: { type: Boolean }, multiple selection
     //-   unselectableBranches: { type: Boolean },
 
+    li.minor
+      strong.version v3.19.0
+      ul
+        li
+          strong w-notification-manager
+          ul
+            li Removed the WNotificationManager from Vue dev tools and now only use a single Vue App instance.
+
     li.patch
       strong.version v3.18.1
       ul
