@@ -131,7 +131,7 @@ export default class WaveUI {
           else $waveui.switchTheme(config.theme, true)
 
           injectCSSInDOM($waveui)
-          injectNotifManagerInDOM(wApp, components, $waveui)
+          injectNotifManagerInDOM(app)
 
           // This mixin must only run once, we can delete it.
           app._context.mixins.find(mixin => mixin.mounted && delete mixin.mounted)
