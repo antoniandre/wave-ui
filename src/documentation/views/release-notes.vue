@@ -42,6 +42,13 @@ main
     //-   multiple: { type: Boolean }, multiple selection
     //-   unselectableBranches: { type: Boolean },
 
+    li.patch
+      strong.version v3.19.1
+      ul
+        li
+          strong TypeScript
+          li Updated the TypeScript definitions for #[]code w-drawer] &amp; #[code w-select].
+
     li.minor
       strong.version v3.19.0
       ul
