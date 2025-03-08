@@ -203,7 +203,7 @@ export interface WaveDrawerEmits {
    * TODO: Add Description
    * @see https://antoniandre.github.io/wave-ui/w-drawer
    */
-  'onUpdate:modelValue'?: (boolean) => void
+  'onUpdate:modelValue'?: (modelValue: boolean) => void
 
   /**
    * TODO: Add Description
