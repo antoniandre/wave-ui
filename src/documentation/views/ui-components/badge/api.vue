@@ -58,7 +58,10 @@ export default {
       return WBadge.props
     },
     events () {
-      return WBadge.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WBadge.emits.reduce((obj, label) => {
+        obj[label] = { description: eventsDescs[label] || '' }
+        return obj
+      }, {})
     }
   }
 }

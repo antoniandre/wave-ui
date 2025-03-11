@@ -37,7 +37,10 @@ export default {
       return WDivider.props
     },
     events () {
-      return WDivider.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
+      return WDivider.emits.reduce((obj, label) => {
+        obj[label] = events[label] || {}
+        return obj
+      }, {})
     }
   }
 }

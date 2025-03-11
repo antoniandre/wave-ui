@@ -57,7 +57,10 @@ export default {
       return WDialog.props
     },
     events () {
-      return WDialog.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WDialog.emits.reduce((obj, label) => {
+        obj[label] = { description: eventsDescs[label] || '' }
+        return obj
+      }, {})
     }
   }
 }

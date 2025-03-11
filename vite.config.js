@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite'
+import { resolve } from 'node:path'
 import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
-import Delete from 'rollup-plugin-delete'
 import autoprefixer from 'autoprefixer'
+import Delete from 'rollup-plugin-delete'
+import { defineConfig } from 'vite'
 import svgLoader from 'vite-svg-loader'
 
 const bundlingConf = {
@@ -15,7 +15,10 @@ const bundlingConf = {
     plugins: [
       // Rollup generates all the files, then remove what we don't want.
       // @todo: find a better way.
-      Delete({ targets: ['dist/{images,.htaccess,ghspa.js}', 'dist/*.{ico,txt,html}'], hook: 'generateBundle' })
+      Delete({
+        targets: ['dist/{images,.htaccess,ghspa.js}', 'dist/*.{ico,txt,html}'],
+        hook: 'generateBundle'
+      })
     ],
     // Make sure to externalize deps that shouldn't be bundled into library.
     external: ['vue'],

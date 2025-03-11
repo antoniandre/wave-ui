@@ -9,26 +9,26 @@ export default createStore({
   }),
 
   mutations: {
-    setDarkMode (state, bool) {
+    setDarkMode(state, bool) {
       state.darkMode = bool
       localStorage.darkMode = bool
     },
-    setCurrentPage (state, pageTitle) {
+    setCurrentPage(state, pageTitle) {
       state.currentPage = pageTitle
     },
-    initUsePug (state) {
-      state.usePug = !!parseInt(localStorage.getItem('usePug'))
+    initUsePug(state) {
+      state.usePug = !!Number.parseInt(localStorage.getItem('usePug'))
     },
-    setUsePug (state, usePug) {
+    setUsePug(state, usePug) {
       if (state.usePug !== usePug) {
         state.usePug = usePug
         localStorage.setItem('usePug', +usePug)
       }
     },
-    initTabsView (state) {
-      state.tabsView = !!parseInt(localStorage.getItem('tabsView'))
+    initTabsView(state) {
+      state.tabsView = !!Number.parseInt(localStorage.getItem('tabsView'))
     },
-    setTabsView (state, tabsView) {
+    setTabsView(state, tabsView) {
       if (state.tabsView !== tabsView) {
         state.tabsView = tabsView
         localStorage.setItem('tabsView', +tabsView)
@@ -37,7 +37,7 @@ export default createStore({
   },
 
   actions: {
-    detectDarkMode ({ commit }) {
+    detectDarkMode({ commit }) {
       // Detect the dark mode preference.
       const darkMode = window?.matchMedia?.('(prefers-color-scheme: dark)')?.matches
 

@@ -55,7 +55,10 @@ export default {
       return WIcon.props
     },
     events () {
-      return WIcon.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WIcon.emits.reduce((obj, label) => {
+        obj[label] = { description: eventsDescs[label] || '' }
+        return obj
+      }, {})
     }
   }
 }

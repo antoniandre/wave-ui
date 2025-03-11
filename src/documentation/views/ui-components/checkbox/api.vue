@@ -145,10 +145,16 @@ export default {
       return { ...WCheckbox.props, ...FormElementMixin.props }
     },
     checkboxesEvents () {
-      return WCheckboxes.emits.reduce((obj, label) => (obj[label] = checkboxes.events[label] || {}) && obj, {})
+      return WCheckboxes.emits.reduce((obj, label) => {
+        obj[label] = checkboxes.events[label] || {}
+        return obj
+      }, {})
     },
     checkboxEvents () {
-      return WCheckbox.emits.reduce((obj, label) => (obj[label] = checkbox.events[label] || {}) && obj, {})
+      return WCheckbox.emits.reduce((obj, label) => {
+        obj[label] = checkbox.events[label] || {}
+        return obj
+      }, {})
     }
   }
 }

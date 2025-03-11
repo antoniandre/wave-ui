@@ -65,7 +65,10 @@ export default {
       return WTag.props
     },
     events () {
-      return WTag.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
+      return WTag.emits.reduce((obj, label) => {
+        obj[label] = events[label] || {}
+        return obj
+      }, {})
     }
   }
 }
