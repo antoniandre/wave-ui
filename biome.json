@@ -25,6 +25,9 @@
       },
       "complexity": {
         "noForEach": "off"
+      },
+      "performance": {
+        "noDelete": "off"
       }
     }
   },
