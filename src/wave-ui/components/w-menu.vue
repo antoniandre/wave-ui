@@ -122,12 +122,12 @@ export default {
 
     menuMinWidth () {
       if (this.minWidth === 'activator') return this.activatorWidth ? `${this.activatorWidth}px` : 0
-      else return isNaN(this.minWidth) ? this.minWidth : (this.minWidth ? `${this.minWidth}px` : 0)
+      return isNaN(this.minWidth) ? this.minWidth : (this.minWidth ? `${this.minWidth}px` : 0)
     },
 
     menuMaxWidth () {
       if (this.maxWidth === 'activator') return this.activatorWidth ? `${this.activatorWidth}px` : 0
-      else return isNaN(this.maxWidth) ? this.maxWidth : (this.maxWidth ? `${this.maxWidth}px` : 0)
+      return isNaN(this.maxWidth) ? this.maxWidth : (this.maxWidth ? `${this.maxWidth}px` : 0)
     },
 
     menuClasses () {
@@ -190,7 +190,7 @@ export default {
             this.hoveringActivator = true
             this.open(e)
           },
-          mouseleave: e => {
+          mouseleave: () => {
             this.hoveringActivator = false
             // Wait 10ms, the time to get the hoveringMenu updated on mouseenter on the menu.
             setTimeout(() => {

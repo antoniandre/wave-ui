@@ -295,7 +295,7 @@ export default {
     },
 
     focusTreeItem (liNode) {
-      liNode && liNode.querySelector('.w-tree__item-label').focus()
+      liNode?.querySelector('.w-tree__item-label').focus()
     },
 
     itemIcon (item) {

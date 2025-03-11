@@ -148,7 +148,7 @@ export default {
       this.scrollable.hovered = false
     },
 
-    onResize (e) {
+    onResize () {
     },
 
     onMouseWheel (e) {
@@ -156,7 +156,7 @@ export default {
 
       // When scrolling beyond limits, release the mousewheel and scroll the parent.
       if (this.scrollValuePercent <= 0 && e[this.m.deltaXorY] < 0) return
-      else if (this.scrollValuePercent >= 100 - this.thumbSizePercent && e[this.m.deltaXorY] > 0) return
+      if (this.scrollValuePercent >= 100 - this.thumbSizePercent && e[this.m.deltaXorY] > 0) return
 
       e.preventDefault() // Hold the scroll in the hovered w-scrollable element.
 

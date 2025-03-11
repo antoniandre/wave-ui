@@ -66,13 +66,13 @@ export default {
       ]
     },
     classes () {
-      const slotText = this.$slots.badge && this.$slots.badge().map(item => item.children).join('')
+      const slotText = this.$slots.badge?.().map(item => item.children).join('')
 
       return {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         [this.badgeClass]: this.badgeClass || null,
-        'w-badge--round': this.round || (slotText || this.modelValue + '' || '').length < 2,
+        'w-badge--round': this.round || (slotText || `${this.modelValue}` || '').length < 2,
         'w-badge--dark': this.dark,
         'w-badge--light': this.light,
         'w-badge--outline': this.outline,

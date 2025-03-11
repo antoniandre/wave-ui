@@ -262,7 +262,7 @@ export default {
       type: [Boolean, Object, String],
       validator: object => {
         if (!object) return true // Accept any falsy value.
-        else if (typeof object === 'object' && (!object.itemsPerPage || (object.page && isNaN(object.page)))) {
+        if (typeof object === 'object' && (!object.itemsPerPage || (object.page && isNaN(object.page)))) {
           consoleError(
             'Wrong pagination config received in the w-table\'s `pagination` prop (received: `' + JSON.stringify(object) + '`). ' +
             '\nExpected object: { itemsPerPage: Integer, page: Integer } or { itemsPerPage: Integer, start: Integer }.'
@@ -539,8 +539,8 @@ export default {
       const newNextColWidth = nextColWidth - deltaX
 
       // 1. Apply the change of width.
-      columnEl.style.width = colWidth + deltaX + 'px'
-      nextColumnEl.style.width = nextColWidth - deltaX + 'px'
+      columnEl.style.width = `${colWidth + deltaX}px`
+      nextColumnEl.style.width = `${nextColWidth - deltaX}px`
 
       // 2. Check if we went too far (the width applied is different than the browser-computed one).
       const minWidthReached = (deltaX < 0 && columnEl.offsetWidth > newColWidth) ||
@@ -551,13 +551,13 @@ export default {
       // Make sure we don't shrink enough to push other left cells.
       if (minWidthReached) {
         const newWidth = Math.max(columnEl.offsetWidth, minColumnWidth)
-        columnEl.style.width = newWidth + 'px'
-        nextColumnEl.style.width = maxWidth - newWidth + 'px'
+        columnEl.style.width = `${newWidth}px`
+        nextColumnEl.style.width = `${maxWidth - newWidth}px`
       }
       // Make sure we don't grow enough to push other right cells.
       else if (maxWidthReached) {
-        columnEl.style.width = maxWidth - nextColumnEl.offsetWidth + 'px'
-        nextColumnEl.style.width = nextColumnEl.offsetWidth + 'px'
+        columnEl.style.width = `${maxWidth - nextColumnEl.offsetWidth}px`
+        nextColumnEl.style.width = `${nextColumnEl.offsetWidth}px`
       }
     },
 

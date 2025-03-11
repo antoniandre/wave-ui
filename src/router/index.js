@@ -223,7 +223,7 @@ Object.defineProperty(router, 'status', {
   set: value => (status.loading = value)
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((_to, _from, next) => {
   // Update through the property observer for reactivity.
   router.status = true
   next()
@@ -232,7 +232,7 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   router.status = false
   setTimeout(() => {
-    const pageTitle = (document.querySelector('h1') || {}).innerText?.replace(/[#\n]|IN PROGRESS/g, '')
+    const pageTitle = document.querySelector('h1')?.innerText?.replace(/[#\n]|IN PROGRESS/g, '')
     document.title = `${pageTitle} - Wave UI`
     // After route change, update the title of the page to pass it to Codepen from examples.
     store.commit('setCurrentPage', pageTitle)

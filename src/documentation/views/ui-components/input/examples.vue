@@ -1128,7 +1128,6 @@ export default {
   computed: {
     filePreviewIcon () {
       const { extension } = this.file3
-      console.log(extension, this.file3)
       switch (extension) {
         case 'jpg':
         case 'png':
@@ -1178,7 +1177,7 @@ export default {
 
       axios.post(`${binURL}/${filename}`, file)
         .then(
-          data => {
+          () => {
             this.loading = false
             this.$waveui.notify(
               `<div>

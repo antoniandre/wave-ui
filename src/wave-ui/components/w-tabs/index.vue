@@ -257,7 +257,7 @@ export default {
     updateSlider (domLookup = true) {
       if (domLookup) {
         const ref = this.$refs['tabs-bar']
-        this.activeTabEl = ref && ref.querySelector('.w-tabs__bar-item--active')
+        this.activeTabEl = ref?.querySelector('.w-tabs__bar-item--active')
       }
 
       if (!this.fillBar && this.activeTabEl) {
@@ -285,7 +285,7 @@ export default {
         // Scroll the new active tab item title into view if needed.
         this.$nextTick(() => {
           const ref = this.$refs['tabs-bar']
-          this.activeTabEl = ref && ref.querySelector(`.w-tabs__bar-item:nth-child(${index + 1})`)
+          this.activeTabEl = ref?.querySelector(`.w-tabs__bar-item:nth-child(${index + 1})`)
           if (this.activeTabEl) {
             this.activeTabEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
           }

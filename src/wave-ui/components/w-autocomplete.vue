@@ -99,8 +99,8 @@ export default {
       if (this.keywords) {
         items = items.filter(item => {
           if (!item.searchable.includes(this.normalizedKeywords)) return false
-          else if (this.multiple && !this.allowDuplicates) return isItemNotSelected(item)
-          else return true
+          if (this.multiple && !this.allowDuplicates) return isItemNotSelected(item)
+          return true
         })
       }
 
@@ -111,7 +111,7 @@ export default {
 
     highlightedItemIndex () {
       if (this.highlightedItem === null) return -1
-      else if (this.highlightedItem === 'extra-item') return this.filteredItems.length
+      if (this.highlightedItem === 'extra-item') return this.filteredItems.length
 
       return this.filteredItems.findIndex(item => item.uid === this.highlightedItem)
     },

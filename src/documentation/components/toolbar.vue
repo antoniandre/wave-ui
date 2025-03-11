@@ -55,7 +55,7 @@ export default {
     version () {
       return process.env.VITE_APP_VERSION.replace(
         /-(\w)(\w+)\.(\d+)/,
-        (m0, m1, m2, m3) => ` <strong>${m1.toUpperCase()}${m2} ${m3}</strong>`
+        (_m0, m1, m2, m3) => ` <strong>${m1.toUpperCase()}${m2} ${m3}</strong>`
       )
     }
   },

@@ -75,7 +75,7 @@ export default {
           _index: i,
           value: itemValue, // If no value is set then add one to prevent error.
           color: item[this.itemColorKey] || this.color,
-          _isChecked: this.modelValue && this.modelValue.includes(itemValue)
+          _isChecked: this.modelValue?.includes(itemValue)
         })
       })
     },

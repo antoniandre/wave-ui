@@ -118,8 +118,8 @@ export default {
       // eslint-disable-next-line array-callback-return
       return children.map(node => {
         if (!node.children || typeof node.children === 'string') return node.children || ''
-        else if (Array.isArray(node.children)) return this.getSlotChildrenText(node.children)
-        else if (node.children.default) return this.getSlotChildrenText(node.children.default())
+        if (Array.isArray(node.children)) return this.getSlotChildrenText(node.children)
+        if (node.children.default) return this.getSlotChildrenText(node.children.default())
       }).join('')
     },
 

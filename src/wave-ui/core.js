@@ -45,7 +45,6 @@ const injectPresets = (component, presets) => {
 
         // If the given prop (= preset) is still not found in the mixins props raise warning.
         if (!foundProp) consoleWarn(`Attempting to set a preset on a prop that doesn't exist: \`${component.name}.${preset}\`.`)
-        continue // Continue to the next preset.
       }
     }
 
@@ -80,7 +79,7 @@ export default class WaveUI {
     },
 
     // Callable from this.$waveui.
-    switchTheme (theme, skipFlatten = false) {
+    switchTheme (theme) {
       this.theme = theme
       document.documentElement.setAttribute('data-theme', theme)
       document.head.querySelector('#wave-ui-colors')?.remove?.()
@@ -134,7 +133,7 @@ export default class WaveUI {
           injectNotifManagerInDOM(app)
 
           // This mixin must only run once, we can delete it.
-          app._context.mixins.find(mixin => mixin.mounted && delete mixin.mounted)
+          app._context.mixins.find(mixin => mixin.mounted && (mixin.mounted = undefined))
         }
       }
     })

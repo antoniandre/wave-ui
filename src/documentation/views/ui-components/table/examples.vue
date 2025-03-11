@@ -2066,7 +2066,7 @@ const tableItemsInAPI = {
   ]
 }
 
-const table12ItemsInApi = Array(2000).fill('').map((item, i) => ({
+const table12ItemsInApi = Array(2000).fill('').map((_, i) => ({
   id: i + 1,
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
@@ -2223,7 +2223,7 @@ export default {
           { label: 'Last name', key: 'lastName' },
           { label: 'Birthdate', key: 'birthdate' }
         ],
-        items: Array(200).fill('').map((item, i) => ({
+        items: Array(200).fill('').map((_, i) => ({
           id: i + 1,
           firstName: faker.person.firstName(),
           lastName: faker.person.lastName(),
@@ -2247,7 +2247,7 @@ export default {
           itemsPerPage: 50,
           total: 2000
         },
-        fetch: ({ page, start, end, total, itemsPerPage, sorting }) => {
+        fetch: ({ _page, start, end, _total, _itemsPerPage, sorting }) => {
           this.table12.loading = 'header'
           setTimeout(() => {
             const itemsFromApi = table12ItemsInApi.slice(0) // Clone the array before sorting.
@@ -2255,7 +2255,7 @@ export default {
               const sortKey = sorting[0].substring(1)
               itemsFromApi.sort((a, b) => {
                 if (sorting[0][0] === '+') return a[sortKey] < b[sortKey] ? -1 : 1
-                else return a[sortKey] > b[sortKey] ? -1 : 1
+                return a[sortKey] > b[sortKey] ? -1 : 1
               })
             }
             this.table12.items = itemsFromApi.slice(start - 1, end)
@@ -2277,7 +2277,7 @@ export default {
           itemsPerPage: 50,
           total: 2000
         },
-        fetch: ({ page, start, end, total, itemsPerPage, sorting }) => {
+        fetch: ({ _page, start, end, _total, _itemsPerPage, sorting }) => {
           this.table13.loading = 'header'
           setTimeout(() => {
             const itemsFromApi = table12ItemsInApi.slice(0) // Clone the array before sorting.
@@ -2285,7 +2285,7 @@ export default {
               const sortKey = sorting[0].substring(1)
               itemsFromApi.sort((a, b) => {
                 if (sorting[0][0] === '+') return a[sortKey] < b[sortKey] ? -1 : 1
-                else return a[sortKey] > b[sortKey] ? -1 : 1
+                return a[sortKey] > b[sortKey] ? -1 : 1
               })
             }
             this.table13.items = itemsFromApi.slice(start - 1, end)
@@ -2312,7 +2312,7 @@ export default {
       this.table6.headers[columnIndex].hidden = !this.table6.headers[columnIndex].hidden
     },
 
-    onColumnResize ({ index, widths }) {
+    onColumnResize ({ _index, widths }) {
       widths.forEach((width, i) => (this.table8.headers[i].width = width))
 
       localStorage.tableWidths = widths

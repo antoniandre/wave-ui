@@ -136,7 +136,7 @@ export default {
             this.hoveringActivator = true
             this.open(e)
           },
-          mouseleave: e => {
+          mouseleave: () => {
             this.hoveringActivator = false
             this.close()
           }
