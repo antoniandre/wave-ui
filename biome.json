@@ -13,7 +13,9 @@
       },
       "suspicious": {
         "noConsoleLog": "warn",
-        "noDebugger": "warn"
+        "noDebugger": "warn",
+        "noAssignInExpressions": "off",
+        "noGlobalIsNan": "off"
       },
       "style": {
         "useTemplate": "error",
@@ -45,6 +47,6 @@
     }
   },
   "files": {
-    "ignore": ["dist", "node_modules", "*.min.js", "src/public", "src/assets", "coverage", "package-lock.json", "pnpm-lock.yaml", "yarn.lock", "docs"]
+    "ignore": ["dist", "node_modules", "*.min.js", "public", "src/assets", "coverage", "package-lock.json", "pnpm-lock.yaml", "yarn.lock", "docs"]
   }
 }

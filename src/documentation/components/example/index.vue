@@ -144,11 +144,11 @@ export default {
 
       const { html: htmlSlot, pug, js: jsSlot, css: cssSlot, scss } = this.$slots
       const slots = {
-        html: (htmlSlot && htmlSlot()[0].children) || '',
-        pug: ((pug && pug()[0].children) || '').replace(/(#[\w.-]+)(?=\s|\))(?!\n)/gi, '$1=""'),
-        js: (jsSlot && jsSlot()[0].children) || '',
-        css: (cssSlot && cssSlot()[0].children) || '',
-        scss: (scss && scss()[0].children) || ''
+        html: (htmlSlot?.()?.[0]?.children) || '',
+        pug: ((pug?.()?.[0]?.children) || '').replace(/(#[\w.-]+)(?=\s|\))(?!\n)/gi, '$1=""'),
+        js: (jsSlot?.()?.[0]?.children) || '',
+        css: (cssSlot?.()?.[0]?.children) || '',
+        scss: (scss?.()?.[0]?.children) || ''
       }
       let html = ''
       let css = ''
