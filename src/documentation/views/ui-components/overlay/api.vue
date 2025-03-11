@@ -41,7 +41,7 @@ const events = {
     }
   },
   close: {
-    description: 'Emitted on overlay close (a click on overlay doesn\'t trigger this event if <code>persistent</code>).',
+    description: 'Emitted on overlay close (a click on overlay doesn\'t trigger this event if <code>persistent</code>).'
   },
   closed: {
     description: 'Emitted after the overlay is completely closed (after the closing animation).'

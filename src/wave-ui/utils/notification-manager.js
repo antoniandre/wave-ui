@@ -4,7 +4,7 @@ import WNotificationManager from '../components/w-notification-manager.vue'
 export class NotificationManager {
   static #instance
   notifications
-   // Private fields.
+  // Private fields.
   _uid // A unique ID for each notification.
   _notificationDefaults
 
