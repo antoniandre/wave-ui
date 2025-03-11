@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { ColorShadeInfo, WaveColor } from './colors'
-import { WaveAlertProps } from './components/WAlert'
+import type { ColorShadeInfo, WaveColor } from './colors'
+import type { WaveAlertProps } from './components/WAlert'
 
 export type WaveNotificationType = 'info' | 'success' | 'warning' | 'error';
 export interface $waveui {

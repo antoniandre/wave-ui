@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-import {
+import type {
   ComputedGetter,
   ComputedOptions,
   DefineComponent,
@@ -11,7 +11,7 @@ import {
   SlotsType
 } from 'vue'
 
-import {
+import type {
   PublicProps,
   ResolveProps
 } from '../extra-vue-types'
@@ -193,8 +193,7 @@ export interface WaveBadgeProps {
 // ----------------------------------------------------------------------------
 // Emits
 // ----------------------------------------------------------------------------
-export interface WaveBadgeEmits {
-}
+export type WaveBadgeEmits = {}
 
 // ----------------------------------------------------------------------------
 // Computeds
