@@ -301,7 +301,7 @@ export default {
     if (this.modelValue) {
       const arrayOfValues = Array.isArray(this.modelValue) ? this.modelValue : [this.modelValue]
       arrayOfValues.forEach(value => {
-        this.selection.push(this.optimizedItemsForSearch.find(item => item[this.itemValueKey] === +value))
+        this.selection.push(this.optimizedItemsForSearch.find(item => item[this.itemValueKey] === value))
       })
     }
   },
@@ -316,7 +316,7 @@ export default {
       if (value) {
         const arrayOfValues = Array.isArray(value) ? value : [value]
         arrayOfValues.forEach(value => {
-          this.selection.push(this.optimizedItemsForSearch.find(item => item[this.itemValueKey] === +value))
+          this.selection.push(this.optimizedItemsForSearch.find(item => item[this.itemValueKey] === value))
         })
       }
     }
