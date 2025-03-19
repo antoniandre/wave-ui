@@ -313,7 +313,15 @@ export default {
     &.w-menu--left {margin-left: -4 * $base-increment;}
     &.w-menu--right {margin-left: 4 * $base-increment;}
 
-    @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
-  }
+    // Menu without border.
+    &.w-menu--no-border {
+      @include triangle(var(--w-menu-bg-color), '.w-menu', 9px, 0);
+    }
+
+    // Menu with border.
+    &:not(.w-menu--no-border) {
+      @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
+    }
+}
 }
 </style>
