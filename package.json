@@ -12,7 +12,10 @@
   "unpkg": "dist/wave-ui.umd.js",
   "jsdelivr": "dist/wave-ui.umd.js",
   "module": "./dist/wave-ui.es.js",
-  "files": ["dist", "src/wave-ui"],
+  "files": [
+    "dist",
+    "src/wave-ui"
+  ],
   "exports": {
     ".": {
       "import": "./dist/wave-ui.es.js",
@@ -25,8 +28,20 @@
     "./src/wave-ui/*": "./src/wave-ui/*"
   },
   "type": "module",
-  "sideEffects": ["*.css", "*.scss", "*.vue"],
-  "keywords": ["wave ui", "ui framework", "ui library", "vue ui", "vue3", "vue framework", "ui"],
+  "sideEffects": [
+    "*.css",
+    "*.scss",
+    "*.vue"
+  ],
+  "keywords": [
+    "wave ui",
+    "ui framework",
+    "ui library",
+    "vue ui",
+    "vue3",
+    "vue framework",
+    "ui"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build --base /wave-ui/",
@@ -40,14 +55,14 @@
     "publish-doc": "npm run build && npm run build-bundle && git add . && git commit -m 'Publish documentation on Github.' && git push && git push --tag"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.9",
+    "@babel/core": "^7.26.10",
     "@biomejs/biome": "^1.9.4",
     "@faker-js/faker": "^9.6.0",
     "@mdi/font": "^7.4.47",
     "@tsconfig/recommended": "^1.0.8",
-    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue": "^5.2.3",
     "autoprefixer": "^10.4.21",
-    "axios": "^1.8.2",
+    "axios": "^1.8.4",
     "font-awesome": "^4.7.0",
     "globals": "^16.0.0",
     "gsap": "^3.12.7",
@@ -56,11 +71,11 @@
     "postcss": "^8.5.3",
     "pug": "^3.0.3",
     "rollup-plugin-delete": "^3.0.1",
-    "sass": "^1.85.1",
+    "sass": "^1.86.2",
     "simple-syntax-highlighter": "^3.1.1",
-    "splitpanes": "^4.0.2",
+    "splitpanes": "^4.0.3",
     "typescript": "^5.8.2",
-    "vite": "^6.2.1",
+    "vite": "^6.2.4",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
