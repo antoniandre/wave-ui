@@ -42,12 +42,21 @@ main
     //-   multiple: { type: Boolean }, multiple selection
     //-   unselectableBranches: { type: Boolean },
 
+    li.minor
+      strong.version v3.20.0
+      ul
+        li
+          strong CSS utilities
+          ul
+            li Added a new #[code setAppClasses] utility method to the #[code $waveui] object. #[span.tag.new]
+
     li.patch
       strong.version v3.19.1
       ul
         li
           strong TypeScript
-          li Updated the TypeScript definitions for #[code w-drawer] &amp; #[code w-select].
+          ul
+            li Updated the TypeScript definitions for #[code w-drawer] &amp; #[code w-select].
 
     li.minor
       strong.version v3.19.0
@@ -55,7 +64,7 @@ main
         li
           strong w-notification-manager
           ul
-            li Removed the WNotificationManager from Vue dev tools and now only use a single Vue App instance.
+            li Removed the #[code WNotificationManager] from Vue dev tools and now only use a single Vue App instance.
 
     li.patch
       strong.version v3.18.1
@@ -122,7 +131,7 @@ main
         li
           strong w-accordion
           ul
-            li Added a new w-accordion-item component for external use within #[strong.code w-accordion].
+            li Added a new w-accordion-item component for external use within #[strong.code w-accordion]. #[span.tag.new]
 
     li.patch
       strong.version v3.16.3
