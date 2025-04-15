@@ -195,41 +195,52 @@ defineExpose({ scroll })
 
 <style lang="scss">
 .w-scrollable {
-  position: relative;
-  overflow: hidden;
-}
+  display: flex;
+  border-radius: inherit;
 
-.w-scrollbar {
-  position: absolute;
-  background: #000;
-  user-select: none;
-
-  &--horizontal {
-    inset: auto 0 0;
-    height: 8px;
-  }
-  &--vertical {
-    inset: 0 0 0 auto;
-    width: 8px;
+  &__content {
+    padding: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
   }
 
-  &__thumb {
+  &__scrollbar {
+    position: relative;
+    flex: 0 0 auto;
+    background: $scrollbar-bg-color;
+    user-select: none;
+
+    &--horizontal {
+      inset: auto 0 0;
+      border-bottom-left-radius: inherit;
+      border-bottom-right-radius: inherit;
+      height: $scrollbar-size;
+    }
+    &--vertical {
+      inset: 0 0 0 auto;
+      border-top-right-radius: inherit;
+      border-bottom-right-radius: inherit;
+      width: $scrollbar-size;
+    }
+  }
+
+  &__scrollbar-thumb {
     position: absolute;
-    background: #333;
+    background: $scrollbar-thumb-color;
     border-radius: $border-radius;
     z-index: 1;
     will-change: top left;
 
-    &:hover {background: #444;}
+    &:hover {background: $scrollbar-thumb-color;}
   }
-  &--horizontal &__thumb {
+  &--horizontal &__scrollbar-thumb {
     height: 6px;
     left: 0;
     right: 0;
     margin-top: 1px;
     margin-bottom: 1px;
   }
-  &--vertical &__thumb {
+  &--vertical &__scrollbar-thumb {
     width: 6px;
     top: 0;
     bottom: 0;

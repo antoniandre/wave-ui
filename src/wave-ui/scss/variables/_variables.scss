@@ -148,3 +148,10 @@ $tooltip-bg-color: $detachable-bg-color !default;
 $tooltip-color: $detachable-color !default;
 $tooltip-border-color: $border-color !default;
 // --------------------------------------------------------
+
+// w-scrollable.
+// --------------------------------------------------------
+$scrollbar-size: 8px !default;
+$scrollbar-bg-color: color-mix(in srgb, var(--w-contrast-bg-color) 8%, var(--w-base-bg-color)) !default;
+$scrollbar-thumb-color: color-mix(in srgb, var(--w-contrast-bg-color) 25%, var(--w-base-bg-color)) !default;
+// --------------------------------------------------------
