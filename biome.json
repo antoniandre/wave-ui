@@ -51,5 +51,17 @@
   },
   "files": {
     "ignore": ["dist", "node_modules", "*.min.js", "public", "src/assets", "coverage", "package-lock.json", "pnpm-lock.yaml", "yarn.lock", "docs"]
-  }
+  },
+  "overrides": [
+    {
+      "include": ["*.svelte", "*.astro", "*.vue"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off"
+          }
+        }
+      }
+    }
+  ]
 }
