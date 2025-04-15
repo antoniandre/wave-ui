@@ -41,7 +41,7 @@ import DivRiotsLogo from '@/assets/divriots.svg?url'
 import DivRiotsLogoGrey from '@/assets/divriots-grey.svg?url'
 
 const githubBackers = [
-  'divriots', 'nmauersberg', 'KleinSamuel', 'chris-deep', 'crbast', 'CoolGoose', 'bohdaq',
+  'divriots', 'nmauersberg', 'tswolin', 'KleinSamuel', 'chris-deep', 'crbast', 'CoolGoose', 'bohdaq',
   'cordova-jauregui', 'consuman', 'bastien09', 'micksp', 'orefalo', 'helenetran', 'antoniandre'
 ]
 
