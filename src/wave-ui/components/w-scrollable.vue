@@ -24,6 +24,8 @@ const props = defineProps({
   height: { type: [Number, String] }
 })
 
+const emit = defineEmits([])
+
 const domProps = {
   h: {
     direction: 'horizontal',
@@ -140,7 +142,6 @@ function onMouseLeave () {
 }
 
 function onResize () {
-  // Implementation remained empty in original code.
 }
 
 function onMouseWheel (e) {
@@ -178,9 +179,6 @@ onMounted(() => {
   const { top, left } = scrollable.value.getBoundingClientRect()
   scrollableState.value.top = top
   scrollableState.value.left = left
-
-  scrollable.value.parentNode.style.position = 'relative'
-  scrollable.value.parentNode.style.padding = 0
 
   window.addEventListener('resize', onResize)
 })
