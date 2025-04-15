@@ -6,7 +6,7 @@
   :class="scrollableClasses"
   v-bind="$attrs"
   :style="scrollableStyles")
-  .w-scrollable__content(ref="scrollable")
+  .w-scrollable__content(ref="scrollableEl")
     slot
   .w-scrollable__scrollbar(ref="trackEl" @mousedown="onTrackMouseDown" :class="scrollbarClasses")
     .w-scrollable__scrollbar-thumb(ref="thumbEl" :style="thumbStyles")
@@ -53,7 +53,7 @@ const domProps = {
 
 // Refs used in template and functions.
 const mounted = ref(false)
-const scrollable = ref(null)
+const scrollableEl = ref(null)
 const trackEl = ref(null)
 const thumbEl = ref(null)
 const scrollableState = ref({
@@ -66,8 +66,8 @@ const dragging = ref(false)
 
 const isHorizontal = computed(() => {
   if (!mounted.value) return false
-  console.log('💂‍♂️', scrollable.value?.scrollWidth, scrollable.value?.offsetWidth)
-  return (props.width && !props.height) || (scrollable.value?.scrollWidth > scrollable.value?.offsetWidth)
+  console.log('💂‍♂️', scrollableEl.value?.scrollWidth, scrollableEl.value?.offsetWidth)
+  return (props.width && !props.height) || (scrollableEl.value?.scrollWidth > scrollableEl.value?.offsetWidth)
 })
 
 const m = computed(() => domProps[isHorizontal.value ? 'h' : 'v'])
@@ -159,14 +159,14 @@ function onMouseWheel (e) {
 }
 
 function computeScroll (cursorPositionXorY) {
-  const { top, left, width, height } = scrollable.value.getBoundingClientRect()
+  const { top, left, width, height } = scrollableEl.value.getBoundingClientRect()
   const topOrLeft = isHorizontal.value ? left : top
   const size = isHorizontal.value ? width : height
   scrollValuePercent.value = Math.max(0, Math.min(((cursorPositionXorY - topOrLeft) / size) * 100, 100))
 }
 
 function scroll () {
-  scrollable.value[m.value.scrollTopOrLeft] = scrollValuePercent.value * scrollable.value?.[m.value.scrollSize] / 100
+  scrollableEl.value[m.value.scrollTopOrLeft] = scrollValuePercent.value * scrollableEl.value?.[m.value.scrollSize] / 100
   updateThumbPosition()
 }
 
@@ -176,7 +176,7 @@ function updateThumbPosition () {
 
 onMounted(() => {
   mounted.value = true
-  const { top, left } = scrollable.value.getBoundingClientRect()
+  const { top, left } = scrollableEl.value.getBoundingClientRect()
   scrollableState.value.top = top
   scrollableState.value.left = left
 
