@@ -80,11 +80,18 @@ const scrollbarClasses = computed(() => ({
   [`w-scrollable__scrollbar--${m.value.direction}`]: true
 }))
 
+const refreshThumb = ref(0)
+
 const thumbSizePercent = computed(() => {
+  refreshThumb.value // Dependency to force re-evaluation.
   if (!mounted.value) return 0
-  const size = props[m.value.size] ?? scrollable.value?.[m.value.offsetSize]
-  return (size * 100 / scrollable.value?.[m.value.scrollSize]) || 0
+  const size = props[m.value.size] ?? scrollableEl.value?.[m.value.offsetSize]
+  return (size * 100 / scrollableEl.value?.[m.value.scrollSize]) || 0
 })
+
+function forceRefreshThumb () {
+  refreshThumb.value++
+}
 
 const scrollableStyles = computed(() => ({
   [m.value.maxSize]: props[m.value.size] ? `${props[m.value.size]}px` : undefined
@@ -141,9 +148,6 @@ function onMouseLeave () {
   scrollableState.value.hovered = false
 }
 
-function onResize () {
-}
-
 function onMouseWheel (e) {
   if (!scrollableState.value.hovered) return // Only scroll a w-scrollable element that is being hovered.
 
@@ -180,12 +184,12 @@ onMounted(() => {
   scrollableState.value.top = top
   scrollableState.value.left = left
 
-  window.addEventListener('resize', onResize)
+  window.addEventListener('resize', forceRefreshThumb)
 })
 
 // Clean up event listener.
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', onResize)
+  window.removeEventListener('resize', forceRefreshThumb)
 })
 
 defineExpose({ scroll })
