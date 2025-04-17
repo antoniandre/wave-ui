@@ -6,7 +6,7 @@
 :root {
   --w-base-increment: #{$base-increment};
   --w-css-scope: #{$css-scope};
-  --w-contrast-bg-o0-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 5%, transparent)};
+  --w-contrast-bg-o05-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 5%, transparent)};
   --w-contrast-bg-o1-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 10%, transparent)};
   --w-contrast-bg-o2-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 20%, transparent)};
   --w-contrast-bg-o3-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 30%, transparent)};

@@ -126,6 +126,13 @@
   .base-color--bg {background-color: var(--w-base-bg-color);}
   .contrast-color {color: color-mix(in srgb, var(--w-contrast-color) 75%, transparent);}
   .contrast-color--bg {background-color: var(--w-contrast-bg-color);}
+
+  .contrast-o05 {color: var(--w-contrast-bg-o05-color);}
+  .contrast-o05--bg {background-color: var(--w-contrast-bg-o05-color);}
+  @for $i from 1 through 9 {
+    .contrast-o#{$i} {color: var(--w-contrast-bg-o#{$i}-color);}
+    .contrast-o#{$i}--bg {background-color: var(--w-contrast-bg-o#{$i}-color);}
+  }
   // ------------------------------------------------------
 
   // Status colors - must stay last and have highest priority.
