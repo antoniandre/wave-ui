@@ -52,6 +52,15 @@
     .d-iflex {display: inline-flex;}
     .d-block {display: block;}
     .d-iblock {display: inline-block;}
+
+    .ovh {overflow: hidden;}
+    .ovv {overflow: visible;}
+    .ova {overflow: auto;}
+
+    .op05 {opacity: 0.05;}
+    @for $i from 0 through 9 {
+      .op#{$i} {opacity: $i * 0.1;}
+    }
     // ----------------------------------------------
 
     // Borders (from 0 to 6), radii (from 0 to 6 + `m` for max).
