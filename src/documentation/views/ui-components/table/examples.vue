@@ -2011,7 +2011,9 @@ const allItems = [
   { id: 12, firstName: 'Sheree', lastName: 'Castle' },
   { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
   { id: 14, firstName: 'Maude', lastName: 'Hayley' },
-  { id: 15, firstName: 'Josie', lastName: 'Richard' }
+  { id: 15, firstName: 'Josie', lastName: 'Richard' },
+  { id: 16, firstName: 'David', lastName: 'Elliott' },
+  { id: 17, firstName: 'Alan', lastName: 'Elliott' }
 ]
 
 const tableItemsInAPI = {
