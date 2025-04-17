@@ -12,7 +12,8 @@ w-toolbar.main-toolbar(fixed)
     template(#thumb)
       w-icon mdi {{ $store.state.darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}
 
-  strong.version.size--xs(v-html="`v<code>${version}</code>`")
+  router-link(to="/release-notes" @click.native="scrollTop(true)")
+    strong.version.size--xs(v-html="`v<code>${version}</code>`")
 
   w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
