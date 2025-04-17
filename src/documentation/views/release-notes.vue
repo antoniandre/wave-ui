@@ -28,6 +28,39 @@ main
     //-   unselectableBranches: { type: Boolean },
 
     li.minor
+      strong.version v3.21.0
+      ul
+        li
+          strong CSS
+          ul
+            li
+              | Added a few helper classes and CSS3 variables to make it easier to apply transparencies:
+              ul
+                li The #[code .ovh] class to set the overflow to hidden.
+                li The #[code .ovv] class to set the overflow to visible.
+                li The #[code .ova] class to set the overflow to auto.
+                li The #[code .op05] class to set the opacity to 0.05.
+                li The #[code .op1] class to set the opacity to 0.1.
+                li The #[code .op2] class to set the opacity to 0.2.
+                li The #[code .op3] class to set the opacity to 0.3.
+                li The #[code .op4] class to set the opacity to 0.4.
+                li The #[code .op5] class to set the opacity to 0.5.
+                li The #[code .op6] class to set the opacity to 0.6.
+                li The #[code .op7] class to set the opacity to 0.7.
+                li The #[code .op8] class to set the opacity to 0.8.
+                li The #[code .op9] class to set the opacity to 0.9.
+                li The #[code .contrast-o05] class to set the color to 0.05% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o1] class to set the color to 0.1% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o2] class to set the color to 0.2% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o3] class to set the color to 0.3% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o4] class to set the color to 0.4% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o5] class to set the color to 0.5% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o6] class to set the color to 0.6% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o7] class to set the color to 0.7% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o8] class to set the color to 0.8% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o9] class to set the color to 0.9% of the background contrast color (uses color-mix).
+
+    li.minor
       strong.version v3.20.0
       ul
         li
