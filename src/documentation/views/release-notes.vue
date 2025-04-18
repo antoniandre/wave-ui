@@ -39,6 +39,7 @@ main
                 li The #[code .ovh] class to set the overflow to hidden.
                 li The #[code .ovv] class to set the overflow to visible.
                 li The #[code .ova] class to set the overflow to auto.
+                li The #[code .op025] class to set the opacity to 0.025.
                 li The #[code .op05] class to set the opacity to 0.05.
                 li The #[code .op1] class to set the opacity to 0.1.
                 li The #[code .op2] class to set the opacity to 0.2.
