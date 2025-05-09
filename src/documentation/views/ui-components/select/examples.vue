@@ -772,6 +772,54 @@ div
       fit-to-content
       :items="[{ label: 'Item 1' }, { label: 'Disabled item 2', disabled: true }, { label: 'Item 3' }]")
 
+  title-link(h2) Deselect Item
+  example
+    w-select.mb4(
+      :items="items1"
+      label="Deselect item"
+      deselect-item)
+    w-select.mb4(
+      :items="items1"
+      label="Deselect with custom label"
+      model-value="Item 1"
+      deselect-item
+      deselect-item-label="Deselect")
+    template(#pug).
+      w-select.mb4(
+        :items="items1"
+        label="Deselect item"
+        deselect-item)
+      w-select.mb4(
+        :items="items1"
+        label="Deselect with custom label"
+        model-value="Item 1"
+        deselect-item
+        deselect-item-label="Deselect")
+    template(#html).
+      &lt;w-select
+        class="mb4"
+        :items="items"
+        label="Disabled &amp; empty"
+        deselect-item&gt;
+      &lt;/w-select&gt;
+
+      &lt;w-select
+        class="mb4"
+        :items="items"
+        value="Item 1"
+        label="Disabled &amp; filled"
+        deselect-item
+        deselect-item-label="Deselect"&gt;
+      &lt;/w-select&gt;
+
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
 </template>
 
 <script>
