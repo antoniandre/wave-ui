@@ -806,7 +806,7 @@ $tr-border-top: 1px;
   // Sorting arrow.
   &__header--sortable {cursor: pointer;}
   &__header-sort {
-    color: color-mix(in srgb, var(--w-base-color) 8%, transparent);
+    color: color-mix(in srgb, var(--w-base-color) 50%, transparent);
     vertical-align: text-bottom;
     @include default-transition;
 
