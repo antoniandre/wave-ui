@@ -18,8 +18,14 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/wave-ui.es.js",
-      "require": "./dist/wave-ui.umd.js"
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/wave-ui.es.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default":"./dist/wave-ui.umd.js"
+      }
     },
     "./package.json": "./package.json",
     "./dist/*": "./dist/*",
