@@ -1,37 +1,22 @@
 <template lang="pug">
 main
   title-link.mt4(h1) Release notes
-  p.mt-6.mb5.grey-light2.text-italic
-    | Follows the
-    a.ml1(href="https://semver.org" target="_blank")
-      | Semantic versioning specs.
-      w-icon.ml1 mdi mdi-open-in-new
 
-  .w-flex.justify-end
+  .w-flex.align-center.justify-space-between.mt-8.mb8.wrap.gap2
+    p.grey-light2.text-italic.mb0
+      | Follows the
+      a.ml1(href="https://semver.org" target="_blank")
+        | Semantic versioning specs.
+        w-icon.ml1 mdi mdi-open-in-new
+
     w-button(
       @click="$refs.legacy.scrollIntoView()"
-      round
       bg-color="vue-green"
       color="white"
-      dark
-      sm)
+      dark)
       | Jump to #[strong.ml1 Vue 2]
       w-icon.ml2 wi-arrow-down
   ul.history
-    li.dashed
-      w-flex.mt8(align-center)
-        w-tag.pl3.pr2.text-bold(round bg-color="vue-green" color="white")
-          | VUE 3
-          w-icon.ml1(md) wi-chevron-down
-        .w-divider.grow.mr8.vue-green--bg
-
-      small.grey.mt1
-        w-icon.ml-1.mr1.grey wi-chevron-right
-        | #[span.code.inherit npm i wave-ui]
-
-    //- Vue 3.
-    //-----------------------------------------------------
-
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
     //- TODO
     //- - cleanup dynamic-css file
@@ -41,6 +26,76 @@ main
     //- - add in w-tree
     //-   multiple: { type: Boolean }, multiple selection
     //-   unselectableBranches: { type: Boolean },
+
+    li.minor
+      strong.version v3.21.0
+      ul
+        li
+          strong CSS
+          ul
+            li
+              | Added a few helper classes and CSS3 variables to make it easier to apply transparencies:
+              ul
+                li The #[code .ovh] class to set the overflow to hidden.
+                li The #[code .ovv] class to set the overflow to visible.
+                li The #[code .ova] class to set the overflow to auto.
+                li The #[code .op025] class to set the opacity to 0.025.
+                li The #[code .op05] class to set the opacity to 0.05.
+                li The #[code .op1] class to set the opacity to 0.1.
+                li The #[code .op2] class to set the opacity to 0.2.
+                li The #[code .op3] class to set the opacity to 0.3.
+                li The #[code .op4] class to set the opacity to 0.4.
+                li The #[code .op5] class to set the opacity to 0.5.
+                li The #[code .op6] class to set the opacity to 0.6.
+                li The #[code .op7] class to set the opacity to 0.7.
+                li The #[code .op8] class to set the opacity to 0.8.
+                li The #[code .op9] class to set the opacity to 0.9.
+                li The #[code .contrast-o05] class to set the color to 0.05% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o1] class to set the color to 0.1% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o2] class to set the color to 0.2% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o3] class to set the color to 0.3% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o4] class to set the color to 0.4% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o5] class to set the color to 0.5% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o6] class to set the color to 0.6% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o7] class to set the color to 0.7% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o8] class to set the color to 0.8% of the background contrast color (uses color-mix).
+                li The #[code .contrast-o9] class to set the color to 0.9% of the background contrast color (uses color-mix).
+
+    li.minor
+      strong.version v3.20.0
+      ul
+        li
+          strong CSS utilities
+          ul
+            li Added a new #[code setAppClasses] utility method to the #[code $waveui] object. #[span.tag.new]
+
+    li.patch
+      strong.version v3.19.1
+      ul
+        li
+          strong TypeScript
+          ul
+            li Updated the TypeScript definitions for #[code w-drawer] &amp; #[code w-select].
+
+    li.minor
+      strong.version v3.19.0
+      ul
+        li
+          strong w-notification-manager
+          ul
+            li Removed the #[code WNotificationManager] from Vue dev tools and now only use a single Vue App instance.
+
+    li.patch
+      strong.version v3.18.1
+      ul
+        li
+          strong w-accordion
+          ul
+            li Allow clicking through the title :before.
+        li
+          strong SCSS
+          ul
+            li Fix deprecation warning on the #[code round] function.
 
     li.minor
       strong.version v3.18.0
@@ -95,7 +150,7 @@ main
         li
           strong w-accordion
           ul
-            li Added a new w-accordion-item component for external use within #[strong.code w-accordion].
+            li Added a new w-accordion-item component for external use within #[strong.code w-accordion]. #[span.tag.new]
 
     li.patch
       strong.version v3.16.3
@@ -2252,21 +2307,16 @@ main
   .history {
     margin-left: 4px;
 
-    >li {
-      padding-left: 20px;
-    }
-
-    >li+li {
-      margin-top: 28px;
-    }
-
     li {
       list-style-type: none;
       position: relative;
     }
 
+    > li {padding-left: 20px;}
+    > li + li {margin-top: 28px;}
+
     // Bullet.
-    >li:before {
+    > li:before {
       content: '';
       position: absolute;
       top: 11px;
@@ -2280,12 +2330,8 @@ main
       z-index: 1;
     }
 
-    >li:first-child:before {
-      display: none;
-    }
-
     // Left border.
-    >li:after {
+    > li:after {
       content: '';
       position: absolute;
       top: 11px;
@@ -2293,25 +2339,23 @@ main
       left: -0.5px;
       border-left: 1px solid #ddd;
     }
+    > li:last-child:after {display: none;}
+    > li.dashed:after {border-left-style: dashed;}
 
-    >li:last-child:after {
-      display: none;
-    }
-
-    >li.dashed:after {
-      border-left-style: dashed;
-    }
-
-    >li.patch:before {
+    > li.patch:before {
       font-size: 7px;
+      width: 1.1rem;
+      border-style: dashed;
+      animation: spin 10s linear infinite;
     }
-
-    >li.minor:before {
+    > li.minor:before {
       font-size: 11px;
+      width: 1.1rem;
+      animation: pulse 3s ease-in-out infinite;
     }
-
-    >li.major:before {
+    > li.major:before {
       font-size: 14px;
+      animation: pulse-sonar 3s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .version {
@@ -2319,25 +2363,16 @@ main
       display: block;
     }
 
-    >li.patch:before,
-    >li.patch .version {
-      color: color-mix(in srgb, var(--w-base-color) 30%, transparent);
-    }
-
-    >li.minor:before,
-    >li.minor .version {
-      color: color-mix(in srgb, var(--w-base-color) 60%, transparent);
-    }
-
-    >li.major:before,
-    >li.major .version {
+    > li.patch:before,
+    > li.patch .version {color: color-mix(in srgb, var(--w-base-color) 30%, transparent);}
+    > li.minor:before,
+    > li.minor .version {color: color-mix(in srgb, var(--w-base-color) 60%, transparent);}
+    > li.major:before, > li.major .version {
       color: #09c;
       font-size: 1.4rem;
     }
 
-    ul {
-      margin-left: -2px;
-    }
+    ul {margin-left: -2px;}
 
     li li {
       padding-left: 20px;
@@ -2362,9 +2397,7 @@ main
       aspect-ratio: 1;
     }
 
-    li li li:before {
-      content: '\e007';
-    }
+    li li li:before {content: '\e007';}
 
     p {
       margin: 0.2em 0 0;
@@ -2382,13 +2415,8 @@ main
     }
   }
 
-  .vue-green {
-    color: #42b883;
-  }
-
-  .vue-green--bg {
-    background-color: #42b883;
-  }
+  .vue-green {color: #42b883;}
+  .vue-green--bg {background-color: #42b883;}
 
   span.tag {
     border-radius: 99em;
@@ -2399,29 +2427,39 @@ main
     position: relative;
     top: -1px;
   }
+  span.new {background-color: #3698e5;}
+  span.new:before {content: 'NEW';}
+  span.deprecated {background-color: #000;}
+  span.deprecated:before {content: 'DEPRECATED';}
+  span.removed {background-color: #f02c2c;}
+  span.removed:before {content: 'REMOVED';}
 
-  span.new {
-    background-color: #3698e5;
+  @keyframes spin {
+    from {transform: translate(-50%, -50%) rotate(0deg);}
+    to {transform: translate(-50%, -50%) rotate(360deg);}
   }
-
-  span.new:before {
-    content: 'NEW';
+  @keyframes pulse {
+    0% {transform: translate(-50%, -50%) scale(1);}
+    50% {transform: translate(-50%, -50%) scale(1.1);}
+    100% {transform: translate(-50%, -50%) scale(1);}
   }
-
-  span.deprecated {
-    background-color: #000;
-  }
-
-  span.deprecated:before {
-    content: 'DEPRECATED';
-  }
-
-  span.removed {
-    background-color: #f02c2c;
-  }
-
-  span.removed:before {
-    content: 'REMOVED';
+  @keyframes pulse-sonar {
+    0% {
+      box-shadow: 0 0 0 0 #09c;
+      transform: translate(-50%, -50%) scale(1);
+      border-color: var(--w-primary-color);
+      opacity: 0.5;
+    }
+    50% {
+      box-shadow: 0 0 0 15px rgba(9, 204, 204, 0);
+      transform: translate(-50%, -50%) scale(1.05);
+      border-color: #09c;
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(9, 204, 204, 0);
+      transform: translate(-50%, -50%) scale(1);
+      border-color: var(--w-primary-color);
+    }
   }
 }
 </style>

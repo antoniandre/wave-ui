@@ -98,7 +98,10 @@ export default {
       return WForm.props
     },
     events () {
-      return WForm.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
+      return WForm.emits.reduce((obj, label) => {
+        obj[label] = events[label] || {}
+        return obj
+      }, {})
     }
   }
 }

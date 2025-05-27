@@ -141,7 +141,10 @@ export default {
       return { ...WSelect.props, ...FormElementMixin.props }
     },
     events () {
-      return WSelect.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
+      return WSelect.emits.reduce((obj, label) => {
+        obj[label] = events[label] || {}
+        return obj
+      }, {})
     }
   }
 }

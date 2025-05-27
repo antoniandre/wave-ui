@@ -122,12 +122,12 @@ export default {
 
     menuMinWidth () {
       if (this.minWidth === 'activator') return this.activatorWidth ? `${this.activatorWidth}px` : 0
-      else return isNaN(this.minWidth) ? this.minWidth : (this.minWidth ? `${this.minWidth}px` : 0)
+      return isNaN(this.minWidth) ? this.minWidth : (this.minWidth ? `${this.minWidth}px` : 0)
     },
 
     menuMaxWidth () {
       if (this.maxWidth === 'activator') return this.activatorWidth ? `${this.activatorWidth}px` : 0
-      else return isNaN(this.maxWidth) ? this.maxWidth : (this.maxWidth ? `${this.maxWidth}px` : 0)
+      return isNaN(this.maxWidth) ? this.maxWidth : (this.maxWidth ? `${this.maxWidth}px` : 0)
     },
 
     menuClasses () {
@@ -190,7 +190,7 @@ export default {
             this.hoveringActivator = true
             this.open(e)
           },
-          mouseleave: e => {
+          mouseleave: () => {
             this.hoveringActivator = false
             // Wait 10ms, the time to get the hoveringMenu updated on mouseenter on the menu.
             setTimeout(() => {
@@ -282,6 +282,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-menu-wrap {display: none;}
 
 .w-menu {
@@ -296,7 +298,7 @@ export default {
   &--tile {border-radius: 0;}
   &--round {
     border-radius: 99em;
-    padding: $base-increment round(2.5 * $base-increment);
+    padding: $base-increment math.round(2.5 * $base-increment);
   }
   &--shadow {box-shadow: $box-shadow;}
 
@@ -311,7 +313,15 @@ export default {
     &.w-menu--left {margin-left: -4 * $base-increment;}
     &.w-menu--right {margin-left: 4 * $base-increment;}
 
-    @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
-  }
+    // Menu without border.
+    &.w-menu--no-border {
+      @include triangle(var(--w-menu-bg-color), '.w-menu', 9px, 0);
+    }
+
+    // Menu with border.
+    &:not(.w-menu--no-border) {
+      @include triangle(var(--w-menu-bg-color), '.w-menu', 9px);
+    }
+}
 }
 </style>

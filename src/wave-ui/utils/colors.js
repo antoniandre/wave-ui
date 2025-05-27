@@ -20,7 +20,7 @@ export const generateColorShades = config => {
       const color = { label, color: (themeOfColors[label]?.color ?? themeOfColors[label])?.replace?.('#', '') }
       const col = color.color
       if (!col) continue // Don't break if a color is only set for one of the themes.
-      if (col.length === 3) color.color = col[0] + '' + col[0] + col[1] + col[1] + col[2] + col[2]
+      if (col.length === 3) color.color = `${col[0]}${col[0]}${col[1]}${col[1]}${col[2]}${col[2]}`
 
       for (let i = 1; i <= 6; i++) {
         const lighterColor = lighten(`#${color.color}`, i * (colorInfo?.lightIncrement ?? 16) + (colorInfo?.lightOffset ?? 0))
@@ -205,12 +205,12 @@ export function mixColors (color1, color2, weight = 50) {
   const red = clamp(Math.round(c1.red * c1Weight + c2.red * c2Weight), 0, 255)
   const green = clamp(Math.round(c1.green * c1Weight + c2.green * c2Weight), 0, 255)
   const blue = clamp(Math.round(c1.blue * c1Weight + c2.blue * c2Weight), 0, 255)
-
   const alpha = c1.alpha * percentage + c2.alpha * (1 - percentage)
 
-  return c1.hasAlpha || c2.hasAlpha || alpha !== 1
-    ? hexFromRGB(red, green, blue, alpha)
-    : hexFromRGB(red, green, blue)
+  const channels = [red, green, blue]
+  if (c1.hasAlpha || c2.hasAlpha || alpha !== 1) channels.push(alpha)
+
+  return hexFromRGB(...channels)
 }
 
 /**

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { App } from 'vue'
+import type { App } from 'vue'
 
-import { $waveui } from '@/types/$waveui'
+import type { $waveui } from '@/types/$waveui'
 
 export interface BreakpointConfig {
   xs?: number

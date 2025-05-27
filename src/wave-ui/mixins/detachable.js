@@ -306,7 +306,7 @@ export default {
     removeFromDOM () {
       document.removeEventListener('mousedown', this.onOutsideMousedown)
       window.removeEventListener('resize', this.onResize)
-      if (this.detachableEl && this.detachableEl.parentNode) {
+      if (this.detachableEl?.parentNode) {
         this.detachableVisible = false
         this.detachableEl.remove()
         this.detachableEl = null

@@ -133,9 +133,9 @@ export default {
     getItemValue (item) {
       if (item && typeof item === 'object') {
         if (item[this.itemValueKey] !== undefined) return item[this.itemValueKey]
-        else return item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item.index
+        return item[this.itemLabelKey] !== undefined ? item[this.itemLabelKey] : item.index
       }
-      else return item
+      return item
     },
 
     // Action of selecting 1 item.

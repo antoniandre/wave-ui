@@ -335,7 +335,7 @@ export default {
       // If the preview prop is a string, the user is setting the  preview to an icon and
       // don't need the actual file preview.
       const isPreviewAnIcon = typeof this.preview === 'string'
-      const isFileAnImage = original.type && original.type.startsWith('image/')
+      const isFileAnImage = original.type?.startsWith('image/')
       // Check if the file is an image and set a preview image.
       if (this.preview && !isPreviewAnIcon && isFileAnImage) {
         reader.addEventListener('load', e => {
@@ -357,7 +357,7 @@ export default {
     // On page load, check if the field is autofilled by the browser.
     // 20211229. Only a problem on Chrome. Firefox ok, Safari always prompts before filling up.
     setTimeout(() => {
-      if (this.$refs.input && this.$refs.input.matches(':-webkit-autofill')) this.isAutofilled = true
+      if (this.$refs.input?.matches(':-webkit-autofill')) this.isAutofilled = true
     }, 400) // Can't be less than 350: time for the browser to autofill.
   },
 
@@ -375,6 +375,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 $inactive-color: #777;
 
 .w-input {
@@ -602,8 +604,8 @@ $inactive-color: #777;
       padding-right: 0;
     }
     .w-input__input-wrap--round & {
-      padding-left: round(3 * $base-increment);
-      padding-right: round(3 * $base-increment);
+      padding-left: math.round(3 * $base-increment);
+      padding-right: math.round(3 * $base-increment);
     }
     .w-input--inner-icon-left & {left: 18px;}
     .w-input--no-padding.w-input--inner-icon-left & {left: 26px;}

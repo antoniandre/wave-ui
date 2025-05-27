@@ -1,3 +1,4 @@
+@use "sass:math";
 @use 'variables' as *;
 
 // All these CSS classes will not be generated if the $use-layout-classes is set to false.
@@ -51,6 +52,15 @@
     .d-iflex {display: inline-flex;}
     .d-block {display: block;}
     .d-iblock {display: inline-block;}
+
+    .ovh {overflow: hidden;}
+    .ovv {overflow: visible;}
+    .ova {overflow: auto;}
+
+    .op05 {opacity: 0.05;}
+    @for $i from 0 through 9 {
+      .op#{$i} {opacity: $i * 0.1;}
+    }
     // ----------------------------------------------
 
     // Borders (from 0 to 6), radii (from 0 to 6 + `m` for max).
@@ -67,7 +77,7 @@
     .bd0 {border: none;}
 
     @for $i from 1 through 6 {
-      .bdrs#{$i} {border-radius: round($i * $base-increment);}
+      .bdrs#{$i} {border-radius: math.round($i * $base-increment);}
     }
     .bdrsr {border-radius: 999em;}
     .bdrsm {border-radius: 100%;}
@@ -78,13 +88,13 @@
     // ----------------------------------------------
     @for $i from -6 through -1 {
       .sh#{$i} {
-        box-shadow: 0 0 (-1 * round($i * $base-increment)) rgba(#000, max(0.15 * divide(-$i, 2), 0.15)) inset;
+        box-shadow: 0 0 (-1 * math.round($i * $base-increment)) rgba(#000, max(0.15 * divide(-$i, 2), 0.15)) inset;
       }
     }
     @for $i from 1 through 6 {
       .sh#{$i} {
         box-shadow: 0 0 1px rgba(#000, 0.1),
-                    round($base-increment * divide($i, 4)) round($base-increment * divide($i, 4)) round($i * $base-increment) rgba(#000, max(0.15 * divide($i, 2), 0.15));
+                    math.round($base-increment * divide($i, 4)) math.round($base-increment * divide($i, 4)) math.round($i * $base-increment) rgba(#000, max(0.15 * divide($i, 2), 0.15));
       }
     }
     .sh0 {box-shadow: none;}
@@ -94,7 +104,7 @@
     // ----------------------------------------------
     // Margin.
     @for $i from 0 through 12 {
-      $number: round($i * $base-increment);
+      $number: math.round($i * $base-increment);
       .ma#{$i} {margin: $number;}
       @if ($i > 0) {.ma-#{$i} {margin: -$number;}}
     }
@@ -102,7 +112,7 @@
     .ma0 {margin: 0;}
 
     @for $i from 0 through 12 {
-      $number: round($i * $base-increment);
+      $number: math.round($i * $base-increment);
       .mx#{$i} {margin-left: $number;margin-right: $number;}
       .my#{$i} {margin-top: $number;margin-bottom: $number;}
       @if ($i > 0) {
@@ -116,7 +126,7 @@
     .my0 {margin-top: 0;margin-bottom: 0;}
 
     @for $i from 0 through 12 {
-      $number: round($i * $base-increment);
+      $number: math.round($i * $base-increment);
       .mt#{$i} {margin-top: $number;}
       .mr#{$i} {margin-right: $number;}
       .mb#{$i} {margin-bottom: $number;}
@@ -139,13 +149,13 @@
 
     // Padding.
     @for $i from 1 through 12 {
-      $number: round($i * $base-increment);
+      $number: math.round($i * $base-increment);
       .pa#{$i} {padding: $number;}
     }
     .pa0 {padding: 0;}
 
     @for $i from 0 through 12 {
-      $number: round($i * $base-increment);
+      $number: math.round($i * $base-increment);
       .px#{$i} {padding-left: $number;padding-right: $number;}
       .py#{$i} {padding-top: $number;padding-bottom: $number;}
     }
@@ -153,7 +163,7 @@
     .py0 {padding-top: 0;padding-bottom: 0;}
 
     @for $i from 0 through 12 {
-      $number: round($i * $base-increment);
+      $number: math.round($i * $base-increment);
       .pt#{$i} {padding-top: $number;}
       .pr#{$i} {padding-right: $number;}
       .pb#{$i} {padding-bottom: $number;}
@@ -167,14 +177,14 @@
 
     // Sizes.
     // ----------------------------------------------
-    // In all the sizes below, round(x / 2) * 2 to always have even numbers.
+    // In all the sizes below, math.round(x / 2) * 2 to always have even numbers.
     // Different heights with a mix of odd and even numbers will misalign
     // when vertically centering (vertical-align or align-items center).
-    .size--xs {font-size: round(0.8 * $base-font-size);}
-    .size--sm {font-size: round(0.9 * $base-font-size);}
-    .size--md {font-size: round(1 * $base-font-size);}
-    .size--lg {font-size: round(1.2 * $base-font-size);}
-    .size--xl {font-size: round(1.4 * $base-font-size);}
+    .size--xs {font-size: math.round(0.8 * $base-font-size);}
+    .size--sm {font-size: math.round(0.9 * $base-font-size);}
+    .size--md {font-size: math.round(1 * $base-font-size);}
+    .size--lg {font-size: math.round(1.2 * $base-font-size);}
+    .size--xl {font-size: math.round(1.4 * $base-font-size);}
     // ----------------------------------------------
 
     // Grid system.
@@ -211,6 +221,6 @@
 }
 
 @for $i from 1 through 12 {
-  .w-flex.gap#{$i}, .w-grid.gap#{$i} {gap: round($base-increment * $i);}
+  .w-flex.gap#{$i}, .w-grid.gap#{$i} {gap: math.round($base-increment * $i);}
 }
 .w-flex.gap0, .w-grid.gap0 {gap: 0;}

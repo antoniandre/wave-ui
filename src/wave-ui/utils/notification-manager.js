@@ -1,10 +1,10 @@
-import { createApp, defineComponent } from 'vue'
+import { h, render } from 'vue'
 import WNotificationManager from '../components/w-notification-manager.vue'
 
 export class NotificationManager {
   static #instance
   notifications
-   // Private fields.
+  // Private fields.
   _uid // A unique ID for each notification.
   _notificationDefaults
 
@@ -56,24 +56,17 @@ export class NotificationManager {
 /**
  * Injects the w-notification-manager in the DOM programmatically so the user does not have to do it.
  *
- * @param {Object} wApp The DOM element where to mount the w-notification-manager.
- * @param {Object} components All the Wave UI components to provide to the w-notification-manager,
- *                            so it can also use them.
- * @param {Object} $waveui the injected reactive instance of the WaveUI class.
+ * @param {Object} app The Vue app instance.
  */
-export const injectNotifManagerInDOM = (wApp, components, $waveui) => {
+export const injectNotifManagerInDOM = app => {
   const div = document.createElement('div')
-  wApp.appendChild(div)
+  document.body.appendChild(div) // Attach to body before teleporting.
 
-  const WNotifManager = createApp(defineComponent({
-    ...WNotificationManager,
-    inject: ['$waveui']
-  })).provide('$waveui', $waveui)
+  // Create a VNode for WNotificationManager and assign app._context to inherit global components.
+  const vnode = h(WNotificationManager)
+  vnode.appContext = app._context // ! \ Attach app context to inherit global components & provide()!
 
-  for (const id in components) {
-    const component = components[id]
-    WNotifManager.component(component.name, { ...component, inject: ['$waveui'] })
-  }
-  WNotifManager.mount(div)
-  div.remove() // The WNotificationManager contains a teleport to .w-app.
+  render(vnode, div) // Render inside the main app scope.
+
+  div.remove() // The WNotificationManager component teleports itself inside `.w-app`.
 }

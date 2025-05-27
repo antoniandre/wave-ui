@@ -1,0 +1,67 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "organizeImports": {
+    "enabled": false
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedVariables": "error",
+        "noConstructorReturn": "off"
+      },
+      "suspicious": {
+        "noConsoleLog": "warn",
+        "noDebugger": "warn",
+        "noAssignInExpressions": "off",
+        "noGlobalIsNan": "off"
+      },
+      "style": {
+        "useTemplate": "error",
+        "useBlockStatements": "off",
+        "noParameterAssign": "off",
+        "useNumberNamespace": "off"
+      },
+      "complexity": {
+        "noForEach": "off"
+      },
+      "performance": {
+        "noDelete": "off"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": false,
+    "formatWithErrors": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 320,
+    "lineEnding": "lf",
+    "ignore": ["dist", "node_modules", "docs"]
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "none",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "asNeeded"
+    }
+  },
+  "files": {
+    "ignore": ["dist", "node_modules", "*.min.js", "public", "src/assets", "coverage", "package-lock.json", "pnpm-lock.yaml", "yarn.lock", "docs"]
+  },
+  "overrides": [
+    {
+      "include": ["*.svelte", "*.astro", "*.vue"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off"
+          }
+        }
+      }
+    }
+  ]
+}

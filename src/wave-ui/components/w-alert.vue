@@ -131,6 +131,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-alert {
   position: relative;
   margin-top: 4 * $base-increment;
@@ -214,8 +216,8 @@ export default {
   &__dismiss.w-button {
     align-self: flex-start;
     margin-left: 2 * $base-increment;
-    margin-top: round(-0.5 * $base-increment);
-    margin-right: round(-0.5 * $base-increment);
+    margin-top: math.round(-0.5 * $base-increment);
+    margin-right: math.round(-0.5 * $base-increment);
   }
 
   & &__icon {
@@ -246,8 +248,8 @@ export default {
   // ------------------------------------------------------
   &.size--xs {padding-top: $base-increment;padding-bottom: $base-increment;}
   &.size--sm {padding-top: $base-increment;padding-bottom: $base-increment;}
-  &.size--md {padding-top: round(2 * $base-increment);padding-bottom: round(2 * $base-increment);}
-  &.size--lg {padding-top: round(3 * $base-increment);padding-bottom: round(2.5 * $base-increment);}
-  &.size--xl {padding-top: round(3 * $base-increment);padding-bottom: round(3 * $base-increment);}
+  &.size--md {padding-top: math.round(2 * $base-increment);padding-bottom: math.round(2 * $base-increment);}
+  &.size--lg {padding-top: math.round(3 * $base-increment);padding-bottom: math.round(2.5 * $base-increment);}
+  &.size--xl {padding-top: math.round(3 * $base-increment);padding-bottom: math.round(3 * $base-increment);}
 }
 </style>

@@ -183,7 +183,7 @@ export default {
 
     if (this.lazy) {
       const IntersectObserver = new IntersectionObserver(entry => {
-        if (entry[0] && entry[0].isIntersecting) {
+        if (entry[0]?.isIntersecting) {
           this.loadImage()
           IntersectObserver.disconnect()
         }

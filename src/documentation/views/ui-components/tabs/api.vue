@@ -105,7 +105,10 @@ export default {
       return WTabs.props
     },
     events () {
-      return WTabs.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
+      return WTabs.emits.reduce((obj, label) => {
+        obj[label] = events[label] || {}
+        return obj
+      }, {})
     }
   }
 }

@@ -31,13 +31,13 @@ export default {
     toolbarHeight () {
       const h = this.height
       // If a number is passed without units, append `px`.
-      return h && parseInt(h) == h ? h + 'px' : h
+      return h && parseInt(h) === h ? `${h}px` : h
     },
     // Return the width value if defined, or false otherwise.
     toolbarWidth () {
       const w = this.width
       // If a number is passed without units, append `px`.
-      return w && parseInt(w) == w ? w + 'px' : w
+      return w && parseInt(w) === w ? `${w}px` : w
     },
     classes () {
       return {

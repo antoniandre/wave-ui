@@ -135,7 +135,7 @@ export default {
     },
     applyShowStyles (el) {
       if (this.animX) {
-        el.style.width = this.el.width + 'px'
+        el.style.width = `${this.el.width}px`
         el.style.marginLeft = this.el.marginLeft
         el.style.marginRight = this.el.marginRight
         el.style.paddingLeft = this.el.paddingLeft
@@ -144,7 +144,7 @@ export default {
         el.style.borderRightWidth = this.el.borderRightWidth
       }
       if (this.animY) {
-        el.style.height = this.el.height + 'px'
+        el.style.height = `${this.el.height}px`
         el.style.marginTop = this.el.marginTop
         el.style.marginBottom = this.el.marginBottom
         el.style.paddingTop = this.el.paddingTop
@@ -153,7 +153,7 @@ export default {
         el.style.borderBottomWidth = this.el.borderBottomWidth
       }
 
-      el.style.transition = this.duration + 'ms ease-in-out'
+      el.style.transition = `${this.duration}ms ease-in-out`
     },
     applyOriginalStyles (el) {
       el.style.cssText = this.el.originalStyles

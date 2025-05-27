@@ -79,6 +79,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-tag {
   position: relative;
   display: inline-flex;
@@ -103,37 +105,37 @@ export default {
   &--shadow {box-shadow: $box-shadow;}
 
   &.size--xs {
-    $font-size: round(0.7 * $base-font-size);
+    $font-size: math.round(0.7 * $base-font-size);
     font-size: $font-size;
     line-height: $font-size + 2px;
-    padding: round(0.25 * $base-increment) $base-increment;
+    padding: math.round(0.25 * $base-increment) $base-increment;
   }
   &.size--sm {
-    $font-size: round(0.82 * $base-font-size);
+    $font-size: math.round(0.82 * $base-font-size);
     font-size: $font-size;
     line-height: $font-size + 2px;
-    padding: round(0.25 * $base-increment) $base-increment;
+    padding: math.round(0.25 * $base-increment) $base-increment;
   }
   &.size--md {
-    $font-size: round(0.85 * $base-font-size);
+    $font-size: math.round(0.85 * $base-font-size);
     font-size: $font-size;
     line-height: $font-size + 4px;
-    padding-top: round(0.25 * $base-increment);
-    padding-bottom: round(0.25 * $base-increment);
+    padding-top: math.round(0.25 * $base-increment);
+    padding-bottom: math.round(0.25 * $base-increment);
   }
   &.size--lg {
-    $font-size: round(1.1 * $base-font-size);
+    $font-size: math.round(1.1 * $base-font-size);
     font-size: $font-size;
     line-height: $font-size + 4px;
-    padding-top: round(0.5 * $base-increment);
-    padding-bottom: round(0.5 * $base-increment);
+    padding-top: math.round(0.5 * $base-increment);
+    padding-bottom: math.round(0.5 * $base-increment);
   }
   &.size--xl {
-    $font-size: round(1.3 * $base-font-size);
+    $font-size: math.round(1.3 * $base-font-size);
     font-size: $font-size;
     line-height: $font-size + 4px;
-    padding-top: round(1 * $base-increment);
-    padding-bottom: round(1 * $base-increment);
+    padding-top: math.round(1 * $base-increment);
+    padding-bottom: math.round(1 * $base-increment);
   }
 
   &--clickable {

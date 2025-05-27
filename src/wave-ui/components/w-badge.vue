@@ -66,13 +66,13 @@ export default {
       ]
     },
     classes () {
-      const slotText = this.$slots.badge && this.$slots.badge().map(item => item.children).join('')
+      const slotText = this.$slots.badge?.().map(item => item.children).join('')
 
       return {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         [this.badgeClass]: this.badgeClass || null,
-        'w-badge--round': this.round || (slotText || this.modelValue + '' || '').length < 2,
+        'w-badge--round': this.round || (slotText || `${this.modelValue}` || '').length < 2,
         'w-badge--dark': this.dark,
         'w-badge--light': this.light,
         'w-badge--outline': this.outline,
@@ -92,6 +92,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-badge-wrap {
   position: relative;
   display: inline-flex;
@@ -105,9 +107,9 @@ export default {
   user-select: none;
   border-radius: 99em;
   // Always get an even number for better text vertical align.
-  height: round(1.1 * divide($base-font-size, 2)) * 2;
-  line-height: round(1.1 * divide($base-font-size, 2)) * 2;
-  min-width: round(1.1 * divide($base-font-size, 2)) * 2;
+  height: math.round(1.1 * divide($base-font-size, 2)) * 2;
+  line-height: math.round(1.1 * divide($base-font-size, 2)) * 2;
+  min-width: math.round(1.1 * divide($base-font-size, 2)) * 2;
   z-index: 1;
   padding: 0 $base-increment;
 
@@ -124,38 +126,38 @@ export default {
   // Sizes.
   &.size--xs {
     // Always get an even number for better text vertical alignment.
-    $height: round(divide($base-font-size, 2)) * 2;
-    font-size: round(0.67 * divide($base-font-size, 2)) * 2;
+    $height: math.round(divide($base-font-size, 2)) * 2;
+    font-size: math.round(0.67 * divide($base-font-size, 2)) * 2;
     height: $height;
     line-height: $height;
     min-width: $height;
 
-    &--round {width: $height;padding: 0 round(divide($height, 2));}
+    &--round {width: $height;padding: 0 math.round(divide($height, 2));}
   }
   &.size--sm {
-    $height: round(1.1 * divide($base-font-size, 2)) * 2;
-    font-size: round(0.75 * divide($base-font-size, 2)) * 2;
+    $height: math.round(1.1 * divide($base-font-size, 2)) * 2;
+    font-size: math.round(0.75 * divide($base-font-size, 2)) * 2;
     height: $height;
     line-height: $height;
     min-width: $height;
   }
   &.size--md {
-    $height: round(1.3 * divide($base-font-size, 2)) * 2;
-    font-size: round(0.9 * divide($base-font-size, 2)) * 2;
+    $height: math.round(1.3 * divide($base-font-size, 2)) * 2;
+    font-size: math.round(0.9 * divide($base-font-size, 2)) * 2;
     height: $height;
     line-height: $height;
     min-width: $height;
   }
   &.size--lg {
-    $height: round(1.5 * divide($base-font-size, 2)) * 2;
-    font-size: round(1.05 * divide($base-font-size, 2)) * 2;
+    $height: math.round(1.5 * divide($base-font-size, 2)) * 2;
+    font-size: math.round(1.05 * divide($base-font-size, 2)) * 2;
     height: $height;
     line-height: $height;
     min-width: $height;
   }
   &.size--xl {
-    $height: round(1.8 * divide($base-font-size, 2)) * 2;
-    font-size: round(1.2 * divide($base-font-size, 2)) * 2;
+    $height: math.round(1.8 * divide($base-font-size, 2)) * 2;
+    font-size: math.round(1.2 * divide($base-font-size, 2)) * 2;
     height: $height;
     line-height: $height;
     min-width: $height;
@@ -171,12 +173,12 @@ export default {
     &.w-badge--bottom {margin-bottom: -1 * $base-increment;}
     &.w-badge--left {margin-right: -3 * $base-increment;}
     &.w-badge--right {margin-left: -3 * $base-increment;}
-    &.w-badge--top.size--xs {margin-top: round(-0.5 * $base-increment);}
-    &.w-badge--bottom.size--xs {margin-bottom: round(-0.5 * $base-increment);}
-    &.w-badge--top.size--sm {margin-top: round(-0.75 * $base-increment);}
-    &.w-badge--bottom.size--sm {margin-bottom: round(-0.75 * $base-increment);}
-    &.w-badge--top.size--lg {margin-top: round(-1.5 * $base-increment);}
-    &.w-badge--bottom.size--lg {margin-bottom: round(-1.5 * $base-increment);}
+    &.w-badge--top.size--xs {margin-top: math.round(-0.5 * $base-increment);}
+    &.w-badge--bottom.size--xs {margin-bottom: math.round(-0.5 * $base-increment);}
+    &.w-badge--top.size--sm {margin-top: math.round(-0.75 * $base-increment);}
+    &.w-badge--bottom.size--sm {margin-bottom: math.round(-0.75 * $base-increment);}
+    &.w-badge--top.size--lg {margin-top: math.round(-1.5 * $base-increment);}
+    &.w-badge--bottom.size--lg {margin-bottom: math.round(-1.5 * $base-increment);}
     &.w-badge--top.size--xl {margin-top: -2 * $base-increment;}
     &.w-badge--bottom.size--xl {margin-bottom: -2 * $base-increment;}
   }
@@ -190,10 +192,10 @@ export default {
   &--shadow {box-shadow: $box-shadow;}
 
   &--dot.w-badge {min-width: 0;padding: 0;aspect-ratio: 1;}
-  &--dot.size--xs {height: round(1.35 * $base-increment);}
-  &--dot.size--sm {height: round(1.7 * $base-increment);}
-  &--dot.size--md {height: round(2.2 * $base-increment);}
-  &--dot.size--lg {height: round(2.75 * $base-increment);}
+  &--dot.size--xs {height: math.round(1.35 * $base-increment);}
+  &--dot.size--sm {height: math.round(1.7 * $base-increment);}
+  &--dot.size--md {height: math.round(2.2 * $base-increment);}
+  &--dot.size--lg {height: math.round(2.75 * $base-increment);}
   &--dot.size--xl {height: 3 * $base-increment;}
 }
 </style>

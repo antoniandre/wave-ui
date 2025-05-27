@@ -118,8 +118,8 @@ export default {
       // eslint-disable-next-line array-callback-return
       return children.map(node => {
         if (!node.children || typeof node.children === 'string') return node.children || ''
-        else if (Array.isArray(node.children)) return this.getSlotChildrenText(node.children)
-        else if (node.children.default) return this.getSlotChildrenText(node.children.default())
+        if (Array.isArray(node.children)) return this.getSlotChildrenText(node.children)
+        if (node.children.default) return this.getSlotChildrenText(node.children.default())
       }).join('')
     },
 
@@ -144,11 +144,11 @@ export default {
 
       const { html: htmlSlot, pug, js: jsSlot, css: cssSlot, scss } = this.$slots
       const slots = {
-        html: (htmlSlot && htmlSlot()[0].children) || '',
-        pug: ((pug && pug()[0].children) || '').replace(/(#[\w.-]+)(?=\s|\))(?!\n)/gi, '$1=""'),
-        js: (jsSlot && jsSlot()[0].children) || '',
-        css: (cssSlot && cssSlot()[0].children) || '',
-        scss: (scss && scss()[0].children) || ''
+        html: (htmlSlot?.()?.[0]?.children) || '',
+        pug: ((pug?.()?.[0]?.children) || '').replace(/(#[\w.-]+)(?=\s|\))(?!\n)/gi, '$1=""'),
+        js: (jsSlot?.()?.[0]?.children) || '',
+        css: (cssSlot?.()?.[0]?.children) || '',
+        scss: (scss?.()?.[0]?.children) || ''
       }
       let html = ''
       let css = ''

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-import {
+import type {
   ComputedGetter,
   ComputedOptions,
   DefineComponent,
@@ -11,7 +11,7 @@ import {
   SlotsType
 } from 'vue'
 
-import {
+import type {
   PublicProps,
   ResolveProps
 } from '../extra-vue-types'
@@ -39,10 +39,10 @@ export interface WSelectDropdownItem {
   /**
    * The *default* key to access the vlue of the item.
    * This can be overriden using the `item-value-key` property.
-   * @property {string} value
+   * @property {string|number|boolean} value
    * @see https://antoniandre.github.io/wave-ui/w-select#item-value-key-prop
    */
-  value?: string
+  value?: string|number|boolean
 
   /**
    * Whether or not this list item is disabled.

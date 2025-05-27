@@ -46,7 +46,10 @@ export default {
       return WApp.props
     },
     events () {
-      return (WApp.emits || []).reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return (WApp.emits || []).reduce((obj, label) => {
+        obj[label] = { description: eventsDescs[label] || '' }
+        return obj
+      }, {})
     }
   }
 }

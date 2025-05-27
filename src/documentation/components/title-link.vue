@@ -10,13 +10,11 @@ component.title-link(:is="tag" :class="classes")
 </template>
 
 <script>
-const getSlotText = function (slot) {
-  return (slot || [])?.reduce?.((array, node) => {
-    const hasString = typeof node === 'string' || typeof node.children === 'string'
-    array.push(hasString ? (node?.children || node).trim() : getSlotText(node.children))
-    return array
-  }, []).join(' ')
-}
+const getSlotText = slot => (slot || [])?.reduce?.((array, node) => {
+  const hasString = typeof node === 'string' || typeof node?.children === 'string'
+  array.push(hasString ? (node?.children || node).trim() : getSlotText(node?.children))
+  return array
+}, [])?.join(' ') || ''
 
 export default {
   props: {
@@ -43,7 +41,7 @@ export default {
 
     Slug () {
       if (this.slug) return this.slug
-      else if (!this.$slots.default) return ''
+      if (!this.$slots.default) return ''
 
       const source = this.label || getSlotText(this.$slots.default())
       return (

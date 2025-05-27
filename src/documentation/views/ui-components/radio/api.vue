@@ -142,10 +142,16 @@ export default {
       return { ...WRadio.props, ...FormElementMixin.props }
     },
     radiosEvents () {
-      return WRadios.emits.reduce((obj, label) => (obj[label] = radios.events[label] || {}) && obj, {})
+      return WRadios.emits.reduce((obj, label) => {
+        obj[label] = radios.events[label] || {}
+        return obj
+      }, {})
     },
     radioEvents () {
-      return WRadio.emits.reduce((obj, label) => (obj[label] = radio.events[label] || {}) && obj, {})
+      return WRadio.emits.reduce((obj, label) => {
+        obj[label] = radio.events[label] || {}
+        return obj
+      }, {})
     }
   }
 }

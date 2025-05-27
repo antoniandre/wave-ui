@@ -124,7 +124,10 @@ export default {
       return WAccordion.props
     },
     events () {
-      return WAccordion.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
+      return WAccordion.emits.reduce((obj, label) => {
+        obj[label] = events[label] || {}
+        return obj
+      }, {})
     }
   }
 }

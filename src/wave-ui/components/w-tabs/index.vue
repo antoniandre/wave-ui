@@ -257,7 +257,7 @@ export default {
     updateSlider (domLookup = true) {
       if (domLookup) {
         const ref = this.$refs['tabs-bar']
-        this.activeTabEl = ref && ref.querySelector('.w-tabs__bar-item--active')
+        this.activeTabEl = ref?.querySelector('.w-tabs__bar-item--active')
       }
 
       if (!this.fillBar && this.activeTabEl) {
@@ -285,7 +285,7 @@ export default {
         // Scroll the new active tab item title into view if needed.
         this.$nextTick(() => {
           const ref = this.$refs['tabs-bar']
-          this.activeTabEl = ref && ref.querySelector(`.w-tabs__bar-item:nth-child(${index + 1})`)
+          this.activeTabEl = ref?.querySelector(`.w-tabs__bar-item:nth-child(${index + 1})`)
           if (this.activeTabEl) {
             this.activeTabEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
           }
@@ -348,6 +348,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-tabs {
   z-index: 1;
   border-radius: $border-radius;
@@ -386,7 +388,7 @@ export default {
     align-items: center;
     padding: (2 * $base-increment) (3 * $base-increment);
     justify-content: center;
-    font-size: round(1.2 * $base-font-size);
+    font-size: math.round(1.2 * $base-font-size);
     transition: $transition-duration ease-in-out, flex-grow 0s, flex 0s; // `flex` for Safari.
     user-select: none;
     cursor: pointer;

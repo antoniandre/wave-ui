@@ -55,7 +55,10 @@ export default {
       return WTimeline.props
     },
     events () {
-      return WTimeline.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WTimeline.emits.reduce((obj, label) => {
+        obj[label] = { description: eventsDescs[label] || '' }
+        return obj
+      }, {})
     }
   }
 }

@@ -44,7 +44,7 @@ $css-scope: '.w-app' !default; // Allows control on CSS rules priority.
 $use-layout-classes: true !default;
 
 $base-font-size: 14px !default; // Must be a px unit.
-$base-increment: round(divide($base-font-size, 4)) !default;
+$base-increment: math.round(divide($base-font-size, 4)) !default;
 $layout-padding: $base-increment * 4 !default; // Applied on the .content-wrap tag.
 $border-radius: 4px !default;
 $border-color: color-mix(in srgb, var(--w-contrast-bg-color) 12%, transparent) !default;
@@ -54,9 +54,9 @@ $fast-transition-duration: 0.15s !default;
 $box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
              0 2px 2px 0 rgba(0, 0, 0, 0.15),
              0 1px 5px 0 rgba(0, 0, 0, 0.15) !default;
-$form-field-height: round(2 * $base-font-size) !default;
+$form-field-height: math.round(2 * $base-font-size) !default;
 // Always an even number for better vertical alignment. (Used in checkbox, radio, switch)
-$small-form-el-size: round(divide(1.3 * $base-font-size, 2)) * 2 !default;
+$small-form-el-size: math.round(divide(1.3 * $base-font-size, 2)) * 2 !default;
 
 // Detachable elements are: w-tooltip, w-menu, w-confirm.
 $detachable-bg-color: $base-bg-color !default;
@@ -147,4 +147,11 @@ $toolbar-bg-color: $base-bg-color !default;
 $tooltip-bg-color: $detachable-bg-color !default;
 $tooltip-color: $detachable-color !default;
 $tooltip-border-color: $border-color !default;
+// --------------------------------------------------------
+
+// w-scrollable.
+// --------------------------------------------------------
+$scrollbar-size: 8px !default;
+$scrollbar-bg-color: color-mix(in srgb, var(--w-contrast-bg-color) 8%, var(--w-base-bg-color)) !default;
+$scrollbar-thumb-color: color-mix(in srgb, var(--w-contrast-bg-color) 25%, var(--w-base-bg-color)) !default;
 // --------------------------------------------------------

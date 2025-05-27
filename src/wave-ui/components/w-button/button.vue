@@ -145,6 +145,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 $spinner-size: 40;
 
 .w-button {
@@ -226,16 +228,16 @@ $spinner-size: 40;
   }
 
   // Sizes adjustments (always an even number for easier vertical alignments).
-  &.size--xs {height: round(1.25 * divide($base-font-size, 2)) * 2;}
-  &.size--sm {height: round(1.55 * divide($base-font-size, 2)) * 2;}
-  &.size--md {height: round(1.85 * divide($base-font-size, 2)) * 2;}
-  &.size--lg {height: round(2.2 * divide($base-font-size, 2)) * 2;}
-  &.size--xl {height: round(2.5 * divide($base-font-size, 2)) * 2;}
+  &.size--xs {height: math.round(1.25 * divide($base-font-size, 2)) * 2;}
+  &.size--sm {height: math.round(1.55 * divide($base-font-size, 2)) * 2;}
+  &.size--md {height: math.round(1.85 * divide($base-font-size, 2)) * 2;}
+  &.size--lg {height: math.round(2.2 * divide($base-font-size, 2)) * 2;}
+  &.size--xl {height: math.round(2.5 * divide($base-font-size, 2)) * 2;}
 
   &.size--xs {padding-left: $base-increment;padding-right: $base-increment;}
   &.size--xl {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
-  &--round.size--xs {padding-left: round(1.5 * $base-increment);padding-right: round(1.5 * $base-increment);}
-  &--round.size--xl {padding-left: round(4.5 * $base-increment);padding-right: round(4.5 * $base-increment);}
+  &--round.size--xs {padding-left: math.round(1.5 * $base-increment);padding-right: math.round(1.5 * $base-increment);}
+  &--round.size--xl {padding-left: math.round(4.5 * $base-increment);padding-right: math.round(4.5 * $base-increment);}
   &--icon.size--xs {padding-left: 0;padding-right: 0;}
   &--icon.size--xl {padding-left: 0;padding-right: 0;}
 

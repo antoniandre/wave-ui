@@ -60,7 +60,10 @@ export default {
       return WBreadcrumbs.props
     },
     events () {
-      return WBreadcrumbs.emits.reduce((obj, label) => (obj[label] = { description: eventsDescs[label] || '' }) && obj, {})
+      return WBreadcrumbs.emits.reduce((obj, label) => {
+        obj[label] = { description: eventsDescs[label] || '' }
+        return obj
+      }, {})
     }
   }
 }

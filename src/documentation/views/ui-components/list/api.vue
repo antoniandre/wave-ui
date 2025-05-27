@@ -109,7 +109,10 @@ export default {
       return WList.props
     },
     events () {
-      return WList.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
+      return WList.emits.reduce((obj, label) => {
+        obj[label] = events[label] || {}
+        return obj
+      }, {})
     }
   }
 }

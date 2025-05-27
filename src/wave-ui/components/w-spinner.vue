@@ -55,6 +55,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-spinner {
   position: relative;
   display: inline-flex;
@@ -64,10 +66,10 @@ export default {
   aspect-ratio: 1;
   min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
 
-  &.size--xs {font-size: round(0.9 * divide($base-font-size, 2)) * 2;}
-  &.size--sm {font-size: round(1.5 * $base-font-size);}
-  &.size--md {font-size: round(2 * $base-font-size);}
-  &.size--lg {font-size: round(2.5 * $base-font-size);}
+  &.size--xs {font-size: math.round(0.9 * divide($base-font-size, 2)) * 2;}
+  &.size--sm {font-size: math.round(1.5 * $base-font-size);}
+  &.size--md {font-size: math.round(2 * $base-font-size);}
+  &.size--lg {font-size: math.round(2.5 * $base-font-size);}
   &.size--xl {font-size: 3 * $base-font-size;}
 
   &:before, &:after {

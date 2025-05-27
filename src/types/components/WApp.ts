@@ -3,15 +3,15 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import {
   ComputedGetter,
-  ComputedOptions,
-  DefineComponent,
-  EmitsOptions,
-  ExtractDefaultPropTypes,
-  MethodOptions,
-  SlotsType
+  type ComputedOptions,
+  type DefineComponent,
+  type EmitsOptions,
+  type ExtractDefaultPropTypes,
+  type MethodOptions,
+  type SlotsType
 } from 'vue'
 
-import {
+import type {
   PublicProps,
   ResolveProps
 } from '../extra-vue-types'
@@ -101,8 +101,7 @@ export interface WaveAppProps {
 // ----------------------------------------------------------------------------
 // Emits
 // ----------------------------------------------------------------------------
-export interface WaveAppEmits {
-}
+export type WaveAppEmits = {}
 
 // ----------------------------------------------------------------------------
 // Computeds

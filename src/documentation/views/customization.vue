@@ -11,8 +11,9 @@ main
     Wave UI components rely on SCSS variables that you can easily override from your SCSS file,
     just like this:
   pre.ssh-pre(data-label="SCSS" :dark="$store.state.darkMode")
-    span.purple.text-bold @import&nbsp;
+    span.purple.text-bold @use&nbsp;
     span.red-light2 'wave-ui/src/wave-ui/scss/_variables'
+    span.purple.text-bold &nbsp;as *
     span.blue-grey ;
     br
     br
@@ -63,15 +64,15 @@ main
   ul
     li.
       In your project #[span.code src] folder, create a #[code _variables.scss] (usually in an #[span.code scss]
-      folder), and import Wave UI's variables: #[code @import 'wave-ui/src/wave-ui/scss/_variables';].
+      folder), and import Wave UI's variables at the top: #[code @use "wave-ui/src/wave-ui/scss/variables/index" as *;].
 
     li.mt2
-      | Import your SCSS variables file globally from Vite config and re-serve the app.
+      | Import both your SCSS variables file and the one from Wave UI globally from Vite config and re-serve the app.
       ssh-pre(language="js" label="vite.config.js" :dark="$store.state.darkMode").
         css: {
           preprocessorOptions: {
             scss: {
-              additionalData: '@use "@/scss/variables" as *;'
+              additionalData: '@use "wave-ui/src/wave-ui/scss/variables/index" as *; @use "@/scss/variables" as *;'
             }
           }
         }
@@ -104,7 +105,7 @@ main
     span.grey-light1.text-italic // First import the Wave UI variables, then override what you want.
     br
     span.purple.text-bold @import&nbsp;
-    span.red-light2 'wave-ui/src/wave-ui/scss/_variables'
+    span.red-light2 'wave-ui/src/wave-ui/scss/variables/index'
     span.blue-grey ;
     br
     br

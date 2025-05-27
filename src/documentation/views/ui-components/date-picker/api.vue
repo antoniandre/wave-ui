@@ -33,7 +33,10 @@ export default {
       return WDatePicker.props
     },
     events () {
-      return WDatePicker.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
+      return WDatePicker.emits.reduce((obj, label) => {
+        obj[label] = events[label] || {}
+        return obj
+      }, {})
     }
   }
 }

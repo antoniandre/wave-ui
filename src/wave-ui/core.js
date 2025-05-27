@@ -45,7 +45,6 @@ const injectPresets = (component, presets) => {
 
         // If the given prop (= preset) is still not found in the mixins props raise warning.
         if (!foundProp) consoleWarn(`Attempting to set a preset on a prop that doesn't exist: \`${component.name}.${preset}\`.`)
-        continue // Continue to the next preset.
       }
     }
 
@@ -74,19 +73,40 @@ export default class WaveUI {
     theme: null, // The current theme (light or dark).
     _notificationManager: null,
 
-    // Callable from this.$waveui.
+    /**
+     * Notify the user. (Callable from this.$waveui)
+     *
+     * @param {...any} args - The arguments to pass to the notification manager.
+     */
     notify (...args) {
       this._notificationManager.notify(...args)
     },
 
-    // Callable from this.$waveui.
-    switchTheme (theme, skipFlatten = false) {
+    /**
+     * Switch the theme. (Callable from this.$waveui)
+     *
+     * @param {string} theme - The theme to switch to.
+     */
+    switchTheme (theme) {
       this.theme = theme
       document.documentElement.setAttribute('data-theme', theme)
       document.head.querySelector('#wave-ui-colors')?.remove?.()
       const themeColors = this.config.colors[this.theme]
       injectColorsCSSInDOM(themeColors, this.config.css.colorShadeCssVariables)
       this.colors = flattenColors(themeColors, colorPalette)
+    },
+
+    /**
+     * Set the classes of the app element. (Callable from this.$waveui)
+     *
+     * @param {string} classes - The classes to set.
+     */
+    setAppClasses (...classes) {
+      const wApp = document.querySelector('.w-app')
+      if (wApp) {
+        wApp.className = 'w-app' // First reset the classes.
+        wApp.classList.add(...classes)
+      }
     }
   }
 
@@ -131,10 +151,10 @@ export default class WaveUI {
           else $waveui.switchTheme(config.theme, true)
 
           injectCSSInDOM($waveui)
-          injectNotifManagerInDOM(wApp, components, $waveui)
+          injectNotifManagerInDOM(app)
 
           // This mixin must only run once, we can delete it.
-          app._context.mixins.find(mixin => mixin.mounted && delete mixin.mounted)
+          app._context.mixins.find(mixin => mixin.mounted && (mixin.mounted = undefined))
         }
       }
     })

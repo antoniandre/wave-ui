@@ -33,7 +33,10 @@ export default {
       return WScrollable.props
     },
     events () {
-      return WScrollable.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
+      return WScrollable.emits.reduce((obj, label) => {
+        obj[label] = events[label] || {}
+        return obj
+      }, {})
     }
   }
 }

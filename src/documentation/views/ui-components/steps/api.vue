@@ -33,7 +33,10 @@ export default {
       return WSteps.props
     },
     events () {
-      return WSteps.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})
+      return WSteps.emits.reduce((obj, label) => {
+        obj[label] = events[label] || {}
+        return obj
+      }, {})
     }
   }
 }

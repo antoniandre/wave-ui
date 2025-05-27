@@ -7,17 +7,9 @@
     "outDir": "dist/types/",
     "baseUrl": ".",
     "paths": {
-      "@/*": [ "src/*" ]
+      "@/*": ["src/*"]
     }
   },
-  "include": [
-    "./src/**/*",
-    "./src/**/*.ts",
-    "./src/*.d.ts",
-    "./src/**/*.d.ts"
-  ],
-  "exclude": [
-    "./dist/",
-    "./node_modules/"
-  ]
+  "include": ["./src/**/*", "./src/**/*.ts", "./src/*.d.ts", "./src/**/*.d.ts"],
+  "exclude": ["./dist/", "./node_modules/"]
 }

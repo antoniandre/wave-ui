@@ -154,6 +154,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 $outline-width: 2px;
 
 .w-switch {
@@ -207,7 +209,7 @@ $outline-width: 2px;
       box-sizing: border-box;
       border: none;
       width: 2 * $small-form-el-size;
-      height: round(0.7 * $small-form-el-size);
+      height: math.round(0.7 * $small-form-el-size);
     }
     .w-switch--thin :checked ~ & {background-color: $switch-inactive-color;}
 
@@ -248,7 +250,7 @@ $outline-width: 2px;
     .w-switch--on & {left: 100%;transform: translateX(-100%);}
 
     .w-switch--thin & {
-      top: - round(0.15 * $small-form-el-size);
+      top: - math.round(0.15 * $small-form-el-size);
       transform: scale(1.1);
       box-shadow: $box-shadow;
     }
@@ -278,7 +280,7 @@ $outline-width: 2px;
     :checked ~ & {transform: translateX(-100%) scale(0);left: 100%;}
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
-    .w-switch--thin & {top: - round(0.15 * $small-form-el-size);}
+    .w-switch--thin & {top: - math.round(0.15 * $small-form-el-size);}
   }
 
   &--ripple &__input:before {

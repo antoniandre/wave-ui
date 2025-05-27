@@ -136,7 +136,7 @@ export default {
             this.hoveringActivator = true
             this.open(e)
           },
-          mouseleave: e => {
+          mouseleave: () => {
             this.hoveringActivator = false
             this.close()
           }
@@ -215,12 +215,14 @@ export default {
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
 .w-tooltip {
   // Fix Safari where `width: max-content` does not take padding and border into consideration.
   display: table;
 
   position: absolute;
-  padding: $base-increment round(1.5 * $base-increment);
+  padding: $base-increment math.round(1.5 * $base-increment);
   border-radius: $border-radius;
   border: 1px solid $tooltip-border-color;
   background-color: $tooltip-bg-color;
@@ -238,7 +240,7 @@ export default {
   &--tile {border-radius: 0;}
   &--round {
     border-radius: 99em;
-    padding: $base-increment round(2.5 * $base-increment);
+    padding: $base-increment math.round(2.5 * $base-increment);
   }
   &--shadow {box-shadow: $box-shadow;}
   &--no-border {border: none;}
