@@ -1,6 +1,9 @@
 <template lang="pug">
 div
   title-link(h2) Basic
+  p.
+    Providing an array of items will automatically create a table row for each item.<br>
+    Note that the #[code class] key is used to add a custom class to the table row for easy row styling.
   example
     w-table(:headers="table1.headers" :items="table1.items")
     template(#pug).
@@ -19,11 +22,11 @@ div
             { label: 'Last name', key: 'lastName' }
           ],
           items: [
-            { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
-            { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
-            { id: 3, firstName: 'Rory', lastName: 'Bristol' },
-            { id: 4, firstName: 'Daley', lastName: 'Elliott' },
-            { id: 5, firstName: 'Virgil', lastName: 'Carman' }
+            { id: 1, class: 'row--1', firstName: 'Floretta', lastName: 'Sampson' },
+            { id: 2, class: 'row--2', firstName: 'Nellie', lastName: 'Lynn' },
+            { id: 3, class: 'row--3', firstName: 'Rory', lastName: 'Bristol' },
+            { id: 4, class: 'row--4', firstName: 'Daley', lastName: 'Elliott' },
+            { id: 5, class: 'row--5', firstName: 'Virgil', lastName: 'Carman' }
           ]
         }
       })
@@ -1997,21 +2000,21 @@ div
 import { faker } from '@faker-js/faker'
 
 const allItems = [
-  { id: 1, firstName: 'Floretta', lastName: 'Sampson' },
-  { id: 2, firstName: 'Nellie', lastName: 'Lynn' },
-  { id: 3, firstName: 'Rory', lastName: 'Bristol' },
-  { id: 4, firstName: 'Daley', lastName: 'Elliott' },
-  { id: 5, firstName: 'Virgil', lastName: 'Carman' },
-  { id: 6, firstName: 'Baldwin', lastName: 'Morison' },
-  { id: 7, firstName: 'Beckah', lastName: 'Mann' },
-  { id: 8, firstName: 'Davie', lastName: 'Forester' },
-  { id: 9, firstName: 'Andi', lastName: 'Montgomery' },
-  { id: 10, firstName: 'Magnolia', lastName: 'Kirk' },
-  { id: 11, firstName: 'Hamilton', lastName: 'Mallory' },
-  { id: 12, firstName: 'Sheree', lastName: 'Castle' },
-  { id: 13, firstName: 'Rebekah', lastName: 'Eason' },
-  { id: 14, firstName: 'Maude', lastName: 'Hayley' },
-  { id: 15, firstName: 'Josie', lastName: 'Richard' }
+  { id: 1, class: 'row--1', firstName: 'Floretta', lastName: 'Sampson' },
+  { id: 2, class: 'row--2', firstName: 'Nellie', lastName: 'Lynn' },
+  { id: 3, class: 'row--3', firstName: 'Rory', lastName: 'Bristol' },
+  { id: 4, class: 'row--4', firstName: 'Daley', lastName: 'Elliott' },
+  { id: 5, class: 'row--5', firstName: 'Virgil', lastName: 'Carman' },
+  { id: 6, class: 'row--6', firstName: 'Baldwin', lastName: 'Morison' },
+  { id: 7, class: 'row--7', firstName: 'Beckah', lastName: 'Mann' },
+  { id: 8, class: 'row--8', firstName: 'Davie', lastName: 'Forester' },
+  { id: 9, class: 'row--9', firstName: 'Andi', lastName: 'Montgomery' },
+  { id: 10, class: 'row--10', firstName: 'Magnolia', lastName: 'Kirk' },
+  { id: 11, class: 'row--11', firstName: 'Hamilton', lastName: 'Mallory' },
+  { id: 12, class: 'row--12', firstName: 'Sheree', lastName: 'Castle' },
+  { id: 13, class: 'row--13', firstName: 'Rebekah', lastName: 'Eason' },
+  { id: 14, class: 'row--14', firstName: 'Maude', lastName: 'Hayley' },
+  { id: 15, class: 'row--15', firstName: 'Josie', lastName: 'Richard' }
 ]
 
 const tableItemsInAPI = {
