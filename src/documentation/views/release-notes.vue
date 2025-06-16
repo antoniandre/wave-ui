@@ -28,6 +28,14 @@ main
     //-   unselectableBranches: { type: Boolean },
 
     li.minor
+      strong.version v3.22.0
+      ul
+        li
+          strong w-table
+          ul
+            li Added the #[code class] key to the table items to add a custom class to the table row. #[span.tag.new]
+
+    li.minor
       strong.version v3.21.0
       ul
         li
