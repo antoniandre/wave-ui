@@ -73,7 +73,7 @@
             tr.w-table__row(
               v-else
               @click="doSelectRow(item, i)"
-              :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined }")
+              :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined, [item.class]: item.class }")
               template(v-for="(header, j) in headers")
                 td.w-table__cell(
                   v-if="$slots[`item-cell.${header.key}`] || $slots[`item-cell.${j + 1}`] || $slots['item-cell']"
