@@ -410,7 +410,7 @@ $inactive-color: #777;
     border: $border;
     transition: border $transition-duration;
 
-    .w-ui.h-auto & {height: auto;}
+    .w-input.h-auto & {height: auto;}
     .w-input--floating-label & {margin-top: 3 * $base-increment;}
     .w-input[class^="bdrs"] &, .w-input[class*=" bdrs"] & {border-radius: inherit;}
 
