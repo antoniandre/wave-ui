@@ -10,8 +10,17 @@
     .hide {display: none;}
     .spacer {flex-grow: 1;}
 
-    .h-auto, .w-cmp.h-auto, .w-cmp .w-form-el.h-auto {height: auto;}
-    .h-screen, .w-cmp.h-screen {height: 100vh;}
+    .grow {flex-grow: 1;flex-basis: auto;}
+    .no-grow {flex-grow: 0;}
+    .shrink {flex-shrink: 1;}
+    .no-shrink {flex-shrink: 0;}
+    .fill-width {width: 100%;}
+    .fill-height {height: 100%;}
+    .h-auto {height: auto;}
+    .h-screen {height: 100vh;}
+    .basis-zero {flex-basis: 0;}
+    .wrap {flex-wrap: wrap;}
+    .no-wrap {flex-wrap: nowrap;}
 
     .align-start {align-items: flex-start;}
     .align-center {align-items: center;}
