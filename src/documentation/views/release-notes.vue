@@ -28,10 +28,27 @@ main
     //-   unselectableBranches: { type: Boolean },
 
     li.minor
+      strong.version v3.23.0
+      ul
+        li
+          strong CSS
+          ul
+            li Added the #[code .h-auto] and #[code .h-screen] classes to set the height to auto or screen height.
+            li Changed the default CSS scope to #[code html .w-app] to facilitate overriding the default Wave UI components classes.
+        li
+          strong.code w-input
+          ul
+            li Added the #[code inputClass] prop to add additional classes to the input element. #[span.tag.new]
+        li
+          strong.code TypeScript
+          ul
+            li Resolve #[code Could not find a declaration file for module 'wave-ui'] in IDE. #[issue-link 170]
+
+    li.minor
       strong.version v3.22.0
       ul
         li
-          strong w-table
+          strong.code w-table
           ul
             li Added the #[code class] key to the table items to add a custom class to the table row. #[span.tag.new]
 
@@ -89,7 +106,7 @@ main
       strong.version v3.19.0
       ul
         li
-          strong w-notification-manager
+          strong.code w-notification-manager
           ul
             li Removed the #[code WNotificationManager] from Vue dev tools and now only use a single Vue App instance.
 
@@ -97,7 +114,7 @@ main
       strong.version v3.18.1
       ul
         li
-          strong w-accordion
+          strong.code w-accordion
           ul
             li Allow clicking through the title :before.
         li
@@ -148,7 +165,7 @@ main
       strong.version v3.17.4
       ul
         li
-          strong w-button
+          strong.code w-button
           ul
             li Prevent the button action to be called while the button is in the loading state.
 
@@ -156,7 +173,7 @@ main
       strong.version v3.17.0
       ul
         li
-          strong w-accordion
+          strong.code w-accordion
           ul
             li Added a new w-accordion-item component for external use within #[strong.code w-accordion]. #[span.tag.new]
 
