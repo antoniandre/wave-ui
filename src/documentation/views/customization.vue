@@ -166,11 +166,11 @@ main
   pre.ssh-pre(data-label="SCSS" :dark="$store.state.darkMode")
     span.pink $css-scope
     span.blue-grey.mr1 :
-    span.red-light2 '.w-app'
+    span.red-light2 'html .w-app'
     span.blue-grey ;
   p.
     For instance if you set the scope to #[code html > body > div.w-app], the default
-    #[code .w-app .primary {color: #234781;}] would become
+    #[code html .w-app .primary {color: #234781;}] would become
     #[code html > body > div.w-app .primary {color: #234781;}].
   alert.mt6.py3(success).
     This means you can control all the css rules specificity and consequently their priority!
