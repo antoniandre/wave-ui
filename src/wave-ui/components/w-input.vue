@@ -49,7 +49,8 @@ component(
         :disabled="isDisabled || null"
         :required="required || null"
         :tabindex="tabindex || null"
-        v-bind="attrs")
+        v-bind="attrs"
+        :class="inputClass")
       //- Input type file.
       template(v-else)
         input(
@@ -165,7 +166,8 @@ export default {
     // https://stackoverflow.com/questions/16365668/pre-populate-html-form-file-input
     files: { type: Array },
     dark: { type: Boolean },
-    light: { type: Boolean }
+    light: { type: Boolean },
+    inputClass: { type: String } // Additional classes for the input element.
     // Props from mixin: name, disabled, readonly, required, tabindex, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -408,6 +410,7 @@ $inactive-color: #777;
     border: $border;
     transition: border $transition-duration;
 
+    .w-ui.h-auto & {height: auto;}
     .w-input--floating-label & {margin-top: 3 * $base-increment;}
     .w-input[class^="bdrs"] &, .w-input[class*=" bdrs"] & {border-radius: inherit;}
 
