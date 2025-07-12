@@ -28,6 +28,15 @@ main
     //-   unselectableBranches: { type: Boolean },
 
     li.minor
+      strong.version v3.24.0
+      ul
+        li
+          strong.code w-image
+          ul
+            li Added the #[code w-image--error] class in case of image error. #[span.tag.new]
+            li Provide the image wrapper element to the #[code error] event handler. #[span.tag.new]
+
+    li.minor
       strong.version v3.23.0
       ul
         li
