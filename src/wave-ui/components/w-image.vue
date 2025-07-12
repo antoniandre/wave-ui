@@ -1,5 +1,10 @@
 <template lang="pug">
-component.w-image(:is="wrapperTag" :class="wrapperClasses" :style="wrapperStyles")
+component.w-image(
+  :is="wrapperTag"
+  ref="imageWrap"
+  :class="wrapperClasses"
+  :style="wrapperStyles"
+  @error="error = true")
   transition(:name="transition" appear)
     component.w-image__image(
       v-if="loaded"
@@ -60,6 +65,7 @@ export default {
     return {
       loading: false,
       loaded: false,
+      error: false,
       // The computed image source, and real image dimensions.
       computedImg: {
         src: '',
@@ -92,7 +98,8 @@ export default {
       return {
         'w-image--absolute': this.absolute,
         'w-image--fixed': this.fixed,
-        'w-image--has-ratio': this.normalized.ratio
+        'w-image--has-ratio': this.normalized.ratio,
+        'w-image--error': this.error
       }
     },
 
@@ -160,7 +167,8 @@ export default {
           return resolve(img)
         }
         img.onerror = error => {
-          this.$emit('error', error)
+          this.error = true
+          this.$emit('error', error, this.$refs.imageWrap)
           // If a fallback is provided & not already trying to load it, load the fallback src.
           if (this.fallback && !loadFallback) {
             this.loading = false
