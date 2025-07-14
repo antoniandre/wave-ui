@@ -84,6 +84,15 @@ main
     .d-block {display: block;}
     .d-iblock {display: inline-block;}
 
+    .ovh {overflow: hidden;}
+    .ovv {overflow: visible;}
+    .ova {overflow: auto;}
+
+    .por {position: relative;}
+    .poa {position: absolute;}
+    .pof {position: fixed;}
+    .pos {position: sticky;}
+
     .text-left {text-align: left;}
     .text-center {text-align: center;}
     .text-right {text-align: right;}
@@ -97,6 +106,8 @@ main
     .no-shrink {flex-shrink: 0;}
     .fill-width {width: 100%;}
     .fill-height {height: 100%;}
+    .h-auto {height: auto;}
+    .h-screen {height: 100vh;}
     .basis-zero {flex-basis: 0;}
 
     .align-start {align-items: flex-start;}
