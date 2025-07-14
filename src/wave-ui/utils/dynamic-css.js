@@ -271,9 +271,18 @@ export const injectCSSInDOM = $waveui => {
     css.id = 'wave-ui-styles'
     css.innerHTML = doDynamicCSS(config)
 
-    const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
-    if (firstStyle) firstStyle.before(css)
-    else document.head.appendChild(css)
+    // Prepend or append the CSS to the head based on the config.css.prependCss option.
+    const stylesheets = document.head.querySelectorAll('style,link[rel="stylesheet"]')
+    if (config.css.prependCss) {
+      const firstStyle = stylesheets[0]
+      if (firstStyle) firstStyle.before(css)
+      else document.head.prepend(css)
+    }
+    else {
+      const lastStyle = stylesheets[stylesheets.length - 1]
+      if (lastStyle) lastStyle.after(css)
+      else document.head.appendChild(css)
+    }
   }
 
   getBreakpoint($waveui)

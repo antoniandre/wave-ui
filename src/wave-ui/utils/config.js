@@ -10,6 +10,7 @@ const config = reactive({
     xl: 9999 // Xl only needs a greater value than lg but starts from lg and goes to infinity.
   },
   css: {
+    prepend: false, // Prepend the CSS to the head instead of appending it.
     // Generate shades for custom colors and status colors.
     // Note: the color palette shades are always generated separately from SCSS.
     colorShades: true,
