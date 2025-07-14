@@ -28,6 +28,16 @@ main
     //-   unselectableBranches: { type: Boolean },
 
     li.minor
+      strong.version v3.25.0
+      ul
+        li
+          strong CSS
+          ul
+            li Prepend or append the CSS to the head based on the config.css.prependCss option. #[span.tag.new]
+            li Added the #[code .por], #[code .poa], #[code .pof] and #[code .pos] classes along with breakpoints overrides classes to set the position to relative, absolute, fixed or sticky. #[span.tag.new]
+            li Added #[code .h-auto] and #[code .h-screen] classes to the breakpoints overrides. #[span.tag.new]
+
+    li.minor
       strong.version v3.24.0
       ul
         li
