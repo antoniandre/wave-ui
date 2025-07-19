@@ -59,10 +59,10 @@
     .ovv {overflow: visible;}
     .ova {overflow: auto;}
 
-    .por {position: relative;}
-    .poa {position: absolute;}
-    .pof {position: fixed;}
-    .pos {position: sticky;}
+    .relative {position: relative;}
+    .absolute {position: absolute;}
+    .fixed {position: fixed;}
+    .sticky {position: sticky;}
 
     .op05 {opacity: 0.05;}
     @for $i from 0 through 9 {

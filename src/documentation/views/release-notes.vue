@@ -27,6 +27,14 @@ main
     //-   multiple: { type: Boolean }, multiple selection
     //-   unselectableBranches: { type: Boolean },
 
+    li.patch
+      strong.version v3.25.1
+      ul
+        li
+          strong CSS
+          ul
+            li replaced the #[code .por], #[code .poa], #[code .pof] and #[code .pos] classes with the #[code .relative], #[code .absolute], #[code .fixed] and #[code .sticky] classes for straightforwardness and better naming universality.
+
     li.minor
       strong.version v3.25.0
       ul

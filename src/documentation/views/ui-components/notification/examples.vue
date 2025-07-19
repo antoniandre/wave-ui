@@ -266,7 +266,7 @@ div
       title-link(h2) Notification timeout
       p Notifications have no timeout by default. But you can add one to hide the notification by itself after some time.
       p Setting the timeout to #[code 0] as a number or a string will cancel the timeout and the notification will stay visible.
-      example(content-class="mt2 pos-relative ovh")
+      example(content-class="mt2 relative ovh")
         w-button.mr6(
           @click="notification2.show = !notification2.show"
           color="primary"
@@ -571,7 +571,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.pos-relative {position: relative;}
-</style>

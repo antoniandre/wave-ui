@@ -30,16 +30,16 @@ main
   title-link(h2) Position
   ul.mt4
     li
-      code.mr2 .por
+      code.mr2 .relative
       | Applies the #[span.code position: relative] property.
     li
-      code.mr2 .poa
+      code.mr2 .absolute
       | Applies the #[span.code position: absolute] property.
     li
-      code.mr2 .pof
+      code.mr2 .fixed
       | Applies the #[span.code position: fixed] property.
     li
-      code.mr2 .pos
+      code.mr2 .sticky
       | Applies the #[span.code position: sticky] property.
   title-link(h2) Height
   ul.mt4

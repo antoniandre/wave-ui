@@ -88,10 +88,10 @@ main
     .ovv {overflow: visible;}
     .ova {overflow: auto;}
 
-    .por {position: relative;}
-    .poa {position: absolute;}
-    .pof {position: fixed;}
-    .pos {position: sticky;}
+    .relative {position: relative;}
+    .absolute {position: absolute;}
+    .fixed {position: fixed;}
+    .sticky {position: sticky;}
 
     .text-left {text-align: left;}
     .text-center {text-align: center;}
