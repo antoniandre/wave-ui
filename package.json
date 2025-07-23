@@ -68,7 +68,7 @@
     "@tsconfig/recommended": "^1.0.10",
     "@vitejs/plugin-vue": "^5.2.4",
     "autoprefixer": "^10.4.21",
-    "axios": "^1.10.0",
+    "axios": "^1.11.0",
     "font-awesome": "^4.7.0",
     "globals": "^16.3.0",
     "gsap": "^3.13.0",
@@ -83,7 +83,7 @@
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
     "vite-svg-loader": "^5.1.0",
-    "vue": "^3.5.17",
+    "vue": "^3.5.18",
     "vue-router": "^4.5.1",
     "vueperslides": "^3.6.0",
     "vuex": "^4.1.0"
