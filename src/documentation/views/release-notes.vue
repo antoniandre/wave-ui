@@ -33,6 +33,16 @@ main
         li
           strong CSS
           ul
+            li.
+              Restore the default CSS scope to #[code .w-app] instead of #[code html .w-app],
+              Since from v3.25.0 the dynamic styles are by default appended to the #[code &lt;head&gt;] tag and not prepended.
+
+    li.patch
+      strong.version v3.25.1
+      ul
+        li
+          strong CSS
+          ul
             li replaced the #[code .por], #[code .poa], #[code .pof] and #[code .pos] classes with the #[code .relative], #[code .absolute], #[code .fixed] and #[code .sticky] classes for straightforwardness and better naming universality.
 
     li.minor
