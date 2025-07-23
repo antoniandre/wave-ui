@@ -172,7 +172,7 @@
         pre.ssh-pre.pa2(:class="{ 'ssh-pre--dark': $store.state.darkMode }")
           span.pink $css-scope
           span.blue-grey.mr1 :
-          span.red-light2 'html .w-app'
+          span.red-light2 '.w-app'
           span.blue-grey ;
 
   section.section.section--3

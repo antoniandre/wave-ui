@@ -39,7 +39,7 @@ $disabled-color: var(--w-disabled-color);
 
 // GLOBAL DEFAULTS.
 // ========================================================
-$css-scope: 'html .w-app' !default; // Allows control on CSS rules priority.
+$css-scope: '.w-app' !default; // Allows control on CSS rules priority.
 // True by default. False allows you to use an external CSS library (like Tailwind).
 $use-layout-classes: true !default;
 
