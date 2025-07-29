@@ -105,7 +105,7 @@ export default class WaveUI {
       const wApp = document.querySelector('.w-app')
       if (wApp) {
         wApp.className = 'w-app' // First reset the classes.
-        wApp.classList.add(...classes)
+        if (classes.length && classes[0]) wApp.classList.add(...classes)
       }
     }
   }
