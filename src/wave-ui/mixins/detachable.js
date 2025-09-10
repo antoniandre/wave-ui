@@ -57,7 +57,7 @@ export default {
 
       let target = this.appendTo || defaultTarget
       if (target === true) target = defaultTarget
-      else if (this.appendTo === 'activator') target = this.$el.previousElementSibling
+      else if (this.appendTo === 'activator') target = this.$el.previousElementSibling || this.$el.nextElementSibling
       else if (target && !['object', 'string'].includes(typeof target)) target = defaultTarget
       else if (typeof target === 'object' && !target.nodeType) {
         target = defaultTarget
