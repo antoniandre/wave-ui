@@ -28,6 +28,14 @@ main
     //-   unselectableBranches: { type: Boolean },
 
     li.patch
+      strong.version v3.25.4
+      ul
+        li
+          strong.code w-menu &amp; w-tooltip
+          ul
+            li If #[code appendTo] is set to 'activator' and the activator is not found in the previous element, use the next element.
+
+    li.patch
       strong.version v3.25.1
       ul
         li
