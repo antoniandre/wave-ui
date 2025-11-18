@@ -75,7 +75,7 @@ export default {
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 
-  emits: ['input', 'update:modelValue', 'focus'],
+  emits: ['input', 'update:modelValue', 'focus', 'blur', 'mouseenter', 'mouseleave'],
 
   data () {
     return {
