@@ -28,6 +28,14 @@ main
     //-   unselectableBranches: { type: Boolean },
 
     li.patch
+      strong.version v3.25.5
+      ul
+        li
+          strong.code w-switch
+          ul
+            li Fix emitting #[code mouseenter] and #[code mouseleave] events on the switch component.
+
+    li.patch
       strong.version v3.25.4
       ul
         li
