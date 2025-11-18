@@ -4,6 +4,8 @@ component(
   :is="formRegister ? 'w-form-element' : 'div'"
   v-bind="formRegister && { validators, inputValue: isOn, disabled: isDisabled, readonly: isReadonly }"
   v-model:valid="valid"
+  @mouseenter="$emit('mouseenter', $event)"
+  @mouseleave="$emit('mouseleave', $event)"
   @reset="$emit('update:modelValue', isOn = null);$emit('input', null)"
   :class="classes"
   :style="$attrs.style")
@@ -21,6 +23,7 @@ component(
     v-bind="attrs"
     @change="onInput() /* Edge doesn't fire input on checkbox/radio/select change */"
     @focus="$emit('focus', $event)"
+    @blur="$emit('blur', $event)"
     :aria-checked="isOn || 'false'"
     role="switch")
   template(v-if="hasLabel && labelOnLeft")
