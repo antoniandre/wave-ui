@@ -67,7 +67,15 @@ export default {
     persistent: { type: Boolean },
     transition: { type: String },
     dark: { type: Boolean },
-    light: { type: Boolean }
+    light: { type: Boolean },
+    loading: { type: Boolean },
+    outline: { type: Boolean },
+    text: { type: Boolean },
+    round: { type: Boolean },
+    shadow: { type: Boolean },
+    tile: { type: Boolean },
+    type: { type: String },
+    disabled: { type: Boolean }
   },
 
   emits: ['cancel', 'confirm'],
@@ -128,6 +136,14 @@ export default {
         icon: this.icon,
         dark: this.dark,
         light: this.light,
+        loading: this.loading,
+        outline: this.outline,
+        text: this.text,
+        round: this.round,
+        shadow: this.shadow,
+        tile: this.tile,
+        type: this.type,
+        disabled: this.disabled,
         tooltip: label,
         tooltipProps,
         ...this.mainButton
