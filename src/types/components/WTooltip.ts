@@ -113,6 +113,13 @@ export interface WaveTooltipProps {
   delay?: number
 
   /**
+   * When set to `true`, the tooltip does not open on user interaction or via `v-model`; the activator slot content remains visible.
+   * @property {boolean} disable
+   * @see https://antoniandre.github.io/wave-ui/w-tooltip
+   */
+  disable?: boolean
+
+  /**
    * TODO: Add Description
    * @property {boolean} dark
    * @see https://antoniandre.github.io/wave-ui/w-tooltip

@@ -66,6 +66,46 @@ div
         Menu content
       &lt;/w-menu&gt;
 
+  title-link(h2) Disabled
+  p.
+    Use the #[code disable] prop to keep the activator visible while preventing the menu from opening
+    (including when #[code v-model] is #[code true]).
+  example.example-disable(content-class="text-center pt5" app-classes-string="align-center")
+    w-flex(align-center justify-center wrap :gap="4")
+      w-switch.mb2(v-model="menuDisabled" label="Disable menu")
+      w-menu(append-to=".example-disable" :disable="menuDisabled")
+        template(#activator="{ on }")
+          w-button(v-on="on") Show menu
+        | Menu content
+    template(#pug).
+      w-flex(align-center justify-center wrap :gap="4")
+        w-switch.mb2(v-model="menuDisabled" label="Disable menu")
+        w-menu(:disable="menuDisabled")
+          template(#activator="{ on }")
+            w-button(v-on="on") Show menu
+          | Menu content
+    template(#html).
+      &lt;w-flex align-center justify-center wrap :gap="4"&gt;
+        &lt;w-switch
+          class="mb2"
+          v-model="menuDisabled"
+          label="Disable menu"&gt;
+        &lt;/w-switch&gt;
+
+        &lt;w-menu :disable="menuDisabled"&gt;
+          &lt;template #activator="{ on }"&gt;
+            &lt;w-button v-on="on"&gt;
+              Show menu
+            &lt;/w-button&gt;
+          &lt;/template&gt;
+          Menu content
+        &lt;/w-menu&gt;
+      &lt;/w-flex&gt;
+    template(#js).
+      data: () => ({
+        menuDisabled: false
+      })
+
   title-link(h2) Persistent menu
   p.
     A persistent menu can only be closed by clicking on the activator again, or programmatically.#[br]
@@ -1151,6 +1191,7 @@ div
 <script>
 export default {
   data: () => ({
+    menuDisabled: false,
     showMenu: false,
     showListMenu1: false,
     showListMenu2: false,

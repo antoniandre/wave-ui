@@ -48,7 +48,8 @@ const propsDescs = {
   overlayProps: 'An object of props to pass down to the <span class="code">w-overlay</span> component for more control.',
   persistent: 'When set to <code>true</code>, clicking outside of the menu will not close the menu.',
   activator: 'Allows you to define one or multiple external activators for the menu through a DOM selector string.<br>This way, you don\'t need to use the <code>activator</code> slot, and you can activate the menu from different activators.',
-  delay: 'A delay - in milliseconds - before opening the menu.<br>A small delay may help the menu position computing if the menu content changes at the moment the activator is activated. For instance, when defining multiple activators opening the same menu with different content.'
+  delay: 'A delay - in milliseconds - before opening the menu.<br>A small delay may help the menu position computing if the menu content changes at the moment the activator is activated. For instance, when defining multiple activators opening the same menu with different content.',
+  disable: 'When set to <code>true</code>, the menu never opens on interaction or via <code>v-model</code>; the activator remains rendered.'
 }
 
 const slots = {

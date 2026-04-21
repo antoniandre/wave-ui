@@ -396,6 +396,53 @@ div.tooltips-demo
         &lt;/w-tooltip&gt;
       &lt;/div&gt;
 
+  title-link(h2) Disabled
+  p.
+    Use the #[code disable] prop to keep the activator visible and interactive while preventing the
+    tooltip from opening (including when #[code v-model] is #[code true]).
+  example(content-class="text-center")
+    w-flex(align-center justify-center wrap :gap="4")
+      w-switch.mb2(v-model="tooltipDisabled" label="Disable tooltip")
+      w-tooltip(:disable="tooltipDisabled" show-on-click left)
+        template(#activator="{ on }")
+          w-button.ma2(v-on="on" bg-color="primary" dark) Click to toggle
+        | This tooltip is controlled by the switch.
+    template(#pug).
+      w-flex(align-center justify-center wrap :gap="4")
+        w-switch.mb2(v-model="tooltipDisabled" label="Disable tooltip")
+        w-tooltip(:disable="tooltipDisabled" show-on-click left)
+          template(#activator="{ on }")
+            w-button.ma2(v-on="on" bg-color="primary" dark) Click to toggle
+          | This tooltip is controlled by the switch.
+    template(#html).
+      &lt;w-flex align-center justify-center wrap :gap="4"&gt;
+        &lt;w-switch
+          class="mb2"
+          v-model="tooltipDisabled"
+          label="Disable tooltip"&gt;
+        &lt;/w-switch&gt;
+
+        &lt;w-tooltip
+          :disable="tooltipDisabled"
+          show-on-click
+          left&gt;
+          &lt;template #activator="{ on }"&gt;
+            &lt;w-button
+              class="ma2"
+              v-on="on"
+              bg-color="primary"
+              dark&gt;
+              Click to toggle
+            &lt;/w-button&gt;
+          &lt;/template&gt;
+          This tooltip is controlled by the switch.
+        &lt;/w-tooltip&gt;
+      &lt;/w-flex&gt;
+    template(#js).
+      data: () => ({
+        tooltipDisabled: false
+      })
+
   title-link(h2) Persistent
   p.
     By default with the #[code show-on-click] option, the tooltip will hide when you click
@@ -1227,6 +1274,7 @@ div.tooltips-demo
 <script>
 export default {
   data: () => ({
+    tooltipDisabled: false,
     showTooltip: false,
     showTooltip2: false,
     transition: 'bounce',

@@ -122,6 +122,8 @@ export default {
     },
 
     activatorEventHandlers () {
+      if (this.disable) return {}
+
       let handlers = {}
 
       // Check the window exists: SSR-proof.
@@ -163,6 +165,8 @@ export default {
 
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     toggle (e) {
+      if (this.disable) return
+
       let shouldShowTooltip = this.detachableVisible
 
       // For touch devices.

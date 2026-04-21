@@ -177,6 +177,13 @@ export interface WaveMenuProps {
   delay?: number
 
   /**
+   * When set to `true`, the menu does not open on user interaction or via `v-model`; the activator slot content remains visible.
+   * @property {boolean} disable
+   * @see https://antoniandre.github.io/wave-ui/w-menu
+   */
+  disable?: boolean
+
+  /**
    * TODO: Add Description
    * @property {boolean} dark
    * @see https://antoniandre.github.io/wave-ui/w-menu

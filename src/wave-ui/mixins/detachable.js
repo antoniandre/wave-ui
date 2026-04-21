@@ -23,7 +23,9 @@ export default {
     zIndex: { type: [Number, String, Boolean] },
     // Optionally designate an external activator.
     // The activator can be a DOM string selector, a ref or a DOM node.
-    activator: { type: [String, Object] }
+    activator: { type: [String, Object] },
+    // When true, the tooltip/menu does not open; the activator stays in the DOM.
+    disable: { type: Boolean, default: false }
   },
 
   inject: {
@@ -127,14 +129,27 @@ export default {
   },
 
   methods: {
+    unbindActivatorDocEvents () {
+      if (this.docEventListenersHandlers.length) {
+        this.docEventListenersHandlers.forEach(({ eventName, handler }) => {
+          document.removeEventListener(eventName, handler)
+        })
+        this.docEventListenersHandlers = []
+      }
+    },
+
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     async open (e) {
+      if (this.disable) return
+
       // A tiny delay may help positioning the detachable correctly in case of multiple activators
       // with different menu contents.
       if (this.delay) await new Promise(resolve => (this.openTimeout = setTimeout(resolve, this.delay)))
 
       // Cancel opening if the timeout has been cancelled by blur event (when going fast).
       if (this.delay && !this.openTimeout) return
+
+      if (this.disable) return
 
       this.detachableVisible = true
 
@@ -346,17 +361,17 @@ export default {
     else {
       this.$nextTick(() => {
         if (this.activator) this.bindActivatorEvents()
-        if (this.modelValue) this.open({ target: this.activatorEl })
+        if (this.modelValue && !this.disable) this.open({ target: this.activatorEl })
       })
     }
 
     // Unwrap the overlay if any.
     if (this.overlay) this.overlayEl = this.$refs.overlay?.$el
 
-    if (this.modelValue && this.activator) {
+    if (this.modelValue && this.activator && !this.disable) {
       this.toggle({ type: this.shouldShowOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
     }
-    else if (this.modelValue) this.open({ target: this.activatorEl })
+    else if (this.modelValue && !this.disable) this.open({ target: this.activatorEl })
   },
 
   unmounted () {
@@ -366,18 +381,23 @@ export default {
 
     // Remove the event listeners the exact same way they have been defined.
     // Fixes issues on hot-reloading.
-    if (this.docEventListenersHandlers.length) {
-      this.docEventListenersHandlers.forEach(({ eventName, handler }) => {
-        document.removeEventListener(eventName, handler)
-      })
-    }
+    this.unbindActivatorDocEvents()
   },
 
   watch: {
+    disable (disabled) {
+      if (this.activator) {
+        this.unbindActivatorDocEvents()
+        if (!disabled) this.bindActivatorEvents()
+      }
+      if (disabled) this.close()
+      else if (this.modelValue) this.open({ target: this.activatorEl })
+    },
+
     modelValue (bool) {
       if (!!bool !== this.detachableVisible) {
-        if (bool) this.open({ target: this.activatorEl })
-        else this.close()
+        if (bool && !this.disable) this.open({ target: this.activatorEl })
+        else if (!bool) this.close()
       }
     },
     appendTo () {

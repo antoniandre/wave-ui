@@ -180,6 +180,8 @@ export default {
     },
 
     activatorEventHandlers () {
+      if (this.disable) return {}
+
       let handlers = {}
 
       if (this.showOnHover) {
@@ -222,6 +224,8 @@ export default {
 
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
     toggle (e) {
+      if (this.disable) return
+
       let shouldShowMenu = this.detachableVisible
       if (typeof window !== 'undefined' && 'ontouchstart' in window &&
           this.showOnHover && e.type === 'click') {
