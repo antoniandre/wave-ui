@@ -34,6 +34,10 @@ main
           strong.code w-accordion
           ul
             li Added #[code keep-in-dom] and #[code keep-alive] options, consistent with #[code w-tabs]. #[span.tag.new]
+        li
+          strong.code w-menu &amp; w-tooltip
+          ul
+            li Added the #[code disable] prop to prevent opening while keeping the activator in the DOM. #[span.tag.new]
 
     li.patch
       strong.version v3.25.5
