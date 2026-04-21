@@ -27,6 +27,14 @@ main
     //-   multiple: { type: Boolean }, multiple selection
     //-   unselectableBranches: { type: Boolean },
 
+    li.minor
+      strong.version v3.26.0
+      ul
+        li
+          strong.code w-accordion
+          ul
+            li Added #[code keep-in-dom] and #[code keep-alive] options, consistent with #[code w-tabs]. #[span.tag.new]
+
     li.patch
       strong.version v3.25.5
       ul
