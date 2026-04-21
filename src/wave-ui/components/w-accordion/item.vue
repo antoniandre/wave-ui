@@ -33,19 +33,48 @@
       @click.stop="!accordionItem._disabled && toggleItem(accordionItem, $event)"
       :class="{ 'w-accordion__expand-icon--expanded': accordionItem._expanded, 'w-accordion__expand-icon--rotate90': options.expandIconRotate90 }")
   //- Content.
-  w-transition-expand(y @after-leave="onEndOfCollapse(accordionItem)" :duration="options.duration")
-    .w-accordion__item-content(v-if="accordionItem._expanded" :class="contentClasses")
+  //- keepInDom: content stays mounted; v-show toggles visibility (keep-alive is inactive, like w-tabs).
+  w-transition-expand(
+    v-if="options.keepInDom"
+    y
+    @after-leave="onEndOfCollapse(accordionItem)"
+    :duration="options.duration")
+    accordion-content(
+      v-show="accordionItem._expanded"
+      :item="accordionItem"
+      :class="contentClasses")
       slot(
         name="content"
         :item="getOriginalItem(accordionItem)"
         :expanded="accordionItem._expanded"
         :index="accordionItem._index + 1")
         div(v-html="accordionItem[options.itemContentKey]")
+  w-transition-expand(
+    v-else
+    y
+    @after-leave="onEndOfCollapse(accordionItem)"
+    :duration="options.duration")
+    keep-alive(:exclude="options.keepAlive ? '' : 'accordion-content'")
+      accordion-content(
+        v-if="accordionItem._expanded"
+        :key="accordionItem._cuid"
+        :item="accordionItem"
+        :class="contentClasses")
+        slot(
+          name="content"
+          :item="getOriginalItem(accordionItem)"
+          :expanded="accordionItem._expanded"
+          :index="accordionItem._index + 1")
+          div(v-html="accordionItem[options.itemContentKey]")
 </template>
 
 <script>
+import AccordionContent from './accordion-content.vue'
+
 export default {
   name: 'w-accordion-item',
+
+  components: { AccordionContent },
 
   props: {
     title: { type: String },

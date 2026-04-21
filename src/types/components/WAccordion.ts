@@ -166,6 +166,26 @@ export interface WaveAccordionProps {
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
   light?: boolean
+
+  /**
+   * When set to `true` and by default, each accordion panel content is kept alive. Which means that the state of the components inside a panel will be maintained when collapsing and expanding it, and the `mounted` hook will only be run the first time it is opened.
+   * When explicitly set to `false`, the panel state will be reset upon each reopening, and the `mounted` hook will be run again.
+   * The default behavior is to keep panel contents alive, but unmount collapsed panels from the DOM (unless `keepInDom` is used).
+   * You can read more about the keep-alive behavior in the `Vue official documentation for keep-alive <i class="w-icon mdi mdi-open-in-new"></i>`.
+   * @property {boolean} keepAlive - Default: true
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   * @see https://vuejs.org/guide/built-ins/keep-alive.html
+   */
+  keepAlive?: boolean
+
+  /**
+   * `Will deactivate the `keep-alive` prop.` When set to `true`, every accordion panel content stays in the DOM when collapsed (hidden with `v-show`), unless the item is removed.
+   * Note that the `mounted` hook will be run once per panel, as soon as it is appended to the DOM.
+   * The default behavior is to keep panel contents alive when `keepAlive` is true, but unmount collapsed panels from the DOM.
+   * @property {boolean} keepInDom - Default: false
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  keepInDom?: boolean
 }
 
 // ----------------------------------------------------------------------------

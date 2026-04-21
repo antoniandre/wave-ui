@@ -74,7 +74,9 @@ export default {
     shadow: { type: Boolean },
     duration: { type: Number, default: 250 },
     dark: { type: Boolean },
-    light: { type: Boolean }
+    light: { type: Boolean },
+    keepAlive: { type: Boolean, default: true },
+    keepInDom: { type: Boolean, default: false }
   },
 
   components: { WAccordionItem },

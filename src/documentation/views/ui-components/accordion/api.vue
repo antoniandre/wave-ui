@@ -32,7 +32,9 @@ const propsDescs = {
   expandSingle: 'Specifies the accordion behavior, whether only one item can be expanded at a time or multiple. When set to true, expanding another item than the one already expanded is still possible, but it will collapse the other expanded item.',
   collapseIcon: 'Provide a different icon than the expand icon, to show when the accordion item is expanded. By default and when empty, there is no collapse icon: the expand icon rotates to show a closing ability.',
   shadow: 'Applies a shadow to the whole accordion container.',
-  duration: 'Specify the duration in millisecond of the expand/collapse animation.'
+  duration: 'Specify the duration in millisecond of the expand/collapse animation.',
+  keepInDom: '<span class="grey text-italic">Will deactivate the <code>keep-alive</code> prop.</span> When set to <code>true</code>, every panel content stays in the DOM when collapsed (hidden with <code>v-show</code>), unless the item is removed from the accordion.<br>Note that the <code>mounted</code> hook will be run once per panel, as soon as it is appended to the DOM.<br>The default behavior is to keep panel contents alive when <code>keep-alive</code> is enabled, but unmount collapsed panels from the DOM.',
+  keepAlive: 'When set to <code>true</code> and by default, each panel content is kept alive. Which means that the state of the components inside a panel will be maintained when collapsing and expanding it, and the <code>mounted</code> hook will only be run the first time it is opened.<br>When explicitly set to <code>false</code>, the panel state will be reset upon each reopening, and the <code>mounted</code> hook will be run again.<br>The default behavior is to keep panel contents alive, but unmount collapsed panels from the DOM (unless <code>keep-in-dom</code> is used).<br>You can read more about the keep-alive behavior in the <a href="https://vuejs.org/guide/built-ins/keep-alive.html" target="_blank">Vue official documentation for keep-alive <i class="w-icon mdi mdi-open-in-new"></i></a>.'
 }
 
 const slots = {
