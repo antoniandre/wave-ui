@@ -1,8 +1,6 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": {
-    "enabled": false
-  },
+  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
+  "assist": { "actions": { "source": { "organizeImports": "off" } } },
   "linter": {
     "enabled": true,
     "rules": {
@@ -12,10 +10,10 @@
         "noConstructorReturn": "off"
       },
       "suspicious": {
-        "noConsoleLog": "warn",
         "noDebugger": "warn",
         "noAssignInExpressions": "off",
-        "noGlobalIsNan": "off"
+        "noGlobalIsNan": "off",
+        "noConsole": { "level": "warn", "options": { "allow": ["log"] } }
       },
       "style": {
         "useTemplate": "error",
@@ -38,7 +36,7 @@
     "indentWidth": 2,
     "lineWidth": 320,
     "lineEnding": "lf",
-    "ignore": ["dist", "node_modules", "docs"]
+    "includes": ["**", "!**/dist", "!**/node_modules", "!**/docs"]
   },
   "javascript": {
     "formatter": {
@@ -50,11 +48,11 @@
     }
   },
   "files": {
-    "ignore": ["dist", "node_modules", "*.min.js", "public", "src/assets", "coverage", "package-lock.json", "pnpm-lock.yaml", "yarn.lock", "docs"]
+    "includes": ["**", "!**/dist", "!**/node_modules", "!**/*.min.js", "!**/public", "!**/src/assets", "!**/coverage", "!**/package-lock.json", "!**/pnpm-lock.yaml", "!**/yarn.lock", "!**/docs"]
   },
   "overrides": [
     {
-      "include": ["*.svelte", "*.astro", "*.vue"],
+      "includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
       "linter": {
         "rules": {
           "correctness": {

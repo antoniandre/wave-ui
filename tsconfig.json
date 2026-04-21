@@ -3,11 +3,11 @@
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "lib": ["es6", "dom", "es2017"],
+    "lib": ["es2017", "dom"],
     "outDir": "dist/types/",
-    "baseUrl": ".",
+    "rootDir": "./src",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["./src/**/*", "./src/**/*.ts", "./src/*.d.ts", "./src/**/*.d.ts"],
