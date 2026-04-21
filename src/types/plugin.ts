@@ -17,8 +17,6 @@ export interface ConstructorOptions {
 }
 
 export declare class WaveUIPlugin {
-  static #registered: boolean
-
   $waveui: $waveui
 
   constructor(app: App, options?: ConstructorOptions & {})

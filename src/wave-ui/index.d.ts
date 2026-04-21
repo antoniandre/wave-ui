@@ -6,8 +6,6 @@ declare module 'wave-ui/src/wave-ui' {
   import type { ConstructorOptions } from '@/types/plugin'
 
   export declare class WaveUIPlugin {
-    static #registered: boolean
-
     $waveui: $waveui
 
     constructor(app: App, options?: ConstructorOptions & {})

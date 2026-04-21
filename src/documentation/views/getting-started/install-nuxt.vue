@@ -1,11 +1,26 @@
 <template lang="pug">
 div
   w-accordion(
-    :model-value="[true, false]"
+    :model-value="[true, false, false]"
     expand-single
     expand-icon-rotate90
     title-class="py2 title3 mb0"
     item-class="bd1")
+    w-accordion-item
+      template(#title) Nuxt 4
+      template(#content)
+        p Installing in Nuxt 4 is very simple. Create an #[code app/plugins/wave-ui.js] file (create the directory if not existing) with this content:
+        ssh-pre(language="js" :dark="$store.state.darkMode").
+          import 'wave-ui/dist/wave-ui.css'
+          import WaveUI from 'wave-ui'
+
+          export default defineNuxtPlugin(nuxtApp => {
+            nuxtApp.vueApp.use(WaveUI, { on: '#__nuxt' })
+          })
+        p.mt4
+          | In Nuxt 4 the plugins directory moved to #[code app/plugins/].
+          | If you prefer to keep it at the project root #[code plugins/] still works as a fallback.
+
     w-accordion-item
       template(#title) Nuxt 3
       template(#content)

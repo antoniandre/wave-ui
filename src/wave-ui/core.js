@@ -53,8 +53,6 @@ const injectPresets = (component, presets) => {
 }
 
 export default class WaveUI {
-  static #registered = false
-
   // Exposed as a global object and also `app.provide`d.
   // Accessible from this.$waveui, or inject('$waveui').
   $waveui = {
@@ -161,11 +159,10 @@ export default class WaveUI {
 
     // eslint-disable-next-line no-new
     new WaveUI(app, options)
-    WaveUI.#registered = true
   }
 
   constructor (app, options = {}) {
-    if (WaveUI.#registered) return // May happen with SSR.
+    if (app.config.globalProperties.$waveui) return // Already installed for this app instance.
 
     this.$waveui._notificationManager = new NotificationManager()
 

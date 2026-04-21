@@ -38,6 +38,10 @@ main
           strong.code w-menu &amp; w-tooltip
           ul
             li Added the #[code disable] prop to prevent opening while keeping the activator in the DOM. #[span.tag.new]
+        li
+          strong SSR (Nuxt 3 &amp; 4)
+          ul
+            li Fixed SSR compatibility: the Wave UI constructor now correctly initializes #[code $waveui] for every Vue app instance. Previously, a module-level #[code #registered] flag caused the constructor to exit early on subsequent server-side requests, leaving #[code $waveui] unprovided to those app instances.
 
     li.patch
       strong.version v3.25.5
