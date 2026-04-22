@@ -1,6 +1,6 @@
 <template lang="pug">
 slot(name="activator" :on="activatorEventHandlers")
-transition(:name="transitionName" appear)
+transition(:name="transitionName" appear @after-leave="onAfterLeave")
   .w-tooltip(
     v-if="detachableVisible"
     ref="detachable"
@@ -13,8 +13,6 @@ transition(:name="transitionName" appear)
 <script>
 import { objectifyClasses } from '../utils/index'
 import DetachableMixin from '../mixins/detachable'
-
-// const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
 
 export default {
   name: 'w-tooltip',
@@ -52,10 +50,10 @@ export default {
   data: () => ({
     detachableVisible: false,
     hoveringActivator: false,
-    // The tooltip computed top & left coordinates.
+    // null until first computeDetachableCoords run, so no inline top/left is set before positioning.
     detachableCoords: {
-      top: 0,
-      left: 0
+      top: null,
+      left: null
     },
     detachableEl: null,
     timeoutId: null
@@ -68,6 +66,7 @@ export default {
      * - `detachableParentEl`
      * - `activatorEl`
      * - `position`
+     * - `effectiveDetachablePosition`
      * - `alignment`
      **/
 
@@ -76,7 +75,9 @@ export default {
     },
 
     transitionName () {
-      const direction = this.position.replace(/top|bottom/, m => ({ top: 'up', bottom: 'down' }[m]))
+      const direction = this.effectiveDetachablePosition.replace(/top|bottom/, m => (
+        { top: 'up', bottom: 'down' }[m]
+      ))
       return this.transition || `w-tooltip-slide-fade-${direction}`
     },
 
@@ -96,7 +97,7 @@ export default {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         ...this.tooltipClasses,
-        [`w-tooltip--${this.position}`]: !this.noPosition,
+        [`w-tooltip--${this.effectiveDetachablePosition}`]: !this.noPosition,
         [`w-tooltip--align-${this.alignment}`]: !this.noPosition && this.alignment,
         'w-tooltip--dark': this.dark,
         'w-tooltip--light': this.light,
@@ -115,8 +116,9 @@ export default {
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || null,
-        top: (this.detachableCoords.top && `${~~this.detachableCoords.top}px`) || null,
-        left: (this.detachableCoords.left && `${~~this.detachableCoords.left}px`) || null,
+        top: Number.isFinite(this.detachableCoords.top) ? `${~~this.detachableCoords.top}px` : null,
+        left: Number.isFinite(this.detachableCoords.left) ? `${~~this.detachableCoords.left}px` : null,
+        visibility: this.detachableReady ? null : 'hidden', // Hidden until coords are ready.
         '--w-tooltip-bg-color': this.$waveui.colors[this.bgColor] || 'var(--w-base-bg-color)'
       }
     },
@@ -208,9 +210,14 @@ export default {
       this.$emit('update:modelValue', (this.detachableVisible = false))
       this.$emit('input', false)
       this.$emit('close')
+      this.viewportPlacementOverride = null
       // Remove the mousedown listener if the tooltip got closed without a mousedown outside of the tooltip.
-      document.removeEventListener('mousedown', this.onOutsideMousedown)
-      window.removeEventListener('resize', this.onResize)
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('mousedown', this.onOutsideMousedown)
+      }
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', this.onResize)
+      }
     }
   }
 

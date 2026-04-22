@@ -1,6 +1,6 @@
 <template lang="pug">
 slot(name="activator" :on="activatorEventHandlers")
-transition(:name="transitionName" appear)
+transition(:name="transitionName" appear @after-leave="onAfterLeave")
   .w-menu(
     v-if="custom && detachableVisible"
     ref="detachable"
@@ -44,8 +44,6 @@ w-overlay(
 <script>
 import { objectifyClasses } from '../utils/index'
 import DetachableMixin from '../mixins/detachable'
-
-// const marginFromWindowSide = 4 // Amount of px from a window side, instead of overflowing.
 
 export default {
   name: 'w-menu',
@@ -96,10 +94,10 @@ export default {
     detachableVisible: false,
     hoveringActivator: false,
     hoveringMenu: false,
-    // The menu computed top & left coordinates.
+    // null until first computeDetachableCoords run, so no inline top/left is set before positioning.
     detachableCoords: {
-      top: 0,
-      left: 0
+      top: null,
+      left: null
     },
     activatorWidth: 0,
     detachableEl: null,
@@ -113,6 +111,7 @@ export default {
      * - `detachableParentEl`
      * - `activatorEl`
      * - `position`
+     * - `effectiveDetachablePosition`
      * - `alignment`
      **/
 
@@ -154,7 +153,7 @@ export default {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         ...this.menuClasses,
-        [`w-menu--${this.position}`]: !this.noPosition,
+        [`w-menu--${this.effectiveDetachablePosition}`]: !this.noPosition,
         [`w-menu--align-${this.alignment}`]: !this.noPosition && this.alignment,
         'w-menu--tile': this.tile,
         'w-menu--card': !this.custom,
@@ -171,10 +170,11 @@ export default {
     styles () {
       return {
         zIndex: this.zIndex || this.zIndex === 0 || (this.overlay && !this.zIndex && 200) || null,
-        top: (this.detachableCoords.top && `${~~this.detachableCoords.top}px`) || null,
-        left: (this.detachableCoords.left && `${~~this.detachableCoords.left}px`) || null,
+        top: Number.isFinite(this.detachableCoords.top) ? `${~~this.detachableCoords.top}px` : null,
+        left: Number.isFinite(this.detachableCoords.left) ? `${~~this.detachableCoords.left}px` : null,
         minWidth: (this.minWidth && this.menuMinWidth) || null,
         maxWidth: (this.maxWidth && this.menuMaxWidth) || null,
+        visibility: this.detachableReady ? null : 'hidden', // Hidden until coords are ready.
         '--w-menu-bg-color': this.arrow && (this.$waveui.colors[this.bgColor] || 'var(--w-base-bg-color)')
       }
     },
@@ -275,9 +275,14 @@ export default {
       this.$emit('update:modelValue', (this.detachableVisible = false))
       this.$emit('input', false)
       this.$emit('close')
+      this.viewportPlacementOverride = null
       // Remove the mousedown listener if the menu got closed without a mousedown outside of the menu.
-      document.removeEventListener('mousedown', this.onOutsideMousedown)
-      window.removeEventListener('resize', this.onResize)
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('mousedown', this.onOutsideMousedown)
+      }
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', this.onResize)
+      }
     }
   }
 
