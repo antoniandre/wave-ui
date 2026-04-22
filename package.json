@@ -7,11 +7,11 @@
   "repository": "https://github.com/antoniandre/wave-ui",
   "license": "MIT",
   "funding": "https://github.com/sponsors/antoniandre",
-  "main": "./dist/wave-ui.es.js",
+  "main": "./dist/wave-ui.esm.js",
   "types": "./dist/types/index.d.ts",
   "unpkg": "dist/wave-ui.umd.js",
   "jsdelivr": "dist/wave-ui.umd.js",
-  "module": "./dist/wave-ui.es.js",
+  "module": "./dist/wave-ui.esm.js",
   "files": [
     "dist",
     "src/wave-ui"
@@ -20,7 +20,7 @@
     ".": {
       "import": {
         "types": "./dist/types/index.d.ts",
-        "default": "./dist/wave-ui.es.js"
+        "default": "./dist/wave-ui.esm.js"
       },
       "require": {
         "types": "./dist/types/index.d.ts",

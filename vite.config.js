@@ -25,6 +25,7 @@ const bundlingConf = {
     output: {
       // Provide global variables to use in the UMD build for externalized deps.
       globals: { vue: 'Vue' },
+      // Rollup names the `es` bundle `wave-ui.esm.js`; keep package.json `main`/`module`/`exports` in sync.
       entryFileNames: 'wave-ui.[format].js',
       chunkFileNames: '[name].js'
     }
