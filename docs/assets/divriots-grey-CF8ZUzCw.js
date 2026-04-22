@@ -1,0 +1,1 @@
+var e=`/wave-ui/assets/divriots-B_KSrxWL.svg`,t=`/wave-ui/assets/divriots-grey-mhwOlI6i.svg`;export{e as n,t};

@@ -1,0 +1,1 @@
+var e=e=>console.warn(`Wave UI: ${e}`),t=e=>console.error(`Wave UI: ${e}`);export{e as n,t};

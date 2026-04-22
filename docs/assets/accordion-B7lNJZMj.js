@@ -1,0 +1,493 @@
+import{H as e,N as t,c as n,d as r,g as i,h as a,ht as o,k as s,vt as c}from"./runtime-core.esm-bundler-DPe36P4s.js";import{t as l}from"./_plugin-vue_export-helper-S3RvzygF.js";import{H as u}from"./index-D1jKshrg.js";var d={class:`mt3`},f={class:`ml1`},p={class:`mt3`},m={class:`ml1`},h={class:`mt3`},g={class:`ml1`},_={class:`mt3`},v={class:`ml1`},y={class:`ml1`};function b(l,u,b,x,S,C){let w=t(`alert`),T=t(`title-link`),E=t(`w-accordion`),D=t(`example`),O=t(`w-button`),k=t(`w-icon`),A=t(`w-alert`),j=t(`w-tag`),M=t(`w-list`),N=t(`w-accordion-item`);return s(),r(`div`,null,[i(w,{info:``},{default:e(()=>[...u[7]||=[n(`p`,null,`Two components are available:`,-1),n(`ul`,null,[n(`li`,null,[n(`strong`,{class:`code`},`w-accordion`),a(`: The root accordion component.`)]),n(`li`,{class:`mt2`},[n(`strong`,{class:`code`},`w-accordion-item`),a(`: An optional component if you don't need / prefer not to use
+the `),n(`code`,null,`items`),a(` prop.`)])],-1)]]),_:1}),i(T,{h2:``},{default:e(()=>[...u[8]||=[a(`Basic`,-1)]]),_:1}),i(E,{items:l.items},null,8,[`items`]),u[104]||=n(`p`,{class:`grey-light2 my4`},`Now that you've seen the default accordion in real context, all the accordions of this page will have a
+light blue background in order to help visualize their edges.
+`,-1),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[10]||=[a(`w-accordion(v-model="accordion" :items="items")
+
+div.mt3
+  | v-model:
+  code.ml1 `+c(`{{ accordion }}`),-1)]]),html:e(()=>[...u[11]||=[a(`<w-accordion v-model="accordion" :items="items" />
+
+<div class="mt3">
+  v-model:
+  <code class="ml1">`+c(`{{ accordion }}`)+`</code>
+</div>`,-1)]]),js:e(()=>[...u[12]||=[a(`data: () => ({
+  items: [
+    {
+      title: 'Item 1',
+      content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+    },
+    {
+      title: 'Item 2',
+      content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+    },
+    {
+      title: 'Item 3',
+      content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+    }
+  ],
+  accordion: []
+})
+`,-1)]]),default:e(()=>[i(E,{class:`discrete--bg`,modelValue:l.accordion1,"onUpdate:modelValue":u[0]||=e=>l.accordion1=e,items:l.items},null,8,[`modelValue`,`items`]),n(`div`,d,[u[9]||=a(`v-model:`,-1),n(`code`,f,c(l.accordion1),1)])]),_:1}),i(T,{h2:``},{default:e(()=>[...u[13]||=[a(`Expanded by default`,-1)]]),_:1}),u[105]||=n(`p`,null,[a(`You can expand one or multiple panes by default by providing a v-model array of booleans:
+`),n(`span`,{class:`code`},`true`),a(` to expand, `),n(`span`,{class:`code`},`false`),a(` to collapse the item.`)],-1),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[15]||=[a(`w-accordion(v-model="accordion" :items="items")
+
+div.mt3
+  | v-model:
+  code.ml1 `+c(`{{ accordion }}`),-1)]]),html:e(()=>[...u[16]||=[a(`<w-accordion v-model="accordion" :items="items" />
+
+<div class="mt3">
+  v-model:
+  <code class="ml1">`+c(`{{ accordion }}`)+`</code>
+</div>`,-1)]]),js:e(()=>[...u[17]||=[a(`data: () => ({
+  items: [
+    {
+      title: 'Item 1',
+      content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+    },
+    {
+      title: 'Item 2',
+      content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+    },
+    {
+      title: 'Item 3',
+      content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+    }
+  ],
+  accordion: [false, true, false]
+})
+`,-1)]]),default:e(()=>[i(E,{class:`discrete--bg`,modelValue:l.accordion2,"onUpdate:modelValue":u[1]||=e=>l.accordion2=e,items:l.items},null,8,[`modelValue`,`items`]),n(`div`,p,[u[14]||=a(`v-model:`,-1),n(`code`,m,c(l.accordion2),1)])]),_:1}),i(T,{h2:``},{default:e(()=>[...u[18]||=[a(`Disabled pane`,-1)]]),_:1}),u[106]||=n(`p`,null,[a(`Specify which pane should be disabled - expanded or collapsed - by adding the `),n(`span`,{class:`code`},`disabled`),a(` property
+directly in the object.`)],-1),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[19]||=[a(`w-accordion(v-model="accordion" :items="items")`,-1)]]),html:e(()=>[...u[20]||=[a(`<w-accordion v-model="accordion" :items="items" />`,-1)]]),js:e(()=>[...u[21]||=[a(`data: () => ({
+  items: [
+    { title: 'Item 1 - disabled collapsed', content: 'Disabled', disabled: true },
+    { title: 'Item 2 - disabled expanded', content: 'You can\\'t collapse this pane.', disabled: true },
+    { title: 'Item 3 - fully enabled', content: 'You can toggle this pane to expand and collapse.' }
+  ],
+  accordion: [false, true, true]
+})
+`,-1)]]),default:e(()=>[i(E,{class:`discrete--bg`,modelValue:l.accordion3,"onUpdate:modelValue":u[2]||=e=>l.accordion3=e,items:l.itemsDisabled},null,8,[`modelValue`,`items`])]),_:1}),i(T,{h2:``},{default:e(()=>[...u[22]||=[a(`Shadow`,-1)]]),_:1}),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[23]||=[a(`w-accordion(:items="items" shadow)`,-1)]]),html:e(()=>[...u[24]||=[a(`<w-accordion :items="items" shadow />`,-1)]]),js:e(()=>[...u[25]||=[a(`data: () => ({
+  items: [
+    {
+      title: 'Item 1',
+      content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+    },
+    {
+      title: 'Item 2',
+      content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+    },
+    {
+      title: 'Item 3',
+      content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+    }
+  ]
+})
+`,-1)]]),default:e(()=>[i(E,{class:`discrete--bg`,items:l.items,shadow:``},null,8,[`items`])]),_:1}),i(T,{h2:``},{default:e(()=>[...u[26]||=[a(`Color & background color`,-1)]]),_:1}),u[107]||=n(`p`,null,[a(`Like in most components, you can set a `),n(`code`,null,`color`),a(` for the text and a `),n(`code`,null,`bg-color`),a(` for the
+background.`),n(`br`),a(`
+No background color is set by default and the text color is inherited.`)],-1),i(D,{"content-class":`pa4`},{pug:e(()=>[a(`w-accordion(:items="items" color="amber-dark1")
+
+w-accordion.mt6(:items="items" bg-color="`+c(l.$store.state.darkMode?`indigo-dark6`:`yellow-light5`)+`")`,1)]),html:e(()=>[a(`<w-accordion :items="items" color="amber-dark1"></w-accordion>
+
+<w-accordion class="mt6" :items="items" bg-color="`+c(l.$store.state.darkMode?`indigo-dark6`:`yellow-light5`)+`"></w-accordion>`,1)]),js:e(()=>[...u[27]||=[a(`data: () => ({
+  items: [
+    {
+      title: 'Item 1',
+      content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+    },
+    {
+      title: 'Item 2',
+      content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+    },
+    {
+      title: 'Item 3',
+      content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+    }
+  ]
+})
+`,-1)]]),default:e(()=>[i(E,{class:`discrete--bg`,items:l.items,color:`amber-dark1`},null,8,[`items`]),i(E,{class:`mt6`,items:l.items,"bg-color":l.$store.state.darkMode?`indigo-dark6`:`yellow-light5`},null,8,[`items`,`bg-color`])]),_:1}),i(T,{h3:``},{default:e(()=>[...u[28]||=[a(`Different color per item`,-1)]]),_:1}),u[108]||=n(`p`,null,[a(`The colors are set in the data in each item object.`),n(`br`),a(`
+the default mapping for the color is the `),n(`code`,null,`color`),a(` key, but you can customize it with the
+`),n(`code`,null,`item-color-key`),a(` prop.`)],-1),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[29]||=[a(`w-accordion(:items="items")`,-1)]]),html:e(()=>[...u[30]||=[a(`<w-accordion :items="items" />`,-1)]]),js:e(()=>[...u[31]||=[a(`data: () => ({
+  items: [
+    { title: 'Item 1', content: 'Content 1', color: 'amber' },
+    { title: 'Item 2', content: 'Content 2', color: 'warning' },
+    { title: 'Item 3', content: 'Content 3', color: 'error' }
+  ]
+})
+`,-1)]]),default:e(()=>[i(E,{class:`discrete--bg`,items:l.items2},null,8,[`items`])]),_:1}),i(T,{h2:``},{default:e(()=>[...u[32]||=[a(`Expand a single item at a time`,-1)]]),_:1}),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[34]||=[a(`w-accordion(v-model="accordion" :items="items" expand-single)
+
+div.mt3
+  | v-model:
+  code.ml1 `+c(`{{ accordion }}`),-1)]]),html:e(()=>[...u[35]||=[a(`<w-accordion
+  v-model="accordion"
+  :items="items"
+  expand-single>
+</w-accordion>
+
+<div class="mt3">
+  v-model:
+  <code class="ml1">`+c(`{{ accordion }}`)+`</code>
+</div>`,-1)]]),js:e(()=>[...u[36]||=[a(`data: () => ({
+  items: [
+    {
+      title: 'Item 1',
+      content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+    },
+    {
+      title: 'Item 2',
+      content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+    },
+    {
+      title: 'Item 3',
+      content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+    }
+  ],
+  accordion: []
+})
+`,-1)]]),default:e(()=>[i(E,{class:`discrete--bg`,modelValue:l.accordion4,"onUpdate:modelValue":u[3]||=e=>l.accordion4=e,items:l.items,"expand-single":``},null,8,[`modelValue`,`items`]),n(`div`,h,[u[33]||=a(`v-model:`,-1),n(`code`,g,c(l.accordion4),1)])]),_:1}),i(T,{h2:``},{default:e(()=>[...u[37]||=[a(`External control`,-1)]]),_:1}),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[41]||=[a(`w-button.mr2(@click="accordion = Array&#40;3&#41;.fill&#40;true&#41;" sm) Expand all
+w-button(@click="accordion = Array&#40;3&#41;.fill&#40;false&#41;" sm) Collapse all
+
+w-accordion.mt4(v-model="accordion" :items="items")
+
+div.mt3
+  | v-model:
+  code.ml1 `+c(`{{ accordion }}`),-1)]]),html:e(()=>[...u[42]||=[a(`<w-button
+  class="mr2"
+  @click="accordion = Array&#40;3&#41;.fill&#40;true&#41;"
+  sm>
+  Expand all
+</w-button>
+<w-button
+  @click="accordion = Array&#40;3&#41;.fill&#40;false&#41;"
+  sm>
+  Collapse all
+</w-button>
+
+<w-accordion class="mt4" v-model="accordion" :items="items" />
+
+<div class="mt3">
+  v-model:
+  <code class="ml1">`+c(`{{ accordion }}`)+`</code>
+</div>`,-1)]]),js:e(()=>[...u[43]||=[a(`data: () => ({
+  items: [
+    {
+      title: 'Item 1',
+      content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+    },
+    {
+      title: 'Item 2',
+      content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+    },
+    {
+      title: 'Item 3',
+      content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+    }
+  ],
+  accordion: []
+})
+`,-1)]]),default:e(()=>[i(O,{class:`mr2`,onClick:u[4]||=e=>l.accordion5=[,,,].fill(!0),sm:``},{default:e(()=>[...u[38]||=[a(`Expand all`,-1)]]),_:1}),i(O,{onClick:u[5]||=e=>l.accordion5=[,,,].fill(!1),sm:``},{default:e(()=>[...u[39]||=[a(`Collapse all`,-1)]]),_:1}),i(E,{class:`mt4 discrete--bg`,modelValue:l.accordion5,"onUpdate:modelValue":u[6]||=e=>l.accordion5=e,items:l.items},null,8,[`modelValue`,`items`]),n(`div`,_,[u[40]||=a(`v-model:`,-1),n(`code`,v,c(l.accordion5),1)])]),_:1}),i(T,{h2:``},{default:e(()=>[...u[44]||=[a(`Custom rendering via slots`,-1)]]),_:1}),u[109]||=n(`p`,null,[a(`Customize all the tab items titles and/or content via the single slot `),n(`code`,null,`item-title`),a(`, and/or
+all the tab items content via the single slot `),n(`code`,null,`item-content`),a(`.`)],-1),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[45]||=[a(`w-accordion(:items="items" content-class="pa0")
+  template(#item-title="{ item }")
+    w-icon(lg :color="item.itemColor") `+c(`{{ item.icon }}`)+`
+    .title3.my0.ml2(:class="item.itemColor") `+c(`{{ item.title }}`)+`
+  template(#item-content="{ item }")
+    w-alert.my0.pb3(border-left tile :color="item.itemColor" v-html="item.content")`,-1)]]),html:e(()=>[...u[46]||=[a(`<w-accordion :items="items" content-class="pa0">
+  <template #item-title="{ item }">
+    <w-icon lg :color="item.itemColor">
+      `+c(`{{ item.icon }}`)+`
+    </w-icon>
+    <div class="title3 ml2" :class="item.itemColor">
+      `+c(`{{ item.title }}`)+`
+    </div>
+  </template>
+  <template #item-content="{ item }") />
+    <w-alert
+      class="my0 pb3"
+      border-left
+      tile
+      :color="item.itemColor"
+      v-html="item.content" />
+  </template>`,-1)]]),js:e(()=>[...u[47]||=[a(`data: () => ({
+  items: [
+    {
+      title: 'Item 1',
+      content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.',
+      icon: 'mdi mdi-home',
+      itemColor: 'blue'
+    },
+    {
+      title: 'Item 2',
+      content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!',
+      icon: 'mdi mdi-github',
+      itemColor: 'green'
+    },
+    {
+      title: 'Item 3',
+      content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.',
+      icon: 'mdi mdi-codepen',
+      itemColor: 'orange'
+    }
+  ]
+})
+`,-1)]]),default:e(()=>[i(E,{class:`discrete--bg`,items:l.items,"content-class":`pa0`},{"item-title":e(({item:t})=>[i(k,{lg:``,color:t.itemColor},{default:e(()=>[a(c(t.icon),1)]),_:2},1032,[`color`]),n(`div`,{class:o([`title3 my0 ml2`,t.itemColor])},c(t.title),3)]),"item-content":e(({item:e})=>[i(A,{class:`my0 pb3`,"border-left":``,tile:``,color:e.itemColor,innerHTML:e.content},null,8,[`color`,`innerHTML`])]),_:1},8,[`items`])]),_:1}),i(T,{h3:``,slug:`slots--different-title-and-content`},{default:e(()=>[...u[48]||=[a(`Different title and content layouts per item`,-1)]]),_:1}),u[110]||=n(`p`,null,[a(`Here is a more complex example using slots to render 3 totally diferent pane titles and contents.`),n(`br`),a(`
+This time, an array of object is defined to show you can also do a mix of contents coming from the
+the component's data or directly in the template.`)],-1),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[62]||=[a(`w-accordion(:items="items")
+  template(#item-title.item1)
+    | This is the 1st item
+    w-tag.ml2(color="red" sm outline) HOT
+  template(#item-content.item1)
+    p This content has a checklist.
+    .title4 To do
+    w-list(checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]")
+
+  template(#item-title.item2)
+    w-icon.mr1(md color="amber") mdi mdi-emoticon-excited-outline
+    em This is the 2nd item
+  template(#item-content.item2="{ item }")
+    p The full content here is custom and completely distinct and independent from the other items.
+    p
+      | You also have access to the item's data if you need:
+      code.ml1 `+c(`{{ item }}`)+`
+
+  template(#item-title.item3)
+    strong This is the 3rd item
+    w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
+  template(#item-content.item3)
+    p Do you want to check the project on Github?
+    w-button.mt1(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
+      | Github
+      w-icon.ml2(sm) mdi mdi-open-in-new`,-1)]]),html:e(()=>[...u[63]||=[a(`<w-accordion :items="items">
+  <template #item-title.item1>
+    This is the 1st item
+    <w-tag class="ml2" color="red" sm outline>HOT</w-tag>
+  </template>
+  <template #item-content.item1>
+    <p>This content has a checklist.</p>
+    <div class="title4 my3">To do</div>
+    <w-list
+      checklist
+      color="primary"
+      :items="[{ label: 'do this' }, { label: 'do that next' }]" />
+  </template>
+
+  <template #item-title.item2>
+    <w-icon class="mr1" md color="amber">
+      mdi mdi-emoticon-excited-outline
+    </w-icon>
+    <em>This is the 2nd item</em>
+  </template>
+  <template #item-content.item2="{ item }">
+    <p>
+      The full content here is custom and completely distinct and independent from the other items.
+    </p>
+    <p>
+      You also have access to the item's data if you need:
+      <code class="ml1">`+c(`{{ item }}`)+`</code>
+    </p>
+  </template>
+
+  <template #item-title.item3>
+    <strong> This is the 3rd item</strong>
+    <w-icon class="ml1" md color="pink">
+      mdi mdi-emoticon-kiss-outline
+    </w-icon>
+  </template>
+  <template #item-content.item3>
+    <p>Do you want to check the project on Github?</p>
+    <w-button
+      class="mt1"
+      route="https://github.com/antoniandre/wave-ui">
+      Github
+      <w-icon class="ml2" sm>mdi mdi-open-in-new</w-icon>
+    </w-button>
+  </template>
+</w-accordion>`,-1)]]),js:e(()=>[...u[64]||=[a(`data: () => ({
+  items: [
+    { id: 'item1' },
+    { id: 'item2' },
+    { id: 'item3' }
+  ]
+})
+`,-1)]]),default:e(()=>[i(E,{class:`discrete--bg`,items:l.itemsCustom},{"item-title.item1":e(()=>[u[50]||=a(`This is the 1st item`,-1),i(j,{class:`ml2`,color:`red`,sm:``,outline:``},{default:e(()=>[...u[49]||=[a(`HOT`,-1)]]),_:1})]),"item-content.item1":e(()=>[u[51]||=n(`p`,null,`This content has a checklist.`,-1),u[52]||=n(`div`,{class:`title4`},`To do`,-1),i(M,{checklist:``,color:`primary`,items:[{label:`do this`},{label:`do that next`}]})]),"item-title.item2":e(()=>[i(k,{class:`mr1`,md:``,color:`amber`},{default:e(()=>[...u[53]||=[a(`mdi mdi-emoticon-excited-outline`,-1)]]),_:1}),u[54]||=n(`em`,null,`This is the 2nd item`,-1)]),"item-content.item2":e(({item:e})=>[u[56]||=n(`p`,null,`The full content here is custom and completely distinct and independent from the other items.`,-1),n(`p`,null,[u[55]||=a(`You also have access to the item's data if you need:`,-1),n(`code`,y,c(e),1)])]),"item-title.item3":e(()=>[u[58]||=n(`strong`,null,`This is the 3rd item`,-1),i(k,{class:`ml1`,md:``,color:`pink`},{default:e(()=>[...u[57]||=[a(`mdi mdi-emoticon-kiss-outline`,-1)]]),_:1})]),"item-content.item3":e(()=>[u[61]||=n(`p`,null,`Do you want to check the project on Github?`,-1),i(O,{class:`mt1`,"bg-color":`primary`,route:`https://github.com/antoniandre/wave-ui`},{default:e(()=>[u[60]||=a(`Github`,-1),i(k,{class:`ml2`,sm:``},{default:e(()=>[...u[59]||=[a(`mdi mdi-open-in-new`,-1)]]),_:1})]),_:1})]),_:1},8,[`items`])]),_:1}),i(T,{h2:``,slug:`w-accordion-item`},{default:e(()=>[...u[65]||=[a(`Custom rendering via `,-1),n(`span`,{class:`code`},`w-accordion-item`,-1)]]),_:1}),u[111]||=n(`p`,null,[a(`If you don't need data objects at all and all the items layouts will be different,
+using the `),n(`strong`,{class:`code`},`w-accordion-item`),a(` component is a more flexible and straightforward approach.
+`)],-1),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[72]||=[a(`w-accordion
+  w-accordion-item
+    template(#title) Item title 1
+    template(#content) Item content 1
+
+  w-accordion-item
+    template(#title) Item title 2
+    template(#content) Item content 2
+
+  w-accordion-item
+    template(#title) Item title 3
+    template(#content) Item content 3`,-1)]]),html:e(()=>[...u[73]||=[a(`<w-accordion>
+  <w-accordion-item>
+    <template #title>Item title 1</template>
+    <template #content>Item content 1</template>
+  </w-accordion-item>
+
+  <w-accordion-item>
+    <template #title>Item title 2</template>
+    <template #content>Item content 2</template>
+  </w-accordion-item>
+
+  <w-accordion-item>
+    <template #title>Item title 3</template>
+    <template #content>Item content 3</template>
+  </w-accordion-item>
+</w-accordion>
+`,-1)]]),default:e(()=>[i(E,{class:`discrete--bg`},{default:e(()=>[i(N,null,{title:e(()=>[...u[66]||=[a(`Item title 1`,-1)]]),content:e(()=>[...u[67]||=[a(`Item content 1`,-1)]]),_:1}),i(N,null,{title:e(()=>[...u[68]||=[a(`Item title 2`,-1)]]),content:e(()=>[...u[69]||=[a(`Item content 2`,-1)]]),_:1}),i(N,null,{title:e(()=>[...u[70]||=[a(`Item title 3`,-1)]]),content:e(()=>[...u[71]||=[a(`Item content 3`,-1)]]),_:1})]),_:1})]),_:1}),i(T,{h3:``,slug:`w-accordion-item--different-title-and-content`},{default:e(()=>[...u[74]||=[a(`Different title and content layouts per item`,-1)]]),_:1}),u[112]||=n(`p`,null,[a(`Same example as `),n(`a`,{href:`#slots--different-title-and-content`},`above`),a(` but using the `),n(`strong`,{class:`code`},`w-accordion-item`),a(` component.`)],-1),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[87]||=[a(`w-accordion(:items="items")
+  w-accordion-item
+    template(#title)
+      | This is the 1st item
+      w-tag.ml2(color="red" sm outline) HOT
+    template(#content)
+      p This content has a checklist.
+      .title4 To do
+      w-list(checklist color="primary" :items="[{ label: 'do this' }, { label: 'do that next' }]")
+
+  w-accordion-item
+    template(#title)
+      w-icon.mr1(md color="amber") mdi mdi-emoticon-excited-outline
+      em This is the 2nd item
+    template(#content)
+      p The full content here is custom and completely distinct and independent from the other items.
+
+  w-accordion-item
+    template(#title)
+      strong This is the 3rd item
+      w-icon.ml1(md color="pink") mdi mdi-emoticon-kiss-outline
+    template(#content)
+      p Do you want to check the project on Github?
+      w-button.mt1(bg-color="primary" route="https://github.com/antoniandre/wave-ui")
+        | Github
+        w-icon.ml2(sm) mdi mdi-open-in-new`,-1)]]),html:e(()=>[...u[88]||=[a(`<w-accordion>
+  <w-accordion-item>
+    <template #title>
+      This is the 1st item
+      <w-tag class="ml2" color="red" sm outline>HOT</w-tag>
+    </template>
+    <template #content>
+      <p>This content has a checklist.</p>
+      <div class="title4 my3">To do</div>
+      <w-list
+        checklist
+        color="primary"
+        :items="[{ label: 'do this' }, { label: 'do that next' }]" />
+    </template>
+  </w-accordion-item>
+
+  <w-accordion-item>
+    <template #title>
+      <w-icon class="mr1" md color="amber">
+        mdi mdi-emoticon-excited-outline
+      </w-icon>
+      <em>This is the 2nd item</em>
+    </template>
+    <template #content>
+      <p>
+        The full content here is custom and completely distinct and independent from the other items.
+      </p>
+    </template>
+  </w-accordion-item>
+
+  <w-accordion-item>
+    <template #title>
+      <strong> This is the 3rd item</strong>
+      <w-icon class="ml1" md color="pink">
+        mdi mdi-emoticon-kiss-outline
+      </w-icon>
+    </template>
+    <template #content>
+      <p>Do you want to check the project on Github?</p>
+      <w-button
+        class="mt1"
+        route="https://github.com/antoniandre/wave-ui">
+        Github
+        <w-icon class="ml2" sm>mdi mdi-open-in-new</w-icon>
+      </w-button>
+    </template>
+  </w-accordion-item>
+</w-accordion>
+`,-1)]]),default:e(()=>[i(E,{class:`discrete--bg`},{default:e(()=>[i(N,null,{title:e(()=>[u[76]||=a(`This is the 1st item`,-1),i(j,{class:`ml2`,color:`red`,sm:``,outline:``},{default:e(()=>[...u[75]||=[a(`HOT`,-1)]]),_:1})]),content:e(()=>[u[77]||=n(`p`,null,`This content has a checklist.`,-1),u[78]||=n(`div`,{class:`title4`},`To do`,-1),i(M,{checklist:``,color:`primary`,items:[{label:`do this`},{label:`do that next`}]})]),_:1}),i(N,null,{title:e(()=>[i(k,{class:`mr1`,md:``,color:`amber`},{default:e(()=>[...u[79]||=[a(`mdi mdi-emoticon-excited-outline`,-1)]]),_:1}),u[80]||=n(`em`,null,`This is the 2nd item`,-1)]),content:e(()=>[...u[81]||=[n(`p`,null,`The full content here is custom and completely distinct and independent from the other items.`,-1)]]),_:1}),i(N,null,{title:e(()=>[u[83]||=n(`strong`,null,`This is the 3rd item`,-1),i(k,{class:`ml1`,md:``,color:`pink`},{default:e(()=>[...u[82]||=[a(`mdi mdi-emoticon-kiss-outline`,-1)]]),_:1})]),content:e(()=>[u[86]||=n(`p`,null,`Do you want to check the project on Github?`,-1),i(O,{class:`mt1`,"bg-color":`primary`,route:`https://github.com/antoniandre/wave-ui`},{default:e(()=>[u[85]||=a(`Github`,-1),i(k,{class:`ml2`,sm:``},{default:e(()=>[...u[84]||=[a(`mdi mdi-open-in-new`,-1)]]),_:1})]),_:1})]),_:1})]),_:1})]),_:1}),i(T,{h2:``},{default:e(()=>[...u[89]||=[a(`Toggle icon options`,-1)]]),_:1}),i(T,{h3:``},{default:e(()=>[...u[90]||=[a(`Alternative style`,-1)]]),_:1}),u[113]||=n(`p`,null,[a(`With the option `),n(`code`,null,`icon-rotate90`),a(`, the icon will initially point to the left and will
+rotate 90 degrees clockwise when expanding.`)],-1),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[91]||=[a(`.title4 Icon on the left
+w-accordion(:items="items" icon-rotate90)
+
+.title4.mt6 Icon on the right
+w-accordion(:items="items" icon-rotate90 expand-icon-right)`,-1)]]),html:e(()=>[...u[92]||=[a(`<div class="title4">
+  Icon on the left
+</div>
+<w-accordion
+  :items="items"
+  icon-rotate90>
+</w-accordion>
+
+<div class="title4 mt8">
+  Icon on the right
+</div>
+<w-accordion
+  :items="items"
+  icon-rotate90
+  expand-icon-right>
+</w-accordion>`,-1)]]),js:e(()=>[...u[93]||=[a(`data: () => ({
+  items: [
+    { title: 'Item 1', content: 'Content 1' },
+    { title: 'Item 2', content: 'Content 2' },
+    { title: 'Item 3', content: 'Content 3' }
+  ]
+})
+`,-1)]]),default:e(()=>[u[94]||=n(`div`,{class:`title4`},`Icon on the left`,-1),i(E,{class:`discrete--bg`,items:l.items,"expand-icon-rotate90":``},null,8,[`items`]),u[95]||=n(`div`,{class:`title4 mt6`},`Icon on the right`,-1),i(E,{class:`discrete--bg`,items:l.items,"expand-icon-rotate90":``,"expand-icon-right":``},null,8,[`items`])]),_:1}),i(T,{h3:``},{default:e(()=>[...u[96]||=[a(`More options`,-1)]]),_:1}),i(D,{"content-class":`pa4`},{pug:e(()=>[...u[97]||=[a(`.title4 1 custom icon (only expand)
+w-accordion(:items="items" expand-icon="wi-chevron-down")
+
+.title4.mt6 2 custom icons (expand & collapse)
+w-accordion(:items="items" expand-icon="wi-plus" collapse-icon="wi-minus")
+
+.title4.mt6 No icon
+w-accordion(:items="items" :expand-icon="false" title-class="py2")
+
+.title4.mt6 Icon on the right
+w-accordion(:items="items" expand-icon-right)`,-1)]]),html:e(()=>[...u[98]||=[a(`<div class="title4 mb2">
+  1 custom icon (only expand)
+</div>
+<w-accordion
+  :items="items"
+  expand-icon="wi-chevron-down">
+</w-accordion>
+
+<div class="title4 mt8 mb2">
+  2 custom icons (expand & collapse)
+</div>
+<w-accordion
+  :items="items"
+  expand-icon="wi-plus"
+  collapse-icon="wi-minus">
+</w-accordion>
+
+<div class="title4 mt8 mb2">
+  No icon
+</div>
+<w-accordion
+  :items="items"
+  :expand-icon="false"
+  title-class="py2">
+</w-accordion>
+
+<div class="title4 mt8 mb2">
+  Icon on the right
+</div>
+<w-accordion
+  :items="items"
+  expand-icon-right>
+</w-accordion>`,-1)]]),js:e(()=>[...u[99]||=[a(`data: () => ({
+  items: [
+    {
+      title: 'Item 1',
+      content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.'
+    },
+    {
+      title: 'Item 2',
+      content: 'Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!'
+    },
+    {
+      title: 'Item 3',
+      content: 'Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.'
+    }
+  ]
+})`,-1)]]),default:e(()=>[u[100]||=n(`div`,{class:`title4`},`One custom icon (only expand)`,-1),i(E,{class:`discrete--bg`,items:l.items,"expand-icon":`wi-chevron-down`},null,8,[`items`]),u[101]||=n(`div`,{class:`title4 mt6`},`Two custom icons (expand & collapse)`,-1),i(E,{class:`discrete--bg`,items:l.items,"expand-icon":`wi-plus`,"collapse-icon":`wi-minus`},null,8,[`items`]),u[102]||=n(`div`,{class:`title4 mt6`},`No icon`,-1),i(E,{class:`discrete--bg`,items:l.items,"expand-icon":!1,"title-class":`py2`},null,8,[`items`]),u[103]||=n(`div`,{class:`title4 mt6`},`Icon on the right`,-1),i(E,{class:`discrete--bg`,items:l.items,"expand-icon-right":``},null,8,[`items`])]),_:1})])}var x=l({data:()=>({items:[{title:`Item 1`,content:`Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut neque enim beatae autem iure, velit labore aut ipsa voluptatem aliquam distinctio harum. Possimus aliquid voluptatum facere incidunt dolor a.`,icon:`mdi mdi-home`,itemColor:`blue`},{title:`Item 2`,content:`Unde quo consequatur doloremque fugiat aperiam hic rerum, dolores aspernatur. Reiciendis aspernatur ab fugiat, saepe vel aut eaque molestiae eos commodi minus. Dolorum voluptatibus fugiat, incidunt magnam repudiandae fugit dolor!`,icon:`mdi mdi-github`,itemColor:`green`},{title:`Item 3`,content:`Enim minus excepturi totam dolorem iure nisi aperiam asperiores. Saepe blanditiis, magni ab fugit exercitationem optio. Beatae totam vitae autem consectetur accusantium dolor expedita, earum quaerat? Sed at perspiciatis aliquid.`,icon:`mdi mdi-codepen`,itemColor:`orange`}],items2:[{title:`Item 1`,content:`content 1`,color:`amber`},{title:`Item 2`,content:`content 2`,color:`warning`},{title:`Item 3`,content:`content 3`,color:`error`}],itemsDisabled:[{title:`Item 1 - disabled collapsed`,content:`Disabled`,disabled:!0},{title:`Item 2 - disabled expanded`,content:`You can't collapse this pane.`,disabled:!0},{title:`Item 3 - fully enabled`,content:`You can toggle this pane to expand and collapse.`}],itemsCustom:[{id:`item1`},{id:`item2`},{id:`item3`}],accordion1:[],accordion2:[!1,!0,!1],accordion3:[!1,!0,!0],accordion4:[],accordion5:[]})},[[`render`,b]]);function S(o,c,l,u,d,f){let p=t(`title-link`),m=t(`component-api`);return s(),r(`div`,null,[c[1]||=n(`div`,{class:`w-divider my12`},null,-1),i(p,{class:`title1`,h2:``},{default:e(()=>[...c[0]||=[a(`API`,-1)]]),_:1}),i(m,{class:`mt0`,items:f.props,descriptions:o.propsDescs,title:`Props`},null,8,[`items`,`descriptions`]),i(m,{items:o.slots,title:`w-accordion Slots`},null,8,[`items`]),i(m,{class:`mt12`,items:o.slotsAccordionItem,title:`w-accordion-item Slots`},null,8,[`items`]),i(m,{items:f.events,title:`Events`},null,8,[`items`])])}var C={modelValue:`<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide an array of booleans to dictate the state (expanded and collapsed) of all the accordion items. This value gets updated by the accordion when using a v-model.`,color:`Applies a text color on each accordion item. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.`,bgColor:`Applies a background color on each accordion item. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.`,items:`Required when not using the <strong class="code">w-accordion-item</strong> component, but redundant otherwise.<br>Expecting an array of objects. Each object being an accordion item, it should include a <code>title</code> and <code>content</code> attributes.<br><div class="w-tag white grey-dark4--bg size--xs w-tag--round bd2">DEPRECATED</div>: you can also provide an integer number (call it <em class="code">x</em>), to loop through and create <em class="code">x</em> items in the accordion.<br>You can (not deprecated) use the individual slots <code>item-title.x</code> &amp; <code>item-content.x</code> to define each item title and content.`,itemTitleKey:`Specifies the name of the property in each item object where to find the item's title string.`,itemContentKey:`Specifies the name of the property in each item object where to find the item's content string.`,itemColorKey:`Specifies the name of the property in each item object where to find the item's desired color string. This allows a different color for each accordion item.`,itemClass:`Applies a custom CSS class (or space separated classes) on every item container (which includes both the title and the content of the item).`,titleClass:`Applies a custom CSS class (or space separated classes) on every title container.`,contentClass:`Applies a custom CSS class (or space separated classes) on every content container.`,expandIcon:`Specifies the name of the icon to display in the toggle button. If set to false or empty string, the button will be removed.`,expandIconRight:`When set to true, the expand button will be placed at the right end of the item's title.`,expandIconRotate90:`With this option, the expand icon will initially point to the right, then point down on expand with a clockwise rotation of 90 degrees.`,expandIconProps:`An object of props to pass down to the <strong class="code">w-icon</strong> component for more control on the expand icon.<br>Example of use: <code>&lt;w-accordion :items="items" :expand-icon-props="{ flipY: true }"&gt;&lt;/w-accordion&gt;</code>`,expandSingle:`Specifies the accordion behavior, whether only one item can be expanded at a time or multiple. When set to true, expanding another item than the one already expanded is still possible, but it will collapse the other expanded item.`,collapseIcon:`Provide a different icon than the expand icon, to show when the accordion item is expanded. By default and when empty, there is no collapse icon: the expand icon rotates to show a closing ability.`,shadow:`Applies a shadow to the whole accordion container.`,duration:`Specify the duration in millisecond of the expand/collapse animation.`,keepInDom:`<span class="grey text-italic">Will deactivate the <code>keep-alive</code> prop.</span> When set to <code>true</code>, every panel content stays in the DOM when collapsed (hidden with <code>v-show</code>), unless the item is removed from the accordion.<br>Note that the <code>mounted</code> hook will be run once per panel, as soon as it is appended to the DOM.<br>The default behavior is to keep panel contents alive when <code>keep-alive</code> is enabled, but unmount collapsed panels from the DOM.`,keepAlive:`When set to <code>true</code> and by default, each panel content is kept alive. Which means that the state of the components inside a panel will be maintained when collapsing and expanding it, and the <code>mounted</code> hook will only be run the first time it is opened.<br>When explicitly set to <code>false</code>, the panel state will be reset upon each reopening, and the <code>mounted</code> hook will be run again.<br>The default behavior is to keep panel contents alive, but unmount collapsed panels from the DOM (unless <code>keep-in-dom</code> is used).<br>You can read more about the keep-alive behavior in the <a href="https://vuejs.org/guide/built-ins/keep-alive.html" target="_blank">Vue official documentation for keep-alive <i class="w-icon mdi mdi-open-in-new"></i></a>.`},w={"item-title":{description:`Provide a custom title for every item. Applies to all the items, but can be overridden by the <code>item-title.x</code> slot.`,params:{item:`The current item object.`,index:`The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.`,expanded:`A boolean representing the expanded state of the accordion item.`}},"item-title.x":{description:`<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom title for a single item: the item at the index <em class="code">x</em>.`,params:{item:`The current item object.`,index:`The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.`,expanded:`A boolean representing the expanded state of the accordion item.`}},"item-content":{description:`Provide a custom content for every item. Applies to all the items, but can be overridden by the <code>item-content.x</code> slot.`,params:{item:`The current item object.`,index:`The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.`,expanded:`A boolean representing the expanded state of the accordion item.`}},"item-content.x":{description:`<em class="code">x</em> is an integer starting at <span class="code">1</span>.<br>Provide a custom content for a single item: the item at the index <em class="code">x</em>.`,params:{item:`The current item object.`,index:`The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.`,expanded:`A boolean representing the expanded state of the accordion item.`}}},T={title:{description:`Provide a custom title for every item (you could use the title prop instead).`,params:{item:`The current item object.`,index:`The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.`,expanded:`A boolean representing the expanded state of the accordion item.`}},content:{description:`Provide a custom content for every item (you could use the content prop instead).`,params:{item:`The current item object.`,index:`The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.`,expanded:`A boolean representing the expanded state of the accordion item.`}}},E={input:{description:`Emitted each time the state of the accordion changes (when an item is expanded or collapsed).<br>Updates the v-model value in Vue 2.x only.`,params:{"[Array]":`An array of booleans representing the expanded state of each accordion item.`}},"update:modelValue":{description:`Emitted each time the state of the accordion changes (when an item is expanded or collapsed).<br>Updates the v-model value in Vue 3 only.`,params:{"[Array]":`An array of booleans representing the expanded state of each accordion item.`}},focus:{description:`Emitted on each accordion item title focus.`,params:{"[Object]":`The focused accordion item object.`}}},D=l({data:()=>({propsDescs:C,slots:w,slotsAccordionItem:T}),computed:{props(){return u.props},events(){return u.emits.reduce((e,t)=>(e[t]=E[t]||{},e),{})}}},[[`render`,S]]);function O(n,o,c,l,u,d){let f=t(`ui-component-title`),p=t(`examples`),m=t(`api`);return s(),r(`main`,null,[i(f,null,{default:e(()=>[...o[0]||=[a(`w-accordion`,-1)]]),_:1}),i(p),i(m)])}var k=l({components:{Examples:x,Api:D}},[[`render`,O]]);export{k as default};
