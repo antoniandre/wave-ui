@@ -37,6 +37,7 @@ main
         li
           strong.code w-menu &amp; w-tooltip
           ul
+            li Move the element to the opposite side when it would be out of viewport. #[span.tag.new]
             li Added the #[code disable] prop to prevent opening while keeping the activator in the DOM. #[span.tag.new]
         li
           strong SSR (Nuxt 3 &amp; 4)
