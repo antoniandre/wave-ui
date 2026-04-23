@@ -142,6 +142,8 @@ export default {
     // By default you can unselect a list item by re-selecting it.
     // Allow preventing that on single selection lists only.
     noUnselect: { type: Boolean },
+    deselectItem: { type: Boolean },
+    deselectItemLabel: { type: String, default: 'None' },
     menuProps: { type: Object }, // Allow passing down an object of props to the w-menu component.
     dark: { type: Boolean },
     light: { type: Boolean },
@@ -169,7 +171,7 @@ export default {
     // Check all the items and add a `value` if missing, containing either: value, label or index
     // in this order.
     selectItems () {
-      return this.items.map((item, i) => {
+      const items = this.items.map((item, i) => {
         const obj = { ...item } // Don't modify the original.
 
         // If no value is set on the item, add one from its label, or from its index. the result is
@@ -178,6 +180,16 @@ export default {
         obj.index = i
         return obj
       })
+
+      // If unselectItem is true, add the clear option at the top
+      if (this.deselectItem) {
+        items.unshift({
+          value: 'deselect-option-null-value',
+          label: this.deselectItemLabel
+        })
+      }
+
+      return items
     },
     hasLabel () {
       return this.label || this.$slots.default
@@ -355,6 +367,9 @@ export default {
 
     // Called on item selection: on click & `enter` keydown.
     onListItemSelect (e) {
+      if (e.value === 'deselect-option-null-value') {
+        this.onReset()
+      }
       this.$emit('item-select', e)
       // Close menu after selection on single select, but keep open if multiple.
       if (!this.multiple) this.showMenu = false // Will call `closeMenu()` from w-menu(@close).
