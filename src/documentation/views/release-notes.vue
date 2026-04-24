@@ -27,12 +27,13 @@ main
     //-   multiple: { type: Boolean }, multiple selection
     //-   unselectableBranches: { type: Boolean },
 
-    li.patch
-      strong.version v3.26.1
+    li.minor
+      strong.version v3.27.0
       ul
         li
           strong All the form components
           ul
+            li Added individual #[code no-blur-validation] option to all the form components. #[span.tag.new]
             li Generate components IDs with Vue's #[code useId] for SSR compatibility. #[span.tag.new]
 
     li.minor
