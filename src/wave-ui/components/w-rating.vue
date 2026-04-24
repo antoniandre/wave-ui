@@ -29,11 +29,15 @@ component(
 </template>
 
 <script>
-import FormElementMixin from '../mixins/form-elements'
+import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
 
 export default {
   name: 'w-rating',
   mixins: [FormElementMixin],
+
+  setup () {
+    return useWaveUiFormIds()
+  },
 
   props: {
     modelValue: {},

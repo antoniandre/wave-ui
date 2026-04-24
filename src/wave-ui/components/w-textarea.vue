@@ -67,12 +67,16 @@ component(
  * @todo Share the common parts between w-input, w-textarea & w-select.
  **/
 
-import FormElementMixin from '../mixins/form-elements'
+import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
 
 export default {
   name: 'w-textarea',
   mixins: [FormElementMixin],
   inheritAttrs: false, // The attrs should only be added to the textarea not the wrapper.
+
+  setup () {
+    return useWaveUiFormIds()
+  },
 
   props: {
     modelValue: { default: '' },

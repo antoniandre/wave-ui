@@ -128,13 +128,17 @@ component(
  * - option to fit to the content using contenteditable div
  **/
 
-import FormElementMixin from '../mixins/form-elements'
+import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
 import { reactive } from 'vue'
 
 export default {
   name: 'w-input',
   mixins: [FormElementMixin],
   inheritAttrs: false, // The attrs should only be added to the input not the wrapper.
+
+  setup () {
+    return useWaveUiFormIds()
+  },
 
   props: {
     modelValue: { default: '' },

@@ -108,11 +108,20 @@ component(
  * @todo Share the common parts between w-input, w-textarea & w-select.
  **/
 
-import FormElementMixin from '../mixins/form-elements'
+import { computed } from 'vue'
+import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
 
 export default {
   name: 'w-select',
   mixins: [FormElementMixin],
+
+  setup (props) {
+    const { waveUiUseId } = useWaveUiFormIds()
+    const selectListId = computed(() =>
+      props.id ? `${props.id}__listbox` : `w-select-menu--${waveUiUseId}`
+    )
+    return { waveUiUseId, selectListId }
+  },
 
   props: {
     items: { type: Array, required: true },
@@ -147,7 +156,7 @@ export default {
     light: { type: Boolean },
     fitToContent: { type: Boolean }
     // Props from mixin: id, name, disabled, readonly, required, tabindex, validators.
-    // Computed from mixin: inputId, selectListId, inputName, isDisabled & isReadonly.
+    // Computed from mixin: inputId, inputName, isDisabled & isReadonly. `selectListId` from setup.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur', 'item-click', 'item-select', 'click:inner-icon-left', 'click:inner-icon-right'],
@@ -166,11 +175,6 @@ export default {
   }),
 
   computed: {
-    /** Prefix for w-list item ids (`id_item-N`) and ARIA listbox linkage; stable with SSR. */
-    selectListId () {
-      return this.id ? `${this.id}__listbox` : `w-select-menu--${this.waveUiUseId}`
-    },
-
     // Check all the items and add a `value` if missing, containing either: value, label or index
     // in this order.
     selectItems () {

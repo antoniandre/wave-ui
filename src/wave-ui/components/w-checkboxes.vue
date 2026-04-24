@@ -31,11 +31,15 @@ component(
 
 <script>
 import { reactive } from 'vue'
-import FormElementMixin from '../mixins/form-elements'
+import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
 
 export default {
   name: 'w-checkboxes',
   mixins: [FormElementMixin],
+
+  setup () {
+    return useWaveUiFormIds()
+  },
 
   props: {
     items: { type: Array, required: true }, // All the possible options.

@@ -49,11 +49,15 @@ component(
 </template>
 
 <script>
-import FormElementMixin from '../mixins/form-elements'
+import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
 
 export default {
   name: 'w-checkbox',
   mixins: [FormElementMixin],
+
+  setup () {
+    return useWaveUiFormIds()
+  },
 
   inject: {
     wCheckboxes: { default: null }

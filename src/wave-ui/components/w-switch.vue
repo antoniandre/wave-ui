@@ -53,12 +53,16 @@ component(
 </template>
 
 <script>
-import FormElementMixin from '../mixins/form-elements'
+import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
 
 export default {
   name: 'w-switch',
   mixins: [FormElementMixin],
   inheritAttrs: false, // The attrs should only be added to the input not the wrapper.
+
+  setup () {
+    return useWaveUiFormIds()
+  },
 
   props: {
     modelValue: { default: false }, // v-model.

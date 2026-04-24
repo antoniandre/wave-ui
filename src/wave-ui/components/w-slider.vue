@@ -78,11 +78,15 @@ component(
 </template>
 
 <script>
-import FormElementMixin from '../mixins/form-elements'
+import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
 
 export default {
   name: 'w-slider',
   mixins: [FormElementMixin],
+
+  setup () {
+    return useWaveUiFormIds()
+  },
 
   props: {
     modelValue: { type: Number, default: 0 },

@@ -1,5 +1,10 @@
 import { useId } from 'vue'
 
+/** SSR-safe id suffix; call from each component's `setup()` (mixin `setup` is not reliably merged). */
+export function useWaveUiFormIds () {
+  return { waveUiUseId: useId() }
+}
+
 export default {
   inject: {
     // Used in each form component to determine whether to use the w-form-element wrap or not.
@@ -7,14 +12,6 @@ export default {
     formRegister: { default: null },
     // If the form is disabled or readonly, apply to all the form components.
     formProps: { default: () => ({ disabled: false, readonly: false }) }
-  },
-
-  setup () {
-    return {
-      // SSR-safe unique suffix (Vue 3.5+). Must not start with `_`/`$` or Vue omits it from the
-      // render context and template/slot access can warn or fail (see exposeSetupStateOnRenderContext).
-      waveUiUseId: useId()
-    }
   },
 
   props: {
