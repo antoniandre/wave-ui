@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: rating, disabled: isDisabled, readonly: isReadonly }"
+  v-bind="formRegister && { validators, inputValue: rating, disabled: isDisabled, readonly: isReadonly, noBlurValidation }"
   v-model:valid="valid"
   @reset="$emit('update:modelValue', rating = null);$emit('input', null)"
   :class="classes")

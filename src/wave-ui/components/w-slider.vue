@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: rangeValueScaled, disabled: isDisabled, readonly: isReadonly }"
+  v-bind="formRegister && { validators, inputValue: rangeValueScaled, disabled: isDisabled, readonly: isReadonly, noBlurValidation }"
   v-model:valid="valid"
   @reset="rangeValuePercent = 0;updateRangeValueScaled()"
   :wrap="formRegister || null"

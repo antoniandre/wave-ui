@@ -20,6 +20,8 @@ export default {
     readonly: { type: Boolean },
     inputValue: { required: true }, // The form element's input value.
     validators: { type: Array },
+    /** When `true`, skip blur validation for this element. When `false`, force blur validation even if `w-form` has `no-blur-validation`. When unset, inherit from the form. */
+    noBlurValidation: { type: Boolean },
     isFocused: { default: false }, // Watched.
     column: { default: false }, // Flex direction of the embedded component: column or row by default.
     wrap: { default: false } // Flex-wrap if needed.
@@ -57,6 +59,13 @@ export default {
         'w-form-el',
         classes[this.Validation.isValid === null ? 2 : ~~this.Validation.isValid]
       ]
+    },
+
+    // Per-element `no-blur-validation` overrides the form when set; otherwise inherit `w-form`.
+    shouldSkipBlurValidation () {
+      if (this.noBlurValidation === true) return true
+      if (this.noBlurValidation === false) return false
+      return !!this.formProps.noBlurValidation
     }
   },
 
@@ -89,7 +98,7 @@ export default {
       // When focusing, reset the hasJustReset flag so the input value is watched again.
       if (val) this.hasJustReset = false
       // On blur, Update the form element's validity.
-      else if (!this.formProps.noBlurValidation && this.validators && !this.readonly) {
+      else if (!this.shouldSkipBlurValidation && this.validators && !this.readonly) {
         this.$emit('update:valid', await this.validateElement(this))
       }
     }

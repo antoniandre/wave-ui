@@ -49,7 +49,8 @@ export default {
       formUnregister: this.unregister,
       validateElement: this.validateElement,
       // Give access to the form params (like disabled) to all the form components.
-      // To keep it reactive, we need an object not a list of props (by design in Vue).
+      // Use the form instance (not `this.$props`): injected descendants must read reactive
+      // props (`no-blur-validation`, `no-keyup-validation`, etc.) through the instance proxy.
       formProps: this.$props
     }
   },

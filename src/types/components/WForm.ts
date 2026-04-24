@@ -46,7 +46,8 @@ export interface WaveFormProps {
   noKeyupValidation?: boolean
 
   /**
-   * Prevents the form element validation on blur (happening by default).
+   * Prevents validation on blur for all fields (blur validation is on by default).
+   * A field can override with its own `no-blur-validation` prop (`true` / `false` / unset to inherit).
    * @property {boolean} noBlurValidation
    * @see https://antoniandre.github.io/wave-ui/w-form
    */

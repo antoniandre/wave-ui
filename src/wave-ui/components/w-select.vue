@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: selectionString, disabled: isDisabled, readonly: isReadonly, isFocused }"
+  v-bind="formRegister && { validators, inputValue: selectionString, disabled: isDisabled, readonly: isReadonly, isFocused, noBlurValidation }"
   v-model:valid="valid"
   @reset="onReset"
   :wrap="hasLabel && labelPosition !== 'inside'"

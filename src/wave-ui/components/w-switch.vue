@@ -2,7 +2,7 @@
 component(
   ref="formEl"
   :is="formRegister ? 'w-form-element' : 'div'"
-  v-bind="formRegister && { validators, inputValue: isOn, disabled: isDisabled, readonly: isReadonly }"
+  v-bind="formRegister && { validators, inputValue: isOn, disabled: isDisabled, readonly: isReadonly, noBlurValidation }"
   v-model:valid="valid"
   @mouseenter="$emit('mouseenter', $event)"
   @mouseleave="$emit('mouseleave', $event)"

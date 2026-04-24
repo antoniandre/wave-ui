@@ -56,6 +56,13 @@ export interface WaveFormElementProps {
   validators?: Array<any>
 
   /**
+   * Per-element blur validation: `true` skips blur, `false` forces blur even when `w-form` sets `no-blur-validation`, unset inherits the form.
+   * @property {boolean} noBlurValidation
+   * @see https://antoniandre.github.io/wave-ui/w-form-element
+   */
+  noBlurValidation?: boolean
+
+  /**
    * TODO: Add Description
    * @property {any} isFocused - Default: false
    * @see https://antoniandre.github.io/wave-ui/w-form-element

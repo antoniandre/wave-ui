@@ -24,7 +24,9 @@ export default {
     readonly: { type: Boolean },
     required: { type: Boolean },
     tabindex: { type: String },
-    validators: { type: Array }
+    validators: { type: Array },
+    /** Per-field blur validation: `true` skips blur, `false` forces blur even when `w-form` sets `no-blur-validation`, unset inherits the form. */
+    noBlurValidation: { type: Boolean }
   },
 
   data: () => ({
