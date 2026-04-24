@@ -4,7 +4,7 @@ transition(:name="transitionName" appear @after-leave="onAfterLeave")
   .w-tooltip(
     v-if="detachableVisible"
     ref="detachable"
-    :key="_tooltipInstanceId"
+    :key="tooltipInstanceId"
     :class="classes"
     :style="styles")
     slot
@@ -20,7 +20,8 @@ export default {
   mixins: [DetachableMixin],
 
   setup () {
-    return { _tooltipInstanceId: useId() }
+    // No leading `_`/`$`: Vue omits those from the render context (setup() reserved prefixes).
+    return { tooltipInstanceId: useId() }
   },
 
   props: {

@@ -11,8 +11,9 @@ export default {
 
   setup () {
     return {
-      // SSR-safe unique suffix (Vue 3.5+). Exposed on `this` for Options API templates.
-      _waveUiUseId: useId()
+      // SSR-safe unique suffix (Vue 3.5+). Must not start with `_`/`$` or Vue omits it from the
+      // render context and template/slot access can warn or fail (see exposeSetupStateOnRenderContext).
+      waveUiUseId: useId()
     }
   },
 
@@ -37,11 +38,11 @@ export default {
     /** Stable DOM id for the control (and labels), including SSR/hydration. */
     inputId () {
       const componentName = this.$options.name || 'w-field'
-      return this.id || `${componentName}--${this._waveUiUseId}`
+      return this.id || `${componentName}--${this.waveUiUseId}`
     },
 
     inputName () {
-      return this.name || `${this.$options.name}--${this._waveUiUseId}`
+      return this.name || `${this.$options.name}--${this.waveUiUseId}`
     },
     isDisabled () {
       return this.disabled || this.formProps.disabled

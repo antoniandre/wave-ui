@@ -121,7 +121,7 @@ export default {
   computed: {
     /** DOM id for the thumb control and related labels (distinct from `inputId` on `w-slider`). */
     thumbId () {
-      return this.id ? `${this.id}__thumb` : `button--${this._waveUiUseId}`
+      return this.id ? `${this.id}__thumb` : `button--${this.waveUiUseId}`
     },
 
     minVal () {

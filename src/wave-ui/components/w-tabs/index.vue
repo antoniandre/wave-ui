@@ -79,7 +79,7 @@ export default {
   name: 'w-tabs',
 
   setup () {
-    return { _tabsStableId: useId() }
+    return { tabsStableId: useId() }
   },
 
   props: {
@@ -183,7 +183,7 @@ export default {
     addTab (item) {
       // If there is no unique ID provided, inject one in each tab.
       // This will cause a single other update from watching the tabs items and stop there.
-      if (!(item[this.itemIdKey] ?? item._uid ?? false)) item._uid = `${this._tabsStableId}-${this.tabs.length}`
+      if (!(item[this.itemIdKey] ?? item._uid ?? false)) item._uid = `${this.tabsStableId}-${this.tabs.length}`
 
       this.tabs.push({
         _uid: item[this.itemIdKey] ?? item._uid,
@@ -200,7 +200,7 @@ export default {
       this.tabs = items.map((item, _index) => {
         // If there is no unique ID provided, inject one in each tab.
         // This will cause a single other update from watching the tabs items and stop there.
-        if (!(item[this.itemIdKey] ?? item._uid ?? false)) item._uid = `${this._tabsStableId}-${_index}`
+        if (!(item[this.itemIdKey] ?? item._uid ?? false)) item._uid = `${this.tabsStableId}-${_index}`
 
         return {
           ...item,

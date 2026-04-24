@@ -168,7 +168,7 @@ export default {
   computed: {
     /** Prefix for w-list item ids (`id_item-N`) and ARIA listbox linkage; stable with SSR. */
     selectListId () {
-      return this.id ? `${this.id}__listbox` : `w-select-menu--${this._waveUiUseId}`
+      return this.id ? `${this.id}__listbox` : `w-select-menu--${this.waveUiUseId}`
     },
 
     // Check all the items and add a `value` if missing, containing either: value, label or index

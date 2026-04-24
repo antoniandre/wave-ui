@@ -49,7 +49,7 @@ export default {
   name: 'w-list',
 
   setup () {
-    return { _waveUiUseId: useId() }
+    return { waveUiUseId: useId() }
   },
 
   props: {
@@ -96,7 +96,7 @@ export default {
 
     listId () {
       if (!this.addIds) return null
-      return typeof this.addIds === 'string' ? this.addIds : `w-list--${this._waveUiUseId}`
+      return typeof this.addIds === 'string' ? this.addIds : `w-list--${this.waveUiUseId}`
     },
 
     selectedItems () {
