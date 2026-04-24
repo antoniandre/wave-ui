@@ -11,9 +11,11 @@ div
 </template>
 
 <script>
+import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WSlider from '@/wave-ui/components/w-slider.vue'
 
 const propsDescs = {
+  id: 'Sets the base DOM <code>id</code> for the slider control. If omitted, Wave UI generates stable ids. The thumb button uses <code>&lt;your-id&gt;__thumb</code> when <code>id</code> is set, or an auto-generated <code>button--…</code> id otherwise.',
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Dictates the range selection of the slider. When the user changes the range, the <code>v-model</code> value will be updated.',
   color: 'Applies a foreground color to the slider. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   labelColor: 'Applies a specific color to the slider\'s left and right labels. Note that on validation failure, the validation-color takes precedence.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
@@ -28,7 +30,7 @@ const propsDescs = {
   max: 'Sets an integer or floating maximum number for the slider.',
   labelLeft: 'Defines a label to display on the left of the slider.',
   labelRight: 'Defines a label to display on the right of the slider.',
-  name: 'Provide a native HTML <code>name</code> attribute to the slider. If not provided, a unique name will be computed.',
+  name: 'Provide a native HTML <code>name</code> attribute to the slider. If omitted, a unique value is generated with the same stable mechanism as the default id (SSR-safe).',
   disabled: 'Disables the slider making it unreactive to user interactions.',
   readonly: 'The slider will still look like an interactive slider except that it is read-only: its current value cannot be changed by user interaction.',
   required: 'Applies the native HTML <code>required</code> attribute to the slider.',
@@ -68,7 +70,7 @@ export default {
     // Reads all the props and events directly from the component, so that as soon as a new prop or event
     // is added it will appear even if no description is yet provided.
     props () {
-      return WSlider.props
+      return { ...WSlider.props, ...FormElementMixin.props }
     },
     events () {
       return WSlider.emits.reduce((obj, label) => (obj[label] = events[label] || {}) && obj, {})

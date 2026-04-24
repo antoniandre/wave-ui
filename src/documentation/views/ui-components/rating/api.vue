@@ -15,6 +15,7 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WRating from '@/wave-ui/components/w-rating.vue'
 
 const propsDescs = {
+  id: 'Sets the native HTML <code>id</code> on the hidden input that carries the rating value. If omitted, Wave UI generates a stable id.',
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Dictates the current rating value. When the user rates, the <code>v-model</code> value will be updated.',
   max: 'The total count of buttons (usually stars) to display in the rating component.',
   icon: 'Sets the icon (star by default) of each button of the rating component.<br>Accepts a string: e.g. <code>mdi mdi-home</code>.',
@@ -26,7 +27,7 @@ const propsDescs = {
   lg: 'Sets the size (font-size) of the rating component to large.',
   xl: 'Sets the size (font-size) of the rating component to extra large.',
   noRipple: 'Removes the ripple animation on click of one of the buttons.',
-  name: 'Provide a native HTML <code>name</code> attribute to the rating component. If not provided, a unique name will be computed.',
+  name: 'Provide a native HTML <code>name</code> attribute to the rating component. If omitted, a unique value is generated with the same stable mechanism as the default id (SSR-safe).',
   disabled: 'Disables the rating component making it unreactive to user interactions.',
   readonly: 'The rating component will still look like an interactive rating component except that it is read-only: its current value cannot be changed by user interaction.',
   required: 'Applies the native HTML <code>required</code> attribute to the rating component.',

@@ -31,6 +31,7 @@ import WRadio from '@/wave-ui/components/w-radio.vue'
 
 const radios = {
   propsDescs: {
+    id: 'Present on the wrapper for API consistency; each inner <code>w-radio</code> gets its own stable <code>id</code> automatically (SSR-safe). Use <code>name</code> for the shared HTML <code>name</code> on every radio.',
     items: 'An array of radio button items to display. Each item object should contain at least a <code>label</code> or a <code>value</code> attribute.',
     modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide a value (of one of the <code>items</code> objects) to dictate the selected choice.<br>This value gets updated when using a v-model.',
     labelOnLeft: 'Moves the label to the left of each radio button. By default the label is displayed on the right.',
@@ -40,7 +41,7 @@ const radios = {
     inline: 'Displays all the radio buttons inline instead of in column.',
     color: 'Applies a color to the active radio buttons. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
     labelColor: 'Applies a specific color to the radio buttons\' labels. Note that on validation failure, the validation-color takes precedence.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-    name: 'Provide a native HTML <code>name</code> attribute to each radio button. If not provided, a unique common name will be computed and applied to all the radio buttons.',
+    name: 'Provide a native HTML <code>name</code> attribute shared by every radio in the group. If omitted, a unique shared name is generated (SSR-safe).',
     disabled: 'Disables all the radio buttons making them unreactive to user interactions.',
     readonly: 'The radio button will still look like an interactive radio button except that it is read-only: its current value cannot be changed by user interaction.',
     required: 'Applies the native HTML <code>required</code> attribute to each radio button.',
@@ -88,6 +89,7 @@ const radios = {
 
 const radio = {
   propsDescs: {
+    id: 'Sets the native HTML <code>id</code> and ties it to adjacent <code>&lt;label for&gt;</code> bindings. If omitted, Wave UI generates a stable id.',
     modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide a boolean to dictate the selected state of the radio button.<br>This value gets updated when using a v-model.',
     returnValue: 'Since the native HTML radio uses the <code>value</code> attribute to define the selected state, the <code>return-value</code> prop let you specify a value to return to the <code>v-model</code> when the radio is selected (instead of returning <code>true</code>).',
     label: 'Sets a visible label for the radio button.',
@@ -95,7 +97,7 @@ const radio = {
     color: 'Applies a color to the radio button when active. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
     labelColor: 'Applies a specific color to the radio button\'s label. Note that on validation failure, the validation-color takes precedence.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
     noRipple: 'Removes the ripple animation on select.',
-    name: 'Provide a native HTML <code>name</code> attribute to the radio button. If not provided, a unique name will be computed.',
+    name: 'Provide a native HTML <code>name</code> attribute to the radio button. If omitted, a unique value is generated with the same stable mechanism as the default id (SSR-safe).',
     disabled: 'Disables the radio button making it unreactive to user interactions.',
     readonly: 'The radio button will still look like an interactive radio button except that it is read-only: its current value cannot be changed by user interaction.',
     required: 'Applies the native HTML <code>required</code> attribute to the radio button.',

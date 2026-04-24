@@ -19,7 +19,7 @@ const propsDescs = {
   checklist: 'Sets the type of list to checklist: each item has a checkbox.',
   roundCheckboxes: 'When <code>checklist</code> is true, displays round checkboxes instead of square ones.',
   multiple: 'When selectable, allows multiple selections. A checklist always has multiple selections.',
-  addIds: 'When set to true, will add an id on the list and all the list items.<br>Useful for accessibility aria fields for instance.',
+  addIds: 'When <code>true</code>, assigns a stable <code>id</code> on the list root and every item (SSR-safe). When a string, that value is used as the id prefix instead of an auto-generated one.<br>Useful for <code>aria-*</code> relationships (e.g. <code>w-select</code> passes its listbox prefix here).',
   hover: 'On mouseover, highlights the list items with the given <code>color</code>. Also adds a small vertical padding on the list items to space them.',
   color: 'Applies a color to the list items\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the list items\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',

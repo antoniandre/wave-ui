@@ -15,6 +15,7 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WSelect from '@/wave-ui/components/w-select.vue'
 
 const propsDescs = {
+  id: 'Sets an explicit DOM <code>id</code> when you need a fixed value (e.g. SSR, tests, or external labels). If omitted, a stable id is auto-generated with Vue’s <code>useId()</code>.<br>When set, the dropdown listbox id becomes <code>&lt;your-id&gt;__listbox</code> (used for ARIA and list item ids).',
   items: 'Expecting an array of objects. Each object being a select list item, it should include at least a <code>label</code> attribute.',
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>The current selection of the select field.<br>Gets updated on selection change.',
   multiple: 'Allows multiple selections. When set to <code>true</code>, the list of choices will stay open after selecting an item.',
@@ -42,7 +43,7 @@ const propsDescs = {
   fitToContent: 'Fits the select list width to its selected content.',
   dark: false, // Hide the prop. 'When set to true, the text color will be set to white.',
   returnObject: 'The current selection is returned via the <code>value</code> prop or <code>v-model</code> as an array of full objects or a single full object (returning the original as given) when <code>multiple</code> is set to false.',
-  name: 'Provide a native HTML <code>name</code> attribute to the select field. If not provided, a unique name will be computed.',
+  name: 'Provide a native HTML <code>name</code> attribute to the select field. If omitted, a unique value is generated with the same stable mechanism as the default id (SSR-safe).',
   disabled: 'Disables the select field making it unreactive to user interactions.',
   readonly: 'The select field will still look like an interactive select field except that it is read-only: its current value cannot be changed by user interaction.',
   required: 'Applies the native HTML <code>required</code> attribute to the select field.',

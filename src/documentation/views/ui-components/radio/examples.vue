@@ -138,8 +138,8 @@ div
     | Case 4 is fully operational. #[span.code :tada:]
     | (Keyboard arrows navigation is a browser choice, Safari doesn't have it)#[br]
     strong.
-      Note that when you use the #[span.code w-radios] component, a unique name is set by default so you don't
-      have to worry about it if you don't need it.
+      Note that when you use the #[span.code w-radios] component, a shared unique #[code name] (and stable per-radio #[code id] values) are set by default so you don't
+      have to worry about them if you don't need to override them.
 
   title-link(h2) Custom label in w-radio
   p #[span.code w-radio] provides a default slot to customize the content.

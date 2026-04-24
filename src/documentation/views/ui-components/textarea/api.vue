@@ -15,6 +15,7 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import Wtextarea from '@/wave-ui/components/w-textarea.vue'
 
 const propsDescs = {
+  id: 'Sets the native HTML <code>id</code> and ties it to adjacent <code>&lt;label for&gt;</code> bindings. If omitted, Wave UI generates a stable id.',
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>The text content of the textarea.<br>Gets updated on textarea input.',
   label: 'Sets a visible label for the textarea.',
   labelPosition: 'Sets the position of the label to one of the following positions: \'left\', \'right\', \'inside\'.',
@@ -34,7 +35,7 @@ const propsDescs = {
   tile: 'Removes the default border-radius and sets sharp edges on the textarea.',
   rows: 'The default and minimum number of rows to display in the textarea (native HTML attribute).',
   cols: 'Applies the native HTML <code>cols</code> attribute to the textarea (native HTML attribute).',
-  name: 'Provide a native HTML <code>name</code> attribute to the textarea. If not provided, a unique name will be computed.',
+  name: 'Provide a native HTML <code>name</code> attribute to the textarea. If omitted, a unique value is generated with the same stable mechanism as the default id (SSR-safe).',
   disabled: 'Disables the textarea making it unreactive to user interactions.',
   readonly: 'The textarea will still look like an interactive textarea except that it is read-only: its current content cannot be changed by user interaction.',
   required: 'Applies the native HTML <code>required</code> attribute to the textarea.',
@@ -46,13 +47,13 @@ const slots = {
   'icon-left': {
     description: 'The left icon, if the <code>innerIconLeft</code> prop is not flexible enough.<br/>',
     params: {
-      inputId: 'The <code>id</code> of the associated input. If your slot uses a label you can have it activate the input like so: <code>&lt;label :for="inputId"&gt;</code>'
+      inputId: 'The effective <code>id</code> string of the native textarea (your <code>id</code> prop or Wave UI’s stable default). Use with <code>&lt;label :for="inputId"&gt;</code> in custom slot markup.'
     }
   },
   'icon-right': {
     description: 'The right icon, if the <code>innerIconRight</code> prop is not flexible enough.',
     params: {
-      inputId: 'The <code>id</code> of the associated input. If your slot uses a label you can have it activate the input like so: <code>&lt;label :for="inputId"&gt;</code>'
+      inputId: 'The effective <code>id</code> string of the native textarea (your <code>id</code> prop or Wave UI’s stable default). Use with <code>&lt;label :for="inputId"&gt;</code> in custom slot markup.'
     }
   }
 }

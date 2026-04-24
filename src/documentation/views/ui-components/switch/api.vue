@@ -15,6 +15,7 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WSwitch from '@/wave-ui/components/w-switch.vue'
 
 const propsDescs = {
+  id: 'Sets the native HTML <code>id</code> and ties it to adjacent <code>&lt;label for&gt;</code> bindings. If omitted, Wave UI generates a stable id.',
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Dictates the state of the switch. When the user toggles the switch, the <code>v-model</code> value will be updated.',
   label: 'Sets a visible label for the switch.',
   labelOnLeft: 'Moves the label to the left of the switch. By default the label is displayed on the right.',
@@ -22,7 +23,7 @@ const propsDescs = {
   labelColor: 'Applies a specific color to the switch\'s label. Note that on validation failure, the validation-color takes precedence.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   thin: 'Applies a thiner style to the switch.',
   noRipple: 'Removes the ripple animation on activation.',
-  name: 'Provide a native HTML <code>name</code> attribute to the switch. If not provided, a unique name will be computed.',
+  name: 'Provide a native HTML <code>name</code> attribute to the switch. If omitted, a unique value is generated with the same stable mechanism as the default id (SSR-safe).',
   disabled: 'Disables the switch making it unreactive to user interactions.',
   readonly: 'The switch will still look like an interactive switch except that it is read-only: its current state cannot be changed by user interaction.',
   required: 'Applies the native HTML <code>required</code> attribute to the switch.',

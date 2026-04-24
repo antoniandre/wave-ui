@@ -30,6 +30,7 @@ import WCheckbox from '@/wave-ui/components/w-checkbox.vue'
 
 const checkboxes = {
   propsDescs: {
+    id: 'Present on the wrapper for API consistency; each inner <code>w-checkbox</code> gets its own stable <code>id</code> automatically (SSR-safe). Use <code>name</code> for the shared HTML <code>name</code> on every checkbox.',
     items: 'An array of checkbox items to display. Each item object should contain at least a <code>label</code> or a <code>value</code> attribute.',
     modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide an array of values to dictate the checked state of all the checkboxes.<br>This value gets updated when using a v-model.',
     returnValues: 'When set to <code>true</code>, the return value of the w-checkboxes component will be an array of <code>returnValue</code>s of each item that is checked. If set to false and by default, the return value will be an array of booleans.',
@@ -41,7 +42,7 @@ const checkboxes = {
     round: 'Displays round checkboxes instead of square ones.',
     color: 'Applies a color to the active checkbox. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
     labelColor: 'Applies a specific color to the checkboxes labels. Note that on validation failure, the validation-color takes precedence.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
-    name: 'Provide a native HTML <code>name</code> attribute to the checkbox. If not provided, a unique common name will be computed and applied to all the checkboxes.',
+    name: 'Provide a native HTML <code>name</code> attribute shared by every checkbox in the group. If omitted, a unique shared name is generated (SSR-safe).',
     disabled: 'Disables all the checkboxes making them unreactive to user interactions.',
     readonly: 'The checkbox will still look like an interactive checkbox except that it is read-only: its current value cannot be changed by user interaction.',
     required: 'Applies the native HTML <code>required</code> attribute to each checkbox.',
@@ -89,6 +90,7 @@ const checkboxes = {
 
 const checkbox = {
   propsDescs: {
+    id: 'Sets the native HTML <code>id</code> and ties it to adjacent <code>&lt;label for&gt;</code> bindings. If omitted, Wave UI generates a stable id.',
     modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide a boolean to dictate the checked state the checkbox.<br>This value gets updated when using a v-model.',
     returnValue: 'Since the native HTML checkbox element uses the <code>value</code> attribute to define the checked state, the <code>return-value</code> prop let you specify a value to return to the <code>v-model</code> when the checkbox is checked (instead of returning <code>true</code>).',
     label: 'Sets a visible label for the checkbox.',
@@ -98,7 +100,7 @@ const checkbox = {
     noRipple: 'Removes the ripple animation on check.',
     indeterminate: 'Applies an indeterminate state on the checkbox. E.g. when it represents the selected state of a collection of elements where some are checked and some not.',
     round: 'Displays a round checkbox instead of a square one.',
-    name: 'Provide a native HTML <code>name</code> attribute to the checkbox. If not provided, a unique name will be computed.',
+    name: 'Provide a native HTML <code>name</code> attribute to the checkbox. If omitted, a unique value is generated with the same stable mechanism as the default id (SSR-safe).',
     disabled: 'Disables the checkbox making it unreactive to user interactions.',
     readonly: 'The checkbox will still look like an interactive checkbox except that it is read-only: its current value cannot be changed by user interaction.',
     required: 'Applies the native HTML <code>required</code> attribute to the checkbox.',

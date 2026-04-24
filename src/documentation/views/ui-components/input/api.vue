@@ -15,6 +15,7 @@ import FormElementMixin from '@/wave-ui/mixins/form-elements'
 import WInput from '@/wave-ui/components/w-input.vue'
 
 const propsDescs = {
+  id: 'Sets the native HTML <code>id</code> and ties it to adjacent <code>&lt;label for&gt;</code> bindings. If omitted, Wave UI generates a stable id.',
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>The text content of the input field.<br>Gets updated on text input.',
   type: 'Applies a native HTML <code>type</code> attribute.',
   label: 'Sets a visible label for the input field.',
@@ -36,7 +37,7 @@ const propsDescs = {
   round: 'Sets a maximum border-radius on the corners of the input field, giving it a round look.',
   shadow: 'Applies a drop shadow to the input field.',
   tile: 'Removes the default border-radius and sets sharp edges on the input field.',
-  name: 'Provide a native HTML <code>name</code> attribute to the input field. If not provided, a unique name will be computed.',
+  name: 'Provide a native HTML <code>name</code> attribute to the input field. If omitted, a unique value is generated with the same stable mechanism as the default id (SSR-safe).',
   disabled: 'Disables the input field making it unreactive to user interactions.',
   readonly: 'The input field will still look like an interactive input field except that it is read-only: its current value cannot be changed by user interaction.',
   required: 'Applies the native HTML <code>required</code> attribute to the input field.',
@@ -49,13 +50,13 @@ const slots = {
   'icon-left': {
     description: 'The left icon, if the <code>innerIconLeft</code> prop is not flexible enough.<br/>',
     params: {
-      inputId: 'The <code>id</code> of the associated input. If your slot uses a label you can have it activate the input like so: <code>&lt;label :for="inputId"&gt;</code>'
+      inputId: 'The effective <code>id</code> string of the native input (your <code>id</code> prop or Wave UI’s stable default). Use with <code>&lt;label :for="inputId"&gt;</code> in custom slot markup.'
     }
   },
   'icon-right': {
     description: 'The right icon, if the <code>innerIconRight</code> prop is not flexible enough.',
     params: {
-      inputId: 'The <code>id</code> of the associated input. If your slot uses a label you can have it activate the input like so: <code>&lt;label :for="inputId"&gt;</code>'
+      inputId: 'The effective <code>id</code> string of the native input (your <code>id</code> prop or Wave UI’s stable default). Use with <code>&lt;label :for="inputId"&gt;</code> in custom slot markup.'
     }
   }
 }
