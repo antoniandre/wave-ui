@@ -6,7 +6,7 @@ component(
   v-model:valid="valid"
   @reset="$emit('update:modelValue', rating = null);$emit('input', null)"
   :class="classes")
-  input(:id="inputName" :name="inputName" type="hidden" :value="rating")
+  input(:id="inputId" :name="inputName" type="hidden" :value="rating")
   template(v-for="i in max" :key="i")
     slot(v-if="$slots.item" name="item" :index="i + 1")
     button.w-rating__button(
@@ -49,8 +49,8 @@ export default {
     noRipple: { type: Boolean },
     dark: { type: Boolean },
     light: { type: Boolean }
-    // Props from mixin: name, disabled, readonly, required, validators.
-    // Computed from mixin: inputName, isDisabled & isReadonly.
+    // Props from mixin: id, name, disabled, readonly, required, validators.
+    // Computed from mixin: inputId, inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur'],

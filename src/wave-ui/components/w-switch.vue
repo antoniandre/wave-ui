@@ -11,7 +11,7 @@ component(
   :style="$attrs.style")
   input(
     ref="input"
-    :id="`w-switch--${_.uid}`"
+    :id="inputId"
     type="checkbox"
     :name="inputName"
     :checked="isOn"
@@ -29,7 +29,7 @@ component(
   template(v-if="hasLabel && labelOnLeft")
     label.w-switch__label.w-switch__label--left.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-switch--${_.uid}`"
+      :for="inputId"
       :class="labelClasses")
       slot {{ label }}
   .w-switch__input(
@@ -47,7 +47,7 @@ component(
   template(v-if="hasLabel && !labelOnLeft")
     label.w-switch__label.w-switch__label--right.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-switch--${_.uid}`"
+      :for="inputId"
       :class="labelClasses")
       slot {{ label }}
 </template>
@@ -71,8 +71,8 @@ export default {
     loading: { type: [Boolean, Number], default: false },
     dark: { type: Boolean },
     light: { type: Boolean }
-    // Props from mixin: name, disabled, readonly, required, tabindex, validators.
-    // Computed from mixin: inputName, isDisabled & isReadonly.
+    // Props from mixin: id, name, disabled, readonly, required, tabindex, validators.
+    // Computed from mixin: inputId, inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur', 'mouseenter', 'mouseleave'],

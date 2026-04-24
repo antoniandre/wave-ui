@@ -43,8 +43,14 @@ ul.w-list(:class="classes")
 </template>
 
 <script>
+import { useId } from 'vue'
+
 export default {
   name: 'w-list',
+
+  setup () {
+    return { _waveUiUseId: useId() }
+  },
 
   props: {
     items: { type: [Array, Number], required: true }, // All the possible options.
@@ -89,7 +95,8 @@ export default {
     },
 
     listId () {
-      return this.addIds ? (typeof this.addIds === 'string' ? this.addIds : `w-list--${this._.uid}`) : null
+      if (!this.addIds) return null
+      return typeof this.addIds === 'string' ? this.addIds : `w-list--${this._waveUiUseId}`
     },
 
     selectedItems () {

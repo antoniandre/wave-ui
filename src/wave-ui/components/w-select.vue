@@ -31,8 +31,8 @@ component(
         role="button"
         aria-haspopup="listbox"
         :aria-expanded="showMenu ? 'true' : 'false'"
-        :aria-owns="`w-select-menu--${_.uid}`"
-        :aria-activedescendant="`w-select-menu--${_.uid}_item-1`"
+        :aria-owns="selectListId"
+        :aria-activedescendant="`${selectListId}_item-1`"
         :class="inputWrapClasses")
         slot(name="icon-left")
           w-icon.w-select__icon.w-select__icon--inner-left(
@@ -79,7 +79,7 @@ component(
       :multiple="multiple"
       arrows-navigation
       return-object
-      :add-ids="`w-select-menu--${_.uid}`"
+      :add-ids="selectListId"
       :no-unselect="noUnselect"
       :selection-color="selectionColor"
       :item-color-key="itemColorKey"
@@ -146,8 +146,8 @@ export default {
     dark: { type: Boolean },
     light: { type: Boolean },
     fitToContent: { type: Boolean }
-    // Props from mixin: name, disabled, readonly, required, tabindex, validators.
-    // Computed from mixin: inputName, isDisabled & isReadonly.
+    // Props from mixin: id, name, disabled, readonly, required, tabindex, validators.
+    // Computed from mixin: inputId, selectListId, inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur', 'item-click', 'item-select', 'click:inner-icon-left', 'click:inner-icon-right'],
@@ -166,6 +166,11 @@ export default {
   }),
 
   computed: {
+    /** Prefix for w-list item ids (`id_item-N`) and ARIA listbox linkage; stable with SSR. */
+    selectListId () {
+      return this.id ? `${this.id}__listbox` : `w-select-menu--${this._waveUiUseId}`
+    },
+
     // Check all the items and add a `value` if missing, containing either: value, label or index
     // in this order.
     selectItems () {
@@ -394,7 +399,7 @@ export default {
       setTimeout(() => {
         const itemIndex = this.inputValue.length ? this.inputValue[0].index : 0 // Real index starts at 0.
         // User visible index starts at 1.
-        this.$refs['w-list'].$el.querySelector(`#w-select-menu--${this._.uid}_item-${itemIndex + 1}`)?.focus()
+        document.getElementById(`${this.selectListId}_item-${itemIndex + 1}`)?.focus()
       }, 100)
     },
 

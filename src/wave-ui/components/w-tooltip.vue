@@ -4,19 +4,24 @@ transition(:name="transitionName" appear @after-leave="onAfterLeave")
   .w-tooltip(
     v-if="detachableVisible"
     ref="detachable"
-    :key="_.uid"
+    :key="_tooltipInstanceId"
     :class="classes"
     :style="styles")
     slot
 </template>
 
 <script>
+import { useId } from 'vue'
 import { objectifyClasses } from '../utils/index'
 import DetachableMixin from '../mixins/detachable'
 
 export default {
   name: 'w-tooltip',
   mixins: [DetachableMixin],
+
+  setup () {
+    return { _tooltipInstanceId: useId() }
+  },
 
   props: {
     modelValue: {},

@@ -51,7 +51,7 @@ export default {
     round: { type: Boolean },
     color: { type: String, default: 'primary' },
     labelColor: { type: String, default: 'primary' }
-    // Props from mixin: name, disabled, readonly, required, validators.
+    // Props from mixin: id, name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
 

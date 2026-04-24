@@ -8,7 +8,7 @@ component(
   :class="classes")
   input(
     ref="input"
-    :id="`w-radio--${_.uid}`"
+    :id="inputId"
     type="radio"
     :name="inputName"
     :checked="inputValue || null"
@@ -22,12 +22,12 @@ component(
   template(v-if="hasLabel && labelOnLeft")
     label.w-radio__label.w-form-el-shakable.pr2(
       v-if="$slots.default"
-      :for="`w-radio--${_.uid}`"
+      :for="inputId"
       :class="labelClasses")
       slot {{ label }}
     label.w-radio__label.w-form-el-shakable.pr2(
       v-else-if="label"
-      :for="`w-radio--${_.uid}`"
+      :for="inputId"
       :class="labelClasses"
       v-html="label")
   .w-radio__input(
@@ -36,12 +36,12 @@ component(
   template(v-if="hasLabel && !labelOnLeft")
     label.w-radio__label.w-form-el-shakable.pl2(
       v-if="$slots.default"
-      :for="`w-radio--${_.uid}`"
+      :for="inputId"
       :class="labelClasses")
       slot {{ label }}
     label.w-radio__label.w-form-el-shakable.pl2(
       v-else-if="label"
-      :for="`w-radio--${_.uid}`"
+      :for="inputId"
       :class="labelClasses"
       v-html="label")
 </template>
@@ -66,8 +66,8 @@ export default {
     noRipple: { type: Boolean },
     dark: { type: Boolean },
     light: { type: Boolean }
-    // Props from mixin: name, disabled, readonly, required, tabindex, validators.
-    // Computed from mixin: inputName, isDisabled & isReadonly.
+    // Props from mixin: id, name, disabled, readonly, required, tabindex, validators.
+    // Computed from mixin: inputId, inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus'],

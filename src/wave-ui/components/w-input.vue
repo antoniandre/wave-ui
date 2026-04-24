@@ -15,17 +15,17 @@ component(
     template(v-if="labelPosition === 'left'")
       label.w-input__label.w-input__label--left.w-form-el-shakable(
         v-if="$slots.default || label"
-        :for="`w-input--${_.uid}`"
+        :for="inputId"
         :class="labelClasses")
         slot {{ label }}
 
     //- Input wrapper.
     .w-input__input-wrap(:class="inputWrapClasses")
-      slot(name="icon-left" :input-id="`w-input--${_.uid}`")
+      slot(name="icon-left" :input-id="inputId")
         w-icon.w-input__icon.w-input__icon--inner-left(
           v-if="innerIconLeft"
           tag="label"
-          :for="`w-input--${_.uid}`"
+          :for="inputId"
           @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
       //- All types of input except file.
       input.w-input__input(
@@ -35,7 +35,7 @@ component(
         @input="onInput"
         @focus="onFocus"
         @blur="onBlur"
-        :id="`w-input--${_.uid}`"
+        :id="inputId"
         :type="type"
         :name="inputName"
         :placeholder="placeholder || null"
@@ -55,7 +55,7 @@ component(
       template(v-else)
         input(
           ref="input"
-          :id="`w-input--${_.uid}`"
+          :id="inputId"
           type="file"
           :name="name || null"
           @focus="onFocus"
@@ -68,7 +68,7 @@ component(
         transition-group.w-input__input.w-input__input--file(
           tag="label"
           name="fade"
-          :for="`w-input--${_.uid}`")
+          :for="inputId")
           span.w-input__no-file(v-if="!inputFiles.length && isFocused" key="no-file")
             slot(name="no-file")
               template(v-if="$slots['no-file'] === undefined") No file
@@ -83,11 +83,11 @@ component(
           :class="labelClasses")
           slot {{ label }}
 
-      slot(name="icon-right" :input-id="`w-input--${_.uid}`")
+      slot(name="icon-right" :input-id="inputId")
         w-icon.w-input__icon.w-input__icon--inner-right(
           v-if="innerIconRight"
           tag="label"
-          :for="`w-input--${_.uid}`"
+          :for="inputId"
           @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
       w-progress.fill-width(
@@ -97,7 +97,7 @@ component(
         :model-value="showProgress ? (uploadInProgress || uploadComplete) && overallFilesProgress : loadingValue")
 
     //- Files preview.
-    label.d-flex(v-if="type === 'file' && preview && inputFiles.length" :for="`w-input--${_.uid}`")
+    label.d-flex(v-if="type === 'file' && preview && inputFiles.length" :for="inputId")
       template(v-for="(file, i) in inputFiles")
         i.w-icon.wi-spinner.w-icon--spin.size--sm.w-input__file-preview.primary(
           v-if="file.progress < 100"
@@ -116,7 +116,7 @@ component(
     template(v-if="labelPosition === 'right'")
       label.w-input__label.w-input__label--right.w-form-el-shakable(
         v-if="$slots.default || label"
-        :for="`w-input--${_.uid}`"
+        :for="inputId"
         :class="labelClasses")
         slot {{ label }}
 </template>
@@ -168,8 +168,8 @@ export default {
     dark: { type: Boolean },
     light: { type: Boolean },
     inputClass: { type: String } // Additional classes for the input element.
-    // Props from mixin: name, disabled, readonly, required, tabindex, validators.
-    // Computed from mixin: inputName, isDisabled & isReadonly.
+    // Props from mixin: id, name, disabled, readonly, required, tabindex, validators.
+    // Computed from mixin: inputId, inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right', 'update:overallProgress'],

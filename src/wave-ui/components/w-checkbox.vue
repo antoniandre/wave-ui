@@ -8,7 +8,7 @@ component(
   :class="classes")
   input(
     ref="input"
-    :id="`w-checkbox--${_.uid}`"
+    :id="inputId"
     type="checkbox"
     :name="inputName"
     :checked="isChecked || null"
@@ -24,12 +24,12 @@ component(
   template(v-if="hasLabel && labelOnLeft")
     label.w-checkbox__label.w-form-el-shakable.pr2(
       v-if="$slots.default"
-      :for="`w-checkbox--${_.uid}`"
+      :for="inputId"
       :class="labelClasses")
       slot {{ label }}
     label.w-checkbox__label.w-form-el-shakable.pr2(
       v-else-if="label"
-      :for="`w-checkbox--${_.uid}`"
+      :for="inputId"
       :class="labelClasses"
       v-html="label")
   .w-checkbox__input(@click="$refs.input.focus();$refs.input.click()" :class="this.color")
@@ -38,12 +38,12 @@ component(
   template(v-if="hasLabel && !labelOnLeft")
     label.w-checkbox__label.w-form-el-shakable.pl2(
       v-if="$slots.default"
-      :for="`w-checkbox--${_.uid}`"
+      :for="inputId"
       :class="labelClasses")
       slot {{ label }}
     label.w-checkbox__label.w-form-el-shakable.pl2(
       v-else-if="label"
-      :for="`w-checkbox--${_.uid}`"
+      :for="inputId"
       :class="labelClasses"
       v-html="label")
 </template>
@@ -73,8 +73,8 @@ export default {
     round: { type: Boolean },
     dark: { type: Boolean },
     light: { type: Boolean }
-    // Props from mixin: name, disabled, readonly, required, tabindex, validators.
-    // Computed from mixin: inputName, isDisabled & isReadonly.
+    // Props from mixin: id, name, disabled, readonly, required, tabindex, validators.
+    // Computed from mixin: inputId, inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur'],

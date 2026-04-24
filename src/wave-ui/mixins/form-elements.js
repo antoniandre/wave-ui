@@ -1,3 +1,5 @@
+import { useId } from 'vue'
+
 export default {
   inject: {
     // Used in each form component to determine whether to use the w-form-element wrap or not.
@@ -7,7 +9,16 @@ export default {
     formProps: { default: () => ({ disabled: false, readonly: false }) }
   },
 
+  setup () {
+    return {
+      // SSR-safe unique suffix (Vue 3.5+). Exposed on `this` for Options API templates.
+      _waveUiUseId: useId()
+    }
+  },
+
   props: {
+    /** When set, used as the DOM `id` and for associated labels (`for`). SSR-safe when provided. */
+    id: { type: String },
     name: { type: String }, // When sending data through form.
     disabled: { type: Boolean },
     readonly: { type: Boolean },
@@ -21,8 +32,14 @@ export default {
   }),
 
   computed: {
+    /** Stable DOM id for the control (and labels), including SSR/hydration. */
+    inputId () {
+      const componentName = this.$options.name || 'w-field'
+      return this.id || `${componentName}--${this._waveUiUseId}`
+    },
+
     inputName () {
-      return this.name || `${this.$options.name}--${this._.uid}`
+      return this.name || `${this.$options.name}--${this._waveUiUseId}`
     },
     isDisabled () {
       return this.disabled || this.formProps.disabled

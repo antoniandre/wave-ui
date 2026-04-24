@@ -9,12 +9,12 @@ component(
   :class="wrapperClasses")
   label.w-slider__label.w-slider__label--left.w-form-el-shakable(
     v-if="$slots['label-left']"
-    :for="`button--${_.uid}`"
+    :for="thumbId"
     :class="labelClasses")
     slot(name="label-left")
   label.w-slider__label.w-slider__label--left.w-form-el-shakable(
     v-else-if="labelLeft"
-    :for="`button--${_.uid}`"
+    :for="thumbId"
     :class="labelClasses"
     v-html="labelLeft")
   .w-slider__track-wrap
@@ -34,7 +34,7 @@ component(
       .w-slider__thumb(:style="thumbStyles")
         button.w-slider__thumb-button(
           ref="thumb"
-          :id="`button--${_.uid}`"
+          :id="thumbId"
           :class="[color]"
           :name="inputName"
           :model-value="rangeValueScaled"
@@ -48,7 +48,7 @@ component(
           @click.prevent)
         label.w-slider__thumb-label(
           v-if="thumbLabel"
-          :for="`button--${_.uid}`"
+          :for="thumbId"
           :class="thumbClasses")
           div(v-if="thumbLabel === 'droplet'")
             slot(name="label" :value="rangeValueScaled") {{ ~~rangeValueScaled }}
@@ -67,12 +67,12 @@ component(
         style="left: 100%") {{ this.maxVal }}
   label.w-slider__label.w-slider__label--right.w-form-el-shakable(
     v-if="$slots['label-right']"
-    :for="`button--${_.uid}`"
+    :for="thumbId"
     :class="labelClasses")
     slot(name="label-right")
   label.w-slider__label.w-slider__label--right.w-form-el-shakable(
     v-else-if="labelRight"
-    :for="`button--${_.uid}`"
+    :for="thumbId"
     :class="labelClasses"
     v-html="labelRight")
 </template>
@@ -101,8 +101,8 @@ export default {
     labelRight: { type: String },
     dark: { type: Boolean },
     light: { type: Boolean }
-    // Props from mixin: name, disabled, readonly, required, validators.
-    // Computed from mixin: inputName, isDisabled & isReadonly.
+    // Props from mixin: id, name, disabled, readonly, required, validators.
+    // Computed from mixin: inputId, thumbId, inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus'],
@@ -119,6 +119,11 @@ export default {
   }),
 
   computed: {
+    /** DOM id for the thumb control and related labels (distinct from `inputId` on `w-slider`). */
+    thumbId () {
+      return this.id ? `${this.id}__thumb` : `button--${this._waveUiUseId}`
+    },
+
     minVal () {
       return parseFloat(this.min)
     },

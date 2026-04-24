@@ -12,17 +12,17 @@ component(
   template(v-if="labelPosition === 'left'")
     label.w-textarea__label.w-textarea__label--left.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-textarea--${_.uid}`"
+      :for="inputId"
       :class="labelClasses")
       slot {{ label }}
 
   //- Input wrapper.
   .w-textarea__textarea-wrap(:class="inputWrapClasses")
-    slot(name="icon-left" :input-id="`w-textarea--${_.uid}`")
+    slot(name="icon-left" :input-id="inputId")
       w-icon.w-textarea__icon.w-textarea__icon--inner-left(
         v-if="innerIconLeft"
         tag="label"
-        :for="`w-textarea--${_.uid}`"
+        :for="inputId"
         @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
     textarea.w-textarea__textarea(
       ref="textarea"
@@ -31,7 +31,7 @@ component(
       @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
-      :id="`w-textarea--${_.uid}`"
+      :id="inputId"
       :name="inputName"
       :placeholder="placeholder || null"
       :rows="rows || null"
@@ -46,18 +46,18 @@ component(
         v-if="$slots.default || label"
         :class="labelClasses")
         slot {{ label }}
-    slot(name="icon-right" :input-id="`w-textarea--${_.uid}`")
+    slot(name="icon-right" :input-id="inputId")
       w-icon.w-textarea__icon.w-textarea__icon--inner-right(
         v-if="innerIconRight"
         tag="label"
-        :for="`w-textarea--${_.uid}`"
+        :for="inputId"
         @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
 
   //- Right label.
   template(v-if="labelPosition === 'right'")
     label.w-textarea__label.w-textarea__label--right.w-form-el-shakable(
       v-if="$slots.default || label"
-      :for="`w-textarea--${_.uid}`"
+      :for="inputId"
       :class="labelClasses")
       slot {{ label }}
 </template>
@@ -95,8 +95,8 @@ export default {
     cols: { type: [Number, String] },
     dark: { type: Boolean },
     light: { type: Boolean }
-    // Props from mixin: name, disabled, readonly, required, tabindex, validators.
-    // Computed from mixin: inputName, isDisabled & isReadonly.
+    // Props from mixin: id, name, disabled, readonly, required, tabindex, validators.
+    // Computed from mixin: inputId, inputName, isDisabled & isReadonly.
   },
 
   emits: ['input', 'update:modelValue', 'focus', 'blur', 'click:inner-icon-left', 'click:inner-icon-right'],

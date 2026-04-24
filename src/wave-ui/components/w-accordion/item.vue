@@ -69,10 +69,15 @@
 </template>
 
 <script>
+import { useId } from 'vue'
 import AccordionContent from './accordion-content.vue'
 
 export default {
   name: 'w-accordion-item',
+
+  setup () {
+    return { accordionItemUid: useId() }
+  },
 
   components: { AccordionContent },
 
@@ -100,7 +105,7 @@ export default {
   computed: {
     accordionItem: {
       get () {
-        return this.getAccordionItem(this._.uid)
+        return this.getAccordionItem(this.accordionItemUid)
       },
       set () {}
     },
@@ -130,7 +135,7 @@ export default {
   created () {
     // Register this item to the w-accordion component.
     this.registerItem({
-      _cuid: this._.uid,
+      _cuid: this.accordionItemUid,
       _index: 0,
       _expanded: this.expanded,
       _disabled: this.disabled,
@@ -140,7 +145,7 @@ export default {
   },
 
   beforeUnmount () {
-    this.unregisterItem(this._.uid)
+    this.unregisterItem(this.accordionItemUid)
   }
 }
 </script>
