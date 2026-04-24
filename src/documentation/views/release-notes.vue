@@ -27,6 +27,14 @@ main
     //-   multiple: { type: Boolean }, multiple selection
     //-   unselectableBranches: { type: Boolean },
 
+    li.patch
+      strong.version v3.26.1
+      ul
+        li
+          strong All the form components
+          ul
+            li Generate components IDs with Vue's #[code useId] for SSR compatibility. #[span.tag.new]
+
     li.minor
       strong.version v3.26.0
       ul
