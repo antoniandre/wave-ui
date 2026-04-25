@@ -47,10 +47,13 @@
 <script>
 import { objectifyClasses } from '../../utils/index'
 import { consoleError } from '../../utils/console'
+import RippleMixin from '../../mixins/ripple'
 import WAccordionItem from './item.vue'
 
 export default {
   name: 'w-accordion',
+
+  mixins: [RippleMixin],
 
   props: {
     modelValue: { type: Array },
@@ -94,7 +97,8 @@ export default {
       options: this.$props,
       registerItem: this.registerItem,
       unregisterItem: this.unregisterItem,
-      getAccordionItem: this.getAccordionItem
+      getAccordionItem: this.getAccordionItem,
+      getAccordionNoRipple: () => this.noRipple
     }
   },
 

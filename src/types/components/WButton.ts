@@ -245,6 +245,14 @@ export interface WaveButtonProps {
    * @see https://antoniandre.github.io/wave-ui/w-button
    */
   xl?: boolean
+
+  /**
+   * When `true`, disables the pointer ripple on this button only.
+   * Global default still follows `$waveui.config.ripple`.
+   * @property {boolean} noRipple
+   * @see https://antoniandre.github.io/wave-ui/w-button
+   */
+  noRipple?: boolean
 }
 
 // ----------------------------------------------------------------------------

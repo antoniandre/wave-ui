@@ -231,6 +231,13 @@ export interface $waveui {
     },
 
     /**
+     * Default pointer ripple for supported components and for `v-wave-ripple` when the binding is not `false`.
+     * @property {boolean} ripple - Default: true
+     * @see https://antoniandre.github.io/wave-ui/options-presets-and-waveui
+     */
+    ripple: boolean,
+
+    /**
      * Component presets
      * @property presets
      * @see https://antoniandre.github.io/wave-ui/options-presets-and-waveui

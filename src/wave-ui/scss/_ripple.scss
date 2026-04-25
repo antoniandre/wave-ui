@@ -1,0 +1,37 @@
+// Pointer ripple (v-wave-ripple + components using applyRipple).
+// Note: avoid overflow:hidden here so hosts like w-button keep focus rings that extend past the box.
+.w-ripple {
+  position: relative;
+
+  .w-ripple__ink-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}
+
+.w-ripple__ink {
+  position: absolute;
+  z-index: 2; // Above .w-button:before hover overlay (explicit z-index:0 on :before keeps ink visible).
+  border-radius: 50%;
+  pointer-events: none;
+  transform: scale(0);
+  opacity: 0.5;
+  // currentColor is often invisible on filled buttons (e.g. white on white); use a neutral ink.
+  background-color: rgba(#000, 0.22);
+  will-change: transform, opacity;
+  animation: w-ripple-ink-expand 0.65s ease-out forwards;
+}
+
+html[data-theme='dark'] .w-ripple__ink {
+  background-color: rgba(#fff, 0.2);
+}
+
+@keyframes w-ripple-ink-expand {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}

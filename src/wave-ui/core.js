@@ -4,6 +4,7 @@ import { consoleWarn } from './utils/console'
 import { colorPalette, generateColorShades, flattenColors } from './utils/colors'
 import { injectColorsCSSInDOM, injectCSSInDOM } from './utils/dynamic-css'
 import { injectNotifManagerInDOM, NotificationManager } from './utils/notification-manager'
+import { waveRippleDirective } from './utils/wave-ripple-directive'
 import './scss/index.scss'
 
 let mounted = false
@@ -122,6 +123,7 @@ export default class WaveUI {
         window.addEventListener('scroll', f)
       }
     })
+    app.directive('waveRipple', waveRippleDirective)
 
     // Register a-la-carte components from the given list.
     const { components = {} } = options || {}

@@ -215,6 +215,14 @@ export interface WaveTabsProps {
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
   keepInDom?: boolean
+
+  /**
+   * When `true`, disables the tab bar pointer ripple on this tabs instance only.
+   * Global default still follows `$waveui.config.ripple`.
+   * @property {boolean} noRipple
+   * @see https://antoniandre.github.io/wave-ui/w-tabs
+   */
+  noRipple?: boolean
 }
 
 // ----------------------------------------------------------------------------

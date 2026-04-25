@@ -6,7 +6,8 @@ component.w-button(
   :class="classes"
   :disabled="!!disabled || null"
   v-bind="attrs"
-  :style="styles")
+  :style="styles"
+  @pointerdown="onPointerDownRipple")
   w-icon(v-if="icon" v-bind="iconProps || {}") {{ icon }}
   slot(v-else)
   transition(name="scale-fade")
@@ -22,10 +23,14 @@ component.w-button(
 </template>
 
 <script>
+import RippleMixin from '../../mixins/ripple'
+
 export default {
   // Fully handle the attrs and listeners manually for the case of a router link that has both a
   // route and onClick.
   inheritAttrs: false,
+
+  mixins: [RippleMixin],
 
   props: {
     color: { type: String },
@@ -66,6 +71,13 @@ export default {
   },
 
   emits: [],
+
+  methods: {
+    onPointerDownRipple (e) {
+      if (this.disabled || this.loading || !this.rippleActive) return
+      this.onRipple(e)
+    }
+  },
 
   computed: {
     hasRouter () {
@@ -112,6 +124,7 @@ export default {
     },
     classes () {
       return {
+        'w-ripple': this.rippleActive,
         // If no color / bg color is set, set a primary color by default.
         'primary--bg': !this.bgColor && !this.color && !(this.outline || this.text),
         primary: !this.bgColor && !this.color && !this.dark && (this.outline || this.text),
@@ -246,6 +259,7 @@ $spinner-size: 40;
     content: '';
     position: absolute;
     inset: 0;
+    z-index: 0;
     opacity: 0;
     background-color: #000;
     border-radius: inherit;

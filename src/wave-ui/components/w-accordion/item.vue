@@ -2,10 +2,11 @@
 .w-accordion__item(:class="itemClasses" :aria-expanded="accordionItem._expanded ? 'true' : 'false'")
   .w-accordion__item-title(
     @click="!accordionItem._disabled && toggleItem(accordionItem, $event)"
+    @pointerdown="onAccordionTitlePointerDown"
     @focus="$emit('focus', (accordionItem))"
     @keypress.enter="!accordionItem._disabled && toggleItem(accordionItem, $event)"
     :tabindex="!accordionItem._disabled && 0"
-    :class="titleClasses")
+    :class="accordionTitleClasses")
     //- Expand icon on left.
     w-button.w-accordion__expand-icon(
       v-if="options.expandIcon && !options.expandIconRight"
@@ -70,10 +71,14 @@
 
 <script>
 import { useId } from 'vue'
+import RippleMixin from '../../mixins/ripple'
+import { isRippleEnabled } from '../../utils/ripple'
 import AccordionContent from './accordion-content.vue'
 
 export default {
   name: 'w-accordion-item',
+
+  mixins: [RippleMixin],
 
   setup () {
     return { accordionItemUid: useId() }
@@ -88,21 +93,40 @@ export default {
     disabled: { type: Boolean }
   },
 
-  inject: [
-    'options',
-    'titleClasses',
-    'contentClasses',
-    'onItemToggle',
-    'onEndOfCollapse',
-    'getOriginalItem',
-    'getAccordionItem',
-    'registerItem',
-    'unregisterItem'
-  ],
+  inject: {
+    options: { from: 'options' },
+    titleClasses: { from: 'titleClasses' },
+    contentClasses: { from: 'contentClasses' },
+    onItemToggle: { from: 'onItemToggle' },
+    onEndOfCollapse: { from: 'onEndOfCollapse' },
+    getOriginalItem: { from: 'getOriginalItem' },
+    getAccordionItem: { from: 'getAccordionItem' },
+    registerItem: { from: 'registerItem' },
+    unregisterItem: { from: 'unregisterItem' },
+    getAccordionNoRipple: { from: 'getAccordionNoRipple', default: () => undefined }
+  },
 
   emits: ['focus'],
 
   computed: {
+    /** Per-item noRipple override, else parent `w-accordion` noRipple, else global config. */
+    rippleActive () {
+      let resolvedNoRipple
+      if (typeof this.noRipple === 'boolean') resolvedNoRipple = this.noRipple
+      else {
+        const p = this.getAccordionNoRipple?.()
+        resolvedNoRipple = typeof p === 'boolean' ? p : undefined
+      }
+      return isRippleEnabled(resolvedNoRipple ? false : undefined, this.$waveui)
+    },
+
+    accordionTitleClasses () {
+      return {
+        ...this.titleClasses,
+        'w-ripple': this.rippleActive
+      }
+    },
+
     accordionItem: {
       get () {
         return this.getAccordionItem(this.accordionItemUid)
@@ -119,6 +143,12 @@ export default {
   },
 
   methods: {
+    onAccordionTitlePointerDown (e) {
+      if (this.accordionItem._disabled) return
+      if (e.target.closest?.('.w-accordion__expand-icon')) return
+      this.onRipple(e)
+    },
+
     toggleItem (item, e) {
       item._expanded = !item._expanded
 

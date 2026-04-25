@@ -53,7 +53,8 @@ export default {
     sm: { type: Boolean },
     md: { type: Boolean },
     lg: { type: Boolean },
-    xl: { type: Boolean }
+    xl: { type: Boolean },
+    noRipple: { type: Boolean, default: undefined }
   },
 
   components: { ButtonPartial },

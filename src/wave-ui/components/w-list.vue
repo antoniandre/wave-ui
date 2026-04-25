@@ -44,9 +44,12 @@ ul.w-list(:class="classes")
 
 <script>
 import { useId } from 'vue'
+import RippleMixin from '../mixins/ripple'
 
 export default {
   name: 'w-list',
+
+  mixins: [RippleMixin],
 
   setup () {
     return { waveUiUseId: useId() }
@@ -161,7 +164,13 @@ export default {
     },
 
     liLabelClasses (item) {
+      const rippleHost =
+        this.rippleActive &&
+        !item.disabled &&
+        (this.checklist || this.isSelectable || (this.nav && item[this.itemRouteKey]))
+
       return {
+        'w-ripple': rippleHost,
         'w-list__item-label--disabled': item.disabled || (this.nav && !item[this.itemRouteKey] && !item.children),
         'w-list__item-label--active': (this.isSelectable && item._selected) || null,
         'w-list__item-label--focused': item._focused,
@@ -188,6 +197,7 @@ export default {
       // If selectable list, on mousedown select the item.
       const mousedown = this.isSelectable && (e => {
         e.stopPropagation()
+        this.onRipple(e)
         !li.disabled && this.selectItem(li)
       })
       // If selectable list, on enter key press select item.
@@ -230,6 +240,7 @@ export default {
         props.onFocus = () => (li._focused = true)
         props.onBlur = () => (li._focused = false)
         props.onInput = value => this.selectItem(li, value)
+        props.onPointerdown = e => this.onRipple(e)
         // When clicking on the checkbox component wrapper, trigger a focus & click on the checkbox.
         props.onClick = e => {
           const checkbox = e.target.querySelector('input[type="checkbox"]')
@@ -250,6 +261,7 @@ export default {
         if (!li.disabled && li[this.itemRouteKey]) {
           props.onKeydown = keydown
           props.onMousedown = mousedown
+          props.onPointerdown = e => this.onRipple(e)
 
           if (this.$router) {
             props.to = li[this.itemRouteKey]

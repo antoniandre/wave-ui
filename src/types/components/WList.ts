@@ -185,6 +185,14 @@ export interface WaveListProps {
    * @see https://antoniandre.github.io/wave-ui/w-list
    */
   arrowsNavigation?: boolean
+
+  /**
+   * When `true`, disables the pointer ripple on interactive rows for this list only.
+   * Global default still follows `$waveui.config.ripple`.
+   * @property {boolean} noRipple
+   * @see https://antoniandre.github.io/wave-ui/w-list
+   */
+  noRipple?: boolean
 }
 
 // ----------------------------------------------------------------------------

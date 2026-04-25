@@ -57,6 +57,8 @@ const config = reactive({
     align: 'right',
     transition: 'default' // Sliding from the side by default.
   },
+  // Default ripple for v-wave-ripple and components (unless their `no-ripple` prop is set).
+  ripple: true,
   presets: {} // User presets for each component.
 })
 

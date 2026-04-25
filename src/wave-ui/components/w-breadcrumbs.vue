@@ -20,7 +20,8 @@
         :is="hasRouter ? 'router-link' : 'a'"
         :to="hasRouter && item[itemRouteKey]"
         :href="item[itemRouteKey]"
-        :class="color || null")
+        :class="breadcrumbLinkClasses"
+        @pointerdown="onRipple")
         slot(name="item" :item="item" :index="i + 1" :isLast="i === items.length - 1")
       component.w-breadcrumbs__item(
         v-else
@@ -29,7 +30,8 @@
         :to="hasRouter && item[itemRouteKey]"
         :href="item[itemRouteKey]"
         v-html="item[itemLabelKey]"
-        :class="color || null")
+        :class="breadcrumbLinkClasses"
+        @pointerdown="onRipple")
 
     //- Current page when linkLastItem is false.
     slot(
@@ -43,8 +45,13 @@
 </template>
 
 <script>
+import RippleMixin from '../mixins/ripple'
+
 export default {
   name: 'w-breadcrumbs',
+
+  mixins: [RippleMixin],
+
   props: {
     items: { type: Array, required: true },
     linkLastItem: { type: Boolean },
@@ -63,6 +70,10 @@ export default {
   emits: [],
 
   computed: {
+    breadcrumbLinkClasses () {
+      return [this.color || null, { 'w-ripple': this.rippleActive }]
+    },
+
     hasRouter () {
       return '$router' in this
     },

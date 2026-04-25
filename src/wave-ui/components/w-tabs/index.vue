@@ -5,6 +5,7 @@
       v-for="(item, i) in tabs"
       :key="i"
       :class="barItemClasses(item)"
+      @pointerdown="onTabsBarPointerDown($event, item)"
       @click="!item._disabled && item._uid !== activeTabUid && openTab(item._uid)"
       @focus="$emit('focus', getOriginalItem(item))"
       :tabindex="!item._disabled && 0"
@@ -73,10 +74,13 @@
 <script>
 import { useId } from 'vue'
 import { objectifyClasses } from '../../utils/index'
+import RippleMixin from '../../mixins/ripple'
 import TabContent from './tab-content.vue'
 
 export default {
   name: 'w-tabs',
+
+  mixins: [RippleMixin],
 
   setup () {
     return { tabsStableId: useId() }
@@ -235,6 +239,7 @@ export default {
       const isActive = item._index === this.activeTabIndex
 
       return {
+        'w-ripple': this.rippleActive,
         [`${this.bgColor}--bg`]: this.bgColor,
         [this.color]: this.color && !item._disabled && !(this.activeClass && isActive),
         'w-tabs__bar-item--active': isActive,
@@ -242,6 +247,11 @@ export default {
         ...objectifyClasses(this.titleClass),
         ...(isActive ? objectifyClasses(this.activeClass) : {})
       }
+    },
+
+    onTabsBarPointerDown (e, item) {
+      if (item._disabled) return
+      this.onRipple(e)
     },
 
     // Switching tabs.

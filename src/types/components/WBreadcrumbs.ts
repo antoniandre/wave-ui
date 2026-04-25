@@ -110,6 +110,14 @@ export interface WaveBreadcrumbsProps {
    * @see https://antoniandre.github.io/wave-ui/w-breadcrumbs
    */
   xl?: boolean
+
+  /**
+   * When `true`, disables the pointer ripple on link items for this breadcrumbs only.
+   * Global default still follows `$waveui.config.ripple`.
+   * @property {boolean} noRipple
+   * @see https://antoniandre.github.io/wave-ui/w-breadcrumbs
+   */
+  noRipple?: boolean
 }
 
 // ----------------------------------------------------------------------------

@@ -186,6 +186,14 @@ export interface WaveAccordionProps {
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
   keepInDom?: boolean
+
+  /**
+   * When `true`, disables the accordion title pointer ripple for all items.
+   * Global default still follows `$waveui.config.ripple`. Per-item override: set `no-ripple` on `w-accordion-item`.
+   * @property {boolean} noRipple
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  noRipple?: boolean
 }
 
 // ----------------------------------------------------------------------------

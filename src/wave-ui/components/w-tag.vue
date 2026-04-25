@@ -1,6 +1,7 @@
 <template lang="pug">
 span.w-tag(
   @click="$emit('update:modelValue', !modelValue);$emit('input', !modelValue)"
+  @pointerdown="onTagPointerDown"
   @keypress.enter="$emit('update:modelValue', !modelValue);$emit('input', !modelValue)"
   :class="classes"
   :role="modelValue !== -1 && 'button'"
@@ -17,8 +18,12 @@ span.w-tag(
 </template>
 
 <script>
+import RippleMixin from '../mixins/ripple'
+
 export default {
   name: 'w-tag',
+
+  mixins: [RippleMixin],
 
   props: {
     modelValue: { type: [Boolean, Number], default: -1 },
@@ -58,6 +63,7 @@ export default {
         [this.color]: this.color,
         [`${this.bgColor}--bg`]: this.bgColor,
         [`size--${this.presetSize}`]: true,
+        'w-ripple': this.rippleActive && this.modelValue !== -1,
         'w-tag--dark': this.dark,
         'w-tag--light': this.light,
         'w-tag--clickable': this.modelValue !== -1,
@@ -73,6 +79,14 @@ export default {
         width: (!isNaN(this.width) ? `${this.width}px` : this.width) || null,
         height: (!isNaN(this.height) ? `${this.height}px` : this.height) || null
       }
+    }
+  },
+
+  methods: {
+    onTagPointerDown (e) {
+      if (this.modelValue === -1) return
+      if (e.target.closest?.('.w-tag__closable')) return
+      this.onRipple(e)
     }
   }
 }

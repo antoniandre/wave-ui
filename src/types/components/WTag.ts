@@ -152,6 +152,14 @@ export interface WaveTagProps {
    * @see https://antoniandre.github.io/wave-ui/w-tag
    */
   light?: boolean
+
+  /**
+   * When `true`, disables the pointer ripple for clickable tags on this instance.
+   * Global default still follows `$waveui.config.ripple`.
+   * @property {boolean} noRipple
+   * @see https://antoniandre.github.io/wave-ui/w-tag
+   */
+  noRipple?: boolean
 }
 
 // ----------------------------------------------------------------------------
