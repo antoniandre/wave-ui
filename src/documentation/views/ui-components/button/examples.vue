@@ -459,6 +459,7 @@ div
         :tooltip-props="{ top: true, transition: 'twist', bgColor: 'success' }"&gt;
         Hover me too please
       &lt;/w-button&gt;
+
 </template>
 
 <script>

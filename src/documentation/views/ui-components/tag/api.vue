@@ -30,7 +30,8 @@ const propsDescs = {
   lg: 'Sets the size of the tag to large.',
   xl: 'Sets the size of the tag to extra large.',
   width: 'Sets a width on the tag.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
-  height: 'Sets a height on the tag.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.'
+  height: 'Sets a height on the tag.<br>Accepts a string made of a value and a unit (e.g. <code>2.5em</code>) or a number (e.g. <code>45</code>) that will be a pixel value.',
+  noRipple: 'When <code>true</code>, disables the pointer ripple on clickable tags (no effect when the tag is not clickable). By default, ripple follows <code>$waveui.config.ripple</code>.'
 }
 
 const slots = {

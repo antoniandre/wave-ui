@@ -44,7 +44,8 @@ const propsDescs = {
   sm: 'Sets the size of the button to small.',
   md: 'Sets the size of the button to medium.',
   lg: 'Sets the size of the button to large.',
-  xl: 'Sets the size of the button to extra large.'
+  xl: 'Sets the size of the button to extra large.',
+  noRipple: 'When <code>true</code>, disables the pointer ripple on this button only. By default, ripple follows <code>$waveui.config.ripple</code> (see <a href="options-presets-and-waveui">global options</a>).'
 }
 
 const slots = {

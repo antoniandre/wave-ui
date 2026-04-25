@@ -25,7 +25,8 @@ const propsDescs = {
   sm: 'Sets the font size of the items.',
   md: 'Sets the font size of the items.',
   lg: 'Sets the font size of the items.',
-  xl: 'Sets the font size of the items.'
+  xl: 'Sets the font size of the items.',
+  noRipple: 'When <code>true</code>, disables the pointer ripple on breadcrumb links for this instance. By default, ripple follows <code>$waveui.config.ripple</code>.'
 }
 
 const slots = {

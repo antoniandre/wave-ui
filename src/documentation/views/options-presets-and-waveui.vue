@@ -20,6 +20,24 @@ main
               | {{ item.route.startsWith('w-') ?  'component' : 'knowledge base page' }}.
             div(v-else-if="item.definition" v-html="item.definition")
 
+        title-link.mt10(h3 slug="ripple-directive") #[code v-wave-ripple] directive
+        p.mt2.
+          Use the #[code v-wave-ripple] directive on any element for the same pointer ripple as Wave UI components.
+          It respects #[code $waveui.config.ripple] by default; pass #[code false] to disable on a single host,
+          or #[code :="{ disabled: myFlag }"] to disable when #[code myFlag] is true.
+        example
+          .pa6.round.text-center.title3(
+            v-wave-ripple
+            style="max-width: 14em; margin: 0 auto; cursor: pointer; user-select: none; border: 1px solid rgba(0,0,0,.08)")
+            | Tap for ripple
+          template(#pug).
+            .pa6.round.text-center.title3(
+              v-wave-ripple
+              style="max-width: 14em; margin: 0 auto; cursor: pointer; user-select: none; border: 1px solid rgba(0,0,0,.08)")
+              | Tap for ripple
+          template(#html).
+            &lt;div v-wave-ripple class="pa6 round text-center title3" style="..."&gt;Tap for ripple&lt;/div&gt;
+
         .mt6
           w-icon.ml-1.mr1 wi-chevron-right
           | View the
@@ -138,6 +156,10 @@ export default {
       { label: 'icons', route: 'w-icon' },
       { label: 'iconsLigature', route: 'w-icon' },
       { label: 'notificationManager', route: 'w-notification' },
+      {
+        label: 'ripple',
+        definition: 'Default pointer ripple for supported Wave UI components and for the <code>v-wave-ripple</code> directive when the binding is not <code>false</code>. Default: <code>true</code>. Set to <code>false</code> to disable ripples app-wide. Use component <code>no-ripple</code> props to disable locally when global ripple is on.'
+      },
       { label: 'presets', route: 'options-presets-and-waveui#presets' },
       { label: 'theme', definition: 'From version 3.0. Choose which theme to use: <code>light</code> or <code>dark</code>. You can also set <code>auto</code> to let Wave UI read the preferred theme from the user OS.' }
     ],

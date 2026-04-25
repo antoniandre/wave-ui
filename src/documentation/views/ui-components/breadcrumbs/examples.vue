@@ -184,6 +184,7 @@ div
           { label: 'Current page', route: '/w-breadcrumbs' }
         ]
       })
+
 </template>
 
 <script>

@@ -533,6 +533,7 @@ div.lists-demo
           { label: 'Disabled', id: 'disabled', icon: 'mdi mdi-minus-circle', route: '/w-list/disabled', disabled: true }
         ]
       })
+
   router-view
 </template>
 

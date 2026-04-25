@@ -5,6 +5,9 @@ div
 
   component-api.mt0(:items="props" :descriptions="propsDescs" title="Props")
 
+  title-link.title1.mt12(h2 slug="w-accordion-item-api") &lt;w-accordion-item&gt; API
+  component-api.mt0(:items="accordionItemProps" :descriptions="accordionItemPropsDescs" title="Props")
+
   component-api(:items="slots" title="w-accordion Slots")
   component-api.mt12(:items="slotsAccordionItem" title="w-accordion-item Slots")
 
@@ -13,6 +16,15 @@ div
 
 <script>
 import WAccordion from '@/wave-ui/components/w-accordion/index.vue'
+import WAccordionItem from '@/wave-ui/components/w-accordion/item.vue'
+
+const accordionItemPropsDescs = {
+  title: 'The title of the accordion item.',
+  content: 'The content of the accordion item.',
+  expanded: 'Whether this item starts expanded.',
+  disabled: 'Disables interaction with this item.',
+  noRipple: 'When <code>true</code>, disables the pointer ripple for this item title only. When omitted, it follows the parent accordion then <code>$waveui.config.ripple</code>.'
+}
 
 const propsDescs = {
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Provide an array of booleans to dictate the state (expanded and collapsed) of all the accordion items. This value gets updated by the accordion when using a v-model.',
@@ -34,7 +46,8 @@ const propsDescs = {
   shadow: 'Applies a shadow to the whole accordion container.',
   duration: 'Specify the duration in millisecond of the expand/collapse animation.',
   keepInDom: '<span class="grey text-italic">Will deactivate the <code>keep-alive</code> prop.</span> When set to <code>true</code>, every panel content stays in the DOM when collapsed (hidden with <code>v-show</code>), unless the item is removed from the accordion.<br>Note that the <code>mounted</code> hook will be run once per panel, as soon as it is appended to the DOM.<br>The default behavior is to keep panel contents alive when <code>keep-alive</code> is enabled, but unmount collapsed panels from the DOM.',
-  keepAlive: 'When set to <code>true</code> and by default, each panel content is kept alive. Which means that the state of the components inside a panel will be maintained when collapsing and expanding it, and the <code>mounted</code> hook will only be run the first time it is opened.<br>When explicitly set to <code>false</code>, the panel state will be reset upon each reopening, and the <code>mounted</code> hook will be run again.<br>The default behavior is to keep panel contents alive, but unmount collapsed panels from the DOM (unless <code>keep-in-dom</code> is used).<br>You can read more about the keep-alive behavior in the <a href="https://vuejs.org/guide/built-ins/keep-alive.html" target="_blank">Vue official documentation for keep-alive <i class="w-icon mdi mdi-open-in-new"></i></a>.'
+  keepAlive: 'When set to <code>true</code> and by default, each panel content is kept alive. Which means that the state of the components inside a panel will be maintained when collapsing and expanding it, and the <code>mounted</code> hook will only be run the first time it is opened.<br>When explicitly set to <code>false</code>, the panel state will be reset upon each reopening, and the <code>mounted</code> hook will be run again.<br>The default behavior is to keep panel contents alive, but unmount collapsed panels from the DOM (unless <code>keep-in-dom</code> is used).<br>You can read more about the keep-alive behavior in the <a href="https://vuejs.org/guide/built-ins/keep-alive.html" target="_blank">Vue official documentation for keep-alive <i class="w-icon mdi mdi-open-in-new"></i></a>.',
+  noRipple: 'When <code>true</code>, disables the pointer ripple on item titles for all items. By default, ripple follows <code>$waveui.config.ripple</code>. Override per item with <code>no-ripple</code> on <code>w-accordion-item</code>.'
 }
 
 const slots = {
@@ -115,6 +128,7 @@ const events = {
 export default {
   data: () => ({
     propsDescs,
+    accordionItemPropsDescs,
     slots,
     slotsAccordionItem
   }),
@@ -124,6 +138,10 @@ export default {
     // is added it will appear even if no description is yet provided.
     props () {
       return WAccordion.props
+    },
+
+    accordionItemProps () {
+      return { noRipple: { type: Boolean }, ...WAccordionItem.props }
     },
     events () {
       return WAccordion.emits.reduce((obj, label) => {

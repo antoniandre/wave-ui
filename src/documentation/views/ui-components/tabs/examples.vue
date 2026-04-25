@@ -593,7 +593,7 @@ div
         onTitleChange () {
           this.$refs.tabs.updateSlider()
         }
-      }
+      })
 </template>
 
 <script>
