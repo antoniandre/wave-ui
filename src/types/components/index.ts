@@ -27,6 +27,14 @@ export { WProgress } from './WProgress'
 export { WRadio } from './WRadio'
 export { WRadios } from './WRadios'
 export { WRating } from './WRating'
+export {
+  WScrollable,
+  type WaveScrollableScrollbar,
+  type WaveScrollableScrollPayload,
+  type WaveScrollableScrollPosition,
+  type WaveScrollableScrollPositionInput,
+  type WaveScrollableScrollSource
+} from './WScrollable'
 export { WSelect, WSelectDropdownItem } from './WSelect'
 export { WSlider } from './WSlider'
 export { WSpinner } from './WSpinner'
