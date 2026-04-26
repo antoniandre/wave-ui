@@ -19,6 +19,7 @@
             v-for="(header, i) in headers"
             :key="i"
             @click="!colResizing.dragging && header.sortable !== false && sortTable(header)"
+            @pointerdown="onHeaderPointerDown($event, header)"
             :class="headerClasses(header)")
             w-icon.w-table__header-sort(
               v-if="header.sortable !== false && header.align === 'right'"
@@ -73,13 +74,14 @@
             tr.w-table__row(
               v-else
               @click="doSelectRow(item, i)"
+              @pointerdown="onRowPointerDown"
               :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined, [item.class]: item.class }")
               template(v-for="(header, j) in headers")
                 td.w-table__cell(
                   v-if="$slots[`item-cell.${header.key}`] || $slots[`item-cell.${j + 1}`] || $slots['item-cell']"
                   :key="`${j}-a`"
                   :data-label="header.label"
-                  :class="{ [`text-${header.align || 'left'}`]: true, 'w-table__cell--sticky': header.sticky }")
+                  :class="cellClasses(header)")
                   slot(
                     v-if="$slots[`item-cell.${header.key}`]"
                     :name="`item-cell.${header.key}`"
@@ -109,7 +111,7 @@
                   v-else
                   :key="`${j}-b`"
                   :data-label="header.label"
-                  :class="{ [`text-${header.align || 'left'}`]: true, 'w-table__cell--sticky': header.sticky }")
+                  :class="cellClasses(header)")
                   div(v-html="item[header.key] || ''")
                   span.w-table__col-resizer(
                     v-if="j < headers.length - 1 && resizableColumns"
@@ -194,6 +196,7 @@
  * @todo: (Column Resizing) Recalc. on browser resize.
  */
 
+import RippleMixin from '../mixins/ripple'
 import { consoleError } from '../utils/console'
 
 // When column resizing is on, this is the minimum cell width that we can resize to.
@@ -201,6 +204,9 @@ const minColumnWidth = 15
 
 export default {
   name: 'w-table',
+
+  mixins: [RippleMixin],
+
   props: {
     items: { type: Array, required: true },
     headers: { type: Array, required: true },
@@ -383,6 +389,10 @@ export default {
       return this.headers.find(header => header.sticky)
     },
 
+    hasClickableRows () {
+      return this.expandableRows === '' || !!this.expandableRows || this.selectableRows === '' || !!this.selectableRows
+    },
+
     // Faster lookup than array.includes(uid) and also cached.
     selectedRowsByUid () {
       return this.selectedRowsInternal.reduce((obj, uid) => (obj[uid] = true) && obj, {})
@@ -397,10 +407,19 @@ export default {
   methods: {
     headerClasses (header) {
       return {
+        'w-ripple': this.rippleActive && header.sortable !== false,
         'w-table__header--sortable': header.sortable !== false, // Can also be falsy with `0`.
         'w-table__header--sticky': header.sticky,
         'w-table__header--resizable': !!this.resizableColumns,
         [`text-${header.align || 'left'}`]: true
+      }
+    },
+
+    cellClasses (header) {
+      return {
+        'w-ripple': this.rippleActive && this.hasClickableRows,
+        [`text-${header.align || 'left'}`]: true,
+        'w-table__cell--sticky': header.sticky
       }
     },
 
@@ -424,6 +443,20 @@ export default {
 
       if (typeof this.sortFunction === 'function') await this.sortFunction(this.activeSorting)
       else if (typeof this.fetch === 'function') await this.callApiFetch()
+    },
+
+    onHeaderPointerDown (e, header) {
+      if (header.sortable === false || e.target.closest?.('.w-table__col-resizer')) return
+      this.onRipple(e)
+    },
+
+    onRowPointerDown (e) {
+      if (!this.hasClickableRows || e.target.closest?.('.w-table__col-resizer')) return
+      const row = e.currentTarget
+      const rowRect = row.getBoundingClientRect()
+      row.querySelectorAll(':scope > .w-table__cell').forEach(cell => {
+        this.onRipple(e, cell, { sizeRect: rowRect })
+      })
     },
 
     doSelectRow (item, index) {

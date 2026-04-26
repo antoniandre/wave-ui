@@ -31,6 +31,7 @@ const propsDescs = {
   disabled: 'When set to <code>true</code>, disables the tree interactivity (expand, collapse selection, click, tab).',
   noTransition: 'When set to <code>true</code>, disables the expand/collapse transition.',
   selectable: 'Make any item of the tree selectable, via click or via the keyboard arrow keys and <kbd>tab</kbd> key.',
+  noRipple: 'When <code>true</code>, disables the pointer ripple on selectable nodes for this tree. By default, ripple follows <code>$waveui.config.ripple</code>.',
   counts: 'Display the branch children counts on each branch item.',
   iconColor: 'Define a color for all the items icons.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   itemIconKey: 'Specifies the name of the optional attribute in each item object where to find the item\'s icon.',

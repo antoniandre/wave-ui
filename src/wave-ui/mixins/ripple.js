@@ -21,7 +21,7 @@ export default {
      * Resolve host for applyRipple. Vue (and some browsers) can leave `event.currentTarget` null
      * on delegated handlers, which would otherwise skip the ripple entirely.
      */
-    onRipple (e, hostEl) {
+    onRipple (e, hostEl, options) {
       if (!this.rippleActive || !e) return
       let host = hostEl ?? e.currentTarget
       if (!host?.getBoundingClientRect) {
@@ -33,7 +33,7 @@ export default {
         host = this.$el
       }
       if (!host?.getBoundingClientRect) return
-      applyRipple(host, e)
+      applyRipple(host, e, options)
     }
   }
 }

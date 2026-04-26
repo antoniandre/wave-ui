@@ -4,7 +4,7 @@
  *
  * @param {HTMLElement} hostEl
  * @param {PointerEvent|MouseEvent|TouchEvent} event
- * @param {{ disabled?: boolean }} [options]
+ * @param {{ disabled?: boolean, sizeRect?: DOMRect }} [options]
  */
 export function applyRipple (hostEl, event, options = {}) {
   if (typeof window === 'undefined' || typeof document === 'undefined') return
@@ -20,7 +20,8 @@ export function applyRipple (hostEl, event, options = {}) {
   if (clientX == null || clientY == null) return
 
   const rect = hostEl.getBoundingClientRect()
-  const maxSide = Math.max(rect.width, rect.height)
+  const sizeRect = options.sizeRect || rect
+  const maxSide = Math.max(sizeRect.width, sizeRect.height)
   const size = Math.max(maxSide * 2.5, 48)
   const x = clientX - rect.left - size / 2
   const y = clientY - rect.top - size / 2

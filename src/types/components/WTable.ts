@@ -208,6 +208,14 @@ export interface WaveTableProps {
   forceSelection?: boolean
 
   /**
+   * When `true`, disables the pointer ripple on sortable headers and interactive row cells for this table only.
+   * Global default still follows `$waveui.config.ripple`.
+   * @property {boolean} noRipple
+   * @see https://antoniandre.github.io/wave-ui/w-table
+   */
+  noRipple?: boolean
+
+  /**
    * In order to keep the same row selected after sorting or filtering, each row is assigned a unique identifier.
    * By default the expanded rows array will use an `id` key, if present in the item object, or will assign an
    * internal unique ID otherwise.

@@ -134,6 +134,14 @@ export interface WaveTreeProps {
   selectable?: boolean
 
   /**
+   * When `true`, disables the pointer ripple on selectable nodes for this tree only.
+   * Global default still follows `$waveui.config.ripple`.
+   * @property {boolean} noRipple
+   * @see https://antoniandre.github.io/wave-ui/w-tree
+   */
+  noRipple?: boolean
+
+  /**
    * TODO: Add Description
    * @property {boolean} deepReactivity
    * @see https://antoniandre.github.io/wave-ui/w-tree

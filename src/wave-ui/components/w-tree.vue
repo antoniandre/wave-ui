@@ -9,7 +9,9 @@ ul.w-tree(:class="classes")
       :is="getTreeItemComponent(item)"
       v-bind="item.route && { [!$router || hasExternalLink(item) ? 'href' : 'to']: item.route }"
       @click="!disabled && !item.disabled && onLabelClick(item, $event)"
+      @pointerdown="onLabelPointerDown(item, $event)"
       @keydown="!disabled && !item.disabled && onLabelKeydown(item, $event)"
+      :class="itemLabelClasses(item)"
       :tabindex="getTreeItemTabindex(item)")
       //- @click.stop to not follow link if item is a link.
       w-button.w-tree__item-expand(
@@ -59,6 +61,7 @@ ul.w-tree(:class="classes")
 </template>
 
 <script>
+import RippleMixin from '../mixins/ripple'
 import { consoleWarn } from '../utils/console'
 /**
  * @todo:
@@ -67,6 +70,9 @@ import { consoleWarn } from '../utils/console'
 
 export default {
   name: 'w-tree',
+
+  mixins: [RippleMixin],
+
   props: {
     modelValue: { type: [Object, Array] },
     data: { type: [Object, Array], required: true },
@@ -200,6 +206,16 @@ export default {
       return true // Just to chain instructions.
     },
 
+    isItemRippleActive (item) {
+      return this.rippleActive && this.selectable && !this.disabled && !item.disabled
+    },
+
+    itemLabelClasses (item) {
+      return {
+        'w-ripple': this.isItemRippleActive(item)
+      }
+    },
+
     onLabelClick (item, e) {
       const route = item[this.itemRouteKey]
       if (route && this.$router && !this.hasExternalLink(item)) e.preventDefault()
@@ -210,6 +226,11 @@ export default {
       const emitPayload = this.emitPayload(item, e)
       this.$emit('click', emitPayload)
       this.emitItemSelection(item, e) // Always emitting on click, but different event for selection.
+    },
+
+    onLabelPointerDown (item, e) {
+      if (!this.isItemRippleActive(item) || e.target.closest?.('.w-tree__item-expand')) return
+      this.onRipple(e)
     },
 
     onLabelKeydown (item, e) {
@@ -347,7 +368,6 @@ $expand-icon-size: 20px;
   // Tree items.
   // ------------------------------------------------------
   &__item {list-style-type: none;}
-  &__item--branch {}
   &__item--leaf {margin-left: $base-increment * 5 + 2px;}
   &--no-expand-button &__item--leaf {margin-left: 0;}
 
