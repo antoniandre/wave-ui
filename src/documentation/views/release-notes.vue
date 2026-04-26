@@ -34,7 +34,7 @@ main
           strong New Ripple feature on clickable elements
           ul
             li Added global config #[code ripple] (default #[code true]) and the #[code v-wave-ripple] directive for optional ripples on any element. #[span.tag.new]
-            li Added the new ripple effect on clickable elements: #[code w-button], #[code w-tabs], #[code w-accordion] / #[code w-accordion-item], #[code w-breadcrumbs], #[code w-list], and #[code w-tag] (clickable tags only), with the #[code no-ripple] prop to disable. #[span.tag.new]
+            li Added the new ripple effect on clickable elements: #[code w-button], #[code w-tabs], #[code w-accordion] / #[code w-accordion-item], #[code w-breadcrumbs], #[code w-list], and #[code w-tag] (clickable tags only), #[code w-table] (headers and clickable rows only), #[code w-tree] (selectable nodes only), with the #[code no-ripple] prop to disable. #[span.tag.new]
         li
           strong w-scrollable
           ul
