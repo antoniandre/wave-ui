@@ -15,19 +15,19 @@ main
   title-link(h2) Status colors
   p The status colors are useful to express the result of an action or for calls to action.
   .w-flex.wrap.ma-2.text-center.basis-zero
-    .color.success--bg.title3.grow.py3.ma2 success
-    .color.error--bg.title3.grow.py3.ma2 error
-    .color.warning--bg.title3.grow.py3.ma2 warning
-    .color.info--bg.title3.grow.py3.ma2 info
+    .color.bdrs2.success--bg.title3.grow.py3.ma2 success
+    .color.bdrs2.error--bg.title3.grow.py3.ma2 error
+    .color.bdrs2.warning--bg.title3.grow.py3.ma2 warning
+    .color.bdrs2.info--bg.title3.grow.py3.ma2 info
 
-  w-flex.wrap.align-center.mt4
+  .w-flex.wrap.align-center.mt4
     p.my0 Example of use:
-    ssh-pre.my0.mx2(
+    ssh-pre.my0(
       v-show="$store.state.usePug"
       language="pug"
       :dark="$store.state.darkMode").
       w-button(bg-color="success") OK
-    ssh-pre.my0.mx2(
+    ssh-pre.my0(
       language="html-vue"
       v-show="!$store.state.usePug"
       :dark="$store.state.darkMode").
@@ -50,63 +50,63 @@ main
   p.
     You may want a different shade of the status color, for interactive elements' hover effect for
     instance, for different levels of the same status, or just because it works better in your app.
-  .w-flex.wrap.mb12.ma-2.text-center.basis-zero
-    .w-flex.wrap
-      .color.success-light6--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light6
-      .color.success-light5--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light5
-      .color.success-light4--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light4
-      .color.success-light3--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light3
-      .color.success-light2--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light2
-      .color.success-light1--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light1
-      .color.success--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") success
-      .color.success-dark1--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark1
-      .color.success-dark2--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark2
-      .color.success-dark3--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark3
-      .color.success-dark4--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark4
-      .color.success-dark5--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark5
-      .color.success-dark6--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark6
-    .w-flex.wrap
-      .color.error-light6--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light6
-      .color.error-light5--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light5
-      .color.error-light4--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light4
-      .color.error-light3--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light3
-      .color.error-light2--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light2
-      .color.error-light1--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light1
-      .color.error--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") error
-      .color.error-dark1--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark1
-      .color.error-dark2--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark2
-      .color.error-dark3--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark3
-      .color.error-dark4--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark4
-      .color.error-dark5--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark5
-      .color.error-dark6--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark6
-    .w-flex.wrap
-      .color.warning-light6--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light6
-      .color.warning-light5--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light5
-      .color.warning-light4--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light4
-      .color.warning-light3--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light3
-      .color.warning-light2--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light2
-      .color.warning-light1--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light1
-      .color.warning--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning
-      .color.warning-dark1--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark1
-      .color.warning-dark2--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark2
-      .color.warning-dark3--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark3
-      .color.warning-dark4--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark4
-      .color.warning-dark5--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark5
-      .color.warning-dark6--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark6
-    .w-flex.wrap
-      .color.info-light6--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light6
-      .color.info-light5--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light5
-      .color.info-light4--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light4
-      .color.info-light3--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light3
-      .color.info-light2--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light2
-      .color.info-light1--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light1
-      .color.info--bg.title3.py3.mx2.my0.body.xs12(:class="{ black: $store.state.darkMode }") info
-      .color.info-dark1--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark1
-      .color.info-dark2--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark2
-      .color.info-dark3--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark3
-      .color.info-dark4--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark4
-      .color.info-dark5--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark5
-      .color.info-dark6--bg.title3.py3.mx2.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark6
+  .w-flex.wrap.mb12.text-center.basis-zero.gap3.mt3
+    .color-palette.w-flex.wrap.bdrs2
+      .color.success-light6--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light6
+      .color.success-light5--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light5
+      .color.success-light4--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light4
+      .color.success-light3--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light3
+      .color.success-light2--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light2
+      .color.success-light1--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") success-light1
+      .color.success--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") success
+      .color.success-dark1--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark1
+      .color.success-dark2--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark2
+      .color.success-dark3--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark3
+      .color.success-dark4--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark4
+      .color.success-dark5--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark5
+      .color.success-dark6--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") success-dark6
+    .color-palette.w-flex.wrap.bdrs2
+      .color.error-light6--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light6
+      .color.error-light5--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light5
+      .color.error-light4--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light4
+      .color.error-light3--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light3
+      .color.error-light2--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light2
+      .color.error-light1--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") error-light1
+      .color.error--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") error
+      .color.error-dark1--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark1
+      .color.error-dark2--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark2
+      .color.error-dark3--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark3
+      .color.error-dark4--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark4
+      .color.error-dark5--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark5
+      .color.error-dark6--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") error-dark6
+    .color-palette.w-flex.wrap.bdrs2
+      .color.warning-light6--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light6
+      .color.warning-light5--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light5
+      .color.warning-light4--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light4
+      .color.warning-light3--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light3
+      .color.warning-light2--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light2
+      .color.warning-light1--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning-light1
+      .color.warning--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") warning
+      .color.warning-dark1--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark1
+      .color.warning-dark2--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark2
+      .color.warning-dark3--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark3
+      .color.warning-dark4--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark4
+      .color.warning-dark5--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark5
+      .color.warning-dark6--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") warning-dark6
+    .color-palette.w-flex.wrap.bdrs2
+      .color.info-light6--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light6
+      .color.info-light5--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light5
+      .color.info-light4--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light4
+      .color.info-light3--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light3
+      .color.info-light2--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light2
+      .color.info-light1--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") info-light1
+      .color.info--bg.title3.py3.my0.body.xs12(:class="{ black: $store.state.darkMode }") info
+      .color.info-dark1--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark1
+      .color.info-dark2--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark2
+      .color.info-dark3--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark3
+      .color.info-dark4--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark4
+      .color.info-dark5--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark5
+      .color.info-dark6--bg.title3.py3.my0.body.xs12(:class="{ white: !$store.state.darkMode }") info-dark6
 
   title-link.mt12.mb4.w-flex.align-center(h2 slug="color-palette")
     | Color Palette
@@ -118,8 +118,8 @@ main
     This built-in color palette will complete your collection of available colors for fast and easy designs.
 
   .text-center(:class="`${horizontal ? 'horizontal' : 'vertical'}`")
-    .w-flex.wrap.ma-2.basis-zero
-      .color-palette.ma2(
+    .w-flex.wrap.basis-zero.gap3.mt3
+      .color-palette.bdrs2(
         v-for="({ label, color, shades }, j) in colorPalette"
         :key="j")
         template(v-for="(shade, i) in shades" :key="i")
@@ -132,18 +132,18 @@ main
             :class="[`${shade.label}--bg`, i >= 6 ? 'color--darker' : '']")
             span {{ shade.label }}
             small {{ shade.color }}
-      .color-palette.ma2
-        .w-flex.ma-2(:class="{ column: !horizontal }")
-          .color.color--top.ma2.black--bg
+      .color-palette.bdrs2
+        .w-flex.gap3(:class="{ column: !horizontal }")
+          .color.bdrs2.color--top.black--bg
             span black
             small #000
-          .color.color--top.ma2.white--bg.black
+          .color.bdrs2.color--top.white--bg.black
             span white
             small #fff
-          .color.color--top.ma2.transparent--bg.base-color
+          .color.bdrs2.color--top.transparent--bg.base-color
             span transparent
             small transparent
-          .color.color--top.ma2.inherit--bg.base-color
+          .color.bdrs2.color--top.inherit--bg.base-color
             span inherit
             small inherit
 
@@ -254,8 +254,8 @@ main
     to the app background color.#[br]
     Since it is not easy to find a color that will work for both themes, we recommend that you use
     a light and dark version of the same color (using CSS3 variables).#[br]
-    Wave UI provides these 5 CSS classes which carry colors that will automatically change when
-    switching theme (powered by CSS3 variables).
+    Wave UI provides these CSS classes which carry colors that will automatically change when
+    switching theme (powered by CSS custom properties).
   alert(tip)
     strong Important Note
     p
@@ -267,7 +267,7 @@ main
     p
       | From
       w-tag.success--bg.mx2(round sm) Wave UI 3.18
-      | all the color variables have been simplified and renamed now that all major browsers support the color-mix() CSS3 function.
+      | all the color variables have been simplified and renamed now that all major browsers support the color-mix() CSS function.
       | You now can use the variables as normal colors, and if you want to add an alpha channel, you can use this syntax: #[code color-mix(in srgb, var(--w-base-bg-color) 30%, transparent)])! 😉
     .body.mt4.
       You can investigate what these variables contain directly from the dev tools of your browser,
@@ -353,6 +353,8 @@ export default {
 }
 
 .color-palette {
+  overflow: clip;
+
   .vertical & {min-width: 250px;flex-grow: 1;}
   .horizontal & {
     display: flex;

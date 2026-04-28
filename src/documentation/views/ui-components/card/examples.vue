@@ -224,7 +224,7 @@ div
     Providing a card main image is as simple as #[code image="your-image-source"].
   title-link(h3) Standard use
   example
-    w-card(:image="`${baseUrl}images/japanese-wave.png`")
+    w-card(:image="`${baseUrl}images/japanese-wave.png`" :image-props="{ ratio: 5 }")
       | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
       | quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
       | odit dolor labore eveniet at vel sequi nostrum.
@@ -232,7 +232,7 @@ div
         .spacer
         w-button Read more
     template(#pug).
-      w-card(:image="`${baseUrl}images/japanese-wave.png`")
+      w-card(:image="`${baseUrl}images/japanese-wave.png`" :image-props="{ ratio: 5 }")
         | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
         | quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
         | odit dolor labore eveniet at vel sequi nostrum.
@@ -240,7 +240,7 @@ div
           .spacer
           w-button Read more
     template(#html).
-      &lt;w-card :image="`${baseUrl}images/japanese-wave.png`"&gt;
+      &lt;w-card :image="`${baseUrl}images/japanese-wave.png`" :image-props="{ ratio: 5 }"&gt;
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
         quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
         odit dolor labore eveniet at vel sequi nostrum.
@@ -266,7 +266,7 @@ div
   example
     w-card(
       :image="`${baseUrl}images/japanese-wave.png`"
-      :image-props="{ contentClass: 'align-start pa1', ratio: 1 / 4 }")
+      :image-props="{ contentClass: 'align-start pa1', ratio: 3 }")
       | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
       | quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
       | odit dolor labore eveniet at vel sequi nostrum.
@@ -278,7 +278,7 @@ div
     template(#pug).
       w-card(
         :image="`${baseUrl}images/japanese-wave.png`"
-        :image-props="{ contentClass: 'align-start pa1', ratio: 1 / 4 }")
+        :image-props="{ contentClass: 'align-start pa1', ratio: 3 }")
         | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
         | quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
         | odit dolor labore eveniet at vel sequi nostrum.
@@ -288,7 +288,7 @@ div
           .spacer
           w-button Read more
     template(#html).
-      &lt;w-card :image="`${baseUrl}images/japanese-wave.png`"&gt;
+      &lt;w-card :image="`${baseUrl}images/japanese-wave.png`" :image-props="{ contentClass: 'align-start pa1', ratio: 3 }"&gt;
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
         quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
         odit dolor labore eveniet at vel sequi nostrum.

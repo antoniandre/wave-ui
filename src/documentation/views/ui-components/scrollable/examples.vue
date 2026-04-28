@@ -41,23 +41,23 @@ div
     w-card(content-class="pa0")
       w-scrollable(
         height="200"
-        color="pink"
-        bg-color="pink-light6")
+        :color="$store.state.darkMode ? 'blue-dark2' : 'pink'"
+        :bg-color="$store.state.darkMode ? 'secondary-dark5' : 'pink-light6'")
         p.ma0(v-html="scrollDemoHtml")
     template(#pug).
       w-card(bg-color="contrast")
         w-scrollable(
           height="200"
-          color="pink"
-          bg-color="pink-light6"
+          color="{{ $store.state.darkMode ? 'blue-dark2' : 'pink' }}"
+          bg-color="{{ $store.state.darkMode ? 'secondary-dark5' : 'pink-light6' }}"
          )
           p …your content…
     template(#html).
       &lt;w-card bg-color="contrast"&gt;
         &lt;w-scrollable
           height="200"
-          color="pink"
-          bg-color="pink-light6"
+          color="{{ $store.state.darkMode ? 'blue-dark2' : 'pink' }}"
+          bg-color="{{ $store.state.darkMode ? 'secondary-dark5' : 'pink-light6' }}"
          &gt;
           …
         &lt;/w-scrollable&gt;
@@ -69,7 +69,10 @@ div
       w-scrollable(
         horizontal
         content-class="w-flex gap3 pa3")
-        w-card.no-shrink.pa6.blue-light6--bg(v-for="i in 12" :key="i") Card {{ i }}
+        w-card.no-shrink.pa6(
+          v-for="i in 12"
+          :key="i"
+          :class="$store.state.darkMode ? 'blue-dark6--bg' : 'blue-light6--bg'") Card {{ i }}
     template(#pug).
       w-card(content-class="pa0")
         w-scrollable(horizontal content-class="w-flex gap3 pa3")
@@ -86,7 +89,7 @@ div
   example
     w-card(content-class="pa0")
       w-scrollable(height="200" scrollbar="0")
-        p.text-bold.mb2 The Wave scrollbar track is hidden here; scrolling still works like a normal overflow region.
+        p.text-bold.mb2 The scrollbar track is hidden here; scrolling still works like a normal overflow region.
         p.ma0(v-html="scrollDemoHtml")
     template(#pug).
       w-card(content-class="pa0")

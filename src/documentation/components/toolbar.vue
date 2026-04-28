@@ -13,7 +13,7 @@ w-toolbar.main-toolbar(fixed)
       w-icon mdi {{ $store.state.darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}
 
   router-link(to="/release-notes" @click.native="scrollTop(true)")
-    strong.version.size--xs(v-html="`v<code>${version}</code>`")
+    strong.version.size--sm(v-html="`v<code>${version}</code>`")
 
   w-tooltip(z-index="20" append-to=".main-toolbar")
     template(#activator="{ on }")
@@ -114,7 +114,7 @@ div.main-toolbar {
   }
 
   .version {
-    color: color-mix(in srgb, var(--w-base-color) 35%, transparent);
+    color: color-mix(in srgb, var(--w-base-color) 50%, transparent);
 
     code {
       letter-spacing: -0.5px;
