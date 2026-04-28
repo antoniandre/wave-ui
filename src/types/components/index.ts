@@ -1,6 +1,5 @@
 export { WAccordion } from './WAccordion'
 export { WAlert } from './WAlert'
-export { WApp } from './WApp'
 export { WBadge } from './WBadge'
 export { WBreadcrumbs } from './WBreadcrumbs'
 export { WButton } from './WButton'

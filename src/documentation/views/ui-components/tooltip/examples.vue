@@ -2,7 +2,7 @@
 div.tooltips-demo
   alert(tip).
     #[strong Important notes]#[br]
-    By default the tooltip is moved into the w-app in the DOM, so it is not constrained by a hidden
+    By default the tooltip is moved into the #[code .w-app] in the DOM, so it is not constrained by a hidden
     overflow on a parent.#[br]
     When used inside a dialog, menu or drawer, it will be by default appended to that element.#[br]
     You can use the #[code appendTo] prop to place it elsewhere in the DOM, like in the

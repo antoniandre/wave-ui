@@ -28,9 +28,6 @@ div
           const app = createApp(App)
 
           app.use(WaveUI, { /* Some Wave UI options */ })
-          // Or in Wave UI 2.x:
-          // new WaveUI(app, { /* Some Wave UI options */ })
-
           app.mount('#app')
 
         p.my3.ml2.grey-light1
@@ -78,42 +75,6 @@ div
             | #[strong Vue 2] Wave UI demo on Codepen
             w-icon.ml1 mdi mdi-open-in-new
           | .
-
-  .mt8.op05
-    w-accordion(title-class="ml-1 pl0 py3" expand-icon-rotate-90)
-      template(#title)
-        title-link.ma0(@click.prevent h3 slug="place-a--w-app")
-          | 3.
-          w-tag.ml2.warning--bg(round) ONLY FOR WAVE UI 2.x
-          | , place a #[span.code w-app] at the root of your app
-      template(#content)
-        .ml5
-          ssh-pre.mt2(
-            v-show="$store.state.usePug"
-            :dark="$store.state.darkMode"
-            language="pug"
-            label="App.vue").
-            w-app
-              //- All your app content goes here.
-
-              //- Also try to add a button!
-              w-button My Button
-          ssh-pre(
-            v-show="!$store.state.usePug"
-            :dark="$store.state.darkMode"
-            language="html-vue"
-            label="App.vue").
-            &lt;w-app&gt;
-              &lt;!-- All your app content goes here. --&gt;
-
-              &lt;!-- Also try to add a button! --&gt;
-              &lt;w-button&gt;My Button&lt;/w-button&gt;
-            &lt;/w-app&gt;
-          .caption.grey-light1.pb6
-            | The &lt;w-app&gt; is required for Wave UI base styles and for a few components needing to be moved in the DOM.#[br]
-            | There should only be one &lt;w-app&gt; in your whole app.
-
-          p Now check your app in the browser!
 </template>
 
 <style lang="scss">

@@ -5,17 +5,11 @@ ol
     | Add this &lt;script&gt; tag in your app at the end of the &lt;head&gt; tag.
     ssh-pre(language="html" :dark="$store.state.darkMode").
       &lt;link rel="stylesheet" href="https://unpkg.com/wave-ui/dist/wave-ui.css"&gt;&lt;/link&gt;
-    p Or for Vue 2.x:
-    ssh-pre(language="html" :dark="$store.state.darkMode").
-      &lt;link rel="stylesheet" href="https://unpkg.com/wave-ui@legacy/dist/wave-ui.css"&gt;&lt;/link&gt;
     p.grey #[strong Note:] Wave UI is also on #[a(href="https://www.jsdelivr.com/package/npm/wave-ui" target="_blank") JSDelivr].
   li.mt8
     | Add this &lt;script&gt; tag in your app at the end of the &lt;body&gt; tag and after the Vue.js script.
     ssh-pre(language="html" :dark="$store.state.darkMode").
       &lt;script src="https://unpkg.com/wave-ui"&gt;&lt;/script&gt;
-    p Or for Vue 2.x:
-    ssh-pre(language="html" :dark="$store.state.darkMode").
-      &lt;script src="https://unpkg.com/wave-ui@legacy"&gt;&lt;/script&gt;
   li.mt8
     p Initialize Wave UI.
     w-tabs.mt4(:items="2" content-class="pa0")

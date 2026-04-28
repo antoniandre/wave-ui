@@ -65,21 +65,8 @@ div
               ]
 
           li.mt8
-            .title4 in the #[span.code default.vue] layout, wrap the #[code Nuxt] component in a #[code w-app]:
-
-            ssh-pre(v-show="$store.state.usePug" language="html-vue" label="Pug" :dark="$store.state.darkMode").
-              &lt;template lang="pug"&gt;
-                w-app
-                  Nuxt
-              &lt;/template&gt;
-            ssh-pre(v-show="!$store.state.usePug" language="html-vue" :dark="$store.state.darkMode").
-              &lt;template&gt;
-                &lt;w-app&gt;
-                  &lt;Nuxt /&gt;
-                &lt;/w-app&gt;
-              &lt;/template&gt;
-
-            p You're all set. Try to add a #[code w-button]:
+            .title4 You're all set.
+            p in the #[span.code default.vue] layout, for instance, add a #[code w-button].
 
             ssh-pre(v-show="$store.state.usePug" language="pug" label="Pug" :dark="$store.state.darkMode").
               w-button My button
