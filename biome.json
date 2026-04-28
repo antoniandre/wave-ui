@@ -48,11 +48,11 @@
     }
   },
   "files": {
-    "includes": ["**", "!**/dist", "!**/node_modules", "!**/*.min.js", "!**/public", "!**/src/assets", "!**/coverage", "!**/package-lock.json", "!**/pnpm-lock.yaml", "!**/yarn.lock", "!**/docs"]
+    "includes": ["**", "!**/*.vue", "!**/dist", "!**/node_modules", "!**/*.min.js", "!**/public", "!**/src/assets", "!**/coverage", "!**/package-lock.json", "!**/pnpm-lock.yaml", "!**/yarn.lock", "!**/docs"]
   },
   "overrides": [
     {
-      "includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
+      "includes": ["**/*.svelte", "**/*.astro"],
       "linter": {
         "rules": {
           "correctness": {
