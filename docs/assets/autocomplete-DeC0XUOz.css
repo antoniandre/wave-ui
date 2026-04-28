@@ -1,0 +1,1 @@
+.element{border:1px solid color-mix(in srgb, var(--w-contrast-bg-color) 12%, transparent);border-radius:4px;justify-content:center;align-items:center;width:6em;height:5.5em;padding-bottom:8px;display:flex;position:relative}.element .symbol{color:var(--w-primary-color)}.element .number{position:absolute;top:4px;right:4px}
