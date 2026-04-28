@@ -1,4 +1,4 @@
-import{N as e,W as t,c as n,d as r,g as i,h as a,k as o}from"./runtime-core.esm-bundler-inBY9EW4.js";import{t as s}from"./_plugin-vue_export-helper-B80Cc4Ui.js";import{r as c}from"./index-BhRaCC4I.js";function l(s,c){let l=e(`title-link`),u=e(`w-toolbar`),d=e(`w-icon`),f=e(`w-button`),p=e(`example`),m=e(`w-card`),h=e(`w-flex`),g=e(`w-divider`);return o(),r(`div`,null,[i(l,{h2:``},{default:t(()=>[...c[0]||=[a(`Simple toolbar with shadow`,-1)]]),_:1}),i(p,{"content-class":`pa4`},{pug:t(()=>[...c[5]||=[a(`w-toolbar(shadow)
+import{N as e,W as t,c as n,d as r,g as i,h as a,k as o}from"./runtime-core.esm-bundler-inBY9EW4.js";import{t as s}from"./plugin-vue_export-helper-B80Cc4Ui.js";import{r as c}from"./index-BhRaCC4I.js";function l(s,c){let l=e(`title-link`),u=e(`w-toolbar`),d=e(`w-icon`),f=e(`w-button`),p=e(`example`),m=e(`w-card`),h=e(`w-flex`),g=e(`w-divider`);return o(),r(`div`,null,[i(l,{h2:``},{default:t(()=>[...c[0]||=[a(`Simple toolbar with shadow`,-1)]]),_:1}),i(p,{"content-class":`pa4`},{pug:t(()=>[...c[5]||=[a(`w-toolbar(shadow)
   .title2 Title
   .spacer
   span.ml2 Item 1
