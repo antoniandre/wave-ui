@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import { objectifyClasses } from '../../utils/index'
 import { consoleError } from '../../utils/console'
 import RippleMixin from '../../mixins/ripple'
@@ -89,8 +90,8 @@ export default {
   // All provided to the WAccordionItem, not passed as prop since it could be used externally.
   provide () {
     return {
-      titleClasses: this.titleClasses,
-      contentClasses: this.contentClasses,
+      titleClasses: computed(() => this.titleClasses),
+      contentClasses: computed(() => this.contentClasses),
       onItemToggle: this.onItemToggle,
       onEndOfCollapse: this.onEndOfCollapse,
       getOriginalItem: this.getOriginalItem,
@@ -116,7 +117,7 @@ export default {
 
     // Detect if the accordion items are directly provided through slot using WAccordionItem.
     accordionItemsProvided () {
-      return this.$slots.default?.()?.some(item => item?.type?.name)
+      return this.$slots.default?.()?.some(item => item?.type?.name === 'w-accordion-item')
     },
 
     accordionClasses () {
