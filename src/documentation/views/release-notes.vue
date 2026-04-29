@@ -27,11 +27,34 @@ main
     //-   multiple: { type: Boolean }, multiple selection
     //-   unselectableBranches: { type: Boolean },
 
+    li.major
+      strong.version v4.0.0
+      ul
+        li
+          strong CSS custom properties migration
+          ul
+            li Replaced public SCSS-variable customization with CSS custom properties. Override Wave UI through #[code --w-*] variables on #[code :root], #[code [data-theme="light"]], #[code [data-theme="dark"]], or your app scope. #[span.tag.breaking BREAKING]
+            li Built-in palette, status colors, custom colors, spacing utilities, borders, shadows, transitions, and component surface defaults now use CSS variables as the public customization surface. #[span.tag.breaking BREAKING]
+            li Utility classes such as #[code ma3], #[code px2], #[code gap4], #[code bd1], #[code sh2], palette classes, and status classes keep their names but resolve through CSS variables where possible.
+            li Sass source files may still generate internal utility CSS, but consumer apps should no longer need Wave UI Sass #[code @use] / #[code additionalData] customization.
+        li
+          strong.code w-accordion
+          ul
+            li Added new #[code expanded-class] option. #[span.tag.new]
+        li
+          strong.code w-app
+          ul
+            li Removed the deprecated #[code w-app] component.
+        li
+          strong New ripple effect on clickable elements
+          ul
+            li Added the new ripple effect in previous release 3.28.0, don't miss out!
+
     li.minor
       strong.version v3.28.0
       ul
         li
-          strong New Ripple feature on clickable elements
+          strong New ripple effect on clickable elements
           ul
             li Added global config #[code ripple] (default #[code true]) and the #[code v-wave-ripple] directive for optional ripples on any element. #[span.tag.new]
             li Added the new ripple effect on clickable elements: #[code w-button], #[code w-tabs], #[code w-accordion] / #[code w-accordion-item], #[code w-breadcrumbs], #[code w-list], and #[code w-tag] (clickable tags only), #[code w-table] (headers and clickable rows only), #[code w-tree] (selectable nodes only), with the #[code no-ripple] prop to disable. #[span.tag.new]
@@ -292,7 +315,7 @@ main
           strong.code w-alert
           ul
             li Removed the default bold font-weight and added a bold prop for easy toggle.
-            li Decreased the default font-size from 1.1rem to 1rem (1 * $base-font-size).
+            li Decreased the default font-size from 1.1rem to 1rem (1 × base font size).
             li Adjusted the status icon vertical alignment.
             li Made the alert use the primary color if no color and no background color is provided.
             li Removed the default border, added a #[code border] prop, removed the #[code no-border] prop.
@@ -2438,7 +2461,7 @@ main
       position: absolute;
       top: 11px;
       left: 0;
-      background-color: $base-bg-color;
+      background-color: var(--w-base-bg-color);
       border-radius: 1em;
       border: 1px solid currentColor;
       width: 1em;
@@ -2527,7 +2550,7 @@ main
     }
 
     strong.code:first-child:not(.black) {
-      color: $primary;
+      color: var(--w-primary-color);
       font-size: 1.1em;
     }
   }
