@@ -97,6 +97,7 @@ export default {
     options: { from: 'options' },
     titleClasses: { from: 'titleClasses' },
     contentClasses: { from: 'contentClasses' },
+    expandedClass: { from: 'expandedClass' },
     onItemToggle: { from: 'onItemToggle' },
     onEndOfCollapse: { from: 'onEndOfCollapse' },
     getOriginalItem: { from: 'getOriginalItem' },
@@ -137,7 +138,8 @@ export default {
       return {
         'w-accordion__item--expanded': this.accordionItem._expanded,
         'w-accordion__item--disabled': this.accordionItem._disabled,
-        [this.accordionItem[this.options.itemColorKey]]: this.accordionItem[this.options.itemColorKey]
+        [this.accordionItem[this.options.itemColorKey]]: this.accordionItem[this.options.itemColorKey],
+        [this.expandedClass]: this.accordionItem._expanded
       }
     }
   },

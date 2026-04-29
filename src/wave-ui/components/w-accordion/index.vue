@@ -69,6 +69,7 @@ export default {
     itemClass: { type: [String, Array, Object] },
     titleClass: { type: [String, Array, Object] },
     contentClass: { type: [String, Array, Object] },
+    expandedClass: { type: [String, Array, Object] },
     expandIcon: { type: [String, Boolean], default: 'wi-triangle-down' },
     expandIconRight: { type: Boolean },
     expandIconRotate90: { type: Boolean },
@@ -92,6 +93,7 @@ export default {
     return {
       titleClasses: computed(() => this.titleClasses),
       contentClasses: computed(() => this.contentClasses),
+      expandedClass: computed(() => this.expandedClass),
       onItemToggle: this.onItemToggle,
       onEndOfCollapse: this.onEndOfCollapse,
       getOriginalItem: this.getOriginalItem,
@@ -134,7 +136,9 @@ export default {
     },
 
     itemClasses () {
-      return objectifyClasses(this.itemClass)
+      const classes = [this.itemClass]
+      if (this.expandedClass) classes.push(this.expandedClass)
+      return objectifyClasses(classes)
     },
 
     titleClasses () {
