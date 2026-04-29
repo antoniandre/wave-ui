@@ -236,8 +236,12 @@ div
 
   title-link(h2) External control
   example(content-class="pa4")
-    w-button.mr2(@click="accordion5 = Array(3).fill(true)" sm) Expand all
-    w-button(@click="accordion5 = Array(3).fill(false)" sm) Collapse all
+    w-button.mr2(@click="accordion5 = Array(3).fill(true)" bg-color="success" sm)
+      w-icon.mr1 wi-plus
+      | Expand all
+    w-button(@click="accordion5 = Array(3).fill(false)" bg-color="error" sm)
+      w-icon.mr1 wi-minus
+      | Collapse all
     w-accordion.mt4.discrete--bg(v-model="accordion5" :items="items")
     div.mt3
       | v-model:
