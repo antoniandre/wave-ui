@@ -78,24 +78,31 @@ export interface WaveAccordionProps {
 
   /**
    * Applies a custom CSS class (or space separated classes) on every item container (which includes both the title and the content of the item).
-   * @property {string} itemClass
+   * @property {string, array, object} itemClass
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
-  itemClass?: string
+  itemClass?: string|array|object
 
   /**
    * Applies a custom CSS class (or space separated classes) on every title container.
-   * @property {string} titleClass
+   * @property {string, array, object} titleClass
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
-  titleClass?: string
+  titleClass?: string|Array<string>|object
 
   /**
    * Applies a custom CSS class (or space separated classes) on every content container.
-   * @property {string} contentClass
+   * @property {string, array, object} contentClass
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
-  contentClass?: string
+  contentClass?: string|Array<string>|object
+
+  /**
+   * Applies a custom CSS class (or space separated classes) on every expanded item container.
+   * @property {string, array, object} expandedClass
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  expandedClass?: string|Array<string>|object
 
   /**
    * Specifies the name of the icon to display in the toggle button. If set to false or empty string, the button will be removed.
