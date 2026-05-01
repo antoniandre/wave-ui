@@ -19,13 +19,13 @@ main
   ul.history
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
     //- TODO
-    //- - cleanup dynamic-css file
-    //- - the CSS layout classes with breakpoints should have priority.
-    //- - use teleport to append to w-app
-    //- - check all appClassesString
-    //- - add in w-tree
-    //-   multiple: { type: Boolean }, multiple selection
-    //-   unselectableBranches: { type: Boolean },
+      - cleanup dynamic-css file
+      - the CSS layout classes with breakpoints should have priority.
+      - use teleport to append to w-app
+      - check all appClassesString
+      - add in w-tree
+        multiple: { type: Boolean }, multiple selection
+        unselectableBranches: { type: Boolean },
 
     li.major
       strong.version v4.0.0
@@ -41,6 +41,11 @@ main
           strong.code w-accordion
           ul
             li Added new #[code expanded-class] option. #[span.tag.new]
+            li Append content to the accordion item content via the #[code default] slot (or already existing #[code content] slot). #[span.tag.new]
+        li
+          strong Global configuration options
+          ul
+            li Add new #[code css.appClasses] global config option to set custom classes on the .w-app element. #[span.tag.new]
         li
           strong.code w-app
           ul
@@ -48,7 +53,7 @@ main
         li
           strong New ripple effect on clickable elements
           ul
-            li Added the new ripple effect in previous release 3.28.0, don't miss out!
+            li Added the new ripple effect and directive in previous release 3.28.0, don't miss out! #[span.tag.new]
 
     li.minor
       strong.version v3.28.0
