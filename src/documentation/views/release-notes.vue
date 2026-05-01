@@ -29,6 +29,10 @@ main
 
     li.major
       strong.version v4.0.0
+      p
+        | See the
+        router-link.title3.ml1(to="/migration-from-v3-to-v4") Migration guide from version 3.x to 4.x
+        | .
       ul
         li
           strong CSS custom properties migration
