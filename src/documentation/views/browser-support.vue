@@ -1,7 +1,7 @@
 <template lang="pug">
 main
   title-link.mt4(h1) Browser support
-  title-link(h2) Wave UI supports all major browsers 😎
+  title-link.mt0(h2) Wave UI supports all major browsers 😎
   w-list.ml-1.title4(:items="listItems" icon="wi-check" item-class="my1")
     template(#item="{ item: { label } }")
       img(:src="getImageUrl(label)")

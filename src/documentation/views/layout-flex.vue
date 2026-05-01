@@ -2,7 +2,7 @@
 main
   title-link.mt4(h1) Flex layout classes
 
-  title-link(h2 slug="w-flex-component-and-helper-classes") #[span.code w-flex] component &amp; helper classes
+  title-link.mt0(h2 slug="w-flex-component-and-helper-classes") #[span.code w-flex] component &amp; helper classes
   p.
     the #[code w-flex] component and the #[code .w-flex] class both allow a flex layout that you can
     easily control with the following classes or attributes on the component.

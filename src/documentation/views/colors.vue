@@ -20,9 +20,9 @@ main
     .color.bdrs2.warning--bg.title3.grow.py3.ma2 warning
     .color.bdrs2.info--bg.title3.grow.py3.ma2 info
 
-  .w-flex.wrap.align-center.mt4
+  .w-flex.wrap.align-center.mt4.gap1
     p.my0 Example of use:
-    ssh-pre.my0(
+    ssh-pre.my0.pa1(
       v-show="$store.state.usePug"
       language="pug"
       :dark="$store.state.darkMode").

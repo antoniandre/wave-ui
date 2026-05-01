@@ -9,7 +9,7 @@ main
   w-accordion(
     :model-value="openPane"
     expand-single
-    :title-class="`justify-space-between py4 pl6 ${$store.state.darkMode ? 'grey-dark5--bg' : 'blue-light5--bg'}`"
+    :title-class="`justify-space-between py4 pl6 ${$store.state.darkMode ? 'grey-dark5--bg' : 'blue-light6--bg'}`"
     expand-icon="wi-chevron-right"
     collapse-icon="wi-chevron-up"
     expand-icon-right)

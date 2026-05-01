@@ -2,7 +2,7 @@
 main
   title-link.mt4(h1) Spaces
 
-  title-link(h2) Content spacing
+  title-link.mt0(h2) Content spacing
   p.
     Margins and paddings are incrementable from 0 to 12 using this syntax: #[code="ma[number]"],
     #[code="pa[number]"] where number is a number in this interval #[span.code="[0, 12]"] for paddings
@@ -97,6 +97,7 @@ main
 
 <style lang="scss">
 .main-content--layout-spaces {
-  .example__render .code {color: inherit;}
+  .example__render .code,
+  .example__render code {color: inherit;}
 }
 </style>

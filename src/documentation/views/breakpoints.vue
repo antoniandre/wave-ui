@@ -2,7 +2,7 @@
 main
   title-link.mt4(h1) Breakpoints
 
-  title-link(h2) What is this for?
+  title-link.mt0(h2) What is this for?
   p.
     If you are not familiar with breakpoints, you should first read about it.#[br]
     The breakpoints are usually useful when you want to change the layout for a particular viewport width.#[br]
