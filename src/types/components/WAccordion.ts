@@ -309,6 +309,38 @@ export type WaveAccordionSlots = SlotsType<{
   'item-content': (_: { item: any, index: any, expanded: any }) => any
 }>
 
+// Slots for w-accordion-item component
+export type WaveAccordionItemSlots = SlotsType<{
+  /**
+   * Provide a custom title for the accordion item (you could use the title prop instead).
+   * @param {any} item The current item object.
+   * @param {any} index The item index in the array of items. Starts at 1.
+   * @param {any} expanded A boolean representing the expanded state of the accordion item.
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  'title': (_: { item: any, index: any, expanded: any }) => any
+
+  /**
+   * Provide a custom content for the accordion item (you could use the content prop instead).
+   * @param {any} item The current item object.
+   * @param {any} index The item index in the array of items. Starts at 1.
+   * @param {any} expanded A boolean representing the expanded state of the accordion item.
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  'content': (_: { item: any, index: any, expanded: any }) => any
+
+  /**
+   * Fallback slot for the content when the `content` slot is not used. Use this to provide custom content for the item.
+   * You could also use the `content` prop or the `content` slot instead.
+   * @param {any} item The current item object.
+   * @param {any} index The item index in the array of items. Starts at 1.
+   * @param {any} expanded A boolean representing the expanded state of the accordion item.
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  'default': (_: { item: any, index: any, expanded: any }) => any
+}>
+
+
 // ----------------------------------------------------------------------------
 // Component
 // ----------------------------------------------------------------------------
@@ -326,4 +358,69 @@ export type WAccordion = DefineComponent<
   ResolveProps<WaveAccordionProps & WaveAccordionEmits, EmitsOptions>,
   ExtractDefaultPropTypes<WaveAccordionProps>,
   WaveAccordionSlots
+>
+
+// Props for w-accordion-item component
+export interface WaveAccordionItemProps {
+  /**
+   * The title of the accordion item.
+   * @property {string} title
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  title?: string
+
+  /**
+   * The content of the accordion item.
+   * @property {string} content
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  content?: string
+
+  /**
+   * Whether this item starts expanded.
+   * @property {boolean} expanded
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  expanded?: boolean
+
+  /**
+   * Disables interaction with this item.
+   * @property {boolean} disabled
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  disabled?: boolean
+
+  /**
+   * When <code>true</code>, disables the pointer ripple for this item title only. When omitted, it follows the parent accordion then <code>$waveui.config.ripple</code>.
+   * @property {boolean} noRipple
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  noRipple?: boolean
+}
+
+// Emits for w-accordion-item component
+export interface WaveAccordionItemEmits {
+  /**
+   * Emitted on accordion item title focus.
+   * @param {any} item - The focused accordion item object.
+   * @see https://antoniandre.github.io/wave-ui/w-accordion
+   */
+  'onFocus'?: (item: any) => void
+}
+
+// Component type for w-accordion-item
+export type WAccordionItem = DefineComponent<
+  WaveAccordionItemProps,
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  WaveAccordionItemEmits & EmitsOptions,
+  string,
+  PublicProps,
+  ResolveProps<WaveAccordionItemProps & WaveAccordionItemEmits, EmitsOptions>,
+  ExtractDefaultPropTypes<WaveAccordionItemProps>,
+  WaveAccordionItemSlots
 >

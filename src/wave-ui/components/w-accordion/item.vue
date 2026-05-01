@@ -45,7 +45,15 @@
       :item="accordionItem"
       :class="contentClasses")
       slot(
+        v-if="$slots.content"
         name="content"
+        :item="getOriginalItem(accordionItem)"
+        :expanded="accordionItem._expanded"
+        :index="accordionItem._index + 1")
+        div(v-html="accordionItem[options.itemContentKey]")
+      slot(
+        v-else
+        name="default"
         :item="getOriginalItem(accordionItem)"
         :expanded="accordionItem._expanded"
         :index="accordionItem._index + 1")
@@ -62,7 +70,15 @@
         :item="accordionItem"
         :class="contentClasses")
         slot(
+          v-if="$slots.content"
           name="content"
+          :item="getOriginalItem(accordionItem)"
+          :expanded="accordionItem._expanded"
+          :index="accordionItem._index + 1")
+          div(v-html="accordionItem[options.itemContentKey]")
+        slot(
+          v-else
+          name="default"
           :item="getOriginalItem(accordionItem)"
           :expanded="accordionItem._expanded"
           :index="accordionItem._index + 1")

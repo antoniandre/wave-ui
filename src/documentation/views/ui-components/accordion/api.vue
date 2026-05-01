@@ -88,7 +88,7 @@ const slots = {
 
 const slotsAccordionItem = {
   title: {
-    description: 'Provide a custom title for every item (you could use the title prop instead).',
+    description: 'Provide a custom title for the item(s) (you could also use the title prop instead).',
     params: {
       item: 'The current item object.',
       index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.',
@@ -96,10 +96,18 @@ const slotsAccordionItem = {
     }
   },
   content: {
-    description: 'Provide a custom content for every item (you could use the content prop instead).',
+    description: 'Provide a custom content for the item(s) (you could also use the content prop instead).',
     params: {
       item: 'The current item object.',
       index: 'The item index in the array of items. Starts at 1 to be consistent with the <code>item.x</code> slot.',
+      expanded: 'A boolean representing the expanded state of the accordion item.'
+    }
+  },
+  default: {
+    description: 'on the w-accordion-item component only. Provide a custom content for the item(s) (you could also use the content prop or the content slot instead).',
+    params: {
+      item: 'The current item object.',
+      index: 'The item index in the array of items. Starts at 1.',
       expanded: 'A boolean representing the expanded state of the accordion item.'
     }
   }
