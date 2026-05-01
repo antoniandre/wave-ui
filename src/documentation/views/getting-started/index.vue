@@ -51,7 +51,7 @@ main
       Read on the knowledge base pages to get an overview of all the power in your hands!
     template(#item.3)
       | Pick a
-      router-link.ml1(to="/w-app#examples-of-common-layouts" @click.native="scrollToExamples")
+      router-link.ml1(to="/common-app-layouts#examples-of-common-layouts" @click.native="scrollToExamples")
         | common layout
       | .
     template(#item.4).
