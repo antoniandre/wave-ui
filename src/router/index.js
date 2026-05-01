@@ -149,6 +149,11 @@ const routes = [
     component: () => import('@/documentation/views/transitions.vue')
   },
   {
+    path: '/common-app-layouts',
+    name: 'common-app-layouts',
+    component: () => import('@/documentation/views/common-app-layouts.vue')
+  },
+  {
     path: '/release-notes',
     name: 'release-notes',
     component: () => import('@/documentation/views/release-notes.vue')

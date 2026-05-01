@@ -74,7 +74,8 @@ export default {
       { label: 'Colors', route: '/colors', icon: 'mdi mdi-palette' },
       { label: 'Themes', route: '/themes', icon: 'mdi mdi-weather-night' },
       { label: 'Shadows, borders & radii', route: '/shadows-borders-radii', icon: 'mdi mdi-tools' },
-      { label: 'Transitions', route: '/transitions', icon: 'mdi mdi-star-shooting-outline' }
+      { label: 'Transitions', route: '/transitions', icon: 'mdi mdi-star-shooting-outline' },
+      { label: 'Common app layouts', route: '/common-app-layouts', icon: 'mdi mdi-star-shooting-outline' }
     ],
     components: [
       ...UIComponents.filter(item => !item.formElement).map(item => ({ ...item, route: `/w-${item.id}` })),
