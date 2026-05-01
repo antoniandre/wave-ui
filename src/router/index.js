@@ -124,6 +124,11 @@ const routes = [
     component: () => import('@/documentation/views/layout-other-css-classes.vue')
   },
   {
+    path: '/common-app-layouts',
+    name: 'common-app-layouts',
+    component: () => import('@/documentation/views/common-app-layouts.vue')
+  },
+  {
     path: '/typography',
     name: 'typography',
     component: () => import('@/documentation/views/typography.vue')
@@ -147,11 +152,6 @@ const routes = [
     path: '/transitions',
     name: 'transitions',
     component: () => import('@/documentation/views/transitions.vue')
-  },
-  {
-    path: '/common-app-layouts',
-    name: 'common-app-layouts',
-    component: () => import('@/documentation/views/common-app-layouts.vue')
   },
   {
     path: '/release-notes',

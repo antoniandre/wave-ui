@@ -54,28 +54,28 @@ export default {
       { label: 'Why Wave UI?', route: '/why-wave-ui', icon: 'mdi mdi-help-circle-outline' },
       { label: 'Getting started', route: '/getting-started', icon: 'mdi mdi-play-circle-outline' },
       { label: 'Browser support', route: '/browser-support', icon: 'mdi mdi-check-circle-outline' },
-      { label: 'Options, presets &amp; <code>$waveui</code>', route: '/options-presets-and-waveui', icon: 'mdi mdi-auto-fix' },
+      { label: 'Options, presets &amp; <code>$waveui</code>', route: '/options-presets-and-waveui', icon: 'mdi mdi-tools' },
       { label: 'Customization', route: '/customization', icon: 'mdi mdi-tune' },
       { label: 'Breakpoints', route: '/breakpoints', icon: 'mdi mdi-format-horizontal-align-center' },
       {
         label: 'Layout',
         route: '/layout',
-        icon: 'mdi mdi-format-list-text',
+        icon: 'mdi mdi-view-dashboard-outline',
         open: true,
         children: [
           { label: 'Spaces', route: '/layout--spaces', icon: 'mdi mdi-keyboard-space' },
-          { label: 'Grid system (flexbox)', route: '/layout--grid-system', icon: 'mdi mdi-view-grid-outline' },
+          { label: 'Grid system (flexbox)', route: '/layout--grid-system', icon: 'mdi mdi-grid-large' },
           { label: 'Grid system (grid)', route: '/layout--simplified-grid-system', icon: 'mdi mdi-view-grid-outline' },
-          { label: 'Flex', route: '/layout--flex', icon: 'mdi mdi-star' },
-          { label: 'Other CSS classes', route: 'layout--other-css-classes', icon: 'mdi mdi-toolbox-outline' }
+          { label: 'Flex', route: '/layout--flex', icon: 'mdi mdi-auto-fix' },
+          { label: 'Other CSS classes', route: 'layout--other-css-classes', icon: 'mdi mdi-toolbox-outline' },
+          { label: 'Common app layouts', route: '/common-app-layouts', icon: 'mdi mdi-view-dashboard-edit-outline' }
         ]
       },
       { label: 'Typography', route: '/typography', icon: 'mdi mdi-format-font' },
-      { label: 'Colors', route: '/colors', icon: 'mdi mdi-palette' },
+      { label: 'Colors', route: '/colors', icon: 'mdi mdi-palette-outline' },
       { label: 'Themes', route: '/themes', icon: 'mdi mdi-weather-night' },
-      { label: 'Shadows, borders & radii', route: '/shadows-borders-radii', icon: 'mdi mdi-tools' },
-      { label: 'Transitions', route: '/transitions', icon: 'mdi mdi-star-shooting-outline' },
-      { label: 'Common app layouts', route: '/common-app-layouts', icon: 'mdi mdi-star-shooting-outline' }
+      { label: 'Shadows, borders & radii', route: '/shadows-borders-radii', icon: 'mdi mdi-math-compass' },
+      { label: 'Transitions', route: '/transitions', icon: 'mdi mdi-star-shooting-outline' }
     ],
     components: [
       ...UIComponents.filter(item => !item.formElement).map(item => ({ ...item, route: `/w-${item.id}` })),
@@ -177,7 +177,10 @@ export default {
     font-size: 1.5em;
     margin-right: 6px;
   }
-
+  .w-tree__item-expand {
+    position: absolute;
+    right: 8px;
+  }
   .w-tree__item--branch > .w-tree__item-label {text-transform: uppercase;font-weight: bold;}
 
   .w-tag {padding: 2px 4px 1px;}
