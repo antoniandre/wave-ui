@@ -232,10 +232,10 @@ Object.defineProperty(router, 'status', {
   set: value => (status.loading = value)
 })
 
-router.beforeEach((_to, _from, next) => {
+router.beforeEach(() => {
   // Update through the property observer for reactivity.
   router.status = true
-  next()
+  return true
 })
 
 router.afterEach(() => {

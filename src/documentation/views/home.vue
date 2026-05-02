@@ -6,7 +6,7 @@
         w-icon.wave-logo wi-wave
         | Wave UI
       em A Vue.js UI framework with only the bright side.
-      w-button.get-started(outline round route="/getting-started" color="white") Get started
+      w-button.get-started.pa4(outline round route="/getting-started" color="white") Get started
 
     .version
       w-tooltip(z-index="20")
