@@ -1,5 +1,6 @@
 export { WAccordion } from './WAccordion'
 export { WAlert } from './WAlert'
+export { WAutocomplete, WAutocompleteItem } from './WAutocomplete'
 export { WBadge } from './WBadge'
 export { WBreadcrumbs } from './WBreadcrumbs'
 export { WButton } from './WButton'

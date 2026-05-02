@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  ui-component-title(slug="w-autocomplete" in-progress) w-autocomplete
+  ui-component-title(slug="w-autocomplete") w-autocomplete
   examples
   api
 </template>
