@@ -12,7 +12,8 @@ export default {
     right: { type: Boolean },
     up: { type: Boolean },
     down: { type: Boolean },
-    duration: { type: [Number, String] }
+    duration: { type: [Number, String] },
+    mode: { type: String }
   },
 
   computed: {

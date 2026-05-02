@@ -48,3 +48,23 @@ export { WTimeline } from './WTimeline'
 export { WToolbar } from './WToolbar'
 export { WTooltip } from './WTooltip'
 export { WTree } from './WTree'
+export {
+  WTransitionFade,
+  WTransitionScale,
+  WTransitionScaleFade,
+  WTransitionBounce,
+  WTransitionTwist,
+  WTransitionExpand,
+  WTransitionSlide,
+  WTransitionSlideFade,
+  type WaveTransitionBaseProps,
+  type WaveTransitionDirectionProps,
+  type WTransitionFadeProps,
+  type WTransitionScaleProps,
+  type WTransitionScaleFadeProps,
+  type WTransitionBounceProps,
+  type WTransitionTwistProps,
+  type WTransitionExpandProps,
+  type WTransitionSlideProps,
+  type WTransitionSlideFadeProps
+} from './WTransitions'

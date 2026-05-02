@@ -362,6 +362,137 @@ main
     | the #[span.code slide-fade] transition take the direction in parameter, e.g. #[span.code left],
     | #[span.code right], #[span.code up], #[span.code down] and defaults to #[span.code down].
 
+  title-link(h2 slug="component-to-component") Component-to-component transitions
+  p.
+    All Wave UI transitions support a #[code mode] prop (#[code 'out-in'] or #[code 'in-out']) to transition
+    smoothly between two elements or components.#[br]
+    With #[code mode="out-in"] the current element leaves first, then the new one enters — preventing any
+    overlap. Use #[code v-if] / #[code v-else] with unique #[code key] attributes on the children.
+  example
+    w-flex(align-center wrap gap="4")
+      w-button(
+        @click="componentToggle = !componentToggle"
+        color="primary"
+        outline) Switch component
+      w-transition-fade(mode="out-in")
+        .transition-box.comp-a(v-if="componentToggle" key="a")
+          strong Component A
+        .transition-box.comp-b(v-else key="b")
+          strong Component B
+    template(#pug).
+      w-flex(align-center wrap gap="4")
+        w-button(
+          @click="componentToggle = !componentToggle"
+          color="primary"
+          outline) Switch component
+        w-transition-fade(mode="out-in")
+          .transition-box.comp-a(v-if="componentToggle" key="a")
+            strong Component A
+          .transition-box.comp-b(v-else key="b")
+            strong Component B
+    template(#html).
+      &lt;w-flex align-center wrap gap4&gt;
+        &lt;w-button
+          @click="componentToggle = !componentToggle"
+          color="primary"
+          outline&gt;
+          Switch component
+        &lt;/w-button&gt;
+        &lt;w-transition-fade mode="out-in"&gt;
+          &lt;div class="transition-box comp-a" v-if="componentToggle" key="a"&gt;
+            &lt;strong&gt;Component A&lt;/strong&gt;
+          &lt;/div&gt;
+          &lt;div class="transition-box comp-b" v-else key="b"&gt;
+            &lt;strong&gt;Component B&lt;/strong&gt;
+          &lt;/div&gt;
+        &lt;/w-transition-fade&gt;
+      &lt;/w-flex&gt;
+    template(#js).
+      data: () => ({
+        componentToggle: true
+      })
+    template(#css).
+      .transition-box {
+        border-radius: 3px;
+        padding: 1em;
+        width: 14em;
+        text-align: center;
+      }
+
+      .comp-a {
+        background-color: #e3f0ff;
+        border: 1px solid #aad4fb;
+      }
+
+      .comp-b {
+        background-color: #e8f7e8;
+        border: 1px solid #a4d9a4;
+      }
+
+  p.
+    The same #[code mode] prop is available on every Wave UI transition. Here is the same A → B switch
+    using #[code w-transition-twist]:
+  example
+    w-flex(align-center wrap gap="4")
+      w-button(
+        @click="componentToggle2 = !componentToggle2"
+        color="primary"
+        outline) Switch component
+      w-transition-twist(mode="out-in")
+        .transition-box.comp-a(v-if="componentToggle2" key="a")
+          strong Component A
+        .transition-box.comp-b(v-else key="b")
+          strong Component B
+    template(#pug).
+      w-flex(align-center wrap gap="4")
+        w-button(
+          @click="componentToggle2 = !componentToggle2"
+          color="primary"
+          outline) Switch component
+        w-transition-twist(mode="out-in")
+          .transition-box.comp-a(v-if="componentToggle2" key="a")
+            strong Component A
+          .transition-box.comp-b(v-else key="b")
+            strong Component B
+    template(#html).
+      &lt;w-flex align-center wrap gap4&gt;
+        &lt;w-button
+          @click="componentToggle2 = !componentToggle2"
+          color="primary"
+          outline&gt;
+          Switch component
+        &lt;/w-button&gt;
+        &lt;w-transition-twist mode="out-in"&gt;
+          &lt;div class="transition-box comp-a" v-if="componentToggle2" key="a"&gt;
+            &lt;strong&gt;Component A&lt;/strong&gt;
+          &lt;/div&gt;
+          &lt;div class="transition-box comp-b" v-else key="b"&gt;
+            &lt;strong&gt;Component B&lt;/strong&gt;
+          &lt;/div&gt;
+        &lt;/w-transition-twist&gt;
+      &lt;/w-flex&gt;
+    template(#js).
+      data: () => ({
+        componentToggle2: true
+      })
+    template(#css).
+      .transition-box {
+        border-radius: 3px;
+        padding: 1em;
+        width: 14em;
+        text-align: center;
+      }
+
+      .comp-a {
+        background-color: #e3f0ff;
+        border: 1px solid #aad4fb;
+      }
+
+      .comp-b {
+        background-color: #e8f7e8;
+        border: 1px solid #a4d9a4;
+      }
+
   title-link(h2 slug="the-expand-transition") The #[span.code expand] transition
   p.
     The great thing with Wave UI's expand transition is that it also animates any margin or padding on the
@@ -508,7 +639,9 @@ export default {
     toggleExpandXY2: false,
     toggleSlideFadeDown: false,
     toggleSlideFadeRight: false,
-    showCard: false
+    showCard: false,
+    componentToggle: true,
+    componentToggle2: true
   })
 }
 </script>
@@ -523,6 +656,16 @@ export default {
   padding: 1em;
   width: 14em;
   text-align: center;
+}
+
+.comp-a {
+  background-color: #e3f0ff;
+  border: 1px solid #aad4fb;
+}
+
+.comp-b {
+  background-color: #e8f7e8;
+  border: 1px solid #a4d9a4;
 }
 
 @media screen and (max-width: 420px) {

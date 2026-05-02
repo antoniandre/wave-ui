@@ -1,7 +1,7 @@
 <template lang="pug">
 transition(
   name="expand"
-  mode="out-in"
+  :mode="mode"
   :css="false"
   @before-appear="beforeAppear"
   @appear="appear"
@@ -22,7 +22,8 @@ export default {
   props: {
     x: { type: Boolean },
     y: { type: Boolean },
-    duration: { type: Number, default: 250 }
+    duration: { type: Number, default: 250 },
+    mode: { type: String, default: 'out-in' }
   },
 
   data: () => ({

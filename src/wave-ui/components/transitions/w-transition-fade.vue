@@ -8,7 +8,8 @@ export default {
   name: 'w-transition-fade',
   props: {
     appear: { type: Boolean },
-    duration: { type: [Number, String] }
+    duration: { type: [Number, String] },
+    mode: { type: String }
   }
 }
 </script>
