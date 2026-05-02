@@ -278,6 +278,17 @@ main
                   &lt;/template&gt;
                 &lt;/w-menu&gt;
         alert(tip) The old code will still work, but it's recommended to clean it up to avoid confusion and be forward-compatible with future changes.
+
+  .w-flex.justify-center.mt12.pt12
+    .sponsor-card.text-center.lh1.mt10.ovh
+      strong.size--lg Thanks for using Wave UI!
+      .mt2
+        span.op7.
+          This major release includes 20+ improvements.<br>
+          Help us keep building by sponsoring the project.
+        w-icon.op2.ml1 mdi mdi-heart
+      w-button.bd1.pa4.mt2(route="https://github.com/sponsors/antoniandre" target="_blank" text round)
+        | ⭐ Become a Sponsor
 </template>
 
 <script>

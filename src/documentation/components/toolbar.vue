@@ -26,7 +26,7 @@ w-toolbar.main-toolbar(fixed)
     template(#tooltip)
       .text-center View the project#[br]on Github
 
-  w-tooltip(z-index="20" align-right append-to=".main-toolbar" tooltip="Backers")
+  w-tooltip(z-index="20" align-right append-to=".main-toolbar" tooltip="Backers / Become a sponsor")
     div.ml2.mr1
       router-link.pink-light1(to="/backers" @click.native="scrollTop(true)")
         w-icon(lg) mdi mdi-heart-multiple-outline

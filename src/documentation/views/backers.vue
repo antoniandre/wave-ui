@@ -18,12 +18,14 @@ main
           a.mx1(href="https://github.com/sponsors/antoniandre" target="_blank")
             w-icon.white(xl) wi-plus
 
-    p.mt10
-      | If you would like to support Wave UI, you can
-      a.mx1(href="https://github.com/sponsors/antoniandre" target="_blank") become a sponsor
-      | or
-      a.ml1(href="https://www.paypal.me/antoniandre1" target="_blank") make a donation
-      | . Thank you! 🙏🙏
+    .w-flex.justify-center
+      .sponsor-card.lh3.mt10.ovh.size--lg
+        w-icon mdi mdi-heart
+        | If you would like to support Wave UI, you can
+        a.mx1(href="https://github.com/sponsors/antoniandre" target="_blank")
+          | become a sponsor or make a donation
+        | .
+        div Thank you! 🙏🙏
 
     h2.gold Gold Sponsors 🔥
     .gold-sponsors
@@ -102,6 +104,23 @@ export default {
     transform: translate(-50%, -50%);
     color: color-mix(in srgb, var(--w-contrast-bg-color) 5%, transparent);
     font-size: 4.5em;
+  }
+}
+
+.sponsor-card {
+  position: relative;
+  padding: 1.5rem 2rem 1.5rem 2.5rem;
+  border-radius: 12px;
+  background-color: color-mix(in srgb, var(--w-green-color) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--w-green-color) 12%, transparent);
+
+  .w-icon {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-15%, -50%) rotate(-23deg);
+    font-size: 10rem;
+    color: color-mix(in srgb, var(--w-green-color) 8%, transparent);
   }
 }
 
