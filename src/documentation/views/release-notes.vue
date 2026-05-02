@@ -29,35 +29,60 @@ main
 
     li.major
       strong.version v4.0.0
-      p
+      .title3.text-bold
         | See the
-        router-link.title3.ml1(to="/migration-from-v3-to-v4") Migration guide from version 3.x to 4.x
+        router-link.ml1(to="/migration-from-v3-to-v4") Migration guide from version 3.x to 4.x
         | .
       ul
-        li
+        li.my2
           strong CSS custom properties migration
           ul
-            li Replaced public SCSS-variable customization with CSS custom properties. Override Wave UI through #[code --w-*] variables on #[code :root], #[code [data-theme="light"]], #[code [data-theme="dark"]], or your app scope. #[span.tag.breaking BREAKING]
-            li Built-in palette, status colors, custom colors, spacing utilities, borders, shadows, transitions, and component surface defaults now use CSS variables as the public customization surface. #[span.tag.breaking BREAKING]
-            li Utility classes such as #[code ma3], #[code px2], #[code gap4], #[code bd1], #[code sh2], palette classes, and status classes keep their names but resolve through CSS variables where possible.
-            li Sass source files may still generate internal utility CSS, but consumer apps should no longer need Wave UI Sass #[code @use] / #[code additionalData] customization.
-        li
+            li Replaced public SCSS-variable customization with CSS custom properties. Override Wave UI through #[code --w-*] variables on #[code :root], #[code [data-theme="light"]], #[code [data-theme="dark"]], or your app scope. #[span.tag.breaking]
+            li Everything now uses CSS variables (that you can easily override): Built-in palette, status colors, custom colors, utility classes such as #[code ma3], #[code px2], #[code gap4], #[code bd1], #[code sh2], spacing utilities, borders, shadows, transitions, and component surface defaults. #[span.tag.new]
+        li.my2
+          strong.code w-menu &amp; w-tooltip — Teleport + simplified activator
+          ul
+            li Replaced manual DOM insertion with Vue's native #[code Teleport]. The floating element is now moved to its target node via a reactive #[code teleportTarget] computed, eliminating all manual #[code appendChild] / #[code removeChild] calls and the #[code appendTo] watcher, resulting in faster toggles and more reliable components. #[span.tag.new]
+            li Event listeners are now auto-attached to the activator slot's root element. The #[code template(#activator="{ on }") … v-on="on"] boilerplate is no longer needed. #[span.tag.breaking]
+            li The #[code #activator] slot is no longer needed for the activator element. Use the #[strong default slot] for the activator and the #[code tooltip] prop / #[code #tooltip] slot (tooltip) or #[code #content] slot (menu) for the popup content. #[span.tag.breaking]
+            li Added the #[code tooltip] prop to #[code w-tooltip] for simple string tooltip content without any slot. #[span.tag.new]
+        li.my2
           strong.code w-accordion
           ul
             li Added new #[code expanded-class] option. #[span.tag.new]
-            li Append content to the accordion item content via the #[code default] slot (or already existing #[code content] slot). #[span.tag.new]
-        li
+            li Append content to the #[strong.code accordion-item] component via the #[code default] slot (no template tag needed). Or keep using the already existing #[code content] slot. #[span.tag.new]
+        li.my2
           strong Global configuration options
           ul
-            li Add new #[code css.appClasses] global config option to set custom classes on the .w-app element. #[span.tag.new]
-        li
+            li Add new #[code css.appClasses] global config option to set initial custom classes on the .w-app element. #[span.tag.new]
+        li.my2
+          strong Consistent size support for form elements
+          ul
+            li Added #[code xs], #[code sm], #[code md], #[code lg] and #[code xl] size props to #[code w-input], #[code w-select], #[code w-switch], #[code w-checkbox], #[code w-checkboxes], #[code w-radio] and #[code w-radios]. #[span.tag.new]
+            li Introduced the unified #[code --w-size] CSS variable: set it on any of the above components (or a common ancestor) to apply a custom size without using a preset prop. For field components (#[code w-input], #[code w-select]) it controls the field height; for small form elements (#[code w-switch], #[code w-checkbox], #[code w-radio]) it controls the element size. #[span.tag.new]
+        li.my2
+          strong.code w-transition-*
+          ul
+            li Now supports component-to-component transitions using #[code mode] prop (#[code 'out-in'] / #[code 'in-out']) on all 8 built-in transition components: #[code w-transition-fade], #[code w-transition-scale], #[code w-transition-scale-fade], #[code w-transition-bounce], #[code w-transition-twist], #[code w-transition-expand], #[code w-transition-slide], and #[code w-transition-slide-fade]. #[span.tag.new]
+            li Added TypeScript definitions for all transition components. #[span.tag.new]
+        li.my2
+          strong.code w-autocomplete
+          ul
+            li Completed the #[code w-autocomplete] component and added a ton of features and TypeScript definitions. #[span.tag.new]
+            li Now integrated with #[code w-form]: supports #[code validators], #[code no-blur-validation], #[code disabled], #[code readonly], #[code required], #[code id], #[code name], and #[code tabindex] via the shared #[code FormElementMixin]. #[span.tag.new]
+            li Fixed #[code v-model] initialization for string item values (previously coerced to number via #[code +value]). #[span.tag]
+        li.my2
+          strong Don't miss these out from the very close previous releases 3.26 to 3.28!
+          ul
+            li Added Nuxt 3 &amp; 4 SSR compatibility #[span.tag.new]
+            li New ripple effect on clickable elements #[span.tag.new]
+            li Completed the #[strong.code w-scrollable] component and added more options. #[span.tag.new]
+            li #[strong.code w-menu] &amp; #[strong.code w-tooltip] move to the opposite side when it would be out of viewport. #[span.tag.new]
+            li Form components &amp;w-accordion improvements #[span.tag.new]
+        li.my2
           strong.code w-app
           ul
-            li Removed the deprecated #[code w-app] component.
-        li
-          strong New ripple effect on clickable elements
-          ul
-            li Added the new ripple effect and directive in previous release 3.28.0, don't miss out! #[span.tag.new]
+            li Removed the deprecated #[code w-app] component. #[span.tag.removed]
 
     li.minor
       strong.version v3.28.0
@@ -2582,6 +2607,8 @@ main
   span.deprecated:before {content: 'DEPRECATED';}
   span.removed {background-color: #f02c2c;}
   span.removed:before {content: 'REMOVED';}
+  span.breaking {background-color: #e53636;}
+  span.breaking:before {content: 'BREAKING';}
 
   @keyframes spin {
     from {transform: translate(-50%, -50%) rotate(0deg);}
