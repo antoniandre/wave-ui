@@ -48,7 +48,12 @@ const propsDescs = {
   readonly: 'The select field will still look like an interactive select field except that it is read-only: its current value cannot be changed by user interaction.',
   required: 'Applies the native HTML <code>required</code> attribute to the select field.',
   validators: '<span class="deep-orange">Only for validation, when the select field is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the select field. Each function will be executed on select field validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the select field.',
-  noBlurValidation: '<span class="deep-orange">Only when the select is in a <strong class="code">w-form</strong> with <code>validators</code>.</span><br>When <code>true</code>, blur does not validate this field. When <code>false</code>, blur always validates even if the form has <code>no-blur-validation</code>. When unset, inherit the form setting.'
+  noBlurValidation: '<span class="deep-orange">Only when the select is in a <strong class="code">w-form</strong> with <code>validators</code>.</span><br>When <code>true</code>, blur does not validate this field. When <code>false</code>, blur always validates even if the form has <code>no-blur-validation</code>. When unset, inherit the form setting.',
+  xs: 'Sets the height of the select field to extra small (~20 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+  sm: 'Sets the height of the select field to small (~24 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+  md: 'Sets the height of the select field to medium, which is the same as the default height (~28 px at 14 px base font size).',
+  lg: 'Sets the height of the select field to large (~32 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+  xl: 'Sets the height of the select field to extra large (~38 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.'
 }
 
 const slots = {

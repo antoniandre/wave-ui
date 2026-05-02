@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  w-alert(info)
+  alert(info)
     .title4 Good to know
     p.body.
       Any HTML attribute or JavaScript event listeners attached to the component will be applied to the
