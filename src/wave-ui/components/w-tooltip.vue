@@ -1,13 +1,17 @@
 <template lang="pug">
-slot(name="activator" :on="activatorEventHandlers")
-transition(:name="transitionName" appear @after-leave="onAfterLeave")
-  .w-tooltip(
-    v-if="detachableVisible"
-    ref="detachable"
-    :key="tooltipInstanceId"
-    :class="classes"
-    :style="styles")
-    slot
+slot(name="activator")
+slot(v-if="!$slots.activator")
+teleport(:to="teleportTarget" :disabled="!teleportTarget")
+  transition(:name="transitionName" appear @after-leave="onAfterLeave")
+    .w-tooltip(
+      v-if="detachableVisible"
+      ref="detachable"
+      :key="tooltipInstanceId"
+      :class="classes"
+      :style="styles")
+      template(v-if="tooltip") {{ tooltip }}
+      slot(v-else-if="$slots.tooltip" name="tooltip")
+      slot(v-else-if="$slots.activator")
 </template>
 
 <script>
@@ -26,6 +30,7 @@ export default {
 
   props: {
     modelValue: {},
+    tooltip: { type: String }, // Simple string content shorthand; use the #tooltip slot for rich content.
     showOnClick: { type: Boolean },
     color: { type: String },
     bgColor: { type: String },

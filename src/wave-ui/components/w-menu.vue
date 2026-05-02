@@ -1,44 +1,48 @@
 <template lang="pug">
-slot(name="activator" :on="activatorEventHandlers")
-transition(:name="transitionName" appear @after-leave="onAfterLeave")
-  .w-menu(
-    v-if="custom && detachableVisible"
-    ref="detachable"
-    v-bind="$attrs"
-    @click="hideOnMenuClick && close(true)"
-    @mouseenter="showOnHover && (hoveringMenu = true)"
-    @mouseleave="showOnHover && ((hoveringMenu = false), close())"
-    :class="classes"
-    :style="styles")
-    slot
-  w-card.w-menu(
-    v-else-if="detachableVisible"
-    ref="detachable"
-    v-bind="$attrs"
-    @click.native="hideOnMenuClick && close(true)"
-    @mouseenter.native="showOnHover && (hoveringMenu = true)"
-    @mouseleave.native="showOnHover && ((hoveringMenu = false), close())"
-    :tile="tile"
-    :title-class="titleClasses"
-    :content-class="contentClasses"
-    :shadow="shadow"
-    :no-border="noBorder"
-    :class="classes"
-    :style="styles")
-    template(v-if="$slots.title" #title)
-      slot(name="title")
-    template(v-if="$slots.actions" #actions)
-      slot(name="actions")
-    slot
-w-overlay(
-  v-if="overlay"
-  ref="overlay"
-  :model-value="detachableVisible"
-  :persistent="persistent"
-  :class="overlayClasses"
-  v-bind="overlayProps"
-  :z-index="(zIndex || 200) - 1"
-  @update:model-value="detachableVisible = false")
+slot(name="activator")
+slot(v-if="!$slots.activator")
+teleport(:to="teleportTarget" :disabled="!teleportTarget")
+  transition(:name="transitionName" appear @after-leave="onAfterLeave")
+    .w-menu(
+      v-if="custom && detachableVisible"
+      ref="detachable"
+      v-bind="$attrs"
+      @click="hideOnMenuClick && close(true)"
+      @mouseenter="showOnHover && (hoveringMenu = true)"
+      @mouseleave="showOnHover && ((hoveringMenu = false), close())"
+      :class="classes"
+      :style="styles")
+      slot(v-if="$slots.activator")
+      slot(v-else name="content")
+    w-card.w-menu(
+      v-else-if="detachableVisible"
+      ref="detachable"
+      v-bind="$attrs"
+      @click.native="hideOnMenuClick && close(true)"
+      @mouseenter.native="showOnHover && (hoveringMenu = true)"
+      @mouseleave.native="showOnHover && ((hoveringMenu = false), close())"
+      :tile="tile"
+      :title-class="titleClasses"
+      :content-class="contentClasses"
+      :shadow="shadow"
+      :no-border="noBorder"
+      :class="classes"
+      :style="styles")
+      template(v-if="$slots.title" #title)
+        slot(name="title")
+      template(v-if="$slots.actions" #actions)
+        slot(name="actions")
+      slot(v-if="$slots.activator")
+      slot(v-else name="content")
+  w-overlay(
+    v-if="overlay"
+    ref="overlay"
+    :model-value="detachableVisible"
+    :persistent="persistent"
+    :class="overlayClasses"
+    v-bind="overlayProps"
+    :z-index="(zIndex || 200) - 1"
+    @update:model-value="detachableVisible = false")
 </template>
 
 <script>

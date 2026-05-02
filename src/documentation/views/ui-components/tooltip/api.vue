@@ -15,6 +15,7 @@ import WTooltip from '@/wave-ui/components/w-tooltip.vue'
 
 const propsDescs = {
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>This prop controls the visibility of the tooltip. Any truthy value will show the tooltip whereas any falsy value will hide it.',
+  tooltip: 'Simple string content for the tooltip. Use the <code>#tooltip</code> slot for rich content (HTML, multiple lines, components).',
   showOnClick: 'Triggers the tooltip apparition on activator click instead of hover by default. Another click on the activator will hide the tooltip.',
   enableTouch: 'Enables the hover-activating tooltips on touch devices:<br>Since you can\'t hover on touch device (you can only tap which is counted as a click), the hover-activating tooltips are not behaving similar on mobile as they need a tap to be closed. That\'s why this option is disabled by default.',
   color: 'Applies a color to the tooltip\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
@@ -46,8 +47,9 @@ const propsDescs = {
 }
 
 const slots = {
-  activator: { description: '<strong>This slot is required and must have the <code>v-on="on"</code> directive set on it for the tooltip to toggle correctly.</strong><br>The activator can be any visible DOM element or mounted component.' },
-  default: { description: 'The tooltip content.' }
+  activator: { description: 'Place the element that should trigger the tooltip inside this slot. Event listeners are attached automatically — no <code>v-on="on"</code> binding is required.<br>The activator can be any visible DOM element or mounted component.<br><strong>Legacy API:</strong> use this slot for the activator and the <code>default</code> slot for tooltip content.' },
+  default: { description: '<strong>New API:</strong> when no <code>#activator</code> slot is used, the default slot is the activator element.<br><strong>Legacy API:</strong> when an <code>#activator</code> slot is provided, the default slot is the tooltip content.' },
+  tooltip: { description: 'Rich tooltip content for use with the new API (default slot = activator). Use instead of the <code>tooltip</code> prop when the content needs HTML, components, or multiple lines.' }
 }
 
 const eventsDescs = {

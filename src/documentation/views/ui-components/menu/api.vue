@@ -53,9 +53,10 @@ const propsDescs = {
 }
 
 const slots = {
-  activator: { description: '<strong>This slot is required and must have the <code>v-on="on"</code> directive set on it for the menu to toggle correctly.</strong><br>The activator can be any visible DOM element or mounted component.' },
+  activator: { description: 'Place the element that should trigger the menu inside this slot. Event listeners are attached automatically — no <code>v-on="on"</code> binding is required.<br>The activator can be any visible DOM element or mounted component.<br><strong>Legacy API:</strong> use this slot for the activator and the <code>default</code> slot for menu content.' },
+  default: { description: '<strong>New API:</strong> when no <code>#activator</code> slot is used, the default slot is the activator element.<br><strong>Legacy API:</strong> when an <code>#activator</code> slot is provided, the default slot is the menu content.' },
+  content: { description: 'The menu body content for use with the new API (default slot = activator).<br>When <code>custom</code> is <code>false</code> (default), the content is placed inside a <code>w-card</code>.' },
   title: { description: 'By default (when <code>custom</code> is set to false), the menu uses a <span class="code">w-card</span>. This slot allows a custom title for the <span class="code">w-card</span>.' },
-  default: { description: 'The menu content.' },
   actions: { description: 'By default (when <code>custom</code> is set to false), the menu uses a <span class="code">w-card</span>. This slot allows setting the actions slot of the <span class="code">w-card</span>.' }
 }
 

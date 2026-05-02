@@ -33,26 +33,18 @@ header.no-shrink
         | Backers
       .caption
         | Made with
+        w-tooltip(top tooltip="Vue.js")
+          w-icon.ml1(sm) mdi mdi-vuejs
+        w-tooltip(top tooltip="CSS 3")
+          w-icon.ml1(sm) mdi mdi-language-css3
         w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-vuejs
-          | Vue.js
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-language-css3
-          | CSS 3
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-language-html5
-          span.text-nowrap Html 5 &amp; Pug
-        w-tooltip(top)
-          template(#activator="{ on }")
-            w-icon.ml1(v-on="on" sm) mdi mdi-sass
-          | SASS
-        w-tooltip(top align-right)
-          template(#activator="{ on }")
-            w-icon.ml1.heart(v-on="on" sm) mdi mdi-heart
-          | Love
+          w-icon.ml1(sm) mdi mdi-language-html5
+          template(#tooltip)
+            span.text-nowrap Html 5 &amp; Pug
+        w-tooltip(top tooltip="SASS")
+          w-icon.ml1(sm) mdi mdi-sass
+        w-tooltip(top align-right tooltip="Love")
+          w-icon.ml1.heart(sm) mdi mdi-heart
 </template>
 
 <script>

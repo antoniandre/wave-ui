@@ -75,7 +75,7 @@ div
       .text-right.mt6
         strong v-model:
         code.ml2.mr4 {{ form1.valid === false ? 'false' : form1.valid || 'null' }}
-        w-button(type="submit" :disabled="form1.valid === false") Validate
+        w-button(type="submit" bg-color="success" :disabled="form1.valid === false") Validate
     template(#pug).
       w-form(v-model="valid")
         w-input(label="First name" :validators="[validators.required, validators.alphabetical]")
@@ -83,7 +83,7 @@ div
         .text-right.mt6
           strong v-model:
           code.ml2.mr4 {{ "\{\{ valid === false ? 'false' : valid || 'null' \}\}" }}
-          w-button(type="submit" :disabled="valid === false") Validate
+          w-button(type="submit" bg-color="success" :disabled="valid === false") Validate
     template(#html).
       &lt;w-form v-model="valid"&gt;
         &lt;w-input
@@ -102,7 +102,7 @@ div
           &lt;code class="ml2 mr4"&gt;
             {{ "\{\{ valid === false ? 'false' : valid || 'null' \}\}" }}
           &lt;/code&gt;
-          &lt;w-button type="submit" :disabled="valid === false"&gt;
+          &lt;w-button type="submit" bg-color="success" :disabled="valid === false"&gt;
             Validate
           &lt;/w-button&gt;
         &lt;/div&gt;
@@ -144,13 +144,13 @@ div
       w-input(label="First name" :validators="[validators.required]")
       w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
-        w-button(type="submit") Validate
+        w-button(type="submit" bg-color="success") Validate
     template(#pug).
       w-form(action="test.php" method="post" target="_blank" allow-submit)
         w-input(label="First name" :validators="[validators.required]")
         w-input.mt3(label="Last name" :validators="[validators.required]")
         .text-right.mt6
-          w-button(type="submit") Validate
+          w-button(type="submit" bg-color="success") Validate
     template(#html).
       &lt;w-form
         action="test.php"
@@ -170,7 +170,7 @@ div
         &lt;/w-input&gt;
 
         &lt;div class="text-right mt6"&gt;
-          &lt;w-button type="submit"&gt;Validate&lt;/w-button&gt;
+          &lt;w-button type="submit" bg-color="success"&gt;Validate&lt;/w-button&gt;
         &lt;/div&gt;
       &lt;/w-form&gt;
     template(#js).
@@ -194,13 +194,13 @@ div
       w-input(label="First name" :validators="[validators.required]")
       w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
-        w-button(type="submit") Validate
+        w-button(type="submit" bg-color="success") Validate
     template(#pug).
       w-form(no-keyup-validation no-blur-validation)
         w-input(label="First name" :validators="[validators.required]")
         w-input.mt3(label="Last name" :validators="[validators.required]")
         .text-right.mt6
-          w-button(type="submit") Validate
+          w-button(type="submit" bg-color="success") Validate
     template(#html).
       &lt;w-form no-keyup-validation no-blur-validation&gt;
         &lt;w-input
@@ -215,7 +215,7 @@ div
         &lt;/w-input&gt;
 
         &lt;div class="text-right mt6"&gt;
-          &lt;w-button type="submit"&gt;Validate&lt;/w-button&gt;
+          &lt;w-button type="submit" bg-color="success"&gt;Validate&lt;/w-button&gt;
         &lt;/div&gt;
       &lt;/w-form&gt;
     template(#js).
@@ -236,14 +236,14 @@ div
       w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
         w-button.my1.mr2(bg-color="warning" type="reset") Reset
-        w-button.my1(type="submit") Validate
+        w-button.my1(type="submit" bg-color="success") Validate
     template(#pug).
       w-form(v-model="valid")
         w-input(label="First name" :validators="[validators.required]")
         w-input.mt3(label="Last name" :validators="[validators.required]")
         .text-right.mt6
           w-button.my1.mr2(bg-color="warning" type="reset") Reset
-          w-button.my1(type="submit") Validate
+          w-button.my1(type="submit" bg-color="success") Validate
     template(#html).
       &lt;w-form v-model="valid"&gt;
         &lt;w-input
@@ -266,6 +266,7 @@ div
           &lt;/w-button&gt;
           &lt;w-button
             class="my1"
+            bg-color="success"
             type="submit"&gt;
             Validate
           &lt;/w-button&gt;
@@ -311,7 +312,7 @@ div
       w-input(label="First name" :validators="[validators.required]")
       w-input.mt3(label="Last name" :validators="[validators.required]")
       .text-right.mt6
-        w-button(type="submit") Validate
+        w-button(type="submit" bg-color="success") Validate
     template(#pug).
       w-alert(
         :success="success"
@@ -328,7 +329,7 @@ div
         w-input.mt3(label="Last name" :validators="[validators.required]")
 
         .text-right.mt6
-          w-button(type="submit") Validate
+          w-button(type="submit" bg-color="success") Validate
     template(#html).
       &lt;w-alert
         :success="success"
@@ -358,7 +359,7 @@ div
         &lt;/w-input&gt;
 
         &lt;div class="text-right mt6"&gt;
-          &lt;w-button type="submit"&gt;Validate&lt;/w-button&gt;
+          &lt;w-button type="submit" bg-color="success"&gt;Validate&lt;/w-button&gt;
         &lt;/div&gt;
       &lt;/w-form&gt;
     template(#js).
@@ -409,6 +410,7 @@ div
             @click="form6.submitted = form6.sent = false") Reset
           w-button.my1(
             type="submit"
+            bg-color="success"
             :disabled="form6.valid === false"
             :loading="form6.submitted && !form6.sent") Validate
       w-notification(
@@ -445,6 +447,7 @@ div
               @click="form.submitted = form.sent = false") Reset
             w-button.my1(
               type="submit"
+              bg-color="success"
               :disabled="form.valid === false"
               :loading="form.submitted &amp;&amp; !form.sent") Validate
         w-notification(
@@ -522,6 +525,7 @@ div
 
             &lt;w-button
               type="submit"
+              bg-color="success"
               :disabled="form.valid === false"
               :loading="form.submitted &amp;&amp; !form.sent"
               class="my1"&gt;
@@ -590,7 +594,7 @@ div
       w-input.mt3(label="Last name" :validators="[validators.required]")
       w-flex.mt4(justify-end)
         w-button(type="reset" bg-color="warning") Reset
-        w-button.ml2(type="submit" :disabled="form7.valid === false") Validate
+        w-button.ml2(type="submit" bg-color="success" :disabled="form7.valid === false") Validate
     template(#pug).
       w-button(
         :outline="!form.disabled"
@@ -604,7 +608,7 @@ div
         w-input.mt3(label="Last name" :validators="[validators.required]")
         w-flex.mt4(justify-end)
           w-button(type="reset" bg-color="warning") Reset
-          w-button.ml2(type="submit" :disabled="form.valid === false") Validate
+          w-button.ml2(type="submit" bg-color="success" :disabled="form.valid === false") Validate
     template(#html).
       &lt;w-button
         :outline="!form.disabled"
@@ -641,6 +645,7 @@ div
           &lt;/w-button&gt;
           &lt;w-button
             type="submit"
+            bg-color="success"
             :disabled="form.valid === false"
             class="ml2"&gt;
             Validate

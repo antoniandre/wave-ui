@@ -29,6 +29,13 @@ export interface WaveTooltipProps {
   modelValue?: any
 
   /**
+   * Simple string content for the tooltip. For rich/complex content, use the `#tooltip` slot instead.
+   * @property {string} tooltip
+   * @see https://antoniandre.github.io/wave-ui/w-tooltip
+   */
+  tooltip?: string
+
+  /**
    * Triggers the tooltip apparition on activator click instead of hover by default. Another click on the activator will hide the tooltip.
    * @property {boolean} showOnClick
    * @see https://antoniandre.github.io/wave-ui/w-tooltip
@@ -215,18 +222,28 @@ export interface WaveTooltipMethods extends MethodOptions {
 // ----------------------------------------------------------------------------
 export type WaveTooltipSlots = SlotsType<{
   /**
-   * `This slot is required and must have the `v-on="on"` directive set on it for the tooltip to toggle correctly.`
-   * The activator can be any visible DOM element or mounted component.
-   * @param {any} on TODO: Describe me!
+   * The activator element — the element the tooltip appears around on hover/click.
+   * When using the new API (without `#activator`), pass the activator as the default slot
+   * and use the `tooltip` prop or `#tooltip` named slot for the tooltip content.
+   * When using the legacy API, pass the activator here and put the tooltip content in the
+   * default slot.
    * @see https://antoniandre.github.io/wave-ui/w-tooltip
    */
-  'activator': (_: { on: any }) => any
+  'activator': () => any
 
   /**
-   * The tooltip content.
+   * **New API:** When no `#activator` slot is used, the default slot is the activator element.
+   * **Legacy API:** When an `#activator` slot is provided, the default slot is the tooltip content.
    * @see https://antoniandre.github.io/wave-ui/w-tooltip
    */
   'default': () => any
+
+  /**
+   * Rich tooltip content. Use this slot instead of the `tooltip` prop when the content is
+   * complex (HTML, components, multi-line, etc.). Only used with the new API (default slot = activator).
+   * @see https://antoniandre.github.io/wave-ui/w-tooltip
+   */
+  'tooltip': () => any
 }>
 
 // ----------------------------------------------------------------------------

@@ -15,25 +15,21 @@ w-toolbar.main-toolbar(fixed)
   router-link(to="/release-notes" @click.native="scrollTop(true)")
     strong.version.size--sm(v-html="`v<code>${version}</code>`")
 
-  w-tooltip(z-index="20" append-to=".main-toolbar")
-    template(#activator="{ on }")
-      div.ml1(v-on="on")
-        router-link(to="/release-notes" @click.native="scrollTop(true)")
-          w-icon(lg) mdi mdi-update
-    | Release notes
+  w-tooltip(z-index="20" append-to=".main-toolbar" tooltip="Release notes")
+    div.ml1
+      router-link(to="/release-notes" @click.native="scrollTop(true)")
+        w-icon(lg) mdi mdi-update
 
   w-tooltip(z-index="20" append-to=".main-toolbar")
-    template(#activator="{ on }")
-      a.grey-dark3.ml2(v-on="on" href="https://github.com/antoniandre/wave-ui" target="_blank")
-        w-icon(lg) mdi mdi-github
-    .text-center View the project#[br]on Github
+    a.grey-dark3.ml2(href="https://github.com/antoniandre/wave-ui" target="_blank")
+      w-icon(lg) mdi mdi-github
+    template(#tooltip)
+      .text-center View the project#[br]on Github
 
-  w-tooltip(z-index="20" align-right append-to=".main-toolbar")
-    template(#activator="{ on }")
-      div.ml2.mr1(v-on="on")
-        router-link.pink-light1(to="/backers" @click.native="scrollTop(true)")
-          w-icon(lg) mdi mdi-heart-multiple-outline
-    | Backers
+  w-tooltip(z-index="20" align-right append-to=".main-toolbar" tooltip="Backers")
+    div.ml2.mr1
+      router-link.pink-light1(to="/backers" @click.native="scrollTop(true)")
+        w-icon(lg) mdi mdi-heart-multiple-outline
 
   w-button.mr-1.hamburger-menu(
     v-if="$waveui.breakpoint.xs"

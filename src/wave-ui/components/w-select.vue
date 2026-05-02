@@ -24,77 +24,77 @@ component(
     custom
     min-width="activator"
     v-bind="menuProps || {}")
-    template(#activator)
-      //- Input wrapper.
-      .w-select__selection-wrap(
-        @click="!isDisabled && !isReadonly && onInputFieldClick()"
-        role="button"
-        aria-haspopup="listbox"
-        :aria-expanded="showMenu ? 'true' : 'false'"
-        :aria-owns="selectListId"
-        :aria-activedescendant="`${selectListId}_item-1`"
-        :class="inputWrapClasses")
-        slot(name="icon-left")
-          w-icon.w-select__icon.w-select__icon--inner-left(
-            v-if="innerIconLeft"
-            tag="label"
-            @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
-        .w-select__selection-slot(v-if="$slots.selection")
-          //- inputValue is always an array.
-          slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
-        .w-select__selection(
-          ref="selection-input"
-          @focus="!isDisabled && !isReadonly && onFocus($event)"
-          @blur="onBlur"
-          @keydown="!isDisabled && !isReadonly && onKeydown($event)"
-          v-bind="selectionAttributes"
-          v-html="selectionHtml")
-        //- For standard HTML form submission.
-        input(
-          v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
-          :key="i"
-          type="hidden"
-          :value="val.value === undefined ? '' : val.value.toString()"
-          :name="inputName + (multiple ? '[]' : '')")
-        template(v-if="labelPosition === 'inside' && showLabelInside")
-          label.w-select__label.w-select__label--inside.w-form-el-shakable(
-            v-if="$slots.default || label"
-            :class="labelClasses")
-            slot {{ label }}
-        slot(name="icon-right")
-          w-icon.w-select__icon.w-select__icon--inner-right(
-            v-if="innerIconRight"
-            tag="label"
-            @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
-    w-list(
-      ref="w-list"
-      :model-value="inputValue"
-      @update:model-value="onInput"
-      @item-click="$emit('item-click', $event)"
-      @item-select="onListItemSelect"
-      @keydown="onWListKeydown"
-      @keydown:enter="noUnselect && !multiple && closeMenu()"
-      @keydown:escape="showMenu && (showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
-      :items="selectItems"
-      :multiple="multiple"
-      arrows-navigation
-      return-object
-      :add-ids="selectListId"
-      :no-unselect="noUnselect"
-      :selection-color="selectionColor"
-      :item-color-key="itemColorKey"
-      role="listbox"
-      tabindex="-1")
-      template(v-for="i in items.length" #[`item.${i}`]="{ item, selected, index }")
-        slot(
-          v-if="$slots[`item.${i}`] && $slots[`item.${i}`](item, selected, index)"
-          :name="`item.${i}`"
-          :item="item"
-          :selected="selected"
-          :index="index")
-          | {{ item[itemLabelKey] }}
-        slot(v-else name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabelKey] }}
-
+    //- Input wrapper.
+    .w-select__selection-wrap(
+      @click="!isDisabled && !isReadonly && onInputFieldClick()"
+      role="button"
+      aria-haspopup="listbox"
+      :aria-expanded="showMenu ? 'true' : 'false'"
+      :aria-owns="selectListId"
+      :aria-activedescendant="`${selectListId}_item-1`"
+      :class="inputWrapClasses")
+      slot(name="icon-left")
+        w-icon.w-select__icon.w-select__icon--inner-left(
+          v-if="innerIconLeft"
+          tag="label"
+          @click="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
+      .w-select__selection-slot(v-if="$slots.selection")
+        //- inputValue is always an array.
+        slot(name="selection" :item="multiple ? inputValue : inputValue[0]")
+      .w-select__selection(
+        ref="selection-input"
+        @focus="!isDisabled && !isReadonly && onFocus($event)"
+        @blur="onBlur"
+        @keydown="!isDisabled && !isReadonly && onKeydown($event)"
+        v-bind="selectionAttributes"
+        v-html="selectionHtml")
+      //- For standard HTML form submission.
+      input(
+        v-for="(val, i) in (inputValue.length ? inputValue : [{}])"
+        :key="i"
+        type="hidden"
+        :value="val.value === undefined ? '' : val.value.toString()"
+        :name="inputName + (multiple ? '[]' : '')")
+      template(v-if="labelPosition === 'inside' && showLabelInside")
+        label.w-select__label.w-select__label--inside.w-form-el-shakable(
+          v-if="$slots.default || label"
+          :class="labelClasses")
+          slot {{ label }}
+      slot(name="icon-right")
+        w-icon.w-select__icon.w-select__icon--inner-right(
+          v-if="innerIconRight"
+          tag="label"
+          @click="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
+    template(#content)
+      w-list(
+        ref="w-list"
+        :model-value="inputValue"
+        @update:model-value="onInput"
+        @item-click="$emit('item-click', $event)"
+        @item-select="onListItemSelect"
+        @keydown="onWListKeydown"
+        @keydown:enter="noUnselect && !multiple && closeMenu()"
+        @keydown:escape="showMenu && (showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
+        :items="selectItems"
+        :multiple="multiple"
+        arrows-navigation
+        return-object
+        :add-ids="selectListId"
+        :no-unselect="noUnselect"
+        :selection-color="selectionColor"
+        :item-color-key="itemColorKey"
+        role="listbox"
+        tabindex="-1")
+        template(v-for="i in items.length" #[`item.${i}`]="{ item, selected, index }")
+          slot(
+            v-if="$slots[`item.${i}`] && $slots[`item.${i}`](item, selected, index)"
+            :name="`item.${i}`"
+            :item="item"
+            :selected="selected"
+            :index="index")
+            | {{ item[itemLabelKey] }}
+          slot(v-else name="item" :item="item" :selected="selected" :index="index") {{ item[itemLabelKey] }}
+  
   template(v-if="labelPosition === 'right'")
     label.w-select__label.w-select__label--right.w-form-el-shakable(
       v-if="$slots.default || label"

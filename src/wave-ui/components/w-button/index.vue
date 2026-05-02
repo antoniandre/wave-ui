@@ -1,9 +1,9 @@
 <template lang="pug">
 component(v-if="tooltip" is="w-tooltip" v-bind="tooltipProps")
-  template(#activator="{ on }")
-    button-partial(v-bind="buttonProps" v-on="on")
-      slot
-  div(v-html="tooltip")
+  button-partial(v-bind="buttonProps")
+    slot
+  template(#tooltip)
+    div(v-html="tooltip")
 button-partial(v-else v-bind="buttonProps")
   slot
   template(#loading)

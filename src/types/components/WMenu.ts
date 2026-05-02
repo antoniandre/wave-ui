@@ -303,18 +303,27 @@ export interface WaveMenuMethods extends MethodOptions {
 // ----------------------------------------------------------------------------
 export type WaveMenuSlots = SlotsType<{
   /**
-   * `This slot is required and must have the `v-on="on"` directive set on it for the menu to toggle correctly.`
+   * Place the element that triggers the menu inside this slot. Event listeners are attached
+   * automatically — no `v-on="on"` binding is required on the activator element.
    * The activator can be any visible DOM element or mounted component.
-   * @param {any} on TODO: Describe me!
+   * When this slot is used (legacy API), the default slot becomes the menu content.
    * @see https://antoniandre.github.io/wave-ui/w-menu
    */
-  'activator': (_: { on: any }) => any
+  'activator': () => any
 
   /**
-   * The menu content.
+   * **New API:** When no `#activator` slot is used, the default slot is the activator element.
+   * **Legacy API:** When an `#activator` slot is provided, the default slot is the menu content.
    * @see https://antoniandre.github.io/wave-ui/w-menu
    */
   'default': () => any
+
+  /**
+   * The menu body content. Used with the new API (default slot = activator).
+   * When `custom` is `false` (default), the content is placed inside a `w-card`.
+   * @see https://antoniandre.github.io/wave-ui/w-menu
+   */
+  'content': () => any
 
   /**
    * By default (when `custom` is set to false), the menu uses a `w-card`. This slot allows a custom title for the `w-card`.

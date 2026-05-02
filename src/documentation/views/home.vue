@@ -10,9 +10,9 @@
 
     .version
       w-tooltip(z-index="20")
-        template(#activator="{ on }")
-          w-button.mr2(v-on="on" text lg icon="mdi mdi-github" route="https://github.com/antoniandre/wave-ui" target="_blank")
-        .size--xs.text-nowrap View the project on Github
+        w-button.mr2(text lg icon="mdi mdi-github" route="https://github.com/antoniandre/wave-ui" target="_blank")
+        template(#tooltip)
+          .size--xs.text-nowrap View the project on Github
       em(v-html="`Version ${version}`")
 
     svg.wave(viewBox="0 0 1000 300" preserveAspectRatio="none")

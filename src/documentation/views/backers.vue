@@ -9,18 +9,14 @@ main
 
     w-flex.align-center.wrap.justify-center.backers
       .backer.ma1(v-for="backer in backers" :key="backer.username")
-        w-tooltip
-          template(#activator="{ on }")
-            a(:href="backer.url" target="_blank" v-on="on")
-              img.avatar(alt="" :src="backer.avatar" @error="$event.target.src = emptyGif")
-              w-icon.octocat(xl) mdi mdi-github
-          | {{ backer.username }}
-      w-tooltip
-        template(#activator="{ on }")
-          .backer.plus.ma1
-            a.mx1(href="https://github.com/sponsors/antoniandre" target="_blank" v-on="on")
-              w-icon.white(xl) wi-plus
-        | Add yourself!
+        w-tooltip(:tooltip="backer.username")
+          a(:href="backer.url" target="_blank")
+            img.avatar(alt="" :src="backer.avatar" @error="$event.target.src = emptyGif")
+            w-icon.octocat(xl) mdi mdi-github
+      w-tooltip(tooltip="Add yourself!")
+        .backer.plus.ma1
+          a.mx1(href="https://github.com/sponsors/antoniandre" target="_blank")
+            w-icon.white(xl) wi-plus
 
     p.mt10
       | If you would like to support Wave UI, you can

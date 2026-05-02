@@ -5,26 +5,20 @@
     .example__render.grow(:class="contentClass")
       slot
     .buttons
-      w-tooltip(left)
-        template(#activator="{ on }")
-          w-button(
-            v-on="on"
-            @click="showSource = !showSource"
-            lg
-            icon="mdi mdi-code-tags"
-            text
-            color="primary")
-        | View the source code
-      w-tooltip(left)
-        template(#activator="{ on }")
-          w-button(
-            v-on="on"
-            @click="createCodepen"
-            lg
-            icon="mdi mdi-codepen"
-            text
-            color="primary")
-        | Edit in Codepen
+      w-tooltip(left tooltip="View the source code")
+        w-button(
+          @click="showSource = !showSource"
+          lg
+          icon="mdi mdi-code-tags"
+          text
+          color="primary")
+      w-tooltip(left tooltip="Edit in Codepen")
+        w-button(
+          @click="createCodepen"
+          lg
+          icon="mdi mdi-codepen"
+          text
+          color="primary")
 
   w-transition-expand(y)
     .example__source(v-show="showSource")

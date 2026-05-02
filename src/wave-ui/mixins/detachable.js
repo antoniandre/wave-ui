@@ -2,6 +2,10 @@
  * A detachable element is an element that can be appended to another DOM node
  * (but keeping data-driven Vue DOM refreshes).
  * This mixin is used by w-tooltip & w-menu.
+ *
+ * Vue Teleport handles moving the floating content to the right DOM node.
+ * Event listeners are auto-attached to the activator slot's root element so
+ * callers no longer need the `template(#activator="{ on }") v-on="on"` pattern.
  */
 
 import { consoleWarn } from '../utils/console'
@@ -55,7 +59,11 @@ export default {
     // Set to true by computeDetachableCoords after positioning, false until then.
     // Components use this to bind visibility:hidden, so the element is never visible at the
     // wrong position before its coordinates are calculated.
-    detachableReady: false
+    detachableReady: false,
+    // The Vue Teleport target. Stored as data (not computed) so it is resolved lazily at
+    // open()-time — after the DOM is committed — rather than during VNode creation where
+    // document.querySelector() may return null for elements that are part of the same render batch.
+    teleportTarget: null
   }),
 
   computed: {
@@ -74,7 +82,8 @@ export default {
 
       let target = this.appendTo || defaultTarget
       if (target === true) target = defaultTarget
-      else if (this.appendTo === 'activator') target = this.$el.previousElementSibling || this.$el.nextElementSibling
+      // When appendTo is 'activator', teleport into the activator element itself.
+      else if (this.appendTo === 'activator') target = this.activatorEl
       else if (target && !['object', 'string'].includes(typeof target)) target = defaultTarget
       else if (typeof target === 'object' && !target.nodeType) {
         target = defaultTarget
@@ -111,7 +120,9 @@ export default {
           if (typeof document === 'undefined') return null
           return document.querySelector(this.activator)
         }
-        return this.$el.nextElementSibling
+        // For slot-based activators the component root ($el) is a comment fragment anchor in
+        // Vue 3 multi-root components; nextElementSibling is the activator slot's first real element.
+        return this.$el?.nextElementSibling || null
       },
       set () {}
     },
@@ -154,6 +165,7 @@ export default {
     // next open starts hidden. Done here rather than on close() to let the leave animation play.
     onAfterLeave () {
       this.detachableReady = false
+      this.detachableEl = null
     },
 
     unbindActivatorDocEvents () {
@@ -164,6 +176,61 @@ export default {
         })
         this.docEventListenersHandlers = []
       }
+    },
+
+    /**
+     * Single delegating handler for auto-attached slot-activator DOM events.
+     * Reads the current activatorEventHandlers computed each invocation so that changes to
+     * `disable`, `showOnHover`, etc. are always reflected without re-attaching.
+     */
+    _handleActivatorEvent (e) {
+      const handler = this.activatorEventHandlers[e.type]
+      if (handler) handler(e)
+    },
+
+    /**
+     * Attach DOM event listeners directly to the activator slot's root element.
+     * Called once from mounted(); a single delegating handler covers all event types so we never
+     * need to re-attach when props like `disable` or `showOnHover` change.
+     * ! \ This function uses the DOM - NO SSR.
+     */
+    _attachActivatorListeners () {
+      if (typeof document === 'undefined') return
+      const el = this.activatorEl
+      if (!el) return
+
+      // Inspect the activator slot's first VNode for pre-declared event handlers.
+      // When the slot root already declares onClick / onMouseenter etc. — whether on a native
+      // element (w-select, w-autocomplete) or on a component (w-button @click="...") — the
+      // parent is managing that event itself. Skip auto-attaching the competing handler to avoid
+      // open/close races (both toggle() and the explicit handler firing on the same click).
+      // With the new API, the default slot is the activator (no #activator slot used).
+      let existingHandlers = {}
+      const activatorSlot = this.$slots.activator || this.$slots.default
+      if (activatorSlot) {
+        const vnodes = activatorSlot()
+        const firstVnode = vnodes?.[0]
+        existingHandlers = firstVnode?.props || {}
+      }
+
+      this._activatorDomEl = el
+      this._activatorAttachedEvents = []
+      ;['click', 'mouseenter', 'mouseleave', 'focus', 'blur'].forEach(evt => {
+        // Skip if the slot element already binds this event (camelCase Vue prop name: onClick etc.).
+        const vueProp = `on${evt.charAt(0).toUpperCase()}${evt.slice(1)}`
+        if (existingHandlers[vueProp]) return
+        el.addEventListener(evt, this._handleActivatorEvent)
+        this._activatorAttachedEvents.push(evt)
+      })
+    },
+
+    _detachActivatorListeners () {
+      if (!this._activatorDomEl) return
+      ;(this._activatorAttachedEvents || []).forEach(evt => {
+        this._activatorDomEl.removeEventListener(evt, this._handleActivatorEvent)
+      })
+      this._activatorDomEl = null
+      this._activatorAttachedEvents = []
     },
 
     // ! \ This function uses the DOM - NO SSR (only trigger from beforeMount and later).
@@ -181,13 +248,22 @@ export default {
 
       // Hide before entering the DOM; handles rapid re-opens where detachableReady is still true.
       this.detachableReady = false
+
+      // Resolve the teleport target here, at open()-time, so the DOM is fully committed and
+      // detachableDefaultRoot() (for nested menus/tooltips) returns the correct element.
+      // Setting teleportTarget and detachableVisible in the same synchronous block lets Vue
+      // batch both into a single render — the content is never shown at the wrong location.
+      if (typeof document !== 'undefined') this.teleportTarget = this.appendToTarget
+
       this.detachableVisible = true
 
       // If the activator is external, there might be multiple,
       // so on open, the activator will be set to the event target.
       if (this.activator) this.activatorEl = e.target
 
-      await this.insertInDOM()
+      // Wait for Vue Teleport to render the floating element into the target DOM node.
+      await this.$nextTick()
+      this.detachableEl = this.$refs.detachable?.$el || this.$refs.detachable
 
       if (this.minWidth === 'activator' && this.activatorEl) {
         this.activatorWidth = this.activatorEl.offsetWidth
@@ -361,32 +437,6 @@ export default {
       }
     },
 
-    insertInDOM () {
-      return new Promise(resolve => {
-        this.$nextTick(() => {
-          this.detachableEl = this.$refs.detachable?.$el || this.$refs.detachable
-
-          // Move the tooltip/menu elsewhere in the DOM.
-          if (this.detachableEl && this.appendToTarget) this.appendToTarget.appendChild(this.detachableEl)
-          resolve()
-        })
-      })
-    },
-
-    removeFromDOM () {
-      if (typeof document !== 'undefined') {
-        document.removeEventListener('mousedown', this.onOutsideMousedown)
-      }
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('resize', this.onResize)
-      }
-      if (this.detachableEl?.parentNode) {
-        this.detachableVisible = false
-        this.detachableEl.remove()
-        this.detachableEl = null
-      }
-    },
-
     // If the activator is external, add event listeners to the document and check the target is
     // the activator when toggling.
     // This way, the activator can be a future DOM element, that is not yet in the DOM.
@@ -401,8 +451,8 @@ export default {
         eventName = eventName.replace('mouseenter', 'mouseover').replace('mouseleave', 'mouseout')
         const handlerWrap = e => {
           // The activator can be a DOM string selector a ref or a DOM node.
-          if (activatorIsString && e.target?.matches && e.target.matches(this.activator)) handler(e)
-          else if (e.target === this.activatorEl || this.activatorEl.contains(e.target)) handler(e)
+          if (activatorIsString && e.target?.matches?.(this.activator)) handler(e)
+          else if (e.target === this.activatorEl || this.activatorEl?.contains(e.target)) handler(e)
         }
         document.addEventListener(eventName, handlerWrap)
         // The event listeners handlers have to be removed the exact same way they have been attached.
@@ -414,14 +464,18 @@ export default {
   },
 
   mounted () {
-    // If the activator is external.
-    if (this.activator) this.bindActivatorEvents()
-
-    // If the activator seems to be undefined, it is probably a DOM node or Vue ref,
-    // so check it on nextTick.
+    if (this.activator) {
+      // External activator: attach via document-level delegation.
+      this.bindActivatorEvents()
+    }
     else {
+      // Slot-based activator: auto-attach DOM listeners to the slot's root element on next tick
+      // so the slot content is guaranteed to be in the DOM.
       this.$nextTick(() => {
+        // Re-check activator prop (might have resolved from a Vue ref after the tick).
         if (this.activator) this.bindActivatorEvents()
+        else this._attachActivatorListeners()
+
         if (this.modelValue && !this.disable) this.open({ target: this.activatorEl })
       })
     }
@@ -438,10 +492,8 @@ export default {
   unmounted () {
     this.close()
 
-    this.removeFromDOM()
-
-    // Remove the event listeners the exact same way they have been defined.
-    // Fixes issues on hot-reloading.
+    // Clean up slot-activator DOM listeners and external-activator document listeners.
+    this._detachActivatorListeners()
     this.unbindActivatorDocEvents()
   },
 
@@ -451,6 +503,8 @@ export default {
         this.unbindActivatorDocEvents()
         if (!disabled) this.bindActivatorEvents()
       }
+      // For slot-based activators, _handleActivatorEvent always reads the current
+      // activatorEventHandlers computed which already respects `disable`, so no re-attach needed.
       if (disabled) this.close()
       else if (this.modelValue) this.open({ target: this.activatorEl })
     },
@@ -461,9 +515,10 @@ export default {
         else if (!bool) this.close()
       }
     },
+
+    // Keep teleportTarget in sync when the appendTo prop changes at runtime.
     appendTo () {
-      this.removeFromDOM()
-      this.insertInDOM()
+      if (typeof document !== 'undefined') this.teleportTarget = this.appendToTarget
     }
   }
 }
