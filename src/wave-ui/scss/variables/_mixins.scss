@@ -1,33 +1,32 @@
-@use "sass:map";
-@use "variables" as *;
-
 // This allows each UI component to be used in dark or light theme regardless of the global theme.
 @mixin themeable {
   // Will force the light style on this component.
   &--light {
-    --w-base-bg-color: #{map.get($theme-light, 'base-bg-color')};
-    --w-base-color: #{map.get($theme-light, 'base-color')};
-    --w-contrast-bg-color: #{map.get($theme-light, 'contrast-bg-color')};
-    --w-contrast-color: #{map.get($theme-light, 'contrast-color')};
-    --w-disabled-color: #{map.get($theme-light, 'disabled-color')};
-    color: rgba(var(--w-base-color), 0.7);
+    --w-base-bg-color: #fff;
+    --w-base-color: #000;
+    --w-contrast-bg-color: #000;
+    --w-contrast-color: #fff;
+    --w-caption-color: #a0a0a0;
+    --w-disabled-color: #ccc;
+    color: var(--w-base-color-muted);
   }
   // Will force the dark style on this component.
   &--dark {
-    --w-base-bg-color: #{map.get($theme-dark, 'base-bg-color')};
-    --w-base-color: #{map.get($theme-dark, 'base-color')};
-    --w-contrast-bg-color: #{map.get($theme-dark, 'contrast-bg-color')};
-    --w-contrast-color: #{map.get($theme-dark, 'contrast-color')};
-    --w-disabled-color: #{map.get($theme-dark, 'disabled-color')};
-    color: rgba(var(--w-base-color), 0.7);
+    --w-base-bg-color: #222;
+    --w-base-color: #fff;
+    --w-contrast-bg-color: #fff;
+    --w-contrast-color: #000;
+    --w-caption-color: #6e6e6e;
+    --w-disabled-color: #4a4a4a;
+    color: var(--w-base-color-muted);
   }
 }
 
-@mixin default-transition($duration: $transition-duration, $delay: 0s) {
+@mixin default-transition($duration: var(--w-transition-duration), $delay: 0s) {
   transition: $duration $delay ease-in-out;
 }
 
-@mixin out-back-transition($duration: $transition-duration, $delay: 0s) {
+@mixin out-back-transition($duration: var(--w-transition-duration), $delay: 0s) {
   transition: $duration $delay cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
@@ -78,21 +77,21 @@
 
     &#{$selector}--align-top:before {
       transform: none;
-      top: (2 * $base-increment) - 1px;
+      top: calc(2 * var(--w-base-increment) - 1px);
     }
     &#{$selector}--align-bottom:before {
       transform: none;
       top: auto;
-      bottom: (2 * $base-increment) - 1px;
+      bottom: calc(2 * var(--w-base-increment) - 1px);
     }
     &#{$selector}--align-left:before {
       transform: none;
-      left: (2 * $base-increment) - 1px;
+      left: calc(2 * var(--w-base-increment) - 1px);
     }
     &#{$selector}--align-right:before {
       transform: none;
       left: auto;
-      right: (2 * $base-increment) - 1px;
+      right: calc(2 * var(--w-base-increment) - 1px);
     }
   }
 
@@ -129,8 +128,8 @@
     transform: translateY(-50%);
   }
 
-  &#{$selector}--align-top:after {transform: none;top: 2 * $base-increment;}
-  &#{$selector}--align-bottom:after {transform: none;top: auto;bottom: 2 * $base-increment;}
-  &#{$selector}--align-left:after {transform: none;left: 2 * $base-increment;}
-  &#{$selector}--align-right:after {transform: none;left: auto;right: 2 * $base-increment;}
+  &#{$selector}--align-top:after {transform: none;top: calc(2 * var(--w-base-increment));}
+  &#{$selector}--align-bottom:after {transform: none;top: auto;bottom: calc(2 * var(--w-base-increment));}
+  &#{$selector}--align-left:after {transform: none;left: calc(2 * var(--w-base-increment));}
+  &#{$selector}--align-right:after {transform: none;left: auto;right: calc(2 * var(--w-base-increment));}
 }

@@ -1,11 +1,43 @@
-@use "sass:map";
 @use "variables" as *;
 
 // The CSS variables are used in the dynamic-css.js file in order to reuse the same SCSS
 // variable presets.
 :root {
-  --w-base-increment: #{$base-increment};
+  --w-base-font-size: 14px;
+  // Keeps spacing in sync when only --w-base-font-size is overridden (matches former Sass rounding).
+  --w-base-increment: round(nearest, calc(var(--w-base-font-size) / 4), 1px);
+  // Sass-only: must match $css-scope in _layout.scss and what dynamic-css reads for injected rules.
   --w-css-scope: #{$css-scope};
+  --w-layout-padding: 16px;
+  --w-border-radius: 4px;
+  --w-border-width: 1px;
+  --w-border-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 12%, transparent)};
+  --w-border: var(--w-border-width) solid var(--w-border-color);
+  --w-transition-duration: 0.25s;
+  --w-transition-duration-fast: 0.15s;
+  --w-transition-timing-fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
+  --w-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+                  0 2px 2px 0 rgba(0, 0, 0, 0.15),
+                  0 1px 5px 0 rgba(0, 0, 0, 0.15);
+  --w-form-field-height: round(nearest, calc(2 * var(--w-base-font-size)), 1px);
+  // Even px step (same as former 2 * round(1.3 * $base-font-size / 2)).
+  --w-small-form-el-size: round(nearest, calc(1.3 * var(--w-base-font-size)), 2px);
+  --w-scrollbar-size: 8px;
+
+  @for $i from -6 through -1 {
+    --w-shadow-n#{-1 * $i}: 0 0 round(nearest, calc(#{$i} * var(--w-base-increment)), 1px) rgba(0, 0, 0, max(0.15, calc(0.15 * #{-$i} / 2))) inset;
+  }
+  --w-shadow-0: none;
+  @for $i from 1 through 6 {
+    --w-shadow-#{$i}: 0 0 1px rgba(0, 0, 0, 0.1),
+      round(nearest, calc(var(--w-base-increment) * #{$i} / 4), 1px) round(nearest, calc(var(--w-base-increment) * #{$i} / 4), 1px) round(nearest, calc(#{$i} * var(--w-base-increment)), 1px) rgba(0, 0, 0, max(0.15, calc(0.15 * #{$i} / 2)));
+  }
+
+  --w-base-color-muted: #{color-mix(in srgb, var(--w-base-color) 70%, transparent)};
+  --w-overlay-scrim-color: #{color-mix(in srgb, #000 30%, transparent)};
+  --w-surface-hover-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 5%, transparent)};
+  --w-surface-active-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 8%, transparent)};
+  --w-surface-selected-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 15%, transparent)};
   --w-contrast-bg-o025-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 2.5%, transparent)};
   --w-contrast-bg-o05-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 5%, transparent)};
   --w-contrast-bg-o1-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 10%, transparent)};
@@ -18,26 +50,59 @@
   --w-contrast-bg-o8-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 80%, transparent)};
   --w-contrast-bg-o9-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 90%, transparent)};
 
+  --w-detachable-bg-color: var(--w-base-bg-color);
+  --w-detachable-color: var(--w-base-color);
+  --w-confirm-bg-color: var(--w-detachable-bg-color);
+  --w-confirm-color: var(--w-detachable-color);
+  --w-dialog-bg-color: var(--w-base-bg-color);
+  --w-divider-color: var(--w-border-color);
+  --w-drawer-max-size: 380px;
+  --w-drawer-bg-color: var(--w-base-bg-color);
+  --w-menu-bg-color: var(--w-detachable-bg-color);
+  --w-menu-color: var(--w-detachable-color);
+  --w-progress-bg-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 15%, transparent)};
+  --w-rating-bg-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 25%, transparent)};
+  --w-slider-height: var(--w-base-increment);
+  --w-slider-track-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 15%, transparent)};
+  --w-slider-thumb-button-bg-color: var(--w-base-bg-color);
+  --w-slider-thumb-label-bg-color: var(--w-base-bg-color);
+  --w-slider-thumb-label-color: #{color-mix(in srgb, var(--w-base-color) 75%, transparent)};
+  --w-slider-step-label-bg-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 20%, transparent)};
+  --w-slider-step-label-color: #{color-mix(in srgb, var(--w-base-color) 50%, transparent)};
+  --w-switch-inactive-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 25%, transparent)};
+  --w-switch-thumb-color: var(--w-base-bg-color);
+  --w-table-tr-odd-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 2%, transparent)};
+  --w-table-tr-hover-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 5%, transparent)};
+  --w-table-color: #{color-mix(in srgb, var(--w-contrast-color) 70%, transparent)};
+  --w-textarea-line-height: 1.2;
+  --w-timeline-bullet-color: var(--w-base-bg-color);
+  --w-timeline-bg-color: #{color-mix(in srgb, var(--w-contrast-bg-color) 25%, transparent)};
+  --w-toolbar-max-size: 380px;
+  --w-toolbar-bg-color: var(--w-base-bg-color);
+  --w-tooltip-bg-color: var(--w-detachable-bg-color);
+  --w-tooltip-color: var(--w-detachable-color);
+  --w-tooltip-border-color: var(--w-border-color);
+
   background-color: var(--w-base-bg-color);
   color: var(--w-base-color);
 }
 
 :root[data-theme="light"] {
-  --w-base-bg-color: #{map.get($theme-light, 'base-bg-color')};
-  --w-base-color: #{map.get($theme-light, 'base-color')};
-  --w-contrast-bg-color: #{map.get($theme-light, 'contrast-bg-color')};
-  --w-contrast-color: #{map.get($theme-light, 'contrast-color')};
-  --w-caption-color: #{map.get($theme-light, 'caption-color')};
-  --w-disabled-color: #{map.get($theme-light, 'disabled-color')};
+  --w-base-bg-color: #fff;
+  --w-base-color: #000;
+  --w-contrast-bg-color: #000;
+  --w-contrast-color: #fff;
+  --w-caption-color: #a0a0a0;
+  --w-disabled-color: #ccc;
 }
 
 :root[data-theme="dark"] {
-  --w-base-bg-color: #{map.get($theme-dark, 'base-bg-color')};
-  --w-base-color: #{map.get($theme-dark, 'base-color')};
-  --w-contrast-bg-color: #{map.get($theme-dark, 'contrast-bg-color')};
-  --w-contrast-color: #{map.get($theme-dark, 'contrast-color')};
-  --w-caption-color: #{map.get($theme-dark, 'caption-color')};
-  --w-disabled-color: #{map.get($theme-dark, 'disabled-color')};
+  --w-base-bg-color: #222;
+  --w-base-color: #fff;
+  --w-contrast-bg-color: #fff;
+  --w-contrast-color: #000;
+  --w-caption-color: #6e6e6e;
+  --w-disabled-color: #4a4a4a;
 }
 
 * {
@@ -72,13 +137,13 @@ a {text-decoration: none;}
 }
 
 .w-main {
-  padding-left: 3 * $base-increment;
-  padding-right: 3 * $base-increment;
+  padding-left: calc(3 * var(--w-base-increment));
+  padding-right: calc(3 * var(--w-base-increment));
 }
 
 // Structure classes.
 // ----------------------------------------------
 .content-wrap {
   position: relative;
-  padding: $layout-padding;
+  padding: var(--w-layout-padding);
 }

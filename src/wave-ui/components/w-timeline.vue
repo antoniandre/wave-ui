@@ -43,14 +43,14 @@ export default {
 
 <style lang="scss">
 .w-timeline {
-  margin-left: $base-increment;
+  margin-left: var(--w-base-increment);
 
   @include themeable;
 }
 
 .w-timeline-item {
-  padding-left: 5 * $base-increment;
-  padding-bottom: 3 * $base-increment;
+  padding-left: calc(var(--w-base-increment) * 5);
+  padding-bottom: calc(var(--w-base-increment) * 3);
   list-style-type: none;
   position: relative;
 
@@ -61,10 +61,10 @@ export default {
     position: absolute;
     top: 2px;
     left: 0;
-    background-color: $timeline-bullet-color;
+    background-color: var(--w-timeline-bullet-color);
     border-radius: 1em;
     border: 1px solid currentColor;
-    width: $base-font-size;
+    width: var(--w-base-font-size);
     aspect-ratio: 1;
     min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
     transform: translateX(-50%);
@@ -80,7 +80,7 @@ export default {
     top: 2px;
     bottom: -2px;
     left: -1px;
-    border-left: 2px solid $timeline-bg-color;
+    border-left: 2px solid var(--w-timeline-bg-color);
   }
 }
 </style>

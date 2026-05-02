@@ -694,7 +694,7 @@ export default {
     }
     .w-tabs__slider {
       opacity: 1;
-      background-color: $base-bg-color;
+      background-color: var(--w-base-bg-color);
       bottom: 0;
       height: 100%;
       border-radius: 6px;

@@ -139,7 +139,7 @@ export default {
     flex-grow: 1;
     max-width: 95%;
     overflow: auto;
-    background-color: $dialog-bg-color;
+    background-color: var(--w-dialog-bg-color);
 
     @include themeable;
 

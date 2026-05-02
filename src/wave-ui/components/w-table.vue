@@ -763,8 +763,8 @@ $tr-border-top: 1px;
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: $border-radius;
-  border: $border;
+  border-radius: var(--w-border-radius);
+  border: var(--w-border);
 
   &--loading {overflow: hidden;}
 
@@ -800,7 +800,7 @@ $tr-border-top: 1px;
   // ------------------------------------------------------
   thead {position: relative;}
 
-  &__header {padding: $base-increment;}
+  &__header {padding: var(--w-base-increment);}
   &__header--resizable {
     overflow: hidden;
     white-space: nowrap;
@@ -810,7 +810,7 @@ $tr-border-top: 1px;
   &--fixed-header thead {
     position: sticky;
     top: 0;
-    background-color: $base-bg-color;
+    background-color: var(--w-base-bg-color);
     z-index: 1; // For sticky columns to go under.
 
     &:after {
@@ -819,7 +819,7 @@ $tr-border-top: 1px;
       bottom: 0;
       left: 0;
       right: 0;
-      border-bottom: $border;
+      border-bottom: var(--w-border);
     }
   }
 
@@ -832,7 +832,7 @@ $tr-border-top: 1px;
       position: absolute;
       inset: 0;
       z-index: -1;
-      background-color: $base-bg-color;
+      background-color: var(--w-base-bg-color);
     }
   }
 
@@ -864,7 +864,7 @@ $tr-border-top: 1px;
 
     &:before {
       content: '';
-      border-right: $border;
+      border-right: var(--w-border);
       position: absolute;
       left: 50%;
       top: 0;
@@ -893,19 +893,19 @@ $tr-border-top: 1px;
     justify-content: center;
     height: 100%;
     width: 100%;
-    padding-top: 2 * $base-increment;
-    padding-bottom: 2 * $base-increment;
+    padding-top: calc(var(--w-base-increment) * 2);
+    padding-bottom: calc(var(--w-base-increment) * 2);
   }
 
   // Table body.
   // ------------------------------------------------------
-  tbody {transition: opacity $transition-duration;}
+  tbody {transition: opacity var(--w-transition-duration);}
   &--loading-in-header tbody {opacity: 0.6;}
 
   tbody tr {border-top: $tr-border-top solid color-mix(in srgb, var(--w-base-color) 6%, transparent);}
   // Don't apply built-in bg color if a bg color is already found on a tr.
-  tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: $table-tr-odd-color;}
-  tbody .w-table__row:hover:not(.no-data):not([class*="--bg"]) {background-color: $table-tr-hover-color;}
+  tbody tr:nth-child(odd):not(.no-data):not([class*="--bg"]) {background-color: var(--w-table-tr-odd-color);}
+  tbody .w-table__row:hover:not(.no-data):not([class*="--bg"]) {background-color: var(--w-table-tr-hover-color);}
 
   &__row--selected td {position: relative;}
   &__row--selected td:before {
@@ -917,9 +917,9 @@ $tr-border-top: 1px;
     pointer-events: none;
   }
 
-  &__cell {padding: math.round(divide($base-increment, 2)) $base-increment;}
-  &__header:first-child, &__cell:first-child {padding-left: 2 * $base-increment;}
-  &__header:last-child, &__cell:last-child {padding-right: 2 * $base-increment;}
+  &__cell {padding: calc(var(--w-base-increment) / 2) var(--w-base-increment);}
+  &__header:first-child, &__cell:first-child {padding-left: calc(var(--w-base-increment) * 2);}
+  &__header:last-child, &__cell:last-child {padding-right: calc(var(--w-base-increment) * 2);}
 
   &--resizable-cols &__cell {
     position: relative;
@@ -944,14 +944,14 @@ $tr-border-top: 1px;
       bottom: 0;
       z-index: -1;
     }
-    &:before {background-color: $base-bg-color;}
+    &:before {background-color: var(--w-base-bg-color);}
   }
-  tr:nth-child(odd) &__cell--sticky:after {background-color: $table-tr-odd-color;}
-  tr:hover &__cell--sticky:after {background-color: $table-tr-hover-color;}
+  tr:nth-child(odd) &__cell--sticky:after {background-color: var(--w-table-tr-odd-color);}
+  tr:hover &__cell--sticky:after {background-color: var(--w-table-tr-hover-color);}
 
   .no-data &__cell {
     background-color: rgba(255, 255, 255, 0.2);
-    padding: (2 * $base-increment) $base-increment;
+    padding: calc(var(--w-base-increment) * 2) var(--w-base-increment);
   }
 
   // Table footer.
@@ -959,7 +959,7 @@ $tr-border-top: 1px;
   &--fixed-footer tfoot {
     position: sticky;
     bottom: -1px;
-    background-color: $base-bg-color;
+    background-color: var(--w-base-bg-color);
     z-index: 1; // For sticky columns to go under.
 
     &:after {
@@ -968,13 +968,13 @@ $tr-border-top: 1px;
       top: 0;
       left: 0;
       right: 0;
-      border-top: $border;
+      border-top: var(--w-border);
     }
   }
 
   &__footer &__cell {
-    padding-top: $base-increment;
-    padding-bottom: $base-increment;
+    padding-top: var(--w-base-increment);
+    padding-bottom: var(--w-base-increment);
   }
 
   // Pagination.
@@ -983,8 +983,8 @@ $tr-border-top: 1px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 2 * $base-increment;
-    padding: $base-increment 2 * $base-increment;
+    gap: calc(var(--w-base-increment) * 2);
+    padding: var(--w-base-increment) calc(var(--w-base-increment) * 2);
 
     .w-pagination__items-per-page {
       flex: 0 0 auto;
@@ -996,7 +996,7 @@ $tr-border-top: 1px;
       padding-left: 1px; // Prevent overflow causing scrollbar.
       padding-right: 1px;
       max-height: 4.5em;
-      gap: 0.5 * $base-increment;
+      gap: calc(var(--w-base-increment) * 0.5);
       overflow-y: hidden;
     }
 
@@ -1009,20 +1009,20 @@ $tr-border-top: 1px;
       background-color: color-mix(in srgb, var(--w-base-bg-color) 40%, transparent);
 
       &:hover:before {
-        background-color: $primary;
+        background-color: var(--w-primary-color);
         opacity: 0.1;
       }
       &:active:before {
-        background-color: $primary;
+        background-color: var(--w-primary-color);
         opacity: 0.2;
       }
 
       &--active {
         font-weight: bold;
-        color: $primary;
+        color: var(--w-primary-color);
 
         &:before {
-          background-color: $primary;
+          background-color: var(--w-primary-color);
           opacity: 0.1;
         }
       }
@@ -1049,14 +1049,14 @@ $tr-border-top: 1px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-top: $base-increment;
-    padding-bottom: $base-increment;
+    padding-top: var(--w-base-increment);
+    padding-bottom: var(--w-base-increment);
   }
 
   .w-table__cell {
     display: flex;
-    padding-left: 2 * $base-increment;
-    padding-right: 2 * $base-increment;
+    padding-left: calc(var(--w-base-increment) * 2);
+    padding-right: calc(var(--w-base-increment) * 2);
   }
 
   tr:not(.no-data) .text-center,

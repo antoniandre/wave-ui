@@ -361,12 +361,10 @@ export default {
 </script>
 
 <style lang="scss">
-@use "sass:math";
-
 .w-tabs {
   z-index: 1;
-  border-radius: $border-radius;
-  border: $border;
+  border-radius: var(--w-border-radius);
+  border: var(--w-border);
   overflow: hidden;
 
   @include themeable;
@@ -382,13 +380,13 @@ export default {
 
     &--center {justify-content: center;}
     &--right {justify-content: flex-end;}
-    .w-tabs--pill-slider & {padding-left: $base-increment;}
+    .w-tabs--pill-slider & {padding-left: var(--w-base-increment);}
 
     .w-tabs--card &:after {
       content: '';
       display: flex;
       flex-grow: 1;
-      border-bottom: $border;
+      border-bottom: var(--w-border);
       align-self: flex-end;
     }
   }
@@ -399,18 +397,18 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
-    padding: (2 * $base-increment) (3 * $base-increment);
+    padding: calc(var(--w-base-increment) * 2) calc(var(--w-base-increment) * 3);
     justify-content: center;
-    font-size: math.round(1.2 * $base-font-size);
-    transition: $transition-duration ease-in-out, flex-grow 0s, flex 0s; // `flex` for Safari.
+    font-size: round(nearest, calc(1.2 * var(--w-base-font-size)), 1px);
+    transition: var(--w-transition-duration) ease-in-out, flex-grow 0s, flex 0s; // `flex` for Safari.
     user-select: none;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 
     .w-tabs--fill-bar & {flex-grow: 1;flex-basis: 0;}
     .w-tabs--card & {
-      border: $border;
-      border-radius: $border-radius $border-radius 0 0;
+      border: var(--w-border);
+      border-radius: var(--w-border-radius) var(--w-border-radius) 0 0;
       margin-right: -1px;
     }
     .w-tabs--card &--active {border-bottom-color: transparent;}
@@ -425,13 +423,12 @@ export default {
       content: '';
       position: absolute;
       inset: 0;
-      background-color: currentColor;
-      opacity: 0;
-      transition: $fast-transition-duration;
+      background-color: transparent;
+      transition: background-color var(--w-transition-duration-fast);
     }
 
-    &--active:before, &:focus:before, &:hover:before {opacity: 0.05;}
-    &:active:before {opacity: 0.08;}
+    &--active:before, &:focus:before, &:hover:before {background-color: color-mix(in srgb, currentColor 5%, transparent);}
+    &:active:before {background-color: color-mix(in srgb, currentColor 8%, transparent);}
     &--disabled:before {display: none;}
   }
   &--pill-slider &__bar-item:before {display: none;}
@@ -455,7 +452,7 @@ export default {
     bottom: 0;
     height: 2px;
     background-color: currentColor;
-    transition: $transition-duration ease-in-out;
+    transition: var(--w-transition-duration) ease-in-out;
   }
   &--pill-slider &__slider {
     opacity: 0.1;
@@ -473,12 +470,12 @@ export default {
     flex-grow: 1;
 
     .w-tabs--card & {
-      border: $border;
+      border: var(--w-border);
       border-top: none;
-      border-radius: 0 0 $border-radius $border-radius;
+      border-radius: 0 0 var(--w-border-radius) var(--w-border-radius);
     }
   }
-  &__content {padding: 3 * $base-increment;}
+  &__content {padding: calc(var(--w-base-increment) * 3);}
 }
 
 .w-tabs-slide-left-leave-active,
@@ -490,8 +487,8 @@ export default {
   overflow: hidden;
 }
 
-.w-tabs-slide-left-enter-active {animation: w-tabs-slide-left-enter $transition-duration + 0.15s;}
-.w-tabs-slide-left-leave-active {animation: w-tabs-slide-left-leave $transition-duration + 0.15s;}
+.w-tabs-slide-left-enter-active {animation: w-tabs-slide-left-enter calc(var(--w-transition-duration) + 0.15s);}
+.w-tabs-slide-left-leave-active {animation: w-tabs-slide-left-leave calc(var(--w-transition-duration) + 0.15s);}
 @keyframes w-tabs-slide-left-enter {
   0% {transform: translateX(100%);}
   100% {transform: translateX(0);}
@@ -501,8 +498,8 @@ export default {
   100% {transform: translateX(-100%);}
 }
 
-.w-tabs-slide-right-enter-active {animation: w-tabs-slide-right-enter $transition-duration + 0.15s;}
-.w-tabs-slide-right-leave-active {animation: w-tabs-slide-right-leave $transition-duration + 0.15s;}
+.w-tabs-slide-right-enter-active {animation: w-tabs-slide-right-enter calc(var(--w-transition-duration) + 0.15s);}
+.w-tabs-slide-right-leave-active {animation: w-tabs-slide-right-leave calc(var(--w-transition-duration) + 0.15s);}
 @keyframes w-tabs-slide-right-enter {
   0% {transform: translateX(-100%);}
   100% {transform: translateX(0);}

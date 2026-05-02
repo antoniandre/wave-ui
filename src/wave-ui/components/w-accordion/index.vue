@@ -222,6 +222,6 @@ export default {
 
   @include themeable;
 
-  &--shadow {box-shadow: $box-shadow;}
+  &--shadow {box-shadow: var(--w-box-shadow);}
 }
 </style>

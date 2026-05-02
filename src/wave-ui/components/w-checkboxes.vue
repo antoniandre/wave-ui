@@ -128,7 +128,7 @@ export default {
     flex-wrap: wrap;
     vertical-align: middle;
 
-    .w-checkbox {margin-right: 3 * $base-increment;}
+    .w-checkbox {margin-right: calc(var(--w-base-increment) * 3);}
     .w-checkbox:last-child {margin-right: 0;}
   }
 }

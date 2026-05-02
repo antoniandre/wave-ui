@@ -175,7 +175,7 @@ $inactive-color: #666;
   &__input {
     position: relative;
     border-radius: 100%;
-    width: $small-form-el-size;
+    width: var(--w-small-form-el-size);
     aspect-ratio: 1;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
@@ -185,11 +185,11 @@ $inactive-color: #666;
     transition: 0.3s ease-in-out;
     cursor: inherit;
 
-    .w-radio--disabled & {border-color: $disabled-color;}
+    .w-radio--disabled & {border-color: var(--w-disabled-color);}
 
     // Checked state.
     :checked ~ & {border-color: currentColor;}
-    .w-radio--disabled :checked ~ & {border-color: $disabled-color;}
+    .w-radio--disabled :checked ~ & {border-color: var(--w-disabled-color);}
   }
 
   // The inner bullet - visible when checked.
@@ -200,7 +200,7 @@ $inactive-color: #666;
     border: 0 solid $inactive-color;
     // Prevents a tiny hole while animating and in some browser zoom levels.
     background-color: $inactive-color;
-    transition: $transition-duration;
+    transition: var(--w-transition-duration);
 
     :checked ~ & {
       border-width: 4px;
@@ -209,9 +209,9 @@ $inactive-color: #666;
       background-color: currentColor;
     }
     .w-radio--disabled & {
-      border-color: $disabled-color;
+      border-color: var(--w-disabled-color);
       // Prevents a tiny hole while animating and in some browser zoom levels.
-      background-color: $disabled-color;
+      background-color: var(--w-disabled-color);
     }
   }
 

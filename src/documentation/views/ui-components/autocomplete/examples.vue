@@ -114,9 +114,9 @@ export default {
   height: 5.5em;
   padding-bottom: 8px;
   border-radius: 4px;
-  border: 1px solid $border-color;
+  border: 1px solid var(--w-border-color);
 
-  .symbol {color: $primary;}
+  .symbol {color: var(--w-primary-color);}
   .number {
     position: absolute;
     top: 4px;

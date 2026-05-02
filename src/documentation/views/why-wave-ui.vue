@@ -89,7 +89,7 @@ export default {
       { label: '<span class="size--xl">🎨</span> &nbsp; <strong>Effortless to override</strong> with your own styles' },
       { label: '<span class="size--xl">🚫</span> &nbsp; Avoids the use of <code class="mx1">!important</code> for cleaner and more scalable CSS' },
       { label: '<span class="size--xl">📦</span> &nbsp; Smart <strong>CSS scoping</strong> — no side-effect' },
-      { label: '<span class="size--xl">📐</span> &nbsp; Controls all the sizes and spacings from a single <code class="mx1">$base-font-size</code> Sass variable that you can override' },
+      { label: '<span class="size--xl">📐</span> &nbsp; Controls sizes and spacings from <code class="mx1">--w-base-font-size</code> / <code class="mx1">--w-base-increment</code> on <code class="mx1">:root</code>' },
       { label: '<span class="size--xl">🧠</span> &nbsp; Uses <strong>clear, consistent options</strong> and component naming' }
     ]
   })

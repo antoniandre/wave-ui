@@ -1,18 +1,7 @@
-@forward '@/wave-ui/scss/variables';
+@use '@/wave-ui/scss/variables' as *;
 
-$links: #09c;
-$theme-switch-transition: 0.4s;
+// $css-scope: 'body div.w-app';
+// $use-layout-classes: false;
 
-@mixin theme-switch-transition() {
-  transition: color $theme-switch-transition,
-              background-color $theme-switch-transition,
-              border-color $theme-switch-transition,
-              stroke $theme-switch-transition,
-              fill $theme-switch-transition;
-}
-
-// Override Wave UI's SCSS defaults.
-// $base-font-size: 14px;
-// $box-shadow: 0 3px 1px -2px rgba(#000, 0.5),
-//              0 2px 2px 0 rgba(#000, 0.5),
-//              0 1px 5px 0 rgba(#000, 0.5);
+// Override other Wave UI settings via :root CSS variables.
+// --w-base-font-size, --w-border-radius, ...

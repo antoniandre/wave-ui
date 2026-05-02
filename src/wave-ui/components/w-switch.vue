@@ -37,13 +37,14 @@ component(
     :class="inputClasses")
     .w-switch__track(v-if="$slots.track")
       slot(name="track")
-    .w-switch__thumb(v-if="$slots.thumb || loading")
-      w-progress(
-        v-if="loading"
-        circle
-        color="inherit"
-        v-bind="typeof loading === 'number' && { 'model-value': loading }")
-      slot(v-else name="thumb")
+    .w-switch__thumb
+      .w-switch__thumb-content
+        w-progress(
+          v-if="loading"
+          circle
+          color="inherit"
+          v-bind="typeof loading === 'number' && { 'model-value': loading }")
+        slot(v-else-if="$slots.thumb" name="thumb")
   template(v-if="hasLabel && !labelOnLeft")
     label.w-switch__label.w-switch__label--right.w-form-el-shakable(
       v-if="$slots.default || label"
@@ -161,8 +162,6 @@ export default {
 </script>
 
 <style lang="scss">
-@use "sass:math";
-
 $outline-width: 2px;
 
 .w-switch {
@@ -191,15 +190,15 @@ $outline-width: 2px;
   // Switch.
   &__input {
     position: relative;
-    width: 2 * ($small-form-el-size + $outline-width);
-    height: $small-form-el-size + (2 * $outline-width);
+    width: calc(2 * (var(--w-small-form-el-size) + #{$outline-width}));
+    height: calc(var(--w-small-form-el-size) + (2 * #{$outline-width}));
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
     justify-content: center;
     border: $outline-width solid transparent;
     border-radius: 3em;
-    background-color: $switch-inactive-color;
+    background-color: var(--w-switch-inactive-color);
     cursor: inherit;
     @include default-transition;
 
@@ -215,13 +214,13 @@ $outline-width: 2px;
     .w-switch--thin & {
       box-sizing: border-box;
       border: none;
-      width: 2 * $small-form-el-size;
-      height: math.round(0.7 * $small-form-el-size);
+      width: calc(2 * var(--w-small-form-el-size));
+      height: round(nearest, calc(0.7 * var(--w-small-form-el-size)), 1px);
     }
-    .w-switch--thin :checked ~ & {background-color: $switch-inactive-color;}
+    .w-switch--thin :checked ~ & {background-color: var(--w-switch-inactive-color);}
 
     // Disabled.
-    .w-switch--disabled & {color: $disabled-color;}
+    .w-switch--disabled & {color: var(--w-disabled-color);}
     .w-switch--disabled :checked ~ & {opacity: 0.5;}
   }
 
@@ -238,76 +237,72 @@ $outline-width: 2px;
   }
   .w-switch--on &__track {left: 0;transform: translateX(0);}
 
-  // Thumb: show either the thumb slot if any, or :after otherwise.
-  &__thumb, &__input:after {
-    content: '';
+  // Thumb.
+  &__thumb {
     position: absolute;
     left: 0;
-    width: $small-form-el-size;
-    height: $small-form-el-size;
+    top: 50%;
+    width: calc(100% - var(--w-small-form-el-size));
+    height: var(--w-small-form-el-size);
+    transform: translateX(0) translateY(-50%);
+    @include default-transition;
+  }
+  .w-switch--on &__thumb {transform: translateX(100%) translateY(-50%);}
+
+  &__thumb-content {
+    position: relative;
+    isolation: isolate;
+    width: var(--w-small-form-el-size);
+    height: var(--w-small-form-el-size);
     display: flex;
     align-items: center;
     justify-content: center; // Center any content that could be put via slots.
-    background-color: $switch-thumb-color;
+    background-color: var(--w-switch-thumb-color);
     border-radius: 100%;
-    @include default-transition;
 
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
 
-    .w-switch--on & {left: 100%;transform: translateX(-100%);}
-
     .w-switch--thin & {
-      top: - math.round(0.15 * $small-form-el-size);
       transform: scale(1.1);
-      box-shadow: $box-shadow;
+      box-shadow: var(--w-box-shadow);
     }
     .w-switch--thin.w-switch--on & {
-      transform: translateX(-100%) scale(1.1);
       background-color: currentColor;
     }
   }
   &--loading .w-progress {padding: 1px;}
   &--loading.w-switch--thin.w-switch--on .w-progress {color: #fff;}
-  &--loading &__input:after, &--custom-thumb &__input:after {display: none;}
 
   // The focus outline & ripple on switch activation.
-  &__input:before {
+  &__thumb-content:before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    width: $small-form-el-size;
-    aspect-ratio: 1;
+    inset: 0;
     background-color: currentColor;
     border-radius: 100%;
     opacity: 0;
     pointer-events: none;
+    z-index: -1;
     transition: 0.25s ease-in-out;
 
-    :checked ~ & {transform: translateX(-100%) scale(0);left: 100%;}
-
     .w-switch[class^="bdrs"] &, .w-switch[class*=" bdrs"] & {border-radius: inherit;}
-    .w-switch--thin & {top: - math.round(0.15 * $small-form-el-size);}
   }
 
-  &--ripple &__input:before {
+  &--ripple &__thumb-content:before {
     background-color: transparent;
     animation: w-switch-ripple 0.55s 0.15s ease;
   }
 
-  :focus ~ &__input:before {
-    transform: translateX(0) scale(1.8);
+  :focus ~ &__input &__thumb-content:before {
+    transform: scale(1.8);
     opacity: 0.2;
-  }
-  :focus:checked ~ &__input:before {
-    transform: translateX(-100%) scale(1.8);
   }
 
   // After ripple reset to default state, then remove the class via js and the
   // `:focus ~ &__input:before` will re-transition to normal focused outline.
-  &--rippled &__input:before {
+  &--rippled &__thumb-content:before {
     transition: none;
-    transform: translateX(-100%) scale(0);
+    transform: scale(0);
     opacity: 0;
   }
 
@@ -322,7 +317,16 @@ $outline-width: 2px;
 }
 
 @keyframes w-switch-ripple {
-  0% {opacity: 0.8;transform: translateX(-100%) scale(1);background-color: currentColor;} // Start with visible ripple.
-  100% {opacity: 0;transform: translateX(-100%) scale(2.8);} // Propagate ripple to max radius and fade out.
+  // Start with visible ripple.
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+    background-color: currentColor;
+  }
+  // Propagate ripple to max radius and fade out.
+  100% {
+    opacity: 0;
+    transform: scale(2.8);
+  }
 }
 </style>

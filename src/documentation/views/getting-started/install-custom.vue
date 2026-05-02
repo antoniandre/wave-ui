@@ -30,22 +30,23 @@ div
 
     li.mt10
       .title4
-        | Create a #[span.code scss/_variables.scss] file
+        | Create a #[span.code wave-ui-overrides.css] file
         w-tag.info.ml2(round outline sm) OPTIONAL
-      p This step is optional, and is only useful if you want to override the SCSS variables.
+      p This step is optional, and is only useful if you want to override Wave UI CSS variables.
       p.mt6.
-        In your project #[span.code src] folder, create a #[span.code _variables.scss] file in a
-        #[span.code scss/] folder, and import Wave UI's variables:
+        In your project #[span.code src] folder, create a CSS file and load it after Wave UI:
 
-      ssh-pre(language="css" label="scss/_variables.scss" :dark="$store.state.darkMode").
-        @import 'wave-ui/src/wave-ui/scss/variables';
-
-        /* You can add SCSS variables overrides here. */
+      ssh-pre(language="css" label="wave-ui-overrides.css" :dark="$store.state.darkMode").
+        :root {
+          --w-primary-color: #234781;
+          --w-base-increment: 4px;
+          --w-border-radius: 4px;
+        }
 
     li.mt10
       .title4 Update #[span.code vue.config.js]
       p.
-        In #[span.code vue.config.js], transpile #[span.code wave-ui] and import your variables file
+        In #[span.code vue.config.js], transpile #[span.code wave-ui] and import your override file
         globally. Then re-serve the app.
       ssh-pre(language="js" label="vue.config.js" :dark="$store.state.darkMode").
         module.exports = {
@@ -54,25 +55,18 @@ div
           // You don't need this part if you haven't done step 2.
           // ----------------------------------------------------
           css: {
-            loaderOptions: {
-              // `additionalData` was called `prependData` prior sass-loader 9.
-              sass: { additionalData: '@use "@/scss/variables" as *;' }
-            }
+            // Import wave-ui-overrides.css from your app entry file or global CSS.
           }
           // ----------------------------------------------------
         }
 
       .title4 Or if you use Vite:
       p.
-        In #[span.code vite.config.js], the import of variables is done like so:
-      ssh-pre(language="js" label="vite.config.js" :dark="$store.state.darkMode").
-        css: {
-          preprocessorOptions: {
-            scss: {
-              additionalData: '@use "@/scss/variables" as *;'
-            }
-          }
-        }
+        With Vite, import the CSS override from your app entry after Wave UI.
+      ssh-pre(language="js" label="main.js" :dark="$store.state.darkMode").
+        import WaveUI from 'wave-ui'
+        import 'wave-ui/dist/wave-ui.css'
+        import '@/wave-ui-overrides.css'
 
     li.mt8
       .title4 Import only what you need
@@ -102,17 +96,6 @@ div
             })
 
             app.mount('#app')
-
-          alert.mx3(warning)
-            | #[strong In Wave UI] #[strong.code 2.x], you also need to import the #[strong.code w-app] component,
-            | and before you mount the app, you need to instantiate Wave UI.
-
-            ssh-pre.ma0(language="js" :dark="$store.state.darkMode").
-              // 3.
-              // Instantiate the WaveUI class and register it in the Vue instance.
-              new WaveUI(app, {
-                // Some Wave UI options.
-              })
 
         template(#item-title.2) Vue 2
         template(#item-content.2)

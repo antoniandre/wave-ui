@@ -27,7 +27,7 @@ main
       language="pug"
       :dark="$store.state.darkMode").
       w-button(bg-color="success") OK
-    ssh-pre.my0(
+    ssh-pre.my0.pa1(
       language="html-vue"
       v-show="!$store.state.usePug"
       :dark="$store.state.darkMode").
@@ -311,8 +311,10 @@ main
         code.error {{ label }}-rgb
         | prior wave-ui@3.18
   p.
-    If you define theme-specific colors in the Wave UI config, they will also generate a CSS3
-    variable that you can use anywhere.
+    If you define theme-specific colors in the Wave UI config, they will also generate a CSS
+    variable following the #[code --w-{name}-color] convention that you can use anywhere.
+    Built-in palette classes and shades also point to variables such as #[code --w-pink-color]
+    and #[code --w-pink-light3-color].
 </template>
 
 <script>
@@ -407,8 +409,8 @@ export default {
       justify-content: space-between;
       align-items: center;
       height: 45px;
-      padding-left: 2 * $base-increment;
-      padding-right: 2 * $base-increment;
+      padding-left: calc(2 * var(--w-base-increment));
+      padding-right: calc(2 * var(--w-base-increment));
     }
     .horizontal & {min-width: 140px;}
 

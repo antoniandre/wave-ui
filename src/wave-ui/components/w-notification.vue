@@ -168,8 +168,8 @@ export default {
 .w-notification {
   display: flex;
   justify-content: center;
-  left: 2 * $base-increment;
-  right: 2 * $base-increment;
+  left: calc(var(--w-base-increment) * 2);
+  right: calc(var(--w-base-increment) * 2);
   position: fixed;
   z-index: 300;
   pointer-events: none;
@@ -178,8 +178,8 @@ export default {
 
   // Position.
   &--absolute {position: absolute;z-index: 400;}
-  &--top {top: 0;padding-top: 2 * $base-increment;}
-  &--bottom {bottom: 0;padding-bottom: 2 * $base-increment;}
+  &--top {top: 0;padding-top: calc(var(--w-base-increment) * 2);}
+  &--bottom {bottom: 0;padding-bottom: calc(var(--w-base-increment) * 2);}
   &--left {justify-content: flex-start;right: auto;}
   &--right {justify-content: flex-end;left: auto;}
 

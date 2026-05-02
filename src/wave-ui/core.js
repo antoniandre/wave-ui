@@ -91,7 +91,7 @@ export default class WaveUI {
       document.documentElement.setAttribute('data-theme', theme)
       document.head.querySelector('#wave-ui-colors')?.remove?.()
       const themeColors = this.config.colors[this.theme]
-      injectColorsCSSInDOM(themeColors, this.config.css.colorShadeCssVariables)
+      injectColorsCSSInDOM(themeColors, colorPalette, this.config.css.colorShadeCssVariables)
       this.colors = flattenColors(themeColors, colorPalette)
     },
 
@@ -146,6 +146,14 @@ export default class WaveUI {
           // Add the .w-app class where defined by user or at the root.
           const wApp = document.querySelector(config.on) || document.body
           wApp.classList.add('w-app')
+
+          // Add any custom app classes from config.
+          if (config.css.appClasses) {
+            const classesToAdd = typeof config.css.appClasses === 'string'
+              ? config.css.appClasses.split(' ').filter(c => c)
+              : config.css.appClasses
+            if (classesToAdd.length) wApp.classList.add(...classesToAdd)
+          }
 
           if (config.theme === 'auto') detectOSDarkMode($waveui) // Also switches the theme.
           else $waveui.switchTheme(config.theme, true)

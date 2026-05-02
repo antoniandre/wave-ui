@@ -69,8 +69,8 @@ export default {
   display: flex;
   flex: 1 1 auto;
   align-items: center;
-  padding: (2 * $base-increment) (3 * $base-increment);
-  background-color: $toolbar-bg-color;
+  padding: calc(var(--w-base-increment) * 2) calc(var(--w-base-increment) * 3);
+  background-color: var(--w-toolbar-bg-color);
   z-index: 10;
 
   @include themeable;
@@ -83,30 +83,30 @@ export default {
   &--absolute.w-toolbar--right, &--fixed.w-toolbar--right {left: auto;right: 0;}
 
   // Horizontal.
-  &--top {border-bottom: $border;}
+  &--top {border-bottom: var(--w-border);}
   &--bottom {
     bottom: 0;
     top: auto;
-    border-top: $border;
+    border-top: var(--w-border);
   }
 
   // Vertical.
   &--vertical {
-    padding: (2 * $base-increment);
+    padding: calc(var(--w-base-increment) * 2);
     flex-direction: column;
     flex-grow: 0;
     flex-shrink: 0;
   }
 
-  &--left {border-right: $border;}
+  &--left {border-right: var(--w-border);}
   &--right {
     right: 0;
     left: auto;
-    border-left: $border;
+    border-left: var(--w-border);
   }
 
   &--no-border, &--shadow {border-width: 0;}
-  &--shadow {box-shadow: $box-shadow;}
+  &--shadow {box-shadow: var(--w-box-shadow);}
 
   .w-app > & {z-index: 200;}
 

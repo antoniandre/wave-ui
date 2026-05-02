@@ -135,11 +135,11 @@ $circle-size: 40;
   &--top {top: 0;}
   &--bottom {bottom: 0;}
 
-  &--shadow {box-shadow: $box-shadow;}
+  &--shadow {box-shadow: var(--w-box-shadow);}
 
   // Linear progress.
   // ------------------------------------------------------
-  &--linear {border-radius: $border-radius;}
+  &--linear {border-radius: var(--w-border-radius);}
   // Tile, round and outline are only available on linear progress.
   &--tile {border-radius: 0;}
   &--round {border-radius: 99em;}
@@ -147,7 +147,7 @@ $circle-size: 40;
 
   &--linear {
     display: flex;
-    height: $base-increment;
+    height: var(--w-base-increment);
     overflow: hidden;
 
     // Background.
@@ -156,8 +156,7 @@ $circle-size: 40;
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background-color: currentColor;
-      opacity: 0.15;
+      background-color: color-mix(in srgb, currentColor 15%, transparent);
     }
     &.w-progress--outline:after {display: none;}
 
@@ -242,11 +241,11 @@ $circle-size: 40;
     display: inline-flex;
     width: 3em;
     aspect-ratio: 1;
-    font-size: $base-font-size;
+    font-size: var(--w-base-font-size);
 
     svg {display: block;width: 100%;}
     circle.bg {stroke: currentColor;}
-    &.w-progress--default-bg circle.bg {stroke: $progress-bg-color;}
+    &.w-progress--default-bg circle.bg {stroke: var(--w-progress-bg-color);}
 
     .w-progress__progress {
       transform-origin: 100% 100%;

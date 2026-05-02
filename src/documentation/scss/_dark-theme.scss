@@ -1,5 +1,6 @@
 @use './variables' as *;
 
+$theme-switch-transition: 0.4s;
 $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 
 // Global theming rules.
@@ -48,7 +49,11 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
   div.nav-menu .w-tree__item-icon,
   div.nav-menu .w-tree__item-label,
   div.nav-menu .w-tree__item-label:before {
-    @include theme-switch-transition;
+    transition: color $theme-switch-transition,
+                background-color $theme-switch-transition,
+                border-color $theme-switch-transition,
+                stroke $theme-switch-transition,
+                fill $theme-switch-transition;
   }
   .w-app div[class$="-leave-active"],
   .w-app div[class$="-leave-from"],
@@ -56,7 +61,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
   .w-app div[class$="-enter-active"],
   .w-app div[class$="-enter-from"],
   .w-app div[class$="-enter-to"] {
-    transition: all $transition-duration $fast-out-slow-in !important;
+    transition: all var(--w-transition-duration) $fast-out-slow-in !important;
   }
 }
 

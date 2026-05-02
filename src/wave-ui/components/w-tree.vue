@@ -360,15 +360,14 @@ export default {
 </script>
 
 <style lang="scss">
-$expand-icon-size: 20px;
-
 .w-tree {
+  --w-tree-expand-icon-size: 20px;
   margin: 0;
 
   // Tree items.
   // ------------------------------------------------------
   &__item {list-style-type: none;}
-  &__item--leaf {margin-left: $base-increment * 5 + 2px;}
+  &__item--leaf {margin-left: calc(var(--w-base-increment) * 5 + 2px);}
   &--no-expand-button &__item--leaf {margin-left: 0;}
 
   // Tree item label.
@@ -384,21 +383,21 @@ $expand-icon-size: 20px;
       position: absolute;
       top: -1px;
       bottom: -1px;
-      left: - $base-increment + 2px;
-      right: - $base-increment - 2px;
-      border-radius: $border-radius;
+      left: calc(var(--w-base-increment) * -1 + 2px);
+      right: calc(var(--w-base-increment) * -1 - 2px);
+      border-radius: var(--w-border-radius);
     }
-    &:hover:before {background-color: $primary;opacity: 0.1;}
-    &:focus-visible:before {background-color: $primary;opacity: 0.15;}
+    &:hover:before {background-color: var(--w-primary-color);opacity: 0.1;}
+    &:focus-visible:before {background-color: var(--w-primary-color);opacity: 0.15;}
   }
   &.w-tree--selectable &__item-label {cursor: pointer;}
   &.w-tree--selectable &__item--disabled &__item-label {cursor: auto;}
   &__item--leaf &__item-label:before {
-    left: - $base-increment;
-    right: - $base-increment;
+    left: calc(var(--w-base-increment) * -1);
+    right: calc(var(--w-base-increment) * -1);
   }
   &__item--selected > &__item-label:before {
-    background-color: $primary;
+    background-color: var(--w-primary-color);
     opacity: 0.25;
   }
   &__item--disabled &__item-label {opacity: 0.5;}
@@ -408,21 +407,21 @@ $expand-icon-size: 20px;
 
   &__item--branch > &__item-label {cursor: pointer;}
   &__item--disabled > &__item-label {
-    color: $disabled-color;
+    color: var(--w-disabled-color);
     cursor: not-allowed;
     -webkit-tap-highlight-color: transparent;
   }
   &__item--unexpandable > &__item-label {
-    margin-left: $expand-icon-size + 2px;
+    margin-left: calc(var(--w-tree-expand-icon-size) + 2px);
     cursor: auto;
   }
   &--disabled &__item-label {cursor: auto;}
   &--disabled &__item--branch > &__item-label {opacity: 0.5;}
 
-  &__item-icon {margin-right: $base-increment;}
+  &__item-icon {margin-right: var(--w-base-increment);}
 
   // Recursive children.
   // ------------------------------------------------------
-  .w-tree {margin-left: $base-increment * 5;}
+  .w-tree {margin-left: calc(var(--w-base-increment) * 5);}
 }
 </style>

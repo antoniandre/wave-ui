@@ -170,7 +170,7 @@ $inactive-color: #666;
   // The fake checkbox to substitute.
   &__input {
     position: relative;
-    width: $small-form-el-size;
+    width: var(--w-small-form-el-size);
     aspect-ratio: 1;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
@@ -188,12 +188,12 @@ $inactive-color: #666;
     aspect-ratio: 1;
     fill: none;
     stroke-width: 2;
-    stroke: $contrast-color;
+    stroke: var(--w-contrast-color);
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-dasharray: 16px;
     stroke-dashoffset: 16px;
-    transition: $transition-duration ease-out;
+    transition: var(--w-transition-duration) ease-out;
     opacity: 0;
     position: relative;
     z-index: 1;
@@ -214,25 +214,25 @@ $inactive-color: #666;
     width: 100%;
     aspect-ratio: 1;
     border: $outline-width solid $inactive-color;
-    border-radius: $border-radius;
-    transition: $transition-duration ease-in-out;
+    border-radius: var(--w-border-radius);
+    transition: var(--w-transition-duration) ease-in-out;
 
     .w-checkbox--round & {border-radius: 100%;}
-    .w-checkbox--disabled & {border-color: $disabled-color;}
+    .w-checkbox--disabled & {border-color: var(--w-disabled-color);}
 
     // Checked state.
     :checked ~ & {
-      border-width: divide($small-form-el-size, 2);
+      border-width: calc(var(--w-small-form-el-size) / 2);
       border-color: currentColor;
       // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: currentColor;
     }
     .w-checkbox--indeterminate :checked ~ & {
-      border-width: ((divide($small-form-el-size, 2)) - 1px) 3px;
-      background-color: $contrast-color;
+      border-width: calc(var(--w-small-form-el-size) / 2 - 1px) 3px;
+      background-color: var(--w-contrast-color);
     }
     .w-checkbox--disabled :checked ~ & {
-      border-color: $disabled-color;
+      border-color: var(--w-disabled-color);
       // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: color-mix(in srgb, var(--w-contrast-color) 40%, transparent);
     }

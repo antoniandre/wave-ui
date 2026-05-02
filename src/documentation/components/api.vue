@@ -86,7 +86,7 @@ export default {
 
     .title-link {
       font: bold 1.15rem monospace;
-      color: $primary;
+      color: var(--w-primary-color);
       display: inline-block;
       margin-right: 6px;
     }

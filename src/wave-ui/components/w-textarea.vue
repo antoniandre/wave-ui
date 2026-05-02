@@ -237,7 +237,7 @@ $inactive-color: #777;
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
-  font-size: $base-font-size;
+  font-size: var(--w-base-font-size);
 
   @include themeable;
 
@@ -247,15 +247,15 @@ $inactive-color: #777;
     position: relative;
     display: inline-flex;
     flex: 1 1 auto;
-    min-height: $form-field-height;
-    border-radius: $border-radius;
-    border: $border;
-    transition: border $transition-duration;
+    min-height: var(--w-form-field-height);
+    border-radius: var(--w-border-radius);
+    border: var(--w-border);
+    transition: border var(--w-transition-duration);
 
     .w-textarea[class^="bdrs"] &, .w-textarea[class*=" bdrs"] & {border-radius: inherit;}
   }
 
-  &--floating-label &__textarea-wrap {margin-top: 4 * $base-increment;}
+  &--floating-label &__textarea-wrap {margin-top: calc(var(--w-base-increment) * 4);}
 
   &__textarea-wrap--underline {
     border-bottom-left-radius: initial;
@@ -264,7 +264,7 @@ $inactive-color: #777;
   }
 
   &__textarea-wrap--tile {border-radius: initial;}
-  &__textarea-wrap--shadow {box-shadow: $box-shadow;}
+  &__textarea-wrap--shadow {box-shadow: var(--w-box-shadow);}
 
   &--focused &__textarea-wrap {border-color: currentColor;}
 
@@ -277,7 +277,7 @@ $inactive-color: #777;
     width: 100%;
     height: 0;
     border-bottom: 2px solid currentColor;
-    transition: $transition-duration;
+    transition: var(--w-transition-duration);
     transform: scaleX(0);
     pointer-events: none;
   }
@@ -290,12 +290,12 @@ $inactive-color: #777;
     width: 100%;
     height: 100%;
     font: inherit;
-    line-height: $textarea-line-height;
+    line-height: var(--w-textarea-line-height);
     color: inherit;
     background: none;
     border: none;
     outline: none;
-    padding: $base-increment (2 * $base-increment);
+    padding: var(--w-base-increment) calc(var(--w-base-increment) * 2);
     resize: none;
 
     .w-textarea--resizable & {resize: vertical;}
@@ -309,7 +309,7 @@ $inactive-color: #777;
     .w-textarea--inner-icon-right & {padding-right: 27px;}
 
     .w-textarea--disabled & {
-      color: $disabled-color;
+      color: var(--w-disabled-color);
       cursor: not-allowed;
       -webkit-tap-highlight-color: transparent;
     }
@@ -319,7 +319,7 @@ $inactive-color: #777;
 
   // Icons inside.
   // ------------------------------------------------------
-  &__icon {position: absolute;margin-top: $base-increment;}
+  &__icon {position: absolute;margin-top: var(--w-base-increment);}
   &__icon--inner-left {left: 6px;}
   &__icon--inner-right {right: 6px;}
   &--no-padding &__icon--inner-left {left: 1px;}
@@ -328,7 +328,7 @@ $inactive-color: #777;
   .w-textarea--focused &__icon {color: currentColor;}
 
   &--disabled &__icon {
-    color: $disabled-color;
+    color: var(--w-disabled-color);
     cursor: not-allowed;
     -webkit-tap-highlight-color: transparent;
   }
@@ -336,21 +336,21 @@ $inactive-color: #777;
   // Label.
   // ------------------------------------------------------
   &__label {
-    transition: color $transition-duration;
+    transition: color var(--w-transition-duration);
     cursor: pointer;
     align-self: flex-start;
     user-select: none;
 
     &--left {
-      margin-top: $base-increment;
-      margin-right: 2 * $base-increment;
+      margin-top: var(--w-base-increment);
+      margin-right: calc(var(--w-base-increment) * 2);
     }
     &--right {
-      margin-top: $base-increment;
-      margin-left: 2 * $base-increment;
+      margin-top: var(--w-base-increment);
+      margin-left: calc(var(--w-base-increment) * 2);
     }
     .w-textarea--disabled & {
-      color: $disabled-color;
+      color: var(--w-disabled-color);
       cursor: not-allowed;
       -webkit-tap-highlight-color: transparent;
     }
@@ -362,9 +362,9 @@ $inactive-color: #777;
 
   &__label--inside {
     position: absolute;
-    top: $base-increment;
+    top: var(--w-base-increment);
     left: 0;
-    padding-left: 2 * $base-increment;
+    padding-left: calc(var(--w-base-increment) * 2);
     white-space: nowrap;
     transform: translateY(0%);
     pointer-events: none;
@@ -379,7 +379,7 @@ $inactive-color: #777;
 
     .w-textarea--floating-label & {
       transform-origin: 0 0;
-      transition: $transition-duration ease;
+      transition: var(--w-transition-duration) ease;
     }
 
     // move label with underline style.

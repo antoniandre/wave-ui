@@ -1,11 +1,11 @@
 @use 'variables' as *;
 
-$fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
+$fast-out-slow-in: var(--w-transition-timing-fast-out-slow-in);
 
 // Fade.
 // --------------------------------------------------------
-.fade-enter-active {animation: w-fade $transition-duration;}
-.fade-leave-active {animation: w-fade $transition-duration reverse;}
+.fade-enter-active {animation: w-fade var(--w-transition-duration);}
+.fade-leave-active {animation: w-fade var(--w-transition-duration) reverse;}
 @keyframes w-fade {
   0% {opacity: 0;}
   100% {opacity: 1;}
@@ -15,7 +15,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 // Slide-right: translate x from left to right.
 // --------------------------------------------------------
 .slide-right-enter-active, .slide-right-leave-active {
-  transition: $transition-duration $fast-out-slow-in;
+  transition: var(--w-transition-duration) $fast-out-slow-in;
   transition-property: transform, left, margin-left;
   transform: translateX(0%);
 }
@@ -29,7 +29,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 // Slide-left: translate x from right to left.
 // --------------------------------------------------------
 .slide-left-enter-active, .slide-left-leave-active {
-  transition: $transition-duration;
+  transition: var(--w-transition-duration);
   transition-property: transform, right, margin-right;
   transform: translateX(0%);
 }
@@ -43,7 +43,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 // Slide-down: translate y from top to bottom.
 // --------------------------------------------------------
 .slide-down-enter-active, .slide-down-leave-active {
-  transition: transform $transition-duration $fast-out-slow-in;
+  transition: transform var(--w-transition-duration) $fast-out-slow-in;
   transition-property: transform, top, margin-top;
   transform: translateY(0%);
 }
@@ -57,7 +57,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 // Slide-up: translate y from bottom to top.
 // --------------------------------------------------------
 .slide-up-enter-active, .slide-up-leave-active {
-  transition: transform $transition-duration $fast-out-slow-in;
+  transition: transform var(--w-transition-duration) $fast-out-slow-in;
   transition-property: transform, bottom, margin-bottom;
   transform: translateY(0%);
 }
@@ -71,7 +71,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 // Slide-fade-left.
 // --------------------------------------------------------
 .slide-fade-left-enter-active, .slide-fade-left-leave-active {
-  transition: all $transition-duration $fast-out-slow-in;
+  transition: all var(--w-transition-duration) $fast-out-slow-in;
 }
 .slide-fade-left-enter-from, .slide-fade-left-leave-to {
   transform: translateX(12px);
@@ -81,7 +81,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 // Slide-fade-right.
 // --------------------------------------------------------
 .slide-fade-right-enter-active, .slide-fade-right-leave-active {
-  transition: all $transition-duration $fast-out-slow-in;
+  transition: all var(--w-transition-duration) $fast-out-slow-in;
 }
 .slide-fade-right-enter-from, .slide-fade-right-leave-to {
   transform: translateX(-12px);
@@ -92,7 +92,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 // Slide-fade-up.
 // --------------------------------------------------------
 .slide-fade-up-enter-active, .slide-fade-up-leave-active {
-  transition: all $transition-duration $fast-out-slow-in;
+  transition: all var(--w-transition-duration) $fast-out-slow-in;
 }
 .slide-fade-up-enter-from, .slide-fade-up-leave-to {
   transform: translateY(12px);
@@ -103,7 +103,7 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 // Slide-fade-down.
 // --------------------------------------------------------
 .slide-fade-down-enter-active, .slide-fade-down-leave-active {
-  transition: all $transition-duration $fast-out-slow-in;
+  transition: all var(--w-transition-duration) $fast-out-slow-in;
 }
 .slide-fade-down-enter-from, .slide-fade-down-leave-to {
   transform: translateY(-12px);
@@ -113,8 +113,8 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 
 // Scale.
 // --------------------------------------------------------
-.scale-enter-active {animation: w-scale $transition-duration;}
-.scale-leave-active {animation: w-scale $transition-duration reverse;}
+.scale-enter-active {animation: w-scale var(--w-transition-duration);}
+.scale-leave-active {animation: w-scale var(--w-transition-duration) reverse;}
 @keyframes w-scale {
   0% {transform: scale(0);}
   100% {transform: scale(1);}
@@ -123,8 +123,8 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 
 // Scale-fade.
 // --------------------------------------------------------
-.scale-fade-enter-active {animation: w-scale-fade $transition-duration;}
-.scale-fade-leave-active {animation: w-scale-fade $transition-duration reverse;}
+.scale-fade-enter-active {animation: w-scale-fade var(--w-transition-duration);}
+.scale-fade-leave-active {animation: w-scale-fade var(--w-transition-duration) reverse;}
 @keyframes w-scale-fade {
   0% {transform: scale(0.8);opacity: 0;}
   100% {transform: scale(1);opacity: 1;}
@@ -133,8 +133,8 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 
 // Bounce.
 // --------------------------------------------------------
-.bounce-enter-active {animation: w-bounce ($transition-duration + 0.05s);}
-.bounce-leave-active {animation: w-bounce ($transition-duration + 0.05s) reverse;}
+.bounce-enter-active {animation: w-bounce calc(var(--w-transition-duration) + 0.05s);}
+.bounce-leave-active {animation: w-bounce calc(var(--w-transition-duration) + 0.05s) reverse;}
 @keyframes w-bounce {
   0% {transform: scale(0.7);opacity: 0;}
   60% {transform: scale(1.1);opacity: 1;}
@@ -144,8 +144,8 @@ $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
 
 // Twist.
 // --------------------------------------------------------
-.twist-enter-active {animation: w-twist ($transition-duration + 0.25s);}
-.twist-leave-active {animation: w-twist ($transition-duration + 0.25s) reverse;}
+.twist-enter-active {animation: w-twist calc(var(--w-transition-duration) + 0.25s);}
+.twist-leave-active {animation: w-twist calc(var(--w-transition-duration) + 0.25s) reverse;}
 @keyframes w-twist {
   0% {transform: scale(0) rotate(-70deg);}
   60% {transform: scale(1.03) rotate(6deg);}

@@ -239,12 +239,12 @@ export default {
   display: table;
 
   position: absolute;
-  padding: $base-increment math.round(1.5 * $base-increment);
-  border-radius: $border-radius;
-  border: 1px solid $tooltip-border-color;
-  background-color: $tooltip-bg-color;
+  padding: var(--w-base-increment) calc(var(--w-base-increment) * 1.5);
+  border-radius: var(--w-border-radius);
+  border: 1px solid var(--w-tooltip-border-color);
+  background-color: var(--w-tooltip-bg-color);
   pointer-events: none;
-  color: $tooltip-color;
+  color: var(--w-tooltip-color);
   align-items: center;
   max-width: 300px;
   width: max-content; // Not supported in IE11. :/
@@ -257,15 +257,15 @@ export default {
   &--tile {border-radius: 0;}
   &--round {
     border-radius: 99em;
-    padding: $base-increment math.round(2.5 * $base-increment);
+    padding: var(--w-base-increment) calc(var(--w-base-increment) * 2.5);
   }
-  &--shadow {box-shadow: $box-shadow;}
+  &--shadow {box-shadow: var(--w-box-shadow);}
   &--no-border {border: none;}
 
-  &--top {margin-top: -3 * $base-increment;}
-  &--bottom {margin-top: 3 * $base-increment;}
-  &--left {margin-left: -3 * $base-increment;}
-  &--right {margin-left: 3 * $base-increment;}
+  &--top {margin-top: calc(var(--w-base-increment) * -3);}
+  &--bottom {margin-top: calc(var(--w-base-increment) * 3);}
+  &--left {margin-left: calc(var(--w-base-increment) * -3);}
+  &--right {margin-left: calc(var(--w-base-increment) * 3);}
 
   &.size--xs {font-size: 0.75rem;}
   &.size--sm {font-size: 0.83rem;}
@@ -292,30 +292,30 @@ export default {
 .w-tooltip-slide-fade-down-enter-active, .w-tooltip-slide-fade-down-leave-active,
 .w-tooltip-slide-fade-left-enter-active, .w-tooltip-slide-fade-left-leave-active,
 .w-tooltip-slide-fade-right-enter-active, .w-tooltip-slide-fade-right-leave-active {
-  transition: margin $transition-duration ease-in-out, opacity $transition-duration ease-in-out;
+  transition: margin var(--w-transition-duration) ease-in-out, opacity var(--w-transition-duration) ease-in-out;
 }
 
 // slide-fade-up.
 .w-tooltip-slide-fade-up-enter-from, .w-tooltip-slide-fade-up-leave-to {
-  margin-top: -2 * $base-increment;
+  margin-top: calc(var(--w-base-increment) * -2);
   opacity: 0;
 }
 
 // slide-fade-down.
 .w-tooltip-slide-fade-down-enter-from, .w-tooltip-slide-fade-down-leave-to {
-  margin-top: 2 * $base-increment;
+  margin-top: calc(var(--w-base-increment) * 2);
   opacity: 0;
 }
 
 // Slide-fade-left.
 .w-tooltip-slide-fade-left-enter-from, .w-tooltip-slide-fade-left-leave-to {
-  margin-left: -2 * $base-increment;
+  margin-left: calc(var(--w-base-increment) * -2);
   opacity: 0;
 }
 
 // Slide-fade-right.
 .w-tooltip-slide-fade-right-enter-from, .w-tooltip-slide-fade-right-leave-to {
-  margin-left: 2 * $base-increment;
+  margin-left: calc(var(--w-base-increment) * 2);
   opacity: 0;
 }
 // --------------------------------------------------------

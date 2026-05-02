@@ -158,8 +158,6 @@ export default {
 </script>
 
 <style lang="scss">
-@use "sass:math";
-
 $spinner-size: 40;
 
 .w-button {
@@ -167,11 +165,11 @@ $spinner-size: 40;
   display: inline-flex;
   flex-shrink: 0;
   outline: none;
-  border-radius: $border-radius;
+  border-radius: var(--w-border-radius);
   background-color: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.04);
-  padding-left: 2 * $base-increment;
-  padding-right: 2 * $base-increment;
+  padding-left: calc(var(--w-base-increment) * 2);
+  padding-right: calc(var(--w-base-increment) * 2);
   box-shadow: 0 0 0 transparent;
   vertical-align: middle;
   align-self: center;
@@ -186,7 +184,7 @@ $spinner-size: 40;
   z-index: 1;
   // Background-color must not transition to not affect the hover & focus states
   // in :before & :after.
-  transition: all $transition-duration, background-color 0s, padding 0s;
+  transition: all var(--w-transition-duration), background-color 0s, padding 0s;
   -webkit-tap-highlight-color: transparent;
 
   @include themeable;
@@ -198,10 +196,10 @@ $spinner-size: 40;
   // Position.
   &--absolute {position: absolute;}
   &--fixed {position: fixed;}
-  &--top {top: 2 * $base-increment;}
-  &--bottom {bottom: 2 * $base-increment;}
-  &--left {left: 2 * $base-increment;}
-  &--right {right: 2 * $base-increment;}
+  &--top {top: calc(var(--w-base-increment) * 2);}
+  &--bottom {bottom: calc(var(--w-base-increment) * 2);}
+  &--left {left: calc(var(--w-base-increment) * 2);}
+  &--right {right: calc(var(--w-base-increment) * 2);}
 
   &--dark {
     color: rgba(255, 255, 255, 0.95);
@@ -217,8 +215,8 @@ $spinner-size: 40;
   }
   &--round {
     border-radius: 99em;
-    padding-left: 3 * $base-increment;
-    padding-right: 3 * $base-increment;
+    padding-left: calc(var(--w-base-increment) * 3);
+    padding-right: calc(var(--w-base-increment) * 3);
   }
   &--icon {
     aspect-ratio: 1;
@@ -227,7 +225,7 @@ $spinner-size: 40;
     min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
   }
   &--tile {border-radius: initial;}
-  &--shadow {box-shadow: $box-shadow;}
+  &--shadow {box-shadow: var(--w-box-shadow);}
   &--loading {cursor: wait;opacity: 0.8;}
   &[disabled] {
     cursor: not-allowed;
@@ -241,16 +239,16 @@ $spinner-size: 40;
   }
 
   // Sizes adjustments (always an even number for easier vertical alignments).
-  &.size--xs {height: math.round(1.25 * divide($base-font-size, 2)) * 2;}
-  &.size--sm {height: math.round(1.55 * divide($base-font-size, 2)) * 2;}
-  &.size--md {height: math.round(1.85 * divide($base-font-size, 2)) * 2;}
-  &.size--lg {height: math.round(2.2 * divide($base-font-size, 2)) * 2;}
-  &.size--xl {height: math.round(2.5 * divide($base-font-size, 2)) * 2;}
+  &.size--xs {height: calc(2 * round(nearest, calc(1.25 * var(--w-base-font-size) / 2), 1px));}
+  &.size--sm {height: calc(2 * round(nearest, calc(1.55 * var(--w-base-font-size) / 2), 1px));}
+  &.size--md {height: calc(2 * round(nearest, calc(1.85 * var(--w-base-font-size) / 2), 1px));}
+  &.size--lg {height: calc(2 * round(nearest, calc(2.2 * var(--w-base-font-size) / 2), 1px));}
+  &.size--xl {height: calc(2 * round(nearest, calc(2.5 * var(--w-base-font-size) / 2), 1px));}
 
-  &.size--xs {padding-left: $base-increment;padding-right: $base-increment;}
-  &.size--xl {padding-left: 3 * $base-increment;padding-right: 3 * $base-increment;}
-  &--round.size--xs {padding-left: math.round(1.5 * $base-increment);padding-right: math.round(1.5 * $base-increment);}
-  &--round.size--xl {padding-left: math.round(4.5 * $base-increment);padding-right: math.round(4.5 * $base-increment);}
+  &.size--xs {padding-left: var(--w-base-increment);padding-right: var(--w-base-increment);}
+  &.size--xl {padding-left: calc(var(--w-base-increment) * 3);padding-right: calc(var(--w-base-increment) * 3);}
+  &--round.size--xs {padding-left: calc(var(--w-base-increment) * 1.5);padding-right: calc(var(--w-base-increment) * 1.5);}
+  &--round.size--xl {padding-left: calc(var(--w-base-increment) * 4.5);padding-right: calc(var(--w-base-increment) * 4.5);}
   &--icon.size--xs {padding-left: 0;padding-right: 0;}
   &--icon.size--xl {padding-left: 0;padding-right: 0;}
 
@@ -304,7 +302,7 @@ $spinner-size: 40;
   &:active {transform: scale(1.02);}
   &:active:before {
     opacity: 0.3;
-    @include default-transition($fast-transition-duration);
+    @include default-transition(var(--w-transition-duration-fast));
   }
   &--dark:active:before, &.primary--bg:active:before {opacity: 0.35;}
 

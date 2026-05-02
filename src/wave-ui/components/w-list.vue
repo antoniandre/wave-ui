@@ -409,10 +409,10 @@ export default {
 .w-list {
   list-style-type: none;
   margin-left: 0;
-  font-size: $base-font-size;
+  font-size: var(--w-base-font-size);
 
-  &--child {margin-left: 6 * $base-increment;}
-  &--icon {padding-left: 8 * $base-increment;}
+  &--child {margin-left: calc(var(--w-base-increment) * 6);}
+  &--icon {padding-left: calc(var(--w-base-increment) * 8);}
 
   &__item {margin-top: 1px;}
   &__item:first-child {margin-top: 0;}
@@ -428,7 +428,7 @@ export default {
   &__item-bullet {
     position: absolute;
     right: 100%;
-    margin-right: 3 * $base-increment;
+    margin-right: calc(var(--w-base-increment) * 3);
     top: 0.1em;
 
     @-moz-document url-prefix() {
@@ -437,7 +437,7 @@ export default {
 
     .w-list--hoverable &,
     .w-list--selectable &,
-    .w-list--checklist & {margin-top: 3 * $base-increment;}
+    .w-list--checklist & {margin-top: calc(var(--w-base-increment) * 3);}
   }
 
   // List item Label.
@@ -463,15 +463,14 @@ export default {
 
     &--hoverable,
     &--selectable {
-      padding: 2 * $base-increment;
+      padding: calc(var(--w-base-increment) * 2);
 
       &:before {
         content: '';
         position: absolute;
         inset: 0;
-        background-color: currentColor;
-        opacity: 0;
-        transition: 0.2s;
+        background-color: transparent;
+        transition: background-color 0.2s;
         pointer-events: none;
       }
     }
@@ -480,17 +479,17 @@ export default {
     &--hoverable:hover:before,
     &--selectable:focus:before,
     &--focused:before,
-    &--selectable:hover:before {opacity: 0.08;}
+    &--selectable:hover:before {background-color: color-mix(in srgb, currentColor 8%, transparent);}
 
     // Active class (when item is selected).
     &--active:before, &--active:focus:before, &--active:hover:before,
-    .w-list--navigation &.router-link-exact-active:before {opacity: 0.15;}
+    .w-list--navigation &.router-link-exact-active:before {background-color: color-mix(in srgb, currentColor 15%, transparent);}
 
     // Active state (while pressing key or mouse).
     &--active.w-list__item-label--hoverable:hover:before,
     &--active.w-list__item-label--selectable:focus:before,
     &--active.w-list__item-label--selectable:hover:before,
-    &--selectable:active:before {opacity: 0.2;}
+    &--selectable:active:before {background-color: color-mix(in srgb, currentColor 20%, transparent);}
 
     // Disabled.
     &--disabled:before {display: none;}

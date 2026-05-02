@@ -245,7 +245,7 @@ export default {
   position: inherit;
   display: flex;
   z-index: 1;
-  background: $drawer-bg-color;
+  background: var(--w-drawer-bg-color);
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
 
   @include themeable;
@@ -254,13 +254,13 @@ export default {
     top: 0;
     bottom: 0;
     width: 100%;
-    max-width: $drawer-max-size;
+    max-width: var(--w-drawer-max-size);
   }
   &--top, &--bottom {
     left: 0;
     right: 0;
     height: 100%;
-    max-height: $drawer-max-size;
+    max-height: var(--w-drawer-max-size);
   }
   &--fit-content {width: auto;height: auto;}
 

@@ -92,8 +92,6 @@ export default {
 </script>
 
 <style lang="scss">
-@use "sass:math";
-
 .w-badge-wrap {
   position: relative;
   display: inline-flex;
@@ -106,12 +104,13 @@ export default {
   justify-content: center;
   user-select: none;
   border-radius: 99em;
-  // Always get an even number for better text vertical align.
-  height: math.round(1.1 * divide($base-font-size, 2)) * 2;
-  line-height: math.round(1.1 * divide($base-font-size, 2)) * 2;
-  min-width: math.round(1.1 * divide($base-font-size, 2)) * 2;
+  // Always get an even number for better text vertical align (matches former Sass rounding).
+  --w-badge-line: calc(2 * round(nearest, calc(1.1 * var(--w-base-font-size) / 2), 1px));
+  height: var(--w-badge-line);
+  line-height: var(--w-badge-line);
+  min-width: var(--w-badge-line);
   z-index: 1;
-  padding: 0 $base-increment;
+  padding: 0 var(--w-base-increment);
 
   @include themeable;
 
@@ -125,42 +124,44 @@ export default {
 
   // Sizes.
   &.size--xs {
-    // Always get an even number for better text vertical alignment.
-    $height: math.round(divide($base-font-size, 2)) * 2;
-    font-size: math.round(0.67 * divide($base-font-size, 2)) * 2;
-    height: $height;
-    line-height: $height;
-    min-width: $height;
+    --w-badge-h: calc(2 * round(nearest, calc(var(--w-base-font-size) / 2), 1px));
+    font-size: calc(2 * round(nearest, calc(0.67 * var(--w-base-font-size) / 2), 1px));
+    height: var(--w-badge-h);
+    line-height: var(--w-badge-h);
+    min-width: var(--w-badge-h);
 
-    &--round {width: $height;padding: 0 math.round(divide($height, 2));}
+    &--round {
+      width: var(--w-badge-h);
+      padding: 0 round(nearest, calc(var(--w-badge-h) / 2), 1px);
+    }
   }
   &.size--sm {
-    $height: math.round(1.1 * divide($base-font-size, 2)) * 2;
-    font-size: math.round(0.75 * divide($base-font-size, 2)) * 2;
-    height: $height;
-    line-height: $height;
-    min-width: $height;
+    --w-badge-h: calc(2 * round(nearest, calc(1.1 * var(--w-base-font-size) / 2), 1px));
+    font-size: calc(2 * round(nearest, calc(0.75 * var(--w-base-font-size) / 2), 1px));
+    height: var(--w-badge-h);
+    line-height: var(--w-badge-h);
+    min-width: var(--w-badge-h);
   }
   &.size--md {
-    $height: math.round(1.3 * divide($base-font-size, 2)) * 2;
-    font-size: math.round(0.9 * divide($base-font-size, 2)) * 2;
-    height: $height;
-    line-height: $height;
-    min-width: $height;
+    --w-badge-h: calc(2 * round(nearest, calc(1.3 * var(--w-base-font-size) / 2), 1px));
+    font-size: calc(2 * round(nearest, calc(0.9 * var(--w-base-font-size) / 2), 1px));
+    height: var(--w-badge-h);
+    line-height: var(--w-badge-h);
+    min-width: var(--w-badge-h);
   }
   &.size--lg {
-    $height: math.round(1.5 * divide($base-font-size, 2)) * 2;
-    font-size: math.round(1.05 * divide($base-font-size, 2)) * 2;
-    height: $height;
-    line-height: $height;
-    min-width: $height;
+    --w-badge-h: calc(2 * round(nearest, calc(1.5 * var(--w-base-font-size) / 2), 1px));
+    font-size: calc(2 * round(nearest, calc(1.05 * var(--w-base-font-size) / 2), 1px));
+    height: var(--w-badge-h);
+    line-height: var(--w-badge-h);
+    min-width: var(--w-badge-h);
   }
   &.size--xl {
-    $height: math.round(1.8 * divide($base-font-size, 2)) * 2;
-    font-size: math.round(1.2 * divide($base-font-size, 2)) * 2;
-    height: $height;
-    line-height: $height;
-    min-width: $height;
+    --w-badge-h: calc(2 * round(nearest, calc(1.8 * var(--w-base-font-size) / 2), 1px));
+    font-size: calc(2 * round(nearest, calc(1.2 * var(--w-base-font-size) / 2), 1px));
+    height: var(--w-badge-h);
+    line-height: var(--w-badge-h);
+    min-width: var(--w-badge-h);
   }
 
   // Position.
@@ -169,18 +170,18 @@ export default {
   &--left {right: 100%;}
   &--right {left: 100%;}
   &--overlap {
-    &.w-badge--top {margin-top: -1 * $base-increment;}
-    &.w-badge--bottom {margin-bottom: -1 * $base-increment;}
-    &.w-badge--left {margin-right: -3 * $base-increment;}
-    &.w-badge--right {margin-left: -3 * $base-increment;}
-    &.w-badge--top.size--xs {margin-top: math.round(-0.5 * $base-increment);}
-    &.w-badge--bottom.size--xs {margin-bottom: math.round(-0.5 * $base-increment);}
-    &.w-badge--top.size--sm {margin-top: math.round(-0.75 * $base-increment);}
-    &.w-badge--bottom.size--sm {margin-bottom: math.round(-0.75 * $base-increment);}
-    &.w-badge--top.size--lg {margin-top: math.round(-1.5 * $base-increment);}
-    &.w-badge--bottom.size--lg {margin-bottom: math.round(-1.5 * $base-increment);}
-    &.w-badge--top.size--xl {margin-top: -2 * $base-increment;}
-    &.w-badge--bottom.size--xl {margin-bottom: -2 * $base-increment;}
+    &.w-badge--top {margin-top: calc(var(--w-base-increment) * -1);}
+    &.w-badge--bottom {margin-bottom: calc(var(--w-base-increment) * -1);}
+    &.w-badge--left {margin-right: calc(var(--w-base-increment) * -3);}
+    &.w-badge--right {margin-left: calc(var(--w-base-increment) * -3);}
+    &.w-badge--top.size--xs {margin-top: calc(var(--w-base-increment) * -0.5);}
+    &.w-badge--bottom.size--xs {margin-bottom: calc(var(--w-base-increment) * -0.5);}
+    &.w-badge--top.size--sm {margin-top: calc(var(--w-base-increment) * -0.75);}
+    &.w-badge--bottom.size--sm {margin-bottom: calc(var(--w-base-increment) * -0.75);}
+    &.w-badge--top.size--lg {margin-top: calc(var(--w-base-increment) * -1.5);}
+    &.w-badge--bottom.size--lg {margin-bottom: calc(var(--w-base-increment) * -1.5);}
+    &.w-badge--top.size--xl {margin-top: calc(var(--w-base-increment) * -2);}
+    &.w-badge--bottom.size--xl {margin-bottom: calc(var(--w-base-increment) * -2);}
   }
 
   // Look modifiers.
@@ -189,13 +190,13 @@ export default {
     background-color: transparent;
     border-color: currentColor;
   }
-  &--shadow {box-shadow: $box-shadow;}
+  &--shadow {box-shadow: var(--w-box-shadow);}
 
   &--dot.w-badge {min-width: 0;padding: 0;aspect-ratio: 1;}
-  &--dot.size--xs {height: math.round(1.35 * $base-increment);}
-  &--dot.size--sm {height: math.round(1.7 * $base-increment);}
-  &--dot.size--md {height: math.round(2.2 * $base-increment);}
-  &--dot.size--lg {height: math.round(2.75 * $base-increment);}
-  &--dot.size--xl {height: 3 * $base-increment;}
+  &--dot.size--xs {height: calc(var(--w-base-increment) * 1.35);}
+  &--dot.size--sm {height: calc(var(--w-base-increment) * 1.7);}
+  &--dot.size--md {height: calc(var(--w-base-increment) * 2.2);}
+  &--dot.size--lg {height: calc(var(--w-base-increment) * 2.75);}
+  &--dot.size--xl {height: calc(var(--w-base-increment) * 3);}
 }
 </style>

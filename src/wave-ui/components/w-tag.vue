@@ -93,19 +93,17 @@ export default {
 </script>
 
 <style lang="scss">
-@use "sass:math";
-
 .w-tag {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   vertical-align: middle;
-  border-radius: $border-radius;
+  border-radius: var(--w-border-radius);
   border: 1px solid color-mix(in srgb, var(--w-contrast-bg-color) 8%, transparent);
   background-color: color-mix(in srgb, var(--w-base-bg-color) 85%, transparent);
-  padding-left: 2 * $base-increment;
-  padding-right: 2 * $base-increment;
+  padding-left: calc(var(--w-base-increment) * 2);
+  padding-right: calc(var(--w-base-increment) * 2);
   cursor: default;
   user-select: none;
 
@@ -116,40 +114,40 @@ export default {
   &--no-border {border-color: transparent;}
   &--round {border-radius: 99em;}
   &--tile {border-radius: initial;}
-  &--shadow {box-shadow: $box-shadow;}
+  &--shadow {box-shadow: var(--w-box-shadow);}
 
   &.size--xs {
-    $font-size: math.round(0.7 * $base-font-size);
-    font-size: $font-size;
-    line-height: $font-size + 2px;
-    padding: math.round(0.25 * $base-increment) $base-increment;
+    --w-tag-font-size: round(nearest, calc(0.7 * var(--w-base-font-size)), 1px);
+    font-size: var(--w-tag-font-size);
+    line-height: calc(var(--w-tag-font-size) + 2px);
+    padding: calc(var(--w-base-increment) * 0.25) var(--w-base-increment);
   }
   &.size--sm {
-    $font-size: math.round(0.82 * $base-font-size);
-    font-size: $font-size;
-    line-height: $font-size + 2px;
-    padding: math.round(0.25 * $base-increment) $base-increment;
+    --w-tag-font-size: round(nearest, calc(0.82 * var(--w-base-font-size)), 1px);
+    font-size: var(--w-tag-font-size);
+    line-height: calc(var(--w-tag-font-size) + 2px);
+    padding: calc(var(--w-base-increment) * 0.25) var(--w-base-increment);
   }
   &.size--md {
-    $font-size: math.round(0.85 * $base-font-size);
-    font-size: $font-size;
-    line-height: $font-size + 4px;
-    padding-top: math.round(0.25 * $base-increment);
-    padding-bottom: math.round(0.25 * $base-increment);
+    --w-tag-font-size: round(nearest, calc(0.85 * var(--w-base-font-size)), 1px);
+    font-size: var(--w-tag-font-size);
+    line-height: calc(var(--w-tag-font-size) + 4px);
+    padding-top: calc(var(--w-base-increment) * 0.25);
+    padding-bottom: calc(var(--w-base-increment) * 0.25);
   }
   &.size--lg {
-    $font-size: math.round(1.1 * $base-font-size);
-    font-size: $font-size;
-    line-height: $font-size + 4px;
-    padding-top: math.round(0.5 * $base-increment);
-    padding-bottom: math.round(0.5 * $base-increment);
+    --w-tag-font-size: round(nearest, calc(1.1 * var(--w-base-font-size)), 1px);
+    font-size: var(--w-tag-font-size);
+    line-height: calc(var(--w-tag-font-size) + 4px);
+    padding-top: calc(var(--w-base-increment) * 0.5);
+    padding-bottom: calc(var(--w-base-increment) * 0.5);
   }
   &.size--xl {
-    $font-size: math.round(1.3 * $base-font-size);
-    font-size: $font-size;
-    line-height: $font-size + 4px;
-    padding-top: math.round(1 * $base-increment);
-    padding-bottom: math.round(1 * $base-increment);
+    --w-tag-font-size: round(nearest, calc(1.3 * var(--w-base-font-size)), 1px);
+    font-size: var(--w-tag-font-size);
+    line-height: calc(var(--w-tag-font-size) + 4px);
+    padding-top: var(--w-base-increment);
+    padding-bottom: var(--w-base-increment);
   }
 
   &--clickable {
@@ -161,7 +159,7 @@ export default {
       margin-left: 3px;
       margin-right: -3px;
       padding: 1px;
-      transition: $transition-duration;
+      transition: var(--w-transition-duration);
     }
     &.size--lg .w-tag__closable,
     &.size--xl .w-tag__closable {
@@ -178,31 +176,30 @@ export default {
       content: '';
       position: absolute;
       inset: 0;
-      opacity: 0;
       background-color: transparent;
       // As this overlay is a smaller rectangle, the radius must be smaller to cover perfectly.
-      border-radius: $border-radius - 1;
+      border-radius: calc(var(--w-border-radius) - 1px);
       transition: 0.2s;
     }
     &.w-tag--round:before {border-radius: inherit;}
 
     // Hover state.
-    &:hover:before {background-color: currentColor;opacity: 0.06;}
+    &:hover:before {background-color: color-mix(in srgb, currentColor 6%, transparent);}
     &--dark:hover:before {background-color: color-mix(in srgb, var(--w-base-bg-color) 12%, transparent);opacity: 1;}
     &--outline:hover:before,
-    &--text:hover:before {background-color: currentColor;opacity: 0.12;}
+    &--text:hover:before {background-color: color-mix(in srgb, currentColor 12%, transparent);}
 
     // Focus state.
-    &:focus:before {background-color: currentColor;opacity: 0.2;}
+    &:focus:before {background-color: color-mix(in srgb, currentColor 20%, transparent);}
     &--dark:focus:before {background-color: color-mix(in srgb, var(--w-base-bg-color) 12%, transparent);}
     &--outline:focus:before,
-    &--text:focus:before {background-color: currentColor;opacity: 0.12;}
+    &--text:focus:before {background-color: color-mix(in srgb, currentColor 12%, transparent);}
 
     // Active state.
-    &:active:before {background-color: currentColor;opacity: 0.2;}
+    &:active:before {background-color: color-mix(in srgb, currentColor 20%, transparent);}
     &--dark:active:before {background-color: color-mix(in srgb, var(--w-base-bg-color) 20%, transparent);}
     &--outline:active:before,
-    &--text:active:before {background-color: currentColor;opacity: 0.2;}
+    &--text:active:before {background-color: color-mix(in srgb, currentColor 20%, transparent);}
   }
 }
 </style>

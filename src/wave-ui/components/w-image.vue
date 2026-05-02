@@ -247,7 +247,7 @@ export default {
   }
 
   &__caption {
-    padding-top: $base-increment;
+    padding-top: var(--w-base-increment);
     text-align: right;
   }
 }

@@ -141,9 +141,9 @@ export default {
     padding: 5px 2px 5px 16px;
     font-size: 1.02rem;
     font-weight: normal;
-    border-right: 0 solid $primary;
-    color: $primary;
-    transition: $transition-duration ease-in-out, border-width 0s;
+    border-right: 0 solid var(--w-primary-color);
+    color: var(--w-primary-color);
+    transition: var(--w-transition-duration) ease-in-out, border-width 0s;
 
     &:before {
       content: '';
@@ -205,8 +205,8 @@ export default {
 
   .close {
     position: absolute;
-    top: 2 * $base-increment;
-    right: 2 * $base-increment;
+    top: calc(2 * var(--w-base-increment));
+    right: calc(2 * var(--w-base-increment));
     z-index: 10;
   }
 }

@@ -167,8 +167,6 @@ export default {
 </script>
 
 <style lang="scss">
-@use "sass:math";
-
 .w-rating {
   display: inline-flex;
   align-items: center;
@@ -184,21 +182,21 @@ export default {
     justify-content: center;
     border: none;
     background: none;
-    color: $rating-bg-color;
+    color: var(--w-rating-bg-color);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    @include default-transition($fast-transition-duration);
+    @include default-transition(var(--w-transition-duration-fast));
 
     // Disabled & readonly.
     .w-rating--disabled & {opacity: 0.6;cursor: not-allowed;}
     .w-rating--readonly & {cursor: auto;}
 
     // Sizes.
-    &.size--xs {font-size: math.round(0.85 * $base-font-size);}
-    &.size--sm {font-size: math.round(1.15 * $base-font-size);}
-    &.size--md {font-size: math.round(1.4 * $base-font-size);}
-    &.size--lg {font-size: math.round(1.7 * $base-font-size);}
-    &.size--xl {font-size: 2 * $base-font-size;margin-left: 0;}
+    &.size--xs {font-size: round(nearest, calc(0.85 * var(--w-base-font-size)), 1px);}
+    &.size--sm {font-size: round(nearest, calc(1.15 * var(--w-base-font-size)), 1px);}
+    &.size--md {font-size: round(nearest, calc(1.4 * var(--w-base-font-size)), 1px);}
+    &.size--lg {font-size: round(nearest, calc(1.7 * var(--w-base-font-size)), 1px);}
+    &.size--xl {font-size: calc(2 * var(--w-base-font-size));margin-left: 0;}
 
     &:before {font-size: 1.1em;}
     &:before, .w-icon:before {

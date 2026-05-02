@@ -130,7 +130,7 @@ div.w-form-el {
   &--has-error input::placeholder {color: inherit;}
 
   &-shakable {position: relative;}
-  &--error &-shakable {animation: w-form-el-shake 0.3s $transition-duration ease-in-out;}
+  &--error &-shakable {animation: w-form-el-shake 0.3s var(--w-transition-duration) ease-in-out;}
 
   // Error message.
   // ------------------------------------------------------
@@ -138,7 +138,7 @@ div.w-form-el {
     width: 100%;
     flex-grow: 1;
     font-size: 0.775rem;
-    margin-top: $base-increment;
+    margin-top: var(--w-base-increment);
 
     .w-form--error-placeholders & {position: absolute;bottom: 0;}
   }

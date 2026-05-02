@@ -131,15 +131,13 @@ export default {
 </script>
 
 <style lang="scss">
-@use "sass:math";
-
 .w-alert {
   position: relative;
-  margin-top: 4 * $base-increment;
-  margin-bottom: 4 * $base-increment;
-  padding: 2 * $base-increment;
-  font-size: $base-font-size;
-  border-radius: $border-radius;
+  margin-top: calc(var(--w-base-increment) * 4);
+  margin-bottom: calc(var(--w-base-increment) * 4);
+  padding: calc(var(--w-base-increment) * 2);
+  font-size: var(--w-base-font-size);
+  border-radius: var(--w-border-radius);
   border: 0 solid currentColor;
 
   @include themeable;
@@ -154,10 +152,10 @@ export default {
   &--tile {border-radius: 0;}
   &--round {
     border-radius: 99em;
-    padding-left: 3 * $base-increment;
-    padding-right: 3 * $base-increment;
+    padding-left: calc(var(--w-base-increment) * 3);
+    padding-right: calc(var(--w-base-increment) * 3);
   }
-  &--shadow {box-shadow: $box-shadow;}
+  &--shadow {box-shadow: var(--w-box-shadow);}
   &--one-border, &--plain {border: transparent;}
 
   // Before for the border, after for the background color.
@@ -171,33 +169,33 @@ export default {
 
   // Single side border.
   // ------------------------------------------------------
-  &--border-left {padding-left: 3 * $base-increment;}
-  &--border-right {padding-right: 3 * $base-increment;}
-  &--border-top {padding-top: 3 * $base-increment;}
-  &--border-bottom {padding-bottom: 3 * $base-increment;}
+  &--border-left {padding-left: calc(var(--w-base-increment) * 3);}
+  &--border-right {padding-right: calc(var(--w-base-increment) * 3);}
+  &--border-top {padding-top: calc(var(--w-base-increment) * 3);}
+  &--border-bottom {padding-bottom: calc(var(--w-base-increment) * 3);}
 
   &--one-border:before {content: '';opacity: 0.3;}
   &--border-left:before {
     right: auto;
-    width: $base-increment;
+    width: var(--w-base-increment);
     border-top-left-radius: inherit;
     border-bottom-left-radius: inherit;
   }
   &--border-right:before {
     left: auto;
-    width: $base-increment;
+    width: var(--w-base-increment);
     border-top-right-radius: inherit;
     border-bottom-right-radius: inherit;
   }
   &--border-top:before {
     bottom: auto;
-    height: $base-increment;
+    height: var(--w-base-increment);
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
   }
   &--border-bottom:before {
     top: auto;
-    height: $base-increment;
+    height: var(--w-base-increment);
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
   }
@@ -215,15 +213,15 @@ export default {
   // ------------------------------------------------------
   &__dismiss.w-button {
     align-self: flex-start;
-    margin-left: 2 * $base-increment;
-    margin-top: math.round(-0.5 * $base-increment);
-    margin-right: math.round(-0.5 * $base-increment);
+    margin-left: calc(var(--w-base-increment) * 2);
+    margin-top: calc(var(--w-base-increment) * -0.5);
+    margin-right: calc(var(--w-base-increment) * -0.5);
   }
 
   & &__icon {
     opacity: 0.9;
     align-self: flex-start;
-    margin-right: 2 * $base-increment;
+    margin-right: calc(var(--w-base-increment) * 2);
     font-size: 1.3em;
   }
   &--has-icon &__content {flex-grow: 1;}
@@ -238,18 +236,18 @@ export default {
     z-index: 1;
     transform: translateX(-50%);
     border: 1px solid color-mix(in srgb, var(--w-base-bg-color) 70%, transparent);
-    background-color: $base-bg-color;
+    background-color: var(--w-base-bg-color);
   }
   &--icon-outside &__icon:before {transform: scale(1.05);}
 
-  &--icon-outside &__content {padding-left: 3 * $base-increment;}
+  &--icon-outside &__content {padding-left: calc(var(--w-base-increment) * 3);}
 
   // Sizes.
   // ------------------------------------------------------
-  &.size--xs {padding-top: $base-increment;padding-bottom: $base-increment;}
-  &.size--sm {padding-top: $base-increment;padding-bottom: $base-increment;}
-  &.size--md {padding-top: math.round(2 * $base-increment);padding-bottom: math.round(2 * $base-increment);}
-  &.size--lg {padding-top: math.round(3 * $base-increment);padding-bottom: math.round(2.5 * $base-increment);}
-  &.size--xl {padding-top: math.round(3 * $base-increment);padding-bottom: math.round(3 * $base-increment);}
+  &.size--xs {padding-top: var(--w-base-increment);padding-bottom: var(--w-base-increment);}
+  &.size--sm {padding-top: var(--w-base-increment);padding-bottom: var(--w-base-increment);}
+  &.size--md {padding-top: calc(var(--w-base-increment) * 2);padding-bottom: calc(var(--w-base-increment) * 2);}
+  &.size--lg {padding-top: calc(var(--w-base-increment) * 3);padding-bottom: calc(var(--w-base-increment) * 2.5);}
+  &.size--xl {padding-top: calc(var(--w-base-increment) * 3);padding-bottom: calc(var(--w-base-increment) * 3);}
 }
 </style>

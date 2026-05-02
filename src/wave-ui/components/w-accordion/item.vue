@@ -199,13 +199,11 @@ export default {
 </script>
 
 <style lang="scss">
-@use "sass:math";
-
 .w-accordion__item {position: relative;}
 
 button.w-accordion__expand-icon {color: color-mix(in srgb, var(--w-base-color) 40%, transparent);}
 .w-accordion__expand-icon {
-  margin-right: $base-increment;
+  margin-right: var(--w-base-increment);
 
   .w-accordion--rotate-icon & {@include default-transition;}
   &--rotate90 {transform: rotate(-90deg);}
@@ -219,11 +217,11 @@ button.w-accordion__expand-icon {color: color-mix(in srgb, var(--w-base-color) 4
   position: relative;
   display: flex;
   align-items: center;
-  font-size: math.round(1.2 * $base-font-size);
-  padding: 1 * $base-increment;
+  font-size: round(nearest, calc(1.2 * var(--w-base-font-size)), 1px);
+  padding: var(--w-base-increment);
   user-select: none;
   cursor: pointer;
-  border-top: $border;
+  border-top: var(--w-border);
   -webkit-tap-highlight-color: transparent;
 
   .w-accordion__item--disabled & {
@@ -231,7 +229,7 @@ button.w-accordion__expand-icon {color: color-mix(in srgb, var(--w-base-color) 4
     opacity: 0.6;
     -webkit-tap-highlight-color: transparent;
   }
-  .w-accordion--no-icon &, .w-accordion--icon-right & {padding-left: 3 * $base-increment;}
+  .w-accordion--no-icon &, .w-accordion--icon-right & {padding-left: calc(var(--w-base-increment) * 3);}
 
   .w-accordion__item:first-child & {border-top-color: transparent;}
 
@@ -239,18 +237,17 @@ button.w-accordion__expand-icon {color: color-mix(in srgb, var(--w-base-color) 4
     content: '';
     position: absolute;
     inset: 0;
-    background-color: currentColor;
-    opacity: 0;
-    transition: $fast-transition-duration;
+    background-color: transparent;
+    transition: background-color var(--w-transition-duration-fast);
     pointer-events: none;
   }
 
-  &:focus:before, &:hover:before {opacity: 0.03;}
-  &:active:before {opacity: 0.05;}
+  &:focus:before, &:hover:before {background-color: color-mix(in srgb, currentColor 3%, transparent);}
+  &:active:before {background-color: color-mix(in srgb, currentColor 5%, transparent);}
   .w-accordion__item--disabled &:before {display: none;}
 }
 
 .w-accordion__item-content {
-  padding: (2 * $base-increment) (3 * $base-increment);
+  padding: calc(var(--w-base-increment) * 2) calc(var(--w-base-increment) * 3);
 }
 </style>

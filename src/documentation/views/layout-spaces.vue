@@ -16,36 +16,32 @@ main
   example
     .orange-light4--bg.pa12.grey-dark5
       .yellow-light5--bg.pa3.
-        The orange container has a #[span.code.inherit pa12] class which results in a padding of: 12 x 4 x
-        base-font-size pixels.#[br]
-        The default base font size is 14px but it's easy to override it in your SCSS, as well as the
-        increment for #[span.code.inherit pax] and #[span.code.inherit max] classes. Read on in the
+        The orange container has a #[span.code.inherit pa12] class which results in a padding of
+        #[code calc(12 * var(--w-base-increment))] (#[code 48px] with defaults).#[br]
+        The default #[code --w-base-font-size] is #[code 14px]; override #[code --w-base-font-size] and
+        #[code --w-base-increment] on #[code :root] if needed. Read on in the
         #[router-link(to="customization") customization] page.#[br]
 
       .green-light4--bg.mt8.pa3.
-        This green container has a #[span.code.inherit mt8] class which results in a top margin of: 8 x 4 x
-        base-font-size pixels.
+        This green container has a #[span.code.inherit mt8] class which results in a top margin of
+        #[code calc(8 * var(--w-base-increment))] (#[code 32px] with defaults).
     template(#pug).
       .orange-light4--bg.pa12
         .yellow-light5--bg.pa3.
-          The orange container has a `pa12` class which results in a padding of: 12 x 4 x
-          base-font-size pixels.#[br]
-          The default base font size is 14px but it's easy to override it in your SCSS, as well as the
-          increment for `pax` and `max` classes.
+          The orange container has a `pa12` class which results in a padding of `calc(12 * var(--w-base-increment))` (48px with defaults).#[br]
+          Override `--w-base-font-size` and `--w-base-increment` on `:root` if needed.
 
         .green-light4--bg.mt8.pa3.
-          This green container has a `mt8` class which results in a top margin of: 8 x 4 x
-          base-font-size pixels.
+          This green container has a `mt8` class which results in a top margin of `calc(8 * var(--w-base-increment))` (32px with defaults).
     template(#html).
       &lt;div class="orange-light4--bg pa12"&gt;
         &lt;div class="yellow-light5--bg pa3"&gt;
-          The orange container has a `pa12` class which results in a padding of: 12 x 4 x base-font-size pixels.
-          The default base font size is 14px but it's easy to override it in your SCSS, as well as the
-          increment for `pax` and `max` classes.
+          The orange container has a `pa12` class which results in a padding of `calc(12 * var(--w-base-increment))` (48px with defaults).
+          Override `--w-base-font-size` and `--w-base-increment` on `:root` if needed.
         &lt;/div&gt;
 
         &lt;div class="green-light4--bg mt8 pa3"&gt;
-          This green container has an `mt8` class which results in a top margin of: 8 x 4 x base-font-size pixels.
+          This green container has an `mt8` class which results in a top margin of `calc(8 * var(--w-base-increment))` (32px with defaults).
         &lt;/div&gt;
       &lt;/div&gt;
 
@@ -60,18 +56,16 @@ main
   example
     .orange-light4--bg.pa8
     .green-light4--bg.mt-8.mx8.pa3.grey-dark5.
-      This green container has a #[span.code.inherit mt-8] class which results in a negative top margin of: -8 x 4 x
-      base-font-size pixels.
+      This green container has a #[span.code.inherit mt-8] class which results in a negative top margin of
+      #[code calc(-8 * var(--w-base-increment))] (#[code -32px] with defaults).
     template(#pug).
       .orange-light4--bg.pa8
       .green-light4--bg.mt-8.mx8.pa3.
-        This green container has a `mt-8` class which results in a negative top margin of: -8 x 4 x
-        base-font-size pixels.
+        This green container has a `mt-8` class which results in a negative top margin of `calc(-8 * var(--w-base-increment))` (-32px with defaults).
     template(#html).
       &lt;div class="orange-light4--bg pa8"&gt;
         &lt;div class="green-light4--bg mt-8 mx8 pa3"&gt;
-          This green container has a `mt-8` class which results in a negative top margin of: 8 x 4 x
-          base-font-size pixels.
+          This green container has a `mt-8` class which results in a negative top margin of `calc(-8 * var(--w-base-increment))` (-32px with defaults).
         &lt;/div&gt;
       &lt;/div&gt;
 

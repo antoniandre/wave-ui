@@ -1,5 +1,9 @@
 import { consoleError } from './console'
 
+// The built-in palette remains the single source for exact legacy shade values.
+// dynamic-css.js exposes these colors as --w-*-color variables; SCSS color
+// utility classes only reference those variables.
+
 /**
  * Generates the color shades for each custom color and status colors for the current theme (only),
  * and save it in the config object.
@@ -37,11 +41,10 @@ export const flattenColors = (themeColors, colorPalette) => {
   const colors = {
     ...colorPalette.reduce((obj, color) => {
       obj[color.label] = color.color
-      const shades = (color.shades || []).reduce((obj, color) => {
+      ;(color.shades || []).forEach(color => {
         obj[color.label] = color.color
-        return obj
-      }, {})
-      return { ...obj, ...shades }
+      })
+      return obj
     }, { ...themeColors, ...themeColors.shades })
   }
   delete colors.shades

@@ -60,7 +60,7 @@ export interface $waveui {
     css: {
       /**
        * Generate shades for custom colors and status colors.
-       * NOTE: the color palette shades are always generated separately from SCSS.
+       * NOTE: the built-in color palette shades always expose CSS variables.
        * @property {boolean} colorShades - Default: true
        */
       colorShades: boolean,
@@ -71,6 +71,14 @@ export interface $waveui {
        * @property {boolean} colorShadeCssVariables - Default: false
        */
       colorShadeCssVariables: boolean,
+
+      /**
+       * Custom CSS classes to add to the .w-app element.
+       * Accepts a space-separated string or an array of class names.
+       * @property {string|string[]} appClasses - Default: ""
+       * @example "row" or ["row", "my-custom-class"]
+       */
+      appClasses: string | string[],
 
       /**
        * Generate margin and padding utility classes for each breakpoint. E.g. `sm-ma2`
@@ -258,4 +266,12 @@ export interface $waveui {
 
   notify(options: {message: string, timeout: number} & WaveAlertProps): void
   switchTheme (theme: string, skipFlatten: boolean): void
+  
+  /**
+   * Set custom classes on the .w-app element.
+   * @param {...string} classes - Class names to add to the .w-app element. Pass no arguments to remove all custom classes.
+   * @example $waveui.setAppClasses('class1', 'class2')
+   * @example $waveui.setAppClasses() // Remove all custom classes
+   */
+  setAppClasses (...classes: string[]): void
 }

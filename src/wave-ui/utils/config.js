@@ -19,15 +19,14 @@ const config = reactive({
     // Note: colorShades must be enabled for this to work.
     colorShadeCssVariables: false,
 
-    // Generate palette colors and palette color shades.
-    // Can't have this option: color palette is generated via SCSS in colors.scss.
-    // colorPalette: true,
+    // Built-in palette colors and shades always generate CSS variables.
 
     breakpointSpaces: false, // Generate margin & padding classes for each breakpoint. E.g. `sm-ma2`.
     // Generate helper classes for each breakpoint.
     // E.g. `sm-text-left`, `xs-hide`.
     breakpointLayoutClasses: true,
-    grid: 12
+    grid: 12,
+    appClasses: '' // Custom CSS classes to add to the .w-app element.
   },
   colors: {
     // Default colors of Wave UI. Can be overridden from the Wave UI user config on init.

@@ -81,7 +81,7 @@ export interface WaveAccordionProps {
    * @property {string, array, object} itemClass
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
-  itemClass?: string|array|object
+  itemClass?: string|Array<string>|object
 
   /**
    * Applies a custom CSS class (or space separated classes) on every title container.

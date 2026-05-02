@@ -85,7 +85,7 @@ export default {
     > .w-icon {
       background-color: #ffd849;
       border-color: #ffd849;
-      color: $base-bg-color;
+      color: var(--w-base-bg-color);
     }
     > .w-icon:before {font-size: 16px;}
   }

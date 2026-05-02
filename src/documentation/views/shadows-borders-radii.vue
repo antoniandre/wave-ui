@@ -106,8 +106,8 @@ main
 
   title-link(h2) Border radii
   p.
-    The border radii range from #[code 0] to #[code 6], and are incremented by the #[code $base-increment]
-    (SCSS variable) which is equal to 4px by default.#[br]
+    The border radii range from #[code 0] to #[code 6], and are incremented by #[code var(--w-base-increment)]
+    (defaults to #[code 4px] with the default #[code --w-base-font-size]).#[br]
     #[code .bdrs0] will remove any border radius, #[code .bdrsr] will produce a #[strong round] border
     radius, #[code .bdrsm] will produce a #[strong max] border radius (#[span.code 100%]).
   alert(tip)

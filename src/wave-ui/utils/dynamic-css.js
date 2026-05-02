@@ -9,13 +9,26 @@ const cssVars = {
 let breakpointsDef = { keys: [], values: [] }
 let currentBreakpoint = null
 
+const generatePaletteVariables = colorPalette => {
+  let cssVariablesString = ''
+
+  colorPalette.forEach(({ label, color, shades = [] }) => {
+    cssVariablesString += `--w-${label}-color: ${color};`
+    shades.forEach(shade => {
+      cssVariablesString += `--w-${shade.label}-color: ${shade.color};`
+    })
+  })
+
+  return `:root{${cssVariablesString}}`
+}
+
 // Generates the CSS for all the dynamic colors and shades. E.g.
 // :root {[color1-variable], [color2-variable]}
 // .color1--bg {background-color: [color1-variable]}
 // .color1 {color: [color1-variable]}
 const generateColors = (themeColors, generateShadeCssVariables) => {
   let styles = ''
-  const cssVariables = {}
+  let cssVariablesString = ''
 
   // Extract status colors and place them after the other colors.
   const { info, warning, success, error, shades, ...colors } = themeColors
@@ -30,9 +43,10 @@ const generateColors = (themeColors, generateShadeCssVariables) => {
   }
   // The shades don't need css vars.
   for (const colorName in shades) {
+    const colorValue = generateShadeCssVariables ? `var(--w-${colorName}-color)` : shades[colorName]
     styles +=
-      `${cssScope} .${colorName}--bg{background-color:${shades[colorName]}}` +
-      `${cssScope} .${colorName}{color:${shades[colorName]}}`
+      `${cssScope} .${colorName}--bg{background-color:${colorValue}}` +
+      `${cssScope} .${colorName}{color:${colorValue}}`
   }
 
   // Creating CSS3 variables.
@@ -41,14 +55,12 @@ const generateColors = (themeColors, generateShadeCssVariables) => {
   // Status colors must remain after the other colors so they have priority in form validations.
   // That only makes sense when there are 2 colors on the same element: e.g. `span.primary.error`.
   const allColors = { ...colors, info, warning, success, error }
-  for (const colorName in allColors) cssVariables[colorName] = allColors[colorName]?.color ?? allColors[colorName]
-  if (generateShadeCssVariables) {
-    for (const colorName in shades) cssVariables[colorName] = shades[colorName]
+  for (const colorName in allColors) {
+    cssVariablesString += `--w-${colorName}-color: ${allColors[colorName]?.color ?? allColors[colorName]};`
   }
-  let cssVariablesString = ''
-  Object.entries(cssVariables).forEach(([colorName, colorHex]) => {
-    cssVariablesString += `--w-${colorName}-color: ${colorHex};`
-  })
+  if (generateShadeCssVariables) {
+    for (const colorName in shades) cssVariablesString += `--w-${colorName}-color: ${shades[colorName]};`
+  }
 
   return `:root{${cssVariablesString}}${styles}`
 }
@@ -104,7 +116,7 @@ const generateBreakpoints = (breakpoints, grid) => {
 
 const generateBreakpointSpaces = breakpoints => {
   let styles = ''
-  const { cssScope, baseIncrement } = cssVars
+  const { cssScope } = cssVars
 
   breakpoints.forEach(({ label, min }) => {
     // Discard `xs` since the min is 0 (`media query (min-width: 0)`), and leave in _layout.scss.
@@ -148,7 +160,7 @@ const generateBreakpointSpaces = breakpoints => {
 
 const genBreakpointLayoutClasses = breakpoints => {
   let styles = ''
-  const { cssScope, baseIncrement } = cssVars
+  const { cssScope } = cssVars
   const layoutClasses = [
     'show{display:block}',
     'hide{display:none}',
@@ -202,8 +214,8 @@ const genBreakpointLayoutClasses = breakpoints => {
         `@media(min-width:${min}px){` +
         layoutClasses.map(rule => `${cssScope} .${label}u-${rule}`).join('') +
         // w-grid columns and gap.
-        array12.map((item, i) => `.w-grid.${label}u-columns${i + 1}{grid-template-columns:repeat(${i + 1},1fr);}`).join('') +
-        array12.map((item, i) => `.w-flex.${label}u-gap${i + 1},.w-grid.${label}u-gap${i + 1}{gap:${(i + 1) * baseIncrement}px;}`).join('') +
+        array12.map((_, i) => `.w-grid.${label}u-columns${i + 1}{grid-template-columns:repeat(${i + 1},1fr);}`).join('') +
+        array12.map((_, i) => `.w-flex.${label}u-gap${i + 1},.w-grid.${label}u-gap${i + 1}{gap:calc(${i + 1} * var(--w-base-increment));}`).join('') +
         `.w-flex.${label}u-gap0,.w-flex.${label}u-gap0{gap:0}` +
         '}'
     }
@@ -214,8 +226,8 @@ const genBreakpointLayoutClasses = breakpoints => {
       `@media (min-width:${min}px) and (max-width:${max}px){` +
       layoutClasses.map(rule => `${cssScope} .${label}-${rule}`).join('') +
       // w-grid columns and gap.
-      array12.map((item, i) => `.w-grid.${label}-columns${i + 1}{grid-template-columns:repeat(${i + 1},1fr);}`).join('') +
-      array12.map((item, i) => `.w-flex.${label}-gap${i + 1},.w-grid.${label}-gap${i + 1}{gap:${(i + 1) * baseIncrement}px;}`).join('') +
+      array12.map((_, i) => `.w-grid.${label}-columns${i + 1}{grid-template-columns:repeat(${i + 1},1fr);}`).join('') +
+      array12.map((_, i) => `.w-flex.${label}-gap${i + 1},.w-grid.${label}-gap${i + 1}{gap:calc(${i + 1} * var(--w-base-increment));}`).join('') +
       `.w-flex.${label}-gap0,.w-flex.${label}-gap0{gap:0}` +
       '}'
   })
@@ -226,8 +238,8 @@ const genBreakpointLayoutClasses = breakpoints => {
         `@media (max-width:${max}px){` +
         layoutClasses.map(rule => `${cssScope} .${label}d-${rule}`).join('') +
         // w-grid columns and gap.
-        array12.map((item, i) => `.w-grid.${label}d-columns${i + 1}{grid-template-columns:repeat(${i + 1},1fr);}`).join('') +
-        array12.map((item, i) => `.w-flex.${label}d-gap${i + 1},.w-grid.${label}d-gap${i + 1}{gap:${(i + 1) * baseIncrement}px;}`).join('') +
+        array12.map((_, i) => `.w-grid.${label}d-columns${i + 1}{grid-template-columns:repeat(${i + 1},1fr);}`).join('') +
+        array12.map((_, i) => `.w-flex.${label}d-gap${i + 1},.w-grid.${label}d-gap${i + 1}{gap:calc(${i + 1} * var(--w-base-increment));}`).join('') +
         `.w-flex.${label}d-gap0,.w-flex.${label}d-gap0{gap:0}` +
         '}'
     }
@@ -290,11 +302,21 @@ export const injectCSSInDOM = $waveui => {
 }
 
 export const injectColorsCSSInDOM = (themeColors, colorPalette, generateShadeCssVariables) => {
+  if (!document.getElementById('wave-ui-palette')) {
+    const css = document.createElement('style')
+    css.id = 'wave-ui-palette'
+    css.innerHTML = generatePaletteVariables(colorPalette)
+
+    const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
+    if (firstStyle) firstStyle.before(css)
+    else document.head.appendChild(css)
+  }
+
   // Inject global dynamic CSS classes in document head.
   if (!document.getElementById('wave-ui-colors')) {
     const css = document.createElement('style')
     css.id = 'wave-ui-colors'
-    css.innerHTML = generateColors(themeColors, colorPalette, generateShadeCssVariables)
+    css.innerHTML = generateColors(themeColors, generateShadeCssVariables)
 
     const firstStyle = document.head.querySelectorAll('style,link[rel="stylesheet"]')[0]
     if (firstStyle) firstStyle.before(css)
@@ -311,8 +333,8 @@ const doDynamicCSS = config => {
   })
 
   const computedStyles = getComputedStyle(document.documentElement)
-  cssVars.cssScope = computedStyles.getPropertyValue('--w-css-scope')
-  cssVars.baseIncrement = parseInt(computedStyles.getPropertyValue('--w-base-increment'))
+  cssVars.cssScope = (computedStyles.getPropertyValue('--w-css-scope') || '.w-app').trim() || '.w-app'
+  cssVars.baseIncrement = parseInt(computedStyles.getPropertyValue('--w-base-increment'), 10)
 
   let styles = ''
   styles += generateBreakpoints(breakpointsDef, config.css.grid)

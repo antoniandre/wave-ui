@@ -330,8 +330,8 @@ export default {
   flex-wrap: wrap;
   gap: 4px;
   position: relative;
-  border-radius: $border-radius;
-  border: $border;
+  border-radius: var(--w-border-radius);
+  border: var(--w-border);
   padding: 2px 4px;
   user-select: none;
 
@@ -345,7 +345,7 @@ export default {
     align-items: center;
     background: color-mix(in srgb, var(--w-contrast-bg-color) 3.5%, transparent);
     border: 1px solid color-mix(in srgb, var(--w-contrast-bg-color) 5%, transparent);
-    border-radius: $border-radius;
+    border-radius: var(--w-border-radius);
     padding: 0 2px 0 4px;
     flex-shrink: 0;
 
@@ -374,11 +374,11 @@ export default {
     max-height: clamp(20px, 400px, 80vh);
     margin-top: -1px;
     margin-left: 0;
-    background-color: $base-bg-color;
+    background-color: var(--w-base-bg-color);
     border: 1px solid color-mix(in srgb, var(--w-contrast-bg-color) 20%, transparent);
     border-top: none;
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
+    border-bottom-left-radius: var(--w-border-radius);
+    border-bottom-right-radius: var(--w-border-radius);
     overflow: auto;
     z-index: 10;
 
@@ -388,7 +388,7 @@ export default {
       margin: 0;
       padding: 4px 8px;
 
-      &:hover {background-color: rgba($primary, 0.1);}
+      &:hover {background-color: color-mix(in srgb, var(--w-primary-color) 10%, transparent);}
 
       &:before, &:after {
         content: '';
@@ -398,12 +398,12 @@ export default {
 
       &.highlighted:before {
         border-left: 2px solid transparent;
-        border-left-color: $primary;
+        border-left-color: var(--w-primary-color);
         opacity: 0.3;
       }
 
       &.highlighted:after {
-        background-color: $primary;
+        background-color: var(--w-primary-color);
         opacity: 0.1;
       }
     }

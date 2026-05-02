@@ -35,7 +35,7 @@ export default {
 
 <style lang="scss">
 .w-divider {
-  border: 0 solid $divider-color;
+  border: 0 solid var(--w-divider-color);
   border-top-width: 1px;
 
   @include themeable;
@@ -69,15 +69,15 @@ export default {
       display: flex;
       flex: 1 1 auto;
     }
-    &:before {margin-right: 2 * $base-increment;}
-    &:after {margin-left: 2 * $base-increment;}
+    &:before {margin-right: calc(var(--w-base-increment) * 2);}
+    &:after {margin-left: calc(var(--w-base-increment) * 2);}
 
     // Vertical.
     &.w-divider--vertical {
       flex-direction: column;
       &:before, &:after {border-top-width: 0;border-left-width: 1px;}
-      &:before {margin-right: 0;margin-bottom: 2 * $base-increment;}
-      &:after {margin-left: 0;margin-top: 2 * $base-increment;}
+      &:before {margin-right: 0;margin-bottom: calc(var(--w-base-increment) * 2);}
+      &:after {margin-left: 0;margin-top: calc(var(--w-base-increment) * 2);}
     }
   }
 }

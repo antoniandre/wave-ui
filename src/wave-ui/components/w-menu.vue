@@ -175,7 +175,7 @@ export default {
         minWidth: (this.minWidth && this.menuMinWidth) || null,
         maxWidth: (this.maxWidth && this.menuMaxWidth) || null,
         visibility: this.detachableReady ? null : 'hidden', // Hidden until coords are ready.
-        '--w-menu-bg-color': this.arrow && (this.$waveui.colors[this.bgColor] || 'var(--w-base-bg-color)')
+        '--w-menu-bg-color': this.arrow ? (this.$waveui.colors[this.bgColor] || 'var(--w-base-bg-color)') : null
       }
     },
 
@@ -291,36 +291,34 @@ export default {
 </script>
 
 <style lang="scss">
-@use "sass:math";
-
 .w-menu-wrap {display: none;}
 
 .w-menu {
   position: absolute;
   z-index: 100;
-  color: $menu-color;
+  color: var(--w-menu-color);
 
   @include themeable;
 
   &--fixed {position: fixed;z-index: 1000;}
-  &--card {background-color: $menu-bg-color;}
+  &--card {background-color: var(--w-menu-bg-color);}
   &--tile {border-radius: 0;}
   &--round {
     border-radius: 99em;
-    padding: $base-increment math.round(2.5 * $base-increment);
+    padding: var(--w-base-increment) calc(var(--w-base-increment) * 2.5);
   }
-  &--shadow {box-shadow: $box-shadow;}
+  &--shadow {box-shadow: var(--w-box-shadow);}
 
-  &--top {margin-top: -3 * $base-increment;}
-  &--bottom {margin-top: 3 * $base-increment;}
-  &--left {margin-left: -3 * $base-increment;}
-  &--right {margin-left: 3 * $base-increment;}
+  &--top {margin-top: calc(var(--w-base-increment) * -3);}
+  &--bottom {margin-top: calc(var(--w-base-increment) * 3);}
+  &--left {margin-left: calc(var(--w-base-increment) * -3);}
+  &--right {margin-left: calc(var(--w-base-increment) * 3);}
 
   &--arrow {
-    &.w-menu--top {margin-top: -4 * $base-increment;}
-    &.w-menu--bottom {margin-top: 4 * $base-increment;}
-    &.w-menu--left {margin-left: -4 * $base-increment;}
-    &.w-menu--right {margin-left: 4 * $base-increment;}
+    &.w-menu--top {margin-top: calc(var(--w-base-increment) * -4);}
+    &.w-menu--bottom {margin-top: calc(var(--w-base-increment) * 4);}
+    &.w-menu--left {margin-left: calc(var(--w-base-increment) * -4);}
+    &.w-menu--right {margin-left: calc(var(--w-base-increment) * 4);}
 
     // Menu without border.
     &.w-menu--no-border {

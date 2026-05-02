@@ -7,13 +7,13 @@ html, body {height: 100%;}
   scroll-behavior: smooth;
 }
 
-a {color: $links;}
+a {color: #09c;}
 
-ul, ol {margin-left: 4 * $base-increment + 2px;}
+ul, ol {margin-left: calc(4 * var(--w-base-increment) + 2px);}
 .w-list--icon .w-list__item-bullet {color: green;}
 .w-list--icon .w-list__item-bullet.wi-minus {color: rgb(213, 117, 0);}
 
-p {margin-bottom: 2 * $base-increment;}
+p {margin-bottom: calc(2 * var(--w-base-increment));}
 
 .ovh {overflow: hidden;}
 

@@ -113,7 +113,7 @@ export default {
     flex-wrap: wrap;
     vertical-align: middle;
 
-    .w-radio {margin-right: 3 * $base-increment;}
+    .w-radio {margin-right: calc(var(--w-base-increment) * 3);}
     .w-radio:last-child {margin-right: 0;}
   }
 }

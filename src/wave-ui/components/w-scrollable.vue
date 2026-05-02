@@ -744,19 +744,19 @@ defineExpose({
     cursor: pointer;
     touch-action: none;
     opacity: 1;
-    transition: opacity $fast-transition-duration ease;
+    transition: opacity var(--w-transition-duration-fast) ease;
 
     &--horizontal {
       width: 100%;
       border-bottom-left-radius: inherit;
       border-bottom-right-radius: inherit;
-      height: $scrollbar-size;
+      height: var(--w-scrollbar-size);
     }
     &--vertical {
       inset: 0 0 0 auto;
       border-top-right-radius: inherit;
       border-bottom-right-radius: inherit;
-      width: $scrollbar-size;
+      width: var(--w-scrollbar-size);
     }
 
     &--hidden {
@@ -770,7 +770,7 @@ defineExpose({
     color: color-mix(in srgb, var(--w-contrast-bg-color) 8%, var(--w-base-bg-color));
     background: currentColor;
 
-    border-radius: $border-radius;
+    border-radius: var(--w-border-radius);
     z-index: 1;
     transition: box-shadow 0.15s ease;
     cursor: grab;

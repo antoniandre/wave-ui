@@ -10,6 +10,33 @@ export type WaveStatusColors = 'primary' | 'success' | 'error' | 'warning' | 'in
 
 export type PaletteColors = 'pink' | 'purple' | 'deep-purple' | 'indigo' | 'blue' | 'light-blue' | 'cyan' | 'teal' | 'green' | 'light-green' | 'lime' | 'yellow' | 'amber' | 'orange' | 'deep-orange' | 'red' | 'brown' | 'blue-grey' | 'grey';
 
+export type WaveColorCssVariable = `--w-${WaveColor}-color`;
+
+export type WaveDesignTokenCssVariable =
+  '--w-base-font-size' |
+  '--w-base-increment' |
+  '--w-layout-padding' |
+  '--w-border-radius' |
+  '--w-border-width' |
+  '--w-border-color' |
+  '--w-border' |
+  '--w-transition-duration' |
+  '--w-transition-duration-fast' |
+  '--w-box-shadow' |
+  '--w-form-field-height' |
+  '--w-small-form-el-size' |
+  '--w-scrollbar-size' |
+  '--w-base-bg-color' |
+  '--w-base-color' |
+  '--w-contrast-bg-color' |
+  '--w-contrast-color' |
+  '--w-caption-color' |
+  '--w-disabled-color' |
+  '--w-surface-hover-color' |
+  '--w-surface-active-color' |
+  '--w-surface-selected-color' |
+  WaveColorCssVariable;
+
 export type WaveColorShades =
   'black' |
   'white' |

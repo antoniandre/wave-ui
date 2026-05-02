@@ -283,12 +283,12 @@ export default {
 
   // Slider label, left & right.
   // ------------------------------------------------------
-  &__label--left {margin-right: 3 * $base-increment;}
-  &__label--right {margin-left: 3 * $base-increment;}
+  &__label--left {margin-right: calc(var(--w-base-increment) * 3);}
+  &__label--right {margin-left: calc(var(--w-base-increment) * 3);}
 
   // Steps labels.
   // ------------------------------------------------------
-  &--has-step-labels {padding-bottom: 4 * $base-increment;}
+  &--has-step-labels {padding-bottom: calc(var(--w-base-increment) * 4);}
   &__step-labels {
     position: absolute;
     top: 0;
@@ -300,8 +300,8 @@ export default {
     position: absolute;
     transform: translateX(-50%);
     font-size: 0.8em;
-    padding-top: 2 * $base-increment;
-    color: $slider-step-label-color;
+    padding-top: calc(var(--w-base-increment) * 2);
+    color: var(--w-slider-step-label-color);
     z-index: 1;
     cursor: pointer;
 
@@ -311,10 +311,10 @@ export default {
       left: 50%;
       transform: translateX(-50%);
       top: 0;
-      width: $base-increment;
+      width: var(--w-base-increment);
       aspect-ratio: 1;
       min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
-      background-color: $slider-step-label-bg-color;
+      background-color: var(--w-slider-step-label-bg-color);
       border-radius: 99em;
       // box-shadow: 0 0 0 1px #fff;
       box-sizing: border-box;
@@ -333,10 +333,10 @@ export default {
   &__track {
     position: relative;
     flex-grow: 1;
-    height: $slider-height;
-    background-color: $slider-track-color;
+    height: var(--w-slider-height);
+    background-color: var(--w-slider-track-color);
     -webkit-tap-highlight-color: transparent;
-    border-radius: $border-radius;
+    border-radius: var(--w-border-radius);
     touch-action: none;
     cursor: pointer;
 
@@ -364,7 +364,7 @@ export default {
     right: 0;
     height: 100%;
     z-index: 1;
-    transition: $transition-duration;
+    transition: var(--w-transition-duration);
     border-radius: inherit;
 
     .w-slider--dragging & {transition: none;}
@@ -375,14 +375,14 @@ export default {
   // ------------------------------------------------------
   &__thumb {
     position: absolute;
-    width: 3 * $base-increment;
+    width: calc(var(--w-base-increment) * 3);
     aspect-ratio: 1;
     min-width: 0; // Safari ratio fix (e.g. losing ratio if height is set and side padding are added).
     left: 100%;
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    transition: $transition-duration;
+    transition: var(--w-transition-duration);
 
     .w-slider--dragging & {transition: none;}
   }
@@ -397,7 +397,7 @@ export default {
     border: none;
     border-radius: 99em;
     cursor: pointer;
-    background-color: $slider-thumb-button-bg-color;
+    background-color: var(--w-slider-thumb-button-bg-color);
 
     .w-slider--disabled &, .w-slider--readonly & {cursor: auto;}
 
@@ -417,17 +417,17 @@ export default {
     &:active:before, .w-slider--dragging &:before {
       opacity: 1;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-      transition-duration: $fast-transition-duration;
+      transition-duration: var(--w-transition-duration-fast);
     }
     .w-slider--disabled &:before,
     .w-slider--readonly &:before {box-shadow: none;opacity: 0.4;}
 
     // The outline when focused, but also a bigger reactive zone for fat fingers when not.
     &:after {
-      left: -2 * $base-increment;
-      right: -2 * $base-increment;
-      top: -2 * $base-increment;
-      bottom: -2 * $base-increment;
+      left: calc(var(--w-base-increment) * -2);
+      right: calc(var(--w-base-increment) * -2);
+      top: calc(var(--w-base-increment) * -2);
+      bottom: calc(var(--w-base-increment) * -2);
       opacity: 0;
       background-color: currentColor;
     }
@@ -441,15 +441,15 @@ export default {
     position: absolute;
     left: 50%;
     bottom: 100%;
-    margin-bottom: math.round(3 * $base-increment);
+    margin-bottom: calc(var(--w-base-increment) * 3);
     transform: translateX(-50%);
-    padding: math.round(0.75 * $base-increment) (2 * $base-increment);
-    background-color: $slider-thumb-label-bg-color;
-    border-radius: $border-radius;
-    border: $border;
+    padding: calc(var(--w-base-increment) * 0.75) calc(var(--w-base-increment) * 2);
+    background-color: var(--w-slider-thumb-label-bg-color);
+    border-radius: var(--w-border-radius);
+    border: var(--w-border);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
     font-size: 0.85em;
-    color: $slider-thumb-label-color;
+    color: var(--w-slider-thumb-label-color);
 
     &:before, &:after {
       content: '';
@@ -463,7 +463,7 @@ export default {
     }
 
     &:before {border-width: 7px;border-top-color: inherit;}
-    &:after {border-width: 6px;border-top-color: $slider-thumb-label-bg-color;}
+    &:after {border-width: 6px;border-top-color: var(--w-slider-thumb-label-bg-color);}
 
     &--droplet {
       transform: translateX(-50%) rotate(-45deg);

@@ -63,6 +63,7 @@ export default {
     imgProps () {
       return {
         tag: 'div',
+        maxWidth: '100%',
         ratio: 1 / 2,
         ...this.imageProps
       }
@@ -88,21 +89,21 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: $border-radius;
-  border: $border;
+  border-radius: var(--w-border-radius);
+  border: var(--w-border);
 
   @include themeable;
 
   &--tile {border-radius: 0;}
-  &--shadow {box-shadow: $box-shadow;}
+  &--shadow {box-shadow: var(--w-box-shadow);}
   &--no-border, &--shadow {border: none;}
 
   &__title {
     display: flex;
     align-items: center;
-    padding: (2 * $base-increment) (3 * $base-increment);
+    padding: calc(var(--w-base-increment) * 2) calc(var(--w-base-increment) * 3);
     font-size: 1.3em;
-    border-bottom: $border;
+    border-bottom: var(--w-border);
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
 
@@ -117,7 +118,7 @@ export default {
   }
 
   &__content {
-    padding: 3 * $base-increment;
+    padding: calc(var(--w-base-increment) * 3);
     flex-grow: 1;
 
     // Only if there is no title bar.
@@ -134,7 +135,7 @@ export default {
 
   &__actions {
     display: flex;
-    padding: (2 * $base-increment) (3 * $base-increment) (3 * $base-increment);
+    padding: calc(var(--w-base-increment) * 2) calc(var(--w-base-increment) * 3) calc(var(--w-base-increment) * 3);
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
 

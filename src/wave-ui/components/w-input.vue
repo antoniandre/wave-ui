@@ -391,7 +391,7 @@ $inactive-color: #777;
   flex-grow: 1;
   flex-wrap: wrap;
   align-items: center;
-  font-size: $base-font-size;
+  font-size: var(--w-base-font-size);
 
   &--file {
     flex-wrap: nowrap;
@@ -409,13 +409,13 @@ $inactive-color: #777;
     display: inline-flex;
     flex: 1 1 auto;
     align-items: center;
-    height: $form-field-height;
-    border-radius: $border-radius;
-    border: $border;
-    transition: border $transition-duration;
+    height: var(--w-form-field-height);
+    border-radius: var(--w-border-radius);
+    border: var(--w-border);
+    transition: border var(--w-transition-duration);
 
     .w-input.h-auto & {height: auto;}
-    .w-input--floating-label & {margin-top: 3 * $base-increment;}
+    .w-input--floating-label & {margin-top: calc(var(--w-base-increment) * 3);}
     .w-input[class^="bdrs"] &, .w-input[class*=" bdrs"] & {border-radius: inherit;}
 
     // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
@@ -429,7 +429,7 @@ $inactive-color: #777;
 
     &--round {border-radius: 99em;}
     &--tile {border-radius: initial;}
-    &--shadow {box-shadow: $box-shadow;}
+    &--shadow {box-shadow: var(--w-box-shadow);}
     &--loading, &--upload-complete {
       border-bottom-color: transparent;
       flex-wrap: wrap;
@@ -454,7 +454,7 @@ $inactive-color: #777;
       width: 100%;
       height: 0;
       border-bottom: 2px solid currentColor;
-      transition: $transition-duration;
+      transition: var(--w-transition-duration);
       transform: scaleX(0);
       pointer-events: none;
     }
@@ -464,11 +464,11 @@ $inactive-color: #777;
     .w-input--focused &--underline:after {transform: scaleX(1);}
     &--round.w-input__input-wrap--underline:after {
       border-radius: 99em;
-      transition: $transition-duration, height 0.035s;
+      transition: var(--w-transition-duration), height 0.035s;
     }
     .w-input--focused &--round.w-input__input-wrap--underline:after {
       height: 100%;
-      transition: $transition-duration, height 0s ($transition-duration - 0.035s);
+      transition: var(--w-transition-duration), height 0s calc(var(--w-transition-duration) - 0.035s);
     }
   }
 
@@ -486,8 +486,8 @@ $inactive-color: #777;
     border: none;
     border-radius: inherit; // Mostly for the browser-autofilled appearance.
     outline: none;
-    padding-left: 2 * $base-increment;
-    padding-right: 2 * $base-increment;
+    padding-left: calc(var(--w-base-increment) * 2);
+    padding-right: calc(var(--w-base-increment) * 2);
 
     // For type="search" on Safari.
     -webkit-appearance: none;
@@ -500,15 +500,15 @@ $inactive-color: #777;
   }
 
   &__input-wrap--round &__input {
-    padding-left: 3 * $base-increment;
-    padding-right: 3 * $base-increment;
+    padding-left: calc(var(--w-base-increment) * 3);
+    padding-right: calc(var(--w-base-increment) * 3);
   }
 
   &--inner-icon-left &__input {padding-left: 27px;}
   &--inner-icon-right &__input {padding-right: 27px;}
 
   &--disabled &__input {
-    color: $disabled-color;
+    color: var(--w-disabled-color);
     cursor: not-allowed;
     -webkit-tap-highlight-color: transparent;
   }
@@ -548,7 +548,7 @@ $inactive-color: #777;
     left: 0;
     display: flex;
     align-items: center;
-    color: $disabled-color;
+    color: var(--w-disabled-color);
   }
 
   &__file-preview {
@@ -570,7 +570,7 @@ $inactive-color: #777;
   .w-input--focused &__icon {color: currentColor;}
 
   &--disabled &__icon {
-    color: $disabled-color;
+    color: var(--w-disabled-color);
     cursor: not-allowed;
     -webkit-tap-highlight-color: transparent;
   }
@@ -578,15 +578,15 @@ $inactive-color: #777;
   // Label.
   // ------------------------------------------------------
   &__label {
-    transition: color $transition-duration;
+    transition: color var(--w-transition-duration);
     cursor: pointer;
     user-select: none;
 
-    &--left {margin-right: 2 * $base-increment;}
-    &--right {margin-left: 2 * $base-increment;}
+    &--left {margin-right: calc(var(--w-base-increment) * 2);}
+    &--right {margin-left: calc(var(--w-base-increment) * 2);}
 
     .w-input--disabled & {
-      color: $disabled-color;
+      color: var(--w-disabled-color);
       cursor: not-allowed;
       -webkit-tap-highlight-color: transparent;
     }
@@ -600,7 +600,7 @@ $inactive-color: #777;
     position: absolute;
     top: 50%;
     left: 0;
-    padding-left: 2 * $base-increment;
+    padding-left: calc(var(--w-base-increment) * 2);
     white-space: nowrap;
     transform: translateY(-50%);
     pointer-events: none;
@@ -611,15 +611,15 @@ $inactive-color: #777;
       padding-right: 0;
     }
     .w-input__input-wrap--round & {
-      padding-left: math.round(3 * $base-increment);
-      padding-right: math.round(3 * $base-increment);
+      padding-left: calc(var(--w-base-increment) * 3);
+      padding-right: calc(var(--w-base-increment) * 3);
     }
     .w-input--inner-icon-left & {left: 18px;}
     .w-input--no-padding.w-input--inner-icon-left & {left: 26px;}
 
     .w-input--floating-label & {
       transform-origin: 0 0;
-      transition: $transition-duration ease;
+      transition: var(--w-transition-duration) ease;
       will-change: transform;
     }
 

@@ -1,41 +1,40 @@
-@use "sass:math";
 @use 'variables' as *;
 
 #{$css-scope} {
   .headline, .title1 {
-    font-size: math.round(2.2 * $base-font-size);
+    font-size: calc(2.2 * var(--w-base-font-size));
     font-weight: 100;
   }
 
   .title2 {
-    font-size: math.round(1.7 * $base-font-size);
+    font-size: calc(1.7 * var(--w-base-font-size));
     font-weight: 400;
   }
 
   .title3 {
-    font-size: math.round(1.4 * $base-font-size);
+    font-size: calc(1.4 * var(--w-base-font-size));
     font-weight: 400;
   }
 
   .title4 {
-    font-size: math.round(1.25 * $base-font-size);
+    font-size: calc(1.25 * var(--w-base-font-size));
     font-weight: 400;
   }
 
   .title5 {
-    font-size: math.round(1.1 * $base-font-size);
+    font-size: calc(1.1 * var(--w-base-font-size));
     font-weight: 600;
   }
 
   .body {
-    font-size: $base-font-size;
+    font-size: var(--w-base-font-size);
     font-weight: normal;
   }
 
   .caption {
-    font-size: math.round(0.85 * $base-font-size);
+    font-size: calc(0.85 * var(--w-base-font-size));
     font-style: italic;
-    color: $caption-color;
+    color: var(--w-caption-color);
   }
 
   .text-upper {text-transform: uppercase;}

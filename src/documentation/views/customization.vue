@@ -200,7 +200,7 @@ main
                         @use 'wave-ui/src/wave-ui/scss/variables' as *;
                         $css-scope: '.w-app';
                         $use-layout-classes: true;
-                      `,
+                      `
                     }
                   }
                 }
