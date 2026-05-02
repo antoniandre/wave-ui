@@ -84,6 +84,45 @@ export interface WaveRadioProps {
   noRipple?: boolean
 
   /**
+   * Sets the radio button size to extra small (~12 px at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} xs
+   * @see https://antoniandre.github.io/wave-ui/w-radio
+   */
+  xs?: boolean
+
+  /**
+   * Sets the radio button size to small (~16 px at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} sm
+   * @see https://antoniandre.github.io/wave-ui/w-radio
+   */
+  sm?: boolean
+
+  /**
+   * Sets the radio button size to medium, which is the same as the default size (~18 px at 14 px base font size).
+   * @property {boolean} md
+   * @see https://antoniandre.github.io/wave-ui/w-radio
+   */
+  md?: boolean
+
+  /**
+   * Sets the radio button size to large (~20 px at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} lg
+   * @see https://antoniandre.github.io/wave-ui/w-radio
+   */
+  lg?: boolean
+
+  /**
+   * Sets the radio button size to extra large (~24 px at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} xl
+   * @see https://antoniandre.github.io/wave-ui/w-radio
+   */
+  xl?: boolean
+
+  /**
    * TODO: Add Description
    * @property {boolean} dark
    * @see https://antoniandre.github.io/wave-ui/w-radio

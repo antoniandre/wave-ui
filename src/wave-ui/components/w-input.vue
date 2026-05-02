@@ -162,6 +162,12 @@ export default {
     round: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
+    // Sizes.
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean },
     multiple: { type: Boolean }, // Only for file uploads.
     preview: { type: [Boolean, String], default: true }, // Only for file uploads.
     loading: { type: [Boolean, Number], default: false }, // If a number is given, it will be the value of the progress.
@@ -251,6 +257,10 @@ export default {
       return this.overallFilesProgress === 100
     },
 
+    presetSize () {
+      return (this.xs && 'xs') || (this.sm && 'sm') || (this.md && 'md') || (this.lg && 'lg') || (this.xl && 'xl') || null
+    },
+
     classes () {
       return {
         'w-input': true,
@@ -266,6 +276,7 @@ export default {
         'w-input--has-placeholder': this.placeholder,
         'w-input--inner-icon-left': this.innerIconLeft,
         'w-input--inner-icon-right': this.innerIconRight,
+        [`size--${this.presetSize}`]: !!this.presetSize,
         // With the inheritAttrs set to false any class on the component would be lost, so add it back.
         [this.$attrs.class]: !!this.$attrs.class
       }
@@ -409,7 +420,7 @@ $inactive-color: #777;
     display: inline-flex;
     flex: 1 1 auto;
     align-items: center;
-    height: var(--w-form-field-height);
+    height: var(--w-size, var(--w-form-field-height));
     border-radius: var(--w-border-radius);
     border: var(--w-border);
     transition: border var(--w-transition-duration);
@@ -644,5 +655,12 @@ $inactive-color: #777;
     // Chrome & Safari - Must remain in a separated rule as Firefox discard the whole rule seeing -webkit-.
     .w-input--floating-label.w-input--inner-icon-left .w-input__input:-webkit-autofill & {left: 0;}
   }
+
+  // Sizes.
+  // ------------------------------------------------------
+  &.size--xs {--w-size: round(nearest, calc(1.43 * var(--w-base-font-size)), 1px);}
+  &.size--sm {--w-size: round(nearest, calc(1.71 * var(--w-base-font-size)), 1px);}
+  &.size--lg {--w-size: round(nearest, calc(2.29 * var(--w-base-font-size)), 1px);}
+  &.size--xl {--w-size: round(nearest, calc(2.71 * var(--w-base-font-size)), 1px);}
 }
 </style>

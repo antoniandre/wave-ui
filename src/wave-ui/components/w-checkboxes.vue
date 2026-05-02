@@ -54,7 +54,13 @@ export default {
     inline: { type: Boolean },
     round: { type: Boolean },
     color: { type: String, default: 'primary' },
-    labelColor: { type: String, default: 'primary' }
+    labelColor: { type: String, default: 'primary' },
+    // Sizes.
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean }
     // Props from mixin: id, name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -84,10 +90,15 @@ export default {
       })
     },
 
+    presetSize () {
+      return (this.xs && 'xs') || (this.sm && 'sm') || (this.md && 'md') || (this.lg && 'lg') || (this.xl && 'xl') || null
+    },
+
     classes () {
       return [
         'w-checkboxes',
-        `w-checkboxes--${this.inline ? 'inline' : 'column'}`
+        `w-checkboxes--${this.inline ? 'inline' : 'column'}`,
+        this.presetSize && `size--${this.presetSize}`
       ]
     }
   },
@@ -131,5 +142,12 @@ export default {
     .w-checkbox {margin-right: calc(var(--w-base-increment) * 3);}
     .w-checkbox:last-child {margin-right: 0;}
   }
+
+  // Sizes (cascades --w-small-form-el-size to child w-checkbox elements).
+  // ------------------------------------------------------
+  &.size--xs {--w-size: round(nearest, calc(0.86 * var(--w-base-font-size)), 2px);}
+  &.size--sm {--w-size: round(nearest, calc(1.14 * var(--w-base-font-size)), 2px);}
+  &.size--lg {--w-size: round(nearest, calc(1.43 * var(--w-base-font-size)), 2px);}
+  &.size--xl {--w-size: round(nearest, calc(1.71 * var(--w-base-font-size)), 2px);}
 }
 </style>

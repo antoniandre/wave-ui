@@ -43,7 +43,12 @@ const propsDescs = {
   required: 'Applies the native HTML <code>required</code> attribute to the input field.',
   validators: '<span class="deep-orange">Only for validation, when the input field is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the input field. Each function will be executed on input field   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the input field.',
   noBlurValidation: '<span class="deep-orange">Only when the input is in a <strong class="code">w-form</strong> with <code>validators</code>.</span><br>When <code>true</code>, blur does not validate this field. When <code>false</code>, blur always validates even if the form has <code>no-blur-validation</code>. When unset, inherit the form setting.',
-  loading: 'When set to <code>true</code>, displays an indefinite-value progress bar below the input field. If a number is given, it will be the value of the progress.'
+  loading: 'When set to <code>true</code>, displays an indefinite-value progress bar below the input field. If a number is given, it will be the value of the progress.',
+  xs: 'Sets the height of the input field to extra small (~20 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+  sm: 'Sets the height of the input field to small (~24 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+  md: 'Sets the height of the input field to medium, which is the same as the default height (~28 px at 14 px base font size).',
+  lg: 'Sets the height of the input field to large (~32 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+  xl: 'Sets the height of the input field to extra large (~38 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.'
 }
 
 const slots = {

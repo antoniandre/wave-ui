@@ -386,6 +386,58 @@ div
         selection1: 1,
         selection2: 1
       })
+
+  title-link(h2) Sizes
+  p.
+    The radio button size can be controlled with the preset size props #[code xs], #[code sm],
+    #[code md], #[code lg] and #[code xl], or directly via the CSS variable #[code --w-size].
+  p Individual radio buttons:
+  example(content-class="align-center")
+    w-radio.ma2(xs :model-value="true" label="xs")
+    w-radio.ma2(sm :model-value="true" label="sm")
+    w-radio.ma2(md :model-value="true" label="md")
+    w-radio.ma2(lg :model-value="true" label="lg")
+    w-radio.ma2(xl :model-value="true" label="xl")
+    template(#pug).
+      w-radio.ma2(xs :model-value="true" label="xs")
+      w-radio.ma2(sm :model-value="true" label="sm")
+      w-radio.ma2(md :model-value="true" label="md")
+      w-radio.ma2(lg :model-value="true" label="lg")
+      w-radio.ma2(xl :model-value="true" label="xl")
+    template(#html).
+      &lt;w-radio class="ma2" xs :model-value="true" label="xs"&gt;&lt;/w-radio&gt;
+      &lt;w-radio class="ma2" sm :model-value="true" label="sm"&gt;&lt;/w-radio&gt;
+      &lt;w-radio class="ma2" md :model-value="true" label="md"&gt;&lt;/w-radio&gt;
+      &lt;w-radio class="ma2" lg :model-value="true" label="lg"&gt;&lt;/w-radio&gt;
+      &lt;w-radio class="ma2" xl :model-value="true" label="xl"&gt;&lt;/w-radio&gt;
+
+  p Radio button groups via #[code w-radios]:
+  example(content-class="align-center w-flex column")
+    w-radios.mb3(xs :items="radios1" :model-value="1" inline)
+    w-radios.mb3(sm :items="radios1" :model-value="1" inline)
+    w-radios.mb3(md :items="radios1" :model-value="1" inline)
+    w-radios.mb3(lg :items="radios1" :model-value="1" inline)
+    w-radios(xl :items="radios1" :model-value="1" inline)
+    template(#pug).
+      w-radios.mb3(xs :items="items" :model-value="1" inline)
+      w-radios.mb3(sm :items="items" :model-value="1" inline)
+      w-radios.mb3(md :items="items" :model-value="1" inline)
+      w-radios.mb3(lg :items="items" :model-value="1" inline)
+      w-radios(xl :items="items" :model-value="1" inline)
+    template(#html).
+      &lt;w-radios class="mb3" xs :items="items" :model-value="1" inline&gt;&lt;/w-radios&gt;
+      &lt;w-radios class="mb3" sm :items="items" :model-value="1" inline&gt;&lt;/w-radios&gt;
+      &lt;w-radios class="mb3" md :items="items" :model-value="1" inline&gt;&lt;/w-radios&gt;
+      &lt;w-radios class="mb3" lg :items="items" :model-value="1" inline&gt;&lt;/w-radios&gt;
+      &lt;w-radios xl :items="items" :model-value="1" inline&gt;&lt;/w-radios&gt;
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Choice 1', value: 1 },
+          { label: 'Choice 2', value: 2 },
+          { label: 'Choice 3', value: 3 }
+        ]
+      })
 </template>
 
 <script>

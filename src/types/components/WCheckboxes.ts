@@ -96,6 +96,41 @@ export interface WaveCheckboxesProps {
    * @see https://antoniandre.github.io/wave-ui/colors
    */
   labelColor?: string
+
+  /**
+   * Sets all checkboxes to extra small (~12 px at 14 px base font size) via the cascading `--w-size` CSS variable.
+   * @property {boolean} xs
+   * @see https://antoniandre.github.io/wave-ui/w-checkboxes
+   */
+  xs?: boolean
+
+  /**
+   * Sets all checkboxes to small (~16 px at 14 px base font size) via the cascading `--w-size` CSS variable.
+   * @property {boolean} sm
+   * @see https://antoniandre.github.io/wave-ui/w-checkboxes
+   */
+  sm?: boolean
+
+  /**
+   * Sets all checkboxes to medium, which is the same as the default size (~18 px at 14 px base font size).
+   * @property {boolean} md
+   * @see https://antoniandre.github.io/wave-ui/w-checkboxes
+   */
+  md?: boolean
+
+  /**
+   * Sets all checkboxes to large (~20 px at 14 px base font size) via the cascading `--w-size` CSS variable.
+   * @property {boolean} lg
+   * @see https://antoniandre.github.io/wave-ui/w-checkboxes
+   */
+  lg?: boolean
+
+  /**
+   * Sets all checkboxes to extra large (~24 px at 14 px base font size) via the cascading `--w-size` CSS variable.
+   * @property {boolean} xl
+   * @see https://antoniandre.github.io/wave-ui/w-checkboxes
+   */
+  xl?: boolean
 }
 
 // ----------------------------------------------------------------------------

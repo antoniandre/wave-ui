@@ -29,7 +29,12 @@ const propsDescs = {
   required: 'Applies the native HTML <code>required</code> attribute to the switch.',
   validators: '<span class="deep-orange">Only for validation, when the switch is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the switch. Each function will be executed on switch   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the switch.',
   noBlurValidation: '<span class="deep-orange">Only when the switch is in a <strong class="code">w-form</strong> with <code>validators</code>.</span><br>When <code>true</code>, blur does not validate this field. When <code>false</code>, blur always validates even if the form has <code>no-blur-validation</code>. When unset, inherit the form setting.',
-  loading: 'When set to <code>true</code>, displays an indefinite-value progress circle inside the switch thumb. If a number is given, it will be the value of the progress.'
+  loading: 'When set to <code>true</code>, displays an indefinite-value progress circle inside the switch thumb. If a number is given, it will be the value of the progress.',
+  xs: 'Sets the switch size to extra small (~12 px thumb at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+  sm: 'Sets the switch size to small (~16 px thumb at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+  md: 'Sets the switch size to medium, which is the same as the default size (~18 px thumb at 14 px base font size).',
+  lg: 'Sets the switch size to large (~20 px thumb at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+  xl: 'Sets the switch size to extra large (~24 px thumb at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.'
 }
 
 const slots = {

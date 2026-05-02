@@ -75,6 +75,12 @@ export default {
     noRipple: { type: Boolean },
     indeterminate: { type: Boolean },
     round: { type: Boolean },
+    // Sizes.
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean },
     dark: { type: Boolean },
     light: { type: Boolean }
     // Props from mixin: id, name, disabled, readonly, required, tabindex, validators.
@@ -98,6 +104,10 @@ export default {
     hasLabel () {
       return this.label || this.$slots.default
     },
+    presetSize () {
+      return (this.xs && 'xs') || (this.sm && 'sm') || (this.md && 'md') || (this.lg && 'lg') || (this.xl && 'xl') || null
+    },
+
     classes () {
       return {
         [`w-checkbox w-checkbox--${this.isChecked ? 'checked' : 'unchecked'}`]: true,
@@ -108,7 +118,8 @@ export default {
         'w-checkbox--rippled': this.ripple.end,
         'w-checkbox--round': this.round,
         'w-checkbox--dark': this.dark,
-        'w-checkbox--light': this.light
+        'w-checkbox--light': this.light,
+        [`size--${this.presetSize}`]: !!this.presetSize
       }
     }
   },
@@ -150,6 +161,8 @@ $outline-width: 2px;
 $inactive-color: #666;
 
 .w-checkbox {
+  // --_size resolves --w-size if set (e.g. via size class or inline style), otherwise the global default.
+  --_size: var(--w-size, var(--w-small-form-el-size));
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
@@ -170,7 +183,7 @@ $inactive-color: #666;
   // The fake checkbox to substitute.
   &__input {
     position: relative;
-    width: var(--w-small-form-el-size);
+    width: var(--_size);
     aspect-ratio: 1;
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
@@ -222,13 +235,13 @@ $inactive-color: #666;
 
     // Checked state.
     :checked ~ & {
-      border-width: calc(var(--w-small-form-el-size) / 2);
+      border-width: calc(var(--_size) / 2);
       border-color: currentColor;
       // Prevents a tiny hole while animating and in some browser zoom levels.
       background-color: currentColor;
     }
     .w-checkbox--indeterminate :checked ~ & {
-      border-width: calc(var(--w-small-form-el-size) / 2 - 1px) 3px;
+      border-width: calc(var(--_size) / 2 - 1px) 3px;
       background-color: var(--w-contrast-color);
     }
     .w-checkbox--disabled :checked ~ & {
@@ -282,6 +295,13 @@ $inactive-color: #666;
       opacity: 0.7;
     }
   }
+
+  // Sizes.
+  // ------------------------------------------------------
+  &.size--xs {--w-size: round(nearest, calc(0.86 * var(--w-base-font-size)), 2px);}
+  &.size--sm {--w-size: round(nearest, calc(1.14 * var(--w-base-font-size)), 2px);}
+  &.size--lg {--w-size: round(nearest, calc(1.43 * var(--w-base-font-size)), 2px);}
+  &.size--xl {--w-size: round(nearest, calc(1.71 * var(--w-base-font-size)), 2px);}
 }
 
 @keyframes w-checkbox-ripple {

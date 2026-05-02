@@ -772,6 +772,36 @@ div
       fit-to-content
       :items="[{ label: 'Item 1' }, { label: 'Disabled item 2', disabled: true }, { label: 'Item 3' }]")
 
+  title-link(h2) Sizes
+  p.
+    The field height can be controlled with the preset size props #[code xs], #[code sm], #[code md],
+    #[code lg] and #[code xl], or directly via the CSS variable #[code --w-size].
+  example
+    w-select.mb3(xs :items="items1" label="Extra small" outline)
+    w-select.mb3(sm :items="items1" label="Small" outline)
+    w-select.mb3(md :items="items1" label="Medium (default)" outline)
+    w-select.mb3(lg :items="items1" label="Large" outline)
+    w-select(xl :items="items1" label="Extra large" outline)
+    template(#pug).
+      w-select.mb3(xs :items="items" label="Extra small" outline)
+      w-select.mb3(sm :items="items" label="Small" outline)
+      w-select.mb3(md :items="items" label="Medium (default)" outline)
+      w-select.mb3(lg :items="items" label="Large" outline)
+      w-select(xl :items="items" label="Extra large" outline)
+    template(#html).
+      &lt;w-select class="mb3" xs :items="items" label="Extra small" outline&gt;&lt;/w-select&gt;
+      &lt;w-select class="mb3" sm :items="items" label="Small" outline&gt;&lt;/w-select&gt;
+      &lt;w-select class="mb3" md :items="items" label="Medium (default)" outline&gt;&lt;/w-select&gt;
+      &lt;w-select class="mb3" lg :items="items" label="Large" outline&gt;&lt;/w-select&gt;
+      &lt;w-select xl :items="items" label="Extra large" outline&gt;&lt;/w-select&gt;
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Item 1' },
+          { label: 'Item 2' },
+          { label: 'Item 3' }
+        ]
+      })
 </template>
 
 <script>

@@ -49,7 +49,13 @@ export default {
     itemColorKey: { type: String, default: 'color' }, // Support a different color per item.
     inline: { type: Boolean },
     color: { type: String, default: 'primary' },
-    labelColor: { type: String, default: 'primary' }
+    labelColor: { type: String, default: 'primary' },
+    // Sizes.
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean }
     // Props from mixin: id, name, disabled, readonly, required, validators.
     // Computed from mixin: inputName, isDisabled & isReadonly.
   },
@@ -77,10 +83,15 @@ export default {
         color: item[this.itemColorKey] || this.color
       }))
     },
+    presetSize () {
+      return (this.xs && 'xs') || (this.sm && 'sm') || (this.md && 'md') || (this.lg && 'lg') || (this.xl && 'xl') || null
+    },
+
     classes () {
       return [
         'w-radios',
-        `w-radios--${this.inline ? 'inline' : 'column'}`
+        `w-radios--${this.inline ? 'inline' : 'column'}`,
+        this.presetSize && `size--${this.presetSize}`
       ]
     }
   },
@@ -116,5 +127,19 @@ export default {
     .w-radio {margin-right: calc(var(--w-base-increment) * 3);}
     .w-radio:last-child {margin-right: 0;}
   }
+
+  // Sizes (cascades --w-small-form-el-size to child w-radio elements).
+  // Also scales the radio bullet border-width proportionally.
+  // ------------------------------------------------------
+  &.size--xs {--w-size: round(nearest, calc(0.86 * var(--w-base-font-size)), 2px);}
+  &.size--xs .w-radio__input {border-width: 1px;}
+  &.size--xs :checked ~ .w-radio__input:after {border-width: 3px;}
+  &.size--sm {--w-size: round(nearest, calc(1.14 * var(--w-base-font-size)), 2px);}
+  &.size--sm .w-radio__input {border-width: 1.5px;}
+  &.size--sm :checked ~ .w-radio__input:after {border-width: 4px;}
+  &.size--lg {--w-size: round(nearest, calc(1.43 * var(--w-base-font-size)), 2px);}
+  &.size--lg :checked ~ .w-radio__input:after {border-width: 5px;}
+  &.size--xl {--w-size: round(nearest, calc(1.71 * var(--w-base-font-size)), 2px);}
+  &.size--xl :checked ~ .w-radio__input:after {border-width: 7px;}
 }
 </style>

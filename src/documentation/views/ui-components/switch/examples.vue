@@ -250,6 +250,29 @@ div
         :model-value="true"
         loading&gt;
       &lt;/w-switch&gt;
+
+  title-link(h2) Sizes
+  p.
+    The switch size can be controlled with the preset size props #[code xs], #[code sm], #[code md],
+    #[code lg] and #[code xl], or directly via the CSS variable #[code --w-size].
+  example(content-class="align-center")
+    w-switch.ma2(xs :model-value="true" label="xs")
+    w-switch.ma2(sm :model-value="true" label="sm")
+    w-switch.ma2(md :model-value="true" label="md")
+    w-switch.ma2(lg :model-value="true" label="lg")
+    w-switch.ma2(xl :model-value="true" label="xl")
+    template(#pug).
+      w-switch.ma2(xs :model-value="true" label="xs")
+      w-switch.ma2(sm :model-value="true" label="sm")
+      w-switch.ma2(md :model-value="true" label="md")
+      w-switch.ma2(lg :model-value="true" label="lg")
+      w-switch.ma2(xl :model-value="true" label="xl")
+    template(#html).
+      &lt;w-switch class="ma2" xs :model-value="true" label="xs"&gt;&lt;/w-switch&gt;
+      &lt;w-switch class="ma2" sm :model-value="true" label="sm"&gt;&lt;/w-switch&gt;
+      &lt;w-switch class="ma2" md :model-value="true" label="md"&gt;&lt;/w-switch&gt;
+      &lt;w-switch class="ma2" lg :model-value="true" label="lg"&gt;&lt;/w-switch&gt;
+      &lt;w-switch class="ma2" xl :model-value="true" label="xl"&gt;&lt;/w-switch&gt;
 </template>
 
 <script>

@@ -344,6 +344,58 @@ div
           { label: 'Choice 3' }
         ]
       })
+
+  title-link(h2) Sizes
+  p.
+    The checkbox size can be controlled with the preset size props #[code xs], #[code sm], #[code md],
+    #[code lg] and #[code xl], or directly via the CSS variable #[code --w-size].
+  p Individual checkboxes:
+  example(content-class="align-center")
+    w-checkbox.ma2(xs :model-value="true" label="xs")
+    w-checkbox.ma2(sm :model-value="true" label="sm")
+    w-checkbox.ma2(md :model-value="true" label="md")
+    w-checkbox.ma2(lg :model-value="true" label="lg")
+    w-checkbox.ma2(xl :model-value="true" label="xl")
+    template(#pug).
+      w-checkbox.ma2(xs :model-value="true" label="xs")
+      w-checkbox.ma2(sm :model-value="true" label="sm")
+      w-checkbox.ma2(md :model-value="true" label="md")
+      w-checkbox.ma2(lg :model-value="true" label="lg")
+      w-checkbox.ma2(xl :model-value="true" label="xl")
+    template(#html).
+      &lt;w-checkbox class="ma2" xs :model-value="true" label="xs"&gt;&lt;/w-checkbox&gt;
+      &lt;w-checkbox class="ma2" sm :model-value="true" label="sm"&gt;&lt;/w-checkbox&gt;
+      &lt;w-checkbox class="ma2" md :model-value="true" label="md"&gt;&lt;/w-checkbox&gt;
+      &lt;w-checkbox class="ma2" lg :model-value="true" label="lg"&gt;&lt;/w-checkbox&gt;
+      &lt;w-checkbox class="ma2" xl :model-value="true" label="xl"&gt;&lt;/w-checkbox&gt;
+
+  p Checkbox groups via #[code w-checkboxes]:
+  example(content-class="align-center w-flex column")
+    w-checkboxes.mb3(xs :items="checkboxes1" :model-value="[1, 2, 3]" inline)
+    w-checkboxes.mb3(sm :items="checkboxes1" :model-value="[1, 2, 3]" inline)
+    w-checkboxes.mb3(md :items="checkboxes1" :model-value="[1, 2, 3]" inline)
+    w-checkboxes.mb3(lg :items="checkboxes1" :model-value="[1, 2, 3]" inline)
+    w-checkboxes(xl :items="checkboxes1" :model-value="[1, 2, 3]" inline)
+    template(#pug).
+      w-checkboxes.mb3(xs :items="items" :model-value="[1, 2, 3]" inline)
+      w-checkboxes.mb3(sm :items="items" :model-value="[1, 2, 3]" inline)
+      w-checkboxes.mb3(md :items="items" :model-value="[1, 2, 3]" inline)
+      w-checkboxes.mb3(lg :items="items" :model-value="[1, 2, 3]" inline)
+      w-checkboxes(xl :items="items" :model-value="[1, 2, 3]" inline)
+    template(#html).
+      &lt;w-checkboxes class="mb3" xs :items="items" :model-value="[1, 2, 3]" inline&gt;&lt;/w-checkboxes&gt;
+      &lt;w-checkboxes class="mb3" sm :items="items" :model-value="[1, 2, 3]" inline&gt;&lt;/w-checkboxes&gt;
+      &lt;w-checkboxes class="mb3" md :items="items" :model-value="[1, 2, 3]" inline&gt;&lt;/w-checkboxes&gt;
+      &lt;w-checkboxes class="mb3" lg :items="items" :model-value="[1, 2, 3]" inline&gt;&lt;/w-checkboxes&gt;
+      &lt;w-checkboxes xl :items="items" :model-value="[1, 2, 3]" inline&gt;&lt;/w-checkboxes&gt;
+    template(#js).
+      data: () => ({
+        items: [
+          { label: 'Choice 1', value: 1 },
+          { label: 'Choice 2', value: 2 },
+          { label: 'Choice 3', value: 3 }
+        ]
+      })
 </template>
 
 <script>

@@ -265,6 +265,45 @@ export interface WaveSelectProps {
    * @see https://antoniandre.github.io/wave-ui/w-select
    */
   fitToContent?: boolean
+
+  /**
+   * Sets the height of the select field to extra small (~20 px at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} xs
+   * @see https://antoniandre.github.io/wave-ui/w-select
+   */
+  xs?: boolean
+
+  /**
+   * Sets the height of the select field to small (~24 px at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} sm
+   * @see https://antoniandre.github.io/wave-ui/w-select
+   */
+  sm?: boolean
+
+  /**
+   * Sets the height of the select field to medium, which is the same as the default height (~28 px at 14 px base font size).
+   * @property {boolean} md
+   * @see https://antoniandre.github.io/wave-ui/w-select
+   */
+  md?: boolean
+
+  /**
+   * Sets the height of the select field to large (~32 px at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} lg
+   * @see https://antoniandre.github.io/wave-ui/w-select
+   */
+  lg?: boolean
+
+  /**
+   * Sets the height of the select field to extra large (~38 px at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} xl
+   * @see https://antoniandre.github.io/wave-ui/w-select
+   */
+  xl?: boolean
 }
 
 // ----------------------------------------------------------------------------

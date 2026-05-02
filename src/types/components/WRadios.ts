@@ -89,6 +89,41 @@ export interface WaveRadiosProps {
    * @see https://antoniandre.github.io/wave-ui/colors
    */
   labelColor?: string
+
+  /**
+   * Sets all radio buttons to extra small (~12 px at 14 px base font size) via the cascading `--w-size` CSS variable.
+   * @property {boolean} xs
+   * @see https://antoniandre.github.io/wave-ui/w-radios
+   */
+  xs?: boolean
+
+  /**
+   * Sets all radio buttons to small (~16 px at 14 px base font size) via the cascading `--w-size` CSS variable.
+   * @property {boolean} sm
+   * @see https://antoniandre.github.io/wave-ui/w-radios
+   */
+  sm?: boolean
+
+  /**
+   * Sets all radio buttons to medium, which is the same as the default size (~18 px at 14 px base font size).
+   * @property {boolean} md
+   * @see https://antoniandre.github.io/wave-ui/w-radios
+   */
+  md?: boolean
+
+  /**
+   * Sets all radio buttons to large (~20 px at 14 px base font size) via the cascading `--w-size` CSS variable.
+   * @property {boolean} lg
+   * @see https://antoniandre.github.io/wave-ui/w-radios
+   */
+  lg?: boolean
+
+  /**
+   * Sets all radio buttons to extra large (~24 px at 14 px base font size) via the cascading `--w-size` CSS variable.
+   * @property {boolean} xl
+   * @see https://antoniandre.github.io/wave-ui/w-radios
+   */
+  xl?: boolean
 }
 
 // ----------------------------------------------------------------------------

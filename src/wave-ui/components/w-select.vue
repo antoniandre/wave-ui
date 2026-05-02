@@ -147,6 +147,12 @@ export default {
     round: { type: Boolean },
     shadow: { type: Boolean },
     tile: { type: Boolean },
+    // Sizes.
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean },
     returnObject: { type: Boolean },
     // By default you can unselect a list item by re-selecting it.
     // Allow preventing that on single selection lists only.
@@ -214,6 +220,10 @@ export default {
       if (this.$slots.selection) return ''
       return this.selectionString
     },
+    presetSize () {
+      return (this.xs && 'xs') || (this.sm && 'sm') || (this.md && 'md') || (this.lg && 'lg') || (this.xl && 'xl') || null
+    },
+
     classes () {
       return {
         'w-select': true,
@@ -229,7 +239,8 @@ export default {
         'w-select--has-placeholder': this.placeholder,
         'w-select--inner-icon-left': this.innerIconLeft,
         'w-select--inner-icon-right': this.innerIconRight,
-        'w-select--open': this.showMenu
+        'w-select--open': this.showMenu,
+        [`size--${this.presetSize}`]: !!this.presetSize
       }
     },
     inputWrapClasses () {
@@ -463,7 +474,7 @@ export default {
     display: inline-flex;
     flex: 1 1 auto;
     align-items: center;
-    min-height: var(--w-form-field-height); // Min-height to allow multiple lines.
+    min-height: var(--w-size, var(--w-form-field-height)); // Min-height to allow multiple lines.
     border-radius: var(--w-border-radius);
     border: var(--w-border);
     transition: border var(--w-transition-duration);
@@ -656,6 +667,13 @@ export default {
     // Chrome & Safari - Must stay a separated rule or Firefox discards the whole rule seeing -webkit-.
     .w-select--floating-label.w-select--inner-icon-left .w-select__select:-webkit-autofill & {left: 0;}
   }
+
+  // Sizes.
+  // ------------------------------------------------------
+  &.size--xs {--w-size: round(nearest, calc(1.43 * var(--w-base-font-size)), 1px);}
+  &.size--sm {--w-size: round(nearest, calc(1.71 * var(--w-base-font-size)), 1px);}
+  &.size--lg {--w-size: round(nearest, calc(2.29 * var(--w-base-font-size)), 1px);}
+  &.size--xl {--w-size: round(nearest, calc(2.71 * var(--w-base-font-size)), 1px);}
 
   // Menu.
   // ------------------------------------------------------

@@ -46,7 +46,12 @@ const radios = {
     readonly: 'The radio button will still look like an interactive radio button except that it is read-only: its current value cannot be changed by user interaction.',
     required: 'Applies the native HTML <code>required</code> attribute to each radio button.',
     validators: '<span class="deep-orange">Only for validation, when the <strong class="code">w-radios</strong> component is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the radio button. Each function will be executed on radio button   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the radio button.',
-    noBlurValidation: '<span class="deep-orange">Only when the group is in a <strong class="code">w-form</strong> with <code>validators</code>.</span><br>When <code>true</code>, blur does not validate this field. When <code>false</code>, blur always validates even if the form has <code>no-blur-validation</code>. When unset, inherit the form setting.'
+    noBlurValidation: '<span class="deep-orange">Only when the group is in a <strong class="code">w-form</strong> with <code>validators</code>.</span><br>When <code>true</code>, blur does not validate this field. When <code>false</code>, blur always validates even if the form has <code>no-blur-validation</code>. When unset, inherit the form setting.',
+    xs: 'Sets all radio buttons to extra small (~12 px at 14 px base font size) via the cascading <code>--w-size</code> CSS variable.',
+    sm: 'Sets all radio buttons to small (~16 px at 14 px base font size) via the cascading <code>--w-size</code> CSS variable.',
+    md: 'Sets all radio buttons to medium, which is the same as the default size (~18 px at 14 px base font size).',
+    lg: 'Sets all radio buttons to large (~20 px at 14 px base font size) via the cascading <code>--w-size</code> CSS variable.',
+    xl: 'Sets all radio buttons to extra large (~24 px at 14 px base font size) via the cascading <code>--w-size</code> CSS variable.'
   },
   slots: {
     item: {
@@ -103,7 +108,12 @@ const radio = {
     readonly: 'The radio button will still look like an interactive radio button except that it is read-only: its current value cannot be changed by user interaction.',
     required: 'Applies the native HTML <code>required</code> attribute to the radio button.',
     validators: '<span class="deep-orange">Only for validation, when this radio button is wrapped into a <strong class="code">w-form</strong></span>.<br>An array of functions determining the validity of the radio button. Each function will be executed on radio button   validation and should return <code>true</code> when valid, or a string containing an error message when invalid. When one of the validators fails, the returned error message will appear underneath the radio button.',
-    noBlurValidation: '<span class="deep-orange">Only when the radio is in a <strong class="code">w-form</strong> with <code>validators</code>.</span><br>When <code>true</code>, blur does not validate this field. When <code>false</code>, blur always validates even if the form has <code>no-blur-validation</code>. When unset, inherit the form setting.'
+    noBlurValidation: '<span class="deep-orange">Only when the radio is in a <strong class="code">w-form</strong> with <code>validators</code>.</span><br>When <code>true</code>, blur does not validate this field. When <code>false</code>, blur always validates even if the form has <code>no-blur-validation</code>. When unset, inherit the form setting.',
+    xs: 'Sets the radio button size to extra small (~12 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+    sm: 'Sets the radio button size to small (~16 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+    md: 'Sets the radio button size to medium, which is the same as the default size (~18 px at 14 px base font size).',
+    lg: 'Sets the radio button size to large (~20 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.',
+    xl: 'Sets the radio button size to extra large (~24 px at 14 px base font size).<br>Equivalent to setting the CSS variable <code>--w-size</code> to the corresponding value.'
   },
   slots: {
     default: { description: 'The radio button label content.' }

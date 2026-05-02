@@ -74,6 +74,12 @@ export default {
     thin: { type: Boolean },
     noRipple: { type: Boolean },
     loading: { type: [Boolean, Number], default: false },
+    // Sizes.
+    xs: { type: Boolean },
+    sm: { type: Boolean },
+    md: { type: Boolean },
+    lg: { type: Boolean },
+    xl: { type: Boolean },
     dark: { type: Boolean },
     light: { type: Boolean }
     // Props from mixin: id, name, disabled, readonly, required, tabindex, validators.
@@ -104,6 +110,10 @@ export default {
     hasLabel () {
       return this.label || this.$slots.default
     },
+    presetSize () {
+      return (this.xs && 'xs') || (this.sm && 'sm') || (this.md && 'md') || (this.lg && 'lg') || (this.xl && 'xl') || null
+    },
+
     classes () {
       return {
         [`w-switch w-switch--${this.isOn ? 'on' : 'off'}`]: true,
@@ -117,6 +127,7 @@ export default {
         'w-switch--rippled': this.ripple.end,
         'w-switch--dark': this.dark,
         'w-switch--light': this.light,
+        [`size--${this.presetSize}`]: !!this.presetSize,
         // With the inheritAttrs set to false any class on the component would be lost, so add it back.
         [this.$attrs.class]: !!this.$attrs.class
       }
@@ -165,6 +176,8 @@ export default {
 $outline-width: 2px;
 
 .w-switch {
+  // --_size resolves --w-size if set (e.g. via size class or inline style), otherwise the global default.
+  --_size: var(--w-size, var(--w-small-form-el-size));
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
@@ -190,8 +203,8 @@ $outline-width: 2px;
   // Switch.
   &__input {
     position: relative;
-    width: calc(2 * (var(--w-small-form-el-size) + #{$outline-width}));
-    height: calc(var(--w-small-form-el-size) + (2 * #{$outline-width}));
+    width: calc(2 * (var(--_size) + #{$outline-width}));
+    height: calc(var(--_size) + (2 * #{$outline-width}));
     display: flex;
     flex: 0 0 auto; // Prevent stretching width or height.
     align-items: center;
@@ -214,8 +227,8 @@ $outline-width: 2px;
     .w-switch--thin & {
       box-sizing: border-box;
       border: none;
-      width: calc(2 * var(--w-small-form-el-size));
-      height: round(nearest, calc(0.7 * var(--w-small-form-el-size)), 1px);
+      width: calc(2 * var(--_size));
+      height: round(nearest, calc(0.7 * var(--_size)), 1px);
     }
     .w-switch--thin :checked ~ & {background-color: var(--w-switch-inactive-color);}
 
@@ -242,8 +255,8 @@ $outline-width: 2px;
     position: absolute;
     left: 0;
     top: 50%;
-    width: calc(100% - var(--w-small-form-el-size));
-    height: var(--w-small-form-el-size);
+    width: calc(100% - var(--_size));
+    height: var(--_size);
     transform: translateX(0) translateY(-50%);
     @include default-transition;
   }
@@ -252,8 +265,8 @@ $outline-width: 2px;
   &__thumb-content {
     position: relative;
     isolation: isolate;
-    width: var(--w-small-form-el-size);
-    height: var(--w-small-form-el-size);
+    width: var(--_size);
+    height: var(--_size);
     display: flex;
     align-items: center;
     justify-content: center; // Center any content that could be put via slots.
@@ -314,6 +327,13 @@ $outline-width: 2px;
 
     .w-switch--disabled & {opacity: 0.5;}
   }
+
+  // Sizes.
+  // ------------------------------------------------------
+  &.size--xs {--w-size: round(nearest, calc(0.86 * var(--w-base-font-size)), 2px);}
+  &.size--sm {--w-size: round(nearest, calc(1.14 * var(--w-base-font-size)), 2px);}
+  &.size--lg {--w-size: round(nearest, calc(1.43 * var(--w-base-font-size)), 2px);}
+  &.size--xl {--w-size: round(nearest, calc(1.71 * var(--w-base-font-size)), 2px);}
 }
 
 @keyframes w-switch-ripple {

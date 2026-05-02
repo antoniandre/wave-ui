@@ -83,6 +83,45 @@ export interface WaveSwitchProps {
   loading?: boolean|number
 
   /**
+   * Sets the switch size to extra small (~12 px thumb at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} xs
+   * @see https://antoniandre.github.io/wave-ui/w-switch
+   */
+  xs?: boolean
+
+  /**
+   * Sets the switch size to small (~16 px thumb at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} sm
+   * @see https://antoniandre.github.io/wave-ui/w-switch
+   */
+  sm?: boolean
+
+  /**
+   * Sets the switch size to medium, which is the same as the default size (~18 px thumb at 14 px base font size).
+   * @property {boolean} md
+   * @see https://antoniandre.github.io/wave-ui/w-switch
+   */
+  md?: boolean
+
+  /**
+   * Sets the switch size to large (~20 px thumb at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} lg
+   * @see https://antoniandre.github.io/wave-ui/w-switch
+   */
+  lg?: boolean
+
+  /**
+   * Sets the switch size to extra large (~24 px thumb at 14 px base font size).
+   * Equivalent to setting the CSS variable `--w-size` to the corresponding value.
+   * @property {boolean} xl
+   * @see https://antoniandre.github.io/wave-ui/w-switch
+   */
+  xl?: boolean
+
+  /**
    * TODO: Add Description
    * @property {boolean} dark
    * @see https://antoniandre.github.io/wave-ui/w-switch

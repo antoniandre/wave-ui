@@ -1106,6 +1106,37 @@ div
       span.code.mr2 type="time"
       span.grey use #[code w-time-picker] instead
       w-tag.px1.ml1(color="red" outline) coming soon
+
+  title-link(h2) Sizes
+  p.
+    The field height can be controlled with the preset size props #[code xs], #[code sm], #[code md],
+    #[code lg] and #[code xl], or directly via the CSS variable #[code --w-size].
+  example
+    w-input.mb3(xs label="Extra small" outline)
+    w-input.mb3(sm label="Small" outline)
+    w-input.mb3(md label="Medium (default)" outline)
+    w-input.mb3(lg label="Large" outline)
+    w-input(xl label="Extra large" outline)
+    template(#pug).
+      w-input.mb3(xs label="Extra small" outline)
+      w-input.mb3(sm label="Small" outline)
+      w-input.mb3(md label="Medium (default)" outline)
+      w-input.mb3(lg label="Large" outline)
+      w-input(xl label="Extra large" outline)
+    template(#html).
+      &lt;w-input class="mb3" xs label="Extra small" outline&gt;&lt;/w-input&gt;
+      &lt;w-input class="mb3" sm label="Small" outline&gt;&lt;/w-input&gt;
+      &lt;w-input class="mb3" md label="Medium (default)" outline&gt;&lt;/w-input&gt;
+      &lt;w-input class="mb3" lg label="Large" outline&gt;&lt;/w-input&gt;
+      &lt;w-input xl label="Extra large" outline&gt;&lt;/w-input&gt;
+
+  p Using the CSS variable for a custom size:
+  example
+    w-input(label="Custom 36px height" outline style="--w-size: 36px")
+    template(#pug).
+      w-input(label="Custom 36px height" outline style="--w-size: 36px")
+    template(#html).
+      &lt;w-input label="Custom 36px height" outline style="--w-size: 36px"&gt;&lt;/w-input&gt;
 </template>
 
 <script>
