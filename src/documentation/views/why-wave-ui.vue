@@ -10,19 +10,28 @@ main
       w-icon.ml1(size="1.2em" style="color: #ffc518") mdi mdi-white-balance-sunny
 
     .title4.mt6 Why, you ask?
-    .w-flex.align-start
+    .w-flex.align-start.size--lg
       w-icon.ml-1 wi-chevron-right
       | Because Wave UI gives you more flexibility, more control, and less friction—especially when
-      | building complex UI designs. No more fighting the framework just to get what you want.
+      | building complex UI designs.#[br]No more fighting the framework just to get what you want.
 
-  title-link(h2) What is Wave UI?
-  .title4.mt6 Like other UI frameworks, Wave UI is:
-  w-list(:items="features1")
+  title-link(h2)
+    w-icon.op4.mr3(size="1.2em") mdi mdi-information-outline
+    span.primary What is Wave UI?
 
-  .title4.mt8 But here’s where it stands apart:
-  w-list(:items="features2")
+  .title4.mt6
+    w-icon.op4.mr3(size="1.2em") wi-chevron-right
+    | Like other UI frameworks, Wave UI is:
+  w-list.base-color.size--lg.ml8(:items="features1")
 
-  title-link(h2) CSS Philosophy
+  .title4.mt8
+    w-icon.op4.mr3(size="1.2em") wi-chevron-right
+    | But here’s where it stands apart:
+  w-list.base-color.size--lg.ml8(:items="features2")
+
+  title-link(h2)
+    w-icon.op4.mr3(size="1.2em") mdi mdi-heart-outline
+    span.primary CSS Philosophy
   .size--md
     | Wave UI is crafted with deliberate care for CSS — because we believe
     strong.ml1 your styles should work with your framework, not against it.
@@ -57,7 +66,9 @@ main
 
   .w-divider.my12
 
-  title-link(h2) What it doesn't do
+  title-link(h2)
+    w-icon.op4.mr3(size="1.2em") mdi mdi-close
+    span.primary What it doesn't do
   .title4.my4.
     Wave UI puts design freedom first — meaning fewer component options, but far greater styling flexibility.
 
@@ -74,22 +85,22 @@ main
 export default {
   data: () => ({
     features1: [
-      { label: '✅ &nbsp; Fully responsive' },
-      { label: '✅ &nbsp; Accessibility compliant' },
-      { label: '✅ &nbsp; Very flexible' },
-      { label: '✅ &nbsp; Easy to use' }
+      { label: '<strong class="success">✔</strong> &nbsp; Fully responsive' },
+      { label: '<strong class="success">✔</strong> &nbsp; Accessibility compliant' },
+      { label: '<strong class="success">✔</strong> &nbsp; Very flexible' },
+      { label: '<strong class="success">✔</strong> &nbsp; Easy to use' }
     ],
     features2: [
       { label: '<span class="size--xl">🌊</span> &nbsp; <strong>Genuinely awesome!</strong>' },
-      { label: '<span class="size--xl">🔧</span> &nbsp; Built for <strong>Vue 3</strong>, with <strong>Vue 2 compatibility</strong>' },
+      { label: '<span class="size--xl">🔧</span> &nbsp; Built for <strong>Vue 3</strong>, (<strong>Vue 2 compatible</strong>) &bull; Nuxt 4, Nuxt 3, <strong>SSR</strong> compatible' },
       { label: '<span class="size--xl">🪶</span> &nbsp; <strong>Zero dependencies</strong>' },
       { label: '<span class="size--xl">⚡</span> &nbsp; <strong>Lightweight and efficient</strong>' },
       { label: '<span class="size--xl">🧩</span> &nbsp; Offers <strong>powerful components</strong> — e.g. build a full navigation menu in one line' },
       { label: '<span class="size--xl">🧼</span> &nbsp; No unnecessary DOM wrappers cluttering your markup' },
       { label: '<span class="size--xl">🎨</span> &nbsp; <strong>Effortless to override</strong> with your own styles' },
-      { label: '<span class="size--xl">🚫</span> &nbsp; Avoids the use of <code class="mx1">!important</code> for cleaner and more scalable CSS' },
+      { label: '<span class="size--xl">🚫</span> &nbsp; Avoids the use of <code class="mx1 body">!important</code> at all costs for cleaner and more scalable CSS' },
       { label: '<span class="size--xl">📦</span> &nbsp; Smart <strong>CSS scoping</strong> — no side-effect' },
-      { label: '<span class="size--xl">📐</span> &nbsp; Controls sizes and spacings from <code class="mx1">--w-base-font-size</code> / <code class="mx1">--w-base-increment</code> on <code class="mx1">:root</code>' },
+      { label: '<span class="size--xl">📐</span> &nbsp; Controls sizes and spacings from <code class="mx1 body">--w-base-font-size</code> / <code class="mx1 body">--w-base-increment</code> on <code class="mx1 body">:root</code>' },
       { label: '<span class="size--xl">🧠</span> &nbsp; Uses <strong>clear, consistent options</strong> and component naming' }
     ]
   })
