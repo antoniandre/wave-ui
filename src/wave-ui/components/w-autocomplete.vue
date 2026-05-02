@@ -16,6 +16,7 @@ component(
       slot {{ label }}
 
   w-menu(
+    ref="menu"
     v-model="menuOpen"
     @close="onMenuClose"
     :menu-class="`w-autocomplete__menu${menuClass ? ' ' + menuClass : ''}`"
@@ -25,75 +26,81 @@ component(
     custom
     min-width="activator"
     v-bind="menuPropsComputed")
-    template(#activator)
-      .w-autocomplete__input-wrap(
-        @click="!isDisabled && !isReadonly && onWrapClick()"
-        :class="inputWrapClasses")
-        slot(name="icon-left")
-          w-icon.w-autocomplete__icon.w-autocomplete__icon--inner-left(
-            v-if="innerIconLeft"
-            tag="label"
-            :for="inputId"
-            @click.stop="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
+    .w-autocomplete__input-wrap(
+      @click="!isDisabled && !isReadonly && onWrapClick()"
+      :class="inputWrapClasses")
+      slot(name="icon-left")
+        w-icon.w-autocomplete__icon.w-autocomplete__icon--inner-left(
+          v-if="innerIconLeft"
+          tag="label"
+          :for="inputId"
+          @click.stop="$emit('click:inner-icon-left', $event)") {{ innerIconLeft }}
 
-        template(v-if="selection.length")
-          .w-autocomplete__selection(v-for="(item, i) in selection" :key="item.uid")
-            slot(name="selection" :item="item" :unselect="() => unselectItem(i)")
+      template(v-if="selection.length")
+        .w-autocomplete__selection(v-for="(item, i) in selection" :key="item.uid")
+          slot(name="selection" :item="item" :unselect="() => unselectItem(i)")
+            span(v-html="item[itemLabelKey]")
+            w-button(@click.stop="unselectItem(i)" icon="wi-cross" xs text color="currentColor")
+
+      .w-autocomplete__placeholder(
+        v-if="!selection.length && !keywords && placeholder && !showFloatingLabel"
+        v-html="placeholder")
+
+      input.w-autocomplete__input(
+        ref="input"
+        :id="inputId"
+        :value="keywords"
+        :name="inputName"
+        :disabled="isDisabled || null"
+        :readonly="isReadonly || null"
+        :tabindex="tabindex || null"
+        v-on="inputEventListeners"
+        v-bind="inputAttrs")
+
+      template(v-if="labelPosition === 'inside' && showLabelInside")
+        label.w-autocomplete__label.w-autocomplete__label--inside.w-form-el-shakable(
+          v-if="$slots.default || label"
+          :for="inputId"
+          :class="labelClasses")
+          slot {{ label }}
+
+      slot(name="icon-right")
+        w-icon.w-autocomplete__icon.w-autocomplete__icon--inner-right(
+          v-if="innerIconRight"
+          tag="label"
+          :for="inputId"
+          @click.stop="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
+
+    template(#content)
+      .w-autocomplete__list-wrap(
+        ref="listWrap"
+        @mousedown.capture="menuIsBeingClicked = true"
+        @mouseup.capture="setEndOfMenuClick"
+        @touchstart.capture="menuIsBeingClicked = true"
+        @touchend.capture="setEndOfMenuClick")
+        w-list.w-autocomplete__list(
+          v-if="filteredItems.length"
+          ref="list"
+          :items="listItems"
+          :model-value="null"
+          :item-label-key="itemLabelKey"
+          :item-value-key="itemValueKey"
+          :color="color"
+          :selection-color="color"
+          @item-select="onListItemSelect")
+          template(#item="{ item }")
+            slot(name="item" :item="item" :highlighted="highlightedItem === item.uid")
               span(v-html="item[itemLabelKey]")
-              w-button(@click.stop="unselectItem(i)" icon="wi-cross" xs text color="currentColor")
-
-        .w-autocomplete__placeholder(
-          v-if="!selection.length && !keywords && placeholder && !showFloatingLabel"
-          v-html="placeholder")
-
-        input.w-autocomplete__input(
-          ref="input"
-          :id="inputId"
-          :value="keywords"
-          :name="inputName"
-          :disabled="isDisabled || null"
-          :readonly="isReadonly || null"
-          :tabindex="tabindex || null"
-          v-on="inputEventListeners"
-          v-bind="inputAttrs")
-
-        template(v-if="labelPosition === 'inside' && showLabelInside")
-          label.w-autocomplete__label.w-autocomplete__label--inside.w-form-el-shakable(
-            v-if="$slots.default || label"
-            :for="inputId"
-            :class="labelClasses")
-            slot {{ label }}
-
-        slot(name="icon-right")
-          w-icon.w-autocomplete__icon.w-autocomplete__icon--inner-right(
-            v-if="innerIconRight"
-            tag="label"
-            :for="inputId"
-            @click.stop="$emit('click:inner-icon-right', $event)") {{ innerIconRight }}
-
-    ul.w-autocomplete__list(
-      ref="list"
-      @mousedown="menuIsBeingClicked = true"
-      @mouseup="setEndOfMenuClick"
-      @touchstart="menuIsBeingClicked = true"
-      @touchend="setEndOfMenuClick")
-      li(
-        v-for="(item, i) in filteredItems"
-        :key="item.uid"
-        @click.stop="onItemClick(item)"
-        :class="{ highlighted: highlightedItem === item.uid }")
-        slot(name="item" :item="item" :highlighted="highlightedItem === item.uid")
-          span(v-html="item[itemLabelKey]")
-      li.w-autocomplete__no-match(
-        v-if="!filteredItems.length"
-        :class="{ 'w-autocomplete__no-match--default': !$slots['no-match'] }")
-        slot(name="no-match")
-          .caption(v-html="noMatch ?? 'No match.'")
-      li.w-autocomplete__extra-item(
-        v-if="$slots['extra-item']"
-        @click.stop="selectExtraItem"
-        :class="{ highlighted: highlightedItem === 'extra-item' }")
-        slot(name="extra-item")
+        .w-autocomplete__no-match(
+          v-if="!filteredItems.length"
+          :class="{ 'w-autocomplete__no-match--default': !$slots['no-match'] }")
+          slot(name="no-match")
+            .caption(v-html="noMatch ?? 'No match.'")
+        .w-autocomplete__extra-item(
+          v-if="$slots['extra-item']"
+          @click.stop="selectExtraItem"
+          :class="{ highlighted: highlightedItem === 'extra-item' }")
+          slot(name="extra-item")
 
   template(v-if="labelPosition === 'right'")
     label.w-autocomplete__label.w-autocomplete__label--right.w-form-el-shakable(
@@ -203,6 +210,15 @@ export default {
       return this.filteredItems.findIndex(item => item.uid === this.highlightedItem)
     },
 
+    // filteredItems enriched with a per-item `class` property for the highlighted state.
+    // w-list reads item[itemClassKey] (default: 'class') and applies it to the item label div.
+    listItems () {
+      return this.filteredItems.map(item => ({
+        ...item,
+        class: this.highlightedItem === item.uid ? 'highlighted' : undefined
+      }))
+    },
+
     hasValue () {
       return this.selection.length > 0 || !!this.keywords
     },
@@ -265,7 +281,9 @@ export default {
         'w-autocomplete__input-wrap--box': this.outline || this.bgColor || this.shadow,
         'w-autocomplete__input-wrap--underline': !this.outline,
         'w-autocomplete__input-wrap--shadow': this.shadow,
-        'w-autocomplete__input-wrap--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round
+        'w-autocomplete__input-wrap--no-padding': !this.outline && !this.bgColor && !this.shadow && !this.round,
+        'w-autocomplete__input-wrap--inner-icon-left': !!this.innerIconLeft,
+        'w-autocomplete__input-wrap--inner-icon-right': !!this.innerIconRight
       }
     },
 
@@ -350,6 +368,11 @@ export default {
       this.$emit('item-click', item)
     },
 
+    // Called by w-list @item-select. The item is the cleaned item object (uid still present).
+    onListItemSelect (item) {
+      this.onItemClick(item)
+    },
+
     setEndOfMenuClick () {
       setTimeout(() => (this.menuIsBeingClicked = false), 100)
     },
@@ -390,15 +413,19 @@ export default {
         else this.highlightedItem = this.filteredItems[index]?.uid ?? 0
 
         // Scroll the menu list if highlighted item is not in view.
-        const listEl = this.$refs.list
-        if (listEl) {
-          if (this.$slots['extra-item'] && index === itemsCount - 1) listEl.scrollTop = listEl.scrollHeight
+        // listWrap is the scroll container; w-list.$el.childNodes are the <li> elements.
+        const scrollEl = this.$refs.listWrap
+        if (scrollEl) {
+          if (this.$slots['extra-item'] && index === itemsCount - 1) scrollEl.scrollTop = scrollEl.scrollHeight
           else {
-            const { offsetHeight: itemElHeight, offsetTop: itemElTop } = listEl.childNodes[index] || {}
-            if (listEl.scrollTop + listEl.offsetHeight - itemElHeight < itemElTop) {
-              listEl.scrollTop = itemElTop - listEl.offsetHeight + itemElHeight
+            const liEl = this.$refs.list?.$el?.childNodes[index]
+            if (liEl) {
+              const { offsetHeight: itemElHeight, offsetTop: itemElTop } = liEl
+              if (scrollEl.scrollTop + scrollEl.offsetHeight - itemElHeight < itemElTop) {
+                scrollEl.scrollTop = itemElTop - scrollEl.offsetHeight + itemElHeight
+              }
+              else if (scrollEl.scrollTop > itemElTop) scrollEl.scrollTop = itemElTop
             }
-            else if (listEl.scrollTop > itemElTop) listEl.scrollTop = itemElTop
           }
         }
       }
@@ -476,6 +503,15 @@ export default {
         const item = this.findItemByValue(value)
         if (item) this.selection.push(item)
       })
+    },
+
+    // When the number of visible items changes (user is typing), recompute the menu position so
+    // that a menu opening above the input stays anchored to the input's top edge instead of
+    // drifting upward as the list shrinks.
+    filteredItems (newVal, oldVal) {
+      if (this.menuOpen && newVal.length !== oldVal.length) {
+        this.$nextTick(() => this.$refs.menu?.computeDetachableCoords())
+      }
     }
   }
 }
@@ -568,6 +604,14 @@ export default {
       padding-left: 0;
       padding-right: 0;
     }
+
+    // Icon clearance — modifier classes on the wrap itself (no ancestor selector), so these
+    // are always 0-1-0 when alone but come after --no-padding in source order (wins the tie).
+    // The combined --no-padding + --inner-icon cases are 0-2-0 and beat both single rules.
+    &--inner-icon-left { padding-left: 28px; }
+    &--inner-icon-right { padding-right: 28px; }
+    &--no-padding.w-autocomplete__input-wrap--inner-icon-left { padding-left: 22px; }
+    &--no-padding.w-autocomplete__input-wrap--inner-icon-right { padding-right: 22px; }
   }
 
   // Selected item chips (multiple mode).
@@ -657,11 +701,6 @@ export default {
     .w-autocomplete--readonly &:hover { background-color: transparent; }
   }
 
-  &--inner-icon-left &__input-wrap { padding-left: 28px; }
-  &--inner-icon-right &__input-wrap { padding-right: 28px; }
-  &--no-padding.w-autocomplete--inner-icon-left &__input-wrap { padding-left: 22px; }
-  &--no-padding.w-autocomplete--inner-icon-right &__input-wrap { padding-right: 22px; }
-
   // Label.
   // ------------------------------------------------------
   &__label {
@@ -686,39 +725,45 @@ export default {
     }
   }
 
-  &__label--inside {
+  // Nesting under __input-wrap gives this block 2-class specificity (0-2-0), which beats
+  // .w-form-el-shakable { position: relative } (0-1-0) regardless of stylesheet load order.
+  &__input-wrap &__label--inside {
     position: absolute;
-    inset: 0 0 auto;
-    min-height: inherit;
+    // top: 50% would slide down as chips wrap to more rows; a fixed value always points to the
+    // center of the first row, keeping the label anchored and the floating animation correct.
+    top: calc(var(--w-form-field-height) / 2);
+    left: 0;
+    padding-left: calc(var(--w-base-increment) * 2);
     white-space: nowrap;
-    margin-left: calc(var(--w-base-increment) * 2);
-    display: flex;
-    align-items: center;
+    transform: translateY(-50%);
     pointer-events: none;
 
-    .w-autocomplete--no-padding & {
-      left: 0;
-      margin-left: 0;
-    }
-
-    .w-autocomplete__input-wrap--round & {
-      margin-left: calc(var(--w-base-increment) * 3);
-    }
-
-    .w-autocomplete--inner-icon-left & { left: 18px; }
-    .w-autocomplete--no-padding.w-autocomplete--inner-icon-left & { left: 26px; }
+    .w-autocomplete--no-padding & { padding-left: 0; }
+    .w-autocomplete__input-wrap--round & { padding-left: calc(var(--w-base-increment) * 3); }
+    // When an inner-left icon is present, remove padding and align directly with input text start
+    // (matches input-wrap's icon clearance padding: 28px regular, 22px no-padding).
+    .w-autocomplete--inner-icon-left & { left: 28px; padding-left: 0; }
+    .w-autocomplete--no-padding.w-autocomplete--inner-icon-left & { left: 22px; }
     .w-autocomplete--inner-icon-right & { padding-right: 26px; }
 
     .w-autocomplete--floating-label & {
-      transform-origin: 0 50%;
+      transform-origin: 0 0;
       transition: var(--w-transition-duration) ease;
+      will-change: transform;
     }
 
-    // Float the label up when focused, filled or has placeholder.
+    // Float the label up when focused, filled or has placeholder (underline style).
     .w-autocomplete--focused.w-autocomplete--floating-label &,
     .w-autocomplete--filled.w-autocomplete--floating-label &,
     .w-autocomplete--has-placeholder.w-autocomplete--floating-label & {
-      transform: translateY(-80%) scale(0.85);
+      transform: translateY(-160%) scale(0.85);
+    }
+
+    // Float higher for box styles (outline / shadow / bg-color).
+    .w-autocomplete--focused.w-autocomplete--floating-label .w-autocomplete__input-wrap--box &,
+    .w-autocomplete--filled.w-autocomplete--floating-label .w-autocomplete__input-wrap--box &,
+    .w-autocomplete--has-placeholder.w-autocomplete--floating-label .w-autocomplete__input-wrap--box & {
+      transform: translateY(-180%) scale(0.85);
     }
 
     .w-autocomplete--focused.w-autocomplete--floating-label.w-autocomplete--inner-icon-left &,
@@ -741,48 +786,63 @@ export default {
     border-radius: var(--w-border-radius);
   }
 
-  &__list {
-    list-style: none;
-    margin: 0;
-    padding: 4px 0;
+  // Scroll container for the w-list + no-match + extra-item.
+  &__list-wrap {
+    position: relative;
     max-height: 300px;
-    overflow: auto;
+    overflow-y: auto;
+    flex-grow: 1;
+  }
 
-    li {
-      position: relative;
-      list-style-type: none;
-      margin: 0;
-      padding: 6px 12px;
-      cursor: pointer;
+  // w-list inside the dropdown — let the wrap handle overflow; add padding here.
+  &__list.w-list {
+    padding: 4px 0;
+    width: 100%;
 
-      &:hover { background-color: color-mix(in srgb, var(--w-primary-color) 10%, transparent); }
-
-      &:before, &:after {
-        content: '';
-        position: absolute;
-        inset: 0;
-      }
-
-      &.highlighted:before {
-        border-left: 2px solid var(--w-primary-color);
-        opacity: 0.3;
-      }
-
-      &.highlighted:after {
-        background-color: var(--w-primary-color);
-        opacity: 0.1;
-      }
+    // Keyboard-highlighted item: left indicator + tinted background (layered via :after
+    // so it doesn't interfere with w-list's own :before hover/active states).
+    .w-list__item-label.highlighted:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-left: 2px solid currentColor;
+      background-color: color-mix(in srgb, currentColor 10%, transparent);
+      pointer-events: none;
     }
   }
 
   &__no-match {
+    padding: 6px 12px;
     cursor: default;
-
-    &--default:hover { background-color: transparent !important; }
   }
 
   &__extra-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 6px 12px;
+    cursor: pointer;
     border-top: var(--w-border);
+
+    &:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: transparent;
+      transition: background-color 0.2s;
+      pointer-events: none;
+    }
+
+    &:hover:before { background-color: color-mix(in srgb, currentColor 8%, transparent); }
+
+    &.highlighted:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-left: 2px solid currentColor;
+      background-color: color-mix(in srgb, currentColor 10%, transparent);
+      pointer-events: none;
+    }
   }
 }
 </style>
