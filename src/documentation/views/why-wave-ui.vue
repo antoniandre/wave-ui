@@ -18,10 +18,9 @@ main
       span.primary What is Wave UI?
 
     .w-flex.gap3.mdd-wrap
-      .w-card.px4.py4.no-grow.no-shrink
+      .w-card.px3.py4.no-grow.no-shrink
         w-icon wi-check
-        h3.title4.mt0
-          | Like other UI frameworks, Wave UI is
+        h3.mt0.size--md.op7 Like other UI frameworks, Wave UI is
         ul.w-list.ml12.size--lg.lh0
           li.w-flex.gap2.align-center(v-for="(line, i) in features1" :key="i")
             w-icon.why-panel__check(color="success" size="1.4em") mdi mdi-check
@@ -29,8 +28,7 @@ main
 
       .w-card.px4.py4
         w-icon.right mdi mdi-white-balance-sunny
-        h3.title4.mt0
-          | But here’s where it stands apart
+        h3.mt0.size--md.op7 But here’s where it stands apart
         .why-list(role="list")
           article.mb2(v-for="(item, i) in features2" :key="i" role="listitem")
             w-icon.op2(aria-hidden="true" size="1.9em") {{ item.icon }}
@@ -42,16 +40,15 @@ main
       span.primary CSS Philosophy
     .size--md
       | Wave UI is crafted with deliberate care for CSS — because we believe
-      strong.ml1 your styles should work with your framework, not against it.
-    p.size--md.
-      It gives you more control, more flexibility, and none of the typical friction
-      you get from bloated or opinionated styles.
+      strong.mx1 your styles should work with your framework, not against it.
+      | It gives you more control, more flexibility, and none of the typical friction
+      | you get from bloated or opinionated styles.
     alert.my2(tip).
       Because inline styles and #[code !important] are a nightmare to override,
       Wave UI uses not-too-specific selectors and favors CSS styling
       over JavaScript-injected styles.
 
-    .title4.mt6.
+    .title4.mt4.
       Scoped, respectful, and side-effect free
     p.
       All Wave UI styles are strictly scoped to UI components or specific classes —
@@ -63,7 +60,7 @@ main
       to #[w-button.mx1 great button] — Wave UI won’t stand in your way with layers of defaults.#[br]
       And if you choose not to use a Wave UI element at all? No problem. No side effects.
 
-    .title4.mt6.
+    .title4.mt4.
       We encourage your own style
     p.
       Use Wave UI’s CSS utility classes when helpful — but feel free to override styles with
@@ -221,6 +218,8 @@ export default {
       transform: translate(15%, -10%) rotate(12deg);
       font-size: 20rem;
     }
+
+    h3.size--md {font-size: 1.15rem;letter-spacing: -0.02em;}
   }
 
   .top-card__text {
