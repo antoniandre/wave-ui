@@ -4,8 +4,8 @@ main
 
   .text-center
     .mb12
-      h2 A big THANK YOU to all the backers!
-      p Thank you to all of you, you make this happen, you are part of this library!
+      h2.mb0 A big THANK YOU to all the backers!
+      p.op4.size--lg.text-italic Thank you to all of you, you make this happen, you are part of this library.
 
     w-flex.align-center.wrap.justify-center.backers
       .backer.ma1(v-for="backer in backers" :key="backer.username")
@@ -27,7 +27,9 @@ main
         | .
         div Thank you! 🙏🙏
 
-    h2.gold Gold Sponsors 🔥
+    h2.gold.w-flex.align-center.gap2.justify-center
+      | Gold Sponsors
+      w-icon(size="1.1em") mdi mdi-fire
     .gold-sponsors
       a(href="https://divriots.com/" target="_blank")
         img(:src="$store.state.darkMode ? DivRiotsLogoGrey : DivRiotsLogo")
@@ -71,16 +73,20 @@ export default {
   h2 {
     font-size: 2.5em;
     margin-bottom: 1em;
+    letter-spacing: -0.05rem;
   }
 
   h2.gold {
-    margin-top: 3.2em;
-    margin-bottom: 1.4em;
+    margin-top: 3em;
+    margin-bottom: 1.2em;
     color: #ccad15;
   }
 }
 
 .backers {
+  max-width: 50rem;
+  margin: 0 auto;
+
   a {
     position: relative;
     display: flex;
@@ -90,7 +96,7 @@ export default {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 4em;
+    width: 3.8em;
     aspect-ratio: 1;
     border-radius: 4em;
     background-color: color-mix(in srgb, var(--w-contrast-bg-color) 10%, transparent);

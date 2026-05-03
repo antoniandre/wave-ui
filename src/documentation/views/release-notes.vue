@@ -19,10 +19,7 @@ main
   ul.history
     //- #[strong Form elements]: li Added the #[code hide-error] option on all the form elements.
     //- TODO
-      - cleanup dynamic-css file
       - the CSS layout classes with breakpoints should have priority.
-      - use teleport to append to w-app
-      - check all appClassesString
       - add in w-tree
         multiple: { type: Boolean }, multiple selection
         unselectableBranches: { type: Boolean },
