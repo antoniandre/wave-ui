@@ -16,6 +16,8 @@ import type {
   ResolveProps
 } from '../extra-vue-types'
 
+import type { WaveDetachableMixinInstance } from '../mixins/detachable'
+
 // ----------------------------------------------------------------------------
 // Props
 // ----------------------------------------------------------------------------
@@ -338,7 +340,7 @@ export type WaveMenuSlots = SlotsType<{
 export type WMenu = DefineComponent<
   WaveMenuProps,
   {},
-  {},
+  WaveDetachableMixinInstance,
   WaveMenuComputeds,
   WaveMenuMethods,
   {},

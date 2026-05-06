@@ -1,7 +1,7 @@
 <template lang="pug">
 slot(name="activator")
 slot(v-if="!$slots.activator")
-teleport(:to="teleportTarget" :disabled="!teleportTarget")
+teleport(v-if="detachableDomReady" :to="teleportTarget" :disabled="!teleportTarget")
   transition(:name="transitionName" appear @after-leave="onAfterLeave")
     .w-tooltip(
       v-if="detachableVisible"

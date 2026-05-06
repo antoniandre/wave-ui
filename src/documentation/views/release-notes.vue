@@ -81,6 +81,14 @@ main
           ul
             li Removed the deprecated #[code w-app] component. #[span.tag.removed]
 
+    li.patch
+      strong.version v4.0.1
+      ul
+        li
+          strong.code w-menu &amp; w-tooltip
+          ul
+            li Defer #[code Teleport] until after mount so SSR markup matches the client on hydration (avoids Nuxt / Vue hydration mismatches with portaled floating content).
+
     li.minor
       strong.version v3.28.0
       ul

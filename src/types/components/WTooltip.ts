@@ -16,6 +16,8 @@ import type {
   ResolveProps
 } from '../extra-vue-types'
 
+import type { WaveDetachableMixinInstance } from '../mixins/detachable'
+
 // ----------------------------------------------------------------------------
 // Props
 // ----------------------------------------------------------------------------
@@ -252,7 +254,7 @@ export type WaveTooltipSlots = SlotsType<{
 export type WTooltip = DefineComponent<
   WaveTooltipProps,
   {},
-  {},
+  WaveDetachableMixinInstance,
   WaveTooltipComputeds,
   WaveTooltipMethods,
   {},

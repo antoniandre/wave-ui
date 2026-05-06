@@ -44,6 +44,11 @@ export default {
   },
 
   data: () => ({
+    /**
+     * When false (SSR + first hydrated paint), the Teleport subtree is not rendered so HTML matches.
+     * Set true in mounted(), then the menu/tooltip portal attaches — avoids Nuxt/Vue hydration mismatches.
+     */
+    detachableDomReady: false,
     // The event listeners handlers have to be removed the exact same way they have been attached.
     // Since the handler functions have variables that change after hot-reload, keep them exactly
     // as is in an array so we can delete them on destroy.
@@ -464,29 +469,32 @@ export default {
   },
 
   mounted () {
-    if (this.activator) {
-      // External activator: attach via document-level delegation.
-      this.bindActivatorEvents()
-    }
-    else {
-      // Slot-based activator: auto-attach DOM listeners to the slot's root element on next tick
-      // so the slot content is guaranteed to be in the DOM.
-      this.$nextTick(() => {
-        // Re-check activator prop (might have resolved from a Vue ref after the tick).
-        if (this.activator) this.bindActivatorEvents()
-        else this._attachActivatorListeners()
+    this.detachableDomReady = true
+    this.$nextTick(() => {
+      if (this.activator) {
+        // External activator: attach via document-level delegation.
+        this.bindActivatorEvents()
+      }
+      else {
+        // Slot-based activator: auto-attach DOM listeners to the slot's root element on next tick
+        // so the slot content is guaranteed to be in the DOM.
+        this.$nextTick(() => {
+          // Re-check activator prop (might have resolved from a Vue ref after the tick).
+          if (this.activator) this.bindActivatorEvents()
+          else this._attachActivatorListeners()
 
-        if (this.modelValue && !this.disable) this.open({ target: this.activatorEl })
-      })
-    }
+          if (this.modelValue && !this.disable) this.open({ target: this.activatorEl })
+        })
+      }
 
-    // Unwrap the overlay if any.
-    if (this.overlay) this.overlayEl = this.$refs.overlay?.$el
+      // Unwrap the overlay if any.
+      if (this.overlay) this.overlayEl = this.$refs.overlay?.$el
 
-    if (this.modelValue && this.activator && !this.disable) {
-      this.toggle({ type: this.shouldShowOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
-    }
-    else if (this.modelValue && !this.disable) this.open({ target: this.activatorEl })
+      if (this.modelValue && this.activator && !this.disable) {
+        this.toggle({ type: this.shouldShowOnClick ? 'click' : 'mouseenter', target: this.activatorEl })
+      }
+      else if (this.modelValue && !this.disable) this.open({ target: this.activatorEl })
+    })
   },
 
   unmounted () {
