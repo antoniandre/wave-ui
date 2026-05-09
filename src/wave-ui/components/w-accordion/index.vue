@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, Fragment } from 'vue'
 import { objectifyClasses } from '../../utils/index'
 import { consoleError } from '../../utils/console'
 import RippleMixin from '../../mixins/ripple'
@@ -119,7 +119,8 @@ export default {
 
     // Detect if the accordion items are directly provided through slot using WAccordionItem.
     accordionItemsProvided () {
-      return this.$slots.default?.()?.some(item => item?.type?.name === 'w-accordion-item')
+      const slot = this.$slots.default?.() || []
+      return this.hasAccordionItemVNodes(slot)
     },
 
     accordionClasses () {
@@ -151,6 +152,18 @@ export default {
   },
 
   methods: {
+    hasAccordionItemVNodes (nodes = []) {
+      return nodes.some((node) => {
+        if (!node) return false
+        if (node.type === WAccordionItem) return true
+        if (node.type?.name === 'w-accordion-item') return true
+        if (node.type === Fragment && Array.isArray(node.children)) {
+          return this.hasAccordionItemVNodes(node.children)
+        }
+        return false
+      })
+    },
+
     getAccordionItem (cuid) {
       return this.accordionItemsById[cuid]
     },

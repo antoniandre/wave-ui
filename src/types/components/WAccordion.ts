@@ -23,10 +23,10 @@ export interface WaveAccordionProps {
   /**
    * `value` in Vue 2.
    * Provide an array of booleans to dictate the state (expanded and collapsed) of all the accordion items. This value gets updated by the accordion when using a v-model.
-   * @property {Array<any>} modelValue
+   * @property {Array<boolean>} modelValue
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
-  modelValue?: Array<any>
+  modelValue?: Array<boolean>
 
   /**
    * Applies a text color on each accordion item. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the `colors` knowledge base page).
@@ -209,17 +209,17 @@ export interface WaveAccordionProps {
 export interface WaveAccordionEmits {
   /**
    * Emitted each time the state of the accordion changes (when an item is expanded or collapsed).<br>Updates the v-model value in Vue 2.x only.
-   * @param {any} renameMe1 - An array of booleans representing the expanded state of each accordion item.
+   * @param {Array<boolean>} state - An array of booleans representing the expanded state of each accordion item.
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
-  'onInput'?: (renameMe1: any) => void
+  'onInput'?: (state: Array<boolean>) => void
 
   /**
    * Emitted each time the state of the accordion changes (when an item is expanded or collapsed).<br>Updates the v-model value in Vue 3 only.
-   * @param {any} renameMe1 - An array of booleans representing the expanded state of each accordion item.
+   * @param {Array<boolean>} state - An array of booleans representing the expanded state of each accordion item.
    * @see https://antoniandre.github.io/wave-ui/w-accordion
    */
-  'onUpdate:modelValue'?: (renameMe1: any) => void
+  'onUpdate:modelValue'?: (state: Array<boolean>) => void
 
   /**
    * Emitted on each accordion item title focus.

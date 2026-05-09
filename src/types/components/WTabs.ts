@@ -46,7 +46,8 @@ export interface WTabsItem {
 export interface WaveTabsProps {
   /**
    * `value` in Vue 2.
-   * Provide a tab index (a number starting from 0) to open it. This value gets updated when using a v-model.
+   * Provide a tab index (a number starting from 0), or a tab id when using `itemIdKey`, to open it.
+   * This value gets updated when using a v-model.
    * @property {number|string} modelValue
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
@@ -231,17 +232,17 @@ export interface WaveTabsProps {
 export interface WaveTabsEmits {
   /**
    * Emitted each time the current tab changes.<br>Updates the v-model value in Vue 2.x only.
-   * @param {Array<boolean>} tabsOpened - An array of booleans representing the active state of each tab.
+   * @param {number|string} value - The opened tab index, or tab id when `modelValue` uses ids.
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
-  'onInput'?: (tabsOpened: Array<boolean>) => void
+  'onInput'?: (value: number|string) => void
 
   /**
    * Emitted each time the current tab changes.<br>Updates the v-model value in Vue 3 only.
-   * @param {Array<boolean>} tabsOpened - An array of booleans representing the active state of each tab.
+   * @param {number|string} value - The opened tab index, or tab id when `modelValue` uses ids.
    * @see https://antoniandre.github.io/wave-ui/w-tabs
    */
-  'onUpdate:modelValue'?: (tabsOpened: Array<boolean>) => void
+  'onUpdate:modelValue'?: (value: number|string) => void
 
   /**
    * Emitted on each tab title focus.

@@ -183,6 +183,38 @@ export default {
   },
 
   methods: {
+    resolveTabUid (value) {
+      if (!this.tabs.length) return null
+      if (value === undefined || value === null || value === '') return this.tabs[0]._uid
+
+      if (typeof value === 'string') {
+        if (this.tabsByUid[value]?._uid) return value
+        const parsed = Number.parseInt(value, 10)
+        if (!Number.isNaN(parsed) && `${parsed}` === value.trim()) return this.tabs[parsed]?._uid || null
+        return null
+      }
+
+      if (typeof value === 'number' && value >= 0) return this.tabs[value]?._uid || null
+      return null
+    },
+
+    syncActiveTabFromModelValue (value = this.modelValue) {
+      const uid = this.resolveTabUid(value) || this.tabs[0]?._uid || null
+      const tab = uid ? this.tabsByUid[uid] : null
+      this.activeTabUid = tab?._uid || null
+      this.activeTabIndex = tab?._index || 0
+    },
+
+    shouldEmitUidModelValue () {
+      if (typeof this.modelValue !== 'string') return false
+      return !/^\d+$/.test(this.modelValue.trim())
+    },
+
+    getModelValueForTab (tab) {
+      if (this.shouldEmitUidModelValue()) return tab[this.itemIdKey] ?? tab._uid
+      return tab._index
+    },
+
     // Adding a tab in the list.
     addTab (item) {
       // If there is no unique ID provided, inject one in each tab.
@@ -200,6 +232,7 @@ export default {
     refreshTabs () {
       let items = this.items
       if (typeof items === 'number') items = Array(items).fill().map((_, i) => this.tabs[i] || {})
+      else items = items || []
 
       this.tabs = items.map((item, _index) => {
         // If there is no unique ID provided, inject one in each tab.
@@ -258,10 +291,12 @@ export default {
     openTab (uid) {
       this.prevTabIndex = this.activeTabIndex // To resolve the transition direction.
       const tab = this.tabsByUid[uid]
+      if (!tab) return
       this.activeTabIndex = tab._index
       this.activeTabUid = tab._uid
-      this.$emit('update:modelValue', tab._index)
-      this.$emit('input', tab._index)
+      const modelValue = this.getModelValueForTab(tab)
+      this.$emit('update:modelValue', modelValue)
+      this.$emit('input', modelValue)
 
       if (!this.noSlider) this.$nextTick(this.updateSlider)
     },
@@ -288,17 +323,17 @@ export default {
     },
 
     updateActiveTab (index) {
-      if (typeof index === 'string') index = ~~index
-      else if (isNaN(index) || index < 0) index = 0
+      const uid = this.resolveTabUid(index)
+      const tab = uid ? this.tabsByUid[uid] : null
 
       // Only open the tab if it is found.
-      if (this.tabs[index]?._uid) {
-        this.openTab(this.tabs[index]?._uid)
+      if (tab?._uid) {
+        this.openTab(tab._uid)
 
         // Scroll the new active tab item title into view if needed.
         this.$nextTick(() => {
           const ref = this.$refs['tabs-bar']
-          this.activeTabEl = ref?.querySelector(`.w-tabs__bar-item:nth-child(${index + 1})`)
+          this.activeTabEl = ref?.querySelector(`.w-tabs__bar-item:nth-child(${tab._index + 1})`)
           if (this.activeTabEl) {
             this.activeTabEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
           }
@@ -312,13 +347,14 @@ export default {
     }
   },
 
-  beforeMount () {
+  created () {
     this.tabs = [] // Reset for hot-reloading.
-    const items = typeof this.items === 'number' ? Array(this.items).fill().map(Object) : this.items
+    const items = typeof this.items === 'number' ? Array(this.items).fill().map(Object) : this.items || []
     items.forEach(this.addTab)
+    this.syncActiveTabFromModelValue(this.modelValue)
+  },
 
-    if (this.modelValue ?? false) this.updateActiveTab(this.modelValue)
-
+  beforeMount () {
     this.$nextTick(() => {
       this.updateSlider()
       // Disable the slider transition while loading.
@@ -333,14 +369,15 @@ export default {
   },
 
   watch: {
-    modelValue (index) {
-      if (index !== this.activeTabIndex) this.updateActiveTab(index)
+    modelValue (value) {
+      const uid = this.resolveTabUid(value)
+      if (uid && uid !== this.activeTabUid) this.updateActiveTab(value)
     },
     items: {
       handler () {
         this.refreshTabs()
-
-        if (this.tabs.length) this.reopenTheActiveTab()
+        this.syncActiveTabFromModelValue(this.modelValue)
+        if (!this.activeTabUid && this.tabs.length) this.reopenTheActiveTab()
 
         if (!this.noSlider) this.$nextTick(this.updateSlider)
       },
