@@ -24,6 +24,29 @@ main
         multiple: { type: Boolean }, multiple selection
         unselectableBranches: { type: Boolean },
 
+    li.patch
+      strong.version v4.0.2
+      ul
+        li
+          strong.code w-tabs
+          ul
+            li Build the tabs collection before first render (created hook) so SSR and client hydration produce the same tab bar/content DOM.
+            li Keep slider setup timing unchanged (still on next tick in #[code beforeMount]) so there is no extra delay in tab interactivity.
+            li Support string #[code modelValue] as tab id via #[code itemIdKey] without coercing to number; continue supporting numeric index models.
+        li
+          strong.code w-accordion
+          ul
+            li Robustly detect slot-provided #[code w-accordion-item] nodes across SSR and client hydration, including fragment-wrapped nodes.
+            li Prevent hydration mismatches where server markup omitted the accordion slot branch but client rendered it.
+
+    li.patch
+      strong.version v4.0.1
+      ul
+        li
+          strong.code w-menu &amp; w-tooltip
+          ul
+            li Defer #[code Teleport] until after mount so SSR markup matches the client on hydration (avoids Nuxt / Vue hydration mismatches with portaled floating content).
+
     li.major
       strong.version v4.0.0
       .title3.text-bold
@@ -80,14 +103,6 @@ main
           strong.code w-app
           ul
             li Removed the deprecated #[code w-app] component. #[span.tag.removed]
-
-    li.patch
-      strong.version v4.0.1
-      ul
-        li
-          strong.code w-menu &amp; w-tooltip
-          ul
-            li Defer #[code Teleport] until after mount so SSR markup matches the client on hydration (avoids Nuxt / Vue hydration mismatches with portaled floating content).
 
     li.minor
       strong.version v3.28.0
