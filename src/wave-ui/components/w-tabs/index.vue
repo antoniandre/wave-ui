@@ -303,9 +303,11 @@ export default {
 
     // Updates the slider position.
     updateSlider (domLookup = true) {
-      if (domLookup) {
-        const ref = this.$refs['tabs-bar']
-        this.activeTabEl = ref?.querySelector('.w-tabs__bar-item--active')
+      const ref = this.$refs['tabs-bar']
+      if (domLookup || !this.activeTabEl) {
+        this.activeTabEl =
+          ref?.querySelector('.w-tabs__bar-item--active')
+          || ref?.querySelector(`.w-tabs__bar-item:nth-child(${this.activeTabIndex + 1})`)
       }
 
       if (!this.fillBar && this.activeTabEl) {
@@ -315,6 +317,10 @@ export default {
         const { borderLeftWidth } = getComputedStyle(tabsBar)
         this.slider.left = `${left - parentLeft - parseInt(borderLeftWidth) + tabsBar.scrollLeft}px`
         this.slider.width = `${width}px`
+      }
+      else if (!this.fillBar && domLookup && this.tabs.length) {
+        // Hydration/layout timing can briefly hide active title lookup; retry once on next tick.
+        this.$nextTick(() => this.updateSlider(false))
       }
       else {
         this.slider.left = `${this.activeTab._index * 100 / this.tabs.length}%`
