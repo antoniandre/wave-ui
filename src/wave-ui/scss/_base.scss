@@ -88,6 +88,8 @@
 }
 
 :root[data-theme="light"] {
+  color-scheme: light;
+
   --w-base-bg-color: #fff;
   --w-base-color: #000;
   --w-contrast-bg-color: #000;
@@ -97,6 +99,8 @@
 }
 
 :root[data-theme="dark"] {
+  color-scheme: dark;
+
   --w-base-bg-color: #222;
   --w-base-color: #fff;
   --w-contrast-bg-color: #fff;
