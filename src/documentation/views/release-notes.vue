@@ -25,6 +25,14 @@ main
         unselectableBranches: { type: Boolean },
 
     li.patch
+      strong.version v4.0.3
+      ul
+        li
+          strong Theming
+          ul
+            li Align browser theme with Wave UI theme (set the #[code color-scheme] CSS property on the #[code :root] element based on the current theme). #[span.tag.new]
+
+    li.patch
       strong.version v4.0.2
       ul
         li
