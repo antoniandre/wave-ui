@@ -455,6 +455,12 @@ export default {
       margin-right: -1px;
     }
     .w-tabs--card &--active {border-bottom-color: transparent;}
+    .w-tabs--pill-slider & {
+      padding: calc(var(--w-base-increment) * 1) calc(var(--w-base-increment) * 2);
+      margin: calc(var(--w-base-increment) * 1) calc(var(--w-base-increment) * 1);
+      border-radius: 99em;
+      font-size: round(nearest, calc(1.1 * var(--w-base-font-size)), 1px);
+    }
 
     &--disabled {
       cursor: not-allowed;
