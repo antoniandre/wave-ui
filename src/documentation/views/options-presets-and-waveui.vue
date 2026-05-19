@@ -48,7 +48,7 @@ main
           and overlays support this. Callable programmatically via #[code this.$refs.field.focus()]
           like #[code validate()] on form fields.
         example
-          w-input(v-model="focusDemo" v-focus label="Auto-focused on mount")
+          w-input(v-focus label="Auto-focused on mount")
           template(#pug).
             w-input(v-model="value" v-focus label="Auto-focused on mount")
           template(#html).
