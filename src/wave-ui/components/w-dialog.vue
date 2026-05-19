@@ -1,5 +1,6 @@
 <template lang="pug">
 w-overlay.w-dialog(
+  ref="overlay"
   :model-value="showWrapper"
   :persistent="persistent"
   :persistent-no-animation="persistentNoAnimation"
@@ -32,6 +33,7 @@ import { objectifyClasses } from '../utils/index'
 
 export default {
   name: 'w-dialog',
+  expose: ['focus'],
 
   props: {
     modelValue: { default: true },
@@ -103,6 +105,10 @@ export default {
   },
 
   methods: {
+    focus () {
+      this.$refs.overlay?.focus?.()
+    },
+
     onOutsideClick () {
       if (!this.persistent) {
         this.showContent = false

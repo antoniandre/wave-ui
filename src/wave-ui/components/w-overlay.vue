@@ -5,17 +5,18 @@ transition(name="fade" appear @after-leave="onClose")
     v-show="showOverlay"
     ref="overlay"
     :style="(modelValue && styles) || null"
-    @keydown.escape.stop="onClick"
     @click="onClick"
-    v-focus
     tabindex="0"
     :class="classes")
     slot
 </template>
 
 <script>
+import { focusElement } from '../utils/focus'
+
 export default {
   name: 'w-overlay',
+  expose: ['focus'],
 
   props: {
     modelValue: {},
@@ -39,7 +40,8 @@ export default {
 
   data: () => ({
     persistentAnimate: false,
-    showOverlay: false
+    showOverlay: false,
+    documentEscapeBound: false
   }),
 
   computed: {
@@ -61,11 +63,29 @@ export default {
   },
 
   methods: {
-    onClick (e) {
-      // Don't react to a click inside the content (event bubbling).
-      if (!e.target.classList.contains('w-overlay')) return
+    focus () {
+      focusElement(this.$refs.overlay)
+    },
 
-      // Quickly add the animation class and remove it.
+    bindDocumentEscape () {
+      if (this.documentEscapeBound) return
+      document.addEventListener('keydown', this.onDocumentEscape)
+      this.documentEscapeBound = true
+    },
+
+    unbindDocumentEscape () {
+      if (!this.documentEscapeBound) return
+      document.removeEventListener('keydown', this.onDocumentEscape)
+      this.documentEscapeBound = false
+    },
+
+    onDocumentEscape (e) {
+      if (e.key !== 'Escape') return
+      if (!this.showOverlay || !this.modelValue) return
+      this.dismiss(e)
+    },
+
+    dismiss (e) {
       if (this.persistent && !this.persistentNoAnimation) {
         this.persistentAnimate = true
         setTimeout(() => (this.persistentAnimate = false), 150) // Must match CSS animation duration.
@@ -78,9 +98,16 @@ export default {
       this.$emit('click', e)
     },
 
+    onClick (e) {
+      // Don't react to a click inside the content (event bubbling).
+      if (!e.target.classList.contains('w-overlay')) return
+      this.dismiss(e)
+    },
+
     // Wait until the end of the closing transition (v-show) to completely unmount (v-if).
     // The onClose method is called twice from the transition: once for the v-show, and once for the v-if.
     onClose () {
+      this.unbindDocumentEscape()
       this.$emit('update:modelValue', false)
       this.$emit('input', false)
       if (!this.modelValue) this.$emit('close') // Only emit once.
@@ -89,11 +116,20 @@ export default {
 
   created () {
     this.showOverlay = this.modelValue
+    if (this.modelValue) this.bindDocumentEscape()
+  },
+
+  unmounted () {
+    this.unbindDocumentEscape()
   },
 
   watch: {
     modelValue (bool) {
-      if (bool) this.showOverlay = true
+      if (bool) {
+        this.showOverlay = true
+        this.bindDocumentEscape()
+      }
+      else this.unbindDocumentEscape()
     }
   }
 }

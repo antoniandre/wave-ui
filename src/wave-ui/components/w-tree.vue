@@ -68,8 +68,11 @@ import { consoleWarn } from '../utils/console'
  * - option to add a left border.
  **/
 
+import { focusElement } from '../utils/focus'
+
 export default {
   name: 'w-tree',
+  expose: ['focus'],
 
   mixins: [RippleMixin],
 
@@ -122,6 +125,11 @@ export default {
   },
 
   methods: {
+    focus () {
+      if (this.disabled) return
+      focusElement(this.$el.querySelector('.w-tree__item-label[tabindex="0"]'))
+    },
+
     //  From data watcher, retain the oldItems open state.
     updateCurrentDepthTree (items, oldItems = []) {
       this.currentDepthItems = []

@@ -9,6 +9,7 @@ component(
   :wrap="inline"
   :class="classes")
   w-checkbox(
+    ref="item"
     v-for="(item, i) in checkboxItems"
     :key="i"
     :model-value="item._isChecked"
@@ -32,9 +33,11 @@ component(
 <script>
 import { reactive } from 'vue'
 import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
+import { guardFocusable } from '../utils/focus'
 
 export default {
   name: 'w-checkboxes',
+  expose: ['focus'],
   mixins: [FormElementMixin],
 
   setup () {
@@ -104,6 +107,12 @@ export default {
   },
 
   methods: {
+    focus () {
+      if (!guardFocusable(this)) return
+      const items = [].concat(this.$refs.item || []).filter(Boolean)
+      items.find(c => !c.isDisabled && !c.isReadonly)?.focus?.()
+    },
+
     reset () {
       this.checkboxItems.forEach(item => (item._isChecked = null))
       this.$emit('update:modelValue', [])

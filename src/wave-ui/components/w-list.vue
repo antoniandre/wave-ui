@@ -45,10 +45,11 @@ ul.w-list(:class="classes")
 <script>
 import { useId } from 'vue'
 import RippleMixin from '../mixins/ripple'
+import { focusElement } from '../utils/focus'
 
 export default {
   name: 'w-list',
-
+  expose: ['focus'],
   mixins: [RippleMixin],
 
   setup () {
@@ -138,6 +139,14 @@ export default {
   },
 
   methods: {
+    focus () {
+      const selected = this.listItems.find(li => li._selected && !li.disabled)
+      const target = selected || this.listItems.find(li => !li.disabled)
+      if (!target) return
+      if (this.listId) focusElement(document.getElementById(`${this.listId}_item-${target._index + 1}`))
+      else focusElement(this.$el.querySelector('[role="option"][tabindex="0"]'))
+    },
+
     // If object, get the item value, if none, get the item label, if none get the id.
     // If simple value, return as is.
     getItemValue (item) {

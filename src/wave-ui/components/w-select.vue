@@ -110,10 +110,13 @@ component(
 
 import { computed } from 'vue'
 import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
+import FocusableMixin from '../mixins/focusable'
+import { guardFocusable, focusElement } from '../utils/focus'
 
 export default {
   name: 'w-select',
-  mixins: [FormElementMixin],
+  expose: ['focus'],
+  mixins: [FormElementMixin, FocusableMixin],
 
   setup (props) {
     const { waveUiUseId } = useWaveUiFormIds()
@@ -259,6 +262,12 @@ export default {
   },
 
   methods: {
+    focus () {
+      if (!guardFocusable(this)) return
+      focusElement(this.$refs['selection-input'])
+      if (!this.showMenu) this.openMenu()
+    },
+
     onFocus (e) {
       if (this.isFocused) return
 

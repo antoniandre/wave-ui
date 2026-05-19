@@ -76,10 +76,11 @@ import { useId } from 'vue'
 import { objectifyClasses } from '../../utils/index'
 import RippleMixin from '../../mixins/ripple'
 import TabContent from './tab-content.vue'
+import { focusElement } from '../../utils/focus'
 
 export default {
   name: 'w-tabs',
-
+  expose: ['focus'],
   mixins: [RippleMixin],
 
   setup () {
@@ -183,6 +184,14 @@ export default {
   },
 
   methods: {
+    focus () {
+      const bar = this.$refs['tabs-bar']
+      if (!bar) return
+      const tab = bar.querySelector('[role="tab"][aria-selected="true"]:not([tabindex="-1"])')
+        || bar.querySelector('[role="tab"][tabindex="0"]')
+      focusElement(tab)
+    },
+
     resolveTabUid (value) {
       if (!this.tabs.length) return null
       if (value === undefined || value === null || value === '') return this.tabs[0]._uid

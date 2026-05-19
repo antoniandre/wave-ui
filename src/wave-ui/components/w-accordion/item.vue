@@ -90,10 +90,11 @@ import { useId } from 'vue'
 import RippleMixin from '../../mixins/ripple'
 import { isRippleEnabled } from '../../utils/ripple'
 import AccordionContent from './accordion-content.vue'
+import { focusElement } from '../../utils/focus'
 
 export default {
   name: 'w-accordion-item',
-
+  expose: ['focus'],
   mixins: [RippleMixin],
 
   setup () {
@@ -161,6 +162,11 @@ export default {
   },
 
   methods: {
+    focus () {
+      if (this.accordionItem._disabled) return
+      focusElement(this.$el.querySelector('.w-accordion__item-title'))
+    },
+
     onAccordionTitlePointerDown (e) {
       if (this.accordionItem._disabled) return
       if (e.target.closest?.('.w-accordion__expand-icon')) return

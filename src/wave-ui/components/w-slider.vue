@@ -79,10 +79,13 @@ component(
 
 <script>
 import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
+import FocusableMixin from '../mixins/focusable'
 
 export default {
   name: 'w-slider',
-  mixins: [FormElementMixin],
+  expose: ['focus'],
+  focusTargetRef: 'thumb',
+  mixins: [FormElementMixin, FocusableMixin],
 
   setup () {
     return useWaveUiFormIds()

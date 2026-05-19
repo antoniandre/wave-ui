@@ -55,10 +55,12 @@ component(
 
 <script>
 import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
+import FocusableMixin from '../mixins/focusable'
 
 export default {
   name: 'w-switch',
-  mixins: [FormElementMixin],
+  expose: ['focus'],
+  mixins: [FormElementMixin, FocusableMixin],
   inheritAttrs: false, // The attrs should only be added to the input not the wrapper.
 
   setup () {

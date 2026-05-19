@@ -19,10 +19,11 @@ span.w-tag(
 
 <script>
 import RippleMixin from '../mixins/ripple'
+import { focusElement } from '../utils/focus'
 
 export default {
   name: 'w-tag',
-
+  expose: ['focus'],
   mixins: [RippleMixin],
 
   props: {
@@ -47,6 +48,13 @@ export default {
   },
 
   emits: ['input', 'update:modelValue'],
+
+  methods: {
+    focus () {
+      if (this.modelValue === -1) return
+      focusElement(this.$el)
+    }
+  },
 
   computed: {
     presetSize () {

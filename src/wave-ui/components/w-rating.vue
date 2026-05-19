@@ -30,9 +30,11 @@ component(
 
 <script>
 import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
+import { guardFocusable, focusElement } from '../utils/focus'
 
 export default {
   name: 'w-rating',
+  expose: ['focus'],
   mixins: [FormElementMixin],
 
   setup () {
@@ -104,6 +106,11 @@ export default {
   },
 
   methods: {
+    focus () {
+      if (!guardFocusable(this)) return
+      focusElement(this.$el.querySelector('.w-rating__button:not([disabled])'))
+    },
+
     onButtonClick (i) {
       this.rating = i
       this.$emit('update:modelValue', this.rating)

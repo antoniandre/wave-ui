@@ -68,10 +68,13 @@ component(
  **/
 
 import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
+import FocusableMixin from '../mixins/focusable'
 
 export default {
   name: 'w-textarea',
-  mixins: [FormElementMixin],
+  expose: ['focus'],
+  focusTargetRef: 'textarea',
+  mixins: [FormElementMixin, FocusableMixin],
   inheritAttrs: false, // The attrs should only be added to the textarea not the wrapper.
 
   setup () {

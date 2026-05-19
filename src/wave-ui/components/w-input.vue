@@ -129,11 +129,13 @@ component(
  **/
 
 import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
+import FocusableMixin from '../mixins/focusable'
 import { reactive } from 'vue'
 
 export default {
   name: 'w-input',
-  mixins: [FormElementMixin],
+  expose: ['focus'],
+  mixins: [FormElementMixin, FocusableMixin],
   inheritAttrs: false, // The attrs should only be added to the input not the wrapper.
 
   setup () {

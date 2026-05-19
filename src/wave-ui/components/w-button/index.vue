@@ -1,10 +1,10 @@
 <template lang="pug">
 component(v-if="tooltip" is="w-tooltip" v-bind="tooltipProps")
-  button-partial(v-bind="buttonProps")
+  button-partial(ref="button" v-bind="buttonProps")
     slot
   template(#tooltip)
     div(v-html="tooltip")
-button-partial(v-else v-bind="buttonProps")
+button-partial(v-else ref="button" v-bind="buttonProps")
   slot
   template(#loading)
     slot(name="loading")
@@ -12,9 +12,11 @@ button-partial(v-else v-bind="buttonProps")
 
 <script>
 import ButtonPartial from './button.vue'
+import { focusElement } from '../../utils/focus'
 
 export default {
   name: 'w-button',
+  expose: ['focus'],
   inheritAttrs: false, // The attrs are only bound to the button-partial, not the root.
 
   props: {
@@ -65,6 +67,13 @@ export default {
     buttonProps () {
       const { tooltip, tooltipProps = {}, ...props } = this.$props
       return { ...props, ...this.$attrs }
+    }
+  },
+
+  methods: {
+    focus () {
+      if (this.disabled) return
+      focusElement(this.$refs.button?.$el)
     }
   }
 }

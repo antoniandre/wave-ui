@@ -5,6 +5,7 @@
     .w-drawer-wrap__pushable
       w-overlay(
         v-if="!noOverlay"
+        ref="overlay"
         v-model="showDrawer"
         @click="onOutsideClick"
         :persistent="persistent"
@@ -21,12 +22,15 @@
         ref="drawer"
         :is="tag || 'aside'"
         :class="drawerClasses"
-        :style="styles")
+        :style="styles"
+        :tabindex="noOverlay ? 0 : null"
+        @keydown.escape.stop="noOverlay && !persistent && onOutsideClick()")
         slot
   //- Other cases.
   template(v-else)
     w-overlay(
       v-if="!noOverlay"
+      ref="overlay"
       v-model="showDrawer"
       @click="onOutsideClick"
       :persistent="persistent"
@@ -43,11 +47,14 @@
         ref="drawer"
         :is="tag || 'aside'"
         :class="drawerClasses"
-        :style="styles")
+        :style="styles"
+        :tabindex="noOverlay ? 0 : null"
+        @keydown.escape.stop="noOverlay && !persistent && onOutsideClick()")
         slot
 </template>
 
 <script>
+import { focusElement } from '../utils/focus'
 // The complexity in this component is on close:
 // we must keep the wrapper in the DOM until the drawer transition is finished.
 // Then emit the modelValue update that will trigger the removal of the wrapper from the DOM.
@@ -56,6 +63,7 @@ const oppositeSides = { left: 'right', right: 'left', top: 'down', bottom: 'up' 
 
 export default {
   name: 'w-drawer',
+  expose: ['focus'],
 
   props: {
     modelValue: { default: true },
@@ -164,6 +172,11 @@ export default {
   },
 
   methods: {
+    focus () {
+      if (this.$refs.overlay) this.$refs.overlay.focus()
+      else focusElement(this.$refs.drawer?.$el || this.$refs.drawer)
+    },
+
     onBeforeClose () {
       this.$emit('before-close')
     },

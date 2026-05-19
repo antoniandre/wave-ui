@@ -50,10 +50,12 @@ component(
 
 <script>
 import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
+import FocusableMixin from '../mixins/focusable'
 
 export default {
   name: 'w-checkbox',
-  mixins: [FormElementMixin],
+  expose: ['focus'],
+  mixins: [FormElementMixin, FocusableMixin],
 
   setup () {
     return useWaveUiFormIds()

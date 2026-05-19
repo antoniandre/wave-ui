@@ -9,6 +9,7 @@ component(
   :wrap="inline"
   :class="classes")
   w-radio(
+    ref="item"
     v-for="(item, i) in radioItems"
     :key="i"
     :model-value="item.value === modelValue"
@@ -31,9 +32,11 @@ component(
 
 <script>
 import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
+import { guardFocusable } from '../utils/focus'
 
 export default {
   name: 'w-radios',
+  expose: ['focus'],
   mixins: [FormElementMixin],
 
   setup () {
@@ -97,6 +100,12 @@ export default {
   },
 
   methods: {
+    focus () {
+      if (!guardFocusable(this)) return
+      const items = [].concat(this.$refs.item || []).filter(Boolean)
+      items.find(c => !c.isDisabled && !c.isReadonly)?.focus?.()
+    },
+
     onInput (item) {
       this.inputValue = true
       this.$emit('update:modelValue', item.value)

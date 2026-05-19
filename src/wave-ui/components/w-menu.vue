@@ -48,9 +48,11 @@ teleport(v-if="detachableDomReady" :to="teleportTarget" :disabled="!teleportTarg
 <script>
 import { objectifyClasses } from '../utils/index'
 import DetachableMixin from '../mixins/detachable'
+import { focusElement } from '../utils/focus'
 
 export default {
   name: 'w-menu',
+  expose: ['focus'],
   mixins: [DetachableMixin],
   inheritAttrs: false, // The attrs are only bound to the button-partial, not the root.
 
@@ -215,6 +217,11 @@ export default {
   },
 
   methods: {
+    focus () {
+      if (this.overlay && this.$refs.overlay) this.$refs.overlay.focus()
+      else focusElement(this.activatorEl)
+    },
+
     /**
      * Other methods in the `detachable` mixin:
      * - `open`

@@ -113,10 +113,12 @@ component(
 <script>
 import { computed } from 'vue'
 import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
+import FocusableMixin from '../mixins/focusable'
 
 export default {
   name: 'w-autocomplete',
-  mixins: [FormElementMixin],
+  expose: ['focus'],
+  mixins: [FormElementMixin, FocusableMixin],
   inheritAttrs: false,
 
   setup () {
