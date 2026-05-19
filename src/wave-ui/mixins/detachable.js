@@ -9,6 +9,7 @@
  */
 
 import { consoleWarn } from '../utils/console'
+import { callFocus } from '../utils/focus'
 
 // Minimum space (px) from the viewport edge when flipping / nudging.
 const VIEWPORT_MARGIN = 4
@@ -65,6 +66,10 @@ export default {
     // Components use this to bind visibility:hidden, so the element is never visible at the
     // wrong position before its coordinates are calculated.
     detachableReady: false,
+    // Transition @after-enter has run for the current open cycle.
+    _contentEntered: false,
+    // v-focus entries waiting for detachableReady + _contentEntered.
+    _autofocusTargets: [],
     // The Vue Teleport target. Stored as data (not computed) so it is resolved lazily at
     // open()-time — after the DOM is committed — rather than during VNode creation where
     // document.querySelector() may return null for elements that are part of the same render batch.
@@ -171,6 +176,35 @@ export default {
     onAfterLeave () {
       this.detachableReady = false
       this.detachableEl = null
+      this._contentEntered = false
+      this._autofocusTargets = []
+    },
+
+    onDetachableAfterEnter () {
+      this._contentEntered = true
+      this._maybeFlushAutofocus()
+    },
+
+    registerAutofocus (entry) {
+      if (!this._autofocusTargets) this._autofocusTargets = []
+      this._autofocusTargets.push(entry)
+      this._maybeFlushAutofocus()
+    },
+
+    unregisterAutofocus (el) {
+      if (!this._autofocusTargets?.length) return
+      this._autofocusTargets = this._autofocusTargets.filter(entry => entry.el !== el)
+    },
+
+    _maybeFlushAutofocus () {
+      if (this.detachableReady && this._contentEntered) this.flushAutofocus()
+    },
+
+    flushAutofocus () {
+      const targets = this._autofocusTargets || []
+      this._autofocusTargets = []
+      if (!targets.length) return
+      this.$nextTick(() => targets.forEach(({ el }) => callFocus(el)))
     },
 
     unbindActivatorDocEvents () {
@@ -253,6 +287,7 @@ export default {
 
       // Hide before entering the DOM; handles rapid re-opens where detachableReady is still true.
       this.detachableReady = false
+      this._contentEntered = false
 
       // Resolve the teleport target here, at open()-time, so the DOM is fully committed and
       // detachableDefaultRoot() (for nested menus/tooltips) returns the correct element.
@@ -274,8 +309,11 @@ export default {
         this.activatorWidth = this.activatorEl.offsetWidth
       }
 
-      if (!this.noPosition) this.computeDetachableCoords()
-      else this.detachableReady = true
+      if (!this.noPosition) await this.computeDetachableCoords()
+      else {
+        this.detachableReady = true
+        this._maybeFlushAutofocus()
+      }
 
       // In `getActivatorCoordinates` accessing the menu computed styles takes a few ms (less than 10ms),
       // if we don't postpone the Menu apparition it will start transition from a visible menu and
@@ -412,6 +450,7 @@ export default {
       // Always await $nextTick so coordinates, placement class, and visibility are flushed atomically.
       this.detachableReady = true
       await this.$nextTick()
+      this._maybeFlushAutofocus()
 
       // Guard against the component being unmounted while awaiting.
       if (!this.detachableEl) return

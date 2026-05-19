@@ -36,6 +36,7 @@ import { guardFocusable } from '../utils/focus'
 
 export default {
   name: 'w-radios',
+  focusable: true,
   expose: ['focus'],
   mixins: [FormElementMixin],
 

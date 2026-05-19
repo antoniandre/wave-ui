@@ -43,7 +43,7 @@
 import { ref, computed, onMounted, onBeforeUnmount, nextTick, watch, useId, useAttrs } from 'vue'
 import { objectifyClasses } from '../utils/index'
 
-defineOptions({ name: 'WScrollable' })
+defineOptions({ name: 'WScrollable', focusable: true })
 
 const props = defineProps({
   color: { type: String, default: 'primary' },

@@ -34,6 +34,7 @@ import { guardFocusable, focusElement } from '../utils/focus'
 
 export default {
   name: 'w-rating',
+  focusable: true,
   expose: ['focus'],
   mixins: [FormElementMixin],
 

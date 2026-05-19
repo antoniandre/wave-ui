@@ -94,6 +94,7 @@ import { focusElement } from '../../utils/focus'
 
 export default {
   name: 'w-accordion-item',
+  focusable: true,
   expose: ['focus'],
   mixins: [RippleMixin],
 

@@ -72,6 +72,7 @@ import { focusElement } from '../utils/focus'
 
 export default {
   name: 'w-tree',
+  focusable: true,
   expose: ['focus'],
 
   mixins: [RippleMixin],

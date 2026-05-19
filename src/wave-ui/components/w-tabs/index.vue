@@ -80,6 +80,7 @@ import { focusElement } from '../../utils/focus'
 
 export default {
   name: 'w-tabs',
+  focusable: true,
   expose: ['focus'],
   mixins: [RippleMixin],
 

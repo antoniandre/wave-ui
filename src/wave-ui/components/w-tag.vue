@@ -23,6 +23,7 @@ import { focusElement } from '../utils/focus'
 
 export default {
   name: 'w-tag',
+  focusable: true,
   expose: ['focus'],
   mixins: [RippleMixin],
 

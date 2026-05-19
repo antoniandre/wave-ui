@@ -2,7 +2,7 @@
 slot(name="activator")
 slot(v-if="!$slots.activator")
 teleport(v-if="detachableDomReady" :to="teleportTarget" :disabled="!teleportTarget")
-  transition(:name="transitionName" appear @after-leave="onAfterLeave")
+  transition(:name="transitionName" appear @after-enter="onDetachableAfterEnter" @after-leave="onAfterLeave")
     .w-menu(
       v-if="custom && detachableVisible"
       ref="detachable"

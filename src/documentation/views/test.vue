@@ -5,9 +5,14 @@
   p model-value: {{ message }}
 
   h2 Autofocus test
-  w-input(@update:model-value="onCountUpdate" :model-value="count" type="number")
-  p model-value: {{ count }}
-  w-button(@click="openDialog = true") Open
+  w-input.mb4(@update:model-value="onCountUpdate" :model-value="count" type="number")
+  w-button(@click="openDialog = true") Open dialog
+  w-menu
+    w-button.ml3 Show menu
+    template(#content)
+      w-form
+        w-input(v-focus)
+        w-button.mt4(@click="openDialog = false") Close
   w-dialog(v-model="openDialog")
     w-form
       w-input(v-focus)

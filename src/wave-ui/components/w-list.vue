@@ -49,6 +49,7 @@ import { focusElement } from '../utils/focus'
 
 export default {
   name: 'w-list',
+  focusable: true,
   expose: ['focus'],
   mixins: [RippleMixin],
 
