@@ -8,6 +8,8 @@ div
   component-api(:items="slots" title="Slots")
 
   component-api(:items="events" title="Events")
+
+  component-api(:items="methods" title="Methods")
 </template>
 
 <script>
@@ -55,10 +57,17 @@ const slots = {
 
 const eventsDescs = {}
 
+const methods = {
+  focus: {
+    description: 'Focuses the underlying button or link element (including when wrapped in <code>w-tooltip</code>). Also runs when <code>v-focus</code> is used. No-op when <code>disabled</code>.'
+  }
+}
+
 export default {
   data: () => ({
     propsDescs,
-    slots
+    slots,
+    methods
   }),
 
   computed: {

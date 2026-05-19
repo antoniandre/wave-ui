@@ -7,8 +7,11 @@ div
     parameters to the #[span.code w-overlay].
 
   title-link(h2) Overlay with custom opacity and control on #[span.code persistent]
-  p When the overlay is persistent, it will not close on click and on escape key.
-  p When persistent is set to false and by default, the escape key will also close the overlay.
+  p When the overlay is persistent, it will not close on backdrop click or <kbd>Escape</kbd>.
+  p.
+    When persistent is false (default), <kbd>Escape</kbd> closes the overlay while it is open,
+    even when focus is on content inside (e.g. a field in a <code>w-dialog</code>).
+    Backdrop click still only closes when clicking the dimmed area.
   example
     w-flex(wrap)
       w-button.my2(@click="showOverlay = true") Show overlay

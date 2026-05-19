@@ -8,6 +8,8 @@ div
   component-api(:items="slots" title="Slots")
 
   component-api(:items="events" title="Events")
+
+  component-api(:items="methods" title="Methods")
 </template>
 
 <script>
@@ -46,10 +48,17 @@ const eventsDescs = {
   close: 'Emitted on drawer close.'
 }
 
+const methods = {
+  focus: {
+    description: 'Focuses the overlay when present, otherwise the drawer panel (Escape closes when not <code>persistent</code>). Also runs when <code>v-focus</code> is used.'
+  }
+}
+
 export default {
   data: () => ({
     propsDescs,
-    slots
+    slots,
+    methods
   }),
 
   computed: {

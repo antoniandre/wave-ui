@@ -8,6 +8,8 @@ div
   component-api(:items="slots" title="Slots")
 
   component-api(:items="events" title="Events")
+
+  component-api(:items="methods" title="Methods")
 </template>
 
 <script>
@@ -67,10 +69,17 @@ const eventsDescs = {
   open: 'Emitted on menu open.'
 }
 
+const methods = {
+  focus: {
+    description: 'When <code>overlay</code> is set, focuses the overlay (Escape-close). Otherwise focuses the activator. Also runs when <code>v-focus</code> is used.'
+  }
+}
+
 export default {
   data: () => ({
     propsDescs,
-    slots
+    slots,
+    methods
   }),
 
   computed: {

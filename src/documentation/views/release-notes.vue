@@ -24,6 +24,20 @@ main
         multiple: { type: Boolean }, multiple selection
         unselectableBranches: { type: Boolean },
 
+    li.minor
+      strong.version v4.1.0
+      ul
+        li
+          strong #[code v-focus] directive &amp; #[code focus()] on components
+          ul
+            li The global #[code v-focus] directive now calls a component's #[code focus()] method when present, so it works on wrapped form fields (e.g. #[code w-input], #[code w-select]). #[span.tag.new]
+            li Added #[code focus()] on focusable components (form fields, groups, #[code w-button], #[code w-list], #[code w-tree], #[code w-tabs], overlays, dialogs, drawers, menus, etc.). Callable via #[code $refs] like #[code validate()]. #[span.tag.new]
+        li
+          strong.code w-overlay &amp; #[code w-dialog]
+          ul
+            li #[code w-overlay]: <kbd>Escape</kbd> closes while the overlay is open via a document listener, including when focus is on slot content (e.g. #[code w-input] with #[code v-focus] inside #[code w-dialog]). Backdrop click still only closes when clicking the dimmed area. #[span.tag.new]
+            li Removed built-in #[code v-focus] on the overlay root so #[code v-focus] on inner fields is not overridden. #[span.tag.new]
+
     li.patch
       strong.version v4.0.3
       ul

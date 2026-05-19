@@ -8,6 +8,8 @@ div
   component-api(:items="slots" title="Slots")
 
   component-api(:items="events" title="Events")
+
+  component-api(:items="methods" title="Methods")
 </template>
 
 <script>
@@ -64,10 +66,17 @@ const events = {
   }
 }
 
+const methods = {
+  focus: {
+    description: 'Focuses the inner native control. Also runs when the <code>v-focus</code> directive is used. Callable via <code>this.$refs.field.focus()</code>. No-op when <code>disabled</code> or <code>readonly</code>.'
+  }
+}
+
 export default {
   data: () => ({
     propsDescs,
-    slots
+    slots,
+    methods
   }),
 
   computed: {

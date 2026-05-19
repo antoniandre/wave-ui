@@ -8,6 +8,8 @@ div
   component-api(:items="slots" title="Slots")
 
   component-api(:items="events" title="Events")
+
+  component-api(:items="methods" title="Methods")
 </template>
 
 <script>
@@ -45,10 +47,17 @@ const events = {
   }
 }
 
+const methods = {
+  focus: {
+    description: 'Focuses the scrollable root for keyboard scrolling. Also runs when <code>v-focus</code> is used. No-op when <code>disabled</code>.'
+  }
+}
+
 export default {
   data: () => ({
     propsDescs,
-    slots
+    slots,
+    methods
   }),
 
   computed: {

@@ -12,6 +12,8 @@ div
 
   component-api(:items="checkboxesEvents" title="Events")
 
+  component-api(:items="checkboxes.methods" title="Methods")
+
   .w-divider.my12
 
   //- w-checkbox.
@@ -21,6 +23,8 @@ div
   component-api(:items="checkbox.slots" title="Slots")
 
   component-api(:items="checkboxEvents" title="Events")
+
+  component-api(:items="checkbox.methods" title="Methods")
 </template>
 
 <script>
@@ -91,6 +95,11 @@ const checkboxes = {
         '[DOM event object]': 'The associated focus DOM event.'
       }
     }
+  },
+  methods: {
+    focus: {
+      description: 'Focuses the first enabled child control. Also runs when <code>v-focus</code> is used. No-op when the group is <code>disabled</code> or <code>readonly</code>.'
+    }
   }
 }
 
@@ -139,6 +148,11 @@ const checkbox = {
       params: {
         '[DOM event object]': 'The associated focus DOM event.'
       }
+    }
+  },
+  methods: {
+    focus: {
+      description: 'Focuses the inner native control. Also runs when the <code>v-focus</code> directive is used. Callable via <code>this.$refs.field.focus()</code>. No-op when <code>disabled</code> or <code>readonly</code>.'
     }
   }
 }

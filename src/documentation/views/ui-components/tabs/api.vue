@@ -8,6 +8,8 @@ div
   component-api(:items="slots" title="Slots")
 
   component-api(:items="events" title="Events")
+
+  component-api(:items="methods" title="Methods")
 </template>
 
 <script>
@@ -93,10 +95,17 @@ const events = {
   }
 }
 
+const methods = {
+  focus: {
+    description: 'Focuses the active tab title, or the first enabled tab. Also runs when <code>v-focus</code> is used.'
+  }
+}
+
 export default {
   data: () => ({
     propsDescs,
-    slots
+    slots,
+    methods
   }),
 
   computed: {

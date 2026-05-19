@@ -12,6 +12,8 @@ div
   component-api.mt12(:items="slotsAccordionItem" title="w-accordion-item Slots")
 
   component-api(:items="events" title="Events")
+
+  component-api(:items="methods" title="w-accordion-item Methods")
 </template>
 
 <script>
@@ -134,12 +136,19 @@ const events = {
   }
 }
 
+const methods = {
+  focus: {
+    description: 'Focuses the accordion item title. Also runs when <code>v-focus</code> is used. No-op when the item is disabled.'
+  }
+}
+
 export default {
   data: () => ({
     propsDescs,
     accordionItemPropsDescs,
     slots,
-    slotsAccordionItem
+    slotsAccordionItem,
+    methods
   }),
 
   computed: {

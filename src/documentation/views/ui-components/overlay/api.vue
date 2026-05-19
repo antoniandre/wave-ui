@@ -8,6 +8,8 @@ div
   component-api(:items="slots" title="Slots")
 
   component-api(:items="events" title="Events")
+
+  component-api(:items="methods" title="Methods")
 </template>
 
 <script>
@@ -19,8 +21,8 @@ const propsDescs = {
   opacity: 'Sets a custom opacity on the overlay.',
   bgColor: 'Applies a color to the overlay\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   zIndex: 'Applies a z-index (positive or negative integer) to the overlay.',
-  persistent: 'When set to true, clicking outside of the overlay or pressing the escape key will not close the overlay.<br>A bounce animation will give the user a feedback that the overlay content needs attention and cannot be closed.',
-  persistentNoAnimation: 'When this and the <code>persistent</code> props are set to true, clicking outside of the overlay or pressing the escape key will not trigger the default bounce animation (no feedback is given to the user).'
+  persistent: 'When set to true, clicking the backdrop or pressing <kbd>Escape</kbd> will not close the overlay (while it is open, <kbd>Escape</kbd> is listened for on <code>document</code>, regardless of which element is focused inside).<br>A bounce animation gives feedback that the content needs attention.',
+  persistentNoAnimation: 'When this and the <code>persistent</code> props are set to true, clicking the backdrop or pressing <kbd>Escape</kbd> will not trigger the bounce animation.'
 }
 
 const slots = {
@@ -54,10 +56,17 @@ const events = {
   }
 }
 
+const methods = {
+  focus: {
+    description: 'Focuses the overlay root programmatically. <kbd>Escape</kbd> closes the overlay while it is open without requiring backdrop focus (see overlay <code>model-value</code>).'
+  }
+}
+
 export default {
   data: () => ({
     propsDescs,
-    slots
+    slots,
+    methods
   }),
 
   computed: {

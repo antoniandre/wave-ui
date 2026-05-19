@@ -12,6 +12,8 @@ div
 
   component-api(:items="radiosEvents" title="Events")
 
+  component-api(:items="radios.methods" title="Methods")
+
   .w-divider.my12
 
   //- w-radio.
@@ -22,6 +24,8 @@ div
   component-api(:items="radio.slots" title="Slots")
 
   component-api(:items="radioEvents" title="Events")
+
+  component-api(:items="radio.methods" title="Methods")
 </template>
 
 <script>
@@ -90,6 +94,11 @@ const radios = {
         '[DOM event object]': 'The associated focus DOM event.'
       }
     }
+  },
+  methods: {
+    focus: {
+      description: 'Focuses the first enabled child control. Also runs when <code>v-focus</code> is used. No-op when the group is <code>disabled</code> or <code>readonly</code>.'
+    }
   }
 }
 
@@ -136,6 +145,11 @@ const radio = {
       params: {
         '[DOM event object]': 'The associated focus DOM event.'
       }
+    }
+  },
+  methods: {
+    focus: {
+      description: 'Focuses the inner native control. Also runs when the <code>v-focus</code> directive is used. Callable via <code>this.$refs.field.focus()</code>. No-op when <code>disabled</code> or <code>readonly</code>.'
     }
   }
 }

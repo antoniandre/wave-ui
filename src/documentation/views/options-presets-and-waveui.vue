@@ -38,6 +38,28 @@ main
           template(#html).
             &lt;div v-wave-ripple class="pa6 round text-center title3" style="..."&gt;Tap for ripple&lt;/div&gt;
 
+        title-link.mt10(h3 slug="focus-directive") #[code v-focus] directive
+        p.mt2.
+          Use #[code v-focus] on a native focusable element or on a Wave UI component that exposes
+          #[code focus()]. On mount, Wave UI calls #[code focus()] when available, otherwise
+          #[code el.focus()] on the component root.
+        p.
+          Form fields (e.g. #[code w-input]), #[code w-select] (opens the menu), groups, lists, dialogs,
+          and overlays support this. Callable programmatically via #[code this.$refs.field.focus()]
+          like #[code validate()] on form fields.
+        example
+          w-input(v-model="focusDemo" v-focus label="Auto-focused on mount")
+          template(#pug).
+            w-input(v-model="value" v-focus label="Auto-focused on mount")
+          template(#html).
+            &lt;w-input v-model="value" v-focus label="Auto-focused on mount" /&gt;
+
+        title-link.mt10(h3 slug="scroll-directive") #[code v-scroll] directive
+        p.mt2.
+          Use #[code v-scroll] with a callback #[code (event, element) => boolean]. Wave UI listens to
+          #[code window] scroll; when the callback returns #[code true], the listener is removed
+          (handy for one-shot logic such as closing a menu or hiding a hint after the user scrolls).
+
         .mt6
           w-icon.ml-1.mr1 wi-chevron-right
           | View the

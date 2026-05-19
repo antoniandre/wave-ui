@@ -8,6 +8,8 @@ div
   component-api(:items="slots" title="Slots")
 
   component-api(:items="events" title="Events")
+
+  component-api(:items="methods" title="Methods")
 </template>
 
 <script>
@@ -53,10 +55,17 @@ const events = {
   }
 }
 
+const methods = {
+  focus: {
+    description: 'Focuses the tag element when it is interactive (<code>model-value !== -1</code>). Also runs when <code>v-focus</code> is used.'
+  }
+}
+
 export default {
   data: () => ({
     propsDescs,
-    slots
+    slots,
+    methods
   }),
 
   computed: {

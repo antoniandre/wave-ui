@@ -1,11 +1,17 @@
 <template lang="pug">
 .test.ma12.pa12.bd1.bdrs2
   h1.mt0.mb8 Testing playground
-  w-input(@update:model-value="onMessageUpdate" :model-value="message")
+  w-input(@update:model-value="onMessageUpdate" :model-value="message" v-focus)
   p model-value: {{ message }}
 
+  h2 Autofocus test
   w-input(@update:model-value="onCountUpdate" :model-value="count" type="number")
   p model-value: {{ count }}
+  w-button(@click="openDialog = true") Open
+  w-dialog(v-model="openDialog")
+    w-form
+      w-input(v-focus)
+      w-button.mt4(@click="openDialog = false") Close
 </template>
 
 <script setup>
@@ -13,7 +19,7 @@ import { ref } from 'vue'
 
 const message = ref('')
 const count = ref(0)
-
+const openDialog = ref(false)
 const onMessageUpdate = (value) => {
   message.value = value
   console.log('message updated:', value, message.value)

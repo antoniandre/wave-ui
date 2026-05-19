@@ -8,6 +8,8 @@ div
   component-api(:items="slots" title="Slots")
 
   component-api(:items="events" title="Events")
+
+  component-api(:items="methods" title="Methods")
 </template>
 
 <script>
@@ -135,10 +137,17 @@ const events = {
   }
 }
 
+const methods = {
+  focus: {
+    description: 'Focuses the selection field and opens the dropdown when closed. Also runs when <code>v-focus</code> is used. No-op when <code>disabled</code> or <code>readonly</code>.'
+  }
+}
+
 export default {
   data: () => ({
     propsDescs,
-    slots
+    slots,
+    methods
   }),
 
   computed: {

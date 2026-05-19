@@ -8,6 +8,8 @@ div
   component-api(:items="slots" title="Slots")
 
   component-api(:items="events" title="Events")
+
+  component-api(:items="methods" title="Methods")
 </template>
 
 <script>
@@ -44,10 +46,17 @@ const eventsDescs = {
   closed: 'Emitted after the dialog is completely closed (after the closing animation).'
 }
 
+const methods = {
+  focus: {
+    description: 'Delegates focus to the dialog overlay (Escape-close layer). Also runs when <code>v-focus</code> is used.'
+  }
+}
+
 export default {
   data: () => ({
     propsDescs,
-    slots
+    slots,
+    methods
   }),
 
   computed: {
