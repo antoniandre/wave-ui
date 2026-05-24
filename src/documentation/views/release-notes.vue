@@ -24,6 +24,41 @@ main
         multiple: { type: Boolean }, multiple selection
         unselectableBranches: { type: Boolean },
 
+    li.patch
+      strong.version v4.2.0
+      ul
+        li
+          strong SSR / theming: zero-flash theme loading
+          ul
+            li.
+              #[code getSSRStyles()] called without a theme argument now emits both themes'
+              custom color variables scoped to #[code [data-theme="light"]] and
+              #[code [data-theme="dark"]] instead of a single #[code :root{}] block. Combined
+              with the blocking init script, the correct colors are always present at first
+              paint — no color flash regardless of the SSR default. #[span.tag.new]
+            li.
+              New static #[code WaveUI.getThemeInitScript(storageKey?)] — returns a minified
+              inline script that sets #[code data-theme] on #[code &lt;html&gt;] before the first
+              paint by reading #[code localStorage] and OS preference. Inject it as a blocking
+              #[code &lt;script&gt;] in #[code &lt;head&gt;] (e.g. via #[code nuxt.config.ts]
+              #[code app.head.script]). #[span.tag.new]
+            li.
+              New static #[code WaveUI.resolveInitialTheme(storageKey?)] — reads
+              #[code localStorage] and OS preference to return the correct initial theme for
+              CSR apps; pass the result as the #[code theme] install option. #[span.tag.new]
+            li.
+              #[code beforeMount] now respects any #[code data-theme] already set on
+              #[code &lt;html&gt;] (e.g. by the blocking init script) rather than overwriting
+              it with the configured default — no explicit #[code theme] option is needed in
+              #[code app.use(WaveUI, ...)] when using #[code getThemeInitScript()]. #[span.tag.new]
+            li.
+              #[code generateColors] accepts an optional #[code scope] parameter
+              (default: #[code ':root']) — used internally for the dual-scoped SSR output,
+              also available for custom use cases. #[span.tag.new]
+            li.
+              Fixed #[code $waveui.theme] and #[code $waveui.preferredTheme] TypeScript types
+              from #[code null] to #[code 'light' | 'dark' | null]. #[span.tag.fix]
+
     li.minor
       strong.version v4.1.0
       ul

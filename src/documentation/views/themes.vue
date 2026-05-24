@@ -78,6 +78,54 @@ main
       }
     }
 
+  title-link(h2 slug="preventing-theme-flash") Preventing flash of wrong theme (FOUC)
+  p.
+    When using SSR (e.g. Nuxt), the server cannot read #[code localStorage] or OS preference —
+    it always renders with the default #[code light] theme. Without extra setup, users who have
+    selected dark mode will briefly see the light theme on every page load.
+  p There are two complementary tools to eliminate this flash.
+
+  title-link(h3 slug="blocking-init-script") Blocking init script (SSR apps)
+  p.
+    #[code WaveUI.getThemeInitScript(storageKey?)] returns a minified inline script that sets
+    #[code data-theme] on #[code &lt;html&gt;] before the browser makes its first paint, by
+    reading #[code localStorage] and the OS preference. Inject it as a synchronous (no
+    #[code async] / no #[code defer]) #[code &lt;script&gt;] in #[code &lt;head&gt;].
+  p.
+    Wave UI's #[code beforeMount] reads the existing #[code data-theme] attribute and respects
+    it, so no explicit #[code theme] option is needed in #[code app.use(WaveUI, ...)].
+  p Nuxt — #[code nuxt.config.ts]:
+  ssh-pre(language="js" :dark="$store.state.darkMode").
+    import WaveUI from 'wave-ui'
+
+    export default defineNuxtConfig({
+      app: {
+        head: {
+          script: [{ innerHTML: WaveUI.getThemeInitScript() }]
+        }
+      }
+    })
+  p Plain HTML:
+  ssh-pre(language="html" :dark="$store.state.darkMode").
+    &lt;script&gt;&lt;!-- paste the output of WaveUI.getThemeInitScript() here --&gt;&lt;/script&gt;
+  p.
+    Combine it with #[code getSSRStyles()] (no argument) in the plugin, which now emits both
+    themes' color variables scoped to #[code [data-theme="light"]] and
+    #[code [data-theme="dark"]] — so the correct colors are in the initial HTML from the
+    server regardless of which theme the blocking script activates.
+
+  title-link(h3 slug="resolve-initial-theme") Resolving the initial theme (CSR apps)
+  p.
+    For client-side-only Vue apps (no SSR), the flash happens because Wave UI defaults to
+    #[code 'light'] and only corrects it on mount. Pass
+    #[code WaveUI.resolveInitialTheme(storageKey?)] as the #[code theme] option to initialize
+    with the correct value from the very first render:
+  ssh-pre(language="js" :dark="$store.state.darkMode").
+    app.use(WaveUI, {
+      theme: WaveUI.resolveInitialTheme() // Reads localStorage, then falls back to OS preference.
+    })
+  p Both helpers accept an optional #[code storageKey] argument (default: #[code 'waveui-theme']).
+
   title-link(h2 slug="adding-themes-in-your-wave-ui-app") Adding themes in your Wave UI app that never had themes
   p.
     If you never had 2 themes, you most likely have added colors in your CSS that will not look nice

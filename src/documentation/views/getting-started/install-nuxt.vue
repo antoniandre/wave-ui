@@ -16,6 +16,46 @@ div
 
           export default defineNuxtPlugin(nuxtApp => {
             nuxtApp.vueApp.use(WaveUI, { on: '#__nuxt' })
+
+            // Server-side only: inject Wave UI styles into the initial HTML to prevent FOUC.
+            // getSSRStyles() with no argument returns both themes' color variables scoped to
+            // [data-theme="light"] and [data-theme="dark"], so the correct colors are already
+            // present at first paint regardless of the user's stored preference.
+            if (import.meta.server) {
+              const $waveui = nuxtApp.vueApp.config.globalProperties.$waveui
+              const { palette, colors } = $waveui.getSSRStyles()
+              useHead({
+                htmlAttrs: { 'data-theme': 'light' },
+                style: [
+                  { id: 'wave-ui-palette', innerHTML: palette },
+                  { id: 'wave-ui-colors', innerHTML: colors }
+                ]
+              })
+            }
+          })
+
+        title-link.mt8(h3 slug="nuxt4-blocking-script") Optional: persist the theme across page loads
+        p.
+          When users can switch theme, you likely want their choice to survive a page reload.
+          Because the server cannot read #[code localStorage], it always renders with the default
+          light theme — without extra steps a dark-mode user will briefly see a flash of light
+          before the correct theme is applied.
+        p.
+          #[code WaveUI.getThemeInitScript()] returns a small inline script that runs
+          synchronously during HTML parsing — before the browser makes its first paint — and sets
+          #[code data-theme] on #[code &lt;html&gt;] by reading #[code localStorage] and the OS
+          preference. Wave UI's own #[code beforeMount] then reads that attribute, so no explicit
+          #[code theme] option is needed in the plugin.
+        p Add it as a blocking (no #[code async] / no #[code defer]) #[code &lt;script&gt;] via #[code nuxt.config.ts]:
+        ssh-pre(language="js" :dark="$store.state.darkMode").
+          import WaveUI from 'wave-ui'
+
+          export default defineNuxtConfig({
+            app: {
+              head: {
+                script: [{ innerHTML: WaveUI.getThemeInitScript() }]
+              }
+            }
           })
         p.mt4
           | In Nuxt 4 the plugins directory moved to #[code app/plugins/].
@@ -31,6 +71,36 @@ div
 
           export default defineNuxtPlugin(nuxtApp => {
             nuxtApp.vueApp.use(WaveUI, { on: '#__nuxt' })
+
+            // Server-side only: inject Wave UI styles into the initial HTML to prevent FOUC.
+            // getSSRStyles() with no argument returns both themes' color variables scoped to
+            // [data-theme="light"] and [data-theme="dark"], so the correct colors are already
+            // present at first paint regardless of the user's stored preference.
+            if (import.meta.server) {
+              const $waveui = nuxtApp.vueApp.config.globalProperties.$waveui
+              const { palette, colors } = $waveui.getSSRStyles()
+              useHead({
+                htmlAttrs: { 'data-theme': 'light' },
+                style: [
+                  { id: 'wave-ui-palette', innerHTML: palette },
+                  { id: 'wave-ui-colors', innerHTML: colors }
+                ]
+              })
+            }
+          })
+
+        title-link.mt8(h3 slug="nuxt3-blocking-script") Optional: persist the theme across page loads
+        p.
+          Same as Nuxt 4 — add the blocking init script via #[code nuxt.config.js]:
+        ssh-pre(language="js" :dark="$store.state.darkMode").
+          const WaveUI = require('wave-ui')
+
+          module.exports = defineNuxtConfig({
+            app: {
+              head: {
+                script: [{ innerHTML: WaveUI.getThemeInitScript() }]
+              }
+            }
           })
 
     w-accordion-item
