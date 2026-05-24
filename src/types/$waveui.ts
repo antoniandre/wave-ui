@@ -253,8 +253,8 @@ export interface $waveui {
     presets: Record<string, Record<string, string | number | boolean>>,
   },
   colors: Record<WaveColor | string, string>, // Object of pairs of color-name => color hex.
-  preferredTheme: null, // The user OS preferred theme (light or dark).
-  theme: null, // The current theme (light or dark).
+  preferredTheme: 'light' | 'dark' | null, // The user OS preferred theme (light or dark).
+  theme: 'light' | 'dark' | null, // The current theme (light or dark).
   _notificationManager: null,
 
   /**

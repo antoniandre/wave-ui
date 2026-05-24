@@ -9,7 +9,7 @@ const cssVars = {
 let breakpointsDef = { keys: [], values: [] }
 let currentBreakpoint = null
 
-const generatePaletteVariables = colorPalette => {
+export const generatePaletteVariables = colorPalette => {
   let cssVariablesString = ''
 
   colorPalette.forEach(({ label, color, shades = [] }) => {
@@ -26,7 +26,7 @@ const generatePaletteVariables = colorPalette => {
 // :root {[color1-variable], [color2-variable]}
 // .color1--bg {background-color: [color1-variable]}
 // .color1 {color: [color1-variable]}
-const generateColors = (themeColors, generateShadeCssVariables) => {
+export const generateColors = (themeColors, generateShadeCssVariables, scope = ':root') => {
   let styles = ''
   let cssVariablesString = ''
 
@@ -62,7 +62,7 @@ const generateColors = (themeColors, generateShadeCssVariables) => {
     for (const colorName in shades) cssVariablesString += `--w-${colorName}-color: ${shades[colorName]};`
   }
 
-  return `:root{${cssVariablesString}}${styles}`
+  return `${scope}{${cssVariablesString}}${styles}`
 }
 
 // Generate the layout grid. E.g. xs1, xs2, ..., xl12.

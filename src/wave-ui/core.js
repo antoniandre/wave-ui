@@ -2,7 +2,7 @@ import { reactive, inject } from 'vue'
 import { mergeConfig } from './utils/config'
 import { consoleWarn } from './utils/console'
 import { colorPalette, generateColorShades, flattenColors } from './utils/colors'
-import { injectColorsCSSInDOM, injectCSSInDOM } from './utils/dynamic-css'
+import { injectColorsCSSInDOM, injectCSSInDOM, generatePaletteVariables, generateColors } from './utils/dynamic-css'
 import { injectNotifManagerInDOM, NotificationManager } from './utils/notification-manager'
 import { waveRippleDirective } from './utils/wave-ripple-directive'
 import { scheduleFocus, registerVFocus, unregisterVFocus } from './utils/focus'
@@ -88,9 +88,12 @@ export default class WaveUI {
      * @param {string} theme - The theme to switch to.
      */
     switchTheme (theme) {
+      // Only remove the current colors stylesheet when the theme actually changes.
+      // This prevents a blink when switchTheme is called on first mount with the same theme
+      // that was already set during SSR (via getSSRStyles + useHead) or in the constructor.
+      if (this.theme !== theme) document.head.querySelector('#wave-ui-colors')?.remove?.()
       this.theme = theme
       document.documentElement.setAttribute('data-theme', theme)
-      document.head.querySelector('#wave-ui-colors')?.remove?.()
       const themeColors = this.config.colors[this.theme]
       injectColorsCSSInDOM(themeColors, colorPalette, this.config.css.colorShadeCssVariables)
       this.colors = flattenColors(themeColors, colorPalette)
@@ -107,7 +110,90 @@ export default class WaveUI {
         wApp.className = 'w-app' // First reset the classes.
         if (classes.length && classes[0]) wApp.classList.add(...classes)
       }
+    },
+
+    /**
+     * Returns the CSS strings for both Wave UI stylesheets so they can be injected
+     * server-side (e.g. via Nuxt's useHead) to prevent FOUC.
+     * The returned strings map to the `#wave-ui-palette` and `#wave-ui-colors` <style> tags.
+     *
+     * When called without a `theme` argument (recommended), `colors` contains both themes'
+     * custom color variables each scoped to `[data-theme="light"]` / `[data-theme="dark"]`.
+     * Combined with `WaveUI.getThemeInitScript()` injected as a blocking <script> in <head>,
+     * this guarantees the correct colors are present at first paint — no flash of wrong theme.
+     *
+     * When called with an explicit `theme`, returns only that theme's variables on `:root`
+     * (legacy / single-theme use cases).
+     *
+     * @param {string} [theme] - Explicit theme ('light'|'dark'). Omit for dual-scoped output.
+     * @returns {{ theme: string, palette: string, colors: string }}
+     */
+    getSSRStyles (theme) {
+      const palette = generatePaletteVariables(colorPalette)
+      const { colorShadeCssVariables } = this.config.css
+
+      // No theme specified → emit both themes scoped to [data-theme="X"] so a blocking init
+      // script only needs to set the attribute — no color flash is possible.
+      if (!theme) {
+        return {
+          theme: this.theme || this.config?.theme || 'light',
+          palette,
+          colors:
+            generateColors(this.config.colors.light, colorShadeCssVariables, '[data-theme="light"]') +
+            generateColors(this.config.colors.dark, colorShadeCssVariables, '[data-theme="dark"]')
+        }
+      }
+
+      return {
+        theme,
+        palette,
+        colors: generateColors(this.config.colors[theme], colorShadeCssVariables)
+      }
     }
+  }
+
+  /**
+   * Resolves the initial theme from localStorage or OS preference.
+   * Use this as the `theme` install option so Wave UI is initialized with the correct
+   * theme from the very first render — no flash, no manual localStorage reading needed.
+   *
+   *   app.use(WaveUI, { theme: WaveUI.resolveInitialTheme() })
+   *
+   * On the server (SSR) where localStorage/window are unavailable, always returns 'light'
+   * as the safe fallback — pair with `getSSRStyles()` + `getThemeInitScript()` to handle
+   * the server → client handoff without FOUC.
+   *
+   * @param {string} [storageKey='waveui-theme'] - The localStorage key to read.
+   * @returns {'light'|'dark'}
+   */
+  static resolveInitialTheme (storageKey = 'waveui-theme') {
+    if (typeof window === 'undefined') return 'light'
+    try {
+      const stored = localStorage.getItem(storageKey)
+      if (stored === 'light' || stored === 'dark') return stored
+    }
+    catch { }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
+
+  /**
+   * Returns a minified inline script that sets `data-theme` on `<html>` synchronously,
+   * before any CSS is parsed or rendered — eliminating theme FOUC entirely.
+   *
+   * Inject it as a blocking (no async/defer) <script> in <head> before any CSS:
+   *
+   *   Nuxt — nuxt.config.ts:
+   *     app: { head: { script: [{ innerHTML: WaveUI.getThemeInitScript() }] } }
+   *
+   *   Plain HTML:
+   *     <script><%= WaveUI.getThemeInitScript() %></script>
+   *
+   * @param {string} [storageKey='waveui-theme'] - Must match the key used when saving the theme.
+   * @returns {string} Minified inline script string (no <script> tags).
+   */
+  static getThemeInitScript (storageKey = 'waveui-theme') {
+    const key = JSON.stringify(storageKey)
+    return `(function(){try{var t=localStorage.getItem(${key});if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);return}}catch(e){}if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-theme','dark')})()`
   }
 
   static install (app, options = {}) {
@@ -159,7 +245,12 @@ export default class WaveUI {
           }
 
           if (config.theme === 'auto') detectOSDarkMode($waveui) // Also switches the theme.
-          else $waveui.switchTheme(config.theme, true)
+          else {
+            // Respect any data-theme already set on <html> (e.g. by getThemeInitScript) so a
+            // blocking init script is enough — no need to pass `theme` to app.use(WaveUI, ...).
+            const docTheme = document.documentElement.getAttribute('data-theme')
+            $waveui.switchTheme(docTheme === 'light' || docTheme === 'dark' ? docTheme : config.theme)
+          }
 
           injectCSSInDOM($waveui)
           injectNotifManagerInDOM(app)
@@ -203,6 +294,7 @@ export default class WaveUI {
     app.provide('$waveui', $waveui)
 
     if (config.theme !== 'auto') {
+      this.$waveui.theme = config.theme
       this.$waveui.colors = flattenColors(config.colors[config.theme], colorPalette)
     }
   }
