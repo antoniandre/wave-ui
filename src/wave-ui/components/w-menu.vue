@@ -52,7 +52,7 @@ import { focusElement } from '../utils/focus'
 
 export default {
   name: 'w-menu',
-  expose: ['focus'],
+  expose: ['focus', 'computeDetachableCoords'],
   mixins: [DetachableMixin],
   inheritAttrs: false, // The attrs are only bound to the button-partial, not the root.
 
