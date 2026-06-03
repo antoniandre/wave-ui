@@ -31,7 +31,7 @@ component(
       aria-haspopup="listbox"
       :aria-expanded="showMenu ? 'true' : 'false'"
       :aria-owns="selectListId"
-      :aria-activedescendant="`${selectListId}_item-1`"
+      :aria-activedescendant="activeDescendantId"
       :class="inputWrapClasses")
       slot(name="icon-left")
         w-icon.w-select__icon.w-select__icon--inner-left(
@@ -208,7 +208,7 @@ export default {
         class: { 'w-select__selection--placeholder': !this.$slots.selection && !this.selectionString && this.placeholder },
         disabled: this.isDisabled || null,
         readonly: true,
-        ariareadonly: 'true',
+        'aria-readonly': 'true',
         tabindex: this.tabindex ?? null,
         contenteditable: this.isDisabled || this.isReadonly ? 'false' : 'true'
       }
@@ -217,6 +217,15 @@ export default {
       return this.inputValue.map(
         item => item[this.itemValueKey] !== undefined ? item[this.itemLabelKey] : (item[this.itemLabelKey] ?? item)
       ).join(', ')
+    },
+
+    // Points to the focused/selected list item when the menu is open.
+    activeDescendantId () {
+      if (!this.showMenu || !this.selectListId) return undefined
+      const first = this.inputValue[0]
+      if (!first) return `${this.selectListId}_item-1`
+      const idx = this.selectItems.findIndex(item => item.value === first[this.itemValueKey] || item.value === first._value)
+      return `${this.selectListId}_item-${idx >= 0 ? idx + 1 : 1}`
     },
     selectionHtml () {
       if (!this.inputValue.length) return this.placeholder || ''

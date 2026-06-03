@@ -107,6 +107,14 @@ export interface WaveCardProps {
    * @see https://antoniandre.github.io/wave-ui/w-card
    */
   light?: boolean
+
+  /**
+   * Sets an `id` attribute on the card title element.
+   * Used internally by `w-dialog` to wire `aria-labelledby`. Can also be set manually for custom `aria-labelledby` associations.
+   * @property {string} titleId
+   * @see https://antoniandre.github.io/wave-ui/w-card
+   */
+  titleId?: string
 }
 
 // ----------------------------------------------------------------------------

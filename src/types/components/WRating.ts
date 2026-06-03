@@ -29,6 +29,14 @@ export interface WaveRatingProps {
   modelValue?: any
 
   /**
+   * Sets the accessible label for the rating group. Defaults to `"Rating"`.
+   * Override when multiple rating components are on the same page (e.g. `"Overall rating"`, `"Service rating"`).
+   * @property {string} ariaLabel
+   * @see https://antoniandre.github.io/wave-ui/w-rating
+   */
+  ariaLabel?: string
+
+  /**
    * The total count of buttons (usually stars) to display in the rating component.
    * @property {number|string} max - Default: 5
    * @see https://antoniandre.github.io/wave-ui/w-rating

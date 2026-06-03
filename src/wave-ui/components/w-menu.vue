@@ -1,5 +1,5 @@
 <template lang="pug">
-slot(name="activator")
+slot(name="activator" :is-open="detachableVisible")
 slot(v-if="!$slots.activator")
 teleport(v-if="detachableDomReady" :to="teleportTarget" :disabled="!teleportTarget")
   transition(:name="transitionName" appear @after-enter="onDetachableAfterEnter" @after-leave="onAfterLeave")

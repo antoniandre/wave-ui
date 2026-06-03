@@ -29,6 +29,13 @@ export interface WaveSpinnerProps {
   modelValue?: any
 
   /**
+   * Sets the accessible label announced by screen readers when the spinner is visible. Defaults to `"Loading"`.
+   * @property {string} ariaLabel
+   * @see https://antoniandre.github.io/wave-ui/w-spinner
+   */
+  ariaLabel?: string
+
+  /**
    * Sets the color of the spinner.
    * Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the `colors` knowledge base page).
    * Providing a color hex, rgb(a) or hsl(a) will not work.

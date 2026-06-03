@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-breadcrumbs(:class="classes")
+nav.w-breadcrumbs(:class="classes" aria-label="Breadcrumb")
   template(v-for="(item, i) in items")
     //- Separator.
     span.w-breadcrumbs__separator(
@@ -41,7 +41,7 @@
       :item="item"
       :index="i + 1"
       :is-last="i === items.length - 1")
-    span(v-else :key="`${i}f`" v-html="item[itemLabelKey]")
+    span(v-else :key="`${i}f`" aria-current="page" v-html="item[itemLabelKey]")
 </template>
 
 <script>

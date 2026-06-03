@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-alert(v-if="show" :class="classes")
+.w-alert(v-if="show" :role="ariaRole" aria-atomic="true" :class="classes")
   //- Add a wrapper around the content when needed.
   template(v-if="type || icon || dismiss")
     w-icon.w-alert__icon(v-if="type || icon") {{ type ? typeIcon : icon }}
@@ -8,6 +8,7 @@
     w-button.w-alert__dismiss(
       v-if="dismiss"
       @click="$emit('update:modelValue', show = false);$emit('input', false);$emit('close', false)"
+      aria-label="Dismiss"
       icon="wi-cross"
       color="inherit"
       sm
@@ -78,6 +79,11 @@ export default {
         (this.error && 'error') ||
         null
       )
+    },
+
+    // error/warning demand immediate attention; success/info/plain are polite.
+    ariaRole () {
+      return (this.error || this.warning) ? 'alert' : 'status'
     },
 
     presetSize () {

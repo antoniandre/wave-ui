@@ -9,11 +9,11 @@ span.w-tag(
   :tabindex="modelValue !== -1 && 0"
   :style="styles")
   slot
-  i(
+  button(
     v-if="closable && modelValue"
     @click.stop="$emit('update:modelValue', false);$emit('input', false)"
-    role="icon"
-    aria-hidden="true"
+    type="button"
+    aria-label="Remove"
     class="w-icon w-tag__closable wi-cross")
 </template>
 

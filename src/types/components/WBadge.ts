@@ -29,6 +29,14 @@ export interface WaveBadgeProps {
   modelValue?: any
 
   /**
+   * Overrides the default accessible label of the badge. By default the badge value is used as the label.
+   * When `dot` is set the badge is always hidden from assistive technology.
+   * @property {string} ariaLabel
+   * @see https://antoniandre.github.io/wave-ui/w-badge
+   */
+  ariaLabel?: string
+
+  /**
    * Sets the size of the badge (font-size).
    * @property {boolean} xs
    * @see https://antoniandre.github.io/wave-ui/w-badge

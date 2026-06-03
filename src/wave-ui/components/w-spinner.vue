@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-spinner(v-if="modelValue || modelValue === undefined" :class="classes" :style="styles")
+.w-spinner(v-if="modelValue || modelValue === undefined" role="status" :aria-label="ariaLabel || 'Loading'" :class="classes" :style="styles")
   span(v-if="isThreeDots")
 </template>
 
@@ -8,6 +8,7 @@ export default {
   name: 'w-spinner',
   props: {
     modelValue: {},
+    ariaLabel: { type: String }, // Accessible label announced by screen readers (default: 'Loading').
     color: { type: String, default: 'primary' },
     xs: { type: Boolean },
     sm: { type: Boolean },

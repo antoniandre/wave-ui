@@ -18,6 +18,7 @@ component(
     @focus="$emit('focus', $event)"
     @change="onInput($event) /* Edge doesn't emit an `input` event on checkbox/radio/select change */"
     :aria-checked="inputValue || 'false'"
+    :aria-invalid="valid === false ? 'true' : undefined"
     role="radio")
   template(v-if="hasLabel && labelOnLeft")
     label.w-radio__label.w-form-el-shakable.pr2(

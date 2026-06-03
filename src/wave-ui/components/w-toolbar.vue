@@ -1,5 +1,5 @@
 <template lang="pug">
-.w-toolbar(:class="classes" :style="styles")
+.w-toolbar(role="toolbar" :aria-label="ariaLabel || undefined" :class="classes" :style="styles")
   slot
 </template>
 
@@ -8,6 +8,7 @@ export default {
   name: 'w-toolbar',
 
   props: {
+    ariaLabel: { type: String }, // Accessible label for the toolbar (recommended when multiple toolbars are present).
     color: { type: String },
     bgColor: { type: String },
     absolute: { type: Boolean },

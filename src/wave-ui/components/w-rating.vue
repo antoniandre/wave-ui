@@ -7,25 +7,27 @@ component(
   @reset="$emit('update:modelValue', rating = null);$emit('input', null)"
   :class="classes")
   input(:id="inputId" :name="inputName" type="hidden" :value="rating")
-  template(v-for="i in max" :key="i")
-    slot(v-if="$slots.item" name="item" :index="i + 1")
-    button.w-rating__button(
-      :disabled="isDisabled || isReadonly"
-      @mouseenter="hover = i"
-      @mouseleave="hover = 0"
-      @click="onButtonClick(i)"
-      @focus="onFocus"
-      @blur="onBlur"
-      @keydown="onKeydown"
-      :class="buttonClasses(i)"
-      type="button"
-      :tabindex="i === 1 ? 0 : -1")
-      i.w-icon(
-        v-if="i - 1 === ~~rating && rating - ~~rating"
-        role="icon"
-        :class="`${icon} ${color}`"
-        aria-hidden="true"
-        :style="halfStarStyle")
+  div(role="group" :aria-label="ariaLabel || 'Rating'")
+    template(v-for="i in max" :key="i")
+      slot(v-if="$slots.item" name="item" :index="i + 1")
+      button.w-rating__button(
+        :disabled="isDisabled || isReadonly"
+        @mouseenter="hover = i"
+        @mouseleave="hover = 0"
+        @click="onButtonClick(i)"
+        @focus="onFocus"
+        @blur="onBlur"
+        @keydown="onKeydown"
+        :aria-label="`${i} of ${max}`"
+        :aria-pressed="(rating >= i).toString()"
+        :class="buttonClasses(i)"
+        type="button"
+        :tabindex="i === 1 ? 0 : -1")
+        i.w-icon(
+          v-if="i - 1 === ~~rating && rating - ~~rating"
+          :class="`${icon} ${color}`"
+          aria-hidden="true"
+          :style="halfStarStyle")
 </template>
 
 <script>
@@ -44,6 +46,7 @@ export default {
 
   props: {
     modelValue: {},
+    ariaLabel: { type: String }, // Accessible group label (default: 'Rating').
     max: { type: [Number, String], default: 5 },
     color: { type: String, default: 'primary' },
     bgColor: { type: String },

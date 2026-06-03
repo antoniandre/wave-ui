@@ -30,6 +30,14 @@ export interface WaveProgressProps {
   modelValue?: number|string|boolean
 
   /**
+   * Sets the accessible name of the progress bar for assistive technology (e.g. `"Upload progress"`).
+   * Recommended whenever the purpose of the progress bar is not obvious from surrounding context.
+   * @property {string} ariaLabel
+   * @see https://antoniandre.github.io/wave-ui/w-progress
+   */
+  ariaLabel?: string
+
+  /**
    * Shows or hides the label of the progress containing the current progress value.
    * @property {boolean} label
    * @see https://antoniandre.github.io/wave-ui/w-progress

@@ -21,6 +21,14 @@ import type {
 // ----------------------------------------------------------------------------
 export interface WaveIconProps {
   /**
+   * When set, the icon is exposed as `role="img"` with the provided string as its `aria-label` instead of being hidden from assistive technology.
+   * Use this for icons that convey meaning on their own without surrounding visible text.
+   * @property {string} ariaLabel
+   * @see https://antoniandre.github.io/wave-ui/w-icon
+   */
+  ariaLabel?: string
+
+  /**
    * The HTML tag to render the icon into. `<i>` by default.
    * @property {string} tag - Default: 'i'
    * @see https://antoniandre.github.io/wave-ui/w-icon

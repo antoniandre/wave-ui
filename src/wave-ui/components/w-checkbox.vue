@@ -20,6 +20,7 @@ component(
     @change="onInput() /* Edge doesn't emit an `input` event on checkbox/radio/select change */"
     @keypress.enter="onInput"
     :aria-checked="isChecked || 'false'"
+    :aria-invalid="valid === false ? 'true' : undefined"
     role="checkbox")
   template(v-if="hasLabel && labelOnLeft")
     label.w-checkbox__label.w-form-el-shakable.pr2(

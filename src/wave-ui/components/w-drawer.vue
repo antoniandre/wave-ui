@@ -21,6 +21,9 @@
         v-if="showDrawer"
         ref="drawer"
         :is="tag || 'aside'"
+        role="dialog"
+        :aria-modal="!noOverlay ? 'true' : undefined"
+        :aria-label="ariaLabel || undefined"
         :class="drawerClasses"
         :style="styles"
         :tabindex="noOverlay ? 0 : null"
@@ -46,6 +49,9 @@
         v-if="showDrawer"
         ref="drawer"
         :is="tag || 'aside'"
+        role="dialog"
+        :aria-modal="!noOverlay ? 'true' : undefined"
+        :aria-label="ariaLabel || undefined"
         :class="drawerClasses"
         :style="styles"
         :tabindex="noOverlay ? 0 : null"
@@ -85,6 +91,7 @@ export default {
     overlayColor: { type: String },
     overlayOpacity: { type: [Number, String, Boolean] },
     drawerClass: { type: String },
+    ariaLabel: { type: String }, // Accessible label for the drawer dialog (recommended).
     tag: { type: String, default: 'aside' },
     dark: { type: Boolean },
     light: { type: Boolean }

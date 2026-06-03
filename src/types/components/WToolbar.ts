@@ -21,6 +21,14 @@ import type {
 // ----------------------------------------------------------------------------
 export interface WaveToolbarProps {
   /**
+   * Sets the accessible label (`aria-label`) for the toolbar.
+   * Recommended when multiple toolbars are present on the same page so assistive technology can distinguish them.
+   * @property {string} ariaLabel
+   * @see https://antoniandre.github.io/wave-ui/w-toolbar
+   */
+  ariaLabel?: string
+
+  /**
    * Applies a color to the toolbar's text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the `colors` knowledge base page).
    * Providing a color hex, rgb(a) or hsl(a) will not work.
    * @property {string} color

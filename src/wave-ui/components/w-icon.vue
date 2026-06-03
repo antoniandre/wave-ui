@@ -2,8 +2,9 @@
 component.w-icon(
   :is="tag || 'i'"
   :class="classes"
-  role="icon"
-  aria-hidden="true"
+  :role="ariaLabel ? 'img' : undefined"
+  :aria-label="ariaLabel || undefined"
+  :aria-hidden="ariaLabel ? undefined : 'true'"
   :style="readIcon() /* Always reacting to slot change when called from template. */ && styles")
   template(v-if="hasLigature") {{ icon }}
 </template>
@@ -14,6 +15,7 @@ export default {
 
   props: {
     tag: { type: String, default: 'i' },
+    ariaLabel: { type: String }, // When set, exposes the icon as role="img" with this accessible label.
     color: { type: String },
     bgColor: { type: String },
     xs: { type: Boolean },

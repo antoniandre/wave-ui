@@ -46,6 +46,7 @@ component(
         :maxlength="maxlength || null"
         :readonly="isReadonly || null"
         :aria-readonly="isReadonly ? 'true' : 'false'"
+        :aria-invalid="valid === false ? 'true' : undefined"
         :disabled="isDisabled || null"
         :required="required || null"
         :tabindex="tabindex || null"

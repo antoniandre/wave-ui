@@ -1,5 +1,13 @@
 <template lang="pug">
-.w-progress(:class="classes" :style="styles")
+.w-progress(
+  role="progressbar"
+  :aria-valuenow="progressValue > -1 ? progressValue : undefined"
+  :aria-valuemin="progressValue > -1 ? 0 : undefined"
+  :aria-valuemax="progressValue > -1 ? 100 : undefined"
+  :aria-valuetext="progressValue === -1 ? 'Loading' : undefined"
+  :aria-label="ariaLabel || undefined"
+  :class="classes"
+  :style="styles")
   //- Linear progress.
   .w-progress__progress(
     v-if="!circle"
@@ -43,6 +51,7 @@ export default {
 
   props: {
     modelValue: { type: [Number, String, Boolean], default: -1 },
+    ariaLabel: { type: String }, // Accessible name for the progress bar (e.g. 'Upload progress').
     label: { type: Boolean },
     roundCap: { type: Boolean },
     color: { type: String, default: 'primary' },

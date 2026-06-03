@@ -1,11 +1,13 @@
 <template lang="pug">
-slot(name="activator")
+slot(name="activator" :tooltip-id="tooltipInstanceId")
 slot(v-if="!$slots.activator")
 teleport(v-if="detachableDomReady" :to="teleportTarget" :disabled="!teleportTarget")
   transition(:name="transitionName" appear @after-enter="onDetachableAfterEnter" @after-leave="onAfterLeave")
     .w-tooltip(
       v-if="detachableVisible"
       ref="detachable"
+      :id="tooltipInstanceId"
+      role="tooltip"
       :key="tooltipInstanceId"
       :class="classes"
       :style="styles")

@@ -6,10 +6,11 @@
       v-if="modelValue"
       :class="classes"
       :style="styles"
-      aria-atomic="true"
-      aria-label="Badge"
-      aria-live="polite"
-      role="status")
+      :aria-hidden="dot ? 'true' : undefined"
+      :aria-atomic="dot ? undefined : 'true'"
+      :aria-label="dot ? undefined : (ariaLabel || (modelValue === true ? 'Badge' : String(modelValue)))"
+      :aria-live="dot ? undefined : 'polite'"
+      :role="dot ? undefined : 'status'")
       slot(v-if="!dot" name="badge") {{ modelValue === true ? '' : (modelValue || '') }}
 </template>
 
@@ -19,6 +20,7 @@ export default {
 
   props: {
     modelValue: { default: true },
+    ariaLabel: { type: String }, // Override the default aria-label (defaults to the badge value).
     xs: { type: Boolean },
     sm: { type: Boolean },
     md: { type: Boolean },

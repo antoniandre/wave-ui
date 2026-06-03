@@ -168,6 +168,14 @@ export interface WaveDrawerProps {
   drawerClass?: string
 
   /**
+   * Sets the accessible label (`aria-label`) for the drawer dialog.
+   * Recommended so assistive technology can identify the purpose of the drawer.
+   * @property {string} ariaLabel
+   * @see https://antoniandre.github.io/wave-ui/w-drawer
+   */
+  ariaLabel?: string
+
+  /**
    * TODO: Add Description
    * @property {string} tag - Default: 'aside'
    * @see https://antoniandre.github.io/wave-ui/w-drawer
