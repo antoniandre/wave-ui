@@ -255,6 +255,27 @@ export interface WaveTableProps {
   light?: boolean
 
   /**
+   * A CSS class (string, array, or object) to apply to the inner `<table>` element.
+   * @property {string | Array<any> | Record<string, any>} tableClass
+   * @see https://antoniandre.github.io/wave-ui/w-table
+   */
+  tableClass?: string | Array<any> | Record<string, any>
+
+  /**
+   * A CSS class (string, array, or object) to apply to every `<th>` header cell.
+   * @property {string | Array<any> | Record<string, any>} headerClass
+   * @see https://antoniandre.github.io/wave-ui/w-table
+   */
+  headerClass?: string | Array<any> | Record<string, any>
+
+  /**
+   * A CSS class (string, array, or object) to apply to every `<tr>` item row.
+   * @property {string | Array<any> | Record<string, any>} itemClass
+   * @see https://antoniandre.github.io/wave-ui/w-table
+   */
+  itemClass?: string | Array<any> | Record<string, any>
+
+  /**
    * TODO: Add Description
    * @property {any} itemsPerPageOptions
    * @see https://antoniandre.github.io/wave-ui/w-table

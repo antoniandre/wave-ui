@@ -4,7 +4,8 @@
     table.w-table__table(
       @mousedown="onMouseDown"
       @mouseover="onMouseOver"
-      @mouseout="onMouseOut")
+      @mouseout="onMouseOut"
+      :class="tableClass")
       colgroup(ref="colgroup")
         col.w-table__col(
           v-for="(header, i) in headers"
@@ -75,7 +76,7 @@
               v-else
               @click="doSelectRow(item, i)"
               @pointerdown="onRowPointerDown"
-              :class="{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined, [item.class]: item.class }")
+              :class="[{ 'w-table__row--selected': selectedRowsByUid[item._uid] !== undefined, 'w-table__row--expanded': expandedRowsByUid[item._uid] !== undefined, [item.class]: item.class }, itemClass]")
               template(v-for="(header, j) in headers")
                 td.w-table__cell(
                   v-if="$slots[`item-cell.${header.key}`] || $slots[`item-cell.${j + 1}`] || $slots['item-cell']"
@@ -278,8 +279,10 @@ export default {
         return true
       }
     },
-    dark: { type: Boolean },
-    light: { type: Boolean }
+    tableClass: { type: [String, Array, Object] },
+    headerClass: { type: [String, Array, Object] },
+    // Provide a global CSS class for the table rows, you can also use the item.class prop to add dynamic class per row.
+    itemClass: { type: [String, Array, Object] }
   },
 
   emits: [
@@ -369,9 +372,7 @@ export default {
         'w-table--resizing': this.colResizing.dragging,
         'w-table--fixed-header': this.fixedHeaders,
         'w-table--fixed-footer': this.fixedFooter,
-        'w-table--sticky-column': this.hasStickyColumn,
-        'w-table--dark': this.dark,
-        'w-table--light': this.light
+        'w-table--sticky-column': this.hasStickyColumn
       }
     },
 
@@ -406,13 +407,16 @@ export default {
 
   methods: {
     headerClasses (header) {
-      return {
-        'w-ripple': this.rippleActive && header.sortable !== false,
-        'w-table__header--sortable': header.sortable !== false, // Can also be falsy with `0`.
-        'w-table__header--sticky': header.sticky,
-        'w-table__header--resizable': !!this.resizableColumns,
-        [`text-${header.align || 'left'}`]: true
-      }
+      return [
+        {
+          'w-ripple': this.rippleActive && header.sortable !== false,
+          'w-table__header--sortable': header.sortable !== false, // Can also be falsy with `0`.
+          'w-table__header--sticky': header.sticky,
+          'w-table__header--resizable': !!this.resizableColumns,
+          [`text-${header.align || 'left'}`]: true
+        },
+        this.headerClass // Natively supports string, object and array.
+      ]
     },
 
     cellClasses (header) {
