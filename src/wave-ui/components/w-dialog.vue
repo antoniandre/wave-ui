@@ -20,6 +20,10 @@ w-overlay.w-dialog(
       :title-class="titleClass"
       :content-class="contentClass"
       :title="title || undefined"
+      :title-id="(title || $slots.title) ? titleId : undefined"
+      role="dialog"
+      aria-modal="true"
+      :aria-labelledby="(title || $slots.title) ? titleId : undefined"
       :style="contentStyles")
       template(#title v-if="$slots.title")
         slot(name="title")
@@ -67,6 +71,7 @@ export default {
 
   data () {
     return {
+      titleId: `w-dialog-title-${Math.random().toString(36).slice(2, 9)}`,
       showWrapper: this.modelValue,
       showContent: this.modelValue
     }

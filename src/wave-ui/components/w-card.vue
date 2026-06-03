@@ -2,11 +2,13 @@
 .w-card(:class="classes")
   .w-card__title(
     v-if="$slots.title"
+    :id="titleId || undefined"
     :class="{ 'w-card__title--has-toolbar': $slots.title && titleHasToolbar, ...titleClasses }")
     slot(name="title")
   .w-card__title(
     v-else-if="title"
     v-html="title"
+    :id="titleId || undefined"
     :class="{ 'w-card__title--has-toolbar': $slots.title && titleHasToolbar, ...titleClasses }")
   w-image.w-card__image(v-if="image" :src="image" v-bind="imgProps")
     slot(name="image-content")
@@ -35,6 +37,7 @@ export default {
     imageProps: { type: Object },
     titleClass: { type: [String, Object, Array] },
     contentClass: { type: [String, Object, Array] },
+    titleId: { type: String },
     dark: { type: Boolean },
     light: { type: Boolean }
   },
