@@ -25,6 +25,14 @@ main
         unselectableBranches: { type: Boolean },
 
     li.patch
+      strong.version v4.2.3
+      ul
+        li
+          strong w-table
+          ul
+            li Added #[code table-class], #[code header-class], and #[code item-class] props to apply custom CSS classes to the inner #[code &lt;table&gt;], each #[code &lt;th&gt;] header cell, and each #[code &lt;tr&gt;] item row respectively. #[code item-class] also accepts a function called with #[code (item, index)] for per-row dynamic styling. #[span.tag.new]
+
+    li.patch
       strong.version v4.2.2
       ul
         li
