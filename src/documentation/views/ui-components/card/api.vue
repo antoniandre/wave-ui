@@ -23,7 +23,8 @@ const propsDescs = {
   titleClass: 'Provide custom CSS classes for the card\'s title.',
   contentClass: 'Provide custom CSS classes for the card\'s content.',
   image: 'Provide a main image for the card.',
-  imageProps: 'When using <code>image</code>, this attribute accepts an object of props to pass down to the <strong class="code">w-image</strong> component if you need to specify particular options.'
+  imageProps: 'When using <code>image</code>, this attribute accepts an object of props to pass down to the <strong class="code">w-image</strong> component if you need to specify particular options.',
+  titleId: 'Sets an <code>id</code> attribute on the card title element. Used internally by <strong class="code">w-dialog</strong> to wire <code>aria-labelledby</code>. Can also be set manually for custom <code>aria-labelledby</code> associations.'
 }
 
 const slots = {

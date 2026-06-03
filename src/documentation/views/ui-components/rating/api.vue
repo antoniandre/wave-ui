@@ -19,6 +19,7 @@ import WRating from '@/wave-ui/components/w-rating.vue'
 const propsDescs = {
   id: 'Sets the native HTML <code>id</code> on the hidden input that carries the rating value. If omitted, Wave UI generates a stable id.',
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>Dictates the current rating value. When the user rates, the <code>v-model</code> value will be updated.',
+  ariaLabel: 'Sets the accessible label for the rating group. Defaults to <code>"Rating"</code>. Override when multiple rating components are on the same page (e.g. <code>"Overall rating"</code>, <code>"Service rating"</code>).',
   max: 'The total count of buttons (usually stars) to display in the rating component.',
   icon: 'Sets the icon (star by default) of each button of the rating component.<br>Accepts a string: e.g. <code>mdi mdi-home</code>.',
   color: 'Sets the color of the rating active icons (when hovering or when showing the current rating).<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',

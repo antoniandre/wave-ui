@@ -15,6 +15,7 @@ import WBadge from '@/wave-ui/components/w-badge.vue'
 
 const propsDescs = {
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>This prop controls the visibility of the badge. Any truthy value will show the badge whereas any falsy value will hide it.',
+  ariaLabel: 'Overrides the default accessible label of the badge. By default the badge value is used as the label. When <code>dot</code> is set the badge is always hidden from assistive technology.',
   xs: 'Sets the size (font-size) of the badge to extra small.',
   sm: 'Sets the size (font-size) of the badge to small.',
   md: 'Sets the size (font-size) of the badge to medium.',

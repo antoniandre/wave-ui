@@ -25,6 +25,29 @@ main
         unselectableBranches: { type: Boolean },
 
     li.patch
+      strong.version v4.2.2
+      ul
+        li
+          strong Accessibility (ARIA)
+          ul
+            li #[code w-alert]: adds #[code role="alert"] (error/warning) or #[code role="status"] (info/success/plain) with #[code aria-atomic="true"]; dismiss button gets #[code aria-label="Dismiss"]. #[span.tag.new]
+            li #[code w-notification]: live-region semantics inherited from the inner #[code w-alert]. #[span.tag.new]
+            li #[code w-spinner]: adds #[code role="status"] and an #[code aria-label] prop (default #[code "Loading"]) for the accessible name. #[span.tag.new]
+            li #[code w-progress]: adds #[code role="progressbar"] with #[code aria-valuenow] / #[code aria-valuemin] / #[code aria-valuemax]; indeterminate state sets #[code aria-valuetext="Loading"]; new #[code aria-label] prop. #[span.tag.new]
+            li #[code w-breadcrumbs]: root element changed to #[code &lt;nav aria-label="Breadcrumb"&gt;]; current-page item gets #[code aria-current="page"]. #[span.tag.new]
+            li #[code w-tooltip]: tooltip panel gets #[code role="tooltip"] and a stable #[code id]; the #[code tooltipId] is exposed as a scoped slot prop on #[code #activator] so consumers can wire #[code aria-describedby]. #[span.tag.new]
+            li #[code w-drawer]: adds #[code role="dialog"], #[code aria-modal="true"] (when overlay is present), and a new #[code aria-label] prop. #[span.tag.new]
+            li #[code w-dialog]: adds #[code role="dialog"], #[code aria-modal="true"], and #[code aria-labelledby] pointing to the title element (via a new #[code title-id] prop on #[code w-card]). #[span.tag.new]
+            li #[code w-icon]: removes invalid #[code role="icon"]; new #[code aria-label] prop switches to #[code role="img"] with #[code aria-label] for meaningful icons. #[span.tag.new]
+            li #[code w-rating]: star group wrapped in #[code role="group"] with a new #[code aria-label] prop; each button gets a descriptive #[code aria-label] (#[code "N of max"]) and #[code aria-pressed]. #[span.tag.new]
+            li #[code w-toolbar]: adds #[code role="toolbar"] and a new #[code aria-label] prop. #[span.tag.new]
+            li #[code w-menu]: #[code #activator] slot now receives #[code isOpen] as a scoped prop for binding #[code aria-expanded] on the trigger. #[span.tag.new]
+            li #[code w-select]: fixes #[code ariareadonly] attribute typo → #[code aria-readonly]; #[code aria-activedescendant] now points to the selected item dynamically instead of always #[code item-1]. #[span.tag.fix]
+            li #[code w-input] / #[code w-textarea] / #[code w-checkbox] / #[code w-radio]: native controls now set #[code aria-invalid="true"] when validation fails. #[span.tag.new]
+            li #[code w-badge]: #[code aria-label] now reflects the actual badge value; dot badges are marked #[code aria-hidden="true"]. #[span.tag.new]
+            li #[code w-tag]: close icon replaced with a proper #[code &lt;button aria-label="Remove"&gt;] for keyboard accessibility. #[span.tag.new]
+
+    li.patch
       strong.version v4.2.0
       ul
         li

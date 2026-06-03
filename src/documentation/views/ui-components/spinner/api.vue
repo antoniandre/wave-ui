@@ -15,6 +15,7 @@ import WSpinner from '@/wave-ui/components/w-spinner.vue'
 
 const propsDescs = {
   modelValue: '<strong class="error"><code>value</code> in Vue 2.</strong><br>The <code>value</code> or <code>v-model</code> controls the visibility of the spinner. Any truthy value will show the spinner whereas any falsy value will hide it. If no value/v-model or <code>undefined</code> is provided, the spinner will be visible.',
+  ariaLabel: 'Sets the accessible label announced by screen readers when the spinner is visible. Defaults to <code>"Loading"</code>.',
   color: 'Sets the color of the spinner.<br>Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   xs: 'Sets the size of the spinner to extra small.',
   sm: 'Sets the size of the spinner to small.',

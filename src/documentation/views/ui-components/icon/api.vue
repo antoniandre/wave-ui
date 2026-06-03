@@ -14,6 +14,7 @@ div
 import WIcon from '@/wave-ui/components/w-icon.vue'
 
 const propsDescs = {
+  ariaLabel: 'When set, the icon is no longer hidden from assistive technology. It is exposed as <code>role="img"</code> with the provided string as its <code>aria-label</code>. Use this for icons that convey meaning on their own without surrounding visible text.',
   tag: 'The HTML tag to render the icon into. <code>&lt;i&gt;</code> by default.',
   color: 'Applies a color to the icon\'s text. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
   bgColor: 'Applies a color to the icon\'s background. Accepts all the color names of the color palette, status colors, or custom colors (learn more about the colors in the <a href="colors">colors</a> knowledge base page).<br>Providing a color hex, rgb(a) or hsl(a) will not work.',
