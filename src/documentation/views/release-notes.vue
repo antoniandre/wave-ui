@@ -25,7 +25,7 @@ main
         unselectableBranches: { type: Boolean },
 
     li.patch
-      strong.version v4.2.3
+      strong.version v4.2.4
       ul
         li
           strong w-dialog
