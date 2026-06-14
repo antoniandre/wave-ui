@@ -154,6 +154,11 @@ export default {
 
     @include themeable;
 
+    .w-dialog__content {
+      max-height: calc(100dvh - 2rem);
+      overflow: auto;
+    }
+
     .w-dialog--fullscreen > & {
       flex: 1 1 auto;
       height: 100%;
