@@ -25,6 +25,14 @@ main
         unselectableBranches: { type: Boolean },
 
     li.patch
+      strong.version v4.2.5
+      ul
+        li
+          strong v-focus directive
+          ul
+            li Simplify the v-focus directive implementation by removing the custom directive and using the native #[code focus()] method on the component instance. Fixes v-focus directive not triggering focus in PROD.
+
+    li.patch
       strong.version v4.2.4
       ul
         li
