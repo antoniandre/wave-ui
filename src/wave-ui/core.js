@@ -5,7 +5,7 @@ import { colorPalette, generateColorShades, flattenColors } from './utils/colors
 import { injectColorsCSSInDOM, injectCSSInDOM, generatePaletteVariables, generateColors } from './utils/dynamic-css'
 import { injectNotifManagerInDOM, NotificationManager } from './utils/notification-manager'
 import { waveRippleDirective } from './utils/wave-ripple-directive'
-import { scheduleFocus, registerVFocus, unregisterVFocus } from './utils/focus'
+import { focusDirective } from './utils/focus'
 import './scss/index.scss'
 
 let mounted = false
@@ -198,12 +198,7 @@ export default class WaveUI {
 
   static install (app, options = {}) {
     // Register directives.
-    app.directive('focus', {
-      mounted: (el) => {
-        if (!registerVFocus(el)) scheduleFocus(el)
-      },
-      unmounted: (el) => unregisterVFocus(el)
-    })
+    app.directive('focus', focusDirective)
     app.directive('scroll', {
       mounted: (el, binding) => {
         const f = evt => {

@@ -12,13 +12,14 @@ button-partial(v-else ref="button" v-bind="buttonProps")
 
 <script>
 import ButtonPartial from './button.vue'
+import FocusableMixin from '../../mixins/focusable'
 import { focusElement } from '../../utils/focus'
 
 export default {
   name: 'w-button',
-  focusable: true,
   expose: ['focus'],
   inheritAttrs: false, // The attrs are only bound to the button-partial, not the root.
+  mixins: [FocusableMixin],
 
   props: {
     color: { type: String },

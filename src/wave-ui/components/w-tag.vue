@@ -19,13 +19,13 @@ span.w-tag(
 
 <script>
 import RippleMixin from '../mixins/ripple'
-import { focusElement } from '../utils/focus'
+import { focusElement, vFocusLifecycleMixin } from '../utils/focus'
 
 export default {
   name: 'w-tag',
   focusable: true,
   expose: ['focus'],
-  mixins: [RippleMixin],
+  mixins: [RippleMixin, vFocusLifecycleMixin],
 
   props: {
     modelValue: { type: [Boolean, Number], default: -1 },

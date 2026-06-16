@@ -68,14 +68,14 @@ import { consoleWarn } from '../utils/console'
  * - option to add a left border.
  **/
 
-import { focusElement } from '../utils/focus'
+import { focusElement, vFocusLifecycleMixin } from '../utils/focus'
 
 export default {
   name: 'w-tree',
   focusable: true,
   expose: ['focus'],
 
-  mixins: [RippleMixin],
+  mixins: [RippleMixin, vFocusLifecycleMixin],
 
   props: {
     modelValue: { type: [Object, Array] },

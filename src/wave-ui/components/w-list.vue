@@ -45,13 +45,13 @@ ul.w-list(:class="classes")
 <script>
 import { useId } from 'vue'
 import RippleMixin from '../mixins/ripple'
-import { focusElement } from '../utils/focus'
+import { focusElement, vFocusLifecycleMixin } from '../utils/focus'
 
 export default {
   name: 'w-list',
   focusable: true,
   expose: ['focus'],
-  mixins: [RippleMixin],
+  mixins: [RippleMixin, vFocusLifecycleMixin],
 
   setup () {
     return { waveUiUseId: useId() }

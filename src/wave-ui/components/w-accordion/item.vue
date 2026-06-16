@@ -90,13 +90,13 @@ import { useId } from 'vue'
 import RippleMixin from '../../mixins/ripple'
 import { isRippleEnabled } from '../../utils/ripple'
 import AccordionContent from './accordion-content.vue'
-import { focusElement } from '../../utils/focus'
+import { focusElement, vFocusLifecycleMixin } from '../../utils/focus'
 
 export default {
   name: 'w-accordion-item',
   focusable: true,
   expose: ['focus'],
-  mixins: [RippleMixin],
+  mixins: [RippleMixin, vFocusLifecycleMixin],
 
   setup () {
     return { accordionItemUid: useId() }

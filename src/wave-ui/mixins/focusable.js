@@ -1,6 +1,7 @@
-import { guardFocusable, focusElement } from '../utils/focus'
+import { guardFocusable, focusElement, vFocusLifecycleMixin } from '../utils/focus'
 
 export default {
+  mixins: [vFocusLifecycleMixin],
   focusable: true,
 
   methods: {

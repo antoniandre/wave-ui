@@ -32,13 +32,13 @@ component(
 
 <script>
 import FormElementMixin, { useWaveUiFormIds } from '../mixins/form-elements'
-import { guardFocusable, focusElement } from '../utils/focus'
+import { guardFocusable, focusElement, vFocusLifecycleMixin } from '../utils/focus'
 
 export default {
   name: 'w-rating',
   focusable: true,
   expose: ['focus'],
-  mixins: [FormElementMixin],
+  mixins: [FormElementMixin, vFocusLifecycleMixin],
 
   setup () {
     return useWaveUiFormIds()

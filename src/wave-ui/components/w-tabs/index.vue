@@ -76,13 +76,13 @@ import { useId } from 'vue'
 import { objectifyClasses } from '../../utils/index'
 import RippleMixin from '../../mixins/ripple'
 import TabContent from './tab-content.vue'
-import { focusElement } from '../../utils/focus'
+import { focusElement, vFocusLifecycleMixin } from '../../utils/focus'
 
 export default {
   name: 'w-tabs',
   focusable: true,
   expose: ['focus'],
-  mixins: [RippleMixin],
+  mixins: [RippleMixin, vFocusLifecycleMixin],
 
   setup () {
     return { tabsStableId: useId() }

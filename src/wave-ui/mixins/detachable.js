@@ -9,7 +9,6 @@
  */
 
 import { consoleWarn } from '../utils/console'
-import { callFocus } from '../utils/focus'
 
 // Minimum space (px) from the viewport edge when flipping / nudging.
 const VIEWPORT_MARGIN = 4
@@ -204,7 +203,7 @@ export default {
       const targets = this._autofocusTargets || []
       this._autofocusTargets = []
       if (!targets.length) return
-      this.$nextTick(() => targets.forEach(({ el }) => callFocus(el)))
+      this.$nextTick(() => targets.forEach(({ focus }) => focus()))
     },
 
     unbindActivatorDocEvents () {

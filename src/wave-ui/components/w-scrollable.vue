@@ -42,8 +42,11 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount, nextTick, watch, useId, useAttrs } from 'vue'
 import { objectifyClasses } from '../utils/index'
+import { useVFocus } from '../utils/focus'
 
 defineOptions({ name: 'WScrollable', focusable: true })
+
+useVFocus()
 
 const props = defineProps({
   color: { type: String, default: 'primary' },
