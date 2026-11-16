@@ -11,6 +11,7 @@ export const UIComponents = [
   { id: 'autocomplete', label: 'Autocomplete', formElement: true },
   { id: 'breadcrumbs', label: 'Breadcrumbs' },
   { id: 'button', label: 'Button' },
+  { id: 'buttons', label: 'Buttons' },
   { id: 'badge', label: 'Badge' },
   { id: 'card', label: 'Card' },
   { id: 'checkbox', label: 'Checkbox', formElement: true },

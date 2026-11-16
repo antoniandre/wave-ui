@@ -67,7 +67,8 @@ export default {
     sm: { type: Boolean },
     md: { type: Boolean },
     lg: { type: Boolean },
-    xl: { type: Boolean }
+    xl: { type: Boolean },
+    active: { type: Boolean } // Marks the button as selected (e.g. inside w-buttons).
   },
 
   emits: [],
@@ -141,6 +142,7 @@ export default {
         'w-button--loading': this.loading,
         'w-button--icon': this.icon,
         [`size--${this.size}`]: true,
+        'w-button--active': this.active,
         'w-button--absolute': this.absolute,
         'w-button--fixed': this.fixed,
         [`w-button--${this.position.join(' w-button--')}`]: this.absolute || this.fixed
@@ -305,6 +307,12 @@ $spinner-size: 40;
     @include default-transition(var(--w-transition-duration-fast));
   }
   &--dark:active:before, &.primary--bg:active:before {opacity: 0.35;}
+
+  // Selected/active state (e.g. inside w-buttons group).
+  &--active:before {opacity: 0.25;}
+  &--dark.w-button--active:before, &.primary--bg.w-button--active:before,
+  &.success--bg.w-button--active:before, &.error--bg.w-button--active:before,
+  &.warning--bg.w-button--active:before, &.info--bg.w-button--active:before {opacity: 0.35;}
 
   // Disable visual feedback on loading and disabled buttons.
   &--loading:hover:before,

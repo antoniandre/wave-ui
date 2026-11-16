@@ -73,14 +73,14 @@ component(
         @item-click="$emit('item-click', $event)"
         @item-select="onListItemSelect"
         @keydown="onWListKeydown"
-        @keydown:enter="noUnselect && !multiple && closeMenu()"
+        @keydown:enter="(mandatory || noUnselect) && !multiple && closeMenu()"
         @keydown:escape="showMenu && (showMenu = false) /* Will call closeMenu() from w-menu(@close). */"
         :items="selectItems"
         :multiple="multiple"
         arrows-navigation
         return-object
         :add-ids="selectListId"
-        :no-unselect="noUnselect"
+        :mandatory="mandatory || noUnselect"
         :selection-color="selectionColor"
         :item-color-key="itemColorKey"
         role="listbox"
@@ -157,8 +157,8 @@ export default {
     lg: { type: Boolean },
     xl: { type: Boolean },
     returnObject: { type: Boolean },
-    // By default you can unselect a list item by re-selecting it.
-    // Allow preventing that on single selection lists only.
+    mandatory: { type: Boolean }, // Keep at least one item selected at all times.
+    // @deprecated Use `mandatory` instead.
     noUnselect: { type: Boolean },
     menuProps: { type: Object }, // Allow passing down an object of props to the w-menu component.
     dark: { type: Boolean },

@@ -58,7 +58,8 @@ export default {
     md: { type: Boolean },
     lg: { type: Boolean },
     xl: { type: Boolean },
-    noRipple: { type: Boolean, default: undefined }
+    noRipple: { type: Boolean, default: undefined },
+    active: { type: Boolean } // Marks the button as selected (e.g. inside w-buttons).
   },
 
   components: { ButtonPartial },

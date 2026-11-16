@@ -173,7 +173,14 @@ export interface WaveListProps {
   returnObject?: boolean
 
   /**
-   * Once at least one item is selected, prevents the list to have no selection. Clicking an item when only this one is selected will not unselect it.
+   * Once at least one item is selected, prevents the list from having no selection.
+   * @property {boolean} mandatory
+   * @see https://antoniandre.github.io/wave-ui/w-list
+   */
+  mandatory?: boolean
+
+  /**
+   * @deprecated Use `mandatory` instead.
    * @property {boolean} noUnselect
    * @see https://antoniandre.github.io/wave-ui/w-list
    */

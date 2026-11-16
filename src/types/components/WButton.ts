@@ -253,6 +253,14 @@ export interface WaveButtonProps {
    * @see https://antoniandre.github.io/wave-ui/w-button
    */
   noRipple?: boolean
+
+  /**
+   * Marks the button as selected/active (e.g. when used inside a `w-buttons` group).
+   * Adds the `w-button--active` class and applies a persistent overlay.
+   * @property {boolean} active
+   * @see https://antoniandre.github.io/wave-ui/w-button
+   */
+  active?: boolean
 }
 
 // ----------------------------------------------------------------------------

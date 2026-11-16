@@ -24,6 +24,23 @@ main
         multiple: { type: Boolean }, multiple selection
         unselectableBranches: { type: Boolean },
 
+    li.minor
+      strong.version v4.3.0
+      ul
+        li
+          strong w-buttons #[span.tag.new]
+          ul
+            li New component: a button group that wraps #[code w-button] with active-state toggling, #[code v-model], multiple selection, mandatory mode, gap/stuck layouts, #[code active-color] &amp; #[code active-bg-color], per-item configuration via the #[code items] prop, and direct slot usage.
+        li
+          strong w-button
+          ul
+            li Added #[code active] prop: marks the button as selected (adds #[code w-button--active] class with a persistent overlay). #[span.tag.new]
+        li
+          strong w-select / w-list
+          ul
+            li Added #[code mandatory] prop — replaces #[code no-unselect]. Forces at least one item to remain selected at all times. #[span.tag.new]
+            li Deprecated #[code no-unselect] prop — use #[code mandatory] instead. #[code no-unselect] still works as an alias. #[span.tag.deprecated]
+
     li.patch
       strong.version v4.2.5
       ul

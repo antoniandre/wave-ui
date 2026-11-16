@@ -232,7 +232,14 @@ export interface WaveSelectProps {
   returnObject?: boolean
 
   /**
-   * TODO: Add Description
+   * When set to true, forces the select list to always have at least one selected item.
+   * @property {boolean} mandatory
+   * @see https://antoniandre.github.io/wave-ui/w-select
+   */
+  mandatory?: boolean
+
+  /**
+   * @deprecated Use `mandatory` instead.
    * @property {boolean} noUnselect
    * @see https://antoniandre.github.io/wave-ui/w-select
    */

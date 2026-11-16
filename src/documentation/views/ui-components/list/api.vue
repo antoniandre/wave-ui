@@ -37,7 +37,8 @@ const propsDescs = {
   depth: false, // Hide this prop.
   returnObject: 'The current list selection is returned via the <code>value</code> prop or <code>v-model</code> as an array of full objects or a single full object (returning the original as given) when <code>multiple</code> is set to false.',
   arrowsNavigation: 'Allows the navigation through the list items with the keyboard arrows up and down, when set to true and when the items are selectable (the <strong class="code">w-list</strong> has a <code>value</code> or <code>v-model</code>, or is a <code>nav</code> or <code>checklist</code>).',
-  noUnselect: 'Once at least one item is selected, prevents the list to have no selection. Clicking an item when only this one is selected will not unselect it.',
+  mandatory: 'Once at least one item is selected, prevents the list from having no selection. Clicking the only selected item will not unselect it.',
+  noUnselect: { description: 'Deprecated — use <code>mandatory</code> instead.', deprecated: true },
   noRipple: 'When <code>true</code>, disables the pointer ripple on interactive rows for this list. By default, ripple follows <code>$waveui.config.ripple</code>.'
 }
 
