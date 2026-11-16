@@ -25,7 +25,7 @@ div
   p.
     Use #[code active-bg-color] and #[code active-color] to customise the active button appearance.
     #[code color] sets the text color of inactive buttons.
-  example
+  example(content-class="w-flex column gap4" app-classes-string="w-flex gap4")
     w-buttons.mr6(v-model="ex2a" :items="items1" active-bg-color="success")
     w-buttons.mr6(v-model="ex2b" :items="items1" active-bg-color="error" color="error")
     w-buttons(v-model="ex2c" :items="items1" active-bg-color="info" outline)
@@ -77,10 +77,10 @@ div
     p.mt3 Active: #[strong {{ ex4 }}]
     template(#pug).
       w-buttons(v-model="active" :items="items" multiple)
-      p Active: {{ active }}
+      p Active: {{ '\{\{ active \}\}' }}
     template(#html).
       &lt;w-buttons v-model="active" :items="items" multiple&gt;&lt;/w-buttons&gt;
-      &lt;p&gt;Active: {{ active }}&lt;/p&gt;
+      &lt;p&gt;Active: {{ '\{\{ active \}\}' }}&lt;/p&gt;
     template(#js).
       data: () => ({
         active: [0, 2],
@@ -121,10 +121,10 @@ div
     p.mt3 Active id: #[strong {{ ex6 }}]
     template(#pug).
       w-buttons(v-model="activeId" :items="items")
-      p Active id: {{ activeId }}
+      p Active id: {{ '\{\{ activeId \}\}' }}
     template(#html).
       &lt;w-buttons v-model="activeId" :items="items"&gt;&lt;/w-buttons&gt;
-      &lt;p&gt;Active id: {{ activeId }}&lt;/p&gt;
+      &lt;p&gt;Active id: {{ '\{\{ activeId \}\}' }}&lt;/p&gt;
     template(#js).
       data: () => ({
         activeId: 'w',
@@ -139,7 +139,7 @@ div
   p.
     Set the #[code gap] prop to separate the buttons. The value is multiplied by the base increment
     (like in #[code w-flex]). Each button is fully independent — with its own border, radius, and shadow.
-  example
+  example(content-class="w-flex column gap4" app-classes-string="w-flex gap4")
     w-buttons.mr6(v-model="ex7a" :items="items1" :gap="2")
     w-buttons(v-model="ex7b" :items="items1" :gap="2" round)
     template(#pug).
@@ -164,7 +164,7 @@ div
     #[code round] makes the outer shape pill-shaped in stuck mode and each button individually round in gap mode.
     #[code tile] removes all border radius.
     #[code shadow] adds a drop shadow to the wrapper in stuck mode and to each button in gap mode.
-  example
+  example(content-class="w-flex column gap4" app-classes-string="w-flex gap4")
     .w-flex.wrap.gap4
       div
         p.caption Round (stuck)
@@ -172,9 +172,10 @@ div
       div
         p.caption Round (gap)
         w-buttons(v-model="ex8b" :items="items1" :gap="2" round)
-      div
-        p.caption Tile
-        w-buttons(v-model="ex8c" :items="items1" tile)
+    div
+      p.caption Tile
+      w-buttons(v-model="ex8c" :items="items1" tile)
+    .w-flex.wrap.gap4
       div
         p.caption Shadow (stuck)
         w-buttons(v-model="ex8d" :items="items1" shadow)
@@ -207,7 +208,7 @@ div
   p.
     Use the global #[code disabled] prop to disable the entire group, or set #[code disabled: true]
     on individual items in the #[code items] array.
-  example
+  example(content-class="w-flex column gap4" app-classes-string="w-flex gap4")
     w-buttons.mr6(v-model="ex9a" :items="items1" disabled)
     w-buttons(v-model="ex9b" :items="items9")
     template(#pug).
@@ -247,13 +248,13 @@ div
     template(#pug).
       w-buttons(v-model="active" :items="items")
         template(#default="{ item, active }")
-          w-icon.mr1(:color="active ? 'white' : item.color") {{ item.icon }}
-          | {{ item.label }}
+          w-icon.mr1(:color="active ? 'white' : item.color") {{ '\{\{ item.icon \}\}' }}
+          | {{ '\{\{ item.label \}\}' }}
     template(#html).
       &lt;w-buttons v-model="active" :items="items"&gt;
         &lt;template #default="{ item, active }"&gt;
-          &lt;w-icon class="mr1" :color="active ? 'white' : item.color"&gt;{{ item.icon }}&lt;/w-icon&gt;
-          {{ item.label }}
+          &lt;w-icon class="mr1" :color="active ? 'white' : item.color"&gt;{{ '\{\{ item.icon \}\}' }}&lt;/w-icon&gt;
+          {{ '\{\{ item.label \}\}' }}
         &lt;/template&gt;
       &lt;/w-buttons&gt;
     template(#js).

@@ -1,6 +1,20 @@
-<script>
-import { h, cloneVNode } from 'vue'
+<template lang="pug">
+.w-buttons(
+  :class="wrapperClasses"
+  :style="wrapperStyle"
+  role="group"
+  @click="onGroupClick")
+  template(v-if="items")
+    w-button(
+      v-for="(item, i) in buttonItems"
+      :key="i"
+      v-bind="btnProps(item)"
+      @click="onItemClick(item, $event)")
+      slot(:item="item" :index="i" :active="item._active") {{ item.label }}
+  slot(v-else)
+</template>
 
+<script>
 export default {
   name: 'w-buttons',
   inheritAttrs: false,
@@ -47,6 +61,17 @@ export default {
   },
 
   emits: ['update:modelValue', 'click'],
+
+  // Slot mode: child w-button instances register here to receive the active state.
+  provide () {
+    return { wButtons: this }
+  },
+
+  created () {
+    // Plain array on purpose: registering children must not retrigger a parent render
+    // mid-mount (that corrupts the DOM patch and throws parentNode of null).
+    this.childButtons = []
+  },
 
   computed: {
     hasGap () {
@@ -126,16 +151,43 @@ export default {
         text:     !active && !this.outline || null,
         shadow:   this.hasGap && this.shadow || null,
         round:    this.hasGap && this.round || null,
+        icon: this.$slots.default ? null : (item.icon || null),
+        iconProps: item.iconProps,
         disabled: this.disabled || item.disabled || null,
         active,
         'aria-pressed': active ? 'true' : 'false',
-        class: [this.buttonClass, item.class, { 'w-buttons__btn--active': active }],
-        onClick: e => {
-          if (this.disabled || item.disabled) return
-          this.toggle(item._val, item._index)
-          this.$emit('click', item, item._index, e)
-        }
+        class: [this.buttonClass, item.class, { 'w-buttons__btn--active': active }]
       }
+    },
+
+    onItemClick (item, e) {
+      if (this.disabled || item.disabled) return
+      this.toggle(item._val, item._index)
+      this.$emit('click', item, item._index, e)
+    },
+
+    // Slot mode only. Items mode handles clicks on each button.
+    onGroupClick (e) {
+      if (this.items || this.disabled) return
+      const btn = this.childButtons.find(c => c.$el === e.target || c.$el?.contains?.(e.target))
+      if (!btn || btn.disabled || btn.loading) return
+      const i = this.childButtons.indexOf(btn)
+      this.toggle(i, i)
+      this.$emit('click', null, i, e)
+    },
+
+    register (btn) {
+      if (!this.childButtons.includes(btn)) this.childButtons.push(btn)
+      btn.$forceUpdate?.()
+    },
+
+    unregister (btn) {
+      const i = this.childButtons.indexOf(btn)
+      if (i >= 0) this.childButtons.splice(i, 1)
+    },
+
+    isSlotActive (btn) {
+      return this.isActive(this.childButtons.indexOf(btn))
     },
 
     toggle (val, index) {
@@ -161,57 +213,7 @@ export default {
         }
       }
       this.$emit('update:modelValue', next)
-    },
-
-    // Slot mode: toggle by vnode index.
-    toggleSlot (i) {
-      this.toggle(i, i)
     }
-  },
-
-  render () {
-    const { wrapperClasses, wrapperStyle } = this
-
-    // ── Items mode ──────────────────────────────────────────────────────────
-    if (this.items) {
-      const buttons = this.buttonItems.map((item, i) => {
-        const props = this.btnProps(item)
-        const icon = item.icon || null
-        return h('w-button', { key: i, ...props, icon }, icon ? null : {
-          default: () => this.$slots.default
-            ? this.$slots.default({ item, index: i, active: item._active })
-            : (item.label ?? '')
-        })
-      })
-      return h('div', {
-        class: wrapperClasses,
-        style: wrapperStyle,
-        role: 'group'
-      }, buttons)
-    }
-
-    // ── Slot mode ────────────────────────────────────────────────────────────
-    const slotNodes = this.$slots.default?.() ?? []
-    const enhanced = slotNodes.map((vnode, i) => {
-      const active = this.isActive(i)
-      return cloneVNode(vnode, {
-        active,
-        'aria-pressed': active ? 'true' : 'false',
-        disabled: this.disabled || vnode.props?.disabled || null,
-        class: { 'w-buttons__btn--active': active },
-        onClick: e => {
-          if (this.disabled || vnode.props?.disabled) return
-          this.toggleSlot(i)
-          this.$emit('click', null, i, e)
-        }
-      })
-    })
-
-    return h('div', {
-      class: wrapperClasses,
-      style: wrapperStyle,
-      role: 'group'
-    }, enhanced)
   }
 }
 </script>

@@ -64,12 +64,33 @@ export default {
 
   components: { ButtonPartial },
 
+  inject: {
+    buttonsGroup: { from: 'wButtons', default: null }
+  },
+
   emits: [],
 
   computed: {
+    // Slot mode inside w-buttons: the group owns the active state.
+    inSlotGroup () {
+      return !!(this.buttonsGroup && !this.buttonsGroup.items)
+    },
+    resolvedActive () {
+      return this.inSlotGroup ? this.buttonsGroup.isSlotActive(this) : this.active
+    },
     buttonProps () {
-      const { tooltip, tooltipProps = {}, ...props } = this.$props
-      return { ...props, ...this.$attrs }
+      const { tooltip, tooltipProps = {}, active, disabled, ...props } = this.$props
+      return {
+        ...props,
+        ...this.$attrs,
+        disabled: this.inSlotGroup ? (disabled || this.buttonsGroup.disabled) : disabled,
+        active: this.resolvedActive,
+        'aria-pressed': this.inSlotGroup ? (this.resolvedActive ? 'true' : 'false') : this.$attrs['aria-pressed'],
+        class: [
+          this.$attrs.class,
+          this.inSlotGroup && { 'w-buttons__btn--active': this.resolvedActive }
+        ]
+      }
     }
   },
 
@@ -78,6 +99,14 @@ export default {
       if (this.disabled) return
       focusElement(this.$refs.button?.$el)
     }
+  },
+
+  mounted () {
+    if (this.inSlotGroup) this.buttonsGroup.register(this)
+  },
+
+  beforeUnmount () {
+    if (this.inSlotGroup) this.buttonsGroup.unregister(this)
   }
 }
 </script>
