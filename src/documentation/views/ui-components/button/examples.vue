@@ -16,13 +16,13 @@ div
     secondary color and a color palette color shade.
   p
     strong.mr1 Note:
-    ul
-      li The 4 status colors have a white text by default on both light and dark themes.
-      li.
-        The primary color is usually standing out from the background by a higher contrast difference.
-        So when used as a background in a light theme the primary color is considered dark and has a white
-        text by default, while in the dark theme, it will have a black text by default.
-        You can override this color with #[code .w-app .primary--bg {color: #000;}].
+  ul
+    li The 4 status colors have a white text by default on both light and dark themes.
+    li.
+      The primary color is usually standing out from the background by a higher contrast difference.
+      So when used as a background in a light theme the primary color is considered dark and has a white
+      text by default, while in the dark theme, it will have a black text by default.
+      You can override this color with #[code .w-app .primary--bg {color: #000;}].
   example
     w-flex.wrap
       w-button.ma1(bg-color="success") success
