@@ -1,1 +1,0 @@
-var e=(e={})=>(typeof e==`string`?e={[e]:!0}:Array.isArray(e)&&(e={[e.join(` `)]:!0}),e);export{e as t};
