@@ -226,6 +226,8 @@ export default {
     },
 
     onStepLabelClick (step) {
+      if (this.isDisabled || this.isReadonly) return
+
       this.rangeValuePercent = step
       this.updateRangeValueScaled()
     },
